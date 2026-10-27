@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mathematik von Grund auf</title>
+<meta name="description" content="Eine Einführung in die Mathematik in achtundzwanzig Bänden, frei unter CC BY-SA 4.0. Jeder Schritt erklärt, jede Aufgabe gelöst.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Layout: ein Lesespalte wie ein Buchsatz, breite Tabelle für die Bände, ruhige Bänder */
+:root{
+  --bg:#FBFAF7; --fg:#1E2430; --mute:#5A5F6A; --line:#D9D5CC;
+  --tief:#1F3A5F; --akzent:#A34A28; --sand:#F1EDE4;
+  --serif:"Source Serif 4", Palatino, "Palatino Linotype", Georgia, serif;
+  --sans:"Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#15191F; --fg:#E8E6E0; --mute:#A9ADB5; --line:#2E343D; --tief:#8FB4DC; --akzent:#E0885E; --sand:#1C2129; color-scheme:dark } }
+:root[data-theme="dark"]{ --bg:#15191F; --fg:#E8E6E0; --mute:#A9ADB5; --line:#2E343D; --tief:#8FB4DC; --akzent:#E0885E; --sand:#1C2129; color-scheme:dark }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--serif);font-size:17px;line-height:1.55}
+.wrap{max-width:980px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));padding-block:0}
+header{border-bottom:1px solid var(--line);padding-block:48px 36px}
+.eyebrow{font-family:var(--sans);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+h1{font-size:clamp(38px,6vw,60px);line-height:1.05;margin:10px 0 14px;color:var(--tief);font-weight:600;text-wrap:balance}
+.lede{font-size:21px;max-width:40em;margin:0 0 18px}
+.facts{display:flex;flex-wrap:wrap;gap:28px;font-family:var(--sans);color:var(--mute);font-size:15px}
+.facts b{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
+section{padding-block:36px;border-bottom:1px solid var(--line)}
+h2{font-size:26px;margin:0 0 14px;color:var(--tief);font-weight:600}
+p{max-width:40em;margin:0 0 12px}
+a{color:var(--akzent);text-decoration:none;border-bottom:1px solid transparent}
+a:hover,a:focus-visible{border-bottom-color:var(--akzent);outline:none}
+.tabwrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:16px;margin:8px 0 22px}
+th{text-align:left;font-family:var(--sans);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+td.nr{font-family:var(--sans);color:var(--mute);width:3em;font-variant-numeric:tabular-nums}
+td.fach{color:var(--mute)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;color:var(--mute)}
+.halb{font-family:var(--sans);font-size:14px;color:var(--mute);margin:18px 0 4px}
+.bau{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px 28px}
+.bau div h3,.weg h3{font-family:var(--sans);font-size:15px;margin:0 0 4px;color:var(--fg)}
+.bau div p,.weg p{font-size:16px;color:var(--mute);margin:0}
+.wege{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px 28px}
+.band{background:var(--sand);border-radius:6px;padding:20px 22px;margin:8px 0}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14.5px;background:var(--sand);padding:1px 5px;border-radius:3px}
+footer{padding-block:28px 48px;font-family:var(--sans);font-size:14px;color:var(--mute)}
+@media (max-width:520px){ body{font-size:16px} .lede{font-size:19px} td,th{padding:8px 6px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Eine Buchreihe · frei unter CC BY-SA 4.0</div>
+  <h1>Mathematik von Grund auf</h1>
+  <p class="lede">Eine Einführung in achtundzwanzig Bänden. Jeder Schritt erklärt, jede Übungsaufgabe vollständig gelöst, jedes Kapitel mit Geschichte, Forschungsstand und einem Abschnitt darüber, wo die Methode bricht.</p>
+  <div class="facts"><span><b>28</b> Bände</span><span><b>5324</b> Seiten</span><span><b>28</b> kommentierte Quellen je Band</span><span>Herausgeber <b>Jürgen Maier</b></span></div>
+</header>
+
+<section>
+  <h2>Die Bände</h2>
+  <p>Jeder Titel führt zum PDF. Die erste Werkhälfte baut die Mathematik auf, von der Schulmathematik bis zur Kombinatorik; die zweite wendet sie an, überwiegend an Fällen aus der Medizin.</p>
+  <div class="halb">Erste Werkhälfte — Grundlagen</div>
+  <div class="tabwrap"><table><thead><tr><th>Nr.</th><th>Titel</th><th>Gebiet</th><th style="text-align:right">Seiten</th></tr></thead><tbody>
+<tr><td class="nr">0</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_00_Die_Kunst_des_Rechnens.pdf">Die Kunst des Rechnens</a></td><td class="fach">Vorkurs Schulmathematik</td><td class="num">154</td></tr>
+<tr><td class="nr">1</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_01_Die_Koenigin_der_Mathematik.pdf">Die Königin der Mathematik</a></td><td class="fach">Zahlentheorie</td><td class="num">181</td></tr>
+<tr><td class="nr">2</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_02_Die_Kunst_der_linearen_Struktur.pdf">Die Kunst der linearen Struktur</a></td><td class="fach">Lineare Algebra</td><td class="num">167</td></tr>
+<tr><td class="nr">3</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_03_Die_Kunst_des_Grenzuebergangs.pdf">Die Kunst des Grenzübergangs</a></td><td class="fach">Analysis</td><td class="num">173</td></tr>
+<tr><td class="nr">4</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_04_Die_Vermessung_des_Zufalls.pdf">Die Vermessung des Zufalls</a></td><td class="fach">Wahrscheinlichkeitstheorie</td><td class="num">164</td></tr>
+<tr><td class="nr">5</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_05_Die_Kunst_der_Naeherung.pdf">Die Kunst der Näherung</a></td><td class="fach">Numerische Mathematik</td><td class="num">224</td></tr>
+<tr><td class="nr">6</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_06_Die_Vermessung_des_Raumes.pdf">Die Vermessung des Raumes</a></td><td class="fach">Geometrie</td><td class="num">184</td></tr>
+<tr><td class="nr">7</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_07_Die_Wege_des_Denkens.pdf">Die Wege des Denkens</a></td><td class="fach">Geschichte der Mathematik</td><td class="num">188</td></tr>
+<tr><td class="nr">8</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_08_Die_Kunst_der_Verformung.pdf">Die Kunst der Verformung</a></td><td class="fach">Topologie</td><td class="num">178</td></tr>
+<tr><td class="nr">9</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_09_Die_Sprache_der_Felder.pdf">Die Sprache der Felder</a></td><td class="fach">Vektor- und Tensoranalysis</td><td class="num">130</td></tr>
+<tr><td class="nr">10</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_10_Die_Ordnung_des_Unendlichen.pdf">Die Ordnung des Unendlichen</a></td><td class="fach">Logik und Mengenlehre</td><td class="num">124</td></tr>
+<tr><td class="nr">11</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_11_Die_Gestalt_der_Symmetrie.pdf">Die Gestalt der Symmetrie</a></td><td class="fach">Algebra</td><td class="num">150</td></tr>
+<tr><td class="nr">12</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_12_Die_Vollendung_der_Analysis.pdf">Die Vollendung der Analysis</a></td><td class="fach">Funktionentheorie</td><td class="num">176</td></tr>
+<tr><td class="nr">13</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_13_Das_Mass_und_der_Raum.pdf">Das Maß und der Raum</a></td><td class="fach">Maßtheorie und Funktionalanalysis</td><td class="num">175</td></tr>
+<tr><td class="nr">14</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_14_Die_Gesetze_der_Veraenderung.pdf">Die Gesetze der Veränderung</a></td><td class="fach">Differentialgleichungen</td><td class="num">214</td></tr>
+<tr><td class="nr">15</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_15_Die_Kunst_des_Zaehlens.pdf">Die Kunst des Zählens</a></td><td class="fach">Kombinatorik</td><td class="num">200</td></tr>
+<tr><td class="nr">B</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_B_Die_Architektur_der_Gewissheit.pdf">Die Architektur der Gewissheit</a></td><td class="fach">Beweistheorie</td><td class="num">182</td></tr>
+  </tbody></table></div>
+  <div class="halb">Zweite Werkhälfte — Anwendungen</div>
+  <div class="tabwrap"><table><thead><tr><th>Nr.</th><th>Titel</th><th>Gebiet</th><th style="text-align:right">Seiten</th></tr></thead><tbody>
+<tr><td class="nr">16</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_16_Punkte_und_Linien.pdf">Punkte und Linien</a></td><td class="fach">Graphentheorie</td><td class="num">270</td></tr>
+<tr><td class="nr">17</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_17_Was_die_Zahlen_hergeben.pdf">Was die Zahlen hergeben</a></td><td class="fach">Statistik</td><td class="num">282</td></tr>
+<tr><td class="nr">18</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_18_Wachsen_und_Vergehen.pdf">Wachsen und Vergehen</a></td><td class="fach">Biomathematik</td><td class="num">262</td></tr>
+<tr><td class="nr">19</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_19_Das_Beste_finden.pdf">Das Beste finden</a></td><td class="fach">Optimierung</td><td class="num">252</td></tr>
+<tr><td class="nr">20</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_20_Was_Nachrichten_wiegen.pdf">Was Nachrichten wiegen</a></td><td class="fach">Information und Kryptographie</td><td class="num">242</td></tr>
+<tr><td class="nr">21</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_21_Wenn_andere_mitrechnen.pdf">Wenn andere mitrechnen</a></td><td class="fach">Spieltheorie</td><td class="num">236</td></tr>
+<tr><td class="nr">22</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_22_Was_sich_verallgemeinern_laesst.pdf">Was sich verallgemeinern lässt</a></td><td class="fach">Maschinelles Lernen</td><td class="num">204</td></tr>
+<tr><td class="nr">23</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_23_Woran_es_liegt.pdf">Woran es liegt</a></td><td class="fach">Kausale Schlüsse</td><td class="num">158</td></tr>
+<tr><td class="nr">24</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_24_Was_zu_tun_ist.pdf">Was zu tun ist</a></td><td class="fach">Entscheidungen unter Unsicherheit</td><td class="num">140</td></tr>
+<tr><td class="nr">25</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_25_Wenn_der_Zufall_weitergeht.pdf">Wenn der Zufall weitergeht</a></td><td class="fach">Stochastische Prozesse</td><td class="num">158</td></tr>
+<tr><td class="nr">26</td><td><a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_26_Wenn_die_Daten_sich_selbst_bestimmen.pdf">Wenn die Daten sich selbst bestimmen</a></td><td class="fach">Ökonometrie</td><td class="num">156</td></tr>
+  </tbody></table></div>
+  <p>Dazu das <a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Gesamtverzeichnis.pdf">Gesamtverzeichnis</a>: Aufbau der Reihe, Abhängigkeiten der Bände, alle Inhaltsverzeichnisse und ein Register über die ganze Reihe.</p>
+</section>
+
+<section>
+  <h2>Lesewege</h2>
+  <div class="wege">
+<div class="weg"><h3>Von vorn</h3><p>0 → 3 → 2 → 4 → 11 und weiter. Der vollständige Weg; Band 0 zuerst, auch wenn man glaubt, ihn nicht zu brauchen.</p></div>
+<div class="weg"><h3>Studienbegleitend</h3><p>Zum Semester den passenden Band: erstes 0, 2, 3; zweites 3, 4, 11; drittes 12, 13, 14; viertes 5, 15.</p></div>
+<div class="weg"><h3>Nur verstehen</h3><p>7 → B → 10. Ohne Rechnen, aber mit Einordnung. Für alle, die wissen wollen, worum es geht.</p></div>
+<div class="weg"><h3>Medizin und Biologie</h3><p>17 → 18 → 22 → 23 → 24, ergänzt um 16 für Netzwerke, 21 für Anreize und 4 für die Wahrscheinlichkeitsrechnung.</p></div>
+<div class="weg"><h3>Wirtschaft</h3><p>2 → 3 → 4 → 17 → 19 → 21 → 25 → 26, ergänzt um 23 für die kausalen Begriffe und 24 für die Entscheidungen.</p></div>
+<div class="weg"><h3>Anwendung</h3><p>17 → 19 → 21 oder 17 → 18. Die zweite Hälfte lässt sich weitgehend für sich lesen; nötige Grundlagen werden jeweils benannt.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Wie jeder Band gebaut ist</h2>
+  <div class="bau">
+    <div><h3>Leitfall</h3><p>Ein durchgehendes Beispiel, an dem jeder Schritt vorgerechnet wird — in Band 23 die frühe Antibiotikagabe bei Sepsis, in Band 26 die Zuzahlung beim Arztbesuch.</p></div>
+    <div><h3>Sätze mit Beweis</h3><p>Was nicht bewiesen wird, steht als Auslassung mit Fundstelle im Anhang. Es sind je Band drei bis fünf.</p></div>
+    <div><h3>Der Bruchfall</h3><p>In jedem Kapitel der Abschnitt, an dem die Methode versagt — und was dann zu tun ist.</p></div>
+    <div><h3>Übungsaufgaben mit Probe</h3><p>Drei je Kapitel, vollständig gelöst, jede Zahl nachgerechnet. Über tausend in der ganzen Reihe.</p></div>
+    <div><h3>Geschichte und Stand</h3><p>Wer es gefunden hat und woran heute gearbeitet wird — in jedem Kapitel, nicht nur im Vorwort.</p></div>
+    <div><h3>Anhang</h3><p>Formelsammlung, Landkarte der Sätze, Zeittafel, Glossar und achtundzwanzig kommentierte Quellen, darunter stets vier deutschsprachige.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Lizenz, Quellen, Zitieren</h2>
+  <div class="band">
+    <p>Die Reihe ist lizenziert unter <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de">Creative Commons BY-SA 4.0</a>. Sie dürfen die Bände vervielfältigen, verbreiten, bearbeiten und auch kommerziell nutzen, sofern Sie den Urheber nennen und Bearbeitungen unter derselben Lizenz weitergeben.</p>
+    <p>Quelltexte, Simulationen und alle Fassungen liegen auf <a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf">GitHub</a>; jede Fassung wird über Zenodo dauerhaft archiviert und erhält eine DOI.</p>
+    <p>Zitiervorschlag: <code>Maier, J. (2026). Mathematik von Grund auf, Band 23: Woran es liegt. Fassung 1.0.</code></p>
+  </div>
+  <p>Fehler und Vorschläge bitte als <a href="https://github.com/juergenmaier2026/mathematik-von-grund-auf/issues">Issue auf GitHub</a> melden, mit Band, Seite und Zeile. Jede Rückmeldung fließt in die nächste Fassung ein.</p>
+</section>
+
+<section>
+  <h2>Entstehung</h2>
+  <p>Herausgeber und Urheber ist Jürgen Maier, Psychiater und Medizindidaktiker. Die Reihe entstand 2026 in Zusammenarbeit mit Claude (Anthropic); Konzeption, Vorgaben, Prüfung und Herausgeberschaft: Jürgen Maier. Die Schwesterreihe <em>Informatik von Grund auf</em> (26 Bände) folgt derselben Bauart; <em>Physik von Grund auf</em> ist in Vorbereitung.</p>
+</section>
+
+<footer>Mathematik von Grund auf · Stand Oktober 2026 · Fassung 1.0 · CC BY-SA 4.0</footer>
+</div>
+</body>
+</html>
