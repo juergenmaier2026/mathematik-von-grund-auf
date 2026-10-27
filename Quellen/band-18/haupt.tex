@@ -1,0 +1,194 @@
+\documentclass[11pt,a4paper,twoside]{book}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathpazo}
+\usepackage[scaled=0.90]{helvet}
+\usepackage{courier}
+\usepackage[a4paper,inner=3.0cm,outer=2.4cm,top=2.6cm,bottom=2.8cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,arrows.meta,decorations.pathmorphing}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage[german=quotes]{csquotes}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{amsmath,amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{tief}{HTML}{1F3A5F}
+\definecolor{mittel}{HTML}{2E5F8A}
+\definecolor{akzent}{HTML}{A34A28}
+\definecolor{sand}{HTML}{F4F1EA}
+\definecolor{grau}{HTML}{5A5A5A}
+\definecolor{gruen}{HTML}{2F6B4F}
+\definecolor{purpur}{HTML}{5B3A72}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\newcommand{\kursiv}[1]{{\itshape\color{grau}#1}}
+\newcommand{\code}[1]{{\ttfamily\small #1}}
+\newcommand{\Person}[1]{\textbf{#1}}
+\newcommand{\Begriff}[1]{\textbf{#1}}
+\newcommand{\zit}[1]{\textsuperscript{[#1]}}
+\newcommand{\Oh}{\mathcal{O}}
+\newcommand{\boxtitel}[1]{{\bfseries\color{tief}#1}\par\vspace{6pt}}
+\newcommand{\boxtitelr}[1]{{\bfseries\color{akzent}#1}\par\vspace{6pt}}
+\newcommand{\boxtitelg}[1]{{\bfseries\color{gruen}#1}\par\vspace{6pt}}
+\newcommand{\boxtitelp}[1]{{\bfseries\color{purpur}#1}\par\vspace{6pt}}
+\newcommand{\boxtitelm}[1]{{\bfseries\color{mittel}#1}\par\vspace{6pt}}
+\newcommand{\loesung}{\par\vspace{8pt}{\bfseries\color{mittel}Lösung}\par\vspace{4pt}}
+\newcommand{\schritt}[1]{\par\vspace{5pt}{\bfseries\color{grau}#1}\par\vspace{2pt}}
+
+% Graphentheoretische Notation
+\newcommand{\Gr}{G}
+\newcommand{\Kn}[1]{K_{#1}}
+\newcommand{\Kmn}[2]{K_{#1,#2}}
+\newcommand{\Grad}{\deg}
+\newcommand{\Nb}{N}
+\newcommand{\chrom}{\chi}
+\newcommand{\Ecken}{V}
+\newcommand{\Kanten}{E}
+
+\newtcolorbox{grundbox}[1][tief]{
+  breakable, enhanced, colback=sand, colframe=sand,
+  boxrule=0pt, leftrule=3pt, borderline west={3pt}{0pt}{#1},
+  left=12pt, right=10pt, top=10pt, bottom=10pt,
+  sharp corners, before skip=12pt, after skip=12pt}
+
+\newenvironment{merksatz}{\begin{grundbox}[tief]}{\end{grundbox}}
+\newenvironment{warnung}{\begin{grundbox}[akzent]}{\end{grundbox}}
+\newenvironment{definition}{\begin{grundbox}[mittel]}{\end{grundbox}}
+\newenvironment{geschichte}{\begin{grundbox}[gruen]}{\end{grundbox}}
+\newenvironment{forschung}{\begin{grundbox}[purpur]}{\end{grundbox}}
+\newenvironment{aufgabe}{\begin{grundbox}[grau]}{\end{grundbox}}
+\newenvironment{technik}{\begin{grundbox}[mittel]}{\end{grundbox}}
+
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{tief}}{\Large\color{grau}Kapitel \thechapter}{8pt}{\Huge}
+\titleformat{\part}[display]
+  {\normalfont\huge\bfseries\color{tief}\filcenter}{\Large\color{grau}Teil \thepart}{10pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{10pt}{28pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,LO]{\small\itshape\color{grau}\leftmark}
+\fancyfoot[LE,LO]{\small\color{grau}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\renewcommand{\arraystretch}{1.3}
+
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+\renewcommand{\chaptername}{Kapitel}
+\renewcommand{\partname}{Teil}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\tablename}{Tabelle}
+\renewcommand{\figurename}{Abbildung}
+
+\hyphenation{Bio-ma-the-ma-tik Po-pu-la-ti-on Po-pu-la-ti-ons-dy-na-mik
+Dif-fe-ren-ti-al-glei-chung Dif-fe-ren-ti-al-glei-chun-gen Wachs-tums-ra-te
+Ver-dopp-lungs-zeit Halb-werts-zeit ex-po-nen-ti-ell ex-po-nen-ti-el-les
+lo-gis-tisch lo-gis-ti-sche Ka-pa-zi-täts-gren-ze Sät-ti-gung
+Epi-de-mie Epi-de-mie-mo-dell Ba-sis-re-pro-duk-ti-ons-zahl Her-den-im-mu-ni-tät
+In-fek-ti-ös In-ku-ba-ti-ons-zeit Durch-seu-chung
+Phar-ma-ko-ki-ne-tik Kom-par-ti-ment Kom-par-ti-ment-mo-dell Eli-mi-na-ti-on
+Bio-ver-füg-bar-keit Clea-rance Ver-tei-lungs-vo-lu-men Steady-State
+En-zym-ki-ne-tik Mi-cha-e-lis-Men-ten Sub-strat Sät-ti-gungs-ki-ne-tik
+Gleich-ge-wichts-punkt Gleich-ge-wichts-punk-te Sta-bi-li-tät in-sta-bil
+Bi-fur-ka-ti-on Gren-zzy-klus Pha-sen-por-trät Tra-jek-to-rie
+Räu-ber-Beu-te Lot-ka-Vol-ter-ra Ko-exis-tenz Kon-kur-renz
+Tu-mor-wachs-tum Gom-pertz Re-sis-tenz Re-sis-tenz-ent-wick-lung
+Er-reg-bar-keit Ak-ti-ons-po-ten-ti-al Hodg-kin-Hux-ley
+Neu-stadt Kli-ni-kum Er-re-ger}
+
+\tikzset{
+  knoten/.style={circle, fill=tief, inner sep=0pt, minimum size=5.5pt},
+  knotenb/.style={circle, draw=tief, fill=white, line width=0.9pt, inner sep=1pt, minimum size=15pt, font=\scriptsize},
+  knotenr/.style={circle, draw=akzent, fill=akzent!12, line width=0.9pt, inner sep=1pt, minimum size=15pt, font=\scriptsize},
+  knoteng/.style={circle, draw=gruen, fill=gruen!12, line width=0.9pt, inner sep=1pt, minimum size=15pt, font=\scriptsize},
+  kante/.style={draw=grau, line width=0.9pt},
+  kanted/.style={draw=akzent, line width=1.5pt},
+}
+
+\newcommand{\MW}{\overline{x}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\Rnull}{\mathcal{R}_0}
+
+\begin{document}
+\frontmatter
+\begin{titlepage}
+\centering
+\vspace*{1.6cm}
+{\footnotesize\scshape\color{grau} Mathematik von Grund auf --- Band 18}\\[1.9cm]
+{\Huge\bfseries\color{tief} Wachsen und Vergehen}\\[16pt]
+{\Large\color{akzent} Biomathematik}\\[1.4cm]
+
+\begin{tikzpicture}[scale=1.0]
+% exponentiell
+\begin{scope}[xshift=-3.7cm]
+\draw[grau!50, line width=0.6pt] (-1.1,-0.85) -- (-1.1,1.15);
+\draw[grau!50, line width=0.6pt] (-1.1,-0.85) -- (1.1,-0.85);
+\begin{scope}
+\clip (-1.1,-0.86) rectangle (1.1,1.15);
+\draw[tief, line width=1.2pt, smooth, samples=60, domain=-1.05:1.05]
+  plot (\x, {-0.85 + 0.10*exp(1.75*(\x+1.05))});
+\end{scope}
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {wachsen};
+\end{scope}
+% logistisch
+\begin{scope}
+\draw[grau!50, line width=0.6pt] (-1.1,-0.85) -- (-1.1,1.15);
+\draw[grau!50, line width=0.6pt] (-1.1,-0.85) -- (1.1,-0.85);
+\draw[grau!45, dashed, line width=0.5pt] (-1.1,0.9) -- (1.1,0.9);
+\draw[tief, line width=1.2pt, smooth, samples=60, domain=-1.05:1.05]
+  plot (\x, {-0.85 + 1.75/(1+exp(-4.2*\x))});
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {sättigen};
+\end{scope}
+% Epidemiekurve
+\begin{scope}[xshift=3.7cm]
+\draw[grau!50, line width=0.6pt] (-1.1,-0.85) -- (-1.1,1.15);
+\draw[grau!50, line width=0.6pt] (-1.1,-0.85) -- (1.1,-0.85);
+\fill[akzent!30] plot[smooth, samples=50, domain=-1.05:1.05] (\x,{-0.85+1.7*exp(-4.5*(\x+0.1)*(\x+0.1))}) -- (1.05,-0.85) -- (-1.05,-0.85) -- cycle;
+\draw[akzent, line width=1.2pt, smooth, samples=50, domain=-1.05:1.05]
+  plot (\x, {-0.85 + 1.7*exp(-4.5*(\x+0.1)*(\x+0.1))});
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {abklingen};
+\end{scope}
+\end{tikzpicture}
+
+\vspace{1.4cm}
+{\large\color{grau} Von der Zellteilung bis zum Epidemieverlauf}\\[6pt]
+{\color{grau} Jeder Schritt erklärt. Mit vollständig durchgerechneten Übungsaufgaben.}\\[1.9cm]
+{\small\color{grau} Stand der Forschung: August 2026}
+\end{titlepage}
+\input{impressum}
+\tableofcontents
+\mainmatter
+
+\include{00_vorwort}
+\include{01_exponentiell}
+\include{02_logistisch}
+\include{03_diskret}
+\include{04_raeuber}
+\include{05_konkurrenz}
+\include{06_stabilitaet}
+\include{07_sir}
+\include{08_impfung}
+\include{09_netzwerke}
+\include{10_pharmakokinetik}
+\include{11_enzymkinetik}
+\include{12_erregbarkeit}
+\include{13_tumor}
+\include{14_resistenz}
+\include{15_stand}
+\include{A_anhang}
+\include{B_quellen}
+
+\end{document}

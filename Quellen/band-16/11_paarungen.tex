@@ -1,0 +1,629 @@
+\part{Paarungen und Flüsse}
+
+\chapter{Paarungen}
+
+\section{Die Zuteilungsfrage}
+
+\begin{merksatz}
+\boxtitel{Vier Ärztinnen, vier Rotationsstellen}
+An einer Klinik sind vier Rotationsstellen zu besetzen. Jede Ärztin hat angegeben, für welche Stellen sie die Voraussetzungen mitbringt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Ärztin} & \textbf{Mögliche Stellen}\\
+\midrule
+$A$ & Intensiv, Notaufnahme\\
+$B$ & Intensiv\\
+$C$ & Intensiv, Ambulanz\\
+$D$ & Notaufnahme, Ambulanz, Sonografie\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\textbf{Die Frage:} Lassen sich alle vier gleichzeitig auf verschiedene Stellen setzen?
+\end{merksatz}
+
+Man kann probieren. Aber die eigentlich interessante Frage lautet: Woran erkennt man, dass es \kursiv{nicht} geht --- ohne alle Möglichkeiten durchzugehen?
+
+Die Antwort gibt der Satz von Hall, und sie ist von einer Klarheit, die man nicht erwartet.
+
+\begin{definition}
+\boxtitelm{Definition 11.1 --- Paarung}
+Sei $G = (V,E)$ ein Graph. Eine \Begriff{Paarung} (englisch \kursiv{matching}) ist eine Kantenmenge $M \subseteq E$, in der keine zwei Kanten eine gemeinsame Ecke haben.
+
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Eine Ecke heißt \Begriff{gesättigt} durch $M$, wenn eine Kante aus $M$ sie berührt; sonst \Begriff{frei}.
+\item $M$ heißt \Begriff{perfekt}, wenn jede Ecke gesättigt ist.
+\item $M$ heißt \Begriff{größte Paarung}, wenn es keine Paarung mit mehr Kanten gibt.
+\end{itemize}
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{\enquote{Maximal} und \enquote{größt} sind nicht dasselbe}
+Eine Paarung heißt \Begriff{maximal}, wenn man keine Kante mehr hinzufügen kann. Sie heißt \Begriff{größt}, wenn keine andere Paarung mehr Kanten hat. Das erste folgt aus dem zweiten, aber nicht umgekehrt.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+\begin{scope}
+\node[knoten] (a) at (0,0) {};
+\node[knoten] (b) at (1,0) {};
+\node[knoten] (c) at (2,0) {};
+\node[knoten] (d) at (3,0) {};
+\draw[kanted, line width=2pt] (b)--(c);
+\draw[kante] (a)--(b); \draw[kante] (c)--(d);
+\node[font=\scriptsize\itshape, color=akzent] at (1.5,-0.55) {maximal: eine Kante};
+\end{scope}
+\begin{scope}[yshift=-1.5cm]
+\node[knoten] (e) at (0,0) {};
+\node[knoten] (f) at (1,0) {};
+\node[knoten] (g) at (2,0) {};
+\node[knoten] (h) at (3,0) {};
+\draw[kanted, line width=2pt] (e)--(f);
+\draw[kanted, line width=2pt] (g)--(h);
+\draw[kante] (f)--(g);
+\node[font=\scriptsize\itshape, color=gruen] at (1.5,-0.55) {größt: zwei Kanten};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Im oberen Bild lässt sich keine Kante mehr hinzufügen --- alle übrigen berühren $b$ oder $c$. Trotzdem gibt es eine bessere Paarung.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Unterscheidung erklärt, warum ein gieriges Verfahren hier nicht genügt: Es liefert eine maximale, aber nicht notwendig eine größte Paarung. Der nächste Satz sagt, woran man den Unterschied erkennt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Vergrößernde Wege}
+
+\begin{definition}
+\boxtitelm{Definition 11.2 --- alternierender und vergrößernder Weg}
+Sei $M$ eine Paarung.
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Ein Weg heißt \Begriff{alternierend}, wenn seine Kanten abwechselnd zu $M$ und nicht zu $M$ gehören.
+\item Ein alternierender Weg heißt \Begriff{vergrößernd}, wenn seine \kursiv{beiden} Endecken frei sind.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum der Name}
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\node[knoten] (v0) at (0,0) {};
+\node[knoten] (v1) at (1.1,0) {};
+\node[knoten] (v2) at (2.2,0) {};
+\node[knoten] (v3) at (3.3,0) {};
+\node[knoten] (v4) at (4.4,0) {};
+\draw[kante] (v0)--(v1);
+\draw[kanted, line width=2pt] (v1)--(v2);
+\draw[kante] (v2)--(v3);
+\draw[kanted, line width=2pt] (v3)--(v4);
+\node[font=\scriptsize, color=grau] at (0,-0.4) {frei};
+\node[font=\scriptsize, color=grau] at (4.4,-0.4) {};
+\end{tikzpicture}
+\end{center}
+
+Ein vergrößernder Weg beginnt und endet mit einer Nicht-Paarungskante. Er hat also eine ungerade Länge, und die Nicht-Paarungskanten sind um eine zahlreicher als die Paarungskanten.
+
+\schritt{Der Tausch}
+Vertauscht man auf dem Weg die Rollen --- jede Paarungskante wird gelöst, jede andere aufgenommen ---, so entsteht wieder eine Paarung, und zwar mit \kursiv{einer Kante mehr}.
+
+\schritt{Warum das wieder eine Paarung ist}
+Die inneren Ecken des Weges waren vorher durch je eine Paarungskante gesättigt und sind es nachher wieder --- nur durch eine andere. Die beiden Endecken waren frei und sind nun gesättigt. Ecken außerhalb des Weges sind unberührt.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 11.3 (Berge 1957)}
+Eine Paarung $M$ ist genau dann eine größte Paarung, wenn es keinen bezüglich $M$ vergrößernden Weg gibt.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis}
+\schritt{Richtung 1 --- gibt es einen, so ist $M$ nicht größt}
+Das ist der Tausch oben: Er liefert eine Paarung mit mehr Kanten.
+
+\schritt{Richtung 2 --- ist $M$ nicht größt, so gibt es einen}
+Sei $M'$ eine Paarung mit $|M'| > |M|$.
+
+\schritt{Die symmetrische Differenz}
+Wir betrachten
+\[ D = (M \setminus M') \cup (M' \setminus M) , \]
+also die Kanten, die in genau einer der beiden Paarungen liegen. Sei $H$ der Graph mit Eckenmenge $V$ und Kantenmenge $D$.
+
+\schritt{Welche Grade in $H$ vorkommen}
+Eine Ecke $v$ liegt in $M$ auf höchstens einer Kante und in $M'$ auf höchstens einer. Also berühren sie in $H$ höchstens zwei Kanten:
+\[ \deg_H(v) \le 2 . \]
+
+\schritt{Wie $H$ aussieht}
+Ein Graph mit lauter Graden $\le 2$ zerfällt in Wege und Kreise. (Begründung: Jede Komponente ist zusammenhängend mit Maximalgrad $2$; hat sie eine Ecke vom Grad $\le 1$, so ist sie ein Weg, sonst sind alle Grade genau $2$ und sie ist ein Kreis --- das folgt aus Satz 4.2 und Satz 2.8.)
+
+\schritt{Was auf diesen Wegen und Kreisen steht}
+In $H$ liegen keine zwei benachbarten Kanten aus derselben Paarung --- sonst hätten diese eine gemeinsame Ecke innerhalb von $M$ oder innerhalb von $M'$. Also alternieren die Kanten entlang jedes Weges und jedes Kreises zwischen $M$ und $M'$.
+
+\schritt{Der Zählschluss}
+Auf einem Kreis alternierender Kanten liegen gleich viele aus $M$ wie aus $M'$ --- die Länge ist gerade.
+
+Auf einem Weg alternierender Kanten sind die Anzahlen gleich (gerade Länge) oder unterscheiden sich um genau eins (ungerade Länge).
+
+Da insgesamt $|M' \setminus M| > |M \setminus M'|$ gilt --- das folgt aus $|M'| > |M|$, weil die gemeinsamen Kanten auf beiden Seiten gleich zählen ---, muss es eine Komponente geben, in der mehr $M'$-Kanten als $M$-Kanten liegen. Das kann nur ein Weg ungerader Länge sein, der mit $M'$-Kanten beginnt und endet.
+
+\schritt{Dieser Weg ist vergrößernd}
+Seine beiden Endecken werden in $H$ nur von einer $M'$-Kante berührt. Läge an einer solchen Endecke eine $M$-Kante, so wäre sie entweder in $D$ (dann hätte die Ecke Grad $2$ in $H$ und der Weg wäre dort nicht zu Ende) oder in $M \cap M'$ --- aber dann wäre die Endecke schon durch diese Kante in $M'$ gesättigt und könnte nicht zusätzlich auf einer $M'$-Kante aus $D$ liegen.
+
+Also sind beide Endecken bezüglich $M$ frei, und der Weg alterniert. Er ist vergrößernd. $\blacksquare$
+\end{merksatz}
+
+\section{Der Satz von Hall}
+
+Nun der Hauptsatz für den bipartiten Fall --- die Antwort auf die Zuteilungsfrage.
+
+\begin{merksatz}
+\boxtitel{Satz 11.4 (Hall 1935)}
+Sei $G$ bipartit mit Bipartition $(A,B)$. Dann gibt es genau dann eine Paarung, die \kursiv{alle} Ecken von $A$ sättigt, wenn
+\[ |N(S)| \;\ge\; |S| \qquad \text{für jede Teilmenge } S \subseteq A \]
+gilt. Dabei ist $N(S) = \bigcup_{v \in S} N(v)$ die Menge aller Nachbarn von Ecken aus $S$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Bedingung in Worten}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Je $k$ Ärztinnen müssen zusammen mindestens $k$ verschiedene Stellen zur Auswahl haben.}
+\end{minipage}
+\end{center}
+
+Diese Forderung ist offensichtlich \kursiv{notwendig}: Sollen $k$ Ärztinnen auf verschiedene Stellen, so braucht man mindestens $k$ Stellen, und diese müssen für die $k$ Ärztinnen infrage kommen.
+
+Die Leistung des Satzes liegt darin, dass sie auch \kursiv{genügt}. Das ist keineswegs selbstverständlich: Die Bedingung schaut nur auf Teilmengen und Nachbarschaftsgrößen, nicht darauf, wie die Kanten verlaufen.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis der notwendigen Richtung}
+Sei $M$ eine Paarung, die $A$ sättigt, und sei $S \subseteq A$.
+
+Jede Ecke $a \in S$ ist durch eine Kante $\{a, m(a)\} \in M$ gesättigt. Die Ecke $m(a)$ ist ein Nachbar von $a$, liegt also in $N(S)$.
+
+Verschiedene Ecken $a \neq a'$ liefern verschiedene Partner: Wäre $m(a) = m(a')$, so hätten zwei Kanten von $M$ eine gemeinsame Ecke --- das verbietet Definition 11.1.
+
+Die Zuordnung $a \mapsto m(a)$ ist somit eine injektive Abbildung von $S$ nach $N(S)$, also $|S| \le |N(S)|$. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis der hinreichenden Richtung --- Induktion über $|A|$}
+\schritt{Induktionsanfang $|A| = 1$}
+Sei $A = \{a\}$. Die Bedingung für $S = \{a\}$ lautet $|N(a)| \ge 1$, also hat $a$ einen Nachbarn $b$. Die Paarung $\{\{a,b\}\}$ sättigt $A$.
+
+\schritt{Induktionsschritt --- die Fallunterscheidung}
+Sei $|A| \ge 2$ und die Behauptung für kleinere $A$ bewiesen. Wir unterscheiden danach, ob die Bedingung irgendwo \kursiv{knapp} erfüllt ist.
+
+\schritt{Fall 1 --- überall Luft}
+Angenommen, für jede nichtleere echte Teilmenge $S \subsetneq A$ gilt sogar
+\[ |N(S)| \;\ge\; |S| + 1 . \]
+
+Wir wählen eine beliebige Ecke $a \in A$ und einen ihrer Nachbarn $b$ (er existiert nach der Bedingung für $S = \{a\}$). Diese Kante nehmen wir in die Paarung auf.
+
+Nun betrachten wir $G' = G - a - b$ mit $A' = A \setminus \{a\}$.
+
+\kursiv{Erfüllt $G'$ die Hall-Bedingung?} Sei $S \subseteq A'$ nichtleer. In $G'$ fehlt gegenüber $G$ höchstens die Ecke $b$ aus der Nachbarschaft:
+\[ |N_{G'}(S)| \;\ge\; |N_G(S)| - 1 \;\ge\; (|S| + 1) - 1 \;=\; |S| . \]
+Dabei wurde benutzt, dass $S$ eine nichtleere echte Teilmenge von $A$ ist --- echt, weil $a \notin S$.
+
+Nach Induktionsannahme gibt es eine Paarung $M'$ in $G'$, die $A'$ sättigt. Zusammen mit $\{a,b\}$ sättigt sie ganz $A$.
+
+\schritt{Fall 2 --- irgendwo ist es knapp}
+Angenommen, es gibt eine nichtleere echte Teilmenge $S_0 \subsetneq A$ mit
+\[ |N(S_0)| = |S_0| . \]
+
+\kursiv{Der erste Teilgraph.} Sei $G_1$ der von $S_0 \cup N(S_0)$ induzierte Teilgraph. Für $S \subseteq S_0$ ist $N_{G_1}(S) = N_G(S)$ --- alle Nachbarn von Ecken aus $S_0$ liegen ja in $N(S_0)$. Die Hall-Bedingung gilt also in $G_1$.
+
+Da $|S_0| < |A|$, liefert die Induktionsannahme eine Paarung $M_1$, die $S_0$ sättigt. Wegen $|N(S_0)| = |S_0|$ sättigt sie sogar ganz $N(S_0)$.
+
+\kursiv{Der zweite Teilgraph.} Sei $G_2$ der von $(A \setminus S_0) \cup (B \setminus N(S_0))$ induzierte Teilgraph, mit $A_2 = A \setminus S_0$.
+
+\kursiv{Erfüllt $G_2$ die Hall-Bedingung?} Sei $T \subseteq A_2$. Wir betrachten $T \cup S_0 \subseteq A$ und wenden die Bedingung in $G$ an:
+\[ |N_G(T \cup S_0)| \;\ge\; |T \cup S_0| = |T| + |S_0| , \]
+wobei die letzte Gleichheit gilt, weil $T$ und $S_0$ disjunkt sind.
+
+Weiter ist $N_G(T \cup S_0) = N_G(T) \cup N_G(S_0)$, und die Nachbarn von $T$ in $G_2$ sind genau diejenigen Nachbarn in $G$, die nicht in $N(S_0)$ liegen. Also
+\[ |N_{G_2}(T)| = |N_G(T \cup S_0)| - |N_G(S_0)| \;\ge\; \bigl(|T| + |S_0|\bigr) - |S_0| = |T| . \]
+
+Da $S_0$ nichtleer ist, gilt $|A_2| < |A|$. Nach Induktionsannahme gibt es eine Paarung $M_2$, die $A_2$ sättigt.
+
+\schritt{Zusammensetzen}
+$M_1$ benutzt nur Ecken aus $S_0 \cup N(S_0)$, $M_2$ nur Ecken außerhalb davon. Die Vereinigung $M_1 \cup M_2$ ist daher eine Paarung, und sie sättigt $S_0 \cup A_2 = A$. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Zuteilungsfrage beantwortet}
+\schritt{Der Graph}
+$A = \{A, B, C, D\}$ (Ärztinnen), $B = \{$Int, Not, Amb, Son$\}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+\node[knotenb] (a) at (-2.4,0.9) {$A$};
+\node[knotenb] (b) at (-0.8,0.9) {$B$};
+\node[knotenb] (c) at (0.8,0.9) {$C$};
+\node[knotenb] (d) at (2.4,0.9) {$D$};
+\node[knotenr] (i) at (-2.4,-0.9) {I};
+\node[knotenr] (n) at (-0.8,-0.9) {N};
+\node[knotenr] (m) at (0.8,-0.9) {A};
+\node[knotenr] (s) at (2.4,-0.9) {S};
+\draw[kante] (a)--(i); \draw[kante] (a)--(n);
+\draw[kante] (b)--(i);
+\draw[kante] (c)--(i); \draw[kante] (c)--(m);
+\draw[kante] (d)--(n); \draw[kante] (d)--(m); \draw[kante] (d)--(s);
+\end{tikzpicture}
+\end{center}
+
+\schritt{Die Hall-Bedingung an der kritischen Stelle prüfen}
+Man prüft nicht alle $2^4 = 16$ Teilmengen, sondern sucht gezielt nach knappen Stellen --- also nach Gruppen mit wenigen gemeinsamen Möglichkeiten.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{1.2cm}P{1.4cm}@{}}
+\toprule
+$S$ & $N(S)$ & $|S|$ & $|N(S)|$\\
+\midrule
+$\{B\}$ & Int & $1$ & $1$\\
+$\{A,B\}$ & Int, Not & $2$ & $2$\\
+$\{B,C\}$ & Int, Amb & $2$ & $2$\\
+$\{A,B,C\}$ & Int, Not, Amb & $3$ & $3$\\
+$\{A,B,C,D\}$ & alle vier & $4$ & $4$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Alle geprüften Teilmengen erfüllen $|N(S)| \ge |S|$; die übrigen erst recht, da sie größere Nachbarschaften haben. \textbf{Die Zuteilung ist möglich.}
+
+\schritt{Eine Zuteilung angeben}
+$B \to$ Intensiv (die einzige Möglichkeit), $A \to$ Notaufnahme, $C \to$ Ambulanz, $D \to$ Sonografie.
+
+\schritt{Was passiert, wenn $D$ ausfällt?}
+Dann bleiben $A$, $B$, $C$ mit den Möglichkeiten Int, Not / Int / Int, Amb. Prüfung: $|N(\{A,B,C\})| = 3 = |S|$. Es geht noch --- gerade eben.
+
+\schritt{Und wenn zusätzlich die Ambulanz wegfällt?}
+Dann hat $C$ nur noch Intensiv, ebenso $B$. Für $S = \{B,C\}$ ist $|N(S)| = 1 < 2$. \textbf{Unmöglich} --- und man kann genau angeben, warum: Zwei Ärztinnen bewerben sich um eine einzige Stelle.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der praktische Wert des Satzes. Er sagt nicht nur \enquote{geht nicht}, sondern liefert die Begründung in Gestalt einer konkreten Gruppe --- ein Argument, das man einem Vorgesetzten vorlegen kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Folgerung 11.5 --- reguläre bipartite Graphen}
+Ist $G$ bipartit und $r$-regulär mit $r \ge 1$ --- also hat jede Ecke genau den Grad $r$ ---, so besitzt $G$ eine perfekte Paarung.
+
+\schritt{Beweis, Schritt 1: die Seiten sind gleich groß}
+Wir zählen die Kanten auf zwei Weisen. Jede Kante hat genau ein Ende in $A$ und eines in $B$, also
+\[ m = \sum_{a \in A}\deg(a) = r|A| \qquad \text{und} \qquad m = \sum_{b \in B}\deg(b) = r|B| . \]
+Wegen $r \ge 1$ folgt $|A| = |B|$.
+
+\schritt{Schritt 2: die Hall-Bedingung}
+Sei $S \subseteq A$. Wir zählen die Kanten, die in $S$ beginnen, auf zwei Weisen.
+
+\kursiv{Von $S$ aus:} Es sind genau $r|S|$ Kanten.
+
+\kursiv{Von $N(S)$ aus:} Jede dieser Kanten endet in $N(S)$. Jede Ecke von $N(S)$ hat insgesamt $r$ Kanten, von denen höchstens alle nach $S$ führen können. Also enden höchstens $r|N(S)|$ Kanten dort.
+
+Somit
+\[ r|S| \;\le\; r|N(S)| \quad\Longrightarrow\quad |S| \le |N(S)| . \]
+
+\schritt{Schritt 3: Schluss}
+Nach Hall gibt es eine Paarung, die $A$ sättigt. Sie hat $|A|$ Kanten und sättigt damit $|A| = |B|$ Ecken in $B$ --- also alle. Sie ist perfekt. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Folgerung hat eine hübsche Anwendung: Ein Kartenspiel mit $52$ Karten wird in $13$ Stapel zu je $4$ Karten geteilt. Dann kann man stets aus jedem Stapel eine Karte so wählen, dass alle dreizehn Werte --- Zwei bis Ass --- genau einmal vorkommen. Man setze Stapel gegen Werte und verbinde, wenn der Wert im Stapel vorkommt; der Graph ist $4$-regulär.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz von König}
+
+\begin{definition}
+\boxtitelm{Definition 11.6 --- Eckenüberdeckung}
+Eine \Begriff{Eckenüberdeckung} ist eine Eckenmenge $C \subseteq V$, so dass jede Kante mindestens eine ihrer Endecken in $C$ hat.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der einfache Zusammenhang}
+Für jeden Graphen gilt: Ist $M$ eine Paarung und $C$ eine Eckenüberdeckung, so ist
+\[ |M| \;\le\; |C| . \]
+
+\schritt{Warum}
+Jede Kante von $M$ muss von $C$ überdeckt werden, braucht also mindestens eine Ecke aus $C$. Verschiedene Kanten von $M$ haben keine gemeinsame Ecke, brauchen also verschiedene Ecken aus $C$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Ungleichung gilt immer. Die Frage ist, wann Gleichheit eintritt. Im Dreieck $K_3$ ist die größte Paarung $1$ und die kleinste Überdeckung $2$ --- Gleichheit gilt also nicht allgemein.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 11.7 (Kőnig 1931, Egerváry 1931)}
+In einem bipartiten Graphen ist die Größe einer größten Paarung gleich der Größe einer kleinsten Eckenüberdeckung.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- die Konstruktion}
+Sei $M$ eine größte Paarung, Bipartition $(A,B)$.
+
+\schritt{Schritt 1 --- Die erreichbaren Ecken}
+Sei $U \subseteq A$ die Menge der bezüglich $M$ freien Ecken in $A$.
+
+Sei $Z$ die Menge aller Ecken, die von einer Ecke aus $U$ über einen \kursiv{alternierenden} Weg erreichbar sind (einschließlich $U$ selbst, über Wege der Länge $0$). Dabei beginnt jeder solche Weg mit einer Nicht-Paarungskante, weil die Startecken frei sind.
+
+Wir setzen
+\[ Z_A = Z \cap A, \qquad Z_B = Z \cap B . \]
+
+\schritt{Schritt 2 --- Die vorgeschlagene Überdeckung}
+\[ C = (A \setminus Z_A) \;\cup\; Z_B . \]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\draw[kante, grau!45] (-1.6,0.9) ellipse (1.5 and 0.55);
+\draw[kante, grau!45] (1.6,0.9) ellipse (1.5 and 0.55);
+\draw[kante, grau!45] (-1.6,-0.9) ellipse (1.5 and 0.55);
+\draw[kante, grau!45] (1.6,-0.9) ellipse (1.5 and 0.55);
+\node[font=\scriptsize, color=grau] at (-1.6,0.9) {$Z_A$};
+\node[font=\scriptsize, color=akzent] at (1.6,0.9) {$A \setminus Z_A$};
+\node[font=\scriptsize, color=akzent] at (-1.6,-0.9) {$Z_B$};
+\node[font=\scriptsize, color=grau] at (1.6,-0.9) {$B \setminus Z_B$};
+\node[font=\scriptsize\itshape, color=akzent] at (0,-1.75) {rot: die Überdeckung $C$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Schritt 3 --- $C$ ist wirklich eine Überdeckung}
+Angenommen, eine Kante $\{a,b\}$ mit $a \in A$, $b \in B$ wäre nicht überdeckt. Dann ist $a \notin A \setminus Z_A$, also $a \in Z_A$; und $b \notin Z_B$.
+
+$a \in Z_A$ heißt: Es gibt einen alternierenden Weg $P$ von einer freien Ecke aus $U$ nach $a$. Dieser Weg endet in $a \in A$; da er mit einer Nicht-Paarungskante beginnt und alterniert, endet er mit einer \kursiv{Paarungs}kante (oder hat Länge $0$, falls $a$ selbst frei ist).
+
+In beiden Fällen können wir $P$ um die Kante $\{a,b\}$ verlängern --- sie ist keine Paarungskante, denn wäre sie eine, so wäre $b$ über $P$ erreichbar und läge in $Z_B$. Der verlängerte Weg ist alternierend und erreicht $b$. Also $b \in Z_B$ --- Widerspruch. \checkmark
+
+\schritt{Schritt 4 --- $|C| \le |M|$}
+Wir zeigen: Jede Ecke von $C$ ist durch $M$ gesättigt, und verschiedene Ecken von $C$ werden durch \kursiv{verschiedene} Kanten von $M$ gesättigt.
+
+\kursiv{Ecken in $A \setminus Z_A$ sind gesättigt.} Wäre eine solche Ecke frei, so läge sie in $U \subseteq Z_A$ --- Widerspruch.
+
+\kursiv{Ecken in $Z_B$ sind gesättigt.} Wäre $b \in Z_B$ frei, so wäre der alternierende Weg von $U$ nach $b$ ein \kursiv{vergrößernder} Weg: Er beginnt an einer freien Ecke in $A$ und endet an einer freien Ecke in $B$. Nach Satz 11.3 wäre $M$ dann nicht größt --- Widerspruch.
+
+\kursiv{Keine Paarungskante hat beide Enden in $C$.} Sei $\{a,b\} \in M$ mit $b \in Z_B$. Der alternierende Weg von $U$ nach $b$ endet mit einer Nicht-Paarungskante (er beginnt mit einer solchen und alterniert, und $b \in B$). Verlängern wir ihn um die Paarungskante $\{b,a\}$, so erreichen wir $a$ auf alternierendem Weg. Also $a \in Z_A$, und damit $a \notin A \setminus Z_A$.
+
+Somit liefert jede Ecke von $C$ eine eigene Kante von $M$, und
+\[ |C| \le |M| . \]
+
+\schritt{Schritt 5 --- Schluss}
+Zusammen mit der allgemeinen Ungleichung $|M| \le |C'|$ für jede Überdeckung $C'$ folgt: $C$ ist eine kleinste Überdeckung und $|C| = |M|$. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 11.8 (Tutte 1947) --- der allgemeine Fall}
+Ein Graph $G$ besitzt genau dann eine perfekte Paarung, wenn für jede Eckenmenge $S \subseteq V$ gilt:
+\[ \text{Die Anzahl der Komponenten \kursiv{ungerader} Eckenzahl von } G - S \ \text{ ist } \le |S| . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Auch diesen Satz beweise ich nicht --- wie Kuratowski und Brooks. Die notwendige Richtung ist leicht (jede ungerade Komponente muss eine Ecke nach $S$ hinausheiraten), die hinreichende verlangt eine sorgfältige Induktion über mehrere Seiten. Diestel\zit{7}, Kapitel~2 führt sie aus.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum der Satz wichtig ist}
+Hall gilt nur bipartit. Tutte gilt allgemein --- und liefert sofort, dass der Petersen-Graph eine perfekte Paarung hat: Man müsste ein $S$ finden, das den Satz verletzt, und für $3$-reguläre, zusammenhängende Graphen ohne Brücke lässt sich zeigen, dass keines existiert (Satz von Petersen 1891).
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- Hall anwenden}
+Sechs Studierende sollen sechs Prüfungsthemen zugeteilt werden. Die Wünsche:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.4cm}P{2.6cm}P{1.4cm}P{2.6cm}@{}}
+\toprule
+$S_1$ & $T_1, T_2$ & $S_4$ & $T_3, T_4$\\
+$S_2$ & $T_1, T_2$ & $S_5$ & $T_3, T_4$\\
+$S_3$ & $T_1, T_2$ & $S_6$ & $T_5, T_6$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Ist eine Zuteilung möglich?
+
+\loesung
+\schritt{Schritt 1 --- Nach knappen Stellen suchen}
+Die drei Studierenden $S_1$, $S_2$, $S_3$ haben zusammen nur die Themen $T_1$ und $T_2$ zur Auswahl.
+
+\schritt{Schritt 2 --- Die Bedingung prüfen}
+Für $S = \{S_1, S_2, S_3\}$:
+\[ N(S) = \{T_1, T_2\}, \qquad |N(S)| = 2 \;<\; 3 = |S| . \]
+
+\schritt{Antwort}
+\textbf{Nein.} Die Hall-Bedingung ist verletzt, also gibt es keine Zuteilung.
+
+\schritt{Die Begründung in Worten}
+Drei Studierende bewerben sich um zwei Themen. Einer von ihnen muss leer ausgehen --- unabhängig davon, wie man die übrigen verteilt.
+
+\schritt{Schritt 3 --- Die kleinste Reparatur}
+Gibt man einem der drei ein zusätzliches Thema, etwa $S_3$ auch $T_5$, so prüfen wir neu:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{1.0cm}P{1.2cm}@{}}
+\toprule
+$S$ & $N(S)$ & $|S|$ & $|N(S)|$\\
+\midrule
+$\{S_1,S_2\}$ & $T_1,T_2$ & $2$ & $2$\\
+$\{S_1,S_2,S_3\}$ & $T_1,T_2,T_5$ & $3$ & $3$\\
+$\{S_4,S_5\}$ & $T_3,T_4$ & $2$ & $2$\\
+$\{S_3,S_6\}$ & $T_1,T_2,T_5,T_6$ & $2$ & $4$\\
+alle sechs & alle sechs & $6$ & $6$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Kein Verstoß mehr. Eine Zuteilung: $S_1 \to T_1$, $S_2 \to T_2$, $S_3 \to T_5$, $S_4 \to T_3$, $S_5 \to T_4$, $S_6 \to T_6$. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- König nachrechnen}
+Bestimmen Sie im abgebildeten bipartiten Graphen eine größte Paarung und eine kleinste Eckenüberdeckung.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+\node[knotenb] (a1) at (-1.8,0.9) {$a_1$};
+\node[knotenb] (a2) at (-0.6,0.9) {$a_2$};
+\node[knotenb] (a3) at (0.6,0.9) {$a_3$};
+\node[knotenb] (a4) at (1.8,0.9) {$a_4$};
+\node[knotenr] (b1) at (-1.8,-0.9) {$b_1$};
+\node[knotenr] (b2) at (-0.6,-0.9) {$b_2$};
+\node[knotenr] (b3) at (0.6,-0.9) {$b_3$};
+\node[knotenr] (b4) at (1.8,-0.9) {$b_4$};
+\draw[kante] (a1)--(b1); \draw[kante] (a1)--(b2);
+\draw[kante] (a2)--(b1);
+\draw[kante] (a3)--(b1); \draw[kante] (a3)--(b3);
+\draw[kante] (a4)--(b3); \draw[kante] (a4)--(b4);
+\end{tikzpicture}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Eine Paarung suchen}
+Wir versuchen es gierig: $a_1b_1$, dann $a_3b_3$, dann $a_4b_4$. Die Ecke $a_2$ hat nur $b_1$ als Nachbarn, und $b_1$ ist belegt.
+
+Paarung $M = \{a_1b_1,\ a_3b_3,\ a_4b_4\}$ mit $|M| = 3$.
+
+\schritt{Schritt 2 --- Gibt es einen vergrößernden Weg?}
+Freie Ecken in $A$: nur $a_2$. Freie Ecken in $B$: nur $b_2$.
+
+Ein vergrößernder Weg müsste von $a_2$ nach $b_2$ laufen und alternieren. Von $a_2$ führt nur die Kante zu $b_1$ (keine Paarungskante \checkmark). Von $b_1$ geht es über die Paarungskante zu $a_1$. Von $a_1$ über eine Nicht-Paarungskante --- das ist $a_1b_2$. Und $b_2$ ist frei.
+
+\textbf{Gefunden:} $a_2 - b_1 - a_1 - b_2$.
+
+\schritt{Schritt 3 --- Tauschen}
+Wir nehmen $a_2b_1$ und $a_1b_2$ auf, entfernen $a_1b_1$:
+\[ M' = \{a_2b_1,\ a_1b_2,\ a_3b_3,\ a_4b_4\}, \qquad |M'| = 4 . \]
+
+\schritt{Schritt 4 --- Ist $M'$ größt?}
+$|A| = 4$ und alle vier Ecken sind gesättigt. Mehr als $4$ Kanten kann keine Paarung haben, denn jede Kante verbraucht eine Ecke aus $A$. Also ja.
+
+\schritt{Schritt 5 --- Die Überdeckung}
+Nach König muss die kleinste Überdeckung ebenfalls Größe $4$ haben. Eine solche: $C = \{a_1, a_2, a_3, a_4\}$ --- jede Kante hat ihr $A$-Ende darin.
+
+\schritt{Probe}
+Kleiner geht es nicht: Nach dem einfachen Zusammenhang ist $|C| \ge |M'| = 4$ für jede Überdeckung. \checkmark
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Beachten Sie, dass die gierige Paarung aus Schritt 1 maximal, aber nicht größt war --- genau der Fall aus dem Warnkasten zu Beginn. Der vergrößernde Weg hat sie repariert.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Ein Satz über Paarungen in Bäumen}
+Zeigen Sie: Ein Baum hat höchstens eine perfekte Paarung.
+
+\loesung
+\schritt{Schritt 1 --- Annahme}
+Seien $M_1 \neq M_2$ zwei perfekte Paarungen eines Baumes $T$.
+
+\schritt{Schritt 2 --- Die symmetrische Differenz}
+Wie im Beweis von Satz 11.3 betrachten wir $D = (M_1 \setminus M_2) \cup (M_2 \setminus M_1)$. Da $M_1 \neq M_2$, ist $D$ nicht leer.
+
+\schritt{Schritt 3 --- Grade in $D$}
+Jede Ecke liegt in $M_1$ auf genau einer Kante (perfekt!) und in $M_2$ ebenfalls auf genau einer.
+
+Ist eine Ecke $v$ überhaupt an $D$ beteiligt, so sind ihre beiden Kanten verschieden --- sonst läge die gemeinsame Kante in $M_1 \cap M_2$ und käme in $D$ nicht vor. Beide gehören dann zu $D$, also
+\[ \deg_D(v) = 2 \quad \text{für jede von } D \text{ berührte Ecke.} \]
+
+\schritt{Schritt 4 --- Der Widerspruch}
+Ein nichtleerer Graph, in dem jede berührte Ecke Grad $2$ hat, enthält einen Kreis. (Das ist der Hilfssatz aus dem Beweis von Satz 6.4.)
+
+Ein Baum ist kreisfrei. Widerspruch.
+
+\schritt{Schritt 5 --- Schluss}
+Also $M_1 = M_2$. $\blacksquare$
+
+\schritt{Nachbemerkung --- die Existenz ist eine andere Frage}
+Der Satz sagt nur \enquote{höchstens eine}. Viele Bäume haben gar keine: Der Stern $K_{1,3}$ etwa hat vier Ecken, aber jede Paarung kann höchstens eine Kante enthalten --- alle Kanten treffen sich in der Mitte.
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Satz mit vier Vätern und einem irreführenden Namen}
+Der Satz von Hall heißt im Englischen \kursiv{marriage theorem} --- Heiratssatz. Die Einkleidung stammt von \Person{Hermann Weyl} (1949): $n$ Damen und $n$ Herren, jede Dame kennt einige Herren, wann lassen sich alle verheiraten?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.4cm}P{2.4cm}P{4.0cm}@{}}
+\toprule
+\textbf{1912} & Frobenius & äquivalente Determinantenaussage\\
+\textbf{1931} & Kőnig, Egerváry & Paarung $=$ Überdeckung, bipartit\\
+\textbf{1935} & Hall & die Bedingung in heutiger Form\\
+\textbf{1949} & Weyl & die Einkleidung als Heiratsproblem\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\Person{Philip Hall} stellte den Satz nicht als Zuteilungsproblem, sondern als Frage über \kursiv{Repräsentantensysteme}: Gegeben endlich viele Mengen --- wann kann man aus jeder ein Element so wählen, dass alle Gewählten verschieden sind?
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Heiratseinkleidung hat dem Satz zu Bekanntheit verholfen und ihm zugleich geschadet. Sie legt nahe, es gehe um Paare und Symmetrie --- tatsächlich ist die Aussage unsymmetrisch: Sie sättigt \kursiv{eine} Seite und sagt über die andere nichts. In der Zuteilungsfrage dieses Kapitels ist genau das der Punkt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Von Edmonds zur Nierenlebendspende}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.4cm}P{2.6cm}P{3.8cm}@{}}
+\toprule
+\textbf{1965} & Edmonds & Verfahren für größte Paarungen in beliebigen Graphen, $\Oh(n^3)$\\
+\textbf{1962} & Gale, Shapley & stabile Paarungen mit Präferenzen\\
+\textbf{2012} & --- & Wirtschaftsnobelpreis an Shapley und Roth\\
+\textbf{seit 2004} & Roth u.\,a. & Überkreuz-Nierenspende\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\Person{Jack Edmonds} löste 1965 den allgemeinen Fall. Der Kern seines Verfahrens ist der Umgang mit ungeraden Kreisen --- den \enquote{Blüten} ---, an denen die einfache Suche nach vergrößernden Wegen scheitert. In bipartiten Graphen gibt es solche Kreise nicht, weshalb dort das Verfahren aus Satz 11.3 direkt funktioniert.
+
+Der praktisch folgenreichste Zweig betrifft die Nierenlebendspende. Ein Spender ist oft mit seinem Angehörigen nicht verträglich, aber mit einem fremden Empfänger --- und umgekehrt. Man baut den Graphen der Verträglichkeiten und sucht eine größte Paarung oder, bei längeren Ketten, größte Kreiszerlegungen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Programme dieser Art laufen seit 2004 in den USA und seit 2017 in mehreren europäischen Ländern; die längste dokumentierte Kette umfasste über dreißig Transplantationen. Die zugrundeliegende Mathematik ist die dieses Kapitels --- mit dem Zusatz, dass Kreise fester Länge zugelassen werden müssen, was das Problem NP-schwer macht.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 11.3} & Berge: größt $\iff$ kein vergrößernder Weg\\
+\textbf{Satz 11.4} & Hall: $|N(S)| \ge |S|$ für alle $S \subseteq A$\\
+\textbf{Folgerung 11.5} & Reguläre bipartite Graphen haben perfekte Paarungen\\
+\textbf{Satz 11.7} & Kőnig: Paarung $=$ Überdeckung im bipartiten Fall\\
+\textbf{Satz 11.8} & Tutte: der allgemeine Fall\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel zeigt sich, dass Hall und König Sonderfälle eines einzigen, umfassenderen Satzes sind --- und dass derselbe Satz auch die Frage nach Engpässen aus Kapitel~2 beantwortet.}
+\end{minipage}
+\end{center}
+\end{merksatz}

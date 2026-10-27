@@ -1,0 +1,648 @@
+\chapter{Wettbewerb und Koexistenz}
+
+\section{Zwei Stämme, ein Nährmedium}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall}
+Am Klinikum Neustadt treten zwei Stämme desselben Erregers auf: der ursprüngliche, \kursiv{empfindliche} Stamm $E$ und ein \kursiv{unempfindlicher} Stamm $R$.
+
+Sie fressen dasselbe, besiedeln dieselben Nischen und behindern einander. Keiner frisst den anderen --- das unterscheidet diese Lage von Kapitel~4.
+
+\textbf{Die Frage:} Setzt sich einer durch? Oder bestehen beide nebeneinander?
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Annahme}
+Wir gehen vom logistischen Modell aus (Kapitel~2) und ergänzen es um einen Punkt:
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Art hemmt sich selbst \kursiv{und} die andere. Die Hemmung durch die andere Art wird in Einheiten der eigenen umgerechnet.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Umrechnungsfaktor}
+Ein Individuum der Art $2$ hemmt die Art $1$ so stark wie $\alpha_{12}$ Individuen der eigenen Art. Der Hemmterm lautet daher
+\[ \frac{x + \alpha_{12}\,y}{K_1} \]
+statt $x/K_1$ wie in Kapitel~2.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.8cm}P{3.0cm}@{}}
+\toprule
+$\alpha_{12}$ & \textbf{Bedeutung} & \\
+\midrule
+$0$ & keine Hemmung & Arten sind unabhängig\\
+$<1$ & schwächer als eigene & \textcolor{gruen}{günstig für Koexistenz}\\
+$=1$ & genauso stark & völlig gleiche Nische\\
+$>1$ & stärker als eigene & \textcolor{akzent}{Verdrängung droht}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 5.1 --- das Konkurrenzmodell}
+\[ \frac{\dd x}{\dd t} = r_1\,x\left(1 - \frac{x + \alpha_{12}\,y}{K_1}\right), \qquad \frac{\dd y}{\dd t} = r_2\,y\left(1 - \frac{y + \alpha_{21}\,x}{K_2}\right) \]
+mit $r_i, K_i > 0$ und $\alpha_{12}, \alpha_{21} \ge 0$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Sonderfälle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+$y = 0$ & Die erste Gleichung wird zur logistischen Gleichung aus Kapitel~2. Art $1$ strebt gegen $K_1$.\\
+$\alpha_{12} = \alpha_{21} = 0$ & Beide wachsen unabhängig gegen ihre eigenen Grenzen.\\
+$\alpha_{12} = \alpha_{21} = 1$ & Beide Arten sind ununterscheidbar; nur die Summe zählt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist der Fall vollständig überlappender Nischen. Er führt, wie sich zeigen wird, stets zur Verdrängung einer Art --- und ist die einfachste Form dessen, was man das Konkurrenzausschlussprinzip nennt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Nullklinen}
+
+\begin{definition}
+\boxtitelm{Definition 5.2 --- Nullkline}
+Die \Begriff{$x$-Nullkline} ist die Menge aller Punkte der Ebene, in denen $\dd x/\dd t = 0$ gilt. Entsprechend für $y$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum sie das Verhalten bestimmen}
+Auf einer $x$-Nullkline ändert sich $x$ nicht --- die Bahn verläuft dort senkrecht. Zwischen den Nullklinen hat $\dd x/\dd t$ ein festes Vorzeichen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man muss also nur wissen, wo die Nullklinen liegen und welche Vorzeichen dazwischen herrschen --- dann kennt man das Verhalten des Systems, ohne eine einzige Bahn auszurechnen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Nullklinen dieses Modells}
+Aus $\dd x/\dd t = 0$ folgt $x = 0$ oder
+\[ x + \alpha_{12}\,y = K_1 . \]
+Das ist eine Gerade mit den Achsenabschnitten
+\[ x = K_1 \quad\text{und}\quad y = \frac{K_1}{\alpha_{12}} . \]
+
+Entsprechend für $y$: die Gerade $y + \alpha_{21}x = K_2$ mit den Abschnitten
+\[ y = K_2 \quad\text{und}\quad x = \frac{K_2}{\alpha_{21}} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide Nullklinen sind Geraden. Das ganze Verhalten des Modells hängt daher nur davon ab, \kursiv{wie diese beiden Geraden zueinander liegen} --- und dafür gibt es genau vier Möglichkeiten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die vier Lagen}
+Wir vergleichen jeweils die Achsenabschnitte auf derselben Achse.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{0.7cm}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Bedingung} & \textbf{Nullklinen} & \textbf{Ergebnis}\\
+\midrule
+$1$ & $K_1 > \frac{K_2}{\alpha_{21}}$ und $K_2 < \frac{K_1}{\alpha_{12}}$ & getrennt & \textbf{Art 1 gewinnt}\\
+$2$ & $K_1 < \frac{K_2}{\alpha_{21}}$ und $K_2 > \frac{K_1}{\alpha_{12}}$ & getrennt & \textbf{Art 2 gewinnt}\\
+$3$ & $K_1 < \frac{K_2}{\alpha_{21}}$ und $K_2 < \frac{K_1}{\alpha_{12}}$ & kreuzen sich & \textcolor{gruen}{\textbf{Koexistenz}}\\
+$4$ & $K_1 > \frac{K_2}{\alpha_{21}}$ und $K_2 > \frac{K_1}{\alpha_{12}}$ & kreuzen sich & \textcolor{akzent}{\textbf{einer, je nach Start}}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Fall 1
+\begin{scope}
+\draw[grau!60, line width=0.6pt] (0,0) -- (4.0,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,3.6);
+\draw[tief, line width=1.1pt] (3.5,0) -- (0,3.2);
+\draw[akzent, line width=1.1pt] (2.2,0) -- (0,2.0);
+\fill[gruen] (3.5,0) circle (2.4pt);
+\node[font=\scriptsize\itshape, color=grau] at (2.0,-0.55) {Fall 1};
+\end{scope}
+% Fall 3
+\begin{scope}[xshift=5.2cm]
+\draw[grau!60, line width=0.6pt] (0,0) -- (4.0,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,3.6);
+\draw[tief, line width=1.1pt] (2.8,0) -- (0,3.3);
+\draw[akzent, line width=1.1pt] (3.6,0) -- (0,2.2);
+\fill[gruen] (1.62,1.42) circle (2.4pt);
+\node[font=\scriptsize\itshape, color=grau] at (2.0,-0.55) {Fall 3: Koexistenz};
+\end{scope}
+% Fall 4
+\begin{scope}[xshift=10.4cm]
+\draw[grau!60, line width=0.6pt] (0,0) -- (4.0,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,3.6);
+\draw[tief, line width=1.1pt] (3.6,0) -- (0,2.2);
+\draw[akzent, line width=1.1pt] (2.8,0) -- (0,3.3);
+\fill[akzent] (1.62,1.42) circle (2.4pt);
+\fill[gruen] (3.6,0) circle (2.4pt);
+\fill[gruen] (0,3.3) circle (2.4pt);
+\node[font=\scriptsize\itshape, color=grau] at (2.0,-0.55) {Fall 4: zwei Sieger};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Grün markiert sind die stabilen Zustände. In Fall 4 gibt es zwei davon --- welcher erreicht wird, hängt vom Ausgangsbestand ab. Der Schnittpunkt ist dort instabil; er trennt die beiden Einzugsgebiete.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Koexistenzbedingung}
+
+\begin{merksatz}
+\boxtitel{Satz 5.3 --- wann beide bestehen}
+Die Arten können genau dann dauerhaft nebeneinander bestehen, wenn
+\[ \alpha_{12} < \frac{K_1}{K_2} \qquad\text{und}\qquad \alpha_{21} < \frac{K_2}{K_1} . \]
+
+\schritt{Beweis der ersten Bedingung}
+Aus Fall 3 verlangen wir $K_2 < \frac{K_1}{\alpha_{12}}$. Umstellen --- $\alpha_{12} > 0$ und $K_2 > 0$, also darf man multiplizieren und teilen, ohne dass sich das Zeichen dreht:
+\[ K_2\,\alpha_{12} < K_1 \quad\Longleftrightarrow\quad \alpha_{12} < \frac{K_1}{K_2} . \]
+
+\schritt{Beweis der zweiten}
+Entsprechend aus $K_1 < \frac{K_2}{\alpha_{21}}$:
+\[ K_1\,\alpha_{21} < K_2 \quad\Longleftrightarrow\quad \alpha_{21} < \frac{K_2}{K_1} . \qquad \blacksquare \]
+
+\schritt{Die Folgerung}
+Multipliziert man beide Ungleichungen --- alle Größen sind positiv:
+\[ \alpha_{12}\,\alpha_{21} < \frac{K_1}{K_2}\cdot\frac{K_2}{K_1} = 1 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Notwendig für Koexistenz ist $\alpha_{12}\,\alpha_{21} < 1$ --- die gegenseitige Hemmung muss im Mittel schwächer sein als die Selbsthemmung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Bedingung in Worten}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Art muss sich selbst stärker begrenzen als sie die andere begrenzt.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum das genau die richtige Bedingung ist}
+Wird eine Art häufig, so hemmt sie überwiegend sich selbst. Das gibt der seltenen Art Raum, sich zu erholen.
+
+Ist es umgekehrt --- jede hemmt die andere stärker als sich selbst ---, so verstärkt jeder Vorsprung sich selbst. Das ist Fall 4: Wer zuerst häufig ist, gewinnt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man nennt das Prinzip \Begriff{negative Rückkopplung auf die eigene Häufigkeit}. Es ist allgemeiner als dieses Modell und die Grundlage fast aller Koexistenzerklärungen in der Ökologie: Koexistenz braucht einen Mechanismus, der die seltene Art begünstigt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 5.4 --- der Koexistenzpunkt}
+Existiert Koexistenz, so liegt sie bei
+\[ x^{*} = \frac{K_1 - \alpha_{12}K_2}{1 - \alpha_{12}\alpha_{21}}, \qquad y^{*} = \frac{K_2 - \alpha_{21}K_1}{1 - \alpha_{12}\alpha_{21}} . \]
+
+\schritt{Beweis}
+Beide Nullklinengleichungen müssen gelten:
+\[ x + \alpha_{12}y = K_1 \qquad (\mathrm{I}) \]
+\[ \alpha_{21}x + y = K_2 \qquad (\mathrm{II}) \]
+
+Wir lösen $(\mathrm{II})$ nach $y$ auf: $y = K_2 - \alpha_{21}x$, und setzen in $(\mathrm{I})$ ein:
+\begin{align*}
+x + \alpha_{12}\bigl(K_2 - \alpha_{21}x\bigr) &= K_1\\
+x + \alpha_{12}K_2 - \alpha_{12}\alpha_{21}x &= K_1\\
+x\bigl(1 - \alpha_{12}\alpha_{21}\bigr) &= K_1 - \alpha_{12}K_2\\
+x^{*} &= \frac{K_1 - \alpha_{12}K_2}{1 - \alpha_{12}\alpha_{21}}
+\end{align*}
+Einsetzen in $(\mathrm{II})$ liefert $y^{*}$. $\blacksquare$
+
+\schritt{Die Probe an den Vorzeichen}
+Unter der Koexistenzbedingung ist $\alpha_{12}K_2 < K_1$, also ist der Zähler positiv; und $\alpha_{12}\alpha_{21} < 1$, also ist der Nenner positiv. Beide Werte sind positiv. \checkmark
+\end{merksatz}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Empfindlicher und unempfindlicher Stamm --- ohne Antibiotikum}
+Gemessen am Klinikum, Bestände in Einheiten von $10^8$ je Milliliter:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{1.6cm}P{4.4cm}@{}}
+\toprule
+$K_E$ & $10{,}0$ & Kapazität des empfindlichen Stamms\\
+$K_R$ & $8{,}0$ & niedriger --- die Resistenz kostet\\
+$\alpha_{ER}$ & $0{,}8$ & Hemmung von $E$ durch $R$\\
+$\alpha_{RE}$ & $1{,}2$ & Hemmung von $R$ durch $E$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die Bedingungen prüfen}
+\[ \alpha_{ER} = 0{,}8 \quad\text{gegen}\quad \frac{K_E}{K_R} = \frac{10}{8} = 1{,}25 \quad\Longrightarrow\quad 0{,}8 < 1{,}25 \ \checkmark \]
+\[ \alpha_{RE} = 1{,}2 \quad\text{gegen}\quad \frac{K_R}{K_E} = \frac{8}{10} = 0{,}8 \quad\Longrightarrow\quad 1{,}2 > 0{,}8 \ \textcolor{akzent}{\times} \]
+
+Die zweite Bedingung ist verletzt: \textbf{Keine Koexistenz.}
+
+\schritt{Wer gewinnt}
+Wir bestimmen die Lage nach der Tabelle in Abschnitt 5.2:
+\[ K_E = 10 \quad\text{gegen}\quad \frac{K_R}{\alpha_{RE}} = \frac{8}{1{,}2} = 6{,}67 \quad\Longrightarrow\quad 10 > 6{,}67 \]
+\[ K_R = 8 \quad\text{gegen}\quad \frac{K_E}{\alpha_{ER}} = \frac{10}{0{,}8} = 12{,}5 \quad\Longrightarrow\quad 8 < 12{,}5 \]
+
+Das ist Fall 1: \textbf{Der empfindliche Stamm verdrängt den unempfindlichen} --- und zwar von jedem Ausgangsbestand aus.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das bestätigt die Rechnung aus Aufgabe 1.3 mit anderen Mitteln: Ohne Antibiotikum ist Resistenz ein Nachteil. Hier kommt der Grund hinzu --- $E$ ist nicht nur schneller, sondern auch der stärkere Konkurrent um dieselben Nährstoffe.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Unter Antibiotikum}
+Das Antibiotikum senkt die Kapazität des empfindlichen Stamms drastisch --- sagen wir auf $K_E = 1{,}0$.
+
+\schritt{Neu prüfen}
+\[ K_E = 1{,}0 \quad\text{gegen}\quad \frac{K_R}{\alpha_{RE}} = 6{,}67 \quad\Longrightarrow\quad 1{,}0 < 6{,}67 \]
+\[ K_R = 8 \quad\text{gegen}\quad \frac{K_E}{\alpha_{ER}} = \frac{1{,}0}{0{,}8} = 1{,}25 \quad\Longrightarrow\quad 8 > 1{,}25 \]
+
+Das ist Fall 2: \textbf{Der unempfindliche Stamm verdrängt den empfindlichen.}
+
+\schritt{Die Umkehrung in einer Tabelle}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{ohne} & \textbf{mit}\\
+\midrule
+$K_E$ & $10{,}0$ & $1{,}0$\\
+Fall & $1$ & $2$\\
+Sieger & $E$ & \textcolor{akzent}{$R$}\\
+Endzustand & $E = 10$, $R = 0$ & $E = 0$, $R = 8$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Behandlung kehrt das Verhältnis vollständig um. Bemerkenswert ist, wie wenig dazu nötig war: Es genügte, \kursiv{einen} Parameter zu ändern. Alle Wechselwirkungsstärken blieben unberührt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was daraus für die Behandlungsstrategie folgt}
+Das Modell legt nahe, dass der empfindliche Stamm eine \kursiv{nützliche} Rolle spielt: Solange er vorhanden ist, hält er den resistenten klein.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer den empfindlichen Stamm vollständig ausrottet, entfernt den natürlichen Konkurrenten des resistenten.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Gedanke der adaptiven Therapie}
+Daraus ist ein Behandlungsansatz entstanden, der nicht auf vollständige Vernichtung zielt, sondern auf Eindämmung: Man behandelt nur so stark, dass die Gesamtlast beherrschbar bleibt --- und erhält dabei genug empfindliche Erreger, um den resistenten Stamm zu unterdrücken.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In der Krebsbehandlung wird dieser Ansatz seit etwa 2016 in Studien geprüft; Kapitel~14 stellt ihn ausführlich dar. In der Infektiologie ist er umstritten, weil dort eine anhaltende Erregerlast eigene Gefahren birgt --- und weil der Vergleich hinkt: Ein Tumor bleibt im Körper, ein Erreger wird weitergegeben.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Grenze des Arguments}
+Das Modell kennt nur zwei Stämme in einem geschlossenen Gefäß. Es kennt keine Neuinfektion von außen, keine Übertragung auf andere Menschen und keine Mutation. Es begründet daher keine Behandlungsempfehlung, sondern schärft eine Frage.
+\end{warnung}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was dieses Modell nicht kann}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Feste $\alpha$} & Die Wechselwirkungsstärke gilt als Konstante. In Wirklichkeit hängt sie von den Bedingungen ab --- und vom Nährstoff, um den gerade konkurriert wird.\\
+\textbf{Nur zwei Arten} & Bei drei und mehr Arten treten Erscheinungen auf, die im Zweiartenmodell unmöglich sind --- etwa zyklische Überlegenheit.\\
+\textbf{Kein Raum} & Alles ist durchmischt. Räumliche Trennung ermöglicht Koexistenz auch dort, wo das Modell sie ausschließt.\\
+\textbf{Keine Schwankung} & Wechselnde Bedingungen können Arten abwechselnd begünstigen und so Koexistenz erzeugen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Bei drei Arten kann $A$ über $B$ siegen, $B$ über $C$ und $C$ über $A$ --- wie bei Schere, Stein, Papier. Alle drei bestehen dann dauerhaft nebeneinander, obwohl je zwei von ihnen es nicht könnten.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\node[knotenb] (a) at (90:1.0) {$A$};
+\node[knotenb] (b) at (210:1.0) {$B$};
+\node[knotenb] (c) at (330:1.0) {$C$};
+\draw[kanted, -{Stealth[length=5pt]}] (a) to[bend left=18] (b);
+\draw[kanted, -{Stealth[length=5pt]}] (b) to[bend left=18] (c);
+\draw[kanted, -{Stealth[length=5pt]}] (c) to[bend left=18] (a);
+\node[font=\scriptsize\itshape, color=grau, anchor=west] at (1.6,0) {jeder schlägt einen};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei Darmbakterien ist das beobachtet: Manche Stämme erzeugen Giftstoffe gegen andere, sind aber selbst gegen einen dritten empfindlich. Solche Dreiecksbeziehungen gelten heute als eine Erklärung dafür, wie in der Darmflora Hunderte von Arten nebeneinander bestehen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Der Zirkelschluss beim Konkurrenzausschluss}
+Das \Begriff{Konkurrenzausschlussprinzip} lautet: Zwei Arten mit derselben ökologischen Nische können nicht dauerhaft nebeneinander bestehen.
+
+Im Modell ist das bewiesen: Bei $\alpha_{12} = \alpha_{21} = 1$ ist die Koexistenzbedingung stets verletzt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Aber: Wie stellt man fest, ob zwei Arten dieselbe Nische haben?} In der Praxis oft daran, dass sie einander verdrängen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dann ist das Prinzip nicht mehr prüfbar, sondern eine Definition. Diese Kritik wurde seit den 1960er Jahren scharf geführt, und sie ist berechtigt. Der Ausweg besteht darin, die Nische \kursiv{unabhängig} zu bestimmen --- durch Messung von Ressourcennutzung --- und das Ergebnis dann vorherzusagen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.1 --- Koexistenz prüfen und berechnen}
+Zwei Stämme mit $K_1 = 10$, $K_2 = 8$, $\alpha_{12} = 0{,}6$, $\alpha_{21} = 0{,}5$. Prüfen Sie auf Koexistenz und bestimmen Sie gegebenenfalls die Gleichgewichtsbestände.
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingungen}
+\[ \alpha_{12} = 0{,}6 \quad<\quad \frac{K_1}{K_2} = \frac{10}{8} = 1{,}25 \quad \checkmark \]
+\[ \alpha_{21} = 0{,}5 \quad<\quad \frac{K_2}{K_1} = \frac{8}{10} = 0{,}80 \quad \checkmark \]
+
+Beide erfüllt --- \textbf{Koexistenz.}
+
+\schritt{Schritt 2 --- Die Probe über das Produkt}
+\[ \alpha_{12}\alpha_{21} = 0{,}6 \cdot 0{,}5 = 0{,}30 < 1 \quad \checkmark \]
+
+\schritt{Schritt 3 --- Der Gleichgewichtspunkt}
+\[ 1 - \alpha_{12}\alpha_{21} = 1 - 0{,}30 = 0{,}70 \]
+\[ x^{*} = \frac{10 - 0{,}6\cdot8}{0{,}70} = \frac{10 - 4{,}8}{0{,}70} = \frac{5{,}2}{0{,}70} = 7{,}43 \]
+\[ y^{*} = \frac{8 - 0{,}5\cdot10}{0{,}70} = \frac{8 - 5}{0{,}70} = \frac{3}{0{,}70} = 4{,}29 \]
+
+\schritt{Schritt 4 --- Die Proben}
+\kursiv{Erste Nullkline:} $x + \alpha_{12}y = 7{,}43 + 0{,}6 \cdot 4{,}29 = 7{,}43 + 2{,}57 = 10{,}00 = K_1$. \checkmark\\
+\kursiv{Zweite Nullkline:} $y + \alpha_{21}x = 4{,}29 + 0{,}5 \cdot 7{,}43 = 4{,}29 + 3{,}72 = 8{,}01 \approx K_2$. \checkmark
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+& \textbf{allein} & \textbf{zusammen}\\
+\midrule
+Art 1 & $10{,}0$ & $7{,}43$\\
+Art 2 & $8{,}0$ & $4{,}29$\\
+\midrule
+Summe & --- & $11{,}72$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Beide Arten erreichen weniger als allein --- das ist Konkurrenz. Aber beide überleben.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Bemerkenswert ist die letzte Zeile: Die Gesamtbiomasse $11{,}72$ liegt \kursiv{über} der Kapazität jeder einzelnen Art. Weil sich die Arten nur teilweise behindern, nutzen sie zusammen mehr Ressourcen als jede für sich. Das ist der modellhafte Kern dessen, was man in der Ökologie den Vielfaltseffekt nennt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.2 --- Der zweideutige Fall}
+Nun $K_1 = 10$, $K_2 = 8$, $\alpha_{12} = 2{,}0$, $\alpha_{21} = 1{,}5$. Bestimmen Sie den Fall, den Schnittpunkt und dessen Bedeutung.
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingungen}
+\[ \alpha_{12} = 2{,}0 \quad>\quad \frac{K_1}{K_2} = 1{,}25 \quad \textcolor{akzent}{\times} \]
+\[ \alpha_{21} = 1{,}5 \quad>\quad \frac{K_2}{K_1} = 0{,}80 \quad \textcolor{akzent}{\times} \]
+
+Beide verletzt --- das ist \textbf{Fall 4}.
+
+\schritt{Schritt 2 --- Der Schnittpunkt}
+\[ 1 - \alpha_{12}\alpha_{21} = 1 - 3{,}0 = -2{,}0 \]
+\[ x^{*} = \frac{10 - 2{,}0\cdot8}{-2{,}0} = \frac{10-16}{-2{,}0} = \frac{-6}{-2{,}0} = 3{,}0 \]
+\[ y^{*} = \frac{8 - 1{,}5\cdot10}{-2{,}0} = \frac{8-15}{-2{,}0} = \frac{-7}{-2{,}0} = 3{,}5 \]
+
+\schritt{Schritt 3 --- Die Probe}
+$x + 2{,}0y = 3{,}0 + 7{,}0 = 10{,}0 = K_1$. \checkmark\\
+$y + 1{,}5x = 3{,}5 + 4{,}5 = 8{,}0 = K_2$. \checkmark
+
+\schritt{Schritt 4 --- Warum dieser Punkt instabil ist}
+Beide Zähler und der Nenner waren negativ. Das Vorzeichen des Nenners ist das Kennzeichen:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{3.0cm}P{2.0cm}@{}}
+\toprule
+$1-\alpha_{12}\alpha_{21}$ & \textbf{Bedeutung} & \\
+\midrule
+positiv & Selbsthemmung überwiegt & \textcolor{gruen}{stabil}\\
+negativ & Fremdhemmung überwiegt & \textcolor{akzent}{instabil}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Was tatsächlich geschieht}
+Der Punkt $(3{,}0;\ 3{,}5)$ ist ein \Begriff{Sattelpunkt}: Er wird aus einer Richtung angezogen und in einer anderen abgestoßen. Startet das System nicht exakt auf der Trennlinie, so läuft es zu einem der beiden Randzustände:
+\[ (10,\ 0) \qquad\text{oder}\qquad (0,\ 8) . \]
+
+\schritt{Schritt 6 --- Die Trennlinie}
+Sie verläuft näherungsweise durch den Ursprung und den Sattelpunkt. Als Faustregel:
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer zu Beginn im Verhältnis über $3{,}0 : 3{,}5$ liegt, gewinnt.}
+\end{minipage}
+\end{center}
+
+\kursiv{Beispiel:} Start bei $(4;\ 3)$ --- Verhältnis $1{,}33$ gegen $0{,}857$ auf der Trennlinie --- führt zum Sieg von Art 1. Start bei $(2;\ 4)$ führt zum Sieg von Art 2.
+
+\schritt{Schritt 7 --- Was das praktisch bedeutet}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Lage heißt \Begriff{Vorrangeffekt}: Wer zuerst da ist, bleibt. Sie erklärt, warum eine einmal etablierte Darmflora einen eingebrachten Erreger abwehren kann --- man nennt das \Begriff{Kolonisationsresistenz} --- und warum nach einer Antibiotikabehandlung, die die Flora zerstört, gerade dann eine Besiedlung durch problematische Keime droht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und es erklärt, warum die Übertragung von Darmflora eines gesunden Spenders bei wiederkehrenden Infektionen wirksam sein kann: Man verschiebt den Ausgangspunkt über die Trennlinie.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.3 --- Ab wann kippt es?}
+Für den Leitfall mit $K_R = 8$, $\alpha_{ER} = 0{,}8$, $\alpha_{RE} = 1{,}2$: Wie weit muss das Antibiotikum $K_E$ senken, damit der resistente Stamm gewinnt?
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingung für den Sieg von $R$}
+Nach der Tabelle in Abschnitt 5.2 ist das Fall 2:
+\[ K_E < \frac{K_R}{\alpha_{RE}} \qquad\text{und}\qquad K_R > \frac{K_E}{\alpha_{ER}} \]
+
+\schritt{Schritt 2 --- Die erste Bedingung}
+\[ K_E < \frac{8}{1{,}2} = 6{,}67 \]
+
+\schritt{Schritt 3 --- Die zweite Bedingung}
+\[ 8 > \frac{K_E}{0{,}8} \quad\Longleftrightarrow\quad K_E < 8 \cdot 0{,}8 = 6{,}40 \]
+
+\schritt{Schritt 4 --- Zusammen}
+Die schärfere der beiden gilt:
+\[ K_E < 6{,}40 \]
+
+\schritt{Schritt 5 --- Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{2.4cm}P{1.6cm}@{}}
+\toprule
+$K_E$ & $K_E \lessgtr 6{,}67$ & $K_E \lessgtr 6{,}40$ & \textbf{Fall}\\
+\midrule
+$10{,}0$ & größer & größer & $1$: $E$\\
+$6{,}50$ & kleiner & größer & \textcolor{akzent}{$4$: je nach Start}\\
+$6{,}00$ & kleiner & kleiner & $2$: $R$\\
+$1{,}0$ & kleiner & kleiner & $2$: $R$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 6 --- Der Zwischenbereich}
+Zwischen $6{,}40$ und $6{,}67$ liegt Fall 4 --- der Vorrangeffekt aus Aufgabe 5.2. Dort entscheidet der Ausgangsbestand.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es gibt also einen schmalen Bereich der Antibiotikawirkung, in dem beide Ausgänge möglich sind.} Ob die Behandlung anschlägt, hängt dann davon ab, wie viele resistente Keime zu Beginn vorhanden waren.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Modell liefert damit eine Erklärung für eine klinische Beobachtung: Bei unzureichender Dosierung oder zu kurzer Behandlungsdauer ist der Ausgang schwer vorhersagbar. Nicht, weil der Zufall regiert, sondern weil der Ausgangsbestand entscheidet --- und der ist nicht bekannt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie zugleich die Grenze dieses Schlusses: Das Modell kennt keine Mutation. In Wirklichkeit entstehen resistente Keime auch während der Behandlung neu --- und gerade eine Behandlung im Zwischenbereich gibt ihnen Zeit dazu. Kapitel~14 baut diesen Vorgang ein.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Zwei Hefearten und ein Prinzip}
+\Person{Georgi Gause} (1910--1986), sowjetischer Mikrobiologe, führte 1932 bis 1934 die Versuche durch, die das Konkurrenzausschlussprinzip belegten --- und es zugleich in Frage stellten.
+
+Er setzte zwei Arten von Wimpertierchen in dieselbe Nährlösung. Bei zwei Arten, die dieselbe Nahrung an derselben Stelle aufnahmen, verdrängte eine die andere binnen etwa zwei Wochen --- wie das Modell es vorhersagt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Bei einem anderen Paar geschah das nicht: Die eine Art hielt sich im oberen Bereich des Gefäßes und ernährte sich von schwebenden Bakterien, die andere am Boden. Beide bestanden nebeneinander. Gause selbst zog daraus den richtigen Schluss --- dass es auf die \kursiv{Nische} ankommt, nicht auf die Art.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Name}
+Gause nannte das Prinzip nicht nach sich selbst und beanspruchte es auch nicht. Im Englischen heißt es dennoch \kursiv{Gause's law}. Er selbst schrieb die Idee Volterra und Lotka zu.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Gause wandte sich später von der Ökologie ab. Im Zweiten Weltkrieg suchte er nach antibiotisch wirksamen Substanzen und entdeckte 1942 das Gramicidin~S, das in der sowjetischen Militärmedizin breit eingesetzt wurde. Der Begründer der Konkurrenzforschung wurde damit zu einem der frühen Antibiotikaforscher --- eine Verbindung, die zum Leitfall dieses Bandes passt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Mehlkäfer}
+\Person{Thomas Park} führte ab 1948 über Jahrzehnte Versuche mit zwei Mehlkäferarten durch. Das Ergebnis war unbequem: Welche Art gewann, hing von Temperatur und Feuchtigkeit ab --- und bei mittleren Bedingungen war der Ausgang \kursiv{nicht vorhersagbar}. Mal setzte sich die eine durch, mal die andere.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das ist genau Fall 4. Parks Versuche gelten als die beste empirische Bestätigung dafür, dass der Vorrangeffekt wirklich vorkommt --- und dass es Bedingungen gibt, unter denen das Ergebnis eines Wettbewerbs grundsätzlich offen ist.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Koexistenz heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Koexistenz\-theorie} & Seit etwa 2000 systematisch ausgearbeitet: Man trennt \kursiv{Nischenunterschiede}, die Koexistenz fördern, von \kursiv{Fitnessunterschieden}, die sie verhindern.\\
+\textbf{Mikrobiom\-forschung} & Hunderte von Arten im Darm --- das Zweiartenmodell reicht nicht. Netzwerkmodelle mit vielen Arten sind ein aktives Feld.\\
+\textbf{Kolonisations\-resistenz} & Der Vorrangeffekt als Schutzmechanismus; Grundlage der Stuhltransplantation bei wiederkehrenden Darminfektionen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die erste Zeile ist begrifflich der wichtigste Fortschritt. Die Frage \enquote{koexistieren sie?} zerfällt in zwei:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Stabilisierend} & Wie stark begünstigt das System die seltene Art?\\
+\textbf{Ausgleichend} & Wie ähnlich sind die Arten in ihrer Durchsetzungsfähigkeit?\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Koexistenz verlangt, dass der erste Anteil den zweiten überwiegt. In der Sprache dieses Kapitels: Die Selbsthemmung muss den Unterschied in den Kapazitäten ausgleichen können. Das ist genau Satz 5.3, in eine Form gebracht, die sich auf viele Arten übertragen lässt.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Bezug zum Leitfall}
+Für die Resistenzentwicklung ist die entscheidende Größe die \Begriff{Fitnesskosten} der Resistenz --- im Modell der Unterschied $K_E - K_R$. Sie bestimmen, wie schnell ein resistenter Stamm verschwindet, wenn das Antibiotikum abgesetzt wird.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die praktische Hoffnung, dass Resistenzen nach Absetzen von selbst zurückgehen, hat sich nur teilweise erfüllt. Der Grund: Bakterien erwerben häufig zusätzliche Mutationen, die die Kosten ausgleichen, ohne die Resistenz aufzugeben. Aus $K_R = 8$ wird dann wieder $K_R = 10$ --- und der Vorteil des empfindlichen Stamms verschwindet.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 5.1} & Konkurrenz über Umrechnungsfaktoren\\
+\textbf{Nullklinen} & vier Lagen, vier Ausgänge\\
+\textbf{Satz 5.3} & Koexistenz $\iff$ Selbsthemmung überwiegt\\
+\textbf{Satz 5.4} & der Koexistenzpunkt, mit Vorzeichenprobe\\
+\textbf{Fall 4} & Vorrangeffekt --- wer zuerst da ist, bleibt\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel entwickeln wir das Werkzeug, mit dem sich die Stabilität solcher Punkte allgemein bestimmen lässt --- statt sie wie bisher aus dem Bild abzulesen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

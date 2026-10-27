@@ -1,0 +1,711 @@
+\part{Krankheit}
+
+\chapter{Tumorwachstum und Therapie}
+
+\section{Warum nicht logistisch}
+
+\begin{merksatz}
+\boxtitel{Die Beobachtung}
+Ein Tumor wächst anfangs rasch und verlangsamt sich. So weit passt das logistische Modell aus Kapitel~2.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es passt nicht: Die Verlangsamung beginnt viel früher als bei halber Endgröße.} Gemessen wird der Wendepunkt bei etwa einem Drittel --- nicht bei der Hälfte.
+\end{minipage}
+\end{center}
+
+\schritt{Woran das liegt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Versorgung} & Der Kern eines wachsenden Knotens wird von Gefäßen abgeschnitten, lange bevor der Platz ausgeht.\\
+\textbf{Geometrie} & Nur die Randschicht teilt sich. Der teilungsaktive Anteil sinkt wie $1/\text{Radius}$.\\
+\textbf{Zell\-eigenschaften} & Zellen in Zellhaufen teilen sich langsamer, unabhängig von der Versorgung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man braucht ein Modell, bei dem die Bremsung früher einsetzt und milder verläuft --- also nicht linear mit dem Bestand, sondern logarithmisch.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 13.1 --- das Gompertz-Modell}
+\[ \frac{\dd N}{\dd t} \;=\; r\,N\,\ln\frac{K}{N} \]
+mit $0 < N < K$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Vergleich der Bremsterme}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{2.6cm}P{3.4cm}@{}}
+\toprule
+& \textbf{logistisch} & \textbf{Gompertz}\\
+\midrule
+Bremsterm & $1 - N/K$ & $\ln(K/N)$\\
+bei $N \to 0$ & $\to 1$ & \textcolor{akzent}{$\to \infty$}\\
+bei $N = K$ & $0$ & $0$\\
+Wendepunkt & $K/2$ & $\mathbf{K/e \approx 0{,}368\,K}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist bemerkenswert und zugleich die Schwäche des Modells: Bei sehr kleinem Bestand wird die Wachstumsrate je Zelle beliebig groß. Das ist unsinnig --- eine einzelne Zelle kann sich nicht beliebig schnell teilen. Wir kommen im Bruchfall darauf zurück.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Lösung}
+
+\begin{merksatz}
+\boxtitel{Satz 13.2}
+Die Lösung von Definition 13.1 mit $N(0) = N_0$ lautet
+\[ N(t) = K\,\exp\left(-\ln\frac{K}{N_0}\cdot e^{-rt}\right) . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- eine Substitution genügt}
+\schritt{Schritt 1 --- Die richtige Größe}
+Wir setzen
+\[ u(t) := \ln\frac{K}{N(t)} = \ln K - \ln N . \]
+
+\schritt{Schritt 2 --- Ableiten}
+\[ \frac{\dd u}{\dd t} = -\frac{1}{N}\frac{\dd N}{\dd t} \]
+
+Die Gleichung einsetzen:
+\[ \frac{\dd u}{\dd t} = -\frac{1}{N}\cdot r\,N\,\ln\frac{K}{N} = -r\,\ln\frac{K}{N} = -r\,u \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist die Zerfallsgleichung aus Kapitel~1.} Die Substitution hat das Gompertz-Modell auf den einfachsten Fall zurückgeführt.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Lösen}
+\[ u(t) = u_0\,e^{-rt} \qquad\text{mit}\qquad u_0 = \ln\frac{K}{N_0} \]
+
+\schritt{Schritt 4 --- Zurücksetzen}
+\[ \ln\frac{K}{N} = \ln\frac{K}{N_0}\cdot e^{-rt} \]
+\[ \frac{K}{N} = \exp\left(\ln\frac{K}{N_0}\cdot e^{-rt}\right) \]
+\[ N(t) = K\,\exp\left(-\ln\frac{K}{N_0}\cdot e^{-rt}\right) . \]
+
+\schritt{Schritt 5 --- Die Proben}
+\kursiv{Bei $t=0$:} $e^{-r\cdot0} = 1$, also
+\[ N(0) = K\exp\left(-\ln\frac{K}{N_0}\right) = K\cdot\frac{N_0}{K} = N_0 . \quad \checkmark \]
+
+\kursiv{Für $t\to\infty$:} $e^{-rt} \to 0$, also $N \to K e^{0} = K$. \checkmark $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis ist kürzer als der des logistischen Modells in Kapitel~2 --- weil die richtige Substitution alles erledigt. \textbf{Die Größe $\ln(K/N)$ zerfällt exponentiell}; das ist die eigentliche Aussage des Modells und leichter zu merken als die Lösungsformel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 13.3 --- der Wendepunkt}
+Der Wendepunkt liegt bei $N = K/e \approx 0{,}368\,K$.
+
+\schritt{Beweis}
+\[ \frac{\dd N}{\dd t} = r\,N\,(\ln K - \ln N) \]
+Nach $t$ ableiten, mit Produktregel:
+\[ \frac{\dd^2 N}{\dd t^2} = r\frac{\dd N}{\dd t}(\ln K - \ln N) + rN\left(-\frac{1}{N}\frac{\dd N}{\dd t}\right) \]
+\[ = r\frac{\dd N}{\dd t}\left(\ln\frac{K}{N} - 1\right) \]
+
+Da $\dd N/\dd t > 0$, verschwindet dies genau dann, wenn
+\[ \ln\frac{K}{N} = 1 \quad\Longleftrightarrow\quad \frac{K}{N} = e \quad\Longleftrightarrow\quad N = \frac{K}{e} . \qquad \blacksquare \]
+
+\schritt{Der größte Zuwachs}
+\[ \left.\frac{\dd N}{\dd t}\right|_{\max} = r\cdot\frac{K}{e}\cdot 1 = \frac{rK}{e} \approx 0{,}368\,rK \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zum Vergleich: Beim logistischen Modell war es $rK/4 = 0{,}25\,rK$ bei $N = K/2$. Der Gompertz-Verlauf erreicht seinen Höhepunkt früher und höher --- er steigt steiler an und flacht dann langsamer ab. Er ist \kursiv{unsymmetrisch}, und genau darin liegt der Unterschied zu Kapitel~2.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (7.0,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.4);
+\draw[grau!50, dashed] (0,3.0) -- (6.8,3.0);
+\node[font=\scriptsize, color=grau] at (-0.3,3.0) {$K$};
+\draw[grau!45, dashed] (0,1.5) -- (6.8,1.5);
+\draw[grau!45, dashed] (0,1.104) -- (6.8,1.104);
+\node[font=\scriptsize, color=grau] at (-0.45,1.5) {$K/2$};
+\node[font=\scriptsize, color=grau] at (-0.45,1.02) {$K/e$};
+\draw[akzent, line width=1.2pt, dashed, smooth, samples=80, domain=0:6.8]
+  plot (\x, {3.0/(1+exp(-1.35*(\x-3.4)))});
+\draw[tief, line width=1.4pt, smooth, samples=80, domain=0:6.8]
+  plot (\x, {3.0*exp(-5.0*exp(-0.68*\x))});
+\fill[tief] (1.987,1.104) circle (2.2pt);
+\fill[akzent] (3.4,1.5) circle (2.2pt);
+\node[font=\scriptsize, color=tief, anchor=west] at (3.6,2.65) {Gompertz};
+\node[font=\scriptsize, color=akzent, anchor=west] at (4.5,1.75) {logistisch};
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\section{Ein Tumor, durchgerechnet}
+
+\begin{merksatz}
+\boxtitel{Die Größenordnungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{3.4cm}@{}}
+\toprule
+\textbf{Zellzahl} & \textbf{Masse} & \textbf{Bedeutung}\\
+\midrule
+$1$ & --- & erste entartete Zelle\\
+$10^{6}$ & $1$ mg & Zellhaufen, ohne Gefäße\\
+$10^{9}$ & $1$ g & \textcolor{akzent}{Nachweisgrenze, etwa $1$ cm}\\
+$10^{12}$ & $1$ kg & meist tödliche Last\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Faustregel:} etwa $10^{9}$ Zellen je Gramm.
+
+\schritt{Die Parameter}
+Wir setzen $K = 10^{12}$ und wählen $r$ so, dass die Verdopplungszeit bei Nachweisgröße etwa $100$ Tage beträgt --- ein für viele solide Tumoren typischer Wert.
+
+\[ T_2 = \frac{\ln 2}{r\,\ln(K/N)} \quad\Longrightarrow\quad r = \frac{\ln 2}{T_2\,\ln(K/N)} = \frac{0{,}6931}{100 \cdot 6{,}908} = 0{,}001\ \mathrm{d}^{-1} \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Verlauf}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+$N$ & $\ln(K/N)$ & $T_2$ & \textbf{Zeit ab 1 Zelle}\\
+\midrule
+$1$ & $27{,}63$ & $25$ d & $0$\\
+$10^{3}$ & $20{,}72$ & $33$ d & $0{,}79$ Jahre\\
+$10^{6}$ & $13{,}82$ & $50$ d & $1{,}90$ Jahre\\
+$\mathbf{10^{9}}$ & $6{,}91$ & $100$ d & $\mathbf{3{,}80}$ Jahre\\
+$10^{10}$ & $4{,}61$ & $151$ d & $4{,}91$ Jahre\\
+$10^{11}$ & $2{,}30$ & $301$ d & $6{,}81$ Jahre\\
+$K/e$ & $1{,}00$ & $693$ d & $9{,}09$ Jahre\\
+$5\cdot10^{11}$ & $0{,}69$ & $1000$ d & $10{,}10$ Jahre\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Rechnung für die letzte Spalte:} Aus $\ln(K/N) = \ln(K/N_0)\,e^{-rt}$ folgt
+\[ t = -\frac{1}{r}\,\ln\frac{\ln(K/N)}{\ln(K/N_0)} = -1000\cdot\ln\frac{6{,}908}{27{,}631} = -1000\cdot\ln 0{,}25 = 1386\ \mathrm{d} . \]
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die verborgene Vorgeschichte}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Vom Beginn bis zur Nachweisgrenze vergehen etwa vier Jahre. Vom Nachweis bis zur tödlichen Last weitere sechs.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.8pt] (0,0) -- (7.6,0);
+\draw[tief!30, line width=9pt] (0.1,0.55) -- (2.85,0.55);
+\draw[akzent, line width=9pt] (2.85,0.55) -- (7.5,0.55);
+\node[font=\scriptsize, color=tief] at (1.45,0.55) {unsichtbar};
+\node[font=\scriptsize, color=white] at (5.2,0.55) {sichtbar};
+\foreach \x/\lab in {0.1/0, 2.85/{3{,}8}, 7.5/{10}}
+  \node[font=\scriptsize, color=grau] at (\x,-0.35) {\lab};
+\node[font=\scriptsize, color=grau] at (3.8,-0.8) {Jahre seit der ersten entarteten Zelle};
+\draw[grau!55, dashed] (2.85,-0.15) -- (2.85,1.1);
+\node[font=\scriptsize, color=akzent] at (2.85,1.35) {Nachweis};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Drei Folgerungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Streuung} & Zum Zeitpunkt der Entdeckung ist der Tumor Jahre alt. Absiedlungen können längst erfolgt sein.\\
+\textbf{Ursachensuche} & Was einen Tumor ausgelöst hat, liegt Jahre vor der Diagnose. Befragungen zum letzten Jahr treffen die falsche Zeit.\\
+\textbf{Früh\-erkennung} & Sie verlegt den Nachweis nach links --- mit der Vorlaufzeitverzerrung aus Band 17, Kapitel~12.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist ein methodisches Argument, das leicht übersehen wird: Eine Fall-Kontroll-Studie zu Tumorursachen muss nach Belastungen fragen, die zehn oder mehr Jahre zurückliegen --- und Erinnerung über solche Zeiträume ist unzuverlässig. Das ist eine Messverzerrung, die aus der Wachstumskinetik folgt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und die Deutung von Verlaufskontrollen}
+Wächst ein bekannter Tumor langsamer als vorher, so kann das dreierlei bedeuten:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Therapie wirkt} & $r$ ist gesunken.\\
+\textbf{Nichts} & Gompertz-Wachstum verlangsamt sich \kursiv{von selbst}.\\
+\textbf{Beides} & Die häufigste Lage.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ohne Vergleichsgruppe lässt sich das nicht trennen.} Die natürliche Verlangsamung sieht aus wie ein Behandlungserfolg.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist derselbe Sachverhalt wie die Regression zur Mitte in Band 17, Kapitel~10: Ein Verlauf, der ohnehin eingetreten wäre, wird der Maßnahme zugeschrieben. Und die Abhilfe ist dieselbe --- Randomisierung.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Die Wirkung einer Behandlung}
+
+\begin{merksatz}
+\boxtitel{Die Annahme vom festen Anteil}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine gegebene Dosis tötet stets denselben \kursiv{Anteil} der vorhandenen Zellen --- nicht dieselbe Zahl.}
+\end{minipage}
+\end{center}
+
+Man nennt das die \Begriff{Log-kill-Annahme}. Eine Behandlung, die $99{,}9\,\%$ tötet, senkt die Zellzahl um drei Zehnerpotenzen --- gleichgültig, ob $10^{12}$ oder $10^{6}$ Zellen vorhanden waren.
+
+\schritt{Warum das plausibel ist}
+Jede Zelle wird unabhängig von den anderen mit derselben Wahrscheinlichkeit getroffen. Das ist dieselbe Annahme wie beim Zerfall in Kapitel~1 --- nur auf die Dosis statt auf die Zeit bezogen.
+
+\schritt{Die unbequeme Folgerung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+\textbf{vorher} & \textbf{nachher} & \textbf{getötet}\\
+\midrule
+$10^{12}$ & $10^{9}$ & $999$ Milliarden\\
+$10^{9}$ & $10^{6}$ & $999$ Millionen\\
+$10^{3}$ & $1$ & $999$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Um von $10^{12}$ auf null zu kommen, braucht man nicht eine, sondern viele gleich wirksame Gaben.} Und die letzte Zelle ist genauso schwer zu treffen wie die erste Milliarde.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das erklärt, warum Chemotherapien in Zyklen gegeben werden und warum ein vollständiges Verschwinden im Bild --- unter $10^{9}$ Zellen --- keine Heilung bedeutet. Zwischen \enquote{nicht nachweisbar} und \enquote{nicht vorhanden} liegen bis zu neun Zehnerpotenzen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Sechs Zyklen, durchgerechnet}
+Ausgangslast $10^{12}$, je Zyklus drei Zehnerpotenzen, $21$ Tage Abstand.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.4cm}P{1.8cm}@{}}
+\toprule
+\textbf{Zyklus} & \textbf{nach Gabe} & \textbf{nach 21 d} & \textbf{Faktor}\\
+\midrule
+$1$ & $1{,}0\cdot10^{9}$ & $1{,}15\cdot10^{9}$ & $1{,}15$\\
+$2$ & $1{,}15\cdot10^{6}$ & $1{,}53\cdot10^{6}$ & $1{,}33$\\
+$3$ & $1{,}53\cdot10^{3}$ & $2{,}34\cdot10^{3}$ & $1{,}52$\\
+$4$ & $2{,}34$ & $4{,}08$ & $1{,}74$\\
+$5$ & $0{,}0041$ & $0{,}0081$ & $1{,}99$\\
+$6$ & $8\cdot10^{-6}$ & --- & \textcolor{gruen}{Heilung}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Beobachtung}
+Der Wiederanwuchs zwischen den Zyklen wird von Zyklus zu Zyklus \kursiv{stärker} --- von Faktor $1{,}15$ auf $1{,}99$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Grund steht in Definition 13.1: Je kleiner $N$, desto größer $\ln(K/N)$ und damit die Wachstumsrate je Zelle. Ein kleiner Resttumor wächst schneller nach als ein großer. Das ist die \Begriff{Norton-Simon-Hypothese} --- und aus ihr folgt die Empfehlung, die Abstände zwischen den Zyklen so kurz wie vertretbar zu halten.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Modell sagt Heilung vorher}
+Nach sechs Zyklen liegt die berechnete Zellzahl weit unter eins. Nach diesem Modell wäre jeder Tumor heilbar.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Er ist es nicht.} Der Grund fehlt in diesem Modell vollständig --- und ist der Gegenstand des nächsten Kapitels.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Vier Lücken}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Keine Resistenz} & Alle Zellen sind gleich empfindlich. Kapitel~14.\\
+\textbf{Keine ganzen Zahlen} & Bei $N = 0{,}0041$ rechnet das Modell weiter. Unterhalb weniger Zellen braucht man ein zufallsgestütztes Modell.\\
+\textbf{$r$ fest} & Tumoren verändern sich; die Wachstumsrate ist keine Konstante.\\
+\textbf{Unendliche Rate} & Bei $N \to 0$ geht $\ln(K/N) \to \infty$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur letzten Zeile}
+Das Modell behauptet, eine einzelne übrig gebliebene Zelle teile sich alle $25$ Tage --- was noch plausibel ist. Bei $N = 10^{-6}$ wären es rechnerisch alle $17$ Tage, und das ist sinnlos.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Praktisch stört das wenig, weil der Bereich unter einer Zelle ohnehin außerhalb der Modellgültigkeit liegt. Man sollte aber wissen, dass die Zahlen dort nichts mehr bedeuten --- und insbesondere, dass \enquote{$N = 10^{-6}$} keine Aussage über Heilungswahrscheinlichkeit ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Was man stattdessen sagen kann}
+Ist die berechnete mittlere Zellzahl $\mu$ sehr klein, so beträgt die Wahrscheinlichkeit, dass keine Zelle überlebt, näherungsweise
+\[ \Pr[\text{Heilung}] = e^{-\mu} . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+$\mu$ & $e^{-\mu}$ & \\
+\midrule
+$5$ & $0{,}7\,\%$ & \\
+$1$ & $36{,}8\,\%$ & \\
+$0{,}1$ & $90{,}5\,\%$ & \\
+$0{,}01$ & $99{,}0\,\%$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Poisson-Näherung --- und sie macht aus einer sinnlosen Zahl eine sinnvolle. Sie ist zugleich die Grundlage der Modelle zur Bestrahlungsplanung, wo die Heilungswahrscheinlichkeit genau so berechnet wird.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.1 --- Die Vorgeschichte berechnen}
+Ein Tumor wird mit $2$ cm Durchmesser entdeckt. Bei der Voruntersuchung zwölf Monate zuvor war nichts zu sehen. Die Verdopplungszeit bei dieser Größe beträgt $120$ Tage, $K = 10^{12}$. War der Tumor vor einem Jahr schon da?
+
+\loesung
+\schritt{Schritt 1 --- Die Zellzahl bestimmen}
+Eine Kugel von $2$ cm Durchmesser hat das Volumen
+\[ V = \frac{4}{3}\pi\left(1\ \mathrm{cm}\right)^{3} = 4{,}19\ \mathrm{cm^3} \approx 4{,}2\ \mathrm{g} \]
+Mit $10^{9}$ Zellen je Gramm:
+\[ N = 4{,}2\cdot10^{9} \]
+
+\schritt{Schritt 2 --- Die Wachstumskonstante}
+\[ \ln\frac{K}{N} = \ln\frac{10^{12}}{4{,}2\cdot10^{9}} = \ln 238{,}1 = 5{,}473 \]
+\[ r = \frac{\ln 2}{T_2 \cdot \ln(K/N)} = \frac{0{,}6931}{120 \cdot 5{,}473} = 0{,}001055\ \mathrm{d}^{-1} \]
+
+\schritt{Schritt 3 --- Rückwärts rechnen}
+Aus $\ln(K/N_t) = \ln(K/N_0)e^{-rt}$ folgt rückwärts, also mit $t = -365$:
+\[ \ln\frac{K}{N_{\text{vorher}}} = 5{,}473 \cdot e^{+0{,}001055 \cdot 365} = 5{,}473 \cdot e^{0{,}3851} = 5{,}473 \cdot 1{,}4698 = 8{,}044 \]
+
+\schritt{Schritt 4 --- Die Zellzahl}
+\[ \frac{K}{N} = e^{8{,}044} = 3117 \quad\Longrightarrow\quad N = \frac{10^{12}}{3117} = 3{,}21\cdot10^{8} \]
+
+\schritt{Schritt 5 --- Die Größe}
+\[ 3{,}21\cdot10^{8}\ \text{Zellen} = 0{,}32\ \mathrm{g} = 0{,}32\ \mathrm{cm^3} \]
+\[ r = \sqrt[3]{\frac{3 \cdot 0{,}32}{4\pi}} = \sqrt[3]{0{,}0764} = 0{,}424\ \mathrm{cm} \]
+Durchmesser: $0{,}85$ cm.
+
+\schritt{Antwort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ja --- der Tumor war vor einem Jahr bereits knapp $9$ mm groß.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Folgerung}
+Ein Knoten von $9$ mm liegt an der Nachweisgrenze vieler Verfahren, aber nicht darunter. Dass er nicht gesehen wurde, bedeutet nicht, dass er nicht da war.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist ein Befund, der in der Begutachtung eine Rolle spielt: Ob ein Tumor bei einer früheren Untersuchung hätte erkannt werden müssen, lässt sich mit dieser Rechnung eingrenzen. Sie liefert eine Größenabschätzung, keine Gewissheit --- die Verdopplungszeit streut zwischen Tumoren erheblich.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Und die Empfindlichkeit prüfen}
+Bei $T_2 = 60$ Tagen statt $120$:
+\[ r = 0{,}002110, \qquad \ln\frac{K}{N} = 5{,}473\,e^{0{,}7702} = 11{,}82 \]
+\[ N = 10^{12}\,e^{-11{,}82} = 7{,}3\cdot10^{6} \ \text{Zellen} = 7{,}3\ \mathrm{mg} \]
+Durchmesser: etwa $2{,}4$ mm --- unter jeder Nachweisgrenze.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Halbierte Verdopplungszeit, und die Antwort kehrt sich um. Die Rechnung ist so gut wie die Schätzung der Verdopplungszeit --- und die ist meist nicht bekannt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.2 --- Zyklusabstände vergleichen}
+Ein Schema tötet je Gabe $99\,\%$ der Zellen. Vergleichen Sie Abstände von $14$, $21$ und $28$ Tagen bei einer Ausgangslast von $10^{11}$ und $r = 0{,}001$, $K = 10^{12}$. Wie viele Zyklen bis unter eine Zelle?
+
+\loesung
+\schritt{Schritt 1 --- Die Rechenschritte}
+Je Zyklus: Zellzahl durch $100$ teilen, dann $\tau$ Tage Gompertz-Wachstum:
+\[ \ln\frac{K}{N_{\text{neu}}} = \ln\frac{K}{N}\cdot e^{-r\tau} \]
+
+\schritt{Schritt 2 --- Die Wachstumsfaktoren}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.8cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+$\tau$ & $e^{-r\tau}$ & \\
+\midrule
+$14$ d & $0{,}9861$ & \\
+$21$ d & $0{,}9792$ & \\
+$28$ d & $0{,}9724$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 3 --- Der Verlauf bei $\tau = 21$ Tagen}
+Start: $N = 10^{11}$, also $\ln(K/N) = 2{,}303$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.4cm}P{2.2cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Zykl.} & \textbf{nach Gabe} & $\ln(K/N)$ & \textbf{nach $21$ d}\\
+\midrule
+$1$ & $1{,}0\cdot10^{9}$ & $6{,}908$ & $1{,}16\cdot10^{9}$\\
+$2$ & $1{,}16\cdot10^{7}$ & $11{,}36$ & $1{,}45\cdot10^{7}$\\
+$3$ & $1{,}45\cdot10^{5}$ & $15{,}75$ & $1{,}94\cdot10^{5}$\\
+$4$ & $1{,}94\cdot10^{3}$ & $20{,}06$ & $2{,}77\cdot10^{3}$\\
+$5$ & $27{,}7$ & $24{,}31$ & $42{,}2$\\
+$6$ & $0{,}422$ & $28{,}49$ & $0{,}68$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Nach dem \textbf{sechsten Zyklus} liegt die Zellzahl unter eins.
+
+\schritt{Schritt 4 --- Der Vergleich der Abstände}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.2cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+$\tau$ & \textbf{Zyklen} & \textbf{Gesamtdauer} & \textbf{Rest nach 6}\\
+\midrule
+$14$ d & $6$ & $84$ d & $0{,}30$\\
+$21$ d & $6$ & $126$ d & $0{,}68$\\
+$28$ d & $7$ & $196$ d & $1{,}56$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Unterschied ist gering, aber gerichtet: Kürzere Abstände lassen weniger Restzellen übrig.}
+\end{minipage}
+\end{center}
+
+Mit der Poisson-Näherung aus Abschnitt 13.5:
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.8cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+$\tau$ & $\mu$ & $\Pr[\text{Heilung}]$\\
+\midrule
+$14$ d & $0{,}30$ & $74{,}1\,\%$\\
+$21$ d & $0{,}68$ & $50{,}7\,\%$\\
+$28$ d & $1{,}56$ & $21{,}0\,\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Aus einem scheinbar kleinen Unterschied in der Restzellzahl wird ein großer in der Heilungswahrscheinlichkeit --- weil die Exponentialfunktion dazwischensteht. Das ist der rechnerische Kern der \Begriff{dosisdichten Therapie}: dieselben Gaben, kürzere Abstände. Studien haben für mehrere Tumorarten einen Vorteil gezeigt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Der Vorbehalt}
+Kürzere Abstände bedeuten weniger Erholungszeit für gesundes Gewebe. Der Nutzen ist erkauft, und ob er überwiegt, entscheidet die Studie, nicht das Modell.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.3 --- Gompertz und Logistik vergleichen}
+Zeigen Sie, dass sich beide Modelle bei kleinem $N$ ähnlich verhalten, und beziffern Sie, wann sie sich trennen.
+
+\loesung
+\schritt{Schritt 1 --- Die Wachstumsraten je Zelle}
+\[ \text{logistisch: } \frac{1}{N}\frac{\dd N}{\dd t} = r_L\left(1-\frac{N}{K}\right) \]
+\[ \text{Gompertz: } \frac{1}{N}\frac{\dd N}{\dd t} = r_G\,\ln\frac{K}{N} \]
+
+\schritt{Schritt 2 --- Auf denselben Ausgangswert bringen}
+Bei sehr kleinem $N$ ist die logistische Rate $\approx r_L$. Die Gompertz-Rate hängt von $N$ ab; wir passen bei $N_0 = 10^{6}$ an:
+\[ r_L = r_G\,\ln\frac{K}{N_0} = 0{,}001 \cdot 13{,}816 = 0{,}01382\ \mathrm{d}^{-1} \]
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{2.2cm}P{2.2cm}P{1.8cm}@{}}
+\toprule
+$N$ & \textbf{logistisch} & \textbf{Gompertz} & \textbf{Verhältnis}\\
+\midrule
+$10^{6}$ & $0{,}01382$ & $0{,}01382$ & $1{,}00$\\
+$10^{8}$ & $0{,}01382$ & $0{,}00921$ & $0{,}67$\\
+$10^{9}$ & $0{,}01381$ & $0{,}00691$ & $0{,}50$\\
+$10^{10}$ & $0{,}01368$ & $0{,}00461$ & $0{,}34$\\
+$10^{11}$ & $0{,}01244$ & $0{,}00230$ & $0{,}19$\\
+$5\cdot10^{11}$ & $0{,}00691$ & $0{,}00069$ & $0{,}10$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Rechnung für $N=10^{10}$:} logistisch $0{,}01382(1-0{,}01) = 0{,}01368$; Gompertz $0{,}001\cdot\ln(100) = 0{,}004605$.
+
+\schritt{Schritt 4 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das logistische Modell bremst praktisch gar nicht, solange $N \ll K$.} Erst bei einem Prozent der Endgröße hat es $1\,\%$ verloren. Gompertz hat dort bereits zwei Drittel der Rate eingebüßt.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Wo sie sich um die Hälfte unterscheiden}
+Gesucht ist $N$ mit
+\[ r_G\ln\frac{K}{N} = \frac12\,r_L = \frac12\,r_G\ln\frac{K}{N_0} \]
+\[ \ln\frac{K}{N} = \frac{13{,}816}{2} = 6{,}908 \quad\Longrightarrow\quad \frac{K}{N} = 10^{3} \quad\Longrightarrow\quad N = 10^{9} \]
+
+\textbf{Genau an der Nachweisgrenze} --- was die Tabelle bestätigt.
+
+\schritt{Schritt 6 --- Warum das die Modellwahl entscheidet}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im Bereich, den man \kursiv{sieht} --- von $10^{9}$ bis $10^{12}$ ---, unterscheiden sich die Modelle erheblich. Genau dort werden die Daten erhoben, und genau dort passt Gompertz besser. Im unsichtbaren Bereich sind sie kaum zu unterscheiden, und dort wäre es auch gleichgültig.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist eine allgemeine Einsicht zur Modellwahl: Zwei Modelle unterscheiden zu können verlangt, dass man in dem Bereich misst, wo sie auseinandergehen. Bei Tumoren ist das glücklicherweise der beobachtbare --- bei der Epidemieendgröße in Kapitel~7 war es umgekehrt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Sterbetafel und ein Tumor}
+\Person{Benjamin Gompertz} (1779--1865) war Versicherungsmathematiker in London --- und als Jude von der Universität ausgeschlossen; er bildete sich selbst aus.
+
+1825 veröffentlichte er eine Arbeit über Sterbetafeln mit einer einfachen Behauptung: \textbf{Die Sterberate wächst mit dem Alter exponentiell.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das Gompertz-Gesetz gilt bis heute erstaunlich gut --- zwischen etwa dreißig und neunzig Jahren verdoppelt sich die Sterbewahrscheinlichkeit etwa alle acht Jahre, in allen untersuchten Bevölkerungen und über zwei Jahrhunderte hinweg. Es ist eine der beständigsten empirischen Regelmäßigkeiten der Biologie.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Weg zum Tumorwachstum}
+Die Verbindung ist rein formal: Gompertz' Sterbetafel und die Wachstumskurve dieses Kapitels führen auf dieselbe Funktion, weil in beiden Fällen eine Größe exponentiell mit der Zeit abnimmt --- dort die Überlebenswahrscheinlichkeit, hier $\ln(K/N)$.
+
+\Person{Anna Kane Laird} zeigte 1964, dass die Funktion Tumorwachstumsdaten außergewöhnlich gut beschreibt --- besser als jedes andere damals geprüfte Modell.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Laird prüfte Daten von neunzehn Tumorarten in Maus, Ratte und Kaninchen und fand die Gompertz-Form durchweg bestätigt. Bemerkenswert ist, dass sie keine Begründung dafür angeben konnte --- und es bis heute keine allgemein anerkannte gibt. Das Modell ist gut, weil es passt, nicht weil man wüsste, warum.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Log-kill-Annahme}
+\Person{Howard Skipper} formulierte sie in den 1960er Jahren aufgrund von Versuchen an einer Mäuseleukämie. Sein Befund war damals überraschend und bestimmt bis heute, wie Chemotherapieschemata entworfen werden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Skipper zeigte zugleich, dass die Heilung nur gelingt, wenn die \kursiv{letzte} Zelle getötet wird --- daher der Grundsatz, die Behandlung über das sichtbare Verschwinden hinaus fortzusetzen. Das war eine Umkehr der bisherigen Praxis.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Tumormodellierung heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Modell\-vergleiche} & Systematische Prüfungen an Tierdaten finden regelmäßig, dass einfache Modelle mit wenigen Parametern besser vorhersagen als komplizierte.\\
+\textbf{Räumliche Modelle} & Tumoren als wachsende Gewebe mit Sauerstoffgefälle und Gefäßversorgung.\\
+\textbf{Vorhersage am Einzelfall} & Aus zwei bis drei Bildkontrollen das weitere Wachstum schätzen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Vergleiche zwischen exponentiellem, logistischem, Gompertz- und Potenzgesetzmodell an großen Datensammlungen zeigen: Die Gompertz-Form beschreibt vorhandene Daten am besten, das einfachere Potenzgesetz sagt künftiges Wachstum oft besser vorher.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist derselbe Sachverhalt wie bei Pearls Bevölkerungsvorhersage in Kapitel~2: Gute Anpassung und gute Vorhersage sind zweierlei. Ein Modell mit einer Kapazitätsgrenze schätzt diese Grenze aus Daten, die weit davon entfernt liegen --- und die Schätzung ist entsprechend unzuverlässig.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Der praktisch interessanteste Ansatz: Aus wenigen Verlaufskontrollen die Parameter schätzen und den weiteren Verlauf --- mit und ohne Behandlung --- vorhersagen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Schwierigkeit ist dieselbe wie in Kapitel~2: Zwei Messpunkte bestimmen zwei Parameter, aber ohne jede Sicherheit. Man braucht Bevölkerungsmodelle wie in Kapitel~10 --- die Verteilung der Parameter über viele Patienten als Vorwissen, verfeinert durch die Messungen am einzelnen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 13.1} & logarithmische statt linearer Bremsung\\
+\textbf{Satz 13.2} & Lösung über die Substitution $u = \ln(K/N)$\\
+\textbf{Satz 13.3} & Wendepunkt bei $K/e$, nicht $K/2$\\
+\textbf{Log-kill} & fester Anteil, nicht feste Zahl\\
+\textbf{Poisson} & $\Pr[\text{Heilung}] = e^{-\mu}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieses Kapitel sagte Heilung vorher, wo es keine gibt. Im nächsten fügen wir das ein, was fehlte --- und finden dabei ein Behandlungsprinzip, das dem gewohnten widerspricht.}
+\end{minipage}
+\end{center}
+\end{merksatz}

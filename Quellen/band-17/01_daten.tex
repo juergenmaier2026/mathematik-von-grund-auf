@@ -1,0 +1,715 @@
+\part{Beschreiben}
+
+\chapter{Daten, Skalen und die erste Falle}
+
+\section{Was ein Datensatz ist}
+
+Beginnen wir beim Gegenstand. Alles Weitere setzt voraus, dass klar ist, worüber gesprochen wird.
+
+\begin{definition}
+\boxtitelm{Definition 1.1 --- Merkmal, Ausprägung, Beobachtung}
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item Ein \Begriff{Merkmal} ist eine Eigenschaft, die an jedem Untersuchungsobjekt erhoben wird --- etwa das Alter oder das Geschlecht.
+\item Die möglichen Werte eines Merkmals heißen seine \Begriff{Ausprägungen}.
+\item Eine \Begriff{Beobachtung} ist ein einzelnes Untersuchungsobjekt zusammen mit allen an ihm erhobenen Werten.
+\item Die \Begriff{Stichprobe} ist die Gesamtheit der Beobachtungen; ihr Umfang heißt $n$.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Datenmatrix}
+Man ordnet die Daten in einer Tabelle an: eine Zeile je Beobachtung, eine Spalte je Merkmal.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!50, line width=0.7pt] (-2.8,-1.3) rectangle (2.8,1.1);
+\draw[grau!50, line width=0.7pt] (-2.8,0.75) -- (2.8,0.75);
+\foreach \x in {-1.6,-0.4,0.8} \draw[grau!50, line width=0.7pt] (\x,-1.3) -- (\x,1.1);
+\node[font=\scriptsize, color=tief] at (-2.2,0.93) {ID};
+\node[font=\scriptsize, color=tief] at (-1.0,0.93) {Gruppe};
+\node[font=\scriptsize, color=tief] at (0.2,0.93) {NRS24};
+\node[font=\scriptsize, color=tief] at (1.8,0.93) {$\ldots$};
+\node[font=\scriptsize, color=grau] at (-2.2,0.4) {$1$};
+\node[font=\scriptsize, color=grau] at (-2.2,0.0) {$2$};
+\node[font=\scriptsize, color=grau] at (-2.2,-0.4) {$3$};
+\node[font=\scriptsize, color=grau] at (-2.2,-0.9) {$\vdots$};
+\node[font=\scriptsize\itshape, color=akzent] at (-4.0,0.0) {$n$ Zeilen};
+\node[font=\scriptsize\itshape, color=akzent] at (0,-1.65) {eine Spalte je Merkmal};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Anordnung ist keine Formsache. Fast jeder Fehler in der Datenauswertung lässt sich darauf zurückführen, dass Zeilen und Spalten verwechselt werden --- dass etwa über Merkmale gemittelt wird statt über Beobachtungen, oder dass eine Person versehentlich zweimal als Zeile erscheint.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Auszug aus der MOBIL-Studie}
+Für die Handrechnungen dieses Bandes benutzen wir durchgehend denselben Ausschnitt aus zwölf Beobachtungen --- sechs je Gruppe.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{0.9cm}P{1.3cm}P{1.2cm}P{1.5cm}P{1.3cm}P{1.5cm}@{}}
+\toprule
+\textbf{ID} & \textbf{Gruppe} & \textbf{Alter} & \textbf{Geschl.} & \textbf{NRS24} & \textbf{MOB (h)}\\
+\midrule
+$1$ & A & $68$ & w & $5$ & $26$\\
+$2$ & A & $74$ & m & $3$ & $19$\\
+$3$ & A & $61$ & w & $6$ & $31$\\
+$4$ & A & $79$ & m & $4$ & $24$\\
+$5$ & A & $70$ & w & $7$ & $35$\\
+$6$ & A & $65$ & m & $5$ & $22$\\
+\midrule
+$7$ & B & $72$ & w & $3$ & $18$\\
+$8$ & B & $66$ & m & $2$ & $15$\\
+$9$ & B & $81$ & w & $4$ & $21$\\
+$10$ & B & $69$ & m & $3$ & $17$\\
+$11$ & B & $75$ & w & $5$ & $23$\\
+$12$ & B & $63$ & m & $2$ & $14$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Merken Sie sich die Tabelle nicht --- sie wird in jedem Kapitel wieder abgedruckt, wo sie gebraucht wird. Merken Sie sich nur, dass es dieselbe bleibt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Skalenniveaus}
+
+Nun die zentrale Unterscheidung dieses Kapitels. Sie entscheidet darüber, welche Rechnungen mit einem Merkmal überhaupt sinnvoll sind.
+
+\begin{merksatz}
+\boxtitel{Die Grundidee}
+Zahlen in einer Datentabelle sind nicht immer Zahlen im Sinne der Arithmetik. Manchmal sind sie bloße \kursiv{Namen}, die man ebenso gut durch Buchstaben ersetzen könnte.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+Stations\-nummer $3$ & Die $3$ ist ein Name. \enquote{Station $3$ plus Station $5$} ergibt keinen Sinn.\\
+Schmerz $3$ auf der NRS & Die $3$ bedeutet \enquote{weniger als $4$}, aber nicht \enquote{halb so viel wie $6$}.\\
+Alter $3$ Jahre & Hier ist alles erlaubt: Summen, Verhältnisse, Mittelwerte.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Frage lautet also: Welche Rechenoperationen bewahren die Auskunft, die in der Zahl steckt? Das ist der Kern des Skalenbegriffs, und so wird er im Folgenden auch definiert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 1.2 --- die vier Skalenniveaus}
+Ein Merkmal heißt
+
+\begin{itemize}[leftmargin=1.4em, itemsep=5pt]
+\item \Begriff{nominalskaliert}, wenn seine Ausprägungen nur unterschieden, aber nicht geordnet werden können. Die Auskunft bleibt erhalten unter jeder \kursiv{umkehrbaren Umbenennung}.
+
+\item \Begriff{ordinalskaliert}, wenn die Ausprägungen zusätzlich in eine Rangfolge gebracht werden können, die Abstände aber nicht deutbar sind. Die Auskunft bleibt erhalten unter jeder \kursiv{streng wachsenden} Umformung.
+
+\item \Begriff{intervallskaliert}, wenn zusätzlich die Abstände deutbar sind, der Nullpunkt aber willkürlich ist. Erhalten unter Umformungen $x \mapsto a x + b$ mit $a > 0$.
+
+\item \Begriff{verhältnisskaliert}, wenn zusätzlich ein natürlicher Nullpunkt vorliegt, so dass Verhältnisse deutbar sind. Erhalten nur unter $x \mapsto a x$ mit $a > 0$.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was diese Definition wirklich sagt}
+Sie definiert das Skalenniveau nicht über die Zahlen, sondern über die \kursiv{erlaubten Umformungen}. Das ist ungewöhnlich und lohnt eine Erläuterung.
+
+\schritt{Am Beispiel der Temperatur}
+Celsius und Fahrenheit hängen zusammen über
+\[ F = 1{,}8 \cdot C + 32 . \]
+Das ist eine Umformung der Bauart $x \mapsto ax+b$. Beide Skalen enthalten dieselbe Auskunft --- also ist alles, was bei dieser Umformung erhalten bleibt, eine echte Eigenschaft der Temperatur, und alles andere ein Artefakt der Skala.
+
+\schritt{Die Probe}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{3.0cm}@{}}
+\toprule
+\textbf{Aussage} & \textbf{Celsius} & \textbf{Fahrenheit}\\
+\midrule
+$20^\circ$ wärmer als $10^\circ$ & ja & $68 > 50$: ja \checkmark\\
+Abstand $10$--$20$ $=$ Abstand $30$--$40$ & ja & $18 = 18$: ja \checkmark\\
+$20^\circ$ ist doppelt so warm wie $10^\circ$ & \enquote{$2\times$} & $68/50 = 1{,}36$: \textcolor{akzent}{\textbf{nein}}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die dritte Zeile zeigt: Das Verhältnis ist \kursiv{keine} Eigenschaft der Temperatur, sondern hängt davon ab, wo man die Null hingelegt hat. Genau deshalb ist Celsius intervall- und nicht verhältnisskaliert.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei der absoluten Temperatur in Kelvin ist das anders: Dort liegt die Null am physikalisch ausgezeichneten Punkt, und $200$ K sind tatsächlich doppelt so warm wie $100$ K. Kelvin ist verhältnisskaliert, Celsius nicht --- obwohl beides Temperaturen sind.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was auf welcher Skala erlaubt ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.2cm}P{1.2cm}P{1.2cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+& \textbf{nom.} & \textbf{ord.} & \textbf{interv.} & \textbf{verh.}\\
+\midrule
+Gleichheit prüfen & \textcolor{gruen}{ja} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja}\\
+Häufigkeiten zählen & \textcolor{gruen}{ja} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja}\\
+Modus & \textcolor{gruen}{ja} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja}\\
+Ordnen, Rangzahlen & \textcolor{akzent}{nein} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja}\\
+Median, Quantile & \textcolor{akzent}{nein} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja}\\
+Differenzen bilden & \textcolor{akzent}{nein} & \textcolor{akzent}{nein} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja}\\
+\textbf{Mittelwert, Varianz} & \textcolor{akzent}{nein} & \textcolor{akzent}{\textbf{nein}} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja}\\
+Verhältnisse bilden & \textcolor{akzent}{nein} & \textcolor{akzent}{nein} & \textcolor{akzent}{\textbf{nein}} & \textcolor{gruen}{ja}\\
+Variations\-koeffizient & \textcolor{akzent}{nein} & \textcolor{akzent}{nein} & \textcolor{akzent}{nein} & \textcolor{gruen}{ja}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die fett gesetzte Zeile ist die folgenreichste --- und die am häufigsten missachtete. Der nächste Abschnitt geht ihr nach.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Merkmale der MOBIL-Studie eingeordnet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{3.6cm}@{}}
+\toprule
+\textbf{Merkmal} & \textbf{Skala} & \textbf{Begründung}\\
+\midrule
+\code{GESCHL} & nominal & keine Ordnung\\
+\code{GRUPPE} & nominal & A und B sind Namen\\
+\code{NRS24} & \textbf{ordinal} & Rangfolge ja, Abstände nein\\
+\code{ZUFR} & ordinal & wie NRS\\
+\code{BEDARF} & nominal (binär) & ja / nein\\
+\code{ALTER} & verhältnis & natürlicher Nullpunkt\\
+\code{MOB} & verhältnis & $0$ Stunden ist echte Null\\
+\code{OPDAUER} & verhältnis & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Ein Sonderfall: das binäre Merkmal}
+\code{BEDARF} ist nominal mit zwei Ausprägungen. Kodiert man \enquote{ja} als $1$ und \enquote{nein} als $0$, so ist der Mittelwert dieser Kodierung gleich dem \kursiv{Anteil} der Ja-Fälle --- eine sinnvolle Größe.
+
+Das ist kein Widerspruch zur Tabelle oben. Bei zwei Ausprägungen fallen Ordinal-, Intervall- und Verhältnisskala zusammen, weil es nur einen Abstand gibt und er keine Vergleichsgröße hat. Binäre Merkmale sind deshalb der einzige Fall, in dem man ein nominales Merkmal mitteln darf.
+\end{merksatz}
+
+\section{Die erste Falle: der Mittelwert ordinaler Daten}
+
+\begin{warnung}
+\boxtitelr{Was bei der NRS schiefgeht}
+Die \Begriff{numerische Rating-Skala} für Schmerz läuft von $0$ (kein Schmerz) bis $10$ (stärkster vorstellbarer Schmerz). Die Zahlen suggerieren gleiche Abstände. Das ist eine Annahme, keine Messung.
+
+\schritt{Die kritische Frage}
+Ist der Unterschied zwischen $2$ und $3$ derselbe wie zwischen $7$ und $8$?
+
+Empirische Untersuchungen zur Schmerzmessung legen nahe: nein. Der Schritt im unteren Bereich wird als kleiner erlebt als der im oberen. Die Skala ist also gestaucht und gedehnt --- ordinal, nicht intervallskaliert.
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Ein Rechenbeispiel, das den Schaden zeigt}
+Betrachten wir zwei Personen mit den NRS-Werten $2$ und $8$, und zwei andere mit $5$ und $5$.
+
+\schritt{Nach der üblichen Rechnung}
+\[ \MW_1 = \frac{2+8}{2} = 5, \qquad \MW_2 = \frac{5+5}{2} = 5 . \]
+Die beiden Paare erscheinen gleich.
+
+\schritt{Mit einer anderen, ebenso zulässigen Kodierung}
+Die Ordinalskala erlaubt jede streng wachsende Umbenennung. Wir wählen eine, die dem oberen Bereich mehr Gewicht gibt --- was der Schmerzempfindung näherkommt:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.6cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}@{}}
+\toprule
+NRS & $0$ & $2$ & $5$ & $8$ & $10$ & \\
+neu & $0$ & $3$ & $12$ & $40$ & $60$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Dieselbe Rechnung}
+\[ \MW_1 = \frac{3+40}{2} = 21{,}5, \qquad \MW_2 = \frac{12+12}{2} = 12 . \]
+
+\schritt{Das Ergebnis}
+Nun erscheint das erste Paar deutlich schlechter als das zweite --- bei \kursiv{identischen} Daten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Vergleich zweier Mittelwerte kann sich umkehren, wenn man die Kodierung ändert. Bei ordinalen Daten ist die Kodierung aber willkürlich. Also ist der Vergleich willkürlich.}
+\end{minipage}
+\end{center}
+
+\schritt{Was der Median macht}
+\[ \Med_1 = \frac{2+8}{2} \ \text{ nach Umkodierung } \ \frac{3+40}{2} \ ? \]
+Halt --- bei zwei Werten ist auch der Median ein Mittel aus zweien und leidet unter demselben Problem.
+
+Nehmen wir daher drei Werte: $2, 5, 8$ gegen $5,5,5$.
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Original\-kodierung} & \textbf{neue Kodierung}\\
+\midrule
+Median $\{2,5,8\}$ & $5$ & $12$\\
+Median $\{5,5,5\}$ & $5$ & $12$\\
+\midrule
+\textbf{Vergleich} & gleich & \textcolor{gruen}{\textbf{gleich}}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Der Median ist die \kursiv{mittlere Ausprägung}, und welche das ist, hängt nur von der Rangfolge ab --- nicht von den zugewiesenen Zahlen. Er bleibt unter jeder streng wachsenden Umkodierung derselbe Datenpunkt.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Und trotzdem wird gemittelt --- auch in diesem Band}
+Die Wirklichkeit der medizinischen Forschung sieht anders aus. NRS-Werte, Likert-Skalen und Scores werden gemittelt, in $t$-Tests gesteckt und in Regressionen verwendet. Auch dieser Band wird es in Kapitel~2 tun.
+
+Das hat Gründe, die man kennen sollte:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Robustheit} & Simulationsstudien zeigen, dass $t$-Tests auf Likert-Daten meist brauchbare Fehlerraten liefern, solange die Verteilungen ähnlich geformt sind.\\
+\textbf{Vergleich\-barkeit} & Die gesamte Literatur rechnet so. Wer es anders macht, ist nicht vergleichbar.\\
+\textbf{Es gibt Alternativen} & Verteilungsfreie Verfahren (Kapitel~9) und ordinale Regression (Kapitel~11) kommen ohne die Annahme aus.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die ehrliche Haltung ist nicht das Verbot, sondern das Bewusstsein: Wer ordinale Daten mittelt, trifft eine Zusatzannahme über gleiche Abstände. Diese Annahme ist meist unausgesprochen und selten geprüft. Sie \kursiv{kann} vertretbar sein --- aber sie gehört in den Methodenteil, nicht ins Schweigen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Diskret und stetig}
+
+\begin{definition}
+\boxtitelm{Definition 1.3}
+Ein Merkmal heißt \Begriff{diskret}, wenn seine Ausprägungen abzählbar sind --- etwa ganze Zahlen oder Kategorien. Es heißt \Begriff{stetig}, wenn es grundsätzlich jeden Wert in einem Bereich annehmen kann.
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Jede Messung ist in Wahrheit diskret}
+Die Mobilisationszeit ist ein stetiges Merkmal: Zwischen $18$ und $19$ Stunden liegen unendlich viele mögliche Werte.
+
+Erhoben wird sie aber in vollen Stunden. Die Daten sind also diskret, obwohl das Merkmal stetig ist.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Das Merkmal} & stetig --- eine Eigenschaft der Wirklichkeit\\
+\textbf{Die Messung} & diskret --- eine Eigenschaft des Messvorgangs\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Diese Unterscheidung wird in Kapitel~9 wichtig: Verfahren, die auf Rangzahlen beruhen, verlangen, dass keine Bindungen auftreten --- also keine zwei gleichen Werte. Bei grober Rundung treten sie aber ständig auf, und man braucht eine Korrektur.
+\end{warnung}
+
+\section{Häufigkeiten}
+
+\begin{definition}
+\boxtitelm{Definition 1.4 --- die drei Häufigkeitsbegriffe}
+Sei $a$ eine Ausprägung eines Merkmals in einer Stichprobe vom Umfang $n$.
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item Die \Begriff{absolute Häufigkeit} $H(a)$ ist die Anzahl der Beobachtungen mit dieser Ausprägung.
+\item Die \Begriff{relative Häufigkeit} ist $h(a) = H(a)/n$.
+\item Die \Begriff{kumulierte Häufigkeit} ist die Summe der relativen Häufigkeiten aller Ausprägungen bis einschließlich $a$ --- sinnvoll nur ab Ordinalskala.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Häufigkeitstabelle für \code{NRS24}}
+Wir nehmen alle zwölf Beobachtungen des Auszugs: $5,3,6,4,7,5,3,2,4,3,5,2$.
+
+\schritt{Schritt 1 --- Sortieren}
+\[ 2,\ 2,\ 3,\ 3,\ 3,\ 4,\ 4,\ 5,\ 5,\ 5,\ 6,\ 7 \]
+
+\schritt{Schritt 2 --- Auszählen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.3cm}P{1.5cm}P{1.9cm}P{2.4cm}@{}}
+\toprule
+\textbf{NRS} & $H$ & $h$ & \textbf{kumuliert}\\
+\midrule
+$2$ & $2$ & $2/12 = 0{,}167$ & $0{,}167$\\
+$3$ & $3$ & $3/12 = 0{,}250$ & $0{,}417$\\
+$4$ & $2$ & $2/12 = 0{,}167$ & $0{,}583$\\
+$5$ & $3$ & $3/12 = 0{,}250$ & $0{,}833$\\
+$6$ & $1$ & $1/12 = 0{,}083$ & $0{,}917$\\
+$7$ & $1$ & $1/12 = 0{,}083$ & $1{,}000$\\
+\midrule
+\textbf{Summe} & $\mathbf{12}$ & $\mathbf{1{,}000}$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die beiden Proben}
+Die absoluten Häufigkeiten müssen sich zu $n$ summieren: $2+3+2+3+1+1 = 12$. \checkmark\\
+Die relativen zu $1$, und die letzte kumulierte muss $1$ sein. \checkmark
+
+\schritt{Was man daraus abliest}
+Die kumulierte Spalte beantwortet Fragen der Art \enquote{Wie viele hatten höchstens $4$?} --- nämlich $58{,}3\,\%$. Solche Fragen sind bei ordinalen Merkmalen zulässig, weil sie nur die Rangfolge benutzen.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Getrennt nach Gruppen --- die eigentlich interessante Tabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.3cm}P{1.4cm}P{1.4cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{NRS} & $H_A$ & $H_B$ & $h_A$ & $h_B$\\
+\midrule
+$2$ & $0$ & $2$ & $0{,}00$ & $0{,}33$\\
+$3$ & $1$ & $2$ & $0{,}17$ & $0{,}33$\\
+$4$ & $1$ & $1$ & $0{,}17$ & $0{,}17$\\
+$5$ & $2$ & $1$ & $0{,}33$ & $0{,}17$\\
+$6$ & $1$ & $0$ & $0{,}17$ & $0{,}00$\\
+$7$ & $1$ & $0$ & $0{,}17$ & $0{,}00$\\
+\midrule
+\textbf{Summe} & $\mathbf{6}$ & $\mathbf{6}$ & $\mathbf{1{,}00}$ & $\mathbf{1{,}00}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (-0.4,0) -- (7.0,0);
+\draw[grau!60, line width=0.7pt] (-0.4,0) -- (-0.4,2.3);
+\foreach \i/\ha/\hb in {0/0/2, 1/1/2, 2/1/1, 3/2/1, 4/1/0, 5/1/0} {
+  \fill[tief!75] (\i*1.1+0.0,0) rectangle (\i*1.1+0.45,\ha*0.65);
+  \fill[akzent!65] (\i*1.1+0.48,0) rectangle (\i*1.1+0.93,\hb*0.65);
+}
+\foreach \i/\lab in {0/2, 1/3, 2/4, 3/5, 4/6, 5/7}
+  \node[font=\scriptsize, color=grau] at (\i*1.1+0.47,-0.28) {\lab};
+\node[font=\scriptsize, color=grau] at (3.2,-0.62) {NRS nach 24 Stunden};
+\fill[tief!75] (5.0,2.0) rectangle (5.35,2.2);
+\node[font=\scriptsize, color=grau] at (5.75,2.1) {A};
+\fill[akzent!65] (6.1,2.0) rectangle (6.45,2.2);
+\node[font=\scriptsize, color=grau] at (6.8,2.1) {B};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man sieht mit bloßem Auge, dass die Gruppe B nach links verschoben liegt. Ob dieser Eindruck mehr ist als Zufall bei zwölf Beobachtungen, ist die Frage von Teil~III. Die Beschreibung liefert die Vermutung, nicht den Beleg.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Darstellungen und ihre Fallen}
+
+\begin{warnung}
+\boxtitelr{Die abgeschnittene Achse}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\begin{scope}
+\draw[grau!60, line width=0.7pt] (-0.3,0) -- (2.6,0);
+\draw[grau!60, line width=0.7pt] (-0.3,0) -- (-0.3,2.4);
+\fill[tief!75] (0.2,0) rectangle (0.95,2.1);
+\fill[akzent!65] (1.3,0) rectangle (2.05,1.9);
+\node[font=\scriptsize, color=grau] at (-0.55,0) {$0$};
+\node[font=\scriptsize\itshape, color=gruen] at (1.1,-0.5) {ehrlich};
+\end{scope}
+\begin{scope}[xshift=4.6cm]
+\draw[grau!60, line width=0.7pt] (-0.3,0) -- (2.6,0);
+\draw[grau!60, line width=0.7pt] (-0.3,0) -- (-0.3,2.4);
+\fill[tief!75] (0.2,0) rectangle (0.95,2.1);
+\fill[akzent!65] (1.3,0) rectangle (2.05,0.4);
+\node[font=\scriptsize, color=grau] at (-0.62,0) {$18$};
+\node[font=\scriptsize\itshape, color=akzent] at (1.1,-0.5) {dieselben Zahlen};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Beide Bilder zeigen die Werte $26{,}2$ und $18{,}0$ --- die mittleren Mobilisationszeiten der beiden Gruppen. Rechts beginnt die Achse bei $18$ statt bei $0$, und der Unterschied erscheint als Faktor fünf statt als Faktor $1{,}5$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Regel lautet: Bei Balkendiagrammen beginnt die Achse bei null, weil die \kursiv{Balkenlänge} die Größe darstellt. Bei Liniendiagrammen darf man ausschneiden, weil dort die \kursiv{Neigung} die Aussage trägt --- muss es aber kenntlich machen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Das Kreisdiagramm}
+Kreisdiagramme sind fast immer die schlechtere Wahl. Der Grund ist wahrnehmungspsychologisch: Menschen vergleichen Längen erheblich genauer als Winkel oder Flächen.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Vertretbar} & Zwei bis drei Kategorien, grobe Anteile, kein Vergleich zwischen Kreisen.\\
+\textbf{Ungeeignet} & Mehr als vier Kategorien; Vergleich zweier Kreise; ähnlich große Anteile.\\
+\textbf{Unzulässig} & Dreidimensionale Kreise mit Perspektive --- die vorderen Segmente erscheinen systematisch größer.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein gestapelter Balken leistet dasselbe wie ein Kreisdiagramm und lässt sich zwischen Gruppen vergleichen. Es gibt fast keine Lage, in der das Kreisdiagramm die bessere Wahl ist --- und es ist trotzdem die häufigste.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.1 --- Skalenniveaus bestimmen}
+Ordnen Sie den folgenden Merkmalen ein Skalenniveau zu und begründen Sie jeweils über die erlaubten Umformungen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{4.0cm}P{4.4cm}@{}}
+\toprule
+(a) Blutgruppe & (d) ASA-Klassifikation I--IV\\
+(b) Körpergröße in cm & (e) Kalenderjahr\\
+(c) Postleitzahl & (f) Temperatur in Kelvin\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) Blutgruppe --- nominal}
+Die Ausprägungen A, B, AB, 0 lassen sich unterscheiden, aber nicht sinnvoll ordnen. Jede umkehrbare Umbenennung --- etwa A$\to$3, B$\to$1 --- bewahrt die gesamte Auskunft. Also nominal.
+
+\schritt{(b) Körpergröße --- verhältnisskaliert}
+Null Zentimeter bedeutet \enquote{keine Ausdehnung} und ist nicht willkürlich gewählt. Der Wechsel zu Zoll ist die Umformung $x \mapsto x/2{,}54$ --- von der Bauart $x \mapsto ax$ ohne additiven Teil. Die Aussage \enquote{doppelt so groß} bleibt erhalten. Also verhältnisskaliert.
+
+\schritt{(c) Postleitzahl --- nominal}
+Obwohl es Zahlen sind und obwohl sie sogar geografisch geordnet erscheinen: Der Abstand zwischen $10115$ und $10117$ ist keine Größe, und Mittelwerte sind sinnlos. Die Zahl ist ein Name. Also nominal.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Dies ist der wichtigste Fall der Aufgabe. Dass ein Merkmal als Zahl vorliegt, sagt über sein Skalenniveau nichts.}
+\end{minipage}
+\end{center}
+
+\schritt{(d) ASA-Klassifikation --- ordinal}
+Die Klassen I bis IV beschreiben zunehmenden Schweregrad --- also geordnet. Ob der Abstand I$\to$II derselbe ist wie III$\to$IV, ist nicht definiert und wäre auch nicht messbar. Jede streng wachsende Umbenennung, etwa $1,2,3,4 \mapsto 1,5,9,40$, bewahrt die Auskunft. Also ordinal.
+
+\schritt{(e) Kalenderjahr --- intervallskaliert}
+Abstände sind deutbar: Zwischen 1980 und 2000 liegen ebenso viele Jahre wie zwischen 2000 und 2020.
+
+Der Nullpunkt ist aber gesetzt, nicht gefunden. Das Verhältnis \enquote{2000 ist doppelt so viel wie 1000} ist ohne Bedeutung, und in einer anderen Zeitrechnung fiele es anders aus. Der Wechsel von christlicher zu islamischer Zeitrechnung ist eine Umformung $x \mapsto ax+b$. Also intervallskaliert.
+
+\schritt{(f) Temperatur in Kelvin --- verhältnisskaliert}
+Der absolute Nullpunkt ist physikalisch ausgezeichnet. $200$ K haben tatsächlich die doppelte mittlere Teilchenenergie von $100$ K. Also verhältnisskaliert --- im Unterschied zu Celsius.
+
+\schritt{Zusammenfassung}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.0cm}P{2.6cm}P{1.0cm}P{2.6cm}@{}}
+\toprule
+(a) & nominal & (d) & ordinal\\
+(b) & verhältnis & (e) & intervall\\
+(c) & nominal & (f) & verhältnis\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.2 --- Eine Häufigkeitstabelle aufstellen}
+Stellen Sie für das Merkmal \code{MOB} des Auszugs eine Häufigkeitstabelle mit Klassenbildung auf. Wählen Sie die Klassen selbst und begründen Sie die Wahl.
+
+\loesung
+\schritt{Schritt 1 --- Die Daten}
+\[ 26,\ 19,\ 31,\ 24,\ 35,\ 22,\ 18,\ 15,\ 21,\ 17,\ 23,\ 14 \]
+Sortiert:
+\[ 14,\ 15,\ 17,\ 18,\ 19,\ 21,\ 22,\ 23,\ 24,\ 26,\ 31,\ 35 \]
+
+\schritt{Schritt 2 --- Spannweite und Klassenzahl}
+Kleinster Wert $14$, größter $35$, Spannweite $35 - 14 = 21$.
+
+Für die Klassenzahl gibt es Faustregeln. Die bekannteste, die \Begriff{Sturges-Regel}, empfiehlt
+\[ k \approx 1 + \log_2 n = 1 + \log_2 12 \approx 1 + 3{,}58 = 4{,}58 , \]
+also vier oder fünf Klassen.
+
+Eine zweite Faustregel lautet $k \approx \sqrt{n} = \sqrt{12} \approx 3{,}5$.
+
+Wir wählen $k = 5$ und die Klassenbreite $5$, beginnend bei $12{,}5$ --- so fällt kein Beobachtungswert auf eine Klassengrenze.
+
+\schritt{Schritt 3 --- Die Tabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{2.4cm}P{1.2cm}P{1.6cm}P{2.2cm}@{}}
+\toprule
+\textbf{Klasse} & $H$ & $h$ & \textbf{kumuliert}\\
+\midrule
+$12{,}5$ bis $17{,}5$ & $3$ & $0{,}250$ & $0{,}250$\\
+$17{,}5$ bis $22{,}5$ & $4$ & $0{,}333$ & $0{,}583$\\
+$22{,}5$ bis $27{,}5$ & $3$ & $0{,}250$ & $0{,}833$\\
+$27{,}5$ bis $32{,}5$ & $1$ & $0{,}083$ & $0{,}917$\\
+$32{,}5$ bis $37{,}5$ & $1$ & $0{,}083$ & $1{,}000$\\
+\midrule
+\textbf{Summe} & $\mathbf{12}$ & $\mathbf{1{,}000}$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Kontrolle der Zuordnung}
+Klasse 1: $14, 15, 17$ --- drei. \checkmark\\
+Klasse 2: $18, 19, 21, 22$ --- vier. \checkmark\\
+Klasse 3: $23, 24, 26$ --- drei. \checkmark\\
+Klasse 4: $31$ --- eine. \checkmark\\
+Klasse 5: $35$ --- eine. \checkmark\\
+Summe $3+4+3+1+1 = 12$. \checkmark
+
+\schritt{Schritt 4 --- Was die Tabelle zeigt und was sie verdeckt}
+Die Verteilung ist \kursiv{rechtsschief}: Die Masse liegt links, einzelne große Werte ziehen nach rechts. Das ist bei Zeitdauern der Regelfall --- nach unten begrenzt die Null, nach oben nichts.
+
+Verdeckt wird die Gruppenzugehörigkeit. Alle vier Werte über $22{,}5$ stammen aus Gruppe A. Eine Tabelle über beide Gruppen zusammen verwischt genau den Unterschied, um den es in der Studie geht.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das ist die wichtigere Lehre dieser Aufgabe: Eine Zusammenfassung ist immer auch ein Weglassen. Die Frage ist nie, ob man Auskunft verliert, sondern welche man verlieren darf.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.3 --- Wann kippt der Vergleich?}
+In der Warnung oben kehrte sich ein Mittelwertvergleich durch Umkodierung um. Konstruieren Sie ein eigenes Beispiel: zwei Gruppen zu je drei NRS-Werten, bei denen Gruppe A unter der Standardkodierung besser abschneidet und unter einer zulässigen Umkodierung schlechter.
+
+\loesung
+\schritt{Schritt 1 --- Überlegen, was nötig ist}
+Damit sich ein Mittelwertvergleich umkehren lässt, müssen die Gruppen sich in der \kursiv{Streuung} unterscheiden: Eine Gruppe braucht extreme Werte, die andere mittlere. Sind beide Gruppen gleich gestreut, wirkt jede Umkodierung auf beide ähnlich.
+
+\schritt{Schritt 2 --- Ein Ansatz}
+\[ A: \ 1,\ 5,\ 9 \qquad B: \ 4,\ 5,\ 6 \]
+
+Standardkodierung:
+\[ \MW_A = \frac{1+5+9}{3} = 5, \qquad \MW_B = \frac{4+5+6}{3} = 5 . \]
+Gleichstand --- das genügt noch nicht. Wir verschieben $A$ leicht nach unten:
+\[ A: \ 1,\ 4,\ 9 \quad\Rightarrow\quad \MW_A = \frac{14}{3} = 4{,}67 \;<\; 5 = \MW_B . \]
+Also ist $A$ unter der Standardkodierung besser (niedriger Schmerz ist besser).
+
+\schritt{Schritt 3 --- Eine zulässige Umkodierung wählen}
+Wir brauchen eine streng wachsende Abbildung, die hohe Werte stark spreizt. Nehmen wir $f(x) = x^2$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.2cm}P{0.8cm}P{0.8cm}P{0.8cm}P{0.8cm}P{0.8cm}P{0.8cm}@{}}
+\toprule
+NRS & $1$ & $4$ & $5$ & $6$ & $9$ & \\
+$f$ & $1$ & $16$ & $25$ & $36$ & $81$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+$f$ ist auf $\{0,\ldots,10\}$ streng wachsend, also eine zulässige Umbenennung einer Ordinalskala.
+
+\schritt{Schritt 4 --- Neu rechnen}
+\[ \MW_A^{f} = \frac{1 + 16 + 81}{3} = \frac{98}{3} = 32{,}67 \]
+\[ \MW_B^{f} = \frac{16 + 25 + 36}{3} = \frac{77}{3} = 25{,}67 \]
+
+\schritt{Schritt 5 --- Das Ergebnis}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.0cm}P{1.6cm}@{}}
+\toprule
+& $\MW_A$ & $\MW_B$ & \textbf{besser}\\
+\midrule
+Standard & $4{,}67$ & $5{,}00$ & \textbf{A}\\
+Quadriert & $32{,}67$ & $25{,}67$ & \textcolor{akzent}{\textbf{B}}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Der Vergleich hat sich umgekehrt. \checkmark
+
+\schritt{Schritt 6 --- Die Probe mit dem Median}
+\[ \Med_A = 4, \qquad \Med_B = 5 . \]
+Nach Umkodierung:
+\[ \Med_A^f = 16, \qquad \Med_B^f = 25 . \]
+In beiden Fällen ist $A$ besser --- der Median ist stabil, weil er nur die Rangposition benutzt und die Umkodierung die Rangfolge nicht ändert.
+
+\schritt{Nachbemerkung}
+Beachten Sie, was das Beispiel braucht: Gruppe A ist stark gestreut ($1$ bis $9$), Gruppe B eng ($4$ bis $6$). In der MOBIL-Studie sind die Streuungen ähnlich --- dort ist das Problem daher weniger scharf. Genau deshalb funktioniert das Mitteln von Likert-Daten in der Praxis oft. Es funktioniert nicht, weil die Annahme richtig wäre, sondern weil die Verletzung meist klein ist.
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Stevens, ein Psychologe und ein Streit, der nie endete}
+Die vier Skalenniveaus stammen von \Person{Stanley Smith Stevens}, einem Harvard-Psychologen, der sie 1946 in einem dreiseitigen Aufsatz in \kursiv{Science} vorstellte.
+
+Stevens hatte einen konkreten Anlass. Eine britische Kommission hatte 1940 nach siebenjähriger Beratung erklärt, psychologische Größen seien grundsätzlich nicht messbar, weil sich keine Additivität nachweisen lasse. Stevens antwortete mit einer Umdeutung des Messbegriffs: Messen sei die Zuordnung von Zahlen nach einer Regel --- und je nach Regel bekomme man eben verschiedene Skalentypen, von denen nur die oberen die volle Arithmetik erlaubten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Aufsatz ist einer der meistzitierten der Wissenschaftsgeschichte und zugleich einer der umstrittensten. Statistiker wie \Person{John Tukey} und \Person{Paul Velleman} haben eingewandt, das Schema sei zu starr: Es entscheide über die Zulässigkeit eines Verfahrens, ohne die Fragestellung zu kennen. Ihr Argument lautet, ein Verfahren sei zulässig, wenn es zu einer sinnvollen Antwort führe --- und das hänge nicht nur an der Skala.}
+\end{minipage}
+\end{center}
+
+Der Streit ist bis heute nicht entschieden. Dieser Band folgt Stevens als \kursiv{Orientierung} und Velleman als \kursiv{Korrektiv}: Das Schema sagt, wo man hinsehen muss --- nicht, was man tun darf.
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wie mit Likert-Daten heute umgegangen wird}
+Die Frage, ob man ordinale Bewertungsskalen mitteln darf, ist Gegenstand einer umfangreichen Simulationsliteratur.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Befund} & Der $t$-Test hält bei Likert-Daten sein Niveau meist gut ein, solange die Gruppen ähnlich schiefe Verteilungen haben.\\
+\textbf{Die Ausnahme} & Bei gegenläufiger Schiefe oder starken Deckeneffekten kann die Fehlerrate deutlich abweichen.\\
+\textbf{Der Trend} & Ordinale Regressionsmodelle --- kumulative Logit-Modelle --- setzen sich langsam durch; sie kommen ohne die Abstandsannahme aus.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein \Begriff{Deckeneffekt} liegt vor, wenn viele Werte am oberen Rand der Skala liegen. Bei postoperativen Schmerzscores tritt regelmäßig das Gegenteil auf --- ein Bodeneffekt bei null ---, sobald die Analgesie gut wirkt. Dann sind die Verteilungen stark schief, und die Warnung aus der zweiten Zeile greift. Kapitel~9 behandelt, was man stattdessen tut.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 1.1} & Merkmal, Ausprägung, Beobachtung, Datenmatrix\\
+\textbf{Definition 1.2} & Die vier Skalenniveaus --- über erlaubte Umformungen\\
+\textbf{Die Tabelle} & Welche Kennzahl auf welcher Skala zulässig ist\\
+\textbf{Die erste Falle} & Mittelwerte ordinaler Daten sind kodierungsabhängig\\
+\textbf{Definition 1.4} & Absolute, relative und kumulierte Häufigkeit\\
+\textbf{Zwei Darstellungsfallen} & Abgeschnittene Achse, Kreisdiagramm\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel fassen wir eine Häufigkeitsverteilung in wenigen Zahlen zusammen --- und sehen an einem berühmten Beispiel, wie viel dabei verlorengehen kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}

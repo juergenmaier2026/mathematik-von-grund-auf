@@ -1,0 +1,743 @@
+\chapter{Schattenpreise und Sensitivität}
+
+\section{Was ein Schattenpreis ist}
+
+\begin{merksatz}
+\boxtitel{Die Frage nach dem Wert}
+Die Klinik überlegt, eine zusätzliche OP-Stunde einzukaufen --- durch Überstunden, einen weiteren Saal, eine längere Schicht.
+
+\textbf{Die Frage:} Was ist diese Stunde wert?
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Sie ist nicht wert, was sie kostet, und nicht, was sie erwirtschaftet. Sie ist wert, \kursiv{um wie viel der bestmögliche Gesamtnutzen steigt}, wenn man sie hat.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist eine Größe, die sich nur am gesamten Plan bestimmen lässt, nicht an einer einzelnen Tätigkeit --- und genau das macht sie interessant. Kapitel~4 hat sie bereits geliefert: Es ist die duale Variable $y_i$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 5.1 --- Schattenpreis}
+Sei $z^{*}(\vek{b})$ der Optimalwert als Funktion der rechten Seite. Der \Begriff{Schattenpreis} der $i$-ten Bedingung ist
+\[ y_i = \frac{\partial z^{*}}{\partial b_i} , \]
+also die Änderung des Optimalwerts je Einheit zusätzlicher Kapazität.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 5.2 --- der Schattenpreis ist die duale Variable}
+Ist die optimale Basis $B$ bei einer kleinen Änderung von $\vek{b}$ unverändert, so gilt
+\[ z^{*}(\vek{b}) = \vek{b}^{\!\top}\vek{y}^{*} \qquad\text{und damit}\qquad \frac{\partial z^{*}}{\partial b_i} = y_i^{*} . \]
+
+\schritt{Beweis}
+Nach Satz 4.3 gilt $z^{*} = \vek{b}^{\!\top}\vek{y}^{*}$.
+
+Ändert sich $\vek{b}$ so wenig, dass dieselbe Basis optimal bleibt, so ändert sich $\vek{y}^{*}$ nicht --- die duale Lösung hängt nur von der Basis ab, nicht von der rechten Seite.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Kern: $\vek{y}^{*}$ wird aus der $z$-Zeile abgelesen, und die $z$-Zeile entsteht aus den Zielkoeffizienten und der Basismatrix --- die rechte Seite geht nicht ein. Ein Blick auf das Endtableau in Kapitel~3 bestätigt das: Die Spalte ganz rechts spielt bei der Berechnung der $z$-Zeile keine Rolle.}
+\end{minipage}
+\end{center}
+
+Damit ist $z^{*}$ eine \kursiv{lineare} Funktion von $\vek{b}$, und ihre partielle Ableitung nach $b_i$ ist der Koeffizient $y_i^{*}$. $\blacksquare$
+
+\schritt{Die wichtige Einschränkung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Satz gilt nur, solange dieselbe Basis optimal bleibt.} Wie weit das reicht, bestimmt der nächste Abschnitt.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie weit ein Schattenpreis gilt}
+
+\begin{merksatz}
+\boxtitel{Die Rechnung}
+Die Basisvariablen erfüllen $A_B\,\vek{x}_B = \vek{b}$, also
+\[ \vek{x}_B = A_B^{-1}\,\vek{b} . \]
+
+Ändert man $b_i$ um $\Delta$, so ändern sich die Basisvariablen um
+\[ \Delta\,\vek{x}_B = A_B^{-1}\,\Delta\,\vek{e}_i = \Delta\cdot(\text{$i$-te Spalte von } A_B^{-1}) . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Basis bleibt zulässig, solange alle Basisvariablen nichtnegativ bleiben.} Das liefert Schranken für $\Delta$.
+\end{minipage}
+\end{center}
+
+\schritt{Wo $A_B^{-1}$ im Tableau steht}
+Die Spalten der Schlupfvariablen im Endtableau bilden genau $A_B^{-1}$.
+
+\kursiv{Für den Leitfall:}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $a$ & $b$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$b$ & $0$ & $1$ & $\tfrac12$ & $-\tfrac12$ & $10$\\
+$a$ & $1$ & $0$ & $-1$ & $2$ & $40$\\
+\midrule
+$z$ & $0$ & $0$ & $\tfrac15$ & $\tfrac35$ & $52$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ A_B^{-1} = \begin{pmatrix} \tfrac12 & -\tfrac12\\ -1 & 2\end{pmatrix} \]
+mit den Zeilen in der Reihenfolge $b$, $a$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Bereich für die OP-Zeit}
+Wir ändern $b_1 = 80$ um $\Delta$. Die erste Spalte von $A_B^{-1}$ lautet $\left(\tfrac12,\ -1\right)^{\!\top}$:
+\[ b \ \to\ 10 + \tfrac{\Delta}{2}, \qquad a \ \to\ 40 - \Delta \]
+
+\schritt{Die Bedingungen}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Bedingung} & \textbf{Umgeformt} & \\
+\midrule
+$10+\tfrac{\Delta}{2} \ge 0$ & $\Delta \ge -20$ & \\
+$40-\Delta \ge 0$ & $\Delta \le 40$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\[ \boxed{\ 60 \ \le\ b_1 \ \le\ 120\ } \]
+
+\schritt{Die Probe an beiden Rändern}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.4cm}P{1.6cm}P{2.2cm}@{}}
+\toprule
+$b_1$ & $a$ & $b$ & $z$ & \textbf{Formel}\\
+\midrule
+$60$ & $60$ & $0$ & $48$ & $52-0{,}2\cdot20$\\
+$80$ & $40$ & $10$ & $52$ & ---\\
+$100$ & $20$ & $20$ & $56$ & $52+0{,}2\cdot20$\\
+$120$ & $0$ & $30$ & $60$ & $52+0{,}2\cdot40$\\
+$130$ & $0$ & $30$ & $\mathbf{60}$ & \textcolor{akzent}{unverändert}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bis $120$ Stunden bringt jede weitere Stunde $0{,}2$. Darüber hinaus nichts mehr.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+Bei $b_1 = 120$ ist $a = 0$ geworden: Die Klinik führt nur noch Eingriffe der Art $B$ durch. Dann sind die Bettentage vollständig durch $B$ belegt ($2 \cdot 30 = 60$), und mehr OP-Zeit nützt nichts.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist die in Aufgabe 1.3 offen gelassene Frage beantwortet: Die Grenze liegt bei $120$ Stunden. Der Gesamtgewinn bis dahin beträgt $0{,}2 \cdot 40 = 8$ Nutzeneinheiten. Wer mehr als $40$ zusätzliche Stunden beschaffen will, muss zugleich die Bettenzahl erhöhen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Bereich für die Bettentage}
+Zweite Spalte von $A_B^{-1}$: $\left(-\tfrac12,\ 2\right)^{\!\top}$.
+\[ b \ \to\ 10 - \tfrac{\Delta}{2}, \qquad a \ \to\ 40 + 2\Delta \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+$10-\tfrac{\Delta}{2} \ge 0$ & $\Delta \le 20$ & \\
+$40+2\Delta \ge 0$ & $\Delta \ge -20$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\[ \boxed{\ 40 \ \le\ b_2 \ \le\ 80\ } \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.4cm}P{1.6cm}P{2.2cm}@{}}
+\toprule
+$b_2$ & $a$ & $b$ & $z$ & \textbf{Formel}\\
+\midrule
+$40$ & $0$ & $20$ & $40$ & $52-0{,}6\cdot20$\\
+$60$ & $40$ & $10$ & $52$ & ---\\
+$80$ & $80$ & $0$ & $64$ & $52+0{,}6\cdot20$\\
+$90$ & $80$ & $0$ & $\mathbf{64}$ & \textcolor{akzent}{unverändert}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{1.6cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+\textbf{Vorrat} & \textbf{Preis} & \textbf{Bereich} & \textbf{Spielraum}\\
+\midrule
+OP-Zeit & $0{,}2$ & $[60;\ 120]$ & $+50\,\%$\\
+Bettensatz & $0{,}6$ & $[40;\ 80]$ & $+33\,\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Bettensatz ist dreimal so wertvoll --- aber sein Preis gilt nur über einen kürzeren Bereich. Für die Planung heißt das: Erweitert man beides, so muss man die Bereiche gemeinsam prüfen; die getrennt berechneten Grenzen gelten nur, wenn jeweils \kursiv{eine} Größe verändert wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Änderungen der Bewertung}
+
+\begin{merksatz}
+\boxtitel{Die zweite Art von Sensitivität}
+Was geschieht, wenn sich ein Zielkoeffizient ändert --- etwa weil man den Nutzen eines Eingriffs neu bewertet?
+
+\schritt{Die Regel}
+Die Lösung bleibt optimal, solange die $z$-Zeile nichtnegativ bleibt. Nach dem Beweis von Satz 4.3 sind die dortigen Einträge
+\[ \vek{y}^{\!\top} = \vek{c}_B^{\!\top}A_B^{-1} , \]
+also hängen sie von den Zielkoeffizienten der \kursiv{Basisvariablen} ab.
+
+\schritt{Für den Leitfall, Änderung von $c_b$}
+Sei $c_b = 2{,}0+\delta$. Mit $\vek{c}_B = (2{,}0+\delta;\ 0{,}8)$ in der Reihenfolge $(b, a)$:
+\begin{align*}
+y_1 &= (2{,}0+\delta)\cdot\tfrac12 + 0{,}8\cdot(-1) = 1{,}0 + \tfrac{\delta}{2} - 0{,}8 = 0{,}2+\tfrac{\delta}{2}\\
+y_2 &= (2{,}0+\delta)\cdot\left(-\tfrac12\right) + 0{,}8\cdot2 = -1{,}0-\tfrac{\delta}{2}+1{,}6 = 0{,}6-\tfrac{\delta}{2}
+\end{align*}
+
+\schritt{Die Bedingungen}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+$0{,}2+\tfrac{\delta}{2} \ge 0$ & $\delta \ge -0{,}4$ & \\
+$0{,}6-\tfrac{\delta}{2} \ge 0$ & $\delta \le 1{,}2$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\[ \boxed{\ 1{,}6 \ \le\ c_b \ \le\ 3{,}2\ } \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das sind genau die Umschlagwerte aus Aufgabe 2.3, dort durch Vergleich der Eckenwerte gefunden. Hier fallen sie aus zwei Ungleichungen ab --- und das Verfahren überträgt sich auf beliebig viele Variablen, wo das Abzählen der Ecken nicht mehr möglich wäre.}
+\end{minipage}
+\end{center}
+
+\schritt{Und für $c_a$}
+Mit $\vek{c}_B = (2{,}0;\ 0{,}8+\delta)$:
+\begin{align*}
+y_1 &= 1{,}0 - (0{,}8+\delta) = 0{,}2-\delta \ \ge 0 \quad\Longrightarrow\quad \delta \le 0{,}2\\
+y_2 &= -1{,}0 + 2(0{,}8+\delta) = 0{,}6+2\delta \ \ge 0 \quad\Longrightarrow\quad \delta \ge -0{,}3
+\end{align*}
+
+\[ \boxed{\ 0{,}5 \ \le\ c_a \ \le\ 1{,}0\ } \]
+
+\kursiv{Probe bei $c_a = 1{,}0$:} $(60,0) \to 60$; $(40,10) \to 40+20 = 60$. Gleichstand --- der Umschlagpunkt. \checkmark
+
+\kursiv{Probe bei $c_a = 0{,}5$:} $(40,10) \to 20+20 = 40$; $(0,20) \to 40$. Gleichstand. \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was man damit sagen kann}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Robustheit} & Der Plan $(40,10)$ bleibt optimal, solange die Nutzenbewertung von $A$ zwischen $0{,}5$ und $1{,}0$ liegt --- ein Faktor zwei.\\
+\textbf{Wo Genauigkeit zählt} & Nur nahe den Grenzen lohnt es sich, die Bewertung genauer zu bestimmen.\\
+\textbf{Was sich nicht ändert} & Innerhalb des Bereichs bleibt die \kursiv{Lösung} gleich; der \kursiv{Wert} ändert sich sehr wohl.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile wird häufig verwechselt. Bei $c_a = 0{,}9$ ist $(40,10)$ weiterhin optimal, aber $z = 36+20 = 56$ statt $52$. Der Bereich sagt aus, dass die \kursiv{Entscheidung} stabil ist --- nicht, dass das Ergebnis unverändert bleibt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Bei Entartung gibt es keinen Schattenpreis}
+Betrachten wir
+\[ \max\ x_1+x_2 \quad\text{unter}\quad x_1+x_2 \le 4,\quad x_1 \le 2,\quad x_2 \le 2,\quad \vek{x}\ge\vek{0} . \]
+
+Optimum: $(2;\ 2)$ mit $z = 4$. Alle drei Bedingungen sind straff --- eine mehr als nötig.
+
+\schritt{Die rechte Seite ändern}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+$b_1$ & \textbf{Lösung} & $z$ & \\
+\midrule
+$3{,}0$ & $(1;\ 2)$ & $3{,}0$ & \\
+$3{,}5$ & $(1{,}5;\ 2)$ & $3{,}5$ & \\
+$\mathbf{4{,}0}$ & $(2;\ 2)$ & $\mathbf{4{,}0}$ & \\
+$4{,}5$ & $(2;\ 2)$ & $4{,}0$ & \textcolor{akzent}{unverändert}\\
+$5{,}0$ & $(2;\ 2)$ & $4{,}0$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die beiden einseitigen Ableitungen}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Richtung} & \textbf{Steigung} & \\
+\midrule
+von links & $1$ & jede Einheit zählt\\
+nach rechts & $0$ & nichts mehr\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Funktion $z^{*}(b_1)$ hat bei $b_1=4$ einen Knick. Es gibt keine Ableitung --- und damit keinen eindeutigen Schattenpreis.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (6.4,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.2);
+\draw[tief, line width=1.4pt] (0.2,0.2) -- (4.0,2.6) -- (6.2,2.6);
+\fill[akzent] (4.0,2.6) circle (2.6pt);
+\node[font=\scriptsize, color=akzent, anchor=south] at (4.0,2.8) {Knick bei $b_1=4$};
+\node[font=\scriptsize, color=grau] at (2.0,1.0) {Steigung $1$};
+\node[font=\scriptsize, color=grau] at (5.2,2.25) {Steigung $0$};
+\node[font=\scriptsize, color=grau] at (3.2,-0.5) {$b_1$};
+\node[font=\scriptsize, color=grau, rotate=90] at (-0.45,1.6) {$z^{*}$};
+\end{tikzpicture}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Was auf der dualen Seite geschieht}
+Das duale Problem lautet
+\[ \min\ 4y_1+2y_2+2y_3 \quad\text{unter}\quad y_1+y_2 \ge 1,\quad y_1+y_3 \ge 1,\quad \vek{y}\ge\vek{0} . \]
+
+\schritt{Zwei optimale Lösungen}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+$\vek{y}$ & \textbf{Prüfung} & \textbf{Wert}\\
+\midrule
+$(1;\ 0;\ 0)$ & $1\ge1$, $1\ge1$ \checkmark & $4$\\
+$(0;\ 1;\ 1)$ & $1\ge1$, $1\ge1$ \checkmark & $4$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Beide sind dual optimal --- und nach Aufgabe 2.3 auch jede Mischung dazwischen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Primale Entartung bedeutet duale Mehrdeutigkeit.} Die Schattenpreise sind dann nicht eindeutig, und die einseitigen Ableitungen entsprechen den Randpunkten der dualen Lösungsmenge.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die genaue Entsprechung zur Bemerkung in Kapitel~2: Mehrere primale Optima gehen mit dualer Entartung einher, mehrere duale Optima mit primaler Entartung. Die beiden Probleme spiegeln einander in jeder Hinsicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Die praktische Folge}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Da Entartung in großen Modellen die Regel ist, sind berichtete Schattenpreise dort häufig nur \kursiv{einer} von mehreren gültigen Werten --- und zwar derjenige, den das verwendete Programm zufällig gefunden hat. Wer auf dieser Grundlage über Investitionen entscheidet, sollte beide einseitigen Werte bestimmen. Das geht, indem man die Bedingung testweise um eine kleine Größe nach oben und nach unten verschiebt und neu rechnet.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und zwei weitere Vorbehalte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Nur einzeln} & Die berechneten Bereiche gelten, wenn genau eine Größe geändert wird. Ändert man mehrere gleichzeitig, so können sie gemeinsam die Basis sprengen, obwohl jede einzeln im Bereich liegt.\\
+\textbf{Nur im Modell} & Der Schattenpreis $0{,}2$ gilt für zusätzliche OP-Zeit \kursiv{unter den Bedingungen des Modells}. Braucht die zusätzliche Stunde auch zusätzliches Personal, so steht das nicht darin.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für die erste Zeile gibt es eine hinreichende Bedingung: Verändert man mehrere rechte Seiten gleichzeitig und ist die Summe der Anteile, die jede Änderung von ihrem zulässigen Spielraum ausschöpft, höchstens eins, so bleibt die Basis optimal. Man nennt das die Hundert-Prozent-Regel. Sie ist hinreichend, nicht notwendig --- oberhalb von hundert Prozent \kursiv{kann} es trotzdem gutgehen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.1 --- Gültigkeitsbereiche bestimmen}
+Für das Problem aus Aufgabe 3.1 mit dem Endtableau
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $x_1$ & $x_2$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$x_1$ & $1$ & $0$ & $\tfrac14$ & $-\tfrac12$ & $3$\\
+$x_2$ & $0$ & $1$ & $-\tfrac18$ & $\tfrac34$ & $\tfrac32$\\
+\midrule
+$z$ & $0$ & $0$ & $\tfrac34$ & $\tfrac12$ & $21$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+bestimmen Sie die Bereiche für $b_1 = 24$ und $b_2 = 6$.
+
+\loesung
+\schritt{Schritt 1 --- Die Inverse ablesen}
+\[ A_B^{-1} = \begin{pmatrix} \tfrac14 & -\tfrac12\\[2pt] -\tfrac18 & \tfrac34\end{pmatrix} \]
+Zeilen in der Reihenfolge $x_1$, $x_2$.
+
+\schritt{Schritt 2 --- Bereich für $b_1$}
+Erste Spalte: $\left(\tfrac14;\ -\tfrac18\right)^{\!\top}$.
+\[ x_1 \to 3+\tfrac{\Delta}{4}, \qquad x_2 \to \tfrac32 - \tfrac{\Delta}{8} \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$3+\tfrac{\Delta}{4}\ge0$ & $\Delta \ge -12$ & \\
+$\tfrac32-\tfrac{\Delta}{8}\ge0$ & $\Delta \le 12$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\[ 12 \le b_1 \le 36 \]
+
+\schritt{Schritt 3 --- Probe an den Rändern}
+\kursiv{Bei $b_1 = 36$:} $x_1 = 3+3 = 6$, $x_2 = \tfrac32 - \tfrac32 = 0$.
+\[ 6\cdot6+0 = 36 \ \checkmark \qquad 6+0 = 6 \ \checkmark \qquad z = 30 \]
+Formel: $21 + \tfrac34\cdot12 = 21+9 = 30$ \checkmark
+
+\kursiv{Bei $b_1 = 12$:} $x_1 = 0$, $x_2 = 3$.
+\[ 0+12 = 12 \ \checkmark \qquad 0+6 = 6 \ \checkmark \qquad z = 12 \]
+Formel: $21 - \tfrac34\cdot12 = 12$ \checkmark
+
+\kursiv{Bei $b_1 = 40$:} Erneut gerechnet ergibt $x_1 = 6$, $x_2 = 0$, $z = 30$ --- unverändert. Der Schattenpreis fällt auf null.
+
+\schritt{Schritt 4 --- Bereich für $b_2$}
+Zweite Spalte: $\left(-\tfrac12;\ \tfrac34\right)^{\!\top}$.
+\[ x_1 \to 3-\tfrac{\Delta}{2}, \qquad x_2 \to \tfrac32 + \tfrac{3\Delta}{4} \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$3-\tfrac{\Delta}{2}\ge0$ & $\Delta \le 6$ & \\
+$\tfrac32+\tfrac{3\Delta}{4}\ge0$ & $\Delta \ge -2$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\[ 4 \le b_2 \le 12 \]
+
+\schritt{Schritt 5 --- Probe}
+\kursiv{Bei $b_2=12$:} $x_1 = 0$, $x_2 = 6$; $z = 24$. Formel: $21+\tfrac12\cdot6 = 24$ \checkmark\\
+\kursiv{Bei $b_2=4$:} $x_1 = 4$, $x_2 = 0$; $z = 20$. Formel: $21-\tfrac12\cdot2 = 20$ \checkmark
+
+\schritt{Schritt 6 --- Die Übersicht}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Vorrat} & \textbf{Preis} & \textbf{Bereich} & \textbf{Spanne}\\
+\midrule
+$b_1 = 24$ & $\tfrac34$ & $[12;\ 36]$ & $\pm 50\,\%$\\
+$b_2 = 6$ & $\tfrac12$ & $[4;\ 12]$ & $-33\,\%$ / $+100\,\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Beachten Sie die unsymmetrischen Spannen bei $b_2$: Nach unten ist wenig Spielraum, nach oben viel. Das liegt daran, dass eine Verringerung von $b_2$ die Variable $x_2$ rasch auf null drückt, während eine Erhöhung $x_1$ erst nach sechs Einheiten aufbraucht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.2 --- Lohnt sich die Investition?}
+Die Klinik kann einen zusätzlichen OP-Saal einrichten, der $30$ Stunden je Woche bereitstellt. Die jährlichen Kosten entsprechen $6{,}0$ Nutzeneinheiten je Woche. Lohnt es sich? Und was, wenn stattdessen $60$ Stunden möglich wären?
+
+\loesung
+\schritt{Schritt 1 --- Dreißig Stunden}
+$\Delta = 30$ liegt im Bereich $[-20;\ 40]$ --- der Schattenpreis $0{,}2$ gilt durchgehend.
+\[ \text{Gewinn} = 0{,}2 \cdot 30 = 6{,}0 \]
+
+\schritt{Schritt 2 --- Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Wert} & \\
+\midrule
+Nutzen & $6{,}0$ & \\
+Kosten & $6{,}0$ & \\
+\midrule
+Bilanz & $\mathbf{0{,}0}$ & \textcolor{mittel}{genau ausgeglichen}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es lohnt sich gerade nicht --- und gerade nicht nicht.} Bei solchen Ergebnissen entscheiden die Größen, die nicht im Modell stehen.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die neue Lösung}
+$b_1 = 110$: $a = 40-30 = 10$, $b = 10+15 = 25$.
+\kursiv{Probe:} $10 + 100 = 110$ \checkmark; $10+50 = 60$ \checkmark; $z = 8+50 = 58 = 52+6$ \checkmark
+
+\schritt{Schritt 4 --- Sechzig Stunden}
+$\Delta = 60$ liegt \kursiv{außerhalb} des Bereichs. Der Schattenpreis gilt nur bis $\Delta = 40$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Abschnitt} & \textbf{Preis} & \textbf{Gewinn}\\
+\midrule
+$\Delta = 0 \ldots 40$ & $0{,}2$ & $8{,}0$\\
+$\Delta = 40 \ldots 60$ & $\mathbf{0{,}0}$ & $0{,}0$\\
+\midrule
+Summe & & $\mathbf{8{,}0}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Die Warnung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer mit dem Schattenpreis hochrechnet, erhielte $0{,}2 \cdot 60 = 12{,}0$ --- und läge um die Hälfte zu hoch.}
+\end{minipage}
+\end{center}
+
+\kursiv{Probe:} Bei $b_1 = 140$ ist das Optimum $a=0$, $b=30$, $z = 60 = 52+8$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die häufigste Fehlanwendung von Schattenpreisen: Sie sind \kursiv{örtliche} Ableitungen und dürfen nicht über ihren Gültigkeitsbereich hinaus verwendet werden. Die Funktion $z^{*}(\vek{b})$ ist stückweise linear und konkav --- der Grenznutzen fällt, und zwar sprunghaft.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die vollständige Antwort}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Zusatz} & \textbf{Nutzen} & \textbf{Kosten} & \textbf{Bilanz}\\
+\midrule
+$30$ h & $6{,}0$ & $6{,}0$ & $0{,}0$\\
+$40$ h & $8{,}0$ & $8{,}0$ & $0{,}0$\\
+$60$ h & $8{,}0$ & $12{,}0$ & \textcolor{akzent}{$-4{,}0$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Bei linear steigenden Kosten wird der große Saal zum Verlustgeschäft, weil sein Nutzen ab $40$ Stunden nicht mehr wächst.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die richtige Frage lautet daher nicht \enquote{soll man einen Saal bauen?}, sondern \enquote{soll man einen Saal \kursiv{und} Betten erweitern?}. Erhöht man zugleich $b_2$, so bleibt der OP-Schattenpreis über $120$ Stunden hinaus positiv. Kapitel~14 behandelt solche gekoppelten Entscheidungen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.3 --- Einseitige Schattenpreise}
+Bestimmen Sie für
+\[ \max\ 3x_1+2x_2 \quad\text{unter}\quad x_1+x_2 \le 6,\quad x_1 \le 4,\quad x_2 \le 2,\quad \vek{x}\ge\vek{0} \]
+die Lösung und beide einseitigen Schattenpreise der ersten Bedingung.
+
+\loesung
+\schritt{Schritt 1 --- Die Lösung}
+Wegen $c_1 > c_2$ nutzt man $x_1$ so weit wie möglich.
+
+\kursiv{Kandidat $(4;\ 2)$:} $4+2 = 6 \le 6$ \checkmark; $4 \le 4$ \checkmark; $2 \le 2$ \checkmark. $z = 12+4 = 16$.
+
+Alle drei Bedingungen straff --- \textbf{entartet.}
+
+\schritt{Schritt 2 --- Kann es besser sein?}
+Aus $x_1 \le 4$ und $x_2 \le 2$ folgt $z = 3x_1+2x_2 \le 12+4 = 16$. Also ist $16$ das Maximum. \checkmark
+
+\schritt{Schritt 3 --- Erhöhung von $b_1$}
+$b_1 = 7$: Die Schranken $x_1 \le 4$ und $x_2 \le 2$ binden weiterhin; die erste Bedingung wird unwirksam.
+
+Lösung unverändert $(4;\ 2)$, $z = 16$.
+
+\[ \text{rechtsseitiger Schattenpreis} = 0 \]
+
+\schritt{Schritt 4 --- Verringerung von $b_1$}
+$b_1 = 5$: Nun kann nicht mehr beides voll genutzt werden. Da $x_1$ höher bewertet ist, setzt man $x_1 = 4$ und $x_2 = 1$.
+\[ z = 12+2 = 14 \]
+
+\[ \text{linksseitiger Schattenpreis} = \frac{16-14}{1} = 2 \]
+
+\schritt{Schritt 5 --- Die Probe mit weiteren Werten}
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{1.6cm}P{2.2cm}@{}}
+\toprule
+$b_1$ & \textbf{Lösung} & $z$ & \textbf{Steigung}\\
+\midrule
+$4$ & $(4;\ 0)$ & $12$ & \\
+$5$ & $(4;\ 1)$ & $14$ & $2$\\
+$\mathbf{6}$ & $(4;\ 2)$ & $\mathbf{16}$ & $2$\\
+$7$ & $(4;\ 2)$ & $16$ & $\mathbf{0}$\\
+$8$ & $(4;\ 2)$ & $16$ & $0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 6 --- Die dualen Lösungen}
+Das duale Problem:
+\[ \min\ 6y_1+4y_2+2y_3 \quad\text{unter}\quad y_1+y_2 \ge 3,\quad y_1+y_3 \ge 2,\quad \vek{y}\ge\vek{0} \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+$\vek{y}$ & \textbf{Prüfung} & \textbf{Wert}\\
+\midrule
+$(2;\ 1;\ 0)$ & $3\ge3$, $2\ge2$ \checkmark & $12+4 = 16$\\
+$(0;\ 3;\ 2)$ & $3\ge3$, $2\ge2$ \checkmark & $12+4 = 16$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide sind dual optimal. Ihre ersten Komponenten sind $2$ und $0$ --- genau die beiden einseitigen Schattenpreise.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Fragt man ein Programm nach dem Schattenpreis der ersten Bedingung, so erhält man je nach gefundener Basis $0$ oder $2$ --- beides ist \enquote{richtig}, und beides führt zu entgegengesetzten Entscheidungen. Bei $2$ würde man in die Kapazität investieren, bei $0$ nicht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die sichere Vorgehensweise: Man rechnet das Problem mit $b_1 \pm \varepsilon$ zweimal und liest die Steigungen ab. Das kostet zwei zusätzliche Lösungen und erspart eine falsche Investitionsentscheidung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Wer die Schattenpreise erfand}
+Der Begriff stammt aus der Wirtschaftswissenschaft und meint einen Preis, der sich nicht auf einem Markt bildet, sondern aus der Knappheit selbst ergibt.
+
+\schritt{Kantorowitsch, 1939}
+\Person{Leonid Kantorowitsch} nannte sie \kursiv{auflösende Multiplikatoren} und erkannte ihre Bedeutung sofort: Sie geben an, wie eine Planwirtschaft Ressourcen bewerten müsste, um effizient zu planen --- ohne Markt und ohne Preisbildung.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das war politisch heikel. Kantorowitsch argumentierte stets, es handele sich um technische Rechengrößen, nicht um Preise. Seine Arbeiten erschienen teils erst Jahrzehnte später; das ökonomische Hauptwerk von 1942 wurde 1959 veröffentlicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Koopmans, gleichzeitig}
+\Person{Tjalling Koopmans} (1910--1985), niederländischer Ökonom, kam während des Krieges bei der Planung von Schiffstransporten zu denselben Ergebnissen. Er nannte die Größen \kursiv{Schattenpreise} und prägte damit den heute üblichen Begriff.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Koopmans und Kantorowitsch erhielten 1975 gemeinsam den Wirtschaftsnobelpreis. Koopmans setzte sich dafür ein, dass Kantorowitsch einbezogen wurde --- und erwog zeitweise, den Preis abzulehnen, weil Dantzig nicht berücksichtigt worden war, dessen Verfahren beide benutzten.}
+\end{minipage}
+\end{center}
+
+\schritt{Die ökonomische Bedeutung}
+Die duale Lösung liefert eine Bewertung, unter der kein Produktionsverfahren einen Überschuss abwirft --- das ist genau die Bedingung, die in der Gleichgewichtstheorie einen Preisvektor kennzeichnet.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Dualität der linearen Optimierung ist damit zugleich ein Modell der Preisbildung: Knappheit erzeugt Wert, und zwar in einer Höhe, die sich aus der Technik und den Vorräten allein ergibt. Der komplementäre Schlupf besagt dann, dass nur knappe Güter einen Preis haben --- ein Satz, den die Ökonomie lange vor der Optimierung kannte, aber nicht beweisen konnte.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Sensitivität in der Praxis}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Standardausgabe} & Jedes ernstzunehmende Programm liefert Schattenpreise und Bereiche zusammen mit der Lösung --- meist ohne Zusatzaufwand.\\
+\textbf{Entartung} & In großen Modellen die Regel. Die berichteten Preise sind dann nur ein Vertreter der dualen Optimalmenge.\\
+\textbf{Mehrere Änderungen} & Die Hundert-Prozent-Regel ist hinreichend; für genaue Aussagen rechnet man neu.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum man trotzdem neu rechnet}
+Ein modernes Programm löst ein verändertes Problem, indem es beim alten Endtableau ansetzt --- die sogenannte \Begriff{Warmstartrechnung}.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei kleinen Änderungen sind dafür oft nur wenige Simplexschritte nötig. Der Aufwand ist damit so gering, dass die Sensitivitätsanalyse ihren ursprünglichen Zweck --- Rechenzeit zu sparen --- weitgehend verloren hat. Ihr bleibender Wert liegt woanders: Sie erklärt, \kursiv{warum} ein Ergebnis so aussieht, und das leistet keine Neurechnung.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Grenze}
+Bei ganzzahligen Problemen gibt es keine entsprechende Theorie.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Optimalwert ist dort eine Treppenfunktion der rechten Seite, und eine Ableitung existiert an keiner Stelle. Man kann Schranken angeben, aber keine Schattenpreise im Sinn dieses Kapitels. Das ist einer der Gründe, warum die Kapitel~10 bis 12 ein eigener Teil sind.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 5.1} & Schattenpreis als Ableitung des Optimalwerts\\
+\textbf{Satz 5.2} & er ist die duale Variable\\
+\textbf{Bereiche} & aus $A_B^{-1}$ und der Nichtnegativität\\
+\textbf{Bewertungen} & Bereich für $c_j$ aus $\vek{y}\ge\vek{0}$\\
+\textbf{Entartung} & zwei einseitige Preise statt einem\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel betrachten wir Probleme mit besonderer Struktur --- und finden, dass die Dualität dort eine anschauliche Gestalt annimmt und die Lösungen von selbst ganzzahlig ausfallen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

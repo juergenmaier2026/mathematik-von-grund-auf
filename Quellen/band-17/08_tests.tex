@@ -1,0 +1,885 @@
+\chapter{Die klassischen Tests}
+
+\section{Welcher Test wann}
+
+\begin{merksatz}
+\boxtitel{Die Auswahl hängt an drei Fragen}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Was für ein Merkmal? Stetig, ordinal oder kategorial?\\
+$2$ & Wie viele Gruppen? Eine, zwei oder mehr?\\
+$3$ & Sind die Gruppen \kursiv{unabhängig} oder \kursiv{verbunden}?\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.2cm}P{1.9cm}P{2.2cm}P{1.9cm}@{}}
+\toprule
+& \textbf{stetig} & \textbf{ordinal} & \textbf{kategorial}\\
+\midrule
+eine Gruppe & $t$-Test & Vorzeichen\-test & Binomial\-test\\
+zwei verbunden & gepaarter $t$ & Wilcoxon & McNemar\\
+zwei unabhängig & $t$-Test & Mann-Whitney & $\chi^2$, Fisher\\
+mehr als zwei & Varianz\-analyse & Kruskal-Wallis & $\chi^2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die mittlere Spalte ist Gegenstand von Kapitel~9. Dieses Kapitel behandelt die erste und die letzte.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Verbunden oder unabhängig --- der folgenreichste Fehler}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Unabhängig} & Zwei verschiedene Gruppen von Personen.\\
+\textbf{Verbunden} & Dieselben Personen zweimal gemessen --- oder paarweise zugeordnet.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Wer verbundene Daten wie unabhängige behandelt, verschenkt Information und findet Effekte nicht. Wer es umgekehrt macht, erfindet Information und findet Effekte, die es nicht gibt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der zweite Fall ist die Pseudoreplikation aus Kapitel~4. Der erste ist harmloser, aber häufiger --- und Abschnitt 8.3 zeigt an Zahlen, wie viel dabei verlorengeht.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Einstichproben-$t$-Test}
+
+\begin{merksatz}
+\boxtitel{Die Frage}
+Weicht der Mittelwert einer Gruppe von einem \kursiv{vorgegebenen} Wert ab?
+
+\[ H_0: \mu = \mu_0 \qquad\text{gegen}\qquad H_1: \mu \neq \mu_0 \]
+\[ t = \frac{\MW - \mu_0}{s/\sqrt n} \quad \text{mit } n-1 \text{ Freiheitsgraden} . \]
+
+\schritt{An MOBIL}
+Der Qualitätsstandard der Klinik verlangt eine mittlere Mobilisation binnen $24$ Stunden. Erfüllt Gruppe A das?
+
+$\MW_A = 26{,}167$, $s = 5{,}913$, $n = 6$, $\mu_0 = 24$.
+\[ t = \frac{26{,}167 - 24}{5{,}913/\sqrt6} = \frac{2{,}167}{2{,}414} = 0{,}898 \]
+bei $5$ Freiheitsgraden. Tabelle: $t_{5;\,0{,}975} = 2{,}571$.
+
+$0{,}898 < 2{,}571$, also $p > 0{,}05$ --- genauer $p = 0{,}41$.
+
+\schritt{Die Deutung}
+Das Ergebnis ist \kursiv{nicht} signifikant. Was heißt das?
+
+Das Konfidenzintervall lautete $[19{,}96;\ 32{,}37]$ und enthält die $24$. Die Daten sind also mit dem Standard verträglich --- und ebenso mit einer Mobilisation nach $32$ Stunden.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Genau der Fall aus Kapitel~7: \enquote{nicht signifikant} ist hier kein Beleg für die Einhaltung des Standards, sondern eine Auskunft über die Kleinheit der Stichprobe. Wer aus $p = 0{,}41$ folgert, der Standard sei erfüllt, hat den Fehler Nummer fünf begangen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der gepaarte $t$-Test}
+
+\begin{merksatz}
+\boxtitel{Der Kunstgriff}
+Bei verbundenen Daten bildet man für jede Person die \kursiv{Differenz} und führt darauf einen Einstichprobentest gegen null durch.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Aus zwei Stichproben wird eine. Die Frage \enquote{unterscheiden sich die Mittelwerte?} wird zur Frage \enquote{ist der mittlere Unterschied null?}.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{An den MOBIL-Daten}
+Die Studie erhob den Schmerzwert auch nach $48$ Stunden. Für Gruppe B:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{1.0cm}P{1.4cm}P{1.4cm}P{1.2cm}P{1.2cm}@{}}
+\toprule
+\textbf{ID} & \textbf{NRS24} & \textbf{NRS48} & $d$ & $d^2$\\
+\midrule
+$7$ & $3$ & $2$ & $1$ & $1$\\
+$8$ & $2$ & $1$ & $1$ & $1$\\
+$9$ & $4$ & $3$ & $1$ & $1$\\
+$10$ & $3$ & $1$ & $2$ & $4$\\
+$11$ & $5$ & $3$ & $2$ & $4$\\
+$12$ & $2$ & $1$ & $1$ & $1$\\
+\midrule
+$\sum$ & $19$ & $11$ & $\mathbf{8}$ & $\mathbf{12}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 1 --- Mittelwert der Differenzen}
+\[ \overline d = \frac{8}{6} = 1{,}333 \]
+
+\schritt{Schritt 2 --- Streuung der Differenzen}
+\[ \sum (d_i - \overline d)^2 = 12 - \frac{8^2}{6} = 12 - 10{,}667 = 1{,}333 \]
+\[ s_d^2 = \frac{1{,}333}{5} = 0{,}2667, \qquad s_d = 0{,}5164 \]
+
+\schritt{Schritt 3 --- Test}
+\[ \mathrm{SE} = \frac{0{,}5164}{\sqrt6} = 0{,}2108, \qquad t = \frac{1{,}333}{0{,}2108} = 6{,}325 \]
+bei $5$ Freiheitsgraden. Das liegt weit über $t_{5;\,0{,}995} = 4{,}032$; genauer $p = 0{,}0015$.
+
+\schritt{Schritt 4 --- Das Intervall}
+\[ 1{,}333 \pm 2{,}571 \cdot 0{,}2108 = 1{,}333 \pm 0{,}542 \quad\Longrightarrow\quad [\,0{,}79\ ;\ 1{,}88\,] . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was die Paarung einbringt}
+Rechnete man dieselben Zahlen fälschlich als zwei unabhängige Gruppen:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{1.8cm}P{2.2cm}@{}}
+\toprule
+& \textbf{gepaart} & \textbf{unabh.}\\
+\midrule
+Mittelwerte & \multicolumn{2}{l}{\small $3{,}167$ / $1{,}833$}\\
+Unterschied & \multicolumn{2}{l}{$1{,}333$}\\
+Standard\-fehler & $\mathbf{0{,}211}$ & $0{,}573$\\
+$t$ & $\mathbf{6{,}33}$ & $2{,}33$\\
+Freiheitsgrade & $5$ & $10$\\
+$p$ & $\mathbf{0{,}0015}$ & $0{,}042$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Warum der Standardfehler so viel kleiner ist}
+Die Personen unterscheiden sich stark voneinander --- die NRS-Werte reichen von $2$ bis $5$. Die \kursiv{Veränderungen} sind dagegen sehr ähnlich: fünfmal $1$, einmal $2$.
+
+Der gepaarte Test misst nur die Veränderung. Die Unterschiede zwischen den Personen fallen heraus, weil jede mit sich selbst verglichen wird.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der ganze Grund für verbundene Versuchspläne: Sie beseitigen die größte Störquelle --- die Verschiedenheit der Personen --- durch Konstruktion statt durch Rechnung. Ein gepaarter Versuch mit zwanzig Personen kann aussagekräftiger sein als ein unabhängiger mit hundert.}
+\end{minipage}
+\end{center}
+
+\schritt{Was es kostet}
+Freiheitsgrade: $5$ statt $10$. Der kritische $t$-Wert steigt von $2{,}228$ auf $2{,}571$. Das ist ein kleiner Preis für einen Standardfehler, der auf ein Drittel fällt.
+\end{merksatz}
+
+\section{Zwei unabhängige Gruppen: Student oder Welch}
+
+\begin{merksatz}
+\boxtitel{Zwei Fassungen desselben Tests}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.2cm}P{3.0cm}P{3.0cm}@{}}
+\toprule
+& \textbf{Student} & \textbf{Welch}\\
+\midrule
+Annahme & $\sigma_A = \sigma_B$ & \textcolor{gruen}{keine}\\
+Standard\-fehler & $s_p\sqrt{\tfrac{1}{n_A}+\tfrac{1}{n_B}}$ & $\sqrt{\tfrac{s_A^2}{n_A}+\tfrac{s_B^2}{n_B}}$\\
+Freiheits\-grade & $n_A+n_B-2$ & \textcolor{akzent}{Näherung}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Welch-Freiheitsgrade}
+\[ \nu = \frac{\left(\frac{s_A^2}{n_A}+\frac{s_B^2}{n_B}\right)^2}{\frac{(s_A^2/n_A)^2}{n_A-1} + \frac{(s_B^2/n_B)^2}{n_B-1}} \]
+Das Ergebnis ist meist keine ganze Zahl. Man rundet ab oder rechnet mit dem Bruch weiter.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beide Fassungen für MOBIL}
+$s_A^2 = 34{,}967$, $s_B^2 = 12{,}0$, $n_A = n_B = 6$.
+
+\schritt{Welch --- der Standardfehler}
+\[ \frac{34{,}967}{6} = 5{,}828, \qquad \frac{12{,}0}{6} = 2{,}000 \]
+\[ \mathrm{SE} = \sqrt{5{,}828 + 2{,}000} = \sqrt{7{,}828} = 2{,}798 \]
+
+\schritt{Eine Beobachtung}
+Das ist \kursiv{genau} der Wert aus dem Student-Test. Kein Zufall: Bei gleichen Gruppengrößen liefern beide Formeln denselben Standardfehler.
+
+\schritt{Welch --- die Freiheitsgrade}
+\[ \nu = \frac{7{,}828^2}{\frac{5{,}828^2}{5} + \frac{2{,}000^2}{5}} = \frac{61{,}28}{\frac{33{,}97}{5} + \frac{4{,}00}{5}} = \frac{61{,}28}{6{,}794 + 0{,}800} = \frac{61{,}28}{7{,}594} = 8{,}07 \]
+
+\schritt{Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+& \textbf{Student} & \textbf{Welch}\\
+\midrule
+$t$ & $2{,}919$ & $2{,}919$\\
+Freiheitsgrade & $10$ & $8{,}07$\\
+$p$ & $0{,}0153$ & $0{,}0192$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Welch ist vorsichtiger --- weniger Freiheitsgrade bedeuten schwerere Ränder und damit einen größeren $p$-Wert.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Man soll den Varianzvergleich nicht vorschalten}
+Ein verbreitetes Vorgehen: Erst mit einem Test prüfen, ob die Varianzen gleich sind, und dann je nach Ergebnis Student oder Welch wählen.
+
+Das ist nachweislich schlechter als beide Einzelverfahren.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Der Grund} & Der Vorschalttest hat selbst eine Fehlerrate. Beide Fehler wirken zusammen, und das tatsächliche Niveau des Gesamtverfahrens ist unbekannt.\\
+\textbf{Verschärfend} & Bei kleinem $n$ ist der Varianztest ohnehin machtlos --- er erkennt Unterschiede nicht, die er erkennen müsste.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Empfehlung der neueren Literatur lautet: immer Welch.} Er kostet bei gleichen Varianzen fast nichts und schützt bei ungleichen zuverlässig.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass die meisten Programme Student als Voreinstellung führen und Welch als Sonderfall behandeln, ist ein historisches Erbe --- Student war zuerst da. In R ist es umgekehrt: \code{t.test} rechnet ohne Zusatz die Welch-Fassung.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Mehr als zwei Gruppen: die Varianzanalyse}
+
+\begin{warnung}
+\boxtitelr{Warum man nicht einfach paarweise testet}
+Bei drei Gruppen gibt es drei Paare, bei fünf Gruppen zehn. Führt man alle Vergleiche mit $\alpha = 0{,}05$ durch, so steigt die Wahrscheinlichkeit für mindestens einen falschen Alarm.
+
+\schritt{Die Rechnung}
+Bei $k$ unabhängigen Tests ist die Wahrscheinlichkeit, dass \kursiv{keiner} falschen Alarm schlägt, gleich $0{,}95^k$. Also
+\[ \Pr[\text{mindestens ein falscher Alarm}] = 1 - 0{,}95^k . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{1.8cm}P{2.6cm}@{}}
+\toprule
+\textbf{Gruppen} & \textbf{Paare} & \textbf{Fehlerrate}\\
+\midrule
+$3$ & $3$ & $14{,}3\,\%$\\
+$5$ & $10$ & $40{,}1\,\%$\\
+$10$ & $45$ & \textcolor{akzent}{$90{,}1\,\%$}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Bei zehn Gruppen findet man fast sicher einen \enquote{signifikanten} Unterschied --- auch wenn alle gleich sind.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Vergleiche sind nicht wirklich unabhängig, weil sie dieselben Daten benutzen; die Zahlen sind daher Näherungen. Die Größenordnung stimmt. Kapitel~14 behandelt das Problem allgemein.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Der Grundgedanke der Varianzanalyse}
+Statt vieler Einzelvergleiche prüft man in \kursiv{einem} Test:
+\[ H_0: \mu_1 = \mu_2 = \cdots = \mu_k \]
+
+\schritt{Die Idee}
+Man zerlegt die Gesamtstreuung in zwei Teile:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Zwischen Gruppen} & Wie weit liegen die Gruppenmittelwerte auseinander?\\
+\textbf{Innerhalb} & Wie stark streuen die Werte um ihren eigenen Gruppenmittelwert?\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Ist der erste Teil groß gegenüber dem zweiten, spricht das gegen $H_0$.
+
+\schritt{Die Zerlegung}
+\[ \underbrace{\sum_{j}\sum_{i}(x_{ij}-\overline x)^2}_{SS_{\text{gesamt}}} = \underbrace{\sum_j n_j(\overline x_j - \overline x)^2}_{SS_{\text{zwischen}}} + \underbrace{\sum_j\sum_i (x_{ij}-\overline x_j)^2}_{SS_{\text{innerhalb}}} \]
+
+Der Beweis ist derselbe Kniff wie in Satz 2.4: Null einfügen, ausquadrieren, der Mischterm verschwindet nach Satz 2.3.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein vollständiges Beispiel}
+Eine Erweiterung der Studie prüfte drei Schemata mit je fünf Personen. Mobilisationszeiten in Stunden:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.4cm}P{4.0cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Gruppe} & \textbf{Werte} & $\sum$ & $\overline x_j$\\
+\midrule
+A & $26, 19, 31, 24, 30$ & $130$ & $26$\\
+B & $18, 15, 21, 17, 19$ & $90$ & $18$\\
+C & $22, 25, 20, 23, 20$ & $110$ & $22$\\
+\midrule
+\textbf{gesamt} & & $\mathbf{330}$ & $\mathbf{22}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 1 --- Streuung zwischen den Gruppen}
+\[ SS_{\text{zw}} = 5\bigl[(26-22)^2 + (18-22)^2 + (22-22)^2\bigr] = 5\,[16+16+0] = 160 \]
+
+\schritt{Schritt 2 --- Streuung innerhalb}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.2cm}P{4.4cm}P{1.6cm}@{}}
+\toprule
+& \textbf{Abweichungsquadrate} & $\sum$\\
+\midrule
+A & $0, 49, 25, 4, 16$ & $94$\\
+B & $0, 9, 9, 1, 1$ & $20$\\
+C & $0, 9, 4, 1, 4$ & $18$\\
+\midrule
+& & $\mathbf{132}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\[ SS_{\text{in}} = 132 \]
+
+\schritt{Schritt 3 --- Die Probe}
+\[ SS_{\text{ges}} = \sum x^2 - n\overline x^2 = 7552 - 15 \cdot 484 = 7552 - 7260 = 292 \]
+\[ 160 + 132 = 292 . \quad \checkmark \]
+
+\schritt{Schritt 4 --- Die mittleren Quadrate}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{1.6cm}P{1.6cm}P{1.8cm}@{}}
+\toprule
+\textbf{Quelle} & $SS$ & $\mathrm{df}$ & $MS$\\
+\midrule
+zwischen & $160$ & $k-1 = 2$ & $80{,}0$\\
+innerhalb & $132$ & $n-k = 12$ & $11{,}0$\\
+\midrule
+gesamt & $292$ & $14$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Die Prüfgröße}
+\[ F = \frac{MS_{\text{zw}}}{MS_{\text{in}}} = \frac{80{,}0}{11{,}0} = 7{,}27 \]
+bei $2$ und $12$ Freiheitsgraden.
+
+\schritt{Schritt 6 --- Die Entscheidung}
+Der kritische Wert lautet $F_{2;12;\,0{,}95} = 3{,}89$. Wegen $7{,}27 > 3{,}89$ wird $H_0$ verworfen; $p = 0{,}0086$.
+
+\schritt{Was der Test sagt --- und was nicht}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Er sagt: \textbf{Nicht alle drei Mittelwerte sind gleich.} Er sagt nicht, \kursiv{welche} sich unterscheiden.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für diese Frage braucht man anschließende Einzelvergleiche mit einer Korrektur für die Multiplizität --- etwa nach Tukey oder Bonferroni. Kapitel~14 behandelt sie. Wer nach signifikanter Varianzanalyse ohne Korrektur paarweise weitertestet, hat die Multiplizität nur verschoben, nicht gelöst.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Kategoriale Daten}
+
+\begin{merksatz}
+\boxtitel{Die Vierfeldertafel}
+In der vollständigen MOBIL-Studie brauchten zusätzliche Schmerzmittel:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{1.8cm}P{1.8cm}P{1.6cm}@{}}
+\toprule
+& \textbf{Bedarf} & \textbf{kein} & \textbf{Summe}\\
+\midrule
+Gruppe A & $27$ & $33$ & $60$\\
+Gruppe B & $15$ & $45$ & $60$\\
+\midrule
+\textbf{Summe} & $\mathbf{42}$ & $\mathbf{78}$ & $\mathbf{120}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die erwarteten Häufigkeiten unter $H_0$}
+Träfe $H_0$ zu --- kein Zusammenhang ---, so wäre der Anteil in beiden Gruppen gleich dem Gesamtanteil $42/120 = 0{,}35$.
+\[ E_{ij} = \frac{\text{Zeilensumme} \cdot \text{Spaltensumme}}{\text{Gesamtsumme}} \]
+\[ E_{A,\text{ja}} = \frac{60 \cdot 42}{120} = 21, \qquad E_{A,\text{nein}} = \frac{60 \cdot 78}{120} = 39 \]
+Ebenso für B.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Bedarf} & \textbf{kein}\\
+\midrule
+A & $27$ (erw. $21$) & $33$ (erw. $39$)\\
+B & $15$ (erw. $21$) & $45$ (erw. $39$)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die Prüfgröße}
+\[ \chi^2 = \sum_{\text{Felder}} \frac{(O - E)^2}{E} \]
+\begin{align*}
+\chi^2 &= \frac{(27-21)^2}{21} + \frac{(33-39)^2}{39} + \frac{(15-21)^2}{21} + \frac{(45-39)^2}{39}\\
+&= \frac{36}{21} + \frac{36}{39} + \frac{36}{21} + \frac{36}{39}\\
+&= 1{,}714 + 0{,}923 + 1{,}714 + 0{,}923 = 5{,}275
+\end{align*}
+
+\schritt{Die Entscheidung}
+Freiheitsgrade bei einer Vierfeldertafel: $(2-1)(2-1) = 1$. Kritischer Wert $\chi^2_{1;\,0{,}95} = 3{,}841$.
+
+$5{,}275 > 3{,}841$, also signifikant; $p = 0{,}022$.
+
+\schritt{Der Effekt --- was allein zählt}
+\[ \hat p_A = \frac{27}{60} = 0{,}45, \qquad \hat p_B = \frac{15}{60} = 0{,}25 \]
+Unterschied $0{,}20$; das zugehörige Konfidenzintervall reicht von etwa $0{,}03$ bis $0{,}36$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der $\chi^2$-Wert selbst ist nicht deutbar --- $5{,}275$ ist keine Größe, die jemanden interessiert. Man berichtet die beiden Anteile und ihre Differenz.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Wann der $\chi^2$-Test nicht gilt}
+Die Prüfgröße folgt der $\chi^2$-Verteilung nur \kursiv{näherungsweise}. Die Näherung versagt bei kleinen erwarteten Häufigkeiten.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Faustregel} & Alle erwarteten Häufigkeiten $\ge 5$.\\
+\textbf{Bei Verletzung} & Exakter Test nach Fisher.\\
+\textbf{Nicht: Yates} & Die Stetigkeitskorrektur nach Yates macht den Test zu vorsichtig und wird heute nicht mehr empfohlen.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Im Beispiel sind die erwarteten Häufigkeiten $21$, $39$, $21$, $39$ --- unbedenklich.
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Der exakte Test nach Fisher}
+Er rechnet nicht mit einer Näherung, sondern zählt \kursiv{alle} Tafeln ab, die dieselben Randsummen haben.
+
+\schritt{Ein kleines Beispiel}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+& \textbf{Bedarf} & \textbf{kein} & \textbf{Summe}\\
+\midrule
+A & $5$ & $1$ & $6$\\
+B & $1$ & $5$ & $6$\\
+\midrule
+\textbf{Summe} & $6$ & $6$ & $12$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 1 --- Die Wahrscheinlichkeit einer Tafel}
+Bei festen Randsummen ist die Wahrscheinlichkeit, dass in der linken oberen Ecke der Wert $a$ steht,
+\[ \Pr[a] = \frac{\binom{6}{a}\binom{6}{6-a}}{\binom{12}{6}} . \]
+Mit $\binom{12}{6} = 924$:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.0cm}P{2.4cm}P{1.8cm}@{}}
+\toprule
+$a$ & \textbf{Anzahl} & $\Pr[a]$\\
+\midrule
+$0$ & $1 \cdot 1 = 1$ & $0{,}00108$\\
+$1$ & $6 \cdot 6 = 36$ & $0{,}03896$\\
+$2$ & $15 \cdot 15 = 225$ & $0{,}24351$\\
+$3$ & $20 \cdot 20 = 400$ & $0{,}43290$\\
+$4$ & $225$ & $0{,}24351$\\
+$5$ & $36$ & $\mathbf{0{,}03896}$\\
+$6$ & $1$ & $0{,}00108$\\
+\midrule
+& $\mathbf{924}$ & $\mathbf{1{,}00000}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Der $p$-Wert}
+Beobachtet wurde $a = 5$ mit $\Pr = 0{,}03896$. Zweiseitig summiert man alle Tafeln, deren Wahrscheinlichkeit \kursiv{höchstens so groß} ist:
+\[ a = 0,\ 1,\ 5,\ 6 \]
+\[ p = 0{,}00108 + 0{,}03896 + 0{,}03896 + 0{,}00108 = \mathbf{0{,}0801} . \]
+
+\schritt{Schritt 3 --- Der Vergleich mit $\chi^2$}
+Die erwarteten Häufigkeiten wären alle $3$ --- unter der Faustregel. Rechnet man trotzdem:
+\[ \chi^2 = 4 \cdot \frac{(5-3)^2}{3} = 4 \cdot \frac{4}{3} = 5{,}333, \qquad p = 0{,}021 . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.8cm}@{}}
+\toprule
+& $p$ & \\
+\midrule
+$\chi^2$ & $0{,}021$ & \textcolor{akzent}{\textbf{signifikant}}\\
+Fisher & $0{,}080$ & \textcolor{gruen}{nicht signifikant}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Verfahren, dieselben Daten, entgegengesetzte Entscheidungen.} Der exakte Test hat recht; die $\chi^2$-Näherung ist bei erwarteten Häufigkeiten von $3$ nicht zulässig und liefert einen zu kleinen $p$-Wert.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und beachten Sie das Ergebnis selbst: Fünf zu eins gegen eins zu fünf --- ein so deutlicher Unterschied, wie er bei sechs plus sechs Personen kaum denkbar ist --- reicht \kursiv{nicht} für Signifikanz. Bei zwölf Beobachtungen lässt sich fast nichts nachweisen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Übersicht über das Bruchverhalten}
+
+\begin{merksatz}
+\boxtitel{Was bei Verletzung der Voraussetzungen geschieht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+\textbf{Verletzt} & \textbf{Folge} & \textbf{Abhilfe}\\
+\midrule
+Normal\-verteilung, $n$ groß & \textcolor{gruen}{meist unkritisch} & Grenzwertsatz trägt\\
+Normal\-verteilung, $n$ klein, schief & \textcolor{akzent}{Niveau verfehlt} & Kapitel~9\\
+Gleiche Varianzen & \textcolor{akzent}{Niveau verfehlt} & Welch\\
+\textbf{Unabhängigkeit} & \textcolor{akzent}{\textbf{schwer}} & \textcolor{akzent}{\textbf{kein Test rettet}}\\
+Kleine Erwartungswerte & \textcolor{akzent}{$p$ zu klein} & Fisher\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die vierte Zeile ist die schlimmste}
+Gegen Abweichungen von der Normalverteilung gibt es Ersatzverfahren. Gegen ungleiche Varianzen gibt es Welch. Gegen \kursiv{Abhängigkeit} gibt es keine nachträgliche Abhilfe --- man muss sie beim Entwurf berücksichtigen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und sie ist die am schwersten erkennbare: Man sieht den Daten nicht an, ob sie unabhängig sind. Das ergibt sich aus dem Erhebungsvorgang, nicht aus den Zahlen. Deshalb gehört die Frage in den Methodenteil und nicht in die Auswertung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{technik}
+\boxtitelm{Zur Kontrolle in R}
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\code{t.test(mobA, mobB)}\ \ \ \ \ \ \ \ \code{\# Welch, Voreinstellung}\\
+\code{t.test(mobA, mobB, var.equal = TRUE)}\\
+\code{t.test(nrs24, nrs48, paired = TRUE)}\\
+\code{aov(wert \~{} gruppe)}\\
+\code{fisher.test(matrix(c(5,1,1,5), 2))}
+\end{minipage}
+\end{center}
+\end{technik}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Gepaart oder unabhängig?}
+Entscheiden Sie für jede Lage, welcher Test passt.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & Blutdruck vor und nach Gabe eines Mittels, dieselben $40$ Personen.\\
+(b) & Liegedauer in zwei Kliniken, je $80$ Personen.\\
+(c) & Sehschärfe rechtes gegen linkes Auge, $50$ Personen.\\
+(d) & Zwillingspaare, je einer erhält die Therapie.\\
+(e) & Laborwert, dreimal je Person gemessen, zwei Gruppen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) --- gepaart}
+Dieselben Personen zweimal. Jede Person ist ihre eigene Kontrolle. Gepaarter $t$-Test auf die Differenzen.
+
+\schritt{(b) --- unabhängig}
+Verschiedene Personen ohne Zuordnung. Welch-$t$-Test.
+
+\schritt{(c) --- gepaart}
+Die beiden Augen einer Person sind nicht unabhängig --- sie teilen Alter, Erkrankungen, Lebensweise. Gepaart.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Dieser Fall wird in der augenheilkundlichen Literatur häufig falsch behandelt: $50$ Personen liefern $100$ Augen, und es wird mit $n = 100$ gerechnet. Das ist Pseudoreplikation und überschätzt die Genauigkeit erheblich.}
+\end{minipage}
+\end{center}
+
+\schritt{(d) --- gepaart}
+Zwillinge sind einander ähnlicher als zufällige Personen. Die Paarung beseitigt genetische und familiäre Störgrößen --- der Grund, warum Zwillingsstudien so aussagekräftig sind.
+
+\schritt{(e) --- weder noch}
+Hier liegt eine Mehrebenenstruktur vor: Messungen innerhalb von Personen, Personen innerhalb von Gruppen.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textcolor{akzent}{Falsch} & alle Messungen als unabhängig behandeln ($n = 3 \times$ Personenzahl)\\
+\textcolor{mittel}{Vertretbar} & je Person mitteln, dann Zweistichprobentest\\
+\textcolor{gruen}{Richtig} & Mehrebenenmodell (Kapitel~11)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die mittlere Zeile ist ein brauchbarer Notbehelf: Sie ist korrekt, verschenkt aber die Auskunft über die Messgenauigkeit.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Eine Varianzanalyse von Hand}
+Drei Gruppen zu je vier Personen, Messwerte:
+\[ \text{I}: 12, 14, 11, 15 \qquad \text{II}: 18, 16, 19, 15 \qquad \text{III}: 14, 13, 16, 13 \]
+Führen Sie die Varianzanalyse durch.
+
+\loesung
+\schritt{Schritt 1 --- Gruppenmittelwerte}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.4cm}P{1.6cm}P{1.6cm}P{2.2cm}@{}}
+\toprule
+& $\sum$ & $\overline x_j$ & \\
+\midrule
+I & $52$ & $13$ & \\
+II & $68$ & $17$ & \\
+III & $56$ & $14$ & \\
+\midrule
+gesamt & $176$ & $14{,}667$ & $n = 12$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 2 --- Streuung zwischen}
+\begin{align*}
+SS_{\text{zw}} &= 4\bigl[(13-14{,}667)^2 + (17-14{,}667)^2 + (14-14{,}667)^2\bigr]\\
+&= 4\,[2{,}778 + 5{,}444 + 0{,}444]\\
+&= 4 \cdot 8{,}667 = 34{,}667
+\end{align*}
+
+\schritt{Schritt 3 --- Streuung innerhalb}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.2cm}P{3.6cm}P{1.6cm}@{}}
+\toprule
+& \textbf{Abweichungen} & $\sum$ der Quadrate\\
+\midrule
+I & $-1, 1, -2, 2$ & $1+1+4+4 = 10$\\
+II & $1, -1, 2, -2$ & $10$\\
+III & $0, -1, 2, -1$ & $0+1+4+1 = 6$\\
+\midrule
+& & $\mathbf{26}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Probe über die Gesamtstreuung}
+\[ \sum x^2 = 144+196+121+225+324+256+361+225+196+169+256+169 = 2642 \]
+\[ SS_{\text{ges}} = 2642 - \frac{176^2}{12} = 2642 - \frac{30976}{12} = 2642 - 2581{,}33 = 60{,}67 \]
+\[ 34{,}667 + 26 = 60{,}667 . \quad \checkmark \]
+
+\schritt{Schritt 5 --- Die Tafel}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.2cm}P{1.8cm}P{1.4cm}P{1.8cm}@{}}
+\toprule
+\textbf{Quelle} & $SS$ & $\mathrm{df}$ & $MS$\\
+\midrule
+zwischen & $34{,}667$ & $2$ & $17{,}333$\\
+innerhalb & $26{,}000$ & $9$ & $2{,}889$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 6 --- Die Prüfgröße}
+\[ F = \frac{17{,}333}{2{,}889} = 6{,}00 \]
+bei $2$ und $9$ Freiheitsgraden. Kritischer Wert $F_{2;9;\,0{,}95} = 4{,}26$.
+
+$6{,}00 > 4{,}26$: signifikant, $p = 0{,}022$.
+
+\schritt{Schritt 7 --- Die Deutung}
+Nicht alle drei Mittelwerte sind gleich. Der Augenschein legt nahe, dass Gruppe II sich von I abhebt ($17$ gegen $13$), während III dazwischen liegt.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Diese Vermutung ist aber noch kein Ergebnis. Für die Frage, welche Paare sich unterscheiden, braucht man anschließende Vergleiche mit Multiplizitätskorrektur --- sonst hat man das Problem aus Abschnitt 8.5 durch die Hintertür wieder eingeführt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- Vierfeldertafel mit beiden Verfahren}
+In einer kleinen Studie trat eine Komplikation auf bei $4$ von $10$ Personen unter Therapie A und bei $1$ von $10$ unter B. Prüfen Sie mit $\chi^2$ und mit Fisher.
+
+\loesung
+\schritt{Schritt 1 --- Die Tafel}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+& \textbf{Kompl.} & \textbf{keine} & \textbf{Summe}\\
+\midrule
+A & $4$ & $6$ & $10$\\
+B & $1$ & $9$ & $10$\\
+\midrule
+\textbf{Summe} & $5$ & $15$ & $20$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 2 --- Erwartete Häufigkeiten}
+\[ E_{A,\text{K}} = \frac{10 \cdot 5}{20} = 2{,}5, \qquad E_{A,\text{k}} = \frac{10 \cdot 15}{20} = 7{,}5 \]
+Ebenso für B.
+
+\textbf{Zwei der vier erwarteten Häufigkeiten liegen unter $5$.} Die Faustregel ist verletzt --- der $\chi^2$-Test ist eigentlich unzulässig. Wir rechnen ihn trotzdem, um den Vergleich zu haben.
+
+\schritt{Schritt 3 --- $\chi^2$}
+\begin{align*}
+\chi^2 &= \frac{(4-2{,}5)^2}{2{,}5} + \frac{(6-7{,}5)^2}{7{,}5} + \frac{(1-2{,}5)^2}{2{,}5} + \frac{(9-7{,}5)^2}{7{,}5}\\
+&= \frac{2{,}25}{2{,}5} + \frac{2{,}25}{7{,}5} + \frac{2{,}25}{2{,}5} + \frac{2{,}25}{7{,}5}\\
+&= 0{,}90 + 0{,}30 + 0{,}90 + 0{,}30 = 2{,}40
+\end{align*}
+Kritischer Wert $3{,}841$. $2{,}40 < 3{,}841$: nicht signifikant, $p = 0{,}121$.
+
+\schritt{Schritt 4 --- Fisher}
+Mit $\binom{20}{5} = 15\,504$ und
+\[ \Pr[a] = \frac{\binom{10}{a}\binom{10}{5-a}}{15\,504} : \]
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.0cm}P{2.6cm}P{1.8cm}@{}}
+\toprule
+$a$ & \textbf{Anzahl} & $\Pr[a]$\\
+\midrule
+$0$ & $1 \cdot 252 = 252$ & $0{,}01625$\\
+$1$ & $10 \cdot 210 = 2100$ & $0{,}13545$\\
+$2$ & $45 \cdot 120 = 5400$ & $0{,}34830$\\
+$3$ & $120 \cdot 45 = 5400$ & $0{,}34830$\\
+$4$ & $210 \cdot 10 = 2100$ & $\mathbf{0{,}13545}$\\
+$5$ & $252 \cdot 1 = 252$ & $0{,}01625$\\
+\midrule
+& $\mathbf{15\,504}$ & $\mathbf{1{,}00000}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Beobachtet $a = 4$ mit $\Pr = 0{,}13545$. Zweiseitig alle Tafeln mit $\Pr \le 0{,}13545$: das sind $a = 0, 1, 4, 5$.
+\[ p = 0{,}01625 + 0{,}13545 + 0{,}13545 + 0{,}01625 = \mathbf{0{,}3034} . \]
+
+\schritt{Schritt 5 --- Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.8cm}@{}}
+\toprule
+& $p$ & \\
+\midrule
+$\chi^2$ & $0{,}121$ & nicht signifikant\\
+Fisher & $\mathbf{0{,}303}$ & nicht signifikant\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Beide führen zur selben Entscheidung, aber der $\chi^2$-Wert ist um mehr als den Faktor zwei zu klein.
+
+\schritt{Schritt 6 --- Was man berichtet}
+\[ \hat p_A = 0{,}40, \qquad \hat p_B = 0{,}10, \qquad \text{Differenz } 0{,}30 \]
+Das Wilson-Intervall für die Differenz reicht von etwa $-0{,}05$ bis $0{,}58$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Ein beobachteter Unterschied von dreißig Prozentpunkten, und trotzdem kein Nachweis. Das Intervall zeigt warum: Bei zehn Personen je Gruppe ist alles zwischen \enquote{kein Unterschied} und \enquote{sehr großer Unterschied} mit den Daten verträglich. Die Studie war zu klein für diese Frage --- was man vor ihrer Durchführung hätte ausrechnen können.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Die Dame und der Tee}
+Der exakte Test entstand aus einer Nachmittagsgesellschaft in Rothamsted, wohl um 1920.
+
+\Person{Muriel Bristol}, Algologin am Institut, behauptete, sie könne schmecken, ob die Milch vor oder nach dem Tee in die Tasse gegossen worden sei. Fisher schlug einen Versuch vor: acht Tassen, vier von jeder Art, in zufälliger Reihenfolge --- und sie wusste, dass es vier von jeder Art waren.
+
+\schritt{Die Rechnung}
+Bei reinem Raten ist die Wahrscheinlichkeit, alle vier richtig zuzuordnen,
+\[ \frac{1}{\binom{8}{4}} = \frac{1}{70} = 0{,}0143 . \]
+Das ist der exakte Test in seiner Urform --- die Randsummen sind fest, weil beide Seiten wussten, dass es vier und vier waren.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Fisher benutzte das Beispiel 1935 im ersten Kapitel von \kursiv{The Design of Experiments}, um Randomisierung und Signifikanz einzuführen. Ob Frau Bristol bestand, schreibt er nicht. Nach der Erinnerung eines anwesenden Kollegen ordnete sie alle acht Tassen richtig zu.}
+\end{minipage}
+\end{center}
+
+Bemerkenswert ist die Konstruktion: Fisher entwarf den Versuch so, dass die Nullhypothese eine \kursiv{exakt} berechenbare Verteilung hat --- keine Näherung, keine Verteilungsannahme, nur Abzählen. Das ist bis heute das Ideal, und die verteilungsfreien Verfahren des nächsten Kapitels beruhen auf demselben Gedanken.
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Welch statt Student --- eine Empfehlung, die sich langsam durchsetzt}
+Simulationsstudien der letzten zwanzig Jahre kommen übereinstimmend zu demselben Schluss.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{5.6cm}@{}}
+\toprule
+\textbf{Gleiche Varianzen} & Welch verliert gegenüber Student fast nichts an Macht --- meist unter einem Prozentpunkt.\\
+\textbf{Ungleiche Varianzen} & Student verfehlt das Niveau erheblich; bei ungleichen Gruppengrößen kann die tatsächliche Fehlerrate über $10\,\%$ liegen.\\
+\textbf{Vorschalttest} & schlechter als beide Einzelverfahren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Delacre, Lakens und Leys empfahlen 2017 in einer vielbeachteten Arbeit, Welch grundsätzlich als Voreinstellung zu verwenden. Die Empfehlung hat sich in der Methodenliteratur weitgehend durchgesetzt; in der Anwendungspraxis und in vielen Lehrbüchern steht weiterhin Student.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Fall ist lehrreich für die Trägheit statistischer Gewohnheiten. Es geht nicht um eine strittige Frage --- der Befund ist eindeutig und seit Jahrzehnten bekannt. Er hat sich trotzdem nicht durchgesetzt, weil Lehrbücher voneinander abschreiben und weil die Voreinstellung mancher Programme Student ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Ebenso bei Yates}
+Die Stetigkeitskorrektur nach Yates gilt seit den 1970er Jahren als zu vorsichtig. Sie ist in vielen Programmen weiterhin die Voreinstellung --- in R muss man sie mit \code{correct = FALSE} ausdrücklich abschalten.
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Die Auswahl} & Merkmalsart, Gruppenzahl, verbunden oder nicht\\
+\textbf{Gepaart} & warum Paarung so viel einbringt\\
+\textbf{Welch} & als Voreinstellung, ohne Vorschalttest\\
+\textbf{Varianzanalyse} & Zerlegung, $F$-Test --- und was er offenlässt\\
+\textbf{$\chi^2$ und Fisher} & und wann die Näherung versagt\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel kommen die Verfahren, die ohne Verteilungsannahme auskommen --- und der Gedanke, der Fishers Teeversuch zugrunde lag, wird zum allgemeinen Werkzeug.}
+\end{minipage}
+\end{center}
+\end{merksatz}

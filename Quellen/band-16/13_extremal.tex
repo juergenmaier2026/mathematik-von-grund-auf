@@ -1,0 +1,565 @@
+\part{Grenzen und Zufall}
+
+\chapter{Extremale Graphentheorie}
+
+\section{Die Frage nach dem Unvermeidlichen}
+
+Bisher haben wir gegebene Graphen untersucht. Jetzt drehen wir die Frage um:
+
+\begin{merksatz}
+\boxtitel{Die Leitfrage}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wie viele Kanten muss ein Graph auf $n$ Ecken haben, damit er eine bestimmte Struktur \kursiv{unvermeidlich} enthält?}
+\end{minipage}
+\end{center}
+
+Die einfachste Fassung: Wie viele Kanten erzwingen ein Dreieck?
+
+\schritt{Eine erste Beobachtung}
+Der vollständig bipartite Graph $K_{r,s}$ enthält kein Dreieck --- er ist bipartit, hat also nach Satz 2.12 keinen ungeraden Kreis. Er hat $r \cdot s$ Kanten.
+
+Bei $n$ Ecken wählt man $r + s = n$ und will $r\cdot s$ möglichst groß. Aus der Schulmathematik (Band 0, Kapitel 5) ist bekannt: Das Produkt zweier Zahlen fester Summe wird maximal, wenn sie gleich sind.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.4cm}P{2.0cm}P{1.8cm}P{2.2cm}@{}}
+\toprule
+$n$ & \textbf{Aufteilung} & $r \cdot s$ & $\lfloor n^2/4 \rfloor$\\
+\midrule
+$4$ & $2 + 2$ & $4$ & $4$\\
+$5$ & $2+3$ & $6$ & $6$\\
+$6$ & $3+3$ & $9$ & $9$\\
+$7$ & $3+4$ & $12$ & $12$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Es gibt also dreiecksfreie Graphen mit $\lfloor n^2/4 \rfloor$ Kanten. Die Frage ist, ob eine Kante mehr schon ein Dreieck erzwingt.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 13.1 (Mantel 1907)}
+Hat ein Graph auf $n$ Ecken mehr als $\dfrac{n^2}{4}$ Kanten, so enthält er ein Dreieck.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Hilfssatz über Quadratsummen}
+Für beliebige reelle Zahlen $d_1, \ldots, d_n$ gilt
+\[ \sum_{i=1}^n d_i^2 \;\ge\; \frac{1}{n}\Bigl(\sum_{i=1}^n d_i\Bigr)^2 . \]
+
+\schritt{Beweis}
+Sei $\bar{d} = \frac{1}{n}\sum_i d_i$ der Mittelwert. Wir betrachten die Summe der Abweichungsquadrate, die als Summe von Quadraten nichtnegativ ist:
+\[ 0 \;\le\; \sum_{i=1}^n (d_i - \bar{d})^2 . \]
+Ausmultiplizieren:
+\begin{align*}
+\sum_i (d_i - \bar d)^2 &= \sum_i d_i^2 - 2\bar d \sum_i d_i + n \bar d^2\\
+&= \sum_i d_i^2 - 2\bar d \cdot (n\bar d) + n\bar d^2\\
+&= \sum_i d_i^2 - n\bar d^2 .
+\end{align*}
+Aus $0 \le \sum_i d_i^2 - n\bar d^2$ folgt
+\[ \sum_i d_i^2 \;\ge\; n \bar d^2 = n \cdot \frac{1}{n^2}\Bigl(\sum_i d_i\Bigr)^2 = \frac{1}{n}\Bigl(\sum_i d_i\Bigr)^2 . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis von Satz 13.1}
+Sei $G$ dreiecksfrei mit $n$ Ecken und $m$ Kanten. Wir zeigen $m \le n^2/4$.
+
+\schritt{Schritt 1 --- Was Dreiecksfreiheit für eine Kante bedeutet}
+Sei $\{u,v\}$ eine Kante. Behauptung:
+\[ \deg(u) + \deg(v) \;\le\; n . \]
+
+Warum? Hätten $u$ und $v$ einen gemeinsamen Nachbarn $w$, so wären $u$, $v$, $w$ paarweise benachbart --- ein Dreieck. Also ist
+\[ N(u) \cap N(v) = \varnothing . \]
+Beide Nachbarschaften sind Teilmengen von $V$, und disjunkte Teilmengen haben zusammen höchstens $|V| = n$ Elemente:
+\[ \deg(u) + \deg(v) = |N(u)| + |N(v)| = |N(u) \cup N(v)| \le n . \]
+
+\schritt{Schritt 2 --- Über alle Kanten summieren}
+\[ \sum_{\{u,v\} \in E} \bigl(\deg(u) + \deg(v)\bigr) \;\le\; \sum_{\{u,v\} \in E} n \;=\; m\,n . \]
+
+\schritt{Schritt 3 --- Dieselbe Summe anders ordnen}
+Wir zählen nach Ecken statt nach Kanten. In der linken Summe kommt der Term $\deg(v)$ genau einmal für jede Kante an $v$ vor --- also $\deg(v)$ mal. Somit
+\[ \sum_{\{u,v\} \in E} \bigl(\deg(u) + \deg(v)\bigr) \;=\; \sum_{v \in V} \deg(v)^2 . \]
+
+\schritt{Schritt 4 --- Den Hilfssatz anwenden}
+Mit $d_v = \deg(v)$ und $\sum_v \deg(v) = 2m$ (Handschlaglemma) liefert der Hilfssatz
+\[ \sum_{v} \deg(v)^2 \;\ge\; \frac{(2m)^2}{n} = \frac{4m^2}{n} . \]
+
+\schritt{Schritt 5 --- Zusammensetzen}
+\[ \frac{4m^2}{n} \;\le\; \sum_v \deg(v)^2 \;\le\; m\,n . \]
+Für $m \ge 1$ dürfen wir durch $m$ teilen:
+\[ \frac{4m}{n} \le n \quad\Longrightarrow\quad m \le \frac{n^2}{4} . \qquad \blacksquare \]
+
+\schritt{Der Fall $m = 0$}
+Dann ist $0 \le n^2/4$ ohnehin richtig.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Schranke ist scharf --- und die Extremalgraphen sind eindeutig}
+Für gerades $n$ hat $K_{n/2, n/2}$ genau $n^2/4$ Kanten und ist dreiecksfrei. Die Schranke wird also erreicht.
+
+Man kann mehr zeigen: Bei $n^2/4$ Kanten \kursiv{und} Dreiecksfreiheit ist $K_{n/2,n/2}$ der einzige Graph --- bis auf Isomorphie. Die Ungleichungen im Beweis werden nur dann zu Gleichungen, wenn alle Grade gleich sind und je zwei Nachbarschaften einer Kante ganz $V$ ausschöpfen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist ein Merkmal der extremalen Graphentheorie: Man bekommt oft nicht nur die Schranke, sondern auch die Auskunft, wie die Graphen aussehen, die sie erreichen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz von Turán}
+
+Mantel behandelt das Dreieck, also $K_3$. Was ist mit $K_4$, $K_5$, allgemein $K_{r+1}$?
+
+\begin{definition}
+\boxtitelm{Definition 13.2 --- Turán-Graph}
+Der \Begriff{Turán-Graph} $T_r(n)$ entsteht, indem man die $n$ Ecken in $r$ möglichst gleich große Teile aufteilt und je zwei Ecken \kursiv{verschiedener} Teile verbindet. Innerhalb eines Teils gibt es keine Kante.
+
+Seine Kantenzahl bezeichnen wir mit $t_r(n)$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum $T_r(n)$ kein $K_{r+1}$ enthält}
+Eine Clique der Größe $r+1$ bräuchte $r+1$ paarweise benachbarte Ecken. Zwei Ecken desselben Teils sind nicht benachbart, also müssten alle $r+1$ Ecken in verschiedenen Teilen liegen. Es gibt aber nur $r$ Teile.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+\foreach \i/\x in {0/-1.6, 1/0, 2/1.6} {
+  \node[knoten] (p\i) at (\x,0.9) {};
+  \node[knoten] (q\i) at (\x,0.3) {};
+  \draw[kante, grau!35] (\x,0.6) ellipse (0.3 and 0.65);
+}
+\foreach \i/\j in {0/1,1/2,0/2} {
+  \draw[kante] (p\i)--(p\j);
+  \draw[kante] (p\i)--(q\j);
+  \draw[kante] (q\i)--(p\j);
+  \draw[kante] (q\i)--(q\j);
+}
+\node[font=\scriptsize\itshape, color=grau] at (0,-0.4) {$T_3(6)$: drei Teile zu je zwei Ecken, $12$ Kanten};
+\end{tikzpicture}
+\end{center}
+
+Für $r = 2$ ist $T_2(n)$ genau der Graph $K_{\lceil n/2\rceil, \lfloor n/2 \rfloor}$ aus dem Mantel-Abschnitt.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 13.3 (Turán 1941)}
+Enthält ein Graph auf $n$ Ecken keinen $K_{r+1}$, so hat er höchstens $t_r(n)$ Kanten. Insbesondere gilt
+\[ m \;\le\; \Bigl(1 - \frac{1}{r}\Bigr)\frac{n^2}{2} . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- Induktion über $n$ in Schritten von $r$}
+\schritt{Induktionsanfang $n \le r$}
+Dann ist $T_r(n) = K_n$ --- jede Ecke bekommt ihren eigenen Teil ---, und $K_n$ hat die größtmögliche Kantenzahl überhaupt. Die Behauptung ist erfüllt.
+
+\schritt{Induktionsschritt --- Vorbereitung}
+Sei $n > r$ und die Behauptung für alle Eckenzahlen kleiner als $n$ bewiesen. Sei $G$ ein $K_{r+1}$-freier Graph auf $n$ Ecken mit größtmöglicher Kantenzahl.
+
+\schritt{Schritt 1 --- $G$ enthält einen $K_r$}
+Angenommen nicht. Dann könnte man eine Kante hinzufügen, ohne einen $K_{r+1}$ zu erzeugen --- denn ein neu entstehender $K_{r+1}$ enthielte die neue Kante, und die restlichen $r-1$ Ecken bildeten zusammen mit einem Ende der Kante einen $K_r$ in $G$. Das widerspräche der Maximalität von $G$.
+
+Genauer: Fügt man zu einem $K_{r+1}$-freien Graphen ohne $K_r$ irgendeine fehlende Kante $\{x,y\}$ hinzu und entstünde ein $K_{r+1}$, so enthielte dieser $x$ und $y$; die übrigen $r-1$ Ecken wären mit $x$ paarweise benachbart und untereinander auch --- ein $K_r$ in $G$. Widerspruch.
+
+Sei also $A$ eine Eckenmenge, die einen $K_r$ bildet, und $B = V \setminus A$ mit $|B| = n - r$.
+
+\schritt{Schritt 2 --- Die Kanten zählen}
+Wir teilen die Kanten in drei Gruppen.
+
+\kursiv{Innerhalb von $A$:} Da $A$ ein $K_r$ ist, sind es genau $\binom{r}{2}$ Kanten.
+
+\kursiv{Zwischen $A$ und $B$:} Sei $b \in B$. Wäre $b$ mit allen $r$ Ecken von $A$ benachbart, so bildeten $A \cup \{b\}$ einen $K_{r+1}$. Also hat $b$ höchstens $r-1$ Nachbarn in $A$. Insgesamt höchstens
+\[ (n-r)(r-1) \ \text{Kanten}. \]
+
+\kursiv{Innerhalb von $B$:} Der von $B$ induzierte Teilgraph ist $K_{r+1}$-frei (er ist ein Teilgraph von $G$) und hat $n-r$ Ecken. Nach Induktionsannahme höchstens $t_r(n-r)$ Kanten.
+
+\schritt{Schritt 3 --- Zusammenrechnen}
+\[ m \;\le\; \binom{r}{2} \;+\; (n-r)(r-1) \;+\; t_r(n-r) . \]
+
+\schritt{Schritt 4 --- Die rechte Seite ist genau $t_r(n)$}
+Wir prüfen das an der Bauweise des Turán-Graphen. Nimmt man aus jedem der $r$ Teile von $T_r(n)$ eine Ecke heraus, so bilden diese $r$ Ecken einen $K_r$ --- sie liegen ja in verschiedenen Teilen. Übrig bleibt genau $T_r(n-r)$.
+
+Die entfernten $r$ Ecken tragen bei:
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.6cm}P{2.4cm}@{}}
+\toprule
+Untereinander & $\binom{r}{2}$\\
+Zu den übrigen $n-r$ Ecken & $(n-r)(r-1)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Die zweite Zeile: Jede der $n-r$ verbliebenen Ecken liegt in genau einem Teil und ist daher mit genau $r-1$ der entfernten Ecken verbunden.
+
+Also
+\[ t_r(n) = \binom{r}{2} + (n-r)(r-1) + t_r(n-r) . \]
+Zusammen mit Schritt 3 folgt $m \le t_r(n)$. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Zahlenschranke}
+Bei gleichmäßiger Aufteilung hat jeder Teil etwa $n/r$ Ecken. Die Anzahl der \kursiv{fehlenden} Kanten gegenüber dem $K_n$ ist die Summe der Kanten innerhalb der Teile:
+\[ r \cdot \binom{n/r}{2} = r \cdot \frac{\frac{n}{r}\bigl(\frac{n}{r}-1\bigr)}{2} \approx \frac{n^2}{2r} . \]
+Also
+\[ t_r(n) \approx \binom{n}{2} - \frac{n^2}{2r} \approx \frac{n^2}{2} - \frac{n^2}{2r} = \Bigl(1-\frac{1}{r}\Bigr)\frac{n^2}{2} . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.4cm}P{2.6cm}P{3.2cm}@{}}
+\toprule
+$r$ & \textbf{Verbotene Clique} & \textbf{Anteil der Kanten}\\
+\midrule
+$2$ & $K_3$ & $1/2$\\
+$3$ & $K_4$ & $2/3$\\
+$4$ & $K_5$ & $3/4$\\
+$10$ & $K_{11}$ & $9/10$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Spalte gibt an, welcher Anteil aller möglichen Kanten höchstens vorkommen darf. Wer kein Dreieck will, muss die Hälfte weglassen. Wer nur den $K_{11}$ vermeiden will, darf neunzig Prozent behalten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Für nicht vollständige verbotene Graphen ist die Lage völlig anders}
+Turán behandelt Cliquen. Verbietet man stattdessen einen \kursiv{bipartiten} Graphen --- etwa den Vierkreis $C_4$ ---, so bricht die Antwort zusammen.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+\textbf{Verboten} & \textbf{Höchstens} & \\
+\midrule
+$K_3$ & $\approx n^2/4$ & \textcolor{gruen}{genau bekannt}\\
+$K_{r+1}$ & $\approx (1-\frac1r)\frac{n^2}{2}$ & \textcolor{gruen}{genau bekannt}\\
+$C_4$ & $\approx \frac12 n^{3/2}$ & \textcolor{mittel}{Größenordnung bekannt}\\
+$C_6$ & $\Oh(n^{4/3})$ & \textcolor{akzent}{\textbf{Konstante offen}}\\
+$K_{4,4}$ & $\Oh(n^{7/4})$ & \textcolor{akzent}{\textbf{Größenordnung offen}}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Der Grund: Der Satz von Erdős und Stone (1946) sagt, dass die Antwort für einen verbotenen Graphen $H$ im Wesentlichen nur von der \kursiv{chromatischen Zahl} von $H$ abhängt:
+\[ \max m \;=\; \Bigl(1 - \frac{1}{\chi(H)-1}\Bigr)\frac{n^2}{2} \;+\; o(n^2) . \]
+
+Für $\chi(H) \ge 3$ ist der Hauptterm positiv, und die Formel ist aussagekräftig. Für bipartite $H$ ist $\chi(H) = 2$, der Hauptterm wird null --- und die ganze Auskunft steckt im Fehlerterm $o(n^2)$, über den der Satz nichts sagt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist einer der bemerkenswertesten Zustände der Mathematik: Ein Satz löst den Fall $\chi \ge 3$ vollständig und lässt genau die scheinbar einfacheren bipartiten Fälle offen. Sie sind seit achtzig Jahren Gegenstand aktiver Forschung.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Ramsey: Ordnung lässt sich nicht vermeiden}
+
+Eine verwandte Frage: Statt Kanten zu zählen, färben wir sie.
+
+\begin{merksatz}
+\boxtitel{Das Bekanntschaftsproblem}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Auf einer Feier mit sechs Personen gibt es stets \kursiv{drei}, die sich paarweise kennen, oder \kursiv{drei}, die sich paarweise nicht kennen.
+\end{minipage}
+\end{center}
+
+In Graphensprache: Färbt man die Kanten des $K_6$ mit zwei Farben, so entsteht stets ein einfarbiges Dreieck.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 13.4 --- $R(3,3) = 6$}
+\schritt{Teil 1 --- Sechs genügen}
+Sei jede Kante des $K_6$ rot oder blau gefärbt. Wir wählen eine beliebige Ecke $v$.
+
+\kursiv{Das Schubfachprinzip.} Von $v$ gehen fünf Kanten aus, jede rot oder blau. Bei zwei Farben und fünf Kanten muss eine Farbe mindestens dreimal vorkommen: Kämen beide höchstens zweimal vor, wären es höchstens vier Kanten.
+
+Sagen wir, $v$ hat drei rote Kanten, zu den Ecken $a$, $b$, $c$.
+
+\kursiv{Die Fallunterscheidung.} Wir betrachten die drei Kanten $ab$, $bc$, $ca$.
+
+\textbf{Fall A: Mindestens eine davon ist rot.} Sagen wir $ab$. Dann sind $va$, $vb$ und $ab$ alle rot --- ein rotes Dreieck $v, a, b$.
+
+\textbf{Fall B: Alle drei sind blau.} Dann bilden $a$, $b$, $c$ ein blaues Dreieck.
+
+In beiden Fällen gibt es ein einfarbiges Dreieck. \checkmark
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+\node[knotenb] (v) at (0,1.1) {$v$};
+\node[knotenb] (a) at (-1.1,-0.5) {$a$};
+\node[knotenb] (b) at (0,-1.0) {$b$};
+\node[knotenb] (c) at (1.1,-0.5) {$c$};
+\draw[kanted] (v)--(a); \draw[kanted] (v)--(b); \draw[kanted] (v)--(c);
+\draw[kante, mittel, line width=1.3pt, dashed] (a)--(b);
+\draw[kante, mittel, line width=1.3pt, dashed] (b)--(c);
+\draw[kante, mittel, line width=1.3pt, dashed] (a) to[bend right=35] (c);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.65) {rot durchgezogen, blau gestrichelt};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Teil 2 --- Fünf genügen nicht}
+Wir geben eine Färbung des $K_5$ ohne einfarbiges Dreieck an.
+
+Die fünf Ecken seien $0,1,2,3,4$. Wir färben
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{5.4cm}@{}}
+\toprule
+\textcolor{akzent}{rot} & die fünf Kanten des Außenkreises $01$, $12$, $23$, $34$, $40$\\
+\textcolor{mittel}{blau} & die fünf Kanten des Fünfsterns $02$, $13$, $24$, $30$, $41$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.35]
+\foreach \i in {0,...,4} \node[knotenb] (k\i) at (90+72*\i:1.2) {$\i$};
+\foreach \i/\j in {0/1,1/2,2/3,3/4,4/0} \draw[kanted] (k\i)--(k\j);
+\foreach \i/\j in {0/2,1/3,2/4,3/0,4/1} \draw[kante, mittel, line width=1.3pt, dashed] (k\i)--(k\j);
+\end{tikzpicture}
+\end{center}
+
+\kursiv{Kein rotes Dreieck:} Die roten Kanten bilden den Kreis $C_5$. Ein Dreieck bräuchte drei paarweise benachbarte Ecken; im $C_5$ hat aber jede Ecke nur zwei Nachbarn, und diese sind untereinander nicht benachbart (sonst gäbe es einen Dreikreis im $C_5$, den es nicht gibt).
+
+\kursiv{Kein blaues Dreieck:} Die blauen Kanten bilden ebenfalls einen $C_5$ --- nämlich $0,2,4,1,3,0$. Dasselbe Argument.
+
+\schritt{Schluss}
+$R(3,3) = \mathbf{6}$. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was Ramsey allgemein sagt}
+Die \Begriff{Ramsey-Zahl} $R(s,t)$ ist die kleinste Zahl $n$, so dass jede Rot-Blau-Färbung der Kanten des $K_n$ einen roten $K_s$ oder einen blauen $K_t$ enthält.
+
+\Person{Frank Ramsey} zeigte 1930, dass $R(s,t)$ überhaupt existiert --- dass also \kursiv{jede} genügend große Struktur unvermeidlich Ordnung enthält. Das ist der Inhalt des Gebiets: Vollständige Unordnung ist unmöglich.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.8cm}P{2.2cm}P{3.4cm}@{}}
+\toprule
+$R(s,t)$ & \textbf{Wert} & \textbf{Stand}\\
+\midrule
+$R(3,3)$ & $6$ & \textcolor{gruen}{Satz 13.4}\\
+$R(3,4)$ & $9$ & \textcolor{gruen}{bekannt}\\
+$R(4,4)$ & $18$ & \textcolor{gruen}{bekannt}\\
+$R(5,5)$ & $43$ bis $46$ & \textcolor{akzent}{\textbf{offen}}\\
+$R(6,6)$ & $102$ bis $160$ & \textcolor{akzent}{\textbf{offen}}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Erdős' bekanntes Bild dazu: Zwängen uns Außerirdische, $R(5,5)$ zu bestimmen, so sollten wir alle Rechner und Mathematiker der Erde darauf ansetzen --- wir hätten eine Chance. Verlangten sie $R(6,6)$, so wäre es besser, den Kampf aufzunehmen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.1 --- Mantel anwenden}
+Eine Klasse hat $30$ Schülerinnen. Je zwei sind entweder befreundet oder nicht. Es gibt keine drei, die paarweise befreundet sind. Wie viele Freundschaften kann es höchstens geben, und wie sieht eine solche Verteilung aus?
+
+\loesung
+\schritt{Schritt 1 --- Übersetzen}
+Ecken $=$ Schülerinnen, Kanten $=$ Freundschaften, $n = 30$. \enquote{Keine drei paarweise befreundet} heißt: dreiecksfrei.
+
+\schritt{Schritt 2 --- Die Schranke}
+Nach Satz 13.1
+\[ m \;\le\; \frac{n^2}{4} = \frac{900}{4} = 225 . \]
+
+\schritt{Schritt 3 --- Erreichbar?}
+$n = 30$ ist gerade. Der Graph $K_{15,15}$ ist dreiecksfrei und hat
+\[ 15 \cdot 15 = 225 \ \text{Kanten}. \]
+
+\schritt{Antwort}
+Höchstens $\mathbf{225}$ Freundschaften. Erreicht wird das genau dann, wenn sich die Klasse in zwei Gruppen zu je fünfzehn teilt und jede mit allen aus der anderen Gruppe befreundet ist, mit keiner aus der eigenen.
+
+\schritt{Probe an der Gradsumme}
+Jede Schülerin hätte dann $15$ Freundinnen. Gradsumme $30 \cdot 15 = 450 = 2 \cdot 225$. \checkmark
+
+\schritt{Nachbemerkung}
+Die Zahl ist bemerkenswert: Von den $\binom{30}{2} = 435$ möglichen Freundschaften darf gut die Hälfte bestehen, ohne dass ein Dreierkreis entsteht.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.2 --- Turán für $K_4$}
+Wie viele Kanten kann ein Graph auf $10$ Ecken höchstens haben, der keinen $K_4$ enthält?
+
+\loesung
+\schritt{Schritt 1 --- Die Parameter}
+Verboten ist $K_{r+1}$ mit $r+1 = 4$, also $r = 3$. Gesucht ist $t_3(10)$.
+
+\schritt{Schritt 2 --- Die Aufteilung}
+Zehn Ecken auf drei möglichst gleiche Teile: $4 + 3 + 3$.
+
+\schritt{Schritt 3 --- Die Kanten zählen}
+Verbunden wird zwischen verschiedenen Teilen. Wir zählen paarweise:
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{1.8cm}@{}}
+\toprule
+\textbf{Teilpaar} & \textbf{Rechnung} & \textbf{Kanten}\\
+\midrule
+$4$ und $3$ & $4 \cdot 3$ & $12$\\
+$4$ und $3$ & $4 \cdot 3$ & $12$\\
+$3$ und $3$ & $3 \cdot 3$ & $9$\\
+\midrule
+\textbf{Summe} & & $\mathbf{33}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 4 --- Gegenrechnung über die fehlenden Kanten}
+Insgesamt möglich: $\binom{10}{2} = 45$. Innerhalb der Teile fehlen
+\[ \binom{4}{2} + \binom{3}{2} + \binom{3}{2} = 6 + 3 + 3 = 12 . \]
+Also $45 - 12 = 33$. \checkmark
+
+\schritt{Schritt 5 --- Die Näherungsformel prüfen}
+\[ \Bigl(1-\frac13\Bigr)\frac{10^2}{2} = \frac23 \cdot 50 = 33{,}33\ldots \]
+Der genaue Wert $33$ liegt knapp darunter --- die Formel ist eine obere Näherung. \checkmark
+
+\schritt{Antwort}
+Höchstens $\mathbf{33}$ Kanten.
+
+\schritt{Kontrolle: Warum wäre $4+4+2$ schlechter?}
+\[ 4\cdot4 + 4\cdot2 + 4\cdot2 = 16 + 8 + 8 = 32 < 33 . \]
+Die gleichmäßige Aufteilung ist tatsächlich die beste --- das ist derselbe Grund wie bei Mantel.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.3 --- Eine untere Schranke für Ramsey}
+Zeigen Sie $R(4,4) > 17$, indem Sie die Existenz einer geeigneten Färbung des $K_{17}$ begründen. Zeigen Sie ferner die allgemeine Schranke $R(s,s) > 2^{s/2}$ für $s \ge 3$ mit einem Abzählargument.
+
+\loesung
+\schritt{Teil 1 --- Die konkrete Färbung für $n=17$}
+Wir nehmen als Ecken die Zahlen $0, 1, \ldots, 16$ und färben die Kante $\{i,j\}$
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.8cm}P{6.0cm}@{}}
+\toprule
+\textcolor{akzent}{rot} & falls $i-j$ modulo $17$ eine der Zahlen $\pm1, \pm2, \pm4, \pm8$ ist\\
+\textcolor{mittel}{blau} & sonst\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die roten Differenzen $\{1,2,4,8,9,13,15,16\}$ sind genau die \Begriff{quadratischen Reste} modulo $17$. Man rechnet nach:
+\[ 1^2 = 1,\quad 2^2 = 4,\quad 3^2 = 9,\quad 4^2 = 16,\quad 5^2 = 8,\quad 6^2 = 2,\quad 7^2 = 15,\quad 8^2 = 13 \]
+(alles modulo $17$). Da $17 \equiv 1 \pmod 4$, ist mit $d$ auch $-d$ ein Rest --- die Färbung ist wohldefiniert.
+
+Diese Färbung enthält weder einen roten noch einen blauen $K_4$. Der Nachweis erfordert das Durchgehen der Fälle und beruht darauf, dass die Struktur bei Multiplikation mit einem Rest erhalten bleibt; wir übernehmen ihn hier als bekannt --- er steht in Band 1, Kapitel~7 im Zusammenhang mit quadratischen Resten.
+
+Also $R(4,4) > 17$, und zusammen mit der bekannten oberen Schranke folgt $R(4,4) = 18$.
+
+\schritt{Teil 2 --- Die allgemeine untere Schranke}
+Wir zeigen: Für $s \ge 3$ und $n \le 2^{s/2}$ gibt es eine Färbung des $K_n$ ohne einfarbigen $K_s$.
+
+\schritt{Der Gedanke}
+Wir färben \kursiv{zufällig}: Jede Kante wird unabhängig mit Wahrscheinlichkeit $\tfrac12$ rot und sonst blau gefärbt. Dann zeigen wir, dass die erwartete Anzahl einfarbiger $K_s$ kleiner als $1$ ist --- also muss es eine Färbung ohne solche geben.
+
+\schritt{Schritt 1 --- Die Wahrscheinlichkeit für eine feste Eckenmenge}
+Sei $S$ eine feste $s$-elementige Eckenmenge. Sie enthält $\binom{s}{2}$ Kanten. Damit alle rot sind, müssen $\binom{s}{2}$ unabhängige Ereignisse eintreten:
+\[ \Pr[S \text{ ganz rot}] = \Bigl(\frac12\Bigr)^{\binom{s}{2}} = 2^{-\binom{s}{2}} . \]
+Ebenso für blau. Zusammen
+\[ \Pr[S \text{ einfarbig}] = 2 \cdot 2^{-\binom{s}{2}} = 2^{1-\binom{s}{2}} . \]
+
+\schritt{Schritt 2 --- Der Erwartungswert}
+Es gibt $\binom{n}{s}$ solche Mengen. Die erwartete Anzahl einfarbiger ist
+\[ X = \binom{n}{s} \cdot 2^{1-\binom{s}{2}} . \]
+
+\schritt{Schritt 3 --- Abschätzen}
+Wir benutzen $\binom{n}{s} \le \frac{n^s}{s!}$ und $n \le 2^{s/2}$:
+\[ X \;\le\; \frac{n^s}{s!}\, 2^{1-\binom{s}{2}} \;\le\; \frac{2^{s^2/2}}{s!} \cdot 2 \cdot 2^{-\frac{s(s-1)}{2}} = \frac{2}{s!}\cdot 2^{\frac{s^2}{2} - \frac{s^2-s}{2}} = \frac{2}{s!} \cdot 2^{s/2} . \]
+
+\schritt{Schritt 4 --- Für $s \ge 3$ ist das kleiner als $1$}
+Für $s = 3$: $\frac{2}{6}\cdot 2^{1{,}5} = \frac13 \cdot 2{,}83 \approx 0{,}94 < 1$. \checkmark
+
+Für größere $s$ wächst $s!$ deutlich schneller als $2^{s/2}$, der Ausdruck wird also noch kleiner.
+
+\schritt{Schritt 5 --- Der Schluss}
+Ist der Erwartungswert einer Anzahl kleiner als $1$, so muss es mindestens einen Ausgang geben, bei dem die Anzahl $0$ beträgt --- wäre sie stets $\ge 1$, so wäre auch der Mittelwert $\ge 1$.
+
+Es gibt also eine Färbung ohne einfarbigen $K_s$. Damit $R(s,s) > 2^{s/2}$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Dieser Beweis von Erdős (1947) ist der Ursprung der \Begriff{probabilistischen Methode}: Man beweist die Existenz eines Objekts, indem man zeigt, dass ein zufälliges Objekt mit positiver Wahrscheinlichkeit das Gewünschte leistet --- ohne je eines anzugeben. Bis heute kennt niemand ein Verfahren, das für großes $s$ explizit eine solche Färbung konstruiert.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Turán, im Arbeitslager}
+\Person{Pál Turán} (1910--1976) fand seinen Satz 1940 --- als ungarischer Jude in einem Zwangsarbeitslager, wohin er wegen der Judengesetze verschleppt worden war. Er arbeitete dort in einer Ziegelei.
+
+Turán schrieb später, die Mathematik habe ihn am Leben gehalten: Er habe im Kopf gearbeitet, weil Papier nicht verfügbar war, und Ergebnisse auf Zetteln notiert, wenn sich welche fanden. Der Satz erschien 1941 in einer ungarischen Zeitschrift.
+
+Eine Anekdote aus derselben Zeit: Beim Ziegeltransport auf Loren fiel ihm auf, dass die Weichen ungeschickt lagen und viele Umladungen nötig machten. Daraus entstand die Frage nach der kleinsten Kreuzungszahl des vollständig bipartiten Graphen --- das \kursiv{Ziegelfabrikproblem}, das bis heute offen ist (Kapitel~8).
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Turán überlebte. Er wurde nach dem Krieg Professor in Budapest und war zeitlebens mit Erdős befreundet; die beiden verfassten gemeinsam mehrere Arbeiten. Das Gebiet, das sein Satz begründete --- die extremale Graphentheorie ---, ist heute eines der aktivsten der Kombinatorik.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Was heute offen ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+\textbf{Frage} & \textbf{Stand} & \\
+\midrule
+Turán für Cliquen & \textcolor{gruen}{gelöst 1941} & \\
+Erdős--Stone, $\chi(H)\ge3$ & \textcolor{gruen}{gelöst 1946} & bis auf $o(n^2)$\\
+\textbf{Bipartite $H$} & \textcolor{akzent}{\textbf{offen}} & seit $80$ Jahren\\
+Turán für Hypergraphen & \textcolor{akzent}{\textbf{offen}} & schon für $K_4^{(3)}$\\
+$R(5,5)$ & \textcolor{akzent}{offen} & $43 \le R \le 46$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die vorletzte Zeile ist besonders hartnäckig: Für $3$-elementige Kanten --- also Hypergraphen --- kennt man nicht einmal die Antwort für die kleinste interessante Frage. Erdős setzte darauf einen Preis von $1000$ Dollar aus; er ist bis heute nicht ausgezahlt.
+
+\schritt{Ein Durchbruch in der Nachbarschaft}
+Bei der oberen Schranke für die diagonale Ramsey-Zahl geschah 2023 nach siebzig Jahren erstmals eine Verbesserung der Größenordnung: \Person{Marcelo Campos}, \Person{Simon Griffiths}, \Person{Robert Morris} und \Person{Julian Sahasrabudhe} zeigten
+\[ R(s,s) \;\le\; (4-\varepsilon)^s \]
+für ein festes $\varepsilon > 0$. Die Schranke $4^s$ stammte von Erdős und Szekeres aus dem Jahr 1935.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Abstand bleibt gewaltig: Die untere Schranke aus Aufgabe 13.3 liegt bei etwa $\sqrt{2}^{\,s}$, die obere nun knapp unter $4^s$. Wo dazwischen die Wahrheit liegt, weiß niemand --- und es ist eine der bekanntesten offenen Fragen der Kombinatorik.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 13.1} & Mantel: mehr als $n^2/4$ Kanten erzwingen ein Dreieck\\
+\textbf{Satz 13.3} & Turán: die allgemeine Schranke für $K_{r+1}$\\
+\textbf{Erdős--Stone} & Die Antwort hängt an $\chi(H)$ --- außer bei bipartiten $H$\\
+\textbf{Satz 13.4} & $R(3,3) = 6$, vollständig bewiesen\\
+\textbf{Probabilistisch} & Existenz ohne Konstruktion\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die probabilistische Methode aus Aufgabe 13.3 ist mehr als ein Trick --- sie ist der Zugang des nächsten Kapitels.}
+\end{minipage}
+\end{center}
+\end{merksatz}

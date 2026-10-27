@@ -1,0 +1,783 @@
+\chapter{Enzym- und Rezeptorkinetik}
+
+\section{Warum Sättigung}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall, eine Ebene tiefer}
+Kapitel~10 behandelte den Wirkstoff als Menge in einem Behälter. Jetzt fragen wir, was ihn abbaut --- und woran er wirkt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Beides sind \kursiv{Bindungsvorgänge}: Ein Enzym bindet den Wirkstoff und baut ihn ab; ein Rezeptor bindet ihn und löst eine Wirkung aus. Die Mathematik ist in beiden Fällen dieselbe.
+\end{minipage}
+\end{center}
+
+\schritt{Die entscheidende Einsicht}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es gibt nur endlich viele Enzym- und Rezeptormoleküle. Sind sie alle besetzt, kann mehr Substrat nichts mehr bewirken.}
+\end{minipage}
+\end{center}
+
+Daraus folgt eine Sättigungskurve --- und damit der Grund, warum das Modell aus Kapitel~1 bei hohen Konzentrationen bricht.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das Reaktionsschema}
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\node[font=\small, color=tief] (ES1) at (-2.4,0) {$E + S$};
+\node[font=\small, color=akzent] (ES) at (0,0) {$ES$};
+\node[font=\small, color=tief] (EP) at (2.6,0) {$E + P$};
+\draw[kanted, -{Stealth[length=5pt]}] (-1.75,0.12) -- (-0.45,0.12) node[midway, above, font=\scriptsize, color=grau] {$k_1$};
+\draw[kanted, -{Stealth[length=5pt]}] (-0.45,-0.12) -- (-1.75,-0.12) node[midway, below, font=\scriptsize, color=grau] {$k_{-1}$};
+\draw[kanted, -{Stealth[length=5pt]}] (0.45,0) -- (1.9,0) node[midway, above, font=\scriptsize, color=grau] {$k_2$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{3.0cm}P{3.6cm}@{}}
+\toprule
+$E$ & freies Enzym & bindet\\
+$S$ & Substrat & wird umgesetzt\\
+$ES$ & Komplex & Zwischenzustand\\
+$P$ & Erzeugnis & verlässt das Enzym\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Erhaltungsgröße}
+Die Gesamtmenge an Enzym bleibt fest:
+\[ [E] + [ES] = E_0 . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist dieselbe Art von Probe wie bei den Kammermodellen in Kapitel~7: Was nicht frei ist, ist gebunden. Wer sie nicht aufstellt, verliert die entscheidende Beziehung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Michaelis-Menten-Gleichung}
+
+\begin{merksatz}
+\boxtitel{Satz 11.1}
+Unter der Annahme, dass sich die Komplexmenge rasch einstellt und danach nahezu unverändert bleibt, gilt für die Umsatzgeschwindigkeit
+\[ v \;=\; \frac{V_{\max}\,[S]}{K_M + [S]} \]
+mit
+\[ V_{\max} = k_2\,E_0 \qquad\text{und}\qquad K_M = \frac{k_{-1}+k_2}{k_1} . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis}
+\schritt{Schritt 1 --- Die Gleichung für den Komplex}
+Der Komplex entsteht durch Bindung und zerfällt auf zwei Wegen:
+\[ \frac{\dd[ES]}{\dd t} = \underbrace{k_1[E][S]}_{\text{Bildung}} - \underbrace{k_{-1}[ES]}_{\text{Zerfall zurück}} - \underbrace{k_2[ES]}_{\text{Umsatz}} \]
+
+\schritt{Schritt 2 --- Die Annahme}
+Nach kurzer Anlaufzeit ändert sich $[ES]$ kaum noch:
+\[ \frac{\dd[ES]}{\dd t} \approx 0 \]
+
+Man nennt das die \Begriff{Quasi-Stationarität}.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Sie ist gerechtfertigt, wenn das Substrat weit im Überschuss vorliegt --- dann ändert es sich langsam, und der Komplex folgt ihm nahezu augenblicklich. Das ist derselbe Gedanke wie bei der Trennung schneller und langsamer Vorgänge in der Pharmakokinetik.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Auflösen}
+\[ k_1[E][S] = (k_{-1}+k_2)[ES] \]
+
+Mit $[E] = E_0 - [ES]$:
+\[ k_1\bigl(E_0 - [ES]\bigr)[S] = (k_{-1}+k_2)[ES] \]
+\[ k_1E_0[S] = (k_{-1}+k_2)[ES] + k_1[ES][S] \]
+\[ k_1E_0[S] = [ES]\bigl(k_{-1}+k_2+k_1[S]\bigr) \]
+
+Durch $k_1$ teilen:
+\[ E_0[S] = [ES]\left(\frac{k_{-1}+k_2}{k_1} + [S]\right) = [ES]\bigl(K_M + [S]\bigr) \]
+\[ [ES] = \frac{E_0\,[S]}{K_M+[S]} \]
+
+\schritt{Schritt 4 --- Die Geschwindigkeit}
+Das Erzeugnis entsteht mit der Rate
+\[ v = k_2[ES] = \frac{k_2E_0\,[S]}{K_M+[S]} = \frac{V_{\max}[S]}{K_M+[S]} . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was die beiden Parameter bedeuten}
+\schritt{$V_{\max}$ --- die Höchstgeschwindigkeit}
+Für $[S] \to \infty$ geht $\frac{[S]}{K_M+[S]} \to 1$, also $v \to V_{\max}$.
+
+Sie hängt von der Enzymmenge ab: $V_{\max} = k_2E_0$. Doppelt so viel Enzym, doppelte Höchstgeschwindigkeit.
+
+\schritt{$K_M$ --- die Halbsättigungskonzentration}
+Setzt man $[S] = K_M$:
+\[ v = \frac{V_{\max}K_M}{K_M+K_M} = \frac{V_{\max}}{2} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$K_M$ ist diejenige Substratkonzentration, bei der die halbe Höchstgeschwindigkeit erreicht wird.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+$[S]$ & $v/V_{\max}$ & \\
+\midrule
+$0{,}1\,K_M$ & $9{,}1\,\%$ & \\
+$0{,}5\,K_M$ & $33{,}3\,\%$ & \\
+$K_M$ & $\mathbf{50{,}0\,\%}$ & \\
+$2\,K_M$ & $66{,}7\,\%$ & \\
+$4\,K_M$ & $80{,}0\,\%$ & \\
+$10\,K_M$ & $90{,}9\,\%$ & \\
+$40\,K_M$ & $97{,}6\,\%$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Kurve nähert sich der Höchstgeschwindigkeit sehr langsam. Um von $90$ auf $98$ Prozent zu kommen, braucht man die vierfache Substratkonzentration. Deshalb lässt sich $V_{\max}$ aus Messwerten nur schlecht ablesen --- man erreicht es nie.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (7.0,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.4);
+\draw[grau!50, dashed] (0,3.0) -- (6.8,3.0);
+\node[font=\scriptsize, color=grau] at (-0.45,3.0) {$V_{\max}$};
+\draw[grau!50, dashed] (0,1.5) -- (1.1,1.5);
+\draw[grau!50, dashed] (1.1,0) -- (1.1,1.5);
+\node[font=\scriptsize, color=grau] at (-0.55,1.5) {$\frac{V_{\max}}{2}$};
+\node[font=\scriptsize, color=grau] at (1.1,-0.35) {$K_M$};
+\draw[tief, line width=1.3pt, smooth, samples=90, domain=0:6.8]
+  plot (\x, {3.0*\x/(1.1+\x)});
+\node[font=\scriptsize, color=grau] at (3.6,-0.75) {Substratkonzentration $[S]$};
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die zwei Bereiche}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{3.0cm}@{}}
+\toprule
+\textbf{Bereich} & \textbf{Näherung} & \textbf{Verhalten}\\
+\midrule
+$[S] \ll K_M$ & $v \approx \frac{V_{\max}}{K_M}[S]$ & \textcolor{gruen}{erster Ordnung}\\
+$[S] \gg K_M$ & $v \approx V_{\max}$ & \textcolor{akzent}{nullter Ordnung}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Im unteren Bereich ist die Gleichung aus Kapitel~1 richtig, im oberen nicht.} Das ist die Auflösung des Bruchfalls aus Kapitel~10.
+\end{minipage}
+\end{center}
+
+\schritt{Die Folge für den Wirkstoffabbau}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Niedriger Spiegel} & Halbwertszeit ist eine sinnvolle Größe; alles aus Kapitel~10 gilt.\\
+\textbf{Hoher Spiegel} & Der Abbau ist \kursiv{konstant}. Es gibt keine Halbwertszeit; der Spiegel fällt linear.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beim Alkohol liegt der übliche Bereich weit über $K_M$ --- daher der gleichmäßige Abbau von etwa $0{,}15$ Promille je Stunde. Bei Phenytoin liegt der therapeutische Bereich \kursiv{genau im Übergang}, und das macht diesen Wirkstoff so schwierig: Eine kleine Dosiserhöhung kann den Spiegel überproportional steigen lassen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Hemmung}
+
+\begin{merksatz}
+\boxtitel{Zwei Arten, ein Enzym zu bremsen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{3.0cm}@{}}
+\toprule
+& \textbf{Kompetitiv} & \textbf{Nichtkompetitiv}\\
+\midrule
+Bindungsort & derselbe wie Substrat & anderer Ort\\
+$V_{\max}$ & \textcolor{gruen}{unverändert} & \textcolor{akzent}{sinkt}\\
+$K_M$ & \textcolor{akzent}{steigt} & \textcolor{gruen}{unverändert}\\
+Überwindbar & \textcolor{gruen}{ja, durch mehr Substrat} & \textcolor{akzent}{nein}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Kompetitive Hemmung}
+\[ v = \frac{V_{\max}[S]}{K_M\left(1+\frac{[I]}{K_i}\right) + [S]} \]
+
+Der Hemmstoff wirkt so, als wäre $K_M$ um den Faktor $1+[I]/K_i$ größer.
+
+\schritt{Nichtkompetitive Hemmung}
+\[ v = \frac{\frac{V_{\max}}{1+[I]/K_i}\,[S]}{K_M + [S]} \]
+
+Hier sinkt $V_{\max}$, als hätte man Enzym entfernt.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Unterschied in Zahlen}
+$V_{\max}=100$, $K_M=25$, $K_i=10$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+$[I]$ & $K_{M,\text{eff}}$ & $v$ bei $[S]=25$ & $v$ bei $[S]=1000$\\
+\midrule
+$0$ & $25$ & $50{,}0$ & $97{,}6$\\
+$10$ & $50$ & $33{,}3$ & $95{,}2$\\
+$30$ & $100$ & $20{,}0$ & $90{,}9$\\
+$90$ & $250$ & $9{,}1$ & $80{,}0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei niedriger Substratkonzentration hemmt der Stoff auf ein Fünftel; bei hoher kaum noch.} Genau das meint \enquote{überwindbar}.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist klinisch folgenreich: Bei einer Vergiftung mit einem kompetitiven Hemmstoff kann man das natürliche Substrat im Überschuss zuführen und den Hemmstoff verdrängen. Bei Methanolvergiftung gibt man Ethanol, das um dasselbe Enzym konkurriert --- und verhindert so die Bildung des giftigen Abbauprodukts. Bei nichtkompetitiver Hemmung wirkt dieses Vorgehen nicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Linearisierung nach Lineweaver und Burk}
+Bildet man Kehrwerte, so wird aus der Sättigungskurve eine Gerade:
+\[ \frac{1}{v} = \frac{K_M}{V_{\max}}\cdot\frac{1}{[S]} + \frac{1}{V_{\max}} \]
+
+\schritt{Die Herleitung}
+\[ \frac{1}{v} = \frac{K_M+[S]}{V_{\max}[S]} = \frac{K_M}{V_{\max}[S]} + \frac{[S]}{V_{\max}[S]} \]
+
+Trägt man $1/v$ gegen $1/[S]$ auf, so ist der Achsenabschnitt $1/V_{\max}$ und die Steigung $K_M/V_{\max}$.
+
+\schritt{Warum man das heute nicht mehr tut}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Fehler\-verzerrung} & Kleine Messwerte von $v$ werden zu großen Werten von $1/v$ --- gerade die unsichersten Punkte bestimmen die Gerade.\\
+\textbf{Ungleiche Streuung} & Die Voraussetzung gleicher Streuung aus Band 17, Kapitel~10 ist verletzt.\\
+\textbf{Hebelwirkung} & Der Punkt bei kleinstem $[S]$ liegt am weitesten rechts und hat die größte Hebelwirkung.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man passt die Sättigungskurve heute unmittelbar an, mit nichtlinearer Regression. Die Darstellung nach Lineweaver und Burk ist trotzdem nützlich --- nicht zum Schätzen, sondern zum \kursiv{Erkennen}: Kompetitive und nichtkompetitive Hemmung erzeugen dort unterscheidbare Geradenbüschel.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\begin{scope}
+\draw[grau!60, line width=0.6pt] (-0.3,0) -- (3.6,0);
+\draw[grau!60, line width=0.6pt] (0,-0.3) -- (0,3.0);
+\draw[tief, line width=1.1pt] (0,0.6) -- (3.4,1.9);
+\draw[akzent, line width=1.1pt] (0,0.6) -- (3.4,2.8);
+\fill[gruen] (0,0.6) circle (2.2pt);
+\node[font=\scriptsize\itshape, color=grau] at (1.7,-0.75) {kompetitiv};
+\node[font=\scriptsize, color=grau] at (-0.5,0.6) {$\frac{1}{V_{\max}}$};
+\end{scope}
+\begin{scope}[xshift=5.4cm]
+\draw[grau!60, line width=0.6pt] (-0.3,0) -- (3.6,0);
+\draw[grau!60, line width=0.6pt] (0,-0.3) -- (0,3.0);
+\draw[tief, line width=1.1pt] (0,0.6) -- (3.4,1.9);
+\draw[akzent, line width=1.1pt] (0,1.2) -- (3.4,3.8);
+\node[font=\scriptsize\itshape, color=grau] at (1.7,-0.75) {nichtkompetitiv};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Links schneiden sich alle Geraden auf der senkrechten Achse --- $V_{\max}$ bleibt gleich. Rechts nicht.
+\end{warnung}
+
+\section{Kooperativität und die Hill-Gleichung}
+
+\begin{merksatz}
+\boxtitel{Wenn Bindungsstellen sich beeinflussen}
+Manche Moleküle haben mehrere Bindungsstellen, die einander begünstigen: Ist eine besetzt, binden die übrigen leichter.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Der Sättigungsanteil folgt dann der \Begriff{Hill-Gleichung}
+\[ \theta = \frac{[L]^{n}}{K^{n} + [L]^{n}} \]
+mit dem \Begriff{Hill-Koeffizienten} $n$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.8cm}P{3.2cm}@{}}
+\toprule
+$n$ & \textbf{Bedeutung} & \textbf{Kurvenform}\\
+\midrule
+$1$ & keine Kooperativität & Michaelis-Menten\\
+$>1$ & positiv kooperativ & \textcolor{akzent}{$S$-förmig}\\
+$<1$ & negativ kooperativ & flacher\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{$n$ ist \kursiv{keine} Zahl von Bindungsstellen, sondern ein Maß für die Stärke der Wechselwirkung. Hämoglobin hat vier Bindungsstellen und einen Hill-Koeffizienten von etwa $2{,}8$ --- die Kooperativität ist stark, aber nicht vollständig.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wozu Kooperativität gut ist --- am Hämoglobin}
+$K = P_{50} = 26$ mmHg, $n = 2{,}8$. Zum Vergleich dieselbe Halbsättigung mit $n=1$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+\textbf{Ort} & $p\mathrm{O}_2$ & $n = 2{,}8$ & $n = 1$\\
+\midrule
+Lunge & $100$ & $\mathbf{97{,}8\,\%}$ & $79{,}4\,\%$\\
+Gewebe, Ruhe & $40$ & $77{,}0\,\%$ & $60{,}6\,\%$\\
+Muskel, Arbeit & $20$ & $\mathbf{32{,}4\,\%}$ & $43{,}5\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Was abgegeben wird}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+& $n = 2{,}8$ & $n = 1$\\
+\midrule
+Lunge $\to$ Ruhe & $20{,}8\,\%$ & $18{,}8\,\%$\\
+Lunge $\to$ Arbeit & $\mathbf{65{,}3\,\%}$ & $35{,}9\,\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei starker Beanspruchung gibt die kooperative Bindung fast doppelt so viel Sauerstoff ab.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+Die $S$-Form bewirkt zweierlei zugleich:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Oben flach} & Bei hohem Angebot fast vollständige Beladung --- und unempfindlich gegen Schwankungen.\\
+\textbf{Mitte steil} & Im Gewebebereich führt ein kleiner Druckabfall zu großer Abgabe.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (6.6,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.4);
+\foreach \x/\lab in {0/0, 1.3/20, 2.6/40, 3.9/60, 5.2/80, 6.5/100}
+  \node[font=\scriptsize, color=grau] at (\x,-0.32) {\lab};
+\draw[grau!50, dashed] (0,3.0) -- (6.5,3.0);
+\draw[tief, line width=1.4pt] (0.000,0.000) -- (0.100,0.001) -- (0.200,0.008) -- (0.300,0.024) -- (0.400,0.052) -- (0.500,0.096) -- (0.600,0.157) -- (0.700,0.234) -- (0.800,0.329) -- (0.900,0.439) -- (1.000,0.561) -- (1.100,0.693) -- (1.200,0.831) -- (1.300,0.973) -- (1.400,1.114) -- (1.500,1.252) -- (1.600,1.385) -- (1.700,1.512) -- (1.800,1.632) -- (1.900,1.744) -- (2.000,1.847) -- (2.100,1.943) -- (2.200,2.030) -- (2.300,2.110) -- (2.400,2.183) -- (2.500,2.249) -- (2.600,2.309) -- (2.700,2.363) -- (2.800,2.413) -- (2.900,2.458) -- (3.000,2.499) -- (3.100,2.536) -- (3.200,2.570) -- (3.300,2.601) -- (3.400,2.629) -- (3.500,2.654) -- (3.600,2.678) -- (3.700,2.699) -- (3.800,2.719) -- (3.900,2.737) -- (4.000,2.753) -- (4.100,2.769) -- (4.200,2.783) -- (4.300,2.795) -- (4.400,2.807) -- (4.500,2.818) -- (4.600,2.829) -- (4.700,2.838) -- (4.800,2.847) -- (4.900,2.855) -- (5.000,2.863) -- (5.100,2.870) -- (5.200,2.876) -- (5.300,2.883) -- (5.400,2.888) -- (5.500,2.894) -- (5.600,2.899) -- (5.700,2.903) -- (5.800,2.908) -- (5.900,2.912) -- (6.000,2.916) -- (6.100,2.920) -- (6.200,2.923) -- (6.300,2.927) -- (6.400,2.930) -- (6.500,2.933);
+\draw[akzent, line width=1.2pt, dashed] (0.000,0.000) -- (0.100,0.168) -- (0.200,0.317) -- (0.300,0.452) -- (0.400,0.574) -- (0.500,0.685) -- (0.600,0.786) -- (0.700,0.879) -- (0.800,0.964) -- (0.900,1.042) -- (1.000,1.115) -- (1.100,1.183) -- (1.200,1.246) -- (1.300,1.304) -- (1.400,1.359) -- (1.500,1.411) -- (1.600,1.459) -- (1.700,1.504) -- (1.800,1.547) -- (1.900,1.588) -- (2.000,1.626) -- (2.100,1.662) -- (2.200,1.697) -- (2.300,1.729) -- (2.400,1.760) -- (2.500,1.790) -- (2.600,1.818) -- (2.700,1.845) -- (2.800,1.871) -- (2.900,1.895) -- (3.000,1.919) -- (3.100,1.942) -- (3.200,1.963) -- (3.300,1.984) -- (3.400,2.004) -- (3.500,2.023) -- (3.600,2.042) -- (3.700,2.059) -- (3.800,2.077) -- (3.900,2.093) -- (4.000,2.109) -- (4.100,2.124) -- (4.200,2.139) -- (4.300,2.154) -- (4.400,2.167) -- (4.500,2.181) -- (4.600,2.194) -- (4.700,2.207) -- (4.800,2.219) -- (4.900,2.231) -- (5.000,2.242) -- (5.100,2.253) -- (5.200,2.264) -- (5.300,2.275) -- (5.400,2.285) -- (5.500,2.295) -- (5.600,2.305) -- (5.700,2.314) -- (5.800,2.323) -- (5.900,2.332) -- (6.000,2.341) -- (6.100,2.349) -- (6.200,2.357) -- (6.300,2.365) -- (6.400,2.373) -- (6.500,2.381);
+\node[font=\scriptsize, color=tief, anchor=west] at (3.4,2.55) {$n=2{,}8$};
+\node[font=\scriptsize, color=akzent, anchor=west] at (4.2,1.9) {$n=1$};
+\node[font=\scriptsize, color=grau] at (3.3,-0.75) {$p\mathrm{O}_2$ in mmHg};
+\node[font=\scriptsize, color=grau, rotate=90] at (-0.45,1.7) {Sättigung};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Molekül ohne Kooperativität kann nur eines von beidem: entweder fest binden und schlecht abgeben, oder locker binden und schlecht beladen. Die $S$-Form löst diesen Widerspruch --- und sie ist deshalb in der Biologie überall dort zu finden, wo ein Schalter gebraucht wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wo die Hill-Gleichung sonst auftaucht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{5.6cm}@{}}
+\toprule
+\textbf{Dosis-Wirkung} & Die Wirkung eines Arzneimittels folgt derselben Form; $K$ heißt dort $\mathrm{EC}_{50}$.\\
+\textbf{Genregulation} & Mehrere Regulatormoleküle binden gemeinsam --- die Steilheit erzeugt Schaltverhalten.\\
+\textbf{Ionenkanäle} & Öffnungswahrscheinlichkeit in Abhängigkeit von Spannung oder Botenstoff.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Zeile ist der Grund, warum Dosis-Wirkungs-Kurven üblicherweise gegen den \kursiv{Logarithmus} der Dosis aufgetragen werden: In dieser Darstellung wird die Hill-Kurve punktsymmetrisch und im mittleren Bereich annähernd gerade --- was das Ablesen der $\mathrm{EC}_{50}$ erleichtert. Es ist dieselbe Überlegung wie bei der logistischen Kurve in Kapitel~2, deren Symmetrie in Aufgabe 2.3 bewiesen wurde.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wann die Quasi-Stationarität nicht gilt}
+Die Herleitung setzt voraus, dass $[ES]$ sich rasch einstellt und danach kaum ändert. Das verlangt
+\[ E_0 \ll [S] + K_M . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Enzym muss selten sein gegenüber dem Substrat.} In der Zelle trifft das oft \kursiv{nicht} zu: Manche Enzyme liegen in ähnlicher Menge vor wie ihre Substrate.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dann bindet das Enzym einen erheblichen Teil des Substrats, und die frei messbare Konzentration ist kleiner als die Gesamtmenge. Für solche Fälle gibt es erweiterte Formeln; die Michaelis-Menten-Gleichung liefert dort systematisch zu kleine Umsatzraten.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und drei weitere Einschränkungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{2.8cm}@{}}
+\toprule
+\textbf{Annahme} & \textbf{Verletzung} & \textbf{Folge}\\
+\midrule
+Kein Rückweg & $P$ kann zurückreagieren & gilt nur zu Beginn\\
+Ein Substrat & meist zwei oder mehr & eigene Formeln nötig\\
+Gut durchmischt & Zelle ist es nicht & örtliche Unterschiede\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Alle Messungen zur Bestimmung von $K_M$ und $V_{\max}$ werden als \Begriff{Anfangsgeschwindigkeit} durchgeführt --- in den ersten Augenblicken, bevor sich nennenswert Erzeugnis angesammelt hat.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist keine Feinheit, sondern die Voraussetzung dafür, dass die gemessene Größe überhaupt das ist, was die Gleichung beschreibt. Wer zu spät misst, erhält zu kleine Werte --- und die Abweichung wächst mit der Zeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+In der Zelle sind Enzyme oft in Komplexen zusammengefasst, und die Erzeugnisse werden unmittelbar weitergereicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dann gilt das Massenwirkungsgesetz aus Kapitel~4 nicht mehr --- dieselbe Einschränkung, die dort das Räuber-Beute-Modell betraf. Es ist bemerkenswert, wie oft die Durchmischungsannahme in diesem Band die schwächste Stelle ist: bei Populationen, bei Epidemien, im Behälter und nun in der Zelle.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- Parameter aus Messwerten}
+Für ein Enzym wurden gemessen:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{2.2cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+$[S]$ (µmol/l) & $10$ & $25$ & $50$ & $200$\\
+$v$ (µmol/min) & $28{,}6$ & $50{,}0$ & $66{,}7$ & $88{,}9$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Bestimmen Sie $K_M$ und $V_{\max}$.
+
+\loesung
+\schritt{Schritt 1 --- Zwei Gleichungen aufstellen}
+Aus zwei Messpunkten lassen sich beide Parameter bestimmen. Wir nehmen $[S]=10$ und $[S]=200$:
+\[ 28{,}6 = \frac{V_{\max}\cdot 10}{K_M+10}, \qquad 88{,}9 = \frac{V_{\max}\cdot 200}{K_M+200} \]
+
+\schritt{Schritt 2 --- Umformen}
+\[ 28{,}6\,(K_M+10) = 10\,V_{\max} \quad\Longrightarrow\quad V_{\max} = 2{,}86\,K_M + 28{,}6 \]
+\[ 88{,}9\,(K_M+200) = 200\,V_{\max} \quad\Longrightarrow\quad V_{\max} = 0{,}4445\,K_M + 88{,}9 \]
+
+\schritt{Schritt 3 --- Gleichsetzen}
+\[ 2{,}86\,K_M + 28{,}6 = 0{,}4445\,K_M + 88{,}9 \]
+\[ 2{,}4155\,K_M = 60{,}3 \]
+\[ K_M = 24{,}96 \approx 25 \ \text{µmol/l} \]
+
+\schritt{Schritt 4 --- $V_{\max}$}
+\[ V_{\max} = 2{,}86 \cdot 25 + 28{,}6 = 71{,}5 + 28{,}6 = 100{,}1 \approx 100 \ \text{µmol/min} \]
+
+\schritt{Schritt 5 --- Die Proben an den übrigen Punkten}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.8cm}P{2.2cm}P{2.2cm}P{1.4cm}@{}}
+\toprule
+$[S]$ & \textbf{gemessen} & \textbf{berechnet} & \\
+\midrule
+$10$ & $28{,}6$ & $\frac{100\cdot10}{35} = 28{,}6$ & \checkmark\\
+$25$ & $50{,}0$ & $\frac{100\cdot25}{50} = 50{,}0$ & \checkmark\\
+$50$ & $66{,}7$ & $\frac{100\cdot50}{75} = 66{,}7$ & \checkmark\\
+$200$ & $88{,}9$ & $\frac{100\cdot200}{225} = 88{,}9$ & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 6 --- Die Kontrolle über $K_M$}
+Bei $[S] = 25 = K_M$ muss $v = V_{\max}/2 = 50$ sein. Gemessen: $50{,}0$. \checkmark
+
+\schritt{Schritt 7 --- Eine Warnung zur Methode}
+Aus zwei Punkten zwei Parameter zu bestimmen funktioniert nur bei fehlerfreien Werten. Bei echten Messdaten passt man alle Punkte gemeinsam an --- mit nichtlinearer Regression, nicht über Kehrwerte.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Und man achtet darauf, dass die Messpunkte den Bereich um $K_M$ abdecken. Liegen alle Werte weit darunter, so sieht man nur den linearen Anfangsbereich, und $V_{\max}$ ist praktisch nicht bestimmbar --- dieselbe Schwierigkeit wie bei der Kapazitätsgrenze in Kapitel~2.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- Eine Hemmung einordnen}
+In Gegenwart eines Hemmstoffs werden gemessen: bei $[S]=25$ ein Wert von $v=25{,}0$, bei $[S]=1000$ ein Wert von $v=97{,}6$. Ohne Hemmstoff galt $V_{\max}=100$, $K_M=25$. Welche Art der Hemmung liegt vor?
+
+\loesung
+\schritt{Schritt 1 --- Der hohe Wert entscheidet}
+Bei $[S]=1000$ ohne Hemmstoff:
+\[ v = \frac{100 \cdot 1000}{25+1000} = 97{,}6 \]
+Gemessen mit Hemmstoff: ebenfalls $97{,}6$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$V_{\max}$ ist unverändert} --- bei hohem Substratüberschuss ist die Hemmung vollständig überwunden.
+\end{minipage}
+\end{center}
+
+Das spricht für \textbf{kompetitive Hemmung.}
+
+\schritt{Schritt 2 --- Den Faktor bestimmen}
+Bei $[S]=25$:
+\[ 25{,}0 = \frac{100 \cdot 25}{K_{M,\text{eff}}+25} \]
+\[ K_{M,\text{eff}}+25 = \frac{2500}{25} = 100 \quad\Longrightarrow\quad K_{M,\text{eff}} = 75 \]
+
+\schritt{Schritt 3 --- Der Hemmfaktor}
+\[ \frac{K_{M,\text{eff}}}{K_M} = \frac{75}{25} = 3{,}0 = 1 + \frac{[I]}{K_i} \]
+\[ \frac{[I]}{K_i} = 2{,}0 \]
+
+Die Hemmstoffkonzentration beträgt also das Doppelte der Hemmkonstante.
+
+\schritt{Schritt 4 --- Die Probe bei $[S]=1000$}
+\[ v = \frac{100 \cdot 1000}{75+1000} = \frac{100\,000}{1075} = 93{,}0 \]
+
+Hmm --- gemessen wurde $97{,}6$, berechnet $93{,}0$.
+
+\schritt{Schritt 5 --- Der Widerspruch aufgelöst}
+Die Abweichung zeigt, dass die Annahme reiner kompetitiver Hemmung nicht ganz trifft. Prüfen wir die Alternative:
+
+\kursiv{Nichtkompetitiv} mit unverändertem $K_M$: Bei $[S]=25$ wäre
+\[ 25{,}0 = \frac{V_{\max,\text{eff}}\cdot25}{50} \quad\Longrightarrow\quad V_{\max,\text{eff}} = 50 \]
+Dann wäre bei $[S]=1000$:
+\[ v = \frac{50\cdot1000}{1025} = 48{,}8 \]
+--- weit unter dem gemessenen Wert.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Annahme} & \textbf{Vorhersage} & \textbf{gemessen $97{,}6$}\\
+\midrule
+kompetitiv & $93{,}0$ & \textcolor{gruen}{nahe}\\
+nichtkompetitiv & $48{,}8$ & \textcolor{akzent}{weit daneben}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Es ist kompetitive Hemmung}, mit einer kleinen Messabweichung im hohen Bereich.
+
+\schritt{Schritt 6 --- Die Lehre}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Unterscheidung der Hemmarten gelingt nur, wenn man bei \kursiv{hoher} Substratkonzentration misst. Zwei Messpunkte im mittleren Bereich lassen beide Deutungen zu. Das ist eine allgemeine Regel für die Versuchsplanung: Man misst dort, wo sich die Vorhersagen der konkurrierenden Modelle am stärksten unterscheiden.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Die Steilheit einer Hill-Kurve}
+Zeigen Sie, dass bei der Hill-Gleichung das Verhältnis der Konzentrationen für $90\,\%$ und $10\,\%$ Sättigung
+\[ \frac{[L]_{90}}{[L]_{10}} = 81^{1/n} \]
+beträgt, und werten Sie es für $n=1$, $n=2{,}8$ und $n=8$ aus.
+
+\loesung
+\schritt{Schritt 1 --- Die Gleichung nach $[L]$ auflösen}
+\[ \theta = \frac{[L]^n}{K^n+[L]^n} \]
+\[ \theta\,(K^n+[L]^n) = [L]^n \]
+\[ \theta\,K^n = [L]^n(1-\theta) \]
+\[ [L]^n = K^n\,\frac{\theta}{1-\theta} \]
+\[ [L] = K\left(\frac{\theta}{1-\theta}\right)^{1/n} \]
+
+\schritt{Schritt 2 --- Die beiden Werte}
+\[ [L]_{90} = K\left(\frac{0{,}9}{0{,}1}\right)^{1/n} = K\cdot 9^{1/n} \]
+\[ [L]_{10} = K\left(\frac{0{,}1}{0{,}9}\right)^{1/n} = K\cdot 9^{-1/n} \]
+
+\schritt{Schritt 3 --- Das Verhältnis}
+\[ \frac{[L]_{90}}{[L]_{10}} = \frac{9^{1/n}}{9^{-1/n}} = 9^{2/n} = \left(9^2\right)^{1/n} = 81^{1/n} . \qquad \blacksquare \]
+
+\schritt{Schritt 4 --- Die Werte}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+$n$ & $81^{1/n}$ & \\
+\midrule
+$1$ & $81{,}0$ & \textcolor{akzent}{sehr flach}\\
+$2{,}8$ & $4{,}94$ & Hämoglobin\\
+$4$ & $3{,}00$ & \\
+$8$ & $1{,}73$ & \textcolor{gruen}{fast ein Schalter}\\
+$\infty$ & $1{,}00$ & idealer Schalter\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Rechnung für $n=2{,}8$:} $81^{1/2{,}8} = e^{\ln81/2{,}8} = e^{4{,}394/2{,}8} = e^{1{,}569} = 4{,}80$.
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ohne Kooperativität braucht man die $81$-fache Konzentration, um von zehn auf neunzig Prozent zu kommen.} Bei $n=8$ genügt weniger als das Doppelte.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Was das für Arzneimittel bedeutet}
+Eine Dosis-Wirkungs-Kurve mit $n=1$ ist flach: Zwischen kaum wirksam und fast voll wirksam liegen fast zwei Zehnerpotenzen.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{3.0cm}P{2.6cm}@{}}
+\toprule
+$n$ & \textbf{Dosisspanne} & \textbf{Steuerbarkeit}\\
+\midrule
+$1$ & Faktor $81$ & \textcolor{gruen}{gut steuerbar}\\
+$4$ & Faktor $3$ & \\
+$8$ & Faktor $1{,}7$ & \textcolor{akzent}{schwer dosierbar}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hier kehrt sich die Bewertung um: Was beim Hämoglobin ein Vorteil ist --- der scharfe Umschlag ---, ist beim Arzneimittel ein Nachteil. Eine steile Dosis-Wirkungs-Kurve bedeutet, dass zwischen unwirksam und überdosiert wenig Raum liegt. Bei Wirkstoffen mit hohem Hill-Koeffizienten ist die Dosisfindung entsprechend heikel.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Arbeit von 1913 und ihre Autorin}
+\Person{Leonor Michaelis} (1875--1949), Arzt und Biochemiker in Berlin, und \Person{Maud Menten} (1879--1960), kanadische Ärztin, veröffentlichten 1913 die Arbeit \kursiv{Die Kinetik der Invertinwirkung} --- auf Deutsch, in der \kursiv{Biochemischen Zeitschrift}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Maud Menten gehörte zu den ersten Frauen in Kanada, die Medizin studieren durften. Da Frauen dort keine Forschung betreiben durften, ging sie nach Berlin. Sie promovierte später in Chicago, arbeitete über vierzig Jahre als Pathologin in Pittsburgh und wurde erst 1949 --- im Alter von siebzig Jahren --- zur ordentlichen Professorin ernannt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Korrektur von 1925}
+Michaelis und Menten nahmen an, dass sich zwischen $E$, $S$ und $ES$ ein \kursiv{Gleichgewicht} einstellt --- das gilt nur, wenn $k_2 \ll k_{-1}$.
+
+\Person{George Briggs} und \Person{John Haldane} ersetzten das 1925 durch die Quasi-Stationarität, die in Satz 11.1 verwendet wurde. Dadurch wurde aus der Dissoziationskonstante $k_{-1}/k_1$ die heutige Größe
+\[ K_M = \frac{k_{-1}+k_2}{k_1} . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Form der Gleichung blieb unverändert --- nur die Deutung von $K_M$ änderte sich. Deshalb ist $K_M$ \kursiv{keine} Bindungsstärke, auch wenn es oft so gelesen wird. Es wird nur dann zur Bindungskonstante, wenn der Umsatz langsam gegenüber dem Rückzerfall ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Hill-Gleichung}
+\Person{Archibald Hill} veröffentlichte seine Gleichung 1910 --- als Student, in einer halbseitigen Mitteilung, zur Beschreibung der Sauerstoffbindung des Hämoglobins.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er hielt $n$ zunächst für die Zahl der gleichzeitig bindenden Moleküle und war irritiert, dass sich keine ganze Zahl ergab. Die richtige Deutung --- als Maß für die Wechselwirkung --- kam erst später. Hill erhielt 1922 den Nobelpreis für ganz andere Arbeiten, über die Wärmeentwicklung im Muskel.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Enzymkinetik heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Einzelmolekül\-messungen} & Man beobachtet einzelne Enzymmoleküle und findet, dass ihre Umsatzraten über die Zeit schwanken --- ein Molekül hat ein \enquote{Gedächtnis}.\\
+\textbf{Vollständige Zellmodelle} & Alle Stoffwechselwege einer Zelle als Gleichungssystem; Hunderte von Parametern, die meisten geschätzt.\\
+\textbf{Enzymentwurf} & Rechnergestützter Entwurf neuer Enzyme mit gewünschtem $K_M$ und $V_{\max}$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Die klassische Kinetik beschreibt den Mittelwert über Milliarden von Molekülen. Einzelmolekülmessungen zeigten ab etwa 1998, dass die Mittelung etwas verdeckt: Ein Enzymmolekül wechselt zwischen Zuständen verschiedener Aktivität und bleibt in jedem für Sekunden bis Minuten.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert ist, dass die gemittelte Kurve trotzdem der Michaelis-Menten-Form folgt. Die Gleichung bleibt richtig; ihre Herleitung war es aus dem falschen Grund. Das ist ein wiederkehrendes Muster in diesem Band: Ein Modell kann zutreffen, obwohl sein Mechanismus anders ist als angenommen.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Modelle des gesamten Zellstoffwechsels umfassen heute Tausende von Reaktionen. Die Schwierigkeit liegt nicht im Aufstellen, sondern im Bestimmen der Parameter.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die dritte Warnung aus dem Vorwort in ihrer schärfsten Form: Ein Modell mit tausend Gleichungen und achthundert geschätzten Parametern lässt sich an fast jede Beobachtung anpassen --- und sagt deshalb wenig vorher. Der Gegenentwurf sind Verfahren, die ohne kinetische Parameter auskommen und nur die Stoffbilanzen nutzen; sie sagen weniger, aber das Gesagte ist belastbar.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 11.1} & Michaelis-Menten über Quasi-Stationarität\\
+\textbf{$K_M$} & Halbsättigung --- keine Bindungsstärke\\
+\textbf{Zwei Bereiche} & erster Ordnung unten, nullter oben\\
+\textbf{Hemmung} & kompetitiv überwindbar, nichtkompetitiv nicht\\
+\textbf{Hill} & Steilheit $81^{1/n}$; Kooperativität als Schalter\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel bauen wir aus Ionenkanälen, die genau solchen Kurven folgen, ein System, das von selbst Erregungen erzeugt --- und begegnen dabei der Hopf-Bifurkation aus Kapitel~6 wieder.}
+\end{minipage}
+\end{center}
+\end{merksatz}

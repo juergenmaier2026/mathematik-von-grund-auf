@@ -1,0 +1,633 @@
+\part{Zeichnen und Färben}
+
+\chapter{Planare Graphen}
+
+\section{Drei Häuser und drei Brunnen}
+
+\begin{merksatz}
+\boxtitel{Ein Rätsel aus dem 19. Jahrhundert}
+Drei Häuser sollen mit drei Versorgungswerken verbunden werden --- Wasser, Gas, Strom. Jedes Haus braucht eine Leitung zu jedem Werk, also neun Leitungen. Die Leitungen liegen alle in derselben Ebene und dürfen sich nicht kreuzen.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+\foreach \i in {0,1,2} {
+  \node[knotenb] (h\i) at (-1.2+1.2*\i,0.9) {};
+  \node[knotenr] (w\i) at (-1.2+1.2*\i,-0.9) {};
+}
+\foreach \i in {0,1,2} \foreach \j in {0,1,2} \draw[kante, grau!45] (h\i) -- (w\j);
+\node[font=\scriptsize\itshape, color=grau] at (0,1.35) {Häuser};
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.35) {Werke};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Die Frage:} Geht das?
+\end{merksatz}
+
+Wer es probiert, kommt regelmäßig bis zur achten Leitung und scheitert an der neunten. Das Rätsel wurde jahrzehntelang in Zeitschriften abgedruckt, ohne dass jemand die Auflösung gab.
+
+Der Graph ist $K_{3,3}$. Am Ende dieses Kapitels werden wir wissen: Es geht nicht --- und zwar aus einem Grund, der sich in vier Zeilen hinschreiben lässt, sobald man die Eulersche Polyederformel hat.
+
+\section{Ebene Zeichnungen}
+
+\begin{definition}
+\boxtitelm{Definition 8.1 --- planar, ebene Zeichnung}
+Eine \Begriff{ebene Zeichnung} eines Graphen $G$ ordnet
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item jeder Ecke einen Punkt der Ebene zu, verschiedenen Ecken verschiedene Punkte;
+\item jeder Kante $\{u,v\}$ eine überschneidungsfreie Kurve, die den Punkt von $u$ mit dem von $v$ verbindet und keinen weiteren Eckenpunkt enthält,
+\end{itemize}
+so dass sich zwei Kanten\-kurven höchstens in gemeinsamen Endpunkten treffen.
+
+$G$ heißt \Begriff{planar}, wenn er eine ebene Zeichnung besitzt. Ein Graph zusammen mit einer festen ebenen Zeichnung heißt \Begriff{ebener Graph}.
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Planar ist eine Eigenschaft des Graphen, nicht der Zeichnung}
+Ein Graph ist planar, sobald \kursiv{mindestens eine} kreuzungsfreie Zeichnung existiert. Dass eine bestimmte Zeichnung Kreuzungen hat, sagt gar nichts.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\begin{scope}
+\node[knoten] (a1) at (-0.9,0.9) {};
+\node[knoten] (a2) at (0.9,0.9) {};
+\node[knoten] (a3) at (0.9,-0.9) {};
+\node[knoten] (a4) at (-0.9,-0.9) {};
+\draw[kante] (a1)--(a2);\draw[kante] (a2)--(a3);\draw[kante] (a3)--(a4);\draw[kante] (a4)--(a1);
+\draw[kante] (a1)--(a3);\draw[kante] (a2)--(a4);
+\node[font=\scriptsize\itshape, color=akzent] at (0,-1.5) {sieht nach Kreuzung aus};
+\end{scope}
+\begin{scope}[xshift=5.0cm]
+\node[knoten] (b1) at (-0.9,0.9) {};
+\node[knoten] (b2) at (0.9,0.9) {};
+\node[knoten] (b3) at (0.9,-0.9) {};
+\node[knoten] (b4) at (0,0.0) {};
+\draw[kante] (b1)--(b2);\draw[kante] (b2)--(b3);
+\draw[kante] (b1)--(b4);\draw[kante] (b2)--(b4);\draw[kante] (b3)--(b4);
+\draw[kante] (b1) to[bend right=60] (b3);
+\node[font=\scriptsize\itshape, color=gruen] at (0,-1.5) {derselbe $K_4$, kreuzungsfrei};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Der $K_4$ ist planar. Man muss nur eine Ecke ins Innere legen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Deshalb ist der Nachweis der \kursiv{Nicht}-Planarität die schwierige Richtung: Man muss zeigen, dass \kursiv{keine} Zeichnung funktioniert --- und davon gibt es unendlich viele. Genau dafür brauchen wir die Polyederformel.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{definition}
+\boxtitelm{Definition 8.2 --- Gebiete}
+Sei eine ebene Zeichnung von $G$ gegeben. Entfernt man alle Eckenpunkte und Kantenkurven aus der Ebene, so zerfällt der Rest in zusammenhängende Stücke. Diese heißen die \Begriff{Gebiete} (oder \Begriff{Flächen}) der Zeichnung. Ihre Anzahl bezeichnen wir mit $f$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Das äußere Gebiet zählt mit}
+Genau ein Gebiet ist unbeschränkt --- das \Begriff{äußere Gebiet}, das sich ins Unendliche erstreckt. Es wird mitgezählt.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+\node[knoten] (a) at (-1.0,0.8) {};
+\node[knoten] (b) at (1.0,0.8) {};
+\node[knoten] (c) at (1.0,-0.8) {};
+\node[knoten] (d) at (-1.0,-0.8) {};
+\node[knoten] (e) at (0,0) {};
+\draw[kante] (a)--(b);\draw[kante] (b)--(c);\draw[kante] (c)--(d);\draw[kante] (d)--(a);
+\draw[kante] (a)--(e);\draw[kante] (c)--(e);
+\node[font=\scriptsize, color=mittel] at (-0.35,0.35) {$1$};
+\node[font=\scriptsize, color=mittel] at (0.35,-0.35) {$2$};
+\node[font=\scriptsize, color=mittel] at (1.7,1.1) {$3$};
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {$n=5$, $m=6$, $f=3$};
+\end{tikzpicture}
+\end{center}
+
+Probe: $5 - 6 + 3 = 2$.
+\end{merksatz}
+
+\section{Die Eulersche Polyederformel}
+
+\begin{merksatz}
+\boxtitel{Satz 8.3 (Euler 1750)}
+Für jede ebene Zeichnung eines \kursiv{zusammenhängenden} Graphen mit $n$ Ecken, $m$ Kanten und $f$ Gebieten gilt
+\[ n \;-\; m \;+\; f \;=\; 2 . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis durch Induktion über die Kantenzahl}
+\schritt{Induktionsanfang --- der Graph ist ein Baum}
+Der Fall mit den wenigsten Kanten bei gegebenem $n$ ist der Baum: $m = n-1$ nach Satz 4.2.
+
+Ein Baum hat genau ein Gebiet, nämlich das äußere. Warum? Ein zusätzliches Gebiet entstünde nur, wenn eine geschlossene Kurve die Ebene zerteilt --- und dafür bräuchte man einen Kreis, den ein Baum nicht hat.
+
+Also
+\[ n - m + f = n - (n-1) + 1 = 2 . \quad \checkmark \]
+
+\schritt{Induktionsschritt --- ein Graph mit einem Kreis}
+Sei $G$ zusammenhängend und nicht kreisfrei, und sei die Formel für alle zusammenhängenden ebenen Graphen mit weniger Kanten bewiesen.
+
+Sei $e$ eine Kante auf einem Kreis $C$ von $G$.
+
+\schritt{Was das Entfernen von $e$ bewirkt --- die Ecken}
+Nichts. $n$ bleibt gleich.
+
+\schritt{Was es bewirkt --- die Kanten}
+Eine weniger: $m-1$.
+
+\schritt{Was es bewirkt --- der Zusammenhang}
+Nach Satz 2.14 ist $e$ keine Brücke, denn $e$ liegt auf einem Kreis. Also bleibt $G - e$ zusammenhängend.
+
+\schritt{Was es bewirkt --- die Gebiete}
+Hier steckt der eigentliche Inhalt. Die Kante $e$ liegt auf dem Kreis $C$. Eine geschlossene, überschneidungsfreie Kurve teilt die Ebene in ein Inneres und ein Äußeres --- das ist der \Begriff{Jordansche Kurvensatz}.
+
+Daraus folgt: Die beiden Seiten von $e$ gehören zu \kursiv{verschiedenen} Gebieten. Denn $e$ ist ein Stück der geschlossenen Kurve $C$; auf der einen Seite liegt Inneres, auf der anderen Äußeres von $C$, und man kann nicht von der einen zur anderen gelangen, ohne $C$ zu überqueren.
+
+Entfernt man $e$, so verschmelzen genau diese beiden Gebiete zu einem. Alle übrigen bleiben unberührt. Also $f - 1$.
+
+\schritt{Zusammenrechnen}
+Nach Induktionsannahme gilt für $G-e$:
+\[ n - (m-1) + (f-1) = 2 . \]
+Ausmultiplizieren:
+\[ n - m + 1 + f - 1 = n - m + f = 2 . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was hier ehrlicherweise vorausgesetzt wurde}
+Der Beweis benutzt den Jordanschen Kurvensatz: \kursiv{Jede geschlossene, überschneidungsfreie Kurve in der Ebene teilt diese in genau zwei Gebiete.}
+
+Diese Aussage klingt wie eine Selbstverständlichkeit und ist keine. Ihr Beweis ist erheblich schwieriger als alles in diesem Band; \Person{Camille Jordan} gab 1887 einen, der als lückenhaft galt, und ein vollständiger Beweis stammt von \Person{Oswald Veblen} (1905).
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach der Regel dieses Werkes müsste ich ihn führen. Ich tue es nicht --- er gehört in die Topologie und würde den Band sprengen; Band 8 der Reihe behandelt ihn. Was ich stattdessen tue, ist ihn zu \kursiv{benennen}: Sie wissen jetzt, an welcher Stelle dieses Kapitel auf fremdem Boden steht. Ein verschwiegener Schritt wäre schlimmer als ein ausgewiesener.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Die Formel an Beispielen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{2.6cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.8cm}@{}}
+\toprule
+\textbf{Graph} & $n$ & $m$ & $f$ & $n-m+f$\\
+\midrule
+Dreieck $C_3$ & $3$ & $3$ & $2$ & $2$\\
+$K_4$ & $4$ & $6$ & $4$ & $2$\\
+Würfel $Q_3$ & $8$ & $12$ & $6$ & $2$\\
+Weg $P_5$ & $5$ & $4$ & $1$ & $2$\\
+Oktaeder & $6$ & $12$ & $8$ & $2$\\
+Dodekaeder & $20$ & $30$ & $12$ & $2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Zeilen $3$, $5$ und $6$ betreffen Körper, nicht Zeichnungen. Der Zusammenhang: Die Oberfläche eines konvexen Körpers lässt sich auf die Ebene ausbreiten --- man denke an einen Drahtkäfig, den man an einer Fläche aufschneidet und flach drückt. Diese Fläche wird zum äußeren Gebiet. Deshalb heißt die Formel \enquote{Polyederformel}, obwohl sie hier über Zeichnungen spricht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie viele Kanten passen in die Ebene?}
+
+\begin{merksatz}
+\boxtitel{Satz 8.4 --- Die Kantenschranke}
+Für jeden planaren Graphen mit $n \ge 3$ Ecken gilt
+\[ m \;\le\; 3n - 6 . \]
+Ist $G$ zusätzlich dreiecksfrei, so gilt sogar
+\[ m \;\le\; 2n - 4 . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis der ersten Ungleichung}
+\schritt{Schritt 0 --- Auf den zusammenhängenden Fall zurückführen}
+Ist $G$ unzusammenhängend, so kann man Kanten hinzufügen, bis er zusammenhängend ist, ohne die Planarität zu verlieren (man verbindet zwei Komponenten durch eine Kante durch das äußere Gebiet). Die Kantenzahl wächst dabei; gilt die Schranke für den vollen Graphen, so erst recht für den ursprünglichen. Wir dürfen also $G$ als zusammenhängend annehmen.
+
+Ferner dürfen wir $m \ge 2$ annehmen, sonst ist die Behauptung für $n \ge 3$ trivial.
+
+\schritt{Schritt 1 --- Jedes Gebiet zählen}
+Wir zählen Paare $(g, e)$ aus einem Gebiet $g$ und einer Kante $e$, die an $g$ angrenzt. Nennen wir die Anzahl $Z$ --- wieder eine Doppelzählung.
+
+\schritt{Schritt 2 --- Zählung nach Kanten}
+Jede Kante grenzt an höchstens zwei Gebiete: an die eine und an die andere Seite. (Bei einer Brücke ist es auf beiden Seiten dasselbe Gebiet; dann grenzt sie nur an eines, zählt aber wegen der zwei Seiten doppelt --- wir zählen Seiten, und davon hat jede Kante genau zwei.)
+\[ Z = 2m . \]
+
+\schritt{Schritt 3 --- Zählung nach Gebieten}
+Behauptung: Jedes Gebiet wird von mindestens $3$ Kantenseiten begrenzt.
+
+Warum? Der Rand eines Gebiets ist ein geschlossener Kantenzug. Ein solcher hat Länge $\ge 3$, denn:
+\begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+\item Länge $1$ bräuchte eine Schlinge --- gibt es nicht;
+\item Länge $2$ bräuchte zwei parallele Kanten --- gibt es nicht.
+\end{itemize}
+Bei einer Brücke wird sie beim Umrunden zweimal gezählt, was zulässig ist, weil wir Seiten zählen. Also
+\[ Z \;\ge\; 3f . \]
+
+\schritt{Schritt 4 --- Verbinden}
+\[ 2m = Z \ge 3f \quad\Longrightarrow\quad f \le \frac{2m}{3} . \]
+
+\schritt{Schritt 5 --- In die Polyederformel einsetzen}
+\[ 2 = n - m + f \;\le\; n - m + \frac{2m}{3} = n - \frac{m}{3} . \]
+Umstellen:
+\[ \frac{m}{3} \le n - 2 \quad\Longrightarrow\quad m \le 3n - 6 . \qquad \blacksquare \]
+
+\schritt{Die zweite Ungleichung --- was sich ändert}
+Ist $G$ dreiecksfrei, so hat jeder Gebietsrand Länge $\ge 4$: Länge $3$ wäre ein Dreieck. Also $Z \ge 4f$, somit $f \le m/2$, und
+\[ 2 \le n - m + \frac{m}{2} = n - \frac{m}{2} \quad\Longrightarrow\quad m \le 2n - 4 . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 8.5 --- $K_5$ und $K_{3,3}$ sind nicht planar}
+\schritt{$K_5$}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{3.4cm}@{}}
+\toprule
+Ecken & $n = 5$ & \\
+Kanten & $m = \binom{5}{2} = 10$ & \\
+Schranke & $3n-6 = 9$ & \\
+\midrule
+\textbf{Vergleich} & $10 > 9$ & \textcolor{akzent}{\textbf{verletzt}}\\
+\bottomrule
+\end{tabular}
+\end{center}
+Nach Satz 8.4 kann $K_5$ nicht planar sein.
+
+\schritt{$K_{3,3}$}
+$K_{3,3}$ ist bipartit, enthält also nach Satz 2.12 keinen ungeraden Kreis --- insbesondere kein Dreieck. Die zweite Schranke ist anwendbar:
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{3.4cm}@{}}
+\toprule
+Ecken & $n = 6$ & \\
+Kanten & $m = 3 \cdot 3 = 9$ & \\
+Schranke & $2n-4 = 8$ & \\
+\midrule
+\textbf{Vergleich} & $9 > 8$ & \textcolor{akzent}{\textbf{verletzt}}\\
+\bottomrule
+\end{tabular}
+\end{center}
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Damit ist das Rätsel der drei Häuser gelöst.} Die neunte Leitung lässt sich nicht kreuzungsfrei legen --- nicht, weil man ungeschickt wäre, sondern weil acht das Maximum ist.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie, wie kurz der Nachweis am Ende ist: eine Zeile Rechnung je Graph. Die ganze Arbeit steckt in der Polyederformel und in Satz 8.4 --- und die wurden ein für alle Mal erledigt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Umkehrung von Satz 8.4 gilt nicht}
+Aus $m \le 3n-6$ folgt \kursiv{nicht}, dass $G$ planar ist.
+
+\schritt{Gegenbeispiel}
+Man nehme $K_5$ und hänge an eine seiner Ecken einen langen Weg an, sagen wir mit $10$ zusätzlichen Ecken. Dann ist
+\[ n = 15, \qquad m = 10 + 10 = 20, \qquad 3n - 6 = 39 . \]
+Die Schranke ist bequem erfüllt. Der Graph ist trotzdem nicht planar --- er enthält ja $K_5$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Satz 8.4 ist also ein \kursiv{Ausschlusswerkzeug}, kein Kriterium. Es fängt nur die Graphen, die insgesamt zu viele Kanten haben --- nicht die, bei denen das Problem lokal sitzt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Folgerung 8.6 --- Jeder planare Graph hat eine dünne Ecke}
+In jedem planaren Graphen gibt es eine Ecke vom Grad höchstens $5$.
+
+\schritt{Beweis}
+Für $n \le 6$ ist das klar: Jeder Grad ist höchstens $n - 1 \le 5$.
+
+Sei also $n \ge 7$ und angenommen, jede Ecke hätte Grad $\ge 6$. Dann liefert das Handschlaglemma
+\[ 2m = \sum_v \deg(v) \;\ge\; 6n \quad\Longrightarrow\quad m \ge 3n . \]
+Nach Satz 8.4 ist aber $m \le 3n-6 < 3n$. Widerspruch. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese unscheinbare Folgerung ist der Angelpunkt des nächsten Kapitels. Der gesamte Fünffarbensatz beruht darauf, dass man immer eine Ecke mit höchstens fünf Nachbarn findet, sie wegnimmt und den Rest per Induktion behandelt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz von Kuratowski}
+
+Satz 8.5 zeigt: $K_5$ und $K_{3,3}$ sind die beiden kleinsten nicht planaren Graphen. Kuratowskis Satz sagt, dass sie die \kursiv{einzigen} Hindernisse sind --- jedes andere Hindernis enthält eines der beiden in verkleideter Form.
+
+\begin{definition}
+\boxtitelm{Definition 8.7 --- Unterteilung}
+Eine \Begriff{Unterteilung} eines Graphen $H$ entsteht, indem man einzelne Kanten von $H$ durch Wege ersetzt: Statt der Kante $\{u,v\}$ setzt man neue Ecken $w_1, \ldots, w_k$ ein und die Kanten $uw_1, w_1w_2, \ldots, w_kv$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum Unterteilungen für die Planarität gleichgültig sind}
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\begin{scope}
+\node[knoten] (u) at (-0.8,0) {};
+\node[knoten] (v) at (0.8,0) {};
+\draw[kante] (u)--(v);
+\node[font=\scriptsize\itshape, color=grau] at (0,-0.7) {eine Kante};
+\end{scope}
+\node[font=\large, color=grau] at (1.9,0) {$\rightsquigarrow$};
+\begin{scope}[xshift=3.9cm]
+\node[knoten] (p) at (-0.9,0) {};
+\node[knoten] (q1) at (-0.3,0) {};
+\node[knoten] (q2) at (0.3,0) {};
+\node[knoten] (r) at (0.9,0) {};
+\draw[kante] (p)--(q1);\draw[kante] (q1)--(q2);\draw[kante] (q2)--(r);
+\node[font=\scriptsize\itshape, color=grau] at (0,-0.7) {ein Weg};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Eine Kante ist in einer Zeichnung ohnehin eine Kurve. Ob auf dieser Kurve noch zusätzliche Punkte als Ecken markiert sind, ändert an den Kreuzungen nichts.
+
+\textbf{Also:} Ein Graph ist genau dann planar, wenn jede seiner Unterteilungen es ist.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 8.8 (Kuratowski 1930)}
+Ein Graph ist genau dann planar, wenn er \kursiv{keinen} Teilgraphen enthält, der eine Unterteilung von $K_5$ oder von $K_{3,3}$ ist.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Diesen Satz beweise ich nicht}
+Die eine Richtung ist leicht --- sie folgt aus Satz 8.5 und der Bemerkung über Unterteilungen: Enthält $G$ eine Unterteilung von $K_5$ oder $K_{3,3}$, so kann $G$ nicht planar sein, weil sonst auch dieser Teilgraph planar wäre.
+
+Die andere Richtung ist schwer. Der kürzeste bekannte Beweis füllt mehrere Seiten und arbeitet mit einer Induktion über die Kantenzahl, in der man sorgfältig durch dreifach zusammenhängende Teile hindurchgehen muss.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ich gebe ihn hier nicht wieder, und ich sage das ausdrücklich, statt es zu verschweigen. Wer ihn sehen will, findet ihn bei Diestel\zit{7}, Kapitel 4 --- vollständig und lesbar. Das Ergebnis selbst brauchen wir im Folgenden nur als Werkzeug.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Der Satz von Wagner --- dieselbe Aussage, anders formuliert}
+Eine \Begriff{Kontraktion} einer Kante $\{u,v\}$ verschmilzt die beiden Ecken zu einer, die mit allen bisherigen Nachbarn von $u$ und $v$ verbunden ist. Ein \Begriff{Minor} von $G$ entsteht durch beliebiges Weglassen von Ecken und Kanten und Kontrahieren von Kanten.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\begin{scope}
+\node[knotenb] (u) at (-0.6,0.5) {$u$};
+\node[knotenb] (v) at (0.6,0.5) {$v$};
+\node[knoten] (x) at (-1.2,-0.6) {};
+\node[knoten] (y) at (0,-0.8) {};
+\node[knoten] (z) at (1.2,-0.6) {};
+\draw[kanted] (u)--(v);
+\draw[kante] (u)--(x);\draw[kante] (u)--(y);
+\draw[kante] (v)--(y);\draw[kante] (v)--(z);
+\end{scope}
+\node[font=\large, color=grau] at (2.2,0) {$\rightsquigarrow$};
+\begin{scope}[xshift=4.4cm]
+\node[knotenr] (w) at (0,0.5) {$w$};
+\node[knoten] (x2) at (-1.2,-0.6) {};
+\node[knoten] (y2) at (0,-0.8) {};
+\node[knoten] (z2) at (1.2,-0.6) {};
+\draw[kante] (w)--(x2);\draw[kante] (w)--(y2);\draw[kante] (w)--(z2);
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Satz (Wagner 1937).} Ein Graph ist genau dann planar, wenn er weder $K_5$ noch $K_{3,3}$ als Minor enthält.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die beiden Fassungen sind gleichwertig, aber die Minor-Fassung erwies sich als die tragfähigere: Sie ist der Ausgangspunkt der Graphenminorentheorie von Robertson und Seymour, einem der umfangreichsten Beweiswerke der Mathematik überhaupt. Kapitel~15 berichtet davon.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Der Petersen-Graph}
+Ist der Petersen-Graph planar?
+
+\loesung
+\schritt{Schritt 1 --- Die Kantenschranke prüfen}
+$n = 10$, $m = 15$. Die Schranke lautet $3n-6 = 24$. Wegen $15 \le 24$ ist \kursiv{nichts} ausgeschlossen.
+
+\schritt{Schritt 2 --- Die schärfere Schranke prüfen}
+In Aufgabe 2.2 wurde gezeigt: Der Petersen-Graph hat Taille $5$, ist also insbesondere dreiecksfrei. Damit greift die zweite Schranke:
+\[ 2n - 4 = 20 . \]
+Wegen $15 \le 20$ wieder kein Ausschluss.
+
+\schritt{Schritt 3 --- Noch schärfer: die Taille ausnutzen}
+Wir wiederholen den Beweis von Satz 8.4 mit Taille $5$. Jeder Gebietsrand hat dann Länge $\ge 5$, also
+\[ 2m \ge 5f \quad\Longrightarrow\quad f \le \frac{2m}{5} . \]
+Einsetzen in die Polyederformel:
+\[ 2 = n - m + f \le n - m + \frac{2m}{5} = n - \frac{3m}{5} . \]
+Umstellen:
+\[ \frac{3m}{5} \le n-2 \quad\Longrightarrow\quad m \le \frac{5(n-2)}{3} . \]
+
+Für $n = 10$:
+\[ m \le \frac{5 \cdot 8}{3} = \frac{40}{3} = 13{,}33\ldots \]
+Da $m$ ganzzahlig ist: $m \le 13$.
+
+\schritt{Schritt 4 --- Der Widerspruch}
+Der Petersen-Graph hat $m = 15 > 13$. \textbf{Er ist nicht planar.}
+
+\schritt{Schritt 5 --- Kontrolle über Kuratowski}
+Der Petersen-Graph enthält tatsächlich eine Unterteilung des $K_{3,3}$. Man kann sie so finden: Die drei Ecken $a_0, b_1, b_4$ bilden die eine Seite, die drei Ecken $a_1, a_4, b_0$ die andere; die neun Verbindungen laufen teils direkt, teils über je eine Zwischenecke. Die Ausarbeitung ist mühsam --- und genau deshalb ist die Rechnung aus Schritt 3 der bessere Weg.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Verschärfung in Schritt 3 lohnt sich zu merken: \textbf{Bei Taille $g$ gilt $m \le \frac{g(n-2)}{g-2}$.} Für $g=3$ ergibt das $3n-6$, für $g=4$ ergibt es $2n-4$ --- beide Schranken aus Satz 8.4 sind Sonderfälle.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Ein Polyeder aus Fünfecken}
+Ein konvexer Körper habe nur fünfeckige Flächen, und an jeder Ecke sollen genau drei Flächen zusammenstoßen. Wie viele Ecken, Kanten und Flächen hat er?
+
+\loesung
+\schritt{Schritt 1 --- Die Kanten aus den Flächen}
+Jede Fläche wird von $5$ Kanten begrenzt, und jede Kante grenzt an genau $2$ Flächen. Zählen wir Paare (Fläche, angrenzende Kante):
+\[ 5f = 2m \quad\Longrightarrow\quad m = \frac{5f}{2} . \]
+
+\schritt{Schritt 2 --- Die Kanten aus den Ecken}
+An jeder Ecke stoßen $3$ Flächen zusammen, also auch $3$ Kanten. Jede Kante hat $2$ Enden:
+\[ 3n = 2m \quad\Longrightarrow\quad n = \frac{2m}{3} . \]
+
+\schritt{Schritt 3 --- In die Polyederformel}
+\[ n - m + f = 2 \]
+Wir drücken alles durch $m$ aus. Aus Schritt 1: $f = \frac{2m}{5}$. Aus Schritt 2: $n = \frac{2m}{3}$.
+\[ \frac{2m}{3} - m + \frac{2m}{5} = 2 \]
+
+\schritt{Schritt 4 --- Auflösen}
+Hauptnenner $15$:
+\[ \frac{10m}{15} - \frac{15m}{15} + \frac{6m}{15} = 2 \]
+\[ \frac{10m - 15m + 6m}{15} = \frac{m}{15} = 2 \]
+\[ m = 30 . \]
+
+\schritt{Schritt 5 --- Die übrigen Größen}
+\[ n = \frac{2 \cdot 30}{3} = 20, \qquad f = \frac{2 \cdot 30}{5} = 12 . \]
+
+\schritt{Probe}
+$20 - 30 + 12 = 2$. \checkmark\quad Und $5 \cdot 12 = 60 = 2 \cdot 30$ \checkmark,\quad $3 \cdot 20 = 60 = 2 \cdot 30$ \checkmark
+
+\schritt{Antwort}
+$20$ Ecken, $30$ Kanten, $12$ Fünfecke --- das ist der \textbf{Dodekaeder}. Und es ist der einzige Körper dieser Bauart: Die Rechnung hatte keine Freiheit, das Ergebnis war erzwungen.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Genau so beweist man, dass es nur fünf platonische Körper gibt: Man setzt \enquote{alle Flächen sind $k$-Ecke, an jeder Ecke stoßen $r$ zusammen} an und rechnet nach, für welche Paare $(k,r)$ die Polyederformel eine positive Lösung hat. Es sind fünf.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- $K_{3,3}$ ohne eine Kante}
+Ist $K_{3,3}$ minus einer beliebigen Kante planar? Zeichnen Sie gegebenenfalls.
+
+\loesung
+\schritt{Schritt 1 --- Die Zahlen}
+$n = 6$, $m = 8$. Dreiecksfrei (Teilgraph eines bipartiten Graphen ist bipartit). Schranke: $2n-4 = 8$.
+
+Wegen $8 \le 8$ ist nichts ausgeschlossen --- die Schranke wird exakt erreicht. Das ist ein Hinweis, dass es gehen könnte, aber kein Beweis.
+
+\schritt{Schritt 2 --- Eine Zeichnung angeben}
+Wir lassen die Kante $\{h_3, w_3\}$ weg.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.4]
+\node[knotenb] (h1) at (-1.3,0.9) {$h_1$};
+\node[knotenb] (w1) at (0,1.5) {$w_1$};
+\node[knotenb] (h2) at (1.3,0.9) {$h_2$};
+\node[knotenb] (w2) at (1.3,-0.7) {$w_2$};
+\node[knotenb] (h3) at (0,-1.3) {$h_3$};
+\node[knotenb] (w3) at (-1.3,-0.7) {$w_3$};
+\draw[kante] (h1)--(w1); \draw[kante] (w1)--(h2); \draw[kante] (h2)--(w2);
+\draw[kante] (w2)--(h3); \draw[kante] (h3)--(w3); \draw[kante] (w3)--(h1);
+\draw[kante] (h1) to[bend right=18] (w2);
+\draw[kante] (h2) to[bend right=18] (w3);
+\end{tikzpicture}
+\end{center}
+
+\schritt{Schritt 3 --- Nachprüfen, dass alles da ist}
+Verlangt sind alle Paare $h_i w_j$ außer $h_3w_3$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+& $w_1$ & $w_2$\\
+\midrule
+$h_1$ & Außenkante & Sehne\\
+$h_2$ & Außenkante & Außenkante\\
+$h_3$ & \multicolumn{2}{@{}l}{$h_3 w_1$? --- \textcolor{akzent}{fehlt!}}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Halt. Im Sechseck $h_1 w_1 h_2 w_2 h_3 w_3$ sind die Nachbarn von $h_3$ nur $w_2$ und $w_3$; die Kante $h_3w_1$ fehlt, und die haben wir nicht weggelassen.
+
+\schritt{Schritt 4 --- Korrektur}
+Wir zählen neu. Das Sechseck liefert $6$ Kanten, die beiden Sehnen $2$ weitere --- zusammen $8$. Gebraucht werden $8$. Es fehlt also genau eine der neun, und wir müssen prüfen \kursiv{welche}.
+
+Vorhanden sind: $h_1w_1$, $w_1h_2$, $h_2w_2$, $w_2h_3$, $h_3w_3$, $w_3h_1$ (Sechseck) sowie $h_1w_2$ und $h_2w_3$ (Sehnen).
+
+Fehlend ist somit $h_3w_1$ --- nicht $h_3w_3$, wie in Schritt 2 angekündigt.
+
+Das macht nichts: Die Frage lautete, ob $K_{3,3}$ minus \kursiv{einer beliebigen} Kante planar ist, und $K_{3,3}$ ist so symmetrisch, dass alle neun Kanten gleichwertig sind. Die Zeichnung zeigt $K_{3,3} - h_3w_1$, und das beantwortet die Frage.
+
+\schritt{Antwort}
+\textbf{Ja, planar.} Die Zeichnung hat $n=6$, $m=8$ und --- nach der Polyederformel --- $f = 2 - n + m = 4$ Gebiete: das Äußere und drei innere.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Korrektur in Schritt 4 habe ich stehen lassen, statt sie stillschweigend auszubessern. So läuft mathematisches Arbeiten wirklich ab: Man zeichnet, prüft nach, findet eine Abweichung von der Ankündigung und schaut, ob sie schadet. Hier schadet sie nicht --- aber das musste geprüft werden.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Descartes, Euler und eine Formel mit zwei Vätern}
+Euler teilte die Formel 1750 in einem Brief an Christian Goldbach mit und veröffentlichte sie 1752. Sein Beweis war unvollständig; einen tragfähigen gab \Person{Adrien-Marie Legendre} 1794 mit einem Argument über Kugelflächen.
+
+Etwa hundert Jahre vor Euler hatte \Person{René Descartes} in einem unveröffentlichten Manuskript eine gleichwertige Aussage über Winkelsummen an Polyederecken notiert. Das Manuskript ging verloren; eine Abschrift von Leibniz wurde erst 1860 wiedergefunden.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{3.8cm}@{}}
+\toprule
+\textbf{um 1630} & Descartes & gleichwertige Fassung, unveröffentlicht\\
+\textbf{1750} & Euler & die Formel, Beweis lückenhaft\\
+\textbf{1794} & Legendre & erster tragfähiger Beweis\\
+\textbf{1813} & Cauchy & der heute übliche Beweis\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Bemerkenswert ist der lange Weg von der Formel zum Beweis --- über sechzig Jahre. Der Grund ist derselbe wie bei Hierholzer in Kapitel~6: Die Aussage ist anschaulich so überzeugend, dass die Lücke lange niemandem auffiel.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Planarität erkennen und Kreuzungen zählen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{3.0cm}@{}}
+\toprule
+\textbf{Frage} & \textbf{Aufwand} & \textbf{Stand}\\
+\midrule
+Ist $G$ planar? & \textcolor{gruen}{$\Oh(n)$} & Hopcroft/Tarjan 1974\\
+Ebene Zeichnung finden & \textcolor{gruen}{$\Oh(n)$} & dasselbe Verfahren\\
+\textbf{Kleinste Kreuzungszahl} & \textcolor{akzent}{NP-schwer} & Garey/Johnson 1983\\
+Kreuzungszahl von $K_n$ & \textcolor{akzent}{offen} & Vermutung seit 1960\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die dritte und vierte Zeile überraschen im Kontrast zur ersten. Ob ein Graph \kursiv{ohne} Kreuzungen gezeichnet werden kann, entscheidet man in linearer Zeit. Wie viele Kreuzungen mindestens nötig sind, wenn es nicht geht, ist eine der hartnäckigsten offenen Fragen des Gebiets.
+
+Für den vollständigen Graphen lautet die Vermutung von Hill und Guy (1960): Die kleinste Kreuzungszahl von $K_n$ beträgt
+\[ \frac{1}{4}\Bigl\lfloor \frac{n}{2}\Bigr\rfloor \Bigl\lfloor \frac{n-1}{2}\Bigr\rfloor \Bigl\lfloor \frac{n-2}{2}\Bigr\rfloor \Bigl\lfloor \frac{n-3}{2}\Bigr\rfloor . \]
+Bewiesen ist sie bis $n = 12$; die Zeichnungen, die den vermuteten Wert erreichen, sind bekannt --- niemand konnte bisher zeigen, dass es nicht besser geht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Kreuzungszahl ist keine Spielerei. Beim Entwurf von Schaltkreisen bestimmt sie, wie viele Ebenen eine Platine braucht, und in der Netzwerkdarstellung entscheidet sie über die Lesbarkeit eines Diagramms.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 8.3} & $n - m + f = 2$ für zusammenhängende ebene Graphen\\
+\textbf{Satz 8.4} & $m \le 3n-6$, dreiecksfrei $m \le 2n-4$, allgemein $m \le \frac{g(n-2)}{g-2}$\\
+\textbf{Satz 8.5} & $K_5$ und $K_{3,3}$ sind nicht planar --- das Rätsel ist gelöst\\
+\textbf{Folgerung 8.6} & Jeder planare Graph hat eine Ecke vom Grad $\le 5$\\
+\textbf{Satz 8.8} & Kuratowski: nur diese beiden Hindernisse\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Folgerung 8.6 ist der Schlüssel zum nächsten Kapitel --- dort wird sie den Fünffarbensatz tragen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

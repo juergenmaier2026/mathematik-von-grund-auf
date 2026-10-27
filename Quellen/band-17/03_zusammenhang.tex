@@ -1,0 +1,795 @@
+\chapter{Zusammenhang}
+
+\section{Zwei Merkmale gleichzeitig}
+
+Bisher haben wir jedes Merkmal für sich betrachtet. Die interessanten Fragen betreffen aber fast immer Beziehungen: Hängt der Schmerz mit der Mobilisationszeit zusammen? Wirkt das Schema bei Älteren anders?
+
+\begin{merksatz}
+\boxtitel{Das Streudiagramm}
+Die erste Antwort ist immer ein Bild. Man trägt jede Beobachtung als Punkt ein: waagerecht das eine Merkmal, senkrecht das andere.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (6.6,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,4.3);
+\foreach \x/\lab in {0.8/2, 1.8/3, 2.8/4, 3.8/5, 4.8/6, 5.8/7}
+  \node[font=\scriptsize, color=grau] at (\x,-0.3) {\lab};
+\foreach \y/\lab in {0.4/15, 1.4/20, 2.4/25, 3.4/30, 4.0/35}
+  \node[font=\scriptsize, color=grau] at (-0.42,\y) {\lab};
+% A-Gruppe (tief), B-Gruppe (akzent)
+\fill[tief] (3.8,2.6) circle (2.4pt);
+\fill[tief] (1.8,1.2) circle (2.4pt);
+\fill[tief] (4.8,3.6) circle (2.4pt);
+\fill[tief] (2.8,2.2) circle (2.4pt);
+\fill[tief] (5.8,4.0) circle (2.4pt);
+\fill[tief] (3.8,1.8) circle (2.4pt);
+\fill[akzent] (1.8,1.0) circle (2.4pt);
+\fill[akzent] (0.8,0.4) circle (2.4pt);
+\fill[akzent] (2.8,1.6) circle (2.4pt);
+\fill[akzent] (1.8,0.8) circle (2.4pt);
+\fill[akzent] (3.8,2.0) circle (2.4pt);
+\fill[akzent] (0.8,0.2) circle (2.4pt);
+\node[font=\scriptsize, color=grau] at (3.3,-0.75) {NRS nach 24 Stunden};
+\node[font=\scriptsize, color=grau, rotate=90] at (-1.0,2.1) {Mobilisation (h)};
+\fill[tief] (5.6,4.15) circle (2.4pt);
+\node[font=\scriptsize, color=grau] at (6.0,4.15) {A};
+\fill[akzent] (5.6,3.6) circle (2.4pt);
+\node[font=\scriptsize, color=grau] at (6.0,3.6) {B};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Eindruck ist deutlich: Wer mehr Schmerz angibt, mobilisiert später. Die Aufgabe dieses Kapitels ist, diesen Eindruck in eine Zahl zu fassen --- und zugleich zu klären, was diese Zahl \kursiv{nicht} sagt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Kovarianz}
+
+\begin{definition}
+\boxtitelm{Definition 3.1 --- Kovarianz}
+Für Paare $(x_1,y_1), \ldots, (x_n,y_n)$ ist
+\[ s_{xy} \;=\; \frac{1}{n-1}\sum_{i=1}^n (x_i - \MW)(y_i - \overline{y}) . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum diese Formel einen Zusammenhang misst}
+Betrachten wir die vier Quadranten um den Schwerpunkt $(\MW, \overline{y})$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!50, line width=0.7pt] (-2.2,0) -- (2.2,0);
+\draw[grau!50, line width=0.7pt] (0,-1.7) -- (0,1.7);
+\node[font=\scriptsize, color=gruen] at (1.1,0.85) {$+\,\cdot\,+ \;=\; +$};
+\node[font=\scriptsize, color=gruen] at (-1.1,-0.85) {$-\,\cdot\,- \;=\; +$};
+\node[font=\scriptsize, color=akzent] at (-1.1,0.85) {$-\,\cdot\,+ \;=\; -$};
+\node[font=\scriptsize, color=akzent] at (1.1,-0.85) {$+\,\cdot\,- \;=\; -$};
+\node[font=\scriptsize, color=grau] at (0.55,-0.22) {$(\MW,\overline{y})$};
+\end{tikzpicture}
+\end{center}
+
+Liegen viele Punkte rechts oben und links unten, so überwiegen positive Produkte, und $s_{xy}$ wird positiv. Liegen sie links oben und rechts unten, wird $s_{xy}$ negativ. Verteilen sie sich gleichmäßig, heben sich die Beiträge auf.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie, dass für $y = x$ die Definition in $s_{xx} = s_x^2$ übergeht --- die Varianz ist die Kovarianz eines Merkmals mit sich selbst.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 3.2 --- Verschiebungssatz für die Kovarianz}
+\[ \sum_{i=1}^n (x_i-\MW)(y_i-\overline{y}) \;=\; \sum_{i=1}^n x_i y_i \;-\; n\,\MW\,\overline{y} . \]
+
+\schritt{Beweis}
+\begin{align*}
+\sum_i (x_i-\MW)(y_i-\overline y) &= \sum_i \bigl(x_iy_i - x_i\overline y - \MW y_i + \MW\,\overline y\bigr)\\
+&= \sum_i x_iy_i - \overline y\sum_i x_i - \MW\sum_i y_i + n\MW\overline y\\
+&= \sum_i x_iy_i - \overline y \cdot n\MW - \MW \cdot n\overline y + n\MW\overline y\\
+&= \sum_i x_iy_i - n\MW\overline y . \qquad \blacksquare
+\end{align*}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Kovarianz allein ist unbrauchbar}
+Sie trägt die Einheit \enquote{Einheit von $x$ mal Einheit von $y$} --- im Beispiel \enquote{NRS-Punkte mal Stunden}. Das lässt sich nicht deuten.
+
+Schlimmer: Ihr Zahlenwert hängt von den Einheiten ab. Rechnet man die Mobilisationszeit in Minuten statt Stunden, so wird $s_{xy}$ sechzigmal so groß --- bei unverändertem Zusammenhang.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man braucht also eine Normierung. Sie ergibt sich aus der Frage: Wie groß \kursiv{kann} die Kovarianz bei gegebenen Streuungen überhaupt werden?}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Korrelationskoeffizient}
+
+\begin{definition}
+\boxtitelm{Definition 3.3 --- Korrelation nach Pearson}
+\[ r \;=\; \frac{s_{xy}}{s_x \cdot s_y} \;=\; \frac{\sum_i (x_i-\MW)(y_i-\overline y)}{\sqrt{\sum_i (x_i-\MW)^2}\;\sqrt{\sum_i (y_i-\overline y)^2}} . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die zweite Fassung ist dieselbe}
+Setzt man $s_x = \sqrt{\frac{1}{n-1}\sum(x_i-\MW)^2}$ und ebenso für $y$ und $s_{xy}$ ein, so kürzt sich der Faktor $\frac{1}{n-1}$ vollständig weg. Deshalb ist $r$ von dieser Konvention unabhängig --- ein weiterer Hinweis darauf, dass die Frage $n$ oder $n-1$ hier keine Rolle spielt.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 3.4 --- Es gilt stets $-1 \le r \le 1$}
+\schritt{Beweis über $z$-Werte}
+Wir standardisieren beide Merkmale nach Definition 2.12:
+\[ z_i = \frac{x_i-\MW}{s_x}, \qquad w_i = \frac{y_i-\overline y}{s_y} . \]
+
+\schritt{Schritt 1 --- Zwei Hilfsgleichungen}
+\[ \sum_i z_i^2 = \frac{1}{s_x^2}\sum_i (x_i-\MW)^2 = \frac{(n-1)s_x^2}{s_x^2} = n-1 , \]
+und ebenso $\sum_i w_i^2 = n-1$. Ferner
+\[ \sum_i z_i w_i = \frac{1}{s_xs_y}\sum_i (x_i-\MW)(y_i-\overline y) = \frac{(n-1)s_{xy}}{s_xs_y} = (n-1)\,r . \]
+
+\schritt{Schritt 2 --- Der Kniff}
+Eine Summe von Quadraten ist nie negativ:
+\[ 0 \;\le\; \sum_{i=1}^n (z_i - w_i)^2 = \sum_i z_i^2 - 2\sum_i z_iw_i + \sum_i w_i^2 . \]
+Einsetzen:
+\[ 0 \le (n-1) - 2(n-1)r + (n-1) = (n-1)\,(2 - 2r) . \]
+Da $n \ge 2$ ist $n-1 > 0$, also $2 - 2r \ge 0$ und damit
+\[ r \le 1 . \]
+
+\schritt{Schritt 3 --- Die andere Seite}
+Dieselbe Rechnung mit $(z_i + w_i)^2$:
+\[ 0 \le (n-1)(2+2r) \quad\Longrightarrow\quad r \ge -1 . \qquad \blacksquare \]
+
+\schritt{Wann Gleichheit eintritt}
+$r = 1$ verlangt $\sum(z_i-w_i)^2 = 0$, also $z_i = w_i$ für alle $i$. Ausgeschrieben:
+\[ \frac{x_i-\MW}{s_x} = \frac{y_i-\overline y}{s_y} \quad\Longleftrightarrow\quad y_i = \overline y + \frac{s_y}{s_x}(x_i - \MW) . \]
+Das ist die Gleichung einer Geraden mit positiver Steigung. Entsprechend bedeutet $r = -1$ eine Gerade mit negativer Steigung.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$|r| = 1$ bedeutet also genau: Alle Punkte liegen exakt auf einer Geraden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die MOBIL-Daten, vollständig gerechnet}
+Wir bestimmen $r$ zwischen \code{NRS24} und \code{MOB} für alle zwölf Beobachtungen.
+
+\schritt{Schritt 1 --- Die Tabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.28}
+\begin{tabular}{@{}P{0.9cm}P{1.1cm}P{1.1cm}P{1.3cm}P{1.3cm}P{1.3cm}@{}}
+\toprule
+\textbf{ID} & $x$ & $y$ & $x^2$ & $y^2$ & $xy$\\
+\midrule
+$1$ & $5$ & $26$ & $25$ & $676$ & $130$\\
+$2$ & $3$ & $19$ & $9$ & $361$ & $57$\\
+$3$ & $6$ & $31$ & $36$ & $961$ & $186$\\
+$4$ & $4$ & $24$ & $16$ & $576$ & $96$\\
+$5$ & $7$ & $35$ & $49$ & $1225$ & $245$\\
+$6$ & $5$ & $22$ & $25$ & $484$ & $110$\\
+$7$ & $3$ & $18$ & $9$ & $324$ & $54$\\
+$8$ & $2$ & $15$ & $4$ & $225$ & $30$\\
+$9$ & $4$ & $21$ & $16$ & $441$ & $84$\\
+$10$ & $3$ & $17$ & $9$ & $289$ & $51$\\
+$11$ & $5$ & $23$ & $25$ & $529$ & $115$\\
+$12$ & $2$ & $14$ & $4$ & $196$ & $28$\\
+\midrule
+$\sum$ & $\mathbf{49}$ & $\mathbf{265}$ & $\mathbf{227}$ & $\mathbf{6287}$ & $\mathbf{1186}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Mittelwerte}
+\[ \MW = \frac{49}{12} \approx 4{,}083, \qquad \overline y = \frac{265}{12} \approx 22{,}083 . \]
+
+\schritt{Schritt 3 --- Die drei Summen über den Verschiebungssatz}
+\[ \sum(x-\MW)^2 = 227 - \frac{49^2}{12} = 227 - \frac{2401}{12} = 227 - 200{,}083 = 26{,}917 \]
+\[ \sum(y-\overline y)^2 = 6287 - \frac{265^2}{12} = 6287 - \frac{70225}{12} = 6287 - 5852{,}083 = 434{,}917 \]
+\[ \sum(x-\MW)(y-\overline y) = 1186 - \frac{49 \cdot 265}{12} = 1186 - \frac{12985}{12} = 1186 - 1082{,}083 = 103{,}917 \]
+
+\schritt{Schritt 4 --- Einsetzen}
+\[ r = \frac{103{,}917}{\sqrt{26{,}917}\cdot\sqrt{434{,}917}} = \frac{103{,}917}{5{,}188 \cdot 20{,}854} = \frac{103{,}917}{108{,}19} \approx \mathbf{0{,}961} . \]
+
+\schritt{Schritt 5 --- Die Probe}
+Der Wert liegt im zulässigen Bereich $[-1,1]$. \checkmark\ Er ist positiv, was zum Bild passt. \checkmark
+
+Eine zweite Probe: Das Vorzeichen von $r$ ist das von $\sum(x-\MW)(y-\overline y)$, und diese Summe war positiv. \checkmark
+
+\schritt{Die Deutung}
+Ein Wert von $0{,}96$ bedeutet: Die Punkte liegen sehr nahe an einer Geraden mit positiver Steigung. Mehr sagt er nicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und bei $n = 12$ sagt er auch nicht, dass in der Grundgesamtheit ein Zusammenhang besteht. Das ist eine andere Frage, die Teil~III beantwortet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was $r$ nicht misst}
+
+\begin{warnung}
+\boxtitelr{Drei Dinge, die $r$ nicht leistet}
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Krümmung} & $r$ misst ausschließlich den \kursiv{linearen} Anteil. Ein perfekter, aber gekrümmter Zusammenhang kann $r = 0$ ergeben.\\
+\textbf{Robustheit} & Ein einziger Punkt kann $r$ von $0$ auf $0{,}9$ heben --- Anscombe III und IV.\\
+\textbf{Steigung} & $r$ sagt nichts über die \kursiv{Stärke} des Effekts. Eine Steigung von $0{,}001$ kann $r=1$ haben.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Ein Beispiel zur ersten Zeile}
+Nehmen wir die Punkte $(-2,4), (-1,1), (0,0), (1,1), (2,4)$ --- also $y = x^2$.
+\[ \MW = 0, \qquad \overline y = 2 . \]
+\begin{align*}
+\sum(x-\MW)(y-\overline y) &= (-2)(2) + (-1)(-1) + 0 \cdot (-2)\\
+&\quad + 1 \cdot (-1) + 2 \cdot 2\\
+&= -4+1+0-1+4 \;=\; 0 .
+\end{align*}
+Also $r = 0$ --- bei einem exakten funktionalen Zusammenhang.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.72]
+\draw[grau!60, line width=0.7pt] (-3,0) -- (3,0);
+\draw[grau!60, line width=0.7pt] (0,-0.4) -- (0,4.6);
+\foreach \x/\y in {-2/4, -1/1, 0/0, 1/1, 2/4} \fill[tief] (\x,\y) circle (3.2pt);
+\draw[akzent, line width=1.1pt] (-2.8,2) -- (2.8,2);
+\node[font=\scriptsize, color=akzent] at (2.6,2.45) {$r = 0$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die waagerechte Gerade ist die Regressionsgerade dieser Daten. Sie ist rechnerisch korrekt und inhaltlich Unsinn --- genau das meint Anscombe.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Die Rangkorrelation nach Spearman}
+
+\begin{definition}
+\boxtitelm{Definition 3.5}
+Die \Begriff{Spearman-Korrelation} $r_s$ ist die Pearson-Korrelation der \kursiv{Rangzahlen} statt der Werte. Bei Bindungen vergibt man Durchschnittsränge.
+
+Ohne Bindungen vereinfacht sich die Formel zu
+\[ r_s = 1 - \frac{6\sum_i d_i^2}{n(n^2-1)} , \]
+wobei $d_i$ die Rangdifferenz der $i$-ten Beobachtung ist.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum man das tut}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Ordinale Daten} & Ränge sind bei ordinalen Merkmalen zulässig, Werte nicht.\\
+\textbf{Robustheit} & Ein Ausreißer bekommt den Rang $n$, nicht den Wert $1000$. Der Bruchpunkt steigt erheblich.\\
+\textbf{Monotonie statt Linearität} & $r_s$ erfasst jeden \kursiv{gleichsinnigen} Zusammenhang, auch gekrümmte.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Das Beispiel $y = x^3$}
+Für $x = 1,2,3,4,5$ und $y = 1,8,27,64,125$ ist $r \approx 0{,}98$ --- nicht $1$, weil der Zusammenhang nicht linear ist.
+
+Die Ränge sind aber beidemal $1,2,3,4,5$, also $r_s = 1$ exakt. Die Rangkorrelation erkennt den Zusammenhang als das, was er ist: streng monoton.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{$r_s$ für die MOBIL-Daten}
+\schritt{Schritt 1 --- Ränge vergeben}
+Die NRS-Werte sortiert: $2,2,3,3,3,4,4,5,5,5,6,7$. Bindungen bekommen Durchschnittsränge:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.4cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{NRS} & \textbf{Plätze} & \textbf{Rang}\\
+\midrule
+$2$ & $1, 2$ & $1{,}5$\\
+$3$ & $3, 4, 5$ & $4$\\
+$4$ & $6, 7$ & $6{,}5$\\
+$5$ & $8, 9, 10$ & $9$\\
+$6$ & $11$ & $11$\\
+$7$ & $12$ & $12$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die MOB-Werte sind alle verschieden und bekommen die Ränge $1$ bis $12$.
+
+\schritt{Schritt 2 --- Die Rangtabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.28}
+\begin{tabular}{@{}P{0.9cm}P{1.4cm}P{1.4cm}P{1.2cm}P{1.3cm}@{}}
+\toprule
+\textbf{ID} & $R(x)$ & $R(y)$ & $d$ & $d^2$\\
+\midrule
+$1$ & $9$ & $10$ & $-1$ & $1$\\
+$2$ & $4$ & $5$ & $-1$ & $1$\\
+$3$ & $11$ & $11$ & $0$ & $0$\\
+$4$ & $6{,}5$ & $9$ & $-2{,}5$ & $6{,}25$\\
+$5$ & $12$ & $12$ & $0$ & $0$\\
+$6$ & $9$ & $7$ & $2$ & $4$\\
+$7$ & $4$ & $4$ & $0$ & $0$\\
+$8$ & $1{,}5$ & $2$ & $-0{,}5$ & $0{,}25$\\
+$9$ & $6{,}5$ & $6$ & $0{,}5$ & $0{,}25$\\
+$10$ & $4$ & $3$ & $1$ & $1$\\
+$11$ & $9$ & $8$ & $1$ & $1$\\
+$12$ & $1{,}5$ & $1$ & $0{,}5$ & $0{,}25$\\
+\midrule
+$\sum$ & & & $\mathbf{0}$ & $\mathbf{15{,}0}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die Rangdifferenzen summieren sich zu null --- das muss so sein, weil beide Rangsummen gleich sind. Eine gute Rechenprobe.
+
+\schritt{Schritt 3 --- Einsetzen}
+\[ r_s \approx 1 - \frac{6 \cdot 15}{12(144-1)} = 1 - \frac{90}{12 \cdot 143} = 1 - \frac{90}{1716} = 1 - 0{,}0524 = \mathbf{0{,}948} . \]
+
+\schritt{Schritt 4 --- Ein Vorbehalt}
+Die Kurzformel setzt voraus, dass keine Bindungen vorliegen. Hier gibt es welche, der Wert ist also eine Näherung. Exakt wäre die Pearson-Korrelation der Ränge; sie ergibt $0{,}950$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Unterschied ist hier belanglos. Bei vielen Bindungen --- etwa bei einer fünfstufigen Skala und $n = 200$ --- wird er erheblich, und die Kurzformel ist dann falsch. Statistikprogramme rechnen daher stets die lange Fassung.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{2.0cm}P{2.8cm}@{}}
+\toprule
+Pearson $r$ & $0{,}961$ & setzt Linearität voraus\\
+Spearman $r_s$ & $0{,}950$ & setzt nur Monotonie voraus\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Beide sind hoch und fast gleich --- ein Hinweis darauf, dass der Zusammenhang tatsächlich annähernd linear ist. Weichen sie stark voneinander ab, liegt Krümmung oder ein Ausreißer vor.
+\end{merksatz}
+
+\section{Korrelation und Ursache}
+
+Nun die wichtigste Seite dieses Bandes.
+
+\begin{warnung}
+\boxtitelr{Vier Erklärungen für jede beobachtete Korrelation}
+Findet man zwischen $X$ und $Y$ einen Zusammenhang, so kommen stets \kursiv{mindestens} vier Erklärungen infrage.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.0cm}P{2.4cm}P{5.0cm}@{}}
+\toprule
+$1$ & \textbf{Zufall} & Bei genügend vielen geprüften Merkmalspaaren findet man immer etwas.\\
+$2$ & \textbf{$X$ wirkt auf $Y$} & Die erhoffte Erklärung.\\
+$3$ & \textbf{$Y$ wirkt auf $X$} & Die Richtung ist aus der Korrelation nicht ablesbar.\\
+$4$ & \textbf{Eine dritte Größe} & Ein \Begriff{Konfounder} $Z$ wirkt auf beide.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\begin{scope}
+\node[knotenb] (x) at (-0.9,0) {$X$};
+\node[knotenb] (y) at (0.9,0) {$Y$};
+\draw[kante, -{Stealth[length=5pt]}] (x) -- (y);
+\node[font=\scriptsize\itshape, color=grau] at (0,-0.85) {Fall 2};
+\end{scope}
+\begin{scope}[xshift=3.2cm]
+\node[knotenb] (x2) at (-0.9,0) {$X$};
+\node[knotenb] (y2) at (0.9,0) {$Y$};
+\draw[kante, -{Stealth[length=5pt]}] (y2) -- (x2);
+\node[font=\scriptsize\itshape, color=grau] at (0,-0.85) {Fall 3};
+\end{scope}
+\begin{scope}[xshift=7.0cm]
+\node[knotenb] (x3) at (-0.9,-0.35) {$X$};
+\node[knotenb] (y3) at (0.9,-0.35) {$Y$};
+\node[knotenr] (z3) at (0,0.75) {$Z$};
+\draw[kanted, -{Stealth[length=5pt]}] (z3) -- (x3);
+\draw[kanted, -{Stealth[length=5pt]}] (z3) -- (y3);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.1) {Fall 4};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Korrelation ist in allen vier Fällen \kursiv{dieselbe Zahl}. Sie kann die Fälle nicht unterscheiden --- das ist keine Schwäche der Rechnung, sondern eine Eigenschaft der Daten. Nur das Studiendesign kann hier weiterhelfen; Kapitel~12 zeigt, wie.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Am MOBIL-Beispiel durchgespielt}
+Wir fanden $r = 0{,}96$ zwischen Schmerz und Mobilisationszeit. Welche der vier Erklärungen?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{6.2cm}@{}}
+\toprule
+\textbf{Zufall} & Bei $n=12$ und $r = 0{,}96$ unwahrscheinlich, aber nicht ausgeschlossen. Teil~III beziffert das.\\
+\textbf{Schmerz $\to$ Zeit} & Plausibel: Wer Schmerzen hat, steht nicht auf.\\
+\textbf{Zeit $\to$ Schmerz} & \kursiv{Ebenfalls plausibel:} Wer länger liegt, versteift und hat mehr Schmerz. Die Richtung ist nicht entscheidbar.\\
+\textbf{Dritte Größe} & Ein schwieriger Eingriff verursacht beides --- mehr Schmerz \kursiv{und} spätere Mobilisation.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist die lehrreichste. Beide Richtungen sind medizinisch sinnvoll, und die Daten enthalten keine Auskunft darüber, welche zutrifft. Wer aus dieser Korrelation eine Empfehlung ableitet --- \enquote{bessere Analgesie mobilisiert früher} ---, hat eine Annahme hinzugefügt, die nicht in den Daten steht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Simpson-Paradoxon}
+
+Der schärfste Fall von Fall 4 --- und der einzige, bei dem sich ein Zusammenhang durch Aufteilen sogar \kursiv{umkehrt}.
+
+\begin{merksatz}
+\boxtitel{Der klassische Datensatz}
+Charig und Mitarbeiter verglichen 1986 zwei Verfahren zur Behandlung von Nierensteinen. Die Erfolgsraten:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Verfahren A} & \textbf{Verfahren B}\\
+\midrule
+Kleine Steine & $81/87 = 93\,\%$ & $234/270 = 87\,\%$\\
+Große Steine & $192/263 = 73\,\%$ & $55/80 = 69\,\%$\\
+\midrule
+\textbf{Gesamt} & $273/350 = \mathbf{78\,\%}$ & $289/350 = \mathbf{83\,\%}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{A ist in beiden Gruppen besser --- und insgesamt schlechter.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Warum das geht --- die Rechnung}
+\schritt{Schritt 1 --- Nachprüfen, dass die Zahlen stimmen}
+Verfahren A gesamt: $81 + 192 = 273$ Erfolge bei $87 + 263 = 350$ Fällen. $273/350 = 0{,}78$. \checkmark\\
+Verfahren B gesamt: $234 + 55 = 289$ bei $270 + 80 = 350$. $289/350 = 0{,}826$. \checkmark
+
+\schritt{Schritt 2 --- Die Ursache finden}
+Entscheidend ist die \kursiv{Verteilung der Fälle} auf die Schweregrade:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+& \textbf{A} & \textbf{B}\\
+\midrule
+Kleine Steine & $87$ ($25\,\%$) & $270$ ($77\,\%$)\\
+Große Steine & $263$ ($75\,\%$) & $80$ ($23\,\%$)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Verfahren A wurde überwiegend bei den \kursiv{schwierigen} Fällen angewandt, B überwiegend bei den leichten.
+
+\schritt{Schritt 3 --- Der Gesamtwert als gewichtetes Mittel}
+Die Gesamtrate ist das mit den Fallzahlen gewichtete Mittel der beiden Teilraten:
+\[ A: \quad \frac{87}{350}\cdot 0{,}93 + \frac{263}{350}\cdot 0{,}73 = 0{,}249 \cdot 0{,}93 + 0{,}751 \cdot 0{,}73 = 0{,}231 + 0{,}549 = 0{,}780 \]
+\[ B: \quad \frac{270}{350}\cdot 0{,}87 + \frac{80}{350}\cdot 0{,}69 = 0{,}771 \cdot 0{,}87 + 0{,}229 \cdot 0{,}69 = 0{,}671 + 0{,}158 = 0{,}829 \]
+
+\schritt{Schritt 4 --- Die Erklärung in einem Satz}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+A ist überall besser, wird aber überwiegend auf die schwere Gruppe angewandt, in der \kursiv{beide} Verfahren schlechter abschneiden. Die Gewichtung schlägt den Vorteil.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (6.4,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.2);
+\node[font=\scriptsize, color=grau] at (1.2,-0.32) {klein};
+\node[font=\scriptsize, color=grau] at (4.6,-0.32) {groß};
+\foreach \y/\lab in {0.6/70, 1.6/80, 2.6/90}
+  \node[font=\scriptsize, color=grau] at (-0.48,\y) {\lab\,\%};
+\draw[tief, line width=1.3pt] (1.2,2.9) -- (4.6,0.9);
+\draw[akzent, line width=1.3pt] (1.2,2.3) -- (4.6,0.5);
+\fill[tief] (1.2,2.9) circle (2.4pt); \fill[tief] (4.6,0.9) circle (2.4pt);
+\fill[akzent] (1.2,2.3) circle (2.4pt); \fill[akzent] (4.6,0.5) circle (2.4pt);
+\node[font=\scriptsize, color=tief] at (5.5,1.15) {A};
+\node[font=\scriptsize, color=akzent] at (5.5,0.3) {B};
+\node[font=\scriptsize\itshape, color=grau] at (3.0,-0.8) {A liegt in beiden Gruppen oben};
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Welche Zahl gilt nun?}
+Diese Frage lässt sich \kursiv{nicht} statistisch beantworten. Sie hängt davon ab, was man wissen will.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{\enquote{Welches Verfahren soll ich wählen?}} & Die \kursiv{getrennten} Raten. Der Steindurchmesser ist vor der Behandlung bekannt; man entscheidet innerhalb seiner Gruppe. \textbf{Antwort: A.}\\
+\textbf{\enquote{Wie erfolgreich war Klinik X?}} & Die Gesamtrate --- aber sie sagt mehr über die Fallauswahl als über das Verfahren.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Regel lautet: Man teilt nach einer Größe auf, die \kursiv{vor} der Behandlung feststand und beide beeinflusst --- hier die Steingröße. Teilt man dagegen nach einer Größe auf, die \kursiv{durch} die Behandlung entstanden ist, macht man es schlimmer. Welcher Fall vorliegt, entscheidet das Fachwissen, nicht die Rechnung.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Der ökologische Fehlschluss}
+Eine verwandte Falle: Zusammenhänge auf Gruppenebene gelten nicht notwendig für Einzelne.
+
+\schritt{Das klassische Beispiel}
+Vergleicht man Bundesländer, so ist der Anteil der Menschen mit hohem Bildungsabschluss oft positiv mit einer bestimmten Wahlpräferenz korreliert. Daraus folgt \kursiv{nicht}, dass gebildete Personen so wählen --- der Zusammenhang kann auf Ebene der Personen sogar umgekehrt sein.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In der Medizin tritt derselbe Fehler auf, wenn man aus Länderdaten --- \enquote{Länder mit hohem Fischkonsum haben niedrigere Herzinfarktraten} --- auf den einzelnen Menschen schließt. Solche Studien heißen \Begriff{ökologische Studien}; sie erzeugen Hypothesen und belegen nichts. Kapitel~12 ordnet sie in die Hierarchie der Studientypen ein.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Korrelation von Hand}
+Bestimmen Sie $r$ zwischen \code{ALTER} und \code{MOB} für die sechs Beobachtungen der Gruppe A und deuten Sie das Ergebnis.
+
+\loesung
+\schritt{Schritt 1 --- Die Tabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}P{1.2cm}P{1.2cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+$x$ (Alter) & $y$ (MOB) & $x^2$ & $y^2$ & $xy$\\
+\midrule
+$68$ & $26$ & $4624$ & $676$ & $1768$\\
+$74$ & $19$ & $5476$ & $361$ & $1406$\\
+$61$ & $31$ & $3721$ & $961$ & $1891$\\
+$79$ & $24$ & $6241$ & $576$ & $1896$\\
+$70$ & $35$ & $4900$ & $1225$ & $2450$\\
+$65$ & $22$ & $4225$ & $484$ & $1430$\\
+\midrule
+$\mathbf{417}$ & $\mathbf{157}$ & $\mathbf{29187}$ & $\mathbf{4283}$ & $\mathbf{10841}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die drei Summen}
+\[ \sum(x-\MW)^2 = 29187 - \frac{417^2}{6} = 29187 - \frac{173889}{6} = 29187 - 28981{,}5 = 205{,}5 \]
+\[ \sum(y-\overline y)^2 = 4283 - \frac{157^2}{6} = 4283 - 4108{,}17 = 174{,}83 \]
+\[ \sum(x-\MW)(y-\overline y) = 10841 - \frac{417 \cdot 157}{6} = 10841 - \frac{65469}{6} = 10841 - 10911{,}5 = -70{,}5 \]
+
+\schritt{Schritt 3 --- Einsetzen}
+\[ r = \frac{-70{,}5}{\sqrt{205{,}5}\cdot\sqrt{174{,}83}} = \frac{-70{,}5}{14{,}336 \cdot 13{,}222} = \frac{-70{,}5}{189{,}55} \approx \mathbf{-0{,}372} . \]
+
+\schritt{Schritt 4 --- Die Deutung, sorgfältig}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Vorzeichen} & negativ --- Ältere mobilisieren in diesen sechs Fällen \kursiv{früher}.\\
+\textbf{Betrag} & $0{,}37$ --- schwach bis mäßig.\\
+\textbf{Stichprobe} & $n = 6$. Das ist der entscheidende Punkt.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Warum man hier nichts schließen darf}
+Bei $n = 6$ ergeben sich aus reinem Zufall regelmäßig Korrelationen dieser Größenordnung. Teil~III wird zeigen: Für einen Nachweis bräuchte man bei $n=6$ einen Betrag über etwa $0{,}81$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das Ergebnis widerspricht auch der Erwartung --- man würde vermuten, dass Ältere \kursiv{später} mobilisieren. Genau bei solchen Befunden ist die Versuchung am größten, eine Erklärung zu erfinden. Die richtige Reaktion ist: zu wenige Daten, keine Aussage.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Ein eigenes Simpson-Beispiel bauen}
+Konstruieren Sie zwei Krankenhäuser, bei denen Haus A in beiden Schweregraden eine niedrigere Sterblichkeit hat als Haus B, insgesamt aber eine höhere.
+
+\loesung
+\schritt{Schritt 1 --- Die Bauanleitung}
+Man braucht:
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+(a) & Zwei Schweregrade mit deutlich verschiedener Sterblichkeit.\\
+(b) & Haus A behandelt überwiegend schwere Fälle, Haus B überwiegend leichte.\\
+(c) & In jedem Schweregrad ist A ein wenig besser.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 2 --- Zahlen wählen}
+Leichte Fälle: Sterblichkeit um $2\,\%$. Schwere: um $30\,\%$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.2cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Haus A} & \textbf{Haus B}\\
+\midrule
+Leicht & $2/100 = 2{,}0\,\%$ & $27/900 = 3{,}0\,\%$\\
+Schwer & $270/900 = 30{,}0\,\%$ & $31/100 = 31{,}0\,\%$\\
+\midrule
+\textbf{Gesamt} & $272/1000 = \mathbf{27{,}2\,\%}$ & $58/1000 = \mathbf{5{,}8\,\%}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Prüfen}
+Leicht: $2{,}0 < 3{,}0$ --- A besser. \checkmark\\
+Schwer: $30{,}0 < 31{,}0$ --- A besser. \checkmark\\
+Gesamt: $27{,}2 > 5{,}8$ --- A \kursiv{deutlich} schlechter. \checkmark
+
+\schritt{Schritt 4 --- Die Deutung}
+Haus A ist ein Maximalversorger: Neunzig Prozent seiner Fälle sind schwer. Haus B ist eine Belegklinik mit überwiegend leichten Eingriffen.
+
+Die Gesamtsterblichkeit misst hier fast ausschließlich die \kursiv{Fallzusammensetzung} und fast nichts von der Behandlungsqualität.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Genau darum werden Qualitätskennzahlen im Gesundheitswesen \Begriff{risikoadjustiert} angegeben --- man rechnet auf eine gemeinsame Fallzusammensetzung um. Ohne diese Bereinigung bestraft jede Rangliste die Häuser, die die schweren Fälle übernehmen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Umrechnung vorführen}
+Wir standardisieren auf eine gedachte Bevölkerung mit je $500$ leichten und $500$ schweren Fällen:
+\[ A: \quad 0{,}5 \cdot 2{,}0\,\% + 0{,}5 \cdot 30{,}0\,\% = 16{,}0\,\% \]
+\[ B: \quad 0{,}5 \cdot 3{,}0\,\% + 0{,}5 \cdot 31{,}0\,\% = 17{,}0\,\% \]
+Bei gleicher Fallzusammensetzung ist A besser --- wie es die Teilraten sagen. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Pearson gegen Spearman}
+Gegeben seien die Wertepaare
+\[ (1,1),\ (2,2),\ (3,3),\ (4,4),\ (5,50) . \]
+Berechnen Sie $r$ und $r_s$ und erklären Sie den Unterschied.
+
+\loesung
+\schritt{Schritt 1 --- Pearson}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}P{1.0cm}P{1.2cm}P{1.2cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+$x$ & $y$ & $x^2$ & $y^2$ & $xy$\\
+\midrule
+$1$ & $1$ & $1$ & $1$ & $1$\\
+$2$ & $2$ & $4$ & $4$ & $4$\\
+$3$ & $3$ & $9$ & $9$ & $9$\\
+$4$ & $4$ & $16$ & $16$ & $16$\\
+$5$ & $50$ & $25$ & $2500$ & $250$\\
+\midrule
+$\mathbf{15}$ & $\mathbf{60}$ & $\mathbf{55}$ & $\mathbf{2530}$ & $\mathbf{280}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ \sum(x-\MW)^2 = 55 - \frac{225}{5} = 55 - 45 = 10 \]
+\[ \sum(y-\overline y)^2 = 2530 - \frac{3600}{5} = 2530 - 720 = 1810 \]
+\[ \sum(x-\MW)(y-\overline y) = 280 - \frac{15 \cdot 60}{5} = 280 - 180 = 100 \]
+\[ r = \frac{100}{\sqrt{10}\cdot\sqrt{1810}} = \frac{100}{3{,}162 \cdot 42{,}544} = \frac{100}{134{,}54} \approx \mathbf{0{,}743} \]
+
+\schritt{Schritt 2 --- Spearman}
+Die Ränge sind in beiden Merkmalen $1,2,3,4,5$ --- keine Bindungen, alle Differenzen null:
+\[ r_s = 1 - \frac{6 \cdot 0}{5 \cdot 24} = \mathbf{1{,}000} . \]
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{1.8cm}P{4.0cm}@{}}
+\toprule
+Pearson & $0{,}743$ & misst Nähe zur \kursiv{Geraden}\\
+Spearman & $\mathbf{1{,}000}$ & misst \kursiv{Monotonie}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 4 --- Die Erklärung}
+Der Zusammenhang ist \kursiv{perfekt monoton}: Jedes größere $x$ geht mit einem größeren $y$ einher, ohne Ausnahme. Spearman erkennt das exakt.
+
+Pearson misst etwas anderes --- die Nähe zu einer Geraden. Der Sprung von $4$ auf $50$ passt zu keiner Geraden, die auch die ersten vier Punkte trifft. Deshalb bleibt $r$ deutlich unter $1$.
+
+\schritt{Schritt 5 --- Was daraus zu lernen ist}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein niedrigeres $r$ bedeutet nicht \enquote{schwächerer Zusammenhang}, sondern \enquote{weniger geradlinig}.} Wer $r$ als Maß für die Stärke des Zusammenhangs liest, verwechselt beides.
+\end{minipage}
+\end{center}
+
+\schritt{Nachbemerkung --- welche Zahl hier die richtige ist}
+Das hängt von der Frage ab. Will man wissen, ob $y$ mit $x$ zunimmt: Spearman. Will man $y$ aus $x$ durch eine lineare Formel vorhersagen: Pearson --- und die Antwort $0{,}743$ ist dann die ehrliche Auskunft, dass eine Gerade hier schlecht passt.
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Galton, Pearson und ein Erbe mit zwei Seiten}
+\Person{Francis Galton} (1822--1911) stieß auf die Korrelation bei der Untersuchung von Körpergrößen in Familien. Er bemerkte, dass die Kinder großer Eltern im Mittel kleiner sind als diese --- und die Kinder kleiner Eltern größer. Er nannte das \kursiv{regression towards mediocrity}; daher stammt das Wort \enquote{Regression}, das heute etwas ganz anderes bezeichnet.
+
+\Person{Karl Pearson} (1857--1936), Galtons Schüler, gab der Korrelation 1896 die heutige Formel und baute daraus die mathematische Statistik als Fach auf. Er gründete 1901 die Zeitschrift \kursiv{Biometrika} und besetzte 1911 den ersten Lehrstuhl für Statistik.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Beide waren führende Vertreter der Eugenik --- Galton prägte den Begriff, Pearson vertrat ihn in einer Schärfe, die auch nach den Maßstäben seiner Zeit auffiel. Der Lehrstuhl, den Pearson innehatte, war aus einer eugenischen Stiftung Galtons hervorgegangen; das University College London benannte 2020 die nach beiden benannten Gebäude um.}
+\end{minipage}
+\end{center}
+
+Die Werkzeuge sind davon unberührt --- eine Formel trägt keine Gesinnung. Die Geschichte gehört trotzdem dazu, und zwar aus einem sachlichen Grund: Der Anlass, aus dem heraus die Korrelation entwickelt wurde, war die Frage nach der Vererbung von Eigenschaften. Genau dort ist die Verwechslung von Zusammenhang und Ursache am folgenreichsten --- und sie wurde damals begangen.
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Von der Korrelation zur Kausalität}
+Die Frage, wann man aus Daten auf Ursachen schließen darf, war jahrzehntelang kein mathematisches Thema --- man hielt sie für unentscheidbar und überließ sie dem Studiendesign.
+
+Das hat sich geändert. \Person{Judea Pearl} entwickelte seit den 1990er Jahren einen Formalismus, der kausale Annahmen in einem gerichteten Graphen aufschreibt --- einem \Begriff{DAG}, wie er in Band 16, Kapitel~12 vorkommt. Aus der Struktur dieses Graphen lässt sich dann \kursiv{ausrechnen}, welche Größen man kontrollieren muss und welche man gerade nicht kontrollieren darf.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{5.6cm}@{}}
+\toprule
+\textbf{Konfounder} & wirkt auf Ursache und Wirkung --- \textcolor{gruen}{muss} berücksichtigt werden\\
+\textbf{Mediator} & liegt auf dem Wirkungsweg --- \textcolor{akzent}{darf nicht} berücksichtigt werden\\
+\textbf{Kollider} & wird von beiden beeinflusst --- \textcolor{akzent}{erzeugt} bei Berücksichtigung einen Scheinzusammenhang\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die dritte Zeile war die Überraschung: Das Berücksichtigen einer weiteren Größe kann einen Zusammenhang \kursiv{erzeugen}, der ohne sie nicht besteht. Das widerspricht der verbreiteten Vorstellung, mehr Kontrollvariablen seien immer besser.
+
+Pearl erhielt 2011 den Turing-Preis. Kapitel~15 kommt darauf zurück.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für die Praxis heißt das: Ob eine Größe in ein Modell gehört, ist keine statistische Frage. Sie entscheidet sich an der vermuteten Wirkungsstruktur --- und die muss man aufschreiben, bevor man rechnet.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 3.1} & Kovarianz --- und warum sie allein unbrauchbar ist\\
+\textbf{Satz 3.4} & $-1 \le r \le 1$, mit Gleichheit genau bei exakter Geradenlage\\
+\textbf{Definition 3.5} & Spearman: Monotonie statt Linearität\\
+\textbf{Vier Erklärungen} & Zufall, Wirkung, Gegenwirkung, dritte Größe\\
+\textbf{Simpson} & Ein Zusammenhang kann sich beim Aufteilen umkehren\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~I. Bisher haben wir nur beschrieben, was in den Daten steht. Ab Kapitel~4 fragen wir, was sie über die Grundgesamtheit sagen --- und dort beginnt die eigentliche Statistik.}
+\end{minipage}
+\end{center}
+\end{merksatz}

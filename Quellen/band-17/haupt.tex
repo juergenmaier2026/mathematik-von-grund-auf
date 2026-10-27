@@ -1,0 +1,189 @@
+\documentclass[11pt,a4paper,twoside]{book}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathpazo}
+\usepackage[scaled=0.90]{helvet}
+\usepackage{courier}
+\usepackage[a4paper,inner=3.0cm,outer=2.4cm,top=2.6cm,bottom=2.8cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,arrows.meta,decorations.pathmorphing}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage[german=quotes]{csquotes}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{amsmath,amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{tief}{HTML}{1F3A5F}
+\definecolor{mittel}{HTML}{2E5F8A}
+\definecolor{akzent}{HTML}{A34A28}
+\definecolor{sand}{HTML}{F4F1EA}
+\definecolor{grau}{HTML}{5A5A5A}
+\definecolor{gruen}{HTML}{2F6B4F}
+\definecolor{purpur}{HTML}{5B3A72}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\newcommand{\kursiv}[1]{{\itshape\color{grau}#1}}
+\newcommand{\code}[1]{{\ttfamily\small #1}}
+\newcommand{\Person}[1]{\textbf{#1}}
+\newcommand{\Begriff}[1]{\textbf{#1}}
+\newcommand{\zit}[1]{\textsuperscript{[#1]}}
+\newcommand{\Oh}{\mathcal{O}}
+\newcommand{\boxtitel}[1]{{\bfseries\color{tief}#1}\par\vspace{6pt}}
+\newcommand{\boxtitelr}[1]{{\bfseries\color{akzent}#1}\par\vspace{6pt}}
+\newcommand{\boxtitelg}[1]{{\bfseries\color{gruen}#1}\par\vspace{6pt}}
+\newcommand{\boxtitelp}[1]{{\bfseries\color{purpur}#1}\par\vspace{6pt}}
+\newcommand{\boxtitelm}[1]{{\bfseries\color{mittel}#1}\par\vspace{6pt}}
+\newcommand{\loesung}{\par\vspace{8pt}{\bfseries\color{mittel}Lösung}\par\vspace{4pt}}
+\newcommand{\schritt}[1]{\par\vspace{5pt}{\bfseries\color{grau}#1}\par\vspace{2pt}}
+
+% Graphentheoretische Notation
+\newcommand{\Gr}{G}
+\newcommand{\Kn}[1]{K_{#1}}
+\newcommand{\Kmn}[2]{K_{#1,#2}}
+\newcommand{\Grad}{\deg}
+\newcommand{\Nb}{N}
+\newcommand{\chrom}{\chi}
+\newcommand{\Ecken}{V}
+\newcommand{\Kanten}{E}
+
+\newtcolorbox{grundbox}[1][tief]{
+  breakable, enhanced, colback=sand, colframe=sand,
+  boxrule=0pt, leftrule=3pt, borderline west={3pt}{0pt}{#1},
+  left=12pt, right=10pt, top=10pt, bottom=10pt,
+  sharp corners, before skip=12pt, after skip=12pt}
+
+\newenvironment{merksatz}{\begin{grundbox}[tief]}{\end{grundbox}}
+\newenvironment{warnung}{\begin{grundbox}[akzent]}{\end{grundbox}}
+\newenvironment{definition}{\begin{grundbox}[mittel]}{\end{grundbox}}
+\newenvironment{geschichte}{\begin{grundbox}[gruen]}{\end{grundbox}}
+\newenvironment{forschung}{\begin{grundbox}[purpur]}{\end{grundbox}}
+\newenvironment{aufgabe}{\begin{grundbox}[grau]}{\end{grundbox}}
+\newenvironment{technik}{\begin{grundbox}[mittel]}{\end{grundbox}}
+
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{tief}}{\Large\color{grau}Kapitel \thechapter}{8pt}{\Huge}
+\titleformat{\part}[display]
+  {\normalfont\huge\bfseries\color{tief}\filcenter}{\Large\color{grau}Teil \thepart}{10pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{10pt}{28pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,LO]{\small\itshape\color{grau}\leftmark}
+\fancyfoot[LE,LO]{\small\color{grau}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\renewcommand{\arraystretch}{1.3}
+
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+\renewcommand{\chaptername}{Kapitel}
+\renewcommand{\partname}{Teil}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\tablename}{Tabelle}
+\renewcommand{\figurename}{Abbildung}
+
+\hyphenation{Sta-tis-tik Stich-pro-be Stich-pro-ben Grund-ge-samt-heit
+Merk-mals-aus-prä-gung Ska-len-ni-veau Ska-len-ni-veaus Häu-fig-keits-ta-bel-le
+Stan-dard-ab-wei-chung Stan-dard-feh-ler Kon-fi-denz-in-ter-vall Kon-fi-denz-in-ter-val-le
+Null-hy-po-the-se Al-ter-na-tiv-hy-po-the-se Sig-ni-fi-kanz-ni-veau
+Ver-tei-lungs-frei ver-tei-lungs-freie Per-mu-ta-ti-ons-test Boot-strap
+Re-gres-si-on Re-gres-si-ons-ge-ra-de Re-si-du-um Re-si-du-en Kol-li-ne-a-ri-tät
+lo-gis-tisch lo-gis-ti-sche Über-le-bens-zeit Über-le-bens-zeit-ana-ly-se
+Ran-do-mi-sie-rung Ver-blin-dung Prä-va-lenz Sen-si-ti-vi-tät Spe-zi-fi-tät
+prä-dik-tiv prä-dik-ti-ve Me-ta-ana-ly-se Pu-bli-ka-ti-ons-bias
+Mul-ti-pli-zi-tät Re-pli-ka-ti-ons-kri-se Prä-re-gis-trie-rung
+Mo-bi-li-sa-ti-on Be-darfs-an-al-ge-sie Zu-frie-den-heit
+Ver-hält-nis-ska-la In-ter-vall-ska-la Or-di-nal-ska-la No-mi-nal-ska-la
+Kor-re-la-ti-on Ko-va-ri-anz Quan-til Quan-ti-le Me-di-an}
+
+\tikzset{
+  knoten/.style={circle, fill=tief, inner sep=0pt, minimum size=5.5pt},
+  knotenb/.style={circle, draw=tief, fill=white, line width=0.9pt, inner sep=1pt, minimum size=15pt, font=\scriptsize},
+  knotenr/.style={circle, draw=akzent, fill=akzent!12, line width=0.9pt, inner sep=1pt, minimum size=15pt, font=\scriptsize},
+  knoteng/.style={circle, draw=gruen, fill=gruen!12, line width=0.9pt, inner sep=1pt, minimum size=15pt, font=\scriptsize},
+  kante/.style={draw=grau, line width=0.9pt},
+  kanted/.style={draw=akzent, line width=1.5pt},
+}
+
+\newcommand{\MW}{\overline{x}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\SD}{\operatorname{sd}}
+\newcommand{\Med}{\operatorname{Med}}
+
+\begin{document}
+\frontmatter
+\begin{titlepage}
+\centering
+\vspace*{1.6cm}
+{\footnotesize\scshape\color{grau} Mathematik von Grund auf --- Band 17}\\[1.9cm]
+{\Huge\bfseries\color{tief} Was die Zahlen hergeben}\\[16pt]
+{\Large\color{akzent} Statistik}\\[1.4cm]
+
+\begin{tikzpicture}[scale=1.0]
+% Punktwolke mit Gerade
+\begin{scope}[xshift=-3.6cm]
+\draw[grau!50, line width=0.6pt] (-1.0,-0.85) -- (-1.0,0.95);
+\draw[grau!50, line width=0.6pt] (-1.0,-0.85) -- (1.0,-0.85);
+\foreach \x/\y in {-0.75/-0.55, -0.5/-0.2, -0.25/-0.35, 0/0.15, 0.15/0.0, 0.4/0.4, 0.6/0.3, 0.8/0.65, -0.6/-0.6, 0.25/0.25}
+  \fill[tief] (\x,\y) circle (1.5pt);
+\draw[akzent, line width=1.1pt] (-0.85,-0.62) -- (0.9,0.6);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {beschreiben};
+\end{scope}
+% Glockenkurve mit Schwanz
+\begin{scope}
+\draw[grau!50, line width=0.6pt] (-1.15,-0.85) -- (1.15,-0.85);
+\draw[tief, line width=1.1pt, smooth, samples=60, domain=-1.1:1.1]
+  plot (\x, {-0.85 + 1.5*exp(-3.2*\x*\x)});
+\fill[akzent!35] (0.72,-0.85) -- plot[smooth, samples=20, domain=0.72:1.1] (\x, {-0.85+1.5*exp(-3.2*\x*\x)}) -- (1.1,-0.85) -- cycle;
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {testen};
+\end{scope}
+% Konfidenzintervalle
+\begin{scope}[xshift=3.6cm]
+\draw[grau!50, line width=0.6pt] (0,-0.9) -- (0,1.0);
+\foreach \y/\a/\b in {0.75/-0.75/0.35, 0.4/-0.35/0.7, 0.05/-0.6/0.5, -0.3/0.1/0.95, -0.65/-0.9/0.15} {
+  \draw[tief, line width=1.0pt] (\a,\y) -- (\b,\y);
+  \fill[akzent] ({(\a+\b)/2},\y) circle (1.6pt);
+}
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {schätzen};
+\end{scope}
+\end{tikzpicture}
+
+\vspace{1.4cm}
+{\large\color{grau} Von der Häufigkeitstabelle bis zur kausalen Inferenz}\\[6pt]
+{\color{grau} Jeder Schritt erklärt. Mit vollständig durchgerechneten Übungsaufgaben.}\\[1.9cm]
+{\small\color{grau} Stand der Forschung: August 2026}
+\end{titlepage}
+\input{impressum}
+\tableofcontents
+\mainmatter
+
+\include{00_vorwort}
+\include{01_daten}
+\include{02_lage}
+\include{03_zusammenhang}
+\include{04_stichprobe}
+\include{05_schaetzer}
+\include{06_konfidenz}
+\include{07_test}
+\include{08_tests}
+\include{09_verteilungsfrei}
+\include{10_regression}
+\include{11_zielgroessen}
+\include{12_design}
+\include{13_diagnostik}
+\include{14_multiplizitaet}
+\include{15_stand}
+\include{A_anhang}
+\include{B_quellen}
+
+\end{document}

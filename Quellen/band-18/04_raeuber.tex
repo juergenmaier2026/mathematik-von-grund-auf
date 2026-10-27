@@ -1,0 +1,731 @@
+\part{Wechselwirkung}
+
+\chapter{Räuber und Beute}
+
+\section{Zwei Populationen}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall: Bakterien und Phagen}
+Am Klinikum Neustadt wird geprüft, ob sich der Erreger mit \Begriff{Bakteriophagen} bekämpfen lässt --- Viren, die ausschließlich Bakterien befallen und in ihnen neue Viren erzeugen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Das ist ein Räuber-Beute-System im Reagenzglas: Die Phagen brauchen die Bakterien, um sich zu vermehren; die Bakterien werden von ihnen getötet.
+\end{minipage}
+\end{center}
+
+\textbf{Die Frage:} Rottet der Phage die Bakterien aus? Oder pendelt sich etwas ein?
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die vier Annahmen}
+Sei $x(t)$ die Zahl der Bakterien, $y(t)$ die der Phagen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{0.7cm}P{3.0cm}P{4.6cm}@{}}
+\toprule
+$1$ & \textbf{Beute allein} & wächst exponentiell mit Rate $a$ --- Kapitel~1\\
+$2$ & \textbf{Räuber allein} & stirbt exponentiell mit Rate $c$\\
+$3$ & \textbf{Begegnungen} & sind proportional zu $x\cdot y$\\
+$4$ & \textbf{Umsetzung} & Jede Begegnung tötet eine Beute und erzeugt Räuber\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum das Produkt $x\cdot y$}
+Begegnen sich zwei Arten zufällig im Raum, so ist die Zahl der Zusammentreffen je Zeiteinheit proportional zu beiden Dichten: Doppelt so viele Bakterien bedeuten doppelt so viele Begegnungen, ebenso doppelt so viele Phagen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Annahme heißt \Begriff{Massenwirkungsgesetz} und stammt aus der Chemie. Sie setzt voraus, dass beide Arten \kursiv{gut durchmischt} sind --- dass also jeder Phage jedem Bakterium gleich nahe ist. Im gerührten Reagenzglas trifft das ungefähr zu, im Gewebe nicht. Kapitel~9 kommt darauf zurück.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 4.1 --- das Lotka-Volterra-Modell}
+\[ \frac{\dd x}{\dd t} = x\,(a - b\,y), \qquad \frac{\dd y}{\dd t} = y\,(-c + d\,x) \]
+mit $a, b, c, d > 0$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Parameter}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.2cm}P{3.2cm}P{3.6cm}@{}}
+\toprule
+& \textbf{Bedeutung} & \textbf{Einheit}\\
+\midrule
+$a$ & Wachstumsrate der Beute & $\mathrm{h}^{-1}$\\
+$b$ & Verlustrate je Räuber & je Räuber und Stunde\\
+$c$ & Sterberate der Räuber & $\mathrm{h}^{-1}$\\
+$d$ & Vermehrung je Beute & je Beute und Stunde\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Wie man die Gleichungen liest}
+Beide haben die Form \enquote{Bestand mal Rate}. Der Unterschied steckt im Vorzeichen:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+$a - by$ & Die Beute wächst, solange wenige Räuber da sind. Ab $y > a/b$ schrumpft sie.\\
+$-c + dx$ & Die Räuber sterben, solange wenig Beute da ist. Ab $x > c/d$ vermehren sie sich.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In diesen beiden Schwellen steckt bereits das gesamte Verhalten des Modells --- und, wie sich zeigen wird, auch sein überraschendstes Ergebnis.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Gleichgewichte}
+
+\begin{merksatz}
+\boxtitel{Satz 4.2 --- die beiden Gleichgewichtspunkte}
+Es gibt genau zwei Punkte, in denen sich beide Bestände nicht ändern:
+\[ (x^{*}, y^{*}) = (0,0) \qquad\text{und}\qquad (x^{*}, y^{*}) = \left(\frac{c}{d},\ \frac{a}{b}\right) . \]
+
+\schritt{Beweis}
+Beide Ableitungen müssen null sein:
+\[ x(a-by) = 0 \qquad\text{und}\qquad y(-c+dx) = 0 \]
+
+Aus der ersten: $x = 0$ oder $y = a/b$.\\
+Aus der zweiten: $y = 0$ oder $x = c/d$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Fall} & \textbf{prüft sich als} & \\
+\midrule
+$x=0$ und $y=0$ & \textcolor{gruen}{Lösung} & beide ausgestorben\\
+$x=0$ und $x=c/d$ & \textcolor{akzent}{Widerspruch} & da $c/d > 0$\\
+$y=a/b$ und $y=0$ & \textcolor{akzent}{Widerspruch} & da $a/b > 0$\\
+$y=a/b$ und $x=c/d$ & \textcolor{gruen}{Lösung} & \textbf{das Koexistenzgleichgewicht}\\
+\bottomrule
+\end{tabular}
+\end{center}
+$\blacksquare$
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Das Gleichgewicht steht über Kreuz}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Beutebestand $x^{*} = c/d$ hängt nur von den Räuberparametern ab. Der Räuberbestand $y^{*} = a/b$ hängt nur von den Beuteparametern ab.}
+\end{minipage}
+\end{center}
+
+Das widerspricht der Anschauung. Man erwartete, dass eine schneller wachsende Beute zu mehr Beute führt. Tatsächlich führt sie zu mehr \kursiv{Räubern}.
+
+\schritt{Die Erklärung}
+Der Beutebestand pendelt sich dort ein, wo die Räuber gerade weder wachsen noch schrumpfen --- also bei $-c+dx = 0$. Das ist eine Bedingung an die Räuber.
+
+Entsprechend pendelt sich der Räuberbestand dort ein, wo die Beute gerade stillsteht: $a - by = 0$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Jede Art wird also von den Bedürfnissen der \kursiv{anderen} auf ihren Wert festgelegt. Das ist kein Rechentrick, sondern die Folge daraus, dass beide Gleichungen gleichzeitig null sein müssen. Abschnitt 4.5 macht daraus ein praktisch folgenreiches Ergebnis.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Die Phagen am Klinikum}
+Gemessen wurden --- Bestände in Einheiten von $10^6$ je Milliliter:
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.4cm}P{2.0cm}P{4.2cm}@{}}
+\toprule
+$a$ & $1{,}0\ \mathrm{h}^{-1}$ & Bakterienwachstum\\
+$b$ & $0{,}5$ & Verlust je Phageneinheit\\
+$c$ & $0{,}4\ \mathrm{h}^{-1}$ & Phagenzerfall\\
+$d$ & $0{,}2$ & Phagenbildung je Bakterieneinheit\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Das Gleichgewicht}
+\[ x^{*} = \frac{c}{d} = \frac{0{,}4}{0{,}2} = 2{,}0 \qquad y^{*} = \frac{a}{b} = \frac{1{,}0}{0{,}5} = 2{,}0 \]
+
+Also je $2\cdot10^6$ Bakterien und Phagen je Milliliter.
+
+\schritt{Die Antwort auf die Ausgangsfrage}
+Der Phage rottet die Bakterien \kursiv{nicht} aus. Beide bestehen nebeneinander --- allerdings, wie der nächste Abschnitt zeigt, nicht ruhig, sondern in Schwingungen.
+\end{merksatz}
+
+\section{Das Phasenporträt}
+
+\begin{merksatz}
+\boxtitel{Eine andere Darstellung}
+Statt $x$ und $y$ getrennt über die Zeit aufzutragen, trägt man $y$ gegen $x$ auf. Jeder Punkt der Ebene ist ein Zustand des Systems; die Zeit wird zur Bewegungsrichtung entlang einer Bahn.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (6.2,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,4.6);
+\draw[grau!50, dashed] (2.6,0) -- (2.6,4.3);
+\draw[grau!50, dashed] (0,2.3) -- (5.9,2.3);
+\fill[akzent] (2.6,2.3) circle (2.6pt);
+\node[font=\scriptsize, color=akzent, anchor=west] at (2.8,2.05) {$(c/d,\ a/b)$};
+\draw[tief, line width=1.2pt] (2.6,2.3) ellipse (0.85 and 0.72);
+\draw[tief, line width=1.2pt] (2.6,2.3) ellipse (1.7 and 1.35);
+\draw[tief, line width=1.2pt] (2.6,2.3) ellipse (2.5 and 1.9);
+\draw[tief, -{Stealth[length=6pt]}] (2.6,4.2) -- (2.35,4.2);
+\draw[tief, -{Stealth[length=6pt]}] (2.6,0.4) -- (2.85,0.4);
+\node[font=\scriptsize, color=grau] at (3.3,-0.42) {Bakterien $x$};
+\node[font=\scriptsize, color=grau, rotate=90] at (-0.45,2.3) {Phagen $y$};
+\node[font=\scriptsize\itshape, color=grau] at (5.1,3.9) {gegen den Uhrzeiger};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Die vier Viertel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+\textbf{Lage} & \textbf{Bakterien} & \textbf{Phagen}\\
+\midrule
+wenig von beidem & \textcolor{gruen}{wachsen} & \textcolor{akzent}{sterben}\\
+viele Bakterien, wenige Phagen & \textcolor{gruen}{wachsen} & \textcolor{gruen}{wachsen}\\
+viele von beidem & \textcolor{akzent}{sterben} & \textcolor{gruen}{wachsen}\\
+wenige Bakterien, viele Phagen & \textcolor{akzent}{sterben} & \textcolor{akzent}{sterben}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Reihenfolge erzeugt die Umlaufbewegung: Auf viele Bakterien folgen viele Phagen, auf viele Phagen wenige Bakterien, auf wenige Bakterien wenige Phagen --- und dann beginnt es von vorn. Der Räuber folgt der Beute mit einer Verzögerung von etwa einem Viertel Umlauf.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 4.3 --- eine Erhaltungsgröße}
+Entlang jeder Bahn ist die Größe
+\[ V(x,y) \;=\; d\,x - c\,\ln x + b\,y - a\,\ln y \]
+konstant.
+
+\schritt{Beweis}
+Wir leiten $V$ nach der Zeit ab. Nach der Kettenregel:
+\[ \frac{\dd V}{\dd t} = \left(d - \frac{c}{x}\right)\frac{\dd x}{\dd t} + \left(b - \frac{a}{y}\right)\frac{\dd y}{\dd t} \]
+
+Die Ableitungen einsetzen:
+\[ = \left(d - \frac{c}{x}\right)x(a-by) + \left(b - \frac{a}{y}\right)y(-c+dx) \]
+
+Ausmultiplizieren --- $x$ beziehungsweise $y$ hineinziehen:
+\[ = (dx - c)(a-by) + (by - a)(-c+dx) \]
+
+Im zweiten Summanden klammern wir $-1$ zweimal aus:
+\[ (by-a)(-c+dx) = -(a-by)\cdot(dx-c) \]
+
+Also
+\[ \frac{\dd V}{\dd t} = (dx-c)(a-by) - (a-by)(dx-c) = 0 . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was das bedeutet}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Bahn ist eine geschlossene Kurve.} Das System kehrt immer wieder exakt zu seinem Ausgangszustand zurück --- und zwar für jeden Startwert.
+\end{minipage}
+\end{center}
+
+\schritt{Woher die geschlossenen Bahnen kommen}
+Die Bahn liegt auf einer Höhenlinie von $V$. Man kann zeigen, dass $V$ genau ein Minimum hat --- im Gleichgewichtspunkt --- und nach außen überall wächst. Die Höhenlinien einer solchen Funktion sind geschlossene Kurven um das Minimum.
+
+\schritt{Die Periode nahe am Gleichgewicht}
+Für kleine Auslenkungen ergibt die Linearisierung eine Schwingung mit der Kreisfrequenz $\sqrt{ac}$, also der Periode
+\[ T = \frac{2\pi}{\sqrt{ac}} . \]
+
+\kursiv{Für die Phagen am Klinikum:}
+\[ T = \frac{2\pi}{\sqrt{1{,}0 \cdot 0{,}4}} = \frac{6{,}283}{0{,}6325} = 9{,}93\ \text{Stunden} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert: Die Periode hängt nur von $a$ und $c$ ab --- den Raten, mit denen jede Art \kursiv{allein} wächst oder stirbt. Die Wechselwirkungsstärken $b$ und $d$ bestimmen, wo das Gleichgewicht liegt, aber nicht, wie schnell umgelaufen wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Volterras Prinzip}
+
+Jetzt das Ergebnis, um dessentwillen dieses Kapitel geschrieben ist.
+
+\begin{merksatz}
+\boxtitel{Satz 4.4 --- die Mittelwerte über eine Periode}
+Sei $T$ die Umlaufdauer einer Bahn. Dann gilt für die zeitlichen Mittelwerte
+\[ \overline{x} = \frac{1}{T}\int_0^T x\,\dd t = \frac{c}{d}, \qquad \overline{y} = \frac{1}{T}\int_0^T y\,\dd t = \frac{a}{b} . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Mittelwerte sind genau die Gleichgewichtswerte --- und zwar für \kursiv{jede} Bahn, gleichgültig wie groß die Schwingung ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- kurz und überraschend}
+\schritt{Schritt 1 --- Die Gleichung umschreiben}
+Wir teilen die erste Gleichung durch $x$:
+\[ \frac{1}{x}\frac{\dd x}{\dd t} = a - b\,y \]
+
+Links steht nach der Kettenregel gerade die Ableitung des Logarithmus:
+\[ \frac{\dd}{\dd t}\ln x(t) = \frac{1}{x}\frac{\dd x}{\dd t} \]
+
+Also
+\[ \frac{\dd}{\dd t}\ln x = a - b\,y . \]
+
+\schritt{Schritt 2 --- Über eine Periode integrieren}
+\[ \int_0^T \frac{\dd}{\dd t}\ln x\,\dd t = \int_0^T (a - by)\,\dd t \]
+
+Links steht nach dem Hauptsatz der Differential- und Integralrechnung
+\[ \ln x(T) - \ln x(0) . \]
+
+\schritt{Schritt 3 --- Der entscheidende Punkt}
+Die Bahn ist geschlossen, also $x(T) = x(0)$. Damit ist die linke Seite \textbf{null}.
+
+\schritt{Schritt 4 --- Auflösen}
+\[ 0 = \int_0^T a\,\dd t - b\int_0^T y\,\dd t = aT - b\int_0^T y\,\dd t \]
+\[ \int_0^T y\,\dd t = \frac{aT}{b} \quad\Longrightarrow\quad \overline y = \frac{1}{T}\cdot\frac{aT}{b} = \frac{a}{b} \]
+
+\schritt{Schritt 5 --- Dasselbe für $x$}
+Aus der zweiten Gleichung, durch $y$ geteilt:
+\[ \frac{\dd}{\dd t}\ln y = -c + d\,x \]
+Integrieren über eine Periode ergibt $0 = -cT + d\int_0^T x\,\dd t$, also $\overline x = c/d$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis benutzt keine einzige Eigenschaft der Bahn außer ihrer Geschlossenheit. Deshalb gilt er für alle Schwingungsgrößen gleichermaßen --- man muss die Bahn nicht kennen, nicht ausrechnen und nicht einmal wissen, wie lange $T$ ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Folgerung: Volterras Prinzip}
+Wir bekämpfen nun \kursiv{beide} Arten gleichzeitig --- etwa mit einem Mittel, das Bakterien und Phagen gleichermaßen abtötet, mit der Rate $h$:
+\[ \frac{\dd x}{\dd t} = x\,(a - h - b\,y), \qquad \frac{\dd y}{\dd t} = y\,(-c - h + d\,x) \]
+
+\schritt{Die neuen Mittelwerte}
+Dieselbe Rechnung, mit $a \to a-h$ und $c \to c+h$:
+\[ \overline{x} = \frac{c+h}{d}, \qquad \overline{y} = \frac{a-h}{b} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Bekämpfung erhöht den mittleren Bestand der Beute und senkt den der Räuber.}
+\end{minipage}
+\end{center}
+
+\schritt{Am Zahlenbeispiel}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+$h$ & $\overline x$ (Bakterien) & $\overline y$ (Phagen)\\
+\midrule
+$0$ & $2{,}00$ & $2{,}00$\\
+$0{,}2$ & $3{,}00$ & $1{,}60$\\
+$0{,}4$ & $4{,}00$ & $1{,}20$\\
+$0{,}6$ & $5{,}00$ & $0{,}80$\\
+$1{,}0$ & $7{,}00$ & \textcolor{akzent}{$0{,}00$}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Rechnung für $h=0{,}4$:} $\overline x = (0{,}4+0{,}4)/0{,}2 = 4{,}0$ und $\overline y = (1{,}0-0{,}4)/0{,}5 = 1{,}2$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Mittel, das beide tötet, verdoppelt den mittleren Bakterienbestand.} Bei $h \ge a$ verschwinden die Phagen ganz, und die Bakterien wachsen wieder unbeschränkt.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Warum das folgenreich ist}
+Der Befund erklärt eine Beobachtung, die zunächst unverständlich schien.
+
+\schritt{Die Adria, 1914 bis 1923}
+Der Zoologe Umberto D'Ancona untersuchte die Fangstatistiken der Adriahäfen. Er fand, dass während des Ersten Weltkriegs --- als kaum gefischt wurde --- der Anteil der \kursiv{Raubfische} am Fang deutlich \textbf{stieg}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Weniger Fischerei führte zu mehr Räubern, nicht zu mehr Beutefischen. D'Ancona konnte sich das nicht erklären und wandte sich an seinen Schwiegervater Vito Volterra.
+\end{minipage}
+\end{center}
+
+\schritt{Die Auflösung}
+Genau das sagt Satz 4.4 vorher. Fischerei wirkt wie das Mittel mit Rate $h$: Sie trifft beide Arten. Verringert man $h$, so steigt $\overline y$ und sinkt $\overline x$.
+
+\schritt{Die allgemeine Regel}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer in ein Räuber-Beute-System eingreift und beide Arten gleichermaßen trifft, begünstigt die Beute.}
+\end{minipage}
+\end{center}
+
+\schritt{Wo das heute eine Rolle spielt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Schädlings\-bekämpfung} & Ein Breitbandmittel tötet Schädling und Nützling. Der Schädling kann danach häufiger sein als vorher.\\
+\textbf{Antibiotika} & Ein Breitbandantibiotikum trifft auch die konkurrierende Normalflora --- Kapitel~5.\\
+\textbf{Fischerei} & Der ursprüngliche Fall; heute Grundlage von Fangquotenmodellen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Zeile ist in der Landwirtschaft gut belegt: Nach Breitbandbehandlungen treten regelmäßig Schädlingsvermehrungen auf, die stärker sind als vor dem Eingriff. Man nennt das \Begriff{Sekundärgradation}, und Volterras Prinzip ist ihre einfachste Erklärung.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Das Modell ist strukturell instabil}
+Die geschlossenen Bahnen sind eine sehr besondere Eigenschaft. Sie verschwinden bei der kleinsten Änderung des Modells.
+
+\schritt{Ein Beispiel}
+Gibt man der Beute eine Kapazitätsgrenze --- wie in Kapitel~2 ---, so lautet die erste Gleichung
+\[ \frac{\dd x}{\dd t} = x\left(a\left(1-\frac{x}{K}\right) - b\,y\right) . \]
+
+Die Bahnen sind dann keine geschlossenen Kurven mehr, sondern Spiralen, die auf das Gleichgewicht zulaufen. Die Schwingungen klingen ab.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\begin{scope}
+\draw[grau!60, line width=0.6pt] (0,0) -- (3.6,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,3.2);
+\fill[akzent] (1.8,1.6) circle (2.2pt);
+\draw[tief, line width=1.0pt] (1.8,1.6) ellipse (1.3 and 1.1);
+\draw[tief, line width=1.0pt] (1.8,1.6) ellipse (0.7 and 0.6);
+\node[font=\scriptsize\itshape, color=grau] at (1.8,-0.5) {Lotka-Volterra};
+\end{scope}
+\begin{scope}[xshift=5.0cm]
+\draw[grau!60, line width=0.6pt] (0,0) -- (3.6,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,3.2);
+\fill[akzent] (1.8,1.6) circle (2.2pt);
+\draw[tief, line width=1.0pt, smooth, samples=100, domain=0:12.5]
+  plot ({1.8+1.35*exp(-0.085*\x)*cos(\x)}, {1.6+1.15*exp(-0.085*\x)*sin(\x)});
+\node[font=\scriptsize\itshape, color=grau] at (1.8,-0.5) {mit Kapazitätsgrenze};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\schritt{Warum das ein Mangel ist}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Ein Modell, dessen wichtigste Eigenschaft bei jeder kleinen Änderung verschwindet, beschreibt nichts Robustes. Die Natur enthält immer solche kleinen Änderungen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man sagt, das Modell sei \Begriff{strukturell instabil}. Die geschlossenen Bahnen sind ein Artefakt der besonderen Bauweise, nicht eine Vorhersage. Beobachtete Populationszyklen --- etwa die bekannten Schwankungen von Schneeschuhhase und Luchs --- sind daher \kursiv{nicht} als Beleg für dieses Modell zu lesen.}
+\end{minipage}
+\end{center}
+
+\schritt{Was trotzdem bleibt}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Gleich\-gewichtslage} & Die Überkreuz-Beziehung bleibt auch in verfeinerten Modellen erhalten.\\
+\textbf{Volterras Prinzip} & Gilt ebenfalls allgemeiner --- die Richtung des Effekts bleibt.\\
+\textbf{Die Verzögerung} & Der Räuber folgt der Beute --- das ist ein robustes Merkmal.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und eine Unstimmigkeit, die auffallen sollte}
+Bei kleinem $x$ und kleinem $y$ wächst die Beute exponentiell. Das Modell kennt also weder eine Obergrenze noch ein Aussterben durch Zufall.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Läuft eine Bahn sehr nahe an die Achsen heran --- was bei großen Schwingungen geschieht ---, so sinkt der Bestand auf Werte wie $0{,}001$ Einheiten. Bei $10^6$ je Einheit wären das noch tausend Zellen; bei einer Tierpopulation wären es weniger als ein Individuum. Ein stetiges Modell rechnet das ohne Bedenken weiter. In Wirklichkeit ist die Art dann ausgestorben.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Stetige Modelle kennen keine ganzen Zahlen und kein Aussterben.} Bei kleinen Beständen muss man zu stochastischen Modellen übergehen.
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Gleichgewicht und Periode}
+Für ein Räuber-Beute-System gilt $a = 0{,}8\ \mathrm{d}^{-1}$, $b = 0{,}004$, $c = 0{,}5\ \mathrm{d}^{-1}$, $d = 0{,}001$. Bestimmen Sie das Gleichgewicht, die Periode kleiner Schwingungen und deuten Sie das Ergebnis.
+
+\loesung
+\schritt{Schritt 1 --- Das Gleichgewicht}
+\[ x^{*} = \frac{c}{d} = \frac{0{,}5}{0{,}001} = 500 \ \text{Beutetiere} \]
+\[ y^{*} = \frac{a}{b} = \frac{0{,}8}{0{,}004} = 200 \ \text{Räuber} \]
+
+\schritt{Schritt 2 --- Die Periode}
+\[ T = \frac{2\pi}{\sqrt{ac}} = \frac{6{,}283}{\sqrt{0{,}8 \cdot 0{,}5}} = \frac{6{,}283}{\sqrt{0{,}4}} = \frac{6{,}283}{0{,}6325} = 9{,}93\ \text{Tage} \]
+
+\schritt{Schritt 3 --- Die Probe über die Einheiten}
+$a$ und $c$ haben die Einheit $\mathrm{d}^{-1}$, also hat $\sqrt{ac}$ ebenfalls $\mathrm{d}^{-1}$, und $T$ hat die Einheit Tage. \checkmark
+
+\schritt{Schritt 4 --- Was geschieht, wenn die Beute schneller wächst?}
+Verdoppeln wir $a$ auf $1{,}6$:
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+& $x^{*}$ & $y^{*}$ & $T$\\
+\midrule
+$a = 0{,}8$ & $500$ & $200$ & $9{,}93$ d\\
+$a = 1{,}6$ & $\mathbf{500}$ & $\mathbf{400}$ & $7{,}02$ d\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beutebestand bleibt unverändert bei $500$; die Räuber verdoppeln sich. Das ist die Überkreuz-Eigenschaft aus Abschnitt 4.2, in Zahlen. Wer die Beute fördert --- etwa durch besseres Futterangebot --- fördert die Räuber.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Und wenn man die Räuber dezimiert?}
+Verdoppeln wir $c$ auf $1{,}0$ --- die Räuber sterben doppelt so schnell:
+\[ x^{*} = \frac{1{,}0}{0{,}001} = 1000, \qquad y^{*} = 200 \ \text{unverändert} . \]
+
+Die Beute verdoppelt sich, die Räuber bleiben gleich.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Auch das ist überkreuz --- und es ist die Gegenprobe zu Volterras Prinzip: Trifft man \kursiv{nur} die Räuber, so nützt das der Beute, ohne den Räubern im Mittel zu schaden. Die Kunst liegt in der Auswahl.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Schädlingsbekämpfung durchrechnen}
+Ein Schädling ($x$) wird von einem Nützling ($y$) kurzgehalten: $a = 2{,}0$, $b = 0{,}01$, $c = 0{,}8$, $d = 0{,}004$ (je Woche). Ein Breitbandmittel tötet beide mit der Rate $h$. Wie ändern sich die Mittelwerte?
+
+\loesung
+\schritt{Schritt 1 --- Ohne Behandlung}
+\[ \overline x = \frac{c}{d} = \frac{0{,}8}{0{,}004} = 200, \qquad \overline y = \frac{a}{b} = \frac{2{,}0}{0{,}01} = 200 \]
+
+\schritt{Schritt 2 --- Mit Behandlung}
+\[ \overline x = \frac{c+h}{d} = \frac{0{,}8+h}{0{,}004}, \qquad \overline y = \frac{a-h}{b} = \frac{2{,}0-h}{0{,}01} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+$h$ & $\overline x$ (Schädling) & $\overline y$ (Nützling) & \textbf{Änderung}\\
+\midrule
+$0$ & $200$ & $200$ & ---\\
+$0{,}4$ & $300$ & $160$ & $+50\,\%$\\
+$0{,}8$ & $400$ & $120$ & $+100\,\%$\\
+$1{,}2$ & $500$ & $80$ & $+150\,\%$\\
+$2{,}0$ & $700$ & \textcolor{akzent}{$0$} & \textcolor{akzent}{Nützling weg}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Je stärker behandelt wird, desto größer der mittlere Schädlingsbestand.} Bei $h = 2{,}0$ ist der Nützling ausgerottet, und der Schädling wächst danach unbegrenzt.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Der scheinbare Widerspruch zur Erfahrung}
+Nach einer Behandlung beobachtet man zunächst sehr wohl einen Rückgang. Das Modell widerspricht dem nicht --- es macht eine Aussage über den \kursiv{Mittelwert über eine Periode}, nicht über den Verlauf unmittelbar danach.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Genau darin liegt die Tücke: Der kurzfristige Erfolg ist sichtbar, der langfristige Schaden nicht. Wer nach jeder Behandlung den sofortigen Rückgang misst, wird das Mittel für wirksam halten --- und häufiger behandeln müssen als vorher.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Was stattdessen hilft}
+Ein Mittel, das \kursiv{nur} den Schädling trifft, wirkt wie eine Erhöhung von $c$ --- nein, genauer: Es erhöht die Sterberate der Beute, verändert also $a$ zu $a - h$, ohne $c$ zu berühren:
+\[ \overline x = \frac{c}{d} = 200 \ \text{unverändert}, \qquad \overline y = \frac{a-h}{b} \ \text{sinkt} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Also nützt auch das nichts --- im Mittel! Der Schädlingsbestand bleibt bei $200$, und man schadet dem Nützling. Die einzige Maßnahme, die den mittleren Schädlingsbestand senkt, ist eine, die den \kursiv{Nützling fördert}: Eine Verringerung von $c$ oder eine Erhöhung von $d$ senkt $\overline x = c/d$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist die Grundlage der biologischen Schädlingsbekämpfung} --- und sie folgt unmittelbar aus der Überkreuz-Eigenschaft.
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Die Erhaltungsgröße nutzen}
+Für $a = 1{,}0$, $b = 0{,}5$, $c = 0{,}4$, $d = 0{,}2$ startet das System bei $x_0 = 4{,}0$ und $y_0 = 2{,}0$. Bestimmen Sie den Wert der Erhaltungsgröße und daraus den kleinsten vorkommenden Bakterienbestand.
+
+\loesung
+\schritt{Schritt 1 --- Die Erhaltungsgröße am Startpunkt}
+\[ V = d\,x - c\ln x + b\,y - a\ln y \]
+\[ V_0 = 0{,}2 \cdot 4 - 0{,}4\ln 4 + 0{,}5 \cdot 2 - 1{,}0\ln 2 \]
+\[ = 0{,}8 - 0{,}4 \cdot 1{,}3863 + 1{,}0 - 0{,}6931 \]
+\[ = 0{,}8 - 0{,}5545 + 1{,}0 - 0{,}6931 = 0{,}5524 \]
+
+\schritt{Schritt 2 --- Wo der kleinste $x$-Wert liegt}
+Auf einer geschlossenen Bahn wird $x$ dort am kleinsten, wo die Bahn senkrecht verläuft --- also wo $\dd x/\dd t = 0$ bei $\dd y/\dd t \neq 0$. Aus $x(a-by) = 0$ und $x > 0$:
+\[ y = \frac{a}{b} = \frac{1{,}0}{0{,}5} = 2{,}0 = y^{*} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Extremwerte von $x$ werden also stets bei $y = y^{*}$ angenommen --- und umgekehrt. Die Bahn hat ihre waagerechten und senkrechten Tangenten genau auf den beiden gestrichelten Linien des Phasenporträts.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Gleichung für $x$}
+Wir setzen $y = 2{,}0$ und $V = 0{,}5524$ ein:
+\[ 0{,}5524 = 0{,}2x - 0{,}4\ln x + 0{,}5 \cdot 2 - 1{,}0\ln 2 \]
+\[ 0{,}5524 = 0{,}2x - 0{,}4\ln x + 1{,}0 - 0{,}6931 \]
+\[ 0{,}2x - 0{,}4\ln x = 0{,}5524 - 0{,}3069 = 0{,}2455 \]
+
+\schritt{Schritt 4 --- Lösen}
+Die Gleichung $0{,}2x - 0{,}4\ln x = 0{,}2455$ lässt sich nicht geschlossen auflösen. Wir probieren:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+$x$ & $0{,}2x-0{,}4\ln x$ & \\
+\midrule
+$4{,}0$ & $0{,}2455$ & \textcolor{gruen}{der Startwert}\\
+$2{,}0$ & $0{,}1227$ & zu klein\\
+$1{,}0$ & $0{,}2000$ & zu klein\\
+$0{,}8$ & $0{,}2493$ & knapp zu groß\\
+$0{,}82$ & $0{,}2432$ & knapp zu klein\\
+$\mathbf{0{,}81}$ & $\mathbf{0{,}2462}$ & \textcolor{gruen}{nahe genug}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Antwort}
+Der kleinste Bakterienbestand beträgt etwa $\mathbf{0{,}81}$ Einheiten --- also $8{,}1\cdot10^{5}$ je Milliliter.
+
+\schritt{Schritt 5 --- Die Probe}
+Der Startwert $x_0 = 4{,}0$ liefert denselben Wert des Ausdrucks. Das muss so sein: Auch der Start lag bei $y = 2{,}0 = y^{*}$, also ist $x_0$ selbst ein Extremwert --- nämlich der \kursiv{größte}.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Bahn schwankt also zwischen $0{,}81$ und $4{,}0$ Einheiten Bakterien --- um den Mittelwert $\overline x = c/d = 2{,}0$. Beachten Sie, dass die Schwankung \kursiv{unsymmetrisch} ist: $1{,}19$ nach unten, $2{,}0$ nach oben. Der zeitliche Mittelwert ist dennoch genau $2{,}0$, weil sich das System in den unteren Bereichen länger aufhält.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Warum das praktisch wichtig ist}
+Bei $8{,}1\cdot10^5$ Bakterien je Milliliter ist die Population noch groß. Wäre die Anfangsauslenkung stärker gewesen --- etwa $x_0 = 20$ ---, so läge das Minimum um Größenordnungen tiefer, und das Aussterben durch Zufall würde wahrscheinlich.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das ist die praktische Bedeutung der Erhaltungsgröße: Sie sagt, wie tief die Täler werden --- und damit, ob eine Phagentherapie den Erreger tatsächlich auslöschen könnte. Kapitel~5 und 9 gehen dieser Frage nach.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Schwiegervater, ein Versicherungsmathematiker und die Adria}
+\Person{Vito Volterra} (1860--1940) war einer der führenden italienischen Mathematiker seiner Zeit --- Senator, Präsident der Accademia dei Lincei, Begründer der Funktionalanalysis.
+
+1925 stellte ihm sein Schwiegersohn \Person{Umberto D'Ancona} die Frage aus dem Warnkasten: Warum stieg der Raubfischanteil, als weniger gefischt wurde? Volterra stellte binnen weniger Monate die Gleichungen auf und leitete das Prinzip her, das heute seinen Namen trägt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er war damals fünfundsechzig und hatte nie zuvor über Biologie gearbeitet. Die Arbeit von 1926 begründete ein ganzes Fach.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Vorläufer}
+\Person{Alfred Lotka} (1880--1949), in Lemberg geborener Chemiker, der später als Versicherungsmathematiker bei einer amerikanischen Gesellschaft arbeitete, hatte dieselben Gleichungen bereits 1920 aufgestellt --- allerdings als Modell für eine chemische Reaktion, nicht für Populationen.
+
+Als Volterras Arbeit erschien, wies Lotka in einem Brief an \kursiv{Nature} auf seine Priorität hin. Volterra räumte sie ein. Die Gleichungen tragen seither beide Namen.
+
+\schritt{Ein Nachwort zu Volterra}
+1931 verweigerte Volterra als einer von nur zwölf italienischen Professoren den Treueid auf den Faschismus. Er verlor seinen Lehrstuhl, wurde aus allen Akademien ausgeschlossen und arbeitete bis zu seinem Tod 1940 im Ausland und zu Hause weiter.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Von den etwa zwölfhundert italienischen Hochschullehrern jener Zeit verweigerten zwölf. Volterra war der bekannteste unter ihnen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wie es weiterging}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Realistischere Funktionen} & Statt $bxy$ nimmt man eine sättigende Fraßrate --- ein Räuber kann nur begrenzt viel fressen. Das erzeugt statt geschlossener Bahnen einen \Begriff{Grenzzyklus}.\\
+\textbf{Grenzzyklen} & Eine einzelne geschlossene Bahn, auf die alle anderen zulaufen. Strukturell stabil --- und damit ein brauchbares Modell für beobachtete Zyklen.\\
+\textbf{Phagentherapie} & Seit etwa 2015 wieder ernsthaft untersucht, wegen zunehmender Antibiotikaresistenz. Die Modelle sind Weiterentwicklungen dieses Kapitels.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die dritte Zeile ist der Anschluss an den Leitfall. Die entscheidende Frage lautet dort, ob Bakterien Resistenz gegen den Phagen entwickeln --- was sie tun --- und ob diese Resistenz Kosten hat, die sie gegenüber anderen Stämmen benachteiligen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein besonders untersuchter Fall: Manche Bakterien werden phagenresistent, indem sie genau den Oberflächenrezeptor verlieren, über den auch bestimmte Antibiotika angreifen --- oder umgekehrt eine Resistenz gegen Antibiotika aufgeben. Man spricht von \Begriff{Kollateralsensitivität} und versucht, Phagen und Antibiotika so zu kombinieren, dass jeder Fluchtweg in eine Falle führt. Kapitel~14 kommt darauf zurück.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Schneeschuhhase}
+Die berühmten Zyklen von Hase und Luchs aus den Fangdaten der Hudson's Bay Company --- über hundert Jahre, mit einer Periode von etwa zehn Jahren --- gelten bis heute als Lehrbuchbeispiel. Sie sind jedoch schlecht durch Lotka-Volterra erklärbar: Unter anderem geht der Luchs dem Hasen in den Daten stellenweise \kursiv{voraus}, was das Modell nicht zulässt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Heutige Erklärungen beziehen die Pflanzennahrung der Hasen und die Fangstatistik selbst mit ein. Das Beispiel ist also weniger ein Beleg für das Modell als eine Mahnung, wie schwer der Nachweis eines Mechanismus aus Zeitreihen ist --- dasselbe Problem wie beim Chaosnachweis in Kapitel~3.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 4.1} & aus vier Annahmen aufgestellt\\
+\textbf{Satz 4.2} & Gleichgewicht überkreuz: $(c/d,\ a/b)$\\
+\textbf{Satz 4.3} & eine Erhaltungsgröße, also geschlossene Bahnen\\
+\textbf{Satz 4.4} & \textbf{Volterras Prinzip} --- Bekämpfung nützt der Beute\\
+\textbf{Der Bruchfall} & strukturell instabil; keine ganzen Zahlen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel wechseln wir die Beziehung: Statt Räuber und Beute betrachten wir zwei Arten, die um dasselbe konkurrieren --- und finden eine Bedingung dafür, wann beide nebeneinander bestehen können.}
+\end{minipage}
+\end{center}
+\end{merksatz}

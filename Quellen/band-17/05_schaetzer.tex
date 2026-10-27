@@ -1,0 +1,690 @@
+\chapter{Punktschätzer und ihre Güte}
+
+\section{Was ein Schätzer ist}
+
+\begin{definition}
+\boxtitelm{Definition 5.1 --- Schätzer}
+Ein \Begriff{Schätzer} für einen Parameter $\theta$ ist eine Vorschrift, die aus den Daten $X_1,\ldots,X_n$ eine Zahl $\hat\theta$ berechnet.
+
+Da die Daten zufällig sind, ist $\hat\theta$ eine Zufallsgröße --- sie hat eine Verteilung, einen Erwartungswert und eine Varianz.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Es gibt immer mehrere}
+Für den Mittelwert einer Grundgesamtheit kommen alle folgenden Vorschriften infrage:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.0cm}@{}}
+\toprule
+$\MW$ & das arithmetische Mittel\\
+$\Med$ & der Median\\
+$\frac{x_{(1)}+x_{(n)}}{2}$ & die Mitte zwischen kleinstem und größtem Wert\\
+$x_1$ & einfach die erste Beobachtung\\
+$\mathbf{42}$ & eine feste Zahl, ohne Ansehen der Daten\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Alle fünf sind Schätzer im Sinne der Definition. Die Frage ist, was sie unterscheidet --- und dafür braucht man Gütekriterien.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist nicht als Scherz gemeint. Sie hat Varianz null und ist, falls $\mu$ zufällig $42$ beträgt, der beste Schätzer überhaupt. Andernfalls ist sie unbrauchbar. Ein Gütekriterium muss beides erfassen können.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Erwartungstreue}
+
+\begin{definition}
+\boxtitelm{Definition 5.2 --- Erwartungstreue und Verzerrung}
+Ein Schätzer heißt \Begriff{erwartungstreu}, wenn
+\[ \mathbb{E}[\hat\theta] = \theta \]
+für jeden möglichen Wert von $\theta$ gilt. Die Größe
+\[ \mathrm{Bias}(\hat\theta) = \mathbb{E}[\hat\theta] - \theta \]
+heißt \Begriff{Verzerrung}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was das heißt und was nicht}
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Es heißt} & Wiederholte man die Studie unendlich oft, so träfe der Durchschnitt aller Schätzwerte den wahren Wert.\\
+\textbf{Es heißt nicht} & dass der Schätzer in \kursiv{dieser} Studie richtig liegt. Er kann beliebig weit daneben sein.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\begin{scope}
+\draw[grau!60, line width=0.6pt] (-2.2,0) -- (2.2,0);
+\draw[tief, line width=1.1pt, smooth, samples=60, domain=-2:2] plot (\x, {1.8*exp(-\x*\x*2)});
+\draw[akzent, dashed, line width=0.9pt] (0,0) -- (0,2.0);
+\node[font=\scriptsize, color=akzent] at (0,2.3) {$\theta$};
+\node[font=\scriptsize\itshape, color=gruen] at (0,-0.5) {erwartungstreu, große Varianz};
+\end{scope}
+\begin{scope}[xshift=5.4cm]
+\draw[grau!60, line width=0.6pt] (-2.2,0) -- (2.2,0);
+\draw[tief, line width=1.1pt, smooth, samples=60, domain=-2:2] plot (\x, {1.8*exp(-(\x-0.9)*(\x-0.9)*14)});
+\draw[akzent, dashed, line width=0.9pt] (0,0) -- (0,2.0);
+\node[font=\scriptsize, color=akzent] at (0,2.3) {$\theta$};
+\node[font=\scriptsize\itshape, color=akzent] at (0,-0.5) {verzerrt, kleine Varianz};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Welcher der beiden ist besser? Das lässt sich noch nicht entscheiden --- man braucht ein Kriterium, das Verzerrung und Streuung gemeinsam bewertet. Abschnitt 5.5 liefert es.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Warum $n-1$ --- die Einlösung}
+
+Wir holen nun nach, was Kapitel~2 vertagt hat.
+
+\begin{merksatz}
+\boxtitel{Ein Hilfssatz, den wir zweimal brauchen}
+Für jede Zufallsgröße $X$ mit $\mathbb{E}[X] = \mu$ gilt
+\[ \mathbb{E}[X^2] = \Var[X] + \mu^2 . \]
+
+\schritt{Beweis}
+\begin{align*}
+\Var[X] &= \mathbb{E}\bigl[(X-\mu)^2\bigr] && \text{Definition}\\
+&= \mathbb{E}\bigl[X^2 - 2\mu X + \mu^2\bigr]\\
+&= \mathbb{E}[X^2] - 2\mu\,\mathbb{E}[X] + \mu^2 && \text{nach (R1) und (R2)}\\
+&= \mathbb{E}[X^2] - 2\mu^2 + \mu^2 = \mathbb{E}[X^2] - \mu^2 .
+\end{align*}
+Umstellen ergibt die Behauptung. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Verschiebungssatz aus Kapitel~2 --- nur für Zufallsgrößen statt für Datenreihen. Dieselbe Rechnung, andere Bühne.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 5.3 --- Die Stichprobenvarianz ist erwartungstreu}
+Seien $X_1,\ldots,X_n$ unabhängig mit Erwartungswert $\mu$ und Varianz $\sigma^2$. Dann gilt für
+\[ S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \overline X)^2 \]
+die Gleichung $\mathbb{E}[S^2] = \sigma^2$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- in fünf Schritten}
+\schritt{Schritt 1 --- Den Verschiebungssatz anwenden}
+Nach Satz 2.11 gilt für jede Datenreihe
+\[ \sum_{i=1}^n (X_i - \overline X)^2 = \sum_{i=1}^n X_i^2 - n\,\overline X^2 . \]
+Das ist eine algebraische Identität und gilt daher auch für Zufallsgrößen.
+
+\schritt{Schritt 2 --- Erwartungswert bilden}
+\[ \mathbb{E}\left[\sum_i (X_i-\overline X)^2\right] = \sum_{i=1}^n \mathbb{E}[X_i^2] \;-\; n\,\mathbb{E}[\overline X^2] . \]
+Hier wurde (R2) benutzt --- die Summenregel für Erwartungswerte, die immer gilt.
+
+\schritt{Schritt 3 --- Den ersten Term ausrechnen}
+Nach dem Hilfssatz, angewandt auf $X_i$:
+\[ \mathbb{E}[X_i^2] = \Var[X_i] + \mu^2 = \sigma^2 + \mu^2 . \]
+Da das für jedes $i$ gilt:
+\[ \sum_{i=1}^n \mathbb{E}[X_i^2] = n\,(\sigma^2 + \mu^2) . \]
+
+\schritt{Schritt 4 --- Den zweiten Term ausrechnen}
+Nun der entscheidende Schritt. Wir wenden den Hilfssatz auf $\overline X$ an:
+\[ \mathbb{E}[\overline X^2] = \Var[\overline X] + \bigl(\mathbb{E}[\overline X]\bigr)^2 . \]
+Nach Satz 4.4 ist $\Var[\overline X] = \sigma^2/n$ und $\mathbb{E}[\overline X] = \mu$. Also
+\[ \mathbb{E}[\overline X^2] = \frac{\sigma^2}{n} + \mu^2 . \]
+
+\schritt{Schritt 5 --- Zusammensetzen}
+\begin{align*}
+\mathbb{E}\left[\sum_i (X_i-\overline X)^2\right] &= n(\sigma^2+\mu^2) \;-\; n\left(\frac{\sigma^2}{n} + \mu^2\right)\\
+&= n\sigma^2 + n\mu^2 - \sigma^2 - n\mu^2\\
+&= (n-1)\,\sigma^2 .
+\end{align*}
+
+Teilt man beide Seiten durch $n-1$, so steht links $\mathbb{E}[S^2]$ und rechts $\sigma^2$. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was der Beweis inhaltlich sagt}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Teilte man durch $n$, so bekäme man im Mittel
+\[ \frac{(n-1)\sigma^2}{n} = \sigma^2 \cdot \frac{n-1}{n} \;<\; \sigma^2 . \]
+Der Schätzer wäre also \kursiv{systematisch zu klein}, und zwar um den Faktor $\frac{n-1}{n}$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+$n$ & $\frac{n-1}{n}$ & \textbf{Unterschätzung}\\
+\midrule
+$2$ & $0{,}500$ & \textcolor{akzent}{um die Hälfte}\\
+$6$ & $0{,}833$ & um $17\,\%$\\
+$30$ & $0{,}967$ & um $3\,\%$\\
+$1000$ & $0{,}999$ & belanglos\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die anschauliche Begründung}
+Nach Satz 2.4 minimiert der Mittelwert die Summe der quadratischen Abweichungen. Der \kursiv{Stichproben}mittelwert $\overline X$ liegt also näher an den Daten als der wahre Wert $\mu$ --- er wurde ja aus genau diesen Daten so gewählt.
+
+Misst man die Abweichungen von $\overline X$ statt von $\mu$, so bekommt man daher zu kleine Werte. Der Faktor $\frac{n}{n-1}$ gleicht das aus.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Verlust beträgt genau \enquote{einen Freiheitsgrad}: Aus $n$ Beobachtungen wurde ein Parameter geschätzt, also bleiben $n-1$ unabhängige Abweichungen übrig. Satz 2.3 sagt das direkt --- die Abweichungen summieren sich zu null, also legt die letzte sich aus den ersten $n-1$ fest.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Und trotzdem ist $s$ nicht erwartungstreu}
+Satz 5.3 gilt für die Varianz $S^2$, nicht für die Standardabweichung $S$.
+
+Aus $\mathbb{E}[S^2] = \sigma^2$ folgt \kursiv{nicht} $\mathbb{E}[S] = \sigma$. Die Wurzel ist keine lineare Funktion, und Erwartungswerte vertauschen nicht mit nichtlinearen Funktionen.
+
+Tatsächlich gilt $\mathbb{E}[S] < \sigma$ --- die Standardabweichung wird stets etwas unterschätzt. Bei $n=6$ und Normalverteilung beträgt der Fehler etwa $5\,\%$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man korrigiert das in der Praxis nicht, weil die Korrektur von der Verteilung abhängt und der Fehler bei brauchbaren Stichprobenumfängen klein ist. Aber man sollte wissen, dass die vertraute Formel diese Eigenschaft nicht hat --- \enquote{erwartungstreu} gilt für $s^2$, nicht für $s$.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Konsistenz}
+
+\begin{definition}
+\boxtitelm{Definition 5.4}
+Ein Schätzer heißt \Begriff{konsistent}, wenn er sich mit wachsendem Stichprobenumfang dem wahren Wert beliebig nähert --- genauer: wenn für jedes $\varepsilon > 0$
+\[ \Pr\bigl[\,|\hat\theta_n - \theta| > \varepsilon\,\bigr] \;\longrightarrow\; 0 \quad \text{für } n \to \infty . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum $\MW$ konsistent ist}
+Nach Satz 4.4 ist $\Var[\overline X] = \sigma^2/n \to 0$, und der Erwartungswert ist stets $\mu$.
+
+Eine Zufallsgröße, deren Erwartungswert der Zielwert ist und deren Streuung gegen null geht, muss sich dem Zielwert nähern. Streng begründet wird das mit der Tschebyschew-Ungleichung (Band 4, Kapitel 7):
+\[ \Pr\bigl[|\overline X - \mu| > \varepsilon\bigr] \;\le\; \frac{\Var[\overline X]}{\varepsilon^2} = \frac{\sigma^2}{n\varepsilon^2} \;\longrightarrow\; 0 . \]
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die beiden Eigenschaften sind unabhängig voneinander}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Schätzer für $\mu$} & \textbf{erwartungstreu} & \textbf{konsistent}\\
+\midrule
+$\overline X$ & \textcolor{gruen}{ja} & \textcolor{gruen}{ja}\\
+$X_1$ (erste Beob.) & \textcolor{gruen}{\textbf{ja}} & \textcolor{akzent}{\textbf{nein}}\\
+$\overline X + \frac{1}{n}$ & \textcolor{akzent}{nein} & \textcolor{gruen}{ja}\\
+Die Zahl $42$ & \textcolor{akzent}{nein} & \textcolor{akzent}{nein}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die zweite Zeile erklärt}
+$X_1$ ist erwartungstreu: $\mathbb{E}[X_1] = \mu$ nach Voraussetzung. Aber die Varianz bleibt $\sigma^2$, gleichgültig wie groß $n$ wird --- man wirft ja alle übrigen Daten weg. Der Schätzer wird nie genauer.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das zeigt, dass Erwartungstreue allein nichts wert ist. Sie ist eine Aussage über den Mittelwert unendlich vieler gedachter Wiederholungen und sagt nichts über die Genauigkeit im Einzelfall.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der mittlere quadratische Fehler}
+
+\begin{definition}
+\boxtitelm{Definition 5.5}
+\[ \mathrm{MSE}(\hat\theta) = \mathbb{E}\bigl[(\hat\theta - \theta)^2\bigr] . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 5.6 --- Die Zerlegung}
+\[ \mathrm{MSE}(\hat\theta) = \Var[\hat\theta] \;+\; \bigl(\mathrm{Bias}(\hat\theta)\bigr)^2 . \]
+
+\schritt{Beweis}
+Wir schreiben $b = \mathbb{E}[\hat\theta]$ und fügen eine Null ein:
+\begin{align*}
+\mathbb{E}\bigl[(\hat\theta-\theta)^2\bigr] &= \mathbb{E}\bigl[\bigl((\hat\theta - b) + (b - \theta)\bigr)^2\bigr]\\
+&= \mathbb{E}\bigl[(\hat\theta-b)^2\bigr] + 2(b-\theta)\,\mathbb{E}[\hat\theta - b] + (b-\theta)^2 .
+\end{align*}
+Der mittlere Term verschwindet, denn $\mathbb{E}[\hat\theta - b] = b - b = 0$. Der erste ist $\Var[\hat\theta]$, der letzte ist das Quadrat der Verzerrung. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es ist derselbe Kniff wie in Satz 2.4 --- eine Null einfügen, ausquadrieren, der Mischterm fällt weg. Diese Figur kommt in der Statistik so oft vor, dass sie ein eigenes Gesicht verdient.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wann ein verzerrter Schätzer besser ist}
+Satz 5.6 macht sichtbar, dass sich Verzerrung und Varianz gegeneinander aufrechnen lassen. Ein wenig Verzerrung kann sich lohnen, wenn sie viel Varianz spart.
+
+\schritt{Ein Beispiel}
+Wir schätzen $\sigma^2$ mit dem Faktor $\frac{1}{n+1}$ statt $\frac{1}{n-1}$. Bei normalverteilten Daten ergibt sich:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.2cm}P{1.6cm}@{}}
+\toprule
+\textbf{Teiler} & \textbf{Bias} & \textbf{Varianz} & \textbf{MSE}\\
+\midrule
+$n-1$ & $0$ & $\frac{2\sigma^4}{n-1}$ & $\frac{2\sigma^4}{n-1}$\\[3pt]
+$n$ & klein & kleiner & kleiner\\[3pt]
+$\mathbf{n+1}$ & \textcolor{akzent}{größer} & \textcolor{gruen}{am kleinsten} & \textcolor{gruen}{\textbf{minimal}}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Der Teiler $n+1$ liefert den kleinsten mittleren quadratischen Fehler --- und wird trotzdem nirgends verwendet.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Warum nicht? Weil die Rechnung die Normalverteilung voraussetzt, weil die Erwartungstreue bei der Weiterverarbeitung --- etwa in der Varianzanalyse --- gebraucht wird, und weil die Einheitlichkeit der Literatur einen Wert hat. Es ist eine Konvention, und sie ist nicht in jedem Sinn optimal. Das sollte man wissen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Maximum-Likelihood}
+
+Bisher haben wir Schätzer beurteilt. Nun die Frage, wie man überhaupt auf einen kommt.
+
+\begin{merksatz}
+\boxtitel{Der Grundgedanke}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man wählt denjenigen Parameterwert, unter dem die tatsächlich beobachteten Daten am wahrscheinlichsten wären.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Umkehrung des Blicks}
+Gewöhnlich fragt man: Gegeben der Parameter --- wie wahrscheinlich sind diese Daten? Das ist die Wahrscheinlichkeitsrechnung.
+
+Hier fragt man: Gegeben die Daten --- welcher Parameter macht sie am plausibelsten? Denselben Ausdruck liest man als Funktion des Parameters statt der Daten. Man nennt ihn dann \Begriff{Likelihood} und schreibt $L(\theta)$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der deutsche Ausdruck \enquote{Mutmaßlichkeit} hat sich nicht durchgesetzt; man sagt Likelihood. Wichtig ist nur: $L(\theta)$ ist \kursiv{keine} Wahrscheinlichkeit für $\theta$ --- $\theta$ ist ja keine Zufallsgröße. Es ist die Wahrscheinlichkeit der Daten, als Funktion von $\theta$ gelesen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beispiel 1 --- der Anteil}
+In Gruppe A des Auszugs brauchten $3$ von $6$ Personen zusätzliche Schmerzmittel. Wie schätzt man den Anteil $\pi$?
+
+\schritt{Schritt 1 --- Die Likelihood aufstellen}
+Bei $n$ unabhängigen Personen mit je Wahrscheinlichkeit $\pi$ ist die Wahrscheinlichkeit für genau $k$ Fälle
+\[ L(\pi) = \binom{n}{k}\,\pi^k\,(1-\pi)^{n-k} . \]
+
+\schritt{Schritt 2 --- Logarithmieren}
+Produkte differenziert man ungern. Da der Logarithmus streng wachsend ist, liegt das Maximum von $L$ an derselben Stelle wie das von $\ln L$:
+\[ \ln L(\pi) = \underbrace{\ln\binom{n}{k}}_{\text{hängt nicht von } \pi \text{ ab}} + k\ln\pi + (n-k)\ln(1-\pi) . \]
+
+\schritt{Schritt 3 --- Ableiten und null setzen}
+\[ \frac{\mathrm{d}}{\mathrm{d}\pi}\ln L = \frac{k}{\pi} - \frac{n-k}{1-\pi} \;\stackrel{!}{=}\; 0 \]
+\begin{align*}
+\frac{k}{\pi} &= \frac{n-k}{1-\pi}\\
+k(1-\pi) &= \pi(n-k)\\
+k - k\pi &= n\pi - k\pi\\
+k &= n\pi
+\end{align*}
+\[ \hat\pi = \frac{k}{n} . \]
+
+\schritt{Schritt 4 --- Die Probe, dass es ein Maximum ist}
+Die zweite Ableitung lautet
+\[ -\frac{k}{\pi^2} - \frac{n-k}{(1-\pi)^2} \;<\; 0 \]
+für alle $0 < \pi < 1$ --- also ist die Funktion überall nach unten gekrümmt, und die Nullstelle der ersten Ableitung ist ein Maximum. \checkmark
+
+\schritt{Das Ergebnis}
+\[ \hat\pi_A = \frac{3}{6} = 0{,}50, \qquad \hat\pi_B = \frac{2}{6} = 0{,}33 . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Verfahren liefert die relative Häufigkeit --- also genau das, was jeder ohnehin hingeschrieben hätte. Das ist kein Rückschritt, sondern eine \kursiv{Begründung}: Der naheliegende Schätzer ist nun nicht mehr bloß plausibel, sondern aus einem Prinzip abgeleitet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beispiel 2 --- Mittelwert und Varianz der Normalverteilung}
+\schritt{Schritt 1 --- Die Likelihood}
+Bei $n$ unabhängigen normalverteilten Beobachtungen multiplizieren sich die Dichten:
+\[ L(\mu,\sigma^2) = \prod_{i=1}^n \frac{1}{\sigma\sqrt{2\pi}}\exp\!\left(-\frac{(x_i-\mu)^2}{2\sigma^2}\right) . \]
+
+\schritt{Schritt 2 --- Logarithmieren}
+\[ \ln L = -\frac{n}{2}\ln(2\pi) - \frac{n}{2}\ln\sigma^2 - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i-\mu)^2 . \]
+
+\schritt{Schritt 3 --- Nach $\mu$ maximieren}
+Nur der letzte Term enthält $\mu$, und er steht mit einem Minus davor. $\ln L$ wird also maximal, wenn
+\[ \sum_{i=1}^n (x_i - \mu)^2 \]
+minimal wird. Nach \textbf{Satz 2.4} ist das genau bei $\mu = \MW$ der Fall.
+\[ \hat\mu = \MW . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hier zahlt sich der Satz aus Kapitel~2 unerwartet aus. Wir brauchen keine Ableitung --- das Minimierungsproblem ist schon gelöst. Und nebenbei sieht man, warum der Mittelwert und die Normalverteilung so eng zusammengehören: Die Methode der kleinsten Quadrate \kursiv{ist} die Maximum-Likelihood-Schätzung unter Normalannahme.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Nach $\sigma^2$ maximieren}
+Wir setzen $v = \sigma^2$ und leiten ab:
+\[ \frac{\partial \ln L}{\partial v} = -\frac{n}{2v} + \frac{1}{2v^2}\sum_i (x_i-\hat\mu)^2 \;\stackrel{!}{=}\; 0 . \]
+Multiplizieren mit $2v^2$:
+\[ -nv + \sum_i (x_i-\MW)^2 = 0 \quad\Longrightarrow\quad \hat\sigma^2 = \frac{1}{n}\sum_i (x_i-\MW)^2 . \]
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der Maximum-Likelihood-Schätzer der Varianz ist verzerrt}
+Im Nenner steht $n$, nicht $n-1$. Nach Satz 5.3 ist dieser Schätzer also \kursiv{systematisch zu klein}:
+\[ \mathbb{E}[\hat\sigma^2_{\mathrm{ML}}] = \frac{n-1}{n}\,\sigma^2 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Maximum-Likelihood liefert nicht automatisch erwartungstreue Schätzer.} Das ist keine Schwäche der Methode, sondern zeigt, dass die beiden Gütebegriffe verschiedene Dinge verlangen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{ML verlangt} & Der Parameterwert soll die Daten am besten erklären.\\
+\textbf{Erwartungs\-treue verlangt} & Der Schätzer soll im Mittel über alle Stichproben stimmen.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es gibt keinen Grund, warum beides zusammenfallen müsste. Dass es beim Mittelwert zusammenfällt und bei der Varianz nicht, ist ein Zufall der jeweiligen Formeln. In der Praxis nimmt man bei der Varianz die erwartungstreue Fassung und bei den meisten anderen Modellen --- logistische Regression, Cox-Modell --- die Maximum-Likelihood-Fassung, weil dort keine erwartungstreue bekannt ist.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Ein erster Blick auf Bayes}
+
+\begin{merksatz}
+\boxtitel{Die andere Frage}
+Maximum-Likelihood fragt: Welcher Parameter macht die Daten am wahrscheinlichsten?
+
+Der bayessche Zugang fragt: Wie wahrscheinlich ist der Parameter, \kursiv{gegeben die Daten}? Dafür muss man dem Parameter eine Verteilung zugestehen --- was der klassische Zugang gerade nicht tut.
+
+\schritt{Die Formel}
+\[ \underbrace{f(\theta \mid \text{Daten})}_{\text{Posteriori}} \;\propto\; \underbrace{L(\theta)}_{\text{Likelihood}} \cdot \underbrace{f(\theta)}_{\text{Priori}} \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{6.4cm}@{}}
+\toprule
+\textbf{Priori} & Was man vor der Studie über $\theta$ glaubte.\\
+\textbf{Likelihood} & Was die Daten sagen.\\
+\textbf{Posteriori} & Was man danach glaubt.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Warum das in der Medizin vertraut ist}
+Jede Ärztin denkt so, ohne es Bayes zu nennen.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Priori} & Vortestwahrscheinlichkeit --- was die Anamnese nahelegt\\
+\textbf{Likelihood} & Der Testbefund und seine Güte\\
+\textbf{Posteriori} & Nachtestwahrscheinlichkeit\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kapitel~13 rechnet das vollständig durch --- einschließlich des verblüffenden Befunds, dass ein sehr guter Test bei niedriger Vortestwahrscheinlichkeit überwiegend falsch positive Ergebnisse liefert. Bis dahin genügt der Merksatz: Ein Testergebnis allein sagt wenig; entscheidend ist, was man vorher wusste.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der Streitpunkt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{3.2cm}P{3.2cm}@{}}
+\toprule
+& \textbf{Klassisch} & \textbf{Bayessch}\\
+\midrule
+$\theta$ ist & fest, unbekannt & zufällig\\
+Ergebnis & Punktschätzer, Intervall & ganze Verteilung\\
+Vorwissen & \textcolor{akzent}{unzulässig} & \textcolor{gruen}{ausdrücklich}\\
+Willkür & \textcolor{gruen}{keine Priori} & \textcolor{akzent}{Priori wählbar}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die letzten beiden Zeilen sind derselbe Sachverhalt, einmal als Stärke und einmal als Schwäche gelesen. Genau daran verläuft der Streit --- und er ist nicht entschieden. Kapitel~15 berichtet über den Stand.
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.1 --- Maximum-Likelihood für die Exponentialverteilung}
+Die Zeit bis zu einem Ereignis sei exponentialverteilt mit der Dichte
+\[ f(x) = \lambda e^{-\lambda x} \quad (x \ge 0) . \]
+Bestimmen Sie den Maximum-Likelihood-Schätzer für $\lambda$ und wenden Sie ihn auf die Mobilisationszeiten der Gruppe B an.
+
+\loesung
+\schritt{Schritt 1 --- Die Likelihood}
+\[ L(\lambda) = \prod_{i=1}^n \lambda e^{-\lambda x_i} = \lambda^n \exp\!\left(-\lambda\sum_{i=1}^n x_i\right) . \]
+
+\schritt{Schritt 2 --- Logarithmieren}
+\[ \ln L(\lambda) = n\ln\lambda - \lambda\sum_{i=1}^n x_i . \]
+
+\schritt{Schritt 3 --- Ableiten}
+\[ \frac{\mathrm{d}}{\mathrm{d}\lambda}\ln L = \frac{n}{\lambda} - \sum_{i=1}^n x_i \;\stackrel{!}{=}\; 0 \]
+\[ \frac{n}{\lambda} = \sum_i x_i \quad\Longrightarrow\quad \hat\lambda = \frac{n}{\sum_i x_i} = \frac{1}{\MW} . \]
+
+\schritt{Schritt 4 --- Maximum prüfen}
+Zweite Ableitung: $-n/\lambda^2 < 0$ für alle $\lambda > 0$. Also Maximum. \checkmark
+
+\schritt{Schritt 5 --- Anwenden}
+Für Gruppe B war $\MW = 18{,}0$ Stunden:
+\[ \hat\lambda = \frac{1}{18} = 0{,}0556 \ \text{je Stunde} . \]
+
+\schritt{Schritt 6 --- Die Deutung und ein Vorbehalt}
+$\lambda$ ist die \Begriff{Rate}: Unter dem Modell mobilisieren in jeder Stunde etwa $5{,}6\,\%$ der noch nicht Mobilisierten.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das Modell ist hier allerdings fragwürdig. Die Exponentialverteilung hat ihre größte Dichte bei null und fällt monoton --- sie behauptet, dass die meisten Personen \kursiv{sofort} mobilisieren. Die Daten zeigen das Gegenteil: kein Wert unter $14$ Stunden, die Masse zwischen $15$ und $23$. Eine Verteilung mit einem Gipfel --- etwa die Gammaverteilung --- passt besser.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Lehre}
+Maximum-Likelihood liefert für \kursiv{jedes} Modell einen Schätzer, auch für ein falsches. Die Methode prüft nicht, ob das Modell passt. Diese Prüfung ist ein eigener Arbeitsschritt.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.2 --- Erwartungstreue nachrechnen}
+Zeigen Sie, dass der Schätzer
+\[ T = \frac{X_1 + X_n}{2} \]
+für $\mu$ erwartungstreu ist, und vergleichen Sie seine Varianz mit der von $\overline X$.
+
+\loesung
+\schritt{Schritt 1 --- Erwartungstreue}
+\[ \mathbb{E}[T] = \mathbb{E}\!\left[\frac{X_1+X_n}{2}\right] = \frac{1}{2}\bigl(\mathbb{E}[X_1] + \mathbb{E}[X_n]\bigr) = \frac{1}{2}(\mu+\mu) = \mu . \]
+Erwartungstreu --- und zwar für jedes $n \ge 2$. \checkmark
+
+\schritt{Schritt 2 --- Die Varianz}
+Da $X_1$ und $X_n$ unabhängig sind, greift (R4):
+\[ \Var[T] = \frac{1}{4}\bigl(\Var[X_1] + \Var[X_n]\bigr) = \frac{1}{4}\cdot 2\sigma^2 = \frac{\sigma^2}{2} . \]
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+$n$ & $\Var[\overline X]$ & $\Var[T]$ & \textbf{Verhältnis}\\
+\midrule
+$2$ & $\sigma^2/2$ & $\sigma^2/2$ & $1$\\
+$6$ & $\sigma^2/6$ & $\sigma^2/2$ & $3$\\
+$60$ & $\sigma^2/60$ & $\sigma^2/2$ & $30$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 4 --- Die Deutung}
+Für $n=2$ sind beide Schätzer identisch --- $T$ \kursiv{ist} dann der Mittelwert.
+
+Für größere $n$ wird $T$ zunehmend schlechter: Seine Varianz bleibt konstant, während die von $\overline X$ fällt. Bei $n=60$ ist $T$ dreißigmal so ungenau.
+
+\schritt{Schritt 5 --- Ist $T$ konsistent?}
+Nein. Die Varianz geht nicht gegen null; der Schätzer wird nie genauer. Er ist erwartungstreu und trotzdem unbrauchbar --- dasselbe Muster wie beim Schätzer $X_1$ aus dem Warnkasten.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Beachten Sie: $T$ ist nicht die \kursiv{Spannweitenmitte} $\frac{x_{(1)}+x_{(n)}}{2}$ aus Abschnitt 5.1, sondern das Mittel der ersten und letzten \kursiv{Beobachtung in der Reihenfolge der Erhebung}. Die Spannweitenmitte benutzt Extremwerte und verhält sich ganz anders --- sie ist bei Normalverteilung ebenfalls erwartungstreu, aber extrem unrobust.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.3 --- Die Unterschätzung nachrechnen}
+Zeigen Sie an einem vollständigen Beispiel mit $n=2$, dass der Teiler $n$ die Varianz im Mittel unterschätzt.
+
+\loesung
+\schritt{Schritt 1 --- Die Lage vereinfachen}
+Wir betrachten eine Grundgesamtheit mit nur zwei Werten: $0$ und $2$, jeder mit Wahrscheinlichkeit $\frac12$.
+
+\[ \mu = \frac{0+2}{2} = 1, \qquad \sigma^2 = \frac{(0-1)^2 + (2-1)^2}{2} = \frac{1+1}{2} = 1 . \]
+
+\schritt{Schritt 2 --- Alle Stichproben vom Umfang $2$}
+Mit Zurücklegen gibt es vier gleich wahrscheinliche Stichproben:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{2.0cm}P{1.4cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Stichprobe} & $\overline x$ & $\sum(x_i-\overline x)^2$ & \\
+\midrule
+$(0,0)$ & $0$ & $0$ & \\
+$(0,2)$ & $1$ & $1+1 = 2$ & \\
+$(2,0)$ & $1$ & $2$ & \\
+$(2,2)$ & $2$ & $0$ & \\
+\midrule
+\textbf{Mittel} & $1$ & $\mathbf{1{,}0}$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Der Mittelwert der letzten Spalte:
+\[ \frac{0+2+2+0}{4} = 1{,}0 . \]
+
+\schritt{Schritt 3 --- Die beiden Schätzer vergleichen}
+\textbf{Mit Teiler $n-1 = 1$:}
+\[ \mathbb{E}[S^2] = \frac{1{,}0}{1} = 1{,}0 = \sigma^2 . \quad \checkmark \]
+
+\textbf{Mit Teiler $n = 2$:}
+\[ \mathbb{E}[\hat\sigma^2_{\mathrm{ML}}] = \frac{1{,}0}{2} = 0{,}5 = \frac{\sigma^2}{2} . \]
+
+\schritt{Schritt 4 --- Der Vergleich mit der Formel}
+Satz 5.3 sagt: Der Teiler $n$ unterschätzt um den Faktor $\frac{n-1}{n} = \frac{1}{2}$.
+
+Gefunden: $0{,}5$ statt $1{,}0$ --- genau die Hälfte. \checkmark
+
+\schritt{Schritt 5 --- Die anschauliche Erklärung an diesem Beispiel}
+In zwei der vier Stichproben --- $(0,0)$ und $(2,2)$ --- sind beide Werte gleich, und die geschätzte Streuung ist null. Die Stichprobe sagt: \enquote{keine Variabilität}, obwohl die Grundgesamtheit variabel ist.
+
+Das ist kein Ausreißer, sondern der Regelfall in Kleinform: Der Mittelwert einer Stichprobe passt sich den Daten an und verschluckt dabei einen Teil der Streuung. Bei $n=2$ verschluckt er genau die Hälfte.
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Fisher, ein Prinzip und ein schwieriger Charakter}
+\Person{Ronald Aylmer Fisher} (1890--1962) führte die Maximum-Likelihood-Methode 1922 in einer Arbeit ein, die zugleich die Begriffe \kursiv{Konsistenz}, \kursiv{Effizienz} und \kursiv{hinreichende Statistik} prägte. Auf gut sechzig Seiten entstand ein großer Teil des heutigen Vokabulars.
+
+Fisher entwickelte in den folgenden Jahren die Varianzanalyse, das Randomisierungsprinzip und den Signifikanztest --- also die Grundlagen der Teile III und V dieses Bandes. Er arbeitete dabei an der landwirtschaftlichen Versuchsstation Rothamsted, wo er Düngeversuche auszuwerten hatte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Fisher war auch Eugeniker, wie Galton und Pearson --- mit dem er sich gleichwohl lebenslang befehdete. Und er bestritt bis zu seinem Tod 1962 den Zusammenhang zwischen Rauchen und Lungenkrebs, unter anderem mit dem Argument, eine gemeinsame genetische Ursache sei nicht ausgeschlossen. Er war dabei von der Tabakindustrie beraten worden.}
+\end{minipage}
+\end{center}
+
+Das Argument selbst war nicht unsinnig --- es ist genau der Konfounder-Einwand aus Kapitel~3, und er war 1958 noch nicht widerlegt. Die Geschichte gehört trotzdem in dieses Kapitel, weil sie zeigt, wie ein methodisch korrekter Einwand zum Instrument werden kann: Wer lange genug \enquote{aber es könnte ein Konfounder sein} sagt, hat immer recht und verhindert jede Schlussfolgerung.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Antwort darauf entwickelten Bradford Hill und Doll: nicht ein einzelner Beweis, sondern eine Liste von Kriterien --- Stärke, Konsistenz, Dosis-Wirkungs-Beziehung, zeitliche Abfolge. Kapitel~12 stellt sie vor.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wenn Verzerrung sich lohnt}
+Satz 5.6 legt nahe, dass man Varianz gegen Verzerrung tauschen kann. Dass dieser Tausch manchmal \kursiv{immer} lohnt, war eine der größten Überraschungen der Statistik.
+
+\Person{Charles Stein} zeigte 1956: Schätzt man gleichzeitig drei oder mehr Mittelwerte, so ist der naheliegende Schätzer --- jeder Mittelwert für sich --- nicht optimal. Ein Schätzer, der alle Werte etwas zum Gesamtmittel hin zusammenzieht, hat einen kleineren mittleren quadratischen Fehler. Und zwar für \kursiv{jede} Wahl der wahren Werte.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Ergebnis wirkt widersinnig: Die drei Mittelwerte können völlig unabhängige Dinge betreffen --- die Mobilisationszeit in Hamburg, den Weizenertrag in Kanada und die Lebensdauer von Glühbirnen. Trotzdem verbessert es die Schätzung, sie gemeinsam zu behandeln. Der Grund liegt in der Geometrie hoher Dimensionen, nicht in einem sachlichen Zusammenhang.}
+\end{minipage}
+\end{center}
+
+\schritt{Wozu das heute führt}
+Das Prinzip des \Begriff{Zusammenziehens} ist die Grundlage der modernen Verfahren für viele Parameter:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+Ridge, Lasso & Regression mit vielen Merkmalen\\
+Hierarchische Modelle & Kliniken, Zentren, Wiederholungen\\
+Metaanalyse & Kapitel~14 --- Studien ziehen sich gegenseitig zusammen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+In der multizentrischen Studie heißt das: Die Schätzung für ein kleines Zentrum wird zum Gesamtmittel hin korrigiert. Das ist keine Beschönigung, sondern verringert nachweislich den Fehler --- bei einem Zentrum mit fünf Fällen ist der eigene Mittelwert schlechter als ein zusammengezogener.
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 5.2} & Erwartungstreue --- und was sie nicht leistet\\
+\textbf{Satz 5.3} & \textbf{Warum $n-1$: vollständig bewiesen}\\
+\textbf{Definition 5.4} & Konsistenz --- unabhängig von Erwartungstreue\\
+\textbf{Satz 5.6} & MSE $=$ Varianz $+$ Verzerrung$^2$\\
+\textbf{Maximum-Likelihood} & Anteil, Mittelwert, Varianz --- und dass sie verzerrt sein kann\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel geben wir nicht mehr eine Zahl an, sondern einen Bereich --- und stoßen dabei auf die erste der beiden Fehldeutungen aus dem Vorwort.}
+\end{minipage}
+\end{center}
+\end{merksatz}

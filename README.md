@@ -1,5 +1,7 @@
 # Mathematik von Grund auf
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23698547.svg)](https://doi.org/10.5281/zenodo.23698547)
+
 **Eine Einführung in achtundzwanzig Bänden — 5324 Seiten.** Jeder Schritt erklärt, jede Übungsaufgabe vollständig gelöst, jedes Kapitel mit Geschichte, Forschungsstand und einem Abschnitt darüber, wo die Methode bricht. Achtundzwanzig kommentierte Quellen je Band.
 
 Herausgeber und Urheber: **Jürgen Maier**. Entstanden 2026 in Zusammenarbeit mit Claude (Anthropic); Konzeption, Vorgaben, Prüfung und Herausgeberschaft: Jürgen Maier.
@@ -55,7 +57,7 @@ Die Zahlen der Anwendungsbände (16–26) stammen aus Simulationen, die im Text 
 ## Verzeichnisse
 
 - `pdf/` — alle Bände als PDF, fertig gesetzt
-- `quellen/band-NN/` — LaTeX-Quelltexte der Bände 16 bis 26 und des Gesamtverzeichnisses (die Quellen der Bände 0–15 und B werden nachgetragen)
+- `quellen/band-NN/` — LaTeX-Quelltexte der Bände 16 bis 26 und des Gesamtverzeichnisses, jeweils mit Impressum (die Quellen der Bände 0–15 und B werden nachgetragen)
 - `docs/` — die Website
 
 Bauen eines Bandes: `cd quellen/band-23 && pdflatex haupt.tex && pdflatex haupt.tex` (TeX Live mit Palatino, TikZ, booktabs, longtable).
@@ -66,9 +68,9 @@ Dieses Werk ist lizenziert unter [CC BY-SA 4.0](https://creativecommons.org/lice
 
 ## Zitieren
 
-> Maier, J. (2026). *Mathematik von Grund auf*. Fassung 1.0. https://github.com/juergenmaier2026/mathematik-von-grund-auf
+> Maier, J. (2026). *Mathematik von Grund auf*. Fassung 1.0.1. Zenodo. https://doi.org/10.5281/zenodo.23698547
 
-Für einzelne Bände: *Mathematik von Grund auf, Band 23: Woran es liegt.* Eine DOI je Fassung vergibt Zenodo; siehe [CITATION.cff](CITATION.cff).
+Für einzelne Bände: *Maier, J. (2026). Mathematik von Grund auf, Band 23: Woran es liegt. Fassung 1.0.1. https://doi.org/10.5281/zenodo.23698547* — die DOI `10.5281/zenodo.23698547` bezeichnet die Reihe in allen Fassungen; jede Fassung hat zusätzlich eine eigene DOI bei Zenodo.
 
 ## Fehler und Rückmeldungen
 

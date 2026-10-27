@@ -1,0 +1,747 @@
+\part{Testen}
+
+\chapter{Die Logik des Tests}
+
+\section{Die Frage}
+
+Gruppe B mobilisierte im Mittel $8{,}2$ Stunden früher als Gruppe A. Das ist ein Unterschied in den Daten. Die Frage lautet: Ist er mehr als Zufall?
+
+\begin{merksatz}
+\boxtitel{Warum die Frage überhaupt nötig ist}
+Auch wenn beide Schemata völlig gleich wirkten, wären die beiden Gruppenmittelwerte nicht exakt gleich --- verschiedene Menschen, verschiedene Werte. Ein Unterschied von null wäre sogar erstaunlich.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Die Frage ist also nicht, \kursiv{ob} ein Unterschied vorliegt --- das tut er immer ---, sondern ob er größer ist, als man bei reinem Zufall erwarten würde.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die beiden Hypothesen}
+
+\begin{definition}
+\boxtitelm{Definition 7.1}
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item Die \Begriff{Nullhypothese} $H_0$ ist die Annahme, dass kein Effekt vorliegt --- im Beispiel $\mu_A = \mu_B$.
+\item Die \Begriff{Alternativhypothese} $H_1$ ist die Gegenannahme --- im Beispiel $\mu_A \neq \mu_B$.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum die Nullhypothese die langweilige ist}
+Die Aufteilung ist nicht symmetrisch. $H_0$ ist stets diejenige Hypothese, die einen \kursiv{genauen Wert} festlegt.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{4.0cm}@{}}
+\toprule
+& \textbf{Aussage} & \textbf{Rechenbar?}\\
+\midrule
+$H_0$ & $\mu_A - \mu_B = 0$ & \textcolor{gruen}{ja --- ein Wert}\\
+$H_1$ & $\mu_A - \mu_B \neq 0$ & \textcolor{akzent}{nein --- unendlich viele}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man kann ausrechnen, wie wahrscheinlich die Daten unter \kursiv{einem} festen Wert sind. Unter \enquote{irgendein Unterschied} kann man nichts ausrechnen --- wäre der wahre Unterschied $0{,}1$ Stunden oder $50$? Deshalb wird stets gegen $H_0$ gerechnet und nie für $H_1$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Beweisfigur}
+Der Test ist ein Widerspruchsbeweis mit einer Abschwächung.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{In der Mathematik} & Annahme $\Rightarrow$ Widerspruch $\Rightarrow$ Annahme falsch.\\
+\textbf{Im Test} & Annahme $\Rightarrow$ die Daten wären sehr unwahrscheinlich $\Rightarrow$ \kursiv{Zweifel} an der Annahme.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Unterschied ist wesentlich. Ein Widerspruch ist endgültig; ein unwahrscheinliches Ereignis ist möglich. Deshalb kann ein Test nie beweisen --- weder $H_0$ noch $H_1$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der $p$-Wert}
+
+\begin{definition}
+\boxtitelm{Definition 7.2 --- der $p$-Wert}
+Der \Begriff{$p$-Wert} ist die Wahrscheinlichkeit, \kursiv{unter der Annahme, dass $H_0$ zutrifft}, einen Wert der Teststatistik zu erhalten, der mindestens so weit von der Nullhypothese entfernt liegt wie der tatsächlich beobachtete.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Definition Stück für Stück}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{3.4cm}P{5.0cm}@{}}
+\toprule
+\textbf{Wahrscheinlichkeit} & Nicht der Daten schlechthin, sondern einer \kursiv{Menge} von möglichen Ergebnissen.\\
+\textbf{unter $H_0$} & Es wird gerechnet, \kursiv{als ob} $H_0$ zuträfe. Ob sie zutrifft, bleibt offen.\\
+\textbf{mindestens so weit entfernt} & Nicht nur das beobachtete Ergebnis, sondern auch alle noch extremeren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (-3.8,0) -- (3.8,0);
+\draw[tief, line width=1.2pt, smooth, samples=90, domain=-3.6:3.6]
+  plot (\x, {2.4*exp(-\x*\x/2)});
+\fill[akzent!35] plot[smooth, samples=30, domain=2.0:3.6] (\x,{2.4*exp(-\x*\x/2)}) -- (3.6,0) -- (2.0,0) -- cycle;
+\fill[akzent!35] plot[smooth, samples=30, domain=-3.6:-2.0] (\x,{2.4*exp(-\x*\x/2)}) -- (-2.0,0) -- (-3.6,0) -- cycle;
+\draw[akzent, line width=1.0pt] (2.0,0) -- (2.0,0.9);
+\draw[akzent, line width=1.0pt] (-2.0,0) -- (-2.0,0.9);
+\node[font=\scriptsize, color=akzent] at (2.0,1.2) {beobachtet};
+\node[font=\scriptsize, color=akzent] at (-2.0,1.2) {ebenso weit};
+\node[font=\scriptsize, color=grau] at (0,-0.4) {Wert unter $H_0$};
+\node[font=\scriptsize\itshape, color=akzent] at (0,-0.95) {$p$ ist die Summe beider schraffierter Flächen};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Warum auch die extremeren Werte zählen}
+Bei einer stetigen Größe ist die Wahrscheinlichkeit jedes \kursiv{einzelnen} Werts null. Die Frage \enquote{wie wahrscheinlich war genau dieses Ergebnis?} hat also die Antwort null und ist unbrauchbar.
+
+Sinnvoll fragen lässt sich nur: Wie wahrscheinlich wäre ein Ergebnis, das mindestens so auffällig ist? Das ist eine Fläche, keine Einzelwahrscheinlichkeit.
+
+\schritt{Warum auf beiden Seiten}
+Fragt man nach \kursiv{irgendeinem} Unterschied --- ohne Richtungsvorgabe ---, so ist eine Abweichung nach unten ebenso auffällig wie eine nach oben. Beide Flächen zählen. Man spricht vom \Begriff{zweiseitigen} Test.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Sieben Deutungen, die falsch sind}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{0.7cm}P{3.8cm}P{3.8cm}@{}}
+\toprule
+& \textbf{Aussage} & \textbf{Warum falsch}\\
+\midrule
+$1$ & \enquote{$p$ ist die Wahrscheinlichkeit, dass $H_0$ stimmt.} & $H_0$ ist keine Zufallsgröße. $p$ wird \kursiv{unter} $H_0$ gerechnet, nicht \kursiv{über} sie.\\
+$2$ & \enquote{$1-p$ ist die Wahrscheinlichkeit, dass $H_1$ stimmt.} & Folgt aus dem ersten Fehler.\\
+$3$ & \enquote{$p$ ist die Wahrscheinlichkeit, dass das Ergebnis auf Zufall beruht.} & Dieselbe Verwechslung, anders formuliert.\\
+$4$ & \enquote{Ein kleines $p$ bedeutet einen großen Effekt.} & $p$ hängt auch von $n$ ab. Abschnitt 7.6.\\
+$5$ & \enquote{$p > 0{,}05$ heißt, es gibt keinen Unterschied.} & Heißt nur: kein Nachweis. Abschnitt 7.5.\\
+$6$ & \enquote{$p$ ist die Fehlerwahrscheinlichkeit dieser Entscheidung.} & Das wäre $\alpha$, und das wird \kursiv{vorher} festgelegt.\\
+$7$ & \enquote{Bei Wiederholung wird das Ergebnis mit Wahrscheinlichkeit $1-p$ wieder signifikant.} & Bei $p = 0{,}05$ liegt die Chance tatsächlich bei etwa $50\,\%$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der Kern aller sieben}
+Sie alle verwechseln
+\[ \Pr[\text{Daten} \mid H_0] \qquad \text{mit} \qquad \Pr[H_0 \mid \text{Daten}] . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass diese beiden Größen verschieden sind, ist aus der Medizin vertraut: Die Wahrscheinlichkeit eines positiven Tests bei Krankheit --- die Sensitivität --- ist etwas anderes als die Wahrscheinlichkeit einer Krankheit bei positivem Test. Kapitel~13 rechnet den Unterschied vor. Es ist derselbe Fehler.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur siebten Zeile}
+Die Zahl überrascht und ist nachrechenbar: Ist der beobachtete Effekt zufällig gerade so groß, dass $p = 0{,}05$ herauskommt, so liegt der wahre Effekt vermutlich in dieser Größenordnung --- und dann trifft die Wiederholung mit etwa gleicher Wahrscheinlichkeit darüber wie darunter. Die Macht einer Wiederholung liegt bei rund $50\,\%$.
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Was der $p$-Wert wirklich ist}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Maß für die Verträglichkeit der Daten mit der Nullhypothese.} Klein heißt: Unter $H_0$ wären solche Daten selten. Mehr sagt er nicht --- insbesondere nichts über die Größe des Effekts und nichts über die Wahrscheinlichkeit irgendeiner Hypothese.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die beiden Fehler}
+
+\begin{definition}
+\boxtitelm{Definition 7.3}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{$H_0$ trifft zu} & \textbf{$H_1$ trifft zu}\\
+\midrule
+$H_0$ beibehalten & \textcolor{gruen}{richtig} & \textcolor{akzent}{\textbf{Fehler 2. Art}} ($\beta$)\\
+$H_0$ verwerfen & \textcolor{akzent}{\textbf{Fehler 1. Art}} ($\alpha$) & \textcolor{gruen}{richtig} (Macht $1-\beta$)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die beiden Fehler in der Sprache der Diagnostik}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Fehler 1. Art} & Ein Effekt wird behauptet, den es nicht gibt --- \kursiv{falsch positiv}.\\
+\textbf{Fehler 2. Art} & Ein vorhandener Effekt wird übersehen --- \kursiv{falsch negativ}.\\
+\textbf{Macht} & Die Wahrscheinlichkeit, einen vorhandenen Effekt zu finden --- die \kursiv{Sensitivität} des Tests.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die übliche Wahl}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{4.4cm}@{}}
+\toprule
+$\alpha$ & $0{,}05$ & Konvention, keine Herleitung\\
+$\beta$ & $0{,}20$ & entspricht $80\,\%$ Macht\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie die Asymmetrie: Der Fehler erster Art wird viermal strenger begrenzt als der zweiter Art. Das ist eine Wertentscheidung --- man hält es für schlimmer, einen Effekt zu behaupten, den es nicht gibt, als einen zu übersehen. Ob das in jedem Fall richtig ist, ist eine sachliche Frage. Bei der Prüfung einer Nebenwirkung wäre eher das Umgekehrte angebracht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{$\alpha$ und $p$ sind verschiedene Dinge}
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.6cm}P{6.8cm}@{}}
+\toprule
+$\alpha$ & Wird \kursiv{vor} der Studie festgelegt. Eine Eigenschaft des \kursiv{Verfahrens}: Wie oft darf es fälschlich Alarm schlagen?\\
+$p$ & Wird \kursiv{aus} den Daten berechnet. Eine Eigenschaft dieser \kursiv{einen} Studie.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Entscheidungsregel lautet: Verwirf $H_0$, falls $p \le \alpha$. Dadurch wird die Rate falscher Alarme über viele Studien hinweg auf $\alpha$ begrenzt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es ist dieselbe Denkfigur wie beim Konfidenzintervall: Die Garantie betrifft das Verfahren über viele Anwendungen, nicht die einzelne Entscheidung. Deshalb ist die sechste Fehldeutung oben falsch.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Ablauf --- und die MOBIL-Daten}
+
+\begin{merksatz}
+\boxtitel{Sieben Schritte}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Hypothesen festlegen --- \kursiv{vor} dem Blick auf die Daten.\\
+$2$ & Niveau $\alpha$ festlegen --- ebenfalls vorher.\\
+$3$ & Verfahren wählen und seine Voraussetzungen prüfen.\\
+$4$ & Teststatistik berechnen.\\
+$5$ & $p$-Wert bestimmen.\\
+$6$ & Entscheiden.\\
+$7$ & \textbf{Effektschätzer mit Konfidenzintervall angeben.}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Schritt 7 fehlt in vielen Darstellungen und ist der wichtigste. Ein Test allein sagt nur \enquote{ja} oder \enquote{nein}; das Intervall sagt, worum es geht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der $t$-Test für MOBIL, vollständig}
+\schritt{Schritt 1 --- Hypothesen}
+\[ H_0: \mu_A = \mu_B \qquad \text{gegen} \qquad H_1: \mu_A \neq \mu_B \]
+
+\schritt{Schritt 2 --- Niveau}
+$\alpha = 0{,}05$, zweiseitig.
+
+\schritt{Schritt 3 --- Voraussetzungen}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{1.8cm}P{3.4cm}@{}}
+\toprule
+\textbf{Voraussetzung} & \textbf{Erfüllt?} & \\
+\midrule
+Unabhängigkeit & \textcolor{gruen}{ja} & verschiedene Personen\\
+Normal\-verteilung & \textcolor{mittel}{ungeprüft} & bei $n=6$ kaum prüfbar\\
+Gleiche Varianzen & \textcolor{mittel}{fraglich} & $34{,}97$ gegen $12{,}0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Zwei der drei Voraussetzungen sind unsicher. Wir rechnen trotzdem weiter --- und kommen in Kapitel~8 und 9 darauf zurück, was das bedeutet und was man stattdessen tun kann.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Teststatistik}
+Aus Kapitel~6: $\MW_A - \MW_B = 8{,}167$ und $\mathrm{SE} = 2{,}798$.
+\[ t = \frac{8{,}167}{2{,}798} = 2{,}919 \]
+bei $n_A + n_B - 2 = 10$ Freiheitsgraden.
+
+\schritt{Schritt 5 --- Der $p$-Wert}
+Wir schlagen in der $t$-Tabelle nach, zwischen welchen Werten $2{,}919$ liegt:
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Schwelle} & \textbf{Wert} & \\
+\midrule
+$t_{10;\,0{,}975}$ & $2{,}228$ & $\mathbf{2{,}919 > 2{,}228}$\\
+$t_{10;\,0{,}99}$ & $2{,}764$ & $\mathbf{2{,}919 > 2{,}764}$\\
+$t_{10;\,0{,}995}$ & $3{,}169$ & $2{,}919 < 3{,}169$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Einseitig liegt $p$ also zwischen $0{,}005$ und $0{,}01$; zweiseitig zwischen $0{,}01$ und $0{,}02$. Genauer berechnet:
+\[ p = 0{,}0153 . \]
+
+\schritt{Schritt 6 --- Die Entscheidung}
+$0{,}0153 \le 0{,}05$: $H_0$ wird verworfen.
+
+\schritt{Schritt 7 --- Der Effekt}
+\[ \text{Unterschied } 8{,}2 \ \text{Stunden}, \quad 95\text{-Prozent-KI } [\,1{,}9\ ;\ 14{,}4\,] . \]
+
+\schritt{Die Probe zwischen Test und Intervall}
+Beide müssen zueinander passen: Das Intervall schließt die Null aus \kursiv{genau dann}, wenn $p < 0{,}05$. Hier ist beides der Fall. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Übereinstimmung ist kein Zufall, sondern folgt aus der Konstruktion: Beide beruhen auf derselben Teststatistik und demselben $t$-Wert. Das Intervall ist die Menge aller Hypothesen, die \kursiv{nicht} verworfen würden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wie man das Ergebnis aufschreibt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{6.4cm}@{}}
+\toprule
+\textcolor{akzent}{\textbf{Schlecht}} & \enquote{Der Unterschied war signifikant ($p < 0{,}05$).}\\
+\textcolor{mittel}{Besser} & \enquote{Der Unterschied war signifikant ($p = 0{,}015$).}\\
+\textcolor{gruen}{\textbf{Gut}} & \enquote{Gruppe B mobilisierte im Mittel $8{,}2$ Stunden früher ($95\,\%$-KI $1{,}9$ bis $14{,}4$; $p = 0{,}015$).}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die erste Fassung verschweigt alles Wesentliche: die Richtung, die Größe, die Genauigkeit. Die dritte enthält den Test als kleinsten Bestandteil.
+\end{merksatz}
+
+\section{Signifikanz ist nicht Bedeutsamkeit}
+
+\begin{warnung}
+\boxtitelr{Bei großem $n$ wird alles signifikant}
+Die Teststatistik lautet
+\[ t = \frac{\text{Effekt}}{\mathrm{SE}} = \frac{\text{Effekt}}{s_p\sqrt{2/n}} . \]
+Der Nenner geht mit wachsendem $n$ gegen null. Der Bruch wächst also über jede Grenze --- \kursiv{bei festem Effekt}.
+
+\schritt{Ein Rechenbeispiel}
+Angenommen, das neue Schema wirkt tatsächlich, aber nur um $0{,}2$ Stunden --- zwölf Minuten. Das ist klinisch bedeutungslos.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.0cm}P{1.8cm}P{2.2cm}@{}}
+\toprule
+$n$ je Gruppe & $\mathrm{SE}$ & $t$ & $p$ (zweiseitig)\\
+\midrule
+$6$ & $2{,}02$ & $0{,}10$ & $0{,}92$\\
+$100$ & $0{,}495$ & $0{,}40$ & $0{,}69$\\
+$1000$ & $0{,}157$ & $1{,}28$ & $0{,}20$\\
+$\mathbf{10\,000}$ & $0{,}0495$ & $\mathbf{4{,}04}$ & \textcolor{akzent}{$\mathbf{<0{,}0001}$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die Rechnung für die letzte Zeile mit $s_p = 3{,}5$:
+\[ \mathrm{SE} = 3{,}5\sqrt{\frac{2}{10\,000}} = 3{,}5 \cdot 0{,}01414 = 0{,}0495, \qquad t = \frac{0{,}2}{0{,}0495} = 4{,}04 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei zehntausend Personen je Gruppe ist ein Unterschied von zwölf Minuten hochsignifikant --- und weiterhin bedeutungslos.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Konfidenzintervall schützt davor. Es lautete dann etwa $[0{,}10;\,0{,}30]$ Stunden --- und man sieht auf einen Blick, dass es um Minuten geht. Der $p$-Wert allein zeigt das nicht.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und umgekehrt: $p > 0{,}05$ beweist nichts}
+Ein nicht signifikantes Ergebnis hat zwei mögliche Ursachen:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kein Effekt} & Die Nullhypothese trifft zu.\\
+\textbf{Zu wenig Daten} & Der Effekt besteht, die Studie war zu klein, ihn zu finden.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Der Test kann die beiden nicht unterscheiden. Das Konfidenzintervall kann es.
+
+\schritt{Zwei Studien mit $p = 0{,}30$}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{3.0cm}P{3.2cm}@{}}
+\toprule
+& \textbf{$95\,\%$-KI} & \textbf{Aussage}\\
+\midrule
+Studie I & $[-0{,}3;\ +0{,}4]$ & \textcolor{gruen}{Effekt ist klein}\\
+Studie II & $[-8{,}0;\ +24{,}0]$ & \textcolor{akzent}{nichts gelernt}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Beide sind \enquote{nicht signifikant}. Die erste schließt große Effekte aus und ist ein brauchbares Ergebnis. Die zweite ist mit allem verträglich und sagt gar nichts.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\enquote{Wir konnten keinen Unterschied zeigen} und \enquote{es gibt keinen Unterschied} sind verschiedene Aussagen --- die Warnung aus dem Vorwort. Wer die zweite behaupten will, braucht ein Verfahren, das darauf angelegt ist: die \Begriff{Äquivalenzstudie}, die in Kapitel~12 vorkommt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Fallzahlplanung}
+
+\begin{merksatz}
+\boxtitel{Die Frage vor der Studie}
+Man legt fest:
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{2.4cm}P{4.4cm}@{}}
+\toprule
+$\alpha$ & $0{,}05$ & Wie oft darf falscher Alarm sein?\\
+$1-\beta$ & $0{,}80$ & Wie oft soll ein Effekt gefunden werden?\\
+$\delta$ & \textbf{Sachfrage} & Welcher Effekt wäre bedeutsam?\\
+$\sigma$ & aus Vorstudien & Wie stark streuen die Werte?\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist die schwierigste und keine statistische Frage. $\delta$ ist der kleinste Unterschied, der die Praxis ändern würde --- das muss das Fach entscheiden, nicht die Rechnung. Wer $\delta$ groß wählt, um die Fallzahl klein zu halten, plant eine Studie, die nur Offensichtliches finden kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Formel}
+Für den Vergleich zweier gleich großer Gruppen gilt näherungsweise
+\[ n \;=\; \frac{2\,\bigl(z_{1-\alpha/2} + z_{1-\beta}\bigr)^2\,\sigma^2}{\delta^2} \]
+je Gruppe.
+
+\schritt{Die Bausteine}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{3.4cm}@{}}
+\toprule
+$z_{1-\alpha/2}$ & $1{,}96$ & für $\alpha = 0{,}05$\\
+$z_{1-\beta}$ & $0{,}84$ & für $80\,\%$ Macht\\
+Summe & $2{,}80$ & \\
+Quadrat & $7{,}84$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Für MOBIL}
+Sei $\sigma = 3{,}5$ Stunden und $\delta = 2{,}0$ Stunden --- zwei Stunden früher mobilisieren gilt als bedeutsam.
+\[ n = \frac{2 \cdot 7{,}84 \cdot 3{,}5^2}{2{,}0^2} = \frac{15{,}68 \cdot 12{,}25}{4{,}0} = \frac{192{,}1}{4{,}0} = 48{,}0 . \]
+
+\textbf{Etwa $48$ Personen je Gruppe.} Die Studie plant $60$ --- mit Reserve für Ausfälle, was üblich und richtig ist.
+
+\schritt{Was ein kleinerer Zieleffekt kostet}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+$\delta$ (Stunden) & $n$ je Gruppe & \\
+\midrule
+$4{,}0$ & $12$ & \\
+$2{,}0$ & $48$ & \\
+$1{,}0$ & $193$ & \textcolor{akzent}{viermal so viel}\\
+$0{,}5$ & $770$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Fallzahl wächst mit $1/\delta^2$: Halbiert man den nachzuweisenden Effekt, so vervierfacht sich der Aufwand.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Macht nachträglich zu berechnen ist sinnlos}
+Eine verbreitete Unsitte: Nach einem nicht signifikanten Ergebnis wird die Macht \kursiv{mit dem beobachteten Effekt} nachgerechnet --- und liegt dann erwartungsgemäß niedrig.
+
+Das ist zirkulär. Die so berechnete Macht ist eine feste Funktion des $p$-Werts und enthält keine neue Auskunft.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Was man stattdessen tut: das Konfidenzintervall angeben. Es sagt, welche Effektgrößen die Daten ausschließen --- und genau das war die Frage.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.1 --- Einen Test vollständig durchführen}
+Für den Schmerzwert \code{NRS24} lauten die Kennzahlen: Gruppe A ($n=6$) $\MW = 5{,}0$, $s = 1{,}414$; Gruppe B ($n=6$) $\MW = 3{,}167$, $s = 1{,}169$. Führen Sie den Test durch.
+
+\loesung
+\schritt{Schritt 1 --- Hypothesen und Niveau}
+$H_0: \mu_A = \mu_B$, zweiseitig, $\alpha = 0{,}05$.
+
+\schritt{Schritt 2 --- Voraussetzungen}
+Unabhängigkeit gegeben. Die Normalverteilung ist bei ordinalen NRS-Daten fragwürdig --- das ist die Falle aus Kapitel~1. Wir rechnen trotzdem und vergleichen in Kapitel~9 mit einem verteilungsfreien Verfahren.
+
+Die Varianzen sind ähnlich ($2{,}0$ gegen $1{,}367$), das spricht für den gepoolten Test.
+
+\schritt{Schritt 3 --- Gepoolte Varianz}
+\[ s_p^2 = \frac{5 \cdot 1{,}414^2 + 5 \cdot 1{,}169^2}{10} = \frac{5 \cdot 2{,}0 + 5 \cdot 1{,}367}{10} = \frac{10{,}0 + 6{,}83}{10} = 1{,}683 \]
+\[ s_p = 1{,}297 \]
+
+\schritt{Schritt 4 --- Standardfehler}
+\[ \mathrm{SE} = 1{,}297\sqrt{\frac{1}{6}+\frac{1}{6}} = 1{,}297 \cdot 0{,}5774 = 0{,}749 \]
+
+\schritt{Schritt 5 --- Teststatistik}
+\[ \MW_A - \MW_B = 5{,}0 - 3{,}167 = 1{,}833 \]
+\[ t = \frac{1{,}833}{0{,}749} = 2{,}448 \quad \text{bei } 10 \text{ Freiheitsgraden} \]
+
+\schritt{Schritt 6 --- $p$-Wert}
+$t_{10;\,0{,}975} = 2{,}228$ und $t_{10;\,0{,}99} = 2{,}764$. Der Wert $2{,}448$ liegt dazwischen: einseitig zwischen $0{,}01$ und $0{,}025$, zweiseitig zwischen $0{,}02$ und $0{,}05$.
+
+Genauer: $p = 0{,}034$.
+
+\schritt{Schritt 7 --- Entscheidung und Effekt}
+$0{,}034 \le 0{,}05$: $H_0$ verworfen.
+
+Konfidenzintervall:
+\[ 1{,}833 \pm 2{,}228 \cdot 0{,}749 = 1{,}833 \pm 1{,}669 \quad\Longrightarrow\quad [\,0{,}16\ ;\ 3{,}50\,] . \]
+
+\schritt{Die Formulierung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\enquote{Gruppe B gab nach 24 Stunden im Mittel $1{,}8$ NRS-Punkte weniger an ($95\,\%$-KI $0{,}2$ bis $3{,}5$; $p = 0{,}034$).}
+\end{minipage}
+\end{center}
+
+\schritt{Die Deutung --- und ein Vorbehalt}
+Das Intervall reicht von $0{,}2$ bis $3{,}5$ Punkten. Die untere Grenze liegt knapp über null und wäre klinisch belanglos; als bedeutsam gilt bei der NRS gewöhnlich ein Unterschied ab etwa zwei Punkten.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das Ergebnis ist signifikant und lässt offen, ob der Effekt bedeutsam ist. Genau dafür braucht man das Intervall --- der $p$-Wert von $0{,}034$ allein hätte diese Frage verdeckt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.2 --- Fallzahl planen}
+Eine Studie soll einen Unterschied in der Komplikationsrate von $10\,\%$ gegen $5\,\%$ nachweisen. Wie viele Personen je Gruppe braucht man bei $\alpha = 0{,}05$ und $80\,\%$ Macht?
+
+\loesung
+\schritt{Schritt 1 --- Die Formel für Anteile}
+\[ n = \frac{\bigl(z_{1-\alpha/2}+z_{1-\beta}\bigr)^2\,\bigl[\pi_1(1-\pi_1) + \pi_2(1-\pi_2)\bigr]}{(\pi_1-\pi_2)^2} \]
+
+\schritt{Schritt 2 --- Einsetzen}
+$\pi_1 = 0{,}10$, $\pi_2 = 0{,}05$, also $\delta = 0{,}05$.
+\[ \pi_1(1-\pi_1) = 0{,}10 \cdot 0{,}90 = 0{,}090 \]
+\[ \pi_2(1-\pi_2) = 0{,}05 \cdot 0{,}95 = 0{,}0475 \]
+\[ \text{Summe} = 0{,}1375 \]
+
+\[ n = \frac{7{,}84 \cdot 0{,}1375}{0{,}05^2} = \frac{1{,}078}{0{,}0025} = 431{,}2 \]
+
+\schritt{Antwort}
+Mindestens $\mathbf{432}$ Personen je Gruppe, also $864$ insgesamt.
+
+\schritt{Schritt 3 --- Die Probe}
+Bei $n = 432$ je Gruppe erwartet man $43$ Komplikationen in Gruppe 1 und $22$ in Gruppe 2. Der Standardfehler des Unterschieds:
+\[ \sqrt{\frac{0{,}090}{432} + \frac{0{,}0475}{432}} = \sqrt{\frac{0{,}1375}{432}} = \sqrt{0{,}000318} = 0{,}01784 \]
+\[ z = \frac{0{,}05}{0{,}01784} = 2{,}80 . \]
+Das ist genau $z_{1-\alpha/2} + z_{1-\beta} = 1{,}96 + 0{,}84$. \checkmark
+
+\schritt{Schritt 4 --- Was das praktisch bedeutet}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+Um eine Halbierung der Komplikationsrate von $10$ auf $5$ Prozent nachzuweisen, braucht man fast neunhundert Personen. Das ist der Grund, warum Studien zu seltenen Ereignissen so groß sein müssen --- und warum viele Fragen zu Nebenwirkungen aus einzelnen Studien nicht beantwortbar sind.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Vergleich mit einer kleineren Studie}
+Hätte man nur $100$ je Gruppe, so wäre
+\[ z = \frac{0{,}05}{\sqrt{0{,}1375/100}} = \frac{0{,}05}{0{,}0371} = 1{,}35 . \]
+Die Macht läge bei etwa $27\,\%$ --- man fände den vorhandenen Effekt in drei von vier Fällen nicht.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.3 --- Die sieben Fehldeutungen anwenden}
+Eine Veröffentlichung berichtet: \enquote{Die neue Therapie war überlegen ($p = 0{,}003$). Die Wahrscheinlichkeit, dass dies auf Zufall beruht, beträgt $0{,}3\,\%$.} Prüfen Sie beide Sätze.
+
+\loesung
+\schritt{Der erste Satz}
+\enquote{Überlegen} ist eine Aussage über die Richtung und die Größe. Der $p$-Wert allein trägt sie nicht --- er sagt nur, dass die Daten unter $H_0$ selten wären.
+
+Zulässig wäre: \enquote{Die Daten sind schlecht mit der Annahme gleicher Wirkung verträglich.} Für \enquote{überlegen} braucht man zusätzlich die Richtung des beobachteten Effekts und für die Beurteilung seine Größe.
+
+\schritt{Der zweite Satz --- die Fehldeutung}
+Das ist Fehldeutung Nummer $3$: $p$ ist nicht die Wahrscheinlichkeit, dass das Ergebnis auf Zufall beruht.
+
+\schritt{Warum das falsch ist --- ausführlich}
+Der $p$-Wert wurde unter der Annahme $H_0$ berechnet. Er setzt also voraus, dass alles Zufall ist, und fragt: Wie selten wären dann solche Daten? Antwort: in $0{,}3\,\%$ der Fälle.
+
+Die Behauptung dreht das um: Sie fragt, wie wahrscheinlich es ist, dass Zufall vorliegt --- gegeben die Daten. Dafür bräuchte man zusätzlich die Wahrscheinlichkeit, dass die Therapie überhaupt wirkt, \kursiv{bevor} man die Daten sah. Diese Größe kommt in der Rechnung nicht vor.
+
+\schritt{Ein Zahlenbeispiel, das den Unterschied zeigt}
+Angenommen, von hundert geprüften neuen Therapien wirkt tatsächlich eine von zehn. Wir rechnen mit $\alpha = 0{,}05$ und $80\,\%$ Macht.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.0cm}P{1.6cm}@{}}
+\toprule
+& \textbf{signifikant} & \textbf{nicht} & \textbf{Summe}\\
+\midrule
+wirkt ($10$) & $8$ & $2$ & $10$\\
+wirkt nicht ($90$) & \textcolor{akzent}{$4{,}5$} & $85{,}5$ & $90$\\
+\midrule
+\textbf{Summe} & $\mathbf{12{,}5}$ & $87{,}5$ & $100$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Von $12{,}5$ signifikanten Ergebnissen sind $4{,}5$ falsch --- das sind $36\,\%$, nicht $5\,\%$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Wahrscheinlichkeit, dass ein signifikantes Ergebnis falsch ist, hängt also davon ab, wie viele der geprüften Hypothesen überhaupt zutreffen. Sie ist regelmäßig \kursiv{viel größer} als $\alpha$. Das ist derselbe Rechenweg wie bei den prädiktiven Werten in Kapitel~13 --- und der Kern der Replikationskrise.}
+\end{minipage}
+\end{center}
+
+\schritt{Die richtige Formulierung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\enquote{Unter der Annahme, dass beide Therapien gleich wirken, wären Daten wie diese in $0{,}3\,\%$ der Fälle zu erwarten.}
+\end{minipage}
+\end{center}
+Umständlicher, und richtig.
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Verfahren, das niemand so wollte}
+Das heutige Testen ist eine Vermischung zweier Ansätze, deren Urheber einander bekämpften.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.8cm}P{3.2cm}@{}}
+\toprule
+& \textbf{Fisher} & \textbf{Neyman und Pearson}\\
+\midrule
+Ziel & Beleg gegen $H_0$ & Entscheidungsregel\\
+Ergebnis & $p$-Wert als Maß & Verwerfen oder nicht\\
+$H_1$ & \textcolor{akzent}{keine} & \textcolor{gruen}{nötig}\\
+Schwelle & \textcolor{akzent}{beweglich} & \textcolor{gruen}{vorher fest}\\
+Macht & \textcolor{akzent}{kein Begriff} & \textcolor{gruen}{zentral}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\Person{Ronald Fisher} entwickelte ab 1925 den Signifikanztest als Werkzeug zur Beurteilung von Belegen. Der $p$-Wert war für ihn ein \kursiv{Maß}, keine Entscheidungsgrundlage; die Schwelle $0{,}05$ nannte er als bequemen Anhaltspunkt, nicht als Regel.
+
+\Person{Jerzy Neyman} und \Person{Egon Pearson} entwarfen ab 1928 etwas anderes: ein Entscheidungsverfahren mit kontrollierten Fehlerraten, gedacht für wiederholte Anwendung --- etwa in der Qualitätskontrolle. Dort gibt es keinen $p$-Wert, sondern nur ein Urteil.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Fisher hielt den Ansatz für mechanistisch und der Wissenschaft unangemessen. Der Streit wurde über Jahrzehnte mit persönlicher Schärfe geführt; Fisher nannte Neymans Verfahren einmal die Denkweise eines Handlungsreisenden.}
+\end{minipage}
+\end{center}
+
+Was sich durchsetzte, war keiner der beiden Ansätze, sondern eine Mischung: Man berechnet einen $p$-Wert wie bei Fisher und behandelt ihn wie eine Entscheidungsregel nach Neyman und Pearson --- mit einer festen Schwelle, aber ohne vorherige Festlegung der Macht.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Diese Mischung ist in keinem der beiden Rahmen begründet. Sie steht in den Lehrbüchern, weil sie sich einfach unterrichten lässt --- und sie trägt einen erheblichen Teil der Verwirrung, die dieses Kapitel auszuräumen versucht.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Die Erklärung der Amerikanischen Statistischen Gesellschaft}
+Im März 2016 veröffentlichte die \kursiv{American Statistical Association} erstmals in ihrer Geschichte eine Erklärung zu einer einzelnen Methode. Der Anlass war die wachsende Zahl von Veröffentlichungen, die auf fehlgedeuteten $p$-Werten beruhten.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{0.7cm}P{7.6cm}@{}}
+\toprule
+$1$ & $p$-Werte können angeben, wie unverträglich Daten mit einem Modell sind.\\
+$2$ & $p$-Werte messen \kursiv{nicht} die Wahrscheinlichkeit einer Hypothese oder die Wahrscheinlichkeit, dass Zufall vorliegt.\\
+$3$ & Wissenschaftliche Schlüsse sollten nicht allein davon abhängen, ob ein $p$-Wert eine Schwelle unterschreitet.\\
+$4$ & Ordentliche Schlussfolgerung verlangt vollständige Berichterstattung und Durchsichtigkeit.\\
+$5$ & Ein $p$-Wert misst weder die Größe eines Effekts noch die Bedeutsamkeit eines Ergebnisses.\\
+$6$ & Für sich genommen liefert ein $p$-Wert kein gutes Maß für die Belege bezüglich eines Modells.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Was seither vorgeschlagen wurde}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{5.8cm}@{}}
+\toprule
+\textbf{Schwelle senken} & Benjamin u.\,a.\ (2018) schlugen $p < 0{,}005$ für neue Befunde vor.\\
+\textbf{Ganz aufgeben} & Amrhein, Greenland, McShane (2019): das Wort \enquote{signifikant} streichen.\\
+\textbf{Umbenennen} & \enquote{Kompatibilitätsintervall} statt \enquote{Konfidenzintervall}.\\
+\textbf{Bayessch} & Bayes-Faktoren statt $p$-Werten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Keiner der Vorschläge hat sich allgemein durchgesetzt, und die Debatte ist nicht entschieden. Was sich geändert hat, ist die Berichtspraxis: Effektschätzer mit Intervall sind in guten Zeitschriften heute Pflicht, der $p$-Wert eine Zugabe. Kapitel~15 stellt den Stand ausführlich dar.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Definition 7.2} & Der $p$-Wert, exakt\\
+\textbf{Sieben Fehldeutungen} & und ihr gemeinsamer Kern: $\Pr[D\mid H_0]$ gegen $\Pr[H_0\mid D]$\\
+\textbf{Definition 7.3} & Beide Fehlerarten, Macht\\
+\textbf{Sieben Schritte} & einschließlich des siebten\\
+\textbf{Fallzahl} & $n \sim 1/\delta^2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel kommen die einzelnen Verfahren --- und zu jedem die Frage, was geschieht, wenn seine Voraussetzungen nicht zutreffen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

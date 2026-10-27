@@ -1,0 +1,687 @@
+\chapter{Flüsse und Schnitte}
+
+\section{Wie viel passt gleichzeitig hindurch?}
+
+\begin{merksatz}
+\boxtitel{Die Frage}
+Bei einem Großschadensereignis sollen Verletzte vom Sammelplatz $s$ in die Zentralklinik $t$ gebracht werden. Zwischen den Knotenpunkten des Straßennetzes gibt es Verbindungen mit begrenzter Kapazität --- so viele Fahrzeuge je Stunde und nicht mehr.
+
+\textbf{Die Frage:} Wie viele Fahrzeuge je Stunde erreichen höchstens die Klinik?
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und eine zweite, die überraschenderweise dieselbe Antwort hat: An welcher Stelle des Netzes sitzt der Engpass?}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+Für dieses Kapitel brauchen wir zum ersten und einzigen Mal in diesem Band \kursiv{gerichtete} Kanten. Sie waren in Kapitel~1 ausdrücklich ausgeschlossen worden; hier werden sie nachgereicht.
+
+\begin{definition}
+\boxtitelm{Definition 12.1 --- gerichteter Graph, Netzwerk}
+Ein \Begriff{gerichteter Graph} $D = (V, E)$ besteht aus einer Eckenmenge $V$ und einer Menge $E$ von \kursiv{geordneten} Paaren $(u,v)$ mit $u \neq v$. Man schreibt $u \to v$ und nennt $u$ den Anfang, $v$ das Ende.
+
+Ein \Begriff{Netzwerk} ist ein Tupel $N = (D, c, s, t)$ aus
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item einem gerichteten Graphen $D$,
+\item einer \Begriff{Kapazität} $c(e) \ge 0$ für jede Kante, hier stets ganzzahlig,
+\item zwei ausgezeichneten Ecken: der \Begriff{Quelle} $s$ und der \Begriff{Senke} $t$ mit $s \neq t$.
+\end{itemize}
+\end{definition}
+
+\begin{definition}
+\boxtitelm{Definition 12.2 --- Fluss}
+Ein \Begriff{Fluss} in $N$ ist eine Zuordnung $f(e) \ge 0$ für jede Kante mit
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kapazität} & $f(e) \le c(e)$ für jede Kante $e$\\
+\textbf{Erhaltung} & für jede Ecke $v \neq s,t$: was hineinfließt, fließt heraus\\
+\bottomrule
+\end{tabular}
+\end{center}
+In Zeichen lautet die zweite Bedingung
+\[ \sum_{e \text{ endet in } v} f(e) \;=\; \sum_{e \text{ beginnt in } v} f(e) . \]
+
+Der \Begriff{Wert} des Flusses ist der Nettoausstoß der Quelle:
+\[ w(f) \;=\; \sum_{e \text{ beginnt in } s} f(e) \;-\; \sum_{e \text{ endet in } s} f(e) . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Ein Beispiel}
+\begin{center}
+\begin{tikzpicture}[scale=1.5,every node/.style={font=\scriptsize}]
+\node[knotenb] (s) at (-2.2,0) {$s$};
+\node[knotenb] (a) at (-0.8,0.9) {$a$};
+\node[knotenb] (b) at (-0.8,-0.9) {$b$};
+\node[knotenb] (c) at (0.8,0.9) {$c$};
+\node[knotenb] (d) at (0.8,-0.9) {$d$};
+\node[knotenb] (t) at (2.2,0) {$t$};
+\draw[kante,-{Stealth[length=5pt]}] (s)--(a) node[midway,above left,color=grau] {$3$};
+\draw[kante,-{Stealth[length=5pt]}] (s)--(b) node[midway,below left,color=grau] {$2$};
+\draw[kante,-{Stealth[length=5pt]}] (a)--(c) node[midway,above,color=grau] {$2$};
+\draw[kante,-{Stealth[length=5pt]}] (a)--(d) node[pos=0.35,right,color=grau] {$2$};
+\draw[kante,-{Stealth[length=5pt]}] (b)--(d) node[midway,below,color=grau] {$3$};
+\draw[kante,-{Stealth[length=5pt]}] (c)--(t) node[midway,above right,color=grau] {$3$};
+\draw[kante,-{Stealth[length=5pt]}] (d)--(t) node[midway,below right,color=grau] {$2$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Ein Fluss vom Wert $4$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.2cm}P{1.0cm}P{1.0cm}P{1.2cm}P{1.0cm}P{1.0cm}@{}}
+\toprule
+\textbf{Kante} & $c$ & $f$ & \textbf{Kante} & $c$ & $f$\\
+\midrule
+$sa$ & $3$ & $2$ & $bd$ & $3$ & $2$\\
+$sb$ & $2$ & $2$ & $ct$ & $3$ & $2$\\
+$ac$ & $2$ & $2$ & $dt$ & $2$ & $2$\\
+$ad$ & $2$ & $0$ & & &\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Erhaltung prüfen}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{2.0cm}P{2.0cm}P{1.4cm}@{}}
+\toprule
+\textbf{Ecke} & \textbf{hinein} & \textbf{hinaus} & \\
+\midrule
+$a$ & $2$ (aus $s$) & $2+0 = 2$ & \checkmark\\
+$b$ & $2$ & $2$ & \checkmark\\
+$c$ & $2$ & $2$ & \checkmark\\
+$d$ & $0+2 = 2$ & $2$ & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Der Wert}
+Aus $s$ heraus: $2 + 2 = 4$. In $s$ hinein: $0$. Also $w(f) = 4$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Geht es besser? Die Kante $ad$ ist noch frei, und $sa$ hat noch Luft. Aber $dt$ ist bereits ausgelastet, und $ct$ hat nur noch $1$ frei --- während $ac$ voll ist. Es sieht nach $4$ als Höchstwert aus. Der nächste Abschnitt macht daraus einen Beweis.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Schnitte}
+
+\begin{definition}
+\boxtitelm{Definition 12.3 --- Schnitt und Kapazität}
+Ein \Begriff{Schnitt} ist eine Aufteilung $V = S \cup T$ mit $S \cap T = \varnothing$, $s \in S$ und $t \in T$.
+
+Die \Begriff{Kapazität} des Schnitts ist
+\[ c(S,T) \;=\; \sum_{\substack{e = (u,v) \\ u \in S,\ v \in T}} c(e) , \]
+also die Summe der Kapazitäten aller Kanten, die \kursiv{von $S$ nach $T$} führen. Kanten in der Gegenrichtung zählen nicht mit.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 12.4 --- Jeder Fluss ist durch jeden Schnitt beschränkt}
+Für jeden Fluss $f$ und jeden Schnitt $(S,T)$ gilt
+\[ w(f) \;\le\; c(S,T) . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis}
+\schritt{Schritt 1 --- Den Wert über die ganze Menge $S$ ausdrücken}
+Für jede Ecke $v$ sei
+\[ \text{netto}(v) \;=\; \sum_{e \text{ beginnt in } v} f(e) \;-\; \sum_{e \text{ endet in } v} f(e) . \]
+Nach der Erhaltungsbedingung ist $\text{netto}(v) = 0$ für alle $v \neq s,t$, und $\text{netto}(s) = w(f)$.
+
+Also
+\[ w(f) \;=\; \sum_{v \in S} \text{netto}(v) , \]
+denn alle Summanden außer dem für $s$ sind null ($t$ liegt nicht in $S$).
+
+\schritt{Schritt 2 --- Die Summe auseinandernehmen}
+In $\sum_{v \in S} \text{netto}(v)$ kommt jede Kante $e = (u,v)$ vor, sobald $u$ oder $v$ in $S$ liegt. Wir unterscheiden:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+\textbf{Lage von $e=(u,v)$} & \textbf{Beitrag} & \\
+\midrule
+$u \in S$, $v \in S$ & $+f(e)$ bei $u$, $-f(e)$ bei $v$ & \textcolor{grau}{hebt sich auf}\\
+$u \in S$, $v \in T$ & $+f(e)$ bei $u$ & \textcolor{gruen}{zählt positiv}\\
+$u \in T$, $v \in S$ & $-f(e)$ bei $v$ & \textcolor{akzent}{zählt negativ}\\
+$u \in T$, $v \in T$ & --- & \textcolor{grau}{kommt nicht vor}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Also
+\[ w(f) \;=\; \underbrace{\sum_{u \in S,\, v \in T} f(e)}_{=: f(S,T)} \;-\; \underbrace{\sum_{u \in T,\, v \in S} f(e)}_{=: f(T,S)} . \]
+
+\schritt{Schritt 3 --- Abschätzen}
+Der zweite Summand ist $\ge 0$, weil alle Flusswerte nichtnegativ sind. Der erste ist höchstens $c(S,T)$, weil $f(e) \le c(e)$ für jede Kante gilt. Also
+\[ w(f) \;\le\; f(S,T) \;\le\; c(S,T) . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was Satz 12.4 sofort liefert}
+Findet man \kursiv{einen} Fluss und \kursiv{einen} Schnitt mit demselben Wert, so ist beides optimal: Der Fluss ist größtmöglich, der Schnitt kleinstmöglich.
+
+\schritt{Am Beispiel}
+Wir wählen $S = \{s, a, b, c, d\}$, $T = \{t\}$. Die Kanten von $S$ nach $T$ sind $ct$ (Kapazität $3$) und $dt$ (Kapazität $2$). Also $c(S,T) = 5$.
+
+Das passt nicht zu unserem Fluss vom Wert $4$. Wir suchen einen besseren Schnitt.
+
+Versuch $S = \{s, a, b\}$, $T = \{c,d,t\}$: Kanten von $S$ nach $T$ sind $ac$ ($2$), $ad$ ($2$), $bd$ ($3$). Kapazität $7$. Schlechter.
+
+Versuch $S = \{s,b\}$, $T = \{a,c,d,t\}$: Kanten von $S$ nach $T$ sind $sa$ ($3$) und $bd$ ($3$). Kapazität $6$.
+
+\schritt{Der richtige Schnitt}
+$S = \{s, a, b, d\}$, $T = \{c, t\}$: Kanten von $S$ nach $T$ sind $ac$ ($2$) und $dt$ ($2$). Kapazität $\mathbf{4}$.
+
+Damit ist bewiesen: Der Fluss vom Wert $4$ ist größtmöglich, und $4$ ist der Engpass. \checkmark
+\end{merksatz}
+
+\section{Der Hauptsatz}
+
+\begin{merksatz}
+\boxtitel{Satz 12.5 (Ford und Fulkerson 1956)}
+In jedem Netzwerk mit ganzzahligen Kapazitäten gilt
+\[ \max_f w(f) \;=\; \min_{(S,T)} c(S,T) . \]
+Der größte Flusswert ist gleich der kleinsten Schnittkapazität. Überdies gibt es einen größten Fluss mit lauter ganzzahligen Werten.
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 12.6 --- Restnetzwerk und vergrößernder Weg}
+Sei $f$ ein Fluss. Das \Begriff{Restnetzwerk} $N_f$ enthält für jede Kante $e = (u,v)$ des Netzwerks
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item eine \Begriff{Vorwärtskante} $u \to v$ mit Restkapazität $c(e) - f(e)$, falls diese positiv ist;
+\item eine \Begriff{Rückwärtskante} $v \to u$ mit Restkapazität $f(e)$, falls diese positiv ist.
+\end{itemize}
+Ein \Begriff{vergrößernder Weg} ist ein gerichteter Weg von $s$ nach $t$ im Restnetzwerk.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum es Rückwärtskanten gibt}
+Die Vorwärtskanten sind einleuchtend: Wo noch Kapazität frei ist, kann mehr fließen.
+
+Die Rückwärtskanten sind der eigentliche Kunstgriff. Sie erlauben, eine frühere Entscheidung \kursiv{zurückzunehmen}: Fließt über $e = (u,v)$ bereits etwas, so darf man diesen Anteil verringern --- was sich wie ein Fluss von $v$ nach $u$ auswirkt.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.35,every node/.style={font=\scriptsize}]
+\node[knotenb] (u) at (0,0) {$u$};
+\node[knotenb] (v) at (2.0,0) {$v$};
+\draw[kante,-{Stealth[length=5pt]}] (u) to[bend left=25] node[midway,above,color=grau] {$f=2$, $c=5$} (v);
+\node[font=\scriptsize\itshape, color=grau] at (1.0,-1.4) {im Netzwerk};
+\begin{scope}[xshift=4.6cm]
+\node[knotenb] (u2) at (0,0) {$u$};
+\node[knotenb] (v2) at (2.0,0) {$v$};
+\draw[kanted,-{Stealth[length=5pt]}] (u2) to[bend left=30] node[midway,above,color=akzent] {Rest $3$} (v2);
+\draw[kanted,-{Stealth[length=5pt]}] (v2) to[bend left=30] node[midway,below,color=akzent] {Rest $2$} (u2);
+\node[font=\scriptsize\itshape, color=grau] at (1.0,-1.4) {im Restnetzwerk};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ohne Rückwärtskanten wäre der Satz falsch. Ein gieriges Verfahren, das nur vorwärts schiebt, kann sich in eine Sackgasse manövrieren --- Aufgabe 12.2 zeigt ein Beispiel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis von Satz 12.5 --- Teil 1: das Verfahren}
+\schritt{Schritt 1 --- Start}
+Wir beginnen mit dem Nullfluss $f(e) = 0$ für alle $e$. Er erfüllt beide Bedingungen und hat Wert $0$.
+
+\schritt{Schritt 2 --- Vergrößern}
+Solange es im Restnetzwerk einen Weg $P$ von $s$ nach $t$ gibt: Sei
+\[ \delta = \min\{\text{Restkapazität der Kanten von } P\} > 0 . \]
+Wir erhöhen den Fluss um $\delta$ entlang der Vorwärtskanten von $P$ und verringern ihn um $\delta$ entlang der Rückwärtskanten.
+
+\schritt{Schritt 3 --- Das Ergebnis ist wieder ein Fluss}
+\kursiv{Kapazität:} Bei einer Vorwärtskante war die Restkapazität $c(e)-f(e) \ge \delta$, also bleibt $f(e)+\delta \le c(e)$. Bei einer Rückwärtskante war $f(e) \ge \delta$, also bleibt $f(e)-\delta \ge 0$.
+
+\kursiv{Erhaltung:} Sei $v$ eine innere Ecke von $P$. Der Weg kommt über eine Kante an und geht über eine weiter. Man prüft die vier Kombinationen aus Vor- und Rückwärtskante; in jeder ändern sich Zufluss und Abfluss von $v$ um denselben Betrag $\delta$.
+
+Etwa: Kommt der Weg über eine Vorwärtskante an ($\delta$ mehr Zufluss) und geht über eine Vorwärtskante weiter ($\delta$ mehr Abfluss), so bleibt die Bilanz. Kommt er über eine Vorwärtskante an und geht über eine Rückwärtskante weiter, so wird eine hineinführende Kante um $\delta$ verringert --- ebenfalls $\delta$ weniger Zufluss, was den zusätzlichen Zufluss ausgleicht.
+
+\kursiv{Der Wert wächst:} An $s$ hat der Weg genau eine Kante. Ist sie vorwärts, steigt der Ausstoß um $\delta$; ist sie rückwärts, sinkt der Einstoß um $\delta$. Beides erhöht $w(f)$ um $\delta$.
+
+\schritt{Schritt 4 --- Das Verfahren endet}
+Alle Kapazitäten sind ganzzahlig. Beginnt man mit dem ganzzahligen Nullfluss, so ist $\delta$ in jedem Schritt eine positive ganze Zahl, also $\delta \ge 1$. Der Wert wächst somit bei jedem Durchgang um mindestens $1$.
+
+Nach Satz 12.4 ist der Wert durch die Kapazität irgendeines Schnitts nach oben beschränkt. Also endet das Verfahren nach endlich vielen Schritten --- und liefert dabei einen ganzzahligen Fluss.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis von Satz 12.5 --- Teil 2: der Schnitt}
+Sei $f$ der Fluss, bei dem das Verfahren stehenbleibt. Dann gibt es im Restnetzwerk keinen Weg von $s$ nach $t$.
+
+\schritt{Schritt 1 --- Den Schnitt bilden}
+Sei
+\[ S = \{\, v \in V : \text{es gibt einen Weg von } s \text{ nach } v \text{ im Restnetzwerk} \,\} , \qquad T = V \setminus S . \]
+Es ist $s \in S$ (Weg der Länge $0$) und $t \in T$ (sonst gäbe es einen vergrößernden Weg). $(S,T)$ ist also ein Schnitt.
+
+\schritt{Schritt 2 --- Kanten von $S$ nach $T$ sind voll}
+Sei $e = (u,v)$ mit $u \in S$, $v \in T$. Wäre $f(e) < c(e)$, so hätte das Restnetzwerk die Vorwärtskante $u \to v$ mit positiver Restkapazität. Dann wäre $v$ von $s$ aus erreichbar --- über den Weg nach $u$ und diese Kante --- also $v \in S$. Widerspruch.
+
+Also $f(e) = c(e)$ für alle diese Kanten:
+\[ f(S,T) = c(S,T) . \]
+
+\schritt{Schritt 3 --- Kanten von $T$ nach $S$ sind leer}
+Sei $e = (u,v)$ mit $u \in T$, $v \in S$. Wäre $f(e) > 0$, so hätte das Restnetzwerk die Rückwärtskante $v \to u$ mit positiver Restkapazität. Dann wäre $u$ von $s$ aus erreichbar, also $u \in S$. Widerspruch.
+
+Also $f(T,S) = 0$.
+
+\schritt{Schritt 4 --- Zusammensetzen}
+Nach Schritt 2 des Beweises von Satz 12.4 gilt allgemein
+\[ w(f) = f(S,T) - f(T,S) . \]
+Einsetzen:
+\[ w(f) = c(S,T) - 0 = c(S,T) . \]
+
+\schritt{Schritt 5 --- Schluss}
+Wir haben einen Fluss und einen Schnitt mit gleichem Wert. Nach Satz 12.4 ist jeder Fluss höchstens so groß wie jeder Schnitt; also ist dieser Fluss größtmöglich und dieser Schnitt kleinstmöglich, und die beiden Optima stimmen überein. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Folgerung 12.7 --- Ganzzahligkeit}
+Sind alle Kapazitäten ganzzahlig, so gibt es einen größten Fluss, dessen sämtliche Werte $f(e)$ ganze Zahlen sind.
+
+Das steht schon in Schritt 4 von Teil 1: Das Verfahren erzeugt aus einem ganzzahligen Fluss durch Addition oder Subtraktion einer ganzen Zahl $\delta$ wieder einen ganzzahligen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese unscheinbare Aussage ist der Grund, warum sich die Sätze des vorigen Kapitels aus dem Flusssatz gewinnen lassen. Bei einer Paarung kann man eine Kante nicht \enquote{zur Hälfte} nehmen --- man braucht eine ganzzahlige Lösung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz von Menger und die Ernte}
+
+\begin{merksatz}
+\boxtitel{Satz 12.8 (Menger 1927, Kantenfassung)}
+Seien $s \neq t$ zwei Ecken eines Graphen $G$. Dann ist die größte Anzahl paarweise \kursiv{kantendisjunkter} Wege von $s$ nach $t$ gleich der kleinsten Anzahl von Kanten, deren Entfernung $s$ von $t$ trennt.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- durch Übersetzung in ein Netzwerk}
+\schritt{Schritt 1 --- Das Netzwerk bauen}
+Wir ersetzen jede Kante $\{u,v\}$ von $G$ durch zwei gerichtete Kanten $(u,v)$ und $(v,u)$ und geben jeder die Kapazität $1$. Quelle $s$, Senke $t$.
+
+\schritt{Schritt 2 --- Größter Fluss $=$ Anzahl kantendisjunkter Wege}
+\kursiv{Von den Wegen zum Fluss.} Hat man $k$ kantendisjunkte Wege, so schicke man über jeden eine Einheit. Da die Wege keine Kante teilen, wird keine Kapazität überschritten. Der Wert ist $k$.
+
+\kursiv{Vom Fluss zu den Wegen.} Sei $f$ ein ganzzahliger Fluss vom Wert $k$ (nach Folgerung 12.7 gibt es einen). Jede Kante trägt $0$ oder $1$. Man verfolgt von $s$ aus eine Kante mit $f = 1$, dann von der erreichten Ecke wieder eine, und so fort; die Erhaltung garantiert, dass es weitergeht, solange man nicht bei $t$ ist. So erhält man einen Weg von $s$ nach $t$; man entfernt ihn und wiederholt das Verfahren mit dem Rest, der wieder ein Fluss ist, nun vom Wert $k-1$. Nach $k$ Durchgängen hat man $k$ kantendisjunkte Wege.
+
+\schritt{Schritt 3 --- Kleinster Schnitt $=$ kleinste trennende Kantenmenge}
+Ist $(S,T)$ ein Schnitt der Kapazität $\ell$, so verlaufen genau $\ell$ gerichtete Kanten von $S$ nach $T$. Entfernt man die zugehörigen Kanten von $G$, so gibt es keinen Weg mehr von $s$ nach $t$ --- jeder solche Weg müsste irgendwann von $S$ nach $T$ übertreten.
+
+Umgekehrt liefert jede trennende Kantenmenge $F$ einen Schnitt: Man setze $S$ als die Menge der Ecken, die in $G - F$ noch von $s$ erreichbar sind. Alle Kanten von $S$ nach $T$ liegen dann in $F$, also ist $c(S,T) \le |F|$.
+
+\schritt{Schritt 4 --- Schluss}
+Nach Satz 12.5 sind größter Fluss und kleinster Schnitt gleich. Nach den Schritten 2 und 3 sind das genau die beiden gesuchten Zahlen. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Eckenfassung}
+Entsprechend gilt: Für nicht benachbarte $s,t$ ist die größte Anzahl paarweise \kursiv{eckendisjunkter} Wege von $s$ nach $t$ (bis auf $s$ und $t$ selbst) gleich der kleinsten Anzahl von Ecken, deren Entfernung $s$ von $t$ trennt.
+
+\schritt{Der Kunstgriff}
+Man spaltet jede Ecke $v \neq s,t$ in zwei Ecken $v_{\text{ein}}$ und $v_{\text{aus}}$ auf, verbunden durch eine Kante der Kapazität $1$. Alle hineinführenden Kanten enden bei $v_{\text{ein}}$, alle herausführenden beginnen bei $v_{\text{aus}}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.25,every node/.style={font=\scriptsize}]
+\begin{scope}
+\node[knotenb] (v) at (0,0) {$v$};
+\draw[kante,-{Stealth[length=5pt]}] (-1.1,0.6)--(v);
+\draw[kante,-{Stealth[length=5pt]}] (-1.1,-0.6)--(v);
+\draw[kante,-{Stealth[length=5pt]}] (v)--(1.1,0.6);
+\draw[kante,-{Stealth[length=5pt]}] (v)--(1.1,-0.6);
+\end{scope}
+\node[font=\large, color=grau] at (2.1,0) {$\rightsquigarrow$};
+\begin{scope}[xshift=4.4cm]
+\node[knotenb] (ve) at (-0.5,0) {};
+\node[knotenb] (va) at (0.7,0) {};
+\draw[kanted,-{Stealth[length=5pt]}] (ve)--(va) node[midway,above,color=akzent] {$1$};
+\draw[kante,-{Stealth[length=5pt]}] (-1.6,0.6)--(ve);
+\draw[kante,-{Stealth[length=5pt]}] (-1.6,-0.6)--(ve);
+\draw[kante,-{Stealth[length=5pt]}] (va)--(1.8,0.6);
+\draw[kante,-{Stealth[length=5pt]}] (va)--(1.8,-0.6);
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Jeder Weg durch $v$ muss nun die Kante $v_{\text{ein}} \to v_{\text{aus}}$ benutzen, deren Kapazität $1$ beträgt. Damit übersetzt sich \enquote{eckendisjunkt} in \enquote{kantendisjunkt}, und die Kantenfassung liefert die Behauptung.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Folgerung 12.9 --- König aus Menger}
+Der Satz von Kőnig (Satz 11.7) ist ein Sonderfall.
+
+\schritt{Die Übersetzung}
+Sei $G$ bipartit mit Bipartition $(A,B)$. Wir fügen zwei neue Ecken hinzu: $s$ mit Kanten zu allen Ecken von $A$, und $t$ mit Kanten von allen Ecken von $B$. Alle Kanten werden von $s$ Richtung $t$ gerichtet.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2,every node/.style={font=\scriptsize}]
+\node[knotenr] (s) at (-2.6,0) {$s$};
+\node[knotenb] (a1) at (-1.2,0.9) {};
+\node[knotenb] (a2) at (-1.2,0) {};
+\node[knotenb] (a3) at (-1.2,-0.9) {};
+\node[knotenb] (b1) at (0.6,0.9) {};
+\node[knotenb] (b2) at (0.6,0) {};
+\node[knotenb] (b3) at (0.6,-0.9) {};
+\node[knotenr] (t) at (2.0,0) {$t$};
+\foreach \i in {1,2,3} \draw[kante,-{Stealth[length=4pt]}] (s)--(a\i);
+\foreach \i in {1,2,3} \draw[kante,-{Stealth[length=4pt]}] (b\i)--(t);
+\draw[kante,-{Stealth[length=4pt]}] (a1)--(b1);
+\draw[kante,-{Stealth[length=4pt]}] (a1)--(b2);
+\draw[kante,-{Stealth[length=4pt]}] (a2)--(b2);
+\draw[kante,-{Stealth[length=4pt]}] (a3)--(b3);
+\end{tikzpicture}
+\end{center}
+
+\schritt{Was ein Fluss bedeutet}
+Gibt man den Kanten von $s$ und den Kanten nach $t$ die Kapazität $1$ und den mittleren Kanten die Kapazität $\infty$ (oder ebenfalls $1$, das ändert nichts), so entspricht ein ganzzahliger Fluss vom Wert $k$ genau einer Paarung mit $k$ Kanten: Jede Ecke aus $A$ bekommt höchstens eine Einheit, jede aus $B$ gibt höchstens eine ab.
+
+\schritt{Was ein Schnitt bedeutet}
+Ein kleinster Schnitt besteht aus Kanten der Form $(s,a)$ und $(b,t)$ --- die mittleren sind zu teuer. Die zugehörige Eckenmenge $\{a : (s,a) \text{ im Schnitt}\} \cup \{b : (b,t) \text{ im Schnitt}\}$ ist genau eine Eckenüberdeckung: Jede mittlere Kante $\{a,b\}$ muss durch mindestens eine der beiden abgeschnitten sein, sonst gäbe es einen Weg von $s$ nach $t$.
+
+\schritt{Schluss}
+Größter Fluss $=$ größte Paarung; kleinster Schnitt $=$ kleinste Überdeckung. Satz 12.5 liefert die Gleichheit. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Landkarte der Dualität}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+\textbf{Satz} & \textbf{Maximum} & \textbf{Minimum}\\
+\midrule
+Ford--Fulkerson & Flusswert & Schnittkapazität\\
+Menger (Kanten) & kantendisjunkte Wege & trennende Kanten\\
+Menger (Ecken) & eckendisjunkte Wege & trennende Ecken\\
+Kőnig & Paarung & Ecken\-überdeckung\\
+Hall & --- & \textcolor{grau}{Sonderfall von Kőnig}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle diese Sätze haben dieselbe Gestalt: Ein Maximum ist gleich einem Minimum. Solche Paare heißen \Begriff{Dualitätssätze}. Sie sind in der Optimierung die Regel und nicht die Ausnahme --- der allgemeine Rahmen ist die Dualität der linearen Programmierung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und sie haben denselben praktischen Wert: Man kann die Optimalität einer Lösung \kursiv{nachweisen}, ohne alle Alternativen zu prüfen --- man legt einfach das passende Gegenstück vor. Beim Netzwerk aus Abschnitt 12.1 waren das der Fluss vom Wert $4$ und der Schnitt der Kapazität $4$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.1 --- Größter Fluss bestimmen}
+Bestimmen Sie im abgebildeten Netzwerk den größten Fluss und einen kleinsten Schnitt.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5,every node/.style={font=\scriptsize}]
+\node[knotenb] (s) at (-2.0,0) {$s$};
+\node[knotenb] (a) at (-0.7,0.9) {$a$};
+\node[knotenb] (b) at (-0.7,-0.9) {$b$};
+\node[knotenb] (c) at (0.7,0.9) {$c$};
+\node[knotenb] (d) at (0.7,-0.9) {$d$};
+\node[knotenb] (t) at (2.0,0) {$t$};
+\draw[kante,-{Stealth[length=5pt]}] (s)--(a) node[midway,above left,color=grau] {$4$};
+\draw[kante,-{Stealth[length=5pt]}] (s)--(b) node[midway,below left,color=grau] {$5$};
+\draw[kante,-{Stealth[length=5pt]}] (a)--(c) node[midway,above,color=grau] {$3$};
+\draw[kante,-{Stealth[length=5pt]}] (a)--(b) node[pos=0.4,left,color=grau] {$2$};
+\draw[kante,-{Stealth[length=5pt]}] (b)--(d) node[midway,below,color=grau] {$4$};
+\draw[kante,-{Stealth[length=5pt]}] (c)--(t) node[midway,above right,color=grau] {$5$};
+\draw[kante,-{Stealth[length=5pt]}] (d)--(t) node[midway,below right,color=grau] {$3$};
+\draw[kante,-{Stealth[length=5pt]}] (d)--(c) node[pos=0.45,right,color=grau] {$2$};
+\end{tikzpicture}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Erster vergrößernder Weg}
+$s \to a \to c \to t$. Restkapazitäten: $4$, $3$, $5$. Also $\delta = 3$.
+
+Fluss: $sa = 3$, $ac = 3$, $ct = 3$. Wert $3$.
+
+\schritt{Schritt 2 --- Zweiter Weg}
+$s \to b \to d \to t$. Restkapazitäten: $5$, $4$, $3$. Also $\delta = 3$.
+
+Fluss zusätzlich: $sb = 3$, $bd = 3$, $dt = 3$. Wert $6$.
+
+\schritt{Schritt 3 --- Dritter Weg}
+$s \to b \to d \to c \to t$. Restkapazitäten: $sb$ hat $5-3=2$, $bd$ hat $4-3=1$, $dc$ hat $2$, $ct$ hat $5-3=2$. Also $\delta = 1$.
+
+Fluss zusätzlich: $sb = 4$, $bd = 4$, $dc = 1$, $ct = 4$. Wert $7$.
+
+\schritt{Schritt 4 --- Gibt es einen weiteren Weg?}
+Wir bestimmen, was von $s$ aus im Restnetzwerk erreichbar ist.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.4cm}P{3.0cm}@{}}
+\toprule
+\textbf{Kante} & $c$ & $f$ & \textbf{Rest vorwärts}\\
+\midrule
+$sa$ & $4$ & $3$ & $1$ \textcolor{gruen}{offen}\\
+$sb$ & $5$ & $4$ & $1$ \textcolor{gruen}{offen}\\
+$ac$ & $3$ & $3$ & $0$ \textcolor{akzent}{voll}\\
+$ab$ & $2$ & $0$ & $2$ \textcolor{gruen}{offen}\\
+$bd$ & $4$ & $4$ & $0$ \textcolor{akzent}{voll}\\
+$dc$ & $2$ & $1$ & $1$ \textcolor{gruen}{offen}\\
+$ct$ & $5$ & $4$ & $1$ \textcolor{gruen}{offen}\\
+$dt$ & $3$ & $3$ & $0$ \textcolor{akzent}{voll}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Von $s$ aus: erreichbar sind $a$ (über $sa$) und $b$ (über $sb$ oder über $ab$).
+
+Von $a$ aus: $ac$ ist voll; als Rückwärtskante wäre $c \to a$ möglich, aber wir stehen bei $a$. Es geht nur $ab$ vorwärts.
+
+Von $b$ aus: $bd$ ist voll. Rückwärtskante von $b$ wäre $b \to s$ oder $b \to a$ --- führt nicht weiter.
+
+\textbf{Erreichbar:} $S = \{s, a, b\}$. Die Senke $t$ ist nicht dabei.
+
+\schritt{Schritt 5 --- Der Schnitt}
+$S = \{s,a,b\}$, $T = \{c,d,t\}$. Kanten von $S$ nach $T$: $ac$ (Kapazität $3$) und $bd$ (Kapazität $4$).
+\[ c(S,T) = 3 + 4 = 7 . \]
+
+\schritt{Antwort}
+Größter Flusswert $= \mathbf{7}$, kleinste Schnittkapazität $= \mathbf{7}$. \checkmark
+
+\schritt{Probe --- die Erhaltung nachrechnen}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.2cm}P{2.2cm}P{2.2cm}P{1.2cm}@{}}
+\toprule
+\textbf{Ecke} & \textbf{hinein} & \textbf{hinaus} & \\
+\midrule
+$a$ & $3$ & $3+0 = 3$ & \checkmark\\
+$b$ & $4+0 = 4$ & $4$ & \checkmark\\
+$c$ & $3+1 = 4$ & $4$ & \checkmark\\
+$d$ & $4$ & $3+1 = 4$ & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+Aus $s$ heraus: $3+4 = 7$. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.2 --- Warum es Rückwärtskanten braucht}
+Zeigen Sie an einem Beispiel, dass ein Verfahren ohne Rückwärtskanten steckenbleiben kann.
+
+\loesung
+\schritt{Schritt 1 --- Das Netzwerk}
+\begin{center}
+\begin{tikzpicture}[scale=1.5,every node/.style={font=\scriptsize}]
+\node[knotenb] (s) at (-1.6,0) {$s$};
+\node[knotenb] (a) at (0,0.9) {$a$};
+\node[knotenb] (b) at (0,-0.9) {$b$};
+\node[knotenb] (t) at (1.6,0) {$t$};
+\draw[kante,-{Stealth[length=5pt]}] (s)--(a) node[midway,above left,color=grau] {$1$};
+\draw[kante,-{Stealth[length=5pt]}] (s)--(b) node[midway,below left,color=grau] {$1$};
+\draw[kante,-{Stealth[length=5pt]}] (a)--(t) node[midway,above right,color=grau] {$1$};
+\draw[kante,-{Stealth[length=5pt]}] (b)--(t) node[midway,below right,color=grau] {$1$};
+\draw[kante,-{Stealth[length=5pt]}] (a)--(b) node[midway,right,color=grau] {$1$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Schritt 2 --- Eine ungeschickte erste Wahl}
+Wir wählen den Weg $s \to a \to b \to t$ mit $\delta = 1$.
+
+Danach: $sa = 1$, $ab = 1$, $bt = 1$. Wert $1$.
+
+\schritt{Schritt 3 --- Ohne Rückwärtskanten geht nichts mehr}
+Freie Vorwärtskapazität besteht nur noch auf $sb$ und $at$. Ein Weg von $s$ nach $t$ müsste über $sb$ beginnen; von $b$ führt nur $bt$ weiter, und die ist voll. Oder er müsste über $sa$ beginnen --- die ist voll.
+
+\textbf{Steckengeblieben bei Wert $1$.}
+
+\schritt{Schritt 4 --- Mit Rückwärtskanten}
+Das Restnetzwerk enthält die Rückwärtskante $b \to a$ (Restkapazität $1$, weil $f(ab) = 1$).
+
+Damit gibt es den Weg
+\[ s \to b \;\xrightarrow{\ \text{rückwärts}\ }\; a \to t . \]
+Restkapazitäten: $sb$ hat $1$, die Rückwärtskante $b \to a$ hat $1$, $at$ hat $1$. Also $\delta = 1$.
+
+Wir erhöhen $sb$ auf $1$, \kursiv{verringern} $ab$ auf $0$ und erhöhen $at$ auf $1$.
+
+\schritt{Schritt 5 --- Das Ergebnis}
+$sa = 1$, $at = 1$, $sb = 1$, $bt = 1$, $ab = 0$. Wert $\mathbf{2}$.
+
+\schritt{Probe über einen Schnitt}
+$S = \{s\}$, $T = \{a,b,t\}$: Kanten $sa$ und $sb$, Kapazität $1+1 = 2$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Rückwärtskante hat die erste Entscheidung teilweise zurückgenommen: Der Anteil, der über $a \to b$ lief, wird nun über $a \to t$ geleitet, und $b$ wird stattdessen direkt von $s$ versorgt. Genau das kann ein gieriges Verfahren nicht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.3 --- Menger anwenden}
+Wie viele kantendisjunkte Wege gibt es im Würfelgraphen $Q_3$ zwischen zwei gegenüberliegenden Ecken?
+
+\loesung
+\schritt{Schritt 1 --- Die Ecken benennen}
+$Q_3$ hat als Ecken die Bitfolgen der Länge $3$. Wir nehmen $s = 000$ und $t = 111$.
+
+\schritt{Schritt 2 --- Eine obere Schranke}
+Jeder Weg von $s$ nach $t$ muss die erste Kante an $s$ benutzen. Die Ecke $s$ hat den Grad $3$. Kantendisjunkte Wege benutzen verschiedene erste Kanten, also gibt es höchstens $\mathbf{3}$.
+
+Anders gesagt: Die drei Kanten an $s$ bilden eine trennende Kantenmenge der Größe $3$, und nach Menger ist die Wegzahl höchstens so groß.
+
+\schritt{Schritt 3 --- Drei Wege angeben}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.0cm}P{5.6cm}@{}}
+\toprule
+$P_1$ & $000 \to 100 \to 110 \to 111$\\
+$P_2$ & $000 \to 010 \to 011 \to 111$\\
+$P_3$ & $000 \to 001 \to 101 \to 111$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Kantendisjunktheit prüfen}
+Wir listen alle neun benutzten Kanten:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$\{000,100\}$ & $\{000,010\}$ & $\{000,001\}$\\
+$\{100,110\}$ & $\{010,011\}$ & $\{001,101\}$\\
+$\{110,111\}$ & $\{011,111\}$ & $\{101,111\}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Alle neun sind verschieden --- jede Zeile ändert eine andere Bitstelle, jede Spalte startet mit einer anderen. \checkmark
+
+\schritt{Antwort}
+Genau $\mathbf{3}$ kantendisjunkte Wege, und die drei Kanten an $s$ bilden eine kleinste trennende Menge.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Wege sind sogar eckendisjunkt bis auf $s$ und $t$ --- die Eckenfassung von Menger liefert also ebenfalls $3$. Allgemein gilt für $Q_d$ die Zahl $d$: Der Würfelgraph ist $d$-regulär und $d$-fach zusammenhängend.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Netzwerk, das eigentlich geheim war}
+Der Satz von Ford und Fulkerson entstand 1955 in einem Auftragsbericht der RAND Corporation. Die Aufgabe kam vom US-Militär: Man wollte wissen, wie viel Nachschub das sowjetische Eisenbahnnetz von der Sowjetunion nach Osteuropa transportieren könnte --- und, im Kriegsfall, an welcher Stelle man es am wirksamsten unterbrechen würde.
+
+\Person{Ted Harris} und \Person{Frank Ross} bearbeiteten diese Frage; ihr Bericht enthielt eine Karte des Netzes mit dem gefundenen Engpass, den sie \kursiv{the bottleneck} nannten. Der Bericht wurde erst 1999 freigegeben.
+
+\Person{Lester Ford} und \Person{Delbert Fulkerson} lösten dasselbe Problem im selben Jahr allgemein und veröffentlichten 1956 den Satz und das Verfahren.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Karl Menger} hatte den kombinatorischen Kern bereits 1927 bewiesen --- als Aussage über Wege und trennende Mengen, ohne jeden Bezug zu Kapazitäten oder Transport. Dass sein Satz und der Flusssatz dasselbe sind, wurde erst dreißig Jahre später bemerkt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Der Flusssatz und seine Verfahren heute}
+Das Verfahren aus dem Beweis ist korrekt, aber langsam: Bei ungeschickter Wegwahl kann es so viele Durchgänge brauchen, wie der Flusswert groß ist.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{3.6cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Autoren} & \textbf{Schranke}\\
+\midrule
+$1956$ & Ford, Fulkerson & $\Oh(m \cdot w)$\\
+$1972$ & Edmonds, Karp & $\Oh(m^2 n)$ --- kürzeste Wege zuerst\\
+$1998$ & Goldberg, Rao & $\Oh(m^{3/2}\log\ldots)$\\
+$\mathbf{2022}$ & Chen u.\,a. & $\Oh(m^{1+o(1)})$ --- \textbf{nahezu linear}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die letzte Zeile war eine Überraschung. Ein Team um \Person{Li Chen}, \Person{Rasmus Kyng}, \Person{Yang Liu}, \Person{Richard Peng}, \Person{Maximilian Probst Gutenberg} und \Person{Sushant Sachdeva} zeigte 2022, dass sich der größte Fluss in einer Zeit bestimmen lässt, die kaum über der Zeit liegt, die man allein zum Einlesen des Netzwerks braucht. Die Arbeit erhielt den Best-Paper-Preis der FOCS 2022.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert am Verfahren ist, dass es nicht mehr graphentheoretisch argumentiert, sondern mit Methoden der konvexen Optimierung und der Datenstrukturtheorie. Der Weg zur Lösung führt hier aus dem Gebiet heraus --- ein Muster, das wir schon beim chromatischen Polynom in Kapitel~10 gesehen haben.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 12.4} & Jeder Fluss ist durch jeden Schnitt beschränkt\\
+\textbf{Satz 12.5} & Größter Fluss $=$ kleinster Schnitt\\
+\textbf{Folgerung 12.7} & Ganzzahligkeit --- der Schlüssel zu allem Weiteren\\
+\textbf{Satz 12.8} & Menger in beiden Fassungen\\
+\textbf{Folgerung 12.9} & Kőnig und Hall als Sonderfälle\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~V. Ab Kapitel~13 wechseln wir die Blickrichtung: Statt einzelne Graphen zu untersuchen, fragen wir, was \kursiv{viele Kanten} unausweichlich erzwingen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

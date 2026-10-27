@@ -1,0 +1,654 @@
+\chapter{Impfung und Schwellenwerte}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{Neustadt, ein Jahr später}
+Gegen den Erreger steht nun ein Impfstoff zur Verfügung. Die Gesundheitsbehörde fragt:
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wie viele Menschen müssen geimpft werden, damit sich der Erreger nicht mehr ausbreiten kann?}
+\end{minipage}
+\end{center}
+
+Die Antwort lautet nicht \enquote{alle} --- und genau darin liegt der Wert des Modells.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 8.1 --- die Herdenschwelle}
+Wird ein Anteil $p$ der Bevölkerung vor Beginn immunisiert, so breitet sich der Erreger genau dann nicht aus, wenn
+\[ p \;>\; p_c \;:=\; 1 - \frac{1}{\Rnull} . \]
+
+\schritt{Beweis}
+Geimpfte gehören von Anfang an zur Kammer $R$. Der Anteil der Empfänglichen beträgt also $S/N = 1-p$.
+
+Nach Satz 7.2 breitet sich der Erreger aus, wenn
+\[ \Rnull\cdot\frac{S}{N} > 1 \quad\Longleftrightarrow\quad \Rnull\,(1-p) > 1 . \]
+
+Verneint man das:
+\[ \Rnull\,(1-p) < 1 \quad\Longleftrightarrow\quad 1-p < \frac{1}{\Rnull} \quad\Longleftrightarrow\quad p > 1 - \frac{1}{\Rnull} . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Warum nicht alle geimpft werden müssen}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Eine ansteckende Person trifft im Mittel $\Rnull$ empfängliche Menschen --- \kursiv{wenn} alle empfänglich sind. Ist nur der Anteil $1-p$ empfänglich, so sind es nur $\Rnull(1-p)$.
+\end{minipage}
+\end{center}
+
+Man muss also nicht jede Ansteckung verhindern, sondern nur so viele, dass jeder Ansteckende im Mittel weniger als einen neuen erzeugt.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\begin{scope}
+\foreach \i in {0,...,24} {
+  \pgfmathsetmacro{\xx}{mod(\i,5)*0.42}
+  \pgfmathsetmacro{\yy}{-floor(\i/5)*0.42}
+  \fill[grau!40] (\xx,\yy) circle (2.4pt);
+}
+\fill[akzent] (0.84,-0.84) circle (3.2pt);
+\node[font=\scriptsize\itshape, color=grau] at (0.84,-2.4) {ohne Impfung};
+\end{scope}
+\begin{scope}[xshift=4.6cm]
+\foreach \i in {0,...,24} {
+  \pgfmathsetmacro{\xx}{mod(\i,5)*0.42}
+  \pgfmathsetmacro{\yy}{-floor(\i/5)*0.42}
+  \fill[grau!40] (\xx,\yy) circle (2.4pt);
+}
+\foreach \i in {0,2,3,5,7,8,10,11,13,15,16,18,20,21,23} {
+  \pgfmathsetmacro{\xx}{mod(\i,5)*0.42}
+  \pgfmathsetmacro{\yy}{-floor(\i/5)*0.42}
+  \fill[gruen] (\xx,\yy) circle (2.4pt);
+}
+\fill[akzent] (0.84,-0.84) circle (3.2pt);
+\node[font=\scriptsize\itshape, color=grau] at (0.84,-2.4) {mit $60\,\%$ geimpft};
+\end{scope}
+\node[font=\scriptsize, color=grau, anchor=west] at (7.2,-0.4) {grün: geschützt};
+\node[font=\scriptsize, color=akzent, anchor=west] at (7.2,-0.9) {rot: ansteckend};
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Schwellen für bekannte Erreger}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Erreger} & $\Rnull$ & \textbf{Schwelle $p_c$}\\
+\midrule
+Masern & $12$--$18$ & $92$--$94\,\%$\\
+Keuchhusten & $12$--$17$ & $92$--$94\,\%$\\
+Windpocken & $8$--$12$ & $88$--$92\,\%$\\
+Röteln & $6$--$7$ & $83$--$86\,\%$\\
+Pocken & $5$--$7$ & $80$--$86\,\%$\\
+Mumps & $4$--$7$ & $75$--$86\,\%$\\
+Neustädter Erreger & $2{,}5$ & $\mathbf{60\,\%}$\\
+Grippe, saisonal & $1{,}2$--$1{,}4$ & $17$--$29\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Spannen sind echt: $\Rnull$ hängt von Bevölkerungsdichte, Altersaufbau und Verhalten ab und ist für denselben Erreger in verschiedenen Gesellschaften verschieden. Die Werte für Masern gehören zu den höchsten, die man kennt --- deshalb sind Masern der schwierigste Fall und zugleich der empfindlichste Anzeiger für Lücken im Impfschutz.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Antwort für Neustadt}
+Bei $\Rnull = 2{,}5$ genügen $60\,\%$. Vierzig Prozent der Bevölkerung müssen nicht geimpft werden --- und sind trotzdem geschützt.
+\end{merksatz}
+
+\section{Unvollständiger Schutz}
+
+\begin{warnung}
+\boxtitelr{Kein Impfstoff wirkt bei allen}
+Sei $\varepsilon$ der Anteil der Geimpften, bei denen der Impfschutz greift --- die \Begriff{Wirksamkeit}.
+
+\schritt{Die neue Bedingung}
+Der Anteil tatsächlich Geschützter beträgt $p\,\varepsilon$. Also
+\[ p\,\varepsilon > 1 - \frac{1}{\Rnull} \quad\Longleftrightarrow\quad \boxed{\;p > \frac{1 - 1/\Rnull}{\varepsilon}\;} \]
+
+\schritt{Die unbequeme Folgerung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ist $\varepsilon < 1 - 1/\Rnull$, so lässt sich die Schwelle auch dann nicht erreichen, wenn jeder einzelne Mensch geimpft wird.}
+\end{minipage}
+\end{center}
+
+Denn dann ist $p > 1$ verlangt, was unmöglich ist.
+
+\schritt{Am Beispiel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.6cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+$\Rnull$ & $p_c$ & $\varepsilon = 0{,}95$ & $\varepsilon = 0{,}60$\\
+\midrule
+$2{,}5$ & $60{,}0\,\%$ & $63{,}2\,\%$ & $100{,}0\,\%$\\
+$6$ & $83{,}3\,\%$ & $87{,}7\,\%$ & \textcolor{akzent}{unmöglich}\\
+$15$ & $93{,}3\,\%$ & $98{,}2\,\%$ & \textcolor{akzent}{unmöglich}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Rechnung für $\Rnull=15$, $\varepsilon=0{,}95$:}
+\[ p > \frac{0{,}9333}{0{,}95} = 0{,}9824 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei Masern muss also praktisch jeder geimpft werden, obwohl der Impfstoff zu den wirksamsten gehört. Die zweite Impfung, die in vielen Ländern empfohlen wird, dient genau diesem Zweck: Sie hebt die Wirksamkeit von etwa $93\,\%$ auf über $97\,\%$ und macht die Schwelle dadurch überhaupt erst erreichbar.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Wenn die Schwelle nicht erreicht wird}
+
+Der wichtigere Fall in der Praxis: Was nützt eine Impfquote \kursiv{unterhalb} der Schwelle?
+
+\begin{merksatz}
+\boxtitel{Die Endgröße bei teilweiser Impfung}
+Wir wenden Satz 7.4 an, aber mit dem Ausgangsanteil $s_0 = 1-p$ statt $1$. Dieselbe Herleitung ergibt
+\[ s_\infty = s_0\,e^{-\Rnull\,(s_0 - s_\infty)} . \]
+
+\schritt{Für Neustadt, $\Rnull = 2{,}5$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+$p$ & $s_0$ & \textbf{Erkrankte} & \textbf{davon bei den Ungeimpften}\\
+\midrule
+$0$ & $1{,}00$ & $89{,}3\,\%$ & $89{,}3\,\%$\\
+$0{,}10$ & $0{,}90$ & $76{,}8\,\%$ & $85{,}3\,\%$\\
+$0{,}20$ & $0{,}80$ & $63{,}7\,\%$ & $79{,}7\,\%$\\
+$0{,}30$ & $0{,}70$ & $49{,}9\,\%$ & $71{,}3\,\%$\\
+$0{,}40$ & $0{,}60$ & $35{,}0\,\%$ & $58{,}3\,\%$\\
+$0{,}50$ & $0{,}50$ & $18{,}6\,\%$ & $37{,}1\,\%$\\
+$0{,}55$ & $0{,}45$ & $9{,}6\,\%$ & $21{,}4\,\%$\\
+$\mathbf{0{,}60}$ & $0{,}40$ & $\mathbf{0{,}2\,\%}$ & $0{,}4\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Impfung nützt --- und zwar überproportional.} Zehn Prozent Impfquote senken die Zahl der Erkrankten um $12{,}5$ Prozentpunkte, nicht um zehn.
+\end{minipage}
+\end{center}
+
+\schritt{Der indirekte Schutz}
+Die rechte Spalte zeigt den Anteil der \kursiv{Ungeimpften}, die erkranken. Er fällt von $89{,}3$ auf $21{,}4$ Prozent --- ohne dass diese Menschen etwas getan hätten.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der \Begriff{indirekte Schutz}, und er ist der eigentliche Gegenstand dieses Kapitels. Eine Impfung nützt nicht nur der geimpften Person; sie nimmt den Erreger aus dem Umlauf und schützt dadurch auch diejenigen, die nicht geimpft werden können --- Säuglinge, Menschen mit geschwächtem Abwehrsystem, Personen mit Gegenanzeigen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Nichtlinearität am Rand}
+Von $p = 0{,}55$ auf $p = 0{,}60$ --- fünf Prozentpunkte --- fällt die Erkranktenzahl von $9{,}6$ auf $0{,}2$ Prozent.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die letzten Prozentpunkte vor der Schwelle bewirken am meisten.} Genau dort ist die Impfbereitschaft erfahrungsgemäß am schwersten zu erhöhen.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Altersverschiebung}
+
+Nun ein Ergebnis, das der Anschauung zuwiderläuft und praktisch bedeutsam ist.
+
+\begin{merksatz}
+\boxtitel{Das Modell mit Nachwuchs}
+Für Erreger, die über Jahrzehnte umlaufen, muss man Geburten berücksichtigen:
+\[ \frac{\dd S}{\dd t} = \mu N - \beta\frac{SI}{N} - \mu S, \qquad
+\frac{\dd I}{\dd t} = \beta\frac{SI}{N} - \gamma I - \mu I \]
+mit der Geburts- und Sterberate $\mu = 1/L$, wobei $L$ die mittlere Lebensdauer ist.
+
+\schritt{Das endemische Gleichgewicht}
+Aus $\dd I/\dd t = 0$ mit $I \neq 0$:
+\[ \beta\frac{S}{N} = \gamma + \mu \quad\Longrightarrow\quad \frac{S^{*}}{N} = \frac{\gamma+\mu}{\beta} = \frac{1}{\Rnull} \]
+mit $\Rnull = \beta/(\gamma+\mu)$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Im Dauerzustand ist genau der Anteil $1/\Rnull$ empfänglich.} Die Krankheit reguliert sich selbst auf die Schwelle ein.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist bemerkenswert: Der Anteil hängt nur von $\Rnull$ ab, nicht von der Geburtenrate. Und es liefert ein Verfahren zur Schätzung von $\Rnull$ aus Antikörperuntersuchungen --- misst man, welcher Anteil einer Bevölkerung noch nie Kontakt hatte, so kennt man $1/\Rnull$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 8.2 --- das mittlere Erkrankungsalter}
+Im endemischen Gleichgewicht beträgt das mittlere Alter bei Ansteckung näherungsweise
+\[ A \;\approx\; \frac{L}{\Rnull - 1} . \]
+
+\schritt{Begründung}
+Eine empfängliche Person wird mit der Rate $\lambda = \beta I^{*}/N$ angesteckt. Die mittlere Wartezeit bis dahin ist $1/\lambda$ --- wie bei jedem exponentiellen Vorgang (Kapitel~1).
+
+Aus dem Gleichgewicht der ersten Gleichung ergibt sich nach kurzer Rechnung $\lambda = \mu(\Rnull-1)$, also
+\[ A = \frac{1}{\mu(\Rnull-1)} = \frac{L}{\Rnull-1} . \]
+
+\schritt{Am Beispiel Masern}
+$\Rnull = 15$, $L = 80$ Jahre:
+\[ A = \frac{80}{14} = 5{,}7 \ \text{Jahre} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das stimmt mit der Beobachtung überein: Vor Einführung der Impfung war Masern eine Krankheit des Vorschulalters. Je ansteckender ein Erreger, desto früher trifft er --- weil er praktisch jeden trifft, und zwar so bald wie möglich.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was die Impfung mit dem Erkrankungsalter macht}
+Bei einer Impfquote $p$ unterhalb der Schwelle sinkt die effektive Reproduktionszahl auf $\Rnull(1-p)$. Also:
+\[ A_p \approx \frac{L}{\Rnull(1-p) - 1} \]
+
+\schritt{Für Röteln --- $\Rnull = 6$, $L = 75$ Jahre}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+$p$ & $\Rnull(1-p)$ & \textbf{mittleres Alter}\\
+\midrule
+$0$ & $6{,}00$ & $15{,}0$ Jahre\\
+$0{,}30$ & $4{,}20$ & $23{,}4$\\
+$0{,}50$ & $3{,}00$ & \textcolor{akzent}{$\mathbf{37{,}5}$}\\
+$0{,}70$ & $1{,}80$ & $93{,}7$\\
+$\mathbf{0{,}833}$ & $1{,}00$ & \textcolor{gruen}{Elimination}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Impfquote von $50\,\%$ verschiebt das mittlere Erkrankungsalter von $15$ auf $37$ Jahre.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum das gefährlich ist}
+Röteln sind im Kindesalter harmlos. In der Schwangerschaft führen sie zu schweren Fehlbildungen beim Kind.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine unzureichende Impfquote kann daher die Zahl der schweren Fälle \kursiv{erhöhen}, obwohl die Gesamtzahl der Erkrankungen sinkt. Genau das geschah in Griechenland in den 1990er Jahren: Nach jahrelang mäßiger Impfquote kam es 1993 zu einem Rötelnausbruch mit ungewöhnlich vielen Erkrankungen im gebärfähigen Alter und in der Folge zur höchsten je dort verzeichneten Zahl angeborener Rötelnschäden.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Folgerung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei Erregern, deren Schwere mit dem Alter zunimmt, ist eine halbherzige Impfkampagne schlechter als keine.}
+\end{minipage}
+\end{center}
+
+Das betrifft Röteln, Mumps, Windpocken, Hepatitis~A und Polio. Es betrifft \kursiv{nicht} Masern, deren Verlauf im Säuglingsalter am schwersten ist.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die praktische Folgerung, die daraus gezogen wurde: Wer gegen Röteln impft, muss die Schwelle erreichen --- oder gezielt diejenigen impfen, für die die Krankheit gefährlich ist. Beides ist heute Bestandteil der Empfehlungen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Warum die Schwelle in der Wirklichkeit anders liegt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+\textbf{Abweichung} & \textbf{Ursache} & \textbf{Folge}\\
+\midrule
+Heterogenität & Kontaktzahlen streuen & \textcolor{gruen}{Schwelle sinkt}\\
+Bündelung & Ungeimpfte finden einander & \textcolor{akzent}{Schwelle steigt}\\
+Nachlassender Schutz & Immunität schwindet & \textcolor{akzent}{Auffrischung nötig}\\
+Einschleppung & keine geschlossene Bevölkerung & Ausbrüche bleiben möglich\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die zweite Zeile ist die folgenreichste}
+Das Modell setzt voraus, dass Geimpfte und Ungeimpfte gleichmäßig gemischt sind. Tatsächlich sammeln sich Impfgegner in bestimmten Schulen, Gemeinden und Regionen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine landesweite Impfquote von $95\,\%$ schützt nicht vor Ausbrüchen, wenn es einzelne Gemeinschaften mit $50\,\%$ gibt.} Dort ist die örtliche Reproduktionszahl über eins.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle größeren Masernausbrüche der letzten Jahrzehnte in Ländern mit hoher Durchimpfung folgten diesem Muster: Sie begannen in räumlich oder sozial abgegrenzten Gruppen mit niedriger Quote. Die Durchschnittszahl verdeckt das --- deshalb ist die \kursiv{Verteilung} der Impfquote wichtiger als ihr Mittelwert.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Streuen die Kontaktzahlen stark, so genügt es, die Kontaktfreudigsten zu impfen. Die Schwelle sinkt dann unter $1-1/\Rnull$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Grundlage gezielter Impfstrategien --- etwa der Riegelungsimpfung im Umfeld eines Falls, mit der die Pocken ausgerottet wurden. Sie wirkt, weil sie genau die Personen erreicht, über die die Übertragung läuft.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Schwelle mit unvollständiger Wirksamkeit}
+Für einen Erreger mit $\Rnull = 8$ steht ein Impfstoff mit $\varepsilon = 0{,}90$ zur Verfügung. Welche Quote ist nötig? Was ändert sich bei $\varepsilon = 0{,}85$?
+
+\loesung
+\schritt{Schritt 1 --- Die Grundschwelle}
+\[ p_c = 1 - \frac{1}{8} = 0{,}875 = 87{,}5\,\% \]
+
+\schritt{Schritt 2 --- Mit $\varepsilon = 0{,}90$}
+\[ p > \frac{0{,}875}{0{,}90} = 0{,}9722 = 97{,}2\,\% \]
+
+\schritt{Schritt 3 --- Mit $\varepsilon = 0{,}85$}
+\[ p > \frac{0{,}875}{0{,}85} = 1{,}0294 \]
+
+Über eins --- \textbf{unmöglich.} Selbst bei vollständiger Durchimpfung bliebe die effektive Reproduktionszahl über eins.
+
+\schritt{Schritt 4 --- Die Probe}
+Bei $p=1$ und $\varepsilon = 0{,}85$ sind $85\,\%$ geschützt, $15\,\%$ empfänglich:
+\[ \mathcal{R}_{\text{eff}} = 8 \cdot 0{,}15 = 1{,}20 > 1 \quad \textcolor{akzent}{\times} \]
+Bei $\varepsilon = 0{,}90$: $\mathcal{R}_{\text{eff}} = 8 \cdot 0{,}10 = 0{,}80 < 1$ \checkmark
+
+\schritt{Schritt 5 --- Die kritische Wirksamkeit}
+Allgemein muss gelten $\varepsilon \ge p_c$, also hier $\varepsilon \ge 0{,}875$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Wirksamkeit muss mindestens so groß sein wie die Herdenschwelle.} Andernfalls ist Elimination durch Impfung allein ausgeschlossen.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Empfindlichkeit}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$\varepsilon$ & \textbf{nötige Quote} & \\
+\midrule
+$1{,}00$ & $87{,}5\,\%$ & \\
+$0{,}95$ & $92{,}1\,\%$ & \\
+$0{,}90$ & $97{,}2\,\%$ & \\
+$0{,}88$ & $99{,}4\,\%$ & \textcolor{akzent}{kaum erreichbar}\\
+$0{,}875$ & $100{,}0\,\%$ & \textcolor{akzent}{Grenze}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Fünf Prozentpunkte Wirksamkeit --- von $95$ auf $90$ --- erfordern fünf Prozentpunkte mehr Impfquote. Die letzten Zeilen zeigen, wie steil es danach wird: Nahe der kritischen Wirksamkeit wächst die nötige Quote über jede Grenze.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Die Altersverschiebung beziffern}
+Für Mumps gilt $\Rnull = 5$ und $L = 78$ Jahre. Bestimmen Sie das mittlere Erkrankungsalter ohne Impfung und bei Quoten von $40$, $60$ und $75$ Prozent. Ab welcher Quote läge es über $20$ Jahren?
+
+\loesung
+\schritt{Schritt 1 --- Ohne Impfung}
+\[ A = \frac{78}{5-1} = \frac{78}{4} = 19{,}5 \ \text{Jahre} \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Schon ohne Impfung liegt das mittlere Alter bei knapp zwanzig Jahren. Mumps ist damit von vornherein ein Grenzfall --- die gefürchtete Hodenentzündung tritt vor allem nach der Pubertät auf.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die Schwelle}
+\[ p_c = 1 - \frac{1}{5} = 0{,}80 = 80\,\% \]
+
+\schritt{Schritt 3 --- Die Werte}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+$p$ & $\Rnull(1-p)$ & $A_p$\\
+\midrule
+$0$ & $5{,}00$ & $19{,}5$ J\\
+$0{,}40$ & $3{,}00$ & $39{,}0$ J\\
+$0{,}60$ & $2{,}00$ & $78{,}0$ J\\
+$0{,}75$ & $1{,}25$ & $312{,}0$ J\\
+$0{,}80$ & $1{,}00$ & \textcolor{gruen}{Elimination}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Rechnung für $p=0{,}40$:} $A = 78/(3-1) = 39{,}0$.
+
+\schritt{Schritt 4 --- Die Deutung der großen Werte}
+Ein \enquote{mittleres Erkrankungsalter} von $312$ Jahren ist natürlich unsinnig. Die Zahl bedeutet: Die Ansteckungsrate ist so gering, dass die allermeisten Menschen \kursiv{nie} erkranken --- sie sterben vorher.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Formel gilt nur, solange $A$ klein gegen $L$ ist. Bei $A \ge L$ ist sie als Größenvergleich zu lesen, nicht als Vorhersage. Das ist eine Bruchstelle des Modells, die man kennen muss --- die Rechnung liefert weiter Zahlen, aber sie bedeuten etwas anderes.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Ab welcher Quote über zwanzig Jahren}
+\[ \frac{78}{5(1-p)-1} > 20 \]
+\[ 5(1-p) - 1 < \frac{78}{20} = 3{,}9 \]
+\[ 5(1-p) < 4{,}9 \quad\Longrightarrow\quad 1-p < 0{,}98 \quad\Longrightarrow\quad p > 0{,}02 \]
+
+\schritt{Antwort}
+\textbf{Ab zwei Prozent Impfquote.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei Mumps genügt schon eine minimale Impfquote, um das mittlere Erkrankungsalter über zwanzig Jahre zu schieben} --- weil es ohne Impfung bereits bei $19{,}5$ lag.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die schärfste Form des Arguments aus Abschnitt 8.4: Bei einem Erreger, dessen Erkrankungsalter ohnehin nahe der kritischen Grenze liegt, kippt jede unvollständige Impfung die Lage ins Ungünstige. Die einzige vertretbare Strategie ist dann, die Schwelle zu erreichen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- Wem nützt die Impfung?}
+In Neustadt sind $50\,\%$ geimpft, $\Rnull = 2{,}5$. Von den Ungeimpften erkranken $37{,}1\,\%$. Vergleichen Sie den direkten und den indirekten Nutzen.
+
+\loesung
+\schritt{Schritt 1 --- Ohne jede Impfung}
+Alle $100\,000$ sind empfänglich, $89\,300$ erkranken.
+
+\schritt{Schritt 2 --- Mit $50\,\%$ Impfquote}
+$50\,000$ Geimpfte erkranken nicht. Von den $50\,000$ Ungeimpften erkranken $37{,}1\,\%$:
+\[ 0{,}371 \cdot 50\,000 = 18\,550 \]
+
+\schritt{Schritt 3 --- Die Bilanz}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+& \textbf{ohne} & \textbf{mit $p=0{,}5$}\\
+\midrule
+Erkrankte gesamt & $89\,300$ & $18\,550$\\
+Vermieden & --- & $\mathbf{70\,750}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 4 --- Wer profitiert wovon}
+\kursiv{Direkter Nutzen:} Die $50\,000$ Geimpften hätten ohne Impfung zu $89{,}3\,\%$ erkrankt, also
+\[ 0{,}893 \cdot 50\,000 = 44\,650 \ \text{Fälle} . \]
+
+\kursiv{Indirekter Nutzen:} Die $50\,000$ Ungeimpften hätten $44\,650$ Fälle gehabt, haben aber nur $18\,550$:
+\[ 44\,650 - 18\,550 = 26\,100 \ \text{vermiedene Fälle} . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Nutzen} & \textbf{Fälle} & \textbf{Anteil}\\
+\midrule
+direkt (Geimpfte) & $44\,650$ & $63\,\%$\\
+indirekt (Ungeimpfte) & $26\,100$ & $\mathbf{37\,\%}$\\
+\midrule
+Summe & $70\,750$ & $100\,\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mehr als ein Drittel des Nutzens fällt bei Menschen an, die sich nicht haben impfen lassen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Je Geimpftem gerechnet}
+\[ \frac{70\,750}{50\,000} = 1{,}42 \ \text{vermiedene Fälle je Impfung} \]
+
+Eine Impfung verhindert im Mittel mehr als eine Erkrankung --- sie schützt die geimpfte Person \kursiv{und} einen halben weiteren Menschen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der rechnerische Kern der Debatte um Impfpflichten. Die Entscheidung, sich nicht impfen zu lassen, betrifft nicht nur die entscheidende Person --- sie entzieht anderen einen Schutz, den diese nicht selbst herstellen können. Das Modell liefert dazu die Zahlen; die Abwägung liefert es nicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Die Abhängigkeit von der Quote}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.8cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+$p$ & \textbf{vermieden je Impfung} & \\
+\midrule
+$0{,}10$ & $1{,}25$ & \\
+$0{,}30$ & $1{,}31$ & \\
+$0{,}50$ & $1{,}42$ & \\
+$0{,}59$ & $1{,}51$ & \textcolor{gruen}{knapp unter der Schwelle}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Je näher an der Schwelle, desto mehr bewirkt jede einzelne Impfung --- die Nichtlinearität aus Abschnitt 8.3 in einer anderen Gestalt.
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Die einzige ausgerottete Krankheit des Menschen}
+\Person{Edward Jenner} zeigte 1796, dass eine Infektion mit Kuhpocken gegen Menschenpocken schützt. Das Wort \kursiv{Vakzine} stammt vom lateinischen \kursiv{vacca} --- Kuh.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Jenner war nicht der Erste. Die Beobachtung, dass Melkerinnen keine Pocken bekamen, war unter Landärzten bekannt; der Bauer Benjamin Jesty hatte schon 1774 seine Familie geimpft. Jenners Verdienst war, es systematisch zu prüfen und zu veröffentlichen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Ausrottung}
+Die Weltgesundheitsorganisation beschloss 1967 ein weltweites Ausrottungsprogramm. Die Pocken hatten damals noch etwa zwei Millionen Todesfälle im Jahr zur Folge.
+
+Der letzte natürlich erworbene Fall trat 1977 in Somalia auf; 1980 wurden die Pocken für ausgerottet erklärt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Entscheidend war nicht die flächendeckende Impfung, sondern ein Strategiewechsel: Statt möglichst viele zu impfen, suchte man jeden Fall auf und impfte sein gesamtes Umfeld. Diese \Begriff{Riegelungsimpfung} erreichte die Ausrottung mit Quoten, die deutlich unter der Herdenschwelle lagen.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum das mathematisch funktioniert}
+Die Schwellenformel setzt gleichmäßige Durchmischung voraus. Die Riegelungsimpfung nutzt das Gegenteil aus: Sie impft genau dort, wo das Ansteckungsgeschehen stattfindet.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Damit ist sie ein Beispiel dafür, dass eine Bruchstelle des Modells --- die verletzte Durchmischungsannahme --- sich auch \kursiv{nutzen} lässt. Vier Eigenschaften der Pocken machten es möglich: kein Tierreservoir, keine unbemerkten Verläufe, ein wirksamer und hitzestabiler Impfstoff, und ein Erreger ohne relevante Veränderlichkeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum es bei anderen nicht gelingt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.2cm}P{2.6cm}P{3.2cm}@{}}
+\toprule
+\textbf{Erreger} & \textbf{Hindernis} & \\
+\midrule
+Polio & unbemerkte Verläufe & über $99\,\%$ ohne Lähmung\\
+Masern & sehr hohes $\Rnull$ & Schwelle bei $94\,\%$\\
+Grippe & Veränderlichkeit & jährlich neuer Impfstoff\\
+Gelbfieber & Tierreservoir & Affen als Rückzugsort\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wohin sich die Impfmodellierung bewegt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Alters\-strukturierte Modelle} & Kontaktmatrizen aus Befragungen; sie zeigen, dass Kinder untereinander weit mehr Kontakte haben als mit Erwachsenen.\\
+\textbf{Räumliche Bündelung} & Modelle mit örtlich schwankender Impfquote; sie sagen Ausbrüche vorher, die Durchschnittsmodelle ausschließen.\\
+\textbf{Verhaltens\-modelle} & Die Impfbereitschaft hängt von der wahrgenommenen Gefahr ab --- und die sinkt, wenn die Impfung wirkt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die dritte Zeile}
+Sie beschreibt eine Rückkopplung, die dem Modell dieses Kapitels fehlt: Eine erfolgreiche Impfkampagne lässt die Krankheit verschwinden --- und damit auch die Erinnerung an ihre Schwere.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man kann daraus ein Modell bauen, in dem die Impfquote selbst eine Zustandsgröße ist. Solche Modelle zeigen regelmäßig Schwingungen: Die Quote steigt nach Ausbrüchen, sinkt in ruhigen Zeiten, bis ein neuer Ausbruch folgt. Das Muster entspricht dem, was man bei Masern in mehreren Ländern beobachtet hat --- und es ist wieder die verzögerte Rückkopplung aus Kapitel~3.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Kontaktmatrizen}
+Groß angelegte Befragungen zum Kontaktverhalten haben die Modellierung verändert: Statt einer Durchmischungsannahme benutzt man gemessene Kontaktzahlen zwischen Altersgruppen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Ergebnis ist eine Matrix mit starkem Übergewicht auf der Diagonale --- Menschen treffen überwiegend Gleichaltrige --- und einem Nebenband, das Eltern und Kinder verbindet. Aus ihr ergibt sich $\Rnull$ als größter Eigenwert, wieder mit dem Werkzeug aus Kapitel~6.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Satz 8.1} & Herdenschwelle $p_c = 1-1/\Rnull$\\
+\textbf{Mit Wirksamkeit} & $p > p_c/\varepsilon$; unmöglich, falls $\varepsilon < p_c$\\
+\textbf{Unterhalb der Schwelle} & jede Impfung nützt, zunehmend\\
+\textbf{Satz 8.2} & $A \approx L/(\Rnull-1)$\\
+\textbf{Alters\-verschiebung} & halbherziges Impfen kann schaden\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel geben wir die Durchmischungsannahme auf --- und stellen Kontakte als Netzwerk dar. Dabei zeigt sich, dass die Schwelle bei manchen Netzen überhaupt nicht existiert.}
+\end{minipage}
+\end{center}
+\end{merksatz}

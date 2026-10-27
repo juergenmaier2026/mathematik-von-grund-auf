@@ -1,0 +1,758 @@
+\chapter{Lineare Probleme}
+
+\section{Die Normalform}
+
+\begin{definition}
+\boxtitelm{Definition 2.1 --- lineares Optimierungsproblem}
+Ein \Begriff{lineares Optimierungsproblem} in Normalform lautet
+\[ \text{maximiere}\quad z = \vek{c}^{\!\top}\vek{x} \qquad\text{unter}\qquad A\vek{x} \le \vek{b}, \quad \vek{x} \ge \vek{0} \]
+mit $A \in \R^{m\times n}$, $\vek{b} \in \R^m$, $\vek{c} \in \R^n$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall in dieser Schreibweise}
+\[ \vek{c} = \begin{pmatrix} 0{,}8\\ 2{,}0\end{pmatrix}, \qquad
+A = \begin{pmatrix} 1 & 4\\ 1 & 2\end{pmatrix}, \qquad
+\vek{b} = \begin{pmatrix} 80\\ 60\end{pmatrix} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{3.6cm}@{}}
+\toprule
+& \textbf{Bedeutung} & \textbf{Zeile bzw.\ Spalte}\\
+\midrule
+$\vek{x}$ & Entscheidungen & Spalten von $A$\\
+$\vek{b}$ & Vorräte & Zeilen von $A$\\
+$\vek{c}$ & Bewertung & je Entscheidung\\
+$a_{ij}$ & Verbrauch & Vorrat $i$ je Einheit von $x_j$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Deutung --- Zeilen sind Vorräte, Spalten sind Tätigkeiten --- trägt durch den ganzen Band. Sie ist auch der Schlüssel zur Dualität in Kapitel~4: Dort wird jede Zeile zu einer Variablen und jede Spalte zu einer Bedingung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Alles lässt sich in diese Form bringen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{3.0cm}P{2.8cm}@{}}
+\toprule
+\textbf{Vorliegend} & \textbf{Umformung} & \textbf{Ergebnis}\\
+\midrule
+$\min \vek{c}^{\!\top}\vek{x}$ & mit $-1$ multiplizieren & $\max (-\vek{c})^{\!\top}\vek{x}$\\
+$\vek{a}^{\!\top}\vek{x} \ge \beta$ & mit $-1$ multiplizieren & $-\vek{a}^{\!\top}\vek{x} \le -\beta$\\
+$\vek{a}^{\!\top}\vek{x} = \beta$ & in zwei zerlegen & $\le\beta$ \kursiv{und} $\ge\beta$\\
+$x_j$ frei & aufspalten & $x_j = x_j^{+}-x_j^{-}$, beide $\ge 0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur letzten Zeile}
+Jede reelle Zahl lässt sich als Differenz zweier nichtnegativer Zahlen schreiben. Zum Beispiel $-7 = 0 - 7$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Darstellung ist nicht eindeutig --- auch $-7 = 3 - 10$ wäre möglich. Für die Optimierung stört das nicht: Alle Darstellungen liefern denselben Zielwert. Man handelt sich aber eine Variable mehr ein und eine gewisse Unschärfe in der Lösung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Gleichungsform}
+Für die Rechnung ist eine zweite Form nützlich. Man führt \Begriff{Schlupfvariablen} ein:
+\[ A\vek{x} \le \vek{b} \quad\Longleftrightarrow\quad A\vek{x} + \vek{s} = \vek{b}, \quad \vek{s} \ge \vek{0} \]
+
+\schritt{Was $s_i$ bedeutet}
+\[ s_i = b_i - \sum_j a_{ij}x_j = \text{ungenutzter Rest des Vorrats } i \]
+
+\schritt{Der Leitfall}
+\[ a + 4b + s_1 = 80, \qquad a + 2b + s_2 = 60 \]
+mit $a, b, s_1, s_2 \ge 0$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Aus zwei Ungleichungen mit zwei Variablen sind zwei Gleichungen mit vier Variablen geworden.} Gleichungen lassen sich mit den Mitteln aus Band 2 behandeln; Ungleichungen nicht.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der eigentliche Zweck der Umformung. Die Schwierigkeit ist nicht verschwunden --- sie steckt nun in der Forderung $\vek{s} \ge \vek{0}$ ---, aber sie ist an eine Stelle verschoben, an der man sie besser behandeln kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der zulässige Bereich ist konvex}
+
+\begin{definition}
+\boxtitelm{Definition 2.2}
+Eine Menge $M \subseteq \R^n$ heißt \Begriff{konvex}, wenn für alle $\vek{x},\vek{y} \in M$ und alle $\lambda \in [0,1]$ gilt
+\[ \lambda\vek{x} + (1-\lambda)\vek{y} \in M . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{In Worten}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Verbindungsstrecke zweier Punkte der Menge liegt ganz in der Menge.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+\begin{scope}
+\fill[tief!14] (0,0) -- (2.2,-0.2) -- (2.6,1.1) -- (1.2,1.9) -- (-0.2,1.1) -- cycle;
+\draw[tief, line width=1.0pt] (0,0) -- (2.2,-0.2) -- (2.6,1.1) -- (1.2,1.9) -- (-0.2,1.1) -- cycle;
+\fill[akzent] (0.4,0.35) circle (2.2pt); \fill[akzent] (2.1,1.3) circle (2.2pt);
+\draw[akzent, line width=1.0pt] (0.4,0.35) -- (2.1,1.3);
+\node[font=\scriptsize\itshape, color=gruen] at (1.2,-0.8) {konvex};
+\end{scope}
+\begin{scope}[xshift=5.0cm]
+\fill[tief!14] (0,0) -- (2.4,0) -- (2.4,1.8) -- (1.6,1.8) -- (1.6,0.7) -- (0.8,0.7) -- (0.8,1.8) -- (0,1.8) -- cycle;
+\draw[tief, line width=1.0pt] (0,0) -- (2.4,0) -- (2.4,1.8) -- (1.6,1.8) -- (1.6,0.7) -- (0.8,0.7) -- (0.8,1.8) -- (0,1.8) -- cycle;
+\fill[akzent] (0.4,1.5) circle (2.2pt); \fill[akzent] (2.0,1.5) circle (2.2pt);
+\draw[akzent, line width=1.0pt, dashed] (0.4,1.5) -- (2.0,1.5);
+\node[font=\scriptsize\itshape, color=akzent] at (1.2,-0.8) {nicht konvex};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.3 --- der zulässige Bereich eines linearen Problems ist konvex}
+\schritt{Schritt 1 --- Ein Halbraum ist konvex}
+Sei $M = \{\vek{x} : \vek{a}^{\!\top}\vek{x} \le \beta\}$ und seien $\vek{x},\vek{y} \in M$, $\lambda \in [0,1]$.
+
+Wir rechnen nach:
+\begin{align*}
+\vek{a}^{\!\top}\bigl(\lambda\vek{x}+(1-\lambda)\vek{y}\bigr)
+&= \lambda\,\vek{a}^{\!\top}\vek{x} + (1-\lambda)\,\vek{a}^{\!\top}\vek{y} && \text{(Linearität)}\\
+&\le \lambda\,\beta + (1-\lambda)\,\beta && \text{(da } \lambda \ge 0,\ 1-\lambda \ge 0)\\
+&= \beta
+\end{align*}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie den mittleren Schritt: Er braucht $\lambda \ge 0$ \kursiv{und} $1-\lambda \ge 0$. Nur deshalb dürfen die Ungleichungen $\vek{a}^{\!\top}\vek{x} \le \beta$ mit diesen Faktoren multipliziert werden, ohne sich umzudrehen. Für $\lambda$ außerhalb von $[0,1]$ gilt die Aussage nicht --- und darin steckt der ganze Unterschied zwischen einer Strecke und einer Geraden.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Der Durchschnitt konvexer Mengen ist konvex}
+Seien $M_1,\ldots,M_k$ konvex und $\vek{x},\vek{y} \in \bigcap_i M_i$.
+
+Für jedes einzelne $i$ liegen $\vek{x}$ und $\vek{y}$ in $M_i$, und da $M_i$ konvex ist, liegt auch $\lambda\vek{x}+(1-\lambda)\vek{y}$ in $M_i$.
+
+Das gilt für \kursiv{alle} $i$, also liegt der Punkt im Durchschnitt. \checkmark
+
+\schritt{Schritt 3 --- Zusammensetzen}
+Der zulässige Bereich
+\[ \Zul = \{\vek{x} : A\vek{x} \le \vek{b},\ \vek{x} \ge \vek{0}\} \]
+ist der Durchschnitt von $m$ Halbräumen (je eine Zeile von $A$) und $n$ weiteren (je $x_j \ge 0$).
+
+Nach Schritt 1 ist jeder konvex, nach Schritt 2 auch ihr Durchschnitt. $\blacksquare$
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 2.4 --- Ecke}
+Ein Punkt $\vek{v} \in \Zul$ heißt \Begriff{Ecke} (oder Extremalpunkt), wenn er sich \kursiv{nicht} als Mittelpunkt zweier verschiedener Punkte von $\Zul$ schreiben lässt:
+\[ \vek{v} = \tfrac12(\vek{y}+\vek{z}) \ \text{mit}\ \vek{y},\vek{z}\in\Zul \quad\Longrightarrow\quad \vek{y}=\vek{z}=\vek{v} . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum diese Definition}
+Sie kommt ohne jede Vorstellung von \enquote{Kante} oder \enquote{Fläche} aus und gilt in jeder Dimension.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Punkt im Inneren lässt sich stets als Mittelpunkt schreiben --- man geht ein kleines Stück nach links und nach rechts. Auch ein Punkt mitten auf einer Kante lässt sich so schreiben. Nur an einer Ecke geht es nicht: Jede Richtung, in die man vom Eckpunkt aus gehen kann, hat keine Gegenrichtung innerhalb der Menge.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Hauptsatz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.5 --- das Optimum liegt in einer Ecke}
+Ist $\Zul$ nichtleer und beschränkt, so nimmt die lineare Zielfunktion $z = \vek{c}^{\!\top}\vek{x}$ ihr Maximum in mindestens einer Ecke von $\Zul$ an.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- durch Verschieben}
+\schritt{Schritt 1 --- Existenz}
+$\Zul$ ist als Durchschnitt abgeschlossener Halbräume abgeschlossen, nach Voraussetzung beschränkt und nichtleer; $\vek{c}^{\!\top}\vek{x}$ ist stetig. Nach Satz 1.2 existiert ein Maximum. Sei $\vek{x}^{*}$ eines.
+
+\schritt{Schritt 2 --- Annahme: $\vek{x}^{*}$ ist keine Ecke}
+Dann gibt es nach Definition 2.4 Punkte $\vek{y} \neq \vek{z}$ in $\Zul$ mit $\vek{x}^{*} = \frac12(\vek{y}+\vek{z})$.
+
+Wir setzen $\vek{d} := \vek{y}-\vek{x}^{*}$. Dann ist $\vek{d} \neq \vek{0}$ und
+\[ \vek{z} = 2\vek{x}^{*}-\vek{y} = \vek{x}^{*}-\vek{d} , \]
+also sind $\vek{x}^{*}+\vek{d}$ und $\vek{x}^{*}-\vek{d}$ beide zulässig.
+
+\schritt{Schritt 3 --- Die Zielfunktion ändert sich nicht in Richtung $\vek{d}$}
+Da $\vek{x}^{*}$ ein Maximum ist:
+\[ \vek{c}^{\!\top}(\vek{x}^{*}+\vek{d}) \le \vek{c}^{\!\top}\vek{x}^{*} \quad\Longrightarrow\quad \vek{c}^{\!\top}\vek{d} \le 0 \]
+\[ \vek{c}^{\!\top}(\vek{x}^{*}-\vek{d}) \le \vek{c}^{\!\top}\vek{x}^{*} \quad\Longrightarrow\quad -\vek{c}^{\!\top}\vek{d} \le 0 \]
+
+Beides zusammen ergibt
+\[ \vek{c}^{\!\top}\vek{d} = 0 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man darf also von $\vek{x}^{*}$ aus in Richtung $\vek{d}$ gehen, ohne den Zielwert zu ändern.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- So weit gehen wie möglich}
+Wir betrachten
+\[ \vek{x}(t) = \vek{x}^{*} + t\,\vek{d} \]
+und vergrößern $t$, solange $\vek{x}(t)$ zulässig bleibt.
+
+Da $\Zul$ beschränkt ist, gibt es ein größtes solches $t_{\max} < \infty$. Der Punkt $\vek{x}(t_{\max})$ ist zulässig, weil $\Zul$ abgeschlossen ist.
+
+\schritt{Schritt 5 --- Eine Ungleichung wird straff}
+Bei $t_{\max}$ muss mindestens eine Ungleichung mit Gleichheit erfüllt sein, die es bei $\vek{x}^{*}$ noch nicht war --- sonst könnte man weitergehen.
+
+Der neue Punkt hat also \kursiv{mindestens eine straffe Ungleichung mehr} als der alte und denselben Zielwert.
+
+\schritt{Schritt 6 --- Wiederholen}
+Ist der neue Punkt eine Ecke, sind wir fertig. Andernfalls wenden wir Schritt 2 bis 5 erneut an.
+
+Bei jeder Runde kommt mindestens eine straffe Ungleichung hinzu. Da es nur $m+n$ Ungleichungen gibt, endet das Verfahren nach höchstens $m+n$ Runden.
+
+\schritt{Schritt 7 --- Der Endpunkt ist eine Ecke}
+Kann man von einem Punkt aus in keine Richtung mehr in beide Gegenrichtungen gehen, so ist er nach Definition 2.4 eine Ecke.
+
+Und der Zielwert ist während des gesamten Verfahrens unverändert geblieben. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis ist zugleich ein Verfahren: Er zeigt nicht nur, \kursiv{dass} es eine optimale Ecke gibt, sondern wie man aus einer beliebigen optimalen Lösung eine findet. Diese Bauweise --- ein Existenzbeweis, der ein Verfahren liefert --- ist für die Optimierung kennzeichnend.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein zweites Argument}
+Es gibt einen kürzeren Weg, der ein Ergebnis über konvexe Mengen benutzt.
+
+\schritt{Der Satz von Minkowski}
+Jeder Punkt eines beschränkten Polyeders lässt sich als Konvexkombination seiner Ecken schreiben:
+\[ \vek{x} = \sum_{i=1}^{k}\lambda_i\,\vek{v}_i, \qquad \lambda_i \ge 0, \qquad \sum_i\lambda_i = 1 . \]
+
+\schritt{Die Folgerung}
+\begin{align*}
+\vek{c}^{\!\top}\vek{x} &= \sum_i \lambda_i\,\vek{c}^{\!\top}\vek{v}_i\\
+&\le \sum_i \lambda_i \cdot \max_j\bigl(\vek{c}^{\!\top}\vek{v}_j\bigr) && \text{(jeder Summand ersetzt)}\\
+&= \max_j\bigl(\vek{c}^{\!\top}\vek{v}_j\bigr) \cdot \underbrace{\sum_i\lambda_i}_{=1}\\
+&= \max_j\bigl(\vek{c}^{\!\top}\vek{v}_j\bigr)
+\end{align*}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein Punkt des Bereichs ist besser als die beste Ecke.} Und da die Ecken selbst zulässig sind, ist die beste Ecke das Maximum.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieses Argument ist eleganter, benutzt aber den Satz von Minkowski, dessen Beweis durch Induktion über die Dimension führt und deutlich länger ist als der Beweis von Satz 2.5. Wir haben ihn deshalb nicht als Grundlage gewählt --- er steht in Band 2, Teil~VI.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Ecken sind Basislösungen}
+
+\begin{merksatz}
+\boxtitel{Der Übergang zur Algebra}
+Satz 2.5 sagt, wo man suchen muss. Aber wie findet man Ecken, ohne sie zu zeichnen?
+
+\schritt{Die Idee}
+In Gleichungsform hat das Problem $n+m$ Variablen und $m$ Gleichungen --- also $n$ Freiheitsgrade. Setzt man $n$ Variablen auf null, bleibt ein eindeutig lösbares Gleichungssystem.
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 2.6 --- Basislösung}
+Sei $A\vek{x} = \vek{b}$ mit $A \in \R^{m\times(n+m)}$ vom Rang $m$. Wählt man $m$ Spalten aus, deren Teilmatrix $A_B$ invertierbar ist, so heißen die zugehörigen Variablen \Begriff{Basisvariablen}. Setzt man alle übrigen auf null, so ist
+\[ \vek{x}_B = A_B^{-1}\vek{b} \]
+eine \Begriff{Basislösung}. Sie heißt \Begriff{zulässig}, wenn $\vek{x}_B \ge \vek{0}$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 2.7 --- der Zusammenhang}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Ecken von $\Zul$ sind genau die zulässigen Basislösungen.}
+\end{minipage}
+\end{center}
+
+\schritt{Eine Richtung, in Kürze}
+Ist $\vek{x}$ eine zulässige Basislösung und wäre $\vek{x} = \frac12(\vek{y}+\vek{z})$ mit $\vek{y},\vek{z} \in \Zul$: Für jede Nichtbasisvariable gilt $x_j = 0$, und da $y_j, z_j \ge 0$ mit Mittelwert null, folgt $y_j = z_j = 0$.
+
+Damit erfüllen $\vek{y}$ und $\vek{z}$ dasselbe Gleichungssystem $A_B\vek{x}_B = \vek{b}$ mit invertierbarem $A_B$ --- das hat genau eine Lösung. Also $\vek{y}=\vek{z}=\vek{x}$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Umkehrung verlangt etwas mehr Aufwand und steht in jedem Lehrbuch der linearen Optimierung; der Kern ist, dass an einer Ecke mindestens $n$ Ungleichungen straff sind und die zugehörigen Zeilen linear unabhängig sein müssen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Alle Basislösungen des Leitfalls}
+Vier Variablen, zwei Gleichungen --- also $\binom{4}{2} = 6$ mögliche Basen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.6cm}@{}}
+\toprule
+\textbf{Basis} & $a$ & $b$ & $s_1$ & $s_2$ & $z$\\
+\midrule
+$\{a,b\}$ & $40$ & $10$ & $0$ & $0$ & $\mathbf{52{,}0}$\\
+$\{a,s_1\}$ & $60$ & $0$ & $20$ & $0$ & $48{,}0$\\
+$\{a,s_2\}$ & $80$ & $0$ & $0$ & \textcolor{akzent}{$-20$} & ---\\
+$\{b,s_1\}$ & $0$ & $30$ & \textcolor{akzent}{$-40$} & $0$ & ---\\
+$\{b,s_2\}$ & $0$ & $20$ & $0$ & $20$ & $40{,}0$\\
+$\{s_1,s_2\}$ & $0$ & $0$ & $80$ & $60$ & $0{,}0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Rechnung für $\{b,s_2\}$:} Aus $a = s_1 = 0$ folgt $4b = 80$, also $b=20$; dann $2\cdot20 + s_2 = 60$, also $s_2 = 20$. Beide nichtnegativ --- zulässig.
+
+\kursiv{Rechnung für $\{a,s_2\}$:} Aus $b = s_1 = 0$ folgt $a = 80$; dann $80 + s_2 = 60$, also $s_2 = -20$. Unzulässig.
+
+\schritt{Die Bilanz}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Sechs Basislösungen, davon vier zulässig --- genau die vier Ecken aus Kapitel~1.} Die beiden unzulässigen sind Schnittpunkte der Begrenzungsgeraden außerhalb des Bereichs.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie, welche Variablen an der optimalen Ecke in der Basis stehen: $a$ und $b$, während $s_1 = s_2 = 0$. Beide Vorräte sind aufgebraucht. Das ist kein Zufall --- eine Ecke ist gerade dadurch gekennzeichnet, dass genug Bedingungen straff sind.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Warum Abzählen scheitert}
+
+\begin{warnung}
+\boxtitelr{Die Zahl der Basen}
+Bei $n$ Variablen und $m$ Ungleichungen gibt es höchstens
+\[ \binom{n+m}{m} \]
+Basislösungen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{3.2cm}@{}}
+\toprule
+$n = m$ & $\binom{2m}{m}$ & \textbf{Rechenzeit bei $10^{9}$/s}\\
+\midrule
+$2$ & $6$ & sofort\\
+$5$ & $252$ & sofort\\
+$10$ & $184\,756$ & sofort\\
+$20$ & $1{,}4\cdot10^{11}$ & $2$ Minuten\\
+$50$ & $1{,}0\cdot10^{29}$ & \textcolor{akzent}{$3\cdot10^{12}$ Jahre}\\
+$100$ & $9{,}1\cdot10^{58}$ & \textcolor{akzent}{sinnlos}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei fünfzig Variablen und fünfzig Bedingungen --- einem winzigen Problem --- wäre das Abzählen aller Ecken in dreitausend Milliarden Jahren nicht fertig.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Alter des Weltalls beträgt etwa $1{,}4\cdot10^{10}$ Jahre. Dabei ist ein Problem mit je fünfzig Zeilen und Spalten für heutige Verhältnisse lächerlich klein --- Dienstpläne haben Zehntausende.}
+\end{minipage}
+\end{center}
+
+\schritt{Was daraus folgt}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man braucht ein Verfahren, das gezielt von Ecke zu Ecke geht und dabei jeweils verbessert --- statt alle zu prüfen.}
+\end{minipage}
+\end{center}
+
+Das ist das Simplexverfahren aus Kapitel~3. Es besucht in der Praxis typischerweise etwa $2m$ bis $3m$ Ecken --- bei $m=50$ also gut hundert statt $10^{29}$.
+\end{warnung}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Drei Dinge, die Satz 2.5 nicht abdeckt}
+\schritt{Erstens: unbeschränkte Bereiche}
+Satz 2.5 verlangt Beschränktheit. Ohne sie kann das Maximum unendlich sein --- oder es existiert und liegt trotzdem in einer Ecke.
+
+\kursiv{Beispiel:} $\max x_1$ unter $x_2 \le 5$, $\vek{x} \ge \vek{0}$. Der Bereich ist unbeschränkt, das Maximum existiert nicht.
+
+\kursiv{Gegenbeispiel:} $\max -x_1$ unter denselben Bedingungen. Das Maximum ist $0$, angenommen auf der ganzen Strecke $x_1 = 0$, $0 \le x_2 \le 5$ --- also auch in den Ecken $(0,0)$ und $(0,5)$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In der Praxis ist Unbeschränktheit fast immer ein Modellfehler: Eine Bedingung fehlt. Ein Verfahren, das \enquote{unbeschränkt} meldet, sagt damit nicht \enquote{Sie können unendlich viel Gewinn machen}, sondern \enquote{Sie haben etwas vergessen}.}
+\end{minipage}
+\end{center}
+
+\schritt{Zweitens: mehrere Optima}
+Verläuft die Zielfunktion parallel zu einer Begrenzungsgeraden, so ist eine ganze Kante optimal.
+
+\kursiv{Im Leitfall:} Wäre der Nutzen von $B$ nicht $2{,}0$, sondern $3{,}2$, so wäre $\vek{c} = (0{,}8;\ 3{,}2)$ parallel zu $a+4b=80$.
+\[ (60,0)\!: 48{,}0 \qquad (40,10)\!: 32+32 = 64{,}0 \qquad (0,20)\!: 64{,}0 \]
+Beide Ecken --- und die ganze Kante dazwischen --- sind optimal.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist keine Schwierigkeit, sondern eine Auskunft: Die Klinik kann zwischen den Lösungen frei wählen und ein \kursiv{zweites} Ziel zur Entscheidung heranziehen --- etwa die Zahl der Behandelten. Kapitel~14 macht daraus ein Verfahren.}
+\end{minipage}
+\end{center}
+
+\schritt{Drittens: Entartung}
+Treffen sich an einer Ecke mehr Begrenzungen als nötig, so gehören mehrere Basen zu demselben Punkt.
+
+\kursiv{Beispiel:} $x_1+x_2 \le 4$, $x_1 \le 2$, $x_2 \le 2$, $\vek{x}\ge\vek{0}$. Der Punkt $(2,2)$ erfüllt alle drei mit Gleichheit --- in zwei Dimensionen sind zwei genug.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Entartung ist geometrisch unauffällig und rechnerisch lästig:} Das Simplexverfahren kann dabei mehrere Schritte machen, ohne die Ecke zu verlassen --- und im ungünstigsten Fall im Kreis laufen. Kapitel~3 behandelt das.
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- In Normalform bringen}
+\[ \text{minimiere}\quad 3u - 2v + w \]
+\[ \text{unter}\quad u + v \ge 4, \quad 2u - w = 6, \quad v \le 10, \quad u \ge 0,\ v \ge 0,\ w \text{ frei} \]
+
+\loesung
+\schritt{Schritt 1 --- Die Zielfunktion}
+\[ \min\,(3u-2v+w) \quad\Longrightarrow\quad \max\,(-3u+2v-w) \]
+
+\schritt{Schritt 2 --- Die freie Variable}
+\[ w = w^{+}-w^{-}, \qquad w^{+},w^{-} \ge 0 \]
+
+\schritt{Schritt 3 --- Die Ungleichungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+$u+v \ge 4$ & $\Longrightarrow\ -u-v \le -4$\\
+$2u-w = 6$ & $\Longrightarrow\ 2u-w^{+}+w^{-} \le 6$\\
+& \phantom{$\Longrightarrow$}\ und $-2u+w^{+}-w^{-} \le -6$\\
+$v \le 10$ & bleibt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Die Normalform}
+Mit $\vek{x} = (u,\ v,\ w^{+},\ w^{-})^{\!\top}$:
+\[ \max \quad (-3,\ 2,\ -1,\ 1)\,\vek{x} \]
+\[ \begin{pmatrix}
+-1 & -1 & 0 & 0\\
+2 & 0 & -1 & 1\\
+-2 & 0 & 1 & -1\\
+0 & 1 & 0 & 0
+\end{pmatrix}\vek{x} \le \begin{pmatrix}-4\\ 6\\ -6\\ 10\end{pmatrix}, \qquad \vek{x}\ge\vek{0} \]
+
+\schritt{Schritt 5 --- Die Probe}
+Wir prüfen einen zulässigen Punkt der ursprünglichen Formulierung: $u=4$, $v=0$, $w = 2u-6 = 2$.
+
+\kursiv{Ursprünglich:} $4+0 = 4 \ge 4$ \checkmark; $2\cdot4-2 = 6$ \checkmark; $0 \le 10$ \checkmark.\\
+\kursiv{Zielwert:} $3\cdot4 - 0 + 2 = 14$.
+
+\kursiv{In Normalform:} $\vek{x} = (4,0,2,0)$.
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.2cm}@{}}
+\toprule
+\textbf{Zeile} & \textbf{Wert} & \textbf{Schranke}\\
+\midrule
+$-u-v$ & $-4$ & $\le -4$ \checkmark\\
+$2u-w^{+}+w^{-}$ & $6$ & $\le 6$ \checkmark\\
+$-2u+w^{+}-w^{-}$ & $-6$ & $\le -6$ \checkmark\\
+$v$ & $0$ & $\le 10$ \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+\kursiv{Zielwert:} $-12+0-2+0 = -14 = -(14)$ \checkmark
+
+\schritt{Schritt 6 --- Die Kosten der Umformung}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+& \textbf{vorher} & \textbf{nachher}\\
+\midrule
+Variablen & $3$ & $4$\\
+Ungleichungen & $3$ & $4$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Aus einer Gleichung werden zwei Ungleichungen, aus einer freien Variablen zwei nichtnegative. In der Praxis vermeidet man beides: Gute Verfahren behandeln Gleichungen und freie Variablen unmittelbar, weil die Umformung das Problem unnötig vergrößert und die Zerlegung $w = w^{+}-w^{-}$ zusätzlich Entartung erzeugt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Alle Ecken bestimmen}
+Für
+\[ \max\ 5x_1+4x_2 \quad\text{unter}\quad 6x_1+4x_2 \le 24,\quad x_1+2x_2 \le 6,\quad \vek{x}\ge\vek{0} \]
+bestimmen Sie alle Basislösungen und die optimale Ecke.
+
+\loesung
+\schritt{Schritt 1 --- Gleichungsform}
+\[ 6x_1+4x_2+s_1 = 24, \qquad x_1+2x_2+s_2 = 6 \]
+Vier Variablen, zwei Gleichungen: $\binom{4}{2}=6$ Basen.
+
+\schritt{Schritt 2 --- Basis $\{s_1,s_2\}$}
+$x_1=x_2=0$: $s_1=24$, $s_2=6$. Zulässig, $z=0$.
+
+\schritt{Schritt 3 --- Basis $\{x_1,s_2\}$}
+$x_2=s_1=0$: $6x_1=24 \Rightarrow x_1=4$; $4+s_2=6 \Rightarrow s_2=2$. Zulässig, $z=20$.
+
+\schritt{Schritt 4 --- Basis $\{x_1,s_1\}$}
+$x_2=s_2=0$: $x_1=6$; $36+s_1=24 \Rightarrow s_1=-12$. \textcolor{akzent}{Unzulässig.}
+
+\schritt{Schritt 5 --- Basis $\{x_2,s_1\}$}
+$x_1=s_2=0$: $2x_2=6 \Rightarrow x_2=3$; $12+s_1=24 \Rightarrow s_1=12$. Zulässig, $z=12$.
+
+\schritt{Schritt 6 --- Basis $\{x_2,s_2\}$}
+$x_1=s_1=0$: $4x_2=24 \Rightarrow x_2=6$; $12+s_2=6 \Rightarrow s_2=-6$. \textcolor{akzent}{Unzulässig.}
+
+\schritt{Schritt 7 --- Basis $\{x_1,x_2\}$}
+$s_1=s_2=0$:
+\[ 6x_1+4x_2 = 24, \qquad x_1+2x_2 = 6 \]
+Zweite Gleichung mit $2$ multiplizieren und abziehen:
+\[ 6x_1+4x_2 - (2x_1+4x_2) = 24-12 \quad\Longrightarrow\quad 4x_1 = 12 \quad\Longrightarrow\quad x_1 = 3 \]
+\[ 3+2x_2 = 6 \quad\Longrightarrow\quad x_2 = 1{,}5 \]
+Zulässig, $z = 15+6 = 21$.
+
+\schritt{Schritt 8 --- Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $x_1$ & $x_2$ & $s_1$ & $s_2$ & $z$\\
+\midrule
+$\{s_1,s_2\}$ & $0$ & $0$ & $24$ & $6$ & $0$\\
+$\{x_1,s_2\}$ & $4$ & $0$ & $0$ & $2$ & $20$\\
+$\{x_1,s_1\}$ & $6$ & $0$ & \textcolor{akzent}{$-12$} & $0$ & ---\\
+$\{x_2,s_1\}$ & $0$ & $3$ & $12$ & $0$ & $12$\\
+$\{x_2,s_2\}$ & $0$ & $6$ & $0$ & \textcolor{akzent}{$-6$} & ---\\
+$\{x_1,x_2\}$ & $3$ & $1{,}5$ & $0$ & $0$ & $\mathbf{21}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Antwort}
+\textbf{Optimum bei $(3;\ 1{,}5)$ mit $z=21$.}
+
+\schritt{Schritt 9 --- Die Probe}
+\[ 6\cdot3 + 4\cdot1{,}5 = 18+6 = 24 \ \checkmark \qquad 3 + 2\cdot1{,}5 = 6 \ \checkmark \]
+Beide Bedingungen straff --- wie es an einer Ecke mit beiden Schlupfvariablen gleich null sein muss.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Bemerkenswert ist, dass die Lösung nicht ganzzahlig ist. Bedeuten $x_1$ und $x_2$ Stückzahlen, so ist $(3;\ 1{,}5)$ unbrauchbar --- und das \kursiv{Abrunden} auf $(3,1)$ liefert $z=19$, während $(2,2)$ mit $z=18$ zulässig wäre und $(4,0)$ mit $z=20$ sogar besser. Kapitel~10 zeigt, warum Abrunden im Allgemeinen versagt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Die Menge der Optimallösungen}
+Zeigen Sie, dass die Menge aller optimalen Lösungen eines linearen Problems konvex ist. Was folgt daraus für die Eindeutigkeit?
+
+\loesung
+\schritt{Schritt 1 --- Die Behauptung}
+Sei $z^{*}$ der optimale Wert und
+\[ \Zul^{*} = \{\vek{x}\in\Zul : \vek{c}^{\!\top}\vek{x} = z^{*}\} . \]
+Zu zeigen: $\Zul^{*}$ ist konvex.
+
+\schritt{Schritt 2 --- Der Beweis}
+Seien $\vek{x},\vek{y} \in \Zul^{*}$ und $\lambda\in[0,1]$. Setze $\vek{w} = \lambda\vek{x}+(1-\lambda)\vek{y}$.
+
+\kursiv{Zulässigkeit:} Nach Satz 2.3 ist $\Zul$ konvex, also $\vek{w} \in \Zul$.
+
+\kursiv{Zielwert:}
+\begin{align*}
+\vek{c}^{\!\top}\vek{w} &= \lambda\,\vek{c}^{\!\top}\vek{x} + (1-\lambda)\,\vek{c}^{\!\top}\vek{y}\\
+&= \lambda z^{*} + (1-\lambda)z^{*}\\
+&= z^{*}
+\end{align*}
+
+Also $\vek{w}\in\Zul^{*}$. $\blacksquare$
+
+\schritt{Schritt 3 --- Die Folgerung für die Eindeutigkeit}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Entweder gibt es genau eine optimale Lösung --- oder unendlich viele.}
+\end{minipage}
+\end{center}
+
+\kursiv{Begründung:} Gibt es zwei verschiedene optimale Punkte, so liegt nach Schritt 2 die ganze Verbindungsstrecke in $\Zul^{*}$, und die enthält überabzählbar viele Punkte.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es kann also nie genau zwei oder genau siebzehn Optimallösungen geben. Das ist eine Eigentümlichkeit stetiger Probleme --- bei ganzzahligen Problemen in Kapitel~10 ist es anders, und dort ist \enquote{genau drei Optimallösungen} durchaus möglich.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Wann ist die Lösung eindeutig?}
+Die Lösung ist genau dann eindeutig, wenn die optimale Ecke die \kursiv{einzige} optimale Ecke ist.
+
+\kursiv{Woran man es erkennt:} Ist an der optimalen Ecke keine Nichtbasisvariable mit Zielwertänderung null vorhanden, so ist sie eindeutig. Kapitel~3 macht das an den Rechengrößen des Simplexverfahrens sichtbar.
+
+\schritt{Schritt 5 --- Am Beispiel}
+Wir prüfen den Leitfall mit verschiedenen Bewertungen von $B$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+$c_B$ & $(60,0)$ & $(40,10)$ & \textbf{Optimum}\\
+\midrule
+$1{,}0$ & $48{,}0$ & $42{,}0$ & $(60,0)$ eindeutig\\
+$1{,}6$ & $48{,}0$ & $48{,}0$ & \textcolor{akzent}{ganze Kante}\\
+$2{,}0$ & $48{,}0$ & $52{,}0$ & $(40,10)$ eindeutig\\
+$3{,}2$ & $48{,}0$ & $64{,}0$ & \textcolor{akzent}{Kante zu $(0,20)$}\\
+$4{,}0$ & $48{,}0$ & $72{,}0$ & $(0,20)$ mit $80{,}0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Bei $c_B = 1{,}6$:} $(40,10)$ liefert $32+16 = 48$ --- gleich $(60,0)$. Die Zielfunktion ist parallel zu $a+2b=60$.
+
+\kursiv{Bei $c_B = 3{,}2$:} $(0,20)$ liefert $64{,}0$, ebenso $(40,10)$. Parallel zu $a+4b=80$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die beiden Umschlagwerte $1{,}6$ und $3{,}2$ sind genau die Steigungen der beiden Begrenzungsgeraden, umgerechnet auf $c_A = 0{,}8$: nämlich $0{,}8\cdot2 = 1{,}6$ und $0{,}8\cdot4 = 3{,}2$. Zwischen ihnen bleibt $(40,10)$ optimal --- \textbf{die Lösung ist gegen Änderungen der Bewertung um mehr als das Doppelte unempfindlich}. Kapitel~5 macht daraus ein Verfahren.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ungleichungen waren lange kein Thema}
+Die Mathematik hat sich über Jahrhunderte fast ausschließlich mit Gleichungen befasst. Systeme von \kursiv{Un}gleichungen galten als unbequem und wurden kaum untersucht.
+
+\schritt{Fourier}
+\Person{Joseph Fourier} beschrieb 1826 ein Verfahren, mit dem sich Variablen aus einem System linearer Ungleichungen nacheinander eliminieren lassen --- das Gegenstück zum Gaußschen Verfahren.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das Verfahren funktioniert, ist aber praktisch unbrauchbar: Die Zahl der Ungleichungen kann sich bei jedem Eliminationsschritt quadrieren. Aus zwanzig Ungleichungen können nach wenigen Schritten Millionen werden. Es wurde 1936 von \Person{Theodore Motzkin} wiederentdeckt und trägt heute beide Namen.}
+\end{minipage}
+\end{center}
+
+\schritt{Farkas}
+\Person{Gyula Farkas} (1847--1930), ungarischer Physiker und Mathematiker, bewies 1902 den Satz, der heute als Grundlage der Dualitätstheorie gilt:
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Entweder hat $A\vek{x} = \vek{b}$ eine nichtnegative Lösung --- oder es gibt einen Vektor $\vek{y}$ mit $A^{\!\top}\vek{y} \ge \vek{0}$ und $\vek{b}^{\!\top}\vek{y} < 0$. Genau eines von beidem gilt, nie beides.}
+\end{minipage}
+\end{center}
+
+Farkas untersuchte damit die Mechanik von Systemen mit einseitigen Zwangsbedingungen --- ein Gelenk, das sich nur in eine Richtung bewegen lässt. Dass daraus ein halbes Jahrhundert später die Grundlage der Optimierung werden würde, war nicht absehbar.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Kapitel~4 leitet die Dualität aus diesem Satz her. Er ist eines der schönsten Beispiele für eine Aussage der Form \enquote{entweder das eine oder das andere, und man kann prüfen, welches} --- und genau das braucht man, um eine Lösung als optimal \kursiv{nachzuweisen}.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum erst im 20. Jahrhundert}
+Vor der Rechentechnik gab es kaum Anlass, Ungleichungssysteme mit vielen Variablen zu lösen --- und ohne Anlass keine Theorie.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die lineare Optimierung ist damit ein Fach, das durch seine Anwendbarkeit entstanden ist, nicht umgekehrt. Das unterscheidet sie von den meisten anderen Gebieten dieser Reihe.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wie groß darf ein lineares Problem sein?}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Heutige Grenzen} & Probleme mit Millionen Variablen und Bedingungen werden regelmäßig gelöst, sofern die Matrix \kursiv{dünn} besetzt ist.\\
+\textbf{Dünne Besetzung} & In der Praxis fast immer: Jede Bedingung betrifft nur wenige Variablen. Eine Dienstplanbedingung nennt eine Schicht, nicht alle.\\
+\textbf{Die eigentliche Grenze} & Nicht die Zahl der Variablen, sondern die Zahl der \kursiv{Nichtnullelemente} in $A$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine Matrix mit einer Million Zeilen und Spalten hätte voll besetzt $10^{12}$ Einträge --- acht Terabyte Speicher. Mit zehn Nichtnullen je Zeile sind es zehn Millionen, also wenige hundert Megabyte. Die gesamte Software für lineare Optimierung ist auf diese Struktur hin gebaut.}
+\end{minipage}
+\end{center}
+
+\schritt{Zwei Familien von Verfahren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Simplex} & \textbf{Innere Punkte}\\
+\midrule
+Weg & über die Ecken & \kursiv{durch} das Innere\\
+Schritte & viele, billig & wenige, teuer\\
+Schlechtester Fall & \textcolor{akzent}{exponentiell} & \textcolor{gruen}{polynomial}\\
+In der Praxis & \textcolor{gruen}{sehr gut} & \textcolor{gruen}{sehr gut}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist eines der bekanntesten Rätsel des Fachs: Das Simplexverfahren ist im schlechtesten Fall beweisbar exponentiell --- Klee und Minty gaben 1972 Beispiele an ---, verhält sich in der Praxis aber durchweg gutartig. Die Erklärung dieser Lücke ist bis heute nur teilweise gelungen; Kapitel~3 und 15 kommen darauf zurück.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 2.1} & Normalform; alles lässt sich umformen\\
+\textbf{Satz 2.3} & der zulässige Bereich ist konvex\\
+\textbf{Satz 2.5} & das Optimum liegt in einer Ecke\\
+\textbf{Satz 2.7} & Ecken $=$ zulässige Basislösungen\\
+\textbf{Die Grenze} & $\binom{100}{50} = 10^{29}$ --- Abzählen scheitert\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel bauen wir daraus ein Verfahren: von Ecke zu Ecke, jedes Mal besser, mit einer Abbruchbedingung, die beweist, dass man fertig ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,199 @@
+\chapter*{Vorwort: Die Frage nach dem Besten}
+\addcontentsline{toc}{chapter}{Vorwort}
+\markboth{Vorwort}{Vorwort}
+
+Die Optimierung ist dasjenige Gebiet der Mathematik, das den Entscheidungen am nächsten kommt --- und deshalb am sorgfältigsten sagen muss, was es \kursiv{nicht} entscheidet.
+
+\begin{merksatz}
+\boxtitel{Der Ausgangspunkt}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Optimierungsverfahren findet das Beste --- gemessen an einem Ziel, das jemand vorher festgelegt hat, innerhalb von Grenzen, die jemand vorher beschrieben hat.}
+\end{minipage}
+\end{center}
+
+Beides steht nicht in der Mathematik. Die Wahl des Ziels und die Beschreibung der Grenzen sind die eigentlichen Entscheidungen; das Verfahren führt sie nur aus.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Daraus folgt die Leitfrage dieses Bandes: Was rechnet das Verfahren tatsächlich aus --- und stimmt das mit dem überein, was man wissen wollte? Kapitel~1 zeigt an einem Zahlenbeispiel, wie weit beides auseinanderfallen kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section*{Warum dieser Band anders aufgebaut ist}
+
+\begin{merksatz}
+\boxtitel{Drei Fragen zu jedem Verfahren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Findet es etwas?} & Gibt es überhaupt eine Lösung, und findet das Verfahren sie in endlicher Zeit?\\
+\textbf{Ist es das Beste?} & Oder nur ein örtliches Bestes, hinter dem ein besseres liegt?\\
+\textbf{Wie sicher?} & Was geschieht mit der Lösung, wenn sich die Eingangsdaten geringfügig ändern?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Die dritte Frage wird am häufigsten übergangen und ist am wichtigsten. Eine Lösung, die bei einem Prozent Änderung der Daten völlig anders aussieht, ist keine Lösung, sondern ein Zufall.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil~V dieses Bandes behandelt sie ausführlich. Aber sie taucht schon vorher auf --- bei den Schattenpreisen in Kapitel~5 und bei der Kondition in Kapitel~9.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der Aufbau jedes Kapitels}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Das Problem} & In Worten, dann in Formeln.\\
+\textbf{Das Verfahren} & Schritt für Schritt, an einem Beispiel von Hand durchgerechnet.\\
+\textbf{Der Beweis} & Warum es funktioniert --- vollständig.\\
+\textbf{Die Grenze} & Wo es versagt, wie schnell es ist, was es voraussetzt.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der dritte Punkt ist bei Optimierungsverfahren besonders wichtig. Viele von ihnen werden als Rezept gelehrt --- man führt sie aus, ohne zu wissen, warum das Ergebnis optimal ist. Dann merkt man auch nicht, wenn es das nicht ist.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section*{Was Sie mitbringen müssen}
+
+\begin{merksatz}
+\boxtitel{Die Voraussetzungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Lineare Gleichungen} & Gaußsches Verfahren, Rang, Lösbarkeit. Band 2, Teil~I.\\
+\textbf{Matrizen} & Multiplikation, Transponierte, Inverse. Band 2, Teil~II.\\
+\textbf{Ableiten} & Auch partielle Ableitungen und der Gradient --- ab Kapitel~7. Band 3.\\
+\textbf{Vektorräume} & Nur die Anschauung: Geraden, Ebenen, Halbräume.\\
+\textbf{Wahrschein\-lichkeit} & Erst in Kapitel~13, und dort nur Erwartungswerte.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die ersten sechs Kapitel kommen mit Schulmathematik und etwas linearer Algebra aus. Man kann sie lesen, ohne je abgeleitet zu haben. Ab Kapitel~7 wird die Analysis gebraucht --- und dort erklärt, wo sie auftritt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section*{Das Klinikum Neustadt}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall}
+Wie in den Bänden 17 und 18 läuft ein einziger erfundener Fall durch alle Kapitel --- diesmal die Planung eines Krankenhauses.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{2.8cm}P{3.6cm}@{}}
+\toprule
+\textbf{Teil} & \textbf{Thema} & \textbf{Der Leitfall zeigt}\\
+\midrule
+I & Lineare Probleme & welche Eingriffe in welcher Zahl\\
+II & Dualität & was eine zusätzliche OP-Stunde wert ist\\
+III & Ohne Linearität & Personaleinsatz mit Sättigung\\
+IV & Ganzzahligkeit & Dienstpläne --- halbe Personen gibt es nicht\\
+V & Unsicherheit & Notfälle kommen ungeplant\\
+VI & Stand & was heute lösbar ist\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Fall ist bewusst so gewählt, dass die unangenehmen Fragen sichtbar bleiben: Wonach soll ein Krankenhaus optimieren? Nach Erlös, nach der Zahl der Behandelten, nach dem gewonnenen Nutzen? Die Antworten unterscheiden sich, und keine davon liefert die Mathematik.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section*{Drei Warnungen}
+
+\begin{warnung}
+\boxtitelr{Erstens: Das Ziel ist nicht neutral}
+Jedes Optimierungsproblem verlangt eine einzige Zahl, die groß oder klein werden soll. Wirkliche Entscheidungen haben mehrere Ziele, die einander widersprechen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Wer sie zu einer Zahl zusammenfasst, trifft damit bereits die Entscheidung --- durch die Wahl der Gewichte. Kapitel~14 behandelt das ausführlich.
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Zweitens: Optimal heißt optimal \kursiv{im Modell}}
+Die Nebenbedingungen beschreiben, was zulässig ist. Was nicht aufgeschrieben wurde, gilt als erlaubt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Verfahren nutzt jede Lücke im Modell aus --- das ist seine Aufgabe. Findet es eine erstaunlich gute Lösung, so ist die erste Frage nicht \enquote{wie gut ist sie?}, sondern \enquote{welche Bedingung habe ich vergessen?}.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Drittens: Die Lösung liegt auf dem Rand}
+Bei linearen Problemen liegt das Optimum stets in einer Ecke des zulässigen Bereichs --- also dort, wo mehrere Beschränkungen gleichzeitig ausgeschöpft sind.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine optimale Lösung hat daher keine Reserven.} Sie ist genau dann besonders empfindlich gegen Störungen, wenn sie besonders gut ist.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist kein Mangel der Verfahren, sondern eine Eigenschaft des Problems --- und der Grund, warum Teil~V existiert. Wer in einer unsicheren Welt plant, sollte nicht das Optimum suchen, sondern eine Lösung, die auch dann noch brauchbar ist, wenn es anders kommt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section*{Der Aufbau}
+
+\begin{merksatz}
+\boxtitel{Sechs Teile, fünfzehn Kapitel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.0cm}P{3.2cm}P{4.4cm}@{}}
+\toprule
+\textbf{Teil} & \textbf{Thema} & \textbf{Die Leitfrage}\\
+\midrule
+I & Lineare Probleme (1--3) & Wie findet man die beste Ecke?\\
+II & Dualität (4--6) & Was ist eine Beschränkung wert?\\
+III & Ohne Linearität (7--9) & Wann ist örtlich gleich global?\\
+IV & Ganzzahligkeit (10--12) & Warum wird es plötzlich schwer?\\
+V & Unsicherheit (13--14) & Was tun, wenn die Daten wackeln?\\
+VI & Stand (15) & Was ist heute lösbar?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\vspace{10pt}
+\begin{flushright}
+\itshape\color{grau}
+Das Schwierigste an einem\\
+Optimierungsproblem ist,\\
+es aufzuschreiben.\\[8pt]
+\normalfont\color{grau}\upshape --- eine alte Regel des Fachs
+\end{flushright}

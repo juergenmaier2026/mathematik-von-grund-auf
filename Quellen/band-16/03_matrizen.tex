@@ -1,0 +1,505 @@
+\chapter{Wie man Graphen aufschreibt}
+
+\section{Warum Bilder nicht genügen}
+
+Ein Graph mit zwölf Ecken lässt sich zeichnen. Einer mit tausend nicht mehr sinnvoll, und einer mit einer Million schon gar nicht. Spätestens dann braucht man eine Schreibweise, die
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+(a) & eindeutig ist --- zwei Menschen lesen dasselbe heraus,\\
+(b) & sich rechnen lässt --- man kann Eigenschaften ausrechnen, statt sie abzulesen,\\
+(c) & sparsam ist --- der Platzbedarf soll zum Graphen passen.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Es gibt drei gebräuchliche Antworten. Die dritte ist die sparsamste, die erste die rechenfreundlichste --- und die erste liefert überraschenderweise einen Satz, der die Zahl aller Wege einer gegebenen Länge angibt.
+
+\section{Was eine Matrix ist}
+
+Bevor wir die erste Darstellung angeben, klären wir den Begriff. Wer Band 2 der Reihe kennt, kann diesen Abschnitt überspringen.
+
+\begin{definition}
+\boxtitelm{Definition 3.1 --- Matrix}
+Eine \Begriff{Matrix} mit $n$ Zeilen und $n$ Spalten ist eine rechteckige Anordnung von Zahlen. Man schreibt
+\[ A = \begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{pmatrix} \]
+und bezeichnet mit $a_{ij}$ die Zahl in der $i$-ten Zeile und der $j$-ten Spalte.
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Zeile zuerst, Spalte zweitens}
+Bei $a_{ij}$ ist $i$ die \kursiv{Zeile} und $j$ die \kursiv{Spalte} --- immer in dieser Reihenfolge. Das Verwechseln dieser beiden Indizes ist die häufigste Fehlerquelle beim Rechnen mit Matrizen.
+
+Eine Eselsbrücke: \enquote{Zeilen zuerst, Spalten später} --- alphabetisch und im Alphabet steht Z vor S nicht; die Merkhilfe funktioniert stattdessen über die Form: Man liest wie einen Text erst \kursiv{nach unten} bis zur richtigen Zeile, dann \kursiv{nach rechts} bis zur richtigen Spalte.
+\end{warnung}
+
+\section{Die Adjazenzmatrix}
+
+\begin{definition}
+\boxtitelm{Definition 3.2 --- Adjazenzmatrix}
+Sei $G$ ein Graph, dessen Ecken in einer festen Reihenfolge $v_1, v_2, \ldots, v_n$ durchnummeriert sind. Die \Begriff{Adjazenzmatrix} $A = A(G)$ ist die $n \times n$-Matrix mit
+\[ a_{ij} = \begin{cases} 1, & \text{falls } \{v_i, v_j\} \in E, \\[2pt] 0, & \text{sonst.} \end{cases} \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Ein Beispiel, vollständig ausgeschrieben}
+Wir nehmen den Dienstplangraphen aus Kapitel~1 mit der Nummerierung $v_1 = A$, $v_2 = B$, $v_3 = C$, $v_4 = D$, $v_5 = E$ und den Kanten $AB$, $AC$, $BC$, $BD$, $CE$, $DE$.
+
+\schritt{Feld für Feld}
+Wir gehen die erste Zeile durch. Sie gehört zur Ecke $A$.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.4cm}P{3.6cm}P{1.4cm}@{}}
+\toprule
+\textbf{Feld} & \textbf{Frage} & \textbf{Wert}\\
+\midrule
+$a_{11}$ & Ist $\{A,A\}$ eine Kante? & $0$\\
+$a_{12}$ & Ist $\{A,B\}$ eine Kante? & $1$\\
+$a_{13}$ & Ist $\{A,C\}$ eine Kante? & $1$\\
+$a_{14}$ & Ist $\{A,D\}$ eine Kante? & $0$\\
+$a_{15}$ & Ist $\{A,E\}$ eine Kante? & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die vollständige Matrix}
+\[ A = \begin{pmatrix}
+0 & 1 & 1 & 0 & 0 \\
+1 & 0 & 1 & 1 & 0 \\
+1 & 1 & 0 & 0 & 1 \\
+0 & 1 & 0 & 0 & 1 \\
+0 & 0 & 1 & 1 & 0
+\end{pmatrix} \]
+
+\schritt{Drei Proben}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.6cm}@{}}
+\toprule
+\textbf{Diagonale} & Alle Einträge $a_{ii}$ sind $0$, denn Schlingen gibt es nicht.\\
+\textbf{Symmetrie} & $a_{ij} = a_{ji}$ für alle $i,j$, denn $\{v_i,v_j\} = \{v_j,v_i\}$.\\
+\textbf{Zeilensumme} & Die $i$-te Zeilensumme ist $\deg(v_i)$: Zeile 1 ergibt $2$, Zeile 2 ergibt $3$, Zeile 3 ergibt $3$, Zeile 4 ergibt $2$, Zeile 5 ergibt $2$ --- genau die Grade aus Kapitel~1.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Und die Gesamtsumme}
+Alle Einträge zusammen ergeben $2+3+3+2+2 = 12 = 2 \cdot 6 = 2m$. Das ist das Handschlaglemma, aus der Matrix abgelesen: Jede Kante erzeugt genau zwei Einsen.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Matrix hängt von der Nummerierung ab --- der Graph nicht}
+Vertauscht man zwei Ecken in der Nummerierung, so vertauschen sich die entsprechenden Zeilen \kursiv{und} Spalten. Es entsteht eine andere Matrix, aber derselbe Graph.
+
+Zwei Graphen sind daher genau dann isomorph, wenn ihre Adjazenzmatrizen durch \kursiv{gleichzeitiges} Vertauschen von Zeilen und Spalten ineinander übergehen. Das ist eine exakte Umformulierung von Definition 1.7 --- und leider keine Vereinfachung: Man müsste weiterhin alle $n!$ Nummerierungen durchprobieren.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wer die Matrix nur hinschreibt, hat also nichts gewonnen. Der Gewinn kommt erst, wenn man mit ihr \kursiv{rechnet} --- und dabei Größen bekommt, die von der Nummerierung unabhängig sind. Genau das leistet der nächste Abschnitt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Matrizen multiplizieren}
+
+\begin{definition}
+\boxtitelm{Definition 3.3 --- Matrixprodukt}
+Seien $A$ und $B$ zwei $n \times n$-Matrizen. Ihr \Begriff{Produkt} $C = A \cdot B$ ist die $n \times n$-Matrix mit den Einträgen
+\[ c_{ij} \;=\; \sum_{k=1}^{n} a_{ik} \, b_{kj} \;=\; a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{in}b_{nj} . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was diese Formel anweist zu tun}
+Um den Eintrag an der Stelle $(i,j)$ des Produkts zu bekommen:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.2cm}P{7.2cm}@{}}
+\toprule
+1. & Nimm die $i$-te \kursiv{Zeile} von $A$: das sind die Zahlen $a_{i1}, a_{i2}, \ldots, a_{in}$.\\
+2. & Nimm die $j$-te \kursiv{Spalte} von $B$: das sind $b_{1j}, b_{2j}, \ldots, b_{nj}$.\\
+3. & Multipliziere sie paarweise: erstes mal erstes, zweites mal zweites, und so fort.\\
+4. & Addiere alle $n$ Produkte.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\draw[grau, line width=0.7pt] (-3.4,-1.0) rectangle (-1.0,1.0);
+\draw[akzent, fill=akzent!12, line width=1pt] (-3.4,0.1) rectangle (-1.0,0.55);
+\node[font=\scriptsize, color=grau] at (-2.2,-1.35) {$A$: Zeile $i$};
+\draw[grau, line width=0.7pt] (-0.3,-1.0) rectangle (2.1,1.0);
+\draw[mittel, fill=mittel!12, line width=1pt] (0.5,-1.0) rectangle (0.95,1.0);
+\node[font=\scriptsize, color=grau] at (0.9,-1.35) {$B$: Spalte $j$};
+\node[font=\large, color=grau] at (2.7,0) {$=$};
+\draw[grau, line width=0.7pt] (3.3,-1.0) rectangle (5.7,1.0);
+\fill[gruen] (4.1,0.3) rectangle (4.55,0.55);
+\node[font=\scriptsize, color=grau] at (4.5,-1.35) {$C$: Feld $(i,j)$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein einzelnes Feld des Produkts entsteht also aus einer ganzen Zeile und einer ganzen Spalte. Für die vollständige Matrix braucht man $n^2$ solche Rechnungen mit je $n$ Multiplikationen --- insgesamt $n^3$. Dass es auch schneller geht, ist eine eigene Geschichte; Band 1 der Informatikreihe erzählt sie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{$A^2$ für unser Beispiel --- ein Feld vorgerechnet}
+Wir berechnen $A^2 = A \cdot A$ für die Matrix von oben.
+
+\schritt{Das Feld $(1,1)$}
+Erste Zeile von $A$: $(0,1,1,0,0)$. Erste Spalte von $A$: $(0,1,1,0,0)^{\!\top}$.
+\[ 0\cdot 0 + 1\cdot 1 + 1\cdot 1 + 0\cdot 0 + 0\cdot 0 = 0 + 1 + 1 + 0 + 0 = 2 \]
+
+\schritt{Das Feld $(1,4)$}
+Erste Zeile von $A$: $(0,1,1,0,0)$. Vierte Spalte von $A$: $(0,1,0,0,1)^{\!\top}$.
+\[ 0\cdot 0 + 1\cdot 1 + 1\cdot 0 + 0\cdot 0 + 0\cdot 1 = 1 \]
+
+\schritt{Die vollständige Matrix}
+\[ A^2 = \begin{pmatrix}
+2 & 1 & 1 & 1 & 1 \\
+1 & 3 & 1 & 0 & 2 \\
+1 & 1 & 3 & 2 & 0 \\
+1 & 0 & 2 & 2 & 0 \\
+1 & 2 & 0 & 0 & 2
+\end{pmatrix} \]
+
+\schritt{Was fällt auf?}
+Der Eintrag $(1,1)$ ist $2$ --- und $\deg(A) = 2$. Der Eintrag $(2,2)$ ist $3$ --- und $\deg(B) = 3$. Auf der Diagonalen stehen die Grade.
+
+Der Eintrag $(1,4)$ ist $1$. Zwischen $A$ und $D$ gibt es keine Kante, aber genau einen Weg der Länge $2$: $A - B - D$.
+
+Der Eintrag $(2,4)$ ist $0$. Zwischen $B$ und $D$ gibt es eine Kante, aber keinen Kantenzug der Länge genau $2$: Man müsste über einen gemeinsamen Nachbarn gehen, und $N(B) = \{A,C,D\}$, $N(D) = \{B,E\}$ haben keinen gemeinsamen Eintrag.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 3.4 --- Potenzen der Adjazenzmatrix zählen Kantenzüge}
+Sei $A$ die Adjazenzmatrix von $G$ und $k \ge 0$. Dann ist der Eintrag $(A^k)_{ij}$ gleich der Anzahl der Kantenzüge der Länge $k$ von $v_i$ nach $v_j$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis durch Induktion über $k$}
+\schritt{Induktionsanfang I: $k = 0$}
+$A^0$ ist definitionsgemäß die \Begriff{Einheitsmatrix} $I$ --- Einsen auf der Diagonalen, sonst Nullen.
+
+Wie viele Kantenzüge der Länge $0$ gibt es von $v_i$ nach $v_j$? Ein Kantenzug der Länge $0$ ist eine Folge mit einem einzigen Eintrag, also $(v_i)$; er führt von $v_i$ nach $v_i$. Für $i = j$ gibt es also genau einen, für $i \neq j$ keinen. Das ist genau die Einheitsmatrix.
+
+\schritt{Induktionsanfang II: $k = 1$}
+$A^1 = A$. Kantenzüge der Länge $1$ von $v_i$ nach $v_j$ sind genau die Folgen $(v_i, v_j)$ mit $\{v_i,v_j\} \in E$. Davon gibt es einen, wenn die Kante existiert, sonst keinen --- also $a_{ij}$.
+
+\schritt{Induktionsschritt --- die Annahme}
+Sei $k \ge 1$ und die Behauptung für $k$ bereits bewiesen. Zu zeigen ist sie für $k+1$.
+
+\schritt{Der entscheidende Gedanke: nach der vorletzten Ecke sortieren}
+Jeder Kantenzug der Länge $k+1$ von $v_i$ nach $v_j$ hat die Gestalt
+\[ (v_i, \ \ldots \ , v_\ell, \ v_j) \]
+für eine Ecke $v_\ell$ --- nämlich die vorletzte. Er zerfällt damit eindeutig in zwei Teile:
+\begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+\item ein Kantenzug der Länge $k$ von $v_i$ nach $v_\ell$;
+\item ein letzter Schritt von $v_\ell$ nach $v_j$, der die Kante $\{v_\ell, v_j\}$ benutzt.
+\end{itemize}
+
+\schritt{Die Zählung}
+Wir zählen die Kantenzüge der Länge $k+1$, indem wir nach der vorletzten Ecke $v_\ell$ sortieren und die Fälle addieren.
+
+Für ein festes $v_\ell$: Es gibt $(A^k)_{i\ell}$ Möglichkeiten für den ersten Teil (Induktionsannahme). Der letzte Schritt ist möglich, wenn $\{v_\ell,v_j\} \in E$, also in $a_{\ell j}$ Fällen --- das ist $1$ oder $0$. Jede Kombination aus erstem Teil und letztem Schritt ergibt genau einen Kantenzug der Länge $k+1$, und jeder entsteht so genau einmal. Also gibt es für dieses feste $v_\ell$ genau
+\[ (A^k)_{i\ell} \cdot a_{\ell j} \]
+Kantenzüge.
+
+\schritt{Aufsummieren}
+Jeder Kantenzug hat genau eine vorletzte Ecke, wird also bei genau einem $\ell$ gezählt. Summieren über alle $\ell$:
+\[ \#\{\text{Kantenzüge der Länge } k+1 \text{ von } v_i \text{ nach } v_j\} \;=\; \sum_{\ell=1}^{n} (A^k)_{i\ell}\, a_{\ell j} . \]
+
+\schritt{Und das ist genau das Matrixprodukt}
+Die rechte Seite ist nach Definition 3.3 der Eintrag $(i,j)$ des Produkts $A^k \cdot A = A^{k+1}$. $\blacksquare$
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der Satz zählt Kantenzüge, nicht Wege}
+Das ist keine Kleinigkeit. Im Beispiel ist $(A^2)_{22} = 3$. Es gibt aber keinen \kursiv{Weg} der Länge $2$ von $B$ nach $B$ --- Wege haben lauter verschiedene Ecken. Was gezählt wird, sind die drei Kantenzüge
+\[ (B,A,B), \quad (B,C,B), \quad (B,D,B) . \]
+Sie laufen jeweils hin und zurück.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es gibt keine ähnlich einfache Formel für die Anzahl der \kursiv{Wege} einer gegebenen Länge. Die Rechnung mit Matrixpotenzen funktioniert nur deshalb so glatt, weil Kantenzüge sich beliebig zerlegen und zusammensetzen lassen --- bei Wegen muss man dabei prüfen, ob sich Ecken wiederholen, und genau das lässt sich nicht in ein Produkt fassen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Folgerung 3.5 --- Dreiecke zählen}
+Die Anzahl der Dreiecke in $G$ ist
+\[ \frac{1}{6} \operatorname{spur}(A^3), \]
+wobei $\operatorname{spur}$ die Summe der Diagonaleinträge bezeichnet.
+
+\schritt{Warum}
+$(A^3)_{ii}$ zählt die geschlossenen Kantenzüge der Länge $3$ von $v_i$ nach $v_i$. Ein solcher Kantenzug $(v_i, x, y, v_i)$ verlangt drei Kanten $\{v_i,x\}$, $\{x,y\}$, $\{y,v_i\}$. Wegen $x \neq v_i$ (keine Schlingen) und $y \neq x$ und $y \neq v_i$ sind alle drei Ecken verschieden --- es ist stets ein Dreieck.
+
+\schritt{Warum $\frac{1}{6}$}
+Jedes Dreieck mit den Ecken $p,q,r$ wird gezählt: bei $i = p$, bei $i = q$ und bei $i = r$ --- das sind $3$ Startpunkte. Und von jedem Startpunkt aus in zwei Richtungen --- also $3 \cdot 2 = 6$ Mal insgesamt.
+
+\schritt{Probe am Beispiel}
+Unser Dienstplangraph enthält genau ein Dreieck, nämlich $A,B,C$. Es müsste also $\operatorname{spur}(A^3) = 6$ sein.
+
+Wir brauchen nur die Diagonale von $A^3 = A^2 \cdot A$. Für $(A^3)_{11}$: erste Zeile von $A^2$ ist $(2,1,1,1,1)$, erste Spalte von $A$ ist $(0,1,1,0,0)^{\!\top}$:
+\[ 2\cdot 0 + 1\cdot 1 + 1\cdot 1 + 1\cdot 0 + 1\cdot 0 = 2 . \]
+Ebenso $(A^3)_{22}$: Zeile $(1,3,1,0,2)$ mal Spalte $(1,0,1,1,0)^{\!\top}$ ergibt $1 + 0 + 1 + 0 + 0 = 2$.
+Und $(A^3)_{33}$: Zeile $(1,1,3,2,0)$ mal Spalte $(1,1,0,0,1)^{\!\top}$ ergibt $1+1+0+0+0 = 2$.
+Für $(A^3)_{44}$: Zeile $(1,0,2,2,0)$ mal Spalte $(0,1,0,0,1)^{\!\top}$ ergibt $0+0+0+0+0 = 0$.
+Für $(A^3)_{55}$: Zeile $(1,2,0,0,2)$ mal Spalte $(0,0,1,1,0)^{\!\top}$ ergibt $0+0+0+0+0 = 0$.
+
+\[ \operatorname{spur}(A^3) = 2+2+2+0+0 = 6, \qquad \frac{6}{6} = 1 . \quad \checkmark \]
+
+Die Nullen bei $D$ und $E$ sagen genau das Richtige: Diese beiden Ecken liegen auf keinem Dreieck.
+\end{merksatz}
+
+\section{Inzidenzmatrix und Adjazenzliste}
+
+\begin{definition}
+\boxtitelm{Definition 3.6 --- Inzidenzmatrix}
+Sind die Ecken als $v_1, \ldots, v_n$ und die Kanten als $e_1, \ldots, e_m$ nummeriert, so ist die \Begriff{Inzidenzmatrix} $B$ die $n \times m$-Matrix mit
+\[ b_{ij} = \begin{cases} 1, & \text{falls } v_i \text{ auf } e_j \text{ liegt}, \\ 0, & \text{sonst.} \end{cases} \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Ihre auffälligste Eigenschaft}
+In jeder \kursiv{Spalte} stehen genau zwei Einsen --- eine Kante hat zwei Enden. In jeder \kursiv{Zeile} stehen $\deg(v_i)$ Einsen.
+
+Zählt man alle Einsen einmal spaltenweise und einmal zeilenweise, so erhält man
+\[ 2m \quad \text{beziehungsweise} \quad \sum_i \deg(v_i) . \]
+Das ist wieder das Handschlaglemma --- diesmal so unmittelbar, dass der Beweis in einem Satz steht. Die Inzidenzmatrix \kursiv{ist} die Tabelle der Inzidenzen, die in Kapitel~1 gezählt wurden.
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 3.7 --- Adjazenzliste}
+Die \Begriff{Adjazenzliste} von $G$ ist die Zuordnung, die jeder Ecke $v$ die Liste ihrer Nachbarn $N(v)$ zuordnet.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+& \textbf{Adjazenz\-matrix} & \textbf{Inzidenz\-matrix} & \textbf{Adjazenz\-liste}\\
+\midrule
+Platzbedarf & $n^2$ & $n \cdot m$ & $2m$\\
+\enquote{Sind $u,v$ benachbart?} & \textcolor{gruen}{sofort} & \textcolor{akzent}{langsam} & $\deg(u)$ Schritte\\
+\enquote{Alle Nachbarn von $u$?} & $n$ Schritte & \textcolor{akzent}{$m$ Schritte} & \textcolor{gruen}{sofort}\\
+Rechnen & \textcolor{gruen}{Satz 3.4} & Sätze über Flüsse & \textcolor{akzent}{kaum}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für einen Graphen mit $n = 10^6$ Ecken und $m = 5 \cdot 10^6$ Kanten bräuchte die Adjazenzmatrix $10^{12}$ Felder --- unmöglich. Die Adjazenzliste kommt mit $10^7$ Einträgen aus. Solche Graphen heißen \Begriff{dünn}: Sie haben viel weniger Kanten, als möglich wären.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Vom Bild zur Matrix und zurück}
+Gegeben sei die Matrix
+\[ A = \begin{pmatrix}
+0 & 1 & 0 & 1 \\
+1 & 0 & 1 & 1 \\
+0 & 1 & 0 & 1 \\
+1 & 1 & 1 & 0
+\end{pmatrix} . \]
+Bestimmen Sie Kantenzahl, Gradfolge und die Anzahl der Dreiecke.
+
+\loesung
+\schritt{Schritt 1 --- Prüfung, ob es überhaupt eine Adjazenzmatrix sein kann}
+Diagonale: alle Einträge $0$ --- keine Schlingen. \checkmark\\
+Symmetrie: $a_{12} = a_{21} = 1$, $a_{13} = a_{31} = 0$, $a_{14} = a_{41} = 1$, $a_{23} = a_{32} = 1$, $a_{24} = a_{42} = 1$, $a_{34} = a_{43} = 1$. \checkmark
+
+\schritt{Schritt 2 --- Grade als Zeilensummen}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.4cm}P{2.6cm}P{1.4cm}@{}}
+\toprule
+\textbf{Zeile} & \textbf{Einträge} & $\deg$\\
+\midrule
+$1$ & $0+1+0+1$ & $2$\\
+$2$ & $1+0+1+1$ & $3$\\
+$3$ & $0+1+0+1$ & $2$\\
+$4$ & $1+1+1+0$ & $3$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Gradfolge: $(3,3,2,2)$.
+
+\schritt{Schritt 3 --- Kantenzahl}
+Nach Satz 1.3: $m = \frac{2+3+2+3}{2} = \frac{10}{2} = 5$.
+
+\schritt{Schritt 4 --- Die Kanten benennen}
+Aus den Einsen oberhalb der Diagonalen: $\{1,2\}$, $\{1,4\}$, $\{2,3\}$, $\{2,4\}$, $\{3,4\}$. Das sind fünf. \checkmark
+
+\schritt{Schritt 5 --- Das Bild}
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\node[knotenb] (1) at (-1.1,0.8) {$1$};
+\node[knotenb] (2) at (1.1,0.8) {$2$};
+\node[knotenb] (3) at (1.1,-0.8) {$3$};
+\node[knotenb] (4) at (-1.1,-0.8) {$4$};
+\draw[kante] (1)--(2); \draw[kante] (1)--(4); \draw[kante] (2)--(3);
+\draw[kante] (2)--(4); \draw[kante] (3)--(4);
+\end{tikzpicture}
+\end{center}
+
+\schritt{Schritt 6 --- Dreiecke}
+Direkt abgelesen: $\{1,2,4\}$ ist ein Dreieck (die Kanten $12$, $24$, $41$ sind alle da). $\{2,3,4\}$ ebenfalls. $\{1,2,3\}$ nicht, denn $13$ fehlt. $\{1,3,4\}$ nicht, denn $13$ fehlt. Also \textbf{zwei} Dreiecke.
+
+\schritt{Probe über Folgerung 3.5}
+Wir brauchen $\operatorname{spur}(A^3)$, das sollte $6 \cdot 2 = 12$ sein.
+
+Zunächst $A^2$. Zeile $1$ von $A$ ist $(0,1,0,1)$.
+\begin{align*}
+(A^2)_{11} &= (0,1,0,1)\cdot(0,1,0,1) = 0+1+0+1 = 2\\
+(A^2)_{12} &= (0,1,0,1)\cdot(1,0,1,1) = 0+0+0+1 = 1\\
+(A^2)_{13} &= (0,1,0,1)\cdot(0,1,0,1) = 0+1+0+1 = 2\\
+(A^2)_{14} &= (0,1,0,1)\cdot(1,1,1,0) = 0+1+0+0 = 1
+\end{align*}
+Auf dieselbe Weise erhält man
+\[ A^2 = \begin{pmatrix} 2 & 1 & 2 & 1 \\ 1 & 3 & 1 & 2 \\ 2 & 1 & 2 & 1 \\ 1 & 2 & 1 & 3 \end{pmatrix}. \]
+
+Nun die Diagonale von $A^3$:
+\begin{align*}
+(A^3)_{11} &= (2,1,2,1)\cdot(0,1,0,1) = 0+1+0+1 = 2\\
+(A^3)_{22} &= (1,3,1,2)\cdot(1,0,1,1) = 1+0+1+2 = 4\\
+(A^3)_{33} &= (2,1,2,1)\cdot(0,1,0,1) = 0+1+0+1 = 2\\
+(A^3)_{44} &= (1,2,1,3)\cdot(1,1,1,0) = 1+2+1+0 = 4
+\end{align*}
+\[ \operatorname{spur}(A^3) = 2+4+2+4 = 12, \qquad \frac{12}{6} = 2 . \quad \checkmark \]
+
+Die Zahlen sagen sogar mehr: Die Ecken $2$ und $4$ liegen auf je zwei Dreiecken ($4/2 = 2$), die Ecken $1$ und $3$ auf je einem.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Kantenzüge zählen}
+Wie viele Kantenzüge der Länge $4$ gibt es im Kreis $C_4$ von einer Ecke zu sich selbst?
+
+\loesung
+\schritt{Schritt 1 --- Die Matrix}
+$C_4$ mit den Ecken $1,2,3,4$ im Kreis hat die Kanten $12$, $23$, $34$, $41$:
+\[ A = \begin{pmatrix} 0&1&0&1 \\ 1&0&1&0 \\ 0&1&0&1 \\ 1&0&1&0 \end{pmatrix} \]
+
+\schritt{Schritt 2 --- $A^2$}
+Zeile $1$ ist $(0,1,0,1)$.
+\[ (A^2)_{11} = (0,1,0,1)\cdot(0,1,0,1) = 2, \quad (A^2)_{12} = (0,1,0,1)\cdot(1,0,1,0) = 0, \]
+\[ (A^2)_{13} = (0,1,0,1)\cdot(0,1,0,1) = 2, \quad (A^2)_{14} = (0,1,0,1)\cdot(1,0,1,0) = 0 . \]
+Aus Symmetriegründen ergibt sich
+\[ A^2 = \begin{pmatrix} 2&0&2&0 \\ 0&2&0&2 \\ 2&0&2&0 \\ 0&2&0&2 \end{pmatrix} = 2 \begin{pmatrix} 1&0&1&0 \\ 0&1&0&1 \\ 1&0&1&0 \\ 0&1&0&1 \end{pmatrix}. \]
+
+\schritt{Schritt 3 --- $A^4 = (A^2)^2$}
+Statt zweimal weiterzumultiplizieren, quadrieren wir $A^2$. Nennen wir $M$ die Matrix in der Klammer, also $A^2 = 2M$. Dann ist
+\[ A^4 = (2M)^2 = 4 M^2 . \]
+Für $M^2$: Zeile $1$ von $M$ ist $(1,0,1,0)$.
+\[ (M^2)_{11} = (1,0,1,0)\cdot(1,0,1,0) = 2, \qquad (M^2)_{12} = (1,0,1,0)\cdot(0,1,0,1) = 0 . \]
+Also $M^2 = 2M$ und damit
+\[ A^4 = 4 \cdot 2M = 8M, \qquad (A^4)_{11} = 8 . \]
+
+\schritt{Antwort}
+Es gibt $\mathbf{8}$ geschlossene Kantenzüge der Länge $4$ von einer Ecke zu sich selbst.
+
+\schritt{Probe durch Aufzählen}
+Wir starten in Ecke $1$; die Nachbarn sind $2$ und $4$. Wir schreiben alle Möglichkeiten auf, wobei nach vier Schritten wieder $1$ erreicht sein muss:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}@{}}
+\toprule
+$1,2,1,2,1$ & $1,4,1,4,1$\\
+$1,2,1,4,1$ & $1,4,1,2,1$\\
+$1,2,3,2,1$ & $1,4,3,4,1$\\
+$1,2,3,4,1$ & $1,4,3,2,1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Acht Stück. \checkmark
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Nur die beiden letzten in der Liste --- $1,2,3,4,1$ und $1,4,3,2,1$ --- sind Kreise. Die übrigen sechs enthalten ein Hin und Zurück. Das ist der Unterschied zwischen Kantenzug und Kreis, an einem Beispiel abgezählt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Zusammenhang aus der Matrix ablesen}
+Zeigen Sie: Ein Graph mit $n$ Ecken ist genau dann zusammenhängend, wenn in der Matrix
+\[ S = I + A + A^2 + \cdots + A^{n-1} \]
+kein Eintrag gleich $0$ ist.
+
+\loesung
+\schritt{Schritt 1 --- Was $S_{ij}$ bedeutet}
+Nach Satz 3.4 ist $(A^k)_{ij}$ die Anzahl der Kantenzüge der Länge $k$ von $v_i$ nach $v_j$. Also ist
+\[ S_{ij} = \sum_{k=0}^{n-1} (A^k)_{ij} \]
+die Anzahl aller Kantenzüge von $v_i$ nach $v_j$ mit Länge \kursiv{höchstens} $n-1$.
+
+Da alle Summanden $\ge 0$ sind, gilt:
+\[ S_{ij} > 0 \iff \text{es gibt einen Kantenzug von } v_i \text{ nach } v_j \text{ der Länge} \le n-1 . \]
+
+\schritt{Schritt 2 --- Richtung 1: alle Einträge positiv $\Longrightarrow$ zusammenhängend}
+Sind alle $S_{ij} > 0$, so gibt es zwischen je zwei Ecken einen Kantenzug, nach Lemma 2.3 also einen Weg. Das ist Definition 2.4.
+
+\schritt{Schritt 3 --- Richtung 2: zusammenhängend $\Longrightarrow$ alle Einträge positiv}
+Sei $G$ zusammenhängend und $v_i, v_j$ beliebig. Es gibt einen Weg von $v_i$ nach $v_j$.
+
+Entscheidend ist nun die Längenschranke. Ein Weg hat lauter verschiedene Ecken. Es gibt nur $n$ Ecken, also hat ein Weg höchstens $n$ Eckeneinträge und damit höchstens $n-1$ Schritte. Seine Länge $k$ erfüllt somit $0 \le k \le n-1$.
+
+Damit trägt dieser Weg zum Summanden $A^k$ mit $k \le n-1$ bei, und $S_{ij} \ge 1 > 0$. $\blacksquare$
+
+\schritt{Warum die Schranke $n-1$ genau richtig ist}
+Sie kann nicht kleiner gewählt werden: Im Weg $P_n$ ist der Abstand der beiden Endecken genau $n-1$. Mit $S = I + A + \cdots + A^{n-2}$ bliebe dieser Eintrag $0$, und das Kriterium würde einen zusammenhängenden Graphen fälschlich ablehnen.
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Kirchhoff und die erste Rechnung mit Graphen}
+\Person{Gustav Robert Kirchhoff} veröffentlichte 1847 eine Arbeit über die Verteilung elektrischer Ströme in verzweigten Leitern. Um die Gleichungen aufzustellen, brauchte er eine Buchführung darüber, welcher Leiter welche Knoten verbindet --- und schrieb damit die erste Inzidenzmatrix der Geschichte hin, achtzig Jahre bevor jemand das Wort \enquote{Matrix} in diesem Zusammenhang benutzte.
+
+Kirchhoff ging weiter: Er zeigte, dass die unabhängigen Gleichungen den Kreisen des Netzwerks entsprechen und dass ihre Anzahl $m - n + 1$ beträgt. Diese Zahl heißt heute die \Begriff{zyklomatische Zahl} des Graphen. Sie wird in Kapitel~4 wieder auftauchen, wo sie als \enquote{Anzahl der Kanten, die man über einen Spannbaum hinaus hat} eine anschauliche Bedeutung bekommt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Bemerkenswert ist, dass Kirchhoff die Graphentheorie nicht suchte. Er brauchte sie, um ein physikalisches Problem zu lösen. Das ist der Regelfall in der Geschichte dieses Gebiets: Fast jeder Grundbegriff wurde von jemandem eingeführt, der etwas ganz anderes vorhatte.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Drei Darstellungen} & Adjazenzmatrix, Inzidenzmatrix, Adjazenzliste --- und wann welche\\
+\textbf{Satz 3.4} & $(A^k)_{ij}$ zählt Kantenzüge der Länge $k$\\
+\textbf{Folgerung 3.5} & Dreiecke über $\frac{1}{6}\operatorname{spur}(A^3)$\\
+\textbf{Zusammenhang} & aus $I + A + \cdots + A^{n-1}$ ablesbar\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist Teil~I abgeschlossen. Ab Kapitel~4 geht es nicht mehr um Begriffe, sondern um Struktur: Wie sehen die Graphen aus, die mit möglichst wenigen Kanten zusammenhängend sind?}
+\end{minipage}
+\end{center}
+\end{merksatz}

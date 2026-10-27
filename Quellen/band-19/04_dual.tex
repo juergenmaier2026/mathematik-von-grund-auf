@@ -1,0 +1,782 @@
+\part{Dualität}
+
+\chapter{Das duale Problem}
+
+\section{Wie beweist man, dass etwas optimal ist?}
+
+\begin{merksatz}
+\boxtitel{Zwei ungleich schwere Aufgaben}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Gut ist es} & Man gibt einen zulässigen Punkt an. Jeder kann nachrechnen, dass er zulässig ist und welchen Wert er hat. \textcolor{gruen}{Leicht.}\\
+\textbf{Das Beste ist es} & Man müsste zeigen, dass \kursiv{kein} zulässiger Punkt besser ist --- und davon gibt es unendlich viele. \textcolor{akzent}{Schwer.}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gesucht ist eine \kursiv{obere Schranke}: eine Zahl, von der man beweisen kann, dass kein zulässiger Punkt sie überschreitet.} Stimmt sie mit dem Wert eines zulässigen Punkts überein, so ist beides bewiesen.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Eine Schranke aus den Bedingungen selbst}
+Im Leitfall gilt für jeden zulässigen Punkt
+\[ a + 4b \le 80 \qquad\text{und}\qquad a + 2b \le 60 . \]
+
+\schritt{Ein erster Versuch}
+Wir addieren die beiden Ungleichungen:
+\[ 2a + 6b \le 140 \]
+Teilen durch $2{,}5$:
+\[ 0{,}8a + 2{,}4b \le 56 \]
+
+Da $2{,}4 \ge 2{,}0$ und $b \ge 0$, folgt
+\[ z = 0{,}8a + 2{,}0b \le 0{,}8a + 2{,}4b \le 56 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine bewiesene obere Schranke: $z \le 56$.} Ohne jede Kenntnis der Lösung.
+\end{minipage}
+\end{center}
+
+\schritt{Ein zweiter Versuch}
+Statt beide gleich zu gewichten, nehmen wir $\frac15$ der ersten und $\frac35$ der zweiten:
+\[ \tfrac15(a+4b) + \tfrac35(a+2b) \le \tfrac15\cdot80 + \tfrac35\cdot60 \]
+\[ \left(\tfrac15+\tfrac35\right)a + \left(\tfrac45+\tfrac65\right)b \le 16+36 \]
+\[ 0{,}8\,a + 2{,}0\,b \le 52 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Diesmal stehen links genau die Zielkoeffizienten.} Also $z \le 52$ --- und wir kennen einen zulässigen Punkt mit genau diesem Wert.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist bewiesen, dass $(40,10)$ optimal ist --- ohne Simplexverfahren, ohne Eckenabzählung, in drei Zeilen. Die Gewichte $\frac15$ und $\frac35$ sind genau die Zahlen aus der $z$-Zeile des Endtableaus. Der Rest dieses Kapitels erklärt, warum.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das duale Problem}
+
+\begin{merksatz}
+\boxtitel{Die Suche nach den besten Gewichten}
+Wir gewichten die $i$-te Bedingung mit $y_i \ge 0$ und addieren:
+\[ \sum_i y_i\left(\sum_j a_{ij}x_j\right) \le \sum_i y_i\,b_i \]
+
+Links umsortiert:
+\[ \sum_j \left(\sum_i y_i\,a_{ij}\right)x_j \le \vek{b}^{\!\top}\vek{y} \]
+
+\schritt{Wann das eine Schranke für $z$ liefert}
+Gilt für jedes $j$
+\[ \sum_i y_i\,a_{ij} \ \ge\ c_j , \]
+so folgt wegen $x_j \ge 0$
+\[ z = \sum_j c_j\,x_j \ \le\ \sum_j\left(\sum_i y_i a_{ij}\right)x_j \ \le\ \vek{b}^{\!\top}\vek{y} . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jedes $\vek{y} \ge \vek{0}$ mit $A^{\!\top}\vek{y} \ge \vek{c}$ liefert die obere Schranke $\vek{b}^{\!\top}\vek{y}$.}
+\end{minipage}
+\end{center}
+
+\schritt{Die beste Schranke}
+Man sucht die kleinste --- und hat damit ein neues Optimierungsproblem.
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 4.1 --- das duale Problem}
+Zum \Begriff{primalen} Problem
+\[ \max\ \vek{c}^{\!\top}\vek{x} \quad\text{unter}\quad A\vek{x}\le\vek{b},\ \vek{x}\ge\vek{0} \]
+gehört das \Begriff{duale} Problem
+\[ \min\ \vek{b}^{\!\top}\vek{y} \quad\text{unter}\quad A^{\!\top}\vek{y}\ge\vek{c},\ \vek{y}\ge\vek{0} . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Übersetzungstabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{primal} & \textbf{dual}\\
+\midrule
+Richtung & $\max$ & $\min$\\
+Variablen & $n$ Stück & $m$ Stück\\
+Bedingungen & $m$ Stück & $n$ Stück\\
+Zielkoeffizienten & $\vek{c}$ & $\vek{b}$\\
+Rechte Seiten & $\vek{b}$ & $\vek{c}$\\
+Matrix & $A$ & $A^{\!\top}$\\
+Ungleichungen & $\le$ & $\ge$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Aus jeder Zeile wird eine Variable, aus jeder Spalte eine Bedingung.} Die Rollen von $\vek{b}$ und $\vek{c}$ vertauschen sich.
+\end{minipage}
+\end{center}
+
+\schritt{Die Deutung}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+$x_j$ & Wie viel wird von Tätigkeit $j$ ausgeführt?\\
+$y_i$ & Was ist eine Einheit des Vorrats $i$ wert?\\
+$\sum_i y_ia_{ij} \ge c_j$ & Der Wert des Verbrauchs von Tätigkeit $j$ deckt mindestens ihren Ertrag.\\
+$\vek{b}^{\!\top}\vek{y}$ & Der Gesamtwert aller Vorräte.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist der Kern: Die duale Bedingung sagt, dass keine Tätigkeit \enquote{Gewinn abwirft} --- der Wert der verbrauchten Vorräte ist mindestens so groß wie der Ertrag. Wären die Preise $y_i$ so, dass eine Tätigkeit mehr einbringt als sie verbraucht, so wären sie zu niedrig angesetzt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das duale Problem des Leitfalls}
+\[ \min\ 80\,y_1 + 60\,y_2 \]
+\[ \text{unter}\quad y_1+y_2 \ge 0{,}8, \quad 4y_1+2y_2 \ge 2{,}0, \quad \vek{y}\ge\vek{0} \]
+
+\schritt{Die Bedeutung der Bedingungen}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+$y_1+y_2\ge0{,}8$ & Ein Eingriff $A$ braucht eine OP-Stunde und einen Bettentagsatz; zusammen müssen sie mindestens $0{,}8$ wert sein.\\
+$4y_1+2y_2\ge2{,}0$ & Entsprechend für Eingriff $B$.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Lösen}
+Die Ecken des dualen zulässigen Bereichs:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.2cm}@{}}
+\toprule
+\textbf{Punkt} & \textbf{Bedingung} & \textbf{Wert}\\
+\midrule
+$y_1=0$ & $y_2 \ge 1$ & $60$\\
+$y_2=0$ & $y_1 \ge 0{,}8$ & $64$\\
+Schnitt & $(0{,}2;\ 0{,}6)$ & $\mathbf{52}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zum Schnittpunkt:} Aus $y_2 = 0{,}8-y_1$ und $4y_1+2(0{,}8-y_1) = 2$:
+\[ 4y_1 + 1{,}6 - 2y_1 = 2 \quad\Longrightarrow\quad 2y_1 = 0{,}4 \quad\Longrightarrow\quad y_1 = 0{,}2,\ y_2 = 0{,}6 \]
+\[ 80\cdot0{,}2 + 60\cdot0{,}6 = 16+36 = 52 \]
+
+\kursiv{Zur ersten Zeile:} Bei $y_1=0$ verlangen die Bedingungen $y_2 \ge 0{,}8$ und $2y_2 \ge 2$, also $y_2 \ge 1$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der duale Optimalwert ist $52$ --- genau der primale. Und die duale Lösung $(0{,}2;\ 0{,}6)$ sind die Schattenpreise aus Kapitel~3.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Schwache Dualität}
+
+\begin{merksatz}
+\boxtitel{Satz 4.2}
+Ist $\vek{x}$ primal zulässig und $\vek{y}$ dual zulässig, so gilt
+\[ \vek{c}^{\!\top}\vek{x} \ \le\ \vek{b}^{\!\top}\vek{y} . \]
+
+\schritt{Beweis}
+\begin{align*}
+\vek{c}^{\!\top}\vek{x} = \sum_j c_j x_j
+&\ \le\ \sum_j\left(\sum_i y_i a_{ij}\right)x_j && \textcircled{1}\\
+&\ =\ \sum_i y_i\left(\sum_j a_{ij}x_j\right) && \textcircled{2}\\
+&\ \le\ \sum_i y_i\,b_i \;=\; \vek{b}^{\!\top}\vek{y} && \textcircled{3}
+\end{align*}
+
+\schritt{Wo die Voraussetzungen eingehen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{1.2cm}P{3.0cm}P{3.6cm}@{}}
+\toprule
+& \textbf{Benutzt} & \textbf{Warum erlaubt}\\
+\midrule
+\textcircled{1} & $\sum_i y_ia_{ij}\ge c_j$ & $x_j \ge 0$\\
+\textcircled{2} & nur Umsortieren & endliche Summen\\
+\textcircled{3} & $\sum_j a_{ij}x_j \le b_i$ & $y_i \ge 0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide Nichtnegativitätsbedingungen werden gebraucht, und zwar über Kreuz: Die primale Nichtnegativität $\vek{x}\ge\vek{0}$ rechtfertigt den Schritt mit der \kursiv{dualen} Bedingung, die duale $\vek{y}\ge\vek{0}$ den Schritt mit der \kursiv{primalen}. Lässt man eine weg, bricht der Beweis.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Drei Folgerungen --- ohne weiteren Beweis}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Optimalitäts\-nachweis} & Stimmen die Werte eines primal und eines dual zulässigen Punkts überein, so sind beide optimal.\\
+\textbf{Unbeschränkt} & Ist das primale Problem unbeschränkt, so ist das duale unzulässig.\\
+\textbf{Umgekehrt} & Ist das duale unbeschränkt, so ist das primale unzulässig.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Sei $\vek{c}^{\!\top}\vek{x}_0 = \vek{b}^{\!\top}\vek{y}_0$. Für jedes primal zulässige $\vek{x}$ gilt nach Satz 4.2
+\[ \vek{c}^{\!\top}\vek{x} \le \vek{b}^{\!\top}\vek{y}_0 = \vek{c}^{\!\top}\vek{x}_0 , \]
+also ist $\vek{x}_0$ primal optimal. Entsprechend für $\vek{y}_0$. \checkmark
+
+\schritt{Zur zweiten Zeile}
+Gäbe es ein dual zulässiges $\vek{y}$, so wäre $\vek{b}^{\!\top}\vek{y}$ eine endliche obere Schranke für alle primalen Werte --- im Widerspruch zur Unbeschränktheit. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Folgerung ist das praktisch wichtigste Ergebnis dieses Kapitels. Sie macht Optimalität \kursiv{prüfbar}: Man braucht zwei Zahlen und muss nichts über das Verfahren wissen, das sie erzeugt hat. In der Praxis nutzt man das zur unabhängigen Kontrolle --- ein Programm, das eine Lösung ausgibt, sollte stets auch die duale Lösung liefern.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Starke Dualität}
+
+\begin{merksatz}
+\boxtitel{Satz 4.3 --- der Hauptsatz der linearen Optimierung}
+Hat das primale Problem eine optimale Lösung, so auch das duale, und die Optimalwerte stimmen überein:
+\[ \max\ \vek{c}^{\!\top}\vek{x} = \min\ \vek{b}^{\!\top}\vek{y} . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- aus dem Endtableau}
+\schritt{Schritt 1 --- Was das Endtableau sagt}
+Bricht das Simplexverfahren ab, so lautet die $z$-Zeile
+\[ z + \sum_{i} y_i\,s_i + \sum_j d_j\,x_j = z^{*} \]
+mit \kursiv{allen} Koeffizienten $y_i \ge 0$ und $d_j \ge 0$ --- das ist gerade die Abbruchbedingung.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wir \kursiv{definieren} $\vek{y}$ als die Koeffizienten der Schlupfvariablen in dieser Zeile. Zu zeigen ist, dass dieses $\vek{y}$ dual zulässig ist und den Wert $z^{*}$ hat.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die Schlupfvariablen ersetzen}
+Es ist $s_i = b_i - \sum_j a_{ij}x_j$ und $z = \sum_j c_jx_j$. Einsetzen:
+\[ \sum_j c_jx_j + \sum_i y_i\Bigl(b_i - \sum_j a_{ij}x_j\Bigr) + \sum_j d_jx_j = z^{*} \]
+
+\schritt{Schritt 3 --- Nach $x_j$ sortieren}
+\[ \underbrace{\sum_i y_ib_i}_{\text{konstant}} + \sum_j \underbrace{\Bigl(c_j - \sum_i y_ia_{ij} + d_j\Bigr)}_{=:\ \gamma_j} x_j = z^{*} \]
+
+\schritt{Schritt 4 --- Der Koeffizientenvergleich}
+Diese Gleichung gilt für \kursiv{alle} $\vek{x}$ --- sie ist durch die Umformungen des Verfahrens entstanden und enthält keine Annahme über $\vek{x}$.
+
+Setzt man $\vek{x}=\vek{0}$, so folgt
+\[ \sum_i y_ib_i = z^{*} , \qquad\text{also}\qquad \vek{b}^{\!\top}\vek{y} = z^{*} . \]
+
+Setzt man nacheinander $x_j = 1$ und alle übrigen null, so folgt $\gamma_j = 0$ für jedes $j$:
+\[ c_j - \sum_i y_ia_{ij} + d_j = 0 \quad\Longrightarrow\quad \sum_i y_i a_{ij} = c_j + d_j . \]
+
+\schritt{Schritt 5 --- Duale Zulässigkeit}
+Da $d_j \ge 0$:
+\[ \sum_i y_i a_{ij} = c_j + d_j \ \ge\ c_j \qquad\text{für alle } j , \]
+also $A^{\!\top}\vek{y}\ge\vek{c}$. Und $\vek{y}\ge\vek{0}$ nach Schritt 1.
+
+\textbf{$\vek{y}$ ist dual zulässig.}
+
+\schritt{Schritt 6 --- Schluss}
+Wir haben ein primal zulässiges $\vek{x}^{*}$ mit $\vek{c}^{\!\top}\vek{x}^{*} = z^{*}$ und ein dual zulässiges $\vek{y}$ mit $\vek{b}^{\!\top}\vek{y} = z^{*}$.
+
+Nach der ersten Folgerung aus Satz 4.2 sind beide optimal. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis beantwortet zugleich die Frage aus Kapitel~3, woher die Zahlen der $z$-Zeile kommen: \textbf{Sie \kursiv{sind} die duale Lösung.} Das Simplexverfahren löst beide Probleme gleichzeitig --- man muss nur wissen, wo man hinschauen muss.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der komplementäre Schlupf}
+
+\begin{merksatz}
+\boxtitel{Satz 4.4}
+Seien $\vek{x}$ primal und $\vek{y}$ dual zulässig. Beide sind genau dann optimal, wenn für alle $i$ und $j$ gilt:
+\[ y_i > 0 \ \Longrightarrow\ \sum_j a_{ij}x_j = b_i \qquad\text{und}\qquad x_j > 0 \ \Longrightarrow\ \sum_i y_ia_{ij} = c_j . \]
+
+\schritt{Beweisidee}
+Im Beweis von Satz 4.2 wurden zwei Ungleichungen benutzt. Gleichheit gilt genau dann, wenn beide mit Gleichheit erfüllt sind:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+Schritt \textcircled{1} & $\sum_j\bigl(\sum_i y_ia_{ij}-c_j\bigr)x_j = 0$. Alle Summanden sind $\ge 0$, also muss jeder null sein.\\
+Schritt \textcircled{3} & $\sum_i y_i\bigl(b_i-\sum_j a_{ij}x_j\bigr) = 0$. Ebenso.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Ein Produkt zweier nichtnegativer Zahlen ist genau dann null, wenn mindestens ein Faktor null ist. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{In Worten}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Vorrat mit ungenutztem Rest ist wertlos. Eine Tätigkeit, die ausgeführt wird, wirft genau null Gewinn ab.}
+\end{minipage}
+\end{center}
+
+\schritt{Am Leitfall geprüft}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+& \textbf{Wert} & \textbf{Folgerung}\\
+\midrule
+$a = 40 > 0$ & & $y_1+y_2 = 0{,}8$?\\
+& $0{,}2+0{,}6$ & $= 0{,}8$ \checkmark\\
+$b = 10 > 0$ & & $4y_1+2y_2 = 2{,}0$?\\
+& $0{,}8+1{,}2$ & $= 2{,}0$ \checkmark\\
+$y_1 = 0{,}2>0$ & & OP-Zeit voll?\\
+& $40+40$ & $= 80$ \checkmark\\
+$y_2 = 0{,}6>0$ & & Betten voll?\\
+& $40+20$ & $= 60$ \checkmark\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle vier Bedingungen sind erfüllt --- damit ist die Optimalität beider Lösungen nachgewiesen, ohne dass man ein Verfahren durchlaufen müsste. Man braucht nur die beiden Lösungen und vier Nachrechnungen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wozu man das benutzt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Prüfen} & Eine behauptete Lösung wird ohne Neurechnung bestätigt oder widerlegt.\\
+\textbf{Ergänzen} & Kennt man die primale Lösung, so bestimmt der komplementäre Schlupf die duale --- Aufgabe 4.2.\\
+\textbf{Verfahren bauen} & Innere-Punkte-Verfahren arbeiten damit, indem sie die Produkte nicht auf null, sondern auf einen kleinen Wert setzen und diesen absenken. Kapitel~9.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Vier Kombinationen --- drei davon möglich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.2cm}P{1.6cm}@{}}
+\toprule
+\textbf{primal} & \textbf{dual} & \textbf{möglich?} & \\
+\midrule
+optimal & optimal & \textcolor{gruen}{ja} & Satz 4.3\\
+unbeschränkt & unzulässig & \textcolor{gruen}{ja} & \\
+unzulässig & unbeschränkt & \textcolor{gruen}{ja} & \\
+unzulässig & unzulässig & \textcolor{gruen}{ja} & \textcolor{mittel}{selten}\\
+\midrule
+optimal & unzulässig & \textcolor{akzent}{nein} & Satz 4.3\\
+unbeschränkt & unbeschränkt & \textcolor{akzent}{nein} & Satz 4.2\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die vierte Zeile --- beide unzulässig}
+\[ \max\ 2x_1-x_2 \quad\text{unter}\quad x_1-x_2 \le 1,\quad -x_1+x_2 \le -2,\quad \vek{x}\ge\vek{0} \]
+
+\kursiv{Primal:} Die zweite Bedingung besagt $x_1-x_2 \ge 2$, die erste $x_1-x_2 \le 1$. Widerspruch.
+
+\kursiv{Dual:} $\min\ y_1-2y_2$ unter $y_1-y_2 \ge 2$ und $-y_1+y_2 \ge -1$, also $y_1-y_2 \le 1$. Wieder Widerspruch.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Fall kommt in der Praxis kaum vor, ist aber wichtig für die genaue Formulierung von Satz 4.3: Die starke Dualität setzt voraus, dass \kursiv{eines} der beiden Probleme eine Lösung hat. Ohne diese Voraussetzung wäre die Aussage falsch.}
+\end{minipage}
+\end{center}
+
+\schritt{Die beiden unmöglichen Zeilen}
+\kursiv{Optimal und unzulässig:} Widerspricht Satz 4.3 unmittelbar.
+
+\kursiv{Beide unbeschränkt:} Gäbe es zu beiden zulässige Punkte, so wäre nach Satz 4.2 jeder duale Wert eine obere Schranke für jeden primalen --- beides kann nicht unbeschränkt sein.
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und eine Falle bei der Bildung des Dualen}
+Die Regeln aus Definition 4.1 gelten für die Normalform. Weicht man davon ab, kehren sich Vorzeichen und Richtungen um.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Primale Bedingung} & \textbf{Duale Variable}\\
+\midrule
+$\vek{a}^{\!\top}\vek{x} \le b_i$ & $y_i \ge 0$\\
+$\vek{a}^{\!\top}\vek{x} \ge b_i$ & $y_i \le 0$\\
+$\vek{a}^{\!\top}\vek{x} = b_i$ & $y_i$ \textcolor{mittel}{frei}\\
+\midrule
+\textbf{Primale Variable} & \textbf{Duale Bedingung}\\
+\midrule
+$x_j \ge 0$ & $\ge c_j$\\
+$x_j$ frei & $= c_j$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Merkregel: Eine Gleichung erzeugt eine freie Variable, eine freie Variable erzeugt eine Gleichung. Der sicherste Weg, Fehler zu vermeiden, ist die Umformung in die Normalform vor der Dualisierung --- oder die Probe mit der schwachen Dualität an einem konkreten Zahlenpaar.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Probe, die immer funktioniert}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man nehme irgendeinen primal zulässigen Punkt und irgendeinen dual zulässigen. Ergibt der primale Wert mehr als der duale, so wurde falsch dualisiert.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Duales aufstellen und lösen}
+Bilden Sie das duale Problem zu
+\[ \max\ 5x_1+4x_2 \quad\text{unter}\quad 6x_1+4x_2 \le 24,\quad x_1+2x_2 \le 6,\quad \vek{x}\ge\vek{0} \]
+und lösen Sie es.
+
+\loesung
+\schritt{Schritt 1 --- Das Duale}
+\[ \min\ 24\,y_1+6\,y_2 \]
+\[ \text{unter}\quad 6y_1+y_2 \ge 5, \quad 4y_1+2y_2 \ge 4, \quad \vek{y}\ge\vek{0} \]
+
+\kursiv{Zur Kontrolle:} Die erste duale Bedingung kommt von der ersten \kursiv{Spalte} von $A$, also von $x_1$: Koeffizienten $6$ und $1$, rechte Seite $c_1=5$. \checkmark
+
+\schritt{Schritt 2 --- Die Ecken}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{2.2cm}@{}}
+\toprule
+\textbf{Punkt} & \textbf{Bedingung} & \textbf{Wert}\\
+\midrule
+$y_1=0$ & $y_2 \ge \max(5,2)=5$ & $30$\\
+$y_2=0$ & $y_1 \ge \max(\tfrac56,1)=1$ & $24$\\
+Schnitt & $(\tfrac34;\ \tfrac12)$ & $\mathbf{21}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Schnittpunkt:} Aus $4y_1+2y_2=4$ folgt $y_2 = 2-2y_1$. Einsetzen:
+\[ 6y_1 + 2 - 2y_1 = 5 \quad\Longrightarrow\quad 4y_1 = 3 \quad\Longrightarrow\quad y_1 = \tfrac34,\ y_2 = \tfrac12 \]
+\[ 24\cdot\tfrac34 + 6\cdot\tfrac12 = 18+3 = 21 \]
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Lösung} & \textbf{Wert}\\
+\midrule
+primal & $(3;\ 1{,}5)$ & $21$\\
+dual & $(0{,}75;\ 0{,}5)$ & $21$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Gleiche Werte --- starke Dualität bestätigt.} \checkmark
+
+\schritt{Schritt 4 --- Die Probe mit schwacher Dualität}
+Wir prüfen an einem \kursiv{nicht} optimalen Paar. Primal $(4,0)$: zulässig ($24 \le 24$, $4 \le 6$), Wert $20$.
+
+Dual $(1,0)$: zulässig ($6 \ge 5$, $4 \ge 4$), Wert $24$.
+
+\[ 20 \le 24 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Der Abstand zwischen $20$ und $24$ heißt \Begriff{Dualitätslücke}. Er misst, wie weit man von der Optimalität höchstens entfernt ist --- ohne dass man den Optimalwert kennen müsste. Verfahren, die vorzeitig abgebrochen werden, berichten genau diese Größe.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Vergleich mit Kapitel 3}
+Die duale Lösung $(\frac34;\ \frac12)$ ist genau die $z$-Zeile des Endtableaus aus Aufgabe 3.1 unter den Schlupfspalten. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Optimalität prüfen ohne zu rechnen}
+Jemand behauptet, für
+\[ \max\ 3x_1+2x_2+4x_3 \quad\text{unter}\quad x_1+x_2+2x_3 \le 4,\quad 2x_1+3x_3 \le 5,\quad \vek{x}\ge\vek{0} \]
+sei $\vek{x} = (0;\ 4;\ 0)$ optimal. Prüfen Sie das.
+
+\loesung
+\schritt{Schritt 1 --- Zulässigkeit}
+\[ 0+4+0 = 4 \le 4 \ \checkmark \qquad 0+0 = 0 \le 5 \ \checkmark \]
+Zielwert: $2\cdot4 = 8$.
+
+\schritt{Schritt 2 --- Das Duale}
+\[ \min\ 4y_1+5y_2 \]
+\[ y_1+2y_2 \ge 3, \qquad y_1 \ge 2, \qquad 2y_1+3y_2 \ge 4, \qquad \vek{y}\ge\vek{0} \]
+
+\schritt{Schritt 3 --- Was der komplementäre Schlupf verlangt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+$x_2 = 4 > 0$ & Die zweite duale Bedingung muss straff sein: $y_1 = 2$.\\
+Zweite primale Bedingung hat Schlupf $5$ & Also muss $y_2 = 0$ sein.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Den Kandidaten prüfen}
+$\vek{y} = (2;\ 0)$. Ist er dual zulässig?
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Bedingung} & \textbf{Wert} & \\
+\midrule
+$y_1+2y_2 \ge 3$ & $2$ & \textcolor{akzent}{$2 < 3$}\\
+$y_1 \ge 2$ & $2$ & \checkmark\\
+$2y_1+3y_2 \ge 4$ & $4$ & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die erste Bedingung ist verletzt --- die Behauptung ist falsch.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Wo die Verbesserung liegt}
+Die verletzte Bedingung gehört zu $x_1$. Das bedeutet: $x_1$ bringt mehr ein, als es an Vorräten verbraucht --- man sollte es einsetzen.
+
+\kursiv{Versuch:} $x_1$ erhöhen und $x_2$ entsprechend senken, damit die erste Bedingung straff bleibt: $x_1 = t$, $x_2 = 4-t$.
+\[ z = 3t + 2(4-t) = 8+t \]
+Die zweite Bedingung: $2t \le 5$, also $t \le 2{,}5$.
+
+\[ t = 2{,}5: \quad \vek{x} = (2{,}5;\ 1{,}5;\ 0), \quad z = 10{,}5 \]
+
+\schritt{Schritt 6 --- Ist das nun optimal?}
+Beide primalen Bedingungen sind straff ($4$ und $5$), beide $x_1,x_2>0$, also müssen beide zugehörigen dualen Bedingungen straff sein:
+\[ y_1+2y_2 = 3, \qquad y_1 = 2 \quad\Longrightarrow\quad y_2 = 0{,}5 \]
+
+\kursiv{Dritte duale Bedingung prüfen:} $2\cdot2 + 3\cdot0{,}5 = 5{,}5 \ge 4$ \checkmark\\
+\kursiv{Nichtnegativität:} \checkmark\\
+\kursiv{Dualer Wert:} $4\cdot2 + 5\cdot0{,}5 = 8+2{,}5 = 10{,}5$ \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Primaler und dualer Wert stimmen überein: $(2{,}5;\ 1{,}5;\ 0)$ ist optimal.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert ist der Weg: Der komplementäre Schlupf hat nicht nur die falsche Behauptung widerlegt, sondern auch gezeigt, \kursiv{wo} sie falsch war --- bei $x_1$ --- und damit den Weg zur richtigen Lösung gewiesen. Das ist im Kern der Schritt des Simplexverfahrens, nur von der dualen Seite her gelesen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Warum $x_3 = 0$ bleibt}
+Die dritte duale Bedingung ist \kursiv{nicht} straff ($5{,}5 > 4$). Nach dem komplementären Schlupf muss dann $x_3 = 0$ sein.
+
+\kursiv{Deutung:} Eingriff $3$ verbraucht Vorräte im Wert von $5{,}5$ und bringt nur $4$ --- er lohnt sich nicht.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Schranken ohne Lösung}
+Für
+\[ \max\ 4x_1+3x_2 \quad\text{unter}\quad 2x_1+x_2 \le 10,\quad x_1+3x_2 \le 15,\quad \vek{x}\ge\vek{0} \]
+bestimmen Sie durch Wahl dualer Punkte möglichst gute obere Schranken, ohne das Problem zu lösen.
+
+\loesung
+\schritt{Schritt 1 --- Die duale Zulässigkeit}
+\[ 2y_1+y_2 \ge 4, \qquad y_1+3y_2 \ge 3, \qquad \vek{y}\ge\vek{0} \]
+Zu minimieren: $10y_1+15y_2$.
+
+\schritt{Schritt 2 --- Erster Versuch}
+$\vek{y} = (2;\ 1)$: $4+1 = 5 \ge 4$ \checkmark; $2+3 = 5 \ge 3$ \checkmark
+\[ \text{Schranke: } 20+15 = 35 \]
+
+\schritt{Schritt 3 --- Zweiter Versuch}
+$\vek{y} = (2;\ 0)$: $4 \ge 4$ \checkmark; $2 \ge 3$? \textcolor{akzent}{Nein.} Unzulässig.
+
+$\vek{y} = (2;\ \frac13)$: $4+\frac13 = 4{,}33 \ge 4$ \checkmark; $2+1 = 3 \ge 3$ \checkmark
+\[ \text{Schranke: } 20+5 = 25 \]
+
+\schritt{Schritt 4 --- Dritter Versuch: den Schnittpunkt}
+Beide Bedingungen straff:
+\[ 2y_1+y_2 = 4, \qquad y_1+3y_2 = 3 \]
+Erste mal $3$ minus zweite:
+\[ 6y_1+3y_2 - y_1-3y_2 = 12-3 \quad\Longrightarrow\quad 5y_1 = 9 \quad\Longrightarrow\quad y_1 = 1{,}8 \]
+\[ y_2 = 4-2\cdot1{,}8 = 0{,}4 \]
+\[ \text{Schranke: } 18+6 = 24 \]
+
+\schritt{Schritt 5 --- Die Schranken im Überblick}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$\vek{y}$ & \textbf{zulässig} & \textbf{Schranke}\\
+\midrule
+$(2;\ 1)$ & ja & $35$\\
+$(2;\ \tfrac13)$ & ja & $25$\\
+$(1{,}8;\ 0{,}4)$ & ja & $\mathbf{24}$\\
+$(2;\ 0)$ & \textcolor{akzent}{nein} & ---\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 6 --- Eine untere Schranke}
+Jeder zulässige primale Punkt liefert eine. Etwa $(3;\ 4)$: $6+4=10 \le 10$ \checkmark; $3+12 = 15 \le 15$ \checkmark
+\[ z = 12+12 = 24 \]
+
+\schritt{Schritt 7 --- Der Schluss}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Untere Schranke $24$, obere Schranke $24$ --- also ist $24$ der Optimalwert, und $(3;\ 4)$ ist optimal.}
+\end{minipage}
+\end{center}
+
+\kursiv{Probe über den komplementären Schlupf:}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Bedingung} & \\
+\midrule
+$x_1=3>0$ & $2y_1+y_2=4$ & $3{,}6+0{,}4$ \checkmark\\
+$x_2=4>0$ & $y_1+3y_2=3$ & $1{,}8+1{,}2$ \checkmark\\
+$y_1>0$ & erste voll & $10=10$ \checkmark\\
+$y_2>0$ & zweite voll & $15=15$ \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Aufgabe zeigt das Grundmuster des Optimalitätsnachweises: \textbf{Man klemmt den unbekannten Wert zwischen zwei Schranken ein, bis sie zusammenfallen.} Das ist unabhängig vom Verfahren und funktioniert auch bei Problemen, die man nicht exakt lösen kann --- in Kapitel~11 ist es die Grundlage des Verzweigungsverfahrens.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Anderthalb Stunden bei von Neumann}
+Als \Person{George Dantzig} im Oktober 1947 nach Princeton fuhr, um \Person{John von Neumann} sein neues Verfahren vorzutragen, hatte er einen ausführlichen Vortrag vorbereitet.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Nach Dantzigs eigener Schilderung unterbrach ihn von Neumann nach wenigen Minuten mit den Worten, er solle zur Sache kommen. Dantzig schrieb das Problem in etwa einer Minute an die Tafel. Von Neumann sagte darauf: \enquote{Oh, das!} --- und entwickelte in den folgenden anderthalb Stunden die gesamte Dualitätstheorie.}
+\end{minipage}
+\end{center}
+
+Von Neumann hatte 1928 den Minimax-Satz der Spieltheorie bewiesen und erkannte die Struktur sofort wieder: Ein Zweipersonen-Nullsummenspiel und ein Paar dualer linearer Probleme sind dasselbe.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Zusammenhang ist eng: Der Wert des Spiels entspricht dem gemeinsamen Optimalwert, die optimalen Strategien den Lösungen. Band 21 dieser Reihe geht dem nach.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Beweis}
+Von Neumann veröffentlichte seine Überlegungen nur als internen Bericht. Den ersten vollständigen Beweis der starken Dualität gaben \Person{David Gale}, \Person{Harold Kuhn} und \Person{Albert Tucker} 1951 --- über den Satz von Farkas aus Kapitel~2.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der hier gewählte Beweis über das Endtableau ist kürzer, setzt aber voraus, dass das Simplexverfahren endlich ist. Der Weg über Farkas ist unabhängig davon --- und deshalb der Standardweg in der Theorie. Beide sind vollständig; sie unterscheiden sich darin, was sie voraussetzen.}
+\end{minipage}
+\end{center}
+
+\schritt{Kantorowitsch war früher}
+Die Schattenpreise hatte \Person{Leonid Kantorowitsch} bereits 1939 eingeführt --- er nannte sie \kursiv{auflösende Multiplikatoren}. Dass es sich um die Lösung eines zweiten Optimierungsproblems handelt, sprach er nicht aus.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er sah die ökonomische Bedeutung sehr genau: Die Multiplikatoren sind objektiv bestimmte Knappheitspreise, die sich aus der Technik ergeben und nicht aus einem Markt. Genau das machte seine Arbeit in der Sowjetunion jahrzehntelang verdächtig.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wozu Dualität heute dient}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Gütegarantien} & Jedes vorzeitig abgebrochene Verfahren kann sagen, wie weit es höchstens vom Optimum entfernt ist --- über die Dualitätslücke.\\
+\textbf{Spalten\-erzeugung} & Bei Problemen mit sehr vielen Spalten erzeugt man sie nach Bedarf: Die duale Lösung sagt, welche Spalte sich lohnt.\\
+\textbf{Zerlegung} & Große Probleme werden in Teilprobleme zerlegt, die über duale Preise gekoppelt werden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Bei der Dienstplanung ist jede Spalte ein vollständiger zulässiger Wochenplan für eine Person. Davon gibt es Millionen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man beginnt mit wenigen und fragt nach jedem Lösungsschritt: Gibt es einen Plan, dessen dualer Wert seinen Kosten unterlegen ist? Das ist ein eigenes, meist kombinatorisches Teilproblem. Findet man keinen mehr, so beweist der komplementäre Schlupf, dass die aktuelle Lösung über \kursiv{alle} Millionen Spalten optimal ist --- ohne dass man sie je aufgeschrieben hätte.}
+\end{minipage}
+\end{center}
+
+\schritt{Der allgemeine Rahmen}
+Die Dualität ist kein Sonderfall der linearen Optimierung. Sie gilt in erheblich größerer Allgemeinheit --- für konvexe Probleme über die Lagrange-Funktion, die Kapitel~8 einführt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dort allerdings mit einem Vorbehalt: Die starke Dualität gilt nicht mehr immer, sondern nur unter zusätzlichen Bedingungen. Die Lücke zwischen primalem und dualem Optimalwert kann dann positiv bleiben. Bei linearen Problemen ist sie stets null --- eine Besonderheit, die man leicht für selbstverständlich hält.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 4.1} & Zeilen werden Variablen, Spalten Bedingungen\\
+\textbf{Satz 4.2} & schwache Dualität --- zwei Ungleichungen\\
+\textbf{Satz 4.3} & starke Dualität, bewiesen aus dem Endtableau\\
+\textbf{Satz 4.4} & komplementärer Schlupf als Prüfverfahren\\
+\textbf{Vier Fälle} & welche Kombinationen möglich sind\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel fragen wir, was die dualen Zahlen praktisch bedeuten --- und in welchem Bereich sie gelten, bevor sie sich ändern.}
+\end{minipage}
+\end{center}
+\end{merksatz}

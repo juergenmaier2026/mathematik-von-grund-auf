@@ -1,0 +1,790 @@
+\part{Ausbreitung}
+
+\chapter{Das SIR-Modell}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Neustadt}
+Der Erreger aus dem Klinikum hat die Stadt erreicht. Neustadt hat $100\,000$ Einwohner. Eine Person bleibt etwa fünf Tage ansteckend; danach ist sie genesen und nicht mehr empfänglich.
+
+\textbf{Die Fragen:}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Breitet sich der Erreger überhaupt aus?\\
+$2$ & Wann ist der Höhepunkt, und wie viele sind dann gleichzeitig krank?\\
+$3$ & Wie viele erkranken insgesamt?\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle drei Fragen lassen sich mit drei Gleichungen beantworten --- und die Antwort auf die erste hängt an einer einzigen Zahl.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die drei Kammern}
+Man teilt die Bevölkerung in drei Gruppen ein:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\node[draw=tief, thick, rounded corners=2pt, minimum width=1.5cm, minimum height=0.8cm, fill=tief!8] (S) at (-2.6,0) {$S$};
+\node[draw=akzent, thick, rounded corners=2pt, minimum width=1.5cm, minimum height=0.8cm, fill=akzent!10] (I) at (0,0) {$I$};
+\node[draw=gruen, thick, rounded corners=2pt, minimum width=1.5cm, minimum height=0.8cm, fill=gruen!8] (R) at (2.6,0) {$R$};
+\draw[kanted, -{Stealth[length=6pt]}] (S) -- (I) node[midway, above, font=\scriptsize, color=grau] {$\beta SI/N$};
+\draw[kanted, -{Stealth[length=6pt]}] (I) -- (R) node[midway, above, font=\scriptsize, color=grau] {$\gamma I$};
+\node[font=\scriptsize, color=grau] at (-2.6,-0.7) {empfänglich};
+\node[font=\scriptsize, color=grau] at (0,-0.7) {ansteckend};
+\node[font=\scriptsize, color=grau] at (2.6,-0.7) {genesen};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{2.6cm}P{4.4cm}@{}}
+\toprule
+$S$ & \kursiv{susceptible} & noch nicht angesteckt, kann es werden\\
+$I$ & \kursiv{infectious} & angesteckt und ansteckend\\
+$R$ & \kursiv{removed} & genesen oder gestorben --- in beiden Fällen aus dem Geschehen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das $R$ steht für \kursiv{removed}, nicht für \kursiv{recovered}. Das ist keine Wortklauberei: Verstorbene und Genesene sind für die Ausbreitung gleichwertig --- beide stecken niemanden mehr an und können nicht erneut erkranken. Das Modell unterscheidet sie nicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Annahmen --- alle sechs}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{0.7cm}P{7.7cm}@{}}
+\toprule
+$1$ & Die Bevölkerung ist \kursiv{gut durchmischt}: Jeder trifft jeden mit gleicher Wahrscheinlichkeit.\\
+$2$ & Die Gesamtzahl $N = S+I+R$ bleibt fest --- keine Geburten, keine Zuwanderung.\\
+$3$ & Genesene sind dauerhaft geschützt.\\
+$4$ & Es gibt keine Inkubationszeit: Wer angesteckt wird, ist sofort ansteckend.\\
+$5$ & Alle sind gleich ansteckend und gleich empfänglich.\\
+$6$ & Die Ansteckungsrate ist proportional zu $S \cdot I$ --- das Massenwirkungsgesetz aus Kapitel~4.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Keine dieser sechs Annahmen trifft zu. Der Abschnitt über den Bruchfall geht jede einzeln durch. Erstaunlich ist, dass das Modell trotzdem brauchbare Auskünfte gibt --- und wichtig ist zu wissen, welche.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 7.1 --- das SIR-Modell}
+\[ \frac{\dd S}{\dd t} = -\beta\,\frac{S\,I}{N}, \qquad
+\frac{\dd I}{\dd t} = \beta\,\frac{S\,I}{N} - \gamma\,I, \qquad
+\frac{\dd R}{\dd t} = \gamma\,I \]
+mit der \Begriff{Übertragungsrate} $\beta$ und der \Begriff{Genesungsrate} $\gamma$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die beiden Parameter}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{3.0cm}P{3.6cm}@{}}
+\toprule
+$\beta$ & Ansteckungen je Ansteckendem und Zeit, wenn alle empfänglich sind & $\mathrm{d}^{-1}$\\
+$\gamma$ & Anteil der Ansteckenden, der je Zeiteinheit genest & $\mathrm{d}^{-1}$\\
+$1/\gamma$ & \textbf{mittlere Ansteckungsdauer} & Tage\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Warum $1/\gamma$ die Dauer ist}
+Betrachtet man nur die zweite Gleichung ohne Neuansteckungen, so lautet sie $\dd I/\dd t = -\gamma I$ --- der Zerfall aus Kapitel~1. Die mittlere Verweildauer bei exponentiellem Zerfall beträgt $1/\gamma$.
+
+\schritt{Die Probe: Bleibt $N$ fest?}
+\[ \frac{\dd}{\dd t}(S+I+R) = -\beta\frac{SI}{N} + \beta\frac{SI}{N} - \gamma I + \gamma I = 0 . \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Probe sollte man bei jedem Kammermodell durchführen. Summieren sich die Ableitungen nicht zu null, so hat man einen Fluss vergessen oder doppelt gezählt --- der häufigste Fehler beim Aufstellen solcher Modelle.}
+\end{minipage}
+\end{center}
+
+\schritt{Die dritte Gleichung ist überflüssig}
+Da $R = N - S - I$, genügen die ersten beiden. Man führt $R$ trotzdem mit, weil es die Zahl der Genesenen liefert --- und weil die Probe sonst nicht möglich wäre.
+\end{merksatz}
+
+\section{Die Basisreproduktionszahl}
+
+\begin{merksatz}
+\boxtitel{Satz 7.2 --- die Schwellenbedingung}
+Eine Epidemie breitet sich zu Beginn genau dann aus, wenn
+\[ \Rnull \;:=\; \frac{\beta}{\gamma} \;>\; 1 . \]
+
+\schritt{Beweis}
+Ausbreitung bedeutet $\dd I/\dd t > 0$:
+\[ \beta\frac{SI}{N} - \gamma I > 0 \]
+
+Wir klammern $I$ aus --- es ist positiv, also dürfen wir teilen:
+\[ I\left(\beta\frac{S}{N} - \gamma\right) > 0 \quad\Longleftrightarrow\quad \beta\frac{S}{N} > \gamma \quad\Longleftrightarrow\quad \frac{\beta}{\gamma}\cdot\frac{S}{N} > 1 \]
+
+Zu Beginn ist fast die ganze Bevölkerung empfänglich, also $S/N \approx 1$:
+\[ \frac{\beta}{\gamma} > 1 . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was $\Rnull$ bedeutet}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$\Rnull$ ist die mittlere Zahl der Personen, die ein Ansteckender in einer vollständig empfänglichen Bevölkerung ansteckt.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum $\beta/\gamma$ genau das ist}
+Ein Ansteckender steckt je Zeiteinheit $\beta$ Personen an und bleibt im Mittel $1/\gamma$ lang ansteckend:
+\[ \beta \cdot \frac{1}{\gamma} = \frac{\beta}{\gamma} = \Rnull . \]
+
+\schritt{Die effektive Reproduktionszahl}
+Während der Epidemie sind nicht mehr alle empfänglich. Man setzt
+\[ \mathcal{R}_{\text{eff}}(t) = \Rnull\cdot\frac{S(t)}{N} . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{2.8cm}@{}}
+\toprule
+$\mathcal{R}_{\text{eff}}$ & \textbf{Fallzahl} & \\
+\midrule
+$> 1$ & \textcolor{akzent}{steigt} & Epidemie wächst\\
+$= 1$ & \textcolor{mittel}{Höhepunkt} & Wendepunkt\\
+$< 1$ & \textcolor{gruen}{fällt} & Epidemie klingt ab\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die mittlere Zeile ist der Schlüssel zum Rest des Kapitels: Der Höhepunkt liegt genau dort, wo $\mathcal{R}_{\text{eff}} = 1$ wird --- also wo der Anteil der Empfänglichen auf $1/\Rnull$ gefallen ist. Das ist eine Bedingung, die man ausrechnen kann, ohne die Gleichungen zu lösen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Neustädter Zahlen}
+\[ \frac{1}{\gamma} = 5\ \text{Tage} \quad\Longrightarrow\quad \gamma = 0{,}2\ \mathrm{d}^{-1} \]
+\[ \Rnull = 2{,}5 \quad\Longrightarrow\quad \beta = \Rnull\,\gamma = 2{,}5 \cdot 0{,}2 = 0{,}5\ \mathrm{d}^{-1} \]
+
+\schritt{Die Antwort auf Frage 1}
+$\Rnull = 2{,}5 > 1$: \textbf{Die Epidemie breitet sich aus.}
+
+\schritt{Das anfängliche Wachstum}
+Solange $S \approx N$, lautet die zweite Gleichung
+\[ \frac{\dd I}{\dd t} \approx (\beta - \gamma)\,I = 0{,}3\,I \]
+--- exponentielles Wachstum aus Kapitel~1 mit $r = 0{,}3\ \mathrm{d}^{-1}$.
+
+\[ T_2 = \frac{\ln 2}{0{,}3} = 2{,}31\ \text{Tage} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Verdopplungszeit ist die Größe, die in der Frühphase gemessen wird --- die Fallzahlen verdoppeln sich alle zweieinviertel Tage. Aus ihr und der bekannten Ansteckungsdauer lässt sich $\Rnull$ zurückrechnen: $\Rnull = 1 + r/\gamma = 1 + 0{,}3/0{,}2 = 2{,}5$. \checkmark}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Höhepunkt}
+
+\begin{merksatz}
+\boxtitel{Satz 7.3 --- die Höhe des Gipfels}
+Beginnt die Epidemie mit $S_0 \approx N$ und $I_0 \approx 0$, so beträgt der größte gleichzeitige Krankenstand
+\[ \frac{I_{\max}}{N} \;=\; 1 - \frac{1+\ln\Rnull}{\Rnull} . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- die Zeit loswerden}
+\schritt{Schritt 1 --- Zwei Gleichungen dividieren}
+Wir fragen nicht nach $I(t)$, sondern nach $I$ als Funktion von $S$. Dazu teilen wir:
+\[ \frac{\dd I}{\dd S} = \frac{\dd I/\dd t}{\dd S/\dd t} = \frac{\beta\frac{SI}{N} - \gamma I}{-\beta\frac{SI}{N}} \]
+
+Im Zähler $I$ ausklammern, dann durch $\beta SI/N$ kürzen:
+\[ = \frac{I\left(\beta\frac{S}{N}-\gamma\right)}{-\beta\frac{SI}{N}} = -1 + \frac{\gamma N}{\beta S} = -1 + \frac{N}{\Rnull\,S} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Kunstgriff ist, die Zeit durch Division zu beseitigen. Zurück bleibt eine gewöhnliche Differentialgleichung erster Ordnung, die sich unmittelbar integrieren lässt. Das ist derselbe Gedanke wie bei den Bahnkurven in Kapitel~4.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Integrieren}
+\[ I(S) = -S + \frac{N}{\Rnull}\ln S + C \]
+
+\schritt{Schritt 3 --- Die Konstante}
+Bei $S = S_0$ ist $I = I_0$:
+\[ C = I_0 + S_0 - \frac{N}{\Rnull}\ln S_0 \]
+
+\[ I(S) = I_0 + S_0 - S + \frac{N}{\Rnull}\ln\frac{S}{S_0} \]
+
+\schritt{Schritt 4 --- Wo der Gipfel liegt}
+Nach Satz 7.2 ist $\dd I/\dd t = 0$ genau dann, wenn
+\[ S = \frac{N}{\Rnull} . \]
+
+\schritt{Schritt 5 --- Einsetzen}
+Mit $S_0 = N$ und $I_0 = 0$:
+\[ I_{\max} = N - \frac{N}{\Rnull} + \frac{N}{\Rnull}\ln\frac{N/\Rnull}{N} = N - \frac{N}{\Rnull} - \frac{N}{\Rnull}\ln\Rnull \]
+\[ \frac{I_{\max}}{N} = 1 - \frac{1}{\Rnull} - \frac{\ln\Rnull}{\Rnull} = 1 - \frac{1+\ln\Rnull}{\Rnull} . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Antwort auf Frage 2}
+Für $\Rnull = 2{,}5$:
+\[ \ln 2{,}5 = 0{,}9163 \]
+\[ \frac{I_{\max}}{N} = 1 - \frac{1 + 0{,}9163}{2{,}5} = 1 - \frac{1{,}9163}{2{,}5} = 1 - 0{,}7665 = 0{,}2335 \]
+
+\[ I_{\max} = 0{,}2335 \cdot 100\,000 = \mathbf{23\,350} \ \text{gleichzeitig Kranke} . \]
+
+Der Gipfel wird erreicht, wenn $S = N/\Rnull = 40\,000$ --- also wenn $60\,\%$ der Bevölkerung bereits erkrankt oder erkrankend sind.
+
+\schritt{Die Probe durch numerische Lösung}
+Rechnet man die Gleichungen schrittweise durch, so ergibt sich der Gipfel am Tag $32{,}1$ mit $23\,367$ Kranken --- gegen $23\,348$ aus der Formel. Die Abweichung von $0{,}1\,\%$ stammt daher, dass die Epidemie mit zehn statt null Kranken begann. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert ist, was die Formel \kursiv{nicht} liefert: den Zeitpunkt. Er hängt vom Ausgangswert $I_0$ ab und lässt sich nicht geschlossen angeben. Die Höhe des Gipfels ist von $I_0$ praktisch unabhängig, sein Zeitpunkt nicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Endgröße}
+
+\begin{merksatz}
+\boxtitel{Satz 7.4 --- wie viele insgesamt erkranken}
+Sei $s_\infty = S_\infty/N$ der Anteil, der nie erkrankt. Dann gilt
+\[ s_\infty = e^{-\Rnull\,(1-s_\infty)} . \]
+
+\schritt{Beweis}
+Am Ende ist $I = 0$. Aus der Gleichung in Schritt 3 des vorigen Beweises, mit $S_0 = N$ und $I_0 = 0$:
+\[ 0 = N - S_\infty + \frac{N}{\Rnull}\ln\frac{S_\infty}{N} \]
+
+Durch $N$ teilen und $s_\infty = S_\infty/N$ setzen:
+\[ 0 = 1 - s_\infty + \frac{1}{\Rnull}\ln s_\infty \]
+\[ \ln s_\infty = -\Rnull\,(1-s_\infty) \]
+\[ s_\infty = e^{-\Rnull(1-s_\infty)} . \qquad \blacksquare \]
+
+\schritt{Warum man das nicht auflösen kann}
+Die Unbekannte steht innerhalb und außerhalb der Exponentialfunktion. Eine solche Gleichung hat keine geschlossene Lösung in den Grundfunktionen; man löst sie durch Iteration.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Antwort auf Frage 3}
+Wir lösen $s = e^{-2{,}5(1-s)}$ durch wiederholtes Einsetzen, beginnend bei $s = 0{,}5$:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.2cm}P{2.0cm}P{1.2cm}P{2.0cm}@{}}
+\toprule
+Schritt & $s$ & Schritt & $s$\\
+\midrule
+$0$ & $0{,}5000$ & $5$ & $0{,}1140$\\
+$1$ & $0{,}2865$ & $10$ & $0{,}1075$\\
+$2$ & $0{,}1665$ & $20$ & $0{,}1073$\\
+$3$ & $0{,}1244$ & $\infty$ & $\mathbf{0{,}1073}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Das Ergebnis}
+\[ s_\infty = 0{,}1073 \quad\Longrightarrow\quad \text{Befallsrate} = 1 - 0{,}1073 = \mathbf{89{,}3\,\%} \]
+
+Rund $89\,300$ Menschen erkranken; etwa $10\,700$ bleiben verschont.
+
+\schritt{Die Probe}
+\[ e^{-2{,}5(1-0{,}1073)} = e^{-2{,}5 \cdot 0{,}8927} = e^{-2{,}2318} = 0{,}1073 . \quad \checkmark \]
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Das Überschwingen --- der wichtigste Befund dieses Kapitels}
+Die Herdenschwelle liegt bei
+\[ 1 - \frac{1}{\Rnull} = 1 - \frac{1}{2{,}5} = 0{,}60 , \]
+also bei $60\,\%$. Ab dort sinkt $\mathcal{R}_{\text{eff}}$ unter eins und die Fallzahlen fallen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Trotzdem erkranken am Ende $89{,}3\,\%$ --- fast dreißig Prozentpunkte mehr als nötig.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+Beim Erreichen der Schwelle sind noch $23\,350$ Menschen ansteckend. Diese stecken weiter an --- nur eben jeder weniger als einen. Die Epidemie klingt ab, aber sie hört nicht sofort auf.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man nennt das den \Begriff{Überschwingeffekt}. Er ist der Grund, warum eine ungebremste Epidemie stets deutlich mehr Menschen befällt, als zum Erreichen der Herdenimmunität nötig wäre. Wer darauf setzt, die Schwelle durch Durchseuchung zu erreichen, bekommt sie nicht --- sondern weit mehr.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Größe des Überschwingens}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.2cm}P{1.8cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+$\Rnull$ & \textbf{Schwelle} & \textbf{Endgröße} & \textbf{Über\-schwingen}\\
+\midrule
+$1{,}2$ & $16{,}7\,\%$ & $31{,}4\,\%$ & $14{,}7$ Punkte\\
+$1{,}5$ & $33{,}3\,\%$ & $58{,}3\,\%$ & $24{,}9$\\
+$2{,}0$ & $50{,}0\,\%$ & $79{,}7\,\%$ & \textbf{$29{,}7$}\\
+$2{,}5$ & $60{,}0\,\%$ & $89{,}3\,\%$ & $29{,}3$\\
+$3{,}0$ & $66{,}7\,\%$ & $94{,}0\,\%$ & $27{,}4$\\
+$6{,}0$ & $83{,}3\,\%$ & $99{,}7\,\%$ & $16{,}4$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Überschwingen ist bei $\Rnull \approx 2$ am größten. Bei sehr kleinem $\Rnull$ ist die Epidemie ohnehin schwach; bei sehr großem sind am Ende fast alle befallen, so dass wenig Raum zum Überschwingen bleibt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Der Verlauf in Neustadt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.4cm}P{2.0cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Tag} & $S$ & $I$ & $R$\\
+\midrule
+$0$ & $99\,990$ & $10$ & $0$\\
+$10$ & $99\,675$ & $199$ & $126$\\
+$20$ & $93\,879$ & $3\,599$ & $2\,523$\\
+$30$ & $50\,870$ & $22\,108$ & $27\,023$\\
+$\mathbf{32}$ & $\mathbf{40\,000}$ & $\mathbf{23\,367}$ & $36\,633$\\
+$40$ & $18\,425$ & $13\,951$ & $67\,624$\\
+$50$ & $12\,294$ & $3\,903$ & $83\,803$\\
+$60$ & $11\,073$ & $939$ & $87\,988$\\
+$100$ & $10\,722$ & $3$ & $89\,275$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (7.4,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.4);
+\foreach \x/\lab in {0/0, 1.4/20, 2.8/40, 4.2/60, 5.6/80, 7.0/100}
+  \node[font=\scriptsize, color=grau] at (\x,-0.32) {\lab};
+\node[font=\scriptsize, color=grau] at (3.6,-0.75) {Tage};
+% S
+\draw[tief, line width=1.3pt]
+  (0,3.2) -- (0.7,3.19) -- (1.4,3.00) .. controls (1.8,2.7) and (2.0,1.9) .. (2.24,1.28)
+  .. controls (2.5,0.75) and (2.8,0.55) .. (3.5,0.40) -- (7.0,0.343);
+% I
+\draw[akzent, line width=1.3pt]
+  (0,0.0) -- (1.0,0.02) .. controls (1.6,0.15) and (2.0,0.45) .. (2.24,0.748)
+  .. controls (2.5,0.68) and (2.8,0.45) .. (3.5,0.125) -- (7.0,0.001);
+% R
+\draw[gruen, line width=1.3pt]
+  (0,0.0) -- (1.4,0.08) .. controls (1.9,0.5) and (2.1,1.0) .. (2.5,1.85)
+  .. controls (2.9,2.5) and (3.3,2.75) .. (4.0,2.82) -- (7.0,2.857);
+\draw[grau!50, dashed] (2.24,0) -- (2.24,3.3);
+\node[font=\scriptsize, color=grau] at (2.24,3.55) {Gipfel};
+\node[font=\scriptsize, color=tief, anchor=west] at (7.1,0.36) {$S$};
+\node[font=\scriptsize, color=akzent, anchor=west] at (7.1,0.05) {$I$};
+\node[font=\scriptsize, color=gruen, anchor=west] at (7.1,2.86) {$R$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie die Tage $20$ bis $30$: Der Anteil der Kranken steigt von $3{,}6$ auf $22{,}1$ Prozent --- in zehn Tagen mehr als das Sechsfache. Das ist die Eigenart exponentiellen Wachstums, das lange unauffällig bleibt und dann binnen weniger Verdopplungszeiten alles überrollt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die sechs Annahmen, einzeln geprüft}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{3.0cm}P{3.0cm}@{}}
+\toprule
+\textbf{Annahme} & \textbf{Verletzung} & \textbf{Folge}\\
+\midrule
+Durch\-mischung & Kontakte sind räumlich und sozial gebündelt & \textcolor{akzent}{Endgröße deutlich überschätzt}\\
+Feste Zahl & Geburten, Zuzug & bei kurzen Epidemien unkritisch\\
+Dauerhafter Schutz & Immunität lässt nach & wiederkehrende Wellen\\
+Keine Inkubation & meist Tage & Gipfel später, Höhe kaum betroffen\\
+Alle gleich & sehr verschieden & \textcolor{akzent}{Schwelle sinkt}\\
+Massen\-wirkung & Verhalten ändert sich & \textcolor{akzent}{$\beta$ ist keine Konstante}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur fünften Zeile --- die wichtigste Abweichung}
+Streuen Ansteckbarkeit und Kontaktzahl stark, so erkranken die Kontaktfreudigsten zuerst. Die verbleibende Bevölkerung ist danach weniger gefährdet, als ihr Anteil vermuten lässt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Herdenschwelle liegt dann unter $1-1/\Rnull$, und die Endgröße unter dem berechneten Wert.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wie stark, hängt von der Streuung ab und ist schwer zu beziffern. Modelle mit starker Heterogenität liefern Schwellen, die deutlich unter der einfachen Formel liegen. Das ist ein Grund, warum die einfache Formel die Endgröße \kursiv{überschätzt} --- und kein Grund, sich darauf zu verlassen, denn die Streuung ist unbekannt.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur sechsten Zeile}
+$\beta$ hängt vom Verhalten ab. Sobald über eine Epidemie berichtet wird, ändert es sich --- Menschen meiden Kontakte, waschen Hände, bleiben zu Hause.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Modell beschreibt eine Bevölkerung, die nicht merkt, was geschieht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die grundlegendste Einschränkung, und keine Verfeinerung der Gleichungen behebt sie: Ein Modell, dessen Vorhersage das Verhalten ändert, sagt nicht mehr das vorher, was ohne es geschehen wäre. Kapitel~15 kommt auf dieses Eigenartige zurück.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und die Empfindlichkeit gegenüber $\Rnull$}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+$\Rnull$ & \textbf{Endgröße} & \textbf{Gipfel}\\
+\midrule
+$2{,}0$ & $79{,}7\,\%$ & $15{,}3\,\%$\\
+$2{,}5$ & $89{,}3\,\%$ & $23{,}3\,\%$\\
+$3{,}0$ & $94{,}0\,\%$ & $30{,}0\,\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Eine Unsicherheit von $\pm 20\,\%$ in $\Rnull$ führt zu einem Gipfel zwischen $15$ und $30$ Prozent --- einer Verdopplung.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Warnung aus dem Vorwort in Zahlen: Genauigkeit ist nicht Richtigkeit. Wer eine Gipfelhöhe von \enquote{$23{,}3$ Prozent} berichtet, gibt eine Genauigkeit vor, die in der Eingangsgröße nicht steckt. Man berichtet Bänder.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.1 --- $\Rnull$ aus Frühdaten schätzen}
+In den ersten Tagen eines Ausbruchs verdoppeln sich die Fallzahlen alle $3{,}5$ Tage. Die mittlere Ansteckungsdauer beträgt $4$ Tage. Bestimmen Sie $\Rnull$, den Gipfel und die Endgröße.
+
+\loesung
+\schritt{Schritt 1 --- Die Wachstumsrate}
+\[ r = \frac{\ln 2}{T_2} = \frac{0{,}6931}{3{,}5} = 0{,}1980\ \mathrm{d}^{-1} \]
+
+\schritt{Schritt 2 --- Die Genesungsrate}
+\[ \gamma = \frac{1}{4} = 0{,}25\ \mathrm{d}^{-1} \]
+
+\schritt{Schritt 3 --- Die Reproduktionszahl}
+In der Frühphase gilt $\dd I/\dd t = (\beta-\gamma)I$, also $r = \beta - \gamma$:
+\[ \beta = r + \gamma = 0{,}1980 + 0{,}25 = 0{,}4480\ \mathrm{d}^{-1} \]
+\[ \Rnull = \frac{\beta}{\gamma} = \frac{0{,}4480}{0{,}25} = 1{,}792 \]
+
+\kursiv{Kurzformel:} $\Rnull = 1 + r/\gamma = 1 + 0{,}1980/0{,}25 = 1{,}792$. \checkmark
+
+\schritt{Schritt 4 --- Der Gipfel}
+\[ \ln 1{,}792 = 0{,}5834 \]
+\[ \frac{I_{\max}}{N} = 1 - \frac{1+0{,}5834}{1{,}792} = 1 - \frac{1{,}5834}{1{,}792} = 1 - 0{,}8836 = 0{,}1164 \]
+
+Etwa $11{,}6\,\%$ der Bevölkerung gleichzeitig krank.
+
+\schritt{Schritt 5 --- Die Endgröße}
+Wir lösen $s = e^{-1{,}792(1-s)}$:
+\begin{center}
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{1.6cm}P{2.0cm}@{}}
+\toprule
+Schritt & $s$ & Schritt & $s$\\
+\midrule
+$0$ & $0{,}500$ & $10$ & $0{,}2748$\\
+$2$ & $0{,}3305$ & $20$ & $0{,}2739$\\
+$5$ & $0{,}2796$ & $\infty$ & $\mathbf{0{,}2739}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\[ \text{Befallsrate} = 1 - 0{,}2739 = 72{,}6\,\% \]
+
+\schritt{Schritt 6 --- Die Probe}
+\[ e^{-1{,}792 \cdot 0{,}7261} = e^{-1{,}3012} = 0{,}2722 \approx 0{,}274 \quad \checkmark \]
+
+\schritt{Schritt 7 --- Die Empfindlichkeit prüfen}
+Die Ansteckungsdauer ist meist unsicher. Wäre sie $5$ statt $4$ Tage:
+\[ \gamma = 0{,}2, \quad \Rnull = 1 + \frac{0{,}198}{0{,}2} = 1{,}990 \]
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Dauer} & $\Rnull$ & \textbf{Endgröße}\\
+\midrule
+$4$ Tage & $1{,}79$ & $72{,}6\,\%$\\
+$5$ Tage & $1{,}99$ & $79{,}5\,\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Ein Tag Unterschied in einer schwer messbaren Größe verändert die vorhergesagte Endgröße um sieben Prozentpunkte. Die Verdopplungszeit ist gut messbar, die Ansteckungsdauer nicht --- und $\Rnull$ hängt von beiden ab.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.2 --- Den Gipfel senken}
+Durch Maßnahmen wird $\beta$ in Neustadt von $0{,}5$ auf $0{,}3$ gesenkt. Wie ändern sich Schwelle, Gipfel und Endgröße?
+
+\loesung
+\schritt{Schritt 1 --- Die neue Reproduktionszahl}
+\[ \Rnull = \frac{0{,}3}{0{,}2} = 1{,}5 \]
+
+\schritt{Schritt 2 --- Der Gipfel}
+\[ \ln 1{,}5 = 0{,}4055 \]
+\[ \frac{I_{\max}}{N} = 1 - \frac{1{,}4055}{1{,}5} = 1 - 0{,}9370 = 0{,}0630 \]
+\[ I_{\max} = 6\,300 \]
+
+\schritt{Schritt 3 --- Die Endgröße}
+$s = e^{-1{,}5(1-s)}$ liefert nach Iteration $s_\infty = 0{,}4172$, also eine Befallsrate von $58{,}3\,\%$.
+
+\schritt{Schritt 4 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+& $\Rnull = 2{,}5$ & $\Rnull = 1{,}5$ & \textbf{Änderung}\\
+\midrule
+Schwelle & $60{,}0\,\%$ & $33{,}3\,\%$ & \\
+Gipfel & $23\,350$ & $\mathbf{6\,300}$ & $-73\,\%$\\
+Endgröße & $89\,300$ & $58\,300$ & $-35\,\%$\\
+Wachstumsrate & $0{,}30$ & $0{,}10$ & $-67\,\%$\\
+Verdopplungs\-zeit & $2{,}3$ d & $6{,}9$ d & $\times 3$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Senkung von $\beta$ um $40\,\%$ senkt den Gipfel um $73\,\%$ --- fast doppelt so stark.}
+\end{minipage}
+\end{center}
+
+Der Grund ist die Nichtlinearität: Der Gipfel hängt über $\ln\Rnull/\Rnull$ von der Reproduktionszahl ab, nicht linear.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist das rechnerische Argument für Maßnahmen zur Gipfelsenkung: Eine mäßige Verringerung der Kontakte wirkt auf den gleichzeitigen Krankenstand überproportional. Die Endgröße sinkt weit weniger --- sie wird vor allem \kursiv{verschoben}, nicht vermieden.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Der Preis}
+Die Verdopplungszeit verdreifacht sich, die Epidemie dauert entsprechend länger. Ein flacherer Gipfel bedeutet stets eine längere Epidemie --- die Fläche unter der Kurve entspricht der Endgröße und sinkt nur um ein Drittel.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.3 --- Die Formel für die Endgröße prüfen}
+Zeigen Sie, dass die Gleichung $s = e^{-\Rnull(1-s)}$ für $\Rnull > 1$ genau zwei Lösungen in $[0,1]$ hat, und dass $s = 1$ stets eine davon ist.
+
+\loesung
+\schritt{Schritt 1 --- Die triviale Lösung}
+Für $s = 1$:
+\[ e^{-\Rnull(1-1)} = e^{0} = 1 = s . \quad \checkmark \]
+
+\kursiv{Bedeutung:} Niemand erkrankt. Das ist die Lösung für den Fall, dass die Epidemie gar nicht beginnt.
+
+\schritt{Schritt 2 --- Die Gleichung umformen}
+Wir setzen
+\[ h(s) = e^{-\Rnull(1-s)} - s \]
+und suchen die Nullstellen von $h$ in $[0,1]$.
+
+\schritt{Schritt 3 --- Die Randwerte}
+\[ h(0) = e^{-\Rnull} - 0 = e^{-\Rnull} > 0 \]
+\[ h(1) = 1 - 1 = 0 \]
+
+\schritt{Schritt 4 --- Die Ableitung}
+\[ h'(s) = \Rnull\,e^{-\Rnull(1-s)} - 1 \]
+\[ h'(1) = \Rnull - 1 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Für $\Rnull > 1$ ist $h'(1) > 0$: Die Funktion \kursiv{steigt} bei $s=1$.} Also war sie kurz vorher negativ.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Zwischenwertsatz}
+$h$ ist stetig, $h(0) > 0$ und $h(s) < 0$ für $s$ knapp unter $1$. Also hat $h$ dazwischen eine Nullstelle.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die gesuchte Lösung: der Anteil, der bei einer tatsächlich ablaufenden Epidemie verschont bleibt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Dass es nur eine weitere gibt}
+\[ h''(s) = \Rnull^2\,e^{-\Rnull(1-s)} > 0 \]
+$h$ ist also überall streng konvex --- nach oben gekrümmt. Eine streng konvexe Funktion hat höchstens zwei Nullstellen.
+
+Zusammen mit Schritt 5: \textbf{genau zwei.} $\blacksquare$
+
+\schritt{Schritt 7 --- Der Fall $\Rnull < 1$}
+Dann ist $h'(1) < 0$, die Funktion \kursiv{fällt} bei $s=1$. Zusammen mit $h(0)>0$ und der Konvexität folgt, dass $h$ auf $[0,1)$ keine Nullstelle hat.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Für $\Rnull < 1$ bleibt nur $s_\infty = 1$: keine Epidemie.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 8 --- Die Einordnung}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\begin{scope}
+\draw[grau!60, line width=0.6pt] (0,0) -- (3.6,0);
+\draw[grau!60, line width=0.6pt] (0,-0.3) -- (0,2.4);
+\draw[tief, line width=1.2pt, smooth, samples=60, domain=0:3.4]
+  plot (\x, {2.2*exp(-2.5*(1-\x/3.4))});
+\draw[akzent, line width=1.0pt] (0,0) -- (3.4,2.2);
+\fill[gruen] (0.365,0.236) circle (2.2pt);
+\fill[gruen] (3.4,2.2) circle (2.2pt);
+\node[font=\scriptsize\itshape, color=grau] at (1.8,-0.65) {$\Rnull = 2{,}5$: zwei Schnitte};
+\end{scope}
+\begin{scope}[xshift=5.0cm]
+\draw[grau!60, line width=0.6pt] (0,0) -- (3.6,0);
+\draw[grau!60, line width=0.6pt] (0,-0.3) -- (0,2.4);
+\draw[tief, line width=1.2pt, smooth, samples=60, domain=0:3.4]
+  plot (\x, {2.2*exp(-0.7*(1-\x/3.4))});
+\draw[akzent, line width=1.0pt] (0,0) -- (3.4,2.2);
+\fill[gruen] (3.4,2.2) circle (2.2pt);
+\node[font=\scriptsize\itshape, color=grau] at (1.8,-0.65) {$\Rnull = 0{,}7$: ein Schnitt};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Der Schwellenwert $\Rnull = 1$ ist damit eine \Begriff{transkritische Bifurkation} im Sinne von Kapitel~6: Bei ihrem Durchschreiten wandert eine zweite Lösung aus dem Bereich $s>1$ herein und wird zur sinnvollen. Die gesamte Epidemiologie hängt an dieser einen Schwelle.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Arzt, ein Chemiker und ein Satz, der übersehen wurde}
+\Person{William Kermack} (1898--1970), Chemiker, und \Person{Anderson McKendrick} (1876--1943), Militärarzt im indischen Sanitätsdienst, veröffentlichten 1927 in den \kursiv{Proceedings of the Royal Society} die Arbeit, die dieses Kapitel behandelt.
+
+Sie enthält das Modell, den Schwellensatz und die Endgrößengleichung --- alles, was hier steht.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Arbeit wurde jahrzehntelang kaum beachtet. Erst in den 1970er Jahren, mit dem Aufkommen der mathematischen Epidemiologie als eigenem Fach, wurde sie zum meistzitierten Aufsatz des Gebiets. Der Schwellensatz gilt heute als eines der wichtigsten Ergebnisse der theoretischen Biologie überhaupt.}
+\end{minipage}
+\end{center}
+
+\schritt{Kermacks Unfall}
+1924, drei Jahre vor der Arbeit, erblindete Kermack bei einem Laborunfall durch eine Laugenexplosion vollständig. Er war sechsundzwanzig.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er arbeitete weitere fünfundvierzig Jahre wissenschaftlich --- Kollegen lasen ihm vor, und er rechnete im Kopf. Zeitgenossen berichteten, seine Fähigkeit, lange Herleitungen ohne Papier zu führen, habe sich nach der Erblindung noch gesteigert. Die Arbeit von 1927 entstand vollständig auf diese Weise.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Vorläufer}
+\Person{Ronald Ross} (1857--1932), Nobelpreisträger für die Entdeckung der Malariaübertragung durch Stechmücken, hatte bereits ab 1911 ähnliche Gleichungen aufgestellt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Ross zog daraus eine praktisch folgenreiche Schlussfolgerung: Man muss die Mücken nicht ausrotten, um die Malaria auszurotten --- es genügt, ihre Zahl unter eine Schwelle zu drücken. Diese Einsicht war damals umstritten und ist die früheste Form des Schwellensatzes.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wo das SIR-Modell heute steht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Als Grundbaustein} & Praktisch jedes Epidemiemodell ist eine Erweiterung: SEIR mit Inkubation, SIRS mit nachlassender Immunität, Altersgruppen, räumliche Struktur.\\
+\textbf{$\Rnull$ als Berichtsgröße} & Hat sich weit über die Fachwelt hinaus verbreitet --- mit allen Missverständnissen, die das mit sich bringt.\\
+\textbf{Netzwerk\-modelle} & Kontakte als Graph statt als Durchmischung. Kapitel~9.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Was an $\Rnull$ regelmäßig missverstanden wird}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textcolor{akzent}{\enquote{Eine Eigenschaft des Erregers}} & Nein --- $\beta$ hängt vom Verhalten und von der Bevölkerungsdichte ab. Derselbe Erreger hat in verschiedenen Gesellschaften verschiedene $\Rnull$.\\
+\textcolor{akzent}{\enquote{Eine feste Zahl}} & Nein --- $\Rnull$ wird geschätzt, mit erheblicher Unsicherheit, und die Schätzung hängt vom Modell ab.\\
+\textcolor{akzent}{\enquote{$\Rnull<1$ heißt sicher}} & Nein --- es heißt, dass die Epidemie im Mittel abklingt. Einzelne Ausbrüche bleiben möglich.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der erste Punkt ist der folgenreichste. $\Rnull$ ist keine Naturkonstante, sondern das Produkt aus Erregereigenschaften \kursiv{und} Gesellschaft. Genau deshalb lässt es sich durch Maßnahmen verändern --- was zugleich bedeutet, dass ein aus einer Bevölkerung geschätzter Wert nicht ohne Weiteres auf eine andere übertragbar ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Schätzung aus Daten}
+Sie ist heikler, als die Formel $\Rnull = 1 + r/\gamma$ vermuten lässt. Sie setzt eine exponentiell verteilte Ansteckungsdauer voraus --- was selten zutrifft. Bei realistischeren Verteilungen ergibt sich aus derselben Wachstumsrate ein anderes $\Rnull$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die allgemeine Beziehung läuft über die Verteilung der Generationszeit. Bei stark gestreuter Generationszeit fällt $\Rnull$ für dieselbe beobachtete Wachstumsrate niedriger aus. Die in Umlauf gebrachten Zahlen hängen daher merklich davon ab, welches Modell ihnen zugrunde lag.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 7.1} & drei Kammern, zwei Parameter\\
+\textbf{Satz 7.2} & $\Rnull = \beta/\gamma$, Schwelle bei $1$\\
+\textbf{Satz 7.3} & $I_{\max}/N = 1 - (1+\ln\Rnull)/\Rnull$\\
+\textbf{Satz 7.4} & Endgröße aus $s = e^{-\Rnull(1-s)}$\\
+\textbf{Überschwingen} & Endgröße weit über der Herdenschwelle\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel geht es um die Frage, wie viele geimpft werden müssen --- und warum die Antwort nicht \enquote{alle} lautet.}
+\end{minipage}
+\end{center}
+\end{merksatz}

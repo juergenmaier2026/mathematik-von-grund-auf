@@ -1,0 +1,687 @@
+\chapter{Diagnostische Tests}
+
+\section{Die Vierfeldertafel der Diagnostik}
+
+\begin{merksatz}
+\boxtitel{Vier Felder, vier Namen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.2cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+& \textbf{krank} & \textbf{gesund}\\
+\midrule
+Test positiv & \textcolor{gruen}{richtig positiv} (RP) & \textcolor{akzent}{falsch positiv} (FP)\\
+Test negativ & \textcolor{akzent}{falsch negativ} (FN) & \textcolor{gruen}{richtig negativ} (RN)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Tafel sieht aus wie die aus Kapitel~7 --- und das ist kein Zufall. Der Fehler erster Art entspricht dem falsch positiven Befund, der zweiter Art dem falsch negativen. Dieses Kapitel zeigt denselben Denkfehler wie dort, nur in klinischer Gestalt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 13.1 --- die vier Kennzahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.65}
+\begin{tabular}{@{}P{3.4cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Name} & \textbf{Formel} & \textbf{Bedingt auf}\\
+\midrule
+Sensitivität & $\dfrac{\mathrm{RP}}{\mathrm{RP}+\mathrm{FN}}$ & \textbf{Krankheit}\\[6pt]
+Spezifität & $\dfrac{\mathrm{RN}}{\mathrm{RN}+\mathrm{FP}}$ & \textbf{Gesundheit}\\[6pt]
+Positiver prädiktiver Wert & $\dfrac{\mathrm{RP}}{\mathrm{RP}+\mathrm{FP}}$ & \textbf{Testergebnis}\\[6pt]
+Negativer prädiktiver Wert & $\dfrac{\mathrm{RN}}{\mathrm{RN}+\mathrm{FN}}$ & \textbf{Testergebnis}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Die rechte Spalte ist der ganze Punkt}
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Sensitivität} & $\Pr[\text{Test positiv} \mid \text{krank}]$ --- man geht von der Krankheit aus.\\
+\textbf{Prädiktiver Wert} & $\Pr[\text{krank} \mid \text{Test positiv}]$ --- man geht vom Befund aus.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das sind verschiedene Größen, und die Verwechslung ist derselbe Fehler wie bei den sieben Fehldeutungen des $p$-Werts:}
+\[ \Pr[D \mid H_0] \quad \text{gegen} \quad \Pr[H_0 \mid D] . \]
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im Sprechzimmer sitzt niemand, von dem man weiß, dass er krank ist --- man kennt den Befund und sucht die Krankheit. Die Sensitivität beantwortet die umgekehrte Frage. Sie ist eine Eigenschaft des Tests, kein Auskunftsmittel über den Menschen vor einem.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Die Prävalenzabhängigkeit --- vorgerechnet}
+
+\begin{merksatz}
+\boxtitel{Ein sehr guter Test, drei Lagen}
+Wir nehmen einen Test mit
+\[ \text{Sensitivität } 99\,\% , \qquad \text{Spezifität } 95\,\% \]
+und wenden ihn auf $10\,000$ Personen an --- bei drei verschiedenen Krankheitshäufigkeiten.
+
+\schritt{Lage 1 --- Reihenuntersuchung, Prävalenz $0{,}1\,\%$}
+Von $10\,000$ Personen sind $10$ krank und $9990$ gesund.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.0cm}P{2.4cm}P{1.8cm}@{}}
+\toprule
+& \textbf{krank} & \textbf{gesund} & \textbf{Summe}\\
+\midrule
+positiv & $9{,}9$ & \textcolor{akzent}{$\mathbf{499{,}5}$} & $509{,}4$\\
+negativ & $0{,}1$ & $9490{,}5$ & $9490{,}6$\\
+\midrule
+\textbf{Summe} & $10$ & $9990$ & $10\,000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Die Rechnung:} $10 \cdot 0{,}99 = 9{,}9$ richtig positive; $9990 \cdot 0{,}05 = 499{,}5$ falsch positive.
+
+\[ \mathrm{PPW} = \frac{9{,}9}{509{,}4} = 0{,}0194 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Von hundert positiven Befunden sind etwa zwei richtig.} Achtundneunzig Personen erhalten eine beunruhigende Nachricht und weitere Untersuchungen, ohne krank zu sein.
+\end{minipage}
+\end{center}
+
+\schritt{Lage 2 --- Verdachtsabklärung, Prävalenz $10\,\%$}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.0cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+& \textbf{krank} & \textbf{gesund} & \textbf{Summe}\\
+\midrule
+positiv & $990$ & $450$ & $1440$\\
+negativ & $10$ & $8550$ & $8560$\\
+\midrule
+\textbf{Summe} & $1000$ & $9000$ & $10\,000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\[ \mathrm{PPW} = \frac{990}{1440} = 0{,}688 \]
+
+\schritt{Lage 3 --- begründeter Verdacht, Prävalenz $50\,\%$}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.0cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+& \textbf{krank} & \textbf{gesund} & \textbf{Summe}\\
+\midrule
+positiv & $4950$ & $250$ & $5200$\\
+negativ & $50$ & $4750$ & $4800$\\
+\midrule
+\textbf{Summe} & $5000$ & $5000$ & $10\,000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\[ \mathrm{PPW} = \frac{4950}{5200} = 0{,}952 \]
+
+\schritt{Die Zusammenstellung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+\textbf{Prävalenz} & \textbf{PPW} & \textbf{NPW} & \\
+\midrule
+$0{,}1\,\%$ & \textcolor{akzent}{$\mathbf{1{,}9\,\%}$} & $99{,}999\,\%$ & \\
+$10\,\%$ & $68{,}8\,\%$ & $99{,}9\,\%$ & \\
+$50\,\%$ & $95{,}2\,\%$ & $99{,}0\,\%$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Sensitivität und Spezifität sind in allen drei Lagen gleich. Der prädiktive Wert schwankt zwischen zwei und fünfundneunzig Prozent.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Woran das liegt --- in einem Satz}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Bei einer Prävalenz von $0{,}1\,\%$ gibt es tausendmal mehr Gesunde als Kranke. Selbst wenn nur fünf Prozent der Gesunden fälschlich positiv ausfallen, sind das fünfzigmal mehr Personen, als es Kranke überhaupt gibt.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\foreach \i in {0,...,49} {
+  \pgfmathsetmacro{\xx}{mod(\i,10)*0.42}
+  \pgfmathsetmacro{\yy}{-floor(\i/10)*0.42}
+  \fill[grau!35] (\xx,\yy) circle (1.5pt);
+}
+\fill[akzent] (0,0) circle (2.6pt);
+\node[font=\scriptsize, color=akzent, anchor=west] at (4.5,0) {ein Kranker};
+\node[font=\scriptsize, color=grau, anchor=west] at (4.5,-0.6) {$49$ falsch Positive};
+\node[font=\scriptsize\itshape, color=grau, anchor=west] at (4.5,-1.3) {so sieht Lage 1 aus};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Grund, warum Reihenuntersuchungen bei seltenen Krankheiten so schwierig sind. Man braucht eine Spezifität, die weit über $99\,\%$ liegt --- und selbst dann bleibt der prädiktive Wert bescheiden. Kein noch so guter Test kann das Zahlenverhältnis überwinden.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Satz von Bayes in der handlichen Form}
+
+\begin{merksatz}
+\boxtitel{Die Chancenform}
+Statt mit Wahrscheinlichkeiten rechnet man handlicher mit Chancen (Definition 11.1).
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\[ \underbrace{\text{Chance nachher}}_{\text{Nachtest}} \;=\; \underbrace{\text{Chance vorher}}_{\text{Vortest}} \;\times\; \underbrace{\mathrm{LQ}}_{\text{Likelihood-Quotient}} \]
+\end{minipage}
+\end{center}
+
+\schritt{Die Likelihood-Quotienten}
+\[ \mathrm{LQ}^{+} = \frac{\text{Sensitivität}}{1-\text{Spezifität}}, \qquad \mathrm{LQ}^{-} = \frac{1-\text{Sensitivität}}{\text{Spezifität}} \]
+
+\schritt{Für unseren Test}
+\[ \mathrm{LQ}^{+} = \frac{0{,}99}{0{,}05} = 19{,}8, \qquad \mathrm{LQ}^{-} = \frac{0{,}01}{0{,}95} = 0{,}0105 \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Lage 1 mit der Chancenform nachgerechnet}
+\schritt{Schritt 1 --- Vortestchance}
+\[ \text{Chance} = \frac{0{,}001}{0{,}999} = 0{,}001001 \]
+
+\schritt{Schritt 2 --- Multiplizieren}
+\[ 0{,}001001 \cdot 19{,}8 = 0{,}019820 \]
+
+\schritt{Schritt 3 --- Zurück in eine Wahrscheinlichkeit}
+\[ \pi = \frac{0{,}019820}{1 + 0{,}019820} = \frac{0{,}019820}{1{,}019820} = 0{,}01943 \]
+
+$1{,}94\,\%$ --- wie in der Tafel. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Vorteil dieser Form: Der Likelihood-Quotient hängt \kursiv{nur vom Test} ab, die Vortestchance \kursiv{nur vom Menschen}. Man kann beide getrennt bestimmen und dann multiplizieren --- und man kann mehrere Tests hintereinander schalten, indem man ihre Quotienten multipliziert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wie stark ein Test ist --- eine Merktabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+$\mathrm{LQ}^{+}$ & \textbf{Wirkung} & \\
+\midrule
+$> 10$ & \textcolor{gruen}{große Änderung} & entscheidend\\
+$5$ bis $10$ & mäßige Änderung & \\
+$2$ bis $5$ & kleine Änderung & \\
+$1$ bis $2$ & \textcolor{akzent}{kaum Änderung} & \textcolor{akzent}{nutzlos}\\
+$= 1$ & \textcolor{akzent}{keine} & \textcolor{akzent}{der Test sagt nichts}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{$\mathrm{LQ} = 1$ bedeutet, dass der Befund bei Kranken und Gesunden gleich häufig ist --- der Test trägt nichts bei. Das kommt häufiger vor, als man denkt, besonders bei Befunden mit mäßiger Spezifität.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die ROC-Kurve}
+
+\begin{merksatz}
+\boxtitel{Wenn der Test eine Zahl liefert}
+Die meisten Tests messen eine stetige Größe und vergleichen sie mit einer Schwelle. Die Schwelle ist frei wählbar --- und jede Wahl liefert ein anderes Paar aus Sensitivität und Spezifität.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{2.8cm}@{}}
+\toprule
+\textbf{Schwelle} & \textbf{Sensitivität} & \textbf{Spezifität}\\
+\midrule
+sehr niedrig & \textcolor{gruen}{hoch} & \textcolor{akzent}{niedrig}\\
+mittel & mittel & mittel\\
+sehr hoch & \textcolor{akzent}{niedrig} & \textcolor{gruen}{hoch}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man kann beides nicht gleichzeitig maximieren.} Die ROC-Kurve macht diesen Tauschhandel sichtbar: Sie trägt die Sensitivität gegen $1-$Spezifität auf, für alle möglichen Schwellen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) rectangle (4.2,4.2);
+\draw[grau!55, dashed, line width=0.8pt] (0,0) -- (4.2,4.2);
+\draw[tief, line width=1.4pt] plot[smooth, samples=40, domain=0:4.2]
+  (\x, {4.2*(1-exp(-1.35*\x/4.2*3.2))});
+\fill[akzent] (0.9,3.05) circle (2.4pt);
+\node[font=\scriptsize, color=akzent, anchor=west] at (1.05,2.85) {eine Schwelle};
+\node[font=\scriptsize, color=grau] at (2.1,-0.4) {$1 - $ Spezifität};
+\node[font=\scriptsize, color=grau, rotate=90] at (-0.45,2.1) {Sensitivität};
+\node[font=\scriptsize\itshape, color=grau] at (3.3,1.3) {Zufall};
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 13.2 --- die Fläche unter der Kurve}
+Die \Begriff{AUC} ist die Fläche unter der ROC-Kurve. Sie liegt zwischen $0{,}5$ (Zufall) und $1$ (vollkommene Trennung).
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was die AUC bedeutet --- und die Verbindung zu Kapitel~9}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die AUC ist die Wahrscheinlichkeit, dass eine zufällig gewählte kranke Person einen höheren Testwert hat als eine zufällig gewählte gesunde.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Verbindung}
+Das ist genau die Überlegenheitswahrscheinlichkeit aus Kapitel~9:
+\[ \mathrm{AUC} = \frac{U}{n_1 \cdot n_2} . \]
+Die AUC und der Mann-Whitney-Test messen dieselbe Größe.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{3.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{AUC} & \textbf{Beurteilung} & \\
+\midrule
+$0{,}5$ & Zufall & nutzlos\\
+$0{,}6$--$0{,}7$ & schwach & \\
+$0{,}7$--$0{,}8$ & brauchbar & \\
+$0{,}8$--$0{,}9$ & gut & \\
+$> 0{,}9$ & sehr gut & \textcolor{mittel}{Verdacht prüfen}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist ernst gemeint: Eine AUC über $0{,}95$ in einer klinischen Anwendung ist häufiger ein Hinweis auf einen Fehler im Aufbau --- etwa dass der Testwert in die Referenzdiagnose eingeflossen ist --- als auf einen außergewöhnlichen Test.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was die AUC nicht leistet}
+\begin{center}
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Keine Schwelle} & Sie fasst alle Schwellen zusammen --- auch die unbrauchbaren. Für die Praxis braucht man eine.\\
+\textbf{Keine Gewichtung} & Sie behandelt falsch positive und falsch negative Befunde gleich. In der Wirklichkeit sind sie es selten.\\
+\textbf{Keine Prävalenz} & Wie Sensitivität und Spezifität ist sie prävalenzunabhängig --- und sagt deshalb nichts über den prädiktiven Wert.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Wie man die Schwelle wählt}
+Nicht rechnerisch, sondern nach den Folgen der beiden Fehler.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{3.0cm}@{}}
+\toprule
+\textbf{Lage} & \textbf{Wichtiger} & \textbf{Schwelle}\\
+\midrule
+Ausschluss einer bedrohlichen Krankheit & Sensitivität & niedrig\\
+Bestätigung vor eingreifender Therapie & Spezifität & hoch\\
+Blutspende-Prüfung & Sensitivität & sehr niedrig\\
+Reihen\-untersuchung & Spezifität & \textcolor{akzent}{hoch --- wegen der Prävalenz}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die häufig empfohlene Wahl \enquote{der Punkt mit dem größten Abstand zur Diagonale} --- der Youden-Index --- setzt stillschweigend voraus, dass beide Fehler gleich schwer wiegen und die Prävalenz bei fünfzig Prozent liegt. Beides trifft fast nie zu.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Reihenuntersuchungen}
+
+\begin{warnung}
+\boxtitelr{Drei Größen, die man nennen muss}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Zahl der nötigen Untersuchungen} & Wie viele Personen müssen untersucht werden, um einen Todesfall zu verhindern?\\
+\textbf{Falsch positive je Fund} & Aus den Rechnungen oben: bei niedriger Prävalenz oft mehrere Dutzend.\\
+\textbf{Überdiagnose} & Anteil der entdeckten Fälle, die nie Beschwerden verursacht hätten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur Überdiagnose}
+Sie ist die schwierigste der drei, weil man sie am Einzelnen nie feststellen kann: Man weiß nicht, ob dieser entdeckte Befund je Beschwerden gemacht hätte.
+
+Nachweisbar ist sie nur im Vergleich: Findet man in der untersuchten Gruppe dauerhaft mehr Fälle als in der nicht untersuchten, ohne dass die Sterblichkeit entsprechend sinkt, so ist die Differenz Überdiagnose.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Jede Überdiagnose führt zu einer Behandlung, die nur schaden kann --- denn der Befund hätte nie geschadet. Das ist kein Argument gegen Früherkennung, sondern eines dafür, Nutzen und Schaden gemeinsam zu beziffern. Die Zahlen dafür liegen für die großen Programme vor; sie werden in der Beratung selten genannt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.1 --- Prädiktive Werte berechnen}
+Ein Test hat eine Sensitivität von $90\,\%$ und eine Spezifität von $85\,\%$. Berechnen Sie beide prädiktiven Werte bei Prävalenzen von $1\,\%$, $20\,\%$ und $60\,\%$.
+
+\loesung
+\schritt{Schritt 1 --- Prävalenz $1\,\%$}
+Von $10\,000$: $100$ krank, $9900$ gesund.
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+& \textbf{krank} & \textbf{gesund} & \textbf{Summe}\\
+\midrule
+positiv & $90$ & $1485$ & $1575$\\
+negativ & $10$ & $8415$ & $8425$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\kursiv{Rechnung:} $100 \cdot 0{,}90 = 90$; $9900 \cdot 0{,}15 = 1485$.
+\[ \mathrm{PPW} = \frac{90}{1575} = 0{,}0571, \qquad \mathrm{NPW} = \frac{8415}{8425} = 0{,}9988 \]
+
+\schritt{Schritt 2 --- Prävalenz $20\,\%$}
+$2000$ krank, $8000$ gesund.
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+& \textbf{krank} & \textbf{gesund} & \textbf{Summe}\\
+\midrule
+positiv & $1800$ & $1200$ & $3000$\\
+negativ & $200$ & $6800$ & $7000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\[ \mathrm{PPW} = \frac{1800}{3000} = 0{,}600, \qquad \mathrm{NPW} = \frac{6800}{7000} = 0{,}971 \]
+
+\schritt{Schritt 3 --- Prävalenz $60\,\%$}
+$6000$ krank, $4000$ gesund.
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+& \textbf{krank} & \textbf{gesund} & \textbf{Summe}\\
+\midrule
+positiv & $5400$ & $600$ & $6000$\\
+negativ & $600$ & $3400$ & $4000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\[ \mathrm{PPW} = \frac{5400}{6000} = 0{,}900, \qquad \mathrm{NPW} = \frac{3400}{4000} = 0{,}850 \]
+
+\schritt{Schritt 4 --- Die Übersicht}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.0cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Prävalenz} & \textbf{PPW} & \textbf{NPW} & \\
+\midrule
+$1\,\%$ & $5{,}7\,\%$ & $99{,}9\,\%$ & \\
+$20\,\%$ & $60{,}0\,\%$ & $97{,}1\,\%$ & \\
+$60\,\%$ & $90{,}0\,\%$ & $85{,}0\,\%$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Die Beobachtung}
+Die beiden prädiktiven Werte bewegen sich \kursiv{gegenläufig}. Bei niedriger Prävalenz ist der negative Wert hervorragend und der positive fast wertlos; bei hoher Prävalenz umgekehrt.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Daraus folgt eine praktische Regel: \textbf{Ein Test ist dort am nützlichsten, wo man am unsichersten ist.} Bei sehr niedriger oder sehr hoher Vortestwahrscheinlichkeit ändert er die Einschätzung kaum --- und man hätte auf ihn verzichten können.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.2 --- Zwei Tests nacheinander}
+Eine Person hat eine Vortestwahrscheinlichkeit von $20\,\%$. Test~1 ($\mathrm{LQ}^{+} = 6$) fällt positiv aus, Test~2 ($\mathrm{LQ}^{+} = 4$) ebenfalls. Wie hoch ist die Wahrscheinlichkeit danach?
+
+\loesung
+\schritt{Schritt 1 --- Vortestchance}
+\[ \frac{0{,}20}{0{,}80} = 0{,}25 \]
+
+\schritt{Schritt 2 --- Nach Test 1}
+\[ 0{,}25 \cdot 6 = 1{,}50 \quad\Longrightarrow\quad \pi = \frac{1{,}50}{2{,}50} = 0{,}600 \]
+
+\schritt{Schritt 3 --- Nach Test 2}
+\[ 1{,}50 \cdot 4 = 6{,}00 \quad\Longrightarrow\quad \pi = \frac{6{,}00}{7{,}00} = 0{,}857 \]
+
+\schritt{Antwort}
+Etwa $\mathbf{86\,\%}$.
+
+\schritt{Schritt 4 --- Die Kurzfassung}
+Da sich die Quotienten multiplizieren, geht es auch in einem Schritt:
+\[ 0{,}25 \cdot 6 \cdot 4 = 0{,}25 \cdot 24 = 6{,}00 . \quad \checkmark \]
+
+\schritt{Schritt 5 --- Die stillschweigende Voraussetzung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Multiplikation setzt voraus, dass die beiden Tests \kursiv{bedingt unabhängig} sind} --- dass also Test~2 bei einer kranken Person nicht deshalb häufiger positiv ausfällt, weil Test~1 es war.
+\end{minipage}
+\end{center}
+
+Diese Voraussetzung ist oft verletzt. Zwei Tests, die denselben zugrundeliegenden Vorgang messen --- etwa zwei Entzündungsparameter ---, sind stark voneinander abhängig. Der zweite bringt dann viel weniger als sein Quotient verspricht.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Praktisch bedeutet das: Wer zwei ähnliche Tests hintereinanderschaltet und ihre Quotienten multipliziert, überschätzt die gewonnene Sicherheit --- unter Umständen erheblich. Zwei \kursiv{verschiedenartige} Verfahren --- etwa ein Laborwert und ein bildgebender Befund --- sind eher unabhängig.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Ein Gegenprobe-Gedanke}
+Wäre Test~2 mit Test~1 vollständig gekoppelt, so brächte er gar nichts: Die Wahrscheinlichkeit bliebe bei $60\,\%$. Die Wahrheit liegt meist dazwischen.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.3 --- Eine Schwelle wählen}
+Ein Wert soll zwischen Personen mit und ohne eine Erkrankung trennen. Fünf mögliche Schwellen liefern:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Schwelle} & \textbf{Sens.} & \textbf{Spez.} & $\mathrm{LQ}^{+}$\\
+\midrule
+$A$ & $0{,}99$ & $0{,}40$ & \\
+$B$ & $0{,}95$ & $0{,}70$ & \\
+$C$ & $0{,}85$ & $0{,}85$ & \\
+$D$ & $0{,}70$ & $0{,}95$ & \\
+$E$ & $0{,}40$ & $0{,}99$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+Ergänzen Sie die Quotienten und wählen Sie für zwei Lagen begründet eine Schwelle.
+
+\loesung
+\schritt{Schritt 1 --- Die Quotienten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{1.8cm}P{1.6cm}@{}}
+\toprule
+& \textbf{Sens.} & \textbf{Spez.} & $\mathrm{LQ}^{+}$ & $\mathrm{LQ}^{-}$\\
+\midrule
+$A$ & $0{,}99$ & $0{,}40$ & $1{,}65$ & $\mathbf{0{,}025}$\\
+$B$ & $0{,}95$ & $0{,}70$ & $3{,}17$ & $0{,}071$\\
+$C$ & $0{,}85$ & $0{,}85$ & $5{,}67$ & $0{,}176$\\
+$D$ & $0{,}70$ & $0{,}95$ & $14{,}0$ & $0{,}316$\\
+$E$ & $0{,}40$ & $0{,}99$ & $\mathbf{40{,}0}$ & $0{,}606$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur Rechnung:} $\mathrm{LQ}^{+}_A = 0{,}99/0{,}60 = 1{,}65$; $\mathrm{LQ}^{-}_A = 0{,}01/0{,}40 = 0{,}025$.
+
+\schritt{Schritt 2 --- Lage 1: Ausschluss einer bedrohlichen Erkrankung}
+Hier will man sicher sein, niemanden zu übersehen. Maßgeblich ist $\mathrm{LQ}^{-}$: Er soll möglichst klein sein, damit ein negativer Befund die Wahrscheinlichkeit stark senkt.
+
+\textbf{Wahl: Schwelle $A$} mit $\mathrm{LQ}^{-} = 0{,}025$.
+
+\kursiv{Wirkung:} Bei einer Vortestwahrscheinlichkeit von $10\,\%$ --- Chance $0{,}111$ --- führt ein negativer Befund zu
+\[ 0{,}111 \cdot 0{,}025 = 0{,}00278 \quad\Longrightarrow\quad \pi = 0{,}0028 , \]
+also $0{,}3\,\%$. Die Erkrankung ist praktisch ausgeschlossen.
+
+\kursiv{Der Preis:} Die Spezifität von $0{,}40$ bedeutet, dass $60\,\%$ der Gesunden positiv ausfallen und weiter abgeklärt werden müssen.
+
+\schritt{Schritt 3 --- Lage 2: Bestätigung vor einem eingreifenden Verfahren}
+Hier will man sicher sein, niemanden ohne Grund zu operieren. Maßgeblich ist $\mathrm{LQ}^{+}$.
+
+\textbf{Wahl: Schwelle $E$} mit $\mathrm{LQ}^{+} = 40$.
+
+\kursiv{Wirkung:} Bei Vortestwahrscheinlichkeit $30\,\%$ --- Chance $0{,}4286$ ---:
+\[ 0{,}4286 \cdot 40 = 17{,}14 \quad\Longrightarrow\quad \pi = \frac{17{,}14}{18{,}14} = 0{,}945 \]
+$94{,}5\,\%$ --- eine belastbare Grundlage für den Eingriff.
+
+\kursiv{Der Preis:} Die Sensitivität von $0{,}40$ bedeutet, dass sechzig Prozent der Erkrankten nicht erkannt werden.
+
+\schritt{Schritt 4 --- Die Lehre}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+\textbf{Zweck} & \textbf{Schwelle} & \textbf{Maßgeblich}\\
+\midrule
+Ausschließen & niedrig ($A$) & $\mathrm{LQ}^{-}$\\
+Bestätigen & hoch ($E$) & $\mathrm{LQ}^{+}$\\
+Beides mäßig & mittel ($C$) & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Derselbe Test mit derselben ROC-Kurve leistet Verschiedenes, je nachdem wo man schneidet. Und die Wahl folgt nicht aus der Kurve, sondern aus der Frage --- das ist dieselbe Einsicht wie in Kapitel~1: Die Rechnung sagt nicht, wozu sie dient.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Warum man beide Schwellen benutzen kann}
+In der Praxis verwendet man oft \kursiv{zwei} Schwellen: Unterhalb von $A$ gilt die Erkrankung als ausgeschlossen, oberhalb von $E$ als bestätigt, dazwischen ist der Befund unklar und es folgt weitere Diagnostik.
+
+Das ist ehrlicher als eine einzelne Schwelle, weil es den mittleren Bereich als das ausweist, was er ist: unentschieden.
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Geistlicher, ein Radargerät und ein später Ruhm}
+\Person{Thomas Bayes} (etwa 1702--1761) war presbyterianischer Geistlicher in Tunbridge Wells. Seine Arbeit über die umgekehrte Wahrscheinlichkeit erschien 1763, zwei Jahre nach seinem Tod, eingereicht von seinem Freund Richard Price.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Bayes selbst hatte sie nicht veröffentlicht --- vermutlich, weil er ihre Bedeutung nicht erkannte. Die allgemeine Form und die ersten Anwendungen stammen von \Person{Pierre-Simon Laplace}, der sie um 1774 unabhängig entwickelte und über Jahrzehnte ausbaute.}
+\end{minipage}
+\end{center}
+
+\schritt{Die ROC-Kurve kommt aus dem Krieg}
+Der Name steht für \kursiv{receiver operating characteristic}. Er stammt aus der Radartechnik des Zweiten Weltkriegs: Operateure mussten entscheiden, ob ein Ausschlag auf dem Schirm ein Flugzeug war oder Rauschen.
+
+Die Frage war dieselbe wie in der Diagnostik: Wo setzt man die Schwelle, und wie tauscht man Treffer gegen Fehlalarme? Die Kurve wurde in den 1950er Jahren in die Psychophysik übernommen und gelangte erst um 1970 in die Medizin.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Herkunft erklärt einen Zug der Methode, der in der Medizin fremd wirkt: Sie behandelt den Beurteiler als Teil des Systems. Wo die Schwelle liegt, ist eine Entscheidung des Operateurs --- nicht eine Eigenschaft des Geräts.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Was bei diagnostischen Studien heute schiefgeht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Spektrumbias} & Werden schwer Erkrankte mit Gesunden verglichen, erscheint der Test viel besser als in der Praxis, wo die Grenzfälle überwiegen.\\
+\textbf{Verifikationsbias} & Wird die Referenzdiagnose nur bei positivem Test erhoben, verzerrt das beide Kennzahlen.\\
+\textbf{Fehlende Schwelle} & Wird die Schwelle nachträglich an denselben Daten optimiert, sind Sensitivität und Spezifität zu gut.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die STARD-Empfehlungen --- zuletzt 2015 überarbeitet --- verlangen, alle drei Punkte offenzulegen. Die Befolgung ist unvollständig.
+
+\schritt{Maschinelles Lernen in der Bildgebung}
+Seit etwa 2018 erscheinen zahlreiche Arbeiten zu lernenden Systemen in der Diagnostik, oft mit AUC-Werten über $0{,}95$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{5.6cm}@{}}
+\toprule
+\textbf{Die Frage} & Wie gut ist das System an \kursiv{fremden} Daten, aus anderen Geräten und Kliniken?\\
+\textbf{Der Befund} & Die Leistung fällt bei externer Prüfung regelmäßig deutlich ab.\\
+\textbf{Der Grund} & Systeme lernen Merkmale des Aufnahmeorts mit --- Gerätetyp, Lagerung, Beschriftung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Übersichtsarbeiten kommen übereinstimmend zu dem Schluss, dass nur ein kleiner Teil der veröffentlichten Systeme extern geprüft wurde. Und selbst ein gut geprüftes System unterliegt der Rechnung dieses Kapitels: Bei niedriger Prävalenz bleibt der prädiktive Wert bescheiden, wie gut die AUC auch sei.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Definition 13.1} & vier Kennzahlen --- und worauf jede bedingt\\
+\textbf{Prävalenz} & derselbe Test: PPW von $2$ bis $95\,\%$\\
+\textbf{Chancenform} & Vortestchance $\times$ Likelihood-Quotient\\
+\textbf{Definition 13.2} & AUC --- dieselbe Größe wie Mann-Whitneys $U$\\
+\textbf{Schwellenwahl} & folgt aus der Frage, nicht aus der Kurve\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel geht es um das, was geschieht, wenn man viele Fragen zugleich stellt --- und darum, wie man Ergebnisse vieler Studien zusammenfasst.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,822 @@
+\chapter{Wege, Kreise und Zusammenhang}
+
+\section{Die Frage des Hygieneteams}
+
+Aus Kapitel~1 ist eine Frage offengeblieben. Auf einer Station wurde ein Keim nachgewiesen; es liegt eine Liste von Kontakten vor. Gefragt war:
+
+\begin{merksatz}
+\boxtitel{Die Frage, aufgeteilt in ihre Bestandteile}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+(a) & Kann der Keim von Person $u$ überhaupt zu Person $v$ gelangt sein?\\
+(b) & Über wie viele Zwischenschritte mindestens?\\
+(c) & Zerfällt die Station in Gruppen ohne jeden Kontakt untereinander?\\
+(d) & Gibt es eine einzelne Person, deren Isolierung die Station in zwei kontaktlose Hälften teilt?\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+Alle vier Fragen sind graphentheoretisch, und alle vier bekommen in diesem Kapitel eine Antwort. Frage (a) führt auf den Begriff des Zusammenhangs, (b) auf den Abstand, (c) auf die Zusammenhangskomponenten, (d) auf die Schnittecke.
+
+Zuerst brauchen wir jedoch Ordnung in der Sprache. Das Vorwort hat gewarnt, dass gerade das Wort \enquote{Weg} in verschiedenen Büchern Verschiedenes bedeutet. Hier wird es festgelegt.
+
+\section{Kantenzug, Weg, Kreis}
+
+\begin{definition}
+\boxtitelm{Definition 2.1 --- Kantenzug}
+Sei $G = (V,E)$ ein Graph. Ein \Begriff{Kantenzug} von $u$ nach $v$ ist eine endliche Folge
+\[ W = (v_0,\ v_1,\ v_2,\ \ldots,\ v_k) \]
+von Ecken mit
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item $v_0 = u$ und $v_k = v$,
+\item $\{v_{i-1}, v_i\} \in E$ für alle $i = 1, 2, \ldots, k$.
+\end{itemize}
+Die Zahl $k$ heißt die \Begriff{Länge} des Kantenzugs. Für $k = 0$ ist $W = (u)$ ein Kantenzug der Länge $0$ von $u$ nach $u$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was diese Definition erlaubt --- und was sie nicht sagt}
+Die Definition verlangt nur eines: dass je zwei aufeinanderfolgende Ecken benachbart sind. Sie verbietet \kursiv{nicht}, dass eine Ecke mehrfach vorkommt, und sie verbietet nicht, dass eine Kante mehrfach benutzt wird.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\node[knotenb] (a) at (0,0) {$a$};
+\node[knotenb] (b) at (1.4,0) {$b$};
+\node[knotenb] (c) at (2.8,0) {$c$};
+\node[knotenb] (d) at (1.4,1.1) {$d$};
+\draw[kante] (a) -- (b); \draw[kante] (b) -- (c);
+\draw[kante] (b) -- (d);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{1.4cm}P{3.6cm}@{}}
+\toprule
+\textbf{Folge} & \textbf{Länge} & \textbf{Zulässiger Kantenzug?}\\
+\midrule
+$(a,b,c)$ & $2$ & ja\\
+$(a,b,d,b,c)$ & $4$ & ja --- $b$ zweimal, Kante $bd$ zweimal\\
+$(a,b,a,b,c)$ & $4$ & ja --- Kante $ab$ dreimal\\
+$(a,c)$ & --- & \textcolor{akzent}{\textbf{nein}} --- $\{a,c\} \notin E$\\
+$(a)$ & $0$ & ja\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Länge zählt \kursiv{Schritte}, nicht Ecken. Ein Kantenzug mit $k+1$ Eckeneinträgen hat Länge $k$. Diese Verschiebung um eins ist eine der häufigsten Fehlerquellen bei Rechnungen mit Kantenzügen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 2.2 --- Weg und Kreis}
+Sei $W = (v_0, \ldots, v_k)$ ein Kantenzug.
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item $W$ heißt \Begriff{Weg}, wenn alle Ecken $v_0, v_1, \ldots, v_k$ paarweise verschieden sind.
+\item $W$ heißt \Begriff{Kreis}, wenn $k \ge 3$ gilt, $v_0 = v_k$ ist und die Ecken $v_0, v_1, \ldots, v_{k-1}$ paarweise verschieden sind.
+\end{itemize}
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Warum beim Kreis $k \ge 3$ gefordert wird}
+Ohne diese Bedingung wären zwei Gebilde \enquote{Kreise}, die keine sein sollen:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.5cm}P{2.6cm}P{4.2cm}@{}}
+\toprule
+$k = 1$ & $(v_0, v_0)$ & bräuchte die Kante $\{v_0,v_0\}$ --- gibt es nach Definition 1.1 nicht\\
+$k = 2$ & $(u, v, u)$ & benutzt die Kante $\{u,v\}$ zweimal --- hin und zurück\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Der zweite Fall ist der eigentliche Grund für die Bedingung. Ein Hin und Zurück über dieselbe Kante ist kein Rundgang; nähme man ihn zu, so enthielte \kursiv{jeder} Graph mit mindestens einer Kante einen Kreis, und der Begriff wäre wertlos.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der kürzestmögliche Kreis hat also Länge $3$ und heißt \Begriff{Dreieck}. Ein Graph ohne Kreise heißt \Begriff{kreisfrei} --- daraus wird in Kapitel~4 der Begriff des Baumes.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\subsection*{Vom Kantenzug zum Weg}
+
+Der folgende Hilfssatz sieht harmlos aus und wird in diesem Band ein Dutzend Mal gebraucht. Er erlaubt es, in Beweisen bequem mit Kantenzügen zu arbeiten und am Ende dennoch einen Weg zu haben.
+
+\begin{merksatz}
+\boxtitel{Lemma 2.3}
+Gibt es in $G$ einen Kantenzug von $u$ nach $v$, so gibt es auch einen \kursiv{Weg} von $u$ nach $v$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- durch Verkürzen}
+\schritt{Schritt 1 --- Die richtige Auswahl treffen}
+Es gibt nach Voraussetzung mindestens einen Kantenzug von $u$ nach $v$. Unter allen Kantenzügen von $u$ nach $v$ wählen wir einen von \kursiv{kleinstmöglicher Länge} und nennen ihn
+\[ W = (v_0, v_1, \ldots, v_k), \qquad v_0 = u,\ v_k = v . \]
+
+Dass es einen kürzesten gibt, ist keine Selbstverständlichkeit, sondern folgt aus einer Grundtatsache über die natürlichen Zahlen: Jede nichtleere Menge natürlicher Zahlen besitzt ein kleinstes Element. Die Menge der vorkommenden Längen ist nichtleer (es gibt ja einen Kantenzug), also hat sie ein Minimum.
+
+\schritt{Schritt 2 --- Behauptung: $W$ ist bereits ein Weg}
+Wir zeigen, dass in $W$ keine Ecke doppelt vorkommt. Angenommen doch --- es gäbe Indizes $i < j$ mit
+\[ v_i = v_j . \]
+
+\schritt{Schritt 3 --- Das Stück dazwischen herausschneiden}
+Betrachten wir die verkürzte Folge
+\[ W' = (v_0, \ldots, v_{i-1}, v_i, v_{j+1}, v_{j+2}, \ldots, v_k) . \]
+Wir haben also den Abschnitt zwischen $v_i$ und $v_j$ weggelassen und sind von $v_i$ direkt zu $v_{j+1}$ übergegangen.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\foreach \i/\x in {0/0, 1/1.0, 2/2.0, 3/3.0, 4/4.0, 5/5.0, 6/6.0}
+  \node[knoten] (w\i) at (\x,0) {};
+\foreach \i/\j in {0/1,1/2,4/5,5/6} \draw[kante] (w\i) -- (w\j);
+\draw[kante] (w2) to[bend left=55] (w4);
+\draw[kante] (w2) to[bend right=55] (w4);
+\node[font=\scriptsize, color=grau] at (0,-0.38) {$v_0=u$};
+\node[font=\scriptsize, color=tief] at (2.0,-0.38) {$v_i$};
+\node[font=\scriptsize, color=tief] at (4.0,-0.38) {$v_j$};
+\node[font=\scriptsize, color=grau] at (6.0,-0.38) {$v_k=v$};
+\node[font=\scriptsize\itshape, color=akzent] at (3.0,1.0) {dieselbe Ecke --- die Schleife dazwischen fällt weg};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Schritt 4 --- Ist $W'$ ein zulässiger Kantenzug?}
+Wir müssen prüfen, dass je zwei aufeinanderfolgende Einträge von $W'$ benachbart sind.
+
+Innerhalb des Anfangsstücks $(v_0, \ldots, v_i)$ und innerhalb des Endstücks $(v_{j+1}, \ldots, v_k)$ ist das klar --- diese Paare kamen schon in $W$ vor.
+
+Die einzige neue Nachbarschaft ist die Nahtstelle $v_i \to v_{j+1}$. Nun ist aber $v_i = v_j$ nach Annahme, und $\{v_j, v_{j+1}\}$ war eine Kante von $W$. Also ist
+\[ \{v_i, v_{j+1}\} = \{v_j, v_{j+1}\} \in E . \]
+$W'$ ist damit ein Kantenzug von $u$ nach $v$.
+
+\schritt{Schritt 5 --- Der Widerspruch}
+Die Länge von $W'$ ist $k - (j - i)$. Wegen $i < j$ ist $j - i \ge 1$, also
+\[ \text{Länge}(W') \;\le\; k - 1 \;<\; k . \]
+Damit gäbe es einen kürzeren Kantenzug von $u$ nach $v$ als $W$ --- im Widerspruch zur Wahl von $W$ in Schritt~1.
+
+\schritt{Schritt 6 --- Schluss}
+Die Annahme aus Schritt~2 ist falsch. Also sind alle Ecken von $W$ verschieden, und $W$ ist ein Weg. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Beweisfigur, die hier zum ersten Mal auftritt}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{\enquote{Wähle ein kleinstes Gegenbeispiel und verkleinere es.}}
+
+Man nimmt ein Objekt mit einer Minimalitätseigenschaft, konstruiert daraus ein kleineres mit derselben Eigenschaft und erhält einen Widerspruch. Diese Figur --- das \Begriff{Extremalprinzip} --- kommt in diesem Band noch in den Kapiteln 4, 7, 11 und 13 vor. Sie ersetzt in vielen Fällen eine vollständige Induktion und ist meist kürzer.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zusammenhang und Komponenten}
+
+\begin{definition}
+\boxtitelm{Definition 2.4 --- Zusammenhang}
+Ein Graph $G$ heißt \Begriff{zusammenhängend}, wenn es zu je zwei Ecken $u, v \in V$ einen Weg von $u$ nach $v$ gibt. Andernfalls heißt $G$ \Begriff{unzusammenhängend}.
+\end{definition}
+
+Für die Zerlegung in Gruppen --- Frage (c) --- brauchen wir etwas mehr. Wir definieren eine Beziehung auf der Eckenmenge und zeigen, dass sie die Eckenmenge sauber zerlegt.
+
+\begin{definition}
+\boxtitelm{Definition 2.5 --- die Beziehung \enquote{erreichbar}}
+Für $u, v \in V$ schreiben wir
+\[ u \sim v \quad :\Longleftrightarrow \quad \text{es gibt einen Weg von } u \text{ nach } v \text{ in } G . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 2.6 --- $\sim$ ist eine Äquivalenzrelation}
+Die Beziehung $\sim$ ist reflexiv, symmetrisch und transitiv.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis, alle drei Eigenschaften einzeln}
+\schritt{Reflexivität: $u \sim u$ für jede Ecke $u$}
+Die Folge $(u)$ ist ein Kantenzug der Länge $0$ von $u$ nach $u$ (Definition 2.1 lässt $k=0$ ausdrücklich zu). Sie besteht aus einer einzigen Ecke, also sind trivialerweise alle Ecken darin verschieden --- es ist ein Weg. Somit $u \sim u$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hier zahlt sich aus, dass die Definition den Fall $k=0$ zugelassen hat. Hätte man Kantenzüge erst ab Länge $1$ definiert, so wäre eine isolierte Ecke nicht mit sich selbst verbunden --- und der Zusammenhangsbegriff würde absurd.}
+\end{minipage}
+\end{center}
+
+\schritt{Symmetrie: aus $u \sim v$ folgt $v \sim u$}
+Sei $(v_0, v_1, \ldots, v_k)$ ein Weg von $u$ nach $v$. Betrachte die umgekehrte Folge
+\[ (v_k, v_{k-1}, \ldots, v_1, v_0) . \]
+Sie beginnt bei $v_k = v$ und endet bei $v_0 = u$. Je zwei aufeinanderfolgende Einträge sind benachbart, denn für die Rückwärtsfolge ist das Paar an der Stelle $i$ gerade $\{v_{k-i+1}, v_{k-i}\}$ --- und das ist als Menge dieselbe Kante wie $\{v_{k-i}, v_{k-i+1}\}$, die im ursprünglichen Weg vorkam.
+
+Die Ecken sind dieselben wie vorher, also weiterhin paarweise verschieden. Es ist ein Weg von $v$ nach $u$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{An genau dieser Stelle wird gebraucht, dass Kanten \kursiv{Mengen} sind. Bei gerichteten Graphen gilt die Symmetrie nicht --- und dort ist Zusammenhang deshalb ein deutlich komplizierterer Begriff.}
+\end{minipage}
+\end{center}
+
+\schritt{Transitivität: aus $u \sim v$ und $v \sim w$ folgt $u \sim w$}
+Sei $(u = a_0, \ldots, a_r = v)$ ein Weg von $u$ nach $v$ und $(v = b_0, \ldots, b_s = w)$ ein Weg von $v$ nach $w$. Wir hängen sie aneinander:
+\[ (a_0, a_1, \ldots, a_{r-1},\ v,\ b_1, b_2, \ldots, b_s) . \]
+Das ist ein Kantenzug von $u$ nach $w$: Alle Nachbarschaften stammen aus einem der beiden Wege, und an der Nahtstelle stimmt es, weil $a_r = v = b_0$ ist.
+
+Ein \kursiv{Weg} ist das im Allgemeinen nicht --- die beiden Wege können sich mehrfach kreuzen, und dann käme eine Ecke doppelt vor. Aber nach Lemma 2.3 gibt es dann trotzdem einen Weg von $u$ nach $w$. Also $u \sim w$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der angekündigte Nutzen von Lemma 2.3: Man darf sorglos aneinanderhängen und muss sich nicht darum kümmern, ob dabei Ecken doppelt auftreten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was eine Äquivalenzrelation liefert --- kurz wiederholt}
+Aus Band 10, Kapitel~3 ist bekannt: Eine Äquivalenzrelation auf einer Menge $V$ zerlegt $V$ in \Begriff{Klassen} so, dass
+\begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+\item jede Ecke in genau einer Klasse liegt,
+\item zwei Ecken genau dann in derselben Klasse liegen, wenn sie in Beziehung stehen.
+\end{itemize}
+Man nennt so etwas eine \Begriff{Partition}: keine Klasse ist leer, die Klassen überschneiden sich nicht, und zusammen ergeben sie ganz $V$.
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 2.7 --- Zusammenhangskomponente}
+Die Äquivalenzklassen von $\sim$ heißen \Begriff{Zusammenhangskomponenten} von $G$. Genauer versteht man unter einer Komponente den von einer solchen Klasse $S$ induzierten Teilgraphen $G[S]$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Antwort auf Frage (c)}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Satz 2.6 beantwortet die Frage des Hygieneteams vollständig und, wie sich zeigt, mit einer stärkeren Aussage als erhofft: Die Station zerfällt \kursiv{immer} in Gruppen ohne Kontakt untereinander --- die Frage ist nur, in wie viele. Bei einer Gruppe ist der Graph zusammenhängend und alle sind betroffen; bei mehreren ist jede Gruppe für sich zu betrachten.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\node[knotenb] (a) at (0,0.7) {};
+\node[knotenb] (b) at (0.9,0.2) {};
+\node[knotenb] (c) at (0.2,-0.5) {};
+\node[knotenb] (d) at (1.1,-0.8) {};
+\draw[kante] (a)--(b); \draw[kante] (b)--(c); \draw[kante] (c)--(a); \draw[kante] (b)--(d);
+\node[knotenb] (e) at (2.9,0.4) {};
+\node[knotenb] (f) at (3.9,0.4) {};
+\node[knotenb] (g) at (3.4,-0.5) {};
+\draw[kante] (e)--(f); \draw[kante] (f)--(g);
+\node[knotenb] (h) at (5.4,-0.1) {};
+\node[font=\scriptsize\itshape, color=grau] at (0.6,-1.4) {Komponente 1};
+\node[font=\scriptsize\itshape, color=grau] at (3.4,-1.4) {Komponente 2};
+\node[font=\scriptsize\itshape, color=grau] at (5.4,-1.4) {Komponente 3};
+\end{tikzpicture}
+\end{center}
+
+Ein Graph ist genau dann zusammenhängend, wenn er \kursiv{genau eine} Komponente hat. Die einzelne Ecke rechts bildet eine eigene Komponente --- sie ist nur mit sich selbst verbunden, und zwar über den Weg der Länge $0$.
+\end{merksatz}
+
+\subsection*{Wie viele Kanten braucht Zusammenhang mindestens?}
+
+\begin{merksatz}
+\boxtitel{Satz 2.8}
+Ein zusammenhängender Graph mit $n$ Ecken hat mindestens $n-1$ Kanten.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis durch vollständige Induktion über $n$}
+\schritt{Vorbemerkung --- was vollständige Induktion ist}
+Um eine Aussage $A(n)$ für alle natürlichen Zahlen $n \ge n_0$ zu zeigen, genügt es:
+\begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+\item \Begriff{Induktionsanfang}: $A(n_0)$ ist wahr.
+\item \Begriff{Induktionsschritt}: Aus der Annahme, dass $A(k)$ für alle $k < n$ gilt, folgt $A(n)$.
+\end{itemize}
+Der Gedanke: $A(n_0)$ steht fest; damit folgt $A(n_0+1)$; damit $A(n_0+2)$; und so weiter --- jede einzelne Zahl wird nach endlich vielen Schritten erreicht.
+
+\schritt{Induktionsanfang: $n = 1$}
+Ein Graph mit einer Ecke ist zusammenhängend (der Weg der Länge $0$ verbindet die Ecke mit sich selbst) und hat $0$ Kanten. Behauptet werden $n - 1 = 0$ Kanten. Erfüllt.
+
+\schritt{Induktionsschritt --- die Vorbereitung}
+Sei $n \ge 2$ und $G$ zusammenhängend mit $n$ Ecken. Wir nehmen an, die Behauptung gelte für alle zusammenhängenden Graphen mit weniger als $n$ Ecken.
+
+Zunächst eine Feststellung: In $G$ hat jede Ecke mindestens Grad $1$. Denn wäre $\deg(v) = 0$, so gäbe es von $v$ zu einer anderen Ecke $w$ (die wegen $n \ge 2$ existiert) keinen Weg --- jeder Weg müsste im ersten Schritt eine Kante an $v$ benutzen, und es gibt keine.
+
+\schritt{Fall 1 --- es gibt eine Ecke $v$ mit $\deg(v) = 1$}
+Wir entfernen $v$ samt seiner einen Kante und nennen den Rest $G' = G - v$. Er hat $n-1$ Ecken und $|E| - 1$ Kanten.
+
+\kursiv{$G'$ ist zusammenhängend:} Seien $x, y$ zwei Ecken von $G'$. In $G$ gibt es einen Weg von $x$ nach $y$. Könnte dieser Weg über $v$ laufen? Dann käme $v$ als Zwischenecke vor, hätte im Weg also einen Vorgänger \kursiv{und} einen Nachfolger --- das sind zwei verschiedene Nachbarn, im Widerspruch zu $\deg(v) = 1$. Also meidet der Weg die Ecke $v$ und verläuft ganz in $G'$.
+
+Nach Induktionsannahme hat $G'$ mindestens $(n-1) - 1 = n-2$ Kanten. Also
+\[ |E| = |E(G')| + 1 \;\ge\; (n-2) + 1 \;=\; n-1 . \]
+
+\schritt{Fall 2 --- jede Ecke hat Grad $\ge 2$}
+Dann liefert das Handschlaglemma (Satz 1.3) unmittelbar
+\[ 2|E| = \sum_{v \in V} \deg(v) \;\ge\; \sum_{v \in V} 2 \;=\; 2n, \]
+also $|E| \ge n \ge n-1$.
+
+\schritt{Schluss}
+In beiden Fällen gilt $|E| \ge n-1$. Die beiden Fälle decken alles ab, denn der Minimalgrad ist entweder $1$ (Fall 1, da er nach der Vorbereitung mindestens $1$ ist) oder mindestens $2$ (Fall 2). $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Schranke ist scharf}
+\enquote{Scharf} heißt: Sie kann nicht verbessert werden, weil es Graphen gibt, die sie mit Gleichheit erfüllen.
+
+Der Weg $P_n$ ist zusammenhängend, hat $n$ Ecken und genau $n-1$ Kanten. Also ist $n-1$ die bestmögliche untere Schranke.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\foreach \i in {0,...,5} \node[knoten] (p\i) at (\i*0.85,0) {};
+\foreach \i/\j in {0/1,1/2,2/3,3/4,4/5} \draw[kante] (p\i) -- (p\j);
+\node[font=\scriptsize\itshape, color=grau] at (2.1,-0.45) {$P_6$: sechs Ecken, fünf Kanten};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zu jeder Schranke gehört die Frage, ob sie scharf ist. Eine Schranke ohne dieses Beiwerk sagt wenig: \enquote{mindestens $0$ Kanten} wäre auch wahr und völlig nutzlos. Graphen mit genau $n-1$ Kanten sind der Gegenstand von Kapitel~4.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Abstand}
+
+\begin{definition}
+\boxtitelm{Definition 2.9 --- Abstand, Durchmesser, Taille}
+Sei $G$ ein Graph und $u,v \in V$.
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item Der \Begriff{Abstand} $d(u,v)$ ist die Länge eines kürzesten Weges von $u$ nach $v$. Gibt es keinen, setzt man $d(u,v) = \infty$.
+\item Der \Begriff{Durchmesser} ist $\operatorname{diam}(G) = \max_{u,v \in V} d(u,v)$.
+\item Die \Begriff{Taille} $g(G)$ ist die Länge eines kürzesten Kreises in $G$; ist $G$ kreisfrei, setzt man $g(G) = \infty$.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 2.10 --- der Abstand ist eine Metrik}
+Für alle $u,v,w$ in einer Zusammenhangskomponente gilt:
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.2cm}P{3.4cm}P{3.8cm}@{}}
+\toprule
+(M1) & $d(u,v) \ge 0$, und $d(u,v) = 0 \iff u = v$ & Definitheit\\
+(M2) & $d(u,v) = d(v,u)$ & Symmetrie\\
+(M3) & $d(u,w) \le d(u,v) + d(v,w)$ & Dreiecksungleichung\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis}
+\schritt{(M1)}
+Längen sind Anzahlen von Schritten, also $\ge 0$. Ist $u = v$, so ist $(u)$ ein Weg der Länge $0$, also $d(u,v) = 0$. Ist umgekehrt $d(u,v) = 0$, so gibt es einen Weg der Länge $0$; ein solcher besteht aus einem einzigen Eintrag, der zugleich Anfang und Ende ist --- also $u = v$.
+
+\schritt{(M2)}
+Im Beweis von Satz 2.6 (Symmetrie) wurde gezeigt: Zu jedem Weg von $u$ nach $v$ der Länge $k$ gibt es einen Weg von $v$ nach $u$ derselben Länge $k$ --- nämlich den umgekehrten. Also haben die Mengen der vorkommenden Weglängen in beiden Richtungen dieselben Elemente und damit dasselbe Minimum.
+
+\schritt{(M3) --- Schritt 1: die beiden kürzesten Wege}
+Sei $P$ ein kürzester Weg von $u$ nach $v$ der Länge $a = d(u,v)$ und $Q$ ein kürzester Weg von $v$ nach $w$ der Länge $b = d(v,w)$.
+
+\schritt{(M3) --- Schritt 2: aneinanderhängen}
+Wie im Transitivitätsbeweis liefert das Aneinanderhängen einen Kantenzug von $u$ nach $w$ der Länge $a + b$.
+
+\schritt{(M3) --- Schritt 3: der entscheidende Schluss}
+Nach Lemma 2.3 gibt es dann einen \kursiv{Weg} von $u$ nach $w$, und aus dem Beweis von Lemma 2.3 sieht man mehr: Der dort konstruierte Weg entsteht durch Weglassen von Stücken, ist also \kursiv{höchstens so lang} wie der Kantenzug. Es gibt somit einen Weg von $u$ nach $w$ der Länge $\le a+b$.
+
+Der kürzeste Weg von $u$ nach $w$ ist erst recht höchstens so lang:
+\[ d(u,w) \;\le\; a + b \;=\; d(u,v) + d(v,w) . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Warum die Gleichheit in (M3) oft nicht gilt}
+Die Dreiecksungleichung ist eine \kursiv{Un}gleichung. Der Umweg über $v$ kann echt länger sein als der direkte Weg.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\node[knotenb] (u) at (0,0) {$u$};
+\node[knotenb] (w) at (2.2,0) {$w$};
+\node[knotenb] (v) at (1.1,1.2) {$v$};
+\node[knotenb] (x) at (1.1,1.9) {};
+\draw[kante] (u) -- (w);
+\draw[kante] (u) -- (v); \draw[kante] (v) -- (x); \draw[kante] (x) -- (w);
+\node[font=\scriptsize\itshape, color=grau] at (1.1,-0.5) {$d(u,w) = 1$, aber $d(u,v) + d(v,w) = 1 + 2 = 3$};
+\end{tikzpicture}
+\end{center}
+\end{warnung}
+
+\section{Bipartite Graphen}
+
+\begin{definition}
+\boxtitelm{Definition 2.11 --- bipartit}
+Ein Graph $G = (V,E)$ heißt \Begriff{bipartit}, wenn sich $V$ so in zwei Mengen $A$ und $B$ zerlegen lässt, dass
+\[ V = A \cup B, \qquad A \cap B = \varnothing, \]
+und \kursiv{jede} Kante von $G$ eine Ecke aus $A$ mit einer Ecke aus $B$ verbindet. Das Paar $(A,B)$ heißt eine \Begriff{Bipartition}.
+\end{definition}
+
+In der Sprache des Dienstplans: Bipartit heißt, dass zwei Schichten genügen. Das führt auf die zweite Frage aus Kapitel~1 zurück und ist zugleich der einfachste Fall des Färbungsproblems aus Kapitel~9.
+
+Wie erkennt man Bipartitheit? Der folgende Satz gibt ein Kriterium, das man auch bei großen Graphen prüfen kann.
+
+\begin{merksatz}
+\boxtitel{Satz 2.12 (Kőnig 1916)}
+Ein Graph ist genau dann bipartit, wenn er keinen Kreis ungerader Länge enthält.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis, Richtung 1: bipartit $\Longrightarrow$ kein ungerader Kreis}
+\schritt{Schritt 1 --- Aufstellung}
+Sei $(A,B)$ eine Bipartition und sei $(v_0, v_1, \ldots, v_k)$ mit $v_k = v_0$ ein Kreis in $G$.
+
+\schritt{Schritt 2 --- die Seiten wechseln sich ab}
+Jede Kante verbindet eine Ecke aus $A$ mit einer aus $B$. Da $\{v_{i-1},v_i\}$ für jedes $i$ eine Kante ist, liegen $v_{i-1}$ und $v_i$ stets auf \kursiv{verschiedenen} Seiten. Mit jedem Schritt wechselt man also die Seite.
+
+\schritt{Schritt 3 --- die Buchführung}
+Nehmen wir ohne Einschränkung $v_0 \in A$ an (sonst vertauscht man die Rollen von $A$ und $B$). Dann gilt:
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$v_0 \in A$ & $0$ ist gerade\\
+$v_1 \in B$ & $1$ ist ungerade\\
+$v_2 \in A$ & $2$ ist gerade\\
+\multicolumn{2}{@{}l}{\quad allgemein: $v_i \in A \iff i$ gerade}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 4 --- Schluss}
+Am Ende ist $v_k = v_0 \in A$. Nach der Regel aus Schritt~3 muss dann $k$ gerade sein. Ein ungerader Kreis kann also nicht vorkommen.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis, Richtung 2: kein ungerader Kreis $\Longrightarrow$ bipartit}
+\schritt{Schritt 1 --- Reduktion auf den zusammenhängenden Fall}
+Wenn jede Komponente für sich bipartit ist, so ist es der ganze Graph: Man vereinigt einfach die $A$-Seiten aller Komponenten zu einem $A$ und die $B$-Seiten zu einem $B$. Da zwischen Komponenten keine Kanten verlaufen, entsteht kein Konflikt. Wir dürfen also $G$ als zusammenhängend annehmen.
+
+\schritt{Schritt 2 --- die Konstruktion}
+Wir wählen eine feste Ecke $r \in V$ (die \Begriff{Wurzel}) und setzen
+\[ A = \{\, v \in V : d(r,v) \text{ ist gerade} \,\}, \qquad
+   B = \{\, v \in V : d(r,v) \text{ ist ungerade} \,\} . \]
+Da $G$ zusammenhängend ist, ist $d(r,v)$ für jede Ecke eine endliche Zahl. Jede Ecke landet in genau einer der beiden Mengen, denn jede natürliche Zahl ist entweder gerade oder ungerade. Also ist $V = A \cup B$ und $A \cap B = \varnothing$. Beachte $r \in A$ wegen $d(r,r) = 0$.
+
+\schritt{Schritt 3 --- was noch zu zeigen ist}
+Es bleibt: \kursiv{Keine Kante verläuft innerhalb von $A$ oder innerhalb von $B$.} Angenommen doch --- es gäbe eine Kante $\{x,y\} \in E$ mit $x, y$ auf derselben Seite. Das heißt: $d(r,x)$ und $d(r,y)$ sind beide gerade oder beide ungerade. In jedem Fall ist die Differenz gerade:
+\[ d(r,x) - d(r,y) \ \text{ist eine gerade Zahl.} \]
+
+\schritt{Schritt 4 --- zwei kürzeste Wege betrachten}
+Sei $P$ ein kürzester Weg von $r$ nach $x$ (Länge $p = d(r,x)$) und $Q$ ein kürzester Weg von $r$ nach $y$ (Länge $q = d(r,y)$).
+
+Die beiden Wege beginnen beide bei $r$. Sie können sich ein Stück weit decken und trennen sich dann. Sei $z$ die \kursiv{letzte} Ecke, die auf beiden Wegen vorkommt --- sie existiert, weil zumindest $r$ auf beiden liegt, und es gibt nur endlich viele Kandidaten.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.05]
+\node[knotenb] (r) at (0,0) {$r$};
+\node[knotenb] (z) at (1.6,0) {$z$};
+\node[knotenb] (x) at (3.4,0.85) {$x$};
+\node[knotenb] (y) at (3.4,-0.85) {$y$};
+\draw[kante] (r) -- (z);
+\draw[kante] (z) -- (x);
+\draw[kante] (z) -- (y);
+\draw[kanted] (x) -- (y);
+\node[font=\scriptsize, color=grau] at (0.8,0.3) {gemeinsam};
+\node[font=\scriptsize, color=grau] at (2.6,0.75) {$s$ Schritte};
+\node[font=\scriptsize, color=grau] at (2.6,-0.75) {$t$ Schritte};
+\node[font=\scriptsize, color=akzent] at (4.05,0) {Kante};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Schritt 5 --- die Längen}
+Ein Teilstück eines kürzesten Weges ist selbst ein kürzester Weg. Denn gäbe es zwischen zwei seiner Ecken eine kürzere Verbindung, so könnte man sie einsetzen und den Gesamtweg verkürzen --- im Widerspruch zur Kürze. Also ist der Abschnitt von $r$ nach $z$ auf $P$ ein kürzester Weg, und dasselbe gilt auf $Q$. Beide Abschnitte haben daher dieselbe Länge, nämlich $d(r,z)$; nennen wir sie $c$.
+
+Damit hat der Abschnitt von $z$ nach $x$ die Länge $s = p - c$ und der von $z$ nach $y$ die Länge $t = q - c$.
+
+\schritt{Schritt 6 --- der Kreis}
+Wir setzen zusammen: von $z$ nach $x$ ($s$ Schritte), die Kante $\{x,y\}$ ($1$ Schritt), von $y$ zurück nach $z$ ($t$ Schritte). Das ergibt einen geschlossenen Kantenzug der Länge
+\[ s + 1 + t = (p - c) + 1 + (q - c) = p + q + 1 - 2c . \]
+
+Dieser geschlossene Kantenzug ist sogar ein Kreis: Die Ecken der beiden Abschnitte sind jeweils untereinander verschieden (Teilstücke von Wegen), und sie haben nach Wahl von $z$ außer $z$ selbst keine gemeinsame Ecke.
+
+\schritt{Schritt 7 --- die Parität}
+Nach Schritt~3 ist $p - q$ gerade, also haben $p$ und $q$ dieselbe Parität, also ist $p+q$ gerade. Ferner ist $2c$ gerade. Somit ist
+\[ s + 1 + t = \underbrace{p+q}_{\text{gerade}} + 1 - \underbrace{2c}_{\text{gerade}} \quad \text{ungerade.} \]
+
+Wir haben einen Kreis ungerader Länge gefunden --- im Widerspruch zur Voraussetzung.
+
+\schritt{Schritt 8 --- Schluss}
+Die Annahme aus Schritt~3 war falsch. Jede Kante verläuft also zwischen $A$ und $B$, und $(A,B)$ ist eine Bipartition. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wie man das praktisch anwendet}
+Der Beweis von Richtung 2 ist nicht nur ein Beweis, sondern ein \kursiv{Verfahren}: Man wählt eine Wurzel, berechnet alle Abstände, färbt nach gerade/ungerade und prüft zum Schluss jede Kante. Findet man eine Kante innerhalb einer Seite, liefert Schritt~6 sogar den ungeraden Kreis, der die Bipartitheit verhindert --- man bekommt also nicht nur ein Nein, sondern die Begründung dazu.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beweise, die zugleich Verfahren sind, heißen \Begriff{konstruktiv}. Sie sind in der Graphentheorie die Regel und der Grund, warum das Gebiet und die Informatik so eng beieinander liegen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Brücken und Schnittecken}
+
+Bleibt Frage (d): Gibt es eine einzelne Person, deren Isolierung die Station teilt?
+
+\begin{definition}
+\boxtitelm{Definition 2.13 --- Brücke, Schnittecke}
+Sei $G$ ein Graph.
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item Eine Kante $e \in E$ heißt \Begriff{Brücke}, wenn $G - e$ mehr Komponenten hat als $G$.
+\item Eine Ecke $v \in V$ heißt \Begriff{Schnittecke}, wenn $G - v$ mehr Komponenten hat als $G$.
+\end{itemize}
+Dabei entsteht $G-e$ durch Weglassen der Kante $e$, und $G-v$ durch Weglassen der Ecke $v$ \kursiv{samt aller Kanten}, die $v$ berühren.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 2.14}
+Eine Kante $e$ ist genau dann eine Brücke, wenn sie auf keinem Kreis von $G$ liegt.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis}
+Sei $e = \{x,y\}$.
+
+\schritt{Richtung 1 --- liegt $e$ auf einem Kreis, so ist $e$ keine Brücke}
+Sei $C = (x, y, w_1, w_2, \ldots, w_r, x)$ ein Kreis durch $e$. Dann ist
+\[ R = (x, w_r, w_{r-1}, \ldots, w_1, y) \]
+ein Weg von $x$ nach $y$, der die Kante $e$ nicht benutzt --- er läuft ja auf der anderen Seite des Kreises herum.
+
+Nun sei $u,v$ ein beliebiges Eckenpaar, das in $G$ durch einen Weg verbunden ist. Benutzt dieser Weg die Kante $e$ nicht, so besteht er auch in $G - e$. Benutzt er sie, so ersetzen wir das Kantenstück $x \to y$ durch den Umweg $R$ und erhalten einen Kantenzug in $G-e$; nach Lemma 2.3 gibt es dann auch dort einen Weg. In beiden Fällen bleibt $u \sim v$ erhalten. Die Komponentenzahl ändert sich also nicht.
+
+\schritt{Richtung 2 --- ist $e$ keine Brücke, so liegt $e$ auf einem Kreis}
+Ist $e$ keine Brücke, so hat $G-e$ dieselbe Komponentenzahl wie $G$. Insbesondere liegen $x$ und $y$ auch in $G-e$ in derselben Komponente --- denn in $G$ tun sie es (die Kante $e$ verbindet sie), und die Komponenten können durch Entfernen einer Kante nur zerfallen, nicht verschmelzen; bliebe $x$ von $y$ getrennt, wären es mehr Komponenten.
+
+Es gibt also einen Weg $P$ von $x$ nach $y$ in $G - e$. Seine Länge ist mindestens $2$, denn die einzige Kante der Länge $1$ zwischen $x$ und $y$ wäre $e$, und die fehlt.
+
+Hängen wir an $P$ die Kante $e$ an, so entsteht ein geschlossener Kantenzug der Länge $\ge 3$, in dem alle Ecken bis auf Anfang und Ende verschieden sind --- also ein Kreis durch $e$. $\blacksquare$
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Kein entsprechender Satz für Schnittecken}
+Es liegt nahe zu vermuten: \enquote{Eine Ecke ist genau dann Schnittecke, wenn sie auf keinem Kreis liegt.} Das ist falsch.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\node[knotenb] (a) at (-1.6,0.6) {};
+\node[knotenb] (b) at (-1.6,-0.6) {};
+\node[knotenr] (v) at (0,0) {$v$};
+\node[knotenb] (c) at (1.6,0.6) {};
+\node[knotenb] (d) at (1.6,-0.6) {};
+\draw[kante] (a)--(b); \draw[kante] (a)--(v); \draw[kante] (b)--(v);
+\draw[kante] (c)--(d); \draw[kante] (c)--(v); \draw[kante] (d)--(v);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.25) {$v$ liegt auf zwei Dreiecken --- und ist trotzdem Schnittecke};
+\end{tikzpicture}
+\end{center}
+
+Entfernt man $v$, zerfällt der Graph in zwei Dreieckshälften. Die Ecke liegt auf Kreisen, ist aber der einzige Übergang zwischen den beiden Teilen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist ein gutes Beispiel dafür, wie unzuverlässig Analogieschlüsse in der Graphentheorie sind. Der richtige Begriff für \enquote{es gibt keine Schnittecke} heißt \Begriff{zweifach zusammenhängend} und wird in Kapitel~12 im Zusammenhang mit dem Satz von Menger behandelt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- Komponenten und Kantenzahl}
+Ein Graph hat $10$ Ecken und $3$ Zusammenhangskomponenten. Wie viele Kanten hat er mindestens?
+
+\loesung
+\schritt{Schritt 1 --- Die Komponenten einzeln betrachten}
+Seien die Komponenten $n_1$, $n_2$, $n_3$ Ecken groß mit $n_1 + n_2 + n_3 = 10$ und $n_i \ge 1$.
+
+Jede Komponente ist für sich ein zusammenhängender Graph. Nach Satz 2.8 hat die $i$-te also mindestens $n_i - 1$ Kanten.
+
+\schritt{Schritt 2 --- Aufsummieren}
+Da Kanten nie zwischen Komponenten verlaufen, ist die Gesamtkantenzahl die Summe:
+\[ |E| \;\ge\; (n_1 - 1) + (n_2 - 1) + (n_3 - 1) = (n_1+n_2+n_3) - 3 = 10 - 3 = 7 . \]
+
+\schritt{Schritt 3 --- Ist die Schranke erreichbar?}
+Ja. Man nehme drei Wege, etwa $P_8$, $P_1$, $P_1$: Der erste hat $7$ Kanten, die beiden einzelnen Ecken keine. Zusammen $8+1+1 = 10$ Ecken, $3$ Komponenten, $7$ Kanten.
+
+\schritt{Antwort}
+Mindestens $\mathbf{7}$ Kanten. Allgemein gilt: Ein Graph mit $n$ Ecken und $c$ Komponenten hat mindestens $n - c$ Kanten.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Abstände im Petersen-Graphen}
+Bestimmen Sie Durchmesser und Taille des Petersen-Graphen.
+
+\loesung
+\schritt{Schritt 1 --- Aufbau in Erinnerung rufen}
+Fünf äußere Ecken $a_0, \ldots, a_4$ bilden einen Fünfeckskreis. Fünf innere Ecken $b_0, \ldots, b_4$ sind so verbunden, dass $b_i$ mit $b_{i+2}$ benachbart ist (Indizes stets modulo $5$ gerechnet). Jede Speiche verbindet $a_i$ mit $b_i$.
+
+\schritt{Schritt 2 --- Die Taille: gibt es ein Dreieck?}
+Wir prüfen die drei möglichen Sorten von Dreiecken.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{2.6cm}P{5.4cm}@{}}
+\toprule
+Drei äußere & Der äußere Kreis hat Länge $5$; er enthält keine Sehne, denn $a_i$ ist nur mit $a_{i\pm1}$ und $b_i$ benachbart. Kein Dreieck.\\
+Drei innere & $b_i$ ist mit $b_{i\pm 2}$ benachbart. Wären $b_i, b_j, b_k$ ein Dreieck, so müssten die drei Differenzen alle $\pm 2$ sein --- aber $2+2+2 = 6 \not\equiv 0$ und $2+2-2 = 2 \not\equiv 0$ modulo $5$. Kein Dreieck.\\
+Gemischt & Jede Ecke hat genau eine Speiche. Ein Dreieck mit zwei äußeren und einer inneren Ecke bräuchte zwei Speichen zu derselben inneren Ecke --- gibt es nicht. Ebenso umgekehrt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Gibt es einen Vierkreis?}
+Ein Vierkreis müsste eine gerade Anzahl von Speichen benutzen, also $0$, $2$ oder $4$.
+
+\kursiv{Null Speichen:} ganz außen (der äußere Kreis hat Länge $5$, ohne Sehnen --- unmöglich) oder ganz innen (der innere Fünfstern hat ebenfalls Länge $5$ als Kreis, ohne kürzere --- unmöglich).
+
+\kursiv{Zwei Speichen:} Der Kreis hätte die Form $a_i \to a_j \to b_j \to b_i \to a_i$. Dann müsste $a_i a_j$ eine Kante sein, also $j = i \pm 1$, \kursiv{und} $b_i b_j$ eine Kante, also $j = i \pm 2$. Beides zugleich ist unmöglich.
+
+\kursiv{Vier Speichen:} Dann wechselten sich vier Speichen ab, ohne dazwischen andere Kanten --- der Kreis hätte Länge $8$, nicht $4$.
+
+\schritt{Schritt 4 --- Ein Fünfkreis existiert}
+Der äußere Kreis $a_0 a_1 a_2 a_3 a_4 a_0$ hat Länge $5$. Also
+\[ g(\text{Petersen}) = \mathbf{5} . \]
+
+\schritt{Schritt 5 --- Der Durchmesser}
+Wir bestimmen die Abstände von $a_0$ aus.
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.8cm}P{4.2cm}P{1.4cm}@{}}
+\toprule
+\textbf{Abstand} & \textbf{Ecken} & \textbf{Anzahl}\\
+\midrule
+$0$ & $a_0$ & $1$\\
+$1$ & $a_1$, $a_4$, $b_0$ & $3$\\
+$2$ & $a_2$, $a_3$, $b_1$, $b_4$, $b_2$, $b_3$ & $6$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Zur Kontrolle der dritten Zeile: $a_2$ über $a_1$; $a_3$ über $a_4$; $b_1$ über $a_1$; $b_4$ über $a_4$; $b_2$ über $b_0$ (denn $b_0 b_2$ ist eine Kante); $b_3$ über $b_0$ (denn $b_0 b_3 = b_0 b_{0-2}$ ist eine Kante).
+
+$1 + 3 + 6 = 10$ --- alle Ecken erfasst. Der größte Abstand von $a_0$ aus ist $2$.
+
+\schritt{Schritt 6 --- Warum das für alle Ecken gilt}
+Der Petersen-Graph ist \Begriff{eckentransitiv}: Zu je zwei Ecken gibt es einen Isomorphismus des Graphen auf sich selbst, der die eine in die andere überführt. Deshalb sieht der Graph von jeder Ecke aus gleich aus, und die Rechnung von $a_0$ aus gilt überall.
+\[ \operatorname{diam}(\text{Petersen}) = \mathbf{2} . \]
+
+\schritt{Probe}
+Bei Grad $3$ und Durchmesser $2$ erreicht man von einer Ecke aus höchstens $1 + 3 + 3\cdot 2 = 10$ Ecken. Der Petersen-Graph erreicht genau $10$ --- er ist ein sogenannter Moore-Graph, der diese Schranke mit Gleichheit erfüllt. Das erklärt seinen Sonderstatus. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Bipartit oder nicht?}
+Ist der abgebildete Graph bipartit? Geben Sie eine Bipartition an oder einen ungeraden Kreis.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\node[knotenb] (1) at (0,1.1) {$1$};
+\node[knotenb] (2) at (1.3,0.6) {$2$};
+\node[knotenb] (3) at (1.3,-0.7) {$3$};
+\node[knotenb] (4) at (0,-1.2) {$4$};
+\node[knotenb] (5) at (-1.3,-0.7) {$5$};
+\node[knotenb] (6) at (-1.3,0.6) {$6$};
+\draw[kante] (1)--(2); \draw[kante] (2)--(3); \draw[kante] (3)--(4);
+\draw[kante] (4)--(5); \draw[kante] (5)--(6); \draw[kante] (6)--(1);
+\draw[kante] (1)--(4);
+\end{tikzpicture}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Das Verfahren aus dem Beweis anwenden}
+Wurzel: $r = 1$. Wir bestimmen die Abstände.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.4cm}P{3.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Ecke} & \textbf{Kürzester Weg} & $d(1,v)$ & \textbf{Seite}\\
+\midrule
+$1$ & --- & $0$ & $A$\\
+$2$ & $1\!-\!2$ & $1$ & $B$\\
+$6$ & $1\!-\!6$ & $1$ & $B$\\
+$4$ & $1\!-\!4$ & $1$ & $B$\\
+$3$ & $1\!-\!2\!-\!3$ & $2$ & $A$\\
+$5$ & $1\!-\!6\!-\!5$ & $2$ & $A$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Also $A = \{1, 3, 5\}$ und $B = \{2, 4, 6\}$.
+
+\schritt{Schritt 2 --- Jede Kante prüfen}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Kante} & \textbf{Seiten} & \textbf{In Ordnung?}\\
+\midrule
+$\{1,2\}$ & $A$--$B$ & ja\\
+$\{2,3\}$ & $B$--$A$ & ja\\
+$\{3,4\}$ & $A$--$B$ & ja\\
+$\{4,5\}$ & $B$--$A$ & ja\\
+$\{5,6\}$ & $A$--$B$ & ja\\
+$\{6,1\}$ & $B$--$A$ & ja\\
+$\{1,4\}$ & $A$--$B$ & ja\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Alle sieben Kanten verlaufen zwischen den Seiten.
+
+\schritt{Antwort}
+Der Graph ist bipartit mit der Bipartition $A = \{1,3,5\}$, $B = \{2,4,6\}$.
+
+\schritt{Gegenprobe über Satz 2.12}
+Der Graph enthält die Kreise $1\!-\!2\!-\!3\!-\!4\!-\!1$ (Länge $4$), $1\!-\!4\!-\!5\!-\!6\!-\!1$ (Länge $4$) und den äußeren Sechskreis (Länge $6$). Alle gerade --- passt zum Ergebnis. \checkmark
+
+\schritt{Was passiert, wenn man eine Kante hinzufügt}
+Fügt man $\{1,3\}$ hinzu, so entsteht das Dreieck $1\!-\!2\!-\!3\!-\!1$: ein ungerader Kreis. Der Graph wäre dann nicht mehr bipartit, und es bräuchte drei Schichten statt zwei.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.4 --- Ein Satz über den Durchmesser}
+Zeigen Sie: Ist $G$ zusammenhängend mit $\operatorname{diam}(G) \ge 3$, so ist das Komplement $\overline{G}$ zusammenhängend mit $\operatorname{diam}(\overline{G}) \le 3$.
+
+\loesung
+\schritt{Schritt 1 --- Was zu zeigen ist}
+Für je zwei verschiedene Ecken $u,v$ ist ein Weg in $\overline{G}$ der Länge höchstens $3$ anzugeben.
+
+\schritt{Schritt 2 --- Die Voraussetzung ausnutzen}
+Wegen $\operatorname{diam}(G) \ge 3$ gibt es Ecken $x, y$ mit $d_G(x,y) \ge 3$.
+
+Daraus folgt zweierlei:
+\begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+\item $\{x,y\} \notin E$, sonst wäre $d_G(x,y) = 1$;
+\item $N_G(x) \cap N_G(y) = \varnothing$, denn ein gemeinsamer Nachbar $z$ ergäbe den Weg $x\!-\!z\!-\!y$ und damit $d_G(x,y) \le 2$.
+\end{itemize}
+Insbesondere ist in $\overline{G}$ jede Ecke mit $x$ oder mit $y$ benachbart: Eine Ecke $w \notin \{x,y\}$ kann in $G$ nicht zugleich Nachbar von $x$ und von $y$ sein, ist also in $\overline{G}$ Nachbar von mindestens einem der beiden.
+
+\schritt{Schritt 3 --- Fallunterscheidung für zwei Ecken $u,v$}
+
+\textbf{Fall A: $\{u,v\} \notin E$.} Dann ist $\{u,v\}$ eine Kante von $\overline{G}$, also $d_{\overline{G}}(u,v) = 1$.
+
+\textbf{Fall B: $\{u,v\} \in E$.} Dann ist $\{u,v\}$ keine Kante von $\overline{G}$, und wir brauchen einen Umweg.
+
+Nach Schritt~2 ist $u$ in $\overline{G}$ mit $x$ oder $y$ benachbart; dasselbe gilt für $v$.
+
+\kursiv{Fall B1 --- beide mit derselben dieser Ecken, sagen wir $x$.} Falls $u = x$ oder $v = x$, ist einer der beiden schon $x$ und der Weg hat Länge $1$; andernfalls ist $u\!-\!x\!-\!v$ ein Weg in $\overline{G}$ der Länge $2$.
+
+\kursiv{Fall B2 --- $u$ mit $x$, $v$ mit $y$ (oder umgekehrt).} Da $\{x,y\} \notin E$, ist $\{x,y\}$ eine Kante von $\overline{G}$. Also ist
+\[ u \;-\; x \;-\; y \;-\; v \]
+ein Kantenzug in $\overline{G}$ der Länge $3$. Nach Lemma 2.3 gibt es einen Weg von $u$ nach $v$ der Länge höchstens $3$.
+
+\schritt{Schritt 4 --- Schluss}
+In allen Fällen ist $d_{\overline{G}}(u,v) \le 3$. Also ist $\overline{G}$ zusammenhängend, und sein Durchmesser ist höchstens $3$. $\blacksquare$
+
+\schritt{Probe an einem Beispiel}
+$G = P_4$ (Weg auf $1,2,3,4$) hat $\operatorname{diam} = 3$. Das Komplement hat die Kanten $\{1,3\}, \{1,4\}, \{2,4\}$ --- das ist wieder ein $P_4$, nämlich $3\!-\!1\!-\!4\!-\!2$, mit Durchmesser $3$. Die Schranke ist also scharf. \checkmark
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Dénes Kőnig und der Satz über bipartite Graphen}
+\Person{Dénes Kőnig} (1884--1944) bewies den Satz 2.12 im Jahr 1916, in derselben Arbeit, die auch den nach ihm benannten Satz über Paarungen enthält (Kapitel~11). Er lehrte in Budapest und schrieb 1936 das erste Lehrbuch des Gebiets --- deutschsprachig, im Leipziger Verlag Akademische Verlagsgesellschaft erschienen.
+
+Sein Vater \Person{Gyula Kőnig} war ebenfalls Mathematiker und in der Mengenlehre bekannt geworden. Dénes Kőnig nahm sich 1944 das Leben, wenige Tage nach der deutschen Besetzung Ungarns.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sein Buch ist der Grund, warum ein großer Teil der Grundbegriffe --- \enquote{Ecke}, \enquote{Kante}, \enquote{Grad}, \enquote{Baum} --- deutsche Ursprünge hat. Die englische Terminologie entstand erst nach 1945, teils als Übersetzung, teils als Neuschöpfung.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Kleine Durchmesser in großen Netzen}
+Der Durchmesser wirklicher Netzwerke ist erstaunlich klein. Das Weltnetz der Verweise hat bei über $10^{11}$ Ecken einen mittleren Abstand von etwa $19$; im Netz der Koautorenschaften in der Mathematik liegt er bei ungefähr $7{,}6$.
+
+Die theoretische Erklärung liefern Zufallsgraphmodelle: Bereits ein Zufallsgraph, in dem jede Ecke im Mittel $c > 1$ Nachbarn hat, hat mit hoher Wahrscheinlichkeit einen Durchmesser der Größenordnung $\log n / \log c$. Wächst $n$ um den Faktor $1000$, wächst der Durchmesser nur um etwa $3$. Kapitel~14 rechnet das nach.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Vorsicht ist geboten bei der populären Formulierung \enquote{jeder kennt jeden über sechs Ecken}. Sie geht auf ein Experiment von Stanley Milgram (1967) zurück, das methodisch schwach war: Die Rücklaufquote lag unter einem Drittel, und gescheiterte Ketten wurden nicht gezählt. Die Größenordnung hat sich später bestätigt, das berühmte Ergebnis selbst trug sie nicht.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Sprache} & Kantenzug, Weg, Kreis --- und der Unterschied\\
+\textbf{Lemma 2.3} & Jeder Kantenzug enthält einen Weg\\
+\textbf{Satz 2.6} & Erreichbarkeit ist eine Äquivalenzrelation; daher zerfällt jeder Graph in Komponenten\\
+\textbf{Satz 2.8} & Zusammenhang kostet mindestens $n-1$ Kanten\\
+\textbf{Satz 2.10} & Der Abstand ist eine Metrik\\
+\textbf{Satz 2.12} & Bipartit $\iff$ kein ungerader Kreis --- mit Verfahren\\
+\textbf{Satz 2.14} & Brücke $\iff$ auf keinem Kreis\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}

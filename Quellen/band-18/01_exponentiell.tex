@@ -1,0 +1,600 @@
+\part{Wachstum}
+
+\chapter{Exponentielles Wachstum}
+
+\section{Die Annahme}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall beginnt im Labor}
+Am Klinikum Neustadt wird der Erreger in einer Nährlösung angezüchtet. Zu Beginn enthält ein Milliliter etwa $10^4$ Bakterien. Unter günstigen Bedingungen teilt sich jede Zelle etwa alle dreißig Minuten.
+
+\textbf{Die Frage:} Wie viele sind es nach acht Stunden?
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Annahme in Worten --- vor jeder Formel}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Zelle teilt sich unabhängig von den anderen mit derselben Rate. Nichts hindert sie daran.}
+\end{minipage}
+\end{center}
+
+Daraus folgt: Die Zahl der Neuzugänge je Zeiteinheit ist \kursiv{proportional} zur vorhandenen Zahl. Doppelt so viele Zellen erzeugen doppelt so viele Neue.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die gesamte Annahme. Alles Weitere in diesem Kapitel folgt aus ihr --- und alle Schwierigkeiten, die in Kapitel~2 auftreten, stammen daher, dass sie auf Dauer nicht zutrifft.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 1.1 --- die Wachstumsgleichung}
+Sei $N(t)$ die Anzahl zur Zeit~$t$. Die Annahme lautet in Zeichen
+\[ \frac{\dd N}{\dd t} \;=\; r\,N \]
+mit der \Begriff{Wachstums\-rate} $r > 0$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Wie man die Gleichung liest}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\node[font=\Large, color=tief] at (0,0) {$\displaystyle \frac{\dd N}{\dd t} = r\,N$};
+\draw[akzent, line width=0.7pt] (-0.95,0.45) -- (-1.6,1.1);
+\node[font=\scriptsize, color=akzent, anchor=east] at (-1.65,1.1) {Änderung je Zeit};
+\draw[akzent, line width=0.7pt] (0.62,-0.35) -- (1.3,-1.0);
+\node[font=\scriptsize, color=akzent, anchor=west] at (1.35,-1.0) {so viele sind da};
+\draw[akzent, line width=0.7pt] (0.32,0.4) -- (1.0,1.05);
+\node[font=\scriptsize, color=akzent, anchor=west] at (1.05,1.05) {Rate je Zelle und Zeit};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Die Einheit von $r$}
+Links steht \enquote{Zellen je Stunde}, rechts \enquote{$r$ mal Zellen}. Damit beides übereinstimmt, muss $r$ die Einheit \enquote{je Stunde} tragen --- also $\mathrm{h}^{-1}$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Einheitenprüfung ist keine Formsache. Sie ist die schnellste Art, einen Fehler in einem Modell zu finden: Wenn die Einheiten nicht zusammenpassen, stimmt die Gleichung nicht --- gleichgültig wie plausibel sie aussieht.}
+\end{minipage}
+\end{center}
+
+\schritt{Was $r$ bedeutet}
+\[ r = \frac{1}{N}\cdot\frac{\dd N}{\dd t} \]
+Das ist die \kursiv{relative} Zuwachsrate: der Zuwachs je vorhandener Zelle und Zeiteinheit. Bei $r = 0{,}5\,\mathrm{h}^{-1}$ wächst die Kultur in jeder Stunde um etwa die Hälfte ihres Bestands.
+\end{merksatz}
+
+\section{Die Lösung}
+
+\begin{merksatz}
+\boxtitel{Satz 1.2 --- Trennung der Veränderlichen}
+Die Lösung von $\dfrac{\dd N}{\dd t} = rN$ mit $N(0) = N_0 > 0$ lautet
+\[ N(t) = N_0\,e^{rt} . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- in fünf Schritten}
+\schritt{Schritt 1 --- Sortieren}
+Wir bringen alles mit $N$ nach links, alles mit $t$ nach rechts. Da $N > 0$ ist, darf man durch $N$ teilen:
+\[ \frac{1}{N}\,\dd N = r\,\dd t . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Schreibweise --- mit $\dd N$ und $\dd t$ als getrennten Größen --- ist streng genommen eine Abkürzung. Sie lässt sich rechtfertigen, und Band 14 tut das. Für unsere Zwecke genügt es zu wissen, dass das Ergebnis korrekt ist und sich durch Einsetzen prüfen lässt --- was wir in Schritt 5 tun.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Beide Seiten integrieren}
+\[ \int \frac{1}{N}\,\dd N = \int r\,\dd t \]
+\[ \ln N = r\,t + C \]
+Die Stammfunktion von $1/N$ ist $\ln N$ (für $N>0$), die von der Konstanten $r$ ist $rt$. Die beiden Integrationskonstanten fasst man zu einer zusammen.
+
+\schritt{Schritt 3 --- Nach $N$ auflösen}
+\[ N = e^{rt + C} = e^{C}\cdot e^{rt} \]
+Die Zahl $e^C$ ist positiv, aber unbekannt. Wir nennen sie $A$:
+\[ N(t) = A\,e^{rt} . \]
+
+\schritt{Schritt 4 --- Die Konstante bestimmen}
+Zur Zeit $t=0$ gilt
+\[ N(0) = A\,e^{0} = A \cdot 1 = A . \]
+Also ist $A = N_0$, und
+\[ N(t) = N_0\,e^{rt} . \]
+
+\schritt{Schritt 5 --- Die Probe}
+Wir setzen die gefundene Lösung in die ursprüngliche Gleichung ein.
+
+\kursiv{Linke Seite:}
+\[ \frac{\dd}{\dd t}\Bigl(N_0e^{rt}\Bigr) = N_0 \cdot r\,e^{rt} = r\,N_0e^{rt} \]
+nach der Kettenregel.
+
+\kursiv{Rechte Seite:}
+\[ r\,N(t) = r\,N_0e^{rt} \]
+
+Beide stimmen überein. Und $N(0) = N_0$. \checkmark\ $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Schritt 5 ist nicht bloße Sorgfalt. Die Trennung der Veränderlichen ist ein Verfahren, das \kursiv{Kandidaten} liefert; erst die Probe macht daraus eine Lösung. In diesem Band wird jede Lösung geprüft.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Verdopplungszeit}
+
+\begin{merksatz}
+\boxtitel{Satz 1.3}
+Die Zeit, in der sich der Bestand verdoppelt, beträgt
+\[ T_2 = \frac{\ln 2}{r} \]
+und hängt \kursiv{nicht} vom Ausgangswert ab.
+
+\schritt{Beweis}
+Gesucht ist $T_2$ mit $N(t+T_2) = 2\,N(t)$:
+\begin{align*}
+N_0e^{r(t+T_2)} &= 2\,N_0e^{rt}\\
+e^{rt}\cdot e^{rT_2} &= 2\,e^{rt}\\
+e^{rT_2} &= 2 && \text{(durch } e^{rt} \neq 0 \text{ geteilt)}\\
+rT_2 &= \ln 2\\
+T_2 &= \frac{\ln 2}{r} . \qquad \blacksquare
+\end{align*}
+
+\schritt{Die bemerkenswerte Eigenschaft}
+In der Rechnung fiel $e^{rt}$ vollständig heraus --- und mit ihm $N_0$ und $t$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Von $10$ auf $20$ dauert genauso lange wie von $10^{12}$ auf $2\cdot10^{12}$.} Diese Eigenschaft kennzeichnet das exponentielle Wachstum und kein anderes.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Kultur am Klinikum}
+\schritt{Schritt 1 --- Die Rate bestimmen}
+Gegeben ist $T_2 = 30\ \text{min} = 0{,}5\ \text{h}$. Aus Satz 1.3:
+\[ r = \frac{\ln 2}{T_2} = \frac{0{,}6931}{0{,}5} = 1{,}386\ \mathrm{h}^{-1} . \]
+
+\schritt{Schritt 2 --- Nach acht Stunden}
+\[ N(8) = 10^4 \cdot e^{1{,}386 \cdot 8} = 10^4 \cdot e^{11{,}09} \]
+\[ e^{11{,}09} = 65\,536 \]
+\[ N(8) = 10^4 \cdot 65\,536 = 6{,}55 \cdot 10^{8} \ \text{je Milliliter} . \]
+
+\schritt{Schritt 3 --- Die Kontrolle ohne $e$}
+In acht Stunden liegen $8/0{,}5 = 16$ Verdopplungen. Also
+\[ N(8) = 10^4 \cdot 2^{16} = 10^4 \cdot 65\,536 . \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Rechnung ist die anschaulichere und sollte immer mitlaufen: Verdopplungen zählen ist einfacher als Exponenten ausrechnen und macht Größenordnungsfehler sofort sichtbar.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Der Bezug zur Praxis}
+Eine Keimzahl von $10^8$ bis $10^9$ je Milliliter ist die Größenordnung, bei der eine Bakterienkultur sichtbar trüb wird. Nach acht Stunden ist die Nährlösung also erkennbar bewachsen --- was mit der Laborerfahrung übereinstimmt.
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+Jetzt der wichtigste Abschnitt des Kapitels.
+
+\begin{warnung}
+\boxtitelr{Nichts wächst lange exponentiell}
+Rechnen wir weiter. Nach $48$ Stunden lägen $96$ Verdopplungen vor:
+\[ N(48) = 10^4 \cdot 2^{96} = 10^4 \cdot 7{,}92\cdot10^{28} = 7{,}9\cdot10^{32} \ \text{je Milliliter} . \]
+
+\schritt{Was das bedeutet}
+Eine Bakterienzelle wiegt etwa $10^{-12}$ Gramm. Ein Milliliter Kultur wöge dann
+\[ 7{,}9\cdot10^{32} \cdot 10^{-12}\ \text{g} = 7{,}9\cdot10^{20}\ \text{g} = 7{,}9\cdot10^{17}\ \text{kg} . \]
+
+\schritt{Wann die Erdmasse erreicht wäre}
+Die Erde wiegt $5{,}97\cdot10^{24}$ kg, also $5{,}97\cdot10^{27}$ g --- das sind $5{,}97\cdot10^{39}$ Bakterien.
+
+Von $10^4$ aus braucht man den Faktor $5{,}97\cdot10^{35}$, also
+\[ \log_2\bigl(5{,}97\cdot10^{35}\bigr) = \frac{35{,}78}{0{,}301} = 118{,}9 \ \text{Verdopplungen} , \]
+das sind $118{,}9 \cdot 0{,}5 = 59{,}4$ Stunden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nach zweieinhalb Tagen wöge ein Milliliter Kultur so viel wie die Erde.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist kein Rechenfehler, sondern die korrekte Folgerung aus der Annahme. Es zeigt, dass die Annahme falsch sein muss --- und zwar lange vorher. Ein Modell an seine Grenze zu treiben, ist die beste Art, seine Grenze zu finden.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Woran die Annahme scheitert}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Nährstoffe} & Sie werden knapp. Die Teilungsrate sinkt.\\
+\textbf{Abfallstoffe} & Sie reichern sich an und hemmen das Wachstum.\\
+\textbf{Platz} & Das Volumen ist endlich.\\
+\textbf{Wechsel\-wirkung} & \kursiv{Jede} Zelle teilt sich unabhängig --- das setzt voraus, dass sie einander nicht bemerken.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die typische Wachstumskurve im Labor}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (7.4,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.4);
+\draw[tief, line width=1.3pt]
+  (0,0.35) .. controls (0.9,0.35) and (1.2,0.4) .. (1.6,0.8)
+  .. controls (2.4,1.7) and (3.0,2.5) .. (4.0,2.85)
+  .. controls (4.8,3.05) and (5.4,3.0) .. (6.0,2.95)
+  .. controls (6.6,2.9) and (7.0,2.6) .. (7.2,2.2);
+\foreach \x/\lab in {0.8/{Anlauf}, 2.8/{exponentiell}, 5.0/{Sättigung}, 6.9/{Absterben}}
+  \node[font=\scriptsize\itshape, color=grau] at (\x,-0.42) {\lab};
+\draw[grau!45, dashed] (1.6,0) -- (1.6,3.2);
+\draw[grau!45, dashed] (4.2,0) -- (4.2,3.2);
+\draw[grau!45, dashed] (6.2,0) -- (6.2,3.2);
+\node[font=\scriptsize, color=grau, rotate=90] at (-0.45,1.7) {Keimzahl};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das exponentielle Modell beschreibt genau den zweiten Abschnitt --- und nur ihn.} Er dauert im Labor typischerweise einige Stunden.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die ehrliche Beschreibung: Das Modell ist nicht falsch, sondern \kursiv{lokal} gültig. Kapitel~2 erweitert es so, dass es auch den dritten Abschnitt erfasst.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die halblogarithmische Darstellung}
+
+\begin{merksatz}
+\boxtitel{Wie man exponentielles Wachstum erkennt}
+Logarithmiert man die Lösung, so wird sie linear:
+\[ \ln N(t) = \ln\bigl(N_0e^{rt}\bigr) = \ln N_0 + rt . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Trägt man $\ln N$ gegen $t$ auf, so liegt exponentielles Wachstum auf einer Geraden --- mit der Steigung $r$ und dem Achsenabschnitt $\ln N_0$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{scope}
+\draw[grau!60, line width=0.6pt] (0,0) -- (3.6,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,3.2);
+\begin{scope}
+\clip (0,0) rectangle (3.6,3.2);
+\draw[tief, line width=1.2pt, smooth, samples=50, domain=0:3.6]
+  plot (\x, {0.16*exp(0.85*\x)});
+\end{scope}
+\node[font=\scriptsize\itshape, color=grau] at (1.8,-0.5) {$N$ gegen $t$};
+\end{scope}
+\begin{scope}[xshift=5.4cm]
+\draw[grau!60, line width=0.6pt] (0,0) -- (3.6,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,3.2);
+\draw[akzent, line width=1.2pt] (0,0.5) -- (3.4,2.95);
+\foreach \x in {0.4,1.0,1.6,2.2,2.8}
+  \fill[tief] (\x,{0.5+0.72*\x}) circle (2.0pt);
+\node[font=\scriptsize\itshape, color=grau] at (1.8,-0.5) {$\ln N$ gegen $t$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\schritt{Wozu das gut ist}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Prüfen} & Krümmt sich die Linie, ist das Wachstum nicht exponentiell --- das sieht man in der gewöhnlichen Darstellung nicht.\\
+\textbf{Schätzen} & Die Steigung liefert $r$ unmittelbar. Kapitel~10 in Band 17 zeigt, wie man sie bestimmt.\\
+\textbf{Darstellen} & Über viele Größenordnungen bleibt alles sichtbar.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Zeile ist der eigentliche Nutzen. In der gewöhnlichen Darstellung sieht jedes rasche Wachstum gleich aus --- eine steile Kurve. Erst die logarithmische Achse trennt exponentielles von überexponentiellem und von gesättigtem Wachstum.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zerfall: dieselbe Gleichung mit anderem Vorzeichen}
+
+\begin{merksatz}
+\boxtitel{Wenn $r$ negativ ist}
+Setzt man $r = -k$ mit $k > 0$, so lautet die Gleichung
+\[ \frac{\dd N}{\dd t} = -k\,N \qquad\text{mit der Lösung}\qquad N(t) = N_0e^{-kt} . \]
+
+\schritt{Die Annahme in Worten}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jedes vorhandene Teilchen verschwindet unabhängig von den anderen mit derselben Wahrscheinlichkeit je Zeiteinheit.}
+\end{minipage}
+\end{center}
+
+\schritt{Wo das zutrifft}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Radioaktiver Zerfall} & Trifft exakt zu --- ein Atomkern hat kein Gedächtnis.\\
+\textbf{Arzneimittel} & Trifft näherungsweise zu, solange die abbauenden Enzyme nicht gesättigt sind. Kapitel~10.\\
+\textbf{Absterben} & Trifft zu, wenn alle Zellen gleich gefährdet sind.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Halbwertszeit}
+Dieselbe Rechnung wie in Satz 1.3, mit $\frac12$ statt $2$:
+\[ e^{-kT_{1/2}} = \tfrac12 \quad\Longrightarrow\quad -kT_{1/2} = \ln\tfrac12 = -\ln 2 \]
+\[ T_{1/2} = \frac{\ln 2}{k} . \]
+
+\schritt{Die Merktabelle}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Nach} & \textbf{Anteil übrig} & \\
+\midrule
+$1\,T_{1/2}$ & $50{,}0\,\%$ & \\
+$2\,T_{1/2}$ & $25{,}0\,\%$ & \\
+$3\,T_{1/2}$ & $12{,}5\,\%$ & \\
+$4\,T_{1/2}$ & $6{,}25\,\%$ & \textcolor{gruen}{Faustregel}\\
+$5\,T_{1/2}$ & $3{,}13\,\%$ & \\
+$7\,T_{1/2}$ & $0{,}78\,\%$ & praktisch weg\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Zeile mit vier Halbwertszeiten ist die klinisch wichtigste: Nach dieser Zeit sind rund $94\,\%$ eines Wirkstoffs eliminiert. Dieselbe Zahl kehrt in Kapitel~10 in umgekehrter Richtung wieder --- als Zeit bis zum Erreichen des Gleichgewichtsspiegels.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.1 --- Rate aus zwei Messwerten}
+Eine Kultur enthält zur Zeit $t=0$ genau $2{,}0\cdot10^5$ Zellen je Milliliter, nach $3$ Stunden $1{,}8\cdot10^6$. Bestimmen Sie $r$, die Verdopplungszeit und den Bestand nach $7$ Stunden.
+
+\loesung
+\schritt{Schritt 1 --- Die Gleichung aufstellen}
+\[ N(3) = N_0e^{3r} \quad\Longrightarrow\quad 1{,}8\cdot10^6 = 2{,}0\cdot10^5 \cdot e^{3r} \]
+
+\schritt{Schritt 2 --- Nach $r$ auflösen}
+\[ e^{3r} = \frac{1{,}8\cdot10^6}{2{,}0\cdot10^5} = 9{,}0 \]
+\[ 3r = \ln 9{,}0 = 2{,}1972 \]
+\[ r = \frac{2{,}1972}{3} = 0{,}7324\ \mathrm{h}^{-1} \]
+
+\schritt{Schritt 3 --- Verdopplungszeit}
+\[ T_2 = \frac{\ln 2}{r} = \frac{0{,}6931}{0{,}7324} = 0{,}946\ \text{h} = 56{,}8\ \text{min} \]
+
+\schritt{Schritt 4 --- Die Kontrolle über Verdopplungen}
+In drei Stunden hat sich der Bestand verneunfacht. Neun liegt zwischen $8 = 2^3$ und $16 = 2^4$, genauer bei
+\[ \log_2 9 = \frac{\ln 9}{\ln 2} = \frac{2{,}1972}{0{,}6931} = 3{,}17 \ \text{Verdopplungen} . \]
+\[ T_2 = \frac{3\ \text{h}}{3{,}17} = 0{,}946\ \text{h} . \quad \checkmark \]
+
+\schritt{Schritt 5 --- Der Bestand nach sieben Stunden}
+\[ N(7) = 2{,}0\cdot10^5 \cdot e^{0{,}7324 \cdot 7} = 2{,}0\cdot10^5 \cdot e^{5{,}127} \]
+\[ e^{5{,}127} = 168{,}5 \]
+\[ N(7) = 3{,}37\cdot10^{7} \ \text{je Milliliter} \]
+
+\schritt{Schritt 6 --- Die Kontrolle}
+Sieben Stunden entsprechen $7/0{,}946 = 7{,}40$ Verdopplungen:
+\[ 2^{7{,}40} = 168{,}9 \quad\Longrightarrow\quad 2{,}0\cdot10^5 \cdot 168{,}9 = 3{,}38\cdot10^7 . \quad \checkmark \]
+
+\schritt{Ein Vorbehalt}
+Die Rechnung setzt voraus, dass das Wachstum über die ganzen sieben Stunden exponentiell bleibt. Bei $3{,}4\cdot10^7$ je Milliliter ist das plausibel --- die Sättigung setzt meist erst bei $10^8$ bis $10^9$ ein.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Hätte man nach $24$ Stunden gefragt, so ergäbe die Formel $8{,}8\cdot10^{12}$ --- weit jenseits des Möglichen. Die Antwort wäre rechnerisch richtig und sachlich unbrauchbar. Jede Hochrechnung mit einem Wachstumsmodell braucht die Frage, ob das Modell dort noch gilt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.2 --- Wirkstoffelimination}
+Ein Antibiotikum hat eine Halbwertszeit von $4$ Stunden. Nach einer Einmalgabe beträgt die Spitzenkonzentration $32\ \mathrm{mg/l}$. Die wirksame Mindestkonzentration liegt bei $2\ \mathrm{mg/l}$.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{4.2cm}P{4.2cm}@{}}
+\toprule
+(a) Eliminationskonstante $k$ & (c) Wie lange über $2\ \mathrm{mg/l}$?\\
+(b) Konzentration nach $6$ h & (d) Welches Dosierungsintervall?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) --- Die Konstante}
+\[ k = \frac{\ln 2}{T_{1/2}} = \frac{0{,}6931}{4} = 0{,}1733\ \mathrm{h}^{-1} \]
+
+\schritt{(b) --- Nach sechs Stunden}
+\[ c(6) = 32 \cdot e^{-0{,}1733 \cdot 6} = 32 \cdot e^{-1{,}0397} = 32 \cdot 0{,}3536 = 11{,}3\ \mathrm{mg/l} \]
+
+\kursiv{Kontrolle:} Sechs Stunden sind $1{,}5$ Halbwertszeiten. Also
+\[ 32 \cdot \left(\tfrac12\right)^{1{,}5} = 32 \cdot 0{,}3536 = 11{,}3 . \quad \checkmark \]
+
+\schritt{(c) --- Die Zeit bis zur Mindestkonzentration}
+\[ 2 = 32\,e^{-kt} \quad\Longrightarrow\quad e^{-kt} = \frac{2}{32} = \frac{1}{16} \]
+\[ -kt = \ln\tfrac{1}{16} = -\ln 16 = -2{,}7726 \]
+\[ t = \frac{2{,}7726}{0{,}1733} = 16{,}0\ \text{h} \]
+
+\kursiv{Die Kontrolle in Halbwertszeiten:} Von $32$ auf $2$ ist der Faktor $16 = 2^4$, also genau vier Halbwertszeiten:
+\[ 4 \cdot 4\ \text{h} = 16\ \text{h} . \quad \checkmark \]
+
+\schritt{(d) --- Das Dosierungsintervall}
+Soll die Konzentration nie unter $2\ \mathrm{mg/l}$ fallen, so darf das Intervall höchstens $16$ Stunden betragen. In der Praxis wählte man $12$ Stunden --- zweimal täglich --- mit Sicherheitsabstand.
+
+\schritt{Ein Vorbehalt zu dieser Rechnung}
+Die Rechnung betrachtet eine \kursiv{Einmalgabe}. Bei wiederholter Gabe reichert sich der Wirkstoff an, und die Spitzenkonzentration steigt von Gabe zu Gabe, bis sich ein Gleichgewicht einstellt.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Kapitel~10 rechnet das vollständig durch. Das Ergebnis vorweg: Das Gleichgewicht ist nach etwa vier Halbwertszeiten erreicht --- hier also nach $16$ Stunden, unabhängig von der Dosis. Es ist dieselbe Zahl wie in Teil (c), und das ist kein Zufall.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.3 --- Zwei Stämme im Vergleich}
+Im Labor wachsen nebeneinander ein empfindlicher Stamm ($T_2 = 30$ min) und ein unempfindlicher ($T_2 = 36$ min). Zu Beginn macht der unempfindliche einen Anteil von $0{,}1\,\%$ aus. Wie entwickelt sich sein Anteil --- ohne Antibiotikum?
+
+\loesung
+\schritt{Schritt 1 --- Die beiden Raten}
+\[ r_E = \frac{\ln 2}{0{,}5} = 1{,}3863\ \mathrm{h}^{-1}, \qquad r_U = \frac{\ln 2}{0{,}6} = 1{,}1552\ \mathrm{h}^{-1} \]
+
+\schritt{Schritt 2 --- Die Ausgangszahlen}
+Sei die Gesamtzahl zu Beginn $N_{\text{ges}} = 10^6$. Dann
+\[ E_0 = 0{,}999 \cdot 10^6 = 999\,000, \qquad U_0 = 0{,}001 \cdot 10^6 = 1000 . \]
+
+\schritt{Schritt 3 --- Der Anteil als Funktion der Zeit}
+\[ \text{Anteil}(t) = \frac{U_0e^{r_Ut}}{U_0e^{r_Ut} + E_0e^{r_Et}} \]
+
+Wir teilen Zähler und Nenner durch $U_0e^{r_Ut}$:
+\[ \text{Anteil}(t) = \frac{1}{1 + \dfrac{E_0}{U_0}\,e^{(r_E-r_U)t}} \]
+
+\schritt{Schritt 4 --- Die maßgebliche Größe}
+\[ r_E - r_U = 1{,}3863 - 1{,}1552 = 0{,}2311\ \mathrm{h}^{-1} \]
+\[ \frac{E_0}{U_0} = \frac{999\,000}{1000} = 999 \]
+
+\[ \text{Anteil}(t) = \frac{1}{1 + 999\,e^{0{,}2311\,t}} \]
+
+\schritt{Schritt 5 --- Die Werte}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.8cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+$t$ (h) & $999\,e^{0{,}2311t}$ & \textbf{Anteil}\\
+\midrule
+$0$ & $999$ & $0{,}100\,\%$\\
+$6$ & $3995$ & $0{,}025\,\%$\\
+$12$ & $15\,977$ & $0{,}006\,\%$\\
+$24$ & $255\,500$ & $0{,}0004\,\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 6 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der unempfindliche Stamm wird verdrängt.} Sein Anteil viertelt sich etwa alle sechs Stunden.
+\end{minipage}
+\end{center}
+
+Der Grund steht in Schritt 4: Weil $r_E > r_U$, wächst der Nenner, und der Anteil fällt. Die Unempfindlichkeit kostet Wachstumsgeschwindigkeit --- man nennt das die \Begriff{Fitnesskosten} der Resistenz.
+
+\schritt{Schritt 7 --- Was ein Antibiotikum ändert}
+Unter Antibiotikum wird $r_E$ negativ --- der empfindliche Stamm stirbt --- während $r_U$ positiv bleibt. Dann kehrt sich die Rechnung um, und zwar mit derselben Formel: Aus $r_E - r_U > 0$ wird $r_E - r_U < 0$, und der Anteil wächst statt zu fallen.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{In dieser einen Vorzeichenänderung steckt die gesamte Resistenzproblematik. Kapitel~14 führt sie vollständig aus --- einschließlich der Frage, warum Behandlungspausen die Lage manchmal verbessern und manchmal verschlimmern.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Pfarrer, ein Pamphlet und ein Streit, der nie aufhörte}
+\Person{Thomas Robert Malthus} (1766--1834), anglikanischer Geistlicher und Ökonom, veröffentlichte 1798 anonym eine Schrift über das Bevölkerungsgesetz. Ihr Kern ist die Gegenüberstellung zweier Wachstumsarten:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Bevölkerung} & wächst \kursiv{geometrisch} --- $1, 2, 4, 8, 16$\\
+\textbf{Nahrungs\-mittel} & wachsen \kursiv{arithmetisch} --- $1, 2, 3, 4, 5$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Daraus folgerte Malthus, dass die Bevölkerung notwendig an eine Grenze stoße, und zwar durch Hunger, Krankheit oder Krieg.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die erste Behauptung ist mathematisch die Gleichung dieses Kapitels. Die zweite war schon damals nicht begründet und erwies sich als falsch --- die Nahrungsmittelerzeugung wuchs ihrerseits weitgehend exponentiell. Malthus' Vorhersage traf nicht ein; sein mathematischer Kern blieb.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Wirkung}
+Malthus beeinflusste \Person{Charles Darwin} unmittelbar. Darwin schrieb, die Lektüre habe ihm den entscheidenden Gedanken geliefert: Wenn mehr Nachkommen entstehen, als überleben können, muss eine Auslese stattfinden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das ist die Verbindung, die diesen Band trägt. Exponentielles Wachstum in einer begrenzten Welt \kursiv{erzwingt} Auslese --- und damit alles, was in Teil~II über Konkurrenz und in Teil~V über Resistenz steht. Die Mathematik des ersten Kapitels ist zugleich die Grundlage der Evolutionstheorie.}
+\end{minipage}
+\end{center}
+
+\Person{Pierre-François Verhulst} nahm Malthus' Gleichung 1838 auf und ergänzte sie um den Sättigungsterm. Davon handelt das nächste Kapitel.
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wo exponentielles Wachstum heute gerechnet wird}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Frühphase einer Epidemie} & Solange fast alle empfänglich sind, wächst die Fallzahl exponentiell. Die Wachstumsrate ist die zentrale Beobachtungsgröße --- Kapitel~7.\\
+\textbf{Tumorzellzahl} & In der frühesten Phase; später deutlich langsamer, Kapitel~13.\\
+\textbf{Virus\-vermehrung} & In den ersten Tagen einer Infektion, über mehrere Größenordnungen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Verdopplungszeit als Berichtsgröße}
+In der Epidemiologie hat sich die Verdopplungszeit gegenüber der Wachstumsrate durchgesetzt --- sie ist anschaulicher und lässt sich schneller einordnen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide Angaben sind gleichwertig; man rechnet mit Satz 1.3 ineinander um. Eine Verdopplungszeit von drei Tagen entspricht $r = 0{,}231$ je Tag; eine von einer Woche entspricht $r = 0{,}099$.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Schwierigkeit beim Schätzen}
+Aus Meldedaten die Wachstumsrate zu bestimmen, ist heikler, als es aussieht: Meldeverzüge, Wochenendmuster und wechselnde Testhäufigkeit verzerren die Kurve. Verfahren zur Rückrechnung auf den Erkrankungszeitpunkt sind ein eigenes Forschungsfeld.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Verbindung zu Band 17: Die Modellrechnung ist der leichtere Teil. Der schwierige ist die Frage, was die Daten eigentlich messen --- und dafür braucht man die Kapitel über Erhebung und Verzerrung.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Definition 1.1} & $\dd N/\dd t = rN$, aus der Annahme aufgestellt\\
+\textbf{Satz 1.2} & Trennung der Veränderlichen, mit Probe\\
+\textbf{Satz 1.3} & $T_2 = \ln 2/r$, unabhängig vom Bestand\\
+\textbf{Der Bruchfall} & nach $59$ Stunden die Erdmasse\\
+\textbf{Halb\-logarithmisch} & wie man exponentielles Wachstum erkennt\\
+\textbf{Zerfall} & dieselbe Gleichung, $T_{1/2} = \ln2/k$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel bauen wir die Grenze ein, an der dieses Modell scheitert --- mit einem einzigen zusätzlichen Faktor.}
+\end{minipage}
+\end{center}
+\end{merksatz}

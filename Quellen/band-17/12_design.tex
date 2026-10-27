@@ -1,0 +1,816 @@
+\part{Medizinische Statistik}
+
+\chapter{Studiendesign}
+
+\section{Die Frage vor allen Fragen}
+
+\begin{merksatz}
+\boxtitel{Ein Satz, der elf Kapitel zusammenfasst}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein Rechenverfahren kann reparieren, was bei der Erhebung falsch gemacht wurde.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Kapitel 3} & Korrelation unterscheidet die vier Erklärungen nicht.\\
+\textbf{Kapitel 4} & Bei Abhängigkeit gilt kein Standardfehler.\\
+\textbf{Kapitel 8} & Gegen verletzte Unabhängigkeit hilft kein Test.\\
+\textbf{Kapitel 10} & Regression zur Mitte täuscht Wirkung vor.\\
+\textbf{Kapitel 11} & Informative Zensierung verzerrt jede Kurve.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In jedem dieser Fälle war die Abhilfe dieselbe: nicht anders rechnen, sondern anders erheben. Dieses Kapitel handelt davon.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Ordnung der Studientypen}
+
+\begin{merksatz}
+\boxtitel{Von unten nach oben}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{3.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Typ} & \textbf{Beantwortet} & \textbf{Kausalität}\\
+\midrule
+Fallbericht & Was ist möglich? & \textcolor{akzent}{nein}\\
+Ökologische Studie & Gruppenmuster & \textcolor{akzent}{nein}\\
+Querschnitt & Wie häufig, jetzt? & \textcolor{akzent}{nein}\\
+Fall-Kontroll & Rückblick auf Exposition & \textcolor{mittel}{schwach}\\
+Kohorte & Vorwärts beobachtet & \textcolor{mittel}{mittel}\\
+\textbf{Randomisiert} & \textbf{Wirkt es?} & \textcolor{gruen}{\textbf{ja}}\\
+Metaanalyse & Alles zusammen & \textcolor{gruen}{so gut wie die Teile}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile steht bewusst nicht oben. Eine Metaanalyse ist nie besser als die Studien, die sie zusammenfasst --- Kapitel~14 geht darauf ein. Und der Sprung zwischen Zeile fünf und sechs ist der entscheidende: Erst dort wird die Zuteilung vom Zufall bestimmt statt von Menschen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Ordnung ist keine Rangliste der Wichtigkeit}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Seltene Ereignisse} & Eine Fall-Kontroll-Studie findet, was in einer randomisierten Studie nie aufträte.\\
+\textbf{Schaden} & Man randomisiert niemanden auf eine vermutete Schädigung.\\
+\textbf{Langzeitfolgen} & Über vierzig Jahre randomisiert niemand.\\
+\textbf{Seltene Krankheiten} & Die nötige Fallzahl ist nicht erreichbar.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Zusammenhang zwischen Rauchen und Lungenkrebs wurde nie randomisiert geprüft und ist trotzdem gesichert --- über die Kriterien am Ende dieses Kapitels. Die Ordnung sagt, wie leicht eine kausale Deutung fällt, nicht welche Frage wichtig ist.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Randomisierung}
+
+\begin{merksatz}
+\boxtitel{Was sie leistet --- drei Dinge}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Auch das Unbekannte} & Die Gruppen sind im Mittel gleich --- nicht nur in gemessenen Merkmalen, sondern in \kursiv{allen}. Auch in denen, an die niemand gedacht hat.\\
+\textbf{Keine Auswahl} & Die Zuteilung hängt nicht davon ab, wen die Behandelnden für geeignet halten.\\
+\textbf{Die Rechengrundlage} & Die Nullverteilung folgt aus dem Losverfahren --- Kapitel~9, Permutationstest.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die erste Zeile ist die entscheidende und wird oft unterschätzt.} Für gemessene Störgrößen kann man rechnerisch adjustieren (Kapitel~10). Für ungemessene kann man das nicht --- und man weiß nicht einmal, welche es gibt. Nur die Randomisierung gleicht sie aus.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was sie nicht leistet}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Gleichheit im Einzelfall} & Die Gruppen sind \kursiv{im Mittel} gleich, nicht in jeder einzelnen Studie. Zufällige Ungleichheiten kommen vor.\\
+\textbf{Übertrag\-barkeit} & Die Personen der Studie sind nicht zufällig aus der Bevölkerung gezogen. Die Wirkung gilt für sie, nicht ohne Weiteres für andere.\\
+\textbf{Schutz vor allem Weiteren} & Verblindung, Nachbeobachtung, Auswertung können weiterhin schiefgehen.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Zur zweiten Zeile --- eine wichtige Unterscheidung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+& \textbf{zufällig?} & \textbf{sichert}\\
+\midrule
+Auswahl der Personen & \textcolor{akzent}{meist nein} & äußere Gültigkeit\\
+Zuteilung auf Gruppen & \textcolor{gruen}{ja} & innere Gültigkeit\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die MOBIL-Studie randomisiert die Zuteilung, nicht die Auswahl --- das war die offene Frage aus Kapitel~4. Damit ist der \kursiv{Vergleich} der beiden Gruppen gültig. Ob das Ergebnis auf andere Kliniken übertragbar ist, folgt daraus nicht und ist eine Frage des Fachurteils.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Wie man randomisiert}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Vorgehen} & \textbf{Eignung}\\
+\midrule
+Einfach & Münzwurf je Person & \textcolor{mittel}{ungleiche Gruppen möglich}\\
+Blockweise & Blöcke fester Größe, darin ausgeglichen & \textcolor{gruen}{Standard}\\
+Geschichtet & getrennt je Zentrum, Altersgruppe & \textcolor{gruen}{bei wichtigen Störgrößen}\\
+Minimierung & jeweils zur Gruppe mit dem größeren Bedarf & bei kleinen Studien\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum nicht abwechselnd}
+Ein Verfahren wie \enquote{abwechselnd A und B} oder \enquote{gerade Geburtstage nach A} ist \kursiv{nicht} zufällig, weil es \Begriff{vorhersagbar} ist.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Wer weiß, welche Gruppe als Nächstes kommt, kann die Zuteilung beeinflussen --- indem er eine Person aufnimmt oder nicht, sie früher oder später einschließt.
+\end{minipage}
+\end{center}
+
+\schritt{Verdeckte Zuteilung}
+Deshalb gehört zur Randomisierung die \Begriff{verdeckte Zuteilung}: Die Zuordnung ist bis zum Einschluss unbekannt --- durch eine zentrale Stelle, ein Rechnerverfahren oder nummerierte, undurchsichtige, versiegelte Umschläge.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Untersuchungen zeigen, dass Studien ohne verdeckte Zuteilung im Mittel um etwa dreißig Prozent größere Behandlungseffekte berichten. Das ist einer der am besten belegten Zusammenhänge der Methodenforschung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Verblindung}
+
+\begin{merksatz}
+\boxtitel{Wer was nicht wissen darf}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Die Person} & sonst wirken Erwartung und Berichtsverhalten auf das Ergebnis\\
+\textbf{Die Behandelnden} & sonst unterscheidet sich die übrige Versorgung\\
+\textbf{Die Erhebenden} & sonst wird der Endpunkt unterschiedlich gemessen\\
+\textbf{Die Auswertenden} & sonst werden Entscheidungen in der Analyse beeinflusst\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Bezeichnungen \enquote{einfach} und \enquote{doppelt blind} sind uneinheitlich --- verschiedene Veröffentlichungen meinen Verschiedenes. Die CONSORT-Empfehlungen verlangen deshalb, ausdrücklich aufzuzählen, wer verblindet war.}
+\end{minipage}
+\end{center}
+
+\schritt{Wann Verblindung besonders wichtig ist}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Endpunkt} & \textbf{Beein\-flussbar?} & \\
+\midrule
+Tod & \textcolor{gruen}{kaum} & robust\\
+Laborwert & \textcolor{gruen}{wenig} & ziemlich robust\\
+Schmerzangabe & \textcolor{akzent}{\textbf{stark}} & \textcolor{akzent}{Verblindung nötig}\\
+Zeitpunkt der Mobilisation & \textcolor{akzent}{\textbf{stark}} & wer entscheidet darüber?\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile betrifft die MOBIL-Studie unmittelbar: Wenn die Pflegekraft weiß, welches Schema die Person bekam, und sie zum Aufstehen ermutigt, so misst die Studie auch diese Ermutigung. Ein Endpunkt, über den Menschen mit Kenntnis der Gruppe entscheiden, ist nur bei Verblindung belastbar.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bias-Katalog}
+
+\begin{merksatz}
+\boxtitel{Die wichtigsten systematischen Fehler}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Name} & \textbf{Was geschieht} & \textbf{Abhilfe}\\
+\midrule
+Auswahl & Gruppen anders zusammen\-gesetzt & Randomisierung\\
+Zuteilung & Zuordnung beeinflusst & verdeckte Zuteilung\\
+Durchführung & übrige Versorgung ungleich & Verblindung\\
+Messung & Endpunkt ungleich erhoben & verblindete Erhebung\\
+\textbf{Ausfall} & Ausgeschiedene unterscheiden sich & \textcolor{akzent}{\textbf{schwer}}\\
+Berichts & nur günstige Endpunkte berichtet & Prä\-registrierung\\
+Publikations & nur positive Studien erscheinen & Register\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum der Ausfall so schwer zu beheben ist}
+Er tritt nach der Randomisierung ein. Alles, was die Randomisierung gesichert hat, kann durch ungleiches Ausscheiden wieder zerstört werden.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Als Faustregel gilt: Bis etwa fünf Prozent Ausfall ist das Ergebnis kaum betroffen, ab zwanzig Prozent wird es fragwürdig. Entscheidend ist aber nicht die Zahl, sondern ob sich die Ausgeschiedenen von den Verbliebenen unterscheiden --- und das lässt sich nur vermuten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Zwei Verzerrungen, die man leicht übersieht}
+\schritt{Der unsterbliche Zeitraum}
+Vergleicht man Personen, die eine Behandlung erhielten, mit solchen, die sie nicht erhielten, so mussten die Ersten lange genug leben, um sie zu bekommen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein bekanntes Beispiel: Empfänger einer Transplantation überleben länger als Personen auf der Warteliste. Ein Teil davon ist der Vorteil der Transplantation --- ein Teil ist der Umstand, dass man sie nur bekommt, wenn man bis dahin überlebt hat.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Vorlaufzeit}
+Eine Früherkennung verlängert die Zeit \kursiv{ab Diagnose} auch dann, wenn sie den Todeszeitpunkt nicht verschiebt --- sie verlegt nur die Diagnose nach vorn.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (7.6,0);
+\draw[tief, line width=1.5pt] (2.6,0.9) -- (6.4,0.9);
+\fill[tief] (2.6,0.9) circle (2.2pt); \fill[tief] (6.4,0.9) circle (2.2pt);
+\node[font=\scriptsize, color=tief] at (2.0,0.9) {Diagnose};
+\node[font=\scriptsize, color=tief] at (7.0,0.9) {Tod};
+\draw[akzent, line width=1.5pt] (0.9,0.2) -- (6.4,0.2);
+\fill[akzent] (0.9,0.2) circle (2.2pt); \fill[akzent] (6.4,0.2) circle (2.2pt);
+\node[font=\scriptsize, color=akzent] at (0.45,0.55) {Screening};
+\node[font=\scriptsize\itshape, color=grau] at (3.8,-0.5) {gleicher Todeszeitpunkt, längere \enquote{Überlebenszeit}};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Deshalb ist die Fünfjahresüberlebensrate kein taugliches Maß für den Nutzen einer Früherkennung. Das taugliche Maß ist die \kursiv{Sterblichkeit} in der gesamten eingeladenen Bevölkerung --- und die sinkt bei vielen Screeningprogrammen deutlich weniger, als die Überlebensraten nahelegen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Kohorte und Fall-Kontroll-Studie}
+
+\begin{merksatz}
+\boxtitel{Die zwei Blickrichtungen}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\begin{scope}
+\node[knotenb] (e) at (0,0.6) {};
+\node[knotenb] (ne) at (0,-0.6) {};
+\node[font=\scriptsize, color=grau] at (-1.1,0.6) {exponiert};
+\node[font=\scriptsize, color=grau] at (-1.25,-0.6) {nicht};
+\draw[kanted, -{Stealth[length=5pt]}] (0.3,0.6) -- (1.6,0.6);
+\draw[kanted, -{Stealth[length=5pt]}] (0.3,-0.6) -- (1.6,-0.6);
+\node[font=\scriptsize, color=akzent] at (2.3,0.6) {krank?};
+\node[font=\scriptsize, color=akzent] at (2.3,-0.6) {krank?};
+\node[font=\scriptsize\itshape, color=grau] at (1.0,-1.3) {Kohorte: vorwärts};
+\end{scope}
+\begin{scope}[xshift=5.8cm]
+\node[knotenb] (k) at (2.3,0.6) {};
+\node[knotenb] (nk) at (2.3,-0.6) {};
+\node[font=\scriptsize, color=grau] at (3.1,0.6) {krank};
+\node[font=\scriptsize, color=grau] at (3.25,-0.6) {nicht};
+\draw[kanted, -{Stealth[length=5pt]}] (2.0,0.6) -- (0.7,0.6);
+\draw[kanted, -{Stealth[length=5pt]}] (2.0,-0.6) -- (0.7,-0.6);
+\node[font=\scriptsize, color=akzent] at (0.1,0.6) {exponiert?};
+\node[font=\scriptsize, color=akzent] at (0.1,-0.6) {exponiert?};
+\node[font=\scriptsize\itshape, color=grau] at (1.6,-1.3) {Fall-Kontroll: rückwärts};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{3.0cm}P{3.0cm}@{}}
+\toprule
+& \textbf{Kohorte} & \textbf{Fall-Kontroll}\\
+\midrule
+Dauer & lang & \textcolor{gruen}{kurz}\\
+Kosten & hoch & \textcolor{gruen}{niedrig}\\
+Seltene Krankheit & \textcolor{akzent}{ungeeignet} & \textcolor{gruen}{ideal}\\
+Seltene Exposition & \textcolor{gruen}{geeignet} & \textcolor{akzent}{ungeeignet}\\
+Mehrere Endpunkte & \textcolor{gruen}{ja} & \textcolor{akzent}{nur einer}\\
+Risiko schätzbar & \textcolor{gruen}{ja} & \textcolor{akzent}{\textbf{nein}}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Warum in der Fall-Kontroll-Studie nur das Chancenverhältnis gilt}
+\schritt{Die gedachte Grundgesamtheit}
+$10\,000$ Personen, davon $2000$ exponiert.
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+& \textbf{krank} & \textbf{gesund} & \textbf{Summe}\\
+\midrule
+exponiert & $200$ & $1800$ & $2000$\\
+nicht & $400$ & $7600$ & $8000$\\
+\midrule
+\textbf{Summe} & $600$ & $9400$ & $10\,000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\[ \mathrm{RR} = \frac{200/2000}{400/8000} = \frac{0{,}10}{0{,}05} = 2{,}00 \]
+\[ \mathrm{OR} = \frac{200 \cdot 7600}{1800 \cdot 400} = \frac{1\,520\,000}{720\,000} = 2{,}111 \]
+
+\schritt{Die Fall-Kontroll-Stichprobe}
+Wir nehmen \kursiv{alle} $600$ Kranken und ziehen $600$ Gesunde zufällig aus den $9400$.
+
+Unter den Gesunden sind $1800/9400 = 19{,}1\,\%$ exponiert, also etwa $115$ der gezogenen $600$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{1.6cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+& \textbf{Fälle} & \textbf{Kontrollen} & \textbf{Summe}\\
+\midrule
+exponiert & $200$ & $115$ & $315$\\
+nicht & $400$ & $485$ & $885$\\
+\midrule
+\textbf{Summe} & $600$ & $600$ & $1200$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Das Chancenverhältnis aus der Stichprobe}
+\[ \mathrm{OR} = \frac{200 \cdot 485}{400 \cdot 115} = \frac{97\,000}{46\,000} = 2{,}109 \]
+Das ist praktisch der Wert der Grundgesamtheit. \checkmark
+
+\schritt{Der Versuch, ein Risiko zu berechnen}
+\[ \text{\enquote{Risiko der Exponierten}} = \frac{200}{315} = 0{,}635 ? \]
+Das ist Unsinn. Das wahre Risiko beträgt $0{,}10$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Grund:} Das Verhältnis von Fällen zu Kontrollen wurde vom Untersucher gewählt --- hier $1:1$ statt der tatsächlichen $600:9400$. Jede Größe, die dieses Verhältnis benutzt, ist willkürlich.
+\end{minipage}
+\end{center}
+
+\schritt{Warum das Chancenverhältnis überlebt}
+Es wird spaltenweise gebildet: Chance der Exposition unter den Fällen gegen Chance der Exposition unter den Kontrollen. Beide Spalten sind unabhängig voneinander skaliert --- der Quotient bleibt unberührt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieselbe Eigenschaft, die das Chancenverhältnis in Kapitel~11 unangenehm machte --- seine Symmetrie --- ist hier seine Rechtfertigung. Zöge man zwei Kontrollen je Fall, bliebe das Chancenverhältnis gleich; jedes Risikomaß würde sich ändern.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Intention-to-treat}
+
+\begin{merksatz}
+\boxtitel{Die beiden Auswertungsweisen}
+\begin{center}
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Intention-to-treat} & Jede Person wird in der Gruppe ausgewertet, in die sie randomisiert wurde --- unabhängig davon, was tatsächlich geschah.\\
+\textbf{Per-Protocol} & Nur Personen, die den Plan eingehalten haben.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Die erste Fassung wirkt widersinnig --- warum jemanden als behandelt zählen, der die Behandlung abgebrochen hat? Die Antwort ist der Kern dieses Kapitels.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Zahlenbeispiel}
+Je $100$ Personen. In Gruppe B brechen $20$ wegen Nebenwirkungen ab und wechseln zur alten Therapie; ihre Ergebnisse sind schlecht.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Erfolge} & \textbf{Rate}\\
+\midrule
+Gruppe A ($100$) & $40$ & $40\,\%$\\
+\midrule
+B, durchgehalten ($80$) & $48$ & $60\,\%$\\
+B, abgebrochen ($20$) & $4$ & $20\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die beiden Auswertungen}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+& \textbf{B} & \textbf{Differenz}\\
+\midrule
+Intention-to-treat & $52/100 = 52\,\%$ & $12$ Punkte\\
+Per-Protocol & $48/80 = 60\,\%$ & $\mathbf{20}$ Punkte\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Warum Per-Protocol übertreibt}
+Die $20$ Abbrecher wurden nicht zufällig ausgewählt --- sie brachen ab, weil die Therapie ihnen nicht bekam. Es sind gerade die Personen mit schlechtem Verlauf.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Ausschluss zerstört die Randomisierung.} Gruppe B besteht nach dem Ausschluss aus einer ausgewählten, günstigeren Teilmenge; Gruppe A nicht. Der Vergleich ist nicht mehr fair.
+\end{minipage}
+\end{center}
+
+\schritt{Was Intention-to-treat wirklich schätzt}
+Nicht die Wirkung der Therapie unter idealen Bedingungen, sondern die Wirkung der \kursiv{Entscheidung}, sie zu beginnen --- einschließlich der Abbrüche.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und das ist meist die Frage, die interessiert: Eine Therapie, die hervorragend wirkt, aber von einem Fünftel nicht vertragen wird, ist in der Versorgung genau so gut, wie Intention-to-treat sie ausweist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Wo Intention-to-treat die vorsichtigere Wahl \kursiv{nicht} ist}
+Bei Überlegenheitsstudien zieht Intention-to-treat das Ergebnis zur Null hin --- es ist also konservativ.
+
+Bei \Begriff{Nichtunterlegenheitsstudien} ist es umgekehrt: Dort will man zeigen, dass eine neue Therapie nicht wesentlich schlechter ist. Jede Verwässerung des Unterschieds hilft dieser Behauptung.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Deshalb verlangen die Empfehlungen für solche Studien \kursiv{beide} Auswertungen --- und dass sie zum selben Schluss führen. Weichen sie ab, ist das Ergebnis fraglich.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Nichtunterlegenheitsschwelle}
+Man legt vorab fest, welcher Unterschied noch als \enquote{nicht wesentlich schlechter} gilt --- etwa $5$ Prozentpunkte. Das Konfidenzintervall für den Unterschied darf diese Schwelle nicht überschreiten.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (8.0,0);
+\draw[grau!55, dashed, line width=0.8pt] (5.6,-0.2) -- (5.6,2.7);
+\draw[grau!55, line width=0.8pt] (3.2,-0.2) -- (3.2,2.7);
+\node[font=\scriptsize, color=grau] at (3.2,-0.5) {$0$};
+\node[font=\scriptsize, color=akzent] at (5.6,-0.5) {Schwelle};
+\draw[gruen, line width=1.5pt] (2.0,2.2) -- (5.0,2.2);
+\fill[gruen] (3.5,2.2) circle (1.8pt);
+\node[font=\scriptsize, color=gruen, anchor=west] at (8.2,2.2) {nicht unterlegen};
+\draw[akzent, line width=1.5pt] (2.4,1.4) -- (6.4,1.4);
+\fill[akzent] (4.4,1.4) circle (1.8pt);
+\node[font=\scriptsize, color=akzent, anchor=west] at (8.2,1.4) {unklar};
+\draw[gruen, line width=1.5pt] (1.0,0.6) -- (3.0,0.6);
+\fill[gruen] (2.0,0.6) circle (1.8pt);
+\node[font=\scriptsize, color=gruen, anchor=west] at (8.2,0.6) {sogar überlegen};
+\end{tikzpicture}
+\end{center}
+\end{warnung}
+
+\section{Wann darf man auf Ursachen schließen?}
+
+\begin{merksatz}
+\boxtitel{Die Kriterien von Bradford Hill}
+1965 stellte \Person{Austin Bradford Hill} neun Gesichtspunkte zusammen, die bei der Beurteilung eines beobachteten Zusammenhangs helfen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{0.7cm}P{2.6cm}P{4.8cm}@{}}
+\toprule
+$1$ & Stärke & Ein starker Zusammenhang ist schwerer durch Störgrößen zu erklären.\\
+$2$ & Beständigkeit & Verschiedene Untersucher, Orte, Verfahren finden dasselbe.\\
+$3$ & Spezifität & Eine Ursache, eine Wirkung --- schwach, oft verletzt.\\
+$4$ & \textbf{Zeitliche Folge} & Die Ursache kommt vor der Wirkung. \textcolor{akzent}{\textbf{Das einzige zwingende Kriterium.}}\\
+$5$ & Dosis-Wirkung & Mehr Exposition, mehr Wirkung.\\
+$6$ & Plausibilität & Ein Mechanismus ist denkbar.\\
+$7$ & Vereinbarkeit & Kein Widerspruch zum sonstigen Wissen.\\
+$8$ & Experiment & Wegnahme der Exposition verringert die Wirkung.\\
+$9$ & Analogie & Ähnliches ist bekannt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hill selbst betonte, dies sei \kursiv{keine} Prüfliste zum Abhaken und liefere keine Regel. Genau so wird sie seither benutzt. Die Kriterien sind Gesichtspunkte für ein Urteil, nicht Bedingungen für einen Beweis --- mit der Ausnahme von Nummer vier, die zwingend ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Am Beispiel Rauchen und Lungenkrebs}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{5.8cm}@{}}
+\toprule
+Stärke & Relatives Risiko über $10$ --- ungewöhnlich hoch\\
+Beständigkeit & Dutzende Studien, viele Länder\\
+Zeitliche Folge & Rauchen geht der Erkrankung voraus\\
+Dosis-Wirkung & \textcolor{gruen}{deutlich, über mehrere Stufen}\\
+Experiment & Aufhören senkt das Risiko\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Diese Beleglage --- ohne eine einzige randomisierte Studie --- gilt heute als gesichert. Fishers Konfoundereinwand aus Kapitel~5 ließ sich daran abarbeiten.
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.1 --- Verzerrungen erkennen}
+Benennen Sie in jedem Fall die Verzerrung und schlagen Sie eine Abhilfe vor.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & Eine Klinik berichtet, ihre neue Operationsmethode habe eine niedrigere Sterblichkeit --- sie wird bei gutem Allgemeinzustand angewandt.\\
+(b) & In einer Studie zur Schmerztherapie kennen die Erhebenden die Gruppe.\\
+(c) & Eine Studie mit acht Endpunkten berichtet nur den einen, der signifikant war.\\
+(d) & Nutzer eines Gesundheitsprogramms leben länger als Nichtnutzer.\\
+(e) & Von zwölf Studien zu einem Präparat sind neun veröffentlicht --- alle positiv.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) --- Auswahlverzerrung, hier \kursiv{Indikationsbias}}
+Die Methode wird bei günstigeren Fällen eingesetzt. Der Vergleich misst die Auswahl, nicht die Methode.
+
+\kursiv{Abhilfe:} Randomisierung. Notfalls Adjustierung für gemessene Größen --- aber der ungemessene Anteil des Allgemeinzustands bleibt.
+
+\schritt{(b) --- Messverzerrung}
+Wer die Gruppe kennt, fragt anders nach Schmerzen und deutet Angaben anders. Bei einem so beeinflussbaren Endpunkt ist das erheblich.
+
+\kursiv{Abhilfe:} verblindete Erhebung durch eine Person, die die Zuteilung nicht kennt.
+
+\schritt{(c) --- Berichtsverzerrung, verstärkt durch Multiplizität}
+Bei acht Endpunkten und $\alpha = 0{,}05$ beträgt die Wahrscheinlichkeit für mindestens einen falschen Alarm
+\[ 1 - 0{,}95^8 = 1 - 0{,}663 = 0{,}337 . \]
+In einem Drittel der Fälle findet man etwas, auch wenn nichts ist.
+
+\kursiv{Abhilfe:} Präregistrierung des primären Endpunkts; Multiplizitätskorrektur (Kapitel~14).
+
+\schritt{(d) --- Verzerrung durch den gesunden Nutzer}
+Wer an Gesundheitsprogrammen teilnimmt, unterscheidet sich in vielem: Bildung, Einkommen, Gesundheitsverhalten, Grundzustand. Das Programm wirkt vielleicht --- gemessen wird aber vor allem, wer teilnimmt.
+
+\kursiv{Abhilfe:} Randomisierung der \kursiv{Einladung}, nicht der Teilnahme --- und Auswertung nach Intention-to-treat.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das ist derselbe Gedanke wie bei Screeningprogrammen: Man vergleicht Eingeladene mit Nichteingeladenen, nicht Teilnehmer mit Nichtteilnehmern.}
+\end{minipage}
+\end{center}
+
+\schritt{(e) --- Publikationsverzerrung}
+Die drei unveröffentlichten Studien sind mit hoher Wahrscheinlichkeit die mit ungünstigem Ergebnis. Die Literatur zeichnet ein zu positives Bild.
+
+\kursiv{Abhilfe:} Studienregister mit Pflicht zur Vorabanmeldung; Suche nach unveröffentlichten Daten; Trichterdiagramm in der Metaanalyse (Kapitel~14).
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.2 --- Intention-to-treat gegen Per-Protocol}
+Eine Studie randomisiert $200$ Personen je Gruppe. In Gruppe A halten alle durch; in Gruppe B brechen $50$ ab, davon haben $10$ Erfolg. Von den $150$ Durchhaltenden haben $105$ Erfolg. In Gruppe A haben $110$ Erfolg.
+
+\loesung
+\schritt{Schritt 1 --- Intention-to-treat}
+\[ \hat p_A = \frac{110}{200} = 0{,}550 \]
+\[ \hat p_B = \frac{105 + 10}{200} = \frac{115}{200} = 0{,}575 \]
+\[ \text{Differenz} = 0{,}025 \ \text{--- also } 2{,}5 \text{ Prozentpunkte} \]
+
+\schritt{Schritt 2 --- Per-Protocol}
+\[ \hat p_B^{\text{PP}} = \frac{105}{150} = 0{,}700 \]
+\[ \text{Differenz} = 0{,}700 - 0{,}550 = 0{,}150 \ \text{--- } 15 \text{ Punkte} \]
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+& $p_A$ & $p_B$ & \textbf{Differenz}\\
+\midrule
+Intention-to-treat & $0{,}550$ & $0{,}575$ & $\mathbf{0{,}025}$\\
+Per-Protocol & $0{,}550$ & $0{,}700$ & $\mathbf{0{,}150}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Sechsfacher Unterschied zwischen beiden Auswertungen.
+
+\schritt{Schritt 4 --- Welche Zahl gilt?}
+Die Abbrecher hatten eine Erfolgsrate von $10/50 = 20\,\%$ --- weit unter beiden Gruppen. Sie sind also eine ausgewählte, ungünstige Teilmenge.
+
+Nimmt man sie heraus, bleibt in Gruppe B eine begünstigte Auswahl übrig. In Gruppe A wurde niemand herausgenommen. Der Vergleich ist unfair.
+
+\textbf{Es gilt die Intention-to-treat-Zahl: $2{,}5$ Prozentpunkte.}
+
+\schritt{Schritt 5 --- Was die Abbruchrate bedeutet}
+$25\,\%$ Abbrüche in Gruppe B gegen $0\,\%$ in A sind selbst ein Ergebnis --- und zwar ein wichtiges. Die neue Therapie wird von einem Viertel nicht vertragen.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Hier zeigt sich, was Intention-to-treat wirklich misst: die Wirkung der Entscheidung, diese Therapie zu beginnen. Sie ist gering --- weil der Vorteil bei den Durchhaltenden durch die Abbrüche fast aufgezehrt wird. Das ist keine Verwässerung, sondern die Wirklichkeit der Versorgung.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Was man berichtet}
+Beide Zahlen, mit der Abbruchrate, und Intention-to-treat als primäre Auswertung. Die Per-Protocol-Zahl beantwortet eine andere Frage: Wie wirkt die Therapie bei denen, die sie vertragen? Das ist legitim --- aber sie darf nicht als Wirksamkeit der Therapie ausgegeben werden.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.3 --- Eine Studie planen}
+Entwerfen Sie das Design für die Frage: \enquote{Verkürzt ein neues Schmerzschema die Zeit bis zur Mobilisation nach Hüftgelenksersatz?}
+
+\loesung
+\schritt{Schritt 1 --- Der Typ}
+Randomisierte kontrollierte Studie. Die Frage ist eine Wirksamkeitsfrage, die Behandlung ist zuteilbar, der Endpunkt tritt binnen Tagen ein.
+
+\schritt{Schritt 2 --- Die Endpunkte}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{3.0cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Endpunkt} & \textbf{Skala}\\
+\midrule
+primär & Zeit bis zur Mobilisation & stetig\\
+sekundär & NRS nach 24 h & ordinal\\
+sekundär & Bedarfsanalgesie & binär\\
+Sicherheit & Nebenwirkungen & binär\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Genau ein primärer Endpunkt.} Jeder weitere erzeugt Multiplizität.
+
+\schritt{Schritt 3 --- Die Mobilisation muss definiert werden}
+\enquote{Mobilisiert} ist kein Naturereignis. Man braucht eine überprüfbare Festlegung, etwa: \kursiv{selbständiges Aufstehen und zehn Schritte Gehen mit Gehhilfe, festgestellt durch eine Person, die die Gruppenzuteilung nicht kennt.}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Ohne diese Festlegung misst die Studie, wann jemand für mobilisiert erklärt wird --- und das hängt von der Erwartung des Erklärenden ab.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Randomisierung}
+Blockweise, geschichtet nach Operateur und Altersgruppe. Verdeckte Zuteilung über eine zentrale Stelle.
+
+\schritt{Schritt 5 --- Verblindung}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{3.0cm}@{}}
+\toprule
+& \textbf{möglich?} & \\
+\midrule
+Personen & \textcolor{mittel}{teilweise} & je nach Applikationsform\\
+Behandelnde & \textcolor{akzent}{schwer} & verschiedene Schemata\\
+\textbf{Erhebende} & \textcolor{gruen}{\textbf{ja}} & \textcolor{gruen}{\textbf{zwingend}}\\
+Auswertende & \textcolor{gruen}{ja} & Gruppen als 1 und 2\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 6 --- Fallzahl}
+Aus Kapitel~7: bei $\sigma = 3{,}5$ Stunden, $\delta = 2{,}0$ Stunden, $\alpha = 0{,}05$, $80\,\%$ Macht:
+\[ n = \frac{2 \cdot 7{,}84 \cdot 12{,}25}{4{,}0} = 48 \ \text{je Gruppe} . \]
+Mit Reserve für Ausfälle: $60$ je Gruppe.
+
+\schritt{Schritt 7 --- Auswertungsplan, vorab festgelegt}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{5.8cm}@{}}
+\toprule
+primär & Welch-$t$-Test, zweiseitig, $\alpha = 0{,}05$; Effekt mit $95\,\%$-KI\\
+Auswertung & Intention-to-treat\\
+sekundär & ohne Anspruch auf Nachweis, ausdrücklich als erkundend gekennzeichnet\\
+fehlende Werte & Vorgehen vorab beschreiben\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 8 --- Vor Beginn}
+Anmeldung in einem öffentlichen Studienregister, mit primärem Endpunkt und Auswertungsplan.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Dieser letzte Schritt kostet nichts und ist der wirksamste Schutz gegen die Verzerrungen (c) und (e) aus Aufgabe 12.1. Er ist seit 2005 Voraussetzung für die Veröffentlichung in den meisten großen Zeitschriften.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von den Zitronen zur Randomisierung}
+\Person{James Lind}, Schiffsarzt der britischen Marine, führte 1747 an Bord der \kursiv{HMS Salisbury} einen Versuch durch, der als erste kontrollierte klinische Studie gilt: Zwölf Seeleute mit Skorbut, paarweise auf sechs Behandlungen verteilt --- darunter Zitrusfrüchte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Lind achtete darauf, dass die Zwölf einander im Zustand ähnelten und dieselbe Grundkost erhielten. Die Zuteilung war nicht zufällig, und die Zahl war winzig --- aber der Gedanke der \kursiv{vergleichenden} Prüfung unter gleichen Bedingungen war neu. Die Marine führte die Zitronenration erst 1795 ein, achtundvierzig Jahre später.}
+\end{minipage}
+\end{center}
+
+\schritt{Die erste randomisierte Studie}
+Als solche gilt die Streptomycin-Studie des britischen Medical Research Council von 1948 zur Lungentuberkulose. \Person{Austin Bradford Hill} entwarf sie; die Zuteilung erfolgte über versiegelte Umschläge nach einer Zufallsliste, die nur einer zentralen Stelle bekannt war.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Bemerkenswert ist die Begründung, mit der Hill die Randomisierung durchsetzte: Streptomycin war knapp. Nicht alle Erkrankten konnten behandelt werden --- und wenn ohnehin ausgewählt werden musste, dann war das Los die gerechteste und zugleich wissenschaftlich brauchbarste Auswahl.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Widerstand}
+Die Randomisierung setzte sich langsam durch. \Person{Paul Meier} --- derselbe wie in Kapitel~11 --- schrieb noch in den 1970er Jahren gegen die verbreitete Auffassung an, es sei unethisch, die Behandlung dem Zufall zu überlassen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sein Gegenargument gilt bis heute: Unethisch ist es, Menschen mit einer Behandlung zu versorgen, von der niemand weiß, ob sie wirkt. Der Zustand, in dem beide Möglichkeiten gleich gut begründet sind --- man nennt ihn \Begriff{Gleichgewicht der Ungewissheit} --- ist die Rechtfertigung der Randomisierung und zugleich ihre Grenze: Sobald eine Seite überlegen erscheint, muss die Studie enden.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wohin sich die Studienmethodik bewegt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Pragmatische Studien} & Unter Alltagsbedingungen statt unter Idealbedingungen; breitere Einschlusskriterien, versorgungsnahe Endpunkte.\\
+\textbf{Registerbasiert} & Randomisierung innerhalb bestehender Register --- erheblich billiger, große Fallzahlen.\\
+\textbf{Adaptive Designs} & Fallzahl oder Gruppenzuteilung werden nach Zwischenauswertung angepasst, mit vorab festgelegten Regeln.\\
+\textbf{Plattform\-studien} & Mehrere Therapien gegen eine gemeinsame Kontrolle; neue Arme kommen hinzu, wirkungslose fallen weg.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die letzte Zeile hat sich während der Pandemie bewährt: Große Plattformstudien prüften in kurzer Zeit zahlreiche Therapien gegen eine gemeinsame Kontrollgruppe und konnten mehrere als wirkungslos ausscheiden --- bei einem Bruchteil des Aufwands getrennter Studien.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Adaptive und Plattformdesigns erfordern erheblich mehr methodische Sorgfalt: Jede Zwischenauswertung erzeugt Multiplizität, und jede Anpassungsregel muss vorab festgelegt und in der Fehlerrate berücksichtigt sein. Kapitel~14 behandelt die Grundlagen dafür.}
+\end{minipage}
+\end{center}
+
+\schritt{Präregistrierung}
+Seit 2005 verlangen die großen medizinischen Zeitschriften die Voranmeldung klinischer Studien. Untersuchungen zeigen einen messbaren Effekt: Der Anteil von Studien mit positivem primärem Endpunkt ging in manchen Bereichen deutlich zurück --- ein Hinweis darauf, wie verbreitet das nachträgliche Auswechseln von Endpunkten vorher war.
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Die Ordnung} & und warum sie keine Rangliste der Wichtigkeit ist\\
+\textbf{Randomisierung} & gleicht auch ungemessene Größen aus\\
+\textbf{Verdeckte Zuteilung} & ohne sie etwa $30\,\%$ größere Effekte\\
+\textbf{Fall-Kontroll} & warum nur das Chancenverhältnis gilt\\
+\textbf{Intention-to-treat} & und wann es \kursiv{nicht} konservativ ist\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel geht es um die Kennzahlen diagnostischer Tests --- und um die Rechnung, die den Fehler aus Kapitel~7 in seiner klinischen Gestalt zeigt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

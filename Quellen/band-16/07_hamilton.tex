@@ -1,0 +1,801 @@
+\chapter{Hamiltonkreise}
+
+\section{Dieselbe Frage, anderes Objekt}
+
+Kapitel 6 fragte: Kann man jede \kursiv{Kante} genau einmal durchlaufen? Jetzt fragen wir: Kann man jede \kursiv{Ecke} genau einmal besuchen?
+
+Die beiden Fragen sehen einander so ähnlich, dass man erwartet, die Antworten würden einander ähneln. Sie tun es nicht. Der Unterschied ist einer der lehrreichsten der ganzen Mathematik.
+
+\begin{definition}
+\boxtitelm{Definition 7.1 --- Hamiltonweg, Hamiltonkreis}
+Sei $G$ ein Graph.
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item Ein \Begriff{Hamiltonweg} ist ein Weg, der jede Ecke von $G$ enthält.
+\item Ein \Begriff{Hamiltonkreis} ist ein Kreis, der jede Ecke von $G$ enthält.
+\item $G$ heißt \Begriff{hamiltonsch}, wenn er einen Hamiltonkreis besitzt.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Ein erster Vergleich}
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\begin{scope}
+\foreach \i in {0,...,4} \node[knoten] (a\i) at (90+72*\i:1.0) {};
+\foreach \i/\j in {0/1,1/2,2/3,3/4,4/0} \draw[kanted] (a\i) -- (a\j);
+\foreach \i/\j in {0/2,1/3,2/4,3/0,4/1} \draw[kante] (a\i) -- (a\j);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.6) {$K_5$: hamiltonsch \kursiv{und} eulersch};
+\end{scope}
+\begin{scope}[xshift=5.2cm]
+\node[knoten] (z) at (0,0) {};
+\node[knoten] (p1) at (-1.0,0.7) {};
+\node[knoten] (p2) at (1.0,0.7) {};
+\node[knoten] (p3) at (0,-1.1) {};
+\draw[kante] (z)--(p1); \draw[kante] (z)--(p2); \draw[kante] (z)--(p3);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.6) {Stern: weder noch};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\begin{scope}
+\node[knoten] (c1) at (-1.0,0.6) {};
+\node[knoten] (c2) at (0,0.6) {};
+\node[knoten] (c3) at (1.0,0.6) {};
+\node[knoten] (c4) at (0,-0.6) {};
+\draw[kante] (c1)--(c2); \draw[kante] (c2)--(c3);
+\draw[kante] (c1)--(c4); \draw[kante] (c3)--(c4);
+\draw[kante] (c2)--(c4);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {hamiltonsch, nicht eulersch};
+\end{scope}
+\begin{scope}[xshift=5.4cm]
+\node[knoten] (m) at (0,0) {};
+\node[knoten] (u1) at (-1.0,0.75) {};
+\node[knoten] (u2) at (-1.0,-0.75) {};
+\node[knoten] (v1) at (1.0,0.75) {};
+\node[knoten] (v2) at (1.0,-0.75) {};
+\draw[kante] (m)--(u1); \draw[kante] (m)--(u2); \draw[kante] (u1)--(u2);
+\draw[kante] (m)--(v1); \draw[kante] (m)--(v2); \draw[kante] (v1)--(v2);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {eulersch, nicht hamiltonsch};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Alle vier Kombinationen kommen vor. Die beiden Begriffe sind also voneinander unabhängig --- keiner folgt aus dem anderen.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der entscheidende Unterschied --- und warum er so groß ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.9cm}P{2.9cm}@{}}
+\toprule
+& \textbf{Eulerkreis} & \textbf{Hamiltonkreis}\\
+\midrule
+Kriterium & \textcolor{gruen}{Satz 6.4, vollständig} & \textcolor{akzent}{\textbf{keines bekannt}}\\
+Prüfaufwand & \textcolor{gruen}{Grade zählen} & \textcolor{akzent}{im Wesentlichen Probieren}\\
+Bei $n = 100$ & \textcolor{gruen}{Sekundenbruchteil} & \textcolor{akzent}{unlösbar im Allgemeinen}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Woher der Unterschied? Eine Antwort gibt der Beweis von Satz 6.4. Er funktioniert, weil sich Teilkreise \kursiv{verschmelzen} lassen: Zwei kantendisjunkte geschlossene Züge mit gemeinsamer Ecke ergeben zusammen wieder einen. Man kann also lokal arbeiten und die Stücke zusammensetzen.
+
+Bei Hamiltonkreisen geht das nicht. Zwei Kreise mit gemeinsamer Ecke ergeben keinen Kreis, sondern eine Acht. Es gibt kein Verschmelzungsargument, und deshalb hilft lokales Arbeiten nicht.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.05]
+\begin{scope}
+\draw[kante] (-0.75,0) circle (0.75);
+\draw[kanted] (0.75,0) circle (0.75);
+\node[knotenr] (x) at (0,0) {};
+\node[font=\scriptsize\itshape, color=gruen] at (0,-1.35) {Kantenzüge: verschmelzen zu einem};
+\end{scope}
+\begin{scope}[xshift=5.6cm]
+\draw[kante] (-0.75,0) circle (0.75);
+\draw[kanted] (0.75,0) circle (0.75);
+\node[knotenr] (y) at (0,0) {};
+\node[font=\scriptsize\itshape, color=akzent] at (0,-1.35) {Kreise: die Mitte hat Grad $4$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass kein einfaches Kriterium bekannt ist, ist nicht bloß ein Wissenslücke. Kapitel~15 erklärt, warum es aus tiefen Gründen unwahrscheinlich ist, dass eines existiert.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Ein Werkzeug zum Widerlegen}
+
+Wenn es kein Kriterium gibt, wie zeigt man dann, dass ein Graph \kursiv{nicht} hamiltonsch ist? Der folgende Satz liefert die meistgenutzte Antwort.
+
+\begin{merksatz}
+\boxtitel{Satz 7.2 --- die Komponentenbedingung}
+Sei $G$ hamiltonsch. Dann gilt für jede nichtleere Teilmenge $S \subseteq V$:
+\[ c(G - S) \;\le\; |S| , \]
+wobei $c(\cdot)$ die Anzahl der Zusammenhangskomponenten bezeichnet.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis}
+\schritt{Schritt 1 --- Den Hamiltonkreis zerschneiden}
+Sei $H$ ein Hamiltonkreis von $G$ und $S \subseteq V$ nichtleer mit $|S| = k$.
+
+Wir entfernen die $k$ Ecken von $S$ aus $H$. Ein Kreis, aus dem man $k$ Ecken entfernt, zerfällt in höchstens $k$ Wegstücke.
+
+\schritt{Warum höchstens $k$}
+Denken Sie an einen Ring aus Perlen. Nimmt man eine Perle heraus, wird der Ring zu einer Kette --- ein Stück. Nimmt man eine zweite heraus, zerfällt die Kette in zwei Stücke. Jede weitere entfernte Perle erhöht die Stückzahl um höchstens eins.
+
+Genauer: Nach dem Entfernen der ersten Ecke haben wir $1$ Stück. Jede weitere entfernte Ecke liegt in genau einem Stück und teilt dieses in höchstens $2$ Teile --- weniger, wenn sie am Rand liegt. Also nach $k$ Entfernungen höchstens $k$ Stücke.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\foreach \i in {0,...,7} {
+  \pgfmathsetmacro{\ang}{90-45*\i}
+  \ifnum\i=1 \node[knotenr] (h\i) at (\ang:1.15) {}; \else
+  \ifnum\i=5 \node[knotenr] (h\i) at (\ang:1.15) {}; \else
+  \node[knoten] (h\i) at (\ang:1.15) {}; \fi \fi
+}
+\foreach \i/\j in {0/1,1/2,2/3,3/4,4/5,5/6,6/7,7/0} \draw[kante] (h\i) -- (h\j);
+\node[font=\scriptsize\itshape, color=akzent] at (0,-1.75) {zwei Ecken heraus $\Rightarrow$ zwei Wegstücke};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Schritt 2 --- Von $H$ auf $G$ schließen}
+$H$ ist ein Teilgraph von $G$ mit derselben Eckenmenge. Also ist $H - S$ ein Teilgraph von $G - S$ mit derselben Eckenmenge.
+
+Fügt man zu einem Graphen Kanten hinzu, so kann die Komponentenzahl nur sinken oder gleich bleiben --- nie steigen. Denn zwei Ecken, die vorher verbunden waren, bleiben es.
+
+Also
+\[ c(G-S) \;\le\; c(H-S) \;\le\; k = |S| . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wie man den Satz benutzt}
+Der Satz sagt: \kursiv{Ist} $G$ hamiltonsch, \kursiv{dann} gilt die Ungleichung. Man benutzt ihn in der umgekehrten Richtung: Findet man ein $S$, für das sie verletzt ist, so ist $G$ nicht hamiltonsch.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\node[knotenr] (m1) at (-0.6,0) {};
+\node[knotenr] (m2) at (0.6,0) {};
+\foreach \i/\y in {0/1.1, 1/0.0, 2/-1.1} {
+  \node[knoten] (l\i) at (-1.9,\y) {};
+  \node[knoten] (r\i) at (1.9,\y) {};
+}
+\node[knoten] (l3) at (-2.9,0.55) {};
+\node[knoten] (r3) at (2.9,0.55) {};
+\draw[kante] (m1)--(l0);\draw[kante] (m1)--(l1);\draw[kante] (m1)--(l2);
+\draw[kante] (m2)--(r0);\draw[kante] (m2)--(r1);\draw[kante] (m2)--(r2);
+\draw[kante] (m1)--(m2);
+\draw[kante] (l0)--(l3);\draw[kante] (r0)--(r3);
+\node[font=\scriptsize, color=akzent] at (0,-0.45) {$S$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Beispiel}
+Wählt man $S$ als die beiden roten Ecken, so zerfällt der Rest in sechs Teile: links drei (die drei Zweige, von denen einer zwei Ecken hat), rechts drei. Also
+\[ c(G-S) = 6 \;>\; 2 = |S| . \]
+Der Graph ist nicht hamiltonsch.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Als Sonderfall enthält der Satz: Ein hamiltonscher Graph hat keine Schnittecke. Denn für $S = \{v\}$ mit einer Schnittecke $v$ wäre $c(G-v) \ge 2 > 1$. Anschaulich: Ein Rundgang, der zurückkehren muss, kann keinen Engpass nur einmal durchqueren.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Bedingung ist notwendig, aber nicht hinreichend}
+Es gibt Graphen, die die Komponentenbedingung für \kursiv{jedes} $S$ erfüllen und trotzdem keinen Hamiltonkreis haben. Der Petersen-Graph ist so einer --- Abschnitt 7.5.
+
+Das ist kein Mangel dieses Satzes, sondern die Regel: Alle bekannten notwendigen Bedingungen sind unvollständig, und alle bekannten hinreichenden Bedingungen sind zu stark. Dazwischen bleibt eine Lücke, die niemand schließen konnte.
+\end{warnung}
+
+\section{Zwei hinreichende Bedingungen}
+
+Wenn schon kein vollständiges Kriterium, dann wenigstens Bedingungen, die den Hamiltonkreis \kursiv{garantieren}. Die berühmteste stammt von Ore; die bekanntere von Dirac folgt daraus.
+
+\begin{merksatz}
+\boxtitel{Satz 7.3 (Ore 1960)}
+Sei $G$ ein Graph mit $n \ge 3$ Ecken. Gilt für je zwei \kursiv{nicht benachbarte} Ecken $u,v$
+\[ \deg(u) + \deg(v) \;\ge\; n , \]
+so ist $G$ hamiltonsch.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- Schritt 1: den schlimmsten Fall betrachten}
+Angenommen, der Satz wäre falsch. Dann gibt es einen Graphen $G$ auf $n \ge 3$ Ecken, der die Bedingung erfüllt und keinen Hamiltonkreis hat.
+
+Wir fügen zu $G$ so lange Kanten hinzu, wie dabei kein Hamiltonkreis entsteht, und nennen das Ergebnis $G'$. Das Verfahren endet, weil man höchstens $\binom{n}{2}$ Kanten hat.
+
+\schritt{Was $G'$ leistet}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+(a) & $G'$ erfüllt die Ore-Bedingung. Denn Hinzufügen von Kanten kann Grade nur erhöhen, und die Bedingung ist eine Mindestforderung.\\
+(b) & $G'$ hat keinen Hamiltonkreis --- nach Konstruktion.\\
+(c) & $G'$ ist nicht vollständig. Denn $K_n$ mit $n \ge 3$ hat einen Hamiltonkreis: Man läuft die Ecken in beliebiger Reihenfolge ab, alle nötigen Kanten sind vorhanden.\\
+(d) & Fügt man zu $G'$ irgendeine fehlende Kante hinzu, so \kursiv{entsteht} ein Hamiltonkreis --- sonst hätte man weiter hinzugefügt.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- Schritt 2: ein Hamiltonweg entsteht}
+Nach (c) gibt es zwei nicht benachbarte Ecken $u$ und $v$ in $G'$. Nach (d) hat $G' + \{u,v\}$ einen Hamiltonkreis $H$.
+
+\schritt{$H$ muss die neue Kante benutzen}
+Andernfalls läge $H$ ganz in $G'$, im Widerspruch zu (b).
+
+\schritt{Die neue Kante herausnehmen}
+$H$ ist ein Kreis durch alle $n$ Ecken. Entfernt man daraus die Kante $\{u,v\}$, so bleibt ein Weg durch alle Ecken, der bei $u$ beginnt und bei $v$ endet. Wir schreiben ihn
+\[ u = v_1,\ v_2,\ v_3,\ \ldots,\ v_{n-1},\ v_n = v . \]
+Das ist ein Hamiltonweg von $u$ nach $v$ in $G'$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- Schritt 3: der Zählkniff}
+Jetzt kommt der Kern. Wir definieren zwei Indexmengen:
+\[ S = \{\, i \;:\; 1 \le i \le n-1,\ \{u, v_{i+1}\} \in E(G') \,\}, \]
+\[ T = \{\, i \;:\; 1 \le i \le n-1,\ \{v, v_{i}\} \in E(G') \,\} . \]
+
+In Worten: $S$ sammelt die Stellen, an denen der \kursiv{Nachfolger} auf dem Weg ein Nachbar von $u$ ist; $T$ die Stellen, an denen die Ecke \kursiv{selbst} ein Nachbar von $v$ ist.
+
+\schritt{Die Größen von $S$ und $T$}
+Jeder Nachbar von $u$ ist eine der Ecken $v_2, \ldots, v_n$ (nicht $v_1 = u$ selbst). Schreibt man ihn als $v_{i+1}$, so ist $1 \le i \le n-1$. Verschiedene Nachbarn liefern verschiedene $i$. Also
+\[ |S| = \deg(u) . \]
+Ebenso ist jeder Nachbar von $v$ eine der Ecken $v_1, \ldots, v_{n-1}$, also
+\[ |T| = \deg(v) . \]
+
+\schritt{Beide liegen in derselben kleinen Menge}
+$S$ und $T$ sind Teilmengen von $\{1, 2, \ldots, n-1\}$, einer Menge mit $n-1$ Elementen.
+
+\schritt{Sie müssen sich überschneiden}
+Wären $S$ und $T$ disjunkt, so wäre
+\[ |S| + |T| = |S \cup T| \le n-1 . \]
+Nach Voraussetzung ist aber $u \not\sim v$, also
+\[ |S| + |T| = \deg(u) + \deg(v) \;\ge\; n \;>\; n - 1 . \]
+Widerspruch. Also gibt es ein $i \in S \cap T$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- Schritt 4: der Kreis wird geschlossen}
+Für dieses $i$ gilt:
+\[ \{u, v_{i+1}\} \in E(G') \quad \text{und} \quad \{v, v_i\} \in E(G') . \]
+
+Nun bauen wir einen Hamiltonkreis in $G'$:
+\[ \underbrace{v_1 \to v_2 \to \cdots \to v_i}_{\text{vorwärts}} \;\to\; \underbrace{v_n \to v_{n-1} \to \cdots \to v_{i+1}}_{\text{rückwärts}} \;\to\; v_1 . \]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\foreach \i/\x in {1/0, 2/1.1, 3/2.2, 4/3.3, 5/4.4, 6/5.5}
+  \node[knoten] (w\i) at (\x,0) {};
+\foreach \i/\j in {1/2,2/3,4/5,5/6} \draw[kante] (w\i) -- (w\j);
+\draw[kante] (w3) -- (w4);
+\node[font=\scriptsize, color=grau] at (0,-0.35) {$v_1=u$};
+\node[font=\scriptsize, color=tief] at (2.2,-0.35) {$v_i$};
+\node[font=\scriptsize, color=tief] at (3.3,-0.35) {$v_{i+1}$};
+\node[font=\scriptsize, color=grau] at (5.5,-0.35) {$v_n=v$};
+\draw[kanted] (w1) to[bend left=32] (w4);
+\draw[kanted] (w3) to[bend right=32] (w6);
+\node[font=\scriptsize, color=akzent] at (1.7,1.0) {$\{u,v_{i+1}\}$};
+\node[font=\scriptsize, color=akzent] at (3.9,-1.0) {$\{v_i,v\}$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Warum das ein Kreis durch alle Ecken ist}
+Der erste Abschnitt durchläuft $v_1, \ldots, v_i$; der zweite $v_n, v_{n-1}, \ldots, v_{i+1}$. Zusammen sind das alle $n$ Ecken, jede genau einmal.
+
+Die benutzten Kanten: die Wegkanten $\{v_1,v_2\}, \ldots, \{v_{i-1},v_i\}$ und $\{v_{i+1},v_{i+2}\}, \ldots, \{v_{n-1},v_n\}$ --- sie gehören zum Hamiltonweg. Dazu die Übergangskante $\{v_i, v_n\} = \{v_i, v\}$ und die Schlusskante $\{v_{i+1}, v_1\} = \{v_{i+1}, u\}$ --- beide liegen nach Wahl von $i$ in $G'$.
+
+\schritt{Der Widerspruch}
+$G'$ hat also einen Hamiltonkreis --- im Widerspruch zu (b). Die Annahme war falsch. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Folgerung 7.4 (Dirac 1952)}
+Hat jede Ecke eines Graphen mit $n \ge 3$ Ecken mindestens den Grad $n/2$, so ist $G$ hamiltonsch.
+
+\schritt{Beweis}
+Für nicht benachbarte $u, v$ gilt
+\[ \deg(u) + \deg(v) \;\ge\; \frac{n}{2} + \frac{n}{2} = n . \]
+Das ist die Ore-Bedingung. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Historisch war es umgekehrt: Dirac kam acht Jahre früher, Ore verallgemeinerte. Dass die stärkere Aussage den kürzeren Beweis hat, ist in der Mathematik nicht selten --- eine schärfere Formulierung zeigt oft erst, worauf es wirklich ankommt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Schranke $n/2$ ist scharf --- und die Bedingung ist weit von notwendig entfernt}
+\schritt{Scharf}
+Nimmt man zwei vollständige Graphen $K_{(n+1)/2}$, die genau eine Ecke gemeinsam haben (für ungerades $n$), so hat jede Ecke mindestens Grad $\frac{n-1}{2}$ --- knapp unter $n/2$. Der Graph hat eine Schnittecke und ist nach Satz 7.2 nicht hamiltonsch.
+
+\schritt{Weit von notwendig}
+Der Kreis $C_{100}$ ist hamiltonsch --- er \kursiv{ist} sein eigener Hamiltonkreis. Jede Ecke hat aber nur Grad $2$, und $n/2 = 50$. Dirac ist also meilenweit verfehlt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Lage bei allen bekannten hinreichenden Bedingungen: Sie verlangen sehr dichte Graphen. Die schwierigen Fälle --- dünne Graphen wie der Petersen-Graph --- werden von keiner erfasst.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Würfelgraph und die Gray-Codes}
+
+\begin{definition}
+\boxtitelm{Definition 7.5 --- Würfelgraph}
+Der \Begriff{Würfelgraph} $Q_d$ hat als Ecken alle $2^d$ Folgen aus Nullen und Einsen der Länge $d$. Zwei Ecken sind benachbart, wenn sie sich an genau einer Stelle unterscheiden.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 7.6 --- $Q_d$ ist hamiltonsch für $d \ge 2$}
+\schritt{Beweis durch Induktion über $d$}
+\textbf{Anfang $d = 2$:} $Q_2$ hat die vier Ecken $00, 01, 11, 10$, und je zwei aufeinanderfolgende unterscheiden sich an einer Stelle. Das ist ein Viereck --- der Hamiltonkreis ist der Graph selbst.
+
+\textbf{Schritt.} Sei $d \ge 3$ und $C$ ein Hamiltonkreis in $Q_{d-1}$.
+
+\schritt{Die Zerlegung}
+$Q_d$ besteht aus zwei Kopien von $Q_{d-1}$: der Menge aller Folgen, die mit $0$ beginnen, und der Menge aller, die mit $1$ beginnen. Innerhalb jeder Kopie sind die Nachbarschaften dieselben wie in $Q_{d-1}$ --- die erste Stelle ändert sich ja nicht. Zusätzlich ist jede Ecke $0w$ mit $1w$ benachbart, denn sie unterscheiden sich genau an der ersten Stelle.
+
+\schritt{Der Zusammenbau}
+Sei $\{x, y\}$ eine beliebige Kante des Hamiltonkreises $C$. Wir bilden:
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+Kopie $0$ & der Kreis $C$, mit vorangestellter $0$, ohne die Kante $\{0x, 0y\}$ --- ein Weg von $0x$ nach $0y$\\
+Kopie $1$ & derselbe Kreis mit vorangestellter $1$, ohne $\{1x, 1y\}$ --- ein Weg von $1x$ nach $1y$\\
+Verbindung & die Kanten $\{0x, 1x\}$ und $\{0y, 1y\}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\draw[kante] (-1.3,0) ellipse (0.95 and 1.15);
+\draw[kante] (1.3,0) ellipse (0.95 and 1.15);
+\node[knotenb] (a) at (-0.55,0.5) {};
+\node[knotenb] (b) at (-0.55,-0.5) {};
+\node[knotenb] (c) at (0.55,0.5) {};
+\node[knotenb] (d) at (0.55,-0.5) {};
+\draw[kanted] (a)--(c); \draw[kanted] (b)--(d);
+\node[font=\scriptsize, color=grau] at (-0.95,0.78) {$0x$};
+\node[font=\scriptsize, color=grau] at (-0.95,-0.78) {$0y$};
+\node[font=\scriptsize, color=grau] at (0.95,0.78) {$1x$};
+\node[font=\scriptsize, color=grau] at (0.95,-0.78) {$1y$};
+\node[font=\scriptsize\itshape, color=grau] at (-1.3,-1.5) {Kopie $0$};
+\node[font=\scriptsize\itshape, color=grau] at (1.3,-1.5) {Kopie $1$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Warum das ein Hamiltonkreis ist}
+Wir laufen: von $0x$ über den Weg in Kopie $0$ nach $0y$, dann über $\{0y, 1y\}$ nach $1y$, dann über den Weg in Kopie $1$ nach $1x$, dann über $\{1x, 0x\}$ zurück.
+
+Jede Ecke von Kopie $0$ kommt genau einmal vor (der Weg ist ein Hamiltonweg dieser Kopie), ebenso jede von Kopie $1$. Zusammen alle $2^d$ Ecken, jede genau einmal. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was das praktisch bedeutet: Gray-Codes}
+Ein Hamiltonkreis in $Q_d$ ist dasselbe wie eine Anordnung aller $2^d$ Bitfolgen der Länge $d$, bei der sich aufeinanderfolgende Folgen an genau einer Stelle unterscheiden --- und die letzte wieder an einer Stelle von der ersten. So etwas heißt \Begriff{Gray-Code}.
+
+\schritt{Der Fall $d = 3$, aus dem Beweis gewonnen}
+$Q_2$-Kreis: $00 \to 01 \to 11 \to 10 \to 00$. Wir entfernen die Kante $\{10, 00\}$ und erhalten den Weg $00 \to 01 \to 11 \to 10$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{4.2cm}P{4.2cm}@{}}
+\toprule
+\textbf{Kopie $0$ (vorwärts)} & \textbf{Kopie $1$ (rückwärts)}\\
+\midrule
+$000, 001, 011, 010$ & $110, 111, 101, 100$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Der Gesamtkreis lautet
+\[ 000 \to 001 \to 011 \to 010 \to 110 \to 111 \to 101 \to 100 \to 000 . \]
+
+\schritt{Probe}
+Wir prüfen jeden Übergang auf genau eine geänderte Stelle:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{2.4cm}P{1.8cm}P{2.4cm}P{1.8cm}@{}}
+\toprule
+\textbf{Übergang} & \textbf{Stelle} & \textbf{Übergang} & \textbf{Stelle}\\
+\midrule
+$000 \to 001$ & $3$ & $110 \to 111$ & $3$\\
+$001 \to 011$ & $2$ & $111 \to 101$ & $2$\\
+$011 \to 010$ & $3$ & $101 \to 100$ & $3$\\
+$010 \to 110$ & $1$ & $100 \to 000$ & $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Acht Übergänge, jeder ändert genau eine Stelle. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Gray-Codes werden bei Drehgebern verwendet --- etwa in der Winkelmessung. Beim Übergang von einer Stellung zur nächsten ändert sich nur ein einziges Bit; ein Ablesefehler kann daher höchstens eine Stellung danebenliegen. Bei gewöhnlicher Binärzählung geht $011 \to 100$ über drei Bits gleichzeitig, und ein ungünstiger Ablesezeitpunkt liefert einen völlig falschen Wert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Petersen-Graph ist nicht hamiltonsch}
+
+Jetzt die versprochene Abrechnung mit dem Petersen-Graphen. Er erfüllt die Komponentenbedingung, hat keine Schnittecke, ist $3$-regulär und hochsymmetrisch --- und hat trotzdem keinen Hamiltonkreis. Der Beweis ist der erste in diesem Band, der eine Fallunterscheidung über mehrere Seiten braucht.
+
+\begin{merksatz}
+\boxtitel{Die Bezeichnungen}
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+\foreach \i in {0,...,4} {
+  \node[knotenb] (a\i) at (90+72*\i:1.35) {$a_{\i}$};
+  \node[knotenb] (b\i) at (90+72*\i:0.68) {$b_{\i}$};
+  \draw[kante] (a\i) -- (b\i);
+}
+\foreach \i/\j in {0/1,1/2,2/3,3/4,4/0} \draw[kante] (a\i) -- (a\j);
+\foreach \i/\j in {0/2,1/3,2/4,3/0,4/1} \draw[kante] (b\i) -- (b\j);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{2.2cm}@{}}
+\toprule
+\textbf{Sorte} & \textbf{Kanten} & \textbf{Anzahl}\\
+\midrule
+Außenkreis & $a_i a_{i+1}$ & $5$\\
+Speichen & $a_i b_i$ & $5$\\
+Innenstern & $b_i b_{i+2}$ & $5$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Alle Indizes werden modulo $5$ gerechnet: $a_5$ bedeutet $a_0$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Hilfssatz 7.7 --- Kreise überqueren einen Schnitt gerade oft}
+Sei $C$ ein Kreis in einem Graphen und $A \subseteq V$. Dann ist die Anzahl der Kanten von $C$, die eine Ecke in $A$ und eine außerhalb haben, gerade.
+
+\schritt{Beweis}
+Wir laufen den Kreis einmal ab und notieren bei jedem Schritt, ob wir in $A$ oder außerhalb sind. Jede Überquerungskante wechselt die Seite, jede andere nicht.
+
+Da wir am Ende wieder am Ausgangspunkt sind --- also auf derselben Seite wie zu Beginn ---, muss die Anzahl der Seitenwechsel gerade sein. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 7.8 --- Der Petersen-Graph hat keinen Hamiltonkreis}
+\schritt{Annahme}
+Sei $H$ ein Hamiltonkreis. Er hat $10$ Ecken und daher $10$ Kanten, und jede Ecke hat in $H$ genau den Grad $2$.
+
+\schritt{Schritt 1 --- Wie viele Speichen benutzt $H$?}
+Sei $A = \{a_0, \ldots, a_4\}$ die Außenmenge. Die Kanten zwischen $A$ und dem Rest sind genau die fünf Speichen. Nach Hilfssatz 7.7 benutzt $H$ eine \kursiv{gerade} Anzahl davon. Sei $s$ diese Anzahl; also $s \in \{0, 2, 4\}$.
+
+\schritt{Schritt 2 --- Die Kantenbilanz}
+Wir zählen die Grade der Außenecken in $H$. Jede hat Grad $2$, also
+\[ \sum_{i} \deg_H(a_i) = 10 . \]
+Andererseits setzt sich diese Summe zusammen aus den Enden der benutzten Außenkanten (jede liefert $2$) und den Enden der benutzten Speichen (jede liefert $1$ an der Außenseite):
+\[ 2 \cdot |{\text{Außenkanten in } H}| + s = 10 . \]
+Also
+\[ |{\text{Außenkanten in } H}| = \frac{10 - s}{2} . \]
+Dieselbe Rechnung für die Innenecken ergibt denselben Wert für die Innenkanten.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.4cm}P{2.4cm}P{2.4cm}P{1.6cm}@{}}
+\toprule
+$s$ & \textbf{Außenkanten} & \textbf{Innenkanten} & \textbf{Summe}\\
+\midrule
+$0$ & $5$ & $5$ & $10$\\
+$2$ & $4$ & $4$ & $10$\\
+$4$ & $3$ & $3$ & $10$\\
+\bottomrule
+\end{tabular}
+\end{center}
+In allen Fällen kommt $10$ heraus, wie es sein muss.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Fall $s = 0$}
+Dann benutzt $H$ alle fünf Außenkanten und alle fünf Innenkanten, aber keine Speiche.
+
+Die fünf Außenkanten bilden den Kreis $a_0 a_1 a_2 a_3 a_4 a_0$ --- einen geschlossenen Kreis auf nur fünf Ecken. $H$ enthielte damit einen echten Teilkreis, was für einen Kreis mit zehn Ecken unmöglich ist: Ein Kreis hat an jeder Ecke genau zwei Kanten, und wenn fünf Ecken bereits untereinander geschlossen sind, kann keine Kante mehr nach außen führen.
+
+Also ist $s = 0$ ausgeschlossen.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Fall $s = 2$}
+$H$ benutzt $4$ der $5$ Außenkanten, $4$ der $5$ Innenkanten und $2$ Speichen.
+
+\schritt{Was die Außenkanten bilden}
+Vier der fünf Kanten des Kreises $a_0 \ldots a_4$: Das ist der Kreis ohne eine Kante, also ein \kursiv{Weg} durch alle fünf Außenecken. Sei $\{a_k, a_{k+1}\}$ die weggelassene Kante; dann sind die beiden Endecken des Weges genau $a_k$ und $a_{k+1}$.
+
+\schritt{Wo die Speichen ansetzen müssen}
+Die Ecken im Inneren des Weges haben schon Grad $2$ durch Außenkanten. Die beiden Endecken $a_k$ und $a_{k+1}$ haben erst Grad $1$ und brauchen je eine weitere Kante --- das können nur Speichen sein.
+
+Die beiden benutzten Speichen sind also $\{a_k, b_k\}$ und $\{a_{k+1}, b_{k+1}\}$.
+
+\schritt{Was innen passieren muss}
+Nach demselben Argument bilden die vier Innenkanten einen Weg durch alle fünf Innenecken, und seine beiden Endecken müssen genau die von den Speichen getroffenen sein: $b_k$ und $b_{k+1}$.
+
+\schritt{Der Widerspruch}
+Der Innenstern ist der Kreis $b_0 b_2 b_4 b_1 b_3 b_0$. Lässt man daraus eine Kante weg, etwa $\{b_j, b_{j+2}\}$, so sind die Endecken des entstehenden Weges genau $b_j$ und $b_{j+2}$ --- zwei Ecken, deren Indizes sich um $2$ unterscheiden.
+
+Gefordert waren aber $b_k$ und $b_{k+1}$ --- Indizes, die sich um $1$ unterscheiden. Es müsste also
+\[ 1 \equiv \pm 2 \pmod 5 \]
+gelten. Das ist falsch: $1 \neq 2$ und $1 \neq 3$ modulo $5$.
+
+Also ist $s = 2$ ausgeschlossen.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Fall $s = 4$}
+$H$ benutzt $3$ Außenkanten, $3$ Innenkanten und $4$ Speichen. Genau eine Speiche fehlt; sei es $\{a_k, b_k\}$. Wir setzen ohne Einschränkung $k = 0$ --- der Graph ist symmetrisch genug, dass man die Nummerierung so drehen darf.
+
+\schritt{Schritt 1 --- Was an $a_0$ und $b_0$ geschieht}
+$a_0$ benutzt keine Speiche, hat aber Grad $2$. Die einzigen anderen Kanten an $a_0$ sind $\{a_4, a_0\}$ und $\{a_0, a_1\}$. Beide müssen also in $H$ liegen.
+
+Ebenso muss $b_0$ beide Innenkanten benutzen: $\{b_0, b_2\}$ und $\{b_0, b_3\}$.
+
+\schritt{Schritt 2 --- Die übrigen Außenecken}
+$a_1$ benutzt die Speiche $\{a_1,b_1\}$ und hat bereits $\{a_0,a_1\}$. Damit ist Grad $2$ erreicht --- die Kante $\{a_1, a_2\}$ liegt \kursiv{nicht} in $H$.
+
+Ebenso hat $a_4$ die Speiche und $\{a_4,a_0\}$; also liegt $\{a_3,a_4\}$ nicht in $H$.
+
+\schritt{Schritt 3 --- Die dritte Außenkante ist erzwungen}
+Bisher zwei Außenkanten ($a_4a_0$ und $a_0a_1$); es müssen drei sein. Von den restlichen drei Außenkanten sind $a_1a_2$ und $a_3a_4$ ausgeschlossen. Bleibt nur $\{a_2, a_3\}$.
+
+Kontrolle: $a_2$ hat dann Speiche und $\{a_2,a_3\}$ --- Grad $2$. \checkmark\ $a_3$ ebenso. \checkmark
+
+\schritt{Schritt 4 --- Die übrigen Innenecken}
+$b_2$ hat bereits $\{b_0,b_2\}$ und die Speiche $\{a_2,b_2\}$ --- Grad $2$ erreicht. Ebenso $b_3$.
+
+Bleiben $b_1$ und $b_4$: Beide haben ihre Speiche und brauchen je genau eine Innenkante. Und es fehlt genau eine Innenkante an der Zahl $3$.
+
+Diese eine Kante muss also $b_1$ mit $b_4$ verbinden. Ist $\{b_1, b_4\}$ überhaupt eine Kante? Der Innenstern verbindet $b_i$ mit $b_{i\pm2}$; und $4 \equiv 1 - 2 \pmod 5$. Ja, sie existiert.
+
+\schritt{Schritt 5 --- Alles ist festgelegt --- und falsch}
+Es gibt also genau eine Möglichkeit. Die zehn Kanten von $H$ wären:
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{2.4cm}P{5.8cm}@{}}
+\toprule
+Außen & $a_4a_0$, $a_0a_1$, $a_2a_3$\\
+Speichen & $a_1b_1$, $a_2b_2$, $a_3b_3$, $a_4b_4$\\
+Innen & $b_0b_2$, $b_0b_3$, $b_1b_4$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Jede Ecke hat darin Grad $2$ --- das lässt sich nachprüfen. Aber ist es ein \kursiv{Kreis}?
+
+Wir laufen los bei $a_0$:
+\[ a_0 \to a_1 \to b_1 \to b_4 \to a_4 \to a_0 . \]
+Nach fünf Schritten sind wir zurück. Das ist ein Kreis der Länge $5$, nicht $10$.
+
+Die übrigen fünf Ecken bilden den zweiten Kreis:
+\[ a_2 \to a_3 \to b_3 \to b_0 \to b_2 \to a_2 . \]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+\foreach \i in {0,...,4} {
+  \node[knotenb] (a\i) at (90+72*\i:1.35) {$a_{\i}$};
+  \node[knotenb] (b\i) at (90+72*\i:0.68) {$b_{\i}$};
+}
+\foreach \i/\j in {0/1,1/2,2/3,3/4,4/0} \draw[kante, grau!35] (a\i) -- (a\j);
+\foreach \i/\j in {0/2,1/3,2/4,3/0,4/1} \draw[kante, grau!35] (b\i) -- (b\j);
+\foreach \i in {0,...,4} \draw[kante, grau!35] (a\i) -- (b\i);
+\draw[kanted] (a4)--(a0); \draw[kanted] (a0)--(a1);
+\draw[kanted] (a1)--(b1); \draw[kanted] (b1)--(b4); \draw[kanted] (b4)--(a4);
+\draw[kante, gruen, line width=1.5pt] (a2)--(a3);
+\draw[kante, gruen, line width=1.5pt] (a3)--(b3); \draw[kante, gruen, line width=1.5pt] (b3)--(b0);
+\draw[kante, gruen, line width=1.5pt] (b0)--(b2); \draw[kante, gruen, line width=1.5pt] (b2)--(a2);
+\end{tikzpicture}
+\end{center}
+
+Es entstehen zwei getrennte Fünfkreise, kein Hamiltonkreis. Also ist auch $s = 4$ ausgeschlossen.
+
+\schritt{Schluss}
+Alle drei möglichen Werte von $s$ führen auf einen Widerspruch. Der Petersen-Graph besitzt keinen Hamiltonkreis. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Und doch fast}
+Der Petersen-Graph besitzt einen Hamilton\kursiv{weg}, zum Beispiel
+\[ a_0 \to a_1 \to a_2 \to a_3 \to a_4 \to b_4 \to b_1 \to b_3 \to b_0 \to b_2 . \]
+Prüfen Sie die Kanten: die vier Außenkanten, die Speiche $a_4b_4$, dann $b_4b_1$ (Differenz $2$), $b_1b_3$ (Differenz $2$), $b_3b_0$ (Differenz $2$), $b_0b_2$ (Differenz $2$). Alle vorhanden, alle zehn Ecken genau einmal. \checkmark
+
+Mehr noch: Entfernt man aus dem Petersen-Graphen eine \kursiv{beliebige} Ecke, so ist der Rest hamiltonsch. Solche Graphen heißen \Begriff{hypohamiltonsch} --- sie sind es selbst nicht, aber jeder ihrer Eckenrestgraphen ist es. Der Petersen-Graph ist der kleinste.
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.1 --- Bipartite Graphen und Hamiltonkreise}
+Zeigen Sie: Ist $G$ bipartit mit Bipartition $(A,B)$ und hamiltonsch, so gilt $|A| = |B|$. Folgern Sie, dass $K_{3,4}$ nicht hamiltonsch ist.
+
+\loesung
+\schritt{Schritt 1 --- Der Hamiltonkreis wechselt die Seiten}
+Sei $H = (v_1, v_2, \ldots, v_n, v_1)$ ein Hamiltonkreis. Jede Kante von $H$ ist eine Kante von $G$, verbindet also eine Ecke aus $A$ mit einer aus $B$.
+
+Aufeinanderfolgende Ecken liegen daher stets auf verschiedenen Seiten. Die Ecken wechseln entlang des Kreises also ab: $A, B, A, B, \ldots$
+
+\schritt{Schritt 2 --- Der Kreis hat gerade Länge}
+Nach Satz 2.12 enthält ein bipartiter Graph keinen ungeraden Kreis. Also ist $n$ gerade, sagen wir $n = 2r$.
+
+\schritt{Schritt 3 --- Abzählen}
+Bei striktem Abwechseln über $2r$ Ecken liegen genau $r$ Ecken in $A$ und $r$ in $B$. Da der Hamiltonkreis \kursiv{alle} Ecken enthält, ist
+\[ |A| = r = |B| . \]
+
+\schritt{Schritt 4 --- Anwendung auf $K_{3,4}$}
+Hier ist $|A| = 3$ und $|B| = 4$, also $|A| \neq |B|$. Nach dem Bewiesenen ist $K_{3,4}$ nicht hamiltonsch.
+
+\schritt{Gegenprobe über Satz 7.2}
+Wählt man $S = A$ (die drei Ecken), so zerfällt $K_{3,4} - S$ in vier isolierte Ecken:
+\[ c(G - S) = 4 \;>\; 3 = |S| . \]
+Auch die Komponentenbedingung ist verletzt. Beide Wege führen zum selben Ergebnis. \checkmark
+
+\schritt{Nachbemerkung}
+$K_{4,4}$ dagegen \kursiv{ist} hamiltonsch: $a_1 b_1 a_2 b_2 a_3 b_3 a_4 b_4 a_1$. Die Bedingung $|A| = |B|$ ist bei vollständig bipartiten Graphen also nicht nur notwendig, sondern auch hinreichend.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.2 --- Ore prüfen}
+Sei $G$ der Graph auf $\{1,\ldots,6\}$ mit den Kanten
+\[ 12,\ 13,\ 14,\ 23,\ 25,\ 34,\ 36,\ 45,\ 46,\ 56 . \]
+Prüfen Sie die Bedingungen von Dirac und Ore und entscheiden Sie über Hamiltonizität.
+
+\loesung
+\schritt{Schritt 1 --- Grade bestimmen}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{3.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Ecke} & \textbf{Nachbarn} & $\deg$\\
+\midrule
+$1$ & $2,3,4$ & $3$\\
+$2$ & $1,3,5$ & $3$\\
+$3$ & $1,2,4,6$ & $4$\\
+$4$ & $1,3,5,6$ & $4$\\
+$5$ & $2,4,6$ & $3$\\
+$6$ & $3,4,5$ & $3$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Probe: $3+3+4+4+3+3 = 20 = 2 \cdot 10$. \checkmark
+
+\schritt{Schritt 2 --- Dirac}
+Verlangt: $\deg(v) \ge n/2 = 3$ für alle $v$. Der kleinste Grad ist $3$. \textbf{Dirac ist erfüllt.}
+
+\schritt{Schritt 3 --- Also ist $G$ hamiltonsch}
+Nach Folgerung 7.4 besitzt $G$ einen Hamiltonkreis. Das Ergebnis steht damit schon fest; wir suchen ihn trotzdem.
+
+\schritt{Schritt 4 --- Ore zur Kontrolle}
+Die nicht benachbarten Paare sind $15$, $16$, $24$, $26$, $35$. Wir prüfen jedes:
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.6cm}P{2.8cm}P{1.6cm}@{}}
+\toprule
+\textbf{Paar} & $\deg + \deg$ & $\ge 6$?\\
+\midrule
+$1,5$ & $3+3 = 6$ & \checkmark\\
+$1,6$ & $3+3 = 6$ & \checkmark\\
+$2,4$ & $3+4 = 7$ & \checkmark\\
+$2,6$ & $3+3 = 6$ & \checkmark\\
+$3,5$ & $4+3 = 7$ & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+Ore ist ebenfalls erfüllt --- wie es sein muss, da Dirac schärfer ist.
+
+\schritt{Schritt 5 --- Einen Hamiltonkreis angeben}
+Versuch: $1 \to 2 \to 5 \to 6 \to 3 \to 4 \to 1$.
+
+Kantenprüfung: $12$ \checkmark, $25$ \checkmark, $56$ \checkmark, $63$ \checkmark (in der Liste als $36$), $34$ \checkmark, $41$ \checkmark (als $14$).
+
+Alle sechs Ecken genau einmal, sechs Kanten. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.3 --- Ein Graph, den keine der Bedingungen erfasst}
+Der Kreis $C_8$ ist hamiltonsch. Zeigen Sie, dass weder Dirac noch Ore das erkennen, und erklären Sie, was das über die Reichweite solcher Sätze aussagt.
+
+\loesung
+\schritt{Schritt 1 --- Dirac}
+In $C_8$ hat jede Ecke Grad $2$. Verlangt wäre $n/2 = 4$. Also $2 < 4$: \textbf{Dirac greift nicht.}
+
+\schritt{Schritt 2 --- Ore}
+Nehmen wir zwei gegenüberliegende Ecken, etwa $v_1$ und $v_5$. Sie sind nicht benachbart, und
+\[ \deg(v_1) + \deg(v_5) = 2 + 2 = 4 \;<\; 8 = n . \]
+\textbf{Ore greift ebenfalls nicht.}
+
+\schritt{Schritt 3 --- Trotzdem hamiltonsch}
+$C_8$ \kursiv{ist} sein eigener Hamiltonkreis: $v_1 v_2 \ldots v_8 v_1$ enthält alle acht Ecken genau einmal.
+
+\schritt{Schritt 4 --- Was daraus folgt}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Dirac und Ore sind \kursiv{hinreichende}, nicht notwendige Bedingungen. Sie sagen: \enquote{Wenn dicht genug, dann ja.} Sie sagen nichts über dünne Graphen --- und die interessanten Fälle sind meist dünn.
+
+Zahlenmäßig: Dirac verlangt mindestens $n^2/4$ Kanten. $C_8$ hat $8$. Für $n = 8$ verlangt Dirac $16$. Der Abstand ist ein Faktor $2$, und er wächst mit $n$: Bei $n = 100$ verlangt Dirac $2500$ Kanten, $C_{100}$ hat $100$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Man kennt keine hinreichende Bedingung, die \kursiv{alle} hamiltonschen Graphen erfasst und zugleich leicht prüfbar ist --- denn eine solche wäre ein vollständiges Kriterium. Kapitel~15 erklärt, warum das vermutlich unmöglich ist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Spielzeug, das sich nicht verkaufte}
+\Person{William Rowan Hamilton} (1805--1865) entwickelte 1856 eine algebraische Struktur, die er \kursiv{Icosian Calculus} nannte. Um sie anschaulich zu machen, entwarf er ein Spiel: einen hölzernen Dodekaeder mit zwanzig nummerierten Ecken, an denen Stifte steckten. Die Aufgabe war, mit einer Schnur einen Rundgang durch alle zwanzig Ecken zu legen.
+
+Hamilton verkaufte die Rechte 1859 für fünfundzwanzig Pfund an einen Londoner Spielehändler. Das Spiel war ein Ladenhüter --- es galt als zu leicht. Für den Dodekaeder ist es das auch.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Frage nach solchen Rundgängen war schon vorher gestellt worden. \Person{Thomas Kirkman} untersuchte 1855 --- ein Jahr vor Hamilton --- systematisch, welche Polyeder einen Rundgang durch alle Ecken zulassen. Sein Aufsatz erschien in den Philosophical Transactions und ist die eigentliche erste Behandlung des Problems. Der Name blieb dennoch an Hamilton hängen.}
+\end{minipage}
+\end{center}
+
+Der Fairness halber: Hamiltons Beitrag lag weniger im Problem als im algebraischen Rahmen, aus dem es entstand. Der Icosian Calculus ist ein früher Vorläufer der Gruppentheorie --- Band 11, Kapitel~3.
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Warum es vermutlich kein Kriterium gibt}
+Die Frage \enquote{Hat dieser Graph einen Hamiltonkreis?} gehört zu den ersten Problemen, für die \Person{Richard Karp} 1972 die \Begriff{NP-Vollständigkeit} nachwies. Was das bedeutet, entwickelt Band 3 der Informatikreihe; die kurze Fassung lautet:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Prüfen} & Ist ein Kreis vorgelegt, kann man in wenigen Schritten nachrechnen, ob er passt.\\
+\textbf{Finden} & Kein Verfahren bekannt, das ihn in vertretbarer Zeit findet.\\
+\textbf{Die Kopplung} & Gäbe es eines, so gäbe es zugleich schnelle Verfahren für Tausende anderer Probleme --- das ist die Frage \enquote{P gleich NP?}.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Ein einfaches Kriterium vom Typ des Satzes 6.4 wäre genau so ein Verfahren. Wer eines fände, hätte damit eines der sieben Millenniumsprobleme gelöst.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Forschung geht deshalb andere Wege. Man untersucht eingeschränkte Graphenklassen, in denen es doch geht, und man untersucht \kursiv{typische} Graphen: In einem Zufallsgraphen mit $n$ Ecken ist ein Hamiltonkreis mit hoher Wahrscheinlichkeit vorhanden, sobald keine Ecke mehr den Grad $0$ oder $1$ hat --- ein Ergebnis von Komlós und Szemerédi (1983), auf das Kapitel~14 zurückkommt. Der schwierige Fall ist also nicht der Regelfall, sondern die Ausnahme.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Der Unterschied} & Euler betrifft Kanten und ist gelöst; Hamilton betrifft Ecken und ist es nicht\\
+\textbf{Satz 7.2} & Komponentenbedingung --- das Werkzeug zum Widerlegen\\
+\textbf{Satz 7.3} & Ore: $\deg(u) + \deg(v) \ge n$ genügt\\
+\textbf{Folgerung 7.4} & Dirac als Sonderfall\\
+\textbf{Satz 7.6} & $Q_d$ ist hamiltonsch --- Gray-Codes\\
+\textbf{Satz 7.8} & Der Petersen-Graph ist es nicht\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~III. Ab Kapitel~8 geht es nicht mehr ums Durchlaufen, sondern ums Zeichnen: Wann lässt sich ein Graph ohne Überkreuzungen aufs Papier bringen?}
+\end{minipage}
+\end{center}
+\end{merksatz}

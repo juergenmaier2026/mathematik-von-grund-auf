@@ -1,0 +1,287 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Die wichtigsten Formeln}
+
+\begin{merksatz}
+\boxtitel{Grundlagen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{4.2cm}P{4.4cm}@{}}
+\toprule
+$\sum_{v} \deg(v) = 2m$ & Handschlaglemma (1.3)\\
+Anzahl ungerader Grade ist gerade & (1.4)\\
+$m \le \binom{n}{2} = \frac{n(n-1)}{2}$ & höchstmögliche Kantenzahl\\
+$\deg_{\overline G}(v) = n-1-\deg_G(v)$ & Komplement\\
+$m \ge n - c$ & $c$ Komponenten (2.8, 4.3)\\
+$(A^k)_{ij}$ & Kantenzüge der Länge $k$ (3.4)\\
+$\frac16\operatorname{spur}(A^3)$ & Anzahl der Dreiecke (3.5)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Bäume und Spannbäume}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{4.2cm}P{4.4cm}@{}}
+\toprule
+Baum $\iff$ zusammenhängend, kreisfrei & fünf Fassungen (4.2)\\
+$m = n-1$ & Baum\\
+$m = n - c$ & Wald mit $c$ Komponenten\\
+$\ge 2$ Blätter für $n \ge 2$ & (4.3)\\
+$n^{\,n-2}$ & Bäume auf $n$ Ecken (5.5)\\
+$\frac{(n-2)!}{\prod_i (d_i-1)!}$ & mit vorgeschriebenen Graden (5.6)\\
+$\det L_i$ & Spannbäume (5.8)\\
+$r^{s-1}s^{r-1}$ & Spannbäume von $K_{r,s}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Durchlaufen, Zeichnen, Färben}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{4.2cm}P{4.4cm}@{}}
+\toprule
+Eulerkreis $\iff$ alle Grade gerade & zusammenhängend (6.4)\\
+Eulerzug $\iff$ genau zwei ungerade & (6.5)\\
+$\deg(u)+\deg(v)\ge n$ $\Rightarrow$ hamiltonsch & Ore (7.3)\\
+$\deg(v) \ge n/2$ $\Rightarrow$ hamiltonsch & Dirac (7.4)\\
+$c(G-S) \le |S|$ & notwendig (7.2)\\
+$n - m + f = 2$ & Polyederformel (8.3)\\
+$m \le \frac{g(n-2)}{g-2}$ & Taille $g$, planar (8.4)\\
+$\delta(G) \le 5$ & planar (8.6)\\
+$\chi \ge \omega$, $\chi \ge n/\alpha$ & (9.3)\\
+$\chi \le \Delta + 1$ & gierig (9.4)\\
+$P(G,k) = P(G-e,k) - P(G/e,k)$ & (10.3)\\
+$P(C_n,k) = (k-1)^n + (-1)^n(k-1)$ & (10.6)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Paarungen, Flüsse, Extremales, Spektren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{4.2cm}P{4.4cm}@{}}
+\toprule
+$|N(S)| \ge |S|$ & Hall (11.4)\\
+größte Paarung $=$ kleinste Überdeckung & Kőnig, bipartit (11.7)\\
+größter Fluss $=$ kleinster Schnitt & (12.5)\\
+Wege $=$ trennende Menge & Menger (12.8)\\
+$m \le n^2/4$ & dreiecksfrei, Mantel (13.1)\\
+$m \le (1-\frac1r)\frac{n^2}{2}$ & ohne $K_{r+1}$, Turán (13.3)\\
+$R(3,3) = 6$ & (13.4)\\
+$R(s,s) > 2^{s/2}$ & probabilistisch\\
+$\frac{2m}{n} \le \lambda_1 \le \Delta$ & (14.3)\\
+$x^{\!\top}Lx = \sum_{uv \in E}(x_u-x_v)^2$ & (14.5)\\
+Vielfachheit von $0$ $=$ $c$ & Laplace (14.6)\\
+$p \approx 1/n$ & Schwelle Dreieck (14.8)\\
+$p \approx \ln n / n$ & Schwelle Zusammenhang (14.9)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte des Bandes}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz wo steht --- und worauf er beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{1.4cm}P{3.4cm}@{}}
+\toprule
+\textbf{Satz} & \textbf{Kap.} & \textbf{Beruht auf}\\
+\midrule
+Handschlaglemma & $1$ & Doppelzählung\\
+Kantenzug $\to$ Weg & $2$ & Extremalprinzip\\
+Bipartit $\iff$ kein ungerader Kreis & $2$ & Abstandsfärbung\\
+Brücke $\iff$ kein Kreis & $2$ & ---\\
+Potenzen zählen Kantenzüge & $3$ & Induktion\\
+Fünf Baumfassungen & $4$ & Ringschluss, Satz 2.14\\
+Kruskal & $5$ & Austauschargument\\
+Cayley & $5$ & Prüfer-Bijektion\\
+Matrix-Baum-Satz & $5$ & Cauchy--Binet\\
+Euler/Hierholzer & $6$ & Verschmelzen\\
+Ore & $7$ & maximales Gegenbeispiel\\
+Petersen nicht hamiltonsch & $7$ & drei Fälle\\
+Polyederformel & $8$ & Induktion, Jordan\\
+Kantenschranke & $8$ & Doppelzählung\\
+Fünffarbensatz & $9$ & Satz 8.6, Kempe-Kette\\
+Chromatisches Polynom & $10$ & Mengenaufteilung\\
+Hall & $11$ & Induktion, zwei Fälle\\
+Kőnig & $11$ & alternierende Wege\\
+Max-Fluss-Min-Schnitt & $12$ & Restnetzwerk\\
+Menger & $12$ & Übersetzung\\
+Mantel & $13$ & Quadratsummen\\
+Turán & $13$ & Induktion in $r$-Schritten\\
+$R(3,3)=6$ & $13$ & Schubfach\\
+Laplace-Nullstellen & $14$ & Satz 14.5\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was in diesem Band \kursiv{nicht} bewiesen wurde}
+Vier Ergebnisse wurden benutzt, ohne sie herzuleiten. Alle vier sind an ihrer Stelle ausdrücklich als solche gekennzeichnet.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{1.4cm}P{3.8cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+Jordanscher Kurvensatz & $8$ & Band 8 dieser Reihe\\
+Satz von Kuratowski & $8$ & Diestel\zit{7}, Kap. 4\\
+Satz von Brooks & $9$ & Diestel\zit{7}, Kap. 5\\
+Satz von Tutte & $11$ & Diestel\zit{7}, Kap. 2\\
+Spektralsatz & $14$ & Band 2, Teil V\\
+Cauchy--Binet & $5$ & Band 2, Teil IV\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Sechs Auslassungen auf zweihundertfünfzig Seiten. Jede ist im Text benannt, mit Begründung, warum sie dort steht. Das ist die einzige Form, in der die Regel dieses Werkes --- nichts ist selbstverständlich --- gebrochen werden darf: offen und mit Quellenangabe.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von Königsberg bis heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.4cm}P{2.8cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Ereignis}\\
+\midrule
+$1736$ & Euler & Königsberger Brücken\\
+$1750$ & Euler & Polyederformel\\
+$1847$ & Kirchhoff & Inzidenzmatrix, Spannbäume\\
+$1852$ & Guthrie & Vierfarbenfrage\\
+$1857$ & Cayley & Begriff des Baumes\\
+$1859$ & Hamilton & das Icosian-Spiel\\
+$1873$ & Hierholzer & Beweis des Eulersatzes\\
+$1875$ & Cayley & Zählung der Alkane\\
+$1878$ & Sylvester & das Wort \enquote{Graph}\\
+$1879$ & Kempe & fehlerhafter Vierfarbenbeweis\\
+$1889$ & Cayley & $n^{n-2}$\\
+$1890$ & Heawood & Fünffarbensatz\\
+$1891$ & Petersen & der Petersen-Graph\\
+$1907$ & Mantel & dreiecksfreie Schranke\\
+$1912$ & Birkhoff & chromatisches Polynom\\
+$1916$ & Kőnig & bipartit, Paarungen\\
+$1918$ & Prüfer & der Prüfer-Code\\
+$1926$ & Borůvka & minimaler Spannbaum\\
+$1927$ & Menger & Wege und Trennmengen\\
+$1930$ & Kuratowski & Planaritätskriterium\\
+$1930$ & Ramsey & Ramseytheorie\\
+$1931$ & Kőnig, Egerváry & Paarung $=$ Überdeckung\\
+$1935$ & Hall & Repräsentantensysteme\\
+$1936$ & Kőnig & erstes Lehrbuch\\
+$1937$ & Wagner & Minorenfassung\\
+$1941$ & Turán & extremale Schranke\\
+$1943$ & Hadwiger & die Vermutung\\
+$1947$ & Erdős & probabilistische Methode\\
+$1947$ & Tutte & perfekte Paarungen\\
+$1952$ & Dirac & Hamiltonbedingung\\
+$1956$ & Ford, Fulkerson & Flusssatz\\
+$1956$ & Kruskal & Spannbaumverfahren\\
+$1957$ & Berge & vergrößernde Wege\\
+$1959$ & Erdős, Rényi & Zufallsgraphen\\
+$1960$ & Ore & Verallgemeinerung von Dirac\\
+$1965$ & Edmonds & Paarungen allgemein\\
+$1972$ & Karp & NP-Vollständigkeit\\
+$1975$ & Szemerédi & Regularitätslemma\\
+$1976$ & Appel, Haken & Vierfarbensatz\\
+$1988$ & Lubotzky u.\,a. & Ramanujan-Graphen\\
+$2004$ & Robertson, Seymour & Graphenminoren-Satz\\
+$2005$ & Gonthier & Vierfarbensatz formalisiert\\
+$2012$ & Huh & Log-Konkavität\\
+$2016$ & Babai & Isomorphie quasipolynomiell\\
+$2022$ & Chen u.\,a. & Flüsse fast linear\\
+$2023$ & Campos u.\,a. & Ramsey-Schranke verbessert\\
+$2026$ & Diskin u.\,a. & Perkolationsübergang\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{longtable}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Begriff} & \textbf{Bedeutung}\\
+\midrule
+\endhead
+Adjazenzmatrix & $n\times n$-Matrix mit Einsen an den Kantenstellen (3.2)\\
+Baum & zusammenhängend und kreisfrei (4.1)\\
+Bipartit & Ecken in zwei Gruppen ohne innere Kanten (2.11)\\
+Blatt & Ecke vom Grad $1$\\
+Brücke & Kante, deren Entfernung trennt (2.13)\\
+Chromatische Zahl & kleinste Farbenzahl $\chi$ (9.1)\\
+Clique & paarweise benachbarte Ecken (9.2)\\
+Durchmesser & größter vorkommender Abstand (2.9)\\
+Ecke & Element von $V$ (1.1)\\
+Eulerkreis & benutzt jede Kante genau einmal (6.2)\\
+Expander & dünn und dennoch fest verbunden (14)\\
+Gerichteter Graph & Kanten mit Richtung (12.1)\\
+Grad & Anzahl der Nachbarn (1.2)\\
+Gradfolge & sortierte Liste aller Grade (1.5)\\
+Graphon & Grenzwert einer Graphenfolge (15)\\
+Hamiltonkreis & besucht jede Ecke genau einmal (7.1)\\
+Induzierter Teilgraph & alle Kanten zwischen gewählten Ecken (1.6)\\
+Invariante & bei Isomorphie gleichbleibende Größe (1.8)\\
+Isomorph & strukturgleich (1.7)\\
+Kante & zweielementige Eckenmenge (1.1)\\
+Kantenzug & Folge benachbarter Ecken (2.1)\\
+Kempe-Kette & Komponente aus zwei Farbklassen (9)\\
+Komponente & Äquivalenzklasse der Erreichbarkeit (2.7)\\
+Kreis & geschlossener Weg der Länge $\ge 3$ (2.2)\\
+Laplace-Matrix & $L = D - A$ (5.7)\\
+Minor & durch Löschen und Zusammenziehen (8)\\
+Multigraph & mit Schlingen und Parallelen (6.1)\\
+Paarung & Kanten ohne gemeinsame Ecke (11.1)\\
+Perfekte Paarung & sättigt jede Ecke (11.1)\\
+Planar & kreuzungsfrei zeichenbar (8.1)\\
+Prüfer-Code & Folge zu einem beschrifteten Baum (5)\\
+Schnitt & Aufteilung mit $s$ links, $t$ rechts (12.3)\\
+Schnittecke & Ecke, deren Entfernung trennt (2.13)\\
+Spannbaum & Baum auf allen Ecken (5.1)\\
+Spektrum & Liste der Eigenwerte (14.2)\\
+Taille & Länge des kürzesten Kreises (2.9)\\
+Turán-Graph & vollständig mehrteilig (13.2)\\
+Unabhängige Menge & Ecken ohne Kante dazwischen (9.2)\\
+Vergrößernder Weg & alternierend, freie Enden (11.2)\\
+Wald & kreisfrei, evtl. mehrere Bäume (4.1)\\
+Weg & Kantenzug ohne Eckenwiederholung (2.2)\\
+Wurzelbaum & Baum mit ausgezeichneter Ecke (4.6)\\
+Zufallsgraph & $G(n,p)$ (14.7)\\
+\bottomrule
+\end{longtable}}
+\end{center}
+\end{merksatz}

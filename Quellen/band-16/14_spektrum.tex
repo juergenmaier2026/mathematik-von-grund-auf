@@ -1,0 +1,580 @@
+\chapter{Spektren und Zufallsgraphen}
+
+\section{Zwei Zugänge, die dasselbe wollen}
+
+Dieses Kapitel bringt zwei Werkzeuge zusammen, die auf den ersten Blick nichts miteinander zu tun haben.
+
+\begin{merksatz}
+\boxtitel{Der Plan}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Spektrum} & Aus der Adjazenzmatrix von Kapitel~3 werden Zahlen gewonnen, die Struktureigenschaften wiedergeben.\\
+\textbf{Zufallsgraphen} & Statt einzelne Graphen zu untersuchen, betrachtet man \kursiv{typische} --- und fragt, welche Eigenschaften fast alle haben.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide beantworten dieselbe Art von Frage, die mit den bisherigen Mitteln nicht zugänglich war: nicht \enquote{gibt es} oder \enquote{wie viele}, sondern \enquote{wie ist ein Graph beschaffen}.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Eigenwerte eines Graphen}
+
+\begin{definition}
+\boxtitelm{Definition 14.1 --- Eigenwert und Eigenvektor}
+Sei $A$ eine $n\times n$-Matrix. Eine Zahl $\lambda$ heißt \Begriff{Eigenwert} von $A$, wenn es einen Vektor $x \neq 0$ gibt mit
+\[ A x = \lambda x . \]
+Ein solcher $x$ heißt \Begriff{Eigenvektor} zum Eigenwert $\lambda$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was das anschaulich bedeutet}
+Eine Matrix bildet Vektoren auf Vektoren ab. Im Allgemeinen ändert sich dabei die Richtung. Ein Eigenvektor ist ein Vektor, dessen \kursiv{Richtung} erhalten bleibt --- er wird nur um den Faktor $\lambda$ gestreckt (oder bei negativem $\lambda$ gespiegelt und gestreckt).
+
+\schritt{Für Graphen ausgeschrieben}
+Ist $A$ die Adjazenzmatrix und $x = (x_1, \ldots, x_n)$, so lautet die $i$-te Zeile der Gleichung $Ax = \lambda x$:
+\[ \sum_{j} a_{ij} x_j = \lambda x_i , \qquad \text{also} \qquad \sum_{j \in N(v_i)} x_j = \lambda\, x_i . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In Worten: Denkt man sich an jede Ecke eine Zahl geschrieben, so ist $x$ genau dann ein Eigenvektor, wenn an \kursiv{jeder} Ecke gilt: Die Summe der Nachbarzahlen ist das $\lambda$-fache der eigenen Zahl. Das ist eine rein graphentheoretische Bedingung, ohne jede Matrix.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 14.2 --- Spektrum}
+Das \Begriff{Spektrum} eines Graphen ist die Liste der Eigenwerte seiner Adjazenzmatrix, absteigend geordnet und mit Vielfachheiten:
+\[ \lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_n . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum es überhaupt $n$ reelle Eigenwerte gibt}
+Die Adjazenzmatrix ist \kursiv{symmetrisch}: $a_{ij} = a_{ji}$, weil $\{v_i,v_j\} = \{v_j,v_i\}$ dieselbe Kante ist (Kapitel~3).
+
+Für symmetrische Matrizen gilt der \Begriff{Spektralsatz} (Band 2, Teil~V): Alle Eigenwerte sind reell, und es gibt eine Basis aus zueinander senkrechten Eigenvektoren. Insbesondere gibt es genau $n$ Eigenwerte, wenn man Vielfachheiten mitzählt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diesen Satz beweise ich hier nicht --- er gehört in die lineare Algebra und steht im genannten Band vollständig. Wie bei Kuratowski und Jordan weise ich ihn aber aus, statt ihn stillschweigend zu benutzen. Ohne Symmetrie wäre nichts davon richtig; das ist der zweite Ort in diesem Band, an dem sich die Entscheidung aus Kapitel~1 auszahlt, Kanten als \kursiv{Mengen} zu definieren.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das Spektrum von $K_n$ --- vollständig hergeleitet}
+\schritt{Schritt 1 --- Die Matrix}
+In $K_n$ ist $a_{ij} = 1$ für $i \neq j$ und $a_{ii} = 0$. Mit $J$ als Matrix aus lauter Einsen und $I$ als Einheitsmatrix:
+\[ A = J - I . \]
+
+\schritt{Schritt 2 --- Der erste Eigenvektor}
+Sei $\mathbf{1} = (1,1,\ldots,1)$. Jede Zeile von $J$ ist eine Zeile aus Einsen, also
+\[ J\mathbf{1} = (n, n, \ldots, n) = n\,\mathbf{1} . \]
+Somit
+\[ A\mathbf{1} = J\mathbf{1} - I\mathbf{1} = n\mathbf{1} - \mathbf{1} = (n-1)\mathbf{1} . \]
+\textbf{Erster Eigenwert:} $\lambda = n-1$.
+
+\schritt{Schritt 3 --- Die übrigen Eigenvektoren}
+Sei $x$ ein Vektor, dessen Einträge sich zu null summieren: $\sum_i x_i = 0$. Dann ist jede Zeile von $Jx$ gerade diese Summe, also
+\[ Jx = 0 . \]
+Somit
+\[ Ax = Jx - Ix = 0 - x = (-1)\,x . \]
+\textbf{Zweiter Eigenwert:} $\lambda = -1$.
+
+\schritt{Schritt 4 --- Die Vielfachheiten}
+Die Vektoren mit Koordinatensumme null bilden einen Raum der Dimension $n-1$ (eine Gleichung, $n$ Unbekannte). Also hat $-1$ die Vielfachheit $n-1$, und $n-1$ die Vielfachheit $1$.
+
+\schritt{Das Spektrum}
+\[ \underbrace{n-1}_{1\times}, \quad \underbrace{-1, -1, \ldots, -1}_{(n-1)\times} \]
+
+\schritt{Probe über die Spur}
+Die Summe der Eigenwerte ist gleich der Spur der Matrix (Band 2, Teil V). Die Spur von $A$ ist $0$, da alle Diagonaleinträge $0$ sind. Rechnung:
+\[ (n-1) + (n-1)\cdot(-1) = (n-1) - (n-1) = 0 . \quad \checkmark \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 14.3 --- Der größte Eigenwert liegt zwischen Durchschnitts- und Maximalgrad}
+Für jeden Graphen gilt
+\[ \frac{2m}{n} \;\le\; \lambda_1 \;\le\; \Delta . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis der oberen Schranke --- elementar}
+Sei $x$ ein Eigenvektor zu $\lambda_1$. Sei $i$ ein Index, an dem $|x_i|$ am größten ist; wegen $x \neq 0$ ist $|x_i| > 0$.
+
+Die $i$-te Zeile von $Ax = \lambda_1 x$ lautet
+\[ \lambda_1 x_i = \sum_{j \in N(v_i)} x_j . \]
+
+Beträge nehmen und die Dreiecksungleichung anwenden:
+\[ |\lambda_1|\,|x_i| = \Bigl|\sum_{j \in N(v_i)} x_j\Bigr| \;\le\; \sum_{j \in N(v_i)} |x_j| \;\le\; \sum_{j \in N(v_i)} |x_i| = \deg(v_i)\,|x_i| \;\le\; \Delta\,|x_i| . \]
+
+Dabei wurde im vorletzten Schritt benutzt, dass $|x_j| \le |x_i|$ für alle $j$ gilt --- nach Wahl von $i$.
+
+Teilen durch $|x_i| > 0$ ergibt $|\lambda_1| \le \Delta$, also insbesondere $\lambda_1 \le \Delta$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie den Kniff: Man wählt nicht irgendeine Zeile, sondern die zur betragsgrößten Koordinate. Dadurch werden alle Abschätzungen in dieselbe Richtung möglich.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis der unteren Schranke}
+Hier brauchen wir eine Aussage aus dem Spektralsatz: Für jeden Vektor $x \neq 0$ gilt
+\[ \lambda_1 \;\ge\; \frac{x^{\!\top} A x}{x^{\!\top} x} . \]
+Das ist der \Begriff{Rayleigh-Quotient}; die Ungleichung folgt daraus, dass man $x$ in der Basis aus Eigenvektoren entwickelt und $\lambda_1$ der größte Eigenwert ist.
+
+\schritt{Den richtigen Testvektor wählen}
+Wir setzen $x = \mathbf{1}$.
+
+\kursiv{Der Nenner:} $\mathbf{1}^{\!\top}\mathbf{1} = n$.
+
+\kursiv{Der Zähler:} $\mathbf{1}^{\!\top} A \mathbf{1}$ ist die Summe aller Einträge von $A$. Jede Kante erzeugt zwei Einsen (Kapitel~3), also
+\[ \mathbf{1}^{\!\top} A \mathbf{1} = 2m . \]
+
+\schritt{Einsetzen}
+\[ \lambda_1 \;\ge\; \frac{2m}{n} . \qquad \blacksquare \]
+
+\schritt{Was das bedeutet}
+$2m/n$ ist genau der Durchschnittsgrad (Handschlaglemma). Der größte Eigenwert liegt also stets zwischen Durchschnitts- und Maximalgrad --- und beide Schranken werden bei regulären Graphen zugleich erreicht, weil dort Durchschnitt und Maximum übereinstimmen.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 14.4 --- Bipartitheit im Spektrum}
+Ist $G$ bipartit, so ist sein Spektrum symmetrisch: Mit $\lambda$ ist auch $-\lambda$ Eigenwert, und beide haben dieselbe Vielfachheit.
+
+\schritt{Beweis}
+Sei $(A_1, B_1)$ eine Bipartition, und sei $x$ ein Eigenvektor zu $\lambda$. Wir bilden $y$ durch Vorzeichenwechsel auf einer Seite:
+\[ y_v = \begin{cases} x_v, & v \in A_1,\\ -x_v, & v \in B_1. \end{cases} \]
+
+Sei $v \in A_1$. Alle Nachbarn von $v$ liegen in $B_1$, tragen also das umgekehrte Vorzeichen:
+\[ \sum_{u \in N(v)} y_u = \sum_{u \in N(v)} (-x_u) = -\lambda x_v = -\lambda\, y_v . \]
+
+Sei $v \in B_1$. Alle Nachbarn liegen in $A_1$, behalten also ihr Vorzeichen:
+\[ \sum_{u \in N(v)} y_u = \sum_{u \in N(v)} x_u = \lambda x_v = \lambda \cdot (-y_v) = -\lambda\,y_v . \]
+
+In beiden Fällen ist die Nachbarsumme gleich $-\lambda$ mal dem eigenen Wert. Also ist $y$ ein Eigenvektor zum Eigenwert $-\lambda$.
+
+Da die Zuordnung $x \mapsto y$ umkehrbar ist und Unabhängigkeit erhält, haben $\lambda$ und $-\lambda$ dieselbe Vielfachheit. $\blacksquare$
+
+\schritt{Probe an $K_{1,3}$}
+Der Stern mit vier Ecken hat das Spektrum $\sqrt{3}, 0, 0, -\sqrt{3}$ --- symmetrisch. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Umkehrung gilt ebenfalls, ist aber schwerer: Symmetrisches Spektrum erzwingt Bipartitheit. Damit hat man ein Kriterium, das man rein rechnerisch prüfen kann --- eine Alternative zum Verfahren aus Satz 2.12.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Laplace-Matrix und der Zusammenhang}
+
+Die Laplace-Matrix $L = D - A$ aus Kapitel~5 hat ebenfalls ein Spektrum, und es ist noch aussagekräftiger.
+
+\begin{merksatz}
+\boxtitel{Satz 14.5 --- Die Grundformel}
+Für jeden Vektor $x$ gilt
+\[ x^{\!\top} L\, x \;=\; \sum_{\{u,v\} \in E} (x_u - x_v)^2 . \]
+
+\schritt{Beweis}
+Wir rechnen die linke Seite aus. Mit $L = D - A$:
+\[ x^{\!\top} L x = x^{\!\top} D x - x^{\!\top} A x = \sum_{v} \deg(v)\, x_v^2 \;-\; \sum_{u,v} a_{uv} x_u x_v . \]
+
+\kursiv{Der zweite Term.} In der Doppelsumme kommt jede Kante $\{u,v\}$ zweimal vor --- als $(u,v)$ und als $(v,u)$. Also
+\[ \sum_{u,v} a_{uv}x_ux_v = 2\sum_{\{u,v\}\in E} x_u x_v . \]
+
+\kursiv{Der erste Term.} Nach der Zählung aus Kapitel~1 kommt jede Ecke $v$ in genau $\deg(v)$ Kanten vor. Also lässt sich die Summe nach Kanten umordnen:
+\[ \sum_v \deg(v)\,x_v^2 = \sum_{\{u,v\}\in E} \bigl(x_u^2 + x_v^2\bigr) . \]
+
+\kursiv{Zusammensetzen.}
+\[ x^{\!\top}Lx = \sum_{\{u,v\}\in E}\bigl(x_u^2 + x_v^2 - 2x_ux_v\bigr) = \sum_{\{u,v\}\in E}(x_u - x_v)^2 . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 14.6 --- Die Vielfachheit der Null zählt die Komponenten}
+Die Vielfachheit des Eigenwerts $0$ von $L$ ist gleich der Anzahl der Zusammenhangskomponenten von $G$.
+
+\schritt{Schritt 1 --- Null ist stets Eigenwert}
+Jede Zeilensumme von $L$ ist null (Kapitel~5), also $L\mathbf{1} = 0 = 0 \cdot \mathbf{1}$.
+
+\schritt{Schritt 2 --- Wann ist $Lx = 0$?}
+Aus $Lx = 0$ folgt $x^{\!\top}Lx = 0$, nach Satz 14.5 also
+\[ \sum_{\{u,v\}\in E}(x_u - x_v)^2 = 0 . \]
+Eine Summe von Quadraten ist genau dann null, wenn jeder Summand null ist. Also
+\[ x_u = x_v \quad \text{für jede Kante } \{u,v\} . \]
+
+\schritt{Schritt 3 --- Was das über Komponenten sagt}
+Sind $u$ und $v$ in derselben Komponente, so gibt es einen Weg $u = w_0, w_1, \ldots, w_k = v$. Entlang jeder Kante bleibt der Wert gleich, also $x_u = x_{w_1} = \cdots = x_v$.
+
+$x$ ist somit auf jeder Komponente konstant. Umgekehrt erfüllt jeder solche Vektor die Bedingung aus Schritt 2, und die Rechnung rückwärts liefert $x^{\!\top}Lx=0$; da $L$ nach Satz 14.5 keine negativen Werte annimmt, folgt daraus tatsächlich $Lx=0$.
+
+\schritt{Schritt 4 --- Die Dimension}
+Ein Vektor, der auf jeder der $c$ Komponenten konstant ist, wird durch $c$ freie Zahlen festgelegt --- eine je Komponente. Der Lösungsraum hat also die Dimension $c$.
+
+Die Vielfachheit von $0$ ist gleich dieser Dimension. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Insbesondere: $G$ ist genau dann zusammenhängend, wenn $0$ ein \kursiv{einfacher} Eigenwert ist --- wenn also der zweitkleinste Eigenwert $\mu_2$ positiv ist. Diese Zahl heißt nach \Person{Miroslav Fiedler} die \Begriff{algebraische Zusammenhangszahl}: Sie misst nicht nur \kursiv{ob}, sondern \kursiv{wie stark} der Graph zusammenhängt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zufallsgraphen}
+
+\begin{definition}
+\boxtitelm{Definition 14.7 --- das Modell $G(n,p)$}
+Für $n \in \mathbb{N}$ und $0 \le p \le 1$ ist $G(n,p)$ der Zufallsgraph auf $n$ festen Ecken, bei dem jedes der $\binom{n}{2}$ möglichen Eckenpaare \kursiv{unabhängig} von allen anderen mit Wahrscheinlichkeit $p$ zur Kante wird.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Erste Größen}
+\schritt{Die erwartete Kantenzahl}
+Für jedes Paar $e$ sei $X_e = 1$, falls $e$ Kante wird, sonst $0$. Dann ist $m = \sum_e X_e$ und nach der Linearität des Erwartungswerts (Band 4, Kapitel~7)
+\[ \mathbb{E}[m] = \sum_{e} \mathbb{E}[X_e] = \binom{n}{2}\,p . \]
+
+\schritt{Der erwartete Grad}
+Eine feste Ecke hat $n-1$ mögliche Nachbarn, jeder unabhängig mit Wahrscheinlichkeit $p$:
+\[ \mathbb{E}[\deg(v)] = (n-1)\,p . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Linearität des Erwartungswerts ist das Arbeitspferd dieses Abschnitts. Sie gilt \kursiv{ohne} jede Unabhängigkeitsannahme --- das macht sie so brauchbar, denn die Ereignisse, die uns interessieren, sind meist voneinander abhängig.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 14.8 --- Wann treten Dreiecke auf?}
+Sei $p = p(n)$ und $X$ die Anzahl der Dreiecke in $G(n,p)$.
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+Ist $n\,p \to 0$ & so enthält $G(n,p)$ mit Wahrscheinlichkeit gegen $1$ \kursiv{kein} Dreieck.\\
+Ist $n\,p \to \infty$ & so enthält $G(n,p)$ mit Wahrscheinlichkeit gegen $1$ ein Dreieck.\\
+\bottomrule
+\end{tabular}
+\end{center}
+Die Schwelle liegt also bei $p \approx 1/n$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis der ersten Hälfte --- die erste Momentenmethode}
+\schritt{Schritt 1 --- Den Erwartungswert ausrechnen}
+Für jede der $\binom{n}{3}$ dreielementigen Eckenmengen sei $Y_S = 1$, falls $S$ ein Dreieck bildet. Dafür müssen drei bestimmte Paare Kanten sein, unabhängig voneinander:
+\[ \mathbb{E}[Y_S] = p^3 . \]
+Also
+\[ \mathbb{E}[X] = \binom{n}{3} p^3 . \]
+
+\schritt{Schritt 2 --- Abschätzen}
+Mit $\binom{n}{3} \le \frac{n^3}{6}$:
+\[ \mathbb{E}[X] \;\le\; \frac{n^3 p^3}{6} = \frac{(np)^3}{6} . \]
+
+\schritt{Schritt 3 --- Die Markow-Ungleichung}
+Für eine Zufallsgröße $X \ge 0$ mit ganzzahligen Werten gilt
+\[ \Pr[X \ge 1] \;\le\; \mathbb{E}[X] . \]
+\kursiv{Warum:} Der Erwartungswert ist $\sum_{k\ge 0} k \Pr[X=k] \ge \sum_{k \ge 1} 1 \cdot \Pr[X=k] = \Pr[X \ge 1]$.
+
+\schritt{Schritt 4 --- Schluss}
+\[ \Pr[\text{Dreieck vorhanden}] = \Pr[X \ge 1] \;\le\; \frac{(np)^3}{6} \;\longrightarrow\; 0, \]
+falls $np \to 0$. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Warum die zweite Hälfte schwerer ist}
+Aus $\mathbb{E}[X] \to \infty$ folgt \kursiv{nicht} automatisch, dass $X \ge 1$ wahrscheinlich ist. Es könnte sein, dass $X$ meistens null ist und selten sehr groß --- der Mittelwert wäre trotzdem groß.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beispiel: Eine Zufallsgröße, die mit Wahrscheinlichkeit $1/n$ den Wert $n^2$ annimmt und sonst null ist, hat Erwartungswert $n$ --- und ist trotzdem fast immer null.}
+\end{minipage}
+\end{center}
+
+Man braucht daher zusätzlich eine Aussage über die \kursiv{Streuung}. Die zweite Momentenmethode schätzt die Varianz ab und zeigt
+\[ \Pr[X = 0] \;\le\; \frac{\operatorname{Var}[X]}{\mathbb{E}[X]^2} \;\longrightarrow\; 0 . \]
+Die Rechnung ist ausführlich; sie steht in Alon/Spencer\zit{2}, Kapitel 4, und in Frieze/Karoński\zit{11}, Kapitel 5.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 14.9 --- Die Schwelle für den Zusammenhang}
+Sei $p = \dfrac{\ln n + c_n}{n}$. Dann gilt
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+$c_n \to -\infty$ & $G(n,p)$ ist fast sicher \kursiv{un}zusammenhängend\\
+$c_n \to +\infty$ & $G(n,p)$ ist fast sicher zusammenhängend\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die Rechnung, die das erklärt}
+Wir zählen die \kursiv{isolierten} Ecken. Für eine feste Ecke $v$ ist
+\[ \Pr[\deg(v) = 0] = (1-p)^{\,n-1} , \]
+denn alle $n-1$ möglichen Kanten müssen ausbleiben.
+
+Mit der Abschätzung $1 - p \approx e^{-p}$ für kleines $p$:
+\[ (1-p)^{n-1} \approx e^{-p(n-1)} \approx e^{-pn} = e^{-(\ln n + c_n)} = \frac{e^{-c_n}}{n} . \]
+
+Die erwartete Anzahl isolierter Ecken ist also
+\[ n \cdot \frac{e^{-c_n}}{n} = e^{-c_n} . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{3.2cm}@{}}
+\toprule
+& \textbf{erwartete Anzahl} & \\
+\midrule
+$c_n \to -\infty$ & $e^{-c_n} \to \infty$ & \textcolor{akzent}{viele isolierte Ecken}\\
+$c_n \to +\infty$ & $e^{-c_n} \to 0$ & \textcolor{gruen}{fast sicher keine}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert ist, was diese Rechnung nahelegt und was der volle Beweis bestätigt: Das \kursiv{einzige} Hindernis für den Zusammenhang ist die isolierte Ecke. Sobald keine mehr da ist, hängt der Graph fast sicher zusammen --- es gibt keinen Zwischenzustand, in dem er in zwei große Stücke zerfällt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Phasenübergang}
+Die auffälligste Entdeckung von Erdős und Rényi betrifft die Größe der Komponenten bei $p = c/n$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{3.0cm}P{3.2cm}@{}}
+\toprule
+$c$ & \textbf{größte Komponente} & \\
+\midrule
+$c < 1$ & $\Oh(\ln n)$ & \textcolor{mittel}{winzig}\\
+$c = 1$ & $\approx n^{2/3}$ & \textcolor{akzent}{\textbf{kritisch}}\\
+$c > 1$ & $\approx \alpha \cdot n$ & \textcolor{gruen}{\textbf{Riesenkomponente}}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Bei $c < 1$ hat die größte Komponente logarithmische Größe --- also bei $n = 10^6$ etwa zwanzig Ecken. Bei $c > 1$ enthält eine einzige Komponente einen festen Anteil aller Ecken.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Übergang geschieht schlagartig bei Durchschnittsgrad $1$. Das ist die Rechtfertigung für die Bemerkung aus Kapitel~2 über kleine Durchmesser in großen Netzen: Sobald jede Ecke im Mittel mehr als einen Nachbarn hat, entsteht ein großräumig verbundenes Gebilde.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- Das Spektrum des Vierkreises}
+Bestimmen Sie das Spektrum von $C_4$.
+
+\loesung
+\schritt{Schritt 1 --- Die Matrix}
+Ecken $1,2,3,4$ im Kreis:
+\[ A = \begin{pmatrix} 0&1&0&1\\ 1&0&1&0\\ 0&1&0&1\\ 1&0&1&0 \end{pmatrix} \]
+
+\schritt{Schritt 2 --- Eigenvektoren raten und prüfen}
+Wir benutzen die graphentheoretische Fassung: An jeder Ecke muss die Summe der Nachbarwerte das $\lambda$-fache des eigenen Werts sein.
+
+\kursiv{Versuch $x = (1,1,1,1)$.} Jede Ecke hat zwei Nachbarn mit Wert $1$: Summe $2 = 2 \cdot 1$. Also $\lambda = 2$.
+
+\kursiv{Versuch $x = (1,-1,1,-1)$.} Ecke $1$ hat die Nachbarn $2$ und $4$, beide mit Wert $-1$: Summe $-2 = -2 \cdot 1$. Ecke $2$ hat die Nachbarn $1$ und $3$, beide mit Wert $1$: Summe $2 = -2 \cdot (-1)$. \checkmark\ Also $\lambda = -2$.
+
+\kursiv{Versuch $x = (1,0,-1,0)$.} Ecke $1$: Nachbarn $2$ und $4$, beide $0$, Summe $0 = 0 \cdot 1$. \checkmark\ Ecke $2$: Nachbarn $1$ und $3$, Werte $1$ und $-1$, Summe $0 = 0 \cdot 0$. \checkmark\ Also $\lambda = 0$.
+
+\kursiv{Versuch $x = (0,1,0,-1)$.} Aus Symmetriegründen ebenfalls $\lambda = 0$, und dieser Vektor ist von dem vorigen unabhängig.
+
+\schritt{Schritt 3 --- Das Spektrum}
+\[ 2,\quad 0,\quad 0,\quad -2 \]
+
+\schritt{Schritt 4 --- Vier Proben}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+\textbf{Prüfung} & \textbf{Erwartet} & \textbf{Gefunden}\\
+\midrule
+Anzahl & $n=4$ & $4$ \checkmark\\
+Summe $=$ Spur & $0$ & $2+0+0-2=0$ \checkmark\\
+$\lambda_1 = \Delta$ (regulär) & $2$ & $2$ \checkmark\\
+Symmetrie (bipartit) & ja & $\{2,0,0,-2\}$ \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Fünfte Probe --- über die Quadratsumme}
+Die Summe der Quadrate der Eigenwerte ist gleich der Spur von $A^2$, also der Anzahl geschlossener Kantenzüge der Länge $2$ --- das sind nach Satz 3.4 genau $2m$:
+\[ 2^2 + 0 + 0 + (-2)^2 = 8 = 2 \cdot 4 = 2m . \quad \checkmark \]
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- Wann treten Vierkreise auf?}
+Bestimmen Sie mit der ersten Momentenmethode, ab welcher Größenordnung von $p$ der Zufallsgraph $G(n,p)$ Vierkreise enthält.
+
+\loesung
+\schritt{Schritt 1 --- Die Anzahl der möglichen Vierkreise}
+Wir wählen vier Ecken --- $\binom{n}{4}$ Möglichkeiten --- und ordnen sie zu einem Kreis. Vier Ecken lassen sich auf $4!$ Weisen anordnen; jeder Kreis wird dabei $4 \cdot 2 = 8$ mal gezählt (vier Startpunkte, zwei Richtungen). Also $4!/8 = 3$ verschiedene Kreise je Eckenmenge.
+
+Anzahl möglicher Vierkreise: $3\binom{n}{4}$.
+
+\schritt{Schritt 2 --- Der Erwartungswert}
+Jeder Vierkreis braucht vier bestimmte Kanten:
+\[ \mathbb{E}[X] = 3\binom{n}{4}p^4 \;\le\; 3\cdot\frac{n^4}{24}\,p^4 = \frac{(np)^4}{8} . \]
+
+\schritt{Schritt 3 --- Die Schwelle ablesen}
+Ist $np \to 0$, so geht $\mathbb{E}[X] \to 0$ und nach Markow ist fast sicher kein Vierkreis vorhanden.
+
+Ist $np \to \infty$, so geht $\mathbb{E}[X] \to \infty$ --- und die zweite Momentenmethode zeigt, dass dann fast sicher einer existiert.
+
+\schritt{Antwort}
+Die Schwelle liegt wie beim Dreieck bei $p \approx 1/n$.
+
+\schritt{Schritt 4 --- Warum das kein Zufall ist}
+Für einen festen Graphen $H$ mit $n_H$ Ecken und $m_H$ Kanten ist der Erwartungswert der Kopienzahl von der Größenordnung
+\[ n^{\,n_H}\,p^{\,m_H} . \]
+Er strebt gegen null genau dann, wenn $p \ll n^{-n_H/m_H}$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{1.4cm}P{1.4cm}P{2.4cm}@{}}
+\toprule
+$H$ & $n_H$ & $m_H$ & $n^{-n_H/m_H}$\\
+\midrule
+$K_3$ & $3$ & $3$ & $n^{-1}$\\
+$C_4$ & $4$ & $4$ & $n^{-1}$\\
+$K_4$ & $4$ & $6$ & $n^{-2/3}$\\
+Baum, $k$ Ecken & $k$ & $k-1$ & $n^{-k/(k-1)}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Dreieck und Vierkreis haben dieselbe Schwelle, weil beide gleich viele Ecken wie Kanten haben. Der $K_4$ tritt \kursiv{später} auf --- er ist dichter und braucht mehr Kanten.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Vorsicht: Die Formel gibt nur den ersten Anhaltspunkt. Der genaue Schwellenwert hängt vom \kursiv{dichtesten Teilgraphen} von $H$ ab, nicht von $H$ selbst --- ein Graph, der einen dichten Teil enthält, kann früher \enquote{blockiert} sein, als die Gesamtrechnung nahelegt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Der Fiedler-Wert}
+Bestimmen Sie den zweitkleinsten Laplace-Eigenwert für den Weg $P_3$ und für das Dreieck $K_3$, und deuten Sie den Unterschied.
+
+\loesung
+\schritt{Schritt 1 --- Die Laplace-Matrix von $P_3$}
+Ecken $1,2,3$ mit Kanten $12$, $23$. Grade: $1, 2, 1$.
+\[ L = \begin{pmatrix} 1 & -1 & 0\\ -1 & 2 & -1\\ 0 & -1 & 1 \end{pmatrix} \]
+
+\schritt{Schritt 2 --- Eigenvektoren}
+\kursiv{$x = (1,1,1)$:} Zeilensummen sind null, also $\lambda = 0$.
+
+\kursiv{$x = (1,0,-1)$:} Erste Zeile: $1 \cdot 1 + (-1)\cdot 0 + 0 \cdot (-1) = 1 = 1 \cdot x_1$. Zweite: $-1 + 0 + 1 = 0 = 1 \cdot x_2$. Dritte: $0 + 0 + (-1) = -1 = 1 \cdot x_3$. Also $\lambda = 1$.
+
+\kursiv{$x = (1,-2,1)$:} Erste Zeile: $1 + 2 + 0 = 3 = 3 \cdot 1$. Zweite: $-1 - 4 - 1 = -6 = 3 \cdot (-2)$. Dritte: $0 + 2 + 1 = 3 = 3\cdot 1$. Also $\lambda = 3$.
+
+Spektrum: $0, 1, 3$. Also $\mu_2 = \mathbf{1}$.
+
+\schritt{Schritt 3 --- Die Laplace-Matrix von $K_3$}
+Grade alle $2$:
+\[ L = \begin{pmatrix} 2 & -1 & -1\\ -1 & 2 & -1\\ -1 & -1 & 2 \end{pmatrix} = 3I - J . \]
+Nach derselben Rechnung wie beim Spektrum von $K_n$: $J$ hat die Eigenwerte $3$ (einfach) und $0$ (zweifach). Also hat $L = 3I - J$ die Eigenwerte $3 - 3 = 0$ und $3 - 0 = 3$ (zweifach).
+
+Spektrum: $0, 3, 3$. Also $\mu_2 = \mathbf{3}$.
+
+\schritt{Schritt 4 --- Die Deutung}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.8cm}P{1.4cm}P{1.4cm}P{3.0cm}@{}}
+\toprule
+& $m$ & $\mu_2$ & \\
+\midrule
+$P_3$ & $2$ & $1$ & leicht zu zerteilen\\
+$K_3$ & $3$ & $3$ & fest verbunden\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Beide Graphen sind zusammenhängend, beide haben $\mu_2 > 0$. Aber $P_3$ zerfällt schon beim Entfernen einer Kante, $K_3$ nicht. Der Fiedler-Wert misst genau diesen Unterschied.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Der zugehörige Eigenvektor $(1,0,-1)$ bei $P_3$ zeigt zusätzlich, \kursiv{wo} man teilen würde: Er ist auf der einen Seite positiv, auf der anderen negativ, und die Trennstelle liegt bei der Null in der Mitte. Auf dieser Beobachtung beruht das spektrale Zerlegen großer Netzwerke.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Erdős, Rényi und ein Modell, das schon existierte}
+\Person{Paul Erdős} und \Person{Alfréd Rényi} veröffentlichten 1959 und 1960 zwei Arbeiten, die den Zufallsgraphen als eigenständigen Gegenstand begründeten. Die zweite, \kursiv{On the evolution of random graphs}, enthält den Phasenübergang und gilt als eine der einflussreichsten Arbeiten der Kombinatorik des zwanzigsten Jahrhunderts.
+
+Das Wort \enquote{Evolution} im Titel ist wörtlich gemeint: Die beiden dachten sich den Graphen als etwas, das mit wachsendem $p$ \kursiv{durchläuft} --- erst isolierte Punkte, dann Bäumchen, dann der plötzliche Zusammenschluss zur Riesenkomponente, schließlich Zusammenhang.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Edgar Gilbert} hatte das Modell $G(n,p)$ unabhängig 1959 eingeführt, im selben Jahr. Erdős und Rényi arbeiteten mit einer leicht anderen Fassung --- fester Kantenzahl statt fester Wahrscheinlichkeit. Beide Modelle verhalten sich fast gleich, und die Bezeichnung \enquote{Erdős--Rényi-Graph} hat sich für beide eingebürgert.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Expander --- Graphen, die dünn und trotzdem fest sind}
+Ein \Begriff{Expander} ist ein Graph mit kleinem Grad, dessen Fiedler-Wert dennoch groß bleibt --- er ist also dünn und lässt sich trotzdem nicht leicht zerteilen. Solche Graphen sind an vielen Stellen unentbehrlich: bei fehlerkorrigierenden Codes, beim Entwurf zuverlässiger Netze und in der Komplexitätstheorie.
+
+Der \Begriff{Alon-Boppana-Satz} setzt eine Grenze: Für $d$-reguläre Graphen kann der zweitgrößte Adjazenzeigenwert im Betrag nicht kleiner werden als
+\[ 2\sqrt{d-1} - o(1) . \]
+Graphen, die diese Grenze erreichen, heißen \Begriff{Ramanujan-Graphen}. Dass es sie überhaupt gibt, zeigten Lubotzky, Phillips und Sarnak 1988 --- mit Mitteln aus der Zahlentheorie.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{3.6cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Autoren} & \textbf{Ergebnis}\\
+\midrule
+$1988$ & Lubotzky u.\,a. & explizite Ramanujan-Graphen für bestimmte $d$\\
+$2015$ & Marcus, Spielman, Srivastava & Existenz für \kursiv{alle} $d$, bipartit\\
+$2021$ & Mohanty u.\,a. & schnelle Konstruktion\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist bemerkenswert: Der Beweis von Marcus, Spielman und Srivastava zeigt die Existenz, ohne ein einziges Beispiel anzugeben --- die probabilistische Methode aus Kapitel~13, in einer verfeinerten Gestalt. Dieselbe Arbeit löste nebenbei das Kadison-Singer-Problem, eine seit 1959 offene Frage der Funktionalanalysis.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 14.2} & Spektrum eines Graphen\\
+\textbf{Satz 14.3} & $\frac{2m}{n} \le \lambda_1 \le \Delta$\\
+\textbf{Satz 14.4} & Bipartit $\Rightarrow$ symmetrisches Spektrum\\
+\textbf{Satz 14.6} & Vielfachheit von $0$ bei $L$ $=$ Komponentenzahl\\
+\textbf{Satz 14.8} & Schwelle für Dreiecke bei $p \approx 1/n$\\
+\textbf{Satz 14.9} & Schwelle für Zusammenhang bei $p \approx \ln n / n$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~VI und der Lehrstoff dieses Bandes. Das letzte Kapitel berichtet, wo die Forschung heute steht --- und was von den Fragen, die Sie in diesem Band kennengelernt haben, noch offen ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

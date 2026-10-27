@@ -1,0 +1,874 @@
+\chapter{Lage und Streuung}
+
+\section{Das Summenzeichen}
+
+Bevor wir rechnen, ein Werkzeug. Es sieht harmloser aus, als es ist --- die meisten Formeln dieses Bandes lassen sich ohne es nicht schreiben.
+
+\begin{definition}
+\boxtitelm{Definition 2.1 --- Summenzeichen}
+Für Zahlen $x_1, x_2, \ldots, x_n$ schreibt man
+\[ \sum_{i=1}^{n} x_i \;=\; x_1 + x_2 + \cdots + x_n . \]
+Der Buchstabe $i$ heißt \Begriff{Laufindex}, die $1$ unten die \Begriff{untere Grenze}, das $n$ oben die \Begriff{obere Grenze}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Wie man es liest}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\node[font=\Large, color=tief] at (0,0) {$\displaystyle\sum_{i=1}^{n} x_i$};
+\draw[akzent, line width=0.7pt] (-0.05,0.55) -- (1.4,1.0);
+\node[font=\scriptsize, color=akzent, anchor=west] at (1.45,1.0) {bis hierhin};
+\draw[akzent, line width=0.7pt] (-0.05,-0.55) -- (1.4,-1.0);
+\node[font=\scriptsize, color=akzent, anchor=west] at (1.45,-1.0) {ab hier};
+\draw[akzent, line width=0.7pt] (0.5,0.1) -- (1.4,0.35);
+\node[font=\scriptsize, color=akzent, anchor=west] at (1.45,0.35) {das wird addiert};
+\end{tikzpicture}
+\end{center}
+
+\schritt{An einem Beispiel}
+Für die Mobilisationszeiten der Gruppe A --- $x_1 = 26$, $x_2 = 19$, $x_3 = 31$, $x_4 = 24$, $x_5 = 35$, $x_6 = 22$ --- ist
+\[ \sum_{i=1}^{6} x_i = 26+19+31+24+35+22 = 157 . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Drei Regeln, die ständig gebraucht werden}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.0cm}@{}}
+\toprule
+$\displaystyle\sum_{i=1}^n (x_i + y_i) = \sum_{i=1}^n x_i + \sum_{i=1}^n y_i$ & Summen trennen\\
+$\displaystyle\sum_{i=1}^n c\,x_i = c \sum_{i=1}^n x_i$ & Faktor herausziehen\\
+$\displaystyle\sum_{i=1}^n c = n\,c$ & Konstante $n$-mal addiert\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Warum die dritte Regel stimmt}
+Der Ausdruck $\sum_{i=1}^n c$ bedeutet: Addiere den Wert $c$, und zwar für $i=1$, für $i=2$, und so fort bis $i=n$. Das sind $n$ Summanden, jeder gleich $c$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Regel ist die, die beim Nachrechnen am häufigsten übersehen wird --- weil im Summanden kein $i$ vorkommt und man versucht ist, die Summe ganz zu ignorieren.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Mittelwert}
+
+\begin{definition}
+\boxtitelm{Definition 2.2 --- arithmetisches Mittel}
+\[ \MW \;=\; \frac{1}{n}\sum_{i=1}^{n} x_i . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 2.3 --- Die Abweichungen summieren sich zu null}
+\[ \sum_{i=1}^n (x_i - \MW) = 0 . \]
+
+\schritt{Beweis}
+Wir wenden die Regeln aus Abschnitt 2.1 an:
+\begin{align*}
+\sum_{i=1}^n (x_i - \MW) &= \sum_{i=1}^n x_i \;-\; \sum_{i=1}^n \MW && \text{(erste Regel)}\\
+&= \sum_{i=1}^n x_i \;-\; n\,\MW && \text{(dritte Regel; } \MW \text{ hängt nicht von } i \text{ ab)}\\
+&= \sum_{i=1}^n x_i \;-\; n \cdot \frac{1}{n}\sum_{i=1}^n x_i && \text{(Definition)}\\
+&= \sum_{i=1}^n x_i - \sum_{i=1}^n x_i \;=\; 0 . \qquad \blacksquare
+\end{align*}
+
+\schritt{Die Deutung}
+Der Mittelwert ist der \kursiv{Schwerpunkt} der Daten: Legt man an jeden Datenpunkt ein gleiches Gewicht auf einen Balken, so balanciert er genau bei $\MW$. Die Abweichungen nach links heben die nach rechts auf.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.9pt] (-0.3,0) -- (6.3,0);
+\foreach \x in {0.4, 1.6, 2.2, 2.8, 4.6, 5.8} \fill[tief] (\x,0.2) circle (2.4pt);
+\draw[akzent, line width=1.2pt] (2.9,0) -- (2.6,-0.45) -- (3.2,-0.45) -- cycle;
+\node[font=\scriptsize, color=akzent] at (2.9,-0.75) {$\MW$};
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.4 --- Der Mittelwert minimiert die quadratischen Abstände}
+Für jede reelle Zahl $a$ gilt
+\[ \sum_{i=1}^n (x_i - a)^2 \;=\; \sum_{i=1}^n (x_i - \MW)^2 \;+\; n\,(\MW - a)^2 . \]
+Insbesondere wird die linke Seite genau für $a = \MW$ am kleinsten.
+
+\schritt{Beweis}
+Der Kunstgriff ist, eine Null einzufügen: $x_i - a = (x_i - \MW) + (\MW - a)$.
+
+\begin{align*}
+\sum_i (x_i-a)^2 &= \sum_i \bigl[(x_i-\MW) + (\MW-a)\bigr]^2\\
+&= \sum_i \Bigl[(x_i-\MW)^2 + 2(x_i-\MW)(\MW-a) + (\MW-a)^2\Bigr]\\
+&= \sum_i (x_i-\MW)^2 \;+\; 2(\MW-a)\underbrace{\sum_i (x_i-\MW)}_{= 0 \text{ nach Satz 2.3}} \;+\; \sum_i (\MW-a)^2\\
+&= \sum_i (x_i-\MW)^2 \;+\; 0 \;+\; n(\MW-a)^2 .
+\end{align*}
+
+\schritt{Der Schluss}
+Der erste Summand hängt nicht von $a$ ab. Der zweite ist $\ge 0$ und genau dann null, wenn $a = \MW$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieser Satz ist der Grund, warum der Mittelwert überall dort auftaucht, wo mit Quadraten gearbeitet wird --- bei der Varianz, bei der Regression, bei der Methode der kleinsten Quadrate. Er ist \kursiv{die} Zahl, die quadratische Abweichungen minimiert. Kapitel~10 baut die gesamte Regression darauf auf.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Median, Quantile, Modus}
+
+\begin{definition}
+\boxtitelm{Definition 2.5 --- Median}
+Seien die Daten aufsteigend sortiert: $x_{(1)} \le x_{(2)} \le \cdots \le x_{(n)}$. Dann ist
+\[ \Med = \begin{cases}
+x_{\left(\frac{n+1}{2}\right)}, & n \text{ ungerade},\\[6pt]
+\dfrac{1}{2}\left(x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2}+1\right)}\right), & n \text{ gerade}.
+\end{cases} \]
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Bei geradem $n$ verlässt man die Ordinalskala}
+Für ungerades $n$ ist der Median eine der beobachteten Ausprägungen --- er ist rein durch die Rangfolge bestimmt und deshalb bei ordinalen Daten unbedenklich.
+
+Für gerades $n$ wird gemittelt, und damit kommt die Abstandsannahme durch die Hintertür wieder herein. Streng genommen ist der Median ordinaler Daten bei geradem $n$ nicht eindeutig; man müsste jeden Wert zwischen den beiden mittleren zulassen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In der Praxis mittelt man trotzdem. Wer es genau nehmen will, gibt bei ordinalen Daten und geradem $n$ beide mittleren Werte an --- etwa \enquote{Median zwischen 4 und 5}.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Satz 2.6 --- Der Median minimiert die absoluten Abstände}
+Für ungerades $n$ wird
+\[ \sum_{i=1}^n |x_i - a| \]
+für $a = \Med$ am kleinsten.
+
+\schritt{Beweis --- durch Verschieben}
+Sei $a$ irgendeine Zahl und betrachten wir, was geschieht, wenn wir $a$ um ein kleines Stück $\varepsilon > 0$ nach rechts verschieben.
+
+Für jeden Datenpunkt $x_i > a$ verringert sich $|x_i - a|$ um $\varepsilon$. Für jeden mit $x_i < a$ vergrößert er sich um $\varepsilon$.
+
+Sei $L$ die Anzahl der Punkte links von $a$ und $R$ die Anzahl rechts. Die Gesamtänderung beträgt
+\[ \varepsilon\,(L - R) . \]
+
+\schritt{Die Folgerung}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Lage} & \textbf{Änderung} & \\
+\midrule
+$L < R$ & $\varepsilon(L-R) < 0$ & nach rechts gehen hilft\\
+$L > R$ & $> 0$ & nach links gehen hilft\\
+$L = R$ & $= 0$ & \textcolor{gruen}{Minimum erreicht}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Summe wird also dort am kleinsten, wo links und rechts gleich viele Punkte liegen --- und das ist bei ungeradem $n$ genau der mittlere Wert, also der Median. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit haben Mittelwert und Median jeweils eine eigene Rechtfertigung. Der eine minimiert quadratische, der andere absolute Abweichungen. Welche Wahl richtig ist, hängt davon ab, wie man große Abweichungen gewichten will --- und das ist eine Sachentscheidung, keine mathematische.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 2.7 --- Quantile}
+Für $0 < p < 1$ ist das \Begriff{$p$-Quantil} $Q_p$ ein Wert, unterhalb dessen mindestens der Anteil $p$ der Daten liegt und oberhalb dessen mindestens der Anteil $1-p$ liegt.
+
+Besondere Namen tragen
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{3.4cm}@{}}
+\toprule
+$Q_{0{,}25}$ & unteres Quartil & auch $Q_1$\\
+$Q_{0{,}50}$ & Median & auch $Q_2$\\
+$Q_{0{,}75}$ & oberes Quartil & auch $Q_3$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Es gibt neun gängige Definitionen --- und sie liefern verschiedene Zahlen}
+Die Definition oben lässt bei kleinen Stichproben offen, welcher Wert genau zu nehmen ist. Verschiedene Statistikprogramme füllen diese Lücke verschieden aus; die Programmiersprache R kennt neun Verfahren.
+
+\schritt{Was dieser Band tut}
+Wir benutzen durchgehend die anschaulichste Konvention:
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das untere Quartil ist der Median der unteren Hälfte, das obere der Median der oberen Hälfte. Bei ungeradem $n$ gehört der Median selbst zu keiner der beiden Hälften.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $n = 6$ oder $n = 100$ spielt die Wahl kaum eine Rolle; bei $n = 7$ kann sie sichtbar werden. Wichtig ist nur, dass man sie \kursiv{nennt} --- ein Quartil ohne Angabe der Konvention ist bei kleinen Stichproben keine reproduzierbare Zahl.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{definition}
+\boxtitelm{Definition 2.8 --- Modus}
+Der \Begriff{Modus} ist die häufigste Ausprägung. Er kann mehrdeutig sein und ist die einzige Lagekennzahl, die auch bei nominalen Merkmalen sinnvoll ist.
+\end{definition}
+
+\section{Robustheit}
+
+\begin{merksatz}
+\boxtitel{Ein Ausreißer, und was er anrichtet}
+Nehmen wir die Mobilisationszeiten der Gruppe B: $18, 15, 21, 17, 23, 14$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Original} & \textbf{mit Tippfehler}\\
+\midrule
+Daten & $\ldots,\ 23,\ 14$ & $\ldots,\ 230,\ 14$\\
+Mittelwert & $18{,}0$ & \textcolor{akzent}{$\mathbf{52{,}5}$}\\
+Median & $17{,}5$ & \textcolor{gruen}{$\mathbf{17{,}5}$}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die Rechnung}
+Original: $\frac{18+15+21+17+23+14}{6} = \frac{108}{6} = 18$.
+
+Mit Tippfehler: $\frac{108 - 23 + 230}{6} = \frac{315}{6} = 52{,}5$.
+
+Der Median: sortiert $14, 15, 17, 18, 21, 230$ --- die beiden mittleren sind weiterhin $17$ und $18$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein einziger falsch eingegebener Wert verdreifacht den Mittelwert und lässt den Median unberührt. In der Datenprüfung ist das ein Werkzeug: Weichen Mittelwert und Median stark voneinander ab, lohnt ein Blick auf die Rohdaten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 2.9 --- Bruchpunkt}
+Der \Begriff{Bruchpunkt} einer Kennzahl ist der größte Anteil der Daten, den man beliebig verändern kann, ohne dass die Kennzahl beliebig groß oder klein wird.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Bruchpunkte im Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{2.0cm}P{2.8cm}@{}}
+\toprule
+\textbf{Kennzahl} & \textbf{Bruch\-punkt} & \\
+\midrule
+Mittelwert & $0$ & \textcolor{akzent}{ein Wert genügt}\\
+Spannweite & $0$ & \textcolor{akzent}{ein Wert genügt}\\
+Standard\-abweichung & $0$ & \textcolor{akzent}{ein Wert genügt}\\
+Quartilsabstand & $25\,\%$ & \textcolor{gruen}{robust}\\
+\textbf{Median} & $\mathbf{50\,\%}$ & \textcolor{gruen}{\textbf{höchstmöglich}}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Warum $50\,\%$ das Maximum ist}
+Könnte man mehr als die Hälfte der Daten beliebig setzen, so könnte man sie alle auf denselben, beliebig großen Wert legen --- und da sie dann die Mehrheit bildeten, müsste jede sinnvolle Lagekennzahl mitwandern. Mehr als $50\,\%$ Bruchpunkt ist also unmöglich.
+
+\schritt{Warum der Mittelwert Bruchpunkt $0$ hat}
+Bei $n$ Werten und einem veränderten: Setzt man $x_1 \to \infty$, so geht $\MW \to \infty$. Der Anteil $1/n$ geht für wachsendes $n$ gegen null --- daher der Bruchpunkt $0$.
+\end{merksatz}
+
+\section{Streuungsmaße}
+
+\begin{definition}
+\boxtitelm{Definition 2.10 --- die vier Streuungsmaße}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{3.6cm}P{4.8cm}@{}}
+\toprule
+Spannweite & $R = x_{(n)} - x_{(1)}$\\
+Quartilsabstand & $\mathrm{IQR} = Q_3 - Q_1$\\
+Stichprobenvarianz & $s^2 = \dfrac{1}{n-1}\displaystyle\sum_{i=1}^n (x_i - \MW)^2$\\
+Standardabweichung & $s = \sqrt{s^2}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Warum $n-1$ und nicht $n$? --- vertagt, nicht verschwiegen}
+Die Division durch $n-1$ statt durch $n$ ist die auffälligste Stelle der Formel und wird in Lehrbüchern gern mit \enquote{Freiheitsgrade} abgetan.
+
+Eine ehrliche Begründung braucht den Erwartungswertbegriff und gehört daher in Kapitel~5, wo sie vollständig geführt wird. Hier nur die Vorschau:
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Teilte man durch $n$, so wäre das Ergebnis \kursiv{im Mittel zu klein} --- und zwar systematisch, nicht zufällig. Der Grund: Die Abweichungen werden vom \kursiv{geschätzten} Mittelwert gemessen, und dieser liegt nach Satz 2.4 näher an den Daten als der wahre. Der Faktor $\frac{n}{n-1}$ korrigiert genau diesen Fehler.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für rein beschreibende Zwecke --- wenn man nur die vorliegenden Daten zusammenfasst und nichts über eine Grundgesamtheit aussagen will --- wäre $n$ richtiger. Da man das fast nie tut, hat sich $n-1$ durchgesetzt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Satz 2.11 --- der Verschiebungssatz}
+\[ \sum_{i=1}^n (x_i - \MW)^2 \;=\; \sum_{i=1}^n x_i^2 \;-\; n\,\MW^2 . \]
+
+\schritt{Beweis}
+\begin{align*}
+\sum_i (x_i - \MW)^2 &= \sum_i \bigl(x_i^2 - 2x_i\MW + \MW^2\bigr)\\
+&= \sum_i x_i^2 \;-\; 2\MW\sum_i x_i \;+\; n\MW^2\\
+&= \sum_i x_i^2 \;-\; 2\MW \cdot n\MW \;+\; n\MW^2 \qquad \Bigl(\text{denn } \sum_i x_i = n\MW\Bigr)\\
+&= \sum_i x_i^2 - 2n\MW^2 + n\MW^2 \;=\; \sum_i x_i^2 - n\MW^2 . \qquad \blacksquare
+\end{align*}
+
+\schritt{Wozu das gut ist}
+Die linke Seite verlangt zwei Durchgänge durch die Daten: erst den Mittelwert bestimmen, dann die Abweichungen. Die rechte Seite kommt mit einem aus --- man summiert gleichzeitig $x_i$ und $x_i^2$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Achtung bei der numerischen Anwendung.} Sind die Werte groß und die Streuung klein --- etwa Körpergrößen in Millimetern ---, so werden auf der rechten Seite zwei fast gleich große Zahlen voneinander abgezogen, und es kommt zur Auslöschung. Band 5 der Reihe behandelt das; für Handrechnungen ist die Formel unbedenklich.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die MOBIL-Daten, vollständig durchgerechnet}
+\schritt{Gruppe B --- die einfacheren Zahlen}
+Daten: $18, 15, 21, 17, 23, 14$, also $n = 6$.
+
+\textbf{Summe und Mittelwert:}
+\[ \sum x_i = 18+15+21+17+23+14 = 108, \qquad \MW_B = \frac{108}{6} = 18{,}0 . \]
+
+\textbf{Quadratsumme:}
+\[ \sum x_i^2 = 324 + 225 + 441 + 289 + 529 + 196 = 2004 . \]
+
+\textbf{Verschiebungssatz:}
+\[ \sum (x_i - \MW)^2 = 2004 - 6 \cdot 18^2 = 2004 - 6 \cdot 324 = 2004 - 1944 = 60 . \]
+
+\textbf{Varianz und Standardabweichung:}
+\[ s_B^2 = \frac{60}{6-1} = \frac{60}{5} = 12{,}0, \qquad s_B = \sqrt{12} \approx 3{,}46 . \]
+
+\textbf{Probe durch direktes Nachrechnen:}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.2cm}P{1.6cm}P{1.8cm}@{}}
+\toprule
+$x_i$ & $x_i - 18$ & $(x_i-18)^2$\\
+\midrule
+$18$ & $0$ & $0$\\
+$15$ & $-3$ & $9$\\
+$21$ & $3$ & $9$\\
+$17$ & $-1$ & $1$\\
+$23$ & $5$ & $25$\\
+$14$ & $-4$ & $16$\\
+\midrule
+& $\mathbf{0}$ & $\mathbf{60}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die mittlere Spalte summiert sich zu null --- das ist Satz 2.3. \checkmark\ Die rechte zu $60$. \checkmark
+
+\schritt{Gruppe A}
+Daten: $26, 19, 31, 24, 35, 22$.
+\[ \sum x_i = 157, \qquad \MW_A = \frac{157}{6} \approx 26{,}17 . \]
+\[ \sum x_i^2 = 676+361+961+576+1225+484 = 4283 . \]
+\[ \sum (x_i-\MW)^2 = 4283 - 6\cdot\Bigl(\tfrac{157}{6}\Bigr)^{\!2} = 4283 - \frac{24649}{6} \approx 174{,}83 . \]
+\[ s_A^2 = \frac{174{,}83}{5} = 34{,}97, \qquad s_A \approx 5{,}91 . \]
+
+\schritt{Median und Quartile}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.6cm}P{3.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+& \textbf{sortiert} & \textbf{Median} & \textbf{IQR}\\
+\midrule
+A & $19, 22, 24, 26, 31, 35$ & $25{,}0$ & $9$\\
+B & $14, 15, 17, 18, 21, 23$ & $17{,}5$ & $6$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Für A: untere Hälfte $19,22,24$, Median davon $Q_1 = 22$; obere Hälfte $26,31,35$, also $Q_3 = 31$. IQR $= 9$.\\
+Für B: $Q_1 = 15$, $Q_3 = 21$, IQR $= 6$.
+
+\schritt{Die Zusammenfassung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+& \textbf{Gruppe A} & \textbf{Gruppe B}\\
+\midrule
+$n$ & $6$ & $6$\\
+Mittelwert & $26{,}2$ & $18{,}0$\\
+Standardabw. & $5{,}9$ & $3{,}5$\\
+Median & $25{,}0$ & $17{,}5$\\
+IQR & $9$ & $6$\\
+Spannweite & $16$ & $9$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Gruppe B mobilisiert nicht nur früher, sondern auch \kursiv{einheitlicher} --- beide Streuungsmaße sind kleiner. Das ist eine eigene Beobachtung und oft die klinisch interessantere: Ein Verfahren, das bei allen ähnlich wirkt, ist planbarer als eines mit gleichem Mittelwert und großer Streuung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 2.12 --- Variationskoeffizient und Standardisierung}
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item Der \Begriff{Variationskoeffizient} ist $v = s/\MW$ --- die Streuung im Verhältnis zur Größenordnung. Er ist nur bei verhältnisskalierten Merkmalen mit positivem Mittelwert sinnvoll.
+\item Der \Begriff{$z$-Wert} einer Beobachtung ist
+\[ z_i = \frac{x_i - \MW}{s} . \]
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was die Standardisierung leistet}
+Die $z$-Werte haben stets Mittelwert $0$ und Standardabweichung $1$ --- unabhängig von der ursprünglichen Einheit.
+
+\schritt{Ein Beispiel}
+Die Person mit ID 5 hat $\mathrm{MOB} = 35$, in Gruppe A. Ihr $z$-Wert:
+\[ z = \frac{35 - 26{,}17}{5{,}91} \approx 1{,}49 . \]
+Sie liegt also etwa anderthalb Standardabweichungen über dem Gruppenmittel.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der $z$-Wert macht Größen vergleichbar, die in verschiedenen Einheiten gemessen sind --- Mobilisationszeit und Operationsdauer etwa. Er beantwortet nicht die Frage, ob ein Wert ungewöhnlich \kursiv{ist}: Dafür bräuchte man eine Verteilungsannahme, und die liefert erst Kapitel~4.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Boxplot}
+
+\begin{merksatz}
+\boxtitel{Wie er aufgebaut ist}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (-0.4,0) -- (7.6,0);
+\foreach \x/\lab in {0.6/14, 2.0/17, 3.0/19, 4.6/23, 6.6/30}
+  \node[font=\scriptsize, color=grau] at (\x,-0.35) {\lab};
+% Box
+\draw[tief, line width=1.0pt, fill=tief!10] (2.0,0.5) rectangle (4.6,1.5);
+\draw[akzent, line width=1.6pt] (3.0,0.5) -- (3.0,1.5);
+\draw[tief, line width=1.0pt] (2.0,1.0) -- (0.6,1.0);
+\draw[tief, line width=1.0pt] (4.6,1.0) -- (6.6,1.0);
+\draw[tief, line width=1.0pt] (0.6,0.75) -- (0.6,1.25);
+\draw[tief, line width=1.0pt] (6.6,0.75) -- (6.6,1.25);
+\fill[akzent] (7.2,1.0) circle (2.2pt);
+\node[font=\scriptsize, color=grau] at (2.0,1.85) {$Q_1$};
+\node[font=\scriptsize, color=akzent] at (3.0,1.85) {Median};
+\node[font=\scriptsize, color=grau] at (4.6,1.85) {$Q_3$};
+\node[font=\scriptsize, color=grau] at (7.2,1.55) {Ausreißer};
+\node[font=\scriptsize\itshape, color=grau] at (3.3,-0.85) {die Box umfasst die mittleren $50\,\%$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Box} & von $Q_1$ bis $Q_3$; die Breite ist der IQR\\
+\textbf{Strich} & der Median\\
+\textbf{Schnurrhaare} & bis zum weitesten Wert innerhalb von $1{,}5 \cdot \mathrm{IQR}$ ab der Box\\
+\textbf{Punkte} & alles darüber hinaus, einzeln eingezeichnet\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die $1{,}5$ ist eine Konvention, keine Entdeckung}
+\Person{John Tukey} wählte den Faktor $1{,}5$, weil er bei normalverteilten Daten etwa $0{,}7\,\%$ der Beobachtungen als Ausreißer markiert --- selten genug, um auffällig zu sein, häufig genug, um nicht leer auszugehen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Punkt im Boxplot ist daher kein Messfehler und kein Grund zum Ausschluss.} Er ist ein Hinweis, hinzusehen --- nicht mehr.
+\end{minipage}
+\end{center}
+
+Bei schiefen Verteilungen --- und Zeitdauern sind fast immer rechtsschief --- markiert die Regel systematisch zu viele Punkte am oberen Rand. Das ist kein Befund über die Daten, sondern über die Regel.
+\end{warnung}
+
+\section{Das Anscombe-Quartett}
+
+Jetzt der wichtigste Warnkasten dieses Kapitels.
+
+\begin{merksatz}
+\boxtitel{Vier Datensätze, elf Zahlenpaare, identische Kennzahlen}
+\Person{Francis Anscombe} veröffentlichte 1973 vier Datensätze mit je elf Punkten.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.40]
+\def\axes{\draw[grau!60, line width=0.6pt] (2.5,2.5) rectangle (20,13);}
+% I
+\begin{scope}[xshift=0cm]
+\draw[grau!60, line width=0.6pt] (2.5,2.5) rectangle (16,12.5);
+\foreach \x/\y in {10/8.04, 8/6.95, 13/7.58, 9/8.81, 11/8.33, 14/9.96, 6/7.24, 4/4.26, 12/10.84, 7/4.82, 5/5.68}
+  \fill[tief] (\x,\y) circle (11pt);
+\draw[akzent, line width=1.2pt] (3,4.5) -- (15.5,10.75);
+\node[font=\large, color=grau] at (4.2,11.5) {I};
+\end{scope}
+% II
+\begin{scope}[xshift=15cm]
+\draw[grau!60, line width=0.6pt] (2.5,2.5) rectangle (16,12.5);
+\foreach \x/\y in {10/9.14, 8/8.14, 13/8.74, 9/8.77, 11/9.26, 14/8.10, 6/6.13, 4/3.10, 12/9.13, 7/7.26, 5/4.74}
+  \fill[tief] (\x,\y) circle (11pt);
+\draw[akzent, line width=1.2pt] (3,4.5) -- (15.5,10.75);
+\node[font=\large, color=grau] at (4.2,11.5) {II};
+\end{scope}
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale=0.40]
+% III
+\begin{scope}[xshift=0cm]
+\draw[grau!60, line width=0.6pt] (2.5,2.5) rectangle (16,13.5);
+\foreach \x/\y in {10/7.46, 8/6.77, 13/12.74, 9/7.11, 11/7.81, 14/8.84, 6/6.08, 4/5.39, 12/8.15, 7/6.42, 5/5.73}
+  \fill[tief] (\x,\y) circle (11pt);
+\draw[akzent, line width=1.2pt] (3,4.5) -- (15.5,10.75);
+\node[font=\large, color=grau] at (4.2,12.5) {III};
+\end{scope}
+% IV
+\begin{scope}[xshift=15cm]
+\draw[grau!60, line width=0.6pt] (2.5,2.5) rectangle (21,13.5);
+\foreach \y in {6.58, 5.76, 7.71, 8.84, 8.47, 7.04, 5.25, 5.56, 7.91, 6.89}
+  \fill[tief] (8,\y) circle (11pt);
+\fill[tief] (19,12.50) circle (11pt);
+\draw[akzent, line width=1.2pt] (3,4.5) -- (20.5,13.25);
+\node[font=\large, color=grau] at (4.2,12.5) {IV};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\schritt{Die Kennzahlen --- für alle vier gleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Kennzahl} & \textbf{Wert}\\
+\midrule
+Mittelwert von $x$ & $9{,}0$\\
+Varianz von $x$ & $11{,}0$\\
+Mittelwert von $y$ & $7{,}50$\\
+Varianz von $y$ & $4{,}12$\\
+Korrelation & $0{,}816$\\
+Regressionsgerade & $y = 3{,}00 + 0{,}500\,x$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Was die Bilder zeigen}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.2cm}P{7.2cm}@{}}
+\toprule
+I & Ein Zusammenhang, wie man ihn erwartet. Hier ist alles in Ordnung.\\
+II & Ein deutlich \kursiv{gekrümmter} Zusammenhang. Eine Gerade ist das falsche Modell.\\
+III & Ein exakter linearer Zusammenhang plus \kursiv{ein} Ausreißer, der die Gerade verzieht.\\
+IV & Alle $x$ bis auf eines gleich. Die Gerade wird von einem einzigen Punkt bestimmt.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Lehre}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kennzahlen ersetzen das Bild nicht. Sie fassen zusammen, und Zusammenfassen heißt Weglassen --- man weiß nur nicht immer, was.}
+\end{minipage}
+\end{center}
+
+Im vierten Datensatz ist die Lage besonders bedenklich: Entfernt man den einen rechten Punkt, so ist die Steigung nicht mehr bestimmbar, denn alle übrigen $x$ sind gleich. Die Regressionsgerade beruht vollständig auf einer einzigen Beobachtung --- und keine der sechs Kennzahlen verrät das.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Anscombe schrieb dazu den Satz, der das Anliegen seines Aufsatzes zusammenfasst: Ein Rechner solle uns nicht vom Hinsehen abhalten, sondern es ermöglichen. Das war 1973 eine Forderung; heute ist es eine Selbstverständlichkeit, an die man sich trotzdem erinnern muss.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{technik}
+\boxtitelm{Zur Kontrolle in R}
+\begin{center}
+\begin{minipage}{0.82\textwidth}
+\code{mobB <- c(18, 15, 21, 17, 23, 14)}\\
+\code{mean(mobB); sd(mobB); median(mobB)}\\
+\code{quantile(mobB, c(.25,.75), type = 2)}
+\end{minipage}
+\end{center}
+
+Das Argument \code{type = 2} wählt die Konvention dieses Bandes --- Median der Hälften. Ohne Angabe benutzt R \code{type = 7} und liefert $Q_1 = 15{,}5$ statt $15$.
+\end{technik}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- Alle Kennzahlen für das Alter}
+Bestimmen Sie für das Merkmal \code{ALTER} aller zwölf Beobachtungen Mittelwert, Median, Quartile, Spannweite, Varianz und Standardabweichung.
+
+\loesung
+\schritt{Schritt 1 --- Die Daten}
+\[ 68,\ 74,\ 61,\ 79,\ 70,\ 65,\ 72,\ 66,\ 81,\ 69,\ 75,\ 63 \]
+Sortiert:
+\[ 61,\ 63,\ 65,\ 66,\ 68,\ 69,\ 70,\ 72,\ 74,\ 75,\ 79,\ 81 \]
+
+\schritt{Schritt 2 --- Mittelwert}
+\begin{align*}
+\sum x_i &= 61+63+65+66+68+69+70+72+74+75+79+81
+\end{align*}
+Wir addieren paarweise von außen:
+\[ 61+81 = 142, \quad 63+79 = 142, \quad 65+75 = 140, \]
+\[ 66+74 = 140, \quad 68+72 = 140, \quad 69+70 = 139 \]
+\[ \sum x_i = 142+142+140+140+140+139 = 843 \]
+\[ \MW = \frac{843}{12} = 70{,}25 \]
+
+\schritt{Schritt 3 --- Median und Quartile}
+$n = 12$ ist gerade; die mittleren beiden sind der sechste und siebte Wert: $69$ und $70$.
+\[ \Med = \frac{69+70}{2} = 69{,}5 \]
+
+Untere Hälfte (sechs Werte): $61,63,65,66,68,69$. Ihr Median:
+\[ Q_1 = \frac{65+66}{2} = 65{,}5 \]
+Obere Hälfte: $70,72,74,75,79,81$.
+\[ Q_3 = \frac{74+75}{2} = 74{,}5 \]
+\[ \mathrm{IQR} = 74{,}5 - 65{,}5 = 9{,}0 \]
+
+\schritt{Schritt 4 --- Spannweite}
+\[ R = 81 - 61 = 20 \]
+
+\schritt{Schritt 5 --- Varianz über den Verschiebungssatz}
+\begin{align*}
+\sum x_i^2 &= 3721+3969+4225+4356+4624+4761\\
+&\quad + 4900+5184+5476+5625+6241+6561
+\end{align*}
+Wir addieren in Blöcken:
+\[ 3721+3969 = 7690, \quad 4225+4356 = 8581, \quad 4624+4761 = 9385 \]
+\[ 4900+5184 = 10084, \quad 5476+5625 = 11101, \quad 6241+6561 = 12802 \]
+\[ \sum x_i^2 = 7690+8581+9385+10084+11101+12802 = 59643 \]
+
+\[ n\MW^2 = 12 \cdot 70{,}25^2 = 12 \cdot 4935{,}0625 = 59220{,}75 \]
+\[ \sum(x_i-\MW)^2 = 59643 - 59220{,}75 = 422{,}25 \]
+\[ s^2 = \frac{422{,}25}{11} = 38{,}39, \qquad s = \sqrt{38{,}39} \approx 6{,}20 \]
+
+\schritt{Schritt 6 --- Die Zusammenfassung}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{2.6cm}P{1.8cm}P{2.6cm}P{1.8cm}@{}}
+\toprule
+Mittelwert & $70{,}25$ & Spannweite & $20$\\
+Median & $69{,}5$ & Varianz & $38{,}39$\\
+$Q_1$, $Q_3$ & $65{,}5$; $74{,}5$ & Standardabw. & $6{,}20$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Probe}
+Mittelwert und Median liegen dicht beieinander ($70{,}25$ gegen $69{,}5$) --- ein Hinweis auf eine annähernd symmetrische Verteilung ohne Ausreißer. Dazu passt, dass die Spannweite mit $20$ etwa dem Dreifachen des IQR entspricht; bei starken Ausreißern wäre das Verhältnis größer.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Was ein Umrechnen der Einheit bewirkt}
+Die Mobilisationszeiten der Gruppe B sollen in Minuten statt Stunden angegeben werden. Wie ändern sich Mittelwert, Median, Standardabweichung, Varianz und Variationskoeffizient?
+
+\loesung
+\schritt{Schritt 1 --- Die Umformung benennen}
+$y_i = 60\,x_i$, also von der Bauart $y = a x$ mit $a = 60$.
+
+\schritt{Schritt 2 --- Der Mittelwert}
+\[ \MW_y = \frac{1}{n}\sum_i 60 x_i = 60 \cdot \frac{1}{n}\sum_i x_i = 60\,\MW_x = 60 \cdot 18 = 1080 \ \text{min} . \]
+Hier wurde die zweite Summenregel benutzt.
+
+\schritt{Schritt 3 --- Der Median}
+Der Median ist eine der Beobachtungen beziehungsweise das Mittel zweier Beobachtungen. Da die Umformung streng wachsend ist, bleibt die Rangfolge erhalten, und es werden dieselben Positionen genommen:
+\[ \Med_y = 60 \cdot 17{,}5 = 1050 \ \text{min} . \]
+
+\schritt{Schritt 4 --- Die Varianz}
+\[ s_y^2 = \frac{1}{n-1}\sum_i (60x_i - 60\MW_x)^2 = \frac{1}{n-1}\sum_i 60^2 (x_i-\MW_x)^2 = 3600\,s_x^2 . \]
+\[ s_y^2 = 3600 \cdot 12 = 43\,200 \ \text{min}^2 . \]
+
+\schritt{Schritt 5 --- Die Standardabweichung}
+\[ s_y = \sqrt{43\,200} = 60 \cdot \sqrt{12} \approx 207{,}8 \ \text{min} . \]
+
+\schritt{Schritt 6 --- Der Variationskoeffizient}
+\[ v_y = \frac{s_y}{\MW_y} = \frac{60\,s_x}{60\,\MW_x} = \frac{s_x}{\MW_x} = v_x . \]
+\[ v = \frac{3{,}46}{18{,}0} = 0{,}192 \ \text{--- in beiden Einheiten}. \]
+
+\schritt{Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.4cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Kennzahl} & \textbf{Faktor} & \textbf{Wert (min)}\\
+\midrule
+Mittelwert & $60$ & $1080$\\
+Median & $60$ & $1050$\\
+Standard\-abweichung & $60$ & $207{,}8$\\
+Varianz & $\mathbf{3600}$ & $43\,200$\\
+\textbf{Variationskoeffizient} & $\mathbf{1}$ & \textcolor{gruen}{$\mathbf{0{,}192}$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Lehre}
+Die Varianz ändert sich mit dem \kursiv{Quadrat} des Faktors --- sie trägt die Einheit \enquote{Minuten zum Quadrat}, was sich kaum deuten lässt. Genau deshalb gibt man die Standardabweichung an: Sie hat dieselbe Einheit wie die Daten.
+
+Der Variationskoeffizient ist als einzige Kennzahl \kursiv{einheitenfrei} und deshalb der richtige Maßstab, wenn man die Streuung zweier verschieden gemessener Größen vergleichen will.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Ein Datensatz zum Anscombe-Muster}
+Konstruieren Sie zwei Datensätze mit je fünf Werten, die denselben Mittelwert und dieselbe Standardabweichung haben, aber offensichtlich verschieden sind.
+
+\loesung
+\schritt{Schritt 1 --- Was zu erfüllen ist}
+Gesucht sind $x_1,\ldots,x_5$ und $y_1,\ldots,y_5$ mit gleicher Summe und gleicher Quadratsumme --- denn daraus folgen nach dem Verschiebungssatz gleicher Mittelwert und gleiche Varianz.
+
+\schritt{Schritt 2 --- Ein Ansatz über Symmetrie}
+Wir wählen beide Datensätze symmetrisch um $10$, so dass der Mittelwert automatisch $10$ ist:
+\[ A: \ 6,\ 8,\ 10,\ 12,\ 14 \qquad B: \ 10-c,\ 10-d,\ 10,\ 10+d,\ 10+c \]
+
+\schritt{Schritt 3 --- Die Bedingung an die Quadratsumme}
+Für A:
+\[ \sum (x_i - 10)^2 = 16 + 4 + 0 + 4 + 16 = 40 . \]
+Für B:
+\[ 2c^2 + 2d^2 = 40 \quad\Longrightarrow\quad c^2 + d^2 = 20 . \]
+
+\schritt{Schritt 4 --- Eine Lösung suchen}
+Wir brauchen ein Paar mit $c^2 + d^2 = 20$, das anders aussieht als $c=4$, $d=2$.
+
+Nehmen wir $c = \sqrt{18} \approx 4{,}243$ und $d = \sqrt{2} \approx 1{,}414$: dann $18 + 2 = 20$. \checkmark
+
+\[ B: \ 5{,}76;\ 8{,}59;\ 10;\ 11{,}41;\ 14{,}24 \]
+
+Das ist zulässig, aber unschön. Schöner mit ganzen Zahlen: Es gibt keine ganzzahlige Lösung außer $(4,2)$ und $(2,4)$ --- die aber dieselbe Menge liefern. Wir weichen deshalb von der Symmetrie ab.
+
+\schritt{Schritt 5 --- Ein ganzzahliges Beispiel}
+\[ A: \ 6,\ 8,\ 10,\ 12,\ 14 \qquad B: \ 4,\ 11,\ 11,\ 11,\ 13 \]
+
+\textbf{Probe für B:}
+\[ \sum y_i = 4+11+11+11+13 = 50 \quad\Rightarrow\quad \MW_B = 10 \ \checkmark \]
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{1.2cm}P{1.6cm}P{1.8cm}@{}}
+\toprule
+$y_i$ & $y_i - 10$ & $(y_i-10)^2$\\
+\midrule
+$4$ & $-6$ & $36$\\
+$11$ & $1$ & $1$\\
+$11$ & $1$ & $1$\\
+$11$ & $1$ & $1$\\
+$13$ & $3$ & $9$\\
+\midrule
+& $\mathbf{0}$ & $\mathbf{48}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+$48 \neq 40$. Die Quadratsummen stimmen noch nicht.
+
+\schritt{Schritt 6 --- Nachjustieren}
+Wir ersetzen die $13$ durch $12$ und gleichen die Summe mit einer $12$ statt einer $11$ aus:
+\[ B: \ 4,\ 11,\ 11,\ 12,\ 12 \]
+\[ \sum y_i = 4+11+11+12+12 = 50 \ \checkmark \]
+\[ \sum (y_i-10)^2 = 36 + 1 + 1 + 4 + 4 = 46 . \]
+Noch immer zu groß. Der Ausreißer $4$ trägt allein $36$ bei; wir müssen ihn abschwächen.
+
+\[ B: \ 5,\ 10,\ 11,\ 12,\ 12 \]
+\[ \sum = 50 \ \checkmark, \qquad \sum(y_i-10)^2 = 25+0+1+4+4 = 34 . \]
+Jetzt zu klein. Zwischen $46$ und $34$ liegt $40$; wir probieren
+\[ B: \ 5,\ 9,\ 11,\ 12,\ 13 \]
+\[ \sum = 50 \ \checkmark, \qquad \sum(y_i-10)^2 = 25+1+1+4+9 = 40 . \quad \checkmark \]
+
+\schritt{Schritt 7 --- Das Ergebnis}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Daten} & \textbf{Median}\\
+\midrule
+A & $6, 8, 10, 12, 14$ & $10$\\
+B & $5, 9, 11, 12, 13$ & $11$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Beide: $\MW = 10$, $\sum(x-\MW)^2 = 40$, also $s^2 = 10$ und $s \approx 3{,}16$.
+
+Die Datensätze unterscheiden sich dennoch deutlich: A ist symmetrisch, B ist linksschief --- der Median liegt über dem Mittelwert, und ein niedriger Wert zieht nach unten.
+
+\schritt{Nachbemerkung zum Vorgehen}
+Ich habe den Weg mit den Fehlversuchen stehen lassen. So arbeitet man tatsächlich: Man rät, rechnet nach, korrigiert in die richtige Richtung. Der Verschiebungssatz macht dabei jeden Versuch zu einer Sache von zwei Zeilen.
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Quetelet und der Durchschnittsmensch}
+Der Mittelwert war lange ein Werkzeug der Astronomie: Mehrere Messungen desselben Sterns wurden gemittelt, um den Messfehler zu verkleinern. Dahinter steht eine klare Vorstellung --- es gibt einen wahren Wert, und die Abweichungen sind Fehler.
+
+\Person{Adolphe Quetelet} (1796--1874), belgischer Astronom und Statistiker, übertrug den Gedanken um 1835 auf den Menschen. Er mittelte Körpergrößen, Brustumfänge und Sterblichkeitsraten und prägte den Begriff des \kursiv{homme moyen} --- des Durchschnittsmenschen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Übertragungsfehler steckt in der Deutung. Beim Stern ist die Abweichung ein Fehler; beim Menschen ist sie die Wirklichkeit. Quetelet verstand den Durchschnittsmenschen als das eigentlich Gemeinte und die Abweichungen als Störung --- eine Vorstellung, die später zur Rechtfertigung übler Dinge diente.}
+\end{minipage}
+\end{center}
+
+\Person{Florence Nightingale} war von Quetelets Methoden begeistert und benutzte sie mit umgekehrtem Vorzeichen: Sie zeigte 1858 mit Sterblichkeitsstatistiken der Krimkriegslazarette, dass weit mehr Soldaten an Infektionen als an Verwundungen starben --- und erzwang damit hygienische Reformen. Ihre Diagramme gehören zu den frühesten Beispielen dafür, dass eine gute Darstellung eine Entscheidung herbeiführen kann.
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wie heute berichtet wird}
+Die Frage, ob man \enquote{Mittelwert $\pm$ Standardabweichung} oder \enquote{Median [IQR]} angibt, ist keine Geschmacksfrage.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.4cm}@{}}
+\toprule
+\textbf{Mittelwert $\pm$ SD} & nur bei annähernd symmetrischen Verteilungen\\
+\textbf{Median [IQR]} & bei schiefen Verteilungen, kleinen Stichproben, ordinalen Daten\\
+\textbf{Beides} & wenn der Vergleich mit der Literatur es erfordert\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die CONSORT-Empfehlungen für die Berichterstattung randomisierter Studien --- 2010 aufgestellt und 2025 grundlegend überarbeitet --- verlangen, dass Streuungsmaße ausdrücklich benannt werden. Der Grund ist ein verbreiteter Fehler: Die Angabe \enquote{$18{,}0 \pm 3{,}5$} lässt offen, ob $3{,}5$ die Standardabweichung oder der Standardfehler ist. Beide unterscheiden sich um den Faktor $\sqrt{n}$ --- bei $n=60$ also um fast das Achtfache.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kapitel~4 führt den Unterschied vollständig ein. Merken Sie sich vorerst: Die Standardabweichung beschreibt die \kursiv{Daten}, der Standardfehler die Genauigkeit des \kursiv{Mittelwerts}. Wer den Standardfehler angibt, weil die Balken kleiner aussehen, täuscht.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 2.3} & Abweichungen vom Mittelwert summieren sich zu null\\
+\textbf{Satz 2.4} & Der Mittelwert minimiert quadratische Abstände\\
+\textbf{Satz 2.6} & Der Median minimiert absolute Abstände\\
+\textbf{Satz 2.11} & Verschiebungssatz --- Varianz in einem Durchgang\\
+\textbf{Bruchpunkte} & Mittelwert $0$, Median $50\,\%$\\
+\textbf{Anscombe} & Kennzahlen ersetzen das Bild nicht\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel betrachten wir zwei Merkmale gleichzeitig --- und stoßen auf die verbreitetste Fehldeutung der gesamten Statistik.}
+\end{minipage}
+\end{center}
+\end{merksatz}

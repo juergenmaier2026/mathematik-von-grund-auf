@@ -1,0 +1,748 @@
+\chapter{Erregbare Zellen}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{Alles oder nichts}
+Eine Nervenzelle antwortet auf einen schwachen Reiz mit einer kleinen, rasch abklingenden Spannungsänderung. Überschreitet der Reiz eine Schwelle, so antwortet sie mit einem \Begriff{Aktionspotential}: einem großen, immer gleich geformten Ausschlag.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Antwort hängt nicht von der Reizstärke ab --- nur davon, ob die Schwelle erreicht wurde.}
+\end{minipage}
+\end{center}
+
+\textbf{Die Frage:} Wie kann ein System aus stetigen Gleichungen ein solches Schaltverhalten erzeugen?
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Membran als Bauteil}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Kondensator} & Die Lipidschicht trennt Ladungen. Kapazität etwa $1\ \mathrm{\mu F/cm^2}$.\\
+\textbf{Widerstände} & Ionenkanäle lassen Ladung durch --- einer je Ionenart.\\
+\textbf{Spannungs\-quellen} & Die Konzentrations\-unterschiede erzeugen für jede Ionenart eine eigene Gleichgewichtsspannung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!70, line width=1.2pt] (-2.6,1.0) -- (3.0,1.0);
+\draw[grau!70, line width=1.2pt] (-2.6,-1.0) -- (3.0,-1.0);
+\node[font=\scriptsize, color=grau] at (-3.2,1.0) {außen};
+\node[font=\scriptsize, color=grau] at (-3.2,-1.0) {innen};
+% Kondensator
+\draw[tief, line width=1.0pt] (-1.8,1.0) -- (-1.8,0.25);
+\draw[tief, line width=1.4pt] (-2.15,0.25) -- (-1.45,0.25);
+\draw[tief, line width=1.4pt] (-2.15,-0.05) -- (-1.45,-0.05);
+\draw[tief, line width=1.0pt] (-1.8,-0.05) -- (-1.8,-1.0);
+\node[font=\scriptsize, color=tief] at (-1.8,-1.35) {$C_m$};
+% Kanal Na
+\draw[akzent, line width=1.0pt] (0.2,1.0) -- (0.2,0.4);
+\draw[akzent, line width=1.0pt] (0.0,0.4) rectangle (0.4,-0.05);
+\draw[akzent, line width=1.0pt] (0.2,-0.05) -- (0.2,-0.4);
+\draw[akzent, line width=1.3pt] (-0.05,-0.4) -- (0.45,-0.4);
+\draw[akzent, line width=1.0pt] (0.05,-0.55) -- (0.35,-0.55);
+\draw[akzent, line width=1.0pt] (0.2,-0.55) -- (0.2,-1.0);
+\node[font=\scriptsize, color=akzent] at (0.2,-1.35) {Na$^+$};
+% Kanal K
+\draw[gruen, line width=1.0pt] (2.0,1.0) -- (2.0,0.4);
+\draw[gruen, line width=1.0pt] (1.8,0.4) rectangle (2.2,-0.05);
+\draw[gruen, line width=1.0pt] (2.0,-0.05) -- (2.0,-0.4);
+\draw[gruen, line width=1.3pt] (1.75,-0.4) -- (2.25,-0.4);
+\draw[gruen, line width=1.0pt] (1.85,-0.55) -- (2.15,-0.55);
+\draw[gruen, line width=1.0pt] (2.0,-0.55) -- (2.0,-1.0);
+\node[font=\scriptsize, color=gruen] at (2.0,-1.35) {K$^+$};
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Nernst-Spannung}
+Für jede Ionenart stellt sich eine Spannung ein, bei der Diffusion und elektrische Kraft einander aufheben:
+\[ E = \frac{R\,T}{z\,F}\,\ln\frac{c_{\text{außen}}}{c_{\text{innen}}} \;\approx\; \frac{61{,}5\ \mathrm{mV}}{z}\,\lg\frac{c_{\text{außen}}}{c_{\text{innen}}} \]
+bei Körpertemperatur.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.6cm}P{1.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+\textbf{Ion} & \textbf{außen} & \textbf{innen} & $E$\\
+\midrule
+K$^+$ & $5$ & $140$ & $-89$ mV\\
+Na$^+$ & $145$ & $15$ & $+61$ mV\\
+Cl$^-$ & $110$ & $10$ & $-64$ mV\\
+Ca$^{2+}$ & $2$ & $0{,}0001$ & $+132$ mV\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Konzentrationen in mmol/l.}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Ruhespannung von etwa $-70$ mV liegt nahe bei $E_K$, weil die Membran in Ruhe überwiegend für Kalium durchlässig ist. Öffnen sich Natriumkanäle, so wandert die Spannung in Richtung $+61$ mV --- das ist der Aufstrich des Aktionspotentials.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die passive Membran}
+
+\begin{merksatz}
+\boxtitel{Satz 12.1 --- die Zeitkonstante}
+Bleiben die Leitfähigkeiten fest, so gilt für die Spannung $V$ bei einem eingeprägten Strom $I$
+\[ C_m\frac{\dd V}{\dd t} = -\frac{V - E}{R_m} + I \]
+mit der Lösung
+\[ V(t) = V_\infty + (V_0 - V_\infty)\,e^{-t/\tau}, \qquad \tau = R_m\,C_m . \]
+
+\schritt{Beweis}
+Umformen:
+\[ \frac{\dd V}{\dd t} = -\frac{1}{R_mC_m}\bigl(V - E - R_mI\bigr) = -\frac{1}{\tau}\bigl(V - V_\infty\bigr) \]
+mit $V_\infty := E + R_mI$.
+
+Das ist die Anflutungsgleichung aus Satz 10.2, nur mit einem anderen Ausgangswert. Trennung der Veränderlichen wie dort. $\blacksquare$
+
+\schritt{Die Zahlen}
+Mit $C_m = 1\ \mathrm{\mu F/cm^2}$ und $R_m = 10\ \mathrm{k\Omega\,cm^2}$:
+\[ \tau = 10^4\,\Omega\,\mathrm{cm^2} \cdot 10^{-6}\,\mathrm{F/cm^2} = 10^{-2}\,\mathrm{s} = 10\ \mathrm{ms} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wieder die Vier-Zeitkonstanten-Regel aus Kapitel~10: Nach $40$ ms ist die passive Antwort praktisch abgeschlossen. Und wieder gilt --- die Zeitkonstante hängt nicht von der Reizstärke ab, nur der Endwert tut es.}
+\end{minipage}
+\end{center}
+
+\schritt{Was die passive Membran nicht kann}
+Sie antwortet stets \kursiv{proportional} zum Reiz. Ein doppelt so starker Reiz erzeugt eine doppelt so große Antwort. Ein Schwellenverhalten gibt es nicht.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Alles-oder-Nichts verlangt, dass die Leitfähigkeiten selbst von der Spannung abhängen.} Damit wird die Gleichung nichtlinear --- und alles Weitere möglich.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Modell von Hodgkin und Huxley}
+
+\begin{merksatz}
+\boxtitel{Die Idee in vier Gleichungen}
+\[ C_m\frac{\dd V}{\dd t} = -\bar{g}_{\mathrm{Na}}m^3h\,(V-E_{\mathrm{Na}}) - \bar{g}_{\mathrm{K}}n^4\,(V-E_{\mathrm{K}}) - g_L(V-E_L) + I \]
+dazu drei Gleichungen der Form
+\[ \frac{\dd m}{\dd t} = \frac{m_\infty(V) - m}{\tau_m(V)} \]
+für $m$, $h$ und $n$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{2.6cm}P{4.0cm}@{}}
+\toprule
+$m$ & Natrium-Aktivierung & öffnet \kursiv{schnell} bei Depolarisation\\
+$h$ & Natrium-Inaktivierung & schließt \kursiv{langsam} bei Depolarisation\\
+$n$ & Kalium-Aktivierung & öffnet \kursiv{langsam}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der Ablauf eines Aktionspotentials}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Reiz hebt $V$ an; $m$ öffnet rasch; Natrium strömt ein.\\
+$2$ & Einströmendes Natrium hebt $V$ weiter --- \textbf{positive Rückkopplung}, der Aufstrich.\\
+$3$ & Verzögert schließt $h$ und öffnet $n$; Natrium versiegt, Kalium strömt aus.\\
+$4$ & $V$ fällt, teils unter die Ruhespannung. Erholung.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In Schritt 2 steckt die Erklärung des Alles-oder-Nichts: Die positive Rückkopplung springt erst an, wenn genug Natriumkanäle offen sind. Unterhalb der Schwelle überwiegt der Kaliumstrom und zieht die Spannung zurück.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum wir es nicht ausrechnen}
+Vier gekoppelte Gleichungen mit spannungsabhängigen Koeffizienten lassen sich nicht von Hand lösen. Hodgkin und Huxley rechneten 1952 an einer Handkurbelmaschine; eine einzige Kurve kostete Wochen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für das \kursiv{Verstehen} ist das auch nicht nötig. Der nächste Abschnitt zeigt ein Modell mit zwei Gleichungen, das dasselbe Verhalten erzeugt und sich mit den Werkzeugen aus Kapitel~6 vollständig durchschauen lässt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Modell von FitzHugh und Nagumo}
+
+\begin{definition}
+\boxtitelm{Definition 12.2}
+\[ \frac{\dd v}{\dd t} = v - \frac{v^3}{3} - w + I, \qquad \frac{\dd w}{\dd t} = \varepsilon\,(v + a - b\,w) \]
+mit $\varepsilon$ klein. Wir rechnen mit $a=0{,}7$, $b=0{,}8$, $\varepsilon=0{,}08$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was die beiden Größen bedeuten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{2.8cm}P{3.8cm}@{}}
+\toprule
+$v$ & Spannung & ändert sich \kursiv{schnell}\\
+$w$ & Erholung & ändert sich \kursiv{langsam} --- daher $\varepsilon$ klein\\
+$I$ & eingeprägter Strom & der Reiz\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Woher die Bauteile stammen}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+$v - v^3/3$ & Die kubische Form erzeugt einen Bereich, in dem $\dd v/\dd t$ mit $v$ \kursiv{wächst} --- die positive Rückkopplung.\\
+$-w$ & Die Erholung bremst.\\
+$\varepsilon$ & Die Erholung kommt verzögert --- die Ursache aller Schwingungen, wie in Kapitel~3.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Nullklinen}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{6.4cm}@{}}
+\toprule
+$v$-Nullkline & $w = v - \dfrac{v^3}{3} + I$ --- eine \kursiv{kubische} Kurve mit $N$-Form\\
+$w$-Nullkline & $w = \dfrac{v+a}{b}$ --- eine Gerade\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (-3.0,0) -- (3.0,0);
+\draw[grau!60, line width=0.7pt] (0,-1.8) -- (0,2.4);
+\draw[tief, line width=1.3pt, smooth, samples=70, domain=-2.3:2.3]
+  plot (\x, {0.75*(\x - \x*\x*\x/3)});
+\draw[akzent, line width=1.2pt] (-2.6,{0.75*(-2.6+0.7)/0.8}) -- (2.6,{0.75*(2.6+0.7)/0.8});
+\fill[gruen] (-1.2,{0.75*(-1.2+0.7)/0.8}) circle (2.4pt);
+\node[font=\scriptsize, color=tief, anchor=west] at (1.15,-1.35) {$v$-Nullkline};
+\node[font=\scriptsize, color=akzent, anchor=west] at (1.9,2.05) {$w$-Nullkline};
+\node[font=\scriptsize, color=gruen, anchor=east] at (-1.35,-0.55) {Ruhelage};
+\node[font=\scriptsize, color=grau] at (2.7,-0.28) {$v$};
+\node[font=\scriptsize, color=grau] at (-0.25,2.25) {$w$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Entscheidend ist, \kursiv{wo} die Gerade die Kurve schneidet. Schneidet sie den äußeren, fallenden Ast, so ist der Punkt stabil --- die Zelle ruht. Schneidet sie den mittleren, steigenden Ast, so ist er instabil --- und die Zelle feuert dauernd.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Stabilität, mit den Werkzeugen aus Kapitel 6}
+\schritt{Die Jacobi-Matrix}
+\[ \frac{\partial f}{\partial v} = 1 - v^2, \qquad \frac{\partial f}{\partial w} = -1 \]
+\[ \frac{\partial g}{\partial v} = \varepsilon, \qquad \frac{\partial g}{\partial w} = -\varepsilon b \]
+
+\schritt{Spur und Determinante}
+\[ T = (1-v^{*2}) - \varepsilon b \]
+\[ D = (1-v^{*2})(-\varepsilon b) - (-1)(\varepsilon) = \varepsilon\bigl(1 - b(1-v^{*2})\bigr) \]
+
+\schritt{Ohne Reiz --- $I = 0$}
+Die Ruhelage liegt bei $v^{*} = -1{,}1994$, $w^{*} = -0{,}6243$.
+\[ 1 - v^{*2} = 1 - 1{,}4386 = -0{,}4386 \]
+\[ T = -0{,}4386 - 0{,}064 = -0{,}5026 \]
+\[ D = (-0{,}4386)(-0{,}064) + 0{,}08 = 0{,}0281 + 0{,}08 = 0{,}1081 \]
+\[ T^2 - 4D = 0{,}2526 - 0{,}4323 = -0{,}1797 < 0 \]
+
+$T<0$, $D>0$, Diskriminante negativ: \textbf{stabiler Strudel.} Die Zelle ruht.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 12.3 --- wann die Zelle zu feuern beginnt}
+Die Ruhelage verliert ihre Stabilität genau dann, wenn
+\[ v^{*2} = 1 - \varepsilon\,b . \]
+
+\schritt{Beweis}
+Nach Satz 6.3 ist der Punkt stabil, solange $T<0$ und $D>0$. Die Determinante
+\[ D = \varepsilon\bigl(1-b(1-v^{*2})\bigr) \]
+ist bei unseren Werten stets positiv. Entscheidend ist also $T$:
+\[ T = 0 \quad\Longleftrightarrow\quad 1-v^{*2} = \varepsilon b \quad\Longleftrightarrow\quad v^{*2} = 1-\varepsilon b . \qquad \blacksquare \]
+
+\schritt{Die Zahlen}
+\[ v^{*} = \pm\sqrt{1 - 0{,}08 \cdot 0{,}8} = \pm\sqrt{0{,}936} = \pm 0{,}9675 \]
+
+Das sind genau die Punkte, an denen die kubische Kurve ihre Scheitel hat --- denn dort ist $1-v^2 \approx 0$.
+
+\schritt{Die zugehörigen Reizströme}
+Aus der $v$-Nullkline $I = w - v + v^3/3$ mit $w = (v+a)/b$:
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+$v^{*}$ & $w^{*}$ & $I$\\
+\midrule
+$-0{,}9675$ & $-0{,}3343$ & $\mathbf{0{,}331}$\\
+$+0{,}9675$ & $+2{,}0843$ & $\mathbf{1{,}419}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Für $0{,}331 < I < 1{,}419$ feuert die Zelle dauernd. Außerhalb ruht sie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Übergang in Zahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{1.6cm}P{1.8cm}@{}}
+\toprule
+$I$ & $v^{*}$ & $T$ & $D$ & \textbf{Zustand}\\
+\midrule
+$0{,}0$ & $-1{,}199$ & $-0{,}503$ & $0{,}108$ & \textcolor{gruen}{Ruhe}\\
+$0{,}2$ & $-1{,}069$ & $-0{,}208$ & $0{,}089$ & \textcolor{gruen}{Ruhe}\\
+$0{,}3$ & $-0{,}993$ & $-0{,}051$ & $0{,}079$ & \textcolor{gruen}{Ruhe}\\
+$\mathbf{0{,}331}$ & $-0{,}968$ & $\mathbf{0{,}000}$ & $0{,}076$ & \textcolor{akzent}{\textbf{Hopf}}\\
+$0{,}4$ & $-0{,}907$ & $+0{,}114$ & $0{,}069$ & \textcolor{akzent}{Dauerfeuer}\\
+$1{,}0$ & $+0{,}409$ & $+0{,}769$ & $0{,}027$ & \textcolor{akzent}{Dauerfeuer}\\
+$\mathbf{1{,}419}$ & $+0{,}968$ & $\mathbf{0{,}000}$ & $0{,}076$ & \textcolor{akzent}{\textbf{Hopf}}\\
+$1{,}8$ & $+1{,}228$ & $-0{,}573$ & $0{,}113$ & \textcolor{gruen}{Ruhe}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist die Hopf-Bifurkation aus Kapitel~6, an einem biologischen Beispiel.} Der Punkt $(T,D)$ wandert über die senkrechte Achse des Diagramms --- und aus Ruhe wird Schwingung.
+\end{minipage}
+\end{center}
+
+\schritt{Die zweite Schwelle ist bemerkenswert}
+Bei sehr starkem Reiz hört die Zelle wieder auf zu feuern und verharrt in einem dauerhaft erregten Zustand.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist keine Eigenart des Modells, sondern beobachtbar: Man nennt es \Begriff{Depolarisationsblock}. Er tritt bei sehr starker Reizung auf --- und ist der vermutete Wirkmechanismus mehrerer Arzneistoffe, die auf Nervenzellen dämpfend wirken.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Erregbarkeit}
+
+\begin{merksatz}
+\boxtitel{Wie die Schwelle ohne Schwellenwert entsteht}
+Bei $I=0$ ist die Ruhelage stabil --- jede Störung klingt ab. Trotzdem gibt es ein Alles-oder-Nichts.
+
+\schritt{Der Grund}
+Der Weg zurück zur Ruhelage kann auf zwei völlig verschiedenen Wegen verlaufen:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kleine Störung} & $v$ bleibt links vom mittleren Ast. Die Bahn läuft unmittelbar zur Ruhelage zurück.\\
+\textbf{Große Störung} & $v$ überschreitet den mittleren Ast. Die Bahn wird nach rechts auf den anderen Ast gerissen, läuft ihn hinauf, springt zurück --- ein voller Ausschlag.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (-3.0,0) -- (3.0,0);
+\draw[tief!50, line width=1.1pt, smooth, samples=70, domain=-2.3:2.3]
+  plot (\x, {0.75*(\x - \x*\x*\x/3)});
+\fill[gruen] (-1.2,-0.47) circle (2.4pt);
+\draw[grau!55, dashed] (-1.0,-1.4) -- (-1.0,1.4);
+\node[font=\scriptsize, color=grau] at (-1.0,1.65) {Schwelle};
+\draw[akzent, line width=1.1pt, -{Stealth[length=5pt]}] (-1.45,-0.47) .. controls (-1.35,-0.3) .. (-1.22,-0.45);
+\draw[tief, line width=1.2pt, -{Stealth[length=5pt]}]
+  (-0.85,-0.47) -- (1.35,-0.47) .. controls (1.7,0.1) .. (1.5,0.6)
+  .. controls (1.0,0.75) .. (-1.5,0.3) .. controls (-1.7,-0.2) .. (-1.25,-0.44);
+\node[font=\scriptsize, color=akzent, anchor=east] at (-1.6,-0.75) {klein};
+\node[font=\scriptsize, color=tief, anchor=west] at (0.2,0.95) {groß};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es gibt keinen Schwellenwert in den Gleichungen.} Die Schwelle entsteht aus der Form der kubischen Nullkline --- aus der Lage des mittleren, abstoßenden Astes.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Antwort auf die Frage aus Abschnitt 12.1. Ein Schaltverhalten braucht keinen Schalter. Es genügt, dass zwei Vorgänge verschieden schnell ablaufen und einer von ihnen sich selbst verstärkt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Und die Refraktärzeit}
+Nach einem Ausschlag ist $w$ erhöht --- die Erholungsgröße. Solange sie nicht abgebaut ist, liegt die Bahn oberhalb, und die Schwelle ist weiter rechts.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Absolut} & Unmittelbar danach ist kein Ausschlag möglich, gleichgültig wie stark gereizt wird.\\
+\textbf{Relativ} & Etwas später ist einer möglich, aber nur bei stärkerem Reiz.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide Formen fallen im Modell ab, ohne eigens eingebaut zu sein. Die Refraktärzeit ist der Grund, warum die Erregung im Axon nur in eine Richtung läuft --- rückwärts trifft sie auf frisch erregtes, unerregbares Gewebe.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was FitzHugh-Nagumo nicht kann}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Keine Ionen} & $v$ und $w$ haben keine unmittelbare stoffliche Bedeutung. Man kann keine Wirkung eines Kanalblockers vorhersagen.\\
+\textbf{Keine Amplituden} & Die Größe des Ausschlags ist eine Modellgröße, keine Spannung in Millivolt.\\
+\textbf{Ein Raumpunkt} & Die Ausbreitung entlang eines Axons fehlt; dafür braucht man eine Gleichung mit Ortsableitung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Modell erklärt, \kursiv{warum} es ein Alles-oder-Nichts gibt. Es sagt nicht vorher, \kursiv{wie} die Zelle auf einen bestimmten Stoff reagiert.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist die Arbeitsteilung benannt, die dieses Kapitel trägt: Hodgkin-Huxley ist das Modell für Vorhersagen, FitzHugh-Nagumo das Modell für Einsicht. Beide sind nötig, und keines ersetzt das andere.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und was auch Hodgkin-Huxley nicht leistet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Stetige Größen} & $m$, $h$ und $n$ sind Anteile offener Kanäle. Bei wenigen Kanälen ist das Öffnen zufällig --- die Zelle feuert dann gelegentlich spontan.\\
+\textbf{Eine Zellart} & Die Parameter stammen vom Riesenaxon des Tintenfischs. Andere Zellen haben andere Kanäle und völlig anderes Verhalten.\\
+\textbf{Feste Parameter} & Kanaldichten ändern sich über Stunden bis Tage --- die Zelle regelt ihre eigene Erregbarkeit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist ein Forschungsfeld für sich: Nervenzellen halten ihre Feuerrate über lange Zeit in einem Zielbereich, indem sie die Zahl ihrer Kanäle anpassen. Das ist eine Rückkopplung auf einer viel langsameren Zeitskala --- und Modelle, die sie einbauen, erklären, warum sehr verschiedene Kanalausstattungen dasselbe Verhalten erzeugen können.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.1 --- Nernst-Spannungen und Ruhepotential}
+Berechnen Sie $E_K$ und $E_{\mathrm{Na}}$ für die Werte aus Abschnitt 12.1 und bestimmen Sie die Ruhespannung, wenn die Kaliumleitfähigkeit $25$-mal so groß ist wie die Natriumleitfähigkeit.
+
+\loesung
+\schritt{Schritt 1 --- Die Nernst-Spannungen}
+\[ E_K = 61{,}5 \cdot \lg\frac{5}{140} = 61{,}5 \cdot \lg 0{,}03571 = 61{,}5 \cdot (-1{,}4472) = -89{,}0\ \mathrm{mV} \]
+\[ E_{\mathrm{Na}} = 61{,}5 \cdot \lg\frac{145}{15} = 61{,}5 \cdot \lg 9{,}667 = 61{,}5 \cdot 0{,}9853 = +60{,}6\ \mathrm{mV} \]
+
+\schritt{Schritt 2 --- Die Ruhespannung}
+Im Ruhezustand ist der Gesamtstrom null:
+\[ g_K(V-E_K) + g_{\mathrm{Na}}(V-E_{\mathrm{Na}}) = 0 \]
+\[ V\,(g_K+g_{\mathrm{Na}}) = g_KE_K + g_{\mathrm{Na}}E_{\mathrm{Na}} \]
+\[ V = \frac{g_KE_K + g_{\mathrm{Na}}E_{\mathrm{Na}}}{g_K+g_{\mathrm{Na}}} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Ruhespannung ist also ein mit den Leitfähigkeiten \kursiv{gewichtetes Mittel} der Nernst-Spannungen --- dieselbe Rechenfigur wie beim Simpson-Paradoxon in Band 17, Kapitel~3.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Einsetzen}
+Mit $g_K = 25\,g_{\mathrm{Na}}$:
+\[ V = \frac{25 \cdot (-89{,}0) + 1 \cdot 60{,}6}{26} = \frac{-2225 + 60{,}6}{26} = \frac{-2164{,}4}{26} = -83{,}2\ \mathrm{mV} \]
+
+\schritt{Schritt 4 --- Die Empfindlichkeit}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$g_K/g_{\mathrm{Na}}$ & $V$ & \\
+\midrule
+$100$ & $-87{,}5$ mV & sehr nahe an $E_K$\\
+$25$ & $-83{,}2$ mV & \\
+$10$ & $-75{,}4$ mV & \\
+$1$ & $-14{,}2$ mV & \\
+$0{,}1$ & $+47{,}0$ mV & nahe an $E_{\mathrm{Na}}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Spannung folgt stets derjenigen Ionenart, für die die Membran gerade am durchlässigsten ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der ganze Mechanismus des Aktionspotentials: Öffnen sich die Natriumkanäle, so kehrt sich das Verhältnis kurzzeitig um, und die Spannung springt Richtung $+60$ mV. Schließen sie wieder und öffnen die Kaliumkanäle, so fällt sie zurück --- vorübergehend sogar unter die Ruhespannung, weil das Verhältnis dann noch günstiger für Kalium ist als in Ruhe.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Eine klinische Anwendung}
+Steigt die äußere Kaliumkonzentration von $5$ auf $8$ mmol/l:
+\[ E_K = 61{,}5 \cdot \lg\frac{8}{140} = 61{,}5 \cdot (-1{,}2430) = -76{,}4\ \mathrm{mV} \]
+\[ V = \frac{25 \cdot (-76{,}4) + 60{,}6}{26} = \frac{-1910 + 60{,}6}{26} = -71{,}1\ \mathrm{mV} \]
+
+Die Zelle wird um $12$ mV depolarisiert --- näher an die Schwelle.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Daher die Gefährlichkeit einer erhöhten Kaliumkonzentration im Blut: Die Zellen liegen näher an der Schwelle und werden zunächst übererregbar, bei weiterem Anstieg dann unerregbar --- der Depolarisationsblock aus Abschnitt 12.4. Am Herzen ist das lebensbedrohlich.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.2 --- Die Feuerschwelle verschieben}
+Wie ändert sich der Bereich des Dauerfeuers, wenn $\varepsilon$ von $0{,}08$ auf $0{,}3$ steigt? Deuten Sie das Ergebnis.
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingung}
+Nach Satz 12.3 liegt die Hopf-Bifurkation bei
+\[ v^{*2} = 1 - \varepsilon b \]
+
+\schritt{Schritt 2 --- Die beiden Fälle}
+\[ \varepsilon = 0{,}08: \quad v^{*} = \pm\sqrt{1-0{,}064} = \pm 0{,}9675 \]
+\[ \varepsilon = 0{,}30: \quad v^{*} = \pm\sqrt{1-0{,}24} = \pm\sqrt{0{,}76} = \pm 0{,}8718 \]
+
+\schritt{Schritt 3 --- Die zugehörigen Ströme}
+Mit $I = \frac{v+a}{b} - v + \frac{v^3}{3}$:
+
+\kursiv{Für $v = -0{,}8718$:}
+\[ w = \frac{-0{,}8718+0{,}7}{0{,}8} = -0{,}2148 \]
+\[ v^3/3 = \frac{-0{,}6626}{3} = -0{,}2209 \]
+\[ I = -0{,}2148 + 0{,}8718 - 0{,}2209 = 0{,}4361 \]
+
+\kursiv{Für $v = +0{,}8718$:}
+\[ w = \frac{1{,}5718}{0{,}8} = 1{,}9648, \qquad I = 1{,}9648 - 0{,}8718 + 0{,}2209 = 1{,}3139 \]
+
+\schritt{Schritt 4 --- Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.0cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+$\varepsilon$ & \textbf{unten} & \textbf{oben} & \textbf{Breite}\\
+\midrule
+$0{,}08$ & $0{,}331$ & $1{,}419$ & $1{,}088$\\
+$0{,}30$ & $0{,}436$ & $1{,}314$ & $0{,}878$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine schnellere Erholung verengt den Bereich des Dauerfeuers von beiden Seiten.}
+\end{minipage}
+\end{center}
+
+Der Grund: $w$ folgt der Spannung rascher und bremst früher. Die verzögerte Rückkopplung, die das Schwingen erzeugt, wird schwächer.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $\varepsilon b > 1$ --- also $\varepsilon > 1{,}25$ --- verschwindet der Bereich ganz: Dann hat $v^{*2} = 1-\varepsilon b$ keine reelle Lösung, und die Ruhelage ist für \kursiv{jeden} Strom stabil. Die Zelle wäre dann nicht mehr erregbar. Das ist der rechnerische Kern dessen, was ein dämpfender Wirkstoff bewirkt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Der Grenzwert}
+\[ \varepsilon_c = \frac{1}{b} = \frac{1}{0{,}8} = 1{,}25 \]
+
+\kursiv{Probe bei $\varepsilon = 1{,}25$:} $v^{*2} = 1 - 1{,}25\cdot0{,}8 = 0$, also $v^{*} = 0$ --- die beiden Bifurkationspunkte fallen zusammen und verschwinden danach. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.3 --- Die passive Antwort}
+Eine Zelle mit $\tau = 10$ ms und Ruhespannung $-70$ mV erhält einen Strom, der die Spannung auf $-50$ mV treiben würde. Die Schwelle liegt bei $-55$ mV. Wird die Zelle erregt --- und wann?
+
+\loesung
+\schritt{Schritt 1 --- Die Lösung aufstellen}
+Nach Satz 12.1:
+\[ V(t) = V_\infty + (V_0-V_\infty)\,e^{-t/\tau} = -50 + (-70+50)\,e^{-t/10} = -50 - 20\,e^{-t/10} \]
+mit $t$ in Millisekunden.
+
+\schritt{Schritt 2 --- Die Probe}
+\[ V(0) = -50 - 20 = -70 \quad \checkmark \qquad V(\infty) = -50 \quad \checkmark \]
+
+\schritt{Schritt 3 --- Wann die Schwelle erreicht wird}
+\[ -55 = -50 - 20\,e^{-t/10} \]
+\[ -5 = -20\,e^{-t/10} \quad\Longrightarrow\quad e^{-t/10} = 0{,}25 \]
+\[ -\frac{t}{10} = \ln 0{,}25 = -1{,}386 \quad\Longrightarrow\quad t = 13{,}86\ \mathrm{ms} \]
+
+\textbf{Ja, nach knapp $14$ ms.}
+
+\schritt{Schritt 4 --- Die Kontrolle in Zeitkonstanten}
+Von $-70$ auf $-50$ ist die Spanne $20$ mV; bis $-55$ sind $15$ mV zurückzulegen, also $75\,\%$. Nach der Tabelle aus Kapitel~10 entspricht das genau zwei Zeitkonstanten:
+\[ t = 2 \cdot 10 = 20\ \mathrm{ms}\ ? \]
+
+Das stimmt nicht. Prüfen wir: $1 - e^{-2} = 0{,}865$, also $86{,}5\,\%$. Zwei Zeitkonstanten wären zu viel.
+
+\kursiv{Richtig:} $75\,\%$ entspricht $e^{-t/\tau} = 0{,}25$, also $t/\tau = \ln 4 = 1{,}386$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Verwechslung ist lehrreich: $75\,\%$ ist der Wert nach \kursiv{zwei Halbwertszeiten}, nicht nach zwei Zeitkonstanten. Es gilt $t_{1/2} = \tau\ln 2 = 6{,}93$ ms. Zeitkonstante und Halbwertszeit unterscheiden sich um den Faktor $\ln 2$ --- ein Fehler, der leicht unterläuft.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Ein schwächerer Reiz}
+Würde der Strom die Spannung nur auf $-58$ mV treiben:
+\[ V(t) = -58 - 12\,e^{-t/10} \]
+Der Endwert $-58$ liegt \kursiv{unter} der Schwelle $-55$. Die Zelle wird nie erregt, gleichgültig wie lange gereizt wird.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es gibt eine Mindeststromstärke, unterhalb derer keine Erregung möglich ist} --- die \Begriff{Rheobase}.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Strom-Zeit-Beziehung}
+Aus der Lösung folgt allgemein: Ist $V_\infty$ um den Faktor $q > 1$ über der Schwelle, so wird sie erreicht bei
+\[ t = \tau\,\ln\frac{q}{q-1} . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Reiz} & $q$ & \textbf{Zeit}\\
+\midrule
+knapp über Rheobase & $1{,}1$ & $24{,}0$ ms\\
+$1{,}33$-fach & $1{,}33$ & $13{,}9$ ms\\
+doppelt & $2$ & $6{,}9$ ms\\
+vierfach & $4$ & $2{,}9$ ms\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Beziehung zwischen Reizstärke und nötiger Reizdauer wird in der Neurologie gemessen und heißt \kursiv{Reizzeit-Spannungs-Kurve}. Die Zeit bei doppelter Rheobase --- hier $6{,}9$ ms --- heißt \Begriff{Chronaxie} und ist eine Kennzahl der Erregbarkeit. Sie beträgt genau $\tau\ln 2$, also die Halbwertszeit der Membran.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Tintenfisch und zwei Sommer}
+\Person{Alan Hodgkin} (1914--1998) und \Person{Andrew Huxley} (1917--2012) begannen ihre Untersuchungen 1939 an der Meeresstation in Plymouth. Ihr Versuchsobjekt war das Riesenaxon des Tintenfischs --- mit bis zu einem Millimeter Durchmesser dick genug, um eine Elektrode einzuführen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie maßen als Erste die Spannung im Inneren einer Nervenzelle und fanden etwas Unerwartetes: Das Aktionspotential schießt über null hinaus ins Positive. Die damals herrschende Lehre sagte, die Membran werde lediglich vorübergehend für alle Ionen durchlässig --- dann hätte die Spannung höchstens null erreichen dürfen.}
+\end{minipage}
+\end{center}
+
+Der Krieg unterbrach die Arbeit für sieben Jahre. Erst 1948 und 1949 --- in zwei Sommern in Plymouth --- entstanden die Messungen, auf denen das Modell beruht.
+
+\schritt{Die Rechnung}
+Huxley löste die vier Gleichungen 1951 von Hand an einer mechanischen Tischrechenmaschine. Für einen einzigen Spannungsverlauf brauchte er etwa drei Wochen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er berichtete später, der entscheidende Augenblick sei gewesen, als die errechnete Kurve erstmals von selbst einen vollständigen Ausschlag erzeugte --- mit Überschießen, Rückkehr und Nachschwankung, ohne dass etwas davon eingebaut worden wäre. Die vier Gleichungen und die gemessenen Parameter hatten gereicht.}
+\end{minipage}
+\end{center}
+
+Hodgkin und Huxley erhielten 1963 den Nobelpreis. Ihre Arbeit von 1952 gilt als eine der erfolgreichsten mathematischen Modellierungen der Biologie überhaupt.
+
+\schritt{Die Vereinfachung}
+\Person{Richard FitzHugh} veröffentlichte 1961 die Reduktion auf zwei Gleichungen; \Person{Jin-ichi Nagumo} baute 1962 unabhängig eine elektrische Schaltung mit demselben Verhalten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{FitzHughs Begründung war didaktisch: Mit vier Gleichungen lässt sich kein Phasenporträt zeichnen. Er fasste die schnelle Aktivierung $m$ mit der Spannung zusammen und die beiden langsamen Größen $h$ und $n$ zu einer --- und behielt damit genau die Trennung in schnell und langsam, auf der alles beruht.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Erregbarkeit heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Herzmodelle} & Modelle einzelner Herzmuskelzellen umfassen heute Dutzende von Strömen; sie werden zur Prüfung von Arzneistoffen auf Rhythmusgefährdung eingesetzt.\\
+\textbf{Ganze Organe} & Aus Zellmodellen und Bildgebung zusammengesetzte Herzmodelle --- zur Planung von Eingriffen bei Rhythmusstörungen.\\
+\textbf{Netzwerke} & Tausende gekoppelter Zellmodelle; die Frage ist, welche Muster dabei entstehen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Seit etwa 2013 wird geprüft, ob Zellmodelle die herkömmliche Prüfung auf Rhythmusgefährdung ersetzen oder ergänzen können. Der bisherige Prüfansatz --- die Wirkung auf einen einzelnen Ionenkanal --- hatte wirksame Stoffe aussortiert, die in Wahrheit unbedenklich waren.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Grund ist genau das Zusammenspiel aus Kapitel~6: Ein Stoff, der einen Strom hemmt und einen gegenläufigen ebenfalls, kann die Gesamtwirkung aufheben. Nur ein Modell, das beide enthält, sieht das --- die Betrachtung eines einzelnen Kanals nicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Rechenzeit}
+Was Huxley drei Wochen kostete, dauert heute Millisekunden. Ein vollständiges Herzmodell mit Millionen von Zellen läuft in Stunden.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Beschränkung hat sich damit verschoben --- von der Rechenzeit zu den Parametern. Ein Modell mit hundert Strömen braucht hunderte von Messgrößen, und viele davon stammen aus verschiedenen Zellarten, Temperaturen und Jahrzehnten. Das ist die dritte Warnung aus dem Vorwort, nun in der Herzmodellierung.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Nernst} & Gleichgewichtsspannung je Ionenart\\
+\textbf{Satz 12.1} & passive Membran als Anflutung, $\tau = R_mC_m$\\
+\textbf{Definition 12.2} & FitzHugh-Nagumo: schnell und langsam\\
+\textbf{Satz 12.3} & Hopf-Bifurkation bei $v^{*2} = 1-\varepsilon b$\\
+\textbf{Erregbarkeit} & Schwelle ohne Schwellenwert\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~IV. Ab Kapitel~13 geht es um Wachstum, das man nicht will --- und um die Frage, warum eine Behandlung, die alles vernichten soll, manchmal weniger erreicht als eine, die eindämmt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,734 @@
+\chapter{Andere Zielgrößen}
+
+\section{Wenn die Antwort ja oder nein lautet}
+
+\begin{warnung}
+\boxtitelr{Warum die lineare Regression hier versagt}
+Wir kodieren \code{BEDARF} als $1$ für ja und $0$ für nein und setzen eine Gerade an:
+\[ \hat y = a + b\,x . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Unmögliche Werte} & Die Gerade liefert für große oder kleine $x$ Werte über $1$ und unter $0$. Eine Wahrscheinlichkeit kann das nicht sein.\\
+\textbf{Streuung nicht konstant} & Bei einem binären Merkmal ist $\Var = \pi(1-\pi)$ --- sie hängt vom Wert ab und ist am Rand klein. Die Voraussetzung aus Kapitel~10 ist verletzt.\\
+\textbf{Falsche Form} & Der Zusammenhang ist selten geradlinig: Zwischen $0{,}01$ und $0{,}02$ liegt ein anderer Unterschied als zwischen $0{,}50$ und $0{,}51$.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{warnung}
+
+\begin{definition}
+\boxtitelm{Definition 11.1 --- Chance und Chancenverhältnis}
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item Die \Begriff{Chance} (englisch \kursiv{odds}) zu einer Wahrscheinlichkeit $\pi$ ist
+\[ \mathrm{odds} = \frac{\pi}{1-\pi} . \]
+\item Das \Begriff{Chancenverhältnis} (\Begriff{Odds Ratio}) zweier Gruppen ist der Quotient ihrer Chancen.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum man die Chance nimmt}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{3.4cm}@{}}
+\toprule
+$\pi$ & $\mathrm{odds}$ & \\
+\midrule
+$0{,}01$ & $0{,}0101$ & \\
+$0{,}25$ & $0{,}333$ & \\
+$0{,}50$ & $1{,}000$ & \\
+$0{,}75$ & $3{,}000$ & \\
+$0{,}99$ & $99{,}0$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Wahrscheinlichkeit ist auf $[0,1]$ beschränkt, die Chance auf $[0,\infty)$. Logarithmiert man sie, so ist der Wertebereich ganz $\mathbb{R}$:
+\[ \operatorname{logit}(\pi) = \ln\frac{\pi}{1-\pi} \;\in\; (-\infty, \infty) . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist das erste Problem gelöst: Auf der Logit-Skala darf man ungehindert eine Gerade anpassen, und jede Vorhersage lässt sich zurückrechnen in eine Wahrscheinlichkeit zwischen null und eins.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 11.2 --- das logistische Modell}
+\[ \ln\frac{\pi_i}{1-\pi_i} \;=\; \alpha + \beta_1 x_{i1} + \cdots + \beta_k x_{ik} \]
+Zurückgerechnet:
+\[ \pi_i = \frac{1}{1 + e^{-(\alpha + \beta_1x_{i1}+\cdots)}} . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Form der Kurve}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (-3.4,0) -- (3.4,0);
+\draw[grau!60, line width=0.7pt] (0,-0.2) -- (0,3.2);
+\draw[grau!50, dashed, line width=0.6pt] (-3.4,3.0) -- (3.4,3.0);
+\draw[tief, line width=1.3pt, smooth, samples=80, domain=-3.3:3.3]
+  plot (\x, {3.0/(1+exp(-1.8*\x))});
+\node[font=\scriptsize, color=grau] at (-0.35,3.0) {$1$};
+\node[font=\scriptsize, color=grau] at (-0.35,1.5) {$0{,}5$};
+\node[font=\scriptsize, color=grau] at (-0.25,-0.28) {$0$};
+\node[font=\scriptsize\itshape, color=grau] at (0,-0.75) {Wert der Geraden $\alpha + \beta x$};
+\end{tikzpicture}
+\end{center}
+
+Die Kurve ist $S$-förmig, bleibt stets zwischen null und eins und ist in der Mitte am steilsten. Das entspricht der Anschauung: In der Nähe von $0{,}5$ bewirkt eine kleine Änderung der erklärenden Größe viel, an den Rändern wenig.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Deutung der Koeffizienten}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$e^{\beta}$ ist das Chancenverhältnis je Einheit von $x$ --- bei festgehaltenen übrigen Größen.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+Erhöht man $x_1$ um eins, so wächst die linke Seite um $\beta_1$:
+\[ \ln(\mathrm{odds}_{\text{neu}}) - \ln(\mathrm{odds}_{\text{alt}}) = \beta_1 \]
+\[ \ln\frac{\mathrm{odds}_{\text{neu}}}{\mathrm{odds}_{\text{alt}}} = \beta_1 \quad\Longrightarrow\quad \frac{\mathrm{odds}_{\text{neu}}}{\mathrm{odds}_{\text{alt}}} = e^{\beta_1} . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{3.4cm}@{}}
+\toprule
+$\beta$ & $e^{\beta}$ & \\
+\midrule
+$0$ & $1{,}00$ & kein Zusammenhang\\
+$0{,}69$ & $2{,}00$ & Chance verdoppelt\\
+$-0{,}69$ & $0{,}50$ & Chance halbiert\\
+$1{,}10$ & $3{,}00$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die MOBIL-Daten}
+Bedarf an zusätzlichen Schmerzmitteln:
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+& \textbf{ja} & \textbf{nein} & \textbf{Summe}\\
+\midrule
+A & $27$ & $33$ & $60$\\
+B & $15$ & $45$ & $60$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 1 --- Die Chancen}
+\[ \mathrm{odds}_A = \frac{27}{33} = 0{,}8182, \qquad \mathrm{odds}_B = \frac{15}{45} = 0{,}3333 \]
+
+\schritt{Schritt 2 --- Das Chancenverhältnis}
+\[ \mathrm{OR} = \frac{0{,}8182}{0{,}3333} = 2{,}455 \]
+
+Die Kreuzproduktformel liefert dasselbe:
+\[ \mathrm{OR} = \frac{27 \cdot 45}{33 \cdot 15} = \frac{1215}{495} = 2{,}4545 . \quad \checkmark \]
+
+\schritt{Schritt 3 --- Das Konfidenzintervall}
+Man rechnet auf der logarithmischen Skala, weil die Verteilung dort annähernd symmetrisch ist.
+\[ \ln \mathrm{OR} = \ln 2{,}4545 = 0{,}8979 \]
+\[ \widehat{\mathrm{SE}} = \sqrt{\frac{1}{27}+\frac{1}{33}+\frac{1}{15}+\frac{1}{45}} = \sqrt{0{,}03704+0{,}03030+0{,}06667+0{,}02222} \]
+\[ = \sqrt{0{,}15623} = 0{,}3953 \]
+\[ 0{,}8979 \pm 1{,}96 \cdot 0{,}3953 = 0{,}8979 \pm 0{,}7747 \quad\Longrightarrow\quad [\,0{,}1232\ ;\ 1{,}6726\,] \]
+
+\schritt{Schritt 4 --- Zurückrechnen}
+\[ e^{0{,}1232} = 1{,}131, \qquad e^{1{,}6726} = 5{,}327 \]
+\[ \mathrm{OR} = 2{,}45 \quad (95\,\%\text{-KI } 1{,}13 \text{ bis } 5{,}33) \]
+
+\schritt{Die Deutung}
+Die Chance auf zusätzlichen Schmerzmittelbedarf ist unter dem bisherigen Schema etwa zweieinhalbmal so groß. Das Intervall schließt die Eins nicht ein --- gleichbedeutend mit $p < 0{,}05$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie die Asymmetrie des Intervalls: von $1{,}13$ bis $5{,}33$, mit dem Schätzer bei $2{,}45$. Auf der logarithmischen Skala ist es symmetrisch; zurückgerechnet ist es das nicht. Das ist richtig so --- Chancenverhältnisse sind multiplikative Größen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Chancenverhältnis ist nicht Risikoverhältnis}
+Dies ist die häufigste Fehldeutung der medizinischen Statistik.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Risiko\-verhältnis} & $\mathrm{RR} = \dfrac{\pi_A}{\pi_B}$ --- das Verhältnis der Wahrscheinlichkeiten\\[6pt]
+\textbf{Chancen\-verhältnis} & $\mathrm{OR} = \dfrac{\pi_A/(1-\pi_A)}{\pi_B/(1-\pi_B)}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Im Beispiel}
+\[ \mathrm{RR} = \frac{0{,}45}{0{,}25} = 1{,}80 \qquad \text{gegen} \qquad \mathrm{OR} = 2{,}45 \]
+
+Das Chancenverhältnis übertreibt den Effekt um mehr als ein Drittel.
+
+\schritt{Wann der Unterschied klein ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.8cm}@{}}
+\toprule
+$\pi_B$ & $\pi_A$ & $\mathrm{RR}$ & $\mathrm{OR}$ & \textbf{Abwei\-chung}\\
+\midrule
+$0{,}01$ & $0{,}02$ & $2{,}00$ & $2{,}02$ & \textcolor{gruen}{$1\,\%$}\\
+$0{,}10$ & $0{,}20$ & $2{,}00$ & $2{,}25$ & $13\,\%$\\
+$0{,}25$ & $0{,}45$ & $1{,}80$ & $2{,}45$ & $36\,\%$\\
+$0{,}40$ & $0{,}80$ & $2{,}00$ & $6{,}00$ & \textcolor{akzent}{$200\,\%$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei seltenen Ereignissen sind beide fast gleich. Bei häufigen übertreibt das Chancenverhältnis erheblich.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum man es trotzdem benutzt}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Fall-Kontroll-Studien} & Dort lässt sich das Risiko nicht schätzen, das Chancenverhältnis schon. Kapitel~12 erklärt warum.\\
+\textbf{Rechenbarkeit} & Es fällt unmittelbar aus dem logistischen Modell.\\
+\textbf{Symmetrie} & Es ändert sich nicht, wenn man Ereignis und Nichtereignis vertauscht.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Empfehlung lautet: Bei häufigen Ereignissen zusätzlich das Risikoverhältnis oder die absolute Differenz angeben. Ein Chancenverhältnis von $2{,}45$ klingt nach mehr als \enquote{$45$ statt $25$ Prozent} --- und Letzteres ist die Zahl, die eine Entscheidung trägt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Zeit bis zu einem Ereignis}
+
+\begin{merksatz}
+\boxtitel{Was hier anders ist}
+Die Mobilisationszeit ist eine Zeitdauer. Bei manchen Personen weiß man sie nicht --- weil die Beobachtung endete, bevor das Ereignis eintrat.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Verlegung} & Die Person wurde nach $19$ Stunden in eine andere Klinik verlegt, noch nicht mobilisiert.\\
+\textbf{Studienende} & Die Beobachtung endete, bevor das Ereignis eintrat.\\
+\textbf{Abbruch} & Die Person zog die Einwilligung zurück.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+In allen drei Fällen weiß man: \textbf{Die wahre Zeit ist \kursiv{größer} als die beobachtete.} Man nennt solche Beobachtungen \Begriff{zensiert}.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Zwei naheliegende Behandlungen, beide falsch}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Weglassen} & Man wirft die zensierten Fälle weg. Das verzerrt: Gerade die langsamen Fälle werden bevorzugt zensiert, das Ergebnis wird zu günstig.\\
+\textbf{Als Ereignis zählen} & Man behandelt $19^+$ wie $19$. Das unterschätzt die Zeit systematisch.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zensierte Beobachtung enthält Auskunft --- nämlich dass die Person die ersten $19$ Stunden ohne Ereignis überstanden hat. Diese Auskunft will man nutzen, ohne etwas zu erfinden. Genau das leistet das Verfahren von Kaplan und Meier.}
+\end{minipage}
+\end{center}
+
+\schritt{Die stillschweigende Voraussetzung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zensierung muss \kursiv{uninformativ} sein:} Der Grund für das Ausscheiden darf nichts mit der Zielgröße zu tun haben.
+\end{minipage}
+\end{center}
+
+Wird jemand verlegt, \kursiv{weil} es ihm schlecht geht, so ist diese Voraussetzung verletzt --- und kein Verfahren repariert das. Die Annahme ist nicht aus den Daten prüfbar.
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Der Schätzer von Kaplan und Meier}
+\schritt{Der Grundgedanke}
+Man zerlegt das Überstehen einer langen Zeit in viele kleine Schritte:
+\[ S(t) = \Pr[\text{Ereignis tritt nach } t \text{ ein}] = \prod_{t_j \le t}\left(1 - \frac{d_j}{n_j}\right) \]
+mit
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.4cm}P{6.8cm}@{}}
+\toprule
+$t_j$ & Zeitpunkte, zu denen Ereignisse eintraten\\
+$d_j$ & Anzahl der Ereignisse zu diesem Zeitpunkt\\
+$n_j$ & Anzahl der \kursiv{Risikopersonen} unmittelbar davor\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Warum ein Produkt}
+Um $t$ zu überstehen, muss man jeden einzelnen Zeitpunkt davor überstanden haben. Die Wahrscheinlichkeiten multiplizieren sich --- wie bei einer Kette von Bedingungen.
+
+\schritt{Was mit den Zensierten geschieht}
+Sie zählen zum Nenner $n_j$, solange sie beobachtet werden, und scheiden danach still aus. Sie erscheinen nie im Zähler $d_j$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein vollständiges Beispiel}
+Zehn Personen der Gruppe A, Zeit bis zur Mobilisation in Stunden. Ein Pluszeichen bedeutet zensiert:
+\[ 15,\quad 18,\quad 19^{+},\quad 21,\quad 24,\quad 26^{+},\quad 28,\quad 31,\quad 33^{+},\quad 35 \]
+
+\schritt{Die Tabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.2cm}P{1.4cm}P{1.2cm}P{2.4cm}P{1.8cm}@{}}
+\toprule
+$t_j$ & $n_j$ & $d_j$ & $1 - d_j/n_j$ & $S(t_j)$\\
+\midrule
+$15$ & $10$ & $1$ & $9/10 = 0{,}900$ & $0{,}900$\\
+$18$ & $9$ & $1$ & $8/9 = 0{,}889$ & $0{,}800$\\
+$19$ & $8$ & $0$ & \textcolor{grau}{zensiert} & $0{,}800$\\
+$21$ & $7$ & $1$ & $6/7 = 0{,}857$ & $0{,}686$\\
+$24$ & $6$ & $1$ & $5/6 = 0{,}833$ & $0{,}571$\\
+$26$ & $5$ & $0$ & \textcolor{grau}{zensiert} & $0{,}571$\\
+$28$ & $4$ & $1$ & $3/4 = 0{,}750$ & $\mathbf{0{,}429}$\\
+$31$ & $3$ & $1$ & $2/3 = 0{,}667$ & $0{,}286$\\
+$33$ & $2$ & $0$ & \textcolor{grau}{zensiert} & $0{,}286$\\
+$35$ & $1$ & $1$ & $0/1 = 0$ & $0{,}000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Rechnung für $t = 24$, ausgeschrieben}
+\[ S(24) = \frac{9}{10}\cdot\frac{8}{9}\cdot\frac{6}{7}\cdot\frac{5}{6} = 0{,}900 \cdot 0{,}889 \cdot 0{,}857 \cdot 0{,}833 = 0{,}571 \]
+
+\schritt{Die Kurve}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (7.4,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.3);
+\foreach \y/\lab in {0/0, 0.75/{0{,}25}, 1.5/{0{,}50}, 2.25/{0{,}75}, 3.0/{1{,}00}}
+  \node[font=\scriptsize, color=grau] at (-0.55,\y) {\lab};
+\foreach \x/\lab in {0.8/15, 2.2/20, 3.6/25, 5.0/30, 6.4/35}
+  \node[font=\scriptsize, color=grau] at (\x,-0.32) {\lab};
+\draw[tief, line width=1.3pt]
+ (0,3.0) -- (0.8,3.0) -- (0.8,2.7) -- (1.64,2.7) -- (1.64,2.4) --
+ (2.48,2.4) -- (2.48,2.057) -- (3.32,2.057) -- (3.32,1.714) --
+ (4.44,1.714) -- (4.44,1.286) -- (5.28,1.286) -- (5.28,0.857) --
+ (6.4,0.857) -- (6.4,0);
+\foreach \x/\y in {1.92/2.4, 4.16/1.714, 5.84/0.857} {
+  \draw[akzent, line width=1.1pt] (\x,\y-0.13) -- (\x,\y+0.13);
+}
+\draw[grau!55, dashed, line width=0.6pt] (0,1.5) -- (4.44,1.5);
+\draw[grau!55, dashed, line width=0.6pt] (4.44,0) -- (4.44,1.5);
+\node[font=\scriptsize, color=grau] at (4.44,-0.62) {Median $28$};
+\node[font=\scriptsize\itshape, color=akzent] at (6.9,2.0) {$|$ zensiert};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Die mediane Zeit ablesen}
+Man sucht den ersten Zeitpunkt, an dem die Kurve auf $0{,}5$ oder darunter fällt: bei $t = 28$ Stunden.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man berichtet den Median, nicht den Mittelwert. Der Grund: Endet die Beobachtung mit einer zensierten Person, so ist die Kurve nie bei null angelangt, und der Mittelwert ist gar nicht schätzbar. Der Median braucht nur, dass die Kurve unter $0{,}5$ fällt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Log-Rang-Test}
+Zum Vergleich zweier Kurven benutzt man den \Begriff{Log-Rang-Test}. Sein Gedanke:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Zu jedem Ereigniszeitpunkt bildet man eine Vierfeldertafel: Gruppe gegen Ereignis.\\
+$2$ & Unter $H_0$ berechnet man die erwartete Anzahl in jeder Gruppe --- wie beim $\chi^2$-Test.\\
+$3$ & Man summiert beobachtete und erwartete Anzahlen über alle Zeitpunkte.\\
+$4$ & Die Prüfgröße vergleicht beide Summen.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Test nutzt die gesamte Kurve, nicht nur einen Zeitpunkt. Er ist am mächtigsten, wenn die Kurven sich nicht kreuzen. Kreuzen sie sich --- eine Therapie wirkt früh gut und spät schlecht ---, so kann er beides gegeneinander aufheben und nichts finden, obwohl ein deutlicher Unterschied besteht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Cox-Modell}
+
+\begin{definition}
+\boxtitelm{Definition 11.3 --- Hazard und Cox-Modell}
+Die \Begriff{Hazardrate} $h(t)$ ist die momentane Ereignisrate zum Zeitpunkt $t$ --- gegeben, dass das Ereignis bis dahin nicht eingetreten ist.
+
+Das \Begriff{Cox-Modell} lautet
+\[ h(t \mid x) \;=\; h_0(t)\cdot e^{\beta_1x_1 + \cdots + \beta_kx_k} . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum dieses Modell so erfolgreich ist}
+\begin{center}
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{$h_0$ bleibt offen} & Über den zeitlichen Verlauf wird nichts angenommen. $h_0(t)$ darf jede Form haben.\\
+\textbf{Nur das Verhältnis zählt} & Der Quotient zweier Hazardraten ist $e^{\beta}$ --- unabhängig von $t$, weil $h_0$ sich herauskürzt.\\
+\textbf{Zensierung eingebaut} & Das Verfahren verarbeitet zensierte Beobachtungen wie Kaplan-Meier.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die Deutung}
+$e^{\beta}$ heißt \Begriff{Hazard Ratio}. Ein Wert von $0{,}6$ bedeutet: Die Ereignisrate ist zu jedem Zeitpunkt um $40\,\%$ niedriger.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Nicht:} \enquote{Die Überlebenszeit ist um $40\,\%$ länger.} Das Verhältnis betrifft die Rate, nicht die Zeit. Die Umrechnung hängt von $h_0$ ab und ist selten einfach.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Annahme proportionaler Hazards}
+Der Name \enquote{proportional} steckt in der Formel: Das Verhältnis $e^\beta$ ist \kursiv{zeitunabhängig}. Trifft das nicht zu, so schätzt das Modell eine Art Durchschnitt über die Zeit, der irreführend sein kann.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Wann verletzt} & Wenn eine Behandlung früh wirkt und später nicht mehr --- oder umgekehrt.\\
+\textbf{Wie prüfen} & Kurven der logarithmierten kumulierten Hazards auftragen; sie sollten parallel verlaufen. Oder ein Test auf zeitabhängige Koeffizienten.\\
+\textbf{Was tun} & Zeitabhängige Koeffizienten, Aufteilung in Zeitabschnitte, oder ein anderes Modell.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Prüfung fehlt in einem erheblichen Teil der Veröffentlichungen, die Cox-Modelle berichten. Sie ist kein Zusatz, sondern die Voraussetzung dafür, dass die berichtete Zahl überhaupt etwas bedeutet.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Mehrebenenmodelle}
+
+\begin{merksatz}
+\boxtitel{Die Lösung für die Pseudoreplikation}
+Kapitel~4 und 8 haben den Fall aufgeschoben: mehrere Messungen je Person, mehrere Personen je Zentrum.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Ein \Begriff{Mehrebenenmodell} erlaubt jeder Person --- oder jedem Zentrum --- einen eigenen Achsenabschnitt, der selbst als zufällig behandelt wird:
+\[ y_{ij} = \alpha + u_i + \beta x_{ij} + \varepsilon_{ij} \]
+\end{minipage}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{6.8cm}@{}}
+\toprule
+$u_i$ & Die Abweichung der $i$-ten Person vom Gesamtniveau --- zufällig, mit eigener Varianz.\\
+$\varepsilon_{ij}$ & Die Abweichung der $j$-ten Messung an dieser Person.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Was das leistet}
+Die Streuung wird in zwei Anteile zerlegt: zwischen den Personen und innerhalb. Der Standardfehler berücksichtigt, dass Messungen an derselben Person einander ähneln.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und es leistet noch etwas: Die Schätzung für eine Person mit wenigen Messungen wird zum Gesamtmittel hin gezogen --- genau das Zusammenziehen aus Steins Befund in Kapitel~5. Mehrebenenmodelle sind die verbreitetste Anwendung dieses Prinzips.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- Chancenverhältnis und Risikoverhältnis}
+In einer Studie trat eine Komplikation auf bei $40$ von $100$ Personen unter A und bei $20$ von $100$ unter B. Berechnen Sie beide Kennzahlen mit Intervall und beurteilen Sie den Unterschied.
+
+\loesung
+\schritt{Schritt 1 --- Die Risiken}
+\[ \hat\pi_A = 0{,}40, \qquad \hat\pi_B = 0{,}20 \]
+
+\schritt{Schritt 2 --- Das Risikoverhältnis}
+\[ \mathrm{RR} = \frac{0{,}40}{0{,}20} = 2{,}00 \]
+\[ \widehat{\mathrm{SE}}(\ln \mathrm{RR}) = \sqrt{\frac{1-\hat\pi_A}{100\,\hat\pi_A} + \frac{1-\hat\pi_B}{100\,\hat\pi_B}} = \sqrt{\frac{0{,}60}{40} + \frac{0{,}80}{20}} \]
+\[ = \sqrt{0{,}015 + 0{,}040} = \sqrt{0{,}055} = 0{,}2345 \]
+\[ \ln 2 = 0{,}6931; \qquad 0{,}6931 \pm 1{,}96 \cdot 0{,}2345 = 0{,}6931 \pm 0{,}4596 \]
+\[ [\,e^{0{,}2335};\ e^{1{,}1527}\,] = [\,1{,}26\ ;\ 3{,}17\,] \]
+
+\schritt{Schritt 3 --- Das Chancenverhältnis}
+\[ \mathrm{OR} = \frac{40 \cdot 80}{60 \cdot 20} = \frac{3200}{1200} = 2{,}667 \]
+\[ \widehat{\mathrm{SE}}(\ln \mathrm{OR}) = \sqrt{\frac{1}{40}+\frac{1}{60}+\frac{1}{20}+\frac{1}{80}} = \sqrt{0{,}025+0{,}01667+0{,}05+0{,}0125} \]
+\[ = \sqrt{0{,}10417} = 0{,}3228 \]
+\[ \ln 2{,}667 = 0{,}9808; \qquad 0{,}9808 \pm 1{,}96 \cdot 0{,}3228 = 0{,}9808 \pm 0{,}6327 \]
+\[ [\,e^{0{,}3481};\ e^{1{,}6135}\,] = [\,1{,}42\ ;\ 5{,}02\,] \]
+
+\schritt{Schritt 4 --- Die absolute Differenz}
+\[ 0{,}40 - 0{,}20 = 0{,}20 \]
+Das ist die Größe, die eine Entscheidung trägt: Von hundert Behandelten haben zwanzig mehr eine Komplikation.
+
+\schritt{Schritt 5 --- Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{1.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Kennzahl} & \textbf{Wert} & \textbf{$95\,\%$-KI}\\
+\midrule
+Risikodifferenz & $0{,}20$ & --- \\
+Risiko\-verhältnis & $2{,}00$ & $[1{,}26;\ 3{,}17]$\\
+Chancen\-verhältnis & $\mathbf{2{,}67}$ & $[1{,}42;\ 5{,}02]$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Das Chancenverhältnis liegt um ein Drittel über dem Risikoverhältnis --- weil das Ereignis mit $20$ bis $40$ Prozent häufig ist.
+
+\schritt{Die Empfehlung}
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Man berichtet hier die Risikodifferenz und das Risikoverhältnis. Ein Chancenverhältnis von $2{,}67$ zu nennen, ohne die Häufigkeit anzugeben, wäre irreführend --- der Leser rechnet es gedanklich als Risikoverhältnis um.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- Eine Kaplan-Meier-Kurve}
+Acht Personen, Zeit bis zum Ereignis in Tagen:
+\[ 3,\quad 5^{+},\quad 7,\quad 10,\quad 12^{+},\quad 15,\quad 18^{+},\quad 20 \]
+Bestimmen Sie die Kurve und die mediane Zeit.
+
+\loesung
+\schritt{Schritt 1 --- Die Tabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.2cm}P{1.2cm}P{1.2cm}P{2.2cm}P{1.8cm}@{}}
+\toprule
+$t_j$ & $n_j$ & $d_j$ & $1-d_j/n_j$ & $S(t_j)$\\
+\midrule
+$3$ & $8$ & $1$ & $7/8 = 0{,}875$ & $0{,}875$\\
+$5$ & $7$ & $0$ & \textcolor{grau}{zensiert} & $0{,}875$\\
+$7$ & $6$ & $1$ & $5/6 = 0{,}833$ & $0{,}729$\\
+$10$ & $5$ & $1$ & $4/5 = 0{,}800$ & $\mathbf{0{,}583}$\\
+$12$ & $4$ & $0$ & \textcolor{grau}{zensiert} & $0{,}583$\\
+$15$ & $3$ & $1$ & $2/3 = 0{,}667$ & $\mathbf{0{,}389}$\\
+$18$ & $2$ & $0$ & \textcolor{grau}{zensiert} & $0{,}389$\\
+$20$ & $1$ & $1$ & $0/1 = 0$ & $0{,}000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Rechnung nachvollziehen}
+\[ S(10) = \frac{7}{8}\cdot\frac{5}{6}\cdot\frac{4}{5} = 0{,}875 \cdot 0{,}8333 \cdot 0{,}800 = 0{,}5833 \]
+\[ S(15) = 0{,}5833 \cdot \frac{2}{3} = 0{,}3889 \]
+
+\schritt{Schritt 3 --- Der Median}
+Die Kurve fällt erstmals bei $t = 15$ unter $0{,}5$ --- von $0{,}583$ auf $0{,}389$.
+
+\textbf{Mediane Zeit: $\mathbf{15}$ Tage.}
+
+\schritt{Schritt 4 --- Die Probe: Wie viele Risikopersonen?}
+Nach Ereignissen und Zensierungen abgezählt:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.2cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$t$ & \textbf{ausgeschieden} & \textbf{verbleibend}\\
+\midrule
+$3$ & $1$ Ereignis & $7$\\
+$5$ & $1$ zensiert & $6$\\
+$7$ & $1$ Ereignis & $5$\\
+$10$ & $1$ Ereignis & $4$\\
+$12$ & $1$ zensiert & $3$\\
+$15$ & $1$ Ereignis & $2$\\
+$18$ & $1$ zensiert & $1$\\
+$20$ & $1$ Ereignis & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die Spalte \enquote{verbleibend} stimmt mit den $n_j$ der nächsten Zeile überein. \checkmark
+
+\schritt{Schritt 5 --- Ein naiver Vergleich}
+Rechnete man die drei zensierten Fälle als Ereignisse, so wäre der Median der acht Werte $3,5,7,10,12,15,18,20$ gleich
+\[ \frac{10+12}{2} = 11 \ \text{Tage} . \]
+Also $11$ statt $15$ --- eine Unterschätzung um mehr als ein Viertel.
+
+Ließe man sie weg, blieben $3, 7, 10, 15, 20$ mit Median $10$ --- noch schlechter.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Beide naiven Wege verkürzen die geschätzte Zeit. Bei fünf Ereignissen und drei Zensierungen ist der Unterschied erheblich; bei Studien mit überwiegend zensierten Beobachtungen --- etwa Langzeitüberleben --- wäre er dramatisch.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Ein logistisches Modell deuten}
+Eine Auswertung liefert für das Auftreten einer Wundinfektion:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{3.0cm}P{1.6cm}P{1.6cm}P{2.0cm}@{}}
+\toprule
+\textbf{Größe} & $\beta$ & $e^{\beta}$ & \textbf{$95\,\%$-KI}\\
+\midrule
+Alter (je 10 Jahre) & $0{,}22$ & $1{,}25$ & $[1{,}08;\ 1{,}44]$\\
+Diabetes (ja) & $0{,}69$ & $2{,}00$ & $[1{,}21;\ 3{,}31]$\\
+OP-Dauer (je 30 min) & $0{,}41$ & $1{,}51$ & $[1{,}19;\ 1{,}91]$\\
+Neues Schema & $-0{,}51$ & $0{,}60$ & $[0{,}38;\ 0{,}95]$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Deuten Sie die vier Zeilen und berechnen Sie die vorhergesagte Wahrscheinlichkeit für eine Person mit gegebenen Merkmalen, wenn $\alpha = -4{,}2$ ist.
+
+\loesung
+\schritt{Schritt 1 --- Die vier Zeilen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+Alter & Je zehn Jahre steigt die Chance um $25\,\%$ --- bei gleichem Diabetesstatus, gleicher OP-Dauer, gleichem Schema.\\
+Diabetes & Die Chance ist verdoppelt.\\
+OP-Dauer & Je halbe Stunde steigt die Chance um $51\,\%$.\\
+Neues Schema & Die Chance sinkt um $40\,\%$. Das Intervall reicht bis $0{,}95$ --- knapp unter eins.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Person}
+Sagen wir: $70$ Jahre, Diabetes ja, OP-Dauer $90$ Minuten, neues Schema.
+
+Die Größen sind je Einheit kodiert. Wir müssen festlegen, worauf sich $\alpha$ bezieht; nehmen wir an, Alter zählt in Jahrzehnten ab null und OP-Dauer in Halbstunden ab null.
+\[ \text{Alter} = 7{,}0, \quad \text{Diabetes} = 1, \quad \text{OP-Dauer} = 3{,}0, \quad \text{Schema} = 1 \]
+
+\schritt{Schritt 3 --- Den Logit ausrechnen}
+\begin{align*}
+\operatorname{logit} &= -4{,}2 + 0{,}22 \cdot 7{,}0 + 0{,}69 \cdot 1 + 0{,}41 \cdot 3{,}0 + (-0{,}51)\cdot 1\\
+&= -4{,}2 + 1{,}54 + 0{,}69 + 1{,}23 - 0{,}51\\
+&= -1{,}25
+\end{align*}
+
+\schritt{Schritt 4 --- Zurückrechnen}
+\[ \pi = \frac{1}{1+e^{1{,}25}} = \frac{1}{1+3{,}490} = \frac{1}{4{,}490} = 0{,}223 \]
+
+\textbf{Etwa $22\,\%$.}
+
+\schritt{Schritt 5 --- Die Kontrollrechnung über die Chance}
+\[ \mathrm{odds} = e^{-1{,}25} = 0{,}2865 \]
+\[ \pi = \frac{0{,}2865}{1+0{,}2865} = \frac{0{,}2865}{1{,}2865} = 0{,}2227 . \quad \checkmark \]
+
+\schritt{Schritt 6 --- Was dieselbe Person unter dem alten Schema hätte}
+\[ \operatorname{logit} = -1{,}25 + 0{,}51 = -0{,}74 \]
+\[ \pi = \frac{1}{1+e^{0{,}74}} = \frac{1}{1+2{,}096} = 0{,}323 \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+& $\pi$ & \\
+\midrule
+Altes Schema & $0{,}323$ & \\
+Neues Schema & $0{,}223$ & \\
+\midrule
+Differenz & $\mathbf{0{,}100}$ & $10$ von $100$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die Lehre}
+Das Chancenverhältnis $0{,}60$ ist für alle Personen dasselbe. Die \kursiv{absolute} Wirkung ist es nicht: Bei einer Person mit geringem Grundrisiko --- etwa $5\,\%$ --- sänke es nur auf $3{,}1\,\%$, also um $1{,}9$ Punkte statt um $10$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Deshalb ist die absolute Risikodifferenz personenbezogen und das Chancenverhältnis nicht. Für die Frage \enquote{lohnt sich das für diesen Menschen?} braucht man beides --- das Modell und das Grundrisiko.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Zwei Arbeiten, die das Fach verändert haben}
+\Person{Edward Kaplan} und \Person{Paul Meier} reichten 1958 unabhängig voneinander fast dieselbe Arbeit beim selben Herausgeber ein. Dieser überzeugte beide, gemeinsam zu veröffentlichen. Die Verhandlungen dauerten vier Jahre; die Arbeit erschien schließlich im \kursiv{Journal of the American Statistical Association} und ist heute eine der meistzitierten Arbeiten der Statistik überhaupt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Paul Meier wurde später auch als entschiedener Verfechter der Randomisierung bekannt. Er setzte sich in den 1970er Jahren gegen erheblichen Widerstand dafür ein, dass klinische Studien randomisiert werden --- ein Kampf, den Kapitel~12 aufgreift.}
+\end{minipage}
+\end{center}
+
+\Person{David Cox} veröffentlichte 1972 das nach ihm benannte Modell. Der Kunstgriff --- die Grundrate $h_0(t)$ unbestimmt zu lassen und nur das Verhältnis zu schätzen --- war so ungewöhnlich, dass in der Diskussion zur Arbeit mehrere angesehene Statistiker bezweifelten, dass das überhaupt zulässig sei.
+
+Cox lieferte die theoretische Rechtfertigung zwei Jahre später nach, mit dem Begriff der \Begriff{partiellen Likelihood}. Sein Aufsatz von 1972 ist die meistzitierte Arbeit der gesamten Statistik.
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Was an diesen Modellen heute diskutiert wird}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Weg vom Chancen\-verhältnis} & Bei häufigen Ereignissen setzen sich Modelle durch, die unmittelbar das Risikoverhältnis oder die Risikodifferenz schätzen.\\
+\textbf{Konkurrierende Ereignisse} & Stirbt jemand an anderer Ursache, ist das keine gewöhnliche Zensierung. Kaplan-Meier überschätzt dann das Risiko; man braucht die kumulierte Inzidenzfunktion.\\
+\textbf{Nichtpro\-portionale Hazards} & In der Immuntherapie kreuzen sich Kurven regelmäßig. Es gibt Vorschläge für Ersatzmaße, etwa die eingeschränkte mittlere Überlebenszeit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die zweite Zeile ist eine verbreitete Fehlerquelle. Wer die Zeit bis zum Rückfall untersucht und Todesfälle anderer Ursache als zensiert behandelt, nimmt stillschweigend an, diese Personen hätten dasselbe Rückfallrisiko gehabt wie die übrigen. Bei älteren oder schwer kranken Personen trifft das nicht zu.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile betrifft ein wachsendes Feld: Bei Immuntherapien wirkt die Behandlung oft erst nach Monaten, dafür dann dauerhaft. Die Kurven liegen anfangs übereinander und trennen sich spät --- die Annahme proportionaler Hazards ist klar verletzt, und das Hazard Ratio mittelt über zwei völlig verschiedene Abschnitte.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Logit} & warum man nicht die Wahrscheinlichkeit selbst modelliert\\
+\textbf{$e^{\beta}$} & Chancenverhältnis --- und wann es das Risiko übertreibt\\
+\textbf{Zensierung} & und warum Weglassen und Mitzählen beide falsch sind\\
+\textbf{Kaplan-Meier} & vollständig von Hand gerechnet\\
+\textbf{Cox} & Hazard Ratio und die Proportionalitätsannahme\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~IV. Ab Kapitel~12 geht es nicht mehr um Rechenverfahren, sondern um die Frage, wie man Daten erhebt, aus denen sich überhaupt etwas schließen lässt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

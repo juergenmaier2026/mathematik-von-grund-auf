@@ -1,0 +1,941 @@
+\chapter{Spannbäume und wie man sie zählt}
+
+\section{Das Notrufnetz}
+
+Eine Klinik betreibt an acht Standorten Netzknoten. Zwischen manchen Paaren lässt sich eine Leitung legen; jede kostet eine bestimmte Summe. Verlangt wird: Jeder Standort muss jeden anderen erreichen können --- notfalls über Zwischenknoten. Die Gesamtkosten sollen möglichst klein sein.
+
+\begin{merksatz}
+\boxtitel{Was die Aufgabe verlangt --- übersetzt}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+Standorte & Ecken\\
+Mögliche Leitungen & Kanten\\
+Kosten & eine Zahl an jeder Kante\\
+\enquote{jeder erreicht jeden} & der gewählte Teilgraph ist zusammenhängend und enthält alle Ecken\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Kreis in der Lösung wäre Verschwendung: Nach Satz 2.14 ist jede Kante auf einem Kreis keine Brücke, ließe sich also weglassen, ohne den Zusammenhang zu verlieren. Die Lösung ist somit kreisfrei und zusammenhängend --- ein Baum, der alle Ecken enthält.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 5.1 --- Spannbaum}
+Sei $G = (V,E)$ ein Graph. Ein \Begriff{Spannbaum} von $G$ ist ein Teilgraph $T = (V, E')$ mit $E' \subseteq E$, der \kursiv{alle} Ecken von $G$ enthält und ein Baum ist.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 5.2 --- Jeder zusammenhängende Graph hat einen Spannbaum}
+\schritt{Beweis durch Abbauen}
+Sei $G$ zusammenhängend. Wir betrachten alle zusammenhängenden Teilgraphen von $G$, die \kursiv{alle} Ecken enthalten. Diese Menge ist nicht leer --- $G$ selbst gehört dazu. Unter ihnen wählen wir einen mit \kursiv{kleinstmöglicher} Kantenzahl und nennen ihn $T$.
+
+\schritt{Behauptung: $T$ ist kreisfrei}
+Angenommen, $T$ enthielte einen Kreis, und sei $e$ eine Kante dieses Kreises. Nach Satz 2.14 ist $e$ in $T$ keine Brücke. Also ist $T - e$ noch zusammenhängend, enthält weiterhin alle Ecken (das Weglassen einer Kante entfernt keine Ecke) und hat eine Kante weniger --- im Widerspruch zur Wahl von $T$.
+
+\schritt{Schluss}
+$T$ ist zusammenhängend, kreisfrei und enthält alle Ecken. Also ein Spannbaum. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach Satz 4.2 (iii) hat jeder Spannbaum eines Graphen mit $n$ Ecken genau $n-1$ Kanten --- unabhängig davon, welchen man nimmt. Ein Graph mit $m$ Kanten hat also stets $m - n + 1$ Kanten \kursiv{übrig}. Das ist Kirchhoffs zyklomatische Zahl aus Kapitel~3.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der günstigste Spannbaum}
+
+\begin{definition}
+\boxtitelm{Definition 5.3 --- Kantengewichte, minimaler Spannbaum}
+Eine \Begriff{Gewichtung} von $G$ ist eine Abbildung $w : E \to \mathbb{R}$, die jeder Kante eine Zahl zuordnet. Das \Begriff{Gewicht} eines Teilgraphen ist die Summe der Gewichte seiner Kanten. Ein \Begriff{minimaler Spannbaum} ist ein Spannbaum kleinstmöglichen Gewichts.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Das Verfahren von Kruskal}
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.2cm}P{7.2cm}@{}}
+\toprule
+1. & Sortiere alle Kanten aufsteigend nach Gewicht.\\
+2. & Beginne mit der leeren Kantenmenge $F = \varnothing$.\\
+3. & Gehe die Kanten in dieser Reihenfolge durch. Nimm die aktuelle Kante $e$ in $F$ auf, \kursiv{falls} dadurch kein Kreis entsteht; andernfalls überspringe sie.\\
+4. & Höre auf, wenn $F$ genau $n-1$ Kanten hat.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Verfahren ist \Begriff{gierig}: Es nimmt in jedem Schritt die billigste noch zulässige Kante und schaut nie zurück. Bei den meisten Optimierungsaufgaben führt so ein Vorgehen in die Irre. Hier nicht --- und der folgende Satz sagt, warum.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 5.4 --- Kruskal liefert einen minimalen Spannbaum}
+\schritt{Schritt 1 --- Das Ergebnis ist überhaupt ein Spannbaum}
+$F$ ist während des ganzen Verfahrens kreisfrei --- das ist die Regel in Zeile 3. Also ist $F$ am Ende ein Wald mit $n-1$ Kanten, und nach der Formel $m = n - c$ aus Aufgabe 4.3 hat er $c = n - (n-1) = 1$ Komponente. Ein zusammenhängender kreisfreier Graph auf allen $n$ Ecken ist ein Spannbaum.
+
+Dass man tatsächlich $n-1$ Kanten zusammenbekommt, sieht man so: Bliebe $F$ mit weniger als $n-1$ Kanten stehen, so hätte $F$ mindestens zwei Komponenten $C_1$, $C_2$. Da $G$ zusammenhängend ist, gibt es in $G$ eine Kante zwischen zwei verschiedenen Komponenten von $F$; diese hätte kein Kreis geschlossen und wäre aufgenommen worden.
+
+\schritt{Schritt 2 --- Die Bezeichnungen für den Kern des Beweises}
+Sei $F = \{f_1, f_2, \ldots, f_{n-1}\}$ das Ergebnis, in der Reihenfolge der Aufnahme, also
+\[ w(f_1) \le w(f_2) \le \cdots \le w(f_{n-1}) . \]
+Sei $T^{*}$ ein minimaler Spannbaum. Zu zeigen: $w(F) \le w(T^{*})$.
+
+\schritt{Schritt 3 --- Den minimalen Spannbaum an $F$ heranschieben}
+Wir wählen unter allen minimalen Spannbäumen einen, der mit $F$ \kursiv{möglichst viele} Kanten gemeinsam hat, und nennen ihn wieder $T^{*}$.
+
+Angenommen, $T^{*} \neq F$. Dann gibt es einen kleinsten Index $k$ mit $f_k \notin T^{*}$ --- die ersten $k-1$ Kruskal-Kanten liegen also in $T^{*}$, die $k$-te nicht.
+
+\schritt{Schritt 4 --- Die Kante $f_k$ einfügen}
+Nach Satz 4.5 entsteht in $T^{*} + f_k$ genau ein Kreis $C$. Dieser Kreis enthält $f_k$.
+
+\schritt{Schritt 5 --- Eine passende Kante zum Herausnehmen finden}
+Behauptung: $C$ enthält eine Kante $g$, die nicht zu $F$ gehört.
+
+Angenommen doch --- alle Kanten von $C$ lägen in $F$. Dann enthielte $F$ einen Kreis, im Widerspruch zur Kreisfreiheit von $F$.
+
+Also gibt es $g \in C$ mit $g \notin F$, und wegen $f_k \in F$ ist $g \neq f_k$.
+
+\schritt{Schritt 6 --- Der Gewichtsvergleich}
+Behauptung: $w(f_k) \le w(g)$.
+
+Warum? Betrachten wir den Zeitpunkt, zu dem Kruskal die Kante $f_k$ aufnahm. Zu diesem Zeitpunkt bestand $F$ aus $f_1, \ldots, f_{k-1}$. Hätte $g$ ein kleineres Gewicht als $f_k$, so wäre $g$ vorher an der Reihe gewesen. Kruskal hätte sie geprüft und --- da sie nicht in $F$ landete --- verworfen, weil sie mit $f_1, \ldots, f_{j}$ für ein $j < k$ einen Kreis geschlossen hätte.
+
+Nun liegen aber $f_1, \ldots, f_{k-1}$ alle in $T^{*}$ (Wahl von $k$ in Schritt 3), und $g$ liegt in $T^{*}$ (denn $g \in C \subseteq T^{*} + f_k$ und $g \neq f_k$). Ein Kreis aus $g$ und einigen der $f_1, \ldots, f_{k-1}$ läge damit ganz in $T^{*}$ --- Widerspruch zur Kreisfreiheit von $T^{*}$.
+
+Also war $g$ nicht vor $f_k$ an der Reihe, das heißt $w(g) \ge w(f_k)$.
+
+\schritt{Schritt 7 --- Der Austausch}
+Wir setzen
+\[ T' = T^{*} + f_k - g . \]
+Das ist wieder ein Spannbaum: Die Kante $g$ liegt auf dem Kreis $C$ von $T^{*} + f_k$, ist dort also keine Brücke (Satz 2.14); $T'$ bleibt zusammenhängend, hat $n-1$ Kanten und ist damit nach Satz 4.2 (iii) ein Baum.
+
+Sein Gewicht ist
+\[ w(T') = w(T^{*}) + w(f_k) - w(g) \;\le\; w(T^{*}), \]
+denn $w(f_k) - w(g) \le 0$ nach Schritt 6.
+
+\schritt{Schritt 8 --- Der Widerspruch}
+$T^{*}$ war minimal, also ist $w(T') \ge w(T^{*})$ und damit $w(T') = w(T^{*})$: auch $T'$ ist ein minimaler Spannbaum.
+
+Aber $T'$ hat mit $F$ eine Kante mehr gemeinsam als $T^{*}$ --- es kam $f_k \in F$ hinzu und es fiel $g \notin F$ weg. Das widerspricht der Wahl von $T^{*}$ in Schritt 3.
+
+\schritt{Schritt 9 --- Schluss}
+Die Annahme $T^{*} \neq F$ ist falsch. Also ist $F$ selbst ein minimaler Spannbaum. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das Notrufnetz, durchgerechnet}
+Acht Standorte, mögliche Leitungen mit Kosten in Tausend Euro:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+\node[knotenb] (a) at (-2.2,1.0) {$a$};
+\node[knotenb] (b) at (-0.8,1.5) {$b$};
+\node[knotenb] (c) at (0.8,1.3) {$c$};
+\node[knotenb] (d) at (2.2,0.8) {$d$};
+\node[knotenb] (e) at (-2.0,-0.5) {$e$};
+\node[knotenb] (f) at (-0.5,-0.9) {$f$};
+\node[knotenb] (g) at (1.0,-0.7) {$g$};
+\node[knotenb] (h) at (2.3,-0.3) {$h$};
+\draw[kante] (a)--(b) node[midway,above,font=\scriptsize,color=grau] {$7$};
+\draw[kante] (b)--(c) node[midway,above,font=\scriptsize,color=grau] {$4$};
+\draw[kante] (c)--(d) node[midway,above,font=\scriptsize,color=grau] {$9$};
+\draw[kante] (a)--(e) node[midway,left,font=\scriptsize,color=grau] {$3$};
+\draw[kante] (e)--(f) node[midway,below,font=\scriptsize,color=grau] {$2$};
+\draw[kante] (f)--(g) node[midway,below,font=\scriptsize,color=grau] {$6$};
+\draw[kante] (g)--(h) node[midway,below,font=\scriptsize,color=grau] {$5$};
+\draw[kante] (b)--(f) node[midway,left,font=\scriptsize,color=grau] {$8$};
+\draw[kante] (c)--(g) node[midway,right,font=\scriptsize,color=grau] {$1$};
+\draw[kante] (d)--(h) node[midway,right,font=\scriptsize,color=grau] {$10$};
+\draw[kante] (a)--(f) node[pos=0.35,below,font=\scriptsize,color=grau] {$11$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Schritt 1 --- Sortieren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.4cm}P{1.2cm}P{1.4cm}P{1.2cm}P{1.4cm}P{1.2cm}@{}}
+\toprule
+\textbf{Kante} & \textbf{$w$} & \textbf{Kante} & \textbf{$w$} & \textbf{Kante} & \textbf{$w$}\\
+\midrule
+$cg$ & $1$ & $bc$ & $4$ & $ab$ & $7$\\
+$ef$ & $2$ & $gh$ & $5$ & $bf$ & $8$\\
+$ae$ & $3$ & $fg$ & $6$ & $cd$ & $9$\\
+& & & & $dh$ & $10$\\
+& & & & $af$ & $11$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Durchgehen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.3cm}P{0.9cm}P{2.2cm}P{3.2cm}@{}}
+\toprule
+\textbf{Kante} & \textbf{$w$} & \textbf{Aufnehmen?} & \textbf{Begründung}\\
+\midrule
+$cg$ & $1$ & \textcolor{gruen}{ja} & erste Kante\\
+$ef$ & $2$ & \textcolor{gruen}{ja} & kein Kreis\\
+$ae$ & $3$ & \textcolor{gruen}{ja} & kein Kreis\\
+$bc$ & $4$ & \textcolor{gruen}{ja} & kein Kreis\\
+$gh$ & $5$ & \textcolor{gruen}{ja} & kein Kreis\\
+$fg$ & $6$ & \textcolor{gruen}{ja} & verbindet $\{a,e,f\}$ mit $\{b,c,g,h\}$\\
+$ab$ & $7$ & \textcolor{akzent}{nein} & Kreis $a\!-\!b\!-\!c\!-\!g\!-\!f\!-\!e\!-\!a$\\
+$bf$ & $8$ & \textcolor{akzent}{nein} & Kreis $b\!-\!f\!-\!g\!-\!c\!-\!b$\\
+$cd$ & $9$ & \textcolor{gruen}{ja} & $d$ war noch nicht dabei\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Nach der siebten Aufnahme hat $F$ genau $n-1 = 7$ Kanten. Das Verfahren endet; $dh$ und $af$ werden nicht mehr betrachtet.
+
+\schritt{Schritt 3 --- Das Ergebnis}
+\[ F = \{cg,\ ef,\ ae,\ bc,\ gh,\ fg,\ cd\}, \qquad w(F) = 1+2+3+4+5+6+9 = 30 . \]
+
+\schritt{Probe}
+Sieben Kanten bei acht Ecken. \checkmark\quad Kreisfrei --- jede aufgenommene Kante verband zwei zuvor getrennte Teile. \checkmark\quad Alle acht Ecken kommen vor: $a$ (in $ae$), $b$ ($bc$), $c$ ($cg$), $d$ ($cd$), $e$ ($ef$), $f$ ($fg$), $g$ ($cg$), $h$ ($gh$). \checkmark
+
+\schritt{Gegenprobe}
+Die teuerste weggelassene Kante war $af$ mit $11$. Nähme man sie statt $cd$ mit $9$, wäre $d$ unerreichbar --- das Ergebnis wäre kein Spannbaum. Nähme man $ab$ mit $7$ zusätzlich auf und ließe dafür $fg$ mit $6$ weg, so entstünde ein Gewicht von $31 > 30$.
+\end{merksatz}
+
+\section{Wie viele Spannbäume hat der vollständige Graph?}
+
+Die Frage lautet: Wie viele Bäume gibt es auf einer festen Ecken\-menge $\{1, \ldots, n\}$?
+
+\begin{warnung}
+\boxtitelr{\enquote{Verschieden} heißt hier etwas anderes als in Kapitel 1}
+In Kapitel~1 galten zwei Graphen als gleich, wenn sie isomorph waren. Jetzt sind die Ecken \kursiv{beschriftet}, und zwei Bäume gelten als verschieden, sobald ihre Kantenmengen verschieden sind.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\begin{scope}
+\node[knotenb] (a1) at (0,0.7) {$1$};
+\node[knotenb] (a2) at (-0.7,-0.4) {$2$};
+\node[knotenb] (a3) at (0.7,-0.4) {$3$};
+\draw[kante] (a1)--(a2); \draw[kante] (a2)--(a3);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.1) {$\{12,23\}$};
+\end{scope}
+\begin{scope}[xshift=2.8cm]
+\node[knotenb] (b1) at (0,0.7) {$1$};
+\node[knotenb] (b2) at (-0.7,-0.4) {$2$};
+\node[knotenb] (b3) at (0.7,-0.4) {$3$};
+\draw[kante] (b1)--(b2); \draw[kante] (b1)--(b3);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.1) {$\{12,13\}$};
+\end{scope}
+\begin{scope}[xshift=5.6cm]
+\node[knotenb] (c1) at (0,0.7) {$1$};
+\node[knotenb] (c2) at (-0.7,-0.4) {$2$};
+\node[knotenb] (c3) at (0.7,-0.4) {$3$};
+\draw[kante] (c1)--(c3); \draw[kante] (c2)--(c3);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.1) {$\{13,23\}$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Als \kursiv{unbeschriftete} Graphen sind alle drei derselbe Baum $P_3$. Als \kursiv{beschriftete} sind es drei verschiedene. Kapitel~4 zählte die erste Sorte (dort: ein Baum für $n=3$), dieser Abschnitt zählt die zweite.
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Satz 5.5 (Cayley 1889)}
+Die Anzahl der Bäume auf der Eckenmenge $\{1, \ldots, n\}$ beträgt für $n \ge 2$ genau
+\[ n^{\,n-2} . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Zahlen für kleine $n$}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{1.8cm}P{4.4cm}@{}}
+\toprule
+$n$ & $n^{n-2}$ & \textbf{Kontrolle}\\
+\midrule
+$2$ & $2^0 = 1$ & nur die Kante $12$\\
+$3$ & $3^1 = 3$ & die drei Bilder oben\\
+$4$ & $4^2 = 16$ & $12$ Wege $+$ $4$ Sterne\\
+$5$ & $5^3 = 125$ & \\
+$6$ & $6^4 = 1296$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die Kontrolle für $n=4$ nachgerechnet}
+Ein Baum auf vier Ecken ist entweder ein Weg $P_4$ oder ein Stern $K_{1,3}$ (Kapitel~4).
+
+\kursiv{Sterne:} Ein Stern ist durch seine Mitte festgelegt. Vier Wahlmöglichkeiten, also $4$ Sterne.
+
+\kursiv{Wege:} Ein Weg auf vier beschrifteten Ecken ist durch die Reihenfolge festgelegt, in der die Ecken durchlaufen werden. Es gibt $4! = 24$ Anordnungen; jeder Weg wird dabei zweimal gezählt (vorwärts und rückwärts). Also $24/2 = 12$ Wege.
+
+Zusammen $12 + 4 = 16 = 4^2$. \checkmark
+\end{merksatz}
+
+\subsection*{Der Beweis: das Verfahren von Prüfer}
+
+Der Beweis beruht auf einer Idee von \Person{Heinz Prüfer} (1918): Man ordnet jedem Baum eine Zahlenfolge zu und zeigt, dass diese Zuordnung umkehrbar ist. Da man die Folgen leicht zählen kann, hat man damit auch die Bäume gezählt.
+
+\begin{merksatz}
+\boxtitel{Vom Baum zur Folge}
+Sei $T$ ein Baum auf $\{1, \ldots, n\}$ mit $n \ge 2$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.2cm}P{7.2cm}@{}}
+\toprule
+1. & Suche unter allen Blättern das mit der \kursiv{kleinsten} Beschriftung.\\
+2. & Notiere seinen (einzigen) Nachbarn.\\
+3. & Entferne das Blatt aus dem Baum.\\
+4. & Wiederhole, bis nur noch \kursiv{zwei} Ecken übrig sind.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Man führt also $n-2$ Schritte aus und erhält eine Folge $(p_1, \ldots, p_{n-2})$ von Zahlen aus $\{1,\ldots,n\}$. Sie heißt der \Begriff{Prüfer-Code} von $T$.
+
+\schritt{Warum das immer geht}
+Nach Satz 4.3 hat jeder Baum mit mindestens zwei Ecken ein Blatt --- Schritt 1 findet also stets eines. Und das Entfernen eines Blattes aus einem Baum liefert wieder einen Baum: Der Rest bleibt zusammenhängend (kein Weg zwischen anderen Ecken lief über ein Blatt, denn ein Blatt hat nur einen Nachbarn und kann keine Durchgangsecke sein) und kreisfrei (Kanten wurden nur weggenommen).
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Beispiel, vollständig durchgeführt}
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\node[knotenb] (1) at (-1.6,0.9) {$1$};
+\node[knotenb] (2) at (-0.5,0.3) {$2$};
+\node[knotenb] (3) at (0.8,0.7) {$3$};
+\node[knotenb] (4) at (-1.6,-0.5) {$4$};
+\node[knotenb] (5) at (0.8,-0.6) {$5$};
+\node[knotenb] (6) at (2.1,0.2) {$6$};
+\draw[kante] (1)--(2); \draw[kante] (4)--(2); \draw[kante] (2)--(3);
+\draw[kante] (3)--(5); \draw[kante] (3)--(6);
+\end{tikzpicture}
+\end{center}
+
+\schritt{Die Durchgänge}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.2cm}P{2.8cm}P{1.8cm}P{1.6cm}@{}}
+\toprule
+\textbf{Nr.} & \textbf{Blätter} & \textbf{Kleinstes} & \textbf{Nachbar}\\
+\midrule
+$1$ & $1, 4, 5, 6$ & $1$ & $\mathbf{2}$\\
+$2$ & $4, 5, 6$ & $4$ & $\mathbf{2}$\\
+$3$ & $2, 5, 6$ & $2$ & $\mathbf{3}$\\
+$4$ & $5, 6$ & $5$ & $\mathbf{3}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Nach vier Schritten sind noch die Ecken $3$ und $6$ übrig --- das sind zwei, also wird abgebrochen. Der Prüfer-Code lautet
+\[ (2,\ 2,\ 3,\ 3) . \]
+
+\schritt{Beobachtung}
+Ecke $2$ hatte im Baum Grad $3$ und kommt zweimal im Code vor. Ecke $3$ hatte Grad $3$ und kommt zweimal vor. Die Blätter $1, 4, 5, 6$ kommen gar nicht vor. Das ist kein Zufall:
+\[ \deg_T(v) = (\text{Anzahl der Vorkommen von } v \text{ im Code}) + 1 . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Warum diese Gradformel gilt}
+Wir zählen, wie oft die Ecke $v$ im Code auftaucht.
+
+Jedes Mal, wenn ein Nachbar von $v$ als Blatt entfernt wird, wird $v$ notiert. Umgekehrt wird $v$ nur bei solchen Gelegenheiten notiert. Also:
+\[ \#\{\text{Vorkommen von } v\} \;=\; \#\{\text{Nachbarn von } v, \text{ die entfernt werden}\} . \]
+
+Nun endet das Verfahren, wenn zwei Ecken übrig sind. Für die Ecke $v$ gibt es zwei Fälle.
+
+\kursiv{Fall 1: $v$ wird selbst irgendwann entfernt.} Zu diesem Zeitpunkt ist $v$ ein Blatt, hat also genau einen verbliebenen Nachbarn. Alle übrigen $\deg_T(v) - 1$ Nachbarn wurden vorher entfernt. Also $\deg_T(v) - 1$ Vorkommen.
+
+\kursiv{Fall 2: $v$ bleibt bis zum Schluss übrig.} Dann ist $v$ eine der beiden Endecken. Von seinen $\deg_T(v)$ Nachbarn ist genau einer ebenfalls übrig --- nämlich der andere Überlebende, denn die beiden Übriggebliebenen bilden einen Baum auf zwei Ecken und sind somit benachbart. Die übrigen $\deg_T(v) - 1$ wurden entfernt. Wieder $\deg_T(v) - 1$ Vorkommen.
+
+In beiden Fällen: Vorkommen $= \deg_T(v) - 1$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Insbesondere sind die Blätter genau die Ecken, die im Code \kursiv{nicht} vorkommen. Das ist der Schlüssel zur Umkehrung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Von der Folge zurück zum Baum}
+Gegeben sei eine beliebige Folge $(p_1, \ldots, p_{n-2})$ mit Einträgen aus $\{1,\ldots,n\}$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.2cm}P{7.2cm}@{}}
+\toprule
+1. & Führe eine Liste $L = \{1,\ldots,n\}$ der noch verfügbaren Ecken.\\
+2. & Für $i = 1, \ldots, n-2$: Sei $\ell$ die kleinste Zahl in $L$, die in $(p_i, p_{i+1}, \ldots, p_{n-2})$ \kursiv{nicht} vorkommt. Füge die Kante $\{\ell, p_i\}$ ein und streiche $\ell$ aus $L$.\\
+3. & Am Ende sind zwei Zahlen in $L$; verbinde sie durch eine Kante.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Warum Schritt 2 stets ausführbar ist}
+Zu Beginn des $i$-ten Durchgangs enthält $L$ genau $n - i + 1$ Zahlen. Der Restcode $(p_i, \ldots, p_{n-2})$ hat $n-1-i$ Einträge, kann also höchstens $n-1-i$ verschiedene Zahlen enthalten. Wegen
+\[ (n-i+1) - (n-1-i) = 2 > 0 \]
+bleibt mindestens eine Zahl in $L$ übrig, die nicht im Restcode steht.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Rückrechnung am Beispiel}
+Code $(2,2,3,3)$, also $n = 6$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{2.4cm}P{2.0cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+$i$ & $L$ & \textbf{Restcode} & $\ell$ & \textbf{Kante}\\
+\midrule
+$1$ & $1,2,3,4,5,6$ & $2,2,3,3$ & $1$ & $\{1,2\}$\\
+$2$ & $2,3,4,5,6$ & $2,3,3$ & $4$ & $\{4,2\}$\\
+$3$ & $2,3,5,6$ & $3,3$ & $2$ & $\{2,3\}$\\
+$4$ & $3,5,6$ & $3$ & $5$ & $\{5,3\}$\\
+\midrule
+--- & $3,6$ & --- & --- & $\{3,6\}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Erläuterung der dritten Zeile}
+$L = \{2,3,5,6\}$, Restcode $(3,3)$ enthält nur die $3$. Die kleinste Zahl aus $L$, die nicht $3$ ist, lautet $2$. Also Kante $\{2, p_3\} = \{2,3\}$.
+
+\schritt{Ergebnis}
+Kanten $\{1,2\}, \{2,4\}, \{2,3\}, \{3,5\}, \{3,6\}$ --- das ist genau der Ausgangsbaum. \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis von Satz 5.5}
+\schritt{Schritt 1 --- Die beiden Mengen}
+Sei $\mathcal{T}$ die Menge der Bäume auf $\{1,\ldots,n\}$ und $\mathcal{P} = \{1,\ldots,n\}^{n-2}$ die Menge aller Folgen der Länge $n-2$ mit Einträgen aus $\{1,\ldots,n\}$.
+
+\schritt{Schritt 2 --- Die Anzahl der Folgen}
+Für jede der $n-2$ Stellen gibt es $n$ Möglichkeiten, unabhängig voneinander. Nach der Produktregel (Band 15, Kapitel 1) ist
+\[ |\mathcal{P}| = \underbrace{n \cdot n \cdots n}_{n-2 \text{ Faktoren}} = n^{\,n-2} . \]
+
+\schritt{Schritt 3 --- Die beiden Zuordnungen}
+Das erste Verfahren liefert eine Abbildung $\Phi : \mathcal{T} \to \mathcal{P}$, das zweite eine Abbildung $\Psi : \mathcal{P} \to \mathcal{T}$.
+
+Dass $\Psi$ tatsächlich in $\mathcal{T}$ landet --- also einen Baum liefert --- sieht man so: Es werden $(n-2) + 1 = n-1$ Kanten erzeugt. Bei jeder Kante $\{\ell, p_i\}$ wird $\ell$ danach aus $L$ gestrichen und kommt in keiner späteren Kante mehr als $\ell$ vor; als $p_j$ kann es ebenfalls nicht mehr vorkommen, denn $\ell$ wurde ja gerade so gewählt, dass es im Restcode fehlt. Jede erzeugte Kante verbindet also eine \kursiv{endgültig ausscheidende} Ecke mit einer noch aktiven. Damit entsteht nie ein Kreis: Ein Kreis bräuchte an jeder Ecke zwei Kanten, aber $\ell$ bekommt genau eine und verschwindet. Ein kreisfreier Graph auf $n$ Ecken mit $n-1$ Kanten ist nach Satz 4.2 (iv) ein Baum.
+
+\schritt{Schritt 4 --- $\Psi \circ \Phi = \mathrm{id}$}
+Sei $T$ ein Baum mit Code $\Phi(T) = (p_1,\ldots,p_{n-2})$. Wir zeigen, dass $\Psi$ im $i$-ten Durchgang dasselbe Blatt wählt, das $\Phi$ im $i$-ten Durchgang entfernt hat.
+
+Betrachte den Zeitpunkt vor dem $i$-ten Durchgang von $\Phi$. Der Restbaum $T_i$ besteht aus den Ecken von $L$. Nach der Gradformel, angewandt auf $T_i$ und den Restcode $(p_i,\ldots,p_{n-2})$, sind die Blätter von $T_i$ genau die Ecken von $L$, die im Restcode nicht vorkommen --- mit einer Feinheit: Die Gradformel gilt für den Restcode einschließlich der abschließenden zwei Ecken, und genau das ist die Situation.
+
+$\Phi$ wählt das kleinste Blatt von $T_i$. $\Psi$ wählt die kleinste Zahl aus $L$, die im Restcode fehlt. Nach dem eben Gesagten sind das dieselben Kandidaten, also dieselbe Wahl. Und die eingetragene Kante ist beide Male $\{\ell, p_i\}$.
+
+Induktiv folgt: Alle $n-2$ Kanten stimmen überein, und die Schlusskante verbindet in beiden Fällen die zwei übriggebliebenen Ecken. Also $\Psi(\Phi(T)) = T$.
+
+\schritt{Schritt 5 --- $\Phi \circ \Psi = \mathrm{id}$}
+Dasselbe Argument rückwärts gelesen: Wendet man $\Phi$ auf den von $\Psi$ gebauten Baum an, so wird im $i$-ten Schritt dasselbe Blatt $\ell$ erkannt und derselbe Nachbar $p_i$ notiert.
+
+\schritt{Schritt 6 --- Schluss}
+$\Phi$ und $\Psi$ sind zueinander invers, also ist $\Phi$ eine Bijektion. Zwei Mengen, zwischen denen eine Bijektion besteht, haben gleich viele Elemente:
+\[ |\mathcal{T}| = |\mathcal{P}| = n^{\,n-2} . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Folgerung 5.6 --- Bäume mit vorgeschriebenen Graden}
+Die Anzahl der Bäume auf $\{1,\ldots,n\}$, in denen die Ecke $i$ den Grad $d_i$ hat, beträgt
+\[ \binom{n-2}{d_1 - 1,\ d_2 - 1,\ \ldots,\ d_n - 1} = \frac{(n-2)!}{(d_1-1)!\,(d_2-1)!\cdots(d_n-1)!} . \]
+
+\schritt{Warum}
+Nach der Gradformel ist ein Baum mit diesen Graden dasselbe wie ein Code, in dem die Zahl $i$ genau $d_i - 1$ Mal vorkommt. Die Anzahl solcher Folgen ist der Multinomialkoeffizient aus Band 15, Kapitel~2.
+
+\schritt{Probe}
+Für $n=4$ und die Gradfolge $d = (3,1,1,1)$ --- also den Stern mit Mitte $1$ --- ergibt sich
+\[ \frac{2!}{2!\,0!\,0!\,0!} = 1 . \]
+Es gibt genau einen solchen Baum. \checkmark
+\end{merksatz}
+
+\section{Der Matrix-Baum-Satz}
+
+Cayleys Formel zählt die Spannbäume des \kursiv{vollständigen} Graphen. Für beliebige Graphen gibt es eine Formel, die noch überraschender ist: Sie führt die Zählung auf eine Determinante zurück.
+
+\begin{definition}
+\boxtitelm{Definition 5.7 --- Laplace-Matrix}
+Sei $G$ ein Graph mit Adjazenzmatrix $A$ und sei $D$ die Diagonalmatrix mit den Graden auf der Diagonalen, also $d_{ii} = \deg(v_i)$ und $d_{ij} = 0$ für $i \neq j$. Dann heißt
+\[ L = D - A \]
+die \Begriff{Laplace-Matrix} von $G$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Wie $L$ aussieht}
+\[ \ell_{ij} = \begin{cases}
+\deg(v_i), & i = j,\\
+-1, & i \neq j \text{ und } \{v_i,v_j\} \in E,\\
+0, & \text{sonst.}
+\end{cases} \]
+
+\schritt{Die auffälligste Eigenschaft}
+Jede Zeilensumme ist $0$. Denn in Zeile $i$ steht einmal $\deg(v_i)$ und $\deg(v_i)$ Mal die Zahl $-1$:
+\[ \deg(v_i) + \deg(v_i)\cdot(-1) = 0 . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Daraus folgt sofort $\det L = 0$: Addiert man alle Spalten zur ersten, so entsteht eine Nullspalte. Die Determinante der ganzen Matrix ist also nutzlos --- und genau deshalb streicht der folgende Satz eine Zeile und eine Spalte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 5.8 (Kirchhoff 1847, Matrix-Baum-Satz)}
+Sei $G$ ein Graph mit $n \ge 2$ Ecken und Laplace-Matrix $L$. Streicht man aus $L$ eine beliebige Zeile $i$ und die zugehörige Spalte $i$, so ist die Determinante der verbleibenden $(n-1)\times(n-1)$-Matrix $L_i$ gleich der Anzahl der Spannbäume von $G$:
+\[ \det L_i \;=\; \#\{\text{Spannbäume von } G\} . \]
+Das Ergebnis hängt nicht davon ab, welche Zeile gestrichen wird.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Beispiel, bevor der Beweis kommt}
+Wir nehmen den Kreis $C_4$ mit den Ecken $1,2,3,4$.
+
+\schritt{Die Laplace-Matrix}
+Jede Ecke hat Grad $2$; die Kanten sind $12$, $23$, $34$, $41$.
+\[ L = \begin{pmatrix}
+2 & -1 & 0 & -1\\
+-1 & 2 & -1 & 0\\
+0 & -1 & 2 & -1\\
+-1 & 0 & -1 & 2
+\end{pmatrix} \]
+Zeilensummen: $2-1+0-1 = 0$ \checkmark
+
+\schritt{Zeile und Spalte 4 streichen}
+\[ L_4 = \begin{pmatrix} 2 & -1 & 0\\ -1 & 2 & -1\\ 0 & -1 & 2 \end{pmatrix} \]
+
+\schritt{Determinante ausrechnen --- Entwicklung nach der ersten Zeile}
+\[ \det L_4 = 2 \cdot \det\!\begin{pmatrix} 2 & -1\\ -1 & 2\end{pmatrix} - (-1)\cdot \det\!\begin{pmatrix} -1 & -1\\ 0 & 2\end{pmatrix} + 0 \]
+\begin{align*}
+\det\!\begin{pmatrix} 2 & -1\\ -1 & 2\end{pmatrix} &= 2\cdot 2 - (-1)(-1) = 4 - 1 = 3\\
+\det\!\begin{pmatrix} -1 & -1\\ 0 & 2\end{pmatrix} &= (-1)\cdot 2 - (-1)\cdot 0 = -2
+\end{align*}
+\[ \det L_4 = 2 \cdot 3 + 1 \cdot (-2) = 6 - 2 = 4 \]
+
+\schritt{Probe durch Abzählen}
+Ein Spannbaum von $C_4$ entsteht durch Weglassen genau einer Kante ($4$ Kanten, $n-1 = 3$ sollen bleiben). Jede der vier Möglichkeiten liefert einen Weg $P_4$, also einen Baum. Vier Spannbäume. \checkmark
+
+\schritt{Gegenprobe mit einer anderen Zeile}
+Streichen wir stattdessen Zeile und Spalte $1$:
+\[ L_1 = \begin{pmatrix} 2 & -1 & 0\\ -1 & 2 & -1\\ 0 & -1 & 2\end{pmatrix} \]
+Dieselbe Matrix, also wieder $4$. \checkmark
+\end{merksatz}
+
+\subsection*{Der Beweis}
+
+\begin{merksatz}
+\boxtitel{Schritt 1 --- Kanten eine Richtung geben}
+Wir wählen für jede Kante willkürlich eine der beiden Ecken als \enquote{Anfang} und die andere als \enquote{Ende}. Welche, ist gleichgültig --- das Ergebnis wird davon nicht abhängen.
+
+Sei $M$ die $n \times m$-Matrix mit
+\[ m_{ie} = \begin{cases}
++1, & \text{falls } v_i \text{ Anfang von } e \text{ ist},\\
+-1, & \text{falls } v_i \text{ Ende von } e \text{ ist},\\
+0, & \text{falls } v_i \text{ nicht auf } e \text{ liegt.}
+\end{cases} \]
+Das ist die \Begriff{gerichtete Inzidenzmatrix}. In jeder Spalte steht genau eine $+1$ und genau eine $-1$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Schritt 2 --- Die Schlüsselgleichung $L = M M^{\!\top}$}
+Dabei ist $M^{\!\top}$ die \Begriff{Transponierte}: die Matrix, die entsteht, wenn man Zeilen und Spalten vertauscht, also $(M^{\!\top})_{ei} = m_{ie}$.
+
+\schritt{Nachrechnen}
+Nach Definition 3.3 ist
+\[ (M M^{\!\top})_{ij} = \sum_{e \in E} m_{ie}\, m_{je} . \]
+
+\kursiv{Fall $i = j$.} Dann ist $m_{ie}m_{ie} = m_{ie}^2$. Dieser Wert ist $1$, wenn $v_i$ auf $e$ liegt (denn $(+1)^2 = (-1)^2 = 1$), sonst $0$. Die Summe zählt also die Kanten an $v_i$:
+\[ (MM^{\!\top})_{ii} = \deg(v_i) . \]
+
+\kursiv{Fall $i \neq j$.} Der Summand ist nur dann von Null verschieden, wenn \kursiv{beide} Ecken auf $e$ liegen --- also wenn $e = \{v_i, v_j\}$. Da eine Ecke Anfang und die andere Ende ist, ist das Produkt $(+1)\cdot(-1) = -1$. Es gibt höchstens eine solche Kante. Also
+\[ (MM^{\!\top})_{ij} = \begin{cases} -1, & \{v_i,v_j\} \in E,\\ 0, & \text{sonst.}\end{cases} \]
+
+Das ist genau die Laplace-Matrix. $\checkmark$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hier zeigt sich, wozu die Vorzeichen gut waren: Ohne sie stünde in der Nebendiagonale $+1$, und die Zeilensummen wären nicht $0$. Die Richtungen sind ein Kunstgriff, der die Buchführung stimmig macht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Schritt 3 --- Der Satz von Cauchy und Binet}
+Aus Band 2, Teil IV: Ist $M_i$ eine $(n-1) \times m$-Matrix mit $m \ge n-1$, so gilt
+\[ \det\bigl(M_i M_i^{\!\top}\bigr) \;=\; \sum_{S} \bigl(\det M_i[S]\bigr)^2 , \]
+wobei über alle Auswahlen $S$ von $n-1$ Spalten summiert wird und $M_i[S]$ die quadratische Matrix aus diesen Spalten bezeichnet.
+
+Streicht man aus $M$ die $i$-te Zeile, so erhält man $M_i$, und aus $L = MM^{\!\top}$ wird
+\[ L_i = M_i M_i^{\!\top} . \]
+Also
+\[ \det L_i = \sum_{S \subseteq E,\ |S| = n-1} \bigl(\det M_i[S]\bigr)^2 . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Summe läuft über alle Auswahlen von $n-1$ Kanten. Es bleibt zu zeigen, dass der Summand genau dann $1$ ist, wenn diese $n-1$ Kanten einen Spannbaum bilden, und sonst $0$. Dann steht rechts genau die Anzahl der Spannbäume.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Schritt 4 --- Das Kernlemma}
+Sei $S \subseteq E$ mit $|S| = n-1$. Dann gilt
+\[ \det M_i[S] = \begin{cases} \pm 1, & \text{falls } S \text{ ein Spannbaum ist},\\ 0, & \text{sonst.}\end{cases} \]
+
+\schritt{Fall A: $S$ ist kein Spannbaum}
+Ein Graph auf $n$ Ecken mit $n-1$ Kanten, der kein Spannbaum ist, ist nach Satz 4.2 (iv) nicht kreisfrei --- er enthält also einen Kreis $C$.
+
+Wir behaupten: Die Spalten von $M[S]$, die zu den Kanten von $C$ gehören, sind linear abhängig. Laufen wir den Kreis in einer festen Richtung ab und setzen für jede Kante $\varepsilon_e = +1$, falls wir sie in Richtung Anfang-nach-Ende durchlaufen, sonst $\varepsilon_e = -1$. Dann ist
+\[ \sum_{e \in C} \varepsilon_e \cdot (\text{Spalte } e) = 0 . \]
+Denn an jeder Ecke des Kreises kommt man einmal an und geht einmal weg; die beiden Beiträge in dieser Zeile sind $+1$ und $-1$ und heben sich auf. An Ecken außerhalb des Kreises stehen ohnehin Nullen.
+
+Diese Abhängigkeit bleibt bestehen, wenn man eine Zeile streicht. Eine quadratische Matrix mit linear abhängigen Spalten hat Determinante $0$ (Band 2, Teil IV).
+
+\schritt{Fall B: $S$ ist ein Spannbaum --- Beweis durch Induktion über $n$}
+\textbf{Anfang $n = 2$:} $M_i[S]$ ist eine $1\times 1$-Matrix mit Eintrag $\pm 1$, Determinante $\pm 1$. \checkmark
+
+\textbf{Schritt.} Sei $n \ge 3$. Der Baum $S$ hat nach Satz 4.3 mindestens zwei Blätter; da nur eine Ecke ($v_i$) gestrichen wurde, gibt es ein Blatt $u \neq v_i$. Sei $f$ die einzige Kante an $u$.
+
+In der Matrix $M_i[S]$ steht in der Zeile von $u$ genau ein von Null verschiedener Eintrag, nämlich $\pm 1$ in der Spalte von $f$. Wir entwickeln die Determinante nach dieser Zeile (Band 2, Teil IV):
+\[ \det M_i[S] = \pm 1 \cdot \det N, \]
+wobei $N$ aus $M_i[S]$ durch Streichen der Zeile von $u$ und der Spalte von $f$ entsteht.
+
+Nun ist $N$ genau die entsprechende Matrix für den Baum $S - u$ im Graphen $G - u$, wieder ohne die Zeile von $v_i$. Der Baum $S-u$ hat $n-1$ Ecken. Nach Induktionsannahme ist $\det N = \pm 1$, also $\det M_i[S] = \pm 1$. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Schritt 5 --- Zusammensetzen}
+Nach dem Kernlemma ist $(\det M_i[S])^2$ gleich $1$ für Spannbäume und $0$ sonst --- das Quadrat beseitigt die Unbestimmtheit des Vorzeichens. Also
+\[ \det L_i = \sum_{|S| = n-1} \bigl(\det M_i[S]\bigr)^2 = \#\{\text{Spannbäume}\} . \]
+Die rechte Seite hängt offensichtlich nicht von $i$ ab; also auch die linke. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Cayley als Sonderfall}
+Für $G = K_n$ ist $\deg(v) = n-1$ für alle $v$, und alle Nebeneinträge sind $-1$. Also
+\[ L = n I - J, \]
+wobei $J$ die Matrix aus lauter Einsen ist. Streicht man Zeile und Spalte $n$, so bleibt eine $(n-1)\times(n-1)$-Matrix mit $n-1$ auf der Diagonalen und $-1$ sonst. Ihre Determinante lässt sich mit den Mitteln aus Band 2, Teil IV zu $n^{\,n-2}$ berechnen --- ein zweiter Beweis für Satz 5.5, ganz ohne Kombinatorik.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zwei völlig verschiedene Beweise für dieselbe Formel: einer durch Abzählen von Folgen, einer durch Determinantenrechnung. Der erste erklärt, \kursiv{warum} die Zahl so aussieht; der zweite verallgemeinert auf beliebige Graphen. Beide sind es wert, gekannt zu werden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.1 --- Spannbäume abzählen}
+Bestimmen Sie die Anzahl der Spannbäume des abgebildeten Graphen auf zwei Wegen: durch Abzählen und mit dem Matrix-Baum-Satz.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\node[knotenb] (1) at (-1.0,0.8) {$1$};
+\node[knotenb] (2) at (1.0,0.8) {$2$};
+\node[knotenb] (3) at (1.0,-0.8) {$3$};
+\node[knotenb] (4) at (-1.0,-0.8) {$4$};
+\draw[kante] (1)--(2); \draw[kante] (2)--(3); \draw[kante] (3)--(4);
+\draw[kante] (4)--(1); \draw[kante] (1)--(3);
+\end{tikzpicture}
+\end{center}
+
+\loesung
+\schritt{Weg 1 --- Abzählen}
+Der Graph hat $n = 4$ Ecken und $m = 5$ Kanten. Ein Spannbaum hat $3$ Kanten, wir lassen also $2$ der $5$ Kanten weg. Es gibt $\binom{5}{2} = 10$ Möglichkeiten.
+
+Wir prüfen jede. Kanten: $a = 12$, $b = 23$, $c = 34$, $d = 41$, $e = 13$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+\textbf{Weglassen} & \textbf{Rest} & \textbf{Baum?}\\
+\midrule
+$a,b$ & $c,d,e$ & \textcolor{akzent}{nein} --- Dreieck $1,3,4$; Ecke $2$ isoliert\\
+$a,c$ & $b,d,e$ & \textcolor{gruen}{ja}\\
+$a,d$ & $b,c,e$ & \textcolor{gruen}{ja}\\
+$a,e$ & $b,c,d$ & \textcolor{gruen}{ja}\\
+$b,c$ & $a,d,e$ & \textcolor{gruen}{ja}\\
+$b,d$ & $a,c,e$ & \textcolor{gruen}{ja}\\
+$b,e$ & $a,c,d$ & \textcolor{gruen}{ja}\\
+$c,d$ & $a,b,e$ & \textcolor{akzent}{nein} --- Dreieck $1,2,3$; Ecke $4$ isoliert\\
+$c,e$ & $a,b,d$ & \textcolor{gruen}{ja}\\
+$d,e$ & $a,b,c$ & \textcolor{gruen}{ja}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Zwei Fälle scheiden aus, es bleiben $\mathbf{8}$ Spannbäume.
+
+\schritt{Weg 2 --- Matrix-Baum-Satz}
+Grade: $\deg(1) = 3$ (Nachbarn $2,4,3$), $\deg(2) = 2$, $\deg(3) = 3$, $\deg(4) = 2$.
+\[ L = \begin{pmatrix} 3 & -1 & -1 & -1\\ -1 & 2 & -1 & 0\\ -1 & -1 & 3 & -1\\ -1 & 0 & -1 & 2 \end{pmatrix} \]
+Zeilensummen alle $0$. \checkmark
+
+Zeile und Spalte $4$ streichen:
+\[ L_4 = \begin{pmatrix} 3 & -1 & -1\\ -1 & 2 & -1\\ -1 & -1 & 3 \end{pmatrix} \]
+
+Entwicklung nach der ersten Zeile:
+\begin{align*}
+\det L_4 &= 3\cdot\det\!\begin{pmatrix}2 & -1\\ -1 & 3\end{pmatrix} - (-1)\cdot\det\!\begin{pmatrix}-1 & -1\\ -1 & 3\end{pmatrix} + (-1)\cdot\det\!\begin{pmatrix}-1 & 2\\ -1 & -1\end{pmatrix}\\[3pt]
+&= 3\cdot(6 - 1) + 1\cdot(-3 - 1) - 1\cdot(1 + 2)\\
+&= 15 - 4 - 3 = 8
+\end{align*}
+
+\schritt{Beide Wege stimmen überein: $\mathbf{8}$ Spannbäume.} \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.2 --- Prüfer-Code in beide Richtungen}
+(a) Bestimmen Sie den Prüfer-Code des Baumes mit den Kanten $\{1,3\}, \{2,3\}, \{3,4\}, \{4,5\}, \{4,6\}, \{6,7\}$.\\
+(b) Welcher Baum gehört zum Code $(4,4,1,1,5)$?
+
+\loesung
+\schritt{(a) --- Der Baum}
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\node[knotenb] (1) at (-2.0,0.7) {$1$};
+\node[knotenb] (2) at (-2.0,-0.7) {$2$};
+\node[knotenb] (3) at (-0.8,0) {$3$};
+\node[knotenb] (4) at (0.6,0) {$4$};
+\node[knotenb] (5) at (1.6,0.9) {$5$};
+\node[knotenb] (6) at (1.6,-0.9) {$6$};
+\node[knotenb] (7) at (2.9,-0.9) {$7$};
+\draw[kante] (1)--(3);\draw[kante] (2)--(3);\draw[kante] (3)--(4);
+\draw[kante] (4)--(5);\draw[kante] (4)--(6);\draw[kante] (6)--(7);
+\end{tikzpicture}
+\end{center}
+
+$n = 7$, also hat der Code $5$ Einträge.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.0cm}P{2.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+\textbf{Nr.} & \textbf{Blätter} & \textbf{Kleinstes} & \textbf{Nachbar}\\
+\midrule
+$1$ & $1,2,5,7$ & $1$ & $\mathbf{3}$\\
+$2$ & $2,5,7$ & $2$ & $\mathbf{3}$\\
+$3$ & $3,5,7$ & $3$ & $\mathbf{4}$\\
+$4$ & $5,7$ & $5$ & $\mathbf{4}$\\
+$5$ & $4,7$ & $4$ & $\mathbf{6}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Übrig bleiben $6$ und $7$. Code: $(3,3,4,4,6)$.
+
+\schritt{Kontrolle über die Gradformel}
+Vorkommen: $3$ zweimal, $4$ zweimal, $6$ einmal. Also $\deg(3) = 3$, $\deg(4) = 3$, $\deg(6) = 2$, alle übrigen $1$.
+Im Bild: $\deg(3) = 3$ (Nachbarn $1,2,4$) \checkmark, $\deg(4) = 3$ (Nachbarn $3,5,6$) \checkmark, $\deg(6) = 2$ \checkmark.
+Gradsumme $3+3+2+1+1+1+1 = 12 = 2 \cdot 6 = 2(n-1)$ \checkmark
+
+\schritt{(b) --- Rückrechnung für $(4,4,1,1,5)$}
+Der Code hat $5$ Einträge, also $n = 7$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{2.4cm}P{1.8cm}P{1.2cm}P{1.4cm}@{}}
+\toprule
+$i$ & $L$ & \textbf{Restcode} & $\ell$ & \textbf{Kante}\\
+\midrule
+$1$ & $1..7$ & $4,4,1,1,5$ & $2$ & $\{2,4\}$\\
+$2$ & $1,3,4,5,6,7$ & $4,1,1,5$ & $3$ & $\{3,4\}$\\
+$3$ & $1,4,5,6,7$ & $1,1,5$ & $4$ & $\{4,1\}$\\
+$4$ & $1,5,6,7$ & $1,5$ & $6$ & $\{6,1\}$\\
+$5$ & $1,5,7$ & $5$ & $1$ & $\{1,5\}$\\
+\midrule
+--- & $5,7$ & --- & --- & $\{5,7\}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Erläuterung der ersten Zeile}
+$L = \{1,\ldots,7\}$, im Restcode kommen $1,4,5$ vor. Die kleinste fehlende Zahl ist $2$.
+
+\schritt{Ergebnis}
+Kanten: $\{2,4\}, \{3,4\}, \{1,4\}, \{1,6\}, \{1,5\}, \{5,7\}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\node[knotenb] (4) at (-1.2,0) {$4$};
+\node[knotenb] (2) at (-2.2,0.8) {$2$};
+\node[knotenb] (3) at (-2.2,-0.8) {$3$};
+\node[knotenb] (1) at (0.2,0) {$1$};
+\node[knotenb] (6) at (0.6,-1.1) {$6$};
+\node[knotenb] (5) at (1.5,0.6) {$5$};
+\node[knotenb] (7) at (2.7,0.9) {$7$};
+\draw[kante] (4)--(2);\draw[kante] (4)--(3);\draw[kante] (4)--(1);
+\draw[kante] (1)--(6);\draw[kante] (1)--(5);\draw[kante] (5)--(7);
+\end{tikzpicture}
+\end{center}
+
+\schritt{Probe über die Gradformel}
+Vorkommen im Code $(4,4,1,1,5)$: $4$ zweimal, $1$ zweimal, $5$ einmal. Erwartete Grade: $\deg(4) = 3$, $\deg(1) = 3$, $\deg(5) = 2$, Rest $1$.
+Im Bild: $\deg(4) = 3$ (Nachbarn $2,3,1$) \checkmark, $\deg(1) = 3$ (Nachbarn $4,6,5$) \checkmark, $\deg(5) = 2$ (Nachbarn $1,7$) \checkmark. Sechs Kanten bei sieben Ecken. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.3 --- Spannbäume des vollständig bipartiten Graphen}
+Der vollständig bipartite Graph $K_{2,3}$ hat wie viele Spannbäume?
+
+\loesung
+\schritt{Schritt 1 --- Aufbau}
+Ecken $u_1, u_2$ auf der einen Seite, $w_1, w_2, w_3$ auf der anderen; jede Ecke der einen Seite ist mit jeder der anderen verbunden. $n = 5$, $m = 6$.
+
+\schritt{Schritt 2 --- Die Laplace-Matrix}
+Grade: $\deg(u_j) = 3$, $\deg(w_k) = 2$. Wir nummerieren $u_1, u_2, w_1, w_2, w_3$.
+\[ L = \begin{pmatrix}
+3 & 0 & -1 & -1 & -1\\
+0 & 3 & -1 & -1 & -1\\
+-1 & -1 & 2 & 0 & 0\\
+-1 & -1 & 0 & 2 & 0\\
+-1 & -1 & 0 & 0 & 2
+\end{pmatrix} \]
+Zeilensummen: $3+0-1-1-1 = 0$ \checkmark und $-1-1+2+0+0 = 0$ \checkmark
+
+\schritt{Schritt 3 --- Letzte Zeile und Spalte streichen}
+\[ L_5 = \begin{pmatrix}
+3 & 0 & -1 & -1\\
+0 & 3 & -1 & -1\\
+-1 & -1 & 2 & 0\\
+-1 & -1 & 0 & 2
+\end{pmatrix} \]
+
+\schritt{Schritt 4 --- Vereinfachen vor dem Rechnen}
+Wir ziehen Zeile 2 von Zeile 1 ab. Das ändert die Determinante nicht (Band 2, Teil IV):
+\[ \begin{pmatrix}
+3 & -3 & 0 & 0\\
+0 & 3 & -1 & -1\\
+-1 & -1 & 2 & 0\\
+-1 & -1 & 0 & 2
+\end{pmatrix} \]
+Ebenso Zeile 4 von Zeile 3:
+\[ \begin{pmatrix}
+3 & -3 & 0 & 0\\
+0 & 3 & -1 & -1\\
+0 & 0 & 2 & -2\\
+-1 & -1 & 0 & 2
+\end{pmatrix} \]
+
+\schritt{Schritt 5 --- Entwicklung nach der ersten Spalte}
+Einträge der ersten Spalte: $3$ (Zeile 1) und $-1$ (Zeile 4).
+\begin{align*}
+\det L_5 \;=\;& 3 \cdot \det\!\begin{pmatrix} 3 & -1 & -1\\ 0 & 2 & -2\\ -1 & 0 & 2\end{pmatrix}\\[3pt]
+&+\; (-1)\cdot(-1)^{4+1}\det\!\begin{pmatrix} -3 & 0 & 0\\ 3 & -1 & -1\\ 0 & 2 & -2 \end{pmatrix}
+\end{align*}
+
+Erste Unterdeterminante, Entwicklung nach der ersten Spalte:
+\begin{align*}
+&3\cdot\bigl(2\cdot 2 - (-2)\cdot 0\bigr) + (-1)\cdot(-1)^{3+1}\bigl((-1)(-2) - (-1)\cdot 2\bigr)\\
+&\qquad = 3\cdot 4 - (2 + 2) = 12 - 4 = 8
+\end{align*}
+
+Zweite Unterdeterminante, Entwicklung nach der ersten Zeile:
+\[ -3 \cdot \bigl((-1)(-2) - (-1)\cdot 2\bigr) = -3 \cdot (2+2) = -12 \]
+
+Also
+\[ \det L_5 = 3 \cdot 8 + (-1)\cdot(-1)\cdot(-12) = 24 - 12 = 12 . \]
+
+\schritt{Antwort}
+$K_{2,3}$ hat $\mathbf{12}$ Spannbäume.
+
+\schritt{Probe durch Abzählen}
+Ein Spannbaum hat $4$ Kanten von $6$ möglichen, es sind also $2$ wegzulassen: $\binom{6}{2} = 15$ Fälle. Nicht zulässig sind genau die Fälle, in denen eine Ecke $w_k$ beide ihrer Kanten verliert --- dann wäre $w_k$ isoliert. Für jedes der drei $w_k$ gibt es genau einen solchen Fall, und diese drei Fälle sind verschieden. Also $15 - 3 = 12$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Allgemein gilt die Formel $r^{s-1} s^{r-1}$ für die Spannbäume von $K_{r,s}$. Für $r=2$, $s=3$: $2^2 \cdot 3^1 = 4 \cdot 3 = 12$. \checkmark}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Borůvka, ein Elektrizitätswerk und drei Wiederentdeckungen}
+Das Problem des minimalen Spannbaums wurde 1926 von \Person{Otakar Borůvka} gelöst --- nicht aus mathematischem Interesse, sondern im Auftrag der westmährischen Elektrizitätswerke, die das Stromnetz in Südmähren möglichst günstig aufbauen wollten. Borůvkas Arbeit erschien auf Tschechisch und blieb weitgehend unbeachtet.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{3.8cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Verfahren}\\
+\midrule
+$1926$ & Borůvka & alle Komponenten gleichzeitig\\
+$1930$ & Jarník & von einer Ecke aus wachsen\\
+$1956$ & Kruskal & Kanten sortieren\\
+$1957$ & Prim & wie Jarník, unabhängig\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Das Verfahren aus Zeile 2 heißt heute meist \enquote{Algorithmus von Prim}, obwohl \Person{Vojtěch Jarník} es siebenundzwanzig Jahre früher veröffentlicht hatte --- auf Tschechisch, in einer Antwort auf Borůvkas Arbeit.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Geschichte ist lehrreich über die Rolle der Sprache in der Wissenschaft. Sie ist auch ein Beispiel dafür, dass dasselbe mathematische Problem viermal unabhängig gelöst werden kann, ohne dass jemand es merkt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wie schnell findet man einen minimalen Spannbaum?}
+Kruskal braucht im Wesentlichen die Zeit zum Sortieren der Kanten, also etwa $m \log m$ Rechenschritte. Das war jahrzehntelang der Stand.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Autoren} & \textbf{Schranke}\\
+\midrule
+$1956$ & Kruskal & $\Oh(m \log m)$\\
+$1975$ & Yao & $\Oh(m \log\log n)$\\
+$1995$ & Karger u.\,a. & $\Oh(m)$ mit Zufall\\
+$2002$ & Pettie, Ramachandran & optimal --- Schranke unbekannt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die letzte Zeile beschreibt einen ungewöhnlichen Zustand: Es gibt ein Verfahren, von dem man \kursiv{beweisen} kann, dass es bestmöglich ist --- ohne zu wissen, wie viele Schritte es braucht. Ob ein deterministisches Verfahren mit $\Oh(m)$ Schritten existiert, ist bis heute offen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Matrix-Baum-Satz hat inzwischen eine Nebenrolle in der Statistik bekommen: Er liefert die Normierungskonstante für Wahrscheinlichkeitsverteilungen über Spannbäume, wie sie beim Erzeugen zufälliger Netzwerke gebraucht werden.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 5.2} & Jeder zusammenhängende Graph hat einen Spannbaum\\
+\textbf{Satz 5.4} & Kruskal ist korrekt --- bewiesen durch Austauschargument\\
+\textbf{Satz 5.5} & $n^{n-2}$ Bäume auf $n$ beschrifteten Ecken\\
+\textbf{Prüfer-Code} & Bijektion zwischen Bäumen und Folgen, in beide Richtungen\\
+\textbf{Satz 5.8} & Matrix-Baum-Satz: Spannbäume als Determinante\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist Teil~II abgeschlossen. Ab Kapitel~6 kehren wir nach Königsberg zurück: Es geht darum, einen Graphen \kursiv{abzulaufen} --- jede Kante genau einmal oder jede Ecke genau einmal.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,815 @@
+\part{Der Körper}
+
+\chapter{Pharmakokinetik}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Das Antibiotikum im Patienten}
+Ein Patient des Klinikums Neustadt erhält das Antibiotikum aus Aufgabe 1.2. Bekannt sind:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{1.6cm}P{3.4cm}@{}}
+\toprule
+Halbwertszeit & $4$ h & aus Aufgabe 1.2\\
+Verteilungs\-volumen & $20$ l & \\
+Einzeldosis & $640$ mg & \\
+Wirksame Mindest\-konzentration & $2$ mg/l & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Die Fragen:}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Wie hoch steigt der Spiegel bei wiederholter Gabe?\\
+$2$ & Wann ist das Gleichgewicht erreicht?\\
+$3$ & Lässt es sich schneller erreichen?\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Annahme}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Körper wird als \kursiv{ein} gut durchmischter Behälter behandelt. Der Wirkstoff verteilt sich sofort gleichmäßig darin und wird mit einer festen Rate je Zeiteinheit eliminiert.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\draw[tief, thick, rounded corners=3pt, fill=tief!8] (-1.2,-0.7) rectangle (1.2,0.7);
+\node[font=\small, color=tief] at (0,0.2) {$V$};
+\node[font=\scriptsize, color=grau] at (0,-0.3) {Konzentration $c$};
+\draw[kanted, -{Stealth[length=6pt]}] (-2.6,0) -- (-1.3,0);
+\node[font=\scriptsize, color=akzent] at (-2.6,0.35) {Dosis $D$};
+\draw[kanted, -{Stealth[length=6pt]}] (1.3,0) -- (2.6,0);
+\node[font=\scriptsize, color=akzent] at (2.3,0.35) {$k\,c\,V$};
+\node[font=\scriptsize, color=grau] at (2.0,-0.35) {Ausscheidung};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Was daran offensichtlich falsch ist}
+Der Körper ist kein Behälter, und die Verteilung braucht Zeit. Der Abschnitt über den Bruchfall geht dem nach.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Modell trifft trotzdem für viele Wirkstoffe erstaunlich gut zu --- sobald die Verteilungsphase abgeschlossen ist. Es ist die Grundlage praktisch jeder Dosierungsempfehlung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die drei Kenngrößen}
+
+\begin{definition}
+\boxtitelm{Definition 10.1}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Verteilungs\-volumen $V$} & Das Volumen, in dem sich die Dosis verteilen müsste, um die gemessene Konzentration zu ergeben: $V = D/c_0$.\\
+\textbf{Eliminations\-konstante $k$} & Anteil, der je Zeiteinheit ausgeschieden wird.\\
+\textbf{Clearance $\mathrm{CL}$} & Volumen, das je Zeiteinheit vollständig vom Wirkstoff befreit wird.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Wie sie zusammenhängen}
+\schritt{Die Elimination}
+Die Menge im Körper ist $M = c\,V$. Die Ausscheidungsrate beträgt
+\[ -\frac{\dd M}{\dd t} = \mathrm{CL}\cdot c , \]
+denn je Zeiteinheit wird das Volumen $\mathrm{CL}$ geklärt, jedes mit der Konzentration $c$.
+
+\schritt{Die Gleichung}
+\[ V\frac{\dd c}{\dd t} = -\mathrm{CL}\cdot c \quad\Longrightarrow\quad \frac{\dd c}{\dd t} = -\frac{\mathrm{CL}}{V}\,c \]
+
+Das ist die Zerfallsgleichung aus Kapitel~1 mit
+\[ \boxed{\;k = \frac{\mathrm{CL}}{V}, \qquad \mathrm{CL} = k\,V, \qquad t_{1/2} = \frac{\ln 2}{k} = \frac{\ln 2 \cdot V}{\mathrm{CL}}\;} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Von den drei Größen sind nur zwei unabhängig. $V$ und $\mathrm{CL}$ sind die \kursiv{grundlegenden} --- sie haben eine unmittelbare körperliche Bedeutung. Die Halbwertszeit ist eine abgeleitete Größe und kann sich ändern, ohne dass sich die Ausscheidungsleistung ändert: Bei Wassereinlagerung steigt $V$, und $t_{1/2}$ steigt mit, obwohl die Niere unverändert arbeitet.}
+\end{minipage}
+\end{center}
+
+\schritt{Für den Leitfall}
+\[ k = \frac{\ln 2}{4} = 0{,}1733\ \mathrm{h}^{-1} \]
+\[ \mathrm{CL} = k\,V = 0{,}1733 \cdot 20 = 3{,}47\ \mathrm{l/h} \]
+\[ c_0 = \frac{D}{V} = \frac{640}{20} = 32\ \mathrm{mg/l} \]
+--- derselbe Wert wie in Aufgabe 1.2. \checkmark
+\end{merksatz}
+
+\section{Die Dauerinfusion}
+
+\begin{merksatz}
+\boxtitel{Satz 10.2 --- Anflutung}
+Wird der Wirkstoff mit der festen Rate $R$ (Menge je Zeit) infundiert, so gilt
+\[ c(t) = \frac{R}{\mathrm{CL}}\left(1 - e^{-kt}\right) . \]
+
+\schritt{Beweis}
+Die Gleichung lautet
+\[ V\frac{\dd c}{\dd t} = R - \mathrm{CL}\cdot c \quad\Longrightarrow\quad \frac{\dd c}{\dd t} = \frac{R}{V} - k\,c . \]
+
+\kursiv{Trennung der Veränderlichen.} Wir schreiben $c_\infty := R/\mathrm{CL} = R/(kV)$, dann ist
+\[ \frac{\dd c}{\dd t} = k\,(c_\infty - c) \]
+\[ \frac{\dd c}{c_\infty - c} = k\,\dd t \]
+
+Integrieren --- links mit der Substitution $u = c_\infty - c$, also $\dd u = -\dd c$:
+\[ -\ln(c_\infty - c) = kt + C_1 \]
+\[ c_\infty - c = A\,e^{-kt} \]
+
+\kursiv{Anfangsbedingung} $c(0) = 0$ liefert $A = c_\infty$:
+\[ c(t) = c_\infty\left(1 - e^{-kt}\right) . \qquad \blacksquare \]
+
+\schritt{Die Probe}
+\[ \frac{\dd c}{\dd t} = c_\infty\,k\,e^{-kt} \]
+\[ k(c_\infty - c) = k\,c_\infty e^{-kt} \quad \checkmark \]
+und $c(0) = 0$. \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Gleichgewichtsspiegel}
+\[ c_\infty = \frac{R}{\mathrm{CL}} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Gleichgewichtsspiegel hängt nur von Infusionsrate und Clearance ab --- nicht vom Verteilungsvolumen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist eine der praktisch wichtigsten Aussagen der Pharmakokinetik. Will man einen bestimmten Spiegel halten, so braucht man nur die Clearance zu kennen. Und wenn die Nierenfunktion nachlässt, sinkt $\mathrm{CL}$ --- der Spiegel steigt entsprechend, bei unveränderter Dosis.}
+\end{minipage}
+\end{center}
+
+\schritt{Für den Leitfall}
+Um dauerhaft $20$ mg/l zu halten:
+\[ R = \mathrm{CL}\cdot c_\infty = 3{,}47 \cdot 20 = 69{,}3\ \mathrm{mg/h} \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 10.3 --- die Vier-Halbwertszeiten-Regel}
+Der Anteil des Endwerts nach $n$ Halbwertszeiten beträgt
+\[ 1 - \left(\tfrac12\right)^{n} . \]
+
+\schritt{Beweis}
+Nach $n$ Halbwertszeiten ist $t = n\,t_{1/2} = n\ln2/k$, also
+\[ e^{-kt} = e^{-n\ln 2} = \left(e^{\ln 2}\right)^{-n} = 2^{-n} = \left(\tfrac12\right)^{n} . \qquad \blacksquare \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Halbwerts\-zeiten} & \textbf{erreicht} & \\
+\midrule
+$1$ & $50{,}00\,\%$ & \\
+$2$ & $75{,}00\,\%$ & \\
+$3$ & $87{,}50\,\%$ & \\
+$\mathbf{4}$ & $\mathbf{93{,}75\,\%}$ & \textcolor{gruen}{Faustregel}\\
+$5$ & $96{,}88\,\%$ & \\
+$7$ & $99{,}22\,\%$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dieselbe Tabelle wie in Kapitel~1, nur von unten gelesen.} Das ist kein Zufall: Die Anflutungskurve ist das Spiegelbild der Abklingkurve.
+\end{minipage}
+\end{center}
+
+\schritt{Die praktische Folgerung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach vier Halbwertszeiten ist das Gleichgewicht praktisch erreicht --- unabhängig von der Dosis. Wer die Infusionsrate verdoppelt, verdoppelt den Endwert, erreicht ihn aber nicht schneller. Für den Leitfall bedeutet das $16$ Stunden; bei Wirkstoffen mit einer Halbwertszeit von Tagen entsprechend Wochen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Antwort auf Frage 3 --- die Aufsättigungsdosis}
+Will man den Zielspiegel sofort erreichen, gibt man vorweg die Menge, die zu diesem Spiegel gehört:
+\[ D_{\text{Auf}} = c_\infty \cdot V = 20 \cdot 20 = 400\ \mathrm{mg} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hier ist es umgekehrt wie beim Gleichgewichtsspiegel: Die Aufsättigungsdosis hängt nur vom \kursiv{Volumen} ab, die Erhaltungsdosis nur von der \kursiv{Clearance}. Zwei verschiedene Fragen, zwei verschiedene Größen --- das ist der Grund, warum man beide getrennt kennt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wiederholte Gaben}
+
+\begin{merksatz}
+\boxtitel{Satz 10.4 --- der Gleichgewichtszustand}
+Wird alle $\tau$ Zeiteinheiten die Dosis $D$ gegeben, so pendeln sich die Spiegel ein bei
+\[ c_{\max} = \frac{D/V}{1-r}, \qquad c_{\min} = \frac{(D/V)\,r}{1-r} \qquad\text{mit}\qquad r = e^{-k\tau} . \]
+
+\schritt{Beweis}
+Sei $c_n$ der Höchstwert unmittelbar nach der $n$-ten Gabe. Vor der nächsten Gabe ist der Spiegel auf $c_n r$ gefallen, dann kommt $D/V$ hinzu:
+\[ c_{n+1} = c_n\,r + \frac{D}{V} \]
+
+Das ist eine Rekursion wie in Kapitel~3. Im Gleichgewicht gilt $c_{n+1} = c_n = c_{\max}$:
+\[ c_{\max} = c_{\max}\,r + \frac{D}{V} \quad\Longrightarrow\quad c_{\max}(1-r) = \frac{D}{V} \quad\Longrightarrow\quad c_{\max} = \frac{D/V}{1-r} . \]
+
+Der Tiefstwert ist $c_{\min} = c_{\max}\,r$. $\blacksquare$
+
+\schritt{Die Stabilität}
+Nach Satz 3.4 ist der Fixpunkt stabil, wenn $|f'| < 1$. Hier ist $f(c) = cr + D/V$, also $f' = r = e^{-k\tau} < 1$. \checkmark
+
+\schritt{Der Anreicherungsfaktor}
+\[ R_{\text{ac}} = \frac{1}{1-r} \]
+gibt an, um welchen Faktor der Spitzenspiegel gegenüber der Einzelgabe steigt.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Antwort auf die Fragen 1 und 2}
+Für den Leitfall mit $\tau = 8$ h --- genau zwei Halbwertszeiten:
+\[ r = e^{-0{,}1733 \cdot 8} = e^{-1{,}3863} = 0{,}2500 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Wert $0{,}25$ ist exakt, nicht gerundet: Zwei Halbwertszeiten bedeuten Viertelung. Man sollte solche Werte immer über die Halbwertszeiten prüfen --- es ist die schnellste Fehlerkontrolle.}
+\end{minipage}
+\end{center}
+
+\[ R_{\text{ac}} = \frac{1}{1-0{,}25} = \frac{4}{3} = 1{,}333 \]
+\[ c_{\max} = \frac{32}{0{,}75} = 42{,}67\ \mathrm{mg/l}, \qquad c_{\min} = 42{,}67 \cdot 0{,}25 = 10{,}67\ \mathrm{mg/l} \]
+
+\schritt{Der Weg dorthin}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+\textbf{Gabe} & $c_{\max}$ & $c_{\min}$ & \textbf{Anteil am Endwert}\\
+\midrule
+$1$ & $32{,}00$ & $8{,}00$ & $75{,}0\,\%$\\
+$2$ & $40{,}00$ & $10{,}00$ & $93{,}8\,\%$\\
+$3$ & $42{,}00$ & $10{,}50$ & $98{,}4\,\%$\\
+$4$ & $42{,}50$ & $10{,}62$ & $99{,}6\,\%$\\
+$5$ & $42{,}62$ & $10{,}66$ & $99{,}9\,\%$\\
+$\infty$ & $\mathbf{42{,}67}$ & $\mathbf{10{,}67}$ & $100\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nach der zweiten Gabe --- also nach $16$ Stunden --- sind $93{,}8\,\%$ erreicht.} Das ist wieder die Vier-Halbwertszeiten-Regel: $16$ h sind vier Halbwertszeiten.
+\end{minipage}
+\end{center}
+
+\schritt{Die Schwankungsbreite}
+\[ \frac{c_{\max}}{c_{\min}} = \frac{1}{r} = e^{k\tau} = 2^{\tau/t_{1/2}} = 2^{2} = 4 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Schwankungsbreite hängt \kursiv{allein} vom Verhältnis aus Dosierungsintervall und Halbwertszeit ab --- nicht von der Dosis. Je Halbwertszeit im Intervall verdoppelt sich das Verhältnis.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+$\tau/t_{1/2}$ & $c_{\max}/c_{\min}$ & \\
+\midrule
+$0{,}5$ & $1{,}41$ & \textcolor{gruen}{fast gleichmäßig}\\
+$1$ & $2$ & \\
+$2$ & $4$ & unser Fall\\
+$3$ & $8$ & \\
+$4$ & $16$ & \textcolor{akzent}{starke Schwankung}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Aufsättigungsdosis bei wiederholter Gabe}
+\[ D_{\text{Auf}} = \frac{D}{1-r} = D \cdot R_{\text{ac}} = 640 \cdot 1{,}333 = 853\ \mathrm{mg} \]
+
+Gibt man zuerst $853$ mg und danach alle acht Stunden $640$ mg, so liegt der Spiegel von Anfang an im Gleichgewichtsbereich.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei einem Anreicherungsfaktor von $1{,}33$ lohnt das kaum. Bei Wirkstoffen mit langer Halbwertszeit und kurzem Intervall wird der Faktor groß --- und dann ist die Aufsättigung unumgänglich, weil man sonst tagelang unwirksam behandelt.}
+\end{minipage}
+\end{center}
+
+\schritt{Ein Beispiel dazu}
+$t_{1/2} = 40$ h, $\tau = 12$ h:
+\[ r = 2^{-12/40} = 2^{-0{,}3} = 0{,}812, \qquad R_{\text{ac}} = \frac{1}{0{,}188} = 5{,}32 \]
+Ohne Aufsättigung dauerte es $4 \cdot 40 = 160$ Stunden --- fast sieben Tage --- bis zum Gleichgewicht.
+\end{merksatz}
+
+\section{Die Gabe durch den Mund}
+
+\begin{merksatz}
+\boxtitel{Zwei gegenläufige Vorgänge}
+Bei oraler Gabe kommt der Wirkstoff nicht auf einmal an. Man beschreibt die Aufnahme als eigenen Vorgang erster Ordnung mit der Rate $k_a$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\node[draw=grau, thick, rounded corners=3pt, minimum width=1.4cm, minimum height=0.7cm] (G) at (-2.4,0) {Darm};
+\node[draw=tief, thick, rounded corners=3pt, minimum width=1.4cm, minimum height=0.7cm, fill=tief!8] (B) at (0,0) {Blut};
+\draw[kanted, -{Stealth[length=6pt]}] (G) -- (B) node[midway, above, font=\scriptsize, color=grau] {$k_a$};
+\draw[kanted, -{Stealth[length=6pt]}] (B) -- (2.2,0) node[midway, above, font=\scriptsize, color=grau] {$k$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Das Ergebnis}
+\[ c(t) = \frac{F\,D}{V}\cdot\frac{k_a}{k_a-k}\left(e^{-kt} - e^{-k_a t}\right) \]
+mit der \Begriff{Bioverfügbarkeit} $F$ --- dem Anteil, der überhaupt ins Blut gelangt.
+
+Man nennt das die \Begriff{Bateman-Funktion}.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Herleitung führt auf eine lineare Differentialgleichung mit einem abklingenden Zufluss; sie steht in Band 14, Teil~II. Wir prüfen die Lösung stattdessen an ihren Eigenschaften.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Probe an $t=0$}
+\[ c(0) = \frac{FD}{V}\cdot\frac{k_a}{k_a-k}\,(1-1) = 0 \quad \checkmark \]
+Richtig: Unmittelbar nach dem Schlucken ist noch nichts im Blut.
+
+\schritt{Die Probe für große $t$}
+Da $k_a > k$, klingt $e^{-k_at}$ schneller ab. Für große $t$ bleibt
+\[ c(t) \approx \frac{FD}{V}\cdot\frac{k_a}{k_a-k}\,e^{-kt} , \]
+also derselbe Abfall wie bei der Spritze --- nur von einem anderen Ausgangswert. \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Gipfel}
+\[ t_{\max} = \frac{\ln(k_a/k)}{k_a - k} \]
+
+\schritt{Herleitung}
+Ableiten und null setzen:
+\[ \frac{\dd c}{\dd t} = \frac{FD}{V}\cdot\frac{k_a}{k_a-k}\left(-k\,e^{-kt} + k_a\,e^{-k_at}\right) \stackrel{!}{=} 0 \]
+\[ k_a\,e^{-k_at} = k\,e^{-kt} \quad\Longrightarrow\quad \frac{k_a}{k} = e^{(k_a-k)t} \]
+\[ t_{\max} = \frac{\ln(k_a/k)}{k_a-k} . \qquad \blacksquare \]
+
+\schritt{Für den Leitfall}
+Mit $k_a = 1{,}0\ \mathrm{h}^{-1}$ und $F = 0{,}8$:
+\[ t_{\max} = \frac{\ln(1{,}0/0{,}1733)}{1{,}0-0{,}1733} = \frac{\ln 5{,}770}{0{,}8267} = \frac{1{,}7527}{0{,}8267} = 2{,}12\ \mathrm{h} \]
+\[ c_{\max} = 17{,}7\ \mathrm{mg/l} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.4cm}P{1.8cm}@{}}
+\toprule
+$t$ (h) & $c$ (mg/l) & $t$ (h) & $c$ (mg/l)\\
+\midrule
+$0$ & $0{,}00$ & $3$ & $16{,}87$\\
+$0{,}5$ & $9{,}61$ & $4$ & $14{,}92$\\
+$1$ & $14{,}65$ & $6$ & $10{,}87$\\
+$\mathbf{2{,}12}$ & $\mathbf{17{,}73}$ & $8$ & $7{,}73$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (7.0,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.6);
+\foreach \x/\lab in {0/0, 1.5/3, 3.0/6, 4.5/9, 6.0/12}
+  \node[font=\scriptsize, color=grau] at (\x,-0.32) {\lab};
+\node[font=\scriptsize, color=grau] at (3.4,-0.75) {Stunden};
+\draw[tief, line width=1.3pt] (0,3.2) .. controls (0.8,1.9) and (1.6,1.25) .. (3.0,0.77)
+  .. controls (4.4,0.47) and (5.4,0.29) .. (6.5,0.18);
+\draw[akzent, line width=1.3pt, smooth, samples=80, domain=0:6.5]
+  plot (\x, {2.56*1.2096*(exp(-0.1733*\x*2)-exp(-1.0*\x*2))});
+\node[font=\scriptsize, color=tief, anchor=west] at (1.7,2.3) {Spritze};
+\node[font=\scriptsize, color=akzent, anchor=west] at (2.3,1.35) {Tablette};
+\draw[grau!50, dashed] (1.06,0) -- (1.06,1.85);
+\node[font=\scriptsize, color=grau] at (1.06,-0.62) {$t_{\max}$};
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Fläche unter der Kurve}
+\[ \mathrm{AUC} = \int_0^\infty c(t)\,\dd t = \frac{F\,D}{\mathrm{CL}} \]
+
+\schritt{Warum}
+Die insgesamt ausgeschiedene Menge muss der aufgenommenen entsprechen:
+\[ F\,D = \int_0^\infty \mathrm{CL}\cdot c(t)\,\dd t = \mathrm{CL}\cdot\mathrm{AUC} . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Fläche hängt nur von der aufgenommenen Menge und der Clearance ab --- nicht von der Aufnahmegeschwindigkeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Für den Leitfall}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+& \textbf{AUC} & $c_{\max}$\\
+\midrule
+Spritze & $184{,}7$ & $32{,}0$\\
+Tablette & $147{,}7$ & $17{,}7$\\
+Verhältnis & $0{,}80 = F$ & $0{,}55$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Verhältnis der Flächen ist genau die Bioverfügbarkeit --- und genau so wird sie gemessen. Beim Spitzenspiegel gilt das nicht: Er hängt zusätzlich von der Aufnahmegeschwindigkeit ab. Bei Prüfungen der Austauschbarkeit von Arzneimitteln werden deshalb \kursiv{beide} Größen verglichen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Vier Stellen, an denen das Modell bricht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{2.8cm}@{}}
+\toprule
+\textbf{Verletzung} & \textbf{Wann} & \textbf{Folge}\\
+\midrule
+Zwei Kammern & Verteilung braucht Zeit & früher Abfall steiler\\
+Sättigung & Enzyme ausgelastet & \textcolor{akzent}{Elimination nicht mehr erster Ordnung}\\
+Veränderliche Clearance & Nierenfunktion & Spiegel steigt\\
+Erster Durchgang & Leberpassage & $F$ klein und schwankend\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur Sättigungskinetik}
+Wird der Wirkstoff durch ein Enzym abgebaut, so gilt genauer
+\[ -\frac{\dd c}{\dd t} = \frac{V_{\max}\,c}{K_M + c} \]
+--- die Michaelis-Menten-Beziehung aus Kapitel~11.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+$c \ll K_M$ & Nenner $\approx K_M$, also Abbau proportional zu $c$ --- erster Ordnung, wie bisher.\\
+$c \gg K_M$ & Nenner $\approx c$, also Abbau $\approx V_{\max}$ --- \kursiv{konstant}, unabhängig von $c$.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Im Sättigungsbereich gibt es keine Halbwertszeit.} Der Spiegel fällt linear statt exponentiell, und eine Dosiserhöhung kann den Spiegel überproportional steigen lassen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das betrifft unter anderem Phenytoin, Alkohol und hochdosierte Salicylate. Bei Alkohol ist es alltäglich bekannt: Der Abbau beträgt etwa $0{,}15$ Promille je Stunde, gleichgültig wie hoch der Spiegel ist. Widmark beschrieb das 1932 --- und nannte damit als Erster einen Wirkstoff, der der Zerfallsgleichung aus Kapitel~1 \kursiv{nicht} folgt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Das Zweikammermodell}
+Nach einer Spritze fällt der Spiegel zunächst steil, dann flacher. Die erste Phase ist die Verteilung ins Gewebe, die zweite die eigentliche Ausscheidung.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (6.2,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.4);
+\draw[tief, line width=1.3pt]
+  (0,3.2) .. controls (0.35,1.9) and (0.7,1.55) .. (1.2,1.42)
+  -- (6.0,0.35);
+\draw[grau!55, dashed, line width=0.9pt] (0,1.85) -- (6.0,0.35);
+\node[font=\scriptsize, color=akzent] at (0.85,2.55) {Verteilung};
+\node[font=\scriptsize, color=grau] at (4.0,1.15) {Ausscheidung};
+\node[font=\scriptsize\itshape, color=grau] at (3.1,-0.55) {halblogarithmisch aufgetragen};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In der halblogarithmischen Darstellung aus Kapitel~1 sieht man das sofort: Zwei Geraden statt einer. Die Steigung der zweiten liefert die eigentliche Eliminationskonstante; misst man zu früh, so erhält man eine zu kurze Halbwertszeit und dosiert zu hoch.}
+\end{minipage}
+\end{center}
+
+\schritt{Die praktische Regel}
+Blutspiegel zur Therapiesteuerung werden unmittelbar vor der nächsten Gabe abgenommen --- als Talspiegel. Dann ist die Verteilungsphase sicher vorbei.
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Dosierung bei eingeschränkter Nierenfunktion}
+Ein Wirkstoff wird vollständig über die Niere ausgeschieden. Bei normaler Funktion gilt $\mathrm{CL} = 6{,}0$ l/h und $V = 40$ l. Bei einem Patienten ist die Nierenfunktion auf $40\,\%$ vermindert. Wie ändern sich Halbwertszeit, Erhaltungs- und Aufsättigungsdosis?
+
+\loesung
+\schritt{Schritt 1 --- Normalfall}
+\[ k = \frac{\mathrm{CL}}{V} = \frac{6{,}0}{40} = 0{,}15\ \mathrm{h}^{-1} \]
+\[ t_{1/2} = \frac{\ln 2}{0{,}15} = 4{,}62\ \mathrm{h} \]
+
+\schritt{Schritt 2 --- Eingeschränkte Funktion}
+\[ \mathrm{CL} = 0{,}4 \cdot 6{,}0 = 2{,}4\ \mathrm{l/h} \]
+Das Verteilungsvolumen ändert sich nicht:
+\[ k = \frac{2{,}4}{40} = 0{,}06\ \mathrm{h}^{-1}, \qquad t_{1/2} = \frac{0{,}6931}{0{,}06} = 11{,}55\ \mathrm{h} \]
+
+\schritt{Schritt 3 --- Die Zusammenstellung}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.0cm}P{1.6cm}@{}}
+\toprule
+& \textbf{normal} & \textbf{vermindert} & \textbf{Faktor}\\
+\midrule
+$\mathrm{CL}$ & $6{,}0$ & $2{,}4$ & $0{,}40$\\
+$V$ & $40$ & $40$ & $1{,}00$\\
+$k$ & $0{,}150$ & $0{,}060$ & $0{,}40$\\
+$t_{1/2}$ & $4{,}62$ h & $11{,}55$ h & $\mathbf{2{,}50}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 4 --- Die Erhaltungsdosis}
+Der Gleichgewichtsspiegel ist $c_\infty = R/\mathrm{CL}$. Um denselben Spiegel zu halten:
+\[ R_{\text{neu}} = 0{,}4 \cdot R_{\text{alt}} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Erhaltungsdosis muss auf $40\,\%$ gesenkt werden --- genau im Verhältnis der Clearance.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Aufsättigungsdosis}
+\[ D_{\text{Auf}} = c_{\text{Ziel}}\cdot V \]
+$V$ ist unverändert, also bleibt die Aufsättigungsdosis \textbf{gleich}.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die praktisch wichtigste Aussage der Aufgabe und wird regelmäßig falsch gemacht: \textbf{Bei Niereninsuffizienz wird die Erhaltungsdosis angepasst, die Aufsättigungsdosis nicht.} Wer auch die erste Gabe reduziert, erreicht den wirksamen Bereich unter Umständen tagelang nicht --- und bei einer schweren Infektion kann das entscheidend sein.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Zwei Wege zur Anpassung}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Dosis} & \textbf{Intervall}\\
+\midrule
+Dosis senken & $\times 0{,}4$ & unverändert\\
+Intervall dehnen & unverändert & $\times 2{,}5$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Beide halten den mittleren Spiegel gleich. Sie unterscheiden sich in der Schwankungsbreite:
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dosissenkung bei gleichem Intervall ergibt geringere Schwankungen --- richtig bei Wirkstoffen, die dauerhaft über einer Schwelle liegen müssen. Intervalldehnung ergibt hohe Spitzen und tiefe Täler --- richtig bei Wirkstoffen, deren Wirkung von der Spitzenkonzentration abhängt und deren Giftigkeit vom Talspiegel. Bei Aminoglykosiden trifft genau das zu, und deshalb dehnt man dort das Intervall.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Ein Dosierungsschema entwerfen}
+Ein Antibiotikum soll dauerhaft zwischen $5$ und $20$ mg/l liegen. Bekannt: $t_{1/2} = 6$ h, $V = 35$ l. Bestimmen Sie Intervall und Dosis.
+
+\loesung
+\schritt{Schritt 1 --- Die Schwankungsbreite festlegen}
+\[ \frac{c_{\max}}{c_{\min}} = \frac{20}{5} = 4 \]
+
+\schritt{Schritt 2 --- Das Intervall}
+Nach Abschnitt 10.4 ist
+\[ \frac{c_{\max}}{c_{\min}} = 2^{\tau/t_{1/2}} \quad\Longrightarrow\quad 4 = 2^{\tau/6} \quad\Longrightarrow\quad \frac{\tau}{6} = 2 \quad\Longrightarrow\quad \tau = 12\ \mathrm{h} \]
+
+\textbf{Zweimal täglich.}
+
+\schritt{Schritt 3 --- Die Dosis}
+\[ r = e^{-k\tau} = 2^{-2} = 0{,}25 \]
+\[ c_{\max} = \frac{D/V}{1-r} \quad\Longrightarrow\quad 20 = \frac{D/35}{0{,}75} \]
+\[ \frac{D}{35} = 20 \cdot 0{,}75 = 15 \quad\Longrightarrow\quad D = 525\ \mathrm{mg} \]
+
+\schritt{Schritt 4 --- Die Proben}
+\[ c_{\max} = \frac{525/35}{0{,}75} = \frac{15}{0{,}75} = 20{,}0 \quad \checkmark \]
+\[ c_{\min} = 20{,}0 \cdot 0{,}25 = 5{,}0 \quad \checkmark \]
+
+\schritt{Schritt 5 --- Die Aufsättigung}
+\[ D_{\text{Auf}} = \frac{525}{0{,}75} = 700\ \mathrm{mg} \]
+
+\kursiv{Probe:} $700/35 = 20$ mg/l unmittelbar nach der Gabe --- genau der Zielhöchstwert. \checkmark
+
+\schritt{Schritt 6 --- Der Verlauf ohne Aufsättigung}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{2.2cm}@{}}
+\toprule
+\textbf{Gabe} & $c_{\max}$ & $c_{\min}$ & \textbf{im Zielbereich?}\\
+\midrule
+$1$ & $15{,}0$ & $3{,}75$ & \textcolor{akzent}{nein}\\
+$2$ & $18{,}75$ & $4{,}69$ & \textcolor{akzent}{knapp nicht}\\
+$3$ & $19{,}69$ & $4{,}92$ & \textcolor{mittel}{fast}\\
+$4$ & $19{,}92$ & $4{,}98$ & \textcolor{gruen}{ja}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ohne Aufsättigung liegt der Talspiegel in den ersten zwei Tagen unter der Wirkschwelle. Bei einer schweren Infektion sind das zwei verlorene Tage --- genau dann, wenn die Erregerlast am größten ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Eine Alternative prüfen}
+Wäre $\tau = 8$ h besser?
+\[ r = 2^{-8/6} = 2^{-1{,}333} = 0{,}397, \qquad \frac{c_{\max}}{c_{\min}} = 2{,}52 \]
+Mit $c_{\min} = 5$: $c_{\max} = 12{,}6$ --- deutlich unter $20$.
+\[ D = c_{\max}\,V\,(1-r) = 12{,}6 \cdot 35 \cdot 0{,}603 = 266\ \mathrm{mg} \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.0cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+$\tau$ & \textbf{Dosis} & \textbf{Tagesdosis} & \textbf{Spanne}\\
+\midrule
+$12$ h & $525$ mg & $1050$ mg & $5$--$20$\\
+$8$ h & $266$ mg & $798$ mg & $5$--$12{,}6$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das kürzere Intervall braucht ein Viertel weniger Wirkstoff für denselben Talspiegel --- weil weniger im hohen Bereich verschwendet wird. Dafür muss dreimal täglich gegeben werden, was die Zuverlässigkeit der Einnahme mindert. Diese Abwägung ist keine Rechenfrage.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- Wann die Halbwertszeit täuscht}
+Bei einem Patienten wird eine verlängerte Halbwertszeit gemessen. Zeigen Sie an zwei Fällen, dass daraus \kursiv{nicht} auf eine verminderte Ausscheidung zu schließen ist.
+
+\loesung
+\schritt{Schritt 1 --- Die Grundbeziehung}
+\[ t_{1/2} = \frac{\ln 2 \cdot V}{\mathrm{CL}} \]
+
+Die Halbwertszeit steigt, wenn $V$ steigt \kursiv{oder} $\mathrm{CL}$ fällt.
+
+\schritt{Schritt 2 --- Fall A: verminderte Clearance}
+Ausgangswerte $V = 30$ l, $\mathrm{CL} = 5$ l/h:
+\[ t_{1/2} = \frac{0{,}693 \cdot 30}{5} = 4{,}16\ \mathrm{h} \]
+Bei halbierter Clearance:
+\[ t_{1/2} = \frac{0{,}693 \cdot 30}{2{,}5} = 8{,}32\ \mathrm{h} \]
+
+\schritt{Schritt 3 --- Fall B: vergrößertes Verteilungsvolumen}
+Etwa bei ausgeprägter Wassereinlagerung: $V = 60$ l bei unveränderter Clearance:
+\[ t_{1/2} = \frac{0{,}693 \cdot 60}{5} = 8{,}32\ \mathrm{h} \]
+
+\textbf{Dieselbe Halbwertszeit, völlig verschiedene Ursache.}
+
+\schritt{Schritt 4 --- Die Folgen für die Dosierung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{1.6cm}P{2.0cm}P{2.1cm}@{}}
+\toprule
+& \textbf{Ausgang} & \textbf{Fall A} & \textbf{Fall B}\\
+\midrule
+$V$ & $30$ & $30$ & $\mathbf{60}$\\
+$\mathrm{CL}$ & $5$ & $\mathbf{2{,}5}$ & $5$\\
+$t_{1/2}$ & $4{,}16$ & $8{,}32$ & $8{,}32$\\
+\midrule
+Erhaltungs\-dosis & --- & \textcolor{akzent}{halbieren} & \textcolor{gruen}{unverändert}\\
+Aufsättigungs\-dosis & --- & \textcolor{gruen}{unverändert} & \textcolor{akzent}{verdoppeln}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Anpassungen sind genau entgegengesetzt.} Wer beide Fälle verwechselt, dosiert in beide Richtungen falsch.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Daraus folgt die Regel, die am Anfang von Abschnitt 10.2 stand: Man denkt in $V$ und $\mathrm{CL}$, nicht in der Halbwertszeit. Die Halbwertszeit ist eine abgeleitete Größe und sagt für sich genommen nichts darüber, was zu tun ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Wie man die Fälle unterscheidet}
+Man misst den Spiegel unmittelbar nach einer bekannten Dosis:
+\[ V = \frac{D}{c_0} \]
+
+Ist $c_0$ niedriger als erwartet, liegt Fall B vor. Ist $c_0$ normal und der Abfall verlangsamt, liegt Fall A vor.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Bei Schwerkranken auf der Intensivstation treten beide Veränderungen häufig gemeinsam auf --- vergrößertes Verteilungsvolumen durch Flüssigkeitstherapie und veränderte Clearance. Deshalb wird dort bei mehreren Antibiotika der Spiegel gemessen statt nach Tabelle dosiert.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von der Blutalkoholbestimmung zur Arzneimitteldosierung}
+\Person{Erik Widmark} (1889--1945), schwedischer Rechtsmediziner, untersuchte in den 1920er Jahren den Abbau von Alkohol. Er fand, dass der Blutspiegel \kursiv{linear} fällt --- nicht exponentiell --- und stellte 1932 die nach ihm benannte Formel auf.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Widmark führte dabei den Begriff des Verteilungsvolumens ein, wenn auch unter anderem Namen: Sein Faktor $\varrho$ ist das Verteilungsvolumen je Kilogramm Körpergewicht. Er ist bei Frauen kleiner als bei Männern, weil Alkohol sich nicht im Fettgewebe verteilt --- die erste Anwendung eines pharmakokinetischen Parameters auf Unterschiede zwischen Personengruppen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Begründung des Fachs}
+\Person{Friedrich Hartmut Dost} (1910--1985), Kinderarzt in Leipzig und später Gießen, prägte 1953 den Begriff \kursiv{Pharmakokinetik} und schrieb das erste Lehrbuch dazu.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sein Ausgangspunkt war ein klinisches Bedürfnis: Kinder sind keine kleinen Erwachsenen, und die Umrechnung der Dosis nach Körpergewicht führte regelmäßig zu falschen Spiegeln. Dost zeigte, dass man Volumen und Clearance getrennt betrachten muss --- genau die Unterscheidung aus Aufgabe 10.3.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Funktion}
+\Person{Harry Bateman} (1882--1946), britischer Mathematiker, leitete die nach ihm benannte Funktion 1910 her --- für radioaktive Zerfallsreihen, in denen ein Stoff entsteht und zugleich zerfällt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dass dieselbe Gleichung die Aufnahme einer Tablette beschreibt, bemerkte man erst Jahrzehnte später. Es ist wieder das Muster aus Kapitel~6: Die Mathematik ist lange vor der Anwendung da.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Pharmakokinetik heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Bevölkerungs\-modelle} & Statt eines Patienten modelliert man eine ganze Gruppe und schätzt, wie stark die Parameter zwischen Personen streuen --- die Mehrebenenmodelle aus Band 17, Kapitel~11.\\
+\textbf{Physiologisch begründete Modelle} & Ein Kompartiment je Organ, mit gemessenen Durchblutungen. Erlaubt Vorhersagen ohne Versuche am Menschen.\\
+\textbf{Spiegelsteuerung} & Messung und Anpassung während der Behandlung, zunehmend rechnergestützt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Der entscheidende Fortschritt: Man kann aus wenigen Messungen je Patient, aber vielen Patienten, die Verteilung der Parameter schätzen --- und daraus für einen neuen Patienten eine Vorhersage ableiten, die mit jeder Messung genauer wird.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der bayessche Zugang aus Band 17, Kapitel~5: Die Bevölkerungsverteilung ist die Vorwissensverteilung, die Messung am einzelnen Patienten die Beobachtung. Eine einzige Spiegelmessung liefert dann eine erheblich bessere Dosisempfehlung als jede Tabelle.}
+\end{minipage}
+\end{center}
+
+\schritt{Was bei Antibiotika besonders zählt}
+Bei Antibiotika reicht der Spiegel allein nicht --- entscheidend ist sein Verhältnis zur Empfindlichkeit des Erregers.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Zeitabhängig} & Wirkung hängt davon ab, wie lange der Spiegel über der Hemmkonzentration liegt --- kurze Intervalle oder Dauerinfusion.\\
+\textbf{Spiegel\-abhängig} & Wirkung hängt von der Spitze ab --- lange Intervalle, hohe Einzeldosen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Unterscheidung erklärt die Empfehlung aus Aufgabe 10.1, bei Aminoglykosiden das Intervall zu dehnen statt die Dosis zu senken --- und sie ist der Grund, warum bei Betalaktamen zunehmend über Dauerinfusion nachgedacht wird. Kapitel~14 verbindet das mit der Resistenzentwicklung.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Definition 10.1} & $\mathrm{CL} = kV$; nur zwei sind unabhängig\\
+\textbf{Satz 10.2} & Anflutung $c_\infty(1-e^{-kt})$\\
+\textbf{Satz 10.3} & vier Halbwertszeiten bis zum Gleichgewicht\\
+\textbf{Satz 10.4} & $c_{\max} = (D/V)/(1-r)$; Schwankung $2^{\tau/t_{1/2}}$\\
+\textbf{Getrennt denken} & Erhaltungsdosis aus $\mathrm{CL}$, Aufsättigung aus $V$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel gehen wir eine Ebene tiefer: zu den Enzymen und Rezeptoren, an denen der Wirkstoff angreift --- und zu der Sättigungskurve, die in diesem Kapitel schon aufgetaucht ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

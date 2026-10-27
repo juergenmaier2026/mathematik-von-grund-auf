@@ -1,0 +1,1153 @@
+\part{Der Begriff}
+
+\chapter{Was ein Graph ist}
+
+\section{Drei Fragen, die dieselbe Frage sind}
+
+Beginnen wir mit drei Aufgaben, die nichts miteinander zu tun zu haben scheinen.
+
+\begin{merksatz}
+\boxtitel{Erste Frage --- die Brücken von Königsberg}
+Die Stadt Königsberg lag im 18. Jahrhundert an beiden Ufern des Flusses Pregel. In der Mitte lag eine Insel, den Kneiphof, und weiter östlich, wo die beiden Flussarme sich vereinigen, ein weiteres Landstück. Sieben Brücken verbanden diese vier Landstücke.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.35]
+\fill[mittel!22] (-1.5,-1.15) rectangle (1.5,1.15);
+\fill[sand] (-1.5,0.72) rectangle (1.5,1.15);
+\fill[sand] (-1.5,-1.15) rectangle (1.5,-0.72);
+\fill[sand] (0.55,-0.35) rectangle (1.5,0.35);
+\fill[sand] (-0.45,0) ellipse (0.52 and 0.29);
+\draw[akzent, line width=1.3pt] (-0.78,0.22) -- (-0.78,0.72);
+\draw[akzent, line width=1.3pt] (-0.12,0.22) -- (-0.12,0.72);
+\draw[akzent, line width=1.3pt] (-0.78,-0.22) -- (-0.78,-0.72);
+\draw[akzent, line width=1.3pt] (-0.12,-0.22) -- (-0.12,-0.72);
+\draw[akzent, line width=1.3pt] (0.07,0) -- (0.55,0);
+\draw[akzent, line width=1.3pt] (1.02,0.35) -- (1.02,0.72);
+\draw[akzent, line width=1.3pt] (1.02,-0.35) -- (1.02,-0.72);
+\node[font=\scriptsize, color=grau] at (-1.05,0.93) {Nordufer};
+\node[font=\scriptsize, color=grau] at (-1.05,-0.93) {Südufer};
+\node[font=\scriptsize, color=grau] at (-0.45,0) {Insel};
+\node[font=\scriptsize, color=grau] at (1.05,0.0) {Ostland};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Die Frage der Bürger:} Kann man einen Spaziergang machen, bei dem man jede der sieben Brücken \kursiv{genau einmal} überquert?
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Zweite Frage --- der Dienstplan}
+An einer Klinik sollen fünf Ärztinnen --- nennen wir sie $A$, $B$, $C$, $D$, $E$ --- auf Dienste verteilt werden. Manche Paare dürfen nicht dieselbe Schicht bekommen, weil sie sich sonst in der Facharztweiterbildung gegenseitig blockieren:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.0cm}P{4.4cm}@{}}
+\toprule
+\textbf{Unverträgliche Paare} & $AB$, $AC$, $BC$,\newline $BD$, $CE$, $DE$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\textbf{Die Frage der Oberärztin:} Wie viele verschiedene Schichten braucht man mindestens?
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Dritte Frage --- die Kontaktnachverfolgung}
+Auf einer Station wird bei einem Patienten ein multiresistenter Keim nachgewiesen. Das Hygieneteam hat notiert, wer in den letzten Tagen mit wem längeren Kontakt hatte.
+
+\textbf{Die Frage des Hygieneteams:} Welche Personen können überhaupt betroffen sein --- und lässt sich die Station so in Gruppen zerlegen, dass zwischen den Gruppen kein einziger Kontakt bestand?
+\end{merksatz}
+
+Drei Fragen aus drei Welten. Was sie gemeinsam haben, sieht man erst, wenn man alles wegstreicht, was nicht zur Sache gehört.
+
+\begin{merksatz}
+\boxtitel{Was übrig bleibt, wenn man alles Überflüssige streicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{3.0cm}@{}}
+\toprule
+& \textbf{Die Dinge} & \textbf{Die Beziehung}\\
+\midrule
+Königsberg & Landstücke & \enquote{durch eine Brücke verbunden}\\
+Dienstplan & Ärztinnen & \enquote{unverträglich}\\
+Hygiene & Personen & \enquote{hatten Kontakt}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In allen drei Fällen gibt es eine endliche Menge von Dingen und eine Beziehung, die immer zwischen \kursiv{zwei} Dingen besteht und \kursiv{gegenseitig} ist: Wenn die Insel mit dem Nordufer durch eine Brücke verbunden ist, dann auch das Nordufer mit der Insel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+Genau dieses gemeinsame Skelett ist ein \Begriff{Graph}. Die Mathematik gewinnt ihre Kraft daraus, dass sie das Skelett einmal untersucht und die Ergebnisse dann allen drei Fragen zugleich zugutekommen.
+
+\section{Die Definition --- Zeichen für Zeichen}
+
+Jetzt kommt die Definition. Sie ist kurz, und sie enthält vier Zeichen, die vielleicht nicht selbstverständlich sind. Deshalb steht sie hier zuerst, und danach wird sie Stück für Stück auseinandergenommen.
+
+\begin{definition}
+\boxtitelm{Definition 1.1 --- Graph}
+Ein \Begriff{Graph} ist ein Paar $G = (V, E)$, wobei
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item $V$ eine endliche, nichtleere Menge ist --- ihre Elemente heißen \Begriff{Ecken};
+\item $E$ eine Menge von zweielementigen Teilmengen von $V$ ist --- ihre Elemente heißen \Begriff{Kanten}.
+\end{itemize}
+In Zeichen:
+\[ E \subseteq \bigl\{\, \{u,v\} \;:\; u \in V,\; v \in V,\; u \neq v \,\bigr\}. \]
+\end{definition}
+
+Das war die Definition. Nun das Auseinandernehmen.
+
+\begin{merksatz}
+\boxtitel{Was jedes Zeichen bedeutet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.6cm}P{7.0cm}@{}}
+\toprule
+$G$ & Der Name des Graphen. Ein Buchstabe, mehr nicht --- so wie eine Funktion \enquote{$f$} heißt.\\
+$(V,E)$ & Ein \Begriff{geordnetes Paar}: zwei Dinge in fester Reihenfolge. Erst die Ecken, dann die Kanten. Das Komma trennt sie.\\
+$V$ & Von lateinisch \kursiv{vertex}, Scheitelpunkt. Eine Menge, etwa $V = \{A, B, C, D, E\}$.\\
+$E$ & Von englisch \kursiv{edge}, Kante. Ebenfalls eine Menge --- aber ihre \kursiv{Elemente} sind selbst wieder Mengen.\\
+$\{u,v\}$ & Die Menge, die genau die beiden Ecken $u$ und $v$ enthält. Geschweifte Klammern bedeuten: \enquote{die Menge mit diesen Elementen}.\\
+$\subseteq$ & \enquote{ist Teilmenge von}. $E \subseteq M$ heißt: Jedes Element von $E$ ist auch Element von $M$.\\
+$u \neq v$ & \enquote{$u$ ist nicht dasselbe wie $v$}. Eine Kante verbindet zwei \kursiv{verschiedene} Ecken.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+Der Punkt, der am meisten Verwirrung stiftet, ist dieser: \textbf{Eine Kante ist eine Menge, keine Reihenfolge.} Das hat eine Folge, die wir sofort festhalten.
+
+\begin{merksatz}
+\boxtitel{Warum $\{u,v\}$ und $\{v,u\}$ dieselbe Kante sind}
+Bei Mengen kommt es nicht auf die Reihenfolge an. Die Menge \enquote{die Zahlen 3 und 7} ist dieselbe, ob man sie als $\{3,7\}$ oder als $\{7,3\}$ aufschreibt. Beide haben genau dieselben Elemente, und mehr sagt eine Menge nicht aus.
+
+Daher gilt
+\[ \{u,v\} = \{v,u\}, \]
+und deshalb bildet die Definition genau die \kursiv{gegenseitigen} Beziehungen ab, die wir im vorigen Abschnitt gefunden haben. Wäre eine Kante ein geordnetes Paar $(u,v)$, so wären $(u,v)$ und $(v,u)$ verschieden --- und wir hätten Einbahnstraßen statt Brücken.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das ist kein Zufall und keine Schlamperei, sondern eine bewusste Entscheidung: Die Definition wurde so gebaut, dass sie die Beziehung abbildet, die wir untersuchen wollen. Für Einbahnstraßen gibt es einen anderen Begriff, den gerichteten Graphen --- Abschnitt 1.4.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\subsection*{Ein erstes vollständig ausgeschriebenes Beispiel}
+
+\begin{merksatz}
+\boxtitel{Der Dienstplan als Graph}
+Wir schreiben die zweite Frage aus Abschnitt 1.1 vollständig als Graph auf.
+
+\schritt{Die Eckenmenge}
+\[ V = \{A,\, B,\, C,\, D,\, E\} \]
+Fünf Ärztinnen, fünf Ecken.
+
+\schritt{Die Kantenmenge}
+Die unverträglichen Paare waren $AB$, $AC$, $BC$, $BD$, $CE$ und $DE$. Als Mengen geschrieben:
+\[ E = \bigl\{\, \{A,B\},\ \{A,C\},\ \{B,C\},\ \{B,D\},\ \{C,E\},\ \{D,E\} \,\bigr\} \]
+
+\schritt{Kontrolle}
+$E$ hat sechs Elemente. Jedes davon ist eine zweielementige Teilmenge von $V$. Keine Kante verbindet eine Ecke mit sich selbst. Die Definition ist erfüllt.
+
+\schritt{Und als Bild}
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+\node[knotenb] (A) at (90:1.2) {$A$};
+\node[knotenb] (B) at (162:1.2) {$B$};
+\node[knotenb] (C) at (18:1.2) {$C$};
+\node[knotenb] (D) at (234:1.2) {$D$};
+\node[knotenb] (E) at (306:1.2) {$E$};
+\draw[kante] (A) -- (B);
+\draw[kante] (A) -- (C);
+\draw[kante] (B) -- (C);
+\draw[kante] (B) -- (D);
+\draw[kante] (C) -- (E);
+\draw[kante] (D) -- (E);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das Bild und die beiden Mengen enthalten genau dieselbe Auskunft. Das Bild ist bequemer zu lesen, die Mengen sind eindeutig. Wo beide sich zu widersprechen scheinen, haben die Mengen recht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Zwei Zahlen, die man einem Graphen sofort ansieht}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{3.6cm}@{}}
+\toprule
+\textbf{Name} & \textbf{Zeichen} & \textbf{Bedeutung}\\
+\midrule
+Ordnung & $|V|$ oder $n$ & Anzahl der Ecken\\
+Größe & $|E|$ oder $m$ & Anzahl der Kanten\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die senkrechten Striche $|\cdot|$ bedeuten \enquote{Anzahl der Elemente}. Im Dienstplanbeispiel ist $n = |V| = 5$ und $m = |E| = 6$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Wörter sind unglücklich gewählt --- \enquote{Größe} meint die Kantenzahl, nicht die Eckenzahl --- aber sie sind seit hundert Jahren eingebürgert. Merken Sie sich lieber $n$ und $m$; diese beiden Buchstaben werden in der gesamten Literatur so verwendet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Warum gerade diese Definition?}
+
+Eine Definition ist keine Entdeckung, sondern eine Entscheidung. Man hätte es auch anders machen können, und es lohnt sich zu sehen, was dabei jeweils herauskäme.
+
+\begin{merksatz}
+\boxtitel{Drei Dinge, die Definition 1.1 ausschließt}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\begin{scope}
+\node[knotenb] (x) at (0,0) {$u$};
+\draw[kanted] (x) to[out=50,in=130,looseness=13] (x);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.05) {Schlinge};
+\end{scope}
+\begin{scope}[xshift=3.2cm]
+\node[knotenb] (p) at (-0.6,0) {$u$};
+\node[knotenb] (q) at (0.6,0) {$v$};
+\draw[kanted] (p) to[bend left=45] (q);
+\draw[kanted] (p) to[bend right=45] (q);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.05) {Mehrfachkante};
+\end{scope}
+\begin{scope}[xshift=6.6cm]
+\node[knotenb] (r) at (-0.6,0) {$u$};
+\node[knotenb] (s) at (0.6,0) {$v$};
+\draw[kanted, -{Stealth[length=5pt]}] (r) -- (s);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.05) {Richtung};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{3.4cm}@{}}
+\toprule
+\textbf{Verboten durch} & \textbf{Was fehlt} & \textbf{Wie es sonst heißt}\\
+\midrule
+$u \neq v$ & Schlingen & Graph \kursiv{mit} Schlingen\\
+$E$ ist eine \kursiv{Menge} & Mehrfachkanten & \Begriff{Multigraph}\\
+$\{u,v\}$ statt $(u,v)$ & Richtungen & \Begriff{gerichteter Graph}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Graph nach Definition 1.1 heißt zur Betonung auch \Begriff{schlichter Graph} oder \Begriff{einfacher Graph}. Wenn in diesem Band ohne Zusatz \enquote{Graph} steht, ist immer Definition 1.1 gemeint.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+Warum diese Verbote? Weil sie fast nichts kosten und viel einbringen.
+
+\begin{merksatz}
+\boxtitel{Was die Einschränkung einbringt}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Eindeutigkeit} & Zwischen zwei Ecken gibt es eine Kante oder keine. Man kann also von \enquote{der Kante zwischen $u$ und $v$} sprechen.\\
+\textbf{Endliche Schranke} & Es gibt höchstens $\binom{n}{2}$ Kanten. Bei Mehrfachkanten wäre die Kantenzahl unbeschränkt.\\
+\textbf{Einfache Sätze} & Fast alle Sätze dieses Bandes wären mit Mehrfachkanten umständlicher zu formulieren, ohne inhaltlich mehr zu sagen.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Königsberg braucht aber Mehrfachkanten!}
+Zwischen der Insel und dem Nordufer gibt es \kursiv{zwei} Brücken, zwischen Insel und Südufer ebenfalls. Der Königsberger Graph ist also kein Graph nach Definition 1.1, sondern ein Multigraph.
+
+Das ist kein Versehen, sondern der Normalfall: Die Grundlagen werden für den einfachsten Begriff entwickelt, und wo ein Satz mehr verträgt, wird das ausdrücklich gesagt. Kapitel~6 --- die Eulerzüge --- ist genau so ein Ort: Der Satz von Euler gilt für Multigraphen, und dort wird der Begriff sauber erweitert.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Merken Sie sich das Muster. Es kommt in der Mathematik ständig vor: Man definiert eng, entwickelt die Theorie, und erweitert dort, wo man die Erweiterung wirklich braucht --- nicht vorsorglich.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\subsection*{Die größtmögliche Kantenzahl}
+
+\begin{merksatz}
+\boxtitel{Wie viele Kanten kann ein Graph mit $n$ Ecken höchstens haben?}
+\schritt{Die Frage}
+$E$ besteht aus zweielementigen Teilmengen von $V$. Die größtmögliche Kantenmenge ist die, die \kursiv{alle} solchen Teilmengen enthält. Wie viele gibt es?
+
+\schritt{Erste Zählung --- mit Doppelzählung}
+Wir zählen zunächst \kursiv{geordnete} Paare $(u,v)$ mit $u \neq v$: Für $u$ gibt es $n$ Möglichkeiten, für $v$ dann noch $n-1$ (alle außer $u$). Das sind
+\[ n \cdot (n-1) \quad \text{geordnete Paare.} \]
+
+\schritt{Die Korrektur}
+Jede Kante $\{u,v\}$ wurde dabei \kursiv{zweimal} gezählt: einmal als $(u,v)$ und einmal als $(v,u)$. Also teilen wir durch $2$:
+\[ \frac{n(n-1)}{2} . \]
+
+\schritt{Die übliche Schreibweise}
+Diese Zahl schreibt man als \Begriff{Binomialkoeffizient}
+\[ \binom{n}{2} = \frac{n(n-1)}{2}, \]
+gelesen \enquote{$n$ über $2$}. Sie ist aus Band 15, Kapitel~2 bekannt und bedeutet dort dasselbe: die Anzahl der Möglichkeiten, aus $n$ Dingen zwei auszuwählen, ohne auf die Reihenfolge zu achten.
+
+\schritt{Probe an kleinen Zahlen}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{2.6cm}P{3.4cm}@{}}
+\toprule
+$n$ & $\binom{n}{2} = \frac{n(n-1)}{2}$ & \textbf{Nachzählen}\\
+\midrule
+$2$ & $\frac{2 \cdot 1}{2} = 1$ & $\{A,B\}$ \quad --- stimmt\\
+$3$ & $\frac{3 \cdot 2}{2} = 3$ & $AB, AC, BC$ --- stimmt\\
+$4$ & $\frac{4 \cdot 3}{2} = 6$ & $AB, AC, AD$,\newline $BC, BD, CD$\\
+$5$ & $\frac{5 \cdot 4}{2} = 10$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\section{Nachbarschaft und Grad}
+
+\begin{definition}
+\boxtitelm{Definition 1.2 --- benachbart, Nachbarschaft, Grad}
+Sei $G = (V,E)$ ein Graph und $v \in V$ eine Ecke.
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item Zwei Ecken $u$ und $v$ heißen \Begriff{benachbart} (oder \Begriff{adjazent}), wenn $\{u,v\} \in E$ gilt.
+\item Die \Begriff{Nachbarschaft} von $v$ ist die Menge aller Nachbarn:
+\[ N(v) = \{\, u \in V \;:\; \{u,v\} \in E \,\}. \]
+\item Der \Begriff{Grad} von $v$ ist die Anzahl seiner Nachbarn:
+\[ \deg(v) = |N(v)| . \]
+\end{itemize}
+Eine Ecke mit $\deg(v) = 0$ heißt \Begriff{isoliert}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Am Dienstplanbeispiel nachgerechnet}
+Der Graph war
+\[ E = \bigl\{ \{A,B\}, \{A,C\}, \{B,C\}, \{B,D\}, \{C,E\}, \{D,E\} \bigr\}. \]
+
+\schritt{Nachbarschaften --- durch systematisches Durchgehen}
+Für $A$: Wir gehen alle sechs Kanten durch und notieren die, in denen $A$ vorkommt. Das sind $\{A,B\}$ und $\{A,C\}$. Der jeweils \kursiv{andere} Eintrag ist der Nachbar:
+\[ N(A) = \{B, C\}, \qquad \deg(A) = 2 . \]
+
+Ebenso für die übrigen:
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.2cm}P{3.2cm}P{2.2cm}P{1.6cm}@{}}
+\toprule
+\textbf{Ecke} & \textbf{Kanten mit ihr} & $N(v)$ & $\deg(v)$\\
+\midrule
+$A$ & $AB$, $AC$ & $\{B,C\}$ & $2$\\
+$B$ & $AB$, $BC$, $BD$ & $\{A,C,D\}$ & $3$\\
+$C$ & $AC$, $BC$, $CE$ & $\{A,B,E\}$ & $3$\\
+$D$ & $BD$, $DE$ & $\{B,E\}$ & $2$\\
+$E$ & $CE$, $DE$ & $\{C,D\}$ & $2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Eine erste Beobachtung}
+Die Summe aller Grade ist
+\[ 2 + 3 + 3 + 2 + 2 = 12 = 2 \cdot 6 = 2m . \]
+Das ist kein Zufall, wie der nächste Abschnitt zeigt.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der Grad zählt Nachbarn, nicht Kanten --- meistens dasselbe}
+In einem Graphen nach Definition 1.1 ist die Anzahl der Nachbarn gleich der Anzahl der Kanten, die an $v$ hängen --- denn jede solche Kante liefert genau einen Nachbarn, und verschiedene Kanten liefern verschiedene Nachbarn.
+
+In einem \kursiv{Multigraphen} stimmt das nicht mehr: Bei zwei Brücken zwischen Insel und Nordufer hat die Insel einen Nachbarn, aber zwei Kanten. Dort definiert man den Grad über die \kursiv{Kanten}, weil das für die Sätze die richtige Zahl ist. Eine Schlinge zählt dabei $2$, weil sie an der Ecke zweimal ansetzt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für Königsberg heißt das: Die Insel hat Grad $5$ (zwei Brücken nach Norden, zwei nach Süden, eine nach Osten), die drei anderen Landstücke haben je Grad $3$. Behalten Sie diese vier Zahlen $5,3,3,3$ im Kopf --- in Kapitel~6 entscheiden sie die Frage der Bürger.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Das Handschlaglemma}
+
+Der erste richtige Satz dieses Bandes. Er ist einfach, und er wird bis zum letzten Kapitel gebraucht.
+
+\begin{merksatz}
+\boxtitel{Satz 1.3 (Handschlaglemma)}
+Für jeden Graphen $G = (V,E)$ gilt
+\[ \sum_{v \in V} \deg(v) \;=\; 2 \cdot |E| . \]
+In Worten: \kursiv{Die Summe aller Eckengrade ist doppelt so groß wie die Anzahl der Kanten.}
+\end{merksatz}
+
+\subsection*{Der Beweis --- und was daran das eigentliche Argument ist}
+
+\begin{merksatz}
+\boxtitel{Beweis durch Doppelzählung}
+\schritt{Schritt 1 --- Wir erfinden etwas zum Zählen}
+Betrachten wir alle Paare der Form
+\[ (v, e) \quad \text{mit} \quad v \in V,\ e \in E,\ \text{und } v \text{ liegt auf } e . \]
+Ein solches Paar heißt \Begriff{Inzidenz}: eine Ecke zusammen mit einer Kante, die sie berührt. Nennen wir die Anzahl aller Inzidenzen $Z$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Warum tut man das? Weil man dieselbe Menge auf zwei Arten abzählen kann und dabei zwei verschiedene Ausdrücke bekommt --- die dann gleich sein müssen. Das ist die \Begriff{Doppelzählung}, die wichtigste Beweismethode der endlichen Mathematik.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Erste Zählung: nach Ecken sortiert}
+Wir gehen die Ecken der Reihe nach durch und fragen bei jeder: An wie vielen Inzidenzen ist sie beteiligt?
+
+Eine Ecke $v$ liegt auf genau denjenigen Kanten, die $v$ als Element enthalten. Davon gibt es genau $\deg(v)$ Stück --- das ist die Definition des Grades. Also liefert die Ecke $v$ genau $\deg(v)$ Inzidenzen.
+
+Jede Inzidenz hat genau eine Ecke, wird also bei genau einer Ecke gezählt. Aufsummieren über alle Ecken zählt daher jede Inzidenz genau einmal:
+\[ Z = \sum_{v \in V} \deg(v) . \]
+
+\schritt{Schritt 3 --- Zweite Zählung: nach Kanten sortiert}
+Jetzt gehen wir die Kanten durch und fragen bei jeder: An wie vielen Inzidenzen ist sie beteiligt?
+
+Eine Kante ist eine zweielementige Menge $e = \{u,v\}$. Auf ihr liegen genau die beiden Ecken $u$ und $v$ --- \kursiv{genau zwei}, weil $|e| = 2$ nach Definition und weil $u \neq v$ gilt. Also liefert jede Kante genau $2$ Inzidenzen.
+
+Jede Inzidenz hat genau eine Kante, wird also bei genau einer Kante gezählt. Aufsummieren über alle Kanten:
+\[ Z = \sum_{e \in E} 2 = 2 \cdot |E| . \]
+
+\schritt{Schritt 4 --- Gleichsetzen}
+In Schritt 2 und Schritt 3 haben wir dieselbe Zahl $Z$ ermittelt. Also:
+\[ \sum_{v \in V} \deg(v) \;=\; Z \;=\; 2 \cdot |E| . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Dasselbe als Bild}
+Man kann sich die Inzidenzen als \kursiv{Kantenenden} vorstellen. Jede Kante hat zwei Enden. Jedes Ende steckt in genau einer Ecke.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+\node[knotenb] (a) at (0,0) {$a$};
+\node[knotenb] (b) at (1.7,0) {$b$};
+\node[knotenb] (c) at (0.85,1.2) {$c$};
+\draw[kante] (a) -- (b);
+\draw[kante] (a) -- (c);
+\draw[kante] (b) -- (c);
+\fill[akzent] (0.28,0) circle (1.6pt);
+\fill[akzent] (1.42,0) circle (1.6pt);
+\fill[akzent] (0.20,0.28) circle (1.6pt);
+\fill[akzent] (0.66,0.93) circle (1.6pt);
+\fill[akzent] (1.50,0.28) circle (1.6pt);
+\fill[akzent] (1.04,0.93) circle (1.6pt);
+\node[font=\scriptsize\itshape, color=grau] at (0.85,-0.55) {$3$ Kanten $\cdot$ $2$ Enden $=$ $6$ Enden $=$ $2+2+2$};
+\end{tikzpicture}
+\end{center}
+
+Zählt man die Enden \kursiv{kantenweise}, bekommt man $2m$. Zählt man sie \kursiv{eckenweise}, bekommt man die Gradsumme. Es sind dieselben Enden.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 1.4 --- Die Anzahl der Ecken ungeraden Grades ist gerade}
+\textbf{Behauptung.} In jedem Graphen ist die Anzahl der Ecken mit ungeradem Grad eine gerade Zahl.
+
+\schritt{Beweis --- Schritt 1: Die Ecken aufteilen}
+Wir teilen $V$ in zwei Gruppen:
+\[ V_{\text{g}} = \{\, v \in V : \deg(v) \text{ gerade} \,\}, \qquad
+   V_{\text{u}} = \{\, v \in V : \deg(v) \text{ ungerade} \,\} . \]
+Jede Ecke gehört zu genau einer der beiden Gruppen, denn jede ganze Zahl ist entweder gerade oder ungerade.
+
+\schritt{Schritt 2 --- Die Gradsumme aufspalten}
+\[ \sum_{v \in V} \deg(v) \;=\; \underbrace{\sum_{v \in V_{\text{g}}} \deg(v)}_{=: S_{\text{g}}} \;+\; \underbrace{\sum_{v \in V_{\text{u}}} \deg(v)}_{=: S_{\text{u}}} \]
+
+\schritt{Schritt 3 --- Was wir über die drei Summen wissen}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{6.8cm}@{}}
+\toprule
+Gesamt & Nach Satz 1.3 ist $\sum_{v} \deg(v) = 2m$, also \textbf{gerade}.\\
+$S_{\text{g}}$ & Eine Summe aus lauter geraden Zahlen ist \textbf{gerade}.\\
+$S_{\text{u}}$ & Aus $S_{\text{u}} = 2m - S_{\text{g}}$ folgt: gerade minus gerade ist gerade, also ist $S_{\text{u}}$ \textbf{gerade}.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 4 --- Der Schluss auf die Anzahl}
+$S_{\text{u}}$ ist eine Summe aus lauter \kursiv{ungeraden} Zahlen, und diese Summe ist gerade. Wie viele Summanden hat sie?
+
+Addiert man ungerade Zahlen, so ist die Summe von $k$ ungeraden Zahlen genau dann gerade, wenn $k$ gerade ist. Denn jede ungerade Zahl lässt sich als $2a_i + 1$ schreiben, und
+\[ \sum_{i=1}^{k} (2a_i + 1) = 2\Bigl(\sum_{i=1}^{k} a_i\Bigr) + k . \]
+Der erste Summand ist gerade. Die Gesamtsumme ist also genau dann gerade, wenn $k$ gerade ist.
+
+Da $S_{\text{u}}$ gerade ist, muss $k = |V_{\text{u}}|$ gerade sein. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wofür man das braucht}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Satz 1.4 ist ein \kursiv{Unmöglichkeitswerkzeug}. Er beantwortet Fragen der Art \enquote{Kann es einen Graphen geben, bei dem \ldots?} mit einem klaren Nein.
+
+\textbf{Beispiel.} Kann es in einer Gruppe von $15$ Personen sein, dass jede genau $3$ andere kennt? --- Nein. Es gäbe $15$ Ecken vom ungeraden Grad $3$, und $15$ ist ungerade. Nach Satz 1.4 unmöglich.
+
+\textbf{Gegenprobe mit Satz 1.3.} $\sum \deg(v) = 15 \cdot 3 = 45 = 2m$ hieße $m = 22{,}5$ --- keine ganze Zahl. Beide Sätze zeigen dasselbe.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{geschichte}
+\boxtitelg{Woher der Name \enquote{Handschlaglemma} kommt}
+Deutet man die Ecken als Personen und die Kanten als Handschläge, so besagt Satz 1.3: \kursiv{Die Gesamtzahl der geschüttelten Hände ist doppelt so groß wie die Zahl der Handschläge} --- weil an jedem Handschlag zwei Hände beteiligt sind.
+
+Das Wort \Begriff{Lemma} (griechisch \kursiv{lêmma}, \enquote{das Angenommene}) bezeichnet in der Mathematik einen Hilfssatz: ein Ergebnis, das man weniger um seiner selbst willen beweist als deshalb, weil man es später ständig braucht. Diese Einordnung ist eine Frage der Gewohnheit, nicht des Inhalts --- manches \enquote{Lemma} ist berühmter als die Sätze, für die es erfunden wurde. Das Handschlaglemma ist so ein Fall.
+\end{geschichte}
+
+\section{Welche Gradfolgen sind möglich?}
+
+\begin{definition}
+\boxtitelm{Definition 1.5 --- Gradfolge}
+Die \Begriff{Gradfolge} eines Graphen ist die Liste der Grade aller Ecken, üblicherweise absteigend sortiert.
+\end{definition}
+
+Der Dienstplangraph hat die Gradfolge $(3,3,2,2,2)$.
+
+Die naheliegende Umkehrfrage ist schwerer, als sie aussieht: Gegeben eine Zahlenfolge --- gibt es dazu einen Graphen?
+
+\begin{merksatz}
+\boxtitel{Zwei notwendige Bedingungen, die man sofort prüfen kann}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.2cm}P{7.2cm}@{}}
+\toprule
+(B1) & Die Summe aller Zahlen muss gerade sein (Satz 1.3).\\
+(B2) & Jede Zahl muss zwischen $0$ und $n-1$ liegen, wobei $n$ die Anzahl der Zahlen ist --- mehr Nachbarn als andere Ecken kann keine Ecke haben.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Achtung:} Diese Bedingungen sind \kursiv{notwendig}, aber nicht \kursiv{hinreichend}. Das heißt: Wer sie verletzt, hat sicher keinen Graphen. Wer sie erfüllt, hat noch keinen --- er weiß nur, dass das übliche schnelle Gegenargument nicht greift.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Ein Beispiel, das beide Bedingungen erfüllt und trotzdem unmöglich ist}
+Betrachten Sie die Folge $(3,3,1,1)$, also $n = 4$ Ecken.
+
+\schritt{Prüfung}
+Summe: $3+3+1+1 = 8$, gerade --- (B1) erfüllt. Alle Zahlen liegen zwischen $0$ und $3$ --- (B2) erfüllt.
+
+\schritt{Warum es trotzdem nicht geht}
+Nennen wir die Ecken $a, b, c, d$ mit $\deg(a) = \deg(b) = 3$ und $\deg(c) = \deg(d) = 1$.
+
+Ecke $a$ hat Grad $3$ und es gibt nur drei andere Ecken. Also ist $a$ mit \kursiv{allen} übrigen benachbart: mit $b$, mit $c$ und mit $d$.
+
+Ebenso ist $b$ mit allen übrigen benachbart: mit $a$, mit $c$ und mit $d$.
+
+Damit hat aber $c$ mindestens zwei Nachbarn --- nämlich $a$ und $b$ --- im Widerspruch zu $\deg(c) = 1$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es gibt ein vollständiges Kriterium, das genau entscheidet, welche Folgen möglich sind: den Satz von Erdős und Gallai (1960). Er wird in Aufgabe 1.4 in seiner praktischen Form --- dem Verfahren von Havel und Hakimi --- vorgeführt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Graphen, die einen Namen haben}
+
+Einige Graphen kommen so oft vor, dass sie eigene Bezeichnungen tragen.
+
+\begin{merksatz}
+\boxtitel{Die Familien}
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+\begin{scope}
+\foreach \i in {0,...,4} \node[knoten] (k\i) at (90+72*\i:0.8) {};
+\foreach \i/\j in {0/1,0/2,0/3,0/4,1/2,1/3,1/4,2/3,2/4,3/4} \draw[kante] (k\i) -- (k\j);
+\node[font=\scriptsize, color=grau] at (0,-1.3) {$K_5$};
+\end{scope}
+\begin{scope}[xshift=3.0cm]
+\foreach \i in {0,...,4} \node[knoten] (c\i) at (90+72*\i:0.8) {};
+\foreach \i/\j in {0/1,1/2,2/3,3/4,4/0} \draw[kante] (c\i) -- (c\j);
+\node[font=\scriptsize, color=grau] at (0,-1.3) {$C_5$};
+\end{scope}
+\begin{scope}[xshift=6.0cm]
+\foreach \i in {0,...,4} \node[knoten] (p\i) at (-0.8+0.4*\i,0) {};
+\foreach \i/\j in {0/1,1/2,2/3,3/4} \draw[kante] (p\i) -- (p\j);
+\node[font=\scriptsize, color=grau] at (0,-1.3) {$P_5$};
+\end{scope}
+\begin{scope}[xshift=9.0cm]
+\foreach \i in {0,1} \node[knoten] (u\i) at (-0.35+0.7*\i,0.55) {};
+\foreach \i in {0,1,2} \node[knoten] (w\i) at (-0.7+0.7*\i,-0.55) {};
+\foreach \i in {0,1} \foreach \j in {0,1,2} \draw[kante] (u\i) -- (w\j);
+\node[font=\scriptsize, color=grau] at (0,-1.3) {$K_{2,3}$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.6cm}P{3.2cm}P{1.5cm}P{2.0cm}@{}}
+\toprule
+\textbf{Zeichen} & \textbf{Name} & \textbf{Ecken} & \textbf{Kanten}\\
+\midrule
+$K_n$ & vollständiger Graph & $n$ & $\binom{n}{2}$\\
+$P_n$ & Weg & $n$ & $n-1$\\
+$C_n$ & Kreis ($n \ge 3$) & $n$ & $n$\\
+$K_{r,s}$ & vollständig bipartit & $r+s$ & $r \cdot s$\\
+$Q_d$ & Würfelgraph & $2^d$ & $d \cdot 2^{d-1}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im $K_n$ ist jede Ecke mit jeder anderen verbunden --- er hat die größtmögliche Kantenzahl. Im $K_{r,s}$ zerfallen die Ecken in zwei Gruppen der Größen $r$ und $s$; jede Ecke der einen Gruppe ist mit jeder der anderen verbunden, innerhalb einer Gruppe gibt es keine Kante.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Petersen-Graph --- der berühmteste Einzelgänger}
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\foreach \i in {0,...,4} {
+  \node[knoten] (a\i) at (90+72*\i:1.25) {};
+  \node[knoten] (b\i) at (90+72*\i:0.62) {};
+  \draw[kante] (a\i) -- (b\i);
+}
+\foreach \i/\j in {0/1,1/2,2/3,3/4,4/0} \draw[kante] (a\i) -- (a\j);
+\foreach \i/\j in {0/2,1/3,2/4,3/0,4/1} \draw[kante] (b\i) -- (b\j);
+\end{tikzpicture}
+\end{center}
+
+Zehn Ecken, fünfzehn Kanten, jede Ecke vom Grad $3$. Dieser Graph ist in der Graphentheorie das, was das Gegenbeispiel in der Analysis ist: Er widerlegt eine erstaunliche Zahl plausibler Vermutungen. Sie werden ihm in den Kapiteln 7, 9 und 13 wiederbegegnen.
+\end{merksatz}
+
+\section{Teilgraphen und das Komplement}
+
+\begin{definition}
+\boxtitelm{Definition 1.6 --- Teilgraph, induzierter Teilgraph, Komplement}
+Sei $G = (V,E)$ ein Graph.
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item Ein \Begriff{Teilgraph} von $G$ ist ein Graph $H = (V', E')$ mit $V' \subseteq V$ und $E' \subseteq E$, wobei jede Kante aus $E'$ beide Endecken in $V'$ haben muss.
+\item Für $S \subseteq V$ heißt der Graph mit Eckenmenge $S$ und \kursiv{allen} Kanten aus $E$, die beide Enden in $S$ haben, der von $S$ \Begriff{induzierte Teilgraph}; Zeichen $G[S]$.
+\item Das \Begriff{Komplement} $\overline{G}$ hat dieselbe Eckenmenge $V$, und $\{u,v\}$ ist genau dann Kante von $\overline{G}$, wenn $\{u,v\}$ \kursiv{keine} Kante von $G$ ist.
+\end{itemize}
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Teilgraph und induzierter Teilgraph sind nicht dasselbe}
+Beim Teilgraphen \kursiv{darf} man Kanten weglassen. Beim induzierten Teilgraphen \kursiv{muss} man alle nehmen, die zwischen den gewählten Ecken verlaufen.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\begin{scope}
+\node[knotenb] (A) at (0,0.8) {$A$};
+\node[knotenb] (B) at (-0.8,-0.3) {$B$};
+\node[knotenb] (C) at (0.8,-0.3) {$C$};
+\node[knotenb] (D) at (0,-1.4) {$D$};
+\draw[kante] (A) -- (B); \draw[kante] (A) -- (C);
+\draw[kante] (B) -- (C); \draw[kante] (C) -- (D);
+\node[font=\scriptsize\itshape, color=grau] at (0,-2.0) {$G$};
+\end{scope}
+\begin{scope}[xshift=3.4cm]
+\node[knotenb] (A2) at (0,0.8) {$A$};
+\node[knotenb] (B2) at (-0.8,-0.3) {$B$};
+\node[knotenb] (C2) at (0.8,-0.3) {$C$};
+\draw[kante] (A2) -- (B2); \draw[kante] (A2) -- (C2);
+\node[font=\scriptsize\itshape, color=grau] at (0,-2.0) {Teilgraph: $BC$ weggelassen};
+\end{scope}
+\begin{scope}[xshift=7.4cm]
+\node[knotenb] (A3) at (0,0.8) {$A$};
+\node[knotenb] (B3) at (-0.8,-0.3) {$B$};
+\node[knotenb] (C3) at (0.8,-0.3) {$C$};
+\draw[kante] (A3) -- (B3); \draw[kante] (A3) -- (C3);
+\draw[kanted] (B3) -- (C3);
+\node[font=\scriptsize\itshape, color=grau] at (0,-2.0) {$G[\{A,B,C\}]$: $BC$ muss dabei sein};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Unterschied ist folgenreich. \enquote{$G$ enthält ein Dreieck als Teilgraph} und \enquote{$G$ enthält ein Dreieck als induzierten Teilgraph} sind verschiedene Aussagen --- die zweite verlangt zusätzlich, dass keine weitere Kante zwischen den drei Ecken fehlt. In Kapitel 13 hängt ein ganzer Satz an dieser Unterscheidung.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Isomorphie: Wann sind zwei Graphen derselbe?}
+
+Wir kehren zur ersten Warnung des Vorworts zurück. Dieselbe Struktur kann sehr verschieden aussehen. Was heißt dann \enquote{derselbe Graph}?
+
+\begin{merksatz}
+\boxtitel{Warum \enquote{sieht gleich aus} keine Definition sein kann}
+\begin{center}
+\begin{tikzpicture}[scale=1.05]
+\begin{scope}
+\foreach \i in {0,...,5} \node[knoten] (x\i) at (60*\i:1.05) {};
+\foreach \i/\j in {0/1,1/2,2/3,3/4,4/5,5/0} \draw[kante] (x\i) -- (x\j);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.55) {$G_1$};
+\end{scope}
+\begin{scope}[xshift=4.2cm]
+\node[knoten] (y0) at (-1.0,0.7) {};
+\node[knoten] (y1) at (0,0.7) {};
+\node[knoten] (y2) at (1.0,0.7) {};
+\node[knoten] (y3) at (-1.0,-0.7) {};
+\node[knoten] (y4) at (0,-0.7) {};
+\node[knoten] (y5) at (1.0,-0.7) {};
+\draw[kante] (y0) -- (y4); \draw[kante] (y4) -- (y2);
+\draw[kante] (y2) -- (y3); \draw[kante] (y3) -- (y1);
+\draw[kante] (y1) -- (y5); \draw[kante] (y5) -- (y0);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.55) {$G_2$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Diese beiden Bilder sehen verschieden aus. Beide zeigen aber sechs Ecken, die zu einem einzigen geschlossenen Rundgang verbunden sind --- also den $C_6$. Ob Linien sich kreuzen, hängt vom Zeichnen ab, nicht vom Graphen.
+
+Eine Definition, die \enquote{sieht gleich aus} zur Grundlage macht, wäre also unbrauchbar. Wir brauchen etwas, das nur von $V$ und $E$ spricht.
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 1.7 --- Isomorphie}
+Zwei Graphen $G = (V,E)$ und $H = (W,F)$ heißen \Begriff{isomorph}, geschrieben $G \cong H$, wenn es eine Abbildung
+\[ \varphi : V \longrightarrow W \]
+gibt mit den beiden Eigenschaften:
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item $\varphi$ ist \Begriff{bijektiv} --- jede Ecke von $H$ wird von genau einer Ecke von $G$ getroffen;
+\item für alle $u, v \in V$ gilt: $\{u,v\} \in E \iff \{\varphi(u), \varphi(v)\} \in F$.
+\end{itemize}
+Eine solche Abbildung $\varphi$ heißt \Begriff{Isomorphismus}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was die zweite Bedingung wirklich verlangt}
+Das Zeichen $\iff$ heißt \enquote{genau dann, wenn} und steht für \kursiv{zwei} Forderungen auf einmal:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.8cm}P{6.6cm}@{}}
+\toprule
+$\Longrightarrow$ & Wo in $G$ eine Kante ist, ist auch in $H$ eine --- \kursiv{keine Kante geht verloren}.\\
+$\Longleftarrow$ & Wo in $G$ keine Kante ist, ist auch in $H$ keine --- \kursiv{keine Kante kommt hinzu}.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Richtung wird gern vergessen. Ohne sie könnte man jeden Graphen in den vollständigen $K_n$ \enquote{abbilden}, und der Begriff wäre wertlos.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Isomorphismus, vollständig hingeschrieben}
+Wir zeigen $G_1 \cong G_2$ für die beiden Bilder oben. Nummerieren wir:
+
+$G_1$: Ecken $1,2,3,4,5,6$ im Kreis, Kanten $12, 23, 34, 45, 56, 61$.
+
+$G_2$: Ecken $y_0, \ldots, y_5$, Kanten $y_0y_4$, $y_4y_2$, $y_2y_3$, $y_3y_1$, $y_1y_5$, $y_5y_0$.
+
+\schritt{Die Idee}
+Wir laufen den Rundgang von $G_2$ ab und ordnen ihm die Nummern von $G_1$ der Reihe nach zu.
+
+Der Rundgang von $G_2$ lautet: $y_0 \to y_4 \to y_2 \to y_3 \to y_1 \to y_5 \to y_0$.
+
+\schritt{Die Abbildung}
+\[ \varphi(1) = y_0,\quad \varphi(2) = y_4,\quad \varphi(3) = y_2,\quad \varphi(4) = y_3,\quad \varphi(5) = y_1,\quad \varphi(6) = y_5 \]
+
+\schritt{Prüfung der Bijektivität}
+Die sechs Bildwerte $y_0, y_4, y_2, y_3, y_1, y_5$ sind paarweise verschieden und erschöpfen alle sechs Ecken von $G_2$. Also bijektiv.
+
+\schritt{Prüfung der Kantenbedingung --- Richtung $\Longrightarrow$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Kante in $G_1$} & \textbf{Bild} & \textbf{In $G_2$?}\\
+\midrule
+$\{1,2\}$ & $\{y_0, y_4\}$ & ja\\
+$\{2,3\}$ & $\{y_4, y_2\}$ & ja\\
+$\{3,4\}$ & $\{y_2, y_3\}$ & ja\\
+$\{4,5\}$ & $\{y_3, y_1\}$ & ja\\
+$\{5,6\}$ & $\{y_1, y_5\}$ & ja\\
+$\{6,1\}$ & $\{y_5, y_0\}$ & ja\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Prüfung der Kantenbedingung --- Richtung $\Longleftarrow$}
+Hier kann man sich Arbeit sparen. Beide Graphen haben genau sechs Kanten. Die sechs Kanten von $G_1$ wurden auf sechs \kursiv{verschiedene} Kanten von $G_2$ abgebildet (verschieden, weil $\varphi$ bijektiv ist). Also sind damit \kursiv{alle} Kanten von $G_2$ getroffen, und es bleibt keine übrig, die ein Bild eines Nicht-Kanten-Paares sein könnte. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Dieses Abkürzungsargument funktioniert immer, wenn beide Graphen \kursiv{gleich viele} Kanten haben: Dann genügt die Richtung $\Longrightarrow$. Haben sie verschieden viele, sind sie ohnehin nicht isomorph.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\subsection*{Wie man Nicht-Isomorphie zeigt}
+
+Um $G \cong H$ zu zeigen, gibt man einen Isomorphismus an. Um $G \not\cong H$ zu zeigen, müsste man \kursiv{alle} Abbildungen ausschließen --- bei $n$ Ecken sind das $n!$ Stück. Für $n = 10$ wären das $3\,628\,800$. Das ist kein gangbarer Weg.
+
+\begin{definition}
+\boxtitelm{Definition 1.8 --- Invariante}
+Eine \Begriff{Invariante} ist eine Eigenschaft oder Kennzahl eines Graphen, die bei isomorphen Graphen übereinstimmt.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Standardinvarianten --- in der Reihenfolge, in der man sie prüft}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{0.8cm}P{3.4cm}P{4.0cm}@{}}
+\toprule
+& \textbf{Invariante} & \textbf{Aufwand}\\
+\midrule
+1 & Eckenzahl $n$ & sofort\\
+2 & Kantenzahl $m$ & sofort\\
+3 & Gradfolge & schnell\\
+4 & Zahl der Dreiecke & mäßig\\
+5 & Länge des kürzesten Kreises & mäßig\\
+6 & Zusammenhang (Kapitel 2) & schnell\\
+7 & Eigenwerte (Kapitel 14) & aufwendig\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man prüft von oben nach unten und hört auf, sobald eine Invariante verschieden ausfällt --- dann sind die Graphen nicht isomorph, und man ist fertig.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Gleiche Invarianten beweisen gar nichts}
+Invarianten können Nicht-Isomorphie beweisen. Sie können Isomorphie \kursiv{nie} beweisen.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\begin{scope}
+\foreach \i in {0,...,5} \node[knoten] (u\i) at (60*\i:1.0) {};
+\foreach \i/\j in {0/1,1/2,2/3,3/4,4/5,5/0,0/3} \draw[kante] (u\i) -- (u\j);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.5) {$H_1$: Kreis $C_6$ mit einer Sehne};
+\end{scope}
+\begin{scope}[xshift=5.6cm]
+\node[knoten] (v0) at (-1.0,0.6) {};
+\node[knoten] (v1) at (0,0.6) {};
+\node[knoten] (v2) at (-0.5,-0.35) {};
+\node[knoten] (v3) at (1.1,0.6) {};
+\node[knoten] (v4) at (1.1,-0.5) {};
+\node[knoten] (v5) at (0.2,-1.15) {};
+\draw[kante] (v0) -- (v1); \draw[kante] (v1) -- (v2); \draw[kante] (v2) -- (v0);
+\draw[kante] (v1) -- (v3); \draw[kante] (v3) -- (v4); \draw[kante] (v4) -- (v5);
+\draw[kante] (v5) -- (v2);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.75) {$H_2$: Dreieck mit angehängtem Weg};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Beide haben $n = 6$, $m = 7$ und die Gradfolge $(3,3,2,2,2,2)$ --- drei Invarianten stimmen überein. Trotzdem sind sie nicht isomorph: $H_2$ enthält ein Dreieck (drei paarweise benachbarte Ecken), $H_1$ nicht. Die vierte Invariante entscheidet.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es gibt \kursiv{keine} bekannte Liste von leicht berechenbaren Invarianten, die Isomorphie vollständig entscheidet. Wie schwer das Problem wirklich ist, gehört zu den bemerkenswertesten offenen Fragen des Gebiets --- Kapitel 15 kommt darauf zurück.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.1 --- Grade und Kanten}
+Ein Graph hat $12$ Ecken. Sieben davon haben Grad $3$, die übrigen haben Grad $k$. Der Graph hat $30$ Kanten. Bestimmen Sie $k$.
+
+\loesung
+\schritt{Schritt 1 --- Was gegeben ist}
+$n = 12$, davon $7$ Ecken vom Grad $3$ und $12 - 7 = 5$ Ecken vom Grad $k$. Weiter $m = 30$.
+
+\schritt{Schritt 2 --- Handschlaglemma ansetzen}
+Nach Satz 1.3 gilt $\sum_{v} \deg(v) = 2m$. Die linke Seite zerlegen wir nach den beiden Sorten von Ecken:
+\[ \underbrace{7 \cdot 3}_{\text{die sieben}} + \underbrace{5 \cdot k}_{\text{die fünf}} = 2 \cdot 30 \]
+
+\schritt{Schritt 3 --- Auflösen}
+\begin{align*}
+21 + 5k &= 60 \\
+5k &= 60 - 21 = 39 \\
+k &= \frac{39}{5} = 7{,}8
+\end{align*}
+
+\schritt{Schritt 4 --- Das Ergebnis deuten}
+$k$ müsste $7{,}8$ sein. Ein Grad ist aber die Anzahl von Nachbarn, also eine \kursiv{ganze} Zahl. Es gibt daher \textbf{keinen} solchen Graphen.
+
+\schritt{Probe}
+Gegenrechnung mit $k = 7$: Gradsumme $21 + 35 = 56 = 2m$, also $m = 28$. Mit $k = 8$: $21 + 40 = 61$ --- ungerade, nach Satz 1.4 unmöglich. Die geforderten $30$ Kanten liegen zwischen diesen Fällen und sind nicht erreichbar.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Aufgaben, deren Antwort \enquote{gibt es nicht} lautet, sind in der Graphentheorie häufig. Wer die Rechnung durchführt und bei $7{,}8$ stutzt, hat richtig gearbeitet --- wer $k \approx 8$ hinschreibt, hat den Kern verfehlt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.2 --- Das Komplement}
+Sei $G$ ein Graph mit $n = 6$ Ecken und der Gradfolge $(4,3,3,2,2,2)$. Bestimmen Sie die Gradfolge des Komplements $\overline{G}$ und die Kantenzahl beider Graphen.
+
+\loesung
+\schritt{Schritt 1 --- Der Grundgedanke}
+Im Komplement ist eine Ecke $v$ genau mit den Ecken benachbart, mit denen sie in $G$ \kursiv{nicht} benachbart war. Es gibt $n - 1 = 5$ andere Ecken. Von diesen sind $\deg_G(v)$ Stück Nachbarn in $G$, der Rest ist Nachbar in $\overline{G}$:
+\[ \deg_{\overline{G}}(v) = (n-1) - \deg_G(v) = 5 - \deg_G(v) . \]
+
+\schritt{Schritt 2 --- Einsetzen}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{2.6cm}P{5.2cm}@{}}
+\toprule
+$\deg_G$ & $4,\ 3,\ 3,\ 2,\ 2,\ 2$\\
+$5 - \deg_G$ & $1,\ 2,\ 2,\ 3,\ 3,\ 3$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Absteigend sortiert: $\deg_{\overline{G}} = (3,3,3,2,2,1)$.
+
+\schritt{Schritt 3 --- Die Kantenzahlen}
+Für $G$ mit Satz 1.3:
+\[ m_G = \frac{4+3+3+2+2+2}{2} = \frac{16}{2} = 8 . \]
+Für $\overline{G}$:
+\[ m_{\overline{G}} = \frac{3+3+3+2+2+1}{2} = \frac{14}{2} = 7 . \]
+
+\schritt{Probe}
+Jedes der $\binom{6}{2} = 15$ möglichen Paare ist entweder in $G$ oder in $\overline{G}$ eine Kante, nie in beiden und nie in keinem. Also muss $m_G + m_{\overline{G}} = 15$ gelten:
+\[ 8 + 7 = 15 . \quad \checkmark \]
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.3 --- Isomorph oder nicht?}
+Sind die folgenden beiden Graphen isomorph?
+
+\begin{center}
+\begin{tikzpicture}[scale=1.05]
+\begin{scope}
+\node[knotenb] (a1) at (-0.9,0.9) {$a$};
+\node[knotenb] (a2) at (0.9,0.9) {$b$};
+\node[knotenb] (a3) at (0.9,-0.9) {$c$};
+\node[knotenb] (a4) at (-0.9,-0.9) {$d$};
+\node[knotenb] (a5) at (0,0) {$e$};
+\draw[kante] (a1) -- (a2); \draw[kante] (a2) -- (a3);
+\draw[kante] (a3) -- (a4); \draw[kante] (a4) -- (a1);
+\draw[kante] (a5) -- (a1); \draw[kante] (a5) -- (a3);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.6) {$G$};
+\end{scope}
+\begin{scope}[xshift=5.2cm]
+\node[knotenb] (b1) at (-0.9,0.9) {$p$};
+\node[knotenb] (b2) at (0.9,0.9) {$q$};
+\node[knotenb] (b3) at (0.9,-0.9) {$r$};
+\node[knotenb] (b4) at (-0.9,-0.9) {$s$};
+\node[knotenb] (b5) at (0,0) {$t$};
+\draw[kante] (b1) -- (b2); \draw[kante] (b2) -- (b3);
+\draw[kante] (b3) -- (b4); \draw[kante] (b4) -- (b1);
+\draw[kante] (b5) -- (b1); \draw[kante] (b5) -- (b2);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.6) {$H$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Die schnellen Invarianten}
+Beide haben $n = 5$ und $m = 6$. Kein Ausschluss.
+
+\schritt{Schritt 2 --- Die Gradfolgen}
+In $G$: $\deg(a) = 3$ (Nachbarn $b, d, e$), $\deg(b) = 2$, $\deg(c) = 3$ (Nachbarn $b, d, e$), $\deg(d) = 2$, $\deg(e) = 2$. Gradfolge $(3,3,2,2,2)$.
+
+In $H$: $\deg(p) = 3$ (Nachbarn $q, s, t$), $\deg(q) = 3$ (Nachbarn $p, r, t$), $\deg(r) = 2$, $\deg(s) = 2$, $\deg(t) = 2$. Gradfolge $(3,3,2,2,2)$.
+
+Gleich. Kein Ausschluss.
+
+\schritt{Schritt 3 --- Die nächste Invariante: Sind die Ecken vom Grad 3 benachbart?}
+Das ist eine Invariante, denn ein Isomorphismus bildet Ecken vom Grad $3$ auf Ecken vom Grad $3$ ab und erhält Kanten.
+
+In $G$ sind die Ecken vom Grad $3$ gerade $a$ und $c$. Ist $\{a,c\}$ eine Kante? Die Kantenliste von $G$ lautet $ab, bc, cd, da, ea, ec$. Die Kante $ac$ kommt nicht vor --- \textbf{nicht benachbart}.
+
+In $H$ sind die Ecken vom Grad $3$ gerade $p$ und $q$. Die Kantenliste lautet $pq, qr, rs, sp, tp, tq$. Die Kante $pq$ kommt vor --- \textbf{benachbart}.
+
+\schritt{Schritt 4 --- Schluss}
+Die Invariante unterscheidet die beiden Graphen. Also gilt $G \not\cong H$.
+
+\schritt{Kontrolle über eine zweite Invariante}
+$H$ enthält das Dreieck $p, q, t$ (denn $pq$, $qt$ und $tp$ sind Kanten). Enthält $G$ ein Dreieck? Die Ecke $e$ hat Nachbarn $a$ und $c$, und $ac$ ist keine Kante --- kein Dreieck über $e$. Die Ecke $b$ hat Nachbarn $a$ und $c$, ebenso. Die Ecke $d$ hat Nachbarn $c$ und $a$, ebenso. $G$ ist dreiecksfrei. Beide Wege führen zum selben Ergebnis. $\checkmark$
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.4 --- Gibt es einen Graphen zur Gradfolge $(4,4,3,3,2,2)$?}
+Entscheiden Sie mit dem Verfahren von Havel und Hakimi, und geben Sie gegebenenfalls einen Graphen an.
+
+\loesung
+\schritt{Schritt 0 --- Das Verfahren, zuerst erklärt}
+Der Gedanke: Die Ecke mit dem größten Grad $d$ muss $d$ Nachbarn haben. Man darf annehmen, dass sie mit den $d$ Ecken der \kursiv{nächstgrößten} Grade verbunden ist. Dann streicht man diese Ecke und senkt die Grade ihrer $d$ Nachbarn um $1$. Bleibt eine gültige Folge übrig, war die ursprüngliche gültig.
+
+\schritt{Schritt 1 --- Erste Prüfung}
+Summe $4+4+3+3+2+2 = 18$, gerade. Alle Werte $\le n-1 = 5$. Beide Bedingungen erfüllt.
+
+\schritt{Schritt 2 --- Erster Durchgang}
+Folge: $(4,4,3,3,2,2)$. Wir nehmen die erste $4$ weg und ziehen von den nächsten vier Zahlen je $1$ ab:
+\[ \underline{4} \mid 4,\ 3,\ 3,\ 2 \mid 2 \;\longrightarrow\; 3,\ 2,\ 2,\ 1 \mid 2 \]
+Neue Folge, sortiert: $(3,2,2,2,1)$.
+
+\schritt{Schritt 3 --- Zweiter Durchgang}
+\[ \underline{3} \mid 2,\ 2,\ 2 \mid 1 \;\longrightarrow\; 1,\ 1,\ 1 \mid 1 \]
+Neue Folge, sortiert: $(1,1,1,1)$.
+
+\schritt{Schritt 4 --- Dritter Durchgang}
+\[ \underline{1} \mid 1 \mid 1,\ 1 \;\longrightarrow\; 0 \mid 1,\ 1 \]
+Neue Folge, sortiert: $(1,1,0)$.
+
+\schritt{Schritt 5 --- Vierter Durchgang}
+\[ \underline{1} \mid 1 \mid 0 \;\longrightarrow\; 0 \mid 0 \]
+Neue Folge: $(0,0)$. Das ist die Gradfolge zweier isolierter Ecken --- offensichtlich möglich. Das Verfahren endet erfolgreich.
+
+\schritt{Schritt 6 --- Den Graphen zurückbauen}
+Wir vergeben Namen $v_1, \ldots, v_6$ für die Grade $4,4,3,3,2,2$ und lesen die Durchgänge rückwärts als Kantenliste:
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{2.0cm}P{5.4cm}@{}}
+\toprule
+Durchgang 1 & $v_1 v_2$, $v_1 v_3$, $v_1 v_4$, $v_1 v_5$\\
+Durchgang 2 & $v_2 v_3$, $v_2 v_4$, $v_2 v_6$\\
+Durchgang 3 & $v_3 v_4$\\
+Durchgang 4 & $v_5 v_6$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 7 --- Probe durch Nachzählen der Grade}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.2cm}P{4.0cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Ecke} & \textbf{Nachbarn} & \textbf{Grad} & \textbf{Soll}\\
+\midrule
+$v_1$ & $v_2, v_3, v_4, v_5$ & $4$ & $4$ \checkmark\\
+$v_2$ & $v_1, v_3, v_4, v_6$ & $4$ & $4$ \checkmark\\
+$v_3$ & $v_1, v_2, v_4$ & $3$ & $3$ \checkmark\\
+$v_4$ & $v_1, v_2, v_3$ & $3$ & $3$ \checkmark\\
+$v_5$ & $v_1, v_6$ & $2$ & $2$ \checkmark\\
+$v_6$ & $v_2, v_5$ & $2$ & $2$ \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+Kantenzahl: $4 + 3 + 1 + 1 = 9 = \tfrac{18}{2}$. \checkmark
+
+\schritt{Und als Bild}
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\node[knotenb] (v1) at (-1.0,0.9) {$v_1$};
+\node[knotenb] (v2) at (1.0,0.9) {$v_2$};
+\node[knotenb] (v3) at (-0.7,-0.2) {$v_3$};
+\node[knotenb] (v4) at (0.7,-0.2) {$v_4$};
+\node[knotenb] (v5) at (-1.2,-1.3) {$v_5$};
+\node[knotenb] (v6) at (1.2,-1.3) {$v_6$};
+\draw[kante] (v1) -- (v2); \draw[kante] (v1) -- (v3);
+\draw[kante] (v1) -- (v4); \draw[kante] (v1) -- (v5);
+\draw[kante] (v2) -- (v3); \draw[kante] (v2) -- (v4);
+\draw[kante] (v2) -- (v6); \draw[kante] (v3) -- (v4);
+\draw[kante] (v5) -- (v6);
+\end{tikzpicture}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.5 --- Eine Aussage über alle Graphen}
+Zeigen Sie: In jedem Graphen mit mindestens zwei Ecken gibt es zwei Ecken mit demselben Grad.
+
+\loesung
+\schritt{Schritt 1 --- Wiedererkennen}
+Das ist die Aussage aus dem Vorwort, jetzt in der Fachsprache. Wir führen sie noch einmal, aber mit dem Begriff, der den Beweis kürzer macht.
+
+\schritt{Schritt 2 --- Die möglichen Grade}
+In einem Graphen mit $n$ Ecken gilt für jede Ecke $0 \le \deg(v) \le n-1$. Es gibt also $n$ mögliche Werte für $n$ Ecken.
+
+\schritt{Schritt 3 --- Annahme für einen Widerspruchsbeweis}
+Angenommen, alle Grade sind verschieden. Dann kommt jeder der Werte $0, 1, \ldots, n-1$ genau einmal vor.
+
+\schritt{Schritt 4 --- Zwei besondere Ecken}
+Es gibt eine Ecke $x$ mit $\deg(x) = 0$ und eine Ecke $y$ mit $\deg(y) = n-1$. Wegen $n \ge 2$ ist $0 \neq n-1$, also $x \neq y$.
+
+\schritt{Schritt 5 --- Der Widerspruch}
+$\deg(y) = n-1$ bedeutet: $y$ ist mit allen $n-1$ übrigen Ecken benachbart. Da $x \neq y$, gehört $x$ zu diesen übrigen. Also ist $\{x,y\} \in E$.
+
+Damit ist $x \in N(y)$ und ebenso $y \in N(x)$ --- denn $\{x,y\} = \{y,x\}$ ist dieselbe Kante. Also $\deg(x) \ge 1$, im Widerspruch zu $\deg(x) = 0$.
+
+\schritt{Schritt 6 --- Schluss}
+Die Annahme ist falsch. Es gibt also zwei Ecken gleichen Grades. $\blacksquare$
+
+\schritt{Nachbemerkung --- wo die Voraussetzung steckt}
+Für $n = 1$ ist die Aussage falsch: Ein einzelner Punkt hat genau einen Grad, nämlich $0$, und es gibt keine zwei Ecken. Die Voraussetzung $n \ge 2$ wurde in Schritt 4 gebraucht, um $x \neq y$ zu sichern.
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Wie das Wort \enquote{Graph} in die Mathematik kam}
+Euler löste 1736 das Königsberger Problem, ohne das Wort zu benutzen; er sprach von \kursiv{geometria situs}, der Geometrie der Lage. Sein Aufsatz \kursiv{Solutio problematis ad geometriam situs pertinentis} gilt heute als Geburtsurkunde des Gebiets --- und ist zugleich ein Musterbeispiel dafür, wie eine Fragestellung durch Weglassen des Unwesentlichen lösbar wird. Die Längen der Brücken, die Form der Insel, die Breite des Flusses: alles gestrichen.
+
+Das Wort \enquote{Graph} führte \Person{James Joseph Sylvester} 1878 in einer Notiz in \kursiv{Nature} ein. Er entlehnte es der Chemie: Chemiker zeichneten damals Strukturformeln --- Atome als Punkte, Bindungen als Striche --- und nannten diese Bilder \kursiv{graphic notation}. Sylvester bemerkte, dass die Algebra der Invarianten mit diesen Diagrammen zusammenhängt.
+
+Das erste Lehrbuch erschien erst 1936: \kursiv{Theorie der endlichen und unendlichen Graphen} von \Person{Dénes König}. Zwischen Euler und König liegen zweihundert Jahre, in denen das Gebiet aus lauter Einzelproblemen bestand --- dem Vierfarbenproblem, den Bäumen von Cayley, den Schaltkreisen von Kirchhoff. König war der Erste, der daraus ein Fach machte.
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wie groß sind die Graphen, über die heute geredet wird?}
+Die Definition verlangt nur, dass $V$ endlich ist. In der Praxis reicht die Spanne weit.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.2cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Gegenstand} & \textbf{Ecken} & \textbf{Kanten}\\
+\midrule
+Petersen-Graph & $10$ & $15$\\
+Kontaktnetz einer Station & $\sim 10^2$ & $\sim 10^3$\\
+Straßennetz Deutschlands & $\sim 10^7$ & $\sim 10^7$\\
+Konnektom der Fruchtfliege & $\sim 1{,}4 \cdot 10^5$ & $\sim 5 \cdot 10^7$\\
+Weltweites Netz der Verweise & $> 10^{11}$ & $> 10^{12}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die vierte Zeile ist neu: Das vollständige Konnektom einer erwachsenen Fruchtfliege wurde 2024 veröffentlicht --- der erste vollständig kartierte Gehirngraph eines Tieres mit komplexem Verhalten. Was man daraus lernt, steht in Band 14 der Informatikreihe; dass man es überhaupt als Graphen aufschreibt, ist die Entscheidung aus Definition 1.1.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Begriff} & Graph als Paar $(V,E)$, Ecke, Kante, Ordnung, Größe\\
+\textbf{Grad} & Nachbarschaft, Grad, Gradfolge, isolierte Ecke\\
+\textbf{Satz 1.3} & Gradsumme $= 2m$, bewiesen durch Doppelzählung\\
+\textbf{Satz 1.4} & Gerade Anzahl von Ecken ungeraden Grades\\
+\textbf{Familien} & $K_n$, $P_n$, $C_n$, $K_{r,s}$, $Q_d$, Petersen\\
+\textbf{Isomorphie} & Definition, Nachweis, Widerlegung durch Invarianten\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel geht es um die Frage, die im Hygienebeispiel offen blieb: Wann kann man von einer Ecke zu einer anderen gelangen, und wie zerfällt ein Graph in Teile, zwischen denen es keine Verbindung gibt?}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,585 @@
+\chapter{Beschränktes Wachstum}
+
+\section{Der eine zusätzliche Faktor}
+
+Kapitel~1 endete bei einer Kultur, die nach zweieinhalb Tagen die Erdmasse erreicht hätte. Der Fehler steckt in der Annahme, dass sich jede Zelle ungehindert teilt. Wir bauen das Hindernis ein.
+
+\begin{merksatz}
+\boxtitel{Die neue Annahme in Worten}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es gibt eine Obergrenze $K$. Je näher der Bestand ihr kommt, desto stärker sinkt die Teilungsrate --- und bei $N = K$ ist sie null.}
+\end{minipage}
+\end{center}
+
+\schritt{Die einfachste Umsetzung}
+Die Rate soll bei $N \approx 0$ den Wert $r$ haben und bei $N = K$ den Wert $0$. Der einfachste Ausdruck mit dieser Eigenschaft ist
+\[ r\left(1 - \frac{N}{K}\right) . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+$N$ & $1 - N/K$ & \textbf{Rate}\\
+\midrule
+klein & $\approx 1$ & $\approx r$ --- wie Kapitel 1\\
+$K/2$ & $0{,}5$ & $r/2$\\
+$K$ & $0$ & \textcolor{akzent}{null}\\
+$> K$ & negativ & \textcolor{akzent}{Bestand sinkt}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist wichtig und oft übersehen: Das Modell beschreibt auch, was oberhalb der Grenze geschieht. Ein zu großer Bestand schrumpft --- was in der Biologie tatsächlich vorkommt, etwa wenn eine Population ihre Nahrungsgrundlage überzehrt hat.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 2.1 --- die logistische Gleichung}
+\[ \frac{\dd N}{\dd t} \;=\; r\,N\left(1 - \frac{N}{K}\right) \]
+mit der \Begriff{Wachstumsrate} $r > 0$ und der \Begriff{Kapazitätsgrenze} $K > 0$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die beiden Faktoren}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\node[font=\large, color=tief] at (0,0) {$\displaystyle \frac{\dd N}{\dd t} = r\,\underbrace{N}_{\ }\;\underbrace{\left(1-\frac{N}{K}\right)}_{\ }$};
+\draw[akzent, line width=0.7pt] (0.35,-0.75) -- (-0.5,-1.35);
+\node[font=\scriptsize, color=akzent, anchor=east] at (-0.55,-1.35) {so viele können sich teilen};
+\draw[akzent, line width=0.7pt] (1.5,-0.75) -- (2.3,-1.35);
+\node[font=\scriptsize, color=akzent, anchor=west] at (2.35,-1.35) {so viel Platz ist noch};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Das Produkt als Funktion von $N$}
+\[ \frac{\dd N}{\dd t} = rN - \frac{r}{K}N^2 \]
+Das ist eine nach unten geöffnete Parabel in $N$ mit Nullstellen bei $N=0$ und $N=K$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (-0.3,0) -- (5.4,0);
+\draw[grau!60, line width=0.7pt] (0,-0.3) -- (0,2.4);
+\draw[tief, line width=1.3pt, smooth, samples=60, domain=0:5.0]
+  plot (\x, {0.35*\x*(5-\x)});
+\draw[grau!50, dashed] (2.5,0) -- (2.5,2.19);
+\fill[akzent] (2.5,2.19) circle (2.2pt);
+\node[font=\scriptsize, color=grau] at (2.5,-0.32) {$K/2$};
+\node[font=\scriptsize, color=grau] at (5.0,-0.32) {$K$};
+\node[font=\scriptsize, color=akzent, anchor=west] at (2.75,2.19) {größter Zuwachs: $rK/4$};
+\node[font=\scriptsize, color=grau, rotate=90] at (-0.55,1.2) {$\dd N/\dd t$};
+\node[font=\scriptsize, color=grau] at (4.0,-0.75) {Bestand $N$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Der Scheitel}
+Eine Parabel mit Nullstellen bei $0$ und $K$ hat ihren Scheitel in der Mitte, also bei $N = K/2$. Der Wert dort:
+\[ r\cdot\frac{K}{2}\left(1-\frac12\right) = \frac{rK}{4} . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Zuwachs je Zeiteinheit ist am größten, wenn der Bestand die halbe Kapazität erreicht hat.} Vorher sind zu wenige da, nachher ist zu wenig Platz.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Lösung}
+
+\begin{merksatz}
+\boxtitel{Satz 2.2 --- die logistische Funktion}
+Die Lösung von Definition 2.1 mit $N(0) = N_0$, wobei $0 < N_0 < K$, lautet
+\[ N(t) \;=\; \frac{K}{1 + \left(\dfrac{K-N_0}{N_0}\right)e^{-rt}} . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- Schritt 1 bis 3}
+\schritt{Schritt 1 --- Trennen}
+\[ \frac{\dd N}{N\left(1-\frac{N}{K}\right)} = r\,\dd t \]
+
+\schritt{Schritt 2 --- Den Bruch zerlegen}
+Der Nenner links ist ein Produkt. Solche Brüche zerlegt man in eine Summe --- das ist die \Begriff{Partialbruchzerlegung} (Band 3, Teil~III).
+
+\kursiv{Die Behauptung:}
+\[ \frac{1}{N\left(1-\frac{N}{K}\right)} \;=\; \frac{1}{N} + \frac{1/K}{1-\frac{N}{K}} \]
+
+\kursiv{Die Probe} --- rechte Seite auf den gemeinsamen Nenner bringen:
+\begin{align*}
+\frac{1}{N} + \frac{1/K}{1-\frac{N}{K}} &= \frac{\left(1-\frac{N}{K}\right) + \frac{N}{K}}{N\left(1-\frac{N}{K}\right)}\\
+&= \frac{1 - \frac{N}{K} + \frac{N}{K}}{N\left(1-\frac{N}{K}\right)} = \frac{1}{N\left(1-\frac{N}{K}\right)} . \quad \checkmark
+\end{align*}
+
+\schritt{Schritt 3 --- Beide Seiten integrieren}
+\[ \int\frac{\dd N}{N} + \int\frac{1/K}{1-\frac{N}{K}}\,\dd N = \int r\,\dd t \]
+
+Das erste Integral ist $\ln N$.
+
+Für das zweite setzen wir $u = 1 - \frac{N}{K}$, also $\dd u = -\frac{1}{K}\dd N$ und damit $\frac{1}{K}\dd N = -\dd u$:
+\[ \int\frac{1/K}{u}\,\dd N = \int \frac{-\dd u}{u} = -\ln u = -\ln\left(1-\frac{N}{K}\right) . \]
+
+Zusammen:
+\[ \ln N - \ln\left(1-\frac{N}{K}\right) = rt + C \]
+\[ \ln\frac{N}{1-\frac{N}{K}} = rt + C \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- Schritt 4 bis 6}
+\schritt{Schritt 4 --- Entlogarithmieren und nach $N$ auflösen}
+\[ \frac{N}{1-\frac{N}{K}} = e^{C}e^{rt} =: A\,e^{rt} \]
+
+Mit $1-\frac{N}{K}$ durchmultiplizieren:
+\begin{align*}
+N &= A\,e^{rt}\left(1-\frac{N}{K}\right)\\
+N &= A\,e^{rt} - \frac{A\,e^{rt}}{K}\,N\\
+N + \frac{A\,e^{rt}}{K}\,N &= A\,e^{rt}\\
+N\left(1 + \frac{A\,e^{rt}}{K}\right) &= A\,e^{rt}\\
+N &= \frac{A\,e^{rt}}{1 + \frac{A\,e^{rt}}{K}}
+\end{align*}
+
+Zähler und Nenner durch $A\,e^{rt}$ teilen:
+\[ N(t) = \frac{1}{\frac{1}{A\,e^{rt}} + \frac{1}{K}} = \frac{K}{\frac{K}{A}\,e^{-rt} + 1} \]
+
+\schritt{Schritt 5 --- Die Konstante bestimmen}
+Bei $t=0$:
+\[ N_0 = \frac{K}{\frac{K}{A} + 1} \quad\Longrightarrow\quad \frac{K}{A} + 1 = \frac{K}{N_0} \quad\Longrightarrow\quad \frac{K}{A} = \frac{K}{N_0} - 1 = \frac{K-N_0}{N_0} \]
+
+Eingesetzt ergibt sich die Behauptung.
+
+\schritt{Schritt 6 --- Die Probe}
+Wir schreiben zur Abkürzung $B = \frac{K-N_0}{N_0}$, also $N = \dfrac{K}{1+Be^{-rt}}$.
+
+\kursiv{Ableiten} mit der Kettenregel:
+\[ \frac{\dd N}{\dd t} = K \cdot \left(-1\right)\left(1+Be^{-rt}\right)^{-2}\cdot B\cdot(-r)e^{-rt} = \frac{KrBe^{-rt}}{\left(1+Be^{-rt}\right)^{2}} \]
+
+\kursiv{Die rechte Seite der Gleichung:}
+\[ 1 - \frac{N}{K} = 1 - \frac{1}{1+Be^{-rt}} = \frac{1+Be^{-rt}-1}{1+Be^{-rt}} = \frac{Be^{-rt}}{1+Be^{-rt}} \]
+\[ rN\left(1-\frac{N}{K}\right) = r\cdot\frac{K}{1+Be^{-rt}}\cdot\frac{Be^{-rt}}{1+Be^{-rt}} = \frac{KrBe^{-rt}}{\left(1+Be^{-rt}\right)^{2}} \]
+
+Beide Seiten stimmen überein. Und $N(0) = \frac{K}{1+B} = \frac{K}{K/N_0} = N_0$. \checkmark\ $\blacksquare$
+\end{merksatz}
+
+\section{Was die Kurve tut}
+
+\begin{merksatz}
+\boxtitel{Die drei Grenzfälle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{$t \to -\infty$} & $e^{-rt} \to \infty$, der Nenner wird groß, $N \to 0$.\\
+\textbf{$t \to +\infty$} & $e^{-rt} \to 0$, der Nenner wird $1$, also $N \to K$.\\
+\textbf{$N \ll K$} & Der Term $N/K$ ist vernachlässigbar; die Gleichung geht in $\dd N/\dd t = rN$ über --- Kapitel~1.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist die Rechtfertigung von Kapitel~1: Das exponentielle Modell ist der Grenzfall des logistischen bei kleinem Bestand. Es ist nicht falsch, sondern eine Näherung mit angebbarem Gültigkeitsbereich.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.3 --- der Wendepunkt}
+Die logistische Kurve hat ihren Wendepunkt genau bei $N = K/2$, und zwar zur Zeit
+\[ t^{*} = \frac{1}{r}\,\ln\frac{K-N_0}{N_0} . \]
+
+\schritt{Beweis --- der Wendepunkt}
+Wir leiten die Gleichung nach $t$ ab. Mit $\dd N/\dd t = rN - \frac{r}{K}N^2$:
+\[ \frac{\dd^2N}{\dd t^2} = r\frac{\dd N}{\dd t} - \frac{2r}{K}N\frac{\dd N}{\dd t} = \frac{\dd N}{\dd t}\left(r - \frac{2r}{K}N\right) = r\,\frac{\dd N}{\dd t}\left(1 - \frac{2N}{K}\right) \]
+
+Da $0 < N < K$ ist $\dd N/\dd t > 0$, also verschwindet die zweite Ableitung genau dann, wenn
+\[ 1 - \frac{2N}{K} = 0 \quad\Longleftrightarrow\quad N = \frac{K}{2} . \]
+
+\schritt{Beweis --- der Zeitpunkt}
+Aus der Lösung mit $N = K/2$:
+\[ \frac{K}{2} = \frac{K}{1+Be^{-rt^*}} \quad\Longrightarrow\quad 1+Be^{-rt^*} = 2 \quad\Longrightarrow\quad Be^{-rt^*} = 1 \]
+\[ e^{-rt^*} = \frac{1}{B} \quad\Longrightarrow\quad -rt^* = -\ln B \quad\Longrightarrow\quad t^* = \frac{\ln B}{r} = \frac{1}{r}\ln\frac{K-N_0}{N_0} . \qquad \blacksquare \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Wendepunkt ist der Zeitpunkt des schnellsten Zuwachses. In einer Epidemie entspricht er dem Gipfel der Neuinfektionen --- und er liegt \kursiv{nicht} dort, wo die meisten Menschen erkrankt sind, sondern dort, wo die meisten \kursiv{neu} erkranken. Kapitel~7 kommt darauf zurück.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Kultur am Klinikum}
+
+\begin{merksatz}
+\boxtitel{Dieselben Zahlen wie in Kapitel~1, mit Grenze}
+$N_0 = 10^4$ je Milliliter, $r = 1{,}386\ \mathrm{h}^{-1}$, und als Kapazitätsgrenze $K = 10^9$ je Milliliter.
+
+\schritt{Die Konstante}
+\[ B = \frac{K-N_0}{N_0} = \frac{10^9 - 10^4}{10^4} = 10^5 - 1 = 99\,999 \approx 10^5 \]
+
+\schritt{Die Lösung}
+\[ N(t) = \frac{10^9}{1 + 99\,999\,e^{-1{,}386\,t}} \]
+
+\schritt{Der Vergleich mit Kapitel~1}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.2cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+$t$ (h) & \textbf{exponentiell} & \textbf{logistisch} & \textbf{Abweichung}\\
+\midrule
+$2$ & $1{,}6\cdot10^{5}$ & $1{,}6\cdot10^{5}$ & \textcolor{gruen}{$<1\,\%$}\\
+$4$ & $2{,}56\cdot10^{6}$ & $2{,}55\cdot10^{6}$ & \textcolor{gruen}{$0{,}3\,\%$}\\
+$6$ & $4{,}10\cdot10^{7}$ & $3{,}93\cdot10^{7}$ & $4\,\%$\\
+$8$ & $6{,}55\cdot10^{8}$ & $3{,}96\cdot10^{8}$ & \textcolor{akzent}{$40\,\%$}\\
+$10$ & $1{,}05\cdot10^{10}$ & $8{,}68\cdot10^{8}$ & \textcolor{akzent}{Faktor $12$}\\
+$12$ & $1{,}68\cdot10^{11}$ & $9{,}91\cdot10^{8}$ & \textcolor{akzent}{Faktor $169$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Beispielrechnung für $t=8$:}
+\[ e^{-1{,}386\cdot8} = e^{-11{,}09} = 1{,}526\cdot10^{-5} \]
+\[ 99\,999 \cdot 1{,}526\cdot10^{-5} = 1{,}526 \]
+\[ N(8) = \frac{10^9}{1+1{,}526} = \frac{10^9}{2{,}526} = 3{,}96\cdot10^{8} \]
+
+\schritt{Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bis etwa sechs Stunden sind beide Modelle praktisch gleich.} Danach trennen sie sich rasch --- und zwar genau dort, wo der Bestand in die Größenordnung von $K$ kommt.
+\end{minipage}
+\end{center}
+
+\schritt{Der Wendepunkt}
+\[ t^{*} = \frac{\ln 99\,999}{1{,}386} = \frac{11{,}513}{1{,}386} = 8{,}31\ \text{h} \]
+
+Zu diesem Zeitpunkt beträgt der Bestand $5\cdot10^8$, und der Zuwachs ist am größten:
+\[ \frac{rK}{4} = \frac{1{,}386\cdot10^9}{4} = 3{,}47\cdot10^{8} \ \text{je Stunde} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die praktische Folgerung für das Labor: Will man die Kultur im gleichmäßigen Wachstum halten --- etwa für einen Empfindlichkeitstest ---, so muss man vor dem Wendepunkt verdünnen. Nach acht Stunden ist die Kultur bereits im Übergang zur Sättigung, und die Zellen verhalten sich anders.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Vier Dinge, die das logistische Modell nicht kann}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Anlaufphase} & Die Kurve steigt von Anfang an. Die Verzögerung, bis sich Zellen an ein neues Medium angepasst haben, fehlt.\\
+\textbf{Absterben} & Nach der Sättigung bleibt $N = K$ für immer. Das Absterben aus dem Bild in Kapitel~1 kommt nicht vor.\\
+\textbf{Symmetrie} & Die Kurve ist punktsymmetrisch zum Wendepunkt --- Aufgabe 2.3. Viele biologische Verläufe sind es nicht.\\
+\textbf{Feste Grenze} & $K$ gilt als Konstante. In Wirklichkeit hängt sie von Bedingungen ab, die sich ändern.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Die Symmetrie ist die folgenreichste Einschränkung. Beim Tumorwachstum etwa verlangsamt sich das Wachstum \kursiv{früher} als bei halber Endgröße --- das logistische Modell passt dort schlecht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Deshalb benutzt man in der Onkologie meist das Gompertz-Modell, dessen Wendepunkt bei etwa $37\,\%$ der Endgröße liegt --- bei $K/e$, um genau zu sein. Kapitel~13 leitet es her.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Wie man die Parameter schätzt}
+$r$ und $K$ sind selten bekannt; man bestimmt sie aus Daten.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{$K$ ablesen} & Aus dem Sättigungswert --- setzt voraus, dass man lange genug gemessen hat.\\
+\textbf{$r$ aus der Frühphase} & Halblogarithmische Auftragung der frühen Werte; die Steigung ist $r$ (Kapitel~1).\\
+\textbf{Beides zugleich} & Nichtlineare Anpassung nach kleinsten Quadraten --- Band 17, Kapitel~10, mit einer nichtlinearen Funktion.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der übliche Fehler}
+Schätzt man $K$ aus Daten, die noch weit vor der Sättigung liegen, so ist die Schätzung praktisch beliebig.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist bei Epidemien und beim Tumorwachstum der Regelfall: Man hat die aufsteigende Flanke und will die Endgröße vorhersagen. Verschiedene Kurven, die alle gut zu den vorhandenen Daten passen, sagen dann völlig verschiedene Endwerte voraus. Die Unsicherheit ist \kursiv{sehr} viel größer, als die Anpassungsgüte vermuten lässt.}
+\end{minipage}
+\end{center}
+
+\schritt{Eine Faustregel}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Vor dem Wendepunkt ist $K$ nicht zuverlässig schätzbar.} Solange die Kurve noch beschleunigt, enthalten die Daten kaum Auskunft über die Grenze.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- Eine logistische Kurve aufstellen}
+Eine Hefekultur startet mit $N_0 = 5$ Einheiten, erreicht als Sättigungswert $K = 665$ Einheiten und hat eine Anfangswachstumsrate von $r = 0{,}54\ \mathrm{h}^{-1}$. Bestimmen Sie die Lösung, den Wendepunkt und den Bestand nach $10$ und $20$ Stunden.
+
+\loesung
+\schritt{Schritt 1 --- Die Konstante}
+\[ B = \frac{K-N_0}{N_0} = \frac{665-5}{5} = \frac{660}{5} = 132 \]
+
+\schritt{Schritt 2 --- Die Lösung}
+\[ N(t) = \frac{665}{1 + 132\,e^{-0{,}54\,t}} \]
+
+\schritt{Schritt 3 --- Der Wendepunkt}
+\[ t^{*} = \frac{\ln 132}{0{,}54} = \frac{4{,}883}{0{,}54} = 9{,}04\ \text{h} \]
+Dort ist $N = K/2 = 332{,}5$, und der Zuwachs beträgt
+\[ \frac{rK}{4} = \frac{0{,}54 \cdot 665}{4} = 89{,}8 \ \text{Einheiten je Stunde} . \]
+
+\schritt{Schritt 4 --- Nach zehn Stunden}
+\[ e^{-0{,}54 \cdot 10} = e^{-5{,}40} = 0{,}004517 \]
+\[ 132 \cdot 0{,}004517 = 0{,}5962 \]
+\[ N(10) = \frac{665}{1{,}5962} = 416{,}6 \]
+
+\schritt{Schritt 5 --- Nach zwanzig Stunden}
+\[ e^{-10{,}80} = 2{,}039\cdot10^{-5} \]
+\[ 132 \cdot 2{,}039\cdot10^{-5} = 0{,}002692 \]
+\[ N(20) = \frac{665}{1{,}002692} = 663{,}2 \]
+
+\schritt{Schritt 6 --- Die Übersicht}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.8cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+$t$ (h) & $N(t)$ & \textbf{Anteil an $K$}\\
+\midrule
+$0$ & $5{,}0$ & $0{,}8\,\%$\\
+$5$ & $50{,}5$ & $7{,}6\,\%$\\
+$9{,}04$ & $332{,}5$ & $50{,}0\,\%$\\
+$10$ & $416{,}6$ & $62{,}6\,\%$\\
+$15$ & $632{,}8$ & $95{,}2\,\%$\\
+$20$ & $663{,}2$ & $99{,}7\,\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Probe an der Symmetrie}
+Der Wendepunkt liegt bei $9{,}04$ h. Nach Aufgabe 2.3 muss gelten
+\[ N(t^*-\Delta) + N(t^*+\Delta) = K . \]
+Prüfen wir mit $\Delta = 4$ h, also $t = 5{,}04$ und $t = 13{,}04$:
+\[ N(5{,}04) = \frac{665}{1+132\,e^{-2{,}722}} = \frac{665}{1+132\cdot0{,}06573} = \frac{665}{9{,}676} = 68{,}7 \]
+\[ N(13{,}04) = \frac{665}{1+132\,e^{-7{,}042}} = \frac{665}{1+132\cdot0{,}0008737} = \frac{665}{1{,}1153} = 596{,}3 \]
+\[ 68{,}7 + 596{,}3 = 665{,}0 = K . \quad \checkmark \]
+
+\schritt{Eine Bemerkung zu den Zahlen}
+Die Werte $N_0 = 5$, $K = 665$, $r = 0{,}54$ stammen aus der klassischen Hefeuntersuchung von Carlson (1913) --- einem der ersten Datensätze, an denen die logistische Kurve geprüft wurde. Sie passt dort außergewöhnlich gut.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Wann sind $90$ Prozent erreicht?}
+Leiten Sie eine allgemeine Formel für den Zeitpunkt her, zu dem der Bestand einen Anteil $p$ der Kapazität erreicht, und wenden Sie sie auf die Klinikumskultur an.
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingung}
+\[ N(t_p) = p\,K \quad\Longrightarrow\quad \frac{K}{1+Be^{-rt_p}} = pK \]
+
+\schritt{Schritt 2 --- Auflösen}
+\begin{align*}
+\frac{1}{1+Be^{-rt_p}} &= p\\
+1+Be^{-rt_p} &= \frac{1}{p}\\
+Be^{-rt_p} &= \frac{1}{p} - 1 = \frac{1-p}{p}\\
+e^{-rt_p} &= \frac{1-p}{p\,B}\\
+-rt_p &= \ln\frac{1-p}{p\,B}\\
+t_p &= \frac{1}{r}\,\ln\frac{p\,B}{1-p}
+\end{align*}
+
+\schritt{Schritt 3 --- Die Formel prüfen}
+Für $p = \frac12$ ergibt sich
+\[ t_{1/2} = \frac{1}{r}\ln\frac{\frac12 B}{\frac12} = \frac{\ln B}{r} = t^{*} . \quad \checkmark \]
+Das stimmt mit Satz 2.3 überein.
+
+\schritt{Schritt 4 --- Anwendung auf die Kultur}
+$B = 99\,999$, $r = 1{,}386\ \mathrm{h}^{-1}$.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.4cm}P{2.6cm}P{2.2cm}P{1.8cm}@{}}
+\toprule
+$p$ & $\frac{pB}{1-p}$ & $\ln$ & $t_p$ (h)\\
+\midrule
+$0{,}10$ & $11\,111$ & $9{,}316$ & $6{,}72$\\
+$0{,}50$ & $99\,999$ & $11{,}513$ & $8{,}31$\\
+$0{,}90$ & $899\,991$ & $13{,}710$ & $9{,}89$\\
+$0{,}99$ & $9{,}9\cdot10^{6}$ & $16{,}108$ & $11{,}62$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Die Beobachtung}
+Von $10$ auf $50$ Prozent dauert es $1{,}59$ Stunden. Von $50$ auf $90$ Prozent ebenfalls $1{,}58$ Stunden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist wieder die Symmetrie.} Die Zeitspanne von $p$ bis $\frac12$ ist genauso lang wie die von $\frac12$ bis $1-p$.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Der Nachweis}
+Aus der Formel:
+\[ t_{1-p} - t_{1/2} = \frac{1}{r}\left[\ln\frac{(1-p)B}{p} - \ln B\right] = \frac{1}{r}\ln\frac{1-p}{p} \]
+\[ t_{1/2} - t_{p} = \frac{1}{r}\left[\ln B - \ln\frac{pB}{1-p}\right] = \frac{1}{r}\ln\frac{1-p}{p} \]
+Beide Ausdrücke sind gleich. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Bemerkenswert ist, dass $B$ dabei herausfällt --- die Spanne hängt also nicht vom Ausgangsbestand ab, sondern nur von $r$. Für die Klinikumskultur: Von zehn auf neunzig Prozent dauert es stets $\frac{2}{r}\ln 9 = \frac{4{,}394}{1{,}386} = 3{,}17$ Stunden, gleichgültig wie klein man beginnt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Die Symmetrie beweisen}
+Zeigen Sie, dass die logistische Kurve punktsymmetrisch zu ihrem Wendepunkt ist --- also dass für alle $\Delta$ gilt
+\[ N(t^*-\Delta) + N(t^*+\Delta) = K . \]
+
+\loesung
+\schritt{Schritt 1 --- Den Wendepunkt einsetzen}
+Aus Satz 2.3 ist $e^{-rt^*} = 1/B$, also $B\,e^{-rt^*} = 1$.
+
+\schritt{Schritt 2 --- Die beiden Werte ausdrücken}
+\[ N(t^*+\Delta) = \frac{K}{1+Be^{-r(t^*+\Delta)}} = \frac{K}{1+Be^{-rt^*}e^{-r\Delta}} = \frac{K}{1+e^{-r\Delta}} \]
+\[ N(t^*-\Delta) = \frac{K}{1+Be^{-rt^*}e^{+r\Delta}} = \frac{K}{1+e^{r\Delta}} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie, was hier geschehen ist: Durch die Verschiebung auf den Wendepunkt ist $B$ vollständig verschwunden. Die Kurve sieht, vom Wendepunkt aus betrachtet, für jeden Ausgangsbestand gleich aus.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Addieren}
+Wir schreiben zur Abkürzung $u = e^{r\Delta}$, also $e^{-r\Delta} = 1/u$:
+\begin{align*}
+N(t^*-\Delta) + N(t^*+\Delta) &= \frac{K}{1+u} + \frac{K}{1+\frac{1}{u}}\\
+&= \frac{K}{1+u} + \frac{K\,u}{u+1}\\
+&= \frac{K + K\,u}{1+u}\\
+&= \frac{K(1+u)}{1+u} \;=\; K . \qquad \blacksquare
+\end{align*}
+
+\schritt{Schritt 4 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Der Verlauf vor dem Wendepunkt ist das Spiegelbild des Verlaufs danach --- gespiegelt an der Höhe $K/2$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (6.6,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.2);
+\draw[grau!50, dashed] (0,1.5) -- (6.4,1.5);
+\draw[grau!50, dashed] (3.2,0) -- (3.2,3.0);
+\draw[tief, line width=1.3pt, smooth, samples=70, domain=0:6.4]
+  plot (\x, {3.0/(1+exp(-1.25*(\x-3.2)))});
+\fill[akzent] (3.2,1.5) circle (2.4pt);
+\node[font=\scriptsize, color=grau] at (-0.35,1.5) {$\frac{K}{2}$};
+\node[font=\scriptsize, color=grau] at (3.2,-0.35) {$t^{*}$};
+\fill[tief] (1.6,0.42) circle (1.9pt);
+\fill[tief] (4.8,2.58) circle (1.9pt);
+\draw[grau!55, line width=0.6pt] (1.6,0.42) -- (4.8,2.58);
+\node[font=\scriptsize\itshape, color=grau] at (5.6,0.6) {Summe stets $K$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Schritt 5 --- Warum das eine Einschränkung ist}
+Die Symmetrie ist keine Beobachtung, sondern eine \kursiv{Folge des Modells}. Sie wurde nicht aus Daten gewonnen, sondern steckt bereits in der Annahme, dass die Rate \kursiv{linear} mit dem Bestand abnimmt.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Wer eine logistische Kurve an Daten anpasst, erzwingt damit die Symmetrie --- auch dann, wenn die Daten sie nicht zeigen. Das ist der Grund, warum man in der Onkologie und bei manchen Epidemien andere Modelle wählt. Kapitel~13 führt die Alternativen vor.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Name, der zweimal erfunden wurde}
+\Person{Pierre-François Verhulst} (1804--1849), belgischer Mathematiker und Schüler von Quetelet, veröffentlichte die Gleichung 1838. Er suchte nach einer Antwort auf Malthus und wollte zeigen, dass das Wachstum einer Bevölkerung an eine Grenze stößt, ohne dass es zur Katastrophe kommen muss.
+
+Verhulst prägte auch den Namen: Er nannte die Kurve \kursiv{logistique}, ohne zu erklären, warum. Über die Herkunft des Wortes wird bis heute gestritten --- am wahrscheinlichsten ist eine Anspielung auf das Logarithmische, das in der Lösung steckt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Verhulst starb mit 45 Jahren, und seine Arbeit geriet vollständig in Vergessenheit. Erst 1920 wurde die Gleichung von \Person{Raymond Pearl} und \Person{Lowell Reed} unabhängig wiederentdeckt, die sie an die Bevölkerungszahlen der Vereinigten Staaten anpassten. Pearl erfuhr erst nachträglich von Verhulsts Arbeit und nannte ihn danach als Urheber.}
+\end{minipage}
+\end{center}
+
+\schritt{Eine Warnung aus der Geschichte}
+Pearl sagte aufgrund seiner Anpassung voraus, die Bevölkerung der Vereinigten Staaten werde sich bei etwa $197$ Millionen einpendeln. Tatsächlich waren es im Jahr 2020 über $330$ Millionen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Fehler ist genau der aus dem Abschnitt über die Parameterschätzung: Pearl schätzte $K$ aus Daten, die noch weit vor der Sättigung lagen. Die Anpassung war ausgezeichnet --- und die Hochrechnung falsch. Gute Anpassung an vorhandene Daten sagt nichts über die Güte einer Vorhersage jenseits davon.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wo die logistische Gleichung heute steht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Als Modell} & Für Bakterienkulturen im geschlossenen Gefäß gut brauchbar; für Bevölkerungen und Tumoren meist zu einfach.\\
+\textbf{Als Baustein} & In Epidemie- und Ökologiemodellen steckt der Faktor $(1-N/K)$ an vielen Stellen.\\
+\textbf{Als Funktion} & Die logistische \kursiv{Funktion} ist von der Gleichung unabhängig geworden: Sie ist die Rückrechnung im logistischen Regressionsmodell (Band 17, Kapitel~11) und die gebräuchlichste Aktivierungsfunktion in neuronalen Netzen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist bemerkenswert: Dieselbe Funktion entstand in der Bevölkerungslehre, wurde in der Statistik neu entdeckt und ist heute in der Rechnerkunde allgegenwärtig. In keinem der drei Zusammenhänge spielt ihr ursprünglicher Anlass noch eine Rolle.}
+\end{minipage}
+\end{center}
+
+\schritt{Verallgemeinerungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{5.8cm}@{}}
+\toprule
+Gompertz & Wendepunkt bei $K/e$; Standard beim Tumorwachstum (Kapitel~13)\\
+Richards & Ein zusätzlicher Formparameter verschiebt den Wendepunkt frei\\
+Allee-Effekt & Bei sehr kleinem Bestand ist die Rate \kursiv{negativ} --- Partner finden einander nicht mehr\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die letzte Zeile ist für den Artenschutz folgenreich: Unterhalb einer Schwelle stirbt eine Population aus, auch wenn genügend Lebensraum vorhanden wäre. Das logistische Modell kennt diese Schwelle nicht --- bei ihm erholt sich jeder noch so kleine Bestand.
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 2.1} & ein Faktor mehr als Kapitel~1\\
+\textbf{Satz 2.2} & Lösung über Partialbruchzerlegung, mit Probe\\
+\textbf{Satz 2.3} & Wendepunkt bei $K/2$, größter Zuwachs $rK/4$\\
+\textbf{Die Symmetrie} & eine Folge des Modells, keine Beobachtung\\
+\textbf{Der Bruchfall} & $K$ ist vor dem Wendepunkt nicht schätzbar\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel lassen wir die Zeit in Sprüngen statt stetig verlaufen --- und dieselbe Gleichung verhält sich plötzlich völlig anders.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,537 @@
+\chapter{Das chromatische Polynom}
+
+\section{Von der Existenz zur Anzahl}
+
+Kapitel 9 fragte: \kursiv{Gibt es} eine $k$-Färbung? Jetzt fragen wir: \kursiv{Wie viele} gibt es?
+
+Das ist zunächst nur eine Verschärfung. Es stellt sich aber heraus, dass die Antwort eine überraschende Gestalt hat --- und dass die Existenzfrage aus ihr abfällt.
+
+\begin{definition}
+\boxtitelm{Definition 10.1 --- chromatisches Polynom}
+Für einen Graphen $G$ und eine natürliche Zahl $k$ sei
+\[ P(G, k) \;=\; \#\{\text{$k$-Färbungen von } G\} , \]
+also die Anzahl der Abbildungen $c : V \to \{1,\ldots,k\}$ mit $c(u) \neq c(v)$ für jede Kante $\{u,v\}$.
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Gezählt werden \kursiv{beschriftete} Färbungen}
+Zwei Färbungen gelten als verschieden, sobald irgendeine Ecke eine andere Farbe trägt --- auch wenn sie sich nur durch Umbenennen der Farben unterscheiden.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\begin{scope}
+\node[knotenb] (a) at (-0.6,0) {$1$};
+\node[knotenr] (b) at (0.6,0) {$2$};
+\draw[kante] (a)--(b);
+\end{scope}
+\begin{scope}[xshift=3.0cm]
+\node[knotenr] (c) at (-0.6,0) {$2$};
+\node[knotenb] (d) at (0.6,0) {$1$};
+\draw[kante] (c)--(d);
+\end{scope}
+\node[font=\scriptsize\itshape, color=grau] at (1.2,-0.75) {zwei verschiedene Färbungen};
+\end{tikzpicture}
+\end{center}
+
+Für den Graphen mit einer Kante und $k = 2$ ist also $P = 2$, nicht $1$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Zählweise sieht großzügig aus, ist aber die einzige, mit der man rechnen kann. Zählte man Färbungen \enquote{bis auf Umbenennung}, so ginge die gleich zu beweisende Rekursion kaputt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Vier Beispiele, direkt abgezählt}
+\schritt{Der leere Graph $\overline{K_n}$ --- $n$ Ecken, keine Kante}
+Jede Ecke darf jede Farbe bekommen, unabhängig von den anderen. Nach der Produktregel
+\[ P(\overline{K_n}, k) = k^n . \]
+
+\schritt{Der vollständige Graph $K_n$}
+Alle Ecken müssen verschiedene Farben tragen. Für die erste hat man $k$ Möglichkeiten, für die zweite $k-1$, für die dritte $k-2$ und so fort:
+\[ P(K_n, k) = k(k-1)(k-2)\cdots(k-n+1) . \]
+Für $k < n$ ist einer der Faktoren null --- richtig, denn dann gibt es keine Färbung.
+
+\schritt{Ein Baum mit $n$ Ecken}
+Wir wurzeln den Baum an einer Ecke $r$ und färben von der Wurzel nach außen. Für $r$ gibt es $k$ Möglichkeiten. Jede weitere Ecke hat genau einen bereits gefärbten Nachbarn --- ihren Vorgänger --- und muss nur dessen Farbe meiden: $k-1$ Möglichkeiten.
+
+Da es $n-1$ Ecken außer der Wurzel gibt:
+\[ P(T, k) = k\,(k-1)^{\,n-1} . \]
+
+\schritt{Der Weg $P_3$ --- zur Kontrolle}
+Nach der Baumformel: $k(k-1)^2$. Für $k=2$: $2 \cdot 1 = 2$. Nachzählen: Die Färbungen sind $1,2,1$ und $2,1,2$. Zwei. \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was an diesen Ergebnissen auffällt}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{3.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Graph} & $P(G,k)$ & \textbf{Gestalt}\\
+\midrule
+$\overline{K_n}$ & $k^n$ & Polynom in $k$\\
+$K_3$ & $k(k-1)(k-2)$ & Polynom in $k$\\
+Baum & $k(k-1)^{n-1}$ & Polynom in $k$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+In allen Fällen ist $P(G,k)$ ein \kursiv{Polynom} in $k$ vom Grad $n$ --- also ein Ausdruck der Form $a_nk^n + a_{n-1}k^{n-1} + \cdots + a_0$.
+
+Das ist keineswegs selbstverständlich. $P(G,k)$ war zunächst nur für natürliche Zahlen $k$ definiert, als eine Anzahl. Dass sich diese Anzahlen durch eine feste Polynomformel beschreiben lassen, ist der Inhalt von Satz 10.3.
+\end{merksatz}
+
+\section{Weglassen und Zusammenziehen}
+
+\begin{definition}
+\boxtitelm{Definition 10.2 --- $G-e$ und $G/e$}
+Sei $e = \{u,v\}$ eine Kante von $G$.
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item $G - e$ entsteht durch \Begriff{Weglassen} von $e$; die Ecken bleiben.
+\item $G / e$ entsteht durch \Begriff{Zusammenziehen} von $e$: Die beiden Ecken $u$ und $v$ werden zu einer einzigen Ecke $w$ verschmolzen, die mit allen bisherigen Nachbarn von $u$ und von $v$ verbunden ist. Entstehende Mehrfachkanten werden zu einer zusammengefasst.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{An einem Beispiel}
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+\begin{scope}
+\node[knotenb] (u) at (-0.7,0.6) {$u$};
+\node[knotenb] (v) at (0.7,0.6) {$v$};
+\node[knotenb] (x) at (-0.7,-0.6) {$x$};
+\node[knotenb] (y) at (0.7,-0.6) {$y$};
+\draw[kanted] (u)--(v);
+\draw[kante] (u)--(x);\draw[kante] (v)--(y);\draw[kante] (x)--(y);
+\draw[kante] (u)--(y);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {$G$: $n=4$, $m=5$};
+\end{scope}
+\begin{scope}[xshift=3.6cm]
+\node[knotenb] (u2) at (-0.7,0.6) {$u$};
+\node[knotenb] (v2) at (0.7,0.6) {$v$};
+\node[knotenb] (x2) at (-0.7,-0.6) {$x$};
+\node[knotenb] (y2) at (0.7,-0.6) {$y$};
+\draw[kante] (u2)--(x2);\draw[kante] (v2)--(y2);\draw[kante] (x2)--(y2);
+\draw[kante] (u2)--(y2);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {$G-e$: $n=4$, $m=4$};
+\end{scope}
+\begin{scope}[xshift=7.2cm]
+\node[knotenr] (w) at (0,0.6) {$w$};
+\node[knotenb] (x3) at (-0.7,-0.6) {$x$};
+\node[knotenb] (y3) at (0.7,-0.6) {$y$};
+\draw[kante] (w)--(x3);\draw[kante] (w)--(y3);\draw[kante] (x3)--(y3);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {$G/e$: $n=3$, $m=3$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Beim Zusammenziehen entstanden zwei Kanten von $w$ nach $y$ --- eine von $v$, eine von $u$. Sie wurden zu einer zusammengefasst.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 10.3 --- die Rekursion}
+Für jede Kante $e$ von $G$ gilt
+\[ P(G, k) \;=\; P(G-e,\, k) \;-\; P(G/e,\, k) . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- durch Aufteilen einer Menge}
+Sei $e = \{u,v\}$.
+
+\schritt{Schritt 1 --- Die Menge, die wir aufteilen}
+Sei $\mathcal{F}$ die Menge aller $k$-Färbungen von $G - e$. Es ist $|\mathcal{F}| = P(G-e,k)$.
+
+\schritt{Schritt 2 --- Die Aufteilung}
+Wir teilen $\mathcal{F}$ nach dem Verhältnis der Farben von $u$ und $v$:
+\[ \mathcal{F}_{\neq} = \{\, c \in \mathcal{F} : c(u) \neq c(v) \,\}, \qquad
+   \mathcal{F}_{=} = \{\, c \in \mathcal{F} : c(u) = c(v) \,\} . \]
+Jede Färbung liegt in genau einer der beiden Mengen, also
+\[ P(G-e,k) = |\mathcal{F}_{\neq}| + |\mathcal{F}_{=}| . \]
+
+\schritt{Schritt 3 --- Was $\mathcal{F}_{\neq}$ ist}
+Behauptung: $\mathcal{F}_{\neq}$ ist genau die Menge der $k$-Färbungen von $G$.
+
+\kursiv{Jede $k$-Färbung von $G$ liegt in $\mathcal{F}_{\neq}$:} Sie erfüllt die Bedingung für alle Kanten von $G$, also erst recht für die von $G-e$; und für die Kante $e$ verlangt sie $c(u) \neq c(v)$.
+
+\kursiv{Jedes Element von $\mathcal{F}_{\neq}$ ist eine $k$-Färbung von $G$:} Es erfüllt die Bedingung für alle Kanten von $G-e$, und für die einzige zusätzliche Kante $e$ gilt $c(u) \neq c(v)$ nach Definition von $\mathcal{F}_{\neq}$.
+
+Also $|\mathcal{F}_{\neq}| = P(G,k)$.
+
+\schritt{Schritt 4 --- Was $\mathcal{F}_{=}$ ist}
+Behauptung: Es gibt eine Bijektion zwischen $\mathcal{F}_{=}$ und den $k$-Färbungen von $G/e$.
+
+\kursiv{Von $\mathcal{F}_{=}$ nach $G/e$:} Sei $c \in \mathcal{F}_{=}$, also $c(u) = c(v)$. Wir definieren eine Färbung $\tilde{c}$ von $G/e$ durch
+\[ \tilde{c}(w) = c(u) = c(v), \qquad \tilde{c}(z) = c(z) \ \text{ für alle übrigen Ecken } z . \]
+
+\kursiv{Ist $\tilde{c}$ zulässig?} Zu prüfen sind die Kanten von $G/e$. Eine Kante zwischen zwei Ecken $\neq w$ war schon in $G-e$ vorhanden, und dort war $c$ zulässig. Eine Kante $\{w, z\}$ entstand aus $\{u,z\}$ oder $\{v,z\}$ in $G-e$; in beiden Fällen war dort $c(u) \neq c(z)$ bzw. $c(v) \neq c(z)$, und wegen $c(u)=c(v)=\tilde c(w)$ folgt $\tilde{c}(w) \neq \tilde{c}(z)$. \checkmark
+
+\kursiv{Von $G/e$ nach $\mathcal{F}_{=}$:} Ist umgekehrt eine Färbung $\tilde{c}$ von $G/e$ gegeben, so setze $c(u) = c(v) = \tilde{c}(w)$ und $c(z) = \tilde{c}(z)$ sonst. Mit demselben Argument rückwärts ist $c$ eine zulässige Färbung von $G-e$ mit $c(u)=c(v)$, liegt also in $\mathcal{F}_{=}$.
+
+Die beiden Zuordnungen sind offensichtlich zueinander invers. Also $|\mathcal{F}_{=}| = P(G/e, k)$.
+
+\schritt{Schritt 5 --- Zusammensetzen}
+\[ P(G-e,k) = P(G,k) + P(G/e,k) , \]
+und Umstellen ergibt die Behauptung. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{An Schritt 4 sieht man, warum in Definition 10.2 Mehrfachkanten zusammengefasst werden: Für die Färbung ist es gleichgültig, ob zwei Ecken durch eine oder durch zwei Kanten verbunden sind --- die Forderung \enquote{verschiedene Farben} steht so oder so genau einmal da.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 10.4 --- $P(G,k)$ ist ein Polynom}
+Für jeden Graphen $G$ mit $n$ Ecken und $m$ Kanten ist $P(G,k)$ ein Polynom in $k$ vom Grad $n$ mit ganzzahligen Koeffizienten. Sein höchster Koeffizient ist $1$, der nächste ist $-m$:
+\[ P(G,k) = k^n - m\,k^{n-1} + \cdots \]
+
+\schritt{Beweis durch Induktion über $m$}
+\textbf{Anfang $m = 0$:} Dann ist $G$ der leere Graph, und $P(G,k) = k^n$. Grad $n$, höchster Koeffizient $1$, zweiter Koeffizient $0 = -m$. \checkmark
+
+\textbf{Schritt.} Sei $m \ge 1$ und die Behauptung für alle Graphen mit weniger Kanten bewiesen. Wähle eine Kante $e$.
+
+\kursiv{Der Graph $G-e$} hat $n$ Ecken und $m-1$ Kanten. Nach Induktionsannahme
+\[ P(G-e,k) = k^n - (m-1)k^{n-1} + \cdots \]
+
+\kursiv{Der Graph $G/e$} hat $n-1$ Ecken (zwei wurden zu einer) und höchstens $m-1$ Kanten. Nach Induktionsannahme ist $P(G/e,k)$ ein Polynom vom Grad $n-1$ mit höchstem Koeffizienten $1$:
+\[ P(G/e,k) = k^{n-1} + \cdots \]
+
+\kursiv{Die Differenz.} Nach Satz 10.3
+\[ P(G,k) = \bigl(k^n - (m-1)k^{n-1} + \cdots\bigr) - \bigl(k^{n-1} + \cdots\bigr) . \]
+Der Term $k^n$ kommt nur aus dem ersten Summanden --- Grad $n$, Koeffizient $1$. Der Term $k^{n-1}$ bekommt Beiträge von beiden:
+\[ -(m-1) - 1 = -m . \]
+Ganzzahligkeit bleibt erhalten, weil Differenzen ganzer Zahlen ganz sind. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Folgerung 10.5 --- die chromatische Zahl steckt darin}
+\[ \chi(G) = \min\{\, k \ge 1 : P(G,k) > 0 \,\} . \]
+
+\schritt{Warum}
+$P(G,k) > 0$ bedeutet, dass mindestens eine $k$-Färbung existiert --- also dass $G$ $k$-färbbar ist. Das kleinste solche $k$ ist nach Definition 9.1 gerade $\chi(G)$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kennt man das chromatische Polynom, so kennt man auch die chromatische Zahl --- man setzt $k=1,2,3,\ldots$ ein und schaut, wann zum ersten Mal etwas Positives herauskommt. Man kennt sogar mehr: die Anzahl der Möglichkeiten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Ein vollständig durchgerechnetes Beispiel}
+
+\begin{merksatz}
+\boxtitel{Das chromatische Polynom des Kreises $C_4$}
+\schritt{Schritt 1 --- Eine Kante wählen}
+$C_4$ mit den Ecken $1,2,3,4$ und den Kanten $12$, $23$, $34$, $41$. Wir wählen $e = \{1,2\}$.
+
+\schritt{Schritt 2 --- $C_4 - e$ bestimmen}
+Es bleiben die Kanten $23$, $34$, $41$ --- ein Weg $4$ Ecken lang, also der Baum $P_4$.
+\[ P(C_4 - e, k) = k(k-1)^3 . \]
+
+\schritt{Schritt 3 --- $C_4 / e$ bestimmen}
+Verschmelzen wir $1$ und $2$ zu $w$. Die Kante $12$ verschwindet. Es bleiben: $w3$ (aus $23$), $34$, $4w$ (aus $41$). Das ist ein Dreieck.
+\[ P(C_4 / e, k) = P(K_3, k) = k(k-1)(k-2) . \]
+
+\schritt{Schritt 4 --- Die Differenz}
+\begin{align*}
+P(C_4,k) &= k(k-1)^3 - k(k-1)(k-2)\\
+&= k(k-1)\bigl[(k-1)^2 - (k-2)\bigr]\\
+&= k(k-1)\bigl[k^2 - 2k + 1 - k + 2\bigr]\\
+&= k(k-1)(k^2 - 3k + 3)
+\end{align*}
+
+\schritt{Schritt 5 --- Ausmultiplizieren zur Kontrolle}
+\begin{align*}
+k(k-1) &= k^2 - k\\
+(k^2-k)(k^2-3k+3) &= k^4 - 3k^3 + 3k^2 - k^3 + 3k^2 - 3k\\
+&= k^4 - 4k^3 + 6k^2 - 3k
+\end{align*}
+
+\schritt{Schritt 6 --- Die Proben}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{3.6cm}@{}}
+\toprule
+\textbf{Prüfung} & \textbf{Erwartet} & \textbf{Gefunden}\\
+\midrule
+Grad & $n = 4$ & $4$ \checkmark\\
+Höchster Koeffizient & $1$ & $1$ \checkmark\\
+Zweiter Koeffizient & $-m = -4$ & $-4$ \checkmark\\
+$k=1$ & $0$ & $1-4+6-3 = 0$ \checkmark\\
+$k=2$ & $2$ (bipartit) & $16-32+24-6 = 2$ \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die vorletzte Zeile: Für $k=1$ muss null herauskommen, sobald es eine Kante gibt. Die letzte: $C_4$ ist bipartit, hat also genau zwei $2$-Färbungen --- die beiden Seiten in beiden Rollen. \checkmark
+
+\schritt{Schritt 7 --- Die chromatische Zahl ablesen}
+$P(C_4,1) = 0$, $P(C_4,2) = 2 > 0$. Also $\chi(C_4) = 2$. \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 10.6 --- Die Formel für alle Kreise}
+Für $n \ge 3$ gilt
+\[ P(C_n, k) = (k-1)^n + (-1)^n (k-1) . \]
+
+\schritt{Beweis durch Induktion über $n$}
+\textbf{Anfang $n=3$:} $C_3 = K_3$, also $P = k(k-1)(k-2)$. Die Formel behauptet
+\[ (k-1)^3 - (k-1) = (k-1)\bigl[(k-1)^2 - 1\bigr] = (k-1)(k^2-2k) = (k-1)\cdot k(k-2) . \]
+Dasselbe. \checkmark
+
+\textbf{Schritt.} Sei $n \ge 4$ und die Formel für $n-1$ bewiesen. Wir wenden Satz 10.3 auf eine Kante $e$ von $C_n$ an.
+
+\kursiv{$C_n - e$} ist der Weg mit $n$ Ecken, also ein Baum:
+\[ P(C_n - e, k) = k(k-1)^{n-1} . \]
+
+\kursiv{$C_n / e$} ist der Kreis mit $n-1$ Ecken: Verschmilzt man zwei benachbarte Ecken eines Kreises, so bleibt ein Kreis, der um eine Ecke kürzer ist.
+
+\schritt{Einsetzen}
+\begin{align*}
+P(C_n,k) &= k(k-1)^{n-1} - P(C_{n-1},k)\\
+&= k(k-1)^{n-1} - \bigl[(k-1)^{n-1} + (-1)^{n-1}(k-1)\bigr]\\
+&= (k-1)^{n-1}\bigl[k - 1\bigr] - (-1)^{n-1}(k-1)\\
+&= (k-1)^{n} + (-1)^{n}(k-1) .
+\end{align*}
+Im letzten Schritt wurde $-(-1)^{n-1} = (-1)^n$ benutzt. $\blacksquare$
+
+\schritt{Probe für $n=4$}
+\[ (k-1)^4 + (k-1) = k^4 - 4k^3 + 6k^2 - 4k + 1 + k - 1 = k^4 - 4k^3 + 6k^2 - 3k . \]
+Genau das Ergebnis aus Schritt 5 oben. \checkmark
+
+\schritt{Probe für ungerades $n$}
+Für $n = 5$ und $k = 2$:
+\[ (2-1)^5 + (-1)^5(2-1) = 1 - 1 = 0 . \]
+Null $2$-Färbungen --- richtig, denn $C_5$ ist nicht bipartit. \checkmark
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Verschiedene Graphen können dasselbe Polynom haben}
+Das chromatische Polynom bestimmt den Graphen nicht.
+
+Alle Bäume mit $n$ Ecken haben dasselbe Polynom $k(k-1)^{n-1}$ --- unabhängig davon, ob sie ein Weg oder ein Stern sind. Für $n=4$ gibt es zwei nicht isomorphe Bäume mit identischem Polynom.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\begin{scope}
+\foreach \i in {0,...,3} \node[knoten] (p\i) at (\i*0.7,0) {};
+\foreach \i/\j in {0/1,1/2,2/3} \draw[kante] (p\i)--(p\j);
+\node[font=\scriptsize\itshape, color=grau] at (1.05,-0.6) {$P_4$};
+\end{scope}
+\begin{scope}[xshift=4.6cm]
+\node[knoten] (z) at (0,0) {};
+\node[knoten] (s1) at (-0.7,0.6) {};
+\node[knoten] (s2) at (0.7,0.6) {};
+\node[knoten] (s3) at (0,-0.7) {};
+\draw[kante] (z)--(s1);\draw[kante] (z)--(s2);\draw[kante] (z)--(s3);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.2) {$K_{1,3}$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Beide haben $P = k(k-1)^3$. Sie sind nicht isomorph --- die Gradfolgen sind $(2,2,1,1)$ und $(3,1,1,1)$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das chromatische Polynom ist also eine Invariante im Sinne von Definition 1.8 --- verschiedene Werte beweisen Nicht-Isomorphie --- aber keine vollständige. Es reiht sich damit in die Liste aus Kapitel~1 ein.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Ein Polynom von Hand}
+Bestimmen Sie das chromatische Polynom des abgebildeten Graphen.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.25]
+\node[knotenb] (1) at (-0.9,0.7) {$1$};
+\node[knotenb] (2) at (0.9,0.7) {$2$};
+\node[knotenb] (3) at (0.9,-0.7) {$3$};
+\node[knotenb] (4) at (-0.9,-0.7) {$4$};
+\draw[kante] (1)--(2);\draw[kante] (2)--(3);\draw[kante] (3)--(4);\draw[kante] (4)--(1);
+\draw[kante] (1)--(3);
+\end{tikzpicture}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Den Graphen erkennen}
+Ein Viereck mit einer Diagonalen. Das sind zwei Dreiecke, die sich eine Kante teilen.
+
+\schritt{Schritt 2 --- Die Rekursion auf $e = \{1,3\}$ anwenden}
+Wir nehmen die Diagonale, weil danach beide Teile bekannt sind.
+
+\kursiv{$G - e$:} Es bleiben $12$, $23$, $34$, $41$ --- der Kreis $C_4$. Nach Satz 10.6
+\[ P(G-e,k) = (k-1)^4 + (k-1) . \]
+
+\kursiv{$G/e$:} Verschmelzen wir $1$ und $3$ zu $w$. Kanten: aus $12$ wird $w2$, aus $23$ wird $2w$ --- dieselbe, also zusammengefasst. Aus $34$ wird $w4$, aus $41$ wird $4w$ --- ebenfalls dieselbe. Es bleiben die Ecken $w$, $2$, $4$ und die Kanten $w2$, $w4$. Das ist ein Weg mit drei Ecken.
+\[ P(G/e,k) = k(k-1)^2 . \]
+
+\schritt{Schritt 3 --- Die Differenz}
+\begin{align*}
+P(G,k) &= (k-1)^4 + (k-1) - k(k-1)^2\\
+&= (k-1)\bigl[(k-1)^3 + 1 - k(k-1)\bigr]
+\end{align*}
+Die Klammer ausrechnen:
+\begin{align*}
+(k-1)^3 &= k^3 - 3k^2 + 3k - 1\\
+k(k-1) &= k^2 - k\\
+(k-1)^3 + 1 - k(k-1) &= k^3 - 3k^2 + 3k - 1 + 1 - k^2 + k\\
+&= k^3 - 4k^2 + 4k
+\end{align*}
+Also
+\[ P(G,k) = (k-1)\cdot k \cdot (k^2 - 4k + 4) = k(k-1)(k-2)^2 . \]
+
+\schritt{Schritt 4 --- Proben}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{3.4cm}@{}}
+\toprule
+\textbf{Prüfung} & \textbf{Erwartet} & \textbf{Gefunden}\\
+\midrule
+Grad & $4$ & $1+1+2 = 4$ \checkmark\\
+Zweiter Koeffizient & $-m = -5$ & siehe unten\\
+$k=2$ & $0$ (Dreieck!) & $2\cdot1\cdot0 = 0$ \checkmark\\
+$k=3$ & $>0$ & $3\cdot2\cdot1 = 6$ \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Für den zweiten Koeffizienten multiplizieren wir aus:
+\begin{align*}
+k(k-1) &= k^2-k\\
+(k-2)^2 &= k^2-4k+4\\
+(k^2-k)(k^2-4k+4) &= k^4 - 4k^3 + 4k^2 - k^3 + 4k^2 - 4k\\
+&= k^4 - 5k^3 + 8k^2 - 4k
+\end{align*}
+Zweiter Koeffizient $-5 = -m$. \checkmark
+
+\schritt{Schritt 5 --- Die chromatische Zahl}
+$P(G,1) = 0$, $P(G,2) = 0$, $P(G,3) = 6 > 0$. Also $\chi(G) = \mathbf{3}$, und es gibt genau $6$ Färbungen mit drei Farben.
+
+\schritt{Kontrolle durch Nachdenken}
+Der Graph enthält das Dreieck $1,2,3$, also $\chi \ge 3$. Und drei Farben genügen: $1 \to a$, $3 \to b$, dann müssen $2$ und $4$ beide die dritte Farbe $c$ bekommen (beide sind mit $1$ und $3$ benachbart). Für das Paar $(a,b)$ gibt es $3 \cdot 2 = 6$ Möglichkeiten. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Was die Koeffizienten verraten}
+Ein Graph habe das chromatische Polynom
+\[ P(G,k) = k^5 - 7k^4 + 18k^3 - 20k^2 + 8k . \]
+Bestimmen Sie $n$, $m$ und $\chi(G)$, und entscheiden Sie, ob $G$ zusammenhängend ist.
+
+\loesung
+\schritt{Schritt 1 --- Ecken und Kanten}
+Nach Satz 10.4 ist der Grad gleich $n$ und der zweite Koeffizient gleich $-m$:
+\[ n = 5, \qquad m = 7 . \]
+
+\schritt{Schritt 2 --- Die chromatische Zahl}
+Wir setzen ein.
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{5.0cm}P{1.4cm}@{}}
+\toprule
+$k$ & \textbf{Rechnung} & $P$\\
+\midrule
+$1$ & $1 - 7 + 18 - 20 + 8$ & $0$\\
+$2$ & $32 - 112 + 144 - 80 + 16$ & $0$\\
+$3$ & $243 - 567 + 486 - 180 + 24$ & $6$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Nachrechnung der dritten Zeile: $3^5 = 243$; $7 \cdot 3^4 = 7 \cdot 81 = 567$; $18 \cdot 27 = 486$; $20 \cdot 9 = 180$; $8 \cdot 3 = 24$. Summe: $243 - 567 = -324$; $-324 + 486 = 162$; $162 - 180 = -18$; $-18 + 24 = 6$.
+
+Also $\chi(G) = \mathbf{3}$, und es gibt genau $6$ Färbungen mit $3$ Farben.
+
+\schritt{Schritt 3 --- Zusammenhang}
+Hier hilft eine Beobachtung, die wir bisher nicht formuliert haben. Zerfällt $G$ in Komponenten $G_1, \ldots, G_c$, so lässt sich jede unabhängig färben, also
+\[ P(G,k) = P(G_1,k)\cdots P(G_c,k) . \]
+Jeder Faktor hat den Faktor $k$ (setzt man $k=0$, gibt es keine Färbung), also ist $k^c$ ein Teiler von $P(G,k)$.
+
+Unser Polynom: $P(G,k) = k(k^4 - 7k^3 + 18k^2 - 20k + 8)$. Setzt man in die Klammer $k=0$ ein, erhält man $8 \neq 0$ --- der Faktor $k$ kommt also genau einmal vor.
+
+Wäre $G$ unzusammenhängend, so wäre $c \ge 2$ und $k^2$ ein Teiler. Ist es nicht.
+
+\textbf{Also ist $G$ zusammenhängend.}
+
+\schritt{Probe an der Kantenzahl}
+Ein zusammenhängender Graph mit $5$ Ecken hat mindestens $4$ Kanten (Satz 2.8) und höchstens $\binom{5}{2} = 10$. Der Wert $7$ liegt dazwischen. \checkmark
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Der Graph ist übrigens der $K_5$ ohne ein Dreieck an Kanten --- aber das lässt sich aus dem Polynom allein nicht schließen, wie der Warnkasten oben zeigt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Polynom, erfunden zur Lösung des Vierfarbenproblems}
+\Person{George David Birkhoff} führte das chromatische Polynom 1912 mit einer klaren Absicht ein: Er wollte den Vierfarbensatz beweisen, indem er zeigt, dass $P(G,4) > 0$ für jeden planaren Graphen gilt.
+
+Der Gedanke war gut. Aus einer Anzahl lässt sich mit analytischen Mitteln oft mehr herausholen als aus einer bloßen Existenzaussage --- man kann abschätzen, Nullstellen untersuchen, Ungleichungen aufstellen. Birkhoff und später \Person{Hassler Whitney} entwickelten daraus eine umfangreiche Theorie.
+
+Für den Vierfarbensatz half sie nicht. Das Polynom erwies sich als zu grob: Es unterscheidet planare Graphen nicht hinreichend von nichtplanaren, und die Nullstellen liegen nicht dort, wo man sie bräuchte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Fall ist typisch für die Mathematik. Ein Werkzeug wird für ein bestimmtes Problem gebaut, versagt dort --- und erweist sich anderswo als tragfähig. Das chromatische Polynom ist heute ein Spezialfall des Tutte-Polynoms und verbindet Graphentheorie mit statistischer Physik, Knotentheorie und Matroidtheorie. Nur der Vierfarbensatz ließ sich damit nicht beweisen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Eine Vermutung von 1968 und eine Fields-Medaille}
+\Person{Ronald Read} vermutete 1968, dass die Beträge der Koeffizienten eines chromatischen Polynoms stets \Begriff{log-konkav} sind. Schreibt man
+\[ P(G,k) = \sum_{i} (-1)^{n-i} a_i k^i \quad \text{mit } a_i \ge 0, \]
+so soll gelten
+\[ a_{i-1}\, a_{i+1} \;\le\; a_i^2 \quad \text{für alle } i . \]
+
+\schritt{Probe an unserem Beispiel}
+Für $C_4$ war $P = k^4 - 4k^3 + 6k^2 - 3k$, also $a_4 = 1$, $a_3 = 4$, $a_2 = 6$, $a_1 = 3$.
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{2.8cm}P{2.6cm}P{1.6cm}@{}}
+\toprule
+\textbf{Bedingung} & \textbf{Rechnung} & \\
+\midrule
+$a_4 a_2 \le a_3^2$ & $1 \cdot 6 = 6 \le 16$ & \checkmark\\
+$a_3 a_1 \le a_2^2$ & $4 \cdot 3 = 12 \le 36$ & \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Vermutung blieb über vierzig Jahre offen. \Person{June Huh} bewies sie 2012 --- mit Methoden aus der algebraischen Geometrie, die mit Graphen zunächst nichts zu tun haben: Er übersetzte das Problem in Aussagen über Schnittzahlen auf gewissen algebraischen Varietäten und benutzte dort die Hodge-Riemann-Relationen.
+
+Zusammen mit \Person{Karim Adiprasito} und \Person{Eric Katz} verallgemeinerte Huh das Ergebnis 2018 auf beliebige Matroide. Huh erhielt dafür 2022 die Fields-Medaille.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die zweite Wendung in der Geschichte dieses Polynoms. Birkhoff baute es, um ein graphentheoretisches Problem zu lösen; es scheiterte daran. Hundert Jahre später erwies sich ausgerechnet die Frage nach seinen Koeffizienten als so tief, dass ihre Beantwortung eine der höchsten Auszeichnungen der Mathematik einbrachte.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 10.1} & $P(G,k)$ zählt die $k$-Färbungen\\
+\textbf{Satz 10.3} & $P(G) = P(G-e) - P(G/e)$\\
+\textbf{Satz 10.4} & Es ist ein Polynom vom Grad $n$; zweiter Koeffizient $-m$\\
+\textbf{Folgerung 10.5} & $\chi$ ist das kleinste $k$ mit $P(G,k) > 0$\\
+\textbf{Satz 10.6} & $P(C_n,k) = (k-1)^n + (-1)^n(k-1)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~IV. Ab Kapitel~11 geht es um eine ganz andere Frage: Wie viel passt gleichzeitig durch einen Graphen hindurch?}
+\end{minipage}
+\end{center}
+\end{merksatz}

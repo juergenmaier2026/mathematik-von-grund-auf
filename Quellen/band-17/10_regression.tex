@@ -1,0 +1,736 @@
+\part{Modelle}
+
+\chapter{Lineare Regression}
+
+\section{Von der Kennzahl zur Funktion}
+
+Kapitel~3 fasste den Zusammenhang zweier Merkmale in eine Zahl: die Korrelation. Sie sagt, wie eng die Punkte an einer Geraden liegen --- aber nicht, welche Gerade das ist.
+
+\begin{merksatz}
+\boxtitel{Was die Regression zusätzlich leistet}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Korrelation} & Wie eng? Eine Zahl zwischen $-1$ und $1$, einheitenfrei, symmetrisch in $x$ und $y$.\\
+\textbf{Regression} & Wie genau? Eine Gerade mit Steigung in Einheiten, \kursiv{unsymmetrisch}: $y$ aus $x$ ist etwas anderes als $x$ aus $y$.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Unsymmetrie ist wesentlich. Man muss entscheiden, welche Größe die \kursiv{erklärende} und welche die \kursiv{erklärte} ist --- und diese Entscheidung folgt nicht aus den Daten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 10.1 --- das Modell}
+\[ y_i \;=\; \alpha + \beta\,x_i + \varepsilon_i \]
+mit
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{6.8cm}@{}}
+\toprule
+$\alpha$ & Achsenabschnitt: der Wert von $y$ bei $x = 0$\\
+$\beta$ & Steigung: die Änderung von $y$ je Einheit von $x$\\
+$\varepsilon_i$ & Störgröße: alles, was die Gerade nicht erklärt\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Voraussetzungen --- ausdrücklich aufgezählt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Linearität} & Der Zusammenhang ist tatsächlich geradlinig.\\
+\textbf{Unabhängig\-keit} & Die $\varepsilon_i$ beeinflussen einander nicht.\\
+\textbf{Gleiche Streuung} & $\Var[\varepsilon_i] = \sigma^2$ für alle $i$ --- die Streuung hängt nicht von $x$ ab.\\
+\textbf{Normal\-verteilung} & Nur für Tests und Intervalle nötig, nicht für die Schätzung selbst.\\
+\textbf{$x$ ohne Fehler} & Die erklärende Größe gilt als exakt bekannt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile wird fast immer verletzt --- auch die NRS-Angabe ist eine Messung mit Fehler. Die Folge ist ein systematischer Fehler: Die geschätzte Steigung wird zu \kursiv{flach}. Abschnitt 10.7 kommt darauf zurück.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Methode der kleinsten Quadrate}
+
+\begin{merksatz}
+\boxtitel{Satz 10.2 --- die Schätzformeln}
+Die Gerade, die
+\[ S(a,b) = \sum_{i=1}^n \bigl(y_i - a - b\,x_i\bigr)^2 \]
+minimiert, hat die Parameter
+\[ b = \frac{\sum_i (x_i-\MW)(y_i-\overline y)}{\sum_i (x_i-\MW)^2}, \qquad a = \overline y - b\,\MW . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis}
+\schritt{Schritt 1 --- Nach $a$ ableiten}
+\[ \frac{\partial S}{\partial a} = \sum_i 2\bigl(y_i - a - bx_i\bigr)\cdot(-1) = -2\sum_i \bigl(y_i - a - bx_i\bigr) \]
+Null setzen:
+\[ \sum_i y_i - na - b\sum_i x_i = 0 \]
+Durch $n$ teilen:
+\[ \overline y - a - b\,\MW = 0 \quad\Longrightarrow\quad a = \overline y - b\,\MW . \]
+
+\schritt{Was das schon aussagt}
+Umgestellt: $\overline y = a + b\,\MW$. Die Gerade geht also stets durch den Punkt $(\MW, \overline y)$ --- durch den Schwerpunkt der Punktwolke. Das gilt \kursiv{unabhängig} von der Steigung.
+
+\schritt{Schritt 2 --- Nach $b$ ableiten}
+\[ \frac{\partial S}{\partial b} = -2\sum_i x_i\bigl(y_i - a - bx_i\bigr) \;\stackrel{!}{=}\; 0 \]
+
+\schritt{Schritt 3 --- $a$ einsetzen}
+Mit $a = \overline y - b\MW$ wird der Klammerausdruck zu
+\[ y_i - \overline y + b\MW - bx_i = (y_i - \overline y) - b(x_i - \MW) . \]
+Also
+\[ \sum_i x_i\Bigl[(y_i-\overline y) - b(x_i-\MW)\Bigr] = 0 . \]
+
+\schritt{Schritt 4 --- Ein nützlicher Trick}
+Wir dürfen $x_i$ durch $x_i - \MW$ ersetzen. Denn der zusätzliche Term wäre
+\[ \MW\sum_i\Bigl[(y_i-\overline y) - b(x_i-\MW)\Bigr] = \MW\Bigl[\underbrace{\sum_i(y_i-\overline y)}_{=0} - b\underbrace{\sum_i(x_i-\MW)}_{=0}\Bigr] = 0 \]
+nach Satz 2.3. Also gilt gleichbedeutend
+\[ \sum_i (x_i-\MW)\Bigl[(y_i-\overline y) - b(x_i-\MW)\Bigr] = 0 . \]
+
+\schritt{Schritt 5 --- Auflösen}
+\[ \sum_i (x_i-\MW)(y_i-\overline y) - b\sum_i (x_i-\MW)^2 = 0 \]
+\[ b = \frac{\sum_i (x_i-\MW)(y_i-\overline y)}{\sum_i (x_i-\MW)^2} . \qquad \blacksquare \]
+
+\schritt{Dass es ein Minimum ist}
+$S$ ist eine Summe von Quadraten, also nach oben unbeschränkt und nach unten durch null begrenzt. Die einzige Stelle mit verschwindenden Ableitungen muss daher das Minimum sein.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Zusammenhang mit der Korrelation}
+Der Zähler von $b$ ist derselbe wie der von $r$. Es gilt
+\[ b = r \cdot \frac{s_y}{s_x} . \]
+
+\schritt{Nachrechnen}
+\[ r\cdot\frac{s_y}{s_x} = \frac{\sum(x-\MW)(y-\overline y)}{\sqrt{\sum(x-\MW)^2}\sqrt{\sum(y-\overline y)^2}} \cdot \frac{\sqrt{\sum(y-\overline y)^2}}{\sqrt{\sum(x-\MW)^2}} = \frac{\sum(x-\MW)(y-\overline y)}{\sum(x-\MW)^2} = b . \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Korrelation und Steigung tragen dieselbe Auskunft, nur verschieden normiert. Die Korrelation ist einheitenfrei, die Steigung hat die Einheit \enquote{$y$-Einheit je $x$-Einheit} --- und ist deshalb die deutbarere Größe.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die MOBIL-Daten}
+
+\begin{merksatz}
+\boxtitel{Die Gerade bestimmen}
+Wir erklären die Mobilisationszeit aus dem Schmerzwert. Aus Kapitel~3 liegen alle Summen vor:
+\[ \MW = 4{,}0833, \quad \overline y = 22{,}0833 \]
+\[ \sum(x-\MW)^2 = 26{,}917, \quad \sum(x-\MW)(y-\overline y) = 103{,}917 \]
+
+\schritt{Die Steigung}
+\[ b = \frac{103{,}917}{26{,}917} = 3{,}861 \]
+
+\schritt{Der Achsenabschnitt}
+\[ a = 22{,}0833 - 3{,}861 \cdot 4{,}0833 = 22{,}0833 - 15{,}765 = 6{,}319 \]
+
+\schritt{Die Gleichung}
+\[ \hat y = 6{,}32 + 3{,}86\,x \]
+
+\schritt{Die Deutung --- Zeile für Zeile}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{6.4cm}@{}}
+\toprule
+$b = 3{,}86$ & Je NRS-Punkt mehr dauert die Mobilisation im Mittel $3{,}9$ Stunden länger.\\
+$a = 6{,}32$ & \textcolor{akzent}{Vorhergesagte Mobilisationszeit bei Schmerzwert null --- eine Hochrechnung über den Datenbereich hinaus.}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (6.8,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,4.4);
+\foreach \x/\lab in {0.6/1, 1.6/2, 2.6/3, 3.6/4, 4.6/5, 5.6/6, 6.4/7}
+  \node[font=\scriptsize, color=grau] at (\x,-0.3) {\lab};
+\foreach \y/\lab in {0.5/15, 1.5/20, 2.5/25, 3.5/30, 4.2/35}
+  \node[font=\scriptsize, color=grau] at (-0.45,\y) {\lab};
+\draw[akzent, line width=1.2pt] (1.2,0.15) -- (6.5,4.3);
+\fill[tief] (4.6,2.7) circle (2.2pt);
+\fill[tief] (2.6,1.3) circle (2.2pt);
+\fill[tief] (5.6,3.7) circle (2.2pt);
+\fill[tief] (3.6,2.3) circle (2.2pt);
+\fill[tief] (6.4,4.2) circle (2.2pt);
+\fill[tief] (4.6,1.9) circle (2.2pt);
+\fill[tief] (2.6,1.1) circle (2.2pt);
+\fill[tief] (1.6,0.5) circle (2.2pt);
+\fill[tief] (3.6,1.7) circle (2.2pt);
+\fill[tief] (2.6,0.9) circle (2.2pt);
+\fill[tief] (4.6,2.1) circle (2.2pt);
+\fill[tief] (1.6,0.3) circle (2.2pt);
+\node[font=\scriptsize, color=grau] at (3.4,-0.75) {NRS nach 24 Stunden};
+\node[font=\scriptsize, color=akzent] at (5.9,3.2) {$\hat y = 6{,}32 + 3{,}86x$};
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der Achsenabschnitt ist hier bedeutungslos}
+Der kleinste beobachtete NRS-Wert beträgt $2$. Die Gerade bei $x = 0$ auszuwerten heißt, weit außerhalb des Datenbereichs vorherzusagen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Regressionsgerade gilt nur im Bereich der beobachteten $x$-Werte.} Außerhalb ist sie eine Behauptung ohne Datengrundlage.
+\end{minipage}
+\end{center}
+
+\schritt{Ein Ausweg}
+Verschiebt man die erklärende Größe auf ihren Mittelwert --- man rechnet mit $x - \MW$ statt mit $x$ ---, so wird der Achsenabschnitt zu $\overline y = 22{,}08$ und bedeutet: die vorhergesagte Zeit bei durchschnittlichem Schmerzwert. Das ist eine sinnvolle Größe. Die Steigung ändert sich dabei nicht.
+\end{warnung}
+
+\section{Wie gut passt die Gerade?}
+
+\begin{definition}
+\boxtitelm{Definition 10.3 --- Residuum und Bestimmtheitsmaß}
+Das \Begriff{Residuum} der $i$-ten Beobachtung ist
+\[ e_i = y_i - \hat y_i . \]
+Die Streuung zerlegt sich in
+\[ \underbrace{\sum_i (y_i-\overline y)^2}_{SS_{\text{gesamt}}} = \underbrace{\sum_i (\hat y_i - \overline y)^2}_{SS_{\text{erklärt}}} + \underbrace{\sum_i e_i^2}_{SS_{\text{Rest}}} , \]
+und das \Begriff{Bestimmtheitsmaß} ist
+\[ R^2 = \frac{SS_{\text{erklärt}}}{SS_{\text{gesamt}}} = 1 - \frac{SS_{\text{Rest}}}{SS_{\text{gesamt}}} . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Bei einfacher Regression gilt $R^2 = r^2$}
+Für die MOBIL-Daten war $r = 0{,}9605$, also
+\[ R^2 = 0{,}9605^2 = 0{,}9225 . \]
+
+\schritt{Die Rechnung zur Probe}
+\[ SS_{\text{Rest}} = SS_{\text{gesamt}}\,(1-R^2) = 434{,}917 \cdot 0{,}0775 = 33{,}70 \]
+
+\schritt{Die Deutung}
+$92{,}3\,\%$ der Streuung der Mobilisationszeiten lassen sich durch den Schmerzwert erklären.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Wort \enquote{erklären} ist hier rein rechnerisch gemeint --- es besagt \kursiv{nicht}, dass der Schmerz die Ursache ist. Alle vier Erklärungen aus Kapitel~3 bleiben möglich.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was $R^2$ nicht sagt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Nicht: das Modell ist richtig} & Anscombe~II hat $R^2 = 0{,}67$ bei einem exakt gekrümmten Zusammenhang. Die Gerade ist falsch, $R^2$ merkt es nicht.\\
+\textbf{Nicht: die Steigung ist groß} & $R^2$ hängt nicht von der Einheit ab, die Steigung schon.\\
+\textbf{Nicht: gut für Vorhersagen} & Bei $R^2 = 0{,}92$ und großer Gesamtstreuung können die Einzelvorhersagen weit danebenliegen.\\
+\textbf{Nicht vergleichbar} & Über verschiedene Datensätze hinweg sagt $R^2$ wenig --- es hängt auch davon ab, wie breit die $x$-Werte streuen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur letzten Zeile}
+Wählt man nur Personen mit NRS zwischen $4$ und $5$ aus, so schrumpft $\sum(x-\MW)^2$ stark --- und $R^2$ fällt, obwohl der Zusammenhang derselbe ist. Ein hohes $R^2$ kann schlicht bedeuten, dass die erklärende Größe breit streute.
+\end{warnung}
+
+\section{Tests und Intervalle für die Steigung}
+
+\begin{merksatz}
+\boxtitel{Der Standardfehler der Steigung}
+\[ \widehat{\mathrm{SE}}(b) = \frac{s_e}{\sqrt{\sum_i (x_i-\MW)^2}} \qquad\text{mit}\qquad s_e^2 = \frac{SS_{\text{Rest}}}{n-2} . \]
+
+\schritt{Warum $n-2$}
+Zwei Parameter wurden geschätzt --- $a$ und $b$. Es bleiben $n-2$ freie Abweichungen. Das ist dieselbe Überlegung wie beim $n-1$ in Kapitel~5.
+
+\schritt{Für MOBIL}
+\[ s_e^2 = \frac{33{,}70}{12-2} = 3{,}370, \qquad s_e = 1{,}836 \]
+\[ \widehat{\mathrm{SE}}(b) = \frac{1{,}836}{\sqrt{26{,}917}} = \frac{1{,}836}{5{,}188} = 0{,}3539 \]
+
+\schritt{Der Test auf $\beta = 0$}
+\[ t = \frac{b}{\widehat{\mathrm{SE}}(b)} = \frac{3{,}861}{0{,}3539} = 10{,}91 \]
+bei $n-2 = 10$ Freiheitsgraden. Das liegt weit über $t_{10;\,0{,}9995} = 4{,}587$; $p < 0{,}0001$.
+
+\schritt{Das Konfidenzintervall}
+\[ 3{,}861 \pm 2{,}228 \cdot 0{,}3539 = 3{,}861 \pm 0{,}789 \quad\Longrightarrow\quad [\,3{,}07\ ;\ 4{,}65\,] \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{So berichtet man das Ergebnis: \enquote{Je NRS-Punkt verlängerte sich die Mobilisation um $3{,}9$ Stunden ($95\,\%$-KI $3{,}1$ bis $4{,}7$).} Der $p$-Wert ist dabei die unwichtigste Angabe.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Bedeutung des Nenners}
+$\widehat{\mathrm{SE}}(b)$ enthält $\sum(x-\MW)^2$ im Nenner. Je breiter die $x$-Werte streuen, desto genauer ist die Steigung bestimmt.
+
+Das hat eine praktische Folge für die Versuchsplanung: Will man eine Steigung genau schätzen, wählt man die $x$-Werte möglichst \kursiv{weit auseinander} --- nicht gleichmäßig verteilt.
+\end{merksatz}
+
+\section{Residuenanalyse}
+
+\begin{merksatz}
+\boxtitel{Was man ansieht}
+Man trägt die Residuen $e_i$ gegen die vorhergesagten Werte $\hat y_i$ auf. Bei einem passenden Modell sieht man eine strukturlose Wolke.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.78]
+% 1 gut
+\begin{scope}
+\draw[grau!60, line width=0.6pt] (0,-1.1) -- (3.4,-1.1);
+\draw[grau!50, dashed, line width=0.6pt] (0,0) -- (3.4,0);
+\foreach \x/\y in {0.3/0.4, 0.7/-0.5, 1.1/0.2, 1.5/0.6, 1.9/-0.3, 2.3/-0.6, 2.7/0.5, 3.1/-0.2}
+  \fill[tief] (\x,\y) circle (2.0pt);
+\node[font=\scriptsize\itshape, color=gruen] at (1.7,-1.55) {in Ordnung};
+\end{scope}
+% 2 Krümmung
+\begin{scope}[xshift=4.4cm]
+\draw[grau!60, line width=0.6pt] (0,-1.1) -- (3.4,-1.1);
+\draw[grau!50, dashed, line width=0.6pt] (0,0) -- (3.4,0);
+\foreach \x in {0.3,0.7,1.1,1.5,1.9,2.3,2.7,3.1}
+  \fill[tief] (\x,{0.75*(\x-1.7)*(\x-1.7)-0.55}) circle (2.0pt);
+\node[font=\scriptsize\itshape, color=akzent] at (1.7,-1.55) {Krümmung};
+\end{scope}
+% 3 Trichter
+\begin{scope}[xshift=8.8cm]
+\draw[grau!60, line width=0.6pt] (0,-1.1) -- (3.4,-1.1);
+\draw[grau!50, dashed, line width=0.6pt] (0,0) -- (3.4,0);
+\foreach \x/\y in {0.3/0.1, 0.7/-0.15, 1.1/0.25, 1.5/-0.35, 1.9/0.55, 2.3/-0.7, 2.7/0.85, 3.1/-0.95}
+  \fill[tief] (\x,\y) circle (2.0pt);
+\node[font=\scriptsize\itshape, color=akzent] at (1.7,-1.55) {wachsende Streuung};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{3.0cm}@{}}
+\toprule
+\textbf{Muster} & \textbf{Bedeutet} & \textbf{Abhilfe}\\
+\midrule
+strukturlos & \textcolor{gruen}{Modell passt} & ---\\
+Krümmung & Linearität verletzt & Term $x^2$, oder Logarithmus\\
+Trichter & Streuung hängt von $x$ ab & $y$ logarithmieren, gewichtete Regression\\
+Ausreißer & einzelne Punkte & prüfen, nicht löschen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Residuen summieren sich stets zu null --- das folgt aus Schritt 1 des Beweises von Satz 10.2. Ihre Nullsumme ist daher keine Bestätigung des Modells, sondern eine Eigenschaft der Rechnung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Einflussreiche Punkte}
+Ein Punkt kann die Gerade stark beeinflussen, ohne ein großes Residuum zu haben --- gerade weil er die Gerade zu sich hinzieht.
+
+Das ist Anscombe~IV: Der einzelne rechte Punkt bestimmt die Steigung vollständig und liegt trotzdem exakt auf der Geraden.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Hebel\-wirkung} & Wie weit liegt der $x$-Wert vom Mittel entfernt? Große Hebelwirkung heißt: der Punkt kann viel bewirken.\\
+\textbf{Residuum} & Wie weit liegt der $y$-Wert von der Geraden entfernt?\\
+\textbf{Einfluss} & Beides zusammen --- gemessen etwa durch den Abstand nach Cook.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Prüfung ist einfach: Man rechnet die Regression ohne den fraglichen Punkt noch einmal. Ändert sich die Steigung erheblich, so beruht das Ergebnis auf einer Beobachtung --- und das gehört in den Bericht.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Regression zur Mitte}
+
+Jetzt der Effekt, der der Regression ihren Namen gab --- und der in der Medizin regelmäßig für Wirkungen gehalten wird, die es nicht gibt.
+
+\begin{merksatz}
+\boxtitel{Die Rechnung}
+Standardisiert man beide Merkmale, so lautet die Regressionsgleichung schlicht
+\[ \hat z_y = r \cdot z_x . \]
+
+\schritt{Der Nachweis}
+Für standardisierte Größen ist $\MW = \overline y = 0$ und $s_x = s_y = 1$. Nach Abschnitt 10.2 ist dann $b = r \cdot \frac{1}{1} = r$ und $a = 0 - r\cdot 0 = 0$.
+
+\schritt{Die Folgerung}
+Ist $|r| < 1$, so gilt $|\hat z_y| < |z_x|$: \textbf{Der vorhergesagte Wert liegt stets näher am Mittelwert als der Ausgangswert.}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+$z_x$ & $r = 0{,}6$ & $\hat z_y$\\
+\midrule
+$+3{,}0$ & & $+1{,}8$\\
+$+1{,}0$ & & $+0{,}6$\\
+$-2{,}0$ & & $-1{,}2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Falle in der Medizin}
+\schritt{Der Vorgang}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Man misst bei vielen Personen den Blutdruck.\\
+$2$ & Man wählt diejenigen mit den höchsten Werten für eine Studie aus.\\
+$3$ & Man behandelt sie und misst erneut.\\
+$4$ & Die Werte sind gesunken. Die Behandlung wirkt --- scheinbar.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Warum die Werte auch ohne Behandlung sinken}
+Ein hoher gemessener Wert entsteht aus zwei Anteilen: dem wahren Blutdruck der Person \kursiv{und} einer zufälligen Abweichung --- Tagesform, Messfehler, Aufregung.
+
+Wählt man die höchsten Werte aus, so wählt man bevorzugt Personen mit einer zufällig \kursiv{nach oben} verschobenen Messung. Bei der zweiten Messung ist diese Abweichung neu gewürfelt und im Mittel null.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Werte sinken also, weil sie ausgewählt wurden --- nicht, weil behandelt wurde.}
+\end{minipage}
+\end{center}
+
+\schritt{Ein Zahlenbeispiel}
+Angenommen, der Blutdruck streut mit $\sigma = 15$, davon $10$ wahre Verschiedenheit und $11{,}2$ Messschwankung. Dann ist die Korrelation zweier Messungen etwa
+\[ r = \frac{10^2}{15^2} = 0{,}44 . \]
+Wählt man Personen aus, die $2$ Standardabweichungen über dem Mittel liegen, so sagt die Regression für die zweite Messung
+\[ \hat z = 0{,}44 \cdot 2 = 0{,}88 \]
+voraus --- ein Rückgang um $1{,}12$ Standardabweichungen, also etwa $17$ mmHg, \kursiv{ohne jede Behandlung}.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Genau deshalb braucht man eine Kontrollgruppe. Sie durchläuft dieselbe Auswahl und zeigt denselben Rückgang; der Vergleich beider Gruppen misst dann die Behandlung. Kapitel~12 macht daraus ein Gestaltungsprinzip.}
+\end{minipage}
+\end{center}
+
+\schritt{Wo derselbe Fehler noch auftritt}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+Laborwerte & Auffällige Werte normalisieren sich beim Nachkontrollieren.\\
+Schulleistung & Förderung der Schlechtesten \enquote{wirkt} immer.\\
+Qualitäts\-kennzahlen & Die schlechtesten Kliniken verbessern sich im Folgejahr.\\
+Schmerzskalen & Wer bei starken Schmerzen behandelt wird, berichtet danach weniger.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{warnung}
+
+\section{Mehrere erklärende Größen}
+
+\begin{merksatz}
+\boxtitel{Das Modell}
+\[ y_i = \alpha + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_k x_{ik} + \varepsilon_i \]
+
+\schritt{Die veränderte Deutung}
+$\beta_1$ ist nicht mehr \enquote{die Änderung von $y$ je Einheit $x_1$}, sondern
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{die Änderung von $y$ je Einheit $x_1$ \kursiv{bei festgehaltenen übrigen Größen}.}
+\end{minipage}
+\end{center}
+
+Das ist etwas anderes und kann sogar ein anderes Vorzeichen haben als der einfache Zusammenhang.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Kollinearität}
+Sind zwei erklärende Größen stark miteinander korreliert, so lässt sich ihr Beitrag nicht trennen.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Das Merkmal} & Große Standardfehler, instabile Koeffizienten, unplausible Vorzeichen.\\
+\textbf{Der Grund} & Die Daten enthalten keine Auskunft darüber, welche der beiden Größen wirkt.\\
+\textbf{Nicht das Merkmal} & $R^2$ bleibt hoch --- die \kursiv{Vorhersage} leidet nicht.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Ein Beispiel}
+Nimmt man Körpergröße und Armspannweite gemeinsam in ein Modell auf, so sind beide Koeffizienten schlecht bestimmt und können entgegengesetzte Vorzeichen bekommen. Zusammen sagen sie dasselbe vorher wie jede einzeln.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Abhilfe ist keine statistische: Man entscheidet fachlich, welche Größe gemeint ist, und nimmt eine davon. Verfahren, die automatisch Größen auswählen --- schrittweise Regression ---, gelten heute als problematisch, weil sie die anschließenden $p$-Werte ungültig machen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Welche Größen gehören ins Modell?}
+Die Frage aus Kapitel~3 kehrt zurück, und die Antwort ist dieselbe: Sie ist nicht statistisch zu beantworten.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{3.4cm}@{}}
+\toprule
+\textbf{Rolle} & \textbf{Aufnehmen?} & \textbf{Sonst}\\
+\midrule
+Konfounder & \textcolor{gruen}{ja} & verzerrter Effekt\\
+Mediator & \textcolor{akzent}{nein} & Effekt verschwindet\\
+Kollider & \textcolor{akzent}{nein} & \textcolor{akzent}{Scheineffekt entsteht}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die verbreitete Praxis, \enquote{für alles zu adjustieren, was verfügbar ist}, kann daher schaden. Welche Rolle eine Größe spielt, entscheidet die vermutete Wirkungsstruktur --- und die muss man aufschreiben, bevor man rechnet.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Eine Regression von Hand}
+Für sechs Personen wurden Operationsdauer $x$ (Minuten) und Mobilisationszeit $y$ (Stunden) erhoben:
+\[ (75, 22),\ (90, 26),\ (60, 19),\ (105, 31),\ (85, 24),\ (95, 28) \]
+Bestimmen Sie die Regressionsgerade, $R^2$ und das Konfidenzintervall der Steigung.
+
+\loesung
+\schritt{Schritt 1 --- Die Summen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}P{1.2cm}P{1.2cm}P{1.6cm}P{1.4cm}P{1.6cm}@{}}
+\toprule
+$x$ & $y$ & $x^2$ & $y^2$ & $xy$\\
+\midrule
+$75$ & $22$ & $5625$ & $484$ & $1650$\\
+$90$ & $26$ & $8100$ & $676$ & $2340$\\
+$60$ & $19$ & $3600$ & $361$ & $1140$\\
+$105$ & $31$ & $11025$ & $961$ & $3255$\\
+$85$ & $24$ & $7225$ & $576$ & $2040$\\
+$95$ & $28$ & $9025$ & $784$ & $2660$\\
+\midrule
+$\mathbf{510}$ & $\mathbf{150}$ & $\mathbf{44600}$ & $\mathbf{3842}$ & $\mathbf{13085}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Mittelwerte}
+\[ \MW = \frac{510}{6} = 85, \qquad \overline y = \frac{150}{6} = 25 \]
+
+\schritt{Schritt 3 --- Die drei Quadratsummen}
+\[ \sum(x-\MW)^2 = 44600 - 6 \cdot 85^2 = 44600 - 43350 = 1250 \]
+\[ \sum(y-\overline y)^2 = 3842 - 6 \cdot 625 = 3842 - 3750 = 92 \]
+\[ \sum(x-\MW)(y-\overline y) = 13085 - 6 \cdot 85 \cdot 25 = 13085 - 12750 = 335 \]
+
+\schritt{Schritt 4 --- Die Gerade}
+\[ b = \frac{335}{1250} = 0{,}268 \]
+\[ a = 25 - 0{,}268 \cdot 85 = 25 - 22{,}78 = 2{,}22 \]
+\[ \hat y = 2{,}22 + 0{,}268\,x \]
+
+\schritt{Schritt 5 --- Deutung der Steigung}
+Je Minute Operationsdauer verlängert sich die Mobilisation um $0{,}268$ Stunden --- oder handlicher: je zehn Minuten um $2{,}7$ Stunden.
+
+\schritt{Schritt 6 --- Das Bestimmtheitsmaß}
+\[ r = \frac{335}{\sqrt{1250}\cdot\sqrt{92}} = \frac{335}{35{,}355 \cdot 9{,}592} = \frac{335}{339{,}12} = 0{,}9879 \]
+\[ R^2 = 0{,}9879^2 = 0{,}9759 \]
+Rund $97{,}6\,\%$ der Streuung sind erklärt.
+
+\schritt{Schritt 7 --- Standardfehler und Intervall}
+\[ SS_{\text{Rest}} = 92 \cdot (1 - 0{,}9759) = 92 \cdot 0{,}0241 = 2{,}217 \]
+\[ s_e^2 = \frac{2{,}217}{6-2} = 0{,}554, \qquad s_e = 0{,}744 \]
+\[ \widehat{\mathrm{SE}}(b) = \frac{0{,}744}{\sqrt{1250}} = \frac{0{,}744}{35{,}355} = 0{,}02105 \]
+
+Mit $t_{4;\,0{,}975} = 2{,}776$:
+\[ 0{,}268 \pm 2{,}776 \cdot 0{,}02105 = 0{,}268 \pm 0{,}0584 \quad\Longrightarrow\quad [\,0{,}210\ ;\ 0{,}326\,] \]
+
+\schritt{Schritt 8 --- Die Probe}
+\[ t = \frac{0{,}268}{0{,}02105} = 12{,}73 \]
+Weit über $t_{4;\,0{,}975} = 2{,}776$, also $p < 0{,}001$. Passend dazu enthält das Intervall die Null nicht. \checkmark
+
+\schritt{Ein Vorbehalt}
+$R^2 = 0{,}976$ bei sechs Punkten ist eine sehr hohe Anpassung. Bei kleinen Stichproben ist $R^2$ systematisch zu groß --- die Gerade hat zwei Parameter für sechs Punkte.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das \Begriff{korrigierte Bestimmtheitsmaß} gleicht das aus:
+\[ R^2_{\text{korr}} = 1 - (1-R^2)\frac{n-1}{n-2} = 1 - 0{,}0241 \cdot \frac{5}{4} = 0{,}9699 . \]
+Hier ist der Unterschied klein; bei vielen erklärenden Größen wird er erheblich.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Regression zur Mitte quantifizieren}
+Bei einem Screening liegen $100$ Personen mehr als zwei Standardabweichungen über dem Mittelwert. Die Korrelation zweier Messungen beträgt $r = 0{,}7$. Welchen Wert erwartet man bei der Nachmessung?
+
+\loesung
+\schritt{Schritt 1 --- Die Ausgangslage in $z$-Werten}
+Die ausgewählten Personen haben im Mittel etwa $z_x = 2{,}4$ --- nicht genau $2{,}0$, weil die Auswahl \enquote{mehr als zwei} lautet und der Mittelwert der Ausgewählten darüber liegt. Wir rechnen der Einfachheit halber mit $z_x = 2{,}4$.
+
+\schritt{Schritt 2 --- Die Vorhersage}
+\[ \hat z_y = r \cdot z_x = 0{,}7 \cdot 2{,}4 = 1{,}68 \]
+
+\schritt{Schritt 3 --- Der Rückgang}
+\[ 2{,}40 - 1{,}68 = 0{,}72 \ \text{Standardabweichungen} \]
+
+\schritt{Schritt 4 --- In Einheiten umrechnen}
+Bei $\sigma = 15$ mmHg:
+\[ 0{,}72 \cdot 15 = 10{,}8 \ \text{mmHg} \]
+
+\schritt{Antwort}
+Man erwartet einen Rückgang von etwa $\mathbf{11}$ mmHg --- \textbf{ohne jede Behandlung}.
+
+\schritt{Schritt 5 --- Was das für eine Studie bedeutet}
+Behandelt man diese Gruppe und misst einen Rückgang von $15$ mmHg, so entfallen davon etwa $11$ auf die Auswahl und nur $4$ möglicherweise auf die Behandlung.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ohne Kontrollgruppe ist diese Aufteilung nicht möglich --- man sieht nur die Summe. Deshalb sind Vorher-Nachher-Studien ohne Kontrolle bei ausgewählten Extremgruppen praktisch wertlos.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Wann der Effekt verschwindet}
+Bei $r = 1$ wäre $\hat z_y = z_x$ --- kein Rückgang. Das hieße: Die Messung ist völlig zuverlässig und die Person ändert sich nicht.
+
+Je unzuverlässiger die Messung, desto kleiner $r$ und desto größer der scheinbare Effekt. \textbf{Der Schein wächst mit der Messungenauigkeit.}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- Zwei Regressionen, eine Punktwolke}
+Zeigen Sie an den MOBIL-Daten, dass die Regression von $y$ auf $x$ eine andere Gerade liefert als die von $x$ auf $y$.
+
+\loesung
+\schritt{Schritt 1 --- Die erste Regression}
+Aus Abschnitt 10.3: $b_{y\cdot x} = 3{,}861$, also
+\[ \hat y = 6{,}32 + 3{,}861\,x . \]
+
+\schritt{Schritt 2 --- Die zweite Regression}
+Jetzt vertauschen wir die Rollen:
+\[ b_{x\cdot y} = \frac{\sum(x-\MW)(y-\overline y)}{\sum(y-\overline y)^2} = \frac{103{,}917}{434{,}917} = 0{,}23894 \]
+\[ a_{x\cdot y} = 4{,}0833 - 0{,}23894 \cdot 22{,}0833 = 4{,}0833 - 5{,}2765 = -1{,}1932 \]
+\[ \hat x = -1{,}193 + 0{,}2389\,y . \]
+
+\schritt{Schritt 3 --- Die zweite Gerade im ersten Bild}
+Um beide zu vergleichen, lösen wir die zweite nach $y$ auf:
+\[ y = \frac{x + 1{,}193}{0{,}2389} = 4{,}186\,x + 4{,}993 . \]
+
+\schritt{Schritt 4 --- Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Steigung} & \textbf{Abschnitt}\\
+\midrule
+$y$ auf $x$ & $3{,}861$ & $6{,}32$\\
+$x$ auf $y$, umgestellt & $\mathbf{4{,}186}$ & $4{,}99$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Geraden sind verschieden. Sie schneiden sich im Schwerpunkt $(4{,}083;\ 22{,}083)$ --- dort gehen beide hindurch.
+
+\schritt{Schritt 5 --- Der Zusammenhang}
+\[ b_{y\cdot x} \cdot b_{x\cdot y} = 3{,}861 \cdot 0{,}23894 = 0{,}9225 = R^2 = r^2 . \]
+
+Das ist kein Zufall. Aus $b_{y\cdot x} = r\frac{s_y}{s_x}$ und $b_{x\cdot y} = r\frac{s_x}{s_y}$ folgt sofort, dass ihr Produkt $r^2$ beträgt.
+
+\schritt{Schritt 6 --- Wann beide zusammenfallen}
+Nur bei $|r| = 1$. Je schwächer der Zusammenhang, desto weiter klaffen die beiden Geraden auseinander --- beide neigen sich zur Waagerechten beziehungsweise Senkrechten hin.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist dieselbe Erscheinung wie die Regression zur Mitte, aus einem anderen Blickwinkel. Und es zeigt, warum man die Rollen nicht beliebig vertauschen darf: \enquote{$y$ aus $x$ vorhersagen} und \enquote{$x$ aus $y$ vorhersagen} sind verschiedene Aufgaben mit verschiedenen Antworten.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Prioritätsstreit und ein verschollener Name}
+Die Methode der kleinsten Quadrate wurde 1805 von \Person{Adrien-Marie Legendre} veröffentlicht --- in einem Anhang über die Bahnbestimmung von Kometen.
+
+Vier Jahre später schrieb \Person{Carl Friedrich Gauß} in seiner \kursiv{Theoria motus corporum coelestium}, er benutze das Verfahren seit 1795. Legendre war empört und schrieb einen scharfen Brief; Gauß antwortete kühl, er habe die Methode für zu selbstverständlich gehalten, um sie zu veröffentlichen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Gauß hatte vermutlich recht in der Sache --- seine Notizbücher stützen die Angabe --- und unrecht im Umgang. Der eigentliche Fortschritt war ohnehin ein anderer: Gauß begründete 1809, \kursiv{warum} man Quadrate minimieren soll, nämlich durch die Verbindung mit der Normalverteilung. Das ist die Rechnung aus Kapitel~5, Beispiel~2.}
+\end{minipage}
+\end{center}
+
+\schritt{Woher der Name kommt}
+\Person{Francis Galton} untersuchte 1886 Körpergrößen von Eltern und Kindern und nannte den beobachteten Effekt \kursiv{regression towards mediocrity} --- Rückkehr zur Mittelmäßigkeit. Gemeint war das Phänomen aus Abschnitt 10.6.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das Wort blieb, die Bedeutung verschwand. Heute heißt \enquote{Regression} das Anpassen einer Funktion --- und hat mit Rückkehr nichts mehr zu tun. Der Effekt, der dem Verfahren den Namen gab, ist selbst zu einer Fußnote geworden, die man regelmäßig neu erklären muss.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Was mit der Regression heute strittig ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{5.6cm}@{}}
+\toprule
+\textbf{Schrittweise Auswahl} & Gilt als abgelehnt: Sie macht $p$-Werte und Intervalle ungültig, weil dieselben Daten Modell und Test bestimmen.\\
+\textbf{Adjustieren für alles} & Kann schaden --- Kollider erzeugen Scheinzusammenhänge. Die Rolle jeder Größe muss vorher bedacht sein.\\
+\textbf{Regularisierung} & Ridge und Lasso ziehen Koeffizienten zusammen; sie sind verzerrt und haben oft kleineren Fehler. Das ist Steins Befund aus Kapitel~5.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der Fehler in der erklärenden Größe}
+Die Voraussetzung \enquote{$x$ ohne Fehler} ist in der Medizin fast immer verletzt. Die Folge ist berechenbar: Ist $\lambda$ der Anteil der wahren Varianz an der gemessenen, so wird die Steigung um den Faktor $\lambda$ zu flach geschätzt --- die sogenannte \Begriff{Abschwächung}.
+
+\[ \mathbb{E}[b] \approx \lambda\,\beta \qquad \text{mit} \qquad \lambda = \frac{\sigma^2_{\text{wahr}}}{\sigma^2_{\text{wahr}} + \sigma^2_{\text{Mess}}} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei einer Messung mit Zuverlässigkeit $0{,}8$ wird ein wahrer Effekt von $1{,}0$ also im Mittel als $0{,}8$ geschätzt. Verfahren zur Korrektur gibt es --- sie verlangen eine Schätzung der Messgenauigkeit, die selten vorliegt. Deshalb bleibt die Verzerrung meist unkorrigiert und unerwähnt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 10.2} & Kleinste Quadrate, vollständig hergeleitet\\
+\textbf{$b = r\,s_y/s_x$} & der Zusammenhang mit Kapitel~3\\
+\textbf{$R^2$} & und vier Dinge, die es nicht sagt\\
+\textbf{Residuen} & drei Muster und was sie bedeuten\\
+\textbf{Regression zur Mitte} & $\hat z_y = r\,z_x$ --- und die Falle in der Medizin\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel wird die Zielgröße eine andere: ja oder nein, und danach eine Zeit bis zu einem Ereignis.}
+\end{minipage}
+\end{center}
+\end{merksatz}

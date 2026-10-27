@@ -1,0 +1,341 @@
+\part{Aktueller Stand}
+
+\chapter{Wo die Statistik heute steht}
+
+\section{Die Replikationskrise}
+
+\begin{merksatz}
+\boxtitel{Der Befund}
+Seit etwa 2011 haben mehrere groß angelegte Wiederholungsvorhaben versucht, veröffentlichte Ergebnisse nachzuvollziehen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+\textbf{Gebiet} & \textbf{Wiederholt} & \textbf{Bestätigt}\\
+\midrule
+Psychologie & $100$ Studien & etwa $36\,\%$\\
+Krebsbiologie & $50$ Vorhaben & etwa die Hälfte, mit kleineren Effekten\\
+Wirtschaft & $18$ Studien & etwa $61\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Zahlen sind umstritten --- was als \enquote{bestätigt} gilt, ist selbst eine Entscheidung. Unstrittig ist, dass die Anteile weit unter dem liegen, was man erwarten würde, wenn die ursprünglichen Befunde überwiegend zuträfen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Rechnung, die das erklärt}
+Aufgabe 7.3 hat sie bereits vorgeführt. Hier noch einmal allgemein.
+
+Sei $\pi_0$ der Anteil der geprüften Hypothesen, die zutreffen; $\alpha$ das Niveau, $1-\beta$ die Macht. Dann gilt unter den signifikanten Ergebnissen:
+\[ \Pr[\text{falsch} \mid \text{signifikant}] = \frac{(1-\pi_0)\,\alpha}{(1-\pi_0)\,\alpha + \pi_0\,(1-\beta)} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{2.4cm}P{2.0cm}@{}}
+\toprule
+$\pi_0$ & \textbf{Macht} & \textbf{falsch positiv} & \\
+\midrule
+$0{,}50$ & $0{,}80$ & $5{,}9\,\%$ & \textcolor{gruen}{gut}\\
+$0{,}10$ & $0{,}80$ & $36{,}0\,\%$ & \\
+$0{,}10$ & $0{,}40$ & $52{,}9\,\%$ & \textcolor{akzent}{Mehrheit falsch}\\
+$0{,}05$ & $0{,}40$ & \textcolor{akzent}{$\mathbf{70{,}4\,\%}$} & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Größen bestimmen das Ergebnis: wie plausibel die geprüften Hypothesen waren, und wie groß die Studien sind.} Beide kommen im $p$-Wert nicht vor.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{John Ioannidis} führte diese Rechnung 2005 in einem Aufsatz mit dem Titel \kursiv{Why Most Published Research Findings Are False} vor. Der Titel war absichtlich zugespitzt; die Rechnung ist elementar und unbestritten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Freiheitsgrade des Auswertenden}
+Zur Rechnung kommt ein zweiter Umstand hinzu. Zwischen Daten und Ergebnis liegen Dutzende von Entscheidungen:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+Ausreißer & ausschließen oder behalten, nach welcher Regel?\\
+Umformung & logarithmieren oder nicht?\\
+Kovariablen & welche adjustieren?\\
+Untergruppen & welche berichten?\\
+Verfahren & $t$-Test oder Rangtest?\\
+Endpunkt & welcher ist der primäre?\\
+Fallzahl & wann aufhören zu erheben?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Jede dieser Entscheidungen ist für sich vertretbar. Trifft man sie aber \kursiv{nach} dem Blick auf die Daten, so entsteht eine verborgene Multiplizität --- ohne dass jemand bewusst manipuliert.
+\end{minipage}
+\end{center}
+
+\schritt{Die Größenordnung}
+Simulationsstudien zeigen: Bei mäßiger Ausnutzung dieser Freiheitsgrade steigt die tatsächliche Fehlerrate erster Art von fünf auf über sechzig Prozent.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{Andrew Gelman} nennt das den \kursiv{Garten der sich gabelnden Pfade}: Man muss nicht viele Analysen durchführen und die beste wählen --- es genügt, dass man bei anderen Daten eine andere Analyse gewählt hätte. Der $p$-Wert der einen tatsächlich durchgeführten Analyse ist dann trotzdem ungültig.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Die Debatte um den $p$-Wert}
+
+\begin{merksatz}
+\boxtitel{Die Lager}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Schwelle senken} & $p < 0{,}005$ für neue Befunde. Einfach umzusetzen, vervierfacht aber die nötigen Fallzahlen.\\
+\textbf{Aufgeben} & Das Wort \enquote{signifikant} streichen, Intervalle berichten. Über achthundert Unterzeichner 2019.\\
+\textbf{Bayessch} & Bayes-Faktoren statt $p$-Werten. Löst das Deutungsproblem, schafft das Priori-Problem.\\
+\textbf{Beibehalten} & Der $p$-Wert ist nicht das Problem, sondern sein Gebrauch als Schwelle.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die vierte Zeile hat gute Argumente: Jede Schwelle, gleich wo sie liegt, erzeugt dieselben Anreize. Wer $0{,}005$ fordert, verschiebt das Problem, statt es zu lösen --- und macht Studien so teuer, dass weniger Fragen untersucht werden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was sich tatsächlich geändert hat}
+Unabhängig vom Ausgang der Debatte hat sich die Berichtspraxis verschoben.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Effektschätzer} & Mit Intervall, in der Einheit der Sache --- in guten Zeitschriften Pflicht.\\
+\textbf{Präregistrierung} & Seit 2005 für klinische Studien vorgeschrieben, zunehmend auch in anderen Fächern.\\
+\textbf{Daten und Code} & Offenlegung wird zunehmend verlangt.\\
+\textbf{Registered Reports} & Die Zeitschrift nimmt die Arbeit an, \kursiv{bevor} die Daten erhoben sind --- allein aufgrund der Fragestellung und des Plans.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist der wirksamste der vier Vorschläge, weil sie an der Ursache ansetzt: Wenn die Annahme nicht vom Ergebnis abhängt, verschwindet sowohl der Anreiz zur Suche nach Signifikanz als auch die Publikationsverzerrung. Untersuchungen an solchen Arbeiten finden deutlich niedrigere Anteile positiver Ergebnisse --- etwa vierzig Prozent statt über neunzig.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Kausale Inferenz}
+
+\begin{merksatz}
+\boxtitel{Ein Gebiet, das es vor dreißig Jahren nicht gab}
+Kapitel~3 endete mit der Feststellung, dass die Korrelation die vier Erklärungen nicht unterscheiden kann. Kapitel~12 nannte die Randomisierung als Ausweg. Was, wenn man nicht randomisieren kann?
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Die moderne Antwort lautet: Man schreibt die vermuteten Wirkungszusammenhänge als Graphen auf und leitet daraus ab, was aus den Daten schätzbar ist und was nicht.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+\node[knotenb] (z) at (0,1.0) {$Z$};
+\node[knotenb] (x) at (-1.2,0) {$X$};
+\node[knotenb] (m) at (0,0) {$M$};
+\node[knotenb] (y) at (1.2,0) {$Y$};
+\node[knotenr] (k) at (0,-1.0) {$K$};
+\draw[kanted, -{Stealth[length=5pt]}] (z) -- (x);
+\draw[kanted, -{Stealth[length=5pt]}] (z) -- (y);
+\draw[kante, -{Stealth[length=5pt]}] (x) -- (m);
+\draw[kante, -{Stealth[length=5pt]}] (m) -- (y);
+\draw[kante, -{Stealth[length=5pt]}] (x) -- (k);
+\draw[kante, -{Stealth[length=5pt]}] (y) -- (k);
+\node[font=\scriptsize, color=grau, anchor=west] at (1.8,1.0) {$Z$: Konfounder};
+\node[font=\scriptsize, color=grau, anchor=west] at (1.8,0.35) {$M$: Mediator};
+\node[font=\scriptsize, color=grau, anchor=west] at (1.8,-0.4) {$K$: Kollider};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Was der Graph entscheidet}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{3.4cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Adjustieren?} & \textbf{Sonst}\\
+\midrule
+$Z$ & \textcolor{gruen}{ja} & verzerrter Effekt\\
+$M$ & \textcolor{akzent}{nein} & Effekt verschwindet\\
+$K$ & \textcolor{akzent}{nein} & \textcolor{akzent}{Scheineffekt entsteht}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile bleibt der überraschendste Befund des Gebiets: Das Hinzunehmen einer weiteren Größe kann einen Zusammenhang \kursiv{erzeugen}. Damit ist die verbreitete Vorstellung widerlegt, mehr Kontrollvariablen seien stets besser.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Werkzeuge}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Gerichtete Graphen} & Machen die Annahmen sichtbar und prüfbar --- man sieht, was man voraussetzt.\\
+\textbf{Propensity Score} & Personen werden nach ihrer geschätzten Behandlungswahrscheinlichkeit zusammengeführt.\\
+\textbf{Instrument\-variablen} & Eine Größe, die nur über die Behandlung wirkt, ersetzt die Randomisierung teilweise.\\
+\textbf{Zielstudie} & Man entwirft die randomisierte Studie, die man gerne hätte, und bildet sie in Beobachtungsdaten nach.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile hat sich als besonders fruchtbar erwiesen. Viele Widersprüche zwischen Beobachtungsstudien und späteren randomisierten Studien ließen sich nachträglich darauf zurückführen, dass die Beobachtungsstudie eine andere Frage beantwortet hatte --- etwa durch den unsterblichen Zeitraum aus Kapitel~12.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Statistik und maschinelles Lernen}
+
+\begin{merksatz}
+\boxtitel{Zwei Kulturen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.0cm}P{3.2cm}P{3.0cm}@{}}
+\toprule
+& \textbf{Statistik} & \textbf{Maschinelles Lernen}\\
+\midrule
+Ziel & Verstehen, schätzen & Vorhersagen\\
+Modell & möglichst einfach & beliebig komplex\\
+Prüfung & Voraussetzungen & Leistung an neuen Daten\\
+Frage & Warum? & Wie gut?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{Leo Breiman} beschrieb diesen Gegensatz 2001 in einem viel diskutierten Aufsatz. Er warf der Statistik vor, sich zu sehr an Modelle zu klammern, die sie für wahr halte, statt die Vorhersageleistung zu prüfen. Der Vorwurf saß und hat die Statistik verändert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was Vorhersage nicht ersetzt}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Kausalität} & Ein Modell, das gut vorhersagt, sagt nichts darüber, was geschähe, wenn man eingreift.\\
+\textbf{Übertrag\-barkeit} & Ändert sich die Umgebung, so versagt ein Modell, das auf Begleitumständen beruht.\\
+\textbf{Die Prävalenz} & Die Rechnung aus Kapitel~13 gilt unverändert --- auch für das beste System.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Ein lehrreiches Beispiel}
+Ein System zur Vorhersage des Sterberisikos bei Lungenentzündung stufte Personen mit Asthma als \kursiv{weniger} gefährdet ein --- weil sie in den Trainingsdaten seltener starben.
+
+Der Grund: Sie wurden sofort auf die Intensivstation aufgenommen. Das Modell hatte die Behandlung gelernt, nicht das Risiko.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hätte man danach gehandelt, wären genau diese Personen weniger überwacht worden. Das ist kein Fehler der Methode, sondern eine Verwechslung der Frage: Das Modell beantwortete \enquote{wer stirbt?} und wurde gelesen als \enquote{wer braucht Überwachung?}.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Eine Bilanz}
+
+\begin{merksatz}
+\boxtitel{Was geklärt ist und was nicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.4cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Frage} & \textbf{Kapitel} & \textbf{Stand}\\
+\midrule
+Was ist ein $p$-Wert? & $7$ & \textcolor{gruen}{geklärt}\\
+Soll man ihn benutzen? & $7$, $15$ & \textcolor{akzent}{\textbf{strittig}}\\
+Wie schätzt man? & $5$ & \textcolor{gruen}{geklärt}\\
+Welcher Schätzer ist der beste? & $5$ & \textcolor{mittel}{hängt vom Ziel ab}\\
+Welche Tests wann? & $8$, $9$ & \textcolor{gruen}{weitgehend geklärt}\\
+Wann korrigieren? & $14$ & \textcolor{akzent}{strittig}\\
+Klassisch oder bayessch? & $5$, $15$ & \textcolor{akzent}{\textbf{seit 1930 offen}}\\
+Kausalität ohne Randomisierung? & $12$, $15$ & \textcolor{mittel}{in Bewegung}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Auffällig ist das Muster: Die \kursiv{Rechnungen} sind geklärt, die \kursiv{Entscheidungen} nicht. Das ist genau die Zweiteilung aus dem Vorwort --- und sie ist keine vorübergehende Unordnung, sondern die Eigenart des Gebiets.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Sechs Sätze, die bleiben}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{0.7cm}P{7.7cm}@{}}
+\toprule
+$1$ & Der $p$-Wert ist $\Pr[\text{Daten} \mid H_0]$, nicht $\Pr[H_0 \mid \text{Daten}]$. Alle sieben Fehldeutungen folgen aus dieser Verwechslung.\\
+$2$ & Ein Konfidenzintervall ist eine Aussage über das Verfahren, nicht über das einzelne Intervall.\\
+$3$ & Signifikanz ist nicht Bedeutsamkeit; nicht signifikant ist nicht \enquote{kein Unterschied}.\\
+$4$ & Der prädiktive Wert hängt von der Prävalenz ab, Sensitivität und Spezifität nicht.\\
+$5$ & Kein Rechenverfahren repariert, was bei der Erhebung falsch gemacht wurde.\\
+$6$ & Wer nach dem Blick auf die Daten entscheidet, wie er rechnet, hat kein Ergebnis, sondern eine Hypothese.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Schlusswort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Dieser Band begann mit zwei Befunden: dass der $p$-Wert und das Konfidenzintervall mehrheitlich falsch gedeutet werden. Er endet bei einer Debatte darüber, ob man beide überhaupt weiter verwenden soll.
+
+Dazwischen liegen fünfzehn Kapitel, in denen jede Formel hergeleitet, jede Voraussetzung benannt und zu jedem Verfahren der Bruchfall gezeigt wurde. Das war die Absicht: nicht, Rechenwege zu vermitteln --- die stehen in jedem Programm ---, sondern die Frage zu schärfen, wann ein Verfahren überhaupt anwendbar ist.
+
+Wenn Sie von nun an bei jedem Ergebnis zuerst nach dem Konfidenzintervall suchen, bei jedem Chancenverhältnis nach der Häufigkeit des Ereignisses, bei jedem positiven Befund nach der Prävalenz und bei jeder Untergruppe nach dem Studienprotokoll --- dann hat der Band mehr geleistet, als jede Formel es könnte.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Statistik ist nicht schwierig, weil ihre Mathematik schwierig wäre. Sie ist schwierig, weil sie in jedem Einzelfall verlangt, dass jemand urteilt --- und weil die Rechnung dieses Urteil nicht ersetzen kann, sondern nur voraussetzt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

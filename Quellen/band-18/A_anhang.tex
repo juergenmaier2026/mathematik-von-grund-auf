@@ -1,0 +1,337 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Wachstum}
+
+\begin{merksatz}
+\boxtitel{Eine Population}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\dfrac{\dd N}{\dd t} = rN$ & exponentiell (1.1)\\
+$N(t) = N_0e^{rt}$ & Satz 1.2\\
+$T_2 = \dfrac{\ln 2}{r}$ & Satz 1.3\\
+$T_{1/2} = \dfrac{\ln 2}{k}$ & Zerfall\\
+$\dfrac{\dd N}{\dd t} = rN\left(1-\dfrac{N}{K}\right)$ & logistisch (2.1)\\
+$N(t) = \dfrac{K}{1+Be^{-rt}}$, $B = \dfrac{K-N_0}{N_0}$ & Satz 2.2\\
+Wendepunkt bei $K/2$; $\dot N_{\max} = rK/4$ & Satz 2.3\\
+$t_p = \dfrac{1}{r}\ln\dfrac{pB}{1-p}$ & Zeit bis Anteil $p$\\
+$\dfrac{\dd N}{\dd t} = rN\ln\dfrac{K}{N}$ & Gompertz (13.1)\\
+$\ln\dfrac{K}{N} = \ln\dfrac{K}{N_0}e^{-rt}$ & Satz 13.2\\
+Wendepunkt bei $K/e$; $\dot N_{\max} = rK/e$ & Satz 13.3\\
+$x_{n+1} = ax_n(1-x_n)$ & logistische Abbildung (3.1)\\
+$x^{*} = 0$ und $1-1/a$ & Satz 3.3\\
+stabil $\iff |f'(x^{*})|<1$ & Satz 3.4\\
+$\delta = 4{,}6692\ldots$ & Feigenbaum\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Wechselwirkung}
+
+\begin{merksatz}
+\boxtitel{Zwei Populationen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.6cm}P{4.0cm}@{}}
+\toprule
+$\dot x = x(a-by)$, $\dot y = y(-c+dx)$ & Lotka-Volterra (4.1)\\
+$(x^{*},y^{*}) = (c/d,\ a/b)$ & Satz 4.2, überkreuz\\
+$V = dx - c\ln x + by - a\ln y$ & Erhaltungsgröße (4.3)\\
+$\overline x = c/d$, $\overline y = a/b$ & Satz 4.4\\
+$T = 2\pi/\sqrt{ac}$ & Periode\\
+$\overline x = \dfrac{c+h}{d}$, $\overline y = \dfrac{a-h}{b}$ & Volterras Prinzip\\
+$\dot x = r_1x\left(1-\dfrac{x+\alpha_{12}y}{K_1}\right)$ & Konkurrenz (5.1)\\
+$\alpha_{12} < \dfrac{K_1}{K_2}$ und $\alpha_{21} < \dfrac{K_2}{K_1}$ & Koexistenz (5.3)\\
+$x^{*} = \dfrac{K_1-\alpha_{12}K_2}{1-\alpha_{12}\alpha_{21}}$ & Satz 5.4\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Stabilität}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$J = \begin{pmatrix} f_x & f_y\\ g_x & g_y\end{pmatrix}$ & Definition 6.1\\
+$T = \operatorname{spur}J$, $D = \det J$ & \\
+$\lambda_{1,2} = \dfrac{T\pm\sqrt{T^2-4D}}{2}$ & \\
+stabil $\iff T<0$ und $D>0$ & Satz 6.3\\
+$D<0$ & Sattel\\
+$T^2-4D<0$ & Strudel; $>0$ Knoten\\
+$T=0$, $D>0$ & Zentrum (unentschieden)\\
+$T=0$ überquert & Hopf-Bifurkation\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Ausbreitung}
+
+\begin{merksatz}
+\boxtitel{Epidemien}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\dot S = -\beta SI/N$, $\dot I = \beta SI/N - \gamma I$ & SIR (7.1)\\
+$\Rnull = \beta/\gamma$ & Satz 7.2\\
+$\mathcal{R}_{\text{eff}} = \Rnull\,S/N$ & \\
+$\Rnull = 1 + r/\gamma$ & aus der Wachstumsrate\\
+$\dfrac{I_{\max}}{N} = 1-\dfrac{1+\ln\Rnull}{\Rnull}$ & Satz 7.3\\
+$S$ am Gipfel $= N/\Rnull$ & \\
+$s_\infty = e^{-\Rnull(1-s_\infty)}$ & Satz 7.4\\
+$p_c = 1-1/\Rnull$ & Satz 8.1\\
+$p > p_c/\varepsilon$ & mit Wirksamkeit\\
+$S^{*}/N = 1/\Rnull$ & endemisch\\
+$A \approx L/(\Rnull-1)$ & Satz 8.2\\
+$\Rnull = T\left(\dfrac{\langle k^2\rangle}{\langle k\rangle}-1\right)$ & Satz 9.2, Netz\\
+$\dfrac{\langle k^2\rangle}{\langle k\rangle} \ge \langle k\rangle$ & Freundschaftsparadoxon\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Der Körper}
+
+\begin{merksatz}
+\boxtitel{Pharmakokinetik und Kinetik}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\mathrm{CL} = k\,V$, $t_{1/2} = \dfrac{\ln2\,V}{\mathrm{CL}}$ & Definition 10.1\\
+$c(t) = c_\infty(1-e^{-kt})$, $c_\infty = R/\mathrm{CL}$ & Satz 10.2\\
+$1-(1/2)^n$ nach $n$ Halbwertszeiten & Satz 10.3\\
+$c_{\max} = \dfrac{D/V}{1-r}$, $r = e^{-k\tau}$ & Satz 10.4\\
+$c_{\max}/c_{\min} = 2^{\tau/t_{1/2}}$ & \\
+$D_{\text{Auf}} = c_{\text{Ziel}}\,V$ & aus $V$, nicht $\mathrm{CL}$\\
+$\mathrm{AUC} = F\,D/\mathrm{CL}$ & \\
+$t_{\max} = \dfrac{\ln(k_a/k)}{k_a-k}$ & Bateman\\
+$v = \dfrac{V_{\max}[S]}{K_M+[S]}$ & Satz 11.1\\
+$K_M = \dfrac{k_{-1}+k_2}{k_1}$ & keine Bindungsstärke\\
+$K_{M,\text{eff}} = K_M(1+[I]/K_i)$ & kompetitiv\\
+$\theta = \dfrac{[L]^n}{K^n+[L]^n}$ & Hill\\
+$[L]_{90}/[L]_{10} = 81^{1/n}$ & Steilheit\\
+$E = \dfrac{61{,}5}{z}\lg\dfrac{c_a}{c_i}$ mV & Nernst\\
+$\tau = R_mC_m$ & Satz 12.1\\
+$v^{*2} = 1-\varepsilon b$ & Satz 12.3, Hopf\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Krankheit}
+
+\begin{merksatz}
+\boxtitel{Tumor und Resistenz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+Log-kill: fester Anteil je Gabe & 13.4\\
+$\Pr[\text{Heilung}] = e^{-\mu}$ & Poisson, 13.5\\
+$\Pr[\text{keine Resistenz}] = e^{-\mu N}$ & Satz 14.1\\
+$N_c = 1/\mu$ & kritische Zellzahl\\
+$\mu_{12} = \mu_1\mu_2$ & nur bei Unabhängigkeit\\
+$\operatorname{Var}/\text{Mittel} \gg 1$ & Satz 14.2, vorbestehend\\
+$\Pr[\text{keine Mutante}] = e^{-m}$ & Nullklassen-Methode\\
+Faktor $1-L/K$ & Verlangsamung bei Eindämmung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte des Bandes}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz wo --- und worauf er beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.6cm}P{1.2cm}P{3.4cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Beruht auf}\\
+\midrule
+$N = N_0e^{rt}$ & $1$ & Trennung der Veränderlichen\\
+$T_2$ bestandsunabhängig & $1$ & $e^{rt}$ kürzt sich\\
+Logistische Lösung & $2$ & Partialbruch\-zerlegung\\
+Wendepunkt $K/2$ & $2$ & zweite Ableitung\\
+Symmetrie & $2$ & $B$ fällt heraus\\
+Fixpunktstabilität & $3$ & Tangentennäherung\\
+Perioden\-verdopplung & $3$ & $|f'|$ überschreitet $1$\\
+Gleichgewicht überkreuz & $4$ & beide Gleichungen null\\
+Erhaltungsgröße & $4$ & Terme heben sich auf\\
+\textbf{Volterras Prinzip} & $4$ & $\ln x$ über eine Periode\\
+Koexistenz\-bedingung & $5$ & Lage der Nullklinen\\
+Satz 5.3 bewiesen & $6$ & $D > 0$\\
+Lotka-Volterra ist Zentrum & $6$ & $T=0$\\
+$\Rnull = \beta/\gamma$ & $7$ & $\dd I/\dd t > 0$\\
+Gipfelhöhe & $7$ & $\dd I/\dd S$ integrieren\\
+Endgröße & $7$ & dieselbe Gleichung bei $I=0$\\
+Zwei Lösungen & $7$ & Konvexität\\
+Herdenschwelle & $8$ & $S/N = 1-p$\\
+Altersverschiebung & $8$ & $A = L/(\Rnull-1)$\\
+Netz-$\Rnull$ & $9$ & Auswahl über Kanten\\
+Anflutung & $10$ & wie Satz 10.2\\
+Michaelis-Menten & $11$ & Quasi-Stationarität\\
+Hill-Steilheit & $11$ & $\theta/(1-\theta)$\\
+Erregbarkeit & $12$ & kubische Nullkline\\
+Gompertz-Lösung & $13$ & Substitution $\ln(K/N)$\\
+Goldie-Coldman & $14$ & Poisson\\
+Luria-Delbrück & $14$ & Varianz gegen Mittelwert\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was in diesem Band \kursiv{nicht} bewiesen wurde}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{1.4cm}P{3.4cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+Trennung der Veränderlichen & $1$ & Band 14, Teil~I\\
+Taylor in zwei Veränderlichen & $6$ & Band 3, Teil~V\\
+Eigenwerte und Lösungen & $6$ & Band 2, Teil~IV\\
+Bateman-Funktion & $10$ & Band 14, Teil~II\\
+Feigenbaum-Universalität & $3$ & Strogatz\zit{27}\\
+Luria-Delbrück-Verteilung & $14$ & Otto \& Day\zit{24}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Sechs Auslassungen, jede im Text benannt, mit Begründung und Fundstelle. Das ist die einzige zulässige Form, die Regel dieses Werkes zu brechen: offen und mit Quellenangabe.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von Malthus bis zur adaptiven Therapie}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.36}
+\begin{tabular}{@{}P{1.4cm}P{2.8cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Ereignis}\\
+\midrule
+$1798$ & Malthus & geometrisches Wachstum\\
+$1825$ & Gompertz & Sterbegesetz\\
+$1838$ & Verhulst & logistische Gleichung\\
+$1859$ & Darwin & Auslese aus Überproduktion\\
+$1890$ & Poincaré & Phasenporträt, Chaos\\
+$1892$ & Ljapunow & Stabilitätssatz\\
+$1902$ & Nernst & Gleichgewichtsspannung\\
+$1910$ & Hill & Sättigungsgleichung\\
+$1911$ & Ross & Schwellenwert bei Malaria\\
+$1913$ & Michaelis, Menten & Enzymkinetik\\
+$1920$ & Lotka & chemische Schwingungen\\
+$1925$ & Briggs, Haldane & Quasi-Stationarität\\
+$1926$ & Volterra & Räuber-Beute, Prinzip\\
+$1927$ & Kermack, McKendrick & SIR-Modell\\
+$1932$ & Widmark & Alkoholabbau\\
+$1934$ & Gause & Konkurrenzausschluss\\
+$1943$ & Luria, Delbrück & Schwankungsversuch\\
+$1952$ & Hodgkin, Huxley & Aktionspotential\\
+$1953$ & Dost & Begriff Pharmakokinetik\\
+$1961$ & FitzHugh & Reduktion auf zwei Gleichungen\\
+$1963$ & Lorenz & Wettermodell, Chaos\\
+$1964$ & Laird & Gompertz für Tumoren\\
+$1971$ & Rosenzweig & Anreicherungsparadoxon\\
+$1972$ & May & Vielfalt und Stabilität\\
+$1975$ & Feigenbaum & die Konstante\\
+$1976$ & May & einfache Modelle, komplexe Dynamik\\
+$1979$ & Goldie, Coldman & Resistenz und Tumorgröße\\
+$1991$ & Feld & Freundschaftsparadoxon\\
+$1999$ & Barabási, Albert & Netze mit Potenzgesetz\\
+$2001$ & Pastor-Satorras & Ausbreitung ohne Schwelle\\
+$2005$ & Lloyd-Smith & Überstreuung\\
+$2009$ & Gatenby & adaptive Therapie\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Begriff} & \textbf{Bedeutung}\\
+\midrule
+\endhead
+Allee-Effekt & negative Rate bei kleinem Bestand (2)\\
+Anreicherungs\-paradoxon & reichere Umwelt, instabiler (6)\\
+AUC & Fläche unter der Spiegelkurve (10)\\
+Bateman-Funktion & Spiegel nach oraler Gabe (10)\\
+Bifurkation & Verhaltenswechsel bei Parameteränderung (6)\\
+Bioverfügbarkeit & Anteil, der ins Blut gelangt (10)\\
+Chronaxie & $\tau\ln2$, Erregbarkeitsmaß (12)\\
+Clearance & geklärtes Volumen je Zeit (10)\\
+Depolarisations\-block & Unerregbarkeit bei starkem Reiz (12)\\
+Fitnesskosten & Wachstumsnachteil der Resistenz (1, 14)\\
+Fixpunkt & $f(x^{*}) = x^{*}$ (3.2)\\
+Freundschafts\-paradoxon & $\langle k^2\rangle/\langle k\rangle \ge \langle k\rangle$ (9)\\
+Gompertz-Modell & logarithmische Bremsung (13.1)\\
+Gradverteilung & Anteil mit je $k$ Kontakten (9.1)\\
+Grenzzyklus & isolierte geschlossene Bahn (4)\\
+Herdenschwelle & $1-1/\Rnull$ (8.1)\\
+Hill-Koeffizient & Maß der Kooperativität (11)\\
+Hopf-Bifurkation & aus Ruhe wird Schwingung (6, 12)\\
+Identifizierbarkeit & Parameter aus Daten bestimmbar (15)\\
+Jacobi-Matrix & Tangente in zwei Veränderlichen (6.1)\\
+Kapazitätsgrenze & $K$ im logistischen Modell (2.1)\\
+Kollateral\-sensitivität & Resistenz erzeugt andere Schwäche (14)\\
+Kolonisations\-resistenz & Vorrangeffekt als Schutz (5)\\
+Konkurrenz\-ausschluss & gleiche Nische, keine Koexistenz (5)\\
+Log-kill & fester Anteil je Gabe (13)\\
+Lyapunow-Exponent & Rate des Fehlerwachstums (3)\\
+Massenwirkung & Begegnungen $\propto x\cdot y$ (4)\\
+Michaelis-Konstante & Halbsättigung (11.1)\\
+Nernst-Spannung & Gleichgewicht je Ionenart (12)\\
+Nullkline & Menge mit $\dot x = 0$ (5.2)\\
+Phasenporträt & $y$ gegen $x$ statt über $t$ (4)\\
+Quasi-Stationarität & schneller Vorgang eingestellt (11)\\
+$\Rnull$ & Basisreproduktionszahl (7.2)\\
+Refraktärzeit & Unerregbarkeit nach Ausschlag (12)\\
+Rheobase & Mindestreizstärke (12)\\
+Riegelungsimpfung & Impfen im Umfeld eines Falls (8)\\
+Sattelpunkt & $D<0$, stets instabil (6)\\
+Selektionsfenster & Spiegel wählt aus, ohne zu töten (14)\\
+Strukturelle In\-stabilität & Verhalten bei kleiner Änderung weg (4)\\
+Superspreading & wenige verursachen die meisten Fälle (9)\\
+Überschwingen & Endgröße über der Schwelle (7)\\
+Überstreuung & Varianz über dem Mittelwert (9)\\
+Verteilungs\-volumen & $D/c_0$ (10.1)\\
+Vorrangeffekt & wer zuerst da ist, bleibt (5)\\
+Wendepunkt & größter Zuwachs (2.3, 13.3)\\
+Zeitkonstante & $R_mC_m$ (12.1)\\
+\bottomrule
+\end{longtable}}
+\end{center}
+\end{merksatz}

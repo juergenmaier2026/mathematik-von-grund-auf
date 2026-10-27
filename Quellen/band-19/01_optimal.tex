@@ -1,0 +1,737 @@
+\part{Lineare Probleme}
+
+\chapter{Was heißt optimal?}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Das Klinikum Neustadt}
+Die Chirurgie führt zwei Arten von Eingriffen durch:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+& \textbf{OP-Zeit} & \textbf{Bettentage} & \textbf{Nutzen}\\
+\midrule
+Eingriff $A$ & $1$ h & $3$ & $0{,}8$\\
+Eingriff $B$ & $4$ h & $6$ & $2{,}0$\\
+\midrule
+\textbf{verfügbar} & $80$ h & $180$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Nutzen} bezeichnet hier den erwarteten Gewinn an beschwerdefreier Lebenszeit in Jahren --- eine gebräuchliche, wenn auch umstrittene Größe. Wir kommen im Abschnitt über den Bruchfall darauf zurück.
+
+\textbf{Die Frage:} Wie viele Eingriffe jeder Art soll die Klinik je Woche einplanen?
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das Problem aufschreiben}
+\schritt{Schritt 1 --- Die Entscheidungsgrößen}
+\[ a = \text{Zahl der Eingriffe } A, \qquad b = \text{Zahl der Eingriffe } B \]
+
+\schritt{Schritt 2 --- Die Beschränkungen}
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{3.2cm}P{4.8cm}@{}}
+\toprule
+$a + 4b \le 80$ & OP-Zeit\\
+$3a + 6b \le 180$ & Bettentage\\
+$a \ge 0$, $b \ge 0$ & keine negativen Eingriffe\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die zweite Ungleichung lässt sich durch $3$ teilen:
+\[ a + 2b \le 60 \]
+
+\schritt{Schritt 3 --- Das Ziel}
+\[ \text{maximiere} \qquad z = 0{,}8\,a + 2{,}0\,b \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Ungleichung des zweiten Schritts wird gern vergessen und ist die wichtigste: Ohne sie würde das Verfahren negative Eingriffszahlen anbieten, wenn das rechnerisch günstiger wäre. \textbf{Was nicht ausgeschlossen wird, gilt als erlaubt} --- die zweite Warnung aus dem Vorwort.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Bestandteile}
+
+\begin{definition}
+\boxtitelm{Definition 1.1 --- Optimierungsproblem}
+Ein \Begriff{Optimierungsproblem} besteht aus
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Entscheidungs\-größen} & $\vek{x} = (x_1,\ldots,x_n)$ --- worüber entschieden wird\\
+\textbf{Zielfunktion} & $f: \R^n \to \R$ --- was gemessen wird\\
+\textbf{Zulässigkeitsbereich} & $\Zul \subseteq \R^n$ --- was erlaubt ist\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Gesucht ist ein $\vek{x}^{*} \in \Zul$ mit
+\[ f(\vek{x}^{*}) \le f(\vek{x}) \quad\text{für alle}\quad \vek{x} \in \Zul . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Minimieren und Maximieren}
+Man kann sich auf einen der beiden Fälle beschränken:
+\[ \max_{\vek{x}\in\Zul} f(\vek{x}) = -\min_{\vek{x}\in\Zul}\bigl(-f(\vek{x})\bigr) \]
+
+\schritt{Begründung}
+Ist $\vek{x}^{*}$ ein Maximum von $f$, so gilt $f(\vek{x}^{*}) \ge f(\vek{x})$ für alle zulässigen $\vek{x}$. Multiplikation mit $-1$ dreht die Ungleichung:
+\[ -f(\vek{x}^{*}) \le -f(\vek{x}) \]
+also ist dasselbe $\vek{x}^{*}$ ein Minimum von $-f$. Die Stelle ist dieselbe, nur der Wert wechselt das Vorzeichen. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In der Literatur wird überwiegend minimiert. In diesem Band wird geschrieben, was der Sache entspricht --- Kosten minimiert, Nutzen maximiert ---, und bei jeder Umrechnung ausdrücklich darauf hingewiesen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der zulässige Bereich im Leitfall}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (-0.3,0) -- (7.4,0);
+\draw[grau!60, line width=0.7pt] (0,-0.3) -- (0,4.0);
+\fill[tief!14] (0,0) -- (6.0,0) -- (4.0,1.0) -- (0,2.0) -- cycle;
+\draw[tief, line width=1.2pt] (0,2.0) -- (7.2,0.2);
+\draw[akzent, line width=1.2pt] (0,3.0) -- (6.0,0);
+\draw[tief, line width=1.0pt] (0,0) -- (6.0,0) -- (4.0,1.0) -- (0,2.0) -- cycle;
+\foreach \p/\l in {{(0,0)}/{$(0,0)$}, {(6.0,0)}/{$(60,0)$}, {(4.0,1.0)}/{$(40,10)$}, {(0,2.0)}/{$(0,20)$}}
+  \fill[akzent] \p circle (2.4pt);
+\node[font=\scriptsize, color=grau] at (6.0,-0.35) {$(60,0)$};
+\node[font=\scriptsize, color=grau, anchor=west] at (4.15,1.15) {$(40,10)$};
+\node[font=\scriptsize, color=grau, anchor=east] at (-0.15,2.0) {$(0,20)$};
+\node[font=\scriptsize, color=tief, anchor=west] at (6.4,0.6) {$a+4b=80$};
+\node[font=\scriptsize, color=akzent, anchor=west] at (4.4,2.3) {$a+2b=60$};
+\node[font=\scriptsize, color=grau] at (3.6,-0.8) {Eingriffe $A$};
+\node[font=\scriptsize, color=grau, rotate=90] at (-0.8,2.0) {Eingriffe $B$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Die vier Ecken}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+\textbf{Ecke} & \textbf{OP} & \textbf{Betten} & \textbf{Nutzen}\\
+\midrule
+$(0,0)$ & $0$ & $0$ & $0{,}0$\\
+$(60,0)$ & $60$ & $180$ & $48{,}0$\\
+$\mathbf{(40,10)}$ & $\mathbf{80}$ & $\mathbf{180}$ & $\mathbf{52{,}0}$\\
+$(0,20)$ & $80$ & $120$ & $40{,}0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Rechnung für $(40,10)$:} OP $= 40 + 4\cdot10 = 80$; Bettentage $= 3\cdot40 + 6\cdot10 = 180$; Nutzen $= 0{,}8\cdot40 + 2{,}0\cdot10 = 32 + 20 = 52$.
+
+\schritt{Die Antwort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$40$ Eingriffe $A$ und $10$ Eingriffe $B$ je Woche, mit einem Nutzen von $52$ Jahren.} Beide Kapazitäten sind vollständig ausgeschöpft.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wir haben hier alle Ecken abgezählt. Das geht bei vier Ecken; bei einem wirklichen Dienstplan mit tausend Variablen gibt es mehr Ecken als Atome im Weltall. Kapitel~3 zeigt, wie man die richtige findet, ohne alle zu prüfen. Kapitel~2 begründet zuvor, warum das Optimum überhaupt in einer Ecke liegt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Gibt es überhaupt eine Lösung?}
+
+\begin{merksatz}
+\boxtitel{Drei Dinge, die schiefgehen können}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{2.8cm}@{}}
+\toprule
+\textbf{Fall} & \textbf{Was vorliegt} & \textbf{Beispiel}\\
+\midrule
+Unzulässig & $\Zul = \emptyset$ & $x \ge 3$ und $x \le 2$\\
+Unbeschränkt & Werte wachsen über jede Grenze & $\max x$ bei $x \ge 0$\\
+Kein Maximum & Grenzwert wird nicht angenommen & $\max x$ bei $0 \le x < 1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der dritte Fall ist der unauffälligste. Der Wert kommt der Eins beliebig nahe, erreicht sie aber nie --- es gibt ein Supremum, aber kein Maximum. Ein Verfahren, das diesem Problem begegnet, läuft entweder ewig oder liefert einen unzulässigen Punkt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 1.2 --- der Satz von Weierstraß}
+Ist $\Zul \subseteq \R^n$ nichtleer, \Begriff{abgeschlossen} und \Begriff{beschränkt}, und ist $f$ auf $\Zul$ stetig, so nimmt $f$ auf $\Zul$ sowohl ein Maximum als auch ein Minimum an.
+
+\schritt{Die drei Voraussetzungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Nichtleer} & Sonst gibt es nichts zu wählen.\\
+\textbf{Abgeschlossen} & Der Rand gehört dazu --- also \enquote{$\le$} statt \enquote{$<$}.\\
+\textbf{Beschränkt} & Der Bereich passt in eine Kugel endlichen Radius.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis benutzt die Vollständigkeit der reellen Zahlen und steht in Band 3, Teil~IV. Wir prüfen hier stattdessen, dass jede der drei Voraussetzungen wirklich gebraucht wird --- an drei Gegenbeispielen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Jede Voraussetzung ist nötig}
+\schritt{Ohne Abgeschlossenheit}
+\[ f(x) = x \quad\text{auf}\quad \Zul = [0,1) \]
+Der Bereich ist beschränkt und nichtleer, aber nicht abgeschlossen --- die Eins fehlt.
+
+Für jedes $x \in \Zul$ gibt es ein größeres: etwa $\frac{1+x}{2}$, das ebenfalls in $[0,1)$ liegt. \textbf{Kein Maximum.}
+
+\schritt{Ohne Beschränktheit}
+\[ f(x) = x \quad\text{auf}\quad \Zul = [0,\infty) \]
+Abgeschlossen und nichtleer, aber unbeschränkt. \textbf{Kein Maximum.}
+
+\schritt{Ohne Stetigkeit}
+\[ f(x) = \begin{cases} x & \text{für } 0 \le x < 1\\ 0 & \text{für } x = 1\end{cases} \quad\text{auf}\quad [0,1] \]
+Der Bereich ist abgeschlossen und beschränkt, aber $f$ springt bei $1$. Wieder gibt es zu jedem Wert einen größeren. \textbf{Kein Maximum.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Alle drei Voraussetzungen sind also scharf: Lässt man eine weg, ist der Satz falsch.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Was das für die Praxis bedeutet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Immer $\le$, nie $<$} & Strenge Ungleichungen erzeugen offene Bereiche und damit Probleme ohne Lösung. Statt \enquote{die Wartezeit soll unter $30$ Minuten liegen} schreibt man \enquote{höchstens $30$}.\\
+\textbf{Obere Schranken} & Auch wenn sie sachlich nicht binden --- eine künstliche Schranke wie $x \le 10^6$ macht den Bereich beschränkt und kostet nichts.\\
+\textbf{Sprünge vermeiden} & Unstetige Zielfunktionen --- etwa Mengenrabatte --- brauchen eine eigene Behandlung. Kapitel~10.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Zeile wird oft als Formsache abgetan und ist keine. Ein Verfahren, das ein Problem mit strengen Ungleichungen bearbeitet, liefert entweder eine Lösung auf dem verbotenen Rand oder läuft nicht. Beides ist schwer zu erkennen, wenn man die Ursache nicht kennt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Örtlich und global}
+
+\begin{definition}
+\boxtitelm{Definition 1.3}
+Ein Punkt $\vek{x}^{*} \in \Zul$ heißt
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{globales Minimum} & wenn $f(\vek{x}^{*}) \le f(\vek{x})$ für \kursiv{alle} $\vek{x} \in \Zul$\\
+\textbf{örtliches Minimum} & wenn es ein $\varepsilon > 0$ gibt, so dass $f(\vek{x}^{*}) \le f(\vek{x})$ für alle zulässigen $\vek{x}$ mit $\|\vek{x}-\vek{x}^{*}\| < \varepsilon$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Warum das die zentrale Unterscheidung ist}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (7.2,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.2);
+\draw[tief, line width=1.4pt]
+  (0.2,2.6) .. controls (0.9,1.9) and (1.2,1.35) .. (1.7,1.35)
+  .. controls (2.2,1.35) and (2.5,2.15) .. (3.1,2.25)
+  .. controls (3.7,2.35) and (4.0,0.6) .. (4.7,0.45)
+  .. controls (5.4,0.3) and (5.8,1.5) .. (6.4,2.1)
+  -- (7.0,2.6);
+\fill[mittel] (1.7,1.35) circle (2.6pt);
+\fill[akzent] (4.7,0.45) circle (2.8pt);
+\node[font=\scriptsize, color=mittel, anchor=south] at (1.7,1.55) {örtlich};
+\node[font=\scriptsize, color=akzent, anchor=south] at (4.7,0.65) {global};
+\node[font=\scriptsize, color=grau] at (3.6,-0.55) {Entscheidungsgröße};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Verfahren, das nur die unmittelbare Umgebung prüft, findet das örtliche Minimum und bleibt dort stehen.} Es hat keine Möglichkeit zu bemerken, dass weiter rechts ein besseres liegt.
+\end{minipage}
+\end{center}
+
+\schritt{Die Frage, die den ganzen Band durchzieht}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Wann gleich?} & Bei \kursiv{konvexen} Problemen fallen örtliches und globales Minimum zusammen --- Kapitel~7.\\
+\textbf{Lineare Probleme} & Sind konvex. Deshalb sind die Kapitel~2 bis 6 vergleichsweise einfach.\\
+\textbf{Ganzzahlige Probleme} & Sind es nicht. Deshalb wird Teil~IV schwierig.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die eigentliche Trennlinie des Fachs verläuft nicht zwischen linear und nichtlinear, sondern zwischen konvex und nicht konvex. Ein nichtlineares konvexes Problem mit tausend Variablen ist heute Routine; ein ganzzahliges lineares Problem mit hundert Variablen kann unlösbar sein.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Bruchfall: das falsche Ziel}
+
+Jetzt der wichtigste Abschnitt des Kapitels.
+
+\begin{warnung}
+\boxtitelr{Dieselben Beschränkungen, drei Ziele}
+Die Klinik könnte auch anders planen. Wir prüfen drei Zielfunktionen am selben zulässigen Bereich.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.8cm}P{3.0cm}@{}}
+\toprule
+\textbf{Ziel} & \textbf{Zielfunktion} & \textbf{Begründung}\\
+\midrule
+Nutzen & $0{,}8a + 2{,}0b$ & Gesundheits\-gewinn\\
+Zahl & $a + b$ & möglichst vielen helfen\\
+Wartezeit & $a$ & Warteliste bei $A$ abbauen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Werte an allen vier Ecken}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{1.6cm}P{1.8cm}@{}}
+\toprule
+\textbf{Ecke} & \textbf{Nutzen} & \textbf{Zahl} & \textbf{$A$-Zahl}\\
+\midrule
+$(0,0)$ & $0{,}0$ & $0$ & $0$\\
+$(60,0)$ & $48{,}0$ & $\mathbf{60}$ & $\mathbf{60}$\\
+$(40,10)$ & $\mathbf{52{,}0}$ & $50$ & $40$\\
+$(0,20)$ & $40{,}0$ & $20$ & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ziel 1 führt auf $(40,10)$, die Ziele 2 und 3 auf $(60,0)$.} Die Entscheidung, ob zehn Eingriffe der Art $B$ stattfinden, hängt vollständig an der Wahl des Ziels.
+\end{minipage}
+\end{center}
+
+\schritt{Was das kostet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.2cm}P{1.8cm}@{}}
+\toprule
+\textbf{Gewählt} & \textbf{Nutzen} & \textbf{Behandelte} & \textbf{$B$-Fälle}\\
+\midrule
+$(40,10)$ & $52{,}0$ & $50$ & $10$\\
+$(60,0)$ & $48{,}0$ & $60$ & $\mathbf{0}$\\
+\midrule
+Unterschied & $-7{,}7\,\%$ & $+20\,\%$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zwanzig Prozent mehr Behandelte kosten knapp acht Prozent Nutzen --- und sämtliche Eingriffe der schwereren Art. Das ist keine Rechenfrage. Wer die Zahl maximiert, bevorzugt systematisch die leichten Fälle; wer den Nutzen maximiert, verteilt anders. Beides lässt sich begründen, und die Mathematik sagt nicht, welches richtig ist.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und drei weitere Stellen, an denen das Modell entscheidet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Teilbarkeit} & Die Lösung $(40,10)$ ist ganzzahlig --- glücklicherweise. Bei anderen Zahlen käme $37{,}4$ heraus, und $0{,}4$ Eingriffe gibt es nicht. Kapitel~10.\\
+\textbf{Mittelwerte} & \enquote{Drei Bettentage je Eingriff} ist ein Mittelwert. Die Streuung fehlt im Modell vollständig. Kapitel~13.\\
+\textbf{Was fehlt} & Notfälle, Personalausfall, Rüstzeiten zwischen Eingriffen --- nichts davon steht in den zwei Ungleichungen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Zahl $52{,}0$ ist exakt. Sie ist die exakte Lösung eines Modells, dessen Verhältnis zur Wirklichkeit ungeprüft ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist dieselbe Warnung wie in Band 18: Genauigkeit ist nicht Richtigkeit. Bei der Optimierung kommt eine Verschärfung hinzu --- das Verfahren sucht gezielt die äußerste Ecke des Modells auf und legt damit gerade diejenigen Stellen offen, an denen das Modell am wenigsten zutrifft.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.1 --- Ein Problem aufschreiben}
+Eine Station braucht je Schicht mindestens $4$ Pflegekräfte tagsüber und $2$ nachts. Eine Vollzeitkraft arbeitet $5$ Schichten je Woche, eine Teilzeitkraft $3$. Vollzeit kostet $1{,}0$ Einheiten, Teilzeit $0{,}65$. Je Woche gibt es $21$ Schichten ($14$ Tag, $7$ Nacht). Schreiben Sie das Problem auf.
+
+\loesung
+\schritt{Schritt 1 --- Der Bedarf}
+\[ 14 \cdot 4 + 7 \cdot 2 = 56 + 14 = 70 \ \text{Schichtbesetzungen je Woche} \]
+
+\schritt{Schritt 2 --- Die Entscheidungsgrößen}
+\[ v = \text{Zahl der Vollzeitkräfte}, \qquad t = \text{Zahl der Teilzeitkräfte} \]
+
+\schritt{Schritt 3 --- Die Nebenbedingung}
+\[ 5v + 3t \ge 70 \]
+
+\schritt{Schritt 4 --- Die Zielfunktion}
+\[ \text{minimiere} \qquad k = 1{,}0\,v + 0{,}65\,t \]
+
+\schritt{Schritt 5 --- Die vergessenen Bedingungen}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & $v \ge 0$ und $t \ge 0$\\
+$2$ & $v$ und $t$ ganzzahlig\\
+$3$ & Es muss zu \kursiv{jeder} Schicht genug Personal da sein, nicht nur im Wochenmittel\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 6 --- Die dritte Bedingung ist die wichtige}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Ungleichung $5v+3t \ge 70$ verlangt nur, dass die Summe der Arbeitszeit reicht.} Sie verhindert nicht, dass alle gleichzeitig am Montag arbeiten.
+\end{minipage}
+\end{center}
+
+Richtig wäre eine Bedingung je Schicht: Sei $x_{is}$ die Zahl der Kräfte vom Typ $i$ in Schicht $s$:
+\[ \sum_i x_{is} \ge d_s \quad\text{für jede Schicht } s \]
+dazu Bedingungen, die die Zuordnung mit der Gesamtzahl verknüpfen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Aus zwei Variablen werden damit $2 \cdot 21 = 42$, und es kommen Ruhezeitregeln, Höchstarbeitszeiten und Wünsche hinzu. Ein wirklicher Dienstplan hat einige tausend Variablen. Kapitel~11 behandelt genau diesen Fall.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Die vereinfachte Lösung trotzdem}
+Bei stetigen Variablen: Welcher Typ ist je Schicht günstiger?
+\[ \text{Vollzeit: } \frac{1{,}0}{5} = 0{,}200 \ \text{je Schicht} \]
+\[ \text{Teilzeit: } \frac{0{,}65}{3} = 0{,}217 \ \text{je Schicht} \]
+
+Vollzeit ist günstiger, also $t = 0$ und
+\[ v = \frac{70}{5} = 14 , \qquad k = 14{,}0 . \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das Ergebnis --- ausschließlich Vollzeit --- ist typisch für lineare Probleme: Sie liefern Ecklösungen, in denen eine Möglichkeit vollständig ausgeschöpft und die andere gar nicht genutzt wird. Sobald Sättigungseffekte oder zusätzliche Bedingungen hinzukommen, ändert sich das. Kapitel~2 begründet, warum das so ist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.2 --- Wo Weierstraß nicht greift}
+Prüfen Sie für jedes Problem, ob eine Lösung existiert.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & $\min\ x^2$ auf $\R$\\
+(b) & $\min\ 1/x$ auf $x > 0$\\
+(c) & $\max\ x_1+x_2$ auf $x_1+x_2 \le 10$, $x_i \ge 0$\\
+(d) & $\min\ e^{-x}$ auf $x \ge 0$\\
+(e) & $\max\ x$ auf $x^2 \le 4$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a)}
+$\R$ ist abgeschlossen, aber \kursiv{nicht} beschränkt --- Weierstraß greift nicht.
+
+Trotzdem existiert das Minimum: $x^2 \ge 0$ mit Gleichheit bei $x=0$. \textbf{Lösung $x^{*}=0$.}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Der Satz von Weierstraß ist hinreichend, nicht notwendig. Sind seine Voraussetzungen verletzt, so weiß man nichts --- weder dass eine Lösung existiert noch dass keine existiert.}
+\end{minipage}
+\end{center}
+
+\schritt{(b)}
+$\{x > 0\}$ ist weder abgeschlossen noch beschränkt.
+
+Für $x \to \infty$ gilt $1/x \to 0$, ohne je null zu werden. \textbf{Kein Minimum} --- das Infimum ist $0$ und wird nicht angenommen.
+
+\schritt{(c)}
+Der Bereich ist ein Dreieck mit den Ecken $(0,0)$, $(10,0)$, $(0,10)$ --- abgeschlossen und beschränkt, die Zielfunktion stetig. Weierstraß greift.
+
+\textbf{Maximum $= 10$}, angenommen auf der \kursiv{gesamten} Strecke zwischen $(10,0)$ und $(0,10)$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Ein Beispiel dafür, dass die Lösung nicht eindeutig sein muss. Das geschieht, wenn die Zielfunktion parallel zu einer begrenzenden Ungleichung verläuft --- bei linearen Problemen ein Zeichen dafür, dass zwei Möglichkeiten gleichwertig sind.}
+\end{minipage}
+\end{center}
+
+\schritt{(d)}
+$[0,\infty)$ ist abgeschlossen, aber unbeschränkt.
+
+$e^{-x}$ fällt streng und nähert sich null. \textbf{Kein Minimum.}
+
+\kursiv{Aber ein Maximum:} bei $x=0$ mit dem Wert $1$. Weierstraß greift für keines von beiden; das Maximum existiert trotzdem.
+
+\schritt{(e)}
+$x^2 \le 4$ bedeutet $-2 \le x \le 2$ --- abgeschlossen und beschränkt. \textbf{Maximum $=2$.}
+
+\schritt{Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{1.8cm}P{1.8cm}P{2.6cm}@{}}
+\toprule
+& \textbf{abgeschl.} & \textbf{beschr.} & \textbf{Lösung}\\
+\midrule
+(a) & ja & \textcolor{akzent}{nein} & \textcolor{gruen}{existiert}\\
+(b) & \textcolor{akzent}{nein} & \textcolor{akzent}{nein} & \textcolor{akzent}{keine}\\
+(c) & ja & ja & \textcolor{gruen}{viele}\\
+(d) & ja & \textcolor{akzent}{nein} & \textcolor{akzent}{kein Minimum}\\
+(e) & ja & ja & \textcolor{gruen}{eindeutig}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Zeilen (a) und (d) zeigen dasselbe Muster: Dieselben Voraussetzungen sind verletzt, einmal existiert die Lösung, einmal nicht. Wo der Satz nicht greift, muss man den Einzelfall prüfen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.3 --- Wenn sich die Kapazität ändert}
+Im Leitfall stehen statt $80$ nun $90$ OP-Stunden zur Verfügung. Bestimmen Sie die neue Lösung und die Änderung des Nutzens.
+
+\loesung
+\schritt{Schritt 1 --- Die neuen Bedingungen}
+\[ a + 4b \le 90, \qquad a + 2b \le 60, \qquad a,b \ge 0 \]
+
+\schritt{Schritt 2 --- Die Ecken bestimmen}
+\kursiv{Schnittpunkt der beiden Geraden:}
+\[ a = 90-4b \quad\text{und}\quad a = 60-2b \]
+\[ 90-4b = 60-2b \quad\Longrightarrow\quad 30 = 2b \quad\Longrightarrow\quad b = 15, \ a = 30 \]
+
+\kursiv{Probe:} $30 + 60 = 90$ \checkmark\ und $30 + 30 = 60$ \checkmark
+
+\kursiv{Achsenschnittpunkte:}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Punkt} & \textbf{OP} & \textbf{Betten}\\
+\midrule
+$(60,0)$ & $60 \le 90$ \checkmark & $60 \le 60$ \checkmark\\
+$(0,22{,}5)$ & $90 \le 90$ \checkmark & $45 \le 60$ \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 3 --- Die Werte}
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.2cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Ecke} & \textbf{Rechnung} & \textbf{Nutzen}\\
+\midrule
+$(0,0)$ & --- & $0{,}0$\\
+$(60,0)$ & $0{,}8\cdot60$ & $48{,}0$\\
+$\mathbf{(30,15)}$ & $24+30$ & $\mathbf{54{,}0}$\\
+$(0,22{,}5)$ & $2{,}0\cdot22{,}5$ & $45{,}0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 4 --- Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{1.8cm}P{1.8cm}P{2.2cm}@{}}
+\toprule
+\textbf{OP-Stunden} & $a$ & $b$ & \textbf{Nutzen}\\
+\midrule
+$80$ & $40$ & $10$ & $52{,}0$\\
+$90$ & $30$ & $15$ & $54{,}0$\\
+\midrule
+Änderung & $-10$ & $+5$ & $\mathbf{+2{,}0}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zehn zusätzliche OP-Stunden bringen $2{,}0$ Nutzeneinheiten --- also $0{,}2$ je Stunde.}
+\end{minipage}
+\end{center}
+
+Bemerkenswert ist, \kursiv{wie} der Gewinn zustande kommt: Nicht durch mehr Eingriffe insgesamt --- es werden $45$ statt $50$ --- sondern durch eine Verschiebung von $A$ nach $B$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Grund: Die Bettentage bleiben die knappere Größe. Mehr OP-Zeit erlaubt, dieselben Bettentage auf Eingriffe mit höherem Nutzen je Bettentag zu verwenden. Das ist die Art von Einsicht, die man einer Tabelle nicht ansieht und einer Rechnung schon.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Zahl $0{,}2$ hat einen Namen}
+Sie heißt \Begriff{Schattenpreis} der OP-Stunde: der Wert, den eine zusätzliche Einheit dieser Kapazität hat.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kapitel~5 zeigt, dass sich dieser Wert ausrechnen lässt, \kursiv{ohne} das Problem erneut zu lösen --- und dass er aus dem sogenannten dualen Problem stammt. Er gilt zudem nur in einem bestimmten Bereich: Ab einer gewissen Stundenzahl sind die Betten so knapp, dass weitere OP-Zeit nichts mehr bringt. Aufgabe 5.2 bestimmt diese Grenze.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Fach, das aus dem Krieg kam}
+Die Optimierung ist eines der jüngsten Gebiete der Mathematik. Ihre Grundlagen entstanden zwischen 1939 und 1950, und zwar an drei Orten unabhängig voneinander.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{3.8cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Anlass}\\
+\midrule
+$1939$ & Kantorowitsch & Zuschnitt in einer Sperrholzfabrik\\
+$1941$ & Hitchcock & Transportproblem\\
+$1947$ & Dantzig & Planung der US-Luftwaffe\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Kantorowitsch}
+\Person{Leonid Kantorowitsch} (1912--1986) wurde 1938 von einer Leningrader Sperrholzfabrik um Rat gefragt, wie Maschinen auf Werkstücke zu verteilen seien. Er erkannte die allgemeine Struktur und veröffentlichte 1939 eine Schrift, die das lineare Optimierungsproblem samt einem Lösungsansatz enthält.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Arbeit blieb im Westen dreißig Jahre lang unbekannt. In der Sowjetunion war sie unbequem: Kantorowitsch führte Schattenpreise ein --- objektiv bestimmte Werte für knappe Güter --- und das ließ sich als verkappte Preistheorie lesen. Er erhielt 1975 als einziger sowjetischer Ökonom den Nobelpreis, gemeinsam mit Koopmans.}
+\end{minipage}
+\end{center}
+
+\schritt{Dantzig}
+\Person{George Dantzig} (1914--2005) arbeitete während des Krieges für die US-Luftwaffe an Planungsproblemen. 1947 entwickelte er das Simplexverfahren --- den Gegenstand von Kapitel~3.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Von Dantzig stammt auch eine bekannte Anekdote: Als Student kam er zu spät zur Vorlesung, schrieb zwei an der Tafel stehende Aufgaben als Hausaufgabe ab und löste sie nach einigen Tagen. Es handelte sich um zwei bis dahin ungelöste Probleme der Statistik. Er selbst berichtete, die Lösung sei ihm schwerer gefallen als üblich --- aber er habe nicht gewusst, dass sie als unlösbar galten.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Name}
+\enquote{Lineare Programmierung} hat nichts mit Rechnerprogrammen zu tun. \kursiv{Program} bedeutete im militärischen Sprachgebrauch der Zeit einen Einsatzplan --- Dantzigs Aufgabe war es, solche Pläne zu berechnen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Im Deutschen hat sich \enquote{lineare Optimierung} durchgesetzt, was die Sache besser trifft. Die englische Bezeichnung blieb, und mit ihr die Verwirrung.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wo Optimierung heute steckt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Sichtbar} & Fahrpläne, Zuschnitt, Netzplanung, Portfolios, Dienstpläne.\\
+\textbf{Unsichtbar} & Jedes Verfahren des maschinellen Lernens minimiert eine Fehlerfunktion --- Kapitel~9.\\
+\textbf{In der Medizin} & Bestrahlungsplanung, Organverteilung, Kapazitätsplanung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Größenordnungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{2.6cm}@{}}
+\toprule
+\textbf{Problemart} & \textbf{Variablen} & \textbf{Rechenzeit}\\
+\midrule
+Linear & Millionen & \textcolor{gruen}{Minuten}\\
+Konvex & Hundert\-tausende & \textcolor{gruen}{Minuten}\\
+Ganzzahlig & Tausende & \textcolor{akzent}{Stunden bis nie}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist der Grund für Teil~IV. Die Forderung, dass eine Variable ganzzahlig sein muss, klingt harmlos --- sie ist der Übergang von einem in Minuten lösbaren zu einem grundsätzlich schweren Problem. Kapitel~12 erklärt, warum.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Fortschritt}
+Untersuchungen zur Entwicklung der Lösungsgeschwindigkeit ganzzahliger Probleme zwischen 1990 und 2020 schreiben etwa die Hälfte des Gewinns schnellerer Rechnertechnik zu und die andere Hälfte besseren Verfahren.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zusammengenommen ergibt das eine Beschleunigung um mehrere Größenordnungen. Probleme, die 1990 als unlösbar galten, werden heute nebenbei gelöst --- und das hat die Anwendung mehr verändert als jede einzelne theoretische Einsicht.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 1.1} & Größen, Ziel, Zulässigkeitsbereich\\
+\textbf{Satz 1.2} & Weierstraß --- alle drei Voraussetzungen nötig\\
+\textbf{Definition 1.3} & örtlich gegen global\\
+\textbf{Der Leitfall} & vier Ecken, Optimum bei $(40,10)$\\
+\textbf{Der Bruchfall} & drei Ziele, zwei verschiedene Lösungen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel beweisen wir, was wir hier nur beobachtet haben: dass das Optimum eines linearen Problems stets in einer Ecke liegt --- und was das für die Suche bedeutet.}
+\end{minipage}
+\end{center}
+\end{merksatz}

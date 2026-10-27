@@ -1,0 +1,352 @@
+\part{Aktueller Stand}
+
+\chapter{Wo die Forschung heute steht}
+
+\section{Eine Bilanz}
+
+Vierzehn Kapitel sind vergangen. Es lohnt sich, Bilanz zu ziehen: Welche der Fragen, die Sie kennengelernt haben, sind beantwortet --- und welche nicht?
+
+\begin{merksatz}
+\boxtitel{Die Bilanz dieses Bandes}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.4cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+\textbf{Frage} & \textbf{Kapitel} & \textbf{Stand}\\
+\midrule
+Eulerkreis? & $6$ & \textcolor{gruen}{\textbf{vollständig gelöst}}\\
+Hamiltonkreis? & $7$ & \textcolor{akzent}{\textbf{kein Kriterium}}\\
+Planar? & $8$ & \textcolor{gruen}{gelöst, sogar schnell}\\
+Kreuzungszahl? & $8$ & \textcolor{akzent}{NP-schwer, $K_n$ offen}\\
+$4$-färbbar (planar)? & $9$ & \textcolor{gruen}{gelöst 1976}\\
+$\chi(G)$ allgemein? & $9$ & \textcolor{akzent}{NP-schwer}\\
+Größte Paarung? & $11$ & \textcolor{gruen}{gelöst, schnell}\\
+Größter Fluss? & $12$ & \textcolor{gruen}{gelöst, fast linear}\\
+Turán für Cliquen? & $13$ & \textcolor{gruen}{gelöst 1941}\\
+Turán, bipartit? & $13$ & \textcolor{akzent}{\textbf{offen seit 1946}}\\
+Ramsey $R(5,5)$? & $13$ & \textcolor{akzent}{offen}\\
+Isomorphie? & $1$ & \textcolor{mittel}{Zwischenzustand}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Auffällig ist das Muster in der Spalte rechts. Die Fragen nach \kursiv{Kanten} --- Eulerkreise, Paarungen, Flüsse --- sind gelöst. Die Fragen nach \kursiv{Ecken} --- Hamiltonkreise, Färbungen, Cliquen --- sind es meist nicht. Das ist kein Zufall, sondern hängt mit der Verschmelzbarkeit zusammen, die Kapitel~7 herausgearbeitet hat.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz von Robertson und Seymour}
+
+Der größte Einzelfortschritt des Gebiets in den letzten fünfzig Jahren.
+
+\begin{merksatz}
+\boxtitel{Der Graphenminoren-Satz}
+Erinnerung an Kapitel~8: Ein \Begriff{Minor} von $G$ entsteht durch Weglassen von Ecken und Kanten und durch Zusammenziehen von Kanten.
+
+\textbf{Satz (Robertson und Seymour, 1983--2004).} In jeder unendlichen Folge von Graphen $G_1, G_2, G_3, \ldots$ gibt es zwei Indizes $i < j$, so dass $G_i$ ein Minor von $G_j$ ist.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Warum das so bedeutsam ist}
+\schritt{Die Folgerung}
+Sei $\mathcal{K}$ eine Graphenklasse, die unter Minorenbildung abgeschlossen ist --- ist $G \in \mathcal{K}$ und $H$ ein Minor von $G$, so auch $H \in \mathcal{K}$.
+
+Dann lässt sich $\mathcal{K}$ durch \kursiv{endlich viele} verbotene Minoren beschreiben.
+
+\schritt{Warum das folgt}
+Sei $\mathcal{V}$ die Menge der Graphen, die nicht in $\mathcal{K}$ liegen, aber minimal in dem Sinne, dass alle ihre echten Minoren in $\mathcal{K}$ liegen. Wäre $\mathcal{V}$ unendlich, so gäbe es nach dem Satz zwei Elemente $G_i$, $G_j$ mit $G_i$ als Minor von $G_j$. Da $G_i \notin \mathcal{K}$ und $G_i$ echter Minor von $G_j$ wäre, widerspräche das der Minimalität von $G_j$.
+
+\schritt{Der bekannte Sonderfall}
+Planarität ist unter Minorenbildung abgeschlossen. Die verbotenen Minoren sind nach Wagner (Kapitel~8) genau zwei: $K_5$ und $K_{3,3}$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+\textbf{Klasse} & \textbf{verbotene Minoren} & \\
+\midrule
+Wälder & $1$ & $K_3$\\
+Planare Graphen & $2$ & $K_5$, $K_{3,3}$\\
+In den Torus einbettbar & $\ge 16\,000$ & \textcolor{akzent}{\textbf{unbekannt}}\\
+Knotenfrei im Raum & $7$ & bekannt seit 1995\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Ein Satz, der Existenz zeigt und nichts liefert}
+Der Satz von Robertson und Seymour garantiert, dass die Liste der verbotenen Minoren \kursiv{endlich} ist. Er sagt nicht, wie lang sie ist, und liefert kein Verfahren, sie zu finden.
+
+Für die Einbettbarkeit in den Torus --- die nächstkompliziertere Fläche nach der Ebene --- weiß man seit Jahrzehnten, dass eine endliche Liste existiert. Man kennt bis heute weder ihre Länge noch alle ihre Elemente; bekannt sind über sechzehntausend Einträge.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis umfasst zwanzig Arbeiten mit zusammen über fünfhundert Seiten, erschienen zwischen 1983 und 2004 unter dem gemeinsamen Titel \kursiv{Graph Minors}. Er gilt als einer der längsten Beweise der Mathematik --- und, anders als beim Vierfarbensatz, ist er von Menschen geschrieben und von Menschen geprüft.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Das Isomorphieproblem}
+
+Kapitel~1 endete mit einer offenen Frage: Wie schwer ist es zu entscheiden, ob zwei Graphen isomorph sind?
+
+\begin{merksatz}
+\boxtitel{Ein Problem im Zwischenzustand}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{2.6cm}P{2.8cm}@{}}
+\toprule
+\textbf{Was bekannt ist} & & \\
+\midrule
+In NP & \textcolor{gruen}{ja} & Isomorphismus vorlegen\\
+NP-vollständig? & \textcolor{akzent}{vermutlich nein} & sonst Folgen für ganz NP\\
+In P? & \textcolor{akzent}{unbekannt} & \\
+Babai 2016 & \textcolor{mittel}{quasi\-polynomiell} & $\exp\bigl((\log n)^{\Oh(1)}\bigr)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\Person{László Babai} zeigte 2015/2016, dass sich das Isomorphieproblem in quasipolynomieller Zeit lösen lässt --- deutlich schneller als die vorherige Schranke $\exp(\Oh(\sqrt{n\log n}))$ von Luks aus dem Jahr 1983, aber immer noch langsamer als jedes Polynom.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Geschichte hatte eine Wendung: Kurz nach der Ankündigung fand \Person{Harald Helfgott} beim Nachprüfen einen Fehler in einer Abschätzung. Babai zog die Zeitschranke zurück, reparierte den Beweis binnen weniger Tage und veröffentlichte die berichtigte Fassung. Das Ergebnis steht seither.}
+\end{minipage}
+\end{center}
+
+\schritt{Für Bäume geht es schnell}
+Aufgabe 4.4 zeigte, dass die Gradfolge auch bei Bäumen nicht genügt. Für Bäume gibt es dennoch ein Verfahren mit linearem Aufwand: Man wurzelt beide Bäume an ihrem Zentrum, ordnet jeder Ecke eine Kennung aus den sortierten Kennungen ihrer Nachfolger zu und vergleicht die Wurzelkennungen. Isomorphie ist damit sicher entschieden.
+\end{merksatz}
+
+\section{Färbungen: Hadwiger und die Nachbarschaft}
+
+\begin{merksatz}
+\boxtitel{Die Hadwigersche Vermutung}
+\Person{Hugo Hadwiger} vermutete 1943:
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Enthält ein Graph keinen $K_t$ als Minor, so ist er $(t-1)$-färbbar.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum das eine Verallgemeinerung des Vierfarbensatzes ist}
+Für $t = 5$ lautet die Behauptung: Ein Graph ohne $K_5$-Minor ist $4$-färbbar. Nach dem Satz von Wagner (Kapitel~8) ist ein Graph ohne $K_5$- und ohne $K_{3,3}$-Minor planar --- der Fall $t=5$ ist also mindestens so stark wie der Vierfarbensatz und wurde 1937 von Wagner als gleichwertig dazu nachgewiesen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.4cm}P{2.8cm}P{3.4cm}@{}}
+\toprule
+$t$ & \textbf{Stand} & \\
+\midrule
+$\le 4$ & \textcolor{gruen}{elementar} & \\
+$5$ & \textcolor{gruen}{gelöst} & gleichwertig zum Vierfarbensatz\\
+$6$ & \textcolor{gruen}{gelöst 1993} & Robertson, Seymour, Thomas\\
+$\ge 7$ & \textcolor{akzent}{\textbf{offen}} & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{forschung}
+\boxtitelp{Der Fortschritt der letzten Jahre}
+Da die Vermutung selbst unerreichbar scheint, arbeitet man an Schranken der Form: Ein Graph ohne $K_t$-Minor ist $f(t)$-färbbar, mit möglichst kleinem $f$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.8cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Autoren} & \textbf{Schranke $f(t)$}\\
+\midrule
+$1982/84$ & Kostochka, Thomason & $\Oh(t\sqrt{\log t})$\\
+$2019$ & Norin, Postle, Song & $\Oh(t(\log t)^{\beta})$, $\beta > 1/4$\\
+$2025$ & Delcourt, Postle & $\Oh(t \log\log t)$\\
+$\mathbf{2026}$ & Liu, Luo & $\Oh(t \log\log\log t)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die Arbeit von \Person{Michelle Delcourt} und \Person{Luke Postle} erschien 2025 im \kursiv{Journal of the American Mathematical Society}; sie führt die lineare Fassung der Vermutung auf das Färben endlich vieler kleiner Graphen zurück. Darauf aufbauend verbesserten \Person{Chun-Hung Liu} und \Person{Jason Luo} die Schranke im September 2026 nochmals.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Reihe $\sqrt{\log t}$, $\log\log t$, $\log\log\log t$ zeigt die Bewegungsrichtung: Man nähert sich der vermuteten Schranke $t-1$ in immer flacheren Schritten. Ob man je ankommt, ist offen --- der Abstand ist inzwischen klein, aber jeder weitere Logarithmus kostet mehr Aufwand als der vorige.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\section{Das Regularitätslemma und die Graphlimites}
+
+\begin{merksatz}
+\boxtitel{Szemerédis Regularitätslemma}
+\Person{Endre Szemerédi} bewies 1975 eine Aussage, die zunächst technisch wirkt und sich als eines der mächtigsten Werkzeuge der Kombinatorik erwiesen hat.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jeder genügend große Graph lässt sich in beschränkt viele Teile zerlegen, so dass sich die Kanten zwischen fast allen Teilpaaren verhalten wie in einem Zufallsgraphen.}
+\end{minipage}
+\end{center}
+
+\schritt{Was das bedeutet}
+Jeder Graph --- gleichgültig wie er entstand --- sieht auf grober Ebene aus wie ein gewichteter Zufallsgraph auf wenigen Ecken. Man bekommt also eine \kursiv{Landkarte} des Graphen, deren Größe nicht von $n$ abhängt.
+
+\schritt{Der Preis}
+Die Anzahl der Teile ist zwar beschränkt, aber die Schranke wächst als Turm von Zweierpotenzen in der geforderten Genauigkeit. \Person{Timothy Gowers} zeigte 1997, dass das unvermeidlich ist. Für praktische Zwecke ist das Lemma daher unbrauchbar --- als Beweiswerkzeug ist es unersetzlich.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Aus dem Regularitätslemma folgt unter anderem der Satz von Erdős und Stone aus Kapitel~13, das Dreiecksentfernungslemma und --- über einen längeren Weg --- der Satz von Szemerédi über arithmetische Folgen, für den er 2012 den Abelpreis erhielt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{forschung}
+\boxtitelp{Graphlimites --- Grenzwerte von Graphenfolgen}
+Seit etwa 2006 haben \Person{László Lovász} und Mitarbeiter daraus eine Theorie entwickelt, in der Folgen wachsender Graphen einen \kursiv{Grenzwert} haben. Dieser ist kein Graph mehr, sondern eine symmetrische messbare Funktion $W$ auf dem Einheitsquadrat --- ein \Begriff{Graphon}.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Analogie} & Wie reelle Zahlen die Grenzwerte rationaler Folgen sind, sind Graphonen die Grenzwerte von Graphenfolgen.\\
+\textbf{Was erhalten bleibt} & Die relative Häufigkeit jedes festen Teilgraphen.\\
+\textbf{Was verlorengeht} & Alles, was nur endlich viele Ecken betrifft.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Das Modell $G(n,p)$ aus Kapitel~14 hat als Grenzwert die konstante Funktion $W \equiv p$. Mit anderen $W$ lassen sich Netzwerke mit Gemeinschaftsstruktur beliebig genau beschreiben --- der Gegenstand aktueller Arbeiten über inhomogene Zufallsgraphen, etwa zu Zusammenhang und Hamiltonizität in diesem allgemeineren Modell.
+\end{forschung}
+
+\section{Neue Ergebnisse}
+
+\begin{forschung}
+\boxtitelp{Perkolation --- ein Durchbruch von 2026}
+Die \Begriff{Perkolationstheorie} untersucht, was geschieht, wenn man in einem Graphen jede Kante unabhängig mit Wahrscheinlichkeit $p$ behält --- also genau das Modell aus Kapitel~14, angewandt auf einen vorgegebenen Wirtsgraphen statt auf $K_n$.
+
+Die Leitfrage ist dieselbe wie bei Erdős und Rényi: Ab welchem $p$ entsteht eine Riesenkomponente? Für allgemeine Wirtsgraphen war das lange offen.
+
+Im August 2026 wurde die Lösung eines der zentralen Probleme des Gebiets bekannt. Eine Gruppe um \Person{Sahar Diskin}, \Person{Philip Easo}, \Person{Ritvik Ramanan Radhakrishnan}, \Person{Benny Sudakov} und \Person{Vincent Tassion} an der ETH Zürich klärte, unter welchen Bedingungen der Übergang zur Riesenkomponente scharf ist --- eine Frage, die seit Jahrzehnten offen war.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Arbeit ist zum Zeitpunkt dieser Niederschrift frisch, und die Fachöffentlichkeit prüft sie noch. Das ist der Normalfall bei neuen Ergebnissen dieser Größenordnung --- man denke an Babais Zeitschranke. Wer den Stand Ende 2026 wissen will, sollte nachschlagen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{forschung}
+\boxtitelp{Sublineare Expansion}
+\Person{Richard Montgomery} legte im Juli 2026 einen Überblick vor über eine Beweismethode, die in den letzten zehn Jahren mehrere langjährige Probleme gelöst hat: die \Begriff{sublineare Expansion}.
+
+Der Gedanke: Jeder Graph enthält einen Teilgraphen, der sich in einem abgeschwächten Sinne wie ein Expander verhält --- auch dann, wenn der Graph selbst dünn und unregelmäßig ist. Mit dieser Struktur lassen sich Aussagen über dünne Graphen beweisen, die dem Regularitätslemma unzugänglich sind, weil dieses nur bei dichten Graphen greift.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zu den damit gelösten Problemen zählen Fragen über die Existenz großer Minoren und Unterteilungen in Graphen mit gegebenem Durchschnittsgrad --- Fragen, die unmittelbar an die Hadwigersche Vermutung angrenzen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{forschung}
+\boxtitelp{Beweise, die Maschinen prüfen}
+Ein Zug, der das ganze Fach betrifft: Immer mehr Beweise werden in Beweisassistenten formalisiert.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{3.6cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Gegenstand} & \textbf{System}\\
+\midrule
+$2005$ & Vierfarbensatz & Coq\\
+$2012$ & Satz von Feit--Thompson & Coq\\
+$2016$ & Booleansches Pythagoras-Tripel-Problem & SAT-Löser, $200$ TB Beweis\\
+$2023$ & mehrere Kombinatorik-Sätze & Lean\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die dritte Zeile ist bemerkenswert: Der Beweis umfasst zweihundert Terabyte und ist damit der längste je erzeugte. Kein Mensch wird ihn je lesen; geprüft wird er von einem Programm, dessen Korrektheit ihrerseits nachgewiesen ist.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Debatte, die Kapitel~9 beim Vierfarbensatz beschrieben hat, ist damit nicht entschieden, aber verschoben. Die Frage lautet nicht mehr \enquote{Darf man Rechnern trauen?}, sondern \enquote{Was ist ein Beweis, den niemand versteht, aber jeder nachprüfen kann?}}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\section{Eine Liste offener Fragen}
+
+\begin{merksatz}
+\boxtitel{Zwölf Probleme, die Sie jetzt verstehen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{0.7cm}P{5.2cm}P{2.2cm}@{}}
+\toprule
+& \textbf{Frage} & \textbf{Kapitel}\\
+\midrule
+$1$ & Hadwigersche Vermutung für $t \ge 7$ & $8$, $9$\\
+$2$ & Kreuzungszahl von $K_n$ & $8$\\
+$3$ & Ramsey-Zahl $R(5,5)$ & $13$\\
+$4$ & Turán-Problem für bipartite $H$ & $13$\\
+$5$ & Turán-Problem für Hypergraphen & $13$\\
+$6$ & Wachstum von $R(s,s)$: $\sqrt2^{\,s}$ oder $4^s$? & $13$\\
+$7$ & Isomorphie in Polynomialzeit? & $1$\\
+$8$ & Verbotene Minoren für den Torus & $8$\\
+$9$ & Deterministisches $\Oh(m)$-Verfahren für Spannbäume & $5$\\
+$10$ & Rekonstruktionsvermutung & $1$\\
+$11$ & Vermutung von Erdős--Faber--Lovász & $9$\\
+$12$ & Existenz eines lesbaren Vierfarbenbeweises & $9$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zu Nummer 10 --- die Rekonstruktionsvermutung}
+Sie ist die anschaulichste der Liste und stammt von Kelly und Ulam (1942): Legt man von einem Graphen mit $n \ge 3$ Ecken alle $n$ Teilgraphen $G - v$ vor --- ohne zu sagen, welche Ecke jeweils entfernt wurde ---, so ist $G$ dadurch bis auf Isomorphie eindeutig bestimmt.
+
+Für Bäume ist das bewiesen, für planare Graphen ebenfalls, für Graphen mit vielen Kanten auch. Im Allgemeinen ist es seit über achtzig Jahren offen.
+
+\schritt{Zu Nummer 11}
+Die Vermutung von Erdős, Faber und Lovász von 1972 wurde 2021 von \Person{Dong-yeap Kang}, \Person{Tom Kelly}, \Person{Daniela Kühn}, \Person{Abhishek Methuku} und \Person{Deryk Osthus} für alle hinreichend großen $n$ bewiesen. Für kleine $n$ bleibt sie offen --- ein Zustand, der in der modernen Kombinatorik häufig auftritt.
+\end{merksatz}
+
+\section{Was man daraus mitnimmt}
+
+\begin{merksatz}
+\boxtitel{Fünf Beobachtungen}
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Alter schützt nicht} & Königsberg ist von 1736 und gelöst; Hadwiger ist von 1943 und offen. Das Alter einer Frage sagt nichts über ihre Schwierigkeit.\\
+\textbf{Kanten sind leichter} & Fragen über Kanten haben Lösungen; Fragen über Ecken oft nicht. Der Grund ist die Verschmelzbarkeit.\\
+\textbf{Die Werkzeuge wandern} & Das chromatische Polynom scheiterte am Vierfarbensatz und brachte eine Fields-Medaille. Der Flusssatz wurde für Eisenbahnen erfunden und löst Zuteilungsprobleme.\\
+\textbf{Existenz ohne Konstruktion} & Von Erdős' Ramsey-Schranke bis zu den Ramanujan-Graphen: Man weiß, dass es sie gibt, und kennt keine.\\
+\textbf{Die Grenze verschiebt sich} & Was ein Beweis ist, war 1976 anders als heute --- und wird 2050 wieder anders sein.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Schlusswort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Dieser Band begann mit vier Landstücken und sieben Brücken. Er endet bei einer Liste von Fragen, an denen die besten Köpfe des Fachs seit Jahrzehnten arbeiten.
+
+Dazwischen liegt kein einziger Schritt, den Sie nicht nachvollziehen konnten. Das ist die Eigenart dieses Gebiets: Der Weg vom Anfang bis zum Rand des Bekannten ist kurz, und er führt über Beweise, die auf zwei Seiten passen.
+
+Wenn Sie jetzt eine der zwölf Fragen aus dem vorigen Abschnitt aufschlagen und den Stand der Dinge nachlesen, werden Sie verstehen, worum es geht. Mehr kann ein Lehrbuch nicht leisten --- und weniger sollte es nicht wollen.
+\end{minipage}
+\end{center}
+\end{merksatz}

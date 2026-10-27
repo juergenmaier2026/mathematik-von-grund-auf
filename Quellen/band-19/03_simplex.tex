@@ -1,0 +1,814 @@
+\chapter{Das Simplexverfahren}
+
+\section{Die Idee}
+
+\begin{merksatz}
+\boxtitel{Was Kapitel 2 übrig gelassen hat}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Satz 2.5} & Das Optimum liegt in einer Ecke.\\
+\textbf{Satz 2.7} & Ecken sind zulässige Basislösungen.\\
+\textbf{Die Zahl} & $\binom{n+m}{m}$ --- bei $n=m=50$ etwa $10^{29}$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gesucht ist ein Weg, der von Ecke zu Nachbarecke geht, dabei jedes Mal verbessert --- und der beweist, dass man fertig ist, wenn er anhält.}
+\end{minipage}
+\end{center}
+
+\schritt{Die drei Regeln}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Eintritt} & Welche Nichtbasisvariable soll aufgenommen werden?\\
+\textbf{Austritt} & Welche Basisvariable muss dafür weichen?\\
+\textbf{Abbruch} & Woran erkennt man, dass keine Verbesserung mehr möglich ist?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Regel ist die wichtigste und wird am häufigsten übergangen. Ein Verfahren, das anhält, ohne zu begründen warum, liefert einen Punkt --- aber keine Gewissheit, dass es der beste ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Tableau}
+
+\begin{merksatz}
+\boxtitel{Die Aufstellung}
+Wir schreiben das Problem in Gleichungsform und nehmen die Zielfunktion als zusätzliche Zeile hinzu:
+\[ z - \vek{c}^{\!\top}\vek{x} = 0 \]
+
+\schritt{Der Leitfall}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $a$ & $b$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$s_1$ & $1$ & $4$ & $1$ & $0$ & $80$\\
+$s_2$ & $1$ & $2$ & $0$ & $1$ & $60$\\
+\midrule
+$z$ & $-0{,}8$ & $-2{,}0$ & $0$ & $0$ & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Wie man ein Tableau liest}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Basisvariablen} & stehen links; ihre Spalten bilden die Einheitsmatrix.\\
+\textbf{Ihre Werte} & stehen in der rechten Spalte.\\
+\textbf{Nichtbasis\-variablen} & sind null.\\
+\textbf{Die $z$-Zeile} & gibt an, wie sich $z$ ändert, wenn eine Nichtbasisvariable wächst.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die Startlösung}
+Hier ist sie ablesbar: $a = b = 0$, $s_1 = 80$, $s_2 = 60$, $z = 0$. Das ist die Ecke $(0,0)$ --- die Klinik operiert nicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass der Nullpunkt zulässig ist, liegt an $\vek{b} \ge \vek{0}$. Ist eine rechte Seite negativ, so braucht man erst eine Startecke --- das ist die sogenannte erste Phase, die am Ende dieses Kapitels behandelt wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Bedeutung der $z$-Zeile}
+Aus $z - 0{,}8a - 2{,}0b = 0$ folgt
+\[ z = 0{,}8\,a + 2{,}0\,b . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein \kursiv{negativer} Eintrag in der $z$-Zeile bedeutet, dass eine Erhöhung dieser Variablen den Zielwert steigert.} Solange es einen gibt, ist man nicht fertig.
+\end{minipage}
+\end{center}
+
+\schritt{Die Abbruchregel}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Sind alle Einträge der $z$-Zeile nichtnegativ, so ist die aktuelle Basislösung optimal.}
+\end{minipage}
+\end{center}
+
+\kursiv{Warum:} Ist der Eintrag zu $x_j$ gleich $d_j \ge 0$, so liest sich die Zeile als
+\[ z + \sum_j d_j\,x_j = z^{*} \quad\Longrightarrow\quad z = z^{*} - \sum_j d_j\,x_j \le z^{*} , \]
+denn alle $x_j \ge 0$ und alle $d_j \ge 0$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der ganze Optimalitätsbeweis --- zwei Zeilen. Die $z$-Zeile eines abgeschlossenen Tableaus ist ein \kursiv{Nachweis}: Sie zeigt für jeden zulässigen Punkt, dass sein Zielwert höchstens $z^{*}$ beträgt. Kapitel~4 zeigt, dass diese Einträge genau die Lösung des dualen Problems sind.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Leitfall, Schritt für Schritt}
+
+\begin{merksatz}
+\boxtitel{Schritt 1 --- die Eintrittsregel}
+Der negativste Eintrag der $z$-Zeile steht bei $b$ mit $-2{,}0$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$b$ tritt in die Basis ein.} Jeder zusätzliche Eingriff der Art $B$ bringt $2{,}0$ Nutzeneinheiten --- mehr als $A$ mit $0{,}8$.
+\end{minipage}
+\end{center}
+
+\schritt{Die Austrittsregel}
+Wie weit darf $b$ wachsen, ohne dass eine Basisvariable negativ wird?
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Zeile} & \textbf{Gleichung} & \textbf{Grenze}\\
+\midrule
+$s_1$ & $4b + s_1 = 80$ & $b \le 80/4 = 20$\\
+$s_2$ & $2b + s_2 = 60$ & $b \le 60/2 = 30$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die kleinere Schranke gewinnt: $b = 20$.} Bei $b=20$ wird $s_1 = 0$, also verlässt $s_1$ die Basis.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man nennt das den \Begriff{Quotiententest}. Nur Zeilen mit \kursiv{positivem} Koeffizienten in der Eintrittsspalte werden geprüft --- bei negativem Koeffizienten wächst die Basisvariable mit und wird nie negativ. Findet sich gar keine positive, so ist das Problem unbeschränkt.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Austauschschritt}
+Pivotelement ist die $4$ in der $s_1$-Zeile.
+
+\kursiv{Erste Zeile durch $4$:}
+\[ 0{,}25\,a + b + 0{,}25\,s_1 = 20 \]
+
+\kursiv{Zweite Zeile minus $2\times$ erste:}
+\[ (1-0{,}5)a + (2-2)b + (0-0{,}5)s_1 + s_2 = 60-40 \]
+\[ 0{,}5\,a - 0{,}5\,s_1 + s_2 = 20 \]
+
+\kursiv{$z$-Zeile plus $2{,}0\times$ erste:}
+\[ (-0{,}8 + 0{,}5)a + 0{,}5\,s_1 = 0 + 40 \]
+\[ z - 0{,}3\,a + 0{,}5\,s_1 = 40 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $a$ & $b$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$b$ & $\tfrac14$ & $1$ & $\tfrac14$ & $0$ & $20$\\
+$s_2$ & $\tfrac12$ & $0$ & $-\tfrac12$ & $1$ & $20$\\
+\midrule
+$z$ & $-\tfrac{3}{10}$ & $0$ & $\tfrac12$ & $0$ & $\mathbf{40}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die Lösung ist nun $a=0$, $b=20$, $z=40$ --- die Ecke $(0,20)$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Schritt 2}
+Der Eintrag bei $a$ ist $-\frac{3}{10}$, also negativ. \textbf{$a$ tritt ein.}
+
+\schritt{Quotiententest}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+\textbf{Zeile} & \textbf{Koeffizient} & \textbf{Quotient}\\
+\midrule
+$b$ & $\tfrac14$ & $20 \div \tfrac14 = 80$\\
+$s_2$ & $\tfrac12$ & $20 \div \tfrac12 = \mathbf{40}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$s_2$ verlässt die Basis; Pivotelement ist $\frac12$.
+
+\schritt{Der Austausch}
+\kursiv{Zweite Zeile durch $\frac12$:}
+\[ a - s_1 + 2\,s_2 = 40 \]
+
+\kursiv{Erste Zeile minus $\frac14\times$ zweite:}
+\[ b + \left(\tfrac14 + \tfrac14\right)s_1 - \tfrac12\,s_2 = 20 - 10 \]
+\[ b + \tfrac12\,s_1 - \tfrac12\,s_2 = 10 \]
+
+\kursiv{$z$-Zeile plus $\frac{3}{10}\times$ zweite:}
+\[ \left(\tfrac12 - \tfrac{3}{10}\right)s_1 + \tfrac{3}{5}\,s_2 = 40 + 12 \]
+\[ z + \tfrac15\,s_1 + \tfrac35\,s_2 = 52 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $a$ & $b$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$b$ & $0$ & $1$ & $\tfrac12$ & $-\tfrac12$ & $10$\\
+$a$ & $1$ & $0$ & $-1$ & $2$ & $40$\\
+\midrule
+$z$ & $0$ & $0$ & $\tfrac15$ & $\tfrac35$ & $\mathbf{52}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Abbruch}
+Alle Einträge der $z$-Zeile sind nichtnegativ. \textbf{Optimal: $a=40$, $b=10$, $z=52$.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Schritte statt sechs Basislösungen.} Das Verfahren hat die Ecken $(0,0) \to (0,20) \to (40,10)$ besucht und die drei übrigen gar nicht angesehen.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Zahlen in der $z$-Zeile}
+Am Ende steht
+\[ z + \tfrac15\,s_1 + \tfrac35\,s_2 = 52 . \]
+
+\schritt{Was $\frac15$ und $\frac35$ bedeuten}
+$s_1$ ist der ungenutzte Rest an OP-Zeit. Wächst er um eine Stunde, so fällt $z$ um $0{,}2$.
+
+Umgekehrt gelesen: \textbf{Eine zusätzliche OP-Stunde ist $0{,}2$ Nutzeneinheiten wert.}
+
+\schritt{Die Probe}
+Wir lösen den Leitfall erneut mit $81$ statt $80$ OP-Stunden:
+\[ a + 4b = 81, \quad a + 2b = 60 \quad\Longrightarrow\quad 2b = 21,\ b = 10{,}5,\ a = 39 \]
+\[ z = 0{,}8\cdot39 + 2{,}0\cdot10{,}5 = 31{,}2 + 21{,}0 = 52{,}2 \]
+Zuwachs $0{,}2$. \checkmark
+
+Und mit $61$ statt $60$:
+\[ a+4b = 80, \quad a+2b = 61 \quad\Longrightarrow\quad 2b = 19,\ b = 9{,}5,\ a = 42 \]
+\[ z = 33{,}6 + 19{,}0 = 52{,}6 \]
+Zuwachs $0{,}6$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das sind die Schattenpreise aus Aufgabe 1.3 --- und sie fallen beim Simplexverfahren \kursiv{nebenbei} ab, ohne dass man das Problem erneut lösen müsste. Kapitel~4 erklärt, warum, und Kapitel~5 zeigt, in welchem Bereich sie gelten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Warum das Verfahren funktioniert}
+
+\begin{merksatz}
+\boxtitel{Satz 3.1 --- die drei Eigenschaften}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Zulässigkeit} & Jede erzeugte Basislösung ist zulässig.\\
+\textbf{Verbesserung} & Der Zielwert fällt nie.\\
+\textbf{Endlichkeit} & Bei nicht entarteten Problemen bricht das Verfahren nach endlich vielen Schritten ab.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis}
+\schritt{Zulässigkeit}
+Die eintretende Variable wächst von null auf den Wert $t^{*}$, der im Quotiententest bestimmt wurde. Für jede Basiszeile $i$ mit positivem Koeffizienten $\alpha_i$ gilt danach
+\[ x_{B_i}^{\text{neu}} = x_{B_i} - \alpha_i\,t^{*} \ge x_{B_i} - \alpha_i\cdot\frac{x_{B_i}}{\alpha_i} = 0 , \]
+weil $t^{*}$ als \kursiv{kleinster} der Quotienten gewählt wurde.
+
+Für Zeilen mit $\alpha_i \le 0$ wächst $x_{B_i}$ sogar. \checkmark
+
+\schritt{Verbesserung}
+Sei $d < 0$ der Eintrag der eintretenden Variablen in der $z$-Zeile. Nach dem Schritt gilt
+\[ z^{\text{neu}} = z^{\text{alt}} - d\,t^{*} = z^{\text{alt}} + |d|\,t^{*} \ge z^{\text{alt}} . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Echte Verbesserung genau dann, wenn $t^{*} > 0$.} Ist $t^{*} = 0$, so wechselt die Basis, ohne dass sich der Punkt ändert --- das ist Entartung.
+\end{minipage}
+\end{center}
+
+\schritt{Endlichkeit}
+Ist $t^{*} > 0$ in jedem Schritt, so wächst $z$ echt. Damit kann keine Basis zweimal auftreten --- sie hätte denselben Zielwert.
+
+Da es nur endlich viele Basen gibt (nämlich höchstens $\binom{n+m}{m}$), endet das Verfahren. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie die Beweisstruktur: Die Endlichkeit folgt nicht daraus, dass das Verfahren schnell ist --- es kann alle Basen durchlaufen ---, sondern nur daraus, dass es keine zweimal besucht. Das ist eine schwache Aussage, und Abschnitt 3.5 zeigt, dass sie sich nicht wesentlich verbessern lässt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die erste Phase}
+Ist eine rechte Seite negativ, so ist $\vek{x}=\vek{0}$ nicht zulässig, und es fehlt eine Startecke.
+
+\schritt{Der Kunstgriff}
+Man fügt \Begriff{künstliche Variablen} $y_i \ge 0$ hinzu und löst zunächst
+\[ \text{minimiere}\quad \sum_i y_i \qquad\text{unter}\qquad A\vek{x} + \vek{y} = \vek{b} . \]
+
+Dieses Hilfsproblem hat die offensichtliche Startlösung $\vek{x}=\vek{0}$, $\vek{y}=\vek{b}$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Minimum $=0$} & Alle $y_i$ sind null; die gefundene Basis ist eine zulässige Ecke des ursprünglichen Problems.\\
+\textbf{Minimum $>0$} & Das ursprüngliche Problem hat \kursiv{keine} zulässige Lösung.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der zweite Fall ist eine wertvolle Nebenauskunft: Das Verfahren beweist die Unzulässigkeit, statt sie nur zu vermuten. Und die künstlichen Variablen mit positivem Endwert zeigen sogar, \kursiv{welche} Bedingungen einander widersprechen --- die häufigste Anwendung bei der Fehlersuche in großen Modellen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Entartung und Kreiseln}
+Ist im Quotiententest der kleinste Quotient null, so wechselt die Basis, ohne dass sich der Punkt bewegt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dann wächst $z$ nicht, und das Endlichkeitsargument bricht zusammen.} Theoretisch kann das Verfahren in einen Kreis geraten und ewig laufen.
+\end{minipage}
+\end{center}
+
+\schritt{Wie oft das vorkommt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Entartung} & Sehr häufig. In Dienstplanmodellen sind die meisten Ecken entartet.\\
+\textbf{Kreiseln} & Praktisch nie beobachtet. Die bekannten Beispiele sind eigens dafür gebaut.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Abhilfe}
+\Person{Robert Bland} gab 1977 eine Regel an, die Kreiseln beweisbar ausschließt:
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wähle stets die Variable mit dem \kursiv{kleinsten Index}, sowohl beim Eintritt --- unter allen mit negativem Eintrag --- als auch beim Austritt unter allen mit kleinstem Quotienten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Regel ist beweisbar endlich und in der Praxis langsam. Man verwendet sie deshalb nur als Notbremse: Erst wenn ein Tableau mehrere Schritte lang keinen Fortschritt gemacht hat, schaltet man auf Bland um und danach wieder zurück.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Der schlechteste Fall}
+\Person{Victor Klee} und \Person{George Minty} gaben 1972 eine Familie von Problemen an, bei denen das Simplexverfahren mit der Regel des negativsten Eintrags \kursiv{alle} Ecken besucht.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.0cm}P{3.2cm}@{}}
+\toprule
+$n$ & \textbf{Schritte} & \\
+\midrule
+$3$ & $7$ & \\
+$10$ & $1023$ & \\
+$20$ & $10^{6}$ & \\
+$50$ & $1{,}1\cdot10^{15}$ & \textcolor{akzent}{aussichtslos}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die Zahl beträgt $2^{n}-1$.
+
+\schritt{Die Bauweise}
+Der zulässige Bereich ist ein leicht verzerrter Würfel. Die Verzerrung ist so gewählt, dass die Eintrittsregel jedes Mal die Ecke wählt, die auf dem längstmöglichen Weg zum Optimum liegt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Beispiel ist konstruiert, und genau das ist die Pointe: Solche Probleme kommen in der Anwendung nicht vor. In der Praxis braucht das Simplexverfahren typischerweise zwischen $2m$ und $3m$ Schritte --- bei $m=50$ also gut hundert statt $10^{15}$.}
+\end{minipage}
+\end{center}
+
+\schritt{Die offene Frage}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Warum verhält sich ein im schlechtesten Fall exponentielles Verfahren in der Praxis durchweg gutartig?}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine Teilantwort gaben Spielman und Teng 2004 mit der \Begriff{geglätteten Analyse}: Stört man die Daten eines beliebigen Problems um ein winziges zufälliges Maß, so ist die erwartete Schrittzahl polynomial. Die konstruierten schlechten Fälle sind also nicht nur selten, sondern \kursiv{instabil} --- die kleinste Störung zerstört sie.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Ein vollständiger Durchlauf}
+Lösen Sie mit dem Simplexverfahren
+\[ \max\ 5x_1+4x_2 \quad\text{unter}\quad 6x_1+4x_2 \le 24,\quad x_1+2x_2 \le 6,\quad \vek{x}\ge\vek{0} \]
+und vergleichen Sie mit Aufgabe 2.2.
+
+\loesung
+\schritt{Schritt 1 --- Das Starttableau}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $x_1$ & $x_2$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$s_1$ & $6$ & $4$ & $1$ & $0$ & $24$\\
+$s_2$ & $1$ & $2$ & $0$ & $1$ & $6$\\
+\midrule
+$z$ & $-5$ & $-4$ & $0$ & $0$ & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Erster Austausch}
+Negativster Eintrag: $-5$ bei $x_1$. Quotienten: $24/6 = 4$ und $6/1 = 6$. Kleinster: $4$, also verlässt $s_1$. Pivot $= 6$.
+
+\kursiv{Erste Zeile durch 6:} $x_1 + \frac23 x_2 + \frac16 s_1 = 4$
+
+\kursiv{Zweite minus erste:} $\left(2-\frac23\right)x_2 - \frac16 s_1 + s_2 = 2$, also $\frac43 x_2 - \frac16 s_1 + s_2 = 2$
+
+\kursiv{$z$-Zeile plus $5\times$ erste:} $\left(-4+\frac{10}{3}\right)x_2 + \frac56 s_1 = 20$, also $-\frac23 x_2 + \frac56 s_1$
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $x_1$ & $x_2$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$x_1$ & $1$ & $\tfrac23$ & $\tfrac16$ & $0$ & $4$\\
+$s_2$ & $0$ & $\tfrac43$ & $-\tfrac16$ & $1$ & $2$\\
+\midrule
+$z$ & $0$ & $-\tfrac23$ & $\tfrac56$ & $0$ & $20$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Zweiter Austausch}
+$-\frac23$ bei $x_2$. Quotienten: $4 \div \frac23 = 6$ und $2 \div \frac43 = \frac32$. Kleinster: $\frac32$, also verlässt $s_2$. Pivot $= \frac43$.
+
+\kursiv{Zweite Zeile mal $\frac34$:} $x_2 - \frac18 s_1 + \frac34 s_2 = \frac32$
+
+\kursiv{Erste minus $\frac23\times$ zweite:} $x_1 + \left(\frac16 + \frac{1}{12}\right)s_1 - \frac12 s_2 = 4 - 1 = 3$, also $x_1 + \frac14 s_1 - \frac12 s_2 = 3$
+
+\kursiv{$z$-Zeile plus $\frac23\times$ zweite:} $\left(\frac56 - \frac{1}{12}\right)s_1 + \frac12 s_2 = 20 + 1 = 21$, also $\frac34 s_1 + \frac12 s_2$
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $x_1$ & $x_2$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$x_1$ & $1$ & $0$ & $\tfrac14$ & $-\tfrac12$ & $3$\\
+$x_2$ & $0$ & $1$ & $-\tfrac18$ & $\tfrac34$ & $\tfrac32$\\
+\midrule
+$z$ & $0$ & $0$ & $\tfrac34$ & $\tfrac12$ & $\mathbf{21}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Abbruch und Vergleich}
+Alle $z$-Einträge nichtnegativ: \textbf{$x_1 = 3$, $x_2 = 1{,}5$, $z = 21$} --- genau das Ergebnis aus Aufgabe 2.2. \checkmark
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Aufgabe 2.2} & \textbf{Simplex}\\
+\midrule
+Geprüfte Basen & $6$ & $3$\\
+davon unzulässig & $2$ & $0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Die Schattenpreise}
+$\frac34$ für die erste, $\frac12$ für die zweite Beschränkung.
+
+\kursiv{Probe:} Mit $25$ statt $24$ in der ersten Bedingung:
+\[ x_1 + 2x_2 = 6 \ \Rightarrow\ x_1 = 6-2x_2; \quad 6(6-2x_2)+4x_2 = 25 \ \Rightarrow\ -8x_2 = -11 \]
+\[ x_2 = 1{,}375, \quad x_1 = 3{,}25, \quad z = 16{,}25+5{,}5 = 21{,}75 \]
+Zuwachs $0{,}75 = \frac34$. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Unbeschränktheit erkennen}
+Wenden Sie das Simplexverfahren an auf
+\[ \max\ x_1+x_2 \quad\text{unter}\quad x_1-x_2 \le 2,\quad -x_1+x_2 \le 3,\quad \vek{x}\ge\vek{0} . \]
+
+\loesung
+\schritt{Schritt 1 --- Das Starttableau}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $x_1$ & $x_2$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$s_1$ & $1$ & $-1$ & $1$ & $0$ & $2$\\
+$s_2$ & $-1$ & $1$ & $0$ & $1$ & $3$\\
+\midrule
+$z$ & $-1$ & $-1$ & $0$ & $0$ & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Erster Austausch}
+Beide Einträge sind $-1$; wir wählen $x_1$.
+
+Quotienten: Nur die erste Zeile hat einen positiven Koeffizienten ($1$), Quotient $2$. Die zweite hat $-1$ und wird übersprungen.
+
+$s_1$ verlässt die Basis, Pivot $=1$.
+
+\kursiv{Erste Zeile bleibt:} $x_1 - x_2 + s_1 = 2$\\
+\kursiv{Zweite plus erste:} $0\cdot x_2 + s_1 + s_2 = 5$\\
+\kursiv{$z$-Zeile plus erste:} $-2x_2 + s_1 = 2$
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $x_1$ & $x_2$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$x_1$ & $1$ & $-1$ & $1$ & $0$ & $2$\\
+$s_2$ & $0$ & $0$ & $1$ & $1$ & $5$\\
+\midrule
+$z$ & $0$ & $-2$ & $1$ & $0$ & $2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Der Abbruch anderer Art}
+$x_2$ hat den Eintrag $-2$ und müsste eintreten. Aber:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+\textbf{Zeile} & \textbf{Koeffizient} & \textbf{Quotient}\\
+\midrule
+$x_1$ & $-1$ & \textcolor{akzent}{keiner}\\
+$s_2$ & $0$ & \textcolor{akzent}{keiner}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein positiver Koeffizient in der Spalte --- das Problem ist unbeschränkt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Deutung}
+Die Zeile $x_1 - x_2 + s_1 = 2$ besagt bei $s_1=0$:
+\[ x_1 = 2 + x_2 \]
+Man kann $x_2$ beliebig wachsen lassen; $x_1$ wächst mit, und alle Bedingungen bleiben erfüllt.
+
+\kursiv{Probe:} $x_1 = 2+t$, $x_2 = t$ für $t \ge 0$:
+\[ x_1-x_2 = 2 \le 2 \ \checkmark \qquad -x_1+x_2 = -2 \le 3 \ \checkmark \]
+\[ z = 2+2t \to \infty \]
+
+\schritt{Schritt 5 --- Der Strahl}
+Das Tableau liefert die Richtung unmittelbar: Die Spalte von $x_2$ mit umgekehrtem Vorzeichen, ergänzt um eine $1$ an der Stelle von $x_2$:
+\[ \vek{d} = (1,\ 1)^{\!\top} \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Ein gutes Verfahren meldet nicht nur \enquote{unbeschränkt}, sondern gibt diesen Strahl aus. Er ist die nützlichste Fehlermeldung, die man bekommen kann: Er zeigt genau, in welche Richtung das Modell keine Grenze setzt --- und damit, welche Bedingung fehlt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Mehrere Optima im Tableau erkennen}
+Lösen Sie den Leitfall mit $c_B = 1{,}6$ statt $2{,}0$ und bestimmen Sie alle Optimallösungen.
+
+\loesung
+\schritt{Schritt 1 --- Erster Austausch}
+$-1{,}6$ bei $b$; Quotienten $80/4=20$ und $60/2=30$; $s_1$ raus, Pivot $4$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $a$ & $b$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$b$ & $\tfrac14$ & $1$ & $\tfrac14$ & $0$ & $20$\\
+$s_2$ & $\tfrac12$ & $0$ & $-\tfrac12$ & $1$ & $20$\\
+\midrule
+$z$ & $-\tfrac25$ & $0$ & $\tfrac25$ & $0$ & $32$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{$z$-Zeile:} $-0{,}8 + 1{,}6\cdot\frac14 = -0{,}8+0{,}4 = -0{,}4 = -\frac25$ \checkmark
+
+\schritt{Schritt 2 --- Zweiter Austausch}
+$-\frac25$ bei $a$; Quotienten $80$ und $40$; $s_2$ raus, Pivot $\frac12$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $a$ & $b$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$b$ & $0$ & $1$ & $\tfrac12$ & $-\tfrac12$ & $10$\\
+$a$ & $1$ & $0$ & $-1$ & $2$ & $40$\\
+\midrule
+$z$ & $0$ & $0$ & $\mathbf{0}$ & $\tfrac45$ & $\mathbf{48}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{$z$-Zeile:} $\frac25 + \left(-\frac25\right)\cdot(-1)\cdot(-1)$ --- genauer: $\frac25 - \frac25 \cdot 1 = 0$ für $s_1$; $\frac25 \cdot 2 = \frac45$ für $s_2$; rechts $32 + \frac25\cdot 40 = 48$.
+
+\schritt{Schritt 3 --- Der Befund}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$s_1$ ist Nichtbasisvariable und hat den Eintrag null.} Man kann sie in die Basis aufnehmen, ohne dass sich $z$ ändert.
+\end{minipage}
+\end{center}
+
+Das ist das Kennzeichen mehrerer Optimallösungen.
+
+\schritt{Schritt 4 --- Die zweite Ecke berechnen}
+$s_1$ tritt ein. Quotienten:
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Zeile} & \textbf{Koeffizient} & \textbf{Quotient}\\
+\midrule
+$b$ & $\tfrac12$ & $10 \div \tfrac12 = \mathbf{20}$\\
+$a$ & $-1$ & \textcolor{akzent}{keiner}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$b$ verlässt die Basis, Pivot $\frac12$.
+
+\kursiv{Erste Zeile mal 2:} $2b + s_1 - s_2 = 20$\\
+\kursiv{Zweite plus erste:} $a + 2b + 0\cdot s_1 + s_2 = 60$
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Basis} & $a$ & $b$ & $s_1$ & $s_2$ & \textbf{rechts}\\
+\midrule
+$s_1$ & $0$ & $2$ & $1$ & $-1$ & $20$\\
+$a$ & $1$ & $2$ & $0$ & $1$ & $60$\\
+\midrule
+$z$ & $0$ & $0$ & $0$ & $\tfrac45$ & $\mathbf{48}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Die zweite Lösung}
+$a = 60$, $b = 0$, $s_1 = 20$, $z = 48$ --- die Ecke $(60,0)$.
+
+\kursiv{Probe:} $0{,}8\cdot60 = 48$ \checkmark; OP-Zeit $60 \le 80$, Rest $s_1 = 20$ \checkmark
+
+\schritt{Schritt 6 --- Alle Optimallösungen}
+Nach Aufgabe 2.3 ist die Menge der Optimallösungen konvex, enthält also die ganze Strecke:
+\[ \vek{x}(\lambda) = \lambda\,(40,10) + (1-\lambda)\,(60,0) = \bigl(60-20\lambda,\ 10\lambda\bigr), \qquad \lambda\in[0,1] \]
+
+\kursiv{Probe für $\lambda = \frac12$:} Der Punkt $(50,\ 5)$.
+\[ \text{OP: } 50+20 = 70 \le 80 \ \checkmark \qquad \text{Betten: } 50+10 = 60 \le 60 \ \checkmark \]
+\[ z = 0{,}8\cdot50 + 1{,}6\cdot5 = 40+8 = 48 \ \checkmark \]
+
+\schritt{Schritt 7 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Klinik kann zwischen $60$ und $50$ Eingriffen der Art $A$ frei wählen --- der Nutzen ist derselbe. Erst ein zweites Ziel entscheidet: Bei der Zahl der Behandelten gewinnt $(60,0)$, bei der freien OP-Zeit ebenfalls. \textbf{Das Tableau hat damit nicht nur eine Lösung geliefert, sondern einen Spielraum} --- und das ist in der Anwendung oft die wertvollere Auskunft.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Verfahren, das versteckt wurde}
+\Person{George Dantzig} entwickelte das Simplexverfahren im Frühjahr 1947 im Auftrag der US-Luftwaffe. Er berichtete später, die entscheidende Einsicht sei die Beschränkung auf Ecken gewesen --- er habe zunächst versucht, sich durch das Innere zu bewegen, und sei damit nicht weitergekommen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Ironie: Sechzig Jahre später sind Innere-Punkte-Verfahren die stärkste Alternative zum Simplexverfahren. Dantzigs ursprünglicher Zugang war nicht falsch --- nur seiner Zeit voraus, weil ihm die nichtlineare Theorie fehlte, die Kapitel~8 behandelt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Geheimhaltung}
+Das Verfahren wurde bis 1951 als militärisch bedeutsam eingestuft und erst danach veröffentlicht. In der Zwischenzeit war es in der Planung der Luftwaffe bereits im Einsatz.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dantzig erzählte gern, wie er 1947 \Person{John von Neumann} das Problem vortrug. Von Neumann hörte einige Minuten zu, unterbrach ihn und entwickelte in etwa anderthalb Stunden die gesamte Dualitätstheorie --- er hatte die Analogie zu seiner Spieltheorie sofort erkannt. Dantzig nannte es die lehrreichste Stunde seines Lebens.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Name}
+\enquote{Simplex} bezeichnet in der Geometrie das einfachste Polyeder einer Dimension --- Strecke, Dreieck, Tetraeder. Der Name stammt aus einer frühen Fassung, in der ein solches Gebilde vorkam; im heutigen Verfahren spielt es keine Rolle mehr.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das Verfahren wurde 2000 in eine Liste der zehn einflussreichsten Algorithmen des 20.\ Jahrhunderts aufgenommen --- als einziges, das ausschließlich der Optimierung zuzurechnen ist.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Was sich seit Dantzig geändert hat}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Revidiertes Verfahren} & Man führt nicht das ganze Tableau mit, sondern nur die Inverse der Basismatrix --- bei dünn besetzten Problemen ein Unterschied von Größenordnungen.\\
+\textbf{Zerlegungen} & Statt der Inversen speichert man eine Faktorisierung und aktualisiert sie. Das ist numerisch stabiler.\\
+\textbf{Eintrittsregeln} & Die Regel des negativsten Eintrags ist nicht die beste. Verfahren, die den erwarteten Fortschritt je Rechenaufwand schätzen, sind deutlich schneller.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist bemerkenswert: Die naheliegende Regel --- nimm die Variable mit dem größten Gewinn je Einheit --- ist in der Praxis mittelmäßig, weil sie nicht berücksichtigt, wie weit die Variable überhaupt wachsen kann. Bessere Regeln schätzen das Produkt aus Gewinnrate und Schrittweite ab.}
+\end{minipage}
+\end{center}
+
+\schritt{Die offene theoretische Frage}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gibt es eine Eintrittsregel, die beweisbar mit polynomial vielen Schritten auskommt?}
+\end{minipage}
+\end{center}
+
+Für jede bisher vorgeschlagene deterministische Regel wurden Gegenbeispiele mit exponentieller Schrittzahl gefunden. Auch für mehrere zufallsgestützte Regeln gelang das --- ein Ergebnis von Friedmann, Hansen und Zwick aus dem Jahr 2011, das eine lange gehegte Hoffnung beendete.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Frage hängt mit einem rein geometrischen Problem zusammen: Wie weit können zwei Ecken eines Polyeders mit $m$ Seitenflächen in $n$ Dimensionen höchstens voneinander entfernt sein, gemessen in Kanten? Die Hirsch-Vermutung behauptete $m-n$; sie wurde 2010 von Santos widerlegt. Eine polynomiale Schranke ist weiterhin weder bewiesen noch ausgeschlossen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Das Tableau} & lesen, aufstellen, austauschen\\
+\textbf{Drei Regeln} & Eintritt, Quotiententest, Abbruch\\
+\textbf{Satz 3.1} & zulässig, verbessernd, endlich\\
+\textbf{Sonderfälle} & unbeschränkt, mehrdeutig, entartet\\
+\textbf{Die $z$-Zeile} & liefert nebenbei die Schattenpreise\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~I. Im nächsten Kapitel fragen wir, woher die Zahlen der $z$-Zeile kommen --- und finden hinter jedem Optimierungsproblem ein zweites.}
+\end{minipage}
+\end{center}
+\end{merksatz}

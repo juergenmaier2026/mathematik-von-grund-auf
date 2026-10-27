@@ -1,0 +1,648 @@
+\chapter{Netzwerke und Heterogenität}
+
+\section{Die Annahme, die nie stimmt}
+
+Die Kapitel~7 und 8 setzten voraus, dass jeder jeden mit gleicher Wahrscheinlichkeit trifft. Das ist die erste der sechs Annahmen aus Abschnitt 7.1, und sie ist die falscheste.
+
+\begin{merksatz}
+\boxtitel{Was tatsächlich vorliegt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Feste Partner} & Menschen treffen überwiegend dieselben Personen wieder --- Familie, Kollegen, Nachbarn.\\
+\textbf{Sehr ungleiche Zahlen} & Manche haben drei enge Kontakte täglich, andere dreihundert.\\
+\textbf{Gruppen} & Kontakte bilden Klumpen: Wer meine Freunde kennt, kennt oft auch einander.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Statt einer durchmischten Masse liegt ein \Begriff{Netzwerk} vor: Personen als Ecken, mögliche Übertragungswege als Kanten. Die Werkzeuge dafür stehen in Band 16.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\begin{scope}
+\foreach \i in {0,...,7} {
+  \node[knoten] (h\i) at ({45*\i}:1.1) {};
+}
+\foreach \i in {0,...,7} \foreach \j in {0,...,7} {
+  \ifnum\i<\j \draw[kante, grau!25] (h\i)--(h\j); \fi
+}
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.8) {Durchmischung};
+\end{scope}
+\begin{scope}[xshift=5.4cm]
+\node[knoten] (a) at (0,0.9) {};
+\node[knotenr] (b) at (0,0) {};
+\node[knoten] (c) at (-0.9,-0.7) {};
+\node[knoten] (d) at (0.9,-0.7) {};
+\node[knoten] (e) at (-1.6,0.5) {};
+\node[knoten] (f) at (1.6,0.5) {};
+\node[knoten] (g) at (-1.5,-1.4) {};
+\node[knoten] (h) at (1.5,-1.4) {};
+\draw[kante] (b)--(a); \draw[kante] (b)--(c); \draw[kante] (b)--(d);
+\draw[kante] (b)--(e); \draw[kante] (b)--(f);
+\draw[kante] (c)--(g); \draw[kante] (d)--(h);
+\draw[kante] (a)--(e); \draw[kante] (a)--(f);
+\node[font=\scriptsize\itshape, color=grau] at (0,-2.2) {Netzwerk};
+\node[font=\scriptsize, color=akzent, anchor=west] at (0.25,0.05) {viele Kontakte};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 9.1 --- Gradverteilung}
+Der \Begriff{Grad} $k$ einer Person ist die Zahl ihrer Kontakte. Die \Begriff{Gradverteilung} $p_k$ gibt an, welcher Anteil der Bevölkerung genau $k$ Kontakte hat.
+
+Wir schreiben
+\[ \langle k\rangle = \sum_k k\,p_k \qquad\text{und}\qquad \langle k^2\rangle = \sum_k k^2\,p_k \]
+für den Mittelwert und den Mittelwert der Quadrate.
+\end{definition}
+
+\section{Das Freundschaftsparadoxon}
+
+\begin{merksatz}
+\boxtitel{Wen man erreicht, wenn man einer Kante folgt}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Person mit $k$ Kontakten ist über $k$ Kanten erreichbar. Folgt man einer zufällig gewählten Kante, so landet man bei kontaktreichen Personen mit entsprechend höherer Wahrscheinlichkeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Verteilung am Kantenende}
+Die Wahrscheinlichkeit, über eine zufällige Kante bei einer Person vom Grad $k$ zu landen, ist proportional zu $k\,p_k$. Nach Normierung:
+\[ q_k = \frac{k\,p_k}{\langle k\rangle} \]
+
+\schritt{Der mittlere Grad dort}
+\[ \sum_k k\,q_k = \sum_k k\cdot\frac{k\,p_k}{\langle k\rangle} = \frac{\langle k^2\rangle}{\langle k\rangle} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Kontakt einer zufälligen Person hat im Mittel $\langle k^2\rangle/\langle k\rangle$ Kontakte --- und das ist stets mindestens so groß wie $\langle k\rangle$.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Nachweis}
+Nach dem Verschiebungssatz (Band 17, Satz 2.11) ist
+\[ \langle k^2\rangle - \langle k\rangle^2 = \operatorname{Var}(k) \ge 0 \quad\Longrightarrow\quad \frac{\langle k^2\rangle}{\langle k\rangle} \ge \langle k\rangle . \]
+Gleichheit gilt nur, wenn alle denselben Grad haben.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist das \Begriff{Freundschaftsparadoxon}: Die eigenen Freunde haben im Mittel mehr Freunde als man selbst. Es gilt für fast jede Person und ist kein psychologischer Effekt, sondern eine Folge der Auswahl --- kontaktreiche Menschen tauchen in mehr Freundeslisten auf.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 9.2 --- die Reproduktionszahl auf einem Netz}
+Sei $T$ die Wahrscheinlichkeit, dass eine Übertragung entlang einer Kante stattfindet. Dann ist
+\[ \Rnull \;=\; T\left(\frac{\langle k^2\rangle}{\langle k\rangle} - 1\right) . \]
+
+\schritt{Begründung}
+Eine angesteckte Person wurde über eine Kante erreicht. Sie hat im Mittel $\langle k^2\rangle/\langle k\rangle$ Kontakte, von denen einer die Quelle war --- also bleiben
+\[ \frac{\langle k^2\rangle}{\langle k\rangle} - 1 \]
+mögliche Empfänger. Über jede dieser Kanten überträgt sie mit Wahrscheinlichkeit $T$. $\blacksquare$
+
+\schritt{Die Schwelle}
+\[ \Rnull > 1 \quad\Longleftrightarrow\quad T > T_c := \frac{1}{\frac{\langle k^2\rangle}{\langle k\rangle} - 1} = \frac{\langle k\rangle}{\langle k^2\rangle - \langle k\rangle} \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Zwei Netze mit demselben Durchschnitt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{1.4cm}P{1.6cm}P{2.0cm}@{}}
+\toprule
+\textbf{Netz} & $\langle k\rangle$ & $\langle k^2\rangle$ & $T_c$\\
+\midrule
+alle $k=10$ & $10$ & $100$ & $0{,}1111$\\
+$90\,\%$: $k=5$, $10\,\%$: $k=55$ & $10$ & $325$ & $0{,}0317$\\
+$99\,\%$: $k=5$, $1\,\%$: $k=505$ & $10$ & $2575$ & $\mathbf{0{,}0039}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Rechnung für die mittlere Zeile:}
+\[ \langle k\rangle = 0{,}9\cdot5 + 0{,}1\cdot55 = 4{,}5+5{,}5 = 10 \]
+\[ \langle k^2\rangle = 0{,}9\cdot25 + 0{,}1\cdot3025 = 22{,}5+302{,}5 = 325 \]
+\[ \frac{\langle k^2\rangle}{\langle k\rangle} = 32{,}5, \qquad T_c = \frac{1}{31{,}5} = 0{,}0317 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Alle drei Netze haben dieselbe mittlere Kontaktzahl. Die Ausbreitungsschwelle unterscheidet sich um den Faktor $28$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist die entscheidende Einsicht dieses Kapitels formuliert: \textbf{Nicht die mittlere Kontaktzahl bestimmt die Ausbreitung, sondern ihre Streuung.} Eine wenige Personen umfassende Gruppe mit sehr vielen Kontakten kann eine Epidemie tragen, die in einer gleichmäßigen Bevölkerung derselben Kontaktzahl erloschen wäre.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Netze ohne Schwelle}
+In vielen gemessenen Netzen folgt die Gradverteilung näherungsweise einem Potenzgesetz:
+\[ p_k \sim k^{-\alpha} \qquad\text{mit}\qquad 2 < \alpha \le 3 . \]
+
+\schritt{Was dann mit $\langle k^2\rangle$ geschieht}
+\[ \langle k^2\rangle = \sum_k k^2\,p_k \sim \sum_k k^{2-\alpha} \]
+Für $\alpha \le 3$ ist der Exponent $2-\alpha \ge -1$, und die Summe \kursiv{wächst über jede Grenze}, wenn das Netz groß wird.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dann ist $T_c = 0$: Es gibt keine Schwelle.} Jede noch so kleine Übertragungswahrscheinlichkeit genügt für eine Ausbreitung.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieses Ergebnis von Pastor-Satorras und Vespignani (2001) war eine Überraschung. Es erklärte, warum sich Rechnerviren in Netzen halten konnten, deren Ansteckungswahrscheinlichkeit weit unter jeder klassischen Schwelle lag --- und es hat die Netzwerkepidemiologie begründet.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Einschränkung}
+Reale Netze sind endlich. Dann ist $\langle k^2\rangle$ endlich und die Schwelle nur \kursiv{sehr klein}, nicht null. Für praktische Zwecke läuft es auf dasselbe hinaus.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ob menschliche Kontaktnetze wirklich einem Potenzgesetz folgen, ist umstritten. Bei Sexualkontakten deuten Befragungen darauf hin; bei Alltagskontakten spricht mehr für eine Verteilung mit endlichem, aber großem zweitem Moment. Die Folgerung bleibt in beiden Fällen dieselbe: Die Streuung zählt mehr als der Mittelwert.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Überstreuung und Superspreading}
+
+\begin{merksatz}
+\boxtitel{Nicht jeder steckt gleich viele an}
+$\Rnull$ ist ein \kursiv{Mittelwert}. Die tatsächliche Zahl der Ansteckungen je Person schwankt erheblich.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Man beschreibt sie durch eine negative Binomialverteilung mit dem \Begriff{Überstreuungsparameter} $k$. Kleines $k$ bedeutet starke Streuung.
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.8cm}P{3.4cm}@{}}
+\toprule
+$k$ & \textbf{Bedeutung} & \textbf{Beispiel}\\
+\midrule
+$\to\infty$ & Poisson, wenig Streuung & Modelle der Kapitel 7--8\\
+$1$ & geometrisch & \\
+$0{,}5$ & stark gestreut & \\
+$\approx 0{,}16$ & sehr stark & SARS (2003)\\
+$\approx 0{,}1$ & extrem & Masernausbrüche in Gruppen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Wie ungleich die Übertragung verteilt ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{4.4cm}@{}}
+\toprule
+$k$ & \textbf{Anteil der Übertragungen durch die obersten $20\,\%$}\\
+\midrule
+$5{,}0$ & $43{,}8\,\%$\\
+$1{,}0$ & $58{,}0\,\%$\\
+$0{,}5$ & $69{,}2\,\%$\\
+$0{,}16$ & $\mathbf{90{,}3\,\%}$\\
+$0{,}1$ & $96{,}5\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die vorletzte Zeile ist die berühmte Zwanzig-Achtzig-Regel: Bei $k \approx 0{,}16$ verursachen zwanzig Prozent der Fälle rund neunzig Prozent der Übertragungen. Der Rest steckt niemanden oder nur einen an.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 9.3 --- Wahrscheinlichkeit, dass ein Einzelfall folgenlos bleibt}
+Wird ein einzelner Fall eingeschleppt, so erlischt die Kette mit Wahrscheinlichkeit $q$, wobei $q$ die kleinste Lösung von
+\[ q = \left(1 + \frac{\Rnull}{k}(1-q)\right)^{-k} \]
+in $[0,1]$ ist.
+
+\schritt{Für $\Rnull = 2{,}5$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$k$ & \textbf{erlischt} & \textbf{Ausbruch}\\
+\midrule
+$\to\infty$ & $10{,}7\,\%$ & $89{,}3\,\%$\\
+$5{,}0$ & $17{,}9\,\%$ & $82{,}1\,\%$\\
+$1{,}0$ & $40{,}0\,\%$ & $60{,}0\,\%$\\
+$0{,}5$ & $55{,}8\,\%$ & $44{,}2\,\%$\\
+$0{,}16$ & $\mathbf{79{,}5\,\%}$ & $\mathbf{20{,}5\,\%}$\\
+$0{,}1$ & $86{,}1\,\%$ & $13{,}9\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei gleichem $\Rnull = 2{,}5$ erlischt eine Einschleppung mal in elf, mal in acht von zehn Fällen.} Der Unterschied liegt allein in der Streuung.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei starker Überstreuung sind die meisten Einschleppungen folgenlos --- und die wenigen, die nicht folgenlos bleiben, wachsen umso schneller. Das erklärt ein Muster, das bei SARS 2003 auffiel: lange Zeit nichts, dann plötzlich ein Ausbruch mit Dutzenden Fällen aus einer einzigen Quelle.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was daraus für Maßnahmen folgt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Ausrottung ist leichter} & Weil die meisten Ketten von selbst erlöschen, genügen weniger Maßnahmen als bei gleichmäßiger Übertragung.\\
+\textbf{Rückwärts\-verfolgung} & Sucht man von einem Fall aus \kursiv{rückwärts} nach der Quelle, so landet man mit hoher Wahrscheinlichkeit bei einem Superspreader --- und damit bei einem ganzen Bündel weiterer Fälle.\\
+\textbf{Gelegenheiten statt Personen} & Superspreading hängt meist weniger an der Person als an der Gelegenheit: enge Räume, viele Menschen, lange Dauer, laute Umgebung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum die Rückwärtsverfolgung wirkt}
+Das ist genau das Freundschaftsparadoxon aus Abschnitt 9.2, angewandt auf Ansteckungsketten: Ein zufällig gefundener Fall wurde mit erhöhter Wahrscheinlichkeit von jemandem angesteckt, der viele angesteckt hat.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die übliche Kontaktverfolgung sucht vorwärts --- wen hat dieser Fall angesteckt? Die Rückwärtsverfolgung fragt zuerst: Wer hat ihn angesteckt? Und findet dadurch häufig ein ganzes Ereignis statt einzelner Kontakte. Modellrechnungen legen nahe, dass sie bei stark überstreuten Erregern zwei- bis dreimal so viele Fälle findet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was auch das Netzwerkmodell nicht leistet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Festes Netz} & Kontakte ändern sich täglich. Ein Netz aus Befragungsdaten ist eine Momentaufnahme.\\
+\textbf{Keine Klumpen} & Satz 9.2 setzt voraus, dass die Kontakte eines Menschen einander \kursiv{nicht} kennen. Tatsächlich tun sie es --- und dann trifft eine Übertragung oft auf bereits Angesteckte.\\
+\textbf{Messbarkeit} & $\langle k^2\rangle$ hängt vom längsten Ausläufer der Verteilung ab. Genau dort sind Befragungsdaten am unzuverlässigsten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Das ist die unangenehmste Einschränkung: Die entscheidende Größe wird von wenigen extremen Werten bestimmt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine einzige Person mit $500$ Kontakten in einer Stichprobe von $1000$ verändert $\langle k^2\rangle$ erheblich --- und damit die berechnete Schwelle.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist derselbe Sachverhalt, der in Band 17, Kapitel~2 unter dem Stichwort Bruchpunkt behandelt wurde: Größen, die auf Quadraten beruhen, sind nicht robust. Man sollte sie mit einem Unsicherheitsbereich angeben --- und weiß dann, dass dieser groß ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Bilden die Kontakte Dreiecke, so verläuft die Ausbreitung langsamer als berechnet: Ein Teil der Übertragungsversuche trifft auf Personen, die bereits angesteckt sind.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Grund, warum Haushalte und geschlossene Einrichtungen sich schnell durchseuchen und danach nichts mehr beitragen. Modelle mit Haushaltsstruktur behandeln das gesondert --- und kommen zu deutlich anderen Vorhersagen als reine Netzwerkmodelle.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.1 --- Schwellen auf zwei Netzen}
+Zwei Bevölkerungen haben dieselbe mittlere Kontaktzahl $\langle k\rangle = 12$. In der ersten hat jeder genau zwölf Kontakte; in der zweiten haben $80\,\%$ der Menschen fünf und $20\,\%$ haben $40$. Vergleichen Sie die Schwellen.
+
+\loesung
+\schritt{Schritt 1 --- Die zweite Verteilung prüfen}
+\[ \langle k\rangle = 0{,}8 \cdot 5 + 0{,}2 \cdot 40 = 4{,}0 + 8{,}0 = 12{,}0 \quad \checkmark \]
+
+\schritt{Schritt 2 --- Die zweiten Momente}
+\kursiv{Netz 1:} $\langle k^2\rangle = 12^2 = 144$.
+
+\kursiv{Netz 2:}
+\[ \langle k^2\rangle = 0{,}8 \cdot 25 + 0{,}2 \cdot 1600 = 20 + 320 = 340 \]
+
+\schritt{Schritt 3 --- Die Kennzahlen}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{2.4cm}P{2.0cm}@{}}
+\toprule
+& $\langle k^2\rangle$ & $\langle k^2\rangle/\langle k\rangle$ & $T_c$\\
+\midrule
+Netz 1 & $144$ & $12{,}00$ & $0{,}0909$\\
+Netz 2 & $340$ & $28{,}33$ & $\mathbf{0{,}0366}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Rechnung:} $T_c = 1/(12-1) = 0{,}0909$ und $T_c = 1/(28{,}33-1) = 1/27{,}33 = 0{,}0366$.
+
+\schritt{Schritt 4 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Im zweiten Netz genügt eine um den Faktor $2{,}5$ kleinere Übertragungswahrscheinlichkeit für eine Epidemie.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Ein Erreger mit $T = 0{,}06$}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+& $\Rnull = T(\ldots-1)$ & \\
+\midrule
+Netz 1 & $0{,}06 \cdot 11 = 0{,}66$ & \textcolor{gruen}{erlischt}\\
+Netz 2 & $0{,}06 \cdot 27{,}33 = 1{,}64$ & \textcolor{akzent}{Epidemie}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Bei gleicher mittlerer Kontaktzahl und gleichem Erreger: einmal Ausbreitung, einmal nicht.
+
+\schritt{Schritt 6 --- Was das für Maßnahmen bedeutet}
+Senkt man im zweiten Netz die Kontaktzahl der kontaktreichen Gruppe von $40$ auf $12$, so wird daraus:
+\[ \langle k\rangle = 0{,}8\cdot5 + 0{,}2\cdot12 = 6{,}4, \qquad \langle k^2\rangle = 20 + 28{,}8 = 48{,}8 \]
+\[ \frac{\langle k^2\rangle}{\langle k\rangle} = 7{,}625, \qquad \Rnull = 0{,}06 \cdot 6{,}625 = 0{,}40 \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Man hat nur ein Fünftel der Bevölkerung eingeschränkt und die Reproduktionszahl von $1{,}64$ auf $0{,}40$ gedrückt --- weit unter die Schwelle. Hätte man stattdessen alle gleichmäßig um denselben Anteil eingeschränkt, wäre der Effekt erheblich geringer. \textbf{Gezielte Maßnahmen wirken auf überstreuten Netzen überproportional.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.2 --- Das Freundschaftsparadoxon nachrechnen}
+In einer kleinen Gruppe von sechs Personen bestehen die Freundschaften $AB$, $AC$, $AD$, $AE$, $BC$, $EF$. Vergleichen Sie die mittlere Freundeszahl mit der mittleren Freundeszahl der Freunde.
+
+\loesung
+\schritt{Schritt 1 --- Die Grade}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{3.2cm}P{1.4cm}@{}}
+\toprule
+& \textbf{Freunde} & $k$\\
+\midrule
+$A$ & $B, C, D, E$ & $4$\\
+$B$ & $A, C$ & $2$\\
+$C$ & $A, B$ & $2$\\
+$D$ & $A$ & $1$\\
+$E$ & $A, F$ & $2$\\
+$F$ & $E$ & $1$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 2 --- Die Probe}
+Gradsumme $= 4+2+2+1+2+1 = 12 = 2 \cdot 6$ Kanten. \checkmark\ (Handschlaglemma, Band 16, Satz 1.3.)
+
+\schritt{Schritt 3 --- Der Mittelwert}
+\[ \langle k\rangle = \frac{12}{6} = 2{,}0 \]
+
+\schritt{Schritt 4 --- Die mittlere Freundeszahl der Freunde}
+Für jede Person bilden wir den Mittelwert der Grade ihrer Freunde:
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{3.0cm}P{2.0cm}@{}}
+\toprule
+& \textbf{Grade der Freunde} & \textbf{Mittel}\\
+\midrule
+$A$ & $2,2,1,2$ & $1{,}75$\\
+$B$ & $4,2$ & $3{,}00$\\
+$C$ & $4,2$ & $3{,}00$\\
+$D$ & $4$ & $4{,}00$\\
+$E$ & $4,1$ & $2{,}50$\\
+$F$ & $2$ & $2{,}00$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\[ \text{Mittel über alle Personen} = \frac{1{,}75+3+3+4+2{,}5+2}{6} = \frac{16{,}25}{6} = 2{,}71 \]
+
+\schritt{Schritt 5 --- Über die Formel}
+\[ \langle k^2\rangle = \frac{16+4+4+1+4+1}{6} = \frac{30}{6} = 5{,}0 \]
+\[ \frac{\langle k^2\rangle}{\langle k\rangle} = \frac{5{,}0}{2{,}0} = 2{,}5 \]
+
+\schritt{Schritt 6 --- Warum zwei verschiedene Zahlen}
+$2{,}71$ und $2{,}50$ --- kein Widerspruch, sondern zwei verschiedene Mittelungen:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+$2{,}71$ & Mittel über \kursiv{Personen}: Jede Person zählt gleich viel.\\
+$2{,}50$ & Mittel über \kursiv{Kanten}: Jede Freundschaft zählt gleich viel.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die Formel aus Abschnitt 9.2 liefert die zweite Zahl, weil dort einer zufälligen \kursiv{Kante} gefolgt wird.
+
+\schritt{Schritt 7 --- Das Ergebnis}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide Zahlen liegen über $\langle k\rangle = 2{,}0$.} Die Freunde haben im Mittel mehr Freunde --- gleichgültig, wie man mittelt.
+\end{minipage}
+\end{center}
+
+\kursiv{Bei wem trifft es nicht zu?} Bei $A$: Die Freunde haben im Mittel $1{,}75$, $A$ selbst hat $4$. Der kontaktreichste Mensch erlebt das Paradoxon nicht --- und das gilt allgemein.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Hier zeigt sich zugleich der Zusammenhang mit Kapitel~9: Wäre $A$ ansteckend, würde sie vier Personen erreichen. Von einer zufällig angesteckten Person aus führt der Weg aber überdurchschnittlich oft zu $A$ zurück --- das ist das Argument für die Rückwärtsverfolgung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.3 --- Wie viele Einschleppungen bis zum Ausbruch?}
+Ein Erreger mit $\Rnull = 2{,}5$ und $k = 0{,}16$ wird wiederholt eingeschleppt. Wie viele Einschleppungen dauert es im Mittel, bis eine zum Ausbruch führt? Vergleichen Sie mit $k \to \infty$.
+
+\loesung
+\schritt{Schritt 1 --- Die Ausbruchswahrscheinlichkeiten}
+Aus Satz 9.3:
+\[ k = 0{,}16: \quad 1-q = 0{,}205 \qquad k \to \infty: \quad 1-q = 0{,}893 \]
+
+\schritt{Schritt 2 --- Die mittlere Zahl der Versuche}
+Jede Einschleppung ist ein unabhängiger Versuch mit Erfolgswahrscheinlichkeit $1-q$. Die mittlere Zahl der Versuche bis zum ersten Erfolg beträgt bei einer geometrischen Verteilung
+\[ \frac{1}{1-q} . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{3.2cm}@{}}
+\toprule
+$k$ & \textbf{Ausbruch} & \textbf{Einschlep\-pungen}\\
+\midrule
+$\to\infty$ & $89{,}3\,\%$ & $1{,}12$\\
+$1{,}0$ & $60{,}0\,\%$ & $1{,}67$\\
+$0{,}16$ & $20{,}5\,\%$ & $\mathbf{4{,}88}$\\
+$0{,}1$ & $13{,}9\,\%$ & $7{,}19$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 3 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei starker Überstreuung braucht es im Mittel fünf Einschleppungen, bis eine zündet.} Vier von fünf bleiben folgenlos.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Was das für Grenzmaßnahmen bedeutet}
+Verringert man die Zahl der Einschleppungen um die Hälfte, so verzögert man den Ausbruch --- man verhindert ihn nicht.
+
+\kursiv{Rechnung:} Kommen statt zehn nur fünf Einschleppungen je Monat, so beträgt die Wahrscheinlichkeit, dass in einem Monat mindestens eine zündet:
+\[ 1 - q^{5} = 1 - 0{,}795^{5} = 1 - 0{,}318 = 0{,}682 \]
+gegen
+\[ 1 - 0{,}795^{10} = 1 - 0{,}101 = 0{,}899 . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Einschlep\-pungen je Monat} & \textbf{Ausbruch im Monat} & \textbf{mittlere Frist}\\
+\midrule
+$10$ & $89{,}9\,\%$ & $0{,}49$ Monate\\
+$5$ & $68{,}2\,\%$ & $0{,}98$ Monate\\
+$2$ & $36{,}8\,\%$ & $2{,}44$ Monate\\
+$1$ & $20{,}5\,\%$ & $4{,}88$ Monate\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die gewonnene Zeit wächst umgekehrt proportional zur Zahl der Einschleppungen. Eine Halbierung verdoppelt die Frist. Das ist der rechnerische Gehalt der Aussage, dass Einreisebeschränkungen Zeit kaufen, aber nicht schützen --- und es sagt zugleich, wie viel Zeit: bei $\Rnull = 2{,}5$ und starker Überstreuung nur Wochen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die entscheidende Einschränkung}
+Die Rechnung setzt voraus, dass die Einschleppungen unabhängig sind und $\Rnull$ unverändert bleibt. Wird die gewonnene Zeit genutzt --- für Impfstoff, Behandlungskapazität, Vorbereitung ---, so ist sie wertvoll; wird sie nicht genutzt, ist sie es nicht.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das Modell sagt, wie viel Zeit gewonnen wird. Ob sich das lohnt, sagt es nicht --- das hängt davon ab, was in dieser Zeit geschieht, und das steht in keiner Gleichung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von den Zufallsgraphen zu den Kontaktnetzen}
+Die mathematischen Werkzeuge dieses Kapitels stammen aus der Graphentheorie und waren lange vor ihrer Anwendung da --- dasselbe Muster wie bei Poincaré in Kapitel~6.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.4cm}P{2.6cm}P{3.8cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Beitrag}\\
+\midrule
+$1959$ & Erdős, Rényi & Zufallsgraphen, Schwellenwerte\\
+$1991$ & Feld & Freundschafts\-paradoxon\\
+$1998$ & Watts, Strogatz & Kleine-Welt-Netze\\
+$1999$ & Barabási, Albert & Netze mit Potenzgesetz\\
+$2001$ & Pastor-Satorras, Vespignani & Ausbreitung ohne Schwelle\\
+$2005$ & Lloyd-Smith u.\,a. & Überstreuung bei SARS\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\Person{Scott Feld}, Soziologe, veröffentlichte 1991 einen Aufsatz mit dem Titel \kursiv{Why your friends have more friends than you do}. Er war der Erste, der die Erscheinung benannte und ihre soziologischen Folgen untersuchte --- etwa, dass Menschen ihre eigene Beliebtheit systematisch unterschätzen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dasselbe gilt für viele andere Größen: Die eigenen Kollegen sind im Mittel produktiver, die eigenen Mitreisenden sitzen in volleren Zügen, die eigenen Mitstudierenden besuchen größere Vorlesungen. Überall, wo man durch Beteiligung ausgewählt wird, verzerrt sich der Eindruck nach oben.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Arbeit von 2005}
+\Person{James Lloyd-Smith} und Mitarbeiter untersuchten nach dem SARS-Ausbruch von 2003, wie ungleich die Übertragung verteilt war. Sie fanden $k \approx 0{,}16$ und zeigten, dass dieselbe Reproduktionszahl je nach Streuung völlig verschiedene Ausbruchsmuster erzeugt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Ihre Arbeit erschien in \kursiv{Nature} und veränderte die Sicht auf Ausbruchsbekämpfung: Nicht die Zahl der Fälle, sondern die Verteilung der Übertragungen bestimmt, welche Maßnahmen wirken. Der Begriff des Superspreading-Ereignisses --- statt der Superspreader-\kursiv{Person} --- geht darauf zurück.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Netzwerkepidemiologie heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Zeitlich veränderliche Netze} & Kontakte als Folge von Begegnungen mit Zeitstempel; die Reihenfolge zählt, nicht nur die Verbindung.\\
+\textbf{Mehrschichtige Netze} & Haushalt, Arbeit, Schule, Freizeit als getrennte Schichten mit eigenen Übertragungsraten.\\
+\textbf{Digitale Kontaktdaten} & Näherungsdaten aus Mobilgeräten liefern erstmals gemessene statt erfragte Kontaktzahlen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Die Reihenfolge der Kontakte entscheidet mit. Trifft $A$ zuerst $B$ und dann $C$, so kann sich eine Ansteckung von $A$ nach $C$ ausbreiten --- in umgekehrter Reihenfolge nicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Netz aus zusammengefassten Kontaktdaten überschätzt die Ausbreitung daher regelmäßig: Es erlaubt Wege, die zeitlich gar nicht möglich waren. Der Unterschied kann erheblich sein und ist ein aktives Forschungsfeld.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Sie bringt eigene Schwierigkeiten: Näherungsdaten messen räumliche Nähe, nicht Übertragung. Zwei Menschen durch eine Wand getrennt erscheinen als Kontakt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und sie werfen Fragen auf, die außerhalb der Mathematik liegen. Die Modelle werden genauer; die Frage, welche Daten dafür erhoben werden dürfen, beantwortet keine Gleichung. Kapitel~15 kommt darauf zurück.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Freundschafts\-paradoxon} & $\langle k^2\rangle/\langle k\rangle \ge \langle k\rangle$\\
+\textbf{Satz 9.2} & $\Rnull = T(\langle k^2\rangle/\langle k\rangle - 1)$\\
+\textbf{Ohne Schwelle} & bei Potenzgesetz mit $\alpha \le 3$\\
+\textbf{Überstreuung} & bei $k=0{,}16$ vier von fünf Einschleppungen folgenlos\\
+\textbf{Rückwärts\-verfolgung} & nutzt das Freundschaftsparadoxon\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~III. Ab Kapitel~10 wechseln wir den Maßstab: vom Geschehen in einer Stadt zum Geschehen in einem einzelnen Körper.}
+\end{minipage}
+\end{center}
+\end{merksatz}

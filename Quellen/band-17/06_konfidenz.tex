@@ -1,0 +1,687 @@
+\chapter{Konfidenzintervalle}
+
+\section{Von der Zahl zum Bereich}
+
+Ein Punktschätzer nennt eine Zahl. Er sagt nicht, wie sicher sie ist.
+
+\begin{merksatz}
+\boxtitel{Zwei Studien, derselbe Schätzwert}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{1.6cm}P{1.8cm}P{2.6cm}@{}}
+\toprule
+& $n$ & $\MW$ & \textbf{Aussagekraft}\\
+\midrule
+Studie I & $6$ & $18{,}0$ & \textcolor{akzent}{gering}\\
+Studie II & $600$ & $18{,}0$ & \textcolor{gruen}{hoch}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Beide melden denselben Wert. Wer nur den Punktschätzer angibt, verschweigt den Unterschied.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Konfidenzintervall macht ihn sichtbar. Es ist kein Zusatz zum Ergebnis, sondern ein Teil davon --- und in vielen Fällen der wichtigere.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Konstruktion}
+
+Wir beginnen mit dem einfachsten Fall: $\sigma$ sei bekannt. Das trifft praktisch nie zu, macht aber die Herleitung durchsichtig; der wirkliche Fall folgt in Abschnitt 6.4.
+
+\begin{merksatz}
+\boxtitel{Die Herleitung --- vier Schritte}
+\schritt{Schritt 1 --- Was wir über $\overline X$ wissen}
+Nach Satz 4.4 und Satz 4.6 gilt näherungsweise
+\[ \overline X \;\sim\; \mathcal{N}\!\left(\mu,\ \frac{\sigma^2}{n}\right), \qquad \text{also} \qquad Z = \frac{\overline X - \mu}{\sigma/\sqrt n} \;\sim\; \mathcal{N}(0,1) . \]
+
+\schritt{Schritt 2 --- Eine Aussage über $Z$}
+Aus der Tabelle in Kapitel~4:
+\[ \Pr\bigl[-1{,}96 \le Z \le 1{,}96\bigr] = 0{,}95 . \]
+
+\schritt{Schritt 3 --- Einsetzen und umformen}
+\[ \Pr\!\left[-1{,}96 \;\le\; \frac{\overline X - \mu}{\sigma/\sqrt n} \;\le\; 1{,}96\right] = 0{,}95 \]
+
+Wir formen die Ungleichungskette nach $\mu$ um. Zuerst mit $\sigma/\sqrt n > 0$ durchmultiplizieren:
+\[ -1{,}96\,\frac{\sigma}{\sqrt n} \;\le\; \overline X - \mu \;\le\; 1{,}96\,\frac{\sigma}{\sqrt n} \]
+
+Dann $\overline X$ abziehen:
+\[ -\overline X - 1{,}96\,\frac{\sigma}{\sqrt n} \;\le\; -\mu \;\le\; -\overline X + 1{,}96\,\frac{\sigma}{\sqrt n} \]
+
+Jetzt mit $-1$ multiplizieren --- \kursiv{dabei drehen sich beide Ungleichungszeichen um}:
+\[ \overline X + 1{,}96\,\frac{\sigma}{\sqrt n} \;\ge\; \mu \;\ge\; \overline X - 1{,}96\,\frac{\sigma}{\sqrt n} \]
+
+Von rechts nach links gelesen:
+\[ \overline X - 1{,}96\,\frac{\sigma}{\sqrt n} \;\le\; \mu \;\le\; \overline X + 1{,}96\,\frac{\sigma}{\sqrt n} \]
+
+\schritt{Schritt 4 --- Das Ergebnis}
+\[ \Pr\!\left[\overline X - 1{,}96\,\frac{\sigma}{\sqrt n} \;\le\; \mu \;\le\; \overline X + 1{,}96\,\frac{\sigma}{\sqrt n}\right] = 0{,}95 . \]
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was in Schritt 4 zufällig ist --- und was nicht}
+Die letzte Zeile sieht aus wie eine Wahrscheinlichkeitsaussage über $\mu$. Sie ist keine.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+In der Ungleichung kommt \kursiv{eine} Zufallsgröße vor: $\overline X$. Der Parameter $\mu$ ist eine feste, unbekannte Zahl (Definition 4.1). Zufällig sind die \kursiv{Grenzen}, nicht die Mitte.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[akzent, dashed, line width=1.0pt] (3.2,-0.3) -- (3.2,4.2);
+\node[font=\scriptsize, color=akzent] at (3.2,4.5) {$\mu$ (fest, unbekannt)};
+\foreach \y/\a/\b in {3.7/1.9/4.3, 3.2/2.4/4.8, 2.7/1.5/3.9, 2.2/2.8/5.2, 1.7/1.2/3.6, 1.2/2.1/4.5, 0.7/2.6/5.0, 0.2/0.9/3.3} {
+  \draw[tief, line width=1.0pt] (\a,\y) -- (\b,\y);
+  \fill[tief] ({(\a+\b)/2},\y) circle (1.6pt);
+}
+\draw[akzent, line width=1.4pt] (4.6,-0.3) -- (7.0,-0.3);
+\fill[akzent] (5.8,-0.3) circle (1.8pt);
+\node[font=\scriptsize, color=akzent, anchor=west] at (7.2,-0.3) {trifft nicht};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Jede Studie liefert ein anderes Intervall. Die senkrechte Linie steht fest. Die Aussage \enquote{$95\,\%$} betrifft, wie oft die zufälligen Balken die feste Linie treffen --- nicht, wo die Linie liegt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{definition}
+\boxtitelm{Definition 6.1 --- Konfidenzintervall}
+Ein \Begriff{Konfidenzintervall zum Niveau $1-\alpha$} für einen Parameter $\theta$ ist ein aus den Daten berechnetes Intervall $[U, O]$, für das gilt:
+\[ \Pr\bigl[\,U \le \theta \le O\,\bigr] = 1-\alpha \]
+--- wobei sich die Wahrscheinlichkeit auf die \kursiv{Zufälligkeit der Grenzen} bezieht, bei festem $\theta$.
+
+Die Eigenschaft heißt \Begriff{Überdeckungswahrscheinlichkeit}.
+\end{definition}
+
+\section{Die Deutung --- und fünf falsche}
+
+\begin{merksatz}
+\boxtitel{Die einzige richtige Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wendet man das Verfahren auf viele Studien an, so enthalten $95\,\%$ der so erzeugten Intervalle den jeweils wahren Wert.}
+\end{minipage}
+\end{center}
+
+Die Aussage betrifft also das \kursiv{Verfahren}, nicht das einzelne Intervall. Über das vorliegende Intervall
+\[ [14{,}4;\ 21{,}6] \]
+lässt sich nur sagen: Es enthält $\mu$, oder es enthält $\mu$ nicht. Welches von beidem gilt, weiß niemand --- und eine Wahrscheinlichkeit dafür gibt es im klassischen Rahmen nicht, weil $\mu$ keine Zufallsgröße ist.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Fünf Deutungen, die falsch sind}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{0.7cm}P{4.0cm}P{3.6cm}@{}}
+\toprule
+& \textbf{Aussage} & \textbf{Warum falsch}\\
+\midrule
+$1$ & \enquote{$\mu$ liegt mit $95\,\%$ Wahrscheinlichkeit in $[14{,}4;\,21{,}6]$.} & $\mu$ ist keine Zufallsgröße. Die Aussage ist entweder wahr oder falsch.\\
+$2$ & \enquote{$95\,\%$ der Beobachtungen liegen im Intervall.} & Das wäre ein \Begriff{Prognoseintervall} und wäre viel breiter.\\
+$3$ & \enquote{Wiederholt man die Studie, fallen $95\,\%$ der neuen Mittelwerte hinein.} & Tatsächlich sind es etwa $83\,\%$ --- das Intervall ist zu eng dafür.\\
+$4$ & \enquote{Wir sind zu $95\,\%$ sicher, dass $\mu$ dort liegt.} & Nur bayessch zulässig, und dann heißt es anders und braucht eine Priori.\\
+$5$ & \enquote{Werte außerhalb sind ausgeschlossen.} & Das Intervall trennt nicht in möglich und unmöglich.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile --- die Zahl überrascht}
+Warum nicht $95\,\%$? Weil ein neuer Mittelwert \kursiv{zwei} Quellen von Zufall hat: Er streut selbst um $\mu$, und das Intervall streut ebenfalls um $\mu$. Beide Streuungen addieren sich. Ein Intervall, das $95\,\%$ künftiger Mittelwerte fangen soll, müsste um den Faktor $\sqrt 2$ breiter sein.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Untersuchungen legen Fachleuten genau diese fünf Sätze vor. Die Mehrheit hält mindestens einen für richtig --- unter Studierenden ebenso wie unter Forschenden und Lehrenden. Das ist der Befund aus dem Vorwort, und er ist gut belegt.}
+\end{minipage}
+\end{center}
+
+\schritt{Was man stattdessen sagen darf}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\enquote{Die Daten sind mit Werten zwischen $14{,}4$ und $21{,}6$ Stunden gut verträglich.} Diese Formulierung --- \Begriff{Kompatibilitätsintervall} --- gewinnt seit einigen Jahren an Boden, weil sie keine falsche Wahrscheinlichkeitsaussage nahelegt.
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der wirkliche Fall: $\sigma$ ist unbekannt}
+
+In Schritt 3 der Herleitung steht $\sigma$. Diese Zahl kennt man nicht; man hat nur $s$.
+
+\begin{warnung}
+\boxtitelr{Man darf nicht einfach $s$ einsetzen}
+Ersetzt man $\sigma$ durch $s$, so wird der Nenner selbst zufällig. Der Quotient
+\[ T = \frac{\overline X - \mu}{s/\sqrt n} \]
+ist dann \kursiv{nicht} mehr standardnormalverteilt --- er streut stärker, weil zwei Größen zufällig sind statt einer.
+
+Bei kleinem $n$ ist der Unterschied erheblich. Wer trotzdem mit $1{,}96$ rechnet, bekommt Intervalle, die zu schmal sind und das Niveau verfehlen.
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Die $t$-Verteilung}
+Die Größe $T$ folgt der \Begriff{$t$-Verteilung} mit $n-1$ \Begriff{Freiheitsgraden}. Sie sieht der Normalverteilung ähnlich, hat aber schwerere Ränder.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (-3.6,0) -- (3.6,0);
+\draw[grau!70, line width=1.0pt, smooth, samples=80, domain=-3.4:3.4]
+  plot (\x, {2.4*exp(-\x*\x/2)});
+\draw[akzent, line width=1.3pt, smooth, samples=80, domain=-3.4:3.4]
+  plot (\x, {2.4*0.8*(1+\x*\x/3)^(-2)});
+\node[font=\scriptsize, color=grau] at (1.5,2.0) {$\mathcal{N}(0,1)$};
+\node[font=\scriptsize, color=akzent] at (2.9,0.7) {$t$ mit $3$ Freiheitsgraden};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Die Werte, die man braucht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+\textbf{Freiheits-} & \multicolumn{3}{c}{\textbf{Niveau}}\\
+\textbf{grade} & $90\,\%$ & $95\,\%$ & $99\,\%$\\
+\midrule
+$1$ & $6{,}314$ & $12{,}706$ & $63{,}657$\\
+$2$ & $2{,}920$ & $4{,}303$ & $9{,}925$\\
+$5$ & $2{,}015$ & $\mathbf{2{,}571}$ & $4{,}032$\\
+$10$ & $1{,}812$ & $\mathbf{2{,}228}$ & $3{,}169$\\
+$20$ & $1{,}725$ & $2{,}086$ & $2{,}845$\\
+$30$ & $1{,}697$ & $2{,}042$ & $2{,}750$\\
+$100$ & $1{,}660$ & $1{,}984$ & $2{,}626$\\
+$\infty$ & $1{,}645$ & $\mathbf{1{,}960}$ & $2{,}576$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist die Normalverteilung --- bei unendlich vielen Freiheitsgraden fallen beide zusammen. Ab etwa $n = 100$ ist der Unterschied belanglos; bei $n = 6$ beträgt er ein Drittel: $2{,}571$ statt $1{,}960$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 6.2 --- Das $t$-Intervall}
+Für normalverteilte Daten ist
+\[ \left[\ \MW - t_{n-1;\,1-\alpha/2}\,\frac{s}{\sqrt n}\ ;\ \ \MW + t_{n-1;\,1-\alpha/2}\,\frac{s}{\sqrt n}\ \right] \]
+ein Konfidenzintervall zum Niveau $1-\alpha$ für $\mu$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die MOBIL-Gruppe B, vollständig gerechnet}
+\schritt{Schritt 1 --- Die Kennzahlen}
+Aus Kapitel~2: $n = 6$, $\MW = 18{,}0$, $s = \sqrt{12} = 3{,}464$.
+
+\schritt{Schritt 2 --- Standardfehler}
+\[ \frac{s}{\sqrt n} = \frac{3{,}464}{\sqrt 6} = \frac{3{,}464}{2{,}449} = 1{,}414 . \]
+
+\schritt{Schritt 3 --- Den $t$-Wert nachschlagen}
+Freiheitsgrade: $n - 1 = 5$. Niveau $95\,\%$. Tabelle: $t_{5;\,0{,}975} = 2{,}571$.
+
+\schritt{Schritt 4 --- Die halbe Breite}
+\[ 2{,}571 \cdot 1{,}414 = 3{,}636 . \]
+
+\schritt{Schritt 5 --- Das Intervall}
+\[ 18{,}0 \pm 3{,}636 \quad\Longrightarrow\quad [\,14{,}36\ ;\ 21{,}64\,] \ \text{Stunden} . \]
+
+\schritt{Zum Vergleich: Gruppe A}
+$\MW = 26{,}167$, $s = 5{,}913$, $\frac{s}{\sqrt6} = 2{,}414$, halbe Breite $2{,}571 \cdot 2{,}414 = 6{,}206$:
+\[ [\,19{,}96\ ;\ 32{,}37\,] \ \text{Stunden} . \]
+
+\schritt{Die Deutung}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (8.4,0);
+\foreach \x/\lab in {0.8/14, 2.4/18, 4.0/22, 5.6/26, 7.2/30}
+  \node[font=\scriptsize, color=grau] at (\x,-0.32) {\lab};
+\draw[akzent, line width=1.6pt] (0.94,1.3) -- (3.86,1.3);
+\fill[akzent] (2.4,1.3) circle (2.2pt);
+\node[font=\scriptsize, color=akzent, anchor=west] at (8.6,1.3) {B};
+\draw[tief, line width=1.6pt] (3.18,0.65) -- (8.15,0.65);
+\fill[tief] (5.67,0.65) circle (2.2pt);
+\node[font=\scriptsize, color=tief, anchor=west] at (8.6,0.65) {A};
+\node[font=\scriptsize\itshape, color=grau] at (4.2,-0.8) {Stunden bis zur Mobilisation};
+\end{tikzpicture}
+\end{center}
+
+Die beiden Intervalle überschneiden sich. Das Intervall von A reicht bis $19{,}96$ hinunter, das von B bis $21{,}64$ hinauf.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die naheliegende Folgerung --- \enquote{also kein Unterschied} --- ist voreilig. Der nächste Abschnitt zeigt, warum man für die Frage nach dem \kursiv{Unterschied} ein eigenes Intervall braucht und warum das Überlappen zweier Einzelintervalle kein taugliches Kriterium ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Intervall für den Unterschied}
+
+\begin{merksatz}
+\boxtitel{Warum man es getrennt berechnen muss}
+Gefragt ist nicht, wo $\mu_A$ liegt und wo $\mu_B$, sondern wo $\mu_A - \mu_B$ liegt. Das ist ein eigener Parameter und braucht ein eigenes Intervall.
+
+\schritt{Der Standardfehler des Unterschieds}
+Nach (R4) --- die Gruppen sind unabhängig --- addieren sich die Varianzen:
+\[ \Var[\overline X_A - \overline X_B] = \frac{\sigma^2}{n_A} + \frac{\sigma^2}{n_B} . \]
+Nimmt man gleiche Streuung in beiden Gruppen an, so schätzt man $\sigma^2$ aus beiden gemeinsam:
+\[ s_p^2 = \frac{(n_A-1)s_A^2 + (n_B-1)s_B^2}{n_A+n_B-2} . \]
+Dieser Wert heißt \Begriff{gepoolte Varianz}; er ist das mit den Freiheitsgraden gewichtete Mittel.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Rechnung für MOBIL}
+\schritt{Schritt 1 --- Die gepoolte Varianz}
+\[ s_p^2 = \frac{5 \cdot 34{,}967 + 5 \cdot 12{,}0}{6+6-2} = \frac{174{,}83 + 60{,}0}{10} = \frac{234{,}83}{10} = 23{,}483 \]
+\[ s_p = \sqrt{23{,}483} = 4{,}846 . \]
+
+\schritt{Schritt 2 --- Der Standardfehler}
+\[ \mathrm{SE} = s_p\sqrt{\frac{1}{n_A}+\frac{1}{n_B}} = 4{,}846 \cdot \sqrt{\frac{1}{6}+\frac{1}{6}} = 4{,}846 \cdot \sqrt{0{,}3333} = 4{,}846 \cdot 0{,}5774 = 2{,}798 . \]
+
+\schritt{Schritt 3 --- Der $t$-Wert}
+Freiheitsgrade: $n_A + n_B - 2 = 10$. Tabelle: $t_{10;\,0{,}975} = 2{,}228$.
+
+\schritt{Schritt 4 --- Der Unterschied und sein Intervall}
+\[ \MW_A - \MW_B = 26{,}167 - 18{,}0 = 8{,}167 \ \text{Stunden} \]
+\[ 8{,}167 \pm 2{,}228 \cdot 2{,}798 = 8{,}167 \pm 6{,}234 \]
+\[ [\,1{,}93\ ;\ 14{,}40\,] \ \text{Stunden} . \]
+
+\schritt{Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Das Intervall \kursiv{enthält die Null nicht}. Die Daten sind also schlecht mit der Annahme verträglich, dass beide Schemata gleich wirken.
+\end{minipage}
+\end{center}
+
+Und es sagt mehr: Der Unterschied könnte so klein sein wie zwei Stunden oder so groß wie vierzehn. Bei $n=6$ je Gruppe lässt sich nicht genauer eingrenzen.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Überlappende Einzelintervalle bedeuten nichts}
+Die Einzelintervalle überlappten sich --- das Differenzintervall schließt die Null trotzdem aus. Ein Widerspruch ist das nicht.
+
+\schritt{Der Grund}
+Vergleicht man zwei Intervalle der halben Breite $h_A$ und $h_B$, so berührt sich der Rand bei einem Abstand von $h_A + h_B$. Das Differenzintervall hat aber die halbe Breite
+\[ t\,s_p\sqrt{\tfrac{1}{n_A}+\tfrac{1}{n_B}} , \]
+und wegen $\sqrt{a^2+b^2} < a+b$ ist sie \kursiv{kleiner} als die Summe der beiden Einzelbreiten.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{halbe Breite} & \\
+\midrule
+Intervall A & $6{,}21$ & \\
+Intervall B & $3{,}64$ & \\
+Summe & $9{,}85$ & \textcolor{akzent}{zu großzügig}\\
+\textbf{Differenzintervall} & $\mathbf{6{,}23}$ & \textcolor{gruen}{richtig}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beobachtete Abstand beträgt $8{,}17$. Er ist kleiner als $9{,}85$ --- daher überlappen die Einzelintervalle. Und er ist größer als $6{,}23$ --- daher schließt das Differenzintervall die Null aus. Beides gleichzeitig ist der Normalfall, nicht die Ausnahme.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Merksatz: Wer zwei Gruppen vergleichen will, zeichnet das Intervall für den Unterschied --- nicht zwei Intervalle nebeneinander.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Das Intervall für einen Anteil}
+
+\begin{merksatz}
+\boxtitel{Die naheliegende Formel --- und ihr Versagen}
+Für einen Anteil $\pi$ mit Schätzer $\hat p = k/n$ ist
+\[ \Var[\hat p] = \frac{\pi(1-\pi)}{n} , \]
+also liegt nahe:
+\[ \hat p \pm 1{,}96\,\sqrt{\frac{\hat p(1-\hat p)}{n}} . \]
+Das ist das \Begriff{Wald-Intervall}.
+
+\schritt{Am Beispiel}
+Gruppe A: $3$ von $6$ brauchten zusätzliche Schmerzmittel, also $\hat p = 0{,}5$.
+\[ \sqrt{\frac{0{,}5 \cdot 0{,}5}{6}} = \sqrt{0{,}04167} = 0{,}2041 \]
+\[ 0{,}5 \pm 1{,}96 \cdot 0{,}2041 = 0{,}5 \pm 0{,}400 \quad\Longrightarrow\quad [\,0{,}100\ ;\ 0{,}900\,] . \]
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Das Wald-Intervall bricht zusammen}
+\schritt{Fall 1 --- alle oder keiner}
+Hätten alle sechs Personen Bedarf gehabt, so wäre $\hat p = 1$ und
+\[ \sqrt{\frac{1 \cdot 0}{6}} = 0 \quad\Longrightarrow\quad [\,1{,}000\ ;\ 1{,}000\,] . \]
+Das Intervall hat die Breite null. Es behauptet, der Anteil sei mit Gewissheit hundert Prozent --- aus sechs Beobachtungen.
+
+\schritt{Fall 2 --- Grenzen außerhalb des Möglichen}
+Bei $\hat p = 0{,}1$ und $n = 20$:
+\[ 0{,}1 \pm 1{,}96\sqrt{\frac{0{,}1 \cdot 0{,}9}{20}} = 0{,}1 \pm 1{,}96 \cdot 0{,}0671 = 0{,}1 \pm 0{,}131 \]
+\[ [\,-0{,}031\ ;\ 0{,}231\,] . \]
+Eine negative untere Grenze für einen Anteil.
+
+\schritt{Fall 3 --- das Niveau stimmt nicht}
+Selbst bei mittleren Anteilen liegt die tatsächliche Überdeckung oft bei $88$ bis $92\,\%$ statt bei $95\,\%$ --- und zwar auch bei großem $n$. Die Abweichung verschwindet nicht, sie schwankt nur.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Wald-Intervall steht in fast jedem Einführungsbuch und ist in Statistikprogrammen oft die Voreinstellung. Es ist dennoch die schlechteste der gebräuchlichen Methoden.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Das Wilson-Intervall}
+\Person{Edwin Wilson} gab 1927 eine bessere Formel an. Sie entsteht, wenn man die Ungleichung nicht nach der Näherung, sondern \kursiv{exakt} nach $\pi$ auflöst:
+\[ \frac{\hat p + \frac{z^2}{2n} \;\pm\; \frac{z}{\sqrt n}\sqrt{\hat p(1-\hat p) + \frac{z^2}{4n}}}{1 + \frac{z^2}{n}} \]
+mit $z = 1{,}96$.
+
+\schritt{Gruppe A, $k=3$, $n=6$}
+Wir rechnen mit $z^2 = 3{,}8416$.
+\[ \text{Mitte} = \frac{3 + 1{,}9208}{6 + 3{,}8416} = \frac{4{,}9208}{9{,}8416} = 0{,}5000 \]
+\[ \text{halbe Breite} = \frac{1{,}96}{9{,}8416}\sqrt{6 \cdot 0{,}25 + 0{,}9604} = 0{,}1992 \cdot \sqrt{2{,}4604} = 0{,}1992 \cdot 1{,}5686 = 0{,}3124 \]
+\[ [\,0{,}188\ ;\ 0{,}812\,] . \]
+
+\schritt{Der Fall $k = 6$, $n = 6$}
+\[ \text{Mitte} = \frac{6 + 1{,}9208}{9{,}8416} = \frac{7{,}9208}{9{,}8416} = 0{,}8048 \]
+\[ \text{halbe Breite} = 0{,}1992 \cdot \sqrt{0 + 0{,}9604} = 0{,}1992 \cdot 0{,}980 = 0{,}1952 \]
+\[ [\,0{,}610\ ;\ 1{,}000\,] . \]
+
+\schritt{Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+$k/n$ & \textbf{Wald} & \textbf{Wilson}\\
+\midrule
+$3/6$ & $[0{,}100;\,0{,}900]$ & $[0{,}188;\,0{,}812]$\\
+$6/6$ & \textcolor{akzent}{$[1{,}000;\,1{,}000]$} & \textcolor{gruen}{$[0{,}610;\,1{,}000]$}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Wilson-Intervall bleibt stets innerhalb von $[0,1]$, wird nie zum Punkt und hält das Niveau auch bei kleinen $n$ gut ein. Es ist seit fast hundert Jahren bekannt und setzt sich nur langsam durch.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Dreierregel}
+Ein Sonderfall, den man im Kopf haben sollte: Trat ein Ereignis in $n$ Beobachtungen \kursiv{kein einziges Mal} auf, so ist die obere $95$-Prozent-Grenze näherungsweise
+\[ \frac{3}{n} . \]
+
+\schritt{Ein Beispiel}
+In einer Studie mit $300$ Personen trat keine schwere Nebenwirkung auf. Was heißt das?
+\[ \frac{3}{300} = 0{,}01 . \]
+Die Daten sind mit einer Rate von bis zu einem Prozent verträglich --- also mit bis zu einer schweren Nebenwirkung je hundert Behandelten.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\enquote{Keine Nebenwirkung beobachtet} heißt nicht \enquote{keine Nebenwirkung vorhanden}. Bei $n = 300$ sind Raten bis $1\,\%$ gut verträglich mit dem Befund. Wer für eine seltene Nebenwirkung von $1$ zu $10\,000$ Sicherheit will, braucht etwa $30\,000$ Beobachtungen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.1 --- Ein Intervall und seine Deutung}
+Eine Studie mit $n=25$ berichtet $\MW = 42{,}0$ und $s = 10{,}0$.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{4.2cm}P{4.2cm}@{}}
+\toprule
+(a) $95$-Prozent-Intervall & (c) Welches $n$ für halbe Breite $2$?\\
+(b) $99$-Prozent-Intervall & (d) Welche Deutungen sind zulässig?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) --- Das $95$-Prozent-Intervall}
+\[ \frac{s}{\sqrt n} = \frac{10}{\sqrt{25}} = \frac{10}{5} = 2{,}0 \]
+Freiheitsgrade $24$; die Tabelle gibt zwischen $20$ und $30$ etwa $t_{24;\,0{,}975} \approx 2{,}064$.
+\[ 42{,}0 \pm 2{,}064 \cdot 2{,}0 = 42{,}0 \pm 4{,}13 \quad\Longrightarrow\quad [\,37{,}87\ ;\ 46{,}13\,] . \]
+
+\schritt{(b) --- Das $99$-Prozent-Intervall}
+$t_{24;\,0{,}995} \approx 2{,}797$.
+\[ 42{,}0 \pm 2{,}797 \cdot 2{,}0 = 42{,}0 \pm 5{,}59 \quad\Longrightarrow\quad [\,36{,}41\ ;\ 47{,}59\,] . \]
+
+\schritt{Die Beobachtung}
+Mehr Sicherheit bedeutet ein breiteres Intervall. Man kann nicht beides zugleich haben.
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{2.2cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Niveau} & \textbf{halbe Breite} & \\
+\midrule
+$90\,\%$ & $3{,}42$ & \\
+$95\,\%$ & $4{,}13$ & \\
+$99\,\%$ & $5{,}59$ & \\
+$100\,\%$ & $\infty$ & \textcolor{akzent}{nutzlos}\\
+\bottomrule
+\end{tabular}
+\end{center}
+Die letzte Zeile zeigt die Grenze des Verfahrens: Völlige Sicherheit gibt es nur um den Preis einer Aussage ohne Inhalt.
+
+\schritt{(c) --- Die nötige Fallzahl}
+\[ 2{,}0 \ \ge\ t \cdot \frac{10}{\sqrt n} \]
+Wir rechnen zunächst mit $t \approx 2{,}0$ und prüfen danach:
+\[ \sqrt n \ge \frac{2{,}0 \cdot 10}{2{,}0} = 10 \quad\Longrightarrow\quad n \ge 100 . \]
+Kontrolle: Bei $n = 100$ ist $t_{99;\,0{,}975} \approx 1{,}984$, also
+\[ 1{,}984 \cdot \frac{10}{10} = 1{,}98 \le 2{,}0 . \quad \checkmark \]
+
+\schritt{Antwort}
+Etwa $\mathbf{100}$ Beobachtungen --- das Vierfache für die halbe Breite, wie die Wurzelregel es verlangt.
+
+\schritt{(d) --- Die Deutungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{4.4cm}P{3.4cm}@{}}
+\toprule
+\enquote{$\mu$ liegt zu $95\,\%$ drin} & \textcolor{akzent}{unzulässig}\\
+\enquote{$95\,\%$ der Werte liegen drin} & \textcolor{akzent}{unzulässig}\\
+\enquote{Das Verfahren trifft in $95\,\%$ der Anwendungen} & \textcolor{gruen}{zulässig}\\
+\enquote{Die Daten sind mit Werten von $37{,}9$ bis $46{,}1$ gut verträglich} & \textcolor{gruen}{zulässig}\\
+\enquote{Der Wert $50$ ist ausgeschlossen} & \textcolor{akzent}{unzulässig}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.2 --- Anteil mit beiden Verfahren}
+In einer Nachuntersuchung traten bei $2$ von $40$ Personen Wundheilungsstörungen auf. Berechnen Sie das Wald- und das Wilson-Intervall und vergleichen Sie.
+
+\loesung
+\schritt{Schritt 1 --- Der Punktschätzer}
+\[ \hat p = \frac{2}{40} = 0{,}05 . \]
+
+\schritt{Schritt 2 --- Wald}
+\[ \sqrt{\frac{0{,}05 \cdot 0{,}95}{40}} = \sqrt{\frac{0{,}0475}{40}} = \sqrt{0{,}0011875} = 0{,}03446 \]
+\[ 0{,}05 \pm 1{,}96 \cdot 0{,}03446 = 0{,}05 \pm 0{,}0675 \quad\Longrightarrow\quad [\,-0{,}018\ ;\ 0{,}118\,] . \]
+Die untere Grenze ist negativ --- unmöglich für einen Anteil.
+
+\schritt{Schritt 3 --- Wilson}
+Mit $z^2 = 3{,}8416$ und $n = 40$:
+\[ \text{Nenner} = 40 + 3{,}8416 = 43{,}8416 \]
+\[ \text{Zähler der Mitte} = 2 + 1{,}9208 = 3{,}9208 \quad\Longrightarrow\quad \text{Mitte} = \frac{3{,}9208}{43{,}8416} = 0{,}0894 \]
+
+Für die halbe Breite:
+\[ n\hat p(1-\hat p) + \frac{z^2}{4} = 40 \cdot 0{,}0475 + 0{,}9604 = 1{,}90 + 0{,}9604 = 2{,}8604 \]
+\[ \sqrt{2{,}8604} = 1{,}6913 \]
+\[ \text{halbe Breite} = \frac{1{,}96}{43{,}8416} \cdot 1{,}6913 = 0{,}04471 \cdot 1{,}6913 = 0{,}0756 \]
+
+\[ [\,0{,}0894 - 0{,}0756\ ;\ 0{,}0894 + 0{,}0756\,] = [\,0{,}014\ ;\ 0{,}165\,] . \]
+
+\schritt{Schritt 4 --- Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Wald} & \textbf{Wilson}\\
+\midrule
+Intervall & $[-0{,}018;\,0{,}118]$ & $[0{,}014;\,0{,}165]$\\
+Untere Grenze & \textcolor{akzent}{negativ} & \textcolor{gruen}{$1{,}4\,\%$}\\
+Obere Grenze & $11{,}8\,\%$ & $16{,}5\,\%$\\
+Lage zum Schätzer & symmetrisch & \textcolor{gruen}{nach oben verschoben}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Warum Wilson nach oben verschoben ist}
+Bei kleinen Anteilen ist die Verteilung von $\hat p$ schief: Nach unten ist bei null Schluss, nach oben ist Platz. Ein symmetrisches Intervall bildet das falsch ab.
+
+Wilson trägt dem Rechnung --- der Mittelpunkt $0{,}089$ liegt über dem Schätzer $0{,}05$. Das sieht ungewohnt aus und ist richtig.
+
+\schritt{Die Deutung}
+Die Daten sind mit einer Störungsrate zwischen etwa $1{,}5$ und $16{,}5$ Prozent gut verträglich. Bei $40$ Beobachtungen und zwei Ereignissen lässt sich nicht mehr sagen.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Wer aus \enquote{$5\,\%$ Komplikationsrate} eine Planungsgröße macht, ohne das Intervall zu nennen, gibt eine Genauigkeit vor, die die Daten nicht hergeben. Die obere Grenze ist mehr als dreimal so groß wie der Punktschätzer.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.3 --- Das Überlappungsproblem}
+Zwei Gruppen mit je $n=25$: $\MW_1 = 50$, $\MW_2 = 44$, beide $s = 10$. Zeigen Sie, dass sich die Einzelintervalle überlappen, das Differenzintervall die Null aber ausschließt.
+
+\loesung
+\schritt{Schritt 1 --- Die Einzelintervalle}
+$\frac{s}{\sqrt n} = \frac{10}{5} = 2{,}0$, $t_{24;\,0{,}975} = 2{,}064$, halbe Breite $4{,}13$.
+\[ \text{Gruppe 1:}\ [\,45{,}87\ ;\ 54{,}13\,], \qquad \text{Gruppe 2:}\ [\,39{,}87\ ;\ 48{,}13\,] . \]
+
+\schritt{Schritt 2 --- Überlappen sie?}
+Der Bereich von $45{,}87$ bis $48{,}13$ gehört zu beiden. \textbf{Ja, sie überlappen} --- über eine Spanne von $2{,}26$.
+
+\schritt{Schritt 3 --- Das Differenzintervall}
+Gepoolte Varianz bei gleichen $s$ und gleichen $n$:
+\[ s_p^2 = \frac{24 \cdot 100 + 24 \cdot 100}{48} = 100, \qquad s_p = 10 . \]
+\[ \mathrm{SE} = 10\sqrt{\frac{1}{25}+\frac{1}{25}} = 10\sqrt{0{,}08} = 10 \cdot 0{,}2828 = 2{,}828 \]
+Freiheitsgrade $25+25-2 = 48$; $t_{48;\,0{,}975} \approx 2{,}011$.
+\[ 6{,}0 \pm 2{,}011 \cdot 2{,}828 = 6{,}0 \pm 5{,}687 \quad\Longrightarrow\quad [\,0{,}31\ ;\ 11{,}69\,] . \]
+
+\schritt{Schritt 4 --- Die Null ist ausgeschlossen}
+Die untere Grenze $0{,}31$ liegt über null. \checkmark
+
+\schritt{Schritt 5 --- Die Rechnung, die den scheinbaren Widerspruch auflöst}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.6cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Wert} & \\
+\midrule
+Beobachteter Abstand & $6{,}00$ & \\
+Summe der halben Breiten & $8{,}26$ & \textcolor{akzent}{Überlappung}\\
+Halbe Breite der Differenz & $\mathbf{5{,}69}$ & \textcolor{gruen}{Null ausgeschlossen}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Der Abstand $6{,}00$ liegt zwischen $5{,}69$ und $8{,}26$ --- genau in dem Bereich, in dem beide Beobachtungen gleichzeitig zutreffen.
+
+\schritt{Schritt 6 --- Wie groß der Bereich ist}
+Bei gleichen Gruppen ist die Summe der halben Breiten $2h$ und die halbe Breite der Differenz etwa $h\sqrt 2$. Das Verhältnis beträgt
+\[ \frac{2}{\sqrt2} = \sqrt2 \approx 1{,}41 . \]
+Für jeden Abstand zwischen $h\sqrt2$ und $2h$ --- also über eine Spanne von etwa $41\,\%$ --- überlappen die Einzelintervalle, obwohl der Unterschied nachweisbar ist.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das ist kein Randfall. Gut ein Drittel aller nachweisbaren Unterschiede fällt in diesen Bereich. Wer Ergebnisse als zwei Balken mit Fehlerintervallen darstellt und die Überlappung prüft, übersieht systematisch echte Unterschiede.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Brauereichemiker und ein polnischer Mathematiker}
+\Person{William Sealy Gosset} (1876--1937) arbeitete ab 1899 bei der Brauerei Guinness in Dublin. Seine Aufgabe war die Qualitätskontrolle --- Gerste, Hopfen, Hefe --- mit kleinen Stichproben, weil jede Messung teuer war.
+
+Die vorhandene Statistik half ihm nicht: Sie war für große Stichproben gebaut. Gosset leitete 1908 die Verteilung des Quotienten $\frac{\overline X - \mu}{s/\sqrt n}$ her --- für den Fall, dass $\sigma$ geschätzt werden muss.
+
+Guinness untersagte den Angestellten Veröffentlichungen, weil ein früherer Mitarbeiter Betriebsgeheimnisse preisgegeben hatte. Gosset veröffentlichte daher unter dem Decknamen \kursiv{Student}. Die Verteilung heißt bis heute so.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Fall ist ungewöhnlich: Ein zentrales Werkzeug der Wissenschaft entstand in einer Brauerei, aus einem betriebswirtschaftlichen Bedürfnis, und erschien anonym. Gossets Vorgesetzte erfuhren erst nach seinem Tod vom Umfang seiner Arbeiten.}
+\end{minipage}
+\end{center}
+
+Das Konfidenzintervall selbst ist jünger. \Person{Jerzy Neyman} führte es 1937 ein und legte dabei die Deutung fest, die dieses Kapitel vorträgt --- ausdrücklich als Aussage über das Verfahren, nicht über den Einzelfall. Er schrieb, die Wahrscheinlichkeit beziehe sich auf das \kursiv{langfristige Verhalten} der Methode.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Neyman war sich der Missverständlichkeit bewusst und warnte davor. Neunzig Jahre später ist die Warnung unverändert nötig.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Vom Test zur Schätzung}
+Seit etwa 2015 verschiebt sich die Berichtspraxis in der medizinischen Forschung spürbar.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{5.6cm}@{}}
+\toprule
+\textbf{Früher} & \enquote{Der Unterschied war signifikant ($p < 0{,}05$).}\\
+\textbf{Heute gefordert} & \enquote{Der Unterschied betrug $8{,}2$ Stunden ($95\,\%$-KI $1{,}9$ bis $14{,}4$).}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die Gründe:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Größe sichtbar} & Das Intervall nennt den Effekt in der Einheit der Sache, nicht in einer Wahrscheinlichkeit.\\
+\textbf{Genauigkeit sichtbar} & Ein breites Intervall verrät eine kleine Studie; ein $p$-Wert tut das nicht.\\
+\textbf{Metaanalyse} & Kapitel~14 braucht Schätzwerte und Standardfehler --- ein $p$-Wert allein genügt nicht.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die CONSORT-Empfehlungen verlangen Effektschätzer mit Intervall für jeden primären und sekundären Endpunkt. Mehrere Zeitschriften --- darunter \kursiv{Epidemiology} seit den 1990er Jahren --- haben $p$-Werte weitgehend verbannt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Bewegung geht weiter: Ein Vorschlag von Amrhein, Greenland und McShane (2019), unterzeichnet von über achthundert Fachleuten, fordert, das Wort \enquote{signifikant} ganz aufzugeben und statt dessen Kompatibilitätsintervalle zu berichten. Kapitel~15 stellt die Debatte vollständig dar.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Definition 6.1} & Konfidenzintervall über die Überdeckung des \kursiv{Verfahrens}\\
+\textbf{Fünf Fehldeutungen} & und warum jede einzelne falsch ist\\
+\textbf{Satz 6.2} & Das $t$-Intervall bei unbekanntem $\sigma$\\
+\textbf{Differenz\-intervall} & und warum Überlappung nichts bedeutet\\
+\textbf{Wilson} & statt Wald bei Anteilen; die Dreierregel\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~II. Im nächsten Kapitel kommt die zweite Fehldeutung aus dem Vorwort an die Reihe --- und sie ist die folgenreichere.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,665 @@
+\part{Schätzen}
+
+\chapter{Von der Stichprobe zur Aussage}
+
+\section{Der Sprung}
+
+Bis hierhin haben wir beschrieben, was in zwölf Zeilen einer Tabelle steht. Das ist unstrittig: Der Mittelwert der Gruppe B beträgt $18{,}0$ Stunden, und daran gibt es nichts zu deuten.
+
+Die Frage, die eine Studie stellt, ist eine andere.
+
+\begin{merksatz}
+\boxtitel{Zwei Fragen, die man auseinanderhalten muss}
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Beschreibend} & Wie lange brauchten \kursiv{diese sechs} Personen? --- $18{,}0$ Stunden im Mittel. Fertig.\\
+\textbf{Schließend} & Wie lange braucht ein Mensch nach diesem Schema \kursiv{im Allgemeinen}? --- Darauf gibt es keine sichere Antwort.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Sprung von der ersten zur zweiten Frage ist der Gegenstand der gesamten restlichen Teile dieses Bandes. Er ist nie sicher, und die Kunst besteht darin, die verbleibende Unsicherheit zu \kursiv{beziffern} statt sie zu verschweigen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 4.1 --- Grundgesamtheit und Stichprobe}
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item Die \Begriff{Grundgesamtheit} ist die Menge aller Objekte, über die eine Aussage gemacht werden soll.
+\item Eine \Begriff{Stichprobe} ist eine Teilmenge davon, die tatsächlich untersucht wird.
+\item Eine Kennzahl der Grundgesamtheit heißt \Begriff{Parameter}; eine aus der Stichprobe berechnete heißt \Begriff{Schätzer} oder \Begriff{Statistik}.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Bezeichnungen --- und warum sie streng getrennt werden}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{1.8cm}P{1.8cm}P{1.4cm}@{}}
+\toprule
+& \textbf{Parameter} & \textbf{Schätzer} & \\
+\midrule
+Mittelwert & $\mu$ & $\MW$ & \\
+Standard\-abweichung & $\sigma$ & $s$ & \\
+Anteil & $\pi$ & $\hat{p}$ & \\
+Korrelation & $\rho$ & $r$ & \\
+Umfang & $N$ & $n$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Parameter} & fest, aber \kursiv{unbekannt}. Er hat einen Wert; wir kennen ihn nicht.\\
+\textbf{Schätzer} & bekannt, aber \kursiv{zufällig}. Eine andere Stichprobe hätte einen anderen Wert ergeben.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Umkehrung ist der Angelpunkt. In der beschreibenden Statistik war $\MW$ eine feste Zahl. Jetzt ist $\MW$ eine \kursiv{Zufallsgröße} und $\mu$ die feste Zahl. Wer das durcheinanderbringt, kommt bei Konfidenzintervallen und $p$-Werten zwangsläufig auf die falschen Deutungen --- beide Fehldeutungen aus dem Vorwort lassen sich genau hierauf zurückführen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Grundgesamtheit muss man benennen}
+Welche Grundgesamtheit meint die MOBIL-Studie?
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+Alle je operierten Personen dieser Klinik? & Dann ist die Stichprobe nicht zufällig --- sie stammt aus einem Zeitraum.\\
+Alle künftigen Personen dieser Klinik? & Dann setzt man voraus, dass sich nichts ändert.\\
+Alle Personen mit Hüftgelenksersatz? & Dann müsste die Klinik für alle Kliniken stehen.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Keine dieser Grundgesamtheiten ist die, aus der tatsächlich zufällig gezogen wurde --- denn es wurde überhaupt nicht zufällig gezogen. Randomisiert wurde nur die \kursiv{Zuteilung} auf die beiden Gruppen, nicht die Auswahl der Personen. Kapitel~12 zeigt, warum das trotzdem ausreicht, und wofür genau.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Was wir aus Band 4 brauchen}
+
+Der folgende Abschnitt wiederholt vier Begriffe. Wer Band 4 durchgearbeitet hat, kann ihn überspringen.
+
+\begin{definition}
+\boxtitelm{Definition 4.2 --- Zufallsgröße, Erwartungswert, Varianz}
+Eine \Begriff{Zufallsgröße} $X$ ist eine Größe, deren Wert vom Zufall abhängt.
+
+Für eine Zufallsgröße mit den möglichen Werten $a_1, a_2, \ldots$ und den Wahrscheinlichkeiten $p_1, p_2, \ldots$ ist
+\[ \mathbb{E}[X] = \sum_k a_k\,p_k , \qquad \Var[X] = \mathbb{E}\bigl[(X - \mathbb{E}[X])^2\bigr] . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Rechenregeln, die wir brauchen}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{1.0cm}P{4.0cm}P{3.2cm}@{}}
+\toprule
+(R1) & $\mathbb{E}[aX+b] = a\,\mathbb{E}[X]+b$ & immer\\
+(R2) & $\mathbb{E}[X+Y] = \mathbb{E}[X]+\mathbb{E}[Y]$ & \textbf{immer}\\
+(R3) & $\Var[aX+b] = a^2\,\Var[X]$ & immer\\
+(R4) & $\Var[X+Y] = \Var[X]+\Var[Y]$ & \textcolor{akzent}{\textbf{nur bei Unabhängigkeit}}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die entscheidende Asymmetrie}
+Regel (R2) gilt ohne jede Voraussetzung --- Erwartungswerte addieren sich stets. Regel (R4) gilt \kursiv{nicht} allgemein; sie verlangt, dass die Zufallsgrößen einander nicht beeinflussen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Gegenbeispiel zu (R4) ohne Unabhängigkeit: Sei $Y = -X$. Dann ist $X+Y = 0$, also $\Var[X+Y] = 0$ --- aber $\Var[X]+\Var[Y] = 2\Var[X] > 0$. Die Regel bricht vollständig zusammen.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum (R3) das Quadrat hat}
+Die Varianz misst quadrierte Abweichungen. Streckt man alle Werte um den Faktor $a$, so verdoppelt sich jede Abweichung um $a$ --- und ihr Quadrat um $a^2$. Die Verschiebung $b$ ändert die Abweichungen nicht und fällt heraus. Das ist genau die Rechnung aus Aufgabe 2.2.
+\end{merksatz}
+
+\section{Die Normalverteilung}
+
+\begin{definition}
+\boxtitelm{Definition 4.3}
+Eine stetige Zufallsgröße $X$ heißt \Begriff{normalverteilt} mit den Parametern $\mu$ und $\sigma > 0$, geschrieben $X \sim \mathcal{N}(\mu, \sigma^2)$, wenn ihre \Begriff{Dichte}
+\[ f(x) = \frac{1}{\sigma\sqrt{2\pi}}\;\exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right) \]
+lautet. Die Wahrscheinlichkeit, dass $X$ zwischen $a$ und $b$ liegt, ist die \kursiv{Fläche} unter dieser Kurve zwischen $a$ und $b$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Formel, Stück für Stück}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+$(x-\mu)^2$ & Der Abstand vom Mittelwert, quadriert. Symmetrisch --- links und rechts gleich.\\
+geteilt durch $2\sigma^2$ & Macht den Abstand einheitenfrei und regelt die Breite.\\
+$\exp(-\cdot)$ & Macht daraus einen Wert, der bei $x=\mu$ am größten ist und nach außen rasch fällt.\\
+$\frac{1}{\sigma\sqrt{2\pi}}$ & Ein Normierungsfaktor, der dafür sorgt, dass die Gesamtfläche genau $1$ beträgt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (-3.6,0) -- (3.6,0);
+\draw[tief, line width=1.2pt, smooth, samples=90, domain=-3.4:3.4]
+  plot (\x, {2.6*exp(-\x*\x/2)});
+\draw[grau!50, dashed, line width=0.6pt] (0,0) -- (0,2.7);
+\foreach \x in {-3,-2,-1,0,1,2,3} \draw[grau!60] (\x,0) -- (\x,-0.12);
+\foreach \x/\lab in {-2/{$\mu-2\sigma$}, 0/{$\mu$}, 2/{$\mu+2\sigma$}}
+  \node[font=\scriptsize, color=grau] at (\x,-0.45) {\lab};
+\fill[tief!22] plot[smooth, samples=40, domain=-1:1] (\x,{2.6*exp(-\x*\x/2)}) -- (1,0) -- (-1,0) -- cycle;
+\node[font=\scriptsize, color=tief] at (0,0.85) {$68\,\%$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Die drei Merkzahlen}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Bereich} & \textbf{Anteil} & \textbf{genauer}\\
+\midrule
+$\mu \pm 1\sigma$ & $68\,\%$ & $68{,}27\,\%$\\
+$\mu \pm 2\sigma$ & $95\,\%$ & $95{,}45\,\%$\\
+$\mu \pm 3\sigma$ & $99{,}7\,\%$ & $99{,}73\,\%$\\
+\midrule
+$\mu \pm 1{,}96\,\sigma$ & \textbf{genau $95\,\%$} & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist die, die man braucht. Die Zahl $1{,}96$ wird Ihnen im ganzen Rest dieses Bandes begegnen --- sie ist der Grund, warum so viele Formeln \enquote{$\pm\,1{,}96$} enthalten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Standardisierung und die Tabelle}
+Ist $X \sim \mathcal{N}(\mu,\sigma^2)$, so ist
+\[ Z = \frac{X-\mu}{\sigma} \;\sim\; \mathcal{N}(0,1) . \]
+
+\schritt{Warum}
+Nach (R1) ist $\mathbb{E}[Z] = \frac{1}{\sigma}(\mu - \mu) = 0$, und nach (R3) ist $\Var[Z] = \frac{1}{\sigma^2}\sigma^2 = 1$. Dass auch die \kursiv{Form} erhalten bleibt, ist eine Eigenschaft der Normalverteilung und wird in Band 4 nachgerechnet.
+
+\schritt{Die Verteilungsfunktion}
+Man schreibt $\Phi(z)$ für die Fläche links von $z$ unter der Standardnormalkurve.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.2cm}P{1.6cm}P{1.2cm}P{1.6cm}@{}}
+\toprule
+$z$ & $\Phi(z)$ & $z$ & $\Phi(z)$\\
+\midrule
+$0{,}00$ & $0{,}5000$ & $1{,}64$ & $0{,}9495$\\
+$0{,}50$ & $0{,}6915$ & $1{,}96$ & $\mathbf{0{,}9750}$\\
+$1{,}00$ & $0{,}8413$ & $2{,}00$ & $0{,}9772$\\
+$1{,}28$ & $0{,}8997$ & $2{,}58$ & $0{,}9951$\\
+$1{,}50$ & $0{,}9332$ & $3{,}00$ & $0{,}9987$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Symmetrieregel}
+Für negative $z$ braucht man keine eigene Tabelle:
+\[ \Phi(-z) = 1 - \Phi(z) . \]
+Das folgt daraus, dass die Kurve spiegelsymmetrisch zur Null ist: Die Fläche links von $-z$ ist so groß wie die rechts von $+z$.
+
+\schritt{Eine Rechnung}
+Wie groß ist die Wahrscheinlichkeit, dass $Z$ zwischen $-1{,}96$ und $1{,}96$ liegt?
+\begin{align*}
+\Pr[-1{,}96 \le Z \le 1{,}96] &= \Phi(1{,}96) - \Phi(-1{,}96)\\
+&= \Phi(1{,}96) - \bigl(1 - \Phi(1{,}96)\bigr)\\
+&= 2\,\Phi(1{,}96) - 1\\
+&= 2 \cdot 0{,}9750 - 1 = 0{,}9500 . \quad \checkmark
+\end{align*}
+\end{merksatz}
+
+\section{Die Stichprobenverteilung des Mittelwerts}
+
+Nun der zentrale Satz dieses Kapitels.
+
+\begin{merksatz}
+\boxtitel{Die Denkfigur}
+Wir stellen uns vor, die Studie würde nicht einmal, sondern tausendmal durchgeführt --- jedes Mal mit sechs neuen Personen aus derselben Grundgesamtheit.
+
+Jede dieser Studien liefert einen Mittelwert. Diese tausend Mittelwerte bilden selbst eine Verteilung: die \Begriff{Stichprobenverteilung} des Mittelwerts.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+\draw[grau!50, line width=0.7pt] (-3.4,0) -- (3.4,0);
+\draw[tief!30, line width=1.0pt, smooth, samples=70, domain=-3.2:3.2]
+  plot (\x, {1.3*exp(-\x*\x/2)});
+\draw[akzent, line width=1.4pt, smooth, samples=70, domain=-3.2:3.2]
+  plot (\x, {1.3*2.449*exp(-6*\x*\x/2)});
+\node[font=\scriptsize, color=tief!60] at (2.5,0.5) {Einzelwerte};
+\node[font=\scriptsize, color=akzent] at (1.9,2.6) {Mittelwerte aus $n=6$};
+\node[font=\scriptsize, color=grau] at (0,-0.4) {$\mu$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man sieht die Behauptung schon im Bild: Die Mittelwerte streuen um denselben Punkt, aber \kursiv{enger}. Der folgende Satz sagt, um wie viel enger --- und die Antwort ist erstaunlich einfach.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 4.4 --- Erwartungswert und Varianz des Mittelwerts}
+Seien $X_1, \ldots, X_n$ unabhängige Zufallsgrößen mit demselben Erwartungswert $\mu$ und derselben Varianz $\sigma^2$. Für $\overline{X} = \frac{1}{n}\sum_i X_i$ gilt
+\[ \mathbb{E}[\overline{X}] = \mu, \qquad \Var[\overline{X}] = \frac{\sigma^2}{n} . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis}
+\schritt{Teil 1 --- der Erwartungswert}
+\begin{align*}
+\mathbb{E}[\overline X] &= \mathbb{E}\left[\frac{1}{n}\sum_{i=1}^n X_i\right]\\
+&= \frac{1}{n}\,\mathbb{E}\left[\sum_{i=1}^n X_i\right] && \text{nach (R1) mit } a = \tfrac1n,\ b=0\\
+&= \frac{1}{n}\sum_{i=1}^n \mathbb{E}[X_i] && \text{nach (R2), } n-1 \text{ mal angewandt}\\
+&= \frac{1}{n}\sum_{i=1}^n \mu = \frac{1}{n}\cdot n\mu = \mu .
+\end{align*}
+
+\schritt{Was das bedeutet}
+Der Stichprobenmittelwert ist \Begriff{erwartungstreu}: Im Durchschnitt über alle möglichen Stichproben trifft er den wahren Wert. Er ist im Einzelfall zu groß oder zu klein, aber nicht systematisch in eine Richtung verschoben.
+
+Beachten Sie: Für diesen Teil wurde \kursiv{keine Unabhängigkeit} gebraucht --- (R2) gilt immer.
+
+\schritt{Teil 2 --- die Varianz}
+\begin{align*}
+\Var[\overline X] &= \Var\left[\frac{1}{n}\sum_{i=1}^n X_i\right]\\
+&= \frac{1}{n^2}\,\Var\left[\sum_{i=1}^n X_i\right] && \text{nach (R3), Quadrat des Faktors}\\
+&= \frac{1}{n^2}\sum_{i=1}^n \Var[X_i] && \textcolor{akzent}{\text{nach (R4) --- hier wird Unabhängigkeit gebraucht}}\\
+&= \frac{1}{n^2}\cdot n\sigma^2 = \frac{\sigma^2}{n} . \qquad \blacksquare
+\end{align*}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 4.5 --- Standardfehler}
+Die Standardabweichung der Stichprobenverteilung des Mittelwerts heißt \Begriff{Standardfehler}:
+\[ \mathrm{SE} = \sqrt{\Var[\overline X]} = \frac{\sigma}{\sqrt n} . \]
+Da $\sigma$ unbekannt ist, schätzt man ihn durch
+\[ \widehat{\mathrm{SE}} = \frac{s}{\sqrt n} . \]
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Standardabweichung und Standardfehler --- der versprochene Kasten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.2cm}P{3.0cm}P{3.2cm}@{}}
+\toprule
+& \textbf{Standardabw. $s$} & \textbf{Standardfehler}\\
+\midrule
+Beschreibt & \textbf{die Daten} & \textbf{den Mittelwert}\\
+Frage & Wie verschieden sind die Personen? & Wie genau kenne ich $\mu$?\\
+Bei wachsendem $n$ & bleibt gleich & \textcolor{gruen}{wird kleiner}\\
+Formel & --- & $s/\sqrt n$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die MOBIL-Gruppe B}
+$s_B = 3{,}46$ Stunden bei $n = 6$:
+\[ \widehat{\mathrm{SE}} = \frac{3{,}46}{\sqrt 6} = \frac{3{,}46}{2{,}449} = 1{,}41 \ \text{Stunden} . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.4cm}P{4.8cm}@{}}
+\toprule
+\enquote{$18{,}0 \pm 3{,}5$} & Die Personen streuen um etwa $3{,}5$ Stunden.\\
+\enquote{$18{,}0 \pm 1{,}4$} & Der Mittelwert ist auf etwa $1{,}4$ Stunden genau bestimmt.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Was bei $n=60$ geschähe}
+$s$ bliebe bei etwa $3{,}5$ --- die Personen werden nicht ähnlicher. Der Standardfehler fiele auf
+\[ \frac{3{,}46}{\sqrt{60}} = \frac{3{,}46}{7{,}746} = 0{,}45 \ \text{Stunden} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wer in einer Abbildung Fehlerbalken zeigt, ohne zu sagen, welche Größe sie darstellen, macht die Abbildung unlesbar --- und im Zweifel sieht das Ergebnis mit Standardfehlern überzeugender aus. Bei $n=60$ ist der Unterschied fast das Achtfache.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Die Wurzel --- und was sie kostet}
+Der Standardfehler fällt mit $1/\sqrt{n}$, nicht mit $1/n$. Das hat eine unbequeme Folge.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Genauigkeit} & \textbf{nötiges $n$} & \\
+\midrule
+Ausgangslage & $100$ & \\
+doppelt so genau & $400$ & $4\times$ so viele\\
+zehnmal so genau & $10\,000$ & $100\times$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die Rechnung}
+Aus $\frac{\sigma}{\sqrt{n_2}} = \frac{1}{2}\cdot\frac{\sigma}{\sqrt{n_1}}$ folgt $\sqrt{n_2} = 2\sqrt{n_1}$, also $n_2 = 4n_1$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Grund, warum große Studien so teuer sind und warum es einen Punkt gibt, ab dem sich Vergrößerung nicht mehr lohnt. Kapitel~7 macht daraus die Fallzahlplanung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der zentrale Grenzwertsatz}
+
+Satz 4.4 sagt, \kursiv{wo} die Mittelwerte liegen und wie weit sie streuen. Er sagt nichts über die \kursiv{Form} ihrer Verteilung. Das leistet der folgende Satz --- und er leistet etwas Erstaunliches.
+
+\begin{merksatz}
+\boxtitel{Satz 4.6 (Zentraler Grenzwertsatz)}
+Seien $X_1, X_2, \ldots$ unabhängig, alle mit demselben Erwartungswert $\mu$ und derselben endlichen Varianz $\sigma^2 > 0$. Dann nähert sich die Verteilung von
+\[ \frac{\overline{X} - \mu}{\sigma/\sqrt n} \]
+mit wachsendem $n$ der Standardnormalverteilung --- \kursiv{unabhängig davon, wie die $X_i$ verteilt sind}.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was daran erstaunlich ist}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Die Ausgangsverteilung darf schief sein, mehrgipflig, diskret, unsymmetrisch --- es ist gleichgültig. Die Mittelwerte werden trotzdem normalverteilt.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+% links: schiefe Ausgangsverteilung
+\begin{scope}
+\draw[grau!60, line width=0.6pt] (0,0) -- (3.6,0);
+\foreach \x/\h in {0.2/1.9, 0.6/2.3, 1.0/1.6, 1.4/1.0, 1.8/0.65, 2.2/0.4, 2.6/0.25, 3.0/0.12}
+  \fill[tief!70] (\x,0) rectangle (\x+0.33,\h);
+\node[font=\scriptsize\itshape, color=grau] at (1.8,-0.5) {Einzelwerte: schief};
+\end{scope}
+\node[font=\large, color=grau] at (4.5,1.2) {$\longrightarrow$};
+% rechts: normal
+\begin{scope}[xshift=5.6cm]
+\draw[grau!60, line width=0.6pt] (-0.2,0) -- (3.8,0);
+\draw[akzent, line width=1.3pt, smooth, samples=70, domain=0:3.6]
+  plot (\x, {2.3*exp(-(\x-1.8)*(\x-1.8)/0.5)});
+\node[font=\scriptsize\itshape, color=grau] at (1.8,-0.5) {Mittelwerte: normal};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\schritt{Warum das die Statistik überhaupt möglich macht}
+Ohne diesen Satz müsste man für jede Fragestellung die Verteilung der Einzelwerte kennen --- und die kennt man fast nie. Der Satz erlaubt, mit einer einzigen Verteilung zu arbeiten, gleichgültig woher die Daten kommen.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Vier Dinge, die der Satz nicht sagt}
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & \textbf{Nicht: Die Daten werden normalverteilt.} Die Einzelwerte bleiben, wie sie sind. Nur die \kursiv{Mittelwerte} werden normal.\\
+$2$ & \textbf{Nicht: Das gilt ab $n = 30$.} Diese Faustregel steht in vielen Büchern und hat keine theoretische Grundlage. Bei stark schiefen Verteilungen braucht man Hunderte, bei symmetrischen genügen oft fünf.\\
+$3$ & \textbf{Nicht: Bei genügend großem $n$ ist alles in Ordnung.} Der Satz setzt Unabhängigkeit und endliche Varianz voraus. Fehlt eines, gilt er nicht --- auch bei $n = 10^6$ nicht.\\
+$4$ & \textbf{Nicht: Die Ränder stimmen auch.} Die Annäherung ist in der Mitte gut und an den äußeren Rändern schlecht. Für sehr kleine $p$-Werte ist sie unzuverlässig.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Zu Punkt 3 --- ein Beispiel}
+Misst man denselben Menschen zehnmal, so sind die Werte nicht unabhängig. Man hat dann nicht $n=10$, sondern näherungsweise $n=1$ mit zehn Wiederholungen. Wer trotzdem durch $\sqrt{10}$ teilt, unterschätzt den Standardfehler um den Faktor drei.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieser Fehler --- \Begriff{Pseudoreplikation} --- ist in der medizinischen Literatur verbreitet: mehrere Messungen je Person, mehrere Zähne je Gebiss, mehrere Augen je Kopf. Die richtige Behandlung leistet die Mehrebenenmodellierung; Kapitel~11 deutet sie an.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Rechnen mit der Normalverteilung}
+Die Mobilisationszeit nach dem bisherigen Schema sei normalverteilt mit $\mu = 26$ Stunden und $\sigma = 6$ Stunden.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{4.2cm}P{4.2cm}@{}}
+\toprule
+(a) Anteil unter $20$ Stunden? & (c) Welche Zeit unterschreiten $90\,\%$?\\
+(b) Anteil zwischen $20$ und $32$? & (d) Anteil über $40$ Stunden?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) --- Standardisieren}
+\[ z = \frac{20 - 26}{6} = \frac{-6}{6} = -1{,}00 \]
+\[ \Pr[X < 20] = \Phi(-1{,}00) = 1 - \Phi(1{,}00) = 1 - 0{,}8413 = \mathbf{0{,}1587} . \]
+Etwa $15{,}9\,\%$.
+
+\schritt{(b) --- Zwei Grenzen}
+\[ z_1 = \frac{20-26}{6} = -1{,}00, \qquad z_2 = \frac{32-26}{6} = +1{,}00 \]
+\[ \Pr[20 \le X \le 32] = \Phi(1{,}00) - \Phi(-1{,}00) = 0{,}8413 - 0{,}1587 = \mathbf{0{,}6826} . \]
+Das ist die $68$-Prozent-Regel --- die Grenzen liegen genau bei $\mu \pm 1\sigma$. \checkmark
+
+\schritt{(c) --- Rückwärts rechnen}
+Gesucht ist $x$ mit $\Phi\!\left(\frac{x-26}{6}\right) = 0{,}90$.
+
+Aus der Tabelle: $\Phi(1{,}28) = 0{,}8997 \approx 0{,}90$. Also
+\[ \frac{x - 26}{6} = 1{,}28 \quad\Longrightarrow\quad x = 26 + 6 \cdot 1{,}28 = 26 + 7{,}68 = \mathbf{33{,}7} \ \text{Stunden} . \]
+
+\schritt{(d) --- Der Rand}
+\[ z = \frac{40-26}{6} = \frac{14}{6} = 2{,}333 \]
+Die Tabelle gibt $\Phi(2{,}33) \approx 0{,}9901$, also
+\[ \Pr[X > 40] = 1 - 0{,}9901 = \mathbf{0{,}0099} \approx 1\,\% . \]
+
+\schritt{Die Probe --- und ein Vorbehalt}
+Alle vier Ergebnisse sind plausibel. Aber: Die Annahme der Normalverteilung ist hier fragwürdig.
+
+Eine normalverteilte Größe kann beliebig kleine Werte annehmen. Für $\mu=26$, $\sigma=6$ wäre
+\[ \Pr[X < 0] = \Phi\!\left(\frac{0-26}{6}\right) = \Phi(-4{,}33) \approx 0{,}000008 . \]
+Das ist winzig, aber nicht null --- und eine negative Mobilisationszeit gibt es nicht.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Bei Zeitdauern ist die Normalverteilung stets nur eine Näherung. Sie ist brauchbar, solange $\mu$ mehrere Standardabweichungen über null liegt --- hier gut vier. Bei $\mu = 10$ und $\sigma = 6$ wäre sie es nicht mehr, und man nähme eine Verteilung, die nur positive Werte zulässt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Standardfehler und Fallzahl}
+Bei der MOBIL-Studie soll der Mittelwert der Gruppe B auf $\pm 0{,}5$ Stunden genau bestimmt werden --- gemeint ist ein Standardfehler von höchstens $0{,}5$. Wie viele Personen braucht man, wenn $\sigma \approx 3{,}5$ Stunden ist?
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingung aufschreiben}
+\[ \frac{\sigma}{\sqrt n} \le 0{,}5 \]
+
+\schritt{Schritt 2 --- Nach $n$ auflösen}
+\begin{align*}
+\frac{3{,}5}{\sqrt n} &\le 0{,}5\\
+3{,}5 &\le 0{,}5\sqrt n\\
+\sqrt n &\ge \frac{3{,}5}{0{,}5} = 7\\
+n &\ge 49 .
+\end{align*}
+
+\schritt{Antwort}
+Mindestens $\mathbf{49}$ Personen in der Gruppe.
+
+\schritt{Probe}
+\[ \frac{3{,}5}{\sqrt{49}} = \frac{3{,}5}{7} = 0{,}50 . \quad \checkmark \]
+
+\schritt{Schritt 3 --- Was die Studie tatsächlich vorsieht}
+Die MOBIL-Studie hat $n = 60$ je Gruppe:
+\[ \mathrm{SE} = \frac{3{,}5}{\sqrt{60}} = \frac{3{,}5}{7{,}746} = 0{,}452 \ \text{Stunden} . \]
+Die geplante Genauigkeit wird erreicht. \checkmark
+
+\schritt{Schritt 4 --- Was doppelte Genauigkeit kostete}
+Für $\mathrm{SE} \le 0{,}25$:
+\[ \sqrt n \ge \frac{3{,}5}{0{,}25} = 14 \quad\Longrightarrow\quad n \ge 196 . \]
+Viermal so viele Personen für die halbe Unsicherheit --- die Wurzelregel in Zahlen.
+
+\schritt{Nachbemerkung}
+Diese Rechnung ist noch keine Fallzahlplanung. Sie fragt nach der \kursiv{Genauigkeit einer Schätzung}, nicht nach der Fähigkeit, einen Unterschied nachzuweisen. Letzteres verlangt zusätzlich eine Vorstellung davon, wie groß der Unterschied sein könnte --- Kapitel~7.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Der Grenzwertsatz an einem Würfel}
+Ein Würfel liefert die Augenzahlen $1$ bis $6$ mit gleicher Wahrscheinlichkeit.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{4.2cm}P{4.2cm}@{}}
+\toprule
+(a) $\mu$ und $\sigma$ bestimmen & (c) Wahrscheinlichkeit, dass\\
+(b) Verteilung von $\overline X$ für $n=36$ & \quad $\overline X > 4$?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) --- Erwartungswert}
+Jede Augenzahl hat Wahrscheinlichkeit $\frac16$:
+\[ \mu = \frac{1+2+3+4+5+6}{6} = \frac{21}{6} = 3{,}5 . \]
+
+\schritt{Varianz über den Verschiebungssatz}
+\[ \mathbb{E}[X^2] = \frac{1+4+9+16+25+36}{6} = \frac{91}{6} \approx 15{,}167 \]
+\[ \sigma^2 = \mathbb{E}[X^2] - \mu^2 = 15{,}167 - 12{,}25 = 2{,}917 \]
+\[ \sigma = \sqrt{2{,}917} \approx 1{,}708 . \]
+
+\schritt{(b) --- Die Stichprobenverteilung}
+Nach Satz 4.4:
+\[ \mathbb{E}[\overline X] = 3{,}5, \qquad \Var[\overline X] = \frac{2{,}917}{36} = 0{,}0810 , \]
+\[ \mathrm{SE} = \sqrt{0{,}0810} = 0{,}2847 . \]
+
+Nach Satz 4.6 ist $\overline X$ näherungsweise $\mathcal{N}(3{,}5;\ 0{,}0810)$ verteilt.
+
+\schritt{(c) --- Die gesuchte Wahrscheinlichkeit}
+\[ z = \frac{4 - 3{,}5}{0{,}2847} = \frac{0{,}5}{0{,}2847} = 1{,}756 \]
+Die Tabelle: $\Phi(1{,}76) \approx 0{,}9608$. Also
+\[ \Pr[\overline X > 4] \approx 1 - 0{,}9608 = \mathbf{0{,}039} , \]
+etwa $3{,}9\,\%$.
+
+\schritt{Die Deutung}
+Die Einzelverteilung des Würfels ist \kursiv{gleichverteilt} --- ein Rechteck, nichts weniger glockenförmig lässt sich denken. Trotzdem ist der Mittelwert aus $36$ Würfen sehr gut normalverteilt; die Näherung stimmt hier auf zwei Stellen.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das ist der Grund, warum die Faustregel \enquote{ab $n=30$} überhaupt entstanden ist: Bei symmetrischen Ausgangsverteilungen stimmt sie sogar für viel kleinere $n$. Bei schiefen --- etwa Wartezeiten --- versagt sie. Die Faustregel beschreibt den bequemen Fall und wird auf alle Fälle angewandt.}
+\end{minipage}
+\end{center}
+
+\schritt{Zum Vergleich --- die Einzelbeobachtung}
+Wie wahrscheinlich ist es, dass ein \kursiv{einzelner} Wurf über $4$ liegt? Das sind die Augenzahlen $5$ und $6$:
+\[ \frac{2}{6} = 0{,}333 . \]
+Gegen $0{,}039$ beim Mittelwert aus $36$ Würfen --- fast das Zehnfache. Genau das leistet die Mittelung: Extreme werden unwahrscheinlich.
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Drei Jahrhunderte für einen Satz}
+Der zentrale Grenzwertsatz hat eine ungewöhnlich lange Entstehungsgeschichte.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Beitrag}\\
+\midrule
+$1733$ & de Moivre & Der Fall der Münzwürfe\\
+$1809$ & Gauß & Die Normalverteilung als Fehlergesetz\\
+$1810$ & Laplace & Verallgemeinerung auf beliebige Verteilungen\\
+$1901$ & Ljapunow & Erster strenger Beweis\\
+$1920$ & Pólya & Der Name \enquote{zentraler Grenzwertsatz}\\
+$1922$ & Lindeberg & Die heute übliche Bedingung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\Person{Abraham de Moivre} fand 1733 als Erster die Glockenkurve --- als Näherung für die Binomialverteilung bei vielen Münzwürfen. Er veröffentlichte das Ergebnis auf sieben Seiten, lateinisch, im Selbstverlag, und es blieb weitgehend unbeachtet.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Name ist ein Übersetzungsproblem. Pólya nannte den Satz \enquote{zentral} im Sinne von \enquote{von zentraler Bedeutung für die Wahrscheinlichkeitstheorie}. Im Deutschen liest man es leicht als \enquote{Satz über den zentralen Grenzwert}, was keinen Sinn ergibt. Im Englischen besteht dieselbe Zweideutigkeit.}
+\end{minipage}
+\end{center}
+
+\Person{Carl Friedrich Gauß} begründete die Normalverteilung 1809 ganz anders: Er fragte, für welches Fehlergesetz das arithmetische Mittel der beste Schätzer wäre --- und rechnete rückwärts zur Glockenkurve. Die Kurve ist also nicht aus den Daten gefunden, sondern aus dem Wunsch, mitteln zu dürfen.
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wie groß muss $n$ sein?}
+Die Frage hat keine allgemeine Antwort, und die Faustregel \enquote{$n \ge 30$} ist nicht haltbar.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+\textbf{Ausgangs\-verteilung} & \textbf{nötiges $n$} & \\
+\midrule
+symmetrisch, eingipflig & $\approx 5$ & \textcolor{gruen}{sehr schnell}\\
+gleichverteilt & $\approx 12$ & \textcolor{gruen}{schnell}\\
+mäßig schief & $\approx 30$ & die Faustregel\\
+stark schief (Lognormal) & $\approx 100$ bis $300$ & \textcolor{akzent}{deutlich mehr}\\
+sehr schwere Ränder & \textcolor{akzent}{gar nicht} & \textcolor{akzent}{\textbf{Varianz unendlich}}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die letzte Zeile betrifft Verteilungen ohne endliche Varianz --- die bekannteste ist die Cauchy-Verteilung. Bei ihr ist der Mittelwert aus $n$ Beobachtungen genauso gestreut wie eine Einzelbeobachtung, gleichgültig wie groß $n$ wird. Mitteln hilft dort überhaupt nicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In der Medizin trifft man solche Fälle bei Kostendaten und Liegedauern: wenige extreme Werte tragen den Großteil der Summe. Dort arbeitet man mit Medianen, mit logarithmierten Werten oder mit verteilungsfreien Verfahren --- Kapitel~9.}
+\end{minipage}
+\end{center}
+
+Praktisch prüft man die Annahme nicht durch Rechnen an der Faustregel, sondern durch \Begriff{Simulation}: Man zieht wiederholt Stichproben aus einer Verteilung, die den Daten ähnelt, und sieht nach, ob die Mittelwerte normal aussehen. Das ist der Bootstrap-Gedanke aus Kapitel~9.
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Definition 4.1} & Parameter fest und unbekannt, Schätzer bekannt und zufällig\\
+\textbf{Normal\-verteilung} & Standardisieren, Tabelle, die Zahl $1{,}96$\\
+\textbf{Satz 4.4} & $\mathbb{E}[\overline X] = \mu$ und $\Var[\overline X] = \sigma^2/n$\\
+\textbf{Definition 4.5} & Standardfehler --- und der Unterschied zu $s$\\
+\textbf{Satz 4.6} & Zentraler Grenzwertsatz --- und vier Dinge, die er nicht sagt\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel fragen wir, was einen Schätzer gut macht --- und lösen dabei das in Kapitel~2 vertagte Rätsel des $n-1$.}
+\end{minipage}
+\end{center}
+\end{merksatz}

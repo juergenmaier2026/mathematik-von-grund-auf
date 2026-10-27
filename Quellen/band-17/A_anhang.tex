@@ -1,0 +1,334 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Beschreiben}
+
+\begin{merksatz}
+\boxtitel{Lage und Streuung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\MW = \frac{1}{n}\sum_i x_i$ & arithmetisches Mittel (2.2)\\
+$\sum_i (x_i-\MW) = 0$ & Satz 2.3\\
+$\sum(x_i-a)^2$ minimal bei $a=\MW$ & Satz 2.4\\
+$\sum|x_i-a|$ minimal bei $a=\Med$ & Satz 2.6\\
+$s^2 = \frac{1}{n-1}\sum (x_i-\MW)^2$ & Stichprobenvarianz\\
+$\sum(x_i-\MW)^2 = \sum x_i^2 - n\MW^2$ & Verschiebungssatz (2.11)\\
+$\mathrm{IQR} = Q_3 - Q_1$ & Quartilsabstand\\
+$v = s/\MW$ & Variationskoeffizient\\
+$z_i = (x_i-\MW)/s$ & Standardisierung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Zusammenhang}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$s_{xy} = \frac{1}{n-1}\sum(x_i-\MW)(y_i-\overline y)$ & Kovarianz (3.1)\\
+$\sum(x-\MW)(y-\overline y) = \sum xy - n\MW\overline y$ & Satz 3.2\\
+$r = s_{xy}/(s_xs_y)$ & Korrelation (3.3)\\
+$-1 \le r \le 1$ & Satz 3.4\\
+$r_s = 1 - \frac{6\sum d_i^2}{n(n^2-1)}$ & Spearman, ohne Bindungen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Schätzen und Testen}
+
+\begin{merksatz}
+\boxtitel{Grundlagen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\mathbb{E}[\overline X] = \mu$ & Satz 4.4\\
+$\Var[\overline X] = \sigma^2/n$ & Satz 4.4, braucht Unabhängigkeit\\
+$\mathrm{SE} = s/\sqrt n$ & Standardfehler (4.5)\\
+$\mathbb{E}[X^2] = \Var[X] + \mu^2$ & Hilfssatz zu 5.3\\
+$\mathbb{E}[S^2] = \sigma^2$ & Satz 5.3 --- das $n-1$\\
+$\mathrm{MSE} = \Var + \mathrm{Bias}^2$ & Satz 5.6\\
+$\hat\pi = k/n$ & ML für den Anteil\\
+$\hat\mu = \MW$, $\hat\sigma^2 = \frac1n\sum(x-\MW)^2$ & ML, normal --- verzerrt\\
+$\hat\lambda = 1/\MW$ & ML, exponentiell\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Intervalle und Tests}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\MW \pm t_{n-1}\,\frac{s}{\sqrt n}$ & $t$-Intervall (6.2)\\
+$s_p^2 = \frac{(n_A-1)s_A^2+(n_B-1)s_B^2}{n_A+n_B-2}$ & gepoolte Varianz\\
+$\mathrm{SE} = s_p\sqrt{\frac{1}{n_A}+\frac{1}{n_B}}$ & Student\\
+$\mathrm{SE} = \sqrt{\frac{s_A^2}{n_A}+\frac{s_B^2}{n_B}}$ & Welch\\
+Wilson & statt Wald bei Anteilen\\
+$3/n$ & Dreierregel bei null Ereignissen\\
+$n = \frac{2(z_{1-\alpha/2}+z_{1-\beta})^2\sigma^2}{\delta^2}$ & Fallzahl je Gruppe\\
+$\chi^2 = \sum \frac{(O-E)^2}{E}$ & Vierfeldertafel\\
+$U_A = R_A - \frac{n_A(n_A+1)}{2}$ & Mann-Whitney\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Modelle und Medizin}
+
+\begin{merksatz}
+\boxtitel{Regression}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$b = \frac{\sum(x-\MW)(y-\overline y)}{\sum(x-\MW)^2}$ & Satz 10.2\\
+$a = \overline y - b\MW$ & Gerade durch den Schwerpunkt\\
+$b = r\,s_y/s_x$ & Zusammenhang mit $r$\\
+$R^2 = r^2$ & nur bei einfacher Regression\\
+$\widehat{\mathrm{SE}}(b) = s_e/\sqrt{\sum(x-\MW)^2}$ & mit $s_e^2 = SS_{\text{Rest}}/(n-2)$\\
+$\hat z_y = r\,z_x$ & Regression zur Mitte\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Andere Zielgrößen und Diagnostik}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\operatorname{logit}(\pi) = \ln\frac{\pi}{1-\pi}$ & logistisches Modell (11.2)\\
+$e^{\beta}$ & Chancenverhältnis je Einheit\\
+$\mathrm{OR} = \frac{ad}{bc}$ & Kreuzprodukt\\
+$\widehat{\mathrm{SE}}(\ln\mathrm{OR}) = \sqrt{\frac1a+\frac1b+\frac1c+\frac1d}$ & \\
+$S(t) = \prod_{t_j \le t}(1-d_j/n_j)$ & Kaplan-Meier\\
+$h(t\mid x) = h_0(t)e^{\beta x}$ & Cox (11.3)\\
+$\mathrm{LQ}^{+} = \frac{\text{Sens}}{1-\text{Spez}}$ & Likelihood-Quotient\\
+Chance nachher $=$ Chance vorher $\times\ \mathrm{LQ}$ & Bayes, Chancenform\\
+$\mathrm{AUC} = U/(n_1n_2)$ & wie Mann-Whitney\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Viele Tests, viele Studien}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$1-(1-\alpha)^m$ & Fehlerrate bei $m$ Tests\\
+$\alpha/m$ & Bonferroni\\
+$\alpha/(m-i+1)$ & Holm, aufsteigend\\
+$\frac{i}{m}q$ & Benjamini-Hochberg\\
+$w_i = 1/\mathrm{SE}_i^2$ & Metaanalyse, fester Effekt\\
+$Q = \sum w_i(\hat\theta_i - \hat\theta)^2$ & Heterogenität\\
+$I^2 = \max(0, \frac{Q-(k-1)}{Q})$ & \\
+$w_i^{*} = 1/(\mathrm{SE}_i^2+\tau^2)$ & zufälliger Effekt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte des Bandes}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz wo --- und worauf er beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{1.2cm}P{3.6cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Beruht auf}\\
+\midrule
+Skalenniveaus & $1$ & erlaubte Umformungen\\
+Mittelwert minimiert Quadrate & $2$ & Null einfügen\\
+Median minimiert Beträge & $2$ & Verschiebeargument\\
+Verschiebungssatz & $2$ & Ausquadrieren\\
+$-1 \le r \le 1$ & $3$ & Summe von Quadraten\\
+Simpson & $3$ & gewichtetes Mittel\\
+$\Var[\overline X] = \sigma^2/n$ & $4$ & Unabhängigkeit\\
+Grenzwertsatz & $4$ & \textcolor{grau}{nicht bewiesen}\\
+$\mathbb{E}[S^2] = \sigma^2$ & $5$ & Satz 4.4 auf $\overline X$\\
+MSE-Zerlegung & $5$ & derselbe Kniff wie 2.4\\
+ML für $\mu$ & $5$ & \textbf{Satz 2.4}\\
+$t$-Intervall & $6$ & Umformung der Ungleichung\\
+Überlappungs\-problem & $6$ & $\sqrt{a^2+b^2} < a+b$\\
+Sieben Fehldeutungen & $7$ & $\Pr[D|H_0]$ gegen $\Pr[H_0|D]$\\
+Varianzanalyse & $8$ & Zerlegung wie 2.4\\
+Fisher exakt & $8$ & Abzählen\\
+Permutationstest & $9$ & Austauschbarkeit\\
+Kleinste Quadrate & $10$ & Ableiten, Satz 2.3\\
+Regression zur Mitte & $10$ & $b = rs_y/s_x$\\
+Chancenverhältnis & $11$ & Logit-Differenz\\
+Kaplan-Meier & $11$ & Produkt bedingter Anteile\\
+Fall-Kontroll & $12$ & Spaltenweise Bildung\\
+Prävalenz\-abhängigkeit & $13$ & Satz von Bayes\\
+AUC $= U/(n_1n_2)$ & $13$ & Kapitel~9\\
+Bonferroni & $14$ & Vereinigungs\-abschätzung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was in diesem Band \kursiv{nicht} bewiesen wurde}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{1.4cm}P{3.4cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+Zentraler Grenzwertsatz & $4$ & Band 4, Teil IV\\
+Form der $t$-Verteilung & $6$ & Casella/Berger\zit{7}\\
+Zweite Momentenmethode & $9$ & Efron/Tibshirani\zit{11}\\
+Partielle Likelihood & $11$ & Cox\zit{9}\\
+Tschebyschew-Ungleichung & $5$ & Band 4, Kapitel 7\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Fünf Auslassungen. Jede ist im Text als solche benannt, mit Begründung und Fundstelle. Das ist die einzige zulässige Form, die Regel dieses Werkes zu brechen: offen und mit Quellenangabe.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von den Zitronen bis zur Replikationskrise}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.36}
+\begin{tabular}{@{}P{1.4cm}P{2.8cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Ereignis}\\
+\midrule
+$1747$ & Lind & erster kontrollierter Versuch\\
+$1763$ & Bayes & Satz über umgekehrte Wahrscheinlichkeit\\
+$1774$ & Laplace & allgemeine Form\\
+$1805$ & Legendre & kleinste Quadrate\\
+$1809$ & Gauß & Normalverteilung als Fehlergesetz\\
+$1835$ & Quetelet & der Durchschnittsmensch\\
+$1858$ & Nightingale & Statistik als Argument\\
+$1886$ & Galton & Regression zur Mitte\\
+$1896$ & Pearson & Korrelationskoeffizient\\
+$1900$ & Pearson & $\chi^2$-Test\\
+$1908$ & Gosset & $t$-Verteilung\\
+$1922$ & Fisher & Maximum-Likelihood\\
+$1925$ & Fisher & Signifikanztest, Varianzanalyse\\
+$1928$ & Neyman, Pearson & Entscheidungsverfahren\\
+$1935$ & Fisher & \kursiv{Design of Experiments}\\
+$1937$ & Neyman & Konfidenzintervall\\
+$1945$ & Wilcoxon & Rangtests\\
+$1946$ & Stevens & Skalenniveaus\\
+$1947$ & Mann, Whitney & $U$-Test\\
+$1948$ & Bradford Hill & erste randomisierte Studie\\
+$1956$ & Stein & Zusammenziehen\\
+$1958$ & Kaplan, Meier & Überlebenskurve\\
+$1965$ & Bradford Hill & neun Kriterien\\
+$1972$ & Cox & Regressionsmodell\\
+$1972$ & Cochrane & \kursiv{Effectiveness and Efficiency}\\
+$1976$ & Glass & Metaanalyse\\
+$1977$ & Tukey & \kursiv{Exploratory Data Analysis}\\
+$1979$ & Efron & Bootstrap\\
+$1993$ & --- & Cochrane-Zusammenarbeit\\
+$1995$ & Benjamini, Hochberg & Falscherkennungsrate\\
+$2001$ & Breiman & die zwei Kulturen\\
+$2005$ & Ioannidis & \kursiv{Most findings are false}\\
+$2005$ & --- & Registrierungspflicht\\
+$2009$ & Pearl & \kursiv{Causality}, 2.\ Auflage\\
+$2015$ & Open Science & Wiederholungsvorhaben\\
+$2016$ & ASA & Erklärung zum $p$-Wert\\
+$2019$ & Amrhein u.\,a. & \enquote{signifikant} abschaffen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Begriff} & \textbf{Bedeutung}\\
+\midrule
+\endhead
+Alpha & vorab festgelegtes Niveau (7.3)\\
+AUC & Fläche unter der ROC-Kurve (13.2)\\
+Ausreißer & auffällig abweichender Wert (2.4)\\
+Austauschbarkeit & Voraussetzung des Permutationstests (9)\\
+Bias & systematische Abweichung (5.2)\\
+Bootstrap & Ziehen aus der Stichprobe (9)\\
+Bruchpunkt & Robustheitsmaß (2.9)\\
+Chance & $\pi/(1-\pi)$ (11.1)\\
+Erwartungstreu & $\mathbb{E}[\hat\theta] = \theta$ (5.2)\\
+Fallzahl & Umfang je Gruppe (7)\\
+Freiheitsgrade & Zahl unabhängiger Abweichungen\\
+Hazard & momentane Ereignisrate (11.3)\\
+Heterogenität & echte Verschiedenheit der Studien (14)\\
+$I^2$ & Anteil nicht zufälliger Streuung (14)\\
+Intention-to-treat & Auswertung wie randomisiert (12)\\
+Kollider & von beiden beeinflusst (3, 15)\\
+Konfidenzintervall & Überdeckung des Verfahrens (6.1)\\
+Konfounder & wirkt auf Ursache und Wirkung (3)\\
+Konsistenz & Annäherung bei wachsendem $n$ (5.4)\\
+Kovarianz & ungenormtes Zusammenhangsmaß (3.1)\\
+Likelihood & Wahrscheinlichkeit der Daten als Funktion von $\theta$ (5)\\
+Macht & $1-\beta$ (7.3)\\
+Median & mittlere Ausprägung (2.5)\\
+Mediator & liegt auf dem Wirkungsweg (3)\\
+Metaanalyse & Zusammenfassung mehrerer Studien (14)\\
+Multiplizität & viele Tests zugleich (14)\\
+Nullhypothese & Annahme ohne Effekt (7.1)\\
+Ordinalskala & geordnet, Abstände undeutbar (1.2)\\
+$p$-Wert & $\Pr[\text{so extrem} \mid H_0]$ (7.2)\\
+Perzentil & siehe Quantil (2.7)\\
+Prädiktiver Wert & bedingt auf den Befund (13.1)\\
+Prävalenz & Häufigkeit in der Grundgesamtheit (13)\\
+Pseudoreplikation & abhängige Werte als unabhängig (4)\\
+Randomisierung & zufällige Zuteilung (12)\\
+Residuum & $y_i - \hat y_i$ (10.3)\\
+Robustheit & Unempfindlichkeit gegen Ausreißer (2.4)\\
+ROC & Sensitivität gegen $1-$Spezifität (13)\\
+Sensitivität & bedingt auf Krankheit (13.1)\\
+Signifikanz & $p \le \alpha$ --- nicht Bedeutsamkeit (7)\\
+Spezifität & bedingt auf Gesundheit (13.1)\\
+Standardfehler & Streuung des Schätzers (4.5)\\
+Stichprobe & untersuchte Teilmenge (4.1)\\
+$\tau^2$ & Zusatzvarianz zwischen Studien (14)\\
+Verblindung & Unkenntnis der Zuteilung (12)\\
+Verteilungsfrei & ohne Normalannahme (9)\\
+Zensierung & Beobachtung endete vorzeitig (11)\\
+$z$-Wert & standardisierter Wert (2.12)\\
+\bottomrule
+\end{longtable}}
+\end{center}
+\end{merksatz}

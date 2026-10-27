@@ -1,0 +1,757 @@
+\chapter{Resistenz und Evolution}
+
+\section{Was fehlte}
+
+\begin{merksatz}
+\boxtitel{Der Widerspruch aus Kapitel 13}
+Das Log-kill-Modell sagte vollständige Heilung vorher. Tatsächlich kehren viele Tumoren wieder, und viele Infektionen sprechen nach einiger Zeit nicht mehr an.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der fehlende Baustein: Nicht alle Zellen sind gleich empfindlich.} Ein kleiner Teil überlebt jede Gabe --- und genau dieser Teil vermehrt sich danach.
+\end{minipage}
+\end{center}
+
+\schritt{Die Frage, die dahintersteht}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Erworben} & Die Behandlung \kursiv{macht} Zellen unempfindlich.\\
+\textbf{Vorbestehend} & Unempfindliche Zellen waren schon da; die Behandlung \kursiv{wählt} sie aus.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Frage klingt akademisch und ist es nicht: Beide Fälle verlangen völlig verschiedene Behandlungsstrategien. Abschnitt 14.3 zeigt, wie man sie unterscheidet --- mit einem Versuch, der ohne jede molekulare Untersuchung auskommt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wann Resistenz entsteht}
+
+\begin{merksatz}
+\boxtitel{Satz 14.1 --- die Goldie-Coldman-Abschätzung}
+Entstehen unempfindliche Zellen bei jeder Teilung mit der Wahrscheinlichkeit $\mu$, so beträgt bei einer Zellzahl $N$ die Wahrscheinlichkeit, dass \kursiv{keine} vorhanden ist, näherungsweise
+\[ \Pr[\text{keine Resistenz}] \approx e^{-\mu N} . \]
+
+\schritt{Begründung}
+Um von einer Zelle auf $N$ zu kommen, sind etwa $N$ Teilungen nötig --- jede Zelle außer der ersten entstand durch eine.
+
+Die erwartete Zahl unempfindlicher Zellen ist also etwa $\mu N$. Sind die Ereignisse selten und unabhängig, so folgt ihre Zahl näherungsweise einer Poisson-Verteilung, und die Wahrscheinlichkeit für null Ereignisse ist $e^{-\mu N}$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es ist dieselbe Poisson-Näherung wie am Ende von Kapitel~13 --- nur diesmal für das Auftreten statt für das Überleben.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Zahlen sind unbequem}
+Mit $\mu = 10^{-6}$ je Teilung:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+$N$ & $\mu N$ & $\Pr[\text{keine}]$\\
+\midrule
+$10^{3}$ & $0{,}001$ & $99{,}9\,\%$\\
+$10^{4}$ & $0{,}01$ & $99{,}0\,\%$\\
+$10^{5}$ & $0{,}1$ & $90{,}5\,\%$\\
+$\mathbf{10^{6}}$ & $\mathbf{1}$ & $\mathbf{36{,}8\,\%}$\\
+$10^{7}$ & $10$ & $0{,}005\,\%$\\
+$10^{9}$ & $1000$ & \textcolor{akzent}{praktisch null}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die kritische Größe}
+\[ N_c = \frac{1}{\mu} = 10^{6} \ \text{Zellen} = 1\ \mathrm{mg} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Tumor von einem Milligramm enthält mit Wahrscheinlichkeit $63\,\%$ bereits unempfindliche Zellen.} Die Nachweisgrenze liegt tausendfach höher.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist die Lage beschrieben, in der jede Behandlung beginnt: \textbf{Zum Zeitpunkt der Diagnose sind unempfindliche Zellen mit Sicherheit vorhanden.} Nicht, weil die Behandlung sie erzeugt hätte --- sondern weil sie in einem Tumor dieser Größe zwangsläufig entstehen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die praktische Folgerung, die Goldie und Coldman zogen}
+Je früher behandelt wird und je mehr voneinander unabhängige Mittel gleichzeitig gegeben werden, desto geringer die Wahrscheinlichkeit, dass eine Zelle gegen \kursiv{alle} unempfindlich ist.
+
+Bei zwei unabhängigen Mitteln:
+\[ \Pr[\text{gegen beide}] = \mu^2 = 10^{-12} \quad\Longrightarrow\quad N_c = 10^{12} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die rechnerische Begründung der Kombinationstherapie --- in der Onkologie wie bei Tuberkulose und HIV, wo regelmäßig drei oder vier Mittel gleichzeitig gegeben werden. Die Voraussetzung ist \kursiv{Unabhängigkeit}: Die Resistenzmechanismen dürfen einander nicht bedingen. Trifft das nicht zu, bricht die Rechnung zusammen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Vorher oder nachher --- der Versuch von Luria und Delbrück}
+
+\begin{merksatz}
+\boxtitel{Die Frage und der Kunstgriff}
+1943 war umstritten, ob Bakterien durch den Kontakt mit einem Virus unempfindlich \kursiv{werden} oder ob unempfindliche Bakterien bereits vorhanden sind.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Luria und Delbrück entschieden die Frage ohne jede Beobachtung des Vorgangs --- allein durch die \kursiv{Streuung} der Ergebnisse.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Versuchsaufbau}
+Man lässt viele getrennte Kulturen aus wenigen Zellen anwachsen, setzt dann jede dem Virus aus und zählt die überlebenden Kolonien.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 14.2 --- die beiden Vorhersagen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.2cm}P{3.0cm}P{3.0cm}@{}}
+\toprule
+& \textbf{erworben} & \textbf{vorbestehend}\\
+\midrule
+Wann & bei Kontakt & während des Wachstums\\
+Zahl je Kultur & Poisson & \textcolor{akzent}{stark gestreut}\\
+$\operatorname{Var}/\text{Mittel}$ & $\approx 1$ & \textcolor{akzent}{$\gg 1$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum bei Erwerb Poisson}
+Jede der $N$ Zellen wird beim Kontakt unabhängig mit derselben kleinen Wahrscheinlichkeit unempfindlich. Das ist genau die Lage, in der die Poisson-Verteilung gilt --- und für sie ist die Varianz gleich dem Mittelwert.
+
+\schritt{Warum bei Vorbestehen nicht}
+Eine Mutation, die \kursiv{früh} im Wachstum auftritt, wird mit der Kultur vervielfältigt. Aus einer einzigen frühen Mutation werden Tausende von Nachkommen.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+\begin{scope}
+\node[knoten] (w) at (0,1.7) {};
+\node[knoten] (a) at (-0.7,0.85) {}; \node[knoten] (b) at (0.7,0.85) {};
+\node[knoten] (a1) at (-1.1,0) {}; \node[knoten] (a2) at (-0.35,0) {};
+\node[knoten] (b1) at (0.35,0) {}; \node[knotenr] (b2) at (1.1,0) {};
+\draw[kante] (w)--(a); \draw[kante] (w)--(b);
+\draw[kante] (a)--(a1); \draw[kante] (a)--(a2);
+\draw[kante] (b)--(b1); \draw[kante] (b)--(b2);
+\node[font=\scriptsize\itshape, color=grau] at (0,-0.65) {spät: 1 Nachkomme};
+\end{scope}
+\begin{scope}[xshift=4.6cm]
+\node[knoten] (w) at (0,1.7) {};
+\node[knoten] (a) at (-0.7,0.85) {}; \node[knotenr] (b) at (0.7,0.85) {};
+\node[knoten] (a1) at (-1.1,0) {}; \node[knoten] (a2) at (-0.35,0) {};
+\node[knotenr] (b1) at (0.35,0) {}; \node[knotenr] (b2) at (1.1,0) {};
+\draw[kante] (w)--(a); \draw[kante, akzent] (w)--(b);
+\draw[kante] (a)--(a1); \draw[kante] (a)--(a2);
+\draw[kante, akzent] (b)--(b1); \draw[kante, akzent] (b)--(b2);
+\node[font=\scriptsize\itshape, color=grau] at (0,-0.65) {früh: 2 Nachkommen};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In den meisten Kulturen trat keine frühe Mutation auf --- dort findet man wenige oder keine Überlebenden. In den wenigen mit früher Mutation findet man sehr viele.} Das erzeugt eine enorme Streuung.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Zahlenbeispiel}
+Zwanzig Kulturen, gezählte Kolonien:
+\[ 1,\ 0,\ 3,\ 0,\ 0,\ 5,\ 0,\ 5,\ 0,\ 6,\ 107,\ 0,\ 0,\ 0,\ 1,\ 0,\ 0,\ 64,\ 0,\ 35 \]
+
+\schritt{Mittelwert}
+\[ \MW = \frac{1+3+5+5+6+107+1+64+35}{20} = \frac{227}{20} = 11{,}35 \]
+
+\schritt{Varianz}
+\[ \sum x_i^2 = 1+9+25+25+36+11449+1+4096+1225 = 16\,867 \]
+Nach dem Verschiebungssatz (Band 17, Satz 2.11):
+\[ \sum(x_i-\MW)^2 = 16\,867 - 20 \cdot 11{,}35^2 = 16\,867 - 2576{,}5 = 14\,290{,}5 \]
+\[ s^2 = \frac{14\,290{,}5}{19} = 752{,}1 \]
+
+\schritt{Das Verhältnis}
+\[ \frac{s^2}{\MW} = \frac{752{,}1}{11{,}35} = 66{,}3 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei Poisson-Verteilung müsste dieses Verhältnis nahe bei $1$ liegen. Es ist $66$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist die Frage entschieden: \textbf{Die Mutationen bestanden bereits, bevor das Virus hinzukam.} Die Auslese erzeugt die Unempfindlichkeit nicht, sie legt sie frei. Elf der zwanzig Kulturen hatten keinen einzigen Überlebenden, eine hatte hundertsieben --- ein Muster, das eine Poisson-Verteilung mit Mittelwert $11$ praktisch nie hervorbringt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Kontrollrechnung}
+Bei Poisson mit $\lambda = 11{,}35$ wäre
+\[ \Pr[X = 0] = e^{-11{,}35} = 1{,}2\cdot10^{-5} . \]
+In zwanzig Kulturen erwartete man $0{,}00024$ Nullen --- beobachtet wurden elf.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist kein knapper Befund, sondern ein vernichtender. Luria und Delbrück erhielten dafür 1969 den Nobelpreis, gemeinsam mit Hershey --- die Arbeit gilt als Beginn der Molekulargenetik der Bakterien.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Warum das bis heute zählt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Antibiotika} & Resistente Keime bestehen vor der Behandlung. Die Behandlung wählt sie aus.\\
+\textbf{Tumoren} & Unempfindliche Zellklone bestehen vor der Chemotherapie --- Satz 14.1.\\
+\textbf{Messverfahren} & Die Schwankungsanalyse ist bis heute das Standardverfahren zur Messung von Mutationsraten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Zeile hat eine Folgerung, die der verbreiteten Vorstellung widerspricht: Ein Antibiotikum \kursiv{erzeugt} keine Resistenz. Es entfernt die Konkurrenz der empfindlichen Keime --- genau die Lage aus Kapitel~5. Der schädliche Übergebrauch von Antibiotika wirkt nicht, indem er Mutationen auslöst, sondern indem er auswählt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zwei Strategien}
+
+\begin{merksatz}
+\boxtitel{Das Modell}
+Wir verbinden das Konkurrenzmodell aus Kapitel~5 mit einer Behandlung:
+\[ \frac{\dd S}{\dd t} = r_S\,S\left(1-\frac{S+R}{K}\right) - d(t)\,S \]
+\[ \frac{\dd R}{\dd t} = r_R\,R\left(1-\frac{S+R}{K}\right) \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{3.0cm}P{3.4cm}@{}}
+\toprule
+$S$ & empfindliche Zellen & wachsen schneller\\
+$R$ & unempfindliche & \textcolor{akzent}{Fitnesskosten: $r_R < r_S$}\\
+$d(t)$ & Behandlungsstärke & wirkt nur auf $S$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der entscheidende Punkt}
+Beide Arten konkurrieren um denselben Platz --- der Term $(1-\frac{S+R}{K})$ steht in beiden Gleichungen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Solange viele empfindliche Zellen da sind, wächst auch die unempfindliche Population kaum.} Vernichtet man die empfindlichen, so entfällt diese Bremse.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Rechnung}
+$K = 2\cdot10^{11}$, $r_S = 0{,}010$, $r_R = 0{,}007$, $d_{\max} = 0{,}05$ je Tag; Ausgangslast $S_0 = 10^{11}$, $R_0 = 10^{6}$.
+
+\schritt{Strategie 1 --- Höchstdosis, dauerhaft}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Tag} & $S$ & $R$ & \textbf{gesamt}\\
+\midrule
+$0$ & $9{,}95\cdot10^{10}$ & $10^{6}$ & $10^{11}$\\
+$500$ & $175$ & $3{,}1\cdot10^{7}$ & $3{,}1\cdot10^{7}$\\
+$1000$ & $0$ & $10^{9}$ & $10^{9}$\\
+$1500$ & $0$ & $2{,}9\cdot10^{10}$ & $2{,}9\cdot10^{10}$\\
+$2000$ & $0$ & $1{,}7\cdot10^{11}$ & \textcolor{akzent}{$1{,}7\cdot10^{11}$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\textbf{Fortschreiten nach $2070$ Tagen $= 5{,}7$ Jahre.}
+
+\schritt{Strategie 2 --- eindämmen}
+Behandelt wird nur, solange die Gesamtlast über dem Ausgangswert liegt; sie wird ausgesetzt, sobald die Hälfte erreicht ist.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Tag} & $S$ & $R$ & \textbf{gesamt}\\
+\midrule
+$0$ & $9{,}95\cdot10^{10}$ & $10^{6}$ & $10^{11}$\\
+$500$ & $9{,}8\cdot10^{10}$ & $9{,}2\cdot10^{6}$ & $9{,}8\cdot10^{10}$\\
+$1000$ & $9{,}6\cdot10^{10}$ & $8{,}4\cdot10^{7}$ & $9{,}6\cdot10^{10}$\\
+$1500$ & $9{,}3\cdot10^{10}$ & $7{,}7\cdot10^{8}$ & $9{,}4\cdot10^{10}$\\
+$2000$ & $8{,}0\cdot10^{10}$ & $7{,}1\cdot10^{9}$ & $8{,}7\cdot10^{10}$\\
+$2500$ & $9{,}4\cdot10^{9}$ & $6{,}4\cdot10^{10}$ & $7{,}3\cdot10^{10}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\textbf{Fortschreiten nach $2925$ Tagen $= 8{,}0$ Jahre.}
+
+\schritt{Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Höchstdosis} & \textbf{Eindämmung}\\
+\midrule
+Anfangserfolg & \textcolor{gruen}{vollständig} & \textcolor{mittel}{keiner}\\
+$R$ nach $1000$ d & $10^{9}$ & $\mathbf{8{,}4\cdot10^{7}}$\\
+Fortschreiten & $5{,}7$ Jahre & $\mathbf{8{,}0}$ Jahre\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Strategie, die schlechter aussieht, wirkt länger.} Zwei Jahre und vier Monate mehr --- weil die empfindlichen Zellen die unempfindlichen um mehr als eine Zehnerpotenz zurückhalten.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was dieses Ergebnis nicht besagt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Keine Heilung} & Beide Strategien führen zum Fortschreiten. Das Modell vergleicht Aufschub, nicht Heilung.\\
+\textbf{Voraussetzung} & Der Vorteil hängt daran, dass Resistenz \kursiv{Kosten} hat. Ist $r_R = r_S$, verschwindet er.\\
+\textbf{Nicht übertragbar} & Wo Heilung möglich ist --- kleine Tumorlast, wirksame Kombination ---, ist die Höchstdosis richtig.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist die wichtigste Einschränkung. Bei heilbaren Erkrankungen --- vielen Leukämien, Hodenkrebs, Lymphomen --- gilt weiterhin Skippers Grundsatz aus Kapitel~13: die letzte Zelle treffen. Der Eindämmungsansatz gilt für Lagen, in denen Heilung ohnehin ausgeschlossen ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Stand der Prüfung}
+Der Ansatz wird seit etwa 2016 in Studien geprüft, zuerst beim fortgeschrittenen Prostatakarzinom. Erste Ergebnisse waren ermutigend; belastbare Nachweise aus größeren randomisierten Studien standen zuletzt noch aus.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es ist ein seltener Fall, in dem ein mathematisches Modell eine Behandlungsstrategie \kursiv{vorgeschlagen} hat, statt eine vorhandene zu beschreiben. Ob sie sich bewährt, entscheidet die Studie --- nach den Regeln aus Band 17, Kapitel~12.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Zurück nach Neustadt}
+
+\begin{merksatz}
+\boxtitel{Dieselbe Rechnung für Antibiotika}
+Der Leitfall schließt sich. In Kapitel~1 verdrängte der empfindliche Stamm den unempfindlichen; in Kapitel~5 taten es die Konkurrenzgleichungen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kapitel 1} & Fitnesskosten: $r_U < r_E$, der Anteil des unempfindlichen Stamms fällt.\\
+\textbf{Kapitel 5} & Konkurrenz um dieselbe Nische; $E$ verdrängt $R$ vollständig.\\
+\textbf{Kapitel 14} & Unter Behandlung kehrt sich beides um.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Unterschiede zur Onkologie}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.8cm}P{3.2cm}@{}}
+\toprule
+& \textbf{Tumor} & \textbf{Erreger}\\
+\midrule
+Übertragung & \textcolor{gruen}{keine} & \textcolor{akzent}{ja}\\
+Heilung & oft nicht & \textcolor{gruen}{meist}\\
+Zielgröße & Aufschub & \textcolor{gruen}{Beseitigung}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Deshalb überträgt sich der Eindämmungsgedanke nicht.} Ein eingedämmter Erreger wird weitergegeben; ein eingedämmter Tumor nicht.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Frage nach der richtigen Behandlungsdauer bei Infektionen ist trotzdem offen. Die überkommene Regel, eine Antibiotikagabe stets bis zum Ende durchzuführen, wird seit einigen Jahren in Frage gestellt: Für zahlreiche Infektionen zeigten Studien, dass kürzere Behandlungen ebenso wirksam sind --- und jeder zusätzliche Tag wirkt auswählend auf die gesamte Körperflora.}
+\end{minipage}
+\end{center}
+
+\schritt{Worauf es ankommt}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Am Krankheitsherd} & Dort muss die Konzentration hoch genug sein, um auch teilweise unempfindliche Keime zu treffen.\\
+\textbf{In der übrigen Flora} & Dort wirkt jede Gabe auswählend, ohne Nutzen.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Verbindung zu Kapitel~10: Die Resistenzentwicklung hängt nicht nur von der Gesamtdosis ab, sondern vom zeitlichen Verlauf des Spiegels --- und davon, wie lange er in dem Bereich liegt, der auswählt, ohne abzutöten. Diesen Bereich nennt man das \Begriff{Selektionsfenster}.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was auch dieses Modell nicht enthält}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Zwei Arten} & Tatsächlich gibt es viele Klone mit verschiedenen Empfindlichkeiten und verschiedenen Kosten.\\
+\textbf{Feste Kosten} & Zusatzmutationen können die Kosten der Resistenz ausgleichen --- dann verschwindet der Vorteil der Eindämmung.\\
+\textbf{Kein Raum} & Die Konkurrenz setzt Durchmischung voraus. In einem festen Tumor konkurrieren nur benachbarte Zellen.\\
+\textbf{Keine Mutation} & $R$ entsteht im Modell nicht neu; es war von Anfang an da.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Das ist die ernsteste Einschränkung, und sie ist beobachtet: Bakterien erwerben regelmäßig Zusatzmutationen, die die Wachstumsnachteile der Resistenz aufheben, ohne die Resistenz aufzugeben.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Aus $r_R < r_S$ wird dann $r_R \approx r_S$ --- und die Hoffnung, Resistenzen verschwänden nach Absetzen von selbst, erfüllt sich nicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+In einem festen Tumor ist das Massenwirkungsgesetz verletzt --- wieder dieselbe Durchmischungsannahme wie in den Kapiteln~4, 7, 9 und 11.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Räumliche Modelle zeigen, dass die Konkurrenz zwischen Klonen dort schwächer ist als im durchmischten Fall: Ein unempfindlicher Klon in einer eigenen Ecke spürt die empfindlichen Zellen nicht. Der Vorteil der Eindämmung fällt entsprechend kleiner aus --- und hängt davon ab, wie stark die Klone durchmischt sind.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- Wann Kombinationstherapie hilft}
+Zwei Mittel mit Mutationsraten $\mu_1 = 10^{-6}$ und $\mu_2 = 10^{-7}$. Bestimmen Sie die kritische Zellzahl für jedes Mittel allein und für die Kombination. Was ändert sich, wenn die Resistenzmechanismen nicht unabhängig sind?
+
+\loesung
+\schritt{Schritt 1 --- Einzeln}
+\[ N_{c,1} = \frac{1}{\mu_1} = 10^{6}, \qquad N_{c,2} = \frac{1}{\mu_2} = 10^{7} \]
+
+\schritt{Schritt 2 --- Kombination bei Unabhängigkeit}
+\[ \mu_{12} = \mu_1\,\mu_2 = 10^{-13} \quad\Longrightarrow\quad N_c = 10^{13} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das liegt über der tödlichen Tumorlast von $10^{12}$.} Nach diesem Modell wäre jeder Tumor mit der Kombination heilbar.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Wahrscheinlichkeiten bei $N = 10^{11}$}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+& $\mu N$ & $\Pr[\text{keine}]$\\
+\midrule
+Mittel 1 allein & $10^{5}$ & praktisch null\\
+Mittel 2 allein & $10^{4}$ & praktisch null\\
+Kombination & $0{,}01$ & $\mathbf{99{,}0\,\%}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 4 --- Ohne Unabhängigkeit}
+Sind die Mechanismen gekoppelt --- etwa weil beide Mittel durch dieselbe Ausschleuspumpe entfernt werden ---, so gilt
+\[ \mu_{12} = \mu_1 \cdot \Pr[\text{gegen 2} \mid \text{gegen 1}] . \]
+
+Ist diese bedingte Wahrscheinlichkeit etwa $0{,}1$ statt $10^{-7}$:
+\[ \mu_{12} = 10^{-6} \cdot 0{,}1 = 10^{-7} \quad\Longrightarrow\quad N_c = 10^{7} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die kritische Zellzahl fällt von $10^{13}$ auf $10^{7}$ --- um sechs Zehnerpotenzen.} Die Kombination ist dann kaum besser als das schwächere Einzelmittel.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Folgerung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Nutzen einer Kombination hängt nicht davon ab, wie viele Mittel man gibt, sondern wie \kursiv{verschieden} sie wirken. Zwei Mittel mit demselben Angriffspunkt sind praktisch ein Mittel. Deshalb werden Kombinationen nach Wirkmechanismen zusammengestellt --- bei Tuberkulose, bei HIV und in der Onkologie.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Und die Kehrseite}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Mehrfachresistenz entsteht nicht durch mehrfache unabhängige Mutation --- das wäre nach dieser Rechnung zu unwahrscheinlich. Sie entsteht überwiegend durch Mechanismen, die \kursiv{gleichzeitig} gegen mehrere Mittel schützen, oder durch Weitergabe fertiger Resistenzgene zwischen Bakterien. Beides verletzt die Unabhängigkeitsannahme grundlegend.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- Eine Schwankungsanalyse auswerten}
+Zehn Kulturen liefern die Kolonienzahlen
+\[ 2,\ 0,\ 0,\ 41,\ 0,\ 3,\ 0,\ 0,\ 15,\ 0 . \]
+Entscheiden Sie, ob die Resistenz vorbestehend oder erworben ist.
+
+\loesung
+\schritt{Schritt 1 --- Mittelwert}
+\[ \MW = \frac{2+41+3+15}{10} = \frac{61}{10} = 6{,}1 \]
+
+\schritt{Schritt 2 --- Varianz über den Verschiebungssatz}
+\[ \sum x_i^2 = 4 + 1681 + 9 + 225 = 1919 \]
+\[ \sum(x_i-\MW)^2 = 1919 - 10\cdot6{,}1^2 = 1919 - 372{,}1 = 1546{,}9 \]
+\[ s^2 = \frac{1546{,}9}{9} = 171{,}9 \]
+
+\schritt{Schritt 3 --- Das Verhältnis}
+\[ \frac{s^2}{\MW} = \frac{171{,}9}{6{,}1} = 28{,}2 \]
+
+\schritt{Schritt 4 --- Die Prüfung}
+Bei Poisson-Verteilung wäre das Verhältnis etwa $1$. Genauer: Die Größe
+\[ \chi^2 = \frac{(n-1)\,s^2}{\MW} = 9 \cdot 28{,}2 = 253{,}8 \]
+folgt unter der Poisson-Annahme näherungsweise einer $\chi^2$-Verteilung mit $9$ Freiheitsgraden.
+
+Der kritische Wert beträgt $\chi^2_{9;\,0{,}95} = 16{,}92$. Wegen $253{,}8 \gg 16{,}92$ ist die Poisson-Annahme klar verworfen.
+
+\schritt{Schritt 5 --- Die Kontrolle über die Nullen}
+Bei Poisson mit $\lambda = 6{,}1$:
+\[ \Pr[X=0] = e^{-6{,}1} = 0{,}00224 \]
+Erwartet: $10 \cdot 0{,}00224 = 0{,}022$ Nullen. Beobachtet: \textbf{sechs}.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Kontrolle ist anschaulicher als der $\chi^2$-Wert und führt zum selben Schluss. Sie ist auch robuster: Der eine Wert $41$ bestimmt die Varianz fast allein --- eine Größe mit Bruchpunkt null, wie Band 17, Kapitel~2 zeigt. Die Zahl der Nullen hängt nicht daran.}
+\end{minipage}
+\end{center}
+
+\schritt{Antwort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Resistenz ist vorbestehend.} Sechs von zehn Kulturen enthielten keine einzige resistente Zelle; in vieren trat die Mutation auf, in einer davon früh.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Mutationsrate abschätzen}
+Aus dem Anteil der Kulturen ohne Mutante lässt sich die Rate schätzen. Sei $m$ die erwartete Zahl von \kursiv{Mutationsereignissen} je Kultur:
+\[ \Pr[\text{keine}] = e^{-m} = \frac{6}{10} \quad\Longrightarrow\quad m = -\ln 0{,}6 = 0{,}511 \]
+
+Bei einer Endzellzahl von etwa $10^{8}$ je Kultur:
+\[ \mu = \frac{m}{N} = \frac{0{,}511}{10^{8}} = 5{,}1\cdot10^{-9} \ \text{je Teilung} \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Bemerkenswert ist, dass man dazu nur die \kursiv{Nullen} braucht --- nicht die Kolonienzahlen selbst. Man nennt das die Nullklassen-Methode; sie ist bis heute die einfachste und zuverlässigste Art, aus einem Schwankungsversuch eine Mutationsrate zu gewinnen. Der Mittelwert der Kolonienzahlen taugt dafür nicht, weil er von wenigen frühen Mutationen beherrscht wird.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Wann sich Eindämmung lohnt}
+Leiten Sie eine Bedingung dafür her, wann die unempfindliche Population unter Eindämmung langsamer wächst als unter Höchstdosis, und prüfen Sie sie an den Zahlen aus Abschnitt 14.4.
+
+\loesung
+\schritt{Schritt 1 --- Die Wachstumsrate von $R$}
+\[ \frac{1}{R}\frac{\dd R}{\dd t} = r_R\left(1 - \frac{S+R}{K}\right) \]
+
+Sie hängt nur von der \kursiv{Gesamtlast} ab --- $R$ unterscheidet nicht, ob der Platz von empfindlichen oder unempfindlichen Zellen belegt ist.
+
+\schritt{Schritt 2 --- Die beiden Strategien}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Gesamtlast} & \textbf{Rate von $R$}\\
+\midrule
+Höchstdosis & $\approx R$ (klein) & $\approx r_R$\\
+Eindämmung & $\approx L$ (gehalten) & $r_R(1-L/K)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 3 --- Der Faktor}
+\[ \frac{\text{Rate bei Eindämmung}}{\text{Rate bei Höchstdosis}} = 1 - \frac{L}{K} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Eindämmung verlangsamt das Wachstum der unempfindlichen Population stets --- und zwar um genau den Anteil der gehaltenen Last an der Kapazität.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Für die Zahlen aus Abschnitt 14.4}
+$L \approx 10^{11}$, $K = 2\cdot10^{11}$:
+\[ 1 - \frac{10^{11}}{2\cdot10^{11}} = 0{,}50 \]
+
+Die Rate von $R$ ist also halbiert: $0{,}007 \to 0{,}0035$ je Tag.
+
+\schritt{Schritt 5 --- Die Verdopplungszeiten}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Rate} & $T_2$\\
+\midrule
+Höchstdosis & $0{,}0070$ & $99$ Tage\\
+Eindämmung & $0{,}0035$ & $\mathbf{198}$ Tage\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 6 --- Die Probe an der Simulation}
+Von $10^{6}$ auf $10^{9}$ sind drei Zehnerpotenzen, also
+\[ \log_2 10^{3} = \frac{6{,}908}{0{,}693} = 9{,}97 \ \text{Verdopplungen} . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+& \textbf{berechnet} & \textbf{Simulation}\\
+\midrule
+Höchstdosis & $987$ d & $\approx 1000$ d \checkmark\\
+Eindämmung & $1974$ d & $\approx 2100$ d \checkmark\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 7 --- Die Bedingung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Vorteil ist umso größer, je näher die gehaltene Last an der Kapazitätsgrenze liegt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.8cm}P{2.8cm}P{2.4cm}@{}}
+\toprule
+$L/K$ & \textbf{Verlangsamung} & \\
+\midrule
+$0{,}1$ & Faktor $1{,}1$ & \textcolor{akzent}{kaum}\\
+$0{,}5$ & Faktor $2$ & \\
+$0{,}8$ & Faktor $5$ & \\
+$0{,}9$ & Faktor $10$ & \textcolor{gruen}{erheblich}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und darin liegt zugleich der Widerspruch, den die Strategie aushalten muss: Der Nutzen ist am größten, wenn man die Krankheitslast hoch hält --- also genau dann, wenn die Beschwerden am stärksten sind. Die Abwägung zwischen aufgeschobenem Fortschreiten und gegenwärtiger Belastung ist keine Frage, die ein Modell beantworten kann.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Spielautomat und eine Entscheidung}
+\Person{Salvador Luria} (1912--1991) kam der entscheidende Gedanke 1942 bei einem Fakultätsball in Indiana --- beim Zusehen, wie ein Kollege an einem Spielautomaten spielte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Luria bemerkte, dass der Automat meist nichts auszahlte und gelegentlich sehr viel. Er erkannte darin das Muster, das er bei seinen Bakterienkulturen sah --- und begriff, dass die \kursiv{Streuung} die Frage beantworten könnte, die die Mittelwerte offenließen.}
+\end{minipage}
+\end{center}
+
+\Person{Max Delbrück} (1906--1981), Physiker und aus Deutschland emigriert, lieferte die mathematische Behandlung. Die gemeinsame Arbeit erschien 1943 in \kursiv{Genetics}.
+
+\schritt{Warum die Arbeit so wichtig wurde}
+Sie zeigte erstmals, dass Bakterien Gene im selben Sinn haben wie höhere Lebewesen und dass darauf Auslese wirkt. Bis dahin galten Bakterien vielen als formbar durch ihre Umgebung.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Methodisch ist sie ein Musterbeispiel: Eine Frage über einen unbeobachtbaren Vorgang wurde durch eine Aussage über die \kursiv{Verteilung} beobachtbarer Ergebnisse entschieden. Nicht der Mittelwert trug die Antwort, sondern die Varianz.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Onkologie}
+\Person{James Goldie} und \Person{Andrew Coldman} übertrugen den Gedanken 1979 auf Tumoren. Ihre Arbeit begründete die Regel, früh und mit mehreren Mitteln gleichzeitig zu behandeln.
+
+\schritt{Die Umkehr}
+\Person{Robert Gatenby} schlug ab etwa 2009 vor, bei nicht heilbaren Tumoren umzudenken und auf Eindämmung statt Vernichtung zu zielen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Seine Begründung stammt aus der Schädlingsbekämpfung --- und ist damit ein später Nachfahre von Volterras Prinzip aus Kapitel~4: Wer alles Empfindliche entfernt, begünstigt das Unempfindliche. In der Landwirtschaft hatte man diese Lehre Jahrzehnte früher gezogen, mit den Rückzugsflächen, auf denen bewusst unbehandelte Schädlinge überleben.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Resistenz als Forschungsfeld}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Kollateral\-sensitivität} & Resistenz gegen ein Mittel geht manchmal mit \kursiv{erhöhter} Empfindlichkeit gegen ein anderes einher. Man sucht Folgen von Mitteln, bei denen jeder Fluchtweg in eine Falle führt.\\
+\textbf{Wechselnde Gaben} & Abwechselndes Geben zweier Mittel statt gleichzeitiger Gabe; die Wirksamkeit hängt empfindlich von der Reihenfolge ab.\\
+\textbf{Vorhersage aus Sequenzdaten} & Aus dem Erbgut eines Erregers die Empfindlichkeit vorhersagen, statt sie anzuzüchten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die erste Zeile ist der Anschluss an den Phagenfaden aus Kapitel~4. Bakterien, die einen Oberflächenrezeptor verlieren, um einem Phagen zu entgehen, verlieren damit manchmal auch die Ausschleuspumpe, die sie gegen Antibiotika schützte.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist kein Zufall, sondern ein Muster: Resistenzmechanismen kosten etwas, und was sie kosten, macht anderswo verwundbar. Die Frage, ob sich daraus verlässliche Behandlungsfolgen bauen lassen, ist offen --- die Kollateralsensitivität ist zwischen Stämmen uneinheitlich und damit schwer planbar.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Lage bei Antibiotika}
+Die Zahl neu zugelassener Wirkstoffe ist seit Jahrzehnten gering, während Resistenzen zunehmen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Grund ist wirtschaftlich und wird durch die Mathematik dieses Kapitels verschärft: Ein neues Antibiotikum soll möglichst selten eingesetzt werden, um seine Wirksamkeit zu erhalten. Ein Mittel, dessen Nutzen darin besteht, nicht verwendet zu werden, findet keinen Markt. Vorschläge zur Lösung --- etwa feste Zahlungen unabhängig von der Menge --- werden erprobt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 14.1} & $\Pr[\text{keine}] = e^{-\mu N}$; kritisch bei $N = 1/\mu$\\
+\textbf{Satz 14.2} & Varianz entscheidet: vorbestehend oder erworben\\
+\textbf{Kombination} & wirkt nur bei unabhängigen Mechanismen\\
+\textbf{Eindämmung} & verlangsamt $R$ um den Faktor $1-L/K$\\
+\textbf{Der Leitfall} & schließt sich: Auswahl, nicht Erzeugung\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~V. Das letzte Kapitel fragt, was Modelle in der Biologie und Medizin heute leisten --- und was sie grundsätzlich nicht leisten können.}
+\end{minipage}
+\end{center}
+\end{merksatz}

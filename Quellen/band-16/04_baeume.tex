@@ -1,0 +1,653 @@
+\part{Bäume}
+
+\chapter{Bäume und Wälder}
+
+\section{Die sparsamste Verbindung}
+
+Satz 2.8 hat gezeigt: Ein zusammenhängender Graph mit $n$ Ecken braucht mindestens $n-1$ Kanten. Und der Weg $P_n$ zeigt, dass $n-1$ auch genügen kann.
+
+Damit stellt sich die Frage nach den Graphen, die diese Schranke genau erreichen: den sparsamsten unter allen, die noch zusammenhängen. Sie heißen Bäume, sie sind der wichtigste Einzelbegriff dieses Bandes, und sie kommen an mehr Stellen vor, als man erwartet.
+
+\begin{merksatz}
+\boxtitel{Wo Bäume auftreten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.4cm}@{}}
+\toprule
+\textbf{Alarmierungs\-kette} & Jede Person ruft zwei weitere an. Niemand wird doppelt angerufen, niemand vergessen.\\
+\textbf{Organigramm} & Jede Stelle hat genau eine vorgesetzte Stelle, die Klinikleitung keine.\\
+\textbf{Diagnose\-algorithmus} & Jede Frage verzweigt; von der Eingangsfrage zu jeder Diagnose führt genau ein Weg.\\
+\textbf{Stammbaum} & Abstammungsverhältnisse ohne Rückverbindungen.\\
+\textbf{Datei\-verzeichnis} & Jede Datei liegt in genau einem Ordner.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Gemeinsame steht in der dritten Zeile: \enquote{genau ein Weg}. Das ist keine Zufallseigenschaft, sondern eine der fünf gleichwertigen Beschreibungen, die Satz 4.2 aufstellt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 4.1 --- Baum, Wald, Blatt}
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
+\item Ein \Begriff{Baum} ist ein Graph, der zusammenhängend und kreisfrei ist.
+\item Ein \Begriff{Wald} ist ein Graph, der kreisfrei ist. (Er darf also in mehrere Komponenten zerfallen; jede davon ist dann ein Baum --- daher der Name.)
+\item Eine Ecke vom Grad $1$ heißt \Begriff{Blatt}.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Alle Bäume mit bis zu fünf Ecken}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\begin{scope}
+\node[knoten] (a) at (0,0) {};
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.5) {$n=1$};
+\end{scope}
+\begin{scope}[xshift=1.5cm]
+\node[knoten] (b1) at (0,0.4) {};
+\node[knoten] (b2) at (0,-0.4) {};
+\draw[kante] (b1)--(b2);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.5) {$n=2$};
+\end{scope}
+\begin{scope}[xshift=3.0cm]
+\node[knoten] (c1) at (0,0.5) {};
+\node[knoten] (c2) at (0,0) {};
+\node[knoten] (c3) at (0,-0.5) {};
+\draw[kante] (c1)--(c2); \draw[kante] (c2)--(c3);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.5) {$n=3$};
+\end{scope}
+\begin{scope}[xshift=4.8cm]
+\node[knoten] (d1) at (0,0.75) {};
+\node[knoten] (d2) at (0,0.25) {};
+\node[knoten] (d3) at (0,-0.25) {};
+\node[knoten] (d4) at (0,-0.75) {};
+\draw[kante] (d1)--(d2); \draw[kante] (d2)--(d3); \draw[kante] (d3)--(d4);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.5) {$P_4$};
+\end{scope}
+\begin{scope}[xshift=6.6cm]
+\node[knoten] (e0) at (0,0) {};
+\node[knoten] (e1) at (0,0.7) {};
+\node[knoten] (e2) at (-0.6,-0.5) {};
+\node[knoten] (e3) at (0.6,-0.5) {};
+\draw[kante] (e0)--(e1); \draw[kante] (e0)--(e2); \draw[kante] (e0)--(e3);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.5) {Stern $K_{1,3}$};
+\end{scope}
+\begin{scope}[xshift=9.0cm]
+\node[knoten] (f1) at (-0.7,0.6) {};
+\node[knoten] (f2) at (-0.25,0.2) {};
+\node[knoten] (f3) at (0.2,-0.2) {};
+\node[knoten] (f4) at (0.65,-0.6) {};
+\node[knoten] (f5) at (-0.7,-0.6) {};
+\draw[kante] (f1)--(f2); \draw[kante] (f2)--(f3); \draw[kante] (f3)--(f4); \draw[kante] (f2)--(f5);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.5) {einer von dreien mit $n=5$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Für $n = 1,2,3,4,5$ gibt es genau $1, 1, 1, 2, 3$ verschiedene Bäume (bis auf Isomorphie). Die Zahlen wachsen danach schnell: $6, 11, 23, 47, 106$ für $n = 6, \ldots, 10$. Eine geschlossene Formel dafür ist nicht bekannt --- Abschnitt 5.4 kommt darauf zurück.
+\end{merksatz}
+
+\section{Fünf Beschreibungen, die dasselbe bedeuten}
+
+\begin{merksatz}
+\boxtitel{Satz 4.2 --- Charakterisierung der Bäume}
+Für einen Graphen $T$ mit $n$ Ecken und $m$ Kanten sind die folgenden fünf Aussagen gleichwertig:
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+(i) & $T$ ist ein Baum --- also zusammenhängend und kreisfrei.\\
+(ii) & Je zwei Ecken sind durch \kursiv{genau einen} Weg verbunden.\\
+(iii) & $T$ ist zusammenhängend und $m = n-1$.\\
+(iv) & $T$ ist kreisfrei und $m = n-1$.\\
+(v) & $T$ ist zusammenhängend, und jede Kante ist eine Brücke.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wie man fünf Aussagen als gleichwertig nachweist}
+\enquote{Gleichwertig} heißt: Gilt eine von ihnen, so gelten alle. Streng genommen wären $5 \cdot 4 = 20$ Folgerungen zu zeigen --- von jeder zu jeder anderen.
+
+Es geht sparsamer. Man zeigt einen \Begriff{Ringschluss}:
+\[ \text{(i)} \Rightarrow \text{(ii)} \Rightarrow \text{(iii)} \Rightarrow \text{(iv)} \Rightarrow \text{(v)} \Rightarrow \text{(i)} \]
+Das sind fünf Beweise statt zwanzig. Warum genügt das? Weil man von jeder Aussage zu jeder anderen gelangt, indem man im Ring weiterläuft --- notfalls einmal ganz herum.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\foreach \i/\lab in {0/{(i)}, 1/{(ii)}, 2/{(iii)}, 3/{(iv)}, 4/{(v)}} {
+  \node[knotenb, minimum size=19pt] (r\i) at (90-72*\i:1.25) {\lab};
+}
+\foreach \i/\j in {0/1,1/2,2/3,3/4,4/0}
+  \draw[kante, -{Stealth[length=5pt]}] (r\i) to[bend right=14] (r\j);
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis, Teil 1: (i) $\Rightarrow$ (ii)}
+Sei $T$ zusammenhängend und kreisfrei, seien $u,v$ Ecken.
+
+\schritt{Es gibt mindestens einen Weg}
+Das ist genau die Definition des Zusammenhangs (Definition 2.4).
+
+\schritt{Es gibt höchstens einen --- Annahme}
+Angenommen, es gäbe zwei \kursiv{verschiedene} Wege $P$ und $Q$ von $u$ nach $v$.
+
+\schritt{Die erste Abweichung finden}
+Beide beginnen bei $u$. Wir laufen sie gleichzeitig ab. Da sie verschieden sind, gibt es eine erste Stelle, an der sie sich unterscheiden. Sei $x$ die letzte Ecke, bis zu der beide übereinstimmen; danach benutzt $P$ eine Kante $\{x, p\}$ und $Q$ eine Kante $\{x, q\}$ mit $p \neq q$.
+
+\schritt{Die erste Wiedervereinigung finden}
+Beide Wege enden bei $v$, treffen sich also wieder. Wir laufen $P$ ab $x$ weiter und schauen, welche Ecke von $P$ als erste wieder auf $Q$ liegt; sei $y$ diese Ecke. Sie existiert, weil spätestens $v$ auf beiden liegt. Und es ist $y \neq x$, denn $y$ liegt hinter $x$ auf $P$ und $P$ hat lauter verschiedene Ecken.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\node[knotenb] (u) at (-2.2,0) {$u$};
+\node[knotenb] (x) at (-0.9,0) {$x$};
+\node[knotenb] (y) at (1.5,0) {$y$};
+\node[knotenb] (v) at (2.8,0) {$v$};
+\draw[kante] (u) -- (x);
+\draw[kante] (y) -- (v);
+\draw[kanted] (x) to[bend left=45] node[above, font=\scriptsize, color=akzent] {$P$} (y);
+\draw[kanted] (x) to[bend right=45] node[below, font=\scriptsize, color=akzent] {$Q$} (y);
+\node[font=\scriptsize, color=grau] at (-1.55,0.3) {gemeinsam};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Der Kreis}
+Der Abschnitt von $x$ nach $y$ auf $P$ und der Abschnitt von $x$ nach $y$ auf $Q$ haben --- nach Wahl von $x$ und $y$ --- außer $x$ und $y$ selbst keine gemeinsame Ecke. Beide haben Länge $\ge 1$, und mindestens einer hat Länge $\ge 2$: Hätten beide die Länge $1$, so wären es dieselbe Kante $\{x,y\}$, und dann wäre $p = y = q$ im Widerspruch zu $p \neq q$.
+
+Setzt man beide Abschnitte zusammen --- den einen hin, den anderen zurück ---, so entsteht ein geschlossener Kantenzug der Länge $\ge 3$, dessen Ecken bis auf Anfang und Ende verschieden sind. Das ist ein Kreis.
+
+\schritt{Widerspruch}
+$T$ war kreisfrei. Also war die Annahme falsch, und es gibt höchstens einen Weg.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis, Teil 2: (ii) $\Rightarrow$ (iii)}
+\schritt{Zusammenhang}
+Aus (ii) folgt sofort: Zwischen je zwei Ecken gibt es einen Weg. Also ist $T$ zusammenhängend.
+
+\schritt{Die Kantenzahl --- Induktion über $n$}
+\textbf{Anfang $n=1$:} Ein Graph mit einer Ecke hat keine Kanten, und $n - 1 = 0$. \checkmark
+
+\textbf{Schritt.} Sei $n \ge 2$ und die Behauptung für alle kleineren Eckenzahlen bewiesen. Da $T$ zusammenhängend ist und $n \ge 2$, gibt es mindestens eine Kante; wähle eine, etwa $e = \{x,y\}$.
+
+\schritt{$e$ ist eine Brücke}
+Die Kante $e$ selbst ist ein Weg der Länge $1$ von $x$ nach $y$. Nach (ii) ist er der einzige. Läge $e$ auf einem Kreis, so gäbe es nach dem Beweis von Satz 2.14 einen zweiten Weg von $x$ nach $y$ --- den Rest des Kreises. Also liegt $e$ auf keinem Kreis und ist nach Satz 2.14 eine Brücke.
+
+\schritt{$T - e$ hat genau zwei Komponenten}
+Mindestens zwei, weil $e$ eine Brücke ist. Höchstens zwei, denn: Sei $w$ eine beliebige Ecke. In $T$ gibt es einen Weg von $w$ nach $x$. Benutzt er $e$ nicht, so liegt $w$ in derselben Komponente von $T-e$ wie $x$. Benutzt er $e$, so muss $e$ der letzte Schritt sein (der Weg endet ja in $x$, und $e$ kommt höchstens einmal vor) --- der Weg läuft also von $w$ nach $y$ ohne $e$ und dann über $e$ nach $x$. Dann liegt $w$ in der Komponente von $y$.
+
+Jede Ecke liegt somit in der Komponente von $x$ oder in der von $y$. Genau zwei.
+
+\schritt{Die Induktionsannahme anwenden}
+Seien $T_1$ und $T_2$ diese Komponenten, mit $n_1$ bzw.\ $n_2$ Ecken und $m_1$ bzw.\ $m_2$ Kanten. Es ist $n_1 + n_2 = n$ und $m_1 + m_2 = m - 1$.
+
+Beide erfüllen (ii): Ein Weg zwischen zwei Ecken einer Komponente von $T-e$ ist auch ein Weg in $T$, und ein zweiter dort gäbe einen zweiten in $T$. Beide haben weniger als $n$ Ecken (denn beide sind nichtleer). Nach Induktionsannahme ist $m_1 = n_1 - 1$ und $m_2 = n_2 - 1$.
+
+\schritt{Zusammenrechnen}
+\[ m = m_1 + m_2 + 1 = (n_1 - 1) + (n_2 - 1) + 1 = n_1 + n_2 - 1 = n - 1 . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis, Teil 3: (iii) $\Rightarrow$ (iv)}
+Zu zeigen ist nur die Kreisfreiheit; die Kantenzahl ist gegeben.
+
+\schritt{Annahme}
+Angenommen, $T$ enthielte einen Kreis $C$. Sei $e$ eine Kante von $C$.
+
+\schritt{Entfernen}
+Nach Satz 2.14 ist $e$ keine Brücke, denn $e$ liegt auf einem Kreis. Also hat $T - e$ dieselbe Komponentenzahl wie $T$, ist also weiterhin zusammenhängend.
+
+\schritt{Der Widerspruch}
+$T-e$ ist zusammenhängend mit $n$ Ecken und $m - 1 = n - 2$ Kanten. Nach Satz 2.8 braucht ein zusammenhängender Graph mit $n$ Ecken aber mindestens $n-1$ Kanten. Aus $n-2 \ge n-1$ folgt $-2 \ge -1$ --- falsch.
+
+Also gibt es keinen Kreis.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis, Teil 4: (iv) $\Rightarrow$ (v)}
+\schritt{Schritt 1 --- die Komponenten sind Bäume}
+$T$ ist kreisfrei. Jede Zusammenhangskomponente von $T$ ist zusammenhängend (nach Definition) und kreisfrei (ein Kreis in einer Komponente wäre einer in $T$). Also ist jede Komponente ein Baum, erfüllt also (i).
+
+\schritt{Schritt 2 --- ihre Kantenzahlen}
+Die Folgerungen (i) $\Rightarrow$ (ii) $\Rightarrow$ (iii) sind bereits bewiesen. Also gilt für jede Komponente $T_i$ mit $n_i$ Ecken und $m_i$ Kanten
+\[ m_i = n_i - 1 . \]
+
+\schritt{Schritt 3 --- aufsummieren}
+Hat $T$ genau $c$ Komponenten, so ist
+\[ m = \sum_{i=1}^{c} m_i = \sum_{i=1}^{c} (n_i - 1) = \Bigl(\sum_{i=1}^{c} n_i\Bigr) - c = n - c . \]
+
+\schritt{Schritt 4 --- $c$ bestimmen}
+Nach Voraussetzung ist $m = n-1$. Aus $n - c = n - 1$ folgt $c = 1$. Also ist $T$ zusammenhängend.
+
+\schritt{Schritt 5 --- jede Kante ist Brücke}
+$T$ ist kreisfrei, also liegt keine Kante auf einem Kreis. Nach Satz 2.14 ist damit jede Kante eine Brücke.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis, Teil 5: (v) $\Rightarrow$ (i)}
+$T$ ist nach Voraussetzung zusammenhängend. Zu zeigen bleibt die Kreisfreiheit.
+
+Läge eine Kante $e$ auf einem Kreis, so wäre $e$ nach Satz 2.14 keine Brücke --- im Widerspruch zu (v), wonach \kursiv{jede} Kante eine Brücke ist.
+
+Also gibt es keinen Kreis, und $T$ ist ein Baum. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Ring ist geschlossen. Bemerkenswert an diesem Beweis ist, wie viel Arbeit Satz 2.14 abnimmt: Drei der fünf Teile berufen sich auf ihn. Das ist der Sinn eines Lemmas.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Bedingung $m = n-1$ allein genügt nicht}
+In (iii) und (iv) steht $m = n-1$ jeweils \kursiv{zusammen} mit einer weiteren Bedingung. Lässt man diese weg, wird die Aussage falsch.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\node[knoten] (a) at (-1.6,0.5) {};
+\node[knoten] (b) at (-0.9,0.5) {};
+\node[knoten] (c) at (-1.25,-0.25) {};
+\draw[kante] (a)--(b); \draw[kante] (b)--(c); \draw[kante] (c)--(a);
+\node[knoten] (d) at (0.6,0.3) {};
+\node[knoten] (e) at (1.4,0.3) {};
+\draw[kante] (d)--(e);
+\node[knoten] (f) at (2.4,0.3) {};
+\node[font=\scriptsize\itshape, color=grau] at (0.4,-1.0) {$n = 6$, $m = 4$? Nein: $m=4$, $n=6$ --- gezählt: $3+1 = 4$ Kanten, $6$ Ecken};
+\end{tikzpicture}
+\end{center}
+
+Ein sauberes Gegenbeispiel: Nehmen Sie ein Dreieck und eine isolierte Ecke. Dann ist $n = 4$ und $m = 3 = n-1$. Der Graph ist weder zusammenhängend noch kreisfrei --- und damit kein Baum. Die Zahlengleichung stimmt trotzdem.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Was hier passiert, sieht man an der Formel $m = n - c$ aus Teil 4: Ein zusätzlicher Kreis erhöht $m$ um eins, eine zusätzliche Komponente senkt es um eins. Beides zusammen hebt sich auf.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Blätter}
+
+\begin{merksatz}
+\boxtitel{Satz 4.3 --- Jeder Baum mit $n \ge 2$ Ecken hat mindestens zwei Blätter}
+\schritt{Beweis --- Schritt 1: einen längsten Weg wählen}
+$T$ hat mindestens eine Kante, also gibt es Wege der Länge $\ge 1$. Unter allen Wegen in $T$ wählen wir einen von größtmöglicher Länge:
+\[ P = (u_0, u_1, \ldots, u_k), \qquad k \ge 1 . \]
+Ein längster existiert, weil ein Weg höchstens $n$ Ecken hat, die Längen also nach oben beschränkt sind.
+
+\schritt{Schritt 2 --- Behauptung: $u_0$ ist ein Blatt}
+Angenommen nicht, also $\deg(u_0) \ge 2$. Dann hat $u_0$ außer $u_1$ noch einen weiteren Nachbarn $w$ mit $w \neq u_1$.
+
+\schritt{Schritt 3 --- Fall A: $w$ liegt nicht auf $P$}
+Dann ist
+\[ (w, u_0, u_1, \ldots, u_k) \]
+ein Weg --- alle Ecken sind verschieden, denn $w$ kam auf $P$ nicht vor. Seine Länge ist $k+1 > k$, im Widerspruch zur Wahl von $P$ als längstem Weg.
+
+\schritt{Schritt 4 --- Fall B: $w$ liegt auf $P$}
+Dann ist $w = u_j$ für ein $j$. Wegen $w \neq u_1$ und $w \neq u_0$ ist $j \ge 2$. Betrachten wir
+\[ (u_0, u_1, \ldots, u_j, u_0) . \]
+Das ist ein geschlossener Kantenzug: Die Schritte $u_0 \to u_1 \to \cdots \to u_j$ stammen aus $P$, und der letzte Schritt $u_j \to u_0$ benutzt die Kante $\{u_0, w\} = \{u_0, u_j\}$.
+
+Seine Länge ist $j + 1 \ge 3$, und die Ecken $u_0, \ldots, u_j$ sind paarweise verschieden. Es ist also ein Kreis --- im Widerspruch zur Kreisfreiheit von $T$.
+
+\schritt{Schritt 5 --- Schluss}
+Beide Fälle sind unmöglich, also ist $\deg(u_0) = 1$. Dasselbe Argument, angewandt auf das andere Ende, zeigt $\deg(u_k) = 1$. Wegen $k \ge 1$ ist $u_0 \neq u_k$: zwei verschiedene Blätter. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Folgerung 4.4 --- die mittlere Gradzahl}
+In einem Baum mit $n \ge 2$ Ecken ist die Summe aller Grade
+\[ \sum_{v} \deg(v) = 2m = 2(n-1) = 2n - 2 . \]
+Der Durchschnittsgrad ist also
+\[ \frac{2n-2}{n} = 2 - \frac{2}{n} \;<\; 2 . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bäume sind knapp unterhalb von Durchschnittsgrad $2$. Da jede Ecke mindestens Grad $1$ hat und der Durchschnitt unter $2$ liegt, muss es Ecken vom Grad $1$ geben --- eine zweite, kürzere Begründung für Satz 4.3, die allerdings nur \kursiv{eine} Ecke liefert. Für \kursiv{zwei} Blätter braucht man das Argument mit dem längsten Weg.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 4.5 --- Kante hinzufügen, Kante wegnehmen}
+Sei $T$ ein Baum.
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Hinzufügen} & Fügt man zu $T$ eine Kante $\{u,v\} \notin E$ hinzu, so entsteht \kursiv{genau ein} Kreis.\\
+\textbf{Wegnehmen} & Entfernt man aus $T$ eine Kante, so zerfällt $T$ in genau zwei Komponenten.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Beweis, Hinzufügen}
+Nach (ii) gibt es in $T$ genau einen Weg $P$ von $u$ nach $v$; seine Länge ist $\ge 2$, weil $\{u,v\}$ keine Kante war. Zusammen mit der neuen Kante ergibt $P$ einen Kreis.
+
+Gäbe es einen zweiten Kreis $C'$ durch die neue Kante, so wäre $C'$ ohne diese Kante ein zweiter Weg von $u$ nach $v$ in $T$ --- Widerspruch zu (ii). Und ein Kreis, der die neue Kante \kursiv{nicht} benutzt, läge ganz in $T$ und widerspräche der Kreisfreiheit.
+
+\schritt{Beweis, Wegnehmen}
+Das wurde im Beweis von Teil 2 bereits gezeigt: Jede Kante eines Baumes ist eine Brücke, und $T - e$ hat genau zwei Komponenten. $\blacksquare$
+\end{merksatz}
+
+\section{Wurzelbäume}
+
+In den Beispielen des ersten Abschnitts --- Organigramm, Diagnosealgorithmus, Dateiverzeichnis --- gibt es eine ausgezeichnete Ecke: die Klinikleitung, die Eingangsfrage, das oberste Verzeichnis. Das ist eine \kursiv{Zusatzstruktur}, die der Baum selbst nicht mitbringt.
+
+\begin{definition}
+\boxtitelm{Definition 4.6 --- Wurzelbaum}
+Ein \Begriff{Wurzelbaum} ist ein Paar $(T, r)$ aus einem Baum $T$ und einer ausgezeichneten Ecke $r$, der \Begriff{Wurzel}. Für eine Ecke $v \neq r$ sei $P_v$ der eindeutige Weg von $r$ nach $v$. Dann heißt
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item die vorletzte Ecke auf $P_v$ der \Begriff{Vorgänger} von $v$;
+\item $v$ ein \Begriff{Nachfolger} seines Vorgängers;
+\item die Länge von $P_v$ die \Begriff{Tiefe} von $v$;
+\item die größte vorkommende Tiefe die \Begriff{Höhe} von $(T,r)$.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum das wohldefiniert ist}
+Die Definition beruft sich auf \enquote{den eindeutigen Weg}. Dass es ihn gibt und dass er eindeutig ist, ist genau Aussage (ii) aus Satz 4.2 --- eine Eigenschaft, die wir bewiesen haben und nicht voraussetzen müssen.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\node[knotenr] (r) at (0,1.5) {$r$};
+\node[knotenb] (a) at (-1.4,0.6) {};
+\node[knotenb] (b) at (0.9,0.6) {};
+\node[knotenb] (c) at (-2.1,-0.3) {};
+\node[knotenb] (d) at (-0.7,-0.3) {};
+\node[knotenb] (e) at (0.9,-0.3) {};
+\node[knotenb] (f) at (-2.1,-1.2) {};
+\draw[kante] (r)--(a); \draw[kante] (r)--(b);
+\draw[kante] (a)--(c); \draw[kante] (a)--(d); \draw[kante] (b)--(e);
+\draw[kante] (c)--(f);
+\node[font=\scriptsize, color=grau] at (2.5,1.5) {Tiefe $0$};
+\node[font=\scriptsize, color=grau] at (2.5,0.6) {Tiefe $1$};
+\node[font=\scriptsize, color=grau] at (2.5,-0.3) {Tiefe $2$};
+\node[font=\scriptsize, color=grau] at (2.5,-1.2) {Tiefe $3$};
+\end{tikzpicture}
+\end{center}
+
+Die Höhe dieses Wurzelbaums ist $3$.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Wurzel und Höhe sind keine Eigenschaften des Baumes}
+Derselbe Baum bekommt je nach Wahl der Wurzel eine andere Höhe.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\begin{scope}
+\node[knotenr] (p0) at (0,1.0) {};
+\node[knotenb] (p1) at (0,0.35) {};
+\node[knotenb] (p2) at (0,-0.3) {};
+\node[knotenb] (p3) at (0,-0.95) {};
+\node[knotenb] (p4) at (0,-1.6) {};
+\draw[kante] (p0)--(p1);\draw[kante] (p1)--(p2);\draw[kante] (p2)--(p3);\draw[kante] (p3)--(p4);
+\node[font=\scriptsize\itshape, color=grau] at (0,-2.1) {Wurzel am Ende: Höhe $4$};
+\end{scope}
+\begin{scope}[xshift=4.6cm]
+\node[knotenr] (q0) at (0,0.3) {};
+\node[knotenb] (q1) at (-0.75,-0.35) {};
+\node[knotenb] (q2) at (0.75,-0.35) {};
+\node[knotenb] (q3) at (-0.75,-1.0) {};
+\node[knotenb] (q4) at (0.75,-1.0) {};
+\draw[kante] (q0)--(q1);\draw[kante] (q1)--(q3);
+\draw[kante] (q0)--(q2);\draw[kante] (q2)--(q4);
+\node[font=\scriptsize\itshape, color=grau] at (0,-2.1) {Wurzel in der Mitte: Höhe $2$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Beide Bilder zeigen denselben Baum $P_5$ --- nur die Wurzel ist verschieden gewählt. Aussagen über \enquote{die Höhe eines Baumes} sind daher unvollständig, solange die Wurzel nicht genannt ist.
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Ein Baum aus seiner Gradfolge}
+Ein Baum hat $12$ Ecken. Genau eine Ecke hat Grad $5$, genau zwei haben Grad $3$, und keine Ecke hat Grad $4$ oder mehr als $5$. Wie viele Blätter hat er, und wie viele Ecken vom Grad $2$?
+
+\loesung
+\schritt{Schritt 1 --- Die Unbekannten benennen}
+Sei $b$ die Anzahl der Blätter (Grad $1$) und $z$ die Anzahl der Ecken vom Grad $2$. Es gibt keine Ecken vom Grad $0$: Ein Baum mit $n \ge 2$ Ecken ist zusammenhängend, also hat jede Ecke mindestens Grad $1$.
+
+\schritt{Schritt 2 --- Erste Gleichung: die Eckenzahl}
+\[ b + z + 2 + 1 = 12 \quad\Longrightarrow\quad b + z = 9 \]
+(die $2$ steht für die beiden Ecken vom Grad $3$, die $1$ für die vom Grad $5$).
+
+\schritt{Schritt 3 --- Zweite Gleichung: die Gradsumme}
+Nach Folgerung 4.4 ist die Gradsumme $2n - 2 = 2 \cdot 12 - 2 = 22$. Also
+\[ 1 \cdot b + 2 \cdot z + 3 \cdot 2 + 5 \cdot 1 = 22 \quad\Longrightarrow\quad b + 2z + 11 = 22 \quad\Longrightarrow\quad b + 2z = 11 . \]
+
+\schritt{Schritt 4 --- Das Gleichungssystem lösen}
+Wir ziehen die erste Gleichung von der zweiten ab:
+\begin{align*}
+(b + 2z) - (b + z) &= 11 - 9\\
+z &= 2
+\end{align*}
+Einsetzen in $b + z = 9$ ergibt $b = 7$.
+
+\schritt{Antwort}
+$\mathbf{7}$ Blätter und $\mathbf{2}$ Ecken vom Grad $2$.
+
+\schritt{Probe}
+Eckenzahl: $7 + 2 + 2 + 1 = 12$ \checkmark\\
+Gradsumme: $7\cdot 1 + 2\cdot 2 + 2\cdot 3 + 1 \cdot 5 = 7 + 4 + 6 + 5 = 22 = 2 \cdot 11 = 2(n-1)$ \checkmark
+
+\schritt{Ein solcher Baum, hingezeichnet}
+\begin{center}
+\begin{tikzpicture}[scale=1.05]
+\node[knotenb] (z) at (0,0) {$5$};
+\node[knotenb] (a) at (-1.5,0.9) {$3$};
+\node[knotenb] (b) at (1.5,0.9) {$3$};
+\node[knoten] (l1) at (-0.7,-1.1) {};
+\node[knoten] (l2) at (0.0,-1.2) {};
+\node[knoten] (l3) at (0.7,-1.1) {};
+\node[knotenb] (m1) at (-2.5,0.3) {$2$};
+\node[knoten] (l4) at (-3.3,-0.4) {};
+\node[knoten] (l5) at (-2.1,1.8) {};
+\node[knotenb] (m2) at (2.5,0.3) {$2$};
+\node[knoten] (l6) at (3.3,-0.4) {};
+\node[knoten] (l7) at (2.1,1.8) {};
+\draw[kante] (z)--(a); \draw[kante] (z)--(b);
+\draw[kante] (z)--(l1); \draw[kante] (z)--(l2); \draw[kante] (z)--(l3);
+\draw[kante] (a)--(m1); \draw[kante] (a)--(l5); \draw[kante] (m1)--(l4);
+\draw[kante] (b)--(m2); \draw[kante] (b)--(l7); \draw[kante] (m2)--(l6);
+\end{tikzpicture}
+\end{center}
+Nachzählen: $11$ Kanten, $12$ Ecken. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Eine Ungleichung für Wurzelbäume}
+Sei $(T,r)$ ein Wurzelbaum der Höhe $h$, in dem jede Ecke höchstens $k$ Nachfolger hat. Zeigen Sie
+\[ n \;\le\; 1 + k + k^2 + \cdots + k^h . \]
+Welche Höhe braucht ein solcher Baum mindestens, wenn $n = 1000$ und $k = 2$?
+
+\loesung
+\schritt{Schritt 1 --- Nach Tiefen sortieren}
+Jede Ecke hat genau eine Tiefe. Sei $a_t$ die Anzahl der Ecken der Tiefe $t$. Dann ist
+\[ n = a_0 + a_1 + \cdots + a_h . \]
+
+\schritt{Schritt 2 --- $a_0 = 1$}
+Nur die Wurzel hat Tiefe $0$, denn für $v \neq r$ hat der Weg von $r$ nach $v$ Länge $\ge 1$.
+
+\schritt{Schritt 3 --- Der Zusammenhang zwischen den Ebenen}
+Jede Ecke $v$ der Tiefe $t+1$ hat einen Vorgänger. Behauptung: Dieser hat Tiefe $t$.
+
+Begründung: Sei $P_v = (r, \ldots, u, v)$ der eindeutige Weg zu $v$, mit Vorgänger $u$. Dann ist $(r, \ldots, u)$ ein Weg von $r$ nach $u$ --- und wegen der Eindeutigkeit \kursiv{der} Weg. Seine Länge ist um $1$ kleiner als die von $P_v$, also hat $u$ die Tiefe $t$.
+
+\schritt{Schritt 4 --- Abschätzen}
+Jede Ecke der Tiefe $t+1$ ist Nachfolger einer Ecke der Tiefe $t$, und verschiedene Ecken der Tiefe $t+1$ haben verschiedene\ldots{} nein: Sie können denselben Vorgänger haben. Aber jede Ecke der Tiefe $t$ hat höchstens $k$ Nachfolger. Also
+\[ a_{t+1} \;\le\; k \cdot a_t . \]
+
+\schritt{Schritt 5 --- Auflösen}
+Aus $a_0 = 1$ folgt der Reihe nach $a_1 \le k$, $a_2 \le k \cdot a_1 \le k^2$, allgemein $a_t \le k^t$. Also
+\[ n = \sum_{t=0}^{h} a_t \;\le\; \sum_{t=0}^{h} k^t = 1 + k + \cdots + k^h . \]
+
+\schritt{Schritt 6 --- Der Zahlenwert}
+Für $k = 2$ ist die geometrische Summe (Band 3, Kapitel 2)
+\[ 1 + 2 + 4 + \cdots + 2^h = 2^{h+1} - 1 . \]
+Gefordert ist $2^{h+1} - 1 \ge 1000$, also $2^{h+1} \ge 1001$.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$h$ & $2^{h+1}-1$ & \textbf{reicht?}\\
+\midrule
+$8$ & $511$ & nein\\
+$\mathbf{9}$ & $\mathbf{1023}$ & \textcolor{gruen}{ja}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Antwort}
+Mindestens Höhe $\mathbf{9}$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das ist die Rechnung hinter der Bemerkung, dass man in einem Suchbaum mit tausend Einträgen etwa zehn Fragen braucht. Sie ist zugleich der Grund, warum Diagnosealgorithmen mit Ja-Nein-Fragen erstaunlich flach bleiben: Verdoppelt sich die Zahl der Diagnosen, wächst die Höhe nur um eins.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Wälder}
+Ein Wald hat $n$ Ecken, $m$ Kanten und $c$ Komponenten. Zeigen Sie $m = n - c$, und bestimmen Sie die Anzahl der Komponenten eines Waldes mit $20$ Ecken und $14$ Kanten.
+
+\loesung
+\schritt{Schritt 1 --- Die Komponenten sind Bäume}
+Jede Komponente eines Waldes ist zusammenhängend (das ist die Definition der Komponente) und kreisfrei (ein Kreis darin wäre einer im Wald). Also ist jede ein Baum.
+
+\schritt{Schritt 2 --- Kantenzahl je Komponente}
+Nach Satz 4.2, Aussage (iii), hat die $i$-te Komponente $m_i = n_i - 1$ Kanten.
+
+\schritt{Schritt 3 --- Summieren}
+Da jede Kante in genau einer Komponente liegt:
+\[ m = \sum_{i=1}^{c} m_i = \sum_{i=1}^{c}(n_i - 1) = n - c . \]
+
+\schritt{Schritt 4 --- Der Zahlenwert}
+$14 = 20 - c$, also $c = \mathbf{6}$ Komponenten.
+
+\schritt{Probe an einem Beispiel}
+Sechs Bäume mit zusammen $20$ Ecken: etwa fünf Wege $P_3$ ($5 \cdot 3 = 15$ Ecken, $5 \cdot 2 = 10$ Kanten) und ein $P_5$ ($5$ Ecken, $4$ Kanten). Zusammen $20$ Ecken, $14$ Kanten, $6$ Komponenten. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.4 --- Zwei Bäume mit gleicher Gradfolge}
+Geben Sie zwei nicht isomorphe Bäume mit derselben Gradfolge an. Was folgt daraus für die Invariantenliste aus Kapitel~1?
+
+\loesung
+\schritt{Schritt 1 --- Wonach man sucht}
+Gesucht sind zwei Bäume mit gleicher Eckenzahl (dann automatisch gleicher Kantenzahl, denn $m = n-1$) und gleicher Gradfolge, die sich dennoch unterscheiden.
+
+\schritt{Schritt 2 --- Die kleinsten Beispiele durchprobieren}
+Für $n \le 5$ ist die Gradfolge eines Baumes bereits eindeutig bestimmend --- man kann alle Fälle durchgehen. Bei $n = 6$ wird man fündig.
+
+Wir suchen eine Gradfolge mit Summe $2n-2 = 10$ bei sechs Einträgen. Nehmen wir $(3,2,2,1,1,1)$: Summe $= 3+2+2+1+1+1 = 10$. \checkmark
+
+\schritt{Schritt 3 --- Zwei Bäume dazu}
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\begin{scope}
+\node[knotenb] (a) at (0,0) {$3$};
+\node[knotenb] (b) at (-1.0,0.7) {$2$};
+\node[knotenb] (c) at (1.0,0.7) {$2$};
+\node[knoten] (d) at (0,-0.9) {};
+\node[knoten] (e) at (-1.8,1.3) {};
+\node[knoten] (f) at (1.8,1.3) {};
+\draw[kante] (a)--(b); \draw[kante] (a)--(c); \draw[kante] (a)--(d);
+\draw[kante] (b)--(e); \draw[kante] (c)--(f);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.5) {$T_1$: die Zweien getrennt};
+\end{scope}
+\begin{scope}[xshift=5.6cm]
+\node[knotenb] (p) at (0,0) {$3$};
+\node[knotenb] (q) at (1.0,0.7) {$2$};
+\node[knotenb] (s) at (1.8,1.4) {$2$};
+\node[knoten] (t) at (2.6,2.1) {};
+\node[knoten] (u) at (-0.9,0.6) {};
+\node[knoten] (w) at (-0.9,-0.6) {};
+\draw[kante] (p)--(q); \draw[kante] (q)--(s); \draw[kante] (s)--(t);
+\draw[kante] (p)--(u); \draw[kante] (p)--(w);
+\node[font=\scriptsize\itshape, color=grau] at (0.8,-1.5) {$T_2$: die Zweien hintereinander};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\schritt{Schritt 4 --- Nachweis, dass sie nicht isomorph sind}
+Wir brauchen eine Invariante, die sie unterscheidet.
+
+\kursiv{Erster Versuch --- die Nachbarn der Ecke vom Grad 3.} In $T_1$ hat die Ecke vom Grad $3$ die Nachbargrade $2, 2, 1$. In $T_2$ hat sie die Nachbargrade $2, 1, 1$. Die Liste der Nachbargrade ist eine Invariante, denn ein Isomorphismus erhält Grade und Nachbarschaften.
+
+Also $T_1 \not\cong T_2$.
+
+\kursiv{Zweiter Versuch zur Kontrolle --- der Durchmesser.} In $T_1$ ist der längste Weg $e - b - a - c - f$, Länge $4$. In $T_2$ ist der längste Weg $u - p - q - s - t$, Länge $4$. Diese Invariante unterscheidet \kursiv{nicht} --- ein gutes Beispiel dafür, dass man mehrere braucht.
+
+\schritt{Schritt 5 --- Was daraus folgt}
+Die Gradfolge steht in der Invariantenliste aus Kapitel~1 an dritter Stelle. Sie ist also auch bei Bäumen nicht ausreichend, obwohl Bäume die einfachsten zusammenhängenden Graphen sind.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Dass sogar Bäume nicht durch ihre Gradfolge bestimmt sind, macht deutlich, wie weit man von einem praktikablen Isomorphie\-kriterium entfernt ist. Für Bäume gibt es allerdings --- anders als für Graphen allgemein --- ein schnelles Verfahren, das Isomorphie sicher entscheidet; Kapitel~15 nennt es.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Cayley, die Chemie und die Bäume}
+\Person{Arthur Cayley} (1821--1895) führte den Begriff des Baumes 1857 ein, um Differentialoperatoren zu ordnen. Zwanzig Jahre später kam er auf ein ganz anderes Problem zurück: die Zahl der \kursiv{Isomere} gesättigter Kohlenwasserstoffe.
+
+Ein Alkan $\mathrm{C}_k\mathrm{H}_{2k+2}$ lässt sich als Graph auffassen: Kohlenstoffatome sind Ecken vom Grad $4$, Wasserstoffatome Ecken vom Grad $1$. Lässt man die Wasserstoffatome weg, bleibt ein Baum, in dem jede Ecke höchstens vier Nachbarn hat. Die Zahl der Isomere ist die Zahl solcher Bäume bis auf Isomorphie.
+
+Cayley zählte sie 1875 für $k$ bis $13$. Seine Zahlen stimmten mit den damals bekannten Isomeren überein --- ein bemerkenswerter Fall, in dem reine Kombinatorik eine chemische Vorhersage machte.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{2.2cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+\textbf{$k$ Kohlenstoffe} & $4$ & $5$ & $6$\\
+\midrule
+\textbf{Isomere} & $2$ & $3$ & $5$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Zählung unbewurzelter Bäume ist schwer, weil man Symmetrien herausrechnen muss. Cayley machte dabei für $k = 13$ einen Fehler; er wurde erst 1931 bemerkt. Das Verfahren, das solche Zählungen zuverlässig macht, stammt von \Person{George Pólya} (1937) und steht in Band 15, Kapitel~9.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 4.2} & Fünf gleichwertige Beschreibungen eines Baumes, im Ringschluss bewiesen\\
+\textbf{Satz 4.3} & Jeder Baum mit $n \ge 2$ hat mindestens zwei Blätter\\
+\textbf{Satz 4.5} & Kante hinzufügen erzeugt genau einen Kreis; Kante wegnehmen trennt in zwei Teile\\
+\textbf{Formel} & $m = n - c$ für jeden Wald\\
+\textbf{Wurzelbaum} & Tiefe, Höhe --- und dass beides von der Wurzelwahl abhängt\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel geht es um Bäume \kursiv{innerhalb} eines Graphen: Wie findet man einen sparsamsten Teilgraphen, der noch alle Ecken verbindet --- und wie viele davon gibt es?}
+\end{minipage}
+\end{center}
+\end{merksatz}

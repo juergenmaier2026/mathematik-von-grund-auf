@@ -1,0 +1,713 @@
+\chapter{Färbungen}
+
+\section{Der Dienstplan, endlich beantwortet}
+
+In Kapitel 1 stand die zweite Frage: Fünf Ärztinnen, sechs unverträgliche Paare, wie viele Schichten braucht man mindestens? Jetzt haben wir die Mittel.
+
+\begin{definition}
+\boxtitelm{Definition 9.1 --- Färbung, chromatische Zahl}
+Sei $G = (V,E)$ ein Graph und $k$ eine natürliche Zahl. Eine \Begriff{$k$-Färbung} von $G$ ist eine Abbildung
+\[ c : V \longrightarrow \{1, 2, \ldots, k\} \]
+mit der Eigenschaft
+\[ \{u,v\} \in E \;\Longrightarrow\; c(u) \neq c(v) . \]
+Existiert eine solche, so heißt $G$ \Begriff{$k$-färbbar}. Die \Begriff{chromatische Zahl} $\chi(G)$ ist das kleinste $k$, für das $G$ $k$-färbbar ist.
+\end{definition}
+
+\begin{warnung}
+\boxtitelr{Was die Definition \kursiv{nicht} verlangt}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+Alle Farben benutzen & nein --- eine $5$-Färbung darf mit drei Farben auskommen\\
+Nachbarn verschieden & \textcolor{gruen}{ja, das ist die einzige Forderung}\\
+Nichtnachbarn gleich & nein --- sie \kursiv{dürfen} gleich sein, müssen aber nicht\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Insbesondere ist jede $k$-Färbung auch eine $(k+1)$-Färbung. Die Eigenschaft \enquote{$k$-färbbar} vererbt sich nach oben, und deshalb ist die Frage nach dem \kursiv{kleinsten} $k$ die einzig interessante.
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Der Dienstplan}
+Graph: $V = \{A,B,C,D,E\}$, Kanten $AB$, $AC$, $BC$, $BD$, $CE$, $DE$.
+
+\schritt{Schritt 1 --- Eine untere Schranke}
+Die drei Ecken $A$, $B$, $C$ sind paarweise benachbart. In jeder Färbung müssen sie drei verschiedene Farben tragen. Also
+\[ \chi \ge 3 . \]
+
+\schritt{Schritt 2 --- Eine Färbung mit drei Farben angeben}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+$A$ & $B$ & $C$ & $D$ & $E$\\
+\midrule
+$1$ & $2$ & $3$ & $1$ & $2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 3 --- Jede Kante prüfen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.4cm}P{1.8cm}@{}}
+\toprule
+\textbf{Kante} & \textbf{Farben} & \textbf{Kante} & \textbf{Farben}\\
+\midrule
+$AB$ & $1 \neq 2$ \checkmark & $BD$ & $2 \neq 1$ \checkmark\\
+$AC$ & $1 \neq 3$ \checkmark & $CE$ & $3 \neq 2$ \checkmark\\
+$BC$ & $2 \neq 3$ \checkmark & $DE$ & $1 \neq 2$ \checkmark\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Antwort}
+$\chi = 3$: \textbf{Drei Schichten genügen und drei sind nötig.}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.35]
+\node[knotenb] (A) at (90:1.2) {$A$};
+\node[knotenr] (B) at (162:1.2) {$B$};
+\node[knoteng] (C) at (18:1.2) {$C$};
+\node[knotenb] (D) at (234:1.2) {$D$};
+\node[knotenr] (E) at (306:1.2) {$E$};
+\draw[kante] (A)--(B);\draw[kante] (A)--(C);\draw[kante] (B)--(C);
+\draw[kante] (B)--(D);\draw[kante] (C)--(E);\draw[kante] (D)--(E);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie den Aufbau der Antwort. Für eine chromatische Zahl braucht man \kursiv{immer zwei Dinge}: eine Färbung, die zeigt, dass es reicht --- und ein Argument, das zeigt, dass weniger nicht geht. Nur eines von beiden genügt nie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Erste Werte und erste Schranken}
+
+\begin{merksatz}
+\boxtitel{Was man sofort ausrechnen kann}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{1.6cm}P{4.4cm}@{}}
+\toprule
+\textbf{Graph} & $\chi$ & \textbf{Begründung}\\
+\midrule
+Leerer Graph & $1$ & keine Kante, alles eine Farbe\\
+$K_n$ & $n$ & alle paarweise benachbart\\
+Baum ($n\ge2$) & $2$ & bipartit --- Satz 2.12, kein Kreis\\
+$C_n$, $n$ gerade & $2$ & bipartit\\
+$C_n$, $n$ ungerade & $\mathbf{3}$ & siehe unten\\
+$K_{r,s}$ & $2$ & bipartit\\
+Petersen & $3$ & siehe Aufgabe 9.2\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der ungerade Kreis, nachgerechnet}
+Sei $n$ ungerade. Zwei Farben genügen nicht: Nach Satz 2.12 ist $\chi(G) = 2$ gleichbedeutend mit Bipartitheit --- eine $2$-Färbung \kursiv{ist} eine Bipartition ---, und ein ungerader Kreis ist nicht bipartit.
+
+Drei genügen: Man färbt $v_1, v_2, \ldots, v_{n-1}$ abwechselnd mit $1, 2, 1, 2, \ldots$ Da $n-1$ gerade ist, endet das mit $c(v_{n-1}) = 2$. Für $v_n$ nimmt man Farbe $3$; seine Nachbarn $v_{n-1}$ und $v_1$ tragen $2$ und $1$. \checkmark
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 9.2 --- Clique und Unabhängigkeit}
+\begin{itemize}[leftmargin=1.4em, itemsep=3pt]
+\item Eine \Begriff{Clique} ist eine Eckenmenge, deren Ecken paarweise benachbart sind. Die \Begriff{Cliquenzahl} $\omega(G)$ ist die Größe einer größten Clique.
+\item Eine \Begriff{unabhängige Menge} ist eine Eckenmenge ohne Kante dazwischen. Die \Begriff{Unabhängigkeitszahl} $\alpha(G)$ ist die Größe einer größten unabhängigen Menge.
+\end{itemize}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 9.3 --- Zwei untere Schranken}
+Für jeden Graphen gilt
+\[ \chi(G) \;\ge\; \omega(G) \qquad \text{und} \qquad \chi(G) \;\ge\; \frac{n}{\alpha(G)} . \]
+
+\schritt{Beweis der ersten}
+Sei $S$ eine Clique der Größe $\omega$. Je zwei Ecken von $S$ sind benachbart, tragen also verschiedene Farben. Somit braucht man mindestens $\omega$ Farben.
+
+\schritt{Beweis der zweiten}
+Sei eine $\chi$-Färbung gegeben. Für jede Farbe $i$ sei $V_i$ die Menge der Ecken dieser Farbe.
+
+$V_i$ ist unabhängig: Zwei Ecken darin haben dieselbe Farbe, dürfen also nach Definition 9.1 nicht benachbart sein. Damit ist $|V_i| \le \alpha$.
+
+Jede Ecke liegt in genau einem $V_i$, also
+\[ n = \sum_{i=1}^{\chi} |V_i| \;\le\; \chi \cdot \alpha \quad\Longrightarrow\quad \chi \ge \frac{n}{\alpha} . \qquad \blacksquare \]
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die erste Schranke kann beliebig schlecht sein}
+Man könnte hoffen: $\chi = \omega$. Das wäre bequem, denn Cliquen sieht man.
+
+Es stimmt nicht. Der ungerade Kreis $C_5$ hat $\omega = 2$ (keine drei paarweise benachbarten Ecken) und $\chi = 3$.
+
+Schlimmer: \Person{Jan Mycielski} gab 1955 ein Verfahren an, das aus einem dreiecksfreien Graphen mit chromatischer Zahl $k$ einen dreiecksfreien mit $k+1$ macht. Es gibt also dreiecksfreie Graphen --- $\omega = 2$ --- mit beliebig großer chromatischer Zahl.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist eine der überraschendsten Tatsachen des Gebiets. Man würde erwarten, dass eine hohe chromatische Zahl von dicht verwobenen Stellen herrührt. Sie kann aber auch aus großräumiger Struktur kommen, ohne dass irgendwo drei Ecken paarweise benachbart wären.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Das gierige Verfahren}
+
+\begin{merksatz}
+\boxtitel{Das Verfahren}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.2cm}P{7.2cm}@{}}
+\toprule
+1. & Bringe die Ecken in eine Reihenfolge $v_1, v_2, \ldots, v_n$.\\
+2. & Gehe sie der Reihe nach durch. Gib $v_i$ die kleinste Farbe, die noch bei keinem bereits gefärbten Nachbarn vorkommt.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 9.4 --- Die Gradschranke}
+Sei $\Delta(G)$ der größte in $G$ vorkommende Grad. Dann gilt
+\[ \chi(G) \;\le\; \Delta(G) + 1 . \]
+
+\schritt{Beweis}
+Wir wenden das gierige Verfahren mit beliebiger Reihenfolge an und behaupten: Es benutzt nie eine Farbe größer als $\Delta + 1$.
+
+Betrachte den Schritt, in dem $v_i$ gefärbt wird. Die Ecke $v_i$ hat höchstens $\Delta$ Nachbarn, also erst recht höchstens $\Delta$ bereits gefärbte Nachbarn. Diese belegen höchstens $\Delta$ verschiedene Farben.
+
+Unter den $\Delta + 1$ Farben $1, 2, \ldots, \Delta+1$ bleibt somit mindestens eine frei. Das Verfahren wählt die kleinste freie und kommt also mit $\Delta+1$ Farben aus.
+
+Dass das Ergebnis eine zulässige Färbung ist, liegt an der Vorschrift: $v_i$ bekommt keine Farbe eines bereits gefärbten Nachbarn, und die später gefärbten Nachbarn meiden ihrerseits die Farbe von $v_i$. $\blacksquare$
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Reihenfolge entscheidet über die Güte}
+Das gierige Verfahren liefert \kursiv{immer} eine zulässige Färbung, aber nicht immer eine sparsame.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+\node[knotenb] (a1) at (-1.2,0.7) {$1$};
+\node[knotenb] (a2) at (-1.2,-0.7) {$3$};
+\node[knotenb] (b1) at (0,0.7) {$2$};
+\node[knotenb] (b2) at (0,-0.7) {$4$};
+\node[knotenb] (c1) at (1.2,0.7) {$5$};
+\node[knotenb] (c2) at (1.2,-0.7) {$6$};
+\draw[kante] (a1)--(b2); \draw[kante] (a1)--(c2);
+\draw[kante] (a2)--(b1); \draw[kante] (a2)--(c1);
+\draw[kante] (b1)--(c2); \draw[kante] (b2)--(c1);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.3) {$K_{3,3}$ ohne die \enquote{senkrechten} Kanten};
+\end{tikzpicture}
+\end{center}
+
+Der Graph ist bipartit --- obere Reihe gegen untere ---, also $\chi = 2$.
+
+\schritt{Ungünstige Reihenfolge}
+Nimmt man die Ecken in der Reihenfolge $1,2,3,4,5,6$ wie beschriftet, so ergibt sich:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.2cm}P{3.0cm}P{1.6cm}@{}}
+\toprule
+\textbf{Ecke} & \textbf{gefärbte Nachbarn} & \textbf{Farbe}\\
+\midrule
+$1$ & --- & $1$\\
+$2$ & --- & $1$\\
+$3$ & $2$ (Farbe $1$) & $2$\\
+$4$ & $1$ (Farbe $1$) & $2$\\
+$5$ & $3$ (Farbe $2$), $4$ (Farbe $2$) & $1$\\
+$6$ & $1$ ($1$), $2$ ($1$) & $2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Hier ging es gut: zwei Farben. Bei anderer Anordnung derselben Kantenmenge kann das gierige Verfahren jedoch beliebig viele Farben verbrauchen --- es gibt bipartite Graphen, bei denen eine ungeschickte Reihenfolge $n/2$ Farben erzwingt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es gibt \kursiv{immer} eine Reihenfolge, bei der das gierige Verfahren genau $\chi(G)$ Farben verbraucht --- man ordne die Ecken einer optimalen Färbung nach Farbklassen. Diese Reihenfolge zu finden setzt aber voraus, dass man die optimale Färbung schon kennt. Der Satz ist wahr und nutzlos.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Satz 9.5 (Brooks 1941)}
+Sei $G$ zusammenhängend. Ist $G$ weder ein vollständiger Graph noch ein Kreis ungerader Länge, so gilt
+\[ \chi(G) \;\le\; \Delta(G) . \]
+
+\schritt{Warum die beiden Ausnahmen nötig sind}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.2cm}P{1.6cm}P{1.6cm}P{2.4cm}@{}}
+\toprule
+& $\Delta$ & $\chi$ & \\
+\midrule
+$K_n$ & $n-1$ & $n$ & \textcolor{akzent}{$\chi = \Delta+1$}\\
+$C_5$ & $2$ & $3$ & \textcolor{akzent}{$\chi = \Delta+1$}\\
+Petersen & $3$ & $3$ & \textcolor{gruen}{$\chi = \Delta$}\\
+$C_6$ & $2$ & $2$ & \textcolor{gruen}{$\chi = \Delta$}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Bei den beiden Ausnahmen wird die Schranke aus Satz 9.4 tatsächlich erreicht. Brooks sagt: Sonst nie.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Auch diesen Satz beweise ich nicht}
+Der Beweis ist nicht schwer im Sinne von tief, aber er zerfällt in eine größere Zahl von Fällen: Man unterscheidet nach $\Delta \le 2$, nach dem Vorhandensein einer Schnittecke und danach, ob der Graph dreifach zusammenhängend ist. Jeder Fall braucht eine eigene Reihenfolge für das gierige Verfahren.
+
+Ich verweise auf Diestel\zit{7}, Kapitel 5. Wie bei Kuratowski gilt: Das Ergebnis brauchen wir nur als Werkzeug, und ein ausgewiesener Verweis ist ehrlicher als ein zusammengeschnurrter Beweis.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Folgende --- der Fünffarbensatz --- beweise ich dagegen vollständig. Er ist der Höhepunkt dieses Kapitels, und er kommt ohne fremde Hilfsmittel aus.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Fünffarbensatz}
+
+\begin{merksatz}
+\boxtitel{Satz 9.6 (Heawood 1890)}
+Jeder planare Graph ist $5$-färbbar.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Vorbereitung --- die Kempe-Kette}
+Sei eine Färbung eines Graphen gegeben und seien $i \neq j$ zwei Farben. Der \Begriff{$(i,j)$-Teilgraph} ist der von allen Ecken der Farbe $i$ oder $j$ induzierte Teilgraph.
+
+\schritt{Die entscheidende Beobachtung}
+Sei $K$ eine Zusammenhangskomponente des $(i,j)$-Teilgraphen. Vertauscht man \kursiv{innerhalb von $K$} die Farben $i$ und $j$ --- also: jede Ecke von $K$ mit Farbe $i$ bekommt $j$ und umgekehrt ---, so bleibt die Färbung zulässig.
+
+\schritt{Warum}
+Zu prüfen ist jede Kante $\{x,y\}$.
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+Beide außerhalb $K$ & Nichts ändert sich.\\
+Beide in $K$ & Beide werden umgefärbt. Waren sie vorher verschieden ($i$ und $j$), sind sie es nachher auch ($j$ und $i$).\\
+$x \in K$, $y \notin K$ & Dann trägt $y$ weder $i$ noch $j$. Denn hätte $y$ eine dieser Farben, so läge $y$ im $(i,j)$-Teilgraphen und wäre über die Kante mit $x$ verbunden --- also in derselben Komponente $K$. Die neue Farbe von $x$ ist $i$ oder $j$, also verschieden von der von $y$.\\
+\bottomrule
+\end{tabular}
+\end{center}
+$\blacksquare$
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\draw[kante, grau!40] (-0.9,0) ellipse (1.3 and 0.95);
+\node[knotenb] (p) at (-1.6,0.25) {$i$};
+\node[knotenr] (q) at (-0.9,-0.35) {$j$};
+\node[knotenb] (r) at (-0.2,0.25) {$i$};
+\draw[kante] (p)--(q); \draw[kante] (q)--(r);
+\node[knoteng] (s) at (1.5,0) {$k$};
+\draw[kante] (r)--(s);
+\node[font=\scriptsize\itshape, color=grau] at (-0.9,-1.35) {Komponente $K$ --- hier wird getauscht};
+\node[font=\scriptsize\itshape, color=grau] at (1.5,-1.35) {außerhalb: Farbe $\neq i,j$};
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis des Fünffarbensatzes --- Induktion über $n$}
+\schritt{Induktionsanfang}
+Für $n \le 5$ färbt man jede Ecke anders; fünf Farben reichen.
+
+\schritt{Induktionsschritt --- die dünne Ecke}
+Sei $n \ge 6$ und $G$ planar, und sei der Satz für alle planaren Graphen mit weniger Ecken bewiesen.
+
+Nach Folgerung 8.6 gibt es eine Ecke $v$ mit $\deg(v) \le 5$.
+
+Der Graph $G - v$ ist planar (ein Teilgraph eines planaren Graphen ist planar) und hat $n-1$ Ecken. Nach Induktionsannahme besitzt er eine $5$-Färbung $c$.
+
+\schritt{Fall 1 --- die Nachbarn benutzen höchstens vier Farben}
+Dann ist eine der fünf Farben bei den Nachbarn von $v$ unbenutzt. Wir geben $v$ diese Farbe und sind fertig.
+
+Das erledigt insbesondere alle Fälle mit $\deg(v) \le 4$.
+
+\schritt{Fall 2 --- die Vorbereitung}
+Bleibt: $\deg(v) = 5$ und die fünf Nachbarn tragen fünf verschiedene Farben.
+
+Wir fixieren eine ebene Zeichnung von $G$. Um $v$ herum liegen die fünf Nachbarn in einer bestimmten zyklischen Reihenfolge; wir nennen sie im Uhrzeigersinn
+\[ v_1,\ v_2,\ v_3,\ v_4,\ v_5 \]
+und dürfen die Farben so benennen, dass $c(v_i) = i$ gilt.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.35]
+\node[knotenr] (v) at (0,0) {$v$};
+\foreach \i in {1,...,5} {
+  \pgfmathsetmacro{\ang}{90-72*(\i-1)}
+  \node[knotenb] (n\i) at (\ang:1.35) {$v_{\i}$};
+  \draw[kante] (v) -- (n\i);
+}
+\node[font=\scriptsize, color=grau] at (90:1.75) {Farbe $1$};
+\node[font=\scriptsize, color=grau] at (18:1.85) {Farbe $2$};
+\node[font=\scriptsize, color=grau] at (-54:1.85) {Farbe $3$};
+\node[font=\scriptsize, color=grau] at (-126:1.85) {Farbe $4$};
+\node[font=\scriptsize, color=grau] at (162:1.85) {Farbe $5$};
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- Fall 2, erster Versuch}
+Betrachte den $(1,3)$-Teilgraphen von $G-v$, also alle Ecken der Farben $1$ und $3$.
+
+\schritt{Unterfall 2a --- $v_1$ und $v_3$ liegen in verschiedenen Komponenten}
+Sei $K$ die Komponente, die $v_1$ enthält. Wir vertauschen in $K$ die Farben $1$ und $3$. Nach der Vorbereitung bleibt die Färbung zulässig.
+
+Was ist jetzt anders? $v_1$ trägt nun Farbe $3$. Und $v_3$? Es liegt \kursiv{nicht} in $K$, wurde also nicht umgefärbt und trägt weiterhin $3$.
+
+Die Nachbarn von $v$ tragen nun die Farben $3, 2, 3, 4, 5$ --- die Farbe $1$ kommt bei keinem mehr vor. Wir geben $v$ die Farbe $1$. Fertig.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Kern des Kempe-Tricks: Man ändert die Färbung des Restes so, dass eine Farbe frei wird --- ohne die Zulässigkeit zu zerstören.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Beweis --- Fall 2, der schwierige Unterfall}
+\schritt{Unterfall 2b --- $v_1$ und $v_3$ liegen in derselben Komponente}
+Dann gibt es in $G-v$ einen Weg $P$ von $v_1$ nach $v_3$, auf dem sich die Farben $1$ und $3$ abwechseln --- eine \Begriff{Kempe-Kette}.
+
+\schritt{Der Kreis, der entsteht}
+Fügen wir zu $P$ die beiden Kanten $\{v, v_1\}$ und $\{v, v_3\}$ hinzu, so entsteht ein Kreis
+\[ C = v \to v_1 \to \cdots \to v_3 \to v . \]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.4]
+\node[knotenr] (v) at (0,0) {$v$};
+\foreach \i in {1,...,5} {
+  \pgfmathsetmacro{\ang}{90-72*(\i-1)}
+  \node[knotenb] (n\i) at (\ang:1.3) {$v_{\i}$};
+}
+\draw[kante] (v)--(n2); \draw[kante] (v)--(n4); \draw[kante] (v)--(n5);
+\draw[kanted] (v)--(n1); \draw[kanted] (v)--(n3);
+\draw[kanted] (n1) to[bend left=55] (n3);
+\node[font=\scriptsize, color=akzent] at (2.0,0.35) {Kempe-Kette $P$};
+\node[font=\scriptsize\itshape, color=gruen] at (-1.55,-0.9) {$v_4$ liegt außerhalb};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Was der Kreis trennt}
+Nach dem Jordanschen Kurvensatz teilt $C$ die Ebene in ein Inneres und ein Äußeres.
+
+Die Ecke $v_2$ liegt --- in der zyklischen Anordnung um $v$ --- \kursiv{zwischen} $v_1$ und $v_3$; die Ecken $v_4$ und $v_5$ liegen auf der anderen Seite. Da die Kanten $\{v,v_2\}$, $\{v,v_4\}$, $\{v,v_5\}$ von $v$ ausgehen und sich nicht mit $C$ kreuzen dürfen, liegt $v_2$ auf der einen Seite von $C$ und $v_4$ auf der anderen.
+
+\schritt{Der zweite Kempe-Griff}
+Betrachte nun den $(2,4)$-Teilgraphen. Läge $v_2$ mit $v_4$ in derselben Komponente, so gäbe es einen Weg $Q$ von $v_2$ nach $v_4$, dessen Ecken abwechselnd die Farben $2$ und $4$ tragen.
+
+Dieser Weg müsste von der einen Seite von $C$ auf die andere gelangen, also $C$ überqueren. Das geht nur über eine Ecke von $C$ --- Kanten dürfen sich in einer ebenen Zeichnung nicht kreuzen.
+
+Die Ecken von $C$ sind aber $v$ (nicht gefärbt, gehört nicht zu $G-v$) und die Ecken von $P$, die alle Farbe $1$ oder $3$ tragen. Keine davon hat Farbe $2$ oder $4$, kann also nicht auf $Q$ liegen.
+
+Widerspruch. Also liegen $v_2$ und $v_4$ in \kursiv{verschiedenen} Komponenten des $(2,4)$-Teilgraphen.
+
+\schritt{Der Abschluss}
+Wir vertauschen die Farben $2$ und $4$ in der Komponente, die $v_2$ enthält. Danach trägt $v_2$ die Farbe $4$, während $v_4$ unverändert $4$ trägt.
+
+Die Nachbarn von $v$ tragen nun $1, 4, 3, 4, 5$. Die Farbe $2$ ist frei. Wir geben sie $v$. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was dieser Beweis geleistet hat}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+Aus Kapitel 8 & Folgerung 8.6: eine Ecke vom Grad $\le 5$\\
+Aus Kapitel 8 & Der Jordansche Kurvensatz --- schon dort ausgewiesen\\
+Neu & Die Kempe-Kette und der doppelte Farbtausch\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis ist kurz, vollständig und benutzt kein Hilfsmittel, das nicht in diesem Band steht. Umso bemerkenswerter ist, dass der Schritt von fünf auf vier Farben über hundert Jahre gekostet hat --- und am Ende ganz anders aussah.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Vierfarbensatz}
+
+\begin{merksatz}
+\boxtitel{Satz 9.7 (Appel und Haken 1976)}
+Jeder planare Graph ist $4$-färbbar.
+\end{merksatz}
+
+\begin{geschichte}
+\boxtitelg{Ein Beweis, der elf Jahre lang für richtig gehalten wurde}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Ereignis}\\
+\midrule
+$1852$ & Guthrie & stellt die Frage beim Kartenfärben\\
+$1879$ & Kempe & veröffentlicht einen \enquote{Beweis}\\
+$1890$ & Heawood & findet den Fehler --- rettet den Fünffarbensatz\\
+$1913$ & Birkhoff & Methode der reduziblen Konfigurationen\\
+$1976$ & Appel, Haken & Beweis mit Rechnerhilfe\\
+$1997$ & Robertson u.\,a. & vereinfachter Beweis, $633$ Konfigurationen\\
+$2005$ & Gonthier & vollständige maschinelle Verifikation\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\Person{Alfred Kempe} führte 1879 genau die Kette vor, die wir eben benutzt haben --- und wandte sie auf den Fall $\deg(v) = 5$ mit vier Farben an. Dort muss man \kursiv{zwei} Vertauschungen nacheinander vornehmen, und Kempe übersah, dass die zweite die erste zunichtemachen kann.
+
+\Person{Percy Heawood} fand den Fehler elf Jahre später. Er konnte ihn nicht reparieren --- aber er bemerkte, dass Kempes Argument für \kursiv{fünf} Farben einwandfrei durchgeht. So entstand der Satz, den wir eben bewiesen haben: als Rettungsstück aus einem gescheiterten Beweis.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Kempes Fehler steckte nicht in einer Rechnung, sondern in einer unausgesprochenen Annahme --- er hielt für unabhängig, was es nicht war. Genau davor warnt das Vorwort dieses Bandes.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Ein Beweis, den kein Mensch nachlesen kann}
+Appel und Haken zeigten 1976: Es gibt eine endliche Liste von \enquote{unvermeidbaren} Konfigurationen --- jeder minimale Gegenbeispielgraph müsste eine davon enthalten --- und jede davon ist \enquote{reduzibel}, führt also auf einen kleineren Gegenbeispielgraphen. Damit kann es keinen minimalen Gegenbeispielgraphen geben.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+& \textbf{1976} & \textbf{1997}\\
+\midrule
+Konfigurationen & $1482$ & $633$\\
+Rechenzeit & $\approx 1200$ h & $\approx 3$ h\\
+Von Hand prüfbar & \textcolor{akzent}{nein} & \textcolor{akzent}{nein}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Das löste eine Debatte aus, die bis heute nachwirkt: Ist ein Beweis, den kein Mensch vollständig durchsehen kann, ein Beweis?
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Dagegen} & Ein Beweis soll Einsicht verschaffen, nicht bloß Gewissheit. Hier versteht man am Ende nicht, \kursiv{warum} vier Farben genügen.\\
+\textbf{Dafür} & Die Fehleranfälligkeit langer Handrechnungen ist nachweislich höher als die geprüfter Programme. Kempes Beweis stand elf Jahre.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\Person{Georges Gonthier} beendete 2005 den technischen Teil der Debatte: Er formalisierte den gesamten Beweis im Beweisassistenten Coq --- einschließlich der kombinatorischen Argumente und der Fallprüfungen. Die Korrektheit hängt seither nur noch am Kern des Prüfsystems, nicht mehr an einzelnen Programmen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der philosophische Teil der Debatte bleibt offen. Bis heute kennt niemand einen Beweis des Vierfarbensatzes, den man in einer Vorlesung führen könnte --- und viele Fachleute halten es für möglich, dass es keinen gibt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.1 --- Chromatische Zahl bestimmen}
+Bestimmen Sie $\chi$ für den abgebildeten Graphen und begründen Sie beide Richtungen.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+\node[knotenb] (1) at (90:1.2) {$1$};
+\node[knotenb] (2) at (162:1.2) {$2$};
+\node[knotenb] (3) at (234:1.2) {$3$};
+\node[knotenb] (4) at (306:1.2) {$4$};
+\node[knotenb] (5) at (18:1.2) {$5$};
+\node[knotenb] (6) at (0,0) {$6$};
+\draw[kante] (1)--(2);\draw[kante] (2)--(3);\draw[kante] (3)--(4);
+\draw[kante] (4)--(5);\draw[kante] (5)--(1);
+\draw[kante] (6)--(1);\draw[kante] (6)--(2);\draw[kante] (6)--(3);
+\draw[kante] (6)--(4);\draw[kante] (6)--(5);
+\end{tikzpicture}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Was der Graph ist}
+Ein Fünfeck $C_5$ mit einer zusätzlichen Ecke $6$, die mit allen fünf verbunden ist. Solche Graphen heißen \Begriff{Rad}.
+
+\schritt{Schritt 2 --- Untere Schranke über eine Clique}
+Die Ecken $1$, $2$ und $6$ sind paarweise benachbart: $12$ \checkmark, $16$ \checkmark, $26$ \checkmark. Also $\omega \ge 3$ und damit $\chi \ge 3$ nach Satz 9.3.
+
+\schritt{Schritt 3 --- Die Schranke $3$ genügt nicht}
+Angenommen, es gäbe eine $3$-Färbung. Die Ecke $6$ trage Farbe $3$.
+
+Alle fünf Ecken $1, \ldots, 5$ sind mit $6$ benachbart, dürfen also die Farbe $3$ nicht tragen. Sie müssen mit den Farben $1$ und $2$ auskommen.
+
+Die Ecken $1, \ldots, 5$ bilden aber einen $C_5$, und der ist nach Satz 2.12 nicht bipartit --- er braucht drei Farben. Zwei genügen nicht.
+
+Widerspruch. Also $\chi \ge 4$.
+
+\schritt{Schritt 4 --- Vier Farben genügen}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}@{}}
+\toprule
+$1$ & $2$ & $3$ & $4$ & $5$ & $6$\\
+\midrule
+$1$ & $2$ & $1$ & $2$ & $3$ & $4$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Prüfung der Fünfeckskanten: $12$: $1\neq2$ \checkmark; $23$: $2\neq1$ \checkmark; $34$: $1\neq2$ \checkmark; $45$: $2\neq3$ \checkmark; $51$: $3\neq1$ \checkmark.\\
+Prüfung der Speichen: Ecke $6$ trägt $4$, alle anderen tragen $1$, $2$ oder $3$. \checkmark
+
+\schritt{Antwort}
+$\chi = \mathbf{4}$.
+
+\schritt{Kontrolle über Brooks}
+$\Delta = 5$ (die Ecke $6$). Der Graph ist zusammenhängend, kein vollständiger Graph (etwa $\{1,3\}$ ist keine Kante) und kein ungerader Kreis. Brooks liefert $\chi \le 5$ --- richtig, aber nicht scharf. Unsere Rechnung ist genauer.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.2 --- Der Petersen-Graph}
+Zeigen Sie $\chi(\text{Petersen}) = 3$.
+
+\loesung
+\schritt{Schritt 1 --- Untere Schranke}
+Der Petersen-Graph hat Taille $5$ (Aufgabe 2.2), enthält also kein Dreieck --- somit $\omega = 2$, und Satz 9.3 liefert nur $\chi \ge 2$.
+
+Wir brauchen die zweite Schranke. Gilt $\chi = 2$, so wäre der Graph bipartit, hätte also nach Satz 2.12 keinen ungeraden Kreis. Er hat aber Fünfkreise, etwa den Außenkreis. Also $\chi \ge 3$.
+
+\schritt{Schritt 2 --- Drei Farben genügen}
+Wir färben mit den Farben $1,2,3$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.6cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}@{}}
+\toprule
+& $0$ & $1$ & $2$ & $3$ & $4$\\
+\midrule
+außen $a_i$ & $1$ & $2$ & $1$ & $2$ & $3$\\
+innen $b_i$ & $2$ & $3$ & $3$ & $1$ & $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Alle fünfzehn Kanten prüfen}
+\kursiv{Außenkreis $a_ia_{i+1}$:}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+$a_0a_1$ & $a_1a_2$ & $a_2a_3$ & $a_3a_4$ & $a_4a_0$\\
+$1\neq2$ & $2\neq1$ & $1\neq2$ & $2\neq3$ & $3\neq1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Speichen $a_ib_i$:}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+$a_0b_0$ & $a_1b_1$ & $a_2b_2$ & $a_3b_3$ & $a_4b_4$\\
+$1\neq2$ & $2\neq3$ & $1\neq3$ & $2\neq1$ & $3\neq1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Innenstern $b_ib_{i+2}$:}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+$b_0b_2$ & $b_1b_3$ & $b_2b_4$ & $b_3b_0$ & $b_4b_1$\\
+$2\neq3$ & $3\neq1$ & $3\neq1$ & $1\neq2$ & $1\neq3$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Alle fünfzehn Kanten in Ordnung. \checkmark
+
+\schritt{Antwort}
+$\chi(\text{Petersen}) = \mathbf{3}$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Beachten Sie: Der Petersen-Graph ist \kursiv{nicht} planar (Aufgabe 8.1). Dass er trotzdem mit drei Farben auskommt, ist kein Widerspruch --- der Vierfarbensatz gibt eine obere Schranke für planare Graphen, sagt aber nichts über nichtplanare in die eine oder andere Richtung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.3 --- Wo Kempes Beweis scheitert}
+Erklären Sie genau, warum das Argument aus dem Fünffarbensatz mit \kursiv{vier} Farben nicht durchgeht.
+
+\loesung
+\schritt{Schritt 1 --- Die Ausgangslage bei vier Farben}
+Man nimmt eine Ecke $v$ mit $\deg(v) \le 5$. Bei $\deg(v) \le 3$ oder wenn die Nachbarn höchstens drei Farben benutzen, ist man fertig.
+
+Der schwierige Fall ist $\deg(v) = 5$ mit vier verschiedenen Farben bei fünf Nachbarn --- eine Farbe kommt also doppelt vor. Sagen wir, die Nachbarn im Uhrzeigersinn tragen
+\[ v_1: 1, \quad v_2: 2, \quad v_3: 3, \quad v_4: 4, \quad v_5: 2 . \]
+
+\schritt{Schritt 2 --- Der erste Griff}
+Man betrachtet den $(1,3)$-Teilgraphen. Liegen $v_1$ und $v_3$ in verschiedenen Komponenten, tauscht man und macht Farbe $1$ frei. Fertig.
+
+Andernfalls gibt es eine $(1,3)$-Kette von $v_1$ nach $v_3$, die zusammen mit $v$ einen Kreis $C_{13}$ bildet.
+
+\schritt{Schritt 3 --- Der zweite Griff}
+Ebenso betrachtet man den $(1,4)$-Teilgraphen. Liegen $v_1$ und $v_4$ in verschiedenen Komponenten, tauscht man dort und ist fertig.
+
+Andernfalls gibt es eine $(1,4)$-Kette von $v_1$ nach $v_4$ mit Kreis $C_{14}$.
+
+\schritt{Schritt 4 --- Kempes Schluss}
+Kempe argumentierte: $C_{13}$ trennt $v_2$ von $v_4$, und $C_{14}$ trennt $v_3$ von $v_5$. Also liegen $v_2$ und $v_4$ in verschiedenen Komponenten des $(2,4)$-Teilgraphen, und ebenso $v_3$ und $v_5$ im $(3,2)$-Teilgraphen. Er vertauschte in \kursiv{beiden} Komponenten --- bei $v_2$ die Farben $2$ und $4$, bei $v_3$ die Farben $3$ und $2$ --- und schloss, dass danach Farbe $2$ frei sei.
+
+\schritt{Schritt 5 --- Der Fehler}
+Die beiden Vertauschungen sind nicht unabhängig voneinander.
+
+Die erste Vertauschung ändert Farben von $2$ auf $4$ und umgekehrt. Sie kann dadurch den $(3,2)$-Teilgraphen \kursiv{verändern}: Eine Ecke, die vorher Farbe $2$ trug und den Weg von $v_3$ zu $v_5$ blockierte, trägt nachher Farbe $4$ --- und der Weg ist offen. Die zweite Vertauschung setzt dann auf einer Lage auf, die nicht mehr gilt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Heawood konstruierte 1890 genau ein solches Beispiel und zeigte damit, dass Kempes Argument nicht trägt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Warum der Fünffarbenfall verschont bleibt}
+Bei fünf Farben und fünf Nachbarn tragen alle fünf \kursiv{verschiedene} Farben. Man braucht dann nur \kursiv{eine} Vertauschung: Entweder die $(1,3)$-Ketten sind getrennt --- dann tauscht man dort ---, oder sie sind es nicht, und daraus folgt zwingend, dass die $(2,4)$-Ketten getrennt sind. Man tauscht genau einmal, und es gibt keine zweite Vertauschung, die die erste zerstören könnte.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Der ganze Unterschied zwischen einem hundertjährigen offenen Problem und einem Beweis auf zwei Seiten liegt also darin, ob man einmal oder zweimal vertauschen muss.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 9.1} & Färbung und chromatische Zahl\\
+\textbf{Satz 9.3} & $\chi \ge \omega$ und $\chi \ge n/\alpha$\\
+\textbf{Satz 9.4} & Gierig: $\chi \le \Delta+1$\\
+\textbf{Satz 9.5} & Brooks: $\chi \le \Delta$ außer bei $K_n$ und ungeraden Kreisen\\
+\textbf{Satz 9.6} & \textbf{Fünffarbensatz --- vollständig bewiesen}\\
+\textbf{Satz 9.7} & Vierfarbensatz --- und warum sein Beweis anders ist\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel zählen wir Färbungen, statt nur nach ihrer Existenz zu fragen --- und stoßen dabei auf ein Polynom, wo man keines erwartet.}
+\end{minipage}
+\end{center}
+\end{merksatz}

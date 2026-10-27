@@ -1,0 +1,725 @@
+\chapter{Verteilungsfreie Verfahren und Simulation}
+
+\section{Warum}
+
+Die Verfahren aus Kapitel~8 setzen Normal\-verteilung voraus. Die Warnkästen dort haben gezeigt, wann das schiefgeht. Dieses Kapitel stellt Verfahren vor, die ohne diese Annahme auskommen.
+
+\begin{merksatz}
+\boxtitel{Drei Anlässe}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Ordinale Daten} & Bei NRS- und Likert-Werten ist der Mittelwert kodierungsabhängig (Kapitel~1). Ränge sind es nicht.\\
+\textbf{Schiefe Verteilungen} & Liegedauern, Kosten, Wartezeiten. Der Grenzwertsatz trägt bei kleinem $n$ nicht.\\
+\textbf{Ausreißer} & Ein einziger Wert kann den $t$-Test umkippen. Rangverfahren sind robust.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der Name ist irreführend}
+\enquote{Verteilungsfrei} heißt nicht \enquote{voraussetzungsfrei}. Auch diese Verfahren machen Annahmen --- nur andere.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Weiterhin nötig} & Unabhängigkeit der Beobachtungen. Daran ändert kein Rangverfahren etwas.\\
+\textbf{Oft nötig} & Gleiche \kursiv{Form} der Verteilungen in beiden Gruppen --- siehe Abschnitt 9.5.\\
+\textbf{Nicht mehr nötig} & Die Normalverteilung.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{warnung}
+
+\section{Der Vorzeichentest}
+
+\begin{merksatz}
+\boxtitel{Das einfachste Verfahren der Statistik}
+Bei verbundenen Daten schaut man nur auf das \kursiv{Vorzeichen} jeder Differenz --- nicht auf ihre Größe.
+
+\schritt{Die Nullhypothese}
+Wirkt die Behandlung nicht, so ist jede Differenz mit gleicher Wahrscheinlichkeit positiv oder negativ. Die Anzahl der positiven folgt dann einer Binomialverteilung mit $p = \frac12$.
+
+\schritt{An den MOBIL-Daten}
+Die sechs Differenzen NRS24 minus NRS48 der Gruppe B lauteten $1, 1, 1, 2, 2, 1$ --- alle sechs positiv.
+
+\schritt{Die Rechnung}
+\[ \Pr[\text{alle sechs positiv}] = \left(\tfrac12\right)^6 = \frac{1}{64} = 0{,}015625 \]
+Zweiseitig kommt der ebenso extreme Fall \enquote{alle sechs negativ} hinzu:
+\[ p = 2 \cdot \frac{1}{64} = \frac{2}{64} = \mathbf{0{,}03125} . \]
+
+\schritt{Die Entscheidung}
+$0{,}031 \le 0{,}05$: signifikant.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Bei $n = 6$ ist das der kleinstmögliche $p$-Wert}
+Der Vorzeichentest kann bei sechs Beobachtungen nie einen kleineren Wert als $0{,}031$ liefern --- selbst wenn die Unterschiede gewaltig wären.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+$n$ & \textbf{kleinstes $p$} & \\
+\midrule
+$4$ & $0{,}125$ & \textcolor{akzent}{nie signifikant}\\
+$5$ & $0{,}0625$ & \textcolor{akzent}{nie signifikant}\\
+$6$ & $0{,}03125$ & gerade eben\\
+$10$ & $0{,}00195$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei fünf oder weniger Beobachtungen ist der zweiseitige Vorzeichentest \kursiv{grundsätzlich} nicht signifikant --- unabhängig von den Daten. Das ist kein Mangel, sondern eine ehrliche Auskunft: Aus fünf Vorzeichen lässt sich nichts schließen.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Preis der Einfachheit}
+Der Test wirft die Größe der Unterschiede weg. Ob die Differenzen $1, 1, 1, 2, 2, 1$ oder $0{,}1$ bis $30$ lauten, ändert nichts. Das macht ihn robust und zugleich schwach.
+\end{warnung}
+
+\section{Der Wilcoxon-Vorzeichen-Rang-Test}
+
+\begin{merksatz}
+\boxtitel{Ein Mittelweg}
+Er benutzt mehr als die Vorzeichen, aber weniger als die Werte: die \kursiv{Rangfolge der Beträge}.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Differenzen bilden; Nullen weglassen.\\
+$2$ & Beträge aufsteigend sortieren und Ränge vergeben.\\
+$3$ & Die Ränge der positiven Differenzen summieren: $W^+$.\\
+$4$ & Mit den Schranken einer Tabelle vergleichen.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{An den MOBIL-Daten}
+Differenzen: $1, 1, 1, 2, 2, 1$.
+
+\schritt{Schritt 1 --- Ränge der Beträge}
+Vier Einsen belegen die Plätze $1$ bis $4$ und bekommen den Durchschnittsrang $2{,}5$. Zwei Zweien belegen die Plätze $5$ und $6$, Durchschnittsrang $5{,}5$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.4cm}P{1.6cm}P{1.6cm}P{1.8cm}@{}}
+\toprule
+$|d|$ & \textbf{Anzahl} & \textbf{Plätze} & \textbf{Rang}\\
+\midrule
+$1$ & $4$ & $1$--$4$ & $2{,}5$\\
+$2$ & $2$ & $5$--$6$ & $5{,}5$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Rangsumme der positiven}
+Alle sechs Differenzen sind positiv:
+\[ W^+ = 4 \cdot 2{,}5 + 2 \cdot 5{,}5 = 10 + 11 = 21 . \]
+
+\schritt{Schritt 3 --- Die Probe}
+Die Summe aller Ränge ist $\frac{n(n+1)}{2} = \frac{6 \cdot 7}{2} = 21$. Da alle Differenzen positiv sind, muss $W^+$ genau diesen Wert annehmen. \checkmark
+
+\schritt{Schritt 4 --- Die Entscheidung}
+Für $n=6$ und zweiseitiges Niveau $0{,}05$ lauten die kritischen Schranken $W^+ \le 0$ oder $W^+ \ge 21$. Der Wert $21$ erreicht die Schranke gerade:
+\[ p = 0{,}031 . \]
+
+\schritt{Der Vergleich der drei Verfahren}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{1.8cm}P{2.6cm}@{}}
+\toprule
+\textbf{Verfahren} & $p$ & \textbf{Annahme}\\
+\midrule
+Gepaarter $t$-Test & $\mathbf{0{,}0015}$ & Normal\-verteilung\\
+Wilcoxon & $0{,}031$ & Symmetrie\\
+Vorzeichentest & $0{,}031$ & \textcolor{gruen}{fast keine}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der $t$-Test liefert den kleinsten $p$-Wert --- er nutzt am meisten Auskunft aus den Daten. Das gilt aber nur, \kursiv{wenn} seine Annahme zutrifft. Ist sie verletzt, ist der kleine $p$-Wert unverdient. Die Reihenfolge in der Tabelle ist zugleich die Reihenfolge der Voraussetzungen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Mann-Whitney-Test}
+
+\begin{merksatz}
+\boxtitel{Das Gegenstück für unabhängige Gruppen}
+Auch bekannt als Wilcoxon-Rangsummentest --- es ist dasselbe Verfahren in zwei Schreibweisen.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Alle Werte beider Gruppen gemeinsam sortieren und Ränge vergeben.\\
+$2$ & Die Ränge je Gruppe summieren.\\
+$3$ & Daraus die Prüfgröße $U$ berechnen.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\[ U_A = R_A - \frac{n_A(n_A+1)}{2} \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die MOBIL-Mobilisationszeiten}
+\schritt{Schritt 1 --- Gemeinsam sortieren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.2cm}@{}}
+\toprule
+Wert & $14$ & $15$ & $17$ & $18$ & $19$ & $21$\\
+Gruppe & B & B & B & B & \textbf{A} & B\\
+Rang & $1$ & $2$ & $3$ & $4$ & $5$ & $6$\\
+\midrule
+Wert & $22$ & $23$ & $24$ & $26$ & $31$ & $35$\\
+Gruppe & \textbf{A} & B & \textbf{A} & \textbf{A} & \textbf{A} & \textbf{A}\\
+Rang & $7$ & $8$ & $9$ & $10$ & $11$ & $12$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Rangsummen}
+\[ R_A = 5+7+9+10+11+12 = 54 \]
+\[ R_B = 1+2+3+4+6+8 = 24 \]
+
+\schritt{Probe}
+\[ R_A + R_B = 78 = \frac{12 \cdot 13}{2} . \quad \checkmark \]
+
+\schritt{Schritt 3 --- Die Prüfgrößen}
+\[ U_A = 54 - \frac{6 \cdot 7}{2} = 54 - 21 = 33 \]
+\[ U_B = 24 - 21 = 3 \]
+
+\schritt{Zweite Probe}
+\[ U_A + U_B = 36 = n_A \cdot n_B = 6 \cdot 6 . \quad \checkmark \]
+
+\schritt{Schritt 4 --- Die Entscheidung}
+Man nimmt das kleinere: $U = 3$. Die kritische Schranke für $n_A = n_B = 6$ und zweiseitiges Niveau $0{,}05$ lautet $U \le 5$.
+
+$3 \le 5$: signifikant. Der exakte $p$-Wert beträgt
+\[ p = \frac{14}{924} = 0{,}0152 . \]
+
+\schritt{Was $U$ anschaulich bedeutet}
+$U_B = 3$ zählt die Paare aus je einem A- und einem B-Wert, bei denen der B-Wert größer ist. Von $36$ möglichen Paaren sind das nur drei --- alle mit dem B-Wert $23$, der die A-Werte $19$, $22$ übertrifft, sowie $21 > 19$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Deutung ist nützlich: $U_B/(n_An_B) = 3/36 = 0{,}083$ ist die geschätzte Wahrscheinlichkeit, dass eine zufällige Person aus B länger braucht als eine zufällige aus A. Diese Größe heißt \Begriff{Überlegenheitswahrscheinlichkeit} und ist ein deutbarer Effektschätzer --- anders als $U$ selbst.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was der Mann-Whitney-Test wirklich prüft}
+Die verbreitete Beschreibung \enquote{er vergleicht die Mediane} ist nur unter einer Zusatzannahme richtig.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Was er prüft} & Ob ein zufälliger Wert aus A eher größer ist als ein zufälliger aus B.\\
+\textbf{Was er nicht prüft} & Ob die Mediane gleich sind --- jedenfalls nicht allgemein.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Ein Gegenbeispiel}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.4cm}P{4.4cm}P{1.8cm}@{}}
+\toprule
+& \textbf{Werte} & \textbf{Median}\\
+\midrule
+A & $9, 10, 11$ & $10$\\
+B & $1, 10, 100$ & $10$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Die Mediane sind gleich. Die Verteilungen sind es nicht --- und der Test reagiert auf den Unterschied in der Streuung, nicht auf den in der Lage.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Zusatzannahme lautet: gleiche Form der Verteilungen, nur verschoben.} Trifft sie zu, ist der Test tatsächlich ein Medianvergleich. Trifft sie nicht zu, prüft er etwas Allgemeineres --- was oft auch in Ordnung ist, aber anders berichtet werden muss.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Permutationstest}
+
+Jetzt der Gedanke, der Fishers Teeversuch zugrunde lag --- als allgemeines Werkzeug.
+
+\begin{merksatz}
+\boxtitel{Der Grundgedanke}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Trifft die Nullhypothese zu, so ist die Gruppenzugehörigkeit \kursiv{belanglos}. Man dürfte die Beschriftungen dann beliebig vertauschen, ohne dass sich etwas Wesentliches ändert.
+
+\textbf{Also: Man vertauscht sie auf alle möglichen Weisen und schaut nach, wie oft ein Unterschied herauskommt, der mindestens so groß ist wie der beobachtete.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Die Prüfgröße für die tatsächlichen Daten berechnen.\\
+$2$ & Alle Aufteilungen der Werte auf zwei Gruppen der gegebenen Größen durchgehen.\\
+$3$ & Für jede die Prüfgröße berechnen.\\
+$4$ & $p$ ist der Anteil der Aufteilungen mit mindestens so extremer Prüfgröße.\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die MOBIL-Daten, exakt durchgerechnet}
+\schritt{Schritt 1 --- Die beobachtete Prüfgröße}
+\[ \MW_A - \MW_B = 26{,}167 - 18{,}000 = 8{,}167 \]
+
+\schritt{Schritt 2 --- Wie viele Aufteilungen es gibt}
+Zwölf Werte auf zwei Gruppen zu je sechs:
+\[ \binom{12}{6} = 924 . \]
+
+\schritt{Schritt 3 --- Abzählen}
+Geht man alle $924$ Aufteilungen durch, so ergibt sich bei genau $\mathbf{14}$ von ihnen eine Differenz, deren Betrag mindestens $8{,}167$ beträgt.
+
+\schritt{Schritt 4 --- Der $p$-Wert}
+\[ p = \frac{14}{924} = \mathbf{0{,}0152} . \]
+
+\schritt{Der Vergleich mit den anderen Verfahren}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{1.8cm}P{2.6cm}@{}}
+\toprule
+\textbf{Verfahren} & $p$ & \textbf{Annahme}\\
+\midrule
+$t$-Test (Student) & $0{,}0153$ & Normal\-verteilung\\
+$t$-Test (Welch) & $0{,}0192$ & gleiche Form\\
+Mann-Whitney & $0{,}0152$ & gleiche Form\\
+\textbf{Permutation} & $\mathbf{0{,}0152}$ & \textcolor{gruen}{\textbf{Austausch\-barkeit}}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle vier stimmen praktisch überein --- ein beruhigender Befund, der zeigt, dass die Normalannahme hier nicht schadet. Bemerkenswert ist, dass Permutation und Mann-Whitney denselben Wert liefern, obwohl der eine mit Mittelwerten und der andere mit Rängen arbeitet. Das ist hier Zufall der kleinen Zahlen, kein allgemeiner Satz.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was den Permutationstest besonders macht}
+\begin{center}
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Exakt} & Keine Näherung, keine Verteilungsannahme. Der $p$-Wert ist ein abgezählter Bruch.\\
+\textbf{Beliebige Prüfgröße} & Man kann Mittelwerte vergleichen, Mediane, getrimmte Mittel, Quotienten --- was immer die Sachfrage verlangt.\\
+\textbf{Die Voraussetzung} & \Begriff{Austauschbarkeit}: Unter $H_0$ müssen alle Aufteilungen gleich wahrscheinlich sein. Bei Randomisierung ist das durch die Zuteilung selbst gesichert.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist die tiefste Rechtfertigung des Verfahrens. In einer randomisierten Studie \kursiv{weiß} man, dass die Zuteilung zufällig war --- man hat sie selbst so gemacht. Die Nullverteilung folgt dann nicht aus einer Annahme über die Natur, sondern aus dem eigenen Losverfahren. Fisher nannte das die \enquote{physische Grundlage} des Signifikanztests.}
+\end{minipage}
+\end{center}
+
+\schritt{Wenn es zu viele Aufteilungen gibt}
+Bei $n_A = n_B = 20$ wären es $\binom{40}{20} \approx 1{,}4 \cdot 10^{11}$ --- zu viele. Man zieht dann zufällig etwa $10\,000$ bis $100\,000$ Aufteilungen und schätzt den Anteil. Das Ergebnis heißt \Begriff{Monte-Carlo-Permutationstest} und ist bis auf den Simulationsfehler dasselbe.
+\end{merksatz}
+
+\section{Der Bootstrap}
+
+\begin{merksatz}
+\boxtitel{Der Gedanke}
+Kapitel~4 stellte sich vor, die Studie tausendmal zu wiederholen. Das geht nicht --- man hat nur eine Stichprobe.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Bootstrap behandelt die Stichprobe so, als wäre sie die Grundgesamtheit, und zieht aus ihr.} Man zieht $n$ Werte \kursiv{mit Zurücklegen} und berechnet die Kennzahl. Das wiederholt man viele tausend Mal.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!50, line width=0.8pt] (-1.0,1.2) rectangle (1.0,2.0);
+\node[font=\scriptsize, color=grau] at (0,1.6) {Stichprobe};
+\foreach \i/\x in {0/-2.4, 1/-0.8, 2/0.8, 3/2.4} {
+  \draw[akzent!60, line width=0.7pt] (\x-0.55,-0.4) rectangle (\x+0.55,0.3);
+  \draw[grau!60, -{Stealth[length=4pt]}] (0,1.15) -- (\x,0.35);
+}
+\node[font=\scriptsize, color=akzent] at (-2.4,-0.05) {Zug 1};
+\node[font=\scriptsize, color=akzent] at (-0.8,-0.05) {Zug 2};
+\node[font=\scriptsize, color=akzent] at (0.8,-0.05) {Zug 3};
+\node[font=\scriptsize, color=akzent] at (2.4,-0.05) {$\ldots$};
+\node[font=\scriptsize\itshape, color=grau] at (0,-0.95) {jeweils $n$ Werte mit Zurücklegen};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Warum mit Zurücklegen}
+Zöge man ohne Zurücklegen, so bekäme man jedes Mal dieselbe Stichprobe zurück. Das Zurücklegen erzeugt die Variabilität, die das wiederholte Ziehen aus der Grundgesamtheit gehabt hätte.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Bootstrap für MOBIL}
+Wir ziehen $20\,000$ Mal je sechs Werte aus Gruppe A und sechs aus Gruppe B --- jeweils mit Zurücklegen --- und berechnen die Differenz der Mittelwerte.
+
+\schritt{Das Ergebnis}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{2.6cm}P{2.2cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{$95\,\%$-Intervall} & \\
+\midrule
+$t$-Intervall & $[1{,}93;\ 14{,}40]$ & \\
+Bootstrap-Perzentil & $[3{,}33;\ 13{,}33]$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Das Bootstrap-Intervall besteht aus dem $2{,}5$-- und dem $97{,}5$-Prozent-Quantil der $20\,000$ simulierten Differenzen.
+
+\schritt{Der Vergleich}
+Die beiden Intervalle stimmen in der Größenordnung überein. Das Bootstrap-Intervall ist etwas enger --- bei $n=6$ ist es dafür bekannt, das Niveau leicht zu verfehlen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei sechs Werten je Gruppe gibt es nur $6^6 = 46\,656$ verschiedene Bootstrap-Stichproben, und viele davon bestehen aus wenigen wiederholten Werten. Der Bootstrap braucht eine Stichprobe, die die Grundgesamtheit einigermaßen abbildet --- bei $n = 6$ tut sie das kaum. Als Faustregel gilt $n \ge 20$ bis $30$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wofür der Bootstrap unersetzlich ist}
+Für den Mittelwert gibt es Formeln. Für viele andere Größen nicht.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Median} & Kein einfacher Standardfehler; der Bootstrap liefert ihn.\\
+\textbf{Quotienten} & Verhältnisse zweier Mittelwerte.\\
+\textbf{Korrelation} & Ihre Verteilung ist schief und hängt vom wahren Wert ab.\\
+\textbf{Zusammen\-gesetztes} & Etwa \enquote{der Unterschied der Mediane, geteilt durch die Spannweite}.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Ein Beispiel}
+Für den Median der Gruppe B ergibt der Bootstrap das Intervall
+\[ [\,14{,}5\ ;\ 22{,}0\,] \ \text{Stunden} \]
+bei einem Punktschätzer von $17{,}5$. Eine Formel dafür gibt es nicht --- der Bootstrap braucht keine.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man sieht an den Zahlen auch die Grenze: Die Grenzen sind $14{,}5$ und $22{,}0$, also Mittelwerte je zweier vorhandener Datenpunkte. Der Bootstrap kann nur Werte erzeugen, die sich aus der Stichprobe zusammensetzen lassen --- er ist bei Medianen und kleinen $n$ merklich grobkörnig.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was der Bootstrap nicht kann}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Eine schlechte Stichprobe reparieren} & War die Auswahl verzerrt, so ist es auch jede Bootstrap-Stichprobe. Das Verfahren vervielfältigt den Fehler.\\
+\textbf{Extremwerte} & Für Maximum und Minimum versagt er grundsätzlich --- die Bootstrap-Stichprobe kann nie größere Werte enthalten als die ursprüngliche.\\
+\textbf{Abhängigkeit} & Bei Zeitreihen oder Mehrebenendaten muss man blockweise ziehen, nicht einzeln.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Zeile ist die wichtigste. Der Bootstrap schätzt die Streuung eines Schätzers, nicht seine Verzerrung durch eine schiefe Auswahl. Wer die falschen Leute befragt hat, bekommt ein enges Intervall um den falschen Wert.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.1 --- Mann-Whitney für die Schmerzwerte}
+Führen Sie den Test für \code{NRS24} durch: Gruppe A $= 5, 3, 6, 4, 7, 5$ und Gruppe B $= 3, 2, 4, 3, 5, 2$.
+
+\loesung
+\schritt{Schritt 1 --- Gemeinsam sortieren und Ränge vergeben}
+Sortiert: $2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 7$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{1.2cm}P{2.0cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+\textbf{Wert} & \textbf{Plätze} & \textbf{Rang} & \textbf{Gruppen}\\
+\midrule
+$2$ & $1, 2$ & $1{,}5$ & B, B\\
+$3$ & $3,4,5$ & $4$ & A, B, B\\
+$4$ & $6,7$ & $6{,}5$ & A, B\\
+$5$ & $8,9,10$ & $9$ & A, A, B\\
+$6$ & $11$ & $11$ & A\\
+$7$ & $12$ & $12$ & A\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Rangsummen}
+Gruppe A hat die Werte $5, 3, 6, 4, 7, 5$ mit den Rängen $9, 4, 11, 6{,}5, 12, 9$:
+\[ R_A = 9 + 4 + 11 + 6{,}5 + 12 + 9 = 51{,}5 \]
+Gruppe B hat $3, 2, 4, 3, 5, 2$ mit den Rängen $4, 1{,}5, 6{,}5, 4, 9, 1{,}5$:
+\[ R_B = 4 + 1{,}5 + 6{,}5 + 4 + 9 + 1{,}5 = 26{,}5 \]
+
+\schritt{Probe}
+\[ 51{,}5 + 26{,}5 = 78 = \frac{12 \cdot 13}{2} . \quad \checkmark \]
+
+\schritt{Schritt 3 --- Die Prüfgrößen}
+\[ U_A = 51{,}5 - 21 = 30{,}5, \qquad U_B = 26{,}5 - 21 = 5{,}5 \]
+Probe: $30{,}5 + 5{,}5 = 36$. \checkmark
+
+\schritt{Schritt 4 --- Entscheidung}
+$U = 5{,}5$. Die kritische Schranke lautet $U \le 5$.
+
+$5{,}5 > 5$: \textbf{nicht signifikant.} Der exakte $p$-Wert liegt bei etwa $0{,}058$.
+
+\schritt{Schritt 5 --- Der Vergleich mit dem $t$-Test}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+& $p$ & \\
+\midrule
+$t$-Test (Aufgabe 7.1) & $0{,}034$ & \textcolor{akzent}{signifikant}\\
+Mann-Whitney & $0{,}058$ & \textcolor{gruen}{nicht signifikant}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 6 --- Welches Ergebnis gilt?}
+Die NRS ist ordinalskaliert. Nach Kapitel~1 ist der Mittelwert dort kodierungsabhängig, die Ränge sind es nicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das spricht für den Mann-Whitney-Test --- und damit dafür, das Ergebnis als \kursiv{nicht nachgewiesen} zu berichten. Die vielen Bindungen (nur sechs verschiedene Werte auf zwölf Beobachtungen) schwächen den Rangtest zusätzlich; ein Teil des Unterschieds zwischen $0{,}034$ und $0{,}058$ geht darauf zurück.}
+\end{minipage}
+\end{center}
+
+\schritt{Was man daraus lernt}
+Die Wahl des Verfahrens entscheidet hier über die Schlussfolgerung. Genau deshalb muss sie \kursiv{vor} der Auswertung festgelegt werden --- sonst wählt man das Verfahren, das das gewünschte Ergebnis liefert. Kapitel~15 nennt diese Praxis beim Namen.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.2 --- Einen Permutationstest von Hand}
+Zwei Gruppen mit je drei Werten: $A = 10, 12, 14$ und $B = 5, 7, 9$. Führen Sie den Permutationstest für die Differenz der Mittelwerte vollständig durch.
+
+\loesung
+\schritt{Schritt 1 --- Die beobachtete Differenz}
+\[ \MW_A = \frac{36}{3} = 12, \qquad \MW_B = \frac{21}{3} = 7, \qquad d = 5{,}0 \]
+
+\schritt{Schritt 2 --- Die Anzahl der Aufteilungen}
+\[ \binom{6}{3} = 20 . \]
+
+\schritt{Schritt 3 --- Alle durchgehen}
+Die sechs Werte lauten $5, 7, 9, 10, 12, 14$ mit Gesamtsumme $57$. Für eine Aufteilung mit A-Summe $S$ ist
+\[ d = \frac{S}{3} - \frac{57-S}{3} = \frac{2S - 57}{3} . \]
+Es genügt also, die A-Summen aufzulisten.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}P{2.6cm}P{1.2cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+\textbf{Gruppe A} & $S$ & $d$ & $|d| \ge 5$?\\
+\midrule
+$5,7,9$ & $21$ & $-5{,}00$ & \textcolor{akzent}{ja}\\
+$5,7,10$ & $22$ & $-4{,}33$ & nein\\
+$5,7,12$ & $24$ & $-3{,}00$ & nein\\
+$5,7,14$ & $26$ & $-1{,}67$ & nein\\
+$5,9,10$ & $24$ & $-3{,}00$ & nein\\
+$5,9,12$ & $26$ & $-1{,}67$ & nein\\
+$5,9,14$ & $28$ & $-0{,}33$ & nein\\
+$5,10,12$ & $27$ & $-1{,}00$ & nein\\
+$5,10,14$ & $29$ & $0{,}33$ & nein\\
+$5,12,14$ & $31$ & $1{,}67$ & nein\\
+$7,9,10$ & $26$ & $-1{,}67$ & nein\\
+$7,9,12$ & $28$ & $-0{,}33$ & nein\\
+$7,9,14$ & $30$ & $1{,}00$ & nein\\
+$7,10,12$ & $29$ & $0{,}33$ & nein\\
+$7,10,14$ & $31$ & $1{,}67$ & nein\\
+$7,12,14$ & $33$ & $3{,}00$ & nein\\
+$9,10,12$ & $31$ & $1{,}67$ & nein\\
+$9,10,14$ & $33$ & $3{,}00$ & nein\\
+$9,12,14$ & $35$ & $4{,}33$ & nein\\
+$10,12,14$ & $36$ & $\mathbf{5{,}00}$ & \textcolor{akzent}{\textbf{ja}}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Abzählen}
+Genau $2$ von $20$ Aufteilungen erreichen $|d| \ge 5{,}0$: die beobachtete und ihr Spiegelbild.
+
+\[ p = \frac{2}{20} = \mathbf{0{,}10} . \]
+
+\schritt{Schritt 5 --- Die Deutung}
+Nicht signifikant --- obwohl sich die beiden Gruppen \kursiv{vollständig} trennen: Jeder A-Wert ist größer als jeder B-Wert.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Grenze des Verfahrens bei kleinen Zahlen. Der kleinstmögliche zweiseitige $p$-Wert beträgt hier $2/20 = 0{,}10$. Mit je drei Beobachtungen kann kein Permutationstest signifikant werden --- so vollständig die Trennung auch ausfällt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Ab wann es geht}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+$n$ je Gruppe & $\binom{2n}{n}$ & \textbf{kleinstes $p$}\\
+\midrule
+$3$ & $20$ & $0{,}100$\\
+$4$ & $70$ & $0{,}029$\\
+$5$ & $252$ & $0{,}0079$\\
+$6$ & $924$ & $0{,}0022$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Ab vier je Gruppe ist Signifikanz überhaupt erst möglich.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.3 --- Wann welches Verfahren?}
+Ordnen Sie den folgenden Lagen ein Verfahren zu und begründen Sie.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & Liegedauer in zwei Kliniken, je $n=200$, stark rechtsschief.\\
+(b) & Zufriedenheit auf einer Skala $1$--$5$, zwei Gruppen zu je $30$.\\
+(c) & Konfidenzintervall für den Median der Behandlungskosten, $n=50$.\\
+(d) & Randomisierte Studie, $n=15$ je Gruppe, Endpunkt stetig.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) --- $t$-Test ist vertretbar}
+Bei $n = 200$ je Gruppe trägt der zentrale Grenzwertsatz auch bei starker Schiefe. Die Mittelwerte sind dann gut normalverteilt.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Frage ist eher, ob der \kursiv{Mittelwert} die richtige Kennzahl ist. Bei stark schiefen Kosten- oder Dauerdaten sagt der Median oft mehr über den typischen Fall aus --- und dann ist die Frage nicht, welcher Test, sondern welcher Parameter.}
+\end{minipage}
+\end{center}
+
+\schritt{(b) --- Mann-Whitney}
+Fünfstufige Skala, also ordinal. Bei $n = 30$ je Gruppe gibt es viele Bindungen; man rechnet mit der Bindungskorrektur, die jedes Programm anwendet.
+
+Eine Alternative ist die ordinale Regression (Kapitel~11), die zusätzlich einen deutbaren Effektschätzer liefert.
+
+\schritt{(c) --- Bootstrap}
+Für den Median gibt es keine brauchbare Formel. Bei $n = 50$ ist der Bootstrap gut anwendbar.
+
+\schritt{(d) --- Permutationstest}
+Hier ist er die erste Wahl, und zwar aus einem besonderen Grund: Die Randomisierung \kursiv{erzeugt} die Austauschbarkeit, die das Verfahren voraussetzt. Man muss über die Verteilung der Daten gar nichts annehmen.
+
+Bei $n=15$ je Gruppe gibt es $\binom{30}{15} \approx 1{,}55 \cdot 10^8$ Aufteilungen --- zu viele zum Abzählen, aber problemlos für eine Monte-Carlo-Näherung mit $100\,000$ Ziehungen.
+
+\schritt{Die Zusammenfassung}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.0cm}P{3.0cm}P{4.0cm}@{}}
+\toprule
+& \textbf{Verfahren} & \textbf{Grund}\\
+\midrule
+(a) & $t$-Test & $n$ groß genug\\
+(b) & Mann-Whitney & ordinal\\
+(c) & Bootstrap & keine Formel\\
+(d) & Permutation & Randomisierung\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Chemiker, zwei Statistiker und ein Schnürsenkel}
+\Person{Frank Wilcoxon} (1892--1965) war Chemiker bei einer Agrarfirma in Connecticut. Er wertete Versuche mit Pflanzenschutzmitteln aus und suchte ein Verfahren, das ohne Verteilungsannahme auskommt.
+
+Seine Arbeit von 1945 umfasst drei Seiten und enthält beide nach ihm benannten Tests. Er veröffentlichte sie in einem neu gegründeten, kaum beachteten Mitteilungsblatt; der Aufsatz wurde zu einem der meistzitierten der Statistik.
+
+Zwei Jahre später leiteten \Person{Henry Mann} und \Person{Donald Whitney} unabhängig davon dasselbe Verfahren her --- in anderer Schreibweise und mit vollständiger Theorie. Daher die beiden Namen für einen Test.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Bootstrap ist jünger. \Person{Bradley Efron} stellte ihn 1979 vor; der Name geht auf die Redewendung zurück, sich am eigenen Schnürsenkel aus dem Sumpf zu ziehen --- die deutsche Entsprechung wäre der Münchhausen-Zopf. Gemeint ist das scheinbar Unmögliche: aus einer einzigen Stichprobe die Streuung über viele Stichproben zu gewinnen.}
+\end{minipage}
+\end{center}
+
+Das Verfahren war nur denkbar, weil Rechenzeit billig geworden war. Efron selbst nannte es ein Beispiel dafür, wie technische Möglichkeiten die Theorie verändern: Was man vorher analytisch herleiten musste, konnte man nun ausprobieren.
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Rangtests, Permutation und was sich durchsetzt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.6cm}P{5.6cm}@{}}
+\toprule
+\textbf{Machtverlust} & Sind die Daten tatsächlich normalverteilt, verliert Mann-Whitney gegenüber dem $t$-Test nur etwa $5\,\%$ an Macht --- ein erstaunlich kleiner Preis.\\
+\textbf{Machtgewinn} & Bei schweren Rändern kann er dem $t$-Test deutlich überlegen sein.\\
+\textbf{Der Effektschätzer} & Die Überlegenheitswahrscheinlichkeit setzt sich als Berichtsgröße durch; sie heißt auch \enquote{common language effect size}.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Der Wert $5\,\%$ ist bemerkenswert: Er bedeutet, dass man mit dem Rangtest bei normalverteilten Daten etwa $5\,\%$ mehr Personen braucht --- und dafür gegen Verletzungen der Annahme geschützt ist. Die theoretische Untergrenze liegt bei $1 - 3/\pi \approx 4{,}5\,\%$ und wird bei Normalverteilung fast erreicht.
+
+\schritt{Die Bewegung zur Permutation}
+In der methodischen Literatur wächst die Auffassung, dass der Permutationstest in randomisierten Studien das eigentlich angemessene Verfahren ist --- weil seine Voraussetzung durch das Studiendesign selbst geschaffen wird und nicht angenommen werden muss.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Durchgesetzt hat er sich nicht. Die Gründe sind praktisch: Rechenaufwand bei großen Datensätzen, fehlende Voreinstellungen in Auswertungsprogrammen, und die Schwierigkeit, aus einem Permutationstest ein Konfidenzintervall zu gewinnen --- was möglich, aber umständlich ist.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Vorzeichentest} & und warum er bei $n \le 5$ nie signifikant wird\\
+\textbf{Wilcoxon} & Ränge der Beträge\\
+\textbf{Mann-Whitney} & $U$, die Proben, und was er wirklich prüft\\
+\textbf{Permutation} & exakt, ohne Verteilungsannahme\\
+\textbf{Bootstrap} & für Größen ohne Formel --- und seine drei Grenzen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~III. Ab Kapitel~10 geht es nicht mehr um den Vergleich zweier Gruppen, sondern um den Zusammenhang mehrerer Größen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

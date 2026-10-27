@@ -1,0 +1,773 @@
+\chapter{Viele Tests auf einmal}
+
+\section{Das Problem}
+
+\begin{merksatz}
+\boxtitel{Die Rechnung aus Kapitel~8, allgemein}
+Führt man $m$ unabhängige Tests zum Niveau $\alpha$ durch und trifft keine einzige Alternativhypothese zu, so ist die Wahrscheinlichkeit für mindestens einen falschen Alarm
+\[ 1 - (1-\alpha)^m . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+$m$ & \textbf{Fehlerrate} & \\
+\midrule
+$1$ & $5{,}0\,\%$ & \\
+$5$ & $22{,}6\,\%$ & \\
+$10$ & $40{,}1\,\%$ & \\
+$20$ & $64{,}2\,\%$ & \\
+$100$ & \textcolor{akzent}{$\mathbf{99{,}4\,\%}$} & \textcolor{akzent}{fast sicher}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei hundert geprüften Zusammenhängen findet man praktisch sicher etwas --- auch wenn nichts vorhanden ist. Und man findet im Mittel fünf davon.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Wo Multiplizität entsteht --- oft unbemerkt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Mehrere End\-punkte} & Schmerz, Mobilisation, Zufriedenheit, Liegedauer, Nebenwirkungen.\\
+\textbf{Mehrere Gruppen} & Drei Therapien ergeben drei Paarvergleiche.\\
+\textbf{Mehrere Zeitpunkte} & Messung nach $6$, $12$, $24$, $48$ Stunden.\\
+\textbf{Untergruppen} & Männer, Frauen, Alt, Jung, mit und ohne Begleiterkrankung.\\
+\textbf{Zwischen\-auswertungen} & Jeder Blick in die laufenden Daten ist ein Test.\\
+\textbf{\textcolor{akzent}{Verfahrens\-wahl}} & \textcolor{akzent}{Wer $t$-Test und Mann-Whitney rechnet und den kleineren berichtet, hat zweimal getestet.}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist die unsichtbarste. Sie erscheint in keiner Veröffentlichung, weil nur das gewählte Verfahren berichtet wird --- und sie ist genau die Lage aus Aufgabe 9.1, wo $t$-Test und Rangtest zu verschiedenen Schlüssen führten.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Die Korrekturverfahren}
+
+\begin{definition}
+\boxtitelm{Definition 14.1 --- zwei Fehlerbegriffe}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Familienweise Fehlerrate} & Die Wahrscheinlichkeit, \kursiv{mindestens einen} falschen Alarm unter allen Tests zu haben.\\
+\textbf{Falscher\-kennungsrate} & Der erwartete \kursiv{Anteil} falscher Alarme unter den als signifikant erklärten Ergebnissen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Bonferroni}
+Man prüft jeden Test gegen $\alpha/m$ statt gegen $\alpha$.
+
+\schritt{Warum das genügt}
+Die Wahrscheinlichkeit einer Vereinigung ist höchstens die Summe der Einzelwahrscheinlichkeiten:
+\[ \Pr\Bigl[\bigcup_{i} \{\text{Test } i \text{ schlägt falsch an}\}\Bigr] \;\le\; \sum_{i=1}^m \frac{\alpha}{m} = \alpha . \]
+
+Diese Abschätzung braucht \kursiv{keine} Unabhängigkeit --- das ist ihre Stärke.
+
+\schritt{Die Schwäche}
+Sie ist grob. Bei abhängigen Tests ist die tatsächliche Fehlerrate deutlich kleiner als $\alpha$, und man verliert entsprechend Macht.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Holm --- dasselbe Niveau, mehr Macht}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & $p$-Werte aufsteigend sortieren: $p_{(1)} \le \cdots \le p_{(m)}$.\\
+$2$ & $p_{(1)}$ gegen $\alpha/m$ prüfen. Nicht signifikant $\Rightarrow$ abbrechen.\\
+$3$ & $p_{(2)}$ gegen $\alpha/(m-1)$ prüfen. Und so fort.\\
+$4$ & Beim ersten Nichtbestehen abbrechen; alle weiteren gelten als nicht signifikant.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Holm hält dieselbe familienweise Fehlerrate ein wie Bonferroni und verwirft nie weniger --- oft mehr.} Es gibt daher keinen Grund, Bonferroni zu verwenden.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass Bonferroni trotzdem der bekanntere Name ist, hat denselben Grund wie bei Student gegen Welch in Kapitel~8: Er ist älter und einfacher zu erklären.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Benjamini und Hochberg --- ein anderes Ziel}
+Statt \kursiv{keinen} falschen Alarm zuzulassen, erlaubt man einen festen \kursiv{Anteil}.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & $p$-Werte aufsteigend sortieren.\\
+$2$ & Das größte $i$ suchen mit $p_{(i)} \le \dfrac{i}{m}\,q$.\\
+$3$ & Alle Tests bis einschließlich $i$ verwerfen.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $q = 0{,}05$ heißt das: Unter den als signifikant erklärten Ergebnissen sind im Mittel fünf Prozent falsch. Das ist ein anderer Anspruch als \enquote{höchstens fünf Prozent Wahrscheinlichkeit für einen einzigen Fehler} --- deutlich schwächer, und bei vielen Tests der brauchbarere.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die drei Verfahren an denselben Zahlen}
+Fünf Tests mit
+\[ p = 0{,}003,\quad 0{,}011,\quad 0{,}021,\quad 0{,}038,\quad 0{,}045 \]
+und $\alpha = q = 0{,}05$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{0.7cm}P{1.3cm}P{1.7cm}P{1.9cm}P{1.7cm}@{}}
+\toprule
+$i$ & $p_{(i)}$ & \textbf{Bonf.} & \textbf{Holm} & \textbf{BH}\\
+& & $\alpha/5$ & $\frac{\alpha}{6-i}$ & $\frac{i}{5}q$\\
+\midrule
+$1$ & $0{,}003$ & $0{,}010$ \textcolor{gruen}{\checkmark} & $0{,}0100$ \textcolor{gruen}{\checkmark} & $0{,}010$ \textcolor{gruen}{\checkmark}\\
+$2$ & $0{,}011$ & $0{,}010$ \textcolor{akzent}{$\times$} & $0{,}0125$ \textcolor{gruen}{\checkmark} & $0{,}020$ \textcolor{gruen}{\checkmark}\\
+$3$ & $0{,}021$ & $0{,}010$ \textcolor{akzent}{$\times$} & $0{,}0167$ \textcolor{akzent}{$\times$} & $0{,}030$ \textcolor{gruen}{\checkmark}\\
+$4$ & $0{,}038$ & $0{,}010$ \textcolor{akzent}{$\times$} & \textcolor{grau}{--- Abbruch} & $0{,}040$ \textcolor{gruen}{\checkmark}\\
+$5$ & $0{,}045$ & $0{,}010$ \textcolor{akzent}{$\times$} & \textcolor{grau}{---} & $0{,}050$ \textcolor{gruen}{\checkmark}\\
+\midrule
+& \textbf{verw.} & $\mathbf{1}$ & $\mathbf{2}$ & $\mathbf{5}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eins, zwei, fünf --- bei denselben Daten. Die Verfahren beantworten verschiedene Fragen, und welche man stellen will, ist eine Entscheidung vor der Auswertung. Nachträglich das freundlichste zu wählen wäre wieder Multiplizität.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Wann man korrigiert --- und wann nicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.0cm}P{3.0cm}@{}}
+\toprule
+\textbf{Lage} & \textbf{Korrektur} & \\
+\midrule
+Ein primärer Endpunkt & \textcolor{gruen}{nein} & deshalb legt man einen fest\\
+Mehrere gleich\-rangige Endpunkte & \textcolor{akzent}{ja} & sonst Multiplizität\\
+Erkundende Auswertung & \textcolor{mittel}{kenn\-zeichnen} & als erkundend berichten\\
+Untergruppen & \textcolor{akzent}{ja} & und vorab benennen\\
+Nebenwirkungen & \textcolor{mittel}{\textbf{umstritten}} & \textcolor{mittel}{Korrektur würde Warnsignale unterdrücken}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist ein Beispiel dafür, dass die Wahl der Fehlerrate eine Wertentscheidung ist. Bei der Sicherheitsauswertung will man einen Fehler zweiter Art --- ein übersehenes Risiko --- unbedingt vermeiden. Eine strenge Korrektur arbeitet dagegen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die eigentliche Abhilfe}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein vorab festgelegter primärer Endpunkt löst das Problem besser als jede Korrektur.} Alles Weitere wird als erkundend berichtet --- ohne Anspruch auf Nachweis, mit Effektschätzern und Intervallen statt mit $p$-Werten.
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Metaanalyse}
+
+\begin{merksatz}
+\boxtitel{Die Aufgabe}
+Mehrere Studien zur selben Frage liegen vor, mit verschiedenen Ergebnissen und verschiedenen Umfängen. Wie fasst man sie zusammen?
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nicht durch Abzählen.} \enquote{Drei von fünf Studien waren signifikant} ist keine Zusammenfassung --- es ignoriert Effektgrößen und Studienumfänge und behandelt eine winzige Studie wie eine große.
+\end{minipage}
+\end{center}
+
+\schritt{Der richtige Weg}
+Man mittelt die Effektschätzer, gewichtet nach ihrer Genauigkeit:
+\[ \hat\theta = \frac{\sum_i w_i\,\hat\theta_i}{\sum_i w_i} \qquad\text{mit}\qquad w_i = \frac{1}{\mathrm{SE}_i^2} . \]
+
+\schritt{Warum diese Gewichte}
+Eine Studie mit kleinem Standardfehler trägt mehr Auskunft. Die Gewichtung mit dem Kehrwert der Varianz macht den zusammengefassten Schätzer so genau wie möglich --- sie minimiert seine Varianz.
+
+\[ \mathrm{SE}(\hat\theta) = \frac{1}{\sqrt{\sum_i w_i}} \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein vollständiges Beispiel}
+Fünf Studien zur Frage der MOBIL-Studie, Effekt in Stunden:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.4cm}P{1.6cm}P{1.8cm}@{}}
+\toprule
+\textbf{Studie} & $\hat\theta_i$ & $\mathrm{SE}_i$ & $w_i$ & $w_i\hat\theta_i$\\
+\midrule
+$1$ & $8{,}2$ & $2{,}8$ & $0{,}1276$ & $1{,}0459$\\
+$2$ & $5{,}4$ & $1{,}9$ & $0{,}2770$ & $1{,}4959$\\
+$3$ & $9{,}1$ & $3{,}5$ & $0{,}0816$ & $0{,}7429$\\
+$4$ & $3{,}0$ & $1{,}2$ & $\mathbf{0{,}6944}$ & $2{,}0833$\\
+$5$ & $7{,}3$ & $2{,}1$ & $0{,}2268$ & $1{,}6553$\\
+\midrule
+$\sum$ & & & $\mathbf{1{,}4074}$ & $\mathbf{7{,}0233}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur Rechnung:} $w_1 = 1/2{,}8^2 = 1/7{,}84 = 0{,}1276$.
+
+\schritt{Der zusammengefasste Effekt}
+\[ \hat\theta = \frac{7{,}0233}{1{,}4074} = 4{,}99 \ \text{Stunden} \]
+\[ \mathrm{SE} = \frac{1}{\sqrt{1{,}4074}} = \frac{1}{1{,}1863} = 0{,}843 \]
+\[ 4{,}99 \pm 1{,}96 \cdot 0{,}843 = 4{,}99 \pm 1{,}65 \quad\Longrightarrow\quad [\,3{,}34\ ;\ 6{,}64\,] \]
+
+\schritt{Die Gewichtsanteile}
+\begin{center}
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Studie} & \textbf{Anteil} & \\
+\midrule
+$1$ & $9{,}1\,\%$ & \\
+$2$ & $19{,}7\,\%$ & \\
+$3$ & $5{,}8\,\%$ & \\
+$4$ & \textcolor{akzent}{$\mathbf{49{,}3\,\%}$} & \textcolor{akzent}{allein die Hälfte}\\
+$5$ & $16{,}1\,\%$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Studie 4 bestimmt das Ergebnis fast allein --- und sie ist zugleich die mit dem kleinsten Effekt. Das zusammengefasste Ergebnis von $5{,}0$ Stunden liegt deshalb näher an ihren $3{,}0$ als am Durchschnitt der fünf Zahlen, der $6{,}6$ betrüge.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Heterogenität}
+
+\begin{merksatz}
+\boxtitel{Streuen die Studien mehr, als Zufall erklärt?}
+\[ Q = \sum_i w_i\,(\hat\theta_i - \hat\theta)^2 \]
+Unter der Annahme eines gemeinsamen wahren Effekts folgt $Q$ näherungsweise einer $\chi^2$-Verteilung mit $k-1$ Freiheitsgraden.
+
+\schritt{Für unser Beispiel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+\textbf{Studie} & $\hat\theta_i - \hat\theta$ & \textbf{Quadrat} & $w_i \cdot$ Quadrat\\
+\midrule
+$1$ & $3{,}21$ & $10{,}30$ & $1{,}314$\\
+$2$ & $0{,}41$ & $0{,}168$ & $0{,}047$\\
+$3$ & $4{,}11$ & $16{,}89$ & $1{,}379$\\
+$4$ & $-1{,}99$ & $3{,}961$ & $2{,}751$\\
+$5$ & $2{,}31$ & $5{,}335$ & $1{,}210$\\
+\midrule
+& & & $\mathbf{Q = 6{,}70}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Bei $4$ Freiheitsgraden ist der kritische Wert $\chi^2_{4;\,0{,}95} = 9{,}49$. Wegen $6{,}70 < 9{,}49$ ist der Test nicht signifikant --- $p = 0{,}15$.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der $Q$-Test ist bei wenigen Studien machtlos}
+Bei fünf Studien findet er nur sehr grobe Heterogenität. Ein nicht signifikanter $Q$-Test ist daher \kursiv{kein} Beleg für Homogenität --- derselbe Fehler wie in Kapitel~7.
+
+Deshalb berichtet man zusätzlich eine Kennzahl, die nicht von der Studienzahl abhängt:
+\[ I^2 = \max\left(0,\ \frac{Q - (k-1)}{Q}\right) . \]
+
+\schritt{Für unser Beispiel}
+\[ I^2 = \frac{6{,}70 - 4}{6{,}70} = \frac{2{,}70}{6{,}70} = 0{,}403 \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+$I^2$ & \textbf{Beurteilung} & \\
+\midrule
+$0$--$25\,\%$ & gering & \\
+$25$--$50\,\%$ & \textbf{mäßig} & \textcolor{akzent}{unser Fall}\\
+$50$--$75\,\%$ & erheblich & \\
+$> 75\,\%$ & groß & \textcolor{akzent}{Zusammen\-fassen fraglich}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{$I^2$ gibt den Anteil der Streuung an, der nicht auf Zufall beruht. Bei $40\,\%$ unterscheiden sich die wahren Effekte der Studien --- vermutlich, weil sie verschiedene Personen, Orte oder Durchführungen betrafen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Zwei Modelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Fester Effekt} & \textbf{Zufälliger Effekt}\\
+\midrule
+Annahme & ein gemeinsamer wahrer Wert & jede Studie hat ihren eigenen\\
+Gewichte & $1/\mathrm{SE}_i^2$ & $1/(\mathrm{SE}_i^2 + \tau^2)$\\
+Intervall & enger & \textcolor{gruen}{breiter}\\
+Aussage & über \kursiv{diese} Studien & über die \kursiv{Gesamtheit}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die zusätzliche Varianz schätzen}
+Nach DerSimonian und Laird:
+\[ \tau^2 = \frac{Q - (k-1)}{C}, \qquad C = \sum_i w_i - \frac{\sum_i w_i^2}{\sum_i w_i} . \]
+
+Mit $\sum w_i^2 = 0{,}6333$:
+\[ C = 1{,}4074 - \frac{0{,}6333}{1{,}4074} = 1{,}4074 - 0{,}4500 = 0{,}9574 \]
+\[ \tau^2 = \frac{6{,}70 - 4}{0{,}9574} = \frac{2{,}70}{0{,}9574} = 2{,}82 \]
+
+\schritt{Die neuen Gewichte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+\textbf{Studie} & $\mathrm{SE}_i^2 + \tau^2$ & $w_i^{*}$ & \textbf{Anteil}\\
+\midrule
+$1$ & $10{,}66$ & $0{,}0938$ & $13{,}6\,\%$\\
+$2$ & $6{,}43$ & $0{,}1555$ & $22{,}6\,\%$\\
+$3$ & $15{,}07$ & $0{,}0664$ & $9{,}6\,\%$\\
+$4$ & $4{,}26$ & $0{,}2347$ & $\mathbf{34{,}1\,\%}$\\
+$5$ & $7{,}23$ & $0{,}1383$ & $20{,}1\,\%$\\
+\midrule
+$\sum$ & & $\mathbf{0{,}6887}$ & $100\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Das Ergebnis}
+\[ \hat\theta^{*} = \frac{3{,}9268}{0{,}6887} = 5{,}70 \ \text{Stunden} \]
+\[ \mathrm{SE} = \frac{1}{\sqrt{0{,}6887}} = 1{,}205 \]
+\[ 5{,}70 \pm 1{,}96 \cdot 1{,}205 \quad\Longrightarrow\quad [\,3{,}34\ ;\ 8{,}06\,] \]
+
+\schritt{Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{1.8cm}P{2.6cm}@{}}
+\toprule
+\textbf{Modell} & \textbf{Effekt} & \textbf{$95\,\%$-KI}\\
+\midrule
+Fester Effekt & $4{,}99$ & $[3{,}34;\ 6{,}64]$\\
+Zufälliger Effekt & $5{,}70$ & $[3{,}34;\ \mathbf{8{,}06}]$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zwei Beobachtungen. Erstens ist das Intervall breiter --- die Unsicherheit über die Verschiedenheit der Studien ist eingerechnet. Zweitens verschiebt sich der Punktschätzer: Der Anteil von Studie 4 fällt von $49$ auf $34$ Prozent, weil das Zusatzglied $\tau^2$ die Gewichte angleicht. Große Studien verlieren an Gewicht, kleine gewinnen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Das zufällige Modell ist keine Reparatur}
+Ein verbreiteter Umgang mit Heterogenität lautet: hohes $I^2$, also zufälliges Modell rechnen, fertig.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Modell erklärt die Heterogenität nicht, es rechnet sie ein.} Die Frage, \kursiv{warum} die Studien verschiedene Effekte finden, bleibt offen --- und sie ist meist die interessantere.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Besser} & Untergruppenanalyse nach vermuteten Ursachen: Jahr, Land, Dosis, Studienqualität.\\
+\textbf{Oder} & Metaregression: Der Effekt wird auf Studienmerkmale regressiert.\\
+\textbf{Oder} & Gar nicht zusammenfassen, wenn die Studien zu verschieden sind.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile wird zu selten gewählt. Eine Zahl, die aus unvergleichbaren Studien gemittelt wurde, ist keine Zusammenfassung, sondern eine Vermischung. Man nennt das den \kursiv{Äpfel-und-Birnen-Einwand} --- er ist berechtigt, wenn die Frage eng ist, und unberechtigt, wenn die Frage lautet: \enquote{Wirkt diese Art von Eingriff überhaupt?}}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Publikationsverzerrung}
+
+\begin{merksatz}
+\boxtitel{Das Trichterdiagramm}
+Man trägt den Effektschätzer jeder Studie gegen ihre Genauigkeit auf.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+\begin{scope}
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.4);
+\draw[grau!60, line width=0.7pt] (-1.9,0) -- (1.9,0);
+\draw[grau!50, dashed] (0,0) -- (0,3.4);
+\draw[grau!45] (0,3.3) -- (-1.7,0.2);
+\draw[grau!45] (0,3.3) -- (1.7,0.2);
+\foreach \x/\y in {0.05/3.0, -0.25/2.5, 0.35/2.4, -0.6/1.8, 0.7/1.7, -1.0/1.1, 1.1/1.0, -1.4/0.5, 1.45/0.45, 0.2/2.1, -0.45/1.4}
+  \fill[tief] (\x,\y) circle (2.0pt);
+\node[font=\scriptsize\itshape, color=gruen] at (0,-0.5) {symmetrisch};
+\end{scope}
+\begin{scope}[xshift=5.2cm]
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.4);
+\draw[grau!60, line width=0.7pt] (-1.9,0) -- (1.9,0);
+\draw[grau!50, dashed] (0,0) -- (0,3.4);
+\draw[grau!45] (0,3.3) -- (-1.7,0.2);
+\draw[grau!45] (0,3.3) -- (1.7,0.2);
+\foreach \x/\y in {0.05/3.0, -0.25/2.5, 0.35/2.4, 0.7/1.7, 1.1/1.0, 1.45/0.45, 0.2/2.1, 0.9/1.3}
+  \fill[tief] (\x,\y) circle (2.0pt);
+\node[font=\scriptsize\itshape, color=akzent] at (0,-0.5) {linke Ecke fehlt};
+\end{scope}
+\node[font=\scriptsize, color=grau, rotate=90] at (-0.7,1.7) {Genauigkeit};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Die Erwartung}
+Große Studien liegen oben und eng beieinander, kleine unten und weit gestreut --- ein umgekehrter Trichter, symmetrisch um den wahren Wert.
+
+\schritt{Die Lücke}
+Fehlt die untere linke Ecke, so fehlen kleine Studien mit ungünstigem Ergebnis. Genau die werden am ehesten nicht veröffentlicht.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was das Trichterdiagramm nicht beweist}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Andere Ursachen} & Kleine Studien werden oft sorgfältiger durchgeführt oder betreffen ausgewählte Gruppen --- auch das erzeugt Unsymmetrie.\\
+\textbf{Wenige Studien} & Unter zehn Studien ist die Beurteilung wertlos.\\
+\textbf{Kein Beleg für Symmetrie} & Ein unauffälliger Trichter beweist nicht, dass nichts fehlt.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die wirksame Abhilfe}
+Studienregister mit Anmeldepflicht. Wer nachträglich sucht, kann Verzerrung nur vermuten; wer vorab registriert, kann sie feststellen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Cochrane-Empfehlungen verlangen deshalb eine Suche in Studienregistern und, wo möglich, eine Anfrage bei den Autoren unveröffentlichter Studien. Das ist mühsam und wird unvollständig befolgt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- Drei Korrekturen anwenden}
+Sechs Untergruppenanalysen liefern
+\[ p = 0{,}004,\ 0{,}013,\ 0{,}029,\ 0{,}041,\ 0{,}067,\ 0{,}210 . \]
+Wenden Sie Bonferroni, Holm und Benjamini-Hochberg an ($\alpha = q = 0{,}05$).
+
+\loesung
+\schritt{Schritt 1 --- Bonferroni}
+Schwelle: $0{,}05/6 = 0{,}00833$.
+
+Nur $p_{(1)} = 0{,}004$ liegt darunter. \textbf{Ein Ergebnis verworfen.}
+
+\schritt{Schritt 2 --- Holm}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{1.4cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+$i$ & $p_{(i)}$ & $\alpha/(7-i)$ & \\
+\midrule
+$1$ & $0{,}004$ & $0{,}00833$ & \textcolor{gruen}{\checkmark}\\
+$2$ & $0{,}013$ & $0{,}01000$ & \textcolor{akzent}{$\times$ Abbruch}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+$0{,}013 > 0{,}010$: Abbruch. \textbf{Ein Ergebnis verworfen} --- hier leistet Holm nichts mehr als Bonferroni.
+
+\schritt{Schritt 3 --- Benjamini-Hochberg}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{1.4cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+$i$ & $p_{(i)}$ & $\frac{i}{6}\cdot 0{,}05$ & $p_{(i)} \le$ Schwelle?\\
+\midrule
+$1$ & $0{,}004$ & $0{,}00833$ & \textcolor{gruen}{ja}\\
+$2$ & $0{,}013$ & $0{,}01667$ & \textcolor{gruen}{ja}\\
+$3$ & $0{,}029$ & $0{,}02500$ & \textcolor{akzent}{nein}\\
+$4$ & $0{,}041$ & $0{,}03333$ & \textcolor{akzent}{nein}\\
+$5$ & $0{,}067$ & $0{,}04167$ & \textcolor{akzent}{nein}\\
+$6$ & $0{,}210$ & $0{,}05000$ & \textcolor{akzent}{nein}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\textbf{Achtung:} Das Verfahren sucht das \kursiv{größte} $i$, für das die Bedingung gilt --- nicht das erste Versagen. Hier ist das $i = 2$. Verworfen werden alle bis einschließlich $i=2$.
+
+\textbf{Zwei Ergebnisse verworfen.}
+
+\schritt{Schritt 4 --- Die Übersicht}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Anzahl} & \\
+\midrule
+ohne Korrektur & $4$ & \\
+Bonferroni & $1$ & \\
+Holm & $1$ & \\
+Benjamini-Hochberg & $2$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Die Deutung}
+Ohne Korrektur wären vier Untergruppen \enquote{signifikant}. Bei sechs Tests beträgt die Wahrscheinlichkeit für mindestens einen falschen Alarm
+\[ 1 - 0{,}95^6 = 0{,}265 . \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Untergruppenanalysen sind die häufigste Quelle nicht reproduzierbarer Befunde in klinischen Studien. Der Grund ist nicht Unredlichkeit, sondern Arithmetik: Wer genug Untergruppen bildet, findet immer eine, in der die Therapie besonders gut wirkt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Was man stattdessen tut}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Untergruppen vorab benennen und begründen.\\
+$2$ & Ihre Zahl klein halten.\\
+$3$ & Auf \kursiv{Wechselwirkung} testen, nicht innerhalb jeder Gruppe getrennt.\\
+$4$ & Befunde als erkundend kennzeichnen.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Punkt $3$ ist der methodisch wichtigste: Die Frage lautet nicht \enquote{wirkt es bei Männern?}, sondern \enquote{wirkt es bei Männern \kursiv{anders} als bei Frauen?}. Das ist ein einziger Test statt zweier.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- Eine kleine Metaanalyse}
+Drei Studien berichten Effekte von $2{,}0$ ($\mathrm{SE} = 1{,}0$), $4{,}0$ ($\mathrm{SE} = 0{,}5$) und $6{,}0$ ($\mathrm{SE} = 2{,}0$). Fassen Sie zusammen und beurteilen Sie die Heterogenität.
+
+\loesung
+\schritt{Schritt 1 --- Die Gewichte}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.4cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+& $\hat\theta_i$ & $\mathrm{SE}_i$ & $w_i$ & $w_i\hat\theta_i$\\
+\midrule
+$1$ & $2{,}0$ & $1{,}0$ & $1{,}00$ & $2{,}00$\\
+$2$ & $4{,}0$ & $0{,}5$ & $\mathbf{4{,}00}$ & $16{,}00$\\
+$3$ & $6{,}0$ & $2{,}0$ & $0{,}25$ & $1{,}50$\\
+\midrule
+& & & $\mathbf{5{,}25}$ & $\mathbf{19{,}50}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 2 --- Der zusammengefasste Effekt}
+\[ \hat\theta = \frac{19{,}50}{5{,}25} = 3{,}714 \]
+\[ \mathrm{SE} = \frac{1}{\sqrt{5{,}25}} = \frac{1}{2{,}291} = 0{,}4364 \]
+\[ 3{,}714 \pm 1{,}96 \cdot 0{,}4364 = 3{,}714 \pm 0{,}855 \quad\Longrightarrow\quad [\,2{,}86\ ;\ 4{,}57\,] \]
+
+\schritt{Schritt 3 --- Die Beobachtung zu den Gewichten}
+Studie 2 hat den halben Standardfehler von Studie 1 und daher das \kursiv{vierfache} Gewicht --- die Gewichte gehen mit dem Quadrat.
+
+Studie 3 mit $\mathrm{SE} = 2{,}0$ trägt nur $0{,}25/5{,}25 = 4{,}8\,\%$ bei. Der einfache Mittelwert der drei Zahlen wäre $4{,}0$; die Gewichtung zieht ihn auf $3{,}71$.
+
+\schritt{Schritt 4 --- Heterogenität}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+& $\hat\theta_i - \hat\theta$ & \textbf{Quadrat} & $w_i \cdot$ Quadrat\\
+\midrule
+$1$ & $-1{,}714$ & $2{,}938$ & $2{,}938$\\
+$2$ & $0{,}286$ & $0{,}082$ & $0{,}327$\\
+$3$ & $2{,}286$ & $5{,}224$ & $1{,}306$\\
+\midrule
+& & & $\mathbf{Q = 4{,}571}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Freiheitsgrade: $k-1 = 2$. Kritischer Wert $\chi^2_{2;\,0{,}95} = 5{,}99$.
+
+$4{,}571 < 5{,}99$: nicht signifikant, $p = 0{,}102$.
+
+\schritt{Schritt 5 --- $I^2$}
+\[ I^2 = \frac{4{,}571 - 2}{4{,}571} = \frac{2{,}571}{4{,}571} = 0{,}563 \]
+
+\textbf{$56\,\%$ --- erhebliche Heterogenität.}
+
+\schritt{Schritt 6 --- Der scheinbare Widerspruch}
+Der $Q$-Test ist nicht signifikant, $I^2$ zeigt erhebliche Heterogenität. Ein Widerspruch ist das nicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei drei Studien hat der $Q$-Test fast keine Macht --- er findet nur sehr grobe Unterschiede. $I^2$ misst dagegen das Ausmaß und nicht die Nachweisbarkeit. \textbf{Man richtet sich nach $I^2$, nicht nach dem $p$-Wert des $Q$-Tests} --- genau nach der Regel aus Kapitel~7, dass ein nicht signifikanter Test kein Beleg für die Nullhypothese ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Was folgt}
+Bei $I^2 = 56\,\%$ sollte man das zufällige Modell rechnen und vor allem nach der Ursache suchen: Warum findet Studie 1 den Wert $2{,}0$ und Studie 3 den Wert $6{,}0$? Bei drei Studien wird man das nicht klären --- und sollte das im Bericht auch sagen.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Multiplizität aufdecken}
+Eine Veröffentlichung berichtet: \enquote{Bei Frauen über $70$ mit Diabetes war die neue Therapie signifikant überlegen ($p = 0{,}03$).} Wie beurteilen Sie das?
+
+\loesung
+\schritt{Schritt 1 --- Die Fragen, die zu stellen sind}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & War diese Untergruppe vorab festgelegt?\\
+$2$ & Wie viele Untergruppen wurden geprüft?\\
+$3$ & Wurde auf Wechselwirkung getestet oder nur innerhalb der Gruppe?\\
+$4$ & Wie lautete das Ergebnis in der Gesamtstudie?\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 2 --- Die Zahl der möglichen Untergruppen}
+Die Beschreibung nennt drei Merkmale: Geschlecht, Alter, Diabetes. Bei zwei Ausprägungen je Merkmal ergeben sich
+\[ 2 \cdot 2 \cdot 2 = 8 \]
+Kombinationen --- und das nur, wenn keine weiteren Merkmale geprüft wurden.
+
+Rechnet man die Einzelmerkmale und Paare hinzu:
+\[ 3 \ (\text{einzeln}) + 3 \cdot 4 \ (\text{Paare}) + 8 = 23 \ \text{mögliche Untergruppen} . \]
+
+\schritt{Schritt 3 --- Die Fehlerrate}
+\[ 1 - 0{,}95^{23} = 1 - 0{,}3074 = 0{,}693 \]
+In etwa sieben von zehn Fällen findet man bei $23$ Untergruppen mindestens eine mit $p < 0{,}05$ --- auch wenn die Therapie überall gleich wirkt.
+
+\schritt{Schritt 4 --- Die Beurteilung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Der Befund ist \textbf{erkundend}. Er begründet eine Hypothese für eine künftige Studie, nicht eine Behandlungsempfehlung.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Was die Formulierung verrät}
+Die Angabe einer \kursiv{dreifach} eingegrenzten Untergruppe ist ein Warnzeichen. Wäre der Effekt bei Frauen vorhanden, so hätte man ihn bei Frauen berichtet. Dass drei Bedingungen nötig waren, deutet darauf hin, dass gesucht wurde, bis sich etwas fand.
+
+\schritt{Schritt 6 --- Die sachliche Prüfung}
+Es gibt einen Fall, in dem ein solcher Befund ernst zu nehmen ist: wenn er \kursiv{vorab} aus einem Wirkmechanismus abgeleitet wurde und der Wechselwirkungstest signifikant ist.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das ist der übliche Prüfstein. Eine vorab begründete Untergruppe mit signifikanter Wechselwirkung ist ein Ergebnis; eine nachträglich gefundene ohne Wechselwirkungstest ist eine Beobachtung. Der Unterschied steht nicht in den Zahlen, sondern im Studienprotokoll --- und deshalb ist die Präregistrierung aus Kapitel~12 auch hier die eigentliche Abhilfe.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Name, der nicht ganz stimmt, und eine Bibliothek}
+\Person{Carlo Emilio Bonferroni} (1892--1960) war Wirtschaftsmathematiker in Florenz. Die nach ihm benannte Korrektur geht auf seine Ungleichungen über Wahrscheinlichkeiten von Vereinigungen zurück --- er selbst hat sie nie auf multiples Testen angewandt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Zuschreibung ist ein Beispiel für Stiglers Gesetz der Namensgebung: Keine wissenschaftliche Entdeckung ist nach ihrem Entdecker benannt. \Person{Stephen Stigler} fügte hinzu, das Gesetz sei selbst nicht von ihm --- womit es sich auf sich selbst anwendet.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Metaanalyse}
+Den Begriff prägte \Person{Gene Glass} 1976 in einer Arbeit über die Wirksamkeit von Psychotherapie. Er fasste Hunderte von Einzelstudien zusammen, deren Ergebnisse einander zu widersprechen schienen, und kam zu einem klaren Gesamtbefund.
+
+\schritt{Cochrane}
+\Person{Archie Cochrane}, britischer Epidemiologe und ehemaliger Kriegsgefangener, forderte 1972 in einer schmalen Schrift, dass medizinische Entscheidungen auf systematisch zusammengetragenen Belegen beruhen müssten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er wies darauf hin, dass niemand einen Überblick über die vorhandenen randomisierten Studien habe --- nicht einmal in einzelnen Fachgebieten. Die 1993 gegründete Cochrane-Zusammenarbeit erstellt seither systematische Übersichten; sie umfasst heute über zehntausend Arbeiten und Mitwirkende in mehr als hundert Ländern.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wohin sich die Zusammenfassung bewegt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Netzwerk-Metaanalyse} & Mehrere Therapien werden auch dann verglichen, wenn kein direkter Vergleich vorliegt --- über gemeinsame Kontrollen.\\
+\textbf{Individuelle Daten} & Statt veröffentlichter Kennzahlen werden die Rohdaten der Studien zusammengeführt. Deutlich aussagekräftiger, deutlich mühsamer.\\
+\textbf{Lebende Übersichten} & Die Übersicht wird fortlaufend aktualisiert, statt alle paar Jahre neu erstellt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die erste Zeile hat eine unangenehme Voraussetzung: Die indirekten Vergleiche gelten nur, wenn die Studien in allem übereinstimmen, was den Effekt beeinflusst. Man nennt das \Begriff{Transitivität}; sie ist nicht prüfbar, sondern muss begründet werden.
+
+\schritt{Zur Falscherkennungsrate}
+Das Verfahren von Benjamini und Hochberg stammt von 1995 und war zunächst wenig beachtet. Mit der Genomforschung änderte sich das schlagartig: Wer Zehntausende von Genen gleichzeitig prüft, kann mit der familienweisen Fehlerrate nicht arbeiten --- sie würde fast alles verwerfen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Heute ist es das meistverwendete Multiplizitätsverfahren überhaupt. Das ist ein Beispiel dafür, wie eine neue Datenlage eine vorhandene Methode aus der Versenkung holt --- ähnlich wie der Bootstrap, der erst mit billiger Rechenzeit brauchbar wurde.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Multiplizität} & sechs Quellen, darunter die Verfahrenswahl\\
+\textbf{Bonferroni, Holm, BH} & eins, zwei, fünf bei denselben Daten\\
+\textbf{Metaanalyse} & Gewichtung mit $1/\mathrm{SE}^2$\\
+\textbf{$Q$ und $I^2$} & und warum man sich nach $I^2$ richtet\\
+\textbf{Trichterdiagramm} & und was es nicht beweist\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~V. Das letzte Kapitel berichtet, worüber in der Statistik heute gestritten wird --- und vieles davon hat seinen Ursprung in den Rechnungen dieses Kapitels.}
+\end{minipage}
+\end{center}
+\end{merksatz}

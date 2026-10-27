@@ -1,0 +1,657 @@
+\chapter{Diskrete Modelle und Chaos}
+
+\section{Wenn die Zeit springt}
+
+\begin{merksatz}
+\boxtitel{Wann stetige Modelle nicht passen}
+Die Kapitel~1 und 2 setzen voraus, dass sich der Bestand ununterbrochen ändert. Bei einer Bakterienkultur trifft das zu --- in jedem Augenblick teilt sich irgendwo eine Zelle.
+
+Bei anderen Populationen ist das anders:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Insekten} & Eine Generation je Jahr. Die Elterngeneration ist tot, bevor die nächste schlüpft.\\
+\textbf{Jahreszeitliche Vermehrung} & Fische, Vögel, einjährige Pflanzen.\\
+\textbf{Messung in Schritten} & Auch bei stetigem Vorgang misst man täglich oder wöchentlich.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+In solchen Fällen fragt man nicht nach $\dd N/\dd t$, sondern nach einer \Begriff{Rekursion}: Wie hängt die nächste Generation von der jetzigen ab?
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 3.1 --- die logistische Abbildung}
+Sei $x_n \in [0,1]$ der Bestand der $n$-ten Generation, gemessen als Anteil der Kapazitätsgrenze. Dann ist
+\[ x_{n+1} \;=\; a\,x_n\,(1-x_n) \]
+mit dem Parameter $a > 0$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Dieselbe Idee wie in Kapitel 2}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.8cm}P{3.0cm}@{}}
+\toprule
+& \textbf{stetig} & \textbf{diskret}\\
+\midrule
+Vermehrung & $rN$ & $a\,x_n$\\
+Hemmung & $(1-N/K)$ & $(1-x_n)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Bauweise ist dieselbe: ein Vermehrungsfaktor, gedämpft durch den freien Platz. Man würde erwarten, dass sich die diskrete Fassung ähnlich verhält wie die stetige. Dieses Kapitel handelt davon, dass das grob falsch ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum $x$ ein Anteil ist}
+Man rechnet in Einheiten der Kapazitätsgrenze, also $x = N/K$. Das spart einen Parameter: Statt $r$ und $K$ bleibt nur $a$ übrig. Für $x > 1$ wird $x_{n+1}$ negativ --- die Population stirbt aus. Wir bleiben daher in $[0,1]$, was für $0 < a \le 4$ gesichert ist.
+\end{merksatz}
+
+\section{Ruhelagen}
+
+\begin{definition}
+\boxtitelm{Definition 3.2 --- Fixpunkt}
+Ein \Begriff{Fixpunkt} der Abbildung $f$ ist ein Wert $x^{*}$ mit $f(x^{*}) = x^{*}$ --- der Bestand ändert sich von einer Generation zur nächsten nicht.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 3.3 --- die beiden Fixpunkte}
+Die logistische Abbildung hat genau die Fixpunkte
+\[ x^{*}_1 = 0 \qquad\text{und}\qquad x^{*}_2 = 1 - \frac{1}{a} . \]
+
+\schritt{Beweis}
+\begin{align*}
+a\,x(1-x) &= x\\
+a\,x(1-x) - x &= 0\\
+x\bigl[a(1-x) - 1\bigr] &= 0
+\end{align*}
+Ein Produkt ist null, wenn ein Faktor null ist:
+\[ x = 0 \qquad\text{oder}\qquad a(1-x) = 1 \;\Longleftrightarrow\; 1-x = \frac1a \;\Longleftrightarrow\; x = 1-\frac1a . \quad \blacksquare \]
+
+\schritt{Die Bedingung für den zweiten}
+$x^{*}_2$ liegt nur dann in $[0,1]$, wenn $a \ge 1$. Für $a < 1$ gibt es nur den Nullpunkt --- die Population stirbt aus.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 3.4 --- wann ein Fixpunkt stabil ist}
+Ein Fixpunkt $x^{*}$ heißt \Begriff{stabil}, wenn Bestände in seiner Nähe zu ihm hinstreben. Das ist genau dann der Fall, wenn
+\[ \bigl|f'(x^{*})\bigr| < 1 . \]
+
+\schritt{Begründung}
+Sei $x_n = x^{*} + \varepsilon_n$ mit kleinem $\varepsilon_n$. Dann ist
+\[ x_{n+1} = f(x^{*}+\varepsilon_n) \approx f(x^{*}) + f'(x^{*})\,\varepsilon_n = x^{*} + f'(x^{*})\,\varepsilon_n \]
+nach der Näherung durch die Tangente (Band 3, Teil~II). Also
+\[ \varepsilon_{n+1} \approx f'(x^{*})\,\varepsilon_n . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Die Abweichung wird in jedem Schritt mit demselben Faktor multipliziert. Ist sein Betrag kleiner als eins, schrumpft sie; ist er größer, wächst sie.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist wieder exponentielles Verhalten --- nur diesmal für den \kursiv{Fehler} statt für den Bestand. Dieselbe Rechnung wie in Kapitel~1, an einer ganz anderen Stelle.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Stabilität der beiden Fixpunkte}
+\schritt{Die Ableitung}
+\[ f(x) = a\,x - a\,x^2 \quad\Longrightarrow\quad f'(x) = a - 2a\,x = a\,(1-2x) \]
+
+\schritt{Am Nullpunkt}
+\[ f'(0) = a \]
+Stabil für $a < 1$. Die Population stirbt dann aus, gleichgültig wie sie startet.
+
+\schritt{Am zweiten Fixpunkt}
+\[ f'\!\left(1-\frac1a\right) = a\left(1 - 2\left(1-\frac1a\right)\right) = a\left(1 - 2 + \frac2a\right) = a\left(\frac2a - 1\right) = 2 - a \]
+
+Stabil, wenn $|2-a| < 1$, also
+\[ -1 < 2-a < 1 \quad\Longleftrightarrow\quad 1 < a < 3 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei $a = 3$ verliert der Fixpunkt seine Stabilität.} Was dann geschieht, ist der Gegenstand dieses Kapitels.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Beispiel: $a = 2{,}8$}
+Fixpunkt: $1 - 1/2{,}8 = 0{,}642857$. Ableitung dort: $2 - 2{,}8 = -0{,}8$, Betrag kleiner eins --- stabil.
+
+Start bei $x_0 = 0{,}1$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.38}
+\begin{tabular}{@{}P{1.0cm}P{1.8cm}P{1.0cm}P{1.8cm}@{}}
+\toprule
+$n$ & $x_n$ & $n$ & $x_n$\\
+\midrule
+$0$ & $0{,}100000$ & $6$ & $0{,}612166$\\
+$1$ & $0{,}252000$ & $7$ & $0{,}664773$\\
+$2$ & $0{,}527789$ & $8$ & $0{,}623980$\\
+$3$ & $0{,}697838$ & $10$ & $0{,}631017$\\
+$4$ & $0{,}590409$ & $12$ & $0{,}635363$\\
+$5$ & $0{,}677114$ & $\infty$ & $\mathbf{0{,}642857}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Werte springen abwechselnd über und unter den Fixpunkt und nähern sich ihm. Das entspricht dem \kursiv{negativen} Vorzeichen der Ableitung: Jede Abweichung wechselt das Vorzeichen und schrumpft um den Faktor $0{,}8$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Periodenverdopplung}
+
+\begin{merksatz}
+\boxtitel{Was bei $a > 3$ geschieht}
+Der Fixpunkt ist instabil. Statt sich einzupendeln, springt der Bestand zwischen \kursiv{zwei} Werten hin und her.
+
+\schritt{Ein Beispiel: $a = 3{,}2$, Start bei $x_0 = 0{,}5$}
+Nach einigen Schritten:
+\[ \ldots,\ 0{,}799456,\ 0{,}513044,\ 0{,}799455,\ 0{,}513044,\ 0{,}799455,\ \ldots \]
+
+\schritt{Die beiden Werte exakt}
+Man sucht Lösungen von $f(f(x)) = x$, die keine Fixpunkte sind. Das führt auf eine quadratische Gleichung mit der Lösung
+\[ x = \frac{a+1 \pm \sqrt{(a-3)(a+1)}}{2a} . \]
+Für $a = 3{,}2$:
+\[ \sqrt{0{,}2 \cdot 4{,}2} = \sqrt{0{,}84} = 0{,}91652 \]
+\[ x = \frac{4{,}2 \pm 0{,}91652}{6{,}4} = 0{,}799455 \quad\text{und}\quad 0{,}513045 . \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Unter der Wurzel steht $(a-3)(a+1)$. Für $a < 3$ ist der erste Faktor negativ --- es gibt keinen Zweierzyklus. Bei $a = 3$ entsteht er, und zwar genau dort, wo der Fixpunkt seine Stabilität verliert. Die Schwelle ist dieselbe.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Und weiter}
+Erhöht man $a$ weiter, so wird auch der Zweierzyklus instabil und teilt sich in einen Viererzyklus, dieser in einen Achterzyklus, und so fort.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Schwelle} & \textbf{Wert von $a$} & \textbf{danach}\\
+\midrule
+$a_1$ & $3{,}000000$ & Zweierzyklus\\
+$a_2$ & $3{,}449490$ & Viererzyklus\\
+$a_3$ & $3{,}544090$ & Achterzyklus\\
+$a_4$ & $3{,}564407$ & Sechzehner\\
+$\vdots$ & $\vdots$ & $\vdots$\\
+$a_\infty$ & $\mathbf{3{,}569946}$ & \textcolor{akzent}{\textbf{Chaos}}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Der Wert $a_2 = 1+\sqrt6 = 3{,}44949$ lässt sich noch geschlossen angeben; die weiteren nicht.
+
+\schritt{Die Abstände schrumpfen}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Abstand} & \textbf{Wert} & \textbf{Verhältnis}\\
+\midrule
+$a_2 - a_1$ & $0{,}449490$ & \\
+$a_3 - a_2$ & $0{,}094600$ & $4{,}751$\\
+$a_4 - a_3$ & $0{,}020317$ & $4{,}656$\\
+$a_5 - a_4$ & $0{,}004351$ & $4{,}669$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Verhältnisse streben gegen $\delta = 4{,}669201\ldots$ --- die Feigenbaum-Konstante.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Bemerkenswerte daran: Diese Zahl hängt \kursiv{nicht} von der logistischen Abbildung ab. Jede Abbildung mit einem glatten Höchstwert zeigt dieselbe Konstante --- ob man $ax(1-x)$ nimmt, $a\sin(\pi x)$ oder etwas ganz anderes. Sie ist eine Naturkonstante der Mathematik, vergleichbar mit $\pi$, und wurde 1975 entdeckt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Chaos}
+
+\begin{merksatz}
+\boxtitel{Jenseits der Häufungsstelle}
+Für $a > 3{,}5699$ wiederholt sich die Folge nicht mehr. Sie bleibt beschränkt, springt aber unregelmäßig und ohne erkennbares Muster.
+
+\schritt{Der entscheidende Versuch}
+Wir rechnen mit $a = 3{,}9$ zweimal --- einmal mit $x_0 = 0{,}400$, einmal mit $x_0 = 0{,}401$. Der Unterschied im Startwert beträgt ein Promille.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.0cm}P{2.0cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+$n$ & $x_0 = 0{,}400$ & $x_0 = 0{,}401$ & \textbf{Differenz}\\
+\midrule
+$0$ & $0{,}400000$ & $0{,}401000$ & $0{,}001000$\\
+$1$ & $0{,}936000$ & $0{,}936776$ & $0{,}000776$\\
+$2$ & $0{,}233626$ & $0{,}230984$ & $0{,}002642$\\
+$3$ & $0{,}698274$ & $0{,}692758$ & $0{,}005516$\\
+$4$ & $0{,}821681$ & $0{,}830093$ & $0{,}008412$\\
+$5$ & $0{,}571434$ & $0{,}550052$ & $0{,}021383$\\
+$10$ & $0{,}121805$ & $0{,}140343$ & $0{,}018538$\\
+$15$ & $0{,}933177$ & $0{,}913481$ & $0{,}019696$\\
+$20$ & $0{,}890718$ & $\mathbf{0{,}125669}$ & \textcolor{akzent}{$\mathbf{0{,}765048}$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nach zwanzig Generationen haben die beiden Verläufe nichts mehr miteinander zu tun.} Der eine liegt nahe am oberen Rand, der andere am unteren.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was das bedeutet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Nicht zufällig} & Die Gleichung ist vollständig bestimmt. Bei exakt gleichem Startwert kommt exakt dieselbe Folge heraus.\\
+\textbf{Trotzdem unvorhersagbar} & Jeder gemessene Startwert hat einen Fehler. Nach genügend vielen Schritten ist die Vorhersage wertlos.\\
+\textbf{Nicht kompliziert} & Die Gleichung hat drei Zeichen. Die Unvorhersagbarkeit entsteht nicht aus Kompliziertheit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Rechnung dazu}
+Der Fehler wächst im Mittel exponentiell:
+\[ \varepsilon_n \approx \varepsilon_0\,e^{\lambda n} \]
+mit dem \Begriff{Lyapunow-Exponenten} $\lambda$. Für $a = 3{,}9$ ist $\lambda \approx 0{,}5$.
+
+Ein Anfangsfehler von $10^{-3}$ erreicht die Größenordnung $1$ nach
+\[ n \approx \frac{\ln(10^{3})}{0{,}5} = \frac{6{,}91}{0{,}5} \approx 14 \ \text{Schritten} . \]
+Das passt zur Tabelle.
+
+\schritt{Was zehnmal genauere Messung brächte}
+\[ n \approx \frac{\ln(10^{4})}{0{,}5} = 18{,}4 \]
+Vier Schritte mehr. Für weitere vier Schritte bräuchte man wieder zehnmal genauere Messung.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Vorhersagehorizont wächst nur logarithmisch mit der Messgenauigkeit.} Das ist der Grund, warum die Wettervorhersage bei etwa zwei Wochen an eine Grenze stößt, die sich durch bessere Messungen nicht wesentlich verschieben lässt.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Drei Fehldeutungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{\enquote{Chaos heißt Unordnung}} & Nein. Die Folge bleibt in $[0,1]$, und ihre Häufigkeitsverteilung ist völlig regelmäßig. Ungeordnet ist nur die \kursiv{Reihenfolge}.\\
+\textbf{\enquote{Chaos heißt Zufall}} & Nein. Es gibt keinen Zufall in der Gleichung. Die Folge ist vollständig bestimmt.\\
+\textbf{\enquote{Mehr Rechenleistung hilft}} & Nein. Das Problem liegt im Startwert, nicht in der Rechnung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Zeile lohnt eine Bemerkung: Über lange Zeit lässt sich sehr wohl etwas vorhersagen --- nämlich die Verteilung der Werte. Man kann sagen, wie oft die Population klein sein wird, nur nicht wann. Das ist die statistische Betrachtungsweise eines chaotischen Systems, und sie ist oft die einzig sinnvolle.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wann tritt das in der Biologie wirklich auf?}
+Die Frage ist berechtigt: Beobachtet man chaotische Populationen?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Im Labor} & Bei Mehlkäfern und Wasserflöhen wurden Verläufe gefunden, die zu chaotischen Modellen passen.\\
+\textbf{Im Freiland} & Sehr schwer nachzuweisen --- man bräuchte lange, genaue Zeitreihen und müsste Chaos von Zufallsschwankungen trennen.\\
+\textbf{Die Parameterwerte} & Chaos verlangt $a > 3{,}57$, also eine Vermehrung um mehr als das Dreieinhalbfache je Generation. Das ist bei Wirbeltieren unmöglich, bei Insekten gut denkbar.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die ehrliche Auskunft}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Der Nachweis von Chaos in freilebenden Populationen ist bis heute umstritten. Die Bedeutung dieses Kapitels liegt nicht in der Anwendung, sondern in der \kursiv{Warnung}.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Warnung lautet: Ein unregelmäßiger Verlauf in Daten muss keine äußere Störung haben. Er kann aus dem System selbst stammen. Wer bei schwankenden Populationszahlen nach der Ursache jeder einzelnen Schwankung sucht, sucht unter Umständen etwas, das es nicht gibt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und eine zweite Warnung: die Diskretisierung selbst}
+Vergleichen wir für dieselbe biologische Lage:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+& \textbf{stetig} & \textbf{diskret}\\
+\midrule
+Verhalten & stets Sättigung & \textcolor{akzent}{Zyklen, Chaos}\\
+Abhängig von $r$ bzw. $a$ & \textcolor{gruen}{nein} & \textcolor{akzent}{\textbf{ja}}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die stetige logistische Gleichung strebt für \kursiv{jedes} $r > 0$ gegen $K$. Die diskrete tut das nur für $a < 3$.}
+\end{minipage}
+\end{center}
+
+\schritt{Woher der Unterschied kommt}
+Im stetigen Modell wirkt die Hemmung \kursiv{sofort}. Im diskreten wirkt sie mit einer Generation Verzögerung: Die Nachkommenzahl richtet sich nach dem Bestand der \kursiv{vorigen} Generation.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Verzögerung ist die Ursache des Überschwingens --- und damit der Zyklen und des Chaos. Man kann dasselbe im stetigen Modell erzeugen, indem man eine Zeitverzögerung einbaut. \textbf{Verzögerte Rückkopplung erzeugt Schwingungen.} Das ist ein allgemeines Prinzip, das in Teil~II und in der Regelungstechnik wiederkehrt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die praktische Folgerung}
+Wer ein stetiges Modell für die Rechnung in Zeitschritte zerlegt, muss die Schrittweite klein genug wählen. Zu große Schritte erzeugen Schwingungen, die im Modell gar nicht stecken.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist kein theoretisches Problem. Ein numerisch gelöstes Modell mit zu grober Schrittweite kann Epidemiewellen oder Populationszyklen zeigen, die reine Rechenartefakte sind. Band 5 behandelt, wie man das erkennt und vermeidet.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Fixpunkte und Stabilität}
+Untersuchen Sie die Abbildung $x_{n+1} = a\,x_n(1-x_n)$ für $a = 0{,}8$, $a = 2{,}0$ und $a = 3{,}5$.
+
+\loesung
+\schritt{$a = 0{,}8$}
+Fixpunkte: $x^{*}_1 = 0$ und $x^{*}_2 = 1 - 1/0{,}8 = 1 - 1{,}25 = -0{,}25$.
+
+Der zweite liegt außerhalb von $[0,1]$ und ist biologisch bedeutungslos.
+
+Stabilität von $x^{*}_1 = 0$: $f'(0) = a = 0{,}8 < 1$ --- \textbf{stabil}.
+
+\kursiv{Deutung:} Die Population stirbt aus. Jede Generation erzeugt weniger als eine Nachfolgerin je Individuum, auch bei maximalem freien Platz.
+
+\schritt{$a = 2{,}0$}
+Fixpunkte: $0$ und $1 - 1/2 = 0{,}5$.
+
+$f'(0) = 2 > 1$ --- instabil.\\
+$f'(0{,}5) = 2 - 2 = 0$ --- \textbf{stabil}, und zwar in besonderem Maße.
+
+\kursiv{Probe mit $x_0 = 0{,}1$:}
+\[ 0{,}1 \to 0{,}18 \to 0{,}2952 \to 0{,}41611 \to 0{,}48593 \to 0{,}49960 \to 0{,}5000 \]
+Sehr rasche Annäherung, ohne Überschwingen.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Ableitung null bedeutet \Begriff{überstabil}: Der Fehler wird nicht nur kleiner, sondern quadriert sich. Aus $0{,}01$ wird etwa $0{,}0001$. Das ist die schnellstmögliche Annäherung.}
+\end{minipage}
+\end{center}
+
+\schritt{$a = 3{,}5$}
+Fixpunkt: $1 - 1/3{,}5 = 0{,}714286$.
+
+$f'(0{,}714286) = 2 - 3{,}5 = -1{,}5$, Betrag größer als eins --- \textbf{instabil}.
+
+Da $3{,}449 < 3{,}5 < 3{,}544$, liegt nach der Tabelle in Abschnitt 3.3 ein \textbf{Viererzyklus} vor.
+
+\kursiv{Probe:} Die vier Werte lauten näherungsweise
+\[ 0{,}500884,\quad 0{,}874997,\quad 0{,}382820,\quad 0{,}826941 \]
+und wiederholen sich danach.
+
+\schritt{Die Übersicht}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.4cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+$a$ & \textbf{stabiler Zustand} & $|f'|$ & \textbf{Verhalten}\\
+\midrule
+$0{,}8$ & $x=0$ & $0{,}8$ & Aussterben\\
+$2{,}0$ & $x=0{,}5$ & $0$ & rasche Sättigung\\
+$3{,}5$ & \textcolor{akzent}{keiner} & $1{,}5$ & Viererzyklus\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Den Zweierzyklus herleiten}
+Zeigen Sie, dass die Werte des Zweierzyklus
+\[ x = \frac{a+1 \pm \sqrt{(a-3)(a+1)}}{2a} \]
+lauten, und bestimmen Sie, ab welchem $a$ er existiert.
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingung}
+Ein Zweierzyklus besteht aus zwei Werten $p$ und $q$ mit
+\[ f(p) = q \qquad\text{und}\qquad f(q) = p , \]
+also $f(f(p)) = p$. Wir suchen die Fixpunkte der zweifach angewandten Abbildung.
+
+\schritt{Schritt 2 --- Ein Kunstgriff}
+Statt $f(f(x)) = x$ auszumultiplizieren --- das gäbe ein Polynom vierten Grades ---, nutzen wir zwei Beziehungen aus. Aus
+\[ q = ap(1-p) \qquad\text{und}\qquad p = aq(1-q) \]
+folgt durch Addition und Subtraktion Handlicheres.
+
+\kursiv{Subtraktion:}
+\begin{align*}
+q - p &= ap(1-p) - aq(1-q)\\
+&= a\bigl[p - p^2 - q + q^2\bigr]\\
+&= a\bigl[(p-q) - (p^2-q^2)\bigr]\\
+&= a(p-q)\bigl[1 - (p+q)\bigr]
+\end{align*}
+Da $p \neq q$, dürfen wir durch $(q-p) = -(p-q)$ teilen:
+\[ 1 = -a\bigl[1-(p+q)\bigr] \quad\Longrightarrow\quad p+q = 1 + \frac{1}{a} = \frac{a+1}{a} . \]
+
+\schritt{Schritt 3 --- Das Produkt}
+\kursiv{Addition:}
+\[ p+q = a\bigl[(p+q) - (p^2+q^2)\bigr] \]
+Mit $p^2+q^2 = (p+q)^2 - 2pq$ und $S := p+q = \frac{a+1}{a}$:
+\[ S = a\bigl[S - S^2 + 2pq\bigr] \]
+\[ \frac{S}{a} = S - S^2 + 2pq \quad\Longrightarrow\quad 2pq = \frac{S}{a} - S + S^2 \]
+
+Einsetzen von $S = \frac{a+1}{a}$:
+\[ 2pq = \frac{a+1}{a^2} - \frac{a+1}{a} + \frac{(a+1)^2}{a^2} = \frac{(a+1) - a(a+1) + (a+1)^2}{a^2} \]
+\[ = \frac{(a+1)\bigl[1 - a + a + 1\bigr]}{a^2} = \frac{2(a+1)}{a^2} \]
+\[ P := pq = \frac{a+1}{a^2} \]
+
+\schritt{Schritt 4 --- Die quadratische Gleichung}
+$p$ und $q$ sind die Lösungen von $x^2 - Sx + P = 0$:
+\[ x = \frac{S \pm \sqrt{S^2 - 4P}}{2} \]
+
+\kursiv{Die Diskriminante:}
+\[ S^2 - 4P = \frac{(a+1)^2}{a^2} - \frac{4(a+1)}{a^2} = \frac{(a+1)\bigl[(a+1)-4\bigr]}{a^2} = \frac{(a+1)(a-3)}{a^2} \]
+
+\[ x = \frac{\frac{a+1}{a} \pm \frac{\sqrt{(a+1)(a-3)}}{a}}{2} = \frac{a+1 \pm \sqrt{(a-3)(a+1)}}{2a} . \qquad \blacksquare \]
+
+\schritt{Schritt 5 --- Wann er existiert}
+Die Wurzel ist genau dann reell, wenn $(a-3)(a+1) \ge 0$. Für $a > 0$ ist $a+1 > 0$, also
+\[ a \ge 3 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Zweierzyklus entsteht genau dort, wo der Fixpunkt seine Stabilität verliert.} Beide Schwellen liegen bei $a = 3$.
+\end{minipage}
+\end{center}
+
+\schritt{Probe für $a = 3{,}2$}
+\[ S = \frac{4{,}2}{3{,}2} = 1{,}3125, \qquad P = \frac{4{,}2}{10{,}24} = 0{,}410156 \]
+\[ p + q = 0{,}513045 + 0{,}799455 = 1{,}312500 \quad \checkmark \]
+\[ p \cdot q = 0{,}513045 \cdot 0{,}799455 = 0{,}410156 \quad \checkmark \]
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Wie weit reicht eine Vorhersage?}
+Ein chaotisches System hat den Lyapunow-Exponenten $\lambda = 0{,}5$ je Schritt. Der Startwert ist auf drei Stellen genau bekannt. Nach wie vielen Schritten ist die Vorhersage wertlos? Wie viel brächte eine Messung auf sechs Stellen?
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingung}
+Der Fehler wächst wie $\varepsilon_n = \varepsilon_0\,e^{\lambda n}$. Die Vorhersage ist wertlos, wenn er die Größenordnung des Wertebereichs erreicht --- hier etwa $1$.
+
+\[ \varepsilon_0\,e^{\lambda n} \approx 1 \quad\Longrightarrow\quad e^{\lambda n} \approx \frac{1}{\varepsilon_0} \quad\Longrightarrow\quad n \approx \frac{1}{\lambda}\ln\frac{1}{\varepsilon_0} \]
+
+\schritt{Schritt 2 --- Drei Stellen}
+$\varepsilon_0 = 10^{-3}$:
+\[ n \approx \frac{\ln 10^3}{0{,}5} = \frac{6{,}908}{0{,}5} = 13{,}8 \approx 14 \ \text{Schritte} \]
+
+\schritt{Schritt 3 --- Sechs Stellen}
+$\varepsilon_0 = 10^{-6}$:
+\[ n \approx \frac{\ln 10^6}{0{,}5} = \frac{13{,}816}{0{,}5} = 27{,}6 \approx 28 \ \text{Schritte} \]
+
+\schritt{Schritt 4 --- Der Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+\textbf{Genauigkeit} & \textbf{Faktor} & \textbf{Horizont}\\
+\midrule
+$10^{-3}$ & $1$ & $14$ Schritte\\
+$10^{-6}$ & $1000\times$ & $28$ Schritte\\
+$10^{-9}$ & $10^6\times$ & $41$ Schritte\\
+$10^{-15}$ & $10^{12}\times$ & $69$ Schritte\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Tausendfach genauere Messung verdoppelt den Vorhersagehorizont.} Um ihn zu verdreifachen, bräuchte man den Faktor eine Million.
+\end{minipage}
+\end{center}
+
+Die letzte Zeile entspricht der Genauigkeit doppelt genauer Gleitkommazahlen --- der Grenze gewöhnlicher Rechnerarithmetik. Selbst dann reicht die Vorhersage nur fünfmal so weit wie bei drei Stellen.
+
+\schritt{Schritt 6 --- Was daraus folgt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei chaotischen Systemen ist langfristige Vorhersage nicht eine Frage des Aufwands, sondern grundsätzlich ausgeschlossen. Man verlagert die Frage daher: Statt \enquote{wie wird es am Tag $100$ sein?} fragt man \enquote{wie ist die Verteilung der Zustände über lange Zeit?} --- und das lässt sich beantworten.}
+\end{minipage}
+\end{center}
+
+\schritt{Eine Kontrollrechnung an der Tabelle in Abschnitt 3.4}
+Dort war $\varepsilon_0 = 10^{-3}$ und nach $20$ Schritten $\varepsilon_{20} = 0{,}765$.
+\[ \lambda = \frac{1}{20}\ln\frac{0{,}765}{0{,}001} = \frac{\ln 765}{20} = \frac{6{,}640}{20} = 0{,}332 \]
+Etwas kleiner als $0{,}5$ --- der Fehler wächst nicht gleichmäßig, sondern im Mittel. Die Größenordnung stimmt. \checkmark
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Zoologe, ein Meteorologe und ein Aufsatz mit einer Aufforderung}
+\Person{Robert May}, australischer Physiker und späterer Zoologieprofessor in Oxford, veröffentlichte 1976 in \kursiv{Nature} einen Übersichtsaufsatz mit dem Titel \kursiv{Simple mathematical models with very complicated dynamics}.
+
+Er zeigte darin an der logistischen Abbildung, dass ein Modell mit einer einzigen Zeile Verhalten erzeugt, das man bis dahin für unmöglich gehalten hatte. Der Aufsatz endet mit einer ungewöhnlichen Aufforderung: May schlug vor, dass jeder Studierende diese Gleichung einmal selbst mit einem Taschenrechner durchspielen solle.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Seine Begründung war didaktisch und politisch zugleich: Wer einmal gesehen habe, dass eine einfache Gleichung unvorhersagbares Verhalten erzeugt, werde vorsichtiger mit Vorhersagen in Wirtschaft, Ökologie und Politik umgehen. Der Aufsatz gehört zu den meistzitierten der Biologie.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Vorläufer}
+\Person{Edward Lorenz} hatte den Effekt bereits 1963 bei Wettermodellen beobachtet --- der Legende nach, weil er eine Rechnung mit gerundeten Zwischenwerten neu startete und einen völlig anderen Verlauf erhielt. Seine Arbeit erschien in einer meteorologischen Zeitschrift und blieb ein Jahrzehnt lang außerhalb des Fachs unbekannt.
+
+Von Lorenz stammt auch das Bild vom Flügelschlag des Schmetterlings --- als Titel eines Vortrags von 1972, den er selbst nicht so gemeint hatte, wie er verstanden wurde.
+
+\schritt{Die Konstante}
+\Person{Mitchell Feigenbaum} entdeckte 1975 am Taschenrechner, dass die Verhältnisse der Abstände gegen eine feste Zahl streben --- und dass dieselbe Zahl bei ganz anderen Abbildungen auftritt. Seine Arbeit wurde von zwei Zeitschriften abgelehnt, bevor sie 1978 erschien.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Ablehnung ist verständlich: Feigenbaum hatte ein numerisches Ergebnis ohne Beweis. Dass die Konstante allgemein gilt, wurde erst 1982 von Lanford mit rechnergestützten Methoden bewiesen --- eines der frühen Beispiele für einen Beweis, den kein Mensch von Hand nachvollziehen kann.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Was aus der Chaosforschung geworden ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Meteorologie} & Ensemblevorhersagen: Man rechnet viele leicht verschiedene Startwerte durch und berichtet die Streuung statt einer Zahl.\\
+\textbf{Herzrhythmus} & Herzfrequenzvariabilität zeigt Merkmale nichtlinearer Dynamik; ihre Abnahme gilt als Warnzeichen.\\
+\textbf{Epidemiologie} & Masernausbrüche vor der Impfung zeigten mehrjährige Zyklen, die zu solchen Modellen passen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die erste Zeile ist die folgenreichste Anwendung. Statt zu versuchen, den Startwert genauer zu messen, akzeptiert man die Unsicherheit und rechnet ihre Folgen aus. Eine Wettervorhersage mit Wahrscheinlichkeitsangabe ist unmittelbar das Ergebnis dieser Einsicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dasselbe Vorgehen hat sich in der Epidemiemodellierung durchgesetzt: Man rechnet Szenarien mit einer Spanne von Parameterwerten und berichtet Bänder statt Kurven. Kapitel~7 kommt darauf zurück --- und Kapitel~15 auf die Frage, wie solche Bänder in der Öffentlichkeit gelesen werden.}
+\end{minipage}
+\end{center}
+
+\schritt{Die nüchterne Bilanz}
+Die Erwartung der 1980er Jahre, in vielen biologischen Zeitreihen Chaos nachzuweisen, hat sich weitgehend nicht erfüllt. Die Trennung von deterministischem Chaos und zufälliger Störung verlangt sehr lange, sehr saubere Zeitreihen, die in der Biologie selten vorliegen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Geblieben ist etwas Wichtigeres als eine Nachweismethode: die Einsicht, dass Unregelmäßigkeit keine äußere Ursache braucht. Das hat die Art verändert, wie man Modelle beurteilt --- und wie viel man von ihnen erwartet.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Definition 3.1} & die logistische Abbildung\\
+\textbf{Satz 3.3} & zwei Fixpunkte, $0$ und $1-1/a$\\
+\textbf{Satz 3.4} & stabil genau dann, wenn $|f'| < 1$\\
+\textbf{Perioden\-verdopplung} & bei $a=3$, $3{,}449$, $3{,}544$ \ldots\ mit Faktor $4{,}669$\\
+\textbf{Chaos} & bestimmt und dennoch unvorhersagbar\\
+\textbf{Der Bruchfall} & Verzögerte Rückkopplung erzeugt Schwingungen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~I. Ab Kapitel~4 betrachten wir zwei Populationen gleichzeitig --- und das Prinzip der verzögerten Rückkopplung kehrt in anderer Gestalt wieder.}
+\end{minipage}
+\end{center}
+\end{merksatz}
