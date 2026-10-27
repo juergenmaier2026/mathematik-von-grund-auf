@@ -1,0 +1,211 @@
+\part{Aktueller Stand}
+
+\chapter{Was sich verallgemeinern lässt}
+
+\section{Zurück zum Fall von 2021}
+
+\begin{merksatz}
+\boxtitel{Hätte dieser Band den Fehlschlag verhindert?}
+Das Sepsis-Warnsystem, das 2021 an einer unabhängigen Klinik nachgeprüft wurde, warnte bei fast jedem fünften Patienten und übersah zwei Drittel der Sepsisfälle. Die Trennschärfe fiel von angegebenen $0{,}76$ bis $0{,}83$ auf $0{,}63$.\zit{26}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{1.2cm}P{3.4cm}P{4.0cm}@{}}
+\toprule
+\textbf{Kap.} & \textbf{Werkzeug} & \textbf{Was es gezeigt hätte}\\
+\midrule
+$1$ & Prävalenz und Kosten & Die Schwelle passt nicht zur neuen Klinik.\\
+$3$ & äußere Prüfung & Die Trennschärfe gilt nur für die eigenen Daten.\\
+$3$ & zeitliches Leck & Welche Merkmale erst nach dem Verdacht vorliegen.\\
+$5$, $11$ & Kalibrierung & Ob $30$ Prozent wirklich $30$ Prozent heißt.\\
+$12$ & Etiketten & Welche Definition von Sepsis gelernt wurde.\\
+\midrule
+$7$, $8$ & Schranken & \textcolor{akzent}{nichts}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Werkzeuge, die geholfen hätten, sind die unscheinbaren. Die Theorie der Verallgemeinerung hätte nicht geholfen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Sätze aus Teil~III beschreiben die Übertragung auf neue Patienten \kursiv{derselben Verteilung}. \textbf{Das Problem von 2021 war eine andere Verteilung} --- andere Klinik, andere Praxis, andere Etiketten. Dafür gibt es keine Schranke, sondern nur Sorgfalt: die Prüfung an fremden Daten, bevor man ein Verfahren einsetzt, und die fortlaufende Beobachtung danach.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Vier Muster}
+
+\begin{merksatz}
+\boxtitel{Muster 1 --- ohne Annahme kein Lernen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+$1$ & Satz 1.5: Über alle denkbaren Welten gemittelt sind alle Verfahren gleich.\\
+$6$ & Das Merkmal $(T-37)^{2}$ schlägt den Kern --- weil es Wissen enthält.\\
+$10$ & Das Abstandsmaß ist das ganze Modell.\\
+$14$ & Faltungsnetze tragen die Annahme, dass Muster überall dasselbe bedeuten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Jedes erfolgreiche Verfahren dieses Bandes hat eine Annahme, die zur Aufgabe passt.} Die Kunst liegt darin, sie zu erkennen --- und wer sie kennt, sollte sie hineinstecken, statt sie suchen zu lassen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 2 --- weniger Freiheit, bis zur Schwelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+$2$ & Optimismus $2\sigma^{2}p/n$: jeder Parameter kostet.\\
+$4$ & Strafen senken den vermeidbaren Fehler auf ein Drittel.\\
+$7$ & Die VC-Dimension bestimmt den Datenbedarf.\\
+$8$ & Breiter Rand, wenige Stützvektoren, kurze Beschreibung.\\
+$14$ & \textcolor{akzent}{Und jenseits der Schwelle gilt es nicht mehr.}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die ersten vier Zeilen sind ein zusammenhängendes, bewiesenes Lehrgebäude. \textbf{Die fünfte stellt es nicht in Frage, sondern zeigt seine Grenze}: Es beschreibt die Klasse der Regeln, nicht das Verfahren, das darin sucht. Sobald das Verfahren selbst regularisiert --- wie der Gradientenabstieg in Satz 14.1 ---, zählt nicht mehr, wie viele Regeln es gibt, sondern welche gefunden wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 3 --- die Prüfung ist wichtiger als das Verfahren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+$3$ & Ein Leck macht aus Rauschen $98{,}5$ Prozent Treffsicherheit.\\
+$3$ & Zwanzig verglichene Modelle täuschen fünf Prozentpunkte vor.\\
+$8$ & Die Schranken ordnen, aber messen nicht; die Kreuzvalidierung misst.\\
+$14$ & Abkürzungen fallen erst an fremden Daten auf.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Unterschied zwischen einem guten und einem schlechten Verfahren ist meist kleiner als der zwischen einer ehrlichen und einer fehlerhaften Prüfung.} Eine Übersicht über $71$ klinische Studien fand bei fairem Vergleich keinen Vorteil lernender Verfahren gegenüber der logistischen Regression\zit{5} --- aber reichlich Fälle, in denen die Prüfung den Unterschied erzeugt hatte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 4 --- Vorhersage ist nicht Erklärung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+$4$ & Das Lasso wählt falsche Merkmale in jedem fünften Fall.\\
+$9$ & Ein Zufallsmerkmal steht in jedem fünften Baum an zweiter Stelle.\\
+$12$ & Gruppen entstehen auch aus Gleichverteilung.\\
+$13$ & Die Richtung größter Streuung kann bedeutungslos sein.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Verfahren, das gut vorhersagt, hat nicht verstanden, warum.} Die Merkmale, die es benutzt, die Gruppen, die es bildet, die Richtungen, die es findet --- sie beschreiben die Daten, nicht die Krankheit. Wer aus ihnen Mechanismen ableitet, verlässt die Mathematik dieses Bandes und braucht eine andere: die der Ursachen, die hier nicht behandelt wurde.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was offen ist}
+
+\begin{merksatz}
+\boxtitel{Vier Fragen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Verallgemei\-nerung} & Warum lernen überparametrisierte Netze? Kapitel~14 zeigt Teilantworten, keine vollständige.\\
+\textbf{Übertragung} & Wann gilt, was an einer Klinik gelernt wurde, auch an einer anderen?\\
+\textbf{Ursachen} & Welche Behandlung hilft diesem Patienten? Vorhersage beantwortet das nicht.\\
+\textbf{Gerechtigkeit} & Wie verhindert man, dass ein Verfahren bestehende Ungleichheit fortschreibt?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Zur vierten Frage: ein Fall aus dem Jahr 2019}
+Ein in amerikanischen Kliniken weit verbreitetes Verfahren sollte Patienten mit hohem Betreuungsbedarf erkennen. Gelernt hatte es aus den \kursiv{Behandlungskosten} der Vorjahre.\zit{16}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Weil schwarze Patienten bei gleicher Krankheitslast im Durchschnitt weniger Behandlung erhalten hatten --- aus Gründen des Zugangs, nicht des Bedarfs ---, waren ihre Kosten niedriger. \textbf{Das Verfahren sagte die Kosten richtig vorher und den Bedarf falsch}: Bei gleicher Risikoeinstufung waren schwarze Patienten deutlich kränker. Nach Berichtigung der Zielgröße hätte sich der Anteil schwarzer Patienten im Förderprogramm mehr als verdoppelt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein Fehler im Verfahren --- ein Fehler in der Wahl dessen, was es lernen sollte.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die erste Warnung des Vorworts in ihrer folgenreichsten Gestalt. \textbf{Ein Verfahren lernt, was in den Daten steht}, und wenn in den Daten eine Ungerechtigkeit steht, lernt es die Ungerechtigkeit --- mit derselben Zuverlässigkeit, mit der es alles andere lernt. Die Mathematik kann das nicht bemerken. Es bemerken nur Menschen, die wissen, wie die Daten entstanden sind.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Sechs Sätze, die bleiben}
+
+\begin{merksatz}
+\boxtitel{Die Bilanz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{0.7cm}P{7.7cm}@{}}
+\toprule
+$1$ & Die beste Regel entscheidet überall für das Wahrscheinlichere --- und kein Verfahren unterbietet ihren Fehler, solange es nur dieselben Merkmale kennt.\\
+$2$ & Der Fehler auf neuen Daten besteht aus Rauschen, Verzerrung und Varianz; nur die letzten beiden hängen vom Verfahren ab.\\
+$3$ & Alles, was aus den Daten gelernt wird, gehört in die Prüfung, nicht davor.\\
+$4$ & Eine Klasse ist genau dann lernbar, wenn ihre VC-Dimension endlich ist.\\
+$5$ & Mitteln hilft nur so weit, wie die Gemittelten sich unterscheiden.\\
+$6$ & Der Gradientenabstieg von null wählt unter allen passenden Lösungen die kürzeste.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Schlusswort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Dieser Band begann mit einer Frage, die älter ist als jedes Verfahren: Wie gewinnt man aus hundert Beobachtungen eine Regel, die auch für die hunderterste stimmt?
+
+Vierzehn Kapitel später lässt sich sagen, was das Fach darauf antwortet. Es antwortet nicht mit einem Verfahren, sondern mit einer Rechnung: wie viele Beobachtungen man braucht, wenn man wenig Freiheit lässt; wie man die Freiheit misst; woran man merkt, dass man zu viel gelassen hat. Und es antwortet mit einer Warnung: dass jede dieser Rechnungen voraussetzt, die hunderterste Beobachtung stamme aus derselben Welt wie die ersten hundert.
+
+In der Klinik tut sie das selten. Patienten wechseln, Praxis ändert sich, Definitionen werden neu gefasst. Das Lernen aus Daten ist darum nicht das Ende des ärztlichen Urteils, sondern eine seiner Voraussetzungen --- eine Rechnung, die man kennen muss, um zu wissen, wann man ihr nicht trauen darf.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit steht dieser Band neben den vorangegangenen. Die Statistik sagt, was die Daten hergeben. Die Optimierung sagt, was es kostet. Die Informationstheorie sagt, was übertragbar ist. Die Spieltheorie sagt, was übrig bleibt, wenn der andere es auch weiß. \textbf{Und das Lernen sagt, was von alldem auf den nächsten Fall zutrifft --- und wann nicht.}}
+\end{minipage}
+\end{center}
+\end{merksatz}

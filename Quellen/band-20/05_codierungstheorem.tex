@@ -1,0 +1,658 @@
+\chapter{Das Kanalcodierungstheorem}
+
+\section{Die Aussage}
+
+\begin{merksatz}
+\boxtitel{Satz 5.1 --- Shannon, 1948}
+Sei $C$ die Kapazität eines diskreten gedächtnislosen Kanals.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.0cm}P{6.6cm}@{}}
+\toprule
+\textbf{Erreichbar} & Für jede Rate $R < C$ und jedes $\varepsilon > 0$ gibt es ein $n$ und einen Code der Länge $n$ mit Rate $R$, dessen Fehlerwahrscheinlichkeit kleiner als $\varepsilon$ ist.\\
+\textbf{Umkehrung} & Für $R > C$ lässt sich die Fehlerwahrscheinlichkeit nicht beliebig klein machen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Übergang bei $R = C$ ist scharf.} Unterhalb geht alles, oberhalb nichts.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (6.4,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,2.6);
+\fill[gruen!18] (0,0) rectangle (3.4,2.2);
+\fill[akzent!14] (3.4,0) rectangle (6.2,2.2);
+\draw[akzent, line width=1.4pt] (3.4,0) -- (3.4,2.2);
+\node[font=\scriptsize, color=gruen!70!black] at (1.7,1.1) {Fehler $\to 0$ möglich};
+\node[font=\scriptsize, color=akzent] at (4.8,1.1) {unmöglich};
+\node[font=\scriptsize, color=akzent, anchor=north] at (3.4,-0.15) {$C$};
+\node[font=\scriptsize, color=grau] at (3.1,-0.85) {Rate $R$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide Teile sind bemerkenswert. Die Umkehrung entspricht der Erwartung --- irgendwo muss eine Grenze liegen. Die Erreichbarkeit widerspricht ihr: Sie behauptet, dass bis unmittelbar an diese Grenze heran \kursiv{beliebig} zuverlässig übertragen werden kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Typische Folgen}
+
+\begin{merksatz}
+\boxtitel{Der Schlüsselbegriff}
+Eine Quelle liefert unabhängige Symbole. Betrachtet man lange Folgen, so zerfällt der Raum aller Folgen in zwei sehr ungleiche Teile.
+
+\schritt{Ein Zahlenbeispiel}
+Eine Binärquelle mit $p(1) = 0{,}1$, Folgen der Länge $100$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Anzahl} & \textbf{Gesamt-Wahrsch.}\\
+\midrule
+Alle Folgen & $2^{100}$ & $1$\\
+\textbf{Typische} & $\approx 2^{46{,}9}$ & $\approx 1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Anteil von $2^{-53{,}1} \approx 10^{-16}$ aller Folgen trägt nahezu die gesamte Wahrscheinlichkeit.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Anschaulich: Fast jede tatsächlich auftretende Folge hat etwa zehn Einsen. Folgen mit fünfzig Einsen gibt es zwar weit mehr, aber sie kommen praktisch nie vor. \textbf{Die Menge der typischen Folgen ist winzig und trägt alles.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 5.2 --- typische Menge}
+Für $\varepsilon > 0$ ist
+\[ A_\varepsilon^{(n)} = \left\{ (x_1,\ldots,x_n) \ : \ \left|-\tfrac1n\,\lb p(x_1,\ldots,x_n) - \Ent(X)\right| \le \varepsilon \right\} . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 5.3 --- die asymptotische Gleichverteilungseigenschaft}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & $\Pr\bigl[A_\varepsilon^{(n)}\bigr] \to 1$ für $n\to\infty$.\\
+$2$ & $\bigl|A_\varepsilon^{(n)}\bigr| \le 2^{\,n(\Ent+\varepsilon)}$.\\
+$3$ & $\bigl|A_\varepsilon^{(n)}\bigr| \ge (1-\varepsilon)\,2^{\,n(\Ent-\varepsilon)}$ für hinreichend großes $n$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis von 1}
+Für unabhängige Symbole gilt
+\[ -\frac1n\,\lb p(x_1,\ldots,x_n) = -\frac1n\sum_{i=1}^{n} \lb p(x_i) . \]
+
+Das ist der Mittelwert von $n$ unabhängigen, gleichverteilten Zufallsgrößen $-\lb p(X_i)$ mit dem Erwartungswert
+\[ \mathbb{E}\bigl[-\lb p(X)\bigr] = -\sum_x p(x)\,\lb p(x) = \Ent(X) . \]
+
+Nach dem schwachen Gesetz der großen Zahlen (Band 12) strebt dieser Mittelwert in Wahrscheinlichkeit gegen $\Ent(X)$. \checkmark
+
+\schritt{Beweis von 2}
+Für jede typische Folge gilt nach Definition
+\[ p(x_1,\ldots,x_n) \ \ge\ 2^{-n(\Ent+\varepsilon)} . \]
+Da die Gesamtwahrscheinlichkeit höchstens eins ist:
+\[ 1 \ \ge\ \sum_{\vek{x}\in A} p(\vek{x}) \ \ge\ \bigl|A\bigr|\cdot 2^{-n(\Ent+\varepsilon)} \]
+Umstellen liefert die Behauptung. \checkmark
+
+\schritt{Beweis von 3}
+Nach Teil 1 ist $\Pr[A] \ge 1-\varepsilon$ für großes $n$. Andererseits ist jede Einzelwahrscheinlichkeit höchstens $2^{-n(\Ent-\varepsilon)}$:
+\[ 1-\varepsilon \ \le\ \Pr[A] \ \le\ |A|\cdot 2^{-n(\Ent-\varepsilon)} \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Satz besagt, dass sich die typischen Folgen näherungsweise wie eine \kursiv{Gleichverteilung} über $2^{n\Ent}$ Möglichkeiten verhalten --- daher der Name. Das ist der Grund, warum man in der Informationstheorie so oft mit Zweierpotenzen abzählen darf: Man arbeitet in Wahrheit stets auf der typischen Menge.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Beweisgedanke}
+
+\begin{merksatz}
+\boxtitel{Die Kugelpackung}
+Beim binären symmetrischen Kanal mit Fehlerrate $f$ gilt: Wird $\vek{x}$ gesendet, so ist das Rauschmuster typisch --- es enthält etwa $nf$ Einsen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Empfangsvektor liegt also in einer \enquote{Kugel} von etwa $2^{\,n\,h(f)}$ Folgen um $\vek{x}$.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Abzählung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+& \textbf{allgemein} & $n=100$, $f=0{,}1$\\
+\midrule
+Alle Folgen & $2^{n}$ & $2^{100}$\\
+Eine Kugel & $2^{\,n\,h(f)}$ & $2^{46{,}9}$\\
+\textbf{Kugeln, die passen} & $2^{\,n(1-h(f))}$ & $\mathbf{2^{53{,}1}}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ 1-h(f) = C \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es passen höchstens $2^{nC}$ überschneidungsfreie Kugeln in den Raum --- also höchstens $2^{nC}$ Codewörter.} Das ergibt die Rate $C$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[tief!50, line width=1.0pt] (-0.2,-1.5) rectangle (6.6,1.5);
+\foreach \x/\y in {0.7/0.7, 2.0/-0.6, 3.3/0.8, 4.5/-0.5, 5.7/0.6, 1.4/-0.9, 4.0/0.0}
+  {\draw[akzent!55, line width=0.8pt] (\x,\y) circle (0.52); \fill[akzent] (\x,\y) circle (1.8pt);}
+\node[font=\scriptsize\itshape, color=grau] at (3.2,-1.95) {alle $2^{n}$ Folgen, je Codewort eine Kugel};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieses Argument liefert nur die \kursiv{obere} Schranke --- dass nicht mehr geht. Dass so viele Codewörter tatsächlich unterzubringen sind, folgt daraus nicht: Kugelpackungen lassen im Allgemeinen Zwischenräume. Der zweite Teil ist der schwierigere.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Zufallscodierung}
+Shannons Kunstgriff: Statt einen guten Code zu \kursiv{konstruieren}, wählt man ihn zufällig und zeigt, dass er im Mittel gut ist.
+
+\schritt{Der Aufbau}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Man wähle $2^{\,nR}$ Codewörter der Länge $n$ rein zufällig.\\
+$2$ & Sender und Empfänger kennen beide die Tabelle.\\
+$3$ & Der Empfänger entscheidet für dasjenige Codewort, das mit dem Empfangenen typisch verbunden ist.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die Fehlerabschätzung}
+Ein Fehler entsteht, wenn ein \kursiv{falsches} Codewort ebenfalls in die Entscheidungskugel fällt.
+
+\kursiv{Für ein einzelnes falsches Wort:}
+\[ \Pr[\text{fällt hinein}] \ \approx\ \frac{2^{\,n\,h(f)}}{2^{n}} = 2^{-n(1-h(f))} = 2^{-nC} \]
+
+\kursiv{Für alle $2^{nR}-1$ falschen zusammen} --- über die Summenabschätzung:
+\[ \Pr[\text{Fehler}] \ \lesssim\ 2^{\,nR}\cdot 2^{-nC} = 2^{-n(C-R)} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Für $R < C$ ist der Exponent negativ --- die Fehlerwahrscheinlichkeit fällt exponentiell in $n$.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Zahlen für den Leitfall}
+$f = 0{,}1$, also $C = 0{,}531$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+$n$ & $R$ & \textbf{Exponent} & \textbf{Schranke}\\
+\midrule
+$100$ & $0{,}20$ & $-33{,}1$ & $1{,}1\cdot10^{-10}$\\
+$100$ & $0{,}40$ & $-13{,}1$ & $1{,}1\cdot10^{-4}$\\
+$100$ & $0{,}50$ & $-3{,}1$ & $1{,}2\cdot10^{-1}$\\
+$1000$ & $0{,}40$ & $-131$ & $3{,}7\cdot10^{-40}$\\
+$1000$ & $0{,}50$ & $-31$ & $4{,}6\cdot10^{-10}$\\
+$10\,000$ & $0{,}52$ & $-110$ & $7{,}5\cdot10^{-34}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist der Punkt: Bei einer Rate von $0{,}52$ --- also $98$ Prozent der Kapazität --- ist die Fehlerwahrscheinlichkeit bei Blocklänge $10\,000$ kleiner als $10^{-33}$. Zum Vergleich: Der Wiederholungscode aus Aufgabe 4.3 erreichte bei Rate $0{,}048$ nur $10^{-6}$.}
+\end{minipage}
+\end{center}
+
+\schritt{Der letzte Schritt}
+Die Rechnung liefert den \kursiv{Mittelwert} über alle zufälligen Codes. Ist der Mittelwert kleiner als $\varepsilon$, so muss mindestens ein Code mindestens so gut sein.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Also existiert ein guter Code.} Welcher, sagt der Beweis nicht.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Umkehrung}
+
+\begin{merksatz}
+\boxtitel{Satz 5.4 --- die Ungleichung von Fano}
+Schätzt man $X$ aus $Y$ mit der Fehlerwahrscheinlichkeit $P_e$, so gilt
+\[ \Ent(X\mid Y) \ \le\ h(P_e) + P_e\,\lb\bigl(|\mathcal{X}|-1\bigr) . \]
+
+\schritt{Der Gedanke}
+Die verbleibende Ungewissheit zerfällt in zwei Teile: die Frage, \kursiv{ob} ein Fehler vorliegt --- höchstens $h(P_e)$ Bit --- und im Fehlerfall die Frage, welcher der übrigen Werte richtig ist.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ist $P_e$ klein, so ist $\Ent(X\mid Y)$ klein.} Das ist die Richtung, die für die Umkehrung gebraucht wird.
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+$P_e$ & \textbf{Schranke bei $|\mathcal{X}|=2$} & \\
+\midrule
+$0{,}001$ & $0{,}0114$ & \\
+$0{,}010$ & $0{,}0808$ & \\
+$0{,}100$ & $0{,}4690$ & \\
+$0{,}500$ & $1{,}0000$ & wertlos\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 5.5 --- die Datenverarbeitungsungleichung}
+Bilden $X \to Y \to Z$ eine Kette --- also hängt $Z$ nur über $Y$ von $X$ ab ---, so gilt
+\[ I(X;Z) \ \le\ I(X;Y) . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Keine Nachbearbeitung kann Information hinzufügen, die nicht angekommen ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Aussage hinter Aufgabe 4.2(d), wo zwei hintereinandergeschaltete Kanäle weniger leisteten als einer. Sie hat weitreichende Folgen: \textbf{Kein noch so raffiniertes Verfahren kann aus verrauschten Daten mehr herausholen, als in ihnen steckt} --- eine Warnung, die in der Datenauswertung so oft überhört wird wie in der Nachrichtentechnik.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Umkehrung des Codierungstheorems}
+\schritt{Der Aufbau}
+Eine Nachricht $W$ aus $2^{nR}$ Möglichkeiten wird codiert, über den Kanal geschickt und zu $\hat W$ decodiert.
+
+\schritt{Schritt 1 --- die Entropie der Nachricht}
+Bei gleichverteilter Nachricht:
+\[ \Ent(W) = nR \]
+
+\schritt{Schritt 2 --- zerlegen}
+\[ nR = \Ent(W) = I(W;\hat W) + \Ent(W\mid\hat W) \]
+
+\schritt{Schritt 3 --- beide Teile abschätzen}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+$I(W;\hat W)$ & $\le n\,C$ nach Satz 5.5, da $W \to X^n \to Y^n \to \hat W$\\
+$\Ent(W\mid\hat W)$ & $\le 1 + P_e\cdot nR$ nach Satz 5.4\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 4 --- zusammensetzen}
+\[ nR \ \le\ nC + 1 + P_e\,nR \]
+
+Division durch $n$:
+\[ R \ \le\ C + \frac1n + P_e\,R \]
+
+\schritt{Schritt 5 --- der Schluss}
+Soll $P_e \to 0$ gelten, so folgt im Grenzwert
+\[ R \ \le\ C . \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Umgestellt liefert die Ungleichung sogar mehr: $P_e \ge 1 - \frac{C}{R} - \frac{1}{nR}$. \textbf{Oberhalb der Kapazität bleibt die Fehlerwahrscheinlichkeit nicht nur positiv, sondern über einer festen Schranke} --- bei $R = 2C$ etwa über $\frac12$. Es wird also nicht \enquote{ein bisschen schlechter}, sondern unbrauchbar.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was der Beweis nicht liefert}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Keinen Code} & Der Beweis zeigt, dass ein guter Code existiert. Er gibt keinen an.\\
+\textbf{Keine Blocklänge} & \enquote{Für hinreichend großes $n$} --- wie groß, steht nicht da.\\
+\textbf{Keine Decodierung} & Die typische Decodierung erfordert den Vergleich mit allen $2^{nR}$ Codewörtern. Bei $n=1000$ und $R=0{,}5$ sind das $2^{500}$ Vergleiche.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Satz sagt, dass es geht --- nicht, wie.} Zwischen 1948 und der praktischen Erreichung der Kapazität lagen über fünfzig Jahre.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist die ernsteste. Ein zufälliger Code ist beweisbar gut und praktisch unbrauchbar, weil man weder die Tabelle speichern noch die Decodierung durchführen kann. \textbf{Man braucht Codes mit Struktur} --- und Struktur ist genau das, was der Beweis wegwirft. Kapitel~6 behandelt, wie man beides zusammenbringt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und die Blocklänge kostet Verzögerung}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Der Zielkonflikt} & Große Blöcke bringen die Rate nahe an $C$ --- und erzeugen Wartezeit, weil der Block vollständig vorliegen muss.\\
+\textbf{Im Leitfall} & Bei $10\,000$ Übertragungen je Sekunde bedeutet $n=10\,000$ eine Sekunde Verzögerung.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für die Übertragung eines Ruhe-EKG ist das gleichgültig; für die Fernsteuerung eines Eingriffs nicht. Die Theorie der \Begriff{endlichen Blocklängen} --- seit etwa 2010 systematisch entwickelt --- gibt an, wie nahe man bei gegebenem $n$ und gegebener Fehlerrate an $C$ herankommt. \textbf{Sie schließt genau die Lücke, die Shannons asymptotische Aussage offenlässt.}}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.1 --- Die typische Menge}
+Eine Quelle liefert unabhängig \enquote{auffällig} mit $0{,}2$. Bestimmen Sie für $n=50$ die Größe der typischen Menge und ihren Anteil.
+
+\loesung
+\schritt{Schritt 1 --- Die Entropie}
+\[ \Ent = h(0{,}2) = 0{,}7219 \ \text{Bit} \]
+
+\schritt{Schritt 2 --- Die typische Menge}
+\[ \bigl|A\bigr| \approx 2^{\,50\cdot0{,}7219} = 2^{36{,}1} \approx 7{,}2\cdot10^{10} \]
+
+\schritt{Schritt 3 --- Alle Folgen}
+\[ 2^{50} \approx 1{,}13\cdot10^{15} \]
+
+\schritt{Schritt 4 --- Der Anteil}
+\[ \frac{2^{36{,}1}}{2^{50}} = 2^{-13{,}9} \approx 6{,}5\cdot10^{-5} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Etwa sechs Hunderttausendstel aller Folgen tragen nahezu die gesamte Wahrscheinlichkeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Probe über die Anzahl der Einsen}
+Eine typische Folge hat etwa $50\cdot0{,}2 = 10$ Einsen. Die Zahl solcher Folgen:
+\[ \binom{50}{10} = 1{,}03\cdot10^{10} \]
+
+\kursiv{Vergleich:} $7{,}2\cdot10^{10}$ gegen $1{,}03\cdot10^{10}$ --- dieselbe Größenordnung. \checkmark
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Der Unterschied um den Faktor sieben rührt daher, dass die typische Menge nicht nur Folgen mit \kursiv{genau} zehn Einsen enthält, sondern ein ganzes Band darum. Die Näherung $\binom{n}{np} \approx 2^{n h(p)}$ ist die Standardabschätzung dahinter; sie stimmt bis auf einen Faktor der Ordnung $\sqrt{n}$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Was das für die Kompression bedeutet}
+Man braucht nur die typischen Folgen zu nummerieren:
+\[ \lceil 36{,}1 \rceil = 37 \ \text{Bit statt } 50 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist ein zweiter Beweis des Quellencodierungssatzes --- und der, den Shannon ursprünglich führte. \textbf{Man codiert nur die typischen Folgen und nimmt in Kauf, dass der Rest scheitert}, weil dieser Rest mit wachsendem $n$ verschwindend unwahrscheinlich wird. Die Ersparnis von $13$ Bit entspricht $50\cdot(1-0{,}7219) = 13{,}9$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.2 --- Blocklänge bestimmen}
+Für den Leitfall ($f=0{,}1$, $C = 0{,}531$) soll bei Rate $R = 0{,}45$ die Fehlerwahrscheinlichkeit unter $10^{-9}$ liegen. Welche Blocklänge genügt nach der Zufallscodierungsschranke?
+
+\loesung
+\schritt{Schritt 1 --- Die Schranke}
+\[ P_e \ \lesssim\ 2^{-n(C-R)} \]
+
+\schritt{Schritt 2 --- Auflösen}
+\[ 2^{-n(0{,}531-0{,}45)} \ \le\ 10^{-9} \]
+\[ -n\cdot0{,}081 \ \le\ \lb 10^{-9} = -29{,}90 \]
+\[ n \ \ge\ \frac{29{,}90}{0{,}081} = 369 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Blocklänge von etwa $370$ genügt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Abhängigkeit vom Abstand zur Kapazität}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+$R$ & $C-R$ & \textbf{nötiges $n$}\\
+\midrule
+$0{,}30$ & $0{,}231$ & $130$\\
+$0{,}45$ & $0{,}081$ & $370$\\
+$0{,}50$ & $0{,}031$ & $965$\\
+$0{,}52$ & $0{,}011$ & $2718$\\
+$0{,}525$ & $0{,}006$ & $\mathbf{4983}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die nötige Blocklänge wächst wie $1/(C-R)$.} Die letzten Prozente der Kapazität sind unverhältnismäßig teuer.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Ein Vorbehalt}
+Die Schranke $2^{-n(C-R)}$ ist eine Näherung; die genaue Zufallscodierungsschranke hat einen anderen Exponenten, der für $R$ nahe $C$ kleiner ausfällt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die tatsächlich nötigen Blocklängen sind daher größer als hier berechnet --- meist um einen Faktor zwischen zwei und zehn. Die Größenordnung und vor allem das Verhalten $1/(C-R)^2$ bei der genaueren Rechnung bleiben bestehen. \textbf{Für Anwendungen in der Nähe der Kapazität rechnet man mit Blocklängen im Bereich von Tausenden.}}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Einordnung}
+Moderne Codes erreichen bei Blocklängen um $10^{4}$ tatsächlich Raten innerhalb weniger Prozent der Kapazität.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Rechnung sagt also die richtige Größenordnung vorher --- und sie erklärt, warum die praktische Erreichung der Kapazität erst gelang, als Speicher und Rechenleistung für solche Blocklängen verfügbar wurden.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.3 --- Die Umkehrung anwenden}
+Über den Leitfall-Kanal wird mit Rate $R = 0{,}8$ gesendet. Wie klein kann die Fehlerwahrscheinlichkeit höchstens werden?
+
+\loesung
+\schritt{Schritt 1 --- Die Ungleichung}
+Aus Schritt 4 der Umkehrung:
+\[ R \ \le\ C + \frac1n + P_e\,R \]
+
+Für großes $n$ entfällt $\frac1n$:
+\[ P_e \ \ge\ 1 - \frac{C}{R} \]
+
+\schritt{Schritt 2 --- Einsetzen}
+\[ P_e \ \ge\ 1 - \frac{0{,}531}{0{,}8} = 1 - 0{,}664 = \mathbf{0{,}336} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mindestens jede dritte Nachricht kommt falsch an --- unabhängig von jeder Codierung.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Tabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+$R$ & $C/R$ & $P_e \ge$\\
+\midrule
+$0{,}531$ & $1{,}000$ & $0{,}000$\\
+$0{,}60$ & $0{,}885$ & $0{,}115$\\
+$0{,}80$ & $0{,}664$ & $0{,}336$\\
+$1{,}00$ & $0{,}531$ & $0{,}469$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Die Probe an der letzten Zeile}
+Bei $R = 1$ wird uncodiert gesendet, und jedes Bit kippt mit $0{,}1$. Die Fehlerrate \kursiv{je Bit} beträgt also $0{,}1$.
+
+\kursiv{Scheinbarer Widerspruch:} Die Schranke sagt $0{,}469$.
+
+\kursiv{Auflösung:} $P_e$ ist die Wahrscheinlichkeit, dass die \kursiv{gesamte Nachricht} falsch ist. Bei $n$ Bit ohne Codierung:
+\[ P_e = 1-(0{,}9)^{n} \ \longrightarrow\ 1 \]
+
+Das ist verträglich mit der Schranke $0{,}469$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Verwechslung von Blockfehlerrate und Bitfehlerrate ist einer der häufigsten Fehler beim Umgang mit diesen Sätzen. \textbf{Satz 5.1 handelt von Blöcken.} Für die Bitfehlerrate gilt eine schwächere, aber ebenfalls scharfe Schranke, die mit der Verzerrungstheorie aus Kapitel~8 zusammenhängt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Oberhalb der Kapazität bricht die Übertragung nicht allmählich ein, sondern stürzt ab. Das erklärt eine vertraute Erfahrung: Funkverbindungen und Datenleitungen arbeiten entweder sauber oder gar nicht --- eine Zwischenzone gibt es kaum. \textbf{Die Schärfe des Übergangs bei $R=C$ ist im Alltag beobachtbar.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein nicht konstruktiver Beweis}
+Shannons Beweis der Erreichbarkeit war der erste bedeutende Einsatz der \Begriff{probabilistischen Methode} in der Nachrichtentechnik: Man beweist die Existenz eines Objekts, indem man zeigt, dass ein zufällig gewähltes die gewünschte Eigenschaft mit positiver Wahrscheinlichkeit hat.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Paul Erdős} machte dieselbe Methode etwa gleichzeitig in der Kombinatorik populär. Sie hat eine unangenehme Eigenschaft: Sie beweist, dass etwas existiert, und lässt einen völlig ratlos, wie es aussieht. Für die Nachrichtentechnik bedeutete das ein halbes Jahrhundert Suche.}
+\end{minipage}
+\end{center}
+
+\schritt{Der lange Weg}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.4cm}P{2.6cm}P{3.8cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Code} & \textbf{Abstand zu $C$}\\
+\midrule
+$1950$ & Hamming & groß\\
+$1960$ & Reed-Solomon & erheblich\\
+$1962$ & LDPC (Gallager) & \textcolor{gruen}{klein --- unbemerkt}\\
+$1993$ & Turbo-Codes & $0{,}5$ dB\\
+$1996$ & LDPC wiederentdeckt & $0{,}04$ dB\\
+$2008$ & Polar-Codes & \textcolor{gruen}{beweisbar erreichend}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Gallagers Arbeit}
+\Person{Robert Gallager} beschrieb 1962 in seiner Dissertation Codes, die der Kapazität sehr nahe kommen. Sie wurden vergessen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Grund war schlicht: Die nötige Rechenleistung existierte nicht. Erst dreißig Jahre später, nach der Aufsehen erregenden Vorstellung der Turbo-Codes 1993, suchte man erneut --- und fand Gallagers Arbeit wieder. \textbf{Ein Verfahren kann seiner Zeit so weit voraus sein, dass es unbemerkt bleibt} --- dasselbe Muster wie bei Kantorowitsch in Band 19.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Turbo-Codes}
+\Person{Claude Berrou} und \Person{Alain Glavieux} stellten sie 1993 vor. Die berichteten Ergebnisse lagen so nahe an der Kapazität, dass Fachleute zunächst einen Rechenfehler vermuteten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Ergebnisse wurden bestätigt. Bemerkenswert ist, dass die Erfinder keine Informationstheoretiker waren --- sie hatten die Konstruktion aus praktischen Erwägungen gefunden, und die Theorie ihres Funktionierens folgte erst Jahre später nach.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Nach dem Theorem}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Endliche Blocklängen} & Wie nahe kommt man bei gegebenem $n$? Seit 2010 gibt es scharfe Näherungen.\\
+\textbf{Polar-Codes} & Die erste Familie mit beweisbarer Erreichung der Kapazität und effizienter Decodierung.\\
+\textbf{Kurze Blöcke} & Für Anwendungen mit Echtzeitanforderung sind Blocklängen unter hundert nötig --- ein eigenes Forschungsfeld.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Die Näherung lautet
+\[ R \ \approx\ C - \sqrt{\frac{V}{n}}\;Q^{-1}(\varepsilon) \]
+mit der \Begriff{Kanaldispersion} $V$ und der inversen Normalverteilung $Q^{-1}$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Abstand zur Kapazität schrumpft also wie $1/\sqrt{n}$ --- deutlich langsamer, als die einfache Schranke aus Aufgabe 5.2 nahelegt. Bemerkenswert ist, dass hier eine Normalverteilung auftritt: Die Aussage ist im Kern ein zentraler Grenzwertsatz für die Informationsdichte, und $V$ ist deren Varianz.}
+\end{minipage}
+\end{center}
+
+\schritt{Zu den Polar-Codes}
+\Person{Erdal Arıkan} stellte sie 2008 vor. Sie beruhen auf einem überraschenden Gedanken: Man verwandelt $n$ gleiche Kanäle in $n$ \kursiv{ungleiche} --- teils fast perfekte, teils fast wertlose --- und benutzt nur die guten.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Anteil der guten strebt gegen $C$. Das Verfahren ist der erste vollständige Beweis mit einem konkreten Code --- sechzig Jahre nach Shannon. Polar-Codes sind seit 2016 Bestandteil des Mobilfunkstandards der fünften Generation.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 5.1} & scharfer Übergang bei $R=C$\\
+\textbf{Satz 5.3} & typische Menge: winzig, trägt alles\\
+\textbf{Kugelpackung} & $2^{nC}$ Codewörter passen\\
+\textbf{Zufallscodierung} & Fehler $\lesssim 2^{-n(C-R)}$\\
+\textbf{Sätze 5.4, 5.5} & Fano und Datenverarbeitung\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel bauen wir Codes, die man auch benutzen kann --- und sehen, wie weit der Weg vom Existenzbeweis zur Technik war.}
+\end{minipage}
+\end{center}
+\end{merksatz}

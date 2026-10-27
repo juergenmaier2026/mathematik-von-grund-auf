@@ -1,0 +1,534 @@
+\part{Die Theorie}
+
+\chapter{Wie viele Beispiele man braucht}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{Wann sagt der Trainingsfehler etwas?}
+Kapitel~2 zeigte, dass der Trainingsfehler zu optimistisch ist, und gab für lineare Modelle mit $p$ Parametern die Korrektur $2\sigma^{2}p/n$ an. Kapitel~3 zeigte, wie man den Testfehler mit zurückgehaltenen Daten schätzt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Offen ist die grundsätzliche Frage: Unter welchen Bedingungen liegt der Trainingsfehler \kursiv{garantiert} nahe am Testfehler --- und wie viele Beispiele braucht man dafür?}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Antwort muss für \kursiv{jede} Verteilung gelten, denn wir kennen die Verteilung nicht. \textbf{Und sie muss für die gewählte Regel gelten}, obwohl diese gerade deshalb gewählt wurde, weil sie auf den Trainingsdaten gut aussah --- das ist die Schwierigkeit, an der Kapitel~3 den Betrug festmachte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 7.1 --- wahrscheinlich ungefähr richtig}
+Eine Klasse $\Hyp$ von Regeln heißt \Begriff{lernbar}, wenn es zu jeder Genauigkeit $\varepsilon > 0$ und jeder Irrtumswahrscheinlichkeit $\delta > 0$ eine Stichprobengröße $n(\varepsilon,\delta)$ gibt, so dass für \kursiv{jede} Verteilung gilt:
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+Mit Wahrscheinlichkeit mindestens $1-\delta$ liegt das Risiko der gelernten Regel höchstens um $\varepsilon$ über dem der besten Regel in $\Hyp$.
+\end{minipage}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die beiden Toleranzen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Ungefähr} & $\varepsilon$: Man verlangt nicht das beste Ergebnis, sondern eines, das nahe daran liegt.\\
+\textbf{Wahrscheinlich} & $\delta$: Man verlangt es nicht sicher, denn eine unglückliche Stichprobe kann jeden täuschen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide Toleranzen sind unvermeidlich. \textbf{Mit endlich vielen Beispielen ist keine exakte Aussage möglich}, und keine sichere --- es könnte ja zufällig nur gesunde Patienten mit hohem Laktat gezogen haben. Der Begriff heißt nach den englischen Anfangsbuchstaben PAC, \enquote{probably approximately correct}.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Endlich viele Regeln}
+
+\begin{merksatz}
+\boxtitel{Der einfachste Fall}
+Die Laktatschwelle werde nur in Schritten von $0{,}1$ zwischen $0$ und $10$ mmol/l gewählt --- das sind $|\Hyp| = 101$ Regeln.
+
+\schritt{Satz 7.2 --- wenn eine Regel fehlerfrei ist}
+Gibt es in $\Hyp$ eine Regel mit Risiko null, und wählt man eine Regel, die alle Trainingsdaten richtig einordnet, so hat sie mit Wahrscheinlichkeit mindestens $1-\delta$ ein Risiko von höchstens $\varepsilon$, sobald
+\[ n \ \ge\ \frac{\ln|\Hyp| + \ln(1/\delta)}{\varepsilon} . \]
+
+\schritt{Beweis}
+Nenne eine Regel \kursiv{schlecht}, wenn ihr Risiko größer als $\varepsilon$ ist.
+
+\kursiv{Eine einzelne schlechte Regel} ordnet jeden Patienten mit Wahrscheinlichkeit höchstens $1-\varepsilon$ richtig ein. Alle $n$ unabhängig gezogenen richtig einzuordnen, gelingt ihr mit Wahrscheinlichkeit höchstens
+\[ (1-\varepsilon)^{n} \ \le\ e^{-\varepsilon n} , \]
+denn $1-\varepsilon \le e^{-\varepsilon}$ (Band 3, die Tangente an die Exponentialfunktion).
+
+\kursiv{Irgendeine schlechte Regel} täuscht mit Wahrscheinlichkeit höchstens der Summe über alle --- höchstens $|\Hyp|$ Stück:
+\[ \Pr[\text{eine schlechte Regel ist fehlerfrei}] \ \le\ |\Hyp|\,e^{-\varepsilon n} . \]
+
+\kursiv{Soll das höchstens $\delta$ sein}, so braucht man
+\[ |\Hyp|\,e^{-\varepsilon n} \le \delta \quad\Longleftrightarrow\quad \varepsilon n \ge \ln|\Hyp| + \ln(1/\delta) . \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Zahl der Regeln geht nur logarithmisch ein.} Verdoppelt man sie, braucht man nur $\ln2/\varepsilon$ Beispiele mehr.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 7.3 --- wenn keine Regel fehlerfrei ist}
+Im allgemeinen Fall liegt mit Wahrscheinlichkeit mindestens $1-\delta$ der Trainingsfehler \kursiv{jeder} Regel in $\Hyp$ höchstens $\varepsilon$ neben ihrem Risiko, sobald
+\[ n \ \ge\ \frac{\ln|\Hyp| + \ln(2/\delta)}{2\,\varepsilon^{2}} . \]
+
+\schritt{Der Hilfssatz}
+Die \Begriff{Ungleichung von Hoeffding} besagt: Für den Anteil $\hat p$ von Erfolgen in $n$ unabhängigen Versuchen mit Erfolgswahrscheinlichkeit $p$ gilt
+\[ \Pr\bigl[|\hat p - p| > \varepsilon\bigr] \ \le\ 2\,e^{-2n\varepsilon^{2}} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wir verwenden sie ohne Beweis --- die dritte Auslassung dieses Bandes; die Fundstelle ist Shalev-Shwartz und Ben-David\zit{24}, Anhang B. \textbf{Sie ist eine schärfere Fassung des Gesetzes der großen Zahlen}: Nicht nur geht die Abweichung gegen null, sondern die Wahrscheinlichkeit einer großen Abweichung fällt exponentiell.}
+\end{minipage}
+\end{center}
+
+\schritt{Beweis von Satz 7.3}
+Für eine feste Regel ist der Trainingsfehler ein Anteil wie $\hat p$. Nach Hoeffding weicht er mit Wahrscheinlichkeit höchstens $2e^{-2n\varepsilon^{2}}$ um mehr als $\varepsilon$ ab. Für alle Regeln zusammen höchstens das $|\Hyp|$-fache. Gleichsetzen mit $\delta$ und nach $n$ auflösen. $\blacksquare$
+
+\schritt{Der Vergleich}
+Für $|\Hyp| = 101$ und $\delta = 0{,}05$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+$\varepsilon$ & \textbf{eine fehlerfrei} & \textbf{allgemein}\\
+\midrule
+$0{,}05$ & $153$ & $1661$\\
+$0{,}01$ & $762$ & $41\,520$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Im allgemeinen Fall geht die Genauigkeit quadratisch ein} --- zehnmal genauer kostet hundertmal mehr Daten.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist dieselbe Wurzel aus $n$, die in Band 17 die Breite jedes Vertrauensintervalls bestimmt. \textbf{Der fehlerfreie Fall ist schneller, weil eine einzige Fehleinordnung eine schlechte Regel bereits verrät} --- im allgemeinen Fall muss man den Fehleranteil genau genug messen, und das kostet die übliche statistische Genauigkeit.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Unendlich viele Regeln}
+
+\begin{merksatz}
+\boxtitel{Das Problem}
+Lässt man jede Laktatschwelle zu, nicht nur Zehntelschritte, so ist $|\Hyp| = \infty$, und die Schranken aus Abschnitt 7.2 sagen nichts mehr.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Und doch ist offensichtlich, dass sich eine Schwelle aus Daten lernen lässt.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Ausweg}
+Auf $n$ gegebenen Patienten erzeugen alle unendlich vielen Schwellen nur endlich viele \kursiv{verschiedene Einteilungen} --- höchstens $n+1$, je nachdem, zwischen welchen beiden Messwerten die Schwelle liegt.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (7,0);
+\foreach \x in {1,2.2,3.1,4.5,5.8} \fill[tief] (\x,0) circle (2.5pt);
+\foreach \x/\l in {0.5/1,1.6/2,2.65/3,3.8/4,5.15/5,6.4/6}
+  { \draw[akzent!70, line width=0.8pt] (\x,-0.25) -- (\x,0.25); \node[font=\scriptsize, color=akzent] at (\x,0.5) {\l}; }
+\node[font=\scriptsize\itshape, color=grau] at (3.5,-0.6) {fünf Patienten, sechs mögliche Einteilungen durch eine Schwelle};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Entscheidend ist nicht, wie viele Regeln es gibt, sondern wie viele verschiedene Dinge sie auf den Daten tun können.} Unendlich viele Schwellen verhalten sich auf fünf Patienten wie sechs Regeln.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 7.4 --- zerschmettern, VC-Dimension}
+Eine Klasse $\Hyp$ \Begriff{zerschmettert} eine Punktmenge, wenn sie jede der $2^{m}$ möglichen Einteilungen dieser $m$ Punkte in zwei Gruppen erzeugen kann.
+
+Die \Begriff{VC-Dimension} von $\Hyp$ ist die größte Zahl $d$, für die es eine Menge von $d$ Punkten gibt, die $\Hyp$ zerschmettert.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Beispiele}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{3.4cm}P{1.4cm}P{3.4cm}@{}}
+\toprule
+\textbf{Klasse} & $d$ & \textbf{Begründung}\\
+\midrule
+Schwellen auf $\R$ & $1$ & zwei Punkte: \enquote{links ja, rechts nein} unmöglich\\
+Intervalle auf $\R$ & $2$ & Aufgabe 7.2\\
+Halbebenen im $\R^{2}$ & $3$ & Aufgabe 7.3\\
+Halbräume im $\R^{p}$ & $p+1$ & allgemein\\
+Stützvektoren mit Gauß-Kern & $\infty$ & jede Punktmenge trennbar\\
+$\operatorname{sign}\sin(\omega x)$ & $\infty$ & \textcolor{akzent}{ein einziger Parameter!}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die letzte Zeile zerstört die Vorstellung, man könne Parameter einfach zählen.} Die Familie $\sin(\omega x)$ hat nur den Parameter $\omega$ --- und kann doch durch geeignet hohe Frequenz jede Einteilung beliebig vieler geschickt gelegter Punkte erzeugen. Die VC-Dimension misst nicht die Zahl der Stellschrauben, sondern die Ausdrucksfähigkeit.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die vorletzte Zeile ist ebenso wichtig: Der Gauß-Kern aus Kapitel~6 hat unendliche VC-Dimension. \textbf{Nach der Theorie dieses Kapitels dürfte er gar nicht lernen} --- und tut es doch. Kapitel~8 löst den Widerspruch über den Rand.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Fundamentalsatz}
+
+\begin{merksatz}
+\boxtitel{Satz 7.5 --- Sauer, 1972}
+Hat $\Hyp$ die VC-Dimension $d$, so erzeugt $\Hyp$ auf $n$ Punkten höchstens
+\[ \sum_{i=0}^{d}\binom{n}{i} \ \le\ \left(\frac{e\,n}{d}\right)^{d} \]
+verschiedene Einteilungen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{2.2cm}P{3.0cm}@{}}
+\toprule
+$n$ & $2^{n}$ & \textbf{Schranke bei $d = 2$}\\
+\midrule
+$3$ & $8$ & $7$\\
+$5$ & $32$ & $16$\\
+$10$ & $1024$ & $56$\\
+$20$ & $1\,048\,576$ & $211$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Sobald $n$ die VC-Dimension übersteigt, springt das Wachstum von exponentiell auf polynomial.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis ist eine Induktion über $n$ und $d$ --- übersichtlich, aber länger als der Platz hier erlaubt; wir verzichten auf ihn, die vierte Auslassung. \textbf{Für Intervalle ($d = 2$) wird die Schranke genau erreicht}: $1 + n + \binom n2$ Einteilungen --- keine, ein Punkt, ein zusammenhängendes Stück.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 7.6 --- Vapnik und Tscherwonenkis, 1971}
+Eine Klasse ist genau dann lernbar, wenn ihre VC-Dimension endlich ist. In diesem Fall gilt mit Wahrscheinlichkeit mindestens $1-\delta$ für jede Regel $h \in \Hyp$:
+\[ \Risk(h) \ \le\ \hat\Risk(h) + \sqrt{\frac{8}{n}\left(d\,\ln\frac{2e\,n}{d} + \ln\frac4\delta\right)} . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{An die Stelle von $\ln|\Hyp|$ tritt im Wesentlichen $d\ln n$.} Endlich viele Einteilungen genügen --- unendlich viele Regeln schaden nicht.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis führt über einen Kunstgriff, die \enquote{Symmetrisierung}: Man vergleicht zwei unabhängige Stichproben miteinander statt eine Stichprobe mit der unbekannten Verteilung. Dadurch hat man es nur mit endlich vielen Punkten zu tun, und Satz 7.5 greift. \textbf{Wir verzichten auf ihn} --- die fünfte Auslassung; die Fundstelle ist Shalev-Shwartz und Ben-David\zit{24}, Kapitel~28.}
+\end{minipage}
+\end{center}
+
+\schritt{Die beiden Richtungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{$d$ endlich} & Die Schranke geht mit wachsendem $n$ gegen null --- man lernt.\\
+\textbf{$d$ unendlich} & Für jedes $n$ gibt es eine Verteilung, auf der jedes Verfahren versagt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist Satz 1.5 in schärferer Form. \textbf{Bei unendlicher VC-Dimension kann man immer noch auswendig lernen} --- jede Einteilung der Trainingsdaten ist erreichbar ---, und damit ist nichts über ungesehene Daten gesagt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wie lose die Schranke ist}
+Für die Laktatschwelle ($d = 1$, $\delta = 0{,}05$):
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+$n$ & \textbf{Schranke} & \textbf{tatsächlich (95\,\%)}\\
+\midrule
+$100$ & $0{,}924$ & $0{,}041$\\
+$1000$ & $0{,}322$ & $0{,}012$\\
+$100\,000$ & $0{,}038$ & ---\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Die rechte Spalte: Abstand zwischen Test- und Trainingsfehler der besten Schwelle, $500$ Stichproben aus der Verteilung von Kapitel~1, $95$-Prozent-Quantil.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei tausend Patienten garantiert die Schranke eine Genauigkeit von $32$ Prozentpunkten. Tatsächlich liegt sie bei gut einem.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Jede Verteilung} & Die Schranke gilt auch für die bösartigste denkbare. Unsere ist freundlich.\\
+\textbf{Jede Regel} & Sie gilt gleichzeitig für alle, nicht nur für die gewählte.\\
+\textbf{Grobe Konstanten} & Die Faktoren $8$ und $4$ stammen aus Beweisschritten, die großzügig abschätzen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Schranke ist wertlos als Zahl und wertvoll als Form.} Sie sagt, dass die nötige Datenmenge linear mit $d$ und mit $1/\varepsilon^{2}$ wächst --- das stimmt. Sie sagt nicht, wie viele Daten man im Einzelfall braucht --- das kann nur die Kreuzvalidierung aus Kapitel~3.}
+\end{minipage}
+\end{center}
+
+\schritt{Und für große Modelle}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für Halbräume in zwanzig Dimensionen ($d = 21$) liefert die Schranke bei zehntausend Patienten $0{,}37$. \textbf{Für neuronale Netze mit Millionen Parametern ist sie bei jeder realistischen Datenmenge größer als eins} --- also nichtssagend, denn ein Fehler kann nicht größer als eins sein. Dass diese Netze dennoch verallgemeinern, ist mit diesem Kapitel nicht zu erklären.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.1 --- Wie viele Patienten?}
+Die Laktatschwelle wird in Zehntelschritten zwischen $0$ und $10$ gewählt. Wie viele Patienten braucht man für $\varepsilon = 0{,}05$ und $\delta = 0{,}05$?
+
+\loesung
+\schritt{Schritt 1 --- Die Zahl der Regeln}
+\[ |\Hyp| = \frac{10-0}{0{,}1} + 1 = 101, \qquad \ln101 = 4{,}615 \]
+
+\schritt{Schritt 2 --- Wenn eine Schwelle fehlerfrei wäre}
+\[ n \ \ge\ \frac{4{,}615 + \ln20}{0{,}05} = \frac{4{,}615+2{,}996}{0{,}05} = \frac{7{,}611}{0{,}05} = 152{,}2 \]
+\[ \Longrightarrow\ n = 153 \]
+
+\schritt{Schritt 3 --- Im allgemeinen Fall}
+\[ n \ \ge\ \frac{4{,}615 + \ln40}{2\cdot0{,}05^{2}} = \frac{4{,}615+3{,}689}{0{,}005} = \frac{8{,}304}{0{,}005} = 1660{,}8 \]
+\[ \Longrightarrow\ n = 1661 \]
+
+\schritt{Schritt 4 --- Welcher Fall liegt vor?}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach Kapitel~1 überlappen die Laktatverteilungen; die beste Schwelle hat ein Risiko von $3{,}5$ Prozent, nicht null. \textbf{Also gilt der allgemeine Fall}, und man braucht rund $1700$ Patienten --- zehnmal mehr als im fehlerfreien. Wer die falsche Formel nimmt, weil sie bequemer ist, unterschätzt den Bedarf um eine Größenordnung.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Feinere Schritte}
+Bei Hundertstelschritten ist $|\Hyp| = 1001$, $\ln1001 = 6{,}909$:
+\[ n \ \ge\ \frac{6{,}909+3{,}689}{0{,}005} = 2120 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Zehnmal mehr Regeln kosten nur ein Viertel mehr Daten} --- der Logarithmus aus Satz 7.2. Und bei beliebig feiner Schwelle hilft Satz 7.6, mit $d = 1$ statt $\ln|\Hyp| = \infty$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.2 --- Die VC-Dimension von Intervallen}
+Regeln der Form \enquote{Warnung, wenn $a \le x \le b$}. Zeigen Sie $d = 2$.
+
+\loesung
+\schritt{Schritt 1 --- Zwei Punkte werden zerschmettert}
+Punkte $x_1 < x_2$. Alle vier Einteilungen:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{3.6cm}@{}}
+\toprule
+$x_1$ & $x_2$ & \textbf{Intervall}\\
+\midrule
+nein & nein & weit weg, etwa $[x_2+1,\ x_2+2]$\\
+ja & nein & $[x_1,\ x_1]$\\
+nein & ja & $[x_2,\ x_2]$\\
+ja & ja & $[x_1,\ x_2]$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Alle vier erreichbar. \checkmark
+
+\schritt{Schritt 2 --- Drei Punkte werden nicht zerschmettert}
+Punkte $x_1 < x_2 < x_3$. Die Einteilung \enquote{ja, nein, ja}:
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Intervall, das $x_1$ und $x_3$ enthält, enthält alles dazwischen --- also auch $x_2$.}
+\end{minipage}
+\end{center}
+
+Diese Einteilung ist unerreichbar, gleich wo die drei Punkte liegen. \checkmark
+
+\schritt{Schritt 3 --- Die Zahl der Einteilungen}
+Auf $n$ Punkten erzeugen Intervalle: keinen Punkt ($1$ Möglichkeit), ein zusammenhängendes Stück von Punkt $i$ bis Punkt $j$ ($\binom n2 + n$ Möglichkeiten).
+\[ 1 + n + \binom n2 \]
+
+\kursiv{Für $n = 10$:} $1+10+45 = 56$ --- genau die Schranke aus Satz 7.5. \checkmark
+
+\schritt{Schritt 4 --- Die klinische Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Intervall ist ein Normbereich: \enquote{auffällig, wenn außerhalb $[a,b]$}. \textbf{Ein Normbereich kann Hypo- und Hyperthermie gleichzeitig erfassen} --- was eine Schwelle nicht kann. Die zusätzliche Ausdrucksfähigkeit kostet einen Parameter mehr und nach Satz 7.6 etwa doppelt so viele Daten.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.3 --- Halbebenen}
+Zeigen Sie, dass Halbebenen im $\R^{2}$ drei Punkte zerschmettern, aber keine vier.
+
+\loesung
+\schritt{Schritt 1 --- Drei Punkte}
+Man nehme drei Punkte, die nicht auf einer Geraden liegen --- ein Dreieck.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.0cm}@{}}
+\toprule
+\textbf{Einteilung} & \textbf{Gerade}\\
+\midrule
+alle ja oder alle nein & weit außerhalb\\
+einer gegen zwei & schneidet die eine Ecke ab\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Es gibt $2 + 3 + 3 = 8 = 2^{3}$ Einteilungen, und jede ist erreichbar. \checkmark
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Liegen die drei Punkte auf einer Geraden, so gelingt es nicht: \enquote{außen ja, Mitte nein} ist unerreichbar. \textbf{Die Definition verlangt nur, dass es \kursiv{eine} zerschmetterte Menge gibt}, nicht dass jede es ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Vier Punkte}
+\kursiv{Fall A: Die vier bilden ein konvexes Viereck.} Dann ist die Einteilung \enquote{gegenüberliegende Ecken ja, die anderen nein} unerreichbar --- das XOR-Muster aus Aufgabe 6.3.
+
+\kursiv{Fall B: Ein Punkt liegt im Dreieck der anderen drei.} Dann ist \enquote{der innere nein, die äußeren ja} unerreichbar: Eine Halbebene ist konvex, enthält sie die drei Ecken, so enthält sie das ganze Dreieck.
+
+\kursiv{Fall C: Drei liegen auf einer Geraden.} Wie in Schritt 1 gelingt schon die Einteilung dieser drei nicht.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In jedem Fall gibt es eine unerreichbare Einteilung. Also $d = 3$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Verallgemeinerung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im $\R^{p}$ zerschmettern Halbräume $p+1$ Punkte, aber keine $p+2$. \textbf{Das ist genau die Zahl der Parameter} --- $p$ Gewichte und ein Achsenabschnitt. Bei linearen Verfahren stimmt also die naive Faustregel \enquote{Parameter zählen}, und Satz 2.2 aus Kapitel~2 war ein Spezialfall davon. Erst bei nichtlinearen Familien --- Sinus, Kerne, Netze --- fallen beide auseinander.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Zwei Theorien, die sich spät trafen}
+\Person{Wladimir Wapnik} und \Person{Alexei Tscherwonenkis} veröffentlichten 1968 die Theorie der gleichmäßigen Konvergenz, auf der Satz 7.6 beruht.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie arbeiteten am Institut für Steuerungswissenschaften in Moskau und fragten, wann empirische Häufigkeiten gleichzeitig für eine ganze Klasse von Ereignissen gegen ihre Wahrscheinlichkeiten konvergieren. \textbf{Die Antwort --- endliche Dimension --- war ein Satz der Wahrscheinlichkeitstheorie}, und so wurde sie zunächst auch gelesen.}
+\end{minipage}
+\end{center}
+
+\schritt{Valiant}
+\Person{Leslie Valiant} führte 1984 an der Harvard University den PAC-Begriff ein --- aus der Sicht der theoretischen Informatik.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er fragte nicht nur, wie viele Beispiele man braucht, sondern auch, wie viel \kursiv{Rechenzeit}. \textbf{Erst 1989 zeigten Blumer, Ehrenfeucht, Haussler und Warmuth, dass Valiants Begriff und Wapniks Dimension dasselbe beschreiben} --- zwei Theorien auf zwei Kontinenten, zwanzig Jahre auseinander. Valiant erhielt 2010 den Turing-Preis.}
+\end{minipage}
+\end{center}
+
+\schritt{Sauer, Shelah, Perles}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Satz 7.5 wurde 1972 dreimal unabhängig bewiesen --- von \Person{Norbert Sauer} in der Kombinatorik, von \Person{Saharon Shelah} in der Modelltheorie und von \Person{Micha Perles}, der ihn mit Shelah zusammen veröffentlichte. \textbf{Keiner der drei dachte dabei an Lernen}; ein Kombinatoriker hatte eine Vermutung von Erd\H{o}s geprüft.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Lerntheorie heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Rademacher-Kom\-plexität} & Ein datenabhängiges Maß statt der VC-Dimension --- oft viel schärfer.\\
+\textbf{Stabilität} & Ein Verfahren verallgemeinert, wenn ein einzelner Datenpunkt wenig ändert.\\
+\textbf{Komprimier\-barkeit} & Wer die Daten kurz beschreiben kann, hat gelernt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kann man aus $k$ der $n$ Trainingspunkte die gelernte Regel wiederherstellen --- wie bei den Stützvektoren ---, so verallgemeinert sie ungefähr so, als hätte die Klasse die Dimension $k$. \textbf{Das ist das Prinzip der kürzesten Beschreibung aus Band 20, Kapitel~7} in der Sprache des Lernens: Eine kurze Beschreibung der Daten ist kein Auswendiglernen, sondern ein Muster. Kapitel~8 benutzt diesen Gedanken.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 7.1} & wahrscheinlich ungefähr richtig\\
+\textbf{Satz 7.2} & fehlerfrei: $n \sim \ln|\Hyp|/\varepsilon$\\
+\textbf{Satz 7.3} & allgemein: $n \sim \ln|\Hyp|/\varepsilon^{2}$\\
+\textbf{Definition 7.4} & VC-Dimension: was zerschmettert wird\\
+\textbf{Satz 7.6} & lernbar $\iff$ $d$ endlich\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zwei Rätsel bleiben offen: Warum lernt der Gauß-Kern trotz unendlicher Dimension, und warum ist die Schranke so lose? Das nächste Kapitel beantwortet das erste --- und zeigt, dass es einen Grund für das zweite gibt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

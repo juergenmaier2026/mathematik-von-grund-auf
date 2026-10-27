@@ -1,0 +1,568 @@
+\chapter{Neuronale Netze}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Die Temperatur, noch einmal}
+In Kapitel~6 löste man das Problem von Fieber und Untertemperatur auf zwei Wegen: mit einem Gauß-Kern, der die krumme Grenze selbst fand, oder mit dem Merkmal $(T-37)^{2}$, das ein Mensch hineingesteckt hatte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gesucht ist ein Verfahren, das das Merkmal $(T-37)^{2}$ selbst erfindet.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Kern erfindet keine Merkmale --- er arbeitet mit einem festen, unendlich großen Vorrat, den man durch die Wahl des Kerns festlegt. \textbf{Ein neuronales Netz lernt die Merkmale zusammen mit der Entscheidung.} Das ist sein ganzer Vorzug und zugleich die Ursache aller Schwierigkeiten, die dieses Kapitel behandelt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Aus logistischen Regressionen gebaut}
+
+\begin{merksatz}
+\boxtitel{Ein Neuron}
+Ein \Begriff{Neuron} berechnet
+\[ a = g\bigl(\vek w^{\!\top}\vek x + b\bigr) \]
+mit einer \Begriff{Aktivierungsfunktion} $g$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{3.2cm}@{}}
+\toprule
+\textbf{Name} & $g(z)$ & $g'(z)$\\
+\midrule
+logistisch & $\sigma(z) = \frac{1}{1+e^{-z}}$ & $\sigma(1-\sigma)$, höchstens $\tfrac14$\\
+Gleichrichter & $\max\{0,z\}$ & $0$ oder $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Mit der logistischen Funktion ist ein einzelnes Neuron genau die logistische Regression aus Kapitel~5. \textbf{Der Gleichrichter}, englisch ReLU, ist einfacher und hat sich seit etwa 2010 durchgesetzt --- der Bruchfall erklärt, warum.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 11.1 --- ein Netz mit einer verdeckten Schicht}
+\[ \vek h = g\bigl(W_1\vek x + \vek b_1\bigr), \qquad p = \sigma\bigl(\vek w_2^{\!\top}\vek h + b_2\bigr) \]
+Die $m$ Einträge von $\vek h$ heißen \Begriff{verdeckte Einheiten}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was das bedeutet}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\foreach \i/\y in {1/1.8,2/0.6} \node[knotenb] (x\i) at (0,\y) {$x_\i$};
+\foreach \j/\y in {1/2.4,2/1.6,3/0.8,4/0.0} \node[knotenr] (h\j) at (2.4,\y) {};
+\node[knotenb] (p) at (4.8,1.2) {$p$};
+\foreach \i in {1,2} \foreach \j in {1,2,3,4} \draw[grau!55, line width=0.6pt] (x\i)--(h\j);
+\foreach \j in {1,2,3,4} \draw[grau!55, line width=0.6pt] (h\j)--(p);
+\node[font=\scriptsize\itshape, color=grau] at (0,-0.7) {Messwerte};
+\node[font=\scriptsize\itshape, color=akzent] at (2.4,-0.7) {gelernte Merkmale};
+\node[font=\scriptsize\itshape, color=grau] at (4.8,-0.7) {Entscheidung};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Die letzte Schicht} & ist eine logistische Regression --- auf den Merkmalen $\vek h$ statt auf $\vek x$.\\
+\textbf{Die verdeckte Schicht} & erzeugt diese Merkmale, und zwar solche, mit denen die letzte Schicht gut arbeiten kann.\\
+\textbf{Beide} & werden gemeinsam gelernt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Netz ist eine logistische Regression, die ihre eigenen Merkmale erfindet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wie zwei Gleichrichter eine Mulde bauen}
+Mit $u = T - 37$:
+\[ \max\{0,\ u - 1\} + \max\{0,\ -u - 1\} \]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.6pt] (-3.2,0) -- (3.2,0);
+\draw[grau!60, line width=0.6pt] (0,-0.1) -- (0,2.2);
+\draw[tief, line width=1.4pt] (-3,2) -- (-1,0) -- (1,0) -- (3,2);
+\draw[grau!45, line width=0.8pt, dashed, smooth, samples=40, domain=-2.9:2.9] plot ({\x}, {0.22*\x*\x});
+\node[font=\scriptsize, color=grau, anchor=north] at (-1,-0.08) {$36$};
+\node[font=\scriptsize, color=grau, anchor=north] at (1,-0.08) {$38$};
+\node[font=\scriptsize, color=grau, anchor=north] at (0,-0.08) {$37$};
+\node[font=\scriptsize, color=tief, anchor=west] at (3.05,2) {zwei Gleichrichter};
+\node[font=\scriptsize, color=grau, anchor=west] at (3.05,1.6) {$(T-37)^{2}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das klinische Kriterium \enquote{über $38$ oder unter $36$} als Funktion}, gebaut aus zwei Gleichrichtern --- einer für das Fieber, einer für die Untertemperatur. Ein Netz mit zwei verdeckten Einheiten kann dieses Merkmal lernen. Ob es das tut, ist eine andere Frage, und der Leitfall beantwortet sie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 11.2 --- universelle Näherung}
+Jede stetige Funktion auf einem beschränkten Bereich lässt sich durch ein Netz mit einer verdeckten Schicht beliebig genau nähern --- sofern man genug verdeckte Einheiten zulässt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis für die logistische Funktion stammt von \Person{George Cybenko} (1989) und benutzt den Satz von Hahn-Banach aus Band 13. Wir verzichten auf ihn --- die siebte Auslassung. \textbf{Für Gleichrichter ist der Gedanke anschaulich}: Aus zwei Gleichrichtern baut man eine Mulde, aus vier einen Buckel, aus vielen Buckeln jede Kurve --- wie ein Histogramm aus Säulen.}
+\end{minipage}
+\end{center}
+
+\schritt{Was der Satz nicht sagt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Wie viele} & Es können astronomisch viele Einheiten nötig sein.\\
+\textbf{Wie finden} & Er sagt nicht, wie man die Gewichte findet.\\
+\textbf{Wie verallgemeinern} & Er sagt nichts über ungesehene Daten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Satz ist eine Aussage über Darstellbarkeit, nicht über Lernbarkeit.} Auch Polynome können jede stetige Funktion nähern (Weierstraß, Band 3), und Kapitel~2 zeigte, wie das beim Lernen ausgeht. Die Bedeutung des Satzes wird oft überschätzt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Rückpropagation}
+
+\begin{merksatz}
+\boxtitel{Wie man die Gewichte findet}
+Man minimiert die Kreuzentropie aus Kapitel~5 über alle Gewichte durch Gradientenabstieg. Gebraucht wird die Ableitung nach jedem Gewicht.
+
+\schritt{Die Kettenregel, rückwärts angewandt}
+Für das Netz aus Definition 11.1 mit einem Patienten:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Ausgang} & $\delta_2 = \dfrac{\partial\ell}{\partial z_2} = p - y$ \quad (Satz 5.2)\\
+\textbf{letzte Gewichte} & $\dfrac{\partial\ell}{\partial\vek w_2} = \delta_2\,\vek h$\\
+\textbf{zurück in die Schicht} & $\dfrac{\partial\ell}{\partial\vek h} = \delta_2\,\vek w_2$\\
+\textbf{durch die Aktivierung} & $\vek\delta_1 = \dfrac{\partial\ell}{\partial\vek h}\odot g'(\vek z_1)$\\
+\textbf{erste Gewichte} & $\dfrac{\partial\ell}{\partial W_1} = \vek\delta_1\,\vek x^{\!\top}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{$\odot$ bedeutet Multiplikation Eintrag für Eintrag.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Fehler am Ausgang wird Schicht für Schicht zurückgereicht --- gewichtet mit den Verbindungen, gedämpft durch die Ableitungen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Rechenaufwand ist bemerkenswert: \textbf{Alle Ableitungen zusammen kosten nur etwa doppelt so viel wie eine Vorhersage} --- unabhängig von der Zahl der Gewichte. Würde man jede Ableitung einzeln durch eine kleine Änderung annähern, bräuchte man eine Vorhersage je Gewicht, bei Millionen von Gewichten also Millionen. Ohne diese Einsparung gäbe es keine großen Netze.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Kein Tal, sondern ein Gebirge}
+
+\begin{warnung}
+\boxtitelr{Die Konvexität ist verloren}
+Die Kreuzentropie war in Kapitel~5 konvex --- ein einziges Tal. Im Netz ist sie es nicht mehr.
+
+\schritt{Erster Grund: Vertauschungen}
+Vertauscht man zwei verdeckte Einheiten samt ihren Gewichten, so rechnet das Netz dasselbe. Bei $m$ Einheiten gibt es $m!$ gleichwertige Lösungen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.4cm}P{4.0cm}@{}}
+\toprule
+$m$ & \textbf{gleichwertige Minima}\\
+\midrule
+$4$ & $24$\\
+$16$ & $2{,}1\cdot10^{13}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine konvexe Funktion hat höchstens ein Tal. \textbf{Eine Funktion mit $10^{13}$ getrennten Tälern ist nicht konvex}, und zwischen ihnen liegen Pässe und Grate. Ob man in einem guten Tal landet, hängt vom Ausgangspunkt ab.}
+\end{minipage}
+\end{center}
+
+\schritt{Zweiter Grund: schlechte Täler}
+Neben den gleichwertigen gibt es auch schlechtere Minima. Im Leitfall mit zwei verdeckten Einheiten:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.8cm}P{3.0cm}@{}}
+\toprule
+\textbf{Zufallsstart} & \textbf{Testfehler}\\
+\midrule
+bester von fünf & $4{,}2\,\%$\\
+schlechtester & $20{,}2\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der schlechteste Start endet bei \enquote{nie warnen}. \textbf{Das Netz könnte die Mulde bauen, findet sie aber nicht}, weil der Gradientenabstieg in einem Tal stecken bleibt, in dem beide Einheiten dasselbe tun oder gar nichts. Die Darstellbarkeit aus Satz 11.2 hilft nicht, wenn der Weg dorthin versperrt ist.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Leitfall gerechnet}
+
+\begin{merksatz}
+\boxtitel{Netze verschiedener Breite}
+$300$ Patienten, Gleichrichter, leichte Strafe auf die Gewichte, je fünf Zufallsstarts:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{1.8cm}P{2.8cm}P{1.8cm}@{}}
+\toprule
+\textbf{Einh.} & \textbf{Training} & \textbf{Test (Spannweite)} & \textbf{Trennsch.}\\
+\midrule
+$1$ & $12{,}1\,\%$ & $13{,}0$ ($8$--$20$) & $0{,}743$\\
+$2$ & $13{,}0\,\%$ & $13{,}9$ ($4$--$20$) & $0{,}825$\\
+$4$ & $3{,}6\,\%$ & $4{,}3$ ($3$--$8$) & $0{,}993$\\
+$16$ & $2{,}4\,\%$ & $2{,}7$ ($2{,}6$--$2{,}9$) & $\mathbf{0{,}994}$\\
+$64$ & $2{,}3\,\%$ & $2{,}6$ ($2{,}5$--$2{,}6$) & $\mathbf{0{,}994}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ab sechzehn Einheiten erreicht das Netz die Trennschärfe des von Hand erfundenen Merkmals --- $0{,}994$.}
+\end{minipage}
+\end{center}
+
+\schritt{Zwei Beobachtungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Mehr ist stabiler} & Bei zwei Einheiten streut das Ergebnis zwischen $4$ und $20$ Prozent, bei sechzehn kaum noch.\\
+\textbf{Mehr schadet nicht} & Selbst ein Netz mit zwei Schichten zu je $256$ Einheiten --- $66\,817$ Gewichte für $300$ Patienten, ohne jede Strafe --- erreicht $2{,}7$ Prozent.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die zweite Zeile widerspricht allem, was Teil~I und III lehren.} Zweihundertmal mehr Gewichte als Patienten, und keine Überanpassung. Nach Satz 2.2 wäre der Optimismus riesig, nach Satz 7.6 die Schranke nichtssagend --- und doch verallgemeinert das Netz. Die erste Zeile gibt einen Hinweis: Breite Netze haben so viele gute Täler, dass der Gradientenabstieg fast immer eines findet. Kapitel~14 nimmt die Frage wieder auf.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Der verschwindende Gradient}
+Bei der Rückpropagation wird der Fehler in jeder Schicht mit $g'(z)$ multipliziert. Für die logistische Funktion ist $g' \le \tfrac14$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{3.0cm}@{}}
+\toprule
+\textbf{Schichten} & \textbf{höchstens $(\tfrac14)^{L}$}\\
+\midrule
+$2$ & $0{,}0625$\\
+$5$ & $9{,}8\cdot10^{-4}$\\
+$10$ & $9{,}5\cdot10^{-7}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In einem Netz mit zehn logistischen Schichten erreicht die erste Schicht höchstens ein Millionstel des Fehlersignals.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die vorderen Schichten lernen dann praktisch nichts. \textbf{Das war der Hauptgrund, warum tiefe Netze bis etwa 2010 nicht funktionierten.} Der Gleichrichter hat die Ableitung $1$ auf seiner aktiven Seite und reicht das Signal ungedämpft weiter; zusammen mit sorgfältiger Wahl der Anfangsgewichte machte er tiefe Netze erst trainierbar.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Was sonst noch schiefgeht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Stellgrößen} & Zahl der Schichten und Einheiten, Schrittweite, Strafe, Abbruchzeit, Anfangswerte --- jede beeinflusst das Ergebnis.\\
+\textbf{Zu sicher} & Große Netze geben oft Wahrscheinlichkeiten nahe null oder eins aus, die zu extrem sind.\\
+\textbf{Außerhalb} & Gleichrichternetze setzen außerhalb der Daten linear fort --- ohne Grenze und ohne Warnung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist für die Medizin die ernsteste. \textbf{Ein Netz, das \enquote{Sepsis mit $99$ Prozent} ausgibt, ist womöglich nur zu $80$ Prozent sicher} --- und nach Kapitel~1 hängt die richtige Entscheidung von der Wahrscheinlichkeit ab, nicht nur vom Urteil. Man muss die Kalibrierung nachträglich prüfen und korrigieren, was bei der logistischen Regression kaum nötig ist.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- XOR mit zwei Gleichrichtern}
+Zeigen Sie, dass das Netz
+\[ h_1 = \max\{0,\ x_1+x_2\}, \qquad h_2 = \max\{0,\ x_1+x_2-1\}, \qquad f = h_1 - 2\,h_2 \]
+das XOR-Problem auf $\{0,1\}^{2}$ löst.
+
+\loesung
+\schritt{Schritt 1 --- Alle vier Eingaben}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{1.6cm}P{1.2cm}P{1.2cm}P{2.0cm}P{1.2cm}@{}}
+\toprule
+$(x_1,x_2)$ & $x_1+x_2$ & $h_1$ & $h_2$ & $h_1-2h_2$ & \textbf{XOR}\\
+\midrule
+$(0,0)$ & $0$ & $0$ & $0$ & $0$ & $0$\\
+$(1,0)$ & $1$ & $1$ & $0$ & $1$ & $1$\\
+$(0,1)$ & $1$ & $1$ & $0$ & $1$ & $1$\\
+$(1,1)$ & $2$ & $2$ & $1$ & $0$ & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Alle vier stimmen. \checkmark
+
+\schritt{Schritt 2 --- Was die Einheiten tun}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{6.8cm}@{}}
+\toprule
+$h_1$ & zählt, wie viele Merkmale zutreffen.\\
+$h_2$ & meldet sich erst, wenn beide zutreffen.\\
+$f$ & zieht den doppelten Beitrag von $h_2$ ab --- \enquote{eines, aber nicht beide}.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Einordnung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kapitel~6 löste XOR mit dem Merkmal $x_1x_2$, das ein Mensch wählte. \textbf{Hier entsteht dasselbe aus zwei Einheiten}, deren Gewichte man lernen kann: $h_2$ ist im Wesentlichen das Produkt $x_1x_2$ auf $\{0,1\}^{2}$. Minsky und Papert wussten 1969, dass eine verdeckte Schicht XOR löst; es fehlte ein Verfahren, die Gewichte zu finden --- die Rückpropagation.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- Rückpropagation von Hand}
+Ein Netz mit einem Eingang, einer logistischen verdeckten Einheit und logistischem Ausgang. Gewichte $w_1 = 0{,}5$, $b_1 = 0$, $w_2 = 1$, $b_2 = 0$. Ein Patient: $x = 1$, $y = 1$. Berechnen Sie alle Ableitungen und einen Schritt mit $\eta = 1$.
+
+\loesung
+\schritt{Schritt 1 --- Vorwärts}
+\begin{align*}
+z_1 &= 0{,}5\cdot1 + 0 = 0{,}5, & h &= \sigma(0{,}5) = 0{,}6225\\
+z_2 &= 1\cdot0{,}6225 + 0 = 0{,}6225, & p &= \sigma(0{,}6225) = 0{,}6508\\
+\ell &= -\ln0{,}6508 = 0{,}4296
+\end{align*}
+
+\schritt{Schritt 2 --- Rückwärts: Ausgang}
+\[ \delta_2 = p - y = 0{,}6508 - 1 = -0{,}3492 \]
+\[ \frac{\partial\ell}{\partial w_2} = \delta_2\,h = -0{,}3492\cdot0{,}6225 = -0{,}2174, \qquad \frac{\partial\ell}{\partial b_2} = -0{,}3492 \]
+
+\schritt{Schritt 3 --- Rückwärts: verdeckte Einheit}
+\[ \frac{\partial\ell}{\partial h} = \delta_2\,w_2 = -0{,}3492 \]
+\[ \sigma'(z_1) = h\,(1-h) = 0{,}6225\cdot0{,}3775 = 0{,}2350 \]
+\[ \delta_1 = -0{,}3492\cdot0{,}2350 = -0{,}0821 \]
+\[ \frac{\partial\ell}{\partial w_1} = \delta_1\,x = -0{,}0821, \qquad \frac{\partial\ell}{\partial b_1} = -0{,}0821 \]
+
+\schritt{Schritt 4 --- Die Probe durch Nachrechnen}
+Man ändere $w_1$ um $\pm10^{-6}$ und bilde den Differenzenquotienten des Verlusts:
+\[ \frac{\ell(0{,}500001) - \ell(0{,}499999)}{0{,}000002} = -0{,}0821 \quad \checkmark \]
+Ebenso für $w_2$: $-0{,}2174$. \checkmark
+
+\schritt{Schritt 5 --- Ein Schritt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{2.2cm}P{1.8cm}@{}}
+\toprule
+\textbf{Gewicht} & \textbf{alt} & \textbf{Ableitung} & \textbf{neu}\\
+\midrule
+$w_1$ & $0{,}500$ & $-0{,}0821$ & $0{,}582$\\
+$b_1$ & $0{,}000$ & $-0{,}0821$ & $0{,}082$\\
+$w_2$ & $1{,}000$ & $-0{,}2174$ & $1{,}217$\\
+$b_2$ & $0{,}000$ & $-0{,}3492$ & $0{,}349$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ \ell_{\text{neu}} = 0{,}2744 \quad\text{statt}\quad 0{,}4296 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die vordere Schicht bekommt ein Viertel des Signals der hinteren} --- $0{,}082$ gegen $0{,}349$ ---, und der Faktor ist genau $\sigma'(z_1)\cdot w_2 = 0{,}235$. Das ist der verschwindende Gradient aus dem Bruchfall, schon bei einer einzigen Schicht sichtbar.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Wie viele Gewichte?}
+Zählen Sie die Gewichte eines Netzes mit zwei Eingängen, zwei verdeckten Schichten zu je $h$ Einheiten und einem Ausgang, und vergleichen Sie mit der Zahl der Patienten.
+
+\loesung
+\schritt{Schritt 1 --- Schicht für Schicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Verbindung} & \textbf{Gewichte} & \textbf{Achsenabschn.}\\
+\midrule
+Eingang $\to$ Schicht 1 & $2h$ & $h$\\
+Schicht 1 $\to$ Schicht 2 & $h^{2}$ & $h$\\
+Schicht 2 $\to$ Ausgang & $h$ & $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ \text{zusammen: } h^{2} + 5h + 1 \]
+
+\schritt{Schritt 2 --- Die Zahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{3.4cm}@{}}
+\toprule
+$h$ & \textbf{Gewichte} & \textbf{je Patient ($n = 300$)}\\
+\midrule
+$4$ & $37$ & $0{,}12$\\
+$16$ & $337$ & $1{,}1$\\
+$64$ & $4417$ & $15$\\
+$256$ & $66\,817$ & $223$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Probe für $h = 64$:} $4096 + 320 + 1 = 4417$. \checkmark
+
+\schritt{Schritt 3 --- Was die Faustregel sagt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach Aufgabe 2.3 bräuchte man zehn Ereignisse je Parameter. Mit $60$ Sepsisfällen erlaubt das sechs Parameter --- \textbf{das kleinste Netz der Tabelle hat bereits sechsmal so viele}, das größte zehntausendmal. Und doch verallgemeinert das größte so gut wie das Netz mit sechzehn Einheiten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Faustregel gilt für die logistische Regression, und dort gilt sie gut.} Für Netze gilt sie nicht, und zwar nicht, weil Netze besser wären, sondern weil ihre Parameter nicht unabhängig voneinander wirken und der Gradientenabstieg nicht jede Lösung gleich wahrscheinlich findet. Die Zahl der Gewichte ist bei Netzen kein brauchbares Maß der Komplexität --- und ein besseres gibt es noch nicht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Die Rückpropagation, mehrmals erfunden}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{2.8cm}P{4.2cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Wer} & \textbf{Wo}\\
+\midrule
+$1970$ & \Person{Seppo Linnainmaa} & Rundungsfehler, finnische Magisterarbeit\\
+$1974$ & \Person{Paul Werbos} & Dissertation, Harvard\\
+$1986$ & \Person{Rumelhart}, \Person{Hinton}, \Person{Williams} & \kursiv{Nature}, drei Seiten\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Linnainmaa entwickelte das rückwärts angewandte automatische Differenzieren für ganz andere Zwecke. Werbos wandte es 1974 auf Netze an; seine Arbeit fand kaum Beachtung. \textbf{Erst der Aufsatz von 1986 machte das Verfahren bekannt} --- nicht weil er neu war, sondern weil er zeigte, dass die verdeckten Einheiten sinnvolle Merkmale lernten.}
+\end{minipage}
+\end{center}
+
+\schritt{Die zweite Rückkehr}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{In den 1990er Jahren verloren die Netze wieder an Boden --- gegen Stützvektormaschinen, deren Theorie sauberer war. \Person{Geoffrey Hinton}, \Person{Yoshua Bengio} und \Person{Yann LeCun} arbeiteten weiter, oft gegen den Widerstand der Gutachter. \textbf{2012 gewann ein tiefes Netz aus Hintons Gruppe einen Bilderkennungswettbewerb mit großem Abstand} --- und innerhalb von zwei Jahren wechselte fast das ganze Fach. Die drei erhielten 2018 den Turing-Preis.}
+\end{minipage}
+\end{center}
+
+\schritt{Und ein Nobelpreis}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{2024 erhielten \Person{John Hopfield} und Hinton den Nobelpreis für Physik --- für Beiträge zu Netzen, die aus der statistischen Physik stammen. \textbf{Es war das erste Mal, dass der Physikpreis für eine Arbeit vergeben wurde, deren Hauptanwendung im maschinellen Lernen liegt}, und die Entscheidung wurde im Fach kontrovers aufgenommen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Netze heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Automatisches Differenzieren} & Rückpropagation für beliebige Programme --- die Grundlage aller heutigen Werkzeuge.\\
+\textbf{Tabellen} & Bei tabellarischen klinischen Daten sind Netze den Wäldern meist unterlegen.\\
+\textbf{Kalibrierung} & Verfahren, zu sichere Netze nachträglich abzuschwächen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Mehrere große Vergleichsstudien seit 2021 fanden, dass Gradient-Boosting aus Kapitel~9 auf Tabellendaten mittlerer Größe tiefe Netze meist schlägt. \textbf{Netze glänzen bei Bildern, Tönen und Texten}, wo die Merkmale aus Rohdaten erst gebildet werden müssen. Bei Laborwerten, die schon sinnvolle Merkmale sind, bringt diese Fähigkeit wenig --- und Netze zahlen den Preis der Nichtkonvexität umsonst.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 11.1} & logistische Regression, die Merkmale erfindet\\
+\textbf{Satz 11.2} & alles darstellbar --- aber nicht alles findbar\\
+\textbf{Rückpropagation} & Kettenregel rückwärts, doppelte Vorhersagekosten\\
+\textbf{Nichtkonvexität} & $m!$ Täler, manche schlecht\\
+\textbf{Der Bruchfall} & $(\tfrac14)^{L}$ --- darum Gleichrichter\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~IV. Alle bisherigen Verfahren brauchten Etiketten --- Sepsis ja oder nein. Teil~V fragt, was man lernen kann, wenn niemand sagt, was richtig ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

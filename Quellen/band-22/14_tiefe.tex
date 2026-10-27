@@ -1,0 +1,479 @@
+\chapter{Das Rätsel der tiefen Netze}
+
+\section{Ein Versuch, der die Theorie erschüttert}
+
+\begin{merksatz}
+\boxtitel{Dasselbe Netz, zwei Arten von Etiketten}
+Man nehme das Netz aus Kapitel~11 --- zwei Schichten zu je $256$ Einheiten, $66\,817$ Gewichte, keine Strafe --- und die $300$ Patienten des Temperaturfalls.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Etiketten} & \textbf{Training} & \textbf{Test}\\
+\midrule
+wahre Diagnosen & $0{,}0\,\%$ & $\mathbf{3{,}1\,\%}$\\
+zufällig vertauscht & $1{,}3\,\%$ & $\mathbf{30{,}6\,\%}$\\
+\midrule
+nie warnen & --- & $20{,}2\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Netz lernt auch sinnlose Etiketten fast fehlerfrei auswendig. Und dasselbe Netz verallgemeinert bei sinnvollen Etiketten hervorragend.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum das die Theorie erschüttert}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil~III maß die Komplexität einer Klasse von Regeln --- VC-Dimension, Parameterzahl. \textbf{Die zweite Zeile zeigt, dass diese Klasse jede Einteilung der $300$ Patienten erzeugen kann}: Sie zerschmettert sie. Nach Satz 7.6 kann dann keine Schranke, die nur von der Klasse abhängt, etwas über ungesehene Daten sagen. Und doch verallgemeinert die erste Zeile. Was sie von der zweiten unterscheidet, sind nicht das Netz oder das Verfahren, sondern allein die Daten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dieser Versuch wurde 2017 an großen Bilddatensätzen veröffentlicht} und löste im Fach eine Grundsatzdebatte aus. Er ist das dritte der überraschenden Ergebnisse aus dem Vorwort: Tiefe Netze mit mehr Parametern als Beispielen verallgemeinern gut --- und die klassische Theorie kann nicht erklären, warum.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der doppelte Abstieg}
+
+\begin{merksatz}
+\boxtitel{Die Kurve aus Kapitel 2, weitergeführt}
+Kapitel~2 endete beim Polynom neunten Grades --- dort, wo es die zehn Punkte genau trifft. Man frage: Was geschieht jenseits davon?
+
+\schritt{Ein lineares Modell mit vielen Merkmalen}
+$50$ Patienten, $2000$ Merkmale mit abnehmender Streuung. Man verwendet die ersten $p$ und nimmt, wenn es mehrere Lösungen gibt, diejenige mit der kleinsten Länge $\|\vek\beta\|$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{3.4cm}@{}}
+\toprule
+$p$ & \textbf{Testfehler} & \\
+\midrule
+$5$ & $\mathbf{0{,}687}$ & erstes Minimum\\
+$20$ & $0{,}757$ & \\
+$40$ & $2{,}138$ & \\
+$50$ & $\mathbf{45{,}6}$ & \textcolor{akzent}{$p = n$: trifft genau}\\
+$60$ & $2{,}332$ & \\
+$100$ & $0{,}835$ & \\
+$200$ & $0{,}619$ & \\
+$1000$ & $\mathbf{0{,}549}$ & \textcolor{gruen}{zweites Minimum}\\
+\midrule
+nichts vorhersagen & $1{,}010$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Median über $200$ Stichproben; Rauschen $\sigma^{2} = 0{,}01$, Streuung des $j$-ten Merkmals proportional zu $1/j$.}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.6pt] (0,0) -- (7.2,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,3.2);
+\draw[akzent, line width=1.4pt, smooth] plot coordinates {(0.3,0.95) (0.8,0.92) (1.4,1.05) (2.0,1.6) (2.5,3.0) (3.0,1.7) (3.6,1.15) (4.4,0.82) (5.4,0.74) (6.6,0.73)};
+\draw[grau!60, line width=0.8pt, dashed] (2.5,0) -- (2.5,3.1);
+\node[font=\scriptsize, color=grau, anchor=north] at (2.5,-0.1) {$p = n$};
+\node[font=\scriptsize, color=akzent] at (0.8,1.3) {klassisch};
+\node[font=\scriptsize, color=gruen!60!black] at (5.6,1.15) {überparametrisiert};
+\node[font=\scriptsize\itshape, color=grau] at (3.6,-0.6) {Zahl der Parameter (logarithmisch)};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Genau an der Schwelle $p = n$ explodiert der Fehler. Dahinter fällt er wieder --- und landet unter dem besten klassischen Wert.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die U-Kurve aus Kapitel~2 war nur die linke Hälfte des Bildes.} An der Schwelle gibt es genau eine Lösung, die alle Punkte trifft, und sie muss dafür wild ausschlagen --- das ist das Polynom neunten Grades. Jenseits der Schwelle gibt es unendlich viele treffende Lösungen, und man kann die ruhigste davon wählen. Mehr Freiheit erlaubt mehr Ruhe.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wer wählt die ruhigste Lösung?}
+
+\begin{merksatz}
+\boxtitel{Satz 14.1 --- der Gradientenabstieg wählt von selbst}
+Seien $p > n$ und $X$ vom Rang $n$. Man minimiere $\|\vek y - X\vek\beta\|^{2}$ durch Gradientenabstieg, beginnend bei $\vek\beta_0 = \vek 0$. Konvergiert das Verfahren gegen eine Lösung mit $X\vek\beta = \vek y$, so ist es diejenige mit der kleinsten Länge:
+\[ \vek\beta^{*} = X^{\!\top}(XX^{\!\top})^{-1}\vek y . \]
+
+\schritt{Beweis}
+\kursiv{Erstens --- alle Schritte bleiben im Zeilenraum:} Der Gradient ist $-2X^{\!\top}(\vek y - X\vek\beta)$, also ein Vektor der Form $X^{\!\top}\vek c$. Beginnt man bei $\vek 0$ und addiert nur solche Vektoren, so bleibt man im Raum $\{X^{\!\top}\vek c\}$ --- dem Zeilenraum von $X$.
+
+\kursiv{Zweitens --- jede treffende Lösung zerfällt:} Ist $X\vek\beta = \vek y$, so schreibe $\vek\beta = \vek\beta^{*} + \vek v$. Dann ist $X\vek v = \vek y - \vek y = \vek 0$, also liegt $\vek v$ im Kern von $X$.
+
+\kursiv{Drittens --- Kern und Zeilenraum stehen senkrecht:} Für $\vek v$ im Kern und $X^{\!\top}\vek c$ im Zeilenraum gilt $\vek v^{\!\top}X^{\!\top}\vek c = (X\vek v)^{\!\top}\vek c = 0$. Da $\vek\beta^{*}$ im Zeilenraum liegt:
+\[ \|\vek\beta\|^{2} = \|\vek\beta^{*}\|^{2} + \|\vek v\|^{2} \ \ge\ \|\vek\beta^{*}\|^{2} . \]
+
+\kursiv{Viertens --- zusammen:} Die treffende Lösung im Zeilenraum hat $\vek v = \vek 0$; das ist $\vek\beta^{*}$, die kürzeste. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Niemand hat eine Strafe hinzugefügt --- und doch wählt das Verfahren die ruhigste aller Lösungen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das heißt \Begriff{implizite Regularisierung}: Die Strafe steckt nicht in der Zielfunktion, sondern im Verfahren und im Startpunkt. \textbf{Die kürzeste Lösung ist der Grenzfall der Kammregression aus Kapitel~4} für $\lambda \to 0$ --- das Verfahren verhält sich, als hätte es eine unendlich kleine Strafe. Bei der logistischen Regression zeigte Kapitel~5 dasselbe: Dort läuft der Gradientenabstieg zur Trennung mit dem breitesten Rand.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Grenze des Satzes}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Satz 14.1 gilt für lineare Modelle. \textbf{Für tiefe Netze ist nicht bewiesen, welche Lösung der Gradientenabstieg wählt} --- nur, dass er in der Praxis offenbar Lösungen bevorzugt, die gut verallgemeinern. Welche Eigenschaft diese Lösungen gemeinsam haben, ist die zentrale offene Frage der Lerntheorie. Kandidaten sind flache Minima, kleine Normen, geringe Komprimierbarkeit im Sinne von Kapitel~8; keiner erklärt alles.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Warum Tiefe}
+
+\begin{merksatz}
+\boxtitel{Satz 14.2 --- was eine Schicht nicht schafft}
+Ein Netz mit Gleichrichtern, einem Eingang und einer verdeckten Schicht aus $m$ Einheiten berechnet eine stückweise lineare Funktion mit höchstens $m+1$ Stücken.
+
+\schritt{Beweis}
+Jede Einheit $\max\{0,\ w_jx + b_j\}$ hat höchstens einen Knick, bei $x = -b_j/w_j$. Eine gewichtete Summe von $m$ solchen Funktionen hat höchstens $m$ Knicke, also höchstens $m+1$ lineare Stücke. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Und was Tiefe schafft}
+Die \Begriff{Zeltfunktion} auf $[0,1]$:
+\[ t(x) = \begin{cases} 2x & x \le \tfrac12\\ 2-2x & x > \tfrac12\end{cases} \ = \ 2\max\{0,x\} - 4\max\{0,\ x-\tfrac12\} \]
+--- zwei Gleichrichter.
+
+\schritt{Verkettung}
+Wendet man $t$ zweimal an, so entstehen zwei Zelte; dreimal, vier Zelte.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!55, line width=0.6pt] (0,0) -- (2.2,0); \draw[grau!55, line width=0.6pt] (0,0) -- (0,1.2);
+\draw[tief, line width=1.2pt] (0,0) -- (1,1) -- (2,0);
+\node[font=\scriptsize, color=grau] at (1,-0.35) {$t$};
+\draw[grau!55, line width=0.6pt] (2.8,0) -- (5.0,0); \draw[grau!55, line width=0.6pt] (2.8,0) -- (2.8,1.2);
+\draw[tief, line width=1.2pt] (2.8,0) -- (3.3,1) -- (3.8,0) -- (4.3,1) -- (4.8,0);
+\node[font=\scriptsize, color=grau] at (3.8,-0.35) {$t\circ t$};
+\draw[grau!55, line width=0.6pt] (5.6,0) -- (7.8,0); \draw[grau!55, line width=0.6pt] (5.6,0) -- (5.6,1.2);
+\draw[tief, line width=1.2pt] (5.6,0) -- (5.85,1) -- (6.1,0) -- (6.35,1) -- (6.6,0) -- (6.85,1) -- (7.1,0) -- (7.35,1) -- (7.6,0);
+\node[font=\scriptsize, color=grau] at (6.6,-0.35) {$t\circ t\circ t$};
+\end{tikzpicture}
+\end{center}
+
+\kursiv{Warum sich die Zahl verdoppelt:} $t$ bildet jede der beiden Hälften von $[0,1]$ auf ganz $[0,1]$ ab. Was danach kommt, wird also zweimal durchlaufen --- einmal vorwärts, einmal rückwärts.
+
+\[ t^{L} \ \text{hat}\ 2^{L} \ \text{lineare Stücke.} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{3.0cm}P{3.2cm}@{}}
+\toprule
+$L$ & \textbf{tief: $L$ Schichten} & \textbf{flach: eine Schicht}\\
+\midrule
+$5$ & $10$ Einheiten & $\ge 31$ Einheiten\\
+$10$ & $20$ Einheiten & $\ge 1023$ Einheiten\\
+$20$ & $40$ Einheiten & $\ge 1\,048\,575$ Einheiten\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Was ein tiefes Netz mit vierzig Einheiten berechnet, braucht ein flaches mit über einer Million.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Tiefe erlaubt Wiederverwendung}: Jede Schicht faltet den Raum, und die nächste arbeitet auf dem gefalteten --- was sie tut, wirkt auf allen Falten zugleich. Ob solche Funktionen in der Medizin vorkommen, ist eine andere Frage. Bei Bildern gibt es gute Gründe dafür: Kanten setzen sich zu Formen zusammen, Formen zu Organen, Organe zu Befunden --- eine Hierarchie, die zu einer Kette von Schichten passt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Gebaute Annahmen}
+
+\begin{merksatz}
+\boxtitel{Architekturen als induktive Neigung}
+Satz 1.5 besagte: kein Lernen ohne Annahme. Die erfolgreichen tiefen Netze sind nicht beliebig verschaltet, sondern tragen Annahmen über die Daten in ihrem Aufbau.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{3.0cm}P{3.0cm}@{}}
+\toprule
+\textbf{Bauform} & \textbf{Annahme} & \textbf{Anwendung}\\
+\midrule
+Faltungsnetz & Ein Muster bedeutet an jeder Stelle dasselbe. & Bilder\\
+rekurrentes Netz & Die Reihenfolge zählt. & Zeitreihen, Sprache\\
+Aufmerksamkeit & Jeder Teil kann sich auf jeden beziehen. & Texte\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Faltungsnetz benutzt dieselben Gewichte an jeder Stelle des Bildes. \textbf{Ein Rundherd im Röntgenbild sieht oben links so aus wie unten rechts} --- und das Netz muss ihn deshalb nicht an jeder Stelle einzeln lernen. Die Zahl der freien Gewichte sinkt dadurch um Größenordnungen. Das ist dieselbe Einsicht wie beim Merkmal $(T-37)^{2}$ in Kapitel~6: Wer die richtige Annahme einbaut, braucht weniger Daten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Abkürzungen}
+Ein Netz lernt, was in den Daten die Etiketten vorhersagt --- auch wenn es mit der Krankheit nichts zu tun hat.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Lungenent\-zündung} & Ein Netz erkannte, aus welcher Klinik ein Röntgenbild stammte --- an Markierungen und Aufnahmetechnik --- und nutzte die unterschiedliche Häufigkeit der Erkrankung in den Kliniken.\\
+\textbf{Hautkrebs} & Chirurgische Hautmarkierungen erhöhten die vorhergesagte Melanomwahrscheinlichkeit, weil verdächtige Befunde vor der Aufnahme markiert worden waren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In beiden Fällen war die innere Prüfung ausgezeichnet und die äußere schlecht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist das Leck aus Kapitel~3, in einer Form, die man nicht in einer Tabelle von Merkmalen sieht --- es steckt in den Bildpunkten. \textbf{Je mächtiger das Verfahren, desto zuverlässiger findet es solche Abkürzungen}, denn sie sind oft leichter zu lernen als die eigentliche Krankheit. Die erste Warnung des Vorworts gilt hier in ihrer schärfsten Form.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Unmerkliche Änderungen}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man kann ein Bild so geringfügig verändern, dass kein Mensch einen Unterschied sieht --- und das Netz ordnet es danach völlig anders ein, mit hoher Sicherheit. \textbf{Solche Beispiele gibt es für praktisch jedes tiefe Netz}, und sie lassen sich gezielt berechnen. Sie zeigen, dass die gelernten Merkmale sich von menschlichen Merkmalen grundlegend unterscheiden können, auch wenn beide auf den üblichen Daten zum selben Ergebnis kommen. Nach Kapitel~10 liegt das nahe: In hohen Dimensionen ist jeder Punkt nahe an einer Grenze.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- Die kürzeste Lösung}
+Eine Gleichung, zwei Unbekannte: $\beta_1 + 2\beta_2 = 5$. Bestimmen Sie die kürzeste Lösung und prüfen Sie, dass der Gradientenabstieg von $\vek 0$ aus in ihrer Richtung bleibt.
+
+\loesung
+\schritt{Schritt 1 --- Alle Lösungen}
+\[ \vek\beta = (5 - 2s,\ s) \quad\text{für jedes } s \]
+
+\schritt{Schritt 2 --- Die kürzeste}
+\[ \|\vek\beta\|^{2} = (5-2s)^{2} + s^{2} = 25 - 20s + 5s^{2} \]
+\[ \frac{\dd}{\dd s} = -20 + 10s = 0 \quad\Longrightarrow\quad s = 2 \]
+\[ \vek\beta^{*} = (1,\ 2), \qquad \|\vek\beta^{*}\| = \sqrt5 = 2{,}236 \]
+
+\schritt{Schritt 3 --- Nach der Formel aus Satz 14.1}
+Mit $X = (1\ \ 2)$:
+\[ XX^{\!\top} = 1+4 = 5, \qquad \vek\beta^{*} = X^{\!\top}\cdot\tfrac15\cdot5 = (1,\ 2) \quad \checkmark \]
+
+\schritt{Schritt 4 --- Der Gradientenabstieg}
+Der Gradient ist $-2\,(5 - \beta_1 - 2\beta_2)\cdot(1,\ 2)$ --- stets ein Vielfaches von $(1,2)$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Schritt} & $\vek\beta$ & \textbf{Rest} $5 - \beta_1 - 2\beta_2$\\
+\midrule
+$0$ & $(0;\ 0)$ & $5$\\
+$1$ & $(0{,}5;\ 1{,}0)$ & $2{,}5$\\
+$2$ & $(0{,}75;\ 1{,}5)$ & $1{,}25$\\
+$\infty$ & $(1;\ 2)$ & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Schrittweite $\eta = 0{,}05$:} $\vek\beta \leftarrow \vek\beta + 0{,}1\cdot\text{Rest}\cdot(1,2)$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Jeder Schritt liegt auf der Geraden durch $\vek 0$ in Richtung $(1,2)$}, und die einzige Lösung auf dieser Geraden ist $(1,2)$. Hätte man bei $(5,0)$ begonnen --- auch eine Lösung ---, wäre man dort geblieben. Die implizite Regularisierung hängt also am Startpunkt: Kleine Anfangsgewichte bei Netzen sind aus diesem Grund keine Nebensache.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- Die Zeltfunktion}
+Prüfen Sie $t(x) = 2\max\{0,x\} - 4\max\{0,x-\tfrac12\}$ an drei Stellen und bestimmen Sie $t(t(x))$ bei $x = 0{,}2$ und $x = 0{,}6$.
+
+\loesung
+\schritt{Schritt 1 --- Die Darstellung prüfen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.2cm}P{2.6cm}P{1.8cm}@{}}
+\toprule
+$x$ & $2\max\{0,x\}$ & $4\max\{0,x-\frac12\}$ & $t(x)$\\
+\midrule
+$0{,}25$ & $0{,}5$ & $0$ & $0{,}5$\\
+$0{,}50$ & $1{,}0$ & $0$ & $1{,}0$\\
+$0{,}75$ & $1{,}5$ & $1{,}0$ & $0{,}5$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Probe mit der Definition:} $2\cdot0{,}25 = 0{,}5$; $2\cdot0{,}5 = 1$; $2-2\cdot0{,}75 = 0{,}5$. \checkmark
+
+\schritt{Schritt 2 --- Zweimal anwenden}
+\[ x = 0{,}2: \quad t(0{,}2) = 0{,}4, \quad t(0{,}4) = 0{,}8 \]
+\[ x = 0{,}6: \quad t(0{,}6) = 0{,}8, \quad t(0{,}8) = 0{,}4 \]
+
+\schritt{Schritt 3 --- Die Stücke von $t\circ t$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Bereich} & $t(t(x))$\\
+\midrule
+$[0;\ 0{,}25]$ & $4x$\\
+$[0{,}25;\ 0{,}5]$ & $2 - 4x$\\
+$[0{,}5;\ 0{,}75]$ & $4x - 2$\\
+$[0{,}75;\ 1]$ & $4 - 4x$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Probe:} $4\cdot0{,}2 = 0{,}8$ \checkmark; $4\cdot0{,}6-2 = 0{,}4$ \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Vier Stücke aus vier Gleichrichtern in zwei Schichten.} Eine Schicht mit vier Einheiten könnte nach Satz 14.2 höchstens fünf Stücke erzeugen --- hier geht es gerade noch gleich auf. Erst bei drei oder mehr Schichten wird der Vorsprung der Tiefe deutlich, wie die Tabelle in Abschnitt 14.4 zeigt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Wo liegt die Schwelle?}
+Ein Netz wird an $n$ Patienten trainiert. Bei welcher Größe erwartet man die Spitze des doppelten Abstiegs, und was folgt für die Wahl der Netzgröße?
+
+\loesung
+\schritt{Schritt 1 --- Die Schwelle}
+Die Spitze liegt dort, wo das Modell gerade eben alle Trainingsdaten treffen kann. Bei linearen Modellen ist das $p = n$.
+
+\schritt{Schritt 2 --- Bei Netzen}
+Die Schwelle hängt davon ab, wie viele Parameter nötig sind, um $n$ Punkte auswendig zu lernen. Bei Klassifikation liegt sie etwa bei $p \approx n$ bis $p \approx 2n$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{2.4cm}P{2.0cm}@{}}
+\toprule
+\textbf{Netz aus Kapitel 11} & \textbf{Gewichte} & \textbf{Bereich}\\
+\midrule
+$4$ Einheiten & $17$ & klassisch\\
+$16$ Einheiten & $65$ & klassisch\\
+$64$ Einheiten & $257$ & nahe $n$\\
+$2\times256$ Einheiten & $66\,817$ & weit darüber\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Eine Schicht mit $m$ Einheiten bei zwei Eingängen: $2m + m + m + 1 = 4m+1$ Gewichte; $n = 300$.}
+
+\schritt{Schritt 3 --- Die Folge}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{klassisch} & Man wählt die Größe durch Kreuzvalidierung, links der Schwelle.\\
+\textbf{an der Schwelle} & Die schlechteste Wahl --- das Modell muss alles treffen und hat keine Freiheit, es ruhig zu tun.\\
+\textbf{weit darüber} & Oft gut, sofern das Verfahren implizit regularisiert.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die gefährlichste Größe ist die mittlere.} Wer ein Netz schrittweise vergrößert und beim ersten Anstieg des Testfehlers aufhört, bleibt vor der Schwelle stehen --- und verpasst womöglich das zweite, tiefere Minimum. Wer es dagegen um einen kleinen Betrag über die Schwelle hinaus vergrößert, erwischt die Spitze. Eine Strafe aus Kapitel~4 glättet die Spitze weitgehend; darum tritt sie in der Praxis selten so scharf auf wie im Versuch.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Grundsatzdebatte in drei Aufsätzen}
+\Person{Chiyuan Zhang}, \Person{Samy Bengio}, \Person{Moritz Hardt}, \Person{Benjamin Recht} und \Person{Oriol Vinyals} veröffentlichten 2017 den Versuch mit vertauschten Etiketten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Titel lautete sinngemäß: \enquote{Das Verständnis tiefen Lernens erfordert ein Überdenken der Verallgemeinerung.} \textbf{Er wurde auf der wichtigsten Tagung des Fachs als bester Beitrag ausgezeichnet} --- für einen Befund, der keine neue Methode enthielt, sondern zeigte, dass die vorhandene Theorie nicht ausreicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Der doppelte Abstieg}
+\Person{Mikhail Belkin}, \Person{Daniel Hsu}, \Person{Siyuan Ma} und \Person{Soumik Mandal} beschrieben 2019 die Kurve aus Abschnitt 14.2 und gaben ihr den Namen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Spätere Nachforschungen fanden die Spitze an der Interpolationsschwelle schon in Arbeiten aus den 1990er Jahren, zu linearen Modellen und kleinen Netzen. \textbf{Sie war beobachtet, aber als Merkwürdigkeit abgetan worden}, weil die Theorie sagte, jenseits der Schwelle könne es nur schlechter werden. Niemand hatte weiter gerechnet.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Tiefe}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Matus Telgarsky} bewies 2016 mit der Zeltfunktion, dass bestimmte Funktionen mit tiefen Netzen exponentiell sparsamer darstellbar sind als mit flachen. \textbf{Der Beweis ist kaum länger als Aufgabe 14.2} --- einer der seltenen Fälle, in denen ein tiefes Ergebnis der Lerntheorie mit elementaren Mitteln auskommt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Die offene Frage}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Gutartige Überanpassung} & Wann das Treffen verrauschter Daten nicht schadet --- für lineare Modelle inzwischen genau beschrieben.\\
+\textbf{Flache Minima} & Ob breite Täler besser verallgemeinern als enge --- umstritten.\\
+\textbf{Skalengesetze} & Der Testfehler fällt mit Daten und Parametern nach einem Potenzgesetz.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Seit 2020 wurde bei großen Sprachmodellen beobachtet, dass der Fehler über viele Größenordnungen als Potenz der Datenmenge und der Parameterzahl fällt --- ohne erkennbare Sättigung. \textbf{Diese Gesetze sind empirisch, nicht bewiesen}, und sie haben die Entwicklung des Fachs stärker gesteuert als jeder Satz dieses Bandes: Sie rechtfertigten Investitionen in immer größere Modelle. Warum sie gelten und wo sie enden, ist unbekannt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Der Versuch} & dasselbe Netz lernt Sinn und Unsinn\\
+\textbf{Doppelter Abstieg} & Spitze bei $p = n$, zweites Tal dahinter\\
+\textbf{Satz 14.1} & Gradient von $\vek 0$ wählt die kürzeste Lösung\\
+\textbf{Satz 14.2} & eine Schicht: $m+1$ Stücke; $L$ Schichten: $2^{L}$\\
+\textbf{Der Bruchfall} & Abkürzungen statt Krankheit\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~V. Das letzte Kapitel zieht Bilanz --- und kehrt zum Sepsis-System von 2021 zurück, um zu fragen, welche der Werkzeuge dieses Bandes seinen Fehlschlag hätten verhindern können.}
+\end{minipage}
+\end{center}
+\end{merksatz}

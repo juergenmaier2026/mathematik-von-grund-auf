@@ -1,0 +1,452 @@
+\chapter{Die dünne Fläche}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Zwanzig Laborwerte, wie viele Dimensionen?}
+In Kapitel~4 lagen für jeden Patienten zwanzig Laborwerte vor, untereinander stark verbunden --- jede Paarkorrelation $0{,}7$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwanzig Zahlen je Patient. Aber wie viel Information steckt tatsächlich darin?}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Steigen alle zwanzig Werte gemeinsam, wenn es einem Patienten schlechter geht, so misst man im Grunde eine einzige Größe zwanzigmal. \textbf{Kapitel~10 behauptete, echte Daten füllten den Raum nicht, sondern lägen auf einer dünnen Fläche darin.} Dieses Kapitel findet diese Fläche --- wenn sie eben ist --- und zeigt, was man damit gewinnt und was man verliert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Richtung der größten Streuung}
+
+\begin{merksatz}
+\boxtitel{Die Frage}
+Man sucht eine Richtung $\vek u$ mit $\|\vek u\| = 1$, entlang der die Daten am stärksten streuen. Projiziert man jeden Patienten auf diese Richtung, so erhält man eine einzige Zahl $\vek u^{\!\top}\vek x$, deren Varianz
+\[ \operatorname{Var}\bigl[\vek u^{\!\top}\vek x\bigr] = \vek u^{\!\top}\Sigma\,\vek u \]
+ist --- mit der Kovarianzmatrix $\Sigma$ der Merkmale (Band 4, Kapitel~9).
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 13.1 --- die erste Hauptkomponente}
+Die Richtung größter Streuung ist der Eigenvektor $\vek v_1$ von $\Sigma$ zum größten Eigenwert $\lambda_1$, und die Streuung in dieser Richtung ist $\lambda_1$.
+
+\schritt{Beweis}
+$\Sigma$ ist symmetrisch. Nach dem Spektralsatz (Band 2, Kapitel~10) gibt es eine Orthonormalbasis aus Eigenvektoren $\vek v_1,\ldots,\vek v_p$ mit Eigenwerten $\lambda_1 \ge \cdots \ge \lambda_p \ge 0$.
+
+\kursiv{Man schreibe} $\vek u = \sum_j c_j\vek v_j$ mit $\sum_j c_j^{2} = 1$. Dann ist
+\[ \vek u^{\!\top}\Sigma\,\vek u = \sum_j \lambda_j\,c_j^{2} \ \le\ \lambda_1\sum_j c_j^{2} = \lambda_1 . \]
+Gleichheit gilt für $\vek u = \vek v_1$. $\blacksquare$
+
+\schritt{Die weiteren Hauptkomponenten}
+Sucht man danach die Richtung größter Streuung \kursiv{senkrecht} zu $\vek v_1$, so erhält man $\vek v_2$ mit Streuung $\lambda_2$ --- dieselbe Rechnung, nur ohne den ersten Summanden. Und so fort.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Hauptkomponenten sind die Eigenvektoren der Kovarianzmatrix, nach Eigenwert geordnet. Der Eigenwert ist die Streuung in dieser Richtung.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Anteil der erklärten Streuung}
+Die Gesamtstreuung ist $\sum_j\lambda_j = \operatorname{Spur}\Sigma$. Die ersten $k$ Komponenten erfassen den Anteil
+\[ \frac{\lambda_1 + \cdots + \lambda_k}{\lambda_1 + \cdots + \lambda_p} . \]
+\end{merksatz}
+
+\section{Der Leitfall gerechnet}
+
+\begin{merksatz}
+\boxtitel{Die Eigenwerte bei gleicher Verbundenheit}
+Haben alle $p$ Merkmale Streuung $1$ und paarweise Korrelation $\rho$, so ist
+\[ \Sigma = (1-\rho)\,I + \rho\,\vek1\vek1^{\!\top} . \]
+
+\schritt{Die Eigenwerte}
+\kursiv{Für $\vek v = \vek 1$:}
+\[ \Sigma\vek 1 = (1-\rho)\vek 1 + \rho\,p\,\vek 1 = \bigl(1 + \rho(p-1)\bigr)\vek 1 \]
+
+\kursiv{Für jedes $\vek v \perp \vek 1$:} $\vek 1^{\!\top}\vek v = 0$, also
+\[ \Sigma\vek v = (1-\rho)\,\vek v \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.0cm}P{1.6cm}@{}}
+\toprule
+\textbf{Komponente} & \textbf{Eigenwert} & \textbf{Anzahl} & \textbf{Anteil}\\
+\midrule
+Mittelwert aller & $1+0{,}7\cdot19 = 14{,}3$ & $1$ & $71{,}5\,\%$\\
+alle übrigen & $1-0{,}7 = 0{,}3$ & $19$ & je $1{,}5\,\%$\\
+\midrule
+\textbf{Summe} & $14{,}3 + 19\cdot0{,}3 = 20$ & & $100\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine einzige Zahl --- der Durchschnitt aller zwanzig Werte --- trägt fast drei Viertel der Streuung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man könnte sie einen \enquote{allgemeinen Schweregrad} nennen: Wenn es dem Patienten schlecht geht, steigt alles. \textbf{Das ist die Struktur, die klinische Summenwerte wie der SOFA-Wert ausnutzen} --- sie addieren viele Befunde, weil diese gemeinsam schwanken. Die Hauptkomponente findet dieselbe Idee aus den Daten.}
+\end{minipage}
+\end{center}
+
+\schritt{An einer Stichprobe von $400$ Patienten}
+Die geschätzten Anteile: $72{,}3$; $2{,}1$; $2{,}0$; $1{,}9$ Prozent --- nahe an der Theorie. Für $90$ Prozent der Streuung braucht man allerdings zwölf Komponenten.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die erste Komponente ist ein großer Gewinn, jede weitere ein kleiner.} Nach der ersten sind die übrigen neunzehn Richtungen gleichwertig --- es gibt keine zweite Struktur, nur Rauschen um den Schweregrad herum.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die beste Näherung}
+
+\begin{merksatz}
+\boxtitel{Satz 13.2 --- Eckart und Young, 1936}
+Unter allen Matrizen vom Rang höchstens $k$ ist diejenige, die man erhält, wenn man in der Singulärwertzerlegung $X = UDV^{\!\top}$ alle Singulärwerte außer den $k$ größten auf null setzt, die beste Näherung an $X$ im Sinne der Quadratsumme der Abweichungen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis benutzt eine Ungleichung für Singulärwerte von Summen; wir verzichten auf ihn --- die neunte und letzte Auslassung dieses Bandes. \textbf{Er ist der Grund, warum die Singulärwertzerlegung in Band 2 als zentral bezeichnet wurde}: Sie liefert zu jedem $k$ die bestmögliche Verdichtung.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Zusammenhang mit Satz 13.1}
+Die rechten Singulärvektoren $V$ der zentrierten Datenmatrix sind die Hauptkomponenten; die Singulärwerte sind $d_j = \sqrt{(n-1)\,\lambda_j}$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Hauptkomponenten und Singulärwertzerlegung sind dasselbe --- einmal als Streuung, einmal als Näherung gesehen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Hauptkomponenten und Kamm}
+
+\begin{merksatz}
+\boxtitel{Zwei Arten, schwache Richtungen zu behandeln}
+Man kann die Regression aus Kapitel~4 auch so rechnen: erst auf die ersten $k$ Hauptkomponenten projizieren, dann kleinste Quadrate.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Gewicht der Richtung $j$}\\
+\midrule
+kleinste Quadrate & $1$ für alle\\
+Hauptkomponenten, $k$ & $1$ für $j \le k$, $0$ sonst\\
+Kamm, $\lambda$ & $d_j^{2}/(d_j^{2}+\lambda)$ --- gleitend\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Hauptkomponentenregression schneidet schwache Richtungen ab. Der Kamm dämpft sie.}
+\end{minipage}
+\end{center}
+
+\schritt{Im Leitfall aus Kapitel 4}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{3.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Testfehler}\\
+\midrule
+$1$ Komponente & $1{,}373$\\
+$3$ Komponenten & $1{,}357$\\
+$5$ Komponenten & $1{,}355$\\
+$10$ Komponenten & $1{,}394$\\
+$20$ Komponenten $=$ kleinste Quadrate & $2{,}185$\\
+\midrule
+Kamm & $\mathbf{1{,}345}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Beide Verfahren sind hier fast gleich gut}, und beide weit besser als kleinste Quadrate. Der Kamm ist etwas besser, weil er nicht entscheiden muss, wo er abschneidet --- er lässt jede Richtung ein wenig zu. Dass schon eine einzige Komponente so gut abschneidet, ist hier Glück: Knapp die Hälfte des wahren Zusammenhangs liegt in Richtung des Schweregrads. Der Bruchfall zeigt, dass es auch ganz anders kommen kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wenn die Fläche krumm ist}
+
+\begin{merksatz}
+\boxtitel{Nichtlineare Verfahren}
+Hauptkomponenten finden nur ebene Flächen. Liegen die Daten auf einer gekrümmten, so braucht man andere Werkzeuge.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Kern-Hauptkomp.} & Hauptkomponenten im Merkmalsraum eines Kerns --- der Kerntrick aus Kapitel~6.\\
+\textbf{t-SNE, UMAP} & Bilden hochdimensionale Daten so in die Ebene ab, dass Nachbarn Nachbarn bleiben.\\
+\textbf{Autokodierer} & Ein Netz, das seine Eingabe durch einen engen Flaschenhals hindurch wiederherstellen soll.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Autokodierer ist die nichtlineare Verallgemeinerung von Satz 13.2: \textbf{Mit linearen Einheiten und quadratischem Verlust lernt er genau die ersten Hauptkomponenten.} Mit Gleichrichtern kann er gekrümmte Flächen erfassen. Er ist der Schritt von diesem Kapitel zum nächsten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Streuung ist nicht Bedeutung}
+Die Hauptkomponenten suchen die Richtungen größter Streuung. Ob diese Richtungen etwas mit der Frage zu tun haben, die man stellt, wissen sie nicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Aufgabe 13.3 konstruiert einen Fall, in dem die erste Komponente völlig nutzlos ist} --- Trennschärfe $0{,}50$ --- und die zweite, die man beim Abschneiden verworfen hätte, die ganze Information trägt. Das ist kein Kunstfall: In der Nierendiagnostik etwa ist das Verhältnis zweier eng verbundener Werte oft aussagekräftiger als ihr gemeinsames Niveau.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Einheiten, wieder}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ohne Normierung ist die erste Hauptkomponente fast immer einfach das Merkmal mit den größten Zahlen --- bei Laborwerten etwa die Thrombozyten mit Werten um $250\,000$. \textbf{Dasselbe Problem wie in Kapitel~10 und 12}, und bei unüberwachten Verfahren besonders tückisch, weil es kein Etikett gibt, an dem man den Fehler bemerken würde.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Was Karten aus t-SNE nicht zeigen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Größe der Haufen} & Dichte Gruppen werden aufgebläht, lockere zusammengezogen.\\
+\textbf{Abstand der Haufen} & Weit auseinander gezeichnete Gruppen können eng beieinander liegen.\\
+\textbf{Existenz der Haufen} & Bei ungünstiger Einstellung entstehen Haufen aus reinem Rauschen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Solche Karten sind in der Einzelzellbiologie und zunehmend in der klinischen Forschung verbreitet, und sie sehen überzeugend aus. \textbf{Sie erhalten nur, wer wessen Nachbar ist} --- nicht Entfernungen, nicht Größen, nicht Dichten. Wer aus ihnen liest, zwei Patientengruppen seien \enquote{weit voneinander entfernt}, liest etwas hinein, was die Abbildung nicht verspricht. Mit Kapitel~12 zusammen gilt: Ein Bild mit Haufen ist kein Nachweis von Gruppen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.1 --- Zwei Merkmale von Hand}
+Kreatinin und Harnstoff, beide auf Streuung eins gebracht, Korrelation $0{,}8$. Bestimmen Sie die Hauptkomponenten und ihren Anteil.
+
+\loesung
+\schritt{Schritt 1 --- Die Matrix}
+\[ \Sigma = \begin{pmatrix} 1 & 0{,}8\\ 0{,}8 & 1\end{pmatrix} \]
+
+\schritt{Schritt 2 --- Die Eigenwerte}
+\[ \det(\Sigma - \lambda I) = (1-\lambda)^{2} - 0{,}64 = 0 \quad\Longrightarrow\quad 1-\lambda = \pm0{,}8 \]
+\[ \lambda_1 = 1{,}8, \qquad \lambda_2 = 0{,}2 \]
+
+\schritt{Schritt 3 --- Die Eigenvektoren}
+\[ \vek v_1 = \tfrac{1}{\sqrt2}(1,\ 1), \qquad \vek v_2 = \tfrac{1}{\sqrt2}(1,\ -1) \]
+
+\kursiv{Probe:} $\Sigma\,(1,1)^{\!\top} = (1{,}8;\ 1{,}8)^{\!\top} = 1{,}8\cdot(1,1)^{\!\top}$ \checkmark
+
+\schritt{Schritt 4 --- Die Deutung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{1.6cm}@{}}
+\toprule
+\textbf{Komponente} & \textbf{Bedeutung} & \textbf{Anteil}\\
+\midrule
+$\vek v_1$ & Summe beider & $90\,\%$\\
+$\vek v_2$ & Differenz beider & $10\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist dieselbe Zerlegung wie in Aufgabe 4.3 --- dort mit $\rho = 0{,}95$ und den Eigenwerten $1{,}95$ und $0{,}05$. \textbf{Die erste Komponente misst die Nierenfunktion insgesamt, die zweite das Verhältnis der beiden Werte.} Wer nur die erste behält, verliert zehn Prozent der Streuung --- und die gesamte Information über das Verhältnis.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.2 --- Wie viele Komponenten?}
+Im Leitfall ($p = 20$, $\rho = 0{,}7$): Wie viele Komponenten erfassen $80$, $90$ und $95$ Prozent der Streuung? Wie wäre es bei $\rho = 0{,}3$?
+
+\loesung
+\schritt{Schritt 1 --- Die Formel}
+Mit $\lambda_1 = 1+\rho(p-1)$ und allen übrigen $1-\rho$ erfassen $k$ Komponenten
+\[ \frac{1 + \rho(p-1) + (k-1)(1-\rho)}{p} . \]
+
+\schritt{Schritt 2 --- Bei $\rho = 0{,}7$}
+\[ \frac{14{,}3 + 0{,}3(k-1)}{20} \]
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{2.8cm}P{1.6cm}@{}}
+\toprule
+\textbf{Ziel} & \textbf{Bedingung} & $k$\\
+\midrule
+$80\,\%$ & $0{,}3(k-1) \ge 1{,}7$ & $7$\\
+$90\,\%$ & $0{,}3(k-1) \ge 3{,}7$ & $14$\\
+$95\,\%$ & $0{,}3(k-1) \ge 4{,}7$ & $17$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Beispiel $90\,\%$:} $k - 1 \ge 12{,}33$, also $k = 14$. \checkmark
+
+\schritt{Schritt 3 --- Bei $\rho = 0{,}3$}
+$\lambda_1 = 1 + 0{,}3\cdot19 = 6{,}7$ --- ein Anteil von $33{,}5$ Prozent. Die übrigen haben je $0{,}7$.
+\[ \frac{6{,}7 + 0{,}7(k-1)}{20} \ \ge\ 0{,}9 \quad\Longrightarrow\quad k - 1 \ge 16{,}1 \quad\Longrightarrow\quad k = 18 \]
+
+\schritt{Schritt 4 --- Die Lehre}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die übliche Regel \enquote{so viele Komponenten, dass $90$ Prozent erfasst sind} führt hier fast zur vollen Dimension zurück} --- $14$ oder $18$ von $20$. Die Daten sind eben nicht auf einer niedrigdimensionalen Fläche, sondern auf einer Linie \kursiv{plus} Rauschen in allen Richtungen. Hauptkomponenten verdichten gut, wenn es wenige starke Richtungen gibt; bei gleichmäßigem Rauschen verdichten sie nichts.}
+\end{minipage}
+\end{center}
+
+\kursiv{Die Simulation mit $400$ Patienten ergab für $90$ Prozent zwölf Komponenten --- weniger als die Theorie, weil die geschätzten kleinen Eigenwerte ungleichmäßig streuen.}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.3 --- Die verworfene Komponente}
+Zwei Merkmale mit Korrelation $0{,}9$. Das Risiko hängt nur von ihrer \kursiv{Differenz} ab. Welche Hauptkomponente taugt zur Vorhersage?
+
+\loesung
+\schritt{Schritt 1 --- Die Komponenten}
+Wie in Aufgabe 13.1, mit $\rho = 0{,}9$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{1.6cm}@{}}
+\toprule
+\textbf{Komponente} & \textbf{Richtung} & \textbf{Anteil}\\
+\midrule
+erste & Summe & $95\,\%$\\
+zweite & Differenz & $5\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Der Zusammenhang}
+Das Risiko hängt von $x_1 - x_2$ ab --- also genau von der zweiten Komponente.
+
+\kursiv{Die erste Komponente} ist $x_1 + x_2$. Summe und Differenz zweier gleich streuender Größen sind unkorreliert:
+\[ \operatorname{Cov}(x_1+x_2,\ x_1-x_2) = \operatorname{Var}x_1 - \operatorname{Var}x_2 = 0 \]
+Bei gemeinsamer Normalverteilung heißt das sogar: unabhängig.
+
+\schritt{Schritt 3 --- Simuliert an $20\,000$ Patienten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Merkmal} & \textbf{Streuungs\-anteil} & \textbf{Trennschärfe}\\
+\midrule
+erste Komponente & $95\,\%$ & $\mathbf{0{,}496}$\\
+zweite Komponente & $5\,\%$ & $\mathbf{0{,}854}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Komponente mit $95$ Prozent der Streuung ist nutzlos. Die mit $5$ Prozent trägt alles.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Lehre}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Hauptkomponenten sind unüberwacht} --- sie kennen die Frage nicht. Wer sie als Vorverarbeitung vor eine Vorhersage stellt und dabei nach Streuung abschneidet, kann genau das wegwerfen, worauf es ankommt. Der Kamm aus Kapitel~4 hätte die zweite Richtung gedämpft, aber nicht verworfen, und damit hier deutlich besser abgeschnitten. Verfahren, die Richtungen nach ihrem Zusammenhang mit der Zielgröße wählen --- etwa die Methode der partiellen kleinsten Quadrate ---, vermeiden das Problem.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Pearson, Hotelling und die Intelligenz}
+\Person{Karl Pearson} beschrieb 1901 die Gerade, die einer Punktwolke am nächsten liegt --- gemessen senkrecht zur Geraden, nicht senkrecht zur Achse wie bei der Regression.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das ist die erste Hauptkomponente. \Person{Harold Hotelling} gab 1933 die heutige Form als Eigenwertproblem an und prägte den Namen. \textbf{Beide arbeiteten mit Fragen aus der Psychologie}, und die Methode wurde zunächst dort am meisten verwendet.}
+\end{minipage}
+\end{center}
+
+\schritt{Spearman und der Faktor $g$}
+\Person{Charles Spearman} bemerkte 1904, dass Schulleistungen in verschiedenen Fächern positiv miteinander zusammenhängen, und schloss auf einen gemeinsamen \enquote{allgemeinen Faktor} der Intelligenz.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Mathematisch ist das genau die Lage des Leitfalls: viele positiv verbundene Messungen, eine starke erste Komponente. \textbf{Ob diese Komponente eine reale Eigenschaft ist oder nur die Summe vieler verbundener}, ist bis heute umstritten --- und die Mathematik kann es nicht entscheiden. Dieselbe Frage stellt sich beim \enquote{Schweregrad} des Leitfalls: Ist er eine Größe des Patienten, oder nur ein Name für das gemeinsame Schwanken?}
+\end{minipage}
+\end{center}
+
+\schritt{Eckart und Young}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Carl Eckart} und \Person{Gale Young} bewiesen Satz 13.2 im Jahr 1936 --- in der Zeitschrift \kursiv{Psychometrika}, ebenfalls für psychologische Anwendungen. \textbf{Eckart war Physiker} und hatte zuvor zur Quantenmechanik beigetragen; der Satz ist heute Grundlage jeder Bild- und Datenkompression über Singulärwerte.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Dimensionsreduktion heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Hohe Dimension} & Wenn $p > n$, sind die geschätzten Hauptkomponenten verzerrt --- vorhersagbar verzerrt.\\
+\textbf{Dünn besetzt} & Hauptkomponenten, die nur wenige Merkmale benutzen --- deutbarer.\\
+\textbf{Gelernte Darstellungen} & Netze, deren innere Schichten als verdichtete Merkmale dienen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei mehr Merkmalen als Patienten zeigen auch reine Zufallsdaten eine scheinbar starke erste Komponente. \textbf{Die Verteilung der Eigenwerte reiner Zufallsmatrizen ist bekannt} --- sie folgt einem Gesetz von \Person{Marchenko} und \Person{Pastur} aus dem Jahr 1967 --- und man kann prüfen, ob eine gefundene Komponente darüber hinausgeht. Das ist das Gegenstück zur Zufallskorrelation aus Kapitel~3.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 13.1} & Hauptkomponente $=$ größter Eigenvektor\\
+\textbf{Gleiche Verbundenheit} & $1+\rho(p-1)$ und $1-\rho$\\
+\textbf{Satz 13.2} & abgeschnittene Zerlegung ist beste Näherung\\
+\textbf{Kamm gegen Hauptk.} & dämpfen gegen abschneiden\\
+\textbf{Der Bruchfall} & Streuung ist nicht Bedeutung\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Hauptkomponenten verdichten linear, der Autokodierer nichtlinear. Das nächste Kapitel geht den ganzen Weg --- zu Netzen mit vielen Schichten und Milliarden von Gewichten --- und steht dort vor dem Rätsel, das das Vorwort ankündigte.}
+\end{minipage}
+\end{center}
+\end{merksatz}

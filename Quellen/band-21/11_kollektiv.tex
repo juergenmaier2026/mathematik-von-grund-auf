@@ -1,0 +1,660 @@
+\part{Regeln entwerfen}
+
+\chapter{Kollektivgüter und soziale Dilemmata}
+
+\section{Von zwei auf viele}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall: ein gemeinsamer Nachtdienstpool}
+Vier Abteilungen des Klinikums können Personal in einen gemeinsamen Bereitschaftspool geben. Der Pool arbeitet wirksamer als getrennte Dienste --- jede eingebrachte Stunde erbringt das Doppelte, verteilt auf alle vier.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.8cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Wert} & \\
+\midrule
+Abteilungen $n$ & $4$ & \\
+Verfügbar $e$ & $10$ Stunden & je Abteilung\\
+Verstärkung $r$ & $2$ & Wirksamkeits\-gewinn\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Auszahlung}
+Gibt Abteilung $i$ den Beitrag $c_i$ ab, so erhält sie
+\[ \Aus_i = \underbrace{e-c_i}_{\text{behalten}} \;+\; \underbrace{\frac{r}{n}\sum_j c_j}_{\text{Anteil am Pool}} . \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 11.1 --- das Dilemma}
+Für $1 < r < n$ gilt:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Gleichgewicht} & Niemand gibt etwas: $c_i = 0$ ist strikt dominant.\\
+\textbf{Optimum} & Alle geben alles: $c_i = e$ maximiert die Summe.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis --- das Gleichgewicht}
+Der Grenzertrag einer zusätzlich eingebrachten Einheit beträgt für den Einbringenden
+\[ \frac{\partial \Aus_i}{\partial c_i} = -1 + \frac{r}{n} . \]
+
+Für $r < n$ ist das negativ. Jede Einheit, die man abgibt, kostet unter dem Strich.
+
+\kursiv{Im Leitfall:} $-1+\tfrac24 = -\tfrac12$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede eingebrachte Stunde kostet die Abteilung eine halbe Stunde --- unabhängig davon, was die anderen tun.}
+\end{minipage}
+\end{center}
+
+\schritt{Beweis --- das Optimum}
+Der Gesamtertrag beträgt
+\[ \sum_i \Aus_i = n\,e - \sum_j c_j + r\sum_j c_j = n\,e + (r-1)\sum_j c_j . \]
+
+Für $r > 1$ wächst er mit jedem Beitrag. $\blacksquare$
+
+\schritt{Die Zahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Lage} & \textbf{je Abt.} & \textbf{gesamt}\\
+\midrule
+alle geben $10$ & $20$ & $80$\\
+alle geben $0$ & $10$ & $40$\\
+\midrule
+einer gibt $10$ & $5$ & \\
+die drei anderen & $15$ & $50$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Gleichgewicht verschenkt die Hälfte.} Und wer allein beiträgt, steht schlechter da als ohne den Pool.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist die eigentliche Schwierigkeit: \textbf{Der einzelne Beitragende wird bestraft, während die anderen gewinnen.} Bei $n=2$ ist das genau das Gefangenendilemma aus Kapitel~5, mit $T=15$, $R=20$ --- nein, hier liegt ein Unterschied: Der Beitrag ist teilbar, und das erlaubt Zwischenstufen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Schwelle liegt bei $r = n$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{3.2cm}@{}}
+\toprule
+$r$ & \textbf{Grenzertrag} & \\
+\midrule
+$1$ & $-\tfrac34$ & kein Gewinn zu verteilen\\
+$2$ & $-\tfrac12$ & \textcolor{akzent}{Dilemma}\\
+$3$ & $-\tfrac14$ & \textcolor{akzent}{Dilemma}\\
+$4$ & $0$ & Gleichstand\\
+$5$ & $+\tfrac14$ & \textcolor{gruen}{Beitrag dominant}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Erst wenn der Gewinn die Gruppengröße übersteigt, löst sich das Dilemma von selbst.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Daraus folgt unmittelbar, warum große Gruppen das Problem verschärfen: \textbf{Mit wachsendem $n$ muss $r$ mitwachsen}, sonst wird der Grenzertrag immer negativer. Bei $n=100$ bräuchte man eine hundertfache Verstärkung --- und die gibt es nicht. Das ist der Grund, warum Zusammenarbeit in kleinen Gruppen leichter gelingt, und er hat nichts mit Vertrautheit zu tun.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Die Allmendetragik}
+
+\begin{merksatz}
+\boxtitel{Der zweite Grundtyp}
+Beim Kollektivgut geht es um das Einbringen, bei der Allmende um das Entnehmen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kollektivgut} & Niemand kann ausgeschlossen werden; wer beiträgt, trägt die Kosten allein.\\
+\textbf{Allmende} & Niemand kann ausgeschlossen werden; wer entnimmt, mindert den Bestand für alle.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Das Modell}
+$n$ Nutzer entnehmen je $x_i$; der Ertrag je Einheit sinkt mit der Gesamtentnahme $X = \sum_i x_i$:
+\[ \Aus_i = x_i\,(a - b\,X) - c\,x_i \]
+
+\schritt{Das Gleichgewicht}
+\[ \frac{\partial \Aus_i}{\partial x_i} = a - b\,X - b\,x_i - c = 0 \]
+
+\kursiv{Man beachte den mittleren Term:} Der Nutzer berücksichtigt nur die Minderung, die \kursiv{seine eigene} Entnahme bei \kursiv{seinen eigenen} Einheiten verursacht --- nicht die bei den anderen.
+
+Im symmetrischen Fall $x_i = X/n$:
+\[ a - b\,X - \frac{b\,X}{n} - c = 0 \quad\Longrightarrow\quad X_{\text{GG}} = \frac{n\,(a-c)}{b\,(n+1)} \]
+
+\schritt{Das Optimum}
+\[ \max_X \ X\,(a-bX) - cX \quad\Longrightarrow\quad a - 2bX - c = 0 \quad\Longrightarrow\quad X^{*} = \frac{a-c}{2b} \]
+
+\schritt{Satz 11.2 --- der Übernutzungsfaktor}
+\[ \frac{X_{\text{GG}}}{X^{*}} = \frac{2n}{n+1} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+$n$ & \textbf{Faktor} & $X_{\text{GG}}$ & \textbf{Ertrag}\\
+\midrule
+$1$ & $1{,}00$ & $40{,}0$ & $100\,\%$\\
+$2$ & $1{,}33$ & $53{,}3$ & $89\,\%$\\
+$4$ & $1{,}60$ & $64{,}0$ & $64\,\%$\\
+$10$ & $1{,}82$ & $72{,}7$ & $33\,\%$\\
+$100$ & $1{,}98$ & $79{,}2$ & $4\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Mit $a=100$, $b=1$, $c=20$, also $X^{*}=40$.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Übernutzung nähert sich dem Faktor zwei --- der Ertrag geht gegen null.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert ist das Auseinanderklaffen von Menge und Ertrag: Bei hundert Nutzern wird nur doppelt so viel entnommen, aber der Ertrag fällt auf ein Fünfundzwanzigstel. \textbf{Der Grund ist die Krümmung}: Nahe dem Punkt, an dem der Ertrag null wird ($X = 80$), bringt jede weitere Einheit fast nichts mehr ein und schädigt alle übrigen. Der Einzelne merkt davon nur den eigenen Anteil.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Sonderfall $n=1$}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein einziger Nutzer wählt das Optimum.} Das Problem entsteht ausschließlich durch die Aufteilung.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Daraus zog man lange den Schluss, Privateigentum oder staatliche Verwaltung seien die einzigen Auswege. \textbf{Das ist voreilig}, wie Abschnitt 11.4 zeigt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was hilft}
+
+\begin{merksatz}
+\boxtitel{Bestrafung}
+Man erlaubt den Beteiligten, andere auf eigene Kosten zu bestrafen: Wer $k$ aufwendet, fügt dem Bestraften $m$ zu.
+
+\schritt{Wann sie abschreckt}
+Der Trittbrettgewinn je nicht eingebrachter Einheit beträgt
+\[ 1 - \frac{r}{n} = \tfrac12 \quad\text{im Leitfall.} \]
+
+Eine erwartete Strafe von mehr als $\tfrac12$ je Einheit schreckt ab.
+
+\schritt{Das eigentliche Problem}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bestrafen kostet den Bestrafer --- und nützt allen. Es ist selbst ein Kollektivgut.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist das Dilemma eine Ebene höher verschoben, nicht gelöst. \textbf{Man nennt das das Dilemma zweiter Ordnung.} Im rein eigennützigen Modell straft niemand, und die Drohung ist unglaubwürdig --- genau die Lage aus Kapitel~7.}
+\end{minipage}
+\end{center}
+
+\schritt{Was Versuche zeigen}
+\Person{Ernst Fehr} und \Person{Simon Gächter} führten 2000 Versuche mit und ohne Strafmöglichkeit durch.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{5.8cm}@{}}
+\toprule
+\textbf{Ohne Strafe} & Die Beiträge beginnen bei etwa der Hälfte und fallen über zehn Runden gegen null.\\
+\textbf{Mit Strafe} & Die Beiträge steigen und bleiben nahe dem Maximum.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und zwar auch dann, wenn die Gruppen nach jeder Runde neu zusammengesetzt werden --- also ohne jede Aussicht auf eigenen Nutzen. \textbf{Menschen bestrafen, obwohl es sich nicht lohnt}, und das ist die verlässlichste Abweichung vom eigennützigen Modell, die dieses Fach kennt. Kapitel~15 behandelt, was daraus folgt.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Vorbehalt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wird auch das Bestrafen bestraft --- Vergeltung gegen den Bestrafer ---, so bricht der Nutzen zusammen. In Versuchen mit dieser Möglichkeit sinkt der Gesamtertrag unter den ohne jede Strafe. \textbf{Bestrafung wirkt nur, wenn sie ihrerseits gedeckt ist}, und das verlangt eine Instanz oder eine geteilte Norm.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die acht Regeln von Ostrom}
+\Person{Elinor Ostrom} untersuchte ab den 1970er Jahren Allmenden, die über Jahrhunderte funktionierten --- Almen, Bewässerungssysteme, Fischgründe.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+$1$ & Klare Grenzen: Wer ist berechtigt, und wo?\\
+$2$ & Regeln, die zu den örtlichen Verhältnissen passen.\\
+$3$ & Die Betroffenen können die Regeln mitgestalten.\\
+$4$ & Überwachung durch die Beteiligten selbst.\\
+$5$ & Abgestufte Strafen --- kleine Vergehen, kleine Folgen.\\
+$6$ & Zugängliche Verfahren zur Streitschlichtung.\\
+$7$ & Anerkennung des Selbstverwaltungsrechts von außen.\\
+$8$ & Bei großen Systemen: mehrere Ebenen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Weder Privatisierung noch staatliche Verwaltung --- sondern Selbstverwaltung unter bestimmten Bedingungen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Regeln sind keine Theorie, sondern eine Auswertung von Hunderten von Fällen. \textbf{Spieltheoretisch lassen sie sich dennoch deuten}: Regel 1 macht die Gruppe klein und damit $r/n$ groß; Regel 4 stellt die Beobachtbarkeit her, die Kapitel~8 verlangt; Regel 5 entspricht dem großzügigen Tit for Tat aus dem dortigen Bruchfall; Regel 7 sichert, dass die Zusammenarbeit kein absehbares Ende hat --- also $\delta$ groß bleibt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was die Modelle vereinfachen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Gleiche Spieler} & Alle haben dieselbe Ausstattung und dieselben Kosten. Bei ungleichen Beteiligten sieht das Gleichgewicht anders aus.\\
+\textbf{Ein Zug} & Die Lösungen aus Kapitel~8 stehen zur Verfügung, sobald wiederholt wird.\\
+\textbf{Anonym} & Wer beobachtet wird, verhält sich anders.\\
+\textbf{Lineare Erträge} & Der Grenzertrag $r/n$ ist konstant; Schwelleneffekte fehlen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur vierten Zeile}
+Viele Kollektivgüter haben eine Schwelle: Unterhalb einer Mindestmenge entsteht gar nichts.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Nachtdienstpool, der nur von einer Abteilung gespeist wird, deckt keine Nacht ab. \textbf{Mit Schwelle wird aus dem Dilemma eine Hirschjagd} --- und damit ein Vertrauens-, kein Anreizproblem. Die Empfehlung kehrt sich um: Reden statt Bestrafen, wie die Tabelle in Kapitel~5 sagt.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei ungleicher Ausstattung kann es geschehen, dass der Größte allein das Gut bereitstellt und die Kleinen mitnimmt --- \Person{Mancur Olson} nannte das 1965 die \enquote{Ausbeutung der Großen durch die Kleinen}. \textbf{Das ist kein Randfall}, sondern die Regel bei Bündnissen, Normungsgremien und Forschungsverbünden.}
+\end{minipage}
+\end{center}
+
+\schritt{Und ein Wort zur Bezeichnung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{Garrett Hardin} prägte 1968 den Ausdruck \enquote{Tragik der Allmende} --- und beschrieb dabei keine Allmende, sondern eine unregulierte Ressource ohne jede Regel. \textbf{Historische Allmenden waren durchweg geregelt}, mit Zahl der Tiere, Zeiten und Aufsicht. Hardin selbst räumte später ein, er hätte von einer \kursiv{unverwalteten} Allmende sprechen müssen. Der Ausdruck hat sich dennoch durchgesetzt und wird bis heute als Beleg für etwas herangezogen, das er nicht zeigt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- Wie groß darf die Gruppe sein?}
+Der Pool hat die Verstärkung $r = 2{,}5$. Bis zu welcher Gruppengröße trägt sich die Zusammenarbeit von selbst, und was geschieht darüber?
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingung}
+Beitragen lohnt sich einzeln, wenn
+\[ -1 + \frac{r}{n} \ \ge\ 0 \quad\Longleftrightarrow\quad n \ \le\ r . \]
+
+\[ n \ \le\ 2{,}5 \quad\Longrightarrow\quad n \le 2 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei zwei Abteilungen ist der Beitrag dominant, ab drei nicht mehr.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die Zahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.2cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+$n$ & \textbf{Grenzertrag} & \textbf{GG je Abt.} & \textbf{Opt.\ je Abt.}\\
+\midrule
+$2$ & $+0{,}25$ & $12{,}5$ & $12{,}5$\\
+$3$ & $-0{,}17$ & $10$ & $15$\\
+$5$ & $-0{,}50$ & $10$ & $15$\\
+$10$ & $-0{,}75$ & $10$ & $15$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zum Optimum:} Alle geben $e=10$, jeder erhält $\frac{r}{n}\cdot n\cdot e = r\,e = 25$? Nein:
+\[ \Aus_i = 0 + \frac{r}{n}\cdot n\cdot 10 = r\cdot10 = 25 \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Ein Rechenfehler, der leicht unterläuft: Der Faktor $n$ kürzt sich. \textbf{Bei vollständiger Beteiligung erhält jeder $r\,e$ --- unabhängig von der Gruppengröße.} Das Optimum beträgt also $25$, nicht $15$.}
+\end{minipage}
+\end{center}
+
+\kursiv{Berichtigt:}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.2cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+$n$ & \textbf{Grenzertrag} & \textbf{GG} & \textbf{Optimum}\\
+\midrule
+$2$ & $+0{,}25$ & $25$ & $25$\\
+$3$ & $-0{,}17$ & $10$ & $25$\\
+$5$ & $-0{,}50$ & $10$ & $25$\\
+$10$ & $-0{,}75$ & $10$ & $25$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Der Befund}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Optimum hängt nicht von der Gruppengröße ab --- das Gleichgewicht schon.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Verlust springt beim Übergang von zwei auf drei Abteilungen von null auf sechzig Prozent. \textbf{Es gibt keinen allmählichen Übergang}, weil die Dominanz entweder vorliegt oder nicht. Für die Praxis heißt das: Man teile große Pools in kleine auf, sofern die Verstärkung das zulässt --- oder man sorge für Beobachtbarkeit und Wiederholung.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Aufteilung durchgerechnet}
+Zehn Abteilungen in fünf Zweiergruppen:
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Aufbau} & \textbf{je Abt.} & \textbf{gesamt}\\
+\midrule
+ein Pool zu $10$ & $10$ & $100$\\
+fünf Pools zu $2$ & $\mathbf{25}$ & $\mathbf{250}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Aufteilung verliert allerdings die Größenvorteile: Ein Pool aus zehn Abteilungen könnte eine höhere Verstärkung $r$ erreichen als einer aus zweien. \textbf{Der Entwurf muss beide Wirkungen gegeneinander abwägen}, und die Optimierung dieses Verhältnisses ist die eigentliche Gestaltungsaufgabe.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- Die Allmende begrenzen}
+Bei $a=100$, $b=1$, $c=20$ und $n=4$ soll eine Obergrenze je Nutzer eingeführt werden. Welche, und was bringt sie?
+
+\loesung
+\schritt{Schritt 1 --- Die Ausgangslage}
+\[ X^{*} = \frac{a-c}{2b} = \frac{80}{2} = 40, \qquad X_{\text{GG}} = \frac{4\cdot80}{5} = 64 \]
+
+\schritt{Schritt 2 --- Die Erträge}
+\kursiv{Im Optimum:}
+\[ 40\,(100-40) - 20\cdot40 = 2400 - 800 = 1600 \]
+\kursiv{Im Gleichgewicht:}
+\[ 64\,(100-64) - 20\cdot64 = 2304 - 1280 = 1024 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Verlust beträgt $576$, also $36$ Prozent.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Obergrenze}
+\[ \bar x = \frac{X^{*}}{n} = \frac{40}{4} = 10 \]
+
+\schritt{Schritt 4 --- Ist die Grenze durchsetzbar?}
+Ein einzelner Nutzer bei $\bar x = 10$, die übrigen ebenfalls:
+\[ \frac{\partial \Aus_i}{\partial x_i} = 100 - 40 - 10 - 20 = 30 \ >\ 0 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jeder hätte einen kräftigen Anreiz, die Grenze zu überschreiten.} Sie muss überwacht werden.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Alternative: eine Abgabe}
+Erhebt man je entnommener Einheit eine Abgabe $\tau$, so lautet die Bedingung
+\[ a - bX - b\,x_i - c - \tau = 0 . \]
+
+Damit $X = 40$ und $x_i = 10$ herauskommt:
+\[ 100 - 40 - 10 - 20 - \tau = 0 \quad\Longrightarrow\quad \tau = 30 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Maßnahme} & \textbf{Entnahme} & \textbf{Ertrag}\\
+\midrule
+keine & $64$ & $1024$\\
+Obergrenze $10$ & $40$ & $1600$\\
+Abgabe $\tau=30$ & $40$ & $1600$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide Maßnahmen führen zum selben Ergebnis --- bei der Abgabe fließen allerdings $30\cdot40 = 1200$ an den Erheber, so dass den Nutzern nur $400$ bleiben. \textbf{Die Abgabe wirkt lenkend, aber sie verteilt um}, und ob das erwünscht ist, entscheidet die Verwendung der Einnahmen. Bei Rückerstattung an die Nutzer sind beide Wege gleichwertig.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Der Vergleich mit Kapitel 5}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In Aufgabe 5.1 musste der Abschlag die gesamte Versuchung $T-R$ aufzehren. Hier ist es dasselbe Prinzip in stetiger Form: \textbf{Die Abgabe muss genau den Schaden decken, den eine zusätzliche Einheit den \kursiv{anderen} zufügt} --- hier $b\cdot(X-x_i) = 1\cdot30 = 30$. Das ist die Pigou-Abgabe, und sie ist das ökonomische Standardmittel gegen Allmendeprobleme.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Lohnt sich Bestrafen?}
+Im Leitfall ($n=4$, $e=10$, $r=2$) kann jede Abteilung für $k=1$ einer anderen $m=3$ abziehen. Prüfen Sie die Abschreckung und das Dilemma zweiter Ordnung.
+
+\loesung
+\schritt{Schritt 1 --- Der Trittbrettgewinn}
+Wer eine Einheit zurückhält, gewinnt
+\[ 1 - \frac{r}{n} = 1-\tfrac12 = \tfrac12 . \]
+
+Über die volle Ausstattung von $10$ Einheiten:
+\[ 10\cdot\tfrac12 = 5 \]
+
+\schritt{Schritt 2 --- Die nötige Strafe}
+Bestraft eine einzige Abteilung, so muss gelten
+\[ m \ >\ 5 \quad\Longrightarrow\quad m = 3 \ \text{genügt nicht.} \]
+
+Bestrafen alle drei übrigen:
+\[ 3\cdot3 = 9 \ >\ 5 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Strafe schreckt ab, wenn mindestens zwei der drei übrigen strafen} --- denn $2\cdot3 = 6 > 5$.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was Bestrafen kostet}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Beteiligter} & \textbf{Kosten} & \\
+\midrule
+jeder Bestrafer & $1$ & \\
+zusammen (zwei) & $2$ & \\
+Bestrafter & $6$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 4 --- Das Dilemma zweiter Ordnung}
+Angenommen, alle tragen bei, und niemand muss bestraft werden. Was gewinnt ein Bestrafer?
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nichts --- die Bereitschaft zu strafen kostet erst dann, wenn sie gebraucht wird.}
+\end{minipage}
+\end{center}
+
+Tritt aber ein Trittbrettfahrer auf, so trägt jeder Bestrafer $1$, während der Nutzen der wiederhergestellten Zusammenarbeit auf alle vier entfällt.
+
+\[ \text{Nutzen je Abteilung} = \tfrac14\cdot\text{Gesamtgewinn}, \qquad \text{Kosten} = 1 \ \text{nur für den Strafenden} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Genau dieselbe Struktur wie beim ursprünglichen Kollektivgut} --- nur mit der Strafe als Gut. Im rein eigennützigen Modell wartet jeder darauf, dass ein anderer straft, und niemand tut es.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Warum es dennoch geschieht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Wiederholung} & Bei bekannter Fortsetzung zahlt sich der Ruf des Strafenden aus --- Kapitel~8.\\
+\textbf{Norm} & Wer nicht straft, wird selbst als abweichend angesehen.\\
+\textbf{Vorlieben} & Menschen strafen auch ohne eigenen Nutzen; das ist messbar und reproduzierbar.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile verlässt das Modell dieses Bandes: Sie besagt, dass die Auszahlungen falsch angesetzt waren --- die erste Warnung des Vorworts. \textbf{Setzt man in die Nutzenfunktion einen Term für Ungleichheitsaversion, so wird das Strafen eigennützig}, und die Rechnung stimmt wieder. Kapitel~15 behandelt, ob das ein Fortschritt ist oder eine nachträgliche Anpassung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Aufsatz und eine Widerlegung}
+\Person{Garrett Hardin} (1915--2003) veröffentlichte 1968 in \kursiv{Science} den Aufsatz \enquote{The Tragedy of the Commons}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er wurde eine der meistzitierten Arbeiten der Wissenschaftsgeschichte. Sein Beispiel --- eine offene Weide, auf der jeder Hirte ein Tier zu viel hält --- stammt aus einer Schrift von \Person{William Forster Lloyd} aus dem Jahr 1833. \textbf{Hardins eigentliches Thema war die Bevölkerungspolitik}, und seine dort gezogenen Folgerungen waren eugenisch und fremdenfeindlich; das wird bei der Zitierung meist übergangen.}
+\end{minipage}
+\end{center}
+
+\schritt{Ostrom}
+\Person{Elinor Ostrom} (1933--2012) war Politikwissenschaftlerin und untersuchte über Jahrzehnte Gemeinschaften, die gemeinsame Ressourcen verwalten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Ihr Buch \kursiv{Governing the Commons} von 1990 stellte Hunderte von Fällen zusammen --- schweizerische Almen seit dem 13.\ Jahrhundert, spanische Bewässerungsgenossenschaften, japanische Waldallmenden, philippinische Fischereien. \textbf{Viele funktionierten seit Jahrhunderten}, und zwar weder durch Privateigentum noch durch staatliche Verwaltung.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Preis}
+2009 erhielt sie als erste Frau den Wirtschaftsnobelpreis.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie war keine Ökonomin, hatte nie formale Wirtschaftstheorie studiert und arbeitete überwiegend mit Feldforschung. \textbf{Ihre Bewerbung um ein Wirtschaftsstudium war in den 1950er Jahren abgelehnt worden}, weil sie in der Schule kein Latein und keine höhere Mathematik belegt hatte --- Fächer, die Mädchen an ihrer Schule nicht angeboten wurden.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Verbindung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Ostrom arbeitete in späteren Jahren eng mit Spieltheoretikern zusammen und ließ ihre acht Regeln experimentell prüfen. \textbf{Sie bestritt die Modelle nicht, sondern deren Anwendungsbereich} --- ihr Einwand lautete, dass die Annahme anonymer, einmaliger, unregulierter Nutzung fast nie zutrifft. Das ist genau der Bruchfall dieses Kapitels.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Kollektivgüter heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Antibiotika} & Wirksamkeit als erschöpfbare gemeinsame Ressource --- der Leitfall des ganzen Bandes.\\
+\textbf{Klima} & Das größte Allmendeproblem, mit $n$ in der Größenordnung von zweihundert.\\
+\textbf{Daten} & Offene Datensätze und Software als Kollektivgut mit Schwelle.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Die Wirksamkeit eines Antibiotikums ist eine Ressource, die sich durch Gebrauch erschöpft und sich nur langsam erholt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist Kapitel~5 der Sonderfall $n=2$ dieses Kapitels. \textbf{Bei hundert Kliniken in einer Region beträgt der Übernutzungsfaktor nach Satz 11.2 bereits $1{,}98$} --- praktisch die doppelte Verschreibungsmenge gegenüber dem Optimum. Die Erholungszeit einer Resistenzlage nach Verzicht liegt bei Jahren, was das Problem der Erschöpfbarkeit verschärft.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Freie Software wird von wenigen erstellt und von Millionen genutzt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach Satz 11.1 sollte das nicht funktionieren --- und es funktioniert dennoch, seit Jahrzehnten. \textbf{Die Erklärungen führen sämtlich aus dem Modell heraus}: Ruf, Lernen, eigener Bedarf, Anstellung durch Unternehmen, die von der Software leben. Zugleich sind die bekannten Schwachstellen genau die vorhergesagten: Wesentliche Bausteine werden oft von einzelnen unbezahlten Personen gepflegt, und deren Ausfall legt große Teile der Infrastruktur lahm.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 11.1} & Grenzertrag $r/n - 1$ entscheidet\\
+\textbf{Satz 11.2} & Übernutzung $2n/(n+1)$\\
+\textbf{Bestrafung} & wirkt, ist aber selbst ein Kollektivgut\\
+\textbf{Ostrom} & acht Regeln, spieltheoretisch deutbar\\
+\textbf{Der Bruchfall} & mit Schwelle wird es eine Hirschjagd\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle Maßnahmen dieses Kapitels verändern die Auszahlungen. Das nächste fragt, was sich allein durch die Gestaltung des \kursiv{Verfahrens} erreichen lässt --- und findet eine Grenze, die keine Auszahlung verschiebt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

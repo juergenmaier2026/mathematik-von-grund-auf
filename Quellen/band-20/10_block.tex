@@ -1,0 +1,626 @@
+\chapter{Blockchiffren}
+
+\section{Der Übergang}
+
+\begin{merksatz}
+\boxtitel{Was Satz 9.3 erzwingt}
+Perfekte Sicherheit verlangt einen Schlüssel, der so lang ist wie die Nachricht. Das ist praktisch unbrauchbar.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Also gibt man sie auf --- und ersetzt sie durch eine schwächere Forderung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Informations\-theoretisch} & Der Geheimtext enthält \kursiv{keine} Information über den Klartext. Gilt gegen jeden Gegner.\\
+\textbf{Rechnerisch} & Der Geheimtext enthält Information, aber kein Verfahren mit vertretbarem Aufwand kann sie gewinnen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Unterschied ist grundsätzlich. Bei rechnerischer Sicherheit \kursiv{gibt} es die Information --- ein Gegner mit unbegrenzter Rechenzeit findet den Schlüssel stets, einfach durch Durchprobieren. \textbf{Die Sicherheit beruht allein darauf, dass niemand diese Rechenzeit hat.}}
+\end{minipage}
+\end{center}
+
+\schritt{Die Zahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.2cm}P{3.2cm}@{}}
+\toprule
+\textbf{Schlüssel} & \textbf{Möglich\-keiten} & \textbf{bei $10^{18}$ je Sekunde}\\
+\midrule
+$56$ Bit & $7{,}2\cdot10^{16}$ & $0{,}07$ Sekunden\\
+$112$ Bit & $5{,}2\cdot10^{33}$ & $1{,}7\cdot10^{8}$ Jahre\\
+$128$ Bit & $3{,}4\cdot10^{38}$ & $1{,}1\cdot10^{13}$ Jahre\\
+$256$ Bit & $1{,}2\cdot10^{77}$ & $3{,}7\cdot10^{51}$ Jahre\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Weltalter beträgt $1{,}4\cdot10^{10}$ Jahre. Bei $128$ Bit liegt die Suchdauer tausendmal darüber --- und die unterstellte Rate von einer Trillion Schlüsseln je Sekunde ist bereits großzügig. \textbf{Zwischen $56$ und $128$ Bit liegen keine zweieinhalb Größenordnungen, sondern zwanzig.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Verwirrung und Verwischung}
+
+\begin{merksatz}
+\boxtitel{Shannons zwei Entwurfsgrundsätze}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Verwirrung} & Der Zusammenhang zwischen Schlüssel und Geheimtext soll so verwickelt sein, dass er sich nicht durch einfache Gleichungen beschreiben lässt.\\
+\textbf{Verwischung} & Jedes Bit des Klartextes soll jedes Bit des Geheimtextes beeinflussen --- die Struktur des Klartextes wird über den ganzen Block verteilt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide stammen aus Shannons Arbeit von 1949 und sind bis heute die Leitlinien jedes Chiffrenentwurfs. \textbf{Die Verwischung ist die Antwort auf die Häufigkeitsanalyse aus Kapitel~9}: Wenn ein einzelnes Klartextzeichen den ganzen Block verändert, gibt es keine Zeichenhäufigkeiten mehr, die man zählen könnte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das Lawinenkriterium}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ändert man ein Bit der Eingabe, so soll sich im Mittel die Hälfte der Ausgabebits ändern.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum genau die Hälfte}
+Das ist das Verhalten einer zufälligen Abbildung. Jedes Ausgabebit kippt unabhängig mit Wahrscheinlichkeit $\frac12$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Wert} & \\
+\midrule
+Blocklänge & $128$ & \\
+Erwartete Änderung & $64$ & \\
+Standard\-abweichung & $5{,}66$ & $\sqrt{128/4}$\\
+$\Pr[54\ldots74]$ & $0{,}937$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ändern sich deutlich weniger oder deutlich mehr als $64$ Bit, so verhält sich die Chiffre nicht wie eine zufällige Abbildung --- und das ist angreifbar. \textbf{Das Prüfkriterium lautet nicht \enquote{möglichst viel Änderung}, sondern \enquote{genau so viel wie bei Zufall}.} Eine Chiffre, die \kursiv{alle} Bits kippt, wäre ebenso auffällig wie eine, die keines kippt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Aufbau in Runden}
+Verwirrung und Verwischung erreicht man durch Wiederholung einfacher Bausteine.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Baustein} & \textbf{Wirkung} & \textbf{Umfang}\\
+\midrule
+Ersetzung & Verwirrung & wenige Bits\\
+Vertauschung & Verwischung & ganzer Block\\
+Schlüssel\-addition & bindet den Schlüssel & ganzer Block\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+\foreach \r in {0,1,2} {
+  \begin{scope}[yshift=-\r*1.25cm]
+  \foreach \x in {0,1,2,3}
+    \draw[tief, line width=0.9pt, fill=tief!10] (\x*1.5,0) rectangle ++(1.0,0.45);
+  \node[font=\scriptsize, color=grau, anchor=west] at (6.3,0.22) {Ersetzung};
+  \draw[kanted] (0.5,-0.05) -- (2.9,-0.55);
+  \draw[kanted] (2.0,-0.05) -- (0.6,-0.55);
+  \draw[kanted] (3.5,-0.05) -- (5.0,-0.55);
+  \draw[kanted] (5.0,-0.05) -- (3.6,-0.55);
+  \end{scope}
+}
+\node[font=\scriptsize, color=grau, anchor=west] at (6.3,-0.45) {Vertauschung};
+\node[font=\scriptsize\itshape, color=grau] at (3.0,-4.2) {mehrere Runden};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach wenigen Runden ist jedes Ausgabebit von jedem Eingabebit abhängig --- das nennt man \Begriff{vollständige Verwischung}. Die tatsächliche Rundenzahl liegt deutlich darüber: Der Advanced Encryption Standard erreicht vollständige Verwischung nach zwei Runden und benutzt zehn bis vierzehn. \textbf{Die überzähligen Runden sind der Sicherheitsabstand}, und der ist es, der ein Verfahren jahrzehntelang trägt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Betriebsarten}
+
+\begin{merksatz}
+\boxtitel{Eine Blockchiffre allein genügt nicht}
+Sie verschlüsselt einen Block fester Länge --- etwa $128$ Bit. Nachrichten sind länger.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.8cm}P{3.0cm}P{3.6cm}@{}}
+\toprule
+\textbf{Art} & \textbf{Vorschrift} & \textbf{Eigenschaft}\\
+\midrule
+ECB & $C_i = E_K(M_i)$ & \textcolor{akzent}{unbrauchbar}\\
+CBC & $C_i = E_K(M_i\oplus C_{i-1})$ & braucht Startwert\\
+CTR & $C_i = M_i\oplus E_K(N\Vert i)$ & Stromchiffre\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Warum ECB unbrauchbar ist}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gleiche Klartextblöcke ergeben gleiche Geheimtextblöcke.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Folge}
+Der Geheimtext verrät, welche Blöcke übereinstimmen --- also die gesamte Wiederholungsstruktur der Nachricht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei einem Bild bleiben die Umrisse sichtbar: Flächen gleicher Farbe werden zu Flächen gleicher Geheimtextblöcke. Das bekannteste Anschauungsbeispiel --- ein verschlüsseltes Pinguinbild, dessen Umriss erkennbar bleibt --- ist seit Jahren in jedem Lehrbuch.}
+\end{minipage}
+\end{center}
+
+\schritt{In der Sprache von Kapitel 4}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$I(M;C) > 0$, und zwar erheblich.} ECB verletzt die Grundforderung, ohne dass man irgendetwas brechen müsste.
+\end{minipage}
+\end{center}
+
+\schritt{Bei Befunddaten}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine Datenbank mit einem Eintrag je Patient, blockweise verschlüsselt: Alle Patienten mit derselben Diagnose haben denselben Geheimtextblock. Man kennt die Diagnose nicht --- aber man kann die Patienten gruppieren und die Gruppengrößen mit der bekannten Häufigkeitsverteilung aus Kapitel~1 abgleichen. \textbf{Damit ist die häufigste Gruppe zugeordnet, und die zweithäufigste auch.} Es ist die Häufigkeitsanalyse aus Kapitel~9, auf Blöcke übertragen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Die Abhilfe: Zufall hinzufügen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{CBC} & Ein zufälliger Startwert wird dem ersten Block zugemischt; jeder weitere Block erhält den vorangegangenen Geheimtext.\\
+\textbf{CTR} & Ein Zähler wird verschlüsselt und liefert einen Schlüsselstrom; die Blockchiffre wird nie auf den Klartext angewandt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In beiden Fällen liefern gleiche Klartextblöcke verschiedene Geheimtextblöcke.} Dieselbe Nachricht zweimal verschlüsselt ergibt zwei völlig verschiedene Geheimtexte.
+\end{minipage}
+\end{center}
+
+\schritt{Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.0cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+& \textbf{ECB} & \textbf{CBC} & \textbf{CTR}\\
+\midrule
+Parallel & \textcolor{gruen}{ja} & \textcolor{akzent}{nein} & \textcolor{gruen}{ja}\\
+Wahlfreier Zugriff & \textcolor{gruen}{ja} & teilweise & \textcolor{gruen}{ja}\\
+Auffüllen nötig & ja & ja & \textcolor{gruen}{nein}\\
+Sicher & \textcolor{akzent}{nein} & \textcolor{gruen}{ja} & \textcolor{gruen}{ja}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{CTR verwandelt die Blockchiffre in eine Stromchiffre --- und damit in etwas, das dem Einmalschlüssel aus Kapitel~9 formal gleicht. \textbf{Der Unterschied ist, dass der Schlüsselstrom nicht zufällig, sondern nur \kursiv{nicht unterscheidbar} von zufällig ist.} Damit erbt CTR alle Eigenschaften des Einmalschlüssels --- einschließlich der unangenehmen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Der Zählerwert darf sich nie wiederholen}
+Wird bei CTR derselbe Zählerwert zweimal mit demselben Schlüssel verwendet, so entsteht derselbe Schlüsselstrom:
+\[ C_1 \oplus C_2 = M_1 \oplus M_2 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist exakt der Venona-Fehler aus Kapitel~9} --- nur dass er hier nicht durch doppelt gedrucktes Papier entsteht, sondern durch einen Programmfehler.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Häufige Ursachen: ein Zähler, der nach einem Neustart wieder bei null beginnt; ein zufällig gewählter Startwert, der zu kurz ist; ein auf mehrere Geräte kopierter Schlüssel ohne abgestimmte Zählerbereiche. \textbf{Die Mathematik ist einwandfrei; die Umsetzung ist die Schwachstelle} --- und das ist die durchgehende Erfahrung dieses Fachs.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Die Geburtstagsschranke}
+Bei einer Blocklänge von $n$ Bit treten nach etwa $2^{n/2}$ Blöcken Wiederholungen auf --- rein aus Zufall.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{1.8cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Chiffre} & $n$ & \textbf{Blöcke} & \textbf{Datenmenge}\\
+\midrule
+3DES & $64$ & $2^{32}$ & $\mathbf{34}$ \textbf{GB}\\
+AES & $128$ & $2^{64}$ & $295$ Exabyte\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei $64$ Bit Blocklänge genügen $34$ Gigabyte, um eine Kollision wahrscheinlich zu machen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei CBC verrät eine Kollision $C_i = C_j$ unmittelbar $M_i \oplus M_j$. Genau darauf beruht ein 2016 veröffentlichter Angriff auf Verbindungen, die noch 3DES verwendeten. \textbf{Das Verfahren war nicht gebrochen --- die Blocklänge war zu kurz.} Bei einer Dauerverbindung sind $34$ Gigabyte binnen Stunden erreicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Lehre}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Schlüssellänge und Blocklänge sind verschiedene Größen.} $3$DES hat $112$ Bit Schlüssel und ist dennoch begrenzt --- durch die $64$ Bit Blocklänge.
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und drei weitere Fallen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Keine Echtheit} & Auch CBC und CTR sind formbar. Verschlüsselung allein schützt nicht vor gezielter Veränderung.\\
+\textbf{Seitenkanäle} & Laufzeit, Stromverbrauch und Zwischenspeicherverhalten können den Schlüssel verraten, obwohl die Mathematik stimmt.\\
+\textbf{Auffüllen} & Die Art, wie unvollständige Blöcke ergänzt werden, hat wiederholt zu Angriffen geführt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist die unangenehmste, weil sie außerhalb des mathematischen Modells liegt. Ein Verfahren, dessen Rechenzeit vom Schlüssel abhängt, verrät ihn --- und die frühen Umsetzungen des Advanced Encryption Standard taten genau das, weil die Ersetzungstabelle im Zwischenspeicher schlüsselabhängig durchlaufen wurde. \textbf{Das Modell dieses Kapitels kennt nur Eingabe und Ausgabe; die Wirklichkeit hat mehr Kanäle.}}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Der Lawineneffekt}
+Eine Chiffre mit $64$ Bit Blocklänge wird geprüft: Bei Änderung eines Eingabebits ändern sich $18$ Ausgabebits. Ist das auffällig?
+
+\loesung
+\schritt{Schritt 1 --- Die Erwartung}
+Bei einer zufälligen Abbildung kippt jedes Bit unabhängig mit $\frac12$:
+\[ \mathbb{E} = 64\cdot0{,}5 = 32, \qquad \sigma = \sqrt{64\cdot0{,}25} = 4 \]
+
+\schritt{Schritt 2 --- Der Abstand}
+\[ \frac{18-32}{4} = -3{,}5 \ \text{Standardabweichungen} \]
+
+\schritt{Schritt 3 --- Die Wahrscheinlichkeit}
+Nach der Normalverteilungsnäherung (Band 12):
+\[ \Pr[X \le 18] \approx \Pr[Z \le -3{,}5] = 2{,}3\cdot10^{-4} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein solches Ergebnis tritt bei einer guten Chiffre etwa einmal unter viertausend Versuchen auf --- das ist auffällig.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Einschränkung}
+Prüft man alle $64$ Eingabebits, so hat man $64$ Versuche. Die Wahrscheinlichkeit, dass \kursiv{mindestens einer} so weit abweicht:
+\[ 1-(1-2{,}3\cdot10^{-4})^{64} = 1{,}5\,\% \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist das Problem des mehrfachen Testens aus Band 17. \textbf{Ein einzelner auffälliger Wert unter vielen Prüfungen ist noch kein Befund} --- man müsste ihn an weiteren Eingaben bestätigen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Wann es ein Befund wäre}
+Träte die Abweichung bei \kursiv{allen} Eingabebits auf, so wäre das systematisch:
+\[ (2{,}3\cdot10^{-4})^{64} \approx 10^{-234} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dann läge kein Zufall vor, sondern eine Struktur --- und Strukturen sind der Ansatzpunkt jedes Angriffs. \textbf{Die Prüfung des Lawinenkriteriums ist ein statistischer Test wie jeder andere}, mit denselben Fallstricken.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Betriebsarten}
+Eine Befunddatenbank enthält $50\,000$ Einträge mit je einem Diagnosecode. Die Häufigkeiten sind die aus Kapitel~1. Welche Auskunft gibt ein ECB-verschlüsselter Auszug?
+
+\loesung
+\schritt{Schritt 1 --- Was sichtbar wird}
+Jeder Diagnosecode ergibt stets denselben Geheimtextblock. Der Angreifer sieht acht verschiedene Blöcke mit ihren Häufigkeiten.
+
+\schritt{Schritt 2 --- Die erwarteten Anzahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+\textbf{Gruppe} & \textbf{Anteil} & \textbf{erwartet} & $\sigma$\\
+\midrule
+$A$, $B$ & $0{,}2500$ & $12\,500$ & $97$\\
+$C$, $D$ & $0{,}1250$ & $6250$ & $74$\\
+$E$--$H$ & $0{,}0625$ & $3125$ & $54$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur Standardabweichung:} $\sqrt{50\,000\cdot0{,}25\cdot0{,}75} = 96{,}8$.
+
+\schritt{Schritt 3 --- Die Zuordnung}
+Die drei Häufigkeitsstufen sind durch je etwa sechzig Standardabweichungen getrennt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Zuordnung der Stufen ist praktisch sicher.} Innerhalb einer Stufe --- etwa zwischen $A$ und $B$ --- gibt die Häufigkeit nichts her.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Was der Angreifer erfährt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Auskunft} & \textbf{erhalten?} & \\
+\midrule
+Stufe je Eintrag & \textcolor{akzent}{ja} & drei Klassen\\
+Genaue Gruppe & teilweise & bei $C$/$D$ zweideutig\\
+Gleichheit zweier Einträge & \textcolor{akzent}{ja} & vollständig\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Der Informationsgehalt}
+Der Angreifer erfährt die Stufe. Die verbleibende Ungewissheit:
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.2cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Stufe} & \textbf{Anteil} & \textbf{Restentropie}\\
+\midrule
+$\{A,B\}$ & $0{,}50$ & $1$ Bit\\
+$\{C,D\}$ & $0{,}25$ & $1$ Bit\\
+$\{E,\ldots,H\}$ & $0{,}25$ & $2$ Bit\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\[ \Ent(M\mid C) = 0{,}5\cdot1 + 0{,}25\cdot1 + 0{,}25\cdot2 = 1{,}25 \ \text{Bit} \]
+\[ I(M;C) = \Ent(M) - \Ent(M\mid C) = 2{,}75 - 1{,}25 = \mathbf{1{,}50} \ \text{Bit} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mehr als die Hälfte der Information ist durchgesickert --- ohne dass die Chiffre gebrochen wurde.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Abhilfe}
+Bei CBC oder CTR mit wechselndem Startwert ist $I(M;C) = 0$ im Rahmen der rechnerischen Ununterscheidbarkeit.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für eine \kursiv{durchsuchbare} Datenbank ist das allerdings unbequem: Man kann dann nicht mehr nach dem Geheimtext suchen. Verfahren, die beides leisten --- Suchbarkeit und Geheimhaltung ---, geben notwendig etwas preis; die Frage ist nur, wie viel. \textbf{Das Spannungsfeld zwischen Nutzbarkeit und Geheimhaltung lässt sich verschieben, nicht auflösen.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- Zwei Schlüssel sind nicht doppelt so gut}
+Zeigen Sie, dass eine zweifache Anwendung einer Chiffre mit $k$-Bit-Schlüssel nicht die Sicherheit von $2k$ Bit erreicht.
+
+\loesung
+\schritt{Schritt 1 --- Das Verfahren}
+\[ C = E_{K_2}\bigl(E_{K_1}(M)\bigr) \]
+Der Gesamtschlüssel hat $2k$ Bit, der Raum umfasst $2^{2k}$ Möglichkeiten.
+
+\schritt{Schritt 2 --- Der Angriff}
+Der Angreifer kennt ein Paar $(M,C)$. Er nutzt
+\[ E_{K_1}(M) = D_{K_2}(C) . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Berechne $E_{K}(M)$ für alle $2^{k}$ Schlüssel und speichere die Ergebnisse.\\
+$2$ & Berechne $D_{K}(C)$ für alle $2^{k}$ Schlüssel.\\
+$3$ & Suche Übereinstimmungen. Jede liefert einen Kandidaten $(K_1,K_2)$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Der Aufwand}
+\[ 2^{k} + 2^{k} = 2^{\,k+1} \ \text{Verschlüsselungen} \]
+statt $2^{2k}$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+$k$ & \textbf{erhofft} & \textbf{tatsächlich} & \textbf{Speicher}\\
+\midrule
+$56$ & $2^{112}$ & $2^{57}$ & $2^{56}$ Einträge\\
+$128$ & $2^{256}$ & $2^{129}$ & $2^{128}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die zweifache Anwendung bringt genau ein Bit zusätzliche Sicherheit --- nicht $k$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Der Vorbehalt}
+Der Angriff braucht $2^{k}$ Speicherplätze. Bei $k=56$ sind das $7{,}2\cdot10^{16}$ Einträge zu je $8$ Byte --- rund $576$ Petabyte.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist nicht praktikabel, aber es ist der Punkt: \textbf{Ein Verfahren, dessen Sicherheit allein am Speicherbedarf eines Angriffs hängt, ist nicht solide entworfen.} Es gibt zudem Varianten, die Speicher gegen Rechenzeit tauschen und dabei deutlich unter $2^{2k}$ bleiben.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Folgerung}
+Deshalb wurde dreifache statt zweifacher Anwendung genormt:
+\[ C = E_{K_3}\bigl(D_{K_2}(E_{K_1}(M))\bigr) \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Schlüssel} & \textbf{Sicherheit}\\
+\midrule
+einfach & $56$ & $2^{56}$\\
+zweifach & $112$ & $2^{57}$\\
+dreifach & $168$ & $\approx 2^{112}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Auch die dreifache Anwendung erreicht nicht $2^{168}$, sondern nur etwa $2^{112}$ --- derselbe Angriff wirkt eine Stufe höher. \textbf{Die mittlere Entschlüsselung statt Verschlüsselung ist kein Sicherheitsmerkmal}, sondern erlaubt es, mit $K_1=K_2=K_3$ die einfache Chiffre nachzubilden und so ältere Geräte weiterzuverwenden.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Zwei Normen und ein Wettbewerb}
+\Person{Horst Feistel} (1915--1990), aus Deutschland in die Vereinigten Staaten emigriert, entwickelte bei IBM in den 1970er Jahren die Struktur, die seinen Namen trägt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Ihr Kunstgriff: Man teilt den Block in zwei Hälften und verändert in jeder Runde nur eine davon. Dadurch ist die Umkehrung stets möglich --- \kursiv{unabhängig davon}, wie kompliziert die verwendete Funktion ist. Man kann also eine beliebig verwickelte Funktion einbauen, ohne sich um ihre Umkehrbarkeit zu sorgen.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Data Encryption Standard}
+1977 als Norm verabschiedet, mit $56$ Bit Schlüssel.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{IBM hatte ursprünglich $64$ Bit vorgeschlagen; die Kürzung auf $56$ geschah auf Betreiben der NSA und war von Anfang an umstritten. 1998 baute die Electronic Frontier Foundation für rund $250\,000$ Dollar eine Maschine, die einen Schlüssel in gut zwei Tagen fand --- und beendete damit die Debatte.}
+\end{minipage}
+\end{center}
+
+\schritt{Die andere Seite}
+Zugleich hatte die NSA die Ersetzungstabellen verändert. Das erregte Verdacht.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{1990 fanden \Person{Eli Biham} und \Person{Adi Shamir} die \Begriff{differentielle Kryptanalyse}. Es zeigte sich, dass die veränderten Tabellen gerade dagegen gehärtet waren --- IBM und die NSA hatten das Verfahren also fünfzehn Jahre vor seiner öffentlichen Entdeckung gekannt und stillschweigend abgewehrt. \textbf{Der Verdacht war berechtigt und die Änderung war eine Verbesserung} --- beides zugleich.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Wettbewerb}
+1997 schrieb das amerikanische Normungsinstitut einen offenen Wettbewerb aus. Fünfzehn Vorschläge wurden eingereicht, öffentlich analysiert und über drei Jahre auf zwei Konferenzen diskutiert.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{2000 gewann Rijndael der Belgier \Person{Joan Daemen} und \Person{Vincent Rijmen}. Das Verfahren verzichtet auf die Feistel-Struktur und beruht auf Rechnung in einem endlichen Körper --- Band 6, Teil~V. \textbf{Der offene Wettbewerb gilt heute als Vorbild}: Er hat mehr Vertrauen geschaffen als jede Behördenentscheidung es gekonnt hätte, und dasselbe Verfahren wurde später für Hashfunktionen wiederholt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wo Blockchiffren heute stehen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Stand} & Der Advanced Encryption Standard ist seit über zwanzig Jahren ungebrochen; die besten bekannten Angriffe sparen wenige Bit.\\
+\textbf{Verbundene Betriebs\-arten} & Verschlüsselung und Beglaubigung in einem Durchgang --- heute der Normalfall.\\
+\textbf{Leichtgewichtig} & Chiffren für Geräte mit wenigen Kilobyte Speicher.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Der beste bekannte Angriff auf die Vollrundenfassung mit $128$ Bit senkt den Aufwand von $2^{128}$ auf etwa $2^{126}$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist praktisch bedeutungslos --- $2^{126}$ ist so unerreichbar wie $2^{128}$. Bemerkenswert ist etwas anderes: \textbf{In über zwanzig Jahren intensiver öffentlicher Analyse wurde nichts Wesentliches gefunden.} Für ein Verfahren ohne Sicherheitsbeweis ist das die einzige verfügbare Evidenz --- und sie ist schwächer, als man sich wünschte.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Nach dem Bruchfall dieses Kapitels ist Verschlüsselung ohne Beglaubigung gefährlich.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Erfahrung hat gezeigt, dass Entwickler beides nur selten richtig kombinieren --- die Reihenfolge ist entscheidend, und die falsche hat wiederholt zu Angriffen geführt. \textbf{Die Lösung bestand darin, die Wahl abzuschaffen}: Moderne Betriebsarten leisten beides und lassen sich gar nicht erst falsch zusammensetzen. Kapitel~11 behandelt die Beglaubigung.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Rechnerisch} & Information ist da, aber unerreichbar\\
+\textbf{Zwei Grundsätze} & Verwirrung und Verwischung\\
+\textbf{Lawine} & genau die Hälfte, nicht mehr\\
+\textbf{Betriebsarten} & ECB verrät die Struktur\\
+\textbf{Zwei Schranken} & Schlüssellänge und Blocklänge\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel geht es um die Eigenschaft, die alle bisherigen Verfahren nicht hatten: nachzuweisen, dass eine Nachricht unverändert und vom richtigen Absender ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

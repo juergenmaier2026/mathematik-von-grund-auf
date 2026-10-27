@@ -1,0 +1,618 @@
+\chapter{Wie man prüft --- und wie man sich betrügt}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Ein Modell mit vielen Merkmalen}
+Das Klinikum hat inzwischen mehr als Laktat. Für $50$ Patienten der Intensivstation liegen $5000$ Laborwerte, Genexpressionsdaten und Vitalparameter vor; $25$ entwickelten eine Sepsis, $25$ nicht.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Frage:} Wie gut wird ein daraus gelerntes Modell bei den nächsten Patienten sein?
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In Kapitel~2 konnten wir den Testfehler ausrechnen, weil wir die wahre Kurve kannten. \textbf{Jetzt kennen wir sie nicht}, und der Trainingsfehler ist nach Satz 2.2 zu optimistisch --- bei $5000$ Merkmalen und $50$ Patienten sogar grotesk. Wir brauchen Daten, die das Modell nicht gesehen hat.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zurückhalten}
+
+\begin{merksatz}
+\boxtitel{Die drei Teile}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Training} & Daraus lernt das Verfahren.\\
+\textbf{Validierung} & Damit wählt man zwischen Verfahren oder Einstellungen --- etwa dem Grad des Polynoms.\\
+\textbf{Test} & Wird genau einmal benutzt, ganz am Ende, um den Fehler des gewählten Verfahrens zu schätzen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer die Testdaten zum Auswählen benutzt, hat keine Testdaten mehr.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die wichtigste Regel dieses Kapitels. \textbf{Jede Entscheidung, die man aufgrund der Testdaten trifft, macht sie zu Trainingsdaten} --- und ihr Fehler wird so optimistisch wie der Trainingsfehler. Wer zwanzig Modelle auf denselben Testdaten vergleicht und das beste berichtet, berichtet den Fehler des besten von zwanzig Glücksfällen.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Problem bei kleinen Daten}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $50$ Patienten bleiben nach der Aufteilung vielleicht $30$ zum Lernen und je $10$ für Validierung und Test. \textbf{Zehn Testpatienten geben einen Fehler auf zehn Prozentpunkte genau} --- kaum besser als eine Münze. Man braucht ein Verfahren, das die Daten mehrfach verwendet, ohne zu betrügen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 3.1 --- $k$-fache Kreuzvalidierung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Teile die Daten zufällig in $k$ gleich große Teile.\\
+$2$ & Für jeden Teil $j$: Lerne auf den übrigen $k-1$ Teilen, prüfe auf Teil $j$.\\
+$3$ & Mittle die $k$ Prüffehler.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was dabei geschieht}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\foreach \r in {0,...,4} {
+  \foreach \c in {0,...,4} {
+    \ifnum\r=\c
+      \fill[akzent!55] (\c*1.3,-\r*0.5) rectangle ++(1.2,0.38);
+    \else
+      \fill[tief!22] (\c*1.3,-\r*0.5) rectangle ++(1.2,0.38);
+    \fi
+  }
+  \node[font=\scriptsize, color=grau, anchor=east] at (-0.1,{-\r*0.5+0.19}) {Runde \the\numexpr\r+1\relax};
+}
+\fill[tief!22] (0,-2.8) rectangle ++(0.4,0.3); \node[font=\scriptsize, color=grau, anchor=west] at (0.5,-2.65) {lernen};
+\fill[akzent!55] (2.4,-2.8) rectangle ++(0.4,0.3); \node[font=\scriptsize, color=grau, anchor=west] at (2.9,-2.65) {prüfen};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jeder Patient wird genau einmal geprüft --- und zwar von einem Modell, das ihn nicht gesehen hat.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Wahl von $k$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{6.6cm}@{}}
+\toprule
+$k$ \textbf{klein} & Man lernt auf weniger Daten; der geschätzte Fehler ist etwas zu pessimistisch.\\
+$k = n$ & \Begriff{Weglassen einzelner Fälle}: fast alle Daten zum Lernen, aber $n$ Modelle zu rechnen.\\
+\textbf{üblich} & $k = 5$ oder $k = 10$ --- ein bewährter Kompromiss.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Satz 3.2 --- die Abkürzung bei kleinsten Quadraten}
+Beim Weglassen einzelner Fälle muss man das Modell nicht $n$-mal neu anpassen. Mit dem Residuum $e_i = y_i - \hat y_i$ des vollen Modells und dem Diagonalelement $H_{ii}$ der Projektion aus Satz 2.2 gilt
+\[ y_i - \hat y_{(-i)} = \frac{e_i}{1-H_{ii}} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis braucht eine Formel für die Inverse einer Matrix nach einer Änderung vom Rang eins; wir verzichten auf ihn --- die erste Auslassung dieses Bandes. \textbf{Aufgabe 3.2 prüft den Satz am einfachsten Fall nach}, dem Mittelwert, wo er sich in drei Zeilen herleiten lässt. Man liest an ihm ab, warum Punkte mit großem $H_{ii}$ --- \enquote{Hebelpunkte} am Rand des Messbereichs --- beim Weglassen besonders stark ausschlagen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Leck}
+
+\begin{warnung}
+\boxtitelr{Ein Versuch mit reinem Zufall}
+Man nehme den Leitfall --- aber mit Daten, die \kursiv{keinerlei} Information enthalten: $5000$ Zufallszahlen je Patient, unabhängig davon, ob er eine Sepsis hat.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der wahre Fehler jedes Verfahrens beträgt fünfzig Prozent.} Mehr als Raten ist nicht möglich.
+\end{minipage}
+\end{center}
+
+\schritt{Das Vorgehen, falsch}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Wähle aus den $5000$ Merkmalen die $100$, die mit der Sepsis am stärksten zusammenhängen --- auf \textcolor{akzent}{allen} $50$ Patienten.\\
+$2$ & Führe mit diesen $100$ Merkmalen eine fünffache Kreuzvalidierung durch.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Das Vorgehen, richtig}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Führe eine fünffache Kreuzvalidierung durch.\\
+$2$ & Wähle in \textcolor{gruen}{jeder Runde} die $100$ Merkmale nur auf den Lerndaten dieser Runde.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Das Ergebnis, fünfzigmal wiederholt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Vorgehen} & \textbf{geschätzter Fehler} & \textbf{wahr}\\
+\midrule
+falsch & $\mathbf{1{,}5\,\%}$ & $50\,\%$\\
+richtig & $53{,}5\,\%$ & $50\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Aus reinem Rauschen wird ein Modell mit $98{,}5$ Prozent Treffsicherheit.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Woher das kommt}
+Bei $5000$ Zufallsmerkmalen und $50$ Patienten hängt das zufällig stärkste Merkmal deutlich mit der Zielgröße zusammen.
+
+\schritt{Die höchste Zufallskorrelation}
+Näherungsweise gilt für $m$ unabhängige Merkmale und $n$ Beobachtungen
+\[ \max_j\,|r_j| \ \approx\ \sqrt{\frac{2\ln m}{n}} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}@{}}
+\toprule
+$m$ & $\max|r|$\\
+\midrule
+$10$ & $0{,}30$\\
+$100$ & $0{,}43$\\
+$1000$ & $0{,}53$\\
+$5000$ & $0{,}58$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Für $n=50$. Die Simulation ergibt bei $m = 5000$ im Mittel $0{,}52$ --- die Näherung liegt etwas zu hoch, die Größenordnung stimmt.}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine Korrelation von $0{,}5$ gilt in der Medizin als stark. \textbf{Hier ist sie reiner Zufall}, und die Auswahl der hundert besten Merkmale hat genau diese Zufälle eingesammelt --- auch die Zufälle in den Patienten, die später als \enquote{Prüfdaten} dienen. Die Kreuzvalidierung prüft danach nur noch, ob die Zufälle in sich stimmig sind. Sie sind es.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Regel}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Alles, was aus den Daten gelernt wird --- auch Auswahl, Normierung, Auffüllen fehlender Werte ---, gehört \kursiv{in} die Kreuzvalidierung, nicht davor.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dieser Fehler ist in veröffentlichten Arbeiten erschreckend häufig.} Eine Übersicht aus dem Jahr 2002 fand ihn in einer Reihe viel zitierter Studien zur Krebsdiagnose aus Genexpressionsdaten; die berichteten Fehlerraten nahe null waren durch das Leck erklärbar. Eine spätere Durchsicht über viele Fachgebiete hinweg fand Lecks in Hunderten von Arbeiten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Mehr als eine Fehlerrate}
+
+\begin{merksatz}
+\boxtitel{Die Trennschärfe}
+Viele Verfahren liefern keine Ja-Nein-Antwort, sondern eine Zahl --- eine geschätzte Wahrscheinlichkeit. Erst eine Schwelle macht daraus eine Entscheidung, und Kapitel~1 zeigte, dass die Wahl der Schwelle eine eigene Frage ist.
+
+\begin{definition}
+\boxtitelm{Definition 3.3 --- Fläche unter der Kurve}
+Die \Begriff{Trennschärfe} (englisch AUC) ist die Wahrscheinlichkeit, dass ein zufällig gewählter Sepsispatient eine höhere Zahl erhält als ein zufällig gewählter ohne Sepsis.
+\end{definition}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{6.6cm}@{}}
+\toprule
+$0{,}5$ & Nicht besser als Raten.\\
+$0{,}7$ & Brauchbar für grobe Einordnung.\\
+$0{,}8$ & Gut.\\
+$0{,}9$ & Sehr gut --- in der Medizin selten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Name kommt daher, dass die Größe gleich der Fläche unter der Kurve ist, die Empfindlichkeit gegen Falsch-positiv-Rate für alle Schwellen aufträgt (Band 17, Kapitel~5). \textbf{Die obige Deutung als Paarvergleich ist anschaulicher} und für die Rechnung von Hand bequemer, wie Aufgabe 3.1 zeigt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was die Trennschärfe nicht misst}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Kalibrierung} & Ob eine vorhergesagte Wahrscheinlichkeit von $30$ Prozent tatsächlich in $30$ Prozent der Fälle eintritt.\\
+\textbf{Nutzen} & Ob die Warnung früh genug kommt, um etwas zu ändern.\\
+\textbf{Übertrag\-barkeit} & Ob sie in einer anderen Klinik gleich hoch ist.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Trennschärfe hängt nicht von der Prävalenz ab --- sie vergleicht nur Paare. \textbf{Das ist zugleich ihr Vorzug und ihre Gefahr}: Wechselt ein Modell von der Intensiv- auf die Normalstation, kann die Trennschärfe gleich bleiben, während alle Wahrscheinlichkeiten um den Faktor fünf zu hoch liegen. Aufgabe 1.2 hat diesen Fall bereits gezeigt; eine Trennschärfe allein hätte ihn nicht bemerkt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Die äußere Prüfung}
+
+\begin{merksatz}
+\boxtitel{Der Fall von 2021}
+Ein kommerzielles Sepsis-Warnsystem, in Hunderten amerikanischer Krankenhäuser im Einsatz, wurde an einer Universitätsklinik unabhängig nachgeprüft --- an rund $38\,000$ stationären Aufenthalten.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{2.6cm}P{2.2cm}@{}}
+\toprule
+& \textbf{Hersteller} & \textbf{Nachprüfung}\\
+\midrule
+Trennschärfe & $0{,}76$--$0{,}83$ & $\mathbf{0{,}63}$\\
+erkannte Sepsisfälle & --- & $33\,\%$\\
+Warnung bei allen Aufenthalten & --- & $18\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das System warnte bei fast jedem fünften Patienten --- und übersah zwei von drei Sepsisfällen.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum die innere Prüfung das nicht zeigen konnte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Andere Kranke} & Andere Klinik, andere Patientenmischung, andere Prävalenz.\\
+\textbf{Andere Praxis} & Andere Zeitpunkte der Laborabnahme, andere Dokumentation.\\
+\textbf{Andere Etiketten} & Was als Sepsis gezählt wurde, war nicht einheitlich definiert.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Keine Kreuzvalidierung kann das aufdecken, denn sie teilt dieselben Daten nur anders auf. \textbf{Sie beantwortet die Frage \enquote{wie gut auf Patienten wie diesen?} --- nicht \enquote{wie gut auf meinen Patienten?}} Dafür braucht man eine \Begriff{äußere Prüfung}: an Daten einer anderen Klinik, aus einer anderen Zeit, erhoben von anderen Leuten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Das Leck in der Zeit}
+Ein besonders heimtückischer Fall: Ein Merkmal steht in den Daten, das zum Zeitpunkt der Vorhersage noch gar nicht bekannt war.
+
+\schritt{Ein Beispiel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Merkmal} & \enquote{Blutkultur angeordnet}\\
+\textbf{Zusammenhang} & sehr stark mit späterer Sepsisdiagnose\\
+\textbf{Grund} & Der Arzt hatte die Sepsis bereits vermutet.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Modell sagt voraus, was der Arzt schon wusste --- und rühmt sich dafür.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Solche Merkmale ergeben hervorragende Trennschärfen und keinerlei Nutzen, denn die Warnung kommt nach dem Verdacht, den sie vorwegnehmen sollte. \textbf{Dieser Fehler ist in mehreren veröffentlichten Frühwarnmodellen nachgewiesen worden.} Die Abhilfe ist streng, aber einfach: Für jedes Merkmal muss feststehen, wann es im Behandlungsverlauf verfügbar wurde, und nur was vor dem Vorhersagezeitpunkt vorlag, darf verwendet werden.}
+\end{minipage}
+\end{center}
+
+\schritt{Und das Leck über Patienten}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hat ein Patient mehrere Aufenthalte, und landet einer im Training und einer im Test, so erkennt das Modell ihn wieder --- an Alter, Vorerkrankungen, Medikation. \textbf{Aufgeteilt werden muss nach Patienten, nicht nach Aufenthalten.} Bei Bilddaten gilt dasselbe für mehrere Aufnahmen derselben Person; das Versäumnis hat bei einigen frühen Arbeiten zur Hautkrebserkennung zu deutlich überhöhten Werten geführt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Trennschärfe von Hand}
+Ein Modell gibt zehn Patienten folgende Werte:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{5.6cm}@{}}
+\toprule
+\textbf{Sepsis} & $0{,}9$ \quad $0{,}7$ \quad $0{,}6$ \quad $0{,}3$\\
+\textbf{keine} & $0{,}8$ \quad $0{,}5$ \quad $0{,}4$ \quad $0{,}2$ \quad $0{,}15$ \quad $0{,}1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Die Zahl der Paare}
+\[ 4\cdot6 = 24 \]
+
+\schritt{Schritt 2 --- Jeden Sepsispatienten mit allen anderen vergleichen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{4.2cm}P{1.6cm}@{}}
+\toprule
+\textbf{Sepsis} & \textbf{höher als} & \textbf{Anzahl}\\
+\midrule
+$0{,}9$ & alle sechs & $6$\\
+$0{,}7$ & alle außer $0{,}8$ & $5$\\
+$0{,}6$ & alle außer $0{,}8$ & $5$\\
+$0{,}3$ & $0{,}2$; $0{,}15$; $0{,}1$ & $3$\\
+\midrule
+\textbf{Summe} & & $\mathbf{19}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Trennschärfe}
+\[ \text{AUC} = \frac{19}{24} = 0{,}792 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In knapp vier von fünf Paaren ordnet das Modell richtig.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Eine Schwelle wählen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{2.2cm}P{2.2cm}P{1.6cm}@{}}
+\toprule
+\textbf{Schwelle} & \textbf{Empfindl.} & \textbf{Fehlalarme} & \textbf{Fehler}\\
+\midrule
+$0{,}85$ & $1/4$ & $0/6$ & $3$\\
+$0{,}55$ & $3/4$ & $1/6$ & $2$\\
+$0{,}25$ & $4/4$ & $3/6$ & $3$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieselbe Trennschärfe von $0{,}792$ steht hinter allen drei Zeilen. \textbf{Die Trennschärfe beschreibt das Modell, nicht die Entscheidung} --- welche Zeile man wählt, hängt wieder von den Kosten ab. Bei Kosten $10:1$ ist die unterste die beste: $10\cdot0 + 3 = 3$ gegen $10\cdot1 + 1 = 11$ für die mittlere.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Zusammenhang mit einem bekannten Test}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Zahl $19$ ist die Teststatistik des Mann-Whitney-Tests aus Band 17, Kapitel~9. \textbf{Trennschärfe und Rangtest sind dieselbe Größe}, einmal als Maß, einmal als Prüfgröße --- und daraus folgt auch, wie man ein Vertrauensintervall für die Trennschärfe gewinnt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Weglassen beim Mittelwert}
+Man sagt jeden Laktatwert durch den Mittelwert der übrigen vorher. Zeigen Sie, dass der Fehler beim Weglassen gleich $\frac{n}{n-1}(y_i-\bar y)$ ist, und prüfen Sie Satz 3.2.
+
+\loesung
+\schritt{Schritt 1 --- Der Mittelwert ohne $y_i$}
+\[ \bar y_{(-i)} = \frac{n\,\bar y - y_i}{n-1} \]
+
+\schritt{Schritt 2 --- Der Fehler}
+\[ y_i - \bar y_{(-i)} = y_i - \frac{n\,\bar y - y_i}{n-1} = \frac{(n-1)\,y_i - n\,\bar y + y_i}{n-1} = \frac{n\,y_i - n\,\bar y}{n-1} \]
+\[ = \frac{n}{n-1}\,(y_i-\bar y) \]
+
+\schritt{Schritt 3 --- Satz 3.2 prüfen}
+Beim Mittelwert ist $H$ die Matrix, deren Einträge alle $\tfrac1n$ sind --- jede Vorhersage ist der Durchschnitt aller Werte. Also $H_{ii} = \tfrac1n$:
+\[ \frac{e_i}{1-H_{ii}} = \frac{y_i-\bar y}{1-\frac1n} = \frac{y_i-\bar y}{\frac{n-1}{n}} = \frac{n}{n-1}\,(y_i-\bar y) \quad \checkmark \]
+
+\schritt{Schritt 4 --- Zahlen}
+Laktatwerte $1{,}0$; $1{,}4$; $1{,}2$; $2{,}4$; $\bar y = 1{,}5$; $n = 4$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+$y_i$ & $e_i$ & $\frac43\,e_i$ & \textbf{direkt}\\
+\midrule
+$1{,}0$ & $-0{,}5$ & $-0{,}667$ & $1{,}0-1{,}667$\\
+$1{,}4$ & $-0{,}1$ & $-0{,}133$ & $1{,}4-1{,}533$\\
+$1{,}2$ & $-0{,}3$ & $-0{,}400$ & $1{,}2-1{,}600$\\
+$2{,}4$ & $+0{,}9$ & $+1{,}200$ & $2{,}4-1{,}200$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Probe letzte Zeile:} Mittelwert der übrigen $\frac{1{,}0+1{,}4+1{,}2}{3} = 1{,}2$; $2{,}4-1{,}2 = 1{,}2$. \checkmark
+
+\schritt{Schritt 5 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}@{}}
+\toprule
+& \textbf{mittl.\ Quadrat}\\
+\midrule
+Trainingsfehler & $0{,}290$\\
+Weglassen & $0{,}516$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur ersten Zeile:} $\frac14(0{,}25+0{,}01+0{,}09+0{,}81) = \frac{1{,}16}{4} = 0{,}290$.\\
+\kursiv{Zur zweiten:} $\left(\frac43\right)^{2}\cdot0{,}290 = \frac{16}{9}\cdot0{,}290 = 0{,}516$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Beim Weglassen wird jeder Fehler um den Faktor $\frac{n}{n-1}$ größer} --- bei nur vier Werten um ein Drittel, im Quadrat um drei Viertel. Der Trainingsfehler unterschätzt hier um fast die Hälfte. Bei großem $n$ schrumpft der Unterschied; bei kleinem ist er die Regel.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Wie viele Modelle darf man vergleichen?}
+Man vergleicht $20$ Modelle auf denselben $200$ Testpatienten. Alle sind in Wahrheit gleich gut, mit einer Trefferquote von $80$ Prozent. Welche Trefferquote hat das \enquote{beste}?
+
+\loesung
+\schritt{Schritt 1 --- Die Streuung eines einzelnen Testergebnisses}
+Die gemessene Quote ist ein Anteil aus $200$ Versuchen:
+\[ \sigma = \sqrt{\frac{0{,}8\cdot0{,}2}{200}} = \sqrt{0{,}0008} = 0{,}0283 \]
+
+\schritt{Schritt 2 --- Das Beste von zwanzig}
+Das Maximum von $20$ unabhängigen normalverteilten Größen liegt im Mittel etwa $1{,}87$ Standardabweichungen über dem Erwartungswert.
+
+\kursiv{Der Wert $1{,}87$ ist der Erwartungswert des Maximums von $20$ Standardnormalverteilten; er lässt sich tabellieren oder simulieren.}
+
+\schritt{Schritt 3 --- Die Rechnung}
+\[ 0{,}80 + 1{,}87\cdot0{,}0283 = 0{,}80 + 0{,}053 = 0{,}853 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das \enquote{beste} Modell erscheint mit $85{,}3$ Prozent --- obwohl alle $80$ Prozent haben.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Folgen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{verglichen} & \textbf{Faktor} & \textbf{scheinbar}\\
+\midrule
+$1$ & $0$ & $80{,}0\,\%$\\
+$5$ & $1{,}16$ & $83{,}3\,\%$\\
+$20$ & $1{,}87$ & $85{,}3\,\%$\\
+$100$ & $2{,}51$ & $87{,}1\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist das Problem des multiplen Testens aus Band 17, Kapitel~13, in anderer Gestalt. \textbf{Wer auf dem Testdatensatz auswählt, muss danach einen neuen Testdatensatz haben} --- oder den Fehler um die Auswahl bereinigen. Öffentliche Wettbewerbe mit festem Testdatensatz leiden genau darunter: Nach tausenden Einreichungen ist der Sieger vor allem der, der am besten zum Testdatensatz passt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Idee, die man für Schummelei hielt}
+\Person{Mervyn Stone} veröffentlichte 1974 eine systematische Darstellung der Kreuzvalidierung --- einer Idee, die in der Psychologie seit den 1930er Jahren gebräuchlich war.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Psychologen hatten bemerkt, dass Testbatterien, die an einer Stichprobe zusammengestellt wurden, an der nächsten schlechter abschnitten, und prüften sie deshalb an einer zweiten. \textbf{Die mathematische Statistik betrachtete das lange mit Misstrauen}: Es schien ein Eingeständnis, dass man den eigenen Modellen nicht traute. Stone zeigte, dass genau dieses Misstrauen begründet war.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Leck in der Genomforschung}
+\Person{Christophe Ambroise} und \Person{Geoffrey McLachlan} zeigten 2002, dass mehrere viel beachtete Arbeiten zur Tumorklassifikation aus Genexpressionsdaten genau den Fehler aus Abschnitt 3.3 begangen hatten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Wiederholt man die Auswertung richtig, so steigen die berichteten Fehlerraten nahe null auf deutlich höhere Werte. \textbf{Einige der betroffenen Arbeiten gehörten zu den meistzitierten ihres Gebiets.} Das Muster wiederholt sich seitdem in jedem neuen Feld, in dem viele Merkmale auf wenige Fälle treffen.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Replikationskrise}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Sayash Kapoor} und \Person{Arvind Narayanan} trugen 2023 Belege für Datenlecks aus siebzehn Fachgebieten zusammen, die zusammen Hunderte von Arbeiten betrafen. \textbf{Sie nannten es eine Replikationskrise des maschinellen Lernens} --- dieselbe Diagnose, die Band 17 für die klassische Statistik stellte, mit einer neuen Ursache.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Prüfen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Berichtsstandards} & Leitlinien, was eine Veröffentlichung eines Vorhersagemodells enthalten muss.\\
+\textbf{Verteilungs\-verschiebung} & Verfahren, die bemerken, wenn neue Daten anders aussehen als alte.\\
+\textbf{Nachbeob\-achtung} & Modelle im Einsatz laufend prüfen, nicht nur einmal vorher.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die TRIPOD-Leitlinie von 2015 und ihre Erweiterung für lernende Verfahren von 2024 verlangen unter anderem die Angabe, wie Merkmale ausgewählt wurden, ob eine äußere Prüfung stattfand und wie die Kalibrierung aussieht. \textbf{Die Mehrzahl der veröffentlichten klinischen Vorhersagemodelle erfüllte die Anforderungen bei Überprüfungen nicht} --- und die meisten wurden nie außerhalb ihrer Entstehungsklinik geprüft.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Modell, das bei Einführung gut war, kann durch veränderte Praxis schlechter werden --- und sogar durch seinen eigenen Erfolg: \textbf{Wenn die Warnung zu früherer Behandlung führt, verschwinden die schweren Verläufe, an denen das Modell gelernt hat.} Das Modell sagt dann Ereignisse vorher, die es selbst verhindert, und erscheint zunehmend fehlerhaft. Die Überwachung solcher Rückkopplungen ist ein offenes Problem.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Die Regel} & Testdaten nur einmal benutzen\\
+\textbf{Definition 3.1} & $k$-fache Kreuzvalidierung\\
+\textbf{Das Leck} & alles Gelernte gehört hinein, nicht davor\\
+\textbf{Definition 3.3} & Trennschärfe $=$ Paarvergleich\\
+\textbf{Die äußere Prüfung} & andere Klinik, andere Zeit\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~I. Er hat das Problem abgesteckt: was Lernen heißt, warum zu viel Freiheit schadet, wie man prüft. Teil~II beginnt mit den einfachsten Verfahren, die es gibt --- und findet dort bereits die Mittel, die Freiheit gezielt zu begrenzen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,676 @@
+\part{Der gestörte Kanal}
+
+\chapter{Transinformation und Kapazität}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Funk zum Rettungswagen}
+Das Klinikum überträgt Vitaldaten per Funk. Die Strecke ist gestört: Jedes gesendete Bit kippt unabhängig mit der Wahrscheinlichkeit $f = 0{,}1$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\node[knoten] (x0) at (0,0.7) {}; \node[knoten] (x1) at (0,-0.7) {};
+\node[knoten] (y0) at (3.0,0.7) {}; \node[knoten] (y1) at (3.0,-0.7) {};
+\draw[kanted, -{Stealth[length=4pt]}] (x0)--(y0) node[midway,above,font=\scriptsize,color=grau] {$0{,}9$};
+\draw[kanted, -{Stealth[length=4pt]}] (x1)--(y1) node[midway,below,font=\scriptsize,color=grau] {$0{,}9$};
+\draw[kante, akzent, -{Stealth[length=4pt]}] (x0)--(y1) node[pos=0.25,below left,font=\scriptsize,color=akzent] {$0{,}1$};
+\draw[kante, akzent, -{Stealth[length=4pt]}] (x1)--(y0) node[pos=0.25,above left,font=\scriptsize,color=akzent] {$0{,}1$};
+\node[font=\scriptsize, color=grau, anchor=east] at (-0.15,0.7) {$0$};
+\node[font=\scriptsize, color=grau, anchor=east] at (-0.15,-0.7) {$1$};
+\node[font=\scriptsize, color=grau, anchor=west] at (3.15,0.7) {$0$};
+\node[font=\scriptsize, color=grau, anchor=west] at (3.15,-0.7) {$1$};
+\node[font=\scriptsize\itshape, color=grau] at (1.5,-1.3) {binärer symmetrischer Kanal};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Die Frage:} Wie viel lässt sich je Kanalbenutzung fehlerfrei übertragen?
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die naheliegende Antwort lautet: weniger als ein Bit, und zwar umso weniger, je fehlerfreier man es haben will. Die richtige Antwort ist $0{,}531$ Bit --- und zwar \kursiv{bei beliebig kleiner Fehlerrate}. Dieses Kapitel erklärt, woher die Zahl kommt; Kapitel~5 beweist, dass sie erreichbar ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Transinformation}
+
+\begin{definition}
+\boxtitelm{Definition 4.1}
+Die \Begriff{Transinformation} zwischen $X$ und $Y$ ist
+\[ I(X;Y) = \Ent(X) - \Ent(X\mid Y) . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 4.2 --- drei gleichwertige Formen}
+\[ I(X;Y) = \Ent(X)-\Ent(X\mid Y) = \Ent(Y)-\Ent(Y\mid X) = \Ent(X)+\Ent(Y)-\Ent(X,Y) \]
+
+\schritt{Beweis}
+Nach der Kettenregel (Satz 2.5) gilt
+\[ \Ent(X,Y) = \Ent(Y) + \Ent(X\mid Y) \quad\Longrightarrow\quad \Ent(X\mid Y) = \Ent(X,Y)-\Ent(Y) \]
+Einsetzen in Definition 4.1:
+\[ I(X;Y) = \Ent(X) - \Ent(X,Y) + \Ent(Y) \]
+Das ist die dritte Form. Sie ist in $X$ und $Y$ symmetrisch, also stimmt sie auch mit der zweiten überein. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Transinformation ist symmetrisch:} Was $Y$ über $X$ verrät, ist genau so viel wie umgekehrt.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist keineswegs selbstverständlich. Der Laborwert verrät $0{,}12$ Bit über die Diagnosegruppe, und die Diagnosegruppe genau so viel über den Laborwert --- obwohl beide Größen ganz verschiedene Entropien haben ($0{,}81$ und $0{,}72$ Bit). \textbf{Die Auskunft ist gegenseitig und gleich groß.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das Bild}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\fill[tief!16] (0,0) circle (1.5);
+\fill[akzent!16] (2.0,0) circle (1.5);
+\begin{scope}
+\clip (0,0) circle (1.5);
+\fill[mittel!30] (2.0,0) circle (1.5);
+\end{scope}
+\draw[tief, line width=1.0pt] (0,0) circle (1.5);
+\draw[akzent, line width=1.0pt] (2.0,0) circle (1.5);
+\node[font=\scriptsize, color=tief] at (-0.55,0) {$\Ent(X\mid Y)$};
+\node[font=\scriptsize, color=akzent] at (2.55,0) {$\Ent(Y\mid X)$};
+\node[font=\scriptsize, color=tief!80] at (1.0,-0.1) {$I$};
+\node[font=\scriptsize, color=grau] at (-0.9,1.6) {$\Ent(X)$};
+\node[font=\scriptsize, color=grau] at (2.9,1.6) {$\Ent(Y)$};
+\node[font=\scriptsize\itshape, color=grau] at (1.0,-2.1) {$\Ent(X,Y)$ ist die Gesamtfläche};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Bild ist eine nützliche Merkhilfe und hat eine Grenze: Bei drei Größen kann der \enquote{Schnitt aller drei} negativ werden. Die Mengenanalogie trägt also nur bis zu zwei Größen; darüber hinaus muss man rechnen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die relative Entropie}
+
+\begin{definition}
+\boxtitelm{Definition 4.3}
+Für zwei Verteilungen $p$ und $q$ über derselben Menge ist die \Begriff{relative Entropie}
+\[ D(p\,\|\,q) = \sum_i p_i\,\lb\frac{p_i}{q_i} . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 4.4 --- sie ist nichtnegativ}
+\[ D(p\,\|\,q) \ \ge\ 0 , \]
+mit Gleichheit genau dann, wenn $p = q$.
+
+\schritt{Beweis}
+\begin{align*}
+-D(p\,\|\,q) &= \sum_i p_i\,\lb\frac{q_i}{p_i}\\
+&\le \lb\left(\sum_i p_i\cdot\frac{q_i}{p_i}\right) && \text{(Jensen, $\lb$ konkav)}\\
+&= \lb\left(\sum_i q_i\right) = \lb 1 = 0
+\end{align*}
+
+Gleichheit gilt wegen der strengen Konkavität genau dann, wenn alle $\frac{q_i}{p_i}$ übereinstimmen --- und da beide Summen eins ergeben, bedeutet das $p_i = q_i$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieser Beweis ist zum dritten Mal derselbe --- nach Satz 2.2 und Satz 3.2. Tatsächlich sind beide Sonderfälle: Satz 2.2 ist $D(p\,\|\,\text{gleichverteilt}) \ge 0$, Satz 3.2 ist $D(p\,\|\,q) \ge 0$ mit $q_i = 2^{-l_i}$. \textbf{Die relative Entropie ist das gemeinsame Werkzeug hinter allen Ungleichungen dieses Bandes.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 4.5 --- Transinformation ist nichtnegativ}
+\[ I(X;Y) = D\bigl(p(x,y)\,\|\,p(x)p(y)\bigr) \ \ge\ 0 \]
+mit Gleichheit genau bei Unabhängigkeit.
+
+\schritt{Beweis der ersten Gleichung}
+\begin{align*}
+D\bigl(p(x,y)\,\|\,p(x)p(y)\bigr) &= \sum_{x,y} p(x,y)\,\lb\frac{p(x,y)}{p(x)p(y)}\\
+&= \sum_{x,y} p(x,y)\,\lb p(x,y) - \sum_{x,y}p(x,y)\,\lb p(x) - \sum_{x,y}p(x,y)\,\lb p(y)\\
+&= -\Ent(X,Y) + \Ent(X) + \Ent(Y)
+\end{align*}
+Das ist die dritte Form aus Satz 4.2. \checkmark
+
+\schritt{Der Rest}
+Folgt aus Satz 4.4. Gleichheit bedeutet $p(x,y) = p(x)p(y)$ --- also Unabhängigkeit. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Damit ist auch Satz 2.6 bewiesen:} Aus $I \ge 0$ und $I = \Ent(Y)-\Ent(Y\mid X)$ folgt $\Ent(Y\mid X) \le \Ent(Y)$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Transinformation misst also, \kursiv{wie weit} zwei Größen von der Unabhängigkeit entfernt sind --- gemessen als relative Entropie zwischen der tatsächlichen Verbundverteilung und derjenigen, die bei Unabhängigkeit vorläge. Das ist ein Abhängigkeitsmaß, das im Gegensatz zur Korrelation aus Band 17 auch nichtlineare Zusammenhänge erfasst.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Kanalkapazität}
+
+\begin{definition}
+\boxtitelm{Definition 4.6}
+Ein \Begriff{diskreter gedächtnisloser Kanal} ist gegeben durch die Übergangswahrscheinlichkeiten $p(y\mid x)$. Seine \Begriff{Kapazität} ist
+\[ C = \max_{p(x)} \ I(X;Y) . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was das Maximum bedeutet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Fest} & Der Kanal, also $p(y\mid x)$ --- den kann man nicht ändern.\\
+\textbf{Wählbar} & Die Eingangsverteilung $p(x)$ --- über sie verfügt der Sender.\\
+\textbf{Gesucht} & Die beste Wahl und der dabei erreichte Wert.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Kapazität ist eine Eigenschaft des Kanals allein. Sie sagt zunächst nur, wie viel Information im besten Fall je Benutzung hindurchkommt. Dass sie zugleich die Grenze für \kursiv{fehlerfreie} Übertragung ist, behauptet erst Kapitel~5 --- und das ist der eigentliche Satz.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 4.7 --- die Kapazität des binären symmetrischen Kanals}
+\[ C = 1 - h(f) \]
+mit $h$ als binärer Entropiefunktion, erreicht bei gleichverteiltem Eingang.
+
+\schritt{Beweis --- Schritt 1: die bedingte Entropie}
+Ist $X=0$, so ist $Y$ mit Wahrscheinlichkeit $f$ gleich $1$:
+\[ \Ent(Y\mid X=0) = h(f) \]
+Ebenso $\Ent(Y\mid X=1) = h(f)$.
+
+\[ \Ent(Y\mid X) = p(0)\,h(f) + p(1)\,h(f) = h(f) \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$\Ent(Y\mid X)$ hängt nicht von der Eingangsverteilung ab.} Das ist die Besonderheit symmetrischer Kanäle und macht die Rechnung kurz.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- maximieren}
+\[ I(X;Y) = \Ent(Y) - \Ent(Y\mid X) = \Ent(Y) - h(f) \]
+
+Da nur $\Ent(Y)$ von $p(x)$ abhängt, ist $\Ent(Y)$ zu maximieren. Nach Satz 2.2 ist $\Ent(Y) \le 1$, mit Gleichheit bei $p(Y=0)=\frac12$.
+
+\schritt{Schritt 3 --- das wird erreicht}
+Bei $p(X=0)=\frac12$ gilt
+\[ p(Y=0) = \tfrac12(1-f) + \tfrac12 f = \tfrac12 \quad \checkmark \]
+
+Also $C = 1-h(f)$. $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+$f$ & $h(f)$ & $C$ & \\
+\midrule
+$0{,}00$ & $0{,}0000$ & $1{,}0000$ & ungestört\\
+$0{,}01$ & $0{,}0808$ & $0{,}9192$ & \\
+$0{,}05$ & $0{,}2864$ & $0{,}7136$ & \\
+$\mathbf{0{,}10}$ & $0{,}4690$ & $\mathbf{0{,}5310}$ & \textcolor{akzent}{Leitfall}\\
+$0{,}25$ & $0{,}8113$ & $0{,}1887$ & \\
+$0{,}50$ & $1{,}0000$ & $\mathbf{0{,}0000}$ & \textcolor{akzent}{wertlos}\\
+$0{,}90$ & $0{,}4690$ & $0{,}5310$ & \\
+$1{,}00$ & $0{,}0000$ & $1{,}0000$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die beiden bemerkenswerten Zeilen}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei $f=\frac12$ ist die Kapazität null.} Der Ausgang ist dann von der Eingabe unabhängig --- ein reiner Münzwurf.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei $f=1$ ist sie wieder eins.} Ein Kanal, der \kursiv{jedes} Bit umkehrt, überträgt vollständig --- man muss nur umdrehen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Kurve ist symmetrisch um $f=\frac12$, und dort liegt der einzige wertlose Fall. \textbf{Nicht die Stärke der Störung ist entscheidend, sondern ihre Berechenbarkeit.} Eine Störung, die immer zuschlägt, ist keine.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Leitfall}
+Bei $f=0{,}1$ beträgt die Kapazität $0{,}531$ Bit je Kanalbenutzung. Bei $10\,000$ Übertragungen je Sekunde sind das
+\[ 5310 \ \text{Bit je Sekunde} \]
+--- fehlerfrei, mit geeigneter Codierung.
+\end{merksatz}
+
+\section{Andere Kanäle}
+
+\begin{merksatz}
+\boxtitel{Der Auslöschungskanal}
+Hier geht ein Bit mit Wahrscheinlichkeit $e$ verloren --- der Empfänger erhält ein drittes Zeichen \enquote{unbekannt}, aber nie ein falsches.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\[ C = 1 - e \]
+\end{minipage}
+\end{center}
+
+\schritt{Warum das anschaulich ist}
+Ein Anteil $e$ der Bits geht verloren, der Rest kommt unversehrt an.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Vergleich ist lehrreich: Bei $e=0{,}1$ ist $C = 0{,}9$, bei $f=0{,}1$ nur $0{,}531$. \textbf{Ein Fehler, von dem man weiß, dass er aufgetreten ist, kostet erheblich weniger als einer, den man nicht bemerkt.} Deshalb bauen viele Systeme absichtlich eine Erkennung ein und behandeln erkannte Fehler als Auslöschungen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Z-Kanal}
+Eine Null kommt sicher an, eine Eins kippt mit Wahrscheinlichkeit $f$ --- etwa bei einem Sensor, der Signale übersehen, aber nicht erfinden kann.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+$f$ & $C$ & \textbf{bestes $p(1)$}\\
+\midrule
+$0{,}1$ & $0{,}763$ & $0{,}456$\\
+$0{,}5$ & $0{,}322$ & $0{,}400$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die beste Eingangsverteilung ist nicht gleichverteilt.} Man sendet die störanfällige Eins etwas seltener.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und der Vergleich zum symmetrischen Kanal überrascht: Bei $f=0{,}5$ hat der Z-Kanal noch $0{,}32$ Bit Kapazität, der symmetrische null. Obwohl die Hälfte der Einsen verlorengeht, bleibt Information übrig --- weil eine empfangene Eins \kursiv{sicher} eine gesendete Eins war. \textbf{Asymmetrie ist ein Vorteil.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was Definition 4.6 voraussetzt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Gedächtnislos} & Jede Benutzung stört unabhängig. Tatsächliche Funkstrecken haben Schwundlöcher --- Fehler treten gebündelt auf.\\
+\textbf{Bekannt} & Die Übergangswahrscheinlichkeiten müssen bekannt sein. Sie schwanken mit Wetter, Entfernung und Störquellen.\\
+\textbf{Diskret} & Reale Kanäle sind stetig; die Diskretisierung ist selbst eine Modellentscheidung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Bei gebündelten Fehlern ist die Kapazität \kursiv{höher} als beim gedächtnislosen Kanal gleicher mittlerer Fehlerrate --- die Bündelung ist zusätzliche Struktur, die man ausnutzen kann.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Praktisch nutzt man das durch \Begriff{Verschachtelung}: Man verteilt die Bits eines Codeworts über einen längeren Zeitraum, so dass ein Schwundloch viele Codewörter leicht statt eines schwer trifft. Das ist eine Anpassung des Systems an den Kanal, nicht umgekehrt.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Für den stetigen Kanal mit Gaußschem Rauschen gilt
+\[ C = \tfrac12\,\lb\!\left(1+\frac{S}{N}\right) \ \text{Bit je Benutzung} \]
+mit dem Verhältnis $S/N$ von Signal- zu Rauschleistung.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die berühmteste Formel der Nachrichtentechnik. Sie besagt, dass die Kapazität nur \kursiv{logarithmisch} mit der Sendeleistung wächst: Eine Verdopplung der Leistung bringt bei gutem Empfang etwa ein halbes Bit. Wer die Datenrate verdoppeln will, braucht bei hohem $S/N$ die quadrierte Leistung --- oder mehr Bandbreite.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und die Kapazität ist noch keine Aussage über Codes}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Definition 4.6 definiert ein Maximum von Transinformation. Dass dieses Maximum die Grenze fehlerfreier Übertragung ist, steht dort nicht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide Richtungen sind eigene Sätze. Dass man nicht mehr übertragen kann, folgt aus der Datenverarbeitungsungleichung; dass man so viel erreichen \kursiv{kann}, war Shannons eigentliche Leistung --- und sein Beweis ist nicht konstruktiv. Kapitel~5 behandelt beides.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Transinformation berechnen}
+Für die Verbundverteilung aus Kapitel~2
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{2.0cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+& $Y=+$ & $Y=-$\\
+\midrule
+$X=A$ & $0{,}125$ & $0{,}125$\\
+$X=\bar A$ & $0{,}075$ & $0{,}675$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+berechnen Sie $I(X;Y)$ auf drei Wegen.
+
+\loesung
+\schritt{Weg 1 --- über $\Ent(Y)-\Ent(Y\mid X)$}
+Aus Kapitel~2: $\Ent(Y) = 0{,}7219$, $\Ent(Y\mid X) = 0{,}6017$.
+\[ I = 0{,}7219 - 0{,}6017 = \mathbf{0{,}1202} \]
+
+\schritt{Weg 2 --- über $\Ent(X)-\Ent(X\mid Y)$}
+$\Ent(X) = 0{,}8113$, $\Ent(X\mid Y) = \Ent(X,Y)-\Ent(Y) = 1{,}4130-0{,}7219 = 0{,}6911$.
+\[ I = 0{,}8113 - 0{,}6911 = \mathbf{0{,}1202} \quad \checkmark \]
+
+\schritt{Weg 3 --- über die relative Entropie}
+\[ I = \sum_{x,y} p(x,y)\,\lb\frac{p(x,y)}{p(x)p(y)} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{1.8cm}P{1.6cm}P{1.8cm}@{}}
+\toprule
+$(x,y)$ & $p(x,y)$ & $p(x)p(y)$ & \textbf{Quotient} & \textbf{Beitrag}\\
+\midrule
+$(A,+)$ & $0{,}125$ & $0{,}050$ & $2{,}500$ & $0{,}1653$\\
+$(A,-)$ & $0{,}125$ & $0{,}200$ & $0{,}625$ & $-0{,}0848$\\
+$(\bar A,+)$ & $0{,}075$ & $0{,}150$ & $0{,}500$ & $-0{,}0750$\\
+$(\bar A,-)$ & $0{,}675$ & $0{,}600$ & $1{,}125$ & $0{,}1147$\\
+\midrule
+& & & & $\mathbf{0{,}1202}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zum ersten Beitrag:} $0{,}125\cdot\lb 2{,}5 = 0{,}125\cdot1{,}3219 = 0{,}1653$.\\
+\kursiv{Zum zweiten:} $0{,}125\cdot\lb0{,}625 = 0{,}125\cdot(-0{,}6781) = -0{,}0848$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beachten Sie die negativen Beiträge.} Die Transinformation ist als Ganzes nichtnegativ; einzelne Summanden können sehr wohl negativ sein.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Deutung}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Bit} & \textbf{Anteil}\\
+\midrule
+$\Ent(X)$ & $0{,}8113$ & $100\,\%$\\
+davon $I$ & $0{,}1202$ & $14{,}8\,\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Laborwert nimmt knapp fünfzehn Prozent der Ungewissheit über die Diagnosegruppe. Das ist ein brauchbarer, aber kein durchschlagender Befund --- und die Zahl ist eine sinnvolle Kenngröße für die Güte eines diagnostischen Tests, die neben Empfindlichkeit und Trennschärfe aus Band 17 tritt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Kapazitäten vergleichen}
+Bestimmen Sie die Kapazität:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & Binärer symmetrischer Kanal mit $f=0{,}05$.\\
+(b) & Auslöschungskanal mit $e=0{,}05$.\\
+(c) & Zwei unabhängige Kanäle nach (a) nebeneinander.\\
+(d) & Ein Kanal nach (a), zweimal hintereinander durchlaufen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a)}
+\[ h(0{,}05) = -0{,}05\,\lb0{,}05 - 0{,}95\,\lb0{,}95 \]
+\[ = 0{,}05\cdot4{,}3219 + 0{,}95\cdot0{,}0740 = 0{,}2161+0{,}0703 = 0{,}2864 \]
+\[ C = 1-0{,}2864 = \mathbf{0{,}7136} \]
+
+\schritt{(b)}
+\[ C = 1-0{,}05 = \mathbf{0{,}9500} \]
+
+\kursiv{Vergleich:} Derselbe Störanteil kostet beim Auslöschungskanal $0{,}05$ Bit, beim symmetrischen $0{,}29$ --- fast das Sechsfache.
+
+\schritt{(c) Zwei parallele Kanäle}
+Die Kapazitäten addieren sich:
+\[ C = 2\cdot0{,}7136 = \mathbf{1{,}4272} \]
+
+\kursiv{Begründung:} Die beiden Kanäle stören unabhängig, also ist die Transinformation des Paares die Summe.
+
+\schritt{(d) Zwei Kanäle hintereinander}
+Ein Bit kommt genau dann richtig an, wenn es entweder zweimal richtig oder zweimal falsch übertragen wurde:
+\[ f_{\text{ges}} = 2\cdot0{,}05\cdot0{,}95 = 0{,}095 \]
+
+\[ h(0{,}095) = 0{,}095\cdot3{,}3959 + 0{,}905\cdot0{,}1440 = 0{,}3226+0{,}1303 = 0{,}4529 \]
+\[ C = 1-0{,}4529 = \mathbf{0{,}5471} \]
+
+\schritt{Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{3.0cm}@{}}
+\toprule
+& $C$ & \\
+\midrule
+(a) einfach & $0{,}7136$ & \\
+(b) Auslöschung & $0{,}9500$ & \textcolor{gruen}{erkennbare Fehler}\\
+(c) parallel & $1{,}4272$ & doppelt\\
+(d) hintereinander & $0{,}5471$ & \textcolor{akzent}{weniger als (a)}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Hintereinandergeschaltete Kanäle können nur verlieren.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist ein Sonderfall der \Begriff{Datenverarbeitungsungleichung}: Bilden $X \to Y \to Z$ eine Kette, in der $Z$ nur über $Y$ von $X$ abhängt, so gilt $I(X;Z) \le I(X;Y)$. \textbf{Keine Nachbearbeitung kann Information hinzufügen, die nicht angekommen ist.} Kapitel~5 beweist die Ungleichung und benutzt sie für die Umkehrung des Codierungstheorems.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Der Wiederholungscode}
+Beim Leitfall ($f=0{,}1$) wird jedes Bit $n$-mal gesendet; der Empfänger entscheidet nach Mehrheit. Bestimmen Sie Rate und Fehlerwahrscheinlichkeit und vergleichen Sie mit der Kapazität.
+
+\loesung
+\schritt{Schritt 1 --- Die Fehlerwahrscheinlichkeit}
+Ein Fehler tritt auf, wenn mehr als die Hälfte der Bits kippt:
+\[ P_e = \sum_{i=\lceil n/2\rceil}^{n} \binom{n}{i}\,f^{i}\,(1-f)^{\,n-i} \]
+
+\schritt{Schritt 2 --- Für $n=3$}
+\[ P_e = \binom32 (0{,}1)^2(0{,}9) + \binom33 (0{,}1)^3 = 3\cdot0{,}009 + 0{,}001 = 0{,}028 \]
+
+\schritt{Schritt 3 --- Für $n=5$}
+\[ P_e = 10\,(0{,}1)^3(0{,}9)^2 + 5\,(0{,}1)^4(0{,}9) + (0{,}1)^5 \]
+\[ = 10\cdot0{,}00081 + 5\cdot0{,}00009 + 0{,}00001 = 0{,}0081+0{,}00045+0{,}00001 = 0{,}00856 \]
+
+\schritt{Schritt 4 --- Die Tabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+$n$ & \textbf{Rate} & $P_e$\\
+\midrule
+$1$ & $1{,}0000$ & $1{,}0\cdot10^{-1}$\\
+$3$ & $0{,}3333$ & $2{,}8\cdot10^{-2}$\\
+$5$ & $0{,}2000$ & $8{,}6\cdot10^{-3}$\\
+$9$ & $0{,}1111$ & $8{,}9\cdot10^{-4}$\\
+$11$ & $0{,}0909$ & $3{,}0\cdot10^{-4}$\\
+$21$ & $0{,}0476$ & $1{,}4\cdot10^{-6}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Der Befund}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Um die Fehlerrate zu senken, muss die Rate gesenkt werden --- und für $P_e \to 0$ geht sie gegen null.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Der Vergleich mit der Kapazität}
+\[ C = 1-h(0{,}1) = 0{,}5310 \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Rate} & $P_e$\\
+\midrule
+Wiederholung, $n=21$ & $0{,}048$ & $1{,}4\cdot10^{-6}$\\
+\textbf{Shannon} & $\mathbf{0{,}531}$ & \textbf{beliebig klein}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Kapazität liegt beim Elffachen dessen, was der Wiederholungscode bei dieser Fehlerrate schafft.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Warum Wiederholung so schlecht ist}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Wiederholungscode schützt jedes Bit einzeln. Ein guter Code schützt einen ganzen Block \kursiv{gemeinsam} --- und nutzt dabei aus, dass die Zahl der möglichen Fehlermuster viel kleiner ist als die Zahl der möglichen Blöcke. Bei einem Block von $100$ Bit und $f=0{,}1$ sind typischerweise etwa zehn Bit falsch. Die Zahl der Fehlermuster mit \kursiv{höchstens} zehn falschen Bit beträgt rund $2^{47}$ --- gegenüber $2^{100}$ Blöcken.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Genauer: $100\cdot h(0{,}1) = 46{,}9$, und das ist der Logarithmus der Zahl typischer Fehlermuster. Von den hundert Bit gehen also $46{,}9$ an die Störung verloren, und $53{,}1$ bleiben nutzbar --- genau $100\cdot C$. \textbf{Das ist der ganze Gedanke des nächsten Kapitels, an einer einzigen Zahl abgelesen.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Zahl, die niemand erwartet hatte}
+Vor 1948 galt als ausgemacht, dass Störungen nur durch Wiederholung zu bekämpfen sind --- und dass fehlerfreie Übertragung deshalb unendlich langsam werden muss.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Rechnung aus Aufgabe 4.3 war bekannt und schien die Sache zu entscheiden: Die Fehlerrate fällt exponentiell, die Rate aber wie $1/n$. Für beliebig kleine Fehler muss man beliebig langsam werden.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Bruch}
+Shannon zeigte, dass diese Schlussfolgerung nur für \kursiv{Wiederholungscodes} gilt --- und dass es bessere gibt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Zeitgenossen berichteten, das Ergebnis sei zunächst auf Unglauben gestoßen. Es widerspricht nicht nur der Anschauung, sondern auch der Erfahrung jedes Nachrichtentechnikers. \Person{Robert Fano} sagte später, er habe nicht geglaubt, dass so etwas möglich sei, bis er den Beweis mehrfach durchgegangen sei.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Vorgeschichte der Größe}
+Der Begriff der Kanalkapazität stammt in Ansätzen von \Person{Nyquist} (1924), der die höchste Symbolrate bei gegebener Bandbreite bestimmte, und von \Person{Hartley} (1928).
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Beiden fehlte die Behandlung des Rauschens. Shannons Beitrag war, Störungen nicht als technischen Mangel zu behandeln, sondern als wahrscheinlichkeitstheoretisches Objekt --- und damit dieselbe Größe darauf anzuwenden, die er für Quellen entwickelt hatte.}
+\end{minipage}
+\end{center}
+
+\schritt{Die relative Entropie}
+\Person{Solomon Kullback} und \Person{Richard Leibler} führten sie 1951 ein, als Maß für die Unterscheidbarkeit zweier Verteilungen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Kullback arbeitete zu dieser Zeit für den amerikanischen Nachrichtendienst und hatte während des Krieges an der Entzifferung japanischer Chiffren mitgewirkt. Die Größe, die heute in der Statistik und im maschinellen Lernen allgegenwärtig ist, entstand aus der Frage, wie gut sich zwei Hypothesen anhand abgefangener Nachrichten trennen lassen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Kapazität in der Praxis}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Mehrantennen\-systeme} & Mehrere Sende- und Empfangsantennen erzeugen mehrere parallele Kanäle; die Kapazität wächst näherungsweise linear mit ihrer Zahl.\\
+\textbf{Netzwerke} & Für Kanäle mit mehreren Sendern und Empfängern ist die Kapazität in vielen Fällen bis heute unbekannt.\\
+\textbf{Rückkanal} & Eine Rückmeldung erhöht die Kapazität des gedächtnislosen Kanals \kursiv{nicht} --- sie vereinfacht aber die Codes erheblich.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Schon der einfachste Fall --- zwei Sender, ein Empfänger, ein Störkanal --- ist ungelöst.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für den \Begriff{Interferenzkanal} mit zwei Sender-Empfänger-Paaren ist die Kapazität seit den 1970er Jahren offen; man kennt Schranken, die sich um höchstens ein Bit unterscheiden --- ein Ergebnis von 2008, das als Durchbruch galt. \textbf{Die Informationstheorie ist bei einem Sender vollständig und bei mehreren weitgehend offen.}}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Dass Rückmeldung die Kapazität nicht erhöht, ist ein Satz von Shannon.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das überrascht, weil ein Rückkanal offensichtlich nützlich ist --- man kann verlorene Blöcke nachfordern. Der Satz besagt, dass dieser Nutzen in der \kursiv{Einfachheit} liegt, nicht in der erreichbaren Rate. Bei Kanälen mit Gedächtnis gilt er allerdings nicht mehr.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 4.2} & drei Formen, Symmetrie\\
+\textbf{Satz 4.4} & $D(p\|q)\ge0$ --- das gemeinsame Werkzeug\\
+\textbf{Satz 4.5} & $I \ge 0$, null bei Unabhängigkeit\\
+\textbf{Definition 4.6} & $C = \max_{p(x)} I(X;Y)$\\
+\textbf{Satz 4.7} & $C = 1-h(f)$ beim BSC\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel wird aus der Zahl $0{,}531$ ein Satz --- und zwar der überraschendste dieses Bandes.}
+\end{minipage}
+\end{center}
+\end{merksatz}

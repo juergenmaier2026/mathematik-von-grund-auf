@@ -1,0 +1,710 @@
+\chapter{Entropie}
+
+\section{Der Mittelwert}
+
+\begin{merksatz}
+\boxtitel{Von einem Ereignis zu einer Quelle}
+Kapitel~1 gab den Gehalt \kursiv{eines} Ereignisses. Eine Nachrichtenquelle liefert aber viele.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die natürliche Kenngröße ist der Erwartungswert des Informationsgehalts.}
+\end{minipage}
+\end{center}
+
+\schritt{Im Leitfall}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.6cm}P{1.6cm}P{2.2cm}@{}}
+\toprule
+\textbf{Gruppe} & $p$ & $I$ & $p\cdot I$\\
+\midrule
+$A$, $B$ & $0{,}2500$ & $2$ & $2\times0{,}500$\\
+$C$, $D$ & $0{,}1250$ & $3$ & $2\times0{,}375$\\
+$E$--$H$ & $0{,}0625$ & $4$ & $4\times0{,}250$\\
+\midrule
+\textbf{Summe} & $1$ & & $\mathbf{2{,}75}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Nachrechnung:} $2\cdot0{,}5 + 2\cdot0{,}375 + 4\cdot0{,}25 = 1{,}0 + 0{,}75 + 1{,}0 = 2{,}75$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist die Zahl aus Kapitel~1.} Jetzt ist klar, woher sie kommt --- und Kapitel~3 wird zeigen, dass sie erreichbar und nicht unterbietbar ist.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 2.1 --- Entropie}
+Sei $X$ eine Zufallsgröße mit den Werten $x_1,\ldots,x_n$ und den Wahrscheinlichkeiten $p_1,\ldots,p_n$. Die \Begriff{Entropie} von $X$ ist
+\[ \Ent(X) = \sum_{i=1}^{n} p_i\,\lb\frac{1}{p_i} = -\sum_{i=1}^{n} p_i\,\lb p_i . \]
+Dabei setzt man $0\cdot\lb 0 := 0$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Zur Festsetzung $0\cdot\lb 0 = 0$}
+Der Ausdruck ist zunächst undefiniert. Man betrachtet den Grenzwert:
+\[ \lim_{p\to0^{+}} p\,\lb\frac1p = 0 \]
+
+\kursiv{Begründung:} Mit $p = 2^{-t}$ wird der Ausdruck zu $t\,2^{-t}$, und die Exponentialfunktion wächst schneller als jede Potenz (Band 3).
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Festsetzung ist also nicht willkürlich, sondern die stetige Fortsetzung. Sachlich bedeutet sie: Ein Wert, der nie vorkommt, trägt nichts zur mittleren Ungewissheit bei --- obwohl sein \kursiv{einzelner} Informationsgehalt unendlich wäre.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Grenzen}
+
+\begin{merksatz}
+\boxtitel{Satz 2.2 --- wie groß und wie klein}
+Für jede Zufallsgröße mit $n$ möglichen Werten gilt
+\[ 0 \ \le\ \Ent(X) \ \le\ \lb n . \]
+Links gilt Gleichheit genau dann, wenn ein Wert die Wahrscheinlichkeit $1$ hat; rechts genau bei Gleichverteilung.
+
+\schritt{Beweis der unteren Schranke}
+Jeder Summand $p_i\lb\frac{1}{p_i}$ ist nichtnegativ, denn $p_i \ge 0$ und $\frac{1}{p_i} \ge 1$, also $\lb\frac{1}{p_i}\ge0$.
+
+Die Summe ist null genau dann, wenn jeder Summand null ist --- also wenn für jedes $i$ entweder $p_i=0$ oder $p_i=1$ gilt. Da sich die Wahrscheinlichkeiten zu eins addieren, ist genau ein $p_i$ gleich $1$. \checkmark
+
+\schritt{Beweis der oberen Schranke}
+Wir betrachten die Differenz und ziehen $\lb n$ in die Summe hinein (was erlaubt ist, weil $\sum p_i = 1$):
+\begin{align*}
+\Ent(X) - \lb n &= \sum_i p_i\,\lb\frac{1}{p_i} - \sum_i p_i\,\lb n\\
+&= \sum_i p_i\left(\lb\frac{1}{p_i} - \lb n\right)\\
+&= \sum_i p_i\,\lb\frac{1}{n\,p_i}
+\end{align*}
+
+\schritt{Jensen anwenden}
+Der Logarithmus ist konkav (Band 19, Kapitel~7). Nach der Jensenschen Ungleichung gilt für konkave Funktionen
+\[ \sum_i p_i\,f(u_i) \ \le\ f\left(\sum_i p_i\,u_i\right) \]
+mit $u_i = \frac{1}{n\,p_i}$:
+\[ \sum_i p_i\,\lb\frac{1}{np_i} \ \le\ \lb\left(\sum_i p_i\cdot\frac{1}{np_i}\right) = \lb\left(\sum_i \frac1n\right) = \lb 1 = 0 \]
+
+Also $\Ent(X) \le \lb n$. \checkmark
+
+\schritt{Wann Gleichheit}
+Da der Logarithmus \kursiv{streng} konkav ist, gilt in der Jensenschen Ungleichung Gleichheit genau dann, wenn alle $u_i$ übereinstimmen:
+\[ \frac{1}{np_i} = \text{const} \quad\Longleftrightarrow\quad p_i = \text{const} \quad\Longleftrightarrow\quad p_i = \frac1n \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Kunstgriff in diesem Beweis --- die Konstante in die Summe zu ziehen, um Jensen anwenden zu können --- kehrt in diesem Band mehrfach wieder. Er ist die Standardtechnik der Informationstheorie, und Kapitel~8 zeigt, dass dahinter stets dieselbe Größe steckt: die Kullback-Leibler-Divergenz.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Bedeutung der Schranken}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{1.8cm}P{2.2cm}@{}}
+\toprule
+\textbf{Verteilung über $4$} & $\Ent$ in Bit & \\
+\midrule
+$(\tfrac14,\tfrac14,\tfrac14,\tfrac14)$ & $2{,}000$ & \textcolor{akzent}{Maximum}\\
+$(0{,}4;0{,}3;0{,}2;0{,}1)$ & $1{,}846$ & \\
+$(0{,}7;0{,}2;0{,}07;0{,}03)$ & $1{,}245$ & \\
+$(0{,}97;0{,}01;0{,}01;0{,}01)$ & $0{,}242$ & \\
+$(1;0;0;0)$ & $0{,}000$ & \textcolor{gruen}{Minimum}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Entropie misst, wie gleichmäßig eine Verteilung ist.} Je ungleichmäßiger, desto kleiner --- und desto besser lässt sich komprimieren.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie die zweite Zeile: Eine deutlich ungleiche Verteilung $(0{,}4; 0{,}3; 0{,}2; 0{,}1)$ hat noch $92$ Prozent der maximalen Entropie. \textbf{Die Entropie reagiert erstaunlich unempfindlich auf mäßige Ungleichheit} --- erst starke Konzentration senkt sie deutlich. Das ist der Grund, warum sich Text gut, aber nicht beliebig gut komprimieren lässt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die binäre Entropiefunktion}
+
+\begin{definition}
+\boxtitelm{Definition 2.3}
+Für $p\in[0,1]$ setzt man
+\[ h(p) = -p\,\lb p - (1-p)\,\lb(1-p) . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.4cm}P{1.8cm}@{}}
+\toprule
+$p$ & $h(p)$ & $p$ & $h(p)$\\
+\midrule
+$0{,}00$ & $0{,}0000$ & $0{,}25$ & $0{,}8113$\\
+$0{,}01$ & $0{,}0808$ & $0{,}50$ & $\mathbf{1{,}0000}$\\
+$0{,}05$ & $0{,}2864$ & $0{,}75$ & $0{,}8113$\\
+$0{,}10$ & $0{,}4690$ & $0{,}90$ & $0{,}4690$\\
+$0{,}11$ & $0{,}4999$ & $1{,}00$ & $0{,}0000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (6.4,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.0);
+\draw[tief, line width=1.4pt, smooth, samples=60, domain=0.008:0.992]
+  plot ({6*\x}, {2.6*(-\x*ln(\x)/ln(2) - (1-\x)*ln(1-\x)/ln(2))});
+\draw[grau!45, line width=0.5pt, dashed] (0,2.6) -- (3,2.6);
+\draw[grau!45, line width=0.5pt, dashed] (3,0) -- (3,2.6);
+\fill[akzent] (3,2.6) circle (2.4pt);
+\node[font=\scriptsize, color=grau, anchor=east] at (-0.1,2.6) {$1$};
+\node[font=\scriptsize, color=grau] at (3,-0.35) {$0{,}5$};
+\node[font=\scriptsize, color=grau] at (6,-0.35) {$1$};
+\node[font=\scriptsize, color=grau] at (3.0,-0.85) {$p$};
+\node[font=\scriptsize, color=grau, rotate=90] at (-0.7,1.4) {$h(p)$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Drei Eigenschaften}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Symmetrie} & $h(p) = h(1-p)$ --- es ist gleichgültig, welchen Ausgang man \enquote{Erfolg} nennt.\\
+\textbf{Maximum} & bei $p=\frac12$ mit dem Wert $1$.\\
+\textbf{Steilheit} & An den Rändern ist die Kurve \kursiv{unendlich} steil: $h'(p)\to\infty$ für $p\to0$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur dritten Zeile:}
+\[ h'(p) = \lb\frac{1-p}{p} \ \longrightarrow\ \infty \quad\text{für } p\to0 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das hat eine praktische Folge: Bei $p = 0{,}11$ ist $h = 0{,}5$ --- eine Münze, die nur in elf von hundert Fällen Kopf zeigt, trägt immer noch ein halbes Bit. \textbf{Um die Entropie zu halbieren, muss man die Wahrscheinlichkeit auf ein Neuntel drücken.} Seltene Ereignisse tragen mehr zur Ungewissheit bei, als man vermutet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Mehrere Größen}
+
+\begin{definition}
+\boxtitelm{Definition 2.4}
+Für zwei Zufallsgrößen $X$ und $Y$ mit gemeinsamer Verteilung $p(x,y)$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.8cm}P{5.6cm}@{}}
+\toprule
+\textbf{Verbundentropie} & $\Ent(X,Y) = -\sum_{x,y} p(x,y)\,\lb p(x,y)$\\
+\textbf{Bedingte Entropie} & $\Ent(Y\mid X) = \sum_x p(x)\,\Ent(Y\mid X=x)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 2.5 --- die Kettenregel}
+\[ \Ent(X,Y) = \Ent(X) + \Ent(Y\mid X) \]
+
+\schritt{Beweis}
+Mit $p(x,y) = p(x)\,p(y\mid x)$ und der Rechenregel für Logarithmen:
+\begin{align*}
+\Ent(X,Y) &= -\sum_{x,y} p(x,y)\,\lb\bigl(p(x)\,p(y\mid x)\bigr)\\
+&= -\sum_{x,y} p(x,y)\,\lb p(x) \;-\; \sum_{x,y} p(x,y)\,\lb p(y\mid x)
+\end{align*}
+
+\kursiv{Erster Summand:} Über $y$ summieren ergibt $\sum_y p(x,y) = p(x)$:
+\[ -\sum_x p(x)\,\lb p(x) = \Ent(X) \]
+
+\kursiv{Zweiter Summand:} Mit $p(x,y) = p(x)p(y\mid x)$:
+\[ -\sum_x p(x)\sum_y p(y\mid x)\,\lb p(y\mid x) = \sum_x p(x)\,\Ent(Y\mid X=x) = \Ent(Y\mid X) \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In Worten: Die Ungewissheit über beides ist die Ungewissheit über das eine plus die verbleibende über das andere.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.6 --- Bedingen verringert die Entropie}
+\[ \Ent(Y\mid X) \ \le\ \Ent(Y) \]
+mit Gleichheit genau dann, wenn $X$ und $Y$ unabhängig sind.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zusätzliches Wissen kann die Ungewissheit nur verringern, nie vergrößern.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis läuft wie bei Satz 2.2 über die Jensensche Ungleichung; wir führen ihn in Kapitel~4, wo die Differenz $\Ent(Y)-\Ent(Y\mid X)$ ihren Namen erhält. \textbf{Vorsicht bei der Deutung:} Der Satz gilt für den \kursiv{Mittelwert} über alle $x$. Ein einzelnes $\Ent(Y\mid X=x)$ kann sehr wohl größer sein als $\Ent(Y)$ --- eine bestimmte Beobachtung kann verwirren, obwohl Beobachtungen im Mittel klären.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall mit zwei Größen}
+$X$: Gehört der Fall zur Gruppe $A$? $Y$: Ist der Laborwert positiv?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+& $Y=+$ & $Y=-$ & \textbf{Summe}\\
+\midrule
+$X=A$ & $0{,}125$ & $0{,}125$ & $0{,}250$\\
+$X=\bar A$ & $0{,}075$ & $0{,}675$ & $0{,}750$\\
+\midrule
+\textbf{Summe} & $0{,}200$ & $0{,}800$ & $1{,}000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Randentropien}
+\[ \Ent(X) = h(0{,}25) = 0{,}8113 \ \text{Bit} \]
+\[ \Ent(Y) = h(0{,}20) = 0{,}7219 \ \text{Bit} \]
+
+\schritt{Die bedingte Entropie}
+\[ \Pr[Y=+\mid X=A] = \frac{0{,}125}{0{,}250} = 0{,}5, \qquad \Pr[Y=+\mid X=\bar A] = \frac{0{,}075}{0{,}750} = 0{,}1 \]
+\[ \Ent(Y\mid X) = 0{,}25\cdot h(0{,}5) + 0{,}75\cdot h(0{,}1) = 0{,}25\cdot1 + 0{,}75\cdot0{,}4690 = 0{,}6017 \]
+
+\schritt{Die Verbundentropie}
+\kursiv{Direkt:}
+\[ \Ent(X,Y) = -\bigl[2\cdot0{,}125\,\lb 0{,}125 + 0{,}075\,\lb 0{,}075 + 0{,}675\,\lb 0{,}675\bigr] \]
+\[ = 0{,}750 + 0{,}2802 + 0{,}3828 = 1{,}4130 \ \text{Bit} \]
+
+\kursiv{Über die Kettenregel:}
+\[ \Ent(X) + \Ent(Y\mid X) = 0{,}8113 + 0{,}6017 = 1{,}4130 \quad \checkmark \]
+
+\schritt{Die Bilanz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{3.0cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Bit} & \\
+\midrule
+$\Ent(X)$ & $0{,}8113$ & \\
+$\Ent(Y)$ & $0{,}7219$ & \\
+$\Ent(X,Y)$ & $1{,}4130$ & \\
+$\Ent(Y\mid X)$ & $0{,}6017$ & $< \Ent(Y)$ \checkmark\\
+$\Ent(X\mid Y)$ & $0{,}6911$ & $< \Ent(X)$ \checkmark\\
+\midrule
+Summe der Ränder & $1{,}5332$ & $> \Ent(X,Y)$\\
+\textbf{Differenz} & $\mathbf{0{,}1202}$ & \textcolor{akzent}{die Überschneidung}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Verbundentropie ist kleiner als die Summe der Einzelentropien --- um $0{,}12$ Bit.} Das ist die Information, die beide Größen gemeinsam haben.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es ist genau der Betrag, der in Kapitel~1 \enquote{verschwunden} war. Der Laborwert verrät etwas über die Diagnosegruppe und umgekehrt --- $0{,}12$ Bit, in beide Richtungen gleich viel. Kapitel~4 zeigt, dass diese Symmetrie kein Zufall ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was die Entropie nicht sagt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Keine Ordnung} & Die Entropie hängt nur von der \kursiv{Menge} der Wahrscheinlichkeiten ab, nicht davon, welcher Wert welche hat. Eine Vertauschung ändert nichts.\\
+\textbf{Kein Abstand} & Ob die Werte $1,2,3$ oder $1, 100, 10^6$ heißen, ist gleichgültig. Für Zahlengrößen ist das oft die falsche Beschreibung.\\
+\textbf{Keine Struktur} & Eine Folge, die aus lauter Wiederholungen besteht, kann dieselbe Entropie haben wie eine zufällige --- wenn man nur die Einzelhäufigkeiten betrachtet.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Die Folge
+\[ 010101010101\ldots \]
+hat je zur Hälfte Nullen und Einsen, also eine Symbolentropie von einem Bit --- obwohl sie vollkommen vorhersehbar ist.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Entropie einer Quelle ist nicht die Entropie ihrer Einzelsymbole.} Sie muss über immer längere Blöcke gemessen werden.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei Paaren ergibt sich für obige Folge nur noch ein halbes Bit je Symbol, bei Vierergruppen ein Viertel --- und im Grenzwert null. Man nennt das die \Begriff{Entropierate}; sie ist die richtige Größe für Quellen mit Gedächtnis und wird in Kapitel~3 eingeführt. \textbf{Deutscher Text hat eine Symbolentropie von etwa $4{,}1$ Bit und eine Entropierate von unter $1{,}5$ Bit je Zeichen} --- der Unterschied ist die Struktur der Sprache.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und die stetige Fassung hat eine Falle}
+Für eine stetige Größe mit Dichte $f$ definiert man
+\[ \Ent(X) = -\int f(x)\,\lb f(x)\,\dd x . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kann negativ sein} & Bei einer Gleichverteilung auf $[0;\ 0{,}5]$ ist $f=2$ und $\Ent = -1$ Bit.\\
+\textbf{Nicht invariant} & Eine Skalierung $X \to aX$ ändert den Wert um $\lb a$.\\
+\textbf{Kein Grenzwert} & Sie ist \kursiv{nicht} der Grenzwert der diskreten Entropie feiner werdender Einteilungen --- der wäre unendlich.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man nennt sie deshalb genauer \Begriff{differentielle Entropie} und behandelt sie als eigenen Begriff. Die guten Eigenschaften bleiben dort erhalten, wo \kursiv{Differenzen} gebildet werden --- und genau das geschieht bei der Transinformation in Kapitel~4. Sie ist auch im stetigen Fall nichtnegativ und skaleninvariant.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- Entropien vergleichen}
+Berechnen Sie die Entropie und vergleichen Sie mit der oberen Schranke:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & Ein fairer Würfel.\\
+(b) & Ein gezinkter Würfel: die Sechs mit $\frac12$, die übrigen gleich.\\
+(c) & Ein Buchstabe aus $26$ gleich häufigen.\\
+(d) & Die Blutgruppen: $0$ mit $0{,}41$, $A$ mit $0{,}43$, $B$ mit $0{,}11$, $AB$ mit $0{,}05$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) Fairer Würfel}
+Gleichverteilung, also Maximum:
+\[ \Ent = \lb 6 = 2{,}585 \ \text{Bit} \]
+
+\schritt{(b) Gezinkter Würfel}
+Die Sechs hat $\frac12$, die übrigen fünf je $\frac{1}{10}$.
+\[ \Ent = \tfrac12\lb2 + 5\cdot\tfrac1{10}\lb10 = 0{,}5 + 0{,}5\cdot3{,}3219 = 0{,}5+1{,}6610 = 2{,}161 \ \text{Bit} \]
+
+\kursiv{Vergleich:} $2{,}161$ gegen $2{,}585$ --- eine Einbuße von $16{,}4$ Prozent.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Bemerkenswert wenig für eine so grobe Verfälschung: Die Sechs kommt dreifach zu häufig, und die Entropie sinkt um ein Sechstel. Das ist die Unempfindlichkeit aus Abschnitt 2.2.}
+\end{minipage}
+\end{center}
+
+\schritt{(c) Buchstaben}
+\[ \Ent = \lb 26 = \frac{\ln 26}{\ln 2} = \frac{3{,}2581}{0{,}6931} = 4{,}700 \ \text{Bit} \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Deutscher Text erreicht diesen Wert bei weitem nicht: Die tatsächlichen Buchstabenhäufigkeiten ergeben etwa $4{,}1$ Bit, und unter Berücksichtigung der Abhängigkeiten sinkt der Wert auf unter $1{,}5$ Bit je Zeichen.}
+\end{minipage}
+\end{center}
+
+\schritt{(d) Blutgruppen}
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+& $p$ & $\lb(1/p)$ & $p\cdot\lb(1/p)$\\
+\midrule
+$0$ & $0{,}41$ & $1{,}2863$ & $0{,}5274$\\
+$A$ & $0{,}43$ & $1{,}2176$ & $0{,}5236$\\
+$B$ & $0{,}11$ & $3{,}1844$ & $0{,}3503$\\
+$AB$ & $0{,}05$ & $4{,}3219$ & $0{,}2161$\\
+\midrule
+& $1{,}00$ & & $\mathbf{1{,}617}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Obere Schranke:} $\lb 4 = 2$ Bit.
+
+\schritt{Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.0cm}P{1.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+& $\Ent$ & $\lb n$ & \textbf{Ausnutzung}\\
+\midrule
+(a) & $2{,}585$ & $2{,}585$ & $100{,}0\,\%$\\
+(b) & $2{,}161$ & $2{,}585$ & $83{,}6\,\%$\\
+(c) & $4{,}700$ & $4{,}700$ & $100{,}0\,\%$\\
+(d) & $1{,}617$ & $2{,}000$ & $80{,}9\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Spalte ist die interessante: Sie gibt an, wie viel der möglichen Ungewissheit tatsächlich vorhanden ist. Ihr Gegenstück $1-\text{Ausnutzung}$ heißt \Begriff{Redundanz} --- bei den Blutgruppen also $19$ Prozent. Genau so viel lässt sich durch Codierung einsparen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Die Kettenregel prüfen}
+Für die Verbundverteilung
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.8cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+& $y_1$ & $y_2$ & $y_3$\\
+\midrule
+$x_1$ & $\tfrac18$ & $\tfrac1{16}$ & $\tfrac1{16}$\\
+$x_2$ & $\tfrac1{16}$ & $\tfrac18$ & $\tfrac1{16}$\\
+$x_3$ & $\tfrac1{16}$ & $\tfrac1{16}$ & $\tfrac38$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+berechnen Sie alle Entropien und prüfen Sie die Kettenregel.
+
+\loesung
+\schritt{Schritt 1 --- Die Ränder}
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{2.0cm}@{}}
+\toprule
+& \textbf{Summe} & \textbf{Wert}\\
+\midrule
+$p(x_1)$ & $\tfrac18+\tfrac1{16}+\tfrac1{16}$ & $\tfrac14$\\
+$p(x_2)$ & $\tfrac1{16}+\tfrac18+\tfrac1{16}$ & $\tfrac14$\\
+$p(x_3)$ & $\tfrac1{16}+\tfrac1{16}+\tfrac38$ & $\tfrac12$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Aus Symmetrie der Tabelle gilt dasselbe für $Y$.
+
+\schritt{Schritt 2 --- Die Randentropien}
+\[ \Ent(X) = 2\cdot\tfrac14\lb4 + \tfrac12\lb2 = 2\cdot0{,}5 + 0{,}5 = 1{,}5 \ \text{Bit} \]
+Ebenso $\Ent(Y) = 1{,}5$ Bit.
+
+\schritt{Schritt 3 --- Die Verbundentropie}
+Die neun Felder: viermal $\frac1{16}$? Zählen wir nach:
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{1.6cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+\textbf{Wert} & \textbf{Anzahl} & $\lb(1/p)$ & \textbf{Beitrag}\\
+\midrule
+$\tfrac18$ & $2$ & $3$ & $2\cdot\tfrac38 = 0{,}750$\\
+$\tfrac1{16}$ & $6$ & $4$ & $6\cdot\tfrac14 = 1{,}500$\\
+$\tfrac38$ & $1$ & $1{,}4150$ & $0{,}5306$\\
+\midrule
+\textbf{Summe} & & & $\mathbf{2{,}781}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Probe der Wahrscheinlichkeiten:} $2\cdot\tfrac18 + 6\cdot\tfrac1{16} + \tfrac38 = \tfrac14+\tfrac38+\tfrac38 = 1$ \checkmark
+
+\kursiv{Zum dritten Beitrag:} $\lb\frac{8}{3} = 3 - \lb 3 = 3-1{,}5850 = 1{,}4150$; $0{,}375\cdot1{,}4150 = 0{,}5306$.
+
+\schritt{Schritt 4 --- Die bedingte Entropie}
+\kursiv{Gegeben $x_1$:} Die bedingten Wahrscheinlichkeiten sind $\frac{1/8}{1/4} = \frac12$ und zweimal $\frac{1/16}{1/4} = \frac14$.
+\[ \Ent(Y\mid x_1) = \tfrac12\cdot1 + 2\cdot\tfrac14\cdot2 = 0{,}5+1{,}0 = 1{,}5 \]
+Ebenso $\Ent(Y\mid x_2) = 1{,}5$.
+
+\kursiv{Gegeben $x_3$:} $\frac{1/16}{1/2} = \frac18$ zweimal und $\frac{3/8}{1/2} = \frac34$.
+\[ \Ent(Y\mid x_3) = 2\cdot\tfrac18\cdot3 + \tfrac34\lb\tfrac43 = 0{,}750 + 0{,}75\cdot0{,}4150 = 0{,}750+0{,}3113 = 1{,}0613 \]
+
+\[ \Ent(Y\mid X) = \tfrac14\cdot1{,}5 + \tfrac14\cdot1{,}5 + \tfrac12\cdot1{,}0613 = 0{,}375+0{,}375+0{,}5306 = 1{,}2806 \]
+
+\schritt{Schritt 5 --- Die Kettenregel prüfen}
+\[ \Ent(X) + \Ent(Y\mid X) = 1{,}5 + 1{,}2806 = \mathbf{2{,}781} \quad \checkmark \]
+
+\schritt{Schritt 6 --- Satz 2.6 prüfen}
+\[ \Ent(Y\mid X) = 1{,}281 \ \le\ 1{,}500 = \Ent(Y) \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie Schritt 4: Für $x_1$ und $x_2$ ist die bedingte Entropie \kursiv{genau so groß} wie $\Ent(Y)$ --- diese Beobachtungen klären nichts. Erst $x_3$ senkt sie deutlich. \textbf{Der Satz gilt im Mittel; einzelne Beobachtungen können wirkungslos sein.}}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Die Überschneidung}
+\[ \Ent(X)+\Ent(Y)-\Ent(X,Y) = 1{,}5+1{,}5-2{,}781 = \mathbf{0{,}219} \ \text{Bit} \]
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Die Gruppierungseigenschaft}
+Zeigen Sie: Fasst man zwei Werte mit den Wahrscheinlichkeiten $p_1$ und $p_2$ zu einem zusammen, so gilt
+\[ \Ent(p_1,p_2,p_3,\ldots) = \Ent(p_1{+}p_2,\ p_3,\ldots) + (p_1{+}p_2)\,h\!\left(\frac{p_1}{p_1+p_2}\right) . \]
+Prüfen Sie die Formel am Leitfall.
+
+\loesung
+\schritt{Schritt 1 --- Die Idee}
+Man erfährt die Nachricht in zwei Schritten: erst, ob sie in der zusammengefassten Gruppe liegt, dann gegebenenfalls welcher der beiden Werte es ist.
+
+\schritt{Schritt 2 --- Der Beweis}
+Sei $q = p_1+p_2$. Die beiden fraglichen Summanden auf der linken Seite:
+\[ -p_1\lb p_1 - p_2\lb p_2 \]
+
+Wir schreiben $p_1 = q\cdot\frac{p_1}{q}$ und entsprechend $p_2$:
+\begin{align*}
+-p_1\lb p_1 &= -p_1\left(\lb q + \lb\tfrac{p_1}{q}\right) = -p_1\lb q - p_1\lb\tfrac{p_1}{q}\\
+-p_2\lb p_2 &= -p_2\lb q - p_2\lb\tfrac{p_2}{q}
+\end{align*}
+
+Addieren:
+\[ -(p_1+p_2)\lb q \;-\; q\left[\tfrac{p_1}{q}\lb\tfrac{p_1}{q} + \tfrac{p_2}{q}\lb\tfrac{p_2}{q}\right] = -q\lb q + q\,h\!\left(\tfrac{p_1}{q}\right) \]
+
+Der erste Term ist genau der Beitrag des zusammengefassten Werts. $\blacksquare$
+
+\schritt{Schritt 3 --- Am Leitfall}
+Wir fassen $E$ und $F$ (je $0{,}0625$) zu einer Gruppe mit $0{,}125$ zusammen.
+
+\kursiv{Links:} $\Ent = 2{,}75$ (acht Gruppen).
+
+\kursiv{Rechts, erster Teil:} Sieben Gruppen mit $(0{,}25;\ 0{,}25;\ 0{,}125;\ 0{,}125;\ \mathbf{0{,}125};\ 0{,}0625;\ 0{,}0625)$:
+\[ \Ent = 2\cdot0{,}5 + 3\cdot(0{,}125\cdot3) + 2\cdot(0{,}0625\cdot4) = 1{,}0 + 1{,}125 + 0{,}5 = 2{,}625 \]
+
+\kursiv{Rechts, zweiter Teil:}
+\[ 0{,}125 \cdot h\!\left(\tfrac{0{,}0625}{0{,}125}\right) = 0{,}125 \cdot h(0{,}5) = 0{,}125 \cdot 1 = 0{,}125 \]
+
+\[ 2{,}625 + 0{,}125 = \mathbf{2{,}750} \quad \checkmark \]
+
+\schritt{Schritt 4 --- Wozu das dient}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Codierung} & Das Huffman-Verfahren in Kapitel~3 fasst genau so zusammen --- und die Formel sagt, was das kostet.\\
+\textbf{Entscheidungs\-bäume} & In der Statistik wählt man Aufteilungen nach dem Entropiegewinn; die Formel ist die Rechengrundlage.\\
+\textbf{Axiomatik} & Zusammen mit Stetigkeit und dem Wert $h(\frac12)=1$ legt sie die Entropie vollständig fest.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist Shannons eigener Zugang von 1948: Er forderte Stetigkeit, Monotonie im Umfang bei Gleichverteilung und genau diese Gruppierungseigenschaft --- und bewies, dass nur $-C\sum p_i\ln p_i$ übrigbleibt. Es ist derselbe Aufbau wie bei Satz 1.1, nur eine Ebene höher.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Formel mit zwei Herkünften}
+Die Funktion $-\sum p_i\ln p_i$ stand in der Physik, bevor sie in der Nachrichtentechnik auftauchte.
+
+\schritt{Boltzmann, 1877}
+\Person{Ludwig Boltzmann} (1844--1906) verband die thermodynamische Entropie mit der Zahl $W$ der mikroskopischen Zustände, die zu einem makroskopischen gehören:
+\[ S = k_B \ln W \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das ist der Sonderfall gleich wahrscheinlicher Zustände --- genau Hartleys Formel aus Kapitel~1, nur in anderer Einheit. Die Gleichung steht auf Boltzmanns Grabstein in Wien, obwohl er sie in dieser Form nie aufschrieb; \Person{Max Planck} gab ihr die heutige Gestalt.}
+\end{minipage}
+\end{center}
+
+\schritt{Gibbs, 1902}
+\Person{Josiah Willard Gibbs} verallgemeinerte auf ungleiche Wahrscheinlichkeiten:
+\[ S = -k_B\sum_i p_i \ln p_i \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das ist Shannons Formel, sechsundvierzig Jahre früher und mit einer physikalischen Konstante davor. Dass beide Größen dieselbe Gestalt haben, ist kein Zufall: Beide zählen, wie viele Möglichkeiten es gibt --- die eine für Moleküle, die andere für Nachrichten.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Zusammenhang}
+\Person{Leó Szilárd} zeigte 1929 an einem Gedankenexperiment, dass der Maxwellsche Dämon --- ein Wesen, das Moleküle sortiert und damit angeblich den zweiten Hauptsatz verletzt --- genau dann keine Arbeit gewinnt, wenn man den Informationsgewinn mitbilanziert.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Ein Bit Information entspricht dabei der Entropie $k_B\ln 2$. Die Auflösung des Paradoxons vollendete \Person{Charles Bennett} 1982: Nicht das Messen kostet, sondern das \kursiv{Löschen} des Gedächtnisses --- nach dem Landauer-Prinzip aus Kapitel~1.}
+\end{minipage}
+\end{center}
+
+\schritt{Und eine Warnung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Gleichheit der Formeln hat zu weitreichenden Behauptungen geführt --- über Information als physikalische Grundgröße, über das Universum als Rechner. Der sichere Kern ist schmaler: Beide Größen zählen Möglichkeiten, und wo eine physikalische Fragestellung auf ein Abzählen von Zuständen hinausläuft, tritt dieselbe Funktion auf. Mehr folgt daraus nicht von selbst.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Entropie als Werkzeug}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{5.0cm}@{}}
+\toprule
+\textbf{Maximale Entropie} & Unter allen Verteilungen mit gegebenen Erwartungswerten diejenige mit größter Entropie wählen --- das Prinzip der geringsten Zusatzannahme.\\
+\textbf{Entscheidungs\-bäume} & Aufteilungen werden nach dem Entropiegewinn gewählt.\\
+\textbf{Schätzung} & Die Entropie aus Daten zu schätzen ist bei vielen Symbolen systematisch verzerrt --- nach unten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\Person{Edwin Jaynes} schlug 1957 vor, unter allen mit den Daten verträglichen Verteilungen die entropiereichste zu wählen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Ergebnisse sind bemerkenswert: Gibt man nur den Mittelwert vor, so ergibt sich die Exponentialverteilung; gibt man Mittelwert und Varianz vor, die Normalverteilung. \textbf{Die Normalverteilung ist also die Verteilung, die bei gegebener Streuung am wenigsten behauptet} --- eine Begründung für ihre Sonderstellung, die neben dem zentralen Grenzwertsatz aus Band 12 steht.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Schätzt man $\Ent$ durch Einsetzen der beobachteten Häufigkeiten, so ist das Ergebnis zu klein.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Grund ist Jensen: Die Entropie ist eine konkave Funktion der Wahrscheinlichkeiten, und der Erwartungswert einer konkaven Funktion liegt unter der Funktion des Erwartungswerts. Der Fehler beträgt näherungsweise $\frac{n-1}{2N\ln 2}$ Bit bei $n$ Symbolen und $N$ Beobachtungen --- bei vielen seltenen Symbolen also erheblich. Es ist derselbe Sachverhalt wie in Band 19, Kapitel~13, nur mit umgekehrtem Vorzeichen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 2.1} & $\Ent = -\sum p_i\lb p_i$\\
+\textbf{Satz 2.2} & $0 \le \Ent \le \lb n$, Jensen\\
+\textbf{Definition 2.3} & $h(p)$, Maximum bei $\frac12$\\
+\textbf{Satz 2.5} & Kettenregel\\
+\textbf{Satz 2.6} & Bedingen verringert --- im Mittel\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel wird aus der Zahl $2{,}75$ ein Satz: Sie ist erreichbar, und weniger geht nicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}

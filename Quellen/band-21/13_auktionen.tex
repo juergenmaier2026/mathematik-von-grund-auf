@@ -1,0 +1,748 @@
+\chapter{Auktionen und Zuteilung}
+
+\section{Was Kapitel 12 übrig lässt}
+
+\begin{merksatz}
+\boxtitel{Die Forderung abschwächen}
+Arrow verlangt eine vollständige Reihung aller Möglichkeiten als Ergebnis. Meist braucht man weniger.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kapitel 12} & \enquote{Wie ordnen wir alle Geräte?}\\
+\textbf{Hier} & \enquote{Wer bekommt den Auftrag?} und \enquote{Wer bekommt welche Stelle?}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Zuteilung ist keine Reihung --- und dafür gibt es Verfahren, die funktionieren.}
+\end{minipage}
+\end{center}
+
+\schritt{Zwei Leitfälle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Mit Geld} & Das Klinikum schreibt einen Wartungsvertrag aus. Die Bieter kennen ihre Kosten, das Klinikum nicht.\\
+\textbf{Ohne Geld} & Weiterbildungsstellen werden an Bewerber vergeben. Beide Seiten haben Vorlieben.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Vier Auktionsformen}
+
+\begin{merksatz}
+\boxtitel{Die gebräuchlichen Formen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Englisch} & Der Preis steigt, bis nur einer bleibt. Offen.\\
+\textbf{Holländisch} & Der Preis fällt, bis der Erste zugreift. Offen.\\
+\textbf{Erstpreis} & Verdeckte Gebote; der Höchstbietende zahlt sein Gebot.\\
+\textbf{Zweitpreis} & Verdeckte Gebote; der Höchstbietende zahlt das \kursiv{zweithöchste} Gebot.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die vierte Form wirkt widersinnig --- der Verkäufer verschenkt die Differenz.} Sie ist die einzige, bei der ehrliches Bieten stets richtig ist.
+\end{minipage}
+\end{center}
+
+\schritt{Die Paarungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Holländisch} & entspricht der Erstpreisauktion: Man muss vorab festlegen, bei welchem Preis man zugreift --- ohne etwas über die anderen zu erfahren.\\
+\textbf{Englisch} & entspricht der Zweitpreisauktion: Man bleibt bis zum eigenen Wert und zahlt das, was der Vorletzte geboten hat.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Paarung erklärt, warum die Zweitpreisauktion weniger seltsam ist, als sie aussieht: \textbf{Jede gewöhnliche Versteigerung ist eine} --- der Zuschlag erfolgt knapp über dem Gebot des vorletzten Bieters, nicht bei der Zahlungsbereitschaft des Siegers.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Zweitpreisauktion}
+
+\begin{merksatz}
+\boxtitel{Satz 13.1 --- Vickrey, 1961}
+In der Zweitpreisauktion ist das Bieten des eigenen Wertes eine schwach dominante Strategie.
+
+\schritt{Beweis}
+Sei $v$ mein Wert, $b$ mein Gebot und $m$ das höchste Gebot der anderen. Mein Nutzen beträgt $v-m$, wenn ich gewinne, sonst null.
+
+\kursiv{Fall 1: $b > v$.} Das ändert nur etwas, wenn $m$ zwischen $v$ und $b$ liegt. Dann gewinne ich und zahle $m > v$:
+\[ v - m \ <\ 0 . \]
+Mit $b=v$ hätte ich verloren und null erhalten. \textbf{Schlechter.}
+
+\kursiv{Fall 2: $b < v$.} Das ändert nur etwas, wenn $m$ zwischen $b$ und $v$ liegt. Dann verliere ich und erhalte null, statt
+\[ v - m \ >\ 0 \]
+zu bekommen. \textbf{Schlechter.}
+
+\kursiv{In allen übrigen Fällen} ist das Ergebnis dasselbe wie bei $b=v$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man braucht nichts über die anderen zu wissen.} Der eigene Wert genügt --- das ist Dominanz im Sinne von Kapitel~1.
+\end{minipage}
+\end{center}
+
+\schritt{Die Zahlen}
+Bei $v = 100$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.8cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Gebot} & \textbf{fremdes} & \textbf{Ausgang} & \textbf{Nutzen}\\
+\midrule
+$100$ & $80$ & gewinnt & $+20$\\
+$120$ & $110$ & gewinnt & $\mathbf{-10}$\\
+$120$ & $90$ & gewinnt & $+10$\\
+$80$ & $90$ & \textcolor{akzent}{verliert} & $\mathbf{0}$\\
+$80$ & $70$ & gewinnt & $+30$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile zeigt den Schaden des Überbietens, die vierte den des Unterbietens: Bei einem fremden Gebot von $90$ hätte man mit $100$ gewonnen und $10$ verdient. \textbf{Die dritte und die fünfte Zeile sind dieselben wie bei ehrlichem Gebot} --- das Überbieten schadet nur dort, wo es überhaupt wirkt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Erstpreisauktion}
+Hier lohnt ehrliches Bieten nicht: Wer seinen Wert bietet, gewinnt ohne Gewinn.
+
+\schritt{Das Gleichgewichtsgebot}
+Bei $n$ Bietern mit unabhängigen, auf $[0,1]$ gleichverteilten Werten lautet es
+\[ b(v) = \frac{n-1}{n}\,v . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{3.0cm}@{}}
+\toprule
+$n$ & \textbf{Anteil} & \\
+\midrule
+$2$ & $50\,\%$ & die Hälfte des Wertes\\
+$3$ & $67\,\%$ & \\
+$5$ & $80\,\%$ & \\
+$10$ & $90\,\%$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Je mehr Bieter, desto näher am eigenen Wert.} Der Wettbewerb zwingt zur Offenheit.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man beachte, was hier verlangt wird: Der Bieter muss $n$ kennen und die Verteilung der fremden Werte. \textbf{Bei der Zweitpreisauktion braucht er nichts davon} --- das ist der eigentliche Vorzug, nicht der Preis.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 13.2 --- die Erlösgleichheit}
+Unter den genannten Annahmen erbringen alle vier Formen denselben erwarteten Erlös:
+\[ \mathbb{E}[\text{Erlös}] = \frac{n-1}{n+1} . \]
+
+\schritt{Die Rechnung für die Zweitpreisauktion}
+Der Erlös ist der zweithöchste Wert. Für $n$ gleichverteilte Werte gilt
+\[ \mathbb{E}\bigl[v_{(n-1)}\bigr] = \frac{n-1}{n+1} . \]
+
+\schritt{Die Rechnung für die Erstpreisauktion}
+Der Erlös ist das Gebot des Höchstbietenden:
+\[ \mathbb{E}\left[\frac{n-1}{n}\,v_{(n)}\right] = \frac{n-1}{n}\cdot\frac{n}{n+1} = \frac{n-1}{n+1} \quad \checkmark \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+$n$ & \textbf{Zweitpreis} & \textbf{Erstpreis} & \\
+\midrule
+$2$ & $0{,}3333$ & $0{,}3333$ & \\
+$3$ & $0{,}5000$ & $0{,}5000$ & \\
+$5$ & $0{,}6667$ & $0{,}6667$ & \\
+$10$ & $0{,}8182$ & $0{,}8182$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Probe durch Simulation, $n=3$, $200\,000$ Durchläufe:} $0{,}5002$ und $0{,}4997$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Wahl der Auktionsform ändert den erwarteten Erlös nicht --- nur, wie die Bieter sich verhalten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist ein überraschendes und zugleich zerbrechliches Ergebnis. \textbf{Es gilt nur unter den genannten Annahmen}: unabhängige private Werte, risikoneutrale Bieter, symmetrische Verteilung, keine Absprachen. Wird eine davon verletzt, trennen sich die Formen --- und der Bruchfall zeigt, wie weit.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zuteilung ohne Geld}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall: Weiterbildungsstellen}
+Drei Bewerber, drei Kliniken, jede Seite mit Vorlieben.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{2.8cm}P{2.0cm}P{2.8cm}@{}}
+\toprule
+\textbf{Arzt} & \textbf{Reihung} & \textbf{Klinik} & \textbf{Reihung}\\
+\midrule
+$a_1$ & $K_1 \succ K_2 \succ K_3$ & $K_1$ & $a_2 \succ a_3 \succ a_1$\\
+$a_2$ & $K_2 \succ K_3 \succ K_1$ & $K_2$ & $a_3 \succ a_1 \succ a_2$\\
+$a_3$ & $K_3 \succ K_1 \succ K_2$ & $K_3$ & $a_1 \succ a_2 \succ a_3$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 13.3 --- stabil}
+Eine Zuordnung heißt \Begriff{stabil}, wenn es kein Paar gibt, das einander dem Zugeteilten vorzieht.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Das Verfahren von Gale und Shapley}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Jeder noch nicht vorläufig Zugeordnete fragt bei seiner besten noch nicht abgelehnten Stelle an.\\
+$2$ & Jede Stelle behält vorläufig den besten Anfragenden und lehnt die übrigen ab.\\
+$3$ & Wiederholen, bis niemand mehr frei ist.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Satz 13.4 --- Gale und Shapley, 1962}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Es endet} & Nach höchstens $n^{2}$ Anfragen, denn keine Stelle wird zweimal gefragt.\\
+\textbf{Es ist stabil} & Kein Paar zieht einander vor.\\
+\textbf{Einseitig bestes} & Die anfragende Seite erhält unter allen stabilen Zuordnungen ihre beste.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis der Stabilität}
+Angenommen, $a$ zieht $K$ seiner Zuteilung vor und $K$ zieht $a$ der ihren vor.
+
+Da $a$ die Stellen der Reihe nach durchgeht und $K$ besser ist als die erhaltene, hat $a$ bei $K$ angefragt --- und wurde abgelehnt.
+
+$K$ lehnt nur ab, wenn sie jemand Besseren hält. Da $K$ im Verlauf nur besser wird, hält sie am Ende jemanden, den sie $a$ vorzieht. \textbf{Widerspruch.} $\blacksquare$
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall gerechnet}
+\schritt{Wenn die Ärzte anfragen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Anfrage} & \textbf{Antwort} & \\
+\midrule
+$a_1 \to K_1$ & angenommen & \\
+$a_2 \to K_2$ & angenommen & \\
+$a_3 \to K_3$ & angenommen & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ a_1\!-\!K_1, \quad a_2\!-\!K_2, \quad a_3\!-\!K_3 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jeder Arzt erhält seine erste Wahl --- jede Klinik ihre letzte.}
+\end{minipage}
+\end{center}
+
+\schritt{Wenn die Kliniken anfragen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Anfrage} & \textbf{Antwort} & \\
+\midrule
+$K_1 \to a_2$ & angenommen & \\
+$K_2 \to a_3$ & angenommen & \\
+$K_3 \to a_1$ & angenommen & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ a_2\!-\!K_1, \quad a_3\!-\!K_2, \quad a_1\!-\!K_3 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nun erhält jede Klinik ihre erste Wahl --- jeder Arzt seine letzte.}
+\end{minipage}
+\end{center}
+
+\schritt{Beide sind stabil}
+\kursiv{Prüfung der zweiten Zuordnung:} $a_1$ hätte lieber $K_1$ --- aber $K_1$ hat $a_2$ und zieht $a_2$ dem $a_1$ vor. Ebenso für $K_2$ und $a_3$. Kein blockierendes Paar. \checkmark
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Ärzte} & \textbf{Kliniken}\\
+\midrule
+Ärzte fragen & Rang $1$ & Rang $3$\\
+Kliniken fragen & Rang $3$ & Rang $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer anfragt, gewinnt --- vollständig.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist das Gegenstück zum Erstzieher-Vorteil aus Kapitel~7, und es hat eine unmittelbare praktische Bedeutung: \textbf{Bis 1997 fragten im amerikanischen Vergabeverfahren für Assistenzarztstellen die Kliniken an}, nicht die Bewerber. Nach jahrelanger Kritik wurde das Verfahren umgestellt --- mit der Begründung, die Bewerber seien die schwächere Seite. Der Unterschied ist in der Praxis allerdings klein, weil die extreme Gegenläufigkeit dieses Beispiels selten auftritt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 13.5 --- Wahrheit für die anfragende Seite}
+Für die anfragende Seite ist es dominant, die wahre Reihung anzugeben.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Für die andere Seite gilt das nicht --- sie kann durch Verkürzen der Liste gewinnen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist kein Mangel des Verfahrens, sondern unvermeidlich: \textbf{Es gibt kein stabiles Zuordnungsverfahren, bei dem für beide Seiten Wahrheit dominant ist} --- ein Satz von \Person{Roth} aus dem Jahr 1982, der Satz 12.2 entspricht. Man muss also entscheiden, welche Seite man schützt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Der Fluch des Gewinners}
+Satz 13.1 setzt \kursiv{private} Werte voraus --- jeder kennt seinen eigenen. Bei einem \kursiv{gemeinsamen} Wert, den niemand kennt, ändert sich alles.
+
+\schritt{Das Beispiel}
+Der Wartungsvertrag ist objektiv gleich viel wert; jeder Bieter schätzt ihn mit einem Fehler.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{3.0cm}P{2.6cm}@{}}
+\toprule
+$n$ & \textbf{Höchst\-schätzung} & \textbf{Überschätzung}\\
+\midrule
+$2$ & $105{,}7$ & $+5{,}7$\\
+$5$ & $111{,}5$ & $+11{,}5$\\
+$10$ & $115{,}4$ & $+15{,}4$\\
+$20$ & $118{,}7$ & $+18{,}7$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Wahrer Wert $100$, Schätzfehler normalverteilt mit Streuung $10$.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer gewinnt, hat am stärksten überschätzt --- und zahlt zu viel.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und es wird schlimmer, je mehr Bieter antreten: \textbf{Mehr Wettbewerb verschärft den Fluch.} Die Abhilfe ist, das eigene Gebot um genau diesen Betrag zu senken --- man bietet nicht auf die eigene Schätzung, sondern auf die Schätzung unter der Bedingung, dass man gewinnt. Wer das nicht tut, gewinnt oft und verdient nie.}
+\end{minipage}
+\end{center}
+
+\schritt{Woher der Name}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Drei Ingenieure einer Ölgesellschaft beschrieben das Muster 1971 anhand von Bohrrechten im Golf von Mexiko: Die erfolgreichen Bieter erzielten dort über Jahre keine Rendite. \textbf{Die Rechnung war den Beteiligten nicht bekannt}, obwohl sie elementar ist.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und drei weitere Schwächen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Absprachen} & Die Zweitpreisauktion ist besonders anfällig: Zwei Bieter verabreden, dass einer hoch und der andere niedrig bietet --- der Preis fällt auf das niedrige Gebot.\\
+\textbf{Ausschluss} & Wer den Zuschlag will, kann andere vom Bieten abhalten. Das wirkt stärker als jedes Gebot.\\
+\textbf{Vertrauen} & Der Sieger muss glauben, dass das zweithöchste Gebot wirklich vorlag. Der Veranstalter kann es erfinden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile erklärt, warum die reine Zweitpreisauktion trotz ihrer theoretischen Vorzüge selten offen eingesetzt wird. \textbf{Bei der englischen Auktion tritt das Problem nicht auf}, weil alle Gebote sichtbar sind --- und das ist der Grund, warum die praktisch gebräuchliche Form die offene ist, obwohl die verdeckte die schönere Theorie hat.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.1 --- Eine Ausschreibung}
+Drei Anbieter bewerben sich um einen Wartungsvertrag. Ihre Kosten betragen $60$, $75$ und $90$. Das Klinikum sucht den günstigsten Anbieter.
+
+\loesung
+\schritt{Schritt 1 --- Die Umkehrung}
+Bei einer Beschaffung gewinnt der \kursiv{niedrigste} Bieter. Die Zweitpreisregel lautet dann: Er erhält den \kursiv{zweitniedrigsten} Preis.
+
+\schritt{Schritt 2 --- Die Zweitpreisausschreibung}
+Nach Satz 13.1 bietet jeder seine Kosten:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Anbieter} & \textbf{Kosten} & \textbf{Gebot} & \textbf{Ergebnis}\\
+\midrule
+$X$ & $60$ & $60$ & \textcolor{gruen}{gewinnt}\\
+$Y$ & $75$ & $75$ & \\
+$Z$ & $90$ & $90$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ \text{Preis} = 75, \qquad \text{Gewinn von } X = 75-60 = 15 \]
+
+\schritt{Schritt 3 --- Die Erstpreisausschreibung}
+Hier bietet $X$ knapp unter dem erwarteten Gebot von $Y$. Bei Kenntnis der Kosten wäre das knapp unter $75$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Preis ist derselbe} --- das ist Satz 13.2 in einem Einzelfall.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Unterschied liegt in der Kenntnis: \textbf{Bei der Erstpreisform muss $X$ die Kosten von $Y$ schätzen}, und jeder Fehler kostet --- schätzt er zu hoch, verliert er den Auftrag; zu niedrig, verschenkt er Gewinn. Bei der Zweitpreisform braucht er gar nichts zu schätzen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Was das Klinikum zahlt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Form} & \textbf{Preis} & \textbf{Risiko}\\
+\midrule
+Zweitpreis & $75$ & Vertrauen nötig\\
+Erstpreis & $\approx 75$ & Fehlschätzung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Eine Absprache}
+$X$ und $Y$ verabreden, dass $Y$ mit $200$ bietet.
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Gebote} & \textbf{Preis} & \textbf{Gewinn von $X$}\\
+\midrule
+$60$, $75$, $90$ & $75$ & $15$\\
+$60$, $200$, $90$ & $90$ & $\mathbf{30}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Absprache verdoppelt den Gewinn --- auf Kosten des Klinikums.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und sie ist \kursiv{selbsttragend}: $Y$ verliert dabei nichts, denn er hätte ohnehin nicht gewonnen. \textbf{Er muss nicht einmal beteiligt werden} --- eine Gegenleistung ist nötig, aber keine Aufteilung des Gewinns während der Auktion. Bei der Erstpreisform müsste $X$ sein Gebot tatsächlich erhöhen und riskierte damit $Z$; die Absprache ist dort instabiler.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Gegenmaßnahme}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein \Begriff{Mindestpreis} --- hier eine Obergrenze --- begrenzt den Schaden: Setzt das Klinikum eine Höchstsumme von $80$ fest, so bringt die Absprache nur noch $80$ statt $90$. \textbf{Die Grenze kostet allerdings, wenn alle Gebote darüber liegen}, denn dann findet keine Vergabe statt. Die optimale Grenze hängt von der Verteilung der Kosten ab und ist ein eigenes Entwurfsproblem.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.2 --- Der Fluch berechnet}
+Fünf Anbieter schätzen den Wert eines Auftrags, der objektiv $100$ wert ist. Die Schätzfehler sind unabhängig und normalverteilt mit Streuung $10$. Was sollte ein Bieter tun?
+
+\loesung
+\schritt{Schritt 1 --- Die Höchstschätzung}
+Aus der Tabelle in Abschnitt 13.5: Bei $n=5$ liegt der Erwartungswert der höchsten Schätzung bei $111{,}5$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer gewinnt, hat im Mittel um $11{,}5$ überschätzt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die Näherungsformel}
+Für $n$ normalverteilte Größen mit Streuung $\sigma$ gilt näherungsweise
+\[ \mathbb{E}\bigl[\max\bigr] \approx \sigma\,\sqrt{2\ln n} . \]
+
+\kursiv{Für $n=5$, $\sigma=10$:} $10\cdot\sqrt{2\ln 5} = 10\cdot\sqrt{3{,}219} = 10\cdot1{,}794 = 17{,}9$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Näherung liegt hier deutlich über dem simulierten Wert von $11{,}5$ --- sie wird erst für große $n$ brauchbar. \textbf{Man sollte sie für kleine Bieterzahlen nicht verwenden}, sondern den Erwartungswert der Ordnungsstatistik tabellieren oder simulieren.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Das Gebot}
+Der Bieter mit der Schätzung $s$ sollte nicht $s$ bieten, sondern
+\[ b = s - 11{,}5 . \]
+
+\kursiv{Probe:} Der Gewinner hat im Mittel $s = 111{,}5$ und bietet $100$ --- genau den wahren Wert.
+
+\schritt{Schritt 4 --- Die Abhängigkeit von der Bieterzahl}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+$n$ & \textbf{Abschlag} & \textbf{Gebot bei $s=110$}\\
+\midrule
+$2$ & $5{,}7$ & $104{,}3$\\
+$5$ & $11{,}5$ & $98{,}5$\\
+$10$ & $15{,}4$ & $94{,}6$\\
+$20$ & $18{,}7$ & $91{,}3$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mit wachsender Bieterzahl muss man \kursiv{niedriger} bieten, nicht höher.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das widerspricht der Erfahrung aus Abschnitt 13.3, wo mehr Wettbewerb zu höheren Geboten führte --- \textbf{und beide Aussagen sind richtig}, weil sie verschiedene Lagen betreffen. Bei privaten Werten treibt der Wettbewerb die Gebote hoch; bei gemeinsamen Werten muss er sie drücken, weil das Gewinnen selbst eine schlechte Nachricht ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die eigentliche Einsicht}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man bietet nicht auf die eigene Schätzung, sondern auf die Schätzung \kursiv{unter der Bedingung, dass man gewinnt}. \textbf{Der Gewinn ist eine Information, und man muss sie vorwegnehmen.} Das ist bedingte Wahrscheinlichkeit im Sinne von Band 12 --- und die verbreitetste Fehlanwendung in der Praxis ist, sie wegzulassen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.3 --- Die Liste verkürzen}
+Im Leitfall aus Abschnitt 13.4 fragen die Ärzte an. Kann Klinik $K_1$ durch eine falsche Angabe gewinnen?
+
+\loesung
+\schritt{Schritt 1 --- Das ehrliche Ergebnis}
+\[ a_1\!-\!K_1, \quad a_2\!-\!K_2, \quad a_3\!-\!K_3 \]
+
+$K_1$ erhält $a_1$ --- ihren dritten und letzten Rang.
+
+\schritt{Schritt 2 --- Der Eingriff}
+$K_1$ gibt an, $a_1$ sei für sie nicht annehmbar --- ihre Liste lautet nur noch $a_2 \succ a_3$.
+
+\schritt{Schritt 3 --- Der neue Verlauf}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.8cm}P{2.4cm}@{}}
+\toprule
+\textbf{Anfrage} & \textbf{Antwort} & \\
+\midrule
+$a_1 \to K_1$ & \textcolor{akzent}{abgelehnt} & \\
+$a_2 \to K_2$ & angenommen & \\
+$a_3 \to K_3$ & angenommen & \\
+$a_1 \to K_2$ & $K_2$ zieht $a_1$ dem $a_2$ vor & $a_2$ frei\\
+$a_2 \to K_3$ & $K_3$ zieht $a_2$ dem $a_3$ vor & $a_3$ frei\\
+$a_3 \to K_1$ & angenommen & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ a_1\!-\!K_2, \quad a_2\!-\!K_3, \quad a_3\!-\!K_1 \]
+
+\schritt{Schritt 4 --- Der Gewinn}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+& \textbf{ehrlich} & \textbf{mit Eingriff}\\
+\midrule
+$K_1$ erhält & $a_1$ (Rang $3$) & $\mathbf{a_3}$ \textbf{(Rang 2)}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$K_1$ verbessert sich, indem sie einen Bewerber ablehnt, den sie eigentlich annehmen würde.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Das Risiko}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hätte $a_3$ sich anders verhalten oder wäre die Kette anders verlaufen, so könnte $K_1$ leer ausgehen --- sie hat sich eine Möglichkeit genommen. \textbf{Der Eingriff verlangt genaue Kenntnis aller Reihungen}, und die hat in der Praxis niemand. Das ist der wesentliche Schutz des Verfahrens: nicht Unmanipulierbarkeit, sondern die Schwierigkeit, die Manipulation zu berechnen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Einordnung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach Satz 13.5 ist das unvermeidlich: \textbf{Für die anfragende Seite ist Wahrheit dominant, für die andere nie.} Die Umstellung des amerikanischen Vergabeverfahrens 1997 hat also nicht die Manipulierbarkeit beseitigt, sondern sie von den Bewerbern auf die Kliniken verschoben. Untersuchungen der tatsächlichen Daten ergaben, dass weniger als ein Prozent der Beteiligten durch einen Eingriff hätte gewinnen können.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Aufsatz und seine Verspätung}
+\Person{William Vickrey} (1914--1996) beschrieb die Zweitpreisauktion 1961 in einem Aufsatz, der zunächst kaum beachtet wurde.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Erst in den 1980er Jahren, als die Theorie des Mechanismenentwurfs entstand, wurde seine Arbeit zur Grundlage eines ganzen Gebiets. \textbf{Vickrey erhielt 1996 den Wirtschaftsnobelpreis und starb drei Tage nach der Bekanntgabe} --- auf dem Weg zu einer Tagung, im Auto.}
+\end{minipage}
+\end{center}
+
+\schritt{Eine ältere Spur}
+Briefmarkensammler benutzten die Zweitpreisregel bei Versteigerungen bereits ab 1893.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie nannten es die \enquote{Regel des zweiten Gebots} und setzten sie ein, damit Sammler auch ohne Anwesenheit bieten konnten, ohne zu viel zu zahlen. \textbf{Der Zusammenhang wurde erst 1990 bemerkt}, in einer Arbeit über die Geschichte der Auktionen.}
+\end{minipage}
+\end{center}
+
+\schritt{Gale und Shapley}
+\Person{David Gale} und \Person{Lloyd Shapley} veröffentlichten 1962 einen Aufsatz mit dem Titel \enquote{College Admissions and the Stability of Marriage}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er umfasst neun Seiten und enthält das Verfahren, den Existenzsatz und die Optimalität für die anfragende Seite. \textbf{Die Verfasser wussten nicht, dass ein praktisch gleiches Verfahren seit 1952 für amerikanische Assistenzarztstellen in Gebrauch war} --- es war von Praktikern ohne Theorie entwickelt worden. \Person{Alvin Roth} stellte den Zusammenhang 1984 her.}
+\end{minipage}
+\end{center}
+
+\schritt{Roth}
+\Person{Alvin Roth} übertrug die Theorie auf die Praxis: Er baute Vergabeverfahren für Schulplätze in New York und Boston und ein Tauschverfahren für Nierenspenden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Bei der Nierenspende geht es um Paare, deren Spender nicht zum eigenen Empfänger passt. Man sucht Ketten, in denen jeder Spender zu einem fremden Empfänger passt. \textbf{Seit 2004 sind auf diesem Weg Tausende von Übertragungen zustande gekommen}, die sonst nicht möglich gewesen wären. Roth und Shapley erhielten 2012 gemeinsam den Nobelpreis; Gale war 2008 gestorben.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Zuteilung heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Frequenzen} & Mehrgegenstandsauktionen für Mobilfunklizenzen, seit 1994.\\
+\textbf{Organe} & Tauschketten und Verteilungsregeln.\\
+\textbf{Werbeplätze} & Milliardenfach täglich, in Millisekunden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Werden mehrere Gegenstände zugleich versteigert, deren Wert voneinander abhängt, so versagt die einfache Theorie.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zwei benachbarte Frequenzblöcke sind gemeinsam mehr wert als einzeln. \textbf{Die Gestaltung solcher Auktionen ist ein eigenes Fach geworden}, mit gemischtem Erfolg: Die neuseeländische Versteigerung von 1990 erbrachte wegen eines Entwurfsfehlers einen Bruchteil der erwarteten Summe, in einem Fall ein Gebot von einem Dollar. \Person{Paul Milgrom} und \Person{Robert Wilson} erhielten 2020 den Nobelpreis für die Theorie und für die von ihnen entworfenen Verfahren.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Beim Handel mit Werbeplätzen wird für jeden Seitenaufruf eine Auktion durchgeführt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Lange war die Zweitpreisregel üblich, unter Berufung auf Satz 13.1. \textbf{Seit etwa 2019 stellen die großen Plattformen auf die Erstpreisregel um} --- weil der Veranstalter beim verdeckten Zweitpreis das zweithöchste Gebot nicht nachweisen kann und das Vertrauen fehlte. Es ist genau die dritte Zeile des Bruchfalls, in großem Maßstab.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 13.1} & Zweitpreis: Wahrheit ist dominant\\
+\textbf{Satz 13.2} & alle vier Formen, gleicher Erlös\\
+\textbf{Satz 13.4} & Gale-Shapley: stabil und einseitig bestes\\
+\textbf{Satz 13.5} & Wahrheit nie für beide Seiten\\
+\textbf{Der Fluch} & mehr Bieter, niedriger bieten\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle Verfahren dieses Kapitels setzen voraus, dass niemand sich mit anderen zusammentut. Das nächste fragt, was geschieht, wenn Gruppen gemeinsam handeln dürfen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

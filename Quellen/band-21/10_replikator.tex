@@ -1,0 +1,687 @@
+\chapter{Replikatordynamik}
+
+\section{Von der Stabilität zur Bewegung}
+
+\begin{merksatz}
+\boxtitel{Was Kapitel 9 offenlässt}
+Definition 9.1 prüft, ob eine Lage Störungen aushält. Sie sagt nichts darüber, wie eine Bevölkerung dorthin gelangt --- oder ob überhaupt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gesucht ist eine Gleichung für die Veränderung der Anteile über die Zeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Ansatz}
+Sei $x_i$ der Anteil des Typs $i$. Seine Eignung gegen die Bevölkerung ist
+\[ f_i(\vek x) = (A\vek x)_i = \sum_j a_{ij}\,x_j , \]
+die mittlere Eignung der Bevölkerung
+\[ \bar f(\vek x) = \vek x^{\!\top} A\,\vek x . \]
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 10.1 --- Replikatorgleichung}
+\[ \dot x_i = x_i\,\bigl(f_i(\vek x) - \bar f(\vek x)\bigr) \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Woher die Gleichung kommt}
+Sei $n_i$ die absolute Anzahl des Typs $i$, und wachse sie mit ihrer Eignung:
+\[ \dot n_i = n_i\,f_i \]
+
+Mit $N = \sum_j n_j$ und $x_i = n_i/N$ liefert die Quotientenregel
+\[ \dot x_i = \frac{\dot n_i N - n_i \dot N}{N^{2}} = \frac{n_i f_i}{N} - \frac{n_i}{N}\cdot\frac{\dot N}{N} . \]
+
+Wegen $\dot N = \sum_j n_j f_j = N\,\bar f$:
+\[ \dot x_i = x_i f_i - x_i \bar f = x_i\,(f_i - \bar f) \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Typ wächst genau dann, wenn er überdurchschnittlich abschneidet.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es ist die einfachste denkbare Gleichung mit dieser Eigenschaft, und sie enthält keine Annahme über Bewusstsein, Lernen oder Absicht. \textbf{Dieselbe Gleichung beschreibt auch Lernvorgänge}, bei denen Handlungen im Verhältnis zu ihrem bisherigen Erfolg häufiger gewählt werden --- und das ist der Grund, warum sie auch für menschliches Verhalten herangezogen wird.}
+\end{minipage}
+\end{center}
+
+\schritt{Eigenschaften}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Summe bleibt} & $\sum_i \dot x_i = \bar f - \bar f = 0$, also bleibt $\sum x_i = 1$.\\
+\textbf{Ränder bleiben} & Ist $x_i = 0$, so bleibt $\dot x_i = 0$ --- ausgestorbene Typen kehren nicht zurück.\\
+\textbf{Verschiebungs\-fest} & Addiert man zu einer Spalte eine Konstante, so ändert sich die Dynamik nicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist ein wesentlicher Unterschied zur biologischen Wirklichkeit: \textbf{Die Gleichung kennt keine Mutation.} Ein Typ, der nicht vorhanden ist, kann nicht entstehen. Das macht die Ränder zu Ruhelagen, auch wo sie es nicht sein sollten --- ein Punkt, auf den der Bruchfall zurückkommt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zwei Typen}
+
+\begin{merksatz}
+\boxtitel{Die Gleichung für zwei Strategien}
+Mit $x$ als Anteil des ersten Typs und $1-x$ des zweiten:
+\[ \dot x = x\,(1-x)\,\bigl[f_1(x) - f_2(x)\bigr] \]
+
+\schritt{Herleitung}
+\[ \bar f = x f_1 + (1-x) f_2 \quad\Longrightarrow\quad f_1 - \bar f = (1-x)(f_1-f_2) \]
+Einsetzen in Definition 10.1 liefert die Behauptung. \checkmark
+
+\schritt{Der Leitfall}
+Falke-Taube mit $V=2$, $C=4$:
+\[ f_F = -x + 2(1-x) = 2-3x, \qquad f_T = 0\cdot x + 1\cdot(1-x) = 1-x \]
+\[ f_F - f_T = (2-3x)-(1-x) = 1-2x \]
+
+\[ \boxed{\ \dot x = x\,(1-x)\,(1-2x)\ } \]
+
+\schritt{Die Ruhelagen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{2.8cm}@{}}
+\toprule
+$x$ & $g'(x)$ & \\
+\midrule
+$0$ & $+1$ & \textcolor{akzent}{abstoßend}\\
+$\tfrac12$ & $-\tfrac12$ & \textcolor{gruen}{anziehend}\\
+$1$ & $+1$ & \textcolor{akzent}{abstoßend}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur Ableitung:} $g(x) = x-3x^{2}+2x^{3}$, also $g'(x) = 1-6x+6x^{2}$.
+\[ g'(0) = 1, \qquad g'(\tfrac12) = 1-3+\tfrac32 = -\tfrac12, \qquad g'(1) = 1-6+6 = 1 \]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (6.4,0);
+\draw[tief, line width=1.4pt, smooth, samples=60, domain=0:6]
+  plot ({\x}, {16*(\x/6)*(1-\x/6)*(1-2*\x/6)});
+\draw[grau!45, line width=0.5pt, dashed] (3,-1.2) -- (3,1.2);
+\fill[akzent] (0,0) circle (2.6pt);
+\fill[gruen] (3,0) circle (2.8pt);
+\fill[akzent] (6,0) circle (2.6pt);
+\draw[gruen, line width=1.0pt, -{Stealth[length=4pt]}] (1.2,-0.45) -- (2.2,-0.45);
+\draw[gruen, line width=1.0pt, -{Stealth[length=4pt]}] (4.8,0.45) -- (3.8,0.45);
+\node[font=\scriptsize, color=grau, anchor=north] at (0,-0.12) {$0$};
+\node[font=\scriptsize, color=gruen!70!black, anchor=north] at (3,-0.12) {$\tfrac12$};
+\node[font=\scriptsize, color=grau, anchor=north] at (6,-0.12) {$1$};
+\node[font=\scriptsize\itshape, color=grau] at (3.0,-1.7) {$\dot x$ über dem Falkenanteil $x$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Eine Bahn}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+$t$ & $x(t)$ & \\
+\midrule
+$0$ & $0{,}9000$ & Falken überwiegen\\
+$4$ & $0{,}5832$ & \\
+$8$ & $0{,}5085$ & \\
+$12$ & $0{,}5009$ & \\
+$20$ & $0{,}5000$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Bevölkerung findet das Gleichgewicht, ohne dass jemand es kennt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 10.2 --- der Zusammenhang}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Nash} & Jedes Nash-Gleichgewicht ist eine Ruhelage.\\
+\textbf{Stabil $\Rightarrow$ anziehend} & Jede evolutionär stabile Strategie ist eine asymptotisch stabile Ruhelage.\\
+\textbf{Nicht umgekehrt} & Es gibt anziehende Ruhelagen, die nicht evolutionär stabil sind --- und Ruhelagen, die kein Nash-Gleichgewicht sind.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Im Gleichgewicht haben alle benutzten Strategien dieselbe Eignung (Satz 3.3), also $f_i = \bar f$ und damit $\dot x_i = 0$.
+
+\schritt{Zur dritten Zeile}
+Die Ränder $x=0$ und $x=1$ sind stets Ruhelagen --- unabhängig davon, ob sie ein Gleichgewicht sind.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im Leitfall ist $x=1$ eine Ruhelage, obwohl eine reine Falkenbevölkerung von Tauben unterwandert würde. \textbf{Die Gleichung kann den Zustand nicht verlassen, weil keine Tauben vorhanden sind}, die wachsen könnten. Erst die Ableitung $g'(1) = 1 > 0$ zeigt, dass jede noch so kleine Beimischung ausreicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wenn die Bewegung nicht zur Ruhe kommt}
+
+\begin{merksatz}
+\boxtitel{Das zyklische Spiel}
+Aus Aufgabe 3.1:
+\[ A = \begin{pmatrix} 0 & 2 & -1\\ -2 & 0 & 1\\ 1 & -1 & 0 \end{pmatrix}, \qquad \vek p = \left(\tfrac14,\ \tfrac14,\ \tfrac12\right) \]
+
+\schritt{Satz 10.3 --- die Bahnen sind geschlossen}
+Für antisymmetrisches $A$ mit innerem Gleichgewicht $\vek p$ ist
+\[ H(\vek x) = \sum_i p_i\,\ln x_i \]
+entlang jeder Bahn konstant.
+
+\schritt{Beweis}
+\kursiv{Erstens:} Antisymmetrie liefert $\vek x^{\!\top} A\vek x = 0$, denn jeder Summand $x_i a_{ij} x_j$ hebt sich gegen $x_j a_{ji} x_i$ auf. Also $\bar f = 0$ und
+\[ \dot x_i = x_i\,(A\vek x)_i . \]
+
+\kursiv{Zweitens:}
+\[ \frac{\dd H}{\dd t} = \sum_i p_i\,\frac{\dot x_i}{x_i} = \sum_i p_i\,(A\vek x)_i = \vek p^{\!\top} A\,\vek x . \]
+
+\kursiv{Drittens:} Da $\vek p$ ein Gleichgewicht ist, gilt $A\vek p = \vek 0$. Mit $A^{\!\top} = -A$:
+\[ \vek p^{\!\top} A\,\vek x = (A^{\!\top}\vek p)^{\!\top}\vek x = (-A\vek p)^{\!\top}\vek x = \vek 0^{\!\top}\vek x = 0 \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Bahnen laufen auf Niveauflächen von $H$ --- sie kreisen um das Gleichgewicht, ohne es je zu erreichen.}
+\end{minipage}
+\end{center}
+
+\schritt{Eine Bahn, gerechnet}
+Start bei $(0{,}30;\ 0{,}30;\ 0{,}40)$, also $H = -1{,}06013$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{3.4cm}P{2.4cm}@{}}
+\toprule
+$t$ & $\vek x(t)$ & $H$\\
+\midrule
+$0$ & $(0{,}300;\,0{,}300;\,0{,}400)$ & $-1{,}06013$\\
+$40$ & $(0{,}228;\,0{,}181;\,0{,}592)$ & $-1{,}06013$\\
+$80$ & $(0{,}224;\,0{,}343;\,0{,}433)$ & $-1{,}06013$\\
+$120$ & $(0{,}297;\,0{,}172;\,0{,}531)$ & $-1{,}06013$\\
+$200$ & $(0{,}342;\,0{,}208;\,0{,}450)$ & $-1{,}06013$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Die Umlaufdauer beträgt hier etwa $117$ Zeiteinheiten.}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kapitel~9 hatte bereits festgestellt, dass dieses Spiel keine evolutionär stabile Strategie besitzt. \textbf{Hier sieht man, was stattdessen geschieht}: Die Anteile schwanken dauerhaft mit fester Amplitude, die vom Startwert abhängt. Bei einer kalifornischen Eidechsenart mit drei Paarungsstrategien wurde ein solcher Zyklus über zwei Jahrzehnte dokumentiert, mit einer Periode von etwa sechs Jahren.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Vorbehalt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Erhaltungsgröße macht das System zu einem Grenzfall: \textbf{Die kleinste Störung des Modells zerstört sie}, und dann spiralt die Bahn entweder nach innen oder nach außen. Bei Auswärtsspirale läuft die Bevölkerung gegen den Rand, und ein Typ stirbt aus --- woraufhin der Zyklus endet. Welcher Fall eintritt, hängt an Termen, die das Modell gar nicht enthält.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Leitfall: Resistenz}
+
+\begin{merksatz}
+\boxtitel{Die offene Rechnung aus Band 18}
+Dort war die Ausgangslage: Ein Tumor von $10^{12}$ Zellen, eine Mutationsrate von $\mu = 10^{-6}$, also ein resistenter Anteil von
+\[ x_0 = 10^{-6} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Lage} & \textbf{empfindlich} & \textbf{resistent}\\
+\midrule
+unter Therapie & stark geschädigt & wächst\\
+ohne Therapie & wächst gut & zahlt Preis\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Als Eignungsdifferenzen:}
+\[ r_{\text{an}} = f_R - f_S = +0{,}04 \ \text{je Tag}, \qquad r_{\text{aus}} = -0{,}01 \ \text{je Tag} \]
+
+\schritt{Die Gleichung}
+\[ \dot x = x\,(1-x)\,r \]
+--- die logistische Gleichung aus Band 18, Kapitel~2, mit der Lösung
+\[ x(t) = \frac{x_0\,e^{rt}}{1-x_0+x_0 e^{rt}} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es ist dieselbe Gleichung --- und das ist kein Zufall. \textbf{Die Replikatorgleichung für zwei Typen mit konstanter Eignungsdifferenz \kursiv{ist} die logistische Gleichung.} Was dort als Wachstum unter Ressourcenbegrenzung erschien, ist hier die Verdrängung eines Typs durch einen anderen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Dauertherapie}
+Bis zur Hälfte resistenter Zellen:
+\[ x(t) = \tfrac12 \quad\Longleftrightarrow\quad e^{rt} = \frac{1-x_0}{x_0} \approx 10^{6} \]
+\[ t = \frac{\ln 10^{6}}{0{,}04} = \frac{13{,}82}{0{,}04} = 345 \ \text{Tage} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nach etwa elf Monaten besteht der Tumor zur Hälfte aus resistenten Zellen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Zahl liegt in der Größenordnung klinisch beobachteter Rückfallzeiten bei zielgerichteter Therapie. \textbf{Sie folgt aus zwei Angaben} --- Startanteil und Eignungsdifferenz --- und aus nichts sonst.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Adaptive Therapie}
+Man behandelt in Zyklen: $T_{\text{an}}$ Tage Therapie, $T_{\text{aus}}$ Tage Pause.
+
+\schritt{Die Bedingung}
+Über einen Zyklus darf der resistente Anteil nicht wachsen:
+\[ r_{\text{an}}\,T_{\text{an}} + r_{\text{aus}}\,T_{\text{aus}} \ \le\ 0 \]
+\[ 0{,}04\,T_{\text{an}} \ \le\ 0{,}01\,T_{\text{aus}} \]
+
+\[ \boxed{\ T_{\text{aus}} \ \ge\ 4\,T_{\text{an}}\ } \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Pause muss viermal so lang sein wie die Behandlung.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Zahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+\textbf{Schema} & \textbf{Dauer} & \textbf{resistenter Anteil}\\
+\midrule
+$60$ an, $60$ aus & $960$ d & $6{,}4\cdot10^{-1}$\\
+$60$ an, $180$ aus & $1920$ d & $1{,}2\cdot10^{-4}$\\
+$60$ an, $240$ aus & $2400$ d & $1{,}0\cdot10^{-6}$\\
+$60$ an, $300$ aus & $2880$ d & $8{,}2\cdot10^{-9}$\\
+\midrule
+Dauertherapie & $960$ d & $\approx 1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei $60$ an und $240$ aus bleibt der resistente Anteil exakt auf dem Ausgangswert --- beliebig lange.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist der Grenzfall: Der Netto-Exponent ist genau null. \textbf{Darüber hinaus schrumpft der resistente Anteil sogar}, wie die vierte Zeile zeigt. Das ist die spieltheoretische Begründung, die Band 18, Kapitel~14 offenließ: Die empfindlichen Zellen sind kein Übel, das man beseitigen sollte, sondern das Mittel, mit dem die resistenten unterdrückt werden.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Preis}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Tumorlast} & Der Tumor bleibt bestehen und wächst in den Pausen. Das Ziel ist Beherrschung, nicht Heilung.\\
+\textbf{Nur $20$ Prozent} & Behandelt wird ein Fünftel der Zeit. Wer eine Heilung anstrebt, gibt sie damit auf.\\
+\textbf{Messbarkeit} & Man muss die Tumorlast häufig messen, um die Zyklen zu steuern.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Ansatz eignet sich nicht für Lagen, in denen Heilung erreichbar ist.} Er ist für unheilbare, aber beherrschbare Erkrankungen gedacht --- und dort verspricht er Jahre statt Monate. Klinische Prüfungen bei einer Prostatakarzinomform zeigten seit 2017 eine deutliche Verlängerung der Beherrschungsdauer bei geringerer Gesamtdosis; die Übertragbarkeit auf andere Tumoren ist Gegenstand laufender Studien.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was die Gleichung nicht enthält}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Keine Mutation} & Ausgestorbene Typen kehren nicht zurück. In der Biologie tun sie es.\\
+\textbf{Kein Zufall} & Endliche Bevölkerungen schwanken; die Gleichung beschreibt den Mittelwert.\\
+\textbf{Kein Raum} & Jeder trifft jeden. Räumliche Modelle liefern andere Ergebnisse.\\
+\textbf{Feste Auszahlungen} & Die Matrix ändert sich nicht --- im Leitfall eine grobe Vereinfachung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Fügt man einen Mutationsterm hinzu, so verschwinden die Randruhelagen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die entstehende Gleichung heißt Replikator-Mutator-Gleichung; sie hat innere Ruhelagen nahe den alten Rändern. \textbf{Für den Leitfall ist das wesentlich}: Ein resistenter Anteil von null ist biologisch unerreichbar, weil ständig neue Mutationen entstehen --- genau das war Band 18, Kapitel~14 mit $N_c = 1/\mu$.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur vierten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Eignungsdifferenzen $+0{,}04$ und $-0{,}01$ wurden als konstant angenommen. Tatsächlich hängen sie von der Tumorgröße, der Durchblutung, dem Sauerstoffangebot und der Dosis ab. \textbf{Die Rechnung liefert daher eine Größenordnung und ein Verhältnis} --- die Pause muss ein Vielfaches der Therapie betragen --- aber keine Therapieplanung. Wer sie so benutzt, begeht den Fehler der ersten Warnung des Vorworts.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Ein Koordinationsspiel}
+Bestimmen Sie die Replikatordynamik der Hirschjagd aus Kapitel~5 und analysieren Sie die Ruhelagen.
+\[ A = \begin{pmatrix} 4 & 0\\ 3 & 3 \end{pmatrix} \]
+
+\loesung
+\schritt{Schritt 1 --- Die Eignungen}
+Mit $x$ als Anteil derer, die gemeinsam vorgehen:
+\[ f_G = 4x + 0\,(1-x) = 4x \]
+\[ f_A = 3x + 3\,(1-x) = 3 \]
+
+\schritt{Schritt 2 --- Die Gleichung}
+\[ \dot x = x\,(1-x)\,(4x-3) \]
+
+\schritt{Schritt 3 --- Die Ruhelagen}
+\[ x = 0, \qquad x = \tfrac34, \qquad x = 1 \]
+
+\schritt{Schritt 4 --- Die Stabilität}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{3.4cm}P{2.2cm}@{}}
+\toprule
+$x$ & \textbf{Verhalten nahebei} & \\
+\midrule
+$0$ & $\dot x \approx -3x < 0$ & \textcolor{gruen}{anziehend}\\
+$\tfrac34$ & Vorzeichen\-wechsel $-$ nach $+$ & \textcolor{akzent}{abstoßend}\\
+$1$ & $\dot x \approx (1-x) > 0$ & \textcolor{gruen}{anziehend}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur mittleren Zeile:} Für $x < \tfrac34$ ist $4x-3 < 0$, also $\dot x < 0$; für $x > \tfrac34$ ist $\dot x > 0$.
+
+\schritt{Schritt 5 --- Der Einzugsbereich}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Startet die Bevölkerung mit weniger als $75$ Prozent Kooperierenden, so stirbt die Zusammenarbeit aus.} Darüber setzt sie sich vollständig durch.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Schwelle $\tfrac34$ ist genau die Vertrauensschwelle $q^{*} = T/R$ aus Aufgabe 5.3. \textbf{Was dort eine Erwartung war, ist hier ein Anfangszustand} --- und das ist der begriffliche Gewinn dieses Kapitels: Die Frage \enquote{traut man dem anderen zu, mitzuziehen?} wird zur Frage \enquote{wie viele ziehen bereits mit?}.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Folge für die Praxis}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine Hirschjagd löst man nicht durch Überzeugungsarbeit im Einzelfall, sondern indem man die Bevölkerung über die Schwelle hebt --- etwa durch eine anfängliche Förderung, die nach Erreichen der Schwelle entfallen kann. \textbf{Die Maßnahme muss nur einmal wirken, nicht dauerhaft}, und das unterscheidet sie von der Anreizänderung im Gefangenendilemma, die bestehen bleiben muss.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Die Erhaltungsgröße prüfen}
+Weisen Sie für das zyklische Spiel nach, dass $H$ konstant ist, und bestimmen Sie $H$ für zwei Punkte derselben Bahn.
+
+\loesung
+\schritt{Schritt 1 --- Die Voraussetzungen prüfen}
+\kursiv{Antisymmetrie:} $a_{12} = 2 = -a_{21}$, $a_{13} = -1 = -a_{31}$, $a_{23} = 1 = -a_{32}$ \checkmark
+
+\kursiv{Gleichgewicht:} $A\vek p$ mit $\vek p = (\tfrac14,\tfrac14,\tfrac12)$:
+\begin{align*}
+(A\vek p)_1 &= 0\cdot\tfrac14 + 2\cdot\tfrac14 - 1\cdot\tfrac12 = \tfrac12-\tfrac12 = 0\\
+(A\vek p)_2 &= -2\cdot\tfrac14 + 0 + 1\cdot\tfrac12 = -\tfrac12+\tfrac12 = 0\\
+(A\vek p)_3 &= 1\cdot\tfrac14 - 1\cdot\tfrac14 + 0 = 0
+\end{align*}
+\checkmark
+
+\schritt{Schritt 2 --- $H$ am Startpunkt}
+\[ H = \tfrac14\ln 0{,}300 + \tfrac14\ln 0{,}300 + \tfrac12\ln 0{,}400 \]
+\[ = \tfrac14(-1{,}20397) + \tfrac14(-1{,}20397) + \tfrac12(-0{,}91629) \]
+\[ = -0{,}30099 - 0{,}30099 - 0{,}45814 = \mathbf{-1{,}06013} \]
+
+\schritt{Schritt 3 --- $H$ an einem späteren Punkt}
+Bei $\vek x = (0{,}2280;\ 0{,}1805;\ 0{,}5915)$:
+\[ H = \tfrac14(-1{,}47841) + \tfrac14(-1{,}71202) + \tfrac12(-0{,}52509) \]
+\[ = -0{,}36960 - 0{,}42801 - 0{,}26255 = \mathbf{-1{,}06016} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Übereinstimmung bis auf Rundung --- die Größe bleibt erhalten.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Der Wert am Gleichgewicht}
+\[ H(\vek p) = \tfrac14\ln\tfrac14 + \tfrac14\ln\tfrac14 + \tfrac12\ln\tfrac12 \]
+\[ = \tfrac12(-1{,}38629) + \tfrac12(-0{,}69315) = -0{,}69315-0{,}34657 = -1{,}03972 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Gleichgewicht hat den größten Wert von $H$} --- alle Bahnen liegen darunter.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Warum das ein Maximum ist}
+Die Funktion $\sum p_i \ln x_i$ wird unter der Nebenbedingung $\sum x_i = 1$ bei $x_i = p_i$ maximal.
+
+\kursiv{Grund:} Die Differenz ist
+\[ H(\vek p) - H(\vek x) = \sum_i p_i\ln\frac{p_i}{x_i} = D(\vek p\,\|\,\vek x) \ \ge\ 0 \]
+--- die relative Entropie aus Band 20, Satz 4.4.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Erhaltungsgröße dieses Kapitels ist bis auf ein Vorzeichen die Kullback-Leibler-Divergenz.} Die Bahnen laufen auf Flächen konstanten Abstands zum Gleichgewicht, gemessen in dieser Größe. Dass ausgerechnet das Werkzeug aus Band 20, Teil~II hier wieder auftaucht, ist eine der unerwarteteren Verbindungen zwischen den Bänden.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Folge}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Da $D$ längs der Bahn konstant bleibt, nähert sich die Bevölkerung dem Gleichgewicht nie an --- und entfernt sich auch nie weiter. \textbf{Das Gleichgewicht ist stabil im Sinne von Ljapunow, aber nicht anziehend.} In der Sprache von Kapitel~9: Es ist ein Nash-Gleichgewicht, aber keine evolutionär stabile Strategie, und beides hat dieselbe Ursache.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- Das Therapieschema auslegen}
+Bei einem anderen Tumor gelten $r_{\text{an}} = 0{,}06$ und $r_{\text{aus}} = -0{,}03$ je Tag, Startanteil $x_0 = 10^{-5}$. Legen Sie ein Schema aus und vergleichen Sie mit der Dauertherapie.
+
+\loesung
+\schritt{Schritt 1 --- Die Dauertherapie}
+\[ t = \frac{\ln\bigl((1-x_0)/x_0\bigr)}{r_{\text{an}}} = \frac{\ln 10^{5}}{0{,}06} = \frac{11{,}513}{0{,}06} = 192 \ \text{Tage} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nach gut sechs Monaten ist die Hälfte der Zellen resistent.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die Bedingung für das Gleichgewicht}
+\[ 0{,}06\,T_{\text{an}} \ \le\ 0{,}03\,T_{\text{aus}} \quad\Longrightarrow\quad T_{\text{aus}} \ \ge\ 2\,T_{\text{an}} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Hier genügt die doppelte Pause statt der vierfachen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Der Grund}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+& $r_{\text{an}}$ & $|r_{\text{aus}}|$ & \textbf{Verhältnis}\\
+\midrule
+Leitfall & $0{,}04$ & $0{,}01$ & $4$\\
+hier & $0{,}06$ & $0{,}03$ & $2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Nicht die absolute Größe der Raten entscheidet, sondern ihr Verhältnis.} Die Therapie wirkt hier zwar stärker ($0{,}06$ statt $0{,}04$), aber der Eignungspreis der Resistenz ist ebenfalls höher ($0{,}03$ statt $0{,}01$) --- und das zweite überwiegt. Ein hoher Resistenzpreis ist das günstigste Merkmal für die adaptive Therapie.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Ein konkretes Schema}
+Mit $T_{\text{an}} = 30$ und $T_{\text{aus}} = 90$ Tagen:
+\[ 0{,}06\cdot30 + (-0{,}03)\cdot90 = 1{,}8 - 2{,}7 = -0{,}9 \ \text{je Zyklus} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der resistente Anteil schrumpft um den Faktor $e^{-0{,}9} = 0{,}407$ je Zyklus.}
+\end{minipage}
+\end{center}
+
+\kursiv{Nach zehn Zyklen, also $1200$ Tagen:}
+\[ x \approx 10^{-5}\cdot e^{-9} = 10^{-5}\cdot1{,}23\cdot10^{-4} = 1{,}2\cdot10^{-9} \]
+
+\schritt{Schritt 5 --- Der Vorbehalt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Näherung $x \approx x_0 e^{\sum r t}$ gilt nur, solange $x \ll 1$ --- dann ist der Faktor $(1-x)$ in der Replikatorgleichung nahe eins. \textbf{Bei größeren Anteilen muss man die vollständige logistische Lösung verwenden}, und dann verlangsamt sich sowohl das Wachstum als auch die Schrumpfung. Für die hier auftretenden Größenordnungen ist die Näherung unbedenklich.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Und der Behandlungsanteil}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.8cm}P{2.2cm}@{}}
+\toprule
+\textbf{Fall} & \textbf{Therapie\-anteil} & \\
+\midrule
+Leitfall & $20\,\%$ & $60/300$\\
+hier & $25\,\%$ & $30/120$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In beiden Fällen wird ein knappes Viertel der Zeit behandelt --- und die Beherrschungsdauer steigt von Monaten auf Jahre. \textbf{Weniger Medikament wirkt länger}, und das ist der Satz, der bei dieser Therapieform am meisten Widerstand hervorruft.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Gleichung aus der Ökologie}
+\Person{Peter Taylor} und \Person{Leo Jonker} führten die Replikatorgleichung 1978 ein, um Maynard Smiths statischen Begriff dynamisch zu fassen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie zeigten, dass jede evolutionär stabile Strategie eine asymptotisch stabile Ruhelage ist --- und dass die Umkehrung nicht gilt. \textbf{Damit war klar, dass die beiden Begriffe nicht dasselbe sind}, obwohl sie oft gleichgesetzt werden.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Name}
+Er stammt von \Person{Peter Schuster} und \Person{Karl Sigmund} (1983), die den Zusammenhang zu den Gleichungen der Chemie herstellten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dieselbe Gleichung beschreibt die Konkurrenz sich selbst vervielfältigender Moleküle --- Eigens Hyperzyklen zur Entstehung des Lebens --- und die Konkurrenz von Verhaltensweisen in einer Tierpopulation. \textbf{Sie ist überdies gleichwertig zu den Lotka-Volterra-Gleichungen aus Band 18, Kapitel~4}, mit einer Variablen weniger.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Eidechsen}
+\Person{Barry Sinervo} und \Person{Curt Lively} berichteten 1996 über eine kalifornische Eidechse mit drei erblichen Paarungsstrategien, kenntlich an der Kehlfarbe.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Orange schlägt Blau, Blau schlägt Gelb, Gelb schlägt Orange --- ein zyklisches Spiel in der Natur, mit einer beobachteten Periode von etwa sechs Jahren. \textbf{Die Arbeit gilt als der überzeugendste Feldnachweis für Satz 10.3}, obwohl spätere Untersuchungen zeigten, dass der Zyklus weniger regelmäßig verläuft als zunächst berichtet.}
+\end{minipage}
+\end{center}
+
+\schritt{Gatenby}
+\Person{Robert Gatenby} schlug die adaptive Therapie ab 2009 vor, ausdrücklich unter Berufung auf die evolutionäre Spieltheorie --- und auf die Schädlingsbekämpfung.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dort war seit Jahrzehnten bekannt, dass die vollständige Ausrottung eines Schädlings die Resistenzentwicklung beschleunigt, während eine Restpopulation empfindlicher Tiere sie bremst. \textbf{Die Übertragung auf die Onkologie stieß auf erheblichen Widerstand}, weil sie der Regel widerspricht, die größtmögliche verträgliche Dosis zu geben. Die erste klinische Prüfung begann 2015.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Dynamik heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Andere Dynamiken} & Nachahmen, bestes Antworten, Verstärkungslernen --- jede mit eigenem Langzeitverhalten.\\
+\textbf{Chaos} & Ab drei Strategien und geeigneten Auszahlungen tritt Chaos auf.\\
+\textbf{Steuerung} & Wie man eine Bevölkerung gezielt in ein gewünschtes Gleichgewicht lenkt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Bei vier Strategien wurden chaotische Bahnen nachgewiesen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es ist dasselbe Phänomen wie in Band 18, Kapitel~3: eine einfache Gleichung mit unvorhersehbarem Langzeitverhalten. \textbf{Eine Bevölkerung kann also dauerhaft unregelmäßig schwanken, ohne dass sich etwas an den Regeln ändert} --- und wer aus solchen Daten auf veränderte Umstände schließt, irrt.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Die adaptive Therapie ist ein Beispiel: Man verändert die Auszahlungen zeitweise, um die Bahn zu lenken.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Verwandte Ansätze arbeiten mit zwei abwechselnden Wirkstoffen, deren Resistenzen einander ausschließen --- man nennt das \Begriff{kollaterale Empfindlichkeit}. \textbf{Damit wird aus dem Spiel gegen einen Gegner ein Spiel gegen zwei}, und der Tumor kann nicht beiden zugleich ausweichen. Die Auswahl geeigneter Wirkstoffpaare ist ein aktives Forschungsfeld.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 10.1} & wächst, wer überdurchschnittlich ist\\
+\textbf{Zwei Typen} & $\dot x = x(1-x)(f_1-f_2)$\\
+\textbf{Satz 10.2} & stabil $\Rightarrow$ anziehend, nicht umgekehrt\\
+\textbf{Satz 10.3} & antisymmetrisch: geschlossene Bahnen\\
+\textbf{Adaptive Therapie} & $T_{\text{aus}} \ge \frac{r_{\text{an}}}{|r_{\text{aus}}|}\,T_{\text{an}}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~IV. Bisher waren die Regeln gegeben. Ab Kapitel~11 fragen wir, wie man sie entwirft --- und stoßen auf eine Grenze, die kein Entwurf überwindet.}
+\end{minipage}
+\end{center}
+\end{merksatz}

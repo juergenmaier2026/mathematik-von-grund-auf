@@ -1,0 +1,577 @@
+\chapter{Der breiteste Streifen}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Fieber --- oder Untertemperatur}
+Eine Sepsis kann mit Fieber einhergehen, aber auch mit einer Temperatur unter $36$ Grad. Die klassischen Sepsiskriterien tragen dem Rechnung: \enquote{Temperatur über $38$ \kursiv{oder} unter $36$ Grad}.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Gruppe} & \textbf{Temperatur} & \textbf{Herzfrequenz}\\
+\midrule
+ohne Sepsis ($80\,\%$) & um $37{,}0$ & um $88$/min\\
+Sepsis mit Fieber & um $38{,}9$ & um $108$/min\\
+Sepsis unterkühlt & um $35{,}6$ & um $108$/min\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.6pt] (0,0) -- (6.4,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,3.2);
+\foreach \x/\y in {2.6/0.9,2.9/1.2,3.3/0.7,3.0/1.5,2.7/0.6,3.5/1.1,3.2/1.3,2.8/1.0,3.4/0.8,3.1/0.5}
+  \fill[tief!70] (\x,\y) circle (2.1pt);
+\foreach \x/\y in {0.7/2.2,1.0/2.6,0.5/1.9,1.2/2.3}
+  \fill[akzent] (\x,\y) circle (2.3pt);
+\foreach \x/\y in {5.0/2.4,5.4/2.0,5.7/2.7,5.2/2.9,4.8/2.1}
+  \fill[akzent] (\x,\y) circle (2.3pt);
+\draw[grau!70, line width=0.9pt, dashed] (1.2,3.1) -- (5.6,0.3);
+\draw[gruen!60!black, line width=1.2pt] (1.9,3.1) .. controls (1.6,0.8) and (4.3,0.4) .. (4.3,3.1);
+\node[font=\scriptsize, color=grau, anchor=north] at (3.1,-0.1) {Temperatur};
+\node[font=\scriptsize, color=grau, rotate=90, anchor=south] at (-0.1,1.6) {Herzfrequenz};
+\node[font=\scriptsize, color=grau, anchor=west] at (5.6,0.3) {linear};
+\node[font=\scriptsize, color=gruen!60!black, anchor=west] at (4.35,3.1) {krumm};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Keine Gerade trennt die Gruppen. Die Sepsisfälle liegen links \kursiv{und} rechts.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle Verfahren der Kapitel~4 und 5 ziehen gerade Grenzen. \textbf{Hier versagen sie nicht aus Mangel an Daten, sondern aus Mangel an Form} --- die Verzerrung aus Kapitel~2, nicht die Varianz. Dieses Kapitel zeigt zuerst, welche Gerade die beste ist, und dann, wie man mit einem einzigen Kunstgriff krumme Grenzen bekommt, ohne das Verfahren zu ändern.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Welche Gerade?}
+
+\begin{merksatz}
+\boxtitel{Viele trennen, eine ist die beste}
+Sind die Daten trennbar, so gibt es unendlich viele trennende Geraden. Das Perzeptron findet irgendeine.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\foreach \x/\y in {0.4/0.5,0.9/0.3,0.6/1.1,1.3/0.8,1.0/1.5}
+  \fill[tief!70] (\x,\y) circle (2.2pt);
+\foreach \x/\y in {3.0/2.0,3.5/1.6,3.2/2.6,3.9/2.2,2.7/2.9}
+  \fill[akzent] (\x,\y) circle (2.3pt);
+\fill[akzent!25] (1.3,3.3) -- (2.6,3.3) -- (4.2,0.1) -- (2.9,0.1) -- cycle;
+\draw[akzent!60, line width=0.7pt, dashed] (1.3,3.3) -- (2.9,0.1);
+\draw[akzent!60, line width=0.7pt, dashed] (2.6,3.3) -- (4.2,0.1);
+\draw[gruen!60!black, line width=1.3pt] (1.95,3.3) -- (3.55,0.1);
+\draw[grau!70, line width=0.8pt] (0.3,2.6) -- (4.2,0.4);
+\node[font=\scriptsize, color=gruen!60!black, anchor=south] at (1.95,3.3) {breitester Streifen};
+\node[font=\scriptsize, color=grau, anchor=west] at (4.2,0.4) {knapp};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man wähle die Gerade, die von beiden Gruppen am weitesten entfernt ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Gedanke: Neue Patienten streuen etwas um die gesehenen. \textbf{Eine Grenze, die knapp an einem Trainingspunkt vorbeiführt, ordnet dessen Nachbarn womöglich falsch ein} --- eine Grenze mit breitem Abstand nicht. Satz 5.3 hatte bereits gezeigt, dass der Abstand $\gamma$ über die Schwierigkeit entscheidet; hier wird er zum Ziel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 6.1 --- der Rand}
+Für eine Gerade $\vek w^{\!\top}\vek x + b = 0$ ist der Abstand eines Punktes $\vek x_i$ mit Etikett $t_i \in \{-1,+1\}$ von ihr
+\[ \frac{t_i\,(\vek w^{\!\top}\vek x_i + b)}{\|\vek w\|} . \]
+Der \Begriff{Rand} ist der kleinste dieser Abstände.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Das Optimierungsproblem}
+Man darf $\vek w$ und $b$ gemeinsam mit einer Zahl multiplizieren, ohne die Gerade zu ändern. Also kann man festlegen, dass für die nächstgelegenen Punkte $t_i(\vek w^{\!\top}\vek x_i+b) = 1$ gilt. Dann ist der Rand $\frac{1}{\|\vek w\|}$, und ihn zu vergrößern heißt $\|\vek w\|$ zu verkleinern:
+
+\[ \min_{\vek w,\,b}\ \tfrac12\|\vek w\|^{2} \qquad\text{unter}\qquad t_i\,(\vek w^{\!\top}\vek x_i + b) \ \ge\ 1 \quad\text{für alle } i \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine quadratische Zielfunktion unter linearen Nebenbedingungen} --- ein konvexes Problem im Sinne von Band 19, Kapitel~7.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das duale Problem}
+
+\begin{merksatz}
+\boxtitel{Satz 6.2 --- die Stützvektoren}
+Die Lösung hat die Gestalt
+\[ \vek w = \sum_i \alpha_i\,t_i\,\vek x_i \qquad\text{mit}\qquad \alpha_i \ge 0, \quad \sum_i \alpha_i t_i = 0 , \]
+und es ist $\alpha_i > 0$ nur für Punkte, die genau auf dem Rand liegen.
+
+\schritt{Beweis}
+\kursiv{Die Lagrange-Funktion} (Band 19, Kapitel~9) mit Multiplikatoren $\alpha_i \ge 0$:
+\[ L = \tfrac12\|\vek w\|^{2} - \sum_i \alpha_i\bigl[t_i(\vek w^{\!\top}\vek x_i + b) - 1\bigr] \]
+
+\kursiv{Ableiten nach $\vek w$ und null setzen:}
+\[ \vek w - \sum_i \alpha_i t_i \vek x_i = \vek 0 \quad\Longrightarrow\quad \vek w = \sum_i \alpha_i t_i \vek x_i \]
+
+\kursiv{Ableiten nach $b$:}
+\[ -\sum_i \alpha_i t_i = 0 \]
+
+\kursiv{Komplementärer Schlupf} (Band 19, Satz 9.4): Im Optimum gilt für jedes $i$
+\[ \alpha_i\,\bigl[t_i(\vek w^{\!\top}\vek x_i+b) - 1\bigr] = 0 . \]
+Liegt ein Punkt nicht auf dem Rand, so ist die Klammer positiv, also $\alpha_i = 0$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Lösung hängt nur von den Punkten auf dem Rand ab --- den \Begriff{Stützvektoren}. Alle anderen könnte man weglassen.}
+\end{minipage}
+\end{center}
+
+\schritt{Das duale Problem ausgeschrieben}
+Setzt man $\vek w$ in $L$ ein, so bleibt
+\[ \max_{\vek\alpha}\ \sum_i \alpha_i - \tfrac12\sum_{i,j}\alpha_i\alpha_j\,t_i t_j\,\textcolor{akzent}{\vek x_i^{\!\top}\vek x_j} \]
+unter $\alpha_i \ge 0$ und $\sum_i\alpha_i t_i = 0$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Man beachte die farbige Stelle: Die Daten kommen nur als Skalarprodukte vor.} Nie wird ein einzelnes $\vek x_i$ gebraucht, nur $\vek x_i^{\!\top}\vek x_j$ für Paare. Auch die Vorhersage für einen neuen Punkt, $\vek w^{\!\top}\vek x + b = \sum_i \alpha_i t_i\,\vek x_i^{\!\top}\vek x + b$, braucht nur Skalarprodukte. Auf dieser Beobachtung beruht der Rest des Kapitels.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wenn nichts trennt}
+
+\begin{merksatz}
+\boxtitel{Der weiche Rand}
+Man erlaubt Verstöße, lässt sie aber bezahlen:
+\[ \min_{\vek w,\,b}\ \tfrac12\|\vek w\|^{2} + C\sum_i \max\bigl\{0,\ 1 - t_i(\vek w^{\!\top}\vek x_i+b)\bigr\} \]
+
+\schritt{Drei Verluste im Vergleich}
+Mit $m = t\,(\vek w^{\!\top}\vek x+b)$ --- positiv heißt richtig, groß heißt sicher:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.6pt] (-2.6,0) -- (3.2,0);
+\draw[grau!60, line width=0.6pt] (0,-0.1) -- (0,3.1);
+\draw[grau, line width=1.2pt] (-2.5,1) -- (0,1); \draw[grau, line width=1.2pt] (0,0) -- (3.1,0);
+\draw[akzent, line width=1.3pt] (-2.5,3.5*0.8) -- (1,0) -- (3.1,0);
+\draw[tief, line width=1.3pt, smooth, samples=60, domain=-2.5:3.1] plot ({\x}, {ln(1+exp(-\x))/ln(2)});
+\node[font=\scriptsize, color=grau, anchor=north] at (1,-0.08) {$1$};
+\node[font=\scriptsize, color=grau, anchor=north] at (0,-0.08) {$0$};
+\node[font=\scriptsize, color=grau] at (-1.6,1.25) {null-eins};
+\node[font=\scriptsize, color=akzent, anchor=west] at (-2.4,3.0) {Scharnier};
+\node[font=\scriptsize, color=tief, anchor=west] at (1.5,0.55) {logistisch};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Null-Eins} & Der eigentliche Fehler. Nicht konvex, nicht stetig --- praktisch nicht zu minimieren.\\
+\textbf{Scharnier} & $\max\{0,\,1-m\}$. Konvex. Null, sobald der Punkt sicher richtig liegt.\\
+\textbf{Logistisch} & $\ln(1+e^{-m})$. Konvex, glatt. Nie ganz null.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide konvexen Verluste liegen über dem Null-Eins-Verlust und sind \Begriff{Ersatzverluste} für ihn. \textbf{Das Scharnier kümmert sich nicht um Punkte, die sicher richtig liegen} --- daher die Stützvektoren. Die logistische Kurve kümmert sich um alle, ein wenig --- daher die Wahrscheinlichkeiten. Ansonsten sind sich die beiden Verfahren ähnlicher, als ihre Herkunft vermuten lässt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Rolle von $C$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{$C$ groß} & Verstöße teuer: schmaler Rand, folgt den Daten --- Varianz.\\
+\textbf{$C$ klein} & Verstöße billig: breiter Rand, glatte Grenze --- Verzerrung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Man erkennt die Kammregression aus Kapitel~4: $\|\vek w\|^{2}$ ist die Strafe, $C$ entspricht $1/\lambda$.}
+\end{merksatz}
+
+\section{Der Kerntrick}
+
+\begin{merksatz}
+\boxtitel{Eine Abbildung in einen größeren Raum}
+Man bilde jeden Punkt ab, etwa
+\[ \varphi(x_1, x_2) = \bigl(x_1^{2},\ \sqrt2\,x_1x_2,\ x_2^{2}\bigr) . \]
+In diesem neuen Raum sind Grenzen, die im alten Kreise oder Ellipsen waren, gerade Ebenen.
+
+\schritt{Das Skalarprodukt im neuen Raum}
+\begin{align*}
+\varphi(\vek x)^{\!\top}\varphi(\vek z) &= x_1^{2}z_1^{2} + 2\,x_1x_2z_1z_2 + x_2^{2}z_2^{2}\\
+&= (x_1z_1 + x_2z_2)^{2}\\
+&= (\vek x^{\!\top}\vek z)^{2}
+\end{align*}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man kann das Skalarprodukt im großen Raum ausrechnen, ohne je in ihn hineinzugehen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 6.3 --- Kern}
+Eine Funktion $k(\vek x,\vek z)$ heißt \Begriff{Kern}, wenn es eine Abbildung $\varphi$ gibt mit
+\[ k(\vek x,\vek z) = \varphi(\vek x)^{\!\top}\varphi(\vek z) . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Trick}
+Im dualen Problem ersetzt man überall $\vek x_i^{\!\top}\vek x_j$ durch $k(\vek x_i,\vek x_j)$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Verfahren bleibt linear --- aber in einem Raum, den man nie hinschreibt. Im ursprünglichen Raum wird die Grenze krumm.}
+\end{minipage}
+\end{center}
+
+\schritt{Gebräuchliche Kerne}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{3.2cm}P{3.0cm}@{}}
+\toprule
+\textbf{Name} & \textbf{Formel} & \textbf{Raum}\\
+\midrule
+linear & $\vek x^{\!\top}\vek z$ & der ursprüngliche\\
+Polynom & $(1+\vek x^{\!\top}\vek z)^{d}$ & alle Produkte bis Grad $d$\\
+Gauß & $e^{-\gamma\|\vek x-\vek z\|^{2}}$ & \textcolor{akzent}{unendlich-dimensional}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Gauß-Kern entspricht einem Raum mit unendlich vielen Dimensionen, und trotzdem kostet jede Auswertung nur einen Abstand und eine Exponentialfunktion. \textbf{Anschaulich misst er Ähnlichkeit}: Nahe Punkte haben einen Kern nahe eins, ferne nahe null. Die Vorhersage für einen neuen Patienten ist dann eine gewichtete Abstimmung der Stützvektoren, die ihm ähneln.}
+\end{minipage}
+\end{center}
+
+\schritt{Satz 6.4 --- Mercer}
+Eine symmetrische Funktion $k$ ist genau dann ein Kern, wenn für jede endliche Punktmenge die Matrix $\bigl(k(\vek x_i,\vek x_j)\bigr)_{i,j}$ positiv semidefinit ist.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis braucht die Spektraltheorie kompakter Operatoren aus Band 13, Kapitel~13; wir verzichten auf ihn --- die zweite Auslassung dieses Bandes. \textbf{Der Satz ist die Garantie, dass man einen Kern benutzen darf, ohne $\varphi$ zu kennen}: Es genügt, die Matrix zu prüfen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Leitfall gerechnet}
+
+\begin{merksatz}
+\boxtitel{Dreihundert Patienten, geprüft an zwanzigtausend}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Fehler} & \textbf{Trennschärfe}\\
+\midrule
+nie warnen & $20{,}2\,\%$ & ---\\
+linear, logistisch & $11{,}8\,\%$ & $0{,}874$\\
+linear, Stützvektoren & $10{,}0\,\%$ & ---\\
+Gauß-Kern & $\mathbf{3{,}0\,\%}$ & $0{,}975$\\
+logistisch mit $(T-37)^{2}$ & $3{,}2\,\%$ & $\mathbf{0{,}994}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Gauß-Kern findet die krumme Grenze von selbst. Ein einziges gut gewähltes Merkmal leistet dasselbe.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Stützvektoren}
+Von $300$ Patienten dienen $72$ als Stützvektoren --- knapp ein Viertel.
+
+\schritt{Was die letzte Zeile lehrt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Merkmal $(T-37)^{2}$ --- der quadrierte Abstand von der Normaltemperatur --- ist medizinisches Wissen in einer Zahl. \textbf{Es macht aus dem krummen Problem ein gerades}, und die einfache logistische Regression löst es danach mindestens so gut wie der Kern. Zudem bleibt sie deutbar: Man kann ablesen, wie stark die Abweichung von $37$ Grad wirkt. Der Kern kann das nicht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist Satz 1.5 in einer neuen Gestalt: \textbf{Wer die richtige Annahme kennt, sollte sie hineinstecken, statt sie suchen zu lassen.} Der Kern ist das Mittel der Wahl, wenn man sie \kursiv{nicht} kennt --- und dann zahlt man dafür mit Daten, Rechenzeit und Deutbarkeit.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was der Kern kostet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Rechen\-aufwand} & Die Kernmatrix hat $n^{2}$ Einträge. Bei einer Million Patienten sind das $10^{12}$ --- nicht mehr zu speichern.\\
+\textbf{Zwei Stellgrößen} & $C$ und die Kernbreite $\gamma$ müssen durch Kreuzvalidierung gewählt werden --- mit allen Gefahren aus Kapitel~3.\\
+\textbf{Einheiten} & Der Gauß-Kern misst Abstände. Ohne Normierung dominiert die Herzfrequenz (Größenordnung $100$) die Temperatur (Größenordnung $1$).\\
+\textbf{Keine Wahrscheinlichkeit} & Die Ausgabe ist ein Abstand zur Grenze, keine Wahrscheinlichkeit. Man muss sie nachträglich umrechnen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ohne Normierung wäre ein Unterschied von zwei Schlägen pro Minute so groß wie einer von zwei Grad Temperatur --- medizinisch absurd. \textbf{Der Kern kennt keine Einheiten}; er sieht Zahlen. Die Normierung ist hier keine Formsache, sondern entscheidet, welches Merkmal überhaupt zählt.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur vierten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach Kapitel~1 braucht man für eine kostenbewusste Entscheidung eine Wahrscheinlichkeit. \textbf{Die Stützvektormaschine liefert sie nicht} --- ihr Verlust kümmert sich nicht um Punkte jenseits des Randes und hat daher keine Grundlage, Sicherheit abzustufen. Man kann eine logistische Kurve nachträglich anpassen, aber das ist ein zweites Modell auf dem ersten, mit eigenem Fehler.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.1 --- Der breiteste Streifen in einer Dimension}
+Die Laktatwerte aus Aufgabe 5.3: $1{,}0$ und $1{,}5$ ohne, $2{,}5$ und $3{,}0$ mit Sepsis. Bestimmen Sie $w$, $b$, den Rand und die Multiplikatoren.
+
+\loesung
+\schritt{Schritt 1 --- Die Lage der Grenze}
+Die engsten Punkte verschiedener Gruppen sind $1{,}5$ und $2{,}5$. Die Grenze liegt in der Mitte:
+\[ x^{*} = \frac{1{,}5+2{,}5}{2} = 2{,}0 \]
+
+\schritt{Schritt 2 --- $w$ und $b$}
+Die Stützvektoren erfüllen die Nebenbedingung mit Gleichheit:
+\[ w\cdot2{,}5 + b = +1, \qquad w\cdot1{,}5 + b = -1 \]
+Subtrahieren: $w = 2$. Einsetzen: $b = 1 - 5 = -4$.
+
+\kursiv{Probe:} $2\cdot2{,}0 - 4 = 0$ --- die Grenze liegt bei $2{,}0$. \checkmark
+
+\schritt{Schritt 3 --- Der Rand}
+\[ \frac{1}{|w|} = \frac12 = 0{,}5 \]
+--- genau der halbe Abstand zwischen $1{,}5$ und $2{,}5$. \checkmark
+
+\schritt{Schritt 4 --- Die übrigen Punkte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{1.0cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+$x$ & $t$ & $t\,(wx+b)$ & \\
+\midrule
+$1{,}0$ & $-1$ & $-(2-4) = 2$ & jenseits\\
+$1{,}5$ & $-1$ & $-(3-4) = 1$ & \textcolor{akzent}{auf dem Rand}\\
+$2{,}5$ & $+1$ & $5-4 = 1$ & \textcolor{akzent}{auf dem Rand}\\
+$3{,}0$ & $+1$ & $6-4 = 2$ & jenseits\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Die Multiplikatoren}
+Nur die Stützvektoren haben $\alpha > 0$. Aus $\sum\alpha_i t_i = 0$ folgt $\alpha_{1{,}5} = \alpha_{2{,}5} =: \alpha$. Aus $w = \sum\alpha_i t_i x_i$:
+\[ 2 = \alpha\cdot(+1)\cdot2{,}5 + \alpha\cdot(-1)\cdot1{,}5 = \alpha\cdot1{,}0 \quad\Longrightarrow\quad \alpha = 2 \]
+
+\schritt{Schritt 6 --- Eine Probe über eine Identität}
+Im Optimum gilt $\|\vek w\|^{2} = \sum_i\alpha_i$.
+
+\kursiv{Warum:} $\|\vek w\|^{2} = \vek w^{\!\top}\sum\alpha_i t_i\vek x_i = \sum\alpha_i\,t_i\vek w^{\!\top}\vek x_i$. Auf dem Rand ist $t_i\vek w^{\!\top}\vek x_i = 1 - t_i b$, also $\sum\alpha_i(1-t_ib) = \sum\alpha_i - b\sum\alpha_it_i = \sum\alpha_i$.
+
+\[ \|w\|^{2} = 4, \qquad \sum\alpha_i = 2+2 = 4 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Punkte bei $1{,}0$ und $3{,}0$ spielen keine Rolle.} Man könnte sie verschieben, solange sie jenseits des Randes bleiben, und die Lösung änderte sich nicht. Die logistische Regression dagegen würde jede Verschiebung spüren.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.2 --- Den Kerntrick nachrechnen}
+Prüfen Sie für $\vek x = (1,2)$ und $\vek z = (3,1)$, dass $(\vek x^{\!\top}\vek z)^{2} = \varphi(\vek x)^{\!\top}\varphi(\vek z)$ mit $\varphi$ aus Abschnitt 6.5.
+
+\loesung
+\schritt{Schritt 1 --- Der Kern}
+\[ \vek x^{\!\top}\vek z = 1\cdot3 + 2\cdot1 = 5, \qquad (\vek x^{\!\top}\vek z)^{2} = 25 \]
+
+\schritt{Schritt 2 --- Die Abbildung}
+\[ \varphi(\vek x) = \bigl(1^{2},\ \sqrt2\cdot1\cdot2,\ 2^{2}\bigr) = (1;\ 2{,}828;\ 4) \]
+\[ \varphi(\vek z) = \bigl(3^{2},\ \sqrt2\cdot3\cdot1,\ 1^{2}\bigr) = (9;\ 4{,}243;\ 1) \]
+
+\schritt{Schritt 3 --- Das Skalarprodukt}
+\[ 1\cdot9 + 2{,}828\cdot4{,}243 + 4\cdot1 = 9 + 12{,}00 + 4 = 25 \quad \checkmark \]
+
+\kursiv{Exakt:} $\sqrt2\cdot2\cdot\sqrt2\cdot3 = 2\cdot6 = 12$.
+
+\schritt{Schritt 4 --- Der Aufwand}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Grad, Dimension} & \textbf{über $\varphi$} & \textbf{über $k$}\\
+\midrule
+$2$, $2$ & $3$ Einträge & $2$ Produkte\\
+$2$, $100$ & $5050$ & $100$\\
+$5$, $100$ & $\approx 10^{8}$ & $100$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei Grad $5$ und $100$ Merkmalen hätte $\varphi$ fast hundert Millionen Einträge --- alle Produkte von bis zu fünf Merkmalen. \textbf{Der Kern braucht dafür $100$ Multiplikationen und eine Potenz.} Das ist der ganze Trick: Die Rechnung hängt von der Dimension der Daten ab, nicht von der des Raumes, in dem man trennt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.3 --- Das XOR-Problem}
+Vier Punkte: $(1,1)$ und $(-1,-1)$ mit Etikett $+1$, $(1,-1)$ und $(-1,1)$ mit Etikett $-1$. Zeigen Sie, dass keine Gerade trennt, und finden Sie eine Trennung mit $\varphi$.
+
+\loesung
+\schritt{Schritt 1 --- Keine Gerade trennt}
+Angenommen, $w_1x_1 + w_2x_2 + b$ hätte das richtige Vorzeichen an allen vier Punkten:
+\begin{align*}
+w_1 + w_2 + b &> 0 & -w_1 - w_2 + b &> 0\\
+w_1 - w_2 + b &< 0 & -w_1 + w_2 + b &< 0
+\end{align*}
+Addiert man die beiden Ungleichungen der oberen Zeile, so folgt $2b > 0$. Addiert man die der unteren Zeile, so folgt $2b < 0$. \textbf{Widerspruch.}
+
+\schritt{Schritt 2 --- In den neuen Raum}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{1.0cm}P{3.6cm}@{}}
+\toprule
+$\vek x$ & $t$ & $\varphi(\vek x) = (x_1^{2},\ \sqrt2x_1x_2,\ x_2^{2})$\\
+\midrule
+$(1,1)$ & $+1$ & $(1;\ +\sqrt2;\ 1)$\\
+$(-1,-1)$ & $+1$ & $(1;\ +\sqrt2;\ 1)$\\
+$(1,-1)$ & $-1$ & $(1;\ -\sqrt2;\ 1)$\\
+$(-1,1)$ & $-1$ & $(1;\ -\sqrt2;\ 1)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Trennung}
+Die mittlere Koordinate allein trennt: positiv bei $+1$, negativ bei $-1$.
+\[ \vek w = (0;\ 1;\ 0), \qquad b = 0 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Im neuen Raum trennt eine Ebene. Im alten Raum ist die Grenze das Achsenkreuz $x_1x_2 = 0$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die klinische Entsprechung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das XOR-Muster tritt auf, wenn zwei Merkmale nur \kursiv{gemeinsam} wirken --- etwa ein Medikament, das nur bei einer bestimmten Genvariante schadet. \textbf{Einzeln zeigt keines der beiden einen Zusammenhang}, und jedes Verfahren, das Merkmale einzeln prüft, übersieht die Wirkung vollständig. Das ist die Aufgabe, an der Minsky und Papert 1969 das einzelne Perzeptron scheitern ließen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Idee aus Moskau, dreißig Jahre unterwegs}
+\Person{Wladimir Wapnik} und \Person{Alexei Tscherwonenkis} entwickelten ab den 1960er Jahren in Moskau die Theorie, auf der dieses und das nächste Kapitel beruhen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Methode des verallgemeinerten Porträts --- die Trennung mit breitestem Rand --- beschrieben sie 1963. \textbf{Im Westen wurde ihre Arbeit kaum wahrgenommen}, weil sie überwiegend auf Russisch erschien und die Sowjetunion den wissenschaftlichen Austausch beschränkte.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Auswanderung}
+Wapnik ging 1990 in die Vereinigten Staaten, an die Bell Laboratories.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dort verband er 1992 mit \Person{Bernhard Boser} und \Person{Isabelle Guyon} den breitesten Rand mit dem Kerntrick; 1995 kam mit \Person{Corinna Cortes} der weiche Rand hinzu. \textbf{Innerhalb weniger Jahre wurden Stützvektormaschinen zum Standardverfahren} und verdrängten die neuronalen Netze, die damals als schwer zu beherrschen galten.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Kerntrick ist älter}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Mark Aiserman} und Mitarbeiter hatten Kerne bereits 1964 benutzt, ebenfalls in Moskau, für eine Variante des Perzeptrons. \textbf{Die Idee lag also fast dreißig Jahre bereit}, bevor jemand sie mit der richtigen Zielfunktion verband.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Umkehr}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Ab 2012 kehrten die Netze zurück und verdrängten ihrerseits die Stützvektormaschinen --- zumindest bei Bildern, Sprache und Text. \textbf{Bei tabellarischen Daten mit wenigen tausend Fällen sind Kernverfahren weiterhin konkurrenzfähig}, und ihre Theorie ist ungleich besser verstanden.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Kerne heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Große Daten} & Näherungen, die die Kernmatrix nie vollständig bilden.\\
+\textbf{Gaußprozesse} & Kerne mit Wahrscheinlichkeitsdeutung --- samt Unsicherheit.\\
+\textbf{Netze als Kerne} & Sehr breite Netze verhalten sich wie Kernverfahren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Gaußprozess benutzt denselben Kern, deutet ihn aber als Kovarianz zwischen den Werten an verschiedenen Stellen. \textbf{Er liefert zu jeder Vorhersage eine Unsicherheit} --- und die wird groß, wo keine Daten liegen. Das ist genau, was der Bruchfall von Kapitel~2 vermisste: ein Verfahren, das weiß, wo es nichts weiß.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{2018 wurde gezeigt, dass ein neuronales Netz im Grenzfall unendlicher Breite genau einem Kernverfahren entspricht --- mit einem Kern, den man aus dem Aufbau des Netzes ausrechnen kann. \textbf{Das ist eine der wenigen Brücken zwischen der Theorie dieses Teils und den tiefen Netzen} aus Kapitel~14. Sie trägt allerdings nicht weit: Die erfolgreichen Netze sind gerade nicht unendlich breit, und ihr Vorteil liegt vermutlich in dem, was dieser Grenzfall wegwirft.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 6.1} & Rand $= 1/\|\vek w\|$\\
+\textbf{Satz 6.2} & nur die Stützvektoren zählen\\
+\textbf{Scharnierverlust} & konvexer Ersatz für Null-Eins\\
+\textbf{Kerntrick} & Skalarprodukt ersetzen, Raum nie betreten\\
+\textbf{Der Leitfall} & ein gutes Merkmal schlägt den Kern\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~II. Seine Verfahren funktionieren --- aber warum? Wie viele Daten braucht man, damit der Trainingsfehler etwas über den Testfehler sagt? Teil~III gibt die Antwort, und sie hängt an einer einzigen Zahl.}
+\end{minipage}
+\end{center}
+\end{merksatz}

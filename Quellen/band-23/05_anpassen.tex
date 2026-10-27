@@ -1,0 +1,462 @@
+\chapter{Was man herausrechnen darf}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{Sechs Größen, welche ins Modell?}
+Im Leitfall stehen Alter, Vorerkrankungen, Schweregrad, Organversagen und die Behandlung zur Verfügung. Die übliche Antwort lautet: möglichst alle --- je mehr man berücksichtigt, desto besser.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Diese Antwort ist falsch, und zwar nicht nur ungenau, sondern im Vorzeichen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieses Kapitel unterscheidet vier Rollen, die eine Größe im Graphen spielen kann. \textbf{Bei zweien muss man anpassen, bei zweien darf man es auf keinen Fall} --- und welche Rolle vorliegt, steht nicht in den Daten, sondern im Graphen aus Kapitel~4.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Vier Rollen}
+
+\begin{merksatz}
+\boxtitel{Die Übersicht}
+\begin{center}
+\begin{tikzpicture}[scale=0.95, every node/.style={font=\scriptsize}]
+% Störgröße
+\node[knotenr] (z1) at (0.8,1.6) {$Z$};
+\node[knotenb] (x1) at (0,0.5) {$X$}; \node[knotenb] (y1) at (1.6,0.5) {$Y$};
+\draw[kanted, -{Stealth[length=4pt]}] (z1)--(x1); \draw[kanted, -{Stealth[length=4pt]}] (z1)--(y1);
+\draw[kanted, -{Stealth[length=4pt]}] (x1)--(y1);
+\node[color=gruen!60!black] at (0.8,-0.2) {Störgröße: anpassen};
+% Mediator
+\node[knotenb] (x2) at (3.6,0.5) {$X$}; \node[knotenr] (z2) at (4.9,1.4) {$Z$}; \node[knotenb] (y2) at (6.2,0.5) {$Y$};
+\draw[kanted, -{Stealth[length=4pt]}] (x2)--(z2); \draw[kanted, -{Stealth[length=4pt]}] (z2)--(y2);
+\draw[kanted, -{Stealth[length=4pt]}] (x2)--(y2);
+\node[color=akzent] at (4.9,-0.2) {Mediator: nicht};
+% Kollider
+\node[knotenb] (x3) at (8.2,0.5) {$X$}; \node[knotenb] (y3) at (9.8,0.5) {$Y$};
+\node[knotenr] (z3) at (9.0,-0.5) {$Z$};
+\draw[kanted, -{Stealth[length=4pt]}] (x3)--(z3); \draw[kanted, -{Stealth[length=4pt]}] (y3)--(z3);
+\draw[kanted, -{Stealth[length=4pt]}] (x3)--(y3);
+\node[color=akzent] at (9.0,-1.2) {Kollider: nicht};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.2cm}P{3.2cm}P{3.2cm}@{}}
+\toprule
+\textbf{Rolle} & \textbf{Lage im Graphen} & \textbf{anpassen?}\\
+\midrule
+Störgröße & Ursache von $X$ und von $Y$ & \textcolor{gruen}{ja --- muss}\\
+Mediator & liegt auf dem Weg $X \to Y$ & \textcolor{akzent}{nein}\\
+Kollider & Folge von $X$ und von $Y$ & \textcolor{akzent}{nein}\\
+Instrument & Ursache nur von $X$ & \textcolor{akzent}{nein}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nur die erste Zeile rechtfertigt die Anpassung. Die übrigen drei schaden --- jede auf eigene Weise.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was in jedem Fall geschieht}
+
+\begin{merksatz}
+\boxtitel{Alle vier durchgerechnet}
+Jeweils $200\,000$ erzeugte Patienten, lineare Modelle, geschätzt durch kleinste Quadrate.
+
+\schritt{Erstens --- der Mediator}
+$X$ wirkt \kursiv{nur} über $M$ auf $Y$; wahrer Gesamteffekt $0{,}8\cdot0{,}9 = 0{,}72$. Eine Störgröße $U$ ist beobachtet.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Modell} & \textbf{Schätzung} & \\
+\midrule
+$Y \sim X$ & $1{,}217$ & verzerrt durch $U$\\
+$Y \sim X + U$ & $\mathbf{0{,}720}$ & \textcolor{gruen}{richtig}\\
+$Y \sim X + M + U$ & $\mathbf{0{,}004}$ & \textcolor{akzent}{Effekt verschwunden}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Wer den Mediator anpasst, misst den Effekt \kursiv{bei festgehaltenem} Organversagen} --- und der ist null, weil die Behandlung nur über das Organversagen wirkt. Das Ergebnis ist rechnerisch richtig und beantwortet die falsche Frage. Kapitel~13 behandelt die Fälle, in denen man genau das absichtlich tut.}
+\end{minipage}
+\end{center}
+
+\schritt{Zweitens --- der Kollider}
+$A$ und $B$ sind unabhängig; beide verursachen $S$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Modell} & \textbf{Koeffizient} & \\
+\midrule
+$A \sim B$ & $0{,}002$ & \textcolor{gruen}{unabhängig}\\
+$A \sim B + S$ & $\mathbf{-0{,}390}$ & \textcolor{akzent}{erfunden}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Aus nichts wird ein deutlicher negativer Zusammenhang. \textbf{Das ist die Berkson-Verzerrung aus Aufgabe 1.2 --- nur nicht durch Auswahl, sondern durch Anpassung erzeugt.} Für die Verzerrung ist es gleichgültig, ob man nur Aufgenommene betrachtet oder die Aufnahme als Kovariable ins Modell nimmt.}
+\end{minipage}
+\end{center}
+
+\schritt{Drittens --- das Instrument}
+$Z$ wirkt nur auf $X$; eine \kursiv{unbeobachtete} Störgröße $U$ bleibt im Modell fehlen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Modell} & \textbf{Schätzung} & \textbf{Verzerrung}\\
+\midrule
+$Y \sim X$ & $1{,}186$ & $+0{,}186$\\
+$Y \sim X + Z$ & $1{,}403$ & $\mathbf{+0{,}403}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Anpassung an das Instrument verdoppelt die Verzerrung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Grund: $Z$ erklärt einen Teil der Schwankung von $X$, der \kursiv{nicht} von $U$ stammt. Was von $X$ übrig bleibt, ist stärker von $U$ durchsetzt --- und damit wiegt die verbliebene Verzerrung schwerer. \textbf{Man nennt das Verstärkungsverzerrung}, und sie ist besonders tückisch, weil das Modell mit $Z$ genauer aussieht: Es erklärt mehr Streuung und hat engere Vertrauensintervalle.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Viertens --- eine Größe, die gar nichts damit zu tun hat}
+$W$ ist weder Ursache von $X$ noch von $Y$. Sie ist Kollider zweier unbeobachteter Größen: $U_1$ wirkt auf $X$ und auf $W$, $U_3$ wirkt auf $W$ und auf $Y$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+\node[grau, font=\small] (u1) at (-1.6,1.6) {$U_1$};
+\node[grau, font=\small] (u3) at (1.6,1.6) {$U_3$};
+\node[knotenr] (w) at (0,1.0) {$W$};
+\node[knotenb] (x) at (-1.6,0.0) {$X$};
+\node[knotenb] (y) at (1.6,0.0) {$Y$};
+\draw[grau!60, line width=0.8pt, dashed, -{Stealth[length=4pt]}] (u1)--(w);
+\draw[grau!60, line width=0.8pt, dashed, -{Stealth[length=4pt]}] (u3)--(w);
+\draw[grau!60, line width=0.8pt, dashed, -{Stealth[length=4pt]}] (u1)--(x);
+\draw[grau!60, line width=0.8pt, dashed, -{Stealth[length=4pt]}] (u3)--(y);
+\draw[kanted, -{Stealth[length=4.5pt]}] (x)--(y);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Modell} & \textbf{Schätzung} & \textbf{wahr: $1{,}000$}\\
+\midrule
+$Y \sim X$ & $\mathbf{0{,}999}$ & \textcolor{gruen}{unverzerrt}\\
+$Y \sim X + W$ & $\mathbf{0{,}863}$ & \textcolor{akzent}{verzerrt}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ohne Anpassung richtig, mit Anpassung falsch --- und $W$ liegt zeitlich vor der Behandlung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man nennt das nach der Form des Graphen die \Begriff{M-Verzerrung}. \textbf{Sie widerlegt die verbreitete Regel, man dürfe gefahrlos alles anpassen, was vor der Behandlung erhoben wurde.} Ohne Graph ist $W$ von einer echten Störgröße nicht zu unterscheiden: Beide hängen mit $X$ und mit $Y$ zusammen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Fehler der zweiten Tabelle}
+
+\begin{merksatz}
+\boxtitel{Koeffizienten sind nicht alle gleich zu lesen}
+Eine übliche Veröffentlichung zeigt in der zweiten Tabelle ein Modell mit allen Kovariablen und deutet jeden Koeffizienten als Wirkung.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Die Behandlung} & Ihr Koeffizient ist kausal deutbar --- wenn der Satz aus Kapitel~6 erfüllt ist.\\
+\textbf{Die Kovariablen} & Ihre Koeffizienten sind es in aller Regel \textcolor{akzent}{nicht}.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Anpassungsmenge wurde gewählt, um die Wege um \kursiv{die Behandlung} zu sperren --- nicht die um das Alter. \textbf{Für das Alter kann dieselbe Menge zu wenig enthalten (eine Störgröße fehlt) oder zu viel (ein Mediator ist dabei).} Im Leitfall ist der Schweregrad ein Mediator zwischen Alter und Tod: Der Alterskoeffizient misst dann nur den direkten Anteil und unterschätzt die Gesamtwirkung des Alters.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Modell, ein deutbarer Koeffizient.} Wer mehrere Wirkungen wissen will, braucht mehrere Modelle mit jeweils eigener Anpassungsmenge.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wenn die Störgröße ungenau gemessen ist}
+Passt man an eine fehlerhaft gemessene Störgröße an, so bleibt ein Teil der Verzerrung bestehen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Restverzerrung} & Der Schweregrad in zwei Stufen ist ein grobes Abbild einer stetigen Größe. Was innerhalb der Stufen schwankt, bleibt unkorrigiert.\\
+\textbf{Stellvertreter} & Ein gemessener Wert ersetzt oft eine nicht messbare Größe --- etwa die Laborwerte den \enquote{Zustand}. Die Anpassung ist dann unvollständig.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine Anpassung an einen Stellvertreter beseitigt die Verzerrung nur teilweise}, und wie viel übrig bleibt, hängt davon ab, wie gut der Stellvertreter ist. In der Praxis ist das die häufigste Ursache dafür, dass Beobachtungsstudien und randomisierte Studien auseinanderfallen. Kapitel~11 behandelt Verfahren, die diesen Rest abschätzen.}
+\end{minipage}
+\end{center}
+
+\schritt{Und eine Ausnahme von der Regel}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nicht jede Anpassung an einen Nicht-Störfaktor schadet. \textbf{Eine Größe, die nur auf $Y$ wirkt und nicht auf $X$, darf man anpassen} --- sie verzerrt nicht und verringert sogar die Streuung, genau wie in der randomisierten Studie aus Kapitel~3. Die vier Rollen sind also nicht vollständig; die allgemeine Regel liefert erst der Hintertürtest des nächsten Kapitels.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.1 --- Den Mediator erkennen}
+Im Leitfall soll der Effekt der frühen Gabe auf den Tod geschätzt werden. Welche der fünf übrigen Größen gehören ins Modell?
+
+\loesung
+\schritt{Schritt 1 --- Die Rollen bestimmen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Rolle} & \textbf{anpassen?}\\
+\midrule
+$S$ Schweregrad & Ursache von $X$ und $Y$ & \textcolor{gruen}{ja}\\
+$A$ Alter & Ursache von $S$ und $Y$ & \textcolor{gruen}{darf}\\
+$V$ Vorerkrankungen & Ursache nur von $S$ & \textcolor{akzent}{nein}\\
+$M$ Organversagen & Mediator & \textcolor{akzent}{nein}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die drei Begründungen}
+\kursiv{$S$:} Er liegt auf dem Weg $X \leftarrow S \to Y$. Ohne Anpassung bleibt dieser offen --- das war Kapitel~1.
+
+\kursiv{$A$:} Das Alter wirkt auf $Y$ unmittelbar und auf $X$ nur über $S$. Passt man ohnehin an $S$ an, so ist $A$ nicht nötig --- aber unschädlich und streuungsmindernd.
+
+\kursiv{$V$:} Die Vorerkrankungen wirken nur über $S$. Sie sind ein \kursiv{Instrument} für $X$ --- und nach Abschnitt 5.3 kann ihre Anpassung eine verbliebene Verzerrung verstärken.
+
+\kursiv{$M$:} Mediator. Seine Anpassung setzt den Effekt auf null.
+
+\schritt{Schritt 3 --- Die Antwort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es genügt $\{S\}$, und $\{S, A\}$ ist ebenso richtig. $V$ und $M$ gehören nicht hinein.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Was ein Rechner nicht sieht}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nimmt man alle fünf Größen ins Modell --- wie es viele Auswertungsprogramme vorschlagen ---, so ist das Ergebnis falsch, und zwar dreifach: \textbf{Der Mediator tilgt den Effekt, das Instrument verstärkt die Restverzerrung, und die Alterskoeffizienten verleiten zum Fehler der zweiten Tabelle.} Nichts davon zeigt sich in den Gütemaßen: Das volle Modell erklärt mehr Streuung als das richtige.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.2 --- Den Kollider in Zahlen}
+Alter und Vorerkrankungen sind in der Bevölkerung unabhängig. Beide erhöhen den Schweregrad. Nach Kapitel~4 beträgt ihre Korrelation unter Festhalten des Schweregrads $-0{,}107$. Was folgt daraus für eine Studie an Schwerkranken?
+
+\loesung
+\schritt{Schritt 1 --- Die Lage}
+Eine Studie, die nur Schwerkranke einschließt, hat auf $S$ bedingt --- nicht durch Rechnung, sondern durch die Einschlusskriterien.
+
+\schritt{Schritt 2 --- Die Folge}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.6cm}@{}}
+\toprule
+\textbf{Bevölkerung} & $r = -0{,}001$\\
+\textbf{nur Schwerkranke} & $r = -0{,}107$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In der Studie erscheinen Vorerkrankungen als \kursiv{schützend} gegen hohes Alter --- ein Zusammenhang, den es nicht gibt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Wann das den Effekt verfälscht}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für den Effekt der Behandlung ist die Einschränkung auf Schwerkranke hier \kursiv{unschädlich} --- sie entspricht einer Anpassung an $S$, und $S$ ist die Störgröße. \textbf{Gefährlich wird es, wenn man aus derselben Studie einen Zusammenhang zwischen Alter und Vorerkrankungen berichtet}, oder wenn die Einschlussgröße ein Kollider von Behandlung und Ausgang ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Ein Beispiel für den gefährlichen Fall}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man werte nur Patienten aus, die mindestens drei Tage überlebt haben --- eine übliche Bereinigung, weil frühe Todesfälle die Auswertung stören. \textbf{Das Überleben der ersten drei Tage ist eine Folge sowohl der Behandlung als auch des Zustands.} Es ist ein Kollider, und die Einschränkung darauf verzerrt den Effekt. Dieselbe Falle steckt hinter der Auswertung nach tatsächlicher Behandlung aus Kapitel~3.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.3 --- Die Verstärkung nachrechnen}
+Warum verstärkt die Anpassung an ein Instrument die Verzerrung? Rechnen Sie es an den Zahlen aus Abschnitt 5.3 nach.
+
+\loesung
+\schritt{Schritt 1 --- Das Modell}
+\[ X = 1{,}2\,Z + 0{,}5\,U + \varepsilon_X, \qquad Y = 1{,}0\,X + 1{,}0\,U + \varepsilon_Y \]
+mit $Z$, $U$, $\varepsilon$ unabhängig und standardnormal. $U$ ist unbeobachtet.
+
+\schritt{Schritt 2 --- Ohne Anpassung}
+Die Verzerrung der Regression von $Y$ auf $X$ beträgt
+\[ \text{Verzerrung} = 1{,}0\cdot\frac{\operatorname{Cov}(X,U)}{\operatorname{Var}(X)} = \frac{0{,}5}{1{,}2^{2}+0{,}5^{2}+1} = \frac{0{,}5}{2{,}69} = 0{,}186 \]
+
+\kursiv{Die Simulation ergab $0{,}186$.} \checkmark
+
+\schritt{Schritt 3 --- Mit Anpassung an $Z$}
+Bei festgehaltenem $Z$ schwankt $X$ nur noch durch $U$ und $\varepsilon_X$:
+\[ \operatorname{Var}(X \mid Z) = 0{,}5^{2}+1 = 1{,}25 \]
+\[ \text{Verzerrung} = \frac{0{,}5}{1{,}25} = 0{,}400 \]
+
+\kursiv{Die Simulation ergab $0{,}403$.} \checkmark
+
+\schritt{Schritt 4 --- Der Mechanismus}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{ohne $Z$} & \textbf{mit $Z$}\\
+\midrule
+Streuung von $X$ & $2{,}69$ & $1{,}25$\\
+davon aus $U$ & $0{,}25$ & $0{,}25$\\
+Anteil & $9{,}3\,\%$ & $\mathbf{20{,}0\,\%}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Zähler bleibt, der Nenner schrumpft.} Was von der Behandlung übrig bleibt, ist stärker von der Störgröße durchsetzt.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Warnung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Je stärker das Instrument, desto schlimmer die Verstärkung.} Bei $Z$-Gewicht $2$ statt $1{,}2$ bliebe $\operatorname{Var}(X\mid Z)$ unverändert bei $1{,}25$, aber ohne Anpassung wäre die Verzerrung nur $0{,}5/5{,}25 = 0{,}095$ --- der Faktor stiege auf über vier. Und da niemand $U$ beobachtet, ist die Verzerrung weder vorher noch nachher sichtbar. Kapitel~9 zeigt, wie man dasselbe $Z$ \kursiv{richtig} benutzt: nicht als Kovariable, sondern als Instrument.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Regel, die sich als falsch erwies}
+Bis in die 1990er Jahre galt in der Epidemiologie eine einfache Auswahlregel: Man passe an jede Größe an, die sowohl mit der Behandlung als auch mit dem Ausgang zusammenhängt --- und die zeitlich vor der Behandlung liegt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Regel ist plausibel und in den allermeisten Fällen richtig. \textbf{Die M-Verzerrung aus Abschnitt 5.3 widerlegt sie} --- dort erfüllt $W$ beide Bedingungen und darf dennoch nicht angepasst werden. Das Beispiel geht auf Arbeiten von \Person{Judea Pearl} zurück; \Person{Sander Greenland} und Mitarbeiter trugen es 1999 in die Epidemiologie.}
+\end{minipage}
+\end{center}
+
+\schritt{Wie oft es vorkommt}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Über die praktische Bedeutung wird gestritten. Die M-Verzerrung ist meist klein, wenn die beteiligten Wirkungen mäßig sind --- in der Simulation $14$ Prozent. \textbf{Die Verstärkungsverzerrung dagegen ist oft groß}, und sie tritt auf, sobald man Größen anpasst, die stark die Behandlung und kaum den Ausgang beeinflussen. Beides spricht dafür, die Anpassungsmenge aus einem Graphen abzuleiten statt aus einer Faustregel.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Fehler der zweiten Tabelle}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Daniel Westreich} und \Person{Sander Greenland} gaben ihm 2013 diesen Namen --- nach der Stelle, an der die vollständige Koeffiziententabelle in Veröffentlichungen meist steht. \textbf{Sie fanden ihn in der Mehrzahl der von ihnen durchgesehenen Arbeiten.} Seither verlangen manche Zeitschriften, Kovariablenkoeffizienten gar nicht mehr abzudrucken.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Anpassen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Automatische Auswahl} & Programme, die aus einem Graphen die zulässigen Mengen berechnen.\\
+\textbf{Auswahl aus Daten} & Verfahren, die Störgrößen aus vielen Kandidaten wählen --- mit den Lecks aus Band 22.\\
+\textbf{Negative Kontrollen} & Größen, bei denen kein Effekt zu erwarten ist, als Prüfstein.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man wählt einen Ausgang, auf den die Behandlung sicher nicht wirken kann --- etwa einen Unfalltod --- und schätzt den Effekt darauf. \textbf{Findet man einen, so ist die Anpassung unvollständig}, und man kann die Größe der verbliebenen Verzerrung abschätzen. Das Verfahren ist eines der wenigen, mit denen sich die unprüfbare Annahme aus Kapitel~2 wenigstens indirekt prüfen lässt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Störgröße} & anpassen --- sperrt den Hinterweg\\
+\textbf{Mediator} & nicht --- tilgt den Effekt\\
+\textbf{Kollider} & nicht --- erfindet Zusammenhang\\
+\textbf{Instrument} & nicht --- verstärkt die Restverzerrung\\
+\textbf{Zweite Tabelle} & ein Modell, ein deutbarer Koeffizient\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Vier Rollen sind vier Fälle, keine Regel. Das nächste Kapitel gibt die Regel --- ein Kriterium, das für jeden Graphen entscheidet, welche Mengen zulässig sind, und das die vier Fälle als Sonderfälle enthält.}
+\end{minipage}
+\end{center}
+\end{merksatz}

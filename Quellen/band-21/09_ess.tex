@@ -1,0 +1,606 @@
+\part{Evolution}
+
+\chapter{Evolutionär stabile Strategien}
+
+\section{Spieler, die nicht nachdenken}
+
+\begin{merksatz}
+\boxtitel{Die Voraussetzungen fallen weg}
+Alle bisherigen Kapitel setzten voraus, dass Spieler die Auszahlungen kennen, rechnen können und Erwartungen über andere bilden.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kapitel 1} & Allgemeines Wissen über die Auszahlungen.\\
+\textbf{Kapitel 4} & Nutzenfunktionen im Sinne von Satz 4.1.\\
+\textbf{Kapitel 7} & Glaube an die Rationalität aller anderen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bakterien erfüllen keine dieser Bedingungen --- und stellen dennoch Gleichgewichte her.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Befund, der Teil~IV trägt. Was im ersten Teil des Bandes eine Annahme über Denkleistung war, wird hier zu einer Aussage über Vermehrung: \textbf{Wer mehr Nachkommen hinterlässt, breitet sich aus} --- und das genügt. Die Auszahlung heißt nun \Begriff{Eignung} und misst den Fortpflanzungserfolg.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall: zwei Stämme im Darm}
+Ein Patient trägt zwei Stämme desselben Bakteriums. Der eine bildet Giftstoffe, die konkurrierende Zellen abtöten --- das kostet Stoffwechselleistung. Der andere bildet keine.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{6.4cm}@{}}
+\toprule
+\textbf{Falke} & bildet Giftstoffe, kämpft um die Nische\\
+\textbf{Taube} & teilt sich die Nische, weicht aus\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+\textbf{Treffen} & \textbf{Ergebnis} & \textbf{Eignung}\\
+\midrule
+Falke--Falke & Kampf, beide geschädigt & $\tfrac{V-C}{2}$\\
+Falke--Taube & Falke nimmt alles & $V$ bzw.\ $0$\\
+Taube--Taube & geteilt & $\tfrac{V}{2}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Mit $V = 2$ (die Nische) und $C = 4$ (die Kosten des Kampfes):}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+& \textbf{Falke} & \textbf{Taube}\\
+\midrule
+\textbf{Falke} & $-1$ & $2$\\
+\textbf{Taube} & $0$ & $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nur eine Matrix --- denn beide Stämme spielen dasselbe Spiel und haben dieselben Aussichten. \textbf{Solche Spiele heißen symmetrisch}, und die Evolutionstheorie kennt fast nur diese: Ein Gen hat keine Sonderrolle, es trifft auf Kopien seiner selbst und auf Konkurrenten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man erkennt die Ordnung $T=2 > R=1 > S=0 > P=-1$ --- das ist das Feigheitsspiel aus Kapitel~5. \textbf{Dieselbe Struktur, ein völlig anderer Zugang} zur Lösung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Definition}
+
+\begin{definition}
+\boxtitelm{Definition 9.1 --- evolutionär stabil}
+Eine Strategie $\sigma^{*}$ heißt \Begriff{evolutionär stabil}, wenn für jede andere Strategie $\sigma$ gilt:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+(i) & $\Aus(\sigma^{*},\sigma^{*}) > \Aus(\sigma,\sigma^{*})$, \quad oder\\
+(ii) & $\Aus(\sigma^{*},\sigma^{*}) = \Aus(\sigma,\sigma^{*})$ \ und \ $\Aus(\sigma^{*},\sigma) > \Aus(\sigma,\sigma)$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was die beiden Bedingungen bedeuten}
+Man stelle sich eine Bevölkerung vor, die durchweg $\sigma^{*}$ spielt. Ein kleiner Anteil $\varepsilon$ von Abweichlern spielt $\sigma$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{6.6cm}@{}}
+\toprule
+\textbf{(i)} & Der Abweichler schneidet schon gegen die Mehrheit schlechter ab --- er verschwindet.\\
+\textbf{(ii)} & Er ist gegen die Mehrheit gleich gut. Dann entscheidet, wie beide gegen \kursiv{ihn} abschneiden --- und dort muss $\sigma^{*}$ besser sein.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Rechnung dahinter}
+In einer Bevölkerung mit Anteil $\varepsilon$ Abweichlern trifft man mit $1-\varepsilon$ auf $\sigma^{*}$ und mit $\varepsilon$ auf $\sigma$:
+\begin{align*}
+\Aus(\sigma^{*}) &= (1-\varepsilon)\,\Aus(\sigma^{*},\sigma^{*}) + \varepsilon\,\Aus(\sigma^{*},\sigma)\\
+\Aus(\sigma) &= (1-\varepsilon)\,\Aus(\sigma,\sigma^{*}) + \varepsilon\,\Aus(\sigma,\sigma)
+\end{align*}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Für kleines $\varepsilon$ überwiegt der erste Summand.} Ist er gleich, so entscheidet der zweite --- genau die Fallunterscheidung der Definition.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Definition ist also keine Willkür, sondern die Auswertung einer Ungleichung für hinreichend kleines $\varepsilon$. \textbf{Evolutionäre Stabilität heißt: Eine kleine Abweichlergruppe kann nicht Fuß fassen.} Über große Störungen sagt sie nichts --- ein Vorbehalt, auf den der Bruchfall zurückkommt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 9.2 --- jede stabile Strategie ist ein Gleichgewicht}
+Ist $\sigma^{*}$ evolutionär stabil, so ist $(\sigma^{*},\sigma^{*})$ ein Nash-Gleichgewicht.
+
+\schritt{Beweis}
+Beide Fälle der Definition liefern
+\[ \Aus(\sigma^{*},\sigma^{*}) \ \ge\ \Aus(\sigma,\sigma^{*}) \qquad\text{für alle } \sigma . \]
+Das ist genau Definition 4.3 für ein symmetrisches Profil. $\blacksquare$
+
+\schritt{Die Umkehrung gilt nicht}
+\[ A = \begin{pmatrix} 2 & 1\\ 1 & 1\end{pmatrix} \]
+
+\kursiv{Für $\sigma^{*} = S_2$:} $\Aus(S_2,S_2) = 1 = \Aus(S_1,S_2)$ --- ein Nash-Gleichgewicht, aber Bedingung (i) scheitert.
+
+\kursiv{Bedingung (ii):} $\Aus(S_2,S_1) = 1$ gegen $\Aus(S_1,S_1) = 2$. Gefordert wäre $1 > 2$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$S_2$ ist ein Nash-Gleichgewicht und nicht evolutionär stabil.} Abweichler zu $S_1$ verlieren nichts und gewinnen, sobald sie sich begegnen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Evolutionäre Stabilität ist also eine \kursiv{Verfeinerung} des Gleichgewichtsbegriffs --- eine weitere neben der Teilspielperfektheit aus Kapitel~7. \textbf{Sie schließt genau die schwachen Gleichgewichte aus}, bei denen ein Abweichen nichts kostet. Und sie tut es aus einem völlig anderen Grund: nicht wegen Glaubwürdigkeit, sondern wegen Vermehrung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Leitfall gelöst}
+
+\begin{merksatz}
+\boxtitel{Keine reine Strategie ist stabil}
+\kursiv{Falke:} $\Aus(F,F) = -1$, $\Aus(T,F) = 0$. Also $-1 < 0$ --- Bedingung (i) scheitert, und (ii) auch, denn die Werte sind nicht gleich.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In einer reinen Falkenbevölkerung fahren Tauben besser.} Sie kämpfen nicht und verlieren nichts.
+\end{minipage}
+\end{center}
+
+\kursiv{Taube:} $\Aus(T,T) = 1$, $\Aus(F,T) = 2$. Also $1 < 2$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In einer reinen Taubenbevölkerung fahren Falken besser.} Sie nehmen alles.
+\end{minipage}
+\end{center}
+
+\schritt{Die gemischte Strategie}
+Nach dem Prinzip aus Satz 3.3 ist $p$ so zu wählen, dass beide Typen gleich gut fahren:
+\[ p\cdot(-1) + (1-p)\cdot2 = p\cdot0 + (1-p)\cdot1 \]
+\[ 2-3p = 1-p \quad\Longrightarrow\quad 1 = 2p \quad\Longrightarrow\quad p = \tfrac12 \]
+
+\schritt{Die allgemeine Formel}
+\[ p\cdot\frac{V-C}{2} + (1-p)\,V = (1-p)\,\frac{V}{2} \]
+führt auf
+\[ \boxed{\ p^{*} = \frac{V}{C}\ } \qquad\text{für } V < C \]
+
+\schritt{Die Eignung im Gleichgewicht}
+\[ \Aus^{*} = (1-p^{*})\,\frac{V}{2} = \left(1-\frac VC\right)\frac V2 = \frac{V\,(C-V)}{2C} \]
+
+\kursiv{Im Leitfall:} $\frac{2\cdot2}{8} = \tfrac12$ \checkmark
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.8cm}P{2.2cm}@{}}
+\toprule
+$V$ & $C$ & $p^{*}$ & \textbf{Eignung}\\
+\midrule
+$2$ & $3$ & $0{,}667$ & $0{,}333$\\
+$2$ & $4$ & $0{,}500$ & $0{,}500$\\
+$2$ & $8$ & $0{,}250$ & $0{,}750$\\
+$4$ & $2$ & $1{,}000$ & $1{,}000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Je teurer der Kampf, desto seltener wird gekämpft --- und desto besser fahren alle.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist der bemerkenswerte Fall: Bei achtfachen Kampfkosten erreichen alle eine Eignung von $0{,}75$, während die friedliche Teilung nur $1$ brächte --- der Verlust beträgt nur ein Viertel. \textbf{Hohe Strafen für Aggression bringen eine Bevölkerung nahe an das friedliche Ergebnis}, ohne dass jemand friedlich sein müsste. Das ist die evolutionäre Entsprechung zu Aufgabe 5.1.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Fall $V \ge C$}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ist die Nische mehr wert als der Kampf kostet, so ist Falke strikt dominant und die einzige stabile Strategie.}
+\end{minipage}
+\end{center}
+
+\kursiv{Denn dann ist $\frac{V-C}{2} \ge 0$ und $V > \frac{V}{2}$.} Aus dem Feigheitsspiel wird ein Spiel mit dominanter Strategie.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was das erklärt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Ritualkämpfe} & Viele Arten tragen Rangkämpfe aus, ohne einander zu töten --- hohe $C$ halten $p^{*}$ klein.\\
+\textbf{Waffen} & Wer besser bewaffnet ist, hat oft \kursiv{mehr} Hemmungen; $C$ steigt mit der Bewaffnung.\\
+\textbf{Mischung} & Die Bevölkerung ist im Gleichgewicht gemischt --- entweder aus zwei Typen oder aus Individuen, die selbst würfeln.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist wichtig und oft missverstanden. \textbf{Das Modell unterscheidet nicht zwischen einer Bevölkerung aus $50$ Prozent Falken und einer aus lauter Individuen, die zur Hälfte aggressiv reagieren.} Beide haben dieselben Eignungswerte. Erst Kapitel~10 kann die Fälle trennen, weil die Dynamik sich unterscheidet.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und die zweite Zeile widerspricht einer verbreiteten Erwartung. \Person{Konrad Lorenz} erklärte Tötungshemmungen mit dem Nutzen für die Art --- ein Argument, das die Evolutionstheorie nicht trägt, weil Selektion an Individuen ansetzt. \textbf{Das Falke-Taube-Modell liefert dieselbe Vorhersage ohne Artnutzen}, allein aus den Kosten für den Einzelnen. Das war 1973 der eigentliche Fortschritt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was Definition 9.1 voraussetzt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Unendlich groß} & Die Bevölkerung wird als beliebig groß angenommen; Zufallsschwankungen entfallen.\\
+\textbf{Zufällige Paare} & Jeder trifft jeden mit gleicher Wahrscheinlichkeit --- keine Verwandtschaft, keine Nachbarschaft.\\
+\textbf{Kleine Störungen} & Stabilität gilt gegen kleine Abweichlergruppen, nicht gegen große.\\
+\textbf{Eine Art} & Alle spielen dasselbe Spiel mit denselben Auszahlungen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Treffen Verwandte häufiger aufeinander, so ändert sich alles.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{William Hamilton} zeigte 1964, dass ein Merkmal sich ausbreitet, wenn $r\,b > c$ gilt --- mit $r$ als Verwandtschaftsgrad, $b$ als Nutzen für den anderen und $c$ als eigenen Kosten. \textbf{Bakterienkolonien bestehen weitgehend aus Klonen}, also $r \approx 1$, und dort setzt sich die Zusammenarbeit durch. Im Leitfall heißt das: In einer Monokultur wird nicht gekämpft; Giftstoffbildung lohnt erst beim Zusammentreffen fremder Stämme.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Bei kleinen Bevölkerungen kann eine stabile Strategie durch Zufall verschwinden.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Theorie endlicher Bevölkerungen ergibt teils andere Bedingungen; die Schwelle hängt dann von der Größe ab. \textbf{Bei Bakterien mit $10^{9}$ Zellen ist die Annahme unbedenklich}, bei einer Tierpopulation von fünfzig Individuen nicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Und eine Stelle, an der es gar kein stabiles Ergebnis gibt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das zyklische Spiel aus Aufgabe 3.1 --- Stein, Schere, Papier --- hat ein Nash-Gleichgewicht, aber keine evolutionär stabile Strategie. \textbf{Die Bevölkerung kreist dauerhaft}, und das ist kein Rechenfehler, sondern ein beobachtbares Phänomen: Bei einer Eidechsenart mit drei Paarungsstrategien wurde genau ein solcher Kreislauf über Jahre dokumentiert. Kapitel~10 rechnet ihn aus.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.1 --- Die Falkenquote}
+Ein Stamm bildet Giftstoffe. Durch eine Antibiotikatherapie steigen die Kosten des Kampfes von $C=4$ auf $C=10$, weil geschädigte Zellen zusätzlich anfällig werden. Was geschieht?
+
+\loesung
+\schritt{Schritt 1 --- Die alte Lage}
+\[ p^{*} = \frac{V}{C} = \frac{2}{4} = 0{,}50, \qquad \Aus^{*} = \frac{2\cdot2}{8} = 0{,}50 \]
+
+\schritt{Schritt 2 --- Die neue Lage}
+\[ p^{*} = \frac{2}{10} = 0{,}20, \qquad \Aus^{*} = \frac{2\cdot8}{20} = 0{,}80 \]
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+$C$ & \textbf{Falkenanteil} & \textbf{Eignung} & \textbf{Kämpfe}\\
+\midrule
+$4$ & $50\,\%$ & $0{,}50$ & $25\,\%$\\
+$10$ & $20\,\%$ & $0{,}80$ & $4\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zu den Kämpfen:} Ein Kampf entsteht nur, wenn zwei Falken aufeinandertreffen --- also mit Wahrscheinlichkeit $(p^{*})^{2}$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Zahl der Kämpfe sinkt um den Faktor sechs, die mittlere Eignung steigt um sechzig Prozent.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Grenze}
+\[ \lim_{C\to\infty} p^{*} = 0, \qquad \lim_{C\to\infty} \Aus^{*} = \frac{V}{2} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei beliebig teuren Kämpfen nähert sich die Bevölkerung dem friedlichen Ergebnis beliebig genau --- erreicht es aber nie.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es bleibt stets ein kleiner Anteil Falken, denn in einer reinen Taubenbevölkerung lohnt sich Aggression immer. \textbf{Das ist der Unterschied zu Aufgabe 5.1}: Dort ließ sich die Dominanz durch einen hinreichend großen Abschlag umkehren; hier verschwindet die Falkenstrategie nie ganz, weil ihr Vorteil gerade bei ihrer Seltenheit am größten ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Vorbehalt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Rechnung unterstellt, dass die Therapie nur $C$ verändert und nicht $V$. Tatsächlich verkleinert ein Antibiotikum auch die Nische --- also $V$. \textbf{Sinkt $V$ im selben Verhältnis wie $C$ steigt, so bleibt $p^{*} = V/C$ unverändert}, und die Maßnahme wäre wirkungslos. Welcher Fall vorliegt, ist eine Messfrage und keine Modellfrage.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.2 --- Nash oder stabil?}
+Prüfen Sie beide Bedingungen für jede reine Strategie:
+\[ A = \begin{pmatrix} 3 & 3\\ 3 & 2\end{pmatrix} \]
+
+\loesung
+\schritt{Schritt 1 --- Nash prüfen}
+\kursiv{$S_1$:} $\Aus(S_1,S_1) = 3$, $\Aus(S_2,S_1) = 3$. Gleich --- also Nash (schwach).\\
+\kursiv{$S_2$:} $\Aus(S_2,S_2) = 2$, $\Aus(S_1,S_2) = 3$. Kleiner --- kein Nash.
+
+\schritt{Schritt 2 --- $S_1$ auf Stabilität prüfen}
+\kursiv{Bedingung (i):} $3 > 3$? Nein.
+
+\kursiv{Bedingung (ii):} Der erste Teil ist erfüllt ($3 = 3$). Der zweite verlangt
+\[ \Aus(S_1,S_2) > \Aus(S_2,S_2) \]
+\[ 3 > 2 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$S_1$ ist evolutionär stabil --- über Bedingung (ii).}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Abweichler zu $S_2$ verliert zunächst nichts: Gegen die Mehrheit erhält er ebenfalls $3$. \textbf{Aber sobald zwei Abweichler aufeinandertreffen, fahren sie schlechter} --- $2$ statt $3$. Mit wachsendem Anteil wird die Abweichung immer schlechter, und sie stirbt aus.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Rechnung mit $\varepsilon$}
+\begin{align*}
+\Aus(S_1) &= (1-\varepsilon)\cdot3 + \varepsilon\cdot3 = 3\\
+\Aus(S_2) &= (1-\varepsilon)\cdot3 + \varepsilon\cdot2 = 3-\varepsilon
+\end{align*}
+
+\[ 3 > 3-\varepsilon \qquad\text{für jedes } \varepsilon > 0 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Vorteil ist nur von der Ordnung $\varepsilon$ --- aber er ist da.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Vergleich mit dem Gegenbeispiel}
+Bei $A = \begin{psmallmatrix}2&1\\1&1\end{psmallmatrix}$ aus Abschnitt 9.2 scheiterte $S_2$, weil dort $\Aus(S_2,S_1) = 1 < 2 = \Aus(S_1,S_1)$ galt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Nash} & \textbf{stabil}\\
+\midrule
+hier, $S_1$ & \textcolor{gruen}{ja, schwach} & \textcolor{gruen}{ja}\\
+dort, $S_2$ & \textcolor{gruen}{ja, schwach} & \textcolor{akzent}{nein}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein schwaches Gleichgewicht kann stabil sein oder nicht --- Bedingung (ii) entscheidet.} Genau dafür ist sie da, und sie ist der einzige Teil der Definition, der über den Nash-Begriff hinausgeht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.3 --- Der Vergelter}
+Ein dritter Typ verhält sich gegen Tauben friedlich und gegen Falken kämpferisch. Ist er evolutionär stabil? ($V=2$, $C=4$.)
+
+\loesung
+\schritt{Schritt 1 --- Die Matrix}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{1.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+& \textbf{Falke} & \textbf{Taube} & \textbf{Vergelter}\\
+\midrule
+\textbf{Falke} & $-1$ & $2$ & $-1$\\
+\textbf{Taube} & $0$ & $1$ & $1$\\
+\textbf{Vergelter} & $-1$ & $1$ & $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur Zeile Vergelter:} Gegen einen Falken kämpft er, also $\frac{V-C}{2} = -1$. Gegen eine Taube teilt er, also $\frac V2 = 1$. Gegen einen anderen Vergelter teilt er ebenfalls.
+
+\schritt{Schritt 2 --- Bedingung (i) prüfen}
+\[ \Aus(V,V) = 1 \]
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Abweichler} & \textbf{gegen $V$} & \\
+\midrule
+Falke & $-1$ & $< 1$ \textcolor{gruen}{fällt weg}\\
+Taube & $1$ & $= 1$ \textcolor{mittel}{Gleichstand}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 3 --- Bedingung (ii) für die Taube}
+Gefordert ist
+\[ \Aus(V,\,T) \ >\ \Aus(T,\,T) \]
+\[ 1 \ >\ 1 \quad \textcolor{akzent}{\text{falsch}} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Vergelter ist \kursiv{nicht} evolutionär stabil.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Was daraus folgt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Tauben und Vergelter sind voneinander ununterscheidbar, solange keine Falken da sind --- beide teilen friedlich. \textbf{Der Taubenanteil kann daher beliebig anwachsen, ohne dass es jemanden kostet.} Wird er groß genug, so lohnt sich der Einfall von Falken, und der Vergelter setzt sich wieder durch. Die Bevölkerung driftet also, statt stabil zu sein.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die historische Pointe}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{Maynard Smith} und \Person{Price} führten den Vergelter 1973 ein und bezeichneten ihn als evolutionär stabil --- eine Angabe, die später berichtigt wurde. \textbf{Der Fehler lag genau in Bedingung (ii)}, die im ursprünglichen Aufsatz weniger scharf formuliert war. Maynard Smith hat die Berichtigung selbst vorgenommen und sie in sein Buch von 1982 aufgenommen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Was stattdessen stabil ist}
+Beschränkt man sich auf Falke und Taube, so ist die Mischung $p^{*} = \tfrac12$ stabil.
+
+\kursiv{Prüfung von Bedingung (ii):} Gegen die Mischung sind alle Strategien gleich gut --- Bedingung (i) scheitert stets. Für eine abweichende Mischung $\sigma$ mit Falkenanteil $q \ne \tfrac12$ gilt
+\[ \Aus(\sigma^{*},\sigma) - \Aus(\sigma,\sigma) = \left(\tfrac12 - q\right)\bigl[(-1)q + 2(1-q)\bigr] - \left(\tfrac12-q\right)\bigl[0\cdot q + 1(1-q)\bigr] \]
+\[ = \left(\tfrac12-q\right)\bigl[(2-3q)-(1-q)\bigr] = \left(\tfrac12-q\right)(1-2q) = 2\left(\tfrac12-q\right)^{2} \ >\ 0 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Ausdruck ist ein Quadrat und damit für $q \ne \tfrac12$ echt positiv. \textbf{Das ist der allgemeine Nachweis für innere Gleichgewichte in $2\times2$-Spielen} --- und er zeigt zugleich, warum die Stabilität hier nicht vom Vorzeichen der Auszahlungen abhängt, sondern nur davon, dass das Gleichgewicht im Inneren liegt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Aufsatz, ein Aufsteller, ein Ende}
+\Person{George Price} (1922--1975) war Chemiker, hatte am Manhattan-Projekt mitgearbeitet und kam über Umwege zur Evolutionstheorie --- ohne jede formale Ausbildung darin.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{1970 leitete er eine Gleichung her, die die Veränderung eines Merkmals in ihre Bestandteile zerlegt --- die Price-Gleichung, heute ein Grundwerkzeug der Evolutionstheorie. Er schickte sie unaufgefordert an \kursiv{Nature}; der Herausgeber \Person{Cedric Smith} erkannte ihren Wert und verschaffte ihm eine Stelle am University College London.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Zusammenarbeit}
+\Person{John Maynard Smith} (1920--2004) erhielt 1971 ein unveröffentlichtes Manuskript von Price über Tierkämpfe zur Begutachtung.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er hielt es für zu lang und zu unklar --- und für einen wichtigen Gedanken. Statt es abzulehnen, schlug er eine gemeinsame Arbeit vor. \textbf{\enquote{The Logic of Animal Conflict} erschien 1973 in \kursiv{Nature} auf drei Seiten} und begründete die evolutionäre Spieltheorie. Der Begriff der stabilen Strategie stammt aus dieser Arbeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Prices weiterer Weg}
+Price war Atheist gewesen und wurde nach seiner Arbeit über die Evolution des Altruismus gläubig. Er verschenkte seinen Besitz an Obdachlose und nahm sie in seiner Wohnung auf.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er verarmte und starb 1975 in einem besetzten Haus in London. \textbf{Maynard Smith war einer von wenigen bei der Beerdigung.} Prices Gleichung und der Begriff der stabilen Strategie sind heute Standard; seine eigene Deutung, dass die Mathematik des Altruismus ihm etwas über das Leben sagte, hat ihn zerstört.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Vorgeschichte}
+\Person{Richard Lewontin} hatte 1961 vorgeschlagen, Evolution spieltheoretisch zu betrachten --- allerdings als Spiel der Art gegen die Natur.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das war der falsche Ansatz, weil Selektion an Individuen ansetzt und nicht an Arten. \textbf{Maynard Smith und Price ließen die Natur weg und ließen die Individuen gegeneinander spielen} --- und erst damit wurde der Zugang tragfähig.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Evolutionäre Spieltheorie heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Krebs} & Tumorzellen als Spieler; adaptive Therapie nutzt die Konkurrenz zwischen Zelltypen.\\
+\textbf{Mikrobiom} & Giftstoffbildung, gemeinsame Güter und Trittbrettfahren in Bakteriengemeinschaften.\\
+\textbf{Räumliche Modelle} & Wer nur mit Nachbarn spielt, kooperiert mehr.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Band 18, Kapitel~14 behandelte die adaptive Therapie und ließ die spieltheoretische Begründung offen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Sie lautet: Resistente Zellen zahlen einen Eignungspreis und werden von empfindlichen unterdrückt, solange diese zahlreich sind. \textbf{Wer alle empfindlichen Zellen abtötet, beseitigt die Konkurrenz der resistenten} --- und deren Anteil wächst ungebremst. Die adaptive Therapie hält absichtlich einen empfindlichen Bestand. Kapitel~10 rechnet diesen Verlauf mit denselben Zahlen wie Band 18.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\Person{Martin Nowak} und \Person{Robert May} zeigten 1992, dass ein Gefangenendilemma auf einem Gitter dauerhaft gemischt bleibt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kooperierende bilden Inseln, deren Ränder von Ausbeutern angenagt werden, während das Innere nachwächst. \textbf{Die räumliche Struktur leistet, was die Wiederholung aus Kapitel~8 leistet} --- wiederholte Begegnung mit demselben Gegenüber --- ohne dass jemand sich erinnern müsste. Die entstehenden Muster sind reproduzierbar und wurden in bakteriellen Kulturen nachgewiesen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 9.1} & zwei Bedingungen, kleines $\varepsilon$\\
+\textbf{Satz 9.2} & stabil $\Rightarrow$ Nash, nicht umgekehrt\\
+\textbf{Falke-Taube} & $p^{*} = V/C$, Eignung $\frac{V(C-V)}{2C}$\\
+\textbf{Der Vergelter} & Nash, aber nicht stabil\\
+\textbf{Der Bruchfall} & groß, durchmischt, kleine Störungen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Definition 9.1 fragt, ob eine Lage Störungen aushält. Das nächste Kapitel fragt, wie die Bevölkerung dorthin gelangt --- und findet Fälle, in denen sie es nie tut.}
+\end{minipage}
+\end{center}
+\end{merksatz}

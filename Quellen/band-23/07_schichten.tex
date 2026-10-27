@@ -1,0 +1,352 @@
+\part{Anpassen}
+
+\chapter{Eine Zahl statt zwanzig}
+
+\section{Warum Schichten nicht reichen}
+
+\begin{merksatz}
+\boxtitel{Die Anpassungsformel in der Praxis}
+Satz 6.2 verlangt, über alle Werte von $Z$ zu summieren. Bei zwei Stufen ist das leicht.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Störgrößen} & \textbf{Schichten} & \textbf{je Schicht}\\
+\midrule
+$1$ binär & $2$ & $600$\\
+$5$ binär & $32$ & $38$\\
+$10$ binär & $1024$ & $1$\\
+$3$ stetig & $\infty$ & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Bei $1200$ Patienten.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ab etwa fünf Störgrößen ist keine Schicht mehr besetzt --- der Fluch der Dimension aus Band 22, Kapitel~10.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 7.1 --- Behandlungsneigung}
+Die \Begriff{Behandlungsneigung} eines Patienten ist die Wahrscheinlichkeit, mit der er die Behandlung erhält:
+\[ e(\vek z) = \Pr[X=1 \mid Z=\vek z] . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 7.2 --- Rosenbaum und Rubin, 1983}
+Genügt $Z$ dem Hintertürkriterium, so genügt auch die einzelne Zahl $e(Z)$:
+\[ \bigl(Y(1),Y(0)\bigr) \perp X \ \mid\ Z \quad\Longrightarrow\quad \bigl(Y(1),Y(0)\bigr) \perp X \ \mid\ e(Z) . \]
+
+\schritt{Beweis}
+\kursiv{Erstens:} Bei gegebenem $e(Z)$ ist $\Pr[X=1 \mid e(Z)] = e(Z)$, denn
+\[ \Pr[X=1 \mid e(Z)] = \mathbb{E}\bigl[\Pr[X=1\mid Z] \ \big|\ e(Z)\bigr] = \mathbb{E}[e(Z)\mid e(Z)] = e(Z) . \]
+
+\kursiv{Zweitens:} Für die potentiellen Ergebnisse gilt ebenso
+\[ \Pr\bigl[X=1 \mid Y(1),Y(0),\ e(Z)\bigr] = \mathbb{E}\bigl[\Pr[X=1\mid Y(1),Y(0),Z] \ \big|\ Y(1),Y(0),e(Z)\bigr] . \]
+Nach Voraussetzung ist der innere Ausdruck gleich $e(Z)$, unabhängig von den potentiellen Ergebnissen.
+
+\kursiv{Drittens:} Beide Ausdrücke sind gleich $e(Z)$ --- also hängt die Behandlungswahrscheinlichkeit bei gegebenem $e(Z)$ nicht von den potentiellen Ergebnissen ab. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwanzig Störgrößen lassen sich auf eine einzige Zahl zusammenziehen --- ohne etwas zu verlieren.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der wichtigste praktische Satz dieses Bandes. \textbf{Er verwandelt ein hochdimensionales Problem in ein eindimensionales}, und die Zahl $e(Z)$ hat eine klare Bedeutung: Zwei Patienten mit gleicher Behandlungsneigung sind, was die Zuteilung angeht, austauschbar --- als hätte man bei ihnen dieselbe Münze geworfen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Vier Wege, sie zu benutzen}
+
+\begin{merksatz}
+\boxtitel{Die Verfahren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Schichten} & Fünf Gruppen gleicher Größe nach $e$; in jeder vergleichen, dann mitteln.\\
+\textbf{Paaren} & Zu jedem Behandelten den Unbehandelten mit nächstliegendem $e$ suchen.\\
+\textbf{Gewichten} & Jeden Patienten mit $1/e$ bzw.\ $1/(1-e)$ gewichten --- Kapitel~8.\\
+\textbf{Als Kovariable} & $e$ ins Regressionsmodell aufnehmen. \textcolor{akzent}{Am schwächsten}, weil es eine Modellform unterstellt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall gerechnet}
+$20\,000$ Patienten, zwei stetige Störgrößen, wahres Modell bekannt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{1.6cm}P{1.6cm}P{1.6cm}P{2.0cm}@{}}
+\toprule
+\textbf{Schicht} & $\bar e$ & $n_{\text{beh}}$ & $n_{\text{unbeh}}$ & \textbf{Differenz}\\
+\midrule
+$1$ & $0{,}12$ & $499$ & $3501$ & $-0{,}039$\\
+$2$ & $0{,}27$ & $1112$ & $2888$ & $-0{,}081$\\
+$3$ & $0{,}42$ & $1732$ & $2268$ & $-0{,}122$\\
+$4$ & $0{,}59$ & $2385$ & $1615$ & $-0{,}138$\\
+$5$ & $0{,}80$ & $3156$ & $844$ & $-0{,}124$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Schätzung}\\
+\midrule
+naiv & $+0{,}049$\\
+fünf Schichten & $-0{,}101$\\
+Gewichten & $\mathbf{-0{,}123}$\\
+\midrule
+wahrer Effekt & $\mathbf{-0{,}122}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der naive Vergleich hat das falsche Vorzeichen. Fünf Schichten beseitigen den größten Teil der Verzerrung, ein Sechstel bleibt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Rest ist Restverzerrung innerhalb der Schichten}: In Schicht 1 reicht die Neigung von $0{,}02$ bis $0{,}20$, und innerhalb dieser Spanne sind Behandelte noch immer kränker. Zehn oder zwanzig Schichten verringern den Rest, dünnen aber die Besetzung aus --- derselbe Zielkonflikt wie in Band 22, Kapitel~2. Das Gewichten umgeht ihn, indem es gar nicht erst einteilt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Neigung ist geschätzt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Modellfehler} & $e(Z)$ kennt niemand; man schätzt es, meist durch logistische Regression. Ist das Modell falsch, bleibt Verzerrung.\\
+\textbf{Kein Ersatz} & Die Neigung fasst nur zusammen, was in $Z$ steht. Fehlt eine Störgröße, hilft sie nicht.\\
+\textbf{Gute Balance täuscht} & Dass Behandelte und Unbehandelte nach dem Paaren ähnlich aussehen, beweist nichts über unbeobachtete Größen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile erklärt einen verbreiteten Irrtum. \textbf{Eine Tabelle, die nach dem Paaren gleiche Mittelwerte in allen gemessenen Größen zeigt, sieht aus wie eine randomisierte Studie und ist keine.} Die Randomisierung gleicht auch das Ungemessene aus, die Neigung nur das Gemessene --- Kapitel~3, Satz 3.1.}
+\end{minipage}
+\end{center}
+
+\schritt{Und ein Fehler beim Aufbau des Modells}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In das Neigungsmodell gehören Größen, die den \kursiv{Ausgang} beeinflussen --- nicht solche, die nur die Behandlung beeinflussen. \textbf{Letztere sind Instrumente und verstärken nach Kapitel~5 die Restverzerrung.} Wer das Neigungsmodell nach Güte der Vorhersage von $X$ auswählt, wählt also genau falsch: Ein Modell, das die Behandlung perfekt vorhersagt, macht jede Schätzung unmöglich --- es verletzt die Positivität.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.1 --- Schichten von Hand}
+Aus den fünf Schichten der Tabelle: Berechnen Sie den geschichteten Schätzer und den Effekt bei den Behandelten.
+
+\loesung
+\schritt{Schritt 1 --- Der Durchschnittseffekt}
+Jede Schicht enthält $4000$ von $20\,000$ Patienten, also je $20$ Prozent:
+\[ \hat\tau = 0{,}2\,(-0{,}039-0{,}081-0{,}122-0{,}138-0{,}124) = 0{,}2\cdot(-0{,}504) = -0{,}101 \]
+
+\schritt{Schritt 2 --- Der Effekt bei den Behandelten}
+Nun gewichtet man mit dem Anteil der \kursiv{Behandelten} je Schicht:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{1.8cm}P{1.8cm}P{2.2cm}@{}}
+\toprule
+\textbf{Schicht} & $n_{\text{beh}}$ & \textbf{Anteil} & \textbf{Beitrag}\\
+\midrule
+$1$ & $499$ & $0{,}056$ & $-0{,}0022$\\
+$2$ & $1112$ & $0{,}125$ & $-0{,}0101$\\
+$3$ & $1732$ & $0{,}195$ & $-0{,}0238$\\
+$4$ & $2385$ & $0{,}268$ & $-0{,}0370$\\
+$5$ & $3156$ & $0{,}355$ & $-0{,}0441$\\
+\midrule
+& $8884$ & $1{,}000$ & $\mathbf{-0{,}117}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$-0{,}117$ gegen $-0{,}101$: Die Behandelten profitieren stärker, weil sie in den oberen Schichten überwiegen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Lehre}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dieselben Schichtdifferenzen, zwei verschiedene Zahlen --- je nachdem, über welche Bevölkerung man mittelt.} Das ist Definition 2.3 in der Rechnung: Der Durchschnittseffekt und der Effekt bei den Behandelten unterscheiden sich, sobald die Wirkung zwischen den Schichten schwankt. Welche Zahl man braucht, hängt von der Frage ab --- Leitlinie oder Nachbetrachtung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.2 --- Wie fein soll man schichten?}
+Bei $1200$ Patienten und einem Behandeltenanteil von $50$ Prozent: Wie viele Schichten sind sinnvoll?
+
+\loesung
+\schritt{Schritt 1 --- Die Besetzung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Schichten} & \textbf{je Schicht} & \textbf{je Gruppe}\\
+\midrule
+$5$ & $240$ & $120$\\
+$10$ & $120$ & $60$\\
+$20$ & $60$ & $30$\\
+$50$ & $24$ & $12$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die verbleibende Verzerrung}
+Eine Faustregel besagt, dass fünf Schichten etwa $90$ Prozent der Verzerrung einer stetigen Störgröße beseitigen, zehn Schichten etwa $95$.
+
+\kursiv{Im Leitfall:} $-0{,}101$ gegenüber $-0{,}122$ sind $83$ Prozent --- etwas weniger, weil die Neigung stark streut.
+
+\schritt{Schritt 3 --- Die Streuung}
+Bei $30$ Patienten je Gruppe und Schicht beträgt die Streuung einer Differenz zweier Anteile nahe $0{,}3$ rund
+\[ \sqrt{\frac{2\cdot0{,}21}{30}} = 0{,}118 . \]
+Über $20$ Schichten gemittelt: $0{,}118/\sqrt{20} = 0{,}026$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Streuung des Gesamtschätzers wächst durch feinere Schichtung kaum} --- solange jede Schicht beide Gruppen enthält. Bricht das zusammen, so fällt die Schicht ganz aus, und die Schätzung wird verzerrt \kursiv{und} ungenau. Die Grenze liegt also nicht bei der Streuung, sondern bei der Positivität: Man schichtet so fein, wie es die Besetzung zulässt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.3 --- Was Balance beweist}
+Nach dem Paaren stimmen Alter, Vorerkrankungen und Laborwerte in beiden Gruppen überein. Welche Schlüsse sind zulässig?
+
+\loesung
+\schritt{Schritt 1 --- Was gezeigt ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Gezeigt} & Das Neigungsmodell hat die gemessenen Größen ausgeglichen. Es ist also brauchbar angepasst.\\
+\textbf{Nicht gezeigt} & Dass es keine weiteren Störgrößen gibt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Warum das kein Zirkel ist}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Balance prüft das \kursiv{Modell}, nicht die \kursiv{Annahme}. \textbf{Sie ist eine notwendige, keine hinreichende Bedingung}: Wer sie nicht erreicht, hat sicher ein Problem; wer sie erreicht, hat eines der beiden möglichen Probleme ausgeschlossen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die einzige echte Prüfung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Negative Kontrolle} & Ein Ausgang, auf den die Behandlung nicht wirken kann. Findet man dort einen Effekt, fehlt eine Störgröße.\\
+\textbf{Empfindlichkeit} & Wie stark müsste eine verborgene Größe wirken?\\
+\textbf{Vergleich} & Gibt es zu derselben Frage eine randomisierte Studie?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der dritte Punkt ist die strengste Prüfung und in großem Maßstab durchgeführt worden}: Man bildete mit Beobachtungsdaten Studien nach, deren randomisiertes Ergebnis bekannt war. Bei sorgfältiger Emulation --- Kapitel~11 --- stimmten die Ergebnisse überwiegend überein; bei nachlässiger wichen sie erheblich ab, und zwar in beide Richtungen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Aufsatz von acht Seiten}
+\Person{Paul Rosenbaum} und \Person{Donald Rubin} veröffentlichten 1983 in \kursiv{Biometrika} den Aufsatz, der Satz 7.2 enthält.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er gehört zu den meistzitierten Arbeiten der Statistik überhaupt. \textbf{Der Gedanke, eine ganze Menge von Störgrößen durch eine einzige Zahl zu ersetzen, war neu und überraschend} --- und der Beweis passt, wie oben, auf eine halbe Seite.}
+\end{minipage}
+\end{center}
+
+\schritt{Ein früher Einsatz}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Rubin wurde in den 1990er Jahren als Gutachter in einem Verfahren gegen Tabakkonzerne herangezogen und benutzte Neigungsverfahren, um die Krankheitskosten des Rauchens zu schätzen. \textbf{Die Methode wurde dadurch weit über die Statistik hinaus bekannt} --- und zugleich zum Gegenstand der Kritik, weil beide Seiten mit denselben Daten verschiedene Zahlen erzeugten.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Neigung heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Maschinell geschätzt} & Die Neigung mit Verfahren aus Band 22 statt logistischer Regression.\\
+\textbf{Balance als Ziel} & Gewichte direkt so bestimmen, dass die Mittelwerte übereinstimmen.\\
+\textbf{Hochdimensional} & Hunderte von Störgrößen aus Abrechnungsdaten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein flexibles Lernverfahren schätzt $e(Z)$ genauer --- und schafft ein neues Problem: \textbf{Seine Fehler sind nicht mehr klein genug, damit die einfachen Schätzer gültig bleiben.} Man braucht dann die doppelt robusten Verfahren des nächsten Kapitels, die genau für diesen Fall gebaut sind.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 7.1} & Behandlungsneigung $e(\vek z)$\\
+\textbf{Satz 7.2} & eine Zahl ersetzt alle Störgrößen\\
+\textbf{Vier Wege} & Schichten, Paaren, Gewichten, Kovariable\\
+\textbf{Restverzerrung} & innerhalb der Schichten\\
+\textbf{Balance} & prüft das Modell, nicht die Annahme\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Schichten verschenkt Information, das Gewichten nicht. Das nächste Kapitel führt es aus --- und zeigt ein Verfahren, das selbst dann noch richtig rechnet, wenn eines von zwei Modellen falsch ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

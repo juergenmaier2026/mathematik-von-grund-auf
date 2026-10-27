@@ -1,0 +1,627 @@
+\chapter{Eine Wahrscheinlichkeit vorhersagen}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Zwei Merkmale}
+Zum Laktat kommt nun die Herzfrequenz. Bei $400$ Patienten der Intensivstation liegen beide Werte vor; $10$ Prozent entwickeln eine Sepsis.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{ohne Sepsis} & \textbf{mit Sepsis}\\
+\midrule
+Laktat & um $1{,}2$ mmol/l & um $3{,}0$ mmol/l\\
+Herzfrequenz & um $88$/min & um $112$/min\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\textbf{Gesucht:} nicht nur ein Ja oder Nein, sondern eine Wahrscheinlichkeit.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine Wahrscheinlichkeit ist mehr wert als eine Entscheidung. \textbf{Man kann sie nachträglich mit jeder Kostenrechnung aus Kapitel~1 verbinden} --- die Schwelle wird erst gewählt, wenn feststeht, was ein Fehler kostet. Ein Verfahren, das nur Ja oder Nein ausgibt, hat diese Entscheidung bereits getroffen, ohne sie offenzulegen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Modell}
+
+\begin{merksatz}
+\boxtitel{Warum nicht einfach eine Gerade?}
+Eine lineare Funktion $\beta_0 + \vek\beta^{\!\top}\vek x$ nimmt jeden Wert an --- auch negative und solche über eins. Eine Wahrscheinlichkeit darf das nicht.
+
+\schritt{Der Ausweg: Chancen statt Wahrscheinlichkeiten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Formel} & \textbf{Bereich}\\
+\midrule
+Wahrscheinlichkeit & $p$ & $0$ bis $1$\\
+Chance & $\dfrac{p}{1-p}$ & $0$ bis $\infty$\\
+Logarithmus der Chance & $\ln\dfrac{p}{1-p}$ & $-\infty$ bis $\infty$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Logarithmus der Chance nimmt jeden Wert an --- und darf daher linear sein.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 5.1 --- logistische Regression}
+\[ \ln\frac{p(\vek x)}{1-p(\vek x)} = \beta_0 + \vek\beta^{\!\top}\vek x \]
+oder gleichwertig
+\[ p(\vek x) = \sigma\bigl(\beta_0 + \vek\beta^{\!\top}\vek x\bigr), \qquad \sigma(z) = \frac{1}{1+e^{-z}} . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Funktion $\sigma$}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.6pt] (-3.4,0) -- (3.4,0);
+\draw[grau!60, line width=0.6pt] (0,-0.1) -- (0,2.3);
+\draw[grau!40, line width=0.6pt, dashed] (-3.4,2) -- (3.4,2);
+\draw[grau!40, line width=0.6pt, dashed] (-3.4,1) -- (0,1);
+\draw[tief, line width=1.4pt, smooth, samples=60, domain=-3.3:3.3] plot ({\x}, {2/(1+exp(-1.6*\x))});
+\node[font=\scriptsize, color=grau, anchor=east] at (-3.45,2) {$1$};
+\node[font=\scriptsize, color=grau, anchor=east] at (-3.45,1) {$\tfrac12$};
+\node[font=\scriptsize, color=grau, anchor=north] at (0,-0.12) {$z = 0$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+$\sigma(0) = \tfrac12$ & Bei $z = 0$ ist alles offen.\\
+$\sigma(-z) = 1-\sigma(z)$ & Symmetrisch um $\tfrac12$.\\
+$\sigma'(z) = \sigma(z)\,(1-\sigma(z))$ & Am steilsten in der Mitte.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur dritten Zeile:} $\sigma'(z) = \frac{e^{-z}}{(1+e^{-z})^{2}} = \frac{1}{1+e^{-z}}\cdot\frac{e^{-z}}{1+e^{-z}} = \sigma(z)\,(1-\sigma(z))$.
+
+\schritt{Die Deutung der Koeffizienten}
+Steigt $x_j$ um eine Einheit, so steigt der Logarithmus der Chance um $\beta_j$ --- die Chance selbst wird mit $e^{\beta_j}$ multipliziert.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$e^{\beta_j}$ ist das Chancenverhältnis je Einheit von $x_j$} --- die Größe, die in klinischen Studien als \enquote{Odds Ratio} berichtet wird.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was man minimiert}
+
+\begin{merksatz}
+\boxtitel{Der Verlust}
+Für einen Patienten mit vorhergesagter Wahrscheinlichkeit $p$ und tatsächlichem Ausgang $y \in \{0,1\}$:
+\[ \ell(p,y) = -y\,\ln p - (1-y)\,\ln(1-p) \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+\textbf{Ausgang} & \textbf{Vorhersage} & \textbf{Verlust}\\
+\midrule
+Sepsis & $p = 0{,}9$ & $-\ln0{,}9 = 0{,}105$\\
+Sepsis & $p = 0{,}5$ & $-\ln0{,}5 = 0{,}693$\\
+Sepsis & $p = 0{,}01$ & $-\ln0{,}01 = 4{,}605$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer sich sicher irrt, wird schwer bestraft.}
+\end{minipage}
+\end{center}
+
+\schritt{Woher der Verlust kommt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Band 17} & Er ist der negative Logarithmus der Likelihood --- Minimieren heißt Maximum-Likelihood-Schätzen.\\
+\textbf{Band 20} & Er ist die Kreuzentropie zwischen beobachteter und vorhergesagter Verteilung --- Minimieren heißt, die Kullback-Leibler-Divergenz zu verkleinern.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Zwei Vorgängerbände, dieselbe Größe.} Der mittlere Verlust ist die Zahl der Bits (mal $\ln 2$), die man bräuchte, um die tatsächlichen Ausgänge zu übermitteln, wenn man das Modell als Codebuch benutzt. Ein gutes Modell ist eines, das die Wirklichkeit kurz beschreibt --- Band 20, Kapitel~8.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 5.2 --- Gradient und Konvexität}
+Mit $p_i = \sigma(\vek\beta^{\!\top}\vek x_i)$ --- den Achsenabschnitt als Merkmal $x_{i0} = 1$ eingerechnet --- gilt für den Gesamtverlust $J(\vek\beta) = \sum_i \ell(p_i,y_i)$:
+\[ \nabla J(\vek\beta) = \sum_i (p_i - y_i)\,\vek x_i , \qquad \nabla^{2}J(\vek\beta) = \sum_i p_i(1-p_i)\,\vek x_i\vek x_i^{\!\top} . \]
+Insbesondere ist $J$ konvex.
+
+\schritt{Beweis}
+\kursiv{Die Ableitung nach $z$:} Mit $\sigma' = \sigma(1-\sigma)$ ist
+\[ \frac{\dd}{\dd z}\bigl[-y\ln\sigma(z)\bigr] = -y\,(1-\sigma), \qquad \frac{\dd}{\dd z}\bigl[-(1-y)\ln(1-\sigma(z))\bigr] = (1-y)\,\sigma . \]
+Summe: $-y + y\sigma + \sigma - y\sigma = \sigma - y$.
+
+\kursiv{Nach der Kettenregel} mit $z = \vek\beta^{\!\top}\vek x$ kommt der Faktor $\vek x$ hinzu. Das ist der Gradient.
+
+\kursiv{Nochmals ableiten:} $\frac{\dd}{\dd z}(\sigma - y) = \sigma(1-\sigma)$, mal $\vek x\vek x^{\!\top}$.
+
+\kursiv{Konvexität:} Für jeden Vektor $\vek v$ ist
+\[ \vek v^{\!\top}\nabla^{2}J\,\vek v = \sum_i p_i(1-p_i)\,(\vek x_i^{\!\top}\vek v)^{2} \ \ge\ 0 , \]
+denn alle Summanden sind nichtnegativ. Nach Band 19, Kapitel~7 ist $J$ konvex. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Gradient ist die Summe der Vorhersagefehler, gewichtet mit den Merkmalen} --- dieselbe Gestalt wie bei kleinsten Quadraten.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Konvexität bedeutet: Jedes lokale Minimum ist ein globales} (Band 19, Satz 7.3). Man kann nicht in einer Mulde steckenbleiben. Das ist keine Selbstverständlichkeit --- bei den Netzen aus Kapitel~11 geht genau diese Eigenschaft verloren.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie man minimiert}
+
+\begin{merksatz}
+\boxtitel{Keine geschlossene Lösung}
+Anders als bei kleinsten Quadraten lässt sich $\nabla J = \vek 0$ nicht nach $\vek\beta$ auflösen --- $\vek\beta$ steckt in den $p_i$ im Exponenten.
+
+\schritt{Gradientenabstieg}
+\[ \vek\beta \ \leftarrow\ \vek\beta - \eta\,\nabla J(\vek\beta) \]
+mit einer Schrittweite $\eta > 0$ (Band 19, Kapitel~8).
+
+\schritt{Newton-Verfahren}
+\[ \vek\beta \ \leftarrow\ \vek\beta - \bigl(\nabla^{2}J\bigr)^{-1}\nabla J \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{3.0cm}@{}}
+\toprule
+& \textbf{Gradient} & \textbf{Newton}\\
+\midrule
+je Schritt & billig & teuer: Matrix lösen\\
+Schritte & viele & wenige\\
+bei großem $p$ & geeignet & ungeeignet\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Newton-Verfahren für die logistische Regression hat einen eigenen Namen --- \enquote{iterativ neu gewichtete kleinste Quadrate} ---, weil jeder Schritt eine gewichtete Regression mit den Gewichten $p_i(1-p_i)$ ist. \textbf{Statistikprogramme benutzen es seit Jahrzehnten}; bei Millionen von Merkmalen greift man zum Gradienten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Leitfall gerechnet}
+
+\begin{merksatz}
+\boxtitel{Das angepasste Modell}
+\[ \ln\frac{p}{1-p} = -20{,}1 + 3{,}33\cdot\text{Laktat} + 0{,}120\cdot\text{Herzfrequenz} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Merkmal} & \textbf{Koeffizient} & \textbf{Chancenverh.}\\
+\midrule
+Laktat, je mmol/l & $3{,}33$ & $28$\\
+Herzfrequenz, je $10$/min & $1{,}20$ & $3{,}3$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Geprüft an $20\,000$ neuen Patienten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Merkmale} & \textbf{Trennschärfe}\\
+\midrule
+nur Herzfrequenz & $0{,}892$\\
+nur Laktat & $0{,}944$\\
+beide & $\mathbf{0{,}979}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mit zwei Merkmalen sinkt die Fehlerrate auf $2{,}4$ Prozent --- unter das Bayes-Risiko von $3{,}5$ Prozent aus Kapitel~1.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist kein Widerspruch: Das Bayes-Risiko galt für \kursiv{nur} das Laktat. \textbf{Mit einem zweiten Merkmal gibt es eine neue, niedrigere Grenze} --- genau die Aussage aus Kapitel~1, dass mehr Merkmale helfen, ein besseres Verfahren nicht. Die Zahlen sind allerdings mit Vorsicht zu lesen; der Bruchfall sagt, warum.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Perzeptron}
+
+\begin{merksatz}
+\boxtitel{Der Vorläufer}
+Man lässt die Wahrscheinlichkeit weg und will nur richtig einordnen. Etiketten $t_i \in \{-1,+1\}$.
+
+\schritt{Das Verfahren von Rosenblatt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Beginne mit $\vek w = \vek 0$.\\
+$2$ & Nimm den nächsten Punkt. Ist $t_i\,\vek w^{\!\top}\vek x_i \le 0$ --- falsch eingeordnet ---, setze $\vek w \leftarrow \vek w + t_i\,\vek x_i$.\\
+$3$ & Wiederhole, bis alle richtig liegen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Korrektur schiebt $\vek w$ in Richtung des falsch eingeordneten Punktes --- oder davon weg, je nach Etikett. \textbf{Es ist ein Gradientenabstieg}, auf einen Verlust angewandt, der nur bei Fehlern etwas kostet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 5.3 --- Novikoff, 1962}
+Es gebe einen Einheitsvektor $\vek w^{*}$ und ein $\gamma > 0$ mit $t_i\,\vek w^{*\top}\vek x_i \ge \gamma$ für alle $i$ --- die Daten sind mit Abstand $\gamma$ trennbar. Ferner sei $\|\vek x_i\| \le R$. Dann macht das Perzeptron höchstens
+\[ \left(\frac{R}{\gamma}\right)^{2} \]
+Korrekturen.
+
+\schritt{Beweis}
+Sei $\vek w_k$ der Vektor nach $k$ Korrekturen.
+
+\kursiv{Erstens --- $\vek w_k$ wächst in Richtung $\vek w^{*}$:} Jede Korrektur fügt $t_i\vek x_i$ hinzu, und $t_i\,\vek w^{*\top}\vek x_i \ge \gamma$. Also
+\[ \vek w_k^{\!\top}\vek w^{*} \ \ge\ k\,\gamma . \]
+
+\kursiv{Zweitens --- $\vek w_k$ wächst insgesamt langsam:}
+\[ \|\vek w_{k}\|^{2} = \|\vek w_{k-1}\|^{2} + 2\,t_i\,\vek w_{k-1}^{\!\top}\vek x_i + \|\vek x_i\|^{2} \ \le\ \|\vek w_{k-1}\|^{2} + R^{2} , \]
+denn korrigiert wird nur, wenn $t_i\,\vek w_{k-1}^{\!\top}\vek x_i \le 0$. Also $\|\vek w_k\|^{2} \le k\,R^{2}$.
+
+\kursiv{Drittens --- zusammen:} Nach der Ungleichung von Cauchy-Schwarz mit $\|\vek w^{*}\| = 1$:
+\[ k\,\gamma \ \le\ \vek w_k^{\!\top}\vek w^{*} \ \le\ \|\vek w_k\| \ \le\ \sqrt k\,R \]
+\[ \Longrightarrow\quad \sqrt k \ \le\ \frac{R}{\gamma} \quad\Longrightarrow\quad k \ \le\ \left(\frac{R}{\gamma}\right)^{2} \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Zahl der Fehler hängt nicht von der Zahl der Punkte ab, nicht von der Dimension --- nur vom Verhältnis zwischen Größe der Daten und Breite der Lücke.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der erste Satz des Faches, der eine Aussage über Lernen ohne Bezug auf die Dimension macht.} Er kündigt an, was Kapitel~6 und 7 ausbauen: Nicht die Zahl der Parameter entscheidet, sondern eine geometrische Größe --- hier der Abstand $\gamma$, später der Rand der Stützvektormaschine.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wenn die Daten zu gut sind}
+Lassen sich die beiden Gruppen vollständig durch eine Gerade trennen, so hat die logistische Regression \textcolor{akzent}{kein Minimum}.
+
+\schritt{Warum}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Liegt jeder Sepsispatient auf der einen Seite, so kann man $\vek\beta$ beliebig vergrößern: Alle $p_i$ rücken näher an null oder eins, und der Verlust sinkt immer weiter gegen null, ohne ihn je zu erreichen. \textbf{Das Verfahren läuft ins Unendliche}, die Koeffizienten werden riesig, und die Programme melden entweder einen Fehler oder liefern unsinnige Zahlen ohne Warnung.}
+\end{minipage}
+\end{center}
+
+\schritt{Wann das vorkommt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Wenig Fälle} & Bei seltenen Ausgängen und kleinen Stichproben häufig.\\
+\textbf{Viele Merkmale} & Bei $p \ge n$ fast immer --- es gibt dann stets eine trennende Ebene.\\
+\textbf{Ein Leck} & Ein Merkmal aus der Zukunft (Kapitel~3) trennt oft perfekt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Abhilfe}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine Strafe aus Kapitel~4 --- $\lambda\|\vek\beta\|^{2}$ --- verhindert das Davonlaufen, weil große Koeffizienten nun etwas kosten. \textbf{Die Strafe ist hier nicht Verfeinerung, sondern Voraussetzung dafür, dass es überhaupt eine Lösung gibt.} Eine perfekte Trennung in den Trainingsdaten ist zudem ein Alarmzeichen: Entweder ist das Problem trivial, oder es gibt ein Leck.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Warum der Leitfall zu gut ist}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Trennschärfe von $0{,}979$ stammt aus erzeugten Daten mit zwei sauber getrennten Normalverteilungen. \textbf{Echte Sepsismodelle erreichen $0{,}75$ bis $0{,}85$} --- intern. Die Nachprüfung von 2021 ergab $0{,}63$. Der Abstand zwischen Lehrbuchbeispiel und Klinik ist also erheblich, und er entsteht aus allem, was die Simulation weglässt: fehlende Werte, Messzeitpunkte, uneinheitliche Etiketten, andere Patienten.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.1 --- Ein Modell lesen}
+Ein Modell lautet
+\[ \ln\frac{p}{1-p} = -6 + 1{,}5\cdot\text{Laktat} + 0{,}03\cdot\text{Herzfrequenz} . \]
+Berechnen Sie die Sepsiswahrscheinlichkeit für vier Patienten und deuten Sie die Koeffizienten.
+
+\loesung
+\schritt{Schritt 1 --- Die Patienten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.2cm}P{3.0cm}P{1.2cm}P{1.2cm}@{}}
+\toprule
+\textbf{Laktat} & \textbf{HF} & $z$ & $p$ & \\
+\midrule
+$1{,}2$ & $85$ & $-6+1{,}8+2{,}55 = -1{,}65$ & $0{,}161$ & \\
+$2{,}0$ & $100$ & $-6+3{,}0+3{,}00 = 0$ & $0{,}500$ & \\
+$3{,}0$ & $110$ & $-6+4{,}5+3{,}30 = 1{,}80$ & $0{,}858$ & \\
+$4{,}0$ & $120$ & $-6+6{,}0+3{,}60 = 3{,}60$ & $0{,}973$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Beispiel dritte Zeile:} $p = \frac{1}{1+e^{-1{,}8}} = \frac{1}{1+0{,}165} = 0{,}858$.
+
+\schritt{Schritt 2 --- Die Chancenverhältnisse}
+\[ e^{1{,}5} = 4{,}48 \quad\text{je mmol/l Laktat} \]
+\[ e^{0{,}03\cdot10} = e^{0{,}3} = 1{,}35 \quad\text{je $10$/min Herzfrequenz} \]
+
+\schritt{Schritt 3 --- Eine häufige Fehldeutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{\enquote{Ein mmol/l mehr Laktat macht die Sepsis $4{,}5$-mal so wahrscheinlich} --- das ist falsch.}
+\end{minipage}
+\end{center}
+
+\kursiv{Die Chance vervierfacht sich, nicht die Wahrscheinlichkeit.} Von Laktat $2{,}0$ auf $3{,}0$ bei gleicher Herzfrequenz $100$:
+\[ z: 0 \to 1{,}5, \qquad p: 0{,}500 \to 0{,}818 \]
+Die Wahrscheinlichkeit steigt um den Faktor $1{,}64$, die Chance von $1$ auf $4{,}48$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei seltenen Ereignissen, wo $p$ klein ist, sind Chance und Wahrscheinlichkeit fast gleich --- dort stimmt die Fehldeutung näherungsweise. \textbf{Bei häufigen Ereignissen überschätzt sie den Effekt erheblich}, und in klinischen Veröffentlichungen geschieht das regelmäßig.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.2 --- Gradientenabstieg von Hand}
+Vier Patienten, ein Merkmal, kein Achsenabschnitt: $x = (-1, 0, 1, 2)$, $y = (0, 1, 0, 1)$. Führen Sie zwei Schritte mit $\eta = 0{,}5$ aus, beginnend bei $\beta = 0$.
+
+\loesung
+\schritt{Schritt 1 --- Bei $\beta = 0$}
+Alle $p_i = \sigma(0) = 0{,}5$.
+
+\[ \nabla J = \sum_i (p_i-y_i)\,x_i = (0{,}5)(-1) + (-0{,}5)(0) + (0{,}5)(1) + (-0{,}5)(2) \]
+\[ = -0{,}5 + 0 + 0{,}5 - 1{,}0 = -1{,}0 \]
+
+\[ J(0) = 4\cdot(-\ln0{,}5) = 4\cdot0{,}693 = 2{,}773 \]
+
+\schritt{Schritt 2 --- Der erste Schritt}
+\[ \beta = 0 - 0{,}5\cdot(-1{,}0) = 0{,}5 \]
+
+\schritt{Schritt 3 --- Bei $\beta = 0{,}5$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{1.0cm}P{1.8cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+$x$ & $y$ & $p = \sigma(0{,}5x)$ & $(p-y)\,x$ & $\ell$\\
+\midrule
+$-1$ & $0$ & $0{,}378$ & $-0{,}378$ & $0{,}474$\\
+$0$ & $1$ & $0{,}500$ & $0$ & $0{,}693$\\
+$1$ & $0$ & $0{,}622$ & $0{,}622$ & $0{,}974$\\
+$2$ & $1$ & $0{,}731$ & $-0{,}538$ & $0{,}313$\\
+\midrule
+& & & $\mathbf{-0{,}293}$ & $\mathbf{2{,}455}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Der zweite Schritt}
+\[ \beta = 0{,}5 - 0{,}5\cdot(-0{,}293) = 0{,}5+0{,}147 = 0{,}647 \]
+
+\schritt{Schritt 5 --- Der weitere Verlauf}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{1.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+\textbf{Schritt} & $\beta$ & $J$ & \textbf{Gradient}\\
+\midrule
+$0$ & $0{,}000$ & $2{,}773$ & $-1{,}000$\\
+$1$ & $0{,}500$ & $2{,}455$ & $-0{,}293$\\
+$2$ & $0{,}647$ & $2{,}425$ & $-0{,}118$\\
+$3$ & $0{,}706$ & $2{,}420$ & $-0{,}053$\\
+$5$ & $0{,}745$ & $2{,}418$ & $-0{,}012$\\
+\midrule
+Minimum & $0{,}756$ & $2{,}418$ & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Gradient halbiert sich etwa mit jedem Schritt} --- lineare Konvergenz im Sinne von Band 19, Kapitel~8. Die Daten sind nicht trennbar (der Patient bei $x = 0$ hat Sepsis, der bei $x = 1$ nicht), deshalb gibt es ein endliches Minimum. Mit $y = (0,0,1,1)$ wären sie trennbar, und $\beta$ würde ohne Ende wachsen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.3 --- Das Perzeptron von Hand}
+Vier Patienten mit Laktatwerten $1{,}0$ ($-$), $3{,}0$ ($+$), $1{,}5$ ($-$), $2{,}5$ ($+$). Mit dem Achsenabschnitt wird $\vek x = (1, \text{Laktat})$. Führen Sie das Perzeptron aus und vergleichen Sie mit Satz 5.3.
+
+\loesung
+\schritt{Schritt 1 --- Der Verlauf}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{1.0cm}P{1.8cm}P{1.6cm}P{2.0cm}@{}}
+\toprule
+\textbf{Laktat} & $t$ & $\vek w^{\!\top}\vek x$ & \textbf{falsch?} & \textbf{neues} $\vek w$\\
+\midrule
+$1{,}0$ & $-1$ & $0$ & ja & $(-1;\ -1)$\\
+$3{,}0$ & $+1$ & $-4$ & ja & $(0;\ 2)$\\
+$1{,}5$ & $-1$ & $3$ & ja & $(-1;\ 0{,}5)$\\
+$2{,}5$ & $+1$ & $0{,}25$ & nein & \\
+\midrule
+$1{,}0$ & $-1$ & $-0{,}5$ & nein & \\
+$3{,}0$ & $+1$ & $0{,}5$ & nein & \\
+$1{,}5$ & $-1$ & $-0{,}25$ & nein & \\
+$2{,}5$ & $+1$ & $0{,}25$ & nein & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur ersten Korrektur:} $\vek w = \vek 0 + (-1)\cdot(1;\ 1{,}0) = (-1;\ -1)$.\\
+\kursiv{Zur zweiten:} $\vek w = (-1;\ -1) + (+1)\cdot(1;\ 3{,}0) = (0;\ 2)$.\\
+\kursiv{Zur dritten:} $\vek w = (0;\ 2) + (-1)\cdot(1;\ 1{,}5) = (-1;\ 0{,}5)$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Drei Korrekturen. Die Grenze liegt bei $-1 + 0{,}5\cdot\text{Laktat} = 0$, also Laktat $= 2{,}0$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die Schranke}
+\kursiv{$R$:} Der größte Punkt ist $(1;\ 3)$ mit Länge $\sqrt{10} = 3{,}162$.
+
+\kursiv{$\gamma$:} Die beste Trennung liegt bei Laktat $2$, also $\vek w^{*} = \frac{(-2;\ 1)}{\sqrt5}$. Der kleinste Abstand betrifft die Punkte bei $1{,}5$ und $2{,}5$:
+\[ \gamma = \frac{0{,}5}{\sqrt5} = \frac{0{,}5}{2{,}236} = 0{,}224 \]
+
+\[ \left(\frac{R}{\gamma}\right)^{2} = \frac{10}{0{,}05} = 200 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Schranke erlaubt zweihundert Korrekturen --- gebraucht wurden drei.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was das über den Satz sagt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Schranke gilt für die \kursiv{ungünstigste} Reihenfolge der Punkte und ist entsprechend pessimistisch. \textbf{Worst-Case-Schranken sind in der Lerntheorie die Regel und meist weit von dem entfernt, was man beobachtet} --- ein Muster, das in Kapitel~7 und 8 wiederkehrt. Ihr Wert liegt nicht in der Zahl, sondern in der Form: Sie zeigt, wovon die Schwierigkeit abhängt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Und wenn der Achsenabschnitt fehlte?}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ohne die $1$ in $\vek x$ müsste die Grenze durch den Nullpunkt gehen --- bei Laktat $0$. \textbf{Dann gäbe es keine Trennung}, weil alle Werte positiv sind, und das Perzeptron liefe ohne Ende. Der Achsenabschnitt ist also kein technisches Beiwerk, sondern die Möglichkeit, die Schwelle zu verschieben.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Maschine, ein Buch und ein Winter}
+\Person{Frank Rosenblatt} (1928--1971), Psychologe an der Cornell University, stellte das Perzeptron 1958 vor --- als Modell des Lernens im Gehirn.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er baute es als Maschine mit $400$ Lichtsensoren, deren Gewichte über Motoren an Potentiometern verstellt wurden. \textbf{Die \kursiv{New York Times} berichtete, die Marine erwarte eine Maschine, die gehen, sprechen, sehen, schreiben und sich ihrer selbst bewusst sein werde.} Rosenblatt selbst war vorsichtiger, aber nicht sehr.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Buch}
+\Person{Marvin Minsky} und \Person{Seymour Papert} veröffentlichten 1969 das Buch \kursiv{Perceptrons}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie zeigten genau, was ein einzelnes Perzeptron nicht kann --- etwa entscheiden, ob zwei Merkmale \kursiv{verschieden} sind, die sogenannte XOR-Aufgabe. \textbf{Das Buch wurde weithin als Nachweis gelesen, dass neuronale Netze überhaupt nichts taugen}, obwohl es sich auf eine Schicht beschränkte. Die Forschungsmittel versiegten für fast zwei Jahrzehnte.}
+\end{minipage}
+\end{center}
+
+\schritt{Rosenblatts Ende}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Rosenblatt starb 1971 bei einem Bootsunfall an seinem dreiundvierzigsten Geburtstag. \textbf{Er erlebte weder die Rückkehr der Netze in den 1980er Jahren noch ihren Siegeszug nach 2012}; Kapitel~11 erzählt diese Fortsetzung.}
+\end{minipage}
+\end{center}
+
+\schritt{Die logistische Funktion}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie stammt von \Person{Pierre-François Verhulst}, der sie 1838 für das Bevölkerungswachstum vorschlug --- dieselbe Kurve, die in Band 18, Kapitel~2 das logistische Wachstum beschreibt. \textbf{Die logistische Regression hat mit Logistik im Sinne von Transport nichts zu tun}; der Name kommt über Verhulsts Kurve vom griechischen Wort für Rechnen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Klassifikation heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Die Standardfrage} & Sind lernende Verfahren besser als logistische Regression?\\
+\textbf{Kalibrierung} & Stimmen die Wahrscheinlichkeiten auch?\\
+\textbf{Implizite Neigung} & Wohin läuft der Gradientenabstieg bei trennbaren Daten?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine Übersicht aus dem Jahr 2019 verglich $71$ Studien, die klinische Vorhersagemodelle mit logistischer Regression gegen lernende Verfahren antreten ließen. \textbf{Bei fairer Durchführung fand sie keinen Vorteil der lernenden Verfahren.} Wo sie besser abschnitten, war die logistische Regression meist schlecht angepasst. Bei tabellarischen klinischen Daten mit wenigen Merkmalen ist das einfache Verfahren oft schwer zu schlagen.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei trennbaren Daten läuft $\|\vek\beta\|$ ins Unendliche --- aber seine \kursiv{Richtung} konvergiert. \textbf{Sie konvergiert gegen die Trennung mit dem größten Rand}, wie 2018 gezeigt wurde. Der Gradientenabstieg hat also eine eingebaute Vorliebe, ohne dass man eine Strafe hinzufügt. Das nächste Kapitel macht diese Trennung zum ausdrücklichen Ziel.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 5.1} & Logarithmus der Chance ist linear\\
+\textbf{Der Verlust} & Kreuzentropie $=$ negative Log-Likelihood\\
+\textbf{Satz 5.2} & Gradient $\sum(p_i-y_i)\vek x_i$, konvex\\
+\textbf{Satz 5.3} & Perzeptron: höchstens $(R/\gamma)^{2}$ Fehler\\
+\textbf{Der Bruchfall} & trennbar heißt: kein Minimum\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Perzeptron findet \kursiv{irgendeine} Trennung. Das nächste Kapitel sucht die \kursiv{beste} --- die mit dem breitesten Abstand --- und findet dabei einen Weg, lineare Verfahren auf krumme Grenzen anzuwenden.}
+\end{minipage}
+\end{center}
+\end{merksatz}

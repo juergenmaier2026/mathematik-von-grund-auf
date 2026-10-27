@@ -1,0 +1,300 @@
+\chapter{Für wen es wirkt}
+
+\section{Der Durchschnitt verbirgt}
+
+\begin{merksatz}
+\boxtitel{Ein Effekt, vier Zahlen}
+$300\,000$ Patienten, Behandlung ausgelost. Der Effekt hängt vom Alter ab: bei den Jüngsten $-0{,}20$, bei den Ältesten $0$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Alter} & \textbf{geschätzt} & \textbf{wahr}\\
+\midrule
+$40$--$55$ & $-0{,}171$ & $-0{,}170$\\
+$55$--$70$ & $-0{,}107$ & $-0{,}110$\\
+$70$--$85$ & $-0{,}053$ & $-0{,}050$\\
+$85$--$90$ & $-0{,}029$ & $-0{,}010$\\
+\midrule
+\textbf{alle} & \textbf{$-0{,}100$} & $-0{,}100$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Durchschnittseffekt von zehn Punkten gilt für niemanden: Die Jungen gewinnen doppelt so viel, die Alten nichts.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die zweite Warnung des Vorworts in Zahlen.} Ein Durchschnittseffekt ist ein Mittelwert über eine Bevölkerung --- und wie jeder Mittelwert sagt er nichts über die Streuung. Er kann sogar positiv sein, während die Behandlung der Hälfte schadet; das sieht man ihm nicht an.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was man schätzen will}
+\[ \tau(\vek z) = \mathbb{E}\bigl[Y(1) - Y(0) \ \big|\ Z = \vek z\bigr] \]
+--- der Effekt bei Patienten mit den Merkmalen $\vek z$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Nicht} & der Effekt \kursiv{dieses} Patienten --- der bleibt nach Satz 2.2 unbekannt.\\
+\textbf{Sondern} & der Durchschnitt über alle, die ihm in den gemessenen Merkmalen gleichen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Je mehr Merkmale, desto näher kommt man dem Einzelnen --- und desto größer wird die Streuung}, denn in jeder Zelle bleiben weniger Patienten. Es ist der Zielkonflikt aus Band 22, Kapitel~2, nun auf eine Differenz angewandt: Man schätzt nicht einen Ausgang, sondern den Unterschied zweier Ausgänge, und Differenzen sind erheblich unschärfer als ihre Bestandteile.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie man es schätzt}
+
+\begin{merksatz}
+\boxtitel{Drei Wege}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Untergruppen} & Vorher festgelegte Gruppen getrennt auswerten. Ehrlich, aber grob und schnell erschöpft.\\
+\textbf{Wechselwirkung} & Ein Term $X\cdot Z$ im Modell. Unterstellt eine Form.\\
+\textbf{Kausale Wälder} & Bäume, die nicht nach dem Ausgang, sondern nach dem \kursiv{Unterschied} der Ausgänge teilen --- Band 22, Kapitel~9.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein kausaler Wald sucht die Aufteilung, bei der sich die geschätzten Effekte der beiden Gruppen am stärksten unterscheiden. \textbf{Der entscheidende Kunstgriff heißt Ehrlichkeit}: Eine Hälfte der Daten bestimmt, wo geteilt wird, die andere schätzt in den entstandenen Blättern. Ohne diese Trennung findet der Wald Unterschiede, die er selbst erzeugt hat --- das Leck aus Band 22, Kapitel~3, in kausaler Gestalt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Untergruppen, die keine sind}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Multiples Testen} & Zwanzig Untergruppen ergeben bei reinem Zufall eine \enquote{bedeutsame}.\\
+\textbf{Skalenabhängig} & Ein Effekt kann auf der Differenzskala schwanken und auf der Verhältnisskala konstant sein --- und umgekehrt.\\
+\textbf{Streuung} & Der Effekt in einer Untergruppe wird aus einer Differenz zweier Differenzen geschätzt --- vierfache Fallzahl für gleiche Genauigkeit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Senkt eine Behandlung das Risiko überall um $20$ Prozent \kursiv{relativ}, so beträgt die absolute Senkung bei einem Grundrisiko von $40$ Prozent acht Punkte, bei zehn Prozent nur zwei. \textbf{Auf der Verhältnisskala gibt es dann keine Heterogenität, auf der Differenzskala erhebliche} --- und beide Beschreibungen sind richtig. Für die Behandlungsentscheidung zählt die absolute, denn sie sagt, wie viele Patienten man behandeln muss.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Daraus folgt: Die wichtigste Quelle von Heterogenität ist das Grundrisiko}, nicht eine besondere Empfindlichkeit. Wer wissen will, wem eine Behandlung am meisten nützt, schätzt zuerst das Risiko ohne Behandlung --- das ist eine Vorhersageaufgabe im Sinne von Band 22 --- und wendet darauf den relativen Effekt an. Dieses zweistufige Vorgehen ist robuster als die unmittelbare Schätzung von $\tau(\vek z)$.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- Wie viele Patienten je Untergruppe?}
+Der Gesamteffekt beträgt $-0{,}10$ bei einem Grundrisiko von $0{,}30$. Wie viele Patienten braucht man, um einen Unterschied von $0{,}10$ zwischen zwei Untergruppen nachzuweisen?
+
+\loesung
+\schritt{Schritt 1 --- Der Haupteffekt}
+Nach Kapitel~3:
+\[ n = \frac{(1{,}96+0{,}84)^{2}\,\bigl[0{,}30\cdot0{,}70 + 0{,}20\cdot0{,}80\bigr]}{0{,}10^{2}} = \frac{7{,}85\cdot0{,}37}{0{,}01} = 291 \ \text{je Gruppe} \]
+
+\schritt{Schritt 2 --- Der Unterschied zweier Effekte}
+Er ist eine Differenz zweier Differenzen; seine Varianz ist die Summe von vier Varianzen statt zweier:
+\[ n = 4\cdot291 = 1164 \ \text{je Gruppe} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Frage} & \textbf{je Gruppe} & \textbf{gesamt}\\
+\midrule
+Wirkt es? & $291$ & $582$\\
+Wirkt es verschieden? & $1164$ & $\mathbf{4656}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Achtmal so viele Patienten für die Frage nach dem Unterschied.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Deshalb sind Untergruppenbefunde aus Studien, die für den Haupteffekt geplant wurden, fast immer unzuverlässig} --- sie haben für diese Frage eine Trennschärfe von vielleicht zwanzig Prozent. Ein \enquote{kein Effekt in dieser Untergruppe} heißt dann meist nur: zu wenige Patienten.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- Behandeln oder nicht?}
+Mit dem Effektverlauf aus Abschnitt 14.1: Welche Politik ist die beste, wenn die Behandlung Nebenwirkungen im Wert von $0{,}03$ Punkten hat?
+
+\loesung
+\schritt{Schritt 1 --- Die Schwelle}
+Behandeln lohnt, solange $\tau(\text{Alter}) < -0{,}03$:
+\[ -0{,}20 + 0{,}004\,(\text{Alter}-40) < -0{,}03 \quad\Longrightarrow\quad \text{Alter} < 82{,}5 \]
+
+\schritt{Schritt 2 --- Der Gewinn der drei Politiken}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Politik} & \textbf{Nutzen} & \\
+\midrule
+niemanden & $0$ & \\
+alle & $-0{,}100+0{,}030 = -0{,}070$ & \\
+unter $82{,}5$ & $\mathbf{-0{,}072}$ & \textcolor{gruen}{beste}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur letzten Zeile:} $85$ Prozent der Patienten sind jünger als $82{,}5$; ihr mittlerer Effekt beträgt $-0{,}115$, abzüglich $0{,}03$ ergibt $0{,}85\cdot(-0{,}085) = -0{,}072$; bei den Älteren geht nichts verloren, weil sie unbehandelt bleiben.
+
+\schritt{Schritt 3 --- Die Einordnung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Gewinn durch gezieltes Behandeln ist hier klein} --- zwei Tausendstel gegenüber \enquote{alle behandeln}. Das ist typisch: Solange der Effekt überall dasselbe Vorzeichen hat, bringt die Auswahl wenig. Lohnend wird sie erst, wenn die Behandlung bei einem Teil der Patienten \kursiv{schadet} --- und dann hängt alles daran, ob man diesen Teil zuverlässig erkennt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Und die Unsicherheit}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die geschätzte Schwelle von $82{,}5$ Jahren hat selbst ein Vertrauensintervall, und zwar ein breites --- in Aufgabe 14.1 wurde sichtbar, wie teuer die Schätzung von Unterschieden ist. \textbf{Eine Politik, die an einer ungenau geschätzten Schwelle hängt, kann schlechter sein als gar keine Auswahl.} Man vergleicht deshalb Politiken nicht am geschätzten Optimum, sondern an ihrem Nutzen unter Unsicherheit.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Skala und Heterogenität}
+Eine Behandlung senkt das Risiko überall um $25$ Prozent relativ. Ist der Effekt heterogen?
+
+\loesung
+\schritt{Schritt 1 --- Die absoluten Effekte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.2cm}P{2.0cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+\textbf{Grundrisiko} & \textbf{mit} & \textbf{Differenz} & \textbf{Zahl nötig}\\
+\midrule
+$0{,}40$ & $0{,}30$ & $-0{,}10$ & $10$\\
+$0{,}20$ & $0{,}15$ & $-0{,}05$ & $20$\\
+$0{,}05$ & $0{,}0375$ & $-0{,}0125$ & $80$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{\enquote{Zahl nötig} ist die Zahl der Behandelten je verhindertem Ereignis.}
+
+\schritt{Schritt 2 --- Die Antwort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Auf der Verhältnisskala nein, auf der Differenzskala ja --- achtfach.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was für die Praxis zählt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Spalte entscheidet über den Einsatz: \textbf{Bei einem Grundrisiko von fünf Prozent muss man achtzig Patienten behandeln, um ein Ereignis zu verhindern} --- bei vierzig Prozent nur zehn. Ist die Behandlung teuer oder belastend, so lohnt sie im einen Fall und im anderen nicht, obwohl sie \enquote{gleich gut wirkt}.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Folgerung für Leitlinien}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine Leitlinie sollte den relativen Effekt aus Studien mit dem individuellen Grundrisiko aus einem Vorhersagemodell verbinden} --- statt Untergruppen nach Alter oder Geschlecht zu bilden. Damit treffen sich Band 22 und dieser Band an der Stelle, auf die es klinisch ankommt: Die Vorhersage sagt, wie gefährdet jemand ist; der kausale Schluss sagt, was die Behandlung daran ändert.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Die Untergruppe der Zwillinge}
+In einer großen Herzstudie der 1980er Jahre wurde die Wirkung von Aspirin nach Sternzeichen ausgewertet.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Bei Zwillingen und Waagen zeigte sich kein Nutzen, in allen anderen Zeichen ein deutlicher. \textbf{Die Verfasser druckten das Ergebnis ausdrücklich ab, um zu zeigen, wie wenig Untergruppenanalysen wert sind.} Der Scherz wird seither in jeder Methodenvorlesung erzählt --- und die Praxis der Untergruppenauswertung hat er nicht beendet.}
+\end{minipage}
+\end{center}
+
+\schritt{Und ein ernster Fall}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Mehrfach wurden Medikamente aufgrund von Untergruppenbefunden gezielt eingesetzt und später widerlegt --- oder umgekehrt Patientengruppen ausgeschlossen, denen das Mittel geholfen hätte. \textbf{Die Zulassungsbehörden verlangen deshalb heute, Untergruppen vorab zu benennen} und den Wechselwirkungsterm zu prüfen, statt Gruppen getrennt auszuwerten.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Einzelfall heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Kausale Wälder} & Heterogenität ohne vorgegebene Form, mit Vertrauensintervallen.\\
+\textbf{Politiklernen} & Behandlungsregeln, die den Nutzen unter Nebenbedingungen maximieren.\\
+\textbf{Risikobasierte Auswertung} & Studien nach vorhergesagtem Grundrisiko schichten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man teilt die Studienteilnehmer nach ihrem \kursiv{vorhergesagten} Risiko in Viertel und berichtet den absoluten Effekt je Viertel. \textbf{Das ist eine einzige, vorab festgelegte Untergruppenbildung statt vieler} --- und sie trifft die klinisch wichtigste Quelle von Heterogenität. Mehrere Fachgesellschaften empfehlen dieses Vorgehen inzwischen als Standard.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{$\tau(\vek z)$} & Durchschnitt über Gleichartige, nicht der Einzelne\\
+\textbf{Drei Wege} & Untergruppen, Wechselwirkung, kausale Wälder\\
+\textbf{Ehrlichkeit} & teilen und schätzen getrennt\\
+\textbf{Achtfach} & Fallzahl für Unterschiede\\
+\textbf{Skala} & Heterogenität hängt an ihr\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~V. Das letzte Kapitel zieht Bilanz --- und kehrt ein letztes Mal zur Tabelle aus Kapitel~1 zurück.}
+\end{minipage}
+\end{center}
+\end{merksatz}

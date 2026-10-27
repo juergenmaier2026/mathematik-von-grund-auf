@@ -1,0 +1,533 @@
+\part{Lineare Verfahren}
+
+\chapter{Die Freiheit begrenzen}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Zwanzig Laborwerte, vierzig Patienten}
+Das Klinikum will das Laktat in sechs Stunden vorhersagen --- aus zwanzig Laborwerten, die bei Aufnahme bestimmt werden. Es liegen Daten von vierzig Patienten vor.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Patienten} & $n = 40$\\
+\textbf{Merkmale} & $p = 20$, untereinander stark verbunden (Korrelation $0{,}7$)\\
+\textbf{Wirklich wichtig} & drei davon --- aber das weiß niemand\\
+\textbf{Rauschen} & $\sigma^{2} = 1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Verbundenheit ist realistisch: Kreatinin und Harnstoff steigen gemeinsam, Leberwerte ebenso, Entzündungswerte auch. \textbf{Das Verhältnis $p/n = 1/2$ ist ebenfalls realistisch} --- und nach Satz 2.2 ist der Optimismus dann bereits $2\sigma^{2}\cdot21/40 \approx 1$, also so groß wie das Rauschen selbst.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Kleinste Quadrate und ihr Problem}
+
+\begin{merksatz}
+\boxtitel{Die gewöhnliche Lösung}
+Mit der Merkmalsmatrix $X$ ($n$ Zeilen, $p$ Spalten) und dem Zielvektor $\vek y$ sucht man
+\[ \hat{\vek\beta} = \operatorname*{arg\,min}_{\vek\beta}\ \|\vek y - X\vek\beta\|^{2} . \]
+
+\kursiv{Nach Band 17, Kapitel~7} lautet die Lösung
+\[ \hat{\vek\beta} = (X^{\!\top}X)^{-1}X^{\!\top}\vek y . \]
+
+\schritt{Wo sie versagt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{$p > n$} & $X^{\!\top}X$ ist nicht invertierbar. Es gibt unendlich viele Lösungen mit Trainingsfehler null.\\
+\textbf{Verbundene Merkmale} & $X^{\!\top}X$ ist fast nicht invertierbar. Die Lösung existiert, schwankt aber gewaltig.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Wie stark die Verbundenheit schadet}
+Bei zwei Merkmalen mit Korrelation $\rho$ wächst die Varianz jedes Koeffizienten um den Faktor
+\[ \frac{1}{1-\rho^{2}} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{2.6cm}@{}}
+\toprule
+$\rho$ & \textbf{Faktor}\\
+\midrule
+$0$ & $1$\\
+$0{,}5$ & $1{,}3$\\
+$0{,}9$ & $5{,}3$\\
+$0{,}99$ & $50$\\
+$0{,}999$ & $500$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man kennt das aus Band 17 als Kollinearität. \textbf{Das Verfahren kann nicht entscheiden, welchem der beiden fast gleichen Merkmale es die Wirkung zuschreiben soll} --- und schwankt von Stichprobe zu Stichprobe zwischen großen positiven und großen negativen Werten, die sich gegenseitig fast aufheben. Die Vorhersage bleibt dabei oft vernünftig, die Koeffizienten nicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Kammregression}
+
+\begin{definition}
+\boxtitelm{Definition 4.1 --- Kammregression}
+\[ \hat{\vek\beta}_{\lambda} = \operatorname*{arg\,min}_{\vek\beta}\ \|\vek y - X\vek\beta\|^{2} + \lambda\,\|\vek\beta\|^{2} \]
+mit einer Strafstärke $\lambda > 0$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Lösung}
+\schritt{Satz 4.2}
+\[ \hat{\vek\beta}_{\lambda} = (X^{\!\top}X + \lambda I)^{-1}X^{\!\top}\vek y \]
+--- und die Matrix $X^{\!\top}X+\lambda I$ ist für jedes $\lambda > 0$ invertierbar.
+
+\schritt{Beweis}
+\kursiv{Die Lösung:} Ableiten nach $\vek\beta$ und null setzen:
+\[ -2X^{\!\top}(\vek y - X\vek\beta) + 2\lambda\vek\beta = \vek 0 \quad\Longrightarrow\quad (X^{\!\top}X+\lambda I)\,\vek\beta = X^{\!\top}\vek y \]
+
+\kursiv{Die Invertierbarkeit:} Für jeden Vektor $\vek v \ne \vek 0$ gilt
+\[ \vek v^{\!\top}(X^{\!\top}X+\lambda I)\,\vek v = \|X\vek v\|^{2} + \lambda\,\|\vek v\|^{2} \ >\ 0 . \]
+Eine Matrix mit dieser Eigenschaft hat nur positive Eigenwerte und ist daher invertierbar (Band 2, Kapitel~10). $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Strafe macht aus einem schlecht gestellten Problem ein gut gestelltes.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was die Strafe tut}
+Man zerlege $X$ nach Singulärwerten: $X = UDV^{\!\top}$ mit den Singulärwerten $d_1 \ge d_2 \ge \cdots$ (Band 2, Kapitel~11).
+
+\schritt{Die Vorhersage in dieser Zerlegung}
+\kursiv{Kleinste Quadrate:}
+\[ X\hat{\vek\beta} = \sum_j \vek u_j\,\bigl(\vek u_j^{\!\top}\vek y\bigr) \]
+
+\kursiv{Kammregression:}
+\[ X\hat{\vek\beta}_{\lambda} = \sum_j \vek u_j\,\frac{d_j^{2}}{d_j^{2}+\lambda}\,\bigl(\vek u_j^{\!\top}\vek y\bigr) \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Richtung wird mit dem Faktor $\frac{d_j^{2}}{d_j^{2}+\lambda}$ geschrumpft --- die schwachen Richtungen am stärksten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{3.0cm}@{}}
+\toprule
+\textbf{Richtung} & $d_j^{2}$ & \textbf{Faktor bei $\lambda = 1$}\\
+\midrule
+stark & $100$ & $0{,}99$\\
+mittel & $5$ & $0{,}83$\\
+schwach & $0{,}1$ & $0{,}09$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Verbindung zu Kapitel 2}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In Aufgabe 2.2 war der beste Schrumpffaktor $\frac{\mu^{2}}{\mu^{2}+\sigma^{2}}$ --- Signal durch Signal plus Rauschen. \textbf{Hier steht dieselbe Gestalt}: $d_j^{2}$ misst, wie viel Information die Daten in Richtung $j$ enthalten, und $\lambda$ spielt die Rolle des Rauschens. Richtungen, in denen die Daten wenig streuen, sind unzuverlässig geschätzt und werden deshalb gedämpft. Das ist genau, was verbundene Merkmale erzeugen: eine Richtung mit fast keiner Streuung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Lasso}
+
+\begin{definition}
+\boxtitelm{Definition 4.3 --- Lasso}
+\[ \hat{\vek\beta}_{\lambda} = \operatorname*{arg\,min}_{\vek\beta}\ \tfrac12\|\vek y - X\vek\beta\|^{2} + \lambda\,\|\vek\beta\|_{1}, \qquad \|\vek\beta\|_{1} = \sum_j |\beta_j| \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Unterschied: Beträge statt Quadrate}
+\schritt{Satz 4.4 --- die Lösung bei unabhängigen Merkmalen}
+Sind die Spalten von $X$ orthonormal und ist $b_j$ der Koeffizient nach kleinsten Quadraten, so gilt
+\[ \hat\beta_j = \operatorname{sign}(b_j)\,\bigl(|b_j| - \lambda\bigr)_{+} , \]
+wobei $(z)_{+} = \max\{z,0\}$.
+
+\schritt{Beweis}
+Bei orthonormalen Spalten zerfällt das Problem in $p$ unabhängige eindimensionale:
+\[ \min_{\beta}\ \tfrac12(b-\beta)^{2} + \lambda\,|\beta| . \]
+
+\kursiv{Fall $\beta > 0$:} Ableitung $-(b-\beta)+\lambda = 0$, also $\beta = b-\lambda$ --- zulässig nur, wenn $b > \lambda$.
+
+\kursiv{Fall $\beta < 0$:} Ebenso $\beta = b+\lambda$ --- zulässig nur, wenn $b < -\lambda$.
+
+\kursiv{Sonst:} Für $|b| \le \lambda$ ist $\beta = 0$ das Minimum, denn jede Abweichung von null kostet $\lambda|\beta|$ und bringt höchstens $|b|\,|\beta|$. $\blacksquare$
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!55, line width=0.6pt] (-3,0) -- (3,0);
+\draw[grau!55, line width=0.6pt] (0,-2.2) -- (0,2.2);
+\draw[grau!55, line width=0.8pt, dashed] (-2.2,-2.2) -- (2.2,2.2);
+\draw[tief, line width=1.4pt] (-2.8,-1.8) -- (-1,0) -- (1,0) -- (2.8,1.8);
+\draw[akzent, line width=1.2pt] (-2.8,-1.4) -- (2.8,1.4);
+\node[font=\scriptsize, color=grau, anchor=north] at (1,-0.08) {$\lambda$};
+\node[font=\scriptsize, color=grau, anchor=north] at (-1,-0.08) {$-\lambda$};
+\node[font=\scriptsize, color=tief, anchor=west] at (2.85,1.85) {Lasso};
+\node[font=\scriptsize, color=akzent, anchor=west] at (2.85,1.3) {Kamm};
+\node[font=\scriptsize, color=grau, anchor=west] at (2.25,2.25) {ohne Strafe};
+\node[font=\scriptsize\itshape, color=grau] at (0,-2.6) {geschätzter Koeffizient über dem ungestraften};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{6.4cm}@{}}
+\toprule
+\textbf{Kamm} & teilt jeden Koeffizienten durch $1+\lambda$. Nichts wird null.\\
+\textbf{Lasso} & zieht von jedem $\lambda$ ab. Was kleiner ist als $\lambda$, wird \textcolor{akzent}{genau null}.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Lasso wählt Merkmale aus --- es setzt die unwichtigen auf null.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum Beträge das bewirken}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Betragsfunktion hat bei null einen Knick. \textbf{Eine Strafe mit Knick hält den Koeffizienten bei null fest}, solange der Nutzen einer Abweichung kleiner ist als die Steigung des Knicks. Das Quadrat hat bei null die Steigung null und kann deshalb nie etwas festhalten --- es drückt nur. Geometrisch: Die Menge $\|\vek\beta\|_{1} \le t$ ist eine Raute mit Ecken auf den Achsen, und dort berührt man sie am häufigsten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Leitfall gerechnet}
+
+\begin{merksatz}
+\boxtitel{Dreihundert Wiederholungen}
+Die Strafstärke wurde jeweils durch fünffache Kreuzvalidierung gewählt; geprüft wurde an $2000$ neuen Patienten.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Testfehler} & \textbf{über Rauschen}\\
+\midrule
+kleinste Quadrate & $2{,}19$ & $1{,}19$\\
+Kammregression & $1{,}35$ & $0{,}35$\\
+Lasso & $\mathbf{1{,}31}$ & $\mathbf{0{,}31}$\\
+\midrule
+bestmöglich & $1{,}00$ & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide Strafverfahren verringern den vermeidbaren Fehler auf weniger als ein Drittel.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Überschuss der kleinsten Quadrate von $1{,}19$ liegt nahe an dem, was Satz 2.2 vorhersagt. \textbf{Das Lasso ist hier geringfügig besser als der Kamm}, weil in Wahrheit nur drei Merkmale wirken --- seine Neigung zu dünn besetzten Lösungen passt zur Aufgabe. Wären alle zwanzig Merkmale ein wenig wichtig, läge der Kamm vorn. Das ist Satz 1.5 in praktischer Gestalt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was das Lasso auswählt}
+Im Leitfall wählte das Lasso im Mittel $5{,}7$ Merkmale --- davon $1{,}8$ der drei wahren.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{3.2cm}@{}}
+\toprule
+\textbf{Merkmal} & \textbf{gewählt in}\\
+\midrule
+wahres Merkmal 1 & $89\,\%$\\
+wahres Merkmal 2 & $42\,\%$\\
+wahres Merkmal 3 & $55\,\%$\\
+jedes falsche & $22\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein wahres Merkmal wird in mehr als der Hälfte der Fälle übersehen --- und jedes falsche in jedem fünften Fall aufgenommen.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Grund}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei verbundenen Merkmalen kann ein falsches ein wahres vertreten --- es trägt dieselbe Information, weil beide gemeinsam schwanken. \textbf{Das Lasso wählt dann eines davon, mehr oder weniger zufällig}, und in der nächsten Stichprobe ein anderes. Die Vorhersage bleibt gut, die Auswahl nicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Folgerung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die vom Lasso gewählten Merkmale sind keine Ursachen und oft nicht einmal die wichtigsten.} Wer aus der Auswahl schließt, welche Laborwerte die Sepsis \enquote{erklären}, verwechselt Vorhersage mit Erklärung --- die dritte Warnung des Vorworts. Gegen die Instabilität hilft, die Auswahl an vielen Teilstichproben zu wiederholen und nur zu berichten, was fast immer gewählt wird; gegen die Verwechslung hilft nichts als Vorsicht.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und ein technischer Vorbehalt}
+Beide Strafen hängen von der Einheit der Merkmale ab.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Misst man das Kreatinin in $\mu$mol/l statt in mg/dl, so wird sein Koeffizient $88$-mal kleiner --- und damit viel weniger bestraft. \textbf{Man muss die Merkmale vorher auf gleiche Streuung bringen}, sonst entscheidet die Wahl der Einheit, was ausgewählt wird. Und nach Kapitel~3 gehört diese Normierung \kursiv{in} die Kreuzvalidierung, nicht davor.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Kammregression mit einem Merkmal}
+Ein Merkmal, drei Patienten, ohne Achsenabschnitt: $x = (1,2,3)$, $y = (2,3,5)$. Berechnen Sie den Koeffizienten für $\lambda = 0$, $1$, $7$ und $\infty$.
+
+\loesung
+\schritt{Schritt 1 --- Die Formel in einer Dimension}
+Satz 4.2 wird zu
+\[ \hat\beta_{\lambda} = \frac{\sum x_i y_i}{\sum x_i^{2} + \lambda} . \]
+
+\schritt{Schritt 2 --- Die Summen}
+\[ \sum x_i y_i = 1\cdot2 + 2\cdot3 + 3\cdot5 = 2+6+15 = 23 \]
+\[ \sum x_i^{2} = 1+4+9 = 14 \]
+
+\schritt{Schritt 3 --- Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+$\lambda$ & \textbf{Rechnung} & $\hat\beta$ & \textbf{Faktor}\\
+\midrule
+$0$ & $23/14$ & $1{,}643$ & $1{,}00$\\
+$1$ & $23/15$ & $1{,}533$ & $0{,}93$\\
+$7$ & $23/21$ & $1{,}095$ & $0{,}67$\\
+$\infty$ & --- & $0$ & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur letzten Spalte:} $\frac{14}{14+\lambda}$, also $\frac{d^{2}}{d^{2}+\lambda}$ mit $d^{2} = 14$.
+
+\schritt{Schritt 4 --- Die Probe}
+Bei $\lambda = 7$: $1{,}643\cdot\frac{14}{21} = 1{,}643\cdot0{,}667 = 1{,}095$ \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Strafe wirkt umso schwächer, je mehr Information die Daten haben.} Bei hundert Patienten mit ähnlichen Werten wäre $\sum x_i^{2}$ etwa $470$, und $\lambda = 7$ schrumpfte nur um anderthalb Prozent. Man muss $\lambda$ also mit $n$ zusammen sehen --- was die Kreuzvalidierung von selbst erledigt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Das Lasso von Hand}
+Bei orthonormalen Merkmalen liefern kleinste Quadrate die Koeffizienten
+\[ \vek b = (0{,}90;\ -0{,}40;\ 0{,}15;\ 0{,}05;\ -0{,}60) . \]
+Berechnen Sie Lasso und Kammregression für $\lambda = 0{,}2$ und $\lambda = 0{,}5$.
+
+\loesung
+\schritt{Schritt 1 --- Das Lasso nach Satz 4.4}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+$b_j$ & $\lambda = 0{,}2$ & $\lambda = 0{,}5$\\
+\midrule
+$0{,}90$ & $0{,}70$ & $0{,}40$\\
+$-0{,}40$ & $-0{,}20$ & $\mathbf{0}$\\
+$0{,}15$ & $\mathbf{0}$ & $\mathbf{0}$\\
+$0{,}05$ & $\mathbf{0}$ & $\mathbf{0}$\\
+$-0{,}60$ & $-0{,}40$ & $-0{,}10$\\
+\midrule
+\textbf{ungleich null} & $3$ & $2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Beispiel zweite Zeile, $\lambda = 0{,}5$:} $|{-0{,}40}| - 0{,}5 = -0{,}10 < 0$, also null.
+
+\schritt{Schritt 2 --- Die Kammregression}
+Bei orthonormalen Merkmalen und der Strafe $\frac{\lambda}{2}\|\vek\beta\|^{2}$ passend zu Definition 4.3 gilt $\hat\beta_j = \frac{b_j}{1+\lambda}$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+$b_j$ & $\lambda = 0{,}2$ & $\lambda = 0{,}5$\\
+\midrule
+$0{,}90$ & $0{,}750$ & $0{,}600$\\
+$-0{,}40$ & $-0{,}333$ & $-0{,}267$\\
+$0{,}15$ & $0{,}125$ & $0{,}100$\\
+$0{,}05$ & $0{,}042$ & $0{,}033$\\
+$-0{,}60$ & $-0{,}500$ & $-0{,}400$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Kamm schrumpft alle im selben Verhältnis. Das Lasso zieht von allen dasselbe ab --- und die kleinen verschwinden.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das hat eine unerwünschte Nebenwirkung: \textbf{Das Lasso verkleinert auch die großen Koeffizienten um volle $\lambda$} --- der wichtigste wird bei $\lambda = 0{,}5$ von $0{,}90$ auf $0{,}40$ gedrückt, mehr als halbiert. Deshalb passt man in der Praxis oft das Modell nach der Auswahl noch einmal ohne Strafe an, nur mit den gewählten Merkmalen. Das hebt die Verzerrung auf, bringt aber die Varianz teilweise zurück.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Zwei fast gleiche Merkmale}
+Kreatinin und Harnstoff haben bei den Patienten eine Korrelation von $\rho = 0{,}95$. Beide sind auf Streuung eins gebracht. Die Varianz eines Koeffizienten wäre bei unverbundenen Merkmalen $0{,}05$. Wie groß ist sie hier, und was bewirkt der Kamm?
+
+\loesung
+\schritt{Schritt 1 --- Der Varianzfaktor}
+\[ \frac{1}{1-\rho^{2}} = \frac{1}{1-0{,}9025} = \frac{1}{0{,}0975} = 10{,}26 \]
+
+\schritt{Schritt 2 --- Die Varianz}
+\[ 0{,}05\cdot10{,}26 = 0{,}513 \]
+\[ \text{Streuung} = \sqrt{0{,}513} = 0{,}716 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Koeffizient von etwa $0{,}5$ schwankt um $\pm0{,}72$} --- sein Vorzeichen ist praktisch nicht bestimmbar.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die beiden Richtungen}
+Die Matrix $X^{\!\top}X/n$ der beiden Merkmale ist
+\[ \begin{pmatrix} 1 & 0{,}95\\ 0{,}95 & 1\end{pmatrix} \]
+mit den Eigenwerten $1+\rho = 1{,}95$ (Summe beider) und $1-\rho = 0{,}05$ (Differenz beider).
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{1.8cm}P{3.2cm}@{}}
+\toprule
+\textbf{Richtung} & \textbf{Eigenwert} & \textbf{Kammfaktor, $\lambda/n = 0{,}1$}\\
+\midrule
+Summe & $1{,}95$ & $1{,}95/2{,}05 = 0{,}95$\\
+Differenz & $0{,}05$ & $0{,}05/0{,}15 = 0{,}33$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Kamm lässt die gemeinsame Wirkung fast unberührt und dämpft den Unterschied auf ein Drittel.} Das ist genau richtig: Wie stark \enquote{die Nierenwerte} insgesamt wirken, lässt sich gut schätzen; welcher der beiden es ist, kaum. Der Kamm verteilt die Wirkung dann ungefähr gleich auf beide, statt zufällig einem den Löwenanteil zu geben.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Und das Lasso?}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es wählt eines der beiden und setzt das andere auf null --- welches, hängt vom Zufall der Stichprobe ab. \textbf{Für die Vorhersage macht das wenig, für die Deutung viel.} Wer beides will, benutzt eine Mischung beider Strafen, das sogenannte elastische Netz, das verbundene Merkmale gemeinsam aufnimmt oder gemeinsam verwirft.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Tichonow, Hoerl und Tibshirani}
+\Person{Andrei Tichonow} (1906--1993) führte die Idee 1943 in der Sowjetunion ein, um schlecht gestellte Probleme der Geophysik zu lösen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Wer aus Messungen an der Erdoberfläche auf Gesteinsschichten schließen will, hat mehr Unbekannte als Messungen. Tichonow fügte eine Strafe für \enquote{unruhige} Lösungen hinzu. \textbf{In der Numerik heißt das Verfahren bis heute Tichonow-Regularisierung} --- es ist dasselbe wie die Kammregression, dreißig Jahre früher und in anderer Sprache.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Name}
+\Person{Arthur Hoerl} und \Person{Robert Kennard} veröffentlichten 1970 die Kammregression für die Statistik.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Name stammt aus Hoerls früherer Arbeit über Wirkungsflächen in der Chemie, wo er von \enquote{Kammanalyse} sprach --- der Suche nach Graten in einer Fläche. \textbf{Der Zusammenhang mit der heutigen Bedeutung ist eher lose}, der Name hat sich trotzdem gehalten.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Lasso}
+\Person{Robert Tibshirani} veröffentlichte das Lasso 1996.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Name ist eine Abkürzung, soll aber zugleich an das Lasso des Viehhirten erinnern, das Merkmale einfängt. \textbf{Die Idee war nicht ganz neu} --- Geophysiker hatten die Betragsstrafe schon in den 1970er Jahren verwendet ---, aber Tibshirani gab die statistische Begründung. Der Aufsatz gehört zu den meistzitierten der Statistik überhaupt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Strafen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Nach der Auswahl schließen} & Gültige Vertrauensintervalle für Koeffizienten, die das Lasso ausgewählt hat.\\
+\textbf{Stabilitäts\-auswahl} & Nur berichten, was über viele Teilstichproben stabil gewählt wird.\\
+\textbf{Komprimiertes Messen} & Aus wenigen Messungen ein dünn besetztes Signal rekonstruieren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wählt man Merkmale anhand der Daten aus und rechnet dann mit denselben Daten ein Vertrauensintervall, so ist dieses zu schmal --- dasselbe Leck wie in Kapitel~3. \textbf{Seit etwa 2014 gibt es Verfahren, die das korrigieren}, indem sie die Auswahl in die Rechnung einbeziehen. Die Intervalle werden dabei deutlich breiter, was der ehrlichere Befund ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Mathematik des Lassos erlaubt es, ein Bild aus weit weniger Messungen zu rekonstruieren, als es Bildpunkte hat --- sofern es in einer geeigneten Darstellung dünn besetzt ist. \textbf{Magnetresonanztomographen nutzen das seit einigen Jahren}, um Aufnahmezeiten erheblich zu verkürzen. Das ist eine der wenigen Stellen, an denen ein Satz der Lerntheorie unmittelbar in einem Gerät steckt, das Patienten begegnet.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Kollinearität} & Varianzfaktor $1/(1-\rho^{2})$\\
+\textbf{Satz 4.2} & Kamm: $(X^{\!\top}X+\lambda I)^{-1}X^{\!\top}\vek y$\\
+\textbf{Schrumpfen} & Faktor $d_j^{2}/(d_j^{2}+\lambda)$\\
+\textbf{Satz 4.4} & Lasso: $\operatorname{sign}(b)(|b|-\lambda)_{+}$\\
+\textbf{Der Bruchfall} & ausgewählt heißt nicht ursächlich\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieses Kapitel sagte einen Zahlenwert vorher. Das nächste sagt eine Wahrscheinlichkeit vorher --- Sepsis ja oder nein --- und findet, dass dieselben Strafen dort genauso wirken, das Minimieren aber schwieriger wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}

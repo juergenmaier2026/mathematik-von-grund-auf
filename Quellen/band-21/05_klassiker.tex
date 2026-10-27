@@ -1,0 +1,705 @@
+\chapter{Drei Spiele, die alles erklären}
+
+\section{Dieselbe Form, verschiedene Welten}
+
+\begin{merksatz}
+\boxtitel{Der gemeinsame Rahmen}
+Alle drei Spiele dieses Kapitels sind symmetrisch, haben zwei Strategien je Spieler und werden durch vier Zahlen beschrieben.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{mitziehen} & \textbf{ausscheren}\\
+\midrule
+\textbf{mitziehen} & $(R,\ R)$ & $(S,\ T)$\\
+\textbf{ausscheren} & $(T,\ S)$ & $(P,\ P)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{3.0cm}P{3.6cm}@{}}
+\toprule
+$R$ & \kursiv{Reward} & beide ziehen mit\\
+$T$ & \kursiv{Temptation} & allein ausscheren\\
+$S$ & \kursiv{Sucker} & allein mitziehen\\
+$P$ & \kursiv{Punishment} & beide scheren aus\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Allein die \kursiv{Reihenfolge} dieser vier Zahlen entscheidet, welches Spiel vorliegt --- und die drei Anordnungen führen zu grundverschiedenen Empfehlungen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es kommt nicht auf die Zahlen an, sondern auf ihre Ordnung. \textbf{Zwei Spiele mit völlig verschiedenen Zahlen sind dasselbe Spiel}, wenn die Reihenfolge übereinstimmt --- das folgt aus der Eindeutigkeit des Nutzens bis auf affine Umrechnung, Satz 4.1. Und umgekehrt: Zwei Spiele mit fast gleichen Zahlen sind völlig verschieden, wenn eine Vertauschung stattgefunden hat.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Gefangenendilemma}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall: Reserveantibiotika}
+Beide Häuser können ein Reserveantibiotikum großzügig einsetzen oder zurückhalten. Großzügiger Einsatz nützt den eigenen Patienten unmittelbar; die entstehenden Resistenzen tragen beide.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Klinikum} & \textbf{M.: zurück} & \textbf{M.: frei}\\
+\midrule
+zurückhalten & $(3,\ 3)$ & $(0,\ 5)$\\
+frei einsetzen & $(5,\ 0)$ & $(1,\ 1)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ T = 5 \ >\ R = 3 \ >\ P = 1 \ >\ S = 0 \]
+
+\schritt{Die Lösung}
+\kursiv{Für das Klinikum:} Hält das Marienhospital zurück, so bringt freier Einsatz $5$ statt $3$. Setzt es frei ein, so bringt freier Einsatz $1$ statt $0$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Freier Einsatz dominiert strikt.} Beide Häuser wählen ihn, und beide erhalten $1$.
+\end{minipage}
+\end{center}
+
+\schritt{Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.0cm}P{2.0cm}P{1.6cm}@{}}
+\toprule
+& \textbf{K} & \textbf{M} & \\
+\midrule
+Gleichgewicht & $1$ & $1$ & \\
+beide zurück & $\mathbf{3}$ & $\mathbf{3}$ & \textcolor{gruen}{besser}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das einzige Gleichgewicht ist für beide Spieler schlechter als eine erreichbare Alternative.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die schärfste Fassung der dritten Warnung aus dem Vorwort. \textbf{Hier fallen Gleichgewicht und Optimum nicht nur auseinander --- sie widersprechen sich.} Und die Argumentation, die dorthin führt, ist nicht zu entkräften: Dominanz braucht keinerlei Annahme über das Verhalten des anderen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was daraus nicht folgt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Nicht:} & \enquote{Zusammenarbeit lohnt sich nicht.} Sie lohnt sich sehr --- sie ist nur einseitig nicht durchsetzbar.\\
+\textbf{Nicht:} & \enquote{Menschen kooperieren nicht.} Sie tun es häufig, und die Kapitel~7 bis 10 erklären, warum.\\
+\textbf{Nicht:} & \enquote{So ist die Welt.} Es ist ein Modell mit einer Runde, ohne Absprache, ohne Vorgeschichte und ohne Aufsicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Gefangenendilemma ist keine Aussage über Menschen, sondern über eine Anreizlage.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und es ist zugleich eine Handlungsanweisung --- allerdings nicht an die Spieler, sondern an den, der die Regeln setzt. \textbf{Wer das Ergebnis ändern will, muss die Auszahlungen ändern}, nicht die Spieler ermahnen. Im Leitfall geschieht genau das: Verordnungen zur Antibiotikaverschreibung und verpflichtende Resistenzmeldungen verändern $T$ und $P$, bis die Dominanz kippt. Kapitel~11 behandelt diesen Zugang systematisch.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Das Feigheitsspiel}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall: Ausbau einer Spezialabteilung}
+Beide Häuser erwägen den Aufbau einer teuren Spezialabteilung. Wer allein ausbaut, gewinnt die Zuweisungen. Bauen beide aus, so tragen beide die Kosten bei halber Auslastung.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Klinikum} & \textbf{M.: verzicht} & \textbf{M.: baut}\\
+\midrule
+verzichten & $(3,\ 3)$ & $(2,\ 5)$\\
+ausbauen & $(5,\ 2)$ & $(1,\ 1)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ T = 5 \ >\ R = 3 \ >\ S = 2 \ >\ P = 1 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der einzige Unterschied zum Gefangenendilemma: $S$ und $P$ sind vertauscht.} Beidseitiges Ausscheren ist nun das schlechteste Ergebnis.
+\end{minipage}
+\end{center}
+
+\schritt{Die Folgen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Keine Dominanz} & Gegen Verzicht ist Ausbau besser ($5>3$), gegen Ausbau ist Verzicht besser ($2>1$).\\
+\textbf{Zwei Gleichgewichte} & $(\text{bauen},\text{verzichten})$ und $(\text{verzichten},\text{bauen})$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Das gemischte Gleichgewicht}
+\[ q\cdot3 + (1-q)\cdot2 = q\cdot5 + (1-q)\cdot1 \]
+\[ 2+q = 1+4q \quad\Longrightarrow\quad 3q = 1 \quad\Longrightarrow\quad q = \tfrac13 \]
+
+\kursiv{Auszahlung:} $\tfrac13\cdot3 + \tfrac23\cdot2 = 1+\tfrac43 = \tfrac73 \approx 2{,}33$\\
+\kursiv{Probe:} $\tfrac13\cdot5 + \tfrac23\cdot1 = \tfrac53+\tfrac23 = \tfrac73$ \checkmark
+
+\schritt{Die entscheidende Zahl}
+Beide bauen aus mit Wahrscheinlichkeit
+\[ \left(\tfrac23\right)^{2} = \tfrac49 \approx 44\,\% . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In fast der Hälfte der Fälle tritt das schlechteste Ergebnis ein.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und zwar ohne dass jemand etwas falsch macht. \textbf{Das Feigheitsspiel bestraft Entschlossenheit auf beiden Seiten}, und deshalb lohnt sich hier, was im Gefangenendilemma wirkungslos wäre: sich glaubhaft festzulegen. Wer zuerst und unwiderruflich baut, gewinnt --- Kapitel~7 zeigt, wie sich das formal fassen lässt und warum es ein anderes Spiel erzeugt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Hirschjagd}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall: ein gemeinsames Notfallzentrum}
+Beide Häuser können in ein gemeinsames Zentrum investieren oder ihre eigene Notaufnahme weiterbetreiben. Das Zentrum lohnt sich nur, wenn beide mitziehen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Klinikum} & \textbf{M.: gemeins.} & \textbf{M.: allein}\\
+\midrule
+gemeinsam & $(4,\ 4)$ & $(0,\ 3)$\\
+allein & $(3,\ 0)$ & $(3,\ 3)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ R = 4 \ >\ T = 3 = P \ >\ S = 0 \]
+
+\schritt{Die beiden Gleichgewichte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{3.0cm}@{}}
+\toprule
+\textbf{Gleichgewicht} & \textbf{Auszahlung} & \\
+\midrule
+beide gemeinsam & $(4,4)$ & \textcolor{gruen}{auszahlungsbesser}\\
+beide allein & $(3,3)$ & \textcolor{akzent}{risikoärmer}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Hier stimmen die Interessen überein --- und trotzdem ist die bessere Lösung nicht gesichert.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+\[ q\cdot4 + (1-q)\cdot0 = q\cdot3 + (1-q)\cdot3 \]
+\[ 4q = 3 \quad\Longrightarrow\quad q = \tfrac34 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man muss zu mindestens $75$ Prozent darauf vertrauen, dass der andere mitzieht, damit sich das Mitziehen lohnt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist eine bemerkenswert hohe Schwelle. Das Alleingehen bringt $3$ --- unabhängig davon, was der andere tut. Das Mitziehen bringt $4$, aber nur bei Gegenseitigkeit, sonst $0$. \textbf{Das Risiko ist einseitig}, und wer es scheut, wählt den sicheren Weg. Man nennt $(\text{allein},\text{allein})$ deshalb \Begriff{risikodominant} und $(\text{gemeinsam},\text{gemeinsam})$ \Begriff{auszahlungsdominant}.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Unterschied zum Gefangenendilemma}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Dilemma} & Mitziehen ist \kursiv{nie} eine beste Antwort. Das Problem sind die Anreize.\\
+\textbf{Hirschjagd} & Mitziehen ist eine beste Antwort --- wenn der andere es tut. Das Problem ist das Vertrauen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Unterscheidung ist für die Praxis wesentlich: \textbf{Ein Dilemma löst man durch veränderte Anreize, eine Hirschjagd durch Kommunikation.} Eine bindende Absprache genügt hier bereits --- sie muss nicht einmal durchsetzbar sein, denn niemand hat einen Grund, sie zu brechen. Im Gefangenendilemma wäre dieselbe Absprache wertlos.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Systematik}
+
+\begin{merksatz}
+\boxtitel{Die drei Anordnungen im Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{1.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Spiel} & \textbf{Ordnung} & \textbf{GG} & \textbf{Problem}\\
+\midrule
+Dilemma & $T>R>P>S$ & $1$ & Anreize\\
+Feigheit & $T>R>S>P$ & $3$ & Entschlossen\-heit\\
+Hirschjagd & $R>T\ge P>S$ & $3$ & Vertrauen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\foreach \x/\lab/\col in {0/Dilemma/akzent, 2.6/Feigheit/mittel, 5.2/Hirschjagd/gruen} {
+  \draw[\col, line width=1.0pt, fill=\col!10] (\x,0) rectangle ++(2.0,1.5);
+  \node[font=\scriptsize\bfseries, color=\col] at (\x+1.0,1.2) {\lab};
+}
+\node[font=\scriptsize, color=grau] at (1.0,0.75) {Anreize};
+\node[font=\scriptsize, color=grau] at (1.0,0.38) {ändern};
+\node[font=\scriptsize, color=grau] at (3.6,0.75) {sich};
+\node[font=\scriptsize, color=grau] at (3.6,0.38) {festlegen};
+\node[font=\scriptsize, color=grau] at (6.2,0.75) {miteinander};
+\node[font=\scriptsize, color=grau] at (6.2,0.38) {reden};
+\node[font=\scriptsize\itshape, color=grau] at (3.6,-0.5) {was jeweils hilft};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Tabelle ist das eigentliche Ergebnis des Kapitels. \textbf{Die richtige Maßnahme hängt davon ab, welches Spiel vorliegt} --- und wer das falsch bestimmt, wendet ein wirkungsloses Mittel an. Miteinander reden hilft bei der Hirschjagd und ist im Dilemma vergeblich; veränderte Anreize helfen im Dilemma und sind bei der Hirschjagd unnötiger Aufwand.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Einordnung ist heikel}
+Zwischen Dilemma und Feigheitsspiel liegt nur die Vertauschung von $S$ und $P$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.6cm}@{}}
+\toprule
+\textbf{Die Frage} & Ist beidseitiges Ausscheren schlimmer oder besser als einseitiges Mitziehen?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Von der Antwort hängt ab, ob es ein Gleichgewicht gibt oder drei --- und ob Reden hilft.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im Leitfall der Reserveantibiotika: Ist es schlimmer, wenn beide Häuser großzügig verschreiben ($P$), oder wenn man selbst zurückhält, während der andere verschreibt ($S$)? \textbf{Die Antwort hängt davon ab, wie weit Resistenzen zwischen den Häusern wandern.} Bleiben sie lokal, so ist $S$ erträglich und es liegt ein Dilemma vor. Wandern sie frei, so trägt man die Resistenzen ohnehin mit und hat nur den eigenen Nutzen verloren --- dann ist $S$ sehr schlecht, und es bleibt beim Dilemma. Eine Verschiebung zum Feigheitsspiel träte erst ein, wenn beidseitiger Vollgebrauch eine Katastrophe wäre, die einseitigen Verzicht lohnend macht.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Lehre}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Modellwahl entscheidet die Empfehlung, und sie beruht auf einer Schätzung.} Das ist die erste Warnung des Vorworts, hier an einem Fall, in dem eine einzige vertauschte Ungleichung die Handlungsanweisung umkehrt. Wer spieltheoretisch argumentiert, sollte die Ordnung der vier Zahlen begründen können --- und die Empfindlichkeit prüfen, wie in Aufgabe 1.3.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.1 --- Wann kippt die Dominanz?}
+Im Leitfall der Reserveantibiotika führt eine Meldepflicht dazu, dass freier Einsatz mit einem Abschlag $k$ belegt wird. Ab welchem $k$ verschwindet das Dilemma?
+
+\loesung
+\schritt{Schritt 1 --- Die veränderte Matrix}
+Der Abschlag trifft nur denjenigen, der frei einsetzt:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+& \textbf{zurück} & \textbf{frei}\\
+\midrule
+\textbf{zurück} & $(3,\ 3)$ & $(0,\ 5-k)$\\
+\textbf{frei} & $(5-k,\ 0)$ & $(1-k,\ 1-k)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Wann dominiert freier Einsatz nicht mehr?}
+Zwei Vergleiche müssen beide gelten, damit freier Einsatz dominiert:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{3.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Gegner hält zurück} & $5-k > 3$ & $k < 2$\\
+\textbf{Gegner setzt frei} & $1-k > 0$ & $k < 1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Schwellen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.8cm}P{3.4cm}P{2.6cm}@{}}
+\toprule
+$k$ & \textbf{Lage} & \textbf{Gleichgewicht}\\
+\midrule
+$k<1$ & Dominanz bleibt & $(\text{frei},\text{frei})$\\
+$1<k<2$ & keine Dominanz & \textcolor{mittel}{Hirschjagd}\\
+$k>2$ & Zurückhalten dominiert & $(\text{zurück},\text{zurück})$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Der mittlere Bereich genauer}
+Bei $k = 1{,}5$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{zurück} & \textbf{frei}\\
+\midrule
+\textbf{zurück} & $(3,\ 3)$ & $(0,\ 3{,}5)$\\
+\textbf{frei} & $(3{,}5,\ 0)$ & $(-0{,}5,\ -0{,}5)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Reine Gleichgewichte:}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{2.6cm}P{1.4cm}@{}}
+\toprule
+\textbf{Feld} & \textbf{Abweichen bringt} & \\
+\midrule
+$(\text{zurück},\text{zurück})$ & $3 \to 3{,}5$ & \textcolor{akzent}{kein GG}\\
+$(\text{frei},\text{frei})$ & $-0{,}5 \to 0$ & \textcolor{akzent}{kein GG}\\
+$(\text{frei},\text{zurück})$ & $3{,}5\to3$; $0\to-0{,}5$ & \textcolor{gruen}{GG}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei mittlerem Abschlag entsteht ein Feigheitsspiel, kein Dilemma und keine Lösung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man beachte die Reihenfolge: $T = 3{,}5 > R = 3 > S = 0 > P = -0{,}5$ --- das ist genau die Anordnung des Feigheitsspiels. \textbf{Eine halbherzige Maßnahme verwandelt das Dilemma nicht in Zusammenarbeit, sondern in einen Wettbewerb darum, wer zuerst ausschert.} Das ist eine Warnung an jeden, der Anreize nur ein bisschen verschiebt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Antwort}
+\[ k > 2 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Abschlag muss also die gesamte Versuchung $T - R = 2$ aufzehren --- nicht nur einen Teil. \textbf{Das ist die allgemeine Regel: Eine Maßnahme gegen ein Dilemma muss mindestens $T-R$ kosten}, sonst bleibt die Dominanz bestehen oder es entsteht Schlimmeres.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.2 --- Das Feigheitsspiel und die Festlegung}
+Im Ausbauspiel legt sich das Klinikum öffentlich und unwiderruflich auf den Ausbau fest, bevor das Marienhospital entscheidet. Was ändert sich?
+
+\loesung
+\schritt{Schritt 1 --- Das ursprüngliche Spiel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Gleichgewicht} & \textbf{K} & \textbf{M}\\
+\midrule
+$(\text{bauen},\text{verzicht})$ & $5$ & $2$\\
+$(\text{verzicht},\text{bauen})$ & $2$ & $5$\\
+gemischt & $2{,}33$ & $2{,}33$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Nach der Festlegung}
+Das Marienhospital steht vor einer einfachen Wahl:
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{M wählt} & \textbf{erhält} & \\
+\midrule
+verzichten & $2$ & \textcolor{gruen}{besser}\\
+bauen & $1$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Marienhospital verzichtet, das Klinikum erhält $5$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Der Gewinn}
+\[ 5 - 2{,}33 = 2{,}67 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Verglichen mit dem gemischten Gleichgewicht gewinnt das Klinikum erheblich. \textbf{Und das Marienhospital verliert nur wenig} --- von $2{,}33$ auf $2$ --- weil das gemischte Gleichgewicht ohnehin schlecht war. Die Festlegung schafft Wert, und zwar überwiegend für den, der sie vornimmt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Warum \kursiv{unwiderruflich} das Entscheidende ist}
+Wäre die Festlegung widerrufbar, so wäre sie wertlos.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Denn das Marienhospital könnte seinerseits bauen und darauf setzen, dass das Klinikum einlenkt --- und das Klinikum \kursiv{würde} einlenken, denn $2 > 1$. \textbf{Die Drohung ist nur glaubwürdig, wenn ihre Ausführung nicht mehr in der Hand des Drohenden liegt.} Genau das ist der Begriff der Teilspielperfektheit aus Kapitel~7.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Wie man sich festlegt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Verträge} & Baugenehmigung, Bestellungen, Personalverträge mit Konventionalstrafen.\\
+\textbf{Öffentlichkeit} & Eine angekündigte Kehrtwende kostet Ansehen.\\
+\textbf{Unumkehrbares} & Der ausgehobene Bauplatz ist das stärkste Argument.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle drei Mittel verkleinern den eigenen Handlungsspielraum --- und genau darin liegt ihr Wert.} Das ist eine der wenigen Stellen, an denen die Theorie einer verbreiteten Intuition offen widerspricht: Mehr Möglichkeiten zu haben, ist nicht immer besser. \Person{Thomas Schelling} hat diesen Gedanken 1960 ausgearbeitet und dafür 2005 den Nobelpreis erhalten.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Der Vorbehalt}
+Legen sich \kursiv{beide} fest, so tritt $(1,1)$ ein.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das Wettrennen um die frühere Festlegung ist selbst ein Spiel --- und es hat dieselbe Struktur wie das ursprüngliche. \textbf{Die Lösung durch Festlegung verschiebt das Problem eine Ebene nach oben}, statt es aufzulösen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.3 --- Risiko gegen Ertrag}
+Bestimmen Sie in der Hirschjagd, wie sich die Vertrauensschwelle ändert, wenn der Alleingang statt $3$ nur $2$ einbringt.
+
+\loesung
+\schritt{Schritt 1 --- Die neue Matrix}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{gemeinsam} & \textbf{allein}\\
+\midrule
+\textbf{gemeinsam} & $(4,\ 4)$ & $(0,\ 2)$\\
+\textbf{allein} & $(2,\ 0)$ & $(2,\ 2)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Schwelle}
+\[ q\cdot4 + (1-q)\cdot0 = q\cdot2 + (1-q)\cdot2 \]
+\[ 4q = 2 \quad\Longrightarrow\quad q = \tfrac12 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Schwelle sinkt von $75$ auf $50$ Prozent.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die allgemeine Formel}
+Mit den Bezeichnungen $R$, $T=P$, $S=0$:
+\[ q\,R = T \quad\Longrightarrow\quad q^{*} = \frac{T}{R} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+$R$ & $T$ & $q^{*}$ & \\
+\midrule
+$4$ & $3$ & $0{,}75$ & \\
+$4$ & $2$ & $0{,}50$ & \\
+$4$ & $1$ & $0{,}25$ & \\
+$6$ & $3$ & $0{,}50$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Vertrauensschwelle ist das Verhältnis aus sicherem Ertrag und gemeinsamem Ertrag.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zwei Wege senken sie: den Alleingang unattraktiver machen oder das gemeinsame Vorgehen lohnender. \textbf{Beide Wege sind gleichwertig}, wie die letzten beiden Zeilen zeigen --- $T$ halbieren wirkt wie $R$ verdoppeln. Im Leitfall bedeutet das: Man kann den Zuschuss für das Zentrum erhöhen oder die Doppelvorhaltung verteuern, und beides führt zum selben Ergebnis.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Grenzfall}
+Für $T \ge R$ verschwindet das gemeinsame Gleichgewicht ganz.
+
+\kursiv{Grund:} Dann wäre $q^{*} \ge 1$, also gibt es keine Erwartung, die Mitziehen lohnend macht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $T > R$ ist \kursiv{Alleingehen} dominant, und aus der Hirschjagd wird --- je nach Lage von $S$ und $P$ --- ein Dilemma. \textbf{Die drei Spiele dieses Kapitels sind Nachbarn im selben Raum}, und ein Parameter, der sich um eine Einheit verschiebt, führt von einem zum nächsten.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Und die praktische Folge}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Schwelle $q^{*}$ ist eine \kursiv{Erwartung}, keine Tatsache. Sie hängt davon ab, was jedes Haus dem anderen zutraut --- und das wiederum von Vorgeschichte, Verträgen und persönlichen Beziehungen. \textbf{Damit verlässt man die Matrix}, und die Kapitel~7 bis 10 behandeln genau diesen Bereich: wie Erwartungen entstehen und sich verfestigen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Versuch, ein Name und eine Karriere}
+Im Januar 1950 führten \Person{Merrill Flood} und \Person{Melvin Dresher} bei der RAND Corporation einen Versuch durch: Zwei Kollegen spielten hundertmal ein Spiel mit genau der Struktur aus Abschnitt 5.2.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Spieler kooperierten in sechzig von hundert Runden --- entgegen der Vorhersage. Flood und Dresher hielten das für eine Widerlegung, notierten die Protokolle sorgfältig und veröffentlichten sie. \textbf{Die Protokolle sind bis heute lesenswert}, weil die Spieler ihre Überlegungen mitschrieben und dabei genau die Argumente entwickelten, die Kapitel~7 formalisieren wird.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Name}
+\Person{Albert Tucker} sollte im selben Jahr in Stanford einen Vortrag für Psychologen halten und suchte eine Einkleidung ohne Matrizen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er erfand die Geschichte von zwei Gefangenen, denen getrennt ein Handel angeboten wird. \textbf{Die Einkleidung hat mehr zur Verbreitung beigetragen als jeder Satz} --- und zugleich einen Schaden angerichtet, denn sie legt nahe, es gehe um Verrat und Moral. Es geht um eine Anreizordnung, die in Abgasnormen, Fischereiquoten und Antibiotikaverschreibungen genauso auftritt.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Feigheitsspiel}
+Der Name stammt aus einem Autorennen, bei dem zwei Fahrer aufeinander zuhalten und der Ausweichende verliert.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Bertrand Russell} verglich 1959 die nukleare Abschreckung damit --- mit dem Zusatz, dass halbwüchsige Autofahrer wenigstens für nichts als ihr eigenes Leben verantwortlich seien. \Person{Thomas Schelling} entwickelte daraus 1960 die Theorie der glaubwürdigen Festlegung, die Aufgabe 5.2 vorführt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Hirschjagd}
+Sie geht auf \Person{Jean-Jacques Rousseau} zurück, der 1755 beschrieb, wie eine Gruppe Jäger einen Hirsch nur gemeinsam erlegen kann --- und wie jeder Einzelne einen vorbeilaufenden Hasen greift und damit alle um den Hirsch bringt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Rousseau zog daraus Schlüsse über Gesellschaftsverträge. \textbf{Dass sein Beispiel zweihundert Jahre später eine Auszahlungsmatrix erhielt, hat seine Deutung geschärft}: Das Problem ist nicht Eigennutz, sondern Unsicherheit über den anderen. Rousseau selbst hatte das bereits so gesehen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wo die drei Spiele heute auftauchen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Antibiotika} & Verschreibungsverhalten als Dilemma; Meldepflichten und Reserveklassen als Eingriff.\\
+\textbf{Klimapolitik} & Zwischen Dilemma und Hirschjagd --- die Einordnung ist umstritten und entscheidet die Empfehlung.\\
+\textbf{Impfquoten} & Ein Dilemma mit Schwelle: Ab einer bestimmten Durchimpfung kippt die Anreizlage.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Ob der Klimaschutz ein Dilemma oder eine Hirschjagd ist, wird seit Jahren diskutiert.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Frage ist genau die aus dem Warnkasten in Abschnitt 5.5: Ist einseitiger Verzicht schlimmer als beidseitiges Nichtstun? \textbf{Wer ein Dilemma sieht, fordert bindende Verträge mit Sanktionen; wer eine Hirschjagd sieht, hält vertrauensbildende Maßnahmen und Vorleistungen für ausreichend.} Beide Seiten rechnen richtig --- sie ordnen die vier Zahlen verschieden.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Bei hoher Durchimpfung sinkt der individuelle Nutzen der eigenen Impfung, weil das Risiko ohnehin klein ist.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das erzeugt ein Gleichgewicht knapp unterhalb der Schwelle, ab der die Krankheit verschwände --- ein Ergebnis, das seit den 1990er Jahren modelliert wird und mit den Daten gut übereinstimmt. \textbf{Es ist die Antwort auf die Frage, warum Impfquoten so hartnäckig bei achtzig bis neunzig Prozent verharren} und nicht von selbst weiter steigen. Die Verbindung zu Band 18, Kapitel~8 ist unmittelbar: Dort war $1-1/R_0$ die nötige Quote; hier ist sie das, was das Gleichgewicht gerade nicht erreicht.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{$T>R>P>S$} & Dilemma --- Anreize ändern\\
+\textbf{$T>R>S>P$} & Feigheit --- sich festlegen\\
+\textbf{$R>T\ge P>S$} & Hirschjagd --- miteinander reden\\
+\textbf{Die Schwelle} & $q^{*} = T/R$ bei der Hirschjagd\\
+\textbf{Die Warnung} & halbe Maßnahmen machen es schlimmer\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle drei Spiele hatten mindestens ein Gleichgewicht. Das nächste Kapitel beweist, dass das kein Zufall war --- und zwar für beliebig viele Spieler mit beliebig vielen Strategien.}
+\end{minipage}
+\end{center}
+\end{merksatz}

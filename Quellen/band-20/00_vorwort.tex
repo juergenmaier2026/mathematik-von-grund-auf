@@ -1,0 +1,201 @@
+\chapter*{Vorwort: Eine Größe, die niemand vermutet hatte}
+\addcontentsline{toc}{chapter}{Vorwort}
+\markboth{Vorwort}{Vorwort}
+
+Bis 1948 war \enquote{Information} kein mathematischer Begriff. Danach war sie eine messbare Größe mit einer Einheit --- und mit Sätzen, die bis heute überraschen.
+
+\begin{merksatz}
+\boxtitel{Was dieser Band behauptet}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Nachricht hat ein Gewicht, das sich in Bit angeben lässt --- und dieses Gewicht hängt nicht davon ab, was sie bedeutet, sondern nur davon, wie überraschend sie ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist eine ungewöhnliche Behauptung, und sie hat einen Preis: Der Begriff sagt nichts über Bedeutung, Wahrheit oder Nutzen. Was er dafür leistet, sind Sätze von seltener Schärfe --- über Grenzen, die niemand unterbieten kann, und über Verfahren, die sie erreichen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section*{Drei Ergebnisse, die der Anschauung widersprechen}
+
+\begin{merksatz}
+\boxtitel{Was in diesem Band bewiesen wird}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kapitel 3} & Es gibt eine Grenze, unter die keine Kompression kommen kann --- und Verfahren, die ihr beliebig nahe kommen.\\
+\textbf{Kapitel 5} & Über einen \kursiv{gestörten} Kanal lässt sich mit beliebig kleiner Fehlerrate übertragen. Nicht langsamer, sondern nur bis zu einer festen Rate.\\
+\textbf{Kapitel 9} & Es gibt eine Verschlüsselung, die beweisbar unbrechbar ist --- und einen Satz, der sagt, warum sie praktisch unbrauchbar bleibt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Die mittlere Aussage ist die erstaunlichste. Vor 1948 hielt man es für selbstverständlich, dass Störungen die Fehlerrate erhöhen und man sie nur durch Wiederholung senken kann --- also durch Verlangsamung.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Shannon zeigte, dass das falsch ist. Es gibt eine feste Rate, die \Begriff{Kanalkapazität}, unterhalb derer die Fehlerrate beliebig klein gemacht werden kann, ohne die Rate weiter zu senken. Oberhalb davon geht es gar nicht. Der Übergang ist scharf.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section*{Warum Kryptographie in denselben Band gehört}
+
+\begin{merksatz}
+\boxtitel{Derselbe Begriff, andere Richtung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Teil I--III} & \textbf{Teil IV--V}\\
+\midrule
+Ziel & Information erhalten & Information verbergen\\
+Gegner & Rauschen & ein Mitleser\\
+Maß & Entropie & Entropie\\
+Grenze & Kapazität & Schlüssellänge\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Shannon hat beide Gebiete begründet --- 1948 die Informationstheorie, 1949 die mathematische Kryptographie.} Beide Arbeiten benutzen denselben Entropiebegriff.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Zusammenhang ist kein historischer Zufall. Perfekte Geheimhaltung bedeutet, dass der Geheimtext \kursiv{keine} Information über den Klartext enthält --- und das ist eine Aussage über Transinformation, also über genau die Größe aus Kapitel~4. Kapitel~9 beweist daraus, wie lang ein Schlüssel mindestens sein muss.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section*{Was Sie mitbringen müssen}
+
+\begin{merksatz}
+\boxtitel{Die Voraussetzungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Logarithmen} & Rechenregeln, Basiswechsel. Schulmathematik.\\
+\textbf{Wahrschein\-lichkeit} & Verteilungen, Erwartungswert, Unabhängigkeit, bedingte Wahrscheinlichkeit. Band 12.\\
+\textbf{Konvexität} & Nur die Jensensche Ungleichung, ab Kapitel~2. Band 19, Kapitel~7.\\
+\textbf{Modulare Arithmetik} & Erst ab Kapitel~11 --- und dort von Grund auf eingeführt. Band 8.\\
+\textbf{Gruppen} & Erst ab Kapitel~12, ebenfalls dort erklärt. Band 6.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Hälfte kommt mit Wahrscheinlichkeitsrechnung aus. Die zweite braucht Zahlentheorie --- aber nur einen kleinen, genau umrissenen Teil davon, der in den Kapiteln~11 und 12 vollständig entwickelt wird. Man muss Band 8 nicht gelesen haben.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section*{Das Klinikum Neustadt}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall}
+Wie in den Bänden 17 bis 19 läuft ein einziger erfundener Fall durch alle Kapitel --- diesmal die Digitalisierung eines Krankenhauses.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{3.8cm}@{}}
+\toprule
+\textbf{Teil} & \textbf{Thema} & \textbf{Der Leitfall zeigt}\\
+\midrule
+I & Messen & wie klein Befunddaten werden können\\
+II & Übertragen & Funk zum Rettungswagen\\
+III & Zufall & was ein Datensatz hergibt\\
+IV & Geheimhalten & Patientendaten verschlüsseln\\
+V & Öffentliche Schlüssel & Arztbriefe signieren\\
+VI & Stand & was morgen noch sicher ist\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section*{Drei Warnungen}
+
+\begin{warnung}
+\boxtitelr{Erstens: Information ist nicht Bedeutung}
+Der Informationsgehalt einer Nachricht hängt allein von ihrer Wahrscheinlichkeit ab.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Eine zufällige Zeichenfolge hat mehr Information als ein Satz gleicher Länge --- weil sie unvorhersehbarer ist. Für die Übertragungstechnik ist das die richtige Größe. Für die Frage, was eine Nachricht \kursiv{wert} ist, taugt sie nicht.
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Zweitens: Sätze gelten für Grenzwerte}
+Shannons Ergebnisse sind Aussagen über beliebig lange Nachrichten.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\enquote{Beliebig kleine Fehlerrate} heißt: für hinreichend große Blocklänge. Wie groß, sagt der Satz nicht --- und für praktische Blocklängen kann die Lücke erheblich sein. Kapitel~6 behandelt, was tatsächlich erreichbar ist.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Drittens: Sicherheit ist nicht beweisbar}
+Mit einer einzigen Ausnahme --- dem Einmalschlüssel aus Kapitel~9 --- beruht jedes praktisch verwendete Verfahren auf einer \kursiv{Annahme}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man nimmt an, dass ein bestimmtes Rechenproblem schwer ist. Bewiesen ist das bei keinem einzigen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist derselbe Stand wie bei $\mathsf{P}$ gegen $\mathsf{NP}$ in Band 19, Kapitel~12 --- und hängt unmittelbar damit zusammen. Wäre $\mathsf{P}=\mathsf{NP}$, so wäre nahezu die gesamte heutige Kryptographie hinfällig. \textbf{Die Sicherheit der digitalen Welt ruht auf einer unbewiesenen Vermutung}, und dieser Band sagt das an jeder Stelle, an der es zutrifft.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section*{Der Aufbau}
+
+\begin{merksatz}
+\boxtitel{Sechs Teile, fünfzehn Kapitel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{1.0cm}P{3.2cm}P{4.4cm}@{}}
+\toprule
+\textbf{Teil} & \textbf{Thema} & \textbf{Die Leitfrage}\\
+\midrule
+I & Information messen (1--3) & Wie klein geht es?\\
+II & Der gestörte Kanal (4--6) & Wie schnell geht es fehlerfrei?\\
+III & Zufall (7--8) & Was heißt zufällig?\\
+IV & Geheimhaltung (9--11) & Was ist beweisbar sicher?\\
+V & Öffentliche Schlüssel (12--14) & Wie tauscht man Schlüssel ohne Kanal?\\
+VI & Stand (15) & Was hält dem Quantenrechner stand?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\vspace{10pt}
+\begin{flushright}
+\itshape\color{grau}
+Information ist die Auflösung\\
+von Ungewissheit.\\[8pt]
+\normalfont\color{grau}\upshape --- nach Claude Shannon, 1948
+\end{flushright}

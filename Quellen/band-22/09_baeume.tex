@@ -1,0 +1,625 @@
+\part{Nichtlineare Verfahren}
+
+\chapter{Bäume und Wälder}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Wie Ärzte entscheiden}
+Kein Arzt rechnet am Bett eine logistische Regression. Er fragt der Reihe nach: Ist das Laktat erhöht? Wenn ja --- wie schnell atmet der Patient? Wenn nein --- hat er Fieber oder ist er unterkühlt?
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\scriptsize}]
+\node[draw=tief, rounded corners=3pt, fill=tief!8, inner sep=4pt] (w) at (0,2.4) {Laktat $> 2{,}4$?};
+\node[draw=tief, rounded corners=3pt, fill=tief!8, inner sep=4pt] (a) at (-2.4,1.1) {Temp $> 38{,}3$?};
+\node[draw=tief, rounded corners=3pt, fill=tief!8, inner sep=4pt] (b) at (2.4,1.1) {Atemfrequenz $> 18$?};
+\node[fill=gruen!20, rounded corners=3pt, inner sep=3pt] (a1) at (-3.4,-0.1) {keine};
+\node[fill=akzent!20, rounded corners=3pt, inner sep=3pt] (a2) at (-1.4,-0.1) {Sepsis};
+\node[fill=gruen!20, rounded corners=3pt, inner sep=3pt] (b1) at (1.4,-0.1) {prüfen};
+\node[fill=akzent!20, rounded corners=3pt, inner sep=3pt] (b2) at (3.4,-0.1) {Sepsis};
+\draw[kanted] (w)--(a) node[midway,above left,color=grau] {nein};
+\draw[kanted] (w)--(b) node[midway,above right,color=grau] {ja};
+\draw[kanted] (a)--(a1); \draw[kanted] (a)--(a2);
+\draw[kanted] (b)--(b1); \draw[kanted] (b)--(b2);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Entscheidungsbaum --- die älteste Form klinischer Regeln, und zugleich ein Lernverfahren.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Daten}
+$500$ Patienten, sieben Merkmale: Temperatur, Herzfrequenz, Laktat, Atemfrequenz, Alter --- und zwei reine Zufallszahlen, die mit nichts zusammenhängen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Zufallszahlen sind absichtlich hinzugefügt. \textbf{In echten Daten weiß man nie, welche Merkmale nur Rauschen sind} --- und ein gutes Verfahren sollte sie ignorieren. Wir werden sehen, ob es das tut.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie ein Baum wächst}
+
+\begin{merksatz}
+\boxtitel{Das Verfahren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Suche unter allen Merkmalen und allen Schwellen die Frage, die die Patienten am besten in zwei \enquote{reine} Gruppen teilt.\\
+$2$ & Wende dasselbe auf jede der beiden Gruppen an.\\
+$3$ & Höre auf, wenn eine Gruppe rein ist oder zu klein wird.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Verfahren ist \Begriff{gierig}: Es wählt in jedem Schritt die beste Frage, ohne zu prüfen, ob eine schlechtere jetzt eine bessere später ermöglicht hätte. \textbf{Den global besten Baum zu finden, ist $\mathsf{NP}$-schwer} (Band 19, Kapitel~14) --- also begnügt man sich mit dem schrittweise besten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 9.1 --- Unreinheit}
+Für eine Gruppe mit Sepsisanteil $p$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{3.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Maß} & \textbf{Formel} & \textbf{Maximum bei}\\
+\midrule
+Entropie & $-p\log_2 p - (1-p)\log_2(1-p)$ & $p = \tfrac12$: $1$ bit\\
+Gini & $2p\,(1-p)$ & $p = \tfrac12$: $\tfrac12$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Der \Begriff{Informationsgewinn} einer Frage ist die Unreinheit vorher minus der gewichtete Mittelwert der Unreinheiten danach.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Verbindung zu Band 20}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Entropie ist die aus Band 20, Kapitel~2; der Informationsgewinn ist die Transinformation zwischen Frage und Diagnose aus Kapitel~4 desselben Bandes. \textbf{Ein Entscheidungsbaum stellt diejenige Frage, deren Antwort am meisten über die Diagnose verrät} --- genau das tut ein guter Arzt, und genau das misst die Transinformation.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Gini ist eine quadratische Näherung der Entropie und rechnet ohne Logarithmen. \textbf{In der Praxis wählen beide fast immer dieselbe Frage}, wie Aufgabe 9.1 zeigt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Leitfall gerechnet}
+
+\begin{merksatz}
+\boxtitel{Ein Baum der Tiefe drei}
+Aus $500$ Patienten gelernt:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.36}
+\begin{tabular}{@{}P{8.4cm}@{}}
+\toprule
+\texttt{Laktat $\le$ 2,43}\\
+\quad\texttt{Temp $\le$ 38,25}\ $\to$ \texttt{keine}\\
+\quad\texttt{Temp $>$ 38,25}\\
+\qquad\texttt{Laktat $\le$ 1,17}\ $\to$ \texttt{keine}\\
+\qquad\texttt{Laktat $>$ 1,17}\ $\to$ \texttt{Sepsis}\\
+\texttt{Laktat $>$ 2,43}\\
+\quad\texttt{Atemfrequenz $>$ 17,8}\ $\to$ \texttt{Sepsis}\\
+\quad\texttt{Atemfrequenz $\le$ 17,8}\\
+\qquad\texttt{Temp $>$ 37,63}\ $\to$ \texttt{Sepsis}\\
+\qquad\texttt{Temp $\le$ 37,63}\ $\to$ \texttt{keine}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Wurzelfrage ist die Laktatschwelle von $2{,}43$ --- fast genau die Bayes-Schwelle aus Kapitel~1.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man kann den Baum lesen, prüfen und am Bett anwenden. \textbf{Er hat allerdings die Untertemperatur übersehen}: Im linken Ast fragt er nur nach Fieber. Bei Tiefe drei hat er nicht genug Fragen für beide Richtungen. Das zeigt die Grenze kleiner Bäume --- und den Grund, warum man sie größer werden lässt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Klein, groß, und viele}
+Geprüft an $20\,000$ neuen Patienten:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{1.8cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Training} & \textbf{Test} & \textbf{Trennsch.}\\
+\midrule
+Baum, Tiefe 3 & $2{,}4\,\%$ & $3{,}5\,\%$ & $0{,}946$\\
+Baum, voll ($13$ Blätter) & $0{,}0\,\%$ & $2{,}9\,\%$ & $0{,}952$\\
+logistische Regression & $1{,}4\,\%$ & $2{,}8\,\%$ & $0{,}991$\\
+\midrule
+$200$ Bäume gemittelt & $0{,}0\,\%$ & $1{,}4\,\%$ & $0{,}998$\\
+Zufallswald & $0{,}0\,\%$ & $\mathbf{1{,}2\,\%}$ & $\mathbf{0{,}999}$\\
+Boosting & $0{,}0\,\%$ & $\mathbf{1{,}2\,\%}$ & $\mathbf{0{,}999}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein einzelner Baum ist so gut wie die logistische Regression. Zweihundert Bäume halbieren den Fehler.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die untere Hälfte der Tabelle ist das Thema dieses Kapitels. \textbf{Man verbessert ein Verfahren nicht, indem man es klüger macht, sondern indem man viele davon befragt} --- und zwar so, dass sie sich in ihren Fehlern möglichst unterscheiden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Warum ein Baum nicht reicht}
+
+\begin{warnung}
+\boxtitelr{Bäume sind instabil}
+Man ziehe $200$-mal eine neue Stichprobe gleicher Größe (mit Zurücklegen) aus denselben $500$ Patienten und lerne jedes Mal einen Baum der Tiefe drei.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Wurzel} & $199$-mal Laktat, einmal Atemfrequenz\\
+\textbf{Laktatschwelle} & zwischen $2{,}04$ und $2{,}67$ ($90\,\%$ der Fälle)\\
+\textbf{rechter Ast, zweite Frage} & $142$-mal Atemfrequenz --- aber \textcolor{akzent}{$43$-mal eine Zufallszahl}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In jedem fünften Baum steht an zweiter Stelle ein Merkmal, das mit nichts zusammenhängt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Wurzel ist stabil, weil das Laktat stark wirkt. \textbf{Weiter unten werden die Gruppen klein}, und in kleinen Gruppen kann eine Zufallszahl zufällig gut trennen --- genau das Problem aus Kapitel~3, Abschnitt über die höchste Zufallskorrelation. Und weil jede Frage die folgenden bestimmt, pflanzt sich ein zufälliger Fehler nach unten fort. Bäume haben kleine Verzerrung und große Varianz.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Folge für klinische Regeln}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein aus Daten gelernter Entscheidungsbaum ist eine von vielen möglichen}, und wer ihn als Leitlinie veröffentlicht, veröffentlicht auch seine Zufälle. Die Wurzel verdient Vertrauen, die Blätter nur, wenn sie über viele Stichproben stabil sind.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Viele Bäume}
+
+\begin{merksatz}
+\boxtitel{Satz 9.2 --- die Varianz eines Mittelwerts}
+Seien $Z_1,\ldots,Z_B$ Vorhersagen mit gleicher Varianz $\sigma^{2}$ und paarweiser Korrelation $\rho$. Dann gilt
+\[ \operatorname{Var}\left[\frac1B\sum_{b=1}^{B}Z_b\right] = \rho\,\sigma^{2} + \frac{1-\rho}{B}\,\sigma^{2} . \]
+
+\schritt{Beweis}
+\[ \operatorname{Var}\left[\sum_b Z_b\right] = \sum_b\operatorname{Var}[Z_b] + \sum_{b\ne c}\operatorname{Cov}[Z_b,Z_c] = B\,\sigma^{2} + B(B-1)\,\rho\,\sigma^{2} \]
+Division durch $B^{2}$:
+\[ \frac{\sigma^{2}}{B} + \frac{(B-1)\rho\sigma^{2}}{B} = \rho\sigma^{2} + \frac{(1-\rho)\sigma^{2}}{B} \]
+$\blacksquare$
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Unabhängig, $\rho = 0$} & Varianz $\sigma^{2}/B$ --- beliebig klein.\\
+\textbf{Gleich, $\rho = 1$} & Varianz $\sigma^{2}$ --- Mitteln nützt nichts.\\
+\textbf{Dazwischen} & Mitteln drückt die Varianz auf $\rho\sigma^{2}$, nicht weiter.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mitteln hilft nur so weit, wie die Bäume sich unterscheiden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Zwei Wege zu unterschiedlichen Bäumen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Bagging} & Jeder Baum lernt auf einer anderen Stichprobe mit Zurücklegen. Die Bäume unterscheiden sich, weil ihre Daten sich unterscheiden.\\
+\textbf{Zufallswald} & Zusätzlich darf jeder Baum bei jeder Frage nur eine zufällige Auswahl der Merkmale betrachten. Die Bäume unterscheiden sich noch mehr.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beim Bagging fragen fast alle Bäume zuerst nach dem Laktat --- sie sind sich ähnlich, $\rho$ bleibt groß. \textbf{Der Zufallswald verbietet einem Teil der Bäume das Laktat an der Wurzel}, und sie müssen mit Temperatur oder Atemfrequenz beginnen. Jeder einzelne wird dadurch schlechter, aber $\rho$ sinkt --- und nach Satz 9.2 kann das den Mittelwert verbessern.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Weisheit der vielen, mit einer Bedingung: \textbf{Sie gilt nur für eine Menge, die unabhängig urteilt.} Ein Gremium, in dem alle dieselben Unterlagen lesen und dieselbe Ausbildung hatten, ist nach Satz 9.2 kaum klüger als eines seiner Mitglieder.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Aus Schwachen einen Starken machen}
+
+\begin{merksatz}
+\boxtitel{Die Idee des Boosting}
+Man lernt die Bäume nicht unabhängig, sondern nacheinander --- und jeder neue achtet besonders auf die Patienten, bei denen die bisherigen falsch lagen.
+
+\schritt{Das Verfahren AdaBoost}
+Etiketten $t_i \in \{-1,+1\}$, Anfangsgewichte $D_1(i) = 1/n$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Lerne eine einfache Regel $h_s$ auf den gewichteten Daten. Ihr gewichteter Fehler sei $\varepsilon_s < \tfrac12$.\\
+$2$ & Gib ihr das Stimmgewicht $\alpha_s = \tfrac12\ln\frac{1-\varepsilon_s}{\varepsilon_s}$.\\
+$3$ & Multipliziere die Gewichte falsch eingeordneter Patienten mit $e^{\alpha_s}$, richtig eingeordneter mit $e^{-\alpha_s}$, und normiere mit der Summe $Z_s$.\\
+$4$ & Die Endregel ist $\operatorname{sign}\sum_s \alpha_s h_s(\vek x)$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 9.3 --- Freund und Schapire, 1995}
+Der Trainingsfehler der Endregel nach $S$ Runden ist höchstens
+\[ \prod_{s=1}^{S} Z_s = \prod_{s=1}^{S} 2\sqrt{\varepsilon_s(1-\varepsilon_s)} . \]
+
+\schritt{Beweis}
+Sei $F(\vek x) = \sum_s \alpha_s h_s(\vek x)$.
+
+\kursiv{Erstens --- die Endgewichte:} Wendet man Schritt 3 $S$-mal an, so ist
+\[ D_{S+1}(i) = \frac{e^{-t_i F(\vek x_i)}}{n\prod_s Z_s} , \]
+denn jede Runde multipliziert mit $e^{-\alpha_s t_i h_s(\vek x_i)}$ und teilt durch $Z_s$. Da die $D_{S+1}(i)$ sich zu eins summieren:
+\[ \frac1n\sum_i e^{-t_iF(\vek x_i)} = \prod_s Z_s . \]
+
+\kursiv{Zweitens --- Fehler gegen Exponent:} Ist $\vek x_i$ falsch eingeordnet, so ist $t_iF(\vek x_i) \le 0$ und $e^{-t_iF} \ge 1$. Also
+\[ \text{Trainingsfehler} = \frac1n\sum_i[t_iF(\vek x_i) \le 0] \ \le\ \frac1n\sum_i e^{-t_iF(\vek x_i)} = \prod_s Z_s . \]
+
+\kursiv{Drittens --- $Z_s$ ausrechnen:} Falsche tragen zusammen das Gewicht $\varepsilon_s$, richtige $1-\varepsilon_s$:
+\[ Z_s = \varepsilon_s e^{\alpha_s} + (1-\varepsilon_s)e^{-\alpha_s} = \varepsilon_s\sqrt{\tfrac{1-\varepsilon_s}{\varepsilon_s}} + (1-\varepsilon_s)\sqrt{\tfrac{\varepsilon_s}{1-\varepsilon_s}} = 2\sqrt{\varepsilon_s(1-\varepsilon_s)} \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ist jede Regel auch nur etwas besser als Raten, so fällt der Trainingsfehler exponentiell.}
+\end{minipage}
+\end{center}
+
+\kursiv{Mit $\varepsilon_s = \tfrac12 - \gamma$:} $2\sqrt{(\tfrac12-\gamma)(\tfrac12+\gamma)} = \sqrt{1-4\gamma^{2}} \le e^{-2\gamma^{2}}$, also
+\[ \text{Trainingsfehler} \ \le\ e^{-2\gamma^{2}S} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Aus schwachen Regeln wird eine beliebig starke} --- das war 1988 eine offene Frage von \Person{Michael Kearns} und \Person{Leslie Valiant}, und Boosting ist die Antwort. Dass der \kursiv{Testfehler} dabei nicht explodiert, obwohl der Trainingsfehler null wird, ist ein eigenes Rätsel; seine Lösung führt über den Rand aus Kapitel~8.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was der Wald kostet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Deutbarkeit} & Ein Baum lässt sich lesen. Zweihundert nicht.\\
+\textbf{Außerhalb} & Bäume sagen jenseits der Trainingsdaten den Wert des äußersten Blattes vorher --- konstant, gleich wie weit man sich entfernt.\\
+\textbf{Wahrschein\-lichkeiten} & Anteile von Bäumen sind keine gut kalibrierten Wahrscheinlichkeiten.\\
+\textbf{Wichtigkeit} & Die übliche Rangliste der Merkmale bevorzugt solche mit vielen möglichen Schwellen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hat kein Trainingspatient ein Laktat über $8$, so behandelt der Wald einen Patienten mit $15$ genau wie einen mit $8$. \textbf{Das ist harmlos, wenn die Wirkung dort flach wird, und gefährlich, wenn sie weiter steigt.} Anders als das Polynom aus Kapitel~2 schwingt ein Baum außerhalb nicht aus --- aber er bleibt auch stehen, wo er weitergehen sollte.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur vierten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein stetiger Laborwert bietet Hunderte von Schwellen, ein Ja-Nein-Merkmal nur eine. \textbf{Das stetige wird öfter gewählt und erscheint wichtiger} --- auch wenn es reines Rauschen ist. Man muss die Wichtigkeit durch zufälliges Vertauschen jedes Merkmals auf Testdaten messen, nicht aus dem Aufbau der Bäume ablesen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.1 --- Welche Frage zuerst?}
+Von $100$ Patienten haben $20$ eine Sepsis. Zwei mögliche Fragen:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Frage} & \textbf{nein} & \textbf{ja}\\
+\midrule
+Laktat $> 2{,}4$ & $75$, davon $5$ Sepsis & $25$, davon $15$\\
+Temperatur auffällig & $70$, davon $6$ & $30$, davon $14$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Berechnen Sie Informationsgewinn und Gini-Abnahme.
+
+\loesung
+\schritt{Schritt 1 --- Vorher}
+\[ H(0{,}2) = -0{,}2\log_2 0{,}2 - 0{,}8\log_2 0{,}8 = 0{,}4644 + 0{,}2575 = 0{,}7219 \ \text{bit} \]
+\[ G(0{,}2) = 2\cdot0{,}2\cdot0{,}8 = 0{,}32 \]
+
+\schritt{Schritt 2 --- Laktat}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.6cm}P{1.8cm}P{1.6cm}@{}}
+\toprule
+\textbf{Gruppe} & \textbf{Anteil} & $p$ & $H$ & $G$\\
+\midrule
+nein & $0{,}75$ & $0{,}067$ & $0{,}3534$ & $0{,}1244$\\
+ja & $0{,}25$ & $0{,}600$ & $0{,}9710$ & $0{,}4800$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\[ \text{nachher: } H = 0{,}75\cdot0{,}3534 + 0{,}25\cdot0{,}9710 = 0{,}2650+0{,}2428 = 0{,}5078 \]
+\[ \text{Gewinn} = 0{,}7219 - 0{,}5078 = \mathbf{0{,}2142} \ \text{bit} \]
+\[ G: \ 0{,}32 - (0{,}75\cdot0{,}1244 + 0{,}25\cdot0{,}48) = 0{,}32 - 0{,}2133 = \mathbf{0{,}1067} \]
+
+\schritt{Schritt 3 --- Temperatur}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.4cm}P{1.6cm}P{1.8cm}P{1.6cm}@{}}
+\toprule
+\textbf{Gruppe} & \textbf{Anteil} & $p$ & $H$ & $G$\\
+\midrule
+nein & $0{,}70$ & $0{,}086$ & $0{,}4220$ & $0{,}1567$\\
+ja & $0{,}30$ & $0{,}467$ & $0{,}9968$ & $0{,}4978$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\[ \text{Gewinn} = 0{,}7219 - (0{,}2954 + 0{,}2990) = \mathbf{0{,}1275} \ \text{bit} \]
+\[ G: \ 0{,}32 - (0{,}1097 + 0{,}1493) = \mathbf{0{,}0610} \]
+
+\schritt{Schritt 4 --- Die Entscheidung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+& \textbf{Entropie} & \textbf{Gini}\\
+\midrule
+Laktat & $\mathbf{0{,}214}$ & $\mathbf{0{,}107}$\\
+Temperatur & $0{,}128$ & $0{,}061$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Beide Maße wählen das Laktat.} Die Antwort auf die Laktatfrage verrät $0{,}21$ bit über die Diagnose --- knapp ein Drittel der gesamten Unsicherheit von $0{,}72$ bit. Die Temperaturfrage verrät weniger, weil ihre \enquote{Ja}-Gruppe mit $47$ Prozent Sepsis kaum reiner ist als ein Münzwurf.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.2 --- Wie viele Bäume?}
+Einzelne Bäume haben an einem Punkt die Vorhersagevarianz $\sigma^{2} = 0{,}04$ und untereinander die Korrelation $\rho$. Berechnen Sie die Varianz des Mittels.
+
+\loesung
+\schritt{Schritt 1 --- Die Formel aus Satz 9.2}
+\[ V(B,\rho) = \rho\cdot0{,}04 + \frac{(1-\rho)\cdot0{,}04}{B} \]
+
+\schritt{Schritt 2 --- Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+$B$ & $\rho = 0{,}8$ & $\rho = 0{,}5$ & $\rho = 0{,}2$\\
+\midrule
+$1$ & $0{,}0400$ & $0{,}0400$ & $0{,}0400$\\
+$10$ & $0{,}0328$ & $0{,}0220$ & $0{,}0112$\\
+$100$ & $0{,}0321$ & $0{,}0202$ & $0{,}0083$\\
+$\infty$ & $0{,}0320$ & $0{,}0200$ & $0{,}0080$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Beispiel $B = 10$, $\rho = 0{,}5$:} $0{,}5\cdot0{,}04 + \frac{0{,}5\cdot0{,}04}{10} = 0{,}020 + 0{,}002 = 0{,}022$.
+
+\schritt{Schritt 3 --- Zwei Lehren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Die Zahl} & Ab etwa $B = 10$ bringen weitere Bäume kaum etwas.\\
+\textbf{Die Korrelation} & Von $\rho = 0{,}8$ auf $0{,}2$ zu kommen, viertelt die Varianz --- mehr als jede Zahl von Bäumen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Darum lohnt der zusätzliche Zufall im Zufallswald}: Er verschlechtert jeden einzelnen Baum etwas, senkt aber die Korrelation deutlich. Und darum schadet eine große Zahl von Bäumen nie --- sie hilft nur ab einem gewissen Punkt nicht mehr. Überanpassung durch zu viele Bäume gibt es beim Mitteln nicht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.3 --- Eine Runde Boosting}
+Zehn Patienten mit gleichem Gewicht $0{,}1$. Eine einfache Regel ordnet drei davon falsch ein. Führen Sie eine Runde AdaBoost aus.
+
+\loesung
+\schritt{Schritt 1 --- Fehler und Stimmgewicht}
+\[ \varepsilon = 3\cdot0{,}1 = 0{,}3 \]
+\[ \alpha = \tfrac12\ln\frac{0{,}7}{0{,}3} = \tfrac12\ln2{,}333 = \tfrac12\cdot0{,}8473 = 0{,}4236 \]
+
+\schritt{Schritt 2 --- Die neuen Gewichte vor Normierung}
+\[ e^{\alpha} = 1{,}5275, \qquad e^{-\alpha} = 0{,}6547 \]
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{1.4cm}P{2.4cm}P{2.0cm}@{}}
+\toprule
+\textbf{Gruppe} & \textbf{Anzahl} & \textbf{neu je Patient} & \textbf{zusammen}\\
+\midrule
+falsch & $3$ & $0{,}15275$ & $0{,}45825$\\
+richtig & $7$ & $0{,}06547$ & $0{,}45829$\\
+\midrule
+$Z$ & & & $0{,}9165$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Probe:} $2\sqrt{0{,}3\cdot0{,}7} = 2\sqrt{0{,}21} = 2\cdot0{,}4583 = 0{,}9165$ \checkmark
+
+\schritt{Schritt 3 --- Nach Normierung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Gruppe} & \textbf{je Patient} & \textbf{zusammen}\\
+\midrule
+falsch & $0{,}1667$ & $\mathbf{0{,}500}$\\
+richtig & $0{,}0714$ & $\mathbf{0{,}500}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nach der Neugewichtung tragen die falsch Eingeordneten genau die Hälfte des Gewichts.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Warum das kein Zufall ist}
+\kursiv{Falsche:} $\frac{\varepsilon\,e^{\alpha}}{Z} = \frac{\varepsilon\sqrt{(1-\varepsilon)/\varepsilon}}{2\sqrt{\varepsilon(1-\varepsilon)}} = \frac{\sqrt{\varepsilon(1-\varepsilon)}}{2\sqrt{\varepsilon(1-\varepsilon)}} = \frac12$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die alte Regel ist auf den neuen Gewichten genau so gut wie Raten.} Die nächste Regel muss also etwas anderes finden als die vorige --- das Verfahren zwingt jede Runde, eine neue Sicht auf die Daten zu gewinnen. Es ist das Gegenstück zum Zufallswald: Dort entsteht die Verschiedenheit durch Zufall, hier durch Absicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Wie schnell der Trainingsfehler fällt}
+Wenn jede Runde $\varepsilon = 0{,}3$ erreicht:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Runden} & $0{,}9165^{S}$ & $e^{-0{,}08S}$\\
+\midrule
+$10$ & $0{,}418$ & $0{,}449$\\
+$20$ & $0{,}175$ & $0{,}202$\\
+$50$ & $0{,}013$ & $0{,}018$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur rechten Spalte:} $\gamma = 0{,}5-0{,}3 = 0{,}2$, $2\gamma^{2} = 0{,}08$.
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Zwei Lager, ein Verfahren}
+\Person{Leo Breiman} (1928--2005) veröffentlichte 1984 mit \Person{Jerome Friedman}, \Person{Richard Olshen} und \Person{Charles Stone} das Buch über Klassifikations- und Regressionsbäume.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Etwa gleichzeitig entwickelte \Person{Ross Quinlan} in Australien die Entscheidungsbaumverfahren ID3 und C4.5 aus der Sicht der künstlichen Intelligenz. \textbf{Die beiden Gruppen arbeiteten lange nebeneinander, ohne einander zu zitieren} --- Statistiker und Informatiker hatten verschiedene Zeitschriften, Tagungen und Begriffe. Quinlan benutzte die Entropie, Breiman das Gini-Maß.}
+\end{minipage}
+\end{center}
+
+\schritt{Bagging und Zufallswälder}
+Breiman schlug 1996 das Bagging vor und 2001 den Zufallswald.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Im selben Jahr veröffentlichte er einen Aufsatz über die \enquote{zwei Kulturen} der Statistik: die eine, die Daten durch ein angenommenes Modell erklärt, und die andere, die nur Vorhersagegüte misst. \textbf{Er warf der Statistik vor, sich zu sehr an die erste zu klammern.} Der Aufsatz löste heftigen Widerspruch aus und gilt heute als Wendepunkt.}
+\end{minipage}
+\end{center}
+
+\schritt{Boosting}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Robert Schapire} bewies 1990, dass schwache Lernbarkeit starke nach sich zieht; mit \Person{Yoav Freund} gab er 1995 AdaBoost an. \textbf{Beide erhielten 2003 den Gödel-Preis} --- einen Preis für theoretische Informatik, für ein Verfahren, das zugleich zu den praktisch erfolgreichsten gehört.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wälder heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Tabellarische Daten} & Gradient-Boosting schlägt tiefe Netze bei Tabellen --- bis heute meist.\\
+\textbf{Ursachen schätzen} & Wälder, die Behandlungseffekte je Patient schätzen.\\
+\textbf{Erklären} & Shapley-Werte aus Band 21 für die Beiträge einzelner Merkmale.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Um zu erklären, warum der Wald bei einem bestimmten Patienten warnt, behandelt man die Merkmale als Spieler eines kooperativen Spiels und verteilt die Vorhersage nach dem Shapley-Wert aus Band 21, Kapitel~14. \textbf{Die dort beschriebenen Vorbehalte gelten hier genauso}: Verbundene Merkmale teilen sich die Anerkennung auf eine Weise, die von der gewählten Behandlung fehlender Merkmale abhängt, und die Erklärung beschreibt das Modell, nicht die Krankheit.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 9.1} & Entropie, Gini, Informationsgewinn\\
+\textbf{Instabilität} & kleine Verzerrung, große Varianz\\
+\textbf{Satz 9.2} & Mittel: $\rho\sigma^{2} + (1-\rho)\sigma^{2}/B$\\
+\textbf{Satz 9.3} & Boosting: Fehler $\le \prod 2\sqrt{\varepsilon_s(1-\varepsilon_s)}$\\
+\textbf{Der Bruchfall} & deutbar nur einzeln\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bäume fragen nach Schwellen. Das nächste Kapitel fragt nach Nachbarn --- und stößt auf ein Problem, das in hohen Dimensionen alle Verfahren trifft.}
+\end{minipage}
+\end{center}
+\end{merksatz}

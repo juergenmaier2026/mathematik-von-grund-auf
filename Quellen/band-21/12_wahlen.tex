@@ -1,0 +1,752 @@
+\chapter{Abstimmen}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Eine Gerätebeschaffung}
+Das Klinikum kann eines von mehreren Großgeräten anschaffen. Fünf Abteilungen stimmen ab, jede reiht die Geräte nach ihrem Bedarf.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Frage ist neu:} Nicht wie einzelne sich verhalten, sondern wie man aus vielen Reihungen eine gemeinsame macht.
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kapitel 11} & Man verändert Auszahlungen, um ein gewünschtes Verhalten herbeizuführen.\\
+\textbf{Hier} & Die Auszahlungen liegen fest. Gesucht ist ein \kursiv{Verfahren}, das sie zusammenführt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man erwartet, dass sich ein vernünftiges Verfahren finden lässt. \textbf{Dieses Kapitel zeigt, dass keines existiert} --- und zwar nicht, weil man noch nicht genug gesucht hätte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Paradoxon von Condorcet}
+
+\begin{merksatz}
+\boxtitel{Drei Abteilungen, drei Geräte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{4.0cm}@{}}
+\toprule
+\textbf{Abteilung} & \textbf{Reihung}\\
+\midrule
+Chirurgie & $A \succ B \succ C$\\
+Innere & $B \succ C \succ A$\\
+Radiologie & $C \succ A \succ B$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Paarvergleiche}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Vergleich} & \textbf{Ergebnis} & \\
+\midrule
+$A$ gegen $B$ & $2:1$ & $A$ gewinnt\\
+$B$ gegen $C$ & $2:1$ & $B$ gewinnt\\
+$C$ gegen $A$ & $2:1$ & $C$ gewinnt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\node[knotenb] (A) at (0,1.3) {$A$};
+\node[knotenb] (B) at (1.5,-0.8) {$B$};
+\node[knotenb] (C) at (-1.5,-0.8) {$C$};
+\draw[kanted, -{Stealth[length=4.5pt]}] (A)--(B);
+\draw[kanted, -{Stealth[length=4.5pt]}] (B)--(C);
+\draw[kanted, -{Stealth[length=4.5pt]}] (C)--(A);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.6) {jede Mehrheit ist klar, die Reihung ist es nicht};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Mehrheitsreihung ist nicht übertragbar.} Es gibt keinen Sieger, obwohl jeder Einzelvergleich eindeutig ausgeht.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Übertragbarkeit war in Satz 4.1 eine Forderung an die Vorlieben des Einzelnen --- und jede Abteilung erfüllt sie hier. \textbf{Die Mehrheitsregel erhält sie nicht.} Das ist der Kern des Kapitels: Eine Eigenschaft, die alle Beteiligten haben, muss das Ergebnis der Zusammenführung nicht haben.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Folge für die Tagesordnung}
+Stimmt man paarweise ab, so entscheidet die Reihenfolge der Abstimmungen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Tagesordnung} & \textbf{erster Sieger} & \textbf{Ergebnis}\\
+\midrule
+erst $A$/$B$, dann gegen $C$ & $A$ & $C$\\
+erst $B$/$C$, dann gegen $A$ & $B$ & $A$\\
+erst $C$/$A$, dann gegen $B$ & $C$ & $B$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer die Tagesordnung bestimmt, bestimmt das Ergebnis --- vollständig.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und zwar ohne jede Regelverletzung: Jede einzelne Abstimmung geht mit klarer Mehrheit aus. \textbf{Die Macht liegt bei der Sitzungsleitung, nicht bei den Stimmen} --- ein Befund, den jeder kennt, der Gremienarbeit betreibt, und der hier eine exakte Begründung erhält.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Vier Verfahren, vier Sieger}
+
+\begin{merksatz}
+\boxtitel{Ein Beispiel mit fünf Geräten}
+Dreiundfünfzig Stimmberechtigte, fünf Geräte:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Anzahl} & \textbf{Reihung}\\
+\midrule
+$18$ & $A \succ D \succ E \succ C \succ B$\\
+$12$ & $B \succ E \succ D \succ C \succ A$\\
+$10$ & $C \succ B \succ E \succ D \succ A$\\
+$9$ & $D \succ C \succ E \succ B \succ A$\\
+$4$ & $E \succ B \succ D \succ C \succ A$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Verfahren 1 --- relative Mehrheit}
+Nur der erste Platz zählt.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}@{}}
+\toprule
+$A$ & $B$ & $C$ & $D$ & $E$\\
+$\mathbf{18}$ & $12$ & $10$ & $9$ & $4$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\[ \Longrightarrow\ A \]
+
+\schritt{Verfahren 2 --- Stichwahl der beiden Besten}
+$A$ gegen $B$:
+\[ A: 18, \qquad B: 12+10+9+4 = 35 \]
+\[ \Longrightarrow\ B \]
+
+\schritt{Verfahren 3 --- schrittweise Ausscheidung}
+Immer der Letzte fällt heraus, seine Stimmen gehen weiter.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.6cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}@{}}
+\toprule
+\textbf{Runde} & $A$ & $B$ & $C$ & $D$ & $E$\\
+\midrule
+$1$ & $18$ & $12$ & $10$ & $9$ & $4$\\
+$2$ & $18$ & $16$ & $10$ & $9$ & ---\\
+$3$ & $18$ & $16$ & $19$ & --- & ---\\
+$4$ & $18$ & --- & $\mathbf{35}$ & & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\[ \Longrightarrow\ C \]
+
+\schritt{Verfahren 4 --- Borda-Punkte}
+Vier Punkte für den ersten Platz, drei für den zweiten, und so fort.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.2cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+& $A$ & $B$ & $C$ & $D$ & $E$\\
+\midrule
+Punkte & $72$ & $99$ & $101$ & $\mathbf{132}$ & $126$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur Spalte $D$:} $18\cdot3 + 12\cdot2 + 10\cdot1 + 9\cdot4 + 4\cdot2 = 54+24+10+36+8 = 132$
+
+\[ \Longrightarrow\ D \]
+
+\schritt{Verfahren 5 --- paarweise Mehrheiten}
+$D$ schlägt jeden anderen:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Vergleich} & \textbf{Ergebnis} & \\
+\midrule
+$D$ gegen $A$ & $35:18$ & \\
+$D$ gegen $B$ & $27:26$ & knapp\\
+$D$ gegen $C$ & $43:10$ & \\
+$D$ gegen $E$ & $27:26$ & knapp\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\[ \Longrightarrow\ D \ \text{(Condorcet-Sieger)} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Vier verschiedene Sieger bei fünf gebräuchlichen Verfahren --- aus denselben Stimmzetteln.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Besonders unangenehm ist $A$: Es gewinnt die relative Mehrheit und verliert jeden Paarvergleich mit $18$ gegen $35$. \textbf{Achtzehn von dreiundfünfzig wollen $A$; fünfunddreißig halten es für das schlechteste.} Die relative Mehrheitswahl ist das einzige Verfahren, das diesen Umstand vollständig ignoriert --- und das am weitesten verbreitete.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz von Arrow}
+
+\begin{merksatz}
+\boxtitel{Was man von einem Verfahren erwartet}
+Ein \Begriff{Wahlverfahren} bildet die Reihungen aller Beteiligten auf eine gemeinsame Reihung ab.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Universalität} & Jede Zusammenstellung von Reihungen ist zulässig, und das Ergebnis ist stets eine vollständige, übertragbare Reihung.\\
+\textbf{Einstimmigkeit} & Ziehen alle $x$ dem $y$ vor, so auch das Ergebnis.\\
+\textbf{Unabhängigkeit} & Ob $x$ vor $y$ steht, hängt nur davon ab, wie die Beteiligten $x$ und $y$ zueinander reihen --- nicht von einer dritten Möglichkeit $z$.\\
+\textbf{Keine Diktatur} & Es gibt keinen Beteiligten, dessen Reihung stets das Ergebnis ist.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 12.1 --- Arrow, 1951}
+Bei mindestens drei Möglichkeiten und mindestens zwei Beteiligten gibt es kein Verfahren, das alle vier Bedingungen erfüllt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nicht: man kennt keines. Es gibt keines.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis ist nicht lang, aber trickreich; er führt über den Begriff einer entscheidenden Gruppe und zeigt, dass diese sich auf eine einzige Person zusammenziehen lässt. \textbf{Wir verzichten auf ihn} --- die zweite der neun Auslassungen dieses Bandes. Die Fundstelle ist Osborne und Rubinstein\zit{19}, Kapitel~10.}
+\end{minipage}
+\end{center}
+
+\schritt{Wie die Verfahren scheitern}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Mehrheitsregel} & Verletzt die Universalität --- das Ergebnis ist nicht immer übertragbar (Abschnitt 12.2).\\
+\textbf{Borda} & Verletzt die Unabhängigkeit --- eine zusätzliche Möglichkeit verschiebt die Punkte.\\
+\textbf{Diktatur} & Erfüllt die ersten drei und ist ausgeschlossen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Unabhängigkeit ist die strittige Bedingung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Sie verlangt, dass die Stärke einer Vorliebe unberücksichtigt bleibt --- ob jemand $x$ knapp oder deutlich vor $y$ setzt, darf keine Rolle spielen. \textbf{Genau das macht Borda anders}, und genau deshalb scheitert es an dieser Bedingung. Wer sie aufgibt, muss allerdings Nutzen zwischen Personen vergleichen, und Satz 4.1 sagt, dass das keinen Sinn ergibt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 12.2 --- Gibbard und Satterthwaite, 1973/75}
+Jedes Verfahren, das bei mindestens drei Möglichkeiten jede von ihnen erreichen kann und keine Diktatur ist, lässt sich durch falsche Angaben zum eigenen Vorteil beeinflussen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es gibt kein Verfahren, bei dem ehrliches Abstimmen stets die beste Wahl ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Satz ist eine Folgerung aus Satz 12.1 und in gewisser Weise die praktisch schärfere Aussage. \textbf{Arrow sagt, dass die Zusammenführung Mängel hat; Gibbard und Satterthwaite sagen, dass die Stimmzettel selbst unzuverlässig sind.} Wer taktisch abstimmt, gibt nicht seine Vorlieben an, und damit fehlt dem Verfahren die Eingabe, die es verarbeiten soll.}
+\end{minipage}
+\end{center}
+
+\schritt{Borda wusste es}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Auf den Einwand, sein Verfahren lasse sich manipulieren, soll \Person{Jean-Charles de Borda} geantwortet haben, es sei nur für ehrliche Menschen gedacht. \textbf{Das ist keine Verteidigung, sondern eine Beschreibung der Lage} --- und Satz 12.2 besagt, dass es keinem anderen Verfahren besser ergeht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was die Sätze nicht bedeuten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Nicht:} & \enquote{Alle Verfahren sind gleich schlecht.} Sie scheitern an verschiedenen Bedingungen und in verschieden häufigen Fällen.\\
+\textbf{Nicht:} & \enquote{Abstimmen ist sinnlos.} Bei zwei Möglichkeiten gilt keiner der Sätze --- die einfache Mehrheit erfüllt alles.\\
+\textbf{Nicht:} & \enquote{Manipulation ist häufig.} Sie ist möglich; ob sie gelingt, hängt davon ab, wie viel man über die anderen weiß.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\Person{Kenneth May} zeigte 1952, dass bei genau zwei Möglichkeiten die einfache Mehrheit das einzige Verfahren ist, das Gleichbehandlung der Stimmen, Gleichbehandlung der Möglichkeiten und Monotonie erfüllt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Schwierigkeit beginnt also exakt bei drei.} Das erklärt zugleich, warum Stichwahlen und Ausschussverfahren so verbreitet sind: Sie zerlegen die Aufgabe in Entscheidungen zwischen zweien --- um den Preis, dass die Reihenfolge das Ergebnis bestimmt, wie Abschnitt 12.2 zeigt.}
+\end{minipage}
+\end{center}
+
+\schritt{Wie oft es überhaupt schiefgeht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{3.0cm}@{}}
+\toprule
+\textbf{Möglich\-keiten} & \textbf{kein Sieger} & \\
+\midrule
+$3$ & $\approx 9\,\%$ & bei zufälligen Reihungen\\
+$5$ & $\approx 25\,\%$ & \\
+$10$ & $\approx 50\,\%$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Werte gelten für rein zufällige, voneinander unabhängige Reihungen und viele Stimmen --- der ungünstigste Fall. \textbf{In tatsächlichen Wahlen sind die Reihungen nicht zufällig}, sondern häufig entlang einer gemeinsamen Achse geordnet, und dann gibt es fast immer einen Sieger. Abschnitt 12.6 behandelt diesen Ausweg.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Der Ausweg: eingipflige Vorlieben}
+Lassen sich die Möglichkeiten auf einer Linie anordnen, so dass jeder Beteiligte einen Bestpunkt hat und nach beiden Seiten hin abfällt, so heißen die Vorlieben \Begriff{eingipflig}.
+
+\schritt{Satz 12.3 --- der Medianwähler, Black 1948}
+Bei eingipfligen Vorlieben und ungerader Anzahl Beteiligter ist der Bestpunkt des mittleren Beteiligten ein Condorcet-Sieger.
+
+\schritt{Beweis}
+Sei $m$ der Median der Bestpunkte. Für jede Möglichkeit $y$ rechts von $m$ ziehen alle, deren Bestpunkt bei $m$ oder links davon liegt, $m$ dem $y$ vor --- das sind mindestens die Hälfte plus einer.
+
+Ebenso für $y$ links von $m$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Anordnung auf einer Linie genügt, und die Schwierigkeit verschwindet.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das erklärt, warum Abstimmungen über Beträge --- Budgethöhe, Personalschlüssel, Schwellenwerte --- meist glatt verlaufen: Sie sind von Natur aus eingipflig. \textbf{Schwierig wird es, wenn die Möglichkeiten sich in mehreren Hinsichten unterscheiden} --- etwa bei der Gerätewahl, wo Anschaffungspreis, Platzbedarf und Fachgebiet gegeneinanderstehen. Bei zwei oder mehr Dimensionen gilt der Satz nicht mehr.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.1 --- Ein Verfahren wählen}
+Prüfen Sie am Beispiel aus Abschnitt 12.3, welches Gerät jedes Verfahren wählt, und beurteilen Sie die Ergebnisse.
+
+\loesung
+\schritt{Schritt 1 --- Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{1.4cm}P{3.0cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Sieger} & \\
+\midrule
+relative Mehrheit & $A$ & \\
+Zweierstichwahl & $B$ & \\
+Ausscheidung & $C$ & \\
+Borda & $D$ & \\
+Paarvergleich & $D$ & Condorcet-Sieger\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- $A$ beurteilen}
+\[ A \ \text{gegen jeden anderen}: 18:35 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$A$ verliert jeden Paarvergleich --- es ist ein Condorcet-Verlierer.}
+\end{minipage}
+\end{center}
+
+\kursiv{Grund:} Alle $35$ Stimmberechtigten, die $A$ nicht auf Platz eins setzen, setzen es auf Platz fünf.
+
+\schritt{Schritt 3 --- $C$ beurteilen}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Vergleich} & \textbf{Ergebnis} & \\
+\midrule
+$C$ gegen $D$ & $10:43$ & deutlich verloren\\
+$C$ gegen $E$ & $19:34$ & verloren\\
+$C$ gegen $B$ & $37:16$ & gewonnen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Ausscheidungsverfahren wählt ein Gerät, das gegen $D$ mit $10$ zu $43$ verliert.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist kein Randfall dieses Beispiels, sondern eine bekannte Eigenschaft: \textbf{Das Ausscheidungsverfahren kann den Condorcet-Sieger in einer frühen Runde eliminieren}, weil es nur erste Plätze zählt. $D$ hatte nur neun erste Plätze und wurde in Runde 3 ausgeschieden --- obwohl es gegen alle anderen eine Mehrheit hat.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- $D$ beurteilen}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$D$ schlägt jeden anderen in der direkten Abstimmung --- zweimal allerdings nur mit $27$ zu $26$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Knappheit gegen $B$ und gegen $E$ ist bemerkenswert. \textbf{Ein Condorcet-Sieger ist nicht notwendig ein starker Sieger}, sondern nur einer, der keinen Paarvergleich verliert. Eine einzige Stimmänderung könnte die Lage kippen --- und dann gäbe es keinen Condorcet-Sieger mehr.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Empfehlung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Wenn es einen gibt} & Der Condorcet-Sieger ist die sicherste Wahl --- keine Mehrheit zieht etwas anderes vor.\\
+\textbf{Wenn nicht} & Borda liefert ein plausibles Ergebnis und schließt den Condorcet-Verlierer aus; manipulierbar bleibt es.\\
+\textbf{Nie} & Die relative Mehrheit bei mehr als zwei Möglichkeiten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der letzte Punkt ist die einzige klare Handlungsempfehlung, die dieses Kapitel hergibt. \textbf{Sie folgt nicht aus Arrow, sondern aus der Anschauung}: Ein Verfahren, das den Condorcet-Verlierer zum Sieger erklären kann, ist schwer zu rechtfertigen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.2 --- Die Tagesordnung nutzen}
+Im Paradoxon aus Abschnitt 12.2 leitet die Radiologie die Sitzung und möchte, dass $C$ gewinnt. Welche Tagesordnung wählt sie?
+
+\loesung
+\schritt{Schritt 1 --- Die Zyklusrichtung}
+\[ A \succ B, \qquad B \succ C, \qquad C \succ A \]
+
+\schritt{Schritt 2 --- Der Gedanke}
+Die eigene Möglichkeit soll \kursiv{zuletzt} antreten, gegen denjenigen, den sie schlägt.
+
+\[ C \ \text{schlägt} \ A \quad\Longrightarrow\quad A \ \text{muss die erste Runde gewinnen} \]
+
+\schritt{Schritt 3 --- Die Tagesordnung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.8cm}P{2.8cm}P{2.6cm}@{}}
+\toprule
+\textbf{Runde} & \textbf{Abstimmung} & \textbf{Sieger}\\
+\midrule
+$1$ & $A$ gegen $B$ & $A$ $(2:1)$\\
+$2$ & $A$ gegen $C$ & $\mathbf{C}$ $(2:1)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Die Probe für die anderen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Wer leitet} & \textbf{Erste Runde} & \textbf{Ergebnis}\\
+\midrule
+Chirurgie ($A$) & $B$ gegen $C$ & $A$\\
+Innere ($B$) & $C$ gegen $A$ & $B$\\
+Radiologie ($C$) & $A$ gegen $B$ & $C$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Abteilung kann ihr eigenes Gerät durchsetzen, wenn sie die Tagesordnung bestimmt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Regel}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die eigene Möglichkeit in die letzte Runde --- und als Gegner denjenigen, den sie schlägt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wer zuerst antritt, muss zweimal gewinnen; wer zuletzt antritt, nur einmal. \textbf{Das ist der Spätzieher-Vorteil} --- und damit das Gegenstück zum Erstzieher-Vorteil aus Kapitel~7. Ob Früh oder Spät nützt, hängt daran, ob man festlegt oder antwortet.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Gegenmaßnahme}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Alle Paare} & Man stimmt über sämtliche Paare ab und sucht den Condorcet-Sieger. Gibt es keinen, ist das sichtbar.\\
+\textbf{Borda} & Kennt keine Tagesordnung.\\
+\textbf{Losentscheid} & Bei nachgewiesenem Zyklus --- unbefriedigend, aber unparteiisch.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Zeile ist bei wenigen Möglichkeiten praktikabel: Bei $k$ Möglichkeiten sind $\binom k2$ Abstimmungen nötig, bei fünf also zehn. \textbf{Der Aufwand verhindert die Manipulation der Reihenfolge vollständig} --- und macht zugleich sichtbar, wenn kein Sieger existiert. Das ist mehr wert als ein Ergebnis, das nur so aussieht, als wäre es eines.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.3 --- Taktisch abstimmen}
+Beim Borda-Verfahren im kleinen Beispiel --- $5$ mit $A\succ B\succ C$, $4$ mit $B\succ C\succ A$, $3$ mit $C\succ B\succ A$ --- können die $A$-Anhänger ihre Stimmzettel ändern. Was erreichen sie?
+
+\loesung
+\schritt{Schritt 1 --- Das ehrliche Ergebnis}
+Punkte $2$, $1$, $0$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{3.2cm}P{1.6cm}@{}}
+\toprule
+& \textbf{Rechnung} & \textbf{Summe}\\
+\midrule
+$A$ & $5\cdot2$ & $10$\\
+$B$ & $5\cdot1+4\cdot2+3\cdot1$ & $\mathbf{16}$\\
+$C$ & $4\cdot1+3\cdot2$ & $10$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+$B$ gewinnt; die $A$-Anhänger erhalten ihre zweite Wahl.
+
+\schritt{Schritt 2 --- Der Eingriff}
+Die fünf $A$-Anhänger geben statt $A\succ B\succ C$ nun $A\succ C\succ B$ an --- sie stufen den gefährlichsten Gegner herab.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{3.2cm}P{1.6cm}@{}}
+\toprule
+& \textbf{Rechnung} & \textbf{Summe}\\
+\midrule
+$A$ & $5\cdot2$ & $10$\\
+$B$ & $5\cdot0+4\cdot2+3\cdot1$ & $11$\\
+$C$ & $5\cdot1+4\cdot1+3\cdot2$ & $\mathbf{15}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nun gewinnt $C$ --- die \kursiv{letzte} Wahl der $A$-Anhänger.} Der Eingriff hat ihnen geschadet.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Der bessere Eingriff}
+Um $A$ zum Sieg zu verhelfen, müssten die $A$-Anhänger $A$ um mindestens sieben Punkte verbessern --- das geht nicht, denn $A$ steht bei ihnen bereits ganz oben.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$A$ ist nicht durchsetzbar.} Die einzige Frage ist, ob $B$ oder $C$ gewinnt.
+\end{minipage}
+\end{center}
+
+\kursiv{Da die $A$-Anhänger $B$ dem $C$ vorziehen, ist ehrliches Abstimmen hier die beste Wahl.}
+
+\schritt{Schritt 4 --- Wo der Eingriff lohnt}
+Die $C$-Anhänger ($3$ Stimmen) geben statt $C\succ B\succ A$ nun $C\succ A\succ B$ an:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{3.2cm}P{1.6cm}@{}}
+\toprule
+& \textbf{Rechnung} & \textbf{Summe}\\
+\midrule
+$A$ & $5\cdot2+3\cdot1$ & $13$\\
+$B$ & $5\cdot1+4\cdot2$ & $13$\\
+$C$ & $4\cdot1+3\cdot2$ & $10$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gleichstand zwischen $A$ und $B$ --- und die $C$-Anhänger ziehen $B$ dem $A$ vor.} Auch dieser Eingriff schadet.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Fall, in dem es gelingt}
+Die vier $B$-Anhänger stufen $C$ herab: statt $B\succ C\succ A$ nun $B\succ A\succ C$.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{3.2cm}P{1.6cm}@{}}
+\toprule
+& \textbf{Rechnung} & \textbf{Summe}\\
+\midrule
+$A$ & $5\cdot2+4\cdot1$ & $14$\\
+$B$ & $5\cdot1+4\cdot2+3\cdot1$ & $\mathbf{16}$\\
+$C$ & $3\cdot2$ & $6$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+$B$ gewinnt weiterhin --- hier war der Eingriff unnötig, aber ungefährlich.
+
+\schritt{Schritt 6 --- Die Lehre}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Satz 12.2 besagt, dass es \kursiv{Stimmenverteilungen} gibt, bei denen sich falsche Angaben lohnen --- nicht, dass es bei jeder Verteilung so ist. \textbf{In diesem Beispiel schadet der Eingriff jedem, der ihn versucht}, weil $B$ eine so breite Zustimmung hat. Manipulierbarkeit ist eine Eigenschaft des Verfahrens; ob sich Manipulation lohnt, hängt an den Stimmen --- und an dem, was man über sie weiß.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Zwei Franzosen und ein Amerikaner}
+\Person{Jean-Charles de Borda} (1733--1799) schlug sein Punkteverfahren 1770 der Académie des Sciences vor, die es zur Wahl ihrer Mitglieder übernahm.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Akademie behielt es bis 1800 bei. Dann wurde es auf Betreiben eines neuen Mitglieds abgeschafft --- \Person{Napoleon Bonaparte}, der als Erster Konsul den Vorsitz übernommen hatte. \textbf{Die Begründung ist nicht überliefert.}}
+\end{minipage}
+\end{center}
+
+\schritt{Condorcet}
+\Person{Nicolas de Condorcet} (1743--1794) wies 1785 auf das nach ihm benannte Paradoxon hin und schlug die paarweise Abstimmung vor.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er war Mathematiker, Philosoph und Politiker, verfasste einen Verfassungsentwurf für die Republik und setzte sich früh für die Gleichberechtigung von Frauen und für die Abschaffung der Sklaverei ein. \textbf{Er starb 1794 in einer Gefängniszelle}, nachdem er als Girondist geächtet worden war --- die Umstände sind ungeklärt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Wiederentdeckung}
+Beide Arbeiten gerieten in Vergessenheit. \Person{Charles Dodgson} --- besser bekannt als \Person{Lewis Carroll} --- entwickelte in den 1870er Jahren unabhängig verwandte Verfahren für die Wahlen seines Colleges.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Duncan Black} stellte in den 1940er Jahren die Zusammenhänge her und bewies den Satz über den Medianwähler. \textbf{Er entdeckte dabei Condorcets und Bordas Arbeiten wieder}, die über anderthalb Jahrhunderte unbeachtet geblieben waren.}
+\end{minipage}
+\end{center}
+
+\schritt{Arrow}
+\Person{Kenneth Arrow} (1921--2017) bewies seinen Satz 1950 als Doktorand, im Alter von neunundzwanzig Jahren.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er hatte nach einem Verfahren gesucht und stattdessen bewiesen, dass es keines gibt. \textbf{Die Arbeit umfasst in Buchform gut hundert Seiten} und begründete ein eigenes Fach, die Theorie der gesellschaftlichen Wahl. 1972 erhielt Arrow den Wirtschaftsnobelpreis --- als bis heute jüngster Träger.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wahlverfahren heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{5.0cm}@{}}
+\toprule
+\textbf{Im Einsatz} & Ausscheidungsverfahren in Australien und Irland, seit 2018 auch in mehreren amerikanischen Städten.\\
+\textbf{Zustimmungs\-wahl} & Jeder kreuzt beliebig viele an; umgeht Arrow, weil keine Reihung verlangt wird.\\
+\textbf{Rechenaufwand} & Manche Verfahren sind nachweislich schwer manipulierbar --- ein Schutz durch Komplexität.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Bei der Zustimmungswahl gibt jeder an, welche Möglichkeiten er für annehmbar hält.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Satz 12.1 setzt voraus, dass Reihungen die Eingabe sind --- daher greift er hier nicht unmittelbar. \textbf{Dafür entsteht ein neues Problem: Wo setzt man die Grenze?} Die Antwort hängt davon ab, was man über die anderen erwartet, und damit ist das taktische Element zurück. Satz 12.2 gilt für die Zustimmungswahl ebenfalls.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Für einige Verfahren ist die Berechnung einer wirksamen Manipulation $\mathsf{NP}$-schwer.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das klingt nach einem Ausweg und ist in der Praxis schwächer, als es aussieht: \textbf{Die Schwere gilt für den schlechtesten Fall}, und die häufig auftretenden Stimmenverteilungen sind oft leicht zu manipulieren. Es ist dasselbe Problem wie in Band 20, Kapitel~10 --- ein Verfahren, dessen Sicherheit an einer Worst-Case-Aussage hängt, ist nicht solide.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Condorcet} & Mehrheiten sind nicht übertragbar\\
+\textbf{Die Tagesordnung} & entscheidet vollständig\\
+\textbf{Satz 12.1} & Arrow: es gibt kein Verfahren\\
+\textbf{Satz 12.2} & keines ist manipulationsfest\\
+\textbf{Satz 12.3} & eingipflig: der Median gewinnt\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Arrow verlangt eine vollständige Reihung als Ergebnis. Das nächste Kapitel verlangt weniger --- nur eine Zuteilung --- und findet Verfahren, die tatsächlich funktionieren.}
+\end{minipage}
+\end{center}
+\end{merksatz}

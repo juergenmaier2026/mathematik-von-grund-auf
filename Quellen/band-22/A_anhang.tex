@@ -1,0 +1,263 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Das Problem}
+
+\begin{merksatz}
+\boxtitel{Teil I}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\Risk(h) = \E[L(h(X),Y)]$ & Risiko (1.2)\\
+$h^{*}(x) = [\eta(x) \ge \tfrac12]$ & Bayes-Regel (1.3)\\
+$\eta \ge c_{\text{FP}}/(c_{\text{FP}}+c_{\text{FN}})$ & mit Kosten\\
+kein Verfahren überall besser & Satz 1.5\\
+$\sigma^{2} + \text{Verzerrung}^{2} + \text{Varianz}$ & Satz 2.1\\
+$2\sigma^{2}p/n$ & Optimismus (2.2)\\
+$c^{*} = \mu^{2}/(\mu^{2}+\sigma^{2})$ & Schrumpfen\\
+$e_i/(1-H_{ii})$ & Weglassen (3.2)\\
+Anteil richtig geordneter Paare & Trennschärfe (3.3)\\
+$\sqrt{2\ln m/n}$ & höchste Zufallskorrelation\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Verfahren}
+
+\begin{merksatz}
+\boxtitel{Teil II und IV}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$1/(1-\rho^{2})$ & Kollinearität\\
+$(X^{\!\top}X+\lambda I)^{-1}X^{\!\top}\vek y$ & Kamm (4.2)\\
+$d_j^{2}/(d_j^{2}+\lambda)$ & Schrumpffaktor\\
+$\operatorname{sign}(b)(|b|-\lambda)_{+}$ & Lasso (4.4)\\
+$\ln\frac{p}{1-p} = \beta_0 + \vek\beta^{\!\top}\vek x$ & logistisch (5.1)\\
+$\nabla J = \sum(p_i-y_i)\vek x_i$ & Gradient (5.2)\\
+$(R/\gamma)^{2}$ & Perzeptron (5.3)\\
+$\vek w = \sum\alpha_i t_i\vek x_i$ & Stützvektoren (6.2)\\
+$e^{-\gamma\|\vek x-\vek z\|^{2}}$ & Gauß-Kern\\
+$-p\log_2p - (1-p)\log_2(1-p)$ & Entropie (9.1)\\
+$\rho\sigma^{2} + (1-\rho)\sigma^{2}/B$ & Mittel (9.2)\\
+$\prod 2\sqrt{\varepsilon_s(1-\varepsilon_s)}$ & Boosting (9.3)\\
+$2\Risk^{*}(1-\Risk^{*})$ & ein Nachbar (10.2)\\
+$e = r^{1/p}$ & Kantenlänge\\
+$\sigma(1-\sigma) \le \tfrac14$ & verschwindender Gradient\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Theorie und Tiefe}
+
+\begin{merksatz}
+\boxtitel{Teil III und V}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$(\ln|\Hyp| + \ln\frac1\delta)/\varepsilon$ & fehlerfrei (7.2)\\
+$(\ln|\Hyp| + \ln\frac2\delta)/(2\varepsilon^{2})$ & allgemein (7.3)\\
+$2e^{-2n\varepsilon^{2}}$ & Hoeffding\\
+$\sum_{i\le d}\binom ni \le (en/d)^{d}$ & Sauer (7.5)\\
+$\hat\Risk + \sqrt{\frac8n(d\ln\frac{2en}{d}+\ln\frac4\delta)}$ & VC (7.6)\\
+Stützvektoren$/n$ & Weglassen (8.1)\\
+$(k\ln n + \ln\frac1\delta)/(n-k)$ & Kompression (8.2)\\
+$d \le (R/\gamma)^{2}$ & Rand (8.3)\\
+$\sum_j\sum_{C_j}\|\vek x_i-\vek\mu_j\|^{2}$ & $k$-Mittel (12.1)\\
+$\max\vek u^{\!\top}\Sigma\vek u = \lambda_1$ & Hauptkomp.\ (13.1)\\
+$1+\rho(p-1)$ und $1-\rho$ & gleiche Verbundenheit\\
+$X^{\!\top}(XX^{\!\top})^{-1}\vek y$ & kürzeste Lösung (14.1)\\
+$m+1$ gegen $2^{L}$ Stücke & Tiefe (14.2)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Was in diesem Band \kursiv{nicht} bewiesen wurde}
+
+\begin{merksatz}
+\boxtitel{Neun Auslassungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{1.2cm}P{3.2cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+Weglassformel & $3$ & Hastie u.\,a.\zit{11}, Kap.\ 7\\
+Satz von Mercer & $6$ & Schölkopf, Smola\zit{22}\\
+Hoeffding & $7$ & Shalev-Shwartz\zit{24}, Anh.\ B\\
+Sauer & $7$ & Shalev-Shwartz\zit{24}, Kap.\ 6\\
+Fundamentalsatz (VC) & $7$ & Shalev-Shwartz\zit{24}, Kap.\ 28\\
+Grenzübergang Nachbar & $10$ & Cover, Hart\zit{6}\\
+Universelle Näherung & $11$ & Goodfellow u.\,a.\zit{10}\\
+EM-Monotonie & $12$ & Bishop\zit{3}, Kap.\ 9\\
+Eckart-Young & $13$ & Deisenroth u.\,a.\zit{7}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Neun Auslassungen, jede im Text benannt, mit Begründung und Fundstelle. \textbf{Alle übrigen Sätze des Bandes sind vollständig bewiesen} --- darunter die Kompressionsschranke, die Randdimension über das Perzeptron, AdaBoost, die Schranke über Stützvektoren und die kürzeste Lösung des Gradientenabstiegs.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte des Bandes}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz worauf beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{3.4cm}P{1.0cm}P{3.8cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{beruht auf}\\
+\midrule
+Bayes-Regel & $1$ & punktweise Minimierung\\
+Zerlegung & $2$ & Quadrieren, Erwartungswert\\
+Optimismus & $2$ & Spur einer Projektion\\
+Kamm & $4$ & positiv definite Matrix\\
+Lasso & $4$ & Fallunterscheidung am Knick\\
+Konvexität & $5$ & $\sigma' = \sigma(1-\sigma)$\\
+Perzeptron & $5$ & Cauchy-Schwarz\\
+Stützvektoren & $6$ & komplementärer Schlupf (Band 19)\\
+endliche Klassen & $7$ & Vereinigung, $1-\varepsilon \le e^{-\varepsilon}$\\
+Weglassen & $8$ & komplementärer Schlupf\\
+Kompression & $8$ & wie Satz 7.2\\
+Randdimension & $8$ & Perzeptron, Satz 5.3\\
+Mittel & $9$ & Kovarianzen summieren\\
+Boosting & $9$ & Exponent über Indikator\\
+ein Nachbar & $10$ & Varianz $\ge 0$\\
+$k$-Mittel & $12$ & Durchschnitt minimiert\\
+Hauptkomponenten & $13$ & Spektralsatz (Band 2)\\
+kürzeste Lösung & $14$ & Zeilenraum $\perp$ Kern\\
+Tiefe & $14$ & Knicke zählen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von Hume bis zu den Skalengesetzen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{1.3cm}P{3.0cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Ereignis}\\
+\midrule
+$1739$ & Hume & das Induktionsproblem\\
+$1838$ & Verhulst & die logistische Kurve\\
+$1894$ & Pearson & Mischung zweier Krabbenarten\\
+$1901$ & Pearson & erste Hauptkomponente\\
+$1904$ & Spearman & der allgemeine Faktor\\
+$1933$ & Hotelling & Hauptkomponenten als Eigenwerte\\
+$1936$ & Fisher & Diskriminanzanalyse\\
+$1936$ & Eckart, Young & beste Näherung\\
+$1943$ & Tichonow & Regularisierung\\
+$1950$ & Turing & lernende Maschinen\\
+$1951$ & Fix, Hodges & nächste Nachbarn\\
+$1956$ & Stein & das Paradoxon\\
+$1957$ & Bellman & Fluch der Dimension\\
+$1957$ & Lloyd & $k$ Mittelpunkte\\
+$1958$ & Rosenblatt & das Perzeptron\\
+$1959$ & Samuel & der Name\\
+$1962$ & Novikoff & Konvergenz des Perzeptrons\\
+$1963$ & Vapnik, Tscherwonenkis & breitester Rand\\
+$1967$ & Cover, Hart & ein Nachbar, doppeltes Risiko\\
+$1969$ & Minsky, Papert & \kursiv{Perceptrons}\\
+$1970$ & Hoerl, Kennard & Kammregression\\
+$1971$ & \textbf{Vapnik, Tscherwonenkis} & \textbf{VC-Dimension}\\
+$1972$ & Sauer, Shelah & das Lemma\\
+$1974$ & Stone & Kreuzvalidierung\\
+$1977$ & Dempster, Laird, Rubin & EM\\
+$1984$ & Valiant & PAC-Lernen\\
+$1984$ & Breiman u.\,a. & Entscheidungsbäume\\
+$1986$ & Rumelhart, Hinton, Williams & Rückpropagation\\
+$1986$ & Littlestone, Warmuth & Kompression\\
+$1989$ & Cybenko & universelle Näherung\\
+$1992$ & Boser, Guyon, Vapnik & Kerntrick\\
+$1995$ & Freund, Schapire & AdaBoost\\
+$1996$ & Tibshirani & Lasso\\
+$2001$ & Breiman & Zufallswald, zwei Kulturen\\
+$2002$ & Ambroise, McLachlan & das Leck\\
+$2012$ & Krizhevsky u.\,a. & tiefe Netze gewinnen\\
+$2016$ & Telgarsky & Tiefe\\
+$2017$ & \textbf{Zhang u.\,a.} & \textbf{vertauschte Etiketten}\\
+$2019$ & Belkin u.\,a. & doppelter Abstieg\\
+$2019$ & Obermeyer u.\,a. & Kosten statt Bedarf\\
+$2019$ & Seymour u.\,a. & Sepsis-Phänotypen\\
+$2020$ & --- & Skalengesetze\\
+$2021$ & Wong u.\,a. & Nachprüfung des Sepsissystems\\
+$2023$ & Kapoor, Narayanan & Lecks in $17$ Fächern\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Begriff} & \textbf{Bedeutung}\\
+\midrule
+\endhead
+Äußere Prüfung & an Daten einer anderen Klinik (3)\\
+Bagging & Mittel über Neuziehungen (9)\\
+Bayes-Regel & überall das Wahrscheinlichere (1.3)\\
+Bayes-Risiko & kleinstmöglicher Fehler (1)\\
+Doppelter Abstieg & zweites Tal jenseits $p = n$ (14)\\
+EM-Verfahren & Erwartung, Maximierung (12)\\
+Ersatzverlust & konvexe Näherung an Null-Eins (6)\\
+Gauß-Kern & Ähnlichkeit über Abstand (6)\\
+Hauptkomponente & Richtung größter Streuung (13)\\
+Implizite Regularisierung & Strafe im Verfahren, nicht im Ziel (14)\\
+Induktive Neigung & eingebaute Annahme (1)\\
+Kalibrierung & $30\,\%$ heißt $30\,\%$ (3)\\
+Kammregression & Strafe $\lambda\|\vek\beta\|^{2}$ (4.1)\\
+Kern & Skalarprodukt im Merkmalsraum (6.3)\\
+Kompression & Regel aus $k$ Punkten (8)\\
+Kreuzvalidierung & reihum zurückhalten (3.1)\\
+Kreuzentropie & Verlust der log.\ Regression (5)\\
+Lasso & Strafe $\lambda\|\vek\beta\|_1$ (4.3)\\
+Leck & Information aus der Prüfung im Lernen (3)\\
+Nächste Nachbarn & Mehrheit der ähnlichsten (10.1)\\
+Optimismus & Test minus Training (2.2)\\
+PAC & wahrscheinlich ungefähr richtig (7.1)\\
+Perzeptron & Korrektur bei Fehler (5)\\
+Rand & Abstand zur Grenze (6.1)\\
+Risiko & erwarteter Verlust (1.2)\\
+Rückpropagation & Kettenregel rückwärts (11)\\
+Stützvektor & Punkt auf dem Rand (6.2)\\
+Trennschärfe & Paarvergleich, AUC (3.3)\\
+Überanpassung & Varianz überwiegt (2)\\
+Unteranpassung & Verzerrung überwiegt (2)\\
+VC-Dimension & größte zerschmetterte Menge (7.4)\\
+Verzerrung & mittlere Abweichung (2)\\
+Zerschmettern & jede Einteilung erreichen (7.4)\\
+Zufallswald & Bäume mit Zufallsauswahl (9)\\
+\bottomrule
+\end{longtable}}
+\end{center}
+\end{merksatz}

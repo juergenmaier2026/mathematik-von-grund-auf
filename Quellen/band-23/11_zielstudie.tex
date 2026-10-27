@@ -1,0 +1,361 @@
+\chapter{Die Studie nachbilden}
+
+\section{Der Leitfall, aufgelöst}
+
+\begin{merksatz}
+\boxtitel{Sieben Entscheidungen}
+Statt zu fragen, welches Verfahren man auf die Daten anwendet, beschreibt man zuerst die randomisierte Studie, die man gern durchgeführt hätte --- und bildet sie dann mit den vorhandenen Daten nach.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Teilnehmer} & Erwachsene mit Sepsisverdacht in der Notaufnahme.\\
+\textbf{Eingriffe} & Antibiotikum innerhalb einer Stunde gegen Gabe nach ein bis sechs Stunden.\\
+\textbf{Zuteilung} & Zufällig --- in der Nachbildung ersetzt durch Anpassung an alles bei Aufnahme Bekannte.\\
+\textbf{Beginn} & Zeitpunkt des Sepsisverdachts. Behandlungszuordnung \kursiv{zu diesem Zeitpunkt}.\\
+\textbf{Ausgang} & Tod binnen $28$ Tagen.\\
+\textbf{Nachbeobachtung} & Von Beginn bis Tod oder Tag $28$.\\
+\textbf{Auswertung} & Nach zugeordneter Strategie, nicht nach tatsächlicher Gabe.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Zeile ist eine Entscheidung, die man in einer Studie ohnehin treffen müsste --- und die man in einer Datenauswertung oft stillschweigend trifft.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der vierte Punkt ist der wichtigste.} In einer Studie fallen Zuteilung, Beginn und Beobachtungsanfang zusammen. In Routinedaten tun sie es nicht --- und wer sie auseinanderfallen lässt, erzeugt die Verzerrung des nächsten Abschnitts.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Unsterbliche Zeit}
+
+\begin{warnung}
+\boxtitelr{Eine Behandlung, die nicht wirkt, verlängert das Leben}
+Man ordne jeden Patienten der Gruppe \enquote{behandelt} zu, der irgendwann im Verlauf das Medikament erhielt. Die Gabe erfolge frühestens am Tag $3$ --- und wirke in Wahrheit \kursiv{gar nicht}.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.8cm}@{}}
+\toprule
+\textbf{Gruppe} & \textbf{mittlere Überlebenszeit}\\
+\midrule
+\enquote{behandelt} & $13{,}0$ Tage\\
+\enquote{unbehandelt} & $7{,}5$ Tage\\
+\midrule
+wahrer Effekt & $\mathbf{0}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Behandlung scheint das Leben um $73$ Prozent zu verlängern --- und tut nichts.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wer am Tag $2$ stirbt, kann nicht behandelt worden sein. \textbf{Die Behandeltengruppe enthält nur Patienten, die mindestens drei Tage überlebt haben} --- und diese drei Tage werden ihnen zusätzlich gutgeschrieben. Man nennt das \Begriff{unsterbliche Zeit}: eine Spanne, in der der Tod durch die Gruppenzuordnung ausgeschlossen ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Abhilfe}
+Man beginne die Beobachtung bei allen am Tag $3$ und schließe aus, wer vorher starb:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.8cm}@{}}
+\toprule
+\textbf{Gruppe} & \textbf{ab Tag 3}\\
+\midrule
+behandelt & $9{,}99$ Tage\\
+unbehandelt & $9{,}96$ Tage\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Effekt verschwindet, wie er soll.} Dieselbe Verzerrung steckt hinter zahlreichen Beobachtungsstudien, in denen Medikamente wundersam wirkten --- am bekanntesten die vermeintliche Lebensverlängerung durch Statine und durch Oscar-Gewinne. Sie entsteht nicht aus Störgrößen, sondern aus der falschen Zuordnung des Beginns, und keine Anpassung der Welt behebt sie.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Leitfall gerechnet}
+
+\begin{merksatz}
+\boxtitel{Alle Verfahren nebeneinander}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Effekt} & \textbf{Kapitel}\\
+\midrule
+naiver Vergleich & $+14{,}2$ & $1$\\
+standardisiert & $-7{,}5$ & $1$, $2$\\
+fünf Schichten & $-10{,}1$ & $7$\\
+Gewichten & $-12{,}3$ & $8$\\
+doppelt abgesichert & $-11{,}5$ & $8$\\
+Instrument (Befolger) & $-5{,}6$ & $9$\\
+Sprung an der Schwelle & $-6{,}0$ & $10$\\
+doppelte Differenz & $-5{,}5$ & $10$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Verschiedene Datensätze und Zielgrößen --- die Zahlen sind nicht unmittelbar vergleichbar.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Alle Verfahren außer dem naiven Vergleich stimmen im Vorzeichen und in der Größenordnung überein: Die frühe Gabe senkt die Sterblichkeit um fünf bis zwölf Punkte.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Diese Übereinstimmung ist das stärkste verfügbare Argument.} Jedes Verfahren beruht auf einer anderen unprüfbaren Annahme --- keine unbeobachtete Störgröße, Ausschlussbedingung, Stetigkeit an der Schwelle, parallele Entwicklung. Dass sie zum selben Ergebnis führen, spricht dafür, dass nicht alle zugleich falsch sind. Man nennt das \Begriff{Triangulation}, und sie ersetzt keinen Beweis, aber sie ist mehr als jede einzelne Rechnung.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Unterschiede sind lehrreich}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Instrumentschätzer liegt niedriger --- er misst den Effekt bei den Befolgern, und das sind überwiegend Leichtkranke. Der Sprung an der Schwelle gilt für Grenzfälle. \textbf{Die Zahlen unterscheiden sich nicht, weil eines der Verfahren falsch wäre, sondern weil sie verschiedene Fragen beantworten} --- über verschiedene Bevölkerungen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was die Nachbildung nicht leistet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Störgrößen} & Die Zuteilung wird durch Anpassung ersetzt --- mit allen Annahmen aus Kapitel~2.\\
+\textbf{Erfassung} & Was nicht dokumentiert ist, existiert für die Auswertung nicht. Der klinische Eindruck steht in keiner Datenbank.\\
+\textbf{Behandlungs\-begriff} & \enquote{Innerhalb einer Stunde} muss in den Daten genauso definiert sein wie in der gedachten Studie.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Nachbildung beseitigt die vermeidbaren Fehler, nicht die unvermeidbaren.} Ihr Wert liegt darin, dass sie die Entscheidungen sichtbar macht: Wer sieben Zeilen ausfüllen muss, bemerkt, wenn er den Beginn falsch setzt. Große Vergleichsuntersuchungen haben gezeigt, dass sorgfältig nachgebildete Studien den randomisierten Ergebnissen überwiegend entsprechen --- und nachlässige nicht.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- Unsterbliche Zeit finden}
+Drei Auswertungen. Welche enthält unsterbliche Zeit?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+(a) & Patienten, die im Verlauf eine Rehabilitation erhielten, gegen die übrigen --- Überleben ab Aufnahme.\\
+(b) & Patienten mit Antibiotikagabe binnen einer Stunde gegen später --- Überleben ab Aufnahme.\\
+(c) & Patienten, die in der ersten Woche mindestens eine Blutkultur erhielten, gegen die übrigen --- Überleben ab Tag 8.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a)}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ja.} Wer früh stirbt, erreicht die Rehabilitation nie. Die Gruppe \enquote{mit Reha} ist eine Gruppe von Überlebenden.
+\end{minipage}
+\end{center}
+
+\schritt{(b)}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kaum.} Beide Gruppen sind binnen einer Stunde definiert; nur wer in der ersten Stunde stirbt, verzerrt --- ein kleiner, aber nicht leerer Anteil.
+\end{minipage}
+\end{center}
+
+\kursiv{Sauber wird es, wenn man die ersten sechzig Minuten als Einlaufzeit behandelt und die Beobachtung erst danach beginnt.}
+
+\schritt{(c)}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nein.} Beobachtung ab Tag 8, Gruppenzuordnung anhand der ersten Woche --- die Zuordnung ist zu Beobachtungsbeginn abgeschlossen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das Verfahren der festen Marke}: Man setzt einen Zeitpunkt, ordnet nach allem zu, was vorher geschah, und beobachtet erst danach. \textbf{Es kostet alle Patienten, die vor der Marke sterben} --- und beantwortet eine engere Frage: nicht, was die Behandlung bewirkt, sondern was sie bei denen bewirkt, die die erste Woche überlebt haben.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- Wie groß wird die Verzerrung?}
+Die Behandlung erfolgt frühestens am Tag $k$, die Überlebenszeit sei exponentialverteilt mit Mittelwert $10$ Tagen, und die Behandlung wirke nicht. Wie groß ist der scheinbare Gewinn?
+
+\loesung
+\schritt{Schritt 1 --- Der Mechanismus}
+Die Behandeltengruppe besteht aus Patienten mit $T > k$. Bei der Exponentialverteilung gilt die Gedächtnislosigkeit (Band 4, Kapitel~6):
+\[ \mathbb{E}[T \mid T > k] = k + 10 \]
+
+\schritt{Schritt 2 --- Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$k$ & \textbf{behandelt} & \textbf{scheinbarer Gewinn}\\
+\midrule
+$1$ & $11{,}0$ & $+1$ Tag\\
+$3$ & $13{,}0$ & $+3$ Tage\\
+$7$ & $17{,}0$ & $+7$ Tage\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der scheinbare Gewinn ist genau die unsterbliche Zeit --- Tag für Tag.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Und die Vergleichsgruppe}
+Die Unbehandelten enthalten alle früh Verstorbenen; ihr Mittelwert sinkt unter $10$. \kursiv{In der Rechnung von Abschnitt 11.2:} $7{,}5$ statt $10$.
+
+\[ 13{,}0 - 7{,}5 = 5{,}5 \ \text{Tage scheinbarer Gewinn bei } k = 3 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Beide Seiten verschieben sich, und zwar in entgegengesetzte Richtungen.} Deshalb ist die Verzerrung größer als die unsterbliche Zeit selbst. Sie wächst mit $k$ --- je später die Behandlung im Verlauf einsetzt, desto beeindruckender wirkt sie.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Die sieben Zeilen ausfüllen}
+Entwerfen Sie die Zielstudie für die Frage, ob eine frühe Mobilisierung nach Intensivbehandlung die Selbständigkeit verbessert.
+
+\loesung
+\schritt{Die Entscheidungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Teilnehmer} & Erwachsene, die $\ge 48$ Stunden beatmet wurden und am Tag $3$ noch leben.\\
+\textbf{Eingriffe} & Mobilisierung ab Tag $3$ gegen Beginn ab Tag $7$.\\
+\textbf{Zuteilung} & Anpassung an Zustand, Beatmungsdauer, Sedierungstiefe und Personalbesetzung am Tag $3$.\\
+\textbf{Beginn} & Tag $3$.\\
+\textbf{Ausgang} & Selbständigkeit nach $90$ Tagen.\\
+\textbf{Nachbeobachtung} & Tag $3$ bis Tag $90$; Tod als eigener Ausgang.\\
+\textbf{Auswertung} & Nach zugeordneter Strategie.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die drei Fallen, die dadurch vermieden werden}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Unsterbliche Zeit} & Beginn am Tag $3$, nicht bei Aufnahme.\\
+\textbf{Kollider} & Nicht \enquote{nur wer mobilisiert wurde} --- das wäre eine Auswahl nach einer Folge des Zustands.\\
+\textbf{Konkurrieren\-der Ausgang} & Wer stirbt, ist nicht \enquote{unselbständig}; der Tod braucht eine eigene Behandlung in der Auswertung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die dritte Zeile ist in der Intensivmedizin allgegenwärtig}: Ein Verfahren, das die Sterblichkeit senkt, lässt mehr schwer Beeinträchtigte am Leben und sieht dann schlecht aus, wenn man nur die Überlebenden betrachtet. Man wählt deshalb zusammengesetzte Ausgänge --- \enquote{tot oder unselbständig} --- oder berichtet beide getrennt. Kapitel~13 behandelt die verwandte Frage, wie man Wirkungen über Zwischengrößen zerlegt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Hormonstudie und ihre Umkehr}
+Zwanzig Jahre lang zeigten Beobachtungsstudien, dass eine Hormonersatztherapie nach den Wechseljahren das Herzinfarktrisiko senkt --- um etwa die Hälfte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{2002 zeigte eine große randomisierte Studie das Gegenteil: ein leicht \kursiv{erhöhtes} Risiko. \textbf{Der Widerspruch galt als Beweis, dass Beobachtungsdaten für kausale Fragen untauglich seien.}}
+\end{minipage}
+\end{center}
+
+\schritt{Die Auflösung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Miguel Hernán} und Mitarbeiter bildeten 2008 mit denselben Beobachtungsdaten die randomisierte Studie sorgfältig nach --- gleiche Teilnehmer, gleicher Beginn, gleiche Auswertung. \textbf{Das Ergebnis stimmte mit dem randomisierten überein.} Der ursprüngliche Widerspruch beruhte auf zwei Fehlern: Die Beobachtungsstudien hatten Frauen eingeschlossen, die schon lange Hormone nahmen --- also die, die sie vertragen hatten ---, und den Beobachtungsbeginn falsch gesetzt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Folge}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Daraus entstand der Ansatz der Zielstudie, den Hernán und \Person{James Robins} ab 2016 ausformulierten. \textbf{Seine Lehre ist unbequem: Die meisten Widersprüche zwischen Beobachtung und Versuch stammen nicht aus Störgrößen, sondern aus vermeidbaren Entwurfsfehlern} --- und die lassen sich beheben.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Nachbildung heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.4cm}P{4.8cm}@{}}
+\toprule
+\textbf{Zulassung} & Behörden akzeptieren nachgebildete Studien als ergänzende Evidenz.\\
+\textbf{Vergleichs\-programme} & Systematische Nachbildung bekannter Studien als Prüfstein.\\
+\textbf{Vorabregistrie\-rung} & Das Protokoll wird festgelegt, bevor die Daten gesehen werden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ohne Vorabfestlegung ist die Zielstudie wirkungslos} --- man kann die sieben Zeilen so lange verändern, bis das Ergebnis gefällt. Das ist dasselbe Problem wie das multiple Testen in Band 17 und die Modellauswahl auf Testdaten in Band 22, Kapitel~3: Die Freiheit des Auswertenden ist die Fehlerquelle, und die einzige Abhilfe ist, sie vorher zu binden.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Sieben Zeilen} & erst die Studie, dann die Daten\\
+\textbf{Beginn} & Zuteilung und Beobachtung zusammen\\
+\textbf{Unsterbliche Zeit} & $73$ Prozent Gewinn aus nichts\\
+\textbf{Triangulation} & verschiedene Annahmen, gleiches Ergebnis\\
+\textbf{Der Bruchfall} & vermeidbare Fehler, nicht alle\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~IV. Bisher wurde einmal behandelt. Teil~V behandelt wiederholt --- und dort versagt alles, was die Kapitel~7 und 8 gelehrt haben.}
+\end{minipage}
+\end{center}
+\end{merksatz}

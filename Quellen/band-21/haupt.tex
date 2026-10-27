@@ -1,0 +1,194 @@
+\documentclass[11pt,a4paper,twoside]{book}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathpazo}
+\usepackage[scaled=0.90]{helvet}
+\usepackage{courier}
+\usepackage[a4paper,inner=3.0cm,outer=2.4cm,top=2.6cm,bottom=2.8cm]{geometry}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,arrows.meta,decorations.pathmorphing}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage[german=quotes]{csquotes}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{amsmath,amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{tief}{HTML}{1F3A5F}
+\definecolor{mittel}{HTML}{2E5F8A}
+\definecolor{akzent}{HTML}{A34A28}
+\definecolor{sand}{HTML}{F4F1EA}
+\definecolor{grau}{HTML}{5A5A5A}
+\definecolor{gruen}{HTML}{2F6B4F}
+\definecolor{purpur}{HTML}{5B3A72}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\newcommand{\kursiv}[1]{{\itshape\color{grau}#1}}
+\newcommand{\code}[1]{{\ttfamily\small #1}}
+\newcommand{\Person}[1]{\textbf{#1}}
+\newcommand{\Begriff}[1]{\textbf{#1}}
+\newcommand{\zit}[1]{\textsuperscript{[#1]}}
+\newcommand{\Oh}{\mathcal{O}}
+\newcommand{\boxtitel}[1]{{\bfseries\color{tief}#1}\par\vspace{6pt}}
+\newcommand{\boxtitelr}[1]{{\bfseries\color{akzent}#1}\par\vspace{6pt}}
+\newcommand{\boxtitelg}[1]{{\bfseries\color{gruen}#1}\par\vspace{6pt}}
+\newcommand{\boxtitelp}[1]{{\bfseries\color{purpur}#1}\par\vspace{6pt}}
+\newcommand{\boxtitelm}[1]{{\bfseries\color{mittel}#1}\par\vspace{6pt}}
+\newcommand{\loesung}{\par\vspace{8pt}{\bfseries\color{mittel}Lösung}\par\vspace{4pt}}
+\newcommand{\schritt}[1]{\par\vspace{5pt}{\bfseries\color{grau}#1}\par\vspace{2pt}}
+
+% Graphentheoretische Notation
+\newcommand{\Gr}{G}
+\newcommand{\Kn}[1]{K_{#1}}
+\newcommand{\Kmn}[2]{K_{#1,#2}}
+\newcommand{\Grad}{\deg}
+\newcommand{\Nb}{N}
+\newcommand{\chrom}{\chi}
+\newcommand{\Ecken}{V}
+\newcommand{\Kanten}{E}
+
+\newtcolorbox{grundbox}[1][tief]{
+  breakable, enhanced, colback=sand, colframe=sand,
+  boxrule=0pt, leftrule=3pt, borderline west={3pt}{0pt}{#1},
+  left=12pt, right=10pt, top=10pt, bottom=10pt,
+  sharp corners, before skip=12pt, after skip=12pt}
+
+\newenvironment{merksatz}{\begin{grundbox}[tief]}{\end{grundbox}}
+\newenvironment{warnung}{\begin{grundbox}[akzent]}{\end{grundbox}}
+\newenvironment{definition}{\begin{grundbox}[mittel]}{\end{grundbox}}
+\newenvironment{geschichte}{\begin{grundbox}[gruen]}{\end{grundbox}}
+\newenvironment{forschung}{\begin{grundbox}[purpur]}{\end{grundbox}}
+\newenvironment{aufgabe}{\begin{grundbox}[grau]}{\end{grundbox}}
+\newenvironment{technik}{\begin{grundbox}[mittel]}{\end{grundbox}}
+
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{tief}}{\Large\color{grau}Kapitel \thechapter}{8pt}{\Huge}
+\titleformat{\part}[display]
+  {\normalfont\huge\bfseries\color{tief}\filcenter}{\Large\color{grau}Teil \thepart}{10pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{10pt}{28pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,LO]{\small\itshape\color{grau}\leftmark}
+\fancyfoot[LE,LO]{\small\color{grau}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\renewcommand{\arraystretch}{1.3}
+
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+\renewcommand{\chaptername}{Kapitel}
+\renewcommand{\partname}{Teil}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\tablename}{Tabelle}
+\renewcommand{\figurename}{Abbildung}
+
+\hyphenation{Spiel-the-o-rie spiel-the-o-re-tisch Aus-zah-lung Aus-zah-lungs-ma-trix
+Stra-te-gie Stra-te-gi-en Stra-te-gie-raum
+Gleich-ge-wicht Gleich-ge-wich-te Nash-Gleich-ge-wicht Sat-tel-punkt
+Mi-ni-max Ma-xi-min Null-sum-men-spiel Nicht-null-sum-men-spiel
+Do-mi-nanz do-mi-niert Do-mi-nanz-eli-mi-na-ti-on
+Ge-fan-ge-nen-di-lem-ma Ko-or-di-na-ti-ons-spiel
+Nor-mal-form ex-ten-si-ve Rück-wärts-in-duk-ti-on Teil-spiel
+Wie-der-ho-lung Ver-gel-tungs-stra-te-gie
+evo-lu-ti-o-när evo-lu-ti-o-nä-re Re-pli-ka-tor-dy-na-mik
+Kol-lek-tiv-gut Kol-lek-tiv-gü-ter All-men-de-tra-gik Tritt-brett-fah-ren
+Me-cha-nis-men-ent-wurf An-reiz-ver-träg-lich-keit Ab-stim-mungs-ver-fah-ren
+Auk-ti-on Auk-ti-o-nen Zweit-preis-auk-ti-on Ver-hand-lung Ko-a-li-ti-on
+Shap-ley-Wert Ver-hand-lungs-lö-sung
+Neu-stadt Kli-ni-kum Ma-ri-en-hos-pi-tal Not-arzt-stand-ort}
+
+\tikzset{
+  knoten/.style={circle, fill=tief, inner sep=0pt, minimum size=5.5pt},
+  knotenb/.style={circle, draw=tief, fill=white, line width=0.9pt, inner sep=1pt, minimum size=15pt, font=\scriptsize},
+  knotenr/.style={circle, draw=akzent, fill=akzent!12, line width=0.9pt, inner sep=1pt, minimum size=15pt, font=\scriptsize},
+  knoteng/.style={circle, draw=gruen, fill=gruen!12, line width=0.9pt, inner sep=1pt, minimum size=15pt, font=\scriptsize},
+  kante/.style={draw=grau, line width=0.9pt},
+  kanted/.style={draw=akzent, line width=1.5pt},
+}
+
+\newcommand{\MW}{\overline{x}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Ent}{H}
+\newcommand{\vek}[1]{\boldsymbol{#1}}
+\newcommand{\lb}{\operatorname{ld}}
+
+
+\newcommand{\Str}{S}
+\newcommand{\Aus}{u}
+
+\begin{document}
+\frontmatter
+\begin{titlepage}
+\centering
+\vspace*{1.6cm}
+{\footnotesize\scshape\color{grau} Mathematik von Grund auf --- Band 21}\\[1.9cm]
+{\Huge\bfseries\color{tief} Wenn andere mitrechnen}\\[16pt]
+{\Large\color{akzent} Spieltheorie}\\[1.4cm]
+
+\begin{tikzpicture}[scale=1.0]
+\begin{scope}[xshift=-3.7cm]
+\foreach \x in {0,1} \foreach \y in {0,1}
+  \draw[tief!55, line width=0.8pt, fill=tief!8] (\x*0.64-0.64,\y*0.64-0.64) rectangle ++(0.58,0.58);
+\fill[akzent] (-0.35,-0.35) circle (2.6pt);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.35) {abwägen};
+\end{scope}
+\begin{scope}
+\draw[grau!40, line width=0.6pt] (-1.0,-0.72) -- (1.0,0.72);
+\draw[tief, line width=1.1pt, -{Stealth[length=4pt]}] (-0.95,0.55) -- (-0.14,0.07);
+\draw[akzent, line width=1.1pt, -{Stealth[length=4pt]}] (0.95,-0.55) -- (0.14,-0.07);
+\fill[grau!70] (0,0) circle (2.8pt);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.35) {ausgleichen};
+\end{scope}
+\begin{scope}[xshift=3.7cm]
+\foreach \x in {-0.88,-0.58,-0.28} \foreach \y in {-0.45,-0.05,0.35}
+  \fill[grau!50] (\x,\y) circle (1.7pt);
+\foreach \x in {0.3,0.6,0.9} \foreach \y in {-0.45,-0.05,0.35}
+  \fill[akzent!80] (\x,\y) circle (1.7pt);
+\draw[tief, line width=0.9pt, -{Stealth[length=4.5pt]}] (-0.08,-0.05) -- (0.16,-0.05);
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.35) {sich durchsetzen};
+\end{scope}
+\end{tikzpicture}
+
+\vspace{1.4cm}
+{\large\color{grau} Von der Auszahlungsmatrix bis zum evolutionären Gleichgewicht}\\[6pt]
+{\color{grau} Jeder Schritt erklärt. Mit vollständig durchgerechneten Übungsaufgaben.}\\[1.9cm]
+{\small\color{grau} Stand der Forschung: August 2026}
+\end{titlepage}
+\input{impressum}
+\tableofcontents
+\mainmatter
+
+\include{00_vorwort}
+\include{01_spiel}
+\include{02_minimax}
+\include{03_lp}
+\include{04_nash}
+\include{05_klassiker}
+\include{06_existenz}
+\include{07_extensiv}
+\include{08_wiederholt}
+\include{09_ess}
+\include{10_replikator}
+\include{11_kollektiv}
+\include{12_wahlen}
+\include{13_auktionen}
+\include{14_verhandlung}
+\include{15_stand}
+\include{A_anhang}
+\include{B_quellen}
+
+\end{document}

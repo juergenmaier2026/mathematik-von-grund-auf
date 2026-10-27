@@ -1,0 +1,542 @@
+\part{Graphen und Regeln}
+
+\chapter{Annahmen aufschreiben}
+
+\section{Der Leitfall als Bild}
+
+\begin{merksatz}
+\boxtitel{Was man über Neustadt weiß}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.2cm}P{3.0cm}P{4.0cm}@{}}
+\toprule
+& \textbf{Größe} & \textbf{hängt ab von}\\
+\midrule
+$A$ & Alter über $70$ & ---\\
+$V$ & Vorerkrankungen & ---\\
+$S$ & Schweregrad & $A$, $V$\\
+$X$ & frühe Antibiotikagabe & $S$\\
+$M$ & Organversagen & $S$, $X$\\
+$Y$ & Tod & $A$, $S$, $M$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+\node[knotenb] (a) at (-2.6,2.0) {$A$};
+\node[knotenb] (v) at (-0.6,2.6) {$V$};
+\node[knotenr] (s) at (-0.6,1.1) {$S$};
+\node[knotenb] (x) at (-2.6,0.0) {$X$};
+\node[knotenb] (m) at (0.9,0.0) {$M$};
+\node[knotenb] (y) at (3.0,1.1) {$Y$};
+\draw[kanted, -{Stealth[length=4.5pt]}] (a)--(s);
+\draw[kanted, -{Stealth[length=4.5pt]}] (v)--(s);
+\draw[kanted, -{Stealth[length=4.5pt]}] (s)--(x);
+\draw[kanted, -{Stealth[length=4.5pt]}] (s)--(m);
+\draw[akzent, line width=1.2pt, -{Stealth[length=4.5pt]}] (x)--(m);
+\draw[kanted, -{Stealth[length=4.5pt]}] (m)--(y);
+\draw[kanted, -{Stealth[length=4.5pt]}] (s)--(y);
+\draw[kanted, -{Stealth[length=4.5pt]}] (a) to[bend left=38] (y);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jeder Pfeil ist eine Annahme. Jeder \kursiv{fehlende} Pfeil ist auch eine --- und die schwerer wiegende.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass kein Pfeil von $A$ nach $X$ führt, besagt: \textbf{Das Alter beeinflusst die Entscheidung über den Zeitpunkt nur über den Schweregrad} --- bei gleich schwer Kranken behandelt man Alte nicht anders als Junge. Das ist eine inhaltliche Behauptung, die man bestreiten kann und die man prüfen sollte. Ein Graph macht solche Behauptungen sichtbar; eine Regressionsgleichung versteckt sie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 4.1 --- kausaler Graph}
+Ein \Begriff{kausaler Graph} ist ein gerichteter, kreisfreier Graph (Band 16, Kapitel~2), dessen Knoten die Größen sind. Ein Pfeil $U \to W$ bedeutet: $U$ ist eine \kursiv{unmittelbare} Ursache von $W$.
+
+Dazu gehört ein \Begriff{strukturelles Gleichungsmodell}: Jede Größe wird durch ihre Elternknoten und eine eigene Zufallsgröße bestimmt,
+\[ W = f_W\bigl(\text{Eltern}(W),\ \varepsilon_W\bigr) , \]
+wobei die $\varepsilon$ voneinander unabhängig sind.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 4.2 --- die Faktorisierung}
+Erfüllt eine Verteilung ein solches Modell, so gilt
+\[ \Pr[v_1,\ldots,v_k] = \prod_{i=1}^{k} \Pr\bigl[v_i \mid \text{Eltern}(v_i)\bigr] . \]
+
+\schritt{Was das erspart}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Größen} & \textbf{volle Tabelle} & \textbf{Leitfall-Graph}\\
+\midrule
+$6$ & $63$ & $\mathbf{20}$\\
+$10$ & $1023$ & \\
+$20$ & $1\,048\,575$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur rechten Spalte:} $2^{0}+2^{0}+2^{2}+2^{1}+2^{2}+2^{3} = 1+1+4+2+4+8 = 20$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Ersparnis ist nicht der Zweck, sondern ein Nebengewinn.} Der Zweck ist, dass man die Annahmen einzeln hinschreiben und einzeln bestreiten kann. Aber die Ersparnis erklärt, warum sich solche Modelle auch dort durchgesetzt haben, wo es gar nicht um Ursachen geht --- in Band 22 etwa als Grundlage wahrscheinlichkeitstheoretischer Lernverfahren.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Drei Bausteine}
+
+\begin{merksatz}
+\boxtitel{Jeder Weg besteht aus diesen drei}
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+\node[knotenb] (a1) at (0,1.0) {$A$}; \node[knotenr] (b1) at (1.3,1.0) {$B$}; \node[knotenb] (c1) at (2.6,1.0) {$C$};
+\draw[kanted, -{Stealth[length=4.5pt]}] (a1)--(b1); \draw[kanted, -{Stealth[length=4.5pt]}] (b1)--(c1);
+\node[font=\scriptsize, color=grau] at (1.3,0.35) {Kette};
+
+\node[knotenr] (b2) at (5.0,1.8) {$B$};
+\node[knotenb] (a2) at (4.2,0.8) {$A$}; \node[knotenb] (c2) at (5.8,0.8) {$C$};
+\draw[kanted, -{Stealth[length=4.5pt]}] (b2)--(a2); \draw[kanted, -{Stealth[length=4.5pt]}] (b2)--(c2);
+\node[font=\scriptsize, color=grau] at (5.0,0.25) {Gabel};
+
+\node[knotenb] (a3) at (7.6,1.8) {$A$}; \node[knotenb] (c3) at (9.2,1.8) {$C$};
+\node[knotenr] (b3) at (8.4,0.8) {$B$};
+\draw[kanted, -{Stealth[length=4.5pt]}] (a3)--(b3); \draw[kanted, -{Stealth[length=4.5pt]}] (c3)--(b3);
+\node[font=\scriptsize, color=grau] at (8.4,0.25) {Kollider};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.0cm}P{3.0cm}P{3.4cm}@{}}
+\toprule
+\textbf{Baustein} & \textbf{ohne Bedingung} & \textbf{gegeben $B$}\\
+\midrule
+Kette & $A$, $C$ abhängig & \textcolor{gruen}{unabhängig}\\
+Gabel & $A$, $C$ abhängig & \textcolor{gruen}{unabhängig}\\
+Kollider & \textcolor{gruen}{unabhängig} & \textcolor{akzent}{abhängig}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beim Kollider ist alles umgekehrt: Er sperrt von selbst und öffnet, sobald man auf ihn bedingt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist die Berkson-Verzerrung aus Aufgabe 1.2, nun als Baustein. \textbf{Und sie gilt auch, wenn man auf einen \kursiv{Nachkommen} des Kolliders bedingt} --- wer nach einem Merkmal auswählt, das vom Kollider abhängt, öffnet den Weg ebenfalls, wenn auch schwächer.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 4.3 --- d-Trennung}
+Ein Weg zwischen zwei Knoten heißt \Begriff{gesperrt} durch eine Menge $Z$, wenn er einen Knoten enthält, der
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & eine Kette oder Gabel bildet und in $Z$ liegt, \quad oder\\
+$2$ & ein Kollider ist und weder selbst noch einer seiner Nachkommen in $Z$ liegt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Zwei Knoten heißen \Begriff{d-getrennt} durch $Z$, wenn \kursiv{jeder} Weg zwischen ihnen gesperrt ist.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 4.4 --- was d-Trennung bedeutet}
+Sind $U$ und $W$ durch $Z$ d-getrennt, so sind sie in jeder Verteilung, die zum Graphen passt, bedingt unabhängig gegeben $Z$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis führt über die Faktorisierung aus Satz 4.2 und eine Induktion über die Wege; wir verzichten auf ihn --- die erste Auslassung dieses Bandes; die Fundstelle ist Pearl\zit{18}, Kapitel~1. \textbf{Die Umkehrung gilt \kursiv{fast} immer}: Sind zwei Knoten nicht d-getrennt, so sind sie für fast alle zum Graphen passenden Verteilungen abhängig --- Ausnahmen entstehen nur bei exakt sich aufhebenden Wirkungen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Bild wird damit zu einer Rechenvorschrift: Man liest Unabhängigkeiten ab, statt sie zu prüfen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Am Leitfall geprüft}
+
+\begin{merksatz}
+\boxtitel{Vier Fragen, abgelesen und nachgerechnet}
+$400\,000$ erzeugte Patienten nach dem Modell aus Abschnitt 4.1:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+\textbf{Frage} & \textbf{Korrelation} & \textbf{abgelesen}\\
+\midrule
+$X$ und $A$ roh & $+0{,}188$ & abhängig über $S$\\
+$X$ und $A$ gegeben $S$ & $-0{,}002$ & \textcolor{gruen}{d-getrennt}\\
+$A$ und $V$ roh & $-0{,}001$ & \textcolor{gruen}{unabhängig}\\
+$A$ und $V$ gegeben $S$ & $\mathbf{-0{,}107}$ & \textcolor{akzent}{Kollider geöffnet}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Es gibt zwei Wege von $X$ nach $A$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{4.6cm}@{}}
+\toprule
+$X \leftarrow S \leftarrow A$ & Kette über $S$ --- durch $S$ gesperrt.\\
+$X \leftarrow S \to M \to Y \leftarrow A$ & Kollider $Y$ --- von selbst gesperrt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Beide gesperrt, also d-getrennt --- und die Korrelation fällt von $0{,}188$ auf $-0{,}002$. \checkmark
+
+\schritt{Zur vierten Zeile}
+$A$ und $V$ haben keine gemeinsame Ursache und keinen Pfeil zueinander --- sie sind unabhängig, und die Rechnung bestätigt es.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bedingt man auf den Schweregrad, so wird aus Unabhängigkeit eine Korrelation von $-0{,}107$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{$S$ ist ein Kollider von $A$ und $V$. \textbf{Unter den Schwerkranken erklärt das hohe Alter den Schweregrad --- also braucht es die Vorerkrankungen nicht mehr}, und umgekehrt. Wer den Schweregrad \enquote{herausrechnet}, erzeugt damit einen Zusammenhang zwischen Alter und Vorerkrankungen, den es in der Bevölkerung nicht gibt. Kapitel~5 zeigt, wann das schadet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Der Graph ist nicht in den Daten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Gleiche Muster} & Mehrere Graphen erzeugen genau dieselben Unabhängigkeiten. Die Daten können zwischen ihnen nicht entscheiden.\\
+\textbf{Verborgene Größen} & Was nicht gemessen ist, fehlt im Graphen --- und verändert alle Schlüsse.\\
+\textbf{Kreise} & Rückkopplungen --- Fieber erhöht Herzfrequenz erhöht Fieber --- sind in einem kreisfreien Graphen nicht darstellbar.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Graph} & $X \perp Y$? & $X \perp Y \mid S$?\\
+\midrule
+$X \to S \to Y$ & nein & \textcolor{gruen}{ja}\\
+$X \leftarrow S \leftarrow Y$ & nein & \textcolor{gruen}{ja}\\
+$X \leftarrow S \to Y$ & nein & \textcolor{gruen}{ja}\\
+\midrule
+$X \to S \leftarrow Y$ & \textcolor{gruen}{ja} & nein\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die ersten drei sind an den Daten nicht zu unterscheiden --- der vierte schon.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist Satz 1.2 in grafischer Gestalt.} Die Daten legen das Gerüst fest --- welche Knoten verbunden sind --- und die Kollider; die übrigen Pfeilrichtungen nicht. Man nennt die Menge der ununterscheidbaren Graphen eine \Begriff{Markow-Äquivalenzklasse}. Immerhin sind Kollider erkennbar, und das ist mehr, als Kapitel~1 vermuten ließ; Abschnitt 4.5 des Forschungskastens nutzt es aus.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nimmt man im Leitfall eine unbeobachtete Größe an --- etwa die Erfahrung des diensthabenden Arztes, die sowohl den Zeitpunkt als auch die weitere Behandlung beeinflusst ---, so entsteht ein zusätzlicher Weg von $X$ nach $Y$, den keine Anpassung an $S$ sperrt. \textbf{Man zeichnet solche Größen als gestrichelte Doppelpfeile ein}, und Kapitel~6 sagt, wann sie schaden und wann nicht.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Wege sperren}
+Im Graphen des Leitfalls: Welche der folgenden Aussagen gelten?
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+(a) & $V \perp Y \mid S$\\
+(b) & $X \perp Y \mid S$\\
+(c) & $X \perp A \mid S, M$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) --- Wege von $V$ nach $Y$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{3.6cm}P{4.4cm}@{}}
+\toprule
+\textbf{Weg} & \textbf{gegeben $S$}\\
+\midrule
+$V \to S \to Y$ & Kette, gesperrt\\
+$V \to S \to M \to Y$ & Kette, gesperrt\\
+$V \to S \to X \to M \to Y$ & Kette, gesperrt\\
+$V \to S \leftarrow A \to Y$ & $S$ ist Kollider, \textcolor{akzent}{geöffnet}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{(a) gilt nicht.} Der letzte Weg wird durch das Bedingen auf $S$ gerade geöffnet.
+\end{minipage}
+\end{center}
+
+\kursiv{Inhaltlich:} Unter Schwerkranken sind die ohne Vorerkrankungen eher die Alten --- und Alter erhöht die Sterblichkeit unmittelbar. So entsteht ein Zusammenhang zwischen $V$ und $Y$.
+
+\schritt{(b) --- Wege von $X$ nach $Y$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{3.6cm}P{4.4cm}@{}}
+\toprule
+\textbf{Weg} & \textbf{gegeben $S$}\\
+\midrule
+$X \to M \to Y$ & \textcolor{akzent}{offen} --- das ist die Wirkung\\
+$X \leftarrow S \to Y$ & gesperrt\\
+$X \leftarrow S \to M \to Y$ & gesperrt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{(b) gilt nicht --- und soll es auch nicht.} Der offene Weg ist der ursächliche; genau ihn will man messen.
+\end{minipage}
+\end{center}
+
+\kursiv{Die Rechnung ergab $-0{,}021$} --- klein, aber von null verschieden: die Schutzwirkung der frühen Gabe.
+
+\schritt{(c) --- mit $M$ im Bedingungssatz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{3.8cm}P{4.2cm}@{}}
+\toprule
+\textbf{Weg} & \textbf{gegeben $S$ und $M$}\\
+\midrule
+$X \leftarrow S \leftarrow A$ & gesperrt durch $S$\\
+$X \to M \leftarrow S \to \ldots$ & --- \\
+$X \to M \to Y \leftarrow A$ & $M$ in $Z$: offen; $Y$ Kollider: gesperrt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{(c) gilt.} Alle Wege bleiben gesperrt.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hier ist das Bedingen auf $M$ unschädlich für diese Frage --- \textbf{aber es wäre schädlich für die Schätzung des Effekts von $X$ auf $Y$}, weil es den ursächlichen Weg $X \to M \to Y$ durchschneidet. Dieselbe Größe kann für die eine Frage harmlos und für die andere verheerend sein. Kapitel~5 macht daraus eine Systematik.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Wie viele Zahlen}
+Wie viele Wahrscheinlichkeiten braucht man für die gemeinsame Verteilung von zehn binären Größen --- ohne Graph, und mit einem Graphen, in dem jede Größe höchstens drei Eltern hat?
+
+\loesung
+\schritt{Schritt 1 --- Ohne Graph}
+\[ 2^{10} - 1 = 1023 \]
+
+\schritt{Schritt 2 --- Mit Graph}
+Je Größe braucht man eine Wahrscheinlichkeit für jede Belegung der Eltern:
+\[ \sum_{i=1}^{10} 2^{|\text{Eltern}(i)|} \ \le\ 10\cdot2^{3} = 80 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Größen} & \textbf{ohne Graph} & \textbf{höchstens $3$ Eltern}\\
+\midrule
+$10$ & $1023$ & $\le 80$\\
+$20$ & $\approx 10^{6}$ & $\le 160$\\
+$50$ & $\approx 10^{15}$ & $\le 400$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Bedeutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die volle Tabelle wächst exponentiell, das Modell linear. \textbf{Bei fünfzig Größen bräuchte man mehr Patienten, als es Menschen gibt} --- mit Graph genügen einige tausend. Das ist derselbe Gewinn wie in Band 22, Kapitel~10: Eine Annahme über die Struktur macht aus einer unmöglichen Aufgabe eine lösbare.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Der Preis}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man bezahlt mit der Richtigkeit der Struktur. \textbf{Fehlt ein Pfeil, den es gibt, so ist das Modell falsch --- und zwar ohne dass ein Rechenverfahren das bemerkte.} Zu viele Pfeile schaden dagegen nur der Genauigkeit, nicht der Gültigkeit. Im Zweifel zeichnet man den Pfeil ein.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Was die Daten verraten}
+Man beobachte an drei Größen: $X$ und $Y$ sind abhängig, $X$ und $S$ sind abhängig, $S$ und $Y$ sind abhängig --- aber $X \perp Y \mid S$. Welche Graphen kommen in Frage?
+
+\loesung
+\schritt{Schritt 1 --- Das Gerüst}
+Alle drei Paare hängen zusammen, aber $X$ und $Y$ werden durch $S$ getrennt. Also gibt es keinen Pfeil zwischen $X$ und $Y$:
+\[ X - S - Y \]
+
+\schritt{Schritt 2 --- Die möglichen Richtungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Graph} & \textbf{Art} & $X \perp Y \mid S$?\\
+\midrule
+$X \to S \to Y$ & Kette & \textcolor{gruen}{ja}\\
+$X \leftarrow S \leftarrow Y$ & Kette & \textcolor{gruen}{ja}\\
+$X \leftarrow S \to Y$ & Gabel & \textcolor{gruen}{ja}\\
+$X \to S \leftarrow Y$ & Kollider & nein\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Drei Graphen bleiben übrig. Der Kollider ist ausgeschlossen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was das praktisch heißt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Kette} & $X$ wirkt auf $Y$ --- über $S$. Eingriff in $X$ hilft.\\
+\textbf{Gabel} & $S$ verursacht beides. Eingriff in $X$ hilft nicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Daten entscheiden nicht, ob ein Eingriff hilft} --- genau wie in Satz 1.2. Was sie entscheiden, ist eine Teilfrage: Sie schließen den Kollider aus. Und manchmal genügt Wissen über die Zeit: Liegt $X$ zeitlich vor $S$, so sind die letzten beiden Zeilen ausgeschlossen, und es bleibt die Kette.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Im Leitfall}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dort ist die Richtung klar: Der Schweregrad besteht bei Aufnahme, die Gabe erfolgt danach. \textbf{Die Zeitordnung ist die wichtigste Quelle kausalen Wissens} --- und der Grund, warum man bei jeder Größe festhalten sollte, wann sie erhoben wurde. Das war bereits die Lehre aus Band 22, Kapitel~3, wo ein Merkmal aus der Zukunft das Modell verdarb.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von den Pfadkoeffizienten zu den Graphen}
+\Person{Sewall Wright} (1889--1988) führte 1918 die Pfadanalyse ein --- für die Vererbung der Fellzeichnung bei Meerschweinchen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er zeichnete gerichtete Diagramme und gab Regeln an, wie sich Korrelationen aus den Pfadkoeffizienten zusammensetzen. \textbf{Die Statistik seiner Zeit lehnte das ab}: Wrights Lehrer \Person{Karl Pearson} und später \Person{Ronald Fisher} hielten Kausalaussagen aus Beobachtungsdaten für unwissenschaftlich. Wrights Verfahren überlebte in der Genetik und in der Soziologie, nicht in der Statistik.}
+\end{minipage}
+\end{center}
+
+\schritt{Pearl}
+\Person{Judea Pearl} entwickelte in den 1980er Jahren Bayessche Netze für die künstliche Intelligenz --- zunächst ohne kausale Deutung, als Werkzeug zum effizienten Rechnen mit Wahrscheinlichkeiten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die d-Trennung stammt aus dieser Arbeit. \textbf{Erst um 1990 zog er die Folgerung, dass dieselben Graphen Ursachen darstellen können}, wenn man die Pfeile ernst nimmt und den Eingriff als Durchtrennen deutet. Sein Buch \kursiv{Causality} von 2000 machte daraus ein geschlossenes Gebäude; 2011 erhielt er den Turing-Preis.}
+\end{minipage}
+\end{center}
+
+\schritt{Zwei Schulen}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Sprache der potentiellen Ergebnisse aus Kapitel~2 und die der Graphen entstanden getrennt und standen sich lange feindlich gegenüber. \textbf{Sie sind nachweislich gleichwertig} --- jede Aussage der einen lässt sich in die andere übersetzen ---, und heute benutzt man beide nebeneinander: Graphen, um die Annahmen zu finden, potentielle Ergebnisse, um die Schätzer aufzuschreiben. Dieser Band verfährt ebenso.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Graphen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Struktur lernen} & Aus Daten die Äquivalenzklasse bestimmen --- nicht mehr, aber auch nicht weniger.\\
+\textbf{Mit Eingriffen} & Wenige gezielte Versuche genügen, um die Richtungen festzulegen.\\
+\textbf{Große Graphen} & Genregulation mit Tausenden von Knoten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kann man einzelne Größen gezielt verändern --- in der Zellbiologie etwa durch Ausschalten eines Gens ---, so lassen sich Richtungen bestimmen, die aus Beobachtung allein nicht folgen. \textbf{Die Zahl der nötigen Eingriffe wächst dabei nur logarithmisch mit der Knotenzahl}, wenn man sie geschickt wählt. Das ist eines der wenigen Ergebnisse, bei denen Theorie und Laborpraxis sich unmittelbar treffen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 4.1} & Pfeile sind Annahmen, fehlende auch\\
+\textbf{Satz 4.2} & Faktorisierung über die Eltern\\
+\textbf{Drei Bausteine} & Kette, Gabel, Kollider\\
+\textbf{Definition 4.3} & d-Trennung: alle Wege gesperrt\\
+\textbf{Satz 4.4} & d-getrennt heißt bedingt unabhängig\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man kann nun Annahmen aufschreiben und Unabhängigkeiten ablesen. Das nächste Kapitel beantwortet die praktische Frage, die daraus folgt: Welche Größen soll man herausrechnen --- und welche auf keinen Fall?}
+\end{minipage}
+\end{center}
+\end{merksatz}

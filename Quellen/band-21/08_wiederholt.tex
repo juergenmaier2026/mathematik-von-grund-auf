@@ -1,0 +1,688 @@
+\chapter{Wiederholte Spiele}
+
+\section{Der Leitfall über die Jahre}
+
+\begin{merksatz}
+\boxtitel{Dasselbe Dilemma, jedes Jahr}
+Klinikum und Marienhospital stehen jährlich vor der Frage aus Kapitel~5: Reserveantibiotika zurückhalten oder frei einsetzen. Die Resistenzstatistik des Vorjahres ist beiden bekannt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+& \textbf{zurück} & \textbf{frei}\\
+\midrule
+\textbf{zurück} & $(3,3)$ & $(0,5)$\\
+\textbf{frei} & $(5,0)$ & $(1,1)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ändert die Wiederholung etwas?}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Erwartung ist ja: Wer dieses Jahr ausschert, muss nächstes Jahr mit Vergeltung rechnen. \textbf{Die Antwort hängt davon ab, ob das Spiel ein bekanntes Ende hat} --- und zwar in einer Weise, die niemand erwartet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Endliche Wiederholung}
+
+\begin{merksatz}
+\boxtitel{Satz 8.1 --- die Wiederholung hilft nicht}
+Wird ein Spiel mit eindeutigem Nash-Gleichgewicht genau $n$-mal wiederholt und ist $n$ beiden bekannt, so ist das einzige teilspielperfekte Gleichgewicht die $n$-fache Wiederholung des Stufengleichgewichts.
+
+\schritt{Beweis durch Rückwärtsinduktion}
+\kursiv{Letzte Runde:} Es folgt nichts mehr. Das Spiel ist das einfache Dilemma; beide scheren aus.
+
+\kursiv{Vorletzte Runde:} Das Verhalten in der letzten Runde steht fest --- unabhängig davon, was jetzt geschieht. Also gibt es nichts zu beeinflussen, und wieder ist Ausscheren dominant.
+
+\kursiv{Und so weiter} bis zur ersten Runde. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei hundert bekannten Runden wird schon in der ersten ausgeschert.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist dasselbe Muster wie beim Tausendfüßlerspiel aus Kapitel~7 und ebenso widersinnig. \textbf{Die Vergeltungsdrohung bricht von hinten zusammen}, weil die letzte Runde keine Drohung mehr trägt --- und mit ihr die vorletzte, und so fort. Ein einziger bekannter Endpunkt genügt, um die gesamte Zusammenarbeit zu zerstören.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Vorbehalt zur Voraussetzung}
+Hat das Stufenspiel \kursiv{mehrere} Gleichgewichte, so gilt der Satz nicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dann kann man mit dem Wechsel zwischen einem guten und einem schlechten Gleichgewicht drohen, und die Drohung ist glaubwürdig, weil beide Gleichgewichte sind. \textbf{Im Feigheitsspiel und in der Hirschjagd trägt die endliche Wiederholung also sehr wohl}, im Gefangenendilemma nicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Ohne bekanntes Ende}
+
+\begin{merksatz}
+\boxtitel{Der Abzinsungsfaktor}
+Man bewertet künftige Auszahlungen mit einem Faktor $\delta \in (0,1)$ je Runde:
+\[ \Aus = u_0 + \delta u_1 + \delta^{2} u_2 + \cdots = \sum_{t\ge0} \delta^{t} u_t \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Ungeduld} & Was später kommt, zählt weniger.\\
+\textbf{Fortsetzung} & Oder: $\delta$ ist die Wahrscheinlichkeit, dass es weitergeht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Deutung ist für diesen Band die wichtigere. \textbf{Ein Spiel mit unbekanntem Ende ist rechnerisch dasselbe wie ein unendliches mit Abzinsung} --- und es ist zugleich das realistischere Modell. Niemand weiß, ob es das Marienhospital in zwanzig Jahren noch gibt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die erwartete Zahl weiterer Runden}
+\[ \sum_{t\ge0}\delta^{t} = \frac{1}{1-\delta} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$\delta$ & \textbf{Runden} & \\
+\midrule
+$0{,}50$ & $2$ & \\
+$0{,}67$ & $3$ & \\
+$0{,}90$ & $10$ & \\
+$0{,}95$ & $20$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Vergeltungsstrategie}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Grimm} & Halte zurück. Sobald der andere einmal ausschert: für immer ausscheren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Satz 8.2 --- wann sie trägt}
+Spielen beide Grimm, so liegt ein teilspielperfektes Gleichgewicht vor genau dann, wenn
+\[ \delta \ \ge\ \frac{T-R}{T-P} . \]
+
+\schritt{Beweis}
+\kursiv{Beim Zurückhalten:}
+\[ R + \delta R + \delta^{2} R + \cdots = \frac{R}{1-\delta} \]
+
+\kursiv{Beim einmaligen Ausscheren:} Man erhält $T$, danach für immer $P$:
+\[ T + \delta P + \delta^{2} P + \cdots = T + \frac{\delta P}{1-\delta} \]
+
+\kursiv{Zusammenarbeit lohnt, wenn}
+\[ \frac{R}{1-\delta} \ \ge\ T + \frac{\delta P}{1-\delta} \]
+
+Multiplikation mit $(1-\delta) > 0$:
+\[ R \ \ge\ T(1-\delta) + \delta P \]
+\[ R \ \ge\ T - \delta(T-P) \]
+\[ \delta\,(T-P) \ \ge\ T-R \]
+\[ \delta \ \ge\ \frac{T-R}{T-P} \]
+$\blacksquare$
+
+\schritt{Der Leitfall}
+\[ \delta \ \ge\ \frac{5-3}{5-1} = \frac24 = \frac12 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die beiden Häuser müssen nur damit rechnen, dass es im Mittel noch zwei Runden weitergeht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist eine erstaunlich schwache Bedingung --- und die eigentliche Botschaft des Kapitels. \textbf{Nicht die Zahl der Wiederholungen entscheidet, sondern die Ungewissheit über das Ende.} Hundert bekannte Runden bringen nichts (Satz 8.1), zwei erwartete Runden genügen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wie du mir, so ich dir}
+Die Strategie \Begriff{Tit for Tat} antwortet in jeder Runde mit dem, was der andere zuletzt tat --- und beginnt mit Zurückhalten.
+
+\schritt{Die Schwelle}
+Ein dauerhaft wechselnder Abweichler erhält abwechselnd $T$ und $S$:
+\[ \frac{T+\delta S}{1-\delta^{2}} \ \le\ \frac{R}{1-\delta} \]
+
+Mit $1-\delta^{2} = (1-\delta)(1+\delta)$ und $S=0$:
+\[ \frac{T}{1+\delta} \ \le\ R \quad\Longrightarrow\quad \delta \ \ge\ \frac{T-R}{R} \]
+
+\schritt{Der Leitfall}
+\[ \delta \ \ge\ \frac{5-3}{3} = \frac23 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Strategie} & $\delta^{*}$ & \textbf{Runden}\\
+\midrule
+Grimm & $\tfrac12$ & $2$\\
+Tit for Tat & $\tfrac23$ & $3$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Tit for Tat verlangt mehr Geduld als Grimm --- weil seine Strafe milder ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist ein allgemeiner Zusammenhang: Je härter die angedrohte Strafe, desto geringer die nötige Geduld. \textbf{Grimm ist die härteste denkbare Strafe} und hat deshalb die niedrigste Schwelle. Der Preis zeigt sich im Bruchfall: Eine unwiderrufliche Strafe verzeiht keinen Fehler.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Volkssatz}
+
+\begin{merksatz}
+\boxtitel{Satz 8.3 --- fast alles ist möglich}
+Sei $\vek v$ ein Auszahlungsvektor, der
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{erreichbar} & in der konvexen Hülle der Auszahlungen des Stufenspiels liegt, und\\
+\textbf{annehmbar} & jedem Spieler echt mehr bietet als sein Minmax-Wert\\
+\bottomrule
+\end{tabular}}
+\end{center}
+ist. Dann gibt es ein $\delta^{*} < 1$, so dass $\vek v$ für alle $\delta > \delta^{*}$ als teilspielperfektes Gleichgewicht des wiederholten Spiels auftritt.
+
+\schritt{Der Minmax-Wert}
+\[ \underline{v}_i = \min_{\vek s_{-i}} \max_{s_i} \Aus_i(s_i,\vek s_{-i}) \]
+--- was ein Spieler sich sichern kann, wenn alle anderen ihn maximal schädigen.
+
+\kursiv{Im Gefangenendilemma:} Scheren die anderen aus, so ist das Beste $P = 1$.
+
+\schritt{Die Menge im Bild}
+\begin{center}
+\begin{tikzpicture}[scale=0.62]
+\fill[tief!12] (3,3) -- (5,0) -- (0,0) -- (0,5) -- cycle;
+\draw[tief!55, line width=0.9pt] (3,3) -- (5,0) -- (0,0) -- (0,5) -- cycle;
+\fill[gruen!22] (3,3) -- (4,1) -- (1,1) -- (1,4) -- cycle;
+\draw[gruen, line width=1.2pt] (3,3) -- (4,1) -- (1,1) -- (1,4) -- cycle;
+\draw[grau!60, line width=0.6pt] (0,0) -- (5.6,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,5.6);
+\draw[akzent!60, line width=0.7pt, dashed] (1,0) -- (1,5.2);
+\draw[akzent!60, line width=0.7pt, dashed] (0,1) -- (5.2,1);
+\fill[akzent] (3,3) circle (3pt); \fill[grau] (1,1) circle (3pt);
+\fill[grau] (5,0) circle (3pt); \fill[grau] (0,5) circle (3pt);
+\node[font=\scriptsize, color=akzent, anchor=south west] at (3.1,3.1) {$(3,3)$};
+\node[font=\scriptsize, color=grau, anchor=south west] at (1.1,0.6) {$(1,1)$};
+\node[font=\scriptsize, color=grau, anchor=west] at (5.1,0) {$(5,0)$};
+\node[font=\scriptsize, color=grau, anchor=south] at (0,5.2) {$(0,5)$};
+\node[font=\scriptsize, color=gruen!70!black] at (2.3,2.0) {haltbar};
+\node[font=\scriptsize, color=grau] at (2.8,-0.6) {Klinikum};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jeder Punkt im grünen Bereich ist ein Gleichgewicht --- bei hinreichender Geduld.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was der Volkssatz kostet}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Vorhersagebegriff, der fast alles zulässt, sagt fast nichts vorher.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Die gute Seite} & Zusammenarbeit ist erklärbar, ohne Altruismus zu unterstellen.\\
+\textbf{Die schlechte} & Auch $(1{,}1;\ 4{,}5)$ ist ein Gleichgewicht --- und $(3,3)$ und $(1,1)$ und ein Kontinuum dazwischen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Name ist bezeichnend: \enquote{Volkssatz} heißt, dass das Ergebnis lange mündlich weitergegeben wurde, ohne dass jemand es veröffentlichte oder für sich beanspruchte. \textbf{Man hielt es für zu einfach und zu wenig aussagekräftig zugleich.} Erst Aumann und Shapley (1976) sowie Fudenberg und Maskin (1986) gaben präzise Fassungen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Folge für die Praxis}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wer eine wiederholte Anreizlage gestalten will, kann sich nicht auf den Satz stützen --- er sagt nur, dass gute Lösungen \kursiv{möglich} sind. \textbf{Welche eintritt, entscheidet sich außerhalb des Modells}: durch Vorgeschichte, Absprache, Gewohnheit. Kapitel~10 gibt eine der wenigen Antworten, die innerhalb der Theorie bleiben.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was Fehler anrichten}
+Kein Beobachtungssystem ist vollkommen. Eine Resistenzstatistik kann eine Zurückhaltung als Ausscheren ausweisen.
+
+\schritt{Grimm bei einem Fehler}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein einziger falscher Befund zerstört die Zusammenarbeit für immer.}
+\end{minipage}
+\end{center}
+
+\schritt{Tit for Tat bei einem Fehler}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+\textbf{Runde} & \textbf{K} & \textbf{M} & \\
+\midrule
+$1$ & zurück & zurück & \\
+$2$ & zurück & \textcolor{akzent}{frei} & Fehler\\
+$3$ & \textcolor{akzent}{frei} & zurück & \\
+$4$ & zurück & \textcolor{akzent}{frei} & \\
+$5$ & \textcolor{akzent}{frei} & zurück & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Echo, das nie abklingt.} Beide erhalten im Mittel $\tfrac{5+0}{2} = 2{,}5$ statt $3$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und ein \kursiv{zweiter} Fehler kann das Echo beenden --- oder in dauerhaftes beidseitiges Ausscheren überführen, je nachdem, wann er auftritt. \textbf{Tit for Tat ist gegen Fehler nicht robust}, obwohl es in Axelrods fehlerfreiem Turnier gewann.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Abhilfe}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Großzügig} & Vergilt nur mit einer Wahrscheinlichkeit von etwa $0{,}9$ --- das Echo bricht ab.\\
+\textbf{Zwei Vergehen} & Vergilt erst nach zweimaligem Ausscheren.\\
+\textbf{Gewinnen-bleiben} & Ändert die Strategie nur, wenn die letzte Runde schlecht lief.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In Turnieren mit Rauschen schlagen alle drei das reine Tit for Tat. \textbf{Die dritte Zeile hat sich als besonders widerstandsfähig erwiesen}: Sie kooperiert nach gegenseitigem Zurückhalten, schert nach beidseitigem Ausscheren wieder ein --- und beutet einen Gegner aus, der dauerhaft nachgibt. Damit ist sie nicht mehr \enquote{nett} im Sinne Axelrods.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Die Schwelle bestimmen}
+Wie ändert sich die Grimm-Schwelle, wenn die Versuchung $T$ steigt? Rechnen Sie für $T = 4$, $6$, $10$ bei $R=3$, $P=1$.
+
+\loesung
+\schritt{Schritt 1 --- Die Formel}
+\[ \delta^{*} = \frac{T-R}{T-P} \]
+
+\schritt{Schritt 2 --- Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{2.4cm}P{1.8cm}P{2.2cm}@{}}
+\toprule
+$T$ & \textbf{Rechnung} & $\delta^{*}$ & \textbf{Runden}\\
+\midrule
+$4$ & $\tfrac{1}{3}$ & $0{,}333$ & $1{,}5$\\
+$5$ & $\tfrac{2}{4}$ & $0{,}500$ & $2{,}0$\\
+$6$ & $\tfrac{3}{5}$ & $0{,}600$ & $2{,}5$\\
+$10$ & $\tfrac{7}{9}$ & $0{,}778$ & $4{,}5$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Der Grenzwert}
+\[ \lim_{T\to\infty} \frac{T-R}{T-P} = 1 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Schwelle steigt, erreicht aber nie eins.} Zu jeder noch so großen Versuchung gibt es eine Geduld, die sie aushält.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Gegenprobe mit Tit for Tat}
+\[ \delta^{*} = \frac{T-R}{R} \]
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{2.0cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+$T$ & \textbf{Grimm} & \textbf{Tit for Tat} & \\
+\midrule
+$4$ & $0{,}333$ & $0{,}333$ & gleich\\
+$5$ & $0{,}500$ & $0{,}667$ & \\
+$6$ & $0{,}600$ & $1{,}000$ & \textcolor{mittel}{Grenzfall}\\
+$10$ & $0{,}778$ & $2{,}333$ & \textcolor{akzent}{unmöglich}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ab $T > 2R - R = 6$ kann Tit for Tat die Zusammenarbeit gar nicht mehr tragen --- Grimm sehr wohl.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Bedingung lautet $T \le 2R$, denn $\frac{T-R}{R} \le 1$ ist gleichbedeutend mit $T \le 2R$. \textbf{Sie ist genau die Bedingung dafür, dass abwechselndes Ausbeuten nicht besser ist als beidseitiges Zurückhalten} --- und sie erscheint in der Turnierliteratur regelmäßig als Zusatzforderung an die Auszahlungen, meist ohne Begründung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Endlich und unendlich}
+Das Marienhospital kündigt an, in fünf Jahren zu fusionieren --- das Spiel endet dann. Was folgt daraus, und was ändert eine Unsicherheit über den Zeitpunkt?
+
+\loesung
+\schritt{Schritt 1 --- Mit bekanntem Ende}
+Nach Satz 8.1 schert beidseitig ab der ersten Runde aus.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Verhalten} & \textbf{Ertrag}\\
+\midrule
+$1$ bis $5$ & beide frei & $1$ je Jahr\\
+\midrule
+\textbf{Summe} & & $\mathbf{5}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 2 --- Die Bilanz des Verzichts}
+Bei Zusammenarbeit über fünf Jahre:
+\[ 5\cdot3 = 15 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zehn Einheiten gehen verloren --- wegen einer Ankündigung.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Mit unsicherem Ende}
+Endet das Spiel in jedem Jahr mit Wahrscheinlichkeit $0{,}2$, so ist $\delta = 0{,}8$.
+
+\[ 0{,}8 \ \ge\ \tfrac12 \quad \checkmark \]
+
+Grimm trägt. Die erwartete Zusammenarbeit bringt
+\[ \frac{3}{1-0{,}8} = 15 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dieselbe erwartete Dauer von fünf Jahren --- aber Zusammenarbeit statt Ausscheren.}
+\end{minipage}
+\end{center}
+
+\kursiv{Probe der Dauer:} $\frac{1}{1-0{,}8} = 5$ \checkmark
+
+\schritt{Schritt 4 --- Die Lehre}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Dauer} & \textbf{Ertrag}\\
+\midrule
+sicher $5$ Jahre & $5$ & $5$\\
+erwartet $5$ Jahre & $5$ & $\mathbf{15}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Ungewissheit über das Ende ist wertvoller als eine längere sichere Dauer.} Das ist eines der wenigen Ergebnisse dieses Bandes, die eine unmittelbare Handlungsanweisung enthalten: Wer eine Zusammenarbeit erhalten will, sollte kein Enddatum bekanntgeben. Gekündigte Verträge verlieren ihre Bindungskraft lange vor dem Ablauf.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Vorbehalt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Satz 8.1 ist empirisch ebenso schlecht bestätigt wie das Tausendfüßlerspiel: In Versuchen mit bekanntem Ende kooperieren die meisten Teilnehmer bis kurz vor Schluss und scheren erst in den letzten ein bis zwei Runden aus. \textbf{Der Zusammenbruch geschieht am Ende, nicht am Anfang} --- was die Rückwärtsinduktion gerade nicht vorhersagt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- Ein Fehler und seine Folgen}
+Beide Häuser spielen Tit for Tat. In Runde 2 wird die Zurückhaltung des Marienhospitals fälschlich als Ausscheren gemeldet. Berechnen Sie den Verlust über zwanzig Runden.
+
+\loesung
+\schritt{Schritt 1 --- Der Verlauf}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{1.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Runde} & \textbf{K} & \textbf{M} & \textbf{Auszahlung K}\\
+\midrule
+$1$ & zurück & zurück & $3$\\
+$2$ & zurück & zurück\textsuperscript{*} & $3$\\
+$3$ & frei & zurück & $5$\\
+$4$ & zurück & frei & $0$\\
+$5$ & frei & zurück & $5$\\
+$6$ & zurück & frei & $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{\textsuperscript{*}als Ausscheren gemeldet}
+
+\schritt{Schritt 2 --- Der Mittelwert ab Runde 3}
+\[ \frac{5+0}{2} = 2{,}5 \ \text{je Runde} \]
+
+\schritt{Schritt 3 --- Die Bilanz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{ohne Fehler} & \textbf{mit Fehler}\\
+\midrule
+Runden $1$--$2$ & $6$ & $6$\\
+Runden $3$--$20$ & $54$ & $45$\\
+\midrule
+\textbf{Summe} & $\mathbf{60}$ & $\mathbf{51}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ \text{Verlust} = 9 \ \text{Einheiten}, \ \text{also } 15\,\% \]
+
+\schritt{Schritt 4 --- Mit Grimm statt Tit for Tat}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Strategie} & \textbf{Ertrag} & \textbf{Verlust}\\
+\midrule
+ohne Fehler & $60$ & --- \\
+Tit for Tat & $51$ & $15\,\%$\\
+Grimm & $24$ & $\mathbf{60\,\%}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Zu Grimm:} $2\cdot3 + 18\cdot1 = 6+18 = 24$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die härtere Strategie hat die niedrigere Schwelle und den größeren Fehlerschaden.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Großzügiges Tit for Tat}
+Die Strategie vergilt nur mit Wahrscheinlichkeit $0{,}9$. Die erwartete Dauer des Echos beträgt
+\[ \frac{1}{1-0{,}9} = 10 \ \text{Runden}, \]
+davon die Hälfte mit Ertrag $5$ und die Hälfte mit $0$.
+
+\kursiv{Erwarteter Verlust gegenüber durchgehender Zusammenarbeit:}
+\[ 10\cdot(3 - 2{,}5) = 5 \ \text{Einheiten} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Strategie} & \textbf{Verlust} & \\
+\midrule
+Grimm & $36$ & $\delta^{*}=0{,}50$\\
+Tit for Tat & $9$ & $\delta^{*}=0{,}67$\\
+großzügig & $\mathbf{5}$ & etwas höher\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 6 --- Der Zielkonflikt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Härte senkt die Geduldsschwelle und erhöht die Fehlerkosten.} Welche Strategie besser ist, hängt davon ab, wie verlässlich beobachtet wird --- eine Frage, die in der Matrix nicht vorkommt. Bei guter Beobachtung wählt man Grimm, bei schlechter eine großzügige Variante. Dieselbe Abwägung erscheint in Band 20, Kapitel~6 als Wahl zwischen Fehlererkennung und Fehlerkorrektur.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Turnier mit vierzehn Teilnehmern}
+\Person{Robert Axelrod} (geboren 1943), Politikwissenschaftler in Michigan, lud 1979 Fachleute ein, Strategien für ein wiederholtes Gefangenendilemma einzureichen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Vierzehn Beiträge gingen ein, aus Wirtschaftswissenschaft, Psychologie, Mathematik und Informatik. Jede Strategie spielte gegen jede zweihundert Runden. \textbf{Die kürzeste gewann}: Tit for Tat, eingereicht von \Person{Anatol Rapoport}, fünf Zeilen Fortran.}
+\end{minipage}
+\end{center}
+
+\schritt{Das zweite Turnier}
+Axelrod veröffentlichte die Ergebnisse vollständig und lud erneut ein. Dreiundsechzig Beiträge kamen, viele eigens gegen Tit for Tat entworfen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Rapoport reichte dieselben fünf Zeilen ein und gewann wieder. \textbf{Das ist das bemerkenswertere Ergebnis} --- denn diesmal kannten alle Teilnehmer den Sieger und hatten ein Jahr Zeit, ihn zu schlagen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die vier Eigenschaften}
+Axelrod fasste zusammen, was erfolgreiche Strategien auszeichnete:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{nett} & schert nie als erste aus\\
+\textbf{vergeltend} & lässt Ausscheren nicht durchgehen\\
+\textbf{versöhnlich} & kehrt rasch zur Zusammenarbeit zurück\\
+\textbf{durchschaubar} & ist für den Gegner leicht zu erkennen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Die vierte Eigenschaft überrascht am meisten.} In einem Nullsummenspiel wäre Durchschaubarkeit tödlich --- Kapitel~2. Hier ist sie nützlich, weil der Gegner erkennen können muss, dass Zusammenarbeit belohnt wird. Der Unterschied zwischen Teil~I und Teil~III liegt in diesem einen Punkt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die späteren Einschränkungen}
+Ab den 1990er Jahren zeigten Turniere mit Rauschen, dass Tit for Tat dort deutlich schlechter abschneidet.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{2004 gewann ein Turnier eine Gruppe aus Southampton, die mehrere Strategien einreichte, die sich gegenseitig an einem Erkennungsmuster identifizierten und dann eine davon zum Sieg fütterten. \textbf{Das war regelkonform und hat die Turnierform als Erkenntnisquelle beschädigt} --- ein Turnier misst, was man einreichen darf, nicht was sich bewährt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wiederholung heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Unvollkommene Beobachtung} & Wenn niemand sicher weiß, was der andere tat --- die realistische Lage.\\
+\textbf{Ruf} & Zusammenarbeit zwischen Fremden über Dritte, die berichten.\\
+\textbf{Gestaltung} & Wie man Wiederholung bewusst herstellt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Beobachtet jeder nur ein verrauschtes Signal, so lässt sich die Zusammenarbeit nicht mehr vollständig aufrechterhalten.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{Green} und \Person{Porter} zeigten 1984 an einem Kartellmodell, dass Gleichgewichte notwendig Strafphasen enthalten, in denen niemand geschummelt hat --- man bestraft ein schlechtes Signal, nicht eine Tat. \textbf{Preiskriege wären danach kein Zusammenbruch des Kartells, sondern Teil seiner Funktionsweise.} Das Ergebnis hat die Kartellermittlung verändert.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im Leitfall bedeutet das: Man richtet regelmäßige gemeinsame Resistenzkonferenzen ein, veröffentlicht die Verschreibungsdaten und sorgt dafür, dass die Zusammenarbeit kein absehbares Ende hat. \textbf{Alle drei Maßnahmen verändern nicht die Auszahlungen, sondern $\delta$ und die Beobachtbarkeit} --- und sind damit billiger als die Anreizänderung aus Kapitel~5.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 8.1} & bekanntes Ende zerstört alles\\
+\textbf{Satz 8.2} & $\delta \ge (T-R)/(T-P)$\\
+\textbf{Tit for Tat} & $\delta \ge (T-R)/R$, milder und geduldiger\\
+\textbf{Satz 8.3} & Volkssatz: fast alles ist möglich\\
+\textbf{Der Bruchfall} & Härte senkt die Schwelle, erhöht den Fehlerschaden\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~III. Bisher haben die Spieler nachgedacht. Ab Kapitel~9 tun sie es nicht mehr --- und dieselben Gleichgewichte stellen sich trotzdem ein.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,829 @@
+\chapter{Quellencodierung}
+
+\section{Was ein brauchbarer Code leisten muss}
+
+\begin{merksatz}
+\boxtitel{Das Problem der Trennung}
+Wir wollen häufigen Gruppen kurze Codewörter geben. Aber:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+& $A$ & $B$ & $C$\\
+\midrule
+Code 1 & $0$ & $1$ & $01$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Die Folge $01$ kann $C$ bedeuten oder $AB$ --- der Code ist nicht eindeutig lesbar.
+
+\schritt{Die Abhilfe}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein Codewort darf Anfangsstück eines anderen sein.} Solche Codes heißen \Begriff{präfixfrei}.
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+& $A$ & $B$ & $C$\\
+\midrule
+Code 2 & $0$ & $10$ & $11$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Probe:} $01011$ liest sich eindeutig als $0\mid10\mid11$, also $ABC$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Präfixfreie Codes lassen sich ohne jedes Zurückblicken lesen: Sobald ein Codewort erkannt ist, steht es fest. Man nennt sie deshalb auch \kursiv{augenblicklich decodierbar}. Es gibt eindeutig lesbare Codes, die nicht präfixfrei sind --- aber wie Satz 3.1 zeigt, gewinnt man dadurch nichts.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Codebaum}
+Jeder präfixfreie Binärcode entspricht einem Baum: Links bedeutet $0$, rechts $1$, und die Codewörter sitzen an den Blättern.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\node[knoten] (w) at (0,2.0) {};
+\node[knotenr] (a) at (-1.4,1.0) {};
+\node[knoten] (r) at (1.4,1.0) {};
+\node[knotenr] (b) at (0.5,0.0) {};
+\node[knotenr] (c) at (2.3,0.0) {};
+\draw[kanted] (w)--(a) node[midway,above left,font=\scriptsize,color=grau] {$0$};
+\draw[kanted] (w)--(r) node[midway,above right,font=\scriptsize,color=grau] {$1$};
+\draw[kanted] (r)--(b) node[midway,above left,font=\scriptsize,color=grau] {$0$};
+\draw[kanted] (r)--(c) node[midway,above right,font=\scriptsize,color=grau] {$1$};
+\node[font=\scriptsize, color=akzent, anchor=east] at (-1.55,1.0) {$A = 0$};
+\node[font=\scriptsize, color=akzent, anchor=north] at (0.5,-0.2) {$B = 10$};
+\node[font=\scriptsize, color=akzent, anchor=north] at (2.3,-0.2) {$C = 11$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Präfixfreiheit heißt: Kein Codewort liegt auf dem Weg zu einem anderen.} Alle sitzen an Blättern, keines an einem inneren Knoten.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Kraftsche Ungleichung}
+
+\begin{merksatz}
+\boxtitel{Satz 3.1 --- wann Wortlängen möglich sind}
+Zu vorgegebenen Längen $l_1,\ldots,l_n$ gibt es genau dann einen präfixfreien Binärcode, wenn
+\[ \sum_{i=1}^{n} 2^{-l_i} \ \le\ 1 . \]
+
+\schritt{Beweis der Notwendigkeit}
+Sei $L = \max_i l_i$ und der Code gegeben. Wir betrachten den vollständigen Binärbaum der Tiefe $L$ mit seinen $2^{L}$ Blättern.
+
+\schritt{Schritt 1 --- was ein Codewort blockiert}
+Ein Codewort der Länge $l_i$ sitzt an einem Knoten der Tiefe $l_i$. Unter diesem Knoten liegen genau
+\[ 2^{\,L-l_i} \]
+Blätter der Tiefe $L$.
+
+\schritt{Schritt 2 --- die Bereiche sind getrennt}
+Wären zwei dieser Blättermengen nicht disjunkt, so läge ein Codewort auf dem Weg zum anderen --- Widerspruch zur Präfixfreiheit.
+
+\schritt{Schritt 3 --- abzählen}
+Die Summe aller blockierten Blätter kann die Gesamtzahl nicht übersteigen:
+\[ \sum_{i=1}^{n} 2^{\,L-l_i} \ \le\ 2^{L} \]
+Division durch $2^{L}$ liefert die Behauptung. \checkmark
+
+\schritt{Beweis der Hinlänglichkeit}
+Sei die Ungleichung erfüllt. Wir ordnen die Längen aufsteigend: $l_1 \le l_2 \le \cdots \le l_n$ und vergeben die Codewörter der Reihe nach.
+
+Vor der Vergabe des $k$-ten Wortes sind
+\[ \sum_{i<k} 2^{\,L-l_i} \]
+Blätter blockiert. Es bleiben
+\[ 2^{L} - \sum_{i<k} 2^{\,L-l_i} \ \ge\ \sum_{i \ge k} 2^{\,L-l_i} \ \ge\ 2^{\,L-l_k} \]
+Blätter frei --- also mindestens so viele, wie das $k$-te Wort benötigt. Da die Längen aufsteigend sind, lässt sich stets ein passender freier Knoten finden. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Satz übersetzt eine Aussage über Bäume in eine Ungleichung über Zahlen --- und macht sie damit dem Rechnen zugänglich. \textbf{Dieselbe Ungleichung gilt auch für eindeutig lesbare Codes}, die nicht präfixfrei sind; der Beweis dafür ist länger. Deshalb verliert man durch die Beschränkung auf Präfixcodes nichts.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Ungleichung nachgerechnet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Längen} & $\sum 2^{-l_i}$ & \\
+\midrule
+$1,2,2$ & $\tfrac12+\tfrac14+\tfrac14 = 1$ & \textcolor{gruen}{möglich}\\
+$2,2,3,3,4,4,4,4$ & $1$ & \textcolor{gruen}{möglich}\\
+$1,2,2,3$ & $\tfrac12+\tfrac14+\tfrac14+\tfrac18$ & \textcolor{akzent}{$>1$}\\
+$2,2,3,4,5,5$ & $0{,}75$ & \textcolor{gruen}{möglich, mit Reserve}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gleichheit bedeutet, dass der Baum vollständig ausgenutzt ist.} Bleibt Reserve, so könnte man mindestens ein Codewort verkürzen.
+\end{minipage}
+\end{center}
+
+\kursiv{Zur zweiten Zeile:} $2\cdot\frac14 + 2\cdot\frac18 + 4\cdot\frac1{16} = 0{,}5+0{,}25+0{,}25 = 1$. Das sind die Längen des Leitfalls.
+\end{merksatz}
+
+\section{Die untere Schranke}
+
+\begin{merksatz}
+\boxtitel{Satz 3.2 --- keine Codierung unterbietet die Entropie}
+Für jeden präfixfreien Code mit den Wortlängen $l_i$ gilt
+\[ L \ :=\ \sum_i p_i\,l_i \ \ge\ \Ent(X) . \]
+Gleichheit gilt genau dann, wenn $l_i = -\lb p_i$ für alle $i$.
+
+\schritt{Beweis --- Schritt 1: die Differenz}
+\[ L - \Ent(X) = \sum_i p_i\,l_i + \sum_i p_i\,\lb p_i = \sum_i p_i\,\lb\bigl(p_i\,2^{\,l_i}\bigr) \]
+
+\schritt{Schritt 2 --- Abkürzung}
+Wir setzen $q_i := 2^{-l_i}$ und $Q := \sum_i q_i$. Nach Satz 3.1 ist $Q \le 1$.
+\[ L - \Ent(X) = \sum_i p_i\,\lb\frac{p_i}{q_i} \]
+
+\schritt{Schritt 3 --- Jensen}
+Wir betrachten das Negative und wenden die Jensensche Ungleichung auf den konkaven Logarithmus an:
+\begin{align*}
+-\bigl(L-\Ent(X)\bigr) &= \sum_i p_i\,\lb\frac{q_i}{p_i}\\
+&\le \lb\left(\sum_i p_i\cdot\frac{q_i}{p_i}\right) && \text{(Jensen)}\\
+&= \lb Q \ \le\ \lb 1 = 0 && \text{(Satz 3.1)}
+\end{align*}
+
+Also $L - \Ent(X) \ge 0$. \checkmark
+
+\schritt{Schritt 4 --- wann Gleichheit}
+Es müssen \kursiv{beide} Ungleichungen mit Gleichheit gelten:
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Jensen} & alle $\frac{q_i}{p_i}$ gleich, also $q_i = c\,p_i$\\
+\textbf{Kraft} & $Q = 1$, also $c = 1$ und damit $q_i = p_i$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Aus $q_i = 2^{-l_i} = p_i$ folgt $l_i = -\lb p_i$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Entropie ist erreichbar genau dann, wenn alle Wahrscheinlichkeiten Zweierpotenzen sind.} Dann ist $-\lb p_i$ ganzzahlig.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Leitfall: $\frac14$, $\frac18$ und $\frac1{16}$ ergeben die Längen $2$, $3$ und $4$, und $L = \Ent = 2{,}75$. Man nennt solche Verteilungen \Begriff{dyadisch}. Für alle anderen bleibt eine Lücke --- und der nächste Satz sagt, wie groß sie höchstens ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die obere Schranke}
+
+\begin{merksatz}
+\boxtitel{Satz 3.3 --- der Quellencodierungssatz}
+Es gibt stets einen präfixfreien Code mit
+\[ \Ent(X) \ \le\ L \ <\ \Ent(X) + 1 . \]
+
+\schritt{Beweis --- die Konstruktion}
+Man wähle
+\[ l_i := \left\lceil -\lb p_i \right\rceil . \]
+
+\schritt{Schritt 1 --- Kraft ist erfüllt}
+Aus $l_i \ge -\lb p_i$ folgt $2^{-l_i} \le 2^{\lb p_i} = p_i$, also
+\[ \sum_i 2^{-l_i} \ \le\ \sum_i p_i = 1 . \]
+Nach Satz 3.1 existiert ein solcher Code. \checkmark
+
+\schritt{Schritt 2 --- die obere Abschätzung}
+Aus $\lceil x\rceil < x+1$:
+\[ L = \sum_i p_i\,l_i \ <\ \sum_i p_i\,(-\lb p_i + 1) = \Ent(X) + 1 \]
+
+\schritt{Schritt 3 --- die untere}
+Satz 3.2. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Konstruktion heißt Shannon-Code. Sie ist nicht die beste --- das Aufrunden verschenkt bei jeder Wahrscheinlichkeit etwas ---, aber sie \kursiv{beweist} die Schranke. Für den Beweis genügt ein Code, für die Praxis will man den besten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Huffman-Verfahren}
+
+\begin{merksatz}
+\boxtitel{Der Aufbau von unten}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Die beiden kleinsten Wahrscheinlichkeiten zusammenfassen.\\
+$2$ & Die Summe als neues Symbol in die Liste aufnehmen.\\
+$3$ & Wiederholen, bis nur noch ein Symbol übrig ist.\\
+$4$ & Den entstandenen Baum von der Wurzel aus beschriften.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Gedanke stammt aus Aufgabe 2.3: Das Zusammenfassen zweier Werte kostet genau $q\,h(p_1/q)$ zusätzliche Entropie. Huffman fasst stets dort zusammen, wo dieser Aufpreis am kleinsten ist --- bei den seltensten Symbolen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Durchlauf}
+Sechs Befundarten mit den Anteilen
+\[ 0{,}40; \quad 0{,}25; \quad 0{,}15; \quad 0{,}10; \quad 0{,}06; \quad 0{,}04 \]
+
+\schritt{Die Zusammenfassungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.1cm}P{3.0cm}P{3.7cm}@{}}
+\toprule
+\textbf{Runde} & \textbf{zusammen\-gefasst} & \textbf{neue Liste}\\
+\midrule
+$1$ & $0{,}06+0{,}04 = 0{,}10$ & $0{,}40;\ 0{,}25;\ 0{,}15;$ $0{,}10;\ 0{,}10$\\
+$2$ & $0{,}10+0{,}10 = 0{,}20$ & $0{,}40;\ 0{,}25;\ 0{,}20;\ 0{,}15$\\
+$3$ & $0{,}15+0{,}20 = 0{,}35$ & $0{,}40;\ 0{,}35;\ 0{,}25$\\
+$4$ & $0{,}25+0{,}35 = 0{,}60$ & $0{,}60;\ 0{,}40$\\
+$5$ & $0{,}40+0{,}60 = 1{,}00$ & fertig\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Wortlängen}
+Jedes Symbol erhält so viele Bit, an wie vielen Zusammenfassungen es beteiligt war:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.8cm}P{1.6cm}P{2.2cm}@{}}
+\toprule
+$p$ & \textbf{Länge} & $p\cdot l$ & \\
+\midrule
+$0{,}40$ & $1$ & $0{,}40$ & \\
+$0{,}25$ & $2$ & $0{,}50$ & \\
+$0{,}15$ & $3$ & $0{,}45$ & \\
+$0{,}10$ & $4$ & $0{,}40$ & \\
+$0{,}06$ & $5$ & $0{,}30$ & \\
+$0{,}04$ & $5$ & $0{,}20$ & \\
+\midrule
+& & $\mathbf{2{,}25}$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Kraft-Probe:} $\frac12+\frac14+\frac18+\frac1{16}+2\cdot\frac1{32} = 0{,}5+0{,}25+0{,}125+0{,}0625+0{,}0625 = 1$ \checkmark
+
+\schritt{Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Längen} & $L$\\
+\midrule
+Entropie & --- & $2{,}201$\\
+\textbf{Huffman} & $1,2,3,4,5,5$ & $\mathbf{2{,}250}$\\
+Shannon-Code & $2,2,3,4,5,5$ & $2{,}650$\\
+Gleiche Länge & $3,3,3,3,3,3$ & $3{,}000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zum Shannon-Code:} $\lceil-\lb0{,}40\rceil = \lceil1{,}32\rceil = 2$, $\lceil-\lb0{,}25\rceil = 2$, und so fort. Die Kraft-Summe beträgt nur $0{,}75$ --- es bleibt Reserve, also ist der Code nicht ausgereizt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Huffman liegt $2{,}2$ Prozent über der Entropie, der Shannon-Code $20{,}4$ Prozent.} Beide erfüllen Satz 3.3 --- aber der Unterschied ist erheblich.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 3.4 --- Huffman ist optimal}
+Kein präfixfreier Code hat eine kleinere mittlere Länge als der Huffman-Code.
+
+\schritt{Die beiden tragenden Beobachtungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & In einem optimalen Code haben die beiden seltensten Symbole die größte und dieselbe Länge.\\
+$2$ & Sie können als Geschwister im Baum angeordnet werden, ohne die Länge zu ändern.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zu 1:} Hätte ein selteneres Symbol ein kürzeres Wort als ein häufigeres, so würde Vertauschen die mittlere Länge senken. Und ein längstes Codewort muss ein Geschwister haben --- sonst könnte man sein letztes Bit streichen.
+
+\schritt{Der Schluss}
+Sind die beiden seltensten Geschwister, so ist der Code genau dann optimal für die ursprüngliche Verteilung, wenn der um sie verkürzte Code für die zusammengefasste Verteilung optimal ist.
+
+\kursiv{Grund:} Nach Aufgabe 2.3 unterscheiden sich die mittleren Längen um genau $p_1+p_2$ --- unabhängig davon, wie der Rest codiert ist.
+
+Damit ist das Problem auf eines mit einem Symbol weniger zurückgeführt, und Induktion liefert die Behauptung. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert an diesem Beweis ist, was er nicht braucht: keine Analysis, keine Ungleichung, nur ein Vertauschungsargument und Induktion. \textbf{Huffman fand ihn 1951 als Student}, nachdem sein Lehrer Fano die Aufgabe als offenes Problem gestellt hatte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Blöcke codieren}
+
+\begin{merksatz}
+\boxtitel{Die Lücke verkleinern}
+Satz 3.3 lässt bis zu einem Bit Verlust je Symbol zu. Bei kleiner Entropie ist das viel.
+
+\schritt{Der Ausweg}
+Man codiert nicht einzelne Symbole, sondern Blöcke der Länge $n$. Für unabhängige Symbole gilt
+\[ \Ent(X_1,\ldots,X_n) = n\,\Ent(X) \]
+und Satz 3.3 liefert
+\[ n\,\Ent(X) \ \le\ L_n \ <\ n\,\Ent(X)+1 . \]
+
+Je Symbol:
+\[ \Ent(X) \ \le\ \frac{L_n}{n} \ <\ \Ent(X) + \frac1n \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Überhang schrumpft wie $1/n$ und geht gegen null.}
+\end{minipage}
+\end{center}
+
+\schritt{Am Beispiel}
+Eine Quelle liefert \enquote{unauffällig} mit $0{,}8$ und \enquote{auffällig} mit $0{,}2$. Die Entropie beträgt $h(0{,}2) = 0{,}7219$ Bit.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.0cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+$n$ & $L_n$ & $L_n/n$ & \textbf{Überhang}\\
+\midrule
+$1$ & $1{,}000$ & $1{,}0000$ & $0{,}2781$\\
+$2$ & $1{,}560$ & $0{,}7800$ & $0{,}0581$\\
+$3$ & $2{,}184$ & $0{,}7280$ & $\mathbf{0{,}0061}$\\
+$4$ & $2{,}963$ & $0{,}7408$ & $0{,}0189$\\
+$6$ & $4{,}351$ & $0{,}7253$ & $0{,}0033$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Von $38$ Prozent Überhang bei Einzelcodierung auf unter ein Prozent bei Dreiergruppen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beachten Sie, dass der Überhang \kursiv{nicht} monoton fällt: Bei $n=4$ ist er größer als bei $n=3$. Die Schranke $1/n$ gilt, der tatsächliche Wert schwankt darunter --- je nachdem, wie gut die Blockwahrscheinlichkeiten zufällig zu Zweierpotenzen passen. \textbf{Der Satz garantiert die Einhüllende, nicht den Verlauf.}}
+\end{minipage}
+\end{center}
+
+\schritt{Der Preis}
+Bei $n$ Symbolen und einem Alphabet der Größe $m$ hat die Codetabelle $m^{n}$ Einträge.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+$n$ & $2^{n}$ & $8^{n}$\\
+\midrule
+$3$ & $8$ & $512$\\
+$6$ & $64$ & $262\,144$\\
+$10$ & $1024$ & $10^{9}$\\
+$20$ & $10^{6}$ & \textcolor{akzent}{$10^{18}$}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Grund, warum Huffman in der Praxis nicht auf lange Blöcke angewandt wird. Die arithmetische Codierung aus dem Forschungskasten umgeht das Problem: Sie erreicht die Entropie ohne Codetabelle, indem sie die gesamte Nachricht auf eine einzige Zahl abbildet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Quellen mit Gedächtnis}
+Sind die Symbole abhängig, so ist $\Ent(X_1,\ldots,X_n) < n\,\Ent(X)$, und die richtige Größe ist die \Begriff{Entropierate}
+\[ \Ent_\infty = \lim_{n\to\infty} \frac{\Ent(X_1,\ldots,X_n)}{n} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.8cm}P{2.2cm}@{}}
+\toprule
+\textbf{Quelle} & \textbf{Symbol\-entropie} & \textbf{Rate}\\
+\midrule
+$010101\ldots$ & $1{,}00$ & $0{,}00$\\
+Deutscher Text & $\approx4{,}1$ & $<1{,}5$\\
+Gleichverteilt, $26$ & $4{,}70$ & $4{,}70$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile stammt aus Shannons Untersuchung von 1951, in der er Versuchspersonen den nächsten Buchstaben eines Textes raten ließ und aus ihrer Trefferquote die Rate abschätzte. Sie liegt bei etwa einem Bit je Zeichen --- \textbf{sprachlicher Text ist zu rund achtzig Prozent redundant.} Genau davon leben alle Textkompressionsverfahren.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was der Satz nicht sagt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Die Verteilung} & Sie muss bekannt sein. Wird sie aus den Daten geschätzt, so kostet das Speicherplatz für die Tabelle --- und die Schätzung ist verzerrt.\\
+\textbf{Nur im Mittel} & Einzelne Nachrichten können länger werden als vorher. Nur der Erwartungswert sinkt.\\
+\textbf{Keine Fehlertoleranz} & Ein einziges gekipptes Bit kann den ganzen Rest unlesbar machen --- der Code verliert den Tritt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Im Beispiel erhält das seltenste Symbol fünf Bit statt drei bei gleicher Länge. Kommt es gehäuft vor, so ist die Nachricht länger.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es gibt keinen Code, der \kursiv{jede} Nachricht verkürzt.} Ein solcher müsste eine Abbildung sein, die eine endliche Menge in eine kleinere umkehrbar abbildet.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist ein reines Abzählargument: Es gibt $2^{n}$ Folgen der Länge $n$ und nur $2^{n}-1$ kürzere insgesamt. Jedes Kompressionsverfahren verlängert also manche Eingaben --- und zwar notwendig. Wer eine bereits komprimierte Datei erneut komprimiert, macht sie meist größer.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kompression und Fehlerschutz ziehen in entgegengesetzte Richtungen: Die eine entfernt Redundanz, der andere fügt sie hinzu. Shannon zeigte, dass man beides getrennt und nacheinander tun darf, ohne etwas zu verlieren --- das \Begriff{Trennungsprinzip}. Kapitel~5 kommt darauf zurück; es gilt nicht immer.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Ein Huffman-Code}
+Erstellen Sie einen Huffman-Code für
+\[ 0{,}30;\quad 0{,}25;\quad 0{,}20;\quad 0{,}15;\quad 0{,}10 \]
+und vergleichen Sie mit Entropie und Gleichlängencode.
+
+\loesung
+\schritt{Schritt 1 --- Die Zusammenfassungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.2cm}P{3.0cm}P{3.4cm}@{}}
+\toprule
+\textbf{Runde} & \textbf{zusammengefasst} & \textbf{neue Liste}\\
+\midrule
+$1$ & $0{,}15+0{,}10 = 0{,}25$ & $0{,}30;\ 0{,}25;\ 0{,}25;\ 0{,}20$\\
+$2$ & $0{,}25+0{,}20 = 0{,}45$ & $0{,}45;\ 0{,}30;\ 0{,}25$\\
+$3$ & $0{,}30+0{,}25 = 0{,}55$ & $0{,}55;\ 0{,}45$\\
+$4$ & $0{,}55+0{,}45 = 1{,}00$ & fertig\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zu Runde 2:} Die beiden kleinsten sind $0{,}20$ und eines der beiden $0{,}25$. Wir wählen das in Runde 1 entstandene.
+
+\schritt{Schritt 2 --- Die Längen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{1.6cm}P{1.8cm}@{}}
+\toprule
+$p$ & \textbf{beteiligt an} & \textbf{Länge} & $p\cdot l$\\
+\midrule
+$0{,}30$ & $3,4$ & $2$ & $0{,}60$\\
+$0{,}25$ & $3,4$ & $2$ & $0{,}50$\\
+$0{,}20$ & $2,4$ & $2$ & $0{,}40$\\
+$0{,}15$ & $1,2,4$ & $3$ & $0{,}45$\\
+$0{,}10$ & $1,2,4$ & $3$ & $0{,}30$\\
+\midrule
+& & & $\mathbf{2{,}25}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Kraft-Probe:} $3\cdot\frac14 + 2\cdot\frac18 = 0{,}75+0{,}25 = 1$ \checkmark
+
+\schritt{Schritt 3 --- Ein konkreter Code}
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+$p$ & \textbf{Wort} & $p$ & \textbf{Wort}\\
+\midrule
+$0{,}30$ & $00$ & $0{,}15$ & $100$\\
+$0{,}25$ & $01$ & $0{,}10$ & $101$\\
+$0{,}20$ & $11$ & & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Präfixfreiheit:} Kein Wort ist Anfang eines anderen. \checkmark
+
+\schritt{Schritt 4 --- Die Entropie}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+$p$ & $\lb(1/p)$ & $p\cdot\lb(1/p)$\\
+\midrule
+$0{,}30$ & $1{,}7370$ & $0{,}5211$\\
+$0{,}25$ & $2{,}0000$ & $0{,}5000$\\
+$0{,}20$ & $2{,}3219$ & $0{,}4644$\\
+$0{,}15$ & $2{,}7370$ & $0{,}4105$\\
+$0{,}10$ & $3{,}3219$ & $0{,}3322$\\
+\midrule
+& & $\mathbf{2{,}228}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{1.8cm}P{2.6cm}@{}}
+\toprule
+& $L$ & \textbf{Überhang}\\
+\midrule
+Entropie & $2{,}228$ & ---\\
+Huffman & $2{,}250$ & $\mathbf{1{,}0\,\%}$\\
+Gleiche Länge & $3{,}000$ & $34{,}6\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Viertel der Bits gespart, und nur ein Prozent über der theoretischen Grenze.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Eine Bemerkung zur Eindeutigkeit}
+In Runde 2 gab es zwei gleichwertige Wahlmöglichkeiten. Die andere hätte die Längen $2,2,2,3,3$ ebenfalls geliefert --- nur andere Codewörter.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Huffman-Codes sind nicht eindeutig; ihre mittlere Länge sehr wohl. Bei ungünstigen Gleichständen können die \kursiv{Längen} verschieden ausfallen --- etwa $1,2,3,3$ statt $2,2,2,3$ --- mit gleicher mittlerer Länge, aber verschiedener Streuung. Für die Übertragung bevorzugt man die gleichmäßigere.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Kraft anwenden}
+Prüfen Sie, welche Längenfolgen möglich sind, und konstruieren Sie im positiven Fall einen Code.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & $1,2,3,3$\\
+(b) & $2,2,2,2,2$\\
+(c) & $1,2,3,4,4$\\
+(d) & $2,3,3,3,4,4$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) $1,2,3,3$}
+\[ \tfrac12+\tfrac14+\tfrac18+\tfrac18 = 1 \quad \checkmark \]
+Möglich, und der Baum ist vollständig ausgenutzt.
+
+\kursiv{Ein Code:} $0$, $10$, $110$, $111$.
+
+\schritt{(b) $2,2,2,2,2$}
+\[ 5\cdot\tfrac14 = 1{,}25 \ >\ 1 \]
+\textcolor{akzent}{Nicht möglich.} Bei fünf Symbolen und Länge zwei gäbe es nur vier Codewörter.
+
+\schritt{(c) $1,2,3,4,4$}
+\[ \tfrac12+\tfrac14+\tfrac18+\tfrac1{16}+\tfrac1{16} = \tfrac{8+4+2+1+1}{16} = 1 \quad \checkmark \]
+
+\kursiv{Ein Code:} $0$, $10$, $110$, $1110$, $1111$.
+
+\schritt{(d) $2,3,3,3,4,4$}
+\[ \tfrac14 + 3\cdot\tfrac18 + 2\cdot\tfrac1{16} = 0{,}25+0{,}375+0{,}125 = 0{,}75 \ \le\ 1 \quad \checkmark \]
+
+Möglich --- mit Reserve.
+
+\kursiv{Ein Code:} $00$, $010$, $011$, $100$, $1010$, $1011$.
+
+\schritt{Schritt 5 --- Die Reserve ausnutzen}
+Bei (d) bleibt ein Viertel des Baums frei. Man kann daher ein Codewort verkürzen:
+\[ 2,3,3,3,4,4 \ \longrightarrow\ 2,2,3,3,4,4 \]
+\[ 2\cdot\tfrac14 + 2\cdot\tfrac18 + 2\cdot\tfrac1{16} = 0{,}5+0{,}25+0{,}125 = 0{,}875 \ \le\ 1 \quad \checkmark \]
+
+Und weiter:
+\[ 2,2,2,3,4,4: \quad 3\cdot\tfrac14+\tfrac18+2\cdot\tfrac1{16} = 0{,}75+0{,}125+0{,}125 = 1 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Code mit Kraft-Summe unter eins ist stets verbesserungsfähig.} Ein optimaler Code schöpft den Baum vollständig aus.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist ein brauchbares Prüfkriterium: Findet man bei einem Code die Kraft-Summe kleiner als eins, so ist er sicher nicht optimal --- ohne dass man die Wahrscheinlichkeiten kennen müsste. Umgekehrt gilt das nicht: Kraft-Summe eins ist notwendig, nicht hinreichend.}
+\end{minipage}
+\end{center}
+
+\kursiv{Gegenbeispiel dazu:} Längen $1,2,3,3$ bei den Wahrscheinlichkeiten $(0{,}1;\ 0{,}2;\ 0{,}3;\ 0{,}4)$ haben Kraft-Summe eins und die mittlere Länge $0{,}1+0{,}4+0{,}9+1{,}2 = 2{,}6$ --- der Huffman-Code für diese Verteilung liefert $2\cdot0{,}4+2\cdot0{,}3+2\cdot0{,}2+2\cdot0{,}1 = 2{,}0$.
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Warum kein Verfahren alles komprimiert}
+Zeigen Sie, dass es keine umkehrbare Abbildung gibt, die jede Binärfolge echt verkürzt.
+
+\loesung
+\schritt{Schritt 1 --- Die Behauptung}
+Sei $C$ eine umkehrbare Abbildung von Binärfolgen auf Binärfolgen mit
+\[ |C(x)| < |x| \qquad\text{für alle } x . \]
+
+\schritt{Schritt 2 --- Abzählen}
+Wir betrachten alle Folgen der Länge genau $n$. Davon gibt es $2^{n}$.
+
+Ihre Bilder haben Längen $0,1,\ldots,n-1$. Die Zahl \kursiv{aller} Folgen dieser Längen beträgt
+\[ \sum_{k=0}^{n-1} 2^{k} = 2^{n}-1 . \]
+
+\schritt{Schritt 3 --- Der Widerspruch}
+\[ 2^{n} \ \text{Urbilder} \quad\longrightarrow\quad 2^{n}-1 \ \text{mögliche Bilder} \]
+
+Nach dem Schubfachprinzip müssen zwei Folgen dasselbe Bild haben --- $C$ ist nicht umkehrbar. $\blacksquare$
+
+\schritt{Schritt 4 --- Die schärfere Aussage}
+Man kann mehr sagen: Verkürzt ein Verfahren \kursiv{irgendeine} Folge, so verlängert es eine andere.
+
+\kursiv{Begründung:} Die Abbildung ist umkehrbar, also injektiv. Verkürzt sie eine Folge, so ist ein Bildwort kürzer besetzt, und für die verbleibenden Urbilder stehen entsprechend weniger kurze Bilder zur Verfügung.
+
+\schritt{Schritt 5 --- Wie viele Folgen sich überhaupt verkürzen lassen}
+Wie viele Folgen der Länge $n$ können um mindestens $k$ Bit verkürzt werden?
+
+Es gibt höchstens $2^{\,n-k+1}-1 < 2^{\,n-k+1}$ Folgen kürzer als $n-k+1$.
+\[ \frac{2^{\,n-k+1}}{2^{n}} = 2^{\,1-k} \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Ersparnis} & \textbf{Anteil höchstens} & \\
+\midrule
+$1$ Bit & $100\,\%$ & \\
+$5$ Bit & $6{,}3\,\%$ & \\
+$10$ Bit & $0{,}20\,\%$ & \\
+$20$ Bit & $0{,}0002\,\%$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Weniger als ein Promille aller Folgen lässt sich um zehn Bit verkürzen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Warum Kompression trotzdem funktioniert}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der scheinbare Widerspruch löst sich so auf: Die allermeisten Binärfolgen sind nicht komprimierbar --- aber sie kommen auch nicht vor. Tatsächliche Daten stammen aus einer sehr kleinen Teilmenge, die durch Struktur ausgezeichnet ist. \textbf{Kompression funktioniert nicht, weil Daten komprimierbar wären, sondern weil die vorkommenden Daten es sind.}}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist die Frage von Kapitel~7 gestellt: Was zeichnet die komprimierbaren Folgen aus? Die Antwort führt auf einen Zufallsbegriff, der ohne Wahrscheinlichkeiten auskommt --- und auf einen Satz, der besagt, dass man einer gegebenen Folge ihre Komprimierbarkeit nicht ansehen kann.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Semesterarbeit}
+\Person{Robert Fano} (1917--2016) lehrte 1951 am MIT Informationstheorie. Er stellte seinen Studenten frei, statt der Abschlussprüfung eine Semesterarbeit zu schreiben --- und schlug als Thema vor, den bestmöglichen Präfixcode zu finden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Was Fano den Studenten nicht sagte: Er selbst und Shannon hatten es vergeblich versucht. Ihr Verfahren --- die Shannon-Fano-Codierung --- teilt die Symbole von oben her in möglichst gleich wahrscheinliche Hälften und ist gut, aber nachweislich nicht optimal.}
+\end{minipage}
+\end{center}
+
+\schritt{Huffman}
+\Person{David Huffman} (1925--1999), damals Doktorand, arbeitete monatelang erfolglos. Er hatte die Arbeit bereits aufgegeben und wollte für die Prüfung lernen, als ihm die entscheidende Einsicht kam: Man muss den Baum nicht von oben, sondern \kursiv{von unten} aufbauen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Huffman erzählte später, er habe seine Notizen gerade in den Papierkorb geworfen, als ihm der Gedanke kam. Die Arbeit erschien 1952 auf vier Seiten. Sein Verfahren ist bis heute in Gebrauch --- in Bildformaten, in Archivprogrammen, in praktisch jedem Gerät, das Daten komprimiert.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum von unten}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Unterschied ist der zwischen zwei Denkweisen: Von oben teilt man auf und hofft, dass die Teilungen gut ausfallen --- ein gieriges Verfahren im Sinn von Band 19, Kapitel~12. Von unten fängt man bei den Symbolen an, über die man etwas Sicheres weiß: dass die beiden seltensten die längsten Wörter bekommen müssen. \textbf{Huffmans Verfahren ist ebenfalls gierig --- aber an der richtigen Stelle.}}
+\end{minipage}
+\end{center}
+
+\schritt{Was danach kam}
+Die arithmetische Codierung wurde in den 1970er Jahren entwickelt und erreicht die Entropie beliebig genau, ohne Codetabelle.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie war jahrzehntelang durch Patente belastet, was ihrer Verbreitung schadete und dem Huffman-Verfahren ein langes Leben sicherte. Seit dem Auslaufen der Patente ist sie in modernen Formaten die Regel.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Kompression heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Arithmetisch} & Die Nachricht wird auf ein Teilintervall von $[0,1)$ abgebildet; die Länge des Intervalls ist ihre Wahrscheinlichkeit.\\
+\textbf{Wörterbuch\-verfahren} & Wiederkehrende Teilfolgen durch Verweise ersetzen --- erreicht die Entropierate ohne sie zu kennen.\\
+\textbf{Verlustbehaftet} & Bild und Ton: Man verwirft Anteile, die der Empfänger nicht wahrnimmt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Die Zahl braucht etwa $-\lb p$ Bit, wenn $p$ die Wahrscheinlichkeit der Nachricht ist --- also genau den Informationsgehalt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit entfällt die Ganzzahligkeitsbeschränkung, die Satz 3.3 den Verlust von bis zu einem Bit einbrachte: Ein Symbol darf $0{,}03$ Bit kosten, wenn es sehr häufig ist. Der Überhang beträgt bei arithmetischer Codierung wenige Bit für die \kursiv{gesamte} Nachricht, nicht je Symbol.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\Person{Abraham Lempel} und \Person{Jacob Ziv} gaben 1977 und 1978 zwei Verfahren an, die ihr Wörterbuch während des Lesens aufbauen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert ist ihre Eigenschaft, \Begriff{universell} zu sein: Sie erreichen die Entropierate jeder stationären Quelle, \kursiv{ohne} sie zu kennen. Das ist eine erstaunliche Aussage --- ein Verfahren, das dieselbe Grenze erreicht wie eines, dem man die Verteilung mitteilt. Fast alle heutigen Archivformate beruhen darauf.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Grenze}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Seit etwa 2019 werden Kompressionsverfahren untersucht, die große Sprachmodelle als Wahrscheinlichkeitsschätzer verwenden. Sie erreichen bei Text deutlich bessere Werte als klassische Verfahren --- um den Preis, dass Sender und Empfänger dasselbe Modell mit Milliarden Parametern besitzen müssen. \textbf{Der Modellumfang zählt bei einer ehrlichen Bilanz mit}, und das ist genau die Frage, die Kapitel~7 stellt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 3.1} & Kraft: $\sum 2^{-l_i} \le 1$\\
+\textbf{Satz 3.2} & $L \ge \Ent$, Gleichheit nur dyadisch\\
+\textbf{Satz 3.3} & $\Ent \le L < \Ent+1$\\
+\textbf{Satz 3.4} & Huffman ist optimal\\
+\textbf{Blöcke} & Überhang schrumpft wie $1/n$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~I. Bisher war die Übertragung fehlerfrei. Ab Kapitel~4 stört jemand --- und die Frage lautet, was dann noch durchkommt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

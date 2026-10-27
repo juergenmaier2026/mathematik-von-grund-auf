@@ -1,0 +1,759 @@
+\chapter{Fehlerkorrigierende Codes}
+
+\section{Der Hamming-Abstand}
+
+\begin{definition}
+\boxtitelm{Definition 6.1}
+Der \Begriff{Hamming-Abstand} zweier gleich langer Folgen ist die Zahl der Stellen, an denen sie sich unterscheiden:
+\[ d(\vek{x},\vek{y}) = \bigl|\{\,i \ : \ x_i \ne y_i\,\}\bigr| . \]
+Der \Begriff{Minimalabstand} eines Codes ist der kleinste Abstand zweier verschiedener Codewörter.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 6.2 --- was der Minimalabstand leistet}
+Ein Code mit Minimalabstand $d$ kann
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.6cm}@{}}
+\toprule
+$d-1$ Fehler & \textbf{erkennen}\\
+$\left\lfloor\frac{d-1}{2}\right\rfloor$ Fehler & \textbf{korrigieren}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis der Erkennung}
+Werden höchstens $d-1$ Stellen verfälscht, so hat das Empfangene von jedem Codewort außer dem gesendeten einen Abstand von mindestens $1$ --- es kann also kein anderes Codewort sein.
+
+Genauer: Läge das Empfangene auf einem anderen Codewort, so hätten die beiden Codewörter einen Abstand von höchstens $d-1$ --- Widerspruch zur Definition von $d$. \checkmark
+
+\schritt{Beweis der Korrektur}
+Sei $t = \lfloor\frac{d-1}{2}\rfloor$ und $\vek{y}$ das Empfangene mit höchstens $t$ Fehlern, also $d(\vek{x},\vek{y}) \le t$.
+
+Für jedes andere Codewort $\vek{x}'$ gilt nach der Dreiecksungleichung
+\[ d(\vek{x}',\vek{y}) \ \ge\ d(\vek{x},\vek{x}') - d(\vek{x},\vek{y}) \ \ge\ d - t . \]
+
+Wegen $t \le \frac{d-1}{2}$ ist $d-t \ge d - \frac{d-1}{2} = \frac{d+1}{2} > t$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das gesendete Codewort ist das einzige im Abstand höchstens $t$.} Die Entscheidung für das nächstgelegene ist daher richtig. $\blacksquare$
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Erkennen ist billiger als Korrigieren --- man braucht nur halb so viel Abstand. Deshalb arbeiten viele Systeme mit Erkennung und Nachforderung statt mit Korrektur; das ist der Auslöschungskanal aus Kapitel~4, dessen Kapazität erheblich höher liegt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Lineare Codes}
+
+\begin{definition}
+\boxtitelm{Definition 6.3}
+Ein $[n,k]$-\Begriff{Linearcode} ist ein $k$-dimensionaler Untervektorraum von $\{0,1\}^n$ --- also die Menge aller Linearkombinationen von $k$ Basisvektoren, mit Rechnung modulo $2$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Zwei Matrizen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Generatormatrix} & $G$ mit $k$ Zeilen: $\vek{c} = \vek{u}\,G$ codiert die Nachricht $\vek{u}$.\\
+\textbf{Prüfmatrix} & $H$ mit $n-k$ Zeilen: $\vek{c}$ ist Codewort genau dann, wenn $H\vek{c}^{\!\top} = \vek{0}$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Das Syndrom}
+Für das Empfangene $\vek{y} = \vek{c}+\vek{e}$ mit dem Fehlermuster $\vek{e}$:
+\[ H\vek{y}^{\!\top} = H\vek{c}^{\!\top} + H\vek{e}^{\!\top} = \vek{0} + H\vek{e}^{\!\top} = H\vek{e}^{\!\top} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Syndrom hängt nur vom Fehler ab, nicht vom gesendeten Wort.} Das ist der Grund, warum lineare Codes praktisch handhabbar sind.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Statt mit allen $2^{k}$ Codewörtern zu vergleichen --- wie es der Beweis in Kapitel~5 verlangte ---, rechnet man ein Syndrom der Länge $n-k$ aus und schlägt es in einer Tabelle nach. Bei $n=7$, $k=4$ hat diese Tabelle acht Einträge statt sechzehn Vergleichen; bei $n=1000$, $k=500$ sind es $2^{500}$ gegenüber $2^{500}$ --- der Gewinn liegt bei kurzen Prüfteilen.}
+\end{minipage}
+\end{center}
+
+\schritt{Satz 6.4 --- der Minimalabstand}
+Bei einem Linearcode ist $d$ das kleinste Gewicht eines Codeworts ungleich null.
+
+\kursiv{Grund:} $d(\vek{c},\vek{c}') = d(\vek{c}-\vek{c}',\vek{0})$, und Differenzen von Codewörtern sind wieder Codewörter.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das erspart, alle $\binom{2^k}{2}$ Paare zu prüfen --- man betrachtet nur $2^{k}-1$ Wörter. Bei $k=4$ sind das $15$ statt $120$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Hamming-Code}
+
+\begin{merksatz}
+\boxtitel{Die Konstruktion}
+Für den $[7,4]$-Code besteht die Prüfmatrix aus allen Spalten ungleich null der Länge $3$ --- also den Binärdarstellungen von $1$ bis $7$:
+
+\[ H = \begin{pmatrix}
+0&0&0&1&1&1&1\\
+0&1&1&0&0&1&1\\
+1&0&1&0&1&0&1
+\end{pmatrix} \]
+
+\schritt{Warum das funktioniert}
+Tritt genau ein Fehler an der Stelle $j$ auf, so ist $\vek{e}$ der $j$-te Einheitsvektor und
+\[ H\vek{e}^{\!\top} = \text{$j$-te Spalte von } H = \text{Binärdarstellung von } j . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Syndrom \kursiv{ist} die Nummer der fehlerhaften Stelle.} Man liest sie unmittelbar ab.
+\end{minipage}
+\end{center}
+
+\schritt{Der Minimalabstand}
+Alle Spalten sind verschieden und ungleich null. Daher:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+Gewicht $1$ & Syndrom ist eine Spalte, also $\ne\vek{0}$ --- kein Codewort.\\
+Gewicht $2$ & Syndrom ist die Summe zweier verschiedener Spalten, also $\ne\vek{0}$.\\
+Gewicht $3$ & Kann null werden --- etwa Spalten $1$, $2$ und $3$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ d = 3 \quad\Longrightarrow\quad t = 1 \ \text{Fehler korrigierbar} \]
+
+\schritt{Die Kenngrößen}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+Länge $n$ & $7$ & \\
+Nachricht $k$ & $4$ & \\
+Abstand $d$ & $3$ & \\
+Rate $R$ & $0{,}571$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein perfekter Code}
+Die Kugelpackungsschranke lautet
+\[ 2^{k}\cdot\sum_{i=0}^{t}\binom{n}{i} \ \le\ 2^{n} . \]
+
+\kursiv{Für den Hamming-Code:}
+\[ 2^{4}\cdot(1+7) = 16\cdot8 = 128 = 2^{7} \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gleichheit --- die Kugeln füllen den Raum lückenlos aus.} Solche Codes heißen \Begriff{perfekt}.
+\end{minipage}
+\end{center}
+
+\schritt{Wie selten das ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{1.4cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+\textbf{Code} & $t$ & $k+\lb V$ & \\
+\midrule
+$[7,4]$ & $1$ & $7{,}000$ & \textcolor{gruen}{perfekt}\\
+$[15,11]$ & $1$ & $15{,}000$ & \textcolor{gruen}{perfekt}\\
+$[23,12]$ & $3$ & $23{,}000$ & \textcolor{gruen}{perfekt}\\
+$[15,7]$ & $2$ & $13{,}919$ & Lücke $1{,}08$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur dritten Zeile:} $1+23+253+1771 = 2048 = 2^{11}$, und $2^{12}\cdot2^{11} = 2^{23}$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Golay-Code. Über dem Binäralphabet gibt es --- außer den Wiederholungscodes ungerader Länge --- nur die Hamming-Codes und diesen einen Golay-Code als perfekte Codes. Das ist ein tiefliegendes Ergebnis der Codierungstheorie, und der Golay-Code hat bemerkenswerte Verbindungen zu endlichen Gruppen und zur Kugelpackung im $24$-dimensionalen Raum.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was Codes leisten}
+
+\begin{merksatz}
+\boxtitel{Der Hamming-Code gegen die uncodierte Übertragung}
+Wir vergleichen die Wahrscheinlichkeit, dass ein Nachrichtenblock von vier Bit falsch ankommt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.2cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+$f$ & \textbf{uncodiert} & \textbf{Hamming} & \textbf{Faktor}\\
+\midrule
+$0{,}001$ & $0{,}00399$ & $0{,}00002$ & $200$\\
+$0{,}010$ & $0{,}03940$ & $0{,}00203$ & $19$\\
+$0{,}050$ & $0{,}18549$ & $0{,}04438$ & $4{,}2$\\
+$0{,}100$ & $0{,}34390$ & $0{,}14969$ & $2{,}3$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Uncodiert:} $1-(1-f)^4$.\\
+\kursiv{Hamming:} $1-(1-f)^7-7f(1-f)^6$ --- zwei oder mehr Fehler sind nicht korrigierbar.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Gewinn ist bei kleinen Fehlerraten groß und schrumpft rasch.} Bei $f=0{,}1$ bleibt nur der Faktor zwei --- und man zahlt dafür $43$ Prozent Rate.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Grenze aller Codes, die nur einen Fehler korrigieren: Sobald zwei Fehler wahrscheinlich werden, versagen sie. Bei $n=7$ und $f=0{,}1$ sind im Mittel $0{,}7$ Bit falsch --- der Code arbeitet bereits außerhalb seines Bereichs.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der Abstand zur Kapazität}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+$f$ & $C$ & \textbf{Hamming} & \textbf{Ausnutzung}\\
+\midrule
+$0{,}01$ & $0{,}9192$ & $0{,}5714$ & $62\,\%$\\
+$0{,}05$ & $0{,}7136$ & $0{,}5714$ & $80\,\%$\\
+$0{,}10$ & $0{,}5310$ & $0{,}5714$ & \textcolor{akzent}{$108\,\%$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur letzten Zeile}
+Die Rate übersteigt die Kapazität --- und genau deshalb bleibt die Fehlerrate bei $15$ Prozent stehen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kapitel~5 verbietet nicht, mit einer Rate über $C$ zu senden. Es verbietet, dabei fehlerfrei zu werden.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Hamming-Code ist also bei $f=0{,}1$ prinzipiell chancenlos. Bei $f=0{,}01$ liegt er mit $62$ Prozent Ausnutzung im brauchbaren Bereich --- und das war 1950 ein großer Fortschritt. \textbf{Die Lücke zu den restlichen $38$ Prozent zu schließen, hat fünfzig Jahre gedauert.}}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Drei Schranken}
+
+\begin{merksatz}
+\boxtitel{Was möglich ist und was nicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+\textbf{Schranke} & \textbf{Aussage} & \textbf{Art}\\
+\midrule
+Singleton & $d \le n-k+1$ & obere\\
+Kugelpackung & $2^{k}\sum_{i\le t}\binom{n}{i} \le 2^{n}$ & obere\\
+Gilbert-Varshamov & existiert Code mit $2^{k} \ge \frac{2^{n}}{\sum_{i<d}\binom{n}{i}}$ & untere\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis der Singleton-Schranke}
+Streicht man von jedem Codewort die letzten $d-1$ Stellen, so bleiben die Wörter paarweise verschieden --- sie unterschieden sich ja an mindestens $d$ Stellen.
+
+Es gibt also $2^{k}$ verschiedene Wörter der Länge $n-d+1$:
+\[ 2^{k} \ \le\ 2^{\,n-d+1} \quad\Longrightarrow\quad k \le n-d+1 \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Codes, die hier Gleichheit erreichen, heißen \Begriff{MDS} --- maximal trennend. Über dem Binäralphabet sind sie selten; über größeren Alphabeten gibt es sie in Fülle, und das ist der Grund, warum die wichtigsten praktischen Codes nicht mit Bits, sondern mit Bytes rechnen.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur Gilbert-Varshamov-Schranke}
+Sie ist eine \kursiv{Existenz}aussage und wird durch ein gieriges Verfahren bewiesen: Man wählt Codewörter nacheinander und streicht jeweils die Kugel vom Radius $d-1$ um das gewählte.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert ist, dass diese Schranke über sechzig Jahre lang für Binärcodes nicht verbessert werden konnte. Erst 1982 fanden Tsfasman, Vlăduţ und Zink über algebraische Kurven bessere Codes --- allerdings nur über hinreichend großen Alphabeten. Für das Binäralphabet ist Gilbert-Varshamov bis heute unübertroffen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Reed-Solomon und Bündelfehler}
+
+\begin{merksatz}
+\boxtitel{Codes über Bytes}
+Reed-Solomon-Codes arbeiten mit Symbolen aus einem Alphabet der Größe $q$ --- üblich $q=256$, also Bytes.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Der Gedanke} & Eine Nachricht aus $k$ Symbolen wird als Polynom vom Grad $k-1$ aufgefasst und an $n$ Stellen ausgewertet.\\
+\textbf{Die Eigenschaft} & Je $k$ Auswertungen legen das Polynom fest --- man darf also $n-k$ Symbole verlieren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ d = n-k+1 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Reed-Solomon-Codes sind MDS --- sie erreichen die Singleton-Schranke mit Gleichheit.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Grund ist der Fundamentalsatz über Polynome aus Band 1: Zwei verschiedene Polynome vom Grad höchstens $k-1$ stimmen an höchstens $k-1$ Stellen überein. Der Code ist also nichts anderes als die Aussage, dass $k$ Punkte ein Polynom vom Grad $k-1$ eindeutig bestimmen --- dasselbe Prinzip wie bei der Interpolation.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum Bytes}
+Ein einzelner Kratzer auf einer CD verfälscht viele aufeinanderfolgende Bit --- aber nur wenige Bytes.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+\textbf{Anwendung} & \textbf{Code} & \textbf{korrigiert}\\
+\midrule
+Raumfahrt & $[255,223]$ & $16$ Bytes\\
+QR-Code & verschiedene & bis $30\,\%$\\
+Compact Disc & zwei verschachtelt & $\approx2{,}5$ mm Kratzer\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der $[255,223]$-Code hat die Rate $0{,}875$ und korrigiert $16$ von $255$ Symbolen --- das sind bis zu $128$ aufeinanderfolgende Bit. Er war Teil des Standards für die Voyager-Sonden und ist bis heute in Gebrauch. \textbf{Gegen gebündelte Fehler ist ein Symbolcode einem Bitcode weit überlegen}, weil ein Bündel nur wenige Symbole trifft.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wie die Kapazität schließlich erreicht wurde}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{LDPC} & Prüfmatrix mit sehr wenigen Einsen je Zeile. Die Decodierung tauscht Nachrichten zwischen Bits und Prüfgleichungen aus, bis sich alles fügt.\\
+\textbf{Turbo} & Zwei einfache Codes, durch eine Verschachtelung verbunden; die Decodierer geben einander Wahrscheinlichkeiten weiter.\\
+\textbf{Polar} & Verwandelt gleiche Kanäle in ungleiche und benutzt nur die guten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Allen dreien gemeinsam ist, dass sie nicht das nächstgelegene Codewort suchen.} Sie berechnen für jedes Bit eine Wahrscheinlichkeit und verbessern sie schrittweise.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Bruch mit der klassischen Codierungstheorie, die sich um Minimalabstände drehte. \textbf{Codes, die der Kapazität nahekommen, haben oft einen schlechten Minimalabstand} --- sie verlassen sich nicht darauf, jeden Fehler zu korrigieren, sondern nur die typischen. Genau das hatte Shannons Beweis in Kapitel~5 getan.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was Codes nicht leisten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Zu viele Fehler} & Über $t$ hinaus entscheidet der Decodierer \kursiv{falsch} --- und zwar überzeugt. Er meldet keinen Fehler.\\
+\textbf{Falsches Kanalmodell} & Ein für unabhängige Fehler ausgelegter Code versagt bei Bündeln.\\
+\textbf{Keine Sicherheit} & Fehlerkorrektur schützt gegen Zufall, nicht gegen Absicht. Ein Angreifer kann gezielt Codewörter ineinander überführen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Beim Hamming-Code mit zwei Fehlern zeigt das Syndrom auf eine dritte Stelle --- der Decodierer kippt sie und erzeugt drei Fehler statt zwei.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein perfekter Code hat keine Reserve, um Überlastung zu bemerken.} Jedes Empfangswort liegt in genau einer Kugel.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Deshalb fügt man in der Praxis oft ein zusätzliches Prüfbit hinzu --- der erweiterte $[8,4]$-Code mit $d=4$ korrigiert einen Fehler \kursiv{und} erkennt zwei. Er ist nicht mehr perfekt, und das ist der Vorteil: Die Lücken zwischen den Kugeln sind der Ort, an dem man Überlastung bemerkt.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Übergang zu Teil~IV. Eine Prüfsumme, die zufällige Fehler erkennt, ist gegen gezielte Veränderung wertlos --- man rechnet sie einfach neu aus. Für Schutz gegen Absicht braucht man Hashfunktionen mit anderen Eigenschaften, und die behandelt Kapitel~11.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.1 --- Mit dem Hamming-Code rechnen}
+Mit der Prüfmatrix aus Abschnitt 6.3: Decodieren Sie $\vek{y} = (1,0,1,1,0,1,0)$.
+
+\loesung
+\schritt{Schritt 1 --- Das Syndrom berechnen}
+\[ H = \begin{pmatrix}
+0&0&0&1&1&1&1\\
+0&1&1&0&0&1&1\\
+1&0&1&0&1&0&1
+\end{pmatrix}, \qquad \vek{y} = (1,0,1,1,0,1,0) \]
+
+\kursiv{Erste Zeile:} Stellen $4,5,6,7$ tragen bei:
+\[ y_4+y_5+y_6+y_7 = 1+0+1+0 = 2 \equiv 0 \pmod 2 \]
+
+\kursiv{Zweite Zeile:} Stellen $2,3,6,7$:
+\[ 0+1+1+0 = 2 \equiv 0 \]
+
+\kursiv{Dritte Zeile:} Stellen $1,3,5,7$:
+\[ 1+1+0+0 = 2 \equiv 0 \]
+
+\[ \vek{s} = (0,0,0) \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Syndrom ist null --- $\vek{y}$ ist ein Codewort.} Kein erkennbarer Fehler.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Ein Fehler wird eingebaut}
+Wir kippen Stelle $5$: $\vek{y}' = (1,0,1,1,1,1,0)$.
+
+\kursiv{Erste Zeile:} $1+1+1+0 = 3 \equiv 1$\\
+\kursiv{Zweite Zeile:} $0+1+1+0 = 2 \equiv 0$\\
+\kursiv{Dritte Zeile:} $1+1+1+0 = 3 \equiv 1$
+
+\[ \vek{s} = (1,0,1) \]
+
+\schritt{Schritt 3 --- Das Syndrom lesen}
+$(1,0,1)$ als Binärzahl gelesen ist $4+0+1 = 5$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Fehler sitzt an Stelle $5$ --- genau dort, wo wir ihn eingebaut haben.} \checkmark
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Zwei Fehler}
+Wir kippen zusätzlich Stelle $2$: $\vek{y}'' = (1,1,1,1,1,1,0)$.
+
+\kursiv{Erste Zeile:} $1+1+1+0 = 1$ (unverändert, Stelle $2$ kommt nicht vor)\\
+\kursiv{Zweite Zeile:} $1+1+1+0 = 3 \equiv 1$\\
+\kursiv{Dritte Zeile:} $1+1+1+0 = 1$ (unverändert)
+
+\[ \vek{s} = (1,1,1) \ \longrightarrow\ \text{Stelle } 7 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Decodierer kippt Stelle $7$ --- und erzeugt damit drei Fehler statt zwei.}
+\end{minipage}
+\end{center}
+
+\kursiv{Probe:} $5 \oplus 2 = 7$ in der Bitverknüpfung: $101 \oplus 010 = 111$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Syndrom zweier Fehler ist die Summe der beiden Spalten --- und die ist wieder eine Spalte, weil die Spalten alle Binärzahlen von $1$ bis $7$ durchlaufen. \textbf{Der Decodierer kann Überlastung nicht bemerken}, und das ist der Preis der Perfektheit.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Das erweiterte Verfahren}
+Fügt man ein achtes Bit hinzu, das die Gesamtparität sichert, so gilt:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.0cm}P{2.8cm}@{}}
+\toprule
+\textbf{Syndrom} & \textbf{Parität} & \textbf{Schluss}\\
+\midrule
+$\vek{0}$ & richtig & kein Fehler\\
+$\ne\vek{0}$ & falsch & ein Fehler, korrigierbar\\
+$\ne\vek{0}$ & richtig & \textcolor{akzent}{zwei Fehler}\\
+$\vek{0}$ & falsch & Fehler im Paritätsbit\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die dritte Zeile ist der Gewinn: Zwei Fehler verändern die Gesamtparität nicht, erzeugen aber ein Syndrom. Der $[8,4]$-Code korrigiert also einen Fehler und \kursiv{erkennt} zwei --- dieselbe Kombination, die in Arbeitsspeichern eingesetzt wird.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.2 --- Schranken prüfen}
+Welche der folgenden Codes können existieren?
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & $[10,6,4]$ binär\\
+(b) & $[10,6,5]$ binär\\
+(c) & $[15,11,3]$ binär\\
+(d) & $[15,9,7]$ binär\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) $[10,6,4]$}
+\kursiv{Singleton:} $d \le 10-6+1 = 5$. Erfüllt. \checkmark
+
+\kursiv{Kugelpackung} mit $t = \lfloor3/2\rfloor = 1$:
+\[ 2^{6}\cdot(1+10) = 64\cdot11 = 704 \ \le\ 1024 = 2^{10} \quad \checkmark \]
+
+\textbf{Möglich.}
+
+\schritt{(b) $[10,6,5]$}
+\kursiv{Singleton:} $d \le 5$. Gerade noch erfüllt --- der Code wäre MDS.
+
+\kursiv{Kugelpackung} mit $t = 2$:
+\[ 2^{6}\cdot(1+10+45) = 64\cdot56 = 3584 \ >\ 1024 \]
+
+\textcolor{akzent}{\textbf{Unmöglich.}}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Bemerkenswert: Die Singleton-Schranke ist erfüllt, die Kugelpackungsschranke nicht. Über einem Alphabet mit mindestens elf Symbolen gäbe es diesen MDS-Code sehr wohl --- über dem Binäralphabet nicht. \textbf{Binäre MDS-Codes sind auf triviale Fälle beschränkt}, und das ist der Grund für Reed-Solomon über Bytes.}
+\end{minipage}
+\end{center}
+
+\schritt{(c) $[15,11,3]$}
+\kursiv{Singleton:} $d \le 5$. \checkmark
+
+\kursiv{Kugelpackung} mit $t=1$:
+\[ 2^{11}\cdot(1+15) = 2048\cdot16 = 32768 = 2^{15} \quad \checkmark \]
+
+\textbf{Möglich, und zwar mit Gleichheit} --- das ist der perfekte Hamming-Code der Länge $15$.
+
+\schritt{(d) $[15,9,7]$}
+\kursiv{Singleton:} $d \le 15-9+1 = 7$. Gerade erfüllt.
+
+\kursiv{Kugelpackung} mit $t = 3$:
+\[ 2^{9}\cdot(1+15+105+455) = 512\cdot576 = 294\,912 \ >\ 32\,768 \]
+
+\textcolor{akzent}{\textbf{Unmöglich}} --- um den Faktor neun.
+
+\schritt{Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.0cm}P{1.8cm}P{2.6cm}P{1.8cm}@{}}
+\toprule
+& \textbf{Singleton} & \textbf{Kugel\-packung} & \textbf{Urteil}\\
+\midrule
+(a) & \checkmark & \checkmark & möglich\\
+(b) & \checkmark & \textcolor{akzent}{nein} & unmöglich\\
+(c) & \checkmark & \checkmark (gleich) & \textcolor{gruen}{perfekt}\\
+(d) & \checkmark & \textcolor{akzent}{nein} & unmöglich\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Kugelpackungsschranke ist bei Binärcodes fast immer die schärfere. Beide sind allerdings nur \kursiv{notwendig}: Ein Code, der beide erfüllt, muss nicht existieren. Die Frage, welche Tripel $[n,k,d]$ tatsächlich vorkommen, ist für kleine $n$ tabelliert und im Allgemeinen offen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.3 --- Verschachtelung gegen Bündelfehler}
+Ein Kanal erzeugt Fehlerbündel von bis zu $4$ aufeinanderfolgenden Bit. Zeigen Sie, wie sich ein Code mit $t=1$ dennoch verwenden lässt.
+
+\loesung
+\schritt{Schritt 1 --- Das Problem}
+Ein Bündel von vier Fehlern trifft ein Codewort der Länge $7$ mit hoher Wahrscheinlichkeit mehrfach --- der Code versagt.
+
+\schritt{Schritt 2 --- Die Verschachtelung}
+Man sendet vier Codewörter nicht nacheinander, sondern spaltenweise verschränkt:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{5.4cm}@{}}
+\toprule
+\textbf{Ohne} & $c^{(1)}_1\ldots c^{(1)}_7\ c^{(2)}_1\ldots c^{(2)}_7\ \ldots$\\
+\textbf{Mit} & $c^{(1)}_1 c^{(2)}_1 c^{(3)}_1 c^{(4)}_1\ c^{(1)}_2 c^{(2)}_2 \ldots$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Wirkung}
+Ein Bündel von vier aufeinanderfolgenden gesendeten Bit trifft genau vier \kursiv{verschiedene} Codewörter --- jedes an einer einzigen Stelle.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jedes Codewort erhält höchstens einen Fehler und ist korrigierbar.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die allgemeine Regel}
+Bei Verschachtelungstiefe $m$ und einem Code, der $t$ Fehler korrigiert, sind Bündel bis zur Länge
+\[ m \cdot t \]
+korrigierbar.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+$m$ & $t$ & \textbf{Bündel} & \textbf{Verzögerung}\\
+\midrule
+$4$ & $1$ & $4$ & $28$ Bit\\
+$16$ & $1$ & $16$ & $112$ Bit\\
+$8$ & $2$ & $16$ & $120$ Bit\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Der Preis}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Rate bleibt unverändert.} Bezahlt wird mit Verzögerung und Speicherbedarf: Vor dem Senden müssen $m$ Codewörter vorliegen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist bemerkenswert: Die Verschachtelung verbessert die Fehlerleistung, ohne Redundanz zu kosten. Der Gewinn wird mit Zeit bezahlt statt mit Rate --- und das ist genau der Zielkonflikt aus dem Bruchfall von Kapitel~5.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- In der Praxis}
+Die Compact Disc verwendet zwei verschachtelte Reed-Solomon-Codes.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der erste korrigiert vereinzelte Fehler; erkannte, aber nicht korrigierbare Symbole werden als Auslöschungen an den zweiten weitergereicht --- der sie wegen der höheren Kapazität des Auslöschungskanals aus Kapitel~4 doppelt so wirksam behandeln kann. Die Verschachtelung streckt ein Codewort über etwa drei Millimeter Spurlänge. \textbf{Ein Kratzer von zweieinhalb Millimetern wird vollständig korrigiert} --- deshalb überstehen zerkratzte CDs das Abspielen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Wochenende mit Lochkarten}
+\Person{Richard Hamming} (1915--1998) arbeitete Ende der 1940er Jahre an den Bell-Laboratorien mit einem Relaisrechner, der am Wochenende ohne Bedienung lief.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Rechner besaß eine Fehlererkennung: Fand er einen Fehler, so brach er ab und ging zum nächsten Auftrag. Zweimal hintereinander --- an zwei Wochenenden --- fand Hamming am Montag seine Rechnung abgebrochen vor. Er soll gedacht haben: Wenn die Maschine den Fehler \kursiv{finden} kann, warum kann sie ihn nicht gleich beheben?}
+\end{minipage}
+\end{center}
+
+\schritt{Die Arbeit}
+Hamming entwickelte seine Codes 1947. Die Veröffentlichung verzögerte sich bis 1950, weil die Bell-Laboratorien ein Patent anmelden wollten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Shannon hatte die Konstruktion inzwischen in seiner Arbeit von 1948 als Beispiel erwähnt --- mit Hinweis auf Hamming. Dass ein grundlegendes Ergebnis drei Jahre lang unveröffentlicht blieb, weil eine Patentabteilung prüfte, ist einer der aufschlussreicheren Nebenzüge dieser Geschichte.}
+\end{minipage}
+\end{center}
+
+\schritt{Golay}
+\Person{Marcel Golay} veröffentlichte 1949 --- vor Hamming --- eine halbseitige Notiz, die sowohl die Hamming-Codes als auch den nach ihm benannten perfekten Code enthält.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Notiz umfasst keine Beweise und ist extrem knapp gehalten. Sie gilt als eine der informationsdichtesten Veröffentlichungen der Mathematikgeschichte: eine halbe Seite, zwei Codefamilien, ein Sonderfall von bleibender Bedeutung.}
+\end{minipage}
+\end{center}
+
+\schritt{Reed und Solomon}
+\Person{Irving Reed} und \Person{Gustave Solomon} veröffentlichten ihren Code 1960 auf fünf Seiten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Ein praktisches Decodierverfahren fehlte; es kam 1968 von \Person{Elwyn Berlekamp} und \Person{James Massey}. Erst damit wurde der Code brauchbar --- und ist heute vermutlich der meistverwendete Code überhaupt: in jedem QR-Code, jeder CD, jeder DVD, jedem Speichersystem mit Ausfallsicherung.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Codes heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Im Einsatz} & LDPC in Mobilfunk und Satellitenübertragung, Polar-Codes für Steuerkanäle, Reed-Solomon für Speicher.\\
+\textbf{Verteilte Speicher} & Codes, bei denen ein ausgefallener Knoten wiederhergestellt werden kann, ohne alle übrigen zu lesen.\\
+\textbf{Quantencodes} & Fehlerkorrektur für Quantenzustände --- die Grundlage jedes brauchbaren Quantenrechners.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Bei einem Reed-Solomon-Code muss man zur Wiederherstellung eines Symbols $k$ andere lesen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In einem Rechenzentrum mit Hunderten von Speicherknoten ist das erhebliche Netzlast. \Begriff{Lokal wiederherstellbare Codes} opfern etwas Rate, um diese Zahl klein zu halten --- ein Zielkonflikt, den die klassische Theorie gar nicht kannte, weil sie nur Rate gegen Fehlerleistung abwog.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Quantenzustände lassen sich nicht kopieren und nicht ohne Störung messen --- beides Grundlagen klassischer Fehlerkorrektur.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass Quantenfehlerkorrektur dennoch möglich ist, zeigte \Person{Peter Shor} 1995. Der Kunstgriff besteht darin, nur das \kursiv{Syndrom} zu messen und den Zustand selbst unangetastet zu lassen --- genau die Größe, die nach Abschnitt 6.2 keine Auskunft über die Nachricht gibt. \textbf{Die Eigenschaft, die lineare Codes praktisch macht, ist dieselbe, die sie auf Quantensysteme übertragbar macht.}}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 6.2} & $d-1$ erkennen, $\lfloor\frac{d-1}{2}\rfloor$ korrigieren\\
+\textbf{Syndrom} & hängt nur vom Fehler ab\\
+\textbf{Hamming-Code} & Syndrom ist die Fehlerstelle\\
+\textbf{Drei Schranken} & Singleton, Kugelpackung, Gilbert-Varshamov\\
+\textbf{Verschachtelung} & Bündel zerlegen, ohne Rate zu kosten\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~II. Bisher war der Zufall ein Gegner. Ab Kapitel~7 fragen wir, was Zufall überhaupt ist --- und finden einen Begriff, der ohne Wahrscheinlichkeiten auskommt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

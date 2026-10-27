@@ -1,0 +1,655 @@
+\part{Information messen}
+
+\chapter{Was Information ist}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Das Klinikum Neustadt wird digital}
+Jeder Behandlungsfall erhält einen Diagnoseschlüssel aus acht Gruppen. Die Häufigkeiten über ein Jahr:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.8cm}P{1.6cm}P{1.8cm}@{}}
+\toprule
+\textbf{Gruppe} & \textbf{Anteil} & \textbf{Gruppe} & \textbf{Anteil}\\
+\midrule
+$A$ & $0{,}2500$ & $E$ & $0{,}0625$\\
+$B$ & $0{,}2500$ & $F$ & $0{,}0625$\\
+$C$ & $0{,}1250$ & $G$ & $0{,}0625$\\
+$D$ & $0{,}1250$ & $H$ & $0{,}0625$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die naheliegende Codierung}
+Acht Gruppen, also drei Bit je Fall: $000$ für $A$, $001$ für $B$ und so fort.
+
+\textbf{Die Frage:} Geht es kürzer?
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Antwort lautet ja --- und zwar auf $2{,}75$ Bit im Mittel, nicht weniger. Beide Teile dieser Aussage sind Sätze: dass es geht, und dass es nicht besser geht. Kapitel~3 beweist sie. Zuvor muss geklärt werden, woher die Zahl $2{,}75$ kommt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was Information nicht ist}
+
+\begin{warnung}
+\boxtitelr{Drei Verwechslungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Bedeutung} & \enquote{Der Patient lebt} und \enquote{der Patient ist verstorben} können denselben Informationsgehalt haben. Der Begriff misst nicht, was es bedeutet.\\
+\textbf{Wahrheit} & Eine falsche Nachricht hat denselben Gehalt wie eine richtige gleicher Wahrscheinlichkeit.\\
+\textbf{Nutzen} & Eine unwahrscheinliche und völlig belanglose Nachricht hat viel Information.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Informationsgehalt misst allein, wie sehr eine Nachricht die Ungewissheit des Empfängers auflöst.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Shannon hat das ausdrücklich betont: Die Bedeutungsfrage sei für das technische Problem \kursiv{unerheblich}. Das wurde ihm oft als Mangel ausgelegt und ist der Grund für den Erfolg der Theorie --- eine Größe, die von der Bedeutung absieht, gilt für jede Art von Nachricht gleichermaßen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Informationsgehalt eines Ereignisses}
+
+\begin{merksatz}
+\boxtitel{Drei Forderungen}
+Wir suchen eine Funktion $I(p)$, die den Gehalt eines Ereignisses der Wahrscheinlichkeit $p$ angibt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & $I$ hängt nur von $p$ ab und ist stetig.\\
+$2$ & $I$ ist monoton fallend: Seltenes überrascht mehr.\\
+$3$ & Für unabhängige Ereignisse addieren sich die Gehalte:\\
+& \qquad $I(p\cdot q) = I(p) + I(q)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum die dritte Forderung}
+Erfährt man zwei unabhängige Dinge, so soll die Gesamtinformation die Summe sein. Die Wahrscheinlichkeit des gemeinsamen Ereignisses ist das \kursiv{Produkt}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gesucht ist also eine Funktion, die Produkte in Summen verwandelt.} Damit ist die Antwort im Grunde schon gegeben.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 1.1 --- die Forderungen legen $I$ fest}
+Erfüllt $I:(0,1] \to \R$ die drei Forderungen, so gibt es eine Konstante $C > 0$ mit
+\[ I(p) = -C\,\ln p . \]
+
+\schritt{Beweis --- Schritt 1: die Substitution}
+Wir setzen $p = e^{-x}$ mit $x \ge 0$ und definieren
+\[ g(x) := I(e^{-x}) . \]
+Da $p \mapsto -\ln p$ stetig und streng fallend ist, ist $g$ stetig.
+
+\schritt{Schritt 2 --- die Funktionalgleichung}
+Aus $I(pq) = I(p)+I(q)$ mit $p = e^{-x}$ und $q = e^{-y}$, also $pq = e^{-(x+y)}$:
+\[ g(x+y) = g(x) + g(y) \qquad\text{für alle } x,y \ge 0 . \]
+
+\schritt{Schritt 3 --- ganzzahlige Vielfache}
+Setzt man $y = x$, so folgt $g(2x) = 2g(x)$; durch Wiederholung
+\[ g(nx) = n\,g(x) \qquad\text{für alle } n \in \mathbb{N} . \]
+
+Mit $x = \frac{1}{n}$ und $c := g(1)$:
+\[ c = g(1) = g\left(n\cdot\tfrac1n\right) = n\,g\left(\tfrac1n\right) \quad\Longrightarrow\quad g\left(\tfrac1n\right) = \tfrac{c}{n} \]
+
+\schritt{Schritt 4 --- rationale Zahlen}
+Für $x = \frac{m}{n}$:
+\[ g\left(\tfrac{m}{n}\right) = m\,g\left(\tfrac1n\right) = \tfrac{m}{n}\,c \]
+
+\schritt{Schritt 5 --- alle reellen Zahlen}
+Die Funktion $g$ ist stetig und stimmt auf den rationalen Zahlen mit $x \mapsto cx$ überein. Da die rationalen Zahlen dicht liegen, gilt
+\[ g(x) = c\,x \qquad\text{für alle } x \ge 0 . \]
+
+\schritt{Schritt 6 --- zurückübersetzen}
+Mit $x = -\ln p$:
+\[ I(p) = g(-\ln p) = -c\,\ln p \]
+
+Aus Forderung 2 folgt $c > 0$: Für kleineres $p$ ist $-\ln p$ größer, und $I$ soll dann größer sein. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert ist, wie wenig gefordert wurde. Drei sehr schwache Bedingungen --- Stetigkeit, Monotonie, Additivität bei Unabhängigkeit --- legen die Funktion bis auf einen Faktor \kursiv{vollständig} fest. Der Faktor bestimmt nur die Maßeinheit.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 1.2 --- das Bit}
+Wählt man $C = \frac{1}{\ln 2}$, so wird
+\[ I(p) = -\lb p = \lb\frac1p \]
+mit dem Logarithmus zur Basis $2$. Die Einheit heißt \Begriff{Bit}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum die Basis zwei}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Ereignis der Wahrscheinlichkeit $\frac12$ hat genau ein Bit Information.}
+\end{minipage}
+\end{center}
+
+\[ I\left(\tfrac12\right) = \lb 2 = 1 \]
+
+Das entspricht einer Ja-Nein-Frage: Der Ausgang eines fairen Münzwurfs ist genau ein Bit.
+
+\schritt{Die Werte im Leitfall}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+\textbf{Gruppe} & $p$ & $1/p$ & $I = \lb(1/p)$\\
+\midrule
+$A$, $B$ & $0{,}2500$ & $4$ & $2$ Bit\\
+$C$, $D$ & $0{,}1250$ & $8$ & $3$ Bit\\
+$E$--$H$ & $0{,}0625$ & $16$ & $4$ Bit\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die häufigen Gruppen tragen zwei Bit, die seltenen vier.} Genau darauf beruht die Ersparnis: Man gibt den häufigen Fällen kurze Codewörter.
+\end{minipage}
+\end{center}
+
+\schritt{Andere Einheiten}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+\textbf{Basis} & \textbf{Einheit} & \textbf{Umrechnung}\\
+\midrule
+$2$ & Bit & ---\\
+$e$ & Nat & $1$ Nat $= 1{,}443$ Bit\\
+$10$ & Hartley & $1$ Hartley $= 3{,}322$ Bit\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Umrechnung ist ein reiner Basiswechsel: $\lb x = \frac{\ln x}{\ln 2}$, und $\frac{1}{\ln 2} = 1{,}4427$. In der Theorie rechnet man oft mit Nat, weil die Ableitungen einfacher werden; in der Technik stets mit Bit.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Eigenschaften}
+
+\begin{merksatz}
+\boxtitel{Was die Formel leistet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+$p$ & $I(p)$ & \textbf{Deutung}\\
+\midrule
+$1$ & $0$ & Sicheres trägt nichts bei\\
+$0{,}5$ & $1$ Bit & Münzwurf\\
+$0{,}01$ & $6{,}64$ Bit & seltenes Ereignis\\
+$10^{-6}$ & $19{,}93$ Bit & sehr seltenes\\
+$\to 0$ & $\to\infty$ & unbeschränkt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die erste Zeile}
+\[ I(1) = \lb 1 = 0 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Mitteilung eines sicheren Ereignisses trägt null Bit.} Wer sagt, dass die Sonne aufgegangen ist, teilt nichts mit.
+\end{minipage}
+\end{center}
+
+\schritt{Die letzte Zeile}
+Je unwahrscheinlicher, desto mehr Information --- ohne obere Grenze.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Wachstum ist allerdings langsam: Eine millionenfach kleinere Wahrscheinlichkeit bringt nur den Faktor $20$ statt $6{,}64$, also gut das Dreifache. Der Logarithmus dämpft stark --- und genau das macht die Größe handhabbar.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Additivität nachgerechnet}
+Zwei unabhängige Befunde: Gruppe $A$ ($p=0{,}25$) und ein positiver Laborwert ($p=0{,}125$).
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Ereignis} & $p$ & $I$\\
+\midrule
+Gruppe $A$ & $0{,}2500$ & $2$ Bit\\
+Labor positiv & $0{,}1250$ & $3$ Bit\\
+\midrule
+beides & $0{,}03125$ & $\mathbf{5}$ Bit\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Probe:} $0{,}25 \cdot 0{,}125 = 0{,}03125 = \frac{1}{32}$, und $\lb 32 = 5$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Additivität ist keine Eigenschaft, die man beobachtet hätte --- sie war die \kursiv{Forderung}, aus der die Formel folgte. Das ist die übliche Reihenfolge in der Informationstheorie: Man schreibt auf, was eine Größe leisten soll, und findet, dass es nur eine gibt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was vorausgesetzt wird}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Die Verteilung} & $I(p)$ setzt voraus, dass $p$ bekannt ist. In der Praxis wird sie geschätzt --- mit allen Schwierigkeiten aus Band 17.\\
+\textbf{Unabhängigkeit} & Forderung 3 gilt nur dort. Bei abhängigen Ereignissen ist die Summe der Einzelgehalte zu groß.\\
+\textbf{Ein Empfänger} & Der Gehalt hängt davon ab, was der Empfänger schon weiß. Für verschiedene Empfänger ist er verschieden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Diagnosegruppe und Laborwert sind in Wirklichkeit nicht unabhängig. Gilt etwa
+\[ \Pr[\text{Labor}\mid A] = 0{,}5 \quad\text{statt}\quad 0{,}125 , \]
+so ist der gemeinsame Gehalt
+\[ I(0{,}25 \cdot 0{,}5) = I(0{,}125) = 3 \ \text{Bit} \]
+statt fünf.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Bit sind verschwunden --- sie waren doppelt gezählt.} Diese Größe hat einen Namen: Sie ist die Transinformation zwischen Gruppe und Laborwert.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist der Begriff eingeführt, der Teil~II trägt. \textbf{Abhängigkeit bedeutet, dass eine Größe etwas über die andere verrät} --- und die Transinformation misst, wie viel. Kapitel~4 macht daraus eine Definition.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Informationsgehalt ist keine Eigenschaft der Nachricht, sondern der Beziehung zwischen Nachricht und Empfänger. Wer die Diagnose bereits kennt, erfährt null Bit. Das klingt nach einem Mangel und ist die richtige Modellierung: Information ist Auflösung von Ungewissheit, und Ungewissheit hat jemand.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und eine begriffliche Falle}
+Das Wort \enquote{Bit} bezeichnet zweierlei:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Als Einheit} & Ein Maß für Information --- kann jeden nichtnegativen reellen Wert annehmen, etwa $2{,}75$.\\
+\textbf{Als Zeichen} & Eine Binärstelle, also $0$ oder $1$. Davon gibt es immer ganze Zahlen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der ganze Teil~I handelt vom Abstand zwischen beidem:} Wie viele Binärstellen braucht man, um eine Information von $2{,}75$ Bit zu übertragen?
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Antwort ist nicht drei, sondern --- im Mittel über viele Fälle --- genau $2{,}75$. Dass ein nicht ganzzahliger Wert erreichbar ist, obwohl jede einzelne Nachricht aus ganzen Binärstellen besteht, ist das erste überraschende Ergebnis dieses Bandes. Kapitel~3 zeigt, wie.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.1 --- Informationsgehalte bestimmen}
+Berechnen Sie den Informationsgehalt in Bit:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & Ein Würfel zeigt eine Sechs.\\
+(b) & Ein Würfel zeigt eine gerade Zahl.\\
+(c) & Zwei Würfel zeigen zusammen zwölf.\\
+(d) & Eine zufällige Ziffernfolge der Länge $6$.\\
+(e) & Ein Patient gehört zur Gruppe $E$ (Anteil $0{,}0625$).\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a)}
+\[ p = \tfrac16, \qquad I = \lb 6 = \frac{\ln 6}{\ln 2} = \frac{1{,}7918}{0{,}6931} = 2{,}585 \ \text{Bit} \]
+
+\schritt{(b)}
+\[ p = \tfrac12, \qquad I = 1 \ \text{Bit} \]
+
+\schritt{(c)}
+Beide müssen Sechsen zeigen:
+\[ p = \tfrac16\cdot\tfrac16 = \tfrac1{36}, \qquad I = \lb 36 = 5{,}170 \ \text{Bit} \]
+
+\kursiv{Probe über die Additivität:} $2\cdot2{,}585 = 5{,}170$ \checkmark
+
+\schritt{(d)}
+Jede der zehn Ziffern ist gleich wahrscheinlich, die Stellen sind unabhängig:
+\[ p = 10^{-6}, \qquad I = 6\,\lb 10 = 6\cdot3{,}3219 = 19{,}93 \ \text{Bit} \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Zwanzig Bit für sechs Ziffern --- das sind $3{,}32$ Bit je Ziffer. Speichert man jede Ziffer in vier Binärstellen, so verschenkt man $0{,}68$ Bit je Ziffer, also gut siebzehn Prozent. Genau diese Art von Verschwendung behebt Kapitel~3.}
+\end{minipage}
+\end{center}
+
+\schritt{(e)}
+\[ p = 0{,}0625 = \tfrac1{16}, \qquad I = \lb 16 = 4 \ \text{Bit} \]
+
+\schritt{Die Übersicht}
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+& $p$ & $I$ in Bit\\
+\midrule
+(a) & $0{,}1667$ & $2{,}585$\\
+(b) & $0{,}5000$ & $1{,}000$\\
+(c) & $0{,}0278$ & $5{,}170$\\
+(d) & $10^{-6}$ & $19{,}93$\\
+(e) & $0{,}0625$ & $4{,}000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Bemerkenswert ist (d) im Vergleich zu (c): Eine millionenfach kleinere Wahrscheinlichkeit bringt nur den vierfachen Informationsgehalt. Der Logarithmus dämpft so stark, dass auch extrem seltene Ereignisse handhabbare Zahlen liefern.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.2 --- Warum nur der Logarithmus}
+Prüfen Sie, welche der drei Forderungen die folgenden Funktionen verletzen.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & $I(p) = 1-p$\\
+(b) & $I(p) = \frac1p - 1$\\
+(c) & $I(p) = -\lb p$ für $p \ge \frac12$, sonst $2$\\
+(d) & $I(p) = (-\ln p)^2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) $I(p)=1-p$}
+\kursiv{Forderung 1:} stetig \checkmark\\
+\kursiv{Forderung 2:} fallend \checkmark\\
+\kursiv{Forderung 3:} Zu prüfen ist $I(pq) = I(p)+I(q)$:
+\[ 1-pq \stackrel{?}{=} (1-p)+(1-q) = 2-p-q \]
+Für $p=q=\tfrac12$: links $1-\tfrac14 = 0{,}75$, rechts $2-1 = 1$.
+
+\textcolor{akzent}{Forderung 3 verletzt.}
+
+\schritt{(b) $I(p) = \frac1p-1$}
+\kursiv{Forderungen 1 und 2:} erfüllt.\\
+\kursiv{Forderung 3:}
+\[ \frac{1}{pq}-1 \stackrel{?}{=} \frac1p+\frac1q-2 \]
+Für $p=q=\tfrac12$: links $4-1 = 3$, rechts $2+2-2 = 2$.
+
+\textcolor{akzent}{Verletzt.}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Interessant ist, \kursiv{wie} es verletzt wird: Der Gehalt wächst zu schnell. Bei $p = 10^{-6}$ lieferte diese Formel den Wert $999\,999$ statt $19{,}93$. Ein solches Maß wäre von den seltenen Ereignissen beherrscht --- dieselbe Schwierigkeit wie bei der Varianz in Band 17.}
+\end{minipage}
+\end{center}
+
+\schritt{(c) Die abschnittsweise Funktion}
+Bei $p = \tfrac12$ ist $-\lb\tfrac12 = 1$; für $p$ knapp unter $\tfrac12$ springt der Wert auf $2$.
+
+\textcolor{akzent}{Forderung 1 verletzt} --- nicht stetig.
+
+\kursiv{Forderung 2} ist erfüllt (die Funktion fällt), \kursiv{Forderung 3} nicht.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Dieses Beispiel zeigt, dass die Stetigkeit im Beweis von Satz 1.1 wirklich gebraucht wird: Ohne sie gibt es tatsächlich weitere Lösungen der Funktionalgleichung --- allerdings sehr unangenehme, die sich nicht durch eine Formel hinschreiben lassen. Man nennt sie Hamel-Funktionen; ihre Existenz folgt aus dem Auswahlaxiom.}
+\end{minipage}
+\end{center}
+
+\schritt{(d) $I(p) = (-\ln p)^2$}
+\kursiv{Forderungen 1 und 2:} erfüllt.\\
+\kursiv{Forderung 3:} Mit $u = -\ln p$, $v = -\ln q$ ist $-\ln(pq) = u+v$:
+\[ (u+v)^2 = u^2 + 2uv + v^2 \ \ne\ u^2+v^2 \quad\text{für } u,v > 0 \]
+
+\textcolor{akzent}{Verletzt --- um den Term $2uv$.}
+
+\schritt{Die Bilanz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+& \textbf{stetig} & \textbf{fallend} & \textbf{additiv}\\
+\midrule
+(a) & \checkmark & \checkmark & \textcolor{akzent}{nein}\\
+(b) & \checkmark & \checkmark & \textcolor{akzent}{nein}\\
+(c) & \textcolor{akzent}{nein} & \checkmark & \textcolor{akzent}{nein}\\
+(d) & \checkmark & \checkmark & \textcolor{akzent}{nein}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle vier scheitern an der Additivität --- und das ist kein Zufall, sondern Satz 1.1: \textbf{Sie ist die eigentlich einschränkende Forderung.} Stetigkeit und Monotonie erfüllen unendlich viele Funktionen; die Additivität lässt nur eine übrig.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.3 --- Das Wägeproblem}
+Unter zwölf gleich aussehenden Münzen ist eine gefälscht --- sie ist entweder leichter oder schwerer. Wie viele Wägungen mit einer Balkenwaage braucht man mindestens, um sie zu finden \kursiv{und} zu sagen, ob sie zu leicht oder zu schwer ist?
+
+\loesung
+\schritt{Schritt 1 --- Die zu gewinnende Information}
+Es gibt $12 \cdot 2 = 24$ mögliche Antworten, alle gleich wahrscheinlich:
+\[ I = \lb 24 = \frac{\ln 24}{\ln 2} = \frac{3{,}1781}{0{,}6931} = 4{,}585 \ \text{Bit} \]
+
+\schritt{Schritt 2 --- Die Information je Wägung}
+Eine Balkenwaage hat drei mögliche Ausgänge: links schwerer, rechts schwerer, Gleichgewicht.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Höchstens} $\lb 3 = 1{,}585$ Bit je Wägung --- und zwar genau dann, wenn alle drei Ausgänge gleich wahrscheinlich sind.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die untere Schranke}
+\[ n \cdot 1{,}585 \ \ge\ 4{,}585 \quad\Longrightarrow\quad n \ge 2{,}89 \]
+
+Da $n$ ganzzahlig ist: $n \ge 3$.
+
+\schritt{Schritt 4 --- Die Probe}
+\[ 3^3 = 27 \ \ge\ 24 \quad \checkmark \]
+\[ 3^2 = 9 \ < \ 24 \quad \text{--- zwei Wägungen reichen nicht.} \]
+
+\schritt{Schritt 5 --- Dass drei genügen}
+\kursiv{Erste Wägung:} Vier gegen vier.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+\textbf{Ausgang} & \textbf{Verdächtige} & \textbf{Rest}\\
+\midrule
+Gleichgewicht & die übrigen $4$ & $8$ Fälle\\
+links schwerer & diese $8$ & $8$ Fälle\\
+rechts schwerer & diese $8$ & $8$ Fälle\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+In jedem Fall bleiben acht Möglichkeiten. Mit zwei weiteren Wägungen sind $3^2 = 9 \ge 8$ unterscheidbar --- es geht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Durchführung der beiden Restwägungen ist eine hübsche Knobelei und steht in jedem Rätselbuch. Der Punkt hier ist ein anderer: \textbf{Die Informationstheorie liefert die untere Schranke, ohne dass man das Verfahren kennt.} Sie sagt \enquote{weniger als drei geht nicht} --- und zwar bevor irgendjemand eine Wägestrategie erdacht hat.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Verallgemeinerung}
+Bei $m$ Münzen sind $2m$ Antworten zu unterscheiden, also
+\[ n \ \ge\ \frac{\lb(2m)}{\lb 3} = \log_3(2m) . \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+$m$ & $2m$ & \textbf{Schranke}\\
+\midrule
+$4$ & $8$ & $2$\\
+$12$ & $24$ & $3$\\
+$13$ & $26$ & $3$\\
+$14$ & $28$ & $\mathbf{4}$\\
+$39$ & $78$ & $4$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Bei dreizehn Münzen sagt die Schranke drei, und tatsächlich genügen drei nicht ganz --- man kann die Fälschung finden, aber nicht immer sagen, ob sie leichter oder schwerer ist. \textbf{Eine informationstheoretische Schranke ist notwendig, nicht hinreichend.} Sie schließt aus, sie garantiert nicht. Derselbe Vorbehalt gilt für alle Sätze dieses Bandes.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Arbeit von 1948}
+\Person{Claude Shannon} (1916--2001) veröffentlichte im Juli und Oktober 1948 in zwei Teilen die Arbeit \kursiv{A Mathematical Theory of Communication}. Sie umfasst gut fünfzig Seiten und begründete ein Fach.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Bemerkenswert ist die Geschlossenheit: Die Arbeit enthält den Entropiebegriff, den Quellencodierungssatz, die Kanalkapazität, das Kanalcodierungstheorem und die Erweiterung auf stetige Signale --- alles auf einmal, alles neu, und alles im Wesentlichen in der bis heute gültigen Form.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Vorläufer}
+\Person{Harry Nyquist} (1924) und \Person{Ralph Hartley} (1928) hatten bei denselben Bell-Laboratorien vorgearbeitet. Hartley schlug vor, den Informationsgehalt einer Nachricht aus $n$ Zeichen über einem Alphabet der Größe $s$ als $n\log s$ zu messen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das ist der Sonderfall gleicher Wahrscheinlichkeiten: Bei $s$ gleich wahrscheinlichen Zeichen ist jedes $\lb s$ Bit wert. Hartley fehlte der Schritt zu ungleichen Wahrscheinlichkeiten --- und damit der ganze Rest. Die Einheit Hartley trägt seinen Namen.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Name}
+Shannon berichtete, \Person{John von Neumann} habe ihm den Namen \enquote{Entropie} empfohlen --- mit der Begründung, die Funktion sei in der statistischen Mechanik unter diesem Namen bereits bekannt, und im Übrigen wisse ohnehin niemand, was Entropie sei, was ihm in Diskussionen stets einen Vorteil verschaffen werde.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Anekdote ist vielfach überliefert und in ihren Einzelheiten unsicher. Der sachliche Kern stimmt aber: Die Formel $-\sum p_i\ln p_i$ stand seit \Person{Boltzmann} und \Person{Gibbs} in der Physik, und der Zusammenhang ist mehr als eine Ähnlichkeit --- Kapitel~2 kommt darauf zurück.}
+\end{minipage}
+\end{center}
+
+\schritt{Shannon selbst}
+Er arbeitete bis 1972 an den Bell-Laboratorien und lehrte am MIT. Seine Dissertation von 1937 --- über die Anwendung der Booleschen Algebra auf Schaltkreise --- gilt als eine der folgenreichsten überhaupt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Shannon war für seine Zurückhaltung und seine Bastelfreude bekannt; er baute unter anderem eine jonglierende Maschine und ein Einrad mit außermittigem Sattel. Auf die Frage, warum er nach 1948 kaum noch zur Informationstheorie veröffentlichte, antwortete er sinngemäß, das Wesentliche sei gesagt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wo der Begriff heute steckt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Technik} & Jede Datenübertragung und jede Kompression beruht auf den Sätzen dieses Bandes.\\
+\textbf{Statistik} & Modellwahl über Informationskriterien; die Kullback-Leibler-Divergenz aus Kapitel~8.\\
+\textbf{Physik} & Die Verbindung zur thermodynamischen Entropie; das Landauer-Prinzip.\\
+\textbf{Biologie} & Informationsgehalt von Sequenzen, Kanalmodelle für die Signalübertragung in Zellen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\Person{Rolf Landauer} zeigte 1961, dass das \kursiv{Löschen} eines Bits mindestens die Wärmemenge $k_B T \ln 2$ freisetzen muss.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei Raumtemperatur sind das etwa $3 \cdot 10^{-21}$ Joule --- verschwindend wenig gegenüber dem tatsächlichen Energieverbrauch heutiger Rechner, aber grundsätzlich. Die Aussage wurde 2012 erstmals experimentell bestätigt. Sie besagt, dass Information keine rein mathematische Größe ist: Ihre Vernichtung kostet Energie.}
+\end{minipage}
+\end{center}
+
+\schritt{Und eine Warnung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Erfolg des Begriffs hat zu vielen Übertragungen geführt, die nicht tragen --- Shannon selbst schrieb 1956 einen kurzen Aufsatz mit dem Titel \kursiv{The Bandwagon}, in dem er davor warnte. \textbf{Die Informationstheorie ist eine Theorie über Übertragung, nicht über Erkenntnis.} Wo die Wahrscheinlichkeiten nicht wohldefiniert sind, sind auch ihre Größen es nicht.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Drei Forderungen} & stetig, fallend, additiv\\
+\textbf{Satz 1.1} & sie legen $-C\ln p$ fest\\
+\textbf{Definition 1.2} & Bit als Basis-Zwei-Einheit\\
+\textbf{Der Leitfall} & $2$, $3$ und $4$ Bit je Gruppe\\
+\textbf{Der Bruchfall} & Abhängigkeit, Empfänger, zwei Wortbedeutungen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel mitteln wir über alle Ereignisse --- und erhalten die Größe, die den ganzen Band trägt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,704 @@
+\chapter{Existenz und Berechnung}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{Was bisher zufällig schien}
+Jedes Spiel der Kapitel~4 und 5 hatte mindestens ein Gleichgewicht --- teils rein, teils nur gemischt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{1.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Spiel} & \textbf{rein} & \textbf{gemischt}\\
+\midrule
+Bereitschafts\-modell & $2$ & $1$\\
+Gefangenen\-dilemma & $1$ & --- \\
+Feigheitsspiel & $2$ & $1$\\
+Hirschjagd & $2$ & $1$\\
+Aufgabe 4.2 & $0$ & $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gibt es immer mindestens eines?}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Frage ist nicht müßig. Für Nullsummenspiele beantwortete Satz 2.2 sie mit ja, aber der Beweis in Kapitel~3 benutzte die Dualität --- und die steht bei Nichtnullsummenspielen nicht zur Verfügung. \textbf{Es gibt dort keine gemeinsame Zielfunktion, über die man optimieren könnte}, weil jeder Spieler etwas anderes will.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz von Brouwer}
+
+\begin{merksatz}
+\boxtitel{Satz 6.1 --- Brouwer, 1911}
+Sei $K \subset \R^{n}$ nichtleer, konvex und kompakt, und sei $f: K \to K$ stetig. Dann gibt es ein $\vek x^{*} \in K$ mit
+\[ f(\vek x^{*}) = \vek x^{*} . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede stetige Abbildung einer solchen Menge in sich selbst hat einen Fixpunkt.}
+\end{minipage}
+\end{center}
+
+\schritt{Der eindimensionale Fall}
+Für $K = [0,1]$ ist der Beweis elementar. Man betrachtet
+\[ g(x) = f(x) - x . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Am linken Rand} & $g(0) = f(0) - 0 = f(0) \ge 0$\\
+\textbf{Am rechten Rand} & $g(1) = f(1) - 1 \le 0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Nach dem Zwischenwertsatz (Band 4) gibt es ein $x^{*}$ mit $g(x^{*}) = 0$. \checkmark
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) rectangle (4.4,4.4);
+\draw[grau!45, line width=0.8pt, dashed] (0,0) -- (4.4,4.4);
+\draw[tief, line width=1.4pt] plot[smooth, samples=50, domain=0:4.4]
+  ({\x}, {0.9 + 3.0*(\x/4.4)^3 - 1.4*(\x/4.4) + 0.5*sin(180*\x/4.4)});
+\fill[akzent] (2.74,2.74) circle (2.8pt);
+\node[font=\scriptsize, color=akzent, anchor=west] at (2.9,2.5) {Fixpunkt};
+\node[font=\scriptsize, color=grau, anchor=east] at (-0.1,0) {$0$};
+\node[font=\scriptsize, color=grau, anchor=east] at (-0.1,4.4) {$1$};
+\node[font=\scriptsize, color=grau, anchor=north] at (4.4,-0.1) {$1$};
+\node[font=\scriptsize\itshape, color=grau] at (2.2,-0.75) {jede stetige Kurve von Rand zu Rand schneidet die Diagonale};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Der allgemeine Fall}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In höheren Dimensionen gibt es keinen Zwischenwertsatz, und der Beweis wird erheblich schwieriger --- er benutzt Hilfsmittel der algebraischen Topologie oder, in einer elementareren Fassung, das Lemma von Sperner über gefärbte Triangulierungen. \textbf{Wir benutzen Satz 6.1 ohne Beweis}; das ist die erste der neun Auslassungen, die der Anhang tabelliert. Die Fundstelle ist Osborne und Rubinstein\zit{19}.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum alle drei Voraussetzungen nötig sind}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{3.0cm}P{3.2cm}@{}}
+\toprule
+\textbf{fehlt} & \textbf{Gegenbeispiel} & \textbf{Wirkung}\\
+\midrule
+kompakt & $f(x)=x+1$ auf $\R$ & läuft davon\\
+konvex & Drehung eines Kreisrings & kein Fixpunkt\\
+stetig & Sprungfunktion & springt über\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die mittlere Zeile ist die lehrreichste: Ein Kreisring ist kompakt, und eine Drehung um einen beliebigen Winkel ist stetig und bildet ihn auf sich ab --- aber sie hat keinen Fixpunkt. \textbf{Das Loch in der Mitte genügt}, und genau darauf zielen die topologischen Beweise des Satzes.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Existenzsatz}
+
+\begin{merksatz}
+\boxtitel{Satz 6.2 --- Nash, 1950}
+Jedes endliche Spiel --- beliebig viele Spieler, beliebig viele Strategien --- besitzt mindestens ein Nash-Gleichgewicht in gemischten Strategien.
+
+\schritt{Schritt 1 --- Der Strategieraum}
+Für Spieler $i$ mit $m_i$ reinen Strategien ist die Menge seiner Mischungen
+\[ \Delta_i = \left\{ \vek\sigma_i \ : \ \sigma_{i,k} \ge 0, \ \textstyle\sum_k \sigma_{i,k} = 1 \right\} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Nichtleer} & Jede reine Strategie liegt darin.\\
+\textbf{Konvex} & Mischungen von Mischungen sind Mischungen.\\
+\textbf{Kompakt} & Beschränkt durch $[0,1]^{m_i}$, abgeschlossen durch die Gleichung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Das Produkt $\Delta = \Delta_1\times\cdots\times\Delta_n$ hat dieselben Eigenschaften.
+
+\schritt{Schritt 2 --- Die Abbildung}
+Für ein Profil $\vek\sigma$ und jede reine Strategie $k$ von Spieler $i$ setze
+\[ g_{i,k}(\vek\sigma) = \max\bigl\{0,\ \Aus_i(k,\vek\sigma_{-i}) - \Aus_i(\vek\sigma)\bigr\} . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$g_{i,k}$ misst, um wie viel Strategie $k$ besser wäre als das, was der Spieler gerade erhält} --- und ist null, wenn sie nicht besser ist.
+\end{minipage}
+\end{center}
+
+Nun definiere $T: \Delta \to \Delta$ durch
+\[ T(\vek\sigma)_{i,k} = \frac{\sigma_{i,k} + g_{i,k}(\vek\sigma)}{1 + \sum_{j} g_{i,j}(\vek\sigma)} . \]
+
+\schritt{Schritt 3 --- $T$ ist wohldefiniert und stetig}
+\kursiv{Wohldefiniert:} Zähler und Nenner sind nichtnegativ, der Nenner ist mindestens $1$. Die Summe über $k$ ergibt
+\[ \frac{\sum_k \sigma_{i,k} + \sum_k g_{i,k}}{1+\sum_j g_{i,j}} = \frac{1 + \sum_k g_{i,k}}{1+\sum_j g_{i,j}} = 1 \quad \checkmark \]
+
+\kursiv{Stetig:} $\Aus_i$ ist ein Polynom in den $\sigma$, also stetig; $\max\{0,\cdot\}$ ist stetig; Quotient mit Nenner $\ge 1$ ist stetig.
+
+\schritt{Schritt 4 --- Brouwer anwenden}
+Nach Satz 6.1 gibt es ein $\vek\sigma^{*}$ mit $T(\vek\sigma^{*}) = \vek\sigma^{*}$.
+
+\schritt{Schritt 5 --- Fixpunkt heißt Gleichgewicht}
+Schreibe $G_i := \sum_j g_{i,j}(\vek\sigma^{*})$. Die Fixpunktgleichung lautet
+\[ \sigma_{i,k}^{*}\,(1+G_i) = \sigma_{i,k}^{*} + g_{i,k} \quad\Longrightarrow\quad \sigma_{i,k}^{*}\,G_i = g_{i,k} . \]
+
+\kursiv{Annahme:} $G_i > 0$ für ein $i$.
+
+Dann folgt für jedes $k$ mit $\sigma_{i,k}^{*} > 0$, dass $g_{i,k} > 0$ --- also ist \kursiv{jede benutzte} Strategie echt besser als der Durchschnitt $\Aus_i(\vek\sigma^{*})$.
+
+\kursiv{Das ist unmöglich:} Der Durchschnitt ist
+\[ \Aus_i(\vek\sigma^{*}) = \sum_k \sigma_{i,k}^{*}\,\Aus_i(k,\vek\sigma_{-i}^{*}) \]
+--- ein gewichteter Mittelwert der Erträge der benutzten Strategien. Ein Mittelwert kann nicht kleiner sein als sein kleinster Summand.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Also ist $G_i = 0$ für alle $i$, mithin $g_{i,k} = 0$ für alle $i,k$ --- keine Strategie ist besser als das Erreichte.} Das ist die Definition des Nash-Gleichgewichts. $\blacksquare$
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis ist eine halbe Seite lang und benutzt außer Brouwer nur die Beobachtung aus Satz 3.3: \textbf{Nicht jede benutzte Strategie kann überdurchschnittlich sein.} Von Neumanns Urteil \enquote{das ist trivial, ein Fixpunktsatz} beschreibt die Technik zutreffend --- und verfehlt, dass die Definition die Leistung war.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Abbildung in Zahlen}
+Am Feigheitsspiel aus Kapitel~5, symmetrisch gestartet bei $\vek\sigma = (\tfrac12,\tfrac12)$:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{2.0cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Schritt} & $\sigma_{\text{verzicht}}$ & \textbf{Ertrag} & \textbf{Gewinn bei Ausbau}\\
+\midrule
+$0$ & $0{,}5000$ & $2{,}750$ & $0{,}250$\\
+$1$ & $0{,}4000$ & $2{,}520$ & $0{,}080$\\
+$2$ & $0{,}3704$ & $2{,}440$ & $0{,}041$\\
+$3$ & $0{,}3557$ & $2{,}399$ & $0{,}024$\\
+$4$ & $0{,}3474$ & & \\
+\midrule
+$\infty$ & $\mathbf{0{,}3333}$ & $\mathbf{2{,}333}$ & $\mathbf{0}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zum ersten Schritt:} Ertrag $= \tfrac14(3+2+5+1) = 2{,}75$. Ausbau bringt $\tfrac12\cdot5+\tfrac12\cdot1 = 3$, also $g = 0{,}25$. Verzicht bringt $2{,}5 < 2{,}75$, also $g = 0$.
+\[ T(\vek\sigma)_{\text{verzicht}} = \frac{0{,}5+0}{1+0{,}25} = 0{,}4 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Folge nähert sich dem Gleichgewicht $\tfrac13$.} Der Gewinn schrumpft gegen null --- genau das kennzeichnet den Fixpunkt.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Man darf daraus kein Verfahren machen.} Brouwer garantiert die Existenz eines Fixpunkts, nicht dass die Iteration zu ihm führt --- Fixpunkte können abstoßend sein. Hier klappt es; in anderen Spielen kreist die Folge dauerhaft, wie Kapitel~10 an einem Beispiel zeigen wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Berechnung}
+
+\begin{merksatz}
+\boxtitel{Die Trägersuche}
+Für zwei Spieler lässt sich das Verfahren aus Kapitel~3 übertragen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Vermute je eine Teilmenge benutzter Strategien.\\
+$2$ & Setze die Erträge innerhalb jedes Trägers gleich und löse.\\
+$3$ & Prüfe Nichtnegativität und dass unbenutzte Strategien nicht besser sind.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der Aufwand}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{3.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Trägerpaare} & \\
+\midrule
+$2\times2$ & $9$ & von Hand\\
+$3\times3$ & $49$ & mühsam\\
+$5\times5$ & $961$ & Rechner\\
+$10\times10$ & $1\,046\,529$ & \\
+$20\times20$ & $\approx1{,}1\cdot10^{12}$ & \textcolor{akzent}{aussichtslos}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Zahl der Trägerpaare beträgt $(2^{m}-1)(2^{n}-1)$ und wächst exponentiell.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Unterschied zu Teil I}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Nullsumme} & Lineares Programm. Polynomiale Zeit, gesichert seit 1979.\\
+\textbf{Nichtnull\-summe} & Kein lineares Programm --- es gibt keine gemeinsame Zielfunktion.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Gegnerschaft macht das Problem leichter, nicht schwerer.}
+\end{minipage}
+\end{center}
+
+\schritt{Satz 6.3 --- die Komplexität}
+Das Auffinden eines Nash-Gleichgewichts ist vollständig für die Klasse $\mathsf{PPAD}$ --- und zwar bereits bei zwei Spielern.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Was $\mathsf{PPAD}$ ist} & Die Klasse der Suchprobleme, bei denen die Existenz einer Lösung aus einem Paritätsargument folgt --- Brouwer ist der Prototyp.\\
+\textbf{Was das heißt} & Ein polynomiales Verfahren gilt als sehr unwahrscheinlich; bewiesen ist es nicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Lage entspricht der von $\mathsf{NP}$-Vollständigkeit in Band 19, Kapitel~12, mit einem Unterschied: \textbf{Hier ist die Existenz einer Lösung garantiert}, nur ihr Auffinden ist schwer. Solche Probleme passen nicht in $\mathsf{NP}$ im üblichen Sinn, weil es kein \enquote{Nein} gibt --- und deshalb brauchte es eine eigene Klasse, die \Person{Christos Papadimitriou} 1994 einführte.}
+\end{minipage}
+\end{center}
+
+\schritt{Und was daraus folgt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wenn ein Gleichgewicht nicht in vertretbarer Zeit zu berechnen ist, stellt sich die Frage, ob Spieler es finden. \textbf{Ein Vorhersagebegriff, dessen Auswertung unerreichbar ist, verliert seinen Anspruch} --- so hat Papadimitriou das Ergebnis selbst gedeutet. Kapitel~15 kommt darauf zurück.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was Satz 6.2 nicht liefert}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kein Verfahren} & Der Beweis ist nicht konstruktiv. Brouwer sagt nicht, wo der Fixpunkt liegt.\\
+\textbf{Keine Eindeutigkeit} & Es kann viele Gleichgewichte geben, mit ganz verschiedenen Auszahlungen.\\
+\textbf{Keine Auswahl} & Welches erreicht wird, bleibt offen.\\
+\textbf{Nur endlich} & Bei unendlichen Strategiemengen braucht man Zusatzannahmen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es ist dasselbe Muster wie bei Shannons Kanalcodierungstheorem in Band 20, Kapitel~5: \textbf{Ein Existenzbeweis, der das Objekt nicht angibt.} Dort dauerte es sechzig Jahre bis zum konstruktiven Ersatz; hier spricht Satz 6.3 dafür, dass es ihn nicht geben wird.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur vierten Zeile}
+Bei stetigen Strategieräumen gilt der Satz weiterhin, sofern die Auszahlungen stetig und die Räume konvex und kompakt sind.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Satz von \Person{Glicksberg} von 1952. \textbf{Ohne Stetigkeit versagt er}: Ein Preiswettbewerb, in dem der Billigere den ganzen Markt bekommt, hat unstetige Auszahlungen --- und manche Varianten davon haben tatsächlich kein Gleichgewicht. Solche Fälle sind in der Wirtschaftstheorie keine Randerscheinung.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.1 --- Brouwer nachprüfen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & Bestimmen Sie den Fixpunkt von $f(x) = \tfrac14 x + \tfrac12$ auf $[0,1]$.\\
+(b) & Zeigen Sie, dass $f(x) = x+1$ auf $\R$ keinen hat, und benennen Sie die verletzte Voraussetzung.\\
+(c) & Hat $f(x) = 1-x$ auf $[0,1]$ einen Fixpunkt?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a)}
+\[ x = \tfrac14 x + \tfrac12 \quad\Longrightarrow\quad \tfrac34 x = \tfrac12 \quad\Longrightarrow\quad x = \tfrac23 \]
+
+\kursiv{Probe:} $\tfrac14\cdot\tfrac23 + \tfrac12 = \tfrac16 + \tfrac36 = \tfrac46 = \tfrac23$ \checkmark
+
+\kursiv{Voraussetzungen:} $[0,1]$ ist konvex und kompakt; $f$ ist stetig; $f([0,1]) = [\tfrac12,\tfrac34] \subset [0,1]$ \checkmark
+
+\schritt{(b)}
+\[ x = x+1 \quad\Longrightarrow\quad 0 = 1 \]
+Unlösbar.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Verletzt ist die Kompaktheit:} $\R$ ist nicht beschränkt.
+\end{minipage}
+\end{center}
+
+\kursiv{Konvexität und Stetigkeit sind erfüllt.} Es genügt also eine verletzte Voraussetzung.
+
+\schritt{(c)}
+\[ x = 1-x \quad\Longrightarrow\quad x = \tfrac12 \]
+
+Ja --- und zwar genau einer.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert: Diese Abbildung ist eine Spiegelung, also eine Bewegung ohne Zusammenziehung. \textbf{Brouwer verlangt keine Kontraktion} --- anders als der Fixpunktsatz von Banach, der zusätzlich die Eindeutigkeit und ein Verfahren liefert. Der Preis der schwächeren Voraussetzung ist genau das, was der Bruchfall benennt: kein Verfahren, keine Eindeutigkeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Iteration bei (c)}
+\[ 0{,}3 \ \to\ 0{,}7 \ \to\ 0{,}3 \ \to\ 0{,}7 \ \to\ \cdots \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Folge kreist und erreicht den Fixpunkt nie} --- obwohl er existiert und eindeutig ist.
+\end{minipage}
+\end{center}
+
+\kursiv{Bei (a) dagegen:} $0{,}3 \to 0{,}575 \to 0{,}644 \to 0{,}661 \to 0{,}665 \to \cdots \to \tfrac23$, denn $|f'| = \tfrac14 < 1$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das ist der Grund für die Warnung am Ende von Abschnitt 6.3 --- in Zahlen. \textbf{Existenz und Erreichbarkeit sind zwei verschiedene Dinge}, und die Abbildung $T$ aus Satz 6.2 ist im Allgemeinen keine Kontraktion.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.2 --- Die Nash-Abbildung rechnen}
+Führen Sie im Gefangenendilemma aus Kapitel~5 einen Schritt der Abbildung $T$ aus, ausgehend von $\vek\sigma = (\tfrac12,\tfrac12)$ für beide.
+
+\loesung
+\schritt{Schritt 1 --- Die Matrix}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+& \textbf{zurück} & \textbf{frei}\\
+\midrule
+\textbf{zurück} & $(3,3)$ & $(0,5)$\\
+\textbf{frei} & $(5,0)$ & $(1,1)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Der gegenwärtige Ertrag}
+\[ \Aus_1(\vek\sigma) = \tfrac14(3+0+5+1) = \tfrac94 = 2{,}25 \]
+
+\schritt{Schritt 3 --- Die Erträge der reinen Strategien}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.6cm}P{2.0cm}@{}}
+\toprule
+\textbf{Strategie} & \textbf{Rechnung} & \textbf{Ertrag}\\
+\midrule
+zurückhalten & $\tfrac12\cdot3+\tfrac12\cdot0$ & $1{,}5$\\
+frei einsetzen & $\tfrac12\cdot5+\tfrac12\cdot1$ & $3{,}0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 4 --- Die Gewinne}
+\[ g_{\text{zurück}} = \max\{0,\ 1{,}5-2{,}25\} = 0 \]
+\[ g_{\text{frei}} = \max\{0,\ 3{,}0-2{,}25\} = 0{,}75 \]
+
+\schritt{Schritt 5 --- Der Schritt}
+\[ T(\vek\sigma)_{\text{zurück}} = \frac{0{,}5 + 0}{1+0{,}75} = \frac{0{,}5}{1{,}75} = \tfrac27 \approx 0{,}286 \]
+\[ T(\vek\sigma)_{\text{frei}} = \frac{0{,}5+0{,}75}{1{,}75} = \frac{1{,}25}{1{,}75} = \tfrac57 \approx 0{,}714 \]
+
+\kursiv{Probe:} $\tfrac27 + \tfrac57 = 1$ \checkmark
+
+\schritt{Schritt 6 --- Die Richtung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Anteil des Zurückhaltens sinkt von $0{,}5$ auf $0{,}286$} --- die Abbildung strebt zum Gleichgewicht $(0,1)$.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Der Fixpunkt geprüft}
+Bei $\vek\sigma = (0,1)$, also beidseitig freier Einsatz:
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+\textbf{Strategie} & \textbf{Ertrag} & \textbf{Gewinn}\\
+\midrule
+zurückhalten & $0$ & $\max\{0,-1\} = 0$\\
+frei einsetzen & $1$ & $\max\{0,0\} = 0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Gegenwärtiger Ertrag: $1$. Alle Gewinne null, also $G = 0$:
+\[ T(\vek\sigma)_{\text{frei}} = \frac{1+0}{1+0} = 1 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Abbildung lässt das Gleichgewicht unverändert --- so muss es sein. \textbf{Man beachte, dass das Zurückhalten hier einen \kursiv{negativen} Vorteil hat} und die Abschneidung bei null greift. Ohne sie wäre $T$ nicht wohldefiniert, weil der Nenner null oder negativ werden könnte.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.3 --- Trägersuche}
+Bestimmen Sie alle Gleichgewichte:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+& \textbf{L} & \textbf{R}\\
+\midrule
+\textbf{O} & $(2,\ 1)$ & $(0,\ 0)$\\
+\textbf{M} & $(0,\ 0)$ & $(1,\ 2)$\\
+\textbf{U} & $(1,\ 1)$ & $(1,\ 1)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Reine Gleichgewichte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.4cm}P{1.2cm}@{}}
+\toprule
+\textbf{Feld} & \textbf{Zeile wechselt} & \textbf{Spalte wechselt} & \\
+\midrule
+$(\text{O},\text{L})$ & $2\to0$ bzw. $1$ & $1\to0$ & \textcolor{gruen}{GG}\\
+$(\text{M},\text{R})$ & $1\to0$ bzw. $1$ & $2\to0$ & \textcolor{gruen}{GG}\\
+$(\text{U},\text{L})$ & $1\to2$ & --- & ---\\
+$(\text{U},\text{R})$ & $1\to1$ bzw. $0$ & $1\to0$ & \textcolor{gruen}{GG}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zu $(\text{U},\text{R})$:} Der Zeilenspieler erhält $1$; O brächte $0$, M brächte $1$. Er kann sich also nicht verbessern. Der Spaltenspieler erhält $1$; L brächte ebenfalls $1$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hier liegt ein \kursiv{schwaches} Gleichgewicht vor: Abweichen kostet nichts, bringt aber auch nichts. \textbf{Das zählt nach Definition 4.3 als Gleichgewicht}, weil die Definition nur \enquote{nicht besser} verlangt --- ein Punkt, auf den Kapitel~7 zurückkommt.}
+\end{minipage}
+\end{center}
+
+\kursiv{Und $(\text{U},\text{L})$:} Der Zeilenspieler würde zu O wechseln ($2>1$). Kein Gleichgewicht.
+
+\schritt{Schritt 2 --- Gemischte mit Träger $\{\text{O},\text{M}\}$}
+Der Spaltenspieler sei gleichgültig zwischen L und R:
+\[ p\cdot1 + (1-p)\cdot0 = p\cdot0 + (1-p)\cdot2 \]
+\[ p = 2-2p \quad\Longrightarrow\quad p = \tfrac23 \]
+
+Der Zeilenspieler sei gleichgültig zwischen O und M:
+\[ q\cdot2 + (1-q)\cdot0 = q\cdot0 + (1-q)\cdot1 \]
+\[ 2q = 1-q \quad\Longrightarrow\quad q = \tfrac13 \]
+
+\schritt{Schritt 3 --- Die Probe für die unbenutzte Zeile}
+Ertrag des Zeilenspielers: $2\cdot\tfrac13 = \tfrac23$.
+
+Zeile U brächte gegen $\vek q$:
+\[ \tfrac13\cdot1 + \tfrac23\cdot1 = 1 \ >\ \tfrac23 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textcolor{akzent}{\textbf{Die Vermutung scheitert.}} Der Zeilenspieler würde auf U ausweichen.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Träger $\{\text{O},\text{U}\}$ versuchen}
+Der Zeilenspieler sei gleichgültig zwischen O und U:
+\[ 2q + 0(1-q) = 1q + 1(1-q) = 1 \quad\Longrightarrow\quad q = \tfrac12 \]
+
+Der Spaltenspieler benutzt beide Spalten, muss also gleichgültig sein. Mit $p$ auf O und $1-p$ auf U:
+\[ p\cdot1 + (1-p)\cdot1 = p\cdot0 + (1-p)\cdot1 \]
+\[ 1 = 1-p \quad\Longrightarrow\quad p = 0 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Also $p=0$ --- die Zeile O wird gar nicht benutzt.} Es bleibt $(\text{U},\ \vek q)$ mit beliebigem $q$.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Diese Familie prüfen}
+Spielt der Zeilenspieler U und der Spaltenspieler eine beliebige Mischung $\vek q$:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.8cm}P{2.4cm}@{}}
+\toprule
+\textbf{Zeile} & \textbf{Ertrag gegen $\vek q$} & \\
+\midrule
+O & $2q$ & \\
+M & $1-q$ & \\
+U & $1$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+U ist beste Antwort genau dann, wenn $2q \le 1$ und $1-q \le 1$, also
+\[ q \ \le\ \tfrac12 . \]
+
+Der Spaltenspieler erhält gegen U in beiden Spalten $1$ --- er ist stets gleichgültig. \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es gibt ein ganzes Kontinuum von Gleichgewichten:} $(\text{U},\ (q,1-q))$ für alle $q \le \tfrac12$.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Bilanz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+\textbf{Gleichgewicht} & \textbf{Aus\-zahlung} & \\
+\midrule
+$(\text{O},\text{L})$ & $(2,1)$ & rein\\
+$(\text{M},\text{R})$ & $(1,2)$ & rein\\
+$(\text{U},\ q\le\tfrac12)$ & $(1,1)$ & \textcolor{akzent}{Kontinuum}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Zahl der Gleichgewichte ist hier nicht ungerade, sondern unendlich --- der Satz von Wilson aus Aufgabe 4.1 gilt nur für \kursiv{generische} Auszahlungen, und die Gleichheit der Einträge in Zeile U ist genau die Ausnahme. \textbf{Solche Entartungen sind in konstruierten Beispielen die Regel und in gemessenen Daten die Ausnahme}, was die praktische Bedeutung des Satzes einschränkt: Reale Auszahlungen sind geschätzt, und Schätzungen sind nie exakt gleich.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Beweis in zwei Fassungen}
+Nashs Dissertation von 1950 enthält den Existenzbeweis über den Fixpunktsatz von \Person{Kakutani} --- eine Verallgemeinerung von Brouwer auf mengenwertige Abbildungen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Man bildet jedes Profil auf die Menge der besten Antworten ab. Ein Fixpunkt dieser Abbildung ist unmittelbar ein Gleichgewicht --- der Beweis ist kürzer als der in Abschnitt 6.3, benutzt aber das schwerere Hilfsmittel.}
+\end{minipage}
+\end{center}
+
+\schritt{Die zweite Fassung}
+1951 veröffentlichte Nash in den \kursiv{Annals of Mathematics} einen Beweis, der mit Brouwer auskommt --- genau die Abbildung $T$ aus Satz 6.2.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Der Aufsatz umfasst knapp neun Seiten.} Er enthält neben dem Beweis den Begriff des symmetrischen Gleichgewichts und ein Beispiel mit drei Spielern. Dass Nash denselben Satz zweimal bewies, hatte einen Grund: Der zweite Beweis benutzt weniger und ist damit grundsätzlicher.}
+\end{minipage}
+\end{center}
+
+\schritt{Kakutani und von Neumann}
+\Person{Shizuo Kakutani} hatte seinen Satz 1941 bewiesen --- ausdrücklich, um von Neumanns Minimax-Beweis zu vereinfachen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Von Neumanns Originalbeweis von 1928 war lang und technisch; Kakutanis Fassung passt auf eine Seite. \textbf{Nash benutzte also ein Werkzeug, das eigens für von Neumanns Satz geschaffen worden war} --- was dessen Bemerkung, die Sache sei trivial, in ein etwas anderes Licht rückt.}
+\end{minipage}
+\end{center}
+
+\schritt{Brouwer selbst}
+\Person{Luitzen Brouwer} (1881--1966) bewies seinen Satz 1911 und verwarf ihn später.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er wurde zum Begründer des Intuitionismus, der nicht konstruktive Existenzbeweise ablehnt --- und sein eigener Fixpunktsatz ist das Musterbeispiel eines solchen Beweises. \textbf{Brouwer erklärte ihn für ungültig nach seinen späteren Maßstäben.} Dass die halbe Wirtschaftstheorie auf einem Satz ruht, den sein Urheber nicht mehr anerkannte, gehört zu den bemerkenswerteren Fußnoten dieses Fachs.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Gleichgewichte berechnen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Lemke-Howson} & Ein Wegverfolgungsverfahren für zwei Spieler; findet stets eines, braucht im schlechtesten Fall exponentiell lange.\\
+\textbf{Näherungen} & Gleichgewichte, bei denen sich niemand um mehr als $\varepsilon$ verbessern kann.\\
+\textbf{Korreliert} & Ein weiterer Gleichgewichtsbegriff --- in polynomialer Zeit berechenbar.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Das Verfahren stammt von 1964 und ist dem Simplexverfahren verwandt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass es im schlechtesten Fall exponentiell lange braucht, wurde erst 2004 gezeigt --- mit Beispielen, die den Klee-Minty-Würfeln aus Band 19, Kapitel~3 entsprechen. \textbf{Dasselbe Muster wie dort: ein Verfahren, das in der Praxis gut läuft und im Beweis versagt.}}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Das \Begriff{korrelierte Gleichgewicht} von \Person{Robert Aumann} (1974) erlaubt einen gemeinsamen Zufallsmechanismus, dessen Empfehlungen jeder befolgen möchte.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine Ampel ist das Musterbeispiel: Sie empfiehlt dem einen Halten, dem anderen Fahren, und beide folgen gern. \textbf{Solche Gleichgewichte sind durch ein lineares Programm zu finden} --- also leicht --- und können Auszahlungen erreichen, die kein Nash-Gleichgewicht erreicht. Im Feigheitsspiel aus Kapitel~5 etwa lassen sich die schlechten $(1,1)$ vollständig vermeiden, was das gemischte Gleichgewicht nicht kann.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 6.1} & Brouwer: stetig, konvex, kompakt\\
+\textbf{Satz 6.2} & jedes endliche Spiel hat eines\\
+\textbf{Die Abbildung} & Gewinn dazurechnen, normieren\\
+\textbf{Satz 6.3} & $\mathsf{PPAD}$-vollständig\\
+\textbf{Der Vorbehalt} & Existenz ist nicht Erreichbarkeit\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~II. Bisher wurde einmal gezogen, gleichzeitig und ohne Vorgeschichte. Ab Kapitel~7 gibt es eine Reihenfolge --- und aus der Drohung wird die Frage, ob man sie glauben muss.}
+\end{minipage}
+\end{center}
+\end{merksatz}

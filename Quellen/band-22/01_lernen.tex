@@ -1,0 +1,652 @@
+\part{Das Problem}
+
+\chapter{Was Lernen heißt}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Sepsis-Frühwarnung aus einem einzigen Wert}
+Auf der Intensivstation des Klinikums wird bei jedem Patienten das Laktat bestimmt. Etwa jeder zehnte entwickelt in den folgenden Stunden eine Sepsis.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{3.2cm}@{}}
+\toprule
+\textbf{Gruppe} & \textbf{Anteil} & \textbf{Laktat in mmol/l}\\
+\midrule
+ohne Sepsis & $90\,\%$ & um $1{,}2$, Streuung $0{,}5$\\
+mit Sepsis & $10\,\%$ & um $3{,}0$, Streuung $1{,}0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\textbf{Die Frage:} Ab welchem Laktatwert soll gewarnt werden?
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (7.2,0);
+\draw[tief, line width=1.3pt, smooth, samples=80, domain=0:7]
+  plot ({\x}, {2.6*0.9*exp(-((\x/1.4-1.2)^2)/(2*0.25))/(0.5*2.5066)*0.55});
+\draw[akzent, line width=1.3pt, smooth, samples=80, domain=0:7]
+  plot ({\x}, {2.6*0.1*exp(-((\x/1.4-3.0)^2)/(2*1.0))/(1.0*2.5066)*0.55*4});
+\draw[grau!60, line width=0.8pt, dashed] (3.41,0) -- (3.41,2.0);
+\node[font=\scriptsize, color=tief] at (1.1,1.9) {ohne};
+\node[font=\scriptsize, color=akzent] at (5.0,0.75) {mit Sepsis};
+\node[font=\scriptsize, color=grau, anchor=north] at (3.41,-0.1) {$2{,}44$};
+\node[font=\scriptsize, color=grau, anchor=north] at (0,-0.1) {$0$};
+\node[font=\scriptsize, color=grau, anchor=north] at (7.0,-0.1) {$5$};
+\node[font=\scriptsize\itshape, color=grau] at (3.5,-0.75) {Laktat in mmol/l (Sepsiskurve vierfach überhöht)};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die beiden Verteilungen überlappen. \textbf{Es gibt keine Schwelle, die alle richtig einordnet} --- jede Wahl erkauft weniger Fehlalarme mit mehr übersehenen Fällen oder umgekehrt. Die Frage ist also nicht, wie man Fehler vermeidet, sondern welche man in Kauf nimmt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Bestandteile}
+
+\begin{definition}
+\boxtitelm{Definition 1.1 --- die Lernaufgabe}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Merkmale} & $x \in \mathcal X$ --- was man beobachtet, hier der Laktatwert.\\
+\textbf{Zielgröße} & $y \in \mathcal Y$ --- was man vorhersagen will, hier Sepsis ja oder nein.\\
+\textbf{Verteilung} & $P$ auf $\mathcal X \times \mathcal Y$ --- \textcolor{akzent}{unbekannt}.\\
+\textbf{Regel} & $h: \mathcal X \to \mathcal Y$ --- auch \Begriff{Hypothese} oder \Begriff{Klassifikator}.\\
+\textbf{Verlust} & $L(h(x),y)$ --- was ein Fehler kostet.\\
+\textbf{Daten} & $(x_1,y_1),\ldots,(x_n,y_n)$ unabhängig aus $P$ gezogen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was an dieser Definition wichtig ist}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Verteilung $P$ ist unbekannt.} Man sieht nur die $n$ Beispiele.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das unterscheidet das Lernen von der Statistik aus Band 17. Dort nahm man an, $P$ gehöre zu einer bestimmten Familie --- etwa den Normalverteilungen --- und schätzte deren Parameter. \textbf{Hier nimmt man über $P$ möglichst wenig an}, und gerade deshalb ist die Frage schwer. Im Leitfall kennen wir $P$ nur, weil wir es vorgegeben haben; das Klinikum kennt es nicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Die letzte Zeile ist die stärkste Annahme}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\enquote{Unabhängig aus $P$ gezogen} heißt: Die Daten, aus denen man lernt, und die, auf die man das Gelernte anwendet, stammen aus \kursiv{derselben} Verteilung. \textbf{Das ist genau die Annahme, die beim Sepsis-System von 2021 verletzt war} --- und sie steht in fast jedem Satz dieses Bandes als stillschweigende Voraussetzung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 1.2 --- das Risiko}
+Das \Begriff{Risiko} einer Regel ist ihr erwarteter Verlust:
+\[ \Risk(h) = \E\bigl[L(h(X),Y)\bigr] . \]
+Beim \Begriff{Null-Eins-Verlust} --- ein Fehler kostet eins, ein Treffer null --- ist das
+\[ \Risk(h) = \Pr\bigl[h(X) \ne Y\bigr] , \]
+die Wahrscheinlichkeit einer Fehleinordnung.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Das Ziel}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gesucht ist eine Regel mit kleinem Risiko --- auf Daten, die man noch nicht gesehen hat.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Kern des Titels. \textbf{Eine Regel, die die gesehenen Daten gut erklärt, ist leicht zu finden} --- man lernt sie einfach auswendig. Eine Regel, die auch auf ungesehenen Daten stimmt, ist das eigentliche Ziel, und die Differenz zwischen beiden ist der Gegenstand der Kapitel~2, 3, 7 und 8.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die bestmögliche Regel}
+
+\begin{merksatz}
+\boxtitel{Wenn man $P$ kennte}
+Sei $\eta(x) = \Pr[Y=1 \mid X=x]$ die Wahrscheinlichkeit einer Sepsis beim Laktatwert $x$.
+
+\begin{definition}
+\boxtitelm{Definition 1.3 --- Bayes-Regel}
+\[ h^{*}(x) = \begin{cases} 1 & \text{falls } \eta(x) \ge \tfrac12\\ 0 & \text{sonst} \end{cases} \]
+\end{definition}
+
+\schritt{Satz 1.4 --- sie ist die beste}
+Für jede Regel $h$ gilt beim Null-Eins-Verlust
+\[ \Risk(h^{*}) \ \le\ \Risk(h) . \]
+
+\schritt{Beweis}
+Man betrachtet einen festen Wert $x$. Die Wahrscheinlichkeit eines Fehlers bei gegebenem $x$ ist
+\[ \Pr\bigl[h(x) \ne Y \mid X=x\bigr] = \begin{cases} \eta(x) & \text{falls } h(x)=0 \quad\text{(Sepsis übersehen)}\\ 1-\eta(x) & \text{falls } h(x)=1 \quad\text{(Fehlalarm)} \end{cases} \]
+
+\kursiv{Das Kleinere der beiden ist} $\min\{\eta(x),\,1-\eta(x)\}$ --- und genau dieses wählt $h^{*}$: Ist $\eta(x) \ge \tfrac12$, so ist $1-\eta(x)$ das Kleinere, und $h^{*}$ sagt $1$.
+
+\kursiv{Also gilt für jedes $x$:}
+\[ \Pr\bigl[h^{*}(x) \ne Y \mid X=x\bigr] \ \le\ \Pr\bigl[h(x) \ne Y \mid X=x\bigr] \]
+
+\kursiv{Mittelung über $x$} erhält die Ungleichung, denn ein Mittelwert kleinerer Zahlen ist kleiner. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man entscheidet sich an jeder Stelle für das Wahrscheinlichere --- und das ist global optimal.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall gerechnet}
+\schritt{Die Wahrscheinlichkeit einer Sepsis nach dem Messwert}
+Nach dem Satz von Bayes (Band 4):
+\[ \eta(x) = \frac{0{,}1\cdot f_1(x)}{0{,}1\cdot f_1(x) + 0{,}9\cdot f_0(x)} \]
+mit den Dichten $f_0$ und $f_1$ der beiden Gruppen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.2cm}P{3.2cm}@{}}
+\toprule
+\textbf{Laktat} & $\eta(x)$ & \\
+\midrule
+$1{,}0$ & $0{,}008$ & \\
+$1{,}5$ & $0{,}021$ & \\
+$2{,}0$ & $0{,}108$ & \\
+$2{,}5$ & $0{,}590$ & \textcolor{akzent}{über der Hälfte}\\
+$3{,}0$ & $0{,}973$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Schwelle}
+Die Bayes-Regel warnt, wo $\eta(x) = \tfrac12$ überschritten wird:
+\[ x^{*} = 2{,}44 \ \text{mmol/l} \]
+
+\schritt{Das Bayes-Risiko}
+\[ \Risk^{*} = \Risk(h^{*}) = 3{,}47\,\% \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{1.8cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Schwelle} & \textbf{Fehler} & \textbf{Empf.} & \textbf{Spezif.}\\
+\midrule
+$1{,}50$ & $25{,}4\,\%$ & $93{,}3\,\%$ & $72{,}6\,\%$\\
+$2{,}00$ & $6{,}5\,\%$ & $84{,}1\,\%$ & $94{,}5\,\%$\\
+$\mathbf{2{,}44}$ & $\mathbf{3{,}5\,\%}$ & $71{,}4\,\%$ & $99{,}3\,\%$\\
+$3{,}00$ & $5{,}0\,\%$ & $50{,}0\,\%$ & $100\,\%$\\
+\midrule
+nie warnen & $10{,}0\,\%$ & $0\,\%$ & $100\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die beste mögliche Regel übersieht fast drei von zehn Sepsisfällen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und sie ist nur um den Faktor drei besser als die Regel \enquote{nie warnen}, die ohne jede Messung auskommt. \textbf{Das Bayes-Risiko ist eine untere Schranke für jedes Verfahren} --- kein noch so kluges Lernverfahren kommt darunter, solange es nur das Laktat kennt. Wer bessere Vorhersagen will, braucht mehr Merkmale, nicht ein besseres Verfahren.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wenn Fehler verschieden kosten}
+
+\begin{merksatz}
+\boxtitel{Eine übersehene Sepsis ist schlimmer als ein Fehlalarm}
+Kostet ein übersehener Fall $c_{\text{FN}}$ und ein Fehlalarm $c_{\text{FP}}$, so lautet die Bayes-Regel
+\[ h^{*}(x) = 1 \quad\Longleftrightarrow\quad \eta(x) \ \ge\ \frac{c_{\text{FP}}}{c_{\text{FP}}+c_{\text{FN}}} . \]
+
+\schritt{Warum}
+Dieselbe Rechnung wie in Satz 1.4, nur mit Gewichten: Warnen kostet im Mittel $c_{\text{FP}}(1-\eta)$, nicht warnen $c_{\text{FN}}\,\eta$. Man warnt, wenn das Erste kleiner ist:
+\[ c_{\text{FP}}(1-\eta) \le c_{\text{FN}}\,\eta \quad\Longleftrightarrow\quad \eta \ge \frac{c_{\text{FP}}}{c_{\text{FP}}+c_{\text{FN}}} \]
+
+\schritt{Im Leitfall mit $c_{\text{FN}} : c_{\text{FP}} = 10 : 1$}
+\[ \eta(x) \ \ge\ \frac{1}{11} = 0{,}091 \quad\Longrightarrow\quad x^{*} = 1{,}95 \ \text{mmol/l} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{1.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+& \textbf{Schwelle} & \textbf{Fehler} & \textbf{Kosten}\\
+\midrule
+kleinster Fehler & $2{,}44$ & $3{,}5\,\%$ & $0{,}292$\\
+kleinste Kosten & $1{,}95$ & $7{,}4\,\%$ & $\mathbf{0{,}207}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Regel mit den geringsten Kosten macht doppelt so viele Fehler wie die mit den wenigsten Fehlern --- und ist dennoch die bessere.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Empfindlichkeit steigt dabei von $71$ auf $85$ Prozent. \textbf{Die Wahl der Verlustfunktion ist keine technische Einzelheit, sondern eine medizinische Entscheidung} --- und sie wird in der Entwicklung solcher Systeme häufig nicht getroffen, sondern stillschweigend durch den Null-Eins-Verlust ersetzt. Das ist die erste Warnung des Vorworts in ihrer einfachsten Gestalt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Kein Lernen ohne Annahme}
+
+\begin{merksatz}
+\boxtitel{Satz 1.5 --- kein Verfahren ist überall besser}
+Mittelt man über \kursiv{alle} möglichen Zusammenhänge zwischen $x$ und $y$, so haben alle Lernverfahren auf ungesehenen Daten dasselbe mittlere Risiko.
+
+\schritt{Der Gedanke}
+Sei $\mathcal X$ endlich und seien die Trainingsdaten gegeben. Auf einem Punkt $x$, der in den Daten nicht vorkommt, kann die Zielgröße jeden Wert haben.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ohne Annahme ist jede Vorhersage für $x$ genauso gut wie jede andere} --- im Mittel über alle denkbaren Welten liegt sie in der Hälfte der Fälle richtig.
+\end{minipage}
+\end{center}
+
+\schritt{Ein kleines Beispiel}
+Vier Laktatstufen, drei gesehen, eine nicht:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Stufe} & niedrig & mittel & erhöht & \textbf{hoch}\\
+\midrule
+gesehen & $0$ & $0$ & $1$ & \textcolor{akzent}{?}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Welt A:} \enquote{hoch} bedeutet Sepsis --- dann liegt eine Regel richtig, die \enquote{mehr Laktat, mehr Gefahr} unterstellt.\\
+\kursiv{Welt B:} \enquote{hoch} bedeutet keine Sepsis --- dann liegt eine Regel richtig, die das Gegenteil annimmt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ohne Vorwissen sind beide Welten gleich möglich. \textbf{Das Vorwissen \enquote{mehr Laktat, mehr Gefahr} ist eine Annahme}, und erst sie macht die Vorhersage möglich. Jedes Lernverfahren trägt solche Annahmen in sich; man nennt sie seine \Begriff{induktive Neigung}. Sie ist kein Fehler, sondern die Voraussetzung dafür, überhaupt etwas zu lernen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was der Satz nicht besagt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Nicht:} & \enquote{Alle Verfahren sind gleich gut.} Auf den Aufgaben, die tatsächlich vorkommen, unterscheiden sie sich erheblich.\\
+\textbf{Nicht:} & \enquote{Lernen ist unmöglich.} Es ist unmöglich \kursiv{ohne Annahme}.\\
+\textbf{Sondern:} & Ein Verfahren ist gut, wenn seine Annahmen zur Aufgabe passen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist Humes Problem in mathematischer Gestalt --- und seine Lösung ist dieselbe wie im Alltag: \textbf{Man setzt voraus, dass die Welt nicht beliebig ist}, sondern Regelmäßigkeiten hat, die sich fortsetzen. Ob diese Voraussetzung im Einzelfall stimmt, lässt sich aus den Daten allein nicht entscheiden.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was der Leitfall verschweigt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Die Verteilung} & Die Normalverteilungen waren vorgegeben. Tatsächliche Laktatwerte sind schief verteilt und nie negativ.\\
+\textbf{Die Prävalenz} & Zehn Prozent gelten für diese Station. Auf einer Normalstation sind es vielleicht zwei.\\
+\textbf{Die Zielgröße} & Was ist eine Sepsis? Die Definition hat sich 2016 geändert --- und damit, welche Fälle als $y=1$ zählen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Das Modell hat eine zweite Schwelle bei $x = -1{,}24$: Links davon würde die Bayes-Regel wieder warnen, weil die breitere Sepsisverteilung dort überwiegt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Negative Laktatwerte gibt es nicht, und die Schwelle ist bedeutungslos. \textbf{Sie zeigt aber, dass ein Modell Aussagen über Bereiche macht, in denen es nie geprüft wurde} --- und dass diese Aussagen falsch sein können, ohne dass es auffällt, solange niemand dorthin schaut.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Bei zwei Prozent Prävalenz statt zehn verschiebt sich die Bayes-Schwelle nach rechts, und die Fehlalarme nehmen relativ zu.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein auf der Intensivstation gelerntes Verfahren ist auf der Normalstation ein anderes Verfahren}, auch wenn sich keine Zeile Programmcode ändert. Das ist das Problem des positiven Vorhersagewerts aus Band 17, Kapitel~5 --- hier als Problem der Übertragbarkeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Mit der Definition von 2016 änderte sich, welche Patienten als septisch gelten. Ein Verfahren, das auf Daten nach der alten Definition gelernt hat, sagt die alte Größe vorher. \textbf{Das Verfahren kann nicht klüger sein als die Etiketten, mit denen es gelernt hat} --- und Etiketten in der Medizin sind oft umstrittener, als ihre Darstellung in einer Tabelle vermuten lässt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.1 --- Die Bayes-Regel an Tabellenwerten}
+Bei $1000$ Patienten wurde eine Laktatstufe erhoben:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.0cm}P{2.0cm}P{1.6cm}@{}}
+\toprule
+\textbf{Stufe} & \textbf{Sepsis} & \textbf{keine} & \textbf{Summe}\\
+\midrule
+niedrig & $5$ & $495$ & $500$\\
+mittel & $15$ & $285$ & $300$\\
+erhöht & $40$ & $110$ & $150$\\
+hoch & $40$ & $10$ & $50$\\
+\midrule
+\textbf{Summe} & $100$ & $900$ & $1000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Bestimmen Sie die Bayes-Regel und ihr Risiko.
+
+\loesung
+\schritt{Schritt 1 --- $\eta$ je Stufe}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{2.0cm}P{1.6cm}@{}}
+\toprule
+\textbf{Stufe} & \textbf{Rechnung} & $\eta$ & \textbf{Regel}\\
+\midrule
+niedrig & $5/500$ & $0{,}010$ & $0$\\
+mittel & $15/300$ & $0{,}050$ & $0$\\
+erhöht & $40/150$ & $0{,}267$ & $0$\\
+hoch & $40/50$ & $0{,}800$ & $\mathbf{1}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Bayes-Regel warnt nur bei \enquote{hoch}.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die Fehler}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Stufe} & \textbf{Regel sagt} & \textbf{falsch}\\
+\midrule
+niedrig & keine & $5$\\
+mittel & keine & $15$\\
+erhöht & keine & $40$\\
+hoch & Sepsis & $10$\\
+\midrule
+\textbf{Summe} & & $\mathbf{70}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ \Risk(h^{*}) = \frac{70}{1000} = 7{,}0\,\% \]
+
+\schritt{Schritt 3 --- Die Einordnung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{1.6cm}P{2.0cm}P{1.6cm}@{}}
+\toprule
+\textbf{Regel} & \textbf{Fehler} & \textbf{übersehen} & \textbf{Fehlal.}\\
+\midrule
+nie warnen & $100$ & $100$ & $0$\\
+Bayes (nur hoch) & $70$ & $60$ & $10$\\
+ab erhöht & $135$ & $20$ & $120$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur dritten Zeile:} Übersehen werden $5+15 = 20$, Fehlalarme $110+10 = 120$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Bayes-Regel übersieht sechzig von hundert Fällen.} Ab \enquote{erhöht} zu warnen, halbiert die Übersehenen auf zwanzig --- verdoppelt aber die Gesamtfehlerzahl.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Mit Kosten $10:1$}
+Die Schwelle liegt bei $\eta \ge \tfrac1{11} = 0{,}091$ --- nun wird ab \enquote{erhöht} gewarnt.
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{3.0cm}P{1.8cm}@{}}
+\toprule
+\textbf{Regel} & \textbf{Kosten} & \\
+\midrule
+nur hoch & $10\cdot60 + 1\cdot10$ & $610$\\
+ab erhöht & $10\cdot20 + 1\cdot120$ & $\mathbf{320}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Kosten halbieren sich, obwohl die Fehlerzahl sich fast verdoppelt. \textbf{Welche Regel die beste ist, entscheidet nicht die Mathematik, sondern die Bewertung der Fehler} --- und diese Bewertung gehört in die Hände derer, die die Folgen kennen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.2 --- Was die Prävalenz bewirkt}
+Dieselben Laktatstufen werden auf einer Normalstation erhoben, wo nur zwei Prozent eine Sepsis entwickeln. Die Verteilung der Stufen \kursiv{innerhalb} jeder Gruppe bleibe gleich. Wie lautet nun die Bayes-Regel?
+
+\loesung
+\schritt{Schritt 1 --- Die bedingten Anteile aus Aufgabe 1.1}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Stufe} & $\Pr[\text{Stufe}\mid\text{Sepsis}]$ & $\Pr[\text{Stufe}\mid\text{keine}]$\\
+\midrule
+niedrig & $0{,}05$ & $0{,}550$\\
+mittel & $0{,}15$ & $0{,}317$\\
+erhöht & $0{,}40$ & $0{,}122$\\
+hoch & $0{,}40$ & $0{,}011$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur ersten Zeile:} $5/100 = 0{,}05$ und $495/900 = 0{,}550$.
+
+\schritt{Schritt 2 --- $\eta$ bei zwei Prozent}
+\[ \eta = \frac{0{,}02\cdot p_1}{0{,}02\cdot p_1 + 0{,}98\cdot p_0} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{3.2cm}P{1.8cm}P{1.4cm}@{}}
+\toprule
+\textbf{Stufe} & \textbf{Rechnung} & $\eta$ & \textbf{Regel}\\
+\midrule
+niedrig & $\frac{0{,}001}{0{,}001+0{,}539}$ & $0{,}002$ & $0$\\
+mittel & $\frac{0{,}003}{0{,}003+0{,}311}$ & $0{,}010$ & $0$\\
+erhöht & $\frac{0{,}008}{0{,}008+0{,}120}$ & $0{,}063$ & $0$\\
+hoch & $\frac{0{,}008}{0{,}008+0{,}011}$ & $\mathbf{0{,}424}$ & $\mathbf{0}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur letzten Zeile:} $0{,}02\cdot0{,}40 = 0{,}008$ und $0{,}98\cdot0{,}01111 = 0{,}01089$; $\frac{0{,}008}{0{,}01889} = 0{,}424$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Bayes-Regel warnt nun gar nicht mehr.} Selbst bei hohem Laktat ist eine Sepsis weniger wahrscheinlich als keine.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was das bedeutet}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beim Null-Eins-Verlust ist \enquote{nie warnen} auf der Normalstation die beste Regel --- mit einem Risiko von zwei Prozent. \textbf{Das ist mathematisch korrekt und medizinisch unannehmbar}, und es zeigt, warum der Null-Eins-Verlust bei seltenen Ereignissen fast immer die falsche Wahl ist. Mit Kosten $10:1$ läge die Schwelle bei $0{,}091$, und \enquote{hoch} würde weiterhin warnen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die allgemeine Lehre}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Messwerte innerhalb der Gruppen haben sich nicht geändert, die Regel schon vollständig. \textbf{Ein Verfahren, das auf einer Station mit anderer Prävalenz gelernt hat, trifft auf der neuen systematisch falsche Entscheidungen} --- und zwar in eine vorhersagbare Richtung. Das lässt sich korrigieren, wenn man die neue Prävalenz kennt; es bleibt unbemerkt, wenn man es nicht tut.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.3 --- Auswendiglernen}
+Ein Verfahren speichert alle $1000$ Patienten aus Aufgabe 1.1 samt Laborwert auf drei Nachkommastellen und sagt für jeden gespeicherten Wert das gespeicherte Ergebnis vorher. Für neue Werte sagt es \enquote{keine Sepsis}. Wie groß ist sein Fehler auf den Trainingsdaten, wie groß auf neuen Patienten?
+
+\loesung
+\schritt{Schritt 1 --- Auf den Trainingsdaten}
+Jeder gespeicherte Patient wird richtig wiedergegeben --- sofern kein Wert zweimal mit verschiedenem Ergebnis vorkommt.
+
+\[ \text{Trainingsfehler} \approx 0 \]
+
+\schritt{Schritt 2 --- Auf neuen Patienten}
+Ein neuer Laborwert stimmt auf drei Nachkommastellen fast nie mit einem gespeicherten überein. Das Verfahren sagt also fast immer \enquote{keine Sepsis}.
+
+\[ \text{Testfehler} \approx 10\,\% \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Null Fehler auf den gesehenen Daten, zehn Prozent auf den ungesehenen --- genauso schlecht wie \enquote{nie warnen}.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Training} & \textbf{neu}\\
+\midrule
+Auswendiglernen & $\approx 0\,\%$ & $\approx 10\,\%$\\
+Bayes-Regel (Stufen) & $7\,\%$ & $\approx 7\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist das Grundproblem des Faches in seiner reinsten Form. \textbf{Das Verfahren mit dem kleinsten Trainingsfehler hat den größten Testfehler.} Es hat die Daten gelernt und nicht den Zusammenhang --- und genau das meint der Titel dieses Bandes: Man sucht nicht, was die gesehenen Daten erklärt, sondern was sich verallgemeinern lässt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Warum die Stufenregel verallgemeinert}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Sie fasst viele Patienten zu vier Gruppen zusammen und schätzt je Gruppe nur eine Zahl. Jede dieser Zahlen beruht auf mindestens fünfzig Beobachtungen. \textbf{Sie hat also wenig Freiheit} --- und wer wenig Freiheit hat, kann sich den Daten nicht zu sehr anpassen. Kapitel~2 macht aus diesem Gedanken eine Rechnung, Kapitel~7 einen Satz.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine lernende Maschine und ein Name}
+\Person{Alan Turing} schlug 1950 in seinem Aufsatz über das Denken von Maschinen vor, man solle nicht versuchen, einen erwachsenen Verstand nachzubauen, sondern den eines Kindes --- und ihn dann unterrichten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er nannte das eine \enquote{lernende Maschine} und sagte voraus, dass sie ihren Lehrer an manchen Stellen überraschen werde. \textbf{Die Vorhersage war richtig, und die Überraschungen sind bis heute nicht immer angenehm}: Lernende Maschinen finden in den Daten Muster, die ihre Entwickler nicht bemerkt hatten, und nicht alle davon sind die gewünschten.}
+\end{minipage}
+\end{center}
+
+\schritt{Samuel}
+\Person{Arthur Samuel} (1901--1990) schrieb ab 1952 bei IBM ein Dameprogramm, das durch Spiele gegen sich selbst besser wurde.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{1959 veröffentlichte er einen Aufsatz, in dem der Ausdruck \enquote{maschinelles Lernen} erstmals erscheint. Er beschrieb es als Fähigkeit, zu lernen, ohne ausdrücklich programmiert zu sein. \textbf{Das Programm schlug 1962 einen starken Amateurspieler} --- ein Ereignis, das die Öffentlichkeit weit mehr beeindruckte als die Fachwelt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Bayes-Regel ist älter}
+Der Gedanke, an jeder Stelle für das Wahrscheinlichere zu entscheiden, stammt aus der statistischen Entscheidungstheorie.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Ronald Fisher} gab 1936 die lineare Diskriminanzanalyse an --- am Beispiel dreier Schwertlilienarten, deren Blütenmaße er vermessen ließ. Der Datensatz ist bis heute der meistbenutzte Übungsdatensatz des Faches. \textbf{Fisher war zugleich ein führender Eugeniker}, und die Zeitschrift, in der der Aufsatz erschien, trug diesen Begriff im Titel --- ein Umstand, der bei der Verwendung des Datensatzes lange übergangen wurde.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Lernen in der Medizin heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Bildgebung} & Die erfolgreichste Anwendung --- Netzhautbilder, Hautläsionen, Röntgenbilder.\\
+\textbf{Frühwarnung} & Sepsis, Verschlechterung, Wiederaufnahme --- gemischte Erfahrungen.\\
+\textbf{Zulassung} & Lernende Medizinprodukte als eigene Regulierungsklasse.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei Bildern erreichen Verfahren seit etwa 2017 in eng umrissenen Aufgaben die Treffsicherheit von Fachleuten. \textbf{Der Grund ist, dass die Zielgröße dort klar ist} --- eine Läsion ist bösartig oder nicht, und die Histologie entscheidet --- und dass die Bilder aus verschiedenen Kliniken einander ähnlicher sind als Laborverläufe.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Frühwarnsysteme leiden unter allen drei Problemen des Bruchfalls: unklare Zielgröße, wechselnde Prävalenz, andere Datenlage an anderem Ort. \textbf{Die Nachprüfung von 2021 ergab eine Trennschärfe von $0{,}63$ statt der angegebenen $0{,}76$ bis $0{,}83$} --- und zwei Drittel der Sepsisfälle wurden nicht erkannt. Kapitel~3 behandelt, wie man eine solche Lücke vorher bemerkt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 1.1} & Merkmale, Ziel, unbekannte Verteilung\\
+\textbf{Definition 1.2} & Risiko $=$ erwarteter Verlust\\
+\textbf{Satz 1.4} & Bayes-Regel: überall das Wahrscheinlichere\\
+\textbf{Kosten} & Schwelle $c_{\text{FP}}/(c_{\text{FP}}+c_{\text{FN}})$\\
+\textbf{Satz 1.5} & kein Lernen ohne Annahme\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Bayes-Regel setzt voraus, dass man die Verteilung kennt. Das nächste Kapitel fragt, was geschieht, wenn man sie aus Daten schätzen muss --- und warum dabei zu viel Freiheit genauso schadet wie zu wenig.}
+\end{minipage}
+\end{center}
+\end{merksatz}

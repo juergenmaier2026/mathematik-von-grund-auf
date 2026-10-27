@@ -1,0 +1,479 @@
+\part{Ohne Etiketten, in der Tiefe}
+
+\chapter{Gruppen finden}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Gibt es verschiedene Arten von Sepsis?}
+Alle bisherigen Kapitel hatten ein Etikett: Sepsis ja oder nein. Nun stellt das Klinikum eine andere Frage: \kursiv{Unter} den Sepsispatienten --- gibt es Untergruppen, die sich verschieden verhalten und vielleicht verschieden behandelt werden sollten?
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Niemand kennt die Antwort. Es gibt keine Etiketten, aus denen man lernen könnte.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Frage ist nicht erfunden. \textbf{Eine große Studie beschrieb 2019 vier Sepsis-Phänotypen}, gewonnen aus Routinedaten von über $20\,000$ Patienten --- ohne Vorgabe, wie viele Gruppen es geben sollte oder woran sie zu erkennen wären. Die Gruppen unterschieden sich deutlich in der Sterblichkeit. Dieses Kapitel zeigt, wie solche Gruppen gefunden werden, und warum man ihnen mit Vorsicht begegnen sollte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Überwacht und unüberwacht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{3.0cm}P{3.0cm}@{}}
+\toprule
+& \textbf{überwacht} & \textbf{unüberwacht}\\
+\midrule
+Daten & $(\vek x_i, y_i)$ & nur $\vek x_i$\\
+Ziel & $y$ vorhersagen & Struktur finden\\
+Prüfung & Testfehler & \textcolor{akzent}{?}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Fragezeichen ist der Kern der Schwierigkeit. \textbf{Beim überwachten Lernen weiß man hinterher, ob man richtig lag} --- man vergleicht mit dem Etikett. Beim unüberwachten gibt es nichts zu vergleichen. Jedes Verfahren findet \kursiv{irgendwelche} Gruppen, und ob sie etwas bedeuten, lässt sich aus den Daten allein nicht entscheiden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Verfahren der $k$ Mittelpunkte}
+
+\begin{definition}
+\boxtitelm{Definition 12.1 --- die Zielgröße}
+Teile $n$ Punkte in $k$ Gruppen $C_1,\ldots,C_k$ mit Mittelpunkten $\vek\mu_1,\ldots,\vek\mu_k$ so ein, dass die Summe der quadrierten Abstände zum eigenen Mittelpunkt
+\[ W = \sum_{j=1}^{k}\ \sum_{\vek x_i\in C_j} \|\vek x_i - \vek\mu_j\|^{2} \]
+möglichst klein wird.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Das Verfahren von Lloyd}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$0$ & Wähle $k$ Anfangsmittelpunkte.\\
+$1$ & \textbf{Zuordnen:} Jeder Punkt kommt zum nächsten Mittelpunkt.\\
+$2$ & \textbf{Verschieben:} Jeder Mittelpunkt wird der Durchschnitt seiner Gruppe.\\
+$3$ & Wiederhole $1$ und $2$, bis sich nichts mehr ändert.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Satz 12.2 --- das Verfahren endet}
+Keiner der beiden Schritte vergrößert $W$, und das Verfahren hält nach endlich vielen Schritten an.
+
+\schritt{Beweis}
+\kursiv{Zuordnen:} Jeder Punkt wechselt nur, wenn er dadurch einem Mittelpunkt näher kommt. Sein Beitrag zu $W$ sinkt oder bleibt gleich.
+
+\kursiv{Verschieben:} Für eine feste Gruppe ist der Durchschnitt derjenige Punkt, der die Summe der quadrierten Abstände minimiert. Denn
+\[ \sum_{i}\|\vek x_i - \vek c\|^{2} = \sum_i\|\vek x_i - \bar{\vek x}\|^{2} + n_j\,\|\bar{\vek x} - \vek c\|^{2} , \]
+und der zweite Summand ist nur für $\vek c = \bar{\vek x}$ null. Das ist dieselbe Zerlegung wie in Aufgabe 2.1.
+
+\kursiv{Endlichkeit:} Es gibt nur endlich viele Einteilungen von $n$ Punkten in $k$ Gruppen. Da $W$ nie steigt und bei jeder echten Änderung sinkt, kann keine Einteilung zweimal vorkommen. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Verfahren endet stets --- aber nicht notwendig im besten Zustand.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es findet ein lokales Minimum, das von den Anfangsmittelpunkten abhängt. \textbf{Das globale Minimum zu finden, ist $\mathsf{NP}$-schwer} --- schon in der Ebene. Man startet deshalb viele Male mit verschiedenen Anfängen und behält das beste Ergebnis.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Mischungen und das EM-Verfahren}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall aus Kapitel 1 --- ohne Etiketten}
+Man nehme $2000$ Laktatwerte aus der Verteilung von Kapitel~1, aber ohne die Angabe, wer eine Sepsis hatte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kann man aus den Werten allein wiederfinden, dass es zwei Gruppen gibt, wie groß sie sind und wo sie liegen?}
+\end{minipage}
+\end{center}
+
+\schritt{Das Modell}
+Man nimmt an, die Werte stammten aus einer \Begriff{Mischung} zweier Normalverteilungen:
+\[ f(x) = \pi\cdot\mathcal N(x;\mu_1,\sigma_1^{2}) + (1-\pi)\cdot\mathcal N(x;\mu_2,\sigma_2^{2}) \]
+mit fünf unbekannten Größen.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das Verfahren}
+Man wiederholt zwei Schritte:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{E-Schritt} & Berechne für jeden Punkt, mit welcher Wahrscheinlichkeit er zu Gruppe 2 gehört --- nach dem Satz von Bayes mit den jetzigen Schätzungen.\\
+\textbf{M-Schritt} & Schätze die fünf Größen neu, wobei jeder Punkt mit dieser Wahrscheinlichkeit gewichtet wird.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der E-Schritt ist genau die Rechnung aus Kapitel~1}: die Wahrscheinlichkeit $\eta(x)$ einer Sepsis beim Laktatwert $x$. Nur kennt man die Verteilungen nicht, sondern benutzt die jeweils letzte Schätzung. Das Verfahren heißt nach den Anfangsbuchstaben von \enquote{Erwartung} und \enquote{Maximierung}.}
+\end{minipage}
+\end{center}
+
+\schritt{Satz 12.3 --- Dempster, Laird und Rubin, 1977}
+Kein Schritt verringert die Likelihood der Daten (Band 17, Kapitel~4).
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis benutzt die Jensensche Ungleichung aus Band 20 und zeigt, dass jeder Schritt eine untere Schranke der Log-Likelihood maximiert, die an der jetzigen Stelle anliegt; wir verzichten auf ihn --- die achte Auslassung. \textbf{Das Verfahren von Lloyd ist ein Grenzfall davon}: Setzt man alle Streuungen gleich und lässt sie gegen null gehen, so werden die Wahrscheinlichkeiten zu harten Zuordnungen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das Ergebnis}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{1.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+& \textbf{wahr} & \textbf{EM} & \textbf{$k$-Mittel}\\
+\midrule
+Anteil Gruppe 2 & $0{,}100$ & $0{,}094$ & $0{,}093$\\
+Mittel Gruppe 1 & $1{,}20$ & $1{,}22$ & $1{,}21$\\
+Mittel Gruppe 2 & $3{,}00$ & $3{,}23$ & $3{,}34$\\
+Streuung Gruppe 1 & $0{,}50$ & $0{,}48$ & ---\\
+Streuung Gruppe 2 & $1{,}00$ & $0{,}91$ & ---\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ohne ein einziges Etikett findet das Verfahren beide Gruppen, ihre Größe und ihre Lage --- und ordnet $97$ Prozent der Patienten richtig zu.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Bayes-Regel aus Kapitel~1 --- mit Kenntnis der wahren Verteilungen --- ordnete $96{,}5$ Prozent richtig zu. \textbf{Das unüberwachte Verfahren ist also fast so gut wie das bestmögliche überwachte.} Der Grund: Die Gruppen sind hier tatsächlich verschieden verteilt, und das Modell der Mischung trifft genau zu. Beides ist in der Wirklichkeit selten so klar.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie viele Gruppen?}
+
+\begin{warnung}
+\boxtitelr{Das Verfahren findet immer Gruppen}
+Zwei Datensätze mit je $500$ Punkten in der Ebene:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{strukturiert} & drei deutlich getrennte Haufen\\
+\textbf{gleichverteilt} & keinerlei Struktur, gleichmäßig über ein Quadrat gestreut\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.2cm}P{2.2cm}P{2.2cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+& \multicolumn{2}{c}{\textbf{$W$}} & \multicolumn{2}{c}{\textbf{Stabilität}}\\
+$k$ & strukturiert & gleichv. & str. & gl.\\
+\midrule
+$1$ & $218{,}9$ & $81{,}8$ & --- & ---\\
+$2$ & $109{,}3$ & $49{,}2$ & $1{,}00$ & $0{,}68$\\
+$3$ & $\mathbf{24{,}5}$ & $30{,}1$ & $\mathbf{1{,}00}$ & $0{,}71$\\
+$4$ & $21{,}5$ & $20{,}0$ & $0{,}80$ & $\mathbf{0{,}85}$\\
+$5$ & $18{,}7$ & $16{,}6$ & $0{,}66$ & $0{,}71$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Stabilität: Übereinstimmung der Gruppen über $20$ Neuziehungen, gemessen mit dem bereinigten Rand-Index --- $1$ heißt immer gleich.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei den strukturierten Daten knickt $W$ bei $k = 3$ deutlich ein. Bei den gleichverteilten fällt es gleichmäßig --- aber das Verfahren liefert trotzdem bei jedem $k$ genau $k$ Gruppen.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Stabilität}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man erwartet, dass echte Gruppen stabil sind und erfundene nicht. Bei den strukturierten Daten stimmt das: $1{,}00$ bei $k = 3$. \textbf{Bei den gleichverteilten Daten ist $k = 4$ mit $0{,}85$ am stabilsten} --- weil ein Quadrat vier Ecken hat und das Verfahren es zuverlässig in vier Viertel teilt. Die Stabilität misst, ob die Einteilung von der Stichprobe abhängt, nicht, ob es die Gruppen gibt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was eine Gruppe ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Form} & $k$-Mittel findet runde Gruppen gleicher Größe. Langgestreckte oder verschachtelte übersieht es.\\
+\textbf{Einheiten} & Wie in Kapitel~10: Die Wahl des Abstands entscheidet alles.\\
+\textbf{Übergänge} & Ein Kontinuum wird in Stücke geschnitten, die es nicht gibt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Verläuft eine Erkrankung auf einem Kontinuum von leicht bis schwer, so findet ein Gruppierungsverfahren trotzdem \enquote{leichte}, \enquote{mittlere} und \enquote{schwere} Fälle --- als wären es verschiedene Arten. \textbf{Die Gruppen sind dann Schnitte durch eine Linie, keine Naturgegebenheiten.} In der Psychiatrie ist diese Frage seit Jahrzehnten umstritten: Sind Störungsbilder Kategorien oder Enden von Dimensionen? Gruppierungsverfahren beantworten sie nicht, sie setzen die Antwort voraus.}
+\end{minipage}
+\end{center}
+
+\schritt{Was die Sepsis-Phänotypen zeigen}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die vier Gruppen von 2019 unterschieden sich in der Sterblichkeit, und in Nachauswertungen früherer Studien schienen sie verschieden auf Behandlungen anzusprechen. \textbf{Das ist ein starkes Argument, dass sie etwas bedeuten} --- denn es ist eine Prüfung an einer Größe, die in die Gruppierung nicht einging. Ob es sich um verschiedene Krankheiten handelt oder um verschiedene Stadien, ist damit nicht entschieden. Und ob eine prospektive Behandlung nach Phänotyp besser wäre, müsste eigens geprüft werden.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.1 --- Das Verfahren von Hand}
+Sechs Laktatwerte: $1{,}0$; $1{,}2$; $1{,}5$; $2{,}8$; $3{,}1$; $3{,}6$. Zwei Gruppen, Anfangsmittelpunkte $1{,}0$ und $1{,}5$.
+
+\loesung
+\schritt{Runde 1 --- Zuordnen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{2.2cm}P{2.2cm}P{1.4cm}@{}}
+\toprule
+$x$ & \textbf{Abstand zu $1{,}0$} & \textbf{Abstand zu $1{,}5$} & \textbf{Gruppe}\\
+\midrule
+$1{,}0$ & $0$ & $0{,}5$ & $1$\\
+$1{,}2$ & $0{,}2$ & $0{,}3$ & $1$\\
+$1{,}5$ & $0{,}5$ & $0$ & $2$\\
+$2{,}8$ & $1{,}8$ & $1{,}3$ & $2$\\
+$3{,}1$ & $2{,}1$ & $1{,}6$ & $2$\\
+$3{,}6$ & $2{,}6$ & $2{,}1$ & $2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Runde 1 --- Verschieben}
+\[ \mu_1 = \frac{1{,}0+1{,}2}{2} = 1{,}10, \qquad \mu_2 = \frac{1{,}5+2{,}8+3{,}1+3{,}6}{4} = \frac{11{,}0}{4} = 2{,}75 \]
+
+\schritt{Runde 2 --- Zuordnen}
+Nur ein Punkt wechselt: $1{,}5$ hat zu $1{,}10$ den Abstand $0{,}40$, zu $2{,}75$ den Abstand $1{,}25$ --- er kommt in Gruppe 1.
+
+\schritt{Runde 2 --- Verschieben}
+\[ \mu_1 = \frac{1{,}0+1{,}2+1{,}5}{3} = 1{,}233, \qquad \mu_2 = \frac{2{,}8+3{,}1+3{,}6}{3} = 3{,}167 \]
+
+\schritt{Runde 3}
+Keine Änderung. Ende.
+
+\schritt{Die Zielgröße}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{3.4cm}P{2.2cm}P{1.6cm}@{}}
+\toprule
+\textbf{Zustand} & \textbf{Mittelpunkte} & $W$\\
+\midrule
+Anfang & $1{,}00$; $1{,}50$ & $8{,}700$\\
+nach Runde 1 & $1{,}10$; $2{,}75$ & $2{,}430$\\
+nach Zuordnen in Runde 2 & $1{,}10$; $2{,}75$ & $1{,}028$\\
+nach Runde 2 & $1{,}233$; $3{,}167$ & $\mathbf{0{,}453}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Probe der letzten Zeile:} Gruppe 1: $0{,}054+0{,}001+0{,}071 = 0{,}127$; Gruppe 2: $0{,}134+0{,}004+0{,}188 = 0{,}327$; zusammen $0{,}453$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Jeder Teilschritt senkt $W$, wie Satz 12.2 verlangt.} Mit nur einer Gruppe wäre $W = 6{,}06$; zwei Gruppen senken es auf ein Dreizehntel. Die Trennung liegt zwischen $1{,}5$ und $2{,}8$ --- nahe der Bayes-Schwelle aus Kapitel~1, gefunden ohne jedes Etikett.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.2 --- $W$ fällt immer}
+Zeigen Sie, dass das kleinste erreichbare $W$ mit wachsendem $k$ nie steigt, und folgern Sie, warum man $k$ nicht durch Minimieren von $W$ wählen kann.
+
+\loesung
+\schritt{Schritt 1 --- Der Beweis}
+Sei eine beste Einteilung mit $k$ Gruppen gegeben. Man nehme irgendeinen Punkt, der nicht genau auf seinem Mittelpunkt liegt, und mache ihn zu einer eigenen, $(k+1)$-ten Gruppe.
+
+\kursiv{Sein Beitrag zu $W$ fällt auf null.} Die übrigen Punkte seiner alten Gruppe behalten zunächst den alten Mittelpunkt, ihr Beitrag bleibt also gleich; verschiebt man danach den Mittelpunkt auf ihren Durchschnitt, so sinkt er nach dem Beweis von Satz 12.2 weiter oder bleibt gleich. Insgesamt fällt $W$ um mindestens den bisherigen Beitrag des Punktes.
+
+\[ W^{*}(k+1) \ \le\ W^{*}(k) \]
+
+\schritt{Schritt 2 --- Der Grenzfall}
+\[ W^{*}(n) = 0 \]
+Jeder Punkt ist seine eigene Gruppe.
+
+\schritt{Schritt 3 --- Die Folgerung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer $W$ minimiert, wählt $k = n$ --- eine Gruppe je Patient.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist das Auswendiglernen aus Aufgabe 1.3 in unüberwachter Gestalt. \textbf{Man braucht eine Strafe für die Zahl der Gruppen} --- genau wie in Kapitel~8 für die Komplexität. Übliche Wege sind der Knick in der Kurve, die Stabilität, oder bei Mischmodellen ein Kriterium wie das Bayessche aus Band 17, das jeden Parameter mit $\tfrac12\ln n$ bestraft.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Zahlen aus Abschnitt 12.4}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Schritt} & \textbf{strukturiert} & \textbf{gleichverteilt}\\
+\midrule
+$1 \to 2$ & $-50\,\%$ & $-40\,\%$\\
+$2 \to 3$ & $-78\,\%$ & $-39\,\%$\\
+$3 \to 4$ & $-12\,\%$ & $-33\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bei echten Gruppen bringt die richtige Zahl einen großen Sprung, danach wenig.} Bei fehlender Struktur bringt jeder Schritt ungefähr gleich viel. Der Knick ist ein Hinweis, kein Beweis --- aber er ist ehrlicher als die Stabilität, die bei den gleichverteilten Daten $k = 4$ nahelegte.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.3 --- Ein E-Schritt}
+Die jetzigen Schätzungen seien die wahren Werte aus Kapitel~1: $\pi_2 = 0{,}1$, Gruppe 1 um $1{,}2$ mit Streuung $0{,}5$, Gruppe 2 um $3{,}0$ mit Streuung $1{,}0$. Berechnen Sie für drei Patienten die Zugehörigkeit zu Gruppe 2 und den neuen Anteil $\pi_2$.
+
+\loesung
+\schritt{Schritt 1 --- Die Zugehörigkeiten}
+Das ist die Rechnung aus Kapitel~1, Abschnitt 1.3:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{3.4cm}@{}}
+\toprule
+\textbf{Laktat} & \textbf{Zugehörigkeit zu Gruppe 2}\\
+\midrule
+$2{,}0$ & $0{,}108$\\
+$2{,}5$ & $0{,}590$\\
+$3{,}0$ & $0{,}973$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Der neue Anteil aus diesen drei}
+\[ \pi_2^{\text{neu}} = \frac{0{,}108+0{,}590+0{,}973}{3} = \frac{1{,}671}{3} = 0{,}557 \]
+
+\schritt{Schritt 3 --- Der neue Mittelwert von Gruppe 2}
+\[ \mu_2^{\text{neu}} = \frac{0{,}108\cdot2{,}0 + 0{,}590\cdot2{,}5 + 0{,}973\cdot3{,}0}{1{,}671} = \frac{0{,}216+1{,}475+2{,}919}{1{,}671} = \frac{4{,}610}{1{,}671} = 2{,}76 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Mit nur drei Patienten, die zufällig alle im Grenzbereich liegen, springt der Anteil von $0{,}1$ auf $0{,}56$. \textbf{Bei $2000$ Patienten ist der Sprung winzig}, denn die vielen mit niedrigem Laktat tragen Zugehörigkeiten nahe null bei. Das Verfahren ist auf große Datenmengen angewiesen, damit die weichen Zuordnungen sich zu verlässlichen Schätzungen mitteln.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Weich statt hart}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beim Verfahren von Lloyd käme der Patient mit $2{,}5$ ganz in eine Gruppe. \textbf{Hier gehört er zu $59$ Prozent zur einen und zu $41$ zur anderen} --- und trägt entsprechend zu beiden Schätzungen bei. Für die Medizin ist das die ehrlichere Aussage: Ein Grenzfall ist ein Grenzfall, und ihn einer Gruppe fest zuzuschlagen, erzeugt eine Sicherheit, die es nicht gibt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Bericht aus den Bell Laboratories}
+\Person{Stuart Lloyd} beschrieb das Verfahren 1957 in einem internen Bericht der Bell Laboratories --- als Methode, ein Signal mit wenigen Stufen möglichst genau darzustellen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Es ging um die Umwandlung von Sprache in Zahlen für die Telefonie: Man wollte wissen, auf welche Stufen man runden sollte. \textbf{Das ist Quellencodierung im Sinne von Band 20} --- das Verfahren der $k$ Mittelpunkte ist ursprünglich ein Kompressionsverfahren. Der Bericht wurde erst 1982 veröffentlicht; bis dahin hatten es mehrere andere unabhängig wiederentdeckt.}
+\end{minipage}
+\end{center}
+
+\schritt{Das EM-Verfahren}
+\Person{Arthur Dempster}, \Person{Nan Laird} und \Person{Donald Rubin} gaben 1977 die allgemeine Form an und bewiesen Satz 12.3.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie stellten fest, dass zahlreiche ältere Verfahren --- für fehlende Werte, für Mischungen, für verborgene Zustände --- Sonderfälle desselben Gedankens waren. \textbf{Ihr Aufsatz gehört zu den meistzitierten der gesamten Statistik.} Laird arbeitete später überwiegend in der medizinischen Statistik, wo das Verfahren für unvollständige Längsschnittdaten unentbehrlich wurde.}
+\end{minipage}
+\end{center}
+
+\schritt{Pearson und die Krabben}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die erste Mischungsanalyse stammt von \Person{Karl Pearson} aus dem Jahr 1894: Die Stirnbreite von Krabben aus Neapel hatte eine schiefe Verteilung, und Pearson vermutete zwei Unterarten. \textbf{Er löste das Problem über die ersten fünf Momente und eine Gleichung neunten Grades} --- von Hand. Das EM-Verfahren hätte ihm die Rechnung erspart.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Gruppen in der Medizin heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Phänotypen} & Sepsis, akutes Lungenversagen, Asthma, Diabetes --- überall Vorschläge für Untergruppen.\\
+\textbf{Einzelzellen} & Zelltypen aus der Genexpression einzelner Zellen.\\
+\textbf{Prüfung} & Wie man nachweist, dass eine gefundene Gruppe mehr ist als ein Schnitt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beim akuten Lungenversagen wurden zwei Untergruppen gefunden --- eine mit starker, eine mit schwacher Entzündung ---, die in mehreren unabhängigen Studien wiederkehrten und verschieden auf Behandlungen reagierten. \textbf{Das Wiederkehren in unabhängigen Daten ist die entscheidende Prüfung}, analog zur äußeren Prüfung aus Kapitel~3. Beim Diabetes wurden fünf Untergruppen vorgeschlagen; ob sie diese Prüfung bestehen, ist umstritten.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 12.1} & $W$: Abstand zum eigenen Mittelpunkt\\
+\textbf{Satz 12.2} & Lloyd endet, lokal\\
+\textbf{EM} & E-Schritt $=$ Bayes aus Kapitel~1\\
+\textbf{Die Warnung} & es findet immer Gruppen\\
+\textbf{Die Prüfung} & an einer Größe, die nicht einging\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Gruppen fassen Patienten zusammen. Das nächste Kapitel fasst Merkmale zusammen --- und findet die dünne Fläche, auf der nach Kapitel~10 die Daten liegen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

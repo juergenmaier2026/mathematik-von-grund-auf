@@ -1,0 +1,286 @@
+\chapter{Auf welchem Weg}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{Wirkt die frühe Gabe über das Organversagen?}
+Der Gesamteffekt ist bekannt. Nun fragt man: Wie viel davon läuft über die Verhinderung des Organversagens, und wie viel auf anderem Wege --- über die Bakterienlast, über die Verweildauer, über anderes?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Gesamteffekt} & Wirkung von $X$ auf $Y$ auf allen Wegen.\\
+\textbf{Indirekter Effekt} & Der Teil, der über $M$ läuft.\\
+\textbf{Direkter Effekt} & Der Rest.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Frage ist nicht müßig. \textbf{Läuft die Wirkung ganz über $M$, so genügt es, $M$ zu behandeln} --- und man braucht die frühe Gabe nur, soweit sie $M$ verhindert. Läuft sie daran vorbei, so hilft die Behandlung von $M$ nicht. Das ist der Unterschied zwischen einer Ursachenkette und einem Bündel paralleler Wirkungen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der lineare Fall}
+Bei linearen Modellen ohne Wechselwirkung zerfällt der Effekt in ein Produkt und eine Summe:
+\[ \text{gesamt} = \underbrace{c'}_{\text{direkt}} + \underbrace{a\cdot b}_{\text{indirekt}} \]
+mit $a$: Wirkung von $X$ auf $M$; $b$: Wirkung von $M$ auf $Y$ bei festem $X$; $c'$: Wirkung von $X$ auf $Y$ bei festem $M$.
+
+\schritt{Gerechnet}
+$300\,000$ Patienten, $a = 0{,}6$, $b = 0{,}5$, $c' = 0{,}4$:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Schätzung} & \textbf{erwartet}\\
+\midrule
+gesamt & $0{,}697$ & $0{,}700$\\
+direkt & $0{,}400$ & $0{,}400$\\
+indirekt & $0{,}300$ & $0{,}300$\\
+\midrule
+Summe & $0{,}700$ & \checkmark\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ \text{Anteil über den Mediator: } \frac{0{,}300}{0{,}697} = 43\,\% \]
+\end{merksatz}
+
+\section{Was der lineare Fall verbirgt}
+
+\begin{merksatz}
+\boxtitel{Kontrolliert und natürlich}
+Sobald die Wirkung von $M$ davon abhängt, ob behandelt wurde, zerfällt der einfache Zusammenhang.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Kontrolliert direkt} & Effekt von $X$, wenn man $M$ bei allen auf denselben Wert \kursiv{zwingt}. Hängt davon ab, welchen.\\
+\textbf{Natürlich direkt} & Effekt von $X$, wenn $M$ den Wert behält, den es \kursiv{ohne} Behandlung angenommen hätte.\\
+\textbf{Natürlich indirekt} & Effekt der Verschiebung von $M$ --- bei festgehaltener Behandlung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nur die natürlichen Effekte summieren sich zum Gesamteffekt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Annahme, die dahintersteckt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die natürlich direkte Wirkung vergleicht den Ausgang bei Behandlung, aber mit dem Organversagen, das \kursiv{ohne} Behandlung eingetreten wäre. \textbf{Das ist eine Größe aus zwei verschiedenen Welten zugleich} --- behandelt in der einen Hinsicht, unbehandelt in der anderen. Sie ist in keinem Versuch herstellbar, auch nicht mit beliebigem Aufwand: Man kann einen Patienten nicht behandeln und ihm zugleich den Verlauf des Unbehandelten geben.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die zugehörige Annahme heißt Kreuzwelt-Unabhängigkeit}, und sie ist grundsätzlich unprüfbar --- nicht bloß in der Praxis schwer zu prüfen, sondern aus logischen Gründen: Keine Beobachtung und kein Versuch können sie widerlegen. Das unterscheidet sie von allen anderen Annahmen dieses Bandes.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Drei Gründe für Vorsicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Störgrößen des Mediators} & Für die Zerlegung braucht man nicht nur $X$ unverzerrt, sondern auch $M \to Y$ --- also eine zweite, oft unbeachtete Anpassungsmenge.\\
+\textbf{Folgen der Behandlung} & Ist eine Störgröße von $M \to Y$ selbst eine Folge von $X$, so sind die natürlichen Effekte nicht bestimmbar --- dieselbe Lage wie in Kapitel~12.\\
+\textbf{Messfehler} & Ein ungenau gemessener Mediator verschiebt Anteile vom indirekten zum direkten Effekt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile erklärt einen verbreiteten Befund: \textbf{Wer einen groben Mediator misst, findet einen großen \enquote{direkten} Effekt} --- und deutet ihn als eigenständigen Wirkweg, obwohl er nur den nicht erfassten Teil des indirekten Weges enthält. In der psychiatrischen Forschung, wo Mediatoren oft Fragebogenwerte sind, ist das die Regel.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.1 --- Die Zerlegung rechnen}
+$a = 0{,}6$, $b = 0{,}5$, $c' = 0{,}4$. Berechnen Sie die drei Effekte und den vermittelten Anteil. Was ändert sich, wenn $b$ auf $0{,}9$ steigt?
+
+\loesung
+\schritt{Schritt 1 --- Die Ausgangslage}
+\[ \text{indirekt} = 0{,}6\cdot0{,}5 = 0{,}30, \qquad \text{gesamt} = 0{,}4+0{,}3 = 0{,}70 \]
+\[ \text{Anteil} = 0{,}30/0{,}70 = 43\,\% \]
+
+\schritt{Schritt 2 --- Mit $b = 0{,}9$}
+\[ \text{indirekt} = 0{,}54, \qquad \text{gesamt} = 0{,}94, \qquad \text{Anteil} = 57\,\% \]
+
+\schritt{Schritt 3 --- Die Tabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+$b$ & \textbf{indirekt} & \textbf{gesamt} & \textbf{Anteil}\\
+\midrule
+$0{,}1$ & $0{,}06$ & $0{,}46$ & $13\,\%$\\
+$0{,}5$ & $0{,}30$ & $0{,}70$ & $43\,\%$\\
+$0{,}9$ & $0{,}54$ & $0{,}94$ & $57\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der vermittelte Anteil hängt vom Nenner ab und ist deshalb schlecht zu vergleichen.} Zwei Studien mit demselben indirekten Effekt berichten verschiedene Anteile, wenn ihre Gesamteffekte sich unterscheiden --- etwa weil die Bevölkerungen verschieden sind. Man berichtet daher besser die absoluten Effekte.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.2 --- Wenn der Mediator ungenau gemessen ist}
+Der wahre Mediator werde nur mit einer Korrelation von $0{,}7$ erfasst. Wie verschiebt sich die Zerlegung?
+
+\loesung
+\schritt{Schritt 1 --- Der Mechanismus}
+Bei klassischem Messfehler wird der Koeffizient $b$ um den Faktor der Zuverlässigkeit gedämpft:
+\[ b_{\text{gemessen}} \approx 0{,}7^{2}\cdot b = 0{,}49\,b \]
+
+\schritt{Schritt 2 --- Die Folge}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+& \textbf{wahr} & \textbf{gemessen}\\
+\midrule
+indirekt & $0{,}30$ & $0{,}15$\\
+direkt & $0{,}40$ & $0{,}55$\\
+gesamt & $0{,}70$ & $0{,}70$\\
+Anteil & $43\,\%$ & $\mathbf{21\,\%}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Gesamteffekt bleibt richtig; die Aufteilung verschiebt sich um die Hälfte.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Was der Mediator nicht erfasst, erscheint als direkter Effekt} --- der direkte Effekt ist eine Restgröße und erbt jeden Fehler. Deshalb ist der Satz \enquote{die Wirkung läuft nur teilweise über $M$} fast nie belastbar, solange die Messgenauigkeit von $M$ nicht bekannt ist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.3 --- Zwei Welten zugleich}
+Warum lässt sich der natürlich direkte Effekt nicht durch einen Versuch bestimmen?
+
+\loesung
+\schritt{Schritt 1 --- Was er verlangt}
+\[ \mathbb{E}\bigl[Y\bigl(1,\ M(0)\bigr)\bigr] - \mathbb{E}\bigl[Y\bigl(0,\ M(0)\bigr)\bigr] \]
+--- der erste Ausdruck beschreibt einen Patienten, der behandelt wird, dessen Organversagen aber dem Verlauf ohne Behandlung folgt.
+
+\schritt{Schritt 2 --- Warum das kein Versuch leisten kann}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{$M$ zwingen} & ergibt den \kursiv{kontrollierten} Effekt --- dabei wird $M$ auf einen festen Wert gesetzt, nicht auf den individuellen Wert ohne Behandlung.\\
+\textbf{$M(0)$ beobachten} & geht nur bei Unbehandelten --- dann kann man nicht zugleich behandeln.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Größe bezieht sich auf keinen möglichen Versuch. Sie ist eine Erfindung des Formalismus --- aber eine nützliche.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Wozu sie dann gut ist}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Sie beantwortet die Frage nach dem \kursiv{Mechanismus}, nicht nach einer Handlung.} Wer wissen will, ob eine Behandlung wirkt, braucht sie nicht. Wer verstehen will, warum, braucht etwas in dieser Art --- und muss dafür eine Annahme hinnehmen, die niemand prüfen kann. Der kontrollierte direkte Effekt ist dagegen prüfbar und beantwortet eine andere, oft ebenso brauchbare Frage: Was bringt die Behandlung, wenn man $M$ ohnehin behandelt?}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von der Psychologie zur Mathematik}
+\Person{Reuben Baron} und \Person{David Kenny} veröffentlichten 1986 ein Verfahren zur Mediationsanalyse, das aus drei Regressionen bestand.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Aufsatz erschien in einer psychologischen Zeitschrift und wurde zu einem der meistzitierten Texte der Sozialwissenschaften überhaupt --- über hunderttausend Nennungen. \textbf{Sein Verfahren ist unter Wechselwirkungen falsch} und setzt stillschweigend voraus, dass für den Mediator dieselben Störgrößen genügen wie für die Behandlung.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Berichtigung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Judea Pearl} und \Person{Jacques Robins} klärten in den 1990er Jahren, welche Größen überhaupt gemeint sind, und führten die natürlichen Effekte ein. \textbf{\Person{Tyler VanderWeele} machte daraus ab 2009 ein Lehrgebäude für die Epidemiologie.} Die alte Dreiregressionsmethode wird dennoch weiter benutzt --- ein Beispiel dafür, wie lange ein bequemes Verfahren überlebt, nachdem seine Grenzen bekannt sind.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Mechanismen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Trennbare Effekte} & Wirkungen so zerlegen, dass jeder Teil einem möglichen Eingriff entspricht.\\
+\textbf{Mehrere Mediatoren} & Wege, die sich gegenseitig beeinflussen.\\
+\textbf{Empfindlichkeit} & Wie stark die Kreuzwelt-Annahme verletzt sein dürfte.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Statt eine Behandlung nachträglich in Wege zu zerlegen, denkt man sie sich in Bestandteile zerlegt, die getrennt gegeben werden könnten --- etwa ein Antibiotikum, das die Bakterien tötet, und eines, das zusätzlich entzündungshemmend wirkt. \textbf{Jeder Teileffekt entspricht dann einem denkbaren Versuch}, und die Kreuzwelt-Annahme entfällt. Der Preis ist, dass man die Zerlegung inhaltlich begründen muss --- was die Frage vom Formalismus zurück in die Pharmakologie verlagert.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Linear} & gesamt $= c' + ab$\\
+\textbf{Kontrolliert} & $M$ auf einen Wert zwingen\\
+\textbf{Natürlich} & $M$ auf seinen Wert ohne Behandlung\\
+\textbf{Kreuzwelt} & grundsätzlich unprüfbar\\
+\textbf{Messfehler} & verschiebt indirekt nach direkt\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bisher ging es um Durchschnitte über alle. Das nächste Kapitel fragt nach dem einzelnen Patienten --- und findet, dass die Antwort für jeden anders ausfällt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

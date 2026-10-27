@@ -1,0 +1,342 @@
+\part{Über die Zeit, im Einzelfall}
+
+\chapter{Behandeln über die Zeit}
+
+\section{Das Problem}
+
+\begin{merksatz}
+\boxtitel{Zwei Zeitpunkte}
+Ein Sepsispatient erhält am Tag~$0$ Antibiotika oder nicht ($A_0$). Am Tag~$1$ zeigt sich ein Organversagen ($L_1$) --- oder nicht. Danach wird erneut entschieden ($A_1$). Am Tag~$28$ steht der Ausgang fest.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+\node[knotenb] (a0) at (-3.0,0) {$A_0$};
+\node[knotenr] (l1) at (-1.0,0) {$L_1$};
+\node[knotenb] (a1) at (1.0,0) {$A_1$};
+\node[knotenb] (y) at (3.2,0) {$Y$};
+\node[grau] (u) at (0,1.5) {$U$};
+\draw[kanted, -{Stealth[length=4.5pt]}] (a0)--(l1);
+\draw[kanted, -{Stealth[length=4.5pt]}] (l1)--(a1);
+\draw[kanted, -{Stealth[length=4.5pt]}] (a1)--(y);
+\draw[kanted, -{Stealth[length=4.5pt]}] (a0) to[bend right=30] (y);
+\draw[kanted, -{Stealth[length=4.5pt]}] (l1) to[bend right=22] (y);
+\draw[grau!60, line width=0.8pt, dashed, -{Stealth[length=4pt]}] (u)--(l1);
+\draw[grau!60, line width=0.8pt, dashed, -{Stealth[length=4pt]}] (u)--(y);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+$L_1$ ist \textbf{Störgröße} & für die zweite Gabe --- es beeinflusst $A_1$ und $Y$. Man \kursiv{muss} anpassen.\\
+$L_1$ ist \textbf{Mediator} & für die erste Gabe --- es liegt auf dem Weg $A_0 \to L_1 \to Y$. Man \kursiv{darf nicht} anpassen.\\
+$L_1$ ist \textbf{Kollider} & von $A_0$ und $U$. Anpassen öffnet den Weg $A_0 \to L_1 \leftarrow U \to Y$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dieselbe Größe muss zugleich angepasst und nicht angepasst werden. Kein Regressionsmodell kann das.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Rückkopplung zwischen Behandlung und Störgröße}, und sie ist in der Medizin die Regel, sobald über die Zeit behandelt wird: Blutdruckmittel richten sich nach dem Blutdruck, Insulin nach dem Zucker, Beatmung nach den Blutgasen --- und alle diese Größen sind zugleich Folgen der bisherigen Behandlung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall gerechnet}
+$400\,000$ Patienten; $A_0$ ausgelost, $A_1$ hängt von $L_1$ ab, $U$ unbeobachtet.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{2.4cm}P{2.0cm}@{}}
+\toprule
+\textbf{Auswertung} & \textbf{Effekt} & \\
+\midrule
+$Y$ auf $A_0$, roh & $-0{,}104$ & \\
+an $L_1$ angepasst & $-0{,}068$ & \textcolor{akzent}{falsch}\\
+\midrule
+g-Formel, $\dops(1,1)$ gegen $\dops(0,0)$ & $\mathbf{-0{,}207}$ & \\
+wahr & $\mathbf{-0{,}207}$ & \textcolor{gruen}{richtig}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide üblichen Auswertungen verfehlen den wahren Effekt um die Hälfte bis zwei Drittel.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die rohe Rechnung unterschätzt, weil sie die zweite Gabe außer Acht lässt --- ein Patient, der am Tag $0$ nichts bekam, bekommt am Tag $1$ eher etwas. \textbf{Die angepasste Rechnung unterschätzt noch stärker, weil sie den Wirkweg über $L_1$ abschneidet} und zugleich den Kollider öffnet. Es gibt keine Anpassungsmenge, die hier hilft.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die g-Formel}
+
+\begin{merksatz}
+\boxtitel{Satz 12.1 --- Robins, 1986}
+Unter Konsistenz, Positivität und der \Begriff{folgenweisen Unabhängigkeit} --- bei jedem Schritt ist die Behandlung, gegeben die bisherige Geschichte, so gut wie ausgelost --- gilt
+\[ \Pr\bigl[Y \mid \dops(a_0,a_1)\bigr] = \sum_{\ell} \Pr[Y \mid a_0, \ell, a_1]\ \Pr[\ell \mid a_0] . \]
+
+\schritt{Wie man sie liest}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Zweiter Faktor} & Wie sich $L_1$ entwickelt, \kursiv{wenn} man am Tag $0$ so behandelt --- der Mediatorweg bleibt erhalten.\\
+\textbf{Erster Faktor} & Wie es weitergeht bei gegebenem $L_1$ --- dort wird angepasst, weil $L_1$ Störgröße der zweiten Gabe ist.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$L_1$ wird angepasst, wo es Störgröße ist, und durchlaufen, wo es Mediator ist --- in derselben Formel.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum eine Regression das nicht kann}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine Regression hat für $L_1$ genau einen Koeffizienten --- entweder sie nimmt es auf oder nicht. \textbf{Die g-Formel dagegen behandelt $L_1$ zweimal verschieden}, weil sie die Zeit ernst nimmt: erst wird der Verlauf unter der Strategie erzeugt, dann der Ausgang. Man rechnet sie in der Praxis durch Simulation: Man zieht Patientenverläufe unter der gewünschten Strategie und mittelt den Ausgang.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der zweite Weg: Gewichten über die Zeit}
+Statt zu summieren, kann man gewichten --- mit dem Produkt der Kehrwahrscheinlichkeiten über alle Zeitpunkte:
+\[ w_i = \prod_{t} \frac{1}{\Pr\bigl[A_t = a_{it} \mid \text{Geschichte}\bigr]} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In der so gewichteten Bevölkerung hängt die Behandlung an keinem Zeitpunkt mehr vom Verlauf ab --- $L_1$ ist keine Störgröße mehr und darf weggelassen werden. \textbf{Das Modell, das man dann rechnet, heißt Randstrukturmodell}, weil es die Randverteilung der potentiellen Ergebnisse beschreibt statt der bedingten. Es ist das gebräuchlichste Verfahren für zeitabhängige Behandlungen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Gewichte über die Zeit}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Produkt} & Zehn Zeitpunkte mit Wahrscheinlichkeit $0{,}7$ ergeben ein Gewicht von $1/0{,}7^{10} = 35$.\\
+\textbf{Positivität} & Sie muss zu \kursiv{jedem} Zeitpunkt und für \kursiv{jede} Geschichte gelten --- eine viel stärkere Forderung als in Kapitel~2.\\
+\textbf{Strategien} & \enquote{Immer behandeln} kommt in den Daten womöglich gar nicht vor.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist die härteste Grenze. \textbf{Je länger der Zeitraum, desto unwahrscheinlicher ist es, dass irgendein Patient einer festen Strategie über die ganze Zeit gefolgt ist} --- und ohne solche Patienten ist die Strategie nicht bewertbar. Man weicht deshalb auf \kursiv{dynamische} Strategien aus: \enquote{behandle, sobald das Laktat über $2$ steigt}, statt \enquote{behandle immer}. Solche Strategien bilden das ärztliche Handeln ohnehin besser ab.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.1 --- Die g-Formel von Hand}
+Gegeben:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+& $a_0 = 1$ & $a_0 = 0$\\
+\midrule
+$\Pr[L_1=1 \mid a_0]$ & $0{,}30$ & $0{,}60$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+$\Pr[Y=1 \mid a_0,\ell,a_1{=}1]$ & $\ell = 1$ & $\ell = 0$\\
+\midrule
+$a_0 = 1$ & $0{,}40$ & $0{,}10$\\
+$a_0 = 0$ & $0{,}50$ & $0{,}15$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Berechnen Sie $\Pr[Y \mid \dops(1,1)]$ und $\Pr[Y \mid \dops(0,1)]$.
+
+\loesung
+\schritt{Schritt 1 --- Für $a_0 = 1$}
+\[ 0{,}30\cdot0{,}40 + 0{,}70\cdot0{,}10 = 0{,}120 + 0{,}070 = 0{,}190 \]
+
+\schritt{Schritt 2 --- Für $a_0 = 0$}
+\[ 0{,}60\cdot0{,}50 + 0{,}40\cdot0{,}15 = 0{,}300 + 0{,}060 = 0{,}360 \]
+
+\schritt{Schritt 3 --- Der Effekt der ersten Gabe}
+\[ 0{,}190 - 0{,}360 = \mathbf{-0{,}170} \]
+
+\schritt{Schritt 4 --- Und falsch gerechnet}
+Passt man an $L_1$ an und mittelt über dessen \kursiv{Randverteilung} --- etwa $0{,}45$ ---, so erhält man
+\[ \bigl[0{,}45\cdot0{,}40 + 0{,}55\cdot0{,}10\bigr] - \bigl[0{,}45\cdot0{,}50 + 0{,}55\cdot0{,}15\bigr] = 0{,}235 - 0{,}308 = -0{,}073 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$-0{,}073$ statt $-0{,}170$: Weniger als die Hälfte.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Unterschied steckt allein in der Gewichtung von $L_1$}: Die g-Formel benutzt die Verteilung, die sich \kursiv{unter der jeweiligen Strategie} einstellt --- $0{,}30$ gegen $0{,}60$ ---, die falsche Rechnung eine feste. Genau darin liegt die Wirkung der ersten Gabe: Sie halbiert die Häufigkeit des Organversagens, und das ist der größte Teil ihres Nutzens.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.2 --- Gewichte über zehn Tage}
+Ein Patient erhält an zehn Tagen die Behandlung; die Wahrscheinlichkeit betrage je Tag $0{,}7$, bei zweien nur $0{,}3$. Welches Gewicht trägt er?
+
+\loesung
+\schritt{Schritt 1 --- Das Produkt}
+\[ w = \frac{1}{0{,}7^{8}\cdot0{,}3^{2}} = \frac{1}{0{,}0576\cdot0{,}09} = \frac{1}{0{,}00518} = 193 \]
+
+\schritt{Schritt 2 --- Zum Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{3.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Verlauf} & \textbf{Gewicht}\\
+\midrule
+zehnmal $0{,}7$ & $35$\\
+achtmal $0{,}7$, zweimal $0{,}3$ & $\mathbf{193}$\\
+zehnmal $0{,}5$ & $1024$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Stabilisierte Gewichte}
+Man multipliziert mit der Wahrscheinlichkeit derselben Folge \kursiv{ohne} Bedingung auf den Verlauf:
+\[ w^{\text{stab}} = \prod_t \frac{\Pr[A_t = a_t \mid \text{bisherige Behandlung}]}{\Pr[A_t = a_t \mid \text{Geschichte}]} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zähler und Nenner sind ähnlich groß, das Gewicht bleibt nahe bei eins --- im Beispiel etwa $2$ statt $193$. \textbf{Der Erwartungswert bleibt derselbe, die Streuung sinkt erheblich.} Das ist dasselbe Prinzip wie bei der Anpassung in der randomisierten Studie aus Kapitel~3: Man ändert nichts an der Unverzerrtheit und viel an der Genauigkeit.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.3 --- Welche Strategie ist bewertbar?}
+Über zehn Tage sei die Behandlungswahrscheinlichkeit je Tag $0{,}7$. Wie viele von $10\,000$ Patienten haben der Strategie \enquote{immer behandeln} vollständig entsprochen?
+
+\loesung
+\schritt{Schritt 1 --- Die Rechnung}
+\[ 10\,000\cdot0{,}7^{10} = 10\,000\cdot0{,}0282 = 282 \]
+
+\schritt{Schritt 2 --- Und \enquote{nie behandeln}}
+\[ 10\,000\cdot0{,}3^{10} = 10\,000\cdot0{,}0000059 = \mathbf{0{,}06} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein einziger Patient. Die Strategie \enquote{nie behandeln} ist aus diesen Daten nicht bewertbar.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was stattdessen geht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Kürzerer Zeitraum} & Drei statt zehn Tage: $0{,}3^{3} = 2{,}7\,\%$, also $270$ Patienten.\\
+\textbf{Dynamische Strategie} & \enquote{Behandle nur, wenn das Laktat über $2$ liegt} --- solche Verläufe kommen häufig vor.\\
+\textbf{Modellieren} & Den Ausgang als Funktion der Behandlungsdauer modellieren, statt Strategien einzeln zu vergleichen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die dritte Zeile tauscht Positivität gegen Modellannahme} --- man behauptet einen glatten Zusammenhang und kann dann auch Bereiche bewerten, in denen keine Daten liegen. Das ist ehrlich, solange man es sagt. Die zweite Zeile ist der bessere Weg: Sie stellt die Frage so, dass sie beantwortbar ist, und trifft zugleich besser, was Ärzte wirklich tun.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Arbeit über Arsen}
+\Person{James Robins} veröffentlichte 1986 einen Aufsatz von $115$ Seiten über die Wirkung von Arsen auf Arbeiter einer Kupferhütte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das Problem: Wer krank wurde, verließ die belastete Abteilung --- die Belastung hing vom Gesundheitszustand ab, der wiederum von der bisherigen Belastung. \textbf{Robins entwickelte dafür die g-Formel}, und der Aufsatz gilt als einer der schwersten der Epidemiologie. Er wurde jahrelang kaum gelesen; erst die Behandlung der HIV-Infektion in den 1990er Jahren, bei der dasselbe Problem auftrat, machte das Verfahren bekannt.}
+\end{minipage}
+\end{center}
+
+\schritt{Der gesunde Arbeiter}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Epidemiologie kannte das Problem als \enquote{Effekt des gesunden Arbeiters}: Beschäftigte sind gesünder als die Allgemeinbevölkerung, weil Kranke ausscheiden. \textbf{Man hatte es als Auswahlproblem gedeutet und mit Anpassung zu beheben versucht} --- und genau diese Anpassung machte es schlimmer, wie Abschnitt 12.1 zeigt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Über die Zeit heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Dynamische Strategien} & Regeln der Form \enquote{behandle, wenn}, statt fester Folgen.\\
+\textbf{Intensivmedizin} & Beatmung, Flüssigkeit, Katecholamine --- alles rückgekoppelt.\\
+\textbf{Bestärkendes Lernen} & Strategien aus Daten lernen statt sie zu vergleichen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Verfahren des bestärkenden Lernens suchen die beste Strategie, statt gegebene zu bewerten --- und stoßen dabei auf dieselbe Positivitätsgrenze, nur schärfer: \textbf{Die gefundene Strategie weicht gerade dort vom ärztlichen Handeln ab, wo es keine Daten gibt.} Eine vielbeachtete Arbeit von 2018 schlug für die Sepsisbehandlung Strategien vor, die Intensivmediziner für gefährlich hielten; die Nachprüfung zeigte, dass die Verfahren genau die datenarmen Bereiche bevorzugten.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Rückkopplung} & Störgröße und Mediator zugleich\\
+\textbf{Satz 12.1} & g-Formel: erst Verlauf, dann Ausgang\\
+\textbf{Gewichten} & Produkt über die Zeitpunkte\\
+\textbf{Positivität} & zu jedem Zeitpunkt, für jede Geschichte\\
+\textbf{Dynamisch} & die beantwortbare Frage stellen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die g-Formel durchläuft den Mediator, statt ihn zu sperren. Das nächste Kapitel fragt, wie viel Wirkung durch ihn läuft --- und stößt auf eine Annahme, die über zwei Welten zugleich spricht.}
+\end{minipage}
+\end{center}
+\end{merksatz}

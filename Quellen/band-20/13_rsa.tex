@@ -1,0 +1,622 @@
+\chapter{RSA}
+
+\section{Die andere Aufgabe}
+
+\begin{merksatz}
+\boxtitel{Was Kapitel 12 nicht leistet}
+Der Schlüsseltausch verlangt, dass beide Seiten gleichzeitig anwesend sind und miteinander sprechen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Nicht möglich} & Einem Empfänger eine Nachricht senden, der gerade nicht erreichbar ist.\\
+\textbf{Nicht möglich} & Eine Nachricht so unterschreiben, dass jeder die Echtheit prüfen kann.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gesucht ist ein Schlüsselpaar: einer zum Verschließen, ein anderer zum Öffnen.} Der erste darf öffentlich sein.
+\end{minipage}
+\end{center}
+
+\schritt{Der Leitfall}
+Eine Praxis sendet einen Arztbrief an das Klinikum. Sie hat noch nie mit ihm gesprochen, kennt aber dessen öffentlichen Schlüssel.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diffie und Hellman hatten die Idee 1976 formuliert, ohne ein Verfahren angeben zu können. \textbf{Ein Jahr später fanden drei Mathematiker am MIT eines} --- und es beruht auf einer Frage, die zweitausend Jahre alt ist: wie schwer es ist, eine Zahl in ihre Primfaktoren zu zerlegen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz von Euler}
+
+\begin{merksatz}
+\boxtitel{Die Eulersche Funktion}
+Für eine natürliche Zahl $n$ ist $\varphi(n)$ die Anzahl der zu $n$ teilerfremden Zahlen zwischen $1$ und $n$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+$n$ & $\varphi(n)$ & \\
+\midrule
+$p$ prim & $p-1$ & alle außer $0$\\
+$p\cdot q$ & $(p-1)(q-1)$ & für $p \ne q$ prim\\
+$143 = 11\cdot13$ & $10\cdot12 = 120$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum $(p-1)(q-1)$}
+Von den $n = pq$ Zahlen sind genau die Vielfachen von $p$ und die von $q$ nicht teilerfremd:
+\[ n - q - p + 1 = pq-p-q+1 = (p-1)(q-1) \]
+Die Eins wird addiert, weil die Null in beiden Listen steht. \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 13.1 --- der Satz von Euler}
+Ist $\gcd(a,n) = 1$, so gilt
+\[ a^{\varphi(n)} \equiv 1 \pmod n . \]
+
+\schritt{Der Beweis in Kürze}
+Die zu $n$ teilerfremden Reste bilden eine Gruppe mit $\varphi(n)$ Elementen. Multipliziert man alle mit $a$, so entsteht dieselbe Menge in anderer Reihenfolge --- denn $a$ ist umkehrbar.
+
+Das Produkt aller Elemente ist damit einerseits $P$, andererseits $a^{\varphi(n)}P$. Kürzen liefert die Behauptung. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der kleine Satz von Fermat aus Kapitel~12 ist der Sonderfall $n=p$. Der vollständige Beweis steht in Band 6, Teil~II --- er ist der Satz von Lagrange über Gruppenordnungen, auf diese Gruppe angewandt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Verfahren}
+
+\begin{merksatz}
+\boxtitel{Die Schlüsselerzeugung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Wähle zwei große Primzahlen $p$ und $q$ und setze $n = pq$.\\
+$2$ & Berechne $\varphi(n) = (p-1)(q-1)$.\\
+$3$ & Wähle $e$ teilerfremd zu $\varphi(n)$.\\
+$4$ & Bestimme $d$ mit $e\,d \equiv 1 \pmod{\varphi(n)}$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Inhalt} & \textbf{Status}\\
+\midrule
+Öffentlicher Schlüssel & $(n,e)$ & \textcolor{gruen}{veröffentlicht}\\
+Geheimer Schlüssel & $d$ & \textcolor{akzent}{geheim}\\
+Zu vernichten & $p$, $q$, $\varphi(n)$ & \textcolor{akzent}{geheim}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die Operationen}
+\[ c = m^{e} \bmod n, \qquad m = c^{d} \bmod n \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 13.2 --- warum es funktioniert}
+Für alle $m$ mit $\gcd(m,n)=1$ gilt
+\[ \bigl(m^{e}\bigr)^{d} \equiv m \pmod n . \]
+
+\schritt{Beweis}
+Aus $e\,d \equiv 1 \pmod{\varphi(n)}$ folgt
+\[ e\,d = 1 + k\,\varphi(n) \quad\text{für ein } k\in\mathbb{N} . \]
+
+Damit:
+\begin{align*}
+m^{ed} &= m^{\,1+k\varphi(n)}\\
+&= m\cdot\bigl(m^{\varphi(n)}\bigr)^{k}\\
+&\equiv m\cdot 1^{k} && \text{(Satz 13.1)}\\
+&= m
+\end{align*}
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis ist vier Zeilen lang und benutzt nur den Satz von Euler. \textbf{Die Aussage gilt tatsächlich für alle $m$}, auch für die nicht teilerfremden --- das erfordert eine zusätzliche Betrachtung über den chinesischen Restsatz. Bei großen Primzahlen ist der Fall ohnehin verschwindend selten: Ein $m$ mit $\gcd(m,n)>1$ zu finden hieße, $n$ zu faktorisieren.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein vollständiges Beispiel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Wert} & \textbf{Rechnung}\\
+\midrule
+$p$, $q$ & $11$, $13$ & gewählt\\
+$n$ & $143$ & $11\cdot13$\\
+$\varphi(n)$ & $120$ & $10\cdot12$\\
+$e$ & $7$ & teilerfremd zu $120$\\
+$d$ & $\mathbf{103}$ & $7\cdot103 = 721$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Probe für $d$:} $721 = 6\cdot120+1$ \checkmark
+
+\schritt{Verschlüsseln von $m = 9$}
+\[ c = 9^{7} \bmod 143 \]
+
+\kursiv{Quadrieren und Multiplizieren}, $7 = \texttt{111}_2$:
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.2cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Bit} & \textbf{Rechnung} & \textbf{Ergebnis}\\
+\midrule
+$1$ & $1^2\cdot9$ & $9$\\
+$1$ & $9^2\cdot9 = 729$ & $14$\\
+$1$ & $14^2\cdot9 = 1764$ & $\mathbf{48}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Proben:} $729 = 5\cdot143+14$ \checkmark; $1764 = 12\cdot143+48$ \checkmark
+
+\schritt{Entschlüsseln}
+\[ 48^{103} \bmod 143 = 9 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Rechnung ist von Hand mühsam --- zehn Quadrierungen. Der Empfänger kennt allerdings $p$ und $q$ und kann über den chinesischen Restsatz modulo $11$ und modulo $13$ getrennt rechnen; das ist etwa viermal schneller. \textbf{Der geheime Schlüssel enthält mehr als nur $d$}, und praktische Umsetzungen speichern $p$, $q$ und Hilfsgrößen mit.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie sicher ist es}
+
+\begin{merksatz}
+\boxtitel{Wovon die Sicherheit abhängt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Faktorisierung} & Kennt man $p$ und $q$, so kennt man $\varphi(n)$ und damit $d$.\\
+\textbf{$\varphi(n)$ bestimmen} & Gleichwertig zur Faktorisierung: Aus $n$ und $\varphi(n)$ folgen $p$ und $q$ über eine quadratische Gleichung.\\
+\textbf{$d$ bestimmen} & Ebenfalls gleichwertig --- daraus lässt sich $n$ faktorisieren.\\
+\textbf{RSA-Problem} & Aus $c$ die $e$-te Wurzel ziehen. \textcolor{mittel}{Höchstens} so schwer wie Faktorisieren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile hat denselben Vorbehalt wie beim Diffie-Hellman-Problem in Kapitel~12: Ob das Wurzelziehen \kursiv{genauso} schwer ist wie das Faktorisieren, ist offen. \textbf{Man weiß nur, dass es nicht schwerer ist.}}
+\end{minipage}
+\end{center}
+
+\schritt{Der Stand der Faktorisierung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{1.8cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Zahl} & \textbf{Bits} & \textbf{Jahr} & \textbf{Aufwand}\\
+\midrule
+RSA-768 & $768$ & $2009$ & $\approx2000$ Kernjahre\\
+RSA-250 & $829$ & $2020$ & $\approx2700$ Kernjahre\\
+$2048$ Bit & $2048$ & --- & \textcolor{gruen}{unerreicht}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+$n$ & \textbf{Aufwand} & \\
+\midrule
+$2^{768}$ & $2^{76{,}5}$ & gebrochen\\
+$2^{1024}$ & $2^{86{,}8}$ & \textcolor{mittel}{grenzwertig}\\
+$2^{2048}$ & $2^{116{,}9}$ & sicher\\
+$2^{3072}$ & $2^{138{,}7}$ & sicher\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es sind dieselben Zahlen wie beim diskreten Logarithmus --- das Zahlkörpersieb löst beide Probleme mit demselben Aufwandsgesetz. \textbf{Die Schlüssellängenempfehlungen für RSA und Diffie-Hellman stimmen deshalb überein}, und ein Fortschritt bei einem Problem betrifft meist auch das andere.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Das reine Verfahren ist unsicher}
+Die Vorschrift $c = m^{e}$ --- ohne weitere Maßnahmen --- hat mehrere schwere Mängel.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Bestimmt} & Dieselbe Nachricht ergibt stets denselben Geheimtext. Bei wenigen möglichen Nachrichten rät man sie durch Ausprobieren.\\
+\textbf{Formbar} & $c_1\cdot c_2$ entschlüsselt zu $m_1\cdot m_2$.\\
+\textbf{Kleine Werte} & Ist $m^{e} < n$, so entfällt die Modulrechnung --- man zieht einfach die $e$-te Wurzel.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Ein Arztbrief mit dem Feld \enquote{Befund: positiv} oder \enquote{negativ} hat zwei mögliche Werte. Der Angreifer verschlüsselt beide selbst --- er kennt ja den öffentlichen Schlüssel --- und vergleicht.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Verfahren mit öffentlichem Schlüssel, das deterministisch ist, kann nicht sicher sein.} Der Angreifer kann jede Vermutung selbst prüfen.
+\end{minipage}
+\end{center}
+
+\schritt{Zur zweiten Zeile, nachgerechnet}
+Mit $n=143$, $e=7$:
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+$m$ & $c$ & \\
+\midrule
+$5$ & $47$ & \\
+$7$ & $6$ & \\
+\midrule
+$35$ & $\mathbf{139}$ & $47\cdot6 = 282 \equiv 139$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Probe:} $282 = 143+139$ \checkmark, und $35^{7} \bmod 143 = 139$ \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Angreifer kann also aus dem Geheimtext einer Zahl den Geheimtext ihres Vielfachen erzeugen --- ohne den Klartext zu kennen. Das ist dieselbe Formbarkeit wie beim Einmalschlüssel in Kapitel~9, nur multiplikativ statt additiv.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Abhilfe}
+Man füllt die Nachricht vor dem Potenzieren mit Zufall auf, nach einem genau festgelegten Verfahren.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist die Verschlüsselung nicht mehr bestimmt --- dieselbe Nachricht ergibt jedes Mal einen anderen Geheimtext --- und die Struktur des Auffüllens zerstört die Formbarkeit. \textbf{Die Auffüllung ist kein technisches Beiwerk, sondern der Teil, der das Verfahren sicher macht.} Frühere Auffüllverfahren waren angreifbar, und der bekannteste dieser Angriffe nutzte aus, dass der Empfänger fehlerhafte Auffüllungen meldete.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und vier Umsetzungsfallen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Gemeinsame Faktoren} & Werden Primzahlen mit schlechtem Zufall erzeugt, so teilen sich verschiedene Schlüssel einen Faktor --- und beide fallen.\\
+\textbf{Zu nahe Primzahlen} & Liegen $p$ und $q$ dicht beieinander, so findet man sie durch Suche um $\sqrt n$.\\
+\textbf{Laufzeit} & Die Entschlüsselungsdauer hängt von $d$ ab und verrät es.\\
+\textbf{Fehlerangriff} & Ein einziger Rechenfehler bei der Rechnung über den chinesischen Restsatz verrät $p$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Eine Untersuchung von 2012 prüfte Millionen öffentlicher Schlüssel aus dem Internet und berechnete paarweise größte gemeinsame Teiler.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei einigen Zehntausend Schlüsseln wurde man fündig --- meist von eingebetteten Geräten, die ihre Schlüssel kurz nach dem Einschalten erzeugten, bevor genug Zufall gesammelt war. \textbf{Der größte gemeinsame Teiler ist in Millisekunden berechnet}, während die Faktorisierung einer einzelnen Zahl aussichtslos ist. Zwei schlechte Schlüssel brechen einander.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur vierten Zeile}
+Rechnet der Empfänger getrennt modulo $p$ und modulo $q$ und tritt bei einer der beiden Teilrechnungen ein Fehler auf, so gilt für die fehlerhafte Signatur $s'$:
+\[ \gcd\bigl(s'^{\,e} - m,\ n\bigr) = q \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein einziger gekippter Bitwert --- durch Spannungsschwankung, Hitze oder gezielte Einstrahlung --- gibt den Schlüssel preis. Deshalb prüfen sichere Umsetzungen jede Signatur nach dem Erzeugen. \textbf{Ein mathematisch einwandfreies Verfahren kann durch einen Hardwarefehler vollständig fallen} --- und das ist ein Angriffsweg, den kein Sicherheitsbeweis erfasst.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.1 --- RSA durchrechnen}
+Mit $p = 5$, $q = 11$ und $e = 3$: Bestimmen Sie $d$ und verschlüsseln Sie $m = 8$.
+
+\loesung
+\schritt{Schritt 1 --- Die Kenngrößen}
+\[ n = 55, \qquad \varphi(n) = 4\cdot10 = 40 \]
+
+\kursiv{Teilerfremdheit prüfen:} $\gcd(3,40) = 1$ \checkmark
+
+\schritt{Schritt 2 --- $d$ bestimmen}
+Gesucht ist $d$ mit $3d \equiv 1 \pmod{40}$.
+
+\kursiv{Durchprobieren der Vielfachen:} $3\cdot27 = 81 = 2\cdot40+1$ \checkmark
+\[ d = 27 \]
+
+\schritt{Schritt 3 --- Verschlüsseln}
+\[ c = 8^{3} = 512 \]
+\[ 512 = 9\cdot55 + 17 \quad\Longrightarrow\quad c = \mathbf{17} \]
+
+\schritt{Schritt 4 --- Entschlüsseln}
+\[ 17^{27} \bmod 55 \]
+
+\kursiv{Schrittweise:} $17^2 = 289 = 5\cdot55+14$, also $14$.
+\[ 17^{4} = 14^{2} = 196 = 3\cdot55+31 \ \to\ 31 \]
+\[ 17^{8} = 31^{2} = 961 = 17\cdot55+26 \ \to\ 26 \]
+\[ 17^{16} = 26^{2} = 676 = 12\cdot55+16 \ \to\ 16 \]
+
+Mit $27 = 16+8+2+1$:
+\[ 17^{27} = 16\cdot26\cdot14\cdot17 \]
+\[ 16\cdot26 = 416 = 7\cdot55+31 \ \to\ 31 \]
+\[ 31\cdot14 = 434 = 7\cdot55+49 \ \to\ 49 \]
+\[ 49\cdot17 = 833 = 15\cdot55+8 \ \to\ \mathbf{8} \quad \checkmark \]
+
+\schritt{Schritt 5 --- Die Probe über Satz 13.2}
+\[ e\,d = 81 = 2\cdot40+1 \]
+\[ m^{81} = m\cdot(m^{40})^{2} \equiv m\cdot1 = m \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Zur Anwendbarkeit von Satz 13.1: $\gcd(8,55) = 1$ \checkmark. Bei $m = 5$ oder $m=11$ wäre der Satz nicht unmittelbar anwendbar --- die Aussage gilt dort trotzdem, wie die erweiterte Betrachtung zeigt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Warum dieses Beispiel unsicher ist}
+Mit $n = 55$ gibt es $55$ mögliche Nachrichten. Der Angreifer verschlüsselt alle und vergleicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und er kann $55 = 5\cdot11$ im Kopf faktorisieren. \textbf{Das Beispiel zeigt die Rechnung; die Sicherheit kommt allein aus der Größe} --- praktisch verwendet man Primzahlen mit über tausend Bit.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.2 --- Die Formbarkeit ausnutzen}
+Ein Angreifer kennt den öffentlichen Schlüssel $(n,e)$ und einen Geheimtext $c$, dessen Klartext $m$ er erfahren will. Er darf den Empfänger \kursiv{einen} anderen Geheimtext entschlüsseln lassen --- aber nicht $c$ selbst.
+
+\loesung
+\schritt{Schritt 1 --- Der Ansatz}
+Der Angreifer wählt ein $r$ und bildet
+\[ c' = c\cdot r^{e} \bmod n . \]
+
+\schritt{Schritt 2 --- Was der Empfänger zurückgibt}
+\[ (c')^{d} = (c\cdot r^{e})^{d} = c^{d}\cdot r^{ed} \equiv m\cdot r \pmod n \]
+
+\schritt{Schritt 3 --- Das Ergebnis}
+Der Angreifer erhält $m\cdot r$ und dividiert:
+\[ m = (m\cdot r)\cdot r^{-1} \bmod n \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Er kennt den Klartext --- und $c'$ sah für den Empfänger völlig unverdächtig aus.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Ein Zahlenbeispiel}
+$n=55$, $e=3$, $c=17$ (also $m=8$). Der Angreifer wählt $r=2$:
+\[ c' = 17\cdot2^{3} = 17\cdot8 = 136 = 2\cdot55+26 \ \to\ 26 \]
+
+Der Empfänger entschlüsselt: $26^{27} \bmod 55 = 16$.
+\[ m = 16\cdot2^{-1} \bmod 55 \]
+
+\kursiv{Inverses von $2$:} $2\cdot28 = 56 \equiv 1$, also $2^{-1} = 28$.
+\[ 16\cdot28 = 448 = 8\cdot55+8 \ \to\ \mathbf{8} \quad \checkmark \]
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieser Angriff setzt voraus, dass der Empfänger überhaupt bereit ist, fremde Geheimtexte zu entschlüsseln. Das klingt weltfremd und ist es nicht: Ein Server, der auf fehlerhafte Nachrichten mit einer Fehlermeldung antwortet, gibt bereits genug preis. \textbf{Jede Antwort auf einen gewählten Geheimtext ist eine Entschlüsselung} --- und sei sie nur ein Ja oder Nein.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Abhilfe}
+Eine ordentliche Auffüllung macht $c'$ mit überwältigender Wahrscheinlichkeit ungültig.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Produkt $m\cdot r$ hat keine gültige Auffüllstruktur, und der Empfänger lehnt ab. Damit ist der Angriff abgewehrt --- vorausgesetzt, die Ablehnung verrät nicht, \kursiv{warum} abgelehnt wurde, und die Antwortzeit ist in allen Fällen gleich. \textbf{Die Abwehr liegt außerhalb der Mathematik}, und genau dort versagte sie historisch mehrfach.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.3 --- Signaturen}
+Erklären Sie, wie sich RSA zum Unterschreiben verwenden lässt, und warum man nicht die Nachricht selbst signiert.
+
+\loesung
+\schritt{Schritt 1 --- Die Vertauschung}
+Beim Verschlüsseln wendet man $e$ an und der Empfänger $d$. Beim Signieren ist es umgekehrt:
+\[ s = m^{d} \bmod n \qquad\text{(nur der Inhaber kann das)} \]
+\[ s^{e} \stackrel{?}{=} m \qquad\text{(jeder kann das prüfen)} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das funktioniert, weil $e$ und $d$ symmetrisch zueinander stehen:} $m^{ed} = m^{de}$.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Was das leistet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Herkunft} & Nur wer $d$ kennt, kann $s$ erzeugen.\\
+\textbf{Unversehrtheit} & Jede Änderung an $m$ macht die Prüfung ungültig.\\
+\textbf{Nicht\-abstreitbarkeit} & Anders als beim Beglaubigungscode aus Kapitel~11 kann der Empfänger die Signatur nicht selbst erzeugt haben.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Warum man nicht $m$ selbst signiert}
+\kursiv{Erstens: Länge.} Die Nachricht muss kleiner als $n$ sein. Ein Arztbrief ist es nicht.
+
+\kursiv{Zweitens: Fälschbarkeit.} Der Angreifer wählt ein beliebiges $s$ und berechnet $m = s^{e}$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Er hat eine gültige Signatur --- für eine Nachricht, die er sich nicht aussuchen konnte.}
+\end{minipage}
+\end{center}
+
+\kursiv{Drittens: Formbarkeit.} Aus zwei Signaturen $s_1$, $s_2$ ergibt sich
+\[ s_1\cdot s_2 = (m_1 m_2)^{d} \]
+--- eine gültige Signatur für $m_1 m_2$, ohne Kenntnis von $d$.
+
+\schritt{Schritt 4 --- Die Abhilfe}
+Man signiert den Hashwert:
+\[ s = H(m)^{d} \bmod n \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Länge} & Der Hashwert ist kurz genug.\\
+\textbf{Fälschbarkeit} & Der Angreifer müsste zu $s^{e}$ ein passendes Urbild finden --- das ist Definition 11.1.\\
+\textbf{Formbarkeit} & $H(m_1)\cdot H(m_2)$ ist kein Hashwert einer sinnvollen Nachricht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Die Folge für die Hashfunktion}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Findet jemand eine Kollision $H(m_1) = H(m_2)$, so überträgt sich jede Signatur von $m_1$ auf $m_2$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Deshalb war der Bruch von MD5 in Kapitel~11 folgenschwer: Man konnte zwei Zertifikate mit gleichem Hashwert und verschiedenem Inhalt bauen, eines harmlos signieren lassen und die Signatur auf das andere übertragen. \textbf{Die Sicherheit der Signatur ist durch die schwächste der beiden Komponenten begrenzt} --- und das war nicht RSA.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Auch hier braucht es Auffüllung}
+Die naheliegende Form $H(m)^{d}$ ohne weitere Struktur ist ebenfalls angreifbar.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Der Hashwert ist kurz, $n$ ist lang --- der Rest wird aufgefüllt, und die Art des Auffüllens war wiederholt Angriffspunkt. Ein bekannter Fall von 2006 nutzte aus, dass manche Prüfroutinen Zusatzbytes hinter dem Hashwert ignorierten; bei $e=3$ ließen sich damit Signaturen ohne Kenntnis von $d$ fälschen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Wochenende im April}
+\Person{Ron Rivest}, \Person{Adi Shamir} und \Person{Leonard Adleman} arbeiteten 1977 am MIT an der Frage, ob Diffie und Hellmans Idee eines Verfahrens mit öffentlichem Schlüssel überhaupt umsetzbar sei.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Arbeitsteilung war ungewöhnlich: Rivest und Shamir schlugen Verfahren vor, Adleman brach sie. Nach eigener Erinnerung etwa zweiundvierzigmal. Der dreiundvierzigste Vorschlag hielt stand.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Nacht der Entdeckung}
+Rivest kam die Idee in der Nacht zum 3.\ April 1977, nach einem Abend mit Wein bei einem Pessachfest. Er schrieb die Arbeit noch in derselben Nacht.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Adleman wollte zunächst nicht als Autor genannt werden --- er habe nur Vorschläge widerlegt. Rivest bestand darauf. Die Reihenfolge der Namen ergab sich alphabetisch rückwärts, und so heißt das Verfahren RSA statt ARS.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Vorwegnahme}
+\Person{Clifford Cocks} hatte dasselbe Verfahren 1973 beim britischen GCHQ gefunden --- in einer halben Stunde, wie er berichtete.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er hielt es für rechnerisch unpraktikabel und schrieb es auf vier Seiten nieder, die bis 1997 geheim blieben. \textbf{Cocks hatte zudem keine Signaturen betrachtet} --- ihm ging es allein um Verschlüsselung. Der Gedanke, dass dasselbe Verfahren rückwärts eine Unterschrift liefert, fehlt in seiner Arbeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Zahlen der Preisaufgabe}
+1977 veröffentlichte Rivest in einer Zeitschriftenkolumne eine mit $129$ Stellen verschlüsselte Nachricht und setzte hundert Dollar aus. Er schätzte den nötigen Aufwand auf $4\cdot10^{16}$ Jahre.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Zahl wurde 1994 faktorisiert --- von sechshundert Freiwilligen über das Internet, in acht Monaten. Der Klartext lautete \enquote{the magic words are squeamish ossifrage}. \textbf{Rivests Schätzung lag um vierzehn Größenordnungen daneben}, weil er die Entwicklung der Faktorisierungsverfahren nicht vorhersehen konnte. Das ist die deutlichste Warnung vor Sicherheitsprognosen, die dieses Fach kennt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{RSA heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Rückgang} & Neue Anwendungen wählen überwiegend elliptische Kurven --- kürzere Schlüssel, schnellere Signaturen.\\
+\textbf{Bestand} & In Zertifikaten und Altsystemen weiterhin allgegenwärtig.\\
+\textbf{Quanten} & Shors Verfahren faktorisiert in polynomialer Zeit; längere Schlüssel helfen nicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Bei gleicher Sicherheit ist eine elliptische Signatur etwa zwölfmal kürzer und ihre Erzeugung deutlich schneller.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{RSA hat allerdings einen Vorteil, der oft übersehen wird: Die \kursiv{Prüfung} ist mit kleinem $e$ sehr schnell --- schneller als bei elliptischen Kurven. Wo eine Signatur einmal erzeugt und millionenfach geprüft wird, kann das den Ausschlag geben.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Shor veröffentlichte sein Verfahren 1994. Der Aufwand ist polynomial in der Bitlänge.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach heutigen Schätzungen bräuchte man für einen $2048$-Bit-Schlüssel einige Millionen fehlerkorrigierte Quantenbits --- gegenwärtig sind es einige hundert bis wenige tausend physikalische. \textbf{Der Abstand ist groß und schrumpft}, und niemand kann zuverlässig sagen, wie schnell. Kapitel~15 behandelt, was an die Stelle tritt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 13.1} & Euler: $a^{\varphi(n)}\equiv1$\\
+\textbf{Satz 13.2} & $m^{ed} = m$ in vier Zeilen\\
+\textbf{Die Sicherheit} & höchstens so hart wie Faktorisieren\\
+\textbf{Der Bruchfall} & bestimmt, formbar, kleine Werte\\
+\textbf{Signaturen} & den Hashwert signieren, nie die Nachricht\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel ersetzen wir die Restklassen durch eine Gruppe, in der dieselben Verfahren mit einem Zwölftel der Bits auskommen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

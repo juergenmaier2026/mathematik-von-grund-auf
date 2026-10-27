@@ -1,0 +1,391 @@
+\part{Aktueller Stand}
+
+\chapter{Was die Theorie leistet}
+
+\section{Die zweite Warnung ernst nehmen}
+
+\begin{merksatz}
+\boxtitel{Was Versuche zeigen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Spiel} & \textbf{Vorhersage} & \textbf{Beobachtung}\\
+\midrule
+Ultimatum & kleinstes Angebot & $40$ bis $50\,\%$\\
+Diktator & nichts abgeben & $\approx 20\,\%$\\
+Dilemma, einmalig & ausscheren & $\approx 50\,\%$ kooperieren\\
+Tausendfüßler & sofort nehmen & mehrfach weiterreichen\\
+Kollektivgut & nichts geben & startet bei $50\,\%$\\
+Bestrafung & niemand straft & viele strafen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In keiner dieser Lagen trifft die Vorhersage zu --- und die Abweichungen sind groß, systematisch und reproduzierbar.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man kann die Befunde nicht als Streuung abtun. \textbf{Sie treten in allen untersuchten Ländern auf}, mit Abweichungen in der Höhe, nicht in der Richtung; sie bleiben bei hohen Einsätzen bestehen; und sie verschwinden nicht durch Erfahrung, sondern nur in bestimmten Lagen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Schönheitswettbewerb}
+Jeder nennt eine Zahl zwischen $0$ und $100$. Wer der Zahl $\tfrac23$ des Mittelwerts am nächsten kommt, gewinnt.
+
+\schritt{Das Gleichgewicht}
+Wäre der Mittelwert $m$, so sollte jeder $\tfrac23 m$ nennen --- dann ist der Mittelwert $\tfrac23 m$, und so fort.
+
+\[ \text{Einziges Gleichgewicht: } 0 \]
+
+\schritt{Die Denkstufen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.0cm}P{3.2cm}@{}}
+\toprule
+\textbf{Tiefe} & \textbf{Zahl} & \\
+\midrule
+$0$ & $50$ & rät zufällig\\
+$1$ & $33{,}3$ & rechnet einen Schritt\\
+$2$ & $22{,}2$ & zwei Schritte\\
+$3$ & $14{,}8$ & \\
+$\infty$ & $0$ & Gleichgewicht\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beobachtet werden Mittelwerte um $35$ und Siegerzahlen um $23$ --- das entspricht einer Denktiefe von ein bis zwei Schritten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und zwar unabhängig davon, ob Studierende, Fachleute oder Vorstandsmitglieder befragt werden; die Tiefe schwankt zwischen eins und drei. \textbf{Niemand spielt das Gleichgewicht --- und wer es spielte, verlöre}, denn die anderen tun es nicht. Das ist der schärfste Einwand gegen den Gleichgewichtsbegriff als Handlungsempfehlung: Er ist nicht nur deskriptiv falsch, sondern in genau diesem Fall auch normativ.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Drei Erklärungsversuche}
+
+\begin{merksatz}
+\boxtitel{Erstens: andere Auszahlungen}
+Man nimmt an, dass Menschen nicht nur den eigenen Betrag bewerten, sondern auch die Verteilung.
+
+\[ \Aus_i = x_i - \alpha\,\max\{x_j-x_i,\ 0\} - \beta\,\max\{x_i-x_j,\ 0\} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{6.8cm}@{}}
+\toprule
+$\alpha$ & Abneigung dagegen, schlechter dazustehen als andere.\\
+$\beta$ & Abneigung dagegen, besser dazustehen --- meist kleiner.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Das Ultimatumspiel gerechnet}
+Mit $\alpha = 1$, $\beta = \tfrac12$ und einem Betrag von $10$:
+
+\kursiv{Der Empfänger} nimmt ein Angebot $s$ an, wenn
+\[ s - 1\cdot(10-2s) \ \ge\ 0 \quad\Longrightarrow\quad 3s \ \ge\ 10 \quad\Longrightarrow\quad s \ \ge\ 3{,}33 \]
+
+\kursiv{Der Anbieter} behält $10-s$ und hat für $s \le 5$
+\[ (10-s) - \tfrac12\bigl[(10-s)-s\bigr] = 10-s-5+s = 5 \]
+--- unabhängig von $s$. Für $s > 5$ fällt sein Nutzen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$s$ & \textbf{Nutzen Anbieter} & \\
+\midrule
+$2{,}00$ & $5{,}00$ & \textcolor{akzent}{abgelehnt}\\
+$3{,}34$ & $5{,}00$ & angenommen\\
+$5{,}00$ & $5{,}00$ & angenommen\\
+$6{,}00$ & $2{,}00$ & schlechter\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Vorhergesagt werden Angebote zwischen $33$ und $50$ Prozent --- genau das Beobachtete.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Einwand}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man hat zwei Parameter eingeführt und aus den Daten geschätzt, mit denen man dann dieselben Daten erklärt. \textbf{Das ist keine Vorhersage, sondern eine Anpassung} --- es sei denn, dieselben Werte von $\alpha$ und $\beta$ sagen \kursiv{andere} Spiele richtig vorher. Genau das ist die entscheidende Prüfung, und sie fällt gemischt aus: In manchen Spielen trägt der Ansatz, in anderen braucht es weitere Terme.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Zweitens: begrenzte Denktiefe}
+Statt das Gleichgewicht zu unterstellen, modelliert man Stufen: Stufe $k$ antwortet bestmöglich auf eine Bevölkerung der Stufen darunter.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Vorteil} & Sagt den Schönheitswettbewerb, das Tausendfüßlerspiel und vieles andere richtig vorher.\\
+\textbf{Sparsam} & Ein Parameter --- die Verteilung der Tiefen.\\
+\textbf{Nachteil} & Sagt nicht, wie die Tiefen zustande kommen oder wovon sie abhängen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein bemerkenswertes Nebenergebnis: \textbf{Die Vorhersagen des Gleichgewichts und die der begrenzten Tiefe fallen dort zusammen, wo Dominanz vorliegt} --- schon Stufe 1 meidet eine strikt dominierte Strategie. Je mehr Schritte ein Argument braucht, desto weniger trägt es. Das ist der Befund aus dem Forschungskasten von Kapitel~1, nun in der Bilanz.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Drittens: Lernen und Auslese}
+Teil~IV zeigte, dass Gleichgewichte ohne jedes Nachdenken entstehen können.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Wo es trägt} & Bei häufig wiederholten, einfachen Entscheidungen mit klarer Rückmeldung.\\
+\textbf{Wo nicht} & Bei einmaligen, komplexen Entscheidungen --- also dort, wo man die Theorie am dringendsten bräuchte.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der ehrlichste Befund dieses Kapitels. \textbf{Die Gleichgewichtsvorhersage ist dort gut, wo sie am wenigsten gebraucht wird}, und schlecht dort, wo sie interessant wäre. Bei Preisbildung auf eingespielten Märkten trifft sie zu; bei einer Tarifverhandlung oder einem Klimaabkommen nicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Vier Muster}
+
+\begin{merksatz}
+\boxtitel{Muster 1 --- Gleichgewicht ist kein Optimum}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{6.6cm}@{}}
+\toprule
+$5$ & Das Gefangenendilemma: das einzige Gleichgewicht ist für beide schlechter.\\
+$4$ & Das gemischte Gleichgewicht im Koordinationsspiel: schlechter als beide reinen.\\
+$11$ & Das Kollektivgut: die Hälfte geht verloren; die Allmende: bis zu $96$ Prozent.\\
+$10$ & Die Dauertherapie ist ein Gleichgewicht der Zellen und tötet den Patienten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer nach dem Gleichgewicht sucht, findet nicht die beste Lage, sondern die stabile.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und daraus folgt die einzige durchgehende Handlungsanweisung dieses Bandes: \textbf{Wer das Ergebnis ändern will, muss die Regeln ändern, nicht die Spieler ermahnen.} Teil~V behandelt nichts anderes.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 2 --- die eigene Wahl richtet sich nach den fremden Zahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{6.6cm}@{}}
+\toprule
+$2$ & Die optimale Mischung macht \kursiv{den Gegner} gleichgültig.\\
+$3$ & Die Mischung des Gegners ist der Schattenpreis der eigenen Garantien.\\
+$4$ & Eine Verbesserung der eigenen Auszahlung erhöht den eigenen Ertrag nicht.\\
+$9$ & Die Falkenquote $V/C$ hängt nicht davon ab, wer wie stark ist.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die unanschaulichste Eigenschaft der Theorie und die am häufigsten falsch gerechnete. \textbf{Sie folgt unmittelbar aus dem Gleichgewichtsbegriff}: Wer mischt, muss gleichgültig sein, und gleichgültig macht ihn die Wahl des anderen. Wer stattdessen seine eigenen Zahlen einsetzt, erhält ein falsches Ergebnis.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 3 --- man muss wählen, was man aufgibt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{6.6cm}@{}}
+\toprule
+$12$ & Arrow: vier Forderungen, keine Lösung.\\
+$12$ & Gibbard und Satterthwaite: kein Verfahren ist manipulationsfest.\\
+$13$ & Roth: Wahrheit nie für beide Seiten einer Zuordnung.\\
+$14$ & Kern gegen Shapley: haltbar oder angemessen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Viermal dieselbe Gestalt: Mehrere einleuchtende Forderungen, die zusammen unerfüllbar sind.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Solche Sätze sind nicht nur negativ. \textbf{Sie verwandeln eine Suche in eine Entscheidung}: Statt nach dem richtigen Verfahren zu suchen, wählt man, welche Forderung man opfert --- und das lässt sich begründen und verantworten. Die Umstellung des amerikanischen Vergabeverfahrens 1997 war genau eine solche Entscheidung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 4 --- Existenz ohne Erreichbarkeit}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{6.6cm}@{}}
+\toprule
+$6$ & Brouwer liefert einen Fixpunkt und sagt nicht, wo er liegt.\\
+$6$ & Die Berechnung ist $\mathsf{PPAD}$-vollständig.\\
+$10$ & Beim zyklischen Spiel wird das Gleichgewicht nie erreicht.\\
+$8$ & Der Volkssatz: fast alles ist ein Gleichgewicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es ist dasselbe Muster wie in Band 20, Kapitel~5, mit einem Unterschied: \textbf{Dort schloss sich die Lücke nach sechzig Jahren, hier spricht ein Satz dafür, dass sie bleibt.} Papadimitrious Folgerung --- ein Vorhersagebegriff, dessen Auswertung unerreichbar ist, verliert seinen Anspruch --- gehört zu den ernstesten Einwänden, die das Fach gegen sich selbst hervorgebracht hat.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was nicht in der Matrix steht}
+
+\begin{warnung}
+\boxtitelr{Die Bilanz der drei Warnungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{6.4cm}@{}}
+\toprule
+\textbf{Erste} & Die Auszahlungen sind das Modell. Bestätigt in Kapitel~5: Eine vertauschte Ungleichung kehrt die Empfehlung um.\\
+\textbf{Zweite} & Menschen tun es nicht. Bestätigt in Abschnitt 15.1 --- durchgehend.\\
+\textbf{Dritte} & Ein Gleichgewicht ist keine Empfehlung. Bestätigt in Muster 1.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Und die ernsteste Lücke}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Wer spielt} & Die Abgrenzung der Spieler ist eine Entscheidung, keine Tatsache. Ein Haus ist kein Spieler.\\
+\textbf{Was zählt} & Die Auszahlungen sind geschätzt, oft grob.\\
+\textbf{Welches Spiel} & Ob ein Dilemma oder eine Hirschjagd vorliegt, entscheidet die Empfehlung --- und beruht auf einer Schätzung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle drei Punkte liegen vor der Rechnung, und keiner von ihnen ist spieltheoretisch zu entscheiden.} Deshalb ist die Empfindlichkeitsprüfung aus Aufgabe 1.3 kein Beiwerk, sondern der Teil der Arbeit, der über die Brauchbarkeit entscheidet --- und er fehlt in den meisten Anwendungen.}
+\end{minipage}
+\end{center}
+
+\schritt{Rubinsteins Einwand}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Er hält die Spieltheorie für ein Werkzeug zum Nachdenken, nicht zum Vorhersagen, und bestreitet, je einen Fall gesehen zu haben, in dem sie jemandem zu einer besseren Entscheidung verholfen hätte. \textbf{Man muss ihm nicht folgen, um den Punkt ernst zu nehmen}: Der Ertrag liegt darin, dass man die Lage klarer sieht --- welches Spiel vorliegt, wer die Spieler sind, woran es hängt --- und nicht darin, dass eine Zahl herauskommt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Was dennoch bleibt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Die Einordnung} & Zu wissen, ob ein Anreiz-, Vertrauens- oder Entschlossenheitsproblem vorliegt, entscheidet über die Maßnahme --- Kapitel~5.\\
+\textbf{Die Entwürfe} & Vickrey-Auktionen, Gale-Shapley, Tauschketten für Nierenspenden sind im Einsatz und funktionieren.\\
+\textbf{Die Grenzen} & Arrow und Gibbard sagen, wonach man nicht suchen muss.\\
+\textbf{Die Erklärungen} & Warum Ritualkämpfe, warum Impfquoten stehenbleiben, warum adaptive Therapie wirkt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist die schwerwiegendste: \textbf{Die Verfahren aus Teil~V sind keine Modelle, sondern Konstruktionen} --- sie machen keine Aussage über die Wirklichkeit, sondern schaffen eine. Für sie gilt die zweite Warnung nicht in derselben Schärfe, weil sie nicht vorhersagen, sondern Regeln setzen, deren Eigenschaften bewiesen sind.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Sechs Sätze, die bleiben}
+
+\begin{merksatz}
+\boxtitel{Die Bilanz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{0.7cm}P{7.7cm}@{}}
+\toprule
+$1$ & Jedes endliche Nullsummenspiel hat einen Wert, den beide sich gegenseitig garantieren können --- sobald man würfeln darf.\\
+$2$ & Der Minimax-Satz und der Dualitätssatz der linearen Optimierung sind dieselbe Aussage.\\
+$3$ & Jedes endliche Spiel hat ein Gleichgewicht --- und es kann für alle schlechter sein als eine erreichbare Lage.\\
+$4$ & Bei unbekanntem Ende trägt Zusammenarbeit bereits bei zwei erwarteten Runden; bei bekanntem Ende nie.\\
+$5$ & Es gibt kein Abstimmungsverfahren für drei oder mehr Möglichkeiten, das vier naheliegende Forderungen erfüllt.\\
+$6$ & In der Zweitpreisauktion ist Wahrheit dominant --- man braucht nichts über die anderen zu wissen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Schlusswort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Dieser Band begann mit der Feststellung, dass ein Optimum aufhört zu existieren, sobald jemand anderes mitrechnet, und dass an seine Stelle ein Gleichgewicht tritt.
+
+Fünfzehn Kapitel später lässt sich sagen, was dieser Tausch eingebracht und was er gekostet hat. Eingebracht hat er eine Sprache, in der sich Lagen beschreiben lassen, die vorher nur erzählt werden konnten --- das Wettrüsten zweier Kliniken, das Zögern vor einer gemeinsamen Investition, das Ausscheren bei der Verschreibung. Und er hat Verfahren hervorgebracht, die tatsächlich arbeiten: in Auktionen, bei der Vergabe von Stellen, bei der Verteilung von Organen.
+
+Gekostet hat er die Eindeutigkeit. Ein Gleichgewicht ist selten allein, oft nicht das beste und manchmal nicht erreichbar. Die Theorie sagt, wo man bliebe, nicht wohin man ginge, und sie sagt es für Spieler, die es niemals gibt.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der eigentliche Ertrag liegt darum nicht in der Lösung, sondern in der Einordnung. \textbf{Zu erkennen, ob man vor einem Anreizproblem, einem Vertrauensproblem oder einem Entschlossenheitsproblem steht, ist die Entscheidung, an der alles Weitere hängt} --- und sie lässt sich an vier Zahlen ablesen. Wer das kann, hat vom Fach genug, um es zu benutzen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit steht dieser Band neben den vorangegangenen. Die Statistik sagt, was die Daten hergeben. Die Biomathematik sagt, woran es liegt. Die Optimierung sagt, was es kostet. Die Informationstheorie sagt, was übertragbar ist. \textbf{Und die Spieltheorie sagt, was davon übrig bleibt, wenn der andere es auch weiß.}}
+\end{minipage}
+\end{center}
+\end{merksatz}

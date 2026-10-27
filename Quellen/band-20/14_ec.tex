@@ -1,0 +1,575 @@
+\chapter{Elliptische Kurven und Signaturen}
+
+\section{Warum eine andere Gruppe}
+
+\begin{merksatz}
+\boxtitel{Was die Kapitel 12 und 13 gemeinsam haben}
+Beide Verfahren benutzen die Multiplikation modulo einer Zahl --- und beide leiden unter derselben Schwäche.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Die Ursache} & Die Indexrechnung und das Zahlkörpersieb beruhen darauf, dass sich Zahlen in Primfaktoren zerlegen lassen.\\
+\textbf{Die Folge} & Der Aufwand wächst nur unterexponentiell --- $3072$ Bit für $128$ Bit Sicherheit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gesucht ist eine Gruppe, in der es keine Primfaktorzerlegung gibt --- und in der die Wurzelschranke das Beste bleibt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Verfahren aus Kapitel~12 brauchen nämlich gar keine Zahlen. Sie brauchen nur eine Menge mit einer Verknüpfung, in der sich leicht potenzieren und schwer logarithmieren lässt. \textbf{Der Schlüsseltausch ist eine Aussage über Gruppen, nicht über Zahlen} --- und das eröffnet die Wahl.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Kurve}
+
+\begin{definition}
+\boxtitelm{Definition 14.1}
+Eine \Begriff{elliptische Kurve} über einem Körper ist die Menge der Punkte $(x,y)$ mit
+\[ y^{2} = x^{3} + a\,x + b \]
+zuzüglich eines \Begriff{Fernpunkts} $\mathcal{O}$, wobei $4a^{3}+27b^{2} \ne 0$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Verknüpfung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man legt eine Gerade durch zwei Punkte. Sie schneidet die Kurve in einem dritten. Dessen Spiegelung an der $x$-Achse ist die Summe.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.6pt] (-2.4,0) -- (3.4,0);
+\draw[grau!60, line width=0.6pt] (0,-2.2) -- (0,2.2);
+\draw[tief, line width=1.3pt, smooth, samples=60, domain=0.02:2.05]
+  plot ({\x*\x-1.5}, {\x*(\x*\x-1.5)*0.62+1.1*\x*0.001});
+\draw[tief, line width=1.3pt, smooth, samples=60, domain=0.02:2.05]
+  plot ({\x*\x-1.5}, {-\x*(\x*\x-1.5)*0.62});
+\coordinate (P) at (-0.45,-0.55);
+\coordinate (Q) at (0.95,1.35);
+\coordinate (R) at (2.55,3.55);
+\fill[akzent] (P) circle (2.2pt); \fill[akzent] (0.95,1.35) circle (2.2pt);
+\draw[akzent, line width=0.9pt] (-1.0,-1.29) -- (2.3,3.19);
+\fill[mittel] (2.05,2.51) circle (2.2pt);
+\fill[gruen] (2.05,-2.51) circle (2.2pt);
+\draw[grau!70, line width=0.6pt, dashed] (2.05,2.51) -- (2.05,-2.51);
+\node[font=\scriptsize, color=akzent, anchor=east] at (-0.55,-0.55) {$P$};
+\node[font=\scriptsize, color=akzent, anchor=east] at (0.85,1.35) {$Q$};
+\node[font=\scriptsize, color=mittel, anchor=west] at (2.15,2.51) {$R$};
+\node[font=\scriptsize, color=gruen, anchor=west] at (2.15,-2.51) {$P{+}Q$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Warum die Spiegelung}
+Ohne sie wäre die Verknüpfung nicht assoziativ. Mit ihr gilt: Drei Punkte auf einer Geraden addieren sich zu $\mathcal{O}$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass die so erklärte Verknüpfung tatsächlich eine Gruppe liefert, ist ein Satz --- und die Assoziativität ist der unangenehme Teil des Beweises. Elementar geführt ist er eine lange Rechnung; mit den Mitteln der algebraischen Geometrie ist er kurz. \textbf{Wir nehmen die Gruppeneigenschaft hier als gegeben} und prüfen sie an Beispielen nach.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Formeln}
+Für $P=(x_1,y_1)$ und $Q=(x_2,y_2)$ mit $P \ne -Q$:
+\[ \lambda = \begin{cases} \dfrac{y_2-y_1}{x_2-x_1} & \text{für } P \ne Q\\[10pt] \dfrac{3x_1^{2}+a}{2y_1} & \text{für } P = Q\end{cases} \]
+\[ x_3 = \lambda^{2}-x_1-x_2, \qquad y_3 = \lambda\,(x_1-x_3)-y_1 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile für $\lambda$ ist die Ableitung der Kurve --- die Tangente. Sie ergibt sich durch implizites Differenzieren: $2y\,y' = 3x^2+a$. \textbf{Verdoppeln heißt, die Tangente zu legen}, und das ist die geometrische Entsprechung des Quadrierens aus Kapitel~12.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Über endlichen Körpern}
+
+\begin{merksatz}
+\boxtitel{Dasselbe modulo einer Primzahl}
+Die Formeln gelten unverändert, wenn man modulo $p$ rechnet. Die Division wird zur Multiplikation mit dem Inversen.
+
+\schritt{Ein vollständiges Beispiel}
+\[ E: \ y^{2} = x^{3}+2x+2 \quad\text{über}\quad \mathbb{F}_{17} \]
+
+\kursiv{Ist $G=(5,1)$ ein Punkt?}
+\[ 5^{3}+2\cdot5+2 = 125+10+2 = 137 = 8\cdot17+1 \ \to\ 1 \]
+\[ y^{2} = 1 \quad \checkmark \]
+
+\schritt{Verdoppeln}
+\[ \lambda = \frac{3\cdot25+2}{2\cdot1} = \frac{77}{2} \]
+\kursiv{Modulo 17:} $77 = 4\cdot17+9 \to 9$; $2^{-1} = 9$ wegen $2\cdot9 = 18 \equiv 1$.
+\[ \lambda = 9\cdot9 = 81 = 4\cdot17+13 \ \to\ 13 \]
+\[ x_3 = 13^{2}-5-5 = 169-10 = 159 = 9\cdot17+6 \ \to\ \mathbf{6} \]
+\[ y_3 = 13\,(5-6)-1 = -14 \equiv \mathbf{3} \pmod{17} \]
+
+\[ 2G = (6,3) \]
+
+\kursiv{Probe:} $6^{3}+12+2 = 230 = 13\cdot17+9 \to 9$, und $3^{2} = 9$ \checkmark
+
+\schritt{Die ganze Gruppe}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{1.0cm}P{1.6cm}P{1.0cm}P{1.6cm}P{1.0cm}P{1.6cm}@{}}
+\toprule
+$k$ & $kG$ & $k$ & $kG$ & $k$ & $kG$\\
+\midrule
+$1$ & $(5,1)$ & $8$ & $(13,7)$ & $15$ & $(3,16)$\\
+$2$ & $(6,3)$ & $9$ & $(7,6)$ & $16$ & $(10,11)$\\
+$3$ & $(10,6)$ & $10$ & $(7,11)$ & $17$ & $(6,14)$\\
+$4$ & $(3,1)$ & $11$ & $(13,10)$ & $18$ & $(5,16)$\\
+$5$ & $(9,16)$ & $12$ & $(0,11)$ & $19$ & $\mathcal{O}$\\
+$6$ & $(16,13)$ & $13$ & $(16,4)$ & & \\
+$7$ & $(0,6)$ & $14$ & $(9,1)$ & & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Gruppe hat $19$ Elemente, und $G$ erzeugt sie alle.} $G$ ist also ein erzeugendes Element wie die Primitivwurzel in Kapitel~12.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert ist die Symmetrie: $18G = (5,16)$ und $G = (5,1)$ --- und $1+16 = 17 \equiv 0$. Die Punkte $kG$ und $(19-k)G$ sind Spiegelbilder an der $x$-Achse, also entgegengesetzt. \textbf{Die Tabelle liest sich von beiden Enden.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das Logarithmusproblem hier}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gegeben $G$ und $Q = kG$, bestimme $k$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Restklassen} & \textbf{elliptisch}\\
+\midrule
+Durchprobieren & $n$ & $n$\\
+Pollards Rho & $\sqrt n$ & $\sqrt n$\\
+Indexrechnung & \textcolor{akzent}{$L_n[1/3]$} & \textcolor{gruen}{nicht bekannt}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die dritte Zeile ist der ganze Vorteil.} Bei elliptischen Kurven ist die Wurzelschranke nach heutigem Wissen das Beste --- also $2^{n/2}$ bei $n$ Bit.
+\end{minipage}
+\end{center}
+
+\schritt{Die Folge für die Schlüssellängen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+\textbf{Sicherheit} & \textbf{RSA/DH} & \textbf{elliptisch} & \textbf{Faktor}\\
+\midrule
+$112$ Bit & $2048$ & $224$ & $9{,}1$\\
+$128$ Bit & $3072$ & $256$ & $12{,}0$\\
+$192$ Bit & $7680$ & $384$ & $20{,}0$\\
+$256$ Bit & $15\,360$ & $512$ & $30{,}0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Grund für das Fehlen der Indexrechnung ist begrifflich: Sie sucht Elemente, die sich in kleine Faktoren zerlegen lassen. Auf einer elliptischen Kurve gibt es keinen Begriff von \enquote{klein} --- die Punkte tragen keine Größenordnung. \textbf{Ein Verfahren scheitert nicht an einer Schwierigkeit, sondern daran, dass sein zentraler Begriff fehlt.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Signaturen}
+
+\begin{merksatz}
+\boxtitel{Das Verfahren}
+Öffentlich: die Kurve, $G$ und die Ordnung $n$. Der Unterzeichner hat $d$ geheim und $Q = dG$ öffentlich.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.0cm}P{6.6cm}@{}}
+\toprule
+\textbf{Signieren} & Wähle $k$ zufällig; setze $R = kG$ und $r = x_R \bmod n$.\\
+& $s = k^{-1}\bigl(H(m)+r\,d\bigr) \bmod n$\\
+& Die Signatur ist $(r,s)$.\\
+\midrule
+\textbf{Prüfen} & $u_1 = H(m)\,s^{-1}$, $u_2 = r\,s^{-1}$\\
+& Prüfe $x\bigl(u_1G+u_2Q\bigr) \equiv r$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum die Prüfung aufgeht}
+\begin{align*}
+u_1 G + u_2 Q &= H(m)s^{-1}G + r s^{-1} d G\\
+&= s^{-1}\bigl(H(m)+rd\bigr)\,G\\
+&= s^{-1}\cdot s\,k\,G && \text{(Definition von } s)\\
+&= k\,G = R
+\end{align*}
+Also stimmt die $x$-Koordinate mit $r$ überein. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Prüfer rechnet $R$ aus, ohne $k$ zu kennen --- er setzt es aus zwei bekannten Punkten zusammen. \textbf{Das ist der Kunstgriff des Verfahrens}, und er funktioniert, weil die Gruppenoperation kommutiert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der Zufallswert darf sich nie wiederholen}
+Werden zwei Nachrichten mit demselben $k$ signiert, so gilt
+\[ s_1 = k^{-1}(h_1+rd), \qquad s_2 = k^{-1}(h_2+rd) \]
+
+\schritt{Die Auflösung}
+\[ s_1-s_2 = k^{-1}(h_1-h_2) \quad\Longrightarrow\quad k = \frac{h_1-h_2}{s_1-s_2} \]
+
+Und daraus:
+\[ d = \frac{s_1 k - h_1}{r} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Signaturen mit demselben Zufallswert geben den geheimen Schlüssel vollständig preis.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man beachte, dass $r$ in beiden Fällen gleich ist --- das verrät die Wiederholung sogar öffentlich. \textbf{Der Angreifer braucht nur zwei Signaturen mit gleichem $r$ zu suchen}, und dann zwei Divisionen. Das ist derselbe Fehler wie beim Einmalschlüssel in Kapitel~9 und beim Zähler in Kapitel~10 --- zum dritten Mal in diesem Band, in neuer Gestalt.}
+\end{minipage}
+\end{center}
+
+\schritt{Was tatsächlich geschah}
+2010 wurde der Signaturschlüssel einer verbreiteten Spielkonsole veröffentlicht. Der Hersteller hatte einen festen Wert statt eines zufälligen verwendet.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es war kein Fehler in der Mathematik, kein zu kurzer Schlüssel und keine Schwäche der Kurve --- eine Zeile Programmcode. Die Folge war, dass beliebige Software als vom Hersteller signiert ausgegeben werden konnte. \textbf{Der geheime Schlüssel ließ sich aus zwei öffentlich verfügbaren Signaturen berechnen.}}
+\end{minipage}
+\end{center}
+
+\schritt{Die Abhilfe}
+Man leitet $k$ aus dem geheimen Schlüssel und der Nachricht ab, statt es zu würfeln:
+\[ k = \mathrm{HMAC}_{d}(H(m)) \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist $k$ für jede Nachricht verschieden und für den Angreifer unvorhersehbar --- und das Verfahren kommt ohne Zufallsgenerator aus. \textbf{Man ersetzt eine Anforderung an die Umgebung durch eine Rechnung}, und das ist fast immer der sicherere Weg.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Kurve muss stimmen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Schwache Kurven} & Bei bestimmten Kurven lässt sich das Problem auf ein leichteres zurückführen und in polynomialer Zeit lösen.\\
+\textbf{Kleine Ordnung} & Hat die Gruppe kleine Faktoren, so zerfällt das Problem in Teilprobleme.\\
+\textbf{Punkte prüfen} & Liegt ein empfangener Punkt gar nicht auf der Kurve, so kann die Rechnung den Schlüssel verraten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Die Additionsformeln benutzen den Parameter $b$ nicht.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Angreifer kann daher einen Punkt einer \kursiv{anderen} Kurve senden, deren Gruppe kleine Ordnung hat --- und aus der Antwort den Schlüssel modulo dieser Ordnung erschließen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach genügend vielen solchen Anfragen setzt man den Schlüssel über den chinesischen Restsatz zusammen. Die Abhilfe ist eine Zeile: \textbf{Jeden empfangenen Punkt darauf prüfen, ob er die Kurvengleichung erfüllt.} Dass diese Zeile fehlte, hat wiederholt zu Angriffen geführt.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Vertrauensfrage}
+Die gebräuchlichen Kurven wurden von Normungsgremien festgelegt, teils mit Parametern unklarer Herkunft.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach den Enthüllungen von 2013 über einen manipulierten Zufallsgenerator wuchs das Misstrauen. Die Antwort waren Kurven mit \Begriff{nachvollziehbar zufälligen} Parametern --- jede Konstante wird aus einer öffentlichen Rechenvorschrift abgeleitet, so dass kein Spielraum für eine versteckte Hintertür bleibt. \textbf{Man ersetzt Vertrauen durch Nachprüfbarkeit}, und das ist dieselbe Denkweise wie beim offenen Wettbewerb aus Kapitel~10.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- Punkte addieren}
+Auf $E: y^{2} = x^{3}+2x+2$ über $\mathbb{F}_{17}$ mit $P = (5,1)$ und $Q = (6,3)$: Bestimmen Sie $P+Q$.
+
+\loesung
+\schritt{Schritt 1 --- Die Steigung}
+\[ \lambda = \frac{3-1}{6-5} = \frac{2}{1} = 2 \]
+
+\schritt{Schritt 2 --- Die neue $x$-Koordinate}
+\[ x_3 = \lambda^{2}-x_1-x_2 = 4-5-6 = -7 \equiv 10 \pmod{17} \]
+
+\schritt{Schritt 3 --- Die neue $y$-Koordinate}
+\[ y_3 = \lambda\,(x_1-x_3)-y_1 = 2\,(5-10)-1 = -11 \equiv 6 \pmod{17} \]
+
+\[ P+Q = (10,\ 6) \]
+
+\schritt{Schritt 4 --- Die Probe}
+\kursiv{Liegt der Punkt auf der Kurve?}
+\[ 10^{3}+2\cdot10+2 = 1000+22 = 1022 \]
+\[ 1022 = 60\cdot17+2 \ \to\ 2 \]
+\[ 6^{2} = 36 = 2\cdot17+2 \ \to\ 2 \quad \checkmark \]
+
+\schritt{Schritt 5 --- Die zweite Probe}
+Nach der Tabelle in Abschnitt 14.3 ist $P = G$, $Q = 2G$ und $3G = (10,6)$.
+\[ G + 2G = 3G \quad \checkmark \]
+
+\schritt{Schritt 6 --- Ein Sonderfall}
+Was ist $P + (5,16)$?
+
+Wegen $1+16 = 17 \equiv 0$ sind die beiden Punkte entgegengesetzt:
+\[ (5,1) + (5,16) = \mathcal{O} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Formel versagt hier --- der Nenner $x_2-x_1$ wäre null. \textbf{Das ist kein Mangel, sondern der Fernpunkt}: Die Gerade durch zwei senkrecht übereinanderliegende Punkte ist senkrecht und schneidet die Kurve kein drittes Mal im Endlichen. Jede Umsetzung muss diesen Fall gesondert behandeln, und das ist eine bekannte Fehlerquelle.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- Schlüsseltausch auf der Kurve}
+Alice wählt $a = 3$, Bob $b = 10$. Führen Sie den Tausch mit derselben Kurve durch.
+
+\loesung
+\schritt{Schritt 1 --- Die öffentlichen Punkte}
+Aus der Tabelle:
+\[ A = 3G = (10,6), \qquad B = 10G = (7,11) \]
+
+\schritt{Schritt 2 --- Alice rechnet}
+\[ 10\cdot A = 10\cdot(3G) = 30\,G \]
+
+Wegen $\mathcal{O} = 19G$ gilt $30G = 11G$:
+\[ 30 = 19+11 \quad\Longrightarrow\quad 30G = 11G = (13,10) \]
+
+\schritt{Schritt 3 --- Bob rechnet}
+\[ 3\cdot B = 3\cdot(10G) = 30\,G = (13,10) \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide erhalten $(13,10)$.} Der gemeinsame Schlüssel wird üblicherweise aus der $x$-Koordinate abgeleitet.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Was der Mitleser sieht}
+Er kennt die Kurve, $G$, $A = (10,6)$ und $B = (7,11)$.
+
+Um $a$ zu finden, müsste er die Tabelle durchgehen --- bei $19$ Punkten in Sekunden.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Praktisch verwendete Kurven haben Gruppenordnungen um $2^{256}$. \textbf{Auch hier gilt: Das Beispiel zeigt die Rechnung, nicht die Sicherheit.}}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Vergleich mit Kapitel 12}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Kapitel 12} & \textbf{hier}\\
+\midrule
+Menge & Reste mod $p$ & Kurvenpunkte\\
+Verknüpfung & Multiplikation & Punktaddition\\
+Potenzieren & $g^{a}$ & $aG$\\
+Schwer & Logarithmus & Logarithmus\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Verfahren sind identisch; nur die Gruppe ist ausgetauscht. \textbf{Das ist der Ertrag der abstrakten Formulierung}: Wer Diffie-Hellman für Gruppen versteht, versteht es für jede Gruppe --- und kann die beste wählen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Den Schlüssel aus zwei Signaturen}
+Ein Unterzeichner hat mit demselben $k$ zwei Nachrichten signiert. Bekannt sind $n$, $r$, $s_1$, $s_2$, $h_1$, $h_2$. Bestimmen Sie den geheimen Schlüssel.
+
+\loesung
+\schritt{Schritt 1 --- Die beiden Gleichungen}
+\[ s_1 = k^{-1}(h_1+r\,d), \qquad s_2 = k^{-1}(h_2+r\,d) \]
+
+\schritt{Schritt 2 --- Subtrahieren}
+\[ s_1-s_2 = k^{-1}\bigl[(h_1+rd)-(h_2+rd)\bigr] = k^{-1}(h_1-h_2) \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Term mit $d$ fällt heraus.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- $k$ bestimmen}
+\[ k = \frac{h_1-h_2}{s_1-s_2} \bmod n \]
+
+\schritt{Schritt 4 --- $d$ bestimmen}
+Aus $s_1 k = h_1 + r d$:
+\[ d = \frac{s_1 k - h_1}{r} \bmod n \]
+
+\schritt{Schritt 5 --- Ein Zahlenbeispiel}
+Mit $n = 19$, $r = 13$, $h_1 = 5$, $h_2 = 9$, $s_1 = 7$, $s_2 = 3$:
+\[ k = \frac{5-9}{7-3} = \frac{-4}{4} = -1 \equiv 18 \pmod{19} \]
+
+\[ d = \frac{7\cdot18-5}{13} = \frac{126-5}{13} = \frac{121}{13} \bmod 19 \]
+
+\kursiv{Zähler:} $121 = 6\cdot19+7 \to 7$.\\
+\kursiv{Inverses von $13$:} $13\cdot3 = 39 = 2\cdot19+1$, also $13^{-1} = 3$.
+\[ d = 7\cdot3 = 21 \equiv \mathbf{2} \pmod{19} \]
+
+\schritt{Schritt 6 --- Die Probe}
+\[ s_1 = k^{-1}(h_1+rd) = 18^{-1}\,(5+13\cdot2) = 18^{-1}\cdot31 \]
+\kursiv{$31 \equiv 12$; $18 \equiv -1$, also $18^{-1} = 18$.}
+\[ s_1 = 18\cdot12 = 216 = 11\cdot19+7 \ \to\ \mathbf{7} \quad \checkmark \]
+
+\schritt{Schritt 7 --- Der Aufwand}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Subtraktionen, zwei Divisionen.} Der Angreifer braucht keine Rechenkraft, nur zwei Signaturen mit gleichem $r$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und $r$ steht offen in der Signatur --- er muss also nur nach Wiederholungen suchen. Bei einem festen $k$ ist $r$ in \kursiv{allen} Signaturen gleich, und der Angriff gelingt beim ersten Paar. \textbf{Ein Verfahren, dessen Sicherheit an einem einzigen Zufallswert hängt, bricht vollständig, wenn dieser Wert versagt} --- und das unterscheidet die Signatur von der Verschlüsselung, wo eine Wiederholung nur die betroffenen Nachrichten gefährdet.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 8 --- Sogar Teilinformation genügt}
+Kennt der Angreifer auch nur wenige Bit von $k$ --- etwa weil der Zufallsgenerator leicht verzerrt ist --- so lässt sich $d$ aus vielen Signaturen mit Gitterverfahren gewinnen.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Einige hundert Signaturen mit je vier bekannten Bit genügen. Das ist praktisch bedeutsam, weil Seitenkanäle aus Kapitel~10 genau solche Teilinformation liefern. \textbf{Ein fast perfekter Zufallsgenerator ist hier nicht fast sicher, sondern unsicher.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Zwei Vorschläge im selben Jahr}
+\Person{Neal Koblitz} an der Universität Washington und \Person{Victor Miller} bei IBM schlugen 1985 unabhängig voneinander vor, elliptische Kurven für die Kryptographie zu verwenden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Beide kannten die Kurven aus der Zahlentheorie, wo sie seit dem 19.\ Jahrhundert untersucht werden --- unter anderem im Zusammenhang mit der Fermatschen Vermutung, deren Beweis 1995 wesentlich auf ihnen beruht. \textbf{Ein Gegenstand reiner Grundlagenforschung wurde zur Grundlage der digitalen Sicherheit}, und zwar ohne dass jemand es geplant hätte.}
+\end{minipage}
+\end{center}
+
+\schritt{Die lange Anlaufzeit}
+Die Verfahren brauchten fünfzehn Jahre bis zur breiten Anwendung.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Gründe waren Patentfragen, die höhere Komplexität der Umsetzung und ein grundsätzliches Misstrauen: Die zugrundeliegende Mathematik galt als schwerer überprüfbar. Erst als die Schlüssellängen für RSA unbequem wurden --- insbesondere bei Mobilgeräten --- setzte sich der Wechsel durch.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Kurve mit dem Zweifel}
+2013 wurde bekannt, dass ein genormter Zufallsgenerator auf elliptischen Kurven vermutlich eine Hintertür enthielt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Verdacht bestand seit 2007 --- zwei Forscher hatten gezeigt, dass die Kenntnis eines bestimmten Zusammenhangs zwischen zwei Konstanten die Vorhersage aller Ausgaben erlaubt. Die Konstanten waren ohne Begründung festgelegt worden. \textbf{Der Generator wurde 2014 zurückgezogen}; die Kurven selbst waren nie betroffen, aber das Vertrauen war beschädigt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Antwort}
+\Person{Daniel Bernstein} und andere entwarfen ab 2005 Kurven, deren Parameter sich vollständig aus nachvollziehbaren Regeln ergeben.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Jede Konstante wird begründet --- etwa als kleinste Zahl mit einer bestimmten Eigenschaft. Zusätzlich wurden die Formeln so gewählt, dass Sonderfälle wie in Aufgabe 14.1 nicht auftreten und die Rechnung stets gleich lange dauert. \textbf{Der Entwurf schließt die Fehler aus, statt vor ihnen zu warnen} --- und das ist die eigentliche Lehre der letzten beiden Kapitel.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Elliptische Kurven heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Verbreitung} & Bei neuen Anwendungen der Regelfall; in Mobilfunk, Messengern und Kartenzahlung.\\
+\textbf{Paarungen} & Besondere Kurven erlauben eine Verknüpfung zweier Punkte zu einem Körperelement --- Grundlage für Verfahren, die anders nicht möglich wären.\\
+\textbf{Isogenien} & Abbildungen zwischen Kurven; galten als quantensicherer Kandidat.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Eine Paarung ist eine Abbildung mit
+\[ e(aP,\,bQ) = e(P,Q)^{ab} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit lassen sich Dinge bauen, die sonst unerreichbar sind: Schlüsseltausch zu dritt in einer Runde, Verschlüsselung an eine Kennung statt an einen Schlüssel, und kurze Beweise für umfangreiche Behauptungen. \textbf{Die Paarung war zunächst als Angriffswerkzeug entdeckt worden} --- sie führt das Problem auf eines in einem Körper zurück und schwächt bestimmte Kurven. Erst später erkannte man sie als Baustein.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Ein auf Isogenien beruhendes Verfahren galt lange als aussichtsreicher Kandidat für die Zeit nach dem Quantenrechner.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{2022 wurde es gebrochen --- klassisch, auf einem einzelnen Rechner, binnen Stunden. Der Angriff beruhte auf einem Satz von 1997, den niemand in diesem Zusammenhang gesehen hatte. \textbf{Ein Verfahren, das fünf Jahre lang geprüft worden war, fiel an einem Nachmittag}, und das ist die beste Mahnung zur Vorsicht bei neuen Annahmen. Kapitel~15 behandelt die verbliebenen Kandidaten.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 14.1} & Kurve, Fernpunkt, Gruppengesetz\\
+\textbf{Die Formeln} & Sehne und Tangente, modular gerechnet\\
+\textbf{Der Vorteil} & keine Indexrechnung, Faktor $12$\\
+\textbf{Signaturen} & der Prüfer setzt $R$ zusammen\\
+\textbf{Der Bruchfall} & $k$ zweimal heißt Schlüssel verloren\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~V. Alle Verfahren dieses Teils --- Diffie-Hellman, RSA, elliptische Kurven --- fallen durch dasselbe Quantenverfahren. Das letzte Kapitel fragt, was danach kommt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

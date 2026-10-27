@@ -1,0 +1,682 @@
+\chapter{Verhandlung und Koalitionen}
+
+\section{Wenn Absprachen erlaubt sind}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall: eine Budgetverhandlung}
+Klinikum und Marienhospital teilen einen gemeinsam erwirtschafteten Betrag von $100$ Einheiten. Kommt keine Einigung zustande, so erhält das Klinikum $20$ und das Marienhospital $30$ aus Einzelverträgen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{3.0cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Wert} & \\
+\midrule
+Gesamtbetrag & $100$ & \\
+Konfliktpunkt & $(20,\ 30)$ & ohne Einigung\\
+Überschuss & $50$ & zu verteilen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Frage ist neu:} Nicht, was geschieht, sondern was eine \kursiv{angemessene} Aufteilung wäre.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bisher beschrieb dieser Band, wo eigennützige Spieler landen. \textbf{Die kooperative Spieltheorie fragt anders}: Man gibt Forderungen an eine Lösung vor und prüft, welche sie erfüllt. Von Neumanns Einwand gegen Nashs Zugang --- Kapitel~4 --- zielte genau auf diesen Unterschied, und beide Zweige bestehen seitdem nebeneinander.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Verhandlungslösung}
+
+\begin{merksatz}
+\boxtitel{Die vier Forderungen}
+Gegeben sei eine Menge $S$ erreichbarer Nutzenpaare und ein Konfliktpunkt $\vek d$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Pareto} & Es gibt keinen Punkt in $S$, der beiden mehr bietet.\\
+\textbf{Symmetrie} & Sind die Lage und die Ausgangspunkte für beide gleich, so ist es das Ergebnis auch.\\
+\textbf{Skaleninvarianz} & Rechnet man einen Nutzen affin um, so rechnet sich das Ergebnis mit um --- Satz 4.1.\\
+\textbf{Unabhängigkeit} & Entfernt man aus $S$ Punkte, die nicht gewählt wurden, so ändert sich das Ergebnis nicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 14.1 --- Nash, 1950}
+Es gibt genau eine Lösung, die alle vier Forderungen erfüllt:
+\[ \vek u^{*} = \operatorname*{arg\,max}_{\vek u \in S,\ \vek u \ge \vek d} \ (u_1-d_1)\,(u_2-d_2) . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man maximiert das Produkt der Zugewinne} --- nicht deren Summe.
+\end{minipage}
+\end{center}
+
+\schritt{Der Leitfall}
+Mit $u_1+u_2 = 100$ und $\vek d = (20,30)$:
+\[ f(u_1) = (u_1-20)\,\bigl(100-u_1-30\bigr) = (u_1-20)(70-u_1) \]
+\[ f'(u_1) = (70-u_1) - (u_1-20) = 90-2u_1 = 0 \quad\Longrightarrow\quad u_1 = 45 \]
+
+\[ \vek u^{*} = (45,\ 55), \qquad \text{Produkt } 25\cdot25 = 625 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Überschuss von $50$ wird hälftig geteilt} --- jeder erhält seinen Konfliktwert plus $25$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei linearer Grenze läuft die Lösung stets darauf hinaus. \textbf{Die Ungleichheit des Ergebnisses ($45$ gegen $55$) stammt vollständig aus den Konfliktpunkten}, nicht aus der Verhandlung. Wer seine Ausgangslage verbessert, verbessert das Ergebnis eins zu eins --- und das ist der Grund, warum in Verhandlungen so viel Aufwand darauf verwendet wird, die eigene Rückfallmöglichkeit darzustellen.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum das Produkt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Summe der Zugewinne wäre nicht skaleninvariant: Rechnet man den Nutzen des einen in andere Einheiten um, so verschöbe sich das Maximum. \textbf{Das Produkt ist invariant}, weil ein Faktor $\alpha$ es nur mit $\alpha$ multipliziert und die Stelle des Maximums unverändert lässt. Die dritte Forderung erzwingt also die Gestalt der Lösung fast allein.}
+\end{minipage}
+\end{center}
+
+\schritt{Die strittige Forderung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es ist wieder die Unabhängigkeit --- wie bei Arrow in Kapitel~12. \textbf{Gibt man sie auf und verlangt stattdessen, dass beide denselben Anteil ihres jeweils Erreichbaren bekommen}, so erhält man die Lösung von Kalai und Smorodinsky (1975), die anders ausfällt. Es gibt keinen zwingenden Grund für die eine oder die andere Forderung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Verhandeln als Spielbaum}
+
+\begin{merksatz}
+\boxtitel{Das Modell von Rubinstein}
+Beide machen abwechselnd Angebote. Jede Ablehnung kostet eine Runde; der Wert schrumpft mit $\delta_1$ bzw.\ $\delta_2$ je Runde.
+
+\schritt{Satz 14.2 --- Rubinstein, 1982}
+Es gibt genau ein teilspielperfektes Gleichgewicht. Wer das erste Angebot macht, erhält
+\[ x^{*} = \frac{1-\delta_2}{1-\delta_1\delta_2} . \]
+
+\schritt{Herleitung}
+Sei $x$ der Anteil, den Spieler 1 als Anbieter behält, und $y$ der, den Spieler 2 als Anbieter behält.
+
+\kursiv{Spieler 1 muss Spieler 2 gerade so viel bieten, dass dieser nicht ablehnt.} Lehnt Spieler 2 ab, so erhält er in der nächsten Runde als Anbieter den Wert $\delta_2\,y$:
+\[ 1 - x = \delta_2\,y \]
+
+\kursiv{Ebenso umgekehrt:}
+\[ 1 - y = \delta_1\,x \]
+
+\kursiv{Einsetzen:}
+\[ x = 1 - \delta_2\,(1-\delta_1 x) = 1-\delta_2+\delta_1\delta_2\,x \]
+\[ x\,(1-\delta_1\delta_2) = 1-\delta_2 \quad\Longrightarrow\quad x = \frac{1-\delta_2}{1-\delta_1\delta_2} \]
+$\blacksquare$
+
+\schritt{Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+$\delta_1$ & $\delta_2$ & \textbf{Anbieter} & \\
+\midrule
+$0{,}90$ & $0{,}90$ & $0{,}526$ & Erstzieher-Vorteil\\
+$0{,}99$ & $0{,}99$ & $0{,}503$ & fast hälftig\\
+$0{,}50$ & $0{,}50$ & $0{,}667$ & große Ungeduld\\
+$0{,}90$ & $0{,}80$ & $\mathbf{0{,}714}$ & \textcolor{gruen}{geduldiger}\\
+$0{,}80$ & $0{,}90$ & $0{,}357$ & \textcolor{akzent}{ungeduldiger}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Geduld ist wertvoller als der erste Zug.} Bei $\delta_1 = 0{,}8$ gegen $\delta_2 = 0{,}9$ verliert der Anbieter trotz des Vortritts.
+\end{minipage}
+\end{center}
+
+\schritt{Der Zusammenhang mit Satz 14.1}
+Für $\delta_1 = \delta_2 = \delta \to 1$ strebt $x^{*} \to \tfrac12$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Allgemeiner gilt: \textbf{Im Grenzfall verschwindender Ungeduld liefert das Rubinstein-Modell genau die Nash-Verhandlungslösung} --- mit den Abzinsungsfaktoren als Gewichten. Das ist bemerkenswert, weil beide Zugänge nichts miteinander zu tun haben: Der eine gibt Forderungen vor, der andere rechnet ein Gleichgewicht aus. Man nennt so etwas eine \Begriff{nichtkooperative Begründung} einer kooperativen Lösung.}
+\end{minipage}
+\end{center}
+
+\schritt{Und ein Vorbehalt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Gleichgewicht sagt vorher, dass das \kursiv{erste} Angebot angenommen wird --- es gibt keine Verhandlungsrunden. \textbf{Die beobachtete Wirklichkeit sieht anders aus}, und der Grund ist meist, dass die Beteiligten die Ungeduld des anderen nicht kennen. Modelle mit unvollständiger Information erzeugen Verzögerung und sind erheblich schwerer zu behandeln.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Mehr als zwei}
+
+\begin{definition}
+\boxtitelm{Definition 14.3 --- Koalitionsspiel}
+Eine \Begriff{charakteristische Funktion} ordnet jeder Teilmenge $S$ der Spieler den Wert $v(S)$ zu, den sie gemeinsam erreichen kann.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall mit drei Abteilungen}
+Drei Abteilungen können ein Großgerät gemeinsam betreiben.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{1.6cm}P{2.2cm}P{1.6cm}@{}}
+\toprule
+\textbf{Gruppe} & $v$ & \textbf{Gruppe} & $v$\\
+\midrule
+$\{1\}$ & $0$ & $\{1,2\}$ & $90$\\
+$\{2\}$ & $0$ & $\{1,3\}$ & $80$\\
+$\{3\}$ & $0$ & $\{2,3\}$ & $70$\\
+& & $\{1,2,3\}$ & $120$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Allein erreicht niemand etwas. Je zwei erreichen viel. Alle drei erreichen am meisten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 14.4 --- der Kern}
+Eine Aufteilung $\vek x$ liegt im \Begriff{Kern}, wenn
+\[ \sum_i x_i = v(N) \qquad\text{und}\qquad \sum_{i\in S} x_i \ \ge\ v(S) \ \text{ für alle } S . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Kern im Leitfall}
+\schritt{Die Bedingungen}
+\[ x_1+x_2 \ge 90, \qquad x_1+x_3 \ge 80, \qquad x_2+x_3 \ge 70, \qquad \textstyle\sum x_i = 120 \]
+
+\schritt{Die entscheidende Beobachtung}
+Addiert man die drei Ungleichungen:
+\[ 2\,(x_1+x_2+x_3) \ \ge\ 90+80+70 = 240 \]
+\[ 2\cdot120 = 240 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gleichheit --- also muss jede einzelne Ungleichung mit Gleichheit gelten.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Auflösung}
+\[ x_3 = 120-90 = 30, \qquad x_2 = 120-80 = 40, \qquad x_1 = 120-70 = 50 \]
+
+\[ \text{Kern} = \{(50,\ 40,\ 30)\} \]
+
+\kursiv{Probe:} $50+40 = 90$ \checkmark, $50+30 = 80$ \checkmark, $40+30 = 70$ \checkmark, Summe $120$ \checkmark
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der Kern kann leer sein}
+Ändert man nur $v(\{1,2,3\})$ auf $80$ und setzt alle Paare auf $60$:
+\[ 2\cdot80 = 160 \ <\ 180 = 60+60+60 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Bedingungen sind unerfüllbar --- der Kern ist leer.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In Worten: Je zwei Abteilungen können zusammen $60$ erwirtschaften, alle drei nur $80$. \textbf{Aus jeder Aufteilung kann sich ein Paar mit Gewinn absondern}, und das gilt für jede denkbare Aufteilung. Eine dauerhafte Einigung gibt es nicht; die Koalitionen wechseln fortwährend --- es ist das Gegenstück zum Condorcet-Zyklus aus Kapitel~12.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Shapley-Wert}
+
+\begin{merksatz}
+\boxtitel{Ein Wert, den es immer gibt}
+Man stellt sich vor, die Spieler träten in zufälliger Reihenfolge hinzu. Jeder erhält, was er beim Hinzutreten beisteuert.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\[ \varphi_i = \frac{1}{n!}\sum_{\text{Reihenfolgen}} \bigl[v(\text{Vorgänger}+i) - v(\text{Vorgänger})\bigr] \]
+\end{minipage}
+\end{center}
+
+\schritt{Satz 14.5 --- Shapley, 1953}
+$\varphi$ ist die einzige Zuteilung mit den Eigenschaften:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Vollständig} & $\sum_i \varphi_i = v(N)$\\
+\textbf{Symmetrie} & Wer denselben Beitrag leistet, erhält dasselbe.\\
+\textbf{Nulltypen} & Wer nirgends etwas beisteuert, erhält nichts.\\
+\textbf{Additiv} & Bei zwei zusammengelegten Spielen addieren sich die Werte.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Rechnung im Leitfall}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Reihen\-folge} & $1$ & $2$ & $3$\\
+\midrule
+$1,2,3$ & $0$ & $90$ & $30$\\
+$1,3,2$ & $0$ & $40$ & $80$\\
+$2,1,3$ & $90$ & $0$ & $30$\\
+$2,3,1$ & $50$ & $0$ & $70$\\
+$3,1,2$ & $80$ & $40$ & $0$\\
+$3,2,1$ & $50$ & $70$ & $0$\\
+\midrule
+\textbf{Summe} & $270$ & $240$ & $210$\\
+\textbf{geteilt} & $\mathbf{45}$ & $\mathbf{40}$ & $\mathbf{35}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur zweiten Zeile:} Bei der Reihenfolge $1,3,2$ steuert $3$ den Betrag $v(\{1,3\})-v(\{1\}) = 80$ bei und $2$ den Betrag $v(\{1,2,3\})-v(\{1,3\}) = 40$.
+
+\kursiv{Probe:} $45+40+35 = 120$ \checkmark
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der Shapley-Wert liegt nicht immer im Kern}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Bedingung} & \textbf{Shapley} & \\
+\midrule
+$x_1+x_2 \ge 90$ & $85$ & \textcolor{akzent}{verletzt}\\
+$x_1+x_3 \ge 80$ & $80$ & \checkmark\\
+$x_2+x_3 \ge 70$ & $75$ & \checkmark\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Abteilungen $1$ und $2$ stünden sich besser, wenn sie $3$ ausschlössen} --- $90$ statt $85$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die beiden Begriffe antworten auf verschiedene Fragen. \textbf{Der Kern fragt, was haltbar ist; der Shapley-Wert, was angemessen ist.} Beide sind wohlbegründet und fallen hier auseinander: $(50,40,30)$ gegen $(45,40,35)$. Wer den Shapley-Wert als Verteilungsschlüssel festschreibt, muss damit rechnen, dass Teilgruppen ausscheren wollen.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Trost}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für eine wichtige Klasse --- die \Begriff{konvexen} Spiele, bei denen der Beitrag eines Spielers mit der Größe der Gruppe wächst --- liegt der Shapley-Wert stets im Kern, und der Kern ist nie leer. \textbf{Viele Anwendungsfälle sind konvex}, etwa die Aufteilung von Fixkosten bei gemeinsamer Nutzung. Der Leitfall ist es nicht: Der Beitrag von $3$ zu $\{1,2\}$ beträgt $30$, zu $\{1\}$ aber $80$.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was die kooperative Theorie voraussetzt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Bindende Verträge} & Absprachen müssen durchsetzbar sein. Ohne das gilt Teil~II.\\
+\textbf{Übertragbarer Nutzen} & $v(S)$ als eine Zahl setzt voraus, dass sich Nutzen beliebig umverteilen lässt --- meist durch Geld.\\
+\textbf{Keine Außenwirkung} & $v(S)$ hängt nicht davon ab, was die Übrigen tun. Bei Wettbewerb ist das falsch.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Satz 4.1 besagt, dass Nutzen nicht zwischen Personen vergleichbar ist.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die charakteristische Funktion setzt genau das voraus --- sie gibt einer Gruppe \kursiv{einen} Wert, den sie aufteilen kann. \textbf{Das ist zulässig, wenn es ein Tauschmittel gibt}, dessen Nutzen für alle näherungsweise linear ist. Bei einer Budgetaufteilung ist das vertretbar, bei einer Verteilung von Diensten oder Organen nicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Schließen sich zwei Abteilungen zusammen, so verändert das häufig die Lage der dritten --- sie kann schlechter dastehen als zuvor. \textbf{Solche Spiele heißen Spiele in Partitionsfunktionsform}, und dort ist selbst der Kernbegriff mehrdeutig: Er hängt davon ab, was man der abgesonderten Gruppe über das Verhalten der Übrigen unterstellt. Das ist bis heute ungelöst.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- Die Ausgangslage verbessern}
+Das Klinikum kann seinen Konfliktwert durch einen Einzelvertrag von $20$ auf $40$ heben. Was bringt das, und was darf es kosten?
+
+\loesung
+\schritt{Schritt 1 --- Die neue Lösung}
+\[ f(u_1) = (u_1-40)(70-u_1) \]
+\[ f'(u_1) = (70-u_1)-(u_1-40) = 110-2u_1 = 0 \quad\Longrightarrow\quad u_1 = 55 \]
+
+\[ \vek u^{*} = (55,\ 45) \]
+
+\kursiv{Probe über den Überschuss:} $100-40-30 = 30$, hälftig $15$. Also $40+15 = 55$ und $30+15 = 45$. \checkmark
+
+\schritt{Schritt 2 --- Der Gewinn}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+\textbf{Konfliktpunkt} & \textbf{K} & \textbf{M} & \textbf{Gewinn K}\\
+\midrule
+$(20,30)$ & $45$ & $55$ & --- \\
+$(40,30)$ & $55$ & $45$ & $+10$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Verbesserung der Ausgangslage um $20$ bringt in der Verhandlung nur $10$} --- die andere Hälfte kommt dem Gegenüber zugute.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Regel}
+\[ \frac{\partial u_1^{*}}{\partial d_1} = \frac12 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei linearer Grenze schlägt jede Verbesserung des Konfliktwerts zur Hälfte durch. \textbf{Der Einzelvertrag darf also höchstens $10$ kosten}, nicht $20$. Wer diese Halbierung übersieht, überschätzt den Wert von Rückfallmöglichkeiten regelmäßig um den Faktor zwei.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Gegenmaßnahme des Marienhospitals}
+Hebt es seinerseits von $30$ auf $50$:
+\[ \text{Überschuss} = 100-40-50 = 10, \qquad \vek u^{*} = (45,\ 55) \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide haben aufgerüstet, und das Ergebnis ist dasselbe wie am Anfang --- nur wurde zweimal bezahlt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Verbesserung der Ausgangslage ist selbst ein Spiel, und es hat die Gestalt eines Gefangenendilemmas: \textbf{Beide investieren, und der Überschuss schrumpft von $50$ auf $10$.} Das ist der Kern dessen, was man in der Wirtschaftstheorie unbeschäftigte Kosten des Wettbewerbs nennt --- Aufwand, der keinen Wert schafft, sondern nur Verhandlungsmacht verschiebt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- Was Geduld wert ist}
+Im Rubinstein-Modell mit $\delta_1 = 0{,}9$ und $\delta_2 = 0{,}8$: Wie viel erhält jeder, und wie ändert es sich, wenn Spieler 2 zuerst anbietet?
+
+\loesung
+\schritt{Schritt 1 --- Spieler 1 bietet zuerst}
+\[ x^{*} = \frac{1-\delta_2}{1-\delta_1\delta_2} = \frac{1-0{,}8}{1-0{,}72} = \frac{0{,}2}{0{,}28} = \frac57 = 0{,}714 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Spieler 1 erhält $71{,}4$ Prozent.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Spieler 2 bietet zuerst}
+Die Formel gilt entsprechend mit vertauschten Rollen:
+\[ y^{*} = \frac{1-\delta_1}{1-\delta_1\delta_2} = \frac{0{,}1}{0{,}28} = \frac{5}{14} = 0{,}357 \]
+
+Spieler 1 erhält dann $1-0{,}357 = 0{,}643$.
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Wer bietet} & \textbf{Spieler 1} & \textbf{Spieler 2}\\
+\midrule
+Spieler 1 & $0{,}714$ & $0{,}286$\\
+Spieler 2 & $0{,}643$ & $0{,}357$\\
+\midrule
+\textbf{Unterschied} & $0{,}071$ & $0{,}071$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Erstzieher-Vorteil beträgt sieben Prozentpunkte, der Geduldsvorteil des Spielers 1 aber über dreißig.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Geduld gegen Vortritt}
+Ist Spieler 2 der Geduldigere ($\delta_1=0{,}8$, $\delta_2=0{,}9$) und bietet Spieler 1 zuerst:
+\[ x^{*} = \frac{0{,}1}{1-0{,}72} = 0{,}357 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Spieler 1 erhält trotz des Vortritts nur $36$ Prozent.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Unterschied in der Geduld beträgt nur ein Zehntel und kehrt das Ergebnis vollständig um. \textbf{Wer den Abschluss weniger dringend braucht, verhandelt besser} --- und das ist eine der wenigen Aussagen dieses Bandes, die sich unmittelbar in Handeln übersetzt: Man verbessere seine Rückfallmöglichkeit \kursiv{und} verlängere seinen Zeithorizont.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Grenze}
+\[ \lim_{\delta_1,\delta_2\to1} x^{*} \ \text{hängt vom Verhältnis der Ungeduld ab} \]
+
+Mit $\delta_i = e^{-r_i \Delta}$ und $\Delta \to 0$:
+\[ x^{*} \ \longrightarrow\ \frac{r_2}{r_1+r_2} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Nash-Verhandlungslösung mit den Ungeduldsraten als Gewichten.} Bei gleicher Ungeduld ergibt sich die hälftige Teilung. Der Erstzieher-Vorteil verschwindet, wenn die Runden beliebig kurz werden --- er war ein Artefakt der Zeittaktung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Kern und Shapley vergleichen}
+Drei Abteilungen teilen die Fixkosten eines Geräts. Allein kostet es jede $100$; je zwei zusammen $140$; alle drei $160$. Bestimmen Sie Kern und Shapley-Wert der \kursiv{Ersparnis}.
+
+\loesung
+\schritt{Schritt 1 --- Die charakteristische Funktion}
+Die Ersparnis einer Gruppe ist die Differenz zwischen Einzelkosten und gemeinsamen Kosten.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.0cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+\textbf{Gruppe} & \textbf{einzeln} & \textbf{gemeinsam} & $v(S)$\\
+\midrule
+$\{i\}$ & $100$ & $100$ & $0$\\
+$\{i,j\}$ & $200$ & $140$ & $60$\\
+$\{1,2,3\}$ & $300$ & $160$ & $\mathbf{140}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Der Kern}
+\[ x_i+x_j \ \ge\ 60 \ \text{für alle Paare}, \qquad \textstyle\sum x_i = 140 \]
+
+Addieren der drei Paarbedingungen:
+\[ 2\cdot140 = 280 \ \ge\ 180 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Kern ist nicht leer --- und diesmal ein ganzer Bereich.}
+\end{minipage}
+\end{center}
+
+\kursiv{Die Bedingungen einzeln:} $x_i+x_j \ge 60$ bedeutet $x_k \le 80$. Zusammen mit $x_i \ge 0$:
+\[ \text{Kern} = \Bigl\{\vek x \ : \ 0 \le x_i \le 80, \ \textstyle\sum x_i = 140\Bigr\} \]
+
+\schritt{Schritt 3 --- Der Shapley-Wert}
+Wegen der vollständigen Symmetrie:
+\[ \varphi_i = \frac{140}{3} = 46{,}\overline{6} \]
+
+\kursiv{Nachrechnung über eine Reihenfolge:} Der Erste steuert $0$ bei, der Zweite $60-0 = 60$, der Dritte $140-60 = 80$.
+\[ \varphi_i = \frac{0+60+80}{3} = \frac{140}{3} \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Abkürzung funktioniert hier, weil jeder Spieler in jeder Position gleich häufig vorkommt: \textbf{Bei Symmetrie genügt der Mittelwert der Beiträge über die Positionen}, statt alle $n!$ Reihenfolgen durchzugehen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Liegt er im Kern?}
+\[ 46{,}\overline{6} \ \le\ 80 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ja.} Hier fallen beide Begriffe nicht auseinander.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Warum}
+Das Spiel ist \kursiv{konvex}: Der Beitrag eines Spielers wächst mit der Gruppengröße.
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{tritt hinzu zu} & \textbf{Beitrag} & \\
+\midrule
+$\emptyset$ & $0$ & \\
+einem anderen & $60$ & \\
+zwei anderen & $80$ & wachsend\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach dem Satz von \Person{Shapley} (1971) liegt bei konvexen Spielen der Shapley-Wert stets im Kern, und der Kern ist nie leer. \textbf{Die Aufteilung gemeinsamer Fixkosten ist der Musterfall} --- und das ist der Grund, warum sich der Shapley-Wert gerade dort als Verteilungsschlüssel durchgesetzt hat, etwa bei Flughafengebühren nach Bahnlänge oder bei Gemeinschaftsleitungen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die Kosten zurückgerechnet}
+\[ \text{Kostenanteil}_i = 100 - 46{,}\overline{6} = 53{,}\overline{3} \]
+
+\kursiv{Probe:} $3\cdot53{,}\overline{3} = 160$ \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die gleichmäßige Aufteilung ergibt hier dasselbe, weil das Spiel symmetrisch ist. \textbf{Bei ungleichen Nutzungsanteilen weichen die Verfahren ab}, und dann ist der Shapley-Wert der begründete Schlüssel --- er verteilt nach dem durchschnittlichen Beitrag, nicht nach der Kopfzahl.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Der andere Aufsatz von Nash}
+\Person{John Nash} veröffentlichte 1950 zwei Arbeiten. Die eine begründete den Gleichgewichtsbegriff, die andere die Verhandlungslösung.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Verhandlungsarbeit entstand zuerst --- als Seminararbeit während seines Studiums in Princeton, noch bevor er von Neumann und Morgenstern gelesen hatte. \textbf{Er hatte den Aufsatz in einem Grundkurs über Außenwirtschaft geschrieben} und reichte ihn erst später zur Veröffentlichung ein.}
+\end{minipage}
+\end{center}
+
+\schritt{Shapley}
+\Person{Lloyd Shapley} (1923--2016) führte seinen Wert 1953 in seiner Dissertation ein.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er war im Zweiten Weltkrieg als Soldat in China stationiert und erhielt dort eine Auszeichnung für die Entschlüsselung eines sowjetischen Wetterschlüssels. \textbf{Shapley arbeitete jahrzehntelang bei der RAND Corporation} und galt als einer der Wenigen, die den kooperativen Zweig weiterverfolgten, als fast alle zum nichtkooperativen übergingen.}
+\end{minipage}
+\end{center}
+
+\schritt{Rubinstein}
+\Person{Ariel Rubinstein} veröffentlichte sein Modell 1982 in einem Aufsatz von zwölf Seiten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Es schloss eine Lücke, die seit Nash offen war: \textbf{Warum sollte das Ergebnis einer Verhandlung gerade die Nash-Lösung sein?} Rubinsteins Antwort --- weil sie das einzige teilspielperfekte Gleichgewicht eines naheliegenden Verhandlungsspiels ist --- gilt als Musterbeispiel dafür, wie ein kooperativer Begriff nichtkooperativ begründet wird.}
+\end{minipage}
+\end{center}
+
+\schritt{Und eine Bemerkung des Verfassers}
+Rubinstein hat sich wiederholt kritisch über die Anwendung der Spieltheorie geäußert.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er hält sie für ein Werkzeug zum Nachdenken, nicht zum Vorhersagen, und warnt davor, aus Modellen Handlungsempfehlungen abzuleiten. \textbf{\enquote{Ich habe nie einen Fall gesehen, in dem die Spieltheorie jemandem geholfen hätte, eine bessere Entscheidung zu treffen}} --- das ist eine Äußerung von jemandem, der eines der meistzitierten Ergebnisse des Fachs bewiesen hat, und Kapitel~15 nimmt sie ernst.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Kooperative Begriffe heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Kostenteilung} & Flughafengebühren, Gemeinschaftsleitungen, Rechenzentren.\\
+\textbf{Erklärbarkeit} & Der Shapley-Wert als Maß für den Beitrag eines Merkmals zu einer Vorhersage.\\
+\textbf{Netzwerke} & Wer in einem Verbund welchen Anteil an der Wertschöpfung hat.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Seit etwa 2017 wird der Shapley-Wert eingesetzt, um zu erklären, welchen Anteil ein einzelnes Merkmal an einer Modellvorhersage hat.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die \enquote{Spieler} sind die Merkmale, $v(S)$ ist die Vorhersage bei Kenntnis nur der Merkmale in $S$. \textbf{Die vier Forderungen aus Satz 14.5 werden dabei zu Forderungen an eine Erklärung} --- Vollständigkeit, Gleichbehandlung, kein Beitrag ohne Wirkung, Zerlegbarkeit. Der Rechenaufwand ist allerdings exponentiell und muss genähert werden; und die Unterstellung, man könne Merkmale unabhängig weglassen, ist bei korrelierten Merkmalen falsch.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Das älteste Anwendungsbeispiel stammt von 1973: die Aufteilung der Kosten einer Landebahn auf Flugzeuge verschiedener Größe.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Shapley-Wert liefert dort eine geschlossene Formel: Jeder zahlt für das Stück Bahn, das er braucht, zu gleichen Teilen mit allen, die es ebenfalls brauchen. \textbf{Das Ergebnis ist so einleuchtend, dass es ohne Theorie gefunden worden wäre} --- und genau darin liegt seine Stärke als Prüfstein: Ein Verteilungsbegriff, der in klaren Fällen das Naheliegende liefert, ist in unklaren Fällen vertrauenswürdiger.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 14.1} & Produkt der Zugewinne maximieren\\
+\textbf{Satz 14.2} & Rubinstein: Geduld schlägt Vortritt\\
+\textbf{Definition 14.4} & Kern: keine Gruppe schert aus\\
+\textbf{Satz 14.5} & Shapley: mittlerer Beitrag\\
+\textbf{Der Unterschied} & haltbar gegen angemessen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~V. Das letzte Kapitel zieht Bilanz --- und nimmt die zweite Warnung des Vorworts ernst: dass Menschen nicht tun, was die Theorie sagt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

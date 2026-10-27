@@ -1,0 +1,333 @@
+\chapter{Gewichten und doppelte Absicherung}
+
+\section{Eine Pseudobevölkerung bauen}
+
+\begin{merksatz}
+\boxtitel{Der Gedanke}
+Ein Schwerkranker, der die Behandlung mit Wahrscheinlichkeit $0{,}9$ erhält, steht für viele seinesgleichen, die sie ebenfalls erhielten --- und für wenige, die sie nicht erhielten. Jeder unbehandelte Schwerkranke vertritt also besonders viele.
+
+\begin{definition}
+\boxtitelm{Definition 8.1 --- Gewichtung nach der Kehrwahrscheinlichkeit}
+\[ w_i = \frac{1}{e(\vek z_i)} \ \text{ falls } X_i = 1, \qquad w_i = \frac{1}{1-e(\vek z_i)} \ \text{ falls } X_i = 0 \]
+\end{definition}
+
+\schritt{Satz 8.2 --- der gewichtete Mittelwert schätzt den Eingriff}
+\[ \mathbb{E}\left[\frac{X\,Y}{e(Z)}\right] = \mathbb{E}\bigl[Y(1)\bigr] \]
+
+\schritt{Beweis}
+\kursiv{Erstens --- nach $Z$ bedingen:}
+\[ \mathbb{E}\left[\frac{XY}{e(Z)} \ \bigg|\ Z\right] = \frac{1}{e(Z)}\,\mathbb{E}[X\,Y(1) \mid Z] \]
+--- unter $X=1$ ist $Y = Y(1)$ (Konsistenz), unter $X=0$ verschwindet der Term.
+
+\kursiv{Zweitens --- bedingte Unabhängigkeit:}
+\[ \mathbb{E}[X\,Y(1) \mid Z] = \mathbb{E}[X\mid Z]\cdot\mathbb{E}[Y(1)\mid Z] = e(Z)\cdot\mathbb{E}[Y(1)\mid Z] \]
+
+\kursiv{Drittens --- kürzen und mitteln:}
+\[ \mathbb{E}\left[\frac{XY}{e(Z)}\right] = \mathbb{E}\bigl[\mathbb{E}[Y(1)\mid Z]\bigr] = \mathbb{E}[Y(1)] \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Gewichte bauen eine gedachte Bevölkerung, in der jeder mit gleicher Wahrscheinlichkeit behandelt wird --- eine nachträglich erzeugte Randomisierung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Vorzug gegenüber dem Schichten: Es wird nicht eingeteilt, also entsteht keine Restverzerrung innerhalb von Schichten.} Im Leitfall lieferte das Gewichten $-0{,}123$ gegen einen wahren Wert von $-0{,}122$, das Schichten nur $-0{,}101$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Der Preis: extreme Gewichte}
+Im Leitfall betrug das größte Gewicht $112$ --- ein einziger Patient zählte so viel wie hundertzwölf.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Neigung} & \textbf{Gewicht} & \\
+\midrule
+$0{,}50$ & $2$ & unauffällig\\
+$0{,}10$ & $10$ & \\
+$0{,}02$ & $50$ & bedenklich\\
+$0{,}009$ & $112$ & \textcolor{akzent}{ein Patient allein}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Gewichten verlagert das Positivitätsproblem aus Kapitel~2 in die Varianz.} Wo das Schichten eine Schicht leer lässt und sichtbar scheitert, liefert das Gewichten eine Zahl --- die aber an wenigen Patienten hängt. Übliche Abhilfen sind das Stutzen extremer Gewichte, das Beschränken auf den Bereich gemeinsamer Neigung und stabilisierte Gewichte, bei denen man mit dem Randanteil multipliziert.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Zwei Modelle, eine Chance}
+
+\begin{merksatz}
+\boxtitel{Satz 8.3 --- doppelte Absicherung}
+Der Schätzer
+\[ \hat\mu_1 = \frac1n\sum_i \left[\frac{X_i\,(Y_i - \hat m_1(\vek z_i))}{\hat e(\vek z_i)} + \hat m_1(\vek z_i)\right] \]
+schätzt $\mathbb{E}[Y(1)]$ richtig, wenn \kursiv{mindestens eines} der beiden Modelle --- das Neigungsmodell $\hat e$ oder das Ausgangsmodell $\hat m_1$ --- stimmt.
+
+\schritt{Der Gedanke}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Stimmt $\hat m_1$} & Der zweite Summand ist schon richtig; der erste hat Erwartungswert null, weil $\mathbb{E}[Y - m_1 \mid X{=}1,Z] = 0$.\\
+\textbf{Stimmt $\hat e$} & Der Ausdruck ist Satz 8.2 mit einer Korrektur, deren Erwartungswert sich weghebt --- was $\hat m_1$ zu viel oder zu wenig sagt, wird gewichtet zurückgenommen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Am Leitfall geprüft}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Lage} & \textbf{Schätzung} & \\
+\midrule
+beide Modelle richtig & $-0{,}115$ & \textcolor{gruen}{gut}\\
+Ausgangsmodell falsch & $-0{,}117$ & \textcolor{gruen}{gut}\\
+Neigungsmodell falsch & $-0{,}116$ & \textcolor{gruen}{gut}\\
+beide falsch & $\mathbf{+0{,}049}$ & \textcolor{akzent}{naiv}\\
+\midrule
+wahr & $-0{,}122$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein falsches Modell schadet nicht --- zwei falsche schon.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\enquote{Falsch} bedeutete hier: nur eine Konstante statt des richtigen Modells. \textbf{Der Schätzer fängt beide Male den vollen Fehler ab} und landet innerhalb eines halben Prozentpunkts. Sind beide falsch, fällt er auf den naiven Vergleich zurück --- samt Vorzeichenfehler.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Warum das heute wichtig ist}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Schätzt man beide Modelle mit Lernverfahren aus Band 22, so sind sie beide \kursiv{ungenau} statt falsch --- und die Ungenauigkeit fällt langsamer als $1/\sqrt n$. \textbf{Beim doppelt abgesicherten Schätzer multiplizieren sich die beiden Fehler}, statt sich zu addieren: Ist jeder von der Ordnung $n^{-1/4}$, so ist ihr Produkt von der Ordnung $n^{-1/2}$ --- und der Schätzer wird wieder normalverteilt mit der üblichen Rate. Das ist der Grund, warum kausale Schätzung und maschinelles Lernen sich erst durch diesen Satz vertragen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Fehler, die sich multiplizieren, sind besser als einer, der allein steht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Drei Fallen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Beide falsch} & Die doppelte Absicherung sichert nicht gegen fehlende Störgrößen --- beide Modelle benutzen dasselbe $Z$.\\
+\textbf{Überanpassung} & Werden beide Modelle auf denselben Daten geschätzt wie der Effekt, entsteht ein Leck wie in Band 22, Kapitel~3. Abhilfe: Kreuzanpassung, also Schätzung auf der einen und Auswertung auf der anderen Hälfte.\\
+\textbf{Instabilität} & Kleine $\hat e$ machen den Korrekturterm riesig, auch wenn das Ausgangsmodell gut ist.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Zeile ist die wichtigste und wird am häufigsten übersehen. \textbf{Doppelte Absicherung heißt: doppelt abgesichert gegen \kursiv{Modellfehler}, gar nicht abgesichert gegen \kursiv{fehlende Größen}.} Die unprüfbare Annahme aus Kapitel~2 bleibt in voller Schärfe bestehen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Gewichte von Hand}
+Acht Patienten mit geschätzter Neigung und beobachtetem Ausgang:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.0cm}P{1.4cm}P{1.0cm}P{1.0cm}P{1.8cm}@{}}
+\toprule
+\textbf{Nr.} & $e$ & $X$ & $Y$ & \textbf{Gewicht}\\
+\midrule
+$1$ & $0{,}8$ & $1$ & $1$ & $1{,}25$\\
+$2$ & $0{,}8$ & $1$ & $0$ & $1{,}25$\\
+$3$ & $0{,}8$ & $0$ & $1$ & $5{,}00$\\
+$4$ & $0{,}5$ & $1$ & $0$ & $2{,}00$\\
+$5$ & $0{,}5$ & $0$ & $1$ & $2{,}00$\\
+$6$ & $0{,}2$ & $1$ & $0$ & $5{,}00$\\
+$7$ & $0{,}2$ & $0$ & $0$ & $1{,}25$\\
+$8$ & $0{,}2$ & $0$ & $0$ & $1{,}25$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Die Behandelten}
+\[ \frac{1{,}25\cdot1 + 1{,}25\cdot0 + 2{,}00\cdot0 + 5{,}00\cdot0}{1{,}25+1{,}25+2{,}00+5{,}00} = \frac{1{,}25}{9{,}50} = 0{,}132 \]
+
+\schritt{Schritt 2 --- Die Unbehandelten}
+\[ \frac{5{,}00\cdot1 + 2{,}00\cdot1 + 1{,}25\cdot0 + 1{,}25\cdot0}{5{,}00+2{,}00+1{,}25+1{,}25} = \frac{7{,}00}{9{,}50} = 0{,}737 \]
+
+\schritt{Schritt 3 --- Der Effekt}
+\[ 0{,}132 - 0{,}737 = \mathbf{-0{,}605} \]
+
+\schritt{Schritt 4 --- Zum Vergleich}
+\[ \text{naiv: } \frac{1}{4} - \frac{2}{4} = -0{,}250 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Gewichtung verdoppelt den Effekt}, weil die Unbehandelten mit hoher Neigung --- Patient 3 mit Gewicht $5$ --- für viele stehen, die es nicht gibt. Bei acht Patienten ist eine solche Schätzung allerdings wertlos: Die Summe $9{,}50$ verteilt sich auf vier Personen, davon trägt eine mehr als die Hälfte. Genau das meint die Instabilität aus dem Bruchfall.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Die wirksame Stichprobengröße}
+Wie viele Patienten \enquote{zählen} nach der Gewichtung wirklich?
+
+\loesung
+\schritt{Schritt 1 --- Das Maß}
+\[ n_{\text{wirksam}} = \frac{\bigl(\sum_i w_i\bigr)^{2}}{\sum_i w_i^{2}} \]
+
+\schritt{Schritt 2 --- Für die Behandelten aus Aufgabe 8.1}
+\[ \sum w = 9{,}50, \qquad \sum w^{2} = 1{,}5625+1{,}5625+4+25 = 32{,}13 \]
+\[ n_{\text{wirksam}} = \frac{90{,}25}{32{,}13} = 2{,}81 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Vier behandelte Patienten zählen wie $2{,}8$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Bei gleichen Gewichten}
+\[ n_{\text{wirksam}} = \frac{(n\bar w)^{2}}{n\bar w^{2}} = n \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.2cm}@{}}
+\toprule
+\textbf{Gewichte} & $n_{\text{wirksam}}$ & \textbf{Verlust}\\
+\midrule
+alle gleich & $n$ & $0\,\%$\\
+Aufgabe 8.1 & $0{,}70\,n$ & $30\,\%$\\
+eines von $112$ & $\approx 1$ & fast alles\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Diese Zahl sollte in jeder Auswertung stehen}, denn sie sagt, wie viel Information wirklich hinter der Schätzung steht. Sie ist dieselbe Größe, die in der Stichprobentheorie den Verlust durch ungleiche Auswahlwahrscheinlichkeiten misst --- Band 17, Kapitel~14.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- Warum die Korrektur hilft}
+Zeigen Sie, dass der Korrekturterm in Satz 8.3 den Erwartungswert null hat, wenn das Ausgangsmodell stimmt.
+
+\loesung
+\schritt{Schritt 1 --- Der Term}
+\[ K = \frac{X\,\bigl(Y - m_1(Z)\bigr)}{e(Z)} \]
+
+\schritt{Schritt 2 --- Bedingt auf $Z$ und $X=1$}
+Stimmt das Modell, so ist $m_1(Z) = \mathbb{E}[Y \mid X=1, Z]$, also
+\[ \mathbb{E}\bigl[Y - m_1(Z) \ \big|\ X=1,\ Z\bigr] = 0 . \]
+
+\schritt{Schritt 3 --- Der ganze Term}
+\[ \mathbb{E}[K \mid Z] = \frac{\Pr[X=1\mid Z]}{e(Z)}\cdot\mathbb{E}\bigl[Y-m_1(Z)\mid X=1,Z\bigr] = \frac{\hat{\ }}{\hat{\ }}\cdot 0 = 0 \]
+--- gleich welchen Wert $\hat e$ hat, solange er nicht null ist.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Bruch kann beliebig falsch sein --- er wird mit null multipliziert.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Und umgekehrt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Stimmt stattdessen $\hat e$, so ist der erste Summand nach Satz 8.2 schon ein gültiger Schätzer für $\mathbb{E}[Y(1)]$ --- allerdings mit $Y - m_1$ statt $Y$; der fehlende Teil wird durch den zweiten Summanden $m_1(Z)$ genau ergänzt, denn dessen gewichteter Mittelwert stimmt mit seinem einfachen überein, wenn die Gewichte richtig sind. \textbf{Beide Fälle beruhen darauf, dass ein Faktor null wird --- nicht darauf, dass sich Fehler zufällig aufheben.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Aus der Stichprobentheorie}
+\Person{Daniel Horvitz} und \Person{Donovan Thompson} gaben 1952 den Schätzer an, der Satz 8.2 zugrunde liegt --- für Stichproben mit ungleichen Ziehungswahrscheinlichkeiten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Wer Haushalte mit unterschiedlicher Wahrscheinlichkeit befragt, gewichtet jeden mit dem Kehrwert. \textbf{\Person{James Robins} erkannte in den 1980er Jahren, dass die Behandlungszuteilung formal dasselbe ist} --- die \enquote{Ziehung} in die Behandlungsgruppe erfolgt mit Wahrscheinlichkeit $e(Z)$. Aus einer Technik der Umfrageforschung wurde so ein Werkzeug der Epidemiologie.}
+\end{minipage}
+\end{center}
+
+\schritt{Die doppelte Absicherung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Robins, \Person{Andrea Rotnitzky} und \Person{Lue Ping Zhao} führten sie 1994 ein, zunächst für fehlende Werte. \textbf{Der Name stammt von \Person{Marie Davidian} und Mitarbeitern} und war zunächst umstritten --- Kritiker hielten ihn für irreführend, weil er Sicherheit suggeriert, wo nur Modellfehler abgefangen werden. Der Bruchfall gibt ihnen recht.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Schätzen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Kreuzanpassung} & Modelle und Effekt auf getrennten Datenhälften.\\
+\textbf{Gezieltes Lernen} & Verfahren, die das Ausgangsmodell so verschieben, dass der Korrekturterm verschwindet.\\
+\textbf{Balancierende Gewichte} & Gewichte direkt aus Balancebedingungen statt aus einem Neigungsmodell.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man teilt die Daten in zwei Hälften, schätzt die Modelle auf der einen und wertet auf der anderen aus, dann umgekehrt, und mittelt. \textbf{Damit sind die Modellfehler von den Auswertungsdaten unabhängig} --- und genau das braucht der Beweis der Normalverteilung. Es ist dieselbe Trennung wie bei der Kreuzvalidierung aus Band 22, Kapitel~3, hier aber nicht zur Prüfung, sondern zur Gültigkeit.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 8.1} & Gewicht $1/e$ bzw.\ $1/(1-e)$\\
+\textbf{Satz 8.2} & gewichteter Mittelwert schätzt den Eingriff\\
+\textbf{Satz 8.3} & eines von zwei Modellen genügt\\
+\textbf{Wirksames $n$} & $(\sum w)^{2}/\sum w^{2}$\\
+\textbf{Der Bruchfall} & keine Absicherung gegen fehlende Größen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~III. Alle Verfahren setzten voraus, dass die Störgrößen gemessen sind. Teil~IV behandelt den Fall, in dem sie es nicht sind --- und findet drei Wege, die ohne diese Annahme auskommen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

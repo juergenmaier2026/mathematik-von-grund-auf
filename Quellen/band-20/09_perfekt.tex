@@ -1,0 +1,635 @@
+\part{Geheimhaltung}
+
+\chapter{Perfekte Sicherheit}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Patientendaten übertragen}
+Das Klinikum sendet Befunde an eine Praxis. Die Leitung ist abhörbar.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\node[knoten] (a) at (0,0) {};
+\node[knoten] (b) at (5.0,0) {};
+\node[knotenr] (e) at (2.5,-1.3) {};
+\draw[kanted, -{Stealth[length=4pt]}] (a)--(b) node[midway,above,font=\scriptsize,color=grau] {Geheimtext $c$};
+\draw[kante, akzent, dashed, -{Stealth[length=4pt]}] (2.5,-0.08)--(e);
+\node[font=\scriptsize, color=grau, anchor=east] at (-0.15,0) {Sender};
+\node[font=\scriptsize, color=grau, anchor=west] at (5.15,0) {Empfänger};
+\node[font=\scriptsize, color=akzent, anchor=north] at (2.5,-1.5) {Mitleser};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Die Bestandteile}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{3.6cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Symbol} & \textbf{wer kennt sie}\\
+\midrule
+Klartext & $M$ & Sender, Empfänger\\
+Schlüssel & $K$ & Sender, Empfänger\\
+Geheimtext & $C$ & \textcolor{akzent}{alle}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\textbf{Die Frage:} Was heißt es, dass der Mitleser nichts erfährt --- und ist das erreichbar?
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Antwort auf beide Teile gibt Shannons Arbeit von 1949, und sie benutzt genau die Größen aus Teil~II. \enquote{Nichts erfahren} heißt: Die Transinformation zwischen Klartext und Geheimtext ist null.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Regel von Kerckhoffs}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Verfahren gilt als bekannt. Geheim ist allein der Schlüssel.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{Auguste Kerckhoffs} formulierte diesen Grundsatz 1883. Er ist keine Vorsichtsmaßnahme, sondern eine Aussage über die Wirklichkeit: Verfahren werden bekannt --- durch Verrat, durch Nachbau, durch Veröffentlichung. \textbf{Ein Verfahren, dessen Sicherheit auf seiner Geheimhaltung beruht, ist genau einmal sicher.} Ein Schlüssel lässt sich dagegen austauschen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Warum klassische Verfahren brechen}
+
+\begin{merksatz}
+\boxtitel{Die einfache Ersetzung}
+Jedem Buchstaben wird fest ein anderer zugeordnet. Der Schlüsselraum umfasst
+\[ 26! \approx 4{,}03\cdot10^{26} \]
+Möglichkeiten --- also
+\[ \Ent(K) = \lb(26!) = 88{,}4 \ \text{Bit} . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist mehr als ein $80$-Bit-Schlüssel --- und das Verfahren ist mit Papier und Bleistift zu brechen.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+Die Ersetzung verändert die Buchstaben, nicht ihre Häufigkeiten. Im Geheimtext steht an der Stelle des \texttt{E} ein anderes Zeichen --- aber es ist genauso häufig.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Größe des Schlüsselraums ist also kein Maß für Sicherheit. \textbf{Entscheidend ist, ob der Geheimtext Struktur des Klartextes durchlässt} --- und genau das misst die Transinformation. Abschnitt 9.5 gibt an, wie viele Zeichen genügen, um den Schlüssel festzulegen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Perfekte Sicherheit}
+
+\begin{definition}
+\boxtitelm{Definition 9.1 --- Shannon, 1949}
+Ein Verfahren heißt \Begriff{perfekt sicher}, wenn
+\[ I(M;C) = 0 , \]
+gleichbedeutend mit
+\[ \Pr[M=m \mid C=c] = \Pr[M=m] \qquad\text{für alle } m,c . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was das bedeutet}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Geheimtext verändert die Einschätzung des Mitlesers über den Klartext nicht im Geringsten.} Er ist genau so klug wie vorher.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist eine sehr starke Forderung --- und die einzige Sicherheitsdefinition dieses Bandes, die ohne jede Annahme über die Rechenkraft des Gegners auskommt. \textbf{Sie gilt auch gegen einen Gegner mit unbegrenzter Rechenzeit}, denn es gibt schlicht nichts zu berechnen.}
+\end{minipage}
+\end{center}
+
+\schritt{Was sie nicht fordert}
+Der Mitleser darf durchaus etwas über den Klartext wissen --- etwa dass es ein Befund ist. Er darf nur durch den Geheimtext nichts \kursiv{hinzulernen}.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 9.2 --- der Einmalschlüssel ist perfekt sicher}
+Sei $M$ eine Bitfolge der Länge $n$ und $K$ eine gleichverteilte, unabhängige Bitfolge derselben Länge. Dann ist
+\[ C = M \oplus K \]
+perfekt sicher.
+
+\schritt{Beweis}
+Für festes $m$ und beliebiges $c$:
+\[ \Pr[C=c\mid M=m] = \Pr[K = c\oplus m] = 2^{-n} \]
+--- denn $K$ ist gleichverteilt, und zu jedem Paar $(c,m)$ gehört genau ein Schlüssel.
+
+Diese Wahrscheinlichkeit hängt \kursiv{nicht} von $m$ ab. Also sind $C$ und $M$ unabhängig, und nach Satz 4.5 ist $I(M;C) = 0$. $\blacksquare$
+
+\schritt{Ein Zahlenbeispiel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.8cm}@{}}
+\toprule
+Klartext $M$ & \texttt{01001000}\\
+Schlüssel $K$ & \texttt{11010110}\\
+\midrule
+Geheimtext $C$ & \texttt{10011110}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Entschlüsseln:} $C \oplus K = \texttt{01001000} = M$ \checkmark
+
+\schritt{Warum der Mitleser nichts erfährt}
+Zu \kursiv{jedem} denkbaren Klartext gibt es einen Schlüssel, der genau diesen Geheimtext erzeugt hätte:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Klartext} & \textbf{nötiger Schlüssel} & \\
+\midrule
+\texttt{01001000} & \texttt{11010110} & \\
+\texttt{01000001} & \texttt{11011111} & \\
+\texttt{11111111} & \texttt{01100001} & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Alle drei sind gleich wahrscheinlich.} Der Geheimtext schließt keinen Klartext aus.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Shannons Schranke}
+
+\begin{merksatz}
+\boxtitel{Satz 9.3 --- der Schlüssel muss so groß sein wie die Nachricht}
+Ist ein Verfahren perfekt sicher, so gilt
+\[ \Ent(K) \ \ge\ \Ent(M) . \]
+
+\schritt{Beweis --- Schritt 1: die Voraussetzung}
+Perfekte Sicherheit bedeutet $I(M;C)=0$, also nach Definition 4.1
+\[ \Ent(M\mid C) = \Ent(M) . \]
+
+\schritt{Schritt 2 --- der Empfänger kann entschlüsseln}
+Aus $C$ und $K$ ergibt sich $M$ eindeutig:
+\[ \Ent(M\mid C,K) = 0 . \]
+
+\schritt{Schritt 3 --- die Abschätzung}
+\begin{align*}
+\Ent(M\mid C) &\le \Ent(M,K\mid C) && \text{(mehr Größen, mehr Ungewissheit)}\\
+&= \Ent(K\mid C) + \Ent(M\mid K,C) && \text{(Kettenregel)}\\
+&= \Ent(K\mid C) + 0 && \text{(Schritt 2)}\\
+&\le \Ent(K) && \text{(Satz 2.6)}
+\end{align*}
+
+\schritt{Schritt 4 --- zusammensetzen}
+\[ \Ent(M) = \Ent(M\mid C) \ \le\ \Ent(K) \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Perfekte Sicherheit verlangt einen Schlüssel, der mindestens so viel Ungewissheit trägt wie die Nachricht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis benutzt nur die Kettenregel und Satz 2.6 --- also Werkzeuge aus Kapitel~2. \textbf{Die mathematische Kryptographie beginnt mit einem Satz, dessen Beweis vier Zeilen Informationstheorie ist.} Und der Satz ist ein Unmöglichkeitsergebnis: Er sagt nicht, wie man sicher verschlüsselt, sondern was es kostet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Warum der Einmalschlüssel kaum benutzt wird}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Schlüssellänge} & Wer ein Gigabyte übertragen will, muss vorher ein Gigabyte Schlüssel sicher austauschen.\\
+\textbf{Das Henne-Ei-Problem} & Wenn man einen sicheren Kanal für den Schlüssel hat, könnte man darüber gleich die Nachricht senden.\\
+\textbf{Einmalig} & Der Name ist Programm. Wird ein Schlüssel zweimal verwendet, bricht alles zusammen.\\
+\textbf{Echter Zufall} & Der Schlüssel muss gleichverteilt sein. Ein Pseudozufallsgenerator zerstört die Perfektheit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Werden $M_1$ und $M_2$ mit demselben $K$ verschlüsselt, so gilt
+\[ C_1 \oplus C_2 = M_1 \oplus M_2 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Schlüssel fällt heraus.} Übrig bleibt die Summe zweier Klartexte --- und die ist mit Sprachstatistik zu trennen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Genau das geschah tatsächlich: Das Venona-Projekt der amerikanischen Dienste konnte zwischen 1943 und 1980 sowjetische Funksprüche entziffern, weil während des Krieges Schlüsselblöcke doppelt gedruckt und verteilt worden waren. \textbf{Ein beweisbar unbrechbares Verfahren wurde durch einen Verfahrensfehler gebrochen} --- und das ist die Regel, nicht die Ausnahme.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Die Unizitätsdistanz}
+
+\begin{merksatz}
+\boxtitel{Wenn der Schlüssel zu kurz ist}
+Ist $\Ent(K) < \Ent(M)$, so ist das Verfahren nicht perfekt sicher --- aber wie unsicher?
+
+\schritt{Der Gedanke}
+Jedes Zeichen des Klartextes trägt Redundanz. Natürliche Sprache hat eine Entropierate von etwa $1{,}5$ Bit je Zeichen bei einem Alphabet von $26$ Zeichen:
+\[ D = \lb 26 - 1{,}5 = 4{,}70 - 1{,}5 = 3{,}2 \ \text{Bit je Zeichen} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jedes Zeichen Geheimtext liefert dem Angreifer etwa $D$ Bit an Auskunft über den Schlüssel.} Nach $\Ent(K)/D$ Zeichen ist der Schlüssel festgelegt.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 9.4 --- Unizitätsdistanz}
+\[ U = \frac{\Ent(K)}{D} \]
+--- die Länge des Geheimtextes, ab der im Mittel nur noch ein Schlüssel zu einem sinnvollen Klartext führt.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+\textbf{Verfahren} & $\Ent(K)$ & $U$ in Zeichen\\
+\midrule
+Cäsar & $4{,}70$ & $1{,}5$\\
+Vigenère, $t=5$ & $23{,}50$ & $7{,}3$\\
+Substitution & $88{,}38$ & $\mathbf{27{,}6}$\\
+$128$-Bit-Schlüssel & $128$ & $40$\\
+$256$-Bit-Schlüssel & $256$ & $80$\\
+Einmalschlüssel & $= \Ent(M)$ & \textcolor{gruen}{$\infty$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei der einfachen Ersetzung genügen rund achtundzwanzig Buchstaben, um den Schlüssel eindeutig festzulegen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das erklärt die Erfahrung jedes Rätsellösers: Kurze Kryptogramme sind mehrdeutig, ab etwa dreißig Zeichen gibt es nur noch eine sinnvolle Lesart. \textbf{Die Zahl folgt aus der Redundanz der Sprache, nicht aus einem Verfahren.}}
+\end{minipage}
+\end{center}
+
+\schritt{Der entscheidende Vorbehalt}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Unizitätsdistanz sagt, ab wann der Schlüssel \kursiv{bestimmt} ist --- nicht, wie man ihn findet.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei einem $128$-Bit-Schlüssel ist nach vierzig Zeichen eindeutig festgelegt, welcher es ist. Ihn zu finden erfordert das Durchprobieren von $2^{128}$ Möglichkeiten --- und genau darauf beruht die gesamte moderne Kryptographie. \textbf{Sie tauscht informationstheoretische Sicherheit gegen rechnerische} und lebt davon, dass die Umsetzung der einen in die andere unpraktikabel ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Folgerung für die Praxis}
+Komprimiert man den Klartext vor der Verschlüsselung, so sinkt $D$ --- im Idealfall auf null.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei einem perfekt komprimierten Klartext wäre $U = \infty$ auch bei kurzem Schlüssel: Es gäbe keinen Anhaltspunkt, welcher Entschlüsselungsversuch sinnvoll ist. \textbf{Kompression vor Verschlüsselung ist daher kein Luxus, sondern eine Sicherheitsmaßnahme} --- und der einzige Punkt, an dem sich Teil~I und Teil~IV unmittelbar berühren.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was perfekte Sicherheit nicht leistet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Keine Echtheit} & Der Empfänger weiß nicht, ob die Nachricht vom richtigen Absender stammt.\\
+\textbf{Keine Unversehrtheit} & Der Geheimtext lässt sich gezielt verändern.\\
+\textbf{Keine Verkehrsdaten} & Dass gesendet wurde, wann und wie lang, bleibt sichtbar.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile --- die Formbarkeit}
+Kippt ein Angreifer im Geheimtext das letzte Bit, so kippt es auch im Klartext:
+\[ (C \oplus \delta)\oplus K = M \oplus \delta \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Angreifer, der den Klartext nicht kennt, kann ihn dennoch gezielt verändern.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei einer Dosierungsangabe wäre das folgenschwer: Aus \enquote{$5$ mg} lässt sich ohne Kenntnis des Klartextes ein anderer Wert machen, wenn man weiß, an welcher Stelle die Zahl steht. \textbf{Perfekte Geheimhaltung und Unversehrtheit sind völlig verschiedene Eigenschaften}, und Kapitel~11 behandelt die zweite.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass eine Praxis um drei Uhr nachts eine verschlüsselte Nachricht an die Onkologie sendet, sagt bereits etwas --- unabhängig vom Inhalt. Die Verkehrsdatenanalyse ist in der Praxis oft ergiebiger als der Angriff auf die Verschlüsselung, und sie wird von keiner Sicherheitsdefinition dieses Bandes erfasst.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.1 --- Der Einmalschlüssel}
+Gegeben sei der Geheimtext \texttt{11010011} eines $8$-Bit-Einmalschlüssels.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & Welcher Schlüssel liefert den Klartext \texttt{01000001}?\\
+(b) & Welcher liefert \texttt{01011010}?\\
+(c) & Was folgt daraus für den Mitleser?\\
+(d) & Der Angreifer kippt Bit $3$ und $8$. Was empfängt der Empfänger?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a)}
+\[ K = C \oplus M = \texttt{11010011} \oplus \texttt{01000001} = \texttt{10010010} \]
+
+\kursiv{Probe:} $\texttt{10010010}\oplus\texttt{01000001} = \texttt{11010011}$ \checkmark
+
+\schritt{(b)}
+\[ K = \texttt{11010011} \oplus \texttt{01011010} = \texttt{10001001} \]
+
+\schritt{(c)}
+Beide Schlüssel sind gleich wahrscheinlich --- jeder der $256$ möglichen Schlüssel liefert genau einen der $256$ möglichen Klartexte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Mitleser kann keinen Klartext ausschließen und keinen bevorzugen.} Das ist Satz 9.2 in einem Einzelfall.
+\end{minipage}
+\end{center}
+
+\schritt{(d) Die Formbarkeit}
+Die Maske lautet $\delta = \texttt{00100001}$ (Bit $3$ und $8$, von links gezählt).
+\[ C' = \texttt{11010011}\oplus\texttt{00100001} = \texttt{11110010} \]
+
+Der Empfänger entschlüsselt mit dem richtigen $K$:
+\[ M' = C'\oplus K = (C\oplus\delta)\oplus K = M \oplus \delta \]
+
+\kursiv{Bei $M = \texttt{01000001}$:}
+\[ M' = \texttt{01000001}\oplus\texttt{00100001} = \texttt{01100000} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Empfänger erhält eine veränderte Nachricht und bemerkt nichts.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Angreifer musste $M$ nicht kennen, um $M$ gezielt zu verändern. Er hat vollständige Kontrolle über die Differenz. \textbf{Wer eine Zahl an bekannter Stelle vermutet, kann sie gezielt verfälschen} --- und beim Einmalschlüssel ist diese Verfälschung nicht erkennbar. Die Abhilfe ist ein Beglaubigungscode, Kapitel~11.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.2 --- Shannons Schranke anwenden}
+Ein Klinikum will täglich $500$ Befunde von je $2$ Kilobyte perfekt sicher übertragen. Wie viel Schlüsselmaterial ist nötig, und was bedeutet das?
+
+\loesung
+\schritt{Schritt 1 --- Das Nachrichtenvolumen}
+\[ 500 \cdot 2\,\text{kB} = 1000\,\text{kB} \approx 10^{6} \ \text{Byte} = 8\cdot10^{6} \ \text{Bit} \]
+
+\schritt{Schritt 2 --- Die Schranke}
+Nach Satz 9.3 muss $\Ent(K) \ge \Ent(M)$ gelten. Bei unkomprimierten Befunden ist $\Ent(M)$ deutlich kleiner als die Bitzahl --- Text ist redundant.
+
+\kursiv{Mit einer Entropierate von $1{,}5$ Bit je Zeichen und $10^{6}$ Zeichen:}
+\[ \Ent(M) \approx 1{,}5\cdot10^{6} \ \text{Bit} \]
+
+\schritt{Schritt 3 --- Die praktische Folgerung}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{je Tag} & \textbf{je Jahr}\\
+\midrule
+Unkomprimiert & $1$ MB & $365$ MB\\
+Komprimiert & $188$ kB & $69$ MB\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Selbst nach Kompression müssten jährlich rund $69$ Megabyte Schlüsselmaterial sicher ausgetauscht werden.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Warum das den Ansatz erledigt}
+Der Schlüssel muss über einen sicheren Kanal übertragen werden --- persönlich, per Kurier, auf einem versiegelten Datenträger.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hätte man einen solchen Kanal für $69$ Megabyte, so könnte man darüber gleich die Befunde senden. \textbf{Der Einmalschlüssel verschiebt das Problem, statt es zu lösen} --- er verwandelt \enquote{sicher übertragen} in \enquote{vorher sicher übertragen}.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Wo er dennoch eingesetzt wird}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kleine Mengen} & Diplomatische Kurzmitteilungen, bei denen wenige hundert Bit genügen.\\
+\textbf{Vorratshaltung} & Der Schlüssel wird zu einem Zeitpunkt ausgetauscht, zu dem ein sicherer Kanal vorhanden ist, und später verbraucht.\\
+\textbf{Langfristigkeit} & Nachrichten, die auch in fünfzig Jahren geheim bleiben müssen --- wo keine rechnerische Annahme trägt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist heute wieder aktuell: Wer davon ausgeht, dass ein Quantenrechner die Verfahren aus Teil~V bricht, muss annehmen, dass heute aufgezeichneter Verkehr später entschlüsselt wird. \textbf{Gegen diese Sorge hilft nur informationstheoretische Sicherheit} --- Kapitel~15 kommt darauf zurück.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.3 --- Unizitätsdistanz}
+Bestimmen Sie die Unizitätsdistanz für ein Vigenère-Verfahren mit der Schlüssellänge $t$ und geben Sie an, ab welchem $t$ ein Text von $200$ Zeichen mehrdeutig bleibt.
+
+\loesung
+\schritt{Schritt 1 --- Die Schlüsselentropie}
+Der Schlüssel besteht aus $t$ gleichverteilten Buchstaben:
+\[ \Ent(K) = t\cdot\lb 26 = 4{,}70\,t \ \text{Bit} \]
+
+\schritt{Schritt 2 --- Die Unizitätsdistanz}
+\[ U = \frac{4{,}70\,t}{3{,}2} = 1{,}47\,t \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+$t$ & $\Ent(K)$ & $U$\\
+\midrule
+$1$ & $4{,}70$ & $1{,}5$\\
+$5$ & $23{,}50$ & $7{,}3$\\
+$20$ & $94{,}00$ & $29{,}4$\\
+$100$ & $470{,}0$ & $146{,}9$\\
+$136$ & $639{,}2$ & $\mathbf{199{,}8}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Antwort}
+\[ 1{,}47\,t \ >\ 200 \quad\Longrightarrow\quad t \ >\ 136 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Erst ab einer Schlüssellänge von $137$ Zeichen bleibt ein Text von $200$ Zeichen mehrdeutig.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Deutung}
+Der Schlüssel muss also mehr als zwei Drittel der Textlänge haben.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist Satz 9.3 in abgeschwächter Form: Perfekte Sicherheit verlangt $\Ent(K)\ge\Ent(M)$, also $4{,}70\,t \ge 1{,}5\cdot200 = 300$, mithin $t \ge 64$. Die Unizitätsdistanz verlangt mehr, weil sie nicht Perfektheit fordert, sondern nur Mehrdeutigkeit \kursiv{bei der Suche} --- und dafür muss die Redundanz über die \kursiv{gesamte} Alphabetgröße gemessen werden.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Warum Vigenère trotzdem fiel}
+Bei $t = 20$ und einem Text von $2000$ Zeichen liegt $U = 29$ weit unter der Textlänge --- der Schlüssel ist eindeutig bestimmt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und er ist auch \kursiv{findbar}: Kennt man $t$, so zerfällt der Text in $t$ Teiltexte, von denen jeder nur mit einem Cäsar-Verfahren verschlüsselt ist --- und dafür genügt die Häufigkeitsanalyse. Die Periode $t$ wiederum verrät sich durch Wiederholungen im Geheimtext. \textbf{Die Unizitätsdistanz sagt, dass es geht; das Kasiski-Verfahren sagt, wie.}}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Der Grenzfall}
+Bei $t \ge$ Textlänge und einem zufälligen Schlüssel wird Vigenère zum Einmalschlüssel.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Genau so wurde er historisch verwendet --- als \enquote{laufender Schlüssel} mit einem Buchtext als Quelle. Das ist nicht perfekt sicher, weil der Buchtext selbst redundant ist: Man sucht Schlüssel, die zugleich sinnvollen Klartext und sinnvollen Schlüsseltext liefern.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Patent und ein Beweis}
+\Person{Gilbert Vernam} (1890--1960) meldete 1919 für die amerikanische Telefongesellschaft ein Verfahren an, das Fernschreibzeichen mit einem Lochstreifen verknüpfte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Vernams ursprüngliches Verfahren benutzte einen sich wiederholenden Streifen --- also einen Vigenère mit langer Periode. \Person{Joseph Mauborgne} vom amerikanischen Fernmeldewesen erkannte, dass die Wiederholung die Schwäche ist, und schlug einen Streifen zufälliger Zeichen vor, der nur einmal benutzt wird. \textbf{Die entscheidende Idee war nicht die Verknüpfung, sondern die Einmaligkeit.}}
+\end{minipage}
+\end{center}
+
+\schritt{Der Beweis}
+\Person{Claude Shannon} bewies 1949 in \kursiv{Communication Theory of Secrecy Systems}, dass das Verfahren perfekt sicher ist --- und dass kein Verfahren mit kürzerem Schlüssel es sein kann.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Arbeit entstand bereits 1945 als vertraulicher Bericht und wurde erst nach der Freigabe veröffentlicht. Sie enthält neben Satz 9.3 die Unizitätsdistanz und die Begriffe \kursiv{Verwirrung} und \kursiv{Verwischung}, die den Entwurf von Blockchiffren bis heute leiten --- Kapitel~10.}
+\end{minipage}
+\end{center}
+
+\schritt{Vorläufer}
+\Person{Frank Miller}, ein amerikanischer Bankier, beschrieb 1882 in einem Codebuch für Telegramme ein Verfahren mit Einmalschlüsseln --- siebenunddreißig Jahre vor Vernam.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Arbeit wurde erst 2011 wiederentdeckt und ausgewertet. Sie enthält bereits die Forderung nach Zufälligkeit und Einmaligkeit. Ob Vernam davon wusste, ist unbekannt.}
+\end{minipage}
+\end{center}
+
+\schritt{Venona}
+Zwischen 1943 und 1980 entzifferten amerikanische Dienste rund dreitausend sowjetische Funksprüche.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Ursache war ein Herstellungsfehler: Unter dem Druck des Krieges wurden Schlüsselblöcke doppelt gedruckt und an verschiedene Stellen verteilt. \textbf{Von Millionen Funksprüchen waren nur wenige Prozent betroffen --- und das genügte.} Das Projekt enttarnte unter anderem die Spionage im Manhattan-Projekt. Es ist der lehrreichste Fall der Kryptographiegeschichte: Nicht die Mathematik versagte, sondern die Papierverwaltung.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Informationstheoretische Sicherheit heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{5.0cm}@{}}
+\toprule
+\textbf{Quanten\-schlüsseltausch} & Zwei Parteien erzeugen gemeinsames Schlüsselmaterial; Abhören ist physikalisch nachweisbar.\\
+\textbf{Geheimnis\-teilung} & Ein Geheimnis wird so auf $n$ Teile verteilt, dass je $k$ genügen und $k-1$ nichts verraten.\\
+\textbf{Abhörkanäle} & Ist der Kanal zum Angreifer schlechter als der zum Empfänger, lässt sich ohne Schlüssel geheim übertragen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\Person{Adi Shamir} gab 1979 ein Verfahren an, das auf der Polynominterpolation aus Kapitel~6 beruht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man wählt ein Polynom vom Grad $k-1$, dessen konstantes Glied das Geheimnis ist, und verteilt $n$ Auswertungen. Je $k$ Punkte bestimmen das Polynom; $k-1$ Punkte lassen jeden Wert an der Stelle null gleich möglich. \textbf{Das ist beweisbare Sicherheit im Sinn von Definition 9.1} --- und dasselbe mathematische Prinzip wie beim Reed-Solomon-Code, nur in umgekehrter Absicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\Person{Aaron Wyner} zeigte 1975: Ist der Kanal zum Abhörer schlechter, so gibt es eine positive \Begriff{Geheimhaltungskapazität}.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Sie beträgt beim gedächtnislosen Kanal gerade die Differenz der Kapazitäten. Das ist bemerkenswert: \textbf{Man kann ohne vorher ausgetauschten Schlüssel geheim übertragen}, sofern der Gegner physikalisch benachteiligt ist. Praktisch ist die Voraussetzung schwer zu sichern --- man müsste wissen, wie gut der Empfang des Abhörers ist.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Kerckhoffs} & nur der Schlüssel ist geheim\\
+\textbf{Definition 9.1} & $I(M;C) = 0$\\
+\textbf{Satz 9.2} & Einmalschlüssel ist perfekt\\
+\textbf{Satz 9.3} & $\Ent(K)\ge\Ent(M)$ --- vier Zeilen\\
+\textbf{Definition 9.4} & Unizitätsdistanz $\Ent(K)/D$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Satz 9.3 macht perfekte Sicherheit praktisch unbrauchbar. Das nächste Kapitel gibt sie auf --- und ersetzt sie durch eine Annahme, die niemand beweisen kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}

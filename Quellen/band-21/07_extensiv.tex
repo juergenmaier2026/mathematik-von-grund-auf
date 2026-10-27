@@ -1,0 +1,698 @@
+\part{Über die Zeit}
+
+\chapter{Reihenfolge und Glaubwürdigkeit}
+
+\section{Dasselbe Spiel, nacheinander gespielt}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall, umgestellt}
+Das Ausbauspiel aus Kapitel~5 hatte drei Gleichgewichte und keine Antwort darauf, welches eintritt. Nun ziehe das Klinikum zuerst, und das Marienhospital sehe die Entscheidung.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\node[knotenr] (w) at (0,2.4) {K};
+\node[knotenb] (a) at (-2.2,1.2) {M};
+\node[knotenb] (b) at (2.2,1.2) {M};
+\draw[kanted] (w)--(a) node[midway,above left,font=\scriptsize,color=grau] {bauen};
+\draw[kanted] (w)--(b) node[midway,above right,font=\scriptsize,color=grau] {verzichten};
+\foreach \x/\p/\lab in {-3.2/a/verzicht., -1.2/a/bauen, 1.2/b/verzicht., 3.2/b/bauen}
+  \draw[kante] (\p)--(\x,0.2);
+\node[font=\scriptsize, color=grau, anchor=north] at (-3.2,0.2) {$(5,2)$};
+\node[font=\scriptsize, color=grau, anchor=north] at (-1.2,0.2) {$(1,1)$};
+\node[font=\scriptsize, color=grau, anchor=north] at (1.2,0.2) {$(3,3)$};
+\node[font=\scriptsize, color=grau, anchor=north] at (3.2,0.2) {$(2,5)$};
+\node[font=\scriptsize, color=grau] at (-3.4,0.75) {verz.};
+\node[font=\scriptsize, color=grau] at (-1.0,0.75) {baut};
+\node[font=\scriptsize, color=grau] at (1.0,0.75) {verz.};
+\node[font=\scriptsize, color=grau] at (3.4,0.75) {baut};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Auszahlungen sind unverändert.} Nur die Reihenfolge ist neu --- und das genügt, um die Unbestimmtheit aufzulösen.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 7.1 --- Spiel in extensiver Form}
+Ein \Begriff{Spielbaum} besteht aus Knoten und Kanten. An jedem inneren Knoten zieht ein Spieler; jeder Endknoten trägt einen Auszahlungsvektor.
+
+Eine \Begriff{Strategie} eines Spielers ist ein \kursiv{vollständiger Plan}: für jeden Knoten, an dem er ziehen könnte, eine Festlegung.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Strategiebegriff ist überraschend umfangreich}
+Das Marienhospital zieht nur einmal --- aber es kann an zwei verschiedenen Knoten am Zug sein.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.6cm}P{2.8cm}@{}}
+\toprule
+\textbf{Strategie} & \textbf{nach K baut} & \textbf{nach K verzichtet}\\
+\midrule
+$VV$ & verzichten & verzichten\\
+$VB$ & verzichten & bauen\\
+$BV$ & bauen & verzichten\\
+$BB$ & bauen & bauen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Vier Strategien für einen einzigen Zug.} Eine Strategie legt auch fest, was man in Lagen täte, die gar nicht eintreten.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das wirkt umständlich und ist der Kern des Kapitels. \textbf{Genau diese Festlegungen für nicht eintretende Lagen sind die Drohungen} --- und die Frage, ob man sie glauben muss, ist die Frage nach ihrer Optimalität im jeweiligen Zweig. Bei größeren Bäumen wächst die Zahl der Strategien rasch: Bei $k$ Entscheidungsknoten mit je zwei Zügen sind es $2^{k}$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Rückwärtsinduktion}
+
+\begin{merksatz}
+\boxtitel{Das Verfahren}
+Man löst den Baum von den Blättern her auf.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Betrachte einen Knoten, dessen Nachfolger alle Endknoten sind.\\
+$2$ & Der dort ziehende Spieler wählt seine beste Auszahlung.\\
+$3$ & Ersetze den Knoten durch diesen Auszahlungsvektor.\\
+$4$ & Wiederhole, bis nur die Wurzel bleibt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der Leitfall}
+\kursiv{Knoten nach \enquote{K baut}:} Das Marienhospital vergleicht $2$ (verzichten) mit $1$ (bauen).
+\[ \Longrightarrow \text{verzichten}, \quad \text{Wert } (5,2) \]
+
+\kursiv{Knoten nach \enquote{K verzichtet}:} Es vergleicht $3$ mit $5$.
+\[ \Longrightarrow \text{bauen}, \quad \text{Wert } (2,5) \]
+
+\kursiv{Die Wurzel:} Das Klinikum vergleicht $5$ mit $2$.
+\[ \Longrightarrow \text{bauen} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ergebnis $(5,2)$ --- das Klinikum setzt sich durch, weil es zuerst zieht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der \Begriff{Erstzieher-Vorteil}, und er ist die formale Fassung dessen, was Aufgabe 5.2 als Festlegung beschrieb. \textbf{Der Vorteil entsteht nicht durch den früheren Zug, sondern durch dessen Sichtbarkeit.} Zöge das Klinikum zuerst, ohne dass das Marienhospital es erführe, so läge wieder das Spiel aus Kapitel~5 vor.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 7.2 --- Zermelo, 1913}
+Jedes endliche Spiel mit vollkommener Information --- alle Züge sind sichtbar, kein Zufall --- besitzt ein Gleichgewicht in reinen Strategien.
+
+\schritt{Beweis}
+Rückwärtsinduktion liefert eines. Da der Baum endlich ist, bricht das Verfahren ab; an jedem Knoten existiert ein Maximum, weil endlich viele Züge zur Wahl stehen. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man braucht hier keinen Fixpunktsatz und keine gemischten Strategien.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für Schach heißt das: Entweder kann Weiß gewinnen, oder Schwarz, oder beide können ein Remis erzwingen. \textbf{Welches der drei zutrifft, ist unbekannt} --- der Baum hat etwa $10^{120}$ Knoten. Dame ist seit 2007 gelöst (Remis bei beiderseits bestem Spiel); Schach nicht und voraussichtlich nie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Unglaubwürdige Drohungen}
+
+\begin{merksatz}
+\boxtitel{Die Normalform desselben Spiels}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{1.8cm}P{1.6cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+& $VV$ & $VB$ & $BV$ & $BB$\\
+\midrule
+\textbf{bauen} & $(5,2)$ & $(5,2)$ & $(1,1)$ & $(1,1)$\\
+\textbf{verzicht.} & $(3,3)$ & $(2,5)$ & $(3,3)$ & $(2,5)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Nash-Gleichgewichte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{3.0cm}@{}}
+\toprule
+\textbf{Gleichgewicht} & \textbf{Aus\-zahlung} & \\
+\midrule
+$(\text{bauen},\ VV)$ & $(5,2)$ & \\
+$(\text{bauen},\ VB)$ & $(5,2)$ & \textcolor{gruen}{Rückwärts\-induktion}\\
+$(\text{verzicht.},\ BB)$ & $(2,5)$ & \textcolor{akzent}{Drohung}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Drei Gleichgewichte --- und eines davon widerspricht der Rückwärtsinduktion.}
+\end{minipage}
+\end{center}
+
+\schritt{Das dritte genauer}
+Die Strategie $BB$ besagt: \enquote{Ich baue, was immer du tust.}
+
+\kursiv{Prüfung:} Gilt das Klinikum als abweichend --- es baut ---, so führt $BB$ zu $(1,1)$. Das Klinikum bliebe also lieber bei $2$. Die Drohung wirkt.
+
+\kursiv{Der Einwand:} Baut das Klinikum tatsächlich, so steht das Marienhospital vor der Wahl $2$ gegen $1$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es würde nicht bauen.} Die Drohung ist ein Gleichgewicht, weil sie nie auf die Probe gestellt wird --- und genau deshalb kostet sie nichts.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Schwäche des Nash-Begriffs bei sequentiellen Spielen: \textbf{Er prüft nur, was auf dem tatsächlich beschrittenen Pfad geschieht.} Was jemand abseits des Pfades angekündigt hat, bleibt ungeprüft, weil es dort keine Abweichung gibt, die sich lohnen könnte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 7.3 --- Teilspielperfektheit}
+Ein \Begriff{Teilspiel} ist der Baum unterhalb eines Knotens, sofern er für sich ein Spiel bildet.
+
+Ein Strategieprofil heißt \Begriff{teilspielperfekt}, wenn es in \kursiv{jedem} Teilspiel ein Nash-Gleichgewicht ist --- auch in solchen, die nicht erreicht werden.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Prüfung im Leitfall}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+\textbf{Strategie} & \textbf{nach K baut} & \textbf{nach K verzichtet}\\
+\midrule
+$VV$ & $2$ \textcolor{gruen}{optimal} & $3 < 5$ \textcolor{akzent}{nicht optimal}\\
+$VB$ & $2$ \textcolor{gruen}{optimal} & $5$ \textcolor{gruen}{optimal}\\
+$BB$ & $1 < 2$ \textcolor{akzent}{nicht} & $5$ \textcolor{gruen}{optimal}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nur $(\text{bauen},\ VB)$ ist teilspielperfekt} --- genau die Lösung der Rückwärtsinduktion.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert ist, dass auch $(\text{bauen}, VV)$ herausfällt, obwohl es dieselbe Auszahlung liefert. \textbf{Teilspielperfektheit prüft das Verhalten, nicht das Ergebnis} --- und $VV$ enthält die Absicht, nach einem Verzicht des Klinikums ebenfalls zu verzichten, was dort nicht optimal wäre.}
+\end{minipage}
+\end{center}
+
+\schritt{Satz 7.4}
+Bei vollkommener Information sind die teilspielperfekten Gleichgewichte genau die Lösungen der Rückwärtsinduktion.
+
+\kursiv{Grund:} Jeder Entscheidungsknoten beginnt ein Teilspiel; die Forderung dort ist genau die Wahl des Maximums.
+\end{merksatz}
+
+\section{Wenn nicht alles sichtbar ist}
+
+\begin{merksatz}
+\boxtitel{Informationsmengen}
+Zieht ein Spieler, ohne zu wissen, an welchem Knoten er steht, so fasst man diese Knoten zu einer \Begriff{Informationsmenge} zusammen.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\node[knotenr] (w) at (0,2.2) {K};
+\node[knotenb] (a) at (-1.6,1.1) {M};
+\node[knotenb] (b) at (1.6,1.1) {M};
+\draw[kanted] (w)--(a); \draw[kanted] (w)--(b);
+\draw[grau!60, line width=0.9pt, dashed, rounded corners=8pt]
+  (-2.2,0.7) rectangle (2.2,1.5);
+\node[font=\scriptsize\itshape, color=grau, anchor=west] at (2.35,1.1) {eine Informationsmenge};
+\foreach \x/\p in {-2.4/a, -0.8/a, 0.8/b, 2.4/b} \draw[kante] (\p)--(\x,0.2);
+\node[font=\scriptsize\itshape, color=grau] at (0,-0.35) {M weiß nicht, was K gezogen hat};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Strategie muss dann an allen Knoten derselben Menge dasselbe vorschreiben.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit lassen sich gleichzeitige Züge als Baum darstellen --- Teil~I und II sind Sonderfälle von Teil~III. \textbf{Das Spiel aus Kapitel~5 ist derselbe Baum wie der vom Kapitelanfang}, nur mit den beiden M-Knoten in einer Informationsmenge. Der Erstzieher-Vorteil verschwindet dann vollständig.}
+\end{minipage}
+\end{center}
+
+\schritt{Satz 7.5 --- Kuhn, 1953}
+Bei \Begriff{perfektem Erinnerungsvermögen} --- kein Spieler vergisst, was er wusste oder tat --- genügt es, gemischte Strategien als \Begriff{Verhaltensstrategien} anzugeben: an jeder Informationsmenge eine eigene Wahrscheinlichkeitsverteilung.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist eine erhebliche Vereinfachung. Ohne den Satz müsste man über sämtliche Kombinationen von Plänen mischen --- bei $k$ Informationsmengen mit je zwei Zügen über $2^{k}$ reine Strategien. \textbf{Mit ihm genügen $k$ einzelne Zahlen.} Das ist der Grund, warum sich Spiele wie Poker überhaupt behandeln lassen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Das Tausendfüßlerspiel}
+Zwei Häuser können abwechselnd einen wachsenden gemeinsamen Vorteil abschöpfen oder weiterreichen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{1.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Stufe} & \textbf{am Zug} & \textbf{nimmt} & \textbf{reicht weiter}\\
+\midrule
+$1$ & K & $(1,1)$ & Stufe 2\\
+$2$ & M & $(0,3)$ & Stufe 3\\
+$3$ & K & $(2,2)$ & Stufe 4\\
+$4$ & M & $(1,4)$ & $(3,3)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Rückwärtsinduktion}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.4cm}P{2.4cm}P{1.6cm}@{}}
+\toprule
+\textbf{Stufe} & \textbf{nehmen} & \textbf{weiter} & \\
+\midrule
+$4$ & $4$ & $3$ & \textcolor{akzent}{nimmt}\\
+$3$ & $2$ & $1$ & \textcolor{akzent}{nimmt}\\
+$2$ & $3$ & $2$ & \textcolor{akzent}{nimmt}\\
+$1$ & $1$ & $0$ & \textcolor{akzent}{nimmt}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Klinikum nimmt sofort. Ergebnis $(1,1)$ --- obwohl $(3,3)$ erreichbar gewesen wäre.}
+\end{minipage}
+\end{center}
+
+\schritt{Was Versuche zeigen}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In Experimenten reicht die überwiegende Mehrheit mehrfach weiter. Bei längeren Versionen mit hundert Stufen nimmt fast niemand auf der ersten. \textbf{Die Vorhersage ist eindeutig falsch}, und zwar nicht knapp.}
+\end{minipage}
+\end{center}
+
+\schritt{Die drei Erklärungsversuche}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Auszahlungen} & Die Spieler bewerten nicht nur den eigenen Betrag. Kapitel~15.\\
+\textbf{Denktiefe} & Niemand rechnet hundert Stufen zurück.\\
+\textbf{Zweifel} & Wer für möglich hält, dass der andere weiterreicht, rechnet anders.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist die theoretisch interessanteste. \textbf{Rückwärtsinduktion setzt voraus, dass jeder Spieler an jedem Knoten an die Rationalität aller übrigen glaubt} --- auch an einem Knoten, der nur erreicht wurde, weil jemand unrationell gezogen hat. Das ist eine schwer zu haltende Annahme, und \Person{Robert Aumann} und \Person{Ken Binmore} haben darüber eine jahrzehntelange Auseinandersetzung geführt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Lehre}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Teilspielperfektheit ist die sauberste Verfeinerung des Gleichgewichtsbegriffs --- und die empirisch am schlechtesten bestätigte.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.1 --- Einen Baum auflösen}
+Lösen Sie durch Rückwärtsinduktion. K zieht zuerst, dann M, dann K erneut.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.8cm}P{1.8cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+\textbf{K} & \textbf{M} & \textbf{K} & \textbf{Auszahlung}\\
+\midrule
+links & links & --- & $(3,1)$\\
+links & rechts & links & $(1,4)$\\
+links & rechts & rechts & $(4,2)$\\
+rechts & --- & --- & $(2,3)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Der letzte Knoten}
+Das Klinikum wählt zwischen $(1,4)$ und $(4,2)$ --- es zählt die erste Zahl.
+\[ 4 > 1 \quad\Longrightarrow\quad \text{rechts}, \quad \text{Wert } (4,2) \]
+
+\schritt{Schritt 2 --- Der M-Knoten}
+Das Marienhospital wählt zwischen $(3,1)$ und dem eben bestimmten $(4,2)$ --- es zählt die zweite Zahl.
+\[ 2 > 1 \quad\Longrightarrow\quad \text{rechts}, \quad \text{Wert } (4,2) \]
+
+\schritt{Schritt 3 --- Die Wurzel}
+Das Klinikum wählt zwischen $(4,2)$ und $(2,3)$.
+\[ 4 > 2 \quad\Longrightarrow\quad \text{links} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ergebnis $(4,2)$ auf dem Pfad links--rechts--rechts.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die vollständigen Strategien}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{6.4cm}@{}}
+\toprule
+\textbf{Klinikum} & Wurzel: links. Dritter Knoten: rechts.\\
+\textbf{Marienhosp.} & Zweiter Knoten: rechts.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Eine Beobachtung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Marienhospital wählt \enquote{rechts} und erhält $2$ --- obwohl \enquote{links} ihm $1$ gebracht hätte und es damit dem Klinikum nur $3$ statt $4$ gelassen hätte.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es kann also nicht schaden, indem es sich selbst schadet --- jedenfalls nicht hier. \textbf{Bei Nullsummenspielen fällt beides zusammen, hier nicht}, und das ist eine der häufigsten Fehlvorstellungen beim Lesen von Spielbäumen: Der Gegner wählt nicht, was einem selbst schadet, sondern was ihm nützt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Was ein Zufallszug ändern würde}
+Wäre der dritte Knoten kein Entscheidungs-, sondern ein Zufallsknoten mit je $\tfrac12$:
+\[ \tfrac12(1,4) + \tfrac12(4,2) = (2{,}5;\ 3) \]
+
+Dann wählte das Marienhospital $3 > 1$ --- rechts --- und das Klinikum an der Wurzel $2{,}5 > 2$ --- links. Ergebnis im Erwartungswert $(2{,}5;\ 3)$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{\textbf{Das Klinikum verliert durch den Zufall $1{,}5$, das Marienhospital gewinnt $1$.} Zufallsknoten behandelt man in der Rückwärtsinduktion wie Entscheidungsknoten --- nur dass man mittelt statt maximiert. Satz 7.2 gilt dann weiterhin, sofern man gemischte Ergebnisse zulässt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.2 --- Drohung und Gegendrohung}
+Ein Zulieferer ($Z$) verlangt vom Klinikum ($K$) einen höheren Preis. Das Klinikum kann annehmen oder ablehnen; bei Ablehnung kann der Zulieferer liefern oder die Lieferung einstellen.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{K} & \textbf{Z} & \textbf{Auszahlung}\\
+\midrule
+annehmen & --- & $(2,\ 4)$\\
+ablehnen & liefern & $(4,\ 2)$\\
+ablehnen & einstellen & $(0,\ 0)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Rückwärtsinduktion}
+\kursiv{Nach Ablehnung:} Der Zulieferer vergleicht $2$ mit $0$.
+\[ \Longrightarrow \text{liefern}, \quad \text{Wert } (4,2) \]
+
+\kursiv{Die Wurzel:} Das Klinikum vergleicht $2$ (annehmen) mit $4$.
+\[ \Longrightarrow \text{ablehnen} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Klinikum lehnt ab, der Zulieferer liefert trotzdem. Ergebnis $(4,2)$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die Normalform}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Z: liefern} & \textbf{Z: einstellen}\\
+\midrule
+\textbf{annehmen} & $(2,4)$ & $(2,4)$\\
+\textbf{ablehnen} & $(4,2)$ & $(0,0)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Nash-Gleichgewichte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Feld} & \textbf{K wechselt} & \textbf{Z wechselt}\\
+\midrule
+(annehm., liefern) & $2\to4$ & --- \\
+(annehm., einstell.) & $2\to0$ & $4\to4$ \\
+(ablehn., liefern) & $4\to2$ & $2\to0$ \\
+(ablehn., einstell.) & $0\to2$ & --- \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{1.8cm}P{2.2cm}@{}}
+\toprule
+\textbf{Gleichgewicht} & \textbf{Aus\-zahlung} & \\
+\midrule
+(ablehnen, liefern) & $(4,2)$ & \textcolor{gruen}{teilspiel\-perfekt}\\
+(annehmen, einstellen) & $(2,4)$ & \textcolor{akzent}{Drohung}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Warum die Drohung nicht trägt}
+Die Strategie \enquote{einstellen} wäre nach einer Ablehnung auszuführen. Dort gilt $0 < 2$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Zulieferer schadete sich selbst.} Das Gleichgewicht besteht nur, weil es nie geprüft wird.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Wie der Zulieferer die Drohung tragfähig macht}
+Er muss dafür sorgen, dass Einstellen tatsächlich besser ist als Liefern.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Vertragsstrafe} & Eine Meistbegünstigungsklausel mit anderen Kunden: Liefert er billiger, muss er allen anderen den Preis senken.\\
+\textbf{Ansehen} & Bei vielen Kunden lohnt es, einmal hart zu bleiben --- Kapitel~8.\\
+\textbf{Kapazität} & Er bindet die Menge anderweitig und \kursiv{kann} nicht liefern.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle drei verändern die Auszahlungen im Teilspiel --- nicht die Ankündigung. \textbf{Eine Drohung wird nicht dadurch glaubwürdig, dass man sie deutlicher ausspricht}, sondern dadurch, dass ihre Ausführung dem Drohenden nützt. Das ist Schellings Punkt aus Kapitel~5, nun im Baum sichtbar.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.3 --- Der Tausendfüßler verlängert}
+Bestimmen Sie im Tausendfüßlerspiel aus Abschnitt 7.5, ab welcher Wahrscheinlichkeit $\pi$, dass der Gegner weiterreicht, sich das Weiterreichen auf Stufe 3 lohnt.
+
+\loesung
+\schritt{Schritt 1 --- Die Lage auf Stufe 3}
+Das Klinikum ist am Zug.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{3.0cm}@{}}
+\toprule
+\textbf{Wahl} & \textbf{Ergebnis} & \\
+\midrule
+nehmen & $(2,2)$ & sicher $2$\\
+weiter & $(1,4)$ oder $(3,3)$ & abhängig von M\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Der Erwartungswert beim Weiterreichen}
+Das Marienhospital reiche mit Wahrscheinlichkeit $\pi$ weiter:
+\[ \mathbb{E} = \pi\cdot3 + (1-\pi)\cdot1 = 1 + 2\pi \]
+
+\schritt{Schritt 3 --- Die Schwelle}
+\[ 1+2\pi \ >\ 2 \quad\Longrightarrow\quad \pi \ >\ \tfrac12 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ab einer Wahrscheinlichkeit von fünfzig Prozent lohnt sich das Weiterreichen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Und auf Stufe 1?}
+Reicht das Klinikum auf Stufe 3 weiter, so ist die Lage auf Stufe 1 zu bewerten. Das Marienhospital reiche auf Stufe 2 mit Wahrscheinlichkeit $\rho$ weiter.
+
+\kursiv{Beim Weiterreichen erhält das Klinikum:}
+\[ \rho\,(1+2\pi) + (1-\rho)\cdot0 = \rho\,(1+2\pi) \]
+
+\kursiv{Beim Nehmen:} $1$.
+
+\[ \rho\,(1+2\pi) > 1 \]
+
+\kursiv{Bei $\pi = \rho = 0{,}8$:} $0{,}8\cdot2{,}6 = 2{,}08 > 1$ \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei mäßigem Vertrauen lohnt sich das Weiterreichen deutlich.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Auflösung des Widerspruchs}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Rückwärtsinduktion setzt $\pi = \rho = 0$ --- und zwar nicht als Annahme über Menschen, sondern als Folgerung aus der unterstellten Rationalität. \textbf{Wer dem Gegenüber eine geringe Wahrscheinlichkeit für unrationelles Verhalten zubilligt, rechnet völlig anders} --- und kommt zu dem, was man beobachtet.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Die formale Fassung}
+\Person{Kreps}, \Person{Milgrom}, \Person{Roberts} und \Person{Wilson} zeigten 1982, dass bereits eine kleine Wahrscheinlichkeit für einen \enquote{unbedingt kooperativen} Gegenspielertyp genügt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dann lohnt es sich auch für einen rein eigennützigen Spieler, lange zu kooperieren --- um den Verdacht aufrechtzuerhalten, er sei von diesem Typ. \textbf{Aus einem Zweifel an der Rationalität wird ein rationaler Grund zur Zusammenarbeit}, und das ist eines der eleganteren Ergebnisse des Fachs. Kapitel~8 führt denselben Gedanken für wiederholte Spiele aus.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von Schachfiguren zu Verfeinerungen}
+\Person{Ernst Zermelo} hielt 1912 den Vortrag, der als Beginn der Spieltheorie gilt --- und bewies dabei nicht ganz das, was man ihm heute zuschreibt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Seine Arbeit behandelt die Frage, wann eine Gewinnstellung in endlich vielen Zügen zu verwerten ist. Die heute übliche Fassung --- Gewinn, Verlust oder Remis ist bestimmt --- stammt von \Person{Dénes Kőnig} und \Person{László Kalmár} aus den 1920er Jahren. \textbf{Stiglers Gesetz, diesmal mit zwei Nachbesserern.}}
+\end{minipage}
+\end{center}
+
+\schritt{Kuhn}
+\Person{Harold Kuhn} (1925--2014) gab 1953 der extensiven Form ihre heutige Gestalt: Informationsmengen, Verhaltensstrategien, perfektes Erinnerungsvermögen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sein Satz über Verhaltensstrategien ist die Grundlage jeder praktischen Behandlung großer Spiele. \textbf{Kuhn war zugleich einer der Mathematiker, die sich um Nash kümmerten}, als dieser erkrankt war, und er organisierte später dessen Rückkehr in die Fakultät.}
+\end{minipage}
+\end{center}
+
+\schritt{Selten}
+\Person{Reinhard Selten} (1930--2016) führte 1965 die Teilspielperfektheit ein --- in einer Arbeit über Nachfrageträgheit im Oligopol.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Begriff war ein Nebenprodukt: Selten stellte fest, dass sein Modell absurde Gleichgewichte besaß, und suchte ein Kriterium, sie auszuschließen. \textbf{Die Arbeit erschien auf Deutsch in der \kursiv{Zeitschrift für die gesamte Staatswissenschaft}} und wurde international erst nach Jahren wahrgenommen.}
+\end{minipage}
+\end{center}
+
+\schritt{Und ein Selbstversuch}
+Selten war zugleich einer der Ersten, die spieltheoretische Vorhersagen im Experiment prüften --- und ihnen widersprachen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er sagte über sich, er sei als Theoretiker Anhänger des Gleichgewichtsbegriffs und als Experimentator überzeugt, dass Menschen ihm nicht folgen. \textbf{Diese Doppelhaltung hat er nie aufgelöst und ausdrücklich für angemessen gehalten} --- ein bemerkenswertes Beispiel wissenschaftlicher Redlichkeit von jemandem, der für den Begriff den Nobelpreis erhielt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Bäume in der Praxis}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Spielprogramme} & Rückwärtsinduktion mit Abschneiden und Bewertungsfunktion statt vollständiger Auflösung.\\
+\textbf{Unvollkommene Information} & Bei Poker genügt die Baumsuche nicht --- man braucht Gleichgewichtsnäherungen.\\
+\textbf{Verhandlungen} & Wechselseitige Angebote als Baum; Kapitel~14.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Schachprogramme lösen den Baum nicht auf, sondern brechen nach wenigen Zügen ab und schätzen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Seit 2017 ersetzen Verfahren, die durch Spiel gegen sich selbst lernen, die handgebauten Bewertungsfunktionen. \textbf{Die Rückwärtsinduktion bleibt das Gerüst}, nur die Blätter werden anders bewertet --- und die Suche wird durch eine gelernte Vorauswahl gelenkt statt durch feste Regeln.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Bei unvollkommener Information zerfällt der Baum nicht in unabhängige Teilspiele.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man kann einen Zweig nicht für sich lösen, weil die Bewertung davon abhängt, was der Gegner über die eigene Karte glaubt --- und das hängt vom Verhalten in \kursiv{anderen} Zweigen ab. \textbf{Damit versagt das zentrale Verfahren dieses Kapitels}, und an seine Stelle treten die iterativen Näherungen aus Kapitel~3.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 7.1} & Strategie $=$ vollständiger Plan\\
+\textbf{Satz 7.2} & Zermelo: rein und endlich genügt\\
+\textbf{Definition 7.3} & in jedem Teilspiel ein Gleichgewicht\\
+\textbf{Die Drohung} & glaubwürdig heißt: nützt dem Drohenden\\
+\textbf{Der Bruchfall} & sauberste Verfeinerung, schwächste Bestätigung\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel wird dasselbe Spiel nicht einmal, sondern immer wieder gespielt --- und aus der unglaubwürdigen Drohung wird eine tragfähige.}
+\end{minipage}
+\end{center}
+\end{merksatz}

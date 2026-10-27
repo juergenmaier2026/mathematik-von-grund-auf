@@ -1,0 +1,724 @@
+\chapter{Spiele und lineare Optimierung}
+
+\section{Was noch fehlt}
+
+\begin{merksatz}
+\boxtitel{Der Stand nach Kapitel 2}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Bewiesen} & Satz 2.2 für Matrizen der Größe $2\times2$.\\
+\textbf{Offen} & Der allgemeine Fall --- und ein Verfahren, das die optimalen Mischungen findet.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beides erledigt ein einziger Satz --- und er steht bereits in Band 19.}
+\end{minipage}
+\end{center}
+
+\schritt{Ein Beispiel, das die Verfahren aus Kapitel 1 und 2 nicht lösen}
+\[ A = \begin{pmatrix} 1 & 1 & 3\\ 1 & 4 & 1\\ 5 & 2 & 1 \end{pmatrix} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.6cm}P{2.2cm}@{}}
+\toprule
+\textbf{Prüfung} & \textbf{Ergebnis} & \\
+\midrule
+Sattelpunkt & Maximin $1$, Minimax $3$ & \textcolor{akzent}{keiner}\\
+Zeilendominanz & keine & \\
+Spaltendominanz & keine & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man kann hier nichts streichen und nichts ablesen. \textbf{Die Formel aus Satz 2.3 gilt nur für zwei mal zwei} --- für drei mal drei bräuchte man drei Gleichungen, und ob sie lösbar sind, ist keineswegs klar. Der Ausweg führt über ein Fach, das mit Spielen nichts zu tun zu haben scheint.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Spiel als lineares Programm}
+
+\begin{merksatz}
+\boxtitel{Die Aufgabe des Zeilenspielers}
+Er sucht eine Mischung $\vek p$, die ihm möglichst viel garantiert:
+\[ \max_{\vek p}\ v \quad\text{unter}\quad \sum_i p_i\,a_{ij} \ \ge\ v \ \ \text{für alle } j, \quad \sum_i p_i = 1, \quad p_i \ge 0 \]
+
+\schritt{Warum die Nebenbedingungen genügen}
+Garantiert die Mischung gegen jede \kursiv{reine} Spalte mindestens $v$, so auch gegen jede Mischung --- denn die ist ein gewichteter Mittelwert.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist ein lineares Programm} --- Zielfunktion und Nebenbedingungen sind linear in den Unbekannten $p_1,\ldots,p_m$ und $v$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist die Aufgabe im Prinzip gelöst: Band 19, Kapitel~3 liefert ein Verfahren. \textbf{Interessanter ist aber, was die Dualität aus Kapitel~4 jenes Bandes hier bedeutet} --- und das ist der eigentliche Gegenstand dieses Kapitels.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Eine Vereinfachung}
+Man darf annehmen, dass alle Einträge positiv sind --- und damit $v > 0$.
+
+\schritt{Warum das erlaubt ist}
+Addiert man zu jedem Eintrag dieselbe Zahl $k$, so ändert sich jede erwartete Auszahlung um genau $k$:
+\[ \sum_i\sum_j p_i\,(a_{ij}+k)\,q_j = \sum_i\sum_j p_i a_{ij} q_j + k\underbrace{\sum_i p_i}_{=1}\underbrace{\sum_j q_j}_{=1} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die optimalen Mischungen bleiben dieselben, der Wert verschiebt sich um $k$.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Substitution}
+Mit $v > 0$ setzt man
+\[ x_i := \frac{p_i}{v} \quad\Longrightarrow\quad \sum_i x_i = \frac{1}{v} . \]
+
+Aus $\sum_i p_i a_{ij} \ge v$ wird nach Division durch $v$:
+\[ \sum_i x_i\,a_{ij} \ \ge\ 1 \qquad\text{für alle } j \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$v$ groß machen heißt $\sum x_i$ klein machen.} Die Aufgabe wird zu
+\end{minipage}
+\end{center}
+
+\[ \boxed{\ \min\ \sum_i x_i \quad\text{unter}\quad A^{\!\top}\vek x \ge \vek 1, \quad \vek x \ge \vek 0\ } \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Nebenbedingung $\sum p_i = 1$ ist verschwunden --- sie steckt jetzt in der Zielfunktion. \textbf{Das ist der Kunstgriff}, und er ist der Grund, warum das Programm eine so einfache Gestalt annimmt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das duale Programm}
+
+\begin{merksatz}
+\boxtitel{Die Aufgabe des Spaltenspielers}
+Er sucht $\vek q$, das seinen Verlust begrenzt:
+\[ \min_{\vek q}\ w \quad\text{unter}\quad \sum_j a_{ij}\,q_j \ \le\ w \ \ \text{für alle } i, \quad \sum_j q_j = 1, \quad q_j \ge 0 \]
+
+Mit $y_j := q_j/w$:
+\[ \boxed{\ \max\ \sum_j y_j \quad\text{unter}\quad A\,\vek y \le \vek 1, \quad \vek y \ge \vek 0\ } \]
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 3.1 --- die beiden Programme sind zueinander dual}
+Das Programm des Spaltenspielers ist genau das duale Programm zu dem des Zeilenspielers im Sinne von Band 19, Definition 4.1.
+
+\schritt{Die Gegenüberstellung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Zeilenspieler} & \textbf{Spaltenspieler}\\
+\midrule
+Ziel & $\min \vek 1^{\!\top}\vek x$ & $\max \vek 1^{\!\top}\vek y$\\
+Bedingung & $A^{\!\top}\vek x \ge \vek 1$ & $A\,\vek y \le \vek 1$\\
+Vorzeichen & $\vek x \ge \vek 0$ & $\vek y \ge \vek 0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dieselbe Matrix, transponiert; Ziel und Ungleichungsrichtung vertauscht --- das ist die Dualität, Zeile für Zeile.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 3.2 --- der Minimax-Satz folgt}
+Satz 2.2 ist eine Folgerung aus dem starken Dualitätssatz.
+
+\schritt{Schritt 1 --- Beide Programme sind lösbar}
+\kursiv{Zulässig:} $\vek x$ mit hinreichend großen Einträgen erfüllt $A^{\!\top}\vek x \ge \vek 1$, da alle $a_{ij} > 0$. Ebenso ist $\vek y = \vek 0$ zulässig.
+
+\kursiv{Beschränkt:} Die schwache Dualität (Band 19, Satz 4.2) liefert
+\[ \vek 1^{\!\top}\vek y \ \le\ \vek 1^{\!\top}\vek x \]
+für alle zulässigen Paare --- also ist das Minimum nach unten und das Maximum nach oben beschränkt.
+
+\schritt{Schritt 2 --- Starke Dualität}
+Nach Band 19, Satz 4.3 gilt für die Optima
+\[ \vek 1^{\!\top}\vek x^{*} \ =\ \vek 1^{\!\top}\vek y^{*} \ =:\ z . \]
+
+\schritt{Schritt 3 --- Rückübersetzen}
+\[ \sum_i x_i^{*} = \frac{1}{v}, \qquad \sum_j y_j^{*} = \frac{1}{w} \]
+Aus $z = 1/v = 1/w$ folgt
+\[ v = w = \frac1z . \]
+
+\schritt{Schritt 4 --- Die Mischungen}
+\[ p_i = v\,x_i^{*}, \qquad q_j = w\,y_j^{*} \]
+Beide summieren sich zu eins. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Minimax-Satz und der Dualitätssatz sind dieselbe Aussage in zwei Sprachen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und die Umkehrung gilt ebenfalls: Man kann jedes lineare Programm als Nullsummenspiel schreiben und den Dualitätssatz aus dem Minimax-Satz herleiten. \textbf{Die beiden Sätze sind äquivalent} --- was von Neumann 1947 im Gespräch mit Dantzig binnen weniger Minuten bemerkte, wie der Geschichtskasten erzählt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Ausgleichssatz}
+
+\begin{merksatz}
+\boxtitel{Satz 3.3 --- Prinzip der Gleichgültigkeit}
+Seien $\vek p^{*}$ und $\vek q^{*}$ optimal mit Wert $v$. Dann gilt:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Benutzte Spalten} & Ist $q_j^{*} > 0$, so bringt Spalte $j$ gegen $\vek p^{*}$ genau $v$.\\
+\textbf{Benutzte Zeilen} & Ist $p_i^{*} > 0$, so bringt Zeile $i$ gegen $\vek q^{*}$ genau $v$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis der ersten Aussage}
+Setze $c_j := \sum_i p_i^{*} a_{ij}$ --- der Ertrag von Spalte $j$ gegen $\vek p^{*}$.
+
+\kursiv{Erstens:} Da $\vek p^{*}$ optimal ist, gilt $c_j \ge v$ für alle $j$.
+
+\kursiv{Zweitens:} Der Wert ist der Mittelwert
+\[ v = \sum_j q_j^{*}\,c_j . \]
+
+\kursiv{Drittens:} Ein gewichteter Mittelwert von Zahlen, die alle $\ge v$ sind, ist genau dann gleich $v$, wenn jede Zahl mit positivem Gewicht gleich $v$ ist.
+
+\[ q_j^{*} > 0 \quad\Longrightarrow\quad c_j = v \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis ist drei Zeilen lang und benutzt nur, dass ein Mittelwert nicht kleiner sein kann als sein kleinster Summand. \textbf{In der Sprache von Band 19 ist es der komplementäre Schlupf} (Satz 4.4) --- dieselbe Aussage, hier ohne Dualität hergeleitet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das Verfahren}
+Satz 3.3 liefert ein praktisches Vorgehen für kleine Matrizen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Vermute, welche Zeilen und Spalten benutzt werden.\\
+$2$ & Setze die Erträge der vermuteten Spalten gleich $v$ und löse das lineare Gleichungssystem.\\
+$3$ & Prüfe: alle $p_i \ge 0$? Alle unbenutzten Spalten $\ge v$?\\
+$4$ & Falls nein, andere Vermutung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Vermutung in Schritt 1 heißt \Begriff{Träger} der Lösung. \textbf{Bei $m$ Zeilen gibt es $2^{m}-1$ mögliche Träger}, und das Durchprobieren wächst exponentiell --- weshalb man für größere Matrizen das Simplexverfahren nimmt. Für drei mal drei genügt meist der erste Versuch: voller Träger.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Beispiel gelöst}
+
+\begin{merksatz}
+\boxtitel{Die Matrix vom Kapitelanfang}
+\[ A = \begin{pmatrix} 1 & 1 & 3\\ 1 & 4 & 1\\ 5 & 2 & 1 \end{pmatrix} \]
+
+\schritt{Schritt 1 --- Voller Träger vermuten}
+Wir setzen an, dass alle drei Zeilen benutzt werden. Nach Satz 3.3 müssen dann alle drei Spalten gegen $\vek p$ denselben Wert $v$ liefern:
+\begin{align*}
+1p_1 + 1p_2 + 5p_3 &= v\\
+1p_1 + 4p_2 + 2p_3 &= v\\
+3p_1 + 1p_2 + 1p_3 &= v
+\end{align*}
+dazu $p_1+p_2+p_3 = 1$.
+
+\schritt{Schritt 2 --- Lösen}
+\kursiv{Erste minus zweite:}
+\[ -3p_2 + 3p_3 = 0 \quad\Longrightarrow\quad p_2 = p_3 \]
+
+\kursiv{Erste minus dritte:}
+\[ -2p_1 + 4p_3 = 0 \quad\Longrightarrow\quad p_1 = 2p_3 \]
+
+\kursiv{Einsetzen in die Summe:}
+\[ 2p_3 + p_3 + p_3 = 4p_3 = 1 \quad\Longrightarrow\quad p_3 = \tfrac14 \]
+
+\[ \vek p = \left(\tfrac12,\ \tfrac14,\ \tfrac14\right) \]
+
+\schritt{Schritt 3 --- Der Wert}
+\[ v = 1\cdot\tfrac12 + 1\cdot\tfrac14 + 5\cdot\tfrac14 = \tfrac12+\tfrac14+\tfrac54 = 2 \]
+
+\schritt{Schritt 4 --- Die Proben}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{4.0cm}P{1.6cm}@{}}
+\toprule
+\textbf{Spalte} & \textbf{Rechnung} & \textbf{Wert}\\
+\midrule
+$1$ & $\tfrac12+\tfrac14+\tfrac54$ & $2$\\
+$2$ & $\tfrac12+1+\tfrac12$ & $2$\\
+$3$ & $\tfrac32+\tfrac14+\tfrac14$ & $2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\checkmark
+
+\schritt{Schritt 5 --- Die Gegenseite}
+Analog für $\vek q$: Alle drei Zeilen müssen gegen $\vek q$ denselben Wert liefern.
+\begin{align*}
+1q_1 + 1q_2 + 3q_3 &= v\\
+1q_1 + 4q_2 + 1q_3 &= v\\
+5q_1 + 2q_2 + 1q_3 &= v
+\end{align*}
+
+\kursiv{Erste minus zweite:} $-3q_2 + 2q_3 = 0$, also $q_3 = \tfrac32 q_2$.\\
+\kursiv{Zweite minus dritte:} $-4q_1 + 2q_2 = 0$, also $q_2 = 2q_1$.
+
+Damit $q_2 = 2q_1$ und $q_3 = 3q_1$:
+\[ q_1 + 2q_1 + 3q_1 = 6q_1 = 1 \quad\Longrightarrow\quad q_1 = \tfrac16 \]
+
+\[ \vek q = \left(\tfrac16,\ \tfrac13,\ \tfrac12\right) \]
+
+\schritt{Schritt 6 --- Die Proben der Gegenseite}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{4.0cm}P{1.6cm}@{}}
+\toprule
+\textbf{Zeile} & \textbf{Rechnung} & \textbf{Wert}\\
+\midrule
+$1$ & $\tfrac16+\tfrac13+\tfrac32$ & $2$\\
+$2$ & $\tfrac16+\tfrac43+\tfrac12$ & $2$\\
+$3$ & $\tfrac56+\tfrac23+\tfrac12$ & $2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Wert beträgt $2$ --- zwischen Maximin $1$ und Minimax $3$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Die Programme geprüft}
+Mit $\vek x = \vek p/v$ und $\vek y = \vek q/v$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{3.0cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Vektor} & \textbf{Summe}\\
+\midrule
+$\vek x$ & $(\tfrac14,\ \tfrac18,\ \tfrac18)$ & $\tfrac12$\\
+$\vek y$ & $(\tfrac1{12},\ \tfrac16,\ \tfrac14)$ & $\tfrac12$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ \vek 1^{\!\top}\vek x = \vek 1^{\!\top}\vek y = \tfrac12 = \tfrac1v \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle drei Nebenbedingungen $A^{\!\top}\vek x \ge \vek 1$ sind mit Gleichheit erfüllt, ebenso alle drei Bedingungen $A\vek y \le \vek 1$. \textbf{Das ist der komplementäre Schlupf bei vollem Träger}: Wird jede Variable benutzt, so ist jede Nebenbedingung straff.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Drei Fallen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Falscher Träger} & Die Annahme, alle Zeilen würden benutzt, ist oft falsch. Dann kommen negative $p_i$ heraus.\\
+\textbf{Entartung} & Es kann mehrere optimale Mischungen geben --- die Lösung ist dann nicht eindeutig.\\
+\textbf{Größe} & Das Durchprobieren der Träger wächst exponentiell; das Simplexverfahren nicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Kommt in Schritt 2 ein negatives $p_i$ heraus, so war die Vermutung falsch.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Gleichungssystem ist dann trotzdem lösbar --- nur ist die Lösung keine Wahrscheinlichkeitsverteilung.} Man muss die Probe führen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die häufigste Fehlerquelle beim Rechnen von Hand: Man löst das System, erhält Zahlen und glaubt fertig zu sein. \textbf{Erst die Prüfung auf Nichtnegativität und auf die unbenutzten Spalten macht die Rechnung zu einem Beweis.} Aufgabe 3.3 führt einen Fall vor, in dem die Vermutung revidiert werden muss.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Bei Entartung im Sinne von Band 19, Kapitel~5 gibt es ganze Mengen optimaler Mischungen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der \kursiv{Wert} ist dennoch eindeutig --- das garantiert Satz 2.2. Uneindeutig ist nur, wie man ihn erreicht. \textbf{Die Menge der optimalen Mischungen ist stets konvex und kompakt}, was aus der linearen Beschreibung unmittelbar folgt: Sie ist die Lösungsmenge eines Ungleichungssystems.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Ein zyklisches Spiel}
+Drei Versorgungsstufen stehen zur Wahl. Jede hat gegenüber einer anderen einen Vorteil, die Vorteile sind aber verschieden groß:
+\[ A = \begin{pmatrix} 0 & 2 & -1\\ -2 & 0 & 1\\ 1 & -1 & 0 \end{pmatrix} \]
+Bestimmen Sie Wert und optimale Mischungen.
+
+\loesung
+\schritt{Schritt 1 --- Eine Beobachtung}
+\[ a_{ij} = -a_{ji} \qquad\text{für alle } i,j \]
+Die Matrix ist \Begriff{antisymmetrisch} --- das Spiel ist \kursiv{symmetrisch}: Beide Seiten haben dieselben Möglichkeiten und dieselben Aussichten.
+
+\schritt{Schritt 2 --- Der Wert ist null}
+Wäre $v > 0$, so könnte der Spaltenspieler die Mischung des Zeilenspielers übernehmen und erhielte $-v < 0$ --- im Widerspruch dazu, dass er sich $-v$ garantieren kann.
+
+\kursiv{Genauer:} Für jede Mischung $\vek p$ gilt wegen der Antisymmetrie
+\[ \vek p^{\!\top} A\,\vek p = 0 , \]
+denn die Summanden heben sich paarweise auf. Spielen beide $\vek p^{*}$, so ist die Auszahlung null --- und da beide optimal spielen, ist das der Wert.
+
+\[ v = 0 \]
+
+\schritt{Schritt 3 --- Die Mischung}
+Voller Träger vermutet, alle Spalten gleich $0$:
+\begin{align*}
+0p_1 - 2p_2 + 1p_3 &= 0\\
+2p_1 + 0p_2 - 1p_3 &= 0\\
+-1p_1 + 1p_2 + 0p_3 &= 0
+\end{align*}
+
+\kursiv{Dritte Gleichung:} $p_1 = p_2$.\\
+\kursiv{Zweite Gleichung:} $p_3 = 2p_1$.\\
+\kursiv{Probe erste Gleichung:} $-2p_1 + 2p_1 = 0$ \checkmark
+
+\[ p_1+p_1+2p_1 = 4p_1 = 1 \quad\Longrightarrow\quad \vek p = \left(\tfrac14,\ \tfrac14,\ \tfrac12\right) \]
+
+\schritt{Schritt 4 --- Die Proben}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{4.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Spalte} & \textbf{Rechnung} & \textbf{Wert}\\
+\midrule
+$1$ & $0 - \tfrac24 + \tfrac12$ & $0$\\
+$2$ & $\tfrac24 + 0 - \tfrac12$ & $0$\\
+$3$ & $-\tfrac14 + \tfrac14 + 0$ & $0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\checkmark
+
+Wegen der Symmetrie gilt $\vek q = \vek p$.
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die dritte Stufe wird doppelt so häufig gewählt wie die beiden anderen --- obwohl sie die kleinsten Vorteile bringt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Befund aus Kapitel~2 in schärferer Form: \textbf{Man spielt das häufig, was den Gegner am wirksamsten von seinen starken Zügen abhält} --- nicht das, was einem selbst am meisten einbringt. Stufe 3 schlägt Stufe 1 nur knapp, aber sie ist die einzige Antwort auf die starke Verbindung von Stufe 1 gegen Stufe 2.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Der Sonderfall gleicher Vorteile}
+Bei
+\[ \begin{pmatrix} 0 & 1 & -1\\ -1 & 0 & 1\\ 1 & -1 & 0 \end{pmatrix} \]
+--- also Schere, Stein, Papier --- ergibt dieselbe Rechnung $\vek p = (\tfrac13,\tfrac13,\tfrac13)$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Erst die \kursiv{Ungleichheit} der Vorteile erzeugt eine ungleiche Mischung. Bei symmetrischen Spielen mit gleichen Einsätzen ist die Gleichverteilung optimal --- und das ist der Grund, warum die Alltagsversion so leicht zu durchschauen ist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Vom Spiel zum Programm}
+Schreiben Sie das Spiel aus Abschnitt 3.5 als lineares Programm und geben Sie das duale Programm an.
+
+\loesung
+\schritt{Schritt 1 --- Die Voraussetzung prüfen}
+Alle Einträge von
+\[ A = \begin{pmatrix} 1 & 1 & 3\\ 1 & 4 & 1\\ 5 & 2 & 1 \end{pmatrix} \]
+sind positiv --- keine Verschiebung nötig.
+
+\schritt{Schritt 2 --- Das primale Programm}
+\[ \min\ x_1+x_2+x_3 \]
+unter
+\begin{align*}
+1x_1 + 1x_2 + 5x_3 &\ \ge\ 1\\
+1x_1 + 4x_2 + 2x_3 &\ \ge\ 1\\
+3x_1 + 1x_2 + 1x_3 &\ \ge\ 1\\
+x_1,x_2,x_3 &\ \ge\ 0
+\end{align*}
+
+\kursiv{Zur Aufstellung:} Die $j$-te Nebenbedingung enthält die $j$-te \kursiv{Spalte} von $A$ --- man liest also spaltenweise.
+
+\schritt{Schritt 3 --- Das duale Programm}
+\[ \max\ y_1+y_2+y_3 \]
+unter
+\begin{align*}
+1y_1 + 1y_2 + 3y_3 &\ \le\ 1\\
+1y_1 + 4y_2 + 1y_3 &\ \le\ 1\\
+5y_1 + 2y_2 + 1y_3 &\ \le\ 1\\
+y_1,y_2,y_3 &\ \ge\ 0
+\end{align*}
+
+\kursiv{Hier liest man zeilenweise.}
+
+\schritt{Schritt 4 --- Die Lösungen einsetzen}
+Aus Abschnitt 3.5: $v = 2$, $\vek p = (\tfrac12,\tfrac14,\tfrac14)$, $\vek q = (\tfrac16,\tfrac13,\tfrac12)$.
+
+\[ \vek x = \frac{\vek p}{v} = \left(\tfrac14,\ \tfrac18,\ \tfrac18\right), \qquad \vek y = \frac{\vek q}{v} = \left(\tfrac1{12},\ \tfrac16,\ \tfrac14\right) \]
+
+\schritt{Schritt 5 --- Die Nebenbedingungen prüfen}
+\kursiv{Primal, erste Bedingung:}
+\[ \tfrac14 + \tfrac18 + 5\cdot\tfrac18 = \tfrac{2}{8}+\tfrac18+\tfrac58 = \tfrac88 = 1 \quad \checkmark \]
+\kursiv{zweite:}
+\[ \tfrac14 + 4\cdot\tfrac18 + 2\cdot\tfrac18 = \tfrac28+\tfrac48+\tfrac28 = 1 \quad \checkmark \]
+\kursiv{dritte:}
+\[ 3\cdot\tfrac14 + \tfrac18 + \tfrac18 = \tfrac68+\tfrac18+\tfrac18 = 1 \quad \checkmark \]
+
+\kursiv{Dual, erste Bedingung:}
+\[ \tfrac1{12} + \tfrac16 + 3\cdot\tfrac14 = \tfrac1{12}+\tfrac2{12}+\tfrac9{12} = 1 \quad \checkmark \]
+
+\schritt{Schritt 6 --- Die Zielwerte}
+\[ \vek 1^{\!\top}\vek x = \tfrac14+\tfrac18+\tfrac18 = \tfrac12 \]
+\[ \vek 1^{\!\top}\vek y = \tfrac1{12}+\tfrac16+\tfrac14 = \tfrac{1+2+3}{12} = \tfrac12 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide Zielwerte stimmen überein --- die starke Dualität ist bestätigt.} Und $1/z = 1/\tfrac12 = 2 = v$.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Der Schattenpreis}
+In Band 19, Kapitel~5 war die duale Variable der Schattenpreis der Nebenbedingung.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hier bedeutet das: $y_j$ misst, wie stark die $j$-te Nebenbedingung des Zeilenspielers bindet --- und das ist bis auf den Faktor $v$ genau die Häufigkeit, mit der der Spaltenspieler Spalte $j$ wählt. \textbf{Die Mischung des Gegners ist der Schattenpreis der eigenen Garantien.} Das ist eine der eleganteren Übersetzungen, die dieser Band zu bieten hat.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Wenn der Träger kleiner ist}
+Das Klinikum hat einen dritten Standort zur Wahl:
+\[ A = \begin{pmatrix} 60 & 40\\ 30 & 70\\ 50 & 45 \end{pmatrix} \]
+Lösen Sie das Spiel.
+
+\loesung
+\schritt{Schritt 1 --- Dominanz prüfen}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Vergleich} & \textbf{Ergebnis} & \\
+\midrule
+Zeile 1 vs.\ 3 & $60>50$, $40<45$ & keine Dominanz\\
+Zeile 2 vs.\ 3 & $30<50$, $70>45$ & keine Dominanz\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zeile 3 lässt sich nicht streichen.} Der neue Standort ist gegen keinen der beiden anderen durchweg schlechter.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Vollen Träger versuchen}
+Bei drei Zeilen und zwei Spalten wären drei Unbekannte $p_i$ und $v$ durch zwei Spaltengleichungen plus Summe zu bestimmen --- ein Freiheitsgrad bleibt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist kein Zufall: \textbf{Bei $m$ Zeilen und $n$ Spalten kann der Träger höchstens $\min(m,n)$ groß sein}, wenn die Lösung eindeutig ist. Hier also höchstens zwei Zeilen. Man muss vermuten, \kursiv{welche} zwei.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Zeilen 1 und 2 vermuten}
+Das ist das Spiel aus Kapitel~2:
+\[ \vek p = \left(\tfrac23,\ \tfrac13,\ 0\right), \qquad \vek q = \left(\tfrac12,\ \tfrac12\right), \qquad v = 50 \]
+
+\schritt{Schritt 4 --- Die entscheidende Probe}
+Nach Satz 3.3 muss die \kursiv{unbenutzte} Zeile 3 gegen $\vek q$ höchstens $v$ bringen:
+\[ \tfrac12\cdot50 + \tfrac12\cdot45 = 25 + 22{,}5 = 47{,}5 \ \le\ 50 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Vermutung trägt.} Der neue Standort ist zwar nicht dominiert, aber gegen die optimale Mischung des Gegners schlechter.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Gegenprobe}
+Die benutzten Zeilen müssen gegen $\vek q$ genau $50$ bringen:
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{3.4cm}P{2.2cm}@{}}
+\toprule
+\textbf{Zeile} & \textbf{Rechnung} & \textbf{Wert}\\
+\midrule
+$1$ & $\tfrac12\cdot60+\tfrac12\cdot40$ & $50$ \checkmark\\
+$2$ & $\tfrac12\cdot30+\tfrac12\cdot70$ & $50$ \checkmark\\
+$3$ & $\tfrac12\cdot50+\tfrac12\cdot45$ & $47{,}5$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Und die Spalten gegen $\vek p$:
+\[ \tfrac23\cdot60+\tfrac13\cdot30 = 50, \qquad \tfrac23\cdot40+\tfrac13\cdot70 = 50 \quad \checkmark \]
+
+\schritt{Schritt 6 --- Die Lehre}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.6cm}@{}}
+\toprule
+\textbf{Dominanz} & hinreichend, um zu streichen\\
+\textbf{Nicht dominiert} & bedeutet \kursiv{nicht}, dass die Strategie benutzt wird\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der dritte Standort wäre gegen einen unvorsichtig spielenden Gegner brauchbar --- gegen Nord bringt er $50$ statt der garantierten $40$ von Zeile 1. \textbf{Gegen einen optimal spielenden Gegner ist er wertlos.} Das ist der Unterschied zwischen Dominanz, die immer gilt, und Unbrauchbarkeit im Gleichgewicht, die nur gegen gute Gegner gilt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Und wenn die Vermutung falsch gewesen wäre}
+Hätte man Zeilen 1 und 3 vermutet, so ergäbe sich:
+\[ p\cdot60 + (1-p)\cdot50 = p\cdot40 + (1-p)\cdot45 \]
+\[ 50+10p = 45-5p \quad\Longrightarrow\quad 15p = -5 \quad\Longrightarrow\quad p = -\tfrac13 \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Ein negatives $p$ --- die Vermutung war falsch. \textbf{Genau so erkennt man es}, und genau deshalb steht die Probe nicht am Ende der Rechnung, sondern ist Teil des Beweises.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Gespräch von wenigen Minuten}
+Im Oktober 1947 suchte \Person{George Dantzig} (1914--2005) von Neumann in Princeton auf, um ihm sein neu entwickeltes Simplexverfahren vorzustellen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dantzig berichtete später, er habe etwa eine Minute lang das Problem beschrieben, als von Neumann ihn unterbrach: \enquote{Kommen Sie zur Sache.} Dantzig schilderte die geometrische Form der linearen Optimierung --- und von Neumann trug daraufhin etwa neunzig Minuten lang die Dualitätstheorie vor.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Erklärung}
+Auf Dantzigs verblüffte Frage antwortete von Neumann, er habe soeben ein Buch über Spieltheorie mit Morgenstern geschrieben.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Er hatte in Dantzigs Problem sein eigenes wiedererkannt.} Die Dualität war für ihn der Minimax-Satz in anderer Schreibweise --- und alles, was daraus folgt, lag für ihn bereits vor. Dantzig nannte das Gespräch später die lehrreichste Anderthalbstunde seines Lebens.}
+\end{minipage}
+\end{center}
+
+\schritt{Die formale Klärung}
+\Person{David Gale}, \Person{Harold Kuhn} und \Person{Albert Tucker} veröffentlichten 1951 den Beweis, dass Minimax-Satz und Dualitätssatz äquivalent sind.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Beide Richtungen: Jedes Matrixspiel wird zu einem Paar dualer Programme, und jedes Paar dualer Programme zu einem symmetrischen Matrixspiel. \textbf{Die Übersetzung in die zweite Richtung ist die unerwartetere} und benutzt eine antisymmetrische Blockmatrix, in der Primal und Dual gegeneinander antreten.}
+\end{minipage}
+\end{center}
+
+\schritt{Und ein Nachwort zu Dantzig}
+Dantzig war 1939 als Doktorand zu spät in eine Vorlesung gekommen und hatte zwei an die Tafel geschriebene Aufgaben für Hausaufgaben gehalten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er löste beide und entschuldigte sich für die Verspätung der Abgabe. Es waren zwei offene Probleme der Statistik. Die Geschichte ist verbürgt --- \textbf{Dantzig hat sie selbst mehrfach erzählt und dabei betont, er hätte sie wohl nicht gelöst, wenn er gewusst hätte, was sie waren.}}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Spiele berechnen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{5.0cm}@{}}
+\toprule
+\textbf{Nullsummen\-spiele} & In polynomialer Zeit lösbar --- über die lineare Optimierung.\\
+\textbf{Nichtnullsummen} & Schon bei zwei Spielern deutlich schwerer; Kapitel~6.\\
+\textbf{Sehr große Spiele} & Iterative Verfahren statt exakter Lösung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Dass lineare Programme in polynomialer Zeit lösbar sind, wurde 1979 von \Person{Leonid Chatschijan} bewiesen --- Band 19, Kapitel~12.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit gilt dasselbe für Nullsummenspiele. \textbf{Das ist bemerkenswert, weil es für Nichtnullsummenspiele nachweislich nicht gilt} --- sofern eine verbreitete Komplexitätsannahme zutrifft. Die strikte Gegnerschaft macht das Problem also nicht schwerer, sondern leichter.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Bei Spielen mit $10^{14}$ Strategien --- etwa Poker --- ist die lineare Optimierung unbrauchbar.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man benutzt stattdessen Verfahren, die das Spiel wiederholt gegen sich selbst spielen und die Mischungen schrittweise anpassen. Sie konvergieren nachweislich gegen den Wert, ohne je ein Gleichungssystem zu lösen. \textbf{Die Konvergenzrate ist die eigentliche Forschungsfrage}, und sie hat sich seit 2015 um mehrere Größenordnungen verbessert.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 3.1} & Spiel und Gegenspiel sind dual\\
+\textbf{Satz 3.2} & Minimax $=$ Dualität\\
+\textbf{Satz 3.3} & benutzt heißt gleichgültig\\
+\textbf{Das Verfahren} & Träger vermuten, lösen, prüfen\\
+\textbf{Der Vorbehalt} & nicht dominiert heißt nicht benutzt\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~I. Bisher war jeder Gewinn des einen ein Verlust des anderen. Ab Kapitel~4 haben die Beteiligten teils gleiche, teils gegensätzliche Interessen --- und der Wertbegriff bricht zusammen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,468 @@
+\chapter{Warum Einfaches verallgemeinert}
+
+\section{Das offene Rätsel}
+
+\begin{merksatz}
+\boxtitel{Der Gauß-Kern lernt --- und sollte es nicht}
+In Kapitel~6 lernte die Stützvektormaschine mit Gauß-Kern die Temperaturgrenze aus $300$ Patienten und erreichte auf neuen Daten $3$ Prozent Fehler. Nach Kapitel~7 hat diese Klasse unendliche VC-Dimension --- und Satz 7.6 sagt, dass solche Klassen nicht lernbar sind.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Widerspruch löst sich auf, wenn man nicht die Klasse betrachtet, sondern die gelernte Regel.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die VC-Dimension fragt, was die Klasse \kursiv{im schlimmsten Fall} tun könnte. \textbf{Das Verfahren wählt aber nicht irgendeine Regel, sondern eine mit breitem Rand und wenigen Stützvektoren} --- und solche Regeln sind viel weniger ausdrucksfähig als die Klasse insgesamt. Dieses Kapitel zeigt drei Wege, das zu messen, und alle drei sind elementar beweisbar.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Stützvektoren im Leitfall}
+Dieselben $300$ Patienten, verschiedene Einstellungen:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{1.0cm}P{1.4cm}P{1.6cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+$C$ & $\gamma$ & \textbf{Stützv.} & \textbf{Training} & \textbf{Weglass.} & \textbf{Test}\\
+\midrule
+$0{,}1$ & $3$ & $45\,\%$ & $8{,}7\,\%$ & $10{,}0\,\%$ & $12{,}3\,\%$\\
+$1$ & $3$ & $30\,\%$ & $1{,}0\,\%$ & $1{,}7\,\%$ & $2{,}9\,\%$\\
+$3$ & $3$ & $24\,\%$ & $0{,}7\,\%$ & $2{,}0\,\%$ & $3{,}0\,\%$\\
+$30$ & $3$ & $20\,\%$ & $0{,}0\,\%$ & $2{,}0\,\%$ & $3{,}7\,\%$\\
+$3$ & $\mathbf{30}$ & $\mathbf{73\,\%}$ & $0{,}0\,\%$ & $6{,}7\,\%$ & $\mathbf{10{,}1\,\%}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die letzte Zeile lernt auswendig --- und fast jeder Patient wird zum Stützvektor.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Mit $\gamma = 30$ ist der Kern so schmal, dass jeder Patient nur sich selbst ähnelt. \textbf{Das Verfahren braucht dann fast alle Punkte, um die Grenze zu beschreiben} --- und der Testfehler verdreifacht sich. Die Zahl der Stützvektoren zeigt die Überanpassung an, bevor man sie auf Testdaten sieht. Das ist der erste der drei Wege.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Erster Weg: Weglassen}
+
+\begin{merksatz}
+\boxtitel{Satz 8.1 --- die Schranke über Stützvektoren}
+Beim Weglassen einzelner Fälle (Kapitel~3) kann eine Stützvektormaschine nur solche Punkte falsch einordnen, die in der Lösung Stützvektoren sind. Also gilt
+\[ \text{Weglassfehler} \ \le\ \frac{\text{Zahl der Stützvektoren}}{n} . \]
+
+\schritt{Beweis}
+Sei $\vek x_i$ kein Stützvektor, also $\alpha_i = 0$.
+
+\kursiv{Erstens:} Lässt man $\vek x_i$ weg, so ändert sich die Lösung nicht. Denn die alte Lösung erfüllt alle Bedingungen des neuen Problems --- es sind ja weniger ---, und die Optimalitätsbedingungen aus Satz 6.2 enthalten $\vek x_i$ nur mit dem Faktor $\alpha_i = 0$. Also sind sie auch für das kleinere Problem erfüllt.
+
+\kursiv{Zweitens:} Die alte Lösung ordnet $\vek x_i$ richtig ein, denn $\alpha_i = 0$ bedeutet nach dem komplementären Schlupf $t_i(\vek w^{\!\top}\vek x_i + b) \ge 1 > 0$.
+
+\kursiv{Also} wird $\vek x_i$ beim Weglassen richtig eingeordnet. Fehler können nur bei den Stützvektoren auftreten. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wenige Stützvektoren garantieren einen kleinen Weglassfehler --- unabhängig von der Dimension des Raumes, auch wenn sie unendlich ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Im Leitfall}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Einstellung} & \textbf{Schranke} & \textbf{Weglassfehler}\\
+\midrule
+$C = 3$, $\gamma = 3$ & $24\,\%$ & $2{,}0\,\%$\\
+$C = 3$, $\gamma = 30$ & $73\,\%$ & $6{,}7\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Schranke ist lose --- die meisten Stützvektoren werden beim Weglassen doch richtig eingeordnet. \textbf{Aber sie ordnet die Modelle richtig}: Das Modell mit mehr Stützvektoren ist das schlechtere. Und anders als die VC-Schranke sagt sie etwas Sinnvolles über ein Verfahren mit unendlicher VC-Dimension.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zweiter Weg: Kompression}
+
+\begin{merksatz}
+\boxtitel{Satz 8.2 --- die Kompressionsschranke}
+Ein Verfahren bestimme seine Regel aus nur $k$ der $n$ Trainingspunkte, und diese Regel ordne alle $n$ richtig ein. Dann gilt mit Wahrscheinlichkeit mindestens $1-\delta$:
+\[ \Risk(h) \ \le\ \frac{k\ln n + \ln(1/\delta)}{n-k} . \]
+
+\schritt{Beweis}
+\kursiv{Für eine feste Auswahl} $I$ von $k$ Indizes ist die Regel $h_I$ durch die Punkte in $I$ festgelegt. Die übrigen $n-k$ Punkte sind von $h_I$ unabhängig, denn sie wurden unabhängig gezogen und gingen nicht ein.
+
+Hat $h_I$ ein Risiko über $\varepsilon$, so ordnet sie alle $n-k$ übrigen mit Wahrscheinlichkeit höchstens
+\[ (1-\varepsilon)^{n-k} \ \le\ e^{-\varepsilon(n-k)} \]
+richtig ein --- genau wie in Satz 7.2.
+
+\kursiv{Über alle Auswahlen:} Es gibt höchstens $n^{k}$ Möglichkeiten, $k$ Indizes der Reihe nach zu wählen. Also
+\[ \Pr[\text{irgendein schlechtes } h_I \text{ ist fehlerfrei}] \ \le\ n^{k}\,e^{-\varepsilon(n-k)} . \]
+
+\kursiv{Gleichsetzen mit $\delta$:}
+\[ k\ln n - \varepsilon(n-k) = \ln\delta \quad\Longrightarrow\quad \varepsilon = \frac{k\ln n + \ln(1/\delta)}{n-k} \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{An die Stelle der VC-Dimension tritt die Zahl $k$ der Punkte, auf die sich die Regel stützt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Gedanke der kürzesten Beschreibung aus Band 20, Kapitel~7}, in reinster Form: Eine Regel, die sich mit $k$ Punkten beschreiben lässt, kostet $k\ln n$ Nats zur Übermittlung --- und genau dieser Betrag steht im Zähler. Wer die Daten kurz zusammenfassen kann, hat ein Muster gefunden, nicht Einzelheiten gespeichert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Dritter Weg: der Rand}
+
+\begin{merksatz}
+\boxtitel{Satz 8.3 --- die Dimension des breiten Randes}
+Liegen alle Punkte in einer Kugel vom Radius $R$ um den Ursprung, und betrachtet man nur Trennungen durch den Ursprung, die jede Einteilung mit Rand mindestens $\gamma$ erreichen, so können höchstens
+\[ d \ \le\ \left(\frac{R}{\gamma}\right)^{2} \]
+Punkte zerschmettert werden --- \textcolor{akzent}{gleich in welcher Dimension}.
+
+\schritt{Beweis --- über das Perzeptron aus Kapitel 5}
+Angenommen, $d$ Punkte werden mit Rand $\gamma$ zerschmettert.
+
+\kursiv{Man lasse das Perzeptron laufen}, lege ihm die Punkte der Reihe nach vor und wähle jedes Etikett \kursiv{gegen} seine Vorhersage: Sagt es $+1$, sei das Etikett $-1$, und umgekehrt.
+
+\kursiv{Dann macht es bei jedem Punkt einen Fehler} --- also $d$ Fehler.
+
+\kursiv{Die so gewählte Einteilung ist aber erreichbar}, und zwar mit Rand $\gamma$ --- das war die Annahme. Nach Satz 5.3 macht das Perzeptron darauf höchstens $(R/\gamma)^{2}$ Fehler.
+
+\[ d \ \le\ \left(\frac{R}{\gamma}\right)^{2} \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Satz aus Kapitel~5 über Fehlerzahlen wird zu einem Satz über Ausdrucksfähigkeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Lösung des Rätsels}
+Beim Gauß-Kern ist $\|\varphi(\vek x)\|^{2} = k(\vek x,\vek x) = e^{0} = 1$ für jeden Punkt. Also $R = 1$ --- und
+\[ d \ \le\ \frac{1}{\gamma^{2}} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Raum ist unendlich-dimensional, aber alle Punkte liegen auf der Einheitskugel.} Wer dort mit breitem Rand trennt, hat nur endlich viele Freiheiten --- und zwar umso weniger, je breiter der Rand. Die Stützvektormaschine maximiert den Rand. Damit sucht sie ausdrücklich die Regel mit der kleinsten wirksamen Dimension, und das ist der Grund, warum sie verallgemeinert.}
+\end{minipage}
+\end{center}
+
+\schritt{Der schmale Kern im Leitfall}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $\gamma_{\text{Kern}} = 30$ sind alle Punkte fast orthogonal zueinander --- $k(\vek x_i,\vek x_j) \approx 0$ für verschiedene Patienten. \textbf{Der erreichbare Rand wird winzig}, $(1/\gamma_{\text{Rand}})^{2}$ riesig, und das Verfahren verhält sich, als hätte es unendlich viele Freiheiten. Zwei Namen für $\gamma$ sind unglücklich --- aber die Rechnung ist eindeutig.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Wahl der Komplexität}
+
+\begin{merksatz}
+\boxtitel{Strukturelle Risikominimierung}
+Man ordne die Regeln in eine Kette wachsender Klassen:
+\[ \Hyp_1 \subset \Hyp_2 \subset \Hyp_3 \subset \cdots \]
+--- etwa Polynome vom Grad $1$, $2$, $3$, oder Trennungen mit Rand mindestens $1$, $\tfrac12$, $\tfrac14$.
+
+\schritt{Die Regel}
+Wähle die Klasse und darin die Regel, für die
+\[ \hat\Risk(h) + \text{Komplexitätsstrafe}(\Hyp_k,\,n) \]
+am kleinsten ist.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Strafe} & \textbf{Herkunft}\\
+\midrule
+$2\sigma^{2}p/n$ & Satz 2.2, Akaike\\
+$\sqrt{d\ln n/n}$ & Satz 7.6, Vapnik\\
+$k\ln n/n$ & Satz 8.2, Kompression\\
+$\lambda\|\vek w\|^{2}$ & Kapitel 4, Rand\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Alle Verfahren dieses Bandes sind Varianten desselben Gedankens: gute Anpassung, aber nicht um jeden Preis.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man erkennt Ockhams Rasiermesser: Unter gleich guten Erklärungen wähle die einfachste. \textbf{Die Lerntheorie gibt diesem Grundsatz eine Begründung}, die Ockham nicht hatte --- die einfachere Erklärung ist nicht schöner, sondern verallgemeinert besser, und man kann angeben, um wie viel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Schranken sind lose --- alle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Schranke} & \textbf{Wert} & \textbf{tatsächlich}\\
+\midrule
+Stützvektoren, $C = 3$ & $24\,\%$ & $3{,}0\,\%$\\
+Kompression, $k = 72$ & $> 100\,\%$ & $3{,}0\,\%$\\
+VC, $d = \infty$ & --- & $3{,}0\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur zweiten Zeile:} $\frac{72\cdot5{,}70 + 3{,}00}{228} = \frac{413{,}5}{228} = 1{,}81$ --- mehr als eins, also nichtssagend. Außerdem ordnet die Regel nicht alle Trainingspunkte richtig ein, so dass der Satz streng genommen gar nicht gilt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Keine Schranke dieses Kapitels sagt den Testfehler genau vorher. Alle ordnen die Modelle richtig.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Theorie erklärt, \kursiv{warum} man mit weniger Freiheit besser verallgemeinert --- nicht, \kursiv{wie gut}.} Für die Zahl braucht man zurückgehaltene Daten, und dafür braucht man die Kreuzvalidierung aus Kapitel~3, deren Weglassfehler im Leitfall bis auf einen Prozentpunkt am Testfehler lag.}
+\end{minipage}
+\end{center}
+
+\schritt{Und das eigentliche Problem}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle drei Wege setzen voraus, dass Trainings- und Anwendungsdaten aus derselben Verteilung stammen. \textbf{Beim Sepsis-System von 2021 hätte keine Schranke dieses Kapitels geholfen} --- sie beschreiben die Verallgemeinerung auf \kursiv{neue Patienten derselben Art}, nicht auf eine andere Klinik. Eine Theorie der Übertragbarkeit zwischen Verteilungen gibt es, aber sie verlangt Annahmen über die Art der Verschiebung, die man in der Praxis selten prüfen kann.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Weglassen am kleinen Beispiel}
+Die vier Laktatwerte aus Aufgabe 6.1: $1{,}0$ und $1{,}5$ ohne, $2{,}5$ und $3{,}0$ mit Sepsis. Berechnen Sie den Weglassfehler und vergleichen Sie mit Satz 8.1.
+
+\loesung
+\schritt{Schritt 1 --- Die Schranke}
+Stützvektoren sind $1{,}5$ und $2{,}5$:
+\[ \frac{2}{4} = 50\,\% \]
+
+\schritt{Schritt 2 --- Die Nicht-Stützvektoren}
+Lässt man $1{,}0$ oder $3{,}0$ weg, so bleibt die Grenze bei $2{,}0$, und der weggelassene Punkt liegt auf der richtigen Seite. \checkmark
+
+\schritt{Schritt 3 --- $1{,}5$ weglassen}
+Die engsten Punkte verschiedener Gruppen sind nun $1{,}0$ und $2{,}5$:
+\[ x^{*} = \frac{1{,}0+2{,}5}{2} = 1{,}75 \]
+Der weggelassene Punkt $1{,}5 < 1{,}75$ liegt auf der Seite \enquote{ohne}. \textbf{Richtig.}
+
+\schritt{Schritt 4 --- $2{,}5$ weglassen}
+Die engsten Punkte sind nun $1{,}5$ und $3{,}0$:
+\[ x^{*} = \frac{1{,}5+3{,}0}{2} = 2{,}25 \]
+$2{,}5 > 2{,}25$ --- Seite \enquote{mit}. \textbf{Richtig.}
+
+\schritt{Schritt 5 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Schranke} & $50\,\%$\\
+\textbf{Weglassfehler} & $\mathbf{0\,\%}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Schranke nimmt an, jeder Stützvektor könnte beim Weglassen falsch landen} --- tatsächlich rückt die Grenze nur ein Stück, und der Punkt bleibt auf der richtigen Seite. Das geschieht immer, wenn die Gruppen deutlich getrennt sind; erst bei Überlappung werden Stützvektoren beim Weglassen tatsächlich falsch.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Die Kompressionsschranke}
+Eine Stützvektormaschine trennt alle Trainingsdaten fehlerfrei mit $k = 10$ Stützvektoren. Was garantiert Satz 8.2 bei $n = 300$ und $n = 3000$ ($\delta = 0{,}05$)?
+
+\loesung
+\schritt{Schritt 1 --- Die Werte}
+\[ \ln300 = 5{,}704, \qquad \ln3000 = 8{,}006, \qquad \ln20 = 2{,}996 \]
+
+\schritt{Schritt 2 --- $n = 300$}
+\[ \varepsilon = \frac{10\cdot5{,}704 + 2{,}996}{290} = \frac{57{,}04+3{,}00}{290} = \frac{60{,}04}{290} = 0{,}207 \]
+
+\schritt{Schritt 3 --- $n = 3000$}
+\[ \varepsilon = \frac{10\cdot8{,}006 + 2{,}996}{2990} = \frac{83{,}06}{2990} = 0{,}028 \]
+
+\schritt{Schritt 4 --- Die Abhängigkeit}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{2.4cm}@{}}
+\toprule
+$n$ & $k$ & \textbf{Schranke}\\
+\midrule
+$300$ & $10$ & $20{,}7\,\%$\\
+$3000$ & $10$ & $2{,}8\,\%$\\
+$3000$ & $72$ & $19{,}8\,\%$\\
+$30\,000$ & $72$ & $2{,}5\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Schranke hängt im Wesentlichen vom Verhältnis $k/n$ ab}, mal einem Logarithmus. Wer mit zehnmal mehr Stützvektoren auskommen muss, braucht zehnmal mehr Daten für dieselbe Garantie. Bemerkenswert ist, dass die Dimension des Raumes nirgends vorkommt --- nur, wie viele Punkte die Lösung tragen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Vergleich mit Satz 7.2}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In Satz 7.2 stand $\ln|\Hyp|$ im Zähler. \textbf{Hier steht $k\ln n$} --- der Logarithmus der Zahl der Möglichkeiten, $k$ Stützvektoren aus $n$ auszuwählen. Die Klasse der Regeln, die das Verfahren \kursiv{tatsächlich} hervorbringen kann, ist endlich, auch wenn die Klasse aller Regeln es nicht ist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- Rand und Dimension}
+Beim Gauß-Kern ist $R = 1$. Welche wirksame Dimension ergibt Satz 8.3 für einen Rand von $0{,}5$, $0{,}2$ und $0{,}05$, und was folgt daraus nach Satz 7.6 für $n = 10\,000$?
+
+\loesung
+\schritt{Schritt 1 --- Die Dimensionen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.6cm}P{2.0cm}@{}}
+\toprule
+\textbf{Rand} & $1/\gamma^{2}$ & $d$\\
+\midrule
+$0{,}5$ & $1/0{,}25$ & $4$\\
+$0{,}2$ & $1/0{,}04$ & $25$\\
+$0{,}05$ & $1/0{,}0025$ & $400$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Satz 7.6 bei $n = 10\,000$}
+Der Wurzelausdruck $\sqrt{\frac{8}{n}\bigl(d\ln\frac{2en}{d} + \ln80\bigr)}$ mit $\ln80 = 4{,}382$:
+
+\kursiv{Für $d = 4$:}
+\[ \ln\frac{2e\cdot10^{4}}{4} = \ln13\,591 = 9{,}517 \]
+\[ \sqrt{0{,}0008\cdot(4\cdot9{,}517 + 4{,}382)} = \sqrt{0{,}0008\cdot42{,}45} = \sqrt{0{,}0340} = 0{,}184 \]
+
+\kursiv{Für $d = 25$:}
+\[ \ln\frac{2e\cdot10^{4}}{25} = \ln2175 = 7{,}685 \]
+\[ \sqrt{0{,}0008\cdot(192{,}1 + 4{,}38)} = \sqrt{0{,}157} = 0{,}396 \]
+
+\kursiv{Für $d = 400$:} Der Ausdruck übersteigt eins.
+
+\schritt{Schritt 3 --- Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{1.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Rand} & $d$ & \textbf{Schranke}\\
+\midrule
+$0{,}5$ & $4$ & $18\,\%$\\
+$0{,}2$ & $25$ & $40\,\%$\\
+$0{,}05$ & $400$ & nichtssagend\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Rand ist die eigentliche Stellgröße der Komplexität} --- nicht die Dimension des Raumes, nicht die Zahl der Parameter. Viertelt man den Rand, so versechzehnfacht sich die wirksame Dimension. Die Schranken sind wie immer lose, aber die Richtung ist eindeutig: Ein breiter Rand ist ein einfaches Modell.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Mönch und ein Rasiermesser}
+\Person{Wilhelm von Ockham} (um 1288--1347), englischer Franziskaner, wird der Grundsatz zugeschrieben, man solle Wesenheiten nicht ohne Notwendigkeit vermehren.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Satz in dieser Form steht in keiner seiner erhaltenen Schriften; er wurde ihm im 17.\ Jahrhundert zugeschrieben. \textbf{Ockham selbst benutzte ähnliche Gedanken gegen die Annahme allgemeiner Wesenheiten}, nicht als Regel für Naturgesetze. Seine Rolle als Schutzheiliger der einfachen Erklärung ist eine spätere Erfindung --- aber eine brauchbare.}
+\end{minipage}
+\end{center}
+
+\schritt{Littlestone und Warmuth}
+\Person{Nick Littlestone} und \Person{Manfred Warmuth} stellten die Kompressionsschranke 1986 in einem unveröffentlichten Bericht vor.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie vermuteten, dass jede Klasse endlicher VC-Dimension ein Kompressionsverfahren der Größe $d$ besitzt. \textbf{Die Vermutung war über dreißig Jahre offen.} 2016 zeigten \Person{Shay Moran} und \Person{Amir Yehudayoff}, dass immer eine Kompression existiert, deren Größe exponentiell in $d$ ist; ob sie auf $d$ selbst gebracht werden kann, ist bis heute ungeklärt.}
+\end{minipage}
+\end{center}
+
+\schritt{Vapnik und der Rand}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Satz 8.3 steht im Wesentlichen bereits in Vapniks Arbeiten der 1970er Jahre. \textbf{Er war der Grund, warum Vapnik die Stützvektormaschine für theoretisch überlegen hielt} --- sie maximiert genau die Größe, von der die Schranke abhängt. Vapnik hat diese Auffassung auch vertreten, als die tiefen Netze ohne vergleichbare Begründung erfolgreicher wurden, und ist damit bis heute ein Kritiker des Faches geblieben, das er mitbegründete.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Schranken heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{PAC-Bayes} & Schranken für gewichtete Mischungen von Regeln --- die schärfsten bekannten.\\
+\textbf{Nichtleere Schranken} & Erstmals 2017 für ein tiefes Netz: eine Garantie unter eins.\\
+\textbf{Verteilungs\-verschiebung} & Schranken für Anwendung auf andere Daten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{Gintare Karolina Dziugaite} und \Person{Daniel Roy} berechneten 2017 für ein Netz auf einem Ziffernerkennungsdatensatz eine Schranke von etwa $17$ Prozent --- bei einem tatsächlichen Fehler von etwa $2$ Prozent. \textbf{Dass eine Schranke unter eins liegt, galt als Durchbruch.} Es zeigt zugleich, wie weit die Theorie hinter der Praxis zurückliegt: Die beste Garantie ist achtmal zu pessimistisch.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 8.1} & Weglassfehler $\le$ Stützvektoren$/n$\\
+\textbf{Satz 8.2} & Kompression: $(k\ln n + \ln\frac1\delta)/(n-k)$\\
+\textbf{Satz 8.3} & Rand: $d \le (R/\gamma)^{2}$\\
+\textbf{Das Rätsel} & Einheitskugel, breiter Rand, endliche Dimension\\
+\textbf{Die Lehre} & Schranken ordnen, messen nicht\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~III. Er hat erklärt, warum die Verfahren aus Teil~II verallgemeinern. Teil~IV verlässt die linearen Verfahren --- und das erste nichtlineare, der Entscheidungsbaum, ist so einfach, dass jeder Arzt es seit jeher benutzt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

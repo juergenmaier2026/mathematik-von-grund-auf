@@ -1,0 +1,377 @@
+\chapter{Natürliche Versuche}
+
+\section{Der Sprung an der Schwelle}
+
+\begin{merksatz}
+\boxtitel{Wenn eine Regel entscheidet}
+Am Klinikum löst ein Warnwert das Sepsisprotokoll aus: Ab einem Punktwert von $5$ wird sofort behandelt, darunter nicht.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Patienten mit $4{,}9$ und $5{,}1$ Punkten sind einander fast gleich --- werden aber verschieden behandelt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Unmittelbar an der Schwelle entscheidet der Zufall der Messung, auf welcher Seite man landet. \textbf{In einem schmalen Fenster ist die Zuteilung so gut wie ausgelost} --- und der Sprung der Sterblichkeit an der Schwelle ist der Effekt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Rechnung}
+$4000$ Patienten, Punktwert gleichverteilt, wahrer Effekt $-0{,}060$:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Fenster} & \textbf{Sprung} & $n$\\
+\midrule
+$\pm2{,}0$ & $-0{,}062$ & $1606$\\
+$\pm1{,}0$ & $-0{,}064$ & $774$\\
+$\pm0{,}5$ & $-0{,}071$ & $405$\\
+\midrule
+ohne Fenster & $\mathbf{-0{,}164}$ & $4000$\\
+\midrule
+wahr & $-0{,}060$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der schlichte Vergleich aller Behandelten mit allen Unbehandelten überschätzt den Effekt fast um das Dreifache.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Er vergleicht Punktwerte um $7{,}5$ mit solchen um $2{,}5$ --- zwei völlig verschiedene Patientengruppen. \textbf{Das Fenster löst das Problem, indem es nur Patienten vergleicht, die sich kaum unterscheiden}, und der lineare Term im Modell fängt den verbleibenden Trend auf. Der Preis: Bei $\pm0{,}5$ bleiben nur $405$ von $4000$ Patienten, und die Schätzung streut entsprechend.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was der Sprung bedeutet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Gilt für} & Patienten \kursiv{an der Schwelle} --- nicht für alle.\\
+\textbf{Prüfbar} & Ob andere Größen an der Schwelle ebenfalls springen. Tun sie es, ist die Annahme verletzt.\\
+\textbf{Verletzbar} & Wenn jemand den Punktwert beeinflussen kann, um die Schwelle zu über- oder unterschreiten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist die ernsteste. \textbf{Wenn Ärzte wissen, dass ab fünf Punkten behandelt wird, runden sie im Zweifel auf} --- und dann sind die Patienten knapp über der Schwelle gerade die, bei denen man behandeln wollte. Man prüft das, indem man die Verteilung der Punktwerte betrachtet: Eine Häufung unmittelbar über der Schwelle verrät den Eingriff.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Vorher und nachher, hier und dort}
+
+\begin{merksatz}
+\boxtitel{Die doppelte Differenz}
+Station A führt die Frühgabe 2024 ein, Station B nicht.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{2.0cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+& \textbf{2023} & \textbf{2024} & \textbf{Differenz}\\
+\midrule
+Station A & $32{,}0\,\%$ & $25{,}0\,\%$ & $-7{,}0$\\
+Station B & $28{,}0\,\%$ & $26{,}5\,\%$ & $-1{,}5$\\
+\midrule
+& & & $\mathbf{-5{,}5}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Auswertung} & \textbf{Effekt}\\
+\midrule
+nur A, vorher/nachher & $-7{,}0$\\
+nur 2024, A gegen B & $-1{,}5$\\
+doppelte Differenz & $\mathbf{-5{,}5}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die erste Zeile enthält den allgemeinen Trend, die zweite den Unterschied zwischen den Stationen. Die doppelte Differenz beseitigt beides.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Annahme}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Sie heißt \Begriff{parallele Entwicklung}: Ohne die Einführung hätte sich A genauso entwickelt wie B. \textbf{Das ist eine Aussage über eine nicht eingetretene Welt und damit unprüfbar} --- man kann nur die Jahre davor betrachten und sehen, ob die Kurven dort parallel liefen. Dass sie es taten, beweist nicht, dass sie es weiter getan hätten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine zweite Falle: \textbf{Wenn Station A die Frühgabe gerade deshalb einführte, weil ihre Sterblichkeit hoch war}, so wäre ein Rückgang auch ohne Maßnahme zu erwarten --- die Regression zur Mitte aus Band 17, Kapitel~7. Maßnahmen werden fast immer nach schlechten Jahren beschlossen, und deshalb ist diese Falle die Regel, nicht die Ausnahme.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was beide Verfahren teilen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Örtlich} & Der Sprung gilt an der Schwelle, die doppelte Differenz für diese beiden Stationen in diesen beiden Jahren.\\
+\textbf{Unprüfbar} & Stetigkeit an der Schwelle und parallele Entwicklung sind Annahmen über Nichtbeobachtetes.\\
+\textbf{Wenig Fälle} & Beide benutzen nur einen Teil der Daten --- das Fenster, die beiden Zeitpunkte.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Gewinn dieser Verfahren liegt nicht in der Genauigkeit, sondern in der Glaubwürdigkeit der Annahme.} Eine Anpassung nach Kapitel~7 benutzt alle Patienten und verlangt, dass nichts Unbeobachtetes wirkt. Ein natürlicher Versuch benutzt wenige und verlangt nur, dass sich an einer Stelle nichts anderes ändert. Welche Annahme leichter fällt, entscheidet der Sachverhalt --- nicht die Statistik.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Das Fenster wählen}
+Warum wächst die Schätzung im Leitfall von $-0{,}062$ auf $-0{,}071$, wenn man das Fenster verkleinert?
+
+\loesung
+\schritt{Schritt 1 --- Die beiden Fehlerquellen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Großes Fenster} & Mehr Patienten, aber der Verlauf abseits der Schwelle wird durch die Gerade nur genähert --- \textcolor{akzent}{Verzerrung}.\\
+\textbf{Kleines Fenster} & Kaum Verzerrung, aber wenige Patienten --- \textcolor{akzent}{Streuung}.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Zahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{1.6cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+\textbf{Fenster} & $n$ & \textbf{Schätzung} & \textbf{Streuung}\\
+\midrule
+$\pm2{,}0$ & $1606$ & $-0{,}062$ & $\approx 0{,}010$\\
+$\pm1{,}0$ & $774$ & $-0{,}064$ & $\approx 0{,}014$\\
+$\pm0{,}5$ & $405$ & $-0{,}071$ & $\approx 0{,}020$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle drei Schätzungen liegen innerhalb einer Streuung um den wahren Wert $-0{,}060$.} Der scheinbare Anstieg ist Zufall, nicht Struktur --- ein gutes Beispiel dafür, wie leicht man in solchen Zahlenreihen eine Tendenz sieht. Man wählt die Fensterbreite deshalb nicht nach dem Ergebnis, sondern nach einem vorher festgelegten Kriterium, und berichtet die Empfindlichkeit gegenüber dieser Wahl.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Der Zusammenhang mit Band 22}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es ist die Kurve aus Band 22, Kapitel~2}: Die Fensterbreite ist die Stellgröße der Komplexität, und zwischen Verzerrung und Varianz ist zu wählen.
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Parallele Entwicklung prüfen}
+Für die Jahre 2020 bis 2023 lauten die Sterblichkeiten:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+& $2020$ & $2021$ & $2022$ & $2023$\\
+\midrule
+A & $30{,}5$ & $31{,}0$ & $31{,}5$ & $32{,}0$\\
+B & $27{,}0$ & $27{,}4$ & $27{,}7$ & $28{,}0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Was folgt daraus, und was nicht?
+
+\loesung
+\schritt{Schritt 1 --- Die Differenzen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.2cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Schritt} & $20\!\to\!21$ & $21\!\to\!22$ & $22\!\to\!23$\\
+\midrule
+A & $+0{,}5$ & $+0{,}5$ & $+0{,}5$\\
+B & $+0{,}4$ & $+0{,}3$ & $+0{,}3$\\
+\midrule
+Abstand A$-$B & $3{,}5$ & $3{,}6$ & $3{,}8$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Kurven laufen nicht parallel: Der Abstand wächst um $0{,}1$ bis $0{,}2$ Punkte je Jahr.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Berichtigung}
+Setzt man den Trend fort, so wäre der Abstand 2024 auf etwa $4{,}0$ gewachsen. Tatsächlich beträgt er
+\[ 25{,}0 - 26{,}5 = -1{,}5 . \]
+Statt $-5{,}5$ ergäbe sich
+\[ -1{,}5 - 4{,}0 = -5{,}5 \ \to\ \text{berichtigt: } -1{,}5 - 4{,}0 = -5{,}5 \]
+\kursiv{gegenüber der einfachen Rechnung} $-1{,}5 - 3{,}8 = -5{,}3$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Verletzung verschiebt die Schätzung um $0{,}2$ Punkte --- klein gegenüber $-5{,}5$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Was daraus \kursiv{nicht} folgt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dass der Trend vier Jahre lang stabil war, sagt nichts über 2024.} Gerade im Jahr einer Maßnahme ändert sich oft mehr als die Maßnahme --- neue Leitlinien, neues Personal, eine Grippewelle. Die Vorjahresprüfung ist notwendig und keineswegs hinreichend; sie schließt nur die gröbsten Fälle aus.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- Häufung an der Schwelle}
+In der Verteilung der Punktwerte finden sich im Bereich $4{,}8$ bis $5{,}0$ auffällig wenige und im Bereich $5{,}0$ bis $5{,}2$ auffällig viele Patienten. Was bedeutet das?
+
+\loesung
+\schritt{Schritt 1 --- Der Befund}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.2cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Bereich} & \textbf{erwartet} & \textbf{beobachtet}\\
+\midrule
+$4{,}8$--$5{,}0$ & $80$ & $52$\\
+$5{,}0$--$5{,}2$ & $80$ & $109$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Etwa achtundzwanzig Patienten wurden über die Schwelle gehoben.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Warum das die Schätzung zerstört}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Verschobenen sind nicht zufällig ausgewählt, sondern gerade die, bei denen der Arzt behandeln wollte --- also die, die ihm bedrohlicher erschienen. \textbf{Damit sind die Patienten knapp über der Schwelle kränker als die knapp darunter}, und die Annahme der Stetigkeit ist verletzt. Der geschätzte Sprung enthält dann die Auswahl des Arztes.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Was hilft}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Dichtetest} & Die Häufung statistisch prüfen --- das ist genau dieser Test.\\
+\textbf{Spendenfenster} & Einen schmalen Bereich um die Schwelle ganz ausschließen und den Sprung von außen her schätzen.\\
+\textbf{Andere Schwelle} & Prüfen, ob an einer Stelle ohne Regel ebenfalls ein Sprung erscheint.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dieser Test ist eine der wenigen Stellen, an denen sich eine kausale Annahme wirklich an den Daten prüfen lässt} --- nicht die Annahme selbst, aber eine notwendige Folge daraus. Er entspricht dem Balancetest aus Kapitel~7 und hat dieselbe Grenze: Besteht man ihn, so ist nichts bewiesen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Brunnen und ein Stipendium}
+\Person{John Snow} zeigte 1854, dass die Cholera in London über das Wasser übertragen wurde --- indem er Haushalte verglich, die von zwei verschiedenen Wasserwerken beliefert wurden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Leitungen beider Gesellschaften lagen in denselben Straßen; welche ein Haus versorgte, war historisch bedingt und hatte mit den Bewohnern nichts zu tun. \textbf{Snow nannte es \enquote{ein Experiment im größten Maßstab}} --- und beschrieb damit einen natürlichen Versuch, hundert Jahre bevor der Begriff entstand.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Schwelle}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Donald Thistlethwaite} und \Person{Donald Campbell} führten 1960 den Regressionssprung ein --- für die Frage, ob ein Stipendium die spätere Laufbahn beeinflusst, vergeben ab einer Punktschwelle. \textbf{Die Arbeit blieb fast vierzig Jahre unbeachtet}, bis Ökonomen sie in den 1990er Jahren wiederentdeckten.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Natürliche Versuche heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Gestaffelte Einführung} & Maßnahmen, die an verschiedenen Orten zu verschiedenen Zeiten beginnen.\\
+\textbf{Synthetische Vergleichsgruppe} & Eine Kontrollstation aus mehreren zusammensetzen.\\
+\textbf{Robuste Schranken} & Ergebnisse bei nur \kursiv{ungefähr} parallelen Entwicklungen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Seit etwa 2020 ist bekannt, dass die übliche Regressionsrechnung bei gestaffelter Einführung falsche Ergebnisse liefern kann --- sie vergleicht implizit früh Eingeführte mit spät Eingeführten und zieht dabei bereits Behandelte als Kontrollen heran. \textbf{Dutzende veröffentlichter Arbeiten mussten neu ausgewertet werden}, und die Berichtigungen änderten mehrfach das Vorzeichen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Sprung} & Zuteilung an der Schwelle wie ausgelost\\
+\textbf{Fenster} & Verzerrung gegen Streuung\\
+\textbf{Doppelte Differenz} & Trend und Ortsunterschied heraus\\
+\textbf{Parallele Entwicklung} & unprüfbar, teilweise plausibilisierbar\\
+\textbf{Häufung} & verrät den Eingriff in die Regel\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Drei Wege sind nun beschritten: anpassen, instrumentieren, Gelegenheiten nutzen. Das nächste Kapitel setzt sie zusammen --- und löst den Leitfall auf, mit dem der Band begann.}
+\end{minipage}
+\end{center}
+\end{merksatz}

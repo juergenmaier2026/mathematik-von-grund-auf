@@ -1,0 +1,462 @@
+\chapter{Das Los}
+
+\section{Die Annahme herstellen}
+
+\begin{merksatz}
+\boxtitel{Der Unterschied zu Kapitel 2}
+Die bedingte Unabhängigkeit war dort eine Behauptung über die Welt --- unprüfbar, begründet allenfalls durch Fachwissen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wird die Behandlung ausgelost, so ist sie keine Behauptung mehr, sondern eine Tatsache über das Vorgehen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Los weiß nichts über den Patienten. Es kann sich also weder nach dem Schweregrad richten noch nach dem Alter, nach Vorerkrankungen, nach dem Aussehen --- \textbf{auch nicht nach Größen, die niemand gemessen hat und an die niemand gedacht hat.} Darin liegt die ganze Leistung der Randomisierung, und keine noch so sorgfältige Anpassung an gemessene Größen kann sie ersetzen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 3.1 --- warum das Los genügt}
+Wird $X$ unabhängig von allem Übrigen ausgelost, so gilt
+\[ \bigl(Y(1),\,Y(0)\bigr) \ \perp\ X \]
+und damit
+\[ \mathbb{E}[Y \mid X=1] - \mathbb{E}[Y \mid X=0] = \tau . \]
+
+\schritt{Beweis}
+\kursiv{Erstens:} Die potentiellen Ergebnisse $Y_i(1)$ und $Y_i(0)$ sind Eigenschaften des Patienten, die vor der Zuteilung feststehen. Das Los wird unabhängig davon gezogen, also sind $X$ und das Paar unabhängig.
+
+\kursiv{Zweitens:} Wegen dieser Unabhängigkeit
+\[ \mathbb{E}[Y(1) \mid X=1] = \mathbb{E}[Y(1)] , \qquad \mathbb{E}[Y(0) \mid X=0] = \mathbb{E}[Y(0)] . \]
+
+\kursiv{Drittens --- Konsistenz:} Unter $X=1$ ist das beobachtete $Y$ gleich $Y(1)$, unter $X=0$ gleich $Y(0)$:
+\[ \mathbb{E}[Y \mid X=1] = \mathbb{E}[Y(1)], \qquad \mathbb{E}[Y \mid X=0] = \mathbb{E}[Y(0)] \]
+
+\kursiv{Subtrahieren:}
+\[ \mathbb{E}[Y \mid X=1] - \mathbb{E}[Y \mid X=0] = \mathbb{E}[Y(1)] - \mathbb{E}[Y(0)] = \tau \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der naive Vergleich, der in Kapitel~1 das Vorzeichen verfehlte, ist nach einer Randomisierung genau richtig.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man beachte, was hier \kursiv{nicht} gebraucht wird: keine Angabe darüber, welche Störgrößen es gibt, keine Anpassung, kein Modell. \textbf{Die Randomisierung ersetzt die unprüfbare Annahme durch eine Handlung} --- und das ist der Grund, warum die randomisierte Studie als Goldstandard gilt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was das Los nicht kann}
+
+\begin{merksatz}
+\boxtitel{Ungleichgewicht bleibt möglich}
+Das Los erzeugt keine gleichen Gruppen --- es erzeugt Gruppen, deren Unterschiede zufällig sind.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Im Mittel} & gleich --- über viele Wiederholungen der Studie.\\
+\textbf{In dieser Studie} & womöglich deutlich verschieden, gerade bei kleinen Fallzahlen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $30$ Patienten je Arm und einem Schwerkrankenanteil von $30$ Prozent beträgt die Streuung der Differenz beider Anteile rund $12$ Prozentpunkte --- ein Unterschied von $20$ Punkten ist keine Seltenheit. \textbf{Satz 3.1 gilt trotzdem}: Die Schätzung ist unverzerrt, nur streut sie. Der Unterschied zwischen Verzerrung und Varianz ist hier so wichtig wie in Band 22, Kapitel~2.}
+\end{minipage}
+\end{center}
+
+\schritt{Zwei Gegenmittel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Schichten} & Man lost getrennt innerhalb der Schwer- und der Leichtkranken. Das Ungleichgewicht in dieser Größe wird ausgeschlossen.\\
+\textbf{Anpassen} & Man rechnet die Schichtzugehörigkeit nachträglich heraus --- nicht gegen Verzerrung, sondern gegen Streuung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{In der randomisierten Studie dient die Anpassung einem ganz anderen Zweck als in Kapitel~1.} Dort behob sie eine Verzerrung, hier verringert sie eine Streuung: Wenn man weiß, dass der Schweregrad stark wirkt, so erklärt er einen Teil der Schwankung, und der Rest lässt sich genauer schätzen. Welche Größen man dafür heranzieht, muss vor der Auswertung festgelegt werden --- sonst entsteht das Problem des multiplen Testens aus Band 17, Kapitel~13.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie groß muss die Studie sein?}
+
+\begin{merksatz}
+\boxtitel{Die Fallzahl}
+Aus Band 17, Kapitel~6: Für zwei Anteile $p_0$ und $p_1$ braucht man je Gruppe
+\[ n = \frac{\bigl(z_{1-\alpha/2} + z_{1-\beta}\bigr)^{2}\,\bigl[p_0(1-p_0) + p_1(1-p_1)\bigr]}{(p_0-p_1)^{2}} . \]
+
+\schritt{Der Leitfall}
+Nach Kapitel~1: $p_0 = 0{,}325$ ohne frühe Gabe, $p_1 = 0{,}250$ mit. Zweiseitig $\alpha = 0{,}05$, Trennschärfe $80$ Prozent.
+
+\[ n = \frac{(1{,}960+0{,}842)^{2}\cdot(0{,}2194+0{,}1875)}{0{,}075^{2}} = \frac{7{,}849\cdot0{,}4069}{0{,}005625} = 568 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{gesuchter Effekt} & \textbf{je Gruppe} & \textbf{gesamt}\\
+\midrule
+$10$ Punkte & $310$ & $620$\\
+$7{,}5$ Punkte & $568$ & $1136$\\
+$5$ Punkte & $1315$ & $2630$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Halbiert man den gesuchten Effekt, so vervierfacht sich die Fallzahl.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die $1200$ Patienten des Klinikums hätten also für eine Studie ausgereicht --- wenn man sie ausgelost hätte. \textbf{Dieselbe Datenmenge, die als Beobachtung das Vorzeichen verfehlte, hätte als Versuch die richtige Antwort geliefert.} Der Unterschied liegt nicht in der Zahl, sondern darin, wer die Behandlung bestimmt hat.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wenn nicht alle tun, was ausgelost wurde}
+Wird die frühe Gabe ausgelost, so heißt das nicht, dass sie auch erfolgt. Bei manchen Patienten verzögert sich die Diagnose, bei anderen fehlt der Zugang.
+
+\schritt{Ein Zahlenbeispiel}
+Je $1000$ Patienten, $30$ Prozent schwer krank. Im Arm \enquote{früh} erhalten $200$ der $300$ Schwerkranken das Antibiotikum dennoch spät.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Auswertung} & \textbf{Effekt} & \\
+\midrule
+wahrer Effekt & $-6{,}5$ Punkte & \\
+nach Zuteilung & $-4{,}5$ Punkte & \textcolor{mittel}{zu klein}\\
+nach Behandlung & $-11{,}8$ Punkte & \textcolor{akzent}{zu groß}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die eine Auswertung unterschätzt den Effekt, die andere überschätzt ihn fast um das Doppelte.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Nach Zuteilung} & Ein Teil des Arms wurde gar nicht früh behandelt. Der Effekt wird verdünnt --- aber die Auswertung bleibt \textcolor{gruen}{unverzerrt} für die Frage: \enquote{Was bringt die Anordnung?}\\
+\textbf{Nach Behandlung} & Man vergleicht wieder zwei selbst gewählte Gruppen: Die tatsächlich früh Behandelten sind die Leichtkranken. \textcolor{akzent}{Die Randomisierung ist aufgehoben.}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Auswertung nach Zuteilung heißt \Begriff{Behandlungsabsicht} und ist der Standard klinischer Studien.} Sie beantwortet nicht die Frage nach der Wirkung des Medikaments, sondern die nach der Wirkung der Anordnung --- und das ist für eine Leitlinie oft die richtigere Frage. Die Auswertung nach tatsächlicher Behandlung sieht genauer aus und ist es nicht; Kapitel~9 zeigt, wie man aus derselben Studie dennoch den Behandlungseffekt gewinnt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und vier weitere Grenzen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Übertrag\-barkeit} & Studienteilnehmer sind jünger, gesünder und besser überwacht als die Patienten im Alltag.\\
+\textbf{Ethik} & Auslosen ist nur zulässig, wenn ernsthaft offen ist, was besser wirkt. Bei einer Leitlinienempfehlung ist das nicht mehr der Fall.\\
+\textbf{Zeit und Kosten} & Eine Studie über seltene Ausgänge dauert Jahre.\\
+\textbf{Unmöglichkeit} & Rauchen, Armut, Geburtsgewicht lassen sich nicht zuteilen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist ein Zirkel, der die Medizin durchzieht: \textbf{Sobald eine Behandlung als überlegen gilt, darf man sie nicht mehr prüfen} --- auch wenn die Überlegenheit auf schwacher Evidenz beruht. Bei der frühen Antibiotikagabe ist genau das eingetreten. Deshalb behandeln die Teile III und IV dieses Bandes Verfahren, die aus Beobachtungsdaten arbeiten: nicht weil sie besser wären, sondern weil es oft keine Alternative gibt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Dieselben Patienten, ausgelost}
+Man nehme die $1200$ Patienten aus Kapitel~1 mit denselben Risiken --- schwer: $40$ gegen $50$ Prozent, leicht: $10$ gegen $15$ --- und lose die Behandlung aus. Welche Tabelle ergibt sich, und was zeigt der naive Vergleich?
+
+\loesung
+\schritt{Schritt 1 --- Die Aufteilung}
+Bei Auslosung erhält in jeder Gruppe die Hälfte die frühe Gabe:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{1.8cm}P{1.8cm}P{1.8cm}P{1.6cm}@{}}
+\toprule
+& \multicolumn{2}{c}{\textbf{früh}} & \multicolumn{2}{c}{\textbf{spät}}\\
+& $n$ & \textbf{tot} & $n$ & \textbf{tot}\\
+\midrule
+schwer & $300$ & $120$ & $300$ & $150$\\
+leicht & $300$ & $30$ & $300$ & $45$\\
+\midrule
+\textbf{Summe} & $600$ & $\mathbf{150}$ & $600$ & $\mathbf{195}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Der naive Vergleich}
+\[ \frac{150}{600} - \frac{195}{600} = 0{,}250 - 0{,}325 = -0{,}075 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Genau der kausale Effekt aus Kapitel~1 --- ohne jede Anpassung.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Woran es liegt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Anteil schwer} & \textbf{früh} & \textbf{spät}\\
+\midrule
+Beobachtung (Kap.\ 1) & $83{,}3\,\%$ & $16{,}7\,\%$\\
+Randomisierung & $50{,}0\,\%$ & $50{,}0\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Risiken je Gruppe sind in beiden Fällen dieselben --- nur die Mischung ist verschieden.} In Kapitel~1 verglich man $83$ Prozent Schwerkranke mit $17$ Prozent; hier $50$ mit $50$. Die Anpassungsformel stellt diese Gleichheit rechnerisch her, das Los tatsächlich.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Eine Probe}
+Die Anpassungsformel auf die randomisierte Tabelle angewandt:
+\[ 0{,}5\,(0{,}40-0{,}50) + 0{,}5\,(0{,}10-0{,}15) = -0{,}050 - 0{,}025 = -0{,}075 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Sie liefert dasselbe wie der naive Vergleich. \textbf{Nach einer Randomisierung schadet die Anpassung nicht, sie ändert nur nichts am Erwartungswert} --- wohl aber an der Streuung, wie Abschnitt 3.2 sagt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Die Fallzahl}
+Wie viele Patienten braucht man, um eine Senkung der Sterblichkeit von $32{,}5$ auf $25{,}0$ Prozent nachzuweisen? Und wie ändert sich das bei $90$ Prozent Trennschärfe?
+
+\loesung
+\schritt{Schritt 1 --- Die Bestandteile}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Wert} & \\
+\midrule
+$z_{0{,}975}$ & $1{,}960$ & $\alpha = 0{,}05$\\
+$z_{0{,}80}$ & $0{,}842$ & Trennschärfe $80\,\%$\\
+$p_0(1-p_0)$ & $0{,}2194$ & \\
+$p_1(1-p_1)$ & $0{,}1875$ & \\
+$(p_0-p_1)^{2}$ & $0{,}005625$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Einsetzen}
+\[ n = \frac{(2{,}802)^{2}\cdot0{,}4069}{0{,}005625} = \frac{7{,}849\cdot0{,}4069}{0{,}005625} = \frac{3{,}194}{0{,}005625} = 567{,}7 \]
+\[ \Longrightarrow\ n = 568 \ \text{je Gruppe}, \quad 1136 \ \text{insgesamt} \]
+
+\schritt{Schritt 3 --- Mit neunzig Prozent Trennschärfe}
+$z_{0{,}90} = 1{,}282$:
+\[ n = \frac{(1{,}960+1{,}282)^{2}\cdot0{,}4069}{0{,}005625} = \frac{10{,}51\cdot0{,}4069}{0{,}005625} = 760 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Trennschärfe} & \textbf{je Gruppe} & \textbf{Zuwachs}\\
+\midrule
+$80\,\%$ & $568$ & --- \\
+$90\,\%$ & $760$ & $+34\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Und mit Ausfällen}
+Rechnet man mit $20$ Prozent Abbrechern, so braucht man
+\[ \frac{568}{0{,}8} = 710 \ \text{je Gruppe.} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Diese Aufstockung deckt nur den Verlust an Fällen, nicht die Verdünnung des Effekts} durch Patienten, die die zugeteilte Behandlung nicht erhalten. Nach dem Bruchfall beträgt der beobachtbare Effekt dann nur noch $-4{,}5$ statt $-6{,}5$ Punkte --- und für einen kleineren Effekt braucht man nach Schritt 2 quadratisch mehr Patienten. Wer beides übersieht, plant eine Studie, die ihr Ziel nicht erreichen kann.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Zuteilung oder Behandlung}
+Rechnen Sie den Bruchfall nach: je $1000$ Patienten, $30$ Prozent schwer krank, im Arm \enquote{früh} erhalten $200$ der $300$ Schwerkranken dennoch spät.
+
+\loesung
+\schritt{Schritt 1 --- Arm \enquote{früh}}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.4cm}P{1.4cm}P{1.8cm}P{1.6cm}@{}}
+\toprule
+\textbf{Gruppe} & $n$ & \textbf{Risiko} & \textbf{tot}\\
+\midrule
+schwer, früh & $100$ & $0{,}40$ & $40$\\
+schwer, spät & $200$ & $0{,}50$ & $100$\\
+leicht, früh & $700$ & $0{,}10$ & $70$\\
+\midrule
+\textbf{Summe} & $1000$ & & $\mathbf{210}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Arm \enquote{spät}}
+\[ 300\cdot0{,}50 + 700\cdot0{,}15 = 150 + 105 = 255 \]
+
+\schritt{Schritt 3 --- Nach Zuteilung}
+\[ \frac{210}{1000} - \frac{255}{1000} = -0{,}045 \]
+
+\schritt{Schritt 4 --- Der wahre Effekt}
+\[ \bigl(0{,}3\cdot0{,}40 + 0{,}7\cdot0{,}10\bigr) - \bigl(0{,}3\cdot0{,}50 + 0{,}7\cdot0{,}15\bigr) = 0{,}190 - 0{,}255 = -0{,}065 \]
+
+\schritt{Schritt 5 --- Woher die Verdünnung kommt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.6cm}P{1.6cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+\textbf{Gruppe} & $n$ & \textbf{Effekt} & \textbf{Beitrag}\\
+\midrule
+schwer, früh & $100$ & $-0{,}10$ & $-10$\\
+schwer, spät & $200$ & $0$ & $0$\\
+leicht, früh & $700$ & $-0{,}05$ & $-35$\\
+\midrule
+& $1000$ & & $\mathbf{-45}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ -\frac{45}{1000} = -0{,}045 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die $200$ Wechsler tragen nichts bei --- sie wurden behandelt wie der Vergleichsarm.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Nach tatsächlicher Behandlung}
+Die $800$ tatsächlich früh Behandelten:
+\[ \frac{40+70}{800} = \frac{110}{800} = 0{,}1375 \]
+\[ 0{,}1375 - 0{,}255 = -0{,}1175 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Fast das Doppelte des wahren Effekts.} Die $800$ bestehen zu $87{,}5$ Prozent aus Leichtkranken, der Vergleichsarm nur zu $70$ --- man vergleicht wieder zwei verschiedene Bevölkerungen. \textbf{Die Randomisierung ist durch die Auswahl nach dem Los wieder verlorengegangen}, und zwar durch eine Auswahl, die nach der Zuteilung stattfand. Merkregel: Man darf nach nichts auswählen, was dem Los zeitlich folgt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Vom Teeversuch zur Streptomycinstudie}
+\Person{Ronald Fisher} beschrieb 1935 in \kursiv{The Design of Experiments} die Randomisierung als Grundlage jedes Versuchs --- eingeleitet durch das Beispiel einer Dame, die behauptete, am Geschmack zu erkennen, ob der Tee vor oder nach der Milch eingegossen wurde.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Fishers Punkt war, dass die Reihenfolge der Tassen ausgelost werden muss --- sonst ließe sich jedes Ergebnis auf eine Regelmäßigkeit im Aufbau schieben. \textbf{Er entwickelte die Idee in der Agrarforschung}, wo Bodenunterschiede die Ernteversuche verfälschten, und übertrug sie nie selbst auf die Medizin.}
+\end{minipage}
+\end{center}
+
+\schritt{Die erste moderne Studie}
+\Person{Austin Bradford Hill} leitete 1946 die Streptomycinstudie des britischen Medical Research Council zur Behandlung der Lungentuberkulose.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Zuteilung erfolgte durch versiegelte Umschläge nach einer Zufallsliste, die der behandelnde Arzt nicht kannte. \textbf{Hill begründete die Randomisierung damals weniger statistisch als praktisch}: Sie schütze den Arzt vor dem Vorwurf, die Auswahl beeinflusst zu haben. Der Umstand, dass Streptomycin knapp war und nicht alle Kranken behandelt werden konnten, machte den Versuch überhaupt erst vertretbar.}
+\end{minipage}
+\end{center}
+
+\schritt{Und der Streit um die Absicht}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Auswertung nach Behandlungsabsicht setzte sich erst in den 1980er Jahren durch. \textbf{Sie erschien vielen Ärzten widersinnig}: Warum soll man Patienten, die das Medikament nie erhielten, der Medikamentengruppe zurechnen? Die Antwort steht im Bruchfall --- und der Streit flammt bei jeder Studie neu auf, in der viele Teilnehmer wechseln.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Versuche heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{5.0cm}@{}}
+\toprule
+\textbf{Angepasste Auf\-bauten} & Studien, die Zuteilungswahrscheinlichkeiten während des Verlaufs ändern.\\
+\textbf{Pragmatische Studien} & Randomisierung im Klinikalltag statt unter Studienbedingungen.\\
+\textbf{Gruppenversuche} & Ganze Stationen werden ausgelost --- gegen die Wechselwirkung aus Kapitel~2.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine pragmatische Studie lost innerhalb der gewöhnlichen Versorgung, ohne Ausschlusskriterien und ohne zusätzliche Überwachung. \textbf{Sie beantwortet die Frage, die die Klinik wirklich hat} --- wirkt es bei \kursiv{meinen} Patienten? --- und erkauft das mit unschärferer Behandlung und mehr Wechslern. Die Übertragbarkeit steigt, die Konsistenz aus Kapitel~2 leidet.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 3.1} & das Los macht den naiven Vergleich richtig\\
+\textbf{Auch Unbekanntes} & keine Anpassung leistet das\\
+\textbf{Anpassen} & gegen Streuung, nicht gegen Verzerrung\\
+\textbf{Fallzahl} & halber Effekt, vierfache Zahl\\
+\textbf{Der Bruchfall} & Zuteilung ehrlich, Behandlung verzerrt\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~I. Wo ausgelost werden kann, ist die Sache entschieden. Teil~II wendet sich dem Fall zu, in dem das nicht geht --- und braucht dafür eine Sprache, in der sich Annahmen über Ursachen aufschreiben lassen: Graphen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

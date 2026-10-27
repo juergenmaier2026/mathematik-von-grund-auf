@@ -1,0 +1,144 @@
+\chapter*{Vorwort}
+\addcontentsline{toc}{chapter}{Vorwort}
+
+\begin{merksatz}
+\boxtitel{Eine alte Frage mit neuem Werkzeug}
+Aus hundert Beobachtungen soll eine Regel gewonnen werden, die auch für die hunderterste stimmt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist die Frage dieses Bandes. Sie ist so alt wie die Wissenschaft --- und sie hat keine allgemeine Antwort.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{David Hume bemerkte 1739, dass kein Schluss von Beobachtetem auf Unbeobachtetes logisch zwingend ist. \textbf{Das maschinelle Lernen hat dieses Problem nicht gelöst, sondern präzisiert}: Es gibt an, unter welchen Annahmen der Schluss gelingt, wie viele Beobachtungen er braucht und wie groß der Fehler höchstens ist. Das ist weniger, als der Name verspricht, und mehr, als Hume für möglich hielt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wo der Band steht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{6.4cm}@{}}
+\toprule
+\textbf{Band 17} & Statistik fragt: Was sagen diese Daten über die Welt? Man schätzt Parameter eines Modells, das man vorher festlegt.\\
+\textbf{Band 19} & Optimierung fragt: Welche Wahl ist die beste? Die Zielfunktion ist gegeben.\\
+\textbf{Band 20} & Informationstheorie fragt: Wie kurz lässt sich etwas beschreiben?\\
+\textbf{Hier} & Lernen fragt: Welche Regel wird auf \kursiv{neuen} Daten am besten abschneiden --- ohne dass man das Modell vorher kennt?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dieser Band ist der erste der Reihe, der vier Vorgängerbände zugleich benutzt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Schätzen kommt aus Band 17, das Minimieren aus Band 19, die kürzeste Beschreibung aus Band 20, die Minimax-Formulierung robuster Verfahren aus Band 21. \textbf{Maschinelles Lernen ist kein neues Gebiet, sondern ein Treffpunkt} --- und die meisten seiner Sätze sind Sätze aus diesen Bänden, auf eine neue Frage angewandt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Drei Ergebnisse, die man nicht erwartet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Es gibt kein Lernverfahren, das auf allen Aufgaben besser ist als ein anderes. Wer ohne Annahme lernen will, lernt nichts. \kursiv{(Kapitel 1)}\\
+$2$ & Wie viele Beispiele man braucht, hängt nicht von der Zahl der möglichen Regeln ab, sondern von einer einzigen Zahl --- der VC-Dimension. Unendlich viele Regeln können mit endlich vielen Beispielen lernbar sein. \kursiv{(Kapitel 7)}\\
+$3$ & Tiefe Netze mit mehr Parametern als Beispielen verallgemeinern gut --- entgegen allem, was die Theorie der ersten beiden Teile vorhersagt. Warum, ist nicht verstanden. \kursiv{(Kapitel 14)}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das dritte Ergebnis ist die Lage, in der sich das Fach heute befindet. \textbf{Die erfolgreichsten Verfahren sind die am schlechtesten verstandenen}, und die Theorie, die dieser Band entwickelt, erklärt die ältere Hälfte des Fachs vollständig und die neuere kaum. Das ist keine Schwäche der Darstellung, sondern der Stand.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die sechs Teile}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{3.0cm}P{3.6cm}@{}}
+\toprule
+\textbf{Teil} & \textbf{Thema} & \textbf{Kapitel}\\
+\midrule
+I & Das Problem & $1$--$3$\\
+II & Lineare Verfahren & $4$--$6$\\
+III & Die Theorie & $7$--$8$\\
+IV & Nichtlineare Verfahren & $9$--$11$\\
+V & Ohne Etiketten, in der Tiefe & $12$--$14$\\
+VI & Stand & $15$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der Leitfall}
+Das Klinikum Neustadt will eine Sepsis früh erkennen --- aus Laborwerten und Vitalparametern, bevor die Diagnose klinisch offensichtlich wird.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Leitfall ist nicht erfunden. \textbf{Ein weit verbreitetes kommerzielles Sepsis-Warnsystem wurde 2021 an einer unabhängigen Klinik nachgeprüft} --- und erkannte zwei Drittel der Fälle nicht, bei einer Alarmflut, die das Personal zu ignorieren lernte. Der Band nimmt diese Geschichte als Maßstab: Jedes Verfahren wird daran gemessen, ob es dasselbe Schicksal erleiden würde.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Drei Warnungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.2cm}P{6.4cm}@{}}
+\toprule
+\textbf{Erste} & Ein Verfahren lernt, was in den Daten steht --- nicht, was man gemeint hat. Wer die falschen Daten liefert, bekommt eine gut begründete falsche Antwort.\\
+\textbf{Zweite} & Gute Ergebnisse auf den Trainingsdaten sagen nichts. Gute Ergebnisse auf Testdaten sagen etwas --- über Daten, die so aussehen wie die Testdaten.\\
+\textbf{Dritte} & Vorhersage ist nicht Erklärung. Ein Verfahren, das richtig vorhersagt, muss nicht verstanden haben, warum.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Warnung ist die wichtigste und die am häufigsten verletzte. \textbf{Das Sepsis-Warnsystem von 2021 war auf den Daten seiner Entwickler gut} --- nur sahen die Daten der prüfenden Klinik anders aus. Wer über ein Lernverfahren spricht, muss sagen, auf welchen Daten es geprüft wurde, und wie ähnlich diese denen sind, auf die es angewandt werden soll.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Was dieser Band voraussetzt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{1.6cm}P{3.0cm}@{}}
+\toprule
+\textbf{Werkzeug} & \textbf{Band} & \textbf{gebraucht in}\\
+\midrule
+Wahrscheinlichkeit & $4$ & durchgehend\\
+Matrizen, Eigenwerte & $2$ & Kapitel 4, 6, 13\\
+Ableitungen, Gradient & $3$ & Kapitel 4, 11\\
+Schätzen, Testen & $17$ & Kapitel 2, 3, 4\\
+Konvexität, Dualität & $19$ & Kapitel 5, 6\\
+Entropie & $20$ & Kapitel 9, 12\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Wer nur Band 0 und die Grundzüge von Band 4 kennt, kommt durch Teil~I}, und die weiteren Voraussetzungen werden jeweils dort genannt, wo sie gebraucht werden. Wo ein Satz aus einem Vorgängerband benutzt wird, steht die Fundstelle dabei.}
+\end{minipage}
+\end{center}
+\end{merksatz}

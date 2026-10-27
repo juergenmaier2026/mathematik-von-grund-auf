@@ -1,0 +1,683 @@
+\part{Zufall und Komplexität}
+
+\chapter{Kolmogorow-Komplexität}
+
+\section{Die offene Frage}
+
+\begin{merksatz}
+\boxtitel{Was Aufgabe 3.3 übrig gelassen hat}
+Dort wurde gezeigt: Die allermeisten Binärfolgen lassen sich nicht komprimieren --- aber die tatsächlich vorkommenden sehr wohl.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Frage lautet: Was zeichnet die komprimierbaren Folgen aus?}
+\end{minipage}
+\end{center}
+
+\schritt{Zwei Folgen der Länge 48}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+$A$ & \texttt{01010101 01010101 01010101}\\
+ & \texttt{01010101 01010101 01010101}\\
+\midrule
+$B$ & \texttt{01101010 00001001 11100110}\\
+ & \texttt{01100111 11110011 10111100}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$A$ ist offensichtlich einfach.} $B$ sieht zufällig aus --- $27$ Einsen unter $48$ Stellen, keine erkennbare Regel.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{$B$ sind die ersten $48$ Nachkommastellen von $\sqrt2 - 1$ im Binärsystem. Die Folge lässt sich also durch ein sehr kurzes Programm erzeugen --- und niemand sieht ihr das an. \textbf{Die Frage nach der Komprimierbarkeit ist keine Frage der Statistik, sondern der Beschreibbarkeit.}}
+\end{minipage}
+\end{center}
+
+\schritt{Warum die Entropie hier nicht hilft}
+Die Entropie ist eine Eigenschaft einer \kursiv{Quelle}, nicht einer einzelnen Folge. Für eine feste Folge ist sie gar nicht definiert.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man kann zwar die Häufigkeiten der Symbole in $B$ zählen und daraus eine Zahl bilden --- aber die sagt nichts darüber, ob eine Regel dahintersteckt. Gesucht ist ein Begriff, der eine \kursiv{einzelne} Folge bewertet und dabei ohne Wahrscheinlichkeiten auskommt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Definition}
+
+\begin{definition}
+\boxtitelm{Definition 7.1 --- Kolmogorow-Komplexität}
+Sei $U$ eine feste universelle Rechenmaschine. Die \Begriff{Komplexität} einer Zeichenfolge $x$ ist
+\[ K_U(x) = \min\bigl\{\,|p| \ : \ U(p) = x\,\bigr\} \]
+--- die Länge des kürzesten Programms, das $x$ ausgibt und anhält.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was das bedeutet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Eine Folge} & Die Komplexität gehört zu einem einzelnen Objekt, nicht zu einer Verteilung.\\
+\textbf{Keine Wahrscheinlichkeiten} & Der Begriff kommt ohne sie aus.\\
+\textbf{Absolut} & Er misst, wie viel Beschreibung das Objekt wirklich braucht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die beiden Extreme}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Klein} & $K(\underbrace{0101\ldots01}_{n}) \approx \lb n + c$ --- man muss nur $n$ mitteilen.\\
+\textbf{Groß} & $K(x) \approx |x|$ --- die Folge ist ihre eigene kürzeste Beschreibung.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Die obere Schranke}
+Für jede Folge gilt
+\[ K(x) \ \le\ |x| + c , \]
+denn das Programm \enquote{gib die folgenden Bits aus: $x$} hat diese Länge.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Konstante $c$ ist die Länge der Anweisung \enquote{gib aus} in der gewählten Programmiersprache. Sie hängt von der Sprache ab --- und genau darin liegt die Schwierigkeit, die der nächste Satz behebt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 7.2 --- der Invarianzsatz}
+Für je zwei universelle Maschinen $U$ und $V$ gibt es eine Konstante $c$ mit
+\[ \bigl|K_U(x) - K_V(x)\bigr| \ \le\ c \qquad\text{für alle } x . \]
+
+\schritt{Beweis}
+Da $U$ universell ist, gibt es ein Programm $\pi$ fester Länge, das $V$ auf $U$ nachbildet: Für jede Eingabe $p$ gilt
+\[ U(\pi\,p) = V(p) . \]
+
+Ist $p$ das kürzeste Programm für $x$ auf $V$, so ist $\pi p$ ein Programm für $x$ auf $U$:
+\[ K_U(x) \ \le\ |\pi| + K_V(x) \]
+
+Dieselbe Überlegung in die andere Richtung liefert
+\[ K_V(x) \ \le\ |\pi'| + K_U(x) \]
+
+Mit $c = \max\{|\pi|,|\pi'|\}$ folgt die Behauptung. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Wahl der Programmiersprache ändert die Komplexität nur um eine Konstante.} Sie ist damit für lange Folgen bedeutungslos.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Satz, der den Begriff überhaupt erst zu einem mathematischen macht. Ohne ihn wäre $K$ eine willkürliche Größe, die von der zufälligen Wahl einer Sprache abhinge. \textbf{Der Preis ist, dass alle Aussagen nur \enquote{bis auf eine Konstante} gelten} --- und diese Konstante kann für ein konkretes kurzes Objekt größer sein als das Objekt selbst.}
+\end{minipage}
+\end{center}
+
+\schritt{Die übliche Schreibweise}
+Man schreibt $K(x)$ ohne Index und meint: bis auf eine additive Konstante.
+\end{merksatz}
+
+\section{Die meisten Folgen sind zufällig}
+
+\begin{merksatz}
+\boxtitel{Satz 7.3 --- das Abzählargument}
+Der Anteil der Folgen der Länge $n$ mit
+\[ K(x) \ <\ n-k \]
+ist kleiner als $2^{-k}$.
+
+\schritt{Beweis}
+Es gibt höchstens
+\[ \sum_{j=0}^{n-k-1} 2^{j} = 2^{\,n-k}-1 \]
+Programme der Länge kleiner als $n-k$.
+
+Jedes davon erzeugt höchstens eine Folge. Also gibt es höchstens $2^{n-k}-1$ Folgen mit $K(x) < n-k$.
+
+Der Anteil an allen $2^{n}$ Folgen beträgt
+\[ \frac{2^{\,n-k}-1}{2^{n}} \ <\ 2^{-k} . \]
+$\blacksquare$
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+$k$ & \textbf{Anteil} & \\
+\midrule
+$1$ & $<50\,\%$ & \\
+$5$ & $<3{,}13\,\%$ & \\
+$10$ & $<0{,}098\,\%$ & \\
+$20$ & $<10^{-6}$ & \\
+$50$ & $<10^{-15}$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Weniger als ein Promille aller Folgen lässt sich um zehn Bit verkürzen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist genau die Tabelle aus Aufgabe 3.3 --- nur mit einer anderen Begründung. Dort war es ein Abzählargument über Codes, hier über Programme. \textbf{Beide Male ist die Ursache dieselbe: Es gibt nicht genug kurze Beschreibungen.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 7.4 --- algorithmisch zufällig}
+Eine Folge heißt \Begriff{inkomprimierbar}, wenn
+\[ K(x) \ \ge\ |x| . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Ein Zufallsbegriff ohne Wahrscheinlichkeiten}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Folge ist zufällig, wenn es keine kürzere Beschreibung von ihr gibt als sie selbst.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum das eine gute Definition ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Einzelne Folgen} & Die klassische Wahrscheinlichkeitsrechnung kann nicht sagen, dass \kursiv{diese} Folge zufällig ist --- jede einzelne hat dieselbe Wahrscheinlichkeit $2^{-n}$.\\
+\textbf{Alle Tests bestanden} & Eine inkomprimierbare Folge besteht jeden statistischen Test: Bestünde sie einen nicht, so könnte man daraus eine Verkürzung bauen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist der eigentliche Gehalt. Hat eine Folge etwa deutlich mehr Nullen als Einsen, so lässt sie sich mit einem Huffman-Code aus Kapitel~3 verkürzen --- also ist sie nicht inkomprimierbar. \textbf{Inkomprimierbarkeit fasst alle denkbaren Regelmäßigkeiten in einer einzigen Bedingung zusammen.}}
+\end{minipage}
+\end{center}
+
+\schritt{Ein Beispiel für die Umkehrung}
+Enthält eine Folge der Länge $n$ nur einen Anteil $p \ne \frac12$ an Einsen, so gilt
+\[ K(x) \ \lesssim\ n\,h(p) + O(\lb n) . \]
+
+\kursiv{Bei $p=0{,}1$:} $K \lesssim 0{,}469\,n$ --- die Folge ist um mehr als die Hälfte verkürzbar.
+\end{merksatz}
+
+\section{Die Komplexität ist nicht berechenbar}
+
+\begin{merksatz}
+\boxtitel{Satz 7.5}
+Es gibt kein Verfahren, das zu jeder Folge $x$ den Wert $K(x)$ bestimmt.
+
+\schritt{Beweis --- durch Widerspruch}
+Angenommen, ein solches Verfahren existiert. Dann können wir folgendes Programm schreiben:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Lies eine Zahl $m$.\\
+$2$ & Durchlaufe alle Zeichenfolgen der Reihe nach.\\
+$3$ & Berechne für jede ihre Komplexität.\\
+$4$ & Gib die erste aus mit $K(x) \ge m$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 1 --- das Programm hält an}
+Nach Satz 7.3 gibt es Folgen beliebig großer Komplexität, also wird eine gefunden.
+
+\schritt{Schritt 2 --- die Länge des Programms}
+Der Text der Schritte $2$ bis $4$ hat eine feste Länge $c$. Die Zahl $m$ braucht etwa $\lb m$ Bit:
+\[ \text{Programmlänge} \ \approx\ c + \lb m \]
+
+\schritt{Schritt 3 --- der Widerspruch}
+Das Programm gibt eine Folge $x_0$ mit $K(x_0) \ge m$ aus. Also ist
+\[ K(x_0) \ \le\ c + \lb m . \]
+
+Zusammen:
+\[ m \ \le\ K(x_0) \ \le\ c + \lb m \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Für hinreichend großes $m$ ist $c + \lb m < m$} --- denn der Logarithmus wächst langsamer als jede lineare Funktion. Widerspruch. $\blacksquare$
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $c = 1000$ etwa genügt $m = 1024$: Dann ist $c+\lb m = 1010 < 1024$. \textbf{Das Programm beschreibt in tausendzehn Bit eine Folge, die angeblich mehr als tausendvierundzwanzig Bit zu ihrer Beschreibung braucht.}}
+\end{minipage}
+\end{center}
+
+\schritt{Die Verwandtschaft}
+Das Argument ist eine Formalisierung des Berryschen Paradoxons: \enquote{Die kleinste natürliche Zahl, die sich nicht mit weniger als zwölf Wörtern beschreiben lässt} --- ein Satz aus elf Wörtern.
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was daraus folgt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kein Optimum} & Es gibt kein bestmögliches Kompressionsverfahren, das man tatsächlich ausführen könnte.\\
+\textbf{Kein Nachweis} & Man kann von einer Folge im Allgemeinen nicht beweisen, dass sie zufällig ist.\\
+\textbf{Nur Schranken} & $K(x)$ lässt sich von oben abschätzen --- jedes Kompressionsverfahren liefert eine obere Schranke --- aber nie von unten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist die praktisch wichtigste. \textbf{Wenn ein Verfahren eine Datei nicht verkleinert, beweist das nichts} --- vielleicht hätte ein anderes es gekonnt. Umgekehrt: Gelingt eine Verkürzung, so ist $K$ nachweislich klein.}
+\end{minipage}
+\end{center}
+
+\schritt{Und ein bemerkenswerter Nebeneffekt}
+Man kann für keine konkrete lange Folge \kursiv{beweisen}, dass ihre Komplexität groß ist --- obwohl fast alle Folgen diese Eigenschaft haben.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Genauer: In jedem widerspruchsfreien Beweissystem gibt es eine Schranke $L$, so dass sich für keine Folge die Aussage $K(x) > L$ beweisen lässt. $L$ hängt dabei nur von der Länge der Axiome ab. Das ist eine Fassung des Unvollständigkeitssatzes von Gödel --- und sie stammt von Chaitin. \textbf{Die Mathematik kann fast keinem konkreten Objekt nachweisen, was fast alle Objekte erfüllen.}}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Zusammenhang zur Entropie}
+
+\begin{merksatz}
+\boxtitel{Satz 7.6}
+Erzeugt eine Quelle mit der Entropie $\Ent$ unabhängige Symbole, so gilt
+\[ \frac{1}{n}\,\mathbb{E}\bigl[K(X_1,\ldots,X_n)\bigr] \ \longrightarrow\ \Ent . \]
+
+\schritt{Die Begründung in zwei Richtungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{6.6cm}@{}}
+\toprule
+\textbf{$\le$} & Man beschreibt die Folge durch ihren Huffman-Code plus das Decodierprogramm --- nach Satz 3.3 etwa $n\Ent + O(\lb n)$ Bit.\\
+\textbf{$\ge$} & Nach Satz 7.3 lassen sich nicht alle Folgen kürzer beschreiben; der Erwartungswert bleibt daher oberhalb.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Im Mittel stimmen algorithmische Komplexität und Entropie überein.} Im Einzelfall können sie beliebig weit auseinanderliegen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Folge $B$ vom Kapitelanfang ist das Beispiel: Als Ausgabe einer fairen Münze wäre sie typisch und hätte Entropie $48$ Bit. Tatsächlich hat sie eine Komplexität von wenigen Dutzend Bit, weil sie $\sqrt2$ ist. \textbf{Der Erwartungswert verdeckt genau die Fälle, um die es geht.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Vier Vorbehalte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Die Konstante} & Alle Aussagen gelten bis auf eine additive Konstante. Für kurze Objekte ist der Begriff daher praktisch bedeutungslos.\\
+\textbf{Nicht berechenbar} & Satz 7.5. Der Begriff ist ein Werkzeug des Beweisens, nicht des Rechnens.\\
+\textbf{Keine Zeit} & $K$ misst die Länge des Programms, nicht seine Laufzeit. Ein Programm von zehn Bit darf $10^{100}$ Jahre rechnen.\\
+\textbf{Kein Sinn} & Wie die Entropie misst $K$ keine Bedeutung. Eine zufällige Folge hat maximale Komplexität und minimalen Gehalt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Das ist ein ernster Einwand: Eine Beschreibung, die niemand ausführen kann, ist keine brauchbare Beschreibung.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Deshalb gibt es Varianten mit Zeitschranke --- etwa die Frage nach dem kürzesten Programm, das innerhalb von $t$ Schritten anhält. Diese Größen sind berechenbar, verlieren aber den Invarianzsatz in seiner einfachen Form. \textbf{Man bezahlt die Berechenbarkeit mit der Eindeutigkeit.}}
+\end{minipage}
+\end{center}
+
+\schritt{Zur vierten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine sinnvolle Nachricht liegt zwischen den Extremen: Reine Wiederholung hat niedrige Komplexität und sagt nichts; reiner Zufall hat maximale Komplexität und sagt ebenfalls nichts. Es gibt Versuche, diesen Zwischenbereich zu erfassen --- die \Begriff{logische Tiefe} misst, wie lange das kürzeste Programm rechnen muss. \textbf{Ein tiefes Objekt ist eines, das kurz beschreibbar und dennoch aufwendig zu erzeugen ist} --- etwa die ersten Milliarde Stellen von $\pi$.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.1 --- Komplexität abschätzen}
+Schätzen Sie die Komplexität der folgenden Folgen der Länge $n$ nach oben ab.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & $n$ Nullen\\
+(b) & Die ersten $n$ Binärstellen von $\pi$\\
+(c) & Eine Folge mit genau $n/4$ Einsen an zufälligen Stellen\\
+(d) & Die Folge der ersten $n$ Primzahlen in Binärdarstellung\\
+(e) & Eine Folge aus $n$ Münzwürfen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a) $n$ Nullen}
+Das Programm lautet: \enquote{gib $n$ Nullen aus}. Die Zahl $n$ braucht $\lb n$ Bit.
+\[ K \ \le\ \lb n + c \]
+Bei $n = 10^6$: etwa $20 + c$ Bit.
+
+\schritt{(b) Binärstellen von $\pi$}
+Ein Programm zur Berechnung von $\pi$ hat feste Länge; man muss nur $n$ mitteilen.
+\[ K \ \le\ \lb n + c \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Dieselbe Schranke wie bei (a) --- obwohl die Folge völlig anders aussieht. \textbf{Die Komplexität misst nicht, wie kompliziert etwas \kursiv{wirkt}, sondern wie kurz es beschreibbar ist.}}
+\end{minipage}
+\end{center}
+
+\schritt{(c) Genau $n/4$ Einsen an zufälligen Stellen}
+Man muss angeben, \kursiv{welche} der $\binom{n}{n/4}$ möglichen Anordnungen vorliegt:
+\[ K \ \lesssim\ \lb\binom{n}{n/4} + O(\lb n) \ \approx\ n\,h(0{,}25) = 0{,}811\,n \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Folge ist also um etwa $19$ Prozent verkürzbar --- genau die Redundanz aus Kapitel~2. Die Kenntnis der Häufigkeit allein bringt nicht mehr; alles Weitere müsste aus zusätzlicher Struktur kommen.}
+\end{minipage}
+\end{center}
+
+\schritt{(d) Die ersten $n$ Primzahlen}
+Ein Programm, das Primzahlen erzeugt, hat feste Länge.
+\[ K \ \le\ \lb n + c \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Die Folge der Primzahlen ist also algorithmisch sehr einfach --- obwohl ihre Verteilung zu den tiefsten Fragen der Mathematik gehört. \textbf{Algorithmische Einfachheit und mathematische Tiefe sind zwei verschiedene Dinge.}}
+\end{minipage}
+\end{center}
+
+\schritt{(e) $n$ Münzwürfe}
+Nach Satz 7.3 gilt für den überwiegenden Teil der Folgen
+\[ K \ \ge\ n-k \quad\text{mit Wahrscheinlichkeit} \ >\ 1-2^{-k} . \]
+
+\kursiv{Etwa:} Mit Wahrscheinlichkeit über $99{,}9$ Prozent ist $K \ge n-10$.
+
+\schritt{Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.0cm}P{2.6cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Schranke} & \textbf{bei $n=10^{6}$}\\
+\midrule
+(a) & $\lb n + c$ & $\approx 20+c$\\
+(b) & $\lb n + c$ & $\approx 20+c$\\
+(c) & $0{,}811\,n$ & $\approx 811\,000$\\
+(d) & $\lb n + c$ & $\approx 20+c$\\
+(e) & $\approx n$ & $\approx 10^{6}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Drei der fünf Folgen haben eine Komplexität von etwa zwanzig Bit --- bei einer Million Stellen. \textbf{Nur die Münzwürfe sind wirklich unkomprimierbar}, und genau sie sind die einzigen, bei denen man es nicht beweisen kann.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.2 --- Das Abzählargument nachrechnen}
+Wie viele Folgen der Länge $30$ lassen sich um mindestens $10$ Bit verkürzen? Und wie viele um mindestens die Hälfte?
+
+\loesung
+\schritt{Schritt 1 --- Um mindestens 10 Bit}
+Gesucht sind Folgen mit $K(x) < 20$.
+
+Die Zahl der Programme kürzer als $20$ Bit:
+\[ \sum_{j=0}^{19} 2^{j} = 2^{20}-1 = 1\,048\,575 \]
+
+\schritt{Schritt 2 --- Der Anteil}
+\[ \frac{1\,048\,575}{2^{30}} = \frac{1\,048\,575}{1\,073\,741\,824} = 9{,}77\cdot10^{-4} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Weniger als ein Promille.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Um mindestens die Hälfte}
+Gesucht: $K(x) < 15$. Die Zahl der Programme:
+\[ 2^{15}-1 = 32\,767 \]
+\[ \frac{32\,767}{2^{30}} = 3{,}05\cdot10^{-5} \]
+
+\schritt{Schritt 4 --- Die absolute Zahl}
+Höchstens $32\,767$ von über einer Milliarde Folgen lassen sich auf die Hälfte verkürzen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Ersparnis} & \textbf{Anzahl} & \textbf{Anteil}\\
+\midrule
+$\ge 5$ Bit & $\le 3{,}4\cdot10^{7}$ & $3{,}1\,\%$\\
+$\ge 10$ Bit & $\le 1{,}0\cdot10^{6}$ & $0{,}098\,\%$\\
+$\ge 15$ Bit & $\le 3{,}3\cdot10^{4}$ & $0{,}0031\,\%$\\
+$\ge 20$ Bit & $\le 1023$ & $10^{-6}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Schranke ist außerdem sehr großzügig: Sie unterstellt, dass \kursiv{jedes} kurze Programm eine andere Folge der Länge $30$ ausgibt. Tatsächlich erzeugen viele Programme dieselbe Ausgabe, viele andere gar keine oder eine Folge anderer Länge --- oder sie halten nie an. \textbf{Die wahren Zahlen sind noch weit kleiner.}}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Der Bezug zur Praxis}
+Eine Datei von $30$ Bit ist bedeutungslos klein. Bei $n = 10^{7}$ --- etwa einem Megabyte --- gilt dieselbe Rechnung:
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Höchstens ein Millionstel aller Dateien dieser Größe lässt sich um zwanzig Bit verkürzen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass Kompressionsprogramme dennoch regelmäßig Faktoren von zwei bis zehn erreichen, liegt allein daran, dass tatsächliche Dateien aus einer verschwindend kleinen, hochstrukturierten Teilmenge stammen. Es ist genau der Befund aus Aufgabe 3.3, nun mit einem Begriff versehen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.3 --- Eine Variante des Beweises}
+Zeigen Sie: Es gibt kein Programm, das zu jeder Folge das \kursiv{kürzeste} Programm ausgibt, das sie erzeugt.
+
+\loesung
+\schritt{Schritt 1 --- Die Annahme}
+Sei $M$ ein Programm, das zu jedem $x$ das kürzeste Programm $p_x$ mit $U(p_x)=x$ ausgibt.
+
+\schritt{Schritt 2 --- Daraus folgt Berechenbarkeit von $K$}
+Man führt $M$ aus und misst die Länge der Ausgabe:
+\[ K(x) = |M(x)| \]
+
+Damit wäre $K$ berechenbar --- Widerspruch zu Satz 7.5. $\blacksquare$
+
+\schritt{Schritt 3 --- Die umgekehrte Frage}
+Gibt es ein Programm, das \kursiv{prüft}, ob ein gegebenes $p$ das kürzeste Programm für $U(p)$ ist?
+
+\kursiv{Nein.} Ein solches Programm erlaubte ebenfalls die Berechnung von $K$: Man durchläuft alle Programme aufsteigender Länge und prüft jedes.
+
+\schritt{Schritt 4 --- Was man dennoch tun kann}
+Man kann $K$ von oben \kursiv{annähern}:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Lasse alle Programme bis zur Länge $L$ jeweils $t$ Schritte laufen.\\
+$2$ & Notiere für jedes ausgegebene $x$ die kürzeste gefundene Länge.\\
+$3$ & Vergrößere $t$ und beginne von vorn.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die notierten Werte fallen monoton und streben gegen $K(x)$ --- aber man erfährt nie, wann man angekommen ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Begriff dafür}
+Man nennt eine solche Funktion \Begriff{von oben halbberechenbar}.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Man erfährt} & Jede obere Schranke, die stimmt, wird irgendwann gefunden.\\
+\textbf{Man erfährt nicht} & Ob die gefundene Schranke bereits der wahre Wert ist.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Asymmetrie ist typisch für unentscheidbare Probleme: Positive Befunde lassen sich bestätigen, negative nicht. Bei der Frage nach dem Anhalten eines Programms ist es dasselbe --- man erfährt, dass es anhält, wenn es anhält, und nie, dass es nicht anhält.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 6 --- Und die praktische Entsprechung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Genau so arbeiten Kompressionsprogramme: Jedes liefert eine obere Schranke für $K$. Ein besseres Programm liefert eine bessere Schranke. \textbf{Die Geschichte der Datenkompression ist die Geschichte immer besserer oberer Schranken für eine Größe, die niemand ausrechnen kann.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Dreimal dieselbe Idee}
+Der Begriff wurde zwischen 1960 und 1965 dreimal unabhängig gefunden.
+
+\schritt{Solomonoff, 1960}
+\Person{Ray Solomonoff} (1926--2009) suchte nach einer mathematischen Fassung des induktiven Schließens: Wie sollte man aus Beobachtungen auf Regeln schließen?
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Seine Antwort: Man gewichtet jede mögliche Erklärung mit $2^{-\text{Programmlänge}}$. Das ist eine formale Fassung von Ockhams Rasiermesser --- kürzere Erklärungen sind wahrscheinlicher. Solomonoffs Arbeit erschien als technischer Bericht und blieb lange unbeachtet.}
+\end{minipage}
+\end{center}
+
+\schritt{Kolmogorow, 1965}
+\Person{Andrei Kolmogorow} (1903--1987) --- derselbe, der 1933 die Wahrscheinlichkeitstheorie axiomatisiert hatte --- suchte einen Zufallsbegriff für einzelne Objekte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das ist bemerkenswert: Der Mann, der die Wahrscheinlichkeitsrechnung auf ein festes Fundament gestellt hatte, war mit ihr unzufrieden. Sie kann nicht sagen, dass \kursiv{diese} Folge zufällig ist --- nur etwas über Verteilungen. Kolmogorow suchte dreißig Jahre später den fehlenden Begriff und fand ihn in der Berechenbarkeitstheorie.}
+\end{minipage}
+\end{center}
+
+\schritt{Chaitin, 1965}
+\Person{Gregory Chaitin} fand den Begriff als Student, im Alter von etwa achtzehn Jahren, unabhängig von beiden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Von ihm stammt die Verbindung zur Unvollständigkeit und die Zahl $\Omega$ --- die Wahrscheinlichkeit, dass ein zufällig gewähltes Programm anhält. $\Omega$ ist eine wohldefinierte reelle Zahl, deren Binärstellen algorithmisch zufällig sind: Um $n$ Stellen von $\Omega$ zu kennen, braucht man $n$ Bit an Axiomen. \textbf{Eine einzelne Zahl, die alles Wissen über das Anhalten von Programmen verdichtet enthält} --- und deshalb unerreichbar ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Namensgebung}
+Im Westen setzte sich \enquote{Kolmogorow-Komplexität} durch, obwohl Solomonoff früher war.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Kolmogorow selbst wies stets auf Solomonoffs Priorität hin. Es ist wieder Stiglers Gesetz aus Band 17 --- diesmal mit dem Zusatz, dass der Namensgeber selbst dagegen anschrieb.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wo der Begriff wirkt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{5.0cm}@{}}
+\toprule
+\textbf{Beweistechnik} & Die \Begriff{Inkomprimierbarkeitsmethode}: Man nimmt ein zufälliges Objekt und leitet aus seiner Nichtbeschreibbarkeit untere Schranken her.\\
+\textbf{Modellwahl} & Das Prinzip der kürzesten Beschreibung --- Kapitel~8.\\
+\textbf{Ähnlichkeits\-maße} & Der \Begriff{Normalisierte Kompressionsabstand} vergleicht Objekte über ihre gemeinsame Komprimierbarkeit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Will man zeigen, dass ein Verfahren mindestens $f(n)$ Schritte braucht, so betrachtet man eine inkomprimierbare Eingabe.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wäre das Verfahren schneller, so ließe sich aus seinem Ablauf eine kurze Beschreibung der Eingabe gewinnen --- im Widerspruch zur Inkomprimierbarkeit. \textbf{Die Methode ersetzt aufwendige Abzählargumente durch ein einziges Objekt}, und sie hat in der Komplexitätstheorie zahlreiche Schranken geliefert, die anders schwer zu erhalten waren.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Man schätzt die Ähnlichkeit zweier Objekte durch
+\[ \frac{Z(xy) - \min\{Z(x),Z(y)\}}{\max\{Z(x),Z(y)\}} \]
+mit $Z$ als Länge nach Kompression.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Gedanke: Sind $x$ und $y$ ähnlich, so hilft die Kenntnis des einen beim Komprimieren des anderen. Das Verfahren braucht keinerlei Vorwissen über den Gegenstand --- es wurde erfolgreich auf Sprachverwandtschaft, Musikstile und Erbgutsequenzen angewandt. \textbf{Ein Ähnlichkeitsmaß, das nichts über den Gegenstand voraussetzt}, ist genau das, was ein universeller Begriff verspricht.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 7.1} & kürzestes Programm\\
+\textbf{Satz 7.2} & Invarianz bis auf eine Konstante\\
+\textbf{Satz 7.3} & fast alle Folgen sind inkomprimierbar\\
+\textbf{Satz 7.5} & $K$ ist nicht berechenbar\\
+\textbf{Satz 7.6} & im Mittel gleich der Entropie\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel wird aus dem Gedanken der kürzesten Beschreibung ein statistisches Verfahren --- und die relative Entropie aus Kapitel~4 erweist sich als der Begriff, der Information und Schätzen verbindet.}
+\end{minipage}
+\end{center}
+\end{merksatz}

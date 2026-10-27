@@ -1,0 +1,511 @@
+\chapter{Ähnliche Fälle und der Fluch der Dimension}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{\enquote{Ich hatte mal einen Patienten wie diesen}}
+Die erfahrene Oberärztin sieht den neuen Patienten an und erinnert sich an frühere mit ähnlichem Laktat und ähnlicher Herzfrequenz. Die meisten davon hatten eine Sepsis.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist ein Lernverfahren --- das einfachste, das es gibt, und eines der ältesten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es braucht kein Modell, keine Parameter, keine Annahme über die Form der Grenze. \textbf{Es speichert alle Fälle und fragt im Bedarfsfall die ähnlichsten.} Man nennt das die Methode der nächsten Nachbarn --- und dieses Kapitel zeigt, dass sie in wenigen Dimensionen erstaunlich gut und in vielen erstaunlich schlecht ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 10.1 --- $k$ nächste Nachbarn}
+Für einen neuen Punkt $\vek x$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Berechne den Abstand zu allen $n$ Trainingspunkten.\\
+$2$ & Wähle die $k$ nächsten.\\
+$3$ & Sage vorher, was die Mehrheit von ihnen hat --- oder den Anteil als Wahrscheinlichkeit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Wahl von $k$}
+$500$ Patienten mit Laktat und Herzfrequenz, beide auf gleiche Streuung gebracht:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+$k$ & \textbf{Training} & \textbf{Test} & \\
+\midrule
+$1$ & $0{,}0\,\%$ & $7{,}3\,\%$ & auswendig\\
+$5$ & $3{,}2\,\%$ & $5{,}6\,\%$ & \\
+$15$ & $3{,}8\,\%$ & $\mathbf{4{,}7\,\%}$ & \\
+$51$ & $4{,}6\,\%$ & $4{,}9\,\%$ & \\
+$151$ & $7{,}8\,\%$ & $7{,}5\,\%$ & \\
+$401$ & $23{,}8\,\%$ & $20{,}4\,\%$ & alles gleich\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Kurve aus Kapitel~2 in neuer Gestalt: $k$ klein heißt Varianz, $k$ groß heißt Verzerrung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $k = 1$ entscheidet ein einziger früherer Patient --- und wenn er ein Ausnahmefall war, überträgt sich die Ausnahme. Bei $k = 401$ fragt man fast alle, und da achtzig Prozent keine Sepsis hatten, sagt man fast immer \enquote{keine}. \textbf{Die Zahl $k$ ist die Stellgröße der Komplexität}, und man wählt sie durch Kreuzvalidierung wie den Grad des Polynoms.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie gut kann das sein?}
+
+\begin{merksatz}
+\boxtitel{Satz 10.2 --- Cover und Hart, 1967}
+Mit wachsender Datenmenge nähert sich der Fehler des Verfahrens mit einem einzigen Nachbarn einem Wert, der höchstens
+\[ 2\,\Risk^{*}(1-\Risk^{*}) \ \le\ 2\,\Risk^{*} \]
+beträgt --- dem Doppelten des Bayes-Risikos aus Kapitel~1.
+
+\schritt{Der Gedanke}
+Bei sehr vielen Daten liegt der nächste Nachbar beliebig nahe am neuen Punkt. Sein Etikett ist dann eine unabhängige Ziehung aus derselben Verteilung $\eta(\vek x)$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Dass man bei hinreichend glattem $\eta$ so argumentieren darf, verlangt eine Grenzwertbetrachtung, die wir übergehen --- die sechste Auslassung dieses Bandes. \textbf{Der Rest des Beweises ist elementar.}}
+\end{minipage}
+\end{center}
+
+\schritt{Beweis unter dieser Annahme}
+\kursiv{An einer Stelle $\vek x$} haben neuer Punkt und Nachbar unabhängig mit Wahrscheinlichkeit $\eta$ Sepsis. Ein Fehler entsteht, wenn sie sich unterscheiden:
+\[ \Pr[\text{Fehler} \mid \vek x] = \eta(1-\eta) + (1-\eta)\eta = 2\,\eta(1-\eta) . \]
+
+\kursiv{Mit $m = \min\{\eta, 1-\eta\}$} ist $\eta(1-\eta) = m(1-m)$, und nach Satz 1.4 ist $\Risk^{*} = \E[m]$.
+
+\kursiv{Mittelung über $\vek x$:}
+\[ \Pr[\text{Fehler}] = 2\,\E[m(1-m)] = 2\bigl(\E[m] - \E[m^{2}]\bigr) \]
+
+\kursiv{Da} $\E[m^{2}] \ge (\E[m])^{2}$ --- die Varianz ist nichtnegativ ---:
+\[ \Pr[\text{Fehler}] \ \le\ 2\bigl(\Risk^{*} - (\Risk^{*})^{2}\bigr) = 2\,\Risk^{*}(1-\Risk^{*}) \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Hälfte der verfügbaren Information steckt im nächsten Nachbarn.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{So haben Cover und Hart es selbst formuliert. \textbf{Ein Verfahren ohne jede Theorie, ohne Modell und ohne Parameter kommt bis auf den Faktor zwei an das Beste heran, was überhaupt möglich ist} --- vorausgesetzt, man hat genug Daten. Mit wachsendem $k$ und $k/n \to 0$ erreicht man sogar $\Risk^{*}$ selbst.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Fluch der Dimension}
+
+\begin{warnung}
+\boxtitelr{Was mit Rauschmerkmalen geschieht}
+Man füge den beiden sinnvollen Merkmalen $m$ weitere hinzu, die reines Rauschen sind. Immer $k = 15$, immer $500$ Patienten.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}@{}}
+\toprule
+\textbf{Rauschmerkmale} & \textbf{Testfehler}\\
+\midrule
+$0$ & $4{,}1\,\%$\\
+$2$ & $5{,}8\,\%$\\
+$5$ & $7{,}0\,\%$\\
+$10$ & $9{,}5\,\%$\\
+$20$ & $11{,}2\,\%$\\
+$50$ & $14{,}9\,\%$\\
+$100$ & $\mathbf{18{,}7\,\%}$\\
+\midrule
+nie warnen & $20{,}0\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mit hundert Rauschmerkmalen ist das Verfahren kaum besser als gar keines.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Verfahren kann nicht wissen, welche Merkmale zählen} --- es misst den Abstand über alle gleichermaßen. Hundert Rauschmerkmale tragen hundertmal so viel zum Abstand bei wie zwei sinnvolle, und die \enquote{nächsten} Nachbarn sind dann diejenigen, deren Rauschen zufällig ähnlich ist. Die logistische Regression aus Kapitel~5 würde den Rauschmerkmalen Koeffizienten nahe null geben und kaum leiden.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Drei Seiten desselben Problems}
+\schritt{Erstens: Nachbarschaft wird groß}
+Im Einheitswürfel mit $p$ Dimensionen will man einen Teilwürfel, der den Anteil $r$ der gleichverteilten Daten enthält. Seine Kantenlänge ist
+\[ e = r^{1/p} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+$p$ & $r = 1\,\%$ & $r = 10\,\%$\\
+\midrule
+$1$ & $0{,}01$ & $0{,}10$\\
+$2$ & $0{,}10$ & $0{,}32$\\
+$10$ & $0{,}63$ & $0{,}79$\\
+$100$ & $0{,}95$ & $0{,}98$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{In zehn Dimensionen muss man zwei Drittel jeder Achse überspannen, um ein Prozent der Daten zu erfassen.} Die \enquote{Nachbarschaft} ist dann nicht mehr lokal --- sie umfasst Patienten mit ganz anderen Werten.}
+\end{minipage}
+\end{center}
+
+\schritt{Zweitens: Abstände gleichen sich an}
+$1000$ gleichverteilte Punkte, ein Suchpunkt:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{4.4cm}@{}}
+\toprule
+$p$ & $\dfrac{\text{größter} - \text{kleinster Abstand}}{\text{kleinster Abstand}}$\\
+\midrule
+$1$ & $1241$\\
+$2$ & $45$\\
+$10$ & $3{,}0$\\
+$100$ & $0{,}46$\\
+$1000$ & $0{,}13$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{In tausend Dimensionen ist der fernste Punkt nur dreizehn Prozent weiter weg als der nächste.} \enquote{Nächster Nachbar} bedeutet dann kaum noch etwas --- alle sind fast gleich weit entfernt.}
+\end{minipage}
+\end{center}
+
+\schritt{Drittens: Alles liegt am Rand}
+Der Anteil des Würfels, der näher als $0{,}05$ an einer Seite liegt:
+\[ 1 - 0{,}9^{p} \]
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}@{}}
+\toprule
+$p$ & \textbf{am Rand}\\
+\midrule
+$1$ & $10\,\%$\\
+$10$ & $65\,\%$\\
+$50$ & $99{,}5\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In fünfzig Dimensionen gibt es praktisch kein Inneres. \textbf{Jeder neue Punkt liegt am Rand der Daten --- also dort, wo nach Kapitel~2 jede Vorhersage unsicher wird.} Hohe Dimension heißt fast immer Extrapolation.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Warum Lernen dennoch gelingt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Wenige zählen} & Die meisten Merkmale sind unwichtig. Wer sie erkennt --- Lasso, Bäume ---, reduziert die wirksame Dimension.\\
+\textbf{Daten sind nicht gleichverteilt} & Echte Daten liegen auf niedrigdimensionalen Flächen im hochdimensionalen Raum.\\
+\textbf{Glattheit} & Ist der Zusammenhang glatt, genügen wenige Stützstellen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist die wichtigste. Ein Röntgenbild hat eine Million Bildpunkte, aber die Menge möglicher Röntgenbilder von Brustkörben ist unvergleichlich kleiner als die Menge aller Bilder. \textbf{Die Daten füllen den Raum nicht} --- sie liegen auf einer dünnen Fläche darin, deren Dimension vielleicht einige Dutzend beträgt. Kapitel~13 behandelt, wie man diese Fläche findet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was \enquote{ähnlich} heißt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Einheiten} & Ohne Normierung steigt der Fehler im Leitfall von $4{,}7$ auf $9{,}7$ Prozent --- die Herzfrequenz überdeckt das Laktat.\\
+\textbf{Gewichtung} & Gleiche Streuung heißt nicht gleiche Wichtigkeit. Das Laktat verdient mehr Gewicht als das Alter.\\
+\textbf{Art der Merkmale} & Wie weit ist \enquote{männlich} von \enquote{weiblich}? Wie weit Diagnose A von Diagnose B?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Abstand ist das ganze Modell.} Beim Verfahren der nächsten Nachbarn steckt jede Annahme über die Aufgabe in der Wahl des Abstandsmaßes, und diese Wahl wird häufig nicht getroffen, sondern der euklidische Abstand stillschweigend übernommen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Erfahrung der Oberärztin}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Oberärztin aus dem Leitfall wendet kein festes Abstandsmaß an. \textbf{Sie weiß, welche Merkmale bei welcher Frage zählen} --- beim Verdacht auf Sepsis das Laktat, bei Verdacht auf Lungenembolie andere Werte. Das ist eine gelernte, vom Zusammenhang abhängige Ähnlichkeit, und sie ist der Grund, warum menschliche Erfahrung trotz weniger Fälle so gut funktioniert. Verfahren, die solche Abstandsmaße lernen, sind ein eigenes Forschungsgebiet.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Nachbarn von Hand}
+Sieben frühere Patienten (Laktat in mmol/l, Herzfrequenz in Zehnern pro Minute) und ein neuer, $Q = (2{,}2;\ 10{,}0)$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.0cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+& \textbf{Laktat} & \textbf{HF} & \textbf{Sepsis}\\
+\midrule
+A & $1{,}0$ & $8{,}5$ & nein\\
+B & $1{,}4$ & $9{,}0$ & nein\\
+C & $2{,}8$ & $11{,}0$ & ja\\
+D & $3{,}2$ & $10{,}5$ & ja\\
+E & $2{,}0$ & $9{,}5$ & nein\\
+F & $2{,}6$ & $9{,}8$ & ja\\
+G & $1{,}8$ & $10{,}8$ & nein\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Was sagt das Verfahren für $k = 1, 3, 5, 7$?
+
+\loesung
+\schritt{Schritt 1 --- Die Abstände}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{3.6cm}P{1.4cm}P{1.2cm}@{}}
+\toprule
+& \textbf{Rechnung} & \textbf{Abstand} & \textbf{Rang}\\
+\midrule
+F & $\sqrt{0{,}4^{2}+0{,}2^{2}} = \sqrt{0{,}20}$ & $0{,}447$ & $1$\\
+E & $\sqrt{0{,}2^{2}+0{,}5^{2}} = \sqrt{0{,}29}$ & $0{,}539$ & $2$\\
+G & $\sqrt{0{,}4^{2}+0{,}8^{2}} = \sqrt{0{,}80}$ & $0{,}894$ & $3$\\
+D & $\sqrt{1{,}0^{2}+0{,}5^{2}} = \sqrt{1{,}25}$ & $1{,}118$ & $4$\\
+C & $\sqrt{0{,}6^{2}+1{,}0^{2}} = \sqrt{1{,}36}$ & $1{,}166$ & $5$\\
+B & $\sqrt{0{,}8^{2}+1{,}0^{2}} = \sqrt{1{,}64}$ & $1{,}281$ & $6$\\
+A & $\sqrt{1{,}2^{2}+1{,}5^{2}} = \sqrt{3{,}69}$ & $1{,}921$ & $7$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Abstimmungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.2cm}P{2.6cm}P{1.4cm}P{1.4cm}P{1.6cm}@{}}
+\toprule
+$k$ & \textbf{Nachbarn} & \textbf{ja} & \textbf{nein} & \textbf{Urteil}\\
+\midrule
+$1$ & F & $1$ & $0$ & \textcolor{akzent}{Sepsis}\\
+$3$ & F, E, G & $1$ & $2$ & \textcolor{gruen}{keine}\\
+$5$ & $+$ D, C & $3$ & $2$ & \textcolor{akzent}{Sepsis}\\
+$7$ & $+$ B, A & $3$ & $4$ & \textcolor{gruen}{keine}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Urteil wechselt mit jedem $k$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was das bedeutet}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der neue Patient liegt genau im Grenzbereich --- die Anteile schwanken um die Hälfte: $1$, $\tfrac13$, $\tfrac35$, $\tfrac37$. \textbf{Das Verfahren sagt ehrlich, dass es unsicher ist}, wenn man es nach dem Anteil statt nach der Mehrheit fragt. Wer nur die Mehrheitsentscheidung weitergibt, versteckt diese Unsicherheit.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Mit anderer Einheit}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hätte man die Herzfrequenz in Schlägen statt in Zehnern angegeben, so wären die Unterschiede in der zweiten Spalte zehnmal größer, und das Laktat spielte praktisch keine Rolle mehr. Der nächste Nachbar wäre dann D oder F, je nach Herzfrequenz allein. \textbf{Die Wahl der Einheit ist hier eine Wahl des Modells.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Die Schranke von Cover und Hart}
+Berechnen Sie die asymptotische Fehlerschranke für einen Nachbarn bei verschiedenen Bayes-Risiken.
+
+\loesung
+\schritt{Schritt 1 --- Die Formel}
+\[ 2\,\Risk^{*}(1-\Risk^{*}) \]
+
+\schritt{Schritt 2 --- Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{3.2cm}P{2.0cm}@{}}
+\toprule
+$\Risk^{*}$ & \textbf{Rechnung} & \textbf{Schranke}\\
+\midrule
+$1\,\%$ & $2\cdot0{,}01\cdot0{,}99$ & $1{,}98\,\%$\\
+$3{,}47\,\%$ & $2\cdot0{,}0347\cdot0{,}9653$ & $6{,}70\,\%$\\
+$10\,\%$ & $2\cdot0{,}1\cdot0{,}9$ & $18{,}0\,\%$\\
+$30\,\%$ & $2\cdot0{,}3\cdot0{,}7$ & $42{,}0\,\%$\\
+$50\,\%$ & $2\cdot0{,}5\cdot0{,}5$ & $50{,}0\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Die zweite Zeile ist das Laktat allein aus Kapitel~1.}
+
+\schritt{Schritt 3 --- Die Lehre}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Leichte Aufgabe} & Die Schranke ist fast genau das Doppelte des Bestmöglichen.\\
+\textbf{Unmögliche Aufgabe} & Bei $\Risk^{*} = \tfrac12$ kann niemand etwas --- und der Nachbar auch nicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Faktor zwei ist der Preis dafür, nur einen einzigen Zeugen zu befragen.} Bei $k$ Nachbarn schrumpft er, und bei wachsendem $k$ mit $k/n \to 0$ verschwindet er ganz --- das zeigte \Person{Charles Stone} 1977. Man bezahlt dafür mit mehr Daten.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- Wie viele Patienten in zehn Dimensionen?}
+Bei $500$ gleichverteilten Patienten in zwei Dimensionen liegen die $15$ nächsten Nachbarn eines neuen Patienten in einem kleinen Quadrat. Wie viele Patienten braucht man in zehn Dimensionen, damit die $15$ Nachbarn in einem Würfel \kursiv{derselben Kantenlänge} liegen?
+
+\loesung
+\schritt{Schritt 1 --- Die Kantenlänge in zwei Dimensionen}
+Die $15$ Nachbarn sind der Anteil $\frac{15}{500} = 0{,}03$ der Patienten. Ein Quadrat mit diesem Flächenanteil hat die Kante
+\[ e = 0{,}03^{1/2} = 0{,}173 . \]
+
+\schritt{Schritt 2 --- Dieselbe Kante in zehn Dimensionen}
+Ein Würfel mit Kante $0{,}173$ umfasst dort den Anteil
+\[ 0{,}173^{10} = 2{,}4\cdot10^{-8} . \]
+
+\schritt{Schritt 3 --- Die nötige Datenmenge}
+\[ n = \frac{15}{2{,}4\cdot10^{-8}} = 6{,}2\cdot10^{8} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Sechshundert Millionen Patienten --- statt fünfhundert.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die allgemeine Regel}
+\[ n_p = n_2\cdot\left(\frac{1}{e}\right)^{p-2} \]
+\kursiv{Jede zusätzliche Dimension multipliziert den Bedarf mit $1/0{,}173 = 5{,}8$.}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Fluch der Dimension in einer Zahl.} Er trifft jedes Verfahren, das auf Nachbarschaft beruht, und damit mittelbar auch Bäume, Kerne und Netze. Dass sie trotzdem in hohen Dimensionen funktionieren, liegt nicht daran, dass sie den Fluch überwinden, sondern daran, dass echte Daten ihn nicht in voller Stärke auslösen --- weil sie, wie in Abschnitt 10.3 beschrieben, den Raum nicht füllen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Luftwaffe, ein Bericht, ein Name}
+\Person{Evelyn Fix} und \Person{Joseph Hodges} beschrieben das Verfahren der nächsten Nachbarn 1951 in einem Bericht für die Schule für Fliegermedizin der amerikanischen Luftwaffe.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Bericht blieb unveröffentlicht und wurde erst 1989 in einer Zeitschrift nachgedruckt. \textbf{Fix war eine der ersten Frauen, die in Berkeley in Statistik promoviert wurden}, und arbeitete ihr ganzes Berufsleben dort; ihr Beitrag zu einem der meistbenutzten Lernverfahren ist erst in den letzten Jahren angemessen gewürdigt worden.}
+\end{minipage}
+\end{center}
+
+\schritt{Cover und Hart}
+\Person{Thomas Cover} und \Person{Peter Hart} bewiesen 1967 den Satz dieses Kapitels.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Cover wurde später einer der führenden Informationstheoretiker --- sein Lehrbuch mit \Person{Joy Thomas} war eine der Hauptquellen von Band 20. \textbf{Hart entwickelte kurz darauf den A-Stern-Algorithmus für die kürzeste Wegsuche}, der heute in jedem Navigationsgerät steckt.}
+\end{minipage}
+\end{center}
+
+\schritt{Bellman}
+\Person{Richard Bellman} prägte 1957 den Ausdruck \enquote{Fluch der Dimension} --- in einem Buch über dynamische Programmierung.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er meinte damit, dass eine Tabelle mit $10$ Stützstellen je Achse in $10$ Dimensionen $10^{10}$ Einträge hat. \textbf{Dass dasselbe Problem das Lernen beherrschen würde}, ahnte er, aber die Tragweite zeigte sich erst mit den hochdimensionalen Daten der Genomforschung und der Bildverarbeitung.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Nachbarn heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Schnelle Suche} & Nächste Nachbarn unter Milliarden von Punkten in Millisekunden --- näherungsweise.\\
+\textbf{Gelernte Abstände} & Netze, die Bilder oder Texte in Räume abbilden, in denen der euklidische Abstand Ähnlichkeit misst.\\
+\textbf{Fallbasierte Medizin} & Ähnliche Patienten aus der Krankenakte finden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Moderne Sprachmodelle arbeiten intern mit Vektoren von einigen tausend Dimensionen. \textbf{Das Suchen ähnlicher Texte ist dort ein Suchen nächster Nachbarn} --- und funktioniert trotz der Dimension, weil die Abbildung gelernt wurde, um genau diese Ähnlichkeit zu erhalten. Der Fluch ist nicht überwunden, sondern umgangen: Man lernt zuerst den Raum, in dem Nachbarschaft Sinn ergibt, und sucht dann darin.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 10.1} & $k$ Nachbarn, Mehrheit oder Anteil\\
+\textbf{Satz 10.2} & ein Nachbar: höchstens $2\Risk^{*}(1-\Risk^{*})$\\
+\textbf{Kantenlänge} & $e = r^{1/p}$ --- Nachbarschaft wird global\\
+\textbf{Rauschmerkmale} & zerstören jeden Abstand\\
+\textbf{Die Rettung} & Daten füllen den Raum nicht\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nachbarn brauchen ein gutes Abstandsmaß, Bäume gute Merkmale, Kerne einen guten Kern. Das nächste Kapitel behandelt ein Verfahren, das alle drei selbst lernt --- und dafür die Konvexität aufgibt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

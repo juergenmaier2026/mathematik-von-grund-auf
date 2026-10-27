@@ -1,0 +1,347 @@
+\chapter{Der Hintertürtest}
+
+\section{Die Regel}
+
+\begin{merksatz}
+\boxtitel{Was Kapitel 5 offenließ}
+Vier Rollen sind vier Fälle. Gesucht ist ein Kriterium, das für \kursiv{jeden} Graphen entscheidet, welche Anpassungsmengen zulässig sind.
+
+\schritt{Zwei Arten von Wegen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Vorderwege} & Beginnen mit einem Pfeil \kursiv{aus} $X$ heraus. Sie tragen die Wirkung --- sie müssen offen bleiben.\\
+\textbf{Hinterwege} & Beginnen mit einem Pfeil \kursiv{in} $X$ hinein. Sie tragen die Verzerrung --- sie müssen gesperrt werden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 6.1 --- Hintertürkriterium}
+Eine Menge $Z$ erfüllt das \Begriff{Hintertürkriterium} für $(X,Y)$, wenn
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & $Z$ enthält keinen Nachkommen von $X$, und\\
+$2$ & $Z$ sperrt jeden Hinterweg von $X$ nach $Y$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 6.2 --- die Hintertürformel}
+Erfüllt $Z$ das Kriterium, so gilt
+\[ \Pr\bigl[Y \mid \dops(X=x)\bigr] = \sum_z \Pr[Y \mid X=x,\ Z=z]\,\Pr[Z=z] . \]
+
+\schritt{Warum die beiden Bedingungen genau das Richtige leisten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Bedingung 1} & schließt Mediatoren aus (sie sind Nachkommen) --- die Vorderwege bleiben offen. Sie schließt auch Kollider aus, die \kursiv{nach} $X$ liegen.\\
+\textbf{Bedingung 2} & schließt Störgrößen ein --- die Hinterwege werden gesperrt --- und verbietet zugleich, durch Bedingen auf einen Kollider neue Wege zu öffnen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die rechte Seite enthält nur beobachtbare Größen. Damit ist der Effekt aus Beobachtungsdaten berechenbar --- wenn der Graph stimmt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Beweis benutzt die Faktorisierung aus Satz 4.2 und die Deutung des Eingriffs als Durchtrennen der Pfeile in $X$ hinein; er ist eine Zeilenrechnung über Summen und findet sich bei Pearl\zit{18}, Kapitel~3 --- die zweite Auslassung dieses Bandes. \textbf{Man erkennt in der Formel die Anpassungsformel aus Satz 2.4 wieder}: Was dort aus den vier Annahmen folgte, folgt hier aus dem Bild.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall geprüft}
+Hinterwege von $X$ nach $Y$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{3.4cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Weg} & \textbf{durch $\{S\}$} & \textbf{durch $\{S,A\}$}\\
+\midrule
+$X \leftarrow S \to Y$ & gesperrt & gesperrt\\
+$X \leftarrow S \to M \to Y$ & gesperrt & gesperrt\\
+$X \leftarrow S \leftarrow A \to Y$ & gesperrt & gesperrt\\
+$X \leftarrow S \leftarrow V \to \ldots$ & --- & ---\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Menge} & \textbf{Bedingung 1} & \textbf{Bedingung 2}\\
+\midrule
+$\{S\}$ & \textcolor{gruen}{ja} & \textcolor{gruen}{ja}\\
+$\{S,A\}$ & \textcolor{gruen}{ja} & \textcolor{gruen}{ja}\\
+$\{S,M\}$ & \textcolor{akzent}{nein} & ---\\
+$\{A,V\}$ & \textcolor{gruen}{ja} & \textcolor{gruen}{ja}\\
+$\emptyset$ & \textcolor{gruen}{ja} & \textcolor{akzent}{nein}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Auch $\{A,V\}$ genügt}, obwohl der Schweregrad selbst fehlt: Alter und Vorerkrankungen sind seine einzigen Ursachen, und wer beide festhält, sperrt jeden Weg, der über $S$ zurückläuft. Es gibt also mehrere zulässige Mengen, und man wählt die, die man am besten gemessen hat. Das ist ein praktischer Vorzug des Kriteriums gegenüber einer starren Regel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wenn kein Hinterweg zu sperren ist}
+
+\begin{merksatz}
+\boxtitel{Satz 6.3 --- die Vordertürformel}
+Gibt es eine unbeobachtete Störgröße, aber einen Mediator $M$, der
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & jeden Vorderweg von $X$ nach $Y$ abfängt,\\
+$2$ & keinen unbeobachteten Hinterweg zu $X$ hat, und\\
+$3$ & dessen Hinterwege zu $Y$ durch $X$ gesperrt sind,\\
+\bottomrule
+\end{tabular}}
+\end{center}
+so ist der Effekt dennoch berechenbar:
+\[ \Pr[Y \mid \dops(x)] = \sum_m \Pr[m \mid x] \sum_{x'} \Pr[Y \mid m, x']\,\Pr[x'] . \]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+\node[grau] (u) at (1.5,1.5) {$U$};
+\node[knotenb] (x) at (0,0) {$X$}; \node[knotenr] (m) at (1.5,0) {$M$}; \node[knotenb] (y) at (3.0,0) {$Y$};
+\draw[grau!60, line width=0.8pt, dashed, -{Stealth[length=4pt]}] (u)--(x);
+\draw[grau!60, line width=0.8pt, dashed, -{Stealth[length=4pt]}] (u)--(y);
+\draw[kanted, -{Stealth[length=4.5pt]}] (x)--(m); \draw[kanted, -{Stealth[length=4.5pt]}] (m)--(y);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Effekt wird in zwei Stücke zerlegt: die Wirkung von $X$ auf $M$ --- unverzerrt, weil $U$ nicht auf $M$ wirkt --- und die von $M$ auf $Y$, für die $X$ die Störgröße sperrt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der erstaunlichste Satz dieses Bandes}: Man schätzt einen Effekt trotz unbeobachteter Störgröße, ohne Randomisierung und ohne Instrument. Er wird allerdings selten angewandt, weil Bedingung 1 sehr stark ist --- es darf keinen anderen Wirkweg geben. Bei Rauchen und Lungenkrebs wurde er für den Teerniederschlag in der Lunge vorgeschlagen; ob das zutrifft, ist umstritten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was das Kriterium nicht leistet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Der Graph} & Das Kriterium prüft einen Graphen. Ob der Graph stimmt, prüft es nicht.\\
+\textbf{Keine Menge} & Manchmal gibt es gar keine zulässige Menge --- dann ist der Effekt aus diesen Daten \kursiv{nicht} bestimmbar, und kein Verfahren ändert das.\\
+\textbf{Messfehler} & Eine schlecht gemessene Größe sperrt nur teilweise; Kapitel~5, Bruchfall.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist ein Gewinn, kein Mangel. \textbf{Ein Verfahren, das jedem Datensatz eine Zahl entlockt, verschweigt den Fall der Unbestimmbarkeit} --- eine Regression liefert immer einen Koeffizienten. Das Kriterium sagt hingegen, wann man schweigen muss, und weist damit auf die Verfahren der Kapitel~9 bis 11.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.1 --- Mengen prüfen}
+Prüfen Sie im Leitfallgraphen die Mengen $\{M\}$, $\{A\}$ und $\{S,V\}$.
+
+\loesung
+\schritt{$\{M\}$}
+$M$ ist Nachkomme von $X$ --- Bedingung 1 verletzt.
+
+\kursiv{Und zusätzlich:} $M$ ist Kollider von $X$ und $S$; das Bedingen öffnet den Weg $X \to M \leftarrow S \to Y$. Doppelt unzulässig.
+
+\schritt{$\{A\}$}
+Bedingung 1 erfüllt. Aber der Weg $X \leftarrow S \to Y$ bleibt offen --- $S$ ist weder in $Z$ noch ein Kollider.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Unzulässig: die Hauptstörgröße bleibt unberücksichtigt.}
+\end{minipage}
+\end{center}
+
+\schritt{$\{S,V\}$}
+Bedingung 1 erfüllt. Alle Hinterwege laufen über $S$ und sind gesperrt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zulässig --- aber unklug.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{$V$ wirkt nur über $S$ auf $X$; nach Kapitel~5 ist es ein Instrument. \textbf{Solange der Graph stimmt, schadet seine Aufnahme nicht} --- die Verstärkungsverzerrung entsteht erst, wenn eine \kursiv{unbeobachtete} Störgröße übrig ist. Da man das nie ausschließen kann, lässt man Instrumente vorsichtshalber weg. Das Kriterium erlaubt mehr, als die Klugheit rät.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.2 --- Wenn keine Menge genügt}
+Der diensthabende Arzt sei unbeobachtet; seine Erfahrung beeinflusst sowohl den Zeitpunkt als auch die weitere Versorgung. Zeichnen Sie das ein und prüfen Sie.
+
+\loesung
+\schritt{Schritt 1 --- Der Graph}
+Ein gestrichelter Doppelpfeil zwischen $X$ und $Y$: eine unbeobachtete gemeinsame Ursache.
+
+\schritt{Schritt 2 --- Die Prüfung}
+Der Hinterweg $X \leftarrow U \to Y$ enthält keinen beobachteten Knoten. Keine Menge kann ihn sperren.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es gibt keine zulässige Menge. Der Effekt ist aus diesen Daten nicht bestimmbar.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was bleibt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Messen} & Die Erfahrung des Arztes erheben --- dann wird sie zur Störgröße und ist anpassbar.\\
+\textbf{Instrument} & Eine Größe suchen, die nur den Zeitpunkt beeinflusst --- Kapitel~9.\\
+\textbf{Schranken} & Angeben, wie groß der Effekt höchstens und mindestens sein kann.\\
+\textbf{Empfindlichkeit} & Ausrechnen, wie stark $U$ wirken müsste, um das Ergebnis umzukehren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die vierte Zeile ist in der Praxis die häufigste Antwort.} Sie verwandelt eine unbeantwortbare Frage in eine beantwortbare: Statt \enquote{wie groß ist der Effekt} fragt man \enquote{wie unplausibel müsste die Welt sein, damit es keinen gibt}. Für Rauchen und Lungenkrebs lautete die Antwort: neunfach erhöhtes Risiko einer verborgenen Größe --- Kapitel~2, Forschungskasten.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.3 --- Die Vordertür rechnen}
+$X$, $M$, $Y$ binär, $U$ unbeobachtet. Gegeben:
+\[ \Pr[M=1\mid X=1] = 0{,}80, \quad \Pr[M=1\mid X=0] = 0{,}30 \]
+\[ \Pr[Y=1\mid M=1] \ \text{gemittelt über } X: 0{,}20, \qquad \text{für } M=0: 0{,}50 \]
+Berechnen Sie den Effekt.
+
+\loesung
+\schritt{Schritt 1 --- Die zweite Stufe}
+Die innere Summe in Satz 6.3 ist der über $X$ gemittelte Ausgang bei gegebenem $M$:
+\[ \sum_{x'}\Pr[Y=1\mid m,x']\Pr[x'] = \begin{cases} 0{,}20 & m=1\\ 0{,}50 & m=0\end{cases} \]
+
+\schritt{Schritt 2 --- Die erste Stufe}
+\[ \Pr[Y=1\mid\dops(X=1)] = 0{,}80\cdot0{,}20 + 0{,}20\cdot0{,}50 = 0{,}16+0{,}10 = 0{,}26 \]
+\[ \Pr[Y=1\mid\dops(X=0)] = 0{,}30\cdot0{,}20 + 0{,}70\cdot0{,}50 = 0{,}06+0{,}35 = 0{,}41 \]
+
+\[ \text{Effekt} = 0{,}26 - 0{,}41 = \mathbf{-0{,}15} \]
+
+\schritt{Schritt 3 --- Die Deutung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Wirkung auf $M$} & $+0{,}50$\\
+\textbf{Wirkung von $M$ auf $Y$} & $-0{,}30$\\
+\midrule
+\textbf{Produkt} & $\mathbf{-0{,}15}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei binären Größen zerfällt die Formel in ein Produkt zweier Differenzen. \textbf{Beide Stücke sind unverzerrt schätzbar --- das erste, weil $U$ nicht auf $M$ wirkt; das zweite, weil $X$ dort die Störgröße sperrt.} Der Effekt ist damit bestimmt, obwohl der direkte Vergleich von $X$ und $Y$ hoffnungslos verzerrt wäre.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Kriterium und ein Kalkül}
+\Person{Judea Pearl} veröffentlichte das Hintertürkriterium 1993 und die Vordertürformel 1995.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Beide sind Sonderfälle eines Regelwerks aus drei Umformungsregeln, des \Begriff{do-Kalküls}. \textbf{\Person{Ilya Shpitser} und Pearl zeigten 2006, dass dieses Kalkül vollständig ist}: Lässt sich ein Effekt überhaupt aus Beobachtungsdaten bestimmen, so führen die drei Regeln zum Ziel --- und wenn nicht, so beweist das Scheitern die Unbestimmbarkeit. Ein Rechner kann das heute in Sekunden entscheiden.}
+\end{minipage}
+\end{center}
+
+\schritt{Und der Widerstand}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Epidemiologie übernahm die Graphen zügig; die Ökonometrie tat sich schwerer und arbeitet bis heute überwiegend mit den Verfahren der Kapitel~9 und 10. \textbf{Der Streit war teils sachlich, teils sprachlich}: Dieselben Annahmen heißen in beiden Fächern anders, und beide Seiten hielten die jeweils andere für ungenau.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Bestimmbarkeit heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Rechner} & Programme, die zulässige Mengen und Formeln automatisch bestimmen.\\
+\textbf{Übertragung} & Effekte aus einer Bevölkerung auf eine andere übertragen --- mit eigenem Kriterium.\\
+\textbf{Teilweise Bestimmbarkeit} & Schranken statt Punktschätzungen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Effekt aus Studie A gilt in Klinik B, wenn sich die Unterschiede zwischen beiden als Knoten in einen gemeinsamen Graphen eintragen lassen und ein entsprechendes Kriterium erfüllt ist. \textbf{Damit wird die Übertragbarkeit aus Band 22, Kapitel~3 zu einer prüfbaren Bedingung} statt einer Hoffnung --- sofern man weiß, worin sich die Bevölkerungen unterscheiden.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Vorder-, Hinterweg} & Wirkung gegen Verzerrung\\
+\textbf{Definition 6.1} & kein Nachkomme, alle Hinterwege gesperrt\\
+\textbf{Satz 6.2} & Hintertürformel $=$ Anpassungsformel\\
+\textbf{Satz 6.3} & Vordertür: Effekt trotz verborgener Störgröße\\
+\textbf{Unbestimmbar} & auch eine Antwort\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~II. Man weiß nun, \kursiv{wonach} anzupassen ist. Teil~III behandelt, \kursiv{wie} --- denn bei zwanzig Störgrößen versagt das Stratifizieren, und an seine Stelle tritt eine einzige Zahl je Patient.}
+\end{minipage}
+\end{center}
+\end{merksatz}

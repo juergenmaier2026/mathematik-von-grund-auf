@@ -1,0 +1,586 @@
+\part{Das Problem}
+
+\chapter{Zusammenhang und Ursache}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Eine Tabelle, die das Gegenteil zeigt}
+Am Klinikum Neustadt wurden $1200$ Sepsispatienten ausgewertet. Die Hälfte erhielt das Antibiotikum innerhalb einer Stunde (\enquote{früh}), die andere Hälfte später.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+\textbf{Gabe} & \textbf{Patienten} & \textbf{gestorben} & \textbf{Anteil}\\
+\midrule
+früh & $600$ & $210$ & $35{,}0\,\%$\\
+spät & $600$ & $125$ & $20{,}8\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die frühe Gabe scheint die Sterblichkeit um vierzehn Prozentpunkte zu erhöhen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das widerspricht allem, was die Leitlinien sagen. \textbf{Ein Statistiker könnte die Zahlen prüfen, und sie wären richtig} --- der Unterschied ist groß, die Stichprobe ausreichend, das Vertrauensintervall schließt die Null weit aus. Trotzdem ist der Schluss falsch, und dieses Kapitel zeigt, woran das liegt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Dieselben Patienten, nach Schweregrad getrennt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{1.8cm}P{1.8cm}P{1.8cm}P{1.6cm}@{}}
+\toprule
+& \multicolumn{2}{c}{\textbf{früh}} & \multicolumn{2}{c}{\textbf{spät}}\\
+& $n$ & \textbf{tot} & $n$ & \textbf{tot}\\
+\midrule
+schwer krank & $500$ & $200$ & $100$ & $50$\\
+& & $40\,\%$ & & $50\,\%$\\
+leicht krank & $100$ & $10$ & $500$ & $75$\\
+& & $10\,\%$ & & $15\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In jeder der beiden Gruppen senkt die frühe Gabe die Sterblichkeit --- von $50$ auf $40$ und von $15$ auf $10$ Prozent.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum sich das Vorzeichen umkehrt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Wer bekommt früh?} & Die Schwerkranken --- $500$ von $600$. Bei ihnen ist die Diagnose offensichtlich, und man handelt sofort.\\
+\textbf{Wer stirbt?} & Ebenfalls die Schwerkranken.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Schweregrad wirkt auf beides: auf die Behandlung und auf den Ausgang. \textbf{Die Gruppe \enquote{früh} besteht überwiegend aus Schwerkranken, die Gruppe \enquote{spät} überwiegend aus Leichtkranken} --- man vergleicht nicht zwei Behandlungen, sondern zwei Patientengruppen. In der Medizin heißt das \Begriff{Indikationsverzerrung}, und sie ist die häufigste Fehlerquelle bei der Auswertung von Behandlungsdaten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die richtige Rechnung}
+Man fragt: Was wäre geschehen, wenn \kursiv{alle} $1200$ früh behandelt worden wären? Und wenn alle spät?
+
+\schritt{Standardisierung}
+Der Anteil Schwerkranker ist $600/1200 = \tfrac12$.
+
+\[ \Pr[\text{Tod} \mid \dops(\text{früh})] = \tfrac12\cdot0{,}40 + \tfrac12\cdot0{,}10 = 0{,}250 \]
+\[ \Pr[\text{Tod} \mid \dops(\text{spät})] = \tfrac12\cdot0{,}50 + \tfrac12\cdot0{,}15 = 0{,}325 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Rechnung} & \textbf{Effekt}\\
+\midrule
+naiver Vergleich & $+14{,}2$ Punkte\\
+standardisiert & $\mathbf{-7{,}5}$ \textbf{Punkte}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die frühe Gabe rettet siebeneinhalb von hundert Patienten --- statt vierzehn zu töten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Schweregrad wird dabei nicht weggelassen, sondern gleichgesetzt}: Man rechnet beide Behandlungen für dieselbe Mischung aus Schwer- und Leichtkranken durch. Kapitel~6 wird zeigen, unter welcher Bedingung diese Rechnung erlaubt ist --- und Kapitel~5, dass es Größen gibt, bei denen man sie gerade nicht anwenden darf.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Drei Gründe für einen Zusammenhang}
+
+\begin{merksatz}
+\boxtitel{Wenn $X$ und $Y$ zusammenhängen}
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+\node[knotenb] (x1) at (0,1.2) {$X$}; \node[knotenb] (y1) at (1.6,1.2) {$Y$};
+\draw[kanted, -{Stealth[length=4.5pt]}] (x1)--(y1);
+\node[font=\scriptsize, color=grau] at (0.8,0.5) {Ursache};
+
+\node[knotenr] (u) at (4.2,1.9) {$U$};
+\node[knotenb] (x2) at (3.4,0.9) {$X$}; \node[knotenb] (y2) at (5.0,0.9) {$Y$};
+\draw[kanted, -{Stealth[length=4.5pt]}] (u)--(x2); \draw[kanted, -{Stealth[length=4.5pt]}] (u)--(y2);
+\node[font=\scriptsize, color=grau] at (4.2,0.3) {gemeinsame Ursache};
+
+\node[knotenb] (x3) at (7.0,1.9) {$X$}; \node[knotenb] (y3) at (8.6,1.9) {$Y$};
+\node[knotenr] (s) at (7.8,0.9) {$S$};
+\draw[kanted, -{Stealth[length=4.5pt]}] (x3)--(s); \draw[kanted, -{Stealth[length=4.5pt]}] (y3)--(s);
+\node[font=\scriptsize, color=grau] at (7.8,0.3) {Auswahl};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Ursache} & $X$ wirkt auf $Y$. Nur hier hilft ein Eingriff.\\
+\textbf{Gemeinsame Ursache} & Eine dritte Größe wirkt auf beide. Man nennt sie \Begriff{Störgröße}. Das ist der Leitfall.\\
+\textbf{Auswahl} & Beide wirken auf etwas Drittes, und man betrachtet nur Fälle mit bestimmtem Wert davon. Man nennt das einen \Begriff{Kollider}.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Alle drei erzeugen denselben Zusammenhang in den Daten. Nur der erste rechtfertigt ein Handeln.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist die unbekannteste und in der klinischen Forschung die tückischste. \textbf{Wer nur stationäre Patienten untersucht, hat bereits nach einem Kollider ausgewählt} --- eine Aufnahme wird durch jedes ernste Leiden begünstigt. Aufgabe 1.2 rechnet vor, wie stark der Zusammenhang wird, den diese Auswahl allein erzeugt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zwei Verteilungen}
+
+\begin{definition}
+\boxtitelm{Definition 1.1 --- sehen und tun}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+$\Pr[Y \mid X = x]$ & \textbf{Sehen:} Wie sieht $Y$ aus \kursiv{unter denen}, bei denen $X$ den Wert $x$ hat?\\
+$\Pr[Y \mid \dops(X=x)]$ & \textbf{Tun:} Wie sähe $Y$ aus, wenn man bei \kursiv{allen} den Wert $x$ herstellte?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Unterschied}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Sehen} & ändert nichts an der Welt. Die Auswahl der Patienten mit $X=x$ ist nicht zufällig.\\
+\textbf{Tun} & ändert die Welt: Alle Pfeile, die auf $X$ zeigen, werden durchtrennt. $X$ hängt dann von nichts mehr ab.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+\node[knotenr] (u) at (0,1.4) {$U$};
+\node[knotenb] (x) at (-1.4,0.2) {$X$}; \node[knotenb] (y) at (1.4,0.2) {$Y$};
+\draw[kanted, -{Stealth[length=4.5pt]}] (u)--(x); \draw[kanted, -{Stealth[length=4.5pt]}] (u)--(y);
+\draw[kanted, -{Stealth[length=4.5pt]}] (x)--(y);
+\node[font=\scriptsize\itshape, color=grau] at (0,-0.55) {beobachtet};
+
+\node[knotenr] (u2) at (5.4,1.4) {$U$};
+\node[knotenb] (x2) at (4.0,0.2) {$X$}; \node[knotenb] (y2) at (6.8,0.2) {$Y$};
+\draw[grau!40, line width=0.9pt, dashed] (u2)--(x2);
+\draw[akzent, line width=1.4pt] (4.45,0.95) -- (4.95,0.65);
+\draw[kanted, -{Stealth[length=4.5pt]}] (u2)--(y2);
+\draw[kanted, -{Stealth[length=4.5pt]}] (x2)--(y2);
+\node[font=\scriptsize\itshape, color=grau] at (5.4,-0.55) {nach $\dops(X=x)$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Eingriff schneidet die Pfeile ab, die in $X$ hineinlaufen --- und nur diese.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im Leitfall heißt das: Der Pfeil \enquote{Schweregrad $\to$ frühe Gabe} verschwindet, der Pfeil \enquote{Schweregrad $\to$ Tod} bleibt. \textbf{Genau das tut eine randomisierte Studie}: Das Los ersetzt die ärztliche Entscheidung und trennt die Behandlung von allem, was sie sonst beeinflusst. Kapitel~3 behandelt das ausführlich.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Warum keine Statistik allein genügt}
+
+\begin{merksatz}
+\boxtitel{Satz 1.2 --- Beobachtungsäquivalenz}
+Es gibt zwei verschiedene Ursachenstrukturen, die \kursiv{genau dieselbe} gemeinsame Verteilung von $X$ und $Y$ erzeugen --- und in denen der Effekt eines Eingriffs verschieden ist.
+
+\schritt{Die Zahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+& $Y=1$ & $Y=0$\\
+\midrule
+$X=1$ & $0{,}40$ & $0{,}10$\\
+$X=0$ & $0{,}10$ & $0{,}40$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\[ \Pr[Y=1 \mid X=1] = 0{,}80, \qquad \Pr[Y=1 \mid X=0] = 0{,}20 \]
+
+\schritt{Modell A --- $X$ wirkt auf $Y$}
+$X$ ist ein Münzwurf; danach ist $Y=1$ mit Wahrscheinlichkeit $0{,}8$ falls $X=1$, sonst mit $0{,}2$.
+
+\[ \Pr[Y=1\mid\dops(X=1)] = 0{,}80, \qquad \Pr[Y=1\mid\dops(X=0)] = 0{,}20 \]
+\[ \text{Effekt} = +0{,}60 \]
+
+\schritt{Modell B --- eine gemeinsame Ursache, $X$ wirkt nicht}
+$U$ ist ein Münzwurf. Bei $U=1$ ist $X=1$ mit Wahrscheinlichkeit $a = 0{,}8873$ und unabhängig davon $Y=1$ mit derselben Wahrscheinlichkeit; bei $U=0$ jeweils $1-a$.
+
+\kursiv{Probe:}
+\[ \Pr[X=1,Y=1] = \tfrac12 a^{2} + \tfrac12(1-a)^{2} = \tfrac12(0{,}7873) + \tfrac12(0{,}0127) = 0{,}40 \quad \checkmark \]
+
+\[ \Pr[Y=1\mid\dops(X=1)] = \Pr[Y=1\mid\dops(X=0)] = 0{,}50 \]
+\[ \text{Effekt} = 0 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dieselben Zahlen, ein Effekt von $+0{,}60$ oder von null. Kein Test an diesen Daten kann entscheiden, welcher gilt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das erste der drei überraschenden Ergebnisse des Vorworts}, und es ist kein Grenzfall, sondern die Regel: Zu praktisch jeder beobachteten Verteilung gibt es mehrere Ursachenstrukturen. Auch beliebig viele weitere Patienten ändern daran nichts --- sie bestimmen die Verteilung genauer, und die Verteilung ist es ja gerade, die nicht entscheidet.}
+\end{minipage}
+\end{center}
+
+\schritt{Was daraus folgt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Nicht:} & \enquote{Kausale Schlüsse sind unmöglich.}\\
+\textbf{Sondern:} & Sie brauchen Annahmen, die nicht aus den Daten stammen --- aus Fachwissen, aus dem Ablauf in der Zeit, aus dem Versuchsaufbau.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist genau dieselbe Lage wie in Band 22, Satz 1.5}: Ohne Annahme kein Lernen, ohne Annahme kein kausaler Schluss. Der Unterschied liegt darin, dass die Annahmen hier viel gezielter eingreifen --- und dass die Verfahren dieses Bandes sie aufschreiben statt verschweigen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was die Standardisierung voraussetzt}
+Die Rechnung in Abschnitt 1.1 war richtig --- unter einer Bedingung, die in den Zahlen nicht steht.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Alles gemessen} & Der Schweregrad darf nicht die einzige Störgröße sein, die es gibt --- er muss die einzige sein, die es gibt.\\
+\textbf{Zwei Stufen} & \enquote{Schwer} und \enquote{leicht} sind eine grobe Einteilung. Innerhalb der Schwerkranken kann derselbe Zusammenhang erneut auftreten.\\
+\textbf{Überlappung} & In jeder Gruppe müssen beide Behandlungen vorkommen. Bei $100$ Prozent früh in einer Gruppe gibt es nichts zu vergleichen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Zeile ist unprüfbar. \textbf{Man kann nie ausschließen, dass eine weitere, nicht gemessene Größe beides beeinflusst} --- etwa die Erfahrung des diensthabenden Arztes oder die Tageszeit. Kapitel~6 gibt der Annahme einen Namen und eine grafische Fassung; Kapitel~9 und 10 zeigen Wege, die ohne sie auskommen.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die zweite Zeile in Zahlen}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teilt man \enquote{schwer} nochmals in zwei Stufen, so kann sich das Vorzeichen abermals umkehren --- Simpsons Paradoxon kann sich auf jeder Ebene wiederholen. \textbf{Feinere Einteilung hilft nur, wenn genug Patienten je Stufe bleiben}, sonst tauscht man Verzerrung gegen Varianz, genau wie in Band 22, Kapitel~2. Kapitel~7 behandelt diesen Zielkonflikt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.1 --- Simpson erzeugen}
+Zeigen Sie, wie man aus zwei Untergruppen, in denen die Behandlung jeweils \kursiv{schadet}, eine Gesamttabelle erzeugt, in der sie zu nützen scheint.
+
+\loesung
+\schritt{Schritt 1 --- Das Rezept}
+Man braucht zwei Bedingungen:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Die Untergruppen unterscheiden sich stark im Ausgang.\\
+$2$ & Die Behandlung ist in der \kursiv{günstigeren} Untergruppe überrepräsentiert.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Zahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{1.6cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+& \multicolumn{2}{c}{\textbf{behandelt}} & \multicolumn{2}{c}{\textbf{nicht}}\\
+& $n$ & \textbf{tot} & $n$ & \textbf{tot}\\
+\midrule
+leicht & $900$ & $90$ & $100$ & $5$\\
+& & $10\,\%$ & & $5\,\%$\\
+schwer & $100$ & $60$ & $900$ & $450$\\
+& & $60\,\%$ & & $50\,\%$\\
+\midrule
+gesamt & $1000$ & $150$ & $1000$ & $455$\\
+& & $\mathbf{15\,\%}$ & & $\mathbf{45{,}5\,\%}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In beiden Gruppen schadet die Behandlung um zehn Punkte. Insgesamt scheint sie um dreißig Punkte zu nützen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die standardisierte Rechnung}
+Jede Gruppe umfasst $1000$ von $2000$ Patienten, also je die Hälfte:
+\[ \Pr[\text{Tod}\mid\dops(\text{behandelt})] = \tfrac12\cdot0{,}10 + \tfrac12\cdot0{,}60 = 0{,}350 \]
+\[ \Pr[\text{Tod}\mid\dops(\text{nicht})] = \tfrac12\cdot0{,}05 + \tfrac12\cdot0{,}50 = 0{,}275 \]
+\[ \text{Effekt} = +0{,}075 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Behandlung schadet um siebeneinhalb Punkte} --- obwohl die Gesamttabelle einen Nutzen von dreißig Punkten zeigt. Der naive Vergleich liegt um $37{,}5$ Punkte daneben und im Vorzeichen falsch.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Warnung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man beachte, dass die standardisierte Rechnung hier eine \kursiv{Entscheidung} enthält: Man mittelt über die Hälfte-Hälfte-Mischung der beiden Gruppen. \textbf{Bei anderer Mischung ergäbe sich eine andere Zahl} --- bei lauter Leichtkranken $+5$ Punkte, bei lauter Schwerkranken $+10$. Ein Durchschnittseffekt gilt immer für eine bestimmte Bevölkerung; welche das ist, muss man dazusagen. Das ist die dritte Warnung des Vorworts.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.2 --- Zusammenhang aus reiner Auswahl}
+Zwei Leiden $A$ und $B$ treten in der Bevölkerung mit je zehn Prozent auf und sind \kursiv{voneinander unabhängig}. Jedes erhöht die Wahrscheinlichkeit einer Krankenhausaufnahme.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Zustand} & \textbf{Aufnahme}\\
+\midrule
+weder $A$ noch $B$ & $2\,\%$\\
+nur eines & $30\,\%$\\
+beide & $60\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Wie hängen $A$ und $B$ unter den Aufgenommenen zusammen?
+
+\loesung
+\schritt{Schritt 1 --- Die gemeinsamen Wahrscheinlichkeiten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{1.8cm}P{2.2cm}@{}}
+\toprule
+\textbf{Zustand} & \textbf{Anteil} & \textbf{Aufn.} & \textbf{beides}\\
+\midrule
+kein Leiden & $0{,}81$ & $0{,}02$ & $0{,}0162$\\
+nur $A$ & $0{,}09$ & $0{,}30$ & $0{,}0270$\\
+nur $B$ & $0{,}09$ & $0{,}30$ & $0{,}0270$\\
+$A$ und $B$ & $0{,}01$ & $0{,}60$ & $0{,}0060$\\
+\midrule
+\textbf{Summe} & $1{,}00$ & & $\mathbf{0{,}0762}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Unter den Aufgenommenen}
+\[ \Pr[B \mid A,\ \text{aufgenommen}] = \frac{0{,}0060}{0{,}0270+0{,}0060} = \frac{0{,}0060}{0{,}0330} = 0{,}182 \]
+\[ \Pr[B \mid \text{nicht } A,\ \text{aufgenommen}] = \frac{0{,}0270}{0{,}0162+0{,}0270} = \frac{0{,}0270}{0{,}0432} = 0{,}625 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Unter den Aufgenommenen haben Patienten mit $A$ deutlich \kursiv{seltener} auch $B$ --- $18$ gegen $63$ Prozent.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Das Chancenverhältnis}
+\[ \frac{0{,}182/0{,}818}{0{,}625/0{,}375} = \frac{0{,}222}{1{,}667} = 0{,}133 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Chancenverhältnis von $0{,}13$ --- in einer Bevölkerung, in der die beiden Leiden nichts miteinander zu tun haben.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wer aufgenommen ist und kein $A$ hat, muss einen anderen Grund haben --- meist $B$. \textbf{Das Wissen um die Aufnahme macht die beiden Leiden gegenseitig erklärend}, und deshalb schließt das eine das andere aus. Der Effekt heißt nach \Person{Joseph Berkson}, der ihn 1946 an Krankenhausdaten beschrieb.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die praktische Folge}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Jede Studie an stationären Patienten hat nach einem Kollider ausgewählt.} Findet sie einen Zusammenhang zwischen zwei Erkrankungen, so kann er ganz oder teilweise aus der Auswahl stammen --- und zwar mit umgekehrtem Vorzeichen gegenüber der Wirklichkeit. Dasselbe gilt für Studien an Freiwilligen, an Versicherten oder an Patienten mit vollständiger Dokumentation.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.3 --- Sehen und tun rechnen}
+Prüfen Sie in Modell B aus Satz 1.2 nach, dass $\Pr[Y=1\mid X=1] = 0{,}80$ ist, aber $\Pr[Y=1\mid\dops(X=1)] = 0{,}50$.
+
+\loesung
+\schritt{Schritt 1 --- Das Modell}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$U$ & $\Pr[U]$ & $\Pr[X=1\mid U]$ & $\Pr[Y=1\mid U]$\\
+\midrule
+$1$ & $0{,}5$ & $0{,}8873$ & $0{,}8873$\\
+$0$ & $0{,}5$ & $0{,}1127$ & $0{,}1127$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+$X$ und $Y$ sind bei gegebenem $U$ unabhängig --- kein Pfeil von $X$ nach $Y$.
+
+\schritt{Schritt 2 --- Sehen}
+\[ \Pr[X=1,Y=1] = 0{,}5\cdot0{,}8873^{2} + 0{,}5\cdot0{,}1127^{2} = 0{,}3937 + 0{,}0063 = 0{,}400 \]
+\[ \Pr[X=1] = 0{,}5\cdot0{,}8873 + 0{,}5\cdot0{,}1127 = 0{,}500 \]
+\[ \Pr[Y=1 \mid X=1] = \frac{0{,}400}{0{,}500} = 0{,}800 \quad \checkmark \]
+
+\schritt{Schritt 3 --- Tun}
+Der Eingriff setzt $X$ auf $1$ und durchtrennt den Pfeil von $U$ nach $X$. An der Verteilung von $Y$ ändert das nichts, denn $Y$ hängt nur von $U$ ab:
+\[ \Pr[Y=1\mid\dops(X=1)] = \Pr[Y=1] = 0{,}5\cdot0{,}8873 + 0{,}5\cdot0{,}1127 = 0{,}500 \quad \checkmark \]
+
+\schritt{Schritt 4 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+& $X=1$ & $X=0$\\
+\midrule
+sehen & $0{,}800$ & $0{,}200$\\
+tun & $0{,}500$ & $0{,}500$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Sehen zeigt einen Unterschied von $0{,}6$, das Tun keinen.} Der beobachtete Zusammenhang ist vollständig durch $U$ erklärt: Wer $X=1$ hat, hatte wahrscheinlich $U=1$, und wer $U=1$ hatte, hat wahrscheinlich $Y=1$. Man sieht an $X$ etwas über $U$ --- aber man ändert durch $X$ nichts an $U$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Merkregel}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beobachten heißt: erfahren, welche Welt vorliegt. Eingreifen heißt: eine neue Welt herstellen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Paradoxon mit drei Namen}
+\Person{Edward Simpson} beschrieb 1951 die Umkehr, die dieses Kapitel eröffnet --- allerdings hatten \Person{Karl Pearson} 1899 und \Person{Udny Yule} 1903 dasselbe Phänomen bereits behandelt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Simpson selbst nannte es kein Paradoxon; er hielt fest, dass die Frage, welche Tabelle die richtige sei, \kursiv{nicht} statistisch zu entscheiden ist, sondern vom Sachzusammenhang abhängt. \textbf{Damit hatte er die Lehre dieses Bandes bereits 1951 formuliert} --- und sie wurde ein halbes Jahrhundert lang überlesen.}
+\end{minipage}
+\end{center}
+
+\schritt{Ein berühmter Fall}
+1973 schien die Universität Berkeley Frauen bei der Zulassung zu benachteiligen: $44$ Prozent der Männer wurden angenommen, aber nur $35$ Prozent der Frauen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Nach Fachbereichen getrennt kehrte sich das Bild in den meisten Fächern um. Frauen hatten sich häufiger für Fächer mit niedrigen Annahmequoten beworben. \textbf{Ob das die Benachteiligung widerlegt oder nur verschiebt, ist eine kausale Frage} --- womöglich war die Fächerwahl selbst eine Folge früherer Benachteiligung. Die Zahlen allein entscheiden es nicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Und der Widerstand}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Ronald Fisher} bestritt bis zu seinem Tod 1962, dass der Zusammenhang zwischen Rauchen und Lungenkrebs ursächlich sei; er hielt eine gemeinsame genetische Ursache für möglich. \textbf{Sein Einwand war logisch korrekt} --- Satz 1.2 gibt ihm recht --- und in der Sache falsch. Die Antwort kam nicht aus der Statistik, sondern aus Dosis-Wirkungs-Beziehungen, Tierversuchen und der Beobachtung, dass Aufhören das Risiko senkt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Kausalität heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Routinedaten} & Aus Krankenakten Behandlungseffekte schätzen --- Kapitel~11.\\
+\textbf{Ursachen entdecken} & Aus Daten die Struktur selbst gewinnen, nicht nur Effekte schätzen.\\
+\textbf{Lernen und Kausalität} & Verfahren, die auch bei veränderter Verteilung gelten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Band 22 endete mit der offenen Frage, wann ein an einer Klinik gelerntes Verfahren an einer anderen gilt. \textbf{Eine der wenigen belastbaren Antworten lautet: dann, wenn es kausale Zusammenhänge gelernt hat} --- denn diese bleiben unter Eingriffen und Verteilungsverschiebungen stabil, Korrelationen nicht. Das Sepsis-Warnsystem von 2021 scheiterte an einer Verschiebung; ein Modell, das nur auf ursächlichen Größen beruht, wäre robuster gewesen, hätte aber vermutlich schlechter vorhergesagt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Simpson} & das Vorzeichen kann sich umkehren\\
+\textbf{Drei Gründe} & Ursache, gemeinsame Ursache, Auswahl\\
+\textbf{Definition 1.1} & sehen gegen tun\\
+\textbf{Satz 1.2} & dieselben Daten, verschiedene Effekte\\
+\textbf{Standardisierung} & über die Störgröße mitteln\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieses Kapitel hat den Effekt an einem Beispiel ausgerechnet, ohne ihn zu definieren. Das nächste holt das nach --- mit einer Größe, die für jeden einzelnen Patienten unbeobachtbar ist und für eine Gruppe trotzdem schätzbar.}
+\end{minipage}
+\end{center}
+\end{merksatz}

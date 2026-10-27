@@ -1,0 +1,682 @@
+\part{Gleichgewichte}
+
+\chapter{Das Nash-Gleichgewicht}
+
+\section{Wenn die Interessen sich nicht aufheben}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall: ein gemeinsames Bereitschaftsmodell}
+Klinikum und Marienhospital wollen ihre Rufbereitschaft zusammenlegen. Zwei Modelle stehen zur Wahl --- das eingeführte System des Klinikums oder das des Marienhospitals.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Klinikum} & \textbf{M.: K-System} & \textbf{M.: M-System}\\
+\midrule
+K-System & $(4,\ 3)$ & $(0,\ 0)$\\
+M-System & $(0,\ 0)$ & $(3,\ 4)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Erste Zahl: Klinikum. Zweite: Marienhospital.}
+
+\schritt{Was die Zahlen sagen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Einig} & Beide gewinnen --- jeder lieber mit dem eigenen System.\\
+\textbf{Uneinig} & Beide verlieren alles. Zwei getrennte Bereitschaften bringen niemandem etwas.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Interessen sind teils gleich, teils gegensätzlich.} Eine einzige Matrix genügt nicht mehr --- man braucht zwei Zahlen je Feld.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit bricht alles aus Teil~I zusammen. Es gibt keinen Wert, den beide sich garantieren können --- schon weil sie nicht dasselbe wollen. \textbf{Der Minimax-Satz sagt hier nichts}, und die Frage ist, was an seine Stelle tritt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Warum man Erwartungswerte bilden darf}
+
+\begin{merksatz}
+\boxtitel{Die in Kapitel 1 vertagte Frage}
+Die Auszahlungen sollen ein Nutzen sein, über den man mitteln darf. Wann gibt es einen solchen?
+
+\schritt{Die vier Forderungen}
+Ein Spieler habe Vorlieben über \Begriff{Lotterien} --- Wahrscheinlichkeitsverteilungen über Ergebnisse.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Vollständig} & Je zwei Lotterien sind vergleichbar.\\
+\textbf{Übertragbar} & Ist $A$ besser als $B$ und $B$ besser als $C$, so ist $A$ besser als $C$.\\
+\textbf{Stetig} & Liegt $B$ zwischen $A$ und $C$, so gibt es eine Mischung aus $A$ und $C$, die genauso gut ist wie $B$.\\
+\textbf{Unabhängig} & Ist $A$ besser als $B$, so ist jede Mischung mit $A$ besser als dieselbe Mischung mit $B$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Satz 4.1 --- von Neumann und Morgenstern, 1944}
+Erfüllt eine Vorliebenordnung diese vier Forderungen, so gibt es eine Funktion $\Aus$ mit
+\[ A \text{ wird } B \text{ vorgezogen} \quad\Longleftrightarrow\quad \mathbb{E}[\Aus(A)] > \mathbb{E}[\Aus(B)] . \]
+Sie ist eindeutig bis auf $\Aus \mapsto \alpha\,\Aus + \beta$ mit $\alpha > 0$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Genau dann darf man Erwartungswerte bilden.} Der Nutzen ist keine Messgröße, sondern eine Rechengröße.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Eindeutigkeit bis auf eine positive affine Umrechnung erklärt, warum die Verschiebung in Kapitel~3 erlaubt war --- und warum es sinnlos ist, Nutzen zweier Spieler zu addieren oder zu vergleichen. \textbf{Die Zahlen $4$ und $3$ im Leitfall bedeuten nicht, dass das Klinikum mehr gewinnt als das Marienhospital.} Sie bedeuten nur, dass das Klinikum sein eigenes System vorzieht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Unabhängigkeitsforderung ist die strittige}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Menschen verletzen sie systematisch.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Beispiel von Allais}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{3.4cm}P{3.6cm}@{}}
+\toprule
+& \textbf{Wahl A} & \textbf{Wahl B}\\
+\midrule
+$1$ & $1$ Million sicher & $89\%$: $1$ Mio; $10\%$: $5$ Mio; $1\%$: nichts\\
+$2$ & $11\%$: $1$ Mio; $89\%$: nichts & $10\%$: $5$ Mio; $90\%$: nichts\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die meisten wählen im ersten Paar A und im zweiten B. \textbf{Das ist mit keiner Nutzenfunktion vereinbar}, weil beide Paare sich nur um einen in allen Fällen gleichen Anteil unterscheiden --- genau die Unabhängigkeitsforderung. \Person{Maurice Allais} stellte das Beispiel 1953 auf einer Tagung vor, an der Savage teilnahm; Savage traf selbst die inkonsistente Wahl.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für diesen Band bedeutet das: \textbf{Die Theorie beschreibt, was ein Spieler täte, der die vier Forderungen erfüllt.} Ob Menschen sie erfüllen, ist eine empirische Frage, und die Antwort ist überwiegend nein. Kapitel~15 behandelt, was daraus folgt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Beste Antwort und Gleichgewicht}
+
+\begin{definition}
+\boxtitelm{Definition 4.2 --- beste Antwort}
+Eine Strategie $s_i$ ist eine \Begriff{beste Antwort} auf die Wahl $s_{-i}$ der übrigen, wenn
+\[ \Aus_i(s_i,\,s_{-i}) \ \ge\ \Aus_i(s_i',\,s_{-i}) \qquad\text{für alle } s_i' . \]
+\end{definition}
+
+\begin{definition}
+\boxtitelm{Definition 4.3 --- Nash-Gleichgewicht}
+Ein Strategieprofil $\vek s^{*} = (s_1^{*},\ldots,s_n^{*})$ heißt \Begriff{Nash-Gleichgewicht}, wenn jedes $s_i^{*}$ eine beste Antwort auf $\vek s_{-i}^{*}$ ist.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was das bedeutet}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein Spieler kann sich durch einseitiges Abweichen verbessern.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Einseitig} & Nur ein Spieler ändert seine Wahl, die anderen bleiben. Gemeinsames Abweichen ist nicht ausgeschlossen.\\
+\textbf{Stabil} & Erreicht man die Lage, so bleibt sie bestehen.\\
+\textbf{Nicht bester} & Es kann Lagen geben, die für \kursiv{alle} besser sind.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist die wichtigste Abgrenzung des ganzen Bandes. \textbf{Ein Gleichgewicht ist kein Optimum}, und Kapitel~5 zeigt ein Spiel, dessen einziges Gleichgewicht für beide Spieler schlechter ist als eine erreichbare Alternative. Die dritte Warnung des Vorworts steht hier zum ersten Mal in voller Schärfe.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Zusammenhang mit Teil I}
+Bei Nullsummenspielen fallen beide Begriffe zusammen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Paar optimaler Mischungen im Sinne von Kapitel~2 ist genau ein Nash-Gleichgewicht, und umgekehrt. \textbf{Der Sattelpunkt aus Definition 1.4 ist der Sonderfall in reinen Strategien.} Nash verallgemeinert also, ohne zu widersprechen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Leitfall gelöst}
+
+\begin{merksatz}
+\boxtitel{Die reinen Gleichgewichte}
+Man prüft jedes Feld: Kann einer allein gewinnen, indem er wechselt?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{2.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Feld} & \textbf{K wechselt} & \textbf{M wechselt} & \\
+\midrule
+$(\text{K},\text{K})$ & $4 \to 0$ & $3 \to 0$ & \textcolor{gruen}{GG}\\
+$(\text{K},\text{M})$ & $0 \to 3$ & $0 \to 3$ & ---\\
+$(\text{M},\text{K})$ & $0 \to 4$ & $0 \to 4$ & ---\\
+$(\text{M},\text{M})$ & $3 \to 0$ & $4 \to 0$ & \textcolor{gruen}{GG}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Gleichgewichte --- und die Spieler bevorzugen verschiedene.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist die Theorie an einer Grenze: \textbf{Sie sagt, wo man bleiben würde, nicht wohin man kommt.} Beide Gleichgewichte sind gleichermaßen stabil, und nichts in der Matrix entscheidet zwischen ihnen. Diese Frage --- die Auswahl unter mehreren Gleichgewichten --- ist bis heute nicht befriedigend gelöst und beschäftigt Kapitel~8 und 15.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das gemischte Gleichgewicht}
+Es gibt ein drittes, bei dem beide würfeln.
+
+\schritt{Der Ansatz}
+Nach dem Prinzip aus Satz 3.3 muss jeder Spieler, der mischt, gleichgültig sein --- also müssen seine benutzten Strategien denselben Ertrag bringen.
+
+\schritt{Schritt 1 --- Wann ist das Klinikum gleichgültig?}
+Das Marienhospital spiele K-System mit Wahrscheinlichkeit $q$.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{4.0cm}@{}}
+\toprule
+\textbf{K wählt K} & $q\cdot4 + (1-q)\cdot0 = 4q$\\
+\textbf{K wählt M} & $q\cdot0 + (1-q)\cdot3 = 3-3q$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ 4q = 3-3q \quad\Longrightarrow\quad 7q = 3 \quad\Longrightarrow\quad q = \tfrac37 \]
+
+\schritt{Schritt 2 --- Wann ist das Marienhospital gleichgültig?}
+Das Klinikum spiele K-System mit Wahrscheinlichkeit $p$.
+\[ 3p = 4-4p \quad\Longrightarrow\quad 7p = 4 \quad\Longrightarrow\quad p = \tfrac47 \]
+
+\schritt{Schritt 3 --- Die Auszahlungen}
+\[ \Aus_K = 4\cdot\tfrac37 = \tfrac{12}{7} \approx 1{,}71, \qquad \Aus_M = 3\cdot\tfrac47 = \tfrac{12}{7} \approx 1{,}71 \]
+
+\schritt{Die Bilanz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.0cm}P{2.0cm}P{1.6cm}@{}}
+\toprule
+\textbf{Gleichgewicht} & \textbf{K} & \textbf{M} & \\
+\midrule
+beide K-System & $4$ & $3$ & \\
+beide M-System & $3$ & $4$ & \\
+gemischt & $\mathbf{1{,}71}$ & $\mathbf{1{,}71}$ & \textcolor{akzent}{schlechter}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das gemischte Gleichgewicht ist für beide schlechter als jedes der beiden reinen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Grund ist die Uneinigkeit: Mit Wahrscheinlichkeit $\tfrac47\cdot\tfrac47 + \tfrac37\cdot\tfrac37 = \tfrac{25}{49}$ landen die beiden auf verschiedenen Systemen und bekommen nichts. \textbf{Über die Hälfte der Fälle geht schief.} Dass ein Gleichgewicht für alle Beteiligten schlecht sein kann, ist kein Mangel der Rechnung, sondern eine Aussage über die Lage: Ohne Absprache ist das Ergebnis schlecht.}
+\end{minipage}
+\end{center}
+
+\schritt{Die anschauliche Deutung von $q = \frac37$}
+Wieder gilt der befremdliche Befund aus Kapitel~2: \textbf{Die Mischung des Marienhospitals richtet sich nach den Auszahlungen des Klinikums.}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Erhöhte man den Gewinn des Klinikums beim K-System von $4$ auf $6$, so würde das Marienhospital \kursiv{seltener} K-System spielen --- nämlich $q = \tfrac36 = \tfrac12$ statt $\tfrac37$. Die eigene Auszahlung des Klinikums bleibt dabei unverändert bei $6\cdot\tfrac12 = 3$. \textbf{Eine Verbesserung der eigenen Auszahlung erhöht im gemischten Gleichgewicht nicht den eigenen Ertrag}, sondern verändert das Verhalten des Gegenübers. Das ist eine der unanschaulichsten Folgerungen der Theorie und ein wiederkehrender Streitpunkt in der Anwendung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was mit dem Wertbegriff geschieht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kein Wert} & Es gibt keine Zahl, die das Spiel beschreibt. Jedes Gleichgewicht hat andere Auszahlungen.\\
+\textbf{Keine Garantie} & Wer sein Gleichgewichtsverhalten spielt, hat nichts garantiert --- es hängt davon ab, was der andere tut.\\
+\textbf{Kein Rat} & Die Theorie kann nicht sagen, welches Gleichgewicht zu wählen ist.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Spielt das Klinikum K-System und das Marienhospital ebenfalls, so erhält es $4$. Spielt das Marienhospital M-System, so erhält das Klinikum $0$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gleichgewichtsverhalten ist nur dann sinnvoll, wenn man erwartet, dass der andere dasselbe Gleichgewicht ansteuert.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei Nullsummenspielen war das anders: Dort garantiert die optimale Mischung den Wert, \kursiv{unabhängig} vom Verhalten des Gegners --- genau das besagte Kapitel~2. \textbf{Diese Eigenschaft geht hier verloren}, und mit ihr die wichtigste praktische Rechtfertigung des Gleichgewichtsbegriffs.}
+\end{minipage}
+\end{center}
+
+\schritt{Und das Vorzeichen der Vorhersage}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Nash-Gleichgewicht ist eine Aussage über Stabilität, keine über das Zustandekommen. \textbf{Warum sollten zwei Häuser, die noch nie miteinander gesprochen haben, dasselbe Gleichgewicht ansteuern?} Auf diese Frage gibt es Antworten --- Vorgeschichte, Absprache, Gewohnheit, Evolution ---, und jede davon ist Gegenstand eines späteren Kapitels. Die Definition selbst gibt keine.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Alle Gleichgewichte finden}
+Bestimmen Sie sämtliche Nash-Gleichgewichte:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+& \textbf{L} & \textbf{R}\\
+\midrule
+\textbf{O} & $(5,\ 3)$ & $(1,\ 1)$\\
+\textbf{U} & $(1,\ 1)$ & $(3,\ 5)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Die reinen Gleichgewichte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{2.6cm}P{1.2cm}@{}}
+\toprule
+\textbf{Feld} & \textbf{Zeilenspieler} & \textbf{Spaltenspieler} & \\
+\midrule
+$(\text{O},\text{L})$ & $5$, wechseln $\to1$ & $3$, wechseln $\to1$ & \textcolor{gruen}{GG}\\
+$(\text{O},\text{R})$ & $1$, wechseln $\to3$ & --- & ---\\
+$(\text{U},\text{L})$ & $1$, wechseln $\to5$ & --- & ---\\
+$(\text{U},\text{R})$ & $3$, wechseln $\to1$ & $5$, wechseln $\to1$ & \textcolor{gruen}{GG}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Das gemischte Gleichgewicht}
+\kursiv{Zeilenspieler gleichgültig:} Der Spaltenspieler spiele L mit $q$.
+\[ 5q + 1(1-q) = 1q + 3(1-q) \]
+\[ 1 + 4q = 3 - 2q \quad\Longrightarrow\quad 6q = 2 \quad\Longrightarrow\quad q = \tfrac13 \]
+
+\kursiv{Spaltenspieler gleichgültig:} Der Zeilenspieler spiele O mit $p$.
+\[ 3p + 1(1-p) = 1p + 5(1-p) \]
+\[ 1 + 2p = 5 - 4p \quad\Longrightarrow\quad 6p = 4 \quad\Longrightarrow\quad p = \tfrac23 \]
+
+\schritt{Schritt 3 --- Die Auszahlungen}
+\kursiv{Zeilenspieler:}
+\[ 5\cdot\tfrac13 + 1\cdot\tfrac23 = \tfrac53+\tfrac23 = \tfrac73 \approx 2{,}33 \]
+\kursiv{Probe mit der anderen Zeile:}
+\[ 1\cdot\tfrac13 + 3\cdot\tfrac23 = \tfrac13+2 = \tfrac73 \quad \checkmark \]
+
+\kursiv{Spaltenspieler:}
+\[ 3\cdot\tfrac23 + 1\cdot\tfrac13 = 2+\tfrac13 = \tfrac73 \]
+\kursiv{Probe:}
+\[ 1\cdot\tfrac23 + 5\cdot\tfrac13 = \tfrac23+\tfrac53 = \tfrac73 \quad \checkmark \]
+
+\schritt{Schritt 4 --- Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+\textbf{Gleichgewicht} & \textbf{Zeile} & \textbf{Spalte} & \textbf{Summe}\\
+\midrule
+$(\text{O},\text{L})$ & $5$ & $3$ & $8$\\
+$(\text{U},\text{R})$ & $3$ & $5$ & $8$\\
+gemischt & $2{,}33$ & $2{,}33$ & $\mathbf{4{,}67}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Drei Gleichgewichte, und das gemischte verschenkt über vierzig Prozent des Gesamtertrags.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Eine allgemeine Beobachtung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Zahl der Gleichgewichte ist bei endlichen Spielen mit generischen Auszahlungen stets \kursiv{ungerade} --- ein Satz von \Person{Robert Wilson} aus dem Jahr 1971. \textbf{Zwei reine und ein gemischtes ergeben drei}, und das ist kein Zufall dieses Beispiels, sondern der typische Fall bei Koordinationsspielen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Kein reines Gleichgewicht}
+Zeigen Sie, dass das folgende Spiel kein Gleichgewicht in reinen Strategien hat, und bestimmen Sie das gemischte.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+& \textbf{L} & \textbf{R}\\
+\midrule
+\textbf{O} & $(3,\ 1)$ & $(0,\ 2)$\\
+\textbf{U} & $(1,\ 3)$ & $(2,\ 0)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{Schritt 1 --- Die besten Antworten eintragen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{5.8cm}@{}}
+\toprule
+\textbf{Zeilenspieler} & gegen L: $3>1$, also O. Gegen R: $2>0$, also U.\\
+\textbf{Spaltenspieler} & gegen O: $2>1$, also R. Gegen U: $3>0$, also L.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Der Kreis}
+\[ \text{O} \ \to\ \text{R} \ \to\ \text{U} \ \to\ \text{L} \ \to\ \text{O} \]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\node[knotenb] (OL) at (0,1.4) {O,L};
+\node[knotenb] (OR) at (2.4,1.4) {O,R};
+\node[knotenb] (UR) at (2.4,0) {U,R};
+\node[knotenb] (UL) at (0,0) {U,L};
+\draw[kanted, -{Stealth[length=4pt]}] (OL)--(OR);
+\draw[kanted, -{Stealth[length=4pt]}] (OR)--(UR);
+\draw[kanted, -{Stealth[length=4pt]}] (UR)--(UL);
+\draw[kanted, -{Stealth[length=4pt]}] (UL)--(OL);
+\node[font=\scriptsize\itshape, color=grau] at (1.2,-0.7) {jeder Pfeil: ein Spieler wechselt};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein Feld ist stabil --- immer will einer wechseln.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Das gemischte Gleichgewicht}
+\kursiv{Zeilenspieler gleichgültig:}
+\[ 3q + 0(1-q) = 1q + 2(1-q) \]
+\[ 3q = 2 - q \quad\Longrightarrow\quad 4q = 2 \quad\Longrightarrow\quad q = \tfrac12 \]
+
+\kursiv{Spaltenspieler gleichgültig:}
+\[ 1p + 3(1-p) = 2p + 0(1-p) \]
+\[ 3 - 2p = 2p \quad\Longrightarrow\quad 4p = 3 \quad\Longrightarrow\quad p = \tfrac34 \]
+
+\schritt{Schritt 4 --- Die Auszahlungen}
+\kursiv{Zeilenspieler:} $3\cdot\tfrac12 = \tfrac32$.\\
+\kursiv{Probe:} $1\cdot\tfrac12 + 2\cdot\tfrac12 = \tfrac32$ \checkmark
+
+\kursiv{Spaltenspieler:} $1\cdot\tfrac34 + 3\cdot\tfrac14 = \tfrac34+\tfrac34 = \tfrac32$.\\
+\kursiv{Probe:} $2\cdot\tfrac34 + 0 = \tfrac32$ \checkmark
+
+\schritt{Schritt 5 --- Ist das ein Nullsummenspiel?}
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Feld} & \textbf{Summe} & \\
+\midrule
+$(\text{O},\text{L})$ & $4$ & \\
+$(\text{O},\text{R})$ & $2$ & \\
+$(\text{U},\text{L})$ & $4$ & \\
+$(\text{U},\text{R})$ & $2$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nein --- die Summen sind verschieden.} Es ist ein echtes Nichtnullsummenspiel mit einem einzigen, gemischten Gleichgewicht.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert ist, dass beide Felder mit Summe $4$ --- also mit höherem Gesamtertrag --- im Gleichgewicht nur mit Wahrscheinlichkeit $\tfrac34\cdot\tfrac12 + \tfrac14\cdot\tfrac12 = \tfrac12$ erreicht werden. \textbf{Es gibt keine Möglichkeit, das zu verbessern}, ohne dass einer der beiden einen Grund zum Abweichen bekommt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Ein Nutzen aus Vorlieben}
+Ein Chefarzt zieht eine sichere Verlegung ($V$) einer Notoperation vor, diese wiederum dem Abwarten ($A$). Bei einer Lotterie zwischen Notoperation und Abwarten ist er gleichgültig gegenüber der Verlegung, wenn die Notoperation mit $0{,}8$ eintritt. Konstruieren Sie eine Nutzenfunktion.
+
+\loesung
+\schritt{Schritt 1 --- Die Skala festlegen}
+Nach Satz 4.1 ist der Nutzen bis auf eine positive affine Umrechnung bestimmt. Man darf also zwei Werte frei wählen.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Nutzen} & \\
+\midrule
+Notoperation ($N$) & $1$ & bestes\\
+Abwarten ($A$) & $0$ & schlechtestes\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Vorsicht bei der Anordnung: Genannt wurde $V$ vor $N$ vor $A$. Die Skala wird an den \kursiv{Extremen} verankert --- hier $V$ als bestes und $A$ als schlechtestes. Wir setzen sie also neu.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Nutzen} & \\
+\midrule
+Verlegung ($V$) & $1$ & bestes\\
+Abwarten ($A$) & $0$ & schlechtestes\\
+Notoperation ($N$) & $u$ & gesucht\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 2 --- Die Angabe auswerten}
+Die genannte Gleichgültigkeit lautet: $V$ ist genauso gut wie die Lotterie, die mit $0{,}8$ zu $N$ und mit $0{,}2$ zu $A$ führt.
+
+\[ \Aus(V) = 0{,}8\,\Aus(N) + 0{,}2\,\Aus(A) \]
+\[ 1 = 0{,}8\,u + 0 \quad\Longrightarrow\quad u = \tfrac{1}{0{,}8} = 1{,}25 \]
+
+\schritt{Schritt 3 --- Der Widerspruch}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Es käme $\Aus(N) = 1{,}25 > 1 = \Aus(V)$ heraus --- im Widerspruch dazu, dass $V$ vorgezogen wird.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Angaben sind unvereinbar. Eine Lotterie zwischen $N$ und $A$ kann nie besser sein als $N$ --- und da $V$ besser als $N$ ist, kann keine solche Lotterie $V$ erreichen. \textbf{Die Stetigkeitsforderung verlangt die Gleichgültigkeit für ein $\lambda$ zwischen den \kursiv{umschließenden} Ergebnissen}, nicht zwischen zwei schlechteren.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die richtige Frage}
+Man fragt nach der Lotterie zwischen dem besten und dem schlechtesten Ergebnis:
+
+\kursiv{\enquote{Ab welcher Erfolgswahrscheinlichkeit $\lambda$ einer Lotterie zwischen Verlegung und Abwarten würden Sie diese der Notoperation vorziehen?}}
+
+Antworte der Chefarzt mit $\lambda = 0{,}8$, so folgt
+\[ \Aus(N) = 0{,}8\cdot1 + 0{,}2\cdot0 = 0{,}8 \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Nutzen} & \\
+\midrule
+Verlegung & $1{,}0$ & \\
+Notoperation & $0{,}8$ & \\
+Abwarten & $0{,}0$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 5 --- Die Probe auf Konsistenz}
+\[ \Aus(V) = 1{,}0 \ >\ \Aus(N) = 0{,}8 \ >\ \Aus(A) = 0{,}0 \quad \checkmark \]
+
+\schritt{Schritt 6 --- Die Eindeutigkeit prüfen}
+Eine andere Skala, etwa $\Aus(V) = 10$ und $\Aus(A) = 2$, ergäbe
+\[ \Aus(N) = 0{,}8\cdot10 + 0{,}2\cdot2 = 8{,}4 \]
+
+\kursiv{Umrechnung:} $8{,}4 = 8\cdot0{,}8 + 2$ --- also genau $\alpha\,\Aus + \beta$ mit $\alpha=8$, $\beta=2$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Verhältnisse von Nutzen\kursiv{differenzen} bleiben erhalten, die Verhältnisse der Nutzen selbst nicht. \textbf{Es ist daher sinnlos zu sagen, die Verlegung sei \enquote{$1{,}25$-mal so gut} wie die Notoperation} --- in der zweiten Skala wäre es der Faktor $1{,}19$. Sinnvoll ist nur: Der Abstand zwischen Verlegung und Notoperation beträgt ein Viertel des Abstands zwischen Notoperation und Abwarten.}
+\end{minipage}
+\end{center}
+
+\kursiv{Probe:} $\frac{1{,}0-0{,}8}{0{,}8-0{,}0} = \frac{0{,}2}{0{,}8} = \frac14$ und $\frac{10-8{,}4}{8{,}4-2} = \frac{1{,}6}{6{,}4} = \frac14$ \checkmark
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Siebenundzwanzig Seiten und ein kühler Empfang}
+\Person{John Nash} (1928--2015) kam 1948 mit zwanzig Jahren nach Princeton. Sein Empfehlungsschreiben bestand aus einem Satz: \enquote{Dieser Mann ist ein Genie.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Seine Dissertation von 1950 umfasst siebenundzwanzig Seiten und enthält die Definition des Gleichgewichts, den Existenzbeweis und zwei Beispiele. Das Literaturverzeichnis führt zwei Titel auf, einer davon von Neumann und Morgenstern.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Gespräch}
+Nash stellte seine Idee von Neumann vor. Dieser hörte kurz zu und sagte, das sei trivial --- ein Fixpunktsatz.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Technisch hatte er recht: Der Beweis benutzt denselben Satz von Brouwer, den von Neumann 1928 verwendet hatte, und ist kürzer als dessen eigener. \textbf{Begrifflich lag er falsch} --- und zwar deutlich. Der Gleichgewichtsbegriff hat die Wirtschaftswissenschaft umgestaltet, während von Neumanns Koalitionstheorie aus demselben Buch heute vergleichsweise wenig benutzt wird.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum die Ablehnung}
+Von Neumann hielt den nichtkooperativen Ansatz für zu eng: Spieler, die nicht verhandeln dürfen, seien eine unrealistische Vereinfachung.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Auch dieser Einwand ist ernstzunehmen und kehrt in Kapitel~14 wieder. \textbf{Die Geschichte gab Nash recht, ohne von Neumann unrecht zu geben} --- beide Zugänge bestehen nebeneinander, nur hat der eine sich als anschlussfähiger erwiesen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die späte Anerkennung}
+Nash erkrankte Ende der 1950er Jahre an einer Schizophrenie und war jahrzehntelang arbeitsunfähig.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{In den 1980er Jahren besserte sich sein Zustand; 1994 erhielt er gemeinsam mit \Person{Harsanyi} und \Person{Selten} den Wirtschaftsnobelpreis. \textbf{Das Nobelkomitee hatte lange gezögert} --- nicht wegen der Leistung, sondern wegen der Frage, ob er die Auszeichnung würde entgegennehmen können. Nash starb 2015 bei einem Verkehrsunfall, wenige Tage nach der Verleihung des Abelpreises für eine ganz andere Arbeit: seine Ergebnisse über partielle Differentialgleichungen, die er selbst für gewichtiger hielt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Was am Gleichgewichtsbegriff gearbeitet wird}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Auswahl} & Welches Gleichgewicht wird erreicht, wenn es mehrere gibt? Kapitel~8 und 10.\\
+\textbf{Verfeinerungen} & Zusatzbedingungen, die unplausible Gleichgewichte ausschließen.\\
+\textbf{Lernen} & Ob wiederholtes Spielen zum Gleichgewicht führt --- und zu welchem.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\Person{Reinhard Selten} führte 1965 die Teilspielperfektheit ein, 1975 die zitternde Hand.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide schließen Gleichgewichte aus, die auf unglaubwürdigen Drohungen beruhen oder gegen kleine Fehler nicht robust sind. \textbf{Der Ansatz hat einen Nachteil, den Selten selbst benannte}: Die Zahl der Verfeinerungen wuchs rasch, ohne dass sich eine als die richtige erwies. Kapitel~7 behandelt die wichtigste davon.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Verschiedene Lernverfahren führen zu verschiedenen Ergebnissen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei Nullsummenspielen konvergieren die meisten Verfahren gegen das Gleichgewicht --- Kapitel~3 nannte ein Beispiel. \textbf{Bei Nichtnullsummenspielen gilt das nicht}: Es gibt Spiele, in denen naheliegende Lernverfahren nachweislich nie konvergieren, sondern dauerhaft kreisen. Das ist kein Randphänomen und wird in Kapitel~10 an der Replikatordynamik sichtbar.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 4.1} & wann man mitteln darf\\
+\textbf{Definition 4.3} & niemand gewinnt durch Abweichen\\
+\textbf{Der Leitfall} & zwei reine, ein gemischtes\\
+\textbf{Gemischt rechnen} & den anderen gleichgültig machen\\
+\textbf{Der Verlust} & kein Wert, keine Garantie, kein Rat\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel betrachten wir vier Spiele mit je zwei Strategien. Sie sind vollständig durchgerechnet und in wenigen Zeilen beschrieben --- und sie haben mehr Literatur erzeugt als der Rest dieses Bandes zusammen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

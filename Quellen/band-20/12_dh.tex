@@ -1,0 +1,712 @@
+\part{Öffentliche Schlüssel}
+
+\chapter{Schlüsseltausch über offene Leitung}
+
+\section{Das Problem}
+
+\begin{merksatz}
+\boxtitel{Was alle bisherigen Verfahren voraussetzen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kapitel 9} & Sender und Empfänger teilen einen Einmalschlüssel.\\
+\textbf{Kapitel 10} & Sie teilen einen Blockchiffrenschlüssel.\\
+\textbf{Kapitel 11} & Sie teilen einen Beglaubigungsschlüssel.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Woher kommt dieser gemeinsame Schlüssel?}
+\end{minipage}
+\end{center}
+
+\schritt{Das Ausmaß des Problems}
+Bei $n$ Teilnehmern, die paarweise vertraulich kommunizieren wollen, braucht man
+\[ \binom{n}{2} = \frac{n(n-1)}{2} \ \text{Schlüssel.} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Teilnehmer} & \textbf{Schlüssel} & \\
+\midrule
+$10$ & $45$ & Praxisnetz\\
+$1000$ & $499\,500$ & Klinikverbund\\
+$10^{6}$ & $5\cdot10^{11}$ & \textcolor{akzent}{aussichtslos}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und jeder einzelne müsste persönlich oder per Kurier übergeben werden. \textbf{Bis 1976 galt das als grundsätzliche Grenze der Kryptographie} --- man könne ohne vorherigen sicheren Kanal keinen Schlüssel vereinbaren. Der Gedanke, dass es anders geht, kam erst spät und wirkte zunächst unglaubwürdig.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Rechnen mit Resten}
+
+\begin{merksatz}
+\boxtitel{Das Nötige in Kürze}
+Für eine Primzahl $p$ rechnet man mit den Resten $1,2,\ldots,p-1$ bei Division durch $p$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Multiplikation} & $a\cdot b \bmod p$ bleibt im Bereich.\\
+\textbf{Umkehrbarkeit} & Zu jedem $a \ne 0$ gibt es genau ein $a^{-1}$ mit $a\,a^{-1} \equiv 1$.\\
+\textbf{Kleiner Satz von Fermat} & $a^{p-1} \equiv 1$ für alle $a \ne 0$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Primitivwurzel}
+Ein Element $g$ heißt \Begriff{Primitivwurzel}, wenn seine Potenzen alle Reste durchlaufen:
+\[ \{g^1, g^2, \ldots, g^{p-1}\} = \{1,2,\ldots,p-1\} \]
+
+\kursiv{Beispiel:} $p=23$, $g=5$.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}@{}}
+\toprule
+$k$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$\\
+$5^k$ & $5$ & $2$ & $10$ & $4$ & $20$ & $\mathbf{8}$ & $17$\\
+\midrule
+$k$ & $8$ & $9$ & $10$ & $11$ & $\cdots$ & $21$ & $22$\\
+$5^k$ & $16$ & $11$ & $9$ & $22$ & $\cdots$ & $14$ & $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Alle $22$ Werte sind verschieden --- $5$ ist eine Primitivwurzel modulo $23$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass es solche Elemente gibt, ist ein Satz der Zahlentheorie: Die multiplikative Gruppe modulo einer Primzahl ist zyklisch. Der Beweis steht in Band 8, Teil~III. \textbf{Für dieses Kapitel genügt die Tatsache}, und sie lässt sich an jedem Beispiel nachprüfen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Potenzieren ist schnell}
+Die Berechnung von $g^{a} \bmod p$ erfordert nicht $a$ Multiplikationen, sondern nur etwa $2\lb a$.
+
+\schritt{Quadrieren und Multiplizieren}
+Man liest den Exponenten binär von links und rechnet fortlaufend:
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{6.6cm}@{}}
+\toprule
+\textbf{Bit $0$} & quadrieren\\
+\textbf{Bit $1$} & quadrieren, dann mit $g$ multiplizieren\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Beispiel:} $5^{15} \bmod 23$ mit $15 = \texttt{1111}_2$:
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Bit} & \textbf{Rechnung} & \textbf{Ergebnis}\\
+\midrule
+$1$ & $1^2\cdot5$ & $5$\\
+$1$ & $5^2\cdot5 = 125$ & $10$\\
+$1$ & $10^2\cdot5 = 500$ & $17$\\
+$1$ & $17^2\cdot5 = 1445$ & $\mathbf{19}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Probe:} $125 = 5\cdot23+10$ \checkmark; $500 = 21\cdot23+17$ \checkmark; $1445 = 62\cdot23+19$ \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Vier Schritte statt fünfzehn.} Bei einem Exponenten von $2048$ Bit sind es rund $3000$ statt $10^{616}$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Genau auf diesem Gefälle beruht das ganze Kapitel: \textbf{Potenzieren ist leicht, der umgekehrte Weg vermutlich schwer.} Eine Funktion mit dieser Eigenschaft nennt man eine Einwegfunktion.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Verfahren}
+
+\begin{merksatz}
+\boxtitel{Diffie-Hellman-Schlüsseltausch}
+Öffentlich bekannt sind $p$ und eine Primitivwurzel $g$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+\textbf{Schritt} & \textbf{Alice} & \textbf{Bob}\\
+\midrule
+$1$ & wählt $a$ geheim & wählt $b$ geheim\\
+$2$ & sendet $A = g^{a}$ & sendet $B = g^{b}$\\
+$3$ & rechnet $B^{a}$ & rechnet $A^{b}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum beide dasselbe erhalten}
+\[ B^{a} = (g^{b})^{a} = g^{ab} = (g^{a})^{b} = A^{b} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Potenzgesetz ist der ganze Trick.} Die Reihenfolge der Exponenten spielt keine Rolle.
+\end{minipage}
+\end{center}
+
+\schritt{Ein vollständiges Beispiel}
+$p=23$, $g=5$, $a=6$, $b=15$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Alice} & \textbf{Bob}\\
+\midrule
+geheim & $a = 6$ & $b = 15$\\
+gesendet & $A = 5^{6} = 8$ & $B = 5^{15} = 19$\\
+gerechnet & $19^{6} = \mathbf{2}$ & $8^{15} = \mathbf{2}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Probe:} $g^{ab} = 5^{90} \bmod 23$. Wegen $5^{22}\equiv1$ und $90 = 4\cdot22+2$ ist $5^{90} \equiv 5^{2} = 25 \equiv 2$. \checkmark
+
+\schritt{Was der Mitleser sieht}
+\[ p = 23, \quad g = 5, \quad A = 8, \quad B = 19 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Er kennt $g^{a}$ und $g^{b}$ und will $g^{ab}$.} Dafür müsste er $a$ oder $b$ bestimmen.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 12.1 --- das diskrete Logarithmusproblem}
+Gegeben $p$, $g$ und $y$, bestimme $x$ mit
+\[ g^{x} \equiv y \pmod p . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Stand}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Für große Primzahlen ist kein Verfahren bekannt, das dieses Problem in vertretbarer Zeit löst.} Bewiesen ist die Schwierigkeit nicht.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Es ist dieselbe Lage wie bei $\mathsf{P}$ gegen $\mathsf{NP}$ in Band 19: Man weiß nicht, ob es schwer ist, sondern nur, dass seit fünfzig Jahren niemand einen schnellen Weg gefunden hat. \textbf{Die dritte Warnung aus dem Vorwort steht hier zum ersten Mal in voller Schärfe.}}
+\end{minipage}
+\end{center}
+
+\schritt{Ein feiner Unterschied}
+Streng genommen muss der Angreifer nicht den Logarithmus bestimmen --- er braucht nur $g^{ab}$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Logarithmus\-problem} & Aus $g^{a}$ bestimme $a$.\\
+\textbf{Diffie-Hellman-Problem} & Aus $g^{a}$ und $g^{b}$ bestimme $g^{ab}$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das zweite ist höchstens so schwer wie das erste --- wer Logarithmen ziehen kann, löst auch das zweite. Ob es \kursiv{genauso} schwer ist, ist offen. Für die meisten Gruppen vermutet man es; bewiesen ist es nur unter Zusatzannahmen. \textbf{Die Sicherheit des Verfahrens beruht auf einer Annahme, die schwächer ist als die naheliegende} --- und das wird oft übersehen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie schwer ist es wirklich}
+
+\begin{merksatz}
+\boxtitel{Drei Angriffsverfahren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Aufwand} & \textbf{Speicher}\\
+\midrule
+Durchprobieren & $p$ & $O(1)$\\
+Riesen- und Zwergenschritte & $\sqrt p$ & $\sqrt p$\\
+Pollards Rho & $\sqrt p$ & $O(1)$\\
+\textbf{Indexrechnung} & \textcolor{akzent}{unter\-exponentiell} & groß\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Riesen- und Zwergenschritte}
+Man schreibt $x = i\,m + j$ mit $m = \lceil\sqrt{p-1}\rceil$ und $0 \le j < m$:
+\[ g^{x} = y \quad\Longleftrightarrow\quad g^{j} = y\cdot(g^{-m})^{i} \]
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Tabelliere $g^{j}$ für $j = 0,\ldots,m-1$ (die Zwergenschritte).\\
+$2$ & Berechne $y\cdot(g^{-m})^{i}$ für $i = 0,1,\ldots$ (die Riesenschritte).\\
+$3$ & Bei einem Treffer ist $x = i\,m+j$.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Beispiel:} $p=23$, $g=5$, $y=8$. Mit $m=5$:
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}@{}}
+\toprule
+$j$ & $0$ & $1$ & $2$ & $3$\\
+$5^j$ & $1$ & $\mathbf{5}$ & $2$ & $10$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\kursiv{Riesenschritt $i=1$:} $8\cdot(5^{-5}) \bmod 23 = 5$ --- Treffer bei $j=1$.
+\[ x = 1\cdot5 + 1 = 6 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Statt $22$ Versuchen genügen $5+2 = 7$. Bei $p \approx 2^{2048}$ wären es $2^{1024}$ --- immer noch aussichtslos. \textbf{Die Wurzel halbiert den Exponenten, und das genügt bei großen Zahlen nicht.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Indexrechnung ändert alles}
+Für Restklassen modulo einer Primzahl gibt es ein Verfahren, dessen Aufwand langsamer wächst als jede Potenz --- aber schneller als jedes Polynom.
+
+\[ L_p\!\left[\tfrac13,\,1{,}923\right] = \exp\left(1{,}923\,(\ln p)^{1/3}(\ln\ln p)^{2/3}\right) \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Größe von $p$} & \textbf{Aufwand} & \\
+\midrule
+$2^{512}$ & $2^{63{,}9}$ & \textcolor{akzent}{gebrochen}\\
+$2^{1024}$ & $2^{86{,}8}$ & \textcolor{mittel}{grenzwertig}\\
+$2^{2048}$ & $2^{116{,}9}$ & sicher\\
+$2^{3072}$ & $2^{138{,}7}$ & sicher\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Schlüssel von $1024$ Bit bietet nur etwa $87$ Bit Sicherheit --- nicht $512$, wie die Wurzelschranke nahelegte.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Grund für die scheinbar übertriebenen Schlüssellängen: Man braucht $3072$ Bit, um die Sicherheit eines $128$-Bit-Blockchiffrenschlüssels zu erreichen. \textbf{Die Zahlen der beiden Welten sind nicht vergleichbar}, und das führt regelmäßig zu Fehleinschätzungen.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum elliptische Kurven kürzer sind}
+Die Indexrechnung beruht auf der Zerlegung in Primfaktoren --- ein Begriff, den es in der Gruppe einer elliptischen Kurve nicht gibt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.2cm}P{2.2cm}P{1.8cm}@{}}
+\toprule
+\textbf{Sicherheit} & \textbf{DH/RSA} & \textbf{elliptisch} & \textbf{Faktor}\\
+\midrule
+$80$ Bit & $1024$ & $160$ & $6{,}4$\\
+$112$ Bit & $2048$ & $224$ & $9{,}1$\\
+$128$ Bit & $3072$ & $256$ & $12{,}0$\\
+$256$ Bit & $15\,360$ & $512$ & $\mathbf{30{,}0}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei elliptischen Kurven ist die Wurzelschranke tatsächlich das Beste, was man kennt --- also $2^{n/2}$ bei $n$ Bit. \textbf{Der Vorteil wächst mit der geforderten Sicherheit}, und bei hohen Anforderungen ist er dreißigfach. Kapitel~14 behandelt diese Gruppen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Der Mann in der Mitte}
+Das Verfahren sichert Vertraulichkeit --- nicht Herkunft.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\node[knoten] (a) at (0,0) {}; \node[knotenr] (m) at (2.8,0) {}; \node[knoten] (b) at (5.6,0) {};
+\draw[kanted, {Stealth[length=4pt]}-{Stealth[length=4pt]}] (a)--(m);
+\draw[kanted, {Stealth[length=4pt]}-{Stealth[length=4pt]}] (m)--(b);
+\node[font=\scriptsize, color=grau, anchor=east] at (-0.15,0) {Alice};
+\node[font=\scriptsize, color=akzent, anchor=north] at (2.8,-0.25) {Mallory};
+\node[font=\scriptsize, color=grau, anchor=west] at (5.75,0) {Bob};
+\node[font=\scriptsize, color=grau] at (1.4,0.45) {$g^{m}$};
+\node[font=\scriptsize, color=grau] at (4.2,0.45) {$g^{m'}$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Der Ablauf}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Mallory fängt $A = g^{a}$ ab und sendet Bob stattdessen $g^{m}$.\\
+$2$ & Ebenso in die Gegenrichtung.\\
+$3$ & Alice teilt nun einen Schlüssel mit Mallory, Bob einen anderen.\\
+$4$ & Mallory entschlüsselt, liest, verschlüsselt neu und leitet weiter.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide glauben, miteinander zu sprechen, und bemerken nichts.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Angriff braucht keinerlei Rechenkraft --- er umgeht die Mathematik vollständig. \textbf{Der Schlüsseltausch löst genau eine Hälfte des Problems}, und die andere Hälfte erfordert, dass Alice weiß, welcher öffentliche Wert zu Bob gehört. Kapitel~14 behandelt Signaturen, Kapitel~15 die Frage, wie man einen öffentlichen Schlüssel überhaupt jemandem zuordnet.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und drei weitere Fallen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kleine Untergruppen} & Ist $p-1$ in kleine Faktoren zerlegbar, so lässt sich das Problem in Teilprobleme zerlegen. Man wählt $p = 2q+1$ mit $q$ prim.\\
+\textbf{Feste Parameter} & Wird dieselbe Primzahl von Millionen Systemen genutzt, so lohnt sich eine einmalige Vorberechnung.\\
+\textbf{Schwache Exponenten} & Ein vorhersehbarer Zufallsgenerator macht $a$ ratbar --- die Mathematik ist dann gleichgültig.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Die Indexrechnung zerfällt in eine teure Vorberechnung, die nur von $p$ abhängt, und eine billige Endphase je Logarithmus.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine 2015 veröffentlichte Untersuchung zeigte, dass eine einzige $1024$-Bit-Primzahl von einem erheblichen Teil aller damaligen Verbindungen verwendet wurde. \textbf{Wer die Vorberechnung einmal leistet, bricht danach jede einzelne Verbindung binnen Minuten.} Der Aufwand lag in der Größenordnung dessen, was ein Staat aufbringen kann --- und die Verfasser hielten es für wahrscheinlich, dass es geschehen war.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.1 --- Ein Schlüsseltausch von Hand}
+Mit $p = 23$ und $g = 5$ wählt Alice $a = 4$ und Bob $b = 3$. Führen Sie den Tausch durch und prüfen Sie das Ergebnis.
+
+\loesung
+\schritt{Schritt 1 --- Alices Wert}
+\[ A = 5^{4} = 625 \]
+\[ 625 = 27\cdot23 + 4 \quad\Longrightarrow\quad A = 4 \]
+
+\schritt{Schritt 2 --- Bobs Wert}
+\[ B = 5^{3} = 125 = 5\cdot23+10 \quad\Longrightarrow\quad B = 10 \]
+
+\schritt{Schritt 3 --- Alice rechnet}
+\[ B^{a} = 10^{4} = 10\,000 \]
+\kursiv{Schrittweise:} $10^2 = 100 = 4\cdot23+8$, also $8$. Dann $8^2 = 64 = 2\cdot23+18$, also $\mathbf{18}$.
+
+\schritt{Schritt 4 --- Bob rechnet}
+\[ A^{b} = 4^{3} = 64 = 2\cdot23+18 \quad\Longrightarrow\quad \mathbf{18} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide erhalten $18$.} \checkmark
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Probe}
+\[ g^{ab} = 5^{12} \bmod 23 \]
+Aus der Tabelle in Abschnitt 12.2: $5^{12} = 18$. \checkmark
+
+\schritt{Schritt 6 --- Was der Mitleser tun müsste}
+Er kennt $5$, $23$, $4$ und $10$. Um $a$ zu finden, probiert er:
+\begin{center}
+\renewcommand{\arraystretch}{1.44}
+\begin{tabular}{@{}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}@{}}
+\toprule
+$k$ & $1$ & $2$ & $3$ & $4$\\
+$5^k$ & $5$ & $2$ & $10$ & $\mathbf{4}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Nach vier Versuchen hat er $a=4$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $p=23$ ist das Verfahren wertlos --- es gibt nur $22$ Möglichkeiten. \textbf{Die Sicherheit entsteht ausschließlich aus der Größe}, und praktisch verwendet man Primzahlen mit $2048$ oder mehr Bit. Das Beispiel zeigt die Rechnung, nicht die Sicherheit.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.2 --- Riesen- und Zwergenschritte}
+Bestimmen Sie mit dem Verfahren aus Abschnitt 12.4 den Logarithmus von $y = 17$ zur Basis $g=5$ modulo $23$.
+
+\loesung
+\schritt{Schritt 1 --- Die Schrittweite}
+\[ m = \left\lceil\sqrt{22}\right\rceil = \lceil 4{,}69\rceil = 5 \]
+
+\schritt{Schritt 2 --- Die Zwergenschritte}
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}@{}}
+\toprule
+$j$ & $0$ & $1$ & $2$ & $3$ & $4$\\
+$5^j$ & $1$ & $5$ & $2$ & $10$ & $4$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 3 --- Der Riesenschritt}
+\[ 5^{5} = 20, \qquad (5^{5})^{-1} = 20^{-1} \bmod 23 \]
+
+\kursiv{Inverses bestimmen:} $20\cdot15 = 300 = 13\cdot23+1$, also $20^{-1} = 15$.
+
+\schritt{Schritt 4 --- Die Suche}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.8cm}P{2.2cm}P{1.6cm}@{}}
+\toprule
+$i$ & \textbf{Wert} & \textbf{Rechnung} & \textbf{Treffer}\\
+\midrule
+$0$ & $17$ & --- & nein\\
+$1$ & $17\cdot15 = 255$ & $255-11\cdot23 = 2$ & \textcolor{gruen}{$j=2$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 5 --- Das Ergebnis}
+\[ x = i\,m + j = 1\cdot5 + 2 = \mathbf{7} \]
+
+\kursiv{Probe:} $5^{7} = 5^{5}\cdot5^{2} = 20\cdot2 = 40 = 23+17$, also $17$. \checkmark
+
+\schritt{Schritt 6 --- Der Aufwand}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Schritte} & \textbf{Speicher}\\
+\midrule
+Durch\-probieren & bis $22$ & keiner\\
+Riesen/Zwerge & $5+2 = 7$ & $5$ Einträge\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $p \approx 2^{2048}$ bräuchte das Verfahren $2^{1024}$ Speicherplätze --- also mehr, als es Atome im Weltall gibt. \textbf{Es ist ein Zeit-Speicher-Tausch, und der Speicher ist die härtere Grenze.} Pollards Rho-Verfahren erreicht denselben Zeitaufwand mit konstantem Speicher und ist deshalb das praktisch verwendete.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.3 --- Schlüssellängen}
+Ein Klinikverbund plant eine Infrastruktur, die dreißig Jahre halten soll. Welche Schlüssellängen sind zu wählen?
+
+\loesung
+\schritt{Schritt 1 --- Das Sicherheitsniveau festlegen}
+Für dreißig Jahre wählt man mindestens $128$ Bit Sicherheit.
+
+\schritt{Schritt 2 --- Die Längen ablesen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Baustein} & \textbf{Länge} & \\
+\midrule
+Blockchiffre & $128$ Bit & Kapitel 10\\
+Hashfunktion & $256$ Bit & Kapitel 11\\
+Diffie-Hellman & $3072$ Bit & \textcolor{akzent}{dieses Kapitel}\\
+Elliptische Kurve & $256$ Bit & Kapitel 14\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Warum die dritte Zeile so absticht}
+Die Indexrechnung senkt die Sicherheit von $3072$ Bit Schlüssellänge auf etwa $139$ Bit Sicherheit.
+
+\[ \frac{3072}{128} = 24 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man braucht vierundzwanzigmal so viele Bit wie bei einer Blockchiffre.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Folgen für die Praxis}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+& \textbf{DH $3072$} & \textbf{elliptisch $256$}\\
+\midrule
+Nachricht & $384$ Byte & $32$ Byte\\
+Rechenzeit & hoch & \textcolor{gruen}{gering}\\
+Batteriebedarf & hoch & \textcolor{gruen}{gering}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für ein Blutzuckermessgerät mit Knopfzelle ist das der entscheidende Unterschied. \textbf{Elliptische Kurven haben sich nicht durchgesetzt, weil sie schöner wären, sondern weil sie in den Speicher passen.}}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Vorbehalt, der alles verändert}
+Alle Zahlen setzen voraus, dass kein Quantenrechner verfügbar ist.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{2.8cm}@{}}
+\toprule
+\textbf{Baustein} & \textbf{klassisch} & \textbf{mit Quantenrechner}\\
+\midrule
+Blockchiffre & $128$ Bit & $64$ Bit\\
+Hashfunktion & $128$ Bit & $\approx 85$ Bit\\
+Diffie-Hellman & $139$ Bit & \textcolor{akzent}{gebrochen}\\
+Elliptische Kurve & $128$ Bit & \textcolor{akzent}{gebrochen}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzten beiden Zeilen sind kategorisch: Shors Verfahren löst das Logarithmusproblem in polynomialer Zeit --- \kursiv{längere} Schlüssel helfen nicht. \textbf{Für eine Infrastruktur mit dreißig Jahren Lebensdauer ist das die wichtigste Zeile der Tabelle}, und Kapitel~15 behandelt, was an ihre Stelle tritt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Zwei Entdeckungen, elf Jahre Abstand}
+\Person{Whitfield Diffie} und \Person{Martin Hellman} veröffentlichten 1976 die Arbeit \kursiv{New Directions in Cryptography}. Sie beginnt mit dem Satz, man stehe an der Schwelle einer Revolution.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Arbeit enthält den Schlüsseltausch, den Begriff der Einwegfunktion und --- als Idee ohne Umsetzung --- das Konzept der digitalen Signatur. \Person{Ralph Merkle} hatte unabhängig ein verwandtes Verfahren entwickelt; Hellman schlug später vor, das Verfahren nach allen dreien zu benennen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die frühere Entdeckung}
+\Person{Malcolm Williamson} vom britischen Nachrichtendienst GCHQ fand dasselbe Verfahren 1974 --- zwei Jahre früher.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Zuvor hatte \Person{James Ellis} dort 1970 die Grundidee formuliert und \Person{Clifford Cocks} 1973 ein Verfahren gefunden, das dem RSA aus Kapitel~13 entspricht. Alle drei Arbeiten blieben geheim und wurden erst 1997 freigegeben. \textbf{Ellis starb einen Monat vor der Freigabe}, ohne öffentliche Anerkennung erlebt zu haben.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum die Geheimhaltung folgenlos blieb}
+Die Briten hielten ihre Entdeckung für eine Kuriosität ohne praktischen Wert --- die nötige Rechenleistung schien unerreichbar.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Diffie und Hellman veröffentlichten, und ihre Arbeit löste ein Jahrzehnt intensiver Forschung aus. \textbf{Dieselbe Entdeckung, geheim gehalten, blieb wirkungslos; veröffentlicht, veränderte sie die Welt.} Es ist eines der klarsten Beispiele dafür, dass wissenschaftlicher Fortschritt an der Verbreitung hängt und nicht am Fund.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Widerstand}
+Die amerikanische NSA versuchte in den 1970er Jahren, die Veröffentlichung kryptographischer Forschung zu unterbinden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Hellman erhielt Hinweise, dass Vorträge über sein Verfahren gegen Ausfuhrbestimmungen für Rüstungsgüter verstoßen könnten. Er ließ die Vorträge von Studenten halten, für die keine Genehmigung nötig war --- da sie keine Ausländer unterrichteten, sondern lernten. Die Auseinandersetzung dauerte bis in die 1990er Jahre.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Schlüsseltausch heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Vorwärts\-geheimhaltung} & Für jede Verbindung neue Exponenten; ein später erbeuteter Langzeitschlüssel entschlüsselt nichts rückwirkend.\\
+\textbf{Hybride Verfahren} & Klassischer und quantensicherer Tausch kombiniert --- sicher, solange einer von beiden hält.\\
+\textbf{Passwortbasiert} & Schlüsseltausch mit einem kurzen gemeinsamen Wort, ohne dass Rateangriffe möglich werden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Verwendet man für jede Sitzung frische Exponenten und löscht sie danach, so nützt ein später kompromittierter Langzeitschlüssel nichts.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist wirksam gegen das Aufzeichnen auf Vorrat --- die Praxis, Verkehr heute zu speichern und später zu entschlüsseln. \textbf{Vorwärtsgeheimhaltung ist seit etwa 2013 der Normalfall} und einer der wenigen Fälle, in denen sich eine Sicherheitsverbesserung rasch flächendeckend durchgesetzt hat.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Man führt beide Verfahren aus und leitet den Sitzungsschlüssel aus beiden Ergebnissen ab.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Begründung ist vorsichtig: Die klassischen Verfahren sind seit fünfzig Jahren geprüft, die quantensicheren erst seit wenigen Jahren. Eine Kombination hält, solange \kursiv{eines} von beiden hält. \textbf{Das ist dieselbe Überlegung wie bei der Kombinationstherapie in Band 18, Kapitel~14} --- und dieselbe Voraussetzung: Die Verfahren müssen unabhängig sein.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Primitivwurzel} & erzeugt alle Reste\\
+\textbf{Quadrieren} & Potenzieren in $2\lb a$ Schritten\\
+\textbf{Der Tausch} & $g^{ab}$ aus $g^{a}$ und $g^{b}$\\
+\textbf{Definition 12.1} & das Logarithmusproblem\\
+\textbf{Indexrechnung} & $3072$ Bit für $128$ Bit Sicherheit\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Im nächsten Kapitel lösen wir ein zweites Problem: nicht einen Schlüssel zu vereinbaren, sondern eine Nachricht an jemanden zu richten, mit dem man nie gesprochen hat.}
+\end{minipage}
+\end{center}
+\end{merksatz}

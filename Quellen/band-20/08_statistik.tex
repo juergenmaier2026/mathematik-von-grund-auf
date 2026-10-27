@@ -1,0 +1,694 @@
+\chapter{Information in der Statistik}
+
+\section{Was die relative Entropie misst}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall}
+Ein neuer Schnelltest soll geprüft werden. Behauptet wird eine Trefferquote von $0{,}6$; der Verdacht ist, dass er nicht besser rät als eine Münze.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+& \textbf{Behauptung} $p$ & \textbf{Verdacht} $q$\\
+\midrule
+Trefferquote & $0{,}60$ & $0{,}50$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\textbf{Die Frage:} Wie viele Prüfungen braucht man, um sich zu entscheiden?
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Band 17 beantwortet sie über Fehlerraten und Testgüte. Dieses Kapitel gibt eine zweite Antwort --- über die Information, die jede einzelne Beobachtung beiträgt. Beide führen auf dieselbe Größenordnung, und die informationstheoretische Rechnung ist kürzer.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 8.1 --- die relative Entropie ist die erwartete Evidenz}
+Gilt tatsächlich $p$, so beträgt die erwartete Log-Likelihood-Differenz je Beobachtung
+\[ \mathbb{E}_p\left[\lb\frac{p(X)}{q(X)}\right] = D(p\,\|\,q) . \]
+
+\schritt{Was das bedeutet}
+Nach $n$ unabhängigen Beobachtungen ist der Logarithmus des Likelihood-Verhältnisses näherungsweise
+\[ \lb\frac{\Pr[\text{Daten}\mid p]}{\Pr[\text{Daten}\mid q]} \ \approx\ n\cdot D(p\,\|\,q) . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Beobachtung trägt im Mittel $D(p\|q)$ Bit an Evidenz bei.} Die Evidenz wächst linear mit dem Stichprobenumfang.
+\end{minipage}
+\end{center}
+
+\schritt{Für den Leitfall}
+\begin{align*}
+D(0{,}6\,\|\,0{,}5) &= 0{,}6\,\lb\frac{0{,}6}{0{,}5} + 0{,}4\,\lb\frac{0{,}4}{0{,}5}\\
+&= 0{,}6\cdot0{,}2630 + 0{,}4\cdot(-0{,}3219)\\
+&= 0{,}1578 - 0{,}1288 = \mathbf{0{,}0290} \ \text{Bit}
+\end{align*}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede einzelne Prüfung liefert nur $0{,}029$ Bit.} Für ein Beweisniveau von $1000{:}1$ --- also $10$ Bit --- braucht man etwa $344$ Prüfungen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Zahl passt zu dem, was Band 17 über Fallzahlen sagt: Für einen Unterschied von zehn Prozentpunkten bei Anteilen um $0{,}5$ liegt der nötige Umfang in der Größenordnung von einigen hundert. \textbf{Die informationstheoretische Rechnung liefert das in drei Zeilen} und ohne Verteilungsannahmen über Teststatistiken.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Abhängigkeit vom Unterschied}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$p$ & $D(p\,\|\,0{,}5)$ & \textbf{$n$ für $10$ Bit}\\
+\midrule
+$0{,}51$ & $0{,}00029$ & $34\,655$\\
+$0{,}55$ & $0{,}00723$ & $1384$\\
+$0{,}60$ & $0{,}02905$ & $344$\\
+$0{,}90$ & $0{,}53100$ & $19$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der nötige Umfang wächst wie das Quadrat des Kehrwerts des Unterschieds.} Halber Unterschied bedeutet vierfacher Umfang.
+\end{minipage}
+\end{center}
+
+\kursiv{Probe:} Von $p=0{,}6$ auf $p=0{,}55$ halbiert sich der Abstand zu $0{,}5$; der Umfang steigt von $344$ auf $1384$ --- Faktor $4{,}02$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist dieselbe Wurzel-$n$-Regel wie in Band 17 --- hier fällt sie als Nebenprodukt ab. Abschnitt 8.3 erklärt, woher sie kommt: $D$ wächst für kleine Unterschiede \kursiv{quadratisch}.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Asymmetrie}
+\[ D(p\,\|\,q) \ \ne\ D(q\,\|\,p) \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Wert} & \\
+\midrule
+$D(0{,}6\,\|\,0{,}5)$ & $0{,}0290$ & \\
+$D(0{,}5\,\|\,0{,}6)$ & $0{,}0294$ & fast gleich\\
+\midrule
+$D(0{,}9\,\|\,0{,}5)$ & $0{,}5310$ & \\
+$D(0{,}5\,\|\,0{,}9)$ & $0{,}7370$ & \textcolor{akzent}{$39\,\%$ mehr}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei kleinen Unterschieden ist die relative Entropie nahezu symmetrisch, bei großen nicht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Asymmetrie hat eine klare Bedeutung: $D(p\|q)$ misst, wie leicht man $q$ \kursiv{widerlegt}, wenn $p$ gilt. Eine seltene Beobachtung unter $q$ --- etwa ein Misserfolg, wenn $q$ ihn mit $0{,}1$ erwartet --- liefert sehr viel Evidenz. \textbf{Die relative Entropie ist kein Abstand}; sie erfüllt weder die Symmetrie noch die Dreiecksungleichung und heißt deshalb Divergenz.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Fisher-Information}
+
+\begin{merksatz}
+\boxtitel{Satz 8.2 --- die lokale Näherung}
+Für kleine $\varepsilon$ gilt
+\[ D(p_{\theta+\varepsilon}\,\|\,p_{\theta}) \ \approx\ \frac{\varepsilon^{2}}{2\ln 2}\;\mathcal{I}(\theta) \]
+mit der \Begriff{Fisher-Information}
+\[ \mathcal{I}(\theta) = \mathbb{E}\left[\left(\frac{\partial}{\partial\theta}\ln f_\theta(X)\right)^{2}\right] . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Fisher-Information ist die Krümmung der relativen Entropie am Minimum.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Probe für die Bernoulli-Verteilung}
+\[ \mathcal{I}(p) = \frac{1}{p(1-p)} \]
+
+Bei $p = 0{,}5$ ist $\mathcal{I} = 4$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.4cm}P{1.6cm}@{}}
+\toprule
+$\varepsilon$ & \textbf{exakt} & \textbf{Näherung} & \textbf{Verh.}\\
+\midrule
+$0{,}10$ & $0{,}029049$ & $0{,}028854$ & $1{,}0068$\\
+$0{,}05$ & $0{,}007226$ & $0{,}007213$ & $1{,}0017$\\
+$0{,}01$ & $0{,}000289$ & $0{,}000289$ & $1{,}0001$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur Näherung bei $\varepsilon=0{,}1$:} $\frac{0{,}01\cdot4}{2\cdot0{,}6931} = \frac{0{,}04}{1{,}3863} = 0{,}028854$. \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Folgerung: Cramér-Rao}
+Für jeden erwartungstreuen Schätzer aus $n$ Beobachtungen gilt
+\[ \operatorname{Var}(\hat\theta) \ \ge\ \frac{1}{n\,\mathcal{I}(\theta)} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+$p$ & $\mathcal{I}(p)$ & \textbf{Schranke}\\
+\midrule
+$0{,}10$ & $11{,}11$ & $0{,}090/n$\\
+$0{,}25$ & $5{,}33$ & $0{,}188/n$\\
+$0{,}50$ & $4{,}00$ & $0{,}250/n$\\
+$0{,}90$ & $11{,}11$ & $0{,}090/n$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Information ist am Rand am größten, in der Mitte am kleinsten.} Ein Anteil nahe $0$ oder $1$ lässt sich genauer schätzen als einer nahe $\frac12$.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Schranke $p(1-p)/n$ ist genau die Varianz des relativen Häufigkeitsschätzers aus Band 17 --- der damit die Schranke mit Gleichheit erreicht und in diesem Sinn optimal ist. \textbf{Die Informationstheorie liefert hier nicht nur eine Grenze, sondern den Nachweis, dass ein vertrautes Verfahren sie erreicht.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Modellwahl als Kompression}
+
+\begin{merksatz}
+\boxtitel{Der Gedanke}
+Nach Satz 3.3 kostet eine Beobachtung mit der Wahrscheinlichkeit $p$ genau $-\lb p$ Bit, wenn man sie optimal codiert.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die negative Log-Likelihood \kursiv{ist} eine Codelänge.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Prinzip der kürzesten Beschreibung}
+Man wählt das Modell, das die Gesamtbeschreibung am kürzesten macht:
+\[ L_{\text{ges}} = \underbrace{L(\text{Modell})}_{\text{Parameter}} \;+\; \underbrace{L(\text{Daten}\mid\text{Modell})}_{-\lb \Pr[\text{Daten}\mid\hat\theta]} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist die Modellwahl ein Kompressionsproblem. \textbf{Ein Modell ist gut, wenn es hilft, die Daten kurz aufzuschreiben} --- und zwar einschließlich seiner eigenen Beschreibung. Das ist die praktisch ausführbare Fassung des Gedankens aus Kapitel~7.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Kosten eines Parameters}
+Ein reellwertiger Parameter, aus $n$ Beobachtungen geschätzt, braucht etwa
+\[ \tfrac12\,\lb n \ \text{Bit} . \]
+
+\kursiv{Grund:} Die Schätzgenauigkeit ist nach Cramér-Rao von der Ordnung $1/\sqrt n$; feiner anzugeben lohnt nicht.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$n$ & $\tfrac12\lb n$ & \\
+\midrule
+$100$ & $3{,}32$ Bit & \\
+$1000$ & $4{,}98$ Bit & \\
+$10^{6}$ & $9{,}97$ Bit & \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein durchgerechnetes Beispiel}
+Ist eine Münze fair? Wir vergleichen zwei Modelle.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{3.4cm}@{}}
+\toprule
+\textbf{Modell} & \textbf{Parameter} & \textbf{Codelänge}\\
+\midrule
+fair & keiner & $n$ Bit\\
+verzerrt & $\hat p = k/n$ & $n\,h(\hat p) + \tfrac12\lb n$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Auswertung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+$n$ & $\hat p$ & \textbf{fair} & \textbf{verzerrt} & \textbf{Wahl}\\
+\midrule
+$100$ & $0{,}55$ & $100{,}00$ & $102{,}60$ & fair\\
+$100$ & $0{,}60$ & $100{,}00$ & $100{,}42$ & \textcolor{mittel}{fair}\\
+$100$ & $0{,}65$ & $100{,}00$ & $96{,}73$ & verzerrt\\
+$1000$ & $0{,}55$ & $1000{,}00$ & $997{,}76$ & verzerrt\\
+$1000$ & $0{,}60$ & $1000{,}00$ & $975{,}93$ & verzerrt\\
+$10^{4}$ & $0{,}52$ & $10\,000$ & $9995{,}10$ & verzerrt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur zweiten Zeile:} $100\cdot h(0{,}6) = 100\cdot0{,}9710 = 97{,}10$; dazu $\frac12\lb100 = 3{,}32$; Summe $100{,}42 > 100$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei $60$ Kopf unter $100$ Würfen wird die Münze für fair gehalten; bei $600$ unter $1000$ nicht.} Dieselbe relative Abweichung, verschiedenes Urteil.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist richtig so und entspricht dem, was Band 17 über Signifikanz sagt --- nur ohne willkürliche Schwelle. \textbf{Die Kosten des zusätzlichen Parameters wachsen mit $\frac12\lb n$, der Gewinn mit $n\cdot D(\hat p\,\|\,0{,}5)$.} Der Gewinn wächst schneller, also entscheidet bei genügend Daten jeder echte Unterschied.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Umschlagbedingung}
+Das verzerrte Modell gewinnt, wenn
+\[ n\bigl(1-h(\hat p)\bigr) \ >\ \tfrac12\,\lb n . \]
+
+Wegen $1-h(\hat p) \approx \frac{2}{\ln 2}(\hat p - 0{,}5)^2 \cdot ...$ --- genauer nach Satz 8.2:
+\[ 1-h(\hat p) \ \approx\ \frac{4\,(\hat p-0{,}5)^2}{2\ln 2} = 2{,}885\,(\hat p-0{,}5)^2 \]
+
+\kursiv{Für $\hat p = 0{,}6$:} $2{,}885\cdot0{,}01 = 0{,}02885$ gegen exakt $1-0{,}9710 = 0{,}0290$. \checkmark
+
+\[ n\cdot2{,}885\,(\hat p-0{,}5)^2 \ >\ \tfrac12\lb n \]
+
+\kursiv{Bei $\hat p = 0{,}6$:} $0{,}02885\,n > 0{,}5\lb n$. Bei $n=100$: $2{,}885$ gegen $3{,}32$ --- knapp nicht. Bei $n=120$: $3{,}46$ gegen $3{,}45$ --- gerade. \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Zusammenhang mit AIC}
+Ein verwandtes Kriterium lautet
+\[ \text{AIC} = -2\ln\hat L + 2k \]
+mit $k$ als Zahl der Parameter.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Strafe je Parameter} & \textbf{Ziel}\\
+\midrule
+AIC & $1/\ln 2 = 1{,}44$ Bit & beste Vorhersage\\
+MDL, BIC & $\tfrac12\lb n$ Bit & richtiges Modell\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{AIC bestraft jeden Parameter mit einem festen Betrag, MDL mit einem wachsenden.} Bei großen Datenmengen wählt AIC daher größere Modelle.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist kein Fehler eines der beiden, sondern ein Unterschied im Ziel. \Person{Akaike} leitete sein Kriterium 1973 aus der erwarteten relativen Entropie zwischen Wahrheit und geschätztem Modell her --- es zielt auf gute Vorhersage. MDL zielt darauf, das \kursiv{zutreffende} Modell zu finden. \textbf{Wer das falsche Kriterium wählt, bekommt eine richtige Antwort auf eine andere Frage.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Vier Vorbehalte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Die Modellmenge} & Alle Kriterien wählen \kursiv{unter den betrachteten} Modellen. Ist keines richtig, so wählen sie das am wenigsten falsche.\\
+\textbf{Die Codierung} & Die Kosten eines Parameters hängen davon ab, wie man ihn codiert. $\frac12\lb n$ ist eine Näherung.\\
+\textbf{Unabhängigkeit} & Satz 8.1 setzt unabhängige Beobachtungen voraus. Bei Abhängigkeit ist die tatsächliche Evidenz kleiner.\\
+\textbf{Asymptotik} & Die Rechtfertigung von AIC und BIC ist asymptotisch. Bei kleinen Stichproben sind beide unzuverlässig.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Werden hundert Messungen an zehn Patienten erhoben, so liegen nicht hundert unabhängige Beobachtungen vor.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Evidenz ist dann erheblich kleiner als $n\cdot D$, und alle Rechnungen dieses Kapitels überschätzen sie. \textbf{Das ist derselbe Fehler, den Band 17 als Pseudoreplikation behandelt} --- hier erscheint er als eine zu großzügig gezählte Bitmenge.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die ernsteste Einschränkung und gilt für jedes Auswahlkriterium. Ein Kriterium, das unter zehn falschen Modellen das beste wählt, sagt nichts darüber, ob eines davon brauchbar ist. \textbf{Modellwahl ersetzt keine Modellprüfung.}}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Relative Entropie und Asymmetrie}
+Berechnen Sie $D(p\|q)$ und $D(q\|p)$ für die Verteilungen
+\[ p = (0{,}5;\ 0{,}3;\ 0{,}2), \qquad q = (0{,}4;\ 0{,}4;\ 0{,}2) . \]
+
+\loesung
+\schritt{Schritt 1 --- $D(p\|q)$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+$p_i$ & $q_i$ & $\lb(p_i/q_i)$ & $p_i\lb(p_i/q_i)$\\
+\midrule
+$0{,}5$ & $0{,}4$ & $0{,}3219$ & $0{,}16096$\\
+$0{,}3$ & $0{,}4$ & $-0{,}4150$ & $-0{,}12451$\\
+$0{,}2$ & $0{,}2$ & $0$ & $0$\\
+\midrule
+& & & $\mathbf{0{,}03645}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- $D(q\|p)$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.8cm}P{2.4cm}@{}}
+\toprule
+$q_i$ & $p_i$ & $\lb(q_i/p_i)$ & $q_i\lb(q_i/p_i)$\\
+\midrule
+$0{,}4$ & $0{,}5$ & $-0{,}3219$ & $-0{,}12877$\\
+$0{,}4$ & $0{,}3$ & $0{,}4150$ & $0{,}16601$\\
+$0{,}2$ & $0{,}2$ & $0$ & $0$\\
+\midrule
+& & & $\mathbf{0{,}03724}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Der Vergleich}
+\[ D(p\|q) = 0{,}0365, \qquad D(q\|p) = 0{,}0372 \]
+
+Beide sind positiv und verschieden --- wie Satz 4.4 und die Asymmetrie verlangen.
+
+\schritt{Schritt 4 --- Der Stichprobenumfang}
+Für $10$ Bit Evidenz:
+\[ n \ \approx\ \frac{10}{0{,}0365} = 274 \]
+
+\schritt{Schritt 5 --- Ein Grenzfall}
+Hätte $q$ eine Null an einer Stelle, an der $p$ positiv ist:
+\[ q = (0{,}5;\ 0{,}5;\ 0), \qquad p = (0{,}5;\ 0{,}3;\ 0{,}2) \]
+\[ D(p\|q) = \cdots + 0{,}2\,\lb\frac{0{,}2}{0} = \infty \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine einzige Beobachtung, die unter $q$ unmöglich ist, widerlegt $q$ vollständig.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Umgekehrt ist $D(q\|p)$ endlich --- man kann $p$ durch keine einzelne Beobachtung ausschließen. \textbf{Die Asymmetrie ist hier vollständig:} unendlich gegen endlich. Das ist der Grund, warum man in der Praxis nie ein Modell verwendet, das einer möglichen Beobachtung die Wahrscheinlichkeit null zuweist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Fallzahl bestimmen}
+Ein Medikament soll die Ansprechrate von $30$ auf $40$ Prozent heben. Wie viele Patienten braucht man je Gruppe für ein Beweisniveau von $100{:}1$?
+
+\loesung
+\schritt{Schritt 1 --- Das Beweisniveau in Bit}
+\[ \lb 100 = 6{,}644 \ \text{Bit} \]
+
+\schritt{Schritt 2 --- Die relative Entropie}
+\begin{align*}
+D(0{,}4\,\|\,0{,}3) &= 0{,}4\,\lb\frac{0{,}4}{0{,}3} + 0{,}6\,\lb\frac{0{,}6}{0{,}7}\\
+&= 0{,}4\cdot0{,}4150 + 0{,}6\cdot(-0{,}2224)\\
+&= 0{,}16601 - 0{,}13343 = \mathbf{0{,}03258} \ \text{Bit}
+\end{align*}
+
+\schritt{Schritt 3 --- Der Umfang}
+\[ n \ \approx\ \frac{6{,}644}{0{,}03258} = 204 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Etwa $204$ Patienten in der Behandlungsgruppe.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Warum das nicht die ganze Antwort ist}
+Die Rechnung unterstellt, dass die Vergleichsgruppe die Rate $0{,}3$ \kursiv{sicher} hat. Tatsächlich wird auch sie geschätzt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei zwei gleich großen Gruppen verdoppelt sich die Varianz der Differenz --- man braucht etwa den doppelten Umfang je Gruppe. Die übliche Fallzahlrechnung aus Band 17 liefert für diesen Fall bei $80$ Prozent Güte und fünf Prozent Niveau rund $370$ je Gruppe. \textbf{Die Größenordnung stimmt; die informationstheoretische Rechnung ist eine untere Abschätzung.}}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Abhängigkeit vom Unterschied}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{von $0{,}30$ auf} & $D$ & $n$ für $6{,}64$ Bit\\
+\midrule
+$0{,}35$ & $0{,}00834$ & $796$\\
+$0{,}40$ & $0{,}03258$ & $204$\\
+$0{,}50$ & $0{,}12577$ & $53$\\
+$0{,}60$ & $0{,}27706$ & $24$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Vervierfachung beim Halbieren des Unterschieds ist wieder sichtbar: $204 \to 796$ ist der Faktor $3{,}9$. \textbf{Wer einen halb so großen Effekt nachweisen will, braucht die vierfache Fallzahl} --- und das ist der eigentliche Grund, warum kleine Effekte so schwer zu belegen sind.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- Modellwahl}
+Ein Würfel wird $120$-mal geworfen. Die Sechs kommt $30$-mal. Ist er gezinkt?
+
+\loesung
+\schritt{Schritt 1 --- Die Modelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{3.4cm}@{}}
+\toprule
+\textbf{Modell} & \textbf{Parameter} & \textbf{Annahme}\\
+\midrule
+$M_0$ & keiner & $p_6 = \tfrac16$\\
+$M_1$ & einer & $p_6$ frei, Rest gleich\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Codelänge unter $M_0$}
+Jeder Wurf ist entweder eine Sechs ($p=\frac16$) oder nicht ($p=\frac56$):
+\[ L_0 = 120\cdot h\!\left(\tfrac16\right) = 120\cdot0{,}6500 = 78{,}00 \ \text{Bit} \]
+
+\kursiv{Zur Entropie:} $h(\frac16) = \frac16\lb6 + \frac56\lb\frac65 = 0{,}4308 + 0{,}2192 = 0{,}6500$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Wir betrachten nur die Frage \enquote{Sechs oder nicht}; die Verteilung auf die übrigen fünf Augenzahlen ist in beiden Modellen gleich und kürzt sich heraus.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Codelänge unter $M_1$}
+\[ \hat p = \frac{30}{120} = 0{,}25 \]
+\[ L_1 = 120\cdot h(0{,}25) + \tfrac12\lb 120 = 120\cdot0{,}8113 + 0{,}5\cdot6{,}907 \]
+\[ = 97{,}36 + 3{,}45 = 100{,}81 \ \text{Bit} \]
+
+\schritt{Schritt 4 --- Der Vergleich}
+\[ L_0 = 78{,}00 \ <\ L_1 = 100{,}81 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$M_0$ gewinnt deutlich --- der Würfel gilt als fair?}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Fehler}
+Hier liegt eine Falle. Die Codelänge unter $M_1$ wurde mit der \kursiv{tatsächlichen} Häufigkeit $0{,}25$ gebildet --- aber $M_0$ mit der \kursiv{angenommenen} Rate $\frac16$, obwohl die Daten $0{,}25$ zeigen.
+
+\kursiv{Richtig ist:} Unter $M_0$ kostet jeder Wurf $-\lb p$ Bit mit dem \kursiv{Modellwert}:
+\[ L_0 = -30\,\lb\tfrac16 - 90\,\lb\tfrac56 = 30\cdot2{,}5850 + 90\cdot0{,}2630 \]
+\[ = 77{,}55 + 23{,}67 = 101{,}22 \ \text{Bit} \]
+
+\schritt{Schritt 6 --- Der richtige Vergleich}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Bit} & \\
+\midrule
+$M_0$ (fair) & $101{,}22$ & \\
+$M_1$ (gezinkt) & $\mathbf{100{,}81}$ & \textcolor{gruen}{kürzer}\\
+\midrule
+Unterschied & $0{,}41$ & knapp\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$M_1$ gewinnt --- aber nur um $0{,}41$ Bit, also mit einem Evidenzverhältnis von $2^{0{,}41} = 1{,}33$ zu eins.} Das ist kein belastbarer Befund.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Die Probe über die relative Entropie}
+Der Gewinn ohne Parameterstrafe:
+\[ 120\cdot D(0{,}25\,\|\,\tfrac16) = 120\cdot0{,}03224 = 3{,}87 \ \text{Bit} \]
+
+Abzüglich der Strafe $3{,}45$ bleiben $0{,}42$ --- bis auf Rundung der Unterschied aus Schritt 6. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Lehre aus Schritt 5 ist allgemein: \textbf{Die Codelänge unter einem Modell wird stets mit dessen eigenen Wahrscheinlichkeiten gebildet}, nicht mit den beobachteten. Nur beim Modell mit freiem Parameter fallen beide zusammen --- und genau dafür bezahlt man die Strafe $\frac12\lb n$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 8 --- Wie viele Würfe man bräuchte}
+Für $10$ Bit Netto-Evidenz:
+\[ n\cdot0{,}03224 - \tfrac12\lb n \ \ge\ 10 \]
+
+\kursiv{Bei $n=400$:} $12{,}90 - 4{,}32 = 8{,}57$ --- noch nicht.\\
+\kursiv{Bei $n=450$:} $14{,}51 - 4{,}41 = 10{,}10$ --- erreicht.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Etwa $450$ Würfe. Die $120$ des Beispiels reichten bei weitem nicht --- obwohl die beobachtete Rate $0{,}25$ die erwartete $0{,}167$ um die Hälfte übersteigt. \textbf{Ein auffälliger Anteil ist noch kein Befund.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von der Entzifferung zur Modellwahl}
+\Person{Solomon Kullback} (1907--1994) und \Person{Richard Leibler} (1914--2003) arbeiteten beide für den amerikanischen Nachrichtendienst.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Kullback hatte während des Zweiten Weltkriegs an der Entzifferung japanischer Chiffren mitgewirkt und wurde später Chefkryptanalytiker der NSA. Die Frage, die zur relativen Entropie führte, war praktisch: Wie viele abgefangene Nachrichten braucht man, um zwischen zwei Hypothesen über ein Chiffriersystem zu entscheiden?}
+\end{minipage}
+\end{center}
+
+\schritt{Die Arbeit von 1951}
+Sie erschien in den \kursiv{Annals of Mathematical Statistics} unter dem Titel \enquote{On Information and Sufficiency}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Titel nennt den zweiten Beitrag: Kullback und Leibler zeigten, dass eine Statistik genau dann \kursiv{erschöpfend} ist --- also die ganze Information über den Parameter enthält --- wenn sie die relative Entropie unverändert lässt. Damit erhielt ein Begriff aus Band 17 eine informationstheoretische Kennzeichnung.}
+\end{minipage}
+\end{center}
+
+\schritt{Fisher, früher}
+\Person{Ronald Fisher} hatte die nach ihm benannte Information bereits 1922 eingeführt --- zwanzig Jahre vor Shannon und ohne jeden Bezug zur Nachrichtentechnik.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dass beide Größen zusammenhängen --- die Fisher-Information ist die Krümmung der relativen Entropie --- wurde erst nachträglich bemerkt. \textbf{Zwei Fächer hatten unabhängig voneinander dieselbe Größe gefunden}, das eine zur Beurteilung von Schätzern, das andere zur Beurteilung von Kanälen.}
+\end{minipage}
+\end{center}
+
+\schritt{Akaike, 1973}
+\Person{Hirotugu Akaike} (1927--2009) leitete sein Kriterium aus der erwarteten relativen Entropie zwischen der wahren Verteilung und dem geschätzten Modell her.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er berichtete, die Idee sei ihm 1971 in einem Zug gekommen. Sein Beitrag bestand darin, den Schätzfehler der Parameter mitzubilanzieren --- und dabei kommt der Zuschlag von einem Parameter je Parameter heraus, unabhängig vom Stichprobenumfang.}
+\end{minipage}
+\end{center}
+
+\schritt{Rissanen, 1978}
+\Person{Jorma Rissanen} formulierte das Prinzip der kürzesten Beschreibung als eigenständigen Zugang zur Statistik --- ohne die Annahme, dass es überhaupt ein \kursiv{wahres} Modell gibt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das ist der philosophisch bemerkenswerteste Punkt: \textbf{MDL fragt nicht, welches Modell wahr ist, sondern welches die Daten am kürzesten beschreibt.} Damit ist der Bogen zu Kapitel~7 geschlossen --- und zu Solomonoffs Zugang von 1960, der dasselbe mit der nicht berechenbaren Größe $K$ tat.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Information und Lernen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.4cm}P{4.8cm}@{}}
+\toprule
+\textbf{Schranken für das Verall\-gemeinern} & Wie viel ein Lernverfahren über seine Trainingsdaten \kursiv{behält}, begrenzt seinen Übertragungsfehler.\\
+\textbf{Variations\-verfahren} & Die relative Entropie als Zielfunktion beim Anpassen von Näherungsverteilungen.\\
+\textbf{Informations\-engpass} & Man sucht eine Darstellung, die möglichst wenig über die Eingabe und möglichst viel über die Zielgröße enthält.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Ist $I(\text{Trainingsdaten};\text{gelerntes Modell})$ klein, so ist die Lücke zwischen Trainings- und Testfehler klein.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist eine bemerkenswerte Umkehrung: Ein Verfahren verallgemeinert gut, wenn es sich möglichst \kursiv{wenig} merkt. Die Schranke hat dieselbe Gestalt wie die Überanpassungsargumente aus Band 17 --- nur in Bit gemessen. \textbf{Auswendiglernen ist informationstheoretisch teuer, und genau das bestraft die Schranke.}}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Man maximiert $I(T;Y) - \beta\,I(T;X)$ über Darstellungen $T$ der Eingabe $X$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Gedanke ist alt --- es ist die Suche nach einer erschöpfenden Statistik --- und in dieser Form seit 1999 formuliert. Die Behauptung, tiefe Netze arbeiteten nach diesem Prinzip, wurde ab 2017 lebhaft diskutiert und ist umstritten; die Messung von Transinformation in hochdimensionalen stetigen Räumen ist selbst ein ungelöstes Problem.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 8.1} & $D$ ist die Evidenz je Beobachtung\\
+\textbf{Satz 8.2} & Fisher ist die Krümmung von $D$\\
+\textbf{Cramér-Rao} & $\operatorname{Var} \ge 1/(n\mathcal{I})$\\
+\textbf{MDL} & Modell plus Daten, in Bit\\
+\textbf{Der Bruchfall} & Modellmenge, Abhängigkeit, Asymptotik\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~III. Bisher wollten wir Information erhalten. Ab Kapitel~9 wollen wir sie verbergen --- und die Entropie wird zum Maß dafür, was ein Mitleser nicht erfährt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

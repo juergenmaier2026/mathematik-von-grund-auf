@@ -1,0 +1,343 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Grundbegriffe}
+
+\begin{merksatz}
+\boxtitel{Spiele und Gleichgewichte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+Spieler, $\Str_i$, $\Aus_i$ & Normalform (1.1)\\
+$\Aus_1+\Aus_2 = 0$ & Nullsummenspiel (1.2)\\
+$\max_r\min_c \le \min_c\max_r$ & Satz 1.3, stets\\
+Zeilenmin $=$ Spaltenmax & Sattelpunkt (1.4)\\
+strikt besser gegen alles & Dominanz (1.6)\\
+$\vek p \ge 0$, $\sum p_i = 1$ & gemischt (2.1)\\
+$\vek p^{\!\top}A\vek q$ & erwartete Auszahlung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Nullsummenspiele}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\max_{\vek p}\min_{\vek q} = \min_{\vek q}\max_{\vek p}$ & Minimax (2.2)\\
+$N = a+d-b-c$ & Nenner\\
+$p = \dfrac{d-c}{N}$, $q = \dfrac{d-b}{N}$ & $2\times2$ (2.3)\\
+$v = \dfrac{ad-bc}{N}$ & Determinante\\
+$\min \vek 1^{\!\top}\vek x$, $A^{\!\top}\vek x \ge \vek 1$ & primal (3.1)\\
+$\max \vek 1^{\!\top}\vek y$, $A\vek y \le \vek 1$ & dual\\
+$\vek x = \vek p/v$, $\vek y = \vek q/v$ & Rückrechnung\\
+benutzt $\Rightarrow$ Ertrag $=v$ & Ausgleich (3.3)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Gleichgewichte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+vier Forderungen & Nutzen (4.1)\\
+bis auf $\alpha\Aus+\beta$, $\alpha>0$ & eindeutig\\
+niemand gewinnt einseitig & Nash (4.3)\\
+$T>R>P>S$ & Dilemma\\
+$T>R>S>P$ & Feigheit\\
+$R>T\ge P>S$ & Hirschjagd\\
+$q^{*} = T/R$ & Vertrauensschwelle\\
+$K$ konvex, kompakt, $f$ stetig & Brouwer (6.1)\\
+$T(\vek\sigma)_{i,k} = \dfrac{\sigma_{i,k}+g_{i,k}}{1+\sum_j g_{i,j}}$ & Nash-Abbildung\\
+$(2^{m}-1)(2^{n}-1)$ & Trägerpaare\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Zeit und Evolution}
+
+\begin{merksatz}
+\boxtitel{Über die Zeit}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+vollständiger Plan & Strategie (7.1)\\
+rückwärts vom Blatt & Rückwärtsinduktion\\
+in jedem Teilspiel Nash & perfekt (7.3)\\
+$\sum_t \delta^{t} u_t$ & Abzinsung\\
+$1/(1-\delta)$ & erwartete Runden\\
+$\delta \ge \dfrac{T-R}{T-P}$ & Grimm (8.2)\\
+$\delta \ge \dfrac{T-R}{R}$ & Tit for Tat\\
+erreichbar $+$ über Minmax & Volkssatz (8.3)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Evolution}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\Aus(\sigma^{*},\sigma^{*}) > \Aus(\sigma,\sigma^{*})$ & ESS, Fall (i)\\
+oder $=$ und $\Aus(\sigma^{*},\sigma)>\Aus(\sigma,\sigma)$ & Fall (ii)\\
+$p^{*} = V/C$ & Falke-Taube\\
+$\dfrac{V(C-V)}{2C}$ & Eignung im GG\\
+$\dot x_i = x_i(f_i-\bar f)$ & Replikator (10.1)\\
+$\dot x = x(1-x)(f_1-f_2)$ & zwei Typen\\
+$H = \sum p_i \ln x_i$ & erhalten bei $A^{\!\top}=-A$\\
+$T_{\text{aus}} \ge \dfrac{r_{\text{an}}}{|r_{\text{aus}}|}T_{\text{an}}$ & adaptive Therapie\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Regeln entwerfen}
+
+\begin{merksatz}
+\boxtitel{Kollektivgüter und Wahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\Aus_i = e-c_i+\dfrac rn\sum_j c_j$ & Kollektivgut\\
+$-1+r/n$ & Grenzertrag\\
+$1<r<n$ & Dilemma\\
+$X_{\text{GG}} = \dfrac{n(a-c)}{b(n+1)}$ & Allmende\\
+$X^{*} = \dfrac{a-c}{2b}$ & Optimum\\
+$2n/(n+1)$ & Übernutzung (11.2)\\
+$\tau = b\,(X-x_i)$ & Pigou-Abgabe\\
+\midrule
+Mehrheiten nicht übertragbar & Condorcet\\
+vier Forderungen, keine Lösung & Arrow (12.1)\\
+keines manipulationsfest & Gibbard (12.2)\\
+Median gewinnt & eingipflig (12.3)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Auktionen, Zuteilung, Verhandlung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+Wahrheit dominant & Zweitpreis (13.1)\\
+$b(v) = \dfrac{n-1}{n}v$ & Erstpreis\\
+$\dfrac{n-1}{n+1}$ & Erlös, alle Formen\\
+höchstes Signal $>$ Wert & Fluch des Siegers\\
+Anfragen, halten, ablehnen & Gale-Shapley\\
+anfragende Seite bestes & Satz 13.4\\
+nie für beide Seiten & Satz 13.5\\
+\midrule
+$\max (u_1-d_1)(u_2-d_2)$ & Nash (14.1)\\
+$x^{*} = \dfrac{1-\delta_2}{1-\delta_1\delta_2}$ & Rubinstein (14.2)\\
+$\sum_{i\in S}x_i \ge v(S)$ & Kern (14.4)\\
+mittlerer Beitrag über $n!$ & Shapley (14.5)\\
+konvex $\Rightarrow$ Shapley im Kern & Satz von 1971\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte des Bandes}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz wo --- und worauf er beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{1.2cm}P{3.6cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Beruht auf}\\
+\midrule
+Maximin $\le$ Minimax & $1$ & Definition von max und min\\
+Sattelpunkt $\iff$ gleich & $1$ & Satz 1.3\\
+\textbf{Minimax-Satz} & $2$ & Brouwer (von Neumann)\\
+$2\times2$ ausrechnen & $2$ & lineare Gleichung\\
+Minimax $=$ Dualität & $3$ & Band 19, Satz 4.3\\
+Ausgleichssatz & $3$ & Mittelwertargument\\
+Nutzenfunktion & $4$ & vier Axiome\\
+\textbf{Existenz} & $6$ & Brouwer $+$ Mittelwert\\
+$\mathsf{PPAD}$-Vollständigkeit & $6$ & Chen, Deng 2006\\
+Zermelo & $7$ & Endlichkeit\\
+Teilspielperfektheit & $7$ & Rückwärtsinduktion\\
+endlich zerstört alles & $8$ & Rückwärtsinduktion\\
+Grimm-Schwelle & $8$ & geometrische Reihe\\
+Volkssatz & $8$ & Konstruktion\\
+ESS $\Rightarrow$ Nash & $9$ & Fallunterscheidung\\
+Replikator & $10$ & Quotientenregel\\
+geschlossene Bahnen & $10$ & Antisymmetrie\\
+Grenzertrag & $11$ & Ableitung\\
+Übernutzung & $11$ & Ableitung\\
+\textbf{Arrow} & $12$ & entscheidende Gruppen\\
+Medianwähler & $12$ & Eingipfligkeit\\
+Vickrey & $13$ & Fallunterscheidung\\
+Erlösgleichheit & $13$ & Ordnungsstatistik\\
+Gale-Shapley & $13$ & Widerspruch\\
+Verhandlungslösung & $14$ & vier Axiome\\
+Rubinstein & $14$ & zwei Gleichungen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was in diesem Band \kursiv{nicht} bewiesen wurde}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{1.2cm}P{3.4cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+Fixpunktsatz von Brouwer & $6$ & Osborne\zit{19}\\
+Satz von Arrow & $12$ & Osborne\zit{19}, Kap.\ 10\\
+Nutzensatz (4.1) & $4$ & von Neumann\zit{18}\\
+Minimax allgemein & $2$ & über Kapitel 3\\
+Dualitätssatz & $3$ & Band 19, Kap.\ 4\\
+Satz von Wilson & $4$ & Myerson\zit{16}\\
+Satz von Shapley (1971) & $14$ & Peters\zit{21}\\
+Gibbard-Satterthwaite & $12$ & Myerson\zit{16}\\
+Erstpreis-Gleichgewicht & $13$ & Krishna\zit{13}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Neun Auslassungen, jede im Text benannt, mit Begründung und Fundstelle --- die einzige zulässige Form, die Regel dieses Werkes zu brechen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von einem Brief über Kartenspiele bis zur Erklärbarkeit}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.34}
+\begin{tabular}{@{}P{1.4cm}P{2.8cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Ereignis}\\
+\midrule
+$1713$ & Waldegrave & erste Minimax-Lösung, brieflich\\
+$1755$ & Rousseau & die Hirschjagd\\
+$1770$ & Borda & Punkteverfahren\\
+$1785$ & Condorcet & das Paradoxon\\
+$1833$ & Lloyd & die offene Weide\\
+$1911$ & Brouwer & Fixpunktsatz\\
+$1912$ & Zermelo & Satz über das Schachspiel\\
+$1921$ & Borel & gemischte Strategien\\
+$1928$ & \textbf{von Neumann} & \textbf{Minimax-Satz}\\
+$1941$ & Kakutani & Fixpunktsatz für Mengen\\
+$1944$ & von Neumann, Morgenstern & das Buch\\
+$1947$ & Dantzig, von Neumann & Dualität erkannt\\
+$1948$ & Black & Medianwähler\\
+$1950$ & Flood, Dresher & das erste Dilemma-Experiment\\
+$1950$ & \textbf{Nash} & \textbf{Gleichgewicht, Verhandlung}\\
+$1950$ & Tucker & der Name\\
+$1951$ & \textbf{Arrow} & \textbf{Unmöglichkeitssatz}\\
+$1953$ & Kuhn & extensive Form\\
+$1953$ & Shapley & der Wert\\
+$1953$ & Allais & das Paradoxon\\
+$1960$ & Schelling & Festlegung und Drohung\\
+$1961$ & Vickrey & Zweitpreisauktion\\
+$1962$ & Gale, Shapley & stabile Zuordnung\\
+$1965$ & Selten & Teilspielperfektheit\\
+$1965$ & Olson & Kollektivgüter\\
+$1967$ & Harsanyi & unvollständiges Wissen\\
+$1968$ & Hardin & Tragik der Allmende\\
+$1971$ & Wilson & ungerade Anzahl\\
+$1973$ & \textbf{Maynard Smith, Price} & \textbf{stabile Strategien}\\
+$1973$ & Gibbard & Manipulierbarkeit\\
+$1974$ & Aumann & korreliertes Gleichgewicht\\
+$1978$ & Taylor, Jonker & Replikatorgleichung\\
+$1980$ & Axelrod & die Turniere\\
+$1982$ & Rubinstein & Verhandlungsmodell\\
+$1982$ & Roth & Zuordnung und Wahrheit\\
+$1990$ & Ostrom & Selbstverwaltung\\
+$1992$ & Nowak, May & räumliche Spiele\\
+$1994$ & --- & Frequenzauktionen\\
+$1996$ & Sinervo, Lively & zyklische Eidechsen\\
+$1999$ & Fehr, Schmidt & Ungleichheitsaversion\\
+$2006$ & Chen, Deng & $\mathsf{PPAD}$-Vollständigkeit\\
+$2009$ & Gatenby & adaptive Therapie\\
+$2017$ & Lundberg, Lee & Shapley zur Erklärbarkeit\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Begriff} & \textbf{Bedeutung}\\
+\midrule
+\endhead
+Allmende & gemeinsam genutzte Ressource (11)\\
+Auszahlung & Nutzen eines Ausgangs (1.1)\\
+Beste Antwort & maximiert gegen gegebene Wahl (4.2)\\
+Borda-Verfahren & Punkte nach Rangplatz (12)\\
+Condorcet-Sieger & schlägt jeden im Paarvergleich (12)\\
+Dominanz & besser gegen jede Wahl (1.6)\\
+Eingipflig & Bestpunkt, nach beiden Seiten fallend (12)\\
+Eignung & Auszahlung als Fortpflanzungserfolg (9)\\
+ESS & evolutionär stabil (9.1)\\
+Extensive Form & Spielbaum (7.1)\\
+Fluch des Gewinners & Sieger hat überschätzt (13)\\
+Gemischte Strategie & Wahrscheinlichkeitsvektor (2.1)\\
+Grimm & unwiderrufliche Vergeltung (8)\\
+Informationsmenge & ununterscheidbare Knoten (7)\\
+Kern & keine Gruppe schert aus (14.4)\\
+Kollektivgut & Beitrag nützt allen (11)\\
+Konfliktpunkt & Ergebnis ohne Einigung (14)\\
+Minmax-Wert & was man sich sichern kann (8)\\
+Nash-Gleichgewicht & niemand gewinnt einseitig (4.3)\\
+Normalform & Matrixdarstellung (1.1)\\
+Nullsummenspiel & Gewinn $=$ Verlust (1.2)\\
+Pareto-optimal & niemand besser ohne Verschlechterung\\
+Replikatorgleichung & Wachstum nach Überdurchschnitt (10.1)\\
+Risikodominanz & sicherer trotz geringerem Ertrag (5)\\
+Rückwärtsinduktion & vom Blatt zur Wurzel (7)\\
+Sattelpunkt & Zeilenmin und Spaltenmax (1.4)\\
+Shapley-Wert & mittlerer Beitrag (14.5)\\
+Stabile Zuordnung & kein blockierendes Paar (13.3)\\
+Teilspielperfekt & Nash in jedem Teilspiel (7.3)\\
+Tit for Tat & spiegelt den letzten Zug (8)\\
+Trägermenge & benutzte Strategien (3)\\
+Volkssatz & fast alles ist Gleichgewicht (8.3)\\
+Wert des Spiels & gemeinsamer Minimax-Wert (2.2)\\
+Zweitpreisauktion & Sieger zahlt das zweite Gebot (13)\\
+\bottomrule
+\end{longtable}}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,206 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Begriffe und Formeln}
+
+\begin{merksatz}
+\boxtitel{Teil I und II}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$Y_i(1),\ Y_i(0)$ & potentielle Ergebnisse (2.1)\\
+$Y_i = Y_i(X_i)$ & Konsistenz\\
+$\tau = \mathbb{E}[Y(1)-Y(0)]$ & Durchschnittseffekt (2.3)\\
+$\tau_{\text{beh}}$ & Effekt bei den Behandelten\\
+$(Y(1),Y(0)) \perp X \mid Z$ & bedingte Unabhängigkeit\\
+$0 < \Pr[X{=}1\mid Z] < 1$ & Positivität\\
+$\sum_z \mathbb{E}[Y\mid x,z]\Pr[z]$ & Anpassungsformel (2.4)\\
+$\Pr[Y\mid\dops(x)]$ & Eingriffsverteilung (1.1)\\
+$n = \frac{(z_{1-\alpha/2}+z_{1-\beta})^{2}[\,\cdot\,]}{(p_0-p_1)^{2}}$ & Fallzahl (3)\\
+$\prod_i \Pr[v_i \mid \text{Eltern}]$ & Faktorisierung (4.2)\\
+Kette, Gabel, Kollider & drei Bausteine (4)\\
+d-Trennung & alle Wege gesperrt (4.3)\\
+kein Nachkomme, Hinterwege zu & Hintertür (6.1)\\
+$\sum_m \Pr[m\mid x]\sum_{x'}\Pr[Y\mid m,x']\Pr[x']$ & Vordertür (6.3)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Teil III bis V}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$e(\vek z) = \Pr[X{=}1\mid\vek z]$ & Behandlungsneigung (7.1)\\
+$\perp X \mid e(Z)$ & Rosenbaum-Rubin (7.2)\\
+$w = 1/e$ bzw.\ $1/(1-e)$ & Gewichte (8.1)\\
+$\mathbb{E}[XY/e(Z)] = \mathbb{E}[Y(1)]$ & (8.2)\\
+$\frac{X(Y-\hat m_1)}{\hat e} + \hat m_1$ & doppelt abgesichert (8.3)\\
+$(\sum w)^{2}/\sum w^{2}$ & wirksame Fallzahl\\
+$\frac{\Delta\mathbb{E}[Y]}{\Delta\mathbb{E}[X]}$ & Wald-Schätzer (9.1)\\
+$F > 10$ & Instrumentstärke\\
+Sprung an der Schwelle & Regressionssprung (10)\\
+$(\bar y_{A,1}-\bar y_{A,0}) - (\bar y_{B,1}-\bar y_{B,0})$ & doppelte Differenz (10)\\
+sieben Zeilen & Zielstudie (11)\\
+$\sum_\ell \Pr[Y\mid a_0,\ell,a_1]\Pr[\ell\mid a_0]$ & g-Formel (12.1)\\
+$\prod_t 1/\Pr[A_t \mid \text{Geschichte}]$ & Gewichte über die Zeit\\
+$c' + ab$ & Mediation, linear (13)\\
+$\tau(\vek z)$ & bedingter Effekt (14)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz worauf beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{3.8cm}P{1.0cm}P{3.4cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{beruht auf}\\
+\midrule
+Beobachtungs\-äquivalenz & $1$ & zwei Modelle, eine Tabelle\\
+kein individueller Effekt & $2$ & Begriffsbildung\\
+Anpassungsformel & $2$ & totale Erwartung\\
+Randomisierung & $3$ & Unabhängigkeit vor der Zuteilung\\
+Faktorisierung & $4$ & Modellaufbau\\
+d-Trennung & $4$ & Wege und Kollider\\
+Hintertür & $6$ & Durchtrennen der Pfeile\\
+Vordertür & $6$ & zwei Stücke, je unverzerrt\\
+Neigung genügt & $7$ & Turmregel\\
+Gewichtung & $8$ & Konsistenz und Kürzen\\
+doppelte Absicherung & $8$ & ein Faktor wird null\\
+Wald-Schätzer & $9$ & Ausschlussbedingung\\
+Befolgereffekt & $9$ & vier Patiententypen\\
+g-Formel & $12$ & Zeitordnung\\
+Mediation & $13$ & zwei Welten zugleich\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Was nicht bewiesen wurde}
+
+\begin{merksatz}
+\boxtitel{Vier Auslassungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{1.2cm}P{3.4cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+d-Trennungssatz & $4$ & Pearl\zit{18}, Kap.\ 1\\
+Hintertürformel & $6$ & Pearl\zit{18}, Kap.\ 3\\
+Vollständigkeit des do-Kalküls & $6$ & Pearl u.\,a.\zit{19}\\
+Satz über natürliche Effekte & $13$ & VanderWeele\zit{26}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle übrigen Sätze des Bandes sind vollständig bewiesen} --- darunter die Anpassungsformel, Satz 3.1 über die Randomisierung, Satz 7.2 über die Behandlungsneigung, Satz 8.2 über die Gewichtung und Satz 8.3 über die doppelte Absicherung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von Hume bis zur Zielstudie}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{1.3cm}P{3.0cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Ereignis}\\
+\midrule
+$1748$ & Hume & Ursache als beständige Verknüpfung\\
+$1843$ & Mill & Methoden der Übereinstimmung\\
+$1854$ & Snow & die Wasserwerke Londons\\
+$1899$ & Pearson & die Umkehr in Teiltabellen\\
+$1918$ & S.\ Wright & Pfadanalyse\\
+$1923$ & Neyman & potentielle Ergebnisse\\
+$1928$ & P.\ Wright & Instrumentvariablen\\
+$1935$ & Fisher & \kursiv{The Design of Experiments}\\
+$1946$ & Berkson & Verzerrung durch Aufnahme\\
+$1948$ & Bradford Hill & Streptomycinstudie\\
+$1951$ & Simpson & das Paradoxon\\
+$1952$ & Horvitz, Thompson & Gewichtung nach Kehrwert\\
+$1959$ & Cornfield & Empfindlichkeits\-argument\\
+$1960$ & Thistlethwaite & Regressionssprung\\
+$1965$ & Bradford Hill & neun Gesichtspunkte\\
+$1974$ & Rubin & potentielle Ergebnisse für Beobachtungen\\
+$1983$ & Rosenbaum, Rubin & Behandlungsneigung\\
+$1986$ & \textbf{Robins} & \textbf{g-Formel}\\
+$1986$ & Holland & \enquote{keine Ursache ohne Manipulation}\\
+$1986$ & Baron, Kenny & Mediation in drei Regressionen\\
+$1993$ & \textbf{Pearl} & \textbf{Hintertürkriterium}\\
+$1994$ & Imbens, Angrist & Befolgereffekt\\
+$1994$ & Robins u.\,a. & doppelte Absicherung\\
+$1995$ & Pearl & Vordertürformel\\
+$2000$ & Pearl & \kursiv{Causality}\\
+$2002$ & WHI & Umkehr des Hormonbefundes\\
+$2006$ & Shpitser, Pearl & Vollständigkeit des do-Kalküls\\
+$2008$ & Hernán u.\,a. & Auflösung des Hormonwiderspruchs\\
+$2016$ & Hernán, Robins & Zielstudie\\
+$2018$ & Athey, Wager & kausale Wälder\\
+$2021$ & Card, Angrist, Imbens & Nobelpreis\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Begriff} & \textbf{Bedeutung}\\
+\midrule
+\endhead
+Behandlungsabsicht & Auswertung nach Zuteilung (3)\\
+Behandlungsneigung & $\Pr[X{=}1\mid Z]$ (7.1)\\
+Befolger & wer der Zuteilung folgt (9)\\
+d-Trennung & alle Wege gesperrt (4.3)\\
+Doppelte Absicherung & eines von zwei Modellen genügt (8.3)\\
+Doppelte Differenz & Trend und Ort heraus (10)\\
+Gabel & gemeinsame Ursache (4)\\
+g-Formel & Verlauf erzeugen, dann mitteln (12.1)\\
+Hinterweg & Pfeil in $X$ hinein (6)\\
+Indikationsverzerrung & Kranke werden anders behandelt (1)\\
+Instrument & Ursache nur von $X$ (9)\\
+Kollider & gemeinsame Folge (4)\\
+Konsistenz & $Y = Y(X)$ (2)\\
+Kontrafaktisch & was gewesen wäre (2.1)\\
+Kreuzwelt & zwei Welten zugleich (13)\\
+Mediator & auf dem Weg $X \to Y$ (5)\\
+Positivität & beide Behandlungen kommen vor (2)\\
+Randstrukturmodell & Modell der potentiellen Ergebnisse (12)\\
+Regressionssprung & Schwelle als Zufall (10)\\
+Störgröße & Ursache von $X$ und $Y$ (5)\\
+Triangulation & verschiedene Annahmen, gleiches Ergebnis (11)\\
+Unsterbliche Zeit & Spanne ohne Sterbemöglichkeit (11)\\
+Vordertür & Effekt über den Mediator (6.3)\\
+Zielstudie & erst die Studie, dann die Daten (11)\\
+\bottomrule
+\end{longtable}}
+\end{center}
+\end{merksatz}

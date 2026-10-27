@@ -1,0 +1,715 @@
+\chapter{Hashfunktionen und Unversehrtheit}
+
+\section{Die fehlende Eigenschaft}
+
+\begin{merksatz}
+\boxtitel{Was Kapitel 9 und 10 offen gelassen haben}
+Beide Bruchfälle nannten dieselbe Lücke:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Kapitel 9} & Der Einmalschlüssel ist perfekt geheim und vollständig formbar.\\
+\textbf{Kapitel 10} & Auch CBC und CTR schützen nicht vor gezielter Veränderung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Geheimhaltung und Unversehrtheit sind verschiedene Eigenschaften.} Keine folgt aus der anderen.
+\end{minipage}
+\end{center}
+
+\schritt{Der Leitfall}
+Ein Arztbrief wird übertragen. Drei Fragen sind zu trennen:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{2.8cm}@{}}
+\toprule
+\textbf{Frage} & \textbf{Eigenschaft} & \textbf{Mittel}\\
+\midrule
+Liest jemand mit? & Geheimhaltung & Kapitel 10\\
+Ist er unverändert? & Unversehrtheit & \textcolor{akzent}{dieses Kapitel}\\
+Ist er echt? & Herkunft & \textcolor{akzent}{dieses Kapitel}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In der Praxis ist die zweite Frage oft die wichtigere. Ein mitgelesener Befund ist ein Datenschutzvorfall; ein verfälschter Befund ist ein Behandlungsfehler. \textbf{Verschlüsselung ohne Beglaubigung löst die falsche Hälfte des Problems.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Drei Anforderungen}
+
+\begin{definition}
+\boxtitelm{Definition 11.1}
+Eine \Begriff{Hashfunktion} bildet Eingaben beliebiger Länge auf Werte fester Länge $n$ ab. Sie heißt \Begriff{kryptographisch}, wenn drei Aufgaben schwer sind:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{3.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Aufgabe} & \textbf{Gegeben --- gesucht} & \textbf{Aufwand}\\
+\midrule
+Urbild & $y$ --- ein $x$ mit $H(x)=y$ & $2^{n}$\\
+Zweites Urbild & $x$ --- ein $x'\ne x$ mit gleichem Wert & $2^{n}$\\
+Kollision & nichts --- irgendein Paar & $\mathbf{2^{n/2}}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum die dritte Aufgabe leichter ist}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei den ersten beiden ist ein Ziel vorgegeben; bei der dritten darf der Angreifer sich beides aussuchen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Freiheit ist erheblich mehr wert, als man vermutet --- sie halbiert den Exponenten. Der Grund ist das Geburtstagsproblem, und dessen Rechnung ist der Kern dieses Abschnitts.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 11.2 --- die Geburtstagsschranke}
+Zieht man $k$ Werte gleichverteilt aus $N$ Möglichkeiten, so gilt
+\[ \Pr[\text{keine Kollision}] = \prod_{i=0}^{k-1}\left(1-\frac{i}{N}\right) \ \approx\ e^{-k^{2}/(2N)} . \]
+Die Wahrscheinlichkeit einer Kollision erreicht $\frac12$ bei
+\[ k \ \approx\ 1{,}177\,\sqrt{N} . \]
+
+\schritt{Beweis der Näherung}
+Für kleine $x$ gilt $1-x \approx e^{-x}$, also
+\[ \prod_{i=0}^{k-1}\left(1-\frac iN\right) \ \approx\ \exp\left(-\sum_{i=0}^{k-1}\frac iN\right) = \exp\left(-\frac{k(k-1)}{2N}\right) \ \approx\ e^{-k^{2}/(2N)} . \]
+
+\schritt{Auflösen}
+\[ e^{-k^{2}/(2N)} = \tfrac12 \quad\Longrightarrow\quad \frac{k^{2}}{2N} = \ln 2 \quad\Longrightarrow\quad k = \sqrt{2\ln 2}\cdot\sqrt N = 1{,}177\sqrt N \]
+$\blacksquare$
+
+\schritt{Die Probe am klassischen Beispiel}
+$N = 365$ Tage:
+\[ 1{,}177\cdot\sqrt{365} = 1{,}177\cdot19{,}105 = 22{,}5 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$k$ & \textbf{exakt} & \\
+\midrule
+$10$ & $0{,}1169$ & \\
+$20$ & $0{,}4114$ & \\
+$22$ & $0{,}4757$ & \\
+$\mathbf{23}$ & $\mathbf{0{,}5073}$ & \textcolor{akzent}{Umschlag}\\
+$50$ & $0{,}9704$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dreiundzwanzig Personen genügen für eine Chance über fünfzig Prozent.} Die Näherung sagt $22{,}5$.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Folgerung für Hashfunktionen}
+Mit $N = 2^{n}$:
+\[ k \ \approx\ 1{,}177\cdot2^{n/2} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{1.4cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Funktion} & $n$ & \textbf{Urbild} & \textbf{Kollision}\\
+\midrule
+MD5 & $128$ & $3{,}4\cdot10^{38}$ & $1{,}8\cdot10^{19}$\\
+SHA-1 & $160$ & $1{,}5\cdot10^{48}$ & $1{,}2\cdot10^{24}$\\
+SHA-256 & $256$ & $1{,}2\cdot10^{77}$ & $3{,}4\cdot10^{38}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer Kollisionsresistenz von $128$ Bit will, braucht einen Hashwert von $256$ Bit.} Das ist der Grund für die heute üblichen Längen.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was tatsächlich geschah}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.0cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+& \textbf{erwartet} & \textbf{tatsächlich} & \textbf{Jahr}\\
+\midrule
+MD5 & $2^{64}$ & $\approx 2^{18}$ & $2004$\\
+SHA-1 & $2^{80}$ & $\approx 2^{63}$ & $2017$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei MD5 ist eine Kollision heute in Sekunden zu berechnen.} Nicht die Geburtstagsschranke wurde erreicht --- die Funktion selbst hat Struktur.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Unterschied zwischen $2^{64}$ und $2^{18}$ beträgt vierzehn Größenordnungen. \textbf{Die Geburtstagsschranke ist eine obere Grenze für die Sicherheit, keine untere} --- sie sagt, dass es nicht \kursiv{besser} geht als $2^{n/2}$, nicht dass es so gut ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Die praktische Folge}
+Mit einer MD5-Kollision lassen sich zwei Dokumente bauen, die denselben Hashwert haben --- etwa ein harmloses und ein schädliches Programm, oder zwei Zertifikate mit verschiedenen Inhaltsangaben.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{2008 wurde auf diesem Weg ein gefälschtes Zertifikat für eine Zertifizierungsstelle erzeugt. 2012 nutzte die Schadsoftware Flame eine bis dahin unbekannte MD5-Kollision, um sich als legitimes Aktualisierungspaket auszugeben. \textbf{Zwischen dem ersten Nachweis der Schwäche und dem tatsächlichen Angriff lagen acht Jahre} --- und in dieser Zeit war MD5 weiterhin verbreitet im Einsatz.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Beglaubigung}
+
+\begin{merksatz}
+\boxtitel{Ein Hashwert allein genügt nicht}
+Wird eine Nachricht zusammen mit ihrem Hashwert übertragen, so kann ein Angreifer beides ersetzen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man braucht eine Größe, die nur berechnen kann, wer den Schlüssel kennt.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Beglaubigungscode}
+\[ t = \mathrm{MAC}_K(M) \]
+Der Empfänger rechnet nach und vergleicht.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Leistet} & Unversehrtheit und Herkunft --- die Nachricht stammt von jemandem mit dem Schlüssel.\\
+\textbf{Leistet nicht} & Nichtabstreitbarkeit. Beide Seiten kennen den Schlüssel, also könnte jede die Nachricht erzeugt haben.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist wesentlich: Ein Beglaubigungscode taugt nicht als Beweis vor Dritten. Für einen Arztbrief, der später als Beleg dienen soll, braucht man eine Signatur --- und dafür braucht man zwei verschiedene Schlüssel. Das ist Teil~V.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die naheliegende Konstruktion ist falsch}
+Der Versuch $t = H(K \Vert M)$ scheitert bei allen Hashfunktionen, die blockweise fortschreiten.
+
+\schritt{Die Längenerweiterung}
+Solche Funktionen verarbeiten die Nachricht Block für Block und führen dabei einen Zwischenzustand mit. Der ausgegebene Hashwert \kursiv{ist} dieser Zustand.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer $H(K\Vert M)$ kennt, kann daraus $H(K \Vert M \Vert \text{Auffüllung} \Vert M')$ berechnen --- ohne $K$ zu kennen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man setzt den Zustand auf den bekannten Hashwert und rechnet weiter. Der Angreifer kann also an eine beglaubigte Nachricht etwas anhängen und den passenden Beglaubigungscode mitliefern. \textbf{Das ist kein Angriff auf die Hashfunktion, sondern auf ihre Verwendung} --- die Funktion tut genau das, wofür sie gebaut wurde.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Abhilfe}
+\[ \mathrm{HMAC}_K(M) = H\bigl((K\oplus \text{opad}) \,\Vert\, H((K\oplus \text{ipad})\,\Vert\, M)\bigr) \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweifache Anwendung mit zwei verschiedenen Schlüsselableitungen beseitigt das Problem: Der äußere Aufruf verdeckt den inneren Zustand. Die Konstruktion ist beweisbar sicher, sofern die zugrundeliegende Kompressionsfunktion es ist --- einer der wenigen Fälle in diesem Band, in dem ein Sicherheitsbeweis vorliegt, wenn auch relativ zu einer Annahme.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die neuere Bauweise}
+Hashfunktionen nach dem Schwammprinzip geben nur einen Teil ihres Zustands aus.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei ihnen tritt die Längenerweiterung nicht auf, und $H(K\Vert M)$ ist eine zulässige Konstruktion. \textbf{Eine Bauweise kann einen ganzen Fehlertyp unmöglich machen} --- das ist wirksamer, als vor ihm zu warnen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Zwei Anwendungen}
+
+\begin{merksatz}
+\boxtitel{Passwörter}
+Man speichert nicht das Passwort, sondern seinen Hashwert.
+
+\schritt{Warum das allein nicht genügt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Zu schnell} & Eine gute Hashfunktion ist schnell --- und damit auch das Durchprobieren.\\
+\textbf{Gleiche Werte} & Zwei Benutzer mit gleichem Passwort haben denselben Eintrag.\\
+\textbf{Vorberechnung} & Man kann Tabellen häufiger Passwörter im Voraus anlegen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Zahlen}
+Acht Zeichen aus $94$ möglichen ergeben
+\[ 94^{8} = 6{,}1\cdot10^{15} = 2^{52{,}4} \ \text{Möglichkeiten} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Rate} & \textbf{Dauer} & \\
+\midrule
+$10^{10}$ je Sekunde & $7$ Tage & schnelle Funktion\\
+$10^{4}$ je Sekunde & $\mathbf{19\,000}$ \textbf{Jahre} & absichtlich langsam\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine absichtlich verlangsamte Funktion verwandelt sieben Tage in neunzehntausend Jahre.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Salz}
+Man hängt jedem Passwort einen zufälligen Wert an und speichert ihn im Klartext mit.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit haben gleiche Passwörter verschiedene Einträge, und vorberechnete Tabellen sind wertlos --- man müsste für jeden Salzwert eine eigene anlegen. Bei $128$ Bit Salz sind das $3{,}4\cdot10^{38}$ Tabellen. \textbf{Das Salz muss nicht geheim sein; es muss nur verschieden sein.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Hashbäume}
+Um die Unversehrtheit einer großen Datenmenge nachzuweisen, ordnet man die Hashwerte baumförmig an.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\node[knotenr] (w) at (0,2.1) {};
+\node[knoten] (a) at (-1.7,1.1) {}; \node[knoten] (b) at (1.7,1.1) {};
+\node[knoten] (a1) at (-2.6,0.1) {}; \node[knoten] (a2) at (-0.8,0.1) {};
+\node[knoten] (b1) at (0.8,0.1) {}; \node[knoten] (b2) at (2.6,0.1) {};
+\draw[kanted] (w)--(a); \draw[kanted] (w)--(b);
+\draw[kanted] (a)--(a1); \draw[kanted] (a)--(a2);
+\draw[kanted] (b)--(b1); \draw[kanted] (b)--(b2);
+\foreach \x in {-2.6,-0.8,0.8,2.6}
+  \draw[tief!50, line width=0.8pt, fill=tief!10] (\x-0.3,-0.75) rectangle ++(0.6,0.35);
+\foreach \x in {-2.6,-0.8,0.8,2.6}
+  \draw[kanted] (\x,0.0) -- (\x,-0.38);
+\node[font=\scriptsize, color=akzent, anchor=west] at (0.2,2.1) {Wurzel};
+\node[font=\scriptsize\itshape, color=grau] at (0,-1.2) {Datenblöcke};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Was das leistet}
+Um zu belegen, dass ein bestimmter Block zum Ganzen gehört, genügen die Hashwerte entlang des Weges zur Wurzel.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Blöcke} & \textbf{Nachweis} & \\
+\midrule
+$1000$ & $10$ Hashwerte & \\
+$10^{6}$ & $20$ Hashwerte & \\
+$10^{9}$ & $30$ Hashwerte & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei einer Milliarde Blöcken genügen dreißig Hashwerte --- knapp ein Kilobyte. \textbf{Die Nachweislänge wächst logarithmisch}, und darauf beruhen Versionsverwaltungen, verteilte Dateisysteme und die Blockketten der Kryptowährungen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was Hashfunktionen nicht leisten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Keine Geheimhaltung} & Bei kleinem Wertebereich lässt sich das Urbild durch Ausprobieren finden. Ein Hashwert einer Patientennummer schützt sie nicht.\\
+\textbf{Keine Beweise} & Kein praktisch verwendetes Verfahren hat einen Sicherheitsbeweis. Man vertraut auf gescheiterte Angriffsversuche.\\
+\textbf{Vergleich in gleicher Zeit} & Ein Vergleich, der beim ersten Unterschied abbricht, verrät über die Laufzeit, wie viele Stellen stimmten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Eine Patientennummer aus acht Ziffern hat $10^{8}$ mögliche Werte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das sind in Sekundenbruchteilen durchprobiert.} Der Hashwert ist dann kein Schutz, sondern eine umkehrbare Abbildung.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieser Fehler ist verbreitet: Man hält für anonymisiert, was nur gehasht ist. \textbf{Eine Hashfunktion verbirgt nur, was genug Entropie hat} --- und die Entropie einer Patientennummer beträgt knapp $27$ Bit. Wer anonymisieren will, braucht einen geheimen Schlüssel im Spiel, also einen Beglaubigungscode statt einer Hashfunktion.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Vergleicht man den erwarteten mit dem empfangenen Beglaubigungscode Byte für Byte und bricht beim ersten Unterschied ab, so dauert der Vergleich umso länger, je mehr Anfangsbytes stimmen. Ein Angreifer kann den Code dadurch Byte für Byte erraten --- statt $2^{128}$ Versuchen braucht er $16\cdot256$. \textbf{Ein korrektes Verfahren, falsch verglichen, ist kein Verfahren.}}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- Die Geburtstagsschranke anwenden}
+Ein System vergibt zufällige Kennungen von $64$ Bit.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+(a) & Nach wie vielen Kennungen ist eine Doppelvergabe wahrscheinlicher als nicht?\\
+(b) & Wie groß ist die Wahrscheinlichkeit bei einer Milliarde Kennungen?\\
+(c) & Wie lang müssten die Kennungen sein, damit bei $10^{12}$ Vergaben die Wahrscheinlichkeit unter $10^{-9}$ bleibt?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a)}
+\[ k \approx 1{,}177\cdot2^{32} = 1{,}177\cdot4{,}29\cdot10^{9} = 5{,}06\cdot10^{9} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Rund fünf Milliarden.}
+\end{minipage}
+\end{center}
+
+\schritt{(b)}
+\[ \Pr \approx 1-e^{-k^{2}/(2N)} = 1-\exp\left(-\frac{(10^{9})^{2}}{2\cdot1{,}845\cdot10^{19}}\right) \]
+\[ = 1-\exp(-0{,}0271) = 0{,}0267 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Etwa $2{,}7$ Prozent} --- bei einer Milliarde Kennungen aus $64$ Bit.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Das ist mehr, als die meisten erwarten. Eine Milliarde ist gegenüber $1{,}8\cdot10^{19}$ verschwindend --- und doch liegt die Kollisionswahrscheinlichkeit im Prozentbereich. Die Quadrierung im Exponenten ist der Grund.}
+\end{minipage}
+\end{center}
+
+\schritt{(c)}
+Für kleine Wahrscheinlichkeiten gilt
+\[ \Pr \approx \frac{k^{2}}{2N} \quad\Longrightarrow\quad N \ \ge\ \frac{k^{2}}{2\Pr} \]
+
+\[ N \ \ge\ \frac{(10^{12})^{2}}{2\cdot10^{-9}} = \frac{10^{24}}{2\cdot10^{-9}} = 5\cdot10^{32} \]
+
+\[ n \ \ge\ \lb(5\cdot10^{32}) = 108{,}6 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mindestens $109$ Bit --- in der Praxis wählt man $128$.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Merkregel}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für eine Kollisionswahrscheinlichkeit unter $2^{-t}$ bei $2^{m}$ Vergaben braucht man etwa $2m+t$ Bit. Hier: $2\cdot40 + 30 = 110$. \checkmark \textbf{Die Faustregel \enquote{doppelt so viele Bit wie Vergaben, plus Sicherheitsabstand} deckt alle Fälle ab.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- Die Längenerweiterung}
+Ein System beglaubigt Befehle mit $t = H(K\Vert M)$. Der Angreifer kennt
+\[ M = \texttt{"loesche=nein"}, \qquad t = H(K\Vert M) . \]
+Was kann er erreichen, ohne $K$ zu kennen?
+
+\loesung
+\schritt{Schritt 1 --- Was der Angreifer weiß}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{bekannt?} & \\
+\midrule
+$M$ & ja & abgehört\\
+$t$ & ja & abgehört\\
+$K$ & \textcolor{gruen}{nein} & \\
+$|K|$ & meist ja & Systemangabe\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Der Angriff}
+Die Hashfunktion verarbeitet Blöcke und führt einen Zustand mit; $t$ ist der Endzustand.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Setze den internen Zustand auf $t$.\\
+$2$ & Verarbeite den Anhang $M' = \texttt{"\&loesche=ja"}$.\\
+$3$ & Gib den neuen Zustand als $t'$ aus.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\schritt{Schritt 3 --- Das Ergebnis}
+\[ t' = H\bigl(K \Vert M \Vert \text{Auffüllung} \Vert M'\bigr) \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Angreifer hat einen gültigen Beglaubigungscode für eine Nachricht erzeugt, die er sich ausgesucht hat.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Was der Empfänger sieht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Nachricht} & \texttt{loesche=nein}, Füllbytes, \texttt{\&loesche=ja}\\
+\textbf{Code} & gültig\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ob die Füllbytes stören, hängt vom Empfänger ab. Viele Auswerteverfahren überlesen unbekannte Zeichen oder werten bei doppelten Angaben die \kursiv{letzte} aus --- und dann steht dort \texttt{ja}. \textbf{Die Schwäche der Hashfunktion und die Nachlässigkeit des Auswerters wirken zusammen}, und beide für sich wären harmloser.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Drei Abhilfen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{HMAC} & Zweifache Anwendung; der äußere Aufruf verdeckt den inneren Zustand.\\
+\textbf{Schwamm-Funktion} & Gibt nur einen Teil des Zustands aus; die Fortsetzung ist unmöglich.\\
+\textbf{Schlüssel hinten} & $H(M\Vert K)$ vermeidet die Längenerweiterung --- ist aber gegen Kollisionen in $H$ anfällig.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile zeigt, warum man solche Konstruktionen nicht selbst entwerfen sollte: Jede naheliegende Variante hat eine eigene Schwäche. \textbf{HMAC ist nicht deshalb Standard, weil es elegant wäre, sondern weil es bewiesen ist} --- und weil die Alternativen einzeln geprüft und verworfen wurden.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Passwörter}
+Eine Klinik speichert $5000$ Passwortwerte. Vergleichen Sie drei Verfahren gegen einen Angreifer, der die Datei erbeutet hat und $10^{10}$ Hashwerte je Sekunde berechnen kann.
+
+\loesung
+\schritt{Schritt 1 --- Die Annahmen}
+Passwörter aus acht Zeichen von $94$ möglichen:
+\[ 94^{8} = 6{,}1\cdot10^{15} \]
+
+\schritt{Schritt 2 --- Schnelle Hashfunktion ohne Salz}
+Der Angreifer berechnet einmal alle Hashwerte und vergleicht mit \kursiv{allen} $5000$ Einträgen zugleich.
+\[ \frac{6{,}1\cdot10^{15}}{10^{10}} = 6{,}1\cdot10^{5} \ \text{Sekunden} = 7{,}1 \ \text{Tage} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Sieben Tage für \kursiv{alle} fünftausend Passwörter.} Der Aufwand hängt nicht von ihrer Zahl ab.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Schnelle Hashfunktion mit Salz}
+Jeder Eintrag hat ein eigenes Salz; der Angreifer muss jedes Passwort einzeln angreifen.
+\[ 5000 \cdot 7{,}1 \ \text{Tage} = 35\,500 \ \text{Tage} = 97 \ \text{Jahre} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Salz verwandelt einen Angriff auf alle in fünftausend Einzelangriffe.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Auf \kursiv{ein} bestimmtes Passwort dauert es weiterhin sieben Tage. Das Salz schützt also die Menge, nicht den Einzelnen --- und genau deshalb braucht es zusätzlich die dritte Maßnahme.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Langsame Funktion mit Salz}
+Bei $10^{4}$ Berechnungen je Sekunde:
+\[ \frac{6{,}1\cdot10^{15}}{10^{4}} = 6{,}1\cdot10^{11} \ \text{Sekunden} = 19\,400 \ \text{Jahre} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Neunzehntausend Jahre für ein einziges Passwort.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{alle $5000$} & \textbf{ein einzelnes}\\
+\midrule
+schnell, ohne Salz & $7$ Tage & $7$ Tage\\
+schnell, mit Salz & $97$ Jahre & $7$ Tage\\
+langsam, mit Salz & --- & $\mathbf{19\,400}$ \textbf{Jahre}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 6 --- Der entscheidende Vorbehalt}
+Die Rechnung unterstellt, dass die Passwörter gleichverteilt aus $94^{8}$ gewählt sind.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Tatsächlich haben von Menschen gewählte Passwörter eine Entropie von etwa $20$ bis $30$ Bit --- nicht $52$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $25$ Bit sind es $3{,}4\cdot10^{7}$ Möglichkeiten; selbst bei $10^{4}$ Versuchen je Sekunde ist das in einer Stunde durchprobiert. \textbf{Die Entropie des Passworts ist die eigentliche Schranke} --- alle Maßnahmen dieses Abschnitts vergrößern nur den Aufwand je Versuch, nicht die Zahl der Möglichkeiten. Das ist genau die Aussage von Satz 9.3 in anderer Gestalt: Ohne genug Entropie hilft kein Verfahren.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Zwei Funktionen, zwei Jahrzehnte}
+\Person{Ronald Rivest} entwarf 1991 die Funktion MD5 als Nachfolgerin von MD4, gegen die bereits Angriffe bekannt waren.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{MD5 wurde binnen weniger Jahre allgegenwärtig --- in Zertifikaten, Signaturen, Dateiprüfsummen, Passwortspeichern. 1996 fand \Person{Hans Dobbertin} eine Kollision der inneren Kompressionsfunktion und riet öffentlich von weiterer Verwendung ab. Es geschah wenig.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Bruch}
+2004 stellte \Person{Wang Xiaoyun} auf einer Konferenz vollständige Kollisionen vor --- berechnet in etwa einer Stunde.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Arbeit kam überraschend und traf zugleich MD4, MD5, RIPEMD und HAVAL. Wangs Verfahren beruhte auf einer sorgfältigen Analyse der Differenzenfortpflanzung, die im Westen so nicht verfolgt worden war. \textbf{Heute dauert eine MD5-Kollision Sekundenbruchteile}, und die Funktion gilt seit zwanzig Jahren als gebrochen --- wird aber weiterhin in Altsystemen angetroffen.}
+\end{minipage}
+\end{center}
+
+\schritt{SHA-1}
+1995 als Norm verabschiedet, mit $160$ Bit. Ab 2005 zeigten Wang und andere theoretische Angriffe unter $2^{80}$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{2017 gelang einer Arbeitsgruppe bei Google die erste vollständige Kollision --- zwei PDF-Dateien mit gleichem Hashwert und verschiedenem Inhalt. Der Aufwand betrug etwa $2^{63}$ Rechenschritte, umgerechnet einige zehntausend Jahre auf einem einzelnen Rechenkern. \textbf{Zwischen der ersten Warnung und dem praktischen Nachweis lagen zwölf Jahre} --- und dazwischen die zähe Umstellung ganzer Infrastrukturen.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Wettbewerb}
+2007 schrieb das amerikanische Normungsinstitut einen offenen Wettbewerb aus --- nach dem Vorbild aus Kapitel~10.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{2012 gewann Keccak von \Person{Guido Bertoni}, \Person{Joan Daemen} --- demselben wie bei Rijndael ---, \Person{Michaël Peeters} und \Person{Gilles Van Assche}. Die Schwammbauweise unterscheidet sich grundlegend von der bisherigen und macht die Längenerweiterung strukturell unmöglich. \textbf{Der Wettbewerb wurde begonnen, bevor SHA-2 gebrochen war} --- und das ist die eigentliche Lehre: Man baut den Nachfolger, solange noch Zeit ist.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Hashfunktionen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Stand} & SHA-2 und SHA-3 gelten als sicher; die besten Angriffe erreichen nur stark verkürzte Rundenzahlen.\\
+\textbf{Passwort\-funktionen} & Verfahren, die absichtlich viel Speicher brauchen --- gegen Spezialhardware.\\
+\textbf{Nachweisbarkeit} & Hashbäume als Grundlage für Belege, die sich nicht nachträglich ändern lassen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+Spezialhardware kann Hashwerte millionenfach schneller berechnen als Standardrechner --- aber Speicher lässt sich nicht ebenso vervielfachen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Deshalb sind moderne Passwortfunktionen so gebaut, dass sie einige hundert Megabyte Arbeitsspeicher benötigen. Das verteuert Spezialhardware erheblich und gleicht den Vorteil des Angreifers aus. \textbf{Man verlagert den Wettbewerb von einer Größe, bei der der Angreifer im Vorteil ist, auf eine, bei der er es nicht ist} --- eine Denkweise, die auch außerhalb der Kryptographie nützlich wäre.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Quantenfrage}
+Grovers Verfahren halbiert den Exponenten bei der Urbildsuche: aus $2^{n}$ wird $2^{n/2}$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für Kollisionen ist der Gewinn geringer und nach heutigem Stand praktisch bedeutungslos. \textbf{Hashfunktionen sind die am wenigsten bedrohte Bausteinfamilie}: Eine Verdopplung der Ausgabelänge genügt als Vorsorge. Für die Verfahren aus Teil~V sieht das völlig anders aus --- Kapitel~15.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Definition 11.1} & drei Anforderungen, zwei Aufwände\\
+\textbf{Satz 11.2} & $k \approx 1{,}177\sqrt N$\\
+\textbf{Längen\-erweiterung} & warum $H(K\Vert M)$ falsch ist\\
+\textbf{Salz und Langsamkeit} & sieben Tage gegen $19\,000$ Jahre\\
+\textbf{Hashbäume} & Nachweis in $\lb n$ Werten\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~IV. Alle bisherigen Verfahren setzen einen gemeinsamen Schlüssel voraus. Ab Kapitel~12 fragen wir, wie zwei Fremde einen solchen vereinbaren können --- über eine abgehörte Leitung.}
+\end{minipage}
+\end{center}
+\end{merksatz}

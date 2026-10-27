@@ -1,0 +1,354 @@
+\part{Wenn Anpassen nicht reicht}
+
+\chapter{Instrumente}
+
+\section{Der Gedanke}
+
+\begin{merksatz}
+\boxtitel{Eine Größe, die nur die Behandlung berührt}
+Angenommen, die Erfahrung des diensthabenden Arztes bleibt unbeobachtet. Dann ist nach Kapitel~6 kein Effekt bestimmbar --- es sei denn, es gibt eine Größe $Z$ mit drei Eigenschaften.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Relevanz} & $Z$ beeinflusst $X$. \textcolor{gruen}{Prüfbar.}\\
+\textbf{Unabhängigkeit} & $Z$ ist so gut wie ausgelost --- keine gemeinsame Ursache mit $Y$.\\
+\textbf{Ausschluss} & $Z$ wirkt auf $Y$ \kursiv{nur} über $X$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+\node[knotenr] (z) at (-3.0,0) {$Z$};
+\node[knotenb] (x) at (-1.0,0) {$X$};
+\node[knotenb] (y) at (1.4,0) {$Y$};
+\node[grau] (u) at (0.2,1.4) {$U$};
+\draw[kanted, -{Stealth[length=4.5pt]}] (z)--(x);
+\draw[kanted, -{Stealth[length=4.5pt]}] (x)--(y);
+\draw[grau!60, line width=0.8pt, dashed, -{Stealth[length=4pt]}] (u)--(x);
+\draw[grau!60, line width=0.8pt, dashed, -{Stealth[length=4pt]}] (u)--(y);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Wirkung von $Z$ auf $Y$ kann nur über $X$ laufen. Kennt man beide Stücke, so kennt man auch das mittlere.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 9.1 --- der Wald-Schätzer}
+Unter den drei Bedingungen und bei binärem $Z$ gilt
+\[ \tau = \frac{\mathbb{E}[Y\mid Z=1] - \mathbb{E}[Y\mid Z=0]}{\mathbb{E}[X\mid Z=1] - \mathbb{E}[X\mid Z=0]} . \]
+
+\schritt{Der Gedanke}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Zähler} & Wirkung von $Z$ auf $Y$ --- unverzerrt, da $Z$ so gut wie ausgelost.\\
+\textbf{Nenner} & Wirkung von $Z$ auf $X$ --- ebenso.\\
+\textbf{Quotient} & Wirkung je Einheit $X$, die $Z$ verschiebt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Man misst nicht den Effekt der Behandlung, sondern den der Anordnung --- und teilt durch den Anteil, der ihr folgt.} Das ist die Auswertung nach Behandlungsabsicht aus Kapitel~3, geteilt durch die Befolgungsrate. Damit ist die Zuteilung selbst das beste denkbare Instrument.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wessen Effekt wird geschätzt?}
+
+\begin{merksatz}
+\boxtitel{Vier Arten von Patienten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Art} & \textbf{bei $Z=0$} & \textbf{bei $Z=1$}\\
+\midrule
+Befolger & nicht & behandelt\\
+Immer-Behandelte & behandelt & behandelt\\
+Nie-Behandelte & nicht & nicht\\
+Trotzige & behandelt & nicht\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Satz 9.2 --- der Effekt bei den Befolgern}
+Gibt es keine Trotzigen, so schätzt der Wald-Ausdruck den Durchschnittseffekt \kursiv{unter den Befolgern}.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Immer- und Nie-Behandelte tragen zum Zähler nichts bei}, denn bei ihnen ändert $Z$ nichts an $X$ --- und nach der Ausschlussbedingung auch nichts an $Y$. Übrig bleiben die Befolger, und nur über sie sagt der Schätzer etwas aus.}
+\end{minipage}
+\end{center}
+
+\schritt{Am Beispiel aus Kapitel 3}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{2.6cm}@{}}
+\toprule
+Wirkung auf $Y$ & $-0{,}045$\\
+Wirkung auf $X$ & $+0{,}800$\\
+\midrule
+Quotient & $\mathbf{-0{,}0563}$\\
+\midrule
+wahrer Effekt bei den Befolgern & $\mathbf{-0{,}0563}$\\
+Durchschnittseffekt & $-0{,}065$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Auf die vierte Stelle genau --- und dennoch nicht der Durchschnittseffekt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Befolger sind hier die $700$ Leichtkranken und $100$ Schwerkranken, die der Anordnung folgten; die übrigen $200$ Schwerkranken sind Nie-Behandelte. \textbf{Da die Wirkung bei Schwerkranken doppelt so groß ist, liegt der Befolgereffekt unter dem Durchschnittseffekt.} Wer den Wald-Ausdruck als Durchschnittseffekt berichtet, gibt eine Zahl für die falsche Bevölkerung an --- und zwar für eine, die man nicht einmal benennen kann, denn wer Befolger ist, steht in keiner Akte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Schwache Instrumente}
+Je kleiner der Nenner, desto größer die Schätzung --- und desto empfindlicher gegen jede Verletzung der Annahmen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{1.6cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Stärke} & $F$ & \textbf{Median} & \textbf{Streuung}\\
+\midrule
+stark & $398$ & $1{,}010$ & $0{,}07$\\
+mäßig & $16$ & $0{,}997$ & $0{,}34$\\
+schwach & $1$ & $1{,}172$ & $\mathbf{16{,}8}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{$400$ Wiederholungen, $n = 500$, wahrer Effekt $1{,}000$.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei schwachem Instrument streut die Schätzung um das Sechzehnfache des Effekts.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Faustregel verlangt $F > 10$} --- eine Prüfgröße für die Stärke des Zusammenhangs zwischen $Z$ und $X$. Darunter ist die Schätzung nicht nur ungenau, sondern auch verzerrt: Sie wandert zum naiven Wert hin, denn im Grenzfall $\gamma \to 0$ wird der Quotient zu $0/0$ und wird von der Störgröße bestimmt. Neuere Arbeiten halten selbst $F = 10$ für zu großzügig.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{warnung}
+\boxtitelr{Und die unprüfbare Bedingung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Ausschlussbedingung lässt sich nicht prüfen. \textbf{Wirkt $Z$ auch nur ein wenig unmittelbar auf $Y$, so wird dieser kleine Effekt durch den Nenner geteilt --- und damit vergrößert.} Bei einem Nenner von $0{,}1$ wird aus einer direkten Wirkung von $0{,}01$ eine Verzerrung von $0{,}10$. Schwache Instrumente sind also nicht nur ungenau, sondern auch besonders empfindlich gegen die Verletzung der einen Annahme, die man nicht prüfen kann.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.1 --- Den Wald-Ausdruck rechnen}
+In einer Studie wird die frühe Gabe ausgelost. Im Arm \enquote{früh} erhalten $78$ Prozent tatsächlich früh, im Arm \enquote{spät} $12$ Prozent. Die Sterblichkeit beträgt $24{,}0$ gegen $28{,}4$ Prozent.
+
+\loesung
+\schritt{Schritt 1 --- Zähler und Nenner}
+\[ \text{Zähler} = 0{,}240 - 0{,}284 = -0{,}044 \]
+\[ \text{Nenner} = 0{,}78 - 0{,}12 = 0{,}66 \]
+
+\schritt{Schritt 2 --- Der Quotient}
+\[ \hat\tau = \frac{-0{,}044}{0{,}66} = -0{,}0667 \]
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{nach Zuteilung} & $-4{,}4$ Punkte\\
+\textbf{bei den Befolgern} & $\mathbf{-6{,}7}$ \textbf{Punkte}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Der Anteil der Befolger}
+\[ 0{,}78 - 0{,}12 = 66\,\% \]
+\kursiv{Zwölf Prozent sind Immer-Behandelte, $22$ Prozent Nie-Behandelte.}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Effekt gilt für zwei Drittel der Patienten --- aber niemand weiß, für welche zwei Drittel.} Man kann die Befolger nicht identifizieren, nur ihre Zahl bestimmen. Wenn sich die Befolger systematisch von den übrigen unterscheiden --- etwa weil bei ihnen die Diagnose eindeutiger war ---, ist die Übertragung auf alle Patienten eine zusätzliche Annahme.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.2 --- Wann wird die Verzerrung größer als der Gewinn?}
+Ein Instrument verschiebt $X$ um $0{,}15$. Wie stark darf es höchstens unmittelbar auf $Y$ wirken, damit die Verzerrung unter $0{,}01$ bleibt?
+
+\loesung
+\schritt{Schritt 1 --- Die Rechnung}
+Eine direkte Wirkung $\delta$ landet vollständig im Zähler:
+\[ \text{Verzerrung} = \frac{\delta}{0{,}15} \]
+
+\schritt{Schritt 2 --- Die Schranke}
+\[ \frac{\delta}{0{,}15} < 0{,}01 \quad\Longrightarrow\quad \delta < 0{,}0015 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Nenner} & \textbf{erlaubtes $\delta$} & \textbf{Verstärkung}\\
+\midrule
+$0{,}80$ & $0{,}0080$ & $1{,}25$-fach\\
+$0{,}15$ & $0{,}0015$ & $6{,}7$-fach\\
+$0{,}05$ & $0{,}0005$ & $20$-fach\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bei einem Nenner von $0{,}05$ muss man ausschließen, dass $Z$ das Sterberisiko um mehr als einen halben Promillepunkt unmittelbar beeinflusst} --- eine Behauptung, für die es selten Belege gibt. Wer ein schwaches Instrument benutzt, muss die Ausschlussbedingung also weit strenger begründen als bei einem starken.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.3 --- Instrumente in der Medizin}
+Beurteilen Sie drei vorgeschlagene Instrumente für die Frage nach der frühen Antibiotikagabe.
+
+\loesung
+\schritt{(a) Entfernung zur nächsten Klinik}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{5.8cm}@{}}
+\toprule
+Relevanz & gegeben --- längere Anfahrt verzögert.\\
+Ausschluss & \textcolor{akzent}{zweifelhaft}: Entfernung hängt mit Stadt/Land zusammen, und damit mit Versorgung insgesamt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{(b) Tageszeit der Aufnahme}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{5.8cm}@{}}
+\toprule
+Relevanz & nachts längere Wege bis zum Medikament.\\
+Ausschluss & \textcolor{akzent}{zweifelhaft}: Nachts ist die gesamte Versorgung dünner, nicht nur die Antibiotikagabe.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{(c) Vorliebe des diensthabenden Arztes}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+Relevanz & gegeben, sofern die Ärzte sich unterscheiden.\\
+Unabhängigkeit & haltbar, wenn die Dienstzuteilung nicht vom Patienten abhängt.\\
+Ausschluss & \textcolor{akzent}{zweifelhaft}: Wer früh gibt, behandelt vielleicht auch sonst zügiger.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Alle drei scheitern an derselben Stelle.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist typisch: Wer ein Instrument findet, das die Behandlung beeinflusst, hat meist eine Größe gefunden, die die Versorgung insgesamt beeinflusst} --- und damit auch andere Wege zum Ausgang öffnet. Das erfolgreichste Beispiel der Medizin sind genetische Varianten, die einen einzelnen Stoffwechselweg betreffen; man nennt das Mendelsche Randomisierung, und auch dort ist der Ausschluss die strittige Bedingung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Vom Angebot zur Nachfrage}
+\Person{Philip Wright} veröffentlichte 1928 einen Anhang zu einem Buch über Pflanzenöle, in dem er das Verfahren erstmals beschrieb.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das Problem war, Angebots- und Nachfragekurve zu trennen, obwohl man nur Preise und Mengen beobachtet. Wright benutzte Niederschlagsmengen als Instrument für das Angebot. \textbf{Lange war umstritten, ob der Anhang von ihm oder von seinem Sohn \Person{Sewall Wright} stammt} --- demselben, der die Pfadanalyse aus Kapitel~4 erfand. Eine Schriftvergleichsuntersuchung von 2003 sprach für den Vater.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Befolgereffekt}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Guido Imbens} und \Person{Joshua Angrist} zeigten 1994, dass der Instrumentschätzer nur für die Befolger gilt. \textbf{Das war zunächst eine unwillkommene Nachricht} --- man hatte geglaubt, den Durchschnittseffekt zu schätzen. Beide erhielten 2021 den Wirtschaftsnobelpreis, gemeinsam mit \Person{David Card}, für die Verfahren dieses und des nächsten Kapitels.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Instrumente heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Mendelsche Randomisierung} & Genvarianten als Instrumente für lebenslange Expositionen.\\
+\textbf{Viele schwache} & Hunderte Varianten gemeinsam --- mit eigenen Verzerrungen.\\
+\textbf{Schranken} & Was folgt, wenn der Ausschluss nur ungefähr gilt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Zuteilung der Genvarianten bei der Zeugung ist tatsächlich zufällig --- die Unabhängigkeitsbedingung ist also gut begründet, besser als bei jedem anderen Instrument der Medizin. \textbf{Der Ausschluss ist es nicht}: Ein Gen wirkt meist auf mehreres. Deshalb prüft man mehrere Varianten getrennt und verlangt übereinstimmende Ergebnisse --- ein Vorgehen, das an die negativen Kontrollen aus Kapitel~7 erinnert.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Drei Bedingungen} & nur die erste ist prüfbar\\
+\textbf{Satz 9.1} & Quotient zweier Wirkungen\\
+\textbf{Satz 9.2} & gilt für die Befolger, nicht für alle\\
+\textbf{Schwach} & Streuung und Verzerrung explodieren\\
+\textbf{Verstärkung} & kleine Ausschlussverletzung, geteilt durch den Nenner\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Instrument braucht eine Größe, die zufällig schwankt. Das nächste Kapitel benutzt stattdessen Sprünge und Zeitverläufe --- Gelegenheiten, die die Wirklichkeit von selbst bietet.}
+\end{minipage}
+\end{center}
+\end{merksatz}

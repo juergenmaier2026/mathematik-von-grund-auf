@@ -1,0 +1,376 @@
+\part{Aktueller Stand}
+
+\chapter{Was Information leistet}
+
+\section{Die Bedrohung}
+
+\begin{merksatz}
+\boxtitel{Zwei Quantenverfahren, zwei Wirkungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.0cm}P{3.0cm}P{3.4cm}@{}}
+\toprule
+& \textbf{Shor, 1994} & \textbf{Grover, 1996}\\
+\midrule
+Leistet & Faktorisieren und diskrete Logarithmen in polynomialer Zeit & Durchsuchen in $\sqrt N$ statt $N$\\
+Betrifft & \textcolor{akzent}{Teil V vollständig} & Teil IV teilweise\\
+Abhilfe & \textcolor{akzent}{keine} & \textcolor{gruen}{Länge verdoppeln}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Bilanz je Baustein}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Baustein} & \textbf{klassisch} & \textbf{mit Quantenrechner}\\
+\midrule
+AES-128 & $128$ & $64$ Bit\\
+AES-256 & $256$ & \textcolor{gruen}{$128$ Bit}\\
+SHA-256 & $128$ & $\approx 85$ Bit\\
+SHA-512 & $256$ & \textcolor{gruen}{$\approx 170$ Bit}\\
+RSA-3072 & $138$ & \textcolor{akzent}{gebrochen}\\
+Elliptisch-$256$ & $128$ & \textcolor{akzent}{gebrochen}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die ersten vier Zeilen sind ein Umstellungsaufwand. Die letzten beiden sind ein Bruch.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Unterschied ist grundsätzlich: Grover halbiert den Exponenten --- man verdoppelt die Schlüssellänge und ist wieder da, wo man war. Shor macht das Problem polynomial --- \textbf{längere Schlüssel helfen nicht}, weil der Aufwand nur polynomial mitwächst.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Warum die Umstellung heute nötig ist}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer heute aufgezeichneten Verkehr speichert, kann ihn entschlüsseln, sobald ein Quantenrechner verfügbar ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Rechnung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{1.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Jahre} & \\
+\midrule
+Geheimhaltungs\-dauer & $30$ & Patientendaten\\
+Umstellungsdauer & $10$ & Infrastruktur\\
+\midrule
+Summe & $\mathbf{40}$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ist ein Quantenrechner in weniger als vierzig Jahren verfügbar, so ist heute verschlüsselter Verkehr betroffen. \textbf{Niemand kann den Zeitpunkt zuverlässig nennen} --- und genau deshalb ist die Umstellung keine Frage der Vorhersage, sondern der Vorsicht. Für Patientendaten mit lebenslanger Schutzdauer verschärft sich die Rechnung erheblich.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Stand der Technik}
+Gegenwärtig arbeiten Quantenrechner mit einigen hundert bis wenigen tausend physikalischen Quantenbits.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für einen $2048$-Bit-Schlüssel bräuchte man nach heutigen Schätzungen einige Millionen \kursiv{fehlerkorrigierte} Quantenbits --- und ein fehlerkorrigiertes erfordert tausend oder mehr physikalische. Der Abstand beträgt also mehrere Größenordnungen. \textbf{Er schrumpft, und die Schrumpfungsrate ist unbekannt.}}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Was an die Stelle tritt}
+
+\begin{merksatz}
+\boxtitel{Vier Familien}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.2cm}P{3.0cm}P{3.2cm}@{}}
+\toprule
+\textbf{Familie} & \textbf{beruht auf} & \textbf{Stand}\\
+\midrule
+Gitter & kürzeste Vektoren in hochdimensionalen Gittern & \textcolor{gruen}{genormt}\\
+Codes & Decodieren zufälliger linearer Codes & \textcolor{gruen}{genormt}\\
+Hashwerte & nur Kapitel 11 & \textcolor{gruen}{genormt, langsam}\\
+Mehrere Variablen & Gleichungssysteme über endlichen Körpern & \textcolor{mittel}{teils gebrochen}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die zweite Zeile ist bemerkenswert}
+Das Decodierproblem zufälliger linearer Codes ist genau das Problem aus Kapitel~6 --- nur ohne die Struktur, die Codes brauchbar macht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{Robert McEliece} schlug 1978 ein darauf beruhendes Verfahren vor, zwei Jahre nach Diffie und Hellman. \textbf{Es ist seit fast fünfzig Jahren ungebrochen} --- länger als jedes andere Verfahren mit öffentlichem Schlüssel. Durchgesetzt hat es sich nie, weil der öffentliche Schlüssel etwa ein Megabyte umfasst.}
+\end{minipage}
+\end{center}
+
+\schritt{Die dritte Zeile}
+Signaturen lassen sich allein aus Hashfunktionen bauen --- ohne jede zahlentheoretische Annahme.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die konservativste Wahl: Sie setzt nur voraus, dass die Hashfunktion hält, und nach Kapitel~11 ist das die am wenigsten bedrohte Annahme. Der Preis sind lange Signaturen und teils begrenzte Nutzungszahlen. \textbf{Für Aufgaben wie das Signieren von Aktualisierungen, die selten und langfristig erfolgen, ist das die richtige Abwägung.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Die Annahmen sind jung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+\textbf{Annahme} & \textbf{geprüft seit} & \\
+\midrule
+Faktorisierung & $\approx 2300$ Jahren & Euklid\\
+Diskreter Logarithmus & $50$ Jahren & \\
+Gitterprobleme & $\approx 30$ Jahren & \\
+Isogenien & $15$ Jahren & \textcolor{akzent}{gebrochen 2022}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die neuen Verfahren beruhen auf Problemen, die erheblich weniger lange geprüft sind als die alten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Fall von 2022 ist die Mahnung: Ein Verfahren, das fünf Jahre im Normungsverfahren geprüft worden war, fiel binnen Stunden auf einem gewöhnlichen Rechner --- durch einen Satz von 1997. \textbf{Die Prüfdauer ist die einzige verfügbare Evidenz, und sie ist bei den neuen Verfahren kurz.}}
+\end{minipage}
+\end{center}
+
+\schritt{Die Antwort der Praxis}
+Man kombiniert: klassischer und neuer Schlüsseltausch zugleich, der Sitzungsschlüssel aus beiden abgeleitet.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das hält, solange \kursiv{eines} von beiden hält --- gegen einen Quantenrechner das neue, gegen einen Fehler im neuen das alte. \textbf{Es ist die Kombinationstherapie aus Band 18, Kapitel~14}, mit derselben Voraussetzung: Die Verfahren müssen unabhängig sein.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Vier Muster}
+
+\begin{merksatz}
+\boxtitel{Muster 1 --- eine Ungleichung, immer wieder}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{6.6cm}@{}}
+\toprule
+$2$ & $\Ent \le \lb n$ --- das Maximum bei Gleichverteilung.\\
+$3$ & $L \ge \Ent$ --- keine Codierung unterbietet die Entropie.\\
+$4$ & $D(p\|q) \ge 0$ --- und $I(X;Y)\ge0$ als Sonderfall.\\
+$8$ & Die Fisher-Information als Krümmung von $D$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Viermal derselbe Beweis: Jensen auf den Logarithmus, mit einer geschickt gewählten Konstante in der Summe.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle sind Sonderfälle von $D(p\|q)\ge0$. \textbf{Die relative Entropie ist das eine Werkzeug, auf dem die gesamte Informationstheorie ruht} --- und sie taucht in Kapitel~8 als statistischer Begriff wieder auf, ohne dass sie sich verändert hätte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 2 --- das Typische trägt alles}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{6.6cm}@{}}
+\toprule
+$3$ & Man codiert nur die typischen Folgen und lässt den Rest scheitern.\\
+$5$ & $2^{n\Ent}$ von $2^{n}$ Folgen tragen die ganze Wahrscheinlichkeit.\\
+$6$ & Gute Codes korrigieren nur die typischen Fehler, nicht alle.\\
+$7$ & Fast alle Folgen sind inkomprimierbar --- und kommen nie vor.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Informationstheorie handelt nicht vom Möglichen, sondern vom Wahrscheinlichen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Darin liegt ihr Unterschied zur Kombinatorik und zur Codierungstheorie klassischer Prägung. Shannons Beweis in Kapitel~5 verzichtet auf die Garantie für alle Fälle und gewinnt dadurch die Kapazität. \textbf{Wer alles korrigieren will, erreicht weniger als wer das Typische korrigiert} --- das ist eine der überraschendsten Einsichten dieses Bandes.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 3 --- derselbe Fehler, dreimal}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{6.6cm}@{}}
+\toprule
+$9$ & Einmalschlüssel zweimal benutzt: $C_1\oplus C_2 = M_1\oplus M_2$.\\
+$10$ & Zählerwert zweimal benutzt: derselbe Schlüsselstrom.\\
+$14$ & Zufallswert zweimal benutzt: der geheime Schlüssel fällt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dreimal dieselbe Ursache, dreimal ein anderes Verfahren, dreimal ein vollständiger Bruch.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei Venona war es doppelt gedrucktes Papier, bei den Betriebsarten ein Neustart, bei der Spielkonsole eine Zeile Programmcode. \textbf{Die Mathematik war in allen drei Fällen einwandfrei.} Das ist der durchgehende Befund von Teil~IV und V: Verfahren fallen nicht durch Kryptanalyse, sondern durch Umsetzung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 4 --- Schranken sind einseitig}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{6.6cm}@{}}
+\toprule
+$1$ & Die Wägeschranke schließt aus; sie garantiert nicht.\\
+$6$ & Die Kugelpackungsschranke verbietet Codes; sie liefert keine.\\
+$7$ & $K$ lässt sich von oben abschätzen, nie von unten.\\
+$11$ & Die Geburtstagsschranke ist eine obere Grenze für die Sicherheit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Fast alle Schranken dieses Bandes sagen, was nicht geht.} Dass etwas geht, ist stets ein eigener Satz --- und oft der schwierigere.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Shannons Kanalcodierungstheorem ist das klarste Beispiel: Die Umkehrung folgt aus zwei Ungleichungen, die Erreichbarkeit brauchte einen nicht konstruktiven Beweis und sechzig Jahre bis zur Umsetzung. \textbf{Bei MD5 lag zwischen Schranke und Wirklichkeit der Faktor $10^{14}$} --- in die ungünstige Richtung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was nicht die Mathematik ist}
+
+\begin{warnung}
+\boxtitelr{Die Bilanz der drei Warnungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Erste} & Information ist nicht Bedeutung. Bestätigt in Kapitel~1 und 7: Eine zufällige Folge hat maximale Information und minimalen Gehalt.\\
+\textbf{Zweite} & Sätze gelten für Grenzwerte. Bestätigt in Kapitel~5: Die Kapazität ist erreichbar --- bei Blocklängen in den Tausenden.\\
+\textbf{Dritte} & Sicherheit ist nicht beweisbar. Bestätigt in jedem Kapitel von Teil~IV und V.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Warnung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mit einer einzigen Ausnahme --- dem Einmalschlüssel --- beruht jedes Verfahren dieses Bandes auf einer unbewiesenen Annahme.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und die Ausnahme ist praktisch unbrauchbar, wie Satz 9.3 beweist. \textbf{Die Sicherheit der digitalen Welt ruht auf der Vermutung, dass bestimmte Rechenprobleme schwer sind} --- und ein Beweis dafür würde zugleich $\mathsf{P}\ne\mathsf{NP}$ zeigen, also eines der Millenniumsprobleme lösen.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die eigentliche Schwachstelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Selten} & Ein Verfahren wird durch Kryptanalyse gebrochen.\\
+\textbf{Häufig} & Ein korrektes Verfahren wird falsch verwendet.\\
+\textbf{Sehr häufig} & Der Angriff umgeht die Mathematik vollständig --- Seitenkanäle, Verkehrsdaten, Schlüsselverwaltung, Menschen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Mann in der Mitte aus Kapitel~12 braucht keinerlei Rechenkraft. Der Fehlerangriff aus Kapitel~13 braucht einen Spannungsstoß. Der Zeitangriff aus Kapitel~11 braucht eine Stoppuhr. \textbf{Die Mathematik ist der am besten gesicherte Teil des Systems} --- und deshalb greift niemand sie an.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Sechs Sätze, die bleiben}
+
+\begin{merksatz}
+\boxtitel{Die Bilanz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{0.7cm}P{7.7cm}@{}}
+\toprule
+$1$ & Der Informationsgehalt hängt allein von der Wahrscheinlichkeit ab --- drei schwache Forderungen legen ihn fest.\\
+$2$ & Die Entropie ist die Grenze der Kompression, und sie ist erreichbar.\\
+$3$ & Über einen gestörten Kanal lässt sich bis zur Kapazität beliebig zuverlässig übertragen. Darüber gar nicht.\\
+$4$ & Fast alle Folgen sind unkomprimierbar, und man kann es keiner einzelnen nachweisen.\\
+$5$ & Perfekte Geheimhaltung verlangt einen Schlüssel so lang wie die Nachricht.\\
+$6$ & Alles andere beruht auf einer Annahme.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Schlusswort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Dieser Band begann mit der Behauptung, eine Nachricht habe ein Gewicht, das sich in Bit angeben lässt --- und dass dieses Gewicht nicht davon abhängt, was sie bedeutet.
+
+Fünfzehn Kapitel später lässt sich sagen, was aus dieser Beschränkung geworden ist. Sie hat eine Theorie ermöglicht, die für jede Art von Nachricht gleichermaßen gilt: für Diagnoseschlüssel und Funksignale, für Erbgutsequenzen und Passwörter. Und sie hat Sätze hervorgebracht, die man ohne sie nicht einmal hätte formulieren können --- über Grenzen, die niemand unterbietet, und über Verfahren, die sie erreichen.
+
+Der Preis war von Anfang an klar und ist es geblieben. Der Begriff sagt nichts darüber, ob eine Nachricht wahr ist, ob sie nützt oder ob sie verstanden wird. Er misst allein, wie sehr sie Ungewissheit auflöst --- und das ist eine Frage an den Empfänger, nicht an die Nachricht.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In der zweiten Hälfte kehrt sich das Vorzeichen um, und der Begriff bleibt derselbe. Geheimhaltung heißt, dass der Geheimtext die Ungewissheit des Mitlesers \kursiv{nicht} auflöst --- Definition 9.1 ist Kapitel~4 mit umgekehrtem Wunsch. \textbf{Dieselbe Größe misst, was ankommen soll, und was nicht ankommen darf.}}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit steht dieser Band neben den drei vorangegangenen. Die Statistik sagt, was die Daten hergeben. Die Biomathematik sagt, woran es liegt. Die Optimierung sagt, was es kostet. Und die Informationstheorie sagt, was überhaupt übertragbar ist --- \textbf{und sie sagt es in einer Einheit, die man nachrechnen kann.}}
+\end{minipage}
+\end{center}
+\end{merksatz}

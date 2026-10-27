@@ -1,0 +1,368 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Information messen}
+
+\begin{merksatz}
+\boxtitel{Grundgrößen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$I(p) = \lb\dfrac1p$ & Informationsgehalt (1.2)\\
+stetig, fallend, additiv & Satz 1.1\\
+$\Ent(X) = -\sum p_i\lb p_i$ & Entropie (2.1)\\
+$0 \le \Ent \le \lb n$ & Satz 2.2\\
+$h(p) = -p\lb p-(1-p)\lb(1-p)$ & binär (2.3)\\
+$h(0{,}11) = 0{,}5$ & Steilheit am Rand\\
+$\Ent(X,Y) = \Ent(X)+\Ent(Y\mid X)$ & Kettenregel (2.5)\\
+$\Ent(Y\mid X) \le \Ent(Y)$ & Satz 2.6, im Mittel\\
+$\Ent_\infty = \lim \Ent(X_1..X_n)/n$ & Entropierate\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Quellencodierung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\sum 2^{-l_i} \le 1$ & Kraft (Satz 3.1)\\
+$L = \sum p_i l_i \ge \Ent$ & Satz 3.2\\
+Gleichheit $\iff l_i = -\lb p_i$ & dyadisch\\
+$\Ent \le L < \Ent+1$ & Satz 3.3\\
+$l_i = \lceil-\lb p_i\rceil$ & Shannon-Code\\
+kleinste zwei zusammenfassen & Huffman (3.4)\\
+$\Ent \le L_n/n < \Ent+1/n$ & Blöcke\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Der Kanal}
+
+\begin{merksatz}
+\boxtitel{Transinformation und Kapazität}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$I(X;Y) = \Ent(X)-\Ent(X\mid Y)$ & Definition 4.1\\
+$= \Ent(X)+\Ent(Y)-\Ent(X,Y)$ & symmetrisch\\
+$D(p\|q) = \sum p_i\lb\dfrac{p_i}{q_i} \ge 0$ & Satz 4.4\\
+$I = D\bigl(p(x,y)\|p(x)p(y)\bigr)$ & Satz 4.5\\
+$C = \max_{p(x)} I(X;Y)$ & Definition 4.6\\
+$C = 1-h(f)$ & BSC (Satz 4.7)\\
+$C = 1-e$ & Auslöschung\\
+$C = \frac12\lb(1+S/N)$ & Gauß-Kanal\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Codierung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$R<C$ möglich, $R>C$ nicht & Satz 5.1\\
+$|A_\varepsilon| \approx 2^{n\Ent}$ & typische Menge (5.3)\\
+$2^{n(1-h(f))} = 2^{nC}$ Kugeln & Kugelpackung\\
+$P_e \lesssim 2^{-n(C-R)}$ & Zufallscodierung\\
+$\Ent(X\mid Y) \le h(P_e)+P_e\lb(|\mathcal X|-1)$ & Fano (5.4)\\
+$I(X;Z) \le I(X;Y)$ & Datenverarbeitung (5.5)\\
+$d-1$ erkennen, $\lfloor\frac{d-1}2\rfloor$ korrigieren & Satz 6.2\\
+$H\vek{y}^{\!\top} = H\vek{e}^{\!\top}$ & Syndrom\\
+$2^{k}\sum_{i\le t}\binom ni \le 2^{n}$ & Kugelpackung\\
+$d \le n-k+1$ & Singleton\\
+$m\cdot t$ & Verschachtelung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Zufall und Statistik}
+
+\begin{merksatz}
+\boxtitel{Komplexität}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$K(x) = \min\{|p| : U(p)=x\}$ & Definition 7.1\\
+$|K_U-K_V| \le c$ & Invarianz (7.2)\\
+Anteil mit $K<n-k$: $<2^{-k}$ & Satz 7.3\\
+$K(x) \ge |x|$ & inkomprimierbar (7.4)\\
+$K$ nicht berechenbar & Satz 7.5\\
+$\mathbb{E}[K]/n \to \Ent$ & Satz 7.6\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Statistik}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\mathbb{E}_p[\lb(p/q)] = D(p\|q)$ & Evidenz je Beobachtung\\
+$n \approx \text{Bit}/D(p\|q)$ & Stichprobenumfang\\
+$D(p_{\theta+\varepsilon}\|p_\theta) \approx \frac{\varepsilon^2}{2\ln2}\mathcal I(\theta)$ & Satz 8.2\\
+$\mathcal I(p) = \dfrac{1}{p(1-p)}$ & Bernoulli\\
+$\operatorname{Var} \ge 1/(n\mathcal I)$ & Cramér-Rao\\
+$L(\text{Modell})+L(\text{Daten}\mid\text{Modell})$ & MDL\\
+$\tfrac12\lb n$ & Kosten je Parameter\\
+$-2\ln\hat L+2k$ & AIC\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Kryptographie}
+
+\begin{merksatz}
+\boxtitel{Geheimhaltung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$I(M;C) = 0$ & perfekt sicher (9.1)\\
+$C = M\oplus K$ & Einmalschlüssel (9.2)\\
+$\Ent(K) \ge \Ent(M)$ & Satz 9.3\\
+$U = \Ent(K)/D$ & Unizitätsdistanz (9.4)\\
+$D = \lb|\mathcal A| - \Ent_\infty$ & Redundanz\\
+$C_1\oplus C_2 = M_1\oplus M_2$ & Wiederverwendung\\
+Verwirrung, Verwischung & Shannon 1949\\
+halbe Bits kippen & Lawinenkriterium\\
+$C_i = E(M_i)$ & ECB, \textcolor{akzent}{unbrauchbar}\\
+$C_i = E(M_i\oplus C_{i-1})$ & CBC\\
+$C_i = M_i\oplus E(N\Vert i)$ & CTR\\
+$2^{n/2}$ Blöcke & Geburtstagsschranke\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Hashwerte und öffentliche Schlüssel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.62}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+Urbild, zweites Urbild: $2^{n}$ & Definition 11.1\\
+Kollision: $2^{n/2}$ & \\
+$k \approx 1{,}177\sqrt N$ & Satz 11.2\\
+$H(K\Vert M)$ \textcolor{akzent}{falsch} & Längenerweiterung\\
+$H((K\oplus o)\Vert H((K\oplus i)\Vert M))$ & HMAC\\
+$\lb n$ Werte & Hashbaum\\
+\midrule
+$A = g^{a}$, $B = g^{b}$, $g^{ab}$ & Diffie-Hellman\\
+$g^{x} \equiv y$ & Logarithmusproblem (12.1)\\
+$L_p[1/3,\,1{,}923]$ & Indexrechnung\\
+$\varphi(pq) = (p-1)(q-1)$ & \\
+$a^{\varphi(n)}\equiv1$ & Euler (13.1)\\
+$ed \equiv 1 \bmod \varphi(n)$ & RSA\\
+$m^{ed} = m$ & Satz 13.2\\
+$y^2 = x^3+ax+b$ & elliptisch (14.1)\\
+$\lambda = \frac{3x_1^2+a}{2y_1}$ & Verdoppeln\\
+$x_3 = \lambda^2-x_1-x_2$ & \\
+$s = k^{-1}(H(m)+rd)$ & Signatur\\
+$k = \frac{h_1-h_2}{s_1-s_2}$ & \textcolor{akzent}{bei Wiederholung}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte des Bandes}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz wo --- und worauf er beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{1.2cm}P{3.6cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Beruht auf}\\
+\midrule
+$I(p) = -C\ln p$ & $1$ & Cauchys Funktionalgleichung\\
+$\Ent \le \lb n$ & $2$ & Jensen\\
+Kettenregel & $2$ & Logarithmengesetz\\
+Kraft & $3$ & Blätter abzählen\\
+$L \ge \Ent$ & $3$ & Jensen $+$ Kraft\\
+$\Ent \le L < \Ent+1$ & $3$ & Aufrunden\\
+Huffman optimal & $3$ & Vertauschen, Induktion\\
+$D(p\|q) \ge 0$ & $4$ & Jensen\\
+$I \ge 0$ & $4$ & Sonderfall von $D$\\
+$C = 1-h(f)$ & $4$ & $\Ent(Y\mid X)$ konstant\\
+Typische Menge & $5$ & Gesetz großer Zahlen\\
+\textbf{Kapazität erreichbar} & $5$ & Zufallscodierung\\
+Umkehrung & $5$ & Fano $+$ Datenverarbeitung\\
+Ganzzahlige Ecken & $6$ & Dreiecksungleichung\\
+Ganzzahligkeit & $6$ & Cramer (Band 19)\\
+Invarianz & $7$ & Nachbildung\\
+$K$ unberechenbar & $7$ & Berry-Paradoxon\\
+$D$ als Evidenz & $8$ & Erwartungswert\\
+Fisher & $8$ & zweite Ableitung von $D$\\
+Einmalschlüssel & $9$ & gleichverteiltes $K$\\
+$\Ent(K)\ge\Ent(M)$ & $9$ & Kettenregel $+$ Satz 2.6\\
+Geburtstag & $11$ & $1-x \approx e^{-x}$\\
+$g^{ab}$ beidseitig & $12$ & Potenzgesetz\\
+$m^{ed}=m$ & $13$ & Euler\\
+Signatur prüfbar & $14$ & Kommutativität\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was in diesem Band \kursiv{nicht} bewiesen wurde}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{1.2cm}P{3.4cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+Jensensche Ungleichung & $2$ & Band 19, Kap.\ 7\\
+Gesetz großer Zahlen & $5$ & Band 12, Teil~IV\\
+Erreichbarkeit, vollständig & $5$ & Cover\zit{5}, Kap.\ 7\\
+Kraft für eindeutige Codes & $3$ & Cover\zit{5}, Kap.\ 5\\
+Umkehrung von Satz 6.4 & $6$ & Lin\zit{16}\\
+Gruppengesetz assoziativ & $14$ & Hankerson\zit{11}\\
+$\Z_p^{*}$ ist zyklisch & $12$ & Band 8, Teil~III\\
+Satz von Euler & $13$ & Band 6, Teil~II\\
+Shors Verfahren & $15$ & Nielsen\zit{19}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Neun Auslassungen, jede im Text benannt, mit Begründung und Fundstelle --- die einzige zulässige Form, die Regel dieses Werkes zu brechen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von Fermat bis zur Post-Quanten-Normung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.34}
+\begin{tabular}{@{}P{1.4cm}P{2.8cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Ereignis}\\
+\midrule
+$1640$ & Fermat & kleiner Satz\\
+$1763$ & Bayes & bedingte Wahrscheinlichkeit\\
+$1836$ & Morse & Häufigkeit und Codelänge\\
+$1877$ & Boltzmann & $S = k\ln W$\\
+$1883$ & Kerckhoffs & nur der Schlüssel ist geheim\\
+$1902$ & Gibbs & $-k\sum p\ln p$\\
+$1906$ & Jensen & Ungleichung\\
+$1919$ & Vernam & Einmalschlüssel patentiert\\
+$1924$ & Nyquist & Symbolrate\\
+$1928$ & Hartley & $n\log s$\\
+$1929$ & Szilárd & Dämon und Information\\
+$1943$ & --- & Venona beginnt\\
+$1948$ & \textbf{Shannon} & \textbf{Informationstheorie}\\
+$1949$ & Shannon & perfekte Sicherheit\\
+$1950$ & Hamming & fehlerkorrigierende Codes\\
+$1951$ & Kullback, Leibler & relative Entropie\\
+$1952$ & Huffman & optimaler Präfixcode\\
+$1960$ & Solomonoff & algorithmische Wahrscheinlichkeit\\
+$1960$ & Reed, Solomon & Codes über Bytes\\
+$1961$ & Landauer & Löschen kostet Energie\\
+$1962$ & Gallager & LDPC --- vergessen\\
+$1965$ & Kolmogorow, Chaitin & Komplexität\\
+$1973$ & Cocks (GCHQ) & RSA, geheim\\
+$1973$ & Akaike & Informationskriterium\\
+$1974$ & Williamson (GCHQ) & Schlüsseltausch, geheim\\
+$1976$ & \textbf{Diffie, Hellman} & \textbf{öffentliche Schlüssel}\\
+$1977$ & Rivest, Shamir, Adleman & RSA\\
+$1977$ & --- & DES als Norm\\
+$1978$ & Rissanen & kürzeste Beschreibung\\
+$1978$ & McEliece & Codes als Grundlage\\
+$1985$ & Koblitz, Miller & elliptische Kurven\\
+$1993$ & Berrou, Glavieux & Turbo-Codes\\
+$1994$ & Shor & Quantenfaktorisierung\\
+$1994$ & --- & RSA-$129$ gebrochen\\
+$1995$ & Shor & Quantenfehlerkorrektur\\
+$2001$ & Daemen, Rijmen & AES\\
+$2004$ & Wang & MD5 gebrochen\\
+$2008$ & Arıkan & Polar-Codes\\
+$2012$ & Bertoni u.\,a. & SHA-3\\
+$2017$ & --- & SHA-1 gebrochen\\
+$2022$ & --- & Isogenienverfahren gebrochen\\
+$2024$ & --- & Post-Quanten-Normen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Begriff} & \textbf{Bedeutung}\\
+\midrule
+\endhead
+Beglaubigungscode & Prüfwert mit Schlüssel (11)\\
+Bit & Einheit und Binärstelle (1.2)\\
+Blocklänge & Zahl der Symbole je Codewort (5)\\
+Differentielle Entropie & stetiger Fall, kann negativ sein (2)\\
+Entropie & mittlerer Informationsgehalt (2.1)\\
+Entropierate & Grenzwert je Symbol (3)\\
+Fernpunkt & neutrales Element der Kurve (14.1)\\
+Fisher-Information & Krümmung von $D$ (8.2)\\
+Geburtstagsschranke & $1{,}177\sqrt N$ (11.2)\\
+Hashfunktion & feste Ausgabelänge (11.1)\\
+Indexrechnung & unterexponentiell für Restklassen (12)\\
+Inkomprimierbar & $K(x)\ge|x|$ (7.4)\\
+Kanalkapazität & $\max I(X;Y)$ (4.6)\\
+Kerckhoffs & nur der Schlüssel ist geheim (9)\\
+Kollisionsresistenz & kein Paar gleicher Werte (11.1)\\
+Kraftsche Ungleichung & $\sum2^{-l_i}\le1$ (3.1)\\
+Längenerweiterung & Fortsetzen aus dem Hashwert (11)\\
+Lawinenkriterium & halbe Bits kippen (10)\\
+Perfekt sicher & $I(M;C)=0$ (9.1)\\
+Präfixfrei & kein Wort Anfang eines anderen (3)\\
+Primitivwurzel & erzeugt alle Reste (12)\\
+Relative Entropie & $D(p\|q)$ (4.3)\\
+Salz & öffentlicher Zufallszusatz (11)\\
+Seitenkanal & Laufzeit, Strom, Speicher (10)\\
+Syndrom & $H\vek y^{\!\top}$, hängt nur am Fehler (6)\\
+Transinformation & $I(X;Y)$ (4.1)\\
+Typische Menge & $2^{n\Ent}$ Folgen (5.2)\\
+Unizitätsdistanz & $\Ent(K)/D$ (9.4)\\
+Verschachtelung & Bündel auf Codewörter verteilen (6)\\
+Verwirrung & Schlüssel-Geheimtext verwickelt (10)\\
+Verwischung & jedes Bit wirkt auf jedes (10)\\
+Vorwärts\-geheimhaltung & Sitzungsschlüssel, dann gelöscht (12)\\
+Zertifikat & prüfbarer Beleg (Band 19, Kap.\ 12)\\
+\bottomrule
+\end{longtable}}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,676 @@
+\chapter{Der Minimax-Satz}
+
+\section{Ein Spiel ohne Sattelpunkt}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall, verschärft}
+Die Leitstelle hat ihre Disposition geändert: Sie ruft nicht mehr das nächstgelegene Fahrzeug, sondern wechselt zwischen zwei Regeln. Die Anteile sehen nun so aus:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.2cm}P{1.6cm}P{1.6cm}P{1.8cm}@{}}
+\toprule
+\textbf{Klinikum} & \textbf{M.: N} & \textbf{M.: S} & \textbf{Garantie}\\
+\midrule
+Nord & $60$ & $40$ & $\mathbf{40}$\\
+Süd & $30$ & $70$ & $30$\\
+\midrule
+\textbf{Risiko} & $\mathbf{60}$ & $70$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ \text{Maximin} = 40 \ <\ 60 = \text{Minimax} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein Sattelpunkt.} Jedes Feld lädt eine der beiden Seiten zum Wechseln ein.
+\end{minipage}
+\end{center}
+
+\schritt{Die Unruhe nachvollzogen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{6.4cm}@{}}
+\toprule
+$(\text{N},\text{N})$ & $60$ --- das Marienhospital wechselt nach Süd.\\
+$(\text{N},\text{S})$ & $40$ --- das Klinikum wechselt nach Süd.\\
+$(\text{S},\text{S})$ & $70$ --- das Marienhospital wechselt nach Nord.\\
+$(\text{S},\text{N})$ & $30$ --- das Klinikum wechselt nach Nord.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Kreis schließt sich.} Es gibt keine feste Wahl, bei der beide bleiben würden.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist die Lage, in der Verschwiegenheit alles wert ist. Wüsste das Marienhospital, wo der Notarztwagen des Klinikums steht, so brächte es das Klinikum auf $40$ oder $30$. \textbf{Die Lösung kann also nicht in einer festen Wahl bestehen} --- sie muss unvorhersehbar sein.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Gemischte Strategien}
+
+\begin{definition}
+\boxtitelm{Definition 2.1}
+Eine \Begriff{gemischte Strategie} des Zeilenspielers ist ein Wahrscheinlichkeitsvektor
+\[ \vek{p} = (p_1,\ldots,p_m), \qquad p_i \ge 0, \qquad \sum_i p_i = 1 . \]
+Die Strategien aus Kapitel~1 heißen zur Unterscheidung \Begriff{rein}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die erwartete Auszahlung}
+Spielen beide Seiten gemischt, so ist die erwartete Auszahlung
+\[ \Aus(\vek p,\vek q) = \sum_{i}\sum_{j} p_i\,a_{ij}\,q_j = \vek p^{\!\top} A\,\vek q . \]
+
+\schritt{Warum das der richtige Ansatz ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Unabhängig} & Beide würfeln getrennt, also multiplizieren sich die Wahrscheinlichkeiten.\\
+\textbf{Linear} & Der Ausdruck ist in $\vek p$ linear bei festem $\vek q$ und umgekehrt.\\
+\textbf{Erwartungswert} & Die Auszahlung ist der Nutzen aus Kapitel~1 --- über ihn darf man mitteln.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist keine Nebensächlichkeit. \textbf{Man darf nur dann Erwartungswerte bilden, wenn die Auszahlungen ein Nutzen im Sinne von Neumanns und Morgensterns sind} --- bei Geldbeträgen ist das im Allgemeinen falsch, weil der Nutzen von Geld nicht linear ist. Kapitel~4 behandelt, was genau dafür vorausgesetzt werden muss.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Linearität hat eine Folge}
+Gegen eine feste gemischte Strategie $\vek q$ ist die beste Antwort stets unter den \kursiv{reinen} Strategien zu finden.
+
+\kursiv{Grund:} $\Aus(\vek p,\vek q)$ ist ein gewichteter Mittelwert der Werte $\Aus(i,\vek q)$. Ein Mittelwert ist nie größer als sein größter Summand.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man muss also nur endlich viele Antworten prüfen} --- das macht alle folgenden Rechnungen erst möglich.
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.2 --- von Neumann, 1928}
+Für jede reelle Matrix $A$ gilt
+\[ \max_{\vek p} \min_{\vek q} \vek p^{\!\top} A\,\vek q \ =\ \min_{\vek q} \max_{\vek p} \vek p^{\!\top} A\,\vek q . \]
+Den gemeinsamen Wert nennt man den \Begriff{Wert des Spiels}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Lücke aus Satz 1.3 verschwindet, sobald man mischen darf --- bei jeder Matrix, ohne Ausnahme.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Satz, mit dem die Spieltheorie beginnt. Er behauptet, dass jedes endliche Zweipersonen-Nullsummenspiel eine Zahl hat --- einen Wert, den sich beide Seiten gegenseitig garantieren können. \textbf{Weder Borel noch die Zeitgenossen hielten das für ausgemacht}; Borel vermutete das Gegenteil.}
+\end{minipage}
+\end{center}
+
+\schritt{Was der Satz nicht sagt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Keine Eindeutigkeit} & Es kann mehrere optimale Mischungen geben.\\
+\textbf{Kein Verfahren} & Der ursprüngliche Beweis sagt nicht, wie man $\vek p$ findet. Kapitel~3 liefert das nach.\\
+\textbf{Keine Garantie je Spiel} & Garantiert ist der Erwartungswert. Im Einzelfall kann es schlechter ausgehen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Zeile ist der praktisch wichtigste Vorbehalt. Der Notarztwagen steht an genau einem Ort, und an einem bestimmten Tag kann das Ergebnis $30$ oder $70$ sein. \textbf{Der Wert $50$ zeigt sich erst über viele Wiederholungen} --- und ein Spiel, das nur einmal stattfindet, hat zwar einen Wert, aber niemand erlebt ihn.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Beweis für zwei mal zwei}
+
+\begin{merksatz}
+\boxtitel{Satz 2.3 --- die Ausgleichslösung}
+Sei
+\[ A = \begin{pmatrix} a & b\\ c & d\end{pmatrix} \]
+ohne Sattelpunkt. Dann ist $N := a+d-b-c \ne 0$, und mit
+\[ p = \frac{d-c}{N}, \qquad q = \frac{d-b}{N}, \qquad v = \frac{ad-bc}{N} \]
+gilt: $\vek p = (p,\,1-p)$ und $\vek q = (q,\,1-q)$ sind optimal, und $v$ ist der Wert.
+
+\schritt{Schritt 1 --- Der Ansatz}
+Der Zeilenspieler sucht ein $p$, bei dem die Gegenseite \kursiv{nichts gewinnt}, egal was sie tut:
+\[ \underbrace{p\,a + (1-p)\,c}_{\text{gegen Spalte 1}} \ =\ \underbrace{p\,b + (1-p)\,d}_{\text{gegen Spalte 2}} \]
+
+\schritt{Schritt 2 --- Auflösen}
+\begin{align*}
+p\,a + c - p\,c &= p\,b + d - p\,d\\
+p\,(a-c) - p\,(b-d) &= d-c\\
+p\,(a-c-b+d) &= d-c\\
+p &= \frac{d-c}{a+d-b-c} = \frac{d-c}{N}
+\end{align*}
+
+\schritt{Schritt 3 --- Der Wert}
+Einsetzen in die linke Seite:
+\begin{align*}
+v &= \frac{d-c}{N}\,a + \left(1-\frac{d-c}{N}\right)c\\
+&= \frac{a(d-c) + c\,(N - d + c)}{N}\\
+&= \frac{ad-ac + c\,(a+d-b-c-d+c)}{N}\\
+&= \frac{ad-ac + c\,(a-b)}{N}\\
+&= \frac{ad-ac+ac-bc}{N} = \frac{ad-bc}{N}
+\end{align*}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Zähler ist die Determinante der Matrix.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Warum $N \ne 0$}
+Wäre $N = 0$, so gälte $a-b = c-d$. Dann hätten beide Zeilen dasselbe Gefälle, und man prüft nach: In diesem Fall besitzt die Matrix einen Sattelpunkt --- entgegen der Voraussetzung.
+
+\schritt{Schritt 5 --- Warum $0 \le p \le 1$}
+Ohne Sattelpunkt liegt eines der beiden Muster vor:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{3.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Muster} & \textbf{Bedingung} & $N$\\
+\midrule
+$a$ und $d$ groß & $a>b$, $a>c$, $d>b$, $d>c$ & $>0$\\
+$b$ und $c$ groß & $a<b$, $a<c$, $d<b$, $d<c$ & $<0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Im ersten Fall sind $d-c$ und $N$ beide positiv, und $N - (d-c) = a-b > 0$, also $p < 1$. Der zweite Fall läuft ebenso. \checkmark
+
+\schritt{Schritt 6 --- Die Optimalität}
+Mit diesem $p$ erhält der Zeilenspieler gegen \kursiv{jede} Spaltenwahl genau $v$ --- also auch gegen jede Mischung, denn die ist ein Mittelwert.
+
+\[ \min_{\vek q} \vek p^{\!\top} A \vek q = v \quad\Longrightarrow\quad \max_{\vek p}\min_{\vek q} \ \ge\ v \]
+
+Dieselbe Rechnung für den Spaltenspieler liefert
+\[ \min_{\vek q}\max_{\vek p} \ \le\ v . \]
+
+Mit Satz 1.3 --- der für Mischungen genauso gilt --- folgt Gleichheit. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit ist Satz 2.2 für den Fall $2\times2$ vollständig bewiesen --- ohne jedes Hilfsmittel außer einer linearen Gleichung. \textbf{Der allgemeine Fall braucht mehr}, und Kapitel~3 zeigt, dass er genau der Dualitätssatz aus Band 19 ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall gelöst}
+\[ A = \begin{pmatrix} 60 & 40\\ 30 & 70\end{pmatrix} \]
+
+\schritt{Der Nenner}
+\[ N = 60+70-40-30 = 60 \]
+
+\schritt{Die Mischungen}
+\[ p = \frac{70-30}{60} = \frac{40}{60} = \frac23, \qquad q = \frac{70-40}{60} = \frac{30}{60} = \frac12 \]
+
+\schritt{Der Wert}
+\[ v = \frac{60\cdot70 - 40\cdot30}{60} = \frac{4200-1200}{60} = \frac{3000}{60} = 50 \]
+
+\schritt{Die Proben}
+\kursiv{Klinikum, gegen Nord:} $\tfrac23\cdot60 + \tfrac13\cdot30 = 40+10 = 50$ \checkmark\\
+\kursiv{Klinikum, gegen Süd:} $\tfrac23\cdot40 + \tfrac13\cdot70 = \tfrac{80}{3}+\tfrac{70}{3} = 50$ \checkmark\\
+\kursiv{Marienhospital, gegen Nord:} $\tfrac12\cdot60+\tfrac12\cdot40 = 50$ \checkmark\\
+\kursiv{Marienhospital, gegen Süd:} $\tfrac12\cdot30+\tfrac12\cdot70 = 50$ \checkmark
+
+\schritt{Die Einordnung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{1.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Wert} & \\
+\midrule
+Maximin (rein) & $40$ & Kapitel 1\\
+\textbf{Wert (gemischt)} & $\mathbf{50}$ & dieses Kapitel\\
+Minimax (rein) & $60$ & Kapitel 1\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Mischen bringt dem Klinikum zehn Punkte und kostet das Marienhospital ebenso viel.} Beide gewinnen dasselbe, was sie vorher an Vorsicht verloren.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bemerkenswert an der Lösung ist die Ungleichheit der Mischungen: Das Klinikum steht in zwei von drei Fällen im Norden, das Marienhospital wechselt hälftig. \textbf{Die eigene optimale Mischung hängt nicht von den eigenen Auszahlungen ab, sondern von denen des Gegners} --- $p$ wird so gewählt, dass \kursiv{der andere} gleichgültig wird. Das ist eine der befremdlichsten Eigenschaften der Lösung, und Abschnitt 2.6 kommt darauf zurück.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Preis der Offenheit}
+
+\begin{merksatz}
+\boxtitel{Drei Fälle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{3.0cm}P{2.0cm}P{3.2cm}@{}}
+\toprule
+\textbf{Wer sich festlegt} & \textbf{Klinikum bekommt} & \\
+\midrule
+Klinikum nennt den Standort & $40$ & Maximin\\
+\textbf{niemand} & $\mathbf{50}$ & Wert\\
+Marienhospital nennt ihn & $60$ & Minimax\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer seinen gezogenen Standort preisgibt, zahlt zehn Punkte.}
+\end{minipage}
+\end{center}
+
+\schritt{Und nun der überraschende Teil}
+Was geschieht, wenn das Klinikum nicht den Standort, sondern \kursiv{die Mischung} bekanntgibt --- also offen sagt: \enquote{Wir stehen in zwei von drei Fällen im Norden, ausgewürfelt}?
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Antwort} & \textbf{Ergebnis} & \\
+\midrule
+Marienhospital: Nord & $50$ & \\
+Marienhospital: Süd & $50$ & \\
+jede Mischung & $50$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Bekanntgabe der optimalen Mischung kostet nichts.} Das Marienhospital kann daraus keinen Vorteil ziehen.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der am häufigsten missverstandene Punkt des ganzen Kapitels. \textbf{Geheim bleiben muss der Ausgang des Würfels, nicht der Würfel.} Man darf seine Strategie veröffentlichen --- und genau das geschieht in der Praxis, etwa bei Zollkontrollen oder Stichprobenprüfungen, deren Quoten bekanntgegeben werden, ohne dass jemand weiß, wen es trifft.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum das so ist}
+Die optimale Mischung macht die Gegenseite gleichgültig --- genau das war der Ansatz in Schritt 1 des Beweises.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Und daraus folgt zugleich die Umkehrung: \textbf{Jede \kursiv{nicht} optimale Mischung darf man nicht bekanntgeben}, denn dann hat die Gegenseite eine echt bessere Antwort. Die Bekanntgabe ist nur bei der Gleichgewichtsmischung folgenlos.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Vier Vorbehalte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Echter Zufall nötig} & Ein vorhersehbarer Wechsel ist keine Mischung. Wer abwechselnd Nord und Süd fährt, ist nach zwei Tagen durchschaut.\\
+\textbf{Nur der Erwartungswert} & Im Einzelfall kann es beliebig schlecht ausgehen.\\
+\textbf{Nur Nullsummenspiele} & Satz 2.2 gilt für strikte Gegnerschaft. Bei gemeinsamen Interessen versagt er --- Teil~II.\\
+\textbf{Endlich} & Bei unendlichen Strategiemengen kann der Wert fehlen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Menschen erzeugen keinen Zufall. In Versuchen wechseln sie zu häufig --- eine Folge von fünf gleichen Ergebnissen erscheint ihnen unzufällig, obwohl sie es nicht ist. \textbf{Ein Gegner, der dieses Muster kennt, schlägt jeden menschlichen \enquote{Zufall}}, und genau darauf beruhen Programme, die Schere-Stein-Papier gegen Menschen gewinnen. Wer mischen will, braucht ein Hilfsmittel.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur vierten Zeile}
+Bei unendlich vielen Strategien kann es geschehen, dass Maximin und Minimax verschieden bleiben.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein bekanntes Beispiel: Beide nennen eine natürliche Zahl, wer die größere nennt, gewinnt. Es gibt keine optimale Strategie, weil es keine größte Zahl gibt. \textbf{Für stetige Spiele auf beschränkten Bereichen gilt der Satz weiterhin} --- unter Stetigkeitsannahmen, die Glicksberg 1952 bewies. Die Endlichkeit ist also nicht wesentlich, die Beschränktheit schon.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- Die Lücke schließen}
+Lösen Sie die Matrix aus Aufgabe 1.1(b), die keinen Sattelpunkt hatte:
+\[ A = \begin{pmatrix} 1 & 4\\ 3 & 2\end{pmatrix} \]
+
+\loesung
+\schritt{Schritt 1 --- Prüfen, dass kein Sattelpunkt vorliegt}
+Zeilenminima $1$ und $2$, Spaltenmaxima $3$ und $4$.
+\[ \text{Maximin} = 2 \ <\ 3 = \text{Minimax} \quad \checkmark \]
+
+\schritt{Schritt 2 --- Der Nenner}
+\[ N = a+d-b-c = 1+2-4-3 = -4 \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Hier liegt das zweite Muster aus Schritt 5 des Beweises vor: die Nebendiagonale ist groß. Der Nenner ist negativ, und die Formeln gelten unverändert.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Mischungen}
+\[ p = \frac{d-c}{N} = \frac{2-3}{-4} = \frac{-1}{-4} = \frac14 \]
+\[ q = \frac{d-b}{N} = \frac{2-4}{-4} = \frac{-2}{-4} = \frac12 \]
+
+\schritt{Schritt 4 --- Der Wert}
+\[ v = \frac{ad-bc}{N} = \frac{1\cdot2 - 4\cdot3}{-4} = \frac{2-12}{-4} = \frac{-10}{-4} = \frac52 = 2{,}5 \]
+
+\schritt{Schritt 5 --- Die Proben}
+\kursiv{Zeilenspieler gegen Spalte 1:}
+\[ \tfrac14\cdot1 + \tfrac34\cdot3 = \tfrac14 + \tfrac94 = \tfrac{10}{4} = 2{,}5 \quad \checkmark \]
+\kursiv{gegen Spalte 2:}
+\[ \tfrac14\cdot4 + \tfrac34\cdot2 = 1 + 1{,}5 = 2{,}5 \quad \checkmark \]
+\kursiv{Spaltenspieler gegen Zeile 1:}
+\[ \tfrac12\cdot1 + \tfrac12\cdot4 = 2{,}5 \quad \checkmark \]
+\kursiv{gegen Zeile 2:}
+\[ \tfrac12\cdot3 + \tfrac12\cdot2 = 2{,}5 \quad \checkmark \]
+
+\schritt{Schritt 6 --- Die Einordnung}
+\begin{center}
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{1.8cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Wert} & \\
+\midrule
+Maximin & $2$ & \\
+\textbf{Wert} & $\mathbf{2{,}5}$ & genau in der Mitte\\
+Minimax & $3$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass der Wert hier genau in der Mitte liegt, ist Zufall und nicht die Regel --- im Leitfall lag er bei $50$ zwischen $40$ und $60$, also ebenfalls mittig, aber das war eine Folge der symmetrischen Zahlen. \textbf{Allgemein liegt der Wert irgendwo im Intervall}, wie Aufgabe 2.2 zeigt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Erst streichen, dann mischen}
+Lösen Sie die Matrix aus Aufgabe 1.1(c):
+\[ A = \begin{pmatrix} 6 & 2 & 8\\ 4 & 5 & 7\\ 3 & 1 & 9 \end{pmatrix} \]
+
+\loesung
+\schritt{Schritt 1 --- Dominanz bei den Spalten}
+Der Spaltenspieler minimiert. Spalte 2 gegen Spalte 3:
+\[ 2 < 8, \qquad 5 < 7, \qquad 1 < 9 \]
+\textbf{Spalte 2 dominiert Spalte 3 strikt.} Streichen:
+\[ \begin{pmatrix} 6 & 2\\ 4 & 5\\ 3 & 1 \end{pmatrix} \]
+
+\schritt{Schritt 2 --- Dominanz bei den Zeilen}
+Zeile 1 gegen Zeile 3:
+\[ 6 > 3, \qquad 2 > 1 \]
+\textbf{Zeile 1 dominiert Zeile 3 strikt.} Streichen:
+\[ \begin{pmatrix} 6 & 2\\ 4 & 5 \end{pmatrix} \]
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{Man beachte die Reihenfolge: Zeile 3 war in der \kursiv{ursprünglichen} Matrix nicht dominiert, denn dort galt $8 < 9$. \textbf{Erst das Streichen der dritten Spalte machte die Dominanz sichtbar} --- und das ist der Grund, warum man abwechselnd vorgeht und nach jedem Streichen erneut prüft.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Kein Sattelpunkt im Rest}
+Zeilenminima $2$ und $4$, Spaltenmaxima $6$ und $5$.
+\[ \text{Maximin} = 4 \ <\ 5 = \text{Minimax} \]
+
+\schritt{Schritt 4 --- Die Lösung}
+\[ N = 6+5-2-4 = 5 \]
+\[ p = \frac{5-4}{5} = \frac15, \qquad q = \frac{5-2}{5} = \frac35 \]
+\[ v = \frac{6\cdot5 - 2\cdot4}{5} = \frac{30-8}{5} = \frac{22}{5} = 4{,}4 \]
+
+\schritt{Schritt 5 --- Die Proben}
+\kursiv{Zeilenspieler:}
+\[ \tfrac15\cdot6 + \tfrac45\cdot4 = \tfrac{6}{5}+\tfrac{16}{5} = \tfrac{22}{5} \quad \checkmark \]
+\[ \tfrac15\cdot2 + \tfrac45\cdot5 = \tfrac{2}{5}+\tfrac{20}{5} = \tfrac{22}{5} \quad \checkmark \]
+\kursiv{Spaltenspieler:}
+\[ \tfrac35\cdot6 + \tfrac25\cdot2 = \tfrac{18}{5}+\tfrac{4}{5} = \tfrac{22}{5} \quad \checkmark \]
+\[ \tfrac35\cdot4 + \tfrac25\cdot5 = \tfrac{12}{5}+\tfrac{10}{5} = \tfrac{22}{5} \quad \checkmark \]
+
+\schritt{Schritt 6 --- Zurück zur vollen Matrix}
+Die Lösung lautet für das ursprüngliche Spiel:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Spieler} & \textbf{Mischung} & \\
+\midrule
+Zeile & $(\tfrac15,\ \tfrac45,\ 0)$ & Zeile 3 ungenutzt\\
+Spalte & $(\tfrac35,\ \tfrac25,\ 0)$ & Spalte 3 ungenutzt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 7 --- Die abschließende Probe}
+Man muss prüfen, dass die gestrichenen Strategien auch gegen die Lösung nichts taugen.
+
+\kursiv{Zeile 3 gegen $\vek q = (\tfrac35,\tfrac25,0)$:}
+\[ \tfrac35\cdot3 + \tfrac25\cdot1 = \tfrac{9}{5}+\tfrac{2}{5} = \tfrac{11}{5} = 2{,}2 \ <\ 4{,}4 \quad \checkmark \]
+
+\kursiv{Spalte 3 gegen $\vek p = (\tfrac15,\tfrac45,0)$:}
+\[ \tfrac15\cdot8 + \tfrac45\cdot7 = \tfrac{8}{5}+\tfrac{28}{5} = \tfrac{36}{5} = 7{,}2 \ >\ 4{,}4 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Probe ist nicht überflüssig: Sie bestätigt, dass die Lösung des verkleinerten Spiels auch das volle Spiel löst. \textbf{Bei strikter Dominanz ist das stets der Fall}, und genau deshalb darf man streichen. Der Wert des vollen Spiels beträgt ebenfalls $4{,}4$ --- und er liegt \kursiv{nicht} in der Mitte zwischen $4$ und $5$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Was Offenheit kostet}
+Im Leitfall ($A = \begin{psmallmatrix}60&40\\30&70\end{psmallmatrix}$) wird das Klinikum gezwungen, seine Mischung $\vek p = (p,1-p)$ vorab bekanntzugeben. Welches $p$ wählt es, und was bekommt es?
+
+\loesung
+\schritt{Schritt 1 --- Die Antwort des Gegners}
+Das Marienhospital kennt $p$ und wählt die für das Klinikum schlechtere Spalte:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{4.0cm}@{}}
+\toprule
+\textbf{Nord} & $f_N(p) = 60p + 30(1-p) = 30 + 30p$\\
+\textbf{Süd} & $f_S(p) = 40p + 70(1-p) = 70 - 30p$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Das Klinikum erhält $\min\{f_N(p),\,f_S(p)\}$.
+
+\schritt{Schritt 2 --- Die Funktion zeichnen}
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.7pt] (0,0) -- (6.4,0);
+\draw[grau!60, line width=0.7pt] (0,0) -- (0,3.0);
+% f_N: 30+30p, skaliert: y = (wert-25)/20
+\draw[tief, line width=1.2pt] (0,0.25) -- (6,1.75);
+% f_S: 70-30p
+\draw[akzent, line width=1.2pt] (0,2.25) -- (6,0.75);
+% Minimum dick
+\draw[gruen, line width=2.0pt] (0,0.25) -- (4,1.25);
+\draw[gruen, line width=2.0pt] (4,1.25) -- (6,0.75);
+\fill[gruen] (4,1.25) circle (2.6pt);
+\draw[grau!45, line width=0.5pt, dashed] (4,0) -- (4,1.25);
+\node[font=\scriptsize, color=tief, anchor=west] at (6.05,1.75) {$f_N$};
+\node[font=\scriptsize, color=akzent, anchor=west] at (6.05,0.75) {$f_S$};
+\node[font=\scriptsize, color=gruen!70!black, anchor=south] at (4.1,1.35) {$50$};
+\node[font=\scriptsize, color=grau, anchor=north] at (4,-0.1) {$p=\frac23$};
+\node[font=\scriptsize, color=grau, anchor=north] at (0,-0.1) {$0$};
+\node[font=\scriptsize, color=grau, anchor=north] at (6,-0.1) {$1$};
+\node[font=\scriptsize, color=grau] at (3.0,-0.75) {Anteil Nord};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Schritt 3 --- Das Maximum der unteren Hülle}
+Die untere Hülle steigt, solange $f_N < f_S$, und fällt danach. Das Maximum liegt am Schnittpunkt:
+\[ 30+30p = 70-30p \quad\Longrightarrow\quad 60p = 40 \quad\Longrightarrow\quad p = \tfrac23 \]
+\[ v = 30 + 30\cdot\tfrac23 = 30+20 = 50 \]
+
+\schritt{Schritt 4 --- Das Ergebnis}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Klinikum wählt $p = \frac23$ und erhält $50$ --- genau so viel wie ohne Bekanntgabe.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Vergleich der drei Lagen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Das Klinikum gibt bekannt} & \textbf{bekommt} & \\
+\midrule
+nichts & $50$ & \\
+die Mischung & $\mathbf{50}$ & \textcolor{gruen}{kostenlos}\\
+den gezogenen Standort & $40$ & \textcolor{akzent}{$-10$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 6 --- Warum das so ist}
+Die Kurve $\min\{f_N,f_S\}$ hat ihr Maximum genau dort, wo beide Geraden sich schneiden --- also dort, wo die Gegenseite gleichgültig ist.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die zweite, anschauliche Herleitung von Satz 2.3}: Man zeichnet für jede gegnerische Antwort eine Gerade und sucht den höchsten Punkt der unteren Hülle. Diese Hülle ist stückweise linear und konkav --- die Konstruktion aus Band 19, Kapitel~7. \textbf{Damit ist der Minimax-Satz im Kern ein Konvexitätsargument}, und Kapitel~3 macht diesen Zusammenhang vollständig.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 7 --- Ein Gegenbeispiel zur Vorsicht}
+Gäbe das Klinikum eine \kursiv{andere} Mischung bekannt, etwa $p = 0{,}9$:
+\[ f_N(0{,}9) = 30+27 = 57, \qquad f_S(0{,}9) = 70-27 = 43 \]
+Das Marienhospital wählt Süd, und das Klinikum erhält $43$.
+
+\begin{center}
+\begin{minipage}{0.86\textwidth}
+\kursiv{\textbf{Die Bekanntgabe ist also nur bei der optimalen Mischung folgenlos.} Jede andere Mischung, offengelegt, kostet --- und zwar umso mehr, je weiter sie vom Schnittpunkt entfernt liegt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Satz und ein langer Schatten}
+\Person{John von Neumann} (1903--1957) bewies den Satz 1926 und veröffentlichte ihn 1928 in den \kursiv{Mathematischen Annalen} unter dem Titel \enquote{Zur Theorie der Gesellschaftsspiele}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er war dreiundzwanzig. Der Beweis benutzte den Brouwerschen Fixpunktsatz --- ein Werkzeug aus der Topologie, das mit Gesellschaftsspielen nichts zu tun hat. Von Neumann sagte später, ohne diesen Satz hätte es keine Spieltheorie gegeben, und es ist bemerkenswert, dass derselbe Satz 1950 auch Nashs Ergebnis tragen sollte.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Einschätzung des Verfassers}
+Von Neumann hielt den Minimax-Satz für das Fundament und äußerte, ohne ihn gebe es \enquote{nichts zu beweisen}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das war zugleich eine Grenzziehung: Er hielt Nichtnullsummenspiele für begrifflich ungeklärt und stand Nashs späterem Ergebnis skeptisch gegenüber. \textbf{Der Mann, der das Fach begründete, hielt seine wichtigste Erweiterung für einen Nebenweg} --- Kapitel~4 erzählt, wie das Gespräch ausging.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Buch}
+1944 erschien \kursiv{Theory of Games and Economic Behavior}, gemeinsam mit dem Ökonomen \Person{Oskar Morgenstern}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sechshundert Seiten, gedacht als Neubegründung der Wirtschaftstheorie. Es enthält den Minimax-Satz, die Nutzentheorie aus Kapitel~4 und die Koalitionstheorie aus Kapitel~14. \textbf{Die Ökonomen brauchten zwanzig Jahre, um es aufzunehmen} --- und als sie es taten, war es weniger der Nullsummenteil als der Rest.}
+\end{minipage}
+\end{center}
+
+\schritt{Und ein Nachtrag zur Priorität}
+\Person{Émile Borel} hatte die Frage 1921 gestellt und für unentscheidbar gehalten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Als von Neumanns Beweis erschien, ließ Borel ihn in den Comptes Rendus der französischen Akademie referieren und räumte seinen Irrtum ohne Umschweife ein. \textbf{Ein Streit um die Urheberschaft entstand erst dreißig Jahre später} --- und wurde von Dritten geführt, nicht von den Beteiligten.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wo Minimax heute steht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+\textbf{Robuste Optimierung} & Man behandelt Unsicherheit als Gegenspieler und optimiert gegen den schlimmsten Fall.\\
+\textbf{Lernverfahren} & Zwei Netze, die gegeneinander antreten --- Erzeuger und Prüfer --- lösen ein Minimax-Problem.\\
+\textbf{Kartenspiele} & Bei unvollständiger Information reicht Minimax nicht; man braucht Näherungen an das Gleichgewicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Das ist genau die robuste Formulierung aus Band 19, Kapitel~13.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dort erschien sie als vorsichtige Alternative zur Erwartungswertoptimierung; hier zeigt sich, dass sie ein Spiel gegen die Natur ist. \textbf{Der Unterschied liegt nur in der Deutung}: Die Natur ist kein Gegner, aber wer so rechnet, als wäre sie einer, erhält eine Garantie statt einer Hoffnung.}
+\end{minipage}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+Für Poker mit zwei Spielern wurde 2015 eine Variante im Wesentlichen gelöst; 2017 und 2019 folgten Programme, die auch gegen mehrere menschliche Gegner gewannen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Verfahren dahinter heißt bedauernsminimierender Gegenlauf: Man spielt das Spiel millionenfach gegen sich selbst und passt die Mischungen dort an, wo man im Nachhinein etwas anderes hätte tun sollen. \textbf{Es konvergiert gegen das Gleichgewicht, ohne es je auszurechnen} --- und ist damit die praktische Antwort auf den nicht konstruktiven Charakter von Satz 2.2.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 2.1} & gemischte Strategie\\
+\textbf{Satz 2.2} & die Lücke schließt sich immer\\
+\textbf{Satz 2.3} & $p = \frac{d-c}{N}$, $v = \frac{ad-bc}{N}$\\
+\textbf{Ausgleich} & den Gegner gleichgültig machen\\
+\textbf{Offenheit} & die Mischung darf man nennen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Satz 2.2 ist bewiesen für $2\times2$. Das nächste Kapitel beweist ihn allgemein --- und die Überraschung ist, dass der Beweis bereits in Band 19 steht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
