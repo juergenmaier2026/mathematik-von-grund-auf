@@ -1,0 +1,294 @@
+# Metadaten für OERSI (oersi.org) — schema.org / AMB-Profil
+# Erzeugt für Mathematik von Grund auf, Fassung 1.0.1
+name: "Mathematik von Grund auf"
+description: "Eine Einführung in die Mathematik in achtundzwanzig Bänden (5324 Seiten), von der Schulmathematik bis zur Ökonometrie. Jeder Schritt erklärt, alle Übungsaufgaben vollständig gelöst, jedes Kapitel mit Geschichte, Forschungsstand und einem Abschnitt darüber, wo die Methode bricht. Achtundzwanzig kommentierte Quellen je Band. Leitfälle überwiegend aus der Medizin. Frei unter CC BY-SA 4.0."
+id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf"
+identifier: "https://doi.org/10.5281/zenodo.23698547"
+creator:
+  - type: "Person"
+    name: "Jürgen Maier"
+publisher:
+  - type: "Person"
+    name: "Jürgen Maier"
+inLanguage:
+  - "de"
+license:
+  id: "https://creativecommons.org/licenses/by-sa/4.0/"
+isAccessibleForFree: true
+learningResourceType:
+  - id: "https://w3id.org/kim/hcrt/textbook"
+educationalLevel:
+  - id: "https://w3id.org/kim/educationalLevel/level_A"
+about:
+  - id: "https://w3id.org/kim/hochschulfaechersystematik/n37"
+audience:
+  - id: "http://purl.org/dcx/lrmi-vocabs/educationalAudienceRole/student"
+  - id: "http://purl.org/dcx/lrmi-vocabs/educationalAudienceRole/teacher"
+keywords:
+  - "Mathematik"
+  - "Lehrbuch"
+  - "Statistik"
+  - "Wahrscheinlichkeitsrechnung"
+  - "Kausale Inferenz"
+  - "Ökonometrie"
+  - "Stochastische Prozesse"
+  - "Medizin"
+  - "Open Educational Resources"
+dateCreated: "2026-10-27"
+datePublished: "2026-10-27"
+version: "1.0.1"
+image: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/raw/main/docs/titel.png"
+creativeWorkStatus: "Published"
+hasPart:
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 0: Die Kunst des Rechnens"
+    description: "Vorkurs Schulmathematik. 154 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_00_Die_Kunst_des_Rechnens.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 1: Die Königin der Mathematik"
+    description: "Zahlentheorie. 181 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_01_Die_Koenigin_der_Mathematik.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 2: Die Kunst der linearen Struktur"
+    description: "Lineare Algebra. 167 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_02_Die_Kunst_der_linearen_Struktur.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 3: Die Kunst des Grenzübergangs"
+    description: "Analysis. 173 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_03_Die_Kunst_des_Grenzuebergangs.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 4: Die Vermessung des Zufalls"
+    description: "Wahrscheinlichkeitstheorie. 164 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_04_Die_Vermessung_des_Zufalls.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 5: Die Kunst der Näherung"
+    description: "Numerische Mathematik. 224 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_05_Die_Kunst_der_Naeherung.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 6: Die Vermessung des Raumes"
+    description: "Geometrie. 184 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_06_Die_Vermessung_des_Raumes.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 7: Die Wege des Denkens"
+    description: "Geschichte der Mathematik. 188 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_07_Die_Wege_des_Denkens.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 8: Die Kunst der Verformung"
+    description: "Topologie. 178 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_08_Die_Kunst_der_Verformung.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 9: Die Sprache der Felder"
+    description: "Vektor- und Tensoranalysis. 130 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_09_Die_Sprache_der_Felder.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 10: Die Ordnung des Unendlichen"
+    description: "Logik und Mengenlehre. 124 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_10_Die_Ordnung_des_Unendlichen.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 11: Die Gestalt der Symmetrie"
+    description: "Algebra. 150 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_11_Die_Gestalt_der_Symmetrie.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 12: Die Vollendung der Analysis"
+    description: "Funktionentheorie. 176 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_12_Die_Vollendung_der_Analysis.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 13: Das Maß und der Raum"
+    description: "Maßtheorie und Funktionalanalysis. 175 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_13_Das_Mass_und_der_Raum.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 14: Die Gesetze der Veränderung"
+    description: "Differentialgleichungen. 214 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_14_Die_Gesetze_der_Veraenderung.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 15: Die Kunst des Zählens"
+    description: "Kombinatorik. 200 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_15_Die_Kunst_des_Zaehlens.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 16: Punkte und Linien"
+    description: "Graphentheorie. 270 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_16_Punkte_und_Linien.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 17: Was die Zahlen hergeben"
+    description: "Statistik. 282 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_17_Was_die_Zahlen_hergeben.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 18: Wachsen und Vergehen"
+    description: "Biomathematik. 262 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_18_Wachsen_und_Vergehen.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 19: Das Beste finden"
+    description: "Optimierung. 252 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_19_Das_Beste_finden.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 20: Was Nachrichten wiegen"
+    description: "Information und Kryptographie. 242 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_20_Was_Nachrichten_wiegen.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 21: Wenn andere mitrechnen"
+    description: "Spieltheorie. 236 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_21_Wenn_andere_mitrechnen.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 22: Was sich verallgemeinern lässt"
+    description: "Maschinelles Lernen. 204 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_22_Was_sich_verallgemeinern_laesst.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 23: Woran es liegt"
+    description: "Kausale Schlüsse. 158 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_23_Woran_es_liegt.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 24: Was zu tun ist"
+    description: "Entscheidungen unter Unsicherheit. 140 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_24_Was_zu_tun_ist.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 25: Wenn der Zufall weitergeht"
+    description: "Stochastische Prozesse. 158 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_25_Wenn_der_Zufall_weitergeht.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band 26: Wenn die Daten sich selbst bestimmen"
+    description: "Ökonometrie. 156 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_26_Wenn_die_Daten_sich_selbst_bestimmen.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
+  - type: "LearningResource"
+    name: "Mathematik von Grund auf, Band B: Die Architektur der Gewissheit"
+    description: "Beweistheorie. 182 Seiten."
+    id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/blob/main/pdf/Band_B_Die_Architektur_der_Gewissheit.pdf"
+    inLanguage: ["de"]
+    license:
+      id: "https://creativecommons.org/licenses/by-sa/4.0/"
+    learningResourceType:
+      - id: "https://w3id.org/kim/hcrt/textbook"
