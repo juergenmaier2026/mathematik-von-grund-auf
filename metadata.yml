@@ -1,7 +1,7 @@
 # Metadaten für OERSI (oersi.org) — schema.org / AMB-Profil
-# Erzeugt für Mathematik von Grund auf, Fassung 1.0.1
+# Erzeugt für Mathematik von Grund auf, Fassung 1.1.0
 name: "Mathematik von Grund auf"
-description: "Eine Einführung in die Mathematik in achtundzwanzig Bänden (5324 Seiten), von der Schulmathematik bis zur Ökonometrie. Jeder Schritt erklärt, alle Übungsaufgaben vollständig gelöst, jedes Kapitel mit Geschichte, Forschungsstand und einem Abschnitt darüber, wo die Methode bricht. Achtundzwanzig kommentierte Quellen je Band. Leitfälle überwiegend aus der Medizin. Frei unter CC BY-SA 4.0."
+description: "Eine Einführung in die Mathematik in zweiunddreißig Bänden (6044 Seiten), von der Schulmathematik bis zur Darstellungstheorie. Jeder Schritt erklärt, alle Übungsaufgaben vollständig gelöst, jedes Kapitel mit Geschichte, Forschungsstand und einem Abschnitt darüber, wo die Methode bricht. Achtundzwanzig kommentierte Quellen je Band. Leitfälle überwiegend aus der Medizin. Frei unter CC BY-SA 4.0."
 id: "https://github.com/juergenmaier2026/mathematik-von-grund-auf"
 identifier: "https://doi.org/10.5281/zenodo.23698547"
 creator:
@@ -33,10 +33,13 @@ keywords:
   - "Ökonometrie"
   - "Stochastische Prozesse"
   - "Medizin"
+  - "Dynamische Systeme"
+  - "Algebraische Geometrie"
+  - "Darstellungstheorie"
   - "Open Educational Resources"
 dateCreated: "2026-10-27"
 datePublished: "2026-10-27"
-version: "1.0.1"
+version: "1.1.0"
 image: "https://github.com/juergenmaier2026/mathematik-von-grund-auf/raw/main/docs/titel.png"
 creativeWorkStatus: "Published"
 hasPart:

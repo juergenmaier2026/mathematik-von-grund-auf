@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23698547.svg)](https://doi.org/10.5281/zenodo.23698547)
 
-**Eine Einführung in achtundzwanzig Bänden — 5324 Seiten.** Jeder Schritt erklärt, jede Übungsaufgabe vollständig gelöst, jedes Kapitel mit Geschichte, Forschungsstand und einem Abschnitt darüber, wo die Methode bricht. Achtundzwanzig kommentierte Quellen je Band.
+**Eine Einführung in zweiunddreißig Bänden — 6044 Seiten.** Jeder Schritt erklärt, jede Übungsaufgabe vollständig gelöst, jedes Kapitel mit Geschichte, Forschungsstand und einem Abschnitt darüber, wo die Methode bricht. Achtundzwanzig kommentierte Quellen je Band.
 
 Herausgeber und Urheber: **Jürgen Maier**. Entstanden 2026 in Zusammenarbeit mit Claude (Anthropic); Konzeption, Vorgaben, Prüfung und Herausgeberschaft: Jürgen Maier.
 
@@ -39,6 +39,10 @@ Website mit Lesewegen und Übersicht: https://juergenmaier2026.github.io/mathema
 | 24 | [Was zu tun ist](pdf/Band_24_Was_zu_tun_ist.pdf) | Entscheidungen unter Unsicherheit | 140 |
 | 25 | [Wenn der Zufall weitergeht](pdf/Band_25_Wenn_der_Zufall_weitergeht.pdf) | Stochastische Prozesse | 158 |
 | 26 | [Wenn die Daten sich selbst bestimmen](pdf/Band_26_Wenn_die_Daten_sich_selbst_bestimmen.pdf) | Ökonometrie | 156 |
+| 27 | [Was der Rechner vom Zufall weiß](pdf/Band_27_Was_der_Rechner_vom_Zufall_weiss.pdf) | Numerische Simulation | 170 |
+| 28 | [Wo die Vorhersage endet](pdf/Band_28_Wo_die_Vorhersage_endet.pdf) | Dynamische Systeme und Chaos | 166 |
+| 29 | [Die Form der Lösungen](pdf/Band_29_Die_Form_der_Loesungen.pdf) | Algebraische Geometrie | 188 |
+| 30 | [Was die Symmetrie verrät](pdf/Band_30_Was_die_Symmetrie_verraet.pdf) | Darstellungstheorie | 196 |
 | B | [Die Architektur der Gewissheit](pdf/Band_B_Die_Architektur_der_Gewissheit.pdf) | Beweistheorie | 182 |
 
 Dazu das [Gesamtverzeichnis](pdf/Gesamtverzeichnis.pdf): Aufbau der Reihe, Abhängigkeiten der Bände, Lesewege für Medizin, Informatik, Wirtschaft und Naturwissenschaften, Inhaltsverzeichnisse aller Bände und ein Register über die ganze Reihe.
@@ -52,12 +56,15 @@ Dazu das [Gesamtverzeichnis](pdf/Gesamtverzeichnis.pdf): Aufbau der Reihe, Abhä
 - **Geschichte** und **aktueller Stand** der Forschung je Kapitel
 - **Anhang**: Formelsammlung, Landkarte der Sätze, Zeittafel, Glossar, 28 kommentierte Quellen
 
-Die Zahlen der Anwendungsbände (16–26) stammen aus Simulationen, die im Text nachvollziehbar sind; die Quelltexte liegen unter `quellen/`.
+Die Bände 29 und 30 sind Grundlagenbände, die nach der zweiten Werkhälfte geschrieben wurden und zur ersten gehören; die Bände 27 und 28 setzen die Anwendungsreihe fort.
+
+Die Zahlen der Anwendungsbände (16–28) stammen aus Simulationen, die im Text nachvollziehbar sind. Die Skripte dazu liegen unter `simulationen/` — ein Skript je Kapitel, mit festem Startwert, das die Tabellen des Buches erzeugt und die gedruckten Zahlen nennt; `python3 test_alles.py` prüft alle auf einmal. Für Band 29 liegt dort ein Gröbner-Basen-Rechner (`band-29/poly.py`), für Band 30 ein Charaktertafel-Rechner (`band-30/rep.py`).
 
 ## Verzeichnisse
 
 - `pdf/` — alle Bände als PDF, fertig gesetzt
-- `quellen/band-NN/` — LaTeX-Quelltexte der Bände 16 bis 26 und des Gesamtverzeichnisses, jeweils mit Impressum (die Quellen der Bände 0–15 und B werden nachgetragen)
+- `quellen/band-NN/` — LaTeX-Quelltexte der Bände 16 bis 30 und des Gesamtverzeichnisses, jeweils mit Impressum (die Quellen der Bände 0–15 und B werden nachgetragen)
+- `simulationen/` — die Simulations- und Rechenskripte zu elf Bänden (Python, NumPy, SciPy)
 - `docs/` — die Website
 
 Bauen eines Bandes: `cd quellen/band-23 && pdflatex haupt.tex && pdflatex haupt.tex` (TeX Live mit Palatino, TikZ, booktabs, longtable).
@@ -68,9 +75,15 @@ Dieses Werk ist lizenziert unter [CC BY-SA 4.0](https://creativecommons.org/lice
 
 ## Zitieren
 
-> Maier, J. (2026). *Mathematik von Grund auf*. Fassung 1.0.1. Zenodo. https://doi.org/10.5281/zenodo.23698547
+> Maier, J. (2026). *Mathematik von Grund auf*. Fassung 1.1.0. Zenodo. https://doi.org/10.5281/zenodo.23698547
 
-Für einzelne Bände: *Maier, J. (2026). Mathematik von Grund auf, Band 23: Woran es liegt. Fassung 1.0.1. https://doi.org/10.5281/zenodo.23698547* — die DOI `10.5281/zenodo.23698547` bezeichnet die Reihe in allen Fassungen; jede Fassung hat zusätzlich eine eigene DOI bei Zenodo.
+Für einzelne Bände: *Maier, J. (2026). Mathematik von Grund auf, Band 23: Woran es liegt. Fassung 1.1.0. https://doi.org/10.5281/zenodo.23698547* — die DOI `10.5281/zenodo.23698547` bezeichnet die Reihe in allen Fassungen; jede Fassung hat zusätzlich eine eigene DOI bei Zenodo.
+
+## Fassungen
+
+- **1.1.0** (Oktober 2026): Bände 27–30 neu (numerische Simulation, dynamische Systeme, algebraische Geometrie, Darstellungstheorie); Gesamtverzeichnis auf 32 Bände erweitert; Ordner `simulationen/` mit den Skripten zu elf Bänden; Layoutkorrektur in den Bänden 27–30 (keine verwaisten Überschriften mehr vor Kästen).
+- **1.0.2** (Oktober 2026): DOI im Impressum aller Bände, Metadaten für OERSI, Quelltexte der Bände 16–26.
+- **1.0.1** / **1.0** (Oktober 2026): Erstveröffentlichung, 28 Bände.
 
 ## Fehler und Rückmeldungen
 
@@ -78,4 +91,4 @@ Fehler, Unklarheiten und Vorschläge bitte als [Issue](https://github.com/juerge
 
 ## Schwesterreihen
 
-*Informatik von Grund auf* (26 Bände) und *Physik von Grund auf* (in Vorbereitung) folgen derselben Bauart.
+[*Informatik von Grund auf*](https://github.com/juergenmaier2026/informatik-von-grund-auf) (26 Bände, DOI [10.5281/zenodo.23773283](https://doi.org/10.5281/zenodo.23773283)) und *Physik von Grund auf* (in Vorbereitung) folgen derselben Bauart.

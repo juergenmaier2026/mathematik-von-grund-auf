@@ -1,13 +1,13 @@
 cff-version: 1.2.0
 message: "Wenn Sie dieses Werk verwenden, zitieren Sie es bitte wie unten angegeben."
 title: "Mathematik von Grund auf"
-abstract: "Eine Einführung in die Mathematik in achtundzwanzig Bänden (5324 Seiten), von der Schulmathematik bis zur Ökonometrie. Jeder Schritt erklärt, alle Übungsaufgaben vollständig gelöst, jedes Kapitel mit Geschichte, Forschungsstand und Bruchfall. Leitfälle überwiegend aus der Medizin."
+abstract: "Eine Einführung in die Mathematik in zweiunddreißig Bänden (6044 Seiten), von der Schulmathematik bis zur Darstellungstheorie. Jeder Schritt erklärt, alle Übungsaufgaben vollständig gelöst, jedes Kapitel mit Geschichte, Forschungsstand und Bruchfall. Leitfälle überwiegend aus der Medizin."
 type: dataset
 authors:
   - family-names: Maier
     given-names: Jürgen
-version: "1.0.1"
-date-released: "2026-10-27"
+version: "1.1.0"
+date-released: "2026-10-31"
 license: CC-BY-SA-4.0
 doi: 10.5281/zenodo.23698547
 identifiers:
@@ -22,5 +22,9 @@ keywords:
   - Statistik
   - Kausalität
   - Ökonometrie
+  - Dynamische Systeme
+  - Algebraische Geometrie
+  - Darstellungstheorie
+  - Numerische Simulation
   - Medizin
   - Open Educational Resources
