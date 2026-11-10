@@ -1,0 +1,429 @@
+\chapter{Ketten ohne Gedächtnis}
+
+\section{Die Definition}
+
+\begin{merksatz}
+\boxtitel{Was die Irrfahrt auszeichnet}
+Für die Vorhersage von $S_{n+1}$ genügt der gegenwärtige Ort $S_n$. Wie man dorthin gelangt ist --- über welche Umwege, in welcher Zeit ---, spielt keine Rolle.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Diese Eigenschaft ist die Grundlage fast jedes brauchbaren Prozessmodells.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 2.1 --- Markow-Kette}
+Ein Prozess $(X_n)_{n\ge0}$ mit Werten in einer höchstens abzählbaren Menge $\mathcal Z$ heißt \Begriff{Markow-Kette}, wenn für alle $n$ und alle Zustände
+\[ \Pr\bigl[X_{n+1} = j \ \big|\ X_n = i,\ X_{n-1} = i_{n-1},\ \ldots,\ X_0 = i_0\bigr] = \Pr\bigl[X_{n+1} = j \ \big|\ X_n = i\bigr] . \]
+Hängt die rechte Seite nicht von $n$ ab, heißt die Kette \Begriff{homogen}; man schreibt $p_{ij}$ und fasst diese Zahlen zur \Begriff{Übergangsmatrix} $P$ zusammen.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Ein Beispiel aus der Klinik}
+Tageweise beobachtet, vier Zustände:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{1.6cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+\textbf{von / nach} & \textbf{Station} & \textbf{Intensiv} & \textbf{entlassen} & \textbf{gestorben}\\
+\midrule
+Station & $0{,}80$ & $0{,}08$ & $0{,}11$ & $0{,}01$\\
+Intensiv & $0{,}25$ & $0{,}68$ & $0$ & $0{,}07$\\
+entlassen & $0$ & $0$ & $1$ & $0$\\
+gestorben & $0$ & $0$ & $0$ & $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\scriptsize}]
+\node[knotenb] (s) at (0,0) {S};
+\node[knotenr] (i) at (2.4,0) {I};
+\node[knotenb] (e) at (1.2,1.5) {E};
+\node[knotenb] (t) at (1.2,-1.5) {T};
+\draw[kanted, -{Stealth[length=4pt]}] (s) to[bend left=15] node[above]{$0{,}08$} (i);
+\draw[kanted, -{Stealth[length=4pt]}] (i) to[bend left=15] node[below]{$0{,}25$} (s);
+\draw[kanted, -{Stealth[length=4pt]}] (s) to node[left]{$0{,}11$} (e);
+\draw[kanted, -{Stealth[length=4pt]}] (s) to node[left]{$0{,}01$} (t);
+\draw[kanted, -{Stealth[length=4pt]}] (i) to node[right]{$0{,}07$} (t);
+\draw[kanted, -{Stealth[length=4pt]}] (s) to[loop left] node[left]{$0{,}80$} (s);
+\draw[kanted, -{Stealth[length=4pt]}] (i) to[loop right] node[right]{$0{,}68$} (i);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Annahme steckt in der Definition, nicht in den Zahlen}: Sie besagt, dass zwei Patienten, die heute auf der Intensivstation liegen, dieselben Aussichten haben --- gleichgültig, ob der eine seit zwei Tagen dort ist und der andere seit drei Wochen. Das ist offensichtlich falsch. Kapitel~5 zeigt, wie man es durch zusätzliche Zustände richtigstellt --- und was es kostet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Mehrere Schritte}
+
+\begin{merksatz}
+\boxtitel{Satz 2.2 --- Chapman und Kolmogorow}
+Für die $n$-Schritt-Wahrscheinlichkeiten $p^{(n)}_{ij} = \Pr[X_n = j \mid X_0 = i]$ gilt
+\[ p^{(m+n)}_{ij} = \sum_{k} p^{(m)}_{ik}\,p^{(n)}_{kj} , \qquad\text{kurz}\qquad P^{(m+n)} = P^{m}\,P^{n} . \]
+
+\schritt{Beweis}
+\kursiv{Nach dem Zwischenzustand zerlegen:}
+\[ \Pr[X_{m+n} = j \mid X_0 = i] = \sum_k \Pr[X_{m+n}=j,\ X_m = k \mid X_0 = i] \]
+
+\kursiv{Jeden Summanden aufspalten:}
+\[ = \sum_k \Pr[X_m = k \mid X_0=i]\cdot\Pr[X_{m+n}=j \mid X_m=k,\ X_0=i] \]
+
+\kursiv{Die Markow-Eigenschaft} lässt im zweiten Faktor die Bedingung $X_0=i$ fort:
+\[ = \sum_k p^{(m)}_{ik}\,p^{(n)}_{kj} \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die $n$-Schritt-Matrix ist die $n$-te Potenz der Übergangsmatrix. Damit wird aus einem Prozessproblem eine Aufgabe der linearen Algebra.}
+\end{minipage}
+\end{center}
+
+\kursiv{Probe am Beispiel:} $p^{(2)}_{\text{S},\text{I}} = 0{,}80\cdot0{,}08 + 0{,}08\cdot0{,}68 = 0{,}064+0{,}0544 = 0{,}1184$ \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Verlauf in Zahlen}
+Ein Patient auf Normalstation:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+\textbf{Tag} & \textbf{Station} & \textbf{Intensiv} & \textbf{entlassen} & \textbf{gestorben}\\
+\midrule
+$1$ & $0{,}800$ & $0{,}080$ & $0{,}110$ & $0{,}010$\\
+$2$ & $0{,}660$ & $0{,}118$ & $0{,}198$ & $0{,}024$\\
+$3$ & $0{,}558$ & $0{,}133$ & $0{,}271$ & $0{,}039$\\
+$7$ & $0{,}324$ & $0{,}112$ & $0{,}471$ & $0{,}093$\\
+$30$ & $0{,}024$ & $0{,}009$ & $\mathbf{0{,}775}$ & $\mathbf{0{,}192}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Anteil auf der Intensivstation steigt zunächst und fällt dann} --- am dritten Tag ist er am größten. Solche nichtmonotonen Verläufe sind der Regelfall und aus der Matrix nicht abzulesen; man muss rechnen. Nach dreißig Tagen ist der Ausgang fast entschieden: $77{,}5$ Prozent entlassen, $19{,}2$ Prozent gestorben.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wohin die Kette läuft}
+
+\begin{definition}
+\boxtitelm{Definition 2.3 --- Klassifikation}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{erreichbar} & $j$ ist von $i$ aus erreichbar, wenn $p^{(n)}_{ij} > 0$ für ein $n$.\\
+\textbf{irreduzibel} & Jeder Zustand ist von jedem erreichbar.\\
+\textbf{absorbierend} & $p_{ii} = 1$.\\
+\textbf{rekurrent} & Die Rückkehr nach $i$ ist sicher.\\
+\textbf{flüchtig} & Sonst --- mit positiver Wahrscheinlichkeit kehrt man nie zurück.\\
+\textbf{Periode} & Der größte gemeinsame Teiler aller $n$ mit $p^{(n)}_{ii} > 0$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Am Beispiel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{5.8cm}@{}}
+\toprule
+Station, Intensiv & flüchtig --- man verlässt sie irgendwann für immer.\\
+entlassen, gestorben & absorbierend.\\
+die Kette & nicht irreduzibel; sie zerfällt in eine flüchtige Klasse und zwei absorbierende Zustände.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Irrfahrt aus Kapitel~1 ist dagegen irreduzibel und rekurrent --- und hat die Periode $2$, denn nach ungerade vielen Schritten kann sie nicht im Ursprung sein. \textbf{Periodizität ist der häufigste Grund, warum eine Kette nicht konvergiert}, obwohl sie rekurrent ist; Kapitel~3 behandelt das.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie lange und wohin}
+
+\begin{merksatz}
+\boxtitel{Satz 2.4 --- die Fundamentalmatrix}
+Zerlegt man die Übergangsmatrix einer absorbierenden Kette als
+\[ P = \begin{pmatrix} Q & R\\ 0 & I \end{pmatrix} \]
+--- $Q$ für die Übergänge zwischen flüchtigen Zuständen ---, so gilt:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+$N = (I-Q)^{-1}$ & $N_{ij}$ ist die erwartete Zahl der Besuche in $j$, wenn man in $i$ startet.\\
+$N\vek 1$ & erwartete Zeit bis zur Absorption.\\
+$B = N\,R$ & $B_{ij}$ ist die Wahrscheinlichkeit, im absorbierenden Zustand $j$ zu enden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis der ersten Zeile}
+\kursiv{Die erwartete Zahl der Besuche} in $j$ vor der Absorption ist
+\[ N_{ij} = \sum_{n\ge0} \Pr[X_n = j \mid X_0 = i] = \sum_{n\ge0} (Q^{n})_{ij} , \]
+denn solange die Kette flüchtig bleibt, wirkt nur $Q$.
+
+\kursiv{Die geometrische Reihe} für Matrizen (Band 2, Kapitel~12) konvergiert, weil alle Eigenwerte von $Q$ betragsmäßig kleiner als eins sind:
+\[ \sum_{n\ge0} Q^{n} = (I-Q)^{-1} \]
+$\blacksquare$
+
+\schritt{Am Beispiel gerechnet}
+\[ I - Q = \begin{pmatrix} 0{,}20 & -0{,}08\\ -0{,}25 & 0{,}32\end{pmatrix}, \qquad \det = 0{,}064 - 0{,}020 = 0{,}044 \]
+\[ N = \frac{1}{0{,}044}\begin{pmatrix} 0{,}32 & 0{,}08\\ 0{,}25 & 0{,}20\end{pmatrix} = \begin{pmatrix} 7{,}27 & 1{,}82\\ 5{,}68 & 4{,}55\end{pmatrix} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Start} & \textbf{Verweildauer} & \textbf{entlassen}\\
+\midrule
+Normalstation & $9{,}09$ Tage & $80{,}0\,\%$\\
+Intensivstation & $10{,}23$ Tage & $62{,}5\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Matrixoperationen liefern Verweildauer und Ausgang --- ohne jede Simulation.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bemerkenswert ist die zweite Spalte von $N$}: Ein Patient, der auf Normalstation beginnt, verbringt im Mittel $1{,}82$ Tage auf der Intensivstation --- eine Zahl, die man aus der Matrix nicht ablesen kann und die für die Bettenplanung entscheidend ist. Dieselbe Rechnung trägt die Markow-Modelle aus Band 24, Kapitel~6.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Gedächtnislosigkeit ist eine starke Annahme}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Verweildauer} & Aus der Markow-Annahme folgt zwingend, dass die Aufenthaltsdauer in jedem Zustand geometrisch verteilt ist --- mit dem Maximum bei einem Tag.\\
+\textbf{Wirklichkeit} & Intensivaufenthalte haben ein Maximum nach mehreren Tagen; das Entlassungsrisiko steigt mit der Zeit.\\
+\textbf{Abhilfe} & Zustände aufspalten: \enquote{Intensiv, Tag 1--2}, \enquote{Intensiv, ab Tag 3}. Das kostet Parameter.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die geometrische Verweildauer ist keine Nebenannahme, sondern eine Folge der Definition} --- wer sie nicht will, hat keine Markow-Kette in diesen Zuständen. Der übliche Ausweg heißt Zustandserweiterung: Man nimmt so viel Vergangenheit in den Zustand auf, dass der Rest gedächtnislos wird. \textbf{Im Grenzfall wird der Zustand zur gesamten Vorgeschichte, und die Annahme ist leer.} Zwischen beiden Enden liegt die Modellierungskunst.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- Mehrschrittwahrscheinlichkeiten}
+Berechnen Sie für das Klinikbeispiel $p^{(2)}$ für den Start auf der Intensivstation.
+
+\loesung
+\schritt{Schritt 1 --- Die Zeile multiplizieren}
+Zeile Intensiv: $(0{,}25;\ 0{,}68;\ 0;\ 0{,}07)$.
+
+\[ p^{(2)}_{\text{I,S}} = 0{,}25\cdot0{,}80 + 0{,}68\cdot0{,}25 = 0{,}200+0{,}170 = 0{,}370 \]
+\[ p^{(2)}_{\text{I,I}} = 0{,}25\cdot0{,}08 + 0{,}68\cdot0{,}68 = 0{,}020+0{,}4624 = 0{,}4824 \]
+\[ p^{(2)}_{\text{I,E}} = 0{,}25\cdot0{,}11 = 0{,}0275 \]
+\[ p^{(2)}_{\text{I,T}} = 0{,}25\cdot0{,}01 + 0{,}68\cdot0{,}07 + 0{,}07 = 0{,}0025+0{,}0476+0{,}07 = 0{,}1201 \]
+
+\schritt{Schritt 2 --- Die Probe}
+\[ 0{,}370+0{,}4824+0{,}0275+0{,}1201 = 1{,}0000 \quad \checkmark \]
+
+\schritt{Schritt 3 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Nach zwei Tagen ist ein Intensivpatient mit $37$ Prozent bereits auf Normalstation} --- häufiger, als er noch auf der Intensivstation liegt, wäre da nicht der große Bleibeanteil. Der Anteil der Verstorbenen steigt von $7$ auf $12$ Prozent; der letzte Summand $0{,}07$ stammt von denen, die schon am ersten Tag starben und im absorbierenden Zustand bleiben.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Die Fundamentalmatrix nachrechnen}
+Bestätigen Sie $B = NR$ für den Start auf Normalstation.
+
+\loesung
+\schritt{Schritt 1 --- Die Matrizen}
+\[ N = \begin{pmatrix} 7{,}273 & 1{,}818\\ 5{,}682 & 4{,}545\end{pmatrix}, \qquad R = \begin{pmatrix} 0{,}11 & 0{,}01\\ 0 & 0{,}07\end{pmatrix} \]
+
+\schritt{Schritt 2 --- Die erste Zeile}
+\[ B_{\text{S,E}} = 7{,}273\cdot0{,}11 + 1{,}818\cdot0 = 0{,}800 \]
+\[ B_{\text{S,T}} = 7{,}273\cdot0{,}01 + 1{,}818\cdot0{,}07 = 0{,}0727+0{,}1273 = 0{,}200 \]
+
+\schritt{Schritt 3 --- Die Probe}
+\[ 0{,}800 + 0{,}200 = 1{,}000 \quad \checkmark \]
+
+\schritt{Schritt 4 --- Die Deutung der Summanden}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{2.4cm}P{2.2cm}@{}}
+\toprule
+\textbf{Weg zum Tod} & \textbf{Beitrag} & \textbf{Anteil}\\
+\midrule
+von Normalstation & $0{,}0727$ & $36\,\%$\\
+über Intensivstation & $0{,}1273$ & $64\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Zwei Drittel der Todesfälle gehen über die Intensivstation} --- obwohl ein Patient dort im Mittel nur $1{,}82$ von $9{,}09$ Tagen verbringt. Das Zerlegen von $B$ in Beiträge einzelner Zustände ist eine der nützlichsten Nebenwirkungen des Satzes: Man sieht, \kursiv{wo} das Risiko entsteht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Wenn das Gedächtnis fehlt}
+Zeigen Sie, dass die Verweildauer in einem Zustand einer Markow-Kette geometrisch verteilt ist, und was daraus für die Modellierung folgt.
+
+\loesung
+\schritt{Schritt 1 --- Die Rechnung}
+Sei $p = p_{ii}$ die Bleibewahrscheinlichkeit. Die Verweildauer $D$ erfüllt
+\[ \Pr[D > n] = p^{n} , \qquad \Pr[D = n] = p^{n-1}(1-p) . \]
+
+\schritt{Schritt 2 --- Die Werte für die Intensivstation}
+$p = 0{,}68$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Tage} & $\Pr[D = n]$ & \\
+\midrule
+$1$ & $0{,}320$ & \textcolor{akzent}{Maximum}\\
+$2$ & $0{,}218$ & \\
+$3$ & $0{,}148$ & \\
+$7$ & $0{,}031$ & \\
+\midrule
+Mittelwert & $1/0{,}32 = 3{,}13$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Der Widerspruch zur Erfahrung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Modell behauptet, der häufigste Intensivaufenthalt dauere einen Tag. Tatsächlich liegt das Maximum bei drei bis vier Tagen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Abhilfe}
+Man ersetze den Zustand durch eine Kette von $k$ Teilzuständen, die nacheinander durchlaufen werden:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Teilzustände} & \textbf{Verteilung} & \textbf{Maximum bei}\\
+\midrule
+$1$ & geometrisch & $1$ Tag\\
+$3$ & negativ binomial & $\approx 3$ Tagen\\
+$k$ & negativ binomial & $\approx k$ Tagen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Markow-Eigenschaft bleibt erhalten --- sie gilt nun auf der feineren Zustandsmenge.} Man bezahlt mit Parametern und mit Zuständen, die keine klinische Bedeutung haben. \textbf{Das ist der Grundhandel der Prozessmodellierung}: Gedächtnis lässt sich immer in Zustände verwandeln, und die Frage ist nur, wie viele man verträgt. In stetiger Zeit heißt dieselbe Konstruktion Erlang-Verteilung --- Kapitel~5.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Streit über den Determinismus}
+\Person{Andrei Markow} führte seine Ketten 1906 ein --- in einer Auseinandersetzung mit \Person{Pawel Nekrassow}, der behauptet hatte, das Gesetz der großen Zahlen setze Unabhängigkeit voraus und beweise daher den freien Willen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Markow wollte zeigen, dass das Gesetz auch für abhängige Größen gilt. \textbf{Als Beleg zählte er 1913 die Abfolge von Vokalen und Konsonanten in den ersten zwanzigtausend Buchstaben von Puschkins \kursiv{Eugen Onegin}} --- die erste Anwendung einer Markow-Kette auf wirkliche Daten, und zugleich der Beginn der statistischen Sprachmodellierung.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Fortsetzung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Claude Shannon} griff genau dieses Vorgehen 1948 auf, um Text als Markow-Quelle zu modellieren --- Band 20, Kapitel~5. \textbf{Von dort führt eine ununterbrochene Linie zu den heutigen Sprachmodellen}, die nichts anderes tun, als den nächsten Zustand aus einem sehr großen Gedächtnis vorherzusagen: Zustandserweiterung, wie in Aufgabe 2.3, nur ins Extrem getrieben.}
+\end{minipage}
+\end{center}
+
+\schritt{Kolmogorow}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Andrei Kolmogorow} gab 1931 die Theorie in stetiger Zeit und 1933 die maßtheoretische Grundlegung der Wahrscheinlichkeitsrechnung überhaupt. \textbf{Satz 2.2 trägt seinen Namen gemeinsam mit \Person{Sydney Chapman}}, einem Geophysiker, der die Gleichung unabhängig bei der Untersuchung der Diffusion in der Atmosphäre fand.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Ketten heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.4cm}P{4.8cm}@{}}
+\toprule
+\textbf{Verborgene Zustände} & Ketten, deren Zustand man nur durch verrauschte Messungen sieht.\\
+\textbf{Große Zustandsräume} & Ketten mit Milliarden Zuständen --- Suchmaschinen, Moleküle.\\
+\textbf{Mehrzustands\-modelle} & In der Medizin: Verläufe mit mehreren Ereignissen und Zensierung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Solche Modelle verallgemeinern die Überlebenszeitanalyse aus Band 17: Statt eines Ereignisses gibt es mehrere Zustände, zwischen denen Patienten wechseln. \textbf{Die Übergangsraten dürfen dabei von der Verweildauer abhängen} --- man verlässt die Markow-Annahme bewusst und nennt das Ergebnis semi-markowsch. Die Rechnung wird aufwendiger, die Verweildauern aber realistisch.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 2.1} & nur der Gegenwartszustand zählt\\
+\textbf{Satz 2.2} & $n$ Schritte $=$ $n$-te Matrixpotenz\\
+\textbf{Definition 2.3} & rekurrent, flüchtig, Periode\\
+\textbf{Satz 2.4} & $N = (I-Q)^{-1}$: Dauer und Ausgang\\
+\textbf{Der Bruchfall} & geometrische Verweildauer ist erzwungen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Kette dieses Kapitels endet in absorbierenden Zuständen. Das nächste fragt nach Ketten, die weiterlaufen --- und findet, dass sie eine Verteilung ansteuern, die von ihrem Ausgangspunkt nichts mehr weiß.}
+\end{minipage}
+\end{center}
+\end{merksatz}

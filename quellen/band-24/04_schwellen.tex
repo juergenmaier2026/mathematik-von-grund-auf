@@ -1,0 +1,334 @@
+\part{Klinische Entscheidungen}
+
+\chapter{Zwei Schwellen}
+
+\section{Der Fall}
+
+\begin{merksatz}
+\boxtitel{Verdacht auf Lungenembolie}
+Frau B.\ klagt über Atemnot. Die Frage ist nicht mehr, ob dauerhaft behandelt wird, sondern ob \kursiv{jetzt} eine Lungenembolie vorliegt und sofort therapiert werden muss.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Größe} & \textbf{Wert}\\
+\midrule
+Nutzen bei Embolie & $B$ & $0{,}30$\\
+Schaden ohne Embolie & $H$ & $0{,}02$\\
+Testkosten & $c$ & $0{,}005$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Alles in Nutzeneinheiten; $H$ enthält Blutungsrisiko und Belastung, $c$ auch Strahlung und Kontrastmittel.}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Drei Strategien}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Nichts tun} & Nutzen $0$ (Bezugspunkt).\\
+\textbf{Sofort behandeln} & $p\,B - (1-p)\,H$\\
+\textbf{Erst testen} & $-c + p\,\text{se}\,B - (1-p)(1-\text{sp})\,H$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Beim Testen wird nur nach positivem Befund behandelt.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Drei Geraden in $p$ --- und welche oben liegt, wechselt zweimal.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 4.1 --- Pauker und Kassirer, 1980}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{3.8cm}P{4.8cm}@{}}
+\toprule
+\textbf{Behandlungs\-schwelle} & $p^{*} = \dfrac{H}{B+H}$ --- ohne Test\\
+\textbf{Testschwelle} & $p_t = \dfrac{H(1-\text{sp}) + c}{H(1-\text{sp}) + \text{se}\,B}$\\
+\textbf{Test-Behand\-lungs-Schwelle} & $p_{tt} = \dfrac{H\,\text{sp} - c}{H\,\text{sp} + B(1-\text{se})}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis}
+\kursiv{Erste Zeile:} $pB - (1-p)H = 0$ auflösen.
+
+\kursiv{Zweite Zeile:} Testen gegen Nichtstun gleichsetzen:
+\[ -c + p\,\text{se}\,B - (1-p)(1-\text{sp})H = 0 \]
+\[ p\bigl[\text{se}\,B + (1-\text{sp})H\bigr] = c + (1-\text{sp})H \]
+
+\kursiv{Dritte Zeile:} Testen gegen sofort behandeln:
+\[ -c + p\,\text{se}\,B - (1-p)(1-\text{sp})H = pB - (1-p)H \]
+\[ p\bigl[B(1-\text{se}) + H\,\text{sp}\bigr] = H\,\text{sp} - c \]
+$\blacksquare$
+
+\schritt{Im Fall}
+Mit $\text{se} = 0{,}95$, $\text{sp} = 0{,}90$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Schwelle} & \textbf{Wert} & \textbf{Handlung darunter}\\
+\midrule
+$p_t$ & $2{,}4\,\%$ & nichts tun\\
+$p_{tt}$ & $39{,}4\,\%$ & testen\\
+darüber & & sofort behandeln\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!55, line width=0.7pt] (0,0) -- (8,0);
+\foreach \x/\t in {0/0, 1.0/$2{,}4\%$, 5.2/$39{,}4\%$, 8/100\%} \draw[grau!55] (\x,-0.08)--(\x,0.08) node[above=2pt, font=\scriptsize, color=grau] {\t};
+\draw[gruen!65!black, line width=2.4pt] (0,-0.35) -- (1.0,-0.35);
+\draw[tief, line width=2.4pt] (1.0,-0.35) -- (5.2,-0.35);
+\draw[akzent, line width=2.4pt] (5.2,-0.35) -- (8,-0.35);
+\node[font=\scriptsize, color=gruen!60!black] at (0.5,-0.75) {nichts};
+\node[font=\scriptsize, color=tief] at (3.1,-0.75) {testen};
+\node[font=\scriptsize, color=akzent] at (6.6,-0.75) {behandeln};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Testen lohnt nur zwischen $2{,}4$ und $39{,}4$ Prozent. Außerhalb ändert der Befund die Entscheidung nicht --- er kostet nur.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das zweite überraschende Ergebnis des Vorworts.} Bei einem Verdacht von fünfzig Prozent behandelt man sofort --- nicht weil man sicher wäre, sondern weil ein negativer Befund das Risiko nur auf etwa zehn Prozent senkte und damit noch immer über der Behandlungsschwelle von $6{,}25$ Prozent läge. Der Test könnte die Entscheidung gar nicht ändern.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was die Schwellen verschiebt}
+
+\begin{merksatz}
+\boxtitel{Drei Stellgrößen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+\textbf{Änderung} & $p_t$ & $p_{tt}$ & \textbf{Testbereich}\\
+\midrule
+Ausgangsfall & $2{,}4\,\%$ & $39{,}4\,\%$ & breit\\
+Test umsonst ($c=0$) & $0{,}7\,\%$ & $54{,}5\,\%$ & breiter\\
+schlechterer Test & $3{,}3\,\%$ & $10{,}1\,\%$ & \textcolor{akzent}{schmal}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Dritte Zeile: $\text{se} = 0{,}60$, $\text{sp} = 0{,}95$.}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein unempfindlicher Test verengt den Bereich von oben}: Ein negativer Befund schließt zu wenig aus, also muss man schon bei zehn Prozent sofort behandeln. Ein unspezifischer Test verengt ihn von unten. \textbf{Und ein teurer Test verengt ihn von beiden Seiten} --- was erklärt, warum dieselbe Untersuchung bei gleichem Verdacht vertretbar oder unsinnig sein kann, je nachdem, was sie kostet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Warum trotzdem getestet wird}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Andere Gründe} & Ein Befund ändert vielleicht nicht diese Entscheidung, wohl aber spätere --- oder er beruhigt.\\
+\textbf{Absicherung} & Wer ohne Bild behandelt und daneben liegt, steht schlechter da als der, der es hatte.\\
+\textbf{Unsicheres $p$} & Die Vortestwahrscheinlichkeit wird geschätzt, oft schlecht. Bei unklarem $p$ testet man eher.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist keine medizinische, sondern eine spieltheoretische Überlegung im Sinne von Band 21: \textbf{Der Arzt maximiert nicht den Nutzen des Patienten, sondern den eigenen unter Haftungsrisiko} --- und beide Zielfunktionen fallen auseinander. Das Modell dieses Kapitels beschreibt, was für den Patienten richtig wäre; es erklärt nicht, was geschieht.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Alle drei Schwellen rechnen}
+Berechnen Sie $p^{*}$, $p_t$ und $p_{tt}$ für den Ausgangsfall.
+
+\loesung
+\schritt{Schritt 1 --- Die Behandlungsschwelle}
+\[ p^{*} = \frac{0{,}02}{0{,}30+0{,}02} = \frac{0{,}02}{0{,}32} = 0{,}0625 \]
+
+\schritt{Schritt 2 --- Die Testschwelle}
+\[ p_t = \frac{0{,}02\cdot0{,}10 + 0{,}005}{0{,}02\cdot0{,}10 + 0{,}95\cdot0{,}30} = \frac{0{,}002+0{,}005}{0{,}002+0{,}285} = \frac{0{,}007}{0{,}287} = 0{,}0244 \]
+
+\schritt{Schritt 3 --- Die Test-Behandlungs-Schwelle}
+\[ p_{tt} = \frac{0{,}02\cdot0{,}90 - 0{,}005}{0{,}02\cdot0{,}90 + 0{,}30\cdot0{,}05} = \frac{0{,}018-0{,}005}{0{,}018+0{,}015} = \frac{0{,}013}{0{,}033} = 0{,}3939 \]
+
+\schritt{Schritt 4 --- Die Probe}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$p_t < p^{*} < p_{tt}$ --- die Behandlungsschwelle liegt stets zwischen den beiden anderen.}
+\end{minipage}
+\end{center}
+
+\kursiv{$0{,}0244 < 0{,}0625 < 0{,}3939$} \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Anschaulich: \textbf{Wer testen würde, hat einen Verdacht, der für sofortiges Behandeln zu klein und für Nichtstun zu groß ist} --- der Bereich um $p^{*}$ herum. Wird der Test besser, wächst dieser Bereich; wird er schlechter oder teurer, schrumpft er auf einen Punkt zusammen, und dann gibt es nur noch zwei Strategien.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Wann lohnt kein Test mehr?}
+Ab welchen Testkosten $c$ verschwindet der Testbereich ganz?
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingung}
+\[ p_t = p_{tt} \]
+
+\schritt{Schritt 2 --- Einsetzen und auflösen}
+Mit $\text{se} = 0{,}95$, $\text{sp} = 0{,}90$, $B = 0{,}30$, $H = 0{,}02$:
+\[ \frac{0{,}002+c}{0{,}287} = \frac{0{,}018-c}{0{,}033} \]
+\[ 0{,}033\,(0{,}002+c) = 0{,}287\,(0{,}018-c) \]
+\[ 0{,}000066 + 0{,}033c = 0{,}005166 - 0{,}287c \]
+\[ 0{,}320c = 0{,}005100 \quad\Longrightarrow\quad c = 0{,}0159 \]
+
+\schritt{Schritt 3 --- Die Deutung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$c$ & \textbf{Testbereich} & \\
+\midrule
+$0{,}000$ & $0{,}7$--$54{,}5\,\%$ & weit\\
+$0{,}005$ & $2{,}4$--$39{,}4\,\%$ & \\
+$0{,}0159$ & --- & \textcolor{akzent}{leer}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ab Testkosten von $0{,}016$ Nutzeneinheiten --- etwa $80$ Prozent des Behandlungsschadens $H$ --- lohnt sich der Test bei keiner Vortestwahrscheinlichkeit mehr.} Man behandelt dann oberhalb von $6{,}25$ Prozent und sonst nicht. Das ist der rechnerische Kern der Forderung, invasive Diagnostik nur einzusetzen, wenn sie weniger belastet als die Therapie selbst.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Die Wahrscheinlichkeit schätzen}
+Der klinische Verdacht liege bei $30$ Prozent, die Schätzung sei aber unsicher: gleichverteilt zwischen $10$ und $50$ Prozent. Ändert das die Strategie?
+
+\loesung
+\schritt{Schritt 1 --- Ohne Unsicherheit}
+$30\,\%$ liegt zwischen $2{,}4$ und $39{,}4$ --- also testen.
+
+\schritt{Schritt 2 --- Mit Unsicherheit}
+Der Erwartungsnutzen ist linear in $p$:
+\[ \mathbb{E}\bigl[u(\text{Strategie}) \mid p \sim \text{gleichverteilt}\bigr] = u(\text{Strategie} \mid \bar p = 0{,}30) \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Unsicherheit über $p$ ändert nichts --- solange sie symmetrisch ist und man den Erwartungsnutzen maximiert.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Warum das oft anders empfunden wird}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Weil man die Unsicherheit über $p$ mit der Möglichkeit verwechselt, sie zu verringern.} Wäre die Schätzung selbst durch eine Untersuchung zu verbessern, so hätte diese einen Wert nach Kapitel~3. Bleibt sie unverbesserlich, so ist der Mittelwert alles, was zählt --- die Linearität sorgt dafür.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Wo die Linearität endet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Mehrere Tests} & Die Strategie \enquote{erst dies, dann jenes} ist nicht linear in $p$.\\
+\textbf{Ambiguität} & Wer die Verteilung selbst nicht kennt, kann nicht mitteln --- Kapitel~11.\\
+\textbf{Sequenz} & Wiederholte Entscheidungen mit Lernen --- Teil~III.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Zwei Aufsätze im New England Journal}
+\Person{Stephen Pauker} und \Person{Jerome Kassirer} veröffentlichten 1975 die Behandlungsschwelle und 1980 die beiden Testschwellen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Beide Arbeiten enthalten kaum mehr Mathematik als dieses Kapitel. \textbf{Ihre Wirkung war dennoch begrenzt}: Der Gedanke ging in die Lehrbücher ein, die Rechnung nicht in die Praxis. Kassirer wurde später Herausgeber derselben Zeitschrift und schrieb wiederholt darüber, warum sich die Entscheidungsanalyse nicht durchsetzte --- sein Hauptgrund: Sie verlangt, Werte zu benennen, und das tun Ärzte ungern schriftlich.}
+\end{minipage}
+\end{center}
+
+\schritt{Und eine Vorgeschichte}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Ledley} und \Person{Lusted} hatten bereits 1959 in \kursiv{Science} vorgeschlagen, medizinische Diagnostik mit dem Satz von Bayes und einer Nutzenabwägung zu behandeln. \textbf{Der Aufsatz gilt als Geburtsurkunde der medizinischen Informatik} und enthält bereits die Unterscheidung zwischen dem Wahrscheinlichkeitsteil und dem Bewertungsteil einer Diagnose.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Schwellen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.4cm}P{4.8cm}@{}}
+\toprule
+\textbf{Klinische Regeln} & Punktwerte, die die Vortestwahrscheinlichkeit schätzen --- Band 22.\\
+\textbf{Netto-Nutzen} & Vorhersagemodelle an Schwellen statt an der Trennschärfe bewerten.\\
+\textbf{Weniger ist mehr} & Programme gegen überflüssige Diagnostik.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Trennschärfe aus Band 22 bewertet ein Modell über alle Schwellen gleich --- auch über solche, die niemand benutzen würde. \textbf{Die Entscheidungskurve gewichtet stattdessen mit der Schwelle, die der Kliniker tatsächlich anlegt}, und zeigt den Nettonutzen gegenüber \enquote{alle behandeln} und \enquote{niemanden behandeln}. Sie verbindet damit genau die beiden Bände: Vorhersagegüte und Entscheidungswert.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Drei Strategien} & nichts, testen, behandeln\\
+\textbf{Satz 4.1} & drei Schwellen, $p_t < p^{*} < p_{tt}$\\
+\textbf{Schlechter Test} & schmaler Bereich\\
+\textbf{Teurer Test} & Bereich verschwindet\\
+\textbf{Die Prüffrage} & Was würde ich anders tun?\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Drei Strategien lassen sich noch mit Geraden vergleichen. Das nächste Kapitel behandelt Fälle mit Dutzenden von Ästen --- und zeigt, wie man prüft, welche Zahl das Ergebnis trägt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

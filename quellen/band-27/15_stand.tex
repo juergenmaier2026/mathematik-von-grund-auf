@@ -1,0 +1,183 @@
+\part{Aktueller Stand}
+
+\chapter{Was der Rechner vom Zufall weiß}
+
+\section{Der Leitfall, ein letztes Mal}
+
+\begin{merksatz}
+\boxtitel{Was der Band aus einer Station gemacht hat}
+Am Anfang stand: Wie oft weist eine Intensivstation mit zwölf Betten ab?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.2cm}P{3.6cm}P{3.6cm}@{}}
+\toprule
+\textbf{Kap.} & \textbf{Frage} & \textbf{Antwort}\\
+\midrule
+$1$ & Wie oft? & $0{,}18$ --- mit Fehler $1/\sqrt n$.\\
+$2$--$3$ & Woher der Zufall, und wie viel? & Aus Rechenregeln; und mehr, als Gitter leisten.\\
+$4$--$6$ & Wie genau, und genauer? & Abhängig gemessen; Varianz gesenkt; seltene Fälle gelenkt.\\
+$7$--$9$ & Und wenn man nicht ziehen kann? & Eine Kette, die hinläuft --- geprüft, geflogen.\\
+$10$--$12$ & Und das System selbst? & Ereignisse, Schlangen, seltene Tage, Filter.\\
+$13$--$14$ & Und was ist es wert? & Reproduzierbar, geprüft, mit Unsicherheit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der exakte Wert war stets $0{,}1785$. Was sich geändert hat, ist, was man ihm beilegen kann: einen Fehler, eine Verteilung, eine Bedingung, einen Beweis, dass das Programm stimmt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Vier Muster}
+
+\begin{merksatz}
+\boxtitel{Muster 1 --- der Fehler fällt wie $1/\sqrt n$, und nur so}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+$1$ & Die Wurzelregel --- unabhängig von der Dimension.\\
+$3$ & Das Gitter fällt wie $n^{-2/d}$; ab $d=4$ gewinnt der Zufall.\\
+$4$ & Bei Abhängigkeit ist $n$ durch $\tau$ zu teilen.\\
+$6$ & Quasi-Zufall fällt schneller --- bis $(\log n)^d$ es einholt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Grund, warum die Methode in jedem Fach steht, das in mehr als drei Dimensionen rechnet}: Sie ist nicht gut, sie ist nur als einzige nicht hoffnungslos. Und es ist der Grund, warum der Rest des Bandes nötig war: Ein Fehler, der nur mit der Wurzel fällt, muss mit allen Mitteln an seiner Konstante gesenkt werden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 2 --- derselbe Zufall zweimal}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+$4$ & Gemeinsame Zufallszahlen für Differenzen: Varianz durch fünfundvierzig.\\
+$5$ & Antithetisch: $g(U)$ und $g(1-U)$; Kontrolle: $Y - \beta(C-c)$.\\
+$9$ & Mehrebenen: grob und fein mit denselben Zuwächsen.\\
+$14$ & Dieselben Parameterziehungen für beide Varianten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die dritte Überraschung des Vorworts ist das Prinzip des Bandes geworden}: Zufall, den man nicht braucht, wird nicht neu gezogen, sondern wiederverwendet, und was sich zwischen zwei Varianten nicht ändert, kürzt sich heraus. Jedes Verfahren der Varianzreduktion ist eine Art, dasselbe zu sagen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 3 --- der Rechner zeigt seine Fehler nicht an}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+$2$ & RANDU lieferte zwanzig Jahre lang Zahlen auf fünfzehn Ebenen.\\
+$3$, $6$ & Unendliche Varianz sieht aus wie Konvergenz --- mit Sprüngen.\\
+$7$, $8$ & Die gefangene Kette ist makellos; $\hat R$ sieht es, eine Kette nie.\\
+$12$ & Der falsche Filter liefert ein Intervall, das zu schmal ist.\\
+$13$ & Zwei Programmfehler bestehen jede Buchhaltungsprüfung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Deshalb ist jedes Kapitel mit einem Bruchfall geendet.} Die Simulation hat keinen Fehlerausgang: Sie liefert immer eine Zahl, und die Zahl sieht immer plausibel aus. Was sie richtig macht, ist nie im Lauf selbst zu sehen --- sondern in einer Formel für den Sonderfall, einer zweiten Kette, einem Blick auf das zweite Moment, einem Standardfehler aus Blockmitteln. Die Disziplin des Fachs besteht aus diesen Blicken.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 4 --- die Simulation und die Formel brauchen einander}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+$1$ & Erlang B prüft die Simulation; die Simulation verlässt Erlang B.\\
+$7$ & Der konjugierte Fall prüft die Kette; die Kette geht, wo keine Konjugation ist.\\
+$11$ & Spielerruin prüft die Aufspaltung; die Aufspaltung geht zur lognormalen Station.\\
+$14$ & Die Deltamethode prüft die Streuung; die Ziehungen geben das Intervall.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Simulation hat die Formel nicht verdrängt, sie hat ihr eine neue Rolle gegeben}: Die Formel ist der Sonderfall, an dem das Programm geprüft wird, bevor es dorthin geht, wo keine Formel reicht. Wer nur simuliert, hat keine Probe; wer nur rechnet, bleibt im Sonderfall. Die sechsundzwanzig Bände vor diesem haben die Formeln geliefert; dieser hat gezeigt, wofür man sie braucht, wenn man sie nicht mehr braucht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was offen ist}
+
+\begin{merksatz}
+\boxtitel{Vier Fragen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Konvergenz erkennen} & Es gibt keinen Beweis, dass eine Kette angekommen ist --- nur Nachweise, dass sie es nicht ist. Die Kopplung aus Kapitel~8 ist der erste Weg zu Garantien, und er trägt nicht weit.\\
+\textbf{Hohe Dimension} & Teilchenfilter versagen ab etwa zehn Zustandskoordinaten, Quasi-Monte-Carlo ab einigen Dutzend wirksamen Dimensionen, Markow-Ketten bei mehreren Gipfeln. Für jedes gibt es Umwege; für keines eine Lösung.\\
+\textbf{Modellfehler} & Alle Unsicherheit dieses Bandes ist Unsicherheit innerhalb eines Modells. Die Unsicherheit über das Modell hat kein Maß, nur Sensitivitätsanalysen.\\
+\textbf{Verzerrung gegen Varianz} & Mehrebenen-Verfahren, Ersatzmodelle und gelernte Kontrollen tauschen Varianz gegen Verzerrung, und niemand weiß allgemein, wie viel.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die dritte Frage ist die wichtigste und die am wenigsten mathematische}: Das Intervall $[0{,}12;\ 0{,}25]$ aus Kapitel~14 ist korrekt für eine Station, die es nicht gibt --- eine ohne Tagesrhythmus, ohne Grippewellen, ohne Ärzte, die bei voller Station früher entlassen. Die ehrliche Antwort ist die Spanne über mehrere Modelle, und sie ist breiter. Dass die Simulation dieses Eingeständnis leichter macht als jede Formel --- man ändert zehn Zeilen und rechnet noch einmal ---, ist ihr eigentlicher Beitrag zur Redlichkeit.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Sechs Sätze, die bleiben}
+
+\begin{merksatz}
+\boxtitel{Die Bilanz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{6.6cm}@{}}
+\toprule
+\textbf{Satz 1.2} & Der Fehler ist $\sigma/\sqrt n$, in jeder Dimension.\\
+\textbf{Satz 2.3} & Ein linearer Generator legt seine Punkte auf Ebenen.\\
+\textbf{Satz 4.1} & Abhängige Werte: $n$ durch $\tau = 1+2\sum\rho_k$.\\
+\textbf{Satz 6.2} & Die beste Vorschlagsdichte ist $|h|f$; die Ränder müssen schwerer sein als $f$.\\
+\textbf{Satz 7.2} & Detaillierte Bilanz macht $\pi$ stationär --- ohne Normierungskonstante.\\
+\textbf{Satz 9.5} & Grob oft, fein selten: Kosten $\varepsilon^{-2}$ statt $\varepsilon^{-3}$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dazu eine Regel ohne Nummer: Jede Zahl aus einer Simulation hat einen Standardfehler, einen Startwert und eine Probe --- oder sie ist keine.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Schlusswort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Band 25 hat gezeigt, wie der Zufall weitergeht; Band 26, wie Daten sich selbst bestimmen. Dieser Band hat beides in den Rechner geholt --- und gefunden, dass der Rechner vom Zufall genau so viel weiß, wie man ihm beigebracht hat: eine Rechenregel, die wie Zufall aussieht; eine Wurzel, die langsam fällt; und die Gewissheit, dass er seine Fehler nicht anzeigt. Alles Weitere --- der Standardfehler, der Startwert, die Probe am Sonderfall --- ist nicht im Rechner. Es ist in dem, der ihn benutzt. \textbf{Das war die Absicht dieses Bandes: nicht ein Rechner, der simuliert, sondern ein Leser, der weiß, was er dabei tut.}}
+\end{minipage}
+\end{center}
+\end{merksatz}

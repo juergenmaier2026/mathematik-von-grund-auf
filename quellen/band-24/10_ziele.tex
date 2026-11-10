@@ -1,0 +1,298 @@
+\part{Grenzen des Modells}
+
+\chapter{Mehr als ein Ziel}
+
+\section{Der Fall}
+
+\begin{merksatz}
+\boxtitel{Drei Möglichkeiten, zwei Maßstäbe}
+Für Frau B.\ steht neben der bekannten Gerinnungshemmung ein neueres, teureres Mittel zur Verfügung. Aus dem Markow-Modell von Kapitel~6:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+\textbf{Strategie} & \textbf{QALY} & \textbf{Kosten}\\
+\midrule
+nichts & $8{,}360$ & $0$\\
+Gerinnungshemmung & $9{,}461$ & $7344$\\
+neues Mittel & $9{,}720$ & $19\,000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mehr Nutzen kostet mehr. Es gibt keine beste Wahl, solange man nicht sagt, was ein Lebensjahr wert ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 10.1 --- Kosten-Wirksamkeits-Verhältnis}
+Für zwei Strategien ist
+\[ \text{ICER} = \frac{\text{Kosten}_2 - \text{Kosten}_1}{\text{Nutzen}_2 - \text{Nutzen}_1} \]
+--- der Preis je zusätzlich gewonnener Nutzeneinheit.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Rangfolge bilden}
+Man ordnet nach Nutzen und berechnet die Verhältnisse zwischen \kursiv{benachbarten} Strategien:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Vergleich} & \textbf{ICER} & \\
+\midrule
+Hemmung gegen nichts & $6670$ & je QALY\\
+neu gegen Hemmung & $\mathbf{45\,004}$ & je QALY\\
+\midrule
+neu gegen nichts & $13\,971$ & \textcolor{akzent}{irreführend}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die letzte Zeile ist ein häufiger Fehler: Man vergleicht mit \enquote{nichts}, obwohl niemand \enquote{nichts} erwägt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die richtige Frage lautet nicht, ob das neue Mittel besser ist als keine Behandlung, sondern ob die zusätzlichen $11\,656$ Euro die zusätzlichen $0{,}26$ Jahre wert sind.} Das ergibt $45\,004$ Euro je QALY --- fast siebenmal so viel wie beim ersten Schritt. Wer mit \enquote{nichts} vergleicht, versteckt diesen Sprung hinter einem Durchschnitt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Schwelle}
+
+\begin{merksatz}
+\boxtitel{Nettonutzen}
+Setzt man einen Betrag $w$ je Nutzeneinheit an, so wird aus zwei Zielen wieder eines:
+\[ \text{Nettonutzen} = w\cdot\text{QALY} - \text{Kosten} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Strategie} & $w = 20\,000$ & $w = 50\,000$\\
+\midrule
+nichts & $167\,200$ & $418\,000$\\
+Gerinnungshemmung & $\mathbf{181\,876}$ & $465\,706$\\
+neues Mittel & $175\,400$ & $\mathbf{467\,000}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Umschlag liegt genau bei $45\,004$ --- dem ICER des zweiten Schrittes.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist keine Eigenschaft der Medikamente, sondern der Schwelle.} Wer $30\,000$ Euro je Lebensjahr ansetzt, wählt das ältere Mittel; wer $60\,000$ ansetzt, das neue. Beide rechnen richtig. Die Schwelle selbst folgt aus keiner Rechnung dieses Bandes --- sie ist eine Setzung, und Kapitel~14 fragt, wer sie setzen darf.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was das Verhältnis verbirgt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Kleine Nenner} & Ein Nutzenunterschied nahe null macht das Verhältnis beliebig groß --- und sein Vertrauensintervall unbrauchbar.\\
+\textbf{Vorzeichen} & Ein negativer ICER kann \enquote{billiger und schlechter} oder \enquote{teurer und besser} bedeuten. Die Zahl unterscheidet das nicht.\\
+\textbf{Wessen Kosten} & Klinik, Versicherung, Gesellschaft, Patient --- jede Sichtweise liefert eine andere Zahl.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Nettonutzen hat keines dieser Probleme}: Er ist eine Differenz statt eines Verhältnisses, sein Vorzeichen ist eindeutig, und sein Vertrauensintervall verhält sich gutartig. Dass trotzdem meist das Verhältnis berichtet wird, liegt daran, dass es ohne Angabe von $w$ auskommt --- die Setzung wird an den Leser weitergereicht.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Eine dominierte Möglichkeit}
+Ein viertes Mittel kostet $12\,000$ und bringt $9{,}30$ QALY. Was folgt?
+
+\loesung
+\schritt{Schritt 1 --- Vergleich mit der Gerinnungshemmung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+& \textbf{QALY} & \textbf{Kosten}\\
+\midrule
+Gerinnungshemmung & $9{,}461$ & $7344$\\
+viertes Mittel & $9{,}300$ & $12\,000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Weniger Nutzen und mehr Kosten --- das vierte Mittel ist \kursiv{dominiert} und scheidet aus, gleich welche Schwelle gilt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die schwächere Form}
+Ein fünftes Mittel bringe $9{,}60$ QALY für $16\,000$ Euro.
+\[ \text{ICER gegen Hemmung} = \frac{16\,000-7344}{9{,}60-9{,}461} = \frac{8656}{0{,}139} = 62\,273 \]
+\[ \text{ICER neu gegen fünftes} = \frac{19\,000-16\,000}{9{,}720-9{,}600} = \frac{3000}{0{,}12} = 25\,000 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der zweite Schritt ist billiger als der erste --- also lohnt es nie, beim fünften Mittel stehenzubleiben.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das heißt erweiterte Dominanz}: Eine Mischung aus Hemmung und neuem Mittel ist immer besser als das fünfte allein. Man streicht es aus der Liste und rechnet die Verhältnisse neu --- sonst erhält man eine Rangfolge, in der die Preise je Einheit nicht mehr steigen, und das führt zu widersprüchlichen Empfehlungen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Die Schwelle bestimmen}
+Ein Gesundheitswesen gibt jährlich $100$ Millionen Euro aus und gewinnt damit $5000$ QALY. Welche Schwelle folgt daraus?
+
+\loesung
+\schritt{Schritt 1 --- Der Durchschnitt}
+\[ \frac{100\,000\,000}{5000} = 20\,000 \ \text{Euro je QALY} \]
+
+\schritt{Schritt 2 --- Was daraus folgt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nimmt man eine neue Leistung mit einem Verhältnis von $45\,000$ ins Programm, so muss anderswo gespart werden --- und dort gehen je Euro mehr Jahre verloren, als hier gewonnen werden. \textbf{Die Schwelle ist also kein Preis, den man zu zahlen bereit ist, sondern der Nutzen, den man verdrängt.}}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Rechnung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+& \textbf{gewonnen} & \textbf{verdrängt}\\
+\midrule
+je $45\,000$ Euro & $1{,}00$ QALY & $2{,}25$ QALY\\
+\midrule
+Bilanz & & $\mathbf{-1{,}25}$ QALY\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Aufnahme kostet die Bevölkerung mehr Gesundheit, als sie bringt} --- obwohl sie dem einzelnen Patienten nützt. Das ist die dritte Warnung des Vorworts in Zahlen, und sie erklärt, warum Schwellen nicht nach Zahlungsbereitschaft, sondern nach Verdrängung geschätzt werden sollten. Empirische Schätzungen dieser Verdrängungsschwelle liegen deutlich unter den politisch genannten Beträgen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- Zwei Ziele ohne Preis}
+Eine Behandlung senkt die Sterblichkeit, erhöht aber die Zahl schwerer Behinderungen. Wie entscheidet man ohne gemeinsamen Maßstab?
+
+\loesung
+\schritt{Schritt 1 --- Die Pareto-Grenze}
+Man streicht alle Strategien, die in beiden Zielen schlechter sind als eine andere. Was bleibt, ist die \Begriff{Pareto-Grenze} aus Band 19, Kapitel~12.
+
+\schritt{Schritt 2 --- Was sie leistet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Sie zeigt} & welche Tauschverhältnisse überhaupt zur Wahl stehen.\\
+\textbf{Sie entscheidet nicht} & welches man nehmen soll --- dazu braucht es eine Gewichtung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Der Umweg über die Nutzenwerte}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das QALY ist genau eine solche Gewichtung} --- es setzt ein Jahr mit schwerer Behinderung mit $0{,}4$ gesunden Jahren gleich und macht damit aus zwei Zielen eines. Wer diese Gleichsetzung ablehnt, hat kein zweites Verfahren, sondern muss selbst gewichten. Die Pareto-Grenze ist ehrlich, aber unvollständig; das QALY ist vollständig, aber angreifbar. Kapitel~14 behandelt die Angriffe.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Maß und ein Institut}
+Das qualitätsbereinigte Lebensjahr entstand um 1970 aus Arbeiten von \Person{Herbert Klarman} und \Person{Robert Fanshel}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Gedanke: Ein Jahr in einem eingeschränkten Zustand zählt nur anteilig. \textbf{Damit wurden Behandlungen verschiedener Fachgebiete erstmals vergleichbar} --- eine Hüftoperation und eine Krebsbehandlung erscheinen auf derselben Skala.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Schwelle als Politik}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das britische Institut NICE nennt seit 1999 einen Bereich von $20\,000$ bis $30\,000$ Pfund je QALY. \textbf{Die Zahl war ursprünglich keine Berechnung, sondern eine Beobachtung}: Sie entsprach dem, was bisherige Entscheidungen im Mittel ergeben hatten. Spätere Untersuchungen schätzten die tatsächliche Verdrängungsschwelle auf etwa $13\,000$ Pfund --- also deutlich niedriger.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Abwägen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.6cm}P{4.6cm}@{}}
+\toprule
+\textbf{Verdrängungs\-schwellen} & Empirische Schätzung dessen, was zusätzliche Ausgaben tatsächlich verdrängen.\\
+\textbf{Mehrkriterien\-analyse} & Verfahren, die mehrere Ziele ohne Geldmaßstab gewichten.\\
+\textbf{Unsicherheit} & Die Wahrscheinlichkeit, dass eine Strategie bei gegebener Schwelle die beste ist.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Statt einer Punktschätzung berichtet man, für welchen Anteil der simulierten Parameterwerte jede Strategie gewinnt --- aufgetragen gegen die Schwelle. \textbf{Das ist eine Entscheidungsdarstellung, keine Testdarstellung}: Sie fragt nicht, ob ein Unterschied gesichert ist, sondern welche Wahl bei welcher Zahlungsbereitschaft am ehesten richtig ist. Für Entscheidungen ist das die angemessenere Frage --- wie schon Kapitel~3 am Wert der Information zeigte.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 10.1} & ICER: Preis je zusätzlicher Einheit\\
+\textbf{Rangfolge} & benachbart vergleichen, nicht mit \enquote{nichts}\\
+\textbf{Dominanz} & einfach und erweitert\\
+\textbf{Nettonutzen} & Differenz statt Verhältnis\\
+\textbf{Schwelle} & Verdrängung, nicht Zahlungsbereitschaft\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle Rechnungen setzten bekannte Wahrscheinlichkeiten voraus. Das nächste Kapitel nimmt auch das zurück.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,326 @@
+\part{Die Praxis}
+
+\chapter{Dasselbe noch einmal}
+
+\section{Was Reproduzierbarkeit heißt}
+
+\begin{merksatz}
+\boxtitel{Drei Stufen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{6.0cm}@{}}
+\toprule
+\textbf{Bitgenau} & Derselbe Startwert, dasselbe Programm, dieselbe Zahl bis zur letzten Stelle: $0{,}186134772708$ --- heute und in zehn Jahren.\\
+\textbf{Statistisch} & Ein anderer Startwert gibt eine andere Zahl, $0{,}1678$, und beide liegen innerhalb ihrer Standardfehler beim selben Wert.\\
+\textbf{Sachlich} & Ein anderes Programm, von jemand anderem nach der Beschreibung geschrieben, gibt dasselbe Ergebnis --- oder deckt auf, dass die Beschreibung unvollständig war.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die erste Stufe ist eine Programmfrage, die zweite eine Statistikfrage, die dritte die einzige, die zählt. Dieses Kapitel handelt von allen dreien.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine Simulation, die nicht reproduzierbar ist, ist eine Anekdote.} Die Zahl $0{,}1861$ oben ist der Abweisungsanteil aus $5\,000$ Tagen mit Startwert $42$; sie weicht vom exakten Wert $0{,}1785$ um zwei Standardfehler ab, und ohne den Startwert könnte niemand prüfen, ob das Zufall oder ein Fehler ist. Mit dem Startwert kann jeder den Lauf wiederholen, den Fehler einkreisen und --- das ist der eigentliche Zweck --- den Lauf mit einem geänderten Programm wiederholen und sehen, ob sich \kursiv{nur} das ändert, was sich ändern sollte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Startwerte und Ströme}
+
+\begin{merksatz}
+\boxtitel{Regeln für den Zufall im Programm}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.8cm}@{}}
+\toprule
+\textbf{Startwert sichtbar} & Nie die Uhr als Startwert ohne ihn zu protokollieren. Der Startwert gehört in die Ausgabe, neben das Ergebnis.\\
+\textbf{Ein Strom je Zweck} & Ankünfte, Verweildauern, Entscheidungen: je ein eigener Generator --- Aufgabe 4.3.\\
+\textbf{Abgeleitete Ströme} & Die Ströme für parallele Läufe nicht mit $1, 2, 3, \ldots$ starten, sondern aus einem Hauptstartwert ableiten: \kursiv{SeedSequence}, \kursiv{jumped}, \kursiv{spawn} --- Kapitel~2.\\
+\textbf{Generator benennen} & PCG64, Mersenne-Twister, Philox: Der Name und die Version gehören ins Protokoll, weil derselbe Startwert in verschiedenen Generatoren verschiedene Folgen gibt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum nicht $1, 2, 3$}
+Bei einem linearen Kongruenzgenerator liegen die Folgen zu Startwerten $1$ und $2$ nicht weit auseinander: Beide durchlaufen denselben Zyklus, und der Abstand zwischen ihnen ist eine feste, unbekannte Zahl von Schritten. Bei vierzig parallelen Läufen mit je $10^{6}$ Zahlen aus einem Zyklus von $2^{31}$ überlappen sich zwei von ihnen mit Wahrscheinlichkeit um $40^2\cdot10^{6}/2^{31} \approx 0{,}7$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Überlappende Ströme sind gemeinsame Zufallszahlen, die man nicht wollte: Die Läufe sind korreliert, und der Standardfehler aus Kapitel~4 ist zu klein.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Moderne Generatoren haben Perioden von $2^{128}$ und mehr, und das Problem ist dort praktisch verschwunden} --- aber nicht aus dem Lehrbuch, weil der Fehler mit alten Generatoren noch in laufenden Programmen steckt. Die saubere Lösung, die \kursiv{SeedSequence} von NumPy seit 2019 bietet: Aus einem Hauptstartwert werden Kindstartwerte so abgeleitet, dass ihre Ströme nach allen bekannten Tests unabhängig sind, und jedes Kind kann wieder Kinder haben. Vierzig Läufe sind dann vierzig Kinder von $2026$, und das Protokoll braucht nur die eine Zahl.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Programm prüfen}
+
+\begin{merksatz}
+\boxtitel{Satz 13.1 --- Die Prüfleiter}
+Ein Simulationsprogramm ist geprüft, wenn es diese Stufen bestanden hat, in dieser Reihenfolge:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{0.6cm}P{3.0cm}P{4.8cm}@{}}
+\toprule
+$1$ & \textbf{Erhaltung} & Was hineingeht, kommt heraus: Ankünfte $=$ Aufnahmen $+$ Abweisungen. Little.\\
+$2$ & \textbf{Grenzfälle} & $\lambda\to0$: keine Abweisung. Betten $\to\infty$: keine Abweisung. Verweildauer $0$: keine Abweisung. Ein Bett: Erlang mit $c=1$ von Hand.\\
+$3$ & \textbf{Formel} & Ein Sonderfall mit exakter Lösung: exponentielle Verweildauer gegen Erlang B, mit Standardfehler.\\
+$4$ & \textbf{Unempfind\-lichkeit} & Lognormal gegen exponentiell bei gleichem Mittel: gleiches Ergebnis, Satz aus Band 25.\\
+$5$ & \textbf{Zweites Programm} & Ein anderer schreibt es nach der Beschreibung. Abweichungen sind Lücken in der Beschreibung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis}
+Keine Prüfung beweist Korrektheit; jede Stufe schließt eine Klasse von Fehlern aus. Stufe $1$ findet Buchhaltungsfehler, $2$ Vorzeichen- und Grenzfehler, $3$ Fehler in der Logik, $4$ Fehler in der Verteilung, $5$ Fehler im Verständnis. $\blacksquare$
+
+\schritt{Zwei Fehler, die alle Stufen bis $2$ bestehen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{4.0cm}P{2.6cm}P{1.8cm}@{}}
+\toprule
+\textbf{Programm} & \textbf{Anteil} & \textbf{Urteil}\\
+\midrule
+richtig & $0{,}1826\pm0{,}0018$ & $\checkmark$\\
+\enquote{voll} bei $11$ statt $12$ & $0{,}2308\pm0{,}0018$ & Stufe 3\\
+Entlassungen \kursiv{nach} der Aufnahme geprüft & $0{,}2191\pm0{,}0016$ & Stufe 3\\
+\midrule
+exakt & $0{,}1785$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide Fehler erhalten die Buchhaltung, bestehen alle Grenzfälle --- und liegen um ein Viertel daneben. Erst die Formel entlarvt sie.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der zweite Fehler ist der lehrreiche}: Ein Patient kommt um $10$ Uhr, ein Bett wird um $9$ Uhr frei --- aber das Programm prüft erst nach der Aufnahmeentscheidung, welche Entlassungen fällig waren. Das Bett ist frei, der Patient wird abgewiesen. Es ist die Reihenfolge-Frage aus dem Bruchfall in Kapitel~10, nicht bei gleichzeitigen Ereignissen, sondern bei allen; und sie ist in jedem Zeitschritt-Programm und in jeder Hauptschleife eine Zeile, die man leicht falsch setzt. Die Stufe $3$ ist deshalb nicht Luxus: \textbf{Für jedes Modell gibt es einen Sonderfall mit Formel}, und wer ihn nicht findet, hat das Modell nicht verstanden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bericht}
+
+\begin{merksatz}
+\boxtitel{Was in jeden Simulationsbericht gehört}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.2cm}@{}}
+\toprule
+\textbf{Modell} & Zustand, Ereignisse, Verteilungen mit Parametern, Reihenfolge gleichzeitiger Ereignisse, Anfangszustand.\\
+\textbf{Lauf} & Generator, Hauptstartwert, Zahl und Länge der Läufe, Einschwingphase und wie sie bestimmt wurde.\\
+\textbf{Ergebnis} & Jede Zahl mit Standardfehler und dem Verfahren dafür (Blockmittel, Wiederholungen, $\tau$). Bei Ketten: $\hat R$, $n_{\text{eff}}$.\\
+\textbf{Prüfung} & Welche Stufen der Leiter, mit Zahlen.\\
+\textbf{Code} & Der Quelltext, mit Version. Nicht \enquote{auf Anfrage}.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Zahl ohne Standardfehler ist keine Simulationsergebnis. Ein Ergebnis ohne Startwert ist nicht nachprüfbar. Ein Modell ohne die Reihenfolge-Regel ist nicht beschrieben.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{In der Medizin gibt es dafür eine Leitlinie}: ISPOR-SMDM 2012 für Modellierungsstudien, die von Fachzeitschriften verlangt wird --- und die Zahl der Studien, die sie erfüllen, liegt nach Übersichtsarbeiten unter der Hälfte. Der häufigste Mangel ist der letzte Punkt: Der Code fehlt. Wer in diesem Band bis hierher gekommen ist, hat ihn --- die Intensivstation ist in jeder Sprache hundert Zeilen, und die hundert Zeilen sind der Beweis, nicht die Tabelle.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Bitgenau und doch verschieden}
+Dasselbe Programm, derselbe Startwert, zwei Rechner --- und die Zahl stimmt in der zwölften Stelle nicht.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Summen\-reihenfolge} & Eine Million Zahlen vorwärts summiert: $500\,159{,}25646369834$; rückwärts: $500\,159{,}2564636872$. Gleitkomma-Addition ist nicht assoziativ, Band 11.\\
+\textbf{Parallele Summen} & Vier Kerne summieren je ein Viertel; welcher Kern zuerst fertig ist, entscheidet die Reihenfolge --- und die ist jedes Mal anders.\\
+\textbf{Bibliotheksversion} & Eine neue Version des Generators oder der Normalverteilungs-Routine (Box--Muller gegen Ziggurat, Kapitel~2) gibt zum selben Startwert andere Zahlen.\\
+\textbf{Mathematische Biblio\-thek} & $\exp$ und $\log$ sind auf verschiedenen Prozessoren in der letzten Stelle verschieden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die zwölfte Stelle ist harmlos --- bis eine Verzweigung davon abhängt: \enquote{Ist das Bett vor oder nach der Ankunft frei?} Dann läuft die Simulation ab diesem Ereignis anders, und am Ende steht eine andere Zahl im Rahmen des Standardfehlers, aber nicht dieselbe.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bitgenaue Reproduzierbarkeit über Rechner hinweg ist ein Ziel, das man anstreben und nicht immer erreichen kann.} Was man erreichen kann: auf \kursiv{einem} Rechner mit festgehaltenen Versionen bitgenau, über Rechner hinweg statistisch --- und das Protokoll sagt, welches von beiden gemeint ist. Die Verzweigung in der Mitte ist zugleich das Argument gegen das Rechnen mit Gleitkommazeiten in Ereignislisten: Wer die Zeiten in ganzen Sekunden führt, Band 11, hat keine zwölfte Stelle, von der etwas abhängt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.1 --- Ist das noch Zufall?}
+Startwert $42$ gab $0{,}1861$, Startwert $43$ gab $0{,}1678$, je $5\,000$ Tage; exakt ist $0{,}1785$. Standardfehler je Lauf etwa $0{,}006$ (Kapitel~4). Liegt ein Fehler vor?
+
+\loesung
+\schritt{Schritt 1 --- Die Abweichungen}
+$+0{,}0076$ und $-0{,}0107$: $1{,}3$ und $1{,}8$ Standardfehler.
+
+\schritt{Schritt 2 --- Die Spanne}
+Zwei Läufe mit Differenz $0{,}0183$ bei Standardfehler der Differenz $0{,}006\sqrt2 = 0{,}0085$: $2{,}2$ Standardfehler --- bei zwei Läufen nicht auffällig ($5$ Prozent wären $1{,}96$).
+
+\schritt{Schritt 3 --- Das Urteil}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein Befund. Aber auch kein Freispruch: Zwei Läufe entscheiden nichts. Zehn Läufe mit Mittel $0{,}1826\pm0{,}0018$ --- Abschnitt 13.3 --- liegen $2{,}3$ Standardfehler über dem exakten Wert, und das ist der Punkt, an dem man nachsieht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Und man findet: die Einschwingphase.} Die zehn Läufe verwerfen $100$ Tage und beginnen leer; die Belegung in den ersten Tagen danach ist noch nicht ganz im Dauerzustand --- Kapitel~4 hat das Fenster $10$ bis $50$ Tage mit $0{,}174$ bis $0{,}188$ gezeigt. Bei $5\,000$ Tagen je Lauf wiegt das wenig, aber bei zehn Läufen à $5\,000$ und einem Standardfehler von $0{,}0018$ sieht man es. Mit $20\,000$ Tagen je Lauf war es in Kapitel~10 verschwunden: $0{,}1795$. Die Lehre ist nicht, dass die Simulation falsch war --- sondern dass ein Standardfehler von $0{,}002$ Verzerrungen von $0{,}004$ sichtbar macht, die bei $0{,}006$ unsichtbar waren. Je genauer die Statistik, desto strenger prüft sie das Programm.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.2 --- Der Stufe-3-Test als Hypothesentest}
+Mit exponentieller Verweildauer: zehn Läufe geben Mittel $0{,}1799$, Standardfehler $0{,}0015$; Erlang sagt $0{,}1785$. Formulieren Sie den Test und sein Ergebnis --- und was ein \enquote{Bestehen} bedeutet.
+
+\loesung
+\schritt{Schritt 1 --- Der Test}
+$H_0$: Erwartungswert der Simulation $= 0{,}1785$. Teststatistik $(0{,}1799-0{,}1785)/0{,}0015 = 0{,}93$. Zweiseitig: $p = 0{,}35$. Nicht verworfen.
+
+\schritt{Schritt 2 --- Was nicht verworfen heißt}
+Die Prüfung kann Verzerrungen unter etwa $2\cdot0{,}0015 = 0{,}003$ nicht sehen. Ein Fehler, der $0{,}002$ Verzerrung erzeugt, besteht den Test.
+
+\schritt{Schritt 3 --- Die Konsequenz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Prüfen mit Macht} & So viele Läufe, dass der Standardfehler ein Zehntel der Genauigkeit ist, die man später beansprucht.\\
+\textbf{Mehrere Sonderfälle} & Ein Bett, zwölf Betten, $\lambda$ klein, $\lambda$ groß: Ein Fehler, der bei $12$ Betten $0{,}002$ ausmacht, macht bei einem Bett $0{,}05$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Stufe-3-Test ist ein Äquivalenztest, kein Signifikanztest} --- Band 17, Kapitel~11: Man will zeigen, dass die Verzerrung \kursiv{kleiner} als eine Schranke ist, nicht, dass sie nicht nachweisbar ist. Dafür braucht man ein Vertrauensintervall, das ganz innerhalb der Schranke liegt: $[0{,}177;\,0{,}183]$ innerhalb von $0{,}1785\pm0{,}005$ --- bestanden, mit der Schranke als Teil des Urteils. Die Schranke setzt der Zweck: Für den Vergleich zweier Varianten mit Differenz $0{,}04$ genügt $0{,}005$; für eine Zulassung mit Verlustwahrscheinlichkeit $10^{-6}$ nicht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.3 --- Vierzig Läufe auf vier Kernen}
+Entwerfen Sie die Startwertvergabe und die Zusammenführung so, dass das Ergebnis bitgenau reproduzierbar ist, unabhängig davon, welcher Kern wann fertig wird.
+
+\loesung
+\schritt{Schritt 1 --- Die Startwerte}
+Hauptstartwert $2026$; vierzig Kinder über \kursiv{SeedSequence(2026).spawn(40)}. Lauf $k$ bekommt Kind $k$ --- nicht \enquote{den nächsten freien Kern}, sondern die feste Nummer.
+
+\schritt{Schritt 2 --- Die Zuteilung}
+Kern $j$ bearbeitet die Läufe $k \equiv j \pmod 4$, oder eine Warteschlange verteilt sie --- egal, denn Lauf $k$ hängt nur von Kind $k$ ab.
+
+\schritt{Schritt 3 --- Die Zusammenführung}
+Ergebnisse in ein Feld der Länge $40$ an Position $k$ schreiben; erst nach dem letzten Lauf summieren, in der Reihenfolge $0$ bis $39$. Nie \enquote{addiere, sobald fertig}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jeder Lauf ist eine Funktion seiner Nummer. Die Reihenfolge der Ausführung ist dann gleichgültig, und die Summe ist die Summe in fester Reihenfolge.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das Muster für alles Parallele in der Simulation}: unabhängige Aufgaben, je mit eigenem Zufall, Ergebnisse nach Nummer abgelegt, Reduktion am Ende in fester Reihenfolge. Es ist zugleich das Muster, das Markow-Ketten nicht erlauben --- jede Kette ist eine Folge, und nur die Ketten laufen parallel, nicht die Schritte. Deshalb sind vier Ketten auf vier Kernen der Normalfall und eine Kette auf vier Kernen die Ausnahme, Kapitel~8.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Die Krise und die Antwort}
+Die Reproduzierbarkeitskrise, die um 2011 in der Psychologie und der Medizin ausbrach, erreichte die Simulation später --- und traf sie härter, weil hier alles reproduzierbar sein könnte.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Eine Untersuchung von 2019 fand, dass von Simulationsstudien in führenden Zeitschriften weniger als ein Fünftel den Code beilegten und weniger als die Hälfte den Generator nannten. \textbf{Die Antwort kam aus der Werkzeugseite}: Versionsverwaltung, Band B, seit 2005 mit git; Container, die eine ganze Rechnerumgebung einfrieren; und Zeitschriften, die ab 2015 den Code als Teil der Einreichung verlangten --- zuerst in der Statistik, dann in der Ökonomie, zuletzt in der Medizin.}
+\end{minipage}
+\end{center}
+
+\schritt{SeedSequence}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Robert Kern} entwarf 2019 für NumPy die Ableitung unabhängiger Startwerte aus einem Hauptstartwert --- nach einer Vorarbeit von \Person{O'Neill}, der Erfinderin von PCG. \textbf{Davor war die übliche Praxis, Startwerte $1, 2, 3$ zu vergeben}, und bei den Generatoren der 1990er Jahre waren die Folgen zu benachbarten Startwerten messbar korreliert. Dass dieses Problem heute gelöst ist, verdankt sich wenigen Personen, die es für wichtig hielten, als es niemand sonst tat.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Reproduzierbarkeit heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Reproduzierbare Summen} & Verfahren, die Gleitkommasummen unabhängig von der Reihenfolge bitgenau machen --- mit etwas Mehraufwand.\\
+\textbf{Gegenfaktische Zufallszahlen} & Ströme so anlegen, dass jede Zufallszahl an ein Objekt gebunden ist (Patient $k$, Verweildauer), nicht an eine Position --- Varianten bleiben synchron.\\
+\textbf{Ausführbare Artikel} & Der Artikel ist das Programm: Jede Zahl im Text wird beim Erzeugen des Dokuments berechnet.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die gegenfaktischen Zufallszahlen lösen Aufgabe 4.3 endgültig}: Statt eines Stroms, aus dem man der Reihe nach zieht, hat jeder Patient einen eigenen Startwert, aus seiner Nummer abgeleitet, und seine Verweildauer ist eine Funktion dieses Startwerts. Dann hat Patient $137$ in der Variante mit zwölf und mit dreizehn Betten dieselbe Verweildauer --- ob er aufgenommen wird oder nicht, ob vor ihm jemand abgewiesen wurde oder nicht. Die Synchronität ist in die Struktur eingebaut, nicht in die Disziplin des Programmierers. Die Zählergeneratoren aus Kapitel~2 --- Philox, Threefry --- sind genau dafür gebaut: Der Zähler ist die Patientennummer.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Drei Stufen} & bitgenau, statistisch, sachlich\\
+\textbf{Ströme} & sichtbar, je Zweck, abgeleitet, benannt\\
+\textbf{Satz 13.1} & Prüfleiter: Erhaltung, Grenzen, Formel, Unempfindlichkeit, zweites Programm\\
+\textbf{Bericht} & Modell, Lauf, Fehler, Prüfung, Code\\
+\textbf{Der Bruchfall} & Gleitkomma ist nicht assoziativ\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Geprüft, reproduzierbar, berichtet --- und doch bleibt die Frage, was das Ergebnis wert ist, wenn $\lambda = 2{,}4$ aus hundert Tagen geschätzt wurde und ebenso gut $2{,}2$ oder $2{,}6$ sein könnte. Das nächste Kapitel rechnet diese Unsicherheit durch die Station hindurch.}
+\end{minipage}
+\end{center}
+\end{merksatz}

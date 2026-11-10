@@ -1,0 +1,324 @@
+\chapter{Was man dem Ergebnis glauben darf}
+
+\section{Zwei Arten von Zufall}
+
+\begin{merksatz}
+\boxtitel{Die Abweisungsrate ist $0{,}1785$ --- für wen?}
+Für eine Station mit $\lambda = 2{,}4$ und mittlerer Verweildauer $4{,}79$. Beides sind Schätzungen aus Daten: $240$ Ankünfte in $100$ Tagen, $100$ Aufenthalte mit $\bar y = 1{,}386$, $s = 0{,}60$ auf der logarithmischen Skala.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.6cm}@{}}
+\toprule
+\textbf{Aleatorisch} & Der Zufall der Ankünfte und Verweildauern --- er bleibt, auch wenn man $\lambda$ exakt kennt. Die Simulation erzeugt ihn.\\
+\textbf{Epistemisch} & Die Unkenntnis von $\lambda$, $\mu$, $\sigma$ --- sie schrumpft mit mehr Daten. Band 21 beschreibt sie als A-posteriori-Verteilung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Abweisungsrate ist eine Funktion der Parameter. Sind die Parameter unsicher, ist sie es auch --- und die Frage ist, wie sehr.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{\Begriff{Unsicherheitsquantifizierung} heißt, die epistemische Unsicherheit durch das Modell hindurchzurechnen}: nicht eine Zahl, sondern eine Verteilung über Zahlen, und für jede Entscheidung die Wahrscheinlichkeit, dass sie richtig ist. Die Werkzeuge sind die der Kapitel~7 und~3 --- A-posteriori-Ziehungen und Integration über sie ---, und das Ergebnis ist das, was ein Gutachten eigentlich schuldet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Unsicherheit durch das Modell}
+
+\begin{definition}
+\boxtitel{Definition 14.1 --- Die A-posteriori-Vorhersage einer Kennzahl}
+Sei $\theta$ der Parametervektor mit A-posteriori-Dichte $p(\theta\mid\text{Daten})$ und $g(\theta)$ die Kennzahl des Modells. Die Verteilung von $g$ gegeben die Daten ist das Bild der A-posteriori-Verteilung unter $g$:
+\[ P(g \le z\mid\text{Daten}) = \int \mathbf 1\{g(\theta)\le z\}\,p(\theta\mid\text{Daten})\,d\theta . \]
+Man zieht $\theta^{(1)},\ldots,\theta^{(N)}$ aus der A-posteriori-Verteilung (Kapitel~7) und berechnet $g(\theta^{(i)})$ --- durch Formel oder durch Simulation.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall, $20\,000$ A-posteriori-Ziehungen}
+$\lambda\sim\operatorname{Gamma}(241, 100)$, $(\mu,\sigma)$ nach Kapitel~7; $g = $ Erlang B mit $a = \lambda\,e^{\mu+\sigma^2/2}$ --- die Formel ist hier exakt, die Simulation wäre es auch.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{1.8cm}P{1.6cm}P{2.6cm}P{1.8cm}@{}}
+\toprule
+& \textbf{Mittel} & \textbf{Streuung} & \textbf{$90\,\%$-Intervall} & $P(g>0{,}2)$\\
+\midrule
+$12$ Betten & $0{,}183$ & $0{,}042$ & $[0{,}117;\ 0{,}254]$ & $0{,}33$\\
+$13$ Betten & $0{,}141$ & $0{,}038$ & $[0{,}082;\ 0{,}208]$ & $0{,}07$\\
+\midrule
+Differenz & $0{,}042$ & $0{,}0035$ & $[0{,}035;\ 0{,}046]$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Abweisungsrate bei zwölf Betten liegt zwischen $0{,}12$ und $0{,}25$. Die Wirkung des dreizehnten Betts zwischen $0{,}035$ und $0{,}046$ --- zehnmal schärfer, weil beide Varianten von denselben Parametern abhängen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist Satz 4.3 auf der Parameterebene}: Dieselben $\theta^{(i)}$ für beide Varianten, und die Unsicherheit über $\lambda$, die beide Raten hebt oder senkt, kürzt sich in der Differenz. Für die Entscheidung \enquote{dreizehntes Bett} ist die epistemische Unsicherheit damit fast belanglos --- $0{,}042\pm0{,}0035$ --- während die Frage \enquote{wie hoch ist die Rate überhaupt} mit $\pm0{,}04$ beantwortet wird. Hundert Tage Daten reichen für das Eine und nicht für das Andere. Mit $400$ Tagen halbiert sich die Streuung auf $0{,}021$ --- die Wurzelregel aus Band 17, hier für die Parameter.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Woher die Unsicherheit kommt}
+
+\begin{definition}
+\boxtitel{Definition 14.2 --- Sobol-Indizes}
+Für $g(\theta_1,\ldots,\theta_d)$ mit unabhängigen $\theta_j$ ist der \Begriff{Haupteffekt} von $\theta_j$
+\[ S_j = \frac{\operatorname{Var}\big[\mathbb E[g\mid\theta_j]\big]}{\operatorname{Var}[g]} \]
+--- der Anteil der Varianz von $g$, den $\theta_j$ allein erklärt. Die Summe der $S_j$ ist höchstens $1$; der Rest sind Wechselwirkungen.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 14.3 --- Die Varianzzerlegung}
+Für unabhängige Eingaben und quadratintegrierbares $g$ gilt
+\[ \operatorname{Var}[g] = \sum_j V_j + \sum_{j<k} V_{jk} + \cdots + V_{1\ldots d} \]
+mit $V_j = \operatorname{Var}[\mathbb E[g\mid\theta_j]]$ und den höheren Termen als Varianzen der Wechselwirkungen.
+
+\schritt{Beweis}
+Band 20, Kapitel~12 (Auslassung 5): Die Zerlegung von $g$ in orthogonale Summanden $g_0 + \sum g_j(\theta_j) + \sum g_{jk}(\theta_j,\theta_k)+\cdots$ mit $\mathbb E[g_j] = 0$ und paarweise unkorrelierten Termen; die Varianz ist dann die Summe der Varianzen. $\blacksquare$
+
+\schritt{Für die Abweisungsrate bei zwölf Betten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{1.8cm}@{}}
+\toprule
+\textbf{Parameter} & \textbf{relative Streuung} & $S_j$\\
+\midrule
+$\lambda$ & $6{,}4\,\%$ & $0{,}48$\\
+$\mu$ & & $0{,}43$\\
+$\sigma$ & & $0{,}09$\\
+\midrule
+Summe & & $1{,}00$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ankunftsrate und Lageparameter der Verweildauer tragen je die Hälfte; die Streuung der Verweildauer fast nichts. Keine Wechselwirkungen --- weil $g$ nur von $a = \lambda e^{\mu+\sigma^2/2}$ abhängt und $\ln a$ eine Summe ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Indizes sagen, wo mehr Daten lohnen}: Jeder Tag liefert $2{,}4$ Ankünfte für $\lambda$ und $2{,}4$ Verweildauern für $\mu$ --- beide schrumpfen gleich schnell. Wäre $S_\sigma$ groß, so bräuchte man extreme Aufenthalte, und die sind selten. Die $S_j$ sind hier aus $20\,000$ Ziehungen durch Einteilung in fünfzig Klassen je Parameter geschätzt --- bei einem $g$, das eine Simulation ist, braucht man dafür die Schätzer von \Person{Saltelli} aus dem Forschungskasten, die mit $N(d+2)$ Läufen auskommen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Entscheidung unter Unsicherheit}
+
+\begin{merksatz}
+\boxtitel{Was die Klinikleitung wissen will}
+Nicht \enquote{die Rate ist $0{,}18$}, sondern:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{5.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Frage} & \textbf{Antwort}\\
+\midrule
+Liegt die Rate über $20\,\%$? & mit $33\,\%$ Wahrscheinlichkeit\\
+Bringt das dreizehnte Bett sie unter $15\,\%$? & mit $62\,\%$\\
+Senkt es die Rate um mehr als drei Punkte? & mit $> 99\,\%$\\
+Wie viel Daten für $\pm0{,}02$? & etwa $400$ Tage\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die dritte Zeile ist eine Entscheidung; die erste ist keine. Unsicherheitsquantifizierung trennt die Fragen, die die Daten beantworten können, von denen, die sie nicht beantworten können --- und sagt, was es kosten würde.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Band 24 hat gezeigt, wie man aus solchen Wahrscheinlichkeiten und den Kosten eine Entscheidung macht}: Erwartungswert über die A-posteriori-Verteilung, Wert der Information für mehr Daten. Hier reicht die Tabelle: Das dreizehnte Bett wirkt mit Sicherheit und seine Wirkung ist auf drei Prozent genau bekannt; ob die Station \enquote{ein Problem hat}, ist bei hundert Tagen Daten dagegen offen. Wer das Erste als Argument und das Zweite als Frage vorträgt, hat die Simulation richtig benutzt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Unsicherheit, die nicht im Modell ist}
+Alle Intervalle oben setzen voraus: Poisson-Ankünfte mit konstantem $\lambda$, lognormale Verweildauern, unabhängig, zwölf gleichwertige Betten. Was nicht darin ist:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Tagesrhythmus} & erhöht die Rate um $20$ bis $40\,\%$ --- Kapitel~10, Forschungskasten.\\
+\textbf{Abhängigkeit} & Eine Grippewelle bringt mehr Patienten \kursiv{und} längere Aufenthalte zugleich: $\lambda$ und $\mu$ steigen gemeinsam, und die Varianz von $a$ ist größer als unter Unabhängigkeit.\\
+\textbf{Verhaltens\-änderung} & Bei voller Station entlassen Ärzte früher. Die Verweildauer hängt von der Belegung ab, und das Modell weiß es nicht.\\
+\textbf{Die Daten selbst} & Hundert Tage aus dem Winter sind kein Jahr.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Intervall $[0{,}12;\ 0{,}25]$ ist die Unsicherheit innerhalb des Modells. Die Unsicherheit über das Modell ist nicht darin, und sie ist wahrscheinlich größer.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die dritte Zeile ist die gefährlichste, weil sie das Modell in die richtige Richtung verfälscht}: Die Station sieht in Wirklichkeit weniger Abweisungen, als das Modell vorhersagt --- weil sie sich anpasst ---, und ein Modell, das das nicht enthält, überschätzt den Nutzen des dreizehnten Betts: Mit mehr Betten wird weniger früh entlassen, die Verweildauer steigt, und ein Teil des Gewinns verschwindet. Die Abhilfe ist nicht mehr Statistik, sondern \Begriff{Modellvergleich} --- mehrere Modelle rechnen, mit und ohne Anpassung, mit und ohne Tagesrhythmus --- und die Spanne der Ergebnisse als die ehrliche Unsicherheit berichten. Band 21 nennt das \Begriff{Modellmittelung}; die Praxis nennt es Sensitivitätsanalyse; beides ist dasselbe Eingeständnis.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- Die Elastizität von Hand}
+Wie stark reagiert die Abweisungsrate auf ein Prozent mehr Last $a$? Leiten Sie es aus der Erlang-Rekursion ab und prüfen Sie die Streuung $0{,}042$.
+
+\loesung
+\schritt{Schritt 1 --- Die Ableitung}
+Numerisch aus Kapitel~1: $B(11{,}50)-B(11{,}48) = 0{,}00079$, also $dB/da = 0{,}040$. Elastizität $\dfrac{a}{B}\dfrac{dB}{da} = \dfrac{11{,}49\cdot0{,}040}{0{,}1785} = 2{,}6$.
+
+\schritt{Schritt 2 --- Die Unsicherheit von $a$}
+$\ln a = \ln\lambda + \mu + \sigma^2/2$, unabhängige Summanden:
+\[ \operatorname{Var}[\ln a] = 0{,}064^2 + 0{,}060^2 + \operatorname{Var}[\sigma^2/2] \approx 0{,}0041+0{,}0036+0{,}0007 = 0{,}0084 \]
+Relative Streuung von $a$: $0{,}092$.
+
+\schritt{Schritt 3 --- Die Deltamethode}
+Relative Streuung von $B$: $2{,}6\cdot0{,}092 = 0{,}24$; absolut $0{,}24\cdot0{,}1785 = 0{,}043$. Simuliert: $0{,}042$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Deltamethode aus Band 17 trifft die Streuung --- nicht aber das Intervall}: $[0{,}117;\ 0{,}254]$ ist nicht symmetrisch um $0{,}183$, weil $B$ in $a$ konvex ist und $a$ lognormal. Für die Streuung reicht die Formel, für $P(g>0{,}2)$ braucht man die Ziehungen. Die Elastizität $2{,}6$ ist aber die Zahl, die man sich merkt: Ein Prozent mehr Last, zweieinhalb Prozent mehr Abweisungen --- bei $96$ Prozent Auslastung. Bei $80$ Prozent wäre sie $3{,}4$, bei $60$ Prozent $5$: Je leerer die Station, desto empfindlicher die \kursiv{relative} Rate, aber desto kleiner die absolute.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- Wenn $g$ eine Simulation ist}
+Statt der Erlang-Formel steht eine Simulation mit $\pm0{,}006$ Standardfehler je Lauf. Wie trennt man die Simulationsstreuung von der Parameterunsicherheit?
+
+\loesung
+\schritt{Schritt 1 --- Die Zerlegung}
+Für jedes $\theta^{(i)}$ ein Lauf mit Ergebnis $\hat g_i = g(\theta^{(i)}) + e_i$, $e_i$ der Simulationsfehler. Dann
+\[ \operatorname{Var}[\hat g] = \operatorname{Var}[g(\theta)] + \mathbb E[\operatorname{Var}[e]] = \operatorname{Var}[g(\theta)] + 0{,}006^2 . \]
+
+\schritt{Schritt 2 --- Die Zahlen}
+$\operatorname{Var}[\hat g] = 0{,}042^2 + 0{,}006^2 = 0{,}001764 + 0{,}000036$: Die Simulationsstreuung macht zwei Prozent der Varianz aus. Man kann sie abziehen --- oder ignorieren.
+
+\schritt{Schritt 3 --- Die Planung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Je Parameterziehung ein kurzer Lauf, nicht je Ziehung ein langer: Die Parameterunsicherheit ist siebenmal größer als die Simulationsstreuung, also gehört die Rechenzeit in viele Ziehungen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Varianzzerlegung aus Satz 5.3 und Aufgabe 12.3 noch einmal}, und sie beantwortet die häufigste Planungsfrage der Unsicherheitsquantifizierung: $1\,000$ Parameterziehungen mit je $1\,000$ Tagen schlagen $10$ Ziehungen mit je $100\,000$ Tagen, bei gleichem Aufwand, um den Faktor zehn in der Genauigkeit über die Parameter. Nur wenn die Simulation selbst grob ist --- $\pm0{,}04$ je Lauf --- lohnt sich der Ausgleich, und dann hilft Kapitel~5.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Der Wert von vierhundert Tagen}
+Mit $400$ Tagen Daten wäre die Streuung $0{,}021$ statt $0{,}042$. Was ist diese Verbesserung wert, wenn die Entscheidung lautet: dreizehntes Bett ja oder nein?
+
+\loesung
+\schritt{Schritt 1 --- Hängt die Entscheidung davon ab?}
+Die Differenz $0{,}042\pm0{,}0035$ ist schon bei hundert Tagen so scharf, dass kein realistischer Datensatz sie unter $0{,}03$ bringt. Die Entscheidung \enquote{Bett ja} ändert sich durch mehr Daten nicht.
+
+\schritt{Schritt 2 --- Der Wert der Information}
+Nach Band 24: Der Wert zusätzlicher Daten ist der Erwartungswert der Verbesserung der Entscheidung. Ändert sich die Entscheidung nicht, ist er null.
+
+\schritt{Schritt 3 --- Wofür die Daten dann sind}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Für die andere Frage: Ob die Station \enquote{über $20\,\%$} liegt --- für Berichte, Verhandlungen mit Kostenträgern, den Vergleich mit anderen Häusern. Dort halbieren $400$ Tage das Intervall.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Unsicherheitsquantifizierung endet nicht beim Intervall, sondern bei der Frage, wofür das Intervall gebraucht wird.} Dieselben Daten sind für eine Entscheidung mehr als genug und für eine Kennzahl zu wenig. Wer beides vermischt, fordert entweder Daten, die niemand braucht, oder trifft Entscheidungen auf Zahlen, die niemand hat. Die Tabelle in Abschnitt 14.4 ist der Versuch, die Trennung auf einer Seite darzustellen --- und sie ist das, was man einer Klinikleitung vorlegt, nicht die Formel.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von Sobol bis zur Leitlinie}
+\Person{Ilya Sobol} --- derselbe, dessen Folgen Kapitel~6 nutzt --- veröffentlichte die Varianzzerlegung 1990 in Moskau, auf Russisch; die englische Fassung von 1993 machte sie bekannt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{\Person{Andrea Saltelli} und seine Gruppe in Ispra machten daraus ab 2000 ein Verfahren}: Schätzer für die Indizes aus $N(d+2)$ Modellläufen, Software, ein Lehrbuch 2008, und die Forderung, dass jede Modellstudie für die Europäische Kommission eine Sensitivitätsanalyse enthalten müsse. Die Bezeichnung \enquote{Unsicherheitsquantifizierung} stammt aus den amerikanischen Waffenlaboren der 1990er Jahre, wo nach dem Teststopp 1992 Simulationen die Versuche ersetzten --- und die Frage, wie weit man ihnen trauen dürfe, zur Überlebensfrage wurde.}
+\end{minipage}
+\end{center}
+
+\schritt{Aleatorisch und epistemisch}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Unterscheidung ist älter --- \Person{Hacking} datiert sie auf die Entstehung der Wahrscheinlichkeit im siebzehnten Jahrhundert, die von Anfang an beides war: Würfel und Zeugenaussagen. \textbf{In der Simulation wurde sie in den 1990er Jahren zur Arbeitsgrundlage}, weil nur die zweite Art durch Daten schrumpft und nur die erste durch mehr Läufe sichtbar wird. Wer beide in einem Intervall vermischt, kann keines von beiden verkleinern.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Unsicherheitsquantifizierung heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Ersatzmodelle} & Die Simulation durch ein Gauß-Prozess-Modell (Band 23) ersetzen, das aus hundert Läufen gelernt wird --- dann sind Sobol-Indizes und Intervalle in Sekunden berechnet.\\
+\textbf{Mehrebenen-UQ} & Grobe und feine Modelle gekoppelt, Satz 9.5 für die Parameterintegration.\\
+\textbf{Modell\-unsicherheit} & Formale Verfahren für den Bruchfall: Bayes-Modellmittelung, Imprecise Probabilities, Robustheit gegen Modellfehler.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Ersatzmodell ist der Schlüssel, sobald ein Lauf Stunden dauert}: Ein Klimamodell, ein Herzmodell, ein ganzes Krankenhaus. Man wählt hundert Parameterpunkte nach einem Versuchsplan --- Sobol-Punkte, Kapitel~6, oder ein lateinisches Hyperwürfel-Design ---, rechnet das Modell dort, und der Gauß-Prozess interpoliert mit einem eigenen Unsicherheitsmaß. Über das Ersatzmodell integriert man dann wie über eine Formel. \Person{Kennedy} und \Person{O'Hagan} haben 2001 gezeigt, wie man dabei die Interpolationsunsicherheit mitträgt --- und wie man den Modellfehler selbst als Gauß-Prozess schätzt, der erste formale Zugang zum Bruchfall.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Zwei Arten} & aleatorisch bleibt, epistemisch schrumpft\\
+\textbf{Definition 14.1} & A-posteriori-Ziehungen durch das Modell\\
+\textbf{Satz 14.3} & Sobol: Varianz nach Eingaben zerlegen\\
+\textbf{Die Differenz} & gemeinsame Parameter kürzen sich\\
+\textbf{Der Bruchfall} & Modellunsicherheit ist nicht im Intervall\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Vierzehn Kapitel haben aus einem Rechner, der nur rechnen kann, einen gemacht, der vom Zufall weiß: ihn erzeugt, bändigt, dorthin lenkt, wo es selten wird, aus ihm zurückschließt und sagt, wie weit er trägt. Das letzte Kapitel fragt, wo das Fach im Jahr 2026 steht --- und wo es nicht steht.}
+\end{minipage}
+\end{center}
+\end{merksatz}

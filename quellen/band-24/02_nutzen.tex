@@ -1,0 +1,370 @@
+\chapter{Woher der Nutzen kommt}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{$0{,}40$ --- wer sagt das?}
+Kapitel~1 setzte den Nutzen eines Lebens nach Schlaganfall auf $0{,}40$. Die Zahl entschied die Rechnung mit --- und stand einfach da.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dieses Kapitel zeigt zweierlei: dass es solche Zahlen geben \kursiv{muss}, und wie man sie erhebt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Vier Regeln erzwingen eine Nutzenfunktion}
+
+\begin{merksatz}
+\boxtitel{Was man von vernünftigen Vorlieben verlangt}
+Gegeben seien \Begriff{Lotterien} --- Wahrscheinlichkeitsverteilungen über Ergebnisse. Man schreibt $L \succ L'$, wenn $L$ vorgezogen wird.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Vollständigkeit} & Für je zwei Lotterien steht fest, welche vorgezogen wird --- oder dass sie gleichwertig sind.\\
+\textbf{Transitivität} & Aus $L_1 \succ L_2$ und $L_2 \succ L_3$ folgt $L_1 \succ L_3$.\\
+\textbf{Stetigkeit} & Gilt $L_1 \succ L_2 \succ L_3$, so gibt es ein $p$ mit: die Mischung aus $L_1$ und $L_3$ im Verhältnis $p$ ist gleichwertig zu $L_2$.\\
+\textbf{Unabhängigkeit} & Aus $L_1 \succ L_2$ folgt: Mischt man beide mit derselben dritten Lotterie im selben Verhältnis, bleibt die Vorliebe erhalten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.1 --- von Neumann und Morgenstern, 1944}
+Erfüllen die Vorlieben diese vier Regeln, so gibt es eine Funktion $u$ auf den Ergebnissen mit
+\[ L \succ L' \quad\Longleftrightarrow\quad \mathbb{E}_L[u] > \mathbb{E}_{L'}[u] , \]
+und $u$ ist bis auf eine Verschiebung und eine positive Streckung eindeutig.
+
+\schritt{Die Beweisidee}
+\kursiv{Man wähle das beste Ergebnis $G$ und das schlechteste $S$} und setze $u(G)=1$, $u(S)=0$.
+
+\kursiv{Für jedes andere Ergebnis $x$} liefert die Stetigkeit ein $p_x$ mit
+\[ x \ \sim\ \bigl[\,p_x: G,\ (1-p_x): S\,\bigr] . \]
+Man setze $u(x) = p_x$.
+
+\kursiv{Die Unabhängigkeit sorgt dafür}, dass man in jeder zusammengesetzten Lotterie jedes Ergebnis durch seine gleichwertige Mischung ersetzen darf. Jede Lotterie wird dadurch zu einer Mischung nur aus $G$ und $S$, und ihr Anteil an $G$ ist gerade $\mathbb{E}[u]$.
+
+\kursiv{Da zwischen zwei solchen Mischungen diejenige mit mehr $G$ vorgezogen wird}, entscheidet der Erwartungsnutzen. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer die vier Regeln anerkennt, maximiert einen Erwartungsnutzen --- ob er will oder nicht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das erste der drei überraschenden Ergebnisse des Vorworts.} Der Satz behauptet nicht, dass Menschen so entscheiden --- Kapitel~12 zeigt, dass sie es oft nicht tun. Er behauptet, dass jede Abweichung eine der vier Regeln verletzt, und dass man dann sagen kann, welche. Die Unabhängigkeit ist dabei die strittigste.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie man Nutzenwerte erhebt}
+
+\begin{merksatz}
+\boxtitel{Drei Verfahren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Standardlotterie} & \enquote{Wären Sie bereit, eine Behandlung zu wählen, die mit Wahrscheinlichkeit $p$ volle Gesundheit und mit $1-p$ den Tod bringt?} Der Wert von $p$ an der Grenze \kursiv{ist} der Nutzen.\\
+\textbf{Zeitabwägung} & \enquote{Zehn Jahre nach Schlaganfall oder $x$ Jahre in voller Gesundheit?} Der Nutzen ist $x/10$.\\
+\textbf{Skala} & \enquote{Wo zwischen $0$ und $100$ liegt dieser Zustand?} Einfach --- aber ohne Bezug zu Lotterien und daher nicht nach Satz 2.1 gedeckt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Standardlotterie folgt unmittelbar aus dem Beweis} --- sie fragt genau nach dem $p_x$, das dort konstruiert wird. Das erklärt ihre theoretische Vorrangstellung und zugleich ihre praktische Schwierigkeit: Sie verlangt vom Patienten, über einen Eingriff mit Todesrisiko nachzudenken, und die Antworten hängen stark von der Darstellung ab.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum die drei auseinanderfallen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{typischer Wert} & \\
+\midrule
+Standardlotterie & $0{,}55$ & am höchsten\\
+Zeitabwägung & $0{,}45$ & \\
+Skala & $0{,}35$ & am niedrigsten\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Größenordnungen aus Vergleichsstudien für denselben Zustand.}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Standardlotterie liefert höhere Werte, weil die Risikoscheu einfließt}: Wer den Tod scheut, gibt sich schon bei mäßigem $p$ zufrieden --- und das erhöht den gemessenen Nutzen. Die Zeitabwägung enthält dafür die Zeitvorliebe. Keines der Verfahren misst \enquote{den} Nutzen; jedes misst ihn zusammen mit einer weiteren Haltung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Risikoscheu}
+
+\begin{merksatz}
+\boxtitel{Der gekrümmte Nutzen}
+Ist $u$ konkav, so zieht man den sicheren Betrag der Lotterie mit gleichem Erwartungswert vor.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.6pt] (0,0) -- (5.4,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,2.8);
+\draw[tief, line width=1.4pt, smooth, samples=60, domain=0:5] plot ({\x},{2.5*(1-exp(-\x/2.2))});
+\draw[grau!70, line width=0.8pt, dashed] (0,0) -- (5,{2.5*(1-exp(-5/2.2))});
+\draw[akzent, line width=0.9pt] (2.5,0) -- (2.5,{0.5*2.5*(1-exp(-5/2.2))});
+\draw[akzent, line width=0.9pt, dotted] (0,{0.5*2.5*(1-exp(-5/2.2))}) -- (2.5,{0.5*2.5*(1-exp(-5/2.2))});
+\node[font=\scriptsize, color=grau, anchor=north] at (2.5,-0.1) {Erwartungswert};
+\node[font=\scriptsize, color=akzent, anchor=west] at (1.15,1.55) {Lücke};
+\node[font=\scriptsize\itshape, color=grau, anchor=west] at (5.5,2.1) {$u$};
+\end{tikzpicture}
+\end{center}
+
+\schritt{Gerechnet}
+Lotterie: mit je $\tfrac12$ null oder zehn weitere Lebensjahre; Erwartungswert fünf Jahre. Mit $u(x) = 1-e^{-x/a}$:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{3.4cm}P{2.2cm}@{}}
+\toprule
+$a$ & \textbf{Sicherheits\-äquivalent} & \textbf{Risikoprämie}\\
+\midrule
+$50$ & $4{,}75$ Jahre & $0{,}25$\\
+$20$ & $4{,}38$ Jahre & $0{,}62$\\
+$10$ & $3{,}80$ Jahre & $1{,}20$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein stark risikoscheuer Mensch nimmt $3{,}8$ sichere Jahre statt der Aussicht auf fünf.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist keine Unvernunft, sondern eine Vorliebe} --- und sie steckt bereits in der Nutzenfunktion, nicht in einem Zuschlag daneben. Wer den Erwartungsnutzen maximiert, ist deshalb nicht \enquote{risikoneutral}: Die Risikohaltung sitzt in der Krümmung von $u$, nicht in der Rechenvorschrift.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was der Satz nicht leistet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Wessen Nutzen?} & Der Satz gilt für \kursiv{eine} Person. Über mehrere sagt er nichts --- Kapitel~13.\\
+\textbf{Keine Vergleiche} & Da $u$ nur bis auf Streckung bestimmt ist, lässt sich Nutzen zwischen Personen nicht addieren. Genau das tut die Gesundheitsökonomie trotzdem.\\
+\textbf{Wahrschein\-lichkeiten} & Der Satz setzt sie als gegeben voraus. Woher sie kommen, sagt er nicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist folgenreich. \textbf{Wenn $u$ und $2u+3$ dieselbe Person gleich gut beschreiben, dann ist die Summe der Nutzen zweier Personen bedeutungslos} --- man kann sie durch Umskalieren beliebig verschieben. Die QALY-Rechnung aus Kapitel~6 umgeht das, indem sie den Nutzen an zwei festen Punkten verankert: Tod gleich null, volle Gesundheit gleich eins. Das ist eine Setzung, keine Folgerung.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- Eine Standardlotterie führen}
+Frau B.\ sagt: Sie würde eine Behandlung wählen, die mit $85$ Prozent volle Gesundheit und mit $15$ Prozent den Tod bringt, um den Zustand nach Schlaganfall zu vermeiden --- bei $90$ Prozent Erfolgschance erst recht, bei $80$ Prozent nicht mehr. Welchen Nutzenwert hat der Zustand?
+
+\loesung
+\schritt{Schritt 1 --- Die Grenze}
+Zwischen $0{,}80$ und $0{,}85$; die Indifferenz liege bei $p = 0{,}82$.
+
+\schritt{Schritt 2 --- Ablesen}
+\[ u(\text{nach Schlaganfall}) = p = 0{,}82 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ihr Wert liegt bei $0{,}82$ --- doppelt so hoch wie die $0{,}40$ aus Kapitel~1.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was das für die Entscheidung heißt}
+\[ \text{ohne: } 0{,}06\cdot0{,}82 + 0{,}01\cdot0{,}70 + 0{,}93 = 0{,}0492+0{,}0070+0{,}9300 = 0{,}9862 \]
+\[ \text{mit: } 0{,}02\cdot0{,}82 + 0{,}03\cdot0{,}70 + 0{,}95 = 0{,}0164+0{,}0210+0{,}9500 = 0{,}9874 \]
+\[ \text{Gewinn} = +0{,}0012 \quad\text{statt}\quad +0{,}0180 \]
+
+\schritt{Schritt 4 --- Und die Schwelle}
+\[ s^{*} = \frac{0{,}02\cdot0{,}30}{0{,}667\cdot0{,}18} = \frac{0{,}0060}{0{,}1200} = 5{,}0\,\% \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Schwelle springt von $1{,}5$ auf $5{,}0$ Prozent} --- Frau B.\ liegt mit sechs Prozent nur noch knapp darüber, und der Gewinn schrumpft auf ein Fünfzehntel. \textbf{Eine Patientin, die einen Schlaganfall für erträglich hält, hat einen viel geringeren Nutzen von der Gerinnungshemmung} --- und das ist kein Irrtum ihrerseits, sondern der Kern der Sache. Wer solche Werte nicht erhebt, entscheidet nach seinen eigenen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Die Unabhängigkeit prüfen}
+Vorgelegt werden zwei Paare von Lotterien (Beträge in tausend Euro):
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{3.4cm}P{3.4cm}@{}}
+\toprule
+& \textbf{A} & \textbf{B}\\
+\midrule
+$1$ & sicher $100$ & $89\,\%$: $100$; $10\,\%$: $500$; $1\,\%$: $0$\\
+$2$ & $11\,\%$: $100$; $89\,\%$: $0$ & $10\,\%$: $500$; $90\,\%$: $0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die meisten Menschen wählen A im ersten und B im zweiten Paar. Ist das mit Satz 2.1 vereinbar?
+
+\loesung
+\schritt{Schritt 1 --- A im ersten Paar}
+\[ u(100) > 0{,}89\,u(100) + 0{,}10\,u(500) + 0{,}01\,u(0) \]
+Mit $u(0)=0$:
+\[ 0{,}11\,u(100) > 0{,}10\,u(500) \]
+
+\schritt{Schritt 2 --- B im zweiten Paar}
+\[ 0{,}10\,u(500) > 0{,}11\,u(100) \]
+
+\schritt{Schritt 3 --- Der Widerspruch}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die beiden Ungleichungen sind das genaue Gegenteil voneinander. Keine Nutzenfunktion erfüllt beide.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Welche Regel verletzt ist}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beide Paare unterscheiden sich nur darin, dass in $89$ Prozent der Fälle einmal $100$ und einmal $0$ ausgezahlt wird --- und zwar in \kursiv{beiden} Lotterien des Paares gleichermaßen. \textbf{Nach der Unabhängigkeitsregel darf dieser gemeinsame Teil die Wahl nicht beeinflussen.} Er tut es. Das ist das Allais-Paradox von 1953, der erste ernsthafte Einwand gegen Satz 2.1 --- und Gegenstand von Kapitel~12.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Und was folgt daraus für die Klinik?}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dass Menschen so entscheiden, heißt nicht, dass sie so entscheiden sollten.} Wer den Widerspruch sieht, ändert meist eine seiner Antworten --- das unterscheidet diesen Fall von einer bloßen Geschmacksfrage. Genau darin liegt der Zweck solcher Rechnungen: nicht Menschen zu berichtigen, sondern ihnen zu zeigen, wo ihre eigenen Urteile nicht zusammenpassen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Zeitabwägung und Lebenserwartung}
+Ein Patient sagt, zehn Jahre nach Schlaganfall seien ihm sechs gesunde Jahre wert. Ein anderer sagt dasselbe für zwei statt drei Jahre. Haben beide denselben Nutzenwert?
+
+\loesung
+\schritt{Schritt 1 --- Die Rechnung}
+\[ u_1 = \frac{6}{10} = 0{,}60, \qquad u_2 = \frac{2}{3} = 0{,}67 \]
+
+\schritt{Schritt 2 --- Der Unterschied}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Zeitraum} & \textbf{Nutzen} & \\
+\midrule
+$10$ Jahre & $0{,}60$ & \\
+$3$ Jahre & $0{,}67$ & höher\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Warum das systematisch ist}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wer künftige Jahre geringer gewichtet als nahe, ist eher bereit, \kursiv{späte} Jahre herzugeben. \textbf{Bei langen Zeiträumen fällt der Verzicht also leichter, und der gemessene Nutzen sinkt.} Die Zeitabwägung misst deshalb Nutzen und Zeitvorliebe zugleich --- man kann beides nur trennen, wenn man die Abwertung künftiger Jahre eigens schätzt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Folge für die Praxis}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Nutzenwert gilt für den Zeitraum, in dem er erhoben wurde.} Wer ihn aus einer Zehnjahresfrage nimmt und in ein Zwanzigjahresmodell einsetzt, überträgt stillschweigend.
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Anhang, der ein Fach begründete}
+\Person{John von Neumann} und \Person{Oskar Morgenstern} fügten der zweiten Auflage ihrer \kursiv{Theory of Games and Economic Behavior} 1947 einen Anhang bei, der Satz 2.1 enthielt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie hatten das Buch über Spiele geschrieben --- Band 21 --- und bemerkt, dass ihre Auszahlungen einen Nutzenbegriff voraussetzten, den es noch nicht gab. \textbf{Der Anhang schuf ihn nachträglich}, auf etwa zwanzig Seiten, und wurde wirkungsmächtiger als manches Hauptkapitel.}
+\end{minipage}
+\end{center}
+
+\schritt{Und der Einwand}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Maurice Allais} legte 1953 auf einer Pariser Tagung sein Paradox vor --- und ließ es ausgerechnet \Person{Leonard Savage} vorrechnen, einen der Begründer der Theorie, der prompt \enquote{falsch} antwortete. \textbf{Savage änderte danach seine Antwort und nicht die Theorie}; Allais hielt das für Ausweichen. Der Streit ist bis heute nicht entschieden, und beide Seiten haben recht behalten --- die eine normativ, die andere deskriptiv.}
+\end{minipage}
+\end{center}
+
+\schritt{QALY}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Klarman} und Mitarbeiter rechneten 1968 erstmals Lebensjahre mit Lebensqualität gewichtet; den Namen prägten \Person{Zeckhauser} und \Person{Shepard} 1976. \textbf{Damit wurde aus einer persönlichen Nutzenfunktion eine Währung für die Gesundheitspolitik} --- ein Schritt, den Satz 2.1 nicht deckt und über den Kapitel~14 handelt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Nutzen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Fragebogenmaße} & Standardisierte Erhebungen, die aus wenigen Fragen einen Nutzenwert erzeugen.\\
+\textbf{Wertesätze} & Bevölkerungsbefragungen, die diesen Fragen Zahlen zuordnen --- je Land verschieden.\\
+\textbf{Erlebter Nutzen} & Messungen im Alltag statt in der Befragungssituation.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Derselbe Gesundheitszustand erhält in den Wertesätzen verschiedener Länder deutlich verschiedene Zahlen --- Unterschiede von $0{,}1$ und mehr sind gewöhnlich. \textbf{Damit hängt die Erstattungsentscheidung für ein Medikament davon ab, in welchem Land die Bewertung erhoben wurde.} Das ist kein Messfehler, sondern ein echter Unterschied in den Werthaltungen; es macht nur sichtbar, wie wenig \enquote{der} Nutzen eines Zustands eine feste Größe ist.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Vier Regeln} & Vollständigkeit bis Unabhängigkeit\\
+\textbf{Satz 2.1} & sie erzwingen den Erwartungsnutzen\\
+\textbf{Standardlotterie} & fragt genau nach $p_x$\\
+\textbf{Risikoscheu} & steckt in der Krümmung\\
+\textbf{Der Bruchfall} & Nutzen zweier Personen addiert sich nicht\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nutzen und Wahrscheinlichkeiten stehen nun bereit. Das nächste Kapitel fragt, was es wert ist, die Wahrscheinlichkeiten zu verbessern --- und findet eine obere Schranke für jede Diagnostik.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,347 @@
+\part{Zeitreihen}
+
+\chapter{Eine Reihe, viele Zeitpunkte}
+
+\section{Was sich ändert}
+
+\begin{merksatz}
+\boxtitel{Von vielen Personen zu einer Reihe}
+Bisher hatte man tausende Versicherte und wenige Jahre. Nun hat man \kursiv{eine} Reihe --- die monatlichen Arztbesuche je tausend Versicherte, die Arbeitslosenquote, einen Kurs --- und viele Zeitpunkte.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Eine Beobachtung} & Es gibt nur \kursiv{einen} Verlauf. Der Gesetz-der-großen-Zahlen-Schluss muss über die Zeit statt über Personen laufen.\\
+\textbf{Abhängigkeit} & Aufeinanderfolgende Werte hängen zusammen --- immer.\\
+\textbf{Drift} & Viele Reihen haben keinen festen Mittelwert, zu dem sie zurückkehren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Band 25 hat die Prozesse geliefert. Dieses Kapitel fragt, wann man aus einem einzigen Verlauf ihre Parameter schätzen kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 10.1 --- Stationarität}
+Eine Reihe $(y_t)$ heißt \Begriff{(schwach) stationär}, wenn Erwartungswert und Varianz nicht von $t$ abhängen und die Kovarianz $\operatorname{Cov}(y_t,y_{t-k})$ nur vom Abstand $k$ abhängt:
+\[ \gamma_k = \operatorname{Cov}(y_t,y_{t-k}), \qquad \rho_k = \gamma_k/\gamma_0 \quad\text{(Autokorrelation)}. \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Warum Stationarität die Voraussetzung ist}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nur wenn die Reihe zu einem Mittel zurückkehrt, ist ein langer Ausschnitt eine Stichprobe aus derselben Verteilung --- und nur dann sagt die Vergangenheit etwas über die Zukunft.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Ergodensatz aus Band 25, Kapitel~3, in statistischer Verwendung}: Zeitmittel ersetzen Scharmittel. Für eine nichtstationäre Reihe gibt es kein Scharmittel, dem das Zeitmittel zustreben könnte --- die Stichprobenvarianz der Irrfahrt in der Tabelle unten ist eine Zahl, aber sie schätzt nichts.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das einfachste Modell}
+
+\begin{definition}
+\boxtitelm{Definition 10.2 --- der autoregressive Prozess}
+\[ y_t = \phi\,y_{t-1} + \varepsilon_t, \qquad \varepsilon_t \ \text{weißes Rauschen mit Varianz } \sigma^{2} \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 10.3 --- stationär genau dann, wenn $|\phi| < 1$}
+Für $|\phi| < 1$ gilt
+\[ \operatorname{Var}(y_t) = \frac{\sigma^{2}}{1-\phi^{2}}, \qquad \rho_k = \phi^{k} . \]
+Für $|\phi| \ge 1$ gibt es keine stationäre Lösung.
+
+\schritt{Beweis}
+\kursiv{Rückwärts einsetzen:}
+\[ y_t = \varepsilon_t + \phi\varepsilon_{t-1} + \phi^{2}\varepsilon_{t-2} + \cdots = \sum_{j\ge0}\phi^{j}\varepsilon_{t-j} \]
+Die Reihe konvergiert im quadratischen Mittel genau für $|\phi|<1$ (geometrische Reihe, Band 3). Dann ist
+\[ \operatorname{Var}(y_t) = \sigma^{2}\sum_{j\ge0}\phi^{2j} = \frac{\sigma^{2}}{1-\phi^{2}}, \qquad \operatorname{Cov}(y_t,y_{t-k}) = \sigma^{2}\sum_{j\ge0}\phi^{j+k}\phi^{j} = \phi^{k}\operatorname{Var}(y_t) . \]
+Für $|\phi| \ge 1$ divergiert die Reihe --- die Varianz wächst ohne Grenze. $\blacksquare$
+
+\schritt{Drei Reihen, $200$ Zeitpunkte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.2cm}P{2.0cm}P{2.0cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+$\phi$ & \textbf{Var.\ theor.} & \textbf{Var.\ Stichpr.} & $\hat\rho_1$ & $\hat\rho_5$\\
+\midrule
+$0{,}5$ & $1{,}33$ & $1{,}37$ & $0{,}57$ & $0{,}10$\\
+$0{,}9$ & $5{,}26$ & $3{,}72$ & $0{,}87$ & $0{,}51$\\
+$1{,}0$ & $\infty$ & $9{,}62$ & $0{,}94$ & $0{,}77$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Halbwertszeit eines Schocks ist $\ln 0{,}5/\ln\phi$}: ein Zeitpunkt bei $\phi=0{,}5$, knapp sieben bei $0{,}9$, neunundsechzig bei $0{,}99$ --- und unendlich bei eins. Bei $\phi = 1$ ist der Prozess die Irrfahrt aus Band 25, Kapitel~1: Jeder Schock bleibt für immer. \textbf{Die Grenze zwischen $0{,}99$ und $1{,}00$ ist für die Theorie ein Abgrund und für die Daten kaum zu sehen} --- das Thema des nächsten Kapitels.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Schätzen aus einer Reihe}
+
+\begin{merksatz}
+\boxtitel{Kleinste Quadrate für $\phi$}
+Regression von $y_t$ auf $y_{t-1}$. Für $|\phi|<1$ ist das konsistent --- aber in endlichen Stichproben verzerrt:
+\[ \mathbb{E}[\hat\phi] \ \approx\ \phi - \frac{1+3\phi}{T} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.2cm}P{2.2cm}P{1.8cm}@{}}
+\toprule
+$T$ & \textbf{Mittel} $\hat\phi$ & \textbf{Näherung} & \textbf{wahr}\\
+\midrule
+$20$ & $0{,}674$ & $0{,}715$ & $0{,}9$\\
+$50$ & $0{,}808$ & $0{,}826$ & $0{,}9$\\
+$200$ & $0{,}878$ & $0{,}882$ & $0{,}9$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei zwanzig Jahren Daten erscheint ein Beharren von $0{,}9$ als $0{,}67$ --- die Reihe wirkt weit weniger träge, als sie ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Nickell-Verzerrung aus Kapitel~8 ohne Panel} --- derselbe Mechanismus: Der Regressor $y_{t-1}$ ist mit dem Stichprobenmittel verknüpft, das auch spätere Störungen enthält. Sie wurde schon 1950 von \Person{Hurwicz} beschrieben und heißt nach ihm. Für die Geldpolitik hat sie Gewicht: Wer die Trägheit der Inflation unterschätzt, reagiert zu spät.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 10.4 --- Standardfehler bei Abhängigkeit}
+Für das Mittel einer stationären Reihe gilt
+\[ \operatorname{Var}(\bar y) \ \approx\ \frac{\gamma_0}{T}\Bigl(1 + 2\sum_{k\ge1}\rho_k\Bigr) . \]
+Beim AR(1) ist die Klammer $(1+\phi)/(1-\phi)$.
+
+\schritt{Beweis}
+Ausmultiplizieren der Varianz der Summe liefert $T$ Varianzen und $2(T-k)$ Kovarianzen für jeden Abstand $k$; teilt man durch $T^{2}$ und lässt $T$ wachsen, bleibt die Formel. $\blacksquare$
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.4cm}P{3.2cm}@{}}
+\toprule
+$\phi$ & \textbf{Faktor} & \textbf{wirksamer Umfang}\\
+\midrule
+$0{,}5$ & $3$ & $T/3$\\
+$0{,}9$ & $19$ & $T/19$\\
+$0{,}95$ & $39$ & $T/39$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zweihundert Monate einer Reihe mit $\phi = 0{,}9$ enthalten so viel Information wie zehn unabhängige Beobachtungen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die wichtigste praktische Zahl dieses Kapitels.} Wer Standardfehler nach Band 17 rechnet --- als wären die Beobachtungen unabhängig ---, unterschätzt sie bei $\phi = 0{,}9$ um den Faktor $\sqrt{19} \approx 4{,}4$. Jeder Test wird dann viermal zu scharf. Die Berichtigung nach \Person{Newey} und \Person{West} schätzt die Klammer aus den Daten und ist in Zeitreihenregressionen Pflicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wenn die Reihe nicht zurückkehrt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Trend} & $y_t = a + bt + \varepsilon_t$: stationär um eine Gerade; Abweichungen verschwinden.\\
+\textbf{Einheitswurzel} & $y_t = y_{t-1} + \varepsilon_t$: jeder Schock bleibt; keine Varianz, kein Mittel.\\
+\textbf{Der Unterschied} & Beide Reihen sehen über zwanzig Jahre fast gleich aus --- und verlangen entgegengesetzte Behandlung: Trend abziehen oder differenzieren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Wer eine Irrfahrt um einen Trend bereinigt, erzeugt künstliche Zyklen}; wer eine trendstationäre Reihe differenziert, zerstört Information und erzeugt künstliche negative Autokorrelation. Beides sind alte Fehler der Konjunkturforschung, und beide lassen sich nur vermeiden, wenn man zuerst entscheidet, welcher Fall vorliegt --- Kapitel~11.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Varianz und Autokorrelation}
+Ein AR(1) mit $\phi = 0{,}8$ und $\sigma^{2} = 1$. Berechnen Sie Varianz, die ersten drei Autokorrelationen und die Halbwertszeit.
+
+\loesung
+\schritt{Schritt 1 --- Varianz}
+\[ \frac{1}{1-0{,}64} = 2{,}78 \]
+
+\schritt{Schritt 2 --- Autokorrelationen}
+\[ \rho_1 = 0{,}80, \qquad \rho_2 = 0{,}64, \qquad \rho_3 = 0{,}51 \]
+
+\schritt{Schritt 3 --- Halbwertszeit}
+\[ \frac{\ln 0{,}5}{\ln 0{,}8} = \frac{-0{,}693}{-0{,}223} = 3{,}1 \ \text{Perioden} \]
+
+\schritt{Schritt 4 --- Der wirksame Umfang}
+\[ \frac{1+0{,}8}{1-0{,}8} = 9 \quad\Longrightarrow\quad \text{$T$ Beobachtungen zählen wie } T/9 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für eine Monatsreihe heißt $\phi = 0{,}8$: Ein Schock ist nach einem Quartal halb verklungen, nach einem Jahr bei sieben Prozent.} Zehn Jahre Daten liefern dann die Information von dreizehn unabhängigen Beobachtungen --- ein Vertrauensintervall für das Mittel, das dreimal so breit ist, wie Band 17 ausweisen würde.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Die Verzerrung zurückrechnen}
+Aus $T = 40$ Quartalen wird $\hat\phi = 0{,}75$ geschätzt. Wie groß ist $\phi$ vermutlich?
+
+\loesung
+\schritt{Schritt 1 --- Die Näherung umstellen}
+\[ 0{,}75 = \phi - \frac{1+3\phi}{40} \quad\Longrightarrow\quad 30 = 40\phi - 1 - 3\phi \quad\Longrightarrow\quad \phi = \frac{31}{37} = 0{,}84 \]
+
+\schritt{Schritt 2 --- Die Folge für die Halbwertszeit}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+& $\phi$ & \textbf{Halbwertszeit}\\
+\midrule
+geschätzt & $0{,}75$ & $2{,}4$ Quartale\\
+berichtigt & $0{,}84$ & $4{,}0$ Quartale\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Trägheit ist um zwei Drittel größer, als die Rohschätzung sagt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bei $\phi$ nahe eins wird die Verzerrung gefährlich}: Eine Irrfahrt ($\phi=1$) erscheint bei $T = 40$ als $\hat\phi \approx 0{,}90$ --- stationär und träge, statt nichtstationär. Die Unterscheidung des nächsten Kapitels muss diese Verzerrung einrechnen, und genau das tut die Verteilung des Dickey-Fuller-Tests.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- Gleitende Mittel}
+Ein Prozess $y_t = \varepsilon_t + \theta\varepsilon_{t-1}$ --- gleitendes Mittel erster Ordnung. Berechnen Sie seine Autokorrelationen und vergleichen Sie mit dem AR(1).
+
+\loesung
+\schritt{Schritt 1 --- Varianz und Kovarianz}
+\[ \gamma_0 = (1+\theta^{2})\sigma^{2}, \qquad \gamma_1 = \theta\sigma^{2}, \qquad \gamma_k = 0 \ \text{für } k\ge2 \]
+
+\schritt{Schritt 2 --- Autokorrelation}
+\[ \rho_1 = \frac{\theta}{1+\theta^{2}}, \qquad \rho_k = 0 \ \text{für } k \ge 2 \]
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{3.0cm}@{}}
+\toprule
+& \textbf{AR(1)} & \textbf{MA(1)}\\
+\midrule
+Gedächtnis & unendlich, abklingend & genau eine Periode\\
+$\rho_1$ & beliebig in $(-1,1)$ & höchstens $\tfrac12$\\
+Schock & wirkt für immer nach & verschwindet nach zwei Perioden\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein MA(1) erkennt man daran, dass die Autokorrelation nach dem ersten Abstand abbricht.} Solche Prozesse entstehen durch Überlappung: Wenn Quartalszahlen aus überlappenden Monaten gebildet werden, oder wenn ein Messfehler zwei aufeinanderfolgende Differenzen trifft --- die Differenz einer Irrfahrt mit Messfehler ist ein MA(1) mit negativem $\theta$. Die Kombination beider Bausteine, ARMA, war jahrzehntelang das Arbeitspferd der Vorhersage und ist es in Kapitel~13 wieder.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Sonnenflecken und Konjunktur}
+\Person{George Udny Yule} führte den autoregressiven Prozess 1927 ein --- um die Sonnenfleckenzahlen zu beschreiben, die seit 1749 monatlich erfasst wurden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Yules Bild: Ein Pendel, das von Kindern mit Erbsen beworfen wird. \textbf{Die Erbsen sind die Schocks, das Pendel ist die Dynamik, und die Schwingung ist keine der Erbsen, sondern des Pendels.} Damit war der Gedanke in der Welt, dass regelmäßige Zyklen aus unregelmäßigen Störungen entstehen können --- \Person{Slutsky} zeigte dasselbe im selben Jahr in Moskau, unabhängig und für die Konjunktur.}
+\end{minipage}
+\end{center}
+
+\schritt{Box und Jenkins}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{George Box} und \Person{Gwilym Jenkins} machten daraus 1970 ein Lehrbuch und ein Rezept: identifizieren, schätzen, prüfen. \textbf{Ihr Buch beherrschte die Vorhersage zwanzig Jahre lang}, und ihre Modelle schlugen in Wettbewerben regelmäßig die großen Strukturmodelle der Zeit --- ein Befund, der Kapitel~13 vorbereitet.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Verzerrung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Leonid Hurwicz} beschrieb die Verzerrung der Schätzung von $\phi$ 1950 in einem Sammelband der Cowles-Kommission --- demselben, in dem die Theorie simultaner Gleichungen stand. \textbf{Er erhielt 2007 mit neunzig Jahren den Nobelpreis}, als ältester Preisträger überhaupt, allerdings für die Mechanismustheorie, nicht für die Zeitreihen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Zeitreihen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{5.0cm}@{}}
+\toprule
+\textbf{Langes Gedächtnis} & Autokorrelationen, die wie eine Potenz statt geometrisch fallen.\\
+\textbf{Strukturbrüche} & Wann ändert sich $\phi$ --- und wie erkennt man es rechtzeitig?\\
+\textbf{Hohe Frequenz} & Tausende Beobachtungen am Tag, mit Mikrostrukturrauschen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Manche Reihen --- Flusspegel, Schwankungsmaße an Märkten --- haben Autokorrelationen, die mit $k^{-d}$ fallen statt mit $\phi^{k}$. \textbf{Sie liegen zwischen stationär und Einheitswurzel}: Schocks verschwinden, aber so langsam, dass die Summe der Autokorrelationen divergiert und Satz 10.4 unendlich ergibt. Der Hydrologe \Person{Hurst} entdeckte das 1951 am Nil, und der Exponent trägt seinen Namen --- Band 25 hat ihn im Kapitel über rauhe Volatilität gestreift.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 10.1} & Stationarität: Rückkehr zum Mittel\\
+\textbf{Satz 10.3} & AR(1) stationär für $|\phi|<1$, $\rho_k = \phi^{k}$\\
+\textbf{Hurwicz} & $\hat\phi$ um $(1+3\phi)/T$ zu klein\\
+\textbf{Satz 10.4} & wirksamer Umfang $T(1-\phi)/(1+\phi)$\\
+\textbf{Der Bruchfall} & Trend oder Einheitswurzel\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Bruchfall hat eine Frage offengelassen: Wie entscheidet man, ob $\phi$ gleich eins ist? Das nächste Kapitel zeigt, was geschieht, wenn man es nicht tut --- und warum der übliche Test dafür falsch ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,383 @@
+\chapter{Was Wissen wert ist}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{Lohnt die Abklärung?}
+Frau B.\ könnte eine besondere Blutungsneigung haben --- etwa eine ererbte Gerinnungsstörung. Eine Abklärung kostet Zeit, Geld und Unannehmlichkeiten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Wert einer Untersuchung liegt nicht darin, dass sie etwas herausfindet, sondern darin, dass sie die Entscheidung ändern kann.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Befund, der an der Behandlung nichts ändert, ist wertlos} --- gleich wie genau er ist und wie interessant er wäre. Dieses Kapitel macht daraus eine Rechnung und liefert nebenbei eine obere Schranke, die jede denkbare Diagnostik einhalten muss.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall mit zwei Patiententypen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+& \textbf{Anteil} & \textbf{Blutung ohne} & \textbf{mit}\\
+\midrule
+hohe Neigung & $20\,\%$ & $5{,}0\,\%$ & $20{,}0\,\%$\\
+normal & $80\,\%$ & $1{,}0\,\%$ & $3{,}0\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Das Schlaganfallrisiko sei wie bisher $6$ gegen $2$ Prozent.}
+
+\schritt{Ohne Untersuchung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{behandeln} & \textbf{nicht}\\
+\midrule
+hohe Neigung & $0{,}9280$ & $0{,}9490$\\
+normal & $0{,}9790$ & $0{,}9610$\\
+\midrule
+gemischt & $\mathbf{0{,}9688}$ & $0{,}9586$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ohne Untersuchung behandelt man alle --- und schadet damit den zwanzig Prozent mit hoher Neigung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Wert vollkommener Information}
+
+\begin{definition}
+\boxtitelm{Definition 3.1 --- Wert vollkommener Information}
+\[ \text{EVPI} = \underbrace{\sum_\theta \Pr[\theta]\ \max_a u(a,\theta)}_{\text{erst sehen, dann wählen}} \ - \ \underbrace{\max_a \sum_\theta \Pr[\theta]\,u(a,\theta)}_{\text{ohne zu sehen wählen}} \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 3.2 --- Information schadet nie}
+Es gilt stets $\text{EVPI} \ge 0$.
+
+\schritt{Beweis}
+Für jede feste Handlung $a_0$ gilt punktweise
+\[ u(a_0,\theta) \ \le\ \max_a u(a,\theta) . \]
+Mit $\Pr[\theta]$ gewichtet und summiert:
+\[ \sum_\theta \Pr[\theta]\,u(a_0,\theta) \ \le\ \sum_\theta \Pr[\theta]\,\max_a u(a,\theta) . \]
+Das gilt insbesondere für dasjenige $a_0$, das die linke Seite maximiert. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Maximum der Mittelwerte ist höchstens so groß wie der Mittelwert der Maxima} --- eine Anwendung der Jensenschen Ungleichung (Band 20, Kapitel~3), denn das Maximum ist eine konvexe Funktion. Der Satz gilt nur für den Erwartungsnutzen: Wer nicht nach Satz 2.1 entscheidet, kann durch Information durchaus schlechter gestellt werden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Im Leitfall gerechnet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.8cm}@{}}
+\toprule
+\textbf{Lage} & \textbf{Erwartungs\-nutzen}\\
+\midrule
+alle behandeln & $0{,}9688$\\
+niemanden & $0{,}9586$\\
+\midrule
+bei vollkommener Kenntnis & $\mathbf{0{,}9730}$\\
+\midrule
+\textbf{EVPI} & $\mathbf{0{,}0042}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Denn wer die hohe Neigung kennt, behandelt sie nicht} ($0{,}9490 > 0{,}9280$), \kursiv{die übrigen schon} ($0{,}9790 > 0{,}9610$):
+\[ 0{,}20\cdot0{,}9490 + 0{,}80\cdot0{,}9790 = 0{,}1898 + 0{,}7832 = 0{,}9730 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Keine Untersuchung der Welt kann mehr als $0{,}0042$ bringen --- das sind $1{,}5$ Tage in voller Gesundheit je Jahr.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der praktische Nutzen der Größe: eine Obergrenze, bevor man irgendetwas über den Test weiß.} Kostet die Abklärung mehr als $1{,}5$ gesunde Tage --- an Zeit, Risiko und Geld ---, so kann man sie ohne weitere Rechnung lassen. Man braucht dazu weder Sensitivität noch Spezifität.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Ein wirklicher Test}
+
+\begin{merksatz}
+\boxtitel{Der Wert einer Stichprobeninformation}
+Ein Test mit Sensitivität und Spezifität von je $80$ Prozent:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.0cm}P{3.4cm}@{}}
+\toprule
+\textbf{Ergebnis} & $\Pr$ & \textbf{Nachtestwahrsch.}\\
+\midrule
+positiv & $0{,}320$ & $0{,}500$\\
+negativ & $0{,}680$ & $0{,}059$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Bei positivem Befund lohnt die Behandlung nicht mehr, bei negativem schon} --- der Test ändert also die Entscheidung.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Test} & \textbf{EVSI} & \textbf{Anteil am EVPI}\\
+\midrule
+$80\,\%$ / $80\,\%$ & $0{,}00048$ & $11\,\%$\\
+$95\,\%$ / $95\,\%$ & $0{,}00327$ & $78\,\%$\\
+vollkommen & $0{,}00420$ & $100\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der mäßige Test ändert die Entscheidung --- und bringt trotzdem nur ein Neuntel des Möglichen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bei positivem Befund liegt die Wahrscheinlichkeit einer hohen Neigung bei nur fünfzig Prozent} --- die Hälfte der Nichtbehandelten wird also zu Unrecht nicht behandelt. Der Test führt zu einer anderen Entscheidung, aber nicht zu einer viel besseren. Das ist der Regelfall: Zwischen \enquote{ändert die Entscheidung} und \enquote{lohnt sich} liegt ein weiter Weg.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Warum trotzdem so viel untersucht wird}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Andere Ziele} & Ein Befund beruhigt, begründet, dokumentiert --- Nutzen, die in dieser Rechnung nicht vorkommen.\\
+\textbf{Andere Nutzen} & Der Arzt trägt das Risiko des Übersehens, nicht das der Untersuchung.\\
+\textbf{Folgebefunde} & Jede Untersuchung findet Nebenbefunde, die weitere Untersuchungen nach sich ziehen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist eine Frage aus Band 21: \textbf{Die Nutzenfunktion des Entscheidenden ist nicht die des Patienten.} Wer für ein übersehenes Ereignis haftet, aber nicht für eine unnötige Untersuchung, maximiert etwas anderes als den Patientennutzen --- und die Rechnung dieses Kapitels beschreibt sein Verhalten dann falsch, obwohl sie richtig rechnet.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- EVPI von Hand}
+Die Wahrscheinlichkeit einer hohen Blutungsneigung betrage statt $20$ nur $5$ Prozent. Wie ändert sich der Wert der Information?
+
+\loesung
+\schritt{Schritt 1 --- Ohne Information}
+\[ \text{behandeln: } 0{,}05\cdot0{,}9280 + 0{,}95\cdot0{,}9790 = 0{,}0464+0{,}9301 = 0{,}9765 \]
+\[ \text{nicht: } 0{,}05\cdot0{,}9490 + 0{,}95\cdot0{,}9610 = 0{,}0475+0{,}9130 = 0{,}9605 \]
+
+\schritt{Schritt 2 --- Mit vollkommener Information}
+\[ 0{,}05\cdot0{,}9490 + 0{,}95\cdot0{,}9790 = 0{,}0475+0{,}9301 = 0{,}9776 \]
+
+\schritt{Schritt 3 --- Der Wert}
+\[ \text{EVPI} = 0{,}9776 - 0{,}9765 = \mathbf{0{,}0011} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Anteil hohe Neigung} & \textbf{EVPI} & \\
+\midrule
+$5\,\%$ & $0{,}0011$ & $0{,}4$ Tage\\
+$20\,\%$ & $0{,}0042$ & $1{,}5$ Tage\\
+$50\,\%$ & $0{,}0090$ & $3{,}3$ Tage\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Zur letzten Zeile:} $0{,}5\cdot0{,}9490+0{,}5\cdot0{,}9790 = 0{,}9640$ gegen $\max(0{,}9535;\ 0{,}9550) = 0{,}9550$; Differenz $0{,}0090$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Wert der Information ist dort am größten, wo die Entscheidung am unsichersten ist.} Bei sehr seltener und bei sehr häufiger Neigung steht die Handlung ohnehin fest, und Wissen ändert nichts. Das ist derselbe Gedanke, der im nächsten Kapitel zu zwei Testschwellen führt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Wann ein Test die Entscheidung ändert}
+Zeigen Sie: Ein Test ist genau dann wertvoll, wenn die Nachtestwahrscheinlichkeiten die Behandlungsschwelle einschließen.
+
+\loesung
+\schritt{Schritt 1 --- Die Lage}
+Sei $p^{*}$ die Behandlungsschwelle, $p_{+}$ und $p_{-}$ die Wahrscheinlichkeiten nach positivem und negativem Befund. Stets gilt $p_{-} < p < p_{+}$.
+
+\schritt{Schritt 2 --- Die drei Fälle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{3.0cm}P{2.2cm}@{}}
+\toprule
+\textbf{Lage} & \textbf{Entscheidung} & \textbf{Wert}\\
+\midrule
+$p^{*} < p_{-} < p_{+}$ & beide Male gleich & $0$\\
+$p_{-} < p_{+} < p^{*}$ & beide Male gleich & $0$\\
+$p_{-} < p^{*} < p_{+}$ & verschieden & $> 0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Begründung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Führt der Test in beiden Fällen zur selben Handlung, so ist der Erwartungsnutzen genau derjenige ohne Test --- man hat nur zwei Wege zum selben Ziel gerechnet. \textbf{Der Gewinn entsteht ausschließlich aus dem Zweig, in dem man anders handelt}, und er ist dort der Abstand der beiden Erwartungsnutzen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die praktische Regel}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Vor jeder Untersuchung: Was tue ich bei positivem, was bei negativem Befund? Lautet die Antwort zweimal gleich, kann die Untersuchung entfallen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diese Frage kostet nichts und ersetzt die ganze Rechnung. Sie ist die am häufigsten übergangene Frage der klinischen Medizin --- und in dieser Form auch dann anwendbar, wenn niemand Nutzenwerte erhoben hat.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Die Obergrenze benutzen}
+Die Abklärung dauert einen halben Tag, kostet $400$ Euro und bringt ein kleines Risiko mit sich. Lohnt sie bei einem EVPI von $0{,}0042$?
+
+\loesung
+\schritt{Schritt 1 --- Die Obergrenze in Tagen}
+\[ 0{,}0042 \cdot 365 = 1{,}53 \ \text{Tage in voller Gesundheit} \]
+
+\schritt{Schritt 2 --- Die Kosten abschätzen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Posten} & \textbf{Gegenwert}\\
+\midrule
+halber Tag Aufwand & $\approx 0{,}5$ Tage\\
+Unannehmlichkeit & $\approx 0{,}2$ Tage\\
+Risiko & gering\\
+\midrule
+\textbf{zusammen} & $\approx 0{,}7$ Tage\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$0{,}7$ gegen höchstens $1{,}53$ Tage --- die Abklärung ist nicht von vornherein auszuschließen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Aber}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der wirkliche Test bringt nach Abschnitt 3.3 nur $11$ Prozent des EVPI, also $0{,}17$ Tage --- \textbf{deutlich weniger als sein Aufwand.} Die Obergrenze allein genügt hier also nicht zur Entscheidung; sie hätte nur dann sofort entschieden, wenn der Aufwand über $1{,}53$ Tagen gelegen hätte. \textbf{Genau so ist sie gemeint: als schnelles Ausschlusskriterium, nicht als Begründung.}}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Und die Geldfrage}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die $400$ Euro tauchen in der Patientenrechnung gar nicht auf --- sie trägt die Versichertengemeinschaft. \textbf{Aus Sicht des Patienten ist die Untersuchung also billiger, als sie ist}, und genau daraus entsteht die Mengenausweitung, die Kapitel~14 behandelt. Eine Rechnung, die den Blickwinkel nicht angibt, ist unvollständig.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Preis für Entscheidungen}
+\Person{Ronald Howard} prägte 1966 den Begriff der Entscheidungsanalyse und führte den Wert der Information als eigene Größe ein.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er kam von der Regelungstechnik und arbeitete für Unternehmen, die über Bohrungen und Anlagen zu entscheiden hatten. \textbf{Die Frage \enquote{was wäre es wert, das vorher zu wissen} war dort unmittelbar in Geld zu beziffern} --- und ließ sich erstaunlich reibungslos auf medizinische Untersuchungen übertragen.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Medizin}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Übertragung leisteten \Person{Pauker} und \Person{Kassirer} in den 1970er Jahren, zusammen mit \Person{Barbara McNeil} und \Person{Harvey Fineberg}, deren Lehrbuch von 1980 das Fach begründete. \textbf{Fineberg wurde später Präsident des Institute of Medicine} --- die Entscheidungsanalyse blieb dennoch eine Minderheitenposition, weil sie Zahlen verlangt, die im Alltag niemand erhebt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Informationswert heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.4cm}P{4.8cm}@{}}
+\toprule
+\textbf{Forschungs\-planung} & Der Wert der Information bestimmt, welche Studie sich lohnt.\\
+\textbf{Bevölkerungsbezug} & EVPI mal Zahl der Betroffenen als Obergrenze für Forschungsausgaben.\\
+\textbf{Teilwerte} & Für welche einzelne Größe sich weitere Forschung lohnt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Multipliziert man den EVPI je Patient mit der Zahl der künftig Betroffenen, so erhält man die Obergrenze dessen, was eine klärende Studie wert wäre. \textbf{In Großbritannien wird dieses Verfahren seit Jahren benutzt, um über die Förderung klinischer Studien zu entscheiden} --- und liefert gelegentlich das unbequeme Ergebnis, dass eine viel diskutierte Frage die Studienkosten nicht wert ist.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 3.1} & Mittel der Maxima minus Maximum der Mittel\\
+\textbf{Satz 3.2} & Information schadet nie\\
+\textbf{EVPI} & Obergrenze ohne Kenntnis des Tests\\
+\textbf{EVSI} & was ein wirklicher Test bringt\\
+\textbf{Die Regel} & zweimal dieselbe Antwort, kein Test\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~I. Teil~II wendet das Gerüst auf die klinische Arbeit an --- und beginnt mit der Erkenntnis, dass es zwei Schwellen gibt und nicht eine.}
+\end{minipage}
+\end{center}
+\end{merksatz}

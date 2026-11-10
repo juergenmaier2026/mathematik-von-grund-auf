@@ -1,0 +1,187 @@
+\part{Aktueller Stand}
+
+\chapter{Was die Ökonometrie beiträgt}
+
+\section{Der Leitfall, ein letztes Mal}
+
+\begin{merksatz}
+\boxtitel{Was der Band aus einer Frage gemacht hat}
+Am Anfang stand: Wie stark senkt die Zuzahlung die Arztbesuche?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.2cm}P{3.4cm}P{3.6cm}@{}}
+\toprule
+\textbf{Kap.} & \textbf{Frage} & \textbf{Antwort}\\
+\midrule
+$1$ & Warum stimmt die Regression nicht? & Die Zuzahlung wird gewählt.\\
+$2$ & Hilft mehr Datenmenge? & Nein --- Identifikation zuerst.\\
+$3$--$4$ & Was dann? & Eine Veränderung von außen.\\
+$5$--$6$ & Und die Nullen, die Fehlenden? & Auswahl ist Endogenität.\\
+$7$--$9$ & Und dieselben Personen über Jahre? & Jeder sein eigener Vergleich.\\
+$10$--$12$ & Und eine Reihe über Jahrzehnte? & Erst Stationarität prüfen.\\
+$13$--$14$ & Und was folgt für die Politik? & Nur mit der Annahme dazu.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der wahre Wert war in der Simulation stets $-0{,}10$. Was sich geändert hat, ist die Zahl der Annahmen, die man benennen kann, um ihn zu erreichen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Vier Muster}
+
+\begin{merksatz}
+\boxtitel{Muster 1 --- Identifikation vor Schätzung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+$2$ & Preis und Menge: drei Momente, vier Unbekannte --- für immer.\\
+$6$ & Ohne Ausschlussgröße trägt die Heckman-Korrektur nur die Krümmung.\\
+$12$ & Die Impulsantwort hängt von der Reihenfolge ab.\\
+$13$ & Unter einer Regel sind tiefe und reduzierte Parameter nicht trennbar.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der eigentliche Beitrag der Ökonometrie zu den Nachbarfächern}: die Gewohnheit, vor dem Schätzen zu fragen, ob die Größe aus unbegrenzt vielen Daten bestimmbar wäre. Band 23 stellte dieselbe Frage mit Graphen; hier wird sie mit Gleichungen gestellt und --- durch die Abzählbedingung --- zählbar gemacht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 2 --- jedes Verfahren tauscht eine Annahme gegen eine andere}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+$3$ & Instrument: Exogenität der Störgröße gegen Exogenität des Instruments.\\
+$7$ & Feste Effekte: Unkorreliertheit gegen Zeitkonstanz.\\
+$8$ & Dynamisches Panel: strenge Exogenität gegen serielle Unkorreliertheit.\\
+$9$ & Doppelte Differenz: gleiche Niveaus gegen gleiche Trends.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Kein Verfahren macht Annahmen überflüssig; gute Verfahren machen sie schwächer oder prüfbarer.} Die Tabelle in Kapitel~14 hat das für den Leitfall aufgeschrieben. Wer eine Schätzung beurteilt, fragt nicht, welches Verfahren benutzt wurde, sondern welche Annahme es trägt --- und ob sie in dieser Anwendung haltbar ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 3 --- mehr Daten heilen nicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+$1$ & Die Verzerrung durch Endogenität bleibt bei jedem Umfang.\\
+$3$ & Ein schwaches Instrument wird durch mehr Beobachtungen nicht stark.\\
+$8$ & Die Nickell-Verzerrung hängt von $T$ ab, nicht von $n$.\\
+$11$ & Scheinregressionen werden mit $T$ \kursiv{signifikanter}.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die vierte Zeile ist die Umkehrung des Versprechens der Statistik.} Band 17 lehrte, dass Fehler mit $\sqrt n$ schrumpfen; dieser Band lehrt, wann sie das nicht tun. Das Zeitalter großer Datenmengen hat die erste Lehre populär gemacht und die zweite nötiger denn je --- denn Abrechnungsdaten mit Millionen Versicherten enthalten alle Verzerrungen dieses Bandes, nur mit kleineren Vertrauensintervallen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 4 --- die Daten entstehen durch Entscheidungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+$1$ & Wer gesund ist, wählt den Tarif mit hoher Zuzahlung.\\
+$5$ & Wer trotz hoher Zuzahlung zahlt, hat eine hohe Neigung.\\
+$6$ & Wer trotz wenig Bildung arbeitet, hat einen besonderen Grund.\\
+$13$ & Wer eine Regel kennt, richtet sich nach ihr --- und ändert sie damit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Titel des Bandes und sein Gegenstand.} Teilchen reagieren nicht auf das Messgerät; Menschen reagieren auf Tarife, Regeln und Erwartungen. Die Ökonometrie ist die Statistik für Daten, die von denen erzeugt werden, die man untersucht --- und ihre Methoden sind durchweg Versuche, diesen Umstand nicht zu ignorieren, sondern auszunutzen: Die Entscheidung, die verzerrt, ist dieselbe, die man verstehen will.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was offen ist}
+
+\begin{merksatz}
+\boxtitel{Vier Fragen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Klein oder groß} & Glaubwürdige Antworten auf kleine Fragen --- oder unsichere auf große? Der Streit seit 2010.\\
+\textbf{Lernen und Struktur} & Wie man Lernverfahren für Vorhersage mit Strukturen für Politik verbindet.\\
+\textbf{Externe Gültigkeit} & Wann der Befund aus Oregon in Sachsen gilt.\\
+\textbf{Regelwechsel} & Wie man Erwartungen misst, statt sie zu unterstellen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Frage ist die, die das Fach spaltet. \textbf{Die Glaubwürdigkeitsrevolution hat die Ökonometrie zuverlässiger gemacht und zugleich kleiner}: Man beantwortet, was ein natürlicher Versuch beantworten kann, und die großen Fragen --- was Gesundheitssysteme leisten, was Bildung wert ist --- zerfallen in viele kleine, lokale Antworten, deren Zusammensetzung wieder Annahmen braucht. Ob das ein Fortschritt ist, hängt davon ab, welche Frage man hatte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Sechs Sätze, die bleiben}
+
+\begin{merksatz}
+\boxtitel{Die Bilanz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{0.7cm}P{7.7cm}@{}}
+\toprule
+$1$ & Ist der Regressor mit der Störung korreliert, so bleibt die Verzerrung bei jedem Umfang.\\
+$2$ & Eine Gleichung ist identifiziert durch das, was in ihr fehlt --- nicht durch das, was in ihr steht.\\
+$3$ & Ein Instrument tauscht eine unprüfbare Annahme gegen eine andere; schwach ist es schlimmer als keines.\\
+$4$ & Feste Effekte beseitigen alles Zeitkonstante --- und verstärken Messfehler.\\
+$5$ & Zwei unabhängige Irrfahrten zeigen in drei von vier Fällen einen signifikanten Zusammenhang.\\
+$6$ & Die Koeffizienten einer reduzierten Form gelten für die Politik, unter der sie geschätzt wurden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Schlusswort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+Dieser Band begann mit einer Regression, die um das Vierfache danebenlag, und endete mit einer Tabelle, in der zehn Verfahren nebeneinanderstehen --- jedes mit der Annahme, die es trägt. Dazwischen lag keine neue Mathematik. Die Sätze dieses Bandes sind Folgerungen aus Band 2, 4, 17 und 25; was neu ist, sind die Fragen, die man an sie stellt.
+
+Die erste Frage lautet, ob eine Größe aus den Daten überhaupt bestimmbar ist, bevor man sie schätzt. Die zweite, welche Annahme eine Schätzung trägt und ob man sie in dieser Anwendung glauben kann. Die dritte, ob das, was man gefunden hat, noch gilt, wenn man danach handelt. Keine dieser Fragen beantwortet die Statistik; alle drei stellt die Ökonometrie, und sie hat für jede ein Werkzeug entwickelt, das die Antwort zumindest einkreist.
+
+Das ist weniger, als die Gründer des Fachs in den 1940er Jahren hofften --- sie wollten die Wirtschaft so messen, wie die Astronomie den Himmel misst. Es ist mehr, als die Skeptiker seither behaupten, denn ein Befund mit benannter Annahme ist etwas anderes als eine Meinung. Die Ökonometrie hat gelernt, dass die Daten sich selbst bestimmen. Was sie daraus gemacht hat, ist eine Disziplin des Benennens: Nicht die Zahl ist das Ergebnis, sondern die Zahl zusammen mit dem Satz, der sagt, wann sie gilt.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit hat die zweite Werkhälfte ihren elften Band. Die Statistik sagt, was die Daten hergeben. Das Lernen sagt, was auf den nächsten Fall zutrifft. Die Kausalität sagt, was sich ändert, wenn man handelt. Die Prozesse sagen, wie es weitergeht. Die Entscheidungstheorie sagt, wie man wählt. \textbf{Und die Ökonometrie sagt, was von alledem übrig bleibt, wenn die Beobachteten mitentscheiden, was man beobachtet.}}
+\end{minipage}
+\end{center}
+\end{merksatz}

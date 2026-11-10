@@ -1,0 +1,316 @@
+\part{Faire Spiele}
+
+\chapter{Was man schon weiß}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{Eine Vorhersage, die sich mitentwickelt}
+Ein Prozess läuft. Zu jedem Zeitpunkt kennt man seinen bisherigen Verlauf und möchte den künftigen einschätzen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Vorhersage ist dann selbst eine Zufallsgröße --- sie hängt davon ab, was man bis dahin gesehen hat.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Unterschied zur bedingten Erwartung aus Band 4, wo man auf ein einzelnes Ereignis bedingte und eine Zahl erhielt. \textbf{Hier bedingt man auf alles bisher Beobachtete und erhält eine Funktion des Verlaufs.} Dieser Begriff trägt den ganzen Teil~III und wird in Teil~IV zur Grundlage des stochastischen Integrals.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 7.1 --- Filtration}
+Eine \Begriff{Filtration} ist eine wachsende Folge von Ereignismengen
+\[ \mathcal F_0 \subseteq \mathcal F_1 \subseteq \mathcal F_2 \subseteq \cdots , \]
+wobei $\mathcal F_n$ diejenigen Ereignisse enthält, über die man zur Zeit $n$ entscheiden kann. Ein Prozess heißt \Begriff{angepasst}, wenn $X_n$ aus $\mathcal F_n$ bestimmbar ist.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was das anschaulich heißt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+$\mathcal F_n$ & \enquote{Alles, was bis zum Zeitpunkt $n$ bekannt ist.}\\
+wachsend & Wissen geht nicht verloren.\\
+angepasst & Der Prozess verrät nichts über die Zukunft.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Filtration ist die mathematische Fassung von \enquote{was man zu diesem Zeitpunkt wissen kann}} --- und damit dasselbe Anliegen, das Band 22 im Kapitel über Datenlecks und Band 23 bei der unsterblichen Zeit verfolgte. Dort war es eine Mahnung, hier ist es ein Begriff.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 7.2 --- bedingte Erwartung}
+Die \Begriff{bedingte Erwartung} $\mathbb{E}[Y \mid \mathcal F]$ einer integrierbaren Zufallsgröße $Y$ ist die (bis auf Nullmengen eindeutige) Zufallsgröße $Z$ mit
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & $Z$ ist aus $\mathcal F$ bestimmbar,\\
+$2$ & $\mathbb{E}[Z\,\mathbf 1_A] = \mathbb{E}[Y\,\mathbf 1_A]$ für jedes Ereignis $A \in \mathcal F$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die zweite Bedingung ist der Kern}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Auf jedem Ereignis, über das man entscheiden kann, hat die Vorhersage denselben Mittelwert wie die Wirklichkeit.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist genau die Kalibrierung aus Band 22, Kapitel~3.} Wer für eine Gruppe von Patienten dreißig Prozent Risiko vorhersagt, bei dem sollen auch dreißig Prozent erkranken --- und zwar in jeder Teilgruppe, die man aus dem verfügbaren Wissen bilden kann. Die bedingte Erwartung ist die einzige Vorhersage, die das für alle Teilgruppen zugleich leistet.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Existenz}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass es eine solche Größe gibt, folgt aus dem Satz von Radon und Nikodým (Band 13, Kapitel~12) --- die dritte Auslassung dieses Bandes. Für endliche oder abzählbare $\mathcal F$ kann man sie unmittelbar hinschreiben: Auf jedem Atom von $\mathcal F$ ist $Z$ konstant gleich dem dortigen Mittelwert von $Y$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zwei Sätze}
+
+\begin{merksatz}
+\boxtitel{Satz 7.3 --- die Turmregel}
+Für $\mathcal G \subseteq \mathcal F$ gilt
+\[ \mathbb{E}\bigl[\,\mathbb{E}[Y \mid \mathcal F] \ \big|\ \mathcal G\,\bigr] = \mathbb{E}[Y \mid \mathcal G] . \]
+
+\schritt{Beweis}
+Sei $Z = \mathbb{E}[Y\mid\mathcal F]$ und $W = \mathbb{E}[Z\mid\mathcal G]$. Für jedes $A \in \mathcal G$ ist auch $A \in \mathcal F$, also
+\[ \mathbb{E}[W\,\mathbf 1_A] = \mathbb{E}[Z\,\mathbf 1_A] = \mathbb{E}[Y\,\mathbf 1_A] . \]
+$W$ ist aus $\mathcal G$ bestimmbar und erfüllt die definierende Gleichung --- also ist $W = \mathbb{E}[Y\mid\mathcal G]$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine gröbere Vorhersage der feineren Vorhersage ist die gröbere Vorhersage.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Satz ist der Arbeitsesel der gesamten Prozesstheorie} --- er war schon der erste Schritt im Beweis von Satz 6.2 und wird in Kapitel~8 jeden Martingalbeweis tragen. In der Statistik heißt er Gesetz vom iterierten Erwartungswert und in Band 23 lieferte er die Anpassungsformel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 7.4 --- die beste Vorhersage}
+Unter allen aus $\mathcal F$ bestimmbaren Größen $g$ minimiert $Z = \mathbb{E}[Y\mid\mathcal F]$ den mittleren quadratischen Fehler:
+\[ \mathbb{E}\bigl[(Y-g)^{2}\bigr] = \mathbb{E}\bigl[(Y-Z)^{2}\bigr] + \mathbb{E}\bigl[(Z-g)^{2}\bigr] . \]
+
+\schritt{Beweis}
+\[ (Y-g)^{2} = (Y-Z)^{2} + 2(Y-Z)(Z-g) + (Z-g)^{2} \]
+Der mittlere Term verschwindet im Erwartungswert: Da $(Z-g)$ aus $\mathcal F$ bestimmbar ist, gilt nach der Turmregel
+\[ \mathbb{E}\bigl[(Y-Z)(Z-g)\bigr] = \mathbb{E}\bigl[(Z-g)\,\mathbb{E}[Y-Z\mid\mathcal F]\bigr] = 0 , \]
+denn $\mathbb{E}[Y-Z\mid\mathcal F] = Z - Z = 0$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die bedingte Erwartung ist eine senkrechte Projektion --- und die Zerlegung ist der Satz des Pythagoras.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Damit ist Satz 2.1 aus Band 22 an seinem eigentlichen Ort angekommen}: Die Zerlegung in Rauschen, Verzerrung und Varianz war nichts anderes als diese Projektion, angewandt auf die Lernaufgabe. Und die Regressionsfunktion, die dort das Ziel jedes Lernverfahrens war, ist genau $\mathbb{E}[Y \mid X]$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was man über die bedingte Erwartung falsch annimmt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Kein typischer Wert} & Sie ist ein Mittelwert, kein wahrscheinlicher Ausgang. Bei zweigipfligen Verteilungen liegt sie dort, wo nichts passiert.\\
+\textbf{Nicht messbar} & $\mathbb{E}[Y\mid\mathcal F]$ ist nur bis auf Nullmengen bestimmt; einzelne Werte haben keine Bedeutung.\\
+\textbf{Keine Unabhängigkeit} & Aus $\mathbb{E}[Y\mid X] = \mathbb{E}[Y]$ folgt nicht, dass $X$ und $Y$ unabhängig sind.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Sei $X$ gleichverteilt auf $\{-1,0,1\}$ und $Y = X^{2}$. Dann ist $\mathbb{E}[X\mid Y]=0$ für jeden Wert von $Y$ --- aber $X$ und $Y$ hängen offensichtlich zusammen. \textbf{Unkorreliertheit und Unabhängigkeit fallen auseinander, und die bedingte Erwartung sieht nur den linearen Teil des Zusammenhangs.} Dieselbe Falle steckte in Band 17 hinter dem Korrelationskoeffizienten.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.1 --- Die Turmregel anwenden}
+Eine Klinik nimmt täglich eine poissonverteilte Zahl von Patienten auf, $\lambda = 8$. Jeder ist unabhängig mit Wahrscheinlichkeit $0{,}15$ schwer krank. Wie viele Schwerkranke kommen im Mittel, und wie streut ihre Zahl?
+
+\loesung
+\schritt{Schritt 1 --- Der Erwartungswert}
+\[ \mathbb{E}[S] = \mathbb{E}\bigl[\mathbb{E}[S \mid N]\bigr] = \mathbb{E}[0{,}15\,N] = 0{,}15\cdot8 = 1{,}2 \]
+
+\schritt{Schritt 2 --- Die Varianz}
+Mit der Zerlegung $\operatorname{Var}[S] = \mathbb{E}\bigl[\operatorname{Var}[S\mid N]\bigr] + \operatorname{Var}\bigl[\mathbb{E}[S\mid N]\bigr]$:
+\[ = \mathbb{E}\bigl[N\cdot0{,}15\cdot0{,}85\bigr] + \operatorname{Var}[0{,}15N] = 8\cdot0{,}1275 + 0{,}0225\cdot8 = 1{,}02+0{,}18 = 1{,}2 \]
+
+\schritt{Schritt 3 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mittelwert und Varianz sind gleich --- $S$ ist poissonverteilt mit $\lambda = 1{,}2$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Ausdünnung aus Kapitel~4, nun über die Turmregel bewiesen} statt über die Definition des Prozesses. Die Zerlegung der Varianz in zwei Anteile --- Schwankung innerhalb und zwischen den Bedingungen --- ist dieselbe wie in der Varianzanalyse aus Band 17 und in der Bias-Varianz-Zerlegung aus Band 22.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.2 --- Kalibrierung prüfen}
+Ein Vorhersagemodell gibt für $1000$ Patienten Risiken aus. In der Gruppe mit vorhergesagten $30$ Prozent erkranken tatsächlich $42$ von $100$. Was folgt?
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingung}
+Kalibrierung verlangt $\mathbb{E}[Y \mid \hat p = 0{,}30] = 0{,}30$.
+
+\schritt{Schritt 2 --- Der Test}
+Bei wahren $30$ Prozent ist die Zahl der Erkrankten binomialverteilt mit Streuung
+\[ \sqrt{100\cdot0{,}3\cdot0{,}7} = 4{,}58 \]
+\[ z = \frac{42-30}{4{,}58} = 2{,}62 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Abweichung ist zu groß, um Zufall zu sein --- das Modell ist in diesem Bereich nicht kalibriert.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was das nicht heißt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Modell kann kalibriert und dennoch wertlos sein}: Wer jedem Patienten die Grundprävalenz vorhersagt, ist vollkommen kalibriert und trennt niemanden. Kalibrierung ist die zweite Bedingung aus Definition 7.2; die erste --- dass die Vorhersage möglichst viel Information ausnutzt --- ist davon unabhängig. Trennschärfe und Kalibrierung sind zwei Eigenschaften, und Band 22, Kapitel~3 verlangte beide.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.3 --- Projektion nachrechnen}
+Zeigen Sie an einem einfachen Beispiel, dass die bedingte Erwartung den quadratischen Fehler minimiert.
+
+\loesung
+\schritt{Schritt 1 --- Der Fall}
+$X$ sei ein Münzwurf; $Y = 2$ bei Kopf und $Y \in \{0, 6\}$ mit je $\tfrac12$ bei Zahl.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$X$ & $\mathbb{E}[Y\mid X]$ & $\operatorname{Var}[Y\mid X]$\\
+\midrule
+Kopf & $2$ & $0$\\
+Zahl & $3$ & $9$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Der Fehler der besten Vorhersage}
+\[ \mathbb{E}\bigl[(Y-Z)^{2}\bigr] = \tfrac12\cdot0 + \tfrac12\cdot9 = 4{,}5 \]
+
+\schritt{Schritt 3 --- Eine andere Vorhersage}
+Mit der Konstanten $g = \mathbb{E}[Y] = 2{,}5$:
+\[ \mathbb{E}\bigl[(Y-2{,}5)^{2}\bigr] = \tfrac12\cdot0{,}25 + \tfrac12\bigl(\tfrac12\cdot6{,}25+\tfrac12\cdot12{,}25\bigr) = 0{,}125 + 4{,}625 = 4{,}75 \]
+
+\schritt{Schritt 4 --- Die Zerlegung}
+\[ \mathbb{E}\bigl[(Z-g)^{2}\bigr] = \tfrac12(2-2{,}5)^{2} + \tfrac12(3-2{,}5)^{2} = 0{,}25 \]
+\[ 4{,}5 + 0{,}25 = 4{,}75 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Zugewinn durch die Kenntnis von $X$ beträgt nur $0{,}25$} --- fast der ganze Fehler bleibt, weil bei Zahl noch alles offen ist. Genau dieser verbleibende Teil ist das \enquote{Rauschen} aus Band 22 und die untere Schranke, die kein Verfahren unterbietet.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Begriff aus der Not}
+\Person{Andrei Kolmogorow} führte die bedingte Erwartung 1933 in seiner \kursiv{Grundbegriffe der Wahrscheinlichkeitsrechnung} ein --- weil die elementare Definition bei stetigen Bedingungen versagt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Bedingt man auf ein Ereignis der Wahrscheinlichkeit null, so führt die Formel $\Pr[A\mid B] = \Pr[A\cap B]/\Pr[B]$ auf $0/0$. \textbf{Das Borel-Kolmogorow-Paradox zeigt, dass die Antwort sogar davon abhängt, wie man das Ereignis als Grenzfall auffasst} --- zwei gleichwertig erscheinende Beschreibungen desselben Großkreises liefern verschiedene bedingte Verteilungen. Kolmogorows Ausweg war, die Eigenschaft zur Definition zu machen.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Folge}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Der Preis ist die Eindeutigkeit nur bis auf Nullmengen} --- ein einzelner Wert der bedingten Erwartung hat keine Bedeutung. Das erscheint pedantisch und ist es nicht: Es ist der Grund, warum man bei stetigen Größen nie fragen darf, was bei einem \kursiv{exakten} Messwert gilt, sondern immer nur, was auf einer Menge positiver Wahrscheinlichkeit gilt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Bedingen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Bedingte Dichten} & Schätzen ganzer Verteilungen statt nur ihres Mittelwerts.\\
+\textbf{Quantilvorhersage} & Robust gegen Ausreißer, ohne Erwartungswert.\\
+\textbf{Kalibrierung} & Verfahren, die Vorhersagen nachträglich kalibrieren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Moderne Lernverfahren sagen zunehmend nicht mehr $\mathbb{E}[Y\mid X]$ vorher, sondern die ganze bedingte Verteilung. \textbf{Für die Medizin ist das der wichtigere Gegenstand}: Ein mittlerer Verlauf sagt wenig, wenn die Verteilung zweigipflig ist --- die eine Hälfte erholt sich rasch, die andere gar nicht. Der Mittelwert beschreibt dann, wie der Bruchfall dieses Kapitels sagt, keinen einzigen Patienten.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 7.1} & Filtration: was man wann weiß\\
+\textbf{Definition 7.2} & bedingte Erwartung über Mittelwerttreue\\
+\textbf{Satz 7.3} & Turmregel\\
+\textbf{Satz 7.4} & beste Vorhersage, Pythagoras\\
+\textbf{Der Bruchfall} & kein typischer Wert, keine Unabhängigkeit\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Mit diesem Begriff lässt sich nun sagen, was ein faires Spiel ist: eines, bei dem die beste Vorhersage für morgen der heutige Stand ist. Das nächste Kapitel zieht daraus überraschend viel.}
+\end{minipage}
+\end{center}
+\end{merksatz}

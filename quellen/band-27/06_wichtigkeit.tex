@@ -1,0 +1,373 @@
+\chapter{Dort ziehen, wo etwas passiert}
+
+\section{Das Problem der seltenen Treffer}
+
+\begin{merksatz}
+\boxtitel{Wie oft kommt es ganz schlimm?}
+Aus $400\,000$ simulierten Tagen der Intensivstation:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.6cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Abweisungen am Tag} & \textbf{Anteil} & \textbf{etwa alle}\\
+\midrule
+$\ge1$ & $0{,}235$ & $4$ Tage\\
+$\ge3$ & $0{,}050$ & $20$ Tage\\
+$\ge5$ & $0{,}0068$ & $5$ Monate\\
+$\ge7$ & $0{,}00057$ & $5$ Jahre\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Für die letzte Zeile gab es $226$ Treffer --- noch genug. Für zehn Abweisungen am Tag gäbe es in $400\,000$ Tagen vielleicht einen. Für die Frage, ob so etwas einmal im Jahrhundert vorkommt, versagt das Zählen.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Gesetz der seltenen Treffer}
+Für einen Anteil $p$ ist der relative Fehler $\sqrt{(1-p)/(np)}$. Zehn Prozent Genauigkeit brauchen $n \approx 100/p$ Läufe:
+\[ p = 10^{-3}:\ 10^{5}, \qquad p = 10^{-6}:\ 10^{8}, \qquad p = 10^{-9}:\ 10^{11} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Jahrhundertereignis braucht hundert Jahrhunderte Simulation.} Für Reaktorsicherheit, Versicherungsrisiken, Bitfehler in Übertragungen und Nebenwirkungen bei einem von einer Million Patienten ist das die Normalsituation. Der Ausweg ist in Kapitel~3 schon angeklungen: nicht aus der richtigen Verteilung ziehen, sondern aus einer, die das seltene Ereignis häufig macht --- und den Betrug nachträglich verrechnen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Wichtigkeitsstichprobe}
+
+\begin{definition}
+\boxtitel{Definition 6.1 --- Wichtigkeitsgewicht}
+Sei $\theta = \mathbb E_f[h(X)] = \int h(x) f(x)\,dx$ gesucht, und sei $g$ eine Dichte mit $g(x)>0$ überall dort, wo $h(x)f(x)\neq0$. Dann ist
+\[ \theta = \int h(x)\,\frac{f(x)}{g(x)}\,g(x)\,dx = \mathbb E_g\big[h(X)\,w(X)\big], \qquad w(x) = \frac{f(x)}{g(x)} . \]
+Man ziehe $X_1,\ldots,X_n$ aus $g$ und schätze $\hat\theta = \frac1n\sum h(X_i)\,w(X_i)$. $g$ heißt \Begriff{Vorschlagsdichte}, $w$ das \Begriff{Wichtigkeitsgewicht}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 6.2 --- Erwartungstreue und Varianz}
+$\hat\theta$ ist erwartungstreu, und
+\[ \operatorname{Var}_g[h\,w] = \int \frac{h(x)^2 f(x)^2}{g(x)}\,dx - \theta^2 . \]
+Die Varianz ist null für $g^*(x) = |h(x)|f(x)/\int|h|f$; für $h\ge0$ ist das $g^* = hf/\theta$.
+
+\schritt{Beweis}
+Erwartungstreue ist die Umformung in Definition 6.1. Die Varianz ist $\mathbb E_g[(hw)^2] - \theta^2$ mit $(hw)^2 g = h^2f^2/g$. Einsetzen von $g^*$ gibt $\int h^2f^2\theta/(hf) = \theta\int hf = \theta^2$, also Varianz null. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die beste Vorschlagsdichte ist der Integrand selbst. Man kennt sie nicht --- sie enthält $\theta$ --- aber man weiß jetzt, wie sie aussehen soll: wie $h\cdot f$, groß, wo das Produkt groß ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für ein seltenes Ereignis $h = \mathbf 1_A$ heißt das: $g$ soll auf $A$ konzentriert sein und dort wie $f$ aussehen.} Jede Ziehung außerhalb $A$ ist verschenkt, jede Ziehung in $A$ zählt mit dem Gewicht $f/g$, das klein ist, weil $g$ dort groß ist --- viele kleine Beiträge statt seltener großer. Das ist das Prinzip; der Rest ist die Wahl von $g$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Verschiebung}
+
+\begin{merksatz}
+\boxtitel{$P(Z > 4)$ für die Standardnormalverteilung}
+Exakt: $3{,}167\cdot10^{-5}$ --- einer von $32\,000$. Naiv mit $n = 100\,000$: im Mittel drei Treffer, relativer Fehler $57\,\%$.
+
+\schritt{Der Vorschlag}
+Man ziehe aus $N(\mu,1)$ statt $N(0,1)$. Das Gewicht ist
+\[ w(x) = \frac{\varphi(x)}{\varphi(x-\mu)} = \exp\!\Big(-\mu x + \frac{\mu^2}{2}\Big) , \]
+und der Schätzer $\frac1n\sum \mathbf 1\{X_i>4\}\,w(X_i)$.
+
+\schritt{Das Ergebnis, $n = 100\,000$, hundert Wiederholungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$\mu$ & \textbf{Schätzung} & \textbf{rel. Fehler} & \textbf{Varianzfaktor}\\
+\midrule
+$0$ (naiv) & $2{,}8\cdot10^{-5}$ & $57\,\%$ & $1$\\
+$2$ & $3{,}171\cdot10^{-5}$ & $2{,}4\,\%$ & $550$\\
+$4$ & $3{,}167\cdot10^{-5}$ & $\mathbf{0{,}7\,\%}$ & $\mathbf{6\,700}$\\
+$6$ & $3{,}158\cdot10^{-5}$ & $1{,}9\,\%$ & $900$\\
+$8$ & $3{,}13\cdot10^{-5}$ & $30\,\%$ & $3$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Verschiebung auf die Schwelle gibt einen Faktor von fast siebentausend --- mit $1\,000$ Ziehungen ist man so genau wie naiv mit sieben Millionen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Und die letzte Zeile ist die Warnung}: Zu weit verschoben, und die Hälfte der Ziehungen liegt weit jenseits der Schwelle mit winzigem Gewicht, während die wenigen nahe der Schwelle riesige Gewichte tragen. Die Varianz steigt wieder; bei $\mu=8$ ist fast nichts gewonnen. \textbf{Die Faustregel heißt: $g$ so wählen, dass der Modus von $g$ dort liegt, wo $hf$ seinen Modus hat} --- bei einer Schwelle also auf der Schwelle. Die exakte Rechnung steht in Aufgabe 6.1.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die wirksame Stichprobengröße}
+Ein Maß für die Qualität der Gewichte:
+\[ n_{\text{eff}} = \frac{\big(\sum w_i\big)^2}{\sum w_i^2} . \]
+Sind alle Gewichte gleich, ist $n_{\text{eff}} = n$; trägt ein Gewicht alles, ist $n_{\text{eff}} = 1$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Vorschlag} & $n$ & $n_{\text{eff}}$\\
+\midrule
+$N(4,1)$, Gewichte auf $A$ & $100\,000$ & $18\,000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Fünftel --- und das bei der besten Verschiebung.} Die andere Hälfte der Ziehungen liegt unter der Schwelle mit Gewicht null, und die darüber tragen ungleiche Gewichte. $n_{\text{eff}}$ ist die erste Zahl, die man nach jeder Wichtigkeitsstichprobe ansieht: Fällt sie unter ein Prozent von $n$, so stimmt die Vorschlagsdichte nicht, und die Schätzung ist nicht zu trauen --- auch wenn ihr Standardfehler klein aussieht. Warum er trügen kann, zeigt der Bruchfall.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Quasi-Monte-Carlo}
+
+\begin{merksatz}
+\boxtitel{Gleichmäßiger als Zufall}
+Zufallspunkte in $[0,1]^d$ bilden Haufen und Lücken --- das ist der Grund für den Fehler $n^{-1/2}$. Eine \Begriff{Folge niedriger Diskrepanz} füllt den Würfel absichtlich gleichmäßig: Jedes achsenparallele Teilrechteck enthält fast genau den Anteil der Punkte, der seinem Volumen entspricht.
+
+\schritt{Satz 6.3 --- Koksma--Hlawka}
+Für eine Punktmenge $P$ mit Sterndiskrepanz $D^*_n(P)$ und eine Funktion $h$ mit beschränkter Variation $V(h)$ im Sinne von Hardy und Krause gilt
+\[ \Big|\frac1n\sum_{i=1}^n h(x_i) - \int h\Big| \le V(h)\,D^*_n(P) . \]
+Für die Folgen von \Person{Sobol} und \Person{Halton} ist $D^*_n = O\big((\log n)^d/n\big)$.
+
+\schritt{Beweis}
+Band 20, Kapitel~11 (Auslassung 2 für den mehrdimensionalen Fall). Die eindimensionale Fassung ist partielle Integration: $\frac1n\sum h(x_i) - \int h = -\int_0^1 \big(F_n(t) - t\big)\,dh(t)$ mit der empirischen Verteilungsfunktion $F_n$, und $\sup|F_n - t|$ ist die Diskrepanz. $\blacksquare$
+
+\schritt{Das Integral $\int_{[0,1]^d} e^{x_1+\cdots+x_d}\,dx / (e-1)^d = 1$, Fehler bei $n = 16\,384$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.2cm}P{2.4cm}P{2.6cm}P{2.0cm}@{}}
+\toprule
+$d$ & \textbf{Monte Carlo} & \textbf{Sobol} & \textbf{Faktor}\\
+\midrule
+$2$ & $3{,}6\cdot10^{-3}$ & $1{,}5\cdot10^{-7}$ & $24\,000$\\
+$5$ & $6{,}3\cdot10^{-3}$ & $8{,}5\cdot10^{-6}$ & $740$\\
+$10$ & $1{,}1\cdot10^{-2}$ & $2{,}7\cdot10^{-4}$ & $38$\\
+$20$ & $1{,}3\cdot10^{-2}$ & $3{,}2\cdot10^{-3}$ & $4$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In zwei Dimensionen ist Sobol um das Zwanzigtausendfache genauer. In zwanzig immer noch um das Vierfache --- der Faktor $(\log n)^d$ frisst den Vorteil langsam, aber er frisst ihn.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Satz 6.3 ist eine Schranke, keine Fehlerschätzung}: $V(h)$ ist selten berechenbar, und $(\log n)^{20}/n$ ist für jedes erreichbare $n$ größer als $n^{-1/2}$ --- die Tabelle zeigt trotzdem einen Gewinn, weil die Schranke grob ist. Um einen Fehler mit Standardabweichung zu bekommen, verwirft man die Determiniertheit halb: Man \Begriff{verwürfelt} die Folge zufällig (\Person{Owen}, 1995), wiederholt das zwanzigmal und mittelt. Die Tabelle ist so entstanden. Für glatte Integranden in mäßiger Dimension --- Preise von Finanzprodukten, Erwartungswerte über wenige Parameter --- ist Quasi-Monte-Carlo heute Standard; für die Intensivstation mit ihren Tausenden von Zufallszahlen je Lauf ist es wirkungslos.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Vorschlagsdichte mit zu dünnen Rändern}
+Gesucht $\mathbb E[X^2] = 1$ für $X\sim N(0,1)$; vorgeschlagen $g = N(0,\,0{,}6^2)$ --- schmaler als $f$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.2cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+$n$ & \textbf{Schätzung} & $n_{\text{eff}}$ & \textbf{größtes Gewicht}\\
+\midrule
+$10^{3}$ & $0{,}79$ & $346$ & $3{,}2\,\%$\\
+$10^{4}$ & $1{,}31$ & $605$ & $2{,}9\,\%$\\
+$10^{5}$ & $1{,}04$ & $7\,970$ & $0{,}6\,\%$\\
+$10^{6}$ & $0{,}98$ & $115\,000$ & $0{,}1\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Was geschieht}
+\[ \frac{f(x)^2}{g(x)} \propto \exp\!\Big(-x^2 + \frac{x^2}{2\cdot0{,}36}\Big) = \exp\big(0{,}39\,x^2\big) \to \infty \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Varianz des Schätzers ist unendlich. Der Mittelwert konvergiert --- nach dem Gesetz der großen Zahlen --- aber ohne Rate, und jeder geschätzte Standardfehler ist eine Lüge: Zwischen $n=10^3$ und $10^4$ wird die Schätzung schlechter.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Regel: Die Vorschlagsdichte muss schwerere Ränder haben als $f$, nie leichtere.} Eine Normalverteilung als Vorschlag für eine Normalverteilung braucht eine größere Streuung; sicherer ist eine $t$-Verteilung, deren Ränder jede Normalverteilung überholen. Das zweite Moment $\int h^2f^2/g$ ist auf dem Papier zu prüfen, bevor der Rechner läuft --- derselbe Rat wie beim Bruchfall in Kapitel~3, und aus demselben Grund: Der Rechner zeigt eine unendliche Varianz nicht an. Er zeigt gelegentlich einen Sprung, und zwischen den Sprüngen sieht alles gut aus.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.1 --- Die optimale Verschiebung}
+Für $P(Z>c)$ mit Vorschlag $N(\mu,1)$: Zeigen Sie, dass das zweite Moment des Schätzers $e^{\mu^2}\,P(Z > c+\mu)$ ist, und bestimmen Sie das beste $\mu$ für $c=4$.
+
+\loesung
+\schritt{Schritt 1 --- Das zweite Moment}
+\[ \mathbb E_g\big[\mathbf 1\{X>c\}\,w(X)^2\big] = \int_c^\infty \frac{\varphi(x)^2}{\varphi(x-\mu)}\,dx \]
+Mit $\varphi(x)^2/\varphi(x-\mu) = \varphi(x)\,e^{-\mu x+\mu^2/2}$ und $\varphi(x)e^{-\mu x} = \varphi(x+\mu)\,e^{\mu^2/2}$:
+\[ = e^{\mu^2}\int_c^\infty \varphi(x+\mu)\,dx = e^{\mu^2}\,P(Z > c+\mu) \]
+
+\schritt{Schritt 2 --- Die Werte für $c=4$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.2cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+$\mu$ & $e^{\mu^2}P(Z>4+\mu)$ & \textbf{Varianz}\\
+\midrule
+$0$ & $3{,}17\cdot10^{-5}$ & $3{,}17\cdot10^{-5}$\\
+$2$ & $5{,}4\cdot10^{-8}$ & $5{,}3\cdot10^{-8}$\\
+$4$ & $5{,}5\cdot10^{-9}$ & $4{,}5\cdot10^{-9}$\\
+$6$ & $3{,}3\cdot10^{-8}$ & $3{,}2\cdot10^{-8}$\\
+$8$ & $1{,}1\cdot10^{-5}$ & $1{,}1\cdot10^{-5}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Varianz $=$ zweites Moment $- \theta^2$ mit $\theta^2 = 1{,}0\cdot10^{-9}$.
+
+\schritt{Schritt 3 --- Das Optimum}
+Ableiten von $\mu^2 + \ln P(Z>4+\mu)$ nach $\mu$: $2\mu = \varphi(4+\mu)/P(Z>4+\mu) \approx 4+\mu$ für große Argumente, also $\mu \approx 4$ --- genauer $\mu^* = 4{,}1$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Varianzfaktor gegenüber naiv ist $3{,}17\cdot10^{-5}/4{,}5\cdot10^{-9} = 7\,000$} --- die Simulation gab $6\,700$. Die Rechnung zeigt auch, warum $\mu = 8$ scheitert: $e^{64}$ ist $10^{28}$, und $P(Z>12)$ gleicht das knapp aus; die Gewichte werden astronomisch. Die Verschiebung auf die Schwelle ist der Spezialfall einer allgemeinen Regel, der \Begriff{exponentiellen Neigung} aus Band 25, Kapitel~9: Man wählt $g(x) \propto e^{\lambda x}f(x)$ und $\lambda$ so, dass $\mathbb E_g[X] = c$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.2 --- Zehn Abweisungen an einem Tag}
+Wie würden Sie die Wahrscheinlichkeit von mindestens zehn Abweisungen an einem Tag auf der Intensivstation schätzen?
+
+\loesung
+\schritt{Schritt 1 --- Was das Ereignis treibt}
+Zehn Abweisungen brauchen eine volle Station und viele Ankünfte an einem Tag --- bei $\lambda = 2{,}4$ sind zwölf oder mehr Ankünfte ein $10^{-5}$-Ereignis der Poisson-Verteilung allein.
+
+\schritt{Schritt 2 --- Der Vorschlag}
+Man erhöhe für den betrachteten Tag die Ankunftsrate auf $\lambda' = 12$ und verkürze nichts an den Verweildauern. Das Gewicht für einen Tag mit $k$ Ankünften zu den Zeiten $t_1,\ldots,t_k$ ist das Dichteverhältnis der beiden Poisson-Prozesse:
+\[ w = \Big(\frac{\lambda}{\lambda'}\Big)^{k} e^{(\lambda'-\lambda)\cdot 1} = 0{,}2^{k}\,e^{9{,}6} \]
+
+\schritt{Schritt 3 --- Der Zustand davor}
+Die Station muss zu Tagesbeginn voll sein. Man simuliere das System normal, bis es im Dauerzustand ist, und starte die geneigten Tage aus Zuständen, die man dem laufenden System entnimmt --- jeder Tag ein unabhängiger Versuch mit Gewicht $w$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Ergebnis ist $\frac1n\sum \mathbf 1\{R_i\ge10\}\,w_i$ --- mit einem $n_{\text{eff}}$, das man prüft, bevor man eine Zahl nennt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Wahl $\lambda' = 12$ ist die Neigung aus Aufgabe 6.1}: Die Rate so verschieben, dass das Ereignis typisch wird. Die Gewichte sind dann klein und ungleich --- $0{,}0015$ für einen Tag mit zehn Ankünften, $10^{-10}$ für einen mit zwanzig --- und ein Tag mit dreizehn Ankünften, von denen zehn abgewiesen werden, trägt hunderttausendmal so viel wie einer mit zwanzig. Zu schwach geneigt, und das Ereignis bleibt selten; zu stark, und die Gewichte verzetteln sich. Die Kunst liegt in der Mitte, und Kapitel~11 wird für seltene Ereignisse in Systemen über die Zeit ein Verfahren vorstellen, das die Neigung selbst findet.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.3 --- Wann Quasi-Monte-Carlo hilft}
+Für welche der folgenden Aufgaben lohnt eine Sobol-Folge: (a) $\int_{[0,1]^3}$ einer glatten Funktion, (b) die Abweisungsrate der Intensivstation über $1\,000$ Tage, (c) der Preis einer Option, der von $50$ täglichen Kursen abhängt?
+
+\loesung
+\schritt{Schritt 1 --- (a)}
+Drei Dimensionen, glatt, beschränkte Variation: Faktor Tausende. Ja.
+
+\schritt{Schritt 2 --- (b)}
+Ein Lauf braucht etwa $2\,400$ Ankunftszeiten und ebenso viele Verweildauern --- Dimension $5\,000$, und die Abweisungsrate ist als Funktion dieser Zahlen unstetig mit unendlicher Variation. $(\log n)^{5000}$ ist kein Argument mehr. Nein --- oder nur mit Verwürfelung, als harmloser Zufallsersatz ohne Gewinn.
+
+\schritt{Schritt 3 --- (c)}
+Fünfzig Dimensionen, aber die \Begriff{wirksame Dimension} ist klein: Der Preis hängt vor allem vom Endkurs ab, und der ist die Summe aller fünfzig Schritte. Erzeugt man den Pfad so, dass die erste Sobol-Koordinate den Endkurs bestimmt und die weiteren die Zwischenwerte (\Begriff{Brownsche Brücke}, Band 25, Kapitel~6), so wirkt die Folge wie in zwei oder drei Dimensionen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ja --- und das ist der Grund, warum Quasi-Monte-Carlo in der Finanzmathematik seit den 1990er Jahren Standard ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Regel ist nicht die Dimension, sondern die wirksame Dimension}: Wie viele Koordinaten tragen den Großteil der Varianz? \Person{Caflisch}, \Person{Morokoff} und \Person{Owen} haben 1997 gezeigt, dass eine Hypothekenbewertung in $360$ Dimensionen eine wirksame Dimension von zwei hat. Die Intensivstation hat keine: Jede Ankunft zählt gleich viel. Für sie bleibt der Zufall --- und die Verfahren der Kapitel~4 und~5.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Vom Neutron zur Hypothek}
+Die Wichtigkeitsstichprobe ist das älteste Verfahren dieses Bandes, und sie entstand aus einer Not.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Neutronen in Los Alamos, die durch eine Abschirmung dringen, sind ein seltenes Ereignis --- eines von $10^{10}$. \Person{Kahn} und \Person{Harris} beschrieben 1951, wie man die Neutronen künstlich in die Abschirmung hineinlenkt und mit Gewichten korrigiert. \textbf{Den Namen \enquote{importance sampling} prägte Kahn}; das Gewicht nannte er \enquote{particle weight}, und die Teilchen trugen es wie einen Pass durch die Simulation.}
+\end{minipage}
+\end{center}
+
+\schritt{Quasi-Zufall}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Diskrepanz stammt aus der Zahlentheorie: \Person{Hermann Weyl} 1916 über Gleichverteilung modulo eins. \Person{Koksma} bewies die Ungleichung 1942 in einer Dimension, \Person{Hlawka} 1961 allgemein, \Person{Sobol} konstruierte seine Folge 1967 in Moskau. \textbf{Dass sie außerhalb der Zahlentheorie etwas taugt, bemerkte die Wall Street}: \Person{Paskov} und \Person{Traub} bewerteten 1995 eine Hypothekenanleihe in $360$ Dimensionen mit Sobol-Punkten und waren hundertmal schneller als die Bank.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Seltene Ereignisse heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Adaptive Neigung} & Die Vorschlagsdichte aus den Ziehungen lernen, in Runden --- Kreuzentropie-Verfahren, Kapitel~11.\\
+\textbf{Aufspaltung} & Statt zu gewichten, Pfade vervielfältigen, die sich dem Ereignis nähern --- Kapitel~11.\\
+\textbf{Höhere Ordnung} & Gitterregeln und Netze, deren Fehler für glatte $h$ wie $n^{-2}$ oder $n^{-3}$ fällt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Theorie der Quasi-Monte-Carlo-Verfahren ist in den letzten zwanzig Jahren die aktivste Ecke des Fachs geworden}: \Person{Dick} und \Person{Pillichshammer} haben 2010 Punktmengen konstruiert, die für Funktionen mit $k$ glatten Ableitungen einen Fehler $n^{-k}$ erreichen --- in beliebiger Dimension, solange die wirksame Dimension klein bleibt. Für die Unsicherheitsquantifizierung in Kapitel~14, wo ein Modell Hunderte unsichere Parameter hat, von denen wenige zählen, ist das der Werkzeugkasten.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 6.1} & $w = f/g$, aus $g$ ziehen, mit $w$ wichten\\
+\textbf{Satz 6.2} & beste $g \propto |h|f$; Ränder schwerer als $f$\\
+\textbf{Die Verschiebung} & Modus von $g$ auf die Schwelle\\
+\textbf{$n_{\text{eff}}$} & immer prüfen\\
+\textbf{Satz 6.3} & Koksma--Hlawka; Sobol bei kleiner wirksamer Dimension\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil II ist damit abgeschlossen: Fehler messen, Fehler senken, seltene Ereignisse erreichen. Alle Verfahren haben vorausgesetzt, dass man aus $f$ oder aus einem $g$ ziehen kann. Teil III beginnt mit der Frage, was man tut, wenn man es nicht kann --- wenn $f$ nur bis auf eine unbekannte Konstante bekannt ist, in tausend Dimensionen. Die Antwort ist die wichtigste Erfindung der Simulation seit ihrer Erfindung.}
+\end{minipage}
+\end{center}
+\end{merksatz}

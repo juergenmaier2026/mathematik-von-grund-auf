@@ -1,0 +1,369 @@
+\part{Ketten und Pfade}
+
+\chapter{Ziehen, ohne ziehen zu können}
+
+\section{Das Problem}
+
+\begin{merksatz}
+\boxtitel{Die Verweildauer schätzen}
+Hundert beobachtete Aufenthalte, logarithmiert: Mittel $\bar y = 1{,}283$, Streuung $s = 0{,}528$. Gesucht ist, was man über $\mu$ und $\sigma$ der logarithmischen Normalverteilung weiß --- nach Band 21 die A-posteriori-Dichte
+\[ p(\mu,\sigma\mid y) \;\propto\; \sigma^{-(n+1)} \exp\!\Big(-\frac{\sum_i (y_i-\mu)^2}{2\sigma^2}\Big) \]
+bei flacher A-priori-Verteilung für $\mu$ und $\ln\sigma$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die rechte Seite ist bekannt. Die Normierungskonstante nicht. Und aus einer Dichte, deren Konstante man nicht kennt, kann man mit Kapitel~2 nicht ziehen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Normalfall in der Bayes-Statistik und in der statistischen Physik}: Ein Produkt aus Likelihood und A-priori-Dichte, über $2$ oder $2\,000$ Parameter, dessen Integral niemand ausrechnen kann. Für diesen Fall --- zwei Parameter, konjugierte Form --- gibt es noch exakte Formeln, und genau deshalb eignet er sich zum Prüfen. Das Verfahren, das jetzt kommt, braucht die Formeln nicht; es braucht nur die rechte Seite, ausgewertet an beliebigen Punkten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Metropolis-Algorithmus}
+
+\begin{definition}
+\boxtitel{Definition 7.1 --- Metropolis--Hastings}
+Sei $\pi$ eine Dichte, bekannt bis auf eine Konstante, und $q(x'\mid x)$ eine Vorschlagsdichte, aus der man ziehen kann. Ausgehend von $x_0$ wiederhole man:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+$1$ & Vorschlag $x' \sim q(\cdot\mid x_t)$ ziehen.\\
+$2$ & Annahmewahrscheinlichkeit berechnen:
+$\displaystyle \alpha = \min\Big\{1,\ \frac{\pi(x')\,q(x_t\mid x')}{\pi(x_t)\,q(x'\mid x_t)}\Big\}$\\
+$3$ & Mit Wahrscheinlichkeit $\alpha$ setze $x_{t+1} = x'$, sonst $x_{t+1} = x_t$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Für symmetrisches $q$ --- etwa $x' = x_t + \text{Schritt}\cdot Z$ --- kürzt sich $q$ heraus: $\alpha = \min\{1, \pi(x')/\pi(x_t)\}$. Das ist der \Begriff{Zufallsweg-Metropolis}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 7.2 --- $\pi$ ist die stationäre Verteilung}
+Die Kette aus Definition 7.1 erfüllt die detaillierte Bilanz
+\[ \pi(x)\,P(x\to x') = \pi(x')\,P(x'\to x) \]
+und hat daher $\pi$ als stationäre Verteilung. Ist sie zudem irreduzibel und aperiodisch, so gilt für jede integrierbare Funktion $h$
+\[ \frac1T\sum_{t=1}^T h(x_t) \longrightarrow \int h\,\pi \qquad \text{fast sicher.} \]
+
+\schritt{Beweis}
+Für $x\neq x'$ ist $P(x\to x') = q(x'|x)\,\alpha(x,x')$. Sei ohne Einschränkung $\pi(x')q(x|x') \le \pi(x)q(x'|x)$; dann ist $\alpha(x,x') = \pi(x')q(x|x')/(\pi(x)q(x'|x))$ und $\alpha(x',x) = 1$. Also
+\[ \pi(x)\,q(x'|x)\,\alpha(x,x') = \pi(x')\,q(x|x') = \pi(x')\,q(x|x')\,\alpha(x',x) . \]
+Detaillierte Bilanz ergibt Stationarität durch Integration über $x$ (Band 25, Satz 3.5). Die Konvergenz des Mittels ist der Ergodensatz für Markow-Ketten, Band 25, Satz 3.9. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Normierungskonstante kommt im Quotienten $\pi(x')/\pi(x)$ nicht vor. Das ist der ganze Trick --- und er trägt das ganze Fach.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Was der Satz nicht sagt, ist, wie lange es dauert.} Die Kette konvergiert, aber die Werte $x_1, x_2, \ldots$ sind abhängig --- jeder vom vorigen --- und Kapitel~4 hat gezeigt, was das für den Fehler bedeutet. Die Autokorrelationszeit $\tau$ hängt von der Schrittweite ab, und die Tabelle im nächsten Abschnitt zeigt, wie empfindlich.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Schrittweite}
+
+\begin{merksatz}
+\boxtitel{Zufallsweg-Metropolis für $(\mu, \ln\sigma)$, $20\,000$ Schritte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{1.6cm}P{2.2cm}@{}}
+\toprule
+\textbf{Schritt} & \textbf{Annahme} & $\tau$ & \textbf{wirksames $n$}\\
+\midrule
+$0{,}01$ & $91\,\%$ & $108$ & $170$\\
+$0{,}05$ & $61\,\%$ & $10$ & $1\,800$\\
+$0{,}10$ & $36\,\%$ & $\mathbf{6{,}4}$ & $\mathbf{2\,800}$\\
+$0{,}20$ & $15\,\%$ & $11$ & $1\,600$\\
+$1{,}00$ & $0{,}8\,\%$ & $184$ & $100$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+A-posteriori-Streuung von $\mu$ in allen Zeilen $0{,}053$; exakt $s/\sqrt n\cdot\sqrt{(n-1)/(n-3)} = 0{,}0533$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zu kleine Schritte: fast alles wird angenommen, aber die Kette kriecht. Zu große: fast alles wird abgelehnt, und die Kette steht. Dazwischen liegt ein Faktor dreißig im wirksamen $n$.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Regel}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Schrittweite so wählen, dass etwa ein Viertel bis die Hälfte der Vorschläge angenommen wird --- in einer Dimension nahe $45\,\%$, in vielen nahe $23\,\%$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die $23\,\%$ sind ein Satz, nicht eine Faustregel}: \Person{Roberts}, \Person{Gelman} und \Person{Gilks} bewiesen 1997, dass für Produktdichten in hoher Dimension die optimale Schrittweite wie $2{,}38/\sqrt d$ skaliert und genau diese Annahmerate ergibt. Die Streuung $0{,}053$ in jeder Zeile zeigt, dass Satz 7.2 immer gilt --- auch die kriechende Kette ist richtig, nur hat sie nach $20\,000$ Schritten erst $170$ unabhängige Werte gesammelt. Richtig und brauchbar sind zwei Dinge.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Gibbs-Sampler}
+
+\begin{definition}
+\boxtitel{Definition 7.3 --- Gibbs-Sampler}
+Sei $\pi(x_1,\ldots,x_d)$ gegeben, und seien die bedingten Verteilungen $\pi(x_j\mid x_{-j})$ jeder Koordinate bei festgehaltenen übrigen ziehbar. Dann ziehe man reihum
+\[ x_1 \sim \pi(\cdot\mid x_2,\ldots,x_d),\quad x_2 \sim \pi(\cdot\mid x_1,x_3,\ldots,x_d),\quad \ldots,\quad x_d \sim \pi(\cdot\mid x_1,\ldots,x_{d-1}) . \]
+Jeder Teilschritt ist ein Metropolis-Hastings-Schritt mit Annahmewahrscheinlichkeit $1$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Gibbs-Sampler für $(\mu,\sigma)$}
+Beide bedingten Verteilungen sind in Band 21 hergeleitet:
+\[ \mu\mid\sigma,y \sim N\!\Big(\bar y,\ \frac{\sigma^2}{n}\Big), \qquad \sigma^2\mid\mu,y \sim \frac{\sum_i(y_i-\mu)^2}{\chi^2_{n}} . \]
+
+\schritt{Ergebnis, $20\,000$ Schritte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.0cm}P{1.4cm}@{}}
+\toprule
+& \textbf{Mittel} & \textbf{Streuung} & $\tau$\\
+\midrule
+$\mu$ & $1{,}2825$ & $0{,}0531$ & $1{,}0$\\
+$\sigma$ & $0{,}532$ & $0{,}038$ & $1{,}0$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein Schritt wird abgelehnt, keine Schrittweite ist zu wählen, und $\tau = 1$: Die Kette ist so gut wie unabhängige Ziehungen.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum $\alpha = 1$}
+Vorschlag $x_j' \sim \pi(x_j'\mid x_{-j})$, alles andere bleibt. Der Hastings-Quotient:
+\[ \frac{\pi(x_j', x_{-j})\;\pi(x_j\mid x_{-j})}{\pi(x_j, x_{-j})\;\pi(x_j'\mid x_{-j})} = \frac{\pi(x_j'\mid x_{-j})\,\pi(x_{-j})\;\pi(x_j\mid x_{-j})}{\pi(x_j\mid x_{-j})\,\pi(x_{-j})\;\pi(x_j'\mid x_{-j})} = 1 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Hier ist $\tau=1$, weil $\mu$ und $\sigma$ a posteriori fast unabhängig sind.} Sind zwei Koordinaten stark korreliert --- $\rho = 0{,}99$ ---, so kommt der Gibbs-Sampler nur in winzigen Treppenstufen den schmalen Grat entlang, und $\tau$ wächst wie $1/(1-\rho^2)$: auf $50$. Dann hilft eine Drehung der Koordinaten, oder man zieht beide gemeinsam (\Begriff{Block-Gibbs}). Der Gibbs-Sampler ist nicht besser als Metropolis; er ist Metropolis mit dem bestmöglichen Vorschlag je Koordinate --- und der Preis ist, dass man die bedingten Verteilungen kennen muss.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was man mit der Kette tut}
+
+\begin{merksatz}
+\boxtitel{Abgeleitete Größen}
+Die mittlere Verweildauer ist $\exp(\mu+\sigma^2/2)$. Aus der Gibbs-Kette, Wert für Wert:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.6cm}P{3.2cm}@{}}
+\toprule
+A-posteriori-Mittel & $4{,}16$ Tage\\
+$95$-Prozent-Intervall & $[3{,}74;\ 4{,}67]$\\
+$P(\text{Mittel} > 5)$ & $0{,}0012$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Keine Deltamethode, keine Näherung: Man rechnet die Funktion für jeden Kettenwert aus und sieht ihre Verteilung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Grund, warum die Bayes-Statistik mit diesen Verfahren praktisch wurde}: Nicht die Parameter interessieren, sondern Funktionen von ihnen --- die Abweisungsrate bei dreizehn Betten unter Unsicherheit über die Verweildauer, Kapitel~14 --- und für jede Funktion liefert dieselbe Kette die Antwort. Die $0{,}0012$ beruhen auf $24$ Kettenwerten über $5$; mit Kapitel~6 ließe sich das schärfen, aber für die Entscheidung \enquote{sicher unter fünf} reicht es.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Kette, die nur die Hälfte sieht}
+Zieldichte $\tfrac12 N(-6,1) + \tfrac12 N(6,1)$, Zufallsweg-Metropolis, Schrittweite $1$, vier Ketten à $5\,000$ Schritte, gestartet bei $-6$, $-5$, $5$, $6$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.0cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Kette} & \textbf{Start} & \textbf{Mittel} & \textbf{Annahme}\\
+\midrule
+$1$ & $-6$ & $-5{,}98$ & $71\,\%$\\
+$2$ & $-5$ & $-6{,}02$ & $71\,\%$\\
+$3$ & $5$ & $5{,}97$ & $70\,\%$\\
+$4$ & $6$ & $6{,}06$ & $70\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Kette für sich sieht makellos aus: Annahmerate gut, $\tau = 8$, Standardfehler $0{,}015$. Jede Kette ist um $6$ falsch. Das wahre Mittel ist $0$.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+Der Weg von $-6$ nach $6$ führt durch $0$, wo die Dichte $e^{-18}$ der Gipfelhöhe beträgt. Ein Schritt der Weite $1$ schafft die zwölf Einheiten nicht, und zwölf Schritte hintereinander bergab werden mit Wahrscheinlichkeit $e^{-18}\approx10^{-8}$ angenommen. Die Kette ist \kursiv{theoretisch} irreduzibel und \kursiv{praktisch} in einer Hälfte gefangen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Mit Schrittweite $6$ wechseln die Ketten die Gipfel; Annahme $24\,\%$, alle vier Mittel nahe $0$.} Aber woher wüsste man, dass es zwei Gipfel gibt, wenn man die Dichte nicht zeichnen kann, weil sie $200$ Dimensionen hat? Eine einzelne Kette verrät es nie. \textbf{Vier Ketten von verschiedenen Startpunkten verraten es sofort} --- und das ist der Grundgedanke des nächsten Kapitels.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.1 --- Ein Metropolis-Schritt von Hand}
+Zieldichte $\pi(x)\propto e^{-x^2/2}$. Die Kette steht bei $x_t = 1{,}0$; der Vorschlag ist $x' = 1{,}8$; die gezogene Gleichverteilte ist $u = 0{,}35$. Was ist $x_{t+1}$? Und bei $x' = 0{,}4$?
+
+\loesung
+\schritt{Schritt 1 --- Der Quotient für $x' = 1{,}8$}
+\[ \frac{\pi(1{,}8)}{\pi(1{,}0)} = \exp\!\Big(-\frac{1{,}8^2 - 1{,}0^2}{2}\Big) = \exp(-1{,}12) = 0{,}326 \]
+
+\schritt{Schritt 2 --- Die Entscheidung}
+$u = 0{,}35 > 0{,}326$: abgelehnt. $x_{t+1} = 1{,}0$ --- der alte Wert zählt noch einmal.
+
+\schritt{Schritt 3 --- Für $x' = 0{,}4$}
+\[ \frac{\pi(0{,}4)}{\pi(1{,}0)} = \exp\!\Big(-\frac{0{,}16-1}{2}\Big) = \exp(0{,}42) = 1{,}52 > 1 \]
+Angenommen ohne Ziehung: $x_{t+1} = 0{,}4$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bergauf immer, bergab mit Wahrscheinlichkeit gleich dem Höhenverhältnis} --- so bewegt sich die Kette: Sie strebt zum Gipfel, aber nicht blind, sondern so, dass sie die Zeit an jedem Ort proportional zu dessen Höhe verbringt. Das Nein in Schritt 2 ist kein verlorener Schritt: Die Wiederholung von $1{,}0$ ist die Art, wie die Kette ausdrückt, dass $1{,}0$ wahrscheinlicher ist als $1{,}8$. Wer abgelehnte Schritte aus der Kette streicht, zerstört Satz 7.2.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.2 --- Die Ankunftsrate dazu}
+Nun seien auch die $k = 240$ Ankünfte in $100$ Tagen beobachtet, und $\lambda$ soll mitgeschätzt werden, A-priori flach. Erweitern Sie den Gibbs-Sampler.
+
+\loesung
+\schritt{Schritt 1 --- Die Likelihood für $\lambda$}
+Poisson: $p(k\mid\lambda) \propto \lambda^{k} e^{-100\lambda}$. Bei flacher A-priori-Verteilung ist das eine Gammadichte:
+\[ \lambda\mid k \sim \operatorname{Gamma}(k+1,\ 100) \]
+mit Mittel $2{,}41$ und Streuung $0{,}155$.
+
+\schritt{Schritt 2 --- Die Unabhängigkeit}
+$\lambda$ kommt in der Likelihood der Verweildauern nicht vor, $(\mu,\sigma)$ nicht in der der Ankünfte. Die bedingte Verteilung von $\lambda$ hängt von $(\mu,\sigma)$ nicht ab.
+
+\schritt{Schritt 3 --- Der erweiterte Sampler}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{0.8cm}P{7.4cm}@{}}
+\toprule
+$1$ & $\mu \sim N(\bar y, \sigma^2/n)$\\
+$2$ & $\sigma^2 \sim \sum(y_i-\mu)^2/\chi^2_n$\\
+$3$ & $\lambda \sim \operatorname{Gamma}(241, 100)$ --- unabhängig von Schritt $1$ und $2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Schritt 3 ist ein Gibbs-Schritt, der kein Gibbs-Schritt sein müsste} --- man könnte $\lambda$ auch getrennt ziehen. Aber im Sampler ist es kostenlos, und der Gewinn kommt in Kapitel~14: Mit jedem Tripel $(\lambda,\mu,\sigma)$ der Kette lässt sich die Station simulieren, und die Verteilung der Abweisungsraten über die Kette ist die Unsicherheit der Vorhersage, die aus der Unsicherheit der Parameter folgt. Die Ankunftsrate ist dabei der größere Beitrag: $\pm 6\,\%$ in $\lambda$ gegen $\pm 2\,\%$ in der mittleren Verweildauer.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.3 --- Unabhängigkeitsvorschlag}
+Statt eines Zufallswegs schlage man $x'$ unabhängig vom aktuellen Wert aus einer festen Dichte $g$ vor. Was ist $\alpha$, und wann ist das Verfahren gut?
+
+\loesung
+\schritt{Schritt 1 --- Der Hastings-Quotient}
+$q(x'\mid x) = g(x')$:
+\[ \alpha = \min\Big\{1,\ \frac{\pi(x')\,g(x)}{\pi(x)\,g(x')}\Big\} = \min\Big\{1,\ \frac{w(x')}{w(x)}\Big\}, \qquad w = \frac{\pi}{g} \]
+
+\schritt{Schritt 2 --- Die Verbindung}
+$w$ ist das Wichtigkeitsgewicht aus Kapitel~6. Der Vorschlag wird angenommen, wenn er ein höheres Gewicht hat als der Stand, sonst mit Wahrscheinlichkeit des Gewichtsverhältnisses.
+
+\schritt{Schritt 3 --- Wann es gut ist}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wenn $g$ nahe an $\pi$ liegt: Dann sind alle Gewichte etwa gleich, fast alles wird angenommen, und die Werte sind nahezu unabhängig --- $\tau \approx 1$.}
+\end{minipage}
+\end{center}
+Hat $g$ dünnere Ränder als $\pi$, so gibt es Punkte mit riesigem $w$, und die Kette bleibt dort hängen: Hat sie einmal $x$ mit $w(x) = 10^{6}$ erreicht, lehnt sie fast jeden Vorschlag ab, und $\tau$ wird astronomisch --- dieselbe Krankheit wie im Bruchfall von Kapitel~6.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Unabhängigkeitsvorschlag ist damit das Gegenstück zur Wichtigkeitsstichprobe}: Dieselbe Dichte $g$, dieselbe Bedingung an die Ränder, aber statt Gewichten eine Kette. In der Praxis nimmt man $g$ als Normal- oder $t$-Verteilung um das Maximum von $\pi$ mit der Krümmung aus Band 21 --- die Laplace-Näherung --- und lässt Metropolis den Rest korrigieren. Für glatte, eingipflige $\pi$ in mäßiger Dimension ist das oft das beste Verfahren überhaupt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Los Alamos 1953 und die zwanzig Jahre danach}
+Der Algorithmus erschien 1953 im Journal of Chemical Physics, unter fünf Namen: \Person{Nicholas Metropolis}, \Person{Arianna} und \Person{Marshall Rosenbluth}, \Person{Augusta} und \Person{Edward Teller}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Aufgabe war die Zustandsgleichung von Flüssigkeiten: zweihundert harte Scheiben in einer Schachtel, die Energie als Funktion aller Positionen, und der Boltzmann-Faktor $e^{-E/kT}$ als Dichte --- mit unbekannter Zustandssumme. \textbf{Marshall Rosenbluth erfand das Verfahren, Arianna Rosenbluth programmierte es auf der MANIAC}; Metropolis stellte den Rechner und stand als Erster auf dem Papier. \Person{Hastings} verallgemeinerte 1970 in Toronto auf unsymmetrische Vorschläge, und sein Aufsatz blieb zwanzig Jahre fast ungelesen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Wende}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Geman} und \Person{Geman} formulierten 1984 den Gibbs-Sampler für die Bildrekonstruktion --- benannt nach Gibbs, weil ihre Dichten Gibbs-Verteilungen der Physik waren. \textbf{\Person{Gelfand} und \Person{Smith} zeigten 1990, dass dasselbe Verfahren jede Bayes-Analyse rechenbar macht}, und innerhalb von fünf Jahren war die Bayes-Statistik von einer philosophischen Richtung zu einer Praxis geworden. Das Programm BUGS aus Cambridge, 1991, machte sie für Mediziner zugänglich, die keine Zeile Metropolis je geschrieben haben.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Jenseits des Zufallswegs}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Hamilton-Verfahren} & Vorschläge entlang von Bahnen eines Teilchens im Potential $-\ln\pi$ --- weite Schritte bei hoher Annahme; Kapitel~9.\\
+\textbf{Langevin} & Zufallsweg plus ein Schritt bergauf entlang $\nabla\ln\pi$.\\
+\textbf{Parallele Temperierung} & Mehrere Ketten bei verschiedenen \enquote{Temperaturen}, die Zustände tauschen --- gegen den Bruchfall.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Kette bei hoher Temperatur sieht $\pi^{1/T}$, flach genug, um die Gipfel zu wechseln}; die bei $T=1$ ist die gesuchte. Ab und zu tauschen benachbarte Ketten ihre Zustände, mit einem Metropolis-Quotienten, der die detaillierte Bilanz erhält. So gelangt die kalte Kette über die heiße von einem Gipfel zum anderen. Für Proteinfaltung und für Mischmodelle in der Statistik ist das Standard, und der Preis ist das Zehnfache an Rechenzeit --- für Ketten, die sonst nie das Richtige fänden.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 7.1} & Vorschlag, Quotient, Annahme\\
+\textbf{Satz 7.2} & detaillierte Bilanz $\Rightarrow$ $\pi$ stationär\\
+\textbf{Schrittweite} & Annahme $25$--$45\,\%$, $\tau$ messen\\
+\textbf{Definition 7.3} & Gibbs: bedingt ziehen, $\alpha=1$\\
+\textbf{Der Bruchfall} & zwei Gipfel, eine Kette\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Satz 7.2 verspricht Konvergenz, der Bruchfall zeigt, dass man sie nicht sieht. Das nächste Kapitel ist der Frage gewidmet, woran man erkennt, ob eine Kette angekommen ist --- und was man tun kann, wenn man es nicht erkennen kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}

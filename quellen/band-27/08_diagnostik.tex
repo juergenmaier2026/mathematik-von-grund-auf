@@ -1,0 +1,313 @@
+\chapter{Ist die Kette angekommen?}
+
+\section{Was man nicht sehen kann}
+
+\begin{merksatz}
+\boxtitel{Das Dilemma}
+Satz 7.2 sagt: Die Kette konvergiert gegen $\pi$. Er sagt nicht, wann. Und der Bruchfall in Kapitel~7 hat gezeigt, dass eine Kette, die nicht angekommen ist, genauso aussieht wie eine, die es ist --- Annahmerate, Autokorrelation, Standardfehler: alles unauffällig.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Konvergenz lässt sich aus einer Kette nicht beweisen. Nichtkonvergenz lässt sich oft nachweisen. Die Diagnostik dieses Kapitels sucht nach dem Nachweis --- und wer ihn nicht findet, hat eine Vermutung, keine Gewissheit.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist dieselbe Logik wie beim statistischen Test in Band 17}: Man kann die Nullhypothese \enquote{konvergiert} nicht bestätigen, nur verwerfen. Die Werkzeuge sind drei: mehrere Ketten vergleichen, die Autokorrelation messen, den Anfang verwerfen. Alle drei kosten Rechenzeit, die man lieber in längere Ketten steckte --- und alle drei sind billiger als eine falsche Zahl in einem Gutachten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Mehrere Ketten}
+
+\begin{definition}
+\boxtitel{Definition 8.1 --- Die Kennzahl $\hat R$}
+Für $m$ Ketten der Länge $n$ mit Kettenmitteln $\bar x_j$ und Kettenvarianzen $s_j^2$ sei
+\[ W = \frac1m\sum_j s_j^2, \qquad B = \frac{n}{m-1}\sum_j (\bar x_j - \bar x)^2, \qquad \hat V = \frac{n-1}{n}\,W + \frac1n\,B . \]
+Dann heißt
+\[ \hat R = \sqrt{\frac{\hat V}{W}} \]
+der \Begriff{Skalenreduktionsfaktor} von \Person{Gelman} und \Person{Rubin}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 8.2 --- Was $\hat R$ misst}
+Sind alle Ketten im Dauerzustand, so schätzen $W$ und $\hat V$ beide $\operatorname{Var}_\pi[x]$, und $\hat R \to 1$. Haben die Ketten --- von verschiedenen Startpunkten --- verschiedene Gegenden erreicht, so ist $B \gg W$ und $\hat R > 1$.
+
+\schritt{Beweis}
+$W$ unterschätzt die Varianz, wenn jede Kette nur einen Teil der Verteilung gesehen hat; $\hat V$ ist die Varianz der zusammengelegten Werte und überschätzt sie, wenn die Startpunkte überstreut sind. Im Dauerzustand stimmen beide überein --- $\hat V$ ist dann die übliche Varianzzerlegung in Band 17, Kapitel~10, Zwischen- plus Innerhalb-Varianz. $\blacksquare$
+
+\schritt{Die Ergebnisse aus Kapitel 7}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{4.2cm}P{1.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Ketten} & $\hat R$ & \textbf{Urteil}\\
+\midrule
+$(\mu,\sigma)$, Schritt $0{,}05$, 4 Ketten & $1{,}003$ & angekommen\\
+$(\mu,\sigma)$, Schritt $0{,}2$ & $1{,}001$ & angekommen\\
+zwei Gipfel, Schritt $1$ & $\mathbf{6{,}9}$ & gefangen\\
+zwei Gipfel, Schritt $6$ & $1{,}006$ & angekommen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die vier gefangenen Ketten, die einzeln makellos aussahen, ergeben zusammen $\hat R = 6{,}9$. Die Faustregel: $\hat R < 1{,}01$, sonst länger laufen oder anders vorschlagen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Bedingung ist das Wort \enquote{überstreut}}: Die Startpunkte müssen weiter auseinanderliegen, als die Verteilung breit ist --- sonst starten alle Ketten im selben Gipfel, und $\hat R$ ist $1{,}00$ bei Nichtkonvergenz. Woher man weiß, wie breit die Verteilung ist, bevor man sie kennt? Man nimmt das Maximum der Dichte und die Krümmung dort (Band 21), streut die Startpunkte auf das Mehrfache --- und hofft. Das ist der Bruchfall dieses Kapitels, und er hat keine Lösung, nur eine Milderung: viele Ketten, weit gestreut.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das wirksame $n$ der Kette}
+
+\begin{merksatz}
+\boxtitel{Satz 4.1 für Ketten}
+Die Werte einer Kette sind abhängig; Kapitel~4 gilt ohne Änderung:
+\[ n_{\text{eff}} = \frac{m\,n}{\tau}, \qquad \operatorname{SE} = \frac{\sigma_\pi}{\sqrt{n_{\text{eff}}}} . \]
+Bei mehreren Ketten schätzt man $\tau$ aus den Autokorrelationen innerhalb jeder Kette und mittelt.
+
+\schritt{Für die Gibbs-Kette und die Metropolis-Kette, $20\,000$ Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{1.4cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Verfahren} & $\tau$ & $n_{\text{eff}}$ & \textbf{SE von $\mu$}\\
+\midrule
+Gibbs & $1{,}0$ & $20\,000$ & $0{,}0004$\\
+Metropolis $0{,}1$ & $6{,}4$ & $2\,800$ & $0{,}0010$\\
+Metropolis $0{,}01$ & $108$ & $170$ & $0{,}0041$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Planung}
+Für Standardfehler $0{,}001$ bei $\sigma_\pi = 0{,}053$ und $\tau = 6{,}4$:
+\[ n = \Big(\frac{0{,}053}{0{,}001}\Big)^2\cdot 6{,}4 = 18\,000 \ \text{Schritte} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine Kette mit $n_{\text{eff}} < 100$ ist nicht auswertbar} --- nicht weil das Mittel schlecht wäre, sondern weil die Schätzung des Standardfehlers selbst dann unbrauchbar ist. Und die Quantile der Ränder, das $2{,}5$- und das $97{,}5$-Prozent-Quantil für ein Intervall, brauchen ein eigenes, kleineres $n_{\text{eff}}$: Ränder werden seltener besucht. Die neueren Programme berechnen beides getrennt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Anfang und das Ausdünnen}
+
+\begin{merksatz}
+\boxtitel{Zwei Regeln und eine Unsitte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Einschwingphase} & Die erste Hälfte jeder Kette verwerfen, $\hat R$ mit der zweiten berechnen. Verschwenderisch, aber sicher: Ist $\hat R$ mit der ersten Hälfte anders als mit der zweiten, läuft die Kette noch.\\
+\textbf{Halbe Ketten} & Jede Kette zusätzlich in zwei Hälften teilen und $\hat R$ über $2m$ Halbketten bilden --- entdeckt Drift innerhalb einer Kette.\\
+\textbf{Ausdünnen} & Nur jeden $k$-ten Wert behalten. \kursiv{Senkt den Speicher, nie den Fehler}: Zehn Werte mit $\tau=10$ enthalten mehr Information als einer.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Ausdünnen ist die am weitesten verbreitete Unsitte des Fachs: Es wirft Information weg, um eine Autokorrelation zu verstecken, die man mit Kapitel~4 einfach hätte berücksichtigen können.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Unsitte stammt aus einer Zeit, in der Speicher knapp war und die Standardfehler mit Band-17-Formeln berechnet wurden} --- dann war Ausdünnen die einzige Art, zu unabhängigen Werten zu kommen. Heute ist beides anders. Ein Fall bleibt: Wenn die Auswertung je Kettenwert teuer ist --- eine Stationssimulation je Parametertripel wie in Kapitel~14 ---, dann dünnt man auf etwa $n_{\text{eff}}$ Werte aus, weil mehr nichts bringt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Vier Ketten, ein Gipfel}
+Zieldichte wie in Kapitel~7, zwei Gipfel bei $\pm6$. Vier Ketten, Schrittweite $1$, gestartet bei $5$, $5{,}5$, $6$, $6{,}5$.
+\[ \hat R = 1{,}00, \qquad \tau = 8, \qquad \text{alle vier Mittel bei } 6{,}0 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Diagnostik dieses Kapitels gibt grünes Licht. Das wahre Mittel ist $0$. Es gibt kein Verfahren, das aus diesen Ketten den zweiten Gipfel erkennen könnte, weil keine von ihnen ihn je gesehen hat.}
+\end{minipage}
+\end{center}
+
+\schritt{Was bleibt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Überstreuen} & Startpunkte aus einer Verteilung, die viel breiter ist als die vermutete.\\
+\textbf{Temperieren} & Die heiße Kette aus Kapitel~7 sieht beide Gipfel.\\
+\textbf{Verstehen} & Hat das Modell Symmetrien --- vertauschbare Komponenten in einem Mischmodell ---, so weiß man, dass es $k!$ Gipfel gibt, und prüft, ob die Kette sie besucht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Diagnostik ersetzt nicht das Nachdenken über die Dichte.} Wer weiß, dass seine Likelihood in $\sigma$ zwei Lösungen haben kann, startet dort. Wer es nicht weiß, hat mit vier Ketten eine bessere Chance als mit einer, und mit vierzig eine bessere als mit vier. Aber eine Garantie gibt es nicht, und wer in einem Gutachten eine Markow-Ketten-Schätzung berichtet, schreibt dazu, wie viele Ketten, wie gestreut, welches $\hat R$ --- damit der Leser weiß, wie viel er glauben darf.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- $\hat R$ von Hand}
+Vier Ketten à $n = 1\,000$ für $\mu$: Mittel $1{,}279$, $1{,}286$, $1{,}278$, $1{,}290$; Varianzen $0{,}00281$, $0{,}00279$, $0{,}00285$, $0{,}00276$. Berechnen Sie $\hat R$.
+
+\loesung
+\schritt{Schritt 1 --- $W$}
+\[ W = \frac{0{,}00281+0{,}00279+0{,}00285+0{,}00276}{4} = 0{,}002803 \]
+
+\schritt{Schritt 2 --- $B$}
+Gesamtmittel $1{,}28325$; Stichprobenvarianz der vier Mittel $3{,}29\cdot10^{-5}$:
+\[ B = n\cdot 3{,}29\cdot10^{-5} = 0{,}0329 \]
+
+\schritt{Schritt 3 --- $\hat V$ und $\hat R$}
+\[ \hat V = \frac{999}{1000}\cdot0{,}002803 + \frac{0{,}0329}{1000} = 0{,}002833, \qquad \hat R = \sqrt{\frac{0{,}002833}{0{,}002803}} = 1{,}005 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Angekommen --- und zugleich sieht man, wie die Rechnung ausgehen muss}: Vier Mittel aus je $1\,000$ abhängigen Werten mit Streuung $0{,}053$ und $\tau\approx10$ streuen mit $0{,}053\sqrt{10/1000} = 0{,}0053$; die Varianz $3{,}3\cdot10^{-5}$, Streuung $0{,}0057$, ist genau das. Wäre sie $0{,}05$ --- die Ketten in verschiedenen Gegenden ---, so wäre $B = 2{,}5$, $\hat V = 0{,}0053$ und $\hat R = 1{,}38$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Wie viele Ketten, wie lang?}
+Ein Lauf von $10\,000$ Schritten dauert eine Minute. Sie haben vier Rechenkerne und zehn Minuten. $\tau = 20$, $\sigma_\pi = 2$. Welchen Standardfehler erreichen Sie, und wie verteilen Sie die Zeit?
+
+\loesung
+\schritt{Schritt 1 --- Das Budget}
+Vier Kerne, zehn Minuten: $4\cdot100\,000 = 400\,000$ Schritte.
+
+\schritt{Schritt 2 --- Die Einschwingphase}
+Erste Hälfte verwerfen: $200\,000$ nutzbare Werte, $n_{\text{eff}} = 200\,000/20 = 10\,000$.
+\[ \operatorname{SE} = \frac{2}{\sqrt{10\,000}} = 0{,}02 \]
+
+\schritt{Schritt 3 --- Die Verteilung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{4 Ketten à $100\,000$} & Ein Kern je Kette. $\hat R$ möglich, $n_{\text{eff}} = 10\,000$.\\
+\textbf{1 Kette à $400\,000$} & Nicht parallelisierbar --- dauert vierzig Minuten. Kein $\hat R$.\\
+\textbf{40 Ketten à $10\,000$} & Zehn je Kern nacheinander. $n_{\text{eff}} = 10\,000$, aber vierzig Einschwingphasen und je Kette nur $250$ wirksame Werte --- zu wenig für die Ränder.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine Kette je Kern, so lang wie die Zeit reicht, mindestens vier}: Das ist die Antwort in fast allen Fällen, und sie ist der Grund, warum die Programme standardmäßig vier Ketten laufen lassen. Mehr Ketten als Kerne kosten Einschwingphasen; weniger kosten die Diagnostik. Die eine lange Kette ist die Wahl von früher, als es einen Kern gab --- und als man die Nichtkonvergenz entsprechend selten bemerkte.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- Ausdünnen oder nicht}
+Eine Kette von $100\,000$ Werten mit $\tau = 25$. Vergleichen Sie: alle Werte auswerten mit Satz 4.1; jeden $25$-sten Wert behalten und als unabhängig behandeln.
+
+\loesung
+\schritt{Schritt 1 --- Alle Werte}
+$n_{\text{eff}} = 100\,000/25 = 4\,000$.
+
+\schritt{Schritt 2 --- Ausgedünnt}
+$4\,000$ Werte im Abstand $25$. Ihre Autokorrelation ist $\rho_{25}$ der Originalkette --- bei $\tau = 25$ typisch noch $0{,}1$ bis $0{,}2$, nicht null. Behandelt man sie als unabhängig, ist $n_{\text{eff}} = 4\,000$ \kursiv{überschätzt}; richtig gerechnet mit $\tau' = 1 + 2(0{,}15 + \ldots) \approx 1{,}4$ sind es $2\,900$.
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Vorgehen} & $n_{\text{eff}}$ & \textbf{Standardfehler}\\
+\midrule
+alle, Satz 4.1 & $4\,000$ & richtig\\
+ausgedünnt, naiv & $2\,900$ & als $4\,000$ berichtet: zu klein\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Ausdünnen verliert ein Viertel der Information und erzeugt obendrein einen zu kleinen Fehlerbalken}, weil die Restkorrelation ignoriert wird. Es gibt genau ein Argument dafür: Wenn die $100\,000$ Werte je $2\,000$ Parameter sind und nicht in den Speicher passen. Dann dünnt man aus --- und rechnet den Standardfehler trotzdem mit Satz 4.1 aus den behaltenen Werten.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Der Streit um die eine Kette}
+Anfang der 1990er Jahre, als die Bayes-Statistik rechenbar wurde, stritt das Fach, wie man Konvergenz prüft.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Gelman} und \Person{Rubin} schlugen 1992 mehrere überstreute Ketten vor und die Kennzahl $\hat R$. \Person{Geyer} hielt im selben Jahr dagegen: \textbf{eine lange Kette sei besser als viele kurze}, weil nur sie die Einschwingphase einmal bezahle --- und die Schätzung von $\tau$ aus einer Kette sei die bessere Diagnostik. Beide hatten recht; die Kerne haben entschieden: Seit Rechner vier davon haben, laufen vier Ketten, und Geyers Autokorrelationsschätzer wird in jeder von ihnen benutzt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Programme}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{BUGS 1991 ließ den Benutzer die Diagnostik selbst anstellen --- und viele taten es nicht. \textbf{Stan, seit 2012, verweigert sich}: Es berechnet $\hat R$ und $n_{\text{eff}}$ für jeden Parameter, warnt bei $\hat R > 1{,}01$ und bei $n_{\text{eff}} < 100$ je Kette, und gibt die Warnungen in roter Schrift aus. Dass seither weniger falsche Bayes-Analysen erscheinen, ist nicht bewiesen, aber plausibel.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Diagnostik heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Rang-$\hat R$} & $\hat R$ auf rangtransformierten Werten --- robust gegen schwere Ränder und unendliche Varianz.\\
+\textbf{Kopplung} & Zwei Ketten so koppeln, dass sie sich nach endlicher Zeit treffen; die Treffzeit schätzt die Mischzeit ohne Annahme.\\
+\textbf{Unverzerrte Schätzer} & Aus gekoppelten Ketten einen Schätzer ohne Einschwingfehler bauen --- Band 25, Kapitel~3.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{\Person{Jacob}, \Person{O'Leary} und \Person{Atchadé} haben 2020 die Kopplung aus Band 25 zum Werkzeug gemacht}: Zwei Ketten laufen mit gemeinsamen Zufallszahlen --- Satz 4.3 --- und einem Vorschlag, der sie mit positiver Wahrscheinlichkeit auf denselben Punkt setzt. Haben sie sich getroffen, bleiben sie zusammen, und ab da ist der Einschwingfehler null. Die Verteilung der Treffzeit ist eine obere Schranke für die Mischzeit --- die erste Diagnostik, die eine Garantie liefert statt eines Verdachts. Für den Bruchfall gilt auch sie nicht: Zwei Ketten im selben Gipfel treffen sich schnell.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 8.1} & $\hat R$ aus $W$ und $B$; unter $1{,}01$\\
+\textbf{Satz 8.2} & überstreute Startpunkte sind die Bedingung\\
+\textbf{$n_{\text{eff}}$} & $mn/\tau$; unter $100$ nicht auswertbar\\
+\textbf{Regeln} & erste Hälfte verwerfen, nicht ausdünnen\\
+\textbf{Der Bruchfall} & vier Ketten, ein Gipfel: unsichtbar\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zwei Kapitel lang war die Kette ein Zufallsweg mit Schritten der Weite $0{,}1$ in zwei Dimensionen. In zweitausend Dimensionen braucht derselbe Weg nach Satz 7.2 Schritte der Weite $0{,}05$ und Millionen davon. Das nächste Kapitel lässt die Kette stattdessen fliegen --- entlang der Bahnen der Mechanik --- und rechnet danach die Pfade, aus denen Band 25 besteht.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,389 @@
+\part{Genauer werden}
+
+\chapter{Den Fehler richtig messen}
+
+\section{Der naive Standardfehler}
+
+\begin{merksatz}
+\boxtitel{Eine Simulation, fünftausend Tage}
+$12\,096$ Ankünfte, Abweisungsanteil $0{,}1784$. Nach Band 17 wäre der Standardfehler
+\[ \frac{\sqrt{p(1-p)}}{\sqrt n} = \frac{0{,}383}{\sqrt{12\,096}} = 0{,}0035 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Er ist falsch --- um fast das Doppelte. Die Ankünfte sind nicht unabhängig.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Autokorrelation der Abweisungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Abstand} & $1$ & $2$ & $5$ & $10$\\
+\midrule
+$\rho_k$ & $0{,}38$ & $0{,}20$ & $0{,}02$ & $-0{,}00$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Wird ein Patient abgewiesen, ist die Station voll --- und beim nächsten ist sie es wahrscheinlich noch.} Die Abweisungen kommen in Häufungen. Das ist Satz 10.4 aus Band 26 in der Simulation: Die Varianz des Mittels ist um den Faktor $1+2\sum\rho_k$ größer als bei Unabhängigkeit.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Drei Verfahren}
+
+\begin{merksatz}
+\boxtitel{Satz 4.1 --- die Autokorrelationszeit}
+Für eine stationäre Folge mit Autokorrelationen $\rho_k$ gilt
+\[ \operatorname{Var}[\bar x] \approx \frac{\sigma^{2}}{n}\,\tau, \qquad \tau = 1 + 2\sum_{k\ge1}\rho_k . \]
+$\tau$ heißt \Begriff{integrierte Autokorrelationszeit}; $n/\tau$ ist die \Begriff{wirksame Stichprobengröße}.
+
+\schritt{Beweis}
+Band 26, Satz 10.4. $\blacksquare$
+
+\schritt{Im Leitfall}
+$\tau \approx 2{,}5$, wirksames $n = 4\,800$, Standardfehler $0{,}0055$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Schwierigkeit liegt in der Summe}: Sie läuft über alle Abstände, und die geschätzten $\rho_k$ für große $k$ sind reines Rauschen. Man bricht ab, sobald $\rho_k$ unter null fällt oder bei $k \approx \sqrt n$ --- beides Faustregeln. Die beiden folgenden Verfahren vermeiden die Schätzung von $\rho_k$ ganz.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 4.2 --- Blockmittel}
+Man teile die Folge in $b$ Blöcke der Länge $m = n/b$ und bilde die Blockmittel $\bar x_1,\ldots,\bar x_b$. Ist $m$ groß gegen $\tau$, so sind die Blockmittel nahezu unabhängig, und
+\[ \widehat{\operatorname{SE}} = \frac{s_{\text{Block}}}{\sqrt b} \]
+mit der Stichprobenstreuung $s_{\text{Block}}$ der Blockmittel.
+
+\schritt{Der Gedanke}
+Zwei Blöcke, die weiter als $\tau$ auseinanderliegen, wissen nichts voneinander. Ihre Mittel sind damit unabhängige Beobachtungen, und Band 17 gilt wieder --- nur mit $b$ statt $n$. $\blacksquare$
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Blöcke} & \textbf{Länge} & \textbf{Standardfehler}\\
+\midrule
+$10$ & $1\,209$ & $0{,}0071$\\
+$50$ & $241$ & $0{,}0060$\\
+$200$ & $60$ & $0{,}0057$\\
+\midrule
+naiv & & $0{,}0035$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle drei Blockungen liegen nahe beieinander und beim Doppelten des naiven Werts.} Zu wenige Blöcke machen die Streuungsschätzung selbst ungenau (zehn Werte); zu kurze Blöcke lassen Abhängigkeit über die Grenze (sechzig Ankünfte bei $\tau=3$ ist noch gut). Zwischen zwanzig und hundert Blöcken ist die übliche Wahl, und der Vorzug des Verfahrens ist, dass es keine Annahme über die Form der Abhängigkeit braucht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Unabhängige Wiederholungen}
+Vierzig Läufe à tausend Tage, jeder mit eigenem Startwert:
+\[ \bar p = 0{,}1799, \qquad \operatorname{SE} = \frac{s}{\sqrt{40}} = 0{,}0020 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das sauberste Verfahren: Jeder Lauf ist eine Beobachtung, und Band 17 gilt ohne Einschränkung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Preis ist die Einschwingphase}: Jeder Lauf beginnt mit leerer Station, und vierzig Läufe haben vierzig Anfänge. Bei kurzen Läufen frisst das einen großen Teil der Daten --- der nächste Abschnitt beziffert, wie viel. Die Blockmittel haben dieses Problem nur einmal.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Anfang}
+
+\begin{merksatz}
+\boxtitel{Die Einschwingphase gemessen}
+$1\,500$ Läufe, Abweisungsanteil nach Zeitfenster:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.4cm}P{2.0cm}@{}}
+\toprule
+\textbf{Tage} & \textbf{Anteil} & \textbf{Tage} & \textbf{Anteil}\\
+\midrule
+$0$--$10$ & $\mathbf{0{,}101}$ & $50$--$60$ & $0{,}179$\\
+$10$--$20$ & $0{,}174$ & $60$--$80$ & $0{,}178$\\
+$20$--$30$ & $0{,}178$ & $80$--$100$ & $0{,}178$\\
+$30$--$50$ & $0{,}186$ & $100$--$200$ & $0{,}180$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die ersten zehn Tage liegen bei der Hälfte des Dauerwerts. Ab Tag zwanzig ist nichts mehr zu erkennen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Regel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Messen} & Den Verlauf über viele Läufe mitteln und ablesen, ab wann er flach ist --- wie hier.\\
+\textbf{Faustregel} & Mindestens das Fünffache der längsten Zeitskala im System verwerfen; hier $5\cdot4{,}8 = 24$ Tage.\\
+\textbf{Warm starten} & Den Endzustand eines Laufs als Anfang des nächsten nehmen --- dann gibt es nur eine Einschwingphase.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Einschwingphase ist die Mischzeit der Markow-Kette aus Band 25, Kapitel~3} --- und wie dort ist sie im Einzelfall schwer zu bestimmen, weil man nicht weiß, wie der Dauerzustand aussieht, bevor man ihn erreicht hat. Die Tabelle oben kostet $1\,500$ Läufe; in der Praxis genügen fünfzig, um die Größenordnung zu sehen. Was nicht genügt, ist Raten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zwei Varianten vergleichen}
+
+\begin{merksatz}
+\boxtitel{Satz 4.3 --- gemeinsame Zufallszahlen}
+Will man $\theta_A - \theta_B$ schätzen, so simuliere man beide Varianten mit denselben Zufallszahlen. Dann gilt
+\[ \operatorname{Var}[\hat\theta_A - \hat\theta_B] = \operatorname{Var}[\hat\theta_A] + \operatorname{Var}[\hat\theta_B] - 2\operatorname{Cov}[\hat\theta_A,\hat\theta_B] , \]
+und die Kovarianz ist positiv, wenn beide Varianten auf dieselben Zufallszahlen ähnlich reagieren.
+
+\schritt{Zwölf gegen dreizehn Betten, je $30$ Läufe à $2\,000$ Tage}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.6cm}P{2.6cm}P{2.0cm}@{}}
+\toprule
+\textbf{Zufallszahlen} & \textbf{Differenz} & \textbf{SE}\\
+\midrule
+unabhängig & $0{,}0423$ & $0{,}0020$\\
+gemeinsam & $0{,}0423$ & $\mathbf{0{,}0003}$\\
+\midrule
+exakt (Erlang) & $0{,}0422$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dieselben Ankünfte, dieselben Verweildauern, nur ein Bett mehr: Der Fehler der Differenz fällt auf ein Siebtel --- die Varianz auf ein Fünfundvierzigstel. Ohne eine einzige Rechnung mehr.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die wichtigste Regel dieses Kapitels und die am häufigsten verletzte.} Wer zwei Stationsvarianten mit zwei verschiedenen Startwerten vergleicht, misst die Differenz plus den Unterschied zweier Zufallsfolgen. Mit gemeinsamen Zahlen misst er nur die Differenz. In der klinischen Forschung heißt derselbe Gedanke gepaarter Vergleich: Jeder Patient sein eigener Kontrollfall. Kapitel~5 treibt ihn weiter.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wenn der Fehler nicht normalverteilt ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Seltene Ereignisse} & Bei einem Anteil von $0{,}001$ und zehn Treffern ist das Intervall $\pm1{,}96\,\text{SE}$ falsch --- es reicht unter null. Man braucht das Intervall aus Band 17, Kapitel~9, oder die Poisson-Verteilung.\\
+\textbf{Schwere Ränder} & Ist die gemessene Größe eine Wartezeit oder ein Maximum, so bestimmen wenige extreme Läufe den Mittelwert; der zentrale Grenzwertsatz greift erst bei sehr großem $n$.\\
+\textbf{Quantile} & Das $95$-Prozent-Quantil der Wartezeit hat einen Standardfehler, der mit der Dichte am Quantil skaliert --- und die ist dort klein.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für alle drei Fälle ist der Bootstrap aus Band 17, Kapitel~12 die Rettung}: Man ziehe aus den Blockmitteln oder aus den unabhängigen Läufen mit Zurücklegen, berechne die Kennzahl, wiederhole. Das liefert ein Intervall ohne Normalverteilungsannahme --- und kostet nur Rechenzeit, nicht Simulationszeit.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Die Autokorrelationszeit berechnen}
+Aus den Werten $\rho_1 = 0{,}37$, $\rho_2 = 0{,}22$, $\rho_3 = 0{,}12$, $\rho_4 = 0{,}07$, $\rho_5 = 0{,}04$ und danach null: Wie groß ist $\tau$, das wirksame $n$ und der Standardfehler bei $n = 12\,018$ und $\sigma = 0{,}386$?
+
+\loesung
+\schritt{Schritt 1 --- $\tau$}
+\[ \tau = 1 + 2(0{,}37+0{,}22+0{,}12+0{,}07+0{,}04) = 1 + 2\cdot0{,}82 = 2{,}64 \]
+
+\schritt{Schritt 2 --- Wirksames $n$}
+\[ \frac{12\,096}{2{,}64} = 4\,582 \]
+
+\schritt{Schritt 3 --- Standardfehler}
+\[ \frac{0{,}383}{\sqrt{4\,582}} = 0{,}0057 \]
+
+\schritt{Schritt 4 --- Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{SE}\\
+\midrule
+naiv & $0{,}0035$\\
+Autokorrelationszeit & $0{,}0057$\\
+Blockmittel ($50$) & $0{,}0060$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die beiden richtigen Verfahren unterscheiden sich um ein Zehntel, vom falschen um fast das Doppelte.} Die Abweichung zwischen ihnen ist die Unsicherheit der Schätzung des Standardfehlers selbst --- die bei fünfzig Blöcken etwa zehn Prozent beträgt. Mehr Genauigkeit im Fehlerbalken braucht niemand; die Genauigkeit in der Zahl selbst ist das Ziel.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Wie lange einschwingen lassen?}
+Die mittlere Verweildauer sei nun $12$ Tage statt $4{,}8$, bei gleicher Auslastung. Wie ändert sich die Einschwingphase, und was folgt für die Planung der Läufe?
+
+\loesung
+\schritt{Schritt 1 --- Die Zeitskala}
+Die Station vergisst ihren Anfangszustand mit der Verweildauer. Faustregel: fünffache Dauer.
+\[ 5\cdot12 = 60 \ \text{Tage statt } 24 \]
+
+\schritt{Schritt 2 --- Die Folge für unabhängige Wiederholungen}
+Bei Läufen von $200$ Tagen:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Verweildauer} & \textbf{verworfen} & \textbf{nutzbar}\\
+\midrule
+$4{,}8$ Tage & $24$ & $88\,\%$\\
+$12$ Tage & $60$ & $70\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Und die Autokorrelation}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Längere Verweildauern heißen längeres Gedächtnis: $\tau$ wächst, das wirksame $n$ schrumpft --- bei gleicher Lauflänge wird die Schätzung ungenauer.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Deshalb wählt man bei trägen Systemen wenige lange Läufe statt vieler kurzer}: Ein Lauf von $8\,000$ Tagen hat eine Einschwingphase, vierzig Läufe von $200$ Tagen haben vierzig. Für die Streuung nimmt man dann Blockmittel. Die Regel ist dieselbe wie bei Markow-Ketten-Verfahren in Kapitel~8, wo sie noch mehr Gewicht hat.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Gemeinsame Zufallszahlen richtig einsetzen}
+Ein Kollege simuliert zwölf und dreizehn Betten mit demselben Startwert, findet aber keine Varianzsenkung. Was ist vermutlich falsch?
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingung}
+Gemeinsame Zufallszahlen wirken nur, wenn \kursiv{dieselbe} Zufallszahl in beiden Varianten \kursiv{dasselbe} bedeutet --- die $k$-te Ankunftszeit, die $k$-te Verweildauer.
+
+\schritt{Schritt 2 --- Der häufigste Fehler}
+Ein einziger Zahlenstrom für alles: Erst die Ankunft, dann --- falls ein Bett frei ist --- die Verweildauer. Bei dreizehn Betten wird öfter eine Verweildauer gezogen, und ab der ersten Abweichung ist die Zuordnung verschoben: Die Zahl, die bei zwölf Betten eine Ankunft war, ist bei dreizehn eine Verweildauer.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Zahlen sind gemeinsam, aber nicht synchron. Die Kovarianz verschwindet.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Abhilfe}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Getrennte Ströme} & Ein Generator für Ankünfte, einer für Verweildauern, je mit eigenem Startwert.\\
+\textbf{Immer ziehen} & Die Verweildauer jedes Patienten ziehen, auch wenn er abgewiesen wird --- und verwerfen.\\
+\textbf{Inversion} & Nur Verfahren mit fester Zahl von Zufallszahlen je Ziehung; Verwerfung bricht die Synchronität.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die dritte Zeile ist der Grund, warum Kapitel~2 die Inversion bevorzugt hat.} Box-Muller braucht zwei Zahlen je Paar, immer; die Verwerfung braucht mal eine, mal fünf. Wer Varianten vergleichen will, baut die Simulation von Anfang an so, dass jede Zufallszahl eine feste Rolle hat --- das ist Entwurf, nicht Nachbesserung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Die Statistik der Simulation}
+Die ersten Simulationen der 1940er Jahre berichteten Zahlen ohne Fehler; die Frage, wie genau sie waren, galt als nachrangig.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{George Fishman} schrieb 1973 das erste Lehrbuch, das die Simulation als statistisches Experiment behandelte --- Einschwingphase, Autokorrelation, Blockmittel. \textbf{Die Blockmethode selbst stammt von \Person{Conway} aus dem Jahr 1963}, der Warteschlangen für die Fertigung simulierte und bemerkte, dass seine Vertrauensintervalle systematisch zu eng waren.}
+\end{minipage}
+\end{center}
+
+\schritt{Gemeinsame Zufallszahlen}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Gedanke ist so alt wie die Methode: \Person{Kahn} und \Person{Marshall} beschrieben ihn 1953 in einem Bericht der RAND Corporation. \textbf{Dass er in der Praxis so oft versäumt wird, liegt an der Bequemlichkeit}: Ein einziger Zahlenstrom ist einfacher zu programmieren als drei synchronisierte. \Person{Law} und \Person{Kelton}, deren Lehrbuch seit 1982 das Fach bestimmt, widmen dem Fehler aus Aufgabe 4.3 ein ganzes Kapitel.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Fehlerkontrolle heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Folgeverfahren} & Simulieren, bis das Intervall eine vorgegebene Breite hat --- mit den Martingalen aus Band 25.\\
+\textbf{Mehrere Ausgaben} & Gemeinsame Intervalle für Abweisungsrate, Wartezeit und Auslastung zugleich.\\
+\textbf{Automatische Einschwingerkennung} & Verfahren, die den Verwerfungspunkt aus den Daten bestimmen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wer \enquote{simuliert, bis es signifikant ist}, begeht den Fehler aus Band 17, Kapitel~12 --- außer, das Abbruchkriterium ist ein Martingal. \textbf{Die sequenziellen Verfahren aus Band 25, Kapitel~9 erlauben genau das}: eine Breite vorgeben, laufen lassen, abbrechen, wenn sie erreicht ist, und das Intervall bleibt gültig. Für Simulationen, bei denen jeder Lauf Stunden kostet, ist das der Unterschied zwischen machbar und nicht.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 4.1} & $\tau = 1+2\sum\rho_k$, wirksames $n/\tau$\\
+\textbf{Satz 4.2} & Blockmittel: keine Annahme über die Form\\
+\textbf{Einschwingen} & messen, fünffache Zeitskala verwerfen\\
+\textbf{Satz 4.3} & gemeinsame Zahlen für Differenzen\\
+\textbf{Der Bruchfall} & Bootstrap, wenn nicht normal\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Satz 4.3 hat gezeigt, dass man denselben Zufall zweimal benutzen kann, um Fehler zu senken. Das nächste Kapitel macht daraus ein Prinzip --- und drückt die Varianz um Faktoren, die mehr Läufe nie erreichen würden.}
+\end{minipage}
+\end{center}
+\end{merksatz}

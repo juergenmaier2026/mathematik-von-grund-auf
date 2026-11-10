@@ -1,0 +1,356 @@
+\part{Systeme über die Zeit}
+
+\chapter{Die Station als Programm}
+
+\section{Zustand, Ereignis, Uhr}
+
+\begin{merksatz}
+\boxtitel{Was eine Simulation über die Zeit braucht}
+Die Intensivstation hat neun Kapitel lang Zahlen geliefert, ohne dass gesagt wurde, wie das Programm aussieht. Jetzt wird es gesagt, weil jedes System über die Zeit dieselben drei Dinge braucht:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.4cm}@{}}
+\toprule
+\textbf{Zustand} & Alles, was man wissen muss, um die Zukunft zu simulieren: hier die Entlassungszeiten der belegten Betten.\\
+\textbf{Ereignisse} & Die Zeitpunkte, an denen sich der Zustand ändert: Ankunft, Entlassung. Dazwischen passiert nichts.\\
+\textbf{Uhr} & Die Simulationszeit springt von Ereignis zu Ereignis --- nicht in festen Schritten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist die ereignisgesteuerte Simulation: Zwischen zwei Ereignissen wird nicht gerechnet, weil sich nichts ändert.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Zustand muss markowsch sein}: Aus ihm allein --- ohne die Vergangenheit --- muss die Zukunft ziehbar sein (Band 25, Kapitel~3). Für exponentielle Verweildauern genügt die Zahl der belegten Betten; für lognormale, die ein Gedächtnis haben, braucht man die Entlassungszeit jedes Patienten. Das ist der Grund, warum Erlang mit einer Zahl rechnen konnte und die Simulation eine Liste führt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Ereignisliste}
+
+\begin{definition}
+\boxtitel{Definition 10.1 --- Ereignisliste und Hauptschleife}
+Die \Begriff{Ereignisliste} ist eine nach Zeit geordnete Menge von Paaren (Zeit, Art). Die Hauptschleife:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+$1$ & Frühestes Ereignis aus der Liste entnehmen; Uhr auf seine Zeit setzen.\\
+$2$ & Zustand gemäß der Ereignisart ändern; Zähler fortschreiben.\\
+$3$ & Folgeereignisse erzeugen und in die Liste einfügen.\\
+$4$ & Zurück zu $1$, bis die Uhr das Ende erreicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die Liste wird als \Begriff{Halde} (Band B, Kapitel~7) geführt: Entnehmen und Einfügen in $O(\log n)$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Intensivstation in zwei Ereignisarten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{6.6cm}@{}}
+\toprule
+\textbf{Ankunft} & Nächste Ankunft erzeugen: Uhr $+\operatorname{Exp}(1/\lambda)$, einfügen. Verweildauer $L$ ziehen. Ist ein Bett frei: Entlassung bei Uhr $+L$ einfügen, Bett belegen. Sonst: Abweisung zählen.\\
+\textbf{Entlassung} & Bett freigeben.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Zähler}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Ankünfte, Abweisungen} & nach der Einschwingphase: Abweisungsanteil $0{,}1795$\\
+\textbf{Belegungsintegral} & $\int_0^T N(t)\,dt$, fortgeschrieben bei jedem Ereignis als (Zeit seit letztem Ereignis) $\times$ (belegte Betten): mittlere Belegung $L = 9{,}45$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Belegung ist ein Zeitmittel, kein Ereignismittel: Man wichtet jeden Zustand mit der Dauer, die er anhielt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Probe --- der Satz von Little}
+Band 25, Satz 11.3: mittlere Belegung $=$ Rate der aufgenommenen $\times$ mittlere Verweildauer:
+\[ \lambda(1-p)\cdot\bar L = 2{,}4\cdot0{,}8205\cdot4{,}79 = 9{,}43 \qquad\text{gegen}\qquad 9{,}45 \ \text{gemessen.} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Satz von Little ist die erste Probe jeder Simulation über die Zeit}, weil er für jedes System gilt, das nichts verliert --- ohne Annahme über Verteilungen. Stimmt er nicht, ist das Programm falsch: ein Bett, das nicht freigegeben wird, ein Patient, der doppelt gezählt wird, ein Belegungsintegral, das beim letzten Ereignis nicht abgeschlossen wurde. Die $0{,}02$ Abweichung oben sind der Standardfehler von $20\,000$ Tagen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeitschritt statt Ereignis}
+
+\begin{merksatz}
+\boxtitel{Die andere Bauart}
+Man kann die Uhr auch in festen Schritten $\Delta t$ laufen lassen: in jedem Schritt die Restverweildauern um $\Delta t$ vermindern, Patienten mit Rest $\le 0$ entlassen, $\operatorname{Poisson}(\lambda\Delta t)$ Ankünfte erzeugen.
+
+\schritt{Abweisungsanteil, je $20\,000$ Tage}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Bauart} & $\Delta t$ & \textbf{Anteil}\\
+\midrule
+ereignisgesteuert & --- & $0{,}1795$\\
+Zeitschritt & $1$ Stunde & $0{,}181$\\
+Zeitschritt & $6$ Stunden & $0{,}179$\\
+Zeitschritt & $1$ Tag & $\mathbf{0{,}193}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Standardfehler je Zeile etwa $0{,}004$; exakt $0{,}1785$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mit Tagesschritten ist der Anteil um $0{,}014$ zu hoch --- vier Standardfehler. Die Zeitschritt-Simulation ist nicht nur ungenauer, sie ist verzerrt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Grund: Jeder Patient bleibt bis zum Ende des Schritts, in dem seine Verweildauer abläuft} --- im Mittel einen halben Schritt zu lang. Bei Tagesschritten sind das zwölf Stunden auf $4{,}8$ Tage, zehn Prozent mehr Belegung, und die Abweisung wächst mit ihr. Mit Stundenschritten ist die Verzerrung unter dem Standardfehler, aber das Programm rechnet $24$-mal so viele Schritte wie Ereignisse. Die Zeitschritt-Bauart hat ihren Platz, wo sich der Zustand stetig ändert --- Band 25, Kapitel~7, und Kapitel~9 dieses Bandes --- oder wo Tausende Teilchen gleichzeitig laufen. Für Systeme mit abzählbaren Ereignissen ist sie der falsche Weg.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Warteschlange}
+
+\begin{merksatz}
+\boxtitel{Was wäre, wenn niemand abgewiesen würde?}
+Eine Variante: Patienten, für die kein Bett frei ist, warten --- auf der Normalstation, im Aufwachraum --- und bekommen das nächste freie Bett. Eine dritte Ereignisart ändert sich:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{6.6cm}@{}}
+\toprule
+\textbf{Ankunft} & Bett frei: wie bisher. Sonst: Ankunftszeit in die Warteschlange.\\
+\textbf{Entlassung} & Bett freigeben. Ist die Warteschlange nicht leer: ältesten Wartenden aufnehmen, Wartezeit notieren, seine Entlassung einfügen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Ergebnis, zehn Läufe à $20\,000$ Tage}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{4.2cm}P{2.4cm}P{2.2cm}@{}}
+\toprule
+& \textbf{Simulation} & \textbf{Erlang C}\\
+\midrule
+Anteil, der wartet & $0{,}83 \pm 0{,}01$ & $0{,}84$\\
+mittlere Wartezeit (alle) & $5{,}5 \pm 0{,}4$ Tage & $7{,}9$ Tage\\
+$95$-Prozent-Quantil & $18 \pm 1{,}5$ Tage & \\
+mittlere Schlangenlänge & $13 \pm 1$ & \\
+längste Schlange & $123$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei Auslastung $a/c = 0{,}96$ wartet fast jeder, im Mittel fast eine Woche, jeder Zwanzigste zweieinhalb. Die Abweisung von $18\,\%$ war nicht das Problem --- sie war das Ventil.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Erlang C --- Band 25, Satz 11.6, für exponentielle Verweildauern --- trifft den Anteil der Wartenden, aber nicht die Wartezeit}: Mit lognormaler Verweildauer, deren Variationskoeffizient $0{,}66$ unter dem exponentiellen $1$ liegt, ist die Wartezeit kürzer. Die Unempfindlichkeit, die Erlang B für das Verlustsystem hatte, gilt für das Wartesystem nicht; das ist seit \Person{Kingman} 1961 bekannt, und die Simulation ist für Wartesysteme mit allgemeiner Verweildauer bis heute der einzige exakte Weg. Was die Tabelle noch zeigt: Die Standardfehler sind groß --- $\pm0{,}4$ Tage auf $5{,}5$ bei zweihunderttausend Tagen ---, weil ein System an der Kapazitätsgrenze ein langes Gedächtnis hat; Kapitel~4 lässt grüßen. Bei $96$ Prozent Auslastung ist die Wartezeit nicht ein Ergebnis, sondern eine Katastrophe --- und das nächste Kapitel rechnet, was ein Bett mehr daran ändert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Gleichzeitige Ereignisse}
+Zwei Ereignisse zur selben Simulationszeit: eine Entlassung und eine Ankunft. Welches zuerst?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Entlassung zuerst} & Das Bett ist frei, der Patient wird aufgenommen.\\
+\textbf{Ankunft zuerst} & Die Station ist voll, der Patient wird abgewiesen --- und eine Sekunde später ist ein Bett frei.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+Bei stetigen Zeiten ist Gleichzeitigkeit ein Nullereignis. Bei Zeitschritten --- Tabelle in Abschnitt 10.3 --- ist sie der Normalfall. Dort ändert die Reihenfolge innerhalb des Schritts das Ergebnis nicht, weil sie nur jeden Aufenthalt um einen Schritt verschiebt; sie ändert es, sobald Ereignisse auf dasselbe Raster fallen, das auch die Entscheidung benutzt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In Systemen mit festen Taktzeiten, Schichtwechseln, Visiten um acht Uhr --- Entlassungen, die sich auf denselben Zeitpunkt häufen wie Aufnahmen --- entscheidet die Reihenfolge, wer ein Bett bekommt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Regel: Die Reihenfolge gleichzeitiger Ereignisse ist eine Modellentscheidung, keine Programmfrage} --- und sie muss aufgeschrieben werden. In der Ereignisliste erzwingt man sie durch einen zweiten Schlüssel: (Zeit, Rang, Art), und der Rang legt fest, dass Entlassungen vor Ankünften kommen, oder umgekehrt, je nachdem, was auf der Station wirklich geschieht. Wer es dem Zufall der Halde überlässt, hat ein Programm, dessen Ergebnis von der Implementierung der Halde abhängt --- und das ist der Fehler, den niemand findet, weil er in keinem Lauf auffällt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Drei Ereignisse von Hand}
+Zwei Betten, Uhr bei $0$, Bett 1 belegt bis $1{,}5$, Bett 2 frei. Ankünfte bei $0{,}4$ und $1{,}2$ mit Verweildauern $2{,}0$ und $3{,}0$; die dritte Ankunft bei $1{,}7$. Führen Sie die Ereignisliste bis zur dritten Ankunft.
+
+\loesung
+\schritt{Schritt 1 --- Anfang}
+Liste: $\{(0{,}4,\text{A}), (1{,}5,\text{E}_1)\}$. Belegung: $1$.
+
+\schritt{Schritt 2 --- Uhr $0{,}4$, Ankunft}
+Bett 2 frei: belegen, Entlassung bei $2{,}4$. Nächste Ankunft $1{,}2$. Liste: $\{(1{,}2,\text{A}), (1{,}5,\text{E}_1), (2{,}4,\text{E}_2)\}$. Belegungsintegral $+\,0{,}4\cdot1 = 0{,}4$.
+
+\schritt{Schritt 3 --- Uhr $1{,}2$, Ankunft}
+Beide Betten belegt: Abweisung. Nächste Ankunft $1{,}7$. Liste: $\{(1{,}5,\text{E}_1), (1{,}7,\text{A}), (2{,}4,\text{E}_2)\}$. Integral $+\,0{,}8\cdot2 = 2{,}0$.
+
+\schritt{Schritt 4 --- Uhr $1{,}5$, Entlassung Bett 1}
+Bett 1 frei. Liste: $\{(1{,}7,\text{A}), (2{,}4,\text{E}_2)\}$. Integral $+\,0{,}3\cdot2 = 2{,}6$.
+
+\schritt{Schritt 5 --- Uhr $1{,}7$}
+Ankunft, Bett 1 frei. Integral $+\,0{,}2\cdot1 = 2{,}8$; mittlere Belegung bisher $2{,}8/1{,}7 = 1{,}65$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Patient von $1{,}2$ wurde abgewiesen, obwohl $0{,}3$ Zeiteinheiten später ein Bett frei wurde} --- das ist die Abweisung, die in der Wartevariante zu einer Wartezeit von $0{,}3$ würde. Und die Verweildauer $3{,}0$ dieses Patienten wurde gezogen und verworfen; wer sie nicht zieht, bricht die Synchronität aus Aufgabe 4.3. Fünf Ereignisse von Hand genügen, um zu sehen, dass das Programm nur Buchhaltung ist --- und dass jede Zeile Buchhaltung eine Stelle für einen Fehler ist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Die Probe mit Little in der Wartevariante}
+In der Wartevariante gilt Little zweimal. Formulieren Sie beide Gleichungen und prüfen Sie sie mit den Zahlen aus Abschnitt 10.4.
+
+\loesung
+\schritt{Schritt 1 --- Die Betten}
+Niemand wird abgewiesen, also Aufnahmerate $\lambda = 2{,}4$:
+\[ L_{\text{Betten}} = 2{,}4\cdot4{,}79 = 11{,}5 \ \text{von } 12 \]
+Auslastung $0{,}958$ --- das ist $a/c$.
+
+\schritt{Schritt 2 --- Die Schlange}
+\[ L_{\text{Schlange}} = \lambda\cdot\bar W = 2{,}4\cdot5{,}5 = 13{,}2 \ \text{Wartende im Mittel} \]
+
+\schritt{Schritt 3 --- Die Prüfung}
+Die Simulation hat die mittlere Schlangenlänge als Zeitmittel gezählt: $13\pm1$. Die längste Schlange war $123$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dreizehn Patienten, die im Mittel auf ein Intensivbett warten, bei einer Station mit zwölf Betten} --- das ist die Zahl, die ein Klinikleiter sehen muss, und sie folgt aus der Wartezeit durch eine Multiplikation. Little verbindet die Sicht des Patienten (wie lange warte ich) mit der Sicht der Station (wie viele warten), und beide Zahlen aus derselben Simulation müssen zueinander passen. Tun sie es nicht, zählt das Programm an einer Stelle falsch.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- Eine dritte Ereignisart}
+Die Station soll Vorrang kennen: Notfälle werden aufgenommen, auch wenn dafür der stabilste Patient vorzeitig auf die Normalstation verlegt wird. Was ändert sich am Zustand, an den Ereignissen, an den Zählern?
+
+\loesung
+\schritt{Schritt 1 --- Der Zustand}
+Je Bett nicht nur die Entlassungszeit, sondern auch die Patientenart und die bisherige Liegedauer --- um den \enquote{stabilsten} zu finden, braucht man ein Kriterium, etwa die kürzeste Restdauer.
+
+\schritt{Schritt 2 --- Die Ereignisse}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Ankunft Notfall} & Bett frei: aufnehmen. Sonst: Patient mit kürzester Restdauer verlegen (sein Entlassungsereignis aus der Liste entfernen!), Notfall aufnehmen.\\
+\textbf{Ankunft geplant} & wie bisher.\\
+\textbf{Verlegung} & Zähler für vorzeitige Verlegungen; verbleibende Restdauer notieren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Zähler}
+Abweisungen geplanter Patienten; Verlegungen; Verteilung der verlorenen Restdauer --- denn eine Verlegung mit zwei Tagen Rest ist etwas anderes als eine mit zwei Stunden.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Entfernen eines Ereignisses aus der Liste ist der Punkt, an dem die Halde allein nicht mehr reicht}: Sie kann das Minimum entnehmen, aber kein beliebiges Element. Man markiert das Ereignis als ungültig und überspringt es beim Entnehmen --- \enquote{faules Löschen}, Band B --- und zählt, wie viele Leichen in der Liste liegen. Die Modellfrage dahinter ist größer als die Programmfrage: Ist die vorzeitige Verlegung ein Schaden? Dann braucht die Simulation ein Maß dafür, und das Maß kommt nicht aus der Mathematik, sondern von denen, die auf der Station arbeiten.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von GPSS zu SimPy}
+Die ereignisgesteuerte Simulation ist älter als ihre Theorie.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Geoffrey Gordon} bei IBM schrieb 1961 GPSS --- General Purpose Simulation System ---, in dem man Fertigungsstraßen und Telefonzentralen als Fluss von Transaktionen durch Blöcke beschrieb. \textbf{Im selben Jahr begannen \Person{Dahl} und \Person{Nygaard} in Oslo mit Simula}, einer Sprache für Simulationen, in der jeder Patient, jedes Bett ein Objekt mit eigenem Zustand war --- die erste objektorientierte Sprache, Band B, Kapitel~12, entstanden aus dem Bedürfnis, Ereignislisten sauber zu führen.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Theorie danach}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Little} bewies seinen Satz 1961 am MIT, nachdem er jahrelang als Faustregel benutzt worden war. \textbf{Die Frage, wie man Simulationen über die Zeit statistisch auswertet, beantworteten erst \Person{Law} und \Person{Kelton} 1982} --- Kapitel~4 dieses Bandes. SimPy, 2002, brachte die Ereignisliste in Python: Prozesse, die auf Ereignisse warten, in zwanzig Zeilen für die ganze Intensivstation. Der Leser, der bis hier gekommen ist, kann sie schreiben.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Simulation im Krankenhaus heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Ganze Häuser} & Notaufnahme, OP, Intensiv, Normalstation gekoppelt --- mit Tagesrhythmus und Wochenrhythmus der Ankünfte.\\
+\textbf{Digitale Zwillinge} & Das Modell läuft neben dem Betrieb und wird mit Echtzeitdaten gespeist; Vorhersage der Belegung für die nächsten $48$ Stunden.\\
+\textbf{Agentenbasiert} & Patienten und Personal als Agenten mit Regeln --- für Epidemien innerhalb des Hauses.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Tagesrhythmus ist die wichtigste Erweiterung des Leitfalls}: Ankünfte in der Notaufnahme sind um $18$ Uhr dreimal so häufig wie um $4$ Uhr, Entlassungen von Intensivstationen häufen sich vormittags nach der Visite. Beides macht $\lambda$ und die Verweildauer zeitabhängig --- ein inhomogener Poisson-Prozess, Band 25, Kapitel~5, den man durch Ausdünnung erzeugt --- und beides erhöht die Abweisungsrate gegenüber dem konstanten Modell, weil Spitzen nicht durch Täler ausgeglichen werden. Studien aus britischen und niederländischen Häusern finden Unterschiede von $20$ bis $40$ Prozent in der Abweisungsrate; das konstante Modell ist die untere Schranke.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 10.1} & Ereignisliste, Halde, Hauptschleife\\
+\textbf{Zähler} & Zeitmittel für Zustände, Ereignismittel für Patienten\\
+\textbf{Little} & erste Probe jedes Programms\\
+\textbf{Zeitschritt} & verzerrt um einen halben Schritt\\
+\textbf{Der Bruchfall} & gleichzeitige Ereignisse: Rang festlegen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Wartevariante hat eine Zahl geliefert, die niemand hinnehmen würde: eine Woche Wartezeit auf ein Intensivbett. Das nächste Kapitel fragt, was dagegen hilft --- ein Bett, zwei Betten, kürzere Verweildauer --- und wie man die seltenen Tage findet, an denen die Schlange auf hundert wächst.}
+\end{minipage}
+\end{center}
+\end{merksatz}

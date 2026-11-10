@@ -1,0 +1,383 @@
+\chapter{Wohin die Kette strebt}
+
+\section{Eine Kette, die weiterläuft}
+
+\begin{merksatz}
+\boxtitel{Chronischer Verlauf statt Klinikaufenthalt}
+Ein chronisch Kranker, monatlich beurteilt, in drei Zuständen --- stabil, verschlechtert, Krise --- ohne absorbierende Zustände:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{1.8cm}P{2.0cm}P{1.6cm}@{}}
+\toprule
+\textbf{von / nach} & \textbf{stabil} & \textbf{verschl.} & \textbf{Krise}\\
+\midrule
+stabil & $0{,}85$ & $0{,}12$ & $0{,}03$\\
+verschlechtert & $0{,}30$ & $0{,}55$ & $0{,}15$\\
+Krise & $0{,}10$ & $0{,}40$ & $0{,}50$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Diese Kette endet nie. Die Frage ist nicht, wo sie ankommt, sondern wie sie sich auf Dauer verteilt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 3.1 --- stationäre Verteilung}
+Eine Verteilung $\pi$ auf den Zuständen heißt \Begriff{stationär}, wenn
+\[ \pi\,P = \pi , \qquad \sum_i \pi_i = 1 . \]
+Startet die Kette in $\pi$, so ist sie zu jedem späteren Zeitpunkt in $\pi$ verteilt.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Berechnet}
+Das Gleichungssystem lautet ausgeschrieben
+\[ \pi_1 = 0{,}85\pi_1 + 0{,}30\pi_2 + 0{,}10\pi_3 \]
+\[ \pi_2 = 0{,}12\pi_1 + 0{,}55\pi_2 + 0{,}40\pi_3 \]
+mit $\pi_1+\pi_2+\pi_3 = 1$. Auflösen ergibt
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Zustand} & $\pi$ & \textbf{Rückkehrzeit}\\
+\midrule
+stabil & $0{,}6145$ & $1{,}63$ Monate\\
+verschlechtert & $0{,}2682$ & $3{,}73$ Monate\\
+Krise & $0{,}1173$ & $8{,}52$ Monate\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Patient verbringt auf lange Sicht $61$ Prozent der Zeit stabil und erlebt im Mittel alle $8{,}5$ Monate eine Krise.}
+\end{minipage}
+\end{center}
+
+\schritt{Satz 3.2 --- die Rückkehrzeit}
+Für eine irreduzible, positiv rekurrente Kette gilt
+\[ \mathbb{E}[\text{Rückkehrzeit nach } i] = \frac{1}{\pi_i} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Zusammenhang ist anschaulich}: Wer ein Achtel der Zeit in der Krise ist, kehrt im Mittel alle acht Monate dorthin zurück. Der Beweis folgt aus dem Ergodensatz und einer Zerlegung der Zeitachse in Ausflüge zwischen zwei Besuchen; wir übergehen ihn --- die zweite Auslassung dieses Bandes.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Konvergenz}
+
+\begin{merksatz}
+\boxtitel{Satz 3.3 --- der Grenzwertsatz für Ketten}
+Ist die Kette irreduzibel, aperiodisch und positiv rekurrent, so gilt für alle Startzustände $i$
+\[ \lim_{n\to\infty} p^{(n)}_{ij} = \pi_j , \]
+und die Konvergenz ist geometrisch mit der Rate des zweitgrößten Eigenwertbetrags.
+
+\schritt{Am Beispiel}
+Start im Zustand \enquote{stabil}, gemessen als halbe Summe der Abweichungen:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{4.2cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+$n$ & \textbf{Verteilung} & \textbf{Abstand} & $|\lambda_2|^{n}$\\
+\midrule
+$1$ & $(0{,}850;\ 0{,}120;\ 0{,}030)$ & $0{,}235$ & $0{,}634$\\
+$2$ & $(0{,}762;\ 0{,}180;\ 0{,}059)$ & $0{,}147$ & $0{,}402$\\
+$5$ & $(0{,}652;\ 0{,}247;\ 0{,}102)$ & $0{,}037$ & $0{,}103$\\
+$10$ & $(0{,}618;\ 0{,}266;\ 0{,}116)$ & $0{,}004$ & $0{,}011$\\
+$20$ & $(0{,}615;\ 0{,}268;\ 0{,}117)$ & $0{,}00004$ & $0{,}0001$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Die Eigenwerte sind $1$, $0{,}634$ und $0{,}266$.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nach acht Monaten ist die Erinnerung an den Ausgangszustand auf ein Prozent geschrumpft.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der zweitgrößte Eigenwert ist die Uhr der Kette.} Er bestimmt, wie lange der Anfangszustand nachwirkt --- und damit, ab wann eine Beobachtung über den Patienten mehr aussagt als über seinen Zustand bei Beobachtungsbeginn. In Band 16, Kapitel~11 war derselbe Eigenwert das Maß für den Zusammenhalt eines Graphen; es ist dieselbe Größe in anderer Kleidung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Warum jede der drei Bedingungen nötig ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{irreduzibel} & Sonst hängt der Grenzwert vom Start ab --- wie in Kapitel~2, wo er entweder \enquote{entlassen} oder \enquote{gestorben} lautete.\\
+\textbf{aperiodisch} & Die zyklische Kette $1\to2\to3\to1$ hat die stationäre Verteilung $(\tfrac13,\tfrac13,\tfrac13)$, konvergiert aber nie: Nach zehn Schritten ist sie mit Sicherheit im Zustand $2$.\\
+\textbf{positiv rekurrent} & Die Irrfahrt aus Kapitel~1 kehrt sicher zurück, aber mit unendlicher Erwartungszeit --- sie hat keine stationäre Verteilung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bei Periodizität rettet man die Aussage durch Mittelung}: Die zeitlichen Mittelwerte konvergieren gegen $\pi$, auch wenn die einzelnen Verteilungen es nicht tun. Das ist der Ergodensatz, und er ist für Anwendungen meist die eigentlich gebrauchte Form --- man beobachtet einen langen Verlauf und will aus ihm die Verteilung schätzen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Umkehrbarkeit}
+
+\begin{definition}
+\boxtitelm{Definition 3.4 --- detailliertes Gleichgewicht}
+Gilt
+\[ \pi_i\,p_{ij} = \pi_j\,p_{ji} \quad\text{für alle } i,j , \]
+so heißt die Kette \Begriff{umkehrbar}, und $\pi$ ist stationär.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 3.5 --- detailliert genügt}
+Erfüllt $\pi$ das detaillierte Gleichgewicht, so ist $\pi$ stationär.
+
+\schritt{Beweis}
+\[ (\pi P)_j = \sum_i \pi_i p_{ij} = \sum_i \pi_j p_{ji} = \pi_j \sum_i p_{ji} = \pi_j \]
+--- im zweiten Schritt die Voraussetzung, im letzten die Zeilensumme eins. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Statt eines Gleichungssystems prüft man einzelne Paare. Das ist der Grund, warum sich stationäre Verteilungen oft raten lassen.}
+\end{minipage}
+\end{center}
+
+\schritt{Im Beispiel nicht erfüllt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Paar} & $\pi_i p_{ij}$ & $\pi_j p_{ji}$\\
+\midrule
+stabil / verschl. & $0{,}0737$ & $0{,}0805$\\
+stabil / Krise & $0{,}0184$ & $0{,}0117$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Es fließt mehr Wahrscheinlichkeit von \enquote{stabil} zur Krise, als direkt zurückkommt} --- der Rest kehrt über den Zwischenzustand zurück. Ein solcher Kreislauf ist mit Stationarität durchaus verträglich; nur ist die Kette dann nicht umkehrbar, und ein rückwärts abgespielter Verlauf sähe anders aus als ein vorwärts abgespielter.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die stationäre Verteilung beschreibt niemanden}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Zeitmittel} & $\pi$ ist der Zeitanteil \kursiv{eines} Patienten auf lange Sicht.\\
+\textbf{Scharmittel} & $\pi$ ist zugleich die Verteilung \kursiv{vieler} Patienten zu einem Zeitpunkt --- wenn sie unabhängig derselben Kette folgen.\\
+\textbf{Verwechslung} & Beides fällt nur bei Ergodizität zusammen. Bei mehreren Patientengruppen mit verschiedenen Matrizen ist die Gesamtverteilung stationär, ohne dass sie einen einzelnen beschreibt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Beispiel: Sechzig Prozent stabil kann heißen, dass jeder Patient sechzig Prozent seiner Zeit stabil ist --- oder dass sechzig Prozent der Patienten immer stabil sind und vierzig nie.} Beide Welten erzeugen dieselbe Querschnittsverteilung und verlangen ganz verschiedene Behandlungen. Unterscheiden lassen sie sich nur durch Längsschnittdaten, und genau daran fehlt es in der Versorgungsforschung meist.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Stationäre Verteilung von Hand}
+Bestimmen Sie $\pi$ für die Zweizustandskette mit $p_{12} = a$ und $p_{21} = b$.
+
+\loesung
+\schritt{Schritt 1 --- Das Gleichungssystem}
+\[ \pi_1 = \pi_1(1-a) + \pi_2 b \quad\Longrightarrow\quad \pi_1 a = \pi_2 b \]
+
+\schritt{Schritt 2 --- Mit der Normierung}
+\[ \pi_1 = \frac{b}{a+b}, \qquad \pi_2 = \frac{a}{a+b} \]
+
+\schritt{Schritt 3 --- Die Probe am detaillierten Gleichgewicht}
+\[ \pi_1 p_{12} = \frac{b}{a+b}\,a = \frac{ab}{a+b} = \frac{a}{a+b}\,b = \pi_2 p_{21} \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Zweizustandskette ist umkehrbar} --- es gibt nur ein Paar, und zwischen zwei Zuständen kann kein Kreislauf entstehen.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Deutung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+$a$ & $b$ & $\pi_2$\\
+\midrule
+$0{,}10$ & $0{,}40$ & $0{,}200$\\
+$0{,}05$ & $0{,}05$ & $0{,}500$\\
+$0{,}02$ & $0{,}30$ & $0{,}063$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Nur das Verhältnis der Übergangsraten zählt, nicht ihre Größe.} Eine Krankheit, die selten beginnt und selten endet, kann dieselbe Prävalenz haben wie eine, die häufig beginnt und schnell abklingt --- bei völlig verschiedener Dynamik. Das ist der Grund, warum Querschnittsdaten über Prävalenz nichts über Inzidenz und Dauer sagen; man braucht beides, und es gilt die Faustregel Prävalenz $\approx$ Inzidenz mal Dauer.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Die Mischzeit}
+Wie viele Monate dauert es im Leitbeispiel, bis der Abstand zur stationären Verteilung unter ein Prozent fällt? Wie ändert sich das bei $|\lambda_2| = 0{,}95$?
+
+\loesung
+\schritt{Schritt 1 --- Die Abschätzung}
+\[ |\lambda_2|^{n} \le 0{,}01 \quad\Longleftrightarrow\quad n \ge \frac{\ln 0{,}01}{\ln|\lambda_2|} \]
+
+\schritt{Schritt 2 --- Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+$|\lambda_2|$ & \textbf{Schranke} & \textbf{tatsächlich}\\
+\midrule
+$0{,}634$ & $10{,}1$ & $8$\\
+$0{,}900$ & $43{,}7$ & \\
+$0{,}950$ & $89{,}8$ & \\
+$0{,}990$ & $458$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Lehre}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Mischzeit wächst wie $1/(1-|\lambda_2|)$} --- nähert sich der zweite Eigenwert der Eins, so explodiert sie. Das geschieht genau dann, wenn die Kette fast in zwei Teile zerfällt: Zwei Gruppen von Zuständen, zwischen denen selten gewechselt wird. Man erkennt eine solche Struktur am Eigenvektor zum zweiten Eigenwert --- dieselbe Konstruktion, mit der Band 16, Kapitel~11 Gemeinschaften in Netzwerken findet.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Warum das praktisch zählt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wer eine Kette simuliert, um $\pi$ zu schätzen, muss die Einschwingphase verwerfen. \textbf{Bei $|\lambda_2| = 0{,}99$ sind das mehrere hundert Schritte} --- und da man $\lambda_2$ meist nicht kennt, ist die Frage, wie lange man verwerfen soll, das Kernproblem jeder Simulation mit Markow-Ketten.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Eine Verteilung erzeugen}
+Gegeben sei eine gewünschte Verteilung $\pi$ auf endlich vielen Zuständen. Konstruieren Sie eine Kette, die gegen $\pi$ konvergiert.
+
+\loesung
+\schritt{Schritt 1 --- Der Ansatz}
+Man wähle eine beliebige symmetrische \Begriff{Vorschlagskette} $q_{ij} = q_{ji}$ und nehme einen Vorschlag mit der Wahrscheinlichkeit
+\[ \alpha_{ij} = \min\left\{1,\ \frac{\pi_j}{\pi_i}\right\} \]
+an; sonst bleibe man, wo man ist.
+
+\schritt{Schritt 2 --- Das detaillierte Gleichgewicht prüfen}
+Sei $\pi_j \le \pi_i$, also $\alpha_{ij} = \pi_j/\pi_i$ und $\alpha_{ji} = 1$:
+\[ \pi_i\,p_{ij} = \pi_i\,q_{ij}\,\frac{\pi_j}{\pi_i} = q_{ij}\,\pi_j \]
+\[ \pi_j\,p_{ji} = \pi_j\,q_{ji}\cdot1 = q_{ij}\,\pi_j \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide Seiten stimmen überein --- nach Satz 3.5 ist $\pi$ stationär.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was daran bemerkenswert ist}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{In der Formel steht nur das Verhältnis $\pi_j/\pi_i$} --- die Normierungskonstante von $\pi$ wird nie gebraucht. Das ist der entscheidende Punkt: In der Bayesschen Statistik aus Band 17 kennt man die A-posteriori-Dichte nur bis auf einen Faktor, dessen Berechnung ein hochdimensionales Integral verlangt. Dieses Verfahren umgeht es vollständig.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Einordnung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Verfahren heißt nach \Person{Nicholas Metropolis} und \Person{Wilfred Hastings} und ist die Grundlage fast aller heutigen Bayesschen Rechnungen. \textbf{Es kehrt die Blickrichtung dieses Kapitels um}: Bisher war die Kette gegeben und $\pi$ gesucht; hier ist $\pi$ gegeben und die Kette wird gebaut. Was dabei bleibt, ist das Problem aus Aufgabe 3.2 --- man weiß nicht, wann die Kette gemischt hat.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Kette für Bomben und eine für Seiten}
+Das Verfahren aus Aufgabe 3.3 entstand 1953 in Los Alamos, bei der Simulation von Teilchensystemen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Als Verfasser der Arbeit erscheinen fünf Personen, unter ihnen \Person{Marshall Rosenbluth} und \Person{Edward Teller}; \Person{Metropolis} stand nur wegen der alphabetischen Ordnung an erster Stelle und hatte nach Rosenbluths späterer Darstellung am Verfahren keinen Anteil. \textbf{Der Name blieb dennoch an ihm hängen.} \Person{Hastings} verallgemeinerte es 1970 und blieb zwanzig Jahre unbeachtet.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Suchmaschine}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Larry Page} und \Person{Sergey Brin} definierten 1998 die Wichtigkeit einer Webseite als ihren Anteil an der stationären Verteilung einer Irrfahrt durch das Netz. \textbf{Der Zusatzterm, der von jeder Seite mit kleiner Wahrscheinlichkeit irgendwohin springt, hat genau den Zweck, Irreduzibilität und Aperiodizität zu erzwingen} --- Satz 3.3 anwendbar zu machen. Die Milliardenbewertung einer Firma beruhte damit unmittelbar auf einem Satz über Markow-Ketten.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Konvergenz heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Mischzeiten} & Scharfe Schranken für Ketten mit riesigen Zustandsräumen.\\
+\textbf{Abschneiden} & Ketten, die plötzlich statt allmählich mischen.\\
+\textbf{Diagnostik} & Verfahren, die erkennen, ob eine Simulation eingeschwungen ist.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beim Mischen eines Kartenspiels bleibt der Abstand zur Gleichverteilung lange nahe eins und fällt dann binnen weniger Schritte auf fast null. \textbf{\Person{Persi Diaconis} und \Person{David Bayer} zeigten 1992, dass sieben Riffelmischungen genügen} --- sechs aber deutlich zu wenig sind. Solche Sprünge sind kein Sonderfall, sondern bei vielen großen Ketten die Regel, und sie machen die Frage nach der Einschwingzeit erst richtig heikel.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 3.1} & $\pi P = \pi$\\
+\textbf{Satz 3.2} & Rückkehrzeit $= 1/\pi_i$\\
+\textbf{Satz 3.3} & irreduzibel, aperiodisch, positiv rekurrent\\
+\textbf{$|\lambda_2|$} & die Uhr der Kette\\
+\textbf{Satz 3.5} & detailliertes Gleichgewicht genügt\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~I. Die Zeit lief bisher in Schritten. Teil~II lässt sie stetig fließen --- und beginnt mit dem Prozess, der dabei entsteht, wenn Ereignisse völlig ohne Gedächtnis eintreffen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

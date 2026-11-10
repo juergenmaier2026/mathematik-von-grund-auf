@@ -1,0 +1,187 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Begriffe und Formeln}
+
+\begin{merksatz}
+\boxtitel{Teil I und II}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\mathbb{E}[u\mid a] = \sum_\theta u(a,\theta)\Pr[\theta]$ & Erwartungsnutzen (1.1)\\
+$s^{*} = \dfrac{c}{(1-r)\,\Delta u}$ & Behandlungsschwelle (1.2)\\
+vier Regeln $\Rightarrow$ $u$ existiert & von Neumann (2.1)\\
+$x \sim [p:G,\ 1-p:S]$ & Standardlotterie\\
+$u$ konkav & Risikoscheu\\
+$-a\ln(1-\mathbb{E}[u])$ & Sicherheitsäquivalent\\
+$\sum_\theta \Pr[\theta]\max_a u - \max_a \sum_\theta \Pr[\theta]u$ & EVPI (3.1)\\
+$\text{EVPI} \ge 0$ & Satz 3.2\\
+$p^{*} = \dfrac{C}{C+B}$ & Behandlungsschwelle mit Kosten\\
+$p_t$, $p_{tt}$ & Test- und Test-Behandlungs-Schwelle (4.1)\\
+Kipppunkt & Empfindlichkeit (5)\\
+$\sum_t \sum_z \pi_t(z)\,u(z)\,(1+d)^{-t}$ & QALY im Markow-Modell (6.1)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Teil III bis V}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$V_t(z) = \max_a \bigl[r + \mathbb{E}\,V_{t+1}\bigr]$ & Bellman, endlich (7.1)\\
+$V = \max_a \bigl[r + \gamma\sum p\,V\bigr]$ & Fixpunkt (8.1)\\
+$\gamma$ & Abwertung je Schritt\\
+Bedauern $\sim \ln T$ & Bandit, beste Ordnung (9)\\
+$\dfrac{\Delta K}{\Delta E}$ & Kosten-Wirksamkeit (10.1)\\
+$\lambda\,\Delta E - \Delta K$ & Nettonutzen\\
+erweiterte Dominanz & Rangfolge bilden\\
+$\max_a \min_\theta u$ & vorsichtige Regel (11)\\
+$\max_a \sum_\theta \Pr u$ gegen Intervalle & Ambiguität\\
+Bezugspunkt, Verlustscheu & tatsächliches Verhalten (12)\\
+keine Regel erfüllt alle Bedingungen & Arrow (13.1)\\
+$\bigl(\sum_i q_i^{1-\epsilon}\bigr)^{1/(1-\epsilon)}$ & Ungleichheitsscheu (14)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz worauf beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{3.6cm}P{1.0cm}P{3.6cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{beruht auf}\\
+\midrule
+Behandlungsschwelle & $1$ & lineare Nutzenbilanz\\
+Nutzenexistenz & $2$ & Stetigkeit und Unabhängigkeit\\
+Information schadet nie & $3$ & Maximum ist konvex\\
+zwei Testschwellen & $4$ & drei Geraden über $p$\\
+Kipppunkt & $5$ & Schnitt zweier Geraden\\
+Markow-Bilanz & $6$ & Zustandsverteilung je Zyklus\\
+Bellman & $7$ & Zerlegung nach dem ersten Schritt\\
+Fixpunkt & $8$ & Kontraktion, Banach (Band 13)\\
+Bandit-Schranke & $9$ & Konzentrations\-ungleichung\\
+erweiterte Dominanz & $10$ & konvexe Hülle\\
+Arrow & $13$ & entscheidende Koalitionen\\
+Ungleichheitsmaß & $14$ & Potenzmittel\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Was nicht bewiesen wurde}
+
+\begin{merksatz}
+\boxtitel{Drei Auslassungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{1.2cm}P{3.4cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+Satz von Arrow & $13$ & Gaertner\zit{9}\\
+Bandit-Schranke von Lai und Robbins & $9$ & Lattimore, Szepesvári\zit{16}\\
+Konvergenz der Wertiteration & $8$ & Puterman\zit{21}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle übrigen Sätze des Bandes sind vollständig bewiesen} --- darunter Satz 2.1 über die Existenz der Nutzenfunktion, Satz 3.2 über den Wert der Information, Satz 4.1 über die beiden Testschwellen und Satz 7.1 über die Rückwärtsrechnung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von Bernoulli bis zur Nutzenbewertung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{1.3cm}P{3.0cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Ereignis}\\
+\midrule
+$1713$ & N.\ Bernoulli & das Petersburger Spiel\\
+$1738$ & D.\ Bernoulli & Nutzen statt Geldwert\\
+$1921$ & Knight & Risiko gegen Ungewissheit\\
+$1926$ & Ramsey & Wahrscheinlichkeit aus Vorlieben\\
+$1944$ & \textbf{von Neumann, Morgenstern} & \textbf{Nutzenaxiome}\\
+$1947$ & Wald & Minimax-Regel\\
+$1951$ & \textbf{Arrow} & \textbf{Unmöglichkeitssatz}\\
+$1953$ & Allais & das Paradox\\
+$1954$ & Savage & subjektive Wahrscheinlichkeit\\
+$1957$ & Bellman & dynamische Programmierung\\
+$1961$ & Ellsberg & Ambiguitätsscheu\\
+$1966$ & Howard & Entscheidungsanalyse, Informationswert\\
+$1968$ & Klarman u.\,a. & erste QALY-Rechnung\\
+$1975$ & Pauker, Kassirer & Behandlungsschwelle\\
+$1979$ & Kahneman, Tversky & Neue Erwartungstheorie\\
+$1980$ & Pauker, Kassirer & Testschwellen\\
+$1985$ & Lai, Robbins & Bandit-Schranke\\
+$1990$ & --- & Kosten-Wirksamkeit in der Erstattung\\
+$1999$ & NICE & Schwellenwert in der Praxis\\
+$2002$ & Kahneman & Nobelpreis\\
+$2010$ & --- & probabilistische Modellanalyse als Standard\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Begriff} & \textbf{Bedeutung}\\
+\midrule
+\endhead
+Ambiguität & unsichere Wahrscheinlichkeiten (11)\\
+Bandit & Erkunden gegen Ausnutzen (9.1)\\
+Behandlungsschwelle & ab hier behandeln (1.2)\\
+Bellman-Gleichung & Wert heute aus Wert morgen (7.1)\\
+Bezugspunkt & woran Gewinn gemessen wird (12)\\
+Diskontierung & Abwertung künftigen Nutzens (6)\\
+Dominanz, erweiterte & Mischung schlägt Einzelne (10)\\
+Entscheidungsbaum & Wahl- und Zufallsknoten (5)\\
+Erwartungsnutzen & Nutzen mal Wahrscheinlichkeit (1.1)\\
+EVPI & Wert vollkommener Information (3.1)\\
+EVSI & Wert eines wirklichen Tests (3)\\
+ICER & Kosten je zusätzlicher Einheit (10.1)\\
+Kipppunkt & wo die Entscheidung wechselt (5)\\
+Markow-Modell & Zustände und Zyklen (6.1)\\
+Minimax & das schlechteste Ergebnis verbessern (11)\\
+Nettonutzen & $\lambda\Delta E - \Delta K$ (10)\\
+QALY & Lebensjahr mal Nutzen (6)\\
+Risikoprämie & Abstand zum Sicherheitsäquivalent (2)\\
+Sicherheitsäquivalent & sicherer Wert gleichen Nutzens (2)\\
+Standardlotterie & Nutzenerhebung über $p$ (2)\\
+Testschwelle & ab hier testen (4.1)\\
+Verlustscheu & Verluste wiegen schwerer (12)\\
+Wertiteration & Fixpunkt schrittweise (8.1)\\
+Zeitabwägung & Jahre gegen Zustand (2)\\
+\bottomrule
+\end{longtable}}
+\end{center}
+\end{merksatz}

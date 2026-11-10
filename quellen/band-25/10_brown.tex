@@ -1,0 +1,393 @@
+\part{Die Brownsche Bewegung}
+
+\chapter{Stetig und nirgends glatt}
+
+\section{Der Grenzübergang}
+
+\begin{merksatz}
+\boxtitel{Die Irrfahrt, immer feiner}
+Man mache in der Zeit $t$ nun $n t$ Schritte der Größe $1/\sqrt n$:
+\[ W^{(n)}_t = \frac{1}{\sqrt n}\,S_{\lfloor nt\rfloor} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Erwartungswert} & $0$\\
+\textbf{Varianz} & $\dfrac{\lfloor nt\rfloor}{n} \to t$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Wahl $1/\sqrt n$ ist die einzige, bei der etwas Endliches herauskommt} --- größere Schritte führen ins Unendliche, kleinere auf die Null.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach dem zentralen Grenzwertsatz (Band 4, Kapitel~13) ist $W_t$ normalverteilt mit Varianz $t$. \textbf{Dass auch die Pfade konvergieren --- und nicht nur die einzelnen Verteilungen --- ist der Satz von Donsker}, den wir übergehen: die fünfte Auslassung dieses Bandes.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 10.1 --- Brownsche Bewegung}
+Ein Prozess $(W_t)_{t\ge0}$ heißt \Begriff{Brownsche Bewegung}, wenn
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & $W_0 = 0$,\\
+$2$ & die Zuwächse über disjunkten Zeitabschnitten unabhängig sind,\\
+$3$ & $W_{t+s}-W_t \sim \mathcal N(0,s)$,\\
+$4$ & die Pfade stetig sind.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Drei Eigenschaften, die man nachrechnet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Skalierung} & $\tfrac{1}{c}\,W_{c^{2}t}$ ist wieder eine Brownsche Bewegung.\\
+\textbf{Spiegelung} & $-W_t$ ebenso.\\
+\textbf{Zeitumkehr} & $t\,W_{1/t}$ ebenso.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Skalierungsregel ist die Wurzelregel aus Kapitel~1, nun als Selbstähnlichkeit}: Vergrößert man die Zeitachse um den Faktor $100$ und die senkrechte Achse um $10$, so sieht der Pfad statistisch genauso aus. Ein Ausschnitt einer Brownschen Bewegung verrät nicht, auf welcher Zeitskala er aufgenommen wurde --- der Grund, warum Kurscharts ohne Achsenbeschriftung nichtssagend sind.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Pfade}
+
+\begin{merksatz}
+\boxtitel{Satz 10.2 --- die quadratische Variation}
+Für jede Folge von Zerlegungen mit Feinheit gegen null gilt
+\[ \sum_{k} \bigl(W_{t_{k+1}}-W_{t_k}\bigr)^{2} \ \longrightarrow\ t . \]
+
+\schritt{Beweis (im quadratischen Mittel)}
+\kursiv{Erwartungswert:} $\mathbb{E}\bigl[\sum (\Delta W)^{2}\bigr] = \sum \Delta t_k = t$.
+
+\kursiv{Varianz:} Die Summanden sind unabhängig, und für $Z \sim \mathcal N(0,\sigma^2)$ ist $\operatorname{Var}[Z^{2}] = 2\sigma^{4}$:
+\[ \operatorname{Var}\Bigl[\sum_k (\Delta W)^{2}\Bigr] = 2\sum_k (\Delta t_k)^{2} \ \le\ 2\,t\,\max_k \Delta t_k \ \longrightarrow\ 0 \]
+$\blacksquare$
+
+\schritt{Simuliert auf $[0,1]$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Schritte} & \textbf{quadratische} & \textbf{totale Variation}\\
+\midrule
+$100$ & $0{,}776$ & $6{,}8$\\
+$1000$ & $0{,}985$ & $25{,}2$\\
+$10\,000$ & $0{,}989$ & $79{,}2$\\
+$100\,000$ & $1{,}008$ & $253{,}2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die quadratische Variation strebt gegen $1$, die gewöhnliche Weglänge gegen unendlich --- sie wächst wie $\sqrt n$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die wichtigste Zahl dieses Kapitels.} Bei jeder differenzierbaren Funktion wäre die quadratische Variation null und die Weglänge endlich; hier ist es umgekehrt. Der Pfad ist so zerknittert, dass er in jeder noch so kurzen Zeitspanne eine unendlich lange Strecke zurücklegt --- und genau deshalb versagt die gewöhnliche Integrationstheorie, wie Kapitel~11 zeigt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 10.3 --- nirgends differenzierbar}
+Mit Wahrscheinlichkeit eins ist der Pfad an keiner Stelle differenzierbar.
+
+\schritt{Der Gedanke}
+Über einen Abschnitt der Länge $h$ ist der typische Zuwachs $\sqrt h$, der Differenzenquotient also
+\[ \frac{|\Delta W|}{h} \approx \frac{\sqrt h}{h} = \frac{1}{\sqrt h} \ \longrightarrow\ \infty . \]
+\kursiv{Die Simulation bestätigt den Faktor:} Der mittlere Betrag eines Zuwachses, geteilt durch $\sqrt{\Delta t}$, ergab $0{,}8006$ --- der theoretische Wert ist $\sqrt{2/\pi} = 0{,}7979$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der vollständige Beweis muss alle Stellen zugleich behandeln und benutzt das Lemma von Borel und Cantelli; er stammt von \Person{Paley}, \Person{Wiener} und \Person{Zygmund} aus dem Jahr 1933. \textbf{Vor ihnen galt eine überall stetige, nirgends differenzierbare Funktion als pathologische Kuriosität} --- seither weiß man, dass fast jeder Pfad eines der wichtigsten Prozesse der Naturwissenschaft von dieser Art ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Höchststände}
+
+\begin{merksatz}
+\boxtitel{Satz 10.4 --- das Spiegelungsprinzip}
+\[ \Pr\Bigl[\max_{s\le t} W_s \ge a\Bigr] = 2\,\Pr[W_t \ge a] \]
+
+\schritt{Beweis}
+Wie in Aufgabe 1.2: Man spiegele den Pfad nach dem ersten Erreichen von $a$ an der Höhe $a$. Wegen der starken Markow-Eigenschaft --- der Prozess beginnt zu einer Stoppzeit von neuem --- ist der gespiegelte Pfad ebenso wahrscheinlich wie der ursprüngliche. $\blacksquare$
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& $\Pr[W_1 \ge 1]$ & $\Pr[\max \ge 1]$\\
+\midrule
+theoretisch & $0{,}1587$ & $0{,}3173$\\
+simuliert & --- & $0{,}3182$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Fast jeder dritte Pfad erreicht binnen einer Zeiteinheit die Höhe einer Standardabweichung --- aber nur jeder sechste endet dort oben.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Treffzeit}
+Aus dem Satz folgt für $T_a = \inf\{t : W_t = a\}$
+\[ \Pr[T_a \le t] = 2\,\Pr[W_t \ge a] = 2\bigl(1-\Phi(a/\sqrt t)\bigr) . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{$T_a$ ist fast sicher endlich und hat dennoch unendlichen Erwartungswert} --- die Dichte fällt wie $t^{-3/2}$. Man erreicht jede Höhe mit Sicherheit und kann trotzdem nicht sagen, wann. Das ist die stetige Fassung dessen, was Kapitel~1 für die Rückkehr in zwei Dimensionen fand.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was die Brownsche Bewegung nicht modelliert}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Sprünge} & Die Pfade sind stetig. Kurseinbrüche, Todesfälle, Ausfälle sind es nicht.\\
+\textbf{Gedächtnis} & Zuwächse sind unabhängig; reale Reihen sind es selten.\\
+\textbf{Feste Streuung} & Die Varianz wächst gleichmäßig mit der Zeit; an Märkten schwankt sie selbst.\\
+\textbf{Unbegrenztheit} & Der Prozess läuft ins Unendliche; Körpergrößen, Bestände und Preise tun das nicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die dritte Zeile ist in der Finanzmathematik die folgenreichste.} Reale Kursschwankungen treten in Phasen auf: Auf ruhige Wochen folgen unruhige. Das Modell aus Kapitel~13 setzt feste Schwankung voraus, und genau daran scheitert es in Krisen --- dann, wenn es gebraucht würde. Kapitel~15 nimmt das wieder auf.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Die Skalierung nachrechnen}
+Zeigen Sie, dass $X_t = \tfrac1c W_{c^{2}t}$ eine Brownsche Bewegung ist.
+
+\loesung
+\schritt{Schritt 1 --- Die vier Bedingungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.6cm}@{}}
+\toprule
+Start & $X_0 = \tfrac1c W_0 = 0$ \checkmark\\
+Unabhängigkeit & disjunkte Abschnitte in $t$ werden zu disjunkten in $c^{2}t$ \checkmark\\
+Stetigkeit & bleibt erhalten \checkmark\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Verteilung}
+\[ X_{t+s}-X_t = \tfrac1c\bigl(W_{c^{2}t+c^{2}s} - W_{c^{2}t}\bigr) \sim \tfrac1c\,\mathcal N(0,\ c^{2}s) = \mathcal N(0,s) \quad \checkmark \]
+
+\schritt{Schritt 3 --- Die Folge für die Praxis}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Zeitraum} & \textbf{Streuung} & \textbf{Faktor}\\
+\midrule
+$1$ Tag & $\sigma$ & $1$\\
+$1$ Monat ($21$ Tage) & $4{,}58\,\sigma$ & $\sqrt{21}$\\
+$1$ Jahr ($252$ Tage) & $15{,}9\,\sigma$ & $\sqrt{252}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Wurzelregel für die Umrechnung von Schwankungsmaßen ist unmittelbare Folge der Skalierung} --- und ihr Gebrauch setzt stillschweigend alle vier Annahmen aus Definition 10.1 voraus. Sind die Zuwächse abhängig, so ist die Umrechnung falsch, und zwar meist zu niedrig.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Die Weglänge}
+Warum wächst die totale Variation wie $\sqrt n$, und was folgt daraus?
+
+\loesung
+\schritt{Schritt 1 --- Die Rechnung}
+Bei $n$ Schritten der Länge $\Delta t = 1/n$ ist
+\[ \mathbb{E}\bigl[|\Delta W|\bigr] = \sqrt{\frac{2}{\pi}}\cdot\sqrt{\Delta t} \]
+\[ \mathbb{E}[\text{Weglänge}] = n\cdot\sqrt{\frac{2}{\pi}}\cdot\frac{1}{\sqrt n} = \sqrt{\frac{2n}{\pi}} \]
+
+\schritt{Schritt 2 --- Die Probe}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+$n$ & $\sqrt{2n/\pi}$ & \textbf{simuliert}\\
+\midrule
+$1000$ & $25{,}2$ & $25{,}2$\\
+$10\,000$ & $79{,}8$ & $79{,}2$\\
+$100\,000$ & $252{,}3$ & $253{,}2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Was daraus folgt}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Integral $\int f\,\dd W$ lässt sich nicht pfadweise als Stieltjes-Integral erklären} --- dafür bräuchte man endliche Weglänge.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Grund für das ganze nächste Kapitel.} Man muss das Integral im quadratischen Mittel erklären, über eine Isometrie --- und bezahlt dafür mit einer Kettenregel, die einen Zusatzterm trägt. Dieser Zusatzterm ist gerade die quadratische Variation aus Satz 10.2, die bei glatten Funktionen null wäre.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Eine praktische Folge}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wer eine Brownsche Bewegung feiner abtastet, misst eine größere Weglänge --- ohne Grenzwert. \textbf{Dasselbe gilt für die gemessene Länge einer Küstenlinie}, und aus derselben Beobachtung entstand der Begriff der fraktalen Dimension. Der Pfad hat die Dimension $\tfrac32$ als Kurve in der Ebene.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- Eine Schranke überschreiten}
+Ein Anlagewert folge einer Brownschen Bewegung mit Jahresstreuung $20$ Prozent. Mit welcher Wahrscheinlichkeit fällt er im Lauf eines Jahres irgendwann um mehr als $30$ Prozent?
+
+\loesung
+\schritt{Schritt 1 --- Das Spiegelungsprinzip}
+\[ \Pr\Bigl[\min_{t\le1} W_t \le -0{,}30\Bigr] = 2\,\Pr[W_1 \le -0{,}30] = 2\bigl(1-\Phi(1{,}5)\bigr) \]
+
+\schritt{Schritt 2 --- Die Zahl}
+\[ 1-\Phi(1{,}5) = 0{,}0668 \quad\Longrightarrow\quad 2\cdot0{,}0668 = \mathbf{0{,}134} \]
+
+\schritt{Schritt 3 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{2.8cm}@{}}
+\toprule
+\textbf{Ereignis} & \textbf{Wahrschein\-lichkeit}\\
+\midrule
+am Jahresende $-30\,\%$ & $6{,}7\,\%$\\
+irgendwann im Jahr $-30\,\%$ & $\mathbf{13{,}4\,\%}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der zwischenzeitliche Einbruch ist doppelt so wahrscheinlich wie der Verlust am Stichtag.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Warum das zählt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Wer eine Verlustgrenze vereinbart hat, bei deren Unterschreitung verkauft wird, muss mit der zweiten Zahl rechnen, nicht mit der ersten.} Dasselbe gilt für jede Regel, die an einen zwischenzeitlichen Zustand anknüpft --- Nachschusspflichten, Abbruchkriterien in Studien, Alarmgrenzen in der Überwachung. Die Verdopplung ist dabei die untere Schranke: Bei Drift nach unten wird es schlimmer.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Pollen, Aktien und Atome}
+\Person{Robert Brown} beobachtete 1827 unter dem Mikroskop, dass Pollenkörner in Wasser unaufhörlich zittern --- und zeigte, dass auch anorganische Teilchen es tun, die Bewegung also nicht vom Leben herrührt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Louis Bachelier} beschrieb den Prozess 1900 in seiner Pariser Doktorarbeit \kursiv{Théorie de la spéculation} --- fünf Jahre vor Einstein und für Aktienkurse statt für Teilchen. \textbf{Die Arbeit wurde als zu anwendungsnah eingestuft, nur mit \enquote{ehrenvoll} bewertet und blieb ein halbes Jahrhundert unbeachtet}, bis \Person{Leonard Savage} sie in den 1950er Jahren wiederentdeckte und \Person{Paul Samuelson} darauf aufmerksam machte.}
+\end{minipage}
+\end{center}
+
+\schritt{Einstein und Perrin}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Albert Einstein} leitete 1905 her, dass das mittlere Verschiebungsquadrat linear mit der Zeit wächst --- Satz 10.2 in physikalischer Gestalt --- und gab damit ein Verfahren an, die Avogadro-Zahl zu messen. \textbf{\Person{Jean Perrin} führte die Messung 1908 aus und lieferte damit den bis dahin überzeugendsten Beleg für die Existenz von Atomen}; er erhielt dafür 1926 den Nobelpreis.}
+\end{minipage}
+\end{center}
+
+\schritt{Wiener}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Norbert Wiener} bewies 1923 als Erster, dass ein Prozess mit den Eigenschaften aus Definition 10.1 überhaupt existiert --- keineswegs selbstverständlich, denn die vierte Bedingung ist eine Aussage über überabzählbar viele Zeitpunkte zugleich. \textbf{Der Prozess heißt deshalb auch Wiener-Prozess}, und das zugehörige Maß auf dem Raum der stetigen Funktionen trägt seinen Namen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Brownsche Pfade heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Feine Struktur} & Lokale Zeit, Nullstellenmenge, Gesetz vom iterierten Logarithmus.\\
+\textbf{In der Ebene} & Konforme Invarianz, Zusammenhang mit statistischer Physik.\\
+\textbf{Verallgemei\-nerungen} & Prozesse mit Sprüngen, mit Gedächtnis, mit zufälliger Streuung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Menge der Nullstellen eines Brownschen Pfades ist abgeschlossen, überabzählbar, enthält kein Intervall und hat Lebesgue-Maß null --- eine Cantor-Menge der Dimension $\tfrac12$. \textbf{Das Gesetz vom iterierten Logarithmus gibt die genaue Größenordnung der Ausschläge an}: $\limsup W_t/\sqrt{2t\ln\ln t} = 1$. Beide Ergebnisse zeigen, wie viel feiner die Pfadstruktur ist, als die Verteilungen erkennen lassen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 10.1} & vier Bedingungen, eine davon über Pfade\\
+\textbf{Skalierung} & selbstähnlich mit Faktor $\sqrt{\ }$\\
+\textbf{Satz 10.2} & quadratische Variation gleich $t$\\
+\textbf{Satz 10.3} & stetig, nirgends differenzierbar\\
+\textbf{Satz 10.4} & Spiegelung: Höchststände aus Endständen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Pfad hat keine Steigung --- also gibt es kein $\dd W/\dd t$. Das nächste Kapitel baut dennoch ein Integral $\int f\,\dd W$, und zwar das einzige, das die Martingaleigenschaft erhält.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,422 @@
+\chapter{Faire Spiele}
+
+\section{Die Definition}
+
+\begin{definition}
+\boxtitelm{Definition 8.1 --- Martingal}
+Ein angepasster Prozess $(M_n)$ mit $\mathbb{E}|M_n| < \infty$ heißt
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{4.6cm}@{}}
+\toprule
+\textbf{Martingal} & $\mathbb{E}[M_{n+1} \mid \mathcal F_n] = M_n$\\
+\textbf{Submartingal} & $\mathbb{E}[M_{n+1} \mid \mathcal F_n] \ge M_n$\\
+\textbf{Supermartingal} & $\mathbb{E}[M_{n+1} \mid \mathcal F_n] \le M_n$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die beste Vorhersage für morgen ist der heutige Stand. Ein Martingal ist ein faires Spiel.}
+\end{minipage}
+\end{center}
+
+\schritt{Vier Beispiele}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+$S_n$ & Die einfache Irrfahrt --- der Musterfall.\\
+$S_n^{2} - n$ & Ebenfalls ein Martingal; daraus folgt in Aufgabe 8.2 die Spieldauer.\\
+$\bigl(\tfrac{q}{p}\bigr)^{S_n}$ & Bei unfairem Spiel --- der Schlüssel zum Ruin mit Drift.\\
+$\mathbb{E}[Y \mid \mathcal F_n]$ & Für jede feste Größe $Y$ --- nach der Turmregel.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Probe für die zweite Zeile:}
+\[ \mathbb{E}[S_{n+1}^{2} \mid \mathcal F_n] = \mathbb{E}[(S_n+\xi)^{2}\mid\mathcal F_n] = S_n^{2} + 2S_n\,\mathbb{E}[\xi] + \mathbb{E}[\xi^{2}] = S_n^{2}+1 \]
+also $\mathbb{E}[S_{n+1}^{2}-(n+1)\mid\mathcal F_n] = S_n^{2}-n$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die letzte Zeile ist bemerkenswert}: Jede fortlaufend berichtigte Vorhersage einer festen Größe ist automatisch ein Martingal. Die geschätzte Überlebenswahrscheinlichkeit eines Patienten, täglich neu berechnet, muss also im Mittel gleich bleiben --- sie darf nicht systematisch fallen oder steigen. Tut sie es doch, war die frühere Schätzung falsch.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Anhalten}
+
+\begin{definition}
+\boxtitelm{Definition 8.2 --- Stoppzeit}
+Eine Zufallszeit $T$ heißt \Begriff{Stoppzeit}, wenn für jedes $n$ das Ereignis $\{T \le n\}$ aus $\mathcal F_n$ bestimmbar ist.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Erlaubt und nicht erlaubt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{4.8cm}@{}}
+\toprule
+\enquote{Beim ersten Erreichen von $10$} & \textcolor{gruen}{Stoppzeit}\\
+\enquote{Beim ersten Verlust nach einem Gewinn} & \textcolor{gruen}{Stoppzeit}\\
+\enquote{Einen Schritt vor dem Höchststand} & \textcolor{akzent}{keine} --- verlangt Kenntnis der Zukunft\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die dritte Zeile ist genau der Fehler, den Band 23 als unsterbliche Zeit beschrieb} --- eine Gruppenzuordnung, die Wissen aus der Zukunft benutzt. Der Begriff der Stoppzeit ist die saubere Fassung dessen, was dort als Entwurfsregel formuliert war.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 8.3 --- optionales Stoppen}
+Ist $(M_n)$ ein Martingal und $T$ eine Stoppzeit, so gilt
+\[ \mathbb{E}[M_T] = \mathbb{E}[M_0] , \]
+sofern eine der folgenden Bedingungen erfüllt ist:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+(a) & $T$ ist beschränkt,\\
+(b) & $M$ ist beschränkt und $T$ fast sicher endlich,\\
+(c) & $\mathbb{E}[T] < \infty$ und die Zuwächse sind beschränkt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis von (a)}
+Sei $T \le N$. Man schreibe
+\[ M_T = M_0 + \sum_{n=0}^{N-1} \mathbf 1_{\{T > n\}}\,(M_{n+1}-M_n) . \]
+Das Ereignis $\{T > n\}$ ist aus $\mathcal F_n$ bestimmbar, also
+\[ \mathbb{E}\bigl[\mathbf 1_{\{T>n\}}(M_{n+1}-M_n)\bigr] = \mathbb{E}\bigl[\mathbf 1_{\{T>n\}}\,\underbrace{\mathbb{E}[M_{n+1}-M_n \mid \mathcal F_n]}_{=\,0}\bigr] = 0 . \]
+Summieren liefert die Behauptung. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein Anhaltekriterium der Welt macht aus einem fairen Spiel ein günstiges.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Satz, der alle Spielsysteme widerlegt.} Die Verdopplungsstrategie --- nach jedem Verlust den Einsatz verdoppeln --- scheint sicheren Gewinn zu bringen; sie verletzt jede der drei Bedingungen, weil das nötige Kapital unbeschränkt ist. Aufgabe 8.3 rechnet nach, was sie tatsächlich leistet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was man damit ausrechnet}
+
+\begin{merksatz}
+\boxtitel{Der Spielerruin, ein zweites Mal}
+Kapitel~1 löste ihn über eine Differenzengleichung. Mit Satz 8.3 geht es in zwei Zeilen.
+
+\schritt{Faires Spiel}
+$S_n$ ist ein Martingal, $T$ die Zeit bis zum Erreichen von $-a$ oder $b$:
+\[ 0 = \mathbb{E}[S_T] = -a\,r + b\,(1-r) \quad\Longrightarrow\quad r = \frac{b}{a+b} \]
+
+\schritt{Unfaires Spiel}
+Mit $p \ne \tfrac12$ ist $M_n = (q/p)^{S_n}$ ein Martingal:
+\[ 1 = \mathbb{E}[M_T] = \left(\frac qp\right)^{-a}r + \left(\frac qp\right)^{b}(1-r) \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$p$ & $a=b=10$ & $a=10$, $b=100$\\
+\midrule
+$0{,}50$ & $0{,}500$ & $0{,}909$\\
+$0{,}49$ & $0{,}599$ & $0{,}994$\\
+$0{,}47$ & $0{,}769$ & $1{,}000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Prozent Nachteil je Spiel machen aus fünfzig Prozent Ruinwahrscheinlichkeit sechzig --- und gegen einen zehnmal reicheren Gegner neunundneunzig.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Hausvorteil beim Roulette beträgt $2{,}7$ Prozent}, bei einfachen Chancen also $p = 0{,}486$. Die Spielbank braucht keinen großen Vorteil --- sie braucht nur genug Kapital und genug Spiele. Beides hat sie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein überraschendes Ergebnis: Muster beim Münzwurf}
+Wie lange dauert es im Mittel, bis eine bestimmte Folge erscheint?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Muster} & \textbf{erwartete Würfe} & \textbf{simuliert}\\
+\midrule
+KZK & $\mathbf{10}$ & $9{,}92$\\
+KKK & $\mathbf{14}$ & $13{,}98$\\
+KKZ & $8$ & \\
+KZZ & $8$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Alle vier Muster sind gleich wahrscheinlich --- und man wartet auf KKK im Mittel vierzehn Würfe, auf KKZ nur acht.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Es kommt auf die Selbstüberlappung an.} Scheitert KKK im letzten Schritt, so ist alles verloren und man beginnt von vorn; scheitert KKZ, so hat man womöglich schon wieder ein KK. Muster, die sich selbst überlappen, warten länger --- obwohl sie gleich häufig vorkommen. Beides zugleich ist nur scheinbar widersprüchlich: Die überlappenden Muster treten in Häufungen auf, mit langen Lücken dazwischen.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Beweis über ein Martingal}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man stelle sich vor jeder Runde einen neuen Spieler auf, der einen Euro auf den ersten Buchstaben des Musters setzt und bei Gewinn alles auf den zweiten, und so fort --- ein faires Spiel. \textbf{Zum Zeitpunkt $T$ hat der Spielsaal genau $\mathbb{E}[T]$ Euro eingenommen und zahlt an die noch laufenden Spieler $\sum_k 2^{k}$ aus}, summiert über alle Längen $k$, bei denen der Anfang des Musters mit seinem Ende übereinstimmt. Optionales Stoppen setzt beides gleich: $\mathbb{E}[T] = 2^{3}+2^{1} = 10$ für KZK und $2^{3}+2^{2}+2^{1} = 14$ für KKK.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wenn die Bedingungen fehlen}
+Bei der Irrfahrt sei $T$ die Zeit bis zum erstmaligen Erreichen von $+1$. Nach Kapitel~1 ist $T$ fast sicher endlich.
+
+\[ \mathbb{E}[S_T] = 1 \ne 0 = \mathbb{E}[S_0] \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Satz versagt --- obwohl das Spiel fair und die Stoppzeit endlich ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Grund: $\mathbb{E}[T] = \infty$, und der Prozess ist nach unten unbeschränkt. \textbf{Man gewinnt mit Sicherheit einen Euro --- braucht dafür aber im Mittel unendlich viel Zeit und zwischenzeitlich beliebig viel Kapital.} Das ist die Verdopplungsstrategie in ihrer reinsten Form, und es zeigt, dass die technischen Bedingungen in Satz 8.3 nicht Zierrat sind, sondern der eigentliche Inhalt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Ein Martingal erkennen}
+Welche der folgenden Prozesse sind Martingale?
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+(a) & Der Kontostand beim Roulette mit fester Einsatzhöhe.\\
+(b) & Die Zahl der bisher aufgetretenen Krisen eines Patienten.\\
+(c) & Der Anteil roter Kugeln in einer Pólya-Urne (gezogene Kugel wird mit einer gleichfarbigen zurückgelegt).\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a)}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Supermartingal, kein Martingal} --- der Erwartungswert fällt um den Hausvorteil je Runde.
+\end{minipage}
+\end{center}
+
+\schritt{(b)}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Submartingal} --- die Zahl kann nur wachsen.
+\end{minipage}
+\end{center}
+
+\schritt{(c) --- die Rechnung}
+Bei $r$ roten von $n$ Kugeln ist der Anteil $X_n = r/n$. Nach der Ziehung:
+\[ \mathbb{E}[X_{n+1} \mid \mathcal F_n] = \frac{r}{n}\cdot\frac{r+1}{n+1} + \frac{n-r}{n}\cdot\frac{r}{n+1} = \frac{r(r+1)+r(n-r)}{n(n+1)} = \frac{r(n+1)}{n(n+1)} = \frac{r}{n} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Martingal --- obwohl der Prozess sich selbst verstärkt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die überraschendste der drei Antworten.} Die Urne verstärkt jede Abweichung: Wer vorn liegt, wird häufiger gezogen. Trotzdem ist der erwartete Anteil morgen der heutige. Der Prozess konvergiert --- nach dem Konvergenzsatz des nächsten Kapitels --- gegen einen \kursiv{zufälligen} Grenzwert, der gleichverteilt ist. \textbf{Verstärkung und Fairness schließen einander nicht aus}, und Modelle dieser Art beschreiben, wie sich Marktanteile, Zitierhäufigkeiten und Krankheitserreger-Stämme festsetzen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Die Spieldauer}
+Bestimmen Sie mit dem Martingal $S_n^2 - n$ die erwartete Dauer des fairen Spielerruins.
+
+\loesung
+\schritt{Schritt 1 --- Optionales Stoppen}
+\[ \mathbb{E}\bigl[S_T^{2}\bigr] - \mathbb{E}[T] = 0 \quad\Longrightarrow\quad \mathbb{E}[T] = \mathbb{E}\bigl[S_T^{2}\bigr] \]
+
+\schritt{Schritt 2 --- Die Randwerte einsetzen}
+Mit $r = b/(a+b)$ für den Ruin bei $-a$:
+\[ \mathbb{E}[S_T^{2}] = a^{2}\,\frac{b}{a+b} + b^{2}\,\frac{a}{a+b} = \frac{ab(a+b)}{a+b} = ab \]
+
+\[ \mathbb{E}[T] = a\,b \]
+
+\schritt{Schritt 3 --- Die Zahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{2.4cm}P{2.2cm}@{}}
+\toprule
+$a$ & $b$ & \textbf{Dauer} & \textbf{Ruin}\\
+\midrule
+$10$ & $10$ & $100$ & $0{,}500$\\
+$10$ & $100$ & $1000$ & $0{,}909$\\
+$100$ & $100$ & $10\,000$ & $0{,}500$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Dauer wächst quadratisch mit dem Kapital, die Ruinwahrscheinlichkeit gar nicht.} Wer mit zehnmal so viel Geld spielt, verliert mit derselben Wahrscheinlichkeit --- nur hundertmal langsamer. Dieselbe Quadratregel taucht in Kapitel~10 als typische Durchquerungszeit der Brownschen Bewegung wieder auf.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- Die Verdopplungsstrategie}
+Ein Spieler setzt einen Euro; nach jedem Verlust verdoppelt er. Beim ersten Gewinn hört er auf. Was leistet die Strategie bei einem Kapital von $2^{k}-1$ Euro?
+
+\loesung
+\schritt{Schritt 1 --- Der Gewinnfall}
+Gewinnt er im $j$-ten Spiel, so hat er $2^{j-1}$ gewonnen und vorher $1+2+\cdots+2^{j-2} = 2^{j-1}-1$ verloren --- Nettogewinn genau ein Euro.
+
+\schritt{Schritt 2 --- Der Verlustfall}
+Verliert er $k$-mal hintereinander, so ist sein Kapital aufgebraucht:
+\[ 1+2+\cdots+2^{k-1} = 2^{k}-1 \]
+
+\schritt{Schritt 3 --- Die Bilanz bei fairem Spiel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.2cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+$k$ & \textbf{Kapital} & $\Pr[\text{Gewinn}]$ & \textbf{Verlust}\\
+\midrule
+$5$ & $31$ & $0{,}969$ & $31$\\
+$10$ & $1023$ & $0{,}999$ & $1023$\\
+$20$ & $10^{6}$ & $0{,}999999$ & $10^{6}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\[ \mathbb{E}[\text{Gewinn}] = (1-2^{-k})\cdot1 - 2^{-k}\,(2^{k}-1) = 1-2^{-k} - 1 + 2^{-k} = 0 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Genau null --- wie Satz 8.3 verlangt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Warum sie trotzdem überzeugt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Strategie gewinnt fast immer ein wenig und selten sehr viel zu verlieren} --- eine Verteilung, die der Mensch nach Band 24, Kapitel~12 systematisch falsch einschätzt. Sie ist das Urbild aller Anlagestrategien mit \enquote{stetigen kleinen Erträgen}: Versicherungsverkauf, Optionsschreiben, Renditejagd in illiquiden Märkten. Der Erwartungswert ist null oder negativ; sichtbar wird das erst im seltenen Fall, und dann auf einmal.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Und beim unfairen Spiel}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beim Roulette ist der Erwartungswert je gesetztem Euro negativ, und da die Strategie den Einsatz vervielfacht, wird der erwartete Verlust größer, nicht kleiner. \textbf{Kein Einsatzsystem ändert den Hausvorteil} --- es verschiebt nur die Verteilung der Ergebnisse.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Wort aus dem Reitsport}
+\enquote{Martingal} heißt ursprünglich ein Hilfszügel, der dem Pferd das Hochwerfen des Kopfes verwehrt --- und im Französischen des 18.\ Jahrhunderts auch die Verdopplungsstrategie beim Spiel.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Jean Ville} übertrug den Ausdruck 1939 auf den mathematischen Begriff. \textbf{Er hatte ihn eingeführt, um die Definition des Zufälligen von \Person{Richard von Mises} zu widerlegen}: Mises hatte gefordert, dass keine Auswahlregel den Mittelwert einer Zufallsfolge verändern dürfe; Ville zeigte, dass diese Bedingung zu schwach ist, und schlug stattdessen vor, dass kein Einsatzsystem das Kapital unbeschränkt wachsen lässt.}
+\end{minipage}
+\end{center}
+
+\schritt{Doob}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Joseph Doob} baute daraus in den 1940er Jahren die Theorie --- optionales Stoppen, Ungleichungen, Konvergenzsätze --- und veröffentlichte sie 1953 in \kursiv{Stochastic Processes}. \textbf{Er soll gesagt haben, das Buch sei geschrieben worden, weil ihn niemand verstand}, wenn er die Ergebnisse mündlich vortrug. Der Beweis von Satz 8.3 in diesem Kapitel ist im Wesentlichen seiner.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Finanzmathematik}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Der Hauptsatz der Preistheorie besagt, dass ein Markt genau dann frei von sicheren Gewinnen ist, wenn es ein Wahrscheinlichkeitsmaß gibt, unter dem die abgezinsten Kurse ein Martingal bilden} --- Kapitel~13. Damit wird aus dem Wort für ein Spielsystem der Grundbegriff einer Billionenindustrie.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Martingale heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Testen ohne festes Ende} & Verfahren, die jederzeit ausgewertet werden dürfen.\\
+\textbf{Konzentration} & Ungleichungen für abhängige Folgen --- Band 22.\\
+\textbf{Wettbasierte Statistik} & Belege als Kapital eines fiktiven Spielers.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein klassischer Test verliert seine Gültigkeit, wenn man zwischendurch hineinsieht --- das multiple Testen aus Band 17. \textbf{Martingalbasierte Verfahren erlauben dagegen beliebiges Mitverfolgen}: Ihre Gültigkeit beruht gerade auf Satz 8.3, wonach kein Anhaltekriterium den Erwartungswert verschiebt. Für klinische Studien ist das von erheblicher Tragweite, weil es erlaubt, eine Studie zu beenden, sobald der Nachweis erbracht ist, ohne den Fehler erster Art zu erhöhen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 8.1} & faires Spiel: morgen $=$ heute im Mittel\\
+\textbf{Definition 8.2} & Stoppzeit ohne Blick in die Zukunft\\
+\textbf{Satz 8.3} & optionales Stoppen, drei Bedingungen\\
+\textbf{Anwendungen} & Ruin, Dauer $ab$, Musterwartezeiten\\
+\textbf{Der Bruchfall} & endliche Stoppzeit genügt nicht\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein faires Spiel bleibt im Mittel, wo es ist. Das nächste Kapitel zeigt, dass es dennoch fast sicher irgendwohin läuft --- und dass dieser Grenzwert die stärkste Aussage der ganzen Theorie trägt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

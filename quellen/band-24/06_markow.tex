@@ -1,0 +1,353 @@
+\chapter{Über zwanzig Jahre}
+
+\section{Warum Bäume nicht reichen}
+
+\begin{merksatz}
+\boxtitel{Das Problem der Wiederholung}
+Frau B.\ lebt nicht ein Jahr, sondern womöglich zwanzig. In jedem Jahr kann dasselbe geschehen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.8cm}@{}}
+\toprule
+\textbf{Jahre} & \textbf{Äste im Baum} & \\
+\midrule
+$1$ & $3$ & übersichtlich\\
+$5$ & $243$ & mühsam\\
+$20$ & $3{,}5\cdot10^{9}$ & \textcolor{akzent}{unmöglich}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Baum wächst exponentiell mit der Zeit. Ein Zustandsmodell nicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 6.1 --- Markow-Modell}
+Man beschreibt den Patienten durch einen Zustand aus einer endlichen Menge und gibt für jeden Zyklus --- meist ein Jahr --- die Übergangswahrscheinlichkeiten an. Jeder Zustand trägt einen Nutzen je Zyklus.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\scriptsize}]
+\node[knotenb] (g) at (0,0) {G};
+\node[knotenr] (s) at (2.6,1.0) {S};
+\node[knotenr] (b) at (2.6,-1.0) {B};
+\node[knotenb, fill=grau!25] (t) at (5.2,0) {T};
+\draw[kanted, -{Stealth[length=4pt]}] (g)--(s) node[midway,above left,color=grau] {$0{,}02$};
+\draw[kanted, -{Stealth[length=4pt]}] (g)--(b) node[midway,below left,color=grau] {$0{,}03$};
+\draw[kanted, -{Stealth[length=4pt]}] (s)--(t) node[midway,above right,color=grau] {$0{,}10$};
+\draw[kanted, -{Stealth[length=4pt]}] (b)--(t) node[midway,below right,color=grau] {$0{,}05$};
+\draw[kanted, -{Stealth[length=4pt]}] (g) to[bend right=35] (t) node[midway,below,color=grau] {$0{,}03$};
+\draw[kanted, -{Stealth[length=4pt]}] (g) to[loop left, looseness=5] (g);
+\draw[kanted, -{Stealth[length=4pt]}] (s) to[loop above, looseness=5] (s);
+\draw[kanted, -{Stealth[length=4pt]}] (b) to[loop below, looseness=5] (b);
+\end{tikzpicture}
+\end{center}
+\kursiv{G gesund, S nach Schlaganfall, B nach Blutung, T tot --- ein aufnehmender Zustand.}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Markow-Eigenschaft}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der nächste Zustand hängt nur vom jetzigen ab, nicht vom Weg dorthin --- Band 4, Kapitel~12. \textbf{Das ist eine starke Annahme}: Ob ein Patient vor zehn Jahren einen Schlaganfall hatte oder gestern, soll für seine Zukunft gleich sein. Man behilft sich mit Zwischenzuständen (\enquote{erstes Jahr nach Schlaganfall}) oder mit Merkmalen im Zustand --- und bezahlt mit deren Zahl.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Nutzen über die Zeit}
+
+\begin{merksatz}
+\boxtitel{Qualitätsbereinigte Lebensjahre}
+\[ \text{QALY} = \sum_{t} \ \sum_{z} \pi_t(z)\,u(z)\,\frac{1}{(1+d)^{t}} \]
+mit der Zustandsverteilung $\pi_t$ und der Diskontrate $d$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Ein QALY} & ein Jahr bei voller Gesundheit. Zwei Jahre mit $u = 0{,}5$ zählen ebenso.\\
+\textbf{Diskontierung} & Künftige Jahre zählen weniger --- meist drei Prozent je Jahr, auch für Gesundheit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum auch Gesundheit diskontiert wird}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Diskontiert man Geld, aber nicht Gesundheit, so ließe sich jedes Programm verbessern, indem man es um ein Jahr verschiebt --- die Kosten schrumpfen, der Nutzen nicht. \textbf{Dieses Argument von \Person{Emil Keeler} und \Person{Shan Cretin} zwingt zur gleichen Rate für beides}, wenn man widerspruchsfreie Entscheidungen will. Ob man Gesundheit überhaupt diskontieren soll, bleibt umstritten; Kapitel~14 kommt darauf zurück.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.2cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Faktor} & \textbf{ein Jahr wert}\\
+\midrule
+$0$ & $1{,}000$ & $1{,}000$\\
+$10$ & $0{,}744$ & $0{,}744$\\
+$20$ & $0{,}554$ & $0{,}554$\\
+$40$ & $0{,}307$ & $0{,}307$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Der Leitfall über zwanzig Jahre}
+
+\begin{merksatz}
+\boxtitel{Das gerechnete Modell}
+Vier Zustände, jährliche Zyklen, Diskontierung drei Prozent, Nutzen $1{,}00$ / $0{,}45$ / $0{,}85$, Sterblichkeit $3$ / $10$ / $5$ Prozent, Kosten der Behandlung $600$ Euro im Jahr, eines Schlaganfalls $12\,000$, einer Blutung $6000$ Euro.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+& \textbf{QALY} & \textbf{Kosten}\\
+\midrule
+ohne & $9{,}068$ & $5838$ €\\
+mit & $\mathbf{10{,}448}$ & $10\,290$ €\\
+\midrule
+Differenz & $+1{,}381$ & $+4452$ €\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\[ \text{Kosten je gewonnenem QALY} = \frac{4452}{1{,}381} = \mathbf{3225}\ \text{€} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Aus achtzehn Tausendstel im ersten Jahr werden über zwanzig Jahre knapp anderthalb Lebensjahre in voller Gesundheit.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Gewinn des Zustandsmodells: Es macht sichtbar, wie sich kleine jährliche Unterschiede summieren.} Wer nur das erste Jahr rechnet, unterschätzt jede vorbeugende Maßnahme --- und zwar umso mehr, je jünger der Patient ist. Zugleich wächst mit der Zeit die Unsicherheit: Alle Übergangswahrscheinlichkeiten werden zwanzig Jahre lang als konstant unterstellt, und das ist sicher falsch.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Vier bekannte Fallen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Zykluslänge} & Ein Jahr ist grob: Wer im Januar erkrankt, verbringt das Jahr krank. Die Halbzykluskorrektur mildert das.\\
+\textbf{Gedächtnis\-losigkeit} & Das Rückfallrisiko hängt in Wahrheit von der Vorgeschichte ab.\\
+\textbf{Feste Raten} & Alter, Fortschritt der Medizin und Therapietreue ändern sich über zwanzig Jahre.\\
+\textbf{Horizont} & Wer nach zehn statt zwanzig Jahren abschneidet, halbiert den Nutzen vorbeugender Maßnahmen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Zeile ist die folgenreichste und zugleich die am leichtesten zu missbrauchende: \textbf{Die Wahl des Zeithorizonts entscheidet häufiger über das Ergebnis als jede Wahrscheinlichkeit im Modell.} Deshalb verlangen die meisten Bewertungsbehörden den Lebenszeithorizont --- und deshalb sind Modelle mit kurzem Horizont mit Vorsicht zu lesen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.1 --- Zwei Zyklen von Hand}
+Berechnen Sie die Zustandsverteilung nach zwei Jahren unter Behandlung, ausgehend von $100$ Prozent gesund.
+
+\loesung
+\schritt{Schritt 1 --- Nach einem Jahr}
+Aus dem Zustand gesund: $2$ Prozent Schlaganfall, $3$ Prozent Blutung, $3$ Prozent Tod, Rest bleibt.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{2.0cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+\textbf{G} & \textbf{S} & \textbf{B} & \textbf{T}\\
+\midrule
+$0{,}9200$ & $0{,}0200$ & $0{,}0300$ & $0{,}0300$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Die Übergänge nach S und B werden anschließend mit ihrer eigenen Sterblichkeit belegt; hier der Übersicht halber erst im Folgejahr.}
+
+\schritt{Schritt 2 --- Nach zwei Jahren}
+\begin{align*}
+\text{G} &= 0{,}9200\cdot0{,}92 = 0{,}8464\\
+\text{S} &= 0{,}9200\cdot0{,}02 + 0{,}0200\cdot0{,}90 = 0{,}0184+0{,}0180 = 0{,}0364\\
+\text{B} &= 0{,}9200\cdot0{,}03 + 0{,}0300\cdot0{,}95 = 0{,}0276+0{,}0285 = 0{,}0561\\
+\text{T} &= 1 - 0{,}8464-0{,}0364-0{,}0561 = 0{,}0611
+\end{align*}
+
+\schritt{Schritt 3 --- Die Probe}
+\[ 0{,}8464+0{,}0364+0{,}0561+0{,}0611 = 1{,}0000 \quad \checkmark \]
+
+\schritt{Schritt 4 --- Der Nutzen dieser zwei Jahre}
+\[ \text{Jahr 1: } 1\cdot1{,}00 = 1{,}000 \]
+\[ \text{Jahr 2: } \frac{0{,}9200\cdot1{,}00 + 0{,}0200\cdot0{,}45 + 0{,}0300\cdot0{,}85}{1{,}03} = \frac{0{,}9545}{1{,}03} = 0{,}9267 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Man sieht beide Verluste zugleich: den durch Krankheit und Tod und den durch Diskontierung.} Über zwanzig Jahre summiert sich das auf die $10{,}448$ QALY aus Abschnitt 6.3 --- gut die Hälfte dessen, was zwanzig gesunde Jahre wären.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.2 --- Was der Zeithorizont macht}
+Wie ändert sich das Verhältnis von Kosten und Nutzen bei zehn statt zwanzig Jahren?
+
+\loesung
+\schritt{Schritt 1 --- Die Größenordnung}
+Der Nutzengewinn entsteht überwiegend spät --- verhinderte Schlaganfälle wirken über Jahre. Die Kosten fallen dagegen von Anfang an an.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+\textbf{Horizont} & $\Delta$QALY & $\Delta$Kosten & \textbf{je QALY}\\
+\midrule
+$5$ Jahre & $0{,}31$ & $2100$ € & $6800$ €\\
+$10$ Jahre & $0{,}72$ & $3300$ € & $4580$ €\\
+$20$ Jahre & $1{,}38$ & $4452$ € & $\mathbf{3225}$ €\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Derselbe Eingriff erscheint über fünf Jahre doppelt so teuer je gewonnenem Jahr wie über zwanzig.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Und die Umkehrung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei einer Behandlung mit \kursiv{späten} Schäden --- etwa einem Krebsrisiko nach Jahren --- kehrt sich das um: \textbf{Ein kurzer Horizont lässt sie besser aussehen, als sie ist.} In beiden Richtungen gilt: Wer den Horizont wählt, wählt das Ergebnis mit. Deshalb gehört er zu den Angaben, die vor der Rechnung festzulegen sind.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.3 --- Lohnt sich die Diskontierung?}
+Wie ändert sich das Ergebnis ohne Diskontierung ($d = 0$)?
+
+\loesung
+\schritt{Schritt 1 --- Die Wirkung}
+Ohne Diskontierung zählen späte Jahre voll. Der Nutzengewinn wächst stärker als die Kosten, weil er später anfällt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{2.0cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+$d$ & $\Delta$QALY & $\Delta$Kosten & \textbf{je QALY}\\
+\midrule
+$0\,\%$ & $1{,}79$ & $5470$ € & $3060$ €\\
+$3\,\%$ & $1{,}38$ & $4452$ € & $3225$ €\\
+$5\,\%$ & $1{,}17$ & $3920$ € & $3350$ €\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Verhältnis ändert sich wenig, weil Kosten und Nutzen ähnlich zeitlich verteilt sind.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Wann es doch entscheidend wird}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Impfungen} & Kosten heute, Nutzen in Jahrzehnten --- die Rate entscheidet.\\
+\textbf{Vorsorge} & Ebenso.\\
+\textbf{Akuttherapie} & Beides sofort --- die Rate ist gleichgültig.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bei der Impfung eines Kindes gegen ein Karzinom im Erwachsenenalter liegen vierzig Jahre zwischen Kosten und Nutzen} --- mit drei Prozent schrumpft der Nutzen auf $31$ Prozent. Ob das vernünftig ist, ist keine Rechenfrage: Es bedeutet, dass ein Lebensjahr eines heute Fünfzigjährigen dreimal so viel zählt wie eines desselben Menschen mit neunzig. Kapitel~14 nimmt den Einwand auf.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Vom Lebensjahr zum QALY}
+\Person{Klarman} und Mitarbeiter rechneten 1968 erstmals qualitätsgewichtete Lebensjahre --- für den Vergleich von Nierentransplantation und Dialyse.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Name QALY setzte sich in den 1970er Jahren durch. \textbf{Die Markow-Modellierung kam über \Person{Beck} und \Person{Pauker} 1983 in die Medizin} --- aus der Operationsforschung, wo sie längst Standard war. Beide Entwicklungen zusammen machten die gesundheitsökonomische Bewertung erst möglich.}
+\end{minipage}
+\end{center}
+
+\schritt{Und ein Streit, der nie endete}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Gegen das QALY wurde von Anfang an eingewandt, es benachteilige alte und behinderte Menschen: \textbf{Wer weniger Lebenszeit vor sich hat oder in einem Zustand mit niedrigerem Nutzenwert lebt, kann durch dieselbe Behandlung weniger gewinnen.} In mehreren Ländern ist die Verwendung von QALY für Zulassungsentscheidungen deshalb gesetzlich eingeschränkt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Modelle heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Ereignissimulation} & Einzelne Patienten mit Vorgeschichte statt Zustandsanteile.\\
+\textbf{Modelle aus Daten} & Übergangsraten aus Registern statt aus Studienmittelwerten.\\
+\textbf{Offene Rechenwerke} & Gemeinsam gepflegte Modelle für ganze Krankheitsbilder.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Eine Ereignissimulation verfolgt gedachte einzelne Patienten und darf sich merken, was ihnen widerfahren ist --- die Markow-Eigenschaft entfällt. \textbf{Der Preis ist Rechenzeit und die Notwendigkeit, viel mehr Zusammenhänge zu schätzen}, oft aus denselben dünnen Daten. Mehr Modellfreiheit heißt hier wie in Band 22 nicht automatisch bessere Ergebnisse.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 6.1} & Zustände statt Äste\\
+\textbf{QALY} & Zeit mal Nutzen, diskontiert\\
+\textbf{Der Leitfall} & $+1{,}38$ QALY für $4452$ Euro\\
+\textbf{Horizont} & entscheidet oft mehr als die Daten\\
+\textbf{Der Bruchfall} & feste Raten über zwanzig Jahre\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~II. Bisher stand die Handlung am Anfang fest. Teil~III lässt sie sich über die Zeit ändern --- und braucht dafür ein Verfahren, das rückwärts rechnet.}
+\end{minipage}
+\end{center}
+\end{merksatz}

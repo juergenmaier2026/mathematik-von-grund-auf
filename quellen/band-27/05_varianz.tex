@@ -1,0 +1,364 @@
+\chapter{Weniger Streuung ohne mehr Läufe}
+
+\section{Das Prinzip}
+
+\begin{merksatz}
+\boxtitel{Zwei Wege zu mehr Genauigkeit}
+Nach Satz 1.2 ist der Fehler $\sigma/\sqrt n$. Es gibt genau zwei Stellschrauben:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.4cm}@{}}
+\toprule
+\textbf{$n$ erhöhen} & Viermal so viele Läufe für die halbe Breite. Teuer, aber ohne Nachdenken.\\
+\textbf{$\sigma$ senken} & Denselben Erwartungswert durch eine andere Zufallsgröße mit kleinerer Varianz schätzen. Billig, aber es braucht einen Einfall.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dieses Kapitel ist die Sammlung der Einfälle. Jeder ersetzt $Y$ durch ein $Y'$ mit $\mathbb E[Y'] = \mathbb E[Y]$ und $\operatorname{Var}[Y'] < \operatorname{Var}[Y]$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine Varianzsenkung um den Faktor $30$ entspricht dreißigmal so vielen Läufen} --- die Tabelle in Abschnitt~5.2 wird sie liefern, für eine Zeile mehr Programmtext. Die Verfahren heißen \Begriff{Varianzreduktion}, und sie sind der Grund, warum erfahrene Simulierer mit tausend Läufen genauer sind als Anfänger mit einer Million.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Antithetische Variablen}
+
+\begin{merksatz}
+\boxtitel{Satz 5.1 --- antithetische Paare}
+Sei $Y = g(U)$ mit $U$ gleichverteilt auf $[0,1]$ und $g$ monoton. Dann hat
+\[ Y' = \frac{g(U) + g(1-U)}{2} \]
+denselben Erwartungswert wie $Y$, und
+\[ \operatorname{Var}[Y'] = \frac{\operatorname{Var}[Y]}{2}\,(1+\rho), \qquad \rho = \operatorname{Corr}[g(U), g(1-U)] \le 0 . \]
+
+\schritt{Beweis}
+$1-U$ ist ebenfalls gleichverteilt, also $\mathbb E[g(1-U)] = \mathbb E[g(U)]$. Die Varianz des Mittels zweier Größen mit gleicher Varianz $\sigma^2$ und Korrelation $\rho$ ist $\sigma^2(1+\rho)/2$ (Band 17, Kapitel~5). Ist $g$ monoton, so ist $g(1-U)$ groß, wenn $g(U)$ klein ist, und $\rho\le0$ --- das ist die Ungleichung von \Person{Chebyshev} für gleichsinnig geordnete Funktionen, Band 15, Kapitel~4. $\blacksquare$
+
+\schritt{Der Vergleich bei gleichem Aufwand}
+Ein antithetisches Paar kostet zwei Auswertungen, also vergleicht man $n/2$ Paare mit $n$ Einzelwerten:
+\[ \frac{\operatorname{Var}[\bar Y']}{\operatorname{Var}[\bar Y]} = 1+\rho \]
+
+\schritt{Beispiel $\int_0^1 e^{x}\,dx$, $n=10\,000$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{SE} & \textbf{Varianzfaktor}\\
+\midrule
+naiv & $0{,}0048$ & $1$\\
+antithetisch & $0{,}0009$ & $\mathbf{31}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die Korrelation von $e^{U}$ und $e^{1-U}$ beträgt $-0{,}968$; $1+\rho = 0{,}032 \approx 1/31$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das funktioniert, weil $e^x$ nahezu linear ist}: Für eine exakt lineare Funktion wäre $\rho=-1$ und die Varianz null --- das Paar träfe den Mittelwert immer genau. Je krummer $g$, desto schwächer die Wirkung; für $g(u) = (u-\tfrac12)^2$ ist $g(U)=g(1-U)$, $\rho=+1$, und das Verfahren verdoppelt die Varianz. Monotonie ist die Bedingung, nicht die Garantie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Kontrollvariablen}
+
+\begin{merksatz}
+\boxtitel{Satz 5.2 --- Kontrollvariable}
+Sei $C$ eine Zufallsgröße mit bekanntem Erwartungswert $\mathbb E[C] = c$, die in derselben Simulation anfällt. Dann hat für jedes $\beta$
+\[ Y' = Y - \beta\,(C - c) \]
+den Erwartungswert $\mathbb E[Y]$, und die Varianz ist minimal für
+\[ \beta^{*} = \frac{\operatorname{Cov}[Y,C]}{\operatorname{Var}[C]}, \qquad \operatorname{Var}[Y'] = \operatorname{Var}[Y]\,(1-\rho^{2}_{YC}) . \]
+
+\schritt{Beweis}
+$\mathbb E[C-c]=0$ erledigt den Erwartungswert. Die Varianz $\operatorname{Var}[Y] - 2\beta\operatorname{Cov}[Y,C] + \beta^2\operatorname{Var}[C]$ ist eine Parabel in $\beta$ mit Scheitel bei $\beta^*$; Einsetzen gibt den Rest. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist die Regression aus Band 26: $Y$ auf $C$ regressieren, und den Teil von $Y$ behalten, den $C$ nicht erklärt.}
+\end{minipage}
+\end{center}
+
+\schritt{Wo die Kontrollvariable herkommt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Die Eingabe selbst} & $U$ mit $\mathbb E[U] = \tfrac12$; beim Integral $\int e^x$ ist $\rho = 0{,}992$, Varianzfaktor $56$.\\
+\textbf{Eine Zählgröße} & Die Zahl der Ankünfte, Erwartungswert $\lambda T$.\\
+\textbf{Ein Mittelwert} & Die mittlere gezogene Verweildauer, Erwartungswert $4{,}79$.\\
+\textbf{Ein einfacheres Modell} & Die Abweisungsrate desselben Laufs mit exponentieller statt lognormaler Verweildauer, Erlang-exakt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Intensivstation, $200$ Läufe à $1\,000$ Tage}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{1.4cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Kontrolle} & $\rho$ & \textbf{Streuung} & \textbf{Faktor}\\
+\midrule
+keine & & $0{,}0132$ & $1$\\
+Zahl der Ankünfte & $0{,}72$ & $0{,}0092$ & $2{,}1$\\
+mittlere Verweildauer & $0{,}52$ & $0{,}0112$ & $1{,}4$\\
+beide & & $\mathbf{0{,}0059}$ & $\mathbf{5{,}0}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Lauf mit zufällig vielen Ankünften weist zufällig viele Patienten ab --- das ist Rauschen, das man kennt, und was man kennt, kann man abziehen.} Beide Kontrollen zusammen halbieren den Fehler und ersetzen damit $800$ weitere Läufe. Das $\beta^*$ wird aus denselben Läufen geschätzt; das macht $Y'$ um eine Größenordnung $1/n$ verzerrt, was bei $200$ Läufen niemand merkt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Konditionierung}
+
+\begin{merksatz}
+\boxtitel{Satz 5.3 --- bedingter Erwartungswert als Schätzer}
+Für jede Zufallsgröße $Z$ gilt
+\[ \mathbb E\big[\mathbb E[Y\mid Z]\big] = \mathbb E[Y], \qquad \operatorname{Var}\big[\mathbb E[Y\mid Z]\big] \le \operatorname{Var}[Y] . \]
+Kann man $\mathbb E[Y\mid Z]$ ausrechnen, so simuliere man nur $Z$ und mittle die Formel.
+
+\schritt{Beweis}
+Turmregel und Varianzzerlegung aus Band 25, Kapitel~2: $\operatorname{Var}[Y] = \operatorname{Var}[\mathbb E[Y|Z]] + \mathbb E[\operatorname{Var}[Y|Z]]$, und der zweite Summand ist nicht negativ. $\blacksquare$
+
+\schritt{Beispiel: $P(X+Y>4)$ für unabhängige $X,Y\sim\operatorname{Exp}(1)$}
+Statt beide zu ziehen und zu zählen, ziehe man nur $X$ und mittle
+\[ P(Y > 4-X \mid X) = e^{-(4-X)^{+}} . \]
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Schätzung} & \textbf{SE} & \textbf{Faktor}\\
+\midrule
+zählen & $0{,}0917$ & $0{,}0027$ & $1$\\
+konditionieren & $0{,}0916$ & $0{,}0016$ & $2{,}9$\\
+\midrule
+exakt $5e^{-4}$ & $0{,}0916$ & & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Zähler liefert nur Nullen und Einsen; der Konditionierer liefert für jedes $X$ eine Wahrscheinlichkeit zwischen beiden.} Ein glatter Wert streut weniger als ein Indikator --- das ist der ganze Trick. In der Intensivstation heißt das: Statt zu zählen, wen man abweist, notiere man bei jeder Ankunft, ob die Station voll ist. Es ist derselbe Schätzer. Aber wer die Belegung zu jedem Zeitpunkt kennt, kann die Abweisungswahrscheinlichkeit als Zeitanteil \enquote{Station voll} schätzen --- das nutzt die Zeit zwischen den Ankünften mit, die der Zähler verschenkt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was zusammen wirkt}
+
+\begin{merksatz}
+\boxtitel{Die vier Verfahren und ihre Bedingungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{3.0cm}P{3.0cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{braucht} & \textbf{versagt bei}\\
+\midrule
+gemeinsame Zahlen & Synchronität & Verwerfung, Verzweigung\\
+antithetisch & Monotonie & symmetrischem $g$\\
+Kontrollvariable & bekanntes $\mathbb E[C]$ & $\rho\approx0$\\
+Konditionierung & Formel für $\mathbb E[Y|Z]$ & keiner --- nur Rechenarbeit\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Verfahren lassen sich kombinieren, aber nicht beliebig.} Antithetische Paare und gemeinsame Zahlen vertragen sich; Kontrollvariablen passen zu allem; Konditionierung ändert, was simuliert wird, und muss zuerst kommen. Was in diesem Kapitel fehlt, ist das stärkste Verfahren von allen, das Wichtigkeitsstichprobe heißt und Kapitel~6 ganz gehört --- weil es auch das gefährlichste ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wenn die Reduktion die Varianz erhöht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Antithetisch bei $g(u) = |u-\tfrac12|$} & $g(U) = g(1-U)$: Jedes Paar besteht aus zwei gleichen Werten, $\rho=1$, Varianz verdoppelt bei gleichem Aufwand.\\
+\textbf{Kontrolle mit geschätztem $c$} & Wer $\mathbb E[C]$ nicht kennt und es aus denselben Läufen schätzt, zieht $\beta(C-\bar C) = 0$ ab --- es passiert nichts. Wer es aus einer kleinen Vorsimulation nimmt, addiert deren Fehler.\\
+\textbf{Falsches $\beta$} & Jedes $\beta$ mit $0<\beta<2\beta^*$ senkt die Varianz; jedes andere erhöht sie. Ein Vorzeichenfehler verdoppelt sie.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Kein Verfahren dieses Kapitels verfälscht den Erwartungswert} --- das ist ihre Sicherheit: Im schlimmsten Fall wird die Schätzung ungenauer, nie falsch. Man prüfe die Wirkung immer, indem man die Streuung mit und ohne Verfahren misst. Eine Varianzreduktion, deren Faktor man nicht gemessen hat, ist eine Vermutung.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.1 --- Antithetisch bei einer Wartezeit}
+Die Verweildauer wird durch Inversion $L = F^{-1}(U)$ erzeugt. Warum erzeugt $F^{-1}(1-U)$ ein antithetisches Gegenstück, und was passiert, wenn die Abweisungsrate als Funktion der Verweildauern nicht monoton ist?
+
+\loesung
+\schritt{Schritt 1 --- Monotonie der Inversion}
+$F^{-1}$ ist monoton wachsend, also ist $F^{-1}(1-U)$ klein, wenn $F^{-1}(U)$ groß ist: Dem Lauf mit langen Verweildauern steht ein Lauf mit kurzen gegenüber.
+
+\schritt{Schritt 2 --- Die Abweisungsrate}
+Mehr Verweildauer heißt mehr Abweisungen, bei jeder einzelnen Verweildauer und damit in der Summe. Die Abbildung von den $U$ auf die Abweisungsrate ist monoton in jedem Argument.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Also sind die beiden Läufe negativ korreliert, und Satz 5.1 gilt --- mehrdimensional, mit derselben Begründung.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Wenn die Monotonie bricht}
+Nimmt man auch die Ankunftszeiten antithetisch, so ist die Wirkung unklar: Eine frühe Ankunft kann die Abweisungen erhöhen (Station voll) oder nicht (Station leer). Für Zwischenankunftszeiten gilt die Monotonie zwar auch --- längere Abstände, weniger Abweisungen --- aber die Korrelation ist schwach, weil die Abweisung von der Reihenfolge abhängt, nicht nur von den Werten.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Deshalb wendet man das Verfahren auf die Zahlen an, deren Wirkung man versteht, und misst den Faktor.} Für die Verweildauern allein liegt er bei etwa $1{,}3$; mit den Ankünften zusammen kaum höher. Die $31$ vom Integral sind ein Sonderfall glatter Funktionen; bei ereignisgetriebenen Systemen sind Faktoren um $1{,}5$ schon gut.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.2 --- Das optimale $\beta$ nachrechnen}
+Für $Y = e^{U}$ und $C = U$: Berechnen Sie $\beta^*$ und den Varianzfaktor exakt.
+
+\loesung
+\schritt{Schritt 1 --- Die Momente}
+\[ \mathbb E[U] = \tfrac12, \quad \operatorname{Var}[U] = \tfrac1{12}, \quad \mathbb E[e^U] = e-1, \quad \mathbb E[e^{2U}] = \tfrac{e^2-1}{2} \]
+\[ \operatorname{Var}[e^U] = \tfrac{e^2-1}{2} - (e-1)^2 = 0{,}2420 \]
+
+\schritt{Schritt 2 --- Die Kovarianz}
+\[ \mathbb E[U e^U] = \int_0^1 u e^u\,du = [ue^u - e^u]_0^1 = 1 \]
+\[ \operatorname{Cov}[e^U,U] = 1 - \tfrac12(e-1) = 0{,}1409 \]
+
+\schritt{Schritt 3 --- $\beta^*$ und $\rho$}
+\[ \beta^* = \frac{0{,}1409}{1/12} = 1{,}691, \qquad \rho = \frac{0{,}1409}{\sqrt{0{,}2420\cdot 1/12}} = 0{,}9918 \]
+
+\schritt{Schritt 4 --- Der Faktor}
+\[ \frac{1}{1-\rho^2} = \frac{1}{1-0{,}9837} = 61 \]
+Die Simulation in Abschnitt~5.3 gab $56$ --- der Unterschied ist die Unsicherheit eines geschätzten Varianzverhältnisses aus $200$ Wiederholungen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{$\beta^* = 1{,}69$ ist nahe an $e-1 = 1{,}72$, der mittleren Steigung von $e^x$} --- die Kontrollvariable zieht die lineare Näherung ab und lässt nur die Krümmung als Rauschen übrig. Das ist allgemein: Je besser eine lineare Funktion von $C$ das $Y$ trifft, desto größer der Faktor. Die Kontrollvariable ist die Taylor-Entwicklung ersten Grades, als Schätzer verkleidet.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.3 --- Alles zusammen}
+Für den Vergleich zwölf gegen dreizehn Betten standen drei Verfahren zur Wahl: gemeinsame Zufallszahlen (Faktor $45$), Kontrolle durch beide Zählgrößen (Faktor $5{,}0$), Konditionierung auf die Belegung. Wie würden Sie vorgehen, und welchen Faktor erwarten Sie?
+
+\loesung
+\schritt{Schritt 1 --- Die Reihenfolge}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+$1$ & Konditionierung: Zeitanteil \enquote{voll} statt Zählung --- ändert den Schätzer.\\
+$2$ & Gemeinsame Zufallszahlen mit getrennten Strömen für beide Varianten.\\
+$3$ & Kontrollvariablen auf die Differenz anwenden, nicht auf jede Variante einzeln.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Warum auf die Differenz}
+Die Zahl der Ankünfte ist in beiden Varianten dieselbe --- gemeinsame Zahlen. Ihre Wirkung auf die Abweisungen ist in beiden fast gleich und kürzt sich in der Differenz weitgehend heraus. Was bleibt, ist der Teil, der gerade nicht gleich ist, und der korreliert schwächer mit $C$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Faktoren multiplizieren sich nicht. Gemeinsame Zahlen und Kontrollvariablen entfernen zum Teil dasselbe Rauschen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Erwartung}
+Gemeinsame Zahlen $45$; Kontrollen auf die Differenz vielleicht noch $1{,}5$; Konditionierung $1{,}3$. Zusammen etwa $60$ bis $80$ --- gemessen, nicht gerechnet.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Faktor $60$ bedeutet: $30$ Läufe leisten, was sonst $1\,800$ leisten würden.} Bei einem Modell, das in Sekunden läuft, ist das Bequemlichkeit. Bei einem Modell, in dem ein Lauf eine Stunde dauert, weil es ein ganzes Krankenhaus mit Operationssälen, Notaufnahme und Normalstationen abbildet, ist es der Unterschied zwischen einer Antwort heute und einer nächste Woche.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Die Erfinder der Varianzreduktion}
+Die Verfahren sind fast so alt wie die Methode, und sie stammen aus derselben Werkstatt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Herman Kahn}, später als Stratege des Kalten Krieges bekannt, schrieb 1949 bei RAND den ersten Bericht über Varianzreduktion bei Neutronentransport --- Kontrollvariablen und gemeinsame Zahlen stehen schon darin. \textbf{Die antithetischen Variablen erfand \Person{Hammersley} 1956 in Oxford}, zusammen mit \Person{Morton}; ihr Buch mit \Person{Handscomb} von 1964 ist die erste Monographie des Fachs und noch heute lesbar.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Name}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\enquote{Antithetisch} --- gegensätzlich --- wählte Hammersley, weil das zweite Element eines Paars dem ersten entgegenläuft. \textbf{Die Idee, Konditionierung als Schätzer zu nutzen, heißt in der Literatur Rao-Blackwellisierung}, nach einem Satz aus Band 17 über die Verbesserung von Schätzern durch suffiziente Statistiken; \Person{Casella} und \Person{Robert} prägten die Anwendung auf Simulation 1996.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Varianzreduktion heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Mehrebenen-Monte-Carlo} & Grobes Modell oft, feines Modell selten, Differenzen als Kontrolle --- Kapitel~9.\\
+\textbf{Gelernte Kontrollen} & Ein neuronales Netz als Kontrollvariable, trainiert auf dieselben Läufe.\\
+\textbf{Quasi-Monte-Carlo} & Gar keine Zufallszahlen, sondern gleichmäßig gestreute Punkte --- Kapitel~6.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Mehrebenen-Verfahren von \Person{Giles} aus dem Jahr 2008 ist die wichtigste Neuerung des Fachs seit Jahrzehnten}: Es nimmt Satz 5.2 und wendet ihn rekursiv an --- das grobe Modell kontrolliert das feine, ein noch gröberes das grobe. Für stochastische Differentialgleichungen aus Band 25 senkt es die Kosten um Größenordnungen; Kapitel~9 rechnet es vor.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 5.1} & antithetisch: Faktor $1/(1+\rho)$ bei Monotonie\\
+\textbf{Satz 5.2} & Kontrollvariable: Faktor $1/(1-\rho^2)$\\
+\textbf{Satz 5.3} & Konditionierung: nie schlechter\\
+\textbf{Die Regel} & Faktor immer messen\\
+\textbf{Der Bruchfall} & Symmetrie, geschätztes $c$, falsches $\beta$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle Verfahren dieses Kapitels haben eines gemeinsam: Sie ziehen aus der richtigen Verteilung. Das nächste Kapitel zieht aus einer falschen --- absichtlich --- und gewinnt damit Faktoren von einer Million. Oder verliert alles.}
+\end{minipage}
+\end{center}
+\end{merksatz}

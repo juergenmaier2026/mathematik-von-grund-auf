@@ -1,0 +1,213 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Begriffe und Formeln}
+
+\begin{merksatz}
+\boxtitel{Teil I bis III}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\operatorname{Cov}(x,u) \ne 0$ & endogen (1.1)\\
+$\hat\beta \to \beta + \operatorname{Cov}(x,u)/\operatorname{Var}(x)$ & Verzerrung (1.2)\\
+$\beta\,\sigma_x^{2}/(\sigma_x^{2}+\sigma_e^{2})$ & Dämpfung durch Messfehler\\
+$-b\,w_v + d\,w_u$ & was die Gerade zeigt (2.1)\\
+Ausschlüsse $\ge$ endogen $-1$ & Abzählbedingung (2.3)\\
+$\operatorname{Cov}(z,y)/\operatorname{Cov}(z,x)$ & Instrument (3.1)\\
+$F$ der ersten Stufe & Instrumentstärke\\
+$\mathbb{E}[g(w,\theta)] = 0$ & Momentenbedingung (4.1)\\
+$\bar g^{\top}W\bar g$, $W = S^{-1}$ & GMM (4.3), (4.4)\\
+$J = n\,\bar g^{\top}\hat S^{-1}\bar g \sim \chi^{2}_{m-k}$ & Hansen (4.5)\\
+$\Pr[y=1\mid x] = F(x^{\top}\beta)$ & Logit, Probit (5.1)\\
+$\beta_j\,f(x^{\top}\beta)$ & Randeffekt (5.2)\\
+$x^{\top}\beta + \sigma\lambda(x^{\top}\beta/\sigma)$ & Tobit, bedingt (5.4)\\
+$x^{\top}\beta + \rho\sigma\lambda(z^{\top}\gamma)$ & Heckman (6.2)\\
+$\tilde y_{it} = y_{it}-\bar y_i$ & Innerhalb (7.2)\\
+$-(1+\rho)/(T-1)$ & Nickell (8.2)\\
+$\Delta_R - \Delta_K$ & doppelte Differenz (9.2)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Teil IV und V}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\gamma_k = \operatorname{Cov}(y_t,y_{t-k})$ & Stationarität (10.1)\\
+$\operatorname{Var} = \sigma^{2}/(1-\phi^{2})$, $\rho_k = \phi^{k}$ & AR(1) (10.3)\\
+$\hat\phi \approx \phi - (1+3\phi)/T$ & Hurwicz\\
+$(1+\phi)/(1-\phi)$ & Varianzfaktor des Mittels (10.4)\\
+$\ln 0{,}5/\ln\phi$ & Halbwertszeit\\
+$t\text{-Statistik} \sim \sqrt T$ & Scheinregression (11.1)\\
+$-2{,}89$ statt $-1{,}64$ & Dickey-Fuller (11.2)\\
+$y_t - \beta x_t$ stationär & Kointegration (12.1)\\
+Fehler $\sim 1/T$ & Superkonsistenz (12.2)\\
+$-3{,}37$ & Engle-Granger (12.3)\\
+$\Delta y = \alpha u_{t-1} + \gamma\Delta x$ & Fehlerkorrektur (12.4)\\
+$\beta + \gamma(\phi-1)$ & reduzierte Form (13.1)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz worauf beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{3.6cm}P{1.0cm}P{3.4cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{beruht auf}\\
+\midrule
+Verzerrung der KQ & $1$ & Gesetz der großen Zahlen\\
+Gewogenes Mittel & $2$ & Gleichgewicht auflösen\\
+Instrumentschätzer & $3$ & Kovarianz ist linear\\
+Konsistenz GMM & $4$ & Eindeutigkeit, Grenzübergang\\
+Beste Gewichtung & $4$ & inverse Varianz (Band 17)\\
+Randeffekt & $5$ & Kettenregel\\
+Tobit, Heckman & $5$, $6$ & abgeschnittene Normalverteilung\\
+Innerhalb & $7$ & Mittel abziehen\\
+Nickell & $8$ & Mittel enthält Zukunft\\
+Differenzen-Instrument & $8$ & Störung reicht nur eine Periode zurück\\
+Doppelte Differenz & $9$ & parallele Trends einsetzen\\
+AR(1) stationär & $10$ & geometrische Reihe (Band 3)\\
+Varianz des Mittels & $10$ & Summe der Kovarianzen\\
+Scheinregression & $11$ & Brownsche Integrale (Band 25)\\
+Superkonsistenz & $12$ & Nenner wächst wie $T^{2}$\\
+Lucas & $13$ & Erwartung einsetzen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Was nicht bewiesen wurde}
+
+\begin{merksatz}
+\boxtitel{Drei Auslassungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{1.2cm}P{3.2cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+Rangbedingung & $2$ & Greene\zit{10}\\
+Gleichmäßige Konvergenz (GMM) & $4$ & Hayashi\zit{12}\\
+Darstellungssatz von Granger & $12$ & Hamilton\zit{11}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle übrigen Sätze des Bandes sind vollständig bewiesen} --- darunter die Verzerrung der kleinsten Quadrate, das gewogene Mittel bei Simultanität, der Instrumentschätzer, die Innerhalb-Transformation, die doppelte Differenz, die Stationarität des AR(1), der Varianzfaktor abhängiger Mittel und die Lucas-Beziehung. Die Grenzverteilungen der Kapitel~11 und 12 wurden hergeleitet, soweit Band 25 die Mittel dafür liefert, und sonst simuliert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von Working bis zur gestaffelten Differenz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{1.3cm}P{3.0cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Ereignis}\\
+\midrule
+$1926$ & Yule & Unsinnskorrelationen\\
+$1927$ & \textbf{Working} & \textbf{Was Nachfragekurven zeigen}\\
+$1927$ & Yule, Slutsky & autoregressive Prozesse\\
+$1928$ & Wright & Instrumentschätzer, Anhang B\\
+$1943$ & \textbf{Haavelmo} & \textbf{Identifikation, Simultanität}\\
+$1950$ & Hurwicz & Verzerrung des AR-Schätzers\\
+$1958$ & Tobin & zensierte Regression\\
+$1961$ & Mundlak & feste Effekte\\
+$1969$ & Granger & Granger-Kausalität\\
+$1970$ & Box, Jenkins & ARMA als Rezept\\
+$1973$ & McFadden & diskrete Wahl als Nutzen\\
+$1974$ & \textbf{Granger, Newbold} & \textbf{Scheinregression}\\
+$1974$ & Newhouse & das Versicherungsexperiment beginnt\\
+$1976$ & \textbf{Lucas} & \textbf{die Kritik}\\
+$1979$ & Heckman & Auswahl als Spezifikationsfehler\\
+$1979$ & Dickey, Fuller & Einheitswurzeltest\\
+$1980$ & Sims & Vektorautoregression\\
+$1981$ & Nickell & Verzerrung im dynamischen Panel\\
+$1982$ & \textbf{Hansen} & \textbf{GMM}\\
+$1983$ & Leamer & \kursiv{Take the Con Out}\\
+$1987$ & \textbf{Engle, Granger} & \textbf{Kointegration}\\
+$1988$ & Johansen & Rangtest\\
+$1991$ & Arellano, Bond & dynamische Panels\\
+$1991$ & Angrist, Krueger & Geburtsquartal\\
+$1994$ & Card, Krueger & Mindestlohn\\
+$1995$ & Bound u.\,a. & schwache Instrumente\\
+$2003$ & Abadie & synthetische Kontrolle\\
+$2008$ & --- & Oregon-Lotterie\\
+$2010$ & Angrist, Pischke & die Glaubwürdigkeits\-wende\\
+$2018$ & Chernozhukov u.\,a. & doppeltes maschinelles Lernen\\
+$2021$ & Goodman-Bacon u.\,a. & gestaffelte Differenz\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Begriff} & \textbf{Bedeutung}\\
+\midrule
+\endhead
+Abzählbedingung & Ausschlüsse zählen (2.3)\\
+Auswahlverzerrung & wer in den Daten ist (6)\\
+Dämpfung & Messfehler zieht zur Null (1)\\
+Dickey-Fuller & Test auf Einheitswurzel (11.2)\\
+Doppelte Differenz & vorher/nachher, mit/ohne (9)\\
+Einheitswurzel & $\phi = 1$, Schocks bleiben (10)\\
+Endogen & korreliert mit der Störung (1.1)\\
+Erste Stufe & Regressor auf Instrument (3)\\
+Fehlerkorrektur & Rückkehr zum Gleichgewicht (12.4)\\
+Feste Effekte & alles Zeitkonstante (7.1)\\
+GMM & gewichtete Momente (4.3)\\
+Granger-Kausalität & Vorhersagbarkeit, nicht Ursache (12)\\
+Heckman-Korrektur & Auswahl als Regressor (6.2)\\
+Identifikation & bestimmbar bei unendlich Daten (2.2)\\
+Instrument & verschiebt $x$, nicht $u$ (3)\\
+Kointegration & gemeinsamer Trend (12.1)\\
+Logit, Probit & Wahrscheinlichkeit als Index (5.1)\\
+Lucas-Kritik & Koeffizient hängt von Regel ab (13.1)\\
+Nickell-Verzerrung & feste Effekte, dynamisch (8.2)\\
+Parallele Trends & gleiche Entwicklung ohne Reform (9.1)\\
+Randeffekt & Wirkung, nicht Koeffizient (5.2)\\
+Reduzierte Form & Parameter mal Regel (13)\\
+Scheinregression & Irrfahrten korrelieren immer (11)\\
+Schwaches Instrument & kleines $F$, große Streuung (3)\\
+Simultanität & $y$ wirkt auf $x$ zurück (1)\\
+Stationarität & Rückkehr zum Mittel (10.1)\\
+Superkonsistenz & Fehler wie $1/T$ (12.2)\\
+Tobit & zensiert bei null (5.3)\\
+Überidentifikation & mehr Momente als Parameter (4.5)\\
+Verbotener Vergleich & behandelt gegen behandelt (9)\\
+Zweiteilmodell & Ob und Wieviel getrennt (5)\\
+\bottomrule
+\end{longtable}}
+\end{center}
+\end{merksatz}

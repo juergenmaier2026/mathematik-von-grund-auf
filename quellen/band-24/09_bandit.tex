@@ -1,0 +1,292 @@
+\chapter{Erkunden oder ausnutzen}
+
+\section{Der Fall}
+
+\begin{merksatz}
+\boxtitel{Zwei Gerinnungshemmer}
+Für Frau B.\ stehen zwei Mittel zur Verfügung. Das ältere ist gut untersucht, das neuere könnte besser sein --- oder schlechter. Man erfährt es nur, indem man es gibt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Gabe ist zugleich Behandlung und Versuch. Wer immer das bisher Beste wählt, lernt nichts mehr.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Widerstreit zwischen Erkunden und Ausnutzen}, und er ist nicht auflösbar, sondern nur abwägbar: Jede Erkundung kostet den heutigen Patienten etwas und nützt den künftigen. Kapitel~7 und 8 haben die Folgen einer Entscheidung über die Zeit verfolgt; hier wirkt die Entscheidung zusätzlich auf das \kursiv{Wissen}.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 9.1 --- mehrarmiger Bandit}
+$K$ Handlungen mit unbekannten Erfolgswahrscheinlichkeiten $p_1,\ldots,p_K$. In jedem Zug wählt man eine, beobachtet Erfolg oder Misserfolg und lernt daraus. Die \Begriff{Reue} nach $T$ Zügen ist
+\[ \text{Reue} = T\cdot\max_k p_k - \mathbb{E}\Bigl[\sum_{t=1}^{T} \text{Erfolg}_t\Bigr] . \]
+\end{definition}
+
+\section{Drei Strategien}
+
+\begin{merksatz}
+\boxtitel{Wie man erkundet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Zufällig erkunden} & Mit Wahrscheinlichkeit $\varepsilon$ eine zufällige Handlung, sonst die bisher beste.\\
+\textbf{Optimistisch} & Jede Handlung mit ihrer oberen Vertrauensschranke bewerten und die beste davon wählen.\\
+\textbf{Nachziehen} & Aus der Nachverteilung jeder Handlung eine Zahl ziehen und die größte wählen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Gerechnet}
+Zwei Mittel mit Erfolgsraten $0{,}45$ und $0{,}55$, $1000$ Behandlungen, $500$ Wiederholungen:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Strategie} & \textbf{mittlere Reue} & \textbf{Anteil}\\
+\midrule
+zufällig ($50/50$) & $50{,}0$ & $100\,\%$\\
+$\varepsilon = 0{,}1$ & $18{,}6$ & $37\,\%$\\
+optimistisch & $24{,}9$ & $50\,\%$\\
+Nachziehen & $\mathbf{12{,}3}$ & $\mathbf{25\,\%}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Statt fünfzig verlorener Erfolge nur zwölf --- bei tausend Behandlungen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Nachziehen ist ein bayessches Verfahren aus Band 17}: Man zieht aus der Nachverteilung und wählt, was gerade am besten aussieht. Es erkundet von selbst genau so viel, wie die Unsicherheit es rechtfertigt --- viel am Anfang, fast nichts am Ende. Die Strategie stammt von \Person{William Thompson} aus dem Jahr 1933 und wurde erst achtzig Jahre später allgemein benutzt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wie gut es höchstens geht}
+Für jede Strategie wächst die Reue mindestens wie $\ln T$ --- man kann das Erkunden nicht ganz vermeiden.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$T$ & $\ln T$ & \textbf{Reue je Zug}\\
+\midrule
+$100$ & $4{,}6$ & hoch\\
+$1000$ & $6{,}9$ & \\
+$10^{6}$ & $13{,}8$ & fast null\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Preis des Lernens wächst logarithmisch, der Nutzen linear.} Deshalb lohnt das Erkunden umso mehr, je mehr künftige Patienten es gibt --- und umso weniger, je näher das Ende des Zeitraums rückt. Das ist derselbe Gedanke wie in Kapitel~7: Wer nur noch ein Angebot vor sich hat, nimmt, was kommt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was am Krankenbett anders ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Wer zahlt} & Der erkundende Patient trägt den Nachteil, künftige Patienten den Vorteil. Die Rechnung mittelt darüber hinweg.\\
+\textbf{Einwilligung} & Eine Zuteilung, die von früheren Ergebnissen abhängt, muss erklärt werden können.\\
+\textbf{Verzögerte Ergebnisse} & Der Erfolg zeigt sich nach Monaten --- bis dahin hat man weiterbehandelt.\\
+\textbf{Wechselnde Lage} & Erfolgsraten ändern sich mit Resistenzen und Patientenmischung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die erste Zeile ist keine Rechenfrage, sondern eine ethische.} Ein Bandit-Verfahren behandelt den einzelnen Patienten als Mittel zum Lernen --- gerechtfertigt nur, wenn er davon weiß und zustimmt. Genau das leistet die randomisierte Studie aus Band 23, Kapitel~3: Sie erkundet ausdrücklich, auf begrenzte Zeit und mit Einwilligung.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.1 --- Der Preis des Erkundens}
+Bei $\varepsilon = 0{,}1$ wird in zehn Prozent der Züge zufällig gewählt. Wie groß ist die Reue, wenn das bessere Mittel sicher bekannt ist?
+
+\loesung
+\schritt{Schritt 1 --- Die Rechnung}
+In zehn Prozent der Züge wird zufällig gewählt, davon in der Hälfte das schlechtere:
+\[ 1000\cdot0{,}10\cdot0{,}5\cdot(0{,}55-0{,}45) = 1000\cdot0{,}05\cdot0{,}10 = 5{,}0 \]
+
+\schritt{Schritt 2 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Anteil} & \textbf{Reue}\\
+\midrule
+unvermeidbar (Erkunden) & $5{,}0$\\
+tatsächlich gemessen & $18{,}6$\\
+\midrule
+Rest (Lernen) & $13{,}6$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Zwei Drittel der Reue entstehen, bevor das Verfahren überhaupt weiß, welches Mittel besser ist.} Danach bleibt nur noch die feste Erkundungsrate übrig --- die man deshalb im Verlauf senken sollte. Verfahren mit fallendem $\varepsilon$ erreichen die logarithmische Grenze; das feste $\varepsilon$ erzeugt dagegen auch nach Jahren noch fünf verlorene Erfolge je tausend Behandlungen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.2 --- Wann lohnt das Erkunden?}
+Ein neues Mittel könnte um zwei Prozentpunkte besser sein. Der Versuch an $200$ Patienten kostet erwartungsgemäß $1{,}0$ Prozentpunkt je Patient. Ab welcher Zahl künftiger Patienten lohnt er?
+
+\loesung
+\schritt{Schritt 1 --- Die Kosten}
+\[ 200\cdot0{,}010 = 2{,}0 \ \text{Ereignisse} \]
+
+\schritt{Schritt 2 --- Der Nutzen}
+Ist das neue Mittel besser --- sagen wir mit Wahrscheinlichkeit $\tfrac12$ ---, so gewinnt jeder künftige Patient $0{,}02$:
+\[ \tfrac12\cdot N\cdot0{,}02 = 0{,}01\,N \]
+
+\schritt{Schritt 3 --- Die Schwelle}
+\[ 0{,}01\,N \ \ge\ 2{,}0 \quad\Longrightarrow\quad N \ \ge\ 200 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{künftige Patienten} & \textbf{Nutzen} & \textbf{lohnt?}\\
+\midrule
+$100$ & $1{,}0$ & nein\\
+$200$ & $2{,}0$ & gleichgültig\\
+$10\,000$ & $100$ & ja, deutlich\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der EVPI aus Kapitel~3, auf eine Bevölkerung hochgerechnet} --- und dieselbe Rechnung, mit der Förderer über Studien entscheiden. Sie erklärt auch, warum Studien zu seltenen Erkrankungen schwer zu rechtfertigen sind: Der Nenner der künftigen Patienten ist klein, die Kosten je Teilnehmer aber nicht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.3 --- Nachziehen von Hand}
+Mittel A: drei Erfolge aus vier. Mittel B: sieben aus zwölf. Welches wird beim Nachziehen häufiger gewählt?
+
+\loesung
+\schritt{Schritt 1 --- Die Nachverteilungen}
+Mit gleichmäßiger Vorverteilung ergibt sich nach Band 17, Kapitel~11:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+& \textbf{Verteilung} & \textbf{Mittel} & \textbf{Streuung}\\
+\midrule
+A & $\text{Beta}(4,\,2)$ & $0{,}667$ & $0{,}178$\\
+B & $\text{Beta}(8,\,6)$ & $0{,}571$ & $0{,}127$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Wahl}
+A hat den höheren Mittelwert \kursiv{und} die größere Streuung --- es wird häufiger gewählt, und zwar in etwa zwei Dritteln der Züge.
+
+\schritt{Schritt 3 --- Was das Verfahren leistet}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Streuung sorgt dafür, dass auch B gelegentlich zum Zuge kommt} --- und je öfter, desto unsicherer es ist. Ein Verfahren, das nur den Mittelwert vergleicht, würde B nie mehr wählen und könnte seinen Irrtum nie bemerken. Die Unsicherheit selbst steuert also das Erkunden, ohne dass man eine Erkundungsrate festlegen müsste.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Und der klinische Einwand}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach vier bzw.\ zwölf Patienten ist die Datenlage so dünn, dass beide Verteilungen weit überlappen. \textbf{Ein Verfahren, das hier schon zu zwei Dritteln A wählt, wäre in einer Zulassungsstudie nicht haltbar} --- es verletzt die Vorabfestlegung aus Band 23, Kapitel~11. Angepasste Studienformen lösen das, indem sie die Zuteilungswahrscheinlichkeiten nach einem vorher festgelegten Plan verschieben.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Verfahren, das im Krieg verboten wurde}
+Das Banditenproblem wurde im Zweiten Weltkrieg von britischen und amerikanischen Mathematikern bearbeitet.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Peter Whittle} berichtete später den Scherz, man habe vorgeschlagen, das Problem über Deutschland abzuwerfen, \enquote{damit auch deren Mathematiker daran zugrunde gehen}. \textbf{Eine allgemeine Lösung fand erst \Person{John Gittins} 1979}: Jeder Arm erhält einen Index, und man wählt den größten --- ein Ergebnis, das damals als überraschend einfach galt und dessen Beweis dennoch schwierig blieb.}
+\end{minipage}
+\end{center}
+
+\schritt{Thompson}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{William Thompson} veröffentlichte 1933 in \kursiv{Biometrika} das Nachziehverfahren --- ausdrücklich für klinische Versuche, damit \enquote{nicht mehr Patienten als nötig die schlechtere Behandlung erhalten}. \textbf{Der Aufsatz wurde sechzig Jahre lang praktisch nicht zitiert} und ist heute eines der meistbenutzten Verfahren in der Werbetechnik.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Erkunden heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Angepasste Studien} & Zuteilungswahrscheinlichkeiten verschieben sich mit den Zwischenergebnissen.\\
+\textbf{Plattformstudien} & Mehrere Behandlungen gleichzeitig, Arme kommen und gehen.\\
+\textbf{Kontextbezogen} & Der beste Arm hängt vom Patienten ab --- Band 22, Kapitel~14.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In der Pandemie 2020 prüften Plattformstudien binnen Monaten ein Dutzend Behandlungen mit einem gemeinsamen Kontrollarm. \textbf{Sie fanden mehrere wirksame Mittel und schlossen unwirksame Arme früh} --- das ist genau die Abwägung dieses Kapitels, organisatorisch umgesetzt. Die statistischen Fragen der Vorabfestlegung sind dabei nicht leichter geworden, sondern nur besser geregelt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 9.1} & Reue gegenüber dem besten Arm\\
+\textbf{Drei Strategien} & zufällig, optimistisch, nachziehend\\
+\textbf{Nachziehen} & Unsicherheit steuert das Erkunden\\
+\textbf{$\ln T$} & der unvermeidbare Preis\\
+\textbf{Der Bruchfall} & wer erkundet, zahlt für andere\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~III. Bisher gab es ein Ziel: den Erwartungsnutzen. Teil~IV nimmt drei Annahmen zurück --- ein Ziel, bekannte Wahrscheinlichkeiten, und dass Menschen so entscheiden, wie sie sollten.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,382 @@
+\chapter{Die Kettenregel mit Zusatz}
+
+\section{Die Formel}
+
+\begin{merksatz}
+\boxtitel{Satz 12.1 --- die Itō-Formel}
+Ist $f$ zweimal stetig differenzierbar, so gilt
+\[ f(W_t) = f(0) + \int_0^t f'(W_s)\,\dd W_s + \frac12\int_0^t f''(W_s)\,\dd s . \]
+In Kurzschreibweise:
+\[ \dd f(W_t) = f'(W_t)\,\dd W_t + \tfrac12 f''(W_t)\,\dd t . \]
+
+\schritt{Beweis}
+\kursiv{Taylor bis zur zweiten Ordnung} auf jedem Teilstück:
+\[ f(W_{t_{k+1}}) - f(W_{t_k}) = f'(W_{t_k})\,\Delta W_k + \tfrac12 f''(W_{t_k})\,(\Delta W_k)^{2} + R_k \]
+
+\kursiv{Summieren:}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+erster Term & strebt gegen das Itō-Integral (Definition 11.1).\\
+zweiter Term & Die Summe $\sum f''(W_{t_k})(\Delta W_k)^{2}$ strebt gegen $\int f''\,\dd s$, weil $(\Delta W_k)^{2}$ sich im Mittel wie $\Delta t_k$ verhält (Satz 10.2).\\
+Restglied & verschwindet, da $|R_k| \le C|\Delta W_k|^{3}$ und $\sum|\Delta W_k|^{3} \to 0$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Merkregel lautet $(\dd W)^{2} = \dd t$ --- das Quadrat eines Zuwachses ist nicht vernachlässigbar, sondern von erster Ordnung in der Zeit.}
+\end{minipage}
+\end{center}
+
+\kursiv{Probe mit $f(x) = x^{2}$:}
+\[ W_t^{2} = 2\int_0^t W\,\dd W + \int_0^t 1\,\dd s = 2\int_0^t W\,\dd W + t \]
+--- genau das Ergebnis aus Kapitel~11. \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die allgemeine Form}
+Erfüllt $X$ die Gleichung $\dd X_t = a_t\,\dd t + b_t\,\dd W_t$, so gilt für $f(t,x)$
+\[ \dd f(t,X_t) = \left(\frac{\partial f}{\partial t} + a_t\frac{\partial f}{\partial x} + \frac{b_t^{2}}{2}\frac{\partial^{2} f}{\partial x^{2}}\right)\dd t + b_t\frac{\partial f}{\partial x}\,\dd W_t . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Term mit der zweiten Ableitung ist der ganze Unterschied zur gewöhnlichen Kettenregel} --- und er verbindet die Prozesstheorie mit den partiellen Differentialgleichungen aus Band 14: Der Klammerausdruck ist genau der Wärmeleitungsoperator. Aus dieser Verbindung entsteht in Kapitel~13 die Preisformel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die wichtigste Gleichung}
+
+\begin{merksatz}
+\boxtitel{Geometrische Brownsche Bewegung}
+\[ \dd S_t = \mu\,S_t\,\dd t + \sigma\,S_t\,\dd W_t \]
+--- Zuwächse proportional zum Stand, wie bei Zinsen, Populationen und Kursen.
+
+\schritt{Die Lösung}
+Man wende Satz 12.1 auf $f(x) = \ln x$ an:
+\[ \dd(\ln S_t) = \frac{1}{S_t}\,\dd S_t - \frac{1}{2S_t^{2}}\,(\dd S_t)^{2} = \left(\mu - \frac{\sigma^{2}}{2}\right)\dd t + \sigma\,\dd W_t \]
+--- denn $(\dd S)^{2} = \sigma^{2}S^{2}\,\dd t$. Integrieren:
+\[ S_t = S_0\,\exp\left(\Bigl(\mu-\frac{\sigma^{2}}{2}\Bigr)t + \sigma W_t\right) \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Im Exponenten steht $\mu - \sigma^{2}/2$, nicht $\mu$. Dieser Abzug ist der Zusatzterm der Itō-Formel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was der Abzug bedeutet}
+$S_0 = 1$, $\mu = 0{,}08$, $\sigma = 0{,}20$:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+\textbf{Jahre} & \textbf{Erwartungs\-wert} & \textbf{Median} & \textbf{Verhältnis}\\
+\midrule
+$1$ & $1{,}083$ & $1{,}062$ & $0{,}980$\\
+$10$ & $2{,}226$ & $1{,}822$ & $0{,}819$\\
+$30$ & $\mathbf{11{,}02}$ & $\mathbf{6{,}05}$ & $0{,}549$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Simulation mit $200\,000$ Pfaden: Median $6{,}02$, Mittelwert $11{,}01$.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nach dreißig Jahren liegen $71$ Prozent aller Verläufe \kursiv{unter} dem Erwartungswert.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Erwartungswert beschreibt hier fast niemanden} --- er wird von wenigen sehr großen Verläufen getragen. Das ist der Bruchfall aus Kapitel~7 in seiner folgenreichsten Gestalt: Wer eine Geldanlage mit der mittleren Rendite bewirbt, nennt eine Zahl, die die Mehrheit der Anleger nicht erreicht.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Schwankungsabzug}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{3.2cm}@{}}
+\toprule
+$\sigma$ & \textbf{Abzug} & \textbf{Median\-wachstum}\\
+\midrule
+$0{,}10$ & $0{,}005$ & $7{,}5\,\%$\\
+$0{,}20$ & $0{,}020$ & $6{,}0\,\%$\\
+$0{,}40$ & $0{,}080$ & $0{,}0\,\%$\\
+$0{,}60$ & $0{,}180$ & $-10{,}0\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bei $\sigma = 0{,}4$ und $\mu = 0{,}08$ wächst der typische Verlauf gar nicht mehr}, obwohl der Erwartungswert weiter mit acht Prozent steigt. Schwankung allein kostet Wachstum --- ein Ergebnis, das für Populationen ebenso gilt wie für Vermögen und das erklärt, warum Streuung nicht nur ein Risikomaß, sondern ein Ertragsabzug ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Rückkehr zum Mittel}
+
+\begin{merksatz}
+\boxtitel{Der Ornstein-Uhlenbeck-Prozess}
+\[ \dd X_t = \theta\,(\bar x - X_t)\,\dd t + \sigma\,\dd W_t \]
+--- eine Rückstellkraft zum Mittelwert, überlagert von Rauschen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{theoretisch} & \textbf{simuliert}\\
+\midrule
+Mittelwert & $\bar x = 1{,}00$ & $0{,}99$\\
+Streuung & $\sigma/\sqrt{2\theta} = 0{,}250$ & $0{,}232$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{$\theta = 2$, $\sigma = 0{,}5$, $200\,000$ Schritte.}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dies ist das stetige Gegenstück zur stationären Kette aus Kapitel~3} --- der Prozess läuft nicht davon, sondern pendelt um einen Wert. Er beschreibt Zinssätze, Körpertemperatur, Membranpotentiale und die Position eines Teilchens in einer Falle. Die Halbwertszeit der Erinnerung ist $\ln 2/\theta$; bei $\theta = 2$ also gut vier Zehntel Zeiteinheiten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was man beim Rechnen falsch macht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Zusatzterm vergessen} & Der häufigste Fehler: Man wendet die gewohnte Kettenregel an und erhält systematisch falsche Drift.\\
+\textbf{Mittelwert und Median} & $\mathbb{E}[\ln S] \ne \ln \mathbb{E}[S]$ --- die Jensensche Ungleichung aus Band 20.\\
+\textbf{Simulation} & Das Euler-Verfahren konvergiert nur mit Ordnung $\tfrac12$ in der Schrittweite.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Schritte} & \textbf{mittlerer Fehler} & \textbf{Verhältnis}\\
+\midrule
+$10$ & $0{,}0077$ & ---\\
+$100$ & $0{,}0025$ & $3{,}1$\\
+$1000$ & $0{,}00078$ & $3{,}2$\\
+$10\,000$ & $0{,}00024$ & $3{,}2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Zehnmal feinere Schritte bringen nur den Faktor $\sqrt{10} = 3{,}16$} --- gegenüber Faktor $10$ beim gewöhnlichen Euler-Verfahren aus Band 14. Wer vierstellige Genauigkeit braucht, zahlt hundertmal mehr Rechenzeit. Verfahren höherer Ordnung gibt es, sie verlangen aber zusätzliche Ableitungen und mehrfache Zufallsgrößen je Schritt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.1 --- Die Formel anwenden}
+Berechnen Sie $\dd(W_t^{3})$ und $\dd(e^{W_t})$.
+
+\loesung
+\schritt{Schritt 1 --- Die dritte Potenz}
+$f(x) = x^{3}$, $f' = 3x^{2}$, $f'' = 6x$:
+\[ \dd(W^{3}) = 3W^{2}\,\dd W + 3W\,\dd t \]
+
+\kursiv{Probe im Erwartungswert:} $\mathbb{E}[W_t^{3}] = 0 + 3\int_0^t \mathbb{E}[W_s]\,\dd s = 0$. \checkmark
+
+\schritt{Schritt 2 --- Die Exponentialfunktion}
+$f = f' = f'' = e^{x}$:
+\[ \dd(e^{W}) = e^{W}\,\dd W + \tfrac12 e^{W}\,\dd t \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$e^{W_t}$ ist kein Martingal --- es wächst im Mittel mit der Rate $\tfrac12$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Das Martingal finden}
+Man suche $c$ mit $\dd(e^{W-ct})$ ohne $\dd t$-Term:
+\[ \dd\bigl(e^{W_t - ct}\bigr) = e^{W-ct}\bigl(\dd W + (\tfrac12 - c)\,\dd t\bigr) \]
+\[ c = \tfrac12 \quad\Longrightarrow\quad M_t = e^{W_t - t/2} \ \text{ist ein Martingal.} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das Exponentialmartingal}, das Gegenstück zu $(q/p)^{S_n}$ aus Kapitel~8. Es ist der Schlüssel zum Maßwechsel in Kapitel~13 --- und zugleich die Erklärung für den Abzug $\sigma^{2}/2$: Damit der abgezinste Kurs fair bleibt, muss der Exponent um die halbe Varianz vermindert werden.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.2 --- Erwartungswert gegen typischen Verlauf}
+Eine Anlage hat $\mu = 0{,}07$ und $\sigma = 0{,}25$. Was erwartet ein Anleger nach zwanzig Jahren?
+
+\loesung
+\schritt{Schritt 1 --- Die beiden Kennzahlen}
+\[ \mathbb{E}[S_{20}] = e^{0{,}07\cdot20} = e^{1{,}4} = 4{,}055 \]
+\[ \text{Median} = e^{(0{,}07-0{,}03125)\cdot20} = e^{0{,}775} = 2{,}171 \]
+
+\schritt{Schritt 2 --- Die Spannweite}
+Mit $\sigma\sqrt{T} = 0{,}25\cdot4{,}472 = 1{,}118$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Quantil} & \textbf{Faktor} & \textbf{jährlich}\\
+\midrule
+$5\,\%$ & $0{,}345$ & $-5{,}2\,\%$\\
+$25\,\%$ & $1{,}021$ & $+0{,}1\,\%$\\
+$50\,\%$ & $2{,}171$ & $+4{,}0\,\%$\\
+$75\,\%$ & $4{,}614$ & $+7{,}9\,\%$\\
+$95\,\%$ & $13{,}65$ & $+14{,}0\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Viertel aller Verläufe steht nach zwanzig Jahren schlechter als eine Verzinsung mit null Prozent.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Lehre}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Verteilung ist so breit, dass der Mittelwert keine brauchbare Auskunft gibt.} Wer über Altersvorsorge entscheidet, braucht die Quantile --- und das ist genau der Punkt, an dem Band 24 ansetzt: Der Nutzen ist konkav, also zählt nicht der Erwartungswert des Vermögens, sondern der Erwartungswert seines Nutzens. Bei logarithmischem Nutzen ist die maßgebliche Größe gerade $\mu - \sigma^{2}/2$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.3 --- Eine Gleichung für die Medizin}
+Die Konzentration eines Medikaments folge $\dd C = -k\,C\,\dd t + \sigma\,C\,\dd W$. Wie verteilt sich die Konzentration nach der Zeit $t$, und wann ist die Hälfte abgebaut?
+
+\loesung
+\schritt{Schritt 1 --- Die Lösung}
+Wie in Abschnitt 12.2 mit $\mu = -k$:
+\[ C_t = C_0\exp\left(\Bigl(-k-\frac{\sigma^{2}}{2}\Bigr)t + \sigma W_t\right) \]
+--- logarithmisch normalverteilt.
+
+\schritt{Schritt 2 --- Zwei Halbwertszeiten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+\textbf{Bezug} & \textbf{Formel} & \textbf{$k=0{,}1$, $\sigma=0{,}3$}\\
+\midrule
+Erwartungswert & $\ln 2/k$ & $6{,}93$ h\\
+Median & $\ln 2/(k+\sigma^{2}/2)$ & $\mathbf{4{,}78}$ h\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die typische Halbwertszeit ist kürzer als die mittlere --- um ein Drittel.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was das praktisch heißt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Wer die Halbwertszeit aus Mittelwertkurven schätzt, erhält einen anderen Wert als aus den Einzelverläufen} --- und beide sind richtig, nur beantworten sie verschiedene Fragen. Für die Dosierung eines einzelnen Patienten zählt der Median, für die Bilanz einer Kohorte der Mittelwert. Dieselbe Unterscheidung wie in Aufgabe 12.2, und dieselbe wie im Bruchfall von Kapitel~3 zwischen Zeit- und Scharmittel.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Grenze des Modells}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das multiplikative Rauschen unterstellt, dass die Abbaurate selbst schwankt --- durch Enzymaktivität, Durchblutung, Begleitmedikation. \textbf{Das trifft die Wirklichkeit besser als additives Rauschen}, weil die Konzentration so nie negativ wird. Es unterstellt aber auch, dass die Schwankungen unabhängig sind; in Wahrheit sind sie es innerhalb eines Patienten nicht, und man braucht Modelle mit patientenspezifischen Parametern.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Formel, zwei Fächer}
+\Person{Kiyoshi Itō} bewies die Formel 1951 in einer Arbeit über stochastische Differentialgleichungen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie war für ihn ein Hilfsmittel, um Diffusionsprozesse zu konstruieren --- Kolmogorow hatte sie über partielle Differentialgleichungen beschrieben, Itō wollte sie pfadweise erzeugen. \textbf{Dass daraus ein halbes Jahrhundert später das Werkzeug einer Weltindustrie werden würde, hätte er nach eigener Aussage nie vermutet}; er bezeichnete sich zeitlebens als reinen Mathematiker.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Physik}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Paul Langevin} hatte 1908 eine Gleichung derselben Bauart aufgeschrieben --- mit einer \enquote{Zufallskraft}, deren mathematischer Sinn offen blieb. \textbf{Die Langevin-Gleichung ist der Ornstein-Uhlenbeck-Prozess aus Abschnitt 12.3}, und \Person{Leonard Ornstein} und \Person{George Uhlenbeck} untersuchten ihn 1930, ohne über ein stochastisches Integral zu verfügen. Itōs Theorie lieferte nachträglich das Fundament.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Ökonomie}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Paul Samuelson} schlug 1965 vor, Kurse durch die geometrische Brownsche Bewegung zu beschreiben statt durch die gewöhnliche --- Bacheliers Modell erlaubte negative Preise. \textbf{Damit war die Bühne für Kapitel~13 bereitet}: Alle Bestandteile lagen vor, und es fehlte nur noch der Gedanke, dass sich eine Option durch fortlaufenden Handel nachbilden lässt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Stochastische Gleichungen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Numerik} & Verfahren höherer Ordnung, Mehrgitter-Monte-Carlo.\\
+\textbf{Filterung} & Zustand eines Systems aus verrauschten Messungen --- Kalman und Nachfolger.\\
+\textbf{Neuronale Modelle} & Membranpotential als Diffusion mit Schwelle.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Filtergleichung beantwortet die Frage, wie sich die bedingte Verteilung des Zustands entwickelt, wenn fortlaufend gemessen wird --- Kapitel~7 in stetiger Zeit. \textbf{Im linearen Fall ergibt sich der Kalman-Filter}, der in jedem Navigationsgerät steckt; im nichtlinearen Fall bleibt nur die Simulation vieler Teilchen. Für die Medizin ist das die Grundlage der fortlaufenden Überwachung: Aus verrauschten Messreihen den wahren Zustand schätzen, ohne den Blick in die Zukunft.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 12.1} & $(\dd W)^{2} = \dd t$, Zusatzterm $\tfrac12 f''$\\
+\textbf{Geometrisch} & Exponent $\mu - \sigma^{2}/2$\\
+\textbf{Der Abzug} & Schwankung kostet Wachstum\\
+\textbf{Ornstein-Uhlenbeck} & Rückkehr zum Mittel\\
+\textbf{Euler} & Ordnung $\tfrac12$, nicht $1$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~IV. Alle Werkzeuge liegen bereit. Teil~V setzt sie ein --- zuerst für die Frage, was eine Option wert ist, und dann für Prozesse in Klinik und Natur.}
+\end{minipage}
+\end{center}
+\end{merksatz}

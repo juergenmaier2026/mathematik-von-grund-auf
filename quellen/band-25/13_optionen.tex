@@ -1,0 +1,382 @@
+\part{Anwendungen}
+
+\chapter{Was eine Option wert ist}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{Ein Recht ohne Pflicht}
+Eine \Begriff{Kaufoption} gibt das Recht, ein Papier zum Zeitpunkt $T$ für den Preis $K$ zu kaufen. Ihr Wert am Ende beträgt
+\[ \max\{S_T - K,\ 0\} . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Was sie heute wert ist, scheint davon abzuhängen, wie wahrscheinlich ein Anstieg ist --- und wie sehr man Risiko scheut. Beides geht nicht in den Preis ein.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das überraschendste Ergebnis dieses Kapitels und der Grund, warum die Formel überhaupt etwas taugt.} Der Grund liegt in Satz 11.3: Wer fortlaufend handelt, spielt ein faires Spiel --- und wenn sich die Auszahlung durch Handel nachbilden lässt, ist ihr Preis der Preis dieser Nachbildung. Über Wahrscheinlichkeiten und Vorlieben muss man dann nicht mehr reden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Nachbildung}
+Man halte zu jedem Zeitpunkt $\Delta_t$ Stück des Papiers und den Rest in Geld. Der Wert des Depots ändert sich um
+\[ \dd V_t = \Delta_t\,\dd S_t + r\,(V_t - \Delta_t S_t)\,\dd t . \]
+
+\schritt{Der Vergleich mit der Option}
+Sei $V_t = C(t,S_t)$ der gesuchte Optionswert. Nach der Itō-Formel:
+\[ \dd C = \left(\frac{\partial C}{\partial t} + \mu S\frac{\partial C}{\partial S} + \frac{\sigma^{2}S^{2}}{2}\frac{\partial^{2}C}{\partial S^{2}}\right)\dd t + \sigma S\frac{\partial C}{\partial S}\,\dd W \]
+
+\kursiv{Setzt man} $\Delta_t = \partial C/\partial S$, so stimmen die $\dd W$-Terme überein --- das Depot folgt der Option bei jeder Kursbewegung.
+
+\kursiv{Gleichsetzen der $\dd t$-Terme} liefert
+\[ \frac{\partial C}{\partial t} + r S\frac{\partial C}{\partial S} + \frac{\sigma^{2}S^{2}}{2}\frac{\partial^{2}C}{\partial S^{2}} = r\,C . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Driftrate $\mu$ ist verschwunden. Im Preis steht $r$ --- die sichere Verzinsung --- und $\sigma$, sonst nichts.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Black-Scholes-Gleichung, und sie ist eine Wärmeleitungsgleichung} (Band 14, Kapitel~12) in verkleideter Form. Dass $\mu$ herausfällt, hat einen anschaulichen Grund: Wer die Option durch Handel nachbildet, hält immer $\partial C/\partial S$ Stück und verdient an der Drift genauso viel wie die Option --- der Unterschied hebt sich weg.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Formel}
+
+\begin{merksatz}
+\boxtitel{Satz 13.1 --- Black, Scholes und Merton, 1973}
+\[ C = S_0\,\Phi(d_1) - K e^{-rT}\,\Phi(d_2) \]
+\[ d_1 = \frac{\ln(S_0/K) + (r+\sigma^{2}/2)\,T}{\sigma\sqrt T}, \qquad d_2 = d_1 - \sigma\sqrt T \]
+
+\schritt{Am Beispiel}
+$S_0 = K = 100$, $r = 2\,\%$, $\sigma = 20\,\%$, $T = 1$ Jahr:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.8cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Wert} & \\
+\midrule
+$d_1$ & $0{,}200$ & \\
+$d_2$ & $0{,}000$ & \\
+Kaufoption & $\mathbf{8{,}92}$ & $8{,}9\,\%$ des Kurses\\
+Verkaufsoption & $6{,}94$ & \\
+$\Delta$ & $0{,}579$ & Stück zu halten\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Abhängigkeit von der Schwankung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+$\sigma$ & \textbf{Preis} & \textbf{Verhältnis}\\
+\midrule
+$10\,\%$ & $5{,}02$ & ---\\
+$20\,\%$ & $8{,}92$ & $1{,}78$\\
+$40\,\%$ & $16{,}70$ & $3{,}33$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Preis hängt fast linear von $\sigma$ ab} --- und $\sigma$ ist die einzige Größe der Formel, die man nicht ablesen kann. Kurs, Basispreis, Laufzeit und Zins stehen fest; die Schwankung muss geschätzt werden. In der Praxis dreht man die Formel deshalb um: Man liest aus dem Marktpreis die \Begriff{implizite Schwankung} ab.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie gut die Nachbildung gelingt}
+
+\begin{merksatz}
+\boxtitel{Absicherung in endlich vielen Schritten}
+Die Theorie verlangt fortlaufenden Handel. In der Praxis schichtet man endlich oft um.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Umschich\-tungen} & \textbf{Streuung} & \textbf{Anteil am Preis}\\
+\midrule
+$4$ & $3{,}23$ & $36\,\%$\\
+$20$ & $1{,}53$ & $17\,\%$\\
+$100$ & $0{,}70$ & $8\,\%$\\
+$500$ & $0{,}32$ & $4\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{$20\,000$ simulierte Pfade; der mittlere Fehler ist in allen Fällen praktisch null.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Nachbildung ist im Mittel genau und im Einzelfall ungenau --- der Fehler fällt nur mit der Wurzel der Umschichtungszahl.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Wer viermal im Jahr umschichtet, hat eine Streuung von einem Drittel des Optionspreises} --- die Absicherung ist dann eher Symbol als Schutz. Und mehr Umschichtungen kosten Gebühren, die mit der Zahl \kursiv{linear} wachsen, während der Nutzen mit der Wurzel steigt. Es gibt also ein Optimum, und es liegt nicht bei \enquote{so oft wie möglich}.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Das Lächeln, das es nicht geben dürfte}
+Liest man aus Marktpreisen die implizite Schwankung ab, so müsste sie für alle Basispreise gleich sein --- die Formel kennt nur ein $\sigma$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Tatsächlich ist sie für weit aus dem Geld liegende Optionen deutlich höher. Die Kurve heißt Volatilitätslächeln.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Ursache} & Reale Kurse haben schwerere Ränder und Sprünge; die Normalverteilung unterschätzt große Bewegungen.\\
+\textbf{Wann entstanden} & Das Lächeln wurde erst nach dem Börsensturz von 1987 deutlich --- vorher waren die Preise der Formel näher.\\
+\textbf{Deutung} & Der Markt bepreist seither, was die Formel nicht kennt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die zweite Zeile ist die bemerkenswerteste Beobachtung der Finanzmathematik.} Die Formel beschrieb den Markt gut, solange alle sie benutzten und niemand einen Zusammenbruch erlebt hatte; nach 1987 nicht mehr. Das Modell hat seinen Gegenstand mitgeformt --- und dann hat der Gegenstand sich verändert.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die vier Annahmen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{feste Streuung} & falsch --- sie schwankt selbst und in Phasen\\
+\textbf{keine Sprünge} & falsch --- Kurslücken über Nacht\\
+\textbf{kostenloser Handel} & falsch --- Gebühren und Spanne\\
+\textbf{unbegrenzte Liquidität} & falsch, gerade dann, wenn es darauf ankommt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle vier versagen \kursiv{gemeinsam} und \kursiv{gleichzeitig} --- in der Krise. \textbf{Genau dann schwanken die Kurse stärker, springen, kosten mehr Gebühr und lassen sich nicht mehr handeln}, und genau dann versagt die Absicherung. 1998 brachte das einen großen Fonds zu Fall, dessen Leitung zwei der Urheber der Formel angehörten.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.1 --- Die Paritätsbeziehung}
+Zeigen Sie ohne jedes Modell: $C - P = S_0 - Ke^{-rT}$.
+
+\loesung
+\schritt{Schritt 1 --- Zwei Depots}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Depot A} & \textbf{Depot B}\\
+\midrule
+Inhalt & Kaufoption $+$ $Ke^{-rT}$ Geld & Verkaufsoption $+$ ein Papier\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Wert am Ende}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+& $S_T > K$ & $S_T \le K$\\
+\midrule
+Depot A & $S_T - K + K = S_T$ & $0 + K = K$\\
+Depot B & $0 + S_T = S_T$ & $K - S_T + S_T = K$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide Depots sind in jedem Fall gleich viel wert --- also müssen sie heute gleich viel kosten.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Probe}
+\[ 8{,}92 - 6{,}94 = 1{,}98; \qquad 100 - 100\,e^{-0{,}02} = 100-98{,}02 = 1{,}98 \quad \checkmark \]
+
+\schritt{Schritt 4 --- Was daran bemerkenswert ist}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Diese Beziehung braucht kein Modell} --- weder Brownsche Bewegung noch feste Schwankung, nur die Abwesenheit sicherer Gewinne. Sie gilt also auch dort, wo Satz 13.1 versagt, und ist deshalb die belastbarste Aussage der ganzen Optionstheorie. Man benutzt sie, um Marktdaten auf Widerspruchsfreiheit zu prüfen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.2 --- Der Preis als Erwartungswert}
+Zeigen Sie, dass der Optionspreis der abgezinste Erwartungswert der Auszahlung ist --- unter einer anderen Wahrscheinlichkeit.
+
+\loesung
+\schritt{Schritt 1 --- Der Maßwechsel}
+Man ersetze in der Gleichung für $S$ die Drift $\mu$ durch $r$:
+\[ S_T = S_0\exp\left(\Bigl(r-\frac{\sigma^{2}}{2}\Bigr)T + \sigma W_T\right) \]
+
+\schritt{Schritt 2 --- Der Erwartungswert}
+\[ e^{-rT}\,\mathbb{E}\bigl[\max\{S_T-K,0\}\bigr] = S_0\Phi(d_1) - Ke^{-rT}\Phi(d_2) \]
+--- man rechnet das Integral über die Normalverteilung aus und erhält Satz 13.1.
+
+\schritt{Schritt 3 --- Die Probe des ersten Moments}
+Unter der neuen Wahrscheinlichkeit gilt
+\[ \mathbb{E}[S_T] = S_0\,e^{rT} \]
+--- der abgezinste Kurs $e^{-rt}S_t$ ist ein Martingal.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist der Hauptsatz der Preistheorie: Kein sicherer Gewinn genau dann, wenn es eine Wahrscheinlichkeit gibt, unter der die abgezinsten Kurse fair sind.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Was die neue Wahrscheinlichkeit \kursiv{nicht} ist}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Sie beschreibt nicht, was geschehen wird.} Unter ihr wächst jedes Papier mit der sicheren Rate --- eine Welt, in der niemand Risiko scheut. Sie ist ein Rechenhilfsmittel, kein Weltbild. Wer sie für eine Prognose hält, unterschätzt die Ertragserwartung riskanter Anlagen systematisch; das ist ein verbreiteter Fehler bei der Bewertung von Beteiligungen und Projekten.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.3 --- Wie oft umschichten?}
+Bei Gebühren von $0{,}1$ Prozent je Umschichtung und der Streuungstabelle aus Abschnitt 13.3: Wie oft lohnt es sich?
+
+\loesung
+\schritt{Schritt 1 --- Die beiden Größen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.2cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+$n$ & \textbf{Streuung} & \textbf{Gebühren} & \textbf{Summe}\\
+\midrule
+$4$ & $3{,}23$ & $0{,}12$ & $3{,}35$\\
+$20$ & $1{,}53$ & $0{,}58$ & $2{,}11$\\
+$100$ & $0{,}70$ & $2{,}90$ & $3{,}60$\\
+$500$ & $0{,}32$ & $14{,}5$ & $14{,}8$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Gebühren grob als $n$ mal $0{,}1\,\%$ mal mittlerem Umsatz von etwa $29$ Einheiten.}
+
+\schritt{Schritt 2 --- Das Ergebnis}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Optimum liegt bei etwa zwanzig Umschichtungen --- nicht bei fünfhundert.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die allgemeine Regel}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Streuung fällt wie $n^{-1/2}$, die Kosten wachsen wie $n$. Die Summe wird minimal, wenn die Ableitungen sich aufheben:
+\[ \tfrac12\,a\,n^{-3/2} = b \quad\Longrightarrow\quad n^{*} \propto \left(\frac{a}{b}\right)^{2/3} . \]
+\textbf{Der Zusammenhang mit der Gebühr ist also schwach} --- halbiert man sie, so schichtet man nur um $60$ Prozent häufiger um. Dasselbe Exponentengesetz beschreibt optimale Bestellmengen und die Taktung von Kontrolluntersuchungen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Und die Folge}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine vollständige Absicherung gibt es nicht} --- weder theoretisch noch praktisch. Wer eine Option verkauft, behält ein Restrisiko, das er einpreisen muss. Die Formel liefert den Preis der idealen Nachbildung; der wirkliche Preis liegt darüber, und zwar umso mehr, je unruhiger der Markt ist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Formel und ihre Folgen}
+\Person{Fischer Black} und \Person{Myron Scholes} reichten ihre Arbeit 1970 bei zwei Zeitschriften ein; beide lehnten sie ab. Sie erschien 1973 --- im selben Monat, in dem die erste Optionsbörse in Chicago eröffnete.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Robert Merton} lieferte gleichzeitig die stochastische Herleitung und den Begriff der fortlaufenden Nachbildung. \textbf{Binnen weniger Jahre rechneten die Händler in Chicago mit Taschenrechnern, die die Formel eingebaut hatten.} Scholes und Merton erhielten 1997 den Wirtschaftsnobelpreis; Black war 1995 gestorben.}
+\end{minipage}
+\end{center}
+
+\schritt{Und der Fall}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Ein Jahr nach dem Preis geriet der Fonds \kursiv{Long-Term Capital Management}, dem Scholes und Merton angehörten, in der Russlandkrise in Schieflage und musste mit über drei Milliarden Dollar gestützt werden. \textbf{Die Verluste entstanden nicht durch falsche Formeln, sondern durch die Annahme, Märkte blieben liquide} --- die vierte Zeile des Bruchfalls.}
+\end{minipage}
+\end{center}
+
+\schritt{Bachelier, noch einmal}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Louis Bachelier} hatte 1900 bereits eine Optionsformel hergeleitet --- mit arithmetischer statt geometrischer Brownscher Bewegung und ohne Abzinsung. \textbf{Sie liefert für kurze Laufzeiten fast dieselben Werte} und wird heute für Zinsprodukte wieder benutzt, seit dort negative Preise auftreten können.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Bewertung heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Schwankende Schwankung} & Modelle, in denen $\sigma$ selbst ein Prozess ist.\\
+\textbf{Sprungmodelle} & Poisson-Sprünge über der Diffusion --- Kapitel~4.\\
+\textbf{Rauhe Volatilität} & Empirisch: $\sigma$ verhält sich wie eine Brownsche Bewegung mit Hurst-Exponent $0{,}1$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Seit 2014 ist bekannt, dass die geschätzte Schwankung selbst weit zerknitterter verläuft als eine Brownsche Bewegung --- mit einem Exponenten um $0{,}1$ statt $0{,}5$. \textbf{Das erklärt die Form des Lächelns bei kurzen Laufzeiten besser als alle früheren Modelle} und hat binnen weniger Jahre ein eigenes Forschungsgebiet hervorgebracht. Die zugehörige Theorie braucht die rauen Pfade aus Kapitel~11, Forschungskasten.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Nachbildung} & $\Delta = \partial C/\partial S$ Stück halten\\
+\textbf{Die Gleichung} & $\mu$ fällt heraus, $r$ bleibt\\
+\textbf{Satz 13.1} & $S_0\Phi(d_1) - Ke^{-rT}\Phi(d_2)$\\
+\textbf{Maßwechsel} & Preis als Erwartungswert unter fairem Maß\\
+\textbf{Der Bruchfall} & alle vier Annahmen versagen zugleich\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieselben Werkzeuge beschreiben Vorgänge, bei denen es um mehr geht als um Geld. Das nächste Kapitel wendet sie auf Nervenzellen, Erbanlagen und die Überwachung von Patienten an.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,317 @@
+\chapter{Der Fluch der Dimension}
+
+\section{Ein Integral als Erwartungswert}
+
+\begin{merksatz}
+\boxtitel{Die Umdeutung}
+Jedes Integral über einen beschränkten Bereich ist ein Erwartungswert:
+\[ \int_0^1 f(x)\,\dd x = \mathbb{E}\bigl[f(U)\bigr], \qquad U \sim \text{gleichverteilt auf } (0,1) . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Also lässt es sich mit Definition 1.1 schätzen: Zufallspunkte ziehen, $f$ auswerten, mitteln.}
+\end{minipage}
+\end{center}
+
+\schritt{In einer Dimension: kein guter Tausch}
+$\int_0^1 e^{-x^{2}}\dd x = 0{,}746824$:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+$n$ & \textbf{Trapezregel} & \textbf{Monte Carlo}\\
+\midrule
+$10$ & $6\cdot10^{-4}$ & $6\cdot10^{-2}$\\
+$100$ & $6\cdot10^{-6}$ & $2\cdot10^{-2}$\\
+$1000$ & $6\cdot10^{-8}$ & $7\cdot10^{-3}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Trapezregel aus Band 5 gewinnt in einer Dimension um fünf Größenordnungen.} Ihr Fehler fällt mit $n^{-2}$, der von Monte Carlo mit $n^{-1/2}$. Wer ein eindimensionales Integral mit Zufallszahlen rechnet, hat das falsche Werkzeug. Die Frage ist, was in zehn Dimensionen geschieht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Rechnung in $d$ Dimensionen}
+
+\begin{merksatz}
+\boxtitel{Satz 3.1 --- der Fluch}
+Eine Produktregel mit $k$ Stützstellen je Achse braucht in $d$ Dimensionen $n = k^{d}$ Auswertungen. Ihr Fehler fällt wie $k^{-2} = n^{-2/d}$. Der Monte-Carlo-Fehler fällt wie $n^{-1/2}$ --- für jedes $d$.
+
+\schritt{Beweis}
+Die Trapezregel hat in jeder Achse den Fehler $O(h^{2})$ mit $h = 1/k$; der Produktfehler ist von derselben Ordnung (Band 5, Kapitel~7). Mit $k = n^{1/d}$ folgt $n^{-2/d}$. Der Monte-Carlo-Teil ist Satz 1.2. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gleichstand bei $d = 4$. Darüber gewinnt der Zufall --- und ab etwa $d = 10$ ist er die einzige Methode, die überhaupt noch ein Ergebnis liefert.}
+\end{minipage}
+\end{center}
+
+\schritt{Geprüft: $\int_{[0,1]^{d}} e^{-|x|^{2}}\,\dd x$ mit je $10^{5}$ Auswertungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{0.8cm}P{1.6cm}P{2.4cm}P{2.2cm}P{1.6cm}@{}}
+\toprule
+$d$ & \textbf{exakt} & \textbf{Monte Carlo} & \textbf{Trapez} & \textbf{je Achse}\\
+\midrule
+$1$ & $0{,}74682$ & $0{,}7470 \pm 0{,}0006$ & $0{,}74682$ & $100\,000$\\
+$3$ & $0{,}41654$ & $0{,}4157 \pm 0{,}0006$ & $0{,}41649$ & $46$\\
+$6$ & $0{,}17350$ & $0{,}1735 \pm 0{,}0004$ & $0{,}1711$ & $7$\\
+$10$ & $0{,}05397$ & $\mathbf{0{,}0541 \pm 0{,}0002}$ & $\mathbf{0{,}0438}$ & $3$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{In zehn Dimensionen hat die Trapezregel drei Punkte je Achse und liegt um zwanzig Prozent daneben; Monte Carlo liegt um drei Promille daneben --- und weiß es.} Die letzte Spalte ist die eigentliche Erklärung: Ein Gitter muss jede Achse abtasten, und die Zahl der Punkte wird auf $d$ Achsen verteilt. Zufallspunkte tun das nicht; sie füllen den Raum, ohne ihn zu zerlegen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Wo die Dimensionen herkommen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Band 17} & Bayessche A-posteriori-Erwartung: ein Integral über alle Parameter --- bei zwanzig Parametern zwanzig Dimensionen.\\
+\textbf{Band 23} & Die g-Formel: Integral über die Verteilung aller Störgrößen zu allen Zeitpunkten.\\
+\textbf{Band 24} & Erwartungsnutzen über Patientenmerkmale, Testergebnisse, Verläufe.\\
+\textbf{Band 25} & Erwartungswert eines Pfadfunktionals: ein Integral über $10^{6}$ Zeitschritte --- $10^{6}$ Dimensionen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Fast jede Erwartung der zweiten Werkhälfte ist ein hochdimensionales Integral. Es gab nie eine Alternative zur Simulation --- der Band holt nur nach, warum.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wo auch der Zufall versagt}
+
+\begin{merksatz}
+\boxtitel{Seltene Treffer}
+Das Volumen der Einheitskugel in $d$ Dimensionen, geschätzt als Trefferanteil im Würfel $[-1,1]^{d}$ mit $200\,000$ Punkten:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{0.8cm}P{2.0cm}P{2.2cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+$d$ & \textbf{exakt} & \textbf{geschätzt} & \textbf{Trefferquote} & \textbf{rel.\ Fehler}\\
+\midrule
+$2$ & $3{,}1416$ & $3{,}1384$ & $0{,}785$ & $0{,}1\,\%$\\
+$5$ & $5{,}2638$ & $5{,}2771$ & $0{,}165$ & $0{,}5\,\%$\\
+$10$ & $2{,}5502$ & $2{,}3808$ & $0{,}0023$ & $4{,}5\,\%$\\
+$20$ & $0{,}0258$ & $\mathbf{0}$ & $2\cdot10^{-8}$ & ---\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In zwanzig Dimensionen trifft keiner von zweihunderttausend Punkten die Kugel. Die Schätzung ist null, und der Standardfehler auch.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der zweite Fluch, und er betrifft den Zufall selbst}: Der relative Fehler einer Trefferschätzung ist $\sqrt{(1-p)/(np)}$ --- bei kleinem $p$ braucht man $n \approx 1/p$ Punkte für einen einzigen Treffer. Die Kugel in zwanzig Dimensionen ist ein Hundertmillionstel des Würfels; die Simulation sucht einen Punkt in einem leeren Raum. Dasselbe geschieht bei jedem seltenen Ereignis --- der Abweisung von fünf Patienten an einem Tag, dem Zusammenbruch eines Portfolios, der Fehldiagnose bei einer Prävalenz von einem Promille. Kapitel~6 zeigt den Ausweg: nicht gleichmäßig ziehen, sondern dort, wo etwas passiert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Unendliche Varianz}
+Satz 1.2 verlangt $\operatorname{Var}[g(X)] < \infty$. Was, wenn nicht?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Das Beispiel} & $\int_0^1 x^{-1/2}\,\dd x = 2$: Der Integrand ist integrierbar, sein Quadrat $x^{-1}$ nicht.\\
+\textbf{Was geschieht} & Der Schätzer konvergiert --- nach dem Gesetz der großen Zahlen ---, aber langsamer als $n^{-1/2}$, und der geschätzte Standardfehler ist unbrauchbar: Er springt bei jedem seltenen, sehr kleinen $x$.\\
+\textbf{Die Abhilfe} & Substitution $x = t^{2}$: $\int_0^1 2\,\dd t = 2$ --- Varianz null.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Fall ist nicht exotisch.} Gewichtete Schätzer aus Band 23, Kapitel~8 --- Gewichtung mit der inversen Behandlungsneigung --- haben genau diese Form: Ein Patient mit Neigung $0{,}001$ erhält das Gewicht $1000$, und ein einziger solcher Patient bewegt das Ergebnis. Die Varianz ist formal endlich, aber riesig, und der Standardfehler aus der Stichprobe unterschätzt sie. Die Abhilfe dort heißt Gewichte stutzen; die Abhilfe hier heißt Substitution. Beides ist derselbe Gedanke: die Masse dorthin verschieben, wo der Schätzer sie verträgt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Den Gleichstand bestimmen}
+Bei welchem $d$ ist die Produkt-Simpsonregel (Fehler $n^{-4/d}$) gleichauf mit Monte Carlo?
+
+\loesung
+\schritt{Schritt 1 --- Gleichsetzen}
+\[ n^{-4/d} = n^{-1/2} \quad\Longleftrightarrow\quad \frac4d = \frac12 \quad\Longleftrightarrow\quad d = 8 \]
+
+\schritt{Schritt 2 --- Die Tabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Regel} & \textbf{Fehler} & \textbf{Gleichstand bei}\\
+\midrule
+Trapez & $n^{-2/d}$ & $d = 4$\\
+Simpson & $n^{-4/d}$ & $d = 8$\\
+Gauß, $k$ Punkte & $n^{-2k/d}$ & $d = 4k$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Der Haken}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Fehlerordnungen der Produktregeln setzen glatte Integranden voraus. Ein Integrand mit Knick --- $\max\{S-K,0\}$ aus Band 25 --- fällt auf $n^{-1/d}$ zurück, und der Gleichstand liegt bei $d = 2$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Monte Carlo braucht keine Glattheit} --- nur endliche Varianz. Das ist neben der Dimensionsfreiheit sein zweiter Vorzug, und in der Praxis oft der wichtigere: Indikatorfunktionen (ist der Patient abgewiesen?), Maxima (ist die Option im Geld?), Schwellen (hat die Kette den Zustand erreicht?) sind alle unstetig. Für sie gibt es keine Regel mit hoher Ordnung, in keiner Dimension.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Ein Integral aus Band 24}
+Der Erwartungsnutzen der Behandlung bei Frau B.\ sei ein Integral über die Verteilung des Blutungsrisikos $r$ (Beta-verteilt, Mittel $0{,}03$) und der Schlaganfallwahrscheinlichkeit $s$ (Beta, Mittel $0{,}02$). Wie würde man es simulieren, und mit welchem Fehler?
+
+\loesung
+\schritt{Schritt 1 --- Der Schätzer}
+Ziehe $n$ Paare $(r_i, s_i)$, berechne je Paar den Nutzen $u_i = 1 - 0{,}30\,r_i - 0{,}60\,s_i$ (vereinfacht), mittle.
+
+\schritt{Schritt 2 --- Die Streuung}
+Mit Streuungen $0{,}015$ für $r$ und $0{,}010$ für $s$:
+\[ \sigma_u = \sqrt{0{,}30^{2}\cdot0{,}015^{2} + 0{,}60^{2}\cdot0{,}010^{2}} = \sqrt{2{,}0\cdot10^{-5}+3{,}6\cdot10^{-5}} = 0{,}0075 \]
+
+\schritt{Schritt 3 --- Die nötige Zahl}
+Der Gewinn durch Behandlung war $0{,}018$; man will ihn auf $\pm0{,}001$ genau:
+\[ n \ge \left(\frac{1{,}96\cdot0{,}0075}{0{,}001}\right)^{2} \approx 216 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zweihundert Ziehungen genügen --- weil der Integrand linear ist und der Zufall nur zwei Dimensionen hat.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Band 24 hat genau das getan und es \enquote{probabilistische Empfindlichkeitsanalyse} genannt.} Die Zahl wächst, sobald der Nutzen nichtlinear wird --- etwa bei einem Markow-Modell über zwanzig Jahre, dessen Ergebnis ein Produkt aus hunderten Übergängen ist. Dann steigt $\sigma_u$, und $n$ geht in die Tausende. Das ist der Normalfall der Gesundheitsökonomie, und er ist der Grund, warum Kapitel~5 die Varianz senkt, statt $n$ zu erhöhen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Die Varianz reparieren}
+Zeigen Sie, dass $\int_0^1 x^{-1/2}\dd x$ durch Monte Carlo mit unendlicher Varianz geschätzt wird, und reparieren Sie es.
+
+\loesung
+\schritt{Schritt 1 --- Die Varianz}
+\[ \mathbb{E}\bigl[g(U)^{2}\bigr] = \int_0^1 x^{-1}\,\dd x = \infty \]
+
+\schritt{Schritt 2 --- Was man beobachtet}
+Mit $n = 10\,000$ Ziehungen: Mittel $1{,}98$, geschätzter Standardfehler $0{,}03$ --- scheinbar brauchbar. Dann kommt eine Ziehung mit $u = 10^{-7}$ und $g = 3162$; das Mittel springt auf $2{,}30$, der Standardfehler auf $0{,}32$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Standardfehler ist nicht zu groß, sondern unberechenbar: Er hängt davon ab, ob der seltene Ausreißer schon gezogen wurde.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Substitution}
+$x = t^{2}$, $\dd x = 2t\,\dd t$:
+\[ \int_0^1 x^{-1/2}\,\dd x = \int_0^1 \frac{2t}{t}\,\dd t = \int_0^1 2\,\dd t \]
+Der Integrand ist konstant; Monte Carlo liefert $2$ mit Varianz null.
+
+\schritt{Schritt 4 --- Die allgemeine Regel}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Man zieht nicht gleichverteilt, sondern aus einer Dichte, die der Singularität folgt} --- hier aus $2t$, was dasselbe ist wie $x$ mit Dichte $\tfrac12 x^{-1/2}$. Das ist die Wichtigkeitsgewichtung aus Kapitel~6 in ihrer einfachsten Form, und die Lehre aus dem Bruchfall: Wo der Integrand explodiert, muss die Ziehungsdichte mit explodieren. Bevor man eine Simulation startet, prüft man das zweite Moment --- auf dem Papier, nicht im Rechner, denn der Rechner zeigt es erst, wenn es zu spät ist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Der Fluch bekommt einen Namen}
+\Person{Richard Bellman} prägte 1957 den Ausdruck \enquote{Fluch der Dimension} --- in demselben Buch, das die dynamische Programmierung aus Band 24 begründete.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er meinte damit, dass eine Wertfunktion über zehn Zustandsgrößen mit je hundert Stützstellen $10^{20}$ Werte braucht. \textbf{Die Einsicht, dass Zufallspunkte dem Fluch entgehen, war älter}: \Person{Metropolis} und \Person{Ulam} schrieben 1949 im ersten veröffentlichten Aufsatz über die Monte-Carlo-Methode, der Vorzug liege gerade bei Integralen hoher Dimension --- und nannten als Beispiel die Boltzmann-Gleichung in sechs.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Bayessche Statistik}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Bayessche Statistik aus Band 17 war bis 1990 auf Modelle mit wenigen Parametern beschränkt --- weil das Integral im Nenner nicht zu berechnen war. \textbf{Als \Person{Gelfand} und \Person{Smith} 1990 zeigten, dass Markow-Ketten das Integral umgehen}, änderte sich das Fach innerhalb von fünf Jahren. Kapitel~7 und 8 dieses Bandes behandeln das Verfahren; dass es nötig war, folgt aus Satz 3.1.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Hochdimensionale Integration heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Dünne Gitter} & Produktregeln, bei denen man die meisten Punkte weglässt --- bis etwa $d = 50$.\\
+\textbf{Quasi-Monte-Carlo} & Punktfolgen mit Fehler $n^{-1}$ statt $n^{-1/2}$ --- Kapitel~6.\\
+\textbf{Effektive Dimension} & Warum Integrale in $10^{6}$ Dimensionen oft so leicht sind wie in zehn.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Pfadintegral über $10^{6}$ Zeitschritte ist formal $10^{6}$-dimensional --- aber der Integrand hängt meist nur von wenigen Kombinationen ab: dem Endwert, dem Maximum, dem Mittel. \textbf{Die effektive Dimension ist die Zahl der Richtungen, auf die es ankommt}, und sie liegt oft unter zehn. Das erklärt, warum die Simulationen aus Band 25 so gut funktionierten, und es ist der Grund, warum man den Fluch in der Praxis seltener spürt, als Satz 3.1 befürchten lässt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Die Umdeutung} & Integral $=$ Erwartungswert\\
+\textbf{Satz 3.1} & $n^{-2/d}$ gegen $n^{-1/2}$, Gleichstand $d=4$\\
+\textbf{Seltene Treffer} & relativer Fehler $\sqrt{1/(np)}$\\
+\textbf{Der Bruchfall} & zweites Moment vorher prüfen\\
+\textbf{Glattheit} & nicht nötig --- nur Varianz\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~I. Der Zufall ist erzeugt, die Methode begründet, ihr Fehler bekannt. Teil~II fragt, wie man diesen Fehler kleiner macht --- erst durch richtiges Messen, dann durch Tricks, die den Zufall gegen sich selbst ausspielen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

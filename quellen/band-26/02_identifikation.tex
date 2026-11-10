@@ -1,0 +1,373 @@
+\chapter{Was die Daten nicht hergeben}
+
+\section{Die Frage von Working}
+
+\begin{merksatz}
+\boxtitel{Preis und Menge, hundert Jahre}
+Man beobachte über Jahre hinweg Preise und abgesetzte Mengen eines Gutes und trage sie in ein Schaubild ein.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Welche Kurve zeichnen die Punkte --- die Nachfrage oder das Angebot?}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.6pt] (0,0) -- (3.0,0); \draw[grau!60, line width=0.6pt] (0,0) -- (0,2.6);
+\draw[tief, line width=1.0pt] (0.2,2.2) -- (2.6,0.4);
+\draw[grau!55, line width=0.8pt, dashed] (0.3,0.3) -- (2.5,2.2);
+\draw[grau!55, line width=0.8pt, dashed] (0.8,0.3) -- (3.0,2.2);
+\draw[grau!55, line width=0.8pt, dashed] (-0.2,0.3) -- (2.0,2.2);
+\foreach \x/\y in {0.75/1.78, 1.25/1.4, 1.75/1.03} \fill[akzent] (\x,\y) circle (1.7pt);
+\node[font=\scriptsize, color=grau] at (1.4,-0.4) {nur Angebot schwankt};
+
+\draw[grau!60, line width=0.6pt] (4.8,0) -- (7.8,0); \draw[grau!60, line width=0.6pt] (4.8,0) -- (4.8,2.6);
+\draw[tief, line width=1.0pt] (5.0,2.2) -- (7.4,0.4);
+\draw[tief, line width=1.0pt] (5.5,2.4) -- (7.8,0.65);
+\draw[tief, line width=1.0pt] (4.7,1.9) -- (7.0,0.2);
+\draw[grau!55, line width=0.8pt, dashed] (5.1,0.3) -- (7.3,2.2);
+\draw[grau!55, line width=0.8pt, dashed] (5.6,0.3) -- (7.8,2.2);
+\draw[grau!55, line width=0.8pt, dashed] (4.8,0.4) -- (6.8,2.2);
+\foreach \x/\y in {5.7/1.2, 6.3/1.35, 6.0/1.0, 6.6/1.6, 6.1/1.55} \fill[akzent] (\x,\y) circle (1.7pt);
+\node[font=\scriptsize, color=grau] at (6.3,-0.4) {beide schwanken};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Links zeichnen die Gleichgewichtspunkte die Nachfragekurve nach} --- weil nur das Angebot sich verschiebt. Rechts zeichnen sie eine Wolke, die zu keiner der beiden Kurven gehört. \textbf{Das Problem liegt nicht an zu wenigen Daten}, und es verschwindet nicht, wenn man hundert Jahre weiter beobachtet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.1 --- was die Regressionsgerade zeigt}
+Im System
+\[ q = a - b\,p + u \quad(\text{Nachfrage}), \qquad q = c + d\,p + v \quad(\text{Angebot}) \]
+mit unabhängigen Störungen strebt der Kleinste-Quadrate-Koeffizient von $q$ auf $p$ gegen
+\[ -b\cdot\frac{\sigma_v^{2}}{\sigma_u^{2}+\sigma_v^{2}} \ + \ d\cdot\frac{\sigma_u^{2}}{\sigma_u^{2}+\sigma_v^{2}} . \]
+
+\schritt{Beweis}
+\kursiv{Gleichsetzen liefert den Preis:}
+\[ p = \frac{a-c+u-v}{b+d} \quad\Longrightarrow\quad \operatorname{Var}(p) = \frac{\sigma_u^{2}+\sigma_v^{2}}{(b+d)^{2}}, \quad \operatorname{Cov}(p,u) = \frac{\sigma_u^{2}}{b+d} . \]
+
+\kursiv{Aus der Nachfragegleichung:}
+\[ \operatorname{Cov}(p,q) = -b\operatorname{Var}(p) + \operatorname{Cov}(p,u) \]
+\[ \frac{\operatorname{Cov}(p,q)}{\operatorname{Var}(p)} = -b + \frac{\sigma_u^{2}/(b+d)}{(\sigma_u^{2}+\sigma_v^{2})/(b+d)^{2}} = -b + (b+d)\,\frac{\sigma_u^{2}}{\sigma_u^{2}+\sigma_v^{2}} \]
+Umgeordnet ergibt das die Behauptung. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die geschätzte Gerade ist ein gewogenes Mittel der beiden wahren Steigungen --- gewichtet mit den Varianzanteilen der jeweils \kursiv{anderen} Störung.}
+\end{minipage}
+\end{center}
+
+\schritt{An $400\,000$ Beobachtungen geprüft}
+Wahre Werte: Nachfrage $-0{,}8$, Angebot $+0{,}6$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+$\sigma_u$ & $\sigma_v$ & \textbf{Formel} & \textbf{simuliert}\\
+\midrule
+$1$ & $1$ & $-0{,}100$ & $-0{,}099$\\
+$1$ & $2$ & $-0{,}520$ & $-0{,}520$\\
+$2$ & $1$ & $+0{,}320$ & $+0{,}319$\\
+$0{,}2$ & $1$ & $-0{,}746$ & $-0{,}746$\\
+$1$ & $0{,}2$ & $+0{,}546$ & $+0{,}546$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dieselben Daten können jede Steigung zwischen $-0{,}8$ und $+0{,}6$ zeigen --- je nachdem, welche Seite stärker schwankt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die dritte Zeile ist die schlimmste}: Dort erscheint die Nachfragekurve mit positiver Steigung --- als kauften die Leute mehr, wenn es teurer wird. Solche Befunde finden sich in der Literatur regelmäßig und werden dann mit Qualitätssignalen oder Statuskonsum erklärt. Meist sind sie schlicht das Ergebnis von Satz 2.1.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Identifikation}
+
+\begin{definition}
+\boxtitelm{Definition 2.2 --- Identifikation}
+Ein Parameter heißt \Begriff{identifiziert}, wenn er durch die Verteilung der beobachtbaren Größen eindeutig bestimmt ist --- wenn also keine zwei Parameterwerte dieselbe beobachtbare Verteilung erzeugen.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was das heißt und was nicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Nicht} & eine Frage des Stichprobenumfangs.\\
+\textbf{Nicht} & eine Frage des Schätzverfahrens.\\
+\textbf{Sondern} & eine Eigenschaft des Modells zusammen mit dem, was beobachtet wird.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Erst wird gefragt, ob die Größe bei unbegrenzt vielen Daten bestimmbar wäre. Dann erst, wie man sie schätzt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Diese Reihenfolge ist der eigentliche Beitrag der Ökonometrie} --- und sie fehlt in weiten Teilen der medizinischen Forschung, wo man gleich zur Schätzung übergeht. Band 23 stellte dieselbe Frage mit Graphen: Gibt es eine zulässige Anpassungsmenge? Hier lautet sie: Lässt sich der Parameter aus den Momenten gewinnen?}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.3 --- die Abzählbedingung}
+In einem System simultaner Gleichungen ist eine Gleichung nur dann identifiziert, wenn die Zahl der aus ihr \kursiv{ausgeschlossenen} exogenen Größen mindestens so groß ist wie die Zahl der in ihr enthaltenen endogenen Größen abzüglich eins.
+
+\schritt{Am Beispiel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.8cm}@{}}
+\toprule
+\textbf{Lage} & \textbf{Ausschlüsse} & \textbf{Nachfrage}\\
+\midrule
+keine exogene Größe & $0$ & \textcolor{akzent}{nicht identifiziert}\\
+Kosten im Angebot & $1$ & \textcolor{gruen}{identifiziert}\\
+Einkommen in der Nachfrage & $0$ & \textcolor{akzent}{weiterhin nicht}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die dritte Zeile ist der häufigste Irrtum}: Eine Größe, die in der \kursiv{eigenen} Gleichung steht, hilft nicht --- sie verschiebt die eigene Kurve und macht die Lage schlimmer. Identifiziert wird eine Gleichung durch das, was in der \kursiv{anderen} steht und in ihr selbst fehlt. \textbf{Das Ausschließen ist die Annahme, nicht das Einschließen.}}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Rangbedingung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Abzählbedingung ist notwendig, nicht hinreichend --- die ausgeschlossenen Größen müssen auch wirklich wirken. Die genaue Fassung verlangt den Rang einer Matrix; wir übergehen sie --- die erste Auslassung dieses Bandes. \textbf{In der Praxis ist der Rangverlust der Normalfall}: Man hat formal ein Instrument, und es ist zu schwach --- Kapitel~3.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Identifiziert heißt nicht glaubwürdig}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Ausschluss ist Annahme} & \enquote{Die Kosten wirken nicht auf die Nachfrage} ist eine Behauptung über die Welt, die niemand prüft.\\
+\textbf{Mehr Ausschlüsse} & Je größer das System, desto mehr Ausschlüsse braucht es --- und desto unglaubwürdiger wird jeder einzelne.\\
+\textbf{Scheinbare Genauigkeit} & Ein identifiziertes System liefert enge Vertrauensintervalle, deren Gültigkeit vollständig an den Ausschlüssen hängt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{\Person{Christopher Sims} nannte solche Ausschlüsse 1980 \enquote{unglaubwürdig}} und schlug vor, in Zeitreihenmodellen ganz auf sie zu verzichten --- daraus entstand die Vektorautoregression aus Kapitel~12. Die Identifikationsfrage verschwindet dadurch nicht, sie wandert nur an eine andere Stelle: Statt Gleichungen schließt man dann Wirkungsrichtungen in der kurzen Frist aus.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- Die Gewichte ausrechnen}
+Bei welchem Verhältnis der Störungsvarianzen zeigt die Regression genau null?
+
+\loesung
+\schritt{Schritt 1 --- Die Bedingung}
+\[ -b\,\frac{\sigma_v^{2}}{\sigma_u^{2}+\sigma_v^{2}} + d\,\frac{\sigma_u^{2}}{\sigma_u^{2}+\sigma_v^{2}} = 0 \quad\Longleftrightarrow\quad \frac{\sigma_u^{2}}{\sigma_v^{2}} = \frac{b}{d} \]
+
+\schritt{Schritt 2 --- Im Beispiel}
+\[ \frac{\sigma_u^{2}}{\sigma_v^{2}} = \frac{0{,}8}{0{,}6} = 1{,}333 \quad\Longrightarrow\quad \frac{\sigma_u}{\sigma_v} = 1{,}155 \]
+
+\schritt{Schritt 3 --- Die Probe}
+\[ -0{,}8\cdot\frac{1}{2{,}333} + 0{,}6\cdot\frac{1{,}333}{2{,}333} = -0{,}343+0{,}343 = 0 \quad \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei fast ausgeglichenen Schwankungen zeigt die Regression gar keinen Zusammenhang --- obwohl beide Kurven deutlich geneigt sind.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Nullbefund ist in simultanen Systemen also kein Beleg für Wirkungslosigkeit.} Er kann ebenso gut bedeuten, dass sich zwei starke, entgegengesetzte Wirkungen in der Beobachtung aufheben. Dasselbe gilt für die Rückkopplung zwischen Beitragssatz und Gesundheit aus Aufgabe 1.3.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Beobachtungsäquivalenz}
+Zeigen Sie, dass verschiedene Parametersätze dieselben Preis-Mengen-Daten erzeugen.
+
+\loesung
+\schritt{Schritt 1 --- Was beobachtbar ist}
+Nur die drei Momente $\operatorname{Var}(p)$, $\operatorname{Var}(q)$ und $\operatorname{Cov}(p,q)$.
+
+\schritt{Schritt 2 --- Was zu bestimmen wäre}
+Vier Größen: $b$, $d$, $\sigma_u^{2}$, $\sigma_v^{2}$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Drei Gleichungen, vier Unbekannte --- es bleibt eine ganze Schar von Lösungen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Zwei davon}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{1.6cm}P{1.6cm}P{1.8cm}@{}}
+\toprule
+$b$ & $d$ & $\sigma_u^{2}$ & $\sigma_v^{2}$ & \textbf{KQ}\\
+\midrule
+$0{,}80$ & $0{,}60$ & $1{,}00$ & $1{,}00$ & $-0{,}100$\\
+$1{,}40$ & $0{,}00$ & $1{,}00$ & $1{,}00$ & $-0{,}700$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Die zweite Zeile lässt sich stets so nachjustieren, dass $\operatorname{Var}(p)$ und $\operatorname{Cov}(p,q)$ übereinstimmen --- ein Freiheitsgrad bleibt übrig.}
+
+\schritt{Schritt 4 --- Die Lehre}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist Satz 1.2 aus Band 23 in ökonometrischer Fassung}: dieselbe beobachtbare Verteilung, verschiedene zugrunde liegende Größen. Dort waren es zwei Graphen, hier zwei Parametersätze. In beiden Fällen entscheidet keine Datenmenge, sondern nur eine Annahme --- und in beiden Fällen besteht der Fortschritt darin, diese Annahme aufzuschreiben.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Die Abzählbedingung anwenden}
+Ein Modell der Arztbesuche:
+\[ \text{Besuche} = \alpha_1 - \beta\,\text{Zuzahlung} + \gamma\,\text{Alter} + u \]
+\[ \text{Zuzahlung} = \alpha_2 + \delta\,\text{Besuche} + \eta\,\text{Beitragssatz} + v \]
+Welche Gleichung ist identifiziert?
+
+\loesung
+\schritt{Schritt 1 --- Zählen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Gleichung} & \textbf{endogen darin} & \textbf{ausgeschlossen}\\
+\midrule
+Besuche & $2$ & Beitragssatz: $1$\\
+Zuzahlung & $2$ & Alter: $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Beide erfüllen die Bedingung $1 \ge 2-1$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide Gleichungen sind identifiziert --- jede durch die Größe, die in der anderen steht.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die Annahmen darin}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Beitragssatz} & wirkt \kursiv{nicht} unmittelbar auf die Besuche --- nur über die Zuzahlung.\\
+\textbf{Alter} & wirkt \kursiv{nicht} unmittelbar auf die Zuzahlung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Prüfung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die zweite Annahme ist falsch}, sobald die Kasse altersabhängige Tarife anbietet --- und die erste, sobald ein hoher Beitragssatz die Versicherten zum Sparen zwingt. \textbf{Formale Identifikation und inhaltliche Haltbarkeit sind zwei verschiedene Dinge}, und die Abzählbedingung prüft nur die erste. Sie ist eine Buchführung über Annahmen, kein Beleg für sie.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Frage von 1927}
+\Person{Elmer Working} veröffentlichte den Aufsatz \kursiv{What Do Statistical Demand Curves Show?} im \kursiv{Quarterly Journal of Economics}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er beantwortete die Titelfrage mit dem Bild aus Abschnitt 2.1 und schloss, man könne eine Nachfragekurve nur dann schätzen, wenn sie stabil bleibe und das Angebot schwanke. \textbf{Sein Bruder \Person{Holbrook Working} wurde ebenfalls ein bedeutender Ökonometriker}; beide arbeiteten an Agrarmärkten, wo sich das Wetter als Angebotsverschieber anbot.}
+\end{minipage}
+\end{center}
+
+\schritt{Haavelmo}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Trygve Haavelmo} formulierte 1943 das Identifikationsproblem allgemein und zeigte, dass die Kleinste-Quadrate-Schätzung in simultanen Systemen grundsätzlich verzerrt ist --- Satz 2.1. \textbf{Er schrieb seine Hauptarbeit als junger Forscher in den USA, abgeschnitten von Norwegen durch die deutsche Besetzung.} Der Nobelpreis kam 1989, als er längst zurückgezogen in Oslo lebte.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Gegenbewegung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Edward Leamer} schrieb 1983 den Aufsatz \kursiv{Let's Take the Con Out of Econometrics} --- eine Abrechnung mit der Praxis, Ausschlüsse nach Bedarf zu wählen. \textbf{Sein Vorschlag: Man solle zeigen, wie stark das Ergebnis von den Annahmen abhängt}, statt eine Zahl zu berichten. Die Empfindlichkeitsanalyse aus Band 23, Kapitel~7 geht auf dieselbe Forderung zurück.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Identifikation heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{5.0cm}@{}}
+\toprule
+\textbf{Teilweise Identifikation} & Schranken statt Punktschätzungen, wenn Annahmen fehlen.\\
+\textbf{Strukturelle Modelle} & Identifikation aus ökonomischer Theorie statt aus Ausschlüssen.\\
+\textbf{Automatische Prüfung} & Rechner, die Identifizierbarkeit aus dem Modell ableiten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{Charles Manski} entwickelte ab den 1990er Jahren die Lehre von den Schranken: Statt eine unhaltbare Annahme zu treffen, gibt man an, welches Intervall die Daten zulassen. \textbf{Die Intervalle sind oft weit --- und das ist die Aussage}: Sie zeigen, wie viel die Annahme beiträgt und wie wenig die Daten. Manski nennt das Nachdenken über das, was man nicht weiß, und es ist die ehrlichste Antwort auf Leamers Vorwurf.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 2.1} & die Gerade ist ein gewogenes Mittel\\
+\textbf{Definition 2.2} & Identifikation vor Schätzung\\
+\textbf{Satz 2.3} & Ausschlüsse zählen, nicht Einschlüsse\\
+\textbf{Nullbefund} & kann Aufhebung zweier Wirkungen sein\\
+\textbf{Der Bruchfall} & identifiziert heißt nicht glaubwürdig\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Abzählbedingung sagt, dass eine Größe bestimmbar ist. Das nächste Kapitel sagt, wie man sie bestimmt --- und wie schnell das Verfahren versagt, wenn der Ausschluss zwar gilt, die Wirkung aber schwach ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

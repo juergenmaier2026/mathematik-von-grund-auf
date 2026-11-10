@@ -1,0 +1,357 @@
+\chapter{Zufall aus einer Formel}
+
+\section{Der Widerspruch}
+
+\begin{merksatz}
+\boxtitel{Ein Rechner kann nicht würfeln}
+Jede Anweisung eines Rechners ist festgelegt; derselbe Zustand führt stets zum selben nächsten. Was er liefert, ist eine Folge, die nach einer Formel entsteht --- und die nur so aussieht, als wäre sie zufällig.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Frage ist nicht, ob die Zahlen zufällig sind --- sie sind es nicht ---, sondern ob irgendein Test den Unterschied bemerkt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist dieselbe Haltung wie bei der Kryptographie in Band 20}: Dort hieß ein Schlüsselstrom sicher, wenn kein Angreifer ihn von Zufall unterscheiden kann. Hier heißt eine Folge brauchbar, wenn keine Simulation den Unterschied merkt. Beides sind Aussagen über den Beobachter, nicht über die Folge.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 2.1 --- linearer Kongruenzgenerator}
+\[ x_{n+1} = (a\,x_n + c) \bmod m, \qquad u_n = x_n/m \]
+mit Multiplikator $a$, Inkrement $c$, Modul $m$ und Startwert $x_0$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Zwei Beispiele mit $m = 16$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{6.4cm}@{}}
+\toprule
+$a=5$, $c=1$ & $0,\,1,\,6,\,15,\,12,\,13,\,2,\,11,\,8,\,9,\,14,\,7,$ $4,\,5,\,10,\,3,\,0,\,\ldots$ --- alle sechzehn Werte, dann von vorn.\\
+$a=5$, $c=0$ & $1, 5, 9, 13, 1, 5, \ldots$ --- Periode vier.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Satz 2.2 --- die volle Periode}
+Ein Generator mit $c \ne 0$ hat genau dann die Periode $m$, wenn $c$ und $m$ teilerfremd sind, $a-1$ durch jeden Primteiler von $m$ teilbar ist, und $a-1$ durch $4$ teilbar ist, falls $m$ es ist.
+
+\kursiv{Probe am ersten Beispiel: $\operatorname{ggT}(1,16)=1$; $a-1=4$ ist durch $2$ und durch $4$ teilbar.} \checkmark \ \kursiv{Der Beweis ist Zahlentheorie aus Band 1 und wird dort in Kapitel~9 geführt --- wir übergehen ihn hier, die erste Auslassung dieses Bandes.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Periode ist die erste Grenze: Nach $m$ Zahlen wiederholt sich alles. Eine Simulation, die mehr braucht, benutzt dieselben Zahlen zweimal.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.6cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Generator} & \textbf{Periode} & \textbf{bei $10^{6}$/s}\\
+\midrule
+Minimal Standard (1988) & $2^{31}-2$ & $36$ Minuten\\
+Mersenne-Twister (1998) & $2^{19937}-1$ & $10^{5990}$ Jahre\\
+PCG64 (2014) & $2^{128}$ & $10^{25}$ Jahre\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Minimal Standard war zwanzig Jahre lang die Empfehlung} --- und seine Periode ist heute in einer halben Stunde erschöpft. Die Bände 16 bis 26 dieser Reihe benutzen PCG64, den Standard von NumPy seit 2019; seine $2^{128}$ Zahlen reichen für jede Simulation, die ein Rechner je ausführen wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Gitter}
+
+\begin{merksatz}
+\boxtitel{Der Fehler von RANDU}
+IBM lieferte ab 1960 den Generator $x_{n+1} = 65539\,x_n \bmod 2^{31}$ aus. Er bestand die üblichen Tests --- Mittelwert $0{,}503$, Varianz $0{,}0832$ gegen $0{,}0833$, keine Autokorrelation.
+
+\schritt{Satz 2.3 --- alle Tripel liegen auf fünfzehn Ebenen}
+Für RANDU gilt für je drei aufeinanderfolgende Zahlen
+\[ x_{n+2} - 6\,x_{n+1} + 9\,x_n \equiv 0 \pmod{2^{31}} . \]
+
+\schritt{Beweis}
+$65539 = 2^{16}+3$, also
+\[ x_{n+2} = (2^{16}+3)^{2}x_n = (2^{32} + 6\cdot2^{16} + 9)\,x_n \equiv (6\cdot2^{16}+9)\,x_n \pmod{2^{31}} . \]
+Andererseits $6\,x_{n+1} = 6(2^{16}+3)x_n = (6\cdot2^{16}+18)\,x_n$. Die Differenz ist $-9x_n$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jedes Tripel $(u_n,u_{n+1},u_{n+2})$ liegt auf einer von nur fünfzehn parallelen Ebenen im Einheitswürfel. Ein zufälliger Punkt im Würfel tut das nie.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{5.0cm}@{}}
+\toprule
+\textbf{Generator} & $\bigl(9u_n - 6u_{n+1} + u_{n+2}\bigr) \bmod 1$\\
+\midrule
+RANDU & nimmt \textbf{einen} Wert an ($30\,000$ Tripel)\\
+PCG64 & $29\,540$ verschiedene Werte\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Gitterstruktur, die jeder lineare Kongruenzgenerator hat} --- RANDU nur in ihrer schlimmsten Form. \Person{Marsaglia} zeigte 1968, dass die $k$-Tupel jedes solchen Generators auf höchstens $(k!\,m)^{1/k}$ Hyperebenen liegen; bei $m = 2^{31}$ und $k = 3$ sind das höchstens $2344$, bei gutem Multiplikator fast so viele, bei RANDU fünfzehn. Eine Simulation, die Tripel braucht --- jeder Punkt im Raum, jede Verweildauer mit zwei Parametern ---, sieht bei RANDU ein Gitter statt einer Wolke.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Aus gleichverteilt wird alles andere}
+
+\begin{merksatz}
+\boxtitel{Satz 2.4 --- Inversion}
+Ist $U$ gleichverteilt auf $(0,1)$ und $F$ eine Verteilungsfunktion mit Umkehrfunktion $F^{-1}$, so hat $X = F^{-1}(U)$ die Verteilung $F$.
+
+\schritt{Beweis}
+\[ \Pr[X \le x] = \Pr[F^{-1}(U) \le x] = \Pr[U \le F(x)] = F(x) . \]
+$\blacksquare$
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Verteilung} & $F^{-1}(u)$ & \textbf{geprüft}\\
+\midrule
+Exponential$(\lambda)$ & $-\ln(1-u)/\lambda$ & Mittel $0{,}4175$ bei $1/\lambda = 0{,}4167$\\
+Poisson$(\lambda)$ & kleinstes $k$ mit $F(k)\ge u$ & Mittel $3{,}201$, Varianz $3{,}209$\\
+Normal & keine geschlossene Form & ---\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Inversion ist das Verfahren der Wahl, wo sie geht}: Sie braucht genau eine Zufallszahl je Ziehung, erhält die Ordnung --- größeres $u$, größeres $x$ --- und macht damit die Tricks aus Kapitel~5 möglich. Für die Normalverteilung geht sie nur näherungsweise, und das führt zu den beiden anderen Verfahren.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.5 --- Box und Muller}
+Sind $U_1$, $U_2$ unabhängig gleichverteilt, so sind
+\[ Z_1 = \sqrt{-2\ln U_1}\,\cos(2\pi U_2), \qquad Z_2 = \sqrt{-2\ln U_1}\,\sin(2\pi U_2) \]
+unabhängig standardnormalverteilt.
+
+\schritt{Beweis}
+Das Paar $(Z_1,Z_2)$ hat in Polarkoordinaten den Radius $R = \sqrt{-2\ln U_1}$ und den Winkel $\Theta = 2\pi U_2$. Der Winkel ist gleichverteilt; für den Radius gilt $\Pr[R^{2} \le r] = \Pr[-2\ln U_1 \le r] = 1-e^{-r/2}$ --- also ist $R^{2}$ exponentialverteilt mit Mittel $2$. Genau das ist die Verteilung von $Z_1^{2}+Z_2^{2}$ bei zwei unabhängigen Normalgrößen ($\chi^{2}$ mit zwei Freiheitsgraden), und die Richtung ist unabhängig vom Radius. $\blacksquare$
+
+\kursiv{Geprüft an $100\,000$ Paaren: Mittel $-0{,}0007$, Streuung $0{,}998$, Schiefe $0{,}001$.}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.6 --- Verwerfung}
+Sei $f$ die gewünschte Dichte und $g$ eine Dichte, aus der man ziehen kann, mit $f(x) \le M\,g(x)$ für alle $x$. Man ziehe $X \sim g$ und $U$ gleichverteilt; man nehme $X$ an, falls $U \le f(X)/(M g(X))$.
+
+\schritt{Beweis}
+\[ \Pr[X \le x \mid \text{angenommen}] = \frac{\int_{-\infty}^{x} g(t)\,\frac{f(t)}{Mg(t)}\,\dd t}{\int_{-\infty}^{\infty} g(t)\,\frac{f(t)}{Mg(t)}\,\dd t} = \frac{\frac1M\int_{-\infty}^{x} f}{\frac1M} = F(x) . \]
+Die Annahmewahrscheinlichkeit ist $1/M$. $\blacksquare$
+
+\schritt{Zwei Beispiele}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{1.6cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+\textbf{Ziel} & $M$ & \textbf{soll} & \textbf{geprüft}\\
+\midrule
+Halbkreis aus Rechteck & $4/\pi$ & $0{,}785$ & $0{,}787$\\
+Halbnormal aus Exponential & $\sqrt{2e/\pi}$ & $0{,}760$ & $0{,}761$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Verwerfung ist das allgemeinste Verfahren und das verschwenderischste}: Ein Viertel der Ziehungen geht verloren, und bei schlecht gewählter Hülle weit mehr. Ihr Vorzug ist, dass sie nur die Dichte braucht --- keine Verteilungsfunktion, keine Umkehrung. In Kapitel~7 wird sie zum Baustein des Metropolis-Verfahrens, das sogar ohne die Normierung der Dichte auskommt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was den Zufall verdirbt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Der Startwert} & Zwei Läufe mit demselben Startwert sind identisch. Zwei Läufe mit den Startwerten $1$ und $2$ sind bei schlechten Generatoren fast identisch.\\
+\textbf{Die Uhr als Startwert} & Zwei Prozesse, die in derselben Sekunde starten, erzeugen dieselben Zahlen --- der häufigste Fehler bei parallelen Simulationen.\\
+\textbf{Die unteren Bits} & Bei vielen alten Generatoren wechseln die letzten Bits streng abwechselnd. Wer $x \bmod 2$ als Münzwurf benutzt, erhält Kopf, Zahl, Kopf, Zahl.\\
+\textbf{Die Umwandlung} & $u\cdot n$ abgerundet ist nicht gleichverteilt auf $\{0,\ldots,n-1\}$, wenn $n$ kein Teiler des Moduls ist. Der Fehler ist klein und systematisch.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die zweite Zeile hat in den 2010er Jahren mehrere veröffentlichte Studien entwertet}, deren Simulationen auf Rechenclustern liefen: Hundert Knoten, dieselbe Sekunde, hundertmal dieselben Zahlen --- und ein Fehlerbalken, der zehnmal zu klein war. Moderne Generatoren bieten dafür Ströme: aus einem Startwert beliebig viele unabhängige Folgen. Kapitel~13 macht daraus eine Vorschrift.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- Einen Generator prüfen}
+Hunderttausend Zahlen eines Generators werden in hundert gleich breite Klassen sortiert. Die $\chi^{2}$-Statistik beträgt $105{,}5$, die Autokorrelation auf Abstand eins $+0{,}003$. Ist der Generator brauchbar?
+
+\loesung
+\schritt{Schritt 1 --- Gleichverteilung}
+Erwartungswert $99$, $95$-Prozent-Grenze $123$ (Band 17, Kapitel~10). $105{,}5$ ist unauffällig.
+
+\schritt{Schritt 2 --- Unabhängigkeit}
+Standardfehler der Autokorrelation bei $n = 100\,000$: $1/\sqrt n = 0{,}003$. Der Wert $0{,}003$ ist eine Standardabweichung --- unauffällig.
+
+\schritt{Schritt 3 --- Das Urteil}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide Tests bestanden --- und RANDU hätte sie auch bestanden.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Generator ist nie bewiesen, nur noch nicht widerlegt.} Die heute üblichen Prüfsammlungen --- TestU01 mit über hundert Tests, darunter Tripel auf Ebenen, Geburtstagsabstände, Rangtests von Zufallsmatrizen --- sind das Ergebnis von fünfzig Jahren gefundener Fehler. Für eigene Zwecke genügt die Regel: einen Generator aus dieser Sammlung benutzen, nie einen selbst gebauten.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Inversion für eine Verweildauer}
+Erzeugen Sie aus $u = 0{,}37$ eine logarithmisch normalverteilte Verweildauer mit Median $4$ und $\sigma = 0{,}6$.
+
+\loesung
+\schritt{Schritt 1 --- Die Normalgröße}
+$\Phi^{-1}(0{,}37) = -0{,}332$ (Tafel oder Näherung).
+
+\schritt{Schritt 2 --- Die Umwandlung}
+\[ d = 4\cdot e^{0{,}6\cdot(-0{,}332)} = 4\cdot e^{-0{,}199} = 4\cdot0{,}820 = 3{,}28 \ \text{Tage} \]
+
+\schritt{Schritt 3 --- Die Probe}
+$\ln(3{,}28/4)/0{,}6 = -0{,}331$; $\Phi(-0{,}331) = 0{,}370$. \checkmark
+
+\schritt{Schritt 4 --- Warum über die Normalgröße}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Umkehrfunktion der logarithmischen Normalverteilung ist $\exp(\mu+\sigma\Phi^{-1}(u))$ --- Inversion der Normalverteilung, dann Exponentialfunktion. \textbf{$\Phi^{-1}$ hat keine geschlossene Form, aber sehr gute Näherungen} (Band 5, Kapitel~6), und jeder Rechner hat sie eingebaut. Für die Verweildauern im Leitfall ist das der schnellste Weg, und er erhält die Ordnung: Ein großes $u$ ist ein langer Aufenthalt. Kapitel~5 wird genau das ausnutzen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Die Hülle wählen}
+Für die Halbnormalverteilung $f(x) = \sqrt{2/\pi}\,e^{-x^{2}/2}$, $x > 0$, soll die Exponentialverteilung $g(x) = \lambda e^{-\lambda x}$ als Hülle dienen. Welches $\lambda$ ist das beste?
+
+\loesung
+\schritt{Schritt 1 --- Das Verhältnis}
+\[ \frac{f(x)}{g(x)} = \frac{\sqrt{2/\pi}}{\lambda}\,e^{-x^{2}/2+\lambda x} \]
+Der Exponent ist maximal bei $x = \lambda$, der Wert dort $e^{\lambda^{2}/2}$:
+\[ M(\lambda) = \frac{\sqrt{2/\pi}}{\lambda}\,e^{\lambda^{2}/2} \]
+
+\schritt{Schritt 2 --- Minimieren}
+\[ \frac{\dd}{\dd\lambda}\ln M = -\frac1\lambda + \lambda = 0 \quad\Longrightarrow\quad \lambda = 1 \]
+\[ M(1) = \sqrt{2/\pi}\cdot e^{1/2} = \sqrt{2e/\pi} = 1{,}3155 \]
+
+\schritt{Schritt 3 --- Die Annahmequote}
+\[ \frac1M = 0{,}760 \quad\text{--- geprüft: } 0{,}761 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+$\lambda$ & $M$ & \textbf{Annahme}\\
+\midrule
+$0{,}5$ & $1{,}81$ & $55\,\%$\\
+$1{,}0$ & $\mathbf{1{,}32}$ & $\mathbf{76\,\%}$\\
+$2{,}0$ & $2{,}95$ & $34\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die beste Hülle ist die, die der Zieldichte am engsten anliegt} --- hier bei $\lambda = 1$, wo Hülle und Ziel sich bei $x = 1$ berühren. Das ist eine Optimierungsaufgabe aus Band 19 und das Muster für alle Verwerfungsverfahren: Je enger die Hülle, desto weniger Verschwendung. Für die Normalverteilung benutzt man heute den Ziggurat-Algorithmus, dessen Hülle aus $256$ Rechtecken besteht und $99$ Prozent annimmt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Verfahren, das jeder benutzte, und sein Fehler}
+\Person{John von Neumann} schlug 1946 die Mittquadratmethode vor --- Zahl quadrieren, mittlere Ziffern nehmen --- und wusste, dass sie schlecht war. Sein Satz dazu ist berühmt: \textbf{Wer arithmetische Verfahren zur Erzeugung von Zufallsziffern erwägt, befindet sich in einem Zustand der Sünde.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Derrick Lehmer} gab 1949 den linearen Kongruenzgenerator an. \textbf{RANDU kam 1960 von IBM und war bis in die 1970er Jahre der meistbenutzte Generator der Welt} --- im System/360, in Fortran-Bibliotheken, in Lehrbüchern. \Person{George Marsaglia} veröffentlichte 1968 den Aufsatz \kursiv{Random Numbers Fall Mainly in the Planes}, und Satz 2.3 wurde allgemein bekannt. Benutzt wurde RANDU trotzdem noch jahrelang; \Person{Knuth} nannte ihn \enquote{wirklich entsetzlich}.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Mersenne-Twister}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Makoto Matsumoto} und \Person{Takuji Nishimura} veröffentlichten 1998 einen Generator mit der Periode $2^{19937}-1$, gleichverteilt in $623$ Dimensionen --- das Gitterproblem war damit praktisch erledigt. \textbf{Er wurde der Standard in Python, R, Matlab und fast allen anderen Umgebungen} und blieb es zwanzig Jahre, bis kleinere und schnellere Generatoren wie PCG ihn ablösten. Für die Kryptographie taugt keiner von beiden: Aus $624$ Ausgaben lässt sich der Zustand des Twisters vollständig zurückrechnen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Zufallszahlen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Zählergeneratoren} & Zahl Nummer $n$ direkt berechnen, ohne die $n-1$ davor --- ideal für Parallelrechner.\\
+\textbf{Physikalischer Zufall} & Rauschen in Halbleitern, Photonen am Strahlteiler --- für Schlüssel, nicht für Simulationen.\\
+\textbf{Quasi-Zufall} & Folgen, die absichtlich gleichmäßiger sind als Zufall --- Kapitel~6.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Generatoren wie Philox oder Threefry berechnen die $n$-te Zufallszahl als Funktion von $n$ und einem Schlüssel --- eine abgeschwächte Blockchiffre aus Band 20. \textbf{Damit kann jeder Prozessor eines Rechenverbunds seine eigenen Zahlen erzeugen, ohne mit den anderen zu sprechen}, und das Problem aus dem Bruchfall verschwindet. Dass die Kryptographie und die Simulation hier dieselben Werkzeuge benutzen, ist kein Zufall: Beide brauchen Folgen, die niemand von Zufall unterscheiden kann.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 2.1} & Kongruenzgenerator, Periode\\
+\textbf{Satz 2.3} & RANDU: fünfzehn Ebenen\\
+\textbf{Satz 2.4} & Inversion: eine Zahl, eine Ziehung\\
+\textbf{Satz 2.5, 2.6} & Box-Muller, Verwerfung\\
+\textbf{Der Bruchfall} & Startwert, Uhr, untere Bits\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nun kann der Rechner aus jeder Verteilung ziehen. Das nächste Kapitel benutzt das für die Aufgabe, an der alle anderen Verfahren scheitern: Integrale in vielen Dimensionen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

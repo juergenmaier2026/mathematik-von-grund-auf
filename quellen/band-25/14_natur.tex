@@ -1,0 +1,366 @@
+\chapter{Prozesse in Klinik und Natur}
+
+\section{Eine Nervenzelle}
+
+\begin{merksatz}
+\boxtitel{Membranpotential als Diffusion}
+Eine Nervenzelle sammelt Eingänge von tausenden Synapsen. Jeder einzelne ist winzig, ihre Summe schwankt --- die Voraussetzung des Grenzübergangs aus Kapitel~10.
+
+\[ \dd V_t = \frac{\bar V - V_t}{\tau}\,\dd t + \sigma\,\dd W_t , \qquad V \ge \vartheta \ \Longrightarrow\ \text{Aktionspotential, } V \leftarrow V_{\text{reset}} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.0cm}P{3.0cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{Wert} & \\
+\midrule
+Zeitkonstante $\tau$ & $20$ ms & Membran\-eigenschaft\\
+Feuerrate & $28{,}2$ Hz & simuliert\\
+mittlerer Abstand & $35{,}4$ ms & \\
+Streuungsmaß & $\mathbf{0{,}131}$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist ein Ornstein-Uhlenbeck-Prozess mit Schwelle --- und ein Poisson-Prozess hätte ein Streuungsmaß von eins.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bei starkem Eingang feuert die Zelle fast regelmäßig}, weil die Rückstellkraft das Rauschen beherrscht; bei schwachem Eingang entscheidet allein der Zufall, und das Streuungsmaß nähert sich eins. \textbf{Man kann also aus der Regelmäßigkeit einer Zellantwort auf ihren Betriebszustand schließen} --- ein Verfahren, das in der Elektrophysiologie täglich benutzt wird und dessen Grundlage die Kapitel~4 und 12 sind.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Eine Erbanlage}
+
+\begin{merksatz}
+\boxtitel{Genetische Drift}
+In einer Population von $N$ Individuen mit zwei Genvarianten wird jede Generation neu gezogen. Der Anteil $p_n$ der einen Variante ist ein Martingal:
+\[ \mathbb{E}[p_{n+1} \mid p_n] = p_n . \]
+
+\schritt{Satz 14.1 --- die Fixierungswahrscheinlichkeit}
+Ohne Selektion ist die Wahrscheinlichkeit, dass sich eine Variante durchsetzt, gleich ihrem heutigen Anteil.
+
+\schritt{Beweis}
+Nach Satz 9.1 konvergiert $p_n$; die einzigen absorbierenden Werte sind $0$ und $1$. Nach Satz 8.3 (der Prozess ist beschränkt) gilt
+\[ p_0 = \mathbb{E}[p_\infty] = 1\cdot\Pr[\text{Fixierung}] + 0\cdot\Pr[\text{Verlust}] . \]
+$\blacksquare$
+
+\kursiv{Simuliert:} Start bei $0{,}1$, $N = 1000$, $20\,000$ Populationen --- Fixierung in $10{,}1$ Prozent der Fälle, nach knapp $20\,000$ Generationen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Satz über faire Spiele beantwortet eine Grundfrage der Evolutionstheorie in drei Zeilen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Mit Selektion}
+Hat eine Variante den Vorteil $s$, so löst die Fixierungswahrscheinlichkeit eine Differentialgleichung, die aus der Diffusionsnäherung folgt:
+\[ \pi(p) = \frac{1-e^{-4Nsp}}{1-e^{-4Ns}} \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+$s$ & \textbf{neue Mutation} & \textbf{Näherung $2s$}\\
+\midrule
+$0$ & $0{,}00050$ & ---\\
+$0{,}001$ & $0{,}00204$ & $0{,}002$\\
+$0{,}010$ & $0{,}01980$ & $0{,}020$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{$N = 1000$, Start bei $p = 1/(2N)$.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine vorteilhafte Mutation mit einem Prozent Vorteil setzt sich nur in zwei von hundert Fällen durch --- und geht in achtundneunzig verloren.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Näherung $2s$ ist das berühmteste Ergebnis der theoretischen Populationsgenetik} und stimmt hier auf zwei Stellen. Sie ist zugleich die Begründung von Aufgabe 6.3: In der Anfangsphase ist die Mutation so selten, dass ihre Vermehrung ein Verzweigungsprozess ist --- mit $R_0 = 1+s$ und nach Aufgabe 6.2 einer Ausbruchswahrscheinlichkeit von $2s$. \textbf{Zwei ganz verschiedene Wege führen auf dieselbe Zahl.}}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Grenze der Selektion}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für $|4Ns| \ll 1$ wird $\pi(p) \approx p$ --- die Selektion verschwindet gegenüber der Drift. \textbf{In kleinen Populationen setzen sich also auch schädliche Varianten durch}, und das ist der mathematische Kern der neutralen Theorie der Evolution: Nicht jede verbreitete Eigenschaft ist ein Vorteil.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Ein überwachter Patient}
+
+\begin{merksatz}
+\boxtitel{Den Zustand aus verrauschten Messungen schätzen}
+Der wahre Zustand folge $X_{t+1} = a\,X_t + w_t$, gemessen werde $Y_t = X_t + v_t$ mit unabhängigem Rauschen.
+
+\schritt{Die Rekursion}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Vorhersage} & $\hat x^- = a\,\hat x$, \quad $P^- = a^{2}P + q$\\
+\textbf{Verstärkung} & $\kappa = \dfrac{P^-}{P^- + r}$\\
+\textbf{Berichtigung} & $\hat x = \hat x^- + \kappa\,(y - \hat x^-)$, \quad $P = (1-\kappa)P^-$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Im Beharrungszustand}
+Mit $a = 0{,}95$, Prozessrauschen $q = 0{,}1$, Messrauschen $r = 1{,}0$:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}@{}}
+\toprule
+Fehlervarianz $P$ & $0{,}241$\\
+Verstärkung $\kappa$ & $0{,}241$\\
+Messvarianz & $1{,}000$\\
+\midrule
+\textbf{Verbesserung} & \textbf{Faktor $4{,}1$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Filter gewichtet jede neue Messung nur mit $24$ Prozent --- und ist dadurch viermal genauer als die Einzelmessung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die bedingte Erwartung aus Kapitel~7, rekursiv berechnet} --- und im linearen Fall zugleich die beste aller Schätzungen, nicht nur die beste lineare. Für die Überwachung heißt das: Ein Alarm sollte nicht auf dem Messwert beruhen, sondern auf dem gefilterten Zustand. Ein Monitor, der bei jedem Ausreißer piept, benutzt $\kappa = 1$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was alle drei Modelle teilen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Gaußsches Rauschen} & In allen drei Fällen sind die Störungen normalverteilt --- bei Synapsen, Geburtenzahlen und Messfehlern nur näherungsweise.\\
+\textbf{Feste Parameter} & $\tau$, $s$, $a$ ändern sich in Wahrheit mit Zustand und Zeit.\\
+\textbf{Lineare Rückstellung} & Reale Systeme haben Sättigungen und Schwellen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Modelle dieses Kapitels sind erste Näherungen, und ihr Wert liegt darin, dass man mit ihnen rechnen kann.} Jede Verfeinerung kostet die geschlossenen Formeln und zwingt zur Simulation. Der richtige Umgang ist daher, mit dem einfachen Modell die Größenordnung zu bestimmen und erst dann zu entscheiden, ob die Verfeinerung den Aufwand lohnt --- dieselbe Haltung, die Band 24 für Entscheidungsmodelle empfahl.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- Regelmäßigkeit messen}
+Wie erkennt man an einer Folge von Zeitpunkten, ob sie poissonsch ist?
+
+\loesung
+\schritt{Schritt 1 --- Das Maß}
+Der Variationskoeffizient der Abstände:
+\[ \mathrm{CV} = \frac{\text{Streuung der Abstände}}{\text{mittlerer Abstand}} \]
+
+\schritt{Schritt 2 --- Die Deutung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.6cm}P{2.8cm}@{}}
+\toprule
+$\mathrm{CV}$ & \textbf{Bedeutung} & \textbf{Beispiel}\\
+\midrule
+$0$ & exakt regelmäßig & Schrittmacher\\
+$0{,}13$ & fast regelmäßig & starker Eingang\\
+$1$ & poissonsch & schwacher Eingang\\
+$> 1$ & gehäuft & Salven\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Verbindung zu Kapitel 4}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Es ist dieselbe Prüfgröße wie in Aufgabe 4.3, nur auf Abstände statt auf Zählungen angewandt.} Für den Poisson-Prozess gilt Varianz gleich Mittelwert bei den Zählungen und $\mathrm{CV} = 1$ bei den Abständen --- beides sind Kennzeichnungen desselben Prozesses. Bei Nervenzellen benutzt man beide Größen nebeneinander, weil sie auf verschiedenen Zeitskalen empfindlich sind.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Falle}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Schwankt die Feuerrate selbst über die Zeit --- etwa mit der Atmung ---, so erscheint die Folge gehäuft, obwohl sie bei fester Rate poissonsch wäre. \textbf{Man muss daher über kurze Abschnitte messen, in denen die Rate als fest gelten kann} --- dieselbe Überlegung wie bei der zeitabhängigen Rate in Aufgabe 4.3(a).}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- Wie lange dauert Fixierung?}
+Für eine neutrale Variante mit Anfangsanteil $p$ beträgt die erwartete Zeit bis zur Fixierung $-4N\,\frac{1-p}{p}\ln(1-p)$ Generationen, bedingt darauf, dass sie eintritt. Rechnen Sie Beispiele.
+
+\loesung
+\schritt{Schritt 1 --- Die Werte für $N = 1000$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{3.0cm}P{2.2cm}@{}}
+\toprule
+$p$ & \textbf{Wahrschein\-lichkeit} & \textbf{Dauer}\\
+\midrule
+$0{,}5$ & $0{,}50$ & $2773$\\
+$0{,}1$ & $0{,}10$ & $3793$\\
+$0{,}001$ & $0{,}001$ & $3998$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Für kleine $p$ strebt der Ausdruck gegen $4N$.}
+
+\schritt{Schritt 2 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine einzelne neue Mutation braucht, wenn sie sich durchsetzt, etwa $4N$ Generationen dafür --- unabhängig davon, wie unwahrscheinlich das war.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Einordnung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei einer Population von zehntausend und zwanzig Jahren Generationsdauer sind das $800\,000$ Jahre. \textbf{Die Zeitskalen der Evolution ergeben sich damit aus zwei Zahlen: der Populationsgröße und der Mutationsrate} --- nicht aus der Stärke der Selektion. Das war Kimuras Hauptargument für die neutrale Theorie, und es folgt unmittelbar aus der Diffusionsnäherung.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Und die Simulation}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Rechnung in Abschnitt 14.2 lief knapp $20\,000$ Generationen, bis alle Populationen entschieden waren --- das Fünffache des Mittelwerts, weil die Verteilung der Fixierungszeiten einen langen Schwanz hat. \textbf{Wer solche Simulationen abbricht, überschätzt systematisch den Anteil unentschiedener Fälle.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Der Filter im Grenzfall}
+Was macht der Kalman-Filter, wenn das Prozessrauschen sehr klein oder sehr groß ist?
+
+\loesung
+\schritt{Schritt 1 --- Die Fixpunktgleichung}
+Im Beharrungszustand gilt mit $P^- = a^{2}P+q$:
+\[ P = \frac{(a^{2}P+q)\,r}{a^{2}P+q+r} \]
+
+\schritt{Schritt 2 --- Die beiden Grenzfälle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+\textbf{Lage} & $\kappa$ & \textbf{Verhalten}\\
+\midrule
+$q \to 0$ & $\to 0$ & mittelt alles, folgt nichts\\
+$q \gg r$ & $\to 1$ & folgt jeder Messung\\
+$q = 0{,}1$, $r = 1$ & $0{,}241$ & dazwischen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die klinische Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Verstärkung ist das Verhältnis von Signal zu Rauschen, in eine Zahl gegossen.} Ein Monitor muss wissen, wie schnell sich der überwachte Zustand ändern \kursiv{kann} --- dann ergibt sich die richtige Glättung von selbst. Wer stattdessen eine feste Glättungszeit einstellt, hat dieselbe Entscheidung getroffen, nur unausgesprochen und ohne Bezug zur Physiologie.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Grenze}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle Formeln gelten nur bei linearem Modell und gaußschem Rauschen. \textbf{Ein plötzlicher Zustandswechsel --- Blutung, Krampfanfall, Extubation --- ist genau das, was der Filter nicht kennt}: Er hält ihn für Messrauschen und glättet ihn weg. Deshalb kombiniert man Filter mit Wechselerkennung, und deshalb ist die Frage, wie schnell ein Alarm reagieren soll, nicht technisch zu beantworten, sondern nach den Kosten der beiden Fehlerarten --- Band 24, Kapitel~1.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Drei Fächer, ein Werkzeug}
+\Person{Ronald Fisher} und \Person{Sewall Wright} entwickelten in den 1920er Jahren unabhängig die Diffusionsnäherung der genetischen Drift --- Wright mit dem Modell, das seinen Namen trägt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Die beiden stritten jahrzehntelang darüber, wie wichtig der Zufall gegenüber der Selektion ist} --- Fisher hielt Populationen für groß genug, um Drift zu vernachlässigen, Wright nicht. \Person{Motoo Kimura} entschied den Streit 1968 zugunsten der Drift, als die Molekularbiologie zeigte, wie viel genetische Vielfalt tatsächlich vorhanden ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Nervenzelle}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Louis Lapicque} stellte das Integrations-Schwellen-Modell 1907 auf --- fünfzig Jahre vor der Entdeckung des Wirkungsmechanismus durch \Person{Hodgkin} und \Person{Huxley}. \textbf{Es ist bis heute das meistbenutzte Modell der Rechenneurowissenschaft}, gerade weil es so einfach ist: Eine Diffusion mit Schwelle, deren Feuerzeitpunkte man in geschlossener Form kennt.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Filter}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Rudolf Kálmán} veröffentlichte seine Arbeit 1960; sie wurde von der Statistik zunächst kaum beachtet. \textbf{Die NASA übernahm das Verfahren für die Apollo-Navigation}, und es lief auf einem Rechner mit vier Kilobyte Speicher. Kálmán selbst sagte später, der entscheidende Gedanke sei gewesen, nicht die Daten zu speichern, sondern den Zustand.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Prozesse in der Biologie heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Einzelzellverläufe} & Genexpression als Sprungprozess, in lebenden Zellen gemessen.\\
+\textbf{Ahnenprozesse} & Rückwärts in der Zeit: der Koaleszent.\\
+\textbf{Überwachung} & Zustandsraummodelle für Verläufe auf der Intensivstation.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Statt vorwärts die Nachkommen zu verfolgen, geht der Koaleszent rückwärts und fragt, wann zwei heutige Individuen einen gemeinsamen Vorfahren hatten --- ein Prozess mit sich verringernder Linienzahl. \textbf{Er ist rechnerisch viel sparsamer, weil er nur die Ahnen der Stichprobe betrachtet}, und er ist die Grundlage jeder heutigen Auswertung genetischer Daten. \Person{John Kingman} führte ihn 1982 ein.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Nervenzelle} & Diffusion mit Schwelle, $\mathrm{CV}$ als Maß\\
+\textbf{Satz 14.1} & Fixierung $=$ heutiger Anteil\\
+\textbf{Mit Selektion} & Näherung $2s$, zweimal hergeleitet\\
+\textbf{Kalman} & bedingte Erwartung, rekursiv\\
+\textbf{Der Bruchfall} & drei Näherungen, dieselben Grenzen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~V. Das letzte Kapitel zieht Bilanz --- und fragt, was die Prozesstheorie den übrigen Bänden der Reihe gegeben hat.}
+\end{minipage}
+\end{center}
+\end{merksatz}

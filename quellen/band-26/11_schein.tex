@@ -1,0 +1,360 @@
+\chapter{Zusammenhänge, die keine sind}
+
+\section{Das Experiment}
+
+\begin{merksatz}
+\boxtitel{Zwei Reihen, die nichts miteinander zu tun haben}
+Man erzeuge zwei unabhängige Irrfahrten von je hundert Zeitpunkten und regressiere die eine auf die andere. Das wiederhole man fünftausendmal.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{2.4cm}P{2.2cm}@{}}
+\toprule
+\textbf{Größe} & \textbf{gefunden} & \textbf{erwartet}\\
+\midrule
+Ablehnung bei $5\,\%$ & $\mathbf{76{,}9\,\%}$ & $5\,\%$\\
+Median $|t|$ & $4{,}5$ & $0{,}7$\\
+Median $R^{2}$ & $0{,}17$ & $0{,}01$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In drei von vier Fällen findet man einen hochsignifikanten Zusammenhang zwischen zwei Reihen, die per Konstruktion unabhängig sind.}
+\end{minipage}
+\end{center}
+
+\schritt{Und es wird schlimmer, nicht besser}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}@{}}
+\toprule
+$T$ & \textbf{Ablehnungsrate}\\
+\midrule
+$50$ & $67{,}7\,\%$\\
+$100$ & $76{,}1\,\%$\\
+$500$ & $88{,}9\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Mehr Daten erhöhen den Anteil falscher Befunde} --- das Gegenteil dessen, was die Statistik aus Band 17 verspricht. Dort schrumpft der Standardfehler mit $\sqrt T$; hier wächst die Teststatistik mit $\sqrt T$, weil der Schätzer gar nicht gegen null strebt. Das ist die Scheinregression, und sie ist der häufigste Fehler in der Auswertung von Zeitreihen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 11.1 --- warum es geschieht}
+Sind $x_t$ und $y_t$ unabhängige Irrfahrten, so strebt der Regressionskoeffizient $\hat\beta$ \kursiv{nicht} gegen null, sondern gegen eine nichtentartete Zufallsgröße; die $t$-Statistik wächst wie $\sqrt T$.
+
+\schritt{Der Gedanke}
+Für stationäre Reihen gilt $\frac1T\sum x_ty_t \to \mathbb{E}[xy] = 0$. Für Irrfahrten gilt das Gesetz der großen Zahlen nicht: $\frac1T\sum x_ty_t$ wächst wie $T$, und
+\[ \hat\beta = \frac{\sum x_ty_t}{\sum x_t^{2}} = \frac{T^{-2}\sum x_ty_t}{T^{-2}\sum x_t^{2}} \ \longrightarrow\ \frac{\int_0^1 W_1(r)W_2(r)\,\dd r}{\int_0^1 W_1(r)^{2}\,\dd r} , \]
+ein Quotient aus Integralen zweier Brownscher Bewegungen --- Band 25, Kapitel~10. Der ist zufällig, aber nicht null. Der Standardfehler schrumpft dagegen wie bei stationären Reihen, und der Quotient explodiert. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Irrfahrten haben beide einen Verlauf, und zwei beliebige Verläufe sehen über einen endlichen Zeitraum immer irgendwie ähnlich aus --- oder entgegengesetzt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Abhilfe im Experiment}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{4.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Regression} & \textbf{Ablehnungsrate}\\
+\midrule
+Niveaus & $76{,}9\,\%$\\
+erste Differenzen & $\mathbf{5{,}1\,\%}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Die Differenzen sind weißes Rauschen; dort gilt Band 17 wieder.}
+\end{merksatz}
+
+\section{Die Einheitswurzel prüfen}
+
+\begin{merksatz}
+\boxtitel{Satz 11.2 --- der Test von Dickey und Fuller}
+Man regressiere $\Delta y_t$ auf $y_{t-1}$ (und eine Konstante):
+\[ \Delta y_t = \alpha + \gamma\,y_{t-1} + \varepsilon_t, \qquad \gamma = \phi-1 . \]
+Unter der Nullhypothese $\gamma = 0$ (Einheitswurzel) ist die $t$-Statistik von $\hat\gamma$ \kursiv{nicht} normalverteilt. Ihre Verteilung ist nach links verschoben:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+& \textbf{Normal} & \textbf{Dickey-Fuller}\\
+\midrule
+$5\,\%$-Quantil & $-1{,}64$ & $\mathbf{-2{,}89}$\\
+Mittel & $0$ & $-1{,}53$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Simuliert aus $10\,000$ Irrfahrten der Länge $100$: $5\,\%$-Quantil $-2{,}90$.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer die Normalverteilung benutzt, verwirft die Einheitswurzel viel zu oft --- und hält Irrfahrten für stationär.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Verschiebung ist die Hurwicz-Verzerrung aus Kapitel~10 am Rand des Parameterraums}: Bei $\phi = 1$ wird $\hat\phi$ systematisch kleiner geschätzt, also $\hat\gamma$ negativ, und das mit einer Verteilung, die keine Normalverteilung mehr ist, sondern ein Funktional der Brownschen Bewegung. Die kritischen Werte wurden 1979 simuliert und tabelliert; heute rechnet jedes Programm sie aus.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Das Verfahren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Dickey-Fuller-Test auf jede Reihe --- mit Verzögerungen von $\Delta y$, falls die Störung autokorreliert ist (\enquote{erweitert}).\\
+$2$ & Verwirft der Test nicht: Reihe als Einheitswurzelprozess behandeln --- differenzieren oder auf Kointegration prüfen (Kapitel~12).\\
+$3$ & Verwirft er: Reihe als stationär behandeln --- Band 17 mit den Standardfehlern aus Satz 10.4.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Test hat wenig Macht}: Ein $\phi$ von $0{,}95$ unterscheidet er bei hundert Beobachtungen kaum von eins. Das ist keine Schwäche des Tests, sondern der Daten --- Kapitel~10 hat gezeigt, dass $0{,}95$ und $1{,}00$ über hundert Perioden fast gleich aussehen. Die Entscheidung ist also oft eine Annahme, und sie sollte so genannt werden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Auch Stationarität schützt nicht ganz}
+Zwei unabhängige AR(1)-Reihen mit $\phi = 0{,}9$, hundert Zeitpunkte:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Reihen} & \textbf{Ablehnungsrate}\\
+\midrule
+zwei Irrfahrten & $76{,}9\,\%$\\
+zwei AR(0,9) & $\mathbf{50{,}3\,\%}$\\
+zwei weiße Rauschen & $5\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Auch zwischen stationären, aber trägen Reihen findet man in jedem zweiten Fall einen Scheinzusammenhang.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hier liegt der Grund anders: Der Koeffizient strebt gegen null, aber der Standardfehler ist nach Satz 10.4 um den Faktor $\sqrt{19}$ zu klein, wenn man ihn naiv berechnet. \textbf{Zwei Fehlerquellen, zwei Abhilfen}: Bei Einheitswurzeln differenzieren, bei trägen stationären Reihen die Standardfehler berichtigen. Wer nur eine davon kennt, findet weiterhin Zusammenhänge, die keine sind.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Differenzen sind kein Allheilmittel}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Differenziert man zwei Reihen, die tatsächlich langfristig verbunden sind, so verliert man genau diese Verbindung --- die Differenzen enthalten nur die kurzfristigen Bewegungen. \textbf{Das nächste Kapitel zeigt, wie man beides behält}: die Nichtstationarität ernst nehmen und den langfristigen Zusammenhang trotzdem schätzen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- Eine Scheinregression erkennen}
+Eine Regression des Arzneimittelumsatzes auf die Zahl der Smartphone-Verträge, Jahresdaten 2000--2024, liefert $R^{2} = 0{,}94$ und $t = 19$. Was ist davon zu halten?
+
+\loesung
+\schritt{Schritt 1 --- Die Warnzeichen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Beide trendieren} & Beide Reihen steigen über den ganzen Zeitraum --- jede Regression zweier steigender Reihen hat hohes $R^{2}$.\\
+\textbf{$R^{2}$ hoch, Residuen träge} & Die Faustregel von Granger und Newbold: $R^{2}$ größer als die Durbin-Watson-Statistik heißt Scheinregression.\\
+\textbf{Kein Mechanismus} & Es gibt keinen Grund, warum Verträge Arzneimittel kaufen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Prüfung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Dickey-Fuller auf beide Reihen: beide haben vermutlich eine Einheitswurzel.\\
+$2$ & Regression in Differenzen: Wächst der Umsatz in Jahren stärker, in denen mehr Verträge dazukommen?\\
+$3$ & Vermutlich nicht --- das Ergebnis wird unauffällig sein.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Befund ist mit großer Wahrscheinlichkeit die Scheinregression aus Satz 11.1 --- zwei Trends, kein Zusammenhang.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Solche Regressionen füllen die Zeitungen}: Käsekonsum und Doktortitel, Nicolas-Cage-Filme und Ertrinkungsfälle, Störche und Geburten. Die Geschichte mit den Störchen ist in Band 23 als Lehrbeispiel für Störgrößen erzählt; hier bekommt sie die technische Erklärung. Beide Reihen trendieren, und das genügt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- Den Test anwenden}
+Für eine Reihe liefert die Regression $\Delta y_t = 0{,}8 - 0{,}12\,y_{t-1}$ mit Standardfehler $0{,}05$ für den Koeffizienten, $T = 60$. Einheitswurzel?
+
+\loesung
+\schritt{Schritt 1 --- Die Statistik}
+\[ t = \frac{-0{,}12}{0{,}05} = -2{,}4 \]
+
+\schritt{Schritt 2 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Kritischer Wert} & \textbf{Wert} & \textbf{Urteil}\\
+\midrule
+Normal, $5\,\%$ & $-1{,}64$ & verwerfen\\
+Dickey-Fuller, $5\,\%$ & $-2{,}91$ & \textcolor{akzent}{nicht verwerfen}\\
+Dickey-Fuller, $10\,\%$ & $-2{,}59$ & nicht verwerfen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nach der falschen Tabelle stationär, nach der richtigen nicht entscheidbar --- die Einheitswurzel wird nicht verworfen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was $\hat\phi = 0{,}88$ bedeutet}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Nach Aufgabe 10.2 ist die Rohschätzung bei $T = 60$ um etwa $(1+3\cdot0{,}9)/60 \approx 0{,}06$ zu klein; berichtigt liegt $\phi$ bei $0{,}94$. \textbf{Ob das $0{,}94$ oder $1{,}00$ ist, können sechzig Beobachtungen nicht sagen.} Die ehrliche Antwort lautet: Die Reihe ist sehr träge, und man behandelt sie am besten so, als hätte sie eine Einheitswurzel --- weil dieser Fehler weniger kostet als der umgekehrte.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Die Kosten der beiden Fehler}
+Warum ist es weniger schlimm, eine stationäre Reihe als Einheitswurzel zu behandeln als umgekehrt?
+
+\loesung
+\schritt{Schritt 1 --- Die beiden Fehler}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Stationär, differenziert} & Information geht verloren; Schätzungen bleiben konsistent, werden ineffizient; die Störung bekommt ein MA(1) mit $\theta = -1$.\\
+\textbf{Einheitswurzel, in Niveaus} & Scheinregression: falsche Befunde, die mit $T$ sicherer werden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Asymmetrie}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der erste Fehler kostet Genauigkeit, der zweite Richtigkeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Einordnung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das Entscheidungsproblem aus Band 24, Kapitel~1, auf die Modellwahl angewandt}: Zwei Fehler, zwei Schadenshöhen, und bei Unentscheidbarkeit wählt man den Fehler mit dem kleineren Schaden. Die Regel \enquote{im Zweifel differenzieren} ist deshalb kein Vorurteil, sondern eine Nutzenabwägung. Sie gilt allerdings nur, solange man nicht an langfristigen Zusammenhängen interessiert ist --- Kapitel~12.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Aufsatz, der ein Fach erschütterte}
+\Person{Clive Granger} und \Person{Paul Newbold} veröffentlichten 1974 den Aufsatz \kursiv{Spurious Regressions in Econometrics} --- mit dem Experiment aus Abschnitt 11.1.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Sie zeigten, dass ein großer Teil der veröffentlichten makroökonomischen Regressionen die Kennzeichen der Scheinregression trug: hohes $R^{2}$, niedrige Durbin-Watson-Statistik. \textbf{\Person{Yule} hatte dasselbe schon 1926 gezeigt} --- in einem Aufsatz mit dem Titel \kursiv{Why Do We Sometimes Get Nonsense-Correlations between Time-Series?} ---, aber niemand hatte zugehört. Granger erhielt 2003 den Nobelpreis, gemeinsam mit \Person{Engle}.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Beweis}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Peter Phillips} lieferte 1986 die Theorie --- Satz 11.1 mit den Integralen der Brownschen Bewegung. \textbf{Damit war die Verbindung zwischen Band 25 und der Ökonometrie hergestellt}: Die Grenzverteilungen nichtstationärer Schätzer sind Funktionale von Wiener-Prozessen, und die Tabellen von Dickey und Fuller bekamen eine Formel.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Konjunkturforschung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Charles Nelson} und \Person{Charles Plosser} testeten 1982 vierzehn amerikanische Makroreihen und konnten die Einheitswurzel bei dreizehn nicht verwerfen. \textbf{Die Folge war ein Streit, der zehn Jahre dauerte}: Wenn das Sozialprodukt eine Irrfahrt ist, gibt es keinen Konjunkturzyklus um einen Trend --- jede Rezession wäre dauerhaft. Die Frage ist bis heute offen, weil die Daten nach Kapitel~10 nicht zwischen $0{,}95$ und $1$ unterscheiden können.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Einheitswurzeln heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{5.0cm}@{}}
+\toprule
+\textbf{Strukturbrüche} & Eine stationäre Reihe mit Bruch sieht aus wie eine Einheitswurzel.\\
+\textbf{Panel-Einheitswurzeln} & Viele kurze Reihen zusammen --- mehr Macht, neue Probleme.\\
+\textbf{Lokal zur Eins} & Theorie für $\phi = 1 - c/T$: weder stationär noch Irrfahrt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{Perron} zeigte 1989, dass die Ergebnisse von Nelson und Plosser kippen, wenn man einen einzigen Bruch --- die Ölkrise 1973 --- zulässt: Dann sind die meisten Reihen trendstationär. \textbf{Die Einheitswurzel und der Strukturbruch sind beobachtungsäquivalent}, so wie in Kapitel~2 Angebot und Nachfrage: Dieselben Daten, zwei Geschichten, und die Wahl zwischen ihnen ist eine Annahme. Das ist kein Mangel der Tests, sondern eine Eigenschaft von Zeitreihen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Das Experiment} & $77\,\%$ falsche Befunde statt $5$\\
+\textbf{Satz 11.1} & $\hat\beta$ strebt nicht gegen null\\
+\textbf{Satz 11.2} & Dickey-Fuller: $-2{,}89$ statt $-1{,}64$\\
+\textbf{Der Bruchfall} & auch träge Reihen täuschen\\
+\textbf{Die Asymmetrie} & im Zweifel differenzieren\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Differenzieren rettet vor Scheinbefunden und zerstört echte Langfristbeziehungen. Das nächste Kapitel findet den Fall, in dem zwei Irrfahrten tatsächlich zusammengehören --- und zeigt, dass man ihn an den Residuen erkennt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

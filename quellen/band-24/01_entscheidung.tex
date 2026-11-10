@@ -1,0 +1,398 @@
+\part{Grundlagen}
+
+\chapter{Abwägen}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Frau B., 78 Jahre}
+Vorhofflimmern, keine Blutungsereignisse in der Vorgeschichte. Die Frage lautet: Gerinnungshemmung oder nicht?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Ereignis im Jahr} & \textbf{ohne} & \textbf{mit}\\
+\midrule
+Schlaganfall & $6{,}0\,\%$ & $2{,}0\,\%$\\
+schwere Blutung & $1{,}0\,\%$ & $3{,}0\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Je tausend behandelte Patientinnen: vierzig verhinderte Schlaganfälle, zwanzig zusätzliche Blutungen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Damit ist die Frage noch nicht entschieden.} Zwei zu eins sieht nach einem guten Tausch aus --- aber nur, wenn ein Schlaganfall und eine Blutung ungefähr gleich schwer wiegen. Wiegt eine Hirnblutung schwerer als ein leichter Schlaganfall, kehrt sich das Bild womöglich um. Die Zahlen allein sagen nichts; sie brauchen eine Bewertung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die drei Bestandteile}
+
+\begin{definition}
+\boxtitelm{Definition 1.1 --- ein Entscheidungsproblem}
+Ein Entscheidungsproblem besteht aus
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Handlungen} & $a \in A$ --- worüber man verfügt.\\
+\textbf{Zuständen} & $\theta \in \Theta$ --- worüber man nicht verfügt, mit Wahrscheinlichkeiten $\Pr[\theta]$.\\
+\textbf{Nutzen} & $u(a,\theta)$ --- wie gut das Ergebnis ist, wenn man $a$ wählt und $\theta$ eintritt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Der \Begriff{Erwartungsnutzen} einer Handlung ist
+\[ \mathbb{E}[u \mid a] = \sum_\theta u(a,\theta)\,\Pr[\theta] . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Trennung, auf die es ankommt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Wahrschein\-lichkeiten} & Sache der Empirie: Studien, Register, kausale Schlüsse aus Band 23.\\
+\textbf{Nutzen} & Sache der Bewertung: Was bedeutet dieser Zustand für \kursiv{diesen} Menschen?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Erst diese Trennung macht Uneinigkeit besprechbar: Streitet man über Zahlen oder über Werte?}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Zwei Ärzte, die zu verschiedenen Empfehlungen kommen, streiten fast nie über beides zugleich} --- und wissen oft nicht, worüber sie streiten. Der eine hält das Blutungsrisiko für höher, der andere die Blutung für schlimmer. Das erste ist durch Daten zu klären, das zweite nicht. Die Trennung zu benennen, ist der erste Nutzen dieses Kapitels.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Leitfall gerechnet}
+
+\begin{merksatz}
+\boxtitel{Nutzenwerte für ein Jahr}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Zustand} & \textbf{Nutzen} & \\
+\midrule
+ohne Ereignis & $1{,}00$ & bestes Ergebnis\\
+schwere Blutung & $0{,}70$ & \\
+Schlaganfall & $0{,}40$ & \\
+Tod & $0{,}00$ & schlechtestes\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Die Werte stammen aus Befragungen von Patienten; Kapitel~2 erklärt, wie man sie gewinnt.}
+
+\schritt{Die Rechnung ohne Behandlung}
+\[ \mathbb{E}[u \mid \text{ohne}] = 0{,}06\cdot0{,}40 + 0{,}01\cdot0{,}70 + 0{,}93\cdot1{,}00 \]
+\[ = 0{,}0240 + 0{,}0070 + 0{,}9300 = 0{,}9610 \]
+
+\schritt{Mit Behandlung}
+\[ \mathbb{E}[u \mid \text{mit}] = 0{,}02\cdot0{,}40 + 0{,}03\cdot0{,}70 + 0{,}95\cdot1{,}00 \]
+\[ = 0{,}0080 + 0{,}0210 + 0{,}9500 = 0{,}9790 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.8cm}P{2.2cm}@{}}
+\toprule
+& \textbf{Erwartungs\-nutzen} & \\
+\midrule
+ohne & $0{,}9610$ & \\
+mit & $\mathbf{0{,}9790}$ & \textcolor{gruen}{besser}\\
+\midrule
+Gewinn & $+0{,}0180$ & $6{,}6$ Tage je Jahr\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Behandlung gewinnt --- um achtzehn Tausendstel, also gut sechs Tage in voller Gesundheit je Behandlungsjahr.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Unterschied ist klein, und das ist bezeichnend.} Fast alle klinischen Entscheidungen bewegen sich in solchen Größenordnungen; die spürbaren Unterschiede liegen im Zusammentreffen vieler kleiner Entscheidungen. Zugleich heißt es, dass eine Änderung der Nutzenwerte das Ergebnis kippen kann --- Kapitel~5 behandelt, wie man das prüft.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Schwelle}
+
+\begin{merksatz}
+\boxtitel{Satz 1.2 --- die Behandlungsschwelle}
+Verringert die Behandlung das Ereignisrisiko $s$ um den Anteil $(1-r)$ und verursacht sie einen erwarteten Schaden $c$, so lohnt sie sich genau dann, wenn
+\[ s \ \ge\ s^{*} = \frac{c}{(1-r)\cdot\Delta u} , \]
+wobei $\Delta u$ der Nutzenverlust durch das verhinderte Ereignis ist.
+
+\schritt{Beweis}
+\kursiv{Nutzen ohne Behandlung:} $1 - s\,\Delta u - (\text{Grundschaden})$.
+
+\kursiv{Nutzen mit Behandlung:} $1 - r\,s\,\Delta u - (\text{Grundschaden}) - c$.
+
+\kursiv{Die Differenz:}
+\[ (1-r)\,s\,\Delta u - c \]
+
+\kursiv{Sie ist genau dann nichtnegativ, wenn} $s \ge c/\bigl[(1-r)\Delta u\bigr]$. $\blacksquare$
+
+\schritt{Im Leitfall}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}@{}}
+\toprule
+Schaden $c = 0{,}02\cdot0{,}30$ & $0{,}0060$\\
+Wirkung $(1-r) = \tfrac23$ & \\
+$\Delta u = 1 - 0{,}40$ & $0{,}60$\\
+\midrule
+$s^{*} = \dfrac{0{,}0060}{0{,}667\cdot0{,}60}$ & $\mathbf{1{,}5\,\%}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ab einem jährlichen Schlaganfallrisiko von $1{,}5$ Prozent lohnt die Behandlung. Frau B.\ liegt mit sechs Prozent weit darüber.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Damit wird aus einer Abwägung eine Zahl, die man nachschlagen kann} --- und genau das tun klinische Punktwerte wie der CHA$_2$DS$_2$-VASc: Sie schätzen $s$, und die Leitlinie nennt die Schwelle. Die Leitlinie enthält also eine Nutzenbewertung, auch wenn sie keine nennt. Wessen Bewertung das ist, sagt sie meist nicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Woher die Nutzenwerte stammen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Wer bewertet?} & Patienten im Zustand bewerten ihn anders als Gesunde, die ihn sich vorstellen --- meist deutlich besser.\\
+\textbf{Welcher Schlaganfall?} & \enquote{Schlaganfall} umfasst die vorübergehende Schwäche und die Pflegebedürftigkeit. Ein Mittelwert verdeckt beides.\\
+\textbf{Wann bewertet?} & Bewertungen ändern sich im Verlauf. Wer entscheidet heute für den Menschen, der man in fünf Jahren ist?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Zeile heißt in der Forschung \Begriff{Anpassungsparadox}: \textbf{Menschen gewöhnen sich an Zustände, die Gesunde für unerträglich halten.} Wer die Nutzenwerte bei Gesunden erhebt, unterschätzt systematisch das Leben mit Behinderung --- und die darauf gestützten Entscheidungen fallen dann zugunsten riskanter Eingriffe aus. Kapitel~14 nimmt das wieder auf, wenn es um die Verteilung von Mitteln geht.}
+\end{minipage}
+\end{center}
+
+\schritt{Und ein grundsätzlicher Einwand}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Erwartungsnutzen mittelt über Zustände, die nur einmal eintreten. \textbf{Frau B.\ erlebt kein Mittel aus vierzig verhinderten Schlaganfällen und zwanzig Blutungen} --- sie erlebt eines von beidem oder keines. Kapitel~2 zeigt, warum die Rechnung trotzdem vernünftig ist, und Kapitel~12, wo die Menschen tatsächlich von ihr abweichen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.1 --- Die Rechnung umkehren}
+Ein Patient hält eine schwere Blutung für ebenso schlimm wie einen Schlaganfall, also $u = 0{,}40$ für beides. Ändert das die Entscheidung?
+
+\loesung
+\schritt{Schritt 1 --- Neu rechnen}
+\[ \text{ohne: } 0{,}06\cdot0{,}40 + 0{,}01\cdot0{,}40 + 0{,}93 = 0{,}0240+0{,}0040+0{,}9300 = 0{,}9580 \]
+\[ \text{mit: } 0{,}02\cdot0{,}40 + 0{,}03\cdot0{,}40 + 0{,}95 = 0{,}0080+0{,}0120+0{,}9500 = 0{,}9700 \]
+
+\schritt{Schritt 2 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Bewertung} & \textbf{Gewinn} & \textbf{Entscheidung}\\
+\midrule
+Blutung $0{,}70$ & $+0{,}0180$ & behandeln\\
+Blutung $0{,}40$ & $+0{,}0120$ & behandeln\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Schwelle}
+\[ c = 0{,}02\cdot0{,}60 = 0{,}0120, \qquad s^{*} = \frac{0{,}0120}{0{,}667\cdot0{,}60} = 3{,}0\,\% \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Schwelle verdoppelt sich von $1{,}5$ auf $3{,}0$ Prozent --- aber Frau B.\ liegt mit sechs Prozent weiterhin darüber.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Wann es kippt}
+Bei welchem Blutungsnutzen $u_B$ wird die Entscheidung umgekehrt?
+\[ (1-r)\,s\,\Delta u = 0{,}02\,(1-u_B) \quad\Longrightarrow\quad 0{,}667\cdot0{,}06\cdot0{,}60 = 0{,}0240 = 0{,}02\,(1-u_B) \]
+\[ 1-u_B = 1{,}20 \quad\Longrightarrow\quad u_B = -0{,}20 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Blutung müsste als \kursiv{schlimmer als der Tod} bewertet werden, damit die Entscheidung kippt.} Bei Frau B.\ ist die Empfehlung also gegenüber der Bewertung sehr unempfindlich --- das ist eine beruhigende Feststellung und genau das, was eine Empfindlichkeitsanalyse leisten soll. Bei einem Patienten mit zwei Prozent Schlaganfallrisiko sähe es anders aus.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.2 --- Die Schwelle in der Leitlinie}
+Eine Leitlinie empfiehlt die Behandlung ab einem Punktwert, der einem Jahresrisiko von $2{,}2$ Prozent entspricht. Welche Bewertung steckt darin?
+
+\loesung
+\schritt{Schritt 1 --- Die Gleichung umstellen}
+\[ s^{*} = \frac{c}{(1-r)\,\Delta u} \quad\Longrightarrow\quad \Delta u = \frac{c}{(1-r)\,s^{*}} \]
+
+\schritt{Schritt 2 --- Einsetzen}
+Mit $c = 0{,}02\cdot(1-u_B)$ und $(1-r) = \tfrac23$:
+\[ 0{,}022 = \frac{0{,}02\,(1-u_B)}{0{,}667\,\Delta u} \quad\Longrightarrow\quad \frac{1-u_B}{\Delta u} = 0{,}022\cdot\frac{0{,}667}{0{,}02} = 0{,}733 \]
+
+\schritt{Schritt 3 --- Die Deutung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{2.6cm}@{}}
+\toprule
+Blutungsschaden & $1-u_B$\\
+Schlaganfallschaden & $\Delta u$\\
+\midrule
+Verhältnis & $\mathbf{0{,}73}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Leitlinie unterstellt, dass eine schwere Blutung knapp drei Viertel so schlimm ist wie ein Schlaganfall.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Was daraus folgt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Jede Schwelle enthält ein solches Verhältnis, ob sie es nennt oder nicht.} Wer einer Leitlinie folgt, übernimmt es --- auch bei einem Patienten, dessen Bewertung davon abweicht. Genau hier liegt der Ort der gemeinsamen Entscheidungsfindung: nicht darin, dem Patienten Wahrscheinlichkeiten zu erklären, sondern darin, sein Verhältnis zu erfragen und mit dem der Leitlinie zu vergleichen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.3 --- Zwei Ärzte, ein Streit}
+Arzt A hält das Blutungsrisiko unter Behandlung für $5$ statt $3$ Prozent. Arzt B hält eine Blutung für halb so schlimm wie der Tod ($u_B = 0{,}50$). Wer kommt zu welcher Empfehlung, und worüber lässt sich streiten?
+
+\loesung
+\schritt{Schritt 1 --- Arzt A}
+\[ \text{mit: } 0{,}02\cdot0{,}40 + 0{,}05\cdot0{,}70 + 0{,}93\cdot1{,}00 = 0{,}0080+0{,}0350+0{,}9300 = 0{,}9730 \]
+\[ 0{,}9730 > 0{,}9610 \quad\Longrightarrow\quad \text{behandeln, Gewinn } +0{,}0120 \]
+
+\schritt{Schritt 2 --- Arzt B}
+\[ \text{ohne: } 0{,}0240 + 0{,}01\cdot0{,}50 + 0{,}9300 = 0{,}9590 \]
+\[ \text{mit: } 0{,}0080 + 0{,}03\cdot0{,}50 + 0{,}9500 = 0{,}9730 \]
+\[ \Longrightarrow\ \text{behandeln, Gewinn } +0{,}0140 \]
+
+\schritt{Schritt 3 --- Die Übersicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+& \textbf{Gewinn} & \textbf{Empfehlung}\\
+\midrule
+Ausgangsfall & $+0{,}0180$ & behandeln\\
+Arzt A & $+0{,}0120$ & behandeln\\
+Arzt B & $+0{,}0140$ & behandeln\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 4 --- Die Lehre}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Beide Abweichungen ändern die Empfehlung nicht --- wohl aber die Begründung.} Arzt A streitet über eine Wahrscheinlichkeit; das ist durch bessere Daten zu klären, etwa durch einen Blutungsrisikowert. Arzt B streitet über eine Bewertung; dafür gibt es keine Studie, wohl aber ein Gespräch mit der Patientin. \textbf{Wer die beiden Streitarten nicht trennt, sucht Daten, wo Werte fehlen --- oder umgekehrt.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Der Petersburger Einsatz}
+\Person{Nicolaus Bernoulli} stellte 1713 ein Spiel vor: Man wirft eine Münze, bis zum ersten Mal Kopf erscheint; fällt das beim $n$-ten Wurf, so erhält man $2^{n}$ Dukaten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Erwartungswert ist unendlich --- niemand aber zahlt mehr als ein paar Dukaten für die Teilnahme. \textbf{\Person{Daniel Bernoulli} löste das Rätsel 1738 in St.\ Petersburg}: Nicht das Geld zählt, sondern sein Nutzen, und der wächst langsamer als der Betrag. Er schlug den Logarithmus vor. Damit war der Nutzenbegriff geboren, zweihundert Jahre bevor er axiomatisch begründet wurde.}
+\end{minipage}
+\end{center}
+
+\schritt{Die klinische Wende}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Stephen Pauker} und \Person{Jerome Kassirer} veröffentlichten 1975 den Schwellenwertgedanken für die Medizin und 1980 seine Erweiterung auf Tests --- Kapitel~4. \textbf{Beide waren Kliniker, keine Mathematiker}, und ihre Aufsätze erschienen im \kursiv{New England Journal of Medicine}. Sie prägten den Begriff der klinischen Entscheidungsanalyse, der bis heute ein Randgebiet der Medizin geblieben ist --- trotz breiter Zustimmung zu seinen Grundgedanken.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Entscheidungshilfen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Gemeinsame Entscheidung} & Werkzeuge, die Wahrscheinlichkeiten und Bewertungen im Gespräch trennen.\\
+\textbf{Nutzenerhebung} & Verfahren, die Bewertungen am Krankenbett erfragen statt aus Tabellen zu nehmen.\\
+\textbf{Modellgestützte Leitlinien} & Schwellen, die die Bewertung offenlegen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kontrollierte Studien zeigen, dass solche Werkzeuge das Wissen der Patienten verbessern und den Entscheidungskonflikt verringern; \textbf{ob sie die Ergebnisse verbessern, ist offen} --- und nach der Logik dieses Kapitels auch schwer zu prüfen, denn das Ergebnis müsste an den Bewertungen des Patienten gemessen werden, die das Werkzeug selbst erst hervorbringt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 1.1} & Handlungen, Zustände, Nutzen\\
+\textbf{Erwartungs\-nutzen} & mit Wahrscheinlichkeiten gewichtet\\
+\textbf{Die Trennung} & Zahlen gegen Werte\\
+\textbf{Satz 1.2} & Schwelle $c/[(1-r)\Delta u]$\\
+\textbf{Der Bruchfall} & wer bewertet, und wann\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieses Kapitel hat Nutzenwerte benutzt, als verstünden sie sich von selbst. Das nächste fragt, woher sie kommen --- und zeigt, dass schon wenige Regeln über vernünftige Vorlieben ihre Existenz erzwingen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

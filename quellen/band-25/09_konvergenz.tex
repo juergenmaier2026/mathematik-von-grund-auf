@@ -1,0 +1,309 @@
+\chapter{Wohin faire Spiele laufen}
+
+\section{Die überraschende Aussage}
+
+\begin{merksatz}
+\boxtitel{Satz 9.1 --- der Martingalkonvergenzsatz}
+Ist $(M_n)$ ein Martingal mit $\sup_n \mathbb{E}|M_n| < \infty$, so konvergiert $M_n$ fast sicher gegen eine Zufallsgröße $M_\infty$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein faires Spiel, dessen Einsätze nicht ins Unermessliche wachsen, kommt fast sicher irgendwo zur Ruhe --- ohne dass man wüsste, wo.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Gedanke des Beweises}
+\kursiv{Man zählt die Aufkreuzungen} eines festen Intervalls $[a,b]$: wie oft der Prozess von unterhalb $a$ nach oberhalb $b$ steigt. Dafür stellt man einen Spieler auf, der kauft, sobald der Wert unter $a$ fällt, und verkauft, sobald er $b$ übersteigt --- eine Folge von Stoppzeiten.
+
+\kursiv{Nach Satz 8.3} ist sein erwarteter Gewinn null. Jede vollendete Aufkreuzung bringt ihm aber mindestens $b-a$, und verlieren kann er höchstens, was am Ende offen ist:
+\[ (b-a)\,\mathbb{E}[\text{Aufkreuzungen}] \ \le\ \mathbb{E}\bigl[(M_n-a)^{-}\bigr] \ \le\ \mathbb{E}|M_n| + |a| . \]
+
+\kursiv{Also ist die Zahl der Aufkreuzungen fast sicher endlich} --- für jedes Paar rationaler $a < b$. Ein Prozess, der kein Intervall unendlich oft durchquert, kann nicht zwischen zwei Werten schwanken; also konvergiert er. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Argument ist eine der schönsten Ideen der Wahrscheinlichkeitstheorie}: Man widerlegt das Schwanken, indem man jemanden daran verdienen lässt. Wer unendlich oft zwischen zwei Werten hin und her läuft, verschenkt unendlich viel Geld --- und das verbietet die Fairness.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Was der Satz nicht sagt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Kein fester Wert} & $M_\infty$ ist zufällig; der Prozess weiß selbst nicht, wohin er läuft.\\
+\textbf{Nicht im Mittel} & Es kann $\mathbb{E}[M_\infty] < \mathbb{E}[M_0]$ gelten --- Masse geht \enquote{ins Unendliche} verloren.\\
+\textbf{Kein Tempo} & Der Satz sagt nichts darüber, wann die Konvergenz einsetzt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Irrfahrt, bei null gestoppt, ist ein nichtnegatives Martingal; sie konvergiert gegen $M_\infty = 0$, obwohl $\mathbb{E}[M_0] = a > 0$. \textbf{Der Erwartungswert geht beim Grenzübergang verloren}, weil die Pfade, die nicht bei null landen, immer größer und immer seltener werden. Erst gleichgradige Integrierbarkeit stellt $\mathbb{E}[M_\infty] = \mathbb{E}[M_0]$ sicher --- die vierte Auslassung dieses Bandes.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Die Urne, zu Ende gedacht}
+
+\begin{merksatz}
+\boxtitel{Wohin die Pólya-Urne läuft}
+Aufgabe 8.1 zeigte, dass der Anteil roter Kugeln ein Martingal ist. Er ist beschränkt, also konvergiert er --- aber wogegen?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Endanteil rot} & \textbf{simuliert} & \textbf{gleichverteilt}\\
+\midrule
+$0{,}0$--$0{,}2$ & $0{,}198$ & $0{,}200$\\
+$0{,}2$--$0{,}4$ & $0{,}198$ & $0{,}200$\\
+$0{,}4$--$0{,}6$ & $0{,}201$ & $0{,}200$\\
+$0{,}6$--$0{,}8$ & $0{,}202$ & $0{,}200$\\
+$0{,}8$--$1{,}0$ & $0{,}202$ & $0{,}200$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{$20\,000$ Urnen mit je $2000$ Ziehungen, Start mit je einer Kugel.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Grenzanteil ist gleichverteilt --- jeder Wert zwischen null und eins ist gleich wahrscheinlich.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Erwartungswert bleibt bei $\tfrac12$, aber kein einzelner Verlauf landet dort} --- die Standardabweichung beträgt $0{,}289$, wie es die Gleichverteilung verlangt. Das ist der Musterfall einer sich selbst verstärkenden Entwicklung: Der Ausgang ist offen, die frühen Ziehungen entscheiden ihn, und rückblickend sieht jede Geschichte zwangsläufig aus. Modelle dieser Art beschreiben, warum sich eine von zwei gleichwertigen Techniken durchsetzt --- und warum die Erklärung dafür meist nachgereicht wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie hoch ein Martingal steigt}
+
+\begin{merksatz}
+\boxtitel{Satz 9.2 --- die Ungleichung von Doob}
+Für ein Martingal mit $\mathbb{E}[M_n^{2}] < \infty$ gilt
+\[ \Pr\Bigl[\max_{k \le n} |M_k| \ge a\Bigr] \ \le\ \frac{\mathbb{E}[M_n^{2}]}{a^{2}} . \]
+
+\schritt{Beweis}
+Sei $T$ die erste Zeit mit $|M_k| \ge a$, gestoppt bei $n$. Dann ist $M_T^2$ mindestens $a^2$ auf dem betrachteten Ereignis, und weil $M_n^{2}$ ein Submartingal ist, gilt $\mathbb{E}[M_T^{2}] \le \mathbb{E}[M_n^{2}]$. Also
+\[ a^{2}\,\Pr\Bigl[\max_k |M_k| \ge a\Bigr] \ \le\ \mathbb{E}[M_T^{2}] \ \le\ \mathbb{E}[M_n^{2}] . \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Tschebyschow-Ungleichung gilt nicht nur für den Endwert, sondern für den gesamten Verlauf --- zum selben Preis.}
+\end{minipage}
+\end{center}
+
+\schritt{An der Irrfahrt geprüft}
+$100$ Schritte, $\mathbb{E}[S_n^2] = 100$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+$a$ & \textbf{simuliert} & \textbf{Doob} & \textbf{Spiegelung}\\
+\midrule
+$10$ & $0{,}315$ & $1{,}000$ & $0{,}317$\\
+$15$ & $0{,}132$ & $0{,}444$ & $0{,}134$\\
+$20$ & $0{,}045$ & $0{,}250$ & $0{,}046$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Doob-Schranke ist grob --- das Spiegelungsprinzip aus Aufgabe 1.2 trifft auf drei Stellen.} Der Vorzug der Ungleichung liegt darin, dass sie für \kursiv{jedes} Martingal gilt, auch dort, wo es kein Spiegelungsprinzip gibt. Aus ihr folgen die Konzentrationsungleichungen, die Band 22, Kapitel~7 für die Lernschranken brauchte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Konvergenz ohne Ankunft}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Man betrachte ein Martingal, das mit Wahrscheinlichkeit $1-2^{-n}$ bei $1$ bleibt und sonst auf $2^{n}$ springt. \textbf{Es konvergiert fast sicher gegen $1$, und sein Erwartungswert bleibt dennoch bei $2$} --- die Sprünge werden seltener und größer, im Produkt gleich viel. Solche Prozesse sind der Grund, warum der Konvergenzsatz allein nicht genügt: Man muss zusätzlich ausschließen, dass sich Masse ins Unendliche davonstiehlt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Fast sichere Konvergenz und Konvergenz der Erwartungswerte sind zwei verschiedene Dinge.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.1 --- Ein Likelihood-Quotient}
+Zwei Hypothesen $H_0$ und $H_1$ über die Verteilung einer Beobachtungsfolge. Zeigen Sie, dass der Quotient der Likelihoods unter $H_0$ ein Martingal ist.
+
+\loesung
+\schritt{Schritt 1 --- Der Prozess}
+\[ L_n = \prod_{k=1}^{n} \frac{f_1(X_k)}{f_0(X_k)} \]
+
+\schritt{Schritt 2 --- Die Martingaleigenschaft unter $H_0$}
+\[ \mathbb{E}_0\bigl[L_{n+1} \mid \mathcal F_n\bigr] = L_n\cdot\mathbb{E}_0\left[\frac{f_1(X_{n+1})}{f_0(X_{n+1})}\right] = L_n \int \frac{f_1(x)}{f_0(x)}\,f_0(x)\,\dd x = L_n\cdot 1 \]
+
+\schritt{Schritt 3 --- Die Folgerung}
+Nach Satz 8.3 und 9.2 gilt für jede Stoppzeit
+\[ \Pr_0\bigl[L_n \ \text{erreicht je } A\bigr] \ \le\ \frac{1}{A} . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Wahrscheinlichkeit, unter $H_0$ jemals einen Likelihood-Quotienten von $A$ zu sehen, ist höchstens $1/A$ --- gleichgültig, wie lange man zusieht.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die Tragweite}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Rechtfertigung des sequenziellen Testens.} Ein klassischer Test verliert seine Gültigkeit, wenn man zwischendurch hineinsieht; dieser nicht. Man darf nach jeder Beobachtung entscheiden, ob man weitermacht --- die Fehlerwahrscheinlichkeit bleibt unter $1/A$. Der Preis ist, dass man das Verhältnis zweier \kursiv{bestimmter} Hypothesen betrachtet.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.2 --- Wie viel der sequenzielle Test spart}
+Man prüfe $p = 0{,}3$ gegen $p = 0{,}5$ bei $\alpha = \beta = 0{,}05$. Wie viele Beobachtungen braucht man?
+
+\loesung
+\schritt{Schritt 1 --- Die Schranken}
+\[ A = \frac{1-\beta}{\alpha} = 19, \qquad B = \frac{\beta}{1-\alpha} = 0{,}0526 \]
+\[ \ln A = 2{,}944, \qquad \ln B = -2{,}944 \]
+
+\schritt{Schritt 2 --- Der mittlere Zuwachs je Beobachtung}
+\[ \ln\frac{p_1}{p_0} = \ln\frac{0{,}5}{0{,}3} = 0{,}511, \qquad \ln\frac{1-p_1}{1-p_0} = \ln\frac{0{,}5}{0{,}7} = -0{,}336 \]
+\[ \mathbb{E}_1[\text{Zuwachs}] = 0{,}5\cdot0{,}511 + 0{,}5\cdot(-0{,}336) = 0{,}0872 \]
+
+\schritt{Schritt 3 --- Die erwartete Fallzahl}
+\[ \mathbb{E}_1[N] \approx \frac{(1-\beta)\ln A + \beta\ln B}{0{,}0872} = \frac{2{,}797-0{,}147}{0{,}0872} = 30{,}4 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.2cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Fallzahl} & \textbf{Ersparnis}\\
+\midrule
+fester Umfang & $62$ & ---\\
+sequenziell unter $H_1$ & $\mathbf{30}$ & $51\,\%$\\
+sequenziell unter $H_0$ & $32$ & $48\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Etwa die Hälfte der Beobachtungen wird eingespart} --- bei gleichen Fehlerwahrscheinlichkeiten. In klinischen Studien heißt das: halb so viele Patienten unter der unterlegenen Behandlung. \textbf{Der Preis ist eine zufällige Fallzahl}, die man vorher nicht kennt, und gelegentlich sehr lange Läufe. Deshalb setzt man in der Praxis eine Obergrenze, was die Rechnung geringfügig verändert.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.3 --- Der Konvergenzsatz an der Urne}
+Warum konvergiert der Anteil in der Pólya-Urne, und warum nicht gegen $\tfrac12$?
+
+\loesung
+\schritt{Schritt 1 --- Die Voraussetzung prüfen}
+$X_n \in [0,1]$, also $\mathbb{E}|X_n| \le 1$. Satz 9.1 ist anwendbar.
+
+\schritt{Schritt 2 --- Warum nicht $\tfrac12$}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Satz sagt nur, \kursiv{dass} konvergiert wird. \textbf{Ein Grenzwert von $\tfrac12$ würde verlangen, dass der Prozess zurückgetrieben wird} --- hier geschieht das Gegenteil: Jede Abweichung erhöht die Wahrscheinlichkeit, sie zu vergrößern. Die Konvergenz kommt nicht durch Rückkehr zustande, sondern durch Erstarren: Nach $n$ Ziehungen ändert eine weitere den Anteil nur noch um höchstens $1/n$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Verteilung des Grenzwerts}
+Nach $n$ Ziehungen ist die Zahl der roten Kugeln gleichverteilt auf $\{1,\ldots,n+1\}$ --- das rechnet man induktiv nach. Im Grenzwert ergibt das die Gleichverteilung auf $[0,1]$.
+
+\kursiv{Probe:} Simulation liefert fünf Fünftel von je $0{,}20$ --- Abweichung höchstens $0{,}002$.
+
+\schritt{Schritt 4 --- Die Verallgemeinerung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Legt man je $c$ gleichfarbige Kugeln nach und startet mit $r$ roten und $s$ schwarzen, so ist der Grenzwert betaverteilt mit den Parametern $r/c$ und $s/c$. \textbf{Damit hat man ein Modell, in dem der Zufall eine Wahrscheinlichkeit erzeugt} --- die Beta-Verteilung aus Band 17 erscheint hier nicht als A-priori-Annahme, sondern als Ergebnis. Solche Urnenmodelle liegen den Bayesschen Verfahren mit unbekannter Zahl von Gruppen zugrunde.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Aufsatz im Krieg}
+\Person{Abraham Wald} entwickelte den sequenziellen Test 1943 im Auftrag der amerikanischen Kriegsforschung --- für die Qualitätsprüfung von Munition.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das Verfahren wurde als militärisches Geheimnis eingestuft und erst 1945 veröffentlicht. \textbf{Man schätzte, dass es den Prüfaufwand um die Hälfte senkte} --- genau die Größenordnung aus Aufgabe 9.2. Wald war 1938 aus Wien geflohen; seine Eltern und Geschwister wurden in Auschwitz ermordet.}
+\end{minipage}
+\end{center}
+
+\schritt{Doob und die Aufkreuzungen}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Joseph Doob} bewies den Konvergenzsatz 1940. \textbf{Das Aufkreuzungsargument gilt als eines der elegantesten Beweismittel der Analysis} und wurde später auf Ergodensätze, Differentiationssätze und die Theorie harmonischer Funktionen übertragen. Doob selbst nannte es in seinen Erinnerungen den einzigen Beweis, auf den er wirklich stolz gewesen sei.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Urne}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{George Pólya} und \Person{Florian Eggenberger} stellten das Urnenmodell 1923 auf --- als Modell für Ansteckung: Jeder Fall erhöht die Wahrscheinlichkeit weiterer Fälle. \textbf{Dass der Grenzanteil zufällig bleibt, war für sie die Hauptaussage} und wurde später zur Grundlage der Theorie austauschbarer Folgen von \Person{Bruno de Finetti}, auf der die Bayessche Statistik ruht.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Konvergenz heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Jederzeit gültig} & Vertrauensintervalle, die man beliebig oft ansehen darf.\\
+\textbf{Verstärkung} & Urnenmodelle für Netzwerke und Marktanteile.\\
+\textbf{Stochastische Näherung} & Konvergenz von Lernverfahren über Supermartingale.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dass der stochastische Gradientenabstieg aus Band 22 konvergiert, beweist man über ein Supermartingal: Der Abstand zum Minimum fällt im Mittel, solange die Schrittweiten quadratisch summierbar, aber nicht summierbar sind. \textbf{Satz 9.1 liefert dann die fast sichere Konvergenz} --- und erklärt zugleich, warum sie ohne Aussage über das Tempo bleibt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 9.1} & beschränkt im Mittel heißt konvergent\\
+\textbf{Aufkreuzungen} & Schwanken kostet Geld\\
+\textbf{Satz 9.2} & Tschebyschow für den ganzen Verlauf\\
+\textbf{Die Urne} & Grenzwert zufällig, gleichverteilt\\
+\textbf{Der Bruchfall} & Erwartungswert kann verloren gehen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~III. Alle bisherigen Prozesse sprangen. Teil~IV lässt die Schritte immer kleiner und immer häufiger werden --- und findet im Grenzfall einen Prozess, dessen Pfade stetig sind und dennoch an keiner Stelle eine Steigung haben.}
+\end{minipage}
+\end{center}
+\end{merksatz}

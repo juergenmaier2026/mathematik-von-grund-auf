@@ -1,0 +1,304 @@
+\chapter{Ein Integral für zerknitterte Pfade}
+
+\section{Warum es nicht einfach geht}
+
+\begin{merksatz}
+\boxtitel{Der Auswertungspunkt entscheidet}
+Man will $\int_0^T W_t\,\dd W_t$ als Grenzwert von Summen erklären. Bei einem gewöhnlichen Integral ist gleichgültig, ob man den Integranden am linken oder rechten Rand jedes Teilstücks auswertet.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.0cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Schritte} & \textbf{links} & \textbf{rechts} & \textbf{Differenz}\\
+\midrule
+$1\,000$ & $-0{,}367$ & $0{,}635$ & $1{,}002$\\
+$10\,000$ & $-0{,}183$ & $0{,}821$ & $1{,}004$\\
+$100\,000$ & $-0{,}428$ & $0{,}574$ & $1{,}001$\\
+$1\,000\,000$ & $-0{,}207$ & $0{,}792$ & $0{,}999$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Jeweils derselbe Pfad, $T = 1$.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die beiden Summen unterscheiden sich um genau $T$ --- und zwar für jede Feinheit. Es gibt keinen gemeinsamen Grenzwert.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+\[ \sum_k W_{t_{k+1}}\Delta W_k - \sum_k W_{t_k}\Delta W_k = \sum_k (\Delta W_k)^{2} \ \longrightarrow\ T \]
+--- die quadratische Variation aus Satz 10.2.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Man muss sich also entscheiden}, und die Wahl ist nicht Geschmackssache: Nur die linke Auswertung benutzt ausschließlich Vergangenheit. Sie ist damit die einzige, bei der der Integrand eine Handlungsanweisung sein kann --- eine Anlagestrategie, eine Dosisregel, eine Regelung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 11.1 --- das Itō-Integral}
+Für einen angepassten Prozess $(H_t)$ mit $\mathbb{E}\int_0^T H_t^{2}\,\dd t < \infty$ ist
+\[ \int_0^T H_t\,\dd W_t \ :=\ \lim_{n} \sum_k H_{t_k}\bigl(W_{t_{k+1}}-W_{t_k}\bigr) \]
+--- Auswertung stets am \kursiv{linken} Rand, Grenzwert im quadratischen Mittel.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 11.2 --- die Itō-Isometrie}
+\[ \mathbb{E}\left[\left(\int_0^T H_t\,\dd W_t\right)^{2}\right] = \mathbb{E}\left[\int_0^T H_t^{2}\,\dd t\right] \]
+
+\schritt{Beweis für Treppenfunktionen}
+\[ \mathbb{E}\Bigl[\bigl(\textstyle\sum_k H_{t_k}\Delta W_k\bigr)^{2}\Bigr] = \sum_k \mathbb{E}\bigl[H_{t_k}^{2}(\Delta W_k)^{2}\bigr] + 2\sum_{j<k} \mathbb{E}\bigl[H_{t_j}\Delta W_j\,H_{t_k}\Delta W_k\bigr] \]
+
+\kursiv{Die gemischten Terme verschwinden:} Für $j < k$ ist alles außer $\Delta W_k$ aus $\mathcal F_{t_k}$ bestimmbar, also nach der Turmregel
+\[ \mathbb{E}\bigl[\cdots\bigr] = \mathbb{E}\bigl[H_{t_j}\Delta W_j H_{t_k}\ \underbrace{\mathbb{E}[\Delta W_k \mid \mathcal F_{t_k}]}_{=\,0}\bigr] = 0 . \]
+
+\kursiv{Die Diagonalterme:} $\Delta W_k$ ist von $\mathcal F_{t_k}$ unabhängig, also
+\[ \mathbb{E}\bigl[H_{t_k}^{2}(\Delta W_k)^{2}\bigr] = \mathbb{E}\bigl[H_{t_k}^{2}\bigr]\,\Delta t_k . \]
+Summieren ergibt die Behauptung; der allgemeine Fall folgt durch Näherung. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Genau hier wird die linke Auswertung gebraucht: Nur dann ist der Integrand vom kommenden Zuwachs unabhängig.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Isometrie ist der Bauplan des ganzen Integrals}: Sie übersetzt Abstände im Raum der Integranden in Abstände im Raum der Integrale und erlaubt so, das Integral zuerst für Treppenfunktionen zu erklären und dann stetig fortzusetzen --- genau wie beim Lebesgue-Integral in Band 13, Kapitel~6.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 11.3 --- das Integral ist ein Martingal}
+Der Prozess $M_t = \int_0^t H_s\,\dd W_s$ ist ein Martingal mit $M_0 = 0$.
+
+\schritt{Beweis}
+Für $s < t$ ist der Zuwachs eine Summe von Termen $H_{t_k}\Delta W_k$ mit $t_k \ge s$; jeder hat wie oben bedingten Erwartungswert null:
+\[ \mathbb{E}[M_t - M_s \mid \mathcal F_s] = 0 . \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer nach einer Strategie handelt, die nur Vergangenes benutzt, spielt in einem fairen Markt weiterhin ein faires Spiel.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist Satz 8.3 in stetiger Zeit} --- und die mathematische Fassung der Aussage, dass kein Handelssystem aus einem fairen Markt Gewinn erzeugt. In Kapitel~13 wird daraus der Hauptsatz der Preistheorie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das erste Integral}
+
+\begin{merksatz}
+\boxtitel{$\int_0^T W\,\dd W$}
+\[ \int_0^T W_t\,\dd W_t = \frac{W_T^{2}}{2} - \frac{T}{2} \]
+
+\schritt{Beweis}
+\[ W_{t_{k+1}}^{2}-W_{t_k}^{2} = 2\,W_{t_k}\Delta W_k + (\Delta W_k)^{2} \]
+Summieren über alle $k$:
+\[ W_T^{2} = 2\sum_k W_{t_k}\Delta W_k + \sum_k (\Delta W_k)^{2} \]
+Der letzte Term strebt gegen $T$ (Satz 10.2), also
+\[ \int_0^T W\,\dd W = \frac{W_T^{2}-T}{2} . \]
+$\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das gewohnte Ergebnis $W_T^{2}/2$ ist falsch --- es fehlt der Abzug $T/2$.}
+\end{minipage}
+\end{center}
+
+\kursiv{Probe an der Tabelle:} Bei $n = 10^{6}$ ergab die linke Summe $-0{,}207$ und $(W_T^{2}-T)/2 = -0{,}208$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Abzug ist kein Rechenfehler, sondern der Preis der Vorhersehbarkeit.} Wer bei jedem Schritt den \kursiv{jetzigen} Stand einsetzt, kann den kommenden Zuwachs nicht ausnutzen; die Mittelpunktsauswertung könnte es und liefert $W_T^2/2$ --- dafür ist sie keine Strategie, sondern Hellseherei.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Zwei Integrale, zwei Rechenregeln}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{3.0cm}@{}}
+\toprule
+& \textbf{Itō} & \textbf{Stratonowitsch}\\
+\midrule
+Auswertung & links & Mittelpunkt\\
+Martingal & \textcolor{gruen}{ja} & nein\\
+Kettenregel & Zusatzterm & \textcolor{gruen}{gewohnt}\\
+Anpassung & \textcolor{gruen}{nötig} & Blick voraus\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Beide sind richtig und beschreiben verschiedene Sachverhalte.} Die Physik benutzt meist Stratonowitsch, weil dort das Rauschen eine Idealisierung eines glatten, aber schnellen Vorgangs ist --- und der Grenzwert glatter Näherungen führt auf die Mittelpunktsregel. \textbf{Finanz, Regelung und Filterung benutzen Itō}, weil dort Entscheidungen zu treffen sind, bevor man das Ergebnis kennt. Wer beides verwechselt, erhält systematisch verschobene Drift.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- Die Isometrie anwenden}
+Berechnen Sie Erwartungswert und Varianz von $\int_0^T W_t\,\dd W_t$.
+
+\loesung
+\schritt{Schritt 1 --- Erwartungswert}
+Nach Satz 11.3 ist das Integral ein Martingal mit Start null:
+\[ \mathbb{E}\left[\int_0^T W\,\dd W\right] = 0 \]
+\kursiv{Probe über die geschlossene Form:} $\mathbb{E}[(W_T^{2}-T)/2] = (T-T)/2 = 0$. \checkmark
+
+\schritt{Schritt 2 --- Varianz über die Isometrie}
+\[ \mathbb{E}\left[\left(\int_0^T W\,\dd W\right)^{2}\right] = \mathbb{E}\left[\int_0^T W_t^{2}\,\dd t\right] = \int_0^T t\,\dd t = \frac{T^{2}}{2} \]
+
+\schritt{Schritt 3 --- Probe über die geschlossene Form}
+\[ \operatorname{Var}\left[\frac{W_T^{2}-T}{2}\right] = \frac{1}{4}\operatorname{Var}[W_T^{2}] = \frac{2T^{2}}{4} = \frac{T^{2}}{2} \quad \checkmark \]
+--- denn für $Z\sim\mathcal N(0,T)$ ist $\operatorname{Var}[Z^{2}] = 2T^{2}$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Isometrie ersetzt eine Rechnung mit vierten Momenten durch ein gewöhnliches Integral} --- das ist ihr praktischer Wert. Bei komplizierteren Integranden gibt es keine geschlossene Form, und dann ist sie der einzige Weg zur Varianz.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- Eine Anlagestrategie}
+Ein Anleger hält zur Zeit $t$ den Betrag $H_t$ in einem Papier, dessen Kurs eine Brownsche Bewegung ist. Sein Gewinn ist $\int_0^T H\,\dd W$. Kann er durch geschickte Wahl von $H$ einen positiven Erwartungswert erzielen?
+
+\loesung
+\schritt{Schritt 1 --- Die Antwort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nein --- solange $H$ angepasst ist und die Integrierbarkeitsbedingung erfüllt.} Nach Satz 11.3 ist der Gewinn ein Martingal mit Erwartungswert null.
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die beiden Schlupflöcher}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Nicht angepasst} & $H_t = \operatorname{sign}(W_T - W_t)$ liefert sicheren Gewinn --- verlangt aber Kenntnis von $W_T$.\\
+\textbf{Nicht integrierbar} & Strategien mit unbeschränktem Einsatz --- die Verdopplung aus Aufgabe 8.3, in stetiger Zeit sogar in endlicher Frist.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In stetiger Zeit lässt sich die Verdopplungsstrategie so beschleunigen, dass sie in endlicher Zeit mit Sicherheit einen Euro gewinnt --- man braucht zwischenzeitlich beliebig hohe Schulden. \textbf{Genau deshalb steht in jeder Fassung der Preistheorie eine Beschränkung der zulässigen Strategien}, meist in der Form, dass das Vermögen nach unten beschränkt bleiben muss. Ohne sie wäre jeder Markt voller sicherer Gewinne, und die Theorie aus Kapitel~13 bräche zusammen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Die beiden Integrale vergleichen}
+Berechnen Sie $\int_0^T W\,\dd W$ im Sinne von Stratonowitsch und deuten Sie die Differenz.
+
+\loesung
+\schritt{Schritt 1 --- Die Summe mit Mittelpunkten}
+\[ \sum_k \frac{W_{t_k}+W_{t_{k+1}}}{2}\,\Delta W_k = \frac12\sum_k \bigl(W_{t_{k+1}}^{2}-W_{t_k}^{2}\bigr) = \frac{W_T^{2}}{2} \]
+--- eine Teleskopsumme, exakt für jede Zerlegung.
+
+\schritt{Schritt 2 --- Der Vergleich}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Auswertung} & \textbf{Wert} & \textbf{simuliert}\\
+\midrule
+links (Itō) & $\dfrac{W_T^{2}-T}{2}$ & $-0{,}207$\\
+Mitte (Strat.) & $\dfrac{W_T^{2}}{2}$ & $0{,}292$\\
+\midrule
+Differenz & $T/2 = 0{,}5$ & $0{,}499$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Stratonowitsch-Fassung gehorcht der gewohnten Kettenregel} --- das Ergebnis ist genau $\tfrac12 W_T^2$, wie bei einer glatten Funktion. Dafür ist sie kein Martingal: Ihr Erwartungswert ist $T/2 > 0$. Man kann nicht beides haben, und das ist der Kern des ganzen Kapitels: \textbf{Entweder die gewohnte Rechenregel oder die Fairness.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Aufsatz von 1942}
+\Person{Kiyoshi Itō} veröffentlichte die Grundzüge seiner Theorie 1942 in einer japanischen Zeitschrift --- mitten im Krieg, ohne Kontakt zur westlichen Forschung.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er arbeitete damals im Statistischen Amt in Tokio und hatte kaum Zugang zu Literatur. \textbf{Die Arbeiten wurden erst in den 1950er Jahren im Westen bekannt}; \Person{Doob} sorgte für ihre Verbreitung. Itō erhielt 2006 den ersten Gauß-Preis; er konnte ihn krankheitshalber nicht selbst entgegennehmen.}
+\end{minipage}
+\end{center}
+
+\schritt{Und der Streit um den Auswertungspunkt}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Ruslan Stratonowitsch} führte 1966 die Mittelpunktsregel ein; unabhängig auch \Person{Donald Fisk}. \textbf{In der Physik entbrannte darüber ein jahrzehntelanger Streit}, weil beide Fassungen für dasselbe System verschiedene Gleichungen liefern. Die Auflösung lautet: Die Frage ist nicht mathematisch, sondern physikalisch --- man muss wissen, wie das Rauschen entsteht.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Stochastische Integration heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Allgemeine Integratoren} & Integration gegen beliebige Semimartingale, auch mit Sprüngen.\\
+\textbf{Raue Pfade} & Eine pfadweise Theorie ohne Wahrscheinlichkeit.\\
+\textbf{Regularitäts\-strukturen} & Gleichungen mit Rauschen in Raum \kursiv{und} Zeit.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei partiellen Differentialgleichungen mit Rauschen treten Ausdrücke auf, die formal unendlich sind --- Produkte von Größen, die als Funktionen gar nicht existieren. \textbf{\Person{Martin Hairer} entwickelte 2014 einen Kalkül, der ihnen Sinn gibt}, und erhielt dafür die Fields-Medaille. Die Aufgabe ist die direkte Fortsetzung der Frage dieses Kapitels: Was bedeutet ein Produkt, wenn die Faktoren zu zerknittert sind?}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Das Problem} & linke und rechte Summe trennen sich um $T$\\
+\textbf{Definition 11.1} & links auswerten, im Mittel konvergieren\\
+\textbf{Satz 11.2} & Isometrie: Varianz als gewöhnliches Integral\\
+\textbf{Satz 11.3} & das Integral ist ein Martingal\\
+\textbf{Das Beispiel} & $\int W\,\dd W = (W_T^{2}-T)/2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Abzug $T/2$ ist kein Einzelfall. Das nächste Kapitel zeigt, dass jede glatte Funktion eines Brownschen Pfades einen solchen Zusatzterm trägt --- und dass er das Wichtigste an der ganzen Theorie ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

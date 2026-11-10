@@ -1,0 +1,255 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Begriffe und Formeln}
+
+\begin{merksatz}
+\boxtitel{Teil I bis III}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.6cm}P{4.0cm}@{}}
+\toprule
+$\hat\theta = \frac1n\sum h(X_i)$ & Monte-Carlo-Schätzer (1.1)\\
+$\operatorname{SE} = \sigma/\sqrt n$ & Wurzelregel (1.2)\\
+$B_c = aB_{c-1}/(c+aB_{c-1})$ & Erlang-Rekursion (1)\\
+$x_{k+1} = (ax_k+c)\bmod m$ & LCG (2.1)\\
+$\le (d!\,m)^{1/d}$ Ebenen & Marsaglia (2.3)\\
+$X = F^{-1}(U)$ & Inversion (2.4)\\
+$\sqrt{-2\ln U_1}\cos 2\pi U_2$ & Box--Muller (2.5)\\
+$n^{-2/d}$ gegen $n^{-1/2}$ & Fluch der Dimension (3.1)\\
+$\tau = 1+2\sum\rho_k$, $n/\tau$ & Autokorrelationszeit (4.1)\\
+$s_{\text{Block}}/\sqrt b$ & Blockmittel (4.2)\\
+$\operatorname{Var}[A-B] = \ldots - 2\operatorname{Cov}$ & gemeinsame Zahlen (4.3)\\
+$\tfrac12(g(U)+g(1-U))$, Faktor $1+\rho$ & antithetisch (5.1)\\
+$Y-\beta^*(C-c)$, $1-\rho^2$ & Kontrollvariable (5.2)\\
+$\operatorname{Var}[\mathbb E[Y|Z]]\le\operatorname{Var}[Y]$ & Konditionierung (5.3)\\
+$w = f/g$, $g^*\propto|h|f$ & Wichtigkeit (6.1), (6.2)\\
+$e^{\mu^2}P(Z>c+\mu)$ & zweites Moment, Verschiebung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.6cm}P{4.0cm}@{}}
+\toprule
+$(\sum w)^2/\sum w^2$ & wirksames $n$\\
+$|\bar h - \int h| \le V(h)D^*_n$ & Koksma--Hlawka (6.3)\\
+$\min\{1, \tfrac{\pi(x')q(x|x')}{\pi(x)q(x'|x)}\}$ & Metropolis--Hastings (7.1)\\
+$\pi(x)P(x\to x') = \pi(x')P(x'\to x)$ & detaillierte Bilanz (7.2)\\
+$2{,}38/\sqrt d$, $23\,\%$ & optimale Schrittweite\\
+$\hat R = \sqrt{\hat V/W}$ & Gelman--Rubin (8.1)\\
+$H = U + \tfrac12 p^\top p$, Sprungverfahren & Hamilton (9.1), (9.2)\\
+$\Delta t^{1/2}$, $\Delta t$, $\Delta t$ & Euler, Milstein, schwach (9.4)\\
+$N_\ell\propto\sqrt{V_\ell/C_\ell}$ & Mehrebenen (9.5)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Teil IV und V}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.6cm}P{4.0cm}@{}}
+\toprule
+(Zeit, Rang, Art) & Ereignisliste (10.1)\\
+$L = \lambda_{\text{eff}}\,\bar W$ & Little (10)\\
+$\tfrac12\Delta t$ zu lang & Zeitschritt-Verzerrung (10)\\
+$\rho^{\sqrt{2(c+1)}-1}/(c(1-\rho))\cdot\tfrac{1+c_s^2}{2}\,S$ & Sakasegawa (11.1)\\
+$(1-r)/(1-r^{\ell})$, $r = (1-p)/p$ & Spielerruin (11)\\
+$n_m/(N_0R^{m-1})$ & Aufspaltung (11.2)\\
+Vorhersage, Gewichtung, Neuziehung & Teilchenfilter (12.1)\\
+$K = (P+q)/(P+q+r)$ & Kalman-Gewinn (12)\\
+Erhaltung, Grenzen, Formel, Unempfindlichkeit, zweites Programm & Prüfleiter (13.1)\\
+$\int\mathbf 1\{g(\theta)\le z\}\,p(\theta|\text{D})\,d\theta$ & A-posteriori-Vorhersage (14.1)\\
+$S_j = \operatorname{Var}[\mathbb E[g|\theta_j]]/\operatorname{Var}[g]$ & Sobol-Index (14.2)\\
+$(a/B)\,dB/da$ & Elastizität (14)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz worauf beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Satz} & \textbf{beruht auf}\\
+\midrule
+1.2 Wurzelregel & Gesetz der großen Zahlen, zentraler Grenzwertsatz (Band 17)\\
+2.3 Marsaglia & Gitter in $\mathbb Z^d$ (Band 1, 7)\\
+2.4 Inversion & Verteilungsfunktion (Band 15)\\
+2.6 Verwerfung & bedingte Wahrscheinlichkeit (Band 15)\\
+3.1 Fluch & Fehler der Trapezregel (Band 11)\\
+4.1 Autokorrelationszeit & Satz 10.4 (Band 26)\\
+5.1 antithetisch & Chebyshev-Ungleichung für Funktionen (Band 15)\\
+5.2 Kontrolle & Regression (Band 26)\\
+5.3 Konditionierung & Turmregel, Varianzzerlegung (Band 25)\\
+6.2 Wichtigkeit & Dichtewechsel (Band 15)\\
+6.3 Koksma--Hlawka & partielle Integration; mehrdimensional Auslassung 2\\
+7.2 Metropolis & Sätze 3.5 und 3.9 (Band 25)\\
+8.2 $\hat R$ & Varianzzerlegung (Band 17)\\
+9.2 Hamilton & Liouville (Band 24, Auslassung 3); 7.2\\
+9.4 Ordnung & Satz 8.6 (Band 25); Milstein Auslassung 4\\
+9.5 Mehrebenen & Lagrange (Band 12); 5.2\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Satz} & \textbf{beruht auf}\\
+\midrule
+11.1 Sakasegawa & Erlang C, Pollaczek--Chintschin (Band 25); Näherung\\
+12.2 Teilchenfilter & 6.1; Satz von Bayes (Band 21)\\
+13.1 Prüfleiter & kein Satz --- eine Praxis\\
+14.3 Sobol & orthogonale Zerlegung (Band 20, Auslassung 5)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Was nicht bewiesen wurde}
+
+\begin{merksatz}
+\boxtitel{Fünf Auslassungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.8cm}P{1.0cm}P{3.2cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+Volle Periode des LCG (Hull--Dobell) & $2$ & Band 1, Kap.~9; Knuth\zit{12}\\
+Koksma--Hlawka, mehrdimensional & $6$ & Band 20; Niederreiter\zit{21}\\
+Satz von Liouville & $9$ & Band 24; Neal\zit{20}\\
+Starke Ordnung des Milstein-Verfahrens & $9$ & Band 25; Kloeden--Platen\zit{11}\\
+Sobol-Zerlegung & $14$ & Band 20; Saltelli\zit{26}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle übrigen Sätze des Bandes sind vollständig bewiesen} --- darunter die Wurzelregel, der Ebenensatz für RANDU, Inversion und Verwerfung, der Fluch der Dimension, die Varianzformeln der antithetischen und der Kontrollvariablen, die optimale Vorschlagsdichte, die detaillierte Bilanz des Metropolis-Algorithmus, die Annahme $1$ des Gibbs-Samplers, die Volumenerhaltung des Sprungverfahrens, die Teleskopzerlegung mit optimaler Pfadverteilung und die Erwartungstreue des Teilchenfilters. Die Näherung von Sakasegawa ist eine Interpolationsformel ohne Beweis und wurde als solche gekennzeichnet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von Buffon bis zur Kopplung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.0cm}P{3.4cm}P{4.2cm}@{}}
+\toprule
+$1777$ & Buffon & die Nadel: $\pi$ durch Zufall\\
+$1909$ & Erlang & Verlustformel für Telefonzentralen\\
+$1916$ & Weyl & Gleichverteilung modulo eins\\
+$1946$ & Ulam, von Neumann & Monte Carlo in Los Alamos\\
+$1949$ & Lehmer & linearer Kongruenzgenerator\\
+$1951$ & Kahn, Harris & Wichtigkeitsstichprobe und Aufspaltung\\
+$1953$ & Metropolis u.\,a. & der Algorithmus\\
+$1955$ & Maruyama & Euler für stochastische Gleichungen\\
+$1956$ & Hammersley, Morton & antithetische Variablen\\
+$1958$ & Box, Muller & normalverteilte Zahlen\\
+$1960$ & Kalman & der Filter\\
+$1961$ & Little; Gordon; Dahl, Nygaard & $L = \lambda W$; GPSS; Simula\\
+$1967$ & Sobol & Folgen niedriger Diskrepanz\\
+$1968$ & Marsaglia & \enquote{Random numbers fall mainly in the planes}\\
+$1970$ & Hastings & Verallgemeinerung auf unsymmetrische Vorschläge\\
+$1974$ & Milstein & Verfahren erster Ordnung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.0cm}P{3.4cm}P{4.2cm}@{}}
+\toprule
+$1984$ & Geman, Geman & Gibbs-Sampler\\
+$1987$ & Duane u.\,a. & Hybrid Monte Carlo\\
+$1990$ & Gelfand, Smith; Sobol & Bayes wird rechenbar; Varianzzerlegung\\
+$1992$ & Gelman, Rubin & $\hat R$\\
+$1993$ & Gordon, Salmond, Smith & Bootstrap-Filter\\
+$1995$ & Owen & verwürfelte Netze\\
+$1997$ & Roberts, Gelman, Gilks & $0{,}234$\\
+$1998$ & Matsumoto, Nishimura & Mersenne-Twister\\
+$2008$ & Giles & Mehrebenen-Monte-Carlo\\
+$2010$ & Andrieu, Doucet, Holenstein & Teilchen-MCMC\\
+$2011$ & Salmon u.\,a. & Zählergeneratoren (Philox)\\
+$2014$ & Hoffman, Gelman; O'Neill & NUTS; PCG\\
+$2020$ & Jacob, O'Leary, Atchadé & unverzerrte Ketten durch Kopplung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Begriff} & \textbf{Bedeutung}\\
+\midrule
+\endhead
+Aleatorisch & Zufall, der bleibt (14)\\
+Antithetisch & $U$ und $1-U$ als Paar (5.1)\\
+Aufspaltung & gute Pfade kopieren (11.2)\\
+Autokorrelationszeit & $1+2\sum\rho_k$ (4.1)\\
+Blockmittel & Standardfehler ohne $\rho_k$ (4.2)\\
+Box--Muller & zwei Gleichverteilte, zwei Normale (2.5)\\
+Degeneration & alle Gewichte auf einem Teilchen (12)\\
+Detaillierte Bilanz & Fluss hin $=$ Fluss zurück (7.2)\\
+Diskrepanz & wie ungleichmäßig eine Punktmenge ist (6.3)\\
+Einschwingphase & Anfang verwerfen (4)\\
+Epistemisch & Zufall, der schrumpft (14)\\
+Ereignisliste & nach Zeit geordnete Halde (10.1)\\
+Erlang B & Verlustformel, unempfindlich (1)\\
+Fluch der Dimension & Gitter brauchen $n^{d}$ (3.1)\\
+Gemeinsame Zufallszahlen & gleicher Zufall für Varianten (4.3)\\
+Gibbs-Sampler & bedingt ziehen, nie ablehnen (7.3)\\
+Hamilton-Monte-Carlo & Impuls und Bahn statt Zufallsweg (9.1)\\
+Inversion & $F^{-1}(U)$ (2.4)\\
+Kontrollvariable & bekannten Erwartungswert abziehen (5.2)\\
+Konditionierung & $\mathbb E[Y|Z]$ statt $Y$ (5.3)\\
+LCG & $ax+c \bmod m$ (2.1)\\
+Mehrebenen & Teleskopsumme über Gitter (9.5)\\
+Metropolis--Hastings & vorschlagen, annehmen mit $\alpha$ (7.1)\\
+Milstein & Euler plus $\tfrac12 bb'(\Delta W^2-\Delta t)$ (9.3)\\
+Neuziehung & Teilchen nach Gewicht vervielfachen (12.1)\\
+$\hat R$ & zwischen/innerhalb der Ketten (8.1)\\
+RANDU & fünfzehn Ebenen (2.3)\\
+Sobol-Folge & Punkte niedriger Diskrepanz (6)\\
+Sobol-Index & Varianzanteil einer Eingabe (14.2)\\
+Sprungverfahren & symplektischer Integrator (9.2)\\
+Startwert & Anfang der Zahlenfolge (2, 13)\\
+Teilchenfilter & Wichtigkeit Tag für Tag (12.1)\\
+Verwerfung & Vorschlag unter die Dichte (2.6)\\
+Wichtigkeitsstichprobe & aus $g$ ziehen, mit $f/g$ wichten (6.1)\\
+Wirksames $n$ & $n/\tau$ oder $(\sum w)^2/\sum w^2$ (4, 6)\\
+Wurzelregel & Fehler $\sigma/\sqrt n$ (1.2)\\
+Zählergenerator & Zahl aus Zählerstand (2, 13)\\
+\bottomrule
+\end{longtable}}
+\end{center}
+\end{merksatz}

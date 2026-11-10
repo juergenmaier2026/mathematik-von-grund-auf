@@ -1,0 +1,383 @@
+\chapter{Warten}
+
+\section{Ankunft und Bedienung}
+
+\begin{merksatz}
+\boxtitel{Die Notaufnahme mit einem Behandlungsplatz}
+Ankünfte poissonsch mit $\lambda = 3{,}2$ je Stunde, Behandlungsdauer exponentiell mit Mittelwert $15$ Minuten, also $\mu = 4$ je Stunde.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}@{}}
+\toprule
+\textbf{Auslastung} $\rho = \lambda/\mu$ & $0{,}80$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Platz ist zu achtzig Prozent belegt --- also zwanzig Prozent Luft. Die mittlere Wartezeit beträgt trotzdem eine Stunde.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 5.1 --- Geburts- und Todesprozess}
+Ein Markow-Prozess in stetiger Zeit auf $\{0,1,2,\ldots\}$, der nur um eins nach oben oder unten springt, mit Raten $\lambda_n$ und $\mu_n$. Die Verweildauer im Zustand $n$ ist exponentiell mit Parameter $\lambda_n + \mu_n$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 5.2 --- die stationäre Verteilung}
+Für konstante Raten $\lambda$ und $\mu$ mit $\rho = \lambda/\mu < 1$ gilt
+\[ \pi_n = (1-\rho)\,\rho^{n} . \]
+
+\schritt{Beweis}
+Der Prozess ist umkehrbar; das detaillierte Gleichgewicht aus Definition 3.4 lautet hier
+\[ \pi_n\,\lambda = \pi_{n+1}\,\mu \quad\Longrightarrow\quad \pi_{n+1} = \rho\,\pi_n \quad\Longrightarrow\quad \pi_n = \rho^{n}\pi_0 . \]
+Die Normierung $\sum_n \rho^n \pi_0 = 1$ liefert mit der geometrischen Reihe $\pi_0 = 1-\rho$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Gleichungssystem mit unendlich vielen Unbekannten, in drei Zeilen gelöst} --- weil die Kette zwischen Nachbarn hin und her läuft und deshalb umkehrbar ist. Das ist der praktische Wert von Satz 3.5.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 5.3 --- die Formel von Little}
+In jedem stationären Wartesystem gilt
+\[ L = \lambda\,W \]
+--- mittlere Zahl im System gleich Ankunftsrate mal mittlerer Verweildauer.
+
+\schritt{Der Gedanke}
+\kursiv{Man zeichne für jeden Kunden ein waagerechtes Band} von seiner Ankunft bis zu seinem Abgang. Die Gesamtfläche aller Bänder bis zur Zeit $T$ lässt sich auf zwei Weisen messen:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.0cm}@{}}
+\toprule
+\textbf{senkrecht} & Zu jedem Zeitpunkt zählt man die Anwesenden: Fläche $= \int_0^T L_t\,\dd t \approx L\,T$.\\
+\textbf{waagerecht} & Je Kunde seine Verweildauer: Fläche $\approx \lambda T \cdot W$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Gleichsetzen und durch $T$ teilen. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Formel gilt ohne jede Annahme über Verteilungen, Bedienreihenfolge oder Zahl der Plätze.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Sie ist damit das robusteste Werkzeug dieses Kapitels} --- man kann sie auf Stationen, Betten, Wartelisten und Lager anwenden, ohne irgendein Modell zu unterstellen. Wenn auf einer Station im Mittel $24$ Patienten liegen und täglich drei aufgenommen werden, beträgt die mittlere Verweildauer acht Tage. Mehr braucht man nicht zu wissen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Explosion an der Grenze}
+
+\begin{merksatz}
+\boxtitel{Wartezeit gegen Auslastung}
+Aus Satz 5.2 und 5.3 folgt
+\[ L = \frac{\rho}{1-\rho}, \qquad W = \frac{1}{\mu-\lambda}, \qquad W_q = \frac{\rho}{\mu-\lambda} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.0cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+$\rho$ & \textbf{im System} & \textbf{Wartezeit} & \textbf{Zuwachs}\\
+\midrule
+$0{,}50$ & $1{,}0$ & $15$ min & ---\\
+$0{,}80$ & $4{,}0$ & $60$ min & $4\times$\\
+$0{,}90$ & $9{,}0$ & $135$ min & $9\times$\\
+$0{,}95$ & $19{,}0$ & $285$ min & $19\times$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.6pt] (0,0) -- (6.2,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,3.0);
+\draw[tief, line width=1.4pt, smooth, samples=80, domain=0.02:0.93] plot ({6*\x},{0.28*\x/(1-\x)});
+\draw[grau!55, line width=0.8pt, dashed] (6,0) -- (6,3.0);
+\node[font=\scriptsize, color=grau, anchor=north] at (3,-0.1) {$\rho = 0{,}5$};
+\node[font=\scriptsize, color=grau, anchor=north] at (6,-0.1) {$1$};
+\node[font=\scriptsize\itshape, color=grau, anchor=west] at (1.2,2.3) {Wartezeit};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die letzten fünf Prozent Auslastung kosten mehr Wartezeit als die ersten neunzig.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die wichtigste Zahl dieses Bandes für die Krankenhausplanung.} Eine Station, die zu $95$ Prozent belegt ist, gilt betriebswirtschaftlich als gut ausgelastet; sie ist in Wahrheit ein System kurz vor dem Zusammenbruch, in dem jede Schwankung sich aufstaut. Der Zusammenhang ist kein Gestaltungsfehler, sondern eine Folge der Zufälligkeit von Ankunft und Dauer --- er verschwindet nur, wenn beide Größen exakt planbar wären.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Mehrere Plätze}
+
+\begin{merksatz}
+\boxtitel{Bündelung}
+Man vergleiche vier getrennte Notaufnahmen mit je einem Platz und $\lambda = 3{,}2$ mit einer gemeinsamen mit vier Plätzen und $\lambda = 12{,}8$. Die Auslastung ist in beiden Fällen $0{,}80$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{2.0cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Plätze} & $\lambda$ & $\Pr[\text{warten}]$ & \textbf{Wartezeit}\\
+\midrule
+$1$ & $3{,}2$ & $0{,}800$ & $60{,}0$ min\\
+$2$ & $6{,}4$ & $0{,}711$ & $26{,}7$ min\\
+$4$ & $12{,}8$ & $0{,}596$ & $11{,}2$ min\\
+$10$ & $32{,}0$ & $0{,}409$ & $3{,}1$ min\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei gleicher Auslastung sinkt die Wartezeit auf ein Zwanzigstel, wenn man zehn Einheiten zusammenlegt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist dieselbe Wurzelregel wie in Aufgabe 4.1, nun in ihrer teuersten Gestalt.} Vier getrennte Wartezimmer mit je einem Arzt sind bei gleicher Gesamtlast viermal so langsam wie ein gemeinsames mit vier Ärzten --- weil in der einen Schlange jemand wartet, während anderswo ein Arzt untätig ist. Die Formel heißt nach Erlang und ist die rechnerische Grundlage jeder Zusammenlegung von Diensten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was das Modell voraussetzt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Exponentielle Dauer} & Behandlungsdauern haben in Wirklichkeit ein Maximum und weniger Streuung.\\
+\textbf{Keine Dringlichkeit} & Wer zuerst kommt, wird zuerst behandelt --- in der Notaufnahme gilt das Gegenteil.\\
+\textbf{Unbegrenzte Schlange} & Niemand geht wieder, niemand wird abgewiesen.\\
+\textbf{Feste Rate} & Der Tagesverlauf ist ausgeblendet.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Die Wartezeit hängt von der \kursiv{Streuung} der Bediendauer ab:
+\[ W_q = \frac{\rho}{1-\rho}\cdot\frac{1+c^{2}}{2}\cdot\frac{1}{\mu} \]
+mit dem Variationskoeffizienten $c$ der Bediendauer.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{1.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Bediendauer} & $c$ & $W_q$ bei $\rho=0{,}8$\\
+\midrule
+fest & $0$ & $30$ min\\
+exponentiell & $1$ & $60$ min\\
+stark streuend & $2$ & $150$ min\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Streuung der Bediendauer wirkt so stark wie die Auslastung.} Wer die Wartezeit verkürzen will, hat damit einen zweiten Hebel: Nicht schneller arbeiten, sondern gleichmäßiger --- etwa indem man aufwendige Fälle aus dem Hauptstrom herausnimmt. Das ist der Grund für getrennte Wege für leichte Fälle, und es wirkt auch dann, wenn die Gesamtkapazität unverändert bleibt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.1 --- Little ohne Modell}
+Auf einer Station liegen im Mittel $24$ Patienten; täglich werden drei aufgenommen. Wie lange bleiben sie? Und was folgt, wenn die Verweildauer um einen Tag sinkt?
+
+\loesung
+\schritt{Schritt 1 --- Die Formel}
+\[ W = \frac{L}{\lambda} = \frac{24}{3} = 8 \ \text{Tage} \]
+
+\schritt{Schritt 2 --- Ein Tag weniger}
+\[ L = 3\cdot7 = 21 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Drei Betten werden frei --- oder es können bei gleicher Bettenzahl $3{,}43$ statt drei Patienten täglich aufgenommen werden.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Probe}
+\[ \lambda = \frac{24}{7} = 3{,}43 \quad\Longrightarrow\quad L = 3{,}43\cdot7 = 24 \quad \checkmark \]
+
+\schritt{Schritt 4 --- Warum die Formel so nützlich ist}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Sie verlangt keine Annahme} --- weder über die Verteilung der Verweildauer noch über die Ankünfte noch über die Reihenfolge. Nur Stationarität: Auf Dauer muss so viel abgehen wie ankommt. Deshalb lässt sie sich auf jede Warteliste, jedes Lager und jede Kohorte anwenden, und deshalb ist sie in Krankenhäusern das meistgebrauchte und am wenigsten bekannte Werkzeug der Kapazitätsplanung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.2 --- Die Grenze der Auslastung}
+Wie stark darf die Auslastung steigen, wenn die mittlere Wartezeit $30$ Minuten nicht überschreiten soll? ($\mu = 4$/h, ein Platz)
+
+\loesung
+\schritt{Schritt 1 --- Die Gleichung}
+\[ W_q = \frac{\rho}{\mu(1-\rho)} \le 0{,}5 \ \text{h} \]
+\[ \frac{\rho}{4(1-\rho)} \le 0{,}5 \quad\Longrightarrow\quad \rho \le 2(1-\rho) \quad\Longrightarrow\quad \rho \le \tfrac23 \]
+
+\schritt{Schritt 2 --- In Patienten je Stunde}
+\[ \lambda \le \tfrac23\cdot4 = 2{,}67 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei $3{,}2$ Ankünften je Stunde reicht ein Platz nicht --- man braucht $\mu \ge 4{,}8$ oder einen zweiten Platz.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die beiden Wege}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Maßnahme} & $W_q$ & \textbf{Auslastung}\\
+\midrule
+schneller: $\mu = 4{,}8$ & $30$ min & $0{,}67$\\
+zweiter Platz & $\mathbf{2{,}9}$ min & $0{,}40$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der zweite Platz wirkt weit stärker als die Beschleunigung} --- und kostet Auslastung. Hier liegt der eigentliche Zielkonflikt: Wer Wartezeiten will, muss Leerlauf bezahlen, und zwar überproportional. Eine Abteilung ohne Leerlauf hat keine Wartezeiten wegbekommen, sondern nur versteckt --- in Wartelisten, Verlegungen und Abweisungen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.3 --- Der Preis der Trennung}
+Zwei Fachabteilungen mit je einem Arzt, je $3{,}2$ Patienten je Stunde. Was gewinnt man durch einen gemeinsamen Dienst?
+
+\loesung
+\schritt{Schritt 1 --- Getrennt}
+Zwei unabhängige Systeme mit $\rho = 0{,}8$:
+\[ W_q = 60 \ \text{min je System} \]
+
+\schritt{Schritt 2 --- Gemeinsam}
+$\lambda = 6{,}4$, zwei Plätze, $\rho = 0{,}8$:
+\[ \Pr[\text{warten}] = 0{,}711, \qquad W_q = 26{,}7 \ \text{min} \]
+
+\schritt{Schritt 3 --- Der Gewinn}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+& \textbf{getrennt} & \textbf{gemeinsam}\\
+\midrule
+Wartezeit & $60$ min & $\mathbf{26{,}7}$ min\\
+Ärzte & $2$ & $2$\\
+Auslastung & $0{,}80$ & $0{,}80$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mehr als die Hälfte der Wartezeit --- ohne eine einzige zusätzliche Arztstunde.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Und was dagegen spricht}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Rechnung setzt voraus, dass jeder Arzt jeden Patienten versorgen kann. \textbf{Spezialisierung senkt die Bediendauer und erhöht zugleich die Wartezeit} --- der Gewinn der Bündelung und der Gewinn der Fachkunde stehen gegeneinander. Die Rechnung sagt nur, wie groß der eine ist; wie groß der andere ist, muss die Klinik wissen. In der Praxis bündelt man deshalb den Zugang und trennt die Weiterbehandlung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Kopenhagen, 1909}
+\Person{Agner Krarup Erlang} arbeitete als Mathematiker bei der Kopenhagener Telefongesellschaft und beantwortete eine praktische Frage: Wie viele Leitungen braucht eine Vermittlungsstelle?
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er nahm poissonsche Anrufe und exponentielle Gesprächsdauern an und leitete daraus die Formeln her, die dieses Kapitel benutzt. \textbf{Erlang veröffentlichte wenig, auf Dänisch, und ohne Beweise} --- seine Ergebnisse wurden später von anderen streng begründet. Die Einheit des Fernsprechverkehrs heißt nach ihm, ebenso die Verteilung aus Kapitel~2, Aufgabe 2.3.}
+\end{minipage}
+\end{center}
+
+\schritt{Little}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{John Little} bewies die Formel $L = \lambda W$ erst 1961, obwohl sie längst benutzt wurde. \textbf{Er hielt den Beweis selbst für die geringere Leistung} --- die Einsicht sei gewesen, dass die Formel keinerlei Annahmen braucht. Sie gilt für jedes System, das im Mittel so viel abgibt, wie es aufnimmt.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Klinik}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Übertragung auf Krankenhäuser begann in den 1950er Jahren mit Bettenplanung und ist bis heute unvollständig. \textbf{Eine vielzitierte Auswertung britischer Krankenhäuser fand, dass oberhalb von $85$ Prozent Bettenauslastung die Zahl abgewiesener Notfälle steil ansteigt} --- der Knick, den Abschnitt 5.2 vorhersagt. Die Empfehlung, unterhalb dieser Grenze zu planen, ist seither Lehrbuchwissen und wird durchgängig missachtet.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Warteschlangen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Vielfach-Server} & Näherungen für Systeme mit hunderten Plätzen und Ungeduld.\\
+\textbf{Steuerung} & Wen wann bedienen --- Dringlichkeitsstufen statt Reihenfolge.\\
+\textbf{Netze} & Systeme, deren Abgänge die Ankünfte anderer sind.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ein Krankenhaus ist ein Netz: Notaufnahme, Station, Intensiv, Funktionsbereiche. \textbf{Für eine wichtige Klasse solcher Netze ist die stationäre Verteilung ein Produkt der Einzelverteilungen} --- ein Ergebnis von \Person{James Jackson} aus dem Jahr 1957, das die Rechnung überhaupt erst möglich macht. Es setzt allerdings voraus, dass kein Bereich blockiert, wenn der nächste voll ist; genau das ist in Krankenhäusern der Regelfall, und dann gibt es keine geschlossene Lösung mehr.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 5.1} & Geburts- und Todesprozess\\
+\textbf{Satz 5.2} & $\pi_n = (1-\rho)\rho^{n}$\\
+\textbf{Satz 5.3} & $L = \lambda W$, ohne Annahmen\\
+\textbf{Die Explosion} & $\rho/(1-\rho)$ nahe eins\\
+\textbf{Bündelung} & vier Einheiten, ein Viertel der Wartezeit\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Hier wuchs die Schlange, weil Ankünfte sich stauten. Das nächste Kapitel behandelt Prozesse, in denen jeder Anwesende selbst neue erzeugt --- und in denen die entscheidende Frage lautet, ob der Prozess ausstirbt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

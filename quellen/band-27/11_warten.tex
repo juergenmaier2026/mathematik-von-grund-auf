@@ -1,0 +1,311 @@
+\chapter{Was hilft, und wie selten es schlimm wird}
+
+\section{Ein Bett mehr}
+
+\begin{merksatz}
+\boxtitel{Vier Eingriffe, je zehn Läufe à $20\,000$ Tage}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{1.4cm}P{1.6cm}P{2.0cm}P{1.8cm}@{}}
+\toprule
+\textbf{Variante} & $\rho$ & \textbf{wartet} & \textbf{Wartezeit} & \textbf{$95\,\%$}\\
+\midrule
+$12$ Betten & $0{,}958$ & $0{,}83$ & $5{,}5$ Tage & $18$ Tage\\
+$13$ Betten & $0{,}884$ & $0{,}56$ & $1{,}36$ & $5{,}7$\\
+$14$ Betten & $0{,}821$ & $0{,}38$ & $0{,}56$ & $2{,}9$\\
+$12$, Verweildauer $-10\,\%$ & $0{,}862$ & $0{,}53$ & $1{,}06$ & $4{,}6$\\
+$12$, Verweildauer $-20\,\%$ & $0{,}766$ & $0{,}29$ & $0{,}30$ & $1{,}8$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Standardfehler der Wartezeit: $0{,}4$ in der ersten Zeile, unter $0{,}05$ in den übrigen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Bett mehr --- acht Prozent Kapazität --- senkt die Wartezeit um den Faktor vier. Zehn Prozent kürzere Verweildauer wirken fast gleich. Nichts daran ist linear.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Auslastung $\rho = \lambda\bar L/c$ ist die einzige Zahl, die zählt}, und die Wartezeit explodiert, wenn sie gegen eins geht --- der Nenner $1-\rho$ in jeder Warteschlangenformel aus Band 25, Kapitel~11. Von $0{,}96$ auf $0{,}88$ ist der Nenner dreimal so groß. Das ist der Grund, warum Intensivstationen bei $85$ Prozent Auslastung geplant werden sollten und bei $95$ Prozent betrieben werden: Die Betriebswirtschaft sieht nur die leeren Betten, die Simulation sieht die Schlange.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 11.1 --- Die Näherung von Sakasegawa}
+Für ein Wartesystem mit $c$ Bedienern, Poisson-Ankünften und Bedienzeiten mit Mittel $S$ und Variationskoeffizient $c_s$ gilt näherungsweise
+\[ \bar W \approx \frac{\rho^{\sqrt{2(c+1)}-1}}{c\,(1-\rho)}\cdot\frac{1+c_s^2}{2}\cdot S . \]
+
+\schritt{Beweis}
+Keiner --- es ist eine Interpolationsformel von 1977 zwischen dem exakten $M/M/c$-Ergebnis (Erlang C) und dem exakten $M/G/1$-Ergebnis (Pollaczek--Chintschin, Band 25, Satz 11.8), deren Fehler in Simulationsstudien unter zehn Prozent liegt. $\blacksquare$
+
+\schritt{Für die Tabelle, $c_s^2 = e^{0{,}36}-1 = 0{,}433$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.0cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Variante} & \textbf{Formel} & \textbf{Simulation}\\
+\midrule
+$12$ Betten & $5{,}7$ & $5{,}5\pm0{,}4$\\
+$13$ Betten & $1{,}35$ & $1{,}36$\\
+$14$ Betten & $0{,}57$ & $0{,}56$\\
+$-10\,\%$ & $1{,}02$ & $1{,}06$\\
+$-20\,\%$ & $0{,}33$ & $0{,}30$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Formel trifft auf zwei Stellen, und sie kostet nichts} --- warum dann simulieren? Weil sie nur das Mittel liefert, nicht das $95$-Prozent-Quantil, nicht die längste Schlange, nicht den Tagesrhythmus, nicht den Vorrang. Die Simulation liefert alles, und die Formel ist ihre Probe: Stimmen die Mittel überein, darf man den Quantilen trauen. Der Faktor $(1+c_s^2)/2$ ist der Grund, warum die lognormale Verweildauer kürzere Wartezeiten gibt als die exponentielle: $0{,}72$ statt $1$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wie selten wird die Schlange lang?}
+
+\begin{merksatz}
+\boxtitel{Die Frage}
+Bei dreizehn Betten: Wie wahrscheinlich ist es, dass die Schlange --- beginnend mit einem Wartenden --- auf sechzig wächst, bevor sie sich geleert hat? In $200\,000$ Tagen war die längste Schlange $49$. Naiv ist nichts zu sehen.
+
+\schritt{Für exponentielle Verweildauern ist es ein Spielerruin}
+Solange die Schlange nicht leer ist, sind alle Betten belegt; die Schlange wächst mit Rate $\lambda = 2{,}4$ und schrumpft mit Rate $13/4{,}79 = 2{,}71$. Die eingebettete Kette ist ein Zufallsweg mit $p = 0{,}469$, Band 25, Kapitel~1:
+\[ P(\text{60 vor 0}\mid 1) = \frac{1-r}{1-r^{60}}, \qquad r = \frac{1-p}{p} = 1{,}131: \qquad 8{,}1\cdot10^{-5} . \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für die lognormale Verweildauer gibt es diese Formel nicht} --- die Schrumpfrate hängt davon ab, wie lange die dreizehn Patienten schon liegen. Die Formel ist, wie in Satz 11.1, die Probe für das Verfahren, das jetzt kommt; das Verfahren selbst braucht sie nicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitel{Definition 11.2 --- Aufspaltung}
+Man wähle Schwellen $0 < \ell_1 < \ell_2 < \cdots < \ell_m = \ell$ und schätze
+\[ P(\text{erreicht } \ell) = \prod_{k=1}^{m} P(\text{erreicht } \ell_k \mid \text{erreicht } \ell_{k-1}) . \]
+Jeden Faktor schätzt man mit Pfaden, die im \Begriff{Eintrittszustand} der vorigen Schwelle starten: Von $N_0$ Pfaden erreichen $n_1$ die Schwelle $\ell_1$; jeder wird in $R$ Kopien \Begriff{aufgespalten}, die unabhängig weiterlaufen; von den $Rn_1$ erreichen $n_2$ die Schwelle $\ell_2$, und so fort. Der Schätzer ist
+\[ \hat P = \frac{n_1}{N_0}\cdot\frac{n_2}{Rn_1}\cdot\frac{n_3}{Rn_2}\cdots = \frac{n_m}{N_0 R^{m-1}} . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Aufspaltung im Leitfall}
+Schwellen $10, 20, \ldots, 60$; $N_0 = 2\,000$, $R = 5$; zwanzig Wiederholungen:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Schwelle} & \textbf{Anteil, exakt} & \textbf{Anteil, 1. Lauf}\\
+\midrule
+$10$ & $0{,}054$ & $0{,}050$\\
+$20$ & $0{,}226$ & $0{,}234$\\
+$30$ & $0{,}274$ & $0{,}291$\\
+$40$ & $0{,}287$ & $0{,}293$\\
+$50$ & $0{,}290$ & $0{,}303$\\
+$60$ & $0{,}291$ & $0{,}288$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{4.2cm}P{3.6cm}@{}}
+\toprule
+Schätzung & $(8{,}2\pm0{,}2)\cdot10^{-5}$\\
+exakt & $8{,}1\cdot10^{-5}$\\
+Pfade je Lauf & $9\,600$\\
+relativer Fehler je Lauf & $12\,\%$\\
+naiv für $12\,\%$ & $810\,000$ Pfade\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Faktor $84$ --- und das Verfahren hat keine Dichte verändert, kein Gewicht berechnet, nichts geneigt. Es hat nur die Pfade vervielfacht, die auf dem Weg waren.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Vorzug gegenüber Kapitel~6}: Die Wichtigkeitsstichprobe braucht die Dichte des Pfads --- für die lognormale Station ein Produkt über Tausende Ziehungen --- und eine Neigung, die man finden muss. Die Aufspaltung braucht nur ein Programm, das man anhalten, kopieren und weiterlaufen lassen kann. Die Regel für die Schwellen: so, dass jeder Faktor etwa $0{,}2$ bis $0{,}5$ beträgt, und $R \approx 1/\text{Faktor}$, damit die Pfadzahl je Stufe ungefähr gleich bleibt. Die erste Stufe hier ist mit $0{,}05$ zu grob --- $\ell_1 = 5$ wäre besser gewesen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Der Eintrittszustand, der keiner ist}
+Bei lognormaler Verweildauer ist der Zustand an der Schwelle nicht die Schlangenlänge, sondern die Schlangenlänge \kursiv{und} die dreizehn Entlassungszeiten. Wer beim Aufspalten nur die Schlangenlänge kopiert und die Entlassungszeiten neu zieht, simuliert ein anderes System.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Richtig} & Den vollständigen Zustand kopieren, einschließlich der Ereignisliste. Jede Kopie bekommt einen eigenen Zufallsstrom ab der Schwelle.\\
+\textbf{Falsch} & Nur den Zähler kopieren. Pfade, die die Schwelle mit dreizehn frisch belegten Betten erreichen --- die gefährlichen ---, werden durch Pfade mit mittleren Restdauern ersetzt. Die Schätzung ist zu klein.\\
+\textbf{Auch falsch} & Alle Kopien mit demselben Zufallsstrom weiterlaufen lassen. Sie sind dann identisch, und $R$ Kopien sind eine.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Kopien müssen am selben Ort beginnen und verschiedene Wege gehen. Beides zugleich, oder das Verfahren ist wertlos.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der zweite Fehler ist subtil, weil er erst nach der Schwelle wirkt}: Die Pfade, die eine Schwelle überhaupt erreichen, sind nicht typisch --- sie haben eine Häufung langer Verweildauern hinter sich, und die liegt noch in den Betten. Das Vergessen des Zustands ersetzt sie durch typische Pfade und unterschätzt die Fortsetzung um Faktoren. Die Gegenprobe ist die Markow-Variante mit exponentieller Verweildauer, bei der der Zustand nur die Zahl ist: Stimmt sie mit der Formel überein, ist das Verfahren richtig, und erst dann wechselt man zur lognormalen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- Wie viele Betten für zwei Tage?}
+Welche Bettenzahl bringt das $95$-Prozent-Quantil der Wartezeit unter zwei Tage?
+
+\loesung
+\schritt{Schritt 1 --- Das Mittel aus Satz 11.1}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+$c$ & $\rho$ & $\bar W$ Formel & $95\,\%$ Simulation\\
+\midrule
+$14$ & $0{,}821$ & $0{,}57$ & $2{,}9$\\
+$15$ & $0{,}766$ & $0{,}28$ & \\
+$16$ & $0{,}719$ & $0{,}15$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Vom Mittel zum Quantil}
+Aus der Tabelle in 11.1 ist das Quantil durchweg etwa das Fünffache des Mittels: $18/5{,}5 = 3{,}3$, $5{,}7/1{,}36 = 4{,}2$, $2{,}9/0{,}56 = 5{,}2$, $1{,}8/0{,}30 = 6$ --- das Verhältnis wächst, wenn weniger warten, weil die Nullen das Mittel drücken. Für $c=15$ also etwa $5{,}5\cdot0{,}28 = 1{,}5$ Tage.
+
+\schritt{Schritt 3 --- Die Antwort}
+$15$ Betten; $14$ reichen nicht. Zur Sicherheit: ein Lauf mit $15$ Betten, der das Quantil direkt misst.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Verfahren ist typisch: Formel zum Eingrenzen, Simulation zum Entscheiden.} Die Formel sagt, dass $15$ oder $16$ in Frage kommen; ein einziger Simulationslauf je Variante klärt es. Der Fehler wäre, zehn Varianten zu simulieren, ohne vorher die Formel zu befragen --- oder der Formel das Quantil zu glauben, das sie nicht kennt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- Die Faktoren der Aufspaltung}
+Leiten Sie die exakten Anteile $0{,}054$ und $0{,}291$ aus der Tabelle in Abschnitt 11.2 her.
+
+\loesung
+\schritt{Schritt 1 --- Von $1$ nach $10$ vor $0$}
+Spielerruin mit $r = 1{,}131$, Start $1$, Ziel $10$:
+\[ \frac{1-r^{1}}{1-r^{10}} = \frac{-0{,}131}{1-3{,}42} = 0{,}054 \]
+
+\schritt{Schritt 2 --- Von $50$ nach $60$ vor $0$}
+\[ \frac{1-r^{50}}{1-r^{60}} = \frac{1-471}{1-1\,613} = 0{,}291 \]
+
+\schritt{Schritt 3 --- Warum die Faktoren sich stabilisieren}
+Für große $k$ ist $r^{\ell_k}\gg1$, und der Quotient geht gegen $r^{-10} = 1{,}131^{-10} = 0{,}291$: die Wahrscheinlichkeit, zehn Stufen zu steigen, bevor man \kursiv{je} auf null fällt. Ab Schwelle $30$ ist die Null praktisch unerreichbar, und jede Stufe kostet denselben Faktor.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Signatur eines Systems mit Drift}: Die Wahrscheinlichkeit, Höhe $\ell$ zu erreichen, fällt wie $r^{-\ell}$ --- exponentiell --- und jede weitere Schwelle multipliziert mit derselben Zahl. Für die Planung der Aufspaltung heißt das: gleichmäßige Schwellen sind richtig, wenn die Drift konstant ist. Bei der lognormalen Station ist sie es nicht ganz, und man setzt die Schwellen nach einem Vorlauf dort, wo die Anteile gleich werden.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Von der Wahrscheinlichkeit zur Häufigkeit}
+Wie oft im Jahr erreicht die Schlange bei dreizehn Betten die Sechzig?
+
+\loesung
+\schritt{Schritt 1 --- Die Zyklen}
+Jedes Mal, wenn die Schlange von null auf eins springt, beginnt ein Versuch. Bei dreizehn Betten warten $56\,\%$ der $2{,}4$ Ankünfte je Tag; die Zahl der Zyklen je Tag ist die Rate, mit der die leere Schlange verlassen wird --- grob die Ankunftsrate mal die Wahrscheinlichkeit, dass alle Betten belegt und niemand wartet: etwa $2{,}4\cdot0{,}15 = 0{,}36$ je Tag, $130$ im Jahr.
+
+\schritt{Schritt 2 --- Die Häufigkeit}
+\[ 130\cdot8{,}1\cdot10^{-5} = 0{,}011 \ \text{je Jahr} \qquad\text{--- einmal in hundert Jahren.} \]
+
+\schritt{Schritt 3 --- Und bei zwölf Betten}
+$r = 1/\rho = 1{,}044$, $r^{60} = 13{,}1$, $P = 0{,}044/12{,}1 = 0{,}0036$; mit etwa $100$ Zyklen im Jahr: $0{,}36$ je Jahr --- \textbf{alle drei Jahre}. Die Simulation über $200\,000$ Tage sah sie zweimal.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Bett verwandelt ein Ereignis alle drei Jahre in eines alle hundert}: Das ist die Zahl, die in einen Antrag auf Erweiterung gehört, und sie ist ohne Kapitel~6 oder~11 nicht zu haben, weil kein Krankenhaus hundert Jahre Daten hat. Die Zyklenzahl in Schritt 1 ist eine grobe Schätzung --- sie wäre in der Simulation direkt zu zählen, und wer die Zahl verwendet, sollte das tun.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von Kahn bis RESTART}
+Die Aufspaltung ist die zweite Erfindung von \Person{Kahn} und \Person{Harris} 1951 --- im selben Aufsatz wie die Wichtigkeitsstichprobe.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Neutronen, die tief in die Abschirmung eindrangen, wurden in Kopien aufgespalten, und Neutronen, die zurückkehrten, mit \enquote{russischem Roulette} --- Band 25 --- getötet, um Rechenzeit zu sparen. \textbf{Dass dasselbe für Warteschlangen und Netze funktioniert, zeigten \Person{Villén-Altamirano} und \Person{Villén-Altamirano} 1991 unter dem Namen RESTART} --- für Verlustwahrscheinlichkeiten von $10^{-9}$ in Telefonvermittlungen, die man für die Zulassung nachweisen musste.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Theorie}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Glasserman}, \Person{Heidelberger}, \Person{Shahabuddin} und \Person{Zajic} bewiesen 1999, wann die Aufspaltung effizient ist: Die Faktoren müssen etwa gleich sein, und ihre Zahl muss wie $\log(1/P)$ wachsen. \textbf{\Person{Cérou} und \Person{Guyader} machten 2007 die Schwellen adaptiv} --- das Verfahren setzt sie selbst so, dass jeder Faktor ein vorgegebener Anteil ist --- und verbanden es mit den Teilchenfiltern aus Kapitel~12.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Seltene Ereignisse in Systemen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Kreuzentropie} & Die Neigung aus Kapitel~6 in Runden lernen: simulieren, die Pfade behalten, die am weitesten kamen, die Parameter an sie anpassen, wiederholen (\Person{Rubinstein} 1999).\\
+\textbf{Subset-Simulation} & Aufspaltung mit Markow-Ketten statt Kopien --- für Versagenswahrscheinlichkeiten in der Bauingenieurkunst.\\
+\textbf{Große Abweichungen} & Die Theorie aus Band 25, Kapitel~9 liefert die asymptotisch optimale Neigung in geschlossener Form.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Kreuzentropie-Methode beantwortet die Frage, die Aufgabe 6.2 offenließ --- welches $\lambda'$?}: Man simuliere mit $\lambda$, nehme die zehn Prozent der Tage mit den meisten Abweisungen und schätze aus ihnen die Ankunftsrate, die sie am besten erklärt --- das ist $\lambda'$ für die nächste Runde. Nach drei bis fünf Runden ist das Ereignis typisch, und die letzte Runde liefert mit den Gewichten aus Kapitel~6 die Schätzung. Der Name kommt daher, dass die Anpassung die Kreuzentropie zur optimalen Dichte $g^*$ aus Satz 6.2 minimiert, Band 23. Für die Intensivstation ist das Verfahren einfacher als die Aufspaltung; für Systeme ohne natürliche Parameterfamilie ist die Aufspaltung einfacher. Beides zu kennen ist der Stand.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Die Auslastung} & $\rho$ gegen $1$: Wartezeit explodiert\\
+\textbf{Satz 11.1} & Sakasegawa als Probe für das Mittel\\
+\textbf{Definition 11.2} & Aufspaltung: Schwellen, Kopien, Produkt\\
+\textbf{Die Regel} & Faktoren $0{,}2$--$0{,}5$, $R\approx1/$Faktor\\
+\textbf{Der Bruchfall} & den ganzen Zustand kopieren\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle Simulationen bis hierher haben das System gekannt und seine Zukunft erzeugt. Das nächste Kapitel dreht die Richtung um: Das System ist nur durch verrauschte Messungen bekannt --- die Belegung von gestern, die Zahlen von heute Morgen --- und gesucht ist, was jetzt wirklich los ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

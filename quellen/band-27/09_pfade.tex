@@ -1,0 +1,366 @@
+\chapter{Fliegen statt kriechen, und Pfade rechnen}
+
+\section{Der Zufallsweg in hundert Dimensionen}
+
+\begin{merksatz}
+\boxtitel{Das Problem}
+Zielverteilung: hundert unabhängige Normalverteilungen mit Streuungen von $0{,}1$ bis $1{,}0$. Zufallsweg-Metropolis, Schrittweite nach der $2{,}38/\sqrt d$-Regel, $80\,000$ Schritte nach der Einschwingphase:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.8cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Schritt} & \textbf{Annahme} & $\tau$ für $\sigma=0{,}1$ & $\tau$ für $\sigma=1$\\
+\midrule
+$0{,}024$ & $71\,\%$ & $94$ & $4\,800$\\
+$0{,}048$ & $45\,\%$ & $41$ & $2\,700$\\
+$0{,}071$ & $26\,\%$ & $34$ & $\mathbf{2\,000}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Schrittweite muss zur schmalsten Richtung passen --- und dann kriecht die Kette in der breitesten: $80\,000$ Schritte, $40$ wirksame Werte.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Fluch der Dimension für Markow-Ketten}: Die Zahl der Schritte, um einmal die Verteilung zu durchqueren, wächst wie $d\cdot(\sigma_{\max}/\sigma_{\min})^2$. Mit zweitausend Parametern eines Modells aus Band 26 und einem Verhältnis von Hundert sind das $10^7$ Schritte je wirksamem Wert. Der Zufallsweg ist am Ende. Was fehlt, ist eine Bewegung, die weit geht und trotzdem angenommen wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Hamilton-Monte-Carlo}
+
+\begin{definition}
+\boxtitel{Definition 9.1 --- Hamilton-Dynamik für $\pi$}
+Man schreibe $\pi(x) \propto e^{-U(x)}$, $U$ die \Begriff{potentielle Energie}, und füge einen \Begriff{Impuls} $p\in\mathbb R^d$ mit kinetischer Energie $\tfrac12 p^{\top}p$ hinzu. Die Gesamtenergie $H(x,p) = U(x)+\tfrac12 p^{\top}p$ definiert die Verteilung $e^{-H}$, deren $x$-Rand $\pi$ ist. Ein Schritt:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{0.8cm}P{7.6cm}@{}}
+\toprule
+$1$ & Impuls ziehen: $p\sim N(0,I)$.\\
+$2$ & $L$ Schritte der Weite $\varepsilon$ entlang der Bewegungsgleichungen $\dot x = p$, $\dot p = -\nabla U(x)$ mit dem Sprungverfahren (unten).\\
+$3$ & Metropolis-Annahme mit $\alpha = \min\{1, e^{H(x,p) - H(x',p')}\}$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 9.2 --- Warum das funktioniert}
+\begin{enumerate}
+\item Die exakte Hamilton-Dynamik erhält $H$ und das Volumen (Liouville); der Vorschlag wäre dann immer angenommen.
+\item Das \Begriff{Sprungverfahren} (\kursiv{leapfrog}) $p \mathrel{-}= \tfrac\varepsilon2\nabla U(x)$, $x \mathrel{+}= \varepsilon p$, $p \mathrel{-}= \tfrac\varepsilon2\nabla U(x)$ ist volumenerhaltend und umkehrbar, erhält $H$ aber nur bis auf $O(\varepsilon^2)$.
+\item Die Metropolis-Korrektur in Schritt $3$ macht aus dem Näherungsfehler eine exakte Kette mit stationärer Verteilung $e^{-H}$.
+\end{enumerate}
+
+\schritt{Beweis}
+(1) ist Mechanik, Band 24, Kapitel~2 (Auslassung 3). (2): Jeder der drei Teilschritte ist eine Scherung --- eine Koordinate wird um eine Funktion der anderen verschoben --- und Scherungen haben Determinante $1$. Umkehrbar, weil $p\to-p$ den Weg rückwärts durchläuft. (3): Volumenerhaltung und Umkehrbarkeit machen den Vorschlag symmetrisch im Sinne von Definition 7.1, also ist der Hastings-Quotient $e^{-H(x',p')}/e^{-H(x,p)}$. $\blacksquare$
+
+\schritt{Dasselbe Ziel, $5\,000$ Schritte mit $L=20$, $\varepsilon = 0{,}1$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{1.6cm}P{1.6cm}P{2.2cm}@{}}
+\toprule
+\textbf{Verfahren} & \textbf{Gradienten} & \textbf{Annahme} & $\tau_{\max}$ & \textbf{wirksames $n$}\\
+\midrule
+Zufallsweg & $80\,000$ & $26\,\%$ & $2\,000$ & $40$\\
+Hamilton & $100\,000$ & $85\,\%$ & $\mathbf{1{,}0}$ & $\mathbf{5\,000}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei gleichem Rechenaufwand das Hundertfache an wirksamen Werten --- und die Streuungen $0{,}099$ und $0{,}999$ stimmen in jeder Richtung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Impuls trägt die Kette über die Verteilung hinweg, statt sie zufällig hin und her zu schieben}: In $L=20$ Schritten legt sie den Weg $L\varepsilon = 2$ zurück, zwei Standardabweichungen der breitesten Richtung, und kommt mit fast derselben Energie an. Der Zufallsweg braucht für dieselbe Strecke $(2/0{,}071)^2 = 800$ Schritte. Der Preis ist der Gradient $\nabla U$ --- den man heute, Band 26, Kapitel~13, automatisch erhält. Die Abstimmung von $\varepsilon$ und $L$ ist heikel; das Programm Stan erledigt sie selbst (Forschungskasten).}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Pfade stochastischer Differentialgleichungen}
+
+\begin{definition}
+\boxtitel{Definition 9.3 --- Das Euler--Maruyama-Verfahren}
+Für $dX = a(X)\,dt + b(X)\,dW$ aus Band 25, Kapitel~7, mit Schrittweite $\Delta t$:
+\[ X_{k+1} = X_k + a(X_k)\,\Delta t + b(X_k)\,\Delta W_k, \qquad \Delta W_k \sim N(0,\Delta t)\ \text{unabhängig.} \]
+Das \Begriff{Milstein-Verfahren} fügt $\tfrac12 b(X_k)b'(X_k)\big(\Delta W_k^2 - \Delta t\big)$ hinzu.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 9.4 --- Starke und schwache Ordnung}
+Unter Lipschitz-Bedingungen an $a$ und $b$ gilt für den Pfadfehler
+\[ \sqrt{\mathbb E\big[(X_T^{\Delta t} - X_T)^2\big]} \le C\,\Delta t^{1/2} \ \ (\text{Euler}), \qquad \le C\,\Delta t \ \ (\text{Milstein}) \]
+und für den Fehler im Erwartungswert glatter Funktionen
+\[ \big|\mathbb E[h(X_T^{\Delta t})] - \mathbb E[h(X_T)]\big| \le C\,\Delta t \ \ (\text{beide}). \]
+
+\schritt{Beweis}
+Band 25, Kapitel~8, Satz 8.6 für die starke Ordnung (Auslassung 4 für Milstein); die schwache Ordnung folgt aus der Kolmogorow-Rückwärtsgleichung und einer Taylor-Entwicklung in $\Delta t$. $\blacksquare$
+
+\schritt{Geometrische Brownsche Bewegung, $X_0 = 100$, $a = 0{,}05X$, $b = 0{,}2X$, $T=1$, $20\,000$ Pfade}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.2cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Schritte} & \textbf{stark Euler} & \textbf{stark Milstein} & \textbf{schwach Euler}\\
+\midrule
+$4$ & $1{,}53$ & $0{,}290$ & $0{,}033$\\
+$16$ & $0{,}75$ & $0{,}074$ & $0{,}0082$\\
+$64$ & $0{,}38$ & $0{,}018$ & $0{,}0021$\\
+$256$ & $0{,}19$ & $0{,}0046$ & $0{,}00051$\\
+$1\,024$ & $0{,}094$ & $0{,}0012$ & $0{,}00013$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Viermal so viele Schritte: Euler-Pfadfehler halbiert ($\Delta t^{1/2}$), Milstein geviertelt ($\Delta t$), Erwartungswertfehler geviertelt ($\Delta t$).
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer einen Erwartungswert will, braucht Euler mit $\Delta t$. Wer den Pfad selbst will --- eine Barriere, ein Maximum, einen Stopp ---, braucht Milstein oder viel kleinere Schritte.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der schwache Fehler ist hier exakt berechenbar}: $\mathbb E[X_T^{\Delta t}] = X_0(1+0{,}05\Delta t)^{1/\Delta t}$ gegen $X_0 e^{0{,}05}$ --- die Zinseszinsformel aus Band 2, und ihre Abweichung vom stetigen Zins ist genau der Euler-Fehler. Die starke Ordnung $\tfrac12$ hat denselben Grund wie die Wurzelregel: $\Delta W$ ist von der Größe $\sqrt{\Delta t}$, und der erste vernachlässigte Term $b b'\,(\Delta W^2-\Delta t)$ ist von der Ordnung $\Delta t$ je Schritt, über $1/\Delta t$ Schritte summiert mit zufälligem Vorzeichen: $\sqrt{\Delta t}$. Milstein nimmt genau diesen Term mit.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Mehrebenen-Monte-Carlo}
+
+\begin{merksatz}
+\boxtitel{Satz 9.5 --- Die Mehrebenen-Zerlegung}
+Sei $P_\ell$ die Auszahlung mit $2^\ell$ Schritten. Dann gilt die Teleskopsumme
+\[ \mathbb E[P_L] = \mathbb E[P_0] + \sum_{\ell=1}^{L}\mathbb E[P_\ell - P_{\ell-1}] , \]
+und jeder Summand wird mit eigener Pfadzahl $N_\ell$ geschätzt --- $P_\ell$ und $P_{\ell-1}$ aus \kursiv{denselben} Brownschen Zuwächsen (Satz 4.3). Ist $\operatorname{Var}[P_\ell - P_{\ell-1}] = V_\ell$ und kostet ein Pfad $C_\ell = 2^\ell$, so minimiert
+\[ N_\ell \propto \sqrt{V_\ell/C_\ell} \]
+die Kosten bei vorgegebener Gesamtvarianz.
+
+\schritt{Beweis}
+Die Teleskopsumme ist Algebra. Die Kosten $\sum N_\ell C_\ell$ bei Nebenbedingung $\sum V_\ell/N_\ell = \varepsilon^2/2$ minimiert man mit Lagrange (Band 12): $C_\ell = \lambda V_\ell/N_\ell^2$, also $N_\ell \propto \sqrt{V_\ell/C_\ell}$. $\blacksquare$
+
+\schritt{Kaufoption $\max(X_T - 100, 0)$, abgezinst; exakt $10{,}451$ (Black--Scholes)}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.2cm}P{1.6cm}P{2.0cm}P{2.6cm}P{2.0cm}@{}}
+\toprule
+$\ell$ & \textbf{Schritte} & $\operatorname{Var}[P_\ell]$ & $\operatorname{Var}[P_\ell - P_{\ell-1}]$ & $N_\ell$ für $\varepsilon = 0{,}02$\\
+\midrule
+$0$ & $1$ & $161$ & & $1\,707\,000$\\
+$1$ & $2$ & $187$ & $2{,}41$ & $148\,000$\\
+$2$ & $4$ & $202$ & $1{,}26$ & $75\,000$\\
+$3$ & $8$ & $209$ & $0{,}70$ & $40\,000$\\
+$4$ & $16$ & $213$ & $0{,}37$ & $20\,000$\\
+$5$ & $32$ & $216$ & $0{,}19$ & $10\,000$\\
+$6$ & $64$ & $217$ & $0{,}095$ & $5\,000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{4.0cm}P{3.4cm}@{}}
+\toprule
+\textbf{Kosten Mehrebenen} & $3{,}6\cdot10^{6}$ Schritte\\
+\textbf{Kosten eine Ebene ($64$)} & $69\cdot10^{6}$ Schritte\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Faktor $19$ --- weil die Varianz der Differenzen mit jeder Ebene halbiert wird und die teuren feinen Pfade nur zu Tausenden statt zu Millionen gebraucht werden.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist Satz 5.2, rekursiv angewandt}: Die grobe Ebene ist die Kontrollvariable der feinen, und ihr Erwartungswert ist nicht bekannt, sondern wird selbst --- billig --- geschätzt. \Person{Giles} hat 2008 gezeigt, dass die Gesamtkosten für Genauigkeit $\varepsilon$ von $\varepsilon^{-3}$ auf $\varepsilon^{-2}(\log\varepsilon)^2$ fallen, wenn $V_\ell$ wie $2^{-\ell}$ fällt --- was bei Euler und Lipschitz-Auszahlung der Fall ist. Für $\varepsilon = 0{,}001$ wird aus dem Faktor $19$ ein Faktor von mehreren Hundert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wenn das Sprungverfahren explodiert}
+Hamilton-Monte-Carlo mit $\varepsilon$ größer als das Doppelte der kleinsten Streuung: Für $U = x^2/(2\sigma^2)$ ist das Sprungverfahren mit $\varepsilon > 2\sigma$ instabil --- $H$ wächst exponentiell mit jedem Schritt, die Energie läuft weg, der Vorschlag wird abgelehnt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{4.0cm}@{}}
+\toprule
+$\varepsilon$ & \textbf{Annahme} & \textbf{Zustand}\\
+\midrule
+$0{,}10$ & $85\,\%$ & gut\\
+$0{,}15$ & $61\,\%$ & $\Delta H$ bis $5$\\
+$0{,}19$ & $43\,\%$ & grenzwertig; $\Delta H$ bis $20$\\
+$0{,}21$ & $0\,\%$ & $\Delta H$ bis $10^{12}$: divergent\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Übergang ist keine allmähliche Verschlechterung, sondern eine Klippe: Bei $\varepsilon = 2\sigma_{\min}$ kippt das Verfahren.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dieselbe Klippe hat Euler--Maruyama}: Für $dX = -\theta X\,dt + dW$ mit $\theta\Delta t > 2$ wächst $|X_k|$ geometrisch, obwohl der wahre Prozess zur Null zurückkehrt. Beides sind Stabilitätsgrenzen expliziter Verfahren, Band 11, Kapitel~9, und beides zeigt sich in der Praxis als \enquote{divergente Übergänge} (Stan) oder als Pfade mit $10^{300}$. Die Abhilfe ist in beiden Fällen dieselbe: kleinerer Schritt in der steifen Richtung --- oder eine Umskalierung der Koordinaten, die alle Streuungen auf eins bringt. Im Hamilton-Verfahren heißt das Massenmatrix, und Stan schätzt sie in der Einschwingphase.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.1 --- Ein Sprungschritt von Hand}
+$U(x) = x^2/2$, Start $x = 1$, $p = 0$, $\varepsilon = 0{,}5$, ein Schritt. Berechnen Sie $(x',p')$ und $\Delta H$.
+
+\loesung
+\schritt{Schritt 1 --- Halber Impulsschritt}
+$\nabla U(1) = 1$: $p = 0 - 0{,}25\cdot1 = -0{,}25$.
+
+\schritt{Schritt 2 --- Ortsschritt}
+$x = 1 + 0{,}5\cdot(-0{,}25) = 0{,}875$.
+
+\schritt{Schritt 3 --- Halber Impulsschritt}
+$\nabla U(0{,}875) = 0{,}875$: $p = -0{,}25 - 0{,}25\cdot0{,}875 = -0{,}469$.
+
+\schritt{Schritt 4 --- Die Energie}
+\[ H_0 = \tfrac12 + 0 = 0{,}5, \qquad H_1 = \tfrac12\cdot0{,}875^2 + \tfrac12\cdot0{,}469^2 = 0{,}383+0{,}110 = 0{,}493 \]
+$\Delta H = -0{,}007$: Annahme sicher. Die exakte Bahn wäre $x(t) = \cos t$, $x(0{,}5) = 0{,}878$, $p(0{,}5) = -0{,}479$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Fehler in $H$ ist $0{,}007$ bei einem Schritt von $0{,}5$ --- und er wächst nicht mit der Zahl der Schritte}: Das Sprungverfahren ist symplektisch, Band 24, und seine Energie schwankt um den wahren Wert, statt wegzulaufen. Das unterscheidet es von Euler, dessen Energiefehler sich aufsummiert. Für Hamilton-Monte-Carlo ist das entscheidend: $L = 100$ Schritte sind so gut annehmbar wie einer.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.2 --- Wie viele Schritte für eine Barriere?}
+Gesucht ist die Wahrscheinlichkeit, dass der Prozess aus Abschnitt 9.3 im Jahr unter $80$ fällt. Warum reicht die schwache Ordnung nicht, und was tut man?
+
+\loesung
+\schritt{Schritt 1 --- Das Problem}
+Die Barriere fragt nach dem Minimum des Pfads. Zwischen zwei Gitterpunkten kann der wahre Pfad unter $80$ fallen und zurückkehren --- das Gitter sieht es nicht. Der Fehler der Trefferwahrscheinlichkeit ist dann von der Ordnung $\sqrt{\Delta t}$, nicht $\Delta t$, auch bei glattem $a$ und $b$.
+
+\schritt{Schritt 2 --- Die Abhilfe}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Brownsche Brücke} & Zwischen $X_k$ und $X_{k+1}$ ist die Wahrscheinlichkeit, die Barriere $B$ zu kreuzen, bekannt: $\exp\!\big(-2(X_k-B)(X_{k+1}-B)/(b^2\Delta t)\big)$. Man ziehe mit ihr, ob gekreuzt wurde.\\
+\textbf{Feineres Gitter} & $\Delta t$ um den Faktor $100$ kleiner --- hundertfache Kosten für den Faktor $10$ im Fehler.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Brücke gibt die Ordnung $\Delta t$ zurück, ohne einen Schritt mehr} --- derselbe Gedanke wie die Konditionierung in Satz 5.3: Was man zwischen den Gitterpunkten weiß, rechnet man aus, statt es zu simulieren. Im Mehrebenen-Verfahren ist die Barriere der schwierige Fall, weil $P_\ell - P_{\ell-1}$ dann Sprünge hat und $V_\ell$ nur wie $2^{-\ell/2}$ fällt; Giles und Mitarbeiter haben dafür eigene Kopplungen entwickelt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.3 --- Die Ebenenzahl wählen}
+Im Mehrebenen-Beispiel: Bis zu welcher Ebene $L$ muss man gehen, damit der Verfahrensfehler unter $\varepsilon/\sqrt2 = 0{,}014$ liegt?
+
+\loesung
+\schritt{Schritt 1 --- Der Verfahrensfehler}
+$\mathbb E[P_L] - \mathbb E[P]$ ist der schwache Fehler mit $2^L$ Schritten. Aus der Tabelle: Die mittleren Differenzen $\mathbb E[P_\ell - P_{\ell-1}]$ fallen von $0{,}165$ über $0{,}049$, $0{,}010$ auf etwa $0{,}003$ bei $\ell = 6$ --- grob halbiert je Ebene.
+
+\schritt{Schritt 2 --- Die Restsumme}
+Bei Halbierung ist der Restfehler nach Ebene $L$ etwa gleich der letzten Differenz: $|\mathbb E[P_L - P_{L-1}]|$. Bei $\ell=5$: $0{,}0013$; bei $\ell = 6$: $0{,}0026$ --- beide unter $0{,}014$, und der Unterschied zwischen ihnen ist Rauschen aus $20\,000$ Pfaden.
+
+\schritt{Schritt 3 --- Die Wahl}
+$L = 4$ hätte gereicht ($0{,}016$ ist knapp drüber, $L=5$ sicher). Mit $L=5$ statt $6$ sinken die Kosten um weitere $15\,\%$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Verfahren von Giles tut genau das automatisch}: Es beginnt mit drei Ebenen, schätzt $V_\ell$ und $\mathbb E[P_\ell - P_{\ell-1}]$ aus wenigen Pfaden, fügt Ebenen hinzu, bis die letzte Differenz klein genug ist, und verteilt die Pfade nach Satz 9.5. Der Benutzer gibt $\varepsilon$ vor und sonst nichts --- und bekommt eine Schätzung mit statistischem Fehler $\varepsilon/\sqrt2$ und Verfahrensfehler $\varepsilon/\sqrt2$, zusammen $\varepsilon$. Das ist die Form, in der die Simulation stochastischer Differentialgleichungen heute in Banken läuft.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Physiker, Statistiker, Banker}
+Die drei Verfahren dieses Kapitels kommen aus drei Welten.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Duane}, \Person{Kennedy}, \Person{Pendleton} und \Person{Roweth} erfanden 1987 das Hamilton-Verfahren für die Gitter-Quantenchromodynamik --- Felder mit Millionen Freiheitsgraden, für die der Zufallsweg hoffnungslos war; sie nannten es \enquote{Hybrid Monte Carlo}. \textbf{\Person{Radford Neal} brachte es 1993 in die Statistik}, für neuronale Netze, und sein Übersichtsartikel von 2011 ist bis heute die beste Einführung. Mit Stan, 2012, wurde es das Standardverfahren der angewandten Bayes-Statistik.}
+\end{minipage}
+\end{center}
+
+\schritt{Maruyama und Giles}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Gisiro Maruyama} bewies 1955 in Fukuoka die Konvergenz des Euler-Verfahrens für stochastische Gleichungen; \Person{Milstein} fand 1974 in Swerdlowsk die Korrektur erster Ordnung. \textbf{\Person{Michael Giles}, Oxford, veröffentlichte das Mehrebenen-Verfahren 2008}, nach einer Vorarbeit von \Person{Heinrich} 2001 für parametrische Integrale. Innerhalb von zehn Jahren wurde es auf partielle Differentialgleichungen, Markow-Ketten und die Unsicherheitsquantifizierung übertragen --- und ist heute die wichtigste Idee des Fachs nach der Wichtigkeitsstichprobe.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Was die Programme heute tun}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{NUTS} & Die Bahnlänge $L$ selbst wählen: laufen, bis die Bahn umkehrt (\enquote{No-U-Turn}, Hoffman und Gelman 2014).\\
+\textbf{Riemann-Hamilton} & Die Massenmatrix ortsabhängig aus der Krümmung von $U$ --- für Verteilungen mit wechselnder Breite.\\
+\textbf{Mehrebenen-Ketten} & Mehrebenen-Monte-Carlo für Markow-Ketten, mit gekoppelten Ketten auf groben und feinen Modellen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Wahl von $L$ war das letzte Handwerk im Hamilton-Verfahren}: zu kurz, und die Kette kriecht; zu lang, und die Bahn kehrt zum Ausgangspunkt zurück --- Rechenzeit für nichts. NUTS baut die Bahn in beide Zeitrichtungen aus, verdoppelt sie, bis sich Anfang und Ende aufeinander zubewegen, und zieht aus allen Punkten der Bahn mit einem Gewicht, das die detaillierte Bilanz erhält. Seit es NUTS gibt, hat der Benutzer nichts mehr einzustellen --- und das ist der Grund, warum Mediziner heute hierarchische Modelle mit Tausenden Parametern rechnen, die 1995 Expertenarbeit waren.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 9.2} & Hamilton: Impuls, Sprungverfahren, Korrektur\\
+\textbf{Satz 9.4} & Euler stark $\tfrac12$, Milstein $1$, schwach $1$\\
+\textbf{Satz 9.5} & Mehrebenen: $N_\ell\propto\sqrt{V_\ell/C_\ell}$\\
+\textbf{Der Bruchfall} & $\varepsilon > 2\sigma_{\min}$: Klippe\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil III hat gezeigt, wie man aus Verteilungen zieht, die man nicht kennt, und Pfade rechnet, die niemand aufschreiben kann. Teil IV kehrt zur Intensivstation zurück --- als vollständiges Programm, mit Ereignisliste, Warteschlange und allem, was ein System über die Zeit braucht.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,443 @@
+\part{Ketten}
+
+\chapter{Die Irrfahrt}
+
+\section{Ein Prozess ist ein Pfad}
+
+\begin{definition}
+\boxtitelm{Definition 1.1 --- stochastischer Prozess}
+Ein \Begriff{stochastischer Prozess} ist eine Familie von Zufallsgrößen
+\[ \bigl(X_t\bigr)_{t \in T} \]
+auf demselben Wahrscheinlichkeitsraum. Für festes $\omega$ heißt die Abbildung $t \mapsto X_t(\omega)$ ein \Begriff{Pfad}.
+
+Ist $T = \{0,1,2,\ldots\}$, spricht man von \Begriff{diskreter}, bei $T = [0,\infty)$ von \Begriff{stetiger Zeit}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Zwei Blickrichtungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Verteilungen} & Wie ist $X_t$ für festes $t$ verteilt? Was ist die gemeinsame Verteilung von $X_{t_1},\ldots,X_{t_n}$?\\
+\textbf{Pfade} & Ist der Verlauf stetig? Monoton? Wie oft überquert er die Null? Wann erreicht er erstmals einen Wert?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Verteilungen sind leicht, die Pfade sind schwer --- und fast alle interessanten Fragen betreffen die Pfade.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Verteilung von $X_t$ zu kennen, sagt nichts über die Verweildauer oberhalb der Null oder über die Zahl der Rückkehrpunkte. \textbf{Genau diese Größen entscheiden aber darüber, wie ein Verlauf auf den Betrachter wirkt} --- ob er wie Zufall aussieht oder wie ein Trend. Dieses Kapitel zeigt es an der einfachsten Kette überhaupt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 1.2 --- die einfache Irrfahrt}
+\[ S_0 = 0, \qquad S_n = \sum_{k=1}^{n} \xi_k \]
+mit unabhängigen $\xi_k$, die die Werte $+1$ und $-1$ mit Wahrscheinlichkeit je $\tfrac12$ annehmen.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Was leicht ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{3.0cm}@{}}
+\toprule
+$\mathbb{E}[S_n]$ & $0$\\
+$\operatorname{Var}[S_n]$ & $n$\\
+$\mathbb{E}\bigl[|S_n|\bigr]$ & $\approx \sqrt{2n/\pi}$\\
+$\Pr[S_{2n} = 0]$ & $\binom{2n}{n}2^{-2n} \approx \frac{1}{\sqrt{\pi n}}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Bei $n = 2000$:} $\sqrt{2\cdot2000/\pi} = 35{,}7$; die Simulation ergab $35{,}6$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Wurzel ist die Signatur des Zufalls}: Nach zehntausend Schritten ist man typischerweise achtzig Schritte vom Ursprung entfernt, nicht zehntausend und nicht null. Alle vier Zeilen folgen aus Band 4 und brauchen keine Prozesstheorie. Der Rest dieses Kapitels braucht sie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Gesetz vom Arkussinus}
+
+\begin{merksatz}
+\boxtitel{Die falsche Erwartung}
+Zwei Spieler werfen zweitausendmal eine Münze; nach jedem Wurf zahlt der Verlierer einen Euro. Wie lange liegt der eine vorn?
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die meisten erwarten: ungefähr die Hälfte der Zeit jeder. Das ist der \kursiv{unwahrscheinlichste} aller Verläufe.}
+\end{minipage}
+\end{center}
+
+\schritt{Satz 1.3 --- Lévy, 1939}
+Der Anteil der Zeit, den die Irrfahrt oberhalb der Null verbringt, hat für großes $n$ die Verteilungsfunktion
+\[ F(x) = \frac{2}{\pi}\arcsin\sqrt{x}, \qquad 0 \le x \le 1 . \]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.6pt] (0,0) -- (6.2,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,2.4);
+\draw[tief, line width=1.4pt, smooth, samples=80, domain=0.012:0.988] plot ({6*\x},{0.52/(3.1416*sqrt(\x*(1-\x)))*2.4});
+\node[font=\scriptsize, color=grau, anchor=north] at (0,-0.1) {$0$};
+\node[font=\scriptsize, color=grau, anchor=north] at (3,-0.1) {$\tfrac12$};
+\node[font=\scriptsize, color=grau, anchor=north] at (6,-0.1) {$1$};
+\node[font=\scriptsize\itshape, color=grau, anchor=west] at (2.0,2.1) {Dichte $\dfrac{1}{\pi\sqrt{x(1-x)}}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Dichte hat ihr Minimum bei $\tfrac12$ und wächst zu beiden Rändern hin über alle Grenzen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{An zwanzigtausend Läufen geprüft}
+Je $2000$ Schritte:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Zeitanteil oben} & \textbf{simuliert} & \textbf{theoretisch}\\
+\midrule
+unter $10\,\%$ & $0{,}214$ & $0{,}205$\\
+$10$--$20\,\%$ & $0{,}090$ & $0{,}090$\\
+$40$--$50\,\%$ & $0{,}062$ & $0{,}064$\\
+\midrule
+unter $10$ \kursiv{oder} über $90\,\%$ & $\mathbf{0{,}408}$ & $\mathbf{0{,}410}$\\
+zwischen $40$ und $60\,\%$ & $\mathbf{0{,}128}$ & $\mathbf{0{,}128}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In zwei von fünf Spielen liegt einer der beiden über neunzig Prozent der Zeit vorn. Der ausgeglichene Verlauf tritt nur in jedem achten Spiel auf.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Und der Führende ist nicht der bessere Spieler} --- das Spiel ist fair. Wer solche Verläufe als Zeitreihe sieht, wird unweigerlich Phasen erkennen, Trends benennen und Erklärungen suchen. Es gibt keine. Dasselbe gilt für Börsenkurse, Krankheitsverläufe und Torfolgen: \textbf{Lange einseitige Strecken sind kein Hinweis auf eine Ursache, sondern die Regel.}}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Vorzeichenwechsel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{3.2cm}P{2.0cm}P{2.2cm}@{}}
+\toprule
+& \textbf{simuliert} & $\sqrt{2n/\pi}$\\
+\midrule
+Nullstellen in $2000$ Schritten & $34{,}8$ & $35{,}7$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Nicht tausend, wie man bei einer fairen Münze vermuten könnte, sondern fünfunddreißig --- und die verteilen sich ungleichmäßig über den Verlauf.}
+\end{merksatz}
+
+\section{Rückkehr}
+
+\begin{merksatz}
+\boxtitel{Satz 1.4 --- Pólya, 1921}
+Die einfache Irrfahrt kehrt in einer und in zwei Dimensionen mit Wahrscheinlichkeit $1$ zum Ausgangspunkt zurück, in drei Dimensionen nur mit Wahrscheinlichkeit
+\[ 1 - \frac{1}{u} \approx 0{,}3405 . \]
+
+\schritt{Der Gedanke des Beweises}
+\kursiv{Sei $u$ die erwartete Zahl der Besuche im Ursprung} (den Start mitgezählt), und $q$ die Wahrscheinlichkeit, überhaupt zurückzukehren. Dann ist die Zahl der Besuche geometrisch verteilt:
+\[ u = \frac{1}{1-q} \quad\Longleftrightarrow\quad q = 1 - \frac1u . \]
+
+\kursiv{Andererseits} ist $u = \sum_{n\ge0} \Pr[S_n = 0]$, und für große $n$ gilt
+\[ \Pr[S_{2n} = 0] \ \sim\ C\,n^{-d/2} . \]
+
+\kursiv{Die Reihe} $\sum n^{-d/2}$ \kursiv{divergiert für $d \le 2$ und konvergiert für $d \ge 3$} (Band 3, Kapitel~9).
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.6cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$d$ & $u$ & $q$\\
+\midrule
+$1$, $2$ & $\infty$ & $1$\\
+$\ge 3$ & endlich & $< 1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+$\blacksquare$ \kursiv{Die Berechnung von $u = 1{,}5164$ für $d = 3$ durch ein dreifaches Integral übergehen wir --- die erste Auslassung dieses Bandes.}
+
+\schritt{Simuliert}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{3.0cm}P{2.2cm}@{}}
+\toprule
+$d$ & \textbf{Rückkehr in $5000$ Schritten} & \textbf{Grenzwert}\\
+\midrule
+$1$ & $0{,}990$ & $1$\\
+$2$ & $0{,}726$ & $1$\\
+$3$ & $\mathbf{0{,}332}$ & $\mathbf{0{,}3405}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In der Ebene nähert sich der Anteil der Eins nur sehr langsam --- die erwartete Rückkehrzeit ist dort unendlich, obwohl die Rückkehr sicher ist. \textbf{Man kehrt gewiss zurück, aber man kann nicht sagen, wann}; das ist der Unterschied zwischen \enquote{fast sicher} und \enquote{im Mittel bald}, und er zieht sich durch den ganzen Band.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Satz hat eine Deutung, die \Person{Shizuo Kakutani} zugeschrieben wird: \textbf{Ein betrunkener Mann findet nach Hause, ein betrunkener Vogel nicht.}}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was an der Irrfahrt besonders ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Symmetrie} & Schon eine minimale Drift ändert alles: Bei $p = 0{,}51$ ist die Rückkehr nicht mehr sicher.\\
+\textbf{Unabhängigkeit} & Reale Verläufe haben Gedächtnis --- Kurse, Krankheiten, Populationen.\\
+\textbf{Gleiche Schritte} & Bei Schritten mit unendlicher Varianz gelten weder die Wurzel noch der Arkussinus.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+Bei Aufwärtswahrscheinlichkeit $p > \tfrac12$ beträgt die Rückkehrwahrscheinlichkeit
+\[ q = \frac{1-p}{p}\cdot\ldots = \min\left\{1,\ \frac{1-p}{p}\right\}\cdot 2p = 2(1-p) \ \text{ für } p \ge \tfrac12 . \]
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}@{}}
+\toprule
+$p$ & $q$\\
+\midrule
+$0{,}500$ & $1{,}000$\\
+$0{,}510$ & $0{,}980$\\
+$0{,}550$ & $0{,}900$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Prozent Vorteil je Schritt genügt, um die sichere Rückkehr zu zerstören} --- und in zwanzig von tausend Fällen entfernt sich der Verlauf dann für immer. Die Symmetrie der einfachen Irrfahrt ist also kein harmloser Sonderfall, sondern die Grenze zwischen zwei Welten. Kapitel~8 zeigt, dass genau an dieser Grenze die Martingale stehen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.1 --- Die Wurzel nachrechnen}
+Berechnen Sie $\Pr[S_{2n} = 0]$ für $n = 1, 2, 10$ und vergleichen Sie mit der Näherung $1/\sqrt{\pi n}$.
+
+\loesung
+\schritt{Schritt 1 --- Die exakte Formel}
+\[ \Pr[S_{2n}=0] = \binom{2n}{n}\,2^{-2n} \]
+
+\schritt{Schritt 2 --- Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.2cm}P{2.6cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+$n$ & \textbf{exakt} & \textbf{Wert} & $1/\sqrt{\pi n}$\\
+\midrule
+$1$ & $2/4$ & $0{,}5000$ & $0{,}5642$\\
+$2$ & $6/16$ & $0{,}3750$ & $0{,}3989$\\
+$10$ & $184\,756/2^{20}$ & $0{,}1762$ & $0{,}1784$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Herkunft der Näherung}
+Mit der Stirlingschen Formel aus Band 15, Kapitel~4:
+\[ \binom{2n}{n} \approx \frac{4^{n}}{\sqrt{\pi n}} \quad\Longrightarrow\quad \Pr[S_{2n}=0] \approx \frac{1}{\sqrt{\pi n}} \]
+
+\schritt{Schritt 4 --- Die Folge}
+\[ \sum_{n\ge1} \frac{1}{\sqrt{\pi n}} = \infty \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Divergenz dieser Reihe ist der ganze Beweis von Satz 1.4 in einer Dimension.} Die erwartete Zahl der Nullbesuche ist unendlich, also ist die Rückkehrwahrscheinlichkeit eins. Dass eine so harmlose Reihe über die Wiederkehr eines Verlaufs entscheidet, ist einer der schönsten Übergänge der Wahrscheinlichkeitsrechnung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.2 --- Das Spiegelungsprinzip}
+Zeigen Sie: Die Wahrscheinlichkeit, dass die Irrfahrt in $n$ Schritten das Niveau $a > 0$ erreicht, beträgt
+\[ \Pr\bigl[\max_{k\le n} S_k \ge a\bigr] = 2\,\Pr[S_n > a] + \Pr[S_n = a] . \]
+
+\loesung
+\schritt{Schritt 1 --- Der Gedanke}
+Man betrachte einen Pfad, der $a$ erreicht und bei $S_n < a$ endet. \kursiv{Man spiegele alles nach dem ersten Erreichen von $a$ an der Höhe $a$.}
+
+\schritt{Schritt 2 --- Die Zuordnung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{4.6cm}@{}}
+\toprule
+\textbf{Ursprünglicher Pfad} & erreicht $a$, endet bei $S_n = a - c$\\
+\textbf{Gespiegelter Pfad} & erreicht $a$, endet bei $S_n = a + c$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die Spiegelung ist eine Eins-zu-eins-Zuordnung, und beide Pfade haben dieselbe Wahrscheinlichkeit --- $2^{-n}$, denn jeder Pfad gleicher Länge ist gleich wahrscheinlich.
+
+\schritt{Schritt 3 --- Zusammenzählen}
+\[ \Pr\bigl[\max \ge a,\ S_n < a\bigr] = \Pr\bigl[\max \ge a,\ S_n > a\bigr] = \Pr[S_n > a] \]
+--- denn wer über $a$ endet, hat $a$ zwangsläufig erreicht.
+
+\[ \Pr[\max \ge a] = \Pr[S_n > a] + \Pr[S_n = a] + \Pr[S_n > a] \]
+$\blacksquare$
+
+\schritt{Schritt 4 --- Eine Zahl}
+Für $n = 2000$ und $a = 50$ liefert die Normalnäherung mit $\sigma = \sqrt{2000} = 44{,}7$:
+\[ \Pr[S_n > 50] \approx 1-\Phi(1{,}118) = 0{,}132 \quad\Longrightarrow\quad \Pr[\max \ge 50] \approx 0{,}264 \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Viertel aller Verläufe erreicht irgendwann die Fünfzig, obwohl nur ein Achtel dort oben endet.} Das Spiegelungsprinzip ist der Schlüssel zu fast allen Aussagen über Höchststände --- und es wird in Kapitel~10 unverändert auf die Brownsche Bewegung übertragen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.3 --- Der Spielerruin}
+Ein Spieler beginnt mit $a$ Euro, sein Gegner mit $b$. Bei jedem Wurf wechselt ein Euro. Mit welcher Wahrscheinlichkeit verliert er alles?
+
+\loesung
+\schritt{Schritt 1 --- Der Ansatz}
+Sei $r_k$ die Ruinwahrscheinlichkeit bei Kapital $k$. Dann gilt für $0 < k < a+b$:
+\[ r_k = \tfrac12 r_{k-1} + \tfrac12 r_{k+1}, \qquad r_0 = 1,\quad r_{a+b} = 0 . \]
+
+\schritt{Schritt 2 --- Lösen}
+Die Gleichung besagt, dass $r_k$ linear in $k$ ist:
+\[ r_k = 1 - \frac{k}{a+b} \quad\Longrightarrow\quad r_a = \frac{b}{a+b} \]
+
+\schritt{Schritt 3 --- Die Zahlen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+$a$ & $b$ & \textbf{Ruin} & \textbf{Spieldauer}\\
+\midrule
+$10$ & $10$ & $0{,}500$ & $100$\\
+$10$ & $100$ & $0{,}909$ & $1000$\\
+$10$ & $1000$ & $0{,}990$ & $10\,000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Die erwartete Spieldauer ist $a\cdot b$ --- man rechnet sie mit demselben Ansatz nach.}
+
+\schritt{Schritt 4 --- Die Lehre}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gegen einen unendlich reichen Gegner verliert man bei fairem Spiel mit Sicherheit --- es dauert nur lange.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Grund, warum die Spielbank nicht gewinnen muss, um zu gewinnen} --- ihr Kapitalvorsprung genügt. Und es ist derselbe Mechanismus, der in Kapitel~6 über das Aussterben kleiner Populationen entscheidet: Nicht der Erwartungswert bringt sie um, sondern die absorbierende Schranke bei null.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Vortrag und ein Irrtum}
+\Person{Karl Pearson} fragte 1905 in einem Brief an die Zeitschrift \kursiv{Nature}, wie sich ein Mann verteile, der planlos umherirrt --- und prägte dabei den Namen \enquote{random walk}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Lord Rayleigh} antwortete eine Woche später, das Problem sei aus der Akustik seit 1880 bekannt. Pearson erwiderte, die Lehre sei: \textbf{\enquote{Der wahrscheinlichste Ort für einen verlorenen Betrunkenen ist irgendwo in der Nähe seines Ausgangspunktes.}} Die Frage war medizinisch gemeint --- es ging um die Ausbreitung von Moskitos in Malariagebieten.}
+\end{minipage}
+\end{center}
+
+\schritt{Pólya und der Zufall im Park}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{George Pólya} kam nach eigener Darstellung auf Satz 1.4, weil er bei Spaziergängen in einem Zürcher Wald einem Paar immer wieder begegnete und sich fragte, wie wahrscheinlich das sei. \textbf{Er veröffentlichte den Satz 1921}; die Unterscheidung zwischen zwei und drei Dimensionen war die Überraschung.}
+\end{minipage}
+\end{center}
+
+\schritt{Feller und das Arkussinus-Gesetz}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{William Feller} stellte Satz 1.3 in seinem Lehrbuch von 1950 an den Anfang --- ausdrücklich, um die Anschauung zu erschüttern. \textbf{Er schrieb, kein anderes Ergebnis der Wahrscheinlichkeitsrechnung widerspreche der Intuition so vollständig}, und empfahl, die Zahlen zu simulieren, bevor man sie glaubt. Genau das tut Abschnitt 1.2 dieses Kapitels.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Irrfahrten heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Auf Graphen} & Mischzeiten, Rückkehrzeiten, Zusammenhang mit Eigenwerten --- Band 16.\\
+\textbf{In Zufallsumgebung} & Irrfahrten, deren Übergangswahrscheinlichkeiten selbst zufällig sind.\\
+\textbf{Selbstvermeidend} & Pfade ohne Wiederkehr --- Modell für Polymere, bis heute weitgehend ungelöst.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die selbstvermeidende Irrfahrt darf keinen Punkt zweimal besuchen. \textbf{Schon die Frage, wie weit sie sich nach $n$ Schritten typischerweise entfernt, ist in drei Dimensionen offen} --- vermutet wird $n^{0{,}588}$, bewiesen ist fast nichts. In zwei Dimensionen kennt man den Exponenten $3/4$ seit 2000 aus der Theorie der konformen Felder; der Beweis brachte \Person{Wendelin Werner} 2006 die Fields-Medaille.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 1.1} & Prozess als Familie, Pfad als Realisierung\\
+\textbf{Die Wurzel} & typische Entfernung $\sqrt{2n/\pi}$\\
+\textbf{Satz 1.3} & Arkussinus --- Ausgeglichenheit ist selten\\
+\textbf{Satz 1.4} & Rückkehr sicher bis $d=2$, sonst $0{,}34$\\
+\textbf{Spiegelung} & Höchststände aus Endständen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Irrfahrt hat kein Gedächtnis über den gegenwärtigen Ort hinaus. Das nächste Kapitel macht daraus eine Definition --- und findet, dass fast alle brauchbaren Prozessmodelle diese eine Eigenschaft teilen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,217 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Begriffe und Formeln}
+
+\begin{merksatz}
+\boxtitel{Teil I und II}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\mathbb{E}|S_n| \approx \sqrt{2n/\pi}$ & typische Entfernung (1)\\
+$\binom{2n}{n}2^{-2n} \approx 1/\sqrt{\pi n}$ & Rückkehr zum Ursprung\\
+$F(x) = \tfrac2\pi\arcsin\sqrt x$ & Arkussinus-Gesetz (1.3)\\
+$q = 1 - 1/u$ & Rückkehr\-wahrschein\-lichkeit (1.4)\\
+$2\Pr[S_n > a] + \Pr[S_n = a]$ & Spiegelungsprinzip\\
+$b/(a+b)$, Dauer $ab$ & Spielerruin\\
+$P^{(m+n)} = P^{m}P^{n}$ & Chapman-Kolmogorow (2.2)\\
+$N = (I-Q)^{-1}$, $B = NR$ & Absorption (2.4)\\
+$\pi P = \pi$, $\mathbb{E}[\text{Rückkehr}] = 1/\pi_i$ & stationär (3.1), (3.2)\\
+$|\lambda_2|^{n}$ & Konvergenzrate (3.3)\\
+$\pi_i p_{ij} = \pi_j p_{ji}$ & detailliertes Gleichgewicht (3.4)\\
+$e^{-\lambda t}(\lambda t)^{k}/k!$ & Poisson-Prozess (4.2)\\
+$\Pr[T>t] = e^{-\lambda t}$ & Wartezeiten (4.3)\\
+$\pi_n = (1-\rho)\rho^{n}$ & Warteschlange (5.2)\\
+$L = \lambda W$ & Little (5.3)\\
+$q = G(q)$ & Aussterben (6.3)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Teil III bis V}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\mathbb{E}[Z\mathbf 1_A] = \mathbb{E}[Y\mathbf 1_A]$ & bedingte Erwartung (7.2)\\
+$\mathbb{E}[\mathbb{E}[Y\mid\mathcal F]\mid\mathcal G] = \mathbb{E}[Y\mid\mathcal G]$ & Turmregel (7.3)\\
+$\mathbb{E}[(Y-g)^{2}]$ minimal & beste Vorhersage (7.4)\\
+$\mathbb{E}[M_{n+1}\mid\mathcal F_n] = M_n$ & Martingal (8.1)\\
+$\mathbb{E}[M_T] = \mathbb{E}[M_0]$ & optionales Stoppen (8.3)\\
+$\sup\mathbb{E}|M_n| < \infty$ & Konvergenz (9.1)\\
+$\Pr[\max|M_k| \ge a] \le \mathbb{E}[M_n^{2}]/a^{2}$ & Doob (9.2)\\
+$\tfrac1c W_{c^{2}t}$ & Skalierung (10)\\
+$\sum(\Delta W)^{2} \to t$ & quadratische Variation (10.2)\\
+$\Pr[\max W \ge a] = 2\Pr[W_t \ge a]$ & Spiegelung (10.4)\\
+$\mathbb{E}[(\int H\,\dd W)^{2}] = \mathbb{E}\int H^{2}\dd t$ & Isometrie (11.2)\\
+$\int_0^T W\,\dd W = (W_T^{2}-T)/2$ & erstes Integral\\
+$\dd f = f'\,\dd W + \tfrac12 f''\,\dd t$ & Itō-Formel (12.1)\\
+$S_0\exp((\mu-\tfrac{\sigma^{2}}2)t+\sigma W_t)$ & geometrisch\\
+$S_0\Phi(d_1)-Ke^{-rT}\Phi(d_2)$ & Optionspreis (13.1)\\
+$\pi(p) = p$ bzw.\ $\approx 2s$ & Fixierung (14.1)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz worauf beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}P{3.6cm}P{1.0cm}P{3.4cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{beruht auf}\\
+\midrule
+Arkussinus & $1$ & Spiegelung, Stirling\\
+Pólya & $1$ & $\sum n^{-d/2}$\\
+Chapman-Kolmogorow & $2$ & Zerlegung nach Zwischenzustand\\
+Fundamentalmatrix & $2$ & geometrische Reihe (Band 2)\\
+Grenzwertsatz & $3$ & Eigenwerte, Kopplung\\
+detailliertes Gleichgewicht & $3$ & Zeilensumme eins\\
+Poisson & $4$ & Differentialgleichung\\
+Little & $5$ & Fläche zweimal messen\\
+Aussterben & $6$ & Konvexität von $G$\\
+Turmregel & $7$ & Definition, zweimal\\
+Projektion & $7$ & Pythagoras\\
+optionales Stoppen & $8$ & Zerlegung in Zuwächse\\
+Konvergenz & $9$ & Aufkreuzungen zählen\\
+Doob & $9$ & Stoppen bei Überschreitung\\
+quadratische Variation & $10$ & $\operatorname{Var}[Z^{2}] = 2\sigma^{4}$\\
+Isometrie & $11$ & Turmregel, gemischte Terme null\\
+Itō-Formel & $12$ & Taylor plus Satz 10.2\\
+Optionspreis & $13$ & Nachbildung, Itō\\
+Fixierung & $14$ & Martingal plus Absorption\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Was nicht bewiesen wurde}
+
+\begin{merksatz}
+\boxtitel{Fünf Auslassungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{1.2cm}P{3.2cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+Pólya-Konstante in $d=3$ & $1$ & Feller\zit{9}\\
+Rückkehrzeit $1/\pi_i$ & $3$ & Norris\zit{23}\\
+Existenz der bedingten Erwartung & $7$ & Williams\zit{28}\\
+Gleichgradige Integrierbarkeit & $9$ & Williams\zit{28}\\
+Satz von Donsker & $10$ & Mörters, Peres\zit{22}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle übrigen Sätze des Bandes sind vollständig bewiesen} --- darunter Chapman-Kolmogorow, die Fundamentalmatrix, der Poisson-Prozess aus seinen drei Annahmen, Little, der Aussterbesatz, optionales Stoppen, der Konvergenzsatz über Aufkreuzungen, die quadratische Variation, die Itō-Isometrie und die Itō-Formel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von den Pollen bis zur rauen Volatilität}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.32}
+\begin{tabular}{@{}P{1.3cm}P{3.0cm}P{4.0cm}@{}}
+\toprule
+\textbf{Jahr} & \textbf{Person} & \textbf{Ereignis}\\
+\midrule
+$1827$ & Brown & zitternde Pollenkörner\\
+$1845$ & Bienaymé & Aussterben von Linien\\
+$1873$ & Galton, Watson & die Frage nach den Namen\\
+$1898$ & Bortkiewicz & Tod durch Hufschlag\\
+$1900$ & \textbf{Bachelier} & \textbf{Kurse als Brownsche Bewegung}\\
+$1905$ & Einstein & Verschiebungsquadrat linear in $t$\\
+$1906$ & Markow & Ketten ohne Gedächtnis\\
+$1907$ & Lapicque & Nervenzelle mit Schwelle\\
+$1908$ & Langevin & Gleichung mit Zufallskraft\\
+$1909$ & Erlang & Warteschlangen in Kopenhagen\\
+$1921$ & Pólya & Rückkehr in zwei und drei Dimensionen\\
+$1923$ & \textbf{Wiener} & \textbf{Existenz des Prozesses}\\
+$1923$ & Eggenberger, Pólya & die Urne\\
+$1930$ & Ornstein, Uhlenbeck & Rückkehr zum Mittel\\
+$1931$ & Kolmogorow & Diffusionen analytisch\\
+$1933$ & Kolmogorow & Grundbegriffe, bedingte Erwartung\\
+$1939$ & Lévy & Arkussinus-Gesetz\\
+$1939$ & Ville & der Name Martingal\\
+$1940$ & Doob & Konvergenzsatz\\
+$1943$ & Wald & sequenzieller Test\\
+$1944$ & Ulam, Hawkins & Kettenreaktion als Verzweigung\\
+$1951$ & \textbf{Itō} & \textbf{die Formel}\\
+$1953$ & Metropolis u.\,a. & Ketten für Simulationen\\
+$1953$ & Doob & \kursiv{Stochastic Processes}\\
+$1960$ & Kálmán & der Filter\\
+$1965$ & Samuelson & geometrische Brownsche Bewegung\\
+$1968$ & Kimura & neutrale Theorie\\
+$1973$ & \textbf{Black, Scholes, Merton} & \textbf{Optionspreisformel}\\
+$1982$ & Kingman & der Koaleszent\\
+$1998$ & --- & Zusammenbruch von LTCM\\
+$2014$ & Hairer & Regularitätsstrukturen\\
+$2014$ & --- & rauhe Volatilität\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Begriff} & \textbf{Bedeutung}\\
+\midrule
+\endhead
+Absorbierend & Zustand, den man nicht verlässt (2)\\
+Angepasst & benutzt nur Vergangenes (7.1)\\
+Arkussinus-Gesetz & Verweildauer oberhalb null (1.3)\\
+Aufkreuzung & Durchquerung eines Intervalls (9)\\
+Aussterbe\-wahrschein\-lichkeit & kleinste Lösung von $q=G(q)$ (6.3)\\
+Brownsche Bewegung & stetig, unabhängige Zuwächse (10.1)\\
+Diffusion & Lösung einer Itō-Gleichung (12)\\
+Filtration & was wann bekannt ist (7.1)\\
+Fundamentalmatrix & $(I-Q)^{-1}$ (2.4)\\
+Geometrische Brownsche Bew. & Zuwächse proportional zum Stand (12)\\
+Irreduzibel & jeder Zustand von jedem erreichbar (2.3)\\
+Itō-Integral & links auswerten (11.1)\\
+Little-Formel & $L = \lambda W$ (5.3)\\
+Markow-Eigenschaft & nur der Gegenwartszustand zählt (2.1)\\
+Martingal & faires Spiel (8.1)\\
+Ornstein-Uhlenbeck & Rückkehr zum Mittel (12)\\
+Periode & ggT der Rückkehrzeiten (2.3)\\
+Poisson-Prozess & gedächtnislose Ereignisse (4.1)\\
+Quadratische Variation & Summe der Zuwachsquadrate (10.2)\\
+Rekurrent & Rückkehr sicher (2.3)\\
+Spiegelungsprinzip & Höchststände aus Endständen (10.4)\\
+Stationäre Verteilung & $\pi P = \pi$ (3.1)\\
+Stoppzeit & kein Blick in die Zukunft (8.2)\\
+Umkehrbar & detailliertes Gleichgewicht (3.4)\\
+Verzweigungsprozess & jeder erzeugt Nachkommen (6.1)\\
+Wartezeitparadox & erlebte Lücken sind länger (4)\\
+\bottomrule
+\end{longtable}}
+\end{center}
+\end{merksatz}

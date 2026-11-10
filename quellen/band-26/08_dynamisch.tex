@@ -1,0 +1,322 @@
+\chapter{Wenn gestern heute erklärt}
+
+\section{Das Beharren}
+
+\begin{merksatz}
+\boxtitel{Arztbesuche haben ein Gedächtnis}
+Wer im letzten Jahr oft beim Arzt war, ist es in diesem Jahr vermutlich wieder --- aus zwei ganz verschiedenen Gründen:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Echte Dynamik} & Ein Besuch zieht Folgebesuche nach sich --- Überweisungen, Kontrollen, Gewohnheit.\\
+\textbf{Feste Effekte} & Dieselbe Person ist dauerhaft kränker; es gibt keinen Übertrag, nur ein Niveau.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Beide erzeugen dieselbe Korrelation zwischen gestern und heute. Für die Politik ist der Unterschied entscheidend.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei echter Dynamik wirkt eine Zuzahlung über Jahre nach --- wer heute wegbleibt, bleibt auch morgen eher weg. Bei festen Effekten verpufft sie nach einem Jahr. \textbf{Die Trennung beider ist das Problem dieses Kapitels}, und sie ist schwerer, als sie aussieht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 8.1 --- das dynamische Panelmodell}
+\[ y_{it} = \rho\,y_{i,t-1} + \beta x_{it} + \alpha_i + u_{it} \]
+Der Vorjahreswert steht unter den Regressoren; $\rho$ misst das Beharren.
+\end{definition}
+
+\section{Warum feste Effekte scheitern}
+
+\begin{merksatz}
+\boxtitel{Satz 8.2 --- die Verzerrung von Nickell}
+Die Innerhalb-Schätzung von $\rho$ ist für festes $T$ inkonsistent. Bei $\beta = 0$ gilt näherungsweise
+\[ \operatorname{plim}\,\hat\rho_{\text{FE}} - \rho \ \approx\ -\frac{1+\rho}{T-1} . \]
+
+\schritt{Der Gedanke}
+Die Innerhalb-Transformation zieht von $y_{i,t-1}$ das Personenmittel $\bar y_{i,-1}$ ab --- und dieses Mittel enthält $y_{it}, y_{i,t+1},\ldots$, also auch die Störungen $u_{it}, u_{i,t+1},\ldots$. Der transformierte Regressor ist damit mit der transformierten Störung korreliert, und zwar negativ: Ein hohes $u_{it}$ erhöht $\bar y_{i,-1}$ und senkt so $\tilde y_{i,t-1}$. Die Korrelation hat die Größenordnung $1/T$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Personenmittel schaut in die Zukunft --- und verletzt damit die strenge Exogenität aus Kapitel~7.}
+\end{minipage}
+\end{center}
+
+\schritt{Simuliert, $\rho = 0{,}5$, $5000$ Personen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.2cm}P{1.8cm}P{1.8cm}P{1.8cm}P{1.8cm}@{}}
+\toprule
+$T$ & \textbf{gepoolt} & \textbf{innerhalb} & \textbf{Näherung} & \textbf{Instr.}\\
+\midrule
+$3$ & $0{,}891$ & $\mathbf{-0{,}073}$ & $-0{,}250$ & $0{,}581$\\
+$5$ & $0{,}884$ & $0{,}158$ & $0{,}125$ & $0{,}569$\\
+$10$ & $0{,}876$ & $0{,}337$ & $0{,}333$ & $0{,}511$\\
+$30$ & $0{,}874$ & $0{,}449$ & $0{,}448$ & $0{,}505$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gepoolt viel zu hoch, innerhalb viel zu niedrig --- der wahre Wert liegt dazwischen, und bei drei Perioden kehrt sich sogar das Vorzeichen um.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die beiden Schätzer bilden eine Zange}: Der gepoolte überschätzt, weil $\alpha_i$ in beiden Jahren steckt; der Innerhalb-Schätzer unterschätzt nach Satz 8.2. Wer eine Schätzung außerhalb dieser Zange erhält, hat einen Fehler gemacht --- eine der wenigen Plausibilitätsprüfungen, die ohne Zusatzannahmen auskommen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Ausweg}
+
+\begin{merksatz}
+\boxtitel{Satz 8.3 --- Differenzen und Instrumente}
+Man bilde erste Differenzen,
+\[ \Delta y_{it} = \rho\,\Delta y_{i,t-1} + \beta\,\Delta x_{it} + \Delta u_{it} , \]
+und benutze $y_{i,t-2}$ als Instrument für $\Delta y_{i,t-1}$. Ist $u_{it}$ seriell unkorreliert, so ist der Schätzer konsistent.
+
+\schritt{Beweis}
+\kursiv{Relevanz:} $y_{i,t-2}$ ist Teil von $\Delta y_{i,t-1} = y_{i,t-1}-y_{i,t-2}$.
+
+\kursiv{Exogenität:} $\Delta u_{it} = u_{it}-u_{i,t-1}$ enthält nur Störungen ab $t-1$; $y_{i,t-2}$ hängt nur von Störungen bis $t-2$ ab. Bei serieller Unkorreliertheit sind beide unkorreliert. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Vergangenheit, die weit genug zurückliegt, ist ein gültiges Instrument für die jüngere Vergangenheit.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die letzte Spalte der Tabelle zeigt das Ergebnis: $0{,}58$ bei $T=3$, $0{,}51$ bei $T=10$ --- deutlich näher am wahren Wert, bei kurzen Panels mit Restfehler aus der kleinen Zahl brauchbarer Perioden. \textbf{Bei $T$ Perioden stehen für jede Differenz alle älteren Niveaus als Instrumente zur Verfügung}, und daraus entsteht der GMM-Schätzer von Arellano und Bond --- mit allen Vorzügen und allen Gefahren aus Kapitel~4.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Zu viele und zu schwache Instrumente}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Zu viele} & Bei $T = 10$ gibt es $36$ Instrumente für eine Gleichung --- die Zahl wächst quadratisch mit $T$. Kapitel~4 hat gewarnt.\\
+\textbf{Zu schwach} & Bei $\rho$ nahe eins ist $y_{i,t-2}$ fast unkorreliert mit $\Delta y_{i,t-1}$ --- ein Zufallsweg hat keine vorhersagbaren Zuwächse. Kapitel~3 hat gewarnt.\\
+\textbf{Serielle Korrelation} & Ist $u_{it}$ selbst korreliert, fällt die Exogenität --- und man braucht ältere Instrumente, die noch schwächer sind.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die zweite Zeile ist in der Praxis die häufigste}: Arztbesuche, Einkommen, Firmenumsätze beharren stark. Dann hilft es, die Gleichung in Niveaus zu schätzen und die \kursiv{Differenzen} als Instrumente zu nehmen --- das Systemverfahren von Blundell und Bond. Es verlangt eine Zusatzannahme über den Anfangszustand, die oft stillschweigend getroffen wird. \textbf{Jeder Schritt dieses Kapitels tauscht eine Annahme gegen eine andere}; keiner macht sie überflüssig.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Die Verzerrung nachrechnen}
+Berechnen Sie die Näherung aus Satz 8.2 für $\rho = 0{,}5$ und $T = 3, 5, 10, 30$ und vergleichen Sie mit der Simulation.
+
+\loesung
+\schritt{Schritt 1 --- Die Formel}
+\[ \hat\rho_{\text{FE}} \approx \rho - \frac{1+\rho}{T-1} = 0{,}5 - \frac{1{,}5}{T-1} \]
+
+\schritt{Schritt 2 --- Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.2cm}P{2.2cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+$T$ & \textbf{Näherung} & \textbf{simuliert} & \textbf{Fehler}\\
+\midrule
+$3$ & $-0{,}250$ & $-0{,}073$ & groß\\
+$5$ & $0{,}125$ & $0{,}158$ & $0{,}03$\\
+$10$ & $0{,}333$ & $0{,}337$ & $0{,}00$\\
+$30$ & $0{,}448$ & $0{,}449$ & $0{,}00$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ab fünf Perioden trifft die Näherung; bei drei ist sie selbst zu grob --- die Verzerrung ist dort so groß, dass die Entwicklung erster Ordnung nicht reicht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Formel ist ein Werkzeug zum Zurückrechnen}: Wer in einem Panel mit $T = 6$ ein $\hat\rho_{\text{FE}} = 0{,}3$ findet, löst $0{,}3 = \rho - (1+\rho)/5$ und erhält $\rho \approx 0{,}63$. Das ist keine saubere Schätzung, aber eine Größenordnung --- und oft mehr, als die Instrumente bei kurzen Panels liefern.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Instrumente zählen}
+Wie viele Instrumente stehen beim Verfahren von Arellano und Bond für $T$ Perioden zur Verfügung, und was folgt?
+
+\loesung
+\schritt{Schritt 1 --- Je Gleichung}
+Für die Differenz in Periode $t$ ($t = 3,\ldots,T$) sind $y_{i,1},\ldots,y_{i,t-2}$ gültig --- das sind $t-2$ Instrumente.
+
+\schritt{Schritt 2 --- Insgesamt}
+\[ \sum_{t=3}^{T}(t-2) = \frac{(T-2)(T-1)}{2} \]
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$T$ & \textbf{Instrumente} & \textbf{Parameter}\\
+\midrule
+$5$ & $6$ & $1$\\
+$10$ & $36$ & $1$\\
+$20$ & $171$ & $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Die Folge}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei zwanzig Perioden stehen $171$ Instrumente gegen einen Parameter --- der Hansen-Test verliert jede Kraft, und die Gewichtsmatrix hat $171\cdot172/2$ Einträge zu schätzen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die übliche Abhilfe ist, die Instrumente zu beschneiden}: nur die jüngsten zwei oder drei Verzögerungen, oder alle Verzögerungen zu einer Spalte zusammengefasst. Damit ist der Schätzer nicht mehr effizient, aber brauchbar. Die Wahl ist eine Ermessensfrage, und sie sollte berichtet werden --- was selten geschieht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- Dynamik oder Niveau?}
+Wie unterscheidet man an den Daten, ob das Beharren der Arztbesuche echte Dynamik oder ein fester Effekt ist?
+
+\loesung
+\schritt{Schritt 1 --- Was beide gemeinsam haben}
+Beide erzeugen positive Autokorrelation auf jedem Abstand.
+
+\schritt{Schritt 2 --- Worin sie sich unterscheiden}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.8cm}P{2.8cm}@{}}
+\toprule
+& \textbf{Dynamik} & \textbf{fester Effekt}\\
+\midrule
+Korrelation mit Abstand $k$ & $\rho^{k}$, fallend & konstant\\
+nach einem Schock & allmähliche Rückkehr & sofortige Rückkehr\\
+Differenzen & korreliert & unkorreliert ($k\ge2$)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Der Test}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man prüfe die Autokorrelation der ersten Differenzen auf Abstand zwei. Ist sie null, gibt es keine Dynamik über den festen Effekt hinaus.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das ist der Test von Arellano und Bond auf serielle Korrelation --- und er prüft zugleich die Voraussetzung von Satz 8.3. \textbf{Die Frage \enquote{Dynamik oder Niveau} ist also nicht nur inhaltlich, sondern entscheidet, welches Verfahren gültig ist.} Fällt der Test durch, braucht man ältere Instrumente oder ein Modell mit zwei Verzögerungen.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Die klinische Lesart}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Für chronische Krankheiten gilt meist beides: ein Niveau und eine Dynamik. \textbf{Die Trennung sagt, wie viel von einer Intervention nachwirkt}: Bei $\rho = 0{,}5$ wirkt ein einmaliger Rückgang um zehn Besuche im Folgejahr noch mit fünf, danach mit $2{,}5$ --- insgesamt zwanzig Besuche, doppelt so viel wie der unmittelbare Effekt. Band 25, Kapitel~3 hat diese geometrische Summe als Kehrwert der Rückkehrrate beschrieben.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Verzerrung mit Namen}
+\Person{Stephen Nickell} wies die Verzerrung aus Satz 8.2 im Jahr 1981 nach --- in einem kurzen Aufsatz in \kursiv{Econometrica}, der bis heute jedes dynamische Panelmodell begleitet.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Bemerkenswert ist, dass die Ökonometrie das Problem erst so spät bemerkte: \textbf{Feste Effekte waren seit zwanzig Jahren in Gebrauch, und niemand hatte sie mit verzögerter Zielgröße geprüft.} Nickell war später Mitglied des geldpolitischen Ausschusses der Bank von England; sein Name blieb an der Verzerrung hängen.}
+\end{minipage}
+\end{center}
+
+\schritt{Arellano und Bond}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Manuel Arellano} und \Person{Stephen Bond} veröffentlichten den GMM-Schätzer 1991 --- angewandt auf die Beschäftigung britischer Firmen. \textbf{Der Aufsatz gehört zu den meistzitierten der Wirtschaftswissenschaften}, und die zugehörige Software machte das Verfahren so leicht anwendbar, dass es routinemäßig falsch angewandt wurde: mit Dutzenden Instrumenten und ohne Blick auf deren Stärke.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Warnung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{David Roodman} schrieb 2009 den Aufsatz \kursiv{A Note on the Theme of Too Many Instruments} --- eine Abrechnung mit der Praxis, die Aufgabe 8.2 beschreibt. \textbf{Er zeigte, dass der Hansen-Test bei vielen Instrumenten fast immer besteht}, gleichgültig ob das Modell stimmt. Seither gehört die Zahl der Instrumente zu den Pflichtangaben, zumindest in guten Zeitschriften.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Dynamische Panels heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.2cm}P{5.0cm}@{}}
+\toprule
+\textbf{Verzerrungs\-korrektur} & Satz 8.2 umkehren statt instrumentieren --- bei mittlerem $T$ oft besser.\\
+\textbf{Heterogene Dynamik} & Jede Person ihr eigenes $\rho$ --- Mittelwerte über Gruppen.\\
+\textbf{Lange Panels} & Wenn $T$ groß ist, werden Zeitreihenmethoden aus Teil~IV anwendbar.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Statt Instrumente zu suchen, kann man die Innerhalb-Schätzung um die bekannte Verzerrung berichtigen --- so, wie Aufgabe 8.1 es von Hand tut, nur mit der exakten Formel. \textbf{Bei $T$ zwischen zehn und dreißig schlägt das die GMM-Verfahren regelmäßig}, weil es keine schwachen Instrumente braucht. Dass die einfachere Methode die jüngere ist, liegt daran, dass die exakte Verzerrung erst mit Rechnern bequem auszuwerten war.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 8.1} & Vorjahreswert als Regressor\\
+\textbf{Satz 8.2} & feste Effekte verzerren um $(1+\rho)/(T-1)$\\
+\textbf{Die Zange} & gepoolt oben, innerhalb unten\\
+\textbf{Satz 8.3} & alte Niveaus als Instrumente\\
+\textbf{Der Bruchfall} & zu viele, zu schwache Instrumente\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Panelmodelle dieses Teils beschreiben, wie sich Personen entwickeln. Das nächste Kapitel benutzt sie für die Frage, die den Band trägt: Was hat eine Reform bewirkt --- und mit wem vergleicht man die Betroffenen?}
+\end{minipage}
+\end{center}
+\end{merksatz}

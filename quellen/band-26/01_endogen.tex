@@ -1,0 +1,398 @@
+\part{Das Problem}
+
+\chapter{Wenn der Regressor nicht unschuldig ist}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Zuzahlung und Arztbesuche}
+Eine Krankenkasse bietet Tarife mit verschiedenen Zuzahlungen an. In den Abrechnungsdaten findet sich:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Auswertung} & \textbf{je Euro Zuzahlung}\\
+\midrule
+schlichte Regression & $-0{,}376$ Besuche\\
+\midrule
+wahre Wirkung & $-0{,}100$ Besuche\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Auswertung überschätzt die Wirkung um das Vierfache --- und man sieht es den Daten nicht an.}
+\end{minipage}
+\end{center}
+
+\schritt{Woran es liegt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wer selten krank ist, wählt den Tarif mit hoher Zuzahlung und niedrigem Beitrag. \textbf{Der Vergleich der Tarife vergleicht also auch Gesunde mit Kranken}, und ein Teil des Unterschieds in den Besuchszahlen stammt daher. In der Sprache von Band 23 ist der Gesundheitszustand eine Störgröße; in der Sprache dieses Bandes heißt die Zuzahlung \Begriff{endogen}.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 1.1 --- exogen und endogen}
+Im Modell $y = \beta x + u$ heißt $x$
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.0cm}@{}}
+\toprule
+\textbf{exogen}, & wenn $\operatorname{Cov}(x,u) = 0$,\\
+\textbf{endogen}, & sonst.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 1.2 --- die Verzerrung der kleinsten Quadrate}
+Für den Schätzer $\hat\beta$ gilt bei großem Stichprobenumfang
+\[ \hat\beta \ \longrightarrow\ \beta + \frac{\operatorname{Cov}(x,u)}{\operatorname{Var}(x)} . \]
+
+\schritt{Beweis}
+\[ \hat\beta = \frac{\sum (x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^{2}} = \beta + \frac{\sum(x_i-\bar x)(u_i-\bar u)}{\sum(x_i-\bar x)^{2}} \]
+Zähler und Nenner streben nach dem Gesetz der großen Zahlen gegen $\operatorname{Cov}(x,u)$ und $\operatorname{Var}(x)$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Verzerrung verschwindet nicht mit wachsendem Umfang --- mehr Daten machen das falsche Ergebnis nur genauer.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Unterschied zwischen Verzerrung und Streuung in seiner unangenehmsten Form.} Bei zehn Millionen Versicherten liefert die Auswertung ein Vertrauensintervall von wenigen Tausendsteln um den falschen Wert. Die Statistik aus Band 17 meldet dabei nichts; sie prüft die Annahme nicht, auf der sie beruht.}
+\end{minipage}
+\end{center}
+
+\schritt{Im Leitfall nachgerechnet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Modell} & \textbf{Schätzung}\\
+\midrule
+nur Zuzahlung & $-0{,}376$\\
+Zuzahlung und Gesundheit & $\mathbf{-0{,}098}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Die zweite Zeile trifft --- aber nur, weil die Gesundheit in der Simulation beobachtbar ist. In Abrechnungsdaten ist sie es nicht.}
+\end{merksatz}
+
+\section{Drei Wege, wie Endogenität entsteht}
+
+\begin{merksatz}
+\boxtitel{Die Unterscheidung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Ausgelassene Größe} & Eine Ursache beider Seiten fehlt im Modell --- die Störgröße aus Band 23.\\
+\textbf{Simultanität} & $y$ wirkt auf $x$ zurück --- Preis und Menge.\\
+\textbf{Messfehler} & $x$ ist fehlerhaft gemessen; der Fehler steckt dann in $u$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der dritte Fall, gerechnet}
+Wird $x$ mit unabhängigem Fehler der Varianz $\sigma_e^{2}$ gemessen, so gilt
+\[ \hat\beta \ \longrightarrow\ \beta\cdot\frac{\sigma_x^{2}}{\sigma_x^{2}+\sigma_e^{2}} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Zuverläs\-sigkeit} & \textbf{Faktor} & \textbf{Beispiel}\\
+\midrule
+$0{,}95$ & $0{,}95$ & Laborwert\\
+$0{,}80$ & $0{,}80$ & Fragebogen\\
+$0{,}50$ & $0{,}50$ & Erinnerung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Messfehler im Regressor zieht den Koeffizienten immer zur Null --- Dämpfung, nicht Zufall.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bei mehreren Regressoren gilt das nicht mehr}: Dort kann der Koeffizient des fehlerhaft gemessenen auch über den wahren Wert hinausgehen, und die Koeffizienten der genau gemessenen werden mitverzerrt. Das ist der Grund, warum \enquote{Kontrolle} für eine grob gemessene Störgröße nur teilweise wirkt --- Band 23, Kapitel~5.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Maßstab}
+
+\begin{merksatz}
+\boxtitel{Wenn die Zuzahlung ausgelost wird}
+Im amerikanischen Krankenversicherungsexperiment wurden Familien zufällig Tarifen zugewiesen. Die Simulation bildet das nach:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Zuzahlung} & \textbf{Besuche je Jahr}\\
+\midrule
+$0$ € & $8{,}01$\\
+$10$ € & $7{,}00$\\
+$20$ € & $5{,}99$\\
+$30$ € & $5{,}02$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\[ \text{Steigung} = -0{,}0997 \quad\text{gegen den wahren Wert } -0{,}100 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Los macht die Zuzahlung exogen --- und die schlichte Regression wird richtig.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das wirkliche Experiment lief von 1974 bis 1982 mit rund $7700$ Teilnehmern} und kostete nach heutigem Geld etwa $400$ Millionen Dollar. Sein Hauptergebnis: Zuzahlungen senken die Inanspruchnahme deutlich, und zwar gleichermaßen bei nötigen und unnötigen Leistungen --- die Gesundheit der meisten Teilnehmer litt dennoch nicht messbar, die der ärmsten Kranken schon. Es ist bis heute der Maßstab, an dem sich jede Beobachtungsstudie zu dieser Frage messen lassen muss.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Warum man nicht einfach kontrolliert}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Nicht gemessen} & Der Gesundheitszustand steht in keiner Abrechnungsdatei.\\
+\textbf{Falsch gemessen} & Diagnosen in Abrechnungsdaten dienen der Vergütung, nicht der Beschreibung.\\
+\textbf{Falsche Richtung} & Manche Kontrollgrößen sind Folgen der Zuzahlung --- Mediatoren und Kollider aus Band 23, Kapitel~5.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die zweite Zeile ist in Deutschland besonders folgenreich}: Die Zahl der dokumentierten Diagnosen hängt davon ab, wie oft jemand zum Arzt geht --- wer selten geht, erscheint gesünder, als er ist. \textbf{Damit ist die Kontrollgröße selbst eine Folge der untersuchten Größe}, und das Kontrollieren verzerrt zusätzlich, statt zu bereinigen.}
+\end{minipage}
+\end{center}
+
+\schritt{Was übrig bleibt}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wenn man weder auslosen noch kontrollieren kann, braucht man eine Quelle von Veränderung in der Zuzahlung, die mit der Gesundheit nichts zu tun hat --- eine Reform, eine Stichtagsregelung, eine Altersgrenze. \textbf{Das ist das Thema von Kapitel~3, und es ist derselbe Gedanke wie das Instrument aus Band 23, Kapitel~9} --- hier allerdings nicht als Ausweg, sondern als Normalfall der ganzen Disziplin.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.1 --- Die Richtung der Verzerrung}
+Bestimmen Sie Vorzeichen und Größe der Verzerrung im Leitfall.
+
+\loesung
+\schritt{Schritt 1 --- Die Formel}
+\[ \text{Verzerrung} = \frac{\operatorname{Cov}(x,u)}{\operatorname{Var}(x)} \]
+
+\schritt{Schritt 2 --- Die Bestandteile}
+Die Zuzahlung ist $x = 10 + 6g + \varepsilon$ mit der Gesundheit $g$; die Störung enthält $u = -2g + \ldots$:
+\[ \operatorname{Cov}(x,u) = 6\cdot(-2)\cdot\operatorname{Var}(g) = -12 \]
+\[ \operatorname{Var}(x) = 36 + 9 = 45 \]
+\[ \text{Verzerrung} = \frac{-12}{45} = -0{,}267 \]
+
+\schritt{Schritt 3 --- Die Probe}
+\[ -0{,}100 + (-0{,}267) = -0{,}367 \]
+\kursiv{Die Simulation ergab $-0{,}376$ --- der Rest stammt aus der Beschränkung auf nichtnegative Besuchszahlen.}
+
+\schritt{Schritt 4 --- Die Regel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Ausgelassene Größe} & \textbf{wirkt auf $y$} & \textbf{Verzerrung}\\
+\midrule
+hängt mit $x$ positiv & positiv & zu groß\\
+hängt mit $x$ positiv & negativ & zu klein\\
+hängt mit $x$ negativ & negativ & zu groß\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Man kann die Richtung der Verzerrung oft angeben, auch ohne die Größe zu kennen} --- und damit wenigstens sagen, ob der geschätzte Effekt eine Ober- oder Untergrenze ist. Im Leitfall wissen wir: Die Wirkung der Zuzahlung ist \kursiv{höchstens} so groß wie geschätzt. Diese Art der Argumentation ist in der Ökonometrie üblich und in der Medizin selten.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.2 --- Messfehler}
+Die Zuzahlung sei korrekt, die Gesundheit werde aber nur mit Zuverlässigkeit $0{,}6$ erfasst. Was bleibt von der Kontrolle?
+
+\loesung
+\schritt{Schritt 1 --- Der gedämpfte Koeffizient}
+Der Koeffizient der Gesundheit wird um den Faktor $0{,}6$ gedämpft --- es wird also nur $60$ Prozent ihrer Wirkung herausgerechnet.
+
+\schritt{Schritt 2 --- Die verbleibende Verzerrung}
+\[ -0{,}100 + 0{,}4\cdot(-0{,}267) = -0{,}207 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Zuverläs\-sigkeit} & \textbf{Schätzung} & \textbf{Fehler}\\
+\midrule
+$1{,}0$ & $-0{,}100$ & ---\\
+$0{,}8$ & $-0{,}153$ & $53\,\%$\\
+$0{,}6$ & $-0{,}207$ & $107\,\%$\\
+$0{,}0$ & $-0{,}367$ & $267\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine zu $60$ Prozent zuverlässig gemessene Störgröße beseitigt $60$ Prozent der Verzerrung --- nicht mehr.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Rechnung hinter der Restverzerrung aus Band 23, Kapitel~5.} Sie zeigt zugleich, warum das Hinzufügen weiterer grober Kontrollgrößen den Koeffizienten zwar bewegt, aber nicht verlässlich zum wahren Wert führt: Jede trägt nur den Anteil bei, den sie wirklich misst.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.3 --- Simultanität erkennen}
+Welche der folgenden Beziehungen sind simultan?
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+(a) & Zahl der Ärzte je Einwohner und Zahl der Arztbesuche.\\
+(b) & Alter und Zahl der Arztbesuche.\\
+(c) & Beitragssatz einer Kasse und Gesundheitszustand ihrer Versicherten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\loesung
+\schritt{(a)}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Simultan.} Mehr Ärzte erzeugen mehr Besuche --- und Ärzte lassen sich dort nieder, wo viel nachgefragt wird.
+\end{minipage}
+\end{center}
+\kursiv{Die Ökonomie nennt den ersten Weg angebotsinduzierte Nachfrage; beide Richtungen sind belegt, und ihre Trennung verlangt ein Instrument für die Niederlassung --- etwa Zulassungssperren.}
+
+\schritt{(b)}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Nicht simultan.} Arztbesuche ändern das Alter nicht.
+\end{minipage}
+\end{center}
+\kursiv{Alter ist eine der wenigen zweifelsfrei exogenen Größen der Sozialwissenschaften --- weshalb Altersgrenzen so häufig als Instrumente dienen.}
+
+\schritt{(c)}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Simultan.} Kranke Versicherte treiben den Beitrag; ein hoher Beitrag vertreibt die Gesunden.
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der zweite Weg ist die Risikoentmischung, und sie kann sich aufschaukeln}: Steigt der Beitrag, gehen die Gesunden, der Beitrag steigt weiter. Dass Gesundheitssysteme einen Risikostrukturausgleich brauchen, folgt unmittelbar aus dieser Rückkopplung --- und die Schätzung ihrer Stärke ist eines der klassischen Probleme dieses Bandes.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Der Preis und die Menge}
+\Person{Elmer Working} fragte 1927 in einem berühmten Aufsatz: \enquote{Was zeigen Preis-Mengen-Daten eigentlich?}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Seine Antwort: Es hängt davon ab, welche Kurve sich verschiebt. \textbf{Schwankt nur das Angebot, so zeichnen die Punkte die Nachfragekurve nach; schwankt nur die Nachfrage, die Angebotskurve; schwanken beide, so zeichnen sie gar nichts.} Dieser Aufsatz gilt als Geburtsstunde des Identifikationsproblems und ist der Ausgangspunkt von Kapitel~2.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Cowles-Kommission}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{In den 1940er Jahren entwickelte eine Gruppe um \Person{Trygve Haavelmo}, \Person{Tjalling Koopmans} und \Person{Jacob Marschak} in Chicago die Theorie simultaner Gleichungen. \textbf{Haavelmos Aufsatz von 1944 trug den Titel \enquote{Die Wahrscheinlichkeitsauffassung in der Ökonometrie}} und begründete, warum ökonomische Daten überhaupt als Zufallsziehungen aufgefasst werden dürfen. Er erhielt dafür 1989 den Wirtschaftsnobelpreis.}
+\end{minipage}
+\end{center}
+
+\schritt{Und das Experiment}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Joseph Newhouse} leitete ab 1971 das Krankenversicherungsexperiment --- den bis dahin größten Sozialversuch der Geschichte. \textbf{Er war politisch umstritten, weil er Familien zufällig unterschiedliche Versicherungen zuwies}, und er lieferte Zahlen, die bis heute jede Debatte über Zuzahlungen prägen. Dass er nie wiederholt wurde, liegt an den Kosten --- und daran, dass seine Ergebnisse beiden Seiten etwas boten.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Endogenität heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.4cm}P{4.8cm}@{}}
+\toprule
+\textbf{Glaubwürdig\-keitswende} & Seit den 1990er Jahren steht der Entwurf vor dem Modell.\\
+\textbf{Schranken} & Was folgt, wenn Exogenität nur \kursiv{ungefähr} gilt.\\
+\textbf{Maschinelle Verfahren} & Lernverfahren für die Kontrollgrößen, Momentenbedingungen für den Effekt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Ökonometrie hat eine Entwicklung durchlaufen, die der Epidemiologie ähnelt: weg von großen Gleichungssystemen, hin zu einzelnen gut begründeten Vergleichen. \textbf{\Person{Angrist} und \Person{Pischke} nannten das 2010 die \enquote{Glaubwürdigkeitsrevolution}} --- und ernteten den Vorwurf, man beantworte nun kleine Fragen gut statt großer schlecht. Der Streit ist nicht entschieden und durchzieht Kapitel~13.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 1.1} & exogen heißt unkorreliert mit der Störung\\
+\textbf{Satz 1.2} & Verzerrung bleibt bei jedem Umfang\\
+\textbf{Drei Wege} & ausgelassen, simultan, fehlgemessen\\
+\textbf{Dämpfung} & Messfehler zieht zur Null\\
+\textbf{Der Maßstab} & das Los macht exogen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieses Kapitel hat gezeigt, dass die Schätzung scheitert. Das nächste zeigt etwas Schlimmeres: dass manche Fragen auch mit unbegrenzt vielen Daten unbeantwortbar sind --- und wie man das vorher erkennt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

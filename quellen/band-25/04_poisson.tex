@@ -1,0 +1,429 @@
+\part{Sprünge in stetiger Zeit}
+
+\chapter{Ereignisse ohne Gedächtnis}
+
+\section{Die Notaufnahme}
+
+\begin{merksatz}
+\boxtitel{Der Leitfall dieses Teils}
+In einer Notaufnahme treffen im Mittel $3{,}2$ Patienten je Stunde ein. Die Ankünfte sind voneinander unabhängig, und niemand stimmt sich ab.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Drei harmlose Annahmen legen den Prozess bereits vollständig fest.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 4.1 --- Poisson-Prozess}
+Ein Zählprozess $(N_t)_{t\ge0}$ mit $N_0 = 0$ heißt \Begriff{Poisson-Prozess mit Rate $\lambda$}, wenn
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & die Zuwächse über disjunkten Zeitabschnitten unabhängig sind,\\
+$2$ & $N_{t+s} - N_t$ nur von der Länge $s$ abhängt,\\
+$3$ & in einem kurzen Abschnitt der Länge $h$ höchstens ein Ereignis eintritt, und zwar mit Wahrscheinlichkeit $\lambda h + o(h)$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 4.2 --- die Verteilung folgt}
+Aus diesen drei Forderungen folgt
+\[ \Pr[N_t = k] = e^{-\lambda t}\,\frac{(\lambda t)^{k}}{k!} . \]
+
+\schritt{Beweis}
+\kursiv{Sei $p_k(t) = \Pr[N_t = k]$.} Zerlegt man den Abschnitt $[0, t+h]$, so gilt wegen der Unabhängigkeit
+\[ p_0(t+h) = p_0(t)\,\bigl(1 - \lambda h + o(h)\bigr) . \]
+
+\kursiv{Umstellen und $h \to 0$:}
+\[ p_0'(t) = -\lambda\,p_0(t), \qquad p_0(0)=1 \quad\Longrightarrow\quad p_0(t) = e^{-\lambda t} . \]
+
+\kursiv{Für $k \ge 1$} kommt der Zuwachs entweder aus $k$ Ereignissen ohne neues oder aus $k-1$ mit einem neuen:
+\[ p_k'(t) = -\lambda\,p_k(t) + \lambda\,p_{k-1}(t) . \]
+
+\kursiv{Mit dem Ansatz} $p_k(t) = e^{-\lambda t}(\lambda t)^k/k!$ prüft man die Gleichung nach:
+\[ p_k' = -\lambda e^{-\lambda t}\frac{(\lambda t)^k}{k!} + e^{-\lambda t}\frac{\lambda^k k t^{k-1}}{k!} = -\lambda p_k + \lambda p_{k-1} \quad \checkmark \]
+Die Lösung des Anfangswertproblems ist eindeutig (Band 14, Kapitel~3). $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man hat keine Verteilung angenommen --- sie ergibt sich aus Unabhängigkeit, Gleichförmigkeit und der Seltenheit gleichzeitiger Ereignisse.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Notaufnahme in Zahlen}
+$\lambda = 3{,}2$ je Stunde:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{1.6cm}P{2.2cm}@{}}
+\toprule
+$k$ & $\Pr[N_1 = k]$ & $k$ & $\Pr[N_1 = k]$\\
+\midrule
+$0$ & $0{,}041$ & $4$ & $0{,}178$\\
+$1$ & $0{,}130$ & $5$ & $0{,}114$\\
+$2$ & $0{,}209$ & $6$ & $0{,}061$\\
+$3$ & $\mathbf{0{,}223}$ & $7$ & $0{,}028$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Frage} & \textbf{Antwort}\\
+\midrule
+sechs oder mehr in einer Stunde & $10{,}5\,\%$\\
+keine Ankunft in $15$ Minuten & $44{,}9\,\%$\\
+mittlerer Abstand & $18{,}75$ min\\
+Abstand über $30$ Minuten & $20{,}2\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bei einer mittleren Ankunftsrate von gut drei je Stunde kommen in jeder zehnten Stunde sechs oder mehr Patienten} --- ohne dass sich irgendetwas geändert hätte. Solche Häufungen sind die Regel, und wer sie als Anzeichen einer Grippewelle deutet, macht denselben Fehler wie der Beobachter des Arkussinus-Gesetzes in Kapitel~1.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Abstände}
+
+\begin{merksatz}
+\boxtitel{Satz 4.3 --- exponentielle Wartezeiten}
+Die Abstände zwischen aufeinanderfolgenden Ereignissen sind unabhängig und exponentialverteilt mit Parameter $\lambda$.
+
+\schritt{Beweis}
+Sei $T_1$ der Zeitpunkt des ersten Ereignisses. Dann ist
+\[ \Pr[T_1 > t] = \Pr[N_t = 0] = e^{-\lambda t} , \]
+also ist $T_1$ exponentialverteilt. Wegen der Unabhängigkeit der Zuwächse beginnt der Prozess nach $T_1$ von neuem. $\blacksquare$
+
+\schritt{Die Gedächtnislosigkeit}
+\[ \Pr[T > s+t \mid T > s] = \frac{e^{-\lambda(s+t)}}{e^{-\lambda s}} = e^{-\lambda t} = \Pr[T > t] \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer zwanzig Minuten gewartet hat, wartet im Mittel noch genauso lange wie zu Beginn.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Exponentialverteilung ist die einzige stetige Verteilung mit dieser Eigenschaft} --- so wie die geometrische die einzige diskrete ist (Kapitel~2, Bruchfall). Beides sind zwei Seiten derselben Aussage: Gedächtnislosigkeit in der Zeit erzwingt die Verteilung der Wartezeit.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Zwei Rechenregeln}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Überlagerung} & Zwei unabhängige Poisson-Prozesse mit $\lambda_1$ und $\lambda_2$ ergeben zusammen einen mit $\lambda_1+\lambda_2$.\\
+\textbf{Ausdünnung} & Behält man jedes Ereignis unabhängig mit Wahrscheinlichkeit $p$, so entsteht ein Poisson-Prozess mit $p\lambda$ --- und der verworfene Teil ist davon \kursiv{unabhängig}.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Im Leitfall}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Strom} & \textbf{Rate} & \\
+\midrule
+Selbsteinweiser & $3{,}2$/h & \\
+Rettungsdienst & $1{,}8$/h & \\
+zusammen & $\mathbf{5{,}0}$/h & Überlagerung\\
+\midrule
+davon schwer ($20\,\%$) & $0{,}64$/h & Ausdünnung\\
+kein schwerer Fall in $2$ h & $27{,}8\,\%$ & \\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Unabhängigkeit von Behaltenem und Verworfenem ist der überraschende Teil.} Dass in einer Stunde viele leichte Fälle kamen, sagt nichts darüber, ob auch viele schwere kamen --- obwohl beide aus demselben Strom stammen. Diese Eigenschaft macht den Poisson-Prozess zum Baukasten der Warteschlangentheorie in Kapitel~5.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Das Wartezeitparadox}
+Ein Besucher betritt die Notaufnahme zu einem zufälligen Zeitpunkt. Wie lang ist der Abstand zwischen der letzten und der nächsten Ankunft, in den er hineinfällt?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{mittlerer Abstand} & $18{,}75$ min\\
+\textbf{vom Besucher erlebter Abstand} & $\mathbf{37{,}5}$ \textbf{min}\\
+\textbf{Restwartezeit} & $18{,}75$ min\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Simuliert an $200\,000$ Ankünften: $18{,}75$ / $37{,}45$ / $18{,}72$ Minuten.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Besucher erlebt doppelt so lange Lücken wie der Durchschnitt --- und muss nach zufälliger Ankunft genauso lange warten, als wäre er gerade am Anfang einer Lücke.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein zufälliger Zeitpunkt trifft eine lange Lücke eher als eine kurze} --- genau proportional zu ihrer Länge. Die erlebte Lückenlänge hat daher die Dichte $\lambda^2 t e^{-\lambda t}$ statt $\lambda e^{-\lambda t}$, und ihr Mittelwert ist $2/\lambda$. Man nennt das Längenverzerrung, und sie ist derselbe Auswahlfehler, der in Band 23, Kapitel~5 als Kollider auftrat: Die Beobachtung wählt aus, was sie misst.}
+\end{minipage}
+\end{center}
+
+\schritt{Und wo es praktisch schadet}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Wer die Aufenthaltsdauer an einem Stichtag erhebt --- alle gerade liegenden Patienten ---, misst nicht die mittlere Verweildauer, sondern die längenverzerrte. \textbf{Bei exponentiell verteilter Verweildauer ergibt das den doppelten Wert.} Dieselbe Falle steckt in Befragungen zur Arbeitslosigkeitsdauer, zur Dauer von Krankheitsepisoden und in der Auswahl von Studienteilnehmern in laufenden Behandlungen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Die Personalplanung}
+Wie viele Patienten muss die Notaufnahme in einer Stunde höchstens versorgen können, damit sie in $95$ Prozent der Stunden ausreicht? ($\lambda = 3{,}2$)
+
+\loesung
+\schritt{Schritt 1 --- Aufsummieren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+$k$ & $\Pr[N=k]$ & $\Pr[N\le k]$\\
+\midrule
+$4$ & $0{,}178$ & $0{,}781$\\
+$5$ & $0{,}114$ & $0{,}895$\\
+$6$ & $0{,}061$ & $0{,}955$\\
+$7$ & $0{,}028$ & $0{,}983$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Antwort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Sechs Behandlungsplätze --- fast das Doppelte des Mittelwerts von $3{,}2$.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Regel dahinter}
+Die Standardabweichung eines Poisson-Prozesses ist $\sqrt{\lambda}$:
+\[ 3{,}2 + 1{,}645\cdot\sqrt{3{,}2} = 3{,}2 + 2{,}94 = 6{,}14 \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+$\lambda$ & \textbf{Bedarf} & \textbf{Reserve}\\
+\midrule
+$3{,}2$ & $6$ & $+88\,\%$\\
+$20$ & $28$ & $+40\,\%$\\
+$100$ & $117$ & $+17\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Kleine Einheiten brauchen anteilig viel mehr Reserve als große} --- die Schwankung wächst mit der Wurzel, der Bedarf linear. Das ist das stärkste mathematische Argument für die Zusammenlegung von Bereitschaftsdiensten, und es gilt genauso für Betten, Blutkonserven und Ersatzteile. Der Preis sind längere Wege.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Die Ordnung der Ankünfte}
+Gegeben sei, dass in einer Stunde genau drei Patienten kamen. Wie sind ihre Ankunftszeiten verteilt?
+
+\loesung
+\schritt{Schritt 1 --- Die Antwort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wie drei unabhängige, gleichverteilte Punkte auf dem Intervall --- der Größe nach geordnet.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die Begründung für einen Punkt}
+\[ \Pr[T_1 \le s \mid N_1 = 1] = \frac{\Pr[N_s = 1]\,\Pr[N_{1-s} = 0]}{\Pr[N_1 = 1]} = \frac{\lambda s\,e^{-\lambda s}\,e^{-\lambda(1-s)}}{\lambda e^{-\lambda}} = s \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Rate $\lambda$ kürzt sich vollständig heraus} --- bedingt auf die Anzahl verschwindet sie. Das gilt auch für mehrere Punkte und ist die eigentliche Kennzeichnung des Poisson-Prozesses: Er ist der Prozess, der seine Ereignisse rein zufällig über die Zeit streut.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Eine Anwendung}
+Der erwartete Zeitpunkt des ersten von drei Patienten:
+\[ \mathbb{E}[T_{(1)}] = \frac{1}{4}\ \text{Stunde} = 15\ \text{min}, \qquad \mathbb{E}[T_{(2)}] = 30,\qquad \mathbb{E}[T_{(3)}] = 45\ \text{min} \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Ankünfte teilen die Stunde im Mittel in vier gleiche Stücke} --- nicht in drei. Wer drei Ereignisse in einer Stunde erwartet und sie um die Zwanzig-, Vierzig- und Sechzigminutenmarke vermutet, liegt systematisch daneben. Diese Eigenschaft wird in Kapitel~14 gebraucht, wenn es um die Simulation von Ereignisfolgen geht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Wann es kein Poisson-Prozess ist}
+Prüfen Sie drei Zählprozesse auf die Annahmen aus Definition 4.1.
+
+\loesung
+\schritt{(a) Ankünfte in der Notaufnahme über $24$ Stunden}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+Unabhängigkeit & haltbar\\
+Gleichförmigkeit & \textcolor{akzent}{verletzt} --- nachts kommen weniger\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Abhilfe: zeitabhängige Rate $\lambda(t)$. Der Prozess bleibt poissonsch, nur mit $\int_0^t\lambda(s)\dd s$ statt $\lambda t$.}
+
+\schritt{(b) Verkehrsunfälle mit mehreren Verletzten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+Einzelereignisse & \textcolor{akzent}{verletzt} --- mehrere Verletzte auf einmal\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Abhilfe: zusammengesetzter Poisson-Prozess --- poissonsche Ereignisse mit zufälliger Größe. Varianz und Mittelwert fallen dann auseinander.}
+
+\schritt{(c) Infektionen während eines Ausbruchs}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{5.4cm}@{}}
+\toprule
+Unabhängigkeit & \textcolor{akzent}{grundlegend verletzt} --- jeder Fall erzeugt weitere\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Prüfgröße}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Beim Poisson-Prozess ist \textbf{Varianz gleich Mittelwert}. Das gibt einen einfachen Test: Man zähle die Ereignisse in vielen gleich langen Abschnitten und vergleiche beide Größen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Befund} & \textbf{Deutung} & \textbf{Beispiel}\\
+\midrule
+Varianz $=$ Mittel & Poisson & (a) stundenweise\\
+Varianz $>$ Mittel & Häufung & (b), (c)\\
+Varianz $<$ Mittel & Regelmäßigkeit & Termine\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der dritte Fall ist der seltenste und der am wenigsten beachtete.} Er tritt auf, wenn Ereignisse einander verdrängen --- bei Terminvergabe, bei Refraktärzeiten von Nervenzellen, bei Bäumen, die um Licht konkurrieren. Die Zählung ist dann gleichmäßiger als der Zufall, und wer Poisson unterstellt, überschätzt die Schwankung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Preußische Pferde}
+\Person{Ladislaus von Bortkiewicz} untersuchte 1898 in \kursiv{Das Gesetz der kleinen Zahlen} die Zahl der Soldaten, die in preußischen Kavalleriekorps durch Hufschlag starben.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Zweihundert Korps-Jahre, $122$ Todesfälle, im Mittel $0{,}61$ je Jahr --- und die beobachteten Häufigkeiten stimmten mit der Poisson-Verteilung auf eine Nachkommastelle überein. \textbf{Das Beispiel wurde zum bekanntesten der Statistikgeschichte}, obwohl es Bortkiewicz gar nicht um die Verteilung ging, sondern um den Nachweis, dass seltene Ereignisse auch ohne besondere Ursachen schwanken.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Telefonzentrale}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Agner Krarup Erlang} entwickelte ab 1909 bei der Kopenhagener Telefongesellschaft die Theorie der Wartezeiten --- ausgehend von der Annahme poissonscher Anrufe. \textbf{Seine Formeln bestimmen bis heute, wie viele Leitungen, Schalter oder Rettungswagen vorzuhalten sind}, und sie sind der Gegenstand des nächsten Kapitels. Die Einheit des Verkehrsaufkommens trägt seinen Namen.}
+\end{minipage}
+\end{center}
+
+\schritt{Poisson selbst}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Siméon Denis Poisson} schrieb die Verteilung 1837 nieder --- in einer Arbeit über Gerichtsurteile, als Näherung der Binomialverteilung bei kleinen Wahrscheinlichkeiten. \textbf{Er maß ihr keine Bedeutung bei} und kam nie auf die Idee eines Prozesses in stetiger Zeit; diesen formulierten erst Erlang und, unabhängig, Kolmogorow.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Zählprozesse heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Selbsterregend} & Prozesse, bei denen jedes Ereignis die Rate kurzzeitig erhöht.\\
+\textbf{Raumprozesse} & Punktmuster in der Ebene --- Zellkerne, Bäume, Erdbeben.\\
+\textbf{Rückschluss} & Aus einem Punktmuster die Rate und ihre Abhängigkeiten schätzen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Selbsterregende Prozesse wurden für Nachbeben entwickelt und beschreiben heute auch Ansteckungen, Kreditausfälle und Nachrichtenwellen. \textbf{Sie sind die einfachste Abweichung von der Unabhängigkeitsannahme}: Die Rate steigt nach jedem Ereignis und klingt dann ab. Ob eine beobachtete Häufung aus Ansteckung oder aus einer gemeinsamen Ursache stammt, lässt sich aus den Daten allein aber nicht entscheiden --- die Frage aus Band 23, Kapitel~1, in zeitlicher Gestalt.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 4.1} & drei Annahmen, kein Verteilungsansatz\\
+\textbf{Satz 4.2} & daraus folgt Poisson\\
+\textbf{Satz 4.3} & Abstände exponentiell, gedächtnislos\\
+\textbf{Baukasten} & Überlagern und Ausdünnen\\
+\textbf{Der Bruchfall} & erlebte Lücken sind doppelt so lang\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Ankünfte allein sind noch keine Warteschlange. Das nächste Kapitel stellt ihnen die Bedienung gegenüber --- und findet, dass die Wartezeit nicht allmählich wächst, sondern an einer scharfen Grenze explodiert.}
+\end{minipage}
+\end{center}
+\end{merksatz}

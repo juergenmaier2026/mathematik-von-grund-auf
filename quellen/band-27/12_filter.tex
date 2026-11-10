@@ -1,0 +1,322 @@
+\chapter{Was jetzt gerade los ist}
+
+\section{Die umgekehrte Frage}
+
+\begin{merksatz}
+\boxtitel{Die Ankunftsrate ist nicht konstant}
+Elf Kapitel lang war $\lambda = 2{,}4$. In Wirklichkeit schwankt die Rate --- Grippewellen, Hitzeperioden, ein neues Zuweiserkrankenhaus ---, und was die Station jeden Morgen sieht, ist nicht $\lambda_t$, sondern die Zahl der Ankünfte von gestern: $1$, $3$, $2$, $5$, $2$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Gesucht ist $\lambda_t$ heute, aus allen Zählungen bis heute. Das ist die Umkehrung der Simulation: nicht aus dem Zustand die Beobachtung erzeugen, sondern aus den Beobachtungen auf den Zustand schließen.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Modell --- Band 25, Kapitel~12}
+\[ \ln\lambda_t = \ln\lambda_{t-1} + \varepsilon_t,\quad \varepsilon_t\sim N(0,\,0{,}05^2) \qquad\qquad Y_t \mid \lambda_t \sim \operatorname{Poisson}(\lambda_t) \]
+Ein verborgener Zustand mit eigener Dynamik, eine verrauschte Beobachtung je Tag.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das \Begriff{Filterproblem} fragt nach $p(\lambda_t\mid Y_1,\ldots,Y_t)$} --- der Verteilung des heutigen Zustands gegeben alles Bisherige. Für lineare Modelle mit Normalverteilungen löst es der Kalman-Filter aus Band 25 in geschlossener Form. Für Poisson-Zählungen mit logarithmischem Zufallsweg gibt es keine Formel. Es gibt aber die Simulation, und dieses Kapitel baut aus ihr einen Filter --- mit genau den Werkzeugen der Kapitel~6 und~11.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Teilchenfilter}
+
+\begin{definition}
+\boxtitel{Definition 12.1 --- Der Teilchenfilter (Bootstrap-Filter)}
+$N$ \Begriff{Teilchen} $x_t^{(1)},\ldots,x_t^{(N)}$ stellen die Filterverteilung dar. Je Zeitschritt:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.4cm}@{}}
+\toprule
+\textbf{Vorhersage} & Jedes Teilchen nach der Zustandsdynamik weiterziehen: $x_t^{(i)} = x_{t-1}^{(i)} + \varepsilon_t^{(i)}$.\\
+\textbf{Gewichtung} & $w^{(i)} \propto p(Y_t\mid x_t^{(i)})$ --- die Likelihood der heutigen Beobachtung.\\
+\textbf{Neuziehung} & $N$ Teilchen mit Zurücklegen nach den Gewichten ziehen; alle Gewichte auf $1/N$ setzen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die Filterverteilung wird durch die gewichteten Teilchen genähert: $\mathbb E[h(x_t)\mid Y_{1:t}] \approx \sum_i w^{(i)}h(x_t^{(i)})$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 12.2 --- Warum das die Filterverteilung ist}
+Die Teilchen nach der Vorhersage sind Ziehungen aus $p(x_t\mid Y_{1:t-1})$; die Gewichtung ist die Wichtigkeitsstichprobe aus Kapitel~6 mit Vorschlag $p(x_t\mid Y_{1:t-1})$ und Ziel $p(x_t\mid Y_{1:t}) \propto p(Y_t\mid x_t)\,p(x_t\mid Y_{1:t-1})$ --- der Satz von Bayes, Band 21. Die Neuziehung ersetzt gewichtete durch ungewichtete Teilchen mit derselben Verteilung.
+
+\schritt{Beweis}
+Induktion über $t$: Sind die Teilchen zur Zeit $t-1$ aus der Filterverteilung, so sind sie nach der Vorhersage aus der Vorhersageverteilung (Vorwärtsgleichung, Band 25), nach der Gewichtung nach Definition 6.1 eine gewichtete Darstellung der Filterverteilung, und nach der Neuziehung eine ungewichtete. Die Neuziehung fügt Varianz hinzu, keinen Fehler (Satz 5.3 rückwärts). $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Teilchenfilter ist Wichtigkeitsstichprobe, Tag für Tag, mit der Simulation als Vorschlagsdichte.}
+\end{minipage}
+\end{center}
+
+\schritt{Ergebnis, $200$ Tage, $1\,000$ Teilchen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{4.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Schätzer für $\lambda_t$} & \textbf{Wurzel des mittleren Fehlerquadrats}\\
+\midrule
+die Zählung $Y_t$ selbst & $1{,}59$\\
+Sieben-Tage-Mittel & $0{,}60$\\
+Kalman-Filter auf $\sqrt{Y_t}$ & $0{,}45$\\
+Teilchenfilter & $\mathbf{0{,}42}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Das $90$-Prozent-Intervall des Filters, Breite im Mittel $1{,}5$, enthielt den wahren Wert an $94\,\%$ der Tage.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Fehler $0{,}42$ bei einer Rate um $2{,}5$ ist nicht die Schwäche des Filters, sondern die der Daten}: Drei Ankünfte am Tag verraten über $\lambda$ nicht viel, und keine Methode kann aus ihnen mehr herausholen, als drin ist. Was der Filter gegenüber dem Mittelwert gewinnt, ist das Modell --- er weiß, wie schnell sich $\lambda$ ändern kann --- und was er gegenüber dem Kalman-Filter gewinnt, ist die richtige Verteilung statt einer genäherten. Der eigentliche Gewinn ist das Intervall: \enquote{$\lambda$ liegt heute mit $90$ Prozent zwischen $2{,}0$ und $3{,}5$} ist eine Aussage, die ein gleitendes Mittel nicht machen kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Wozu die Neuziehung}
+
+\begin{merksatz}
+\boxtitel{Die Degeneration}
+Ohne Neuziehung multiplizieren sich die Gewichte von Tag zu Tag. Wirksame Teilchenzahl $n_{\text{eff}}$ aus Kapitel~6, $N = 1\,000$:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+\textbf{Tag} & $1$ & $5$ & $20$ & $50$ & $200$\\
+\midrule
+$n_{\text{eff}}$ & $712$ & $389$ & $196$ & $39$ & $\mathbf{2}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Mit Neuziehung jeden Tag: $n_{\text{eff}}$ im Mittel $929$, nie unter $344$. Der Fehler ohne Neuziehung: $0{,}52$ statt $0{,}42$ --- und nach Tag $200$ wäre es ein einziges Teilchen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Teilchen, das vor fünfzig Tagen einmal zu hoch lag, trägt diese Schuld für immer. Die Neuziehung vergibt sie: Sie vervielfacht die Teilchen, die heute passen, und lässt die anderen sterben.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Aufspaltung aus Kapitel~11, mit der Likelihood als Schwelle}: Gute Pfade werden kopiert, schlechte getötet, und die Gesamtzahl bleibt konstant. Die Verbindung ist kein Zufall --- Teilchenfilter und Aufspaltung sind dieselbe Idee, und die Theorie von \Person{Del Moral} behandelt beide als \enquote{Feynman-Kac-Teilchensysteme}. Die Faustregel: neu ziehen, wenn $n_{\text{eff}} < N/2$; jeden Tag neu zu ziehen kostet etwas Genauigkeit durch das Ziehungsrauschen, ist aber harmlos. Und $N = 50$ reicht für dieses Problem --- der Fehler $0{,}39$ bei $N=50$ ist nicht schlechter als $0{,}43$ bei $5\,000$, weil die Daten die Grenze setzen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was der Filter noch kann}
+
+\begin{merksatz}
+\boxtitel{Drei Fragen, dieselben Teilchen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Vorhersage} & Die Teilchen $k$ Tage weiterziehen, ohne zu gewichten: $p(\lambda_{t+k}\mid Y_{1:t})$. Und mit jedem Teilchen die Station simulieren --- Kapitel~10 --- für die Belegung der nächsten Woche.\\
+\textbf{Likelihood} & Das Mittel der ungenormten Gewichte je Tag, multipliziert über die Tage, schätzt $p(Y_{1:T})$ --- die Grundlage, um Modelle zu vergleichen oder $s = 0{,}05$ zu schätzen (Band 21).\\
+\textbf{Glättung} & Rückwärts durch die Vorfahren der Teilchen: $p(\lambda_t\mid Y_{1:T})$ für vergangene Tage --- genauer als der Filter, weil die Zukunft mitspricht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die erste Zeile ist der Grund für dieses Kapitel im Buch}: Die Filterverteilung ist der Anfangszustand für die Simulation der nächsten Woche --- nicht ein Schätzwert, sondern tausend gewichtete Möglichkeiten, aus denen jede ihre eigene Woche erzeugt. Die Belegung am Freitag kommt dann als Verteilung heraus, und sie enthält beides: die Unsicherheit über $\lambda$ heute und den Zufall der Woche. Kapitel~14 nennt das Unsicherheitsquantifizierung; hier ist es nur die konsequente Anwendung von Band 21 auf ein System, das läuft.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Das falsche Modell filtert trotzdem}
+Dieselben Daten, derselbe Filter, aber die Dynamik falsch angenommen:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{2.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{angenommenes $s$} & \textbf{Fehler} & \textbf{Überdeckung $90\,\%$}\\
+\midrule
+$0{,}01$ (zu starr) & $0{,}41$ & $\mathbf{66\,\%}$\\
+$0{,}05$ (wahr) & $0{,}42$ & $94\,\%$\\
+$0{,}20$ (zu beweglich) & $0{,}64$ & $100\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der zu starre Filter hat denselben Fehler wie der richtige --- und Intervalle, die den wahren Wert in einem Drittel der Tage verfehlen. Er ist sich sicher und hat unrecht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Filter liefert immer eine Verteilung, auch für ein falsches Modell} --- es gibt keinen Fehlerausgang \enquote{das Modell passt nicht}. Die Prüfung muss von außen kommen: Sind die Beobachtungen, die der Filter für morgen vorhersagt, mit dem verträglich, was morgen eintritt? Das \Begriff{Vorhersage-Residuum} $Y_{t}$ gegen $p(Y_t\mid Y_{1:t-1})$ ist dafür der Maßstab, und bei $s = 0{,}01$ häufen sich die Überraschungen: Tage, an denen die Zählung außerhalb des vorhergesagten $95$-Prozent-Bereichs liegt, zehn Prozent statt fünf. Wer einen Filter betreibt, betreibt diese Prüfung mit. Und beim Bruchfall mit zu starrem Modell hilft nicht mehr Teilchen, sondern das Modell: $s$ aus der Likelihood schätzen, zweite Zeile im Kasten oben.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.1 --- Ein Filterschritt mit vier Teilchen}
+Vier Teilchen stehen nach der Vorhersage bei $\lambda = 1{,}5$, $2{,}0$, $3{,}0$, $4{,}0$. Beobachtet werden $Y_t = 4$ Ankünfte. Berechnen Sie die Gewichte und das Filtermittel.
+
+\loesung
+\schritt{Schritt 1 --- Die Likelihood}
+$p(4\mid\lambda) = \lambda^4 e^{-\lambda}/24$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+$\lambda$ & $\lambda^4 e^{-\lambda}$ & $\div 24$\\
+\midrule
+$1{,}5$ & $1{,}13$ & $0{,}035$\\
+$2{,}0$ & $2{,}17$ & $0{,}068$\\
+$3{,}0$ & $4{,}03$ & $0{,}126$\\
+$4{,}0$ & $4{,}69$ & $0{,}146$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Normiert (Summe $12{,}02$): $0{,}094$, $0{,}181$, $0{,}336$, $0{,}390$.
+
+\schritt{Schritt 2 --- Das Filtermittel}
+\[ 0{,}094\cdot1{,}5 + 0{,}181\cdot2{,}0 + 0{,}336\cdot3{,}0 + 0{,}390\cdot4{,}0 = 3{,}07 \]
+Vor der Beobachtung war das Mittel $2{,}625$; vier Ankünfte haben es um $0{,}45$ angehoben.
+
+\schritt{Schritt 3 --- Die Neuziehung}
+$n_{\text{eff}} = 1/\sum w^2 = 1/0{,}306 = 3{,}3$ von $4$; man zieht viermal mit Zurücklegen --- etwa $\{2{,}0; 3{,}0; 4{,}0; 4{,}0\}$ --- und setzt alle Gewichte auf $\tfrac14$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Vier Teilchen sind kein Filter, aber sie zeigen die Mechanik}: Die Beobachtung verschiebt das Gewicht, nicht die Teilchen; erst die Vorhersage des nächsten Tags bewegt sie, und erst die Neuziehung räumt die unwahrscheinlichen weg. Das Teilchen bei $1{,}5$ hat nach vier Ankünften noch $9$ Prozent --- weil vier Ankünfte bei $\lambda = 1{,}5$ unwahrscheinlich sind, aber nicht unmöglich. Mit $Y_t = 8$ fiele es auf $0{,}4$ Prozent.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.2 --- Der Kalman-Filter als Sonderfall}
+Für $x_t = x_{t-1}+\varepsilon_t$, $Y_t = x_t + \eta_t$ mit $\varepsilon\sim N(0,q)$, $\eta\sim N(0,r)$: Zeigen Sie, dass die Filterverteilung normal bleibt und leiten Sie den Schritt her.
+
+\loesung
+\schritt{Schritt 1 --- Vorhersage}
+Ist $x_{t-1}\mid Y_{1:t-1}\sim N(m, P)$, so ist $x_t\mid Y_{1:t-1}\sim N(m, P+q)$ --- Summe unabhängiger Normalverteilungen.
+
+\schritt{Schritt 2 --- Gewichtung}
+Normal mal Normal ist normal (Band 21, Satz 4.2):
+\[ x_t\mid Y_{1:t}\sim N\big(m + K(Y_t - m),\ (1-K)(P+q)\big), \qquad K = \frac{P+q}{P+q+r} . \]
+
+\schritt{Schritt 3 --- Die Deutung}
+$K$ ist der \Begriff{Kalman-Gewinn}: Bei kleinem Messrauschen $r$ ist $K\to1$ und der Filter glaubt der Messung; bei kleinem $q$ ist $K\to0$ und er glaubt dem Modell.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Teilchenfilter braucht keinen dieser Schritte, weil die Teilchen die Verteilung sind, welche Form sie auch hat} --- der Preis ist das Rauschen von $N$ Ziehungen gegen eine exakte Formel. Für die Zählungen oben wurde der Kalman-Filter auf $\sqrt{Y_t + 3/8}$ angewandt, dessen Varianz nach Band 17 annähernd $\tfrac14$ ist, unabhängig von $\lambda$ --- ein alter Trick, der ein Poisson-Problem in ein normales verwandelt. Er kostete $0{,}03$ an Genauigkeit. In zwei Dimensionen wäre das Verhältnis dasselbe; in zweihundert ist der Teilchenfilter am Ende, Forschungskasten, und der Kalman-Filter läuft noch.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.3 --- Die Belegung am Freitag}
+Es ist Montag; der Filter gibt für $\lambda$ tausend Teilchen. Beschreiben Sie, wie Sie die Verteilung der Belegung am Freitag berechnen, und was darin steckt.
+
+\loesung
+\schritt{Schritt 1 --- Der Anfangszustand}
+Der Zustand der Station heute --- belegte Betten mit Entlassungszeiten --- ist bekannt; nur $\lambda$ nicht.
+
+\schritt{Schritt 2 --- Die Läufe}
+Für jedes Teilchen $\lambda^{(i)}$: den Zufallsweg für $\ln\lambda$ vier Tage weiterziehen, die Station mit diesen Raten vier Tage simulieren (Kapitel~10), die Belegung am Freitag notieren.
+
+\schritt{Schritt 3 --- Das Ergebnis}
+Tausend Belegungen; ihr Histogramm ist die Vorhersageverteilung. Ihre Streuung setzt sich zusammen aus
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Parameter\-unsicher\-heit} & verschiedene $\lambda^{(i)}$ --- die Breite des Filters\\
+\textbf{Dynamik} & $\lambda$ ändert sich bis Freitag\\
+\textbf{Zufall der Woche} & Ankünfte und Verweildauern --- auch bei bekanntem $\lambda$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Varianzzerlegung aus Satz 5.3 trennt die drei Anteile}: Simuliert man je Teilchen zehn Wochen statt einer, so ist die Varianz innerhalb der Teilchen der Zufall der Woche, die zwischen den Teilchen die Unsicherheit über $\lambda$. Für die Station ist meist die Woche der größere Anteil --- bei $2{,}4$ Ankünften am Tag und vier Tagen Horizont dominiert der Poisson-Zufall. Das heißt auch: Ein besserer Filter würde die Vorhersage kaum schärfen. Der Wert des Filters liegt nicht in der Freitagsvorhersage, sondern darin, eine Änderung von $\lambda$ Wochen früher zu bemerken als das Bauchgefühl der Stationsleitung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Vom Mond zum Teilchen}
+Der Kalman-Filter von 1960 brachte Apollo zum Mond --- die Bahnbestimmung aus verrauschten Radarmessungen lief in Echtzeit auf dem Bordrechner.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Für nichtlineare Probleme behalf man sich dreißig Jahre mit Linearisierung --- dem \enquote{erweiterten} Kalman-Filter ---, der bei starker Nichtlinearität versagt. \textbf{\Person{Gordon}, \Person{Salmond} und \Person{Smith} veröffentlichten 1993 den Bootstrap-Filter} für die Zielverfolgung bei der britischen Marine; der Name Teilchenfilter stammt von \Person{Del Moral} 1996, der die Verbindung zur Physik der Feynman-Kac-Formeln sah. Fast gleichzeitig und unabhängig fanden \Person{Kitagawa} in Tokio und \Person{Isard} und \Person{Blake} in Oxford dasselbe Verfahren --- für Zeitreihen und für das Verfolgen von Objekten in Videobildern.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum erst 1993}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Wichtigkeitsstichprobe für Zeitreihen war seit den 1970er Jahren bekannt --- und wegen der Degeneration aufgegeben worden. \textbf{Die Neuziehung war die Erfindung}, und sie war so einfach, dass sie jahrzehntelang niemand für nötig hielt. Seit es sie gibt, laufen Teilchenfilter in Flugzeugen, in Robotern, in Epidemiemodellen --- und in der Rekonstruktion der Reproduktionszahl im Jahr 2020, die wöchentlich in den Nachrichten stand.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Teilchenfilter heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Hohe Dimension} & Bei $d$ Zustandskoordinaten braucht der Bootstrap-Filter $N\sim e^{cd}$ Teilchen --- für die Wettervorhersage mit $10^{9}$ Koordinaten unmöglich; Ensemble-Kalman-Filter als Kompromiss.\\
+\textbf{Teilchen-MCMC} & Der Filter als Likelihood-Schätzer in einer Metropolis-Kette für die Parameter --- Kapitel~7 und~12 verbunden (\Person{Andrieu}, \Person{Doucet}, \Person{Holenstein} 2010).\\
+\textbf{Differenzierbare Filter} & Neuziehung so, dass man durch den Filter ableiten und die Parameter per Gradient anpassen kann.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Likelihood-Schätzer aus dem Kasten in 12.4 ist verrauscht --- und trotzdem darf man ihn in einen Metropolis-Quotienten einsetzen}: Andrieu, Doucet und Holenstein bewiesen, dass die Kette dann die exakte A-posteriori-Verteilung der Parameter hat, solange der Schätzer erwartungstreu ist --- was der Teilchenfilter nach Del Moral ist. Das heißt: $s$, die A-priori-Verteilung, die Form der Dynamik --- alles lässt sich aus den Zählungen schätzen, ohne eine Formel für die Likelihood zu besitzen. \enquote{Pseudo-marginale} Verfahren heißen sie, und sie sind der Grund, warum Modelle mit verborgenen Zuständen heute Routine sind, die 2005 unlösbar waren.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 12.1} & Vorhersage, Gewichtung, Neuziehung\\
+\textbf{Satz 12.2} & Wichtigkeitsstichprobe, Tag für Tag\\
+\textbf{Degeneration} & $n_{\text{eff}}$ fällt ohne Neuziehung auf $1$\\
+\textbf{Der Bruchfall} & falsches Modell: sicher und falsch\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil IV hat die Station als Programm gebaut, verbessert, an ihre seltenen Grenzen geführt und aus Beobachtungen zurückgeschlossen. Teil V fragt, was nötig ist, damit ein anderer dasselbe Ergebnis bekommt --- und was man einem Ergebnis glauben darf, das aus einem Modell kommt, dessen Parameter niemand genau kennt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

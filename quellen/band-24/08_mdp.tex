@@ -1,0 +1,290 @@
+\chapter{Ohne Ende}
+
+\section{Der Fall}
+
+\begin{merksatz}
+\boxtitel{Wie oft soll man untersuchen?}
+Eine Vorsorgeuntersuchung entdeckt eine Erkrankung, bevor sie fortschreitet. Wie groß soll der Abstand sein?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}@{}}
+\toprule
+Neuerkrankung je Jahr & $2\,\%$\\
+Fortschreiten je Jahr & $25\,\%$\\
+Entdeckungsrate & $90\,\%$\\
+Kosten je Untersuchung & $100$ €\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Simuliert über dreißig Jahre}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Abstand} & \textbf{QALY} & \textbf{Kosten} & \textbf{je QALY}\\
+\midrule
+$10$ Jahre & $15{,}735$ & $199$ € & ---\\
+$5$ Jahre & $16{,}084$ & $361$ € & $464$ €\\
+$3$ Jahre & $16{,}365$ & $584$ € & $794$ €\\
+$2$ Jahre & $16{,}587$ & $868$ € & $1279$ €\\
+$1$ Jahr & $16{,}833$ & $1722$ € & $3472$ €\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\kursiv{Die letzte Spalte ist der Zuwachs gegenüber der Zeile darüber.}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jede Verkürzung bringt etwas --- und jede kostet mehr als die vorige.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Es gibt kein \enquote{richtiges} Intervall aus der Rechnung allein.} Es gibt eine Folge von Stufen mit steigenden Preisen, und welche man noch nimmt, hängt davon ab, was ein gewonnenes Jahr wert sein soll. Kapitel~10 macht daraus eine Grenze, Kapitel~14 setzt einen Preis an.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Gleichung ohne Endzeit}
+
+\begin{merksatz}
+\boxtitel{Satz 8.1 --- der Fixpunkt}
+Bei unbegrenztem Zeithorizont und Diskontfaktor $\gamma < 1$ hat
+\[ V(z) = \max_a \left\{ u(z,a) + \gamma \sum_{z'} \Pr[z'\mid z,a]\,V(z') \right\} \]
+genau eine Lösung, und die Wertiteration
+\[ V^{(k+1)} = \mathcal{B}\,V^{(k)} \]
+konvergiert von jedem Startwert aus gegen sie.
+
+\schritt{Beweis}
+\kursiv{Erstens --- die Abbildung zieht zusammen:} Für zwei Wertfunktionen $V$, $W$ gilt an jeder Stelle
+\[ \bigl|\mathcal{B}V(z) - \mathcal{B}W(z)\bigr| \ \le\ \gamma\,\max_{z'}\bigl|V(z')-W(z')\bigr| , \]
+denn das Maximum zweier Ausdrücke unterscheidet sich höchstens so stark wie die Ausdrücke selbst, und die Übergangswahrscheinlichkeiten summieren sich zu eins.
+
+\kursiv{Zweitens --- Banach:} Eine Kontraktion mit Faktor $\gamma < 1$ auf einem vollständigen Raum hat genau einen Fixpunkt, und die Iteration konvergiert gegen ihn --- Band 3, Kapitel~9.
+
+\kursiv{Drittens --- die Geschwindigkeit:} Der Abstand schrumpft je Schritt um den Faktor $\gamma$. $\blacksquare$
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$\gamma$ & \textbf{Schritte für $1\,\%$} & \textbf{entspricht}\\
+\midrule
+$0{,}90$ & $44$ & $10$ Jahre Sicht\\
+$0{,}97$ & $151$ & $33$ Jahre\\
+$0{,}99$ & $458$ & $100$ Jahre\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Diskontfaktor ist zugleich die Rechenbremse und der Zeithorizont}: $\gamma = 0{,}97$ entspricht der Diskontrate von drei Prozent aus Kapitel~6 und einer wirksamen Sicht von etwa dreiunddreißig Jahren. Wer weiter blicken will, muss länger rechnen --- und braucht Daten, die so weit reichen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was die schöne Theorie verlangt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Bekannte Über\-gänge} & Satz 8.1 setzt sie als gegeben voraus. In der Medizin sind sie geschätzt --- aus Daten, die selbst unter der bisherigen Strategie entstanden.\\
+\textbf{Zustandsraum} & Jede zusätzliche Größe vervielfacht ihn. Der Fluch der Dimension trifft hier härter als beim Lernen.\\
+\textbf{Verlässliche Nutzen} & Der Wert wird über Jahrzehnte aufsummiert; kleine Fehler in $u$ wirken groß.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Zeile enthält die Falle, die Band 23 in Kapitel~12 beschrieb: \textbf{Die beobachteten Übergänge gelten für die Strategie, unter der beobachtet wurde} --- nicht für die vorgeschlagene. Eine berechnete Strategie, die deutlich vom Bisherigen abweicht, bewegt sich damit in einem Bereich ohne Daten. Kapitel~11 behandelt Verfahren, die darauf Rücksicht nehmen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Eine Wertiteration von Hand}
+Zwei Zustände: gesund ($u = 1$) und krank ($u = 0{,}5$). Aus gesund wird man mit $10$ Prozent krank; aus krank wird man mit Behandlung ($u$-Abzug $0{,}1$) zu $40$ Prozent gesund, ohne zu $10$. $\gamma = 0{,}9$.
+
+\loesung
+\schritt{Schritt 1 --- Start}
+\[ V^{(0)}(\text{g}) = V^{(0)}(\text{k}) = 0 \]
+
+\schritt{Schritt 2 --- Erste Iteration}
+\[ V^{(1)}(\text{g}) = 1 + 0{,}9\cdot0 = 1{,}000 \]
+\[ V^{(1)}(\text{k}) = \max\{0{,}5;\ 0{,}4\} = 0{,}500 \quad (\text{ohne Behandlung}) \]
+
+\schritt{Schritt 3 --- Zweite Iteration}
+\[ V^{(2)}(\text{g}) = 1 + 0{,}9\,[0{,}9\cdot1{,}000 + 0{,}1\cdot0{,}500] = 1 + 0{,}9\cdot0{,}950 = 1{,}855 \]
+\[ V^{(2)}(\text{k}, \text{behandeln}) = 0{,}4 + 0{,}9\,[0{,}4\cdot1{,}000+0{,}6\cdot0{,}500] = 0{,}4+0{,}9\cdot0{,}700 = 1{,}030 \]
+\[ V^{(2)}(\text{k}, \text{nicht}) = 0{,}5 + 0{,}9\,[0{,}1\cdot1{,}000+0{,}9\cdot0{,}500] = 0{,}5+0{,}9\cdot0{,}550 = 0{,}995 \]
+\[ V^{(2)}(\text{k}) = \mathbf{1{,}030} \quad (\text{behandeln}) \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Entscheidung kippt zwischen der ersten und der zweiten Iteration.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Warum}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{In der ersten Iteration zählt nur das Jetzt, und da ist Nichtstun angenehmer.} Erst wenn die Zukunft mitgerechnet wird, lohnt der sofortige Abzug von $0{,}1$, weil er die Aussicht auf den besseren Zustand vervierfacht. Kurzsichtigkeit ist also kein Fehler des Verfahrens, sondern der Grenzfall $\gamma = 0$ --- und beschreibt gut, was unter Zeitdruck geschieht.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 5 --- Der Grenzwert}
+Nach weiteren Iterationen: $V(\text{g}) = 9{,}02$, $V(\text{k}) = 7{,}93$.
+
+\kursiv{Probe an beiden Gleichungen:}
+\[ 1 + 0{,}9\,[0{,}9\cdot9{,}02 + 0{,}1\cdot7{,}93] = 1 + 0{,}9\cdot8{,}911 = 9{,}02 \quad \checkmark \]
+\[ 0{,}4 + 0{,}9\,[0{,}4\cdot9{,}02 + 0{,}6\cdot7{,}93] = 0{,}4 + 0{,}9\cdot8{,}366 = 7{,}93 \quad \checkmark \]
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Das Intervall wählen}
+Ab welchem Preis je gewonnenem Lebensjahr lohnt sich welches Untersuchungsintervall?
+
+\loesung
+\schritt{Schritt 1 --- Die Stufen aus Abschnitt 8.1}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Übergang} & \textbf{Preis je QALY} & \textbf{lohnt ab}\\
+\midrule
+$10 \to 5$ & $464$ € & $464$ €\\
+$5 \to 3$ & $794$ € & $794$ €\\
+$3 \to 2$ & $1279$ € & $1279$ €\\
+$2 \to 1$ & $3472$ € & $3472$ €\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Regel}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Man geht so lange eine Stufe weiter, wie der Preis der Stufe unter der Zahlungsbereitschaft liegt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Bei $40\,000$ Euro je QALY}
+Alle vier Stufen lohnen --- das jährliche Intervall gewinnt.
+
+\schritt{Schritt 4 --- Der Haken}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Modell kennt keine Schäden des Untersuchens} --- keine falsch positiven Befunde, keine Folgediagnostik, keine Überdiagnose. Nimmt man sie auf, so kehren sich die späten Stufen um: Der zusätzliche Nutzen sinkt, der zusätzliche Schaden steigt, und ab einem gewissen Punkt wird häufigeres Untersuchen \kursiv{schädlich}, nicht nur teuer. Genau darüber wird bei Krebsvorsorgeprogrammen gestritten --- und der Streit ist einer über Modellstruktur, nicht über Zahlen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- Wie weit reicht der Blick?}
+Welchem Zeithorizont entspricht ein Diskontfaktor $\gamma$?
+
+\loesung
+\schritt{Schritt 1 --- Die Summe}
+\[ \sum_{t=0}^{\infty} \gamma^{t} = \frac{1}{1-\gamma} \]
+
+\schritt{Schritt 2 --- Die Werte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$\gamma$ & $1/(1-\gamma)$ & \textbf{Diskontrate}\\
+\midrule
+$0{,}90$ & $10$ & $11{,}1\,\%$\\
+$0{,}95$ & $20$ & $5{,}3\,\%$\\
+$0{,}97$ & $33$ & $3{,}1\,\%$\\
+$0{,}99$ & $100$ & $1{,}0\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Probe:} $\gamma = 1/(1+d)$, also $d = 1/\gamma - 1 = 1/0{,}97-1 = 0{,}0309$.
+
+\schritt{Schritt 3 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Kehrwert von $1-\gamma$ ist die Zahl der Jahre, die praktisch zählen.} Eine Entscheidung mit $\gamma = 0{,}90$ ignoriert alles jenseits eines Jahrzehnts --- was bei einer $78$-jährigen Patientin vertretbar sein mag und bei einem Kind unvertretbar ist. In technischen Anwendungen des bestärkenden Lernens wird $\gamma$ oft nach der Rechengeschwindigkeit gewählt; in der Medizin ist es eine Wertentscheidung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von der Lagerhaltung zur Leitlinie}
+Markow-Entscheidungsprozesse entstanden in den 1950er Jahren --- \Person{Ronald Howard} schrieb 1960 das erste Lehrbuch.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die frühen Anwendungen betrafen Lagerhaltung, Instandhaltung und Warteschlangen. \textbf{\Person{Lloyd Shapley} hatte das Verfahren bereits 1953 für stochastische Spiele formuliert} --- dieselbe Person, die in Band 21 den Shapley-Wert beisteuerte, und derselbe Gedanke, nur mit einem Gegenspieler statt der Natur.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Wiederkehr}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Das bestärkende Lernen der 1990er Jahre ist derselbe Rahmen ohne Kenntnis der Übergänge: \textbf{Man lernt sie aus Erfahrung, statt sie vorauszusetzen.} Der Erfolg bei Brett- und Videospielen hat das Verfahren populär gemacht; die Übertragung auf die Medizin steht vor dem Problem, dass man dort nicht beliebig oft probieren kann.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Strategien heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Teilweise sichtbar} & Der Zustand ist unbekannt; der Glaube über ihn wird zum Zustand.\\
+\textbf{Sicheres Lernen} & Strategien, die den beobachteten Bereich nicht verlassen.\\
+\textbf{Erklärbare Regeln} & Einfache Schwellenregeln statt optimaler, aber unverständlicher Strategien.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die berechnete beste Strategie ist oft eine Tabelle ohne erkennbares Muster. \textbf{Eine um wenige Prozent schlechtere Strategie, die sich als \enquote{behandle ab Wert $x$} aussprechen lässt, wird eher befolgt} --- und eine befolgte schlechtere Strategie schlägt eine ignorierte bessere. Das ist dieselbe Abwägung wie zwischen Baum und Wald in Band 22, Kapitel~9.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 8.1} & Kontraktion, ein Fixpunkt\\
+\textbf{Wertiteration} & konvergiert mit Faktor $\gamma$\\
+\textbf{$1/(1-\gamma)$} & die Zahl der zählenden Jahre\\
+\textbf{Stufen} & jede Verkürzung teurer als die vorige\\
+\textbf{Der Bruchfall} & Übergänge gelten für die alte Strategie\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bisher waren die Wahrscheinlichkeiten bekannt. Das nächste Kapitel handelt vom Fall, in dem man sie erst durch Handeln erfährt --- und dabei Patienten einsetzt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

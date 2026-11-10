@@ -1,0 +1,383 @@
+\chapter{Aussterben oder Ausbruch}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{Ein Fall wird eingeschleppt}
+Ein Reisender bringt einen Erreger in eine Stadt. Jeder Infizierte steckt im Mittel $R_0$ weitere an, unabhängig voneinander.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei $R_0 > 1$ wächst die Zahl im Mittel. Die Frage ist aber nicht, was im Mittel geschieht, sondern ob der Ausbruch überhaupt beginnt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Band 18 behandelte Epidemien durch Differentialgleichungen} --- und musste dafür annehmen, dass die Zahl der Infizierten groß genug ist, um den Zufall zu vernachlässigen. Am Anfang eines Ausbruchs ist sie das nicht: Ein einzelner Fall kann folgenlos bleiben, auch wenn $R_0$ groß ist. Genau diese Anfangsphase behandelt dieses Kapitel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 6.1 --- Verzweigungsprozess}
+Sei $Z_0 = 1$ und
+\[ Z_{n+1} = \sum_{i=1}^{Z_n} \xi_{n,i} , \]
+wobei die $\xi_{n,i}$ unabhängig und wie eine Zufallsgröße $\xi$ verteilt sind --- die Zahl der Nachkommen eines Einzelnen. Man schreibt $m = \mathbb{E}[\xi]$ und
+\[ G(s) = \mathbb{E}\bigl[s^{\xi}\bigr] = \sum_k \Pr[\xi = k]\,s^{k} \]
+für die erzeugende Funktion (Band 15, Kapitel~8).
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 6.2 --- Erwartung und Verkettung}
+\[ \mathbb{E}[Z_n] = m^{n}, \qquad \mathbb{E}\bigl[s^{Z_n}\bigr] = \underbrace{G\bigl(G(\cdots G(s)\cdots)\bigr)}_{n\text{-mal}} \]
+
+\schritt{Beweis der ersten Aussage}
+\[ \mathbb{E}[Z_{n+1}] = \mathbb{E}\bigl[\mathbb{E}[Z_{n+1} \mid Z_n]\bigr] = \mathbb{E}[m\,Z_n] = m\,\mathbb{E}[Z_n] \]
+--- bedingt auf $Z_n$ ist die nächste Generation eine Summe von $Z_n$ unabhängigen Größen mit Mittelwert $m$. Induktion liefert $m^n$. $\blacksquare$
+
+\schritt{Beweis der zweiten Aussage}
+\[ \mathbb{E}\bigl[s^{Z_{n+1}} \mid Z_n = k\bigr] = \mathbb{E}\bigl[s^{\xi_1+\cdots+\xi_k}\bigr] = G(s)^{k} \]
+Also $\mathbb{E}[s^{Z_{n+1}}] = \mathbb{E}\bigl[G(s)^{Z_n}\bigr] = G_n\bigl(G(s)\bigr)$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Verketten erzeugender Funktionen ersetzt die Faltung von Verteilungen} --- eine der elegantesten Vereinfachungen der Wahrscheinlichkeitsrechnung. Aus ihr folgt der ganze nächste Abschnitt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Aussterbewahrscheinlichkeit}
+
+\begin{merksatz}
+\boxtitel{Satz 6.3 --- der Aussterbesatz}
+Die Wahrscheinlichkeit $q$, dass der Prozess irgendwann ausstirbt, ist die kleinste nichtnegative Lösung von
+\[ q = G(q) . \]
+Dabei gilt
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}@{}}
+\toprule
+$m \le 1$ & $q = 1$ (Ausnahme: $\xi \equiv 1$)\\
+$m > 1$ & $q < 1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis}
+\kursiv{Sei $q_n = \Pr[Z_n = 0]$.} Dann ist $q_n = G_n(0)$ und $q_{n+1} = G(q_n)$, denn Aussterben bis Generation $n+1$ heißt: Jede der Linien des ersten Nachkommen stirbt binnen $n$ Generationen aus.
+
+\kursiv{Die Folge $q_n$ wächst} und ist durch $1$ beschränkt, konvergiert also gegen ein $q$ mit $q = G(q)$ --- $G$ ist stetig.
+
+\kursiv{$q$ ist die kleinste Lösung:} Ist $r$ irgendeine Lösung, so folgt aus $q_0 = 0 \le r$ und der Monotonie von $G$ induktiv $q_n \le r$, also $q \le r$.
+
+\kursiv{Die Fallunterscheidung:} $G$ ist auf $[0,1]$ konvex mit $G(1) = 1$ und $G'(1) = m$. Eine konvexe Kurve durch $(1,1)$ schneidet die Winkelhalbierende genau dann ein zweites Mal im Innern, wenn ihre Steigung dort größer als eins ist. $\blacksquare$
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+\draw[grau!60, line width=0.6pt] (0,0) -- (3.4,0);
+\draw[grau!60, line width=0.6pt] (0,0) -- (0,3.4);
+\draw[grau!70, line width=0.8pt, dashed] (0,0) -- (3.2,3.2);
+\draw[tief, line width=1.3pt, smooth, samples=60, domain=0:3.0] plot ({\x},{3*exp(-2*(1-\x/3))});
+\draw[akzent, line width=0.8pt, dotted] (0.61,0.61) -- (0.61,0);
+\node[font=\scriptsize, color=akzent, anchor=north] at (0.61,-0.05) {$q$};
+\node[font=\scriptsize, color=grau, anchor=north] at (3.0,-0.05) {$1$};
+\node[font=\scriptsize\itshape, color=tief, anchor=west] at (2.1,2.0) {$G$};
+\end{tikzpicture}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Poissonsche Nachkommenzahl}
+Bei $\xi \sim \text{Poisson}(R_0)$ ist $G(s) = e^{-R_0(1-s)}$, und $q$ löst
+\[ q = e^{-R_0(1-q)} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$R_0$ & \textbf{Aussterben} & \textbf{Ausbruch}\\
+\midrule
+$0{,}9$ & $1{,}000$ & $0$\\
+$1{,}0$ & $1{,}000$ & $0$\\
+$1{,}5$ & $0{,}417$ & $0{,}583$\\
+$2{,}0$ & $0{,}203$ & $0{,}797$\\
+$3{,}0$ & $0{,}060$ & $0{,}941$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Selbst bei $R_0 = 3$ --- einem Wert wie bei Masern in einer ungeimpften Bevölkerung --- versanden sechs von hundert eingeschleppten Fällen folgenlos.}
+\end{minipage}
+\end{center}
+
+\schritt{Mehrere Startfälle}
+Bei $k$ unabhängigen Einschleppungen ist die Aussterbewahrscheinlichkeit $q^{k}$:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Startfälle} & $R_0 = 1{,}5$ & $R_0 = 2$\\
+\midrule
+$1$ & $0{,}583$ & $0{,}797$\\
+$5$ & $0{,}987$ & $0{,}9997$\\
+$10$ & $0{,}9998$ & $1{,}000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Fünf gleichzeitige Einschleppungen machen aus einer Aussicht von $58$ Prozent eine von $99$.} Das ist der rechnerische Kern jeder Grenzkontrolle: Sie verhindert den Ausbruch nicht, aber sie verringert die Zahl der Versuche --- und die Wahrscheinlichkeit sinkt mit jeder verhinderten Einschleppung um denselben Faktor $q$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{$R_0$ allein genügt nicht}
+Dieselbe mittlere Nachkommenzahl $R_0 = 2$, aber verschiedene Streuung --- gemessen durch den Streuparameter $k$ einer negativen Binomialverteilung (klein heißt stark streuend):
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+$k$ & \textbf{Aussterben} & \textbf{Ausbruch}\\
+\midrule
+$0{,}1$ & $\mathbf{0{,}890}$ & $\mathbf{0{,}110}$\\
+$0{,}5$ & $0{,}640$ & $0{,}360$\\
+$1{,}0$ & $0{,}500$ & $0{,}500$\\
+$10$ & $0{,}245$ & $0{,}755$\\
+\midrule
+Poisson & $0{,}203$ & $0{,}797$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei gleichem $R_0 = 2$ schwankt die Ausbruchswahrscheinlichkeit zwischen $11$ und $80$ Prozent --- je nachdem, wie ungleich die Ansteckungen verteilt sind.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $k = 0{,}1$ stecken die meisten Infizierten niemanden an, und wenige verursachen sehr viele Fälle --- die Lage bei SARS, MERS und in geringerem Maß bei SARS-CoV-2. \textbf{Dann versandet ein eingeschleppter Fall meist, und wenn nicht, explodiert er.} Die Epidemie verläuft in Sprüngen statt gleichmäßig, und Mittelwerte beschreiben sie schlecht.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Folge für Maßnahmen}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bei starker Überstreuung wirkt es besser, Häufungsereignisse zu verhindern, als alle Kontakte gleichmäßig zu verringern} --- dieselbe Senkung von $R_0$ ist unterschiedlich viel wert, je nachdem, an welchem Ende der Verteilung sie ansetzt. Band 18 konnte das nicht sehen, weil seine Differentialgleichungen nur Mittelwerte kennen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.1 --- Aussterben von Hand}
+Ein Erreger erzeuge mit den Wahrscheinlichkeiten $0{,}4$, $0{,}3$, $0{,}3$ null, einen oder zwei Nachkommen. Stirbt er aus?
+
+\loesung
+\schritt{Schritt 1 --- Mittelwert}
+\[ m = 0\cdot0{,}4 + 1\cdot0{,}3 + 2\cdot0{,}3 = 0{,}9 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$m < 1$, also stirbt der Prozess mit Sicherheit aus.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 2 --- Die Probe über die Gleichung}
+\[ G(s) = 0{,}4 + 0{,}3\,s + 0{,}3\,s^{2} \]
+\[ 0{,}3s^{2} - 0{,}7s + 0{,}4 = 0 \quad\Longrightarrow\quad s = \frac{0{,}7 \pm \sqrt{0{,}49-0{,}48}}{0{,}6} = \frac{0{,}7 \pm 0{,}1}{0{,}6} \]
+\[ s_1 = 1, \qquad s_2 = \tfrac{4}{3} \]
+Die kleinste nichtnegative Lösung ist $q = 1$. \checkmark
+
+\schritt{Schritt 3 --- Wie lange es dauert}
+Die erwartete Gesamtzahl aller je Infizierten beträgt
+\[ \sum_{n\ge0} m^{n} = \frac{1}{1-m} = \frac{1}{0{,}1} = 10 . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.6cm}@{}}
+\toprule
+$m$ & \textbf{Gesamtzahl}\\
+\midrule
+$0{,}50$ & $2$\\
+$0{,}80$ & $5$\\
+$0{,}90$ & $10$\\
+$0{,}95$ & $20$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Auch unterhalb der Schwelle entstehen Ketten, und je näher $m$ der Eins kommt, desto länger werden sie.} Ein Erreger mit $R_0 = 0{,}95$ stirbt sicher aus --- nach durchschnittlich zwanzig Fällen, mit gelegentlich weit größeren Ketten. Das erklärt, warum unterhalb der Schwelle noch immer beträchtliche Ausbrüche auftreten, und warum man aus einzelnen Clustern nicht auf $R_0 > 1$ schließen darf.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.2 --- Die Schwelle prüfen}
+Zeigen Sie: Bei $R_0$ knapp über eins ist die Ausbruchswahrscheinlichkeit näherungsweise $2(R_0-1)$.
+
+\loesung
+\schritt{Schritt 1 --- Ansatz}
+Sei $R_0 = 1+\varepsilon$ und $q = 1-x$ mit kleinem $x$. Einsetzen in $q = e^{-R_0(1-q)}$:
+\[ 1-x = e^{-(1+\varepsilon)x} \]
+
+\schritt{Schritt 2 --- Entwickeln}
+Beide Seiten bis zur zweiten Ordnung (Band 3, Kapitel~11):
+\[ 1-x \approx 1 - (1+\varepsilon)x + \tfrac12(1+\varepsilon)^{2}x^{2} \]
+\[ 0 \approx -\varepsilon x + \tfrac12 x^{2} \quad\Longrightarrow\quad x \approx 2\varepsilon \]
+
+\schritt{Schritt 3 --- Die Probe}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.8cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$R_0$ & \textbf{Näherung} & \textbf{exakt}\\
+\midrule
+$1{,}05$ & $0{,}100$ & $0{,}093$\\
+$1{,}10$ & $0{,}200$ & $0{,}176$\\
+$1{,}50$ & $1{,}000$ & $0{,}583$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Knapp über der Schwelle verdoppelt sich die Ausbruchswahrscheinlichkeit mit jedem Prozentpunkt bei $R_0$} --- ein sehr steiler Anstieg, der aber bei $1{,}5$ schon deutlich überschätzt. Die Näherung zeigt, warum Schätzungen von $R_0$ nahe eins so folgenreich sind: Der Unterschied zwischen $0{,}98$ und $1{,}04$ ist der zwischen sicherem Verlöschen und jedem zwölften Versuch, der gelingt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.3 --- Familiennamen}
+Galton fragte 1873, warum Familiennamen aussterben. Ein Mann habe mit den Wahrscheinlichkeiten $0{,}25$, $0{,}30$, $0{,}25$, $0{,}15$, $0{,}05$ null bis vier Söhne. Wie groß ist die Aussterbewahrscheinlichkeit des Namens?
+
+\loesung
+\schritt{Schritt 1 --- Der Mittelwert}
+\[ m = 0{,}30 + 2\cdot0{,}25 + 3\cdot0{,}15 + 4\cdot0{,}05 = 0{,}30+0{,}50+0{,}45+0{,}20 = 1{,}45 \]
+
+\schritt{Schritt 2 --- Die Fixpunktgleichung}
+\[ G(s) = 0{,}25 + 0{,}30s + 0{,}25s^{2} + 0{,}15s^{3} + 0{,}05s^{4} \]
+Iteration $q_{n+1} = G(q_n)$ ab $q_0 = 0$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{2.0cm}P{1.4cm}P{2.0cm}@{}}
+\toprule
+$n$ & $q_n$ & $n$ & $q_n$\\
+\midrule
+$0$ & $0{,}000$ & $6$ & $0{,}439$\\
+$1$ & $0{,}250$ & $10$ & $0{,}451$\\
+$2$ & $0{,}343$ & $20$ & $0{,}454$\\
+$4$ & $0{,}415$ & $\infty$ & $\mathbf{0{,}454}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Fünfundvierzig Prozent aller Namenslinien sterben aus --- obwohl jeder Mann im Mittel $1{,}45$ Söhne hat.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Wachstum im Mittel und Aussterben im Einzelfall schließen einander nicht aus} --- das war Galtons eigentliche Überraschung. Die überlebenden Linien wachsen dafür umso schneller: Bedingt auf das Überleben wächst der Prozess mit Rate $m$, und die gesamte Zunahme verteilt sich auf die überlebenden $55$ Prozent der Linien.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 4 --- Und die Übertragung}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieselbe Rechnung beschreibt das Aussterben von Genlinien, Nachnamen, Unternehmen, Tierpopulationen und Mutationen. \textbf{In der Genetik erklärt sie, warum die meisten neuen Mutationen verschwinden, auch wenn sie einen Vorteil bringen}: Bei einem Selektionsvorteil von einem Prozent überlebt nach Aufgabe 6.2 nur etwa jede fünfzigste. Die Evolution verschwendet fast alles, was sie hervorbringt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Eine Frage nach den Namen}
+\Person{Francis Galton} stellte 1873 in einer Zeitschrift die Frage, mit welcher Wahrscheinlichkeit ein Familienname ausstirbt --- besorgt um das Verschwinden angesehener Familien.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Henry William Watson} antwortete mit der erzeugenden Funktion und kam zu dem Schluss, jeder Name sterbe mit Sicherheit aus. \textbf{Das war falsch}: Er hatte übersehen, dass die Fixpunktgleichung bei $m>1$ eine zweite Lösung hat, und die Wurzel $s=1$ genommen. Der Fehler blieb sechzig Jahre unentdeckt und wurde erst 1930 von \Person{Johan Steffensen} berichtigt.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Vorgeschichte}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Irénée-Jules Bienaymé} hatte das Problem bereits 1845 vollständig gelöst --- in einer kurzen Mitteilung, die in Vergessenheit geriet und erst 1972 wiederentdeckt wurde. \textbf{Der Prozess heißt heute zu Recht Bienaymé-Galton-Watson-Prozess}, auch wenn sich meist nur die beiden letzten Namen halten.}
+\end{minipage}
+\end{center}
+
+\schritt{Und die Kernspaltung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Stanisław Ulam} und \Person{David Hawkins} entwickelten die Theorie 1944 in Los Alamos neu --- für Neutronen in spaltbarem Material. \textbf{Die kritische Masse ist genau der Punkt, an dem $m$ die Eins überschreitet}, und die Frage, ob eine Kettenreaktion anläuft, ist wörtlich die Frage nach dem Aussterben. Daraus entstand nebenbei die Monte-Carlo-Simulation.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Verzweigung heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Überstreuung schätzen} & Aus Ausbruchsdaten den Streuparameter bestimmen.\\
+\textbf{Mit Struktur} & Verzweigung auf Netzwerken statt in gut durchmischter Bevölkerung.\\
+\textbf{Zellpopulationen} & Klonale Ausbreitung von Mutationen im Gewebe.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{In jedem Gewebe entstehen ständig mutierte Zellklone; fast alle sterben nach wenigen Teilungen aus. \textbf{Aus der Größenverteilung überlebender Klone lässt sich auf den Selektionsvorteil zurückrechnen} --- ein Verfahren, das in der Krebsforschung inzwischen breit eingesetzt wird. Es zeigt unter anderem, dass die Haut gesunder Menschen im mittleren Lebensalter bereits von Klonen mit Treibermutationen durchsetzt ist.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 6.1} & jeder erzeugt unabhängig Nachkommen\\
+\textbf{Satz 6.2} & $\mathbb{E}[Z_n] = m^{n}$, Verkettung von $G$\\
+\textbf{Satz 6.3} & $q$ ist kleinste Lösung von $q = G(q)$\\
+\textbf{Überstreuung} & gleiches $R_0$, ganz andere Aussichten\\
+\textbf{Unterhalb} & Ketten der mittleren Länge $1/(1-m)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~II. Alle bisherigen Prozesse waren durch ihre Übergangsregel gegeben. Teil~III wechselt die Blickrichtung: Er fragt nicht, wie ein Prozess läuft, sondern was gilt, wenn er im Mittel weder steigt noch fällt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

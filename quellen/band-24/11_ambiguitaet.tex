@@ -1,0 +1,367 @@
+\chapter{Unsichere Wahrscheinlichkeiten}
+
+\section{Zwei Arten von Nichtwissen}
+
+\begin{merksatz}
+\boxtitel{Der Unterschied}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+\textbf{Risiko} & Die Wahrscheinlichkeiten sind bekannt --- ein Würfel, eine große Studie.\\
+\textbf{Ambiguität} & Die Wahrscheinlichkeiten sind selbst unsicher --- ein neues Mittel, eine fremde Patientengruppe.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der Versuch von Ellsberg}
+Eine Urne enthält $30$ rote Kugeln und $60$ weitere, schwarz oder gelb in unbekanntem Verhältnis.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{3.0cm}P{3.4cm}@{}}
+\toprule
+& \textbf{Wette} & \textbf{Mehrheit wählt}\\
+\midrule
+$A$ & auf rot & \textcolor{gruen}{$A$}\\
+$B$ & auf schwarz & \\
+\midrule
+$C$ & auf rot oder gelb & \\
+$D$ & auf schwarz oder gelb & \textcolor{gruen}{$D$}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer $A$ vorzieht, hält rot für wahrscheinlicher als schwarz. Wer dann $D$ vorzieht, hält schwarz für wahrscheinlicher als rot.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Mit keiner Wahrscheinlichkeitsverteilung ist dieses Paar von Entscheidungen vereinbar} --- es verstößt gegen die Regeln aus Kapitel~2. Die Befragten wissen das meist und bleiben dennoch dabei: Sie bevorzugen die Wette, deren Wahrscheinlichkeit sie \kursiv{kennen}. Das ist keine Rechenschwäche, sondern eine Haltung --- die Scheu vor dem Unbekannten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Entscheiden ohne Wahrscheinlichkeiten}
+
+\begin{merksatz}
+\boxtitel{Drei Regeln}
+Fieber unklarer Herkunft; bakteriell oder viral, Anteil unbekannt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+\textbf{Handlung} & \textbf{bakteriell} & \textbf{viral}\\
+\midrule
+sofort behandeln & $0{,}95$ & $0{,}90$\\
+warten & $0{,}70$ & $0{,}99$\\
+erst testen & $0{,}92$ & $0{,}96$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+\textbf{Regel} & \textbf{Wahl} & \\
+\midrule
+schlimmster Fall & warten $0{,}70$? & nein: sofort $0{,}90$\\
+größte Reue & \textbf{testen} & Reue $0{,}03$\\
+Erwartungs\-nutzen ($p = 0{,}3$) & \textbf{testen} & $0{,}948$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Reuetafel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.0cm}P{2.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Handlung} & \textbf{bakt.} & \textbf{viral} & \textbf{größte}\\
+\midrule
+sofort & $0{,}00$ & $0{,}09$ & $0{,}09$\\
+warten & $0{,}25$ & $0{,}00$ & $0{,}25$\\
+testen & $0{,}03$ & $0{,}03$ & $\mathbf{0{,}03}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Reue misst, wie sehr man sich hinterher ärgert --- und der Test begrenzt diesen Ärger auf drei Hundertstel.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Minimax-Reue bevorzugt systematisch die mittleren, absichernden Handlungen} --- hier den Test, der in keinem Zustand der beste ist. Das entspricht dem klinischen Vorgehen bei unklarer Lage oft besser als die Erwartungsnutzenrechnung, die eine Zahl für $p$ verlangt, die niemand kennt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Mittelweg}
+Statt einer einzigen Verteilung nimmt man eine \kursiv{Menge} von Verteilungen und bewertet jede Handlung mit ihrem schlechtesten Erwartungsnutzen darin.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Enge Menge} & Fast wie die gewöhnliche Rechnung.\\
+\textbf{Weite Menge} & Nähert sich der Regel des schlimmsten Falles.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\kursiv{Beispiel:} Ist nur bekannt, dass $p$ zwischen $0{,}2$ und $0{,}5$ liegt:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{2.2cm}P{2.2cm}P{2.0cm}@{}}
+\toprule
+& $p = 0{,}2$ & $p = 0{,}5$ & \textbf{schlechtester}\\
+\midrule
+sofort & $0{,}910$ & $0{,}925$ & $0{,}910$\\
+warten & $0{,}932$ & $0{,}845$ & $0{,}845$\\
+testen & $0{,}952$ & $0{,}940$ & $\mathbf{0{,}940}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Auch hier gewinnt der Test --- und zwar unabhängig davon, wo in dem Bereich $p$ tatsächlich liegt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine solche Robustheitsaussage ist stärker als jede Punktschätzung}: Man braucht $p$ gar nicht zu kennen. Wo sie sich erreichen lässt, sollte man sie berichten --- und wo nicht, wenigstens angeben, bei welchem $p$ die Empfehlung kippt. Das ist die Schwellenanalyse aus Kapitel~5, hier auf eine unbekannte Wahrscheinlichkeit angewandt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was Vorsicht kostet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Lähmung} & Wer stets den schlimmsten Fall bewertet, unterlässt fast jede Behandlung --- denn fast jede kann schaden.\\
+\textbf{Reihenfolge} & Die Minimax-Reue kann durch Hinzufügen einer dritten, schlechten Handlung die Rangfolge der beiden anderen umkehren.\\
+\textbf{Willkür} & Wie weit man die Verteilungsmenge wählt, ist selbst eine Setzung --- man hat die Unsicherheit nur verschoben.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die zweite Zeile ist ein ernster formaler Einwand: \textbf{Die Reue verletzt die Unabhängigkeit von unbeteiligten Möglichkeiten} --- dieselbe Eigenschaft, an der in Kapitel~13 die Gruppenentscheidung scheitert. Wer sie benutzt, sollte die Liste der betrachteten Handlungen vorher festlegen und nicht nachträglich erweitern.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- Ellsberg rechnen}
+Zeigen Sie, dass die Wahl $A$ und $D$ mit keiner Wahrscheinlichkeitsverteilung vereinbar ist.
+
+\loesung
+\schritt{Schritt 1 --- Die Anteile}
+$\Pr[\text{rot}] = \tfrac13$; $\Pr[\text{schwarz}] = s$, $\Pr[\text{gelb}] = \tfrac23 - s$.
+
+\schritt{Schritt 2 --- Die erste Wahl}
+\[ A \succ B \quad\Longrightarrow\quad \tfrac13 > s \]
+
+\schritt{Schritt 3 --- Die zweite Wahl}
+\[ C: \ \tfrac13 + \bigl(\tfrac23 - s\bigr) = 1 - s, \qquad D: \ s + \bigl(\tfrac23 - s\bigr) = \tfrac23 \]
+\[ D \succ C \quad\Longrightarrow\quad \tfrac23 > 1 - s \quad\Longrightarrow\quad s > \tfrac13 \]
+
+\schritt{Schritt 4 --- Der Widerspruch}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$s < \tfrac13$ und $s > \tfrac13$ zugleich.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bemerkenswert ist, dass die gelben Kugeln in beiden Vergleichen gleich beitragen} --- $\tfrac23 - s$ in $C$ wie in $D$. Nach der Unabhängigkeitsregel dürften sie die Rangfolge also nicht ändern. Sie tun es, weil sie in der einen Wette die Unsicherheit beseitigen und in der anderen nicht. Genau das ist der Punkt: Menschen bewerten nicht nur Ergebnisse, sondern auch, wie gut sie die Lage kennen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- Bei welchem $p$ kippt es?}
+Für welche Anteile $p$ bakterieller Infektionen ist welche Handlung die beste?
+
+\loesung
+\schritt{Schritt 1 --- Die drei Geraden}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{4.2cm}@{}}
+\toprule
+sofort & $0{,}90 + 0{,}05\,p$\\
+warten & $0{,}99 - 0{,}29\,p$\\
+testen & $0{,}96 - 0{,}04\,p$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Die Schnittpunkte}
+\kursiv{Warten gegen Testen:}
+\[ 0{,}99 - 0{,}29p = 0{,}96 - 0{,}04p \quad\Longrightarrow\quad 0{,}03 = 0{,}25p \quad\Longrightarrow\quad p = 0{,}12 \]
+\kursiv{Testen gegen Sofortbehandlung:}
+\[ 0{,}96 - 0{,}04p = 0{,}90 + 0{,}05p \quad\Longrightarrow\quad 0{,}06 = 0{,}09p \quad\Longrightarrow\quad p = 0{,}67 \]
+
+\schritt{Schritt 3 --- Die Bereiche}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{3.0cm}@{}}
+\toprule
+$p < 0{,}12$ & warten\\
+$0{,}12 < p < 0{,}67$ & \textbf{testen}\\
+$p > 0{,}67$ & sofort behandeln\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das sind die zwei Schwellen aus Kapitel~4, hier aus den Nutzenwerten hergeleitet statt aus Likelihood-Verhältnissen.} Beide Rechnungen führen zum selben Bild: Zwischen den Schwellen testet man, außerhalb handelt man. Und die Ambiguität aus Abschnitt 11.2 stört nur, wenn der unsichere Bereich eine Schwelle überschreitet --- $0{,}2$ bis $0{,}5$ liegt ganz im Testbereich.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Die Reue umkehren}
+Man füge eine vierte Handlung hinzu, die in beiden Zuständen schlecht ist: $0{,}60$ bei bakteriell, $0{,}85$ bei viral. Was geschieht mit der Minimax-Reue?
+
+\loesung
+\schritt{Schritt 1 --- Die neuen Bestwerte}
+Unverändert: $0{,}95$ bei bakteriell, $0{,}99$ bei viral --- die neue Handlung ist nirgends die beste.
+
+\schritt{Schritt 2 --- Die Reuetafel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{1.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+& \textbf{bakt.} & \textbf{viral} & \textbf{größte}\\
+\midrule
+sofort & $0{,}00$ & $0{,}09$ & $0{,}09$\\
+warten & $0{,}25$ & $0{,}00$ & $0{,}25$\\
+testen & $0{,}03$ & $0{,}03$ & $\mathbf{0{,}03}$\\
+neu & $0{,}35$ & $0{,}14$ & $0{,}35$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Hier ändert sich nichts --- die Rangfolge bleibt.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Wann es doch geschieht}
+Man ersetze die neue Handlung durch eine mit $0{,}99$ bei bakteriell und $0{,}50$ bei viral:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.2cm}P{1.8cm}P{1.8cm}P{2.0cm}@{}}
+\toprule
+& \textbf{bakt.} & \textbf{viral} & \textbf{größte}\\
+\midrule
+sofort & $0{,}04$ & $0{,}09$ & $0{,}09$\\
+warten & $0{,}29$ & $0{,}00$ & $0{,}29$\\
+testen & $0{,}07$ & $0{,}03$ & $\mathbf{0{,}07}$\\
+neu & $0{,}00$ & $0{,}49$ & $0{,}49$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die neue Handlung wird selbst nie gewählt --- \textbf{aber sie hebt den Bestwert bei \enquote{bakteriell} von $0{,}95$ auf $0{,}99$ und verschiebt damit alle Reuewerte in dieser Spalte.} Hier bleibt die Reihenfolge zufällig erhalten; bei anderen Zahlen kehrt sie sich um. Eine Entscheidungsregel, die von nie gewählten Möglichkeiten abhängt, ist schwer zu rechtfertigen --- und genau dieser Einwand trifft in Kapitel~13 auch die Mehrheitswahl.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Analytiker und zwei Urnen}
+\Person{Daniel Ellsberg} veröffentlichte den Urnenversuch 1961 in seiner Doktorarbeit.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er arbeitete damals als Militäranalytiker bei der RAND Corporation an Entscheidungen unter nuklearer Bedrohung --- einer Lage, in der niemand Wahrscheinlichkeiten kennt. \textbf{Zehn Jahre später gab derselbe Ellsberg die Pentagon-Papiere an die Presse}, was zu einem der größten Prozesse der amerikanischen Pressegeschichte führte. Sein Beitrag zur Entscheidungstheorie blieb daneben fast unbemerkt.}
+\end{minipage}
+\end{center}
+
+\schritt{Knight und die Unternehmer}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Frank Knight} unterschied bereits 1921 zwischen messbarem Risiko und unmessbarer Ungewissheit. \textbf{Nur die zweite, meinte er, begründe den Unternehmergewinn} --- messbares Risiko lasse sich versichern und werfe deshalb nichts ab. Die Unterscheidung ist bis heute unter dem Namen \enquote{Knightsche Ungewissheit} geläufig.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Robustheit heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Robuste Optimierung} & Die beste Lösung für die schlechteste Lage in einem Bereich --- Band 19.\\
+\textbf{Verteilungsrobust} & Schutz gegen Verschiebungen der Datenverteilung --- Band 22, Kapitel~15.\\
+\textbf{Mehrere Vorverteilungen} & Bayessche Rechnung mit einer Familie statt einer Vorverteilung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das Sepsis-Warnsystem aus Band 22 scheiterte an einer Verteilungsverschiebung. \textbf{Verteilungsrobuste Verfahren optimieren von vornherein für den schlechtesten Fall in einer Umgebung der Trainingsverteilung} --- sie sind also die Übertragung dieses Kapitels auf das maschinelle Lernen. Sie sagen schlechter vorher und brechen weniger ein; welcher Tausch richtig ist, entscheidet wieder eine Nutzenabwägung.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Risiko / Ambiguität} & bekannte gegen unsichere Wahrscheinlichkeit\\
+\textbf{Ellsberg} & mit keiner Verteilung vereinbar\\
+\textbf{Minimax-Reue} & begrenzt den Ärger hinterher\\
+\textbf{Verteilungs\-menge} & schlechtester Erwartungsnutzen\\
+\textbf{Der Bruchfall} & Lähmung und unbeteiligte Möglichkeiten\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Dieses Kapitel hat gezeigt, dass Menschen von den Regeln abweichen, wenn Wahrscheinlichkeiten unklar sind. Das nächste zeigt, dass sie es auch dann tun, wenn die Wahrscheinlichkeiten völlig klar sind.}
+\end{minipage}
+\end{center}
+\end{merksatz}

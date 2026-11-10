@@ -1,0 +1,293 @@
+\chapter{Entscheiden für viele}
+
+\section{Zwei Programme, dieselbe Summe}
+
+\begin{merksatz}
+\boxtitel{Der Fall}
+Zwei Programme kosten gleich viel und bringen zusammen je $50$ gewonnene Lebensjahre bei $100$ Patienten.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{3.0cm}P{2.4cm}@{}}
+\toprule
+\textbf{Programm} & \textbf{Verteilung} & \textbf{Summe}\\
+\midrule
+$A$ & jeder $+0{,}5$ Jahre & $50$\\
+$B$ & $25$ Patienten $+2$, die übrigen nichts & $50$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Summe entscheidet nicht --- sie ist gleich.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.2cm}P{2.2cm}@{}}
+\toprule
+\textbf{Maß} & $A$ & $B$\\
+\midrule
+Summe & $50$ & $50$\\
+Gini & $0{,}00$ & $\mathbf{0{,}75}$\\
+Summe der Wurzeln & $\mathbf{70{,}7}$ & $35{,}4$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die dritte Zeile ist eine Bewertung, keine Messung}: Wer die Wurzel des Gewinns summiert, bevorzugt die gleichmäßige Verteilung --- genau wie eine gekrümmte Nutzenfunktion in Kapitel~2 den sicheren Betrag bevorzugt. Die Krümmung drückt dort Risikoscheu aus, hier Ungleichheitsscheu. Wer nur Summen vergleicht, hat sich für die gerade Linie entschieden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Vier Einwände gegen die Summe}
+
+\begin{merksatz}
+\boxtitel{Was das QALY nicht sieht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Verteilung} & Wer wenig hat, zählt genauso wie wer viel hat.\\
+\textbf{Behinderung} & Wer bereits eingeschränkt lebt, kann durch dieselbe Behandlung weniger QALY gewinnen --- und wird deshalb nachrangig.\\
+\textbf{Alter} & Wer jünger ist, gewinnt mehr Jahre. Die Rechnung bevorzugt Junge, ohne es zu sagen.\\
+\textbf{Rettungspflicht} & Ein identifizierbarer Mensch in Not wiegt in der Wahrnehmung schwerer als viele namenlose.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile, gerechnet}
+Eine Behandlung verlängert das Leben um fünf Jahre.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.8cm}P{2.2cm}P{2.4cm}@{}}
+\toprule
+\textbf{Patient} & \textbf{Nutzen/Jahr} & \textbf{Gewinn}\\
+\midrule
+ohne Einschränkung & $1{,}0$ & $5{,}0$ QALY\\
+im Rollstuhl & $0{,}7$ & $3{,}5$ QALY\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dieselbe Behandlung, dieselben fünf Jahre --- und $30$ Prozent weniger Anspruch.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der schwerste Einwand gegen die Verwendung des QALY zur Priorisierung.} Er trifft nicht die Rechnung, sondern ihre Verwendung: Als Maß für den Gewinn \kursiv{eines} Patienten ist das QALY sinnvoll; als Maß dafür, wessen Behandlung Vorrang hat, benachteiligt es systematisch die bereits Benachteiligten. Einige Länder haben deshalb Zusatzgewichte eingeführt oder das Maß ganz verboten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was passiert, wenn man nicht rechnet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.52}
+\begin{tabular}{@{}P{2.6cm}P{6.0cm}@{}}
+\toprule
+\textbf{Verdeckte Rationierung} & Wer die Abwägung nicht ausspricht, trifft sie trotzdem --- über Wartezeiten, Zuzahlungen, Zugangshürden.\\
+\textbf{Ungleichheit} & Die verdeckte Form trifft regelmäßig die Schwächeren stärker als eine offene Regel.\\
+\textbf{Unprüfbarkeit} & Eine unausgesprochene Regel lässt sich nicht kritisieren und nicht verbessern.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Verteidigung der Rechnung, und sie ist stark}: Der Vergleich ist nicht \enquote{Rechnung gegen ärztliches Urteil}, sondern \enquote{offene Regel gegen verdeckte}. Zugleich bleibt der Einwand des vorigen Abschnitts bestehen. Beides zusammen ergibt die vernünftige Haltung: rechnen, das Ergebnis aussprechen --- und die Abweichungen von der Summe ebenfalls begründen, statt sie zu verschweigen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- Gewichtete Bewertung}
+Bewerten Sie die Programme $A$ und $B$ mit $\sum \sqrt{x_i}$ und mit $\sum x_i$. Welches Gewicht hat die Ungleichheitsscheu?
+
+\loesung
+\schritt{Schritt 1 --- Die Summen}
+\[ A: \ 100\cdot0{,}5 = 50, \qquad B: \ 25\cdot2 = 50 \]
+
+\schritt{Schritt 2 --- Die Wurzelsummen}
+\[ A: \ 100\cdot\sqrt{0{,}5} = 100\cdot0{,}7071 = 70{,}71 \]
+\[ B: \ 25\cdot\sqrt{2} = 25\cdot1{,}4142 = 35{,}36 \]
+
+\schritt{Schritt 3 --- Der Umschlagpunkt}
+Wie viel müsste $B$ je Begünstigtem bringen, um gleichzuziehen?
+\[ 25\sqrt{g} = 70{,}71 \quad\Longrightarrow\quad \sqrt{g} = 2{,}828 \quad\Longrightarrow\quad g = 8{,}0 \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$B$ müsste jedem Begünstigten acht statt zwei Jahre bringen --- also die vierfache Gesamtsumme.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Wurzel ist eine sehr starke Ungleichheitsscheu.} Man kann sie abschwächen ($x^{0{,}8}$) oder verschärfen ($\ln x$); jede Wahl ist eine Setzung, und sie sollte ausgesprochen werden. Wichtiger als die Wahl selbst ist, dass sie einmal getroffen und dann auf alle Programme gleich angewandt wird --- sonst entscheidet wieder der Einzelfall.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- Das Alter in der Rechnung}
+Zwei Patienten, $30$ und $70$ Jahre alt, brauchen dieselbe Behandlung; es gibt nur eine. Wie entscheiden verschiedene Maßstäbe?
+
+\loesung
+\schritt{Schritt 1 --- Gewonnene Jahre}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.0cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Alter} & \textbf{Restleben} & \textbf{Gewinn}\\
+\midrule
+$30$ & $50$ Jahre & $\mathbf{50}$\\
+$70$ & $15$ Jahre & $15$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 2 --- Drei Maßstäbe}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{2.6cm}@{}}
+\toprule
+\textbf{Maßstab} & \textbf{Wahl} & \textbf{Begründung}\\
+\midrule
+gewonnene Jahre & $30$-Jähriger & mehr Nutzen\\
+gleiche Chance & Los & gleiches Recht\\
+faire Lebensspanne & $30$-Jähriger & hatte weniger\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bemerkenswert ist, dass der erste und der dritte Maßstab zum selben Ergebnis kommen --- aus entgegengesetzten Gründen.} Der eine zählt den künftigen Nutzen, der andere das bisher Erhaltene. In der Zuteilung knapper Intensivbetten wurden 2020 beide Begründungen benutzt; die deutschen Empfehlungen entschieden sich ausdrücklich \kursiv{gegen} das Alter als eigenständiges Kriterium und für die kurzfristige Überlebenswahrscheinlichkeit.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Warum das kein Rechenproblem ist}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Alle drei Maßstäbe sind widerspruchsfrei. Die Mathematik sagt nicht, welcher gilt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Der Leitfall, zum letzten Mal}
+Frau B.\ soll das neue, teurere Mittel erhalten. Aus Kapitel~10: ICER $45\,004$ Euro je QALY, Schwelle $20\,000$. Was folgt?
+
+\loesung
+\schritt{Schritt 1 --- Aus Sicht der Patientin}
+\[ +0{,}26 \ \text{QALY} \quad\Longrightarrow\quad \text{das Mittel ist besser} \]
+
+\schritt{Schritt 2 --- Aus Sicht der Gesamtheit}
+\[ 11\,656 \ \text{Euro verdrängen} \ \frac{11\,656}{20\,000} = 0{,}58 \ \text{QALY anderswo} \]
+\[ \text{Bilanz: } +0{,}26 - 0{,}58 = \mathbf{-0{,}32} \ \text{QALY} \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Für Frau B.\ ist es die bessere Behandlung. Für die Bevölkerung ist es ein Verlust.}
+\end{minipage}
+\end{center}
+
+\schritt{Schritt 3 --- Was folgt daraus \kursiv{nicht}}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Nicht:} & Der Arzt soll am Bett die Bevölkerungsrechnung anstellen.\\
+\textbf{Sondern:} & Die Regel, welche Mittel zur Verfügung stehen, wird an anderer Stelle gesetzt --- und dort gehört die Rechnung hin.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Diese Arbeitsteilung ist der einzige Weg, beide Loyalitäten zu wahren}: Der Arzt vertritt seinen Patienten, das Gemeinwesen setzt den Rahmen. Wer beides in einer Person vereint, macht den Arzt zum Sachwalter fremder Interessen am Krankenbett --- und zerstört das Vertrauen, ohne die Verteilungsfrage besser zu lösen. Die dritte Warnung des Vorworts ist damit keine Rechenaufgabe, sondern eine Frage der Zuständigkeit.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Oregon und die Liste}
+Der US-Bundesstaat Oregon stellte 1990 eine Rangliste von $709$ Leistungen auf, um die staatliche Krankenversicherung auf mehr Menschen auszudehnen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die erste Fassung ordnete rein nach Kosten je QALY --- und setzte die Zahnkappe vor die Blinddarmoperation, weil sie billiger war und oft gebraucht wird. \textbf{Die Liste wurde zurückgezogen und nach ärztlichem Urteil neu geordnet}; erst diese Fassung wurde umgesetzt. Sie gilt als Lehrstück dafür, dass eine Rechnung, die formal richtig ist, an der öffentlichen Beurteilung scheitern kann.}
+\end{minipage}
+\end{center}
+
+\schritt{Und ein Verbot}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die amerikanische Gesundheitsreform von 2010 untersagte der eingerichteten Forschungsagentur ausdrücklich, Kosten je QALY als Schwelle zu verwenden --- mit der Begründung, das Maß benachteilige Menschen mit Behinderungen und ältere Patienten. \textbf{In Deutschland wird der Nutzen neuer Arzneimittel bewertet, ein ausdrücklicher Schwellenwert je QALY aber nicht genannt}; die Abwägung geschieht in Preisverhandlungen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Verteilung heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.4cm}P{4.8cm}@{}}
+\toprule
+\textbf{Verteilungsbezogene Analyse} & Wer gewinnt und wer verliert, nicht nur wie viel.\\
+\textbf{Gewichte aus Befragungen} & Wie stark die Bevölkerung Ungleichheit scheut.\\
+\textbf{Verfahren statt Formel} & Rechtfertigung durch nachvollziehbare Verfahren.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\Person{Norman Daniels} und \Person{James Sabin} schlugen vor, Priorisierungen nicht durch eine Formel zu rechtfertigen, sondern durch ein Verfahren: öffentliche Begründung, einschlägige Gründe, Berufungsmöglichkeit, Durchsetzung. \textbf{Das verschiebt die Frage von \enquote{welche Rechnung ist richtig} zu \enquote{welches Verfahren ist fair}} --- und entspricht genau dem, was Satz 13.1 nahelegt: Da es die richtige Aggregation nicht gibt, muss die Legitimität aus dem Weg zur Entscheidung kommen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Gleiche Summe} & sehr verschiedene Verteilung\\
+\textbf{Ungleichheits\-scheu} & Krümmung wie bei der Risikoscheu\\
+\textbf{Vier Einwände} & Verteilung, Behinderung, Alter, Rettung\\
+\textbf{Verdeckt} & wer nicht rechnet, teilt trotzdem zu\\
+\textbf{Zuständigkeit} & Bett und Rahmen trennen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Damit endet Teil~V. Das letzte Kapitel zieht Bilanz --- und kehrt ein letztes Mal zu Frau B.\ zurück.}
+\end{minipage}
+\end{center}
+\end{merksatz}

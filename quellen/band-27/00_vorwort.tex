@@ -1,0 +1,122 @@
+\chapter*{Vorwort}
+\addcontentsline{toc}{chapter}{Vorwort}
+
+\begin{merksatz}
+\boxtitel{Die Zahlen dieser Reihe}
+Fast jede Zahl der Bände 16 bis 26 stammt aus einer Simulation: Zwanzigtausend Irrfahrten, zweihunderttausend Versicherte, fünftausend Paare von Zeitreihen. Die Bände haben diese Zahlen benutzt, als wären sie berechnet. Dieser Band fragt, was sie wirklich sind.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{6.4cm}@{}}
+\toprule
+\textbf{Band 18} & Epidemien, gezogen aus Zufallszahlen, die ein Rechner erzeugt hat.\\
+\textbf{Band 22} & Lernkurven über hundert Wiederholungen --- mit welchem Fehlerbalken?\\
+\textbf{Band 25} & Brownsche Pfade mit $10^{6}$ Schritten --- wie nahe an der Theorie?\\
+\textbf{Band 26} & Scheinregression in $77$ Prozent der Fälle --- plus oder minus wie viel?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Simulation ist ein Experiment. Sie hat Fehler, Verzerrungen und Grenzen wie jedes andere --- und sie verlangt dieselbe Sorgfalt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Drei Ergebnisse, die man nicht erwartet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{1.0cm}P{7.4cm}@{}}
+\toprule
+$1$ & Ein Zufallsgenerator, der jahrzehntelang in Gebrauch war, erzeugt Punkte, die vollständig auf fünfzehn Ebenen liegen --- und bestand alle gängigen Tests. \kursiv{(Kapitel 2)}\\
+$2$ & In zwanzig Dimensionen hat ein Gitter mit einer Million Punkten nur zwei Punkte je Achse; Zufallspunkte stören sich daran nicht. \kursiv{(Kapitel 3)}\\
+$3$ & Man kann eine Simulation hundertmal genauer machen, ohne sie hundertmal länger laufen zu lassen --- indem man denselben Zufall zweimal benutzt. \kursiv{(Kapitel 5)}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Das zweite Ergebnis ist der Grund, warum es diesen Band gibt. \textbf{Oberhalb von vier oder fünf Dimensionen versagt jede systematische Rechnung}, und die Zufallsmethode wird vom Notbehelf zur einzigen Möglichkeit. Fast alle Fragen der zweiten Werkhälfte --- Integrale über Patientenmerkmale, über Pfade, über Parameter --- sind hochdimensional.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die sechs Teile}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{3.6cm}P{3.0cm}@{}}
+\toprule
+\textbf{Teil} & \textbf{Thema} & \textbf{Kapitel}\\
+\midrule
+I & Der Zufall im Rechner & $1$--$3$\\
+II & Genauer werden & $4$--$6$\\
+III & Ketten und Pfade & $7$--$9$\\
+IV & Systeme über die Zeit & $10$--$12$\\
+V & Die Praxis & $13$--$14$\\
+VI & Stand & $15$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Der Leitfall}
+Eine Intensivstation mit zwölf Betten. Patienten treffen zufällig ein, bleiben unterschiedlich lange, und wer kein Bett findet, muss verlegt werden. Wie oft geschieht das --- und was ändert ein dreizehntes Bett?
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Frage ist einfach genug, um sie im Sonderfall exakt zu lösen, und realistisch genug, um das sofort zu verlieren}: Sobald Dringlichkeit, Tageszeit oder die Abhängigkeit der Verweildauer von der Auslastung hinzukommen, gibt es keine Formel mehr. Dann bleibt die Simulation --- und die Frage, wie weit man ihr trauen darf.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{warnung}
+\boxtitelr{Drei Warnungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}P{2.2cm}P{6.4cm}@{}}
+\toprule
+\textbf{Erste} & Eine Simulation ohne Fehlerbalken ist eine Anekdote. Jede Zahl braucht ihre Streuung.\\
+\textbf{Zweite} & Der Fehler fällt mit $1/\sqrt n$. Zehnmal genauer heißt hundertmal länger --- es sei denn, man ist klug.\\
+\textbf{Dritte} & Was man simuliert, ist das Modell. Die Simulation prüft die Rechnung, nicht die Annahmen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die dritte Warnung verbindet diesen Band mit Band 23 und 26. \textbf{Eine Simulation kann zeigen, dass ein Schätzer unter den eigenen Annahmen funktioniert} --- so wurde es in Band 26 durchgehend getan. Ob die Annahmen gelten, kann sie nicht zeigen; dafür gibt es keine Rechnung.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\begin{merksatz}
+\boxtitel{Was dieser Band voraussetzt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.4cm}P{1.4cm}P{2.8cm}@{}}
+\toprule
+\textbf{Werkzeug} & \textbf{Band} & \textbf{gebraucht in}\\
+\midrule
+Wahrscheinlichkeit & $4$ & durchgehend\\
+Numerik & $5$ & Kapitel 10--12\\
+Statistik & $17$ & Kapitel 4, 13\\
+Markow-Ketten & $25$ & Kapitel 7--9\\
+Differential\-gleichungen & $14$ & Kapitel 10--11\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle Rechnungen dieses Bandes sind in wenigen Zeilen Python nachvollziehbar}; der Code steht im Anhang und im Quellenverzeichnis der Reihe. Das ist hier kein Zusatz, sondern der Gegenstand.}
+\end{minipage}
+\end{center}
+\end{merksatz}
