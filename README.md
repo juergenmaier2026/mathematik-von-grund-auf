@@ -60,11 +60,14 @@ Die Bände 29 und 30 sind Grundlagenbände, die nach der zweiten Werkhälfte ges
 
 Die Zahlen der Anwendungsbände (16–28) stammen aus Simulationen, die im Text nachvollziehbar sind. Die Skripte dazu liegen unter `simulationen/` — ein Skript je Kapitel, mit festem Startwert, das die Tabellen des Buches erzeugt und die gedruckten Zahlen nennt; `python3 test_alles.py` prüft alle auf einmal. Für Band 29 liegt dort ein Gröbner-Basen-Rechner (`band-29/poly.py`), für Band 30 ein Charaktertafel-Rechner (`band-30/rep.py`).
 
+Zur Reihe entsteht eine **Aufgabensammlung** in zwei Teilbänden (Aufgaben / Lösungen), nach Gebieten geordnet: typische Aufgaben, Stolpersteine mit dem jeweils häufigen Fehler, und die Übungsaufgaben der Bände mit ausführlicher Lösung. Sie liegt unter `aufgabensammlung/` als Arbeitsfassung; die fertigen Gebiete (derzeit 0–9, Schulmathematik bis Differentialgleichungen, 420 Aufgaben) sind benutzbar, die weiteren folgen in Bandreihenfolge.
+
 ## Verzeichnisse
 
 - `pdf/` — alle Bände als PDF, fertig gesetzt
 - `quellen/band-NN/` — LaTeX-Quelltexte der Bände 16 bis 30 und des Gesamtverzeichnisses, jeweils mit Impressum (die Quellen der Bände 0–15 und B werden nachgetragen)
 - `simulationen/` — die Simulations- und Rechenskripte zu elf Bänden (Python, NumPy, SciPy)
+- `aufgabensammlung/` — Aufgabensammlung zur Reihe, zwei Teilbände als PDF samt Quelltexten (Arbeitsfassung, Gebiete 0–9)
 - `docs/` — die Website
 
 Bauen eines Bandes: `cd quellen/band-23 && pdflatex haupt.tex && pdflatex haupt.tex` (TeX Live mit Palatino, TikZ, booktabs, longtable).
@@ -81,7 +84,7 @@ Für einzelne Bände: *Maier, J. (2026). Mathematik von Grund auf, Band 23: Wora
 
 ## Fassungen
 
-- **1.1.0** (Oktober 2026): Bände 27–30 neu (numerische Simulation, dynamische Systeme, algebraische Geometrie, Darstellungstheorie); Gesamtverzeichnis auf 32 Bände erweitert; Ordner `simulationen/` mit den Skripten zu elf Bänden; Layoutkorrektur in den Bänden 27–30 (keine verwaisten Überschriften mehr vor Kästen).
+- **1.1.0** (Oktober 2026): Bände 27–30 neu (numerische Simulation, dynamische Systeme, algebraische Geometrie, Darstellungstheorie); Gesamtverzeichnis auf 32 Bände erweitert; Ordner `simulationen/` mit den Skripten zu elf Bänden; Layoutkorrektur in den Bänden 27–30 (keine verwaisten Überschriften mehr vor Kästen); Aufgabensammlung als Arbeitsfassung (Gebiete 0–9) beigelegt.
 - **1.0.2** (Oktober 2026): DOI im Impressum aller Bände, Metadaten für OERSI, Quelltexte der Bände 16–26.
 - **1.0.1** / **1.0** (Oktober 2026): Erstveröffentlichung, 28 Bände.
 
