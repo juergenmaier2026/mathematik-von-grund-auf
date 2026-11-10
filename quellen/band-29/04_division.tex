@@ -1,0 +1,306 @@
+\part{Rechnen mit Idealen}
+
+\chapter{Ordnen und Teilen}
+
+\section{Ein Rest, der von der Reihenfolge abhängt}
+
+\begin{merksatz}
+\boxtitel{Dasselbe Polynom, zwei Reste}
+Man teile $f = xy^{2} + 1$ durch $g_1 = xy + 1$ und $g_2 = y + 1$, mit $x > y$ und dem größten Monom zuerst:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{4.2cm}P{4.4cm}@{}}
+\toprule
+\textbf{Reihenfolge $g_1, g_2$} & \textbf{Reihenfolge $g_2, g_1$}\\
+\midrule
+$xy^{2} + 1 = y\cdot(xy + 1) + (-y + 1)$ & $xy^{2} + 1 = (xy - x)\cdot(y + 1) + (x + 1)$\\
+$-y + 1 = (-1)\cdot(y + 1) + 2$ & $x + 1$: kein Leitmonom passt\\
+Rest $\mathbf 2$ & Rest $\mathbf{x + 1}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In einer Veränderlichen ist der Rest eindeutig; in zweien hängt er von der Reihenfolge der Teiler ab. Keiner der beiden Reste ist null --- und doch liegt $f$ im Ideal $\langle g_1, g_2\rangle$: $xy^{2} + 1 = y\,g_1 - g_2 + 2$, also $2 = f - y\,g_1 + g_2\in\langle g_1, g_2\rangle$, also $1\in\langle g_1, g_2\rangle$, also ist das Ideal der ganze Ring.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für den Leitfall}: Teilt man die Hyperbel $g$ durch $f_1, f_2, f_3$, in welcher Reihenfolge auch immer, so bleibt $g$ als Rest --- obwohl $g$ im Ideal liegt (Kapitel 2). Die Division, so wie man sie aus der Schule kennt, taugt in mehreren Veränderlichen nicht als Zugehörigkeitstest. Dieses Kapitel macht sie zunächst wohldefiniert --- durch eine Ordnung der Monome --- und zeigt dann genau, was ihr fehlt. Kapitel 5 liefert das Fehlende.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Monomordnungen}
+
+\begin{definition}
+\boxtitelm{Definition 4.1 --- Monomordnung}
+Eine \Begriff{Monomordnung} auf $k[x_1, \ldots, x_n]$ ist eine Totalordnung $>$ auf den Monomen $x^{\alpha}$, $\alpha\in\mathbb N^{n}$, mit
+\begin{enumerate}[label=(\roman*), leftmargin=1.8em]
+\item $x^{\alpha} > x^{\beta}\Rightarrow x^{\alpha}x^{\gamma} > x^{\beta}x^{\gamma}$ für alle $\gamma$ (verträglich mit Multiplikation);
+\item jede nichtleere Menge von Monomen hat ein kleinstes Element (Wohlordnung).
+\end{enumerate}
+Für $f = \sum c_{\alpha}x^{\alpha}\ne0$ heißt das größte $x^{\alpha}$ mit $c_{\alpha}\ne0$ das \Begriff{Leitmonom} $\mathrm{LM}(f)$, $c_{\alpha}$ der \Begriff{Leitkoeffizient} $\mathrm{LC}(f)$ und $\mathrm{LT}(f) = \mathrm{LC}(f)\,\mathrm{LM}(f)$ der \Begriff{Leitterm}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 4.2 --- drei Ordnungen, die man braucht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{6.6cm}@{}}
+\toprule
+\textbf{lex} & $x^{\alpha} > x^{\beta}$, wenn der erste von null verschiedene Eintrag von $\alpha - \beta$ positiv ist. Wie im Wörterbuch: $x$ schlägt jede Potenz von $y$.\\
+\textbf{grlex} & erst nach Gesamtgrad $|\alpha|$, bei Gleichheit lex.\\
+\textbf{grevlex} & erst nach Gesamtgrad, bei Gleichheit gewinnt, wer die \kursiv{kleinere} Potenz der \kursiv{letzten} Veränderlichen hat (der letzte von null verschiedene Eintrag von $\alpha - \beta$ ist negativ).\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Alle drei sind Monomordnungen.
+
+\schritt{Beweis für lex}
+Totalordnung: Zwei verschiedene Exponentenvektoren unterscheiden sich an einer ersten Stelle. (i): $(\alpha + \gamma) - (\beta + \gamma) = \alpha - \beta$. (ii): Sei $S$ eine nichtleere Menge von Monomen. Wäre $x^{\alpha(1)} > x^{\alpha(2)} > \cdots$ eine unendlich absteigende Kette in $S$, so wäre die Folge der ersten Exponenten $\alpha_1(j)$ monoton fallend in $\mathbb N$, also schließlich konstant; dann die zweite, usw. --- nach $n$ Schritten konstant in allen Einträgen, Widerspruch. Also hat $S$ ein kleinstes Element. $\blacksquare$\ (Für grlex und grevlex ebenso, mit dem Gesamtgrad als erstem Kriterium.)
+
+\schritt{Beispiel}
+Für $f = 4xy^{2}z + 4z^{2} - 5x^{3} + 7x^{2}z^{2}$ mit $x > y > z$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{4.6cm}P{2.0cm}@{}}
+\toprule
+ & \textbf{Terme geordnet} & $\mathrm{LT}$\\
+\midrule
+lex & $-5x^{3} + 7x^{2}z^{2} + 4xy^{2}z + 4z^{2}$ & $-5x^{3}$\\
+grlex & $7x^{2}z^{2} + 4xy^{2}z - 5x^{3} + 4z^{2}$ & $7x^{2}z^{2}$\\
+grevlex & $4xy^{2}z + 7x^{2}z^{2} - 5x^{3} + 4z^{2}$ & $4xy^{2}z$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+(grevlex: $xy^{2}z$ und $x^{2}z^{2}$ haben beide Grad $4$; $z$-Exponent $1 < 2$, also gewinnt $xy^{2}z$.)
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Welche Ordnung man wählt, ist keine Geschmacksfrage}: lex eliminiert Veränderliche --- eine lex-Gröbner-Basis ist \enquote{dreieckig} wie ein Gleichungssystem nach Gauß (Kapitel 6) ---, ist aber teuer. grevlex ist die Ordnung, in der Gröbner-Basen am kleinsten ausfallen, aus Gründen, die man nur teilweise versteht; für Dimension und Hilbert-Polynom (Kapitel 7) ist sie die richtige. Alle Rechensysteme nehmen grevlex, wenn man nichts sagt, und wechseln zu lex, wenn man lösen will.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Division mit Rest}
+
+\begin{merksatz}
+\boxtitel{Satz 4.3 --- der Divisionsalgorithmus}
+Sei eine Monomordnung fixiert und $F = (g_1, \ldots, g_s)$ ein Tupel von Polynomen. Zu jedem $f$ gibt es $q_1, \ldots, q_s, r$ mit
+\[ f = q_1g_1 + \cdots + q_sg_s + r , \]
+wobei kein Monom von $r$ durch ein $\mathrm{LM}(g_i)$ teilbar ist und $\mathrm{LM}(q_ig_i)\le\mathrm{LM}(f)$ für alle $i$. Der folgende Algorithmus findet sie.
+
+\schritt{Der Algorithmus}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{0.8cm}P{8.0cm}@{}}
+\toprule
+$1$ & Setze $p = f$, alle $q_i = 0$, $r = 0$.\\
+$2$ & Solange $p\ne0$: Suche das kleinste $i$ mit $\mathrm{LM}(g_i)\mid\mathrm{LM}(p)$.\\
+$3$ & Gibt es eines: $q_i\mathrel{+}= \mathrm{LT}(p)/\mathrm{LT}(g_i)$ und $p\mathrel{-}= \bigl(\mathrm{LT}(p)/\mathrm{LT}(g_i)\bigr)g_i$.\\
+$4$ & Gibt es keines: $r\mathrel{+}= \mathrm{LT}(p)$ und $p\mathrel{-}= \mathrm{LT}(p)$.\\
+$5$ & Am Ende: $f = \sum q_ig_i + r$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis}
+Invariante: $f = p + \sum q_ig_i + r$ gilt vor und nach jedem Schritt (man verschiebt nur Terme). In Schritt 3 verschwindet $\mathrm{LT}(p)$ und alle neuen Terme sind kleiner; in Schritt 4 verschwindet $\mathrm{LT}(p)$ ebenfalls. Also fällt $\mathrm{LM}(p)$ streng --- und eine streng fallende Folge von Monomen ist endlich (Wohlordnung). In $r$ landen nur Terme, deren Monom durch kein $\mathrm{LM}(g_i)$ teilbar war. $\blacksquare$
+
+\schritt{Das Eingangsbeispiel, Zeile für Zeile}
+$f = xy^{2} + 1$, $F = (xy + 1, y + 1)$, lex $x > y$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{1.2cm}P{1.2cm}P{1.2cm}P{3.0cm}@{}}
+\toprule
+$p$ & $q_1$ & $q_2$ & $r$ & \textbf{Schritt}\\
+\midrule
+$xy^{2} + 1$ & $0$ & $0$ & $0$ & $\mathrm{LM} = xy^{2}$, teilbar durch $xy$\\
+$-y + 1$ & $y$ & $0$ & $0$ & $\mathrm{LM} = y$, nicht durch $xy$, aber durch $y$\\
+$2$ & $y$ & $-1$ & $0$ & $\mathrm{LM} = 1$, durch nichts teilbar\\
+$0$ & $y$ & $-1$ & $2$ & fertig\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Algorithmus ist die Schuldivision mit zwei Änderungen}: Statt des höchsten Grades entscheidet die Monomordnung, und Terme, die durch kein Leitmonom teilbar sind, wandern in den Rest, auch wenn danach noch teilbare kommen. Die zweite Änderung ist der Grund für den Bruchfall: Ein Term kann im Rest landen, obwohl er, anders zerlegt, hätte verschwinden können.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was die Division nicht kann}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.4cm}@{}}
+\toprule
+\textbf{Eindeutigkeit} & Der Rest hängt von der Reihenfolge in $F$ ab: $2$ oder $x + 1$ oben.\\
+\textbf{Zugehörigkeit} & $r = 0$ beweist $f\in\langle F\rangle$. Aber $r\ne0$ beweist nichts: $g$ liegt im Leitfall-Ideal und hat Rest $g$.\\
+\textbf{Der Grund} & $f\in\langle F\rangle$ heißt $f = \sum h_ig_i$ --- aber die Leitterme der $h_ig_i$ können sich gegenseitig auslöschen, und dann ist $\mathrm{LM}(f)$ durch kein $\mathrm{LM}(g_i)$ teilbar.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Auslöschung, vorgeführt}
+$g_1 = x^{2} - y$, $g_2 = x^{3} - z$ (lex). Die Kombination $x\cdot g_1 - g_2 = x^{3} - xy - x^{3} + z = -xy + z$ hat Leitmonom $xy$, das weder durch $x^{2}$ noch durch $x^{3}$ teilbar ist: Die Leitterme $x^{3}$ haben sich ausgelöscht, und zurück bleibt ein Element des Ideals, das die Division nicht erkennt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Division erkennt genau die Elemente, deren Leitmonom durch ein Erzeuger-Leitmonom teilbar ist. Sie erkennt alle Elemente des Ideals genau dann, wenn die Leitmonome der Erzeuger alle Leitmonome des Ideals erzeugen: $\langle\mathrm{LM}(g_1), \ldots, \mathrm{LM}(g_s)\rangle = \mathrm{LM}(I)$. Das ist die Definition einer Gröbner-Basis, und die Auslöschung $x\,g_1 - g_2$ ist der Schlüssel, um sie zu finden.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Kombination $x g_1 - g_2$ heißt S-Polynom} --- $S$ für Subtraktion, oder Syzygie: Man multipliziert beide Erzeuger so, dass die Leitterme gleich werden, und zieht ab. Was übrig bleibt, ist entweder durch die Erzeuger teilbar (dann war die Auslöschung harmlos) oder nicht (dann fehlt ein Erzeuger, und das S-Polynom ist der Kandidat). \Person{Buchberger}s Einsicht von 1965 war, dass es genügt, alle Paare zu prüfen; Kapitel 5 beweist das.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Ordnen}
+Ordnen Sie die Monome $x^{3}$, $x^{2}y^{2}$, $xy^{3}z$, $y^{5}$, $xz^{4}$ nach lex, grlex und grevlex ($x > y > z$).
+
+\loesung
+\schritt{Schritt 1 --- Exponentenvektoren}
+$(3,0,0)$, $(2,2,0)$, $(1,3,1)$, $(0,5,0)$, $(1,0,4)$; Grade $3, 4, 5, 5, 5$.
+
+\schritt{Schritt 2 --- lex}
+Erster Eintrag entscheidet: $3 > 2 > 1 = 1 > 0$; bei $(1,3,1)$ gegen $(1,0,4)$ entscheidet der zweite: $3 > 0$. Also $x^{3} > x^{2}y^{2} > xy^{3}z > xz^{4} > y^{5}$.
+
+\schritt{Schritt 3 --- grlex}
+Grad zuerst: die drei vom Grad $5$ oben, untereinander lex: $xy^{3}z > xz^{4} > y^{5}$; dann $x^{2}y^{2}$, dann $x^{3}$. Also $xy^{3}z > xz^{4} > y^{5} > x^{2}y^{2} > x^{3}$.
+
+\schritt{Schritt 4 --- grevlex}
+Grad zuerst; unter den dreien vom Grad $5$: letzter Eintrag ($z$-Exponent) $1, 4, 0$ --- der kleinste gewinnt: $y^{5}$ ($z^{0}$) zuerst, dann $xy^{3}z$ ($z^{1}$), dann $xz^{4}$. Also $y^{5} > xy^{3}z > xz^{4} > x^{2}y^{2} > x^{3}$.
+
+\schritt{Probe}
+lex und grevlex setzen $y^{5}$ an entgegengesetzte Enden der Grad-$5$-Gruppe: lex bestraft das Fehlen von $x$, grevlex das Vorhandensein von $z$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{grevlex ist nicht \enquote{grlex rückwärts}}: Bei grlex gewinnt unter gleichem Grad, wer vorn mehr hat; bei grevlex, wer hinten weniger hat. Das ist meist dasselbe, aber nicht immer --- $x^{2}yz$ gegen $xy^{3}$: grlex sagt $x^{2}yz$ (mehr $x$), grevlex sagt $xy^{3}$ (kein $z$). Der Unterschied wirkt sich auf die Größe der Gröbner-Basen aus, und zwar zugunsten von grevlex.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Division in zwei Reihenfolgen}
+Teilen Sie $f = x^{2}y + xy^{2} + y^{2}$ durch $F = (xy - 1,\ y^{2} - 1)$ und durch $F' = (y^{2} - 1,\ xy - 1)$, lex $x > y$.
+
+\loesung
+\schritt{Schritt 1 --- $F$}
+$\mathrm{LM}(f) = x^{2}y$, teilbar durch $xy$: $q_1 = x$, $p = f - x(xy - 1) = xy^{2} + x + y^{2}$. $\mathrm{LM} = xy^{2}$, teilbar durch $xy$: $q_1 = x + y$, $p = xy^{2} + x + y^{2} - y(xy - 1) = x + y^{2} + y$. $\mathrm{LM} = x$, durch nichts teilbar: $r = x$, $p = y^{2} + y$. $\mathrm{LM} = y^{2}$, teilbar durch $y^{2}$: $q_2 = 1$, $p = y + 1$. Beide Terme in den Rest. Ergebnis: $f = (x + y)(xy - 1) + 1\cdot(y^{2} - 1) + (x + y + 1)$.
+
+\schritt{Schritt 2 --- $F'$}
+$x^{2}y$: nicht durch $y^{2}$, aber durch $xy$: $q_2 = x$, $p = xy^{2} + x + y^{2}$. $xy^{2}$: durch $y^{2}$ teilbar (jetzt zuerst geprüft): $q_1 = x$, $p = x + x + y^{2} = 2x + y^{2}$. $2x$: Rest. $y^{2}$: $q_1 = x + 1$, $p = 1$: Rest. Ergebnis: $f = (x + 1)(y^{2} - 1) + x(xy - 1) + (2x + 1)$.
+
+\schritt{Schritt 3 --- Probe}
+$F$: $(x + y)(xy - 1) = x^{2}y - x + xy^{2} - y$; $+ y^{2} - 1 + x + y + 1 = x^{2}y + xy^{2} + y^{2}$. \checkmark\ $F'$: $(x + 1)(y^{2} - 1) = xy^{2} - x + y^{2} - 1$; $+ x^{2}y - x + 2x + 1 = x^{2}y + xy^{2} + y^{2}$. \checkmark\ Reste $x + y + 1$ und $2x + 1$ --- verschieden.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Differenz der Reste, $y - x$, liegt im Ideal} --- sie muss, weil beide Reste $f$ modulo $I$ darstellen. Tatsächlich ist $y - x = y(xy - 1) - x(y^{2} - 1)$: wieder eine Auslöschung von Leittermen ($xy^{2}$ beide Male), wieder ein S-Polynom. Nimmt man $y - x$ als dritten Erzeuger hinzu, wird der Rest eindeutig (Kapitel 5): Er ist dann $2x + 1 \equiv 2y + 1$ --- und der kleinere, $2y + 1$, ist der kanonische.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Der Leitfall unter der Division}
+Teilen Sie $g = k_{12}k_{20} - \tfrac25k_{12} + \tfrac{3}{50}$ durch $(f_1, f_2, f_3)$ in lex mit $k_{10} > k_{12} > k_{21} > k_{20}$ und erklären Sie den Rest.
+
+\loesung
+\schritt{Schritt 1 --- Leitmonome}
+$\mathrm{LM}(f_1) = k_{10}$, $\mathrm{LM}(f_2) = k_{10}$, $\mathrm{LM}(f_3) = k_{10}k_{21}$. $\mathrm{LM}(g) = k_{12}k_{20}$.
+
+\schritt{Schritt 2 --- Division}
+Kein Monom von $g$ enthält $k_{10}$; also ist keines durch ein Leitmonom teilbar, und $r = g$, alle $q_i = 0$.
+
+\schritt{Schritt 3 --- Erklärung}
+$g = f_3 + (k_{10} - \tfrac25)f_1 - k_{10}f_2$ (Aufgabe 2.3): In dieser Darstellung haben $k_{10}f_1$ und $-k_{10}f_2$ den Leitterm $\pm k_{10}^{2}$, und sie löschen sich aus; $f_3$ und $-k_{10}f_2$ löschen $k_{10}k_{21}$ und $k_{10}k_{20}$ aus. Was bleibt, hat kein $k_{10}$ mehr --- und die Division, die nur Leitmonome der Erzeuger sieht, ist blind dafür.
+
+\schritt{Schritt 4 --- Die Reparatur, vorweg}
+Die Gröbner-Basis des Ideals (Kapitel 5) ist $\{k_{10} + k_{12} - \tfrac12,\ k_{21} + k_{20} - \tfrac25,\ g\}$: $g$ selbst gehört dazu. Teilt man $g$ durch sie, ist der Rest null. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Gröbner-Basis des Leitfalls ist genau das Gleichungssystem aus Kapitel 1}: zwei lineare Gleichungen und die Hyperbel, dreieckig in lex-Ordnung, mit $k_{10}$ oben und $k_{20}$ unten. Die Rechnung von Hand in Kapitel 1 --- einsetzen, vereinfachen --- war ein Buchberger-Algorithmus, ohne es zu wissen. Für größere Modelle weiß es der Rechner, und die Dreiecksform sagt sofort, welche Parameter frei bleiben: alle, die in keinem Leitmonom vorkommen. Hier $k_{20}$ --- oder, gleichwertig, $k_{12}$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Vom Euklidischen Algorithmus zur Monomordnung}
+Die Division mit Rest ist so alt wie die Mathematik --- \Person{Euklid}s Buch VII ---, und für Polynome in einer Veränderlichen kennt sie jede Schule. In mehreren Veränderlichen stand sie zwei Jahrtausende lang im Weg: Was ist der \enquote{Grad}, nach dem man teilt?
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Gauß} hatte 1816 lexikographisch geordnet, um symmetrische Funktionen zu behandeln; \Person{Macaulay} ordnete 1927 Monome, um Hilbertfunktionen zu berechnen, und bewies, dass jedes Ideal dieselbe Hilbertfunktion hat wie sein Leitmonomideal (Kapitel 7). \textbf{Dass eine Monomordnung Wohlordnung sein muss, damit die Division endet, ist \Person{Dickson}s Lemma von 1913, nochmals.} \Person{Gröbner} in Innsbruck ließ in den fünfziger Jahren Studenten Ideale \enquote{reduzieren}, ohne das Verfahren je aufzuschreiben; sein Doktorand \Person{Buchberger} tat es 1965 --- und nannte die Basen nach seinem Lehrer.}
+\end{minipage}
+\end{center}
+
+\schritt{Die grevlex-Ordnung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dass grevlex die beste Ordnung für Gröbner-Basen ist, wurde empirisch gefunden, als man in den achtziger Jahren erstmals größere Beispiele rechnete; \Person{Bayer} und \Person{Stillman} 1987 gaben eine teilweise Erklärung: Für generische Koordinaten hat die grevlex-Basis den kleinstmöglichen Grad, nämlich den Regularitätsindex des Ideals. \textbf{Seither ist grevlex die Voreinstellung jedes Systems}, und die Frage, warum sie auch in nicht-generischen Fällen so gut ist, ist offen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Ordnungen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Gröbner-Fächer} & Zu einem Ideal gibt es nur endlich viele verschiedene reduzierte Gröbner-Basen, eine je Kegel von Ordnungen (Mora--Robbiano 1988); der Fächer ist ein Polyeder, und man kann in ihm wandern.\\
+\textbf{Basiswechsel} & Statt lex direkt zu rechnen: grevlex berechnen, dann umwandeln (FGLM 1993 für nulldimensionale Ideale, Gröbner-Walk 1997) --- oft hundertmal schneller.\\
+\textbf{Gewichts\-ordnungen} & Jede Monomordnung ist durch eine Matrix von Gewichten darstellbar (Robbiano 1985); die Wahl der Gewichte ist ein Optimierungsproblem, das man für die jeweilige Aufgabe löst.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Trennung von \enquote{Basis berechnen} und \enquote{Basis umordnen} ist die wichtigste praktische Einsicht der neunziger Jahre.} Die grevlex-Basis ist klein und schnell; die lex-Basis, die man zum Lösen braucht, ist groß und langsam --- aber aus der einen lässt sich die andere durch lineare Algebra im Koordinatenring gewinnen, ohne noch einmal S-Polynome zu bilden. Für den Leitfall mit vier Veränderlichen ist das gleichgültig; für Kompartimentmodelle mit zwanzig Parametern ist es der Unterschied zwischen Sekunden und Tagen, und die Programme der strukturellen Identifizierbarkeit tun genau das.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 4.1} & Monomordnung: verträglich, wohlgeordnet; $\mathrm{LM}$, $\mathrm{LC}$, $\mathrm{LT}$\\
+\textbf{Satz 4.2} & lex, grlex, grevlex\\
+\textbf{Satz 4.3} & Division mit Rest: existiert, endet, Rest frei von Leitmonomen\\
+\textbf{Der Bruchfall} & Rest nicht eindeutig; $r\ne0$ beweist nichts; Auslöschung = S-Polynom\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Division ist da, die Ordnung ist da, und der Fehler ist benannt: Leitterme, die sich auslöschen. Kapitel 5 fügt dem Erzeugendensystem genau die Polynome hinzu, die aus Auslöschungen entstehen, bis keine mehr übrig ist --- und beweist, dass das reicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}

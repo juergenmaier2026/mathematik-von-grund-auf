@@ -1,0 +1,303 @@
+\chapter{Gruppen, die wirken}
+
+\section{Neun Zahlen für jede Symmetrie}
+
+\begin{merksatz}
+\boxtitel{Das Wassermolekül in Bewegung}
+Jedes der drei Atome kann sich in drei Richtungen verschieben: neun Koordinaten $(x_{\mathrm O}, y_{\mathrm O}, z_{\mathrm O}, x_{\mathrm H_1}, \ldots, z_{\mathrm H_2})$. Eine Symmetrieoperation tut zweierlei: Sie dreht jeden Verschiebungsvektor (die $3\times3$-Matrix aus Kapitel 1) und sie trägt ihn zu dem Atom, auf das das Ausgangsatom abgebildet wird. Für $C_2$:
+\[ D(C_2) = \begin{pmatrix} M & 0 & 0\\ 0 & 0 & M\\ 0 & M & 0\end{pmatrix}, \qquad M = \mathrm{diag}(-1, -1, 1) : \]
+Sauerstoff bleibt (Block oben links), die Wasserstoffe tauschen (Blöcke außerhalb der Diagonale).
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{1.0cm}P{1.0cm}P{1.4cm}P{1.4cm}P{2.4cm}@{}}
+\toprule
+ & $E$ & $C_2$ & $\sigma(xz)$ & $\sigma(yz)$ & \\
+\midrule
+feste Atome & $3$ & $1$ & $1$ & $3$ & (nur die auf der Diagonalen zählen)\\
+Spur von $M$ & $3$ & $-1$ & $1$ & $1$ & (Satz 1.2)\\
+Spur von $D$ & $9$ & $-1$ & $1$ & $3$ & Produkt der beiden\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Vier Matrizen der Größe $9\times9$, eine für jedes Gruppenelement, und sie multiplizieren sich wie die Gruppe: $D(C_2)D(\sigma(xz)) = D(\sigma(yz))$ --- nachgerechnet. Das ist eine Darstellung von $C_{2v}$ auf dem neundimensionalen Raum der Bewegungen. Ihre Spuren, $9, -1, 1, 3$, sind alles, was Kapitel 6 braucht, um die Schwingungen zu finden.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine Darstellung ist eine Gruppe, die auf einem Vektorraum wirkt} --- so, dass Nacheinanderausführen in der Gruppe dem Matrizenprodukt entspricht. Die Gruppe ist abstrakt; die Darstellung ist konkret, und dieselbe Gruppe hat viele. $C_{2v}$ wirkt auf dem Raum ($3\times3$), auf den Bewegungen des Wassers ($9\times9$), auf den Funktionen auf dem Molekül, auf den Orbitalen --- und die Frage dieses Bandes ist, wie alle diese Darstellungen aus wenigen Grundbausteinen zusammengesetzt sind. Dieses Kapitel definiert den Begriff, gibt die Beispiele, die der Band braucht, und beweist, dass man jede Darstellung einer endlichen Gruppe durch orthogonale (unitäre) Matrizen geben kann --- der Satz, von dem alles Weitere abhängt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Definition und Beispiele}
+
+\begin{definition}
+\boxtitelm{Definition 2.1 --- Darstellung}
+Eine \Begriff{Darstellung} einer Gruppe $G$ auf einem endlichdimensionalen Vektorraum $V$ über $k$ ($= \mathbb C$, wenn nichts anderes gesagt ist) ist ein Homomorphismus
+\[ \rho\colon G\to GL(V), \qquad \rho(gh) = \rho(g)\rho(h), \quad \rho(e) = \mathrm{id} . \]
+Nach Wahl einer Basis sind die $\rho(g)$ invertierbare $n\times n$-Matrizen $D(g)$; $n = \dim V$ heißt \Begriff{Grad} (Dimension) der Darstellung. Zwei Darstellungen $\rho, \rho'$ heißen \Begriff{äquivalent}, wenn es eine invertierbare Matrix $T$ gibt mit $D'(g) = TD(g)T^{-1}$ für alle $g$ --- dieselbe Wirkung in anderer Basis. Eine Darstellung heißt \Begriff{treu}, wenn $\rho$ injektiv ist.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Beispiele des Bandes}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{0.9cm}P{4.5cm}@{}}
+\toprule
+\textbf{Darstellung} & \textbf{Grad} & \textbf{Was sie tut}\\
+\midrule
+triviale & $1$ & $D(g) = 1$ für alle $g$\\
+Vorzeichen (von $S_n$, $C_{nv}$) & $1$ & $D(g) = \det$ der Raumoperation: $+1$ Drehungen, $-1$ Spiegelungen\\
+geometrische (von $C_{2v}$, $C_{3v}$, \ldots) & $3$ & die Operationen als $3\times3$-Matrizen aus Kapitel 1\\
+Permutations\-darstellung von $S_3$ & $3$ & $D(\pi)e_i = e_{\pi(i)}$: Permutationsmatrizen\\
+Verschiebungen des Wassers & $9$ & oben: Permutation der Atome $\otimes$ Raumoperation\\
+Verschiebungen des Benzols & $36$ & ebenso, $12$ Atome\\
+reguläre Darstellung & $|G|$ & $G$ wirkt auf dem Raum mit Basis $\{e_g\}_{g\in G}$ durch $D(h)e_g = e_{hg}$\\
+$\mathbb Z/4$ als Drehungen & $2$ & $D(1) = \begin{pmatrix}0 & -1\\ 1 & 0\end{pmatrix}$, Drehung um $90^{\circ}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die reguläre Darstellung von $C_{2v}$}
+Basis $e_E, e_{C_2}, e_{\sigma}, e_{\sigma'}$. $D(C_2)$ bildet $e_E\mapsto e_{C_2}$, $e_{C_2}\mapsto e_E$, $e_\sigma\mapsto e_{\sigma'}$, $e_{\sigma'}\mapsto e_\sigma$: eine Permutationsmatrix ohne Fixpunkt, Spur $0$. Allgemein: Spur von $D_{\mathrm{reg}}(g)$ ist $|G|$ für $g = e$ und $0$ sonst, weil $hg = g$ nur für $h = e$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die reguläre Darstellung enthält jede andere --- Kapitel 4 zeigt, wie oft: jede irreduzible Darstellung so oft, wie ihr Grad angibt. Sie ist der Steinbruch, aus dem alle Darstellungen einer endlichen Gruppe gebrochen werden.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Verschiebungsdarstellung ist ein Tensorprodukt}: $D(g) = P(g)\otimes M(g)$, Permutationsmatrix der Atome mal Raumoperation, und deshalb ist ihre Spur das Produkt der Spuren --- feste Atome mal Spur von $M$. Das ist die Regel, mit der die Chemiker die \enquote{reduzible Darstellung} $\Gamma_{3N}$ hinschreiben, ohne eine einzige $9\times9$-Matrix zu sehen, und Kapitel 9 begründet sie allgemein. Für Benzol: $36\times36$-Matrizen, und doch nur zwölf Zahlen (eine je Klasse), jede das Produkt aus der Zahl der festen Atome und einer Spur aus Satz 1.2.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Unitarität}
+
+\begin{merksatz}
+\boxtitel{Satz 2.2 --- jede Darstellung einer endlichen Gruppe ist unitär}
+Sei $\rho$ eine Darstellung von $G$ ($|G| < \infty$) auf $V$ über $\mathbb C$. Dann gibt es ein Skalarprodukt $\langle\cdot, \cdot\rangle_G$ auf $V$, bezüglich dessen alle $\rho(g)$ unitär sind: $\langle\rho(g)v, \rho(g)w\rangle_G = \langle v, w\rangle_G$. In einer Orthonormalbasis dafür sind alle $D(g)$ unitäre Matrizen, $D(g)^{*}D(g) = I$; über $\mathbb R$ orthogonale.
+
+\schritt{Beweis --- der Mittelungstrick}
+Man nehme irgendein Skalarprodukt $\langle\cdot, \cdot\rangle$ und setze
+\[ \langle v, w\rangle_G := \frac{1}{|G|}\sum_{h\in G}\langle\rho(h)v, \rho(h)w\rangle . \]
+Das ist wieder ein Skalarprodukt (Summe positiv definiter Formen). Und es ist invariant: $\langle\rho(g)v, \rho(g)w\rangle_G = \frac1{|G|}\sum_h\langle\rho(hg)v, \rho(hg)w\rangle$, und wenn $h$ die Gruppe durchläuft, tut es $hg$ auch (Multiplikation mit $g$ ist eine Bijektion). Also dieselbe Summe. $\blacksquare$
+
+\schritt{Folgerung: Eigenwerte}
+Die Eigenwerte jedes $D(g)$ haben Betrag $1$; und da $g^{m} = e$ für $m = $ Ordnung von $g$, ist $D(g)^{m} = I$: Die Eigenwerte sind $m$-te Einheitswurzeln. Jedes $D(g)$ ist diagonalisierbar. Insbesondere: $|\operatorname{Spur}D(g)|\le n$, mit Gleichheit genau dann, wenn $D(g)$ ein Vielfaches der Einheit ist.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Mittelungstrick ist das wichtigste Beweisverfahren des Bandes: Was nicht invariant ist, mittelt man über die Gruppe, und es wird invariant. Er funktioniert, weil die Gruppe endlich ist --- und für kompakte Gruppen wie die Drehgruppe funktioniert er mit einem Integral statt einer Summe, Kapitel 10.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für die Moleküle ist Unitarität keine Überraschung}: Symmetrieoperationen sind Isometrien, und die Verschiebungsdarstellung ist aus Permutationen und orthogonalen Matrizen gebaut --- orthogonal von selbst. Der Satz sagt, dass das kein Zufall der Konstruktion ist, sondern für jede Darstellung gilt, auch für solche, die man abstrakt gegeben hat und die in ihrer ursprünglichen Basis nicht orthogonal aussehen. Die Physik nennt das \Person{Wigner}s Satz von 1931: Symmetrien der Quantenmechanik sind unitär (oder antiunitär, für die Zeitumkehr), und darum sind Erhaltungsgrößen Eigenwerte vom Betrag eins.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Invariante Unterräume}
+
+\begin{definition}
+\boxtitelm{Definition 2.3 --- invarianter Unterraum, Teildarstellung, direkte Summe}
+Ein Unterraum $W\subseteq V$ heißt \Begriff{invariant}, wenn $\rho(g)W\subseteq W$ für alle $g$; dann ist $\rho|_W$ eine \Begriff{Teildarstellung}. Sind $W_1, W_2$ invariant mit $V = W_1\oplus W_2$, so heißt $\rho$ die \Begriff{direkte Summe} $\rho_1\oplus\rho_2$; in einer angepassten Basis sind alle $D(g)$ blockdiagonal, $D(g) = \begin{pmatrix}D_1(g) & 0\\ 0 & D_2(g)\end{pmatrix}$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 2.4 --- erste Zerlegungen}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item Die geometrische Darstellung von $C_{2v}$ auf $\mathbb R^{3}$ zerfällt in drei eindimensionale: $x$-Achse, $y$-Achse, $z$-Achse sind je invariant (alle Matrizen diagonal).
+\item Die geometrische Darstellung von $C_{3v}$ zerfällt in die $z$-Achse (eindimensional, trivial) und die $xy$-Ebene (zweidimensional) --- und die Ebene zerfällt nicht weiter (Kapitel 3).
+\item Die Permutationsdarstellung von $S_3$ auf $\mathbb C^{3}$ zerfällt in die Gerade $\mathbb C(1, 1, 1)$ (trivial) und die Ebene $\{x_1 + x_2 + x_3 = 0\}$ (zweidimensional).
+\item Die Verschiebungsdarstellung des Wassers zerfällt in Translationen ($3$), Rotationen ($3$) und Schwingungen ($3$) --- und jedes dieser Stücke weiter in eindimensionale, weil $C_{2v}$ abelsch ist.
+\end{enumerate}
+
+\schritt{Beweis von (c)}
+$(1, 1, 1)$ wird von jeder Permutation festgelassen: invariant, trivial. Die Ebene $x_1 + x_2 + x_3 = 0$ ist invariant, weil Permutieren die Summe nicht ändert. Die Summe beider ist $\mathbb C^{3}$ (die Ebene enthält $(1,1,1)$ nicht, da $3\ne0$). In der Basis $(1,1,1)$, $(1,-1,0)$, $(1,1,-2)$ sind alle Permutationsmatrizen blockdiagonal mit Blöcken $1\times1$ und $2\times2$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zerlegen heißt: eine Basis finden, in der alle Matrizen der Gruppe gleichzeitig blockdiagonal sind. Für eine einzelne Matrix ist das Diagonalisieren; für eine Gruppe von Matrizen muss eine Basis für alle zugleich passen --- und das geht nicht immer bis zu $1\times1$-Blöcken.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dass die Permutationsdarstellung die triviale abspaltet, ist in der Chemie der \enquote{symmetrische} Anteil}: die Linearkombination der drei H-Orbitale des Ammoniaks, die alle mit gleichem Gewicht nimmt, ist unter jeder Symmetrie invariant --- sie hat die Symmetrie $A_1$ des Moleküls selbst --- und kann mit dem $s$-Orbital des Stickstoffs eine Bindung eingehen. Die beiden übrigen Kombinationen (der zweidimensionale Rest, $E$) passen zu den $p_x, p_y$-Orbitalen. Die Zerlegung einer Darstellung ist die Vorschrift, welche Orbitale miteinander binden dürfen --- Kapitel 13.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Über $\mathbb R$ zerfällt es nicht, über $\mathbb C$ schon}
+$\mathbb Z/4$ wirke auf der Ebene durch Drehung um $90^{\circ}$: $D(1) = \begin{pmatrix}0 & -1\\ 1 & 0\end{pmatrix}$.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.4cm}@{}}
+\toprule
+\textbf{über $\mathbb R$} & Kein invarianter Unterraum der Dimension $1$: Eine Gerade, die um $90^{\circ}$ gedreht auf sich fällt, gibt es nicht. Die Darstellung ist unzerlegbar.\\
+\textbf{über $\mathbb C$} & Eigenvektoren $(1, \mp\mathrm i)$ zu den Eigenwerten $\pm\mathrm i$; beide Geraden invariant. Die Darstellung zerfällt in zwei eindimensionale mit $D(1) = \mathrm i$ bzw.\ $-\mathrm i$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ob eine Darstellung zerfällt, hängt vom Körper ab. Über $\mathbb C$ zerfallen alle Darstellungen abelscher Gruppen in Geraden (Kapitel 3); über $\mathbb R$ bleiben Ebenen übrig, in denen eine Drehung wirkt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Chemiker schreiben in die Charaktertafel von $C_4$ zwei Zeilen mit $\pm\mathrm i$ und fassen sie mit einer Klammer zu \enquote{$E$} zusammen}: Das ist genau dieser Bruchfall --- über $\mathbb C$ zwei eindimensionale Darstellungen, über $\mathbb R$ (wo Schwingungen und Orbitale leben) eine zweidimensionale, deren zwei Zustände entartet sind. Eine Molekülschwingung, die unter $C_4$ den Charakter $\mathrm i$ hätte, gibt es physikalisch nicht einzeln; es gibt das Paar, das zusammen eine reelle Ebene aufspannt. Der Band rechnet über $\mathbb C$, weil dort die Sätze einfach sind, und fragt am Ende --- wie Band 29 ---, was reell ist. Für Darstellungen gibt es dafür einen Test, den Frobenius-Schur-Indikator, Kapitel 9.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- Eine Darstellung prüfen}
+Ist $D\colon S_3\to GL_2(\mathbb C)$ mit $D((12)) = \begin{pmatrix}-1 & 1\\ 0 & 1\end{pmatrix}$, $D((123)) = \begin{pmatrix}-1 & -1\\ 1 & 0\end{pmatrix}$ eine Darstellung? (Es genügt, die Relationen der Erzeuger zu prüfen: $(12)^{2} = e$, $(123)^{3} = e$, $(12)(123)(12) = (123)^{-1}$.)
+
+\loesung
+\schritt{Schritt 1 --- $D((12))^{2}$}
+$\begin{pmatrix}-1 & 1\\ 0 & 1\end{pmatrix}^{2} = \begin{pmatrix}1 & -1 + 1\\ 0 & 1\end{pmatrix} = I$. \checkmark
+
+\schritt{Schritt 2 --- $D((123))^{3}$}
+$A = \begin{pmatrix}-1 & -1\\ 1 & 0\end{pmatrix}$, $A^{2} = \begin{pmatrix}1 - 1 & 1 + 0\\ -1 + 0 & -1 + 0\end{pmatrix} = \begin{pmatrix}0 & 1\\ -1 & -1\end{pmatrix}$, $A^{3} = A^{2}A = \begin{pmatrix}0 + 1 & 0 + 0\\ 1 - 1 & 1 + 0\end{pmatrix} = I$. \checkmark
+
+\schritt{Schritt 3 --- Die Konjugationsrelation}
+$D((12))\,A\,D((12)) = \begin{pmatrix}-1 & 1\\ 0 & 1\end{pmatrix}\begin{pmatrix}-1 & -1\\ 1 & 0\end{pmatrix}\begin{pmatrix}-1 & 1\\ 0 & 1\end{pmatrix}$. Erstes Produkt: $\begin{pmatrix}2 & 1\\ 1 & 0\end{pmatrix}$; mal drittes: $\begin{pmatrix}-2 & 3\\ -1 & 1\end{pmatrix}$. Und $A^{-1} = A^{2} = \begin{pmatrix}0 & 1\\ -1 & -1\end{pmatrix}$. \textbf{Nicht gleich}: keine Darstellung --- jedenfalls nicht mit diesen Matrizen.
+
+\schritt{Schritt 4 --- Was richtig wäre}
+Mit $D((12)) = \begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}$ und demselben $A$: $\begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}A\begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix} = \begin{pmatrix}0 & 1\\ -1 & -1\end{pmatrix} = A^{2}$. \checkmark\ Das ist die Darstellung auf der Ebene $x_1 + x_2 + x_3 = 0$ in der Basis $e_1 - e_2$, $e_2 - e_3$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine Darstellung ist durch die Bilder der Erzeuger bestimmt, aber nicht jede Wahl ist eine}: Die Bilder müssen die Relationen der Gruppe erfüllen --- alle, nicht nur die Ordnungen. Für $S_3 = \langle s, r\mid s^{2} = r^{3} = e,\ srs = r^{-1}\rangle$ sind es drei; wer eine vergisst, hat eine Darstellung einer größeren Gruppe (hier: der unendlichen Gruppe, die nur $s^{2} = r^{3} = e$ erfüllt). Die Probe am Ende ist Pflicht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Die Spur der Verschiebungsdarstellung}
+Berechnen Sie die Spuren von $D(g)$ für die Verschiebungsdarstellung des Ammoniaks ($C_{3v}$, vier Atome, zwölf Koordinaten).
+
+\loesung
+\schritt{Schritt 1 --- Feste Atome}
+$E$: alle $4$. $C_3$: nur N ($1$). $\sigma_v$: N und das H in der Spiegelebene ($2$).
+
+\schritt{Schritt 2 --- Spuren der Raumoperationen (Satz 1.2)}
+$E$: $3$. $C_3$: $1 + 2\cos120^{\circ} = 0$. $\sigma$: $1$.
+
+\schritt{Schritt 3 --- Produkte}
+$\chi(E) = 4\cdot3 = 12$, $\chi(C_3) = 1\cdot0 = 0$, $\chi(\sigma_v) = 2\cdot1 = 2$.
+
+\schritt{Schritt 4 --- Probe}
+$12 = 3N$ für $N = 4$. \checkmark\ Und für Wasser nach derselben Regel: $3\cdot3 = 9$, $1\cdot(-1) = -1$, $1\cdot1 = 1$, $3\cdot1 = 3$ --- die Tabelle am Kapitelanfang. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Regel \enquote{feste Atome mal Spur der Operation} ist der Grund, warum man die $12\times12$-Matrizen nie hinschreibt}: Nur Atome, die auf sich selbst abgebildet werden, tragen zur Diagonale bei, und sie tragen die Spur der Raumoperation bei. Kapitel 6 zerlegt die drei Zahlen $12, 0, 2$ und findet $3A_1 + A_2 + 4E$ --- abzüglich Translation und Rotation $2A_1 + 2E$: vier Schwingungsfrequenzen für Ammoniak, zwei davon doppelt entartet. Gemessen: $3337, 950$ ($A_1$) und $3444, 1627$ ($E$) $\mathrm{cm}^{-1}$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Äquivalent oder nicht}
+Die Darstellungen $D_1(1) = \begin{pmatrix}\mathrm i & 0\\ 0 & -\mathrm i\end{pmatrix}$ und $D_2(1) = \begin{pmatrix}0 & -1\\ 1 & 0\end{pmatrix}$ von $\mathbb Z/4$ ($1$ der Erzeuger): äquivalent über $\mathbb C$? Über $\mathbb R$?
+
+\loesung
+\schritt{Schritt 1 --- Über $\mathbb C$}
+$D_2(1)$ hat Eigenwerte $\pm\mathrm i$ mit Eigenvektoren $(1, -\mathrm i)$, $(1, \mathrm i)$. Mit $T = \begin{pmatrix}1 & 1\\ -\mathrm i & \mathrm i\end{pmatrix}$ ist $T^{-1}D_2(1)T = D_1(1)$. Äquivalent. \checkmark\ (Probe: $D_2(1)\begin{pmatrix}1\\ -\mathrm i\end{pmatrix} = \begin{pmatrix}\mathrm i\\ 1\end{pmatrix} = \mathrm i\begin{pmatrix}1\\ -\mathrm i\end{pmatrix}$. \checkmark)
+
+\schritt{Schritt 2 --- Über $\mathbb R$}
+$D_1$ ist über $\mathbb R$ gar keine Darstellung (komplexe Einträge). Die Frage ist: Gibt es eine reelle Darstellung, die über $\mathbb C$ zu $D_1$ äquivalent ist? Ja: $D_2$. Und $D_2$ ist über $\mathbb R$ unzerlegbar (Bruchfall).
+
+\schritt{Schritt 3 --- Die Invariante}
+Äquivalente Darstellungen haben dieselben Spuren: $\operatorname{Spur}D_1(1) = \mathrm i - \mathrm i = 0 = \operatorname{Spur}D_2(1)$. \checkmark\ Kapitel 4 zeigt die Umkehrung: Gleiche Spuren auf allen Elementen heißt äquivalent.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Spur ist die Invariante, die Äquivalenz entscheidet} --- das ist der Satz, der aus der Darstellungstheorie eine Theorie von Zahlentafeln macht. Hier sieht man schon, warum er plausibel ist: Die Eigenwerte sind Einheitswurzeln (Satz 2.2), eine Darstellung ist bis auf Basiswechsel durch ihre Eigenwerte auf allen Elementen bestimmt, und die Spur ist die Summe der Eigenwerte. Dass die Summe die einzelnen Eigenwerte festlegt, wenn man sie auf allen $g^{k}$ kennt, ist die Newtonsche Identität (Band 11) --- und Kapitel 4 macht daraus einen Beweis.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Frobenius, Burnside, Schur}
+\Person{Ferdinand Georg Frobenius} erhielt im April 1896 einen Brief von \Person{Dedekind} über die \enquote{Gruppendeterminante} --- die Determinante der Matrix $(x_{gh^{-1}})$ mit Unbestimmten $x_g$ --- und ihre Faktorisierung für nichtabelsche Gruppen. Innerhalb eines Jahres hatte Frobenius die Charaktere erfunden, um sie zu erklären: Die Faktoren der Gruppendeterminante sind die irreduziblen Darstellungen, jeder mit seinem Grad als Potenz.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Frobenius erfand die Charaktere vor den Darstellungen}: Erst 1897 definierte er, was wir heute eine Matrixdarstellung nennen. \Person{Burnside} in England arbeitete parallel und fand 1904 mit Charakteren den Satz, dass Gruppen der Ordnung $p^{a}q^{b}$ auflösbar sind --- der erste Satz über Gruppen, den man ohne Darstellungen nicht beweisen konnte (ein darstellungsfreier Beweis kam erst 1970). \Person{Issai Schur}, Frobenius' Schüler, gab 1905 die Lemmas, die Kapitel 3 trägt, und begründete die Theorie, wie sie heute gelehrt wird --- Berlin war bis 1933 ihr Zentrum, bis Schur entlassen wurde und 1939 nach Palästina emigrierte.}
+\end{minipage}
+\end{center}
+
+\schritt{Die reguläre Darstellung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dass jede Gruppe durch Permutationen ihrer selbst dargestellt wird, ist \Person{Cayley}s Satz von 1854 --- und die reguläre Darstellung ist seine lineare Fassung. \textbf{Frobenius' Satz, dass sie jede irreduzible Darstellung genau so oft enthält, wie ihr Grad angibt}, ist der Grund für $\sum d_i^{2} = |G|$, die erste Überraschung des Vorworts; Kapitel 4 beweist ihn in einer Zeile, sobald die Charaktere da sind.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Darstellungen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Darstellungen berechnen} & Für Gruppen mit Millionen Elementen (die sporadischen Gruppen, das Monster mit $8\cdot10^{53}$): Charaktertafeln im ATLAS (1985) und in GAP; die kleinste treue Darstellung des Monsters hat Grad $196883$.\\
+\textbf{Darstellungs\-stabilität} & Church--Farb 2013: Wie Darstellungen von $S_n$ sich für $n\to\infty$ stabilisieren --- Darstellungstheorie als Werkzeug der Topologie von Konfigurationsräumen.\\
+\textbf{Darstellungen lernen} & Neuronale Netze, die Gruppenwirkungen in Daten entdecken (Dehmamy 2021); umgekehrt Netze, deren Gewichte eine Darstellung sind --- die Fourier-Transformation auf Gruppen (Kapitel 12) als Schicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Zahl $196883$ ist die seltsamste Zahl der Mathematik}: \Person{McKay} bemerkte 1978, dass $196884 = 196883 + 1$ der zweite Koeffizient der $j$-Funktion ist --- einer Funktion aus der Theorie der elliptischen Kurven (Band 29, Kapitel 10) ---, und \Person{Conway} und \Person{Norton} machten daraus die Vermutung \enquote{Monstrous Moonshine}, die \Person{Borcherds} 1992 bewies (Fields-Medaille 1998) mit Methoden aus der Stringtheorie. Dass die Dimension einer Darstellung einer endlichen Gruppe in der Fourier-Entwicklung einer Modulform steht, hat bis heute keine vollständig verstandene Erklärung; es ist das Gegenstück zur dritten Überraschung des Vorworts auf einer Ebene, die niemand erwartet hatte.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 2.1} & Darstellung, Grad, Äquivalenz, treu\\
+\textbf{Beispiele} & trivial, Vorzeichen, geometrisch, Permutation, Verschiebung, regulär\\
+\textbf{Satz 2.2} & unitär durch Mittelung; Eigenwerte sind Einheitswurzeln\\
+\textbf{Satz 2.4} & invariante Unterräume, direkte Summe, Blockdiagonalform\\
+\textbf{Der Bruchfall} & Zerfall hängt vom Körper ab\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Zerlegen heißt blockdiagonalisieren. Kapitel 3 fragt, wie weit das geht: ob jede Darstellung in unzerlegbare zerfällt (Maschke), und was eine unzerlegbare auszeichnet (Schur).}
+\end{minipage}
+\end{center}
+\end{merksatz}

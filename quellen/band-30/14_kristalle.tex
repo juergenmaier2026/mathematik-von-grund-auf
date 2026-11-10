@@ -1,0 +1,278 @@
+\chapter{Kristalle, Eisen, Quarks}
+
+\section{Drei Anwendungen, ein Verfahren}
+
+\begin{merksatz}
+\boxtitel{Was die drei gemeinsam haben}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{2.6cm}P{3.6cm}@{}}
+\toprule
+ & \textbf{Gruppe} & \textbf{Frage}\\
+\midrule
+Kristall & Raumgruppe $\supset\mathbb Z^{3}$ & Welche Zustände hat ein Elektron im periodischen Gitter?\\
+Hämoglobin & $O_h\to D_{4h}\to C_{4v}$ & Wie spalten die $d$-Orbitale des Eisens, und warum wechselt der Spin?\\
+Hadronen & $SU(3)$ & Warum kommen Teilchen in Achtergruppen?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+In allen drei Fällen: Man bestimmt die Gruppe, zerlegt die Zustände nach irreduziblen Darstellungen, liest Entartungen und Auswahlregeln ab --- und findet, wo die Symmetrie gebrochen ist, die interessante Physik.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dieses Kapitel hat drei Bruchfälle statt einem}, weil in jeder der drei Anwendungen der Bruch der Symmetrie die Pointe ist: Quasikristalle brechen das Gitter, der Jahn--Teller-Effekt bricht die Entartung, die Quarkmassen brechen $SU(3)$ --- und in allen drei Fällen ist die gebrochene Symmetrie nützlicher als gar keine.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Kristalle}
+
+\begin{merksatz}
+\boxtitel{Satz 14.1 --- Raumgruppen und Bloch}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item Die Symmetriegruppe eines Kristalls (\Begriff{Raumgruppe}) enthält die Translationen um Gittervektoren, $T\cong\mathbb Z^{3}$, als Normalteiler; der Quotient ist eine endliche \Begriff{Punktgruppe}, und wegen der kristallographischen Beschränkung (Kapitel 1) ist sie eine der $32$ kristallographischen Punktgruppen. Es gibt $14$ Gittertypen (Bravais) und $230$ Raumgruppen (Fedorov und Schoenflies 1891, Barlow 1894).
+\item Die irreduziblen Darstellungen von $T = \mathbb Z^{3}$ sind eindimensional, $\chi_{\vec k}(\vec R) = e^{i\vec k\cdot\vec R}$, und $\vec k$ ist modulo des reziproken Gitters bestimmt: Die Klassen bilden die \Begriff{Brillouin-Zone}. Jeder Energieeigenzustand eines Elektrons im Kristall lässt sich als $\psi_{\vec k}(\vec r + \vec R) = e^{i\vec k\cdot\vec R}\psi_{\vec k}(\vec r)$ wählen (\Person{Bloch} 1928), und die Energie wird eine Funktion $E_n(\vec k)$: die \Begriff{Bandstruktur}.
+\item An Punkten $\vec k$, die unter einer Untergruppe $G_{\vec k}$ der Punktgruppe fest bleiben, sind die Bänder nach den irreduziblen Darstellungen von $G_{\vec k}$ klassifiziert; mehrdimensionale Darstellungen erzwingen Bandberührungen.
+\end{enumerate}
+
+\schritt{Beweis von (b)}
+$T$ ist abelsch: Satz 5.1, alle irreduziblen Darstellungen eindimensional, Homomorphismen $\mathbb Z^{3}\to U(1)$, also $\vec R\mapsto e^{i\vec k\cdot\vec R}$. $\vec k$ und $\vec k + \vec G$ mit $e^{i\vec G\cdot\vec R} = 1$ für alle $\vec R$ geben denselben Charakter. Der Hamilton-Operator vertauscht mit $T$, also zerfällt jeder Eigenraum in $T$-Eigenräume (Schur für abelsche Gruppen) --- das ist Bloch. $\blacksquare$
+
+\schritt{Graphen}
+Das Wabengitter hat die Punktgruppe $D_{6h}$. An den Ecken $K$ der Brillouin-Zone ist $G_K = D_{3h}$, und die beiden $p_z$-Bänder tragen dort die zweidimensionale Darstellung $E''$: Sie \emph{müssen} sich berühren. Das ist der Dirac-Punkt, und die Berührung ist nicht Zufall, sondern Schur --- sie überlebt jede Störung, die die Symmetrie erhält.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Kristall ist eine Gruppe mit einem Normalteiler $\mathbb Z^{3}$; Bloch ist Fourier auf diesem Normalteiler; die Bandstruktur ist die Zerlegung nach seinen Charakteren. Wo die Punktgruppe Entartung erzwingt, berühren sich Bänder.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Eisen im Hämoglobin}
+
+\begin{merksatz}
+\boxtitel{Satz 14.2 --- Kristallfeld und Spinzustand}
+Das Eisen im Häm sitzt im Zentrum eines Porphyrinrings (vier Stickstoffatome in einer Ebene), darunter ein Histidin-Stickstoff, darüber $\mathrm{O_2}$ oder nichts: eine Umgebung von (näherungsweise) $C_{4v}$, in nullter Näherung ein Oktaeder $O_h$.
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item In $O_h$ spalten die fünf $d$-Orbitale in $t_{2g}$ ($d_{xy}, d_{xz}, d_{yz}$; drei, tiefer) und $e_g$ ($d_{z^{2}}, d_{x^{2}-y^{2}}$; zwei, höher) mit Abstand $\Delta_o$ (Aufgabe 7.3).
+\item In $D_{4h}$ (oben und unten verschiedene Liganden, aber noch Inversion --- oder, ohne Inversion, $C_{4v}$ mit denselben Buchstaben ohne $g$): $t_{2g}\to b_{2g}(d_{xy}) + e_g(d_{xz}, d_{yz})$, $e_g\to a_{1g}(d_{z^{2}}) + b_{1g}(d_{x^{2}-y^{2}})$.
+\item Sechs $d$-Elektronen ($\mathrm{Fe}^{2+}$) besetzen entweder $t_{2g}^{4}e_g^{2}$ mit vier ungepaarten Spins ($S = 2$, \Begriff{high-spin}; wenn $\Delta_o$ kleiner ist als die Paarungsenergie $P$) oder $t_{2g}^{6}$ mit keinem ($S = 0$, \Begriff{low-spin}; wenn $\Delta_o > P$).
+\end{enumerate}
+
+\schritt{Beweis von (b)}
+Einschränkung $O\downarrow D_4$ ($C_4$ entlang $z$): Die Klassen von $D_4$ liegen in $O$ so: $2C_4\subset6C_4$, $C_2 = C_4^{2}\subset3C_2$, $2C_2'$ (Achsen $x, y$) $\subset3C_2$, $2C_2''$ (Diagonalen) $\subset6C_2'$. $T_2 = (3, 0, -1, -1, 1)$ auf $(E, 8C_3, 3C_2, 6C_4, 6C_2')$ wird $(3, -1, -1, -1, 1)$ auf $(E, 2C_4, C_2, 2C_2', 2C_2'')$; mit der $D_4$-Tafel (Kapitel 5): $m_{B_2} = \frac18(3 + 2 + (-1) + 2\cdot1 + 2\cdot1) = 1$, $m_E = \frac18(6 + 0 + 2 + 0 + 0) = 1$. $E = (2, -1, 2, 0, 0)$ wird $(2, 0, 2, 2, 0)$: $m_{A_1} = \frac18(2 + 0 + 2 + 4 + 0) = 1$, $m_{B_1} = \frac18(2 + 0 + 2 + 4 + 0) = 1$. $\blacksquare$
+
+\schritt{Das Hämoglobin}
+Ohne Sauerstoff (Desoxy-Hb): schwaches Feld, \textbf{high-spin}, $S = 2$, das $\mathrm{Fe}^{2+}$-Ion ist groß (besetzte $e_g$-Orbitale zeigen auf die Liganden) und passt nicht in den Ring --- es sitzt etwa $0{,}4$ \AA{} außerhalb der Ebene. Mit Sauerstoff (Oxy-Hb): $\mathrm{O_2}$ ist ein starker Ligand, $\Delta_o > P$, \textbf{low-spin}, $S = 0$, das Ion ist klein und rückt in die Ebene --- und zieht das Histidin und mit ihm die ganze Proteinkette mit. Diese Bewegung um einen halben Ångström ist der Auslöser für die Kooperativität der vier Untereinheiten (\Person{Perutz} 1970): Das zweite $\mathrm{O_2}$ bindet leichter als das erste.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Bindung von Sauerstoff ändert die Darstellung, in der die Elektronen sitzen: von $t_{2g}^{4}e_g^{2}$ ($S = 2$, paramagnetisch, großes Ion, außerhalb der Ebene) zu $t_{2g}^{6}$ ($S = 0$, diamagnetisch, kleines Ion, in der Ebene). Pauling und Coryell haben 1936 den Spinwechsel mit einer Waage gemessen; Perutz hat 1970 gezeigt, dass er die Kooperativität des Hämoglobins antreibt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Kristallfeldtheorie erklärt nicht alles} --- warum $\mathrm{O_2}$ ein starker Ligand ist, sagt sie nicht (das ist Ligandenfeldtheorie: $\pi$-Rückbindung in die leeren $\pi^{*}$-Orbitale des Sauerstoffs), und ob die Fe--O$_2$-Bindung besser als $\mathrm{Fe}^{2+}$--$\mathrm{O_2}$ low-spin oder als $\mathrm{Fe}^{3+}$--$\mathrm{O_2^{-}}$ mit antiferromagnetischer Kopplung zu beschreiben ist (Weiss 1964), wird bis heute diskutiert; beide sind diamagnetisch, beide haben $S = 0$. Was die Darstellungstheorie sicher sagt: die Zahl der Orbitale je Typ, die möglichen Spinzustände, ihre Entartung, und dass der Wechsel zwischen ihnen mit einer Geometrieänderung einhergehen \emph{muss} --- weil $e_g$-Elektronen auf die Liganden zeigen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Quarks}
+
+\begin{merksatz}
+\boxtitel{Satz 14.3 --- der Achtfache Weg}
+Die irreduziblen Darstellungen von $SU(3)$ sind durch zwei Zahlen $(p, q)$ indiziert, mit Dimension $\frac12(p + 1)(q + 1)(p + q + 2)$: $\mathbf 1 = (0, 0)$, $\mathbf 3 = (1, 0)$, $\bar{\mathbf 3} = (0, 1)$, $\mathbf 8 = (1, 1)$, $\mathbf{10} = (3, 0)$, $\mathbf{27} = (2, 2)$. Die Clebsch--Gordan-Reihen
+\[ \mathbf 3\otimes\bar{\mathbf 3} = \mathbf 8\oplus\mathbf 1,\qquad\mathbf 3\otimes\mathbf 3\otimes\mathbf 3 = \mathbf{10}\oplus\mathbf 8\oplus\mathbf 8\oplus\mathbf 1 \]
+sind die Multipletts der Mesonen (Quark-Antiquark) und Baryonen (drei Quarks) mit den Quarks $u, d, s$ als Basis der $\mathbf 3$ (\Person{Gell-Mann}, \Person{Ne'eman} 1961; Quarks: Gell-Mann, \Person{Zweig} 1964).
+
+\schritt{Woher die Zerlegung kommt}
+Schur--Weyl (Satz 12.4) mit $d = 3$, $n = 3$: $V^{\otimes3} = S^{(3)}\otimes W_{(3)}\oplus S^{(2,1)}\otimes W_{(2,1)}\oplus S^{(1,1,1)}\otimes W_{(1,1,1)}$, und für $V = \mathbb C^{3}$ ist $\dim W_{(3)} = \binom{5}{3} = 10$ (symmetrische Tensoren), $\dim W_{(1,1,1)} = 1$ (Determinante), $\dim W_{(2,1)} = 8$ (Rest: $27 - 10 - 1 = 16 = 2\cdot8$, die zwei Kopien kommen vom zweidimensionalen $S^{(2,1)}$). Also $\mathbf{10}$ symmetrisch, $\mathbf 8$ gemischt (zweimal), $\mathbf 1$ antisymmetrisch.
+
+\schritt{Die Zustände}
+Gewichte: Isospin $I_3$ und Hyperladung $Y$ --- die Eigenwerte der beiden diagonalen Erzeuger von $SU(3)$ (Rang $2$: zwei kommutierende Richtungen, wie $J_z$ allein bei $SU(2)$). Die $\mathbf 8$ der Baryonen mit Spin $\frac12$: $p, n$ ($Y = 1$), $\Sigma^{\pm}, \Sigma^{0}, \Lambda$ ($Y = 0$; $\Sigma^{0}$ und $\Lambda$ haben beide $I_3 = 0$ --- das Gewicht $0$ hat Vielfachheit $2$), $\Xi^{-}, \Xi^{0}$ ($Y = -1$). Die $\mathbf{10}$ mit Spin $\frac32$: $\Delta^{++}, \Delta^{+}, \Delta^{0}, \Delta^{-}$ ($1232$ MeV); $\Sigma^{*}$ ($1385$); $\Xi^{*}$ ($1530$); und an der Spitze $\Omega^{-}$ --- $sss$, $Y = -2$, 1962 von Gell-Mann vorhergesagt mit Masse $\approx1680$ MeV (gleiche Abstände $\approx150$ MeV im Dekuplett: Gell-Mann--Okubo-Formel), 1964 in Brookhaven gefunden bei $1672$ MeV.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.62, every node/.style={font=\scriptsize}]
+\foreach \x/\y/\n in {-3/3/{$\Delta^{-}$}, -1/3/{$\Delta^{0}$}, 1/3/{$\Delta^{+}$}, 3/3/{$\Delta^{++}$}, -2/1.5/{$\Sigma^{*-}$}, 0/1.5/{$\Sigma^{*0}$}, 2/1.5/{$\Sigma^{*+}$}, -1/0/{$\Xi^{*-}$}, 1/0/{$\Xi^{*0}$}, 0/-1.5/{$\Omega^{-}$}}{
+  \fill[tief] (\x,\y) circle (0.13); \node[above=2pt] at (\x,\y) {\n};
+}
+\draw[grau] (-3,3)--(3,3)--(0,-1.5)--cycle;
+\node[grau,anchor=west] at (3.8,3) {$Y = 1$, $1232$};
+\node[grau,anchor=west] at (3.8,1.5) {$Y = 0$, $1385$};
+\node[grau,anchor=west] at (3.8,0) {$Y = -1$, $1530$};
+\node[grau,anchor=west] at (3.8,-1.5) {$Y = -2$, $1672$ MeV};
+\draw[grau,-latex] (-4.2,-1.5)--(-4.2,3.3) node[above] {$Y$};
+\draw[grau,-latex] (-4.2,-1.5)--(-2.5,-1.5) node[right] {$I_3$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Drei Quarks, drei Young-Diagramme, drei Multipletts: $\mathbf{10}$ (symmetrisch, Spin $\frac32$), $\mathbf 8$ (gemischt, Spin $\frac12$), $\mathbf 1$ (antisymmetrisch). Das Dekuplett hatte 1962 ein Loch an der Spitze, und das Loch hatte Masse, Ladung und Seltsamkeit --- $\Omega^{-}$ wurde gefunden, wo die Darstellungstheorie es hingestellt hatte.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Gruppe $SU(3)$ kommt in der Teilchenphysik zweimal vor}, und man muss sie auseinanderhalten: Die \emph{Flavour}-$SU(3)$ dieses Abschnitts ($u, d, s$) ist eine Näherungssymmetrie, gebrochen durch die Quarkmassen (Bruchfall). Die \emph{Farb}-$SU(3)$ der Quantenchromodynamik ist exakt: Jedes Quark trägt eine $\mathbf 3$ in Farbe, Hadronen sind Farbsinguletts, und die acht Gluonen sind die $\mathbf 8$ --- die adjungierte Darstellung, $\mathbf 3\otimes\bar{\mathbf 3}$ minus die Spur. Dass Baryonen aus drei Quarks und nicht aus zwei oder vier bestehen, liegt daran, dass $\mathbf 1\subset\mathbf 3^{\otimes n}$ zuerst für $n = 3$ auftritt (die Determinante). Aufgabe 14.3 zeigt, dass die Farbe nötig ist, damit $\Delta^{++} = uuu$ mit drei parallelen Spins dem Pauli-Prinzip gehorcht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Drei Bruchfälle}
+
+\begin{warnung}
+\boxtitelr{Wo die Symmetrie bricht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Quasikristalle} & \Person{Shechtman} fand 1982 in einer Al--Mn-Legierung Beugungsbilder mit zehnzähliger Symmetrie --- nach Kapitel 1 unmöglich für ein Gitter. Die Auflösung: kein Gitter. Quasikristalle sind aperiodisch geordnet wie Penrose-Parkette, haben scharfe Beugungsreflexe ohne Translationsgruppe, und ihre Symmetrie ist die eines Gitters in sechs Dimensionen, geschnitten mit einem irrationalen dreidimensionalen Unterraum. Die kristallographische Beschränkung setzt $\mathbb Z^{3}$ voraus; die Natur nicht. Nobelpreis Chemie 2011 --- nach zwei Jahren, in denen Shechtman gebeten wurde, die Gruppe zu verlassen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Jahn--Teller} & Ein nichtlineares Molekül in einem entarteten elektronischen Zustand ist \emph{instabil}: Es verzerrt sich und hebt die Entartung auf (\Person{Jahn}, \Person{Teller} 1937). Beweis: $\mathrm{Sym}^{2}\Gamma_{\mathrm{el}}$ enthält für jedes mehrdimensionale $\Gamma_{\mathrm{el}}$ eine nichttriviale Darstellung, die in $\Gamma_{\mathrm{vib}}$ vorkommt (Jahn und Teller prüften alle Punktgruppen durch); die Energie ist in dieser Koordinate linear, also kein Minimum. $\mathrm{Cu}^{2+}$ ($d^{9}$, $e_g^{3}$, entartet) sitzt deshalb nie in einem regelmäßigen Oktaeder, sondern in einem gestreckten; Cyclobutadien ist ein Rechteck (Aufgabe 13.1). Entartung erzwingt ihren eigenen Bruch.\\
+\textbf{Flavour-$SU(3)$} & Die Massen im Oktett reichen von $939$ ($n$) bis $1321$ MeV ($\Xi^{-}$): $SU(3)$ ist um $30\,\%$ gebrochen, durch die Masse des $s$-Quarks ($\approx95$ MeV gegen wenige MeV für $u, d$). Die Brechung ist selbst symmetrisch --- sie transformiert sich wie die $Y$-Komponente einer $\mathbf 8$ ---, und daraus folgt die Gell-Mann--Okubo-Formel $\frac12(m_N + m_\Xi) = \frac14(3m_\Lambda + m_\Sigma)$: $1128{,}5$ gegen $1135$ MeV. Mit $c, b, t$ gibt es keine brauchbare $SU(4)$ oder $SU(6)$ mehr: zu schwer, zu gebrochen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Symmetrie, die nicht ganz gilt, ist kein Fehler der Theorie, sondern ihr Inhalt: Die Abweichung vom Dekuplett ergab die Masse des $\Omega^{-}$, die Abweichung vom Oktaeder die Geometrie des Kupfers, die Abweichung vom Gitter einen neuen Zustand der Materie.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- $T_{1g}$ im quadratischen Feld und Kupfer}
+Schränken Sie $T_1$ von $O$ auf $D_4$ ein, und erklären Sie die Jahn--Teller-Verzerrung von $\mathrm{Cu}^{2+}$ ($d^{9}$) mit der Tabelle aus Satz 14.2b.
+
+\loesung
+\schritt{Schritt 1 --- $T_1\downarrow D_4$}
+$T_1 = (3, 0, -1, 1, -1)$ auf $(E, 8C_3, 3C_2, 6C_4, 6C_2')$; eingeschränkt $(3, 1, -1, -1, -1)$ auf $(E, 2C_4, C_2, 2C_2', 2C_2'')$. $m_{A_2} = \frac18(3 + 2 - 1 + 2 + 2) = 1$; $m_E = \frac18(6 + 0 + 2 + 0 + 0) = 1$. $T_1\to A_2 + E$; Dimension $1 + 2 = 3$. \checkmark\ ($T_1$ sind die Rotationen; $R_z\to A_2$, $(R_x, R_y)\to E$, wie in der $C_{4v}$-Tafel.)
+
+\schritt{Schritt 2 --- $d^{9}$ im Oktaeder}
+Neun Elektronen: $t_{2g}^{6}e_g^{3}$. Das Loch sitzt in $e_g$: zwei Möglichkeiten ($d_{z^{2}}$ oder $d_{x^{2}-y^{2}}$), der Zustand ist zweifach entartet, Symmetrie $E_g$.
+
+\schritt{Schritt 3 --- Jahn--Teller}
+$\mathrm{Sym}^{2}E_g$ in $O_h$: $\chi_E(g^{2})$ auf $(E, C_3, C_2, C_4, C_2')$: $g^{2}$ ist $(E, C_3, E, C_2, E)$, also $(2, -1, 2, 2, 2)$; $\chi_{\mathrm{Sym}^{2}} = \frac12\bigl((4, 1, 4, 0, 0) + (2, -1, 2, 2, 2)\bigr) = (3, 0, 3, 1, 1) = A_{1g} + E_g$. Die nichttriviale Komponente $E_g$ kommt in $\Gamma_{\mathrm{vib}}$ des Oktaeders $\mathrm{CuL_6}$ vor ($\Gamma_{\mathrm{vib}} = A_{1g} + E_g + 2T_{1u} + T_{2g} + T_{2u}$): Die $E_g$-Schwingung (zwei Liganden heraus, vier hinein --- die tetragonale Streckung) koppelt linear an den Zustand und senkt die Energie. Der Oktaeder streckt sich entlang $z$: $D_{4h}$.
+
+\schritt{Schritt 4 --- Nach der Verzerrung}
+In $D_{4h}$ spaltet $e_g\to a_{1g}(d_{z^{2}}) + b_{1g}(d_{x^{2}-y^{2}})$ (Satz 14.2b). Bei Streckung entlang $z$ rücken die axialen Liganden weg, $d_{z^{2}}$ sinkt, $d_{x^{2}-y^{2}}$ steigt; das Loch geht in $d_{x^{2}-y^{2}}$: Grundzustand $b_{1g}^{1}$, nicht entartet. Kupfer(II)-Komplexe haben praktisch immer vier kurze und zwei lange Bindungen --- $[\mathrm{Cu(H_2O)_6}]^{2+}$: $4\times1{,}95$, $2\times2{,}38$ \AA.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Jahn--Teller ist Satz 9.3 mit einer Vorzeichenfrage}: Ob $\mathrm{Sym}^{2}\Gamma$ (für Bosonen-artige Kopplung) eine nichttriviale Schwingungsdarstellung enthält, entscheidet die Tafel; dass sie es für jede mehrdimensionale Darstellung jeder nichtlinearen Punktgruppe tut, haben Jahn und Teller 1937 durch Nachsehen bewiesen --- bis heute gibt es keinen Beweis ohne Fallunterscheidung. Lineare Moleküle sind die Ausnahme (Renner--Teller: quadratische Kopplung). Und für Kramers-Dubletts (Kapitel 11) gilt der Satz nicht: $\mathrm{Alt}^{2}$ statt $\mathrm{Sym}^{2}$, und die Zeitumkehr schützt die Entartung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- High-spin und low-spin}
+Für $d^{6}$ im Oktaeder: Bestimmen Sie beide Konfigurationen, ihre Kristallfeldstabilisierung und das magnetische Moment, und vergleichen Sie mit Pauling--Coryell.
+
+\loesung
+\schritt{Schritt 1 --- Konfigurationen}
+$t_{2g}$ bei $-\frac25\Delta_o$, $e_g$ bei $+\frac35\Delta_o$ (Schwerpunkt null: $3\cdot(-\frac25) + 2\cdot\frac35 = 0$). High-spin $t_{2g}^{4}e_g^{2}$: ein Paar in $t_{2g}$, vier ungepaart, $S = 2$. Low-spin $t_{2g}^{6}$: drei Paare, $S = 0$.
+
+\schritt{Schritt 2 --- Energien}
+High-spin: $4\cdot(-\frac25) + 2\cdot\frac35 = -\frac25\Delta_o$, plus eine Paarungsenergie $P$. Low-spin: $6\cdot(-\frac25) = -\frac{12}5\Delta_o$, plus $3P$. Differenz: low-spin ist günstiger, wenn $-\frac{12}5\Delta_o + 3P < -\frac25\Delta_o + P$, also $2P < 2\Delta_o$, also $\Delta_o > P$. \checkmark\ Für $\mathrm{Fe}^{2+}$ ist $P\approx17\,000$ cm$^{-1}$; $\mathrm{H_2O}$ gibt $\Delta_o\approx10\,000$ (high-spin), $\mathrm{CN^{-}}$ $\approx33\,000$ (low-spin, $[\mathrm{Fe(CN)_6}]^{4-}$ ist diamagnetisch).
+
+\schritt{Schritt 3 --- Magnetisches Moment}
+Spin-only: $\mu = \sqrt{n(n + 2)}\,\mu_B$ für $n$ ungepaarte Elektronen. High-spin $n = 4$: $\sqrt{24} = 4{,}90\,\mu_B$. Low-spin $n = 0$: $0$. Pauling und Coryell (1936) maßen an Desoxyhämoglobin etwa $5{,}4\,\mu_B$ pro Häm (Bahnbeiträge erhöhen den Wert über spin-only), an Oxyhämoglobin null: vier ungepaarte Elektronen im einen, keines im anderen. Der Spinzustand des Eisens wechselt mit jeder Sauerstoffbindung --- und mit ihm die Größe des Ions.
+
+\schritt{Schritt 4 --- Entartung}
+High-spin $t_{2g}^{4}e_g^{2}$: Das $t_{2g}$-Loch kann in drei Orbitalen sitzen: Zustand ${}^{5}T_{2g}$, dreifach bahnentartet, Spin $5$-fach: $15$ Zustände. Jahn--Teller-aktiv ($\mathrm{Sym}^{2}T_{2g}\ni E_g, T_{2g}$), aber schwach (das $t_{2g}$-Loch zeigt zwischen die Liganden). Low-spin $t_{2g}^{6}$: ${}^{1}A_{1g}$, ein Zustand. Die Bindung von $\mathrm{O_2}$ führt von $15$ Zuständen zu einem.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Spin-crossover} --- der Wechsel zwischen high- und low-spin bei $\Delta_o\approx P$ --- lässt sich in manchen Eisen(II)-Komplexen durch Temperatur, Druck oder Licht schalten, mit Hysterese; solche Verbindungen werden als molekulare Speicher untersucht. Das Hämoglobin ist der älteste Spin-crossover-Schalter: geschaltet durch einen Liganden, abgelesen von der Lunge, viermal pro Molekül, und mit einer Kooperativität, die aus der Geometrieänderung folgt. Die Darstellungstheorie liefert die Zahlen $3$, $2$, $15$, $1$ und die Richtung der Bewegung; die Chemie liefert $\Delta_o$ und $P$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Warum Quarks Farbe haben}
+$\Delta^{++}$ besteht aus drei $u$-Quarks mit Spin $\frac32$ und ohne Bahndrehimpuls. Zeigen Sie, dass das ohne einen weiteren Freiheitsgrad das Pauli-Prinzip verletzt, und wie Farbe es rettet.
+
+\loesung
+\schritt{Schritt 1 --- Flavour}
+$uuu$ ist unter Vertauschung der Quarks vollständig symmetrisch: Darstellung $S^{(3)}$ von $S_3$ (das $\mathbf{10}$ ist $W_{(3)}$, symmetrisch --- Satz 14.3).
+
+\schritt{Schritt 2 --- Spin}
+Spin $\frac32$ aus drei Spins $\frac12$: $V_{3/2}\subset V_{1/2}^{\otimes3}$ gehört nach Schur--Weyl zu $S^{(3)}$ (Aufgabe 12.3): symmetrisch.
+
+\schritt{Schritt 3 --- Ort}
+Grundzustand, $L = 0$, alle drei im selben Orbital: symmetrisch.
+
+\schritt{Schritt 4 --- Pauli}
+Quarks sind Fermionen (Spin $\frac12$); die Gesamtwellenfunktion muss das Vorzeichen $S^{(1,1,1)}$ tragen. Produkt von drei symmetrischen Faktoren ist symmetrisch: $S^{(3)}\otimes S^{(3)}\otimes S^{(3)} = S^{(3)}\neq S^{(1,1,1)}$. Widerspruch --- $\Delta^{++}$ dürfte nicht existieren (ebenso $\Delta^{-} = ddd$, $\Omega^{-} = sss$).
+
+\schritt{Schritt 5 --- Farbe}
+Ein weiterer Freiheitsgrad mit drei Werten (\Person{Greenberg} 1964; \Person{Han}, \Person{Nambu} 1965) und der Forderung, dass Hadronen Farbsinguletts sind: Das Singulett in $\mathbf 3^{\otimes3}$ ist $W_{(1,1,1)}$, die Determinante, vollständig antisymmetrisch unter $S_3$. Gesamt: symmetrisch $\otimes$ antisymmetrisch $=$ antisymmetrisch. \checkmark\ Und für die Baryonen des Oktetts: Flavour $\otimes$ Spin muss zusammen symmetrisch sein; $S^{(2,1)}\otimes S^{(2,1)} = S^{(3)}\oplus S^{(2,1)}\oplus S^{(1,1,1)}$ enthält $S^{(3)}$ genau einmal --- das Oktett mit Spin $\frac12$, einmal. In $SU(6)$ (Flavour mal Spin) ist das die $\mathbf{56} = (\mathbf{10}, \tfrac32)\oplus(\mathbf 8, \tfrac12)$: $10\cdot4 + 8\cdot2 = 56$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Farbe wurde aus der Darstellungstheorie von $S_3$ erschlossen}, drei Jahre bevor irgendein dynamisches Argument für sie sprach. Das Zählargument --- drei Faktoren symmetrisch, Pauli verlangt antisymmetrisch, also fehlt ein Faktor mit mindestens drei Werten --- ist Satz 12.4 für $d = 3$, $n = 3$. Dass es genau drei Farben sind, bestätigte später die Zerfallsrate $\pi^{0}\to\gamma\gamma$ (proportional zu $N_c^{2}$) und das Verhältnis $R$ der Hadron- zur Myonerzeugung in $e^{+}e^{-}$-Stößen. Die $\mathbf{56}$ von $SU(6)$ (Gürsey--Radicati 1964) ist, zusammen mit dem Farbsingulett, die Antwort auf die Frage, warum es genau die beobachteten Grundzustands-Baryonen gibt: ein Dekuplett mit Spin $\frac32$, ein Oktett mit Spin $\frac12$, und kein Singulett mit Spin $\frac12$ ohne Bahndrehimpuls.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Drei Daten}
+\textbf{1891}: \Person{Fedorov} in Petersburg und \Person{Schoenflies} in Göttingen leiten unabhängig die $230$ Raumgruppen her, korrespondieren, korrigieren einander (Fedorov hatte $229$, Schoenflies $227$); \Person{Barlow} findet sie 1894 ein drittes Mal. Die Röntgenbeugung, die sie sichtbar machte, kam 1912 (Laue).
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{1936}: \Person{Pauling} und \Person{Coryell} messen die magnetische Suszeptibilität von Blut und finden, dass Hämoglobin beim Sauerstoffbinden von paramagnetisch zu diamagnetisch wechselt --- für Pauling der Beleg, dass die Bindung kovalent ist und den Spinzustand des Eisens ändert. \Person{Perutz} brauchte bis 1959 für die Struktur (Nobelpreis 1962) und bis 1970 für den Mechanismus; die Rolle des Spinzustands als Auslöser war seine Deutung von Paulings Messung. \textbf{1964}: Am 31.\ Januar findet die Blasenkammer-Gruppe in Brookhaven in Aufnahme Nr.~97\,025 die Spur des $\Omega^{-}$, Masse $1686\pm12$ MeV, Zerfallskette über $\Xi^{0}$ und $\Lambda$ --- drei Jahre nach dem Achtfachen Weg, zwei nach der Vorhersage. Gell-Mann erhielt 1969 den Nobelpreis; Ne'eman, der als israelischer Offizier bei Salam in London promovierte und dieselbe $SU(3)$ fand, nicht.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Die drei Anwendungen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Topologische Quantenchemie} & Bradlyn et al.\ 2017: Für alle $230$ Raumgruppen wurden die \enquote{Banddarstellungen} klassifiziert --- welche Zerlegungen der Bänder nach den $G_{\vec k}$ an allen Hochsymmetriepunkten zu atomaren Orbitalen passen und welche nicht. Die, die nicht passen, sind topologische Isolatoren; Datenbanken haben seither Tausende Materialien so klassifiziert.\\
+\textbf{Spin-crossover und Häm} & Zeitaufgelöste Röntgenspektroskopie (Freie-Elektronen-Laser, seit 2012) verfolgt den Spinwechsel des Eisens nach Lichtanregung in Femtosekunden; im Hämoglobin die Dissoziation des $\mathrm{CO}$ und die Rückkehr zum high-spin-Zustand in unter einer Pikosekunde.\\
+\textbf{Exotische Hadronen} & Seit 2003 ($X(3872)$) und besonders am LHC (Pentaquarks 2015, Tetraquarks $T_{cc}^{+}$ 2021) sind Zustände gefunden, die nicht $q\bar q$ oder $qqq$ sind --- alle Farbsinguletts, $\mathbf 1\subset\mathbf 3^{\otimes a}\otimes\bar{\mathbf 3}^{\otimes b}$ für $a - b\equiv0\pmod3$. Die $SU(3)$-Zerlegung sagt, welche Multipletts möglich sind; die QCD auf dem Gitter, welche gebunden sind.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 14.1} & $230$ Raumgruppen; Bloch = Charaktere von $\mathbb Z^{3}$; Bandberührung durch Entartung\\
+\textbf{Satz 14.2} & $t_{2g}/e_g$; $D_{4h}$-Aufspaltung; high-/low-spin, $\Delta_o$ gegen $P$; Hämoglobin\\
+\textbf{Satz 14.3} & $SU(3)$: $(p, q)$, $\mathbf 3^{\otimes3} = \mathbf{10} + \mathbf 8 + \mathbf 8 + \mathbf 1$ via Schur--Weyl; $\Omega^{-}$\\
+\textbf{Die Bruchfälle} & Quasikristalle; Jahn--Teller; gebrochene Flavour-Symmetrie\\
+\textbf{Aufgaben} & Kupfer streckt sich; $\mu = \sqrt{n(n+2)}$; Farbe aus Pauli\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kapitel 15 blickt zurück: auf das Wasser, mit dem alles begann, auf die Muster, die der Band wiederholt hat, auf das, was er ausgelassen hat, und auf das, was im August 2026 offen ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

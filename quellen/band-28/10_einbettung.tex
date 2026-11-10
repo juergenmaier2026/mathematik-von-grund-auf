@@ -1,0 +1,268 @@
+\part{Erkennen und Messen}
+
+\chapter{Ein Kanal genügt}
+
+\section{Der Zustand aus einer Zahl}
+
+\begin{merksatz}
+\boxtitel{Die Herzfrequenz, und was in ihr steckt}
+Von der gereizten Zelle aus Kapitel 6 sieht man im EKG nur die Schlagabstände --- die RR-Intervalle --- und von der Spannung nur einen Kanal. Der Zustand hat zwei Veränderliche, $v$ und $w$, und der Reiz macht aus ihnen drei. Kann ein Kanal drei ersetzen?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.6cm}P{2.0cm}P{1.0cm}P{3.0cm}@{}}
+\toprule
+\textbf{Reihe} & \textbf{Verzögerung $\tau$} & $m$ & \textbf{falsche Nachbarn}\\
+\midrule
+freier Zyklus, $v(t)$ & $1{,}0$ & $2$ & $0{,}0\,\%$\\
+gereizt $T_p = 18$, $v(t)$ & $3{,}0$ & $3$ & $0{,}4\,\%$\\
+Lorenz, $x(t)$ & $0{,}16$ & $3$ & $0{,}0\,\%$\\
+weißes Rauschen & $1$ & $6$ & $21\,\%$ --- und bleibt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Aus einem Kanal und seinen verzögerten Kopien entsteht der Zustandsraum wieder: zwei Kopien für den Zyklus, drei für den gereizten Zyklus und für Lorenz. Nur beim Rauschen gelingt es nie --- und das ist die Diagnose.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bei $T_p = 18$ nehmen die RR-Intervalle nur zwei Werte an, $37{,}3$ und $51{,}4$, in einer Folge, die sich nie wiederholt} --- zwei Reize bis zum Schlag oder drei, und die Reihenfolge der Zweien und Dreien ist die Binärentwicklung der Windungszahl $0{,}43$ aus Kapitel 6. Das Auge sieht Unordnung; die Einbettung sieht einen Torus, auf dem ein Verlauf mit irrationaler Steigung läuft. Dieses Kapitel ist die dritte Überraschung des Vorworts: Man braucht die Gleichungen nicht, und man braucht nicht alle Veränderlichen. Man braucht eine, lange genug.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz von Takens}
+
+\begin{definition}
+\boxtitelm{Definition 10.1 --- Verzögerungsvektor}
+Aus einer Messreihe $s_n = h(x(n\,\Delta t))$ --- einer glatten Funktion $h$ des Zustands --- bilde man
+\[ \mathbf s_n = \bigl(s_n,\ s_{n-\tau},\ s_{n-2\tau},\ \ldots,\ s_{n-(m-1)\tau}\bigr) \in \mathbb R^{m} . \]
+$m$ heißt \Begriff{Einbettungsdimension}, $\tau$ \Begriff{Verzögerung}. Die Abbildung $x \mapsto \mathbf s$ heißt \Begriff{Verzögerungseinbettung}, wenn sie den Attraktor umkehrbar und glatt in $\mathbb R^{m}$ abbildet.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 10.2 --- Takens 1981}
+Liegt der Attraktor auf einer glatten Mannigfaltigkeit der Dimension $d$, so ist für $m \ge 2d + 1$ und fast jede Wahl von $h$ und $\tau$ die Verzögerungsabbildung eine Einbettung: Die Geometrie der $\mathbf s_n$ ist die des Attraktors, und mit ihr Fixpunkte, Zyklen, Ljapunow-Exponenten und Dimension. Für einen seltsamen Attraktor der Box-Dimension $D$ genügt $m > 2D$ (Sauer, Yorke, Casdagli 1991).
+
+\schritt{Warum $2d + 1$}
+Zwei Punkte eines $d$-dimensionalen Gebildes im $\mathbb R^{m}$ fallen bei einer zufälligen Projektion zusammen, wenn ihre Verbindung in den Kern fällt --- Bedingungen von Kodimension $m$ an ein $2d$-dimensionales Paar. Für $m > 2d$ ist das für fast keine Projektion der Fall: keine Selbstdurchdringung. Das ist das Whitney-Argument, Band 20; Takens zeigt, dass die Verzögerungskoordinaten \enquote{zufällig genug} sind (Auslassung 12, \zit{24}). $\blacksquare$
+
+\schritt{Warum es überhaupt gehen kann}
+$s_{n-\tau}$ ist eine Funktion des Zustands vor $\tau$ Schritten, und der ist wegen der Umkehrbarkeit des Flusses (Satz 1.2) eine Funktion des Zustands jetzt. Jede Koordinate des Verzögerungsvektors ist also eine Funktion von $x(t)$ --- und $m$ verschiedene Funktionen, generisch unabhängig, bestimmen einen Punkt in $d \le m$ Dimensionen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Kanal genügt, weil die Vergangenheit eines Kanals die übrigen Veränderlichen enthält: Was $w$ jetzt ist, steht in dem, was $v$ vorher war.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Satz sagt \enquote{fast jede} Wahl --- und die Ausnahmen sind in der Praxis die Regel.} $\tau$ als Vielfaches der Periode macht alle Koordinaten gleich: eine Diagonale, keine Einbettung. $\tau$ sehr klein tut dasselbe näherungsweise. $h$ konstant auf einem Teil des Attraktors --- die Herzzelle in Ruhe --- verliert dort alles. Die Theorie garantiert eine Einbettung für generische Wahl; der folgende Abschnitt sagt, wie man eine gute findet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Wahl von $\tau$ und $m$}
+
+\begin{merksatz}
+\boxtitel{Satz 10.3 --- zwei Faustregeln mit Begründung}
+\schritt{$\tau$: das erste Minimum der Transinformation}
+$I(\tau) = \sum p(s_n, s_{n-\tau})\ln\frac{p(s_n, s_{n-\tau})}{p(s_n)\,p(s_{n-\tau})}$ misst, wie viel $s_{n-\tau}$ über $s_n$ sagt (Band 21). Für kleines $\tau$ ist es fast alles --- Koordinaten redundant; für großes $\tau$ fast nichts --- Koordinaten unverbunden. \Person{Fraser} und \Person{Swinney} (1986): das erste lokale Minimum. Lorenz, $\Delta t = 0{,}01$: $I(0{,}01) = 2{,}51$ nat, $I(0{,}16) = 0{,}89$ --- erstes Minimum --- $I(0{,}25) = 1{,}0$. Also $\tau = 0{,}16$, etwa ein Fünftel eines Umlaufs. (Die Autokorrelation fällt bei $0{,}32$ auf $1/\mathrm e$; ihr erster Nulldurchgang liegt bei $5{,}6$ und taugt nicht.)
+
+\schritt{$m$: falsche Nachbarn}
+Zwei Punkte, die in $m$ Dimensionen nahe sind und in $m + 1$ weit auseinander, waren in $m$ nur durch Projektion benachbart --- \Begriff{falsche Nachbarn}. \Person{Kennel}, \Person{Brown} und \Person{Abarbanel} (1992): Man zähle sie für $m = 1, 2, \ldots$ und nehme das erste $m$, bei dem ihr Anteil auf null fällt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.8cm}P{1.0cm}P{1.0cm}P{1.0cm}P{1.0cm}P{1.0cm}P{1.0cm}@{}}
+\toprule
+$m$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$\\
+\midrule
+Lorenz $x$, $\tau = 0{,}16$ & $97\,\%$ & $3{,}3\,\%$ & $0$ & $0$ & $0$ & $0$\\
+Rauschen & $99\,\%$ & $71\,\%$ & $25\,\%$ & $16\,\%$ & $18\,\%$ & $21\,\%$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Lorenz ist bei $m = 3$ entfaltet --- weniger als Takens' $2\cdot2{,}06 + 1 = 5$, weil der Satz hinreichend ist, nicht notwendig. Rauschen entfaltet sich nie: Jeder Nachbar ist ein Zufallsnachbar, und mehr Dimensionen machen ihn nicht wahrer.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Anteil falscher Nachbarn beim Rauschen fällt zunächst --- $99$, $71$, $25$ --- und steigt dann wieder}: In hohen Dimensionen sind alle Abstände groß, und das zweite Kriterium (Abstand nach dem Schritt größer als zwei Standardabweichungen) schlägt an. Ohne dieses zweite Kriterium, das Kennel und Mitarbeiter genau deshalb hinzufügten, fiele die Kurve beim Rauschen auf null und erklärte den Zufall zum Attraktor in vier Dimensionen --- der erste von mehreren Fehlern, die in den neunziger Jahren tatsächlich gemacht wurden (Kapitel 12).}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Einbettung ist eine Brille, keine Lupe}
+Mit $m$ und $\tau$ kann man jede Reihe in einen Raum legen. Was man dort sieht, ist nicht deshalb ein Attraktor.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.8cm}@{}}
+\toprule
+\textbf{Gefiltertes Rauschen} & AR(2) mit Schwingungsanteil: Die Einbettung zeigt einen verwaschenen Ring, der wie ein verrauschter Zyklus aussieht --- und keiner ist.\\
+\textbf{Zu kurze Reihe} & Hundert Punkte einer chaotischen Reihe in $m = 5$: keine Nachbarn, keine Struktur, jede Schätzung beliebig.\\
+\textbf{Nichtstationär} & Eine Reihe, deren Parameter driften, hat keinen Attraktor; die Einbettung zeigt einen, der sich verschiebt --- und die Methoden der Kapitel 11 und 12 messen die Drift als Dimension.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Satz 10.2 setzt voraus, dass ein Attraktor da ist. Er beweist nicht, dass einer da ist. Die Einbettung macht sichtbar, was ist --- und was nicht ist, in einer Form, die aussieht, als wäre es.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Wie viele Punkte braucht man?} Die Faustregel von \Person{Tsonis}: $N \gtrsim 10^{2 + 0{,}4 D}$ für einen Attraktor der Dimension $D$ --- $10^{3}$ für Lorenz, $10^{4}$ für $D = 5$, $10^{6}$ für $D = 10$; die strengere von \Person{Eckmann} und \Person{Ruelle} 1992: $D \le 2\log_{10}N$, also mit $10^{4}$ Punkten keine Dimension über $8$ messbar, was auch immer herauskommt. Eine Nacht EKG hat $30\,000$ Schläge; eine Minute hat $70$. Das Kleingedruckte der Einbettung ist die Länge.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Einbettung von Hand}
+Die Reihe $s_n = \sin(n\pi/2)$: $0, 1, 0, -1, 0, 1, \ldots$ Betten Sie mit $m = 2$ ein, einmal mit $\tau = 1$, einmal mit $\tau = 2$.
+
+\loesung
+\schritt{Schritt 1 --- $\tau = 1$}
+$(s_n, s_{n-1})$: $(1,0), (0,1), (-1,0), (0,-1), (1,0), \ldots$ --- vier Punkte auf einem Kreis, ein Viererzyklus; die Einbettung des Sinus (ein Zyklus, $d = 1$) in $m = 2$. \checkmark
+
+\schritt{Schritt 2 --- $\tau = 2$}
+$(s_n, s_{n-2})$: $(0,0), (1,-1), (0,0), (-1,1), \ldots$ --- drei Punkte auf der Gegendiagonalen, $(0,0)$ zweimal: Die Phasen $0$ und $\pi$ fallen zusammen. Keine Einbettung: $\tau = T/2$ macht $s_{n-\tau} = -s_n$, und beide Koordinaten tragen dieselbe Information.
+
+\schritt{Schritt 3 --- Die Regel}
+Für einen Sinus ist $\tau = T/4$ ideal (Kreis), $T/2$ und $T$ entartet (Gerade). Die Transinformation hat bei $T/4$ ihr erstes Minimum --- $\sin$ und $\cos$ sind, über eine Periode, unverbunden. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für den Herzzyklus mit Periode $39{,}5$ fand die Transinformation $\tau = 1{,}0$}, viel weniger als ein Viertel --- weil das Aktionspotential ein Relaxationsoszillator ist und seine Information im kurzen Aufstrich sitzt, nicht gleichmäßig über die Periode verteilt. Die Faustregel $T/4$ gilt für sinusartige Reihen; die Transinformation gilt für alle.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Falsche Nachbarn von Hand}
+Die Reihe $2, 5, 3, 5, 2, 1, 4, 1$. Sind die Punkte $n = 2$ und $n = 4$ (beide $s = 5$) in $m = 1$ Nachbarn --- und in $m = 2$, $\tau = 1$?
+
+\loesung
+\schritt{Schritt 1 --- $m = 1$}
+$s_2 = s_4 = 5$: Abstand $0$, nächste Nachbarn.
+
+\schritt{Schritt 2 --- $m = 2$}
+$(s_2, s_1) = (5, 2)$, $(s_4, s_3) = (5, 3)$: Abstand $1$ --- noch Nachbarn.
+
+\schritt{Schritt 3 --- $m = 3$}
+$(5, 2, \cdot)$ braucht $s_0$, das fehlt; nehmen wir stattdessen die Zukunft als Prüfung: $s_3 = 3$ gegen $s_5 = 2$, Abstand $1$; Verhältnis zum Abstand in $m = 2$: $1/1 = 1 < 15$. Kein falscher Nachbar.
+
+\schritt{Schritt 4 --- Ein falscher}
+$n = 6$ und $n = 8$ (beide $s = 1$): in $m = 2$ die Punkte $(1, 2)$ und $(1, 4)$, Abstand $2$; in $m = 1$ Abstand $0$. Verhältnis $2/0 = \infty > 15$: falscher Nachbar in $m = 1$. \checkmark\ Die Reihe hat in $m = 1$ falsche Nachbarn, in $m = 2$ (soweit prüfbar) keine --- eine zweidimensionale Dynamik.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Mit acht Punkten ist das ein Spiel, kein Ergebnis}: Der Bruchfall sagt, dass man Tausende braucht. Aber der Mechanismus ist derselbe --- ein Punktepaar, das nahe war, weil eine Koordinate fehlte, trennt sich, sobald sie da ist. Die Schwelle $15$ ist Konvention (Kennel und Mitarbeiter fanden Ergebnisse zwischen $10$ und $50$ unempfindlich).}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- Wie lang muss das EKG sein?}
+Jemand behauptet, die Herzfrequenz eines Gesunden liege auf einem Attraktor der Dimension $6$, geschätzt aus zehn Minuten Aufzeichnung. Prüfen Sie.
+
+\loesung
+\schritt{Schritt 1 --- Punkte}
+Zehn Minuten bei $70$ Schlägen: $N = 700$ RR-Intervalle.
+
+\schritt{Schritt 2 --- Eckmann--Ruelle}
+$D \le 2\log_{10}700 = 2\cdot2{,}85 = 5{,}7$. Eine Dimension $6$ ist mit $700$ Punkten nicht messbar; der Wert ist die Obergrenze der Methode, nicht eine Eigenschaft des Herzens.
+
+\schritt{Schritt 3 --- Tsonis}
+$N \gtrsim 10^{2 + 2{,}4} = 10^{4{,}4} = 25\,000$ Schläge: sechs Stunden.
+
+\schritt{Schritt 4 --- Und dann}
+Sechs Stunden Herzfrequenz sind nicht stationär --- Schlaf, Wachen, Mahlzeiten. Der dritte Bruchfall: Die Methode braucht eine Länge, die die Voraussetzung zerstört.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Genau das war das Schicksal der \enquote{Chaos im Herzen}-Literatur der neunziger Jahre}: Dimensionen zwischen $4$ und $9$ aus Aufzeichnungen, die die Eckmann-Ruelle-Grenze nicht hergaben, und ohne den Test aus Kapitel 12. Was von ihr blieb, ist nicht die Dimension, sondern das, was Kapitel 12 zeigt: Die Herzfrequenz ist nichtlinear --- und der Nachweis dafür braucht keine Dimension.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Warwick 1980}
+\Person{Floris Takens} bewies den Satz für ein Symposium in Warwick 1980; die Arbeit erschien 1981 in den Lecture Notes in Mathematics unter dem Titel \enquote{Detecting strange attractors in turbulence}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Gleichzeitig und unabhängig hatten \Person{Packard}, \Person{Crutchfield}, \Person{Farmer} und \Person{Shaw} --- das \enquote{Dynamical Systems Collective} in Santa Cruz, Doktoranden ohne Betreuer --- 1980 in den Physical Review Letters vorgeschlagen, aus einer Reihe und ihren Ableitungen den Zustandsraum zu rekonstruieren, und es an einem tropfenden Wasserhahn gezeigt. \textbf{Takens lieferte den Beweis, Santa Cruz die Praxis}; die Idee geht nach Takens' eigener Angabe auf ein Gespräch mit \Person{Ruelle} zurück. \Person{Sauer}, \Person{Yorke} und \Person{Casdagli} 1991 dehnten den Satz auf fraktale Attraktoren aus und ersetzten $2d + 1$ durch $2D$.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Wasserhahn}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Shaw}s Wasserhahn in Santa Cruz --- ein Tropfen fällt durch eine Lichtschranke, gemessen wird nur die Zeit zwischen Tropfen --- war das erste Experiment, dessen Attraktor aus einer Reihe von Intervallen rekonstruiert wurde: \textbf{eine Herzfrequenz des Wasserhahns}. Die Rückkehrabbildung $(T_n, T_{n+1})$ zeigte bei wachsendem Durchfluss Periodenverdopplung und dann ein Zelt wie bei Lorenz. Zehn Jahre bevor jemand RR-Intervalle einbettete, war gezeigt, dass Intervalle genügen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Einbettung heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Reservoir Computing} & Ein zufälliges rekurrentes Netz als Einbettung: Es sagt Lorenz über acht Ljapunow-Zeiten voraus (Pathak 2018) --- ohne Gleichungen, aus einem Kanal.\\
+\textbf{Koopman und DMD} & Statt des Attraktors die linearen Operatoren auf Funktionen des Zustands lernen; die Einbettung wird zur Wahl der Funktionen.\\
+\textbf{Kausale Einbettung} & Convergent Cross Mapping (Sugihara 2012): Zwei Reihen, deren Einbettungen einander vorhersagen, sind gekoppelt --- Kausalität ohne Eingriff.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Takens hat eine Folgerung, die erst dreißig Jahre später jemand benutzt hat}: Wenn $x$ auf $y$ wirkt, enthält die Einbettung von $y$ den Zustand von $x$ --- also lässt sich $x$ aus Nachbarn in der $y$-Einbettung rekonstruieren, und zwar umso besser, je länger die Reihe. Die Umkehrung gilt nicht. \Person{Sugihara} und Mitarbeiter haben daraus 2012 einen Kausalitätstest für Ökosysteme gemacht, in denen man nicht eingreifen kann --- Sardinen und Anchovis vor Kalifornien, deren Bestände einander nicht beeinflussen, sondern beide von der Temperatur getrieben sind. Das Werkzeug dieses Kapitels, einmal umgedreht, beantwortet die Frage aus Band 26: Wer wirkt auf wen?}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 10.1} & Verzögerungsvektor, $m$, $\tau$\\
+\textbf{Satz 10.2} & Takens: $m \ge 2d + 1$ genügt\\
+\textbf{Satz 10.3} & $\tau$: Transinformation; $m$: falsche Nachbarn\\
+\textbf{Der Bruchfall} & Einbettung beweist keinen Attraktor; $N \gtrsim 10^{2+0{,}4D}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Attraktor ist aus einem Kanal wiederhergestellt. Kapitel 11 misst ihn: seine Dimension, die $2{,}06$ von Lorenz --- und was eine Dimension ist, die keine ganze Zahl ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

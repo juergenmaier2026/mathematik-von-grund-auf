@@ -1,0 +1,872 @@
+{
+ "Grundbegriffe": [
+  [
+   "Zahlbereiche N, Z, Q, R, C",
+   "0, 1, 3"
+  ],
+  [
+   "Irrationalität von 2",
+   "0, 1, 7"
+  ],
+  [
+   "Bruchrechnung",
+   "0"
+  ],
+  [
+   "Potenzen, Wurzeln, Logarithmen",
+   "0"
+  ],
+  [
+   "Binomische Formeln",
+   "0, 6"
+  ],
+  [
+   "Quadratische Gleichungen",
+   "0, 7"
+  ],
+  [
+   "Ungleichungen und Beträge",
+   "0, 3"
+  ],
+  [
+   "Funktionsbegriff",
+   "0, 3, 7, 10"
+  ],
+  [
+   "Umkehrfunktion, Verkettung",
+   "0, 3"
+  ],
+  [
+   "Vollständige Induktion",
+   "0, 1, B"
+  ],
+  [
+   "Mengen, Relationen, Abbildungen",
+   "10, B"
+  ]
+ ],
+ "Analysis": [
+  [
+   "Folgen und Grenzwerte",
+   "0, 3"
+  ],
+  [
+   "ε-δ-Definition",
+   "0, 3, 7, 10"
+  ],
+  [
+   "Reihen, geometrische Reihe",
+   "0, 3"
+  ],
+  [
+   "Stetigkeit, Zwischenwertsatz",
+   "3, 8"
+  ],
+  [
+   "Gleichmäßige Stetigkeit",
+   "3, 10"
+  ],
+  [
+   "Ableitung, Ableitungsregeln",
+   "0, 3"
+  ],
+  [
+   "Mittelwertsätze, Taylor",
+   "3"
+  ],
+  [
+   "Kurvendiskussion, Extremwerte",
+   "0, 3"
+  ],
+  [
+   "Riemann-Integral",
+   "0, 3"
+  ],
+  [
+   "Hauptsatz der Analysis",
+   "0, 3, 7"
+  ],
+  [
+   "Integrationstechniken",
+   "3, 5"
+  ],
+  [
+   "Gleichmäßige Konvergenz",
+   "3"
+  ],
+  [
+   "Differentialrechnung im Rn",
+   "3, 9"
+  ],
+  [
+   "Kurven- und Flächenintegrale",
+   "9"
+  ],
+  [
+   "Sätze von Green, Gauß, Stokes",
+   "9"
+  ],
+  [
+   "Differentialformen",
+   "9"
+  ],
+  [
+   "Nichtstandard-Analysis",
+   "3, 10"
+  ]
+ ],
+ "Algebra und Zahlentheorie": [
+  [
+   "Teilbarkeit, ggT, euklidischer Algorith- mus",
+   "1"
+  ],
+  [
+   "Primzahlen, Fundamentalsatz",
+   "1, 7"
+  ],
+  [
+   "Unendlichkeit der Primzahlen",
+   "0, 1, B"
+  ],
+  [
+   "Modulares Rechnen, Kongruenzen",
+   "1"
+  ],
+  [
+   "Chinesischer Restsatz",
+   "1"
+  ],
+  [
+   "Sätze von Fermat, Euler, Wilson",
+   "1"
+  ],
+  [
+   "Quadratische Reziprozität",
+   "1, 7"
+  ],
+  [
+   "Primzahlverteilung, Riemannsche Ver- mutung",
+   "1"
+  ],
+  [
+   "Diophantische Gleichungen",
+   "1, 10"
+  ],
+  [
+   "Kettenbrüche, Pellsche Gleichung",
+   "1"
+  ],
+  [
+   "Elliptische Kurven",
+   "1"
+  ],
+  [
+   "Kryptographie, RSA",
+   "1"
+  ],
+  [
+   "Lineare Gleichungssysteme",
+   "0, 2, 5"
+  ],
+  [
+   "Matrizen, Determinante",
+   "2"
+  ],
+  [
+   "Vektorräume, Basis, Dimension",
+   "2"
+  ],
+  [
+   "Lineare Abbildungen",
+   "2"
+  ],
+  [
+   "Eigenwerte, Jordanform",
+   "2, 5"
+  ],
+  [
+   "Skalarprodukt, Spektralsatz",
+   "2, 9"
+  ],
+  [
+   "Singulärwertzerlegung",
+   "2, 5"
+  ],
+  [
+   "Gruppen und Symmetrie",
+   "6, 8"
+  ],
+  [
+   "Tensoren, Tensoralgebra",
+   "9"
+  ]
+ ],
+ "Geometrie und Topologie": [
+  [
+   "Satz des Pythagoras",
+   "0, 6, 7"
+  ],
+  [
+   "Strahlensätze, Ähnlichkeit",
+   "0, 6"
+  ],
+  [
+   "Flächen und Volumina",
+   "0, 6"
+  ],
+  [
+   "Trigonometrie, Einheitskreis",
+   "0, 6"
+  ],
+  [
+   "Sinus- und Kosinussatz",
+   "0, 6"
+  ],
+  [
+   "Euklids Axiome",
+   "6, 7, B"
+  ],
+  [
+   "Kegelschnitte",
+   "6"
+  ],
+  [
+   "Isometrien, Symmetriegruppen",
+   "6, 8"
+  ],
+  [
+   "Projektive Geometrie",
+   "6"
+  ],
+  [
+   "Parallelenproblem",
+   "6, 7, B"
+  ],
+  [
+   "Hyperbolische, sphärische Geometrie",
+   "6, 7"
+  ],
+  [
+   "Krümmung, Gauß-Bonnet",
+   "6, 9"
+  ],
+  [
+   "Metrische und topologische Räume",
+   "8"
+  ],
+  [
+   "Kompaktheit, Zusammenhang",
+   "8, 10"
+  ],
+  [
+   "Fundamentalgruppe, Homotopie",
+   "8"
+  ],
+  [
+   "Klassifikation der Flächen",
+   "8"
+  ],
+  [
+   "Homologie",
+   "8"
+  ],
+  [
+   "Knotentheorie",
+   "8"
+  ],
+  [
+   "Mannigfaltigkeiten",
+   "8, 9"
+  ],
+  [
+   "Poincaré-Vermutung",
+   "8"
+  ]
+ ],
+ "Stochastik und Numerik": [
+  [
+   "Kombinatorik",
+   "4"
+  ],
+  [
+   "Bedingte Wahrscheinlichkeit, Bayes",
+   "4"
+  ],
+  [
+   "Zufallsvariablen, Verteilungen",
+   "4"
+  ],
+  [
+   "Erwartungswert, Varianz",
+   "4"
+  ],
+  [
+   "Gesetze der großen Zahlen",
+   "4"
+  ],
+  [
+   "Zentraler Grenzwertsatz",
+   "4"
+  ],
+  [
+   "Markow-Ketten, Martingale",
+   "4"
+  ],
+  [
+   "Schätzen und Testen",
+   "4"
+  ],
+  [
+   "Gleitkommazahlen, Rundungsfehler",
+   "5"
+  ],
+  [
+   "Kondition und Stabilität",
+   "5"
+  ],
+  [
+   "LR- und QR-Zerlegung",
+   "5"
+  ],
+  [
+   "Newton-Verfahren",
+   "5"
+  ],
+  [
+   "Interpolation, Splines",
+   "5"
+  ],
+  [
+   "Numerische Quadratur",
+   "5"
+  ],
+  [
+   "Differentialgleichungen, numerisch",
+   "5"
+  ],
+  [
+   "Monte-Carlo-Verfahren",
+   "4, 5"
+  ]
+ ],
+ "Logik, Grundlagen, Geschichte": [
+  [
+   "Beweistechniken (direkt, indirekt, Induk- tion)",
+   "0, B"
+  ],
+  [
+   "Aussagen- und Prädikatenlogik",
+   "10, B"
+  ],
+  [
+   "Beweiskalküle, natürliches Schließen",
+   "10, B"
+  ],
+  [
+   "Gödelscher Vollständigkeitssatz",
+   "10, B"
+  ],
+  [
+   "Kompaktheitssatz",
+   "10"
+  ],
+  [
+   "Löwenheim-Skolem, Skolem-Paradoxon",
+   "10"
+  ],
+  [
+   "Russellsche Antinomie",
+   "10, 7, B"
+  ],
+  [
+   "ZFC-Axiome",
+   "10, B"
+  ],
+  [
+   "Ordinal- und Kardinalzahlen",
+   "10"
+  ],
+  [
+   "Satz von Cantor, Diagonalverfahren",
+   "3, 10, B"
+  ],
+  [
+   "Auswahlaxiom, Zornsches Lemma",
+   "10, 2"
+  ],
+  [
+   "Banach-Tarski-Paradoxon",
+   "10"
+  ],
+  [
+   "Berechenbarkeit, Halteproblem",
+   "10, B"
+  ],
+  [
+   "Gödels Unvollständigkeitssätze",
+   "10, B, 7"
+  ],
+  [
+   "Satz von Tarski",
+   "10"
+  ],
+  [
+   "Modelltheorie, Ultraprodukte",
+   "10"
+  ],
+  [
+   "Forcing, Kontinuumshypothese",
+   "10, B"
+  ],
+  [
+   "Große Kardinalzahlen",
+   "10, B"
+  ],
+  [
+   "Typentheorie, HoTT",
+   "10, B"
+  ],
+  [
+   "Beweisassistenten, Formalisierung",
+   "10, B"
+  ],
+  [
+   "Grundlagenkrise",
+   "7, B"
+  ],
+  [
+   "Hilberts Programm",
+   "7, 10, B"
+  ],
+  [
+   "Geschichte der Zahlzeichen",
+   "7, 0"
+  ],
+  [
+   "Griechische Mathematik",
+   "7, 6, B"
+  ],
+  [
+   "Islamische Mathematik",
+   "7"
+  ],
+  [
+   "Infinitesimalrechnung, Prioritätsstreit",
+   "7, 0, 3"
+  ],
+  [
+   "Rigorisierung des 19. Jahrhunderts",
+   "7, 3"
+  ]
+ ],
+ "Höhere Algebra und Funktionentheorie": [
+  [
+   "Gruppe, Untergruppe, Ordnung",
+   "11, 6, 15"
+  ],
+  [
+   "Satz von Lagrange",
+   "11, 1"
+  ],
+  [
+   "Normalteiler, Faktorgruppe",
+   "11"
+  ],
+  [
+   "Homomorphiesätze",
+   "11, 2"
+  ],
+  [
+   "Gruppenoperation, Bahnensatz",
+   "11, 15"
+  ],
+  [
+   "Sylowsätze",
+   "11"
+  ],
+  [
+   "Ring, Ideal, Hauptidealring",
+   "11, 1"
+  ],
+  [
+   "Polynomring, Irreduzibilität",
+   "11, 0"
+  ],
+  [
+   "Körpererweiterung, Grad",
+   "11"
+  ],
+  [
+   "Konstruierbarkeit mit Zirkel und Lineal",
+   "11, 6, 7"
+  ],
+  [
+   "Endliche Körper",
+   "11, 1, 15"
+  ],
+  [
+   "Galoiskorrespondenz",
+   "11, 7"
+  ],
+  [
+   "Unlösbarkeit der Quintik",
+   "11, 7"
+  ],
+  [
+   "Komplexe Zahlen, Polarform",
+   "12, 0, 2"
+  ],
+  [
+   "Holomorphie, Cauchy-Riemann",
+   "12, 3"
+  ],
+  [
+   "Cauchyscher Integralsatz",
+   "12, 9"
+  ],
+  [
+   "Potenz- und Laurentreihen",
+   "12, 3"
+  ],
+  [
+   "Residuensatz",
+   "12"
+  ],
+  [
+   "Konforme Abbildungen",
+   "12, 6, 8"
+  ],
+  [
+   "Riemannscher Abbildungssatz",
+   "12, 13"
+  ],
+  [
+   "Gammafunktion",
+   "12, 15"
+  ],
+  [
+   "Zetafunktion, Riemannsche Vermutung",
+   "12, 1"
+  ],
+  [
+   "Defekte des Riemann-Integrals",
+   "13, 3"
+  ],
+  [
+   "σ-Algebra, Maß",
+   "13, 4"
+  ],
+  [
+   "Menge von Vitali, Banach-Tarski",
+   "13, 10"
+  ],
+  [
+   "Lebesgue-Integral",
+   "13, 3, 4"
+  ],
+  [
+   "Konvergenzsätze (monoton, dominiert)",
+   "13"
+  ],
+  [
+   "Fubini, Produktmaße",
+   "13, 3"
+  ],
+  [
+   "L p -Räume, Hölder, Minkowski",
+   "13"
+  ],
+  [
+   "Banachraum, Hilbertraum",
+   "13, 2"
+  ],
+  [
+   "Hahn-Banach",
+   "13"
+  ],
+  [
+   "Banach-Steinhaus, offene Abbildung",
+   "13"
+  ],
+  [
+   "Orthonormalbasis, Fourierreihe",
+   "13, 3, 14"
+  ],
+  [
+   "Kompakte Operatoren, Spektralsatz",
+   "13, 2, 14"
+  ],
+  [
+   "Sobolevraum, schwache Ableitung",
+   "13, 14"
+  ],
+  [
+   "Banachscher Fixpunktsatz",
+   "13, 14, 5"
+  ],
+  [
+   "Richtungsfeld, Anfangswertproblem",
+   "14"
+  ],
+  [
+   "Trennung der Variablen",
+   "14, 0"
+  ],
+  [
+   "Picard-Lindelöf, Peano",
+   "14"
+  ],
+  [
+   "Lemma von Gronwall",
+   "14"
+  ],
+  [
+   "Matrixexponential",
+   "14, 2"
+  ],
+  [
+   "Resonanz, harmonischer Oszillator",
+   "14, 9"
+  ],
+  [
+   "Besselfunktionen, Legendrepolynome",
+   "14, 12"
+  ],
+  [
+   "Sturm-Liouville, Eigenwertproblem",
+   "14, 13"
+  ],
+  [
+   "Phasenporträt, Stabilität, Lyapunov",
+   "14"
+  ],
+  [
+   "Bifurkation, Grenzzyklus, Chaos",
+   "14, 8"
+  ],
+  [
+   "Wellengleichung, d’Alembert",
+   "14, 9"
+  ],
+  [
+   "Wärmeleitungsgleichung",
+   "14, 4, 13"
+  ],
+  [
+   "Laplacegleichung, harmonische Funktio- nen",
+   "14, 12, 9"
+  ],
+  [
+   "Lax-Milgram, finite Elemente",
+   "14, 5"
+  ],
+  [
+   "Distributionen, Deltadistribution",
+   "14, 13"
+  ]
+ ],
+ "Kombinatorik und Graphentheorie": [
+  [
+   "Summen- und Produktregel",
+   "15, 4"
+  ],
+  [
+   "Bijektionsprinzip",
+   "15, 10"
+  ],
+  [
+   "Doppeltes Abzählen",
+   "15"
+  ],
+  [
+   "Schubfachprinzip",
+   "15, 1"
+  ],
+  [
+   "Fakultät, Stirlingformel",
+   "15, 4, 12"
+  ],
+  [
+   "Binomialkoeffizient, Pascalsches Dreieck",
+   "15, 0, 4"
+  ],
+  [
+   "Sterne und Balken, Multimengen",
+   "15"
+  ],
+  [
+   "Vandermonde, Hockeyschläger",
+   "15"
+  ],
+  [
+   "Satz von Lucas",
+   "15, 1"
+  ],
+  [
+   "Siebformel, Derangements",
+   "15, 4"
+  ],
+  [
+   "Erzeugende Funktionen",
+   "15, 4, 12"
+  ],
+  [
+   "Catalanzahlen",
+   "15"
+  ],
+  [
+   "Stirlingzahlen, Bellzahlen",
+   "15"
+  ],
+  [
+   "Partitionen, Ferrersdiagramm",
+   "15, 1"
+  ],
+  [
+   "Zwölffachweg",
+   "15"
+  ],
+  [
+   "Burnside, Pólya, Zyklenzeiger",
+   "15, 11"
+  ],
+  [
+   "Graph, Grad, Handschlaglemma",
+   "15, 8"
+  ],
+  [
+   "Bäume, Cayley-Formel, Prüfercode",
+   "15, 5"
+  ],
+  [
+   "Eulerkreis, Hamiltonkreis",
+   "15, 7"
+  ],
+  [
+   "Planarität, Polyederformel, Kuratowski",
+   "15, 6, 8"
+  ],
+  [
+   "Chromatische Zahl, Vierfarbensatz",
+   "15, 8, B"
+  ],
+  [
+   "Matching, Satz von Hall",
+   "15"
+  ],
+  [
+   "Max-Flow-Min-Cut, Menger",
+   "15, 5"
+  ],
+  [
+   "Ramseyzahlen, van der Waerden, Schur",
+   "15"
+  ],
+  [
+   "Probabilistische Methode",
+   "15, 4"
+  ],
+  [
+   "Turán, Sperner, LYM",
+   "15"
+  ],
+  [
+   "Lovász Local Lemma",
+   "15"
+  ],
+  [
+   "Zufallsgraphen, Schwellenwerte",
+   "15, 4"
+  ]
+ ],
+ "Die großen offenen Fragen": [
+  [
+   "Riemannsche Vermutung",
+   "1859              1"
+  ],
+  [
+   "Goldbachsche Vermutung",
+   "1742              1"
+  ],
+  [
+   "Primzahlzwillinge                     Antike",
+   "1"
+  ],
+  [
+   "P gegen NP",
+   "1971              10, 5, B"
+  ],
+  [
+   "Navier-Stokes-Regularität",
+   "1934              3, 5"
+  ],
+  [
+   "Birch und Swinnerton-Dyer",
+   "1965              1"
+  ],
+  [
+   "Hodge-Vermutung",
+   "1950              8"
+  ],
+  [
+   "Yang-Mills-Massenlücke",
+   "1954              9"
+  ],
+  [
+   "Kontinuumshypothese (Status)",
+   "1878              10, B"
+  ],
+  [
+   "Existenz des ultimativen L",
+   "2010              10"
+  ],
+  [
+   "Hilberts 10. Problem über Q",
+   "1900                           10"
+  ],
+  [
+   "2 ℵ ω < ℵ ω1 ?",
+   "1994                           10"
+  ],
+  [
+   "Kugelpackungen in Dimension n",
+   "1611                           6"
+  ],
+  [
+   "Untere Schranken der Beweiskom- plexität",
+   "1985                           10, B"
+  ],
+  [
+   "Navier-Stokes: globale Glattheit in",
+   "1934                           14, 9"
+  ],
+  [
+   "Hilberts 16. Problem (Grenzzyklen)",
+   "1900                           14"
+  ],
+  [
+   "Ramseyzahl R(5, 5)",
+   "1955                           15"
+  ],
+  [
+   "Asymptotik von R(s, s)",
+   "1935                           15"
+  ],
+  [
+   "Union-Closed-Sets-Vermutung",
+   "1979                           15"
+  ],
+  [
+   "Sonnenblumenvermutung",
+   "1960                           15"
+  ],
+  [
+   "Happy-End-Problem ES(n)",
+   "1935                           15, 6"
+  ],
+  [
+   "Hadwiger-Vermutung",
+   "1943                           15"
+  ]
+ ]
+}

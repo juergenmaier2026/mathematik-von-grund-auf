@@ -1,0 +1,313 @@
+\part{Charaktere}
+
+\chapter{Die Spur sagt alles}
+
+\section{Vier Zahlen statt vier Matrizen}
+
+\begin{merksatz}
+\boxtitel{Die irreduziblen Darstellungen von $C_{2v}$ und ihre Spuren}
+$C_{2v}$ ist abelsch; nach Schur sind alle irreduziblen Darstellungen eindimensional, $D(g) = \pm1$ (da $g^{2} = e$). Wie viele gibt es? $D(C_2)$ und $D(\sigma(xz))$ sind frei wählbar, $D(\sigma(yz)) = D(C_2)D(\sigma(xz))$ folgt: vier Darstellungen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.2cm}P{0.8cm}P{0.8cm}P{1.2cm}P{1.2cm}P{3.2cm}@{}}
+\toprule
+$C_{2v}$ & $E$ & $C_2$ & $\sigma(xz)$ & $\sigma(yz)$ & \textbf{Basisfunktion}\\
+\midrule
+$A_1$ & $1$ & $1$ & $1$ & $1$ & $z$; $x^{2}, y^{2}, z^{2}$\\
+$A_2$ & $1$ & $1$ & $-1$ & $-1$ & $R_z$; $xy$\\
+$B_1$ & $1$ & $-1$ & $1$ & $-1$ & $x$, $R_y$; $xz$\\
+$B_2$ & $1$ & $-1$ & $-1$ & $1$ & $y$, $R_x$; $yz$\\
+\midrule
+$\Gamma_{3N}$ & $9$ & $-1$ & $1$ & $3$ & $= 3A_1 + A_2 + 2B_1 + 3B_2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die vier Zeilen sind paarweise orthogonal --- das Skalarprodukt zweier verschiedener Zeilen ist null, das einer Zeile mit sich selbst ist $4 = |G|$. Und die Zeile $\Gamma_{3N}$ ist eine ganzzahlige Kombination der vier: $9 = 3 + 1 + 2 + 3$, $-1 = 3 + 1 - 2 - 3$, $1 = 3 - 1 + 2 - 3$, $3 = 3 - 1 - 2 + 3$. Die Koeffizienten sind Skalarprodukte.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Spur einer Darstellung heißt ihr Charakter, und dieses Kapitel beweist, dass er alles weiß}: Zwei Darstellungen sind genau dann äquivalent, wenn sie denselben Charakter haben; die Charaktere der irreduziblen Darstellungen sind orthonormal; die Vielfachheit eines Bausteins in einer Darstellung ist ein Skalarprodukt; die Zahl der Bausteine ist die Zahl der Klassen; und die Summe der Quadrate ihrer Dimensionen ist die Gruppenordnung. Alles folgt aus Schurs Lemma und dem Mittelungstrick, und am Ende hat man statt Matrizen eine Tafel aus Zahlen --- die Charaktertafel ---, mit der Kapitel 6 die Schwingungen jedes Moleküls sortiert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Charaktere}
+
+\begin{definition}
+\boxtitelm{Definition 4.1 --- Charakter}
+Der \Begriff{Charakter} einer Darstellung $\rho$ ist $\chi_\rho(g) = \operatorname{Spur}\rho(g)$. Er ist eine Funktion $G\to\mathbb C$; \Begriff{irreduzibel} heißt er, wenn $\rho$ es ist. Auf dem Raum der Funktionen $G\to\mathbb C$ sei
+\[ \langle\varphi, \psi\rangle = \frac1{|G|}\sum_{g\in G}\varphi(g)\overline{\psi(g)} . \]
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 4.2 --- erste Eigenschaften}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item $\chi(e) = \dim V$.
+\item $\chi(hgh^{-1}) = \chi(g)$: Der Charakter ist auf Konjugationsklassen konstant --- eine \Begriff{Klassenfunktion}.
+\item $\chi(g^{-1}) = \overline{\chi(g)}$.
+\item Äquivalente Darstellungen haben denselben Charakter.
+\item $\chi_{\rho_1\oplus\rho_2} = \chi_{\rho_1} + \chi_{\rho_2}$.
+\end{enumerate}
+
+\schritt{Beweis}
+(a) Spur der Einheitsmatrix. (b) $\operatorname{Spur}(ABA^{-1}) = \operatorname{Spur}B$. (c) Nach Satz 2.2 ist $\rho(g)$ unitär mit Eigenwerten $\lambda_i$ vom Betrag $1$; $\rho(g^{-1}) = \rho(g)^{-1}$ hat Eigenwerte $\lambda_i^{-1} = \overline{\lambda_i}$. (d) $\operatorname{Spur}(TDT^{-1}) = \operatorname{Spur}D$. (e) Spur einer Blockdiagonalmatrix. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Charakter ist eine Funktion auf den Klassen, nicht auf den Elementen: Für $C_{3v}$ drei Zahlen statt sechs, für $D_{6h}$ zwölf statt vierundzwanzig. Das ist der Grund, warum die Charaktertafel klein ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Orthogonalität}
+
+\begin{merksatz}
+\boxtitel{Satz 4.3 --- die Orthogonalitätsrelationen}
+Seien $\rho_1, \rho_2$ irreduzible Darstellungen mit Charakteren $\chi_1, \chi_2$. Dann
+\[ \langle\chi_1, \chi_2\rangle = \begin{cases}1 & \rho_1\cong\rho_2\\ 0 & \text{sonst.}\end{cases} \]
+
+\schritt{Schritt 1 --- Schur über Mittelung}
+Sei $A\colon V_2\to V_1$ eine beliebige lineare Abbildung und $A^{G} = \frac1{|G|}\sum_g\rho_1(g)A\rho_2(g)^{-1}$. Dann ist $A^{G}$ äquivariant: $\rho_1(h)A^{G}\rho_2(h)^{-1} = A^{G}$ (Umindizieren). Nach Schur ist $A^{G} = 0$, falls $\rho_1\not\cong\rho_2$, und $A^{G} = \lambda\,\mathrm{id}$, falls $\rho_1 = \rho_2$ --- mit $\lambda = \operatorname{Spur}A/\dim V$ (Spur beider Seiten: $\operatorname{Spur}A^{G} = \operatorname{Spur}A$, weil die Spur jedes Summanden $\operatorname{Spur}A$ ist).
+
+\schritt{Schritt 2 --- Matrixelemente}
+In Basen: $(A^{G})_{ik} = \frac1{|G|}\sum_g\sum_{j,l}D_1(g)_{ij}A_{jl}D_2(g^{-1})_{lk}$. Das gilt für jedes $A$; wähle $A = E_{jl}$ (eine $1$ an der Stelle $(j, l)$). Für $\rho_1\not\cong\rho_2$:
+\[ \frac1{|G|}\sum_gD_1(g)_{ij}D_2(g^{-1})_{lk} = 0\quad\text{für alle } i, j, k, l . \]
+Für $\rho_1 = \rho_2 = \rho$ der Dimension $n$: $\frac1{|G|}\sum_gD(g)_{ij}D(g^{-1})_{lk} = \frac{1}{n}\delta_{jl}\delta_{ik}$ (denn $\lambda = \operatorname{Spur}E_{jl}/n = \delta_{jl}/n$).
+
+\schritt{Schritt 3 --- Spuren bilden}
+Setze $i = j$, $k = l$ und summiere über $i$ und $k$: Links steht $\frac1{|G|}\sum_g\chi_1(g)\chi_2(g^{-1}) = \frac1{|G|}\sum_g\chi_1(g)\overline{\chi_2(g)} = \langle\chi_1, \chi_2\rangle$ (Satz 4.2c). Rechts: $0$ im ersten Fall, $\frac1n\sum_{i,k}\delta_{ik}\delta_{ik} = \frac1n\cdot n = 1$ im zweiten. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die irreduziblen Charaktere sind ein Orthonormalsystem. Der Beweis ist Schurs Lemma, auf eine gemittelte Matrix angewandt, und dann Spur gebildet. Nichts weiter.}
+\end{minipage}
+\end{center}
+
+\schritt{Probe an $C_{3v}$}
+Die Charaktere $A_1 = (1, 1, 1)$, $A_2 = (1, 1, -1)$, $E = (2, -1, 0)$ auf den Klassen der Größen $1, 2, 3$: $\langle E, E\rangle = \frac16(1\cdot4 + 2\cdot1 + 3\cdot0) = 1$ \checkmark; $\langle A_2, E\rangle = \frac16(2 - 2 + 0) = 0$ \checkmark; $\langle A_1, A_2\rangle = \frac16(1 + 2 - 3) = 0$ \checkmark.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Matrixelement-Relationen aus Schritt 2 sind mehr, als man für die Charaktere braucht} --- sie sagen, dass die Funktionen $g\mapsto D(g)_{ij}$ für alle irreduziblen $D$ und alle $i, j$ ein Orthogonalsystem im Raum aller Funktionen auf $G$ bilden, mit Norm $1/\sqrt{\dim}$. Zählt man: $\sum(\dim\rho)^{2}$ orthogonale Funktionen in einem Raum der Dimension $|G|$. Satz 4.5 zeigt, dass sie ihn aufspannen --- der Satz von Peter--Weyl für endliche Gruppen, und der Grund für $\sum d_i^{2} = |G|$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zerlegung und Vollständigkeit}
+
+\begin{merksatz}
+\boxtitel{Satz 4.4 --- der Charakter bestimmt die Darstellung}
+Sei $\rho$ eine Darstellung mit Zerlegung $\rho\cong\bigoplus_im_i\rho_i$ in irreduzible (Maschke). Dann
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item $m_i = \langle\chi_\rho, \chi_i\rangle$: Die Vielfachheiten sind Skalarprodukte, insbesondere eindeutig.
+\item $\langle\chi_\rho, \chi_\rho\rangle = \sum m_i^{2}$; $\rho$ ist irreduzibel genau dann, wenn $\langle\chi_\rho, \chi_\rho\rangle = 1$.
+\item Zwei Darstellungen sind genau dann äquivalent, wenn ihre Charaktere gleich sind.
+\end{enumerate}
+
+\schritt{Beweis}
+(a) $\chi_\rho = \sum m_j\chi_j$ (Satz 4.2e); Skalarprodukt mit $\chi_i$ und Orthonormalität. (b) $\langle\sum m_i\chi_i, \sum m_j\chi_j\rangle = \sum m_i^{2}$; das ist $1$ genau für ein $m_i = 1$, alle anderen $0$. (c) $\Rightarrow$ Satz 4.2d; $\Leftarrow$: gleiche Charaktere geben nach (a) gleiche Vielfachheiten, also isomorphe Zerlegungen. $\blacksquare$
+
+\schritt{Der Leitfall}
+$\Gamma_{3N}$ des Wassers: $m_{A_1} = \frac14(9\cdot1 + (-1)\cdot1 + 1\cdot1 + 3\cdot1) = \frac{12}{4} = 3$; $m_{A_2} = \frac14(9 - 1 - 1 - 3) = 1$; $m_{B_1} = \frac14(9 + 1 + 1 - 3) = 2$; $m_{B_2} = \frac14(9 + 1 - 1 + 3) = 3$. Also $3A_1 + A_2 + 2B_1 + 3B_2$, Dimension $3 + 1 + 2 + 3 = 9$. \checkmark\ Norm: $\langle\Gamma, \Gamma\rangle = \frac14(81 + 1 + 1 + 9) = 23 = 9 + 1 + 4 + 9$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Darstellung zu zerlegen heißt, ihren Charakter mit jedem irreduziblen Charakter skalar zu multiplizieren. Für das Wasser: vier Skalarprodukte mit je vier Summanden, und die neun Bewegungen sind nach Symmetrietypen sortiert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 4.5 --- wie viele Bausteine es gibt}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item Die reguläre Darstellung enthält jede irreduzible Darstellung $\rho_i$ genau $d_i = \dim\rho_i$ mal. Folglich $\sum_id_i^{2} = |G|$.
+\item Die irreduziblen Charaktere bilden eine Basis des Raums der Klassenfunktionen. Folglich ist die Zahl der irreduziblen Darstellungen gleich der Zahl der Konjugationsklassen.
+\end{enumerate}
+
+\schritt{Beweis von (a)}
+$\chi_{\mathrm{reg}}(e) = |G|$, $\chi_{\mathrm{reg}}(g) = 0$ sonst (Kapitel 2). Also $m_i = \langle\chi_{\mathrm{reg}}, \chi_i\rangle = \frac1{|G|}|G|\,\overline{\chi_i(e)} = d_i$. Dimension zählen: $|G| = \sum m_id_i = \sum d_i^{2}$. $\blacksquare$
+
+\schritt{Beweis von (b)}
+Orthonormal, also linear unabhängig; zu zeigen: Sie spannen die Klassenfunktionen auf. Sei $f$ eine Klassenfunktion, orthogonal zu allen $\chi_i$; zu zeigen $f = 0$. Für jede Darstellung $\rho$ betrachte $T_f = \sum_gf(g)\rho(g)$. Weil $f$ Klassenfunktion ist, vertauscht $T_f$ mit allen $\rho(h)$: $\rho(h)T_f\rho(h)^{-1} = \sum_gf(g)\rho(hgh^{-1}) = \sum_{g'}f(h^{-1}g'h)\rho(g') = T_f$. Für irreduzibles $\rho = \rho_i$ ist nach Schur $T_f = \lambda\,\mathrm{id}$, und $\lambda d_i = \operatorname{Spur}T_f = \sum_gf(g)\chi_i(g) = |G|\langle f, \overline{\chi_i}\rangle = |G|\overline{\langle\bar f, \chi_i\rangle}$. Nun ist mit $f$ auch $\bar f$ orthogonal zu allen $\chi_i$? Nicht unbedingt --- aber $\overline{\chi_i}$ ist der Charakter der konjugierten Darstellung, ebenfalls irreduzibel, also ist $\langle f, \overline{\chi_i}\rangle = 0$ nach Voraussetzung. Also $T_f = 0$ für alle irreduziblen $\rho$, und damit (Maschke) für alle $\rho$, insbesondere für die reguläre: $0 = T_fe_e = \sum_gf(g)e_g$, also alle $f(g) = 0$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Zahlen kontrollieren jede Charaktertafel: Sie hat so viele Zeilen wie Klassen, und die Quadrate der ersten Spalte summieren sich zur Gruppenordnung. Für $C_{3v}$: drei Zeilen, $1 + 1 + 4 = 6$. Für $D_{6h}$: zwölf Zeilen, $8\cdot1 + 4\cdot4 = 24$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das sind die erste und die zweite Überraschung des Vorworts, in einem Satz.} $\sum d_i^{2} = |G|$ schränkt die möglichen Dimensionen ein: Eine Gruppe der Ordnung $6$ mit drei Klassen hat $d_i\in\{1, 1, 2\}$, denn $1 + 1 + 4$ ist die einzige Zerlegung von $6$ in drei Quadrate mit mindestens einer $1$ (der trivialen Darstellung). Eine Gruppe der Ordnung $24$ mit fünf Klassen ($S_4$, $T_d$): $24 = 1 + 1 + 4 + 9 + 9$, die einzige Möglichkeit --- Dimensionen $1, 1, 2, 3, 3$, und die Chemiker nennen sie $A_1, A_2, E, T_1, T_2$. Man kennt die Dimensionen der Bausteine, bevor man einen einzigen gefunden hat.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Der Charakter unterscheidet nicht, was nicht zu unterscheiden ist}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Isospektrale Gruppen} & Die Diedergruppe $D_4$ (Quadrat, $8$ Elemente) und die Quaternionengruppe $Q_8$ haben \emph{dieselbe Charaktertafel} --- und sind nicht isomorph ($D_4$ hat fünf Elemente der Ordnung $2$, $Q_8$ eines). Die Tafel bestimmt die Gruppe nicht.\\
+\textbf{Über $\mathbb F_p$} & Die Darstellungen $\begin{pmatrix}1 & 0\\ 0 & 1\end{pmatrix}$ und $\begin{pmatrix}1 & k\\ 0 & 1\end{pmatrix}$ von $\mathbb Z/p$ haben denselben Charakter ($2$ überall) und sind nicht äquivalent. Satz 4.4c braucht Maschke.\\
+\textbf{Unendliche Gruppen} & $\mathbb Z$ mit $n\mapsto\begin{pmatrix}1 & n\\ 0 & 1\end{pmatrix}$: Charakter $2$, wie die triviale zweidimensionale. Nicht äquivalent.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Charakter bestimmt die Darstellung --- für endliche Gruppen über $\mathbb C$. Er bestimmt nicht die Gruppe, und außerhalb der Voraussetzungen von Maschke bestimmt er nicht einmal die Darstellung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die erste Zeile ist ein echtes Hindernis für die Praxis}: Wer aus einem Spektrum --- den Entartungen und Auswahlregeln --- auf die Symmetriegruppe schließen will, kann sie nur bis auf die Charaktertafel bestimmen. $D_4$ und $Q_8$ kommen als Molekülsymmetrien beide nicht vor ($Q_8$ ist keine Punktgruppe), aber $D_{2h}$ und $C_{2h}\times\mathbb Z/2$ sind beide abelsch der Ordnung $8$ und haben isomorphe Tafeln --- jede abelsche Gruppe der Ordnung $8$ vom Typ $(\mathbb Z/2)^{3}$ hat dieselbe. Brauer fragte 1963, welche Eigenschaften einer Gruppe in ihrer Charaktertafel stehen; die Antwort füllt bis heute Bände, und die Ordnung der Elemente gehört nicht dazu --- die Potenzabbildungen ($g\mapsto g^{2}$ auf den Klassen) muss man zusätzlich angeben, und mit ihnen sind $D_4$ und $Q_8$ unterschieden.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- $\sum d_i^{2}$ als Rätsel}
+Eine Gruppe hat Ordnung $12$ und vier Konjugationsklassen. Welche Dimensionen haben ihre irreduziblen Darstellungen? Und eine der Ordnung $8$ mit fünf Klassen?
+
+\loesung
+\schritt{Schritt 1 --- Ordnung $12$, vier Klassen}
+$12 = d_1^{2} + d_2^{2} + d_3^{2} + d_4^{2}$ mit $d_1 = 1$ (trivial), alle $d_i\mid12$ (ein Satz, den wir nicht beweisen: $d_i$ teilt $|G|$; Auslassung 1). Also $11 = d_2^{2} + d_3^{2} + d_4^{2}$ mit $d_i\in\{1, 2, 3\}$: $11 = 1 + 1 + 9$. Dimensionen $1, 1, 1, 3$. Das ist $A_4$ (Tetraederdrehgruppe): drei eindimensionale (eine mit komplexen Werten $\omega, \omega^{2}$), eine dreidimensionale.
+
+\schritt{Schritt 2 --- Ordnung $8$, fünf Klassen}
+$8 = 1 + d_2^{2} + \cdots + d_5^{2}$, $7$ als Summe von vier Quadraten aus $\{1, 4\}$: $7 = 1 + 1 + 1 + 4$. Dimensionen $1, 1, 1, 1, 2$. Das sind $D_4$ und $Q_8$ (Bruchfall): dieselben Dimensionen, dieselbe Tafel.
+
+\schritt{Schritt 3 --- Gegenprobe}
+Ordnung $8$, acht Klassen (abelsch): $8 = 8\cdot1$, alle eindimensional. \checkmark\ Ordnung $6$, sechs Klassen: $\mathbb Z/6$, alle eindimensional; drei Klassen: $S_3$, $1, 1, 2$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Zerlegung von $|G|$ in Quadrate ist oft eindeutig --- und wenn nicht, entscheidet die Zahl der eindimensionalen Darstellungen}: Sie ist $|G/[G, G]|$, der Index der Kommutatorgruppe (eindimensionale Darstellungen faktorisieren über die Abelisierung, Kapitel 5). Für $A_4$ ist $[A_4, A_4] = V_4$ (die Kleinsche Vierergruppe), Index $3$: drei eindimensionale. \checkmark}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Die Ebene ist irreduzibel, nochmals}
+Prüfen Sie mit Satz 4.4b, dass die geometrische Darstellung von $C_{3v}$ auf $\mathbb R^{3}$ in genau zwei irreduzible Stücke zerfällt, und bestimmen Sie sie.
+
+\loesung
+\schritt{Schritt 1 --- Der Charakter}
+Spuren der $3\times3$-Matrizen auf den Klassen $E$, $2C_3$, $3\sigma$: $3$, $0$, $1$ (Satz 1.2).
+
+\schritt{Schritt 2 --- Die Norm}
+$\langle\chi, \chi\rangle = \frac16(1\cdot9 + 2\cdot0 + 3\cdot1) = \frac{12}{6} = 2$. Also $\sum m_i^{2} = 2$: genau zwei verschiedene irreduzible Stücke, je einmal.
+
+\schritt{Schritt 3 --- Welche}
+$m_{A_1} = \frac16(3 + 0 + 3) = 1$; $m_{A_2} = \frac16(3 + 0 - 3) = 0$; $m_E = \frac16(6 + 0 + 0) = 1$. Also $A_1\oplus E$: die $z$-Achse und die $xy$-Ebene. \checkmark\ Dimension $1 + 2 = 3$. \checkmark
+
+\schritt{Schritt 4 --- Für Wasser}
+Charakter der geometrischen Darstellung von $C_{2v}$: $3, -1, 1, 1$. $m_{A_1} = \frac14(3 - 1 + 1 + 1) = 1$, $m_{A_2} = \frac14(3 - 1 - 1 - 1) = 0$, $m_{B_1} = \frac14(3 + 1 + 1 - 1) = 1$, $m_{B_2} = \frac14(3 + 1 - 1 + 1) = 1$: $A_1 + B_1 + B_2$, nämlich $z$, $x$, $y$ --- die Spalte \enquote{Basisfunktion} der Tafel. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die geometrische Darstellung ist die Darstellung der Translationen}, und ihre Zerlegung sagt, wie sich die Komponenten eines Vektors --- des Dipolmoments, der Verschiebung des Schwerpunkts --- unter der Gruppe verhalten. Für die Auswahlregeln in Kapitel 6 ist das die entscheidende Information: Eine Schwingung ist infrarotaktiv, wenn ihr Symmetrietyp in der geometrischen Darstellung vorkommt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Die reguläre Darstellung von $S_3$}
+Zerlegen Sie die reguläre Darstellung von $S_3$ und prüfen Sie Satz 4.5a.
+
+\loesung
+\schritt{Schritt 1 --- Charakter}
+$\chi_{\mathrm{reg}} = (6, 0, 0)$ auf den Klassen $E$, $2C_3$, $3\sigma$.
+
+\schritt{Schritt 2 --- Vielfachheiten}
+$m_{A_1} = \frac16\cdot6\cdot1 = 1$, $m_{A_2} = \frac16\cdot6\cdot1 = 1$, $m_E = \frac16\cdot6\cdot2 = 2$. Also $A_1\oplus A_2\oplus2E$: Dimension $1 + 1 + 4 = 6$. \checkmark\ Jede irreduzible Darstellung so oft wie ihre Dimension. \checkmark
+
+\schritt{Schritt 3 --- Explizit}
+Im Raum der Funktionen auf $S_3$: $A_1$ ist die konstante Funktion, $A_2$ die Vorzeichenfunktion, und die vier Matrixelemente $D_E(g)_{ij}$ der zweidimensionalen Darstellung spannen die beiden Kopien von $E$ auf (Satz 4.3, Schritt 2: sie sind orthogonal und es sind $2^{2} = 4$).
+
+\schritt{Schritt 4 --- Die Dimension der Klassenfunktionen}
+Klassenfunktionen auf $S_3$ bilden einen Raum der Dimension $3$ (eine Zahl je Klasse); die drei irreduziblen Charaktere sind orthonormal darin, also eine Basis. \checkmark\ Satz 4.5b.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die reguläre Darstellung ist die Fourier-Analyse auf der Gruppe}: Jede Funktion $f\colon G\to\mathbb C$ ist eine Linearkombination der Matrixelemente $D_i(g)_{jk}$ --- für abelsche Gruppen sind das die Exponentialfunktionen, für $S_3$ eine Konstante, ein Vorzeichen und vier Einträge einer $2\times2$-Matrix. Kapitel 12 macht daraus eine Transformation mit Umkehrformel und Faltungssatz, und die schnelle Fourier-Transformation auf $S_n$ ist ein Algorithmus mit Anwendungen in der Statistik von Rangdaten.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Frobenius' Jahr}
+Zwischen April 1896 und 1897 schrieb \Person{Frobenius} drei Arbeiten --- \enquote{Über Gruppencharaktere}, \enquote{Über die Primfactoren der Gruppendeterminante}, \enquote{Über die Darstellung der endlichen Gruppen durch lineare Substitutionen} ---, die die Charaktertheorie vollständig enthalten: Orthogonalität, Zahl der Charaktere gleich Zahl der Klassen, $\sum d_i^{2} = |G|$, die Charaktertafeln von $S_4$, $S_5$ und $PSL_2(\mathbb F_p)$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Der Weg war die Gruppendeterminante}: Dedekind hatte für $S_3$ gefunden, dass die $6\times6$-Determinante in zwei lineare und das Quadrat eines quadratischen Faktors zerfällt --- $1, 1, 2^{2}$ ---, und Frobenius bewies, dass die irreduziblen Faktoren den Charakteren entsprechen und ihre Grade mit der Potenz übereinstimmen, mit der sie auftreten. Die Darstellungen kamen danach, als Erklärung. \Person{Burnside} fand die Theorie 1898 unabhängig wieder, mit anderer Methode; \Person{Schur}s Dissertation 1901 und seine Arbeit von 1905 gaben die Beweise über Schurs Lemma, die hier stehen. Frobenius' Korrespondenz mit Dedekind ist erhalten und veröffentlicht (Hawkins 1971) --- man kann zusehen, wie die Theorie in einem Jahr entsteht.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Tafel}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Form der Charaktertafel --- Klassen als Spalten, irreduzible Charaktere als Zeilen, Klassengrößen in der Kopfzeile --- ist Frobenius' eigene; die Namen $A, B, E, T$ für Molekülsymmetrien stammen von \Person{Mulliken} 1933 (Nobelpreis Chemie 1966): $A$ und $B$ eindimensional (symmetrisch bzw.\ antisymmetrisch zur Hauptachse), $E$ zwei- (\enquote{entartet}), $T$ dreidimensional; Indizes $1, 2$ für Spiegelsymmetrie, $g, u$ für gerade/ungerade unter Inversion, Striche für $\sigma_h$. \textbf{Dass eine Konvention von 1933 bis heute in jedem Chemiebuch steht}, liegt daran, dass die Tafeln seither nicht anders geworden sind.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Charaktere heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{McKay-Vermutung} & Die Zahl der irreduziblen Charaktere mit $p\nmid d_i$ ist gleich der entsprechenden Zahl im Normalisator einer $p$-Sylowgruppe (McKay 1972) --- bewiesen 2024 (Cabanes--Späth), nach fünfzig Jahren und auf der Klassifikation der endlichen einfachen Gruppen aufbauend.\\
+\textbf{Charaktere berechnen} & Dixon--Schneider-Algorithmus (1990): Charaktertafeln aus den Klassenmultiplikationskoeffizienten, modulo einer Primzahl, für Gruppen mit Millionen Elementen; das Herz von GAP und Magma.\\
+\textbf{Charaktere und Zufall} & Diaconis--Shahshahani 1981: Wie oft muss man ein Kartenspiel mischen? Die Antwort ist eine Summe über Charaktere von $S_{52}$ --- sieben Riffelmischungen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Orthogonalitätsrelationen sind ein Werkzeug der Wahrscheinlichkeitsrechnung geworden}: Eine zufällige Permutation (ein Mischvorgang) ist eine Wahrscheinlichkeitsverteilung auf $S_n$, ihre Fourier-Transformierte (Kapitel 12) ist eine Familie von Matrizen, eine je irreduzibler Darstellung, und der Abstand zur Gleichverteilung nach $k$ Schritten ist eine Summe von Spuren der $k$-ten Potenzen dieser Matrizen --- Charaktere. \Person{Bayer} und \Person{Diaconis} zeigten 1992 so, dass sieben Riffelmischungen ein Kartenspiel zufällig machen und sechs nicht, mit einem scharfen Übergang (\enquote{cutoff}). Band 25 hat Mischzeiten behandelt; die exakte Rechnung für $S_{52}$ ist Frobenius von 1896.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 4.1} & Charakter, Skalarprodukt von Klassenfunktionen\\
+\textbf{Satz 4.3} & irreduzible Charaktere sind orthonormal\\
+\textbf{Satz 4.4} & $m_i = \langle\chi, \chi_i\rangle$; irreduzibel $\iff\langle\chi, \chi\rangle = 1$; Charakter bestimmt Darstellung\\
+\textbf{Satz 4.5} & $\sum d_i^{2} = |G|$; Zahl der Irreduziblen = Zahl der Klassen\\
+\textbf{Der Bruchfall} & Tafel bestimmt nicht die Gruppe ($D_4$, $Q_8$)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Tafel hat so viele Zeilen wie Klassen, und die Zeilen sind orthonormal. Kapitel 5 füllt sie: für alle Gruppen, die der Band braucht, mit Methoden, die ohne Matrizen auskommen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,309 @@
+\part{Der Weg ins Chaos}
+
+\chapter{Wenn die Periode sich verdoppelt}
+
+\section{Alternans}
+
+\begin{merksatz}
+\boxtitel{Die Herzzelle bei steigender Frequenz}
+Die Dauer eines Aktionspotentials hängt von der Erholung davor ab: $\mathrm{APD}_{n+1} = f(\mathrm{DI}_n)$ mit der \Begriff{Restitutionskurve} $f(\mathrm{DI}) = 300 - 250\,\mathrm e^{-\mathrm{DI}/60}$ (Millisekunden) und $\mathrm{DI}_n = \mathrm{BCL} - \mathrm{APD}_n$, wo $\mathrm{BCL}$ der Reizabstand ist. Was geschieht, wenn der Reizabstand sinkt?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{3.6cm}P{1.6cm}P{2.4cm}@{}}
+\toprule
+$\mathrm{BCL}$ & $\mathrm{APD}$ (vier Schläge) & \textbf{Steigung $f'$} & \textbf{Rhythmus}\\
+\midrule
+$400$ & $271,\ 271,\ 271,\ 271$ & $0{,}49$ & regelmäßig\\
+$350$ & $252,\ 252,\ 252,\ 252$ & $0{,}81$ & regelmäßig\\
+$330$ & $242,\ 242,\ 242,\ 242$ & $0{,}96$ & regelmäßig\\
+$320$ & $275,\ 182,\ 275,\ 182$ & $1{,}05$ & \textbf{Alternans}\\
+$310$ & $289,\ 125,\ 289,\ 125$ & $1{,}13$ & \textbf{Alternans}\\
+$300$ & $298,\ \text{---},\ 298,\ \text{---}$ & --- & $2\!:\!1$-Block\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei $\mathrm{BCL} = 326$ ms --- genau dort, wo die Steigung der Restitutionskurve $1$ überschreitet --- verdoppelt sich die Periode: lang, kurz, lang, kurz. Das ist Alternans, und im EKG ist es ein Vorbote des Kammerflimmerns.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Kapitel 3 hat die Rückkehrabbildung eingeführt, Kapitel 6 ihre Phase. Hier ist sie eine Abbildung einer einzigen Zahl auf die nächste} --- $\mathrm{APD}_{n+1} = f(\mathrm{BCL} - \mathrm{APD}_n)$ ---, und ihr Fixpunkt verliert bei Steigung $-1$ die Stabilität, ohne dass ein neuer Fixpunkt erschiene: Stattdessen entsteht ein Zweierzyklus. \Person{Nolasco} und \Person{Dahlen} haben 1968 dieses Kriterium aufgestellt, und es ist das erste Beispiel einer Periodenverdopplung in der Physiologie. Das Kapitel folgt der Verdopplung dorthin, wo sie sich wiederholt --- und wiederholt --- und am Ende etwas erzeugt, das keine Periode mehr hat.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Flip-Verzweigung}
+
+\begin{definition}
+\boxtitelm{Definition 7.1 --- Abbildung, Fixpunkt, Multiplikator}
+Eine \Begriff{Abbildung} $x_{n+1} = f(x_n)$ ist ein dynamisches System in diskreter Zeit. Ein \Begriff{Fixpunkt} erfüllt $f(x^{*}) = x^{*}$; sein \Begriff{Multiplikator} ist $\lambda = f'(x^{*})$. Ein \Begriff{$p$-Zyklus} ist ein Fixpunkt von $f^{p} = f\circ\cdots\circ f$, der keiner von $f^{q}$ mit $q < p$ ist; sein Multiplikator ist das Produkt $f'(x_1)\cdots f'(x_p)$ über die Punkte des Zyklus.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 7.2 --- Stabilität und die Verzweigung bei $-1$}
+Ein Fixpunkt ist anziehend für $|\lambda| < 1$, abstoßend für $|\lambda| > 1$. Durchquert $\lambda$ beim Ändern eines Parameters den Wert $-1$, so verliert der Fixpunkt die Stabilität, und aus ihm entsteht ein Zweierzyklus (\Begriff{Flip-} oder \Begriff{Periodenverdopplungs-Verzweigung}). Durchquert $\lambda$ den Wert $+1$, so entsteht oder verschwindet ein Fixpunkt (Sattel-Knoten, wie in Kapitel 4).
+
+\schritt{Beweis der Stabilität}
+Für $\xi_n = x_n - x^{*}$ gilt $\xi_{n+1} = \lambda\,\xi_n + O(\xi_n^{2})$, also $\xi_n \approx \lambda^{n}\xi_0$: Abfall genau für $|\lambda| < 1$. Bei $\lambda < 0$ wechselt $\xi_n$ das Vorzeichen --- der Fixpunkt wird von beiden Seiten abwechselnd angelaufen. $\blacksquare$
+
+\schritt{Warum ein Zweierzyklus}
+Bei $\lambda = -1$ ist $(f^{2})'(x^{*}) = \lambda^{2} = +1$: Für die zweite Iterierte ist das eine Heugabel-Verzweigung (Satz 4.2), und ihre beiden neuen Fixpunkte $x_1 \ne x_2$ mit $f(x_1) = x_2$, $f(x_2) = x_1$ sind der Zweierzyklus. Seine Stabilität --- Heugabel super- oder subkritisch --- entscheidet das Vorzeichen der \Begriff{Schwarzschen Ableitung} $Sf = f'''/f' - \tfrac32(f''/f')^{2}$ (Auslassung 7). $\blacksquare$
+
+\schritt{Die Restitutionsabbildung}
+$F(A) = f(\mathrm{BCL} - A)$ hat Multiplikator $F' = -f'(\mathrm{DI})$. Die Steigung $f' = 1$ ist also $\lambda = -1$ --- das Nolasco-Dahlen-Kriterium ist Satz 7.2. Mit $f' = \tfrac{250}{60}\mathrm e^{-\mathrm{DI}/60}$ liegt die Grenze bei $\mathrm{DI} = 60\ln\tfrac{250}{60} = 85{,}6$ ms, $\mathrm{APD} = 240$, $\mathrm{BCL} = 325{,}6$ ms. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Abbildung ist monoton fallend --- und deshalb bleibt es bei einer Verdopplung.} Eine monotone Abbildung kann keinen Zyklus mit mehr als zwei Punkten haben: $f^{2}$ ist dann monoton steigend, und monoton steigende Abbildungen haben nur Fixpunkte. Der Alternans wird mit sinkendem $\mathrm{BCL}$ stärker --- $275/182$, dann $289/125$ ---, bis der kurze Schlag ausfällt: $2\!:\!1$-Block, Kapitel 6. Für die Kaskade, die dieses Kapitel im Titel trägt, braucht die Abbildung einen Buckel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die logistische Abbildung}
+
+\begin{merksatz}
+\boxtitel{Die Kaskade}
+$x_{n+1} = r\,x_n(1 - x_n)$ auf $[0,1]$, $0 < r \le 4$: der Buckel. Fixpunkte $0$ und $x^{*} = 1 - 1/r$ mit $\lambda = 2 - r$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.8cm}P{1.6cm}P{2.4cm}P{2.4cm}@{}}
+\toprule
+$r_k$ & \textbf{Periode} & $r_k - r_{k-1}$ & \textbf{Verhältnis}\\
+\midrule
+$r_1 = 3{,}0000$ & $1\to2$ & --- & ---\\
+$r_2 = 3{,}4495$ & $2\to4$ & $0{,}4495$ & ---\\
+$r_3 = 3{,}5441$ & $4\to8$ & $0{,}0946$ & $4{,}752$\\
+$r_4 = 3{,}5644$ & $8\to16$ & $0{,}0203$ & $4{,}656$\\
+$r_5 = 3{,}5688$ & $16\to32$ & $0{,}0044$ & $4{,}668$\\
+$r_\infty = 3{,}5699$ & $\infty$ & --- & $\to 4{,}669\ldots$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Verdopplungen häufen sich geometrisch: Jedes Intervall ist $4{,}669$-mal kürzer als das davor. Bei $r_\infty = 3{,}5699$ hat die Periode den Wert $2^{\infty}$ --- der Verlauf wiederholt sich nie mehr.}
+\end{minipage}
+\end{center}
+
+\schritt{Nachgerechnet: $r_1$}
+$\lambda = 2 - r = -1$ bei $r = 3$. \checkmark\ Der Zweierzyklus für $r > 3$ (Aufgabe 7.1) hat Multiplikator $4 + 2r - r^{2}$, gleich $-1$ bei $r = 1 + \sqrt6 = 3{,}4495$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Jenseits von $r_\infty$ ist der Verlauf chaotisch, aber nicht überall}: Bei $r = 3{,}8284 = 1 + \sqrt8$ entsteht durch einen Sattel-Knoten von $f^{3}$ ein Dreierzyklus, der dann seinerseits eine Kaskade durchläuft --- ein \Begriff{Fenster} der Ordnung im Chaos, und es gibt unendlich viele solche Fenster, zu jeder Periode. Die Reihenfolge, in der die Perioden beim Erhöhen von $r$ auftreten, ist dieselbe für jede Abbildung mit einem Buckel --- die \Begriff{U-Folge} von \Person{Metropolis}, \Person{Stein} und \Person{Stein} 1973. Das Chaos ist geordnet, nur nicht periodisch.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 7.3 --- Feigenbaum}
+Für jede Familie von Abbildungen mit einem einzigen quadratischen Maximum, die eine Periodenverdopplungskaskade durchläuft, gilt
+\[ \lim_{k\to\infty}\frac{r_k - r_{k-1}}{r_{k+1} - r_k} = \delta = 4{,}669\,201\,609\ldots, \]
+und die Abstände der Zykluspunkte verkleinern sich mit $\alpha = 2{,}502\,907\,875\ldots$ --- unabhängig von der Familie.
+
+\schritt{Beweisidee}
+Die Verdopplung $f \mapsto \alpha f(f(x/\alpha))$ --- zweimal anwenden, Maßstab ändern --- ist eine Abbildung auf dem Raum der Abbildungen. Sie hat einen Fixpunkt $g$, die universelle Funktion, und die Linearisierung dort hat genau einen expandierenden Eigenwert: $\delta$. Jede Familie, die nahe an $g$ vorbeiläuft, sieht denselben Eigenwert (Auslassung 8, \zit{6}). $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$\delta$ ist eine Naturkonstante der Dynamik wie $\pi$ der Geometrie: Sie hängt nicht davon ab, ob die Abbildung eine Population, einen Stromkreis oder einen tropfenden Wasserhahn beschreibt, sondern nur davon, dass ihr Maximum quadratisch ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Tabelle oben zeigt die Konvergenz}: $4{,}75$, $4{,}66$, $4{,}67$ --- schon die dritte Verdopplung liegt auf ein Promille an $\delta$. Und die Universalität wurde gemessen: \Person{Libchaber} 1982 in flüssigem Helium ($\delta \approx 4{,}4 \pm 0{,}5$ aus vier Verdopplungen), \Person{Linsay} 1981 in einem Schwingkreis mit Diode, \Person{Testa}, \Person{Pérez} und \Person{Jeffries} 1982 mit $\delta = 4{,}3 \pm 0{,}3$. Die Vorhersage einer Zahl aus einem Renormierungsargument in einem Experiment zu finden, das mit der logistischen Abbildung nichts zu tun hat --- das war der Moment, in dem die Chaostheorie Physik wurde.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Periode drei}
+
+\begin{merksatz}
+\boxtitel{Satz 7.4 --- Scharkowski, und Li--Yorke}
+Man ordne die natürlichen Zahlen so:
+\[ 3 \succ 5 \succ 7 \succ \cdots \succ 2\cdot3 \succ 2\cdot5 \succ \cdots \succ 4\cdot3 \succ 4\cdot5 \succ \cdots \succ 2^{3} \succ 2^{2} \succ 2 \succ 1 . \]
+Hat eine stetige Abbildung eines Intervalls in sich einen Zyklus der Periode $p$, so hat sie Zyklen jeder Periode $q$ mit $p \succ q$. Insbesondere: \textbf{Periode drei erzwingt alle Perioden} --- und überdies eine überabzählbare Menge von Startwerten, deren Verläufe weder periodisch sind noch gegen Periodisches streben.
+
+\schritt{Beweis für \enquote{drei erzwingt zwei}}
+Sei $a < b < c$ ein Dreierzyklus mit $f(a) = b$, $f(b) = c$, $f(c) = a$. Auf $[b,c]$ nimmt $f$ die Werte $c$ und $a$ an, überdeckt also $[a,c] \supset [b,c]$; auf $[a,b]$ nimmt $f$ die Werte $b$ und $c$ an, überdeckt also $[b,c]$. Ein Intervall $I$ mit $f(I) \supset I$ hat einen Fixpunkt (Zwischenwertsatz). Also hat $f$ einen Fixpunkt in $[b,c]$ --- Periode $1$ --- und $f^{2}$ einen in $[a,b]$, der kein Fixpunkt von $f$ ist, weil $f$ auf $[a,b]$ nach $[b,c]$ abbildet: Periode $2$. Der allgemeine Fall ist dieselbe Überdeckungsbuchhaltung mit mehr Intervallen (Auslassung 9). $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Kaskade $1, 2, 4, 8, \ldots$ ist das Ende der Scharkowski-Ordnung, von rechts gelesen. Periode drei steht ganz vorn: Wer sie sieht, hat alles.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{\Person{Li} und \Person{Yorke} nannten ihre Arbeit von 1975 \enquote{Period Three Implies Chaos}, und das Wort Chaos kam mit ihr in die Mathematik.} Dass \Person{Scharkowski} den stärkeren Satz schon 1964 in Kiew bewiesen hatte, erfuhr der Westen erst später. Für den Leitfall: Das Fenster bei $r = 3{,}8284$ ist in der Herzzelle der $3\!:\!2$-Block aus Kapitel 6 --- und wo Periode drei auftritt, ist nach Satz 7.4 das ganze Spektrum der Perioden vorhanden, nur unsichtbar, weil instabil. Die unregelmäßige Zone bei $T_p = 18$ ist der Ort, an dem sie sichtbar werden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Periode drei auf dem Kreis}
+Die Drehung $\varphi \mapsto \varphi + \tfrac13 \pmod 1$ hat nur Dreierzyklen: jeder Punkt liegt auf einem. Keine Periode zwei, keine eins, kein Chaos.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{6.0cm}@{}}
+\toprule
+\textbf{Intervall} & Periode drei erzwingt alles --- Satz 7.4.\\
+\textbf{Kreis} & Periode drei erzwingt nichts: Die Drehung um ein Drittel ist das Gegenbeispiel.\\
+\textbf{Ebene, Raum} & Erst recht nicht; Zyklen können einander umgehen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Satz 7.4 lebt vom Zwischenwertsatz auf einem Intervall: Wer von $a$ nach $c$ will, muss durch $b$. Auf dem Kreis gibt es den anderen Weg.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für die Herzzelle heißt das: Der $3\!:\!2$-Block aus Kapitel 6 erzwingt kein Chaos.} Er ist ein Dreierzyklus der Kreisabbildung, nicht einer Intervallabbildung --- eine Arnold-Zunge, in der alles regelmäßig ist. Erst wenn die Kreisabbildung nicht mehr umkehrbar ist ($K > 1$), faltet sie den Kreis auf ein Intervall zurück, und dann greift Satz 7.4 wieder: Die Dreierzyklen im Innern der überlappenden Zungen sind die mit dem Chaos im Gefolge. Der Satz, der im Titel die Welt verspricht, hat ein Kleingedrucktes --- den Raum, in dem er gilt ---, und die Physiologie liest es.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.1 --- Der Zweierzyklus}
+Berechnen Sie für die logistische Abbildung bei $r = 3{,}2$ den Zweierzyklus und seinen Multiplikator.
+
+\loesung
+\schritt{Schritt 1 --- Die Gleichung}
+$f^{2}(x) = x$ ist vom Grad $4$; zwei Lösungen sind die Fixpunkte $0$ und $1 - 1/r$. Division durch $x\,(x - 1 + 1/r)$ lässt $r^{2}x^{2} - r(r+1)x + (r+1) = 0$:
+\[ x_{1,2} = \frac{r + 1 \pm \sqrt{(r+1)(r-3)}}{2r} . \]
+Reell genau für $r \ge 3$ --- der Zyklus entsteht bei $r_1 = 3$. \checkmark
+
+\schritt{Schritt 2 --- Zahlen}
+$r = 3{,}2$: $\sqrt{4{,}2\cdot0{,}2} = 0{,}9165$; $x_1 = 5{,}1165/6{,}4 = 0{,}7995$, $x_2 = 3{,}2835/6{,}4 = 0{,}5130$.
+
+\schritt{Schritt 3 --- Probe}
+$f(0{,}7995) = 3{,}2\cdot0{,}7995\cdot0{,}2005 = 0{,}5130$. \checkmark\ $f(0{,}5130) = 3{,}2\cdot0{,}5130\cdot0{,}4870 = 0{,}7995$. \checkmark
+
+\schritt{Schritt 4 --- Multiplikator}
+$f'(x_1)f'(x_2) = r^{2}(1-2x_1)(1-2x_2) = 10{,}24\cdot(-0{,}599)\cdot(-0{,}026) = 0{,}160$. Allgemein, mit $x_1 + x_2 = (r+1)/r$ und $x_1x_2 = (r+1)/r^{2}$: $\lambda_2 = 4 + 2r - r^{2}$; bei $3{,}2$: $4 + 6{,}4 - 10{,}24 = 0{,}16$. \checkmark\ Anziehend; $\lambda_2 = -1$ bei $r^{2} - 2r - 5 = 0$, $r = 1 + \sqrt6$. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.2 --- Ein Medikament gegen Alternans}
+Ein Wirkstoff flacht die Restitutionskurve ab: $f(\mathrm{DI}) = 300 - 250\,\mathrm e^{-\mathrm{DI}/\tau}$ mit $\tau = 90$ statt $60$ ms. Bei welchem $\mathrm{BCL}$ beginnt nun der Alternans?
+
+\loesung
+\schritt{Schritt 1 --- Die Grenze}
+$f' = 1$ bei $\mathrm{DI}_c = \tau\ln(250/\tau) = 90\ln2{,}778 = 91{,}9$ ms.
+
+\schritt{Schritt 2 --- $\mathrm{APD}$ dort}
+$f(91{,}9) = 300 - 250\cdot\mathrm e^{-1{,}021} = 300 - 90{,}0 = 210{,}0$ ms.
+
+\schritt{Schritt 3 --- $\mathrm{BCL}$}
+$\mathrm{BCL}_c = 91{,}9 + 210{,}0 = 301{,}9$ ms gegen $325{,}6$ ohne Wirkstoff: Das Herz darf $24$ ms schneller schlagen --- etwa $14$ Schläge je Minute mehr ---, bevor es alterniert.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Restitutionshypothese der Antiarrhythmika}: Ein Wirkstoff, der die Steigung der Restitutionskurve unter $1$ drückt, verhindert den Alternans und damit --- so die Hypothese --- den Übergang in Flimmern. \Person{Garfinkel} und Mitarbeiter haben das 2000 mit Bretylium am Schweineherz gezeigt. Dass die Hypothese nicht die ganze Wahrheit ist --- Alternans entsteht auch aus der Kalziumdynamik, und die Abbildung hat ein Gedächtnis über mehr als einen Schlag --- gehört zu Kapitel 15.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.3 --- $\delta$ aus drei Zahlen}
+Schätzen Sie $r_\infty$ aus $r_3 = 3{,}5441$, $r_4 = 3{,}5644$ und $\delta = 4{,}669$.
+
+\loesung
+\schritt{Schritt 1 --- Die geometrische Reihe}
+Für große $k$ gilt $r_{k+1} - r_k \approx (r_k - r_{k-1})/\delta$, also
+\[ r_\infty - r_4 \approx (r_4 - r_3)\left(\frac1\delta + \frac1{\delta^{2}} + \cdots\right) = \frac{r_4 - r_3}{\delta - 1} . \]
+
+\schritt{Schritt 2 --- Zahlen}
+$r_\infty \approx 3{,}5644 + 0{,}0203/3{,}669 = 3{,}5644 + 0{,}0055 = 3{,}5699$.
+
+\schritt{Schritt 3 --- Probe}
+Der bekannte Wert ist $3{,}569\,946$. \checkmark\ Aus $r_4, r_5$ ebenso: $3{,}5688 + 0{,}0044/3{,}669 = 3{,}5700$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Mit drei Verzweigungspunkten und einer universellen Zahl kennt man den Rand des Chaos auf vier Stellen.} Das ist der praktische Wert der Universalität: Im Experiment misst man zwei oder drei Verdopplungen --- mehr erlaubt das Rauschen selten --- und sagt vorher, wo die Kaskade endet. Umgekehrt ist das Verhältnis $4{,}75$ aus den ersten drei Punkten der logistischen Abbildung schon ein Prüfstein: Wer $\delta \approx 4{,}7$ misst, hat eine Verdopplungskaskade vor sich, welcher Mechanismus auch immer dahintersteckt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Taschenrechner in Los Alamos}
+\Person{Mitchell Feigenbaum} hatte 1975 in Los Alamos einen programmierbaren Taschenrechner HP-65 und wenig Rechenzeit; er berechnete die Verzweigungspunkte der logistischen Abbildung von Hand, Stelle für Stelle, und bemerkte, dass die Abstände geometrisch schrumpften.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er versuchte dieselbe Rechnung mit $r\sin\pi x$ --- und fand dasselbe $\delta$. \textbf{Die Universalität war eine Beobachtung, bevor sie ein Satz war}; der Satz kam 1982 durch \Person{Lanford} mit einem rechnergestützten Beweis, dem ersten seiner Art in der Dynamik. Feigenbaums Arbeit wurde zweimal abgelehnt und erschien 1978 im \enquote{Journal of Statistical Physics}; \Person{May}s Aufsatz von 1976 in \enquote{Nature}, der die logistische Abbildung Biologen und Ökonomen bekannt machte, hatte das Publikum vorbereitet.}
+\end{minipage}
+\end{center}
+
+\schritt{Ein Satz aus Kiew}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Oleksandr Scharkowski} veröffentlichte seine Ordnung 1964 auf Russisch in der ukrainischen mathematischen Zeitschrift; \Person{Li} und \Person{Yorke} kannten sie 1975 nicht. \textbf{Dass der stärkere Satz elf Jahre früher da war, erfuhr der Westen auf einer Konferenz 1976} --- und die Ordnung trägt seither beide Namen, der Satz vom Chaos aber den von Li und Yorke, weil sie das Wort geprägt hatten.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Alternans und Flimmern}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Räumlich diskordanter Alternans} & Benachbarte Gewebebezirke alternieren gegenphasig; die Grenze dazwischen ist der Ort, an dem die Erregungswelle bricht --- Kapitel 13.\\
+\textbf{T-Wellen-Alternans} & Mikrovolt-Alternans im EKG als Risikomarker für den plötzlichen Herztod --- gemessen, aber als Prognosewerkzeug umstritten.\\
+\textbf{Gedächtnis} & Die Restitutionsabbildung mit zwei oder drei Schlägen Gedächtnis: Das Steigungskriterium wird falsch, und es braucht die Eigenwerte einer Matrix.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Verdopplung einer einzelnen Zelle wird im Gewebe zu einem Muster}: Die Welle läuft von Zelle zu Zelle, und jede alterniert --- aber nicht alle im Gleichtakt. Wo lang auf kurz trifft, bricht die Welle, und ein Wellenbruch ist der Anfang einer Spirale, Kapitel 13, und einer Spirale der Anfang des Flimmerns. \Person{Qu}, \Person{Garfinkel} und \Person{Weiss} haben diese Kette 2000 in Simulation und Experiment nachgezeichnet. Die Mathematik der Alternans-Grenze --- Satz 7.2 --- ist damit nicht nur die einer Zelle, sondern die Vorhersage, ab welcher Frequenz ein Herz zur Spirale fähig wird.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 7.1} & Abbildung, Fixpunkt, Multiplikator, Zyklus\\
+\textbf{Satz 7.2} & $|\lambda| < 1$; Flip bei $\lambda = -1$: Zweierzyklus\\
+\textbf{Satz 7.3} & Feigenbaum $\delta = 4{,}669$, universell\\
+\textbf{Satz 7.4} & Scharkowski-Ordnung; Periode drei erzwingt alles\\
+\textbf{Der Bruchfall} & nur auf dem Intervall, nicht auf dem Kreis\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Am Ende der Kaskade steht ein Verlauf ohne Periode --- in einer Abbildung. Kapitel 8 zeigt, dass ein Fluss dasselbe kann, sobald er drei Dimensionen hat, und was das Gebilde ist, auf dem er dann für immer bleibt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

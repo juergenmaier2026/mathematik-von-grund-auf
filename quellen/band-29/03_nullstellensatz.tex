@@ -1,0 +1,347 @@
+\chapter{Hilberts Nullstellensatz}
+
+\section{Die Frage nach dem Rückweg}
+
+\begin{merksatz}
+\boxtitel{Wann sind zwei Gleichungssysteme gleich?}
+Für den Leitfall gibt es viele Gleichungssysteme mit derselben Kurve:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{4.4cm}P{4.2cm}@{}}
+\toprule
+$\{f_1, f_2, f_3\}$ & die Messgleichungen\\
+$\{f_1,\ f_2 - f_1,\ g\}$ & das System aus Kapitel 1\\
+$\{f_1^{2},\ (f_2 - f_1)^{3},\ g\}$ & dieselbe Kurve, andere Vielfachheit\\
+$\{f_1,\ f_2 - f_1,\ g,\ (k_{12} - 1)(k_{12} - 2)\cdot g\}$ & ein überflüssiges Element\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die ersten beiden erzeugen dasselbe Ideal (Kapitel 2). Das dritte erzeugt ein kleineres: $f_1\notin\langle f_1^{2}, (f_2 - f_1)^{3}, g\rangle$. Das vierte erzeugt dasselbe wie das zweite.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Ideale haben genau dann dieselbe Varietät, wenn sie bis auf Potenzen dieselben Elemente enthalten --- jedenfalls über den komplexen Zahlen. Das ist Hilberts Nullstellensatz, und er ist der Rückweg von der Geometrie zur Algebra.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Satz hat zwei Hälften.} Die schwache: Ein Gleichungssystem ohne Lösung enthält die $1$ --- man kann die Unlösbarkeit durch ein Zertifikat $1 = \sum h_if_i$ beweisen. Die starke: Verschwindet $f$ überall, wo die $f_i$ verschwinden, so liegt eine Potenz von $f$ im Ideal. Beide gelten über $\mathbb C$ und über jedem algebraisch abgeschlossenen Körper, und beide scheitern über $\mathbb R$. Mit ihnen wird die Beziehung zwischen Idealen und Varietäten zu einer Bijektion --- und man kann Geometrie treiben, indem man mit Idealen rechnet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der schwache Nullstellensatz}
+
+\begin{merksatz}
+\boxtitel{Satz 3.1 --- der schwache Nullstellensatz}
+Sei $k$ algebraisch abgeschlossen und $I\subseteq k[x_1, \ldots, x_n]$ ein Ideal mit $V(I) = \emptyset$. Dann ist $I = k[x_1, \ldots, x_n]$, also $1\in I$.
+
+\schritt{Beweis für $n = 1$}
+$k[x]$ ist ein Hauptidealring (Band 11): $I = \langle f\rangle$. Ist $f$ konstant $\ne 0$, so $1\in I$. Ist $f$ nicht konstant, hat es eine Nullstelle $a$ (algebraisch abgeschlossen), und $a\in V(I)$ --- Widerspruch. Ist $f = 0$, so $V(I) = k\ne\emptyset$. $\blacksquare$
+
+\schritt{Beweisidee für $n > 1$}
+Sei $I\ne k[x_1, \ldots, x_n]$; zu zeigen: $V(I)\ne\emptyset$. Man vergrößere $I$ zu einem maximalen Ideal $M\supseteq I$ (existiert nach dem Basissatz: eine Kette echter Ideale wird stationär). Der Quotient $K = k[x_1, \ldots, x_n]/M$ ist ein Körper, der $k$ enthält und von den Bildern $\bar x_1, \ldots, \bar x_n$ erzeugt wird. \textbf{Zariskis Lemma} (Auslassung 1): Ein Körper, der als Ring über einem Körper $k$ endlich erzeugt ist, ist algebraisch über $k$. Da $k$ algebraisch abgeschlossen ist, folgt $K = k$: Jedes $\bar x_i$ ist ein Element $a_i\in k$. Dann ist $x_i - a_i\in M$, also $M\supseteq\langle x_1 - a_1, \ldots, x_n - a_n\rangle$, und dieses Ideal ist maximal (sein Quotient ist $k$), also $M = \langle x_i - a_i\rangle$. Der Punkt $a = (a_1, \ldots, a_n)$ liegt in $V(M)\subseteq V(I)$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die maximalen Ideale von $k[x_1, \ldots, x_n]$ sind genau die $\langle x_1 - a_1, \ldots, x_n - a_n\rangle$: Punkte und maximale Ideale sind dasselbe. Das ist der Nullstellensatz in seiner kürzesten Form.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für den Leitfall}: Hätte man Messwerte $s_1, s_2, s_3$, zu denen kein Parametersatz passt --- etwa $s_3 > s_1s_2$, was die Gleichungen nicht zulassen ---, so gäbe es Polynome $h_i$ mit $1 = h_1f_1 + h_2f_2 + h_3f_3$: ein Beweis der Unvereinbarkeit, den man vorlegen kann, ohne alle Parameter durchzuprobieren. Für reelle, positive Parameter ist die Sache feiner (Bruchfall), aber die Idee bleibt: \textbf{Unlösbarkeit hat ein Zertifikat.} Das ist in der Logik der Satz von der Vollständigkeit für Gleichungen, Band 10, und in der Optimierung die Dualität, Band 19.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der starke Nullstellensatz}
+
+\begin{definition}
+\boxtitelm{Definition 3.2 --- Radikal}
+Das \Begriff{Radikal} eines Ideals $I$ ist $\sqrt I = \{\,f : f^{m}\in I\ \text{für ein}\ m\ge1\,\}$. Es ist ein Ideal (Binomialformel: $(f + g)^{m_1 + m_2 - 1}\in I$), enthält $I$, und $I$ heißt \Begriff{Radikalideal}, wenn $\sqrt I = I$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 3.3 --- der starke Nullstellensatz}
+Sei $k$ algebraisch abgeschlossen. Für jedes Ideal $I\subseteq k[x_1, \ldots, x_n]$ gilt
+\[ I(V(I)) = \sqrt I . \]
+Folglich sind $V$ und $I$ zueinander inverse, inklusionsumkehrende Bijektionen zwischen affinen Varietäten in $k^{n}$ und Radikalidealen in $k[x_1, \ldots, x_n]$.
+
+\schritt{Beweis --- der Trick von Rabinowitsch}
+$\supseteq$: Ist $f^{m}\in I$, so verschwindet $f^{m}$ auf $V(I)$, also $f$. --- $\subseteq$: Sei $f\in I(V(I))$, $f\ne0$, und $I = \langle f_1, \ldots, f_s\rangle$. Man führe eine neue Veränderliche $y$ ein und betrachte in $k[x_1, \ldots, x_n, y]$ das Ideal
+\[ J = \langle f_1, \ldots, f_s,\ 1 - yf\rangle . \]
+Ein Punkt $(a, b)\in V(J)$ erfüllte $f_i(a) = 0$ für alle $i$, also $a\in V(I)$, also $f(a) = 0$ --- und $1 - bf(a) = 1\ne0$. Also $V(J) = \emptyset$, und nach Satz 3.1 ist $1\in J$:
+\[ 1 = \sum_{i}p_i(x, y)f_i(x) + q(x, y)\bigl(1 - yf(x)\bigr) . \]
+Das ist eine Identität von Polynomen; man darf $y = 1/f(x)$ einsetzen (im Körper der rationalen Funktionen): $1 = \sum p_i(x, 1/f)f_i(x)$. Multiplikation mit $f^{m}$, wo $m$ die höchste $y$-Potenz in den $p_i$ ist, macht alle Nenner weg: $f^{m} = \sum h_i(x)f_i(x)$ mit Polynomen $h_i$. Also $f^{m}\in I$. $\blacksquare$
+
+\schritt{Die Bijektion}
+Für ein Radikalideal $I$ ist $I(V(I)) = \sqrt I = I$; für eine Varietät $V$ ist $V(I(V)) = V$ (Satz 2.2). Die Zuordnungen sind also zueinander invers. $\blacksquare$
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{0.6cm}P{4.4cm}@{}}
+\toprule
+\textbf{Geometrie} & & \textbf{Algebra}\\
+\midrule
+Varietät $V$ & $\leftrightarrow$ & Radikalideal $I(V)$\\
+Punkt & $\leftrightarrow$ & maximales Ideal\\
+$V\subseteq W$ & $\leftrightarrow$ & $I(V)\supseteq I(W)$\\
+$V\cup W$ & $\leftrightarrow$ & $I(V)\cap I(W)$\\
+$V\cap W$ & $\leftrightarrow$ & $\sqrt{I(V) + I(W)}$\\
+leer & $\leftrightarrow$ & der ganze Ring\\
+irreduzibel (unten) & $\leftrightarrow$ & Primideal\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Trick mit $1 - yf$ ist von 1929 und stammt von J.\ L.\ Rabinowitsch} --- einem Autor, von dem man sonst nichts weiß; vermutlich \Person{George Rainich}, der unter seinem Geburtsnamen Rabinowitsch veröffentlichte. Er macht aus der schwachen Form die starke in zehn Zeilen, und er ist ein Beispiel für ein Denkmuster der algebraischen Geometrie: \enquote{Invertiere $f$, indem du eine Veränderliche $y$ mit $yf = 1$ hinzunimmst} --- die Lokalisierung, Band 11, hier als Rechentrick. Die Tabelle ist das Wörterbuch des Fachs: Jede Aussage über Varietäten ist eine über Radikalideale, und umgekehrt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zerlegen}
+
+\begin{definition}
+\boxtitelm{Definition 3.4 --- irreduzibel}
+Eine Varietät $V\ne\emptyset$ heißt \Begriff{irreduzibel}, wenn aus $V = V_1\cup V_2$ mit Varietäten $V_1, V_2$ folgt $V_1 = V$ oder $V_2 = V$. Sonst heißt sie \Begriff{reduzibel}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 3.5 --- Zerlegung in irreduzible Bestandteile}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item $V$ ist irreduzibel genau dann, wenn $I(V)$ ein Primideal ist ($fg\in I(V)\Rightarrow f\in I(V)$ oder $g\in I(V)$).
+\item Jede Varietät ist eine endliche Vereinigung irreduzibler Varietäten $V = V_1\cup\cdots\cup V_r$, und wenn keine $V_i$ in einer anderen enthalten ist, ist die Zerlegung bis auf Reihenfolge eindeutig. Die $V_i$ heißen die \Begriff{irreduziblen Komponenten} von $V$.
+\end{enumerate}
+
+\schritt{Beweis von (a)}
+Sei $V$ irreduzibel und $fg\in I(V)$. Dann ist $V = (V\cap V(f))\cup(V\cap V(g))$, beides Varietäten (Satz 1.2); also ist eine davon $V$, etwa $V\subseteq V(f)$, d.\,h.\ $f\in I(V)$. Umgekehrt sei $I(V)$ prim und $V = V_1\cup V_2$ mit $V_1\ne V$. Dann ist $I(V_1)\supsetneq I(V)$ (Satz 2.2, und $V(I(V_1)) = V_1\ne V$); wähle $f\in I(V_1)\setminus I(V)$. Für jedes $g\in I(V_2)$ verschwindet $fg$ auf $V_1\cup V_2 = V$, also $fg\in I(V)$, also $g\in I(V)$ (da $f\notin I(V)$). Also $I(V_2)\subseteq I(V)$, also $V_2\supseteq V$, also $V_2 = V$. $\blacksquare$
+
+\schritt{Beweis von (b), Existenz}
+Angenommen, $V$ hat keine solche Zerlegung. Dann ist $V$ reduzibel, $V = V_1\cup V_1'$ mit echten Teilen, und mindestens einer --- sagen wir $V_1$ --- hat ebenfalls keine Zerlegung. So weiter: $V\supsetneq V_1\supsetneq V_2\supsetneq\cdots$, eine unendlich absteigende Kette von Varietäten. Die zugehörigen Ideale $I(V)\subsetneq I(V_1)\subsetneq\cdots$ bilden eine unendlich aufsteigende Kette --- unmöglich nach dem Basissatz (Satz 2.3). $\blacksquare$
+
+\schritt{Beweis von (b), Eindeutigkeit}
+Seien $V = \bigcup V_i = \bigcup W_j$ zwei Zerlegungen ohne überflüssige Teile. Für jedes $i$ ist $V_i = \bigcup_j(V_i\cap W_j)$, und da $V_i$ irreduzibel ist, ist $V_i = V_i\cap W_{j}$ für ein $j$, also $V_i\subseteq W_j$. Ebenso $W_j\subseteq V_{i'}$ für ein $i'$; dann $V_i\subseteq V_{i'}$, also $i = i'$ und $V_i = W_j$. $\blacksquare$
+
+\schritt{Beispiele}
+$V(xz, yz) = V(z)\cup V(x, y)$: Ebene und Gerade, beide irreduzibel ($\langle z\rangle$ und $\langle x, y\rangle$ sind prim). Die Leitfall-Kurve ist irreduzibel (Aufgabe 3.3). $V(xy)$ ist das Achsenkreuz, zwei Komponenten.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Zerlegung ist das geometrische Gegenstück zur Primfaktorzerlegung}: Ein Radikalideal ist ein Durchschnitt endlich vieler Primideale, so wie eine quadratfreie Zahl ein Produkt von Primzahlen ist. Für Ideale, die nicht radikal sind, gibt es die \Begriff{Primärzerlegung} (Lasker 1905, Noether 1921; Auslassung 2), die auch die Vielfachheiten erfasst. Für Hyperflächen $V(f)$ ist die Zerlegung einfach die Faktorisierung von $f$: Jeder irreduzible Faktor eine Komponente. Für den Leitfall mit vier Parametern heißt die Zerlegung: Die Menge der zu den Daten passenden Modelle ist \kursiv{ein} Stück, nicht mehrere --- und das ist eine andere Aussage als in Aufgabe 1.3, wo sie aus zwei Punkten bestand.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Koordinatenring}
+
+\begin{definition}
+\boxtitelm{Definition 3.6 --- Koordinatenring}
+Der \Begriff{Koordinatenring} einer Varietät $V$ ist $k[V] = k[x_1, \ldots, x_n]/I(V)$: die Polynome, betrachtet als Funktionen auf $V$, wobei zwei Polynome gleich sind, wenn sie auf $V$ übereinstimmen. $V$ ist irreduzibel genau dann, wenn $k[V]$ nullteilerfrei ist (Satz 3.5a).
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Der Koordinatenring des Leitfalls}
+Auf der Kurve $C = V(f_1, f_2 - f_1, g)$ gilt $k_{10} = \tfrac12 - k_{12}$ und $k_{21} = \tfrac25 - k_{20}$: Jede Funktion auf $C$ ist ein Polynom in $k_{12}$ und $k_{20}$, und zwischen diesen gilt nur $k_{12}k_{20} = \tfrac25k_{12} - \tfrac{3}{50}$. Also
+\[ k[C]\cong k[k_{12}, k_{20}]\big/\langle k_{12}k_{20} - \tfrac25k_{12} + \tfrac{3}{50}\rangle . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Funktion auf $C$} & \textbf{identifizierbar?}\\
+\midrule
+$k_{10} + k_{12}$ & ja: konstant $\tfrac12$ auf $C$\\
+$k_{21} + k_{20}$ & ja: konstant $\tfrac25$\\
+$k_{10}k_{21} + k_{10}k_{20} + k_{12}k_{20}$ & ja: konstant $\tfrac{14}{100}$\\
+$k_{12}$, $k_{20}$, $k_{10}k_{21}$ & nein: nicht konstant auf $C$\\
+$k_{12}(\tfrac25 - k_{20})$ & ja: $= \tfrac{3}{50}$ --- die Hyperbel selbst\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Identifizierbar sind genau die Funktionen, die im Koordinatenring konstant sind --- und für allgemeine Messwerte $s_1, s_2, s_3$ genau die Polynome in $s_1, s_2, s_3$. Das ist die algebraische Fassung von \enquote{was die Daten sagen}.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Koordinatenring enthält alle Geometrie der Varietät}: Punkte sind seine maximalen Ideale, Teilvarietäten seine Primideale, die Dimension ist seine Krull-Dimension (Kapitel 7), und zwei Varietäten sind \enquote{dieselbe} (isomorph), wenn ihre Koordinatenringe es sind. Darum rechnet die algebraische Geometrie mit Ringen: Der Ring ist die Varietät in einer Form, die man mit Idealen behandeln kann. Die Richtung ist seit \Person{Dedekind} und \Person{Weber} 1882 bekannt --- sie behandelten Kurven über ihre Funktionenkörper --- und seit \Person{Grothendieck} 1960 das Fundament: Ein Schema ist ein Raum, der aus einem beliebigen Ring gemacht ist, Kapitel 15.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Über $\mathbb R$ gilt nichts davon}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{3.4cm}@{}}
+\toprule
+\textbf{Ideal} & $V$ über $\mathbb R$ & $I(V)$ über $\mathbb R$\\
+\midrule
+$\langle x^{2} + 1\rangle$ & leer & $\mathbb R[x]$ --- aber $1\notin\langle x^{2} + 1\rangle$\\
+$\langle x^{2} + y^{2}\rangle$ & der Ursprung & $\langle x, y\rangle\ne\sqrt{\langle x^{2} + y^{2}\rangle} = \langle x^{2} + y^{2}\rangle$\\
+$\langle x^{2} + y^{2} - 1\rangle$ & der Kreis & $\langle x^{2} + y^{2} - 1\rangle$ --- hier stimmt es\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Über $\mathbb R$ ist $x^{2} + y^{2}$ irreduzibel, sein Ideal prim und radikal, und seine Varietät ein Punkt, dessen Ideal $\langle x, y\rangle$ viel größer ist. Der Nullstellensatz scheitert, weil die Nullstellen fehlen, die die Algebra sieht: $y = \pm\mathrm ix$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für den Leitfall ist das kein Schönheitsfehler, sondern die Hauptschwierigkeit}: Parameter sind reell und positiv. Ein Modell kann über $\mathbb C$ zwei Lösungen haben (Aufgabe 1.3), von denen nur eine reell ist --- dann ist es \kursiv{praktisch} global identifizierbar, obwohl die Algebra zwei Punkte zählt. Umgekehrt kann die komplexe Varietät leer sein, während die reelle Frage sinnlos ist. Die reelle algebraische Geometrie hat ihren eigenen Nullstellensatz --- den \Begriff{Positivstellensatz} von \Person{Krivine} 1964 und \Person{Stengle} 1974: Ein System von Gleichungen und Ungleichungen ist über $\mathbb R$ genau dann unlösbar, wenn es ein Zertifikat mit Quadratsummen gibt. Kapitel 13 kommt darauf zurück; bis dahin wird über $\mathbb C$ gerechnet und am Ende gefragt, was reell ist.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Ein Radikal berechnen}
+Bestimmen Sie $\sqrt{\langle x^{2}, xy\rangle}$ in $\mathbb C[x, y]$ und die zugehörige Varietät.
+
+\loesung
+\schritt{Schritt 1 --- Die Varietät}
+$x^{2} = 0$ erzwingt $x = 0$; dann ist $xy = 0$ automatisch. $V = V(x)$: die $y$-Achse.
+
+\schritt{Schritt 2 --- Das Radikal über den Nullstellensatz}
+$\sqrt I = I(V(I)) = I(\text{$y$-Achse}) = \langle x\rangle$ (ein Polynom verschwindet auf $x = 0$ genau dann, wenn es durch $x$ teilbar ist: $f(x, y) = xq + r(y)$, und $r(y) = 0$ für alle $y$).
+
+\schritt{Schritt 3 --- Direkt, ohne Nullstellensatz}
+$x\in\sqrt I$, denn $x^{2}\in I$. Also $\langle x\rangle\subseteq\sqrt I$. Umgekehrt ist $I\subseteq\langle x\rangle$, und $\langle x\rangle$ ist prim (Quotient $k[y]$ nullteilerfrei), also radikal, also $\sqrt I\subseteq\sqrt{\langle x\rangle} = \langle x\rangle$. \checkmark
+
+\schritt{Schritt 4 --- Was verloren ging}
+$I = \langle x^{2}, xy\rangle = \langle x\rangle\cap\langle x^{2}, y\rangle$ (Probe: $\langle x^{2}, y\rangle\ni x^{2}, xy$; und ein Element beider Ideale ist durch $x$ teilbar und liegt in $\langle x^{2}, y\rangle$, also von der Form $x\cdot(ax + by + \ldots)$, in $I$). Der zweite Faktor $\langle x^{2}, y\rangle$ hat als Varietät den Ursprung --- eine \enquote{eingebettete} Komponente, die in der $y$-Achse liegt und in $\sqrt I$ verschwindet. Die Primärzerlegung sieht sie, das Radikal nicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Ideal $\langle x^{2}, xy\rangle$ beschreibt die $y$-Achse mit einem verdickten Punkt im Ursprung} --- eine Figur, die die klassische Geometrie nicht kennt und die Schematheorie ernst nimmt. Für den Leitfall heißt die Lehre: Zwei Gleichungssysteme mit derselben Varietät können verschieden viel Information tragen, und das Radikal ist das, was von der Varietät allein wiedergewonnen werden kann.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Drei Achsen}
+Zerlegen Sie $V(xy, xz, yz)\subset\mathbb C^{3}$ in irreduzible Komponenten und bestimmen Sie $I(V)$.
+
+\loesung
+\schritt{Schritt 1 --- Punkte}
+Sind zwei Koordinaten ungleich null, ist ein Produkt ungleich null. Also höchstens eine Koordinate $\ne 0$: $V$ ist die Vereinigung der drei Koordinatenachsen.
+
+\schritt{Schritt 2 --- Komponenten}
+$x$-Achse $= V(y, z)$, $y$-Achse $= V(x, z)$, $z$-Achse $= V(x, y)$; jede irreduzibel, da $\langle y, z\rangle$ usw.\ prim sind (Quotient $k[x]$). Keine liegt in einer anderen: drei Komponenten.
+
+\schritt{Schritt 3 --- Das Ideal}
+$I(V) = \langle y, z\rangle\cap\langle x, z\rangle\cap\langle x, y\rangle$ (Wörterbuch: Vereinigung $\leftrightarrow$ Durchschnitt). Behauptung: Das ist $\langle xy, xz, yz\rangle$. $\supseteq$ klar. $\subseteq$: Ein Polynom im Durchschnitt hat keinen konstanten Term und keine reinen Potenzen $x^{a}$ (sonst läge es nicht in $\langle y, z\rangle$), keine $y^{b}$, keine $z^{c}$; jedes andere Monom enthält zwei verschiedene Veränderliche und ist durch $xy$, $xz$ oder $yz$ teilbar. \checkmark
+
+\schritt{Schritt 4 --- Radikal}
+$\langle xy, xz, yz\rangle$ ist also ein Radikalideal, und die Erzeuger sind schon die \enquote{richtigen} Gleichungen. Es ist kein Primideal: $x\cdot y\in I$, aber $x, y\notin I$ --- wie es sich für drei Komponenten gehört.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Drei Geraden, drei Gleichungen vom Grad zwei --- und keine zwei Gleichungen genügen}: $V(xy, xz) = V(x)\cup V(y, z)$ ist eine Ebene plus Gerade, nicht drei Geraden. Die Zahl der nötigen Gleichungen ist hier größer als die Kodimension ($3 - 1 = 2$); Varietäten, bei denen sie gleich ist, heißen vollständige Durchschnitte, und die drei Achsen sind das Standardbeispiel für eine, die keiner ist. Kapitel 7 kommt darauf zurück.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Die Leitfall-Kurve ist irreduzibel}
+Zeigen Sie, dass $J = \langle f_1,\ f_2 - f_1,\ g\rangle$ ein Primideal in $\mathbb C[k_{10}, k_{12}, k_{21}, k_{20}]$ ist, und folgern Sie, dass $I(C) = J$.
+
+\loesung
+\schritt{Schritt 1 --- Der Quotient}
+Modulo $f_1$ und $f_2 - f_1$ sind $k_{10} = \tfrac12 - k_{12}$ und $k_{21} = \tfrac25 - k_{20}$ Polynome in den übrigen Veränderlichen. Also $\mathbb C[k_{10}, k_{12}, k_{21}, k_{20}]/J\cong\mathbb C[k_{12}, k_{20}]/\langle g\rangle$ mit $g = k_{12}k_{20} - \tfrac25k_{12} + \tfrac{3}{50}$ (Eliminieren linearer Gleichungen ändert den Quotienten nicht --- Band 11).
+
+\schritt{Schritt 2 --- $g$ ist irreduzibel}
+$g$ hat Grad $1$ in $k_{20}$: $g = k_{12}\cdot k_{20} + (\tfrac{3}{50} - \tfrac25k_{12})$. Eine Zerlegung $g = ab$ müsste einen Faktor ohne $k_{20}$ haben, der dann $k_{12}$ und $\tfrac{3}{50} - \tfrac25k_{12}$ teilt --- also konstant ist ($\mathrm{ggT} = 1$, da $\tfrac{3}{50}\ne0$). Also irreduzibel.
+
+\schritt{Schritt 3 --- Prim}
+In $\mathbb C[k_{12}, k_{20}]$, einem faktoriellen Ring (Band 11), erzeugt ein irreduzibles Polynom ein Primideal. Also ist $\langle g\rangle$ prim, der Quotient nullteilerfrei, und $J$ prim.
+
+\schritt{Schritt 4 --- $I(C) = J$}
+$J\subseteq I(C)$, da die Erzeuger auf $C$ verschwinden. Prim ist radikal; nach Satz 3.3 ist $I(C) = I(V(J)) = \sqrt J = J$. $\blacksquare$\ Die Kurve ist irreduzibel (Satz 3.5a), und ihr Koordinatenring ist der aus Abschnitt 3.5.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Wo die reelle Rechnung aufhört}: $C$ enthält auch Punkte mit $k_{12} < 0$ oder $k_{20} < 0$ (für $k_{12} < 0{,}15$ wird $k_{20}$ negativ); die pharmakologisch zulässigen bilden den Bogen $k_{12}\in[0{,}15;\ 0{,}5]$ aus Kapitel 1. Die Algebra beschreibt die ganze Hyperbel, beide Äste, komplex; die Medizin braucht ein Viertel eines Astes. Beides ist richtig, und man muss wissen, welches man gerade tut.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Hilbert 1893, Lasker, Noether}
+\Person{Hilbert} bewies den Nullstellensatz 1893 in seiner zweiten großen Arbeit zur Invariantentheorie --- als Werkzeug, um den Basissatz konstruktiv zu machen. Der Name \enquote{Nullstellensatz} ist einer der wenigen deutschen Fachausdrücke, die weltweit unübersetzt benutzt werden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{\Person{Emanuel Lasker}, Schachweltmeister von 1894 bis 1921, bewies 1905 die Primärzerlegung für Polynomideale} --- in seiner einzigen bedeutenden mathematischen Arbeit, mit Beweisen, die seine Zeitgenossen kaum lasen. \Person{Emmy Noether} abstrahierte 1921 in \enquote{Idealtheorie in Ringbereichen} beides: Aus dem Basissatz wurde die Kettenbedingung, aus Laskers Zerlegung der Satz von Lasker--Noether für alle noetherschen Ringe. Die Arbeit ist der Anfang der modernen Algebra; \Person{van der Waerden}s Lehrbuch von 1930 trug sie in die Welt, und \Person{Zariski} wandte sie in den vierziger Jahren auf die italienische Geometrie an, deren Beweise er für ungenügend hielt --- die \enquote{algebraische} algebraische Geometrie war geboren.}
+\end{minipage}
+\end{center}
+
+\schritt{Zariskis Lemma}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Beweisidee von Satz 3.1 über maximale Ideale ist von \Person{Zariski} 1947; sein Lemma, dass endlich erzeugte Körpererweiterungen algebraisch sind, ist der eigentliche Kern, und es gibt heute Beweise auf einer Seite (\Person{Artin}, \Person{Tate}; \Person{Munshi} 2008). \textbf{Dass der Nullstellensatz ein Satz über Körper ist, nicht über Geometrie}, war eine der Einsichten, die aus dem Fach eine Algebra machten.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Zertifikate heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Positivstellensatz als Rechenverfahren} & Quadratsummen-Zertifikate per semidefiniter Optimierung (Parrilo 2000, Lasserre 2001): Unlösbarkeit reeller Systeme wird numerisch bewiesen --- Band 19 trifft Band 29.\\
+\textbf{Nullstellensatz-Zertifikate für kombinatorische Probleme} & Ein Graph ist genau dann nicht 3-färbbar, wenn $1$ im Färbungsideal liegt (de Loera 2008); die Zertifikatsgrade messen die Schwierigkeit der Instanz.\\
+\textbf{Reelle Identifizierbarkeit} & Welche Parameter sind aus reellen, positiven Daten bestimmbar? Die Antwort braucht den Positivstellensatz, und sie ist erst in Ansätzen da.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Nullstellensatz sagt, dass ein Zertifikat existiert; der Positivstellensatz sagt es für reelle Ungleichungen; und die semidefinite Optimierung findet es.} Das ist der Kern eines Programms, das seit 2000 Kontrolltheorie, Robotik und kombinatorische Optimierung verändert hat: Eine Aussage \enquote{$f\ge0$ auf der Menge $\{g_i\ge0\}$} wird bewiesen, indem man $f = \sigma_0 + \sum\sigma_ig_i$ mit Quadratsummen $\sigma_i$ schreibt, und die $\sigma_i$ findet ein Rechner als Lösung eines konvexen Problems. Für den Leitfall heißt das: Die Frage, ob ein positiver Parametersatz zu den Daten passt, ist eine Frage nach einem solchen Zertifikat --- und beantwortbar, mit Band 19.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 3.1} & schwach: $V(I) = \emptyset\Rightarrow 1\in I$; Punkte = maximale Ideale\\
+\textbf{Satz 3.3} & stark: $I(V(I)) = \sqrt I$; Varietäten $\leftrightarrow$ Radikalideale\\
+\textbf{Satz 3.5} & irreduzibel $\leftrightarrow$ prim; eindeutige Zerlegung\\
+\textbf{Definition 3.6} & Koordinatenring $k[V]$; identifizierbar = konstant auf der Faser\\
+\textbf{Der Bruchfall} & über $\mathbb R$ gilt nichts davon; Positivstellensatz\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil I hat das Wörterbuch aufgestellt. Teil II lernt rechnen: Wie findet man die Gröbner-Basis aus Satz 2.3, wie entscheidet man Zugehörigkeit, wie eliminiert man Veränderliche --- und wie wird aus dem Leitfall ein Algorithmus, der für jedes Kompartimentmodell sagt, was identifizierbar ist?}
+\end{minipage}
+\end{center}
+\end{merksatz}

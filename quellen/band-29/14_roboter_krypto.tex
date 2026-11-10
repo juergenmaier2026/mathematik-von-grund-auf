@@ -1,0 +1,329 @@
+\chapter{Gelenke und Geheimnisse}
+
+\section{Ein Arm mit zwei Gelenken}
+
+\begin{merksatz}
+\boxtitel{Inverse Kinematik als Polynomsystem}
+Ein ebener Arm mit Gliedern der Längen $l_1 = 2$, $l_2 = 1$ und Gelenkwinkeln $\theta_1, \theta_2$ hat die Hand bei
+\[ x = l_1\cos\theta_1 + l_2\cos(\theta_1 + \theta_2), \qquad y = l_1\sin\theta_1 + l_2\sin(\theta_1 + \theta_2) . \]
+Mit $c_i = \cos\theta_i$, $s_i = \sin\theta_i$ als Veränderlichen und $c_i^{2} + s_i^{2} = 1$ ist das ein Polynomsystem; für das Ziel $(x, y) = (2, \tfrac32)$ liefert die lex-Gröbner-Basis ($c_2 > s_2 > c_1 > s_1$):
+\[ \bigl\{\,c_2 - \tfrac{5}{16},\quad s_2 + \tfrac{25}{8}s_1 - \tfrac{111}{64},\quad c_1 + \tfrac34s_1 - \tfrac{37}{32},\quad s_1^{2} - \tfrac{111}{100}s_1 + \tfrac{69}{320}\,\bigr\} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.2cm}P{1.4cm}P{1.4cm}P{3.6cm}@{}}
+\toprule
+\textbf{Lösung} & $\theta_1$ & $\theta_2$ & \textbf{Bemerkung}\\
+\midrule
+$s_1 = 0{,}859$ & $59{,}2^{\circ}$ & $-71{,}8^{\circ}$ & Ellbogen unten\\
+$s_1 = 0{,}251$ & $14{,}5^{\circ}$ & $+71{,}8^{\circ}$ & Ellbogen oben\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Lösungen --- die quadratische Gleichung in $s_1$ --- für jede erreichbare Hand: Ellbogen oben oder unten. Der Kosinus des zweiten Gelenks, $c_2 = \tfrac{5}{16}$, ist eindeutig: $\cos\theta_2 = \frac{x^{2} + y^{2} - l_1^{2} - l_2^{2}}{2l_1l_2}$, der Kosinussatz. Die Gröbner-Basis hat ihn gefunden, ohne ihn zu kennen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Faser der Vorwärtskinematik ist die Lösungsmenge der inversen Kinematik} --- dieselbe Struktur wie beim Leitfall: Abbildung Gelenke $\to$ Hand, und die Frage, wie viele Gelenkstellungen dieselbe Hand ergeben. Für zwei Gelenke in der Ebene sind es zwei; für den allgemeinen Sechs-Gelenk-Arm im Raum sind es sechzehn, und die Zahl $16$ war von 1968 bis 1986 eine Vermutung. Dieses Kapitel behandelt zwei Anwendungen, in denen Polynomsysteme der Gegenstand sind: die Kinematik, wo man ihre Lösungen braucht, und die Kryptographie, wo man darauf baut, dass sie niemand findet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Kinematik}
+
+\begin{merksatz}
+\boxtitel{Satz 14.1 --- Kinematik ist algebraische Geometrie}
+Die Lage eines starren Körpers im Raum ist ein Punkt der Gruppe $SE(3)$ (Rotation und Verschiebung), und $SE(3)$ ist eine affine Varietät: Rotationsmatrizen erfüllen $R^{\top}R = I$, $\det R = 1$ --- Polynomgleichungen in neun Einträgen, Dimension $3$. Die Vorwärtskinematik eines Arms mit $n$ Gelenken ist eine polynomiale Abbildung (in $c_i, s_i$) von der Varietät $\prod\{c_i^{2} + s_i^{2} = 1\}$ (ein $n$-dimensionaler Torus) nach $SE(3)$ (Dimension $6$). Die inverse Kinematik ist die Faser.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{1.2cm}P{3.8cm}@{}}
+\toprule
+\textbf{Arm} & \textbf{Grad} & \textbf{Bemerkung}\\
+\midrule
+$2$ Gelenke, Ebene & $2$ & Ellbogen oben/unten\\
+$3$ Gelenke, Ebene, mit Orientierung & $2$ & Hand mit Winkel: $3$ Gelenke, $3$ Freiheiten, Faser endlich\\
+$6$ Gelenke, Raum, allgemein (6R) & $16$ & Primrose 1986, Lee--Liang 1988; Raghavan--Roth 1993: eine Gleichung vom Grad $16$\\
+Stewart-Plattform (parallel) & $40$ & Vorwärtskinematik! Husty 1996: $40$ Stellungen, Dietmaier 1998: alle $40$ reell möglich\\
+$7$ Gelenke, Raum & $\infty$ & redundant: Faser eindimensional, der Arm kann bei fester Hand den Ellbogen bewegen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Warum $16$}
+Die Faser des 6R-Arms ist nulldimensional (sechs Gelenke, sechs Freiheitsgrade der Hand) und ihr Grad ist eine Bézout-artige Zahl --- aber viel kleiner als das Produkt der Gleichungsgrade, weil die Gleichungen Struktur haben (Kapitel 9, Aufgabe 9.3). Die Schranke $16$ folgt aus einer Elimination, die alle Gelenke bis auf eines entfernt und eine Gleichung vom Grad $16$ in $\tan(\theta_1/2)$ hinterlässt; dass sie scharf ist, zeigt ein Arm mit $16$ reellen Stellungen (Manseur--Doty 1989).
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Stewart-Plattform ist die Umkehrung}: Sechs Beine verstellbarer Länge tragen eine Platte (Flugsimulatoren, Teleskopspiegel, Operationsroboter). Dort ist die \kursiv{inverse} Kinematik trivial --- Beinlängen aus der Lage ---, die \kursiv{Vorwärts}kinematik dagegen ein Polynomsystem vom Grad $40$: Zu gegebenen Beinlängen gibt es bis zu $40$ Lagen der Platte. Die Zahl wurde 1996 bewiesen, und \Person{Dietmaier} fand 1998 eine Plattform, bei der alle $40$ reell sind --- ein Gegenbeispiel zur Intuition, dass die reelle Zahl weit unter der komplexen liegt. Die Steuerung eines Flugsimulators löst dieses System hundertmal pro Sekunde, numerisch, mit der Vorstellung des vorigen Zeitschritts als Startwert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Kryptographie auf Kurven}
+
+\begin{merksatz}
+\boxtitel{Satz 14.2 --- Diffie--Hellman auf einer elliptischen Kurve}
+Öffentlich: eine Kurve $E$ über $\mathbb F_p$, ein Punkt $G$ von Primzahlordnung $n$. Alice wählt geheim $a$, Bob geheim $b$; sie tauschen $A = aG$ und $B = bG$ aus. Beide berechnen $K = aB = bA = abG$. Ein Lauscher kennt $E, G, A, B$ und müsste $a$ aus $A = aG$ bestimmen --- das \Begriff{diskrete Logarithmusproblem} auf $E$.
+
+\schritt{Ein Beispiel zum Nachrechnen}
+$E\colon y^{2} = x^{3} + x + 4$ über $\mathbb F_{23}$; $\#E = 29$, prim; $G = (0, 2)$ ($2^{2} = 4$ \checkmark).
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{1.4cm}P{1.0cm}P{1.4cm}P{1.0cm}P{1.4cm}P{1.0cm}P{1.4cm}@{}}
+\toprule
+$k$ & $kG$ & $k$ & $kG$ & $k$ & $kG$ & $k$ & $kG$\\
+\midrule
+$1$ & $(0, 2)$ & $2$ & $(13, 12)$ & $3$ & $(11, 9)$ & $4$ & $(1, 12)$\\
+$5$ & $(7, 20)$ & $6$ & $(9, 11)$ & $7$ & $(15, 6)$ & $11$ & $(10, 5)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Alice $a = 7$: $A = (15, 6)$. Bob $b = 11$: $B = (10, 5)$. Gemeinsam: $7B = 11A = 77G = 19G = (22, 18)$. \checkmark\ (Nachgerechnet mit den Formeln aus Satz 10.2 modulo $23$.)
+
+\schritt{Schnelles Vervielfachen}
+$kG$ für $k$ mit $256$ Bit berechnet man nicht durch $k$ Additionen, sondern durch Verdoppeln und Addieren entlang der Binärdarstellung: $7 = 111_2$: $G\to2G\to3G = 2G + G\to6G\to7G$. Etwa $2\log_2k$ Kurvenoperationen, also einige hundert für reale Schlüssel --- Mikrosekunden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Vorwärts ist Vervielfachen leicht (logarithmisch viele Schritte); rückwärts kennt man für allgemeine Kurven nichts Besseres als etwa $\sqrt n$ Schritte --- für $n\approx2^{256}$ sind das $2^{128}$, mehr als das Universum Operationen erlaubt. Darauf beruht die Sicherheit.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Warum Kurven statt Zahlen?} Diffie--Hellman funktioniert in jeder Gruppe; die klassische ist $\mathbb F_p^{\times}$. Dort aber gibt es den \Begriff{Index-Calculus} --- man nutzt, dass Elemente von $\mathbb F_p^{\times}$ ganze Zahlen sind und faktorisiert werden können ---, und der ist subexponentiell: $p$ muss $3072$ Bit haben, um der Sicherheit einer Kurve mit $256$ Bit zu entsprechen. Auf einer elliptischen Kurve gibt es keine \enquote{Faktorisierung} von Punkten, kein Index-Calculus (soweit man weiß), und die besten Angriffe --- Pollards $\rho$-Methode, Band 20 --- sind generisch, $\sqrt n$. Zwölfmal kürzere Schlüssel, zehnmal schnellere Operationen: Das ist der Grund, warum seit 2010 fast jede verschlüsselte Verbindung mit einer elliptischen Kurve beginnt (TLS mit ECDHE, Signal, Bitcoin mit secp256k1, Signaturen mit Ed25519).}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 14.3 --- was eine Kurve sicher macht, und was nicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.8cm}@{}}
+\toprule
+\textbf{Ordnung prim} & $\#E(\mathbb F_p)$ prim oder $= h\cdot n$ mit kleinem $h$: sonst Pohlig--Hellman (Band 20) in den kleinen Faktoren\\
+\textbf{Nicht anomal} & $\#E\ne p$: sonst Smart--Satoh--Araki--Semaev, Polynomzeit (Kapitel 10, Bruchfall)\\
+\textbf{Nicht supersingulär} & $\#E\ne p + 1$ (und allgemein: kein kleiner Einbettungsgrad): sonst MOV-Angriff (Menezes--Okamoto--Vanstone 1993) über die Weil-Paarung in $\mathbb F_{p^{k}}^{\times}$, wo Index-Calculus geht\\
+\textbf{$p$ groß} & $\ge256$ Bit für $128$ Bit Sicherheit\\
+\textbf{Nachvollziehbar erzeugt} & Die Parameter sollen aus nichts Verstecktem kommen; die Diskussion um die NIST-Kurven (Dual\_EC 2013) ist der Grund für Curve25519\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Titelkurve als Gegenbeispiel}
+$y^{2} = x^{3} - 2x$ hat für $p\equiv3\pmod4$ genau $p + 1$ Punkte (Kapitel 10): supersingulär. Die Weil-Paarung bildet das Logarithmusproblem auf $E$ in $\mathbb F_{p^{2}}^{\times}$ ab, wo Index-Calculus greift. Eine schöne Kurve für die Zahlentheorie --- unbrauchbar für die Kryptographie, außer in der paarungsbasierten, die genau diese Abbildung \kursiv{will} (Boneh--Franklin 2001, identitätsbasierte Verschlüsselung).
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle Angriffe der Tabelle nutzen Struktur}, die eine zufällige Kurve nicht hat: eine kleine Gruppe, einen Isomorphismus nach $\mathbb F_p$, eine Paarung in einen kleinen Körper. Die Theorie dieses Bandes ist auf beiden Seiten: Hasse (Kapitel 10) sagt, dass $\#E$ nahe $p$ liegt und damit gezählt werden kann (Schoof 1985, polynomiell); Kapitel 10 und 12 sagen, warum die Gruppe \enquote{neu} ist und keine Faktorisierung hat; und die Paarung ist eine Konstruktion aus Divisoren, Auslassung 18. Was die Theorie nicht sagt, ist, dass das Logarithmusproblem wirklich schwer ist: Das ist eine Vermutung, gestützt auf vierzig Jahre vergeblicher Angriffe --- und außer Kraft, sobald ein Quantenrechner mit einigen tausend logischen Qubits existiert (Shor, Informatik-Reihe Band 15).}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Gröbner-Basen gegen Verschlüsselung}
+
+\begin{merksatz}
+\boxtitel{Satz 14.4 --- algebraische Angriffe}
+Jede Verschlüsselung über $\mathbb F_2$ ist ein Polynomsystem: Schlüsselbits als Unbekannte, Klartext und Geheimtext als Konstanten, die Schaltung als Gleichungen. Den Schlüssel finden heißt, das System lösen --- eine Gröbner-Basis über $\mathbb F_2$ mit den Körpergleichungen $x_i^{2} = x_i$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.8cm}@{}}
+\toprule
+\textbf{HFE} & Patarins \enquote{Hidden Field Equations} (1996): quadratische Gleichungen in $80$ Unbekannten; gebrochen von Faugère und Joux 2003 mit F5 in zwei Tagen --- die Gleichungen hatten versteckte Struktur (kleiner Grad der Regularität).\\
+\textbf{AES} & $128$ Schlüsselbits, Beschreibung als $8000$ quadratische Gleichungen in $1600$ Unbekannten (Courtois--Pieprzyk 2002, \enquote{XSL}); kein Angriff ist je schneller als Ausprobieren gewesen. Der Grad der Regularität ist zu hoch.\\
+\textbf{Zufällige quadratische Systeme} & über $\mathbb F_2$ in $n$ Unbekannten: Gröbner-Basis braucht etwa $2^{0{,}8n}$ Operationen --- schlechter als die $2^{n}$ des Ausprobierens nur um einen konstanten Faktor im Exponenten; MQ ist NP-schwer und Grundlage der Postquantenkryptographie (Rainbow --- gebrochen 2022, Beullens; UOV, MAYO --- Kandidaten 2024).\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dass Gröbner-Basen im schlimmsten Fall doppelt exponentiell sind (Kapitel 5, Bruchfall), ist für die Kryptographie die gute Nachricht: Ein Chiffre ist sicher gegen algebraische Angriffe, wenn seine Gleichungen keine Struktur haben, die den Grad der Regularität senkt. HFE hatte sie; AES, soweit man weiß, nicht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Theorie des Grades der Regularität} (Bardet, Faugère, Salvy 2004) sagt für semireguläre Systeme voraus, bis zu welchem Grad der Buchberger-Algorithmus Polynome erzeugen muss, und damit seine Laufzeit --- und sie ist das Werkzeug, mit dem Entwerfer von Chiffren heute prüfen, ob ihr System einem algebraischen Angriff standhält. Dass dieselbe Rechnung, die dem Pharmakologen sagt, ob sein Modell identifizierbar ist, dem Kryptographen sagt, ob sein Chiffre bricht, ist die Einheit des Fachs: Beide fragen nach der Lösungsmenge eines Polynomsystems; der eine will sie klein, der andere unerreichbar.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Mathematik ist richtig, die Implementierung nicht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.8cm}@{}}
+\toprule
+\textbf{Sony PlayStation 3, 2010} & ECDSA-Signaturen mit \kursiv{derselben} Zufallszahl $k$ für zwei Nachrichten: Aus zwei Signaturen folgt $k$, aus $k$ der geheime Schlüssel. Zwei Gleichungen, zwei Unbekannte, lineare Algebra.\\
+\textbf{Ungültige Kurvenpunkte} & Ein Angreifer schickt einen Punkt, der nicht auf $E$ liegt, sondern auf einer Kurve $y^{2} = x^{3} + ax + b'$ mit kleiner Gruppenordnung; prüft die Gegenseite nicht, verrät sie den Schlüssel modulo kleiner Zahlen (Biehl--Meyer--Müller 2000; in TLS-Bibliotheken 2015 gefunden).\\
+\textbf{Seitenkanäle} & Verdoppeln und Addieren brauchen verschieden lange; wer die Zeit oder den Stromverbrauch misst, liest die Bits von $k$ ab (Kocher 1996). Abhilfe: Montgomery-Leiter, konstante Zeit.\\
+\textbf{Schlechter Zufall} & Debian 2008: ein Patch machte den Zufallsgenerator auf $32768$ Werte arm; alle erzeugten Schlüssel waren aufzählbar.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kein Angriff dieser Tabelle löst das Logarithmusproblem. Jeder umgeht es: durch wiederverwendete Zufallszahlen, ungeprüfte Eingaben, messbare Laufzeiten, schwachen Zufall. Die Algebra hält; die Umgebung bricht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der ungültige Kurvenpunkt ist der algebraisch interessanteste Fall}: Die Additionsformeln (Satz 10.2) enthalten $b$ nicht --- nur $a$ steht in der Tangentensteigung. Rechnet ein Programm die Formeln aus, ohne zu prüfen, ob der Eingabepunkt auf der Kurve liegt, rechnet es korrekt auf \kursiv{irgendeiner} Kurve $y^{2} = x^{3} + ax + b'$, und der Angreifer wählt $b'$ so, dass diese Kurve eine Gruppe mit kleinen Faktoren hat. Dann liefert Pohlig--Hellman den Schlüssel modulo dieser Faktoren, und der chinesische Restsatz (Band 1) setzt ihn zusammen. Die Abwehr ist eine Zeile --- $y^{2}\stackrel?= x^{3} + ax + b$ --- und sie fehlte in mehreren Bibliotheken jahrelang. Die Formeln sind für alle $b$ gleich; das ist Mathematik. Dass man deshalb $b$ prüfen muss, ist Handwerk.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- Der Arm, von Hand}
+Lösen Sie die inverse Kinematik des Eingangsbeispiels ($l_1 = 2$, $l_2 = 1$, Ziel $(2, \tfrac32)$) ohne Gröbner-Basis und vergleichen Sie mit der Basis.
+
+\loesung
+\schritt{Schritt 1 --- Kosinussatz}
+$x^{2} + y^{2} = l_1^{2} + l_2^{2} + 2l_1l_2\cos\theta_2$: $4 + \tfrac94 = 5 + 4c_2$, $c_2 = \tfrac{5}{16}$. \checkmark\ (Erstes Basiselement.) $s_2 = \pm\sqrt{1 - \tfrac{25}{256}} = \pm\tfrac{\sqrt{231}}{16} = \pm0{,}950$.
+
+\schritt{Schritt 2 --- Erstes Gelenk}
+Mit $k_1 = l_1 + l_2c_2 = \tfrac{37}{16}$, $k_2 = l_2s_2$: $x = k_1c_1 - k_2s_1$, $y = k_1s_1 + k_2c_1$. Also $\theta_1 = \operatorname{atan2}(y, x) - \operatorname{atan2}(k_2, k_1) = 36{,}87^{\circ}\mp22{,}33^{\circ}$: $14{,}5^{\circ}$ oder $59{,}2^{\circ}$. \checkmark
+
+\schritt{Schritt 3 --- Vergleich mit der Basis}
+Das letzte Basiselement $s_1^{2} - \tfrac{111}{100}s_1 + \tfrac{69}{320}$ hat die Nullstellen $\tfrac{111}{200}\pm\sqrt{\tfrac{12321}{40000} - \tfrac{69}{320}} = 0{,}555\pm0{,}304$: $0{,}859$ und $0{,}251$, also $\theta_1 = 59{,}2^{\circ}$ bzw.\ $14{,}5^{\circ}$. \checkmark\ Das dritte Element gibt $c_1 = \tfrac{37}{32} - \tfrac34s_1$, das zweite $s_2$.
+
+\schritt{Schritt 4 --- Probe}
+$\theta_1 = 14{,}54^{\circ}$, $\theta_2 = 71{,}79^{\circ}$: $2\cos14{,}54^{\circ} + \cos86{,}33^{\circ} = 1{,}936 + 0{,}064 = 2{,}000$; $2\sin14{,}54^{\circ} + \sin86{,}33^{\circ} = 0{,}502 + 0{,}998 = 1{,}500$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Gröbner-Basis hat den Kosinussatz wiedergefunden} --- das erste Element ist genau er, und die Dreiecksform der Basis ist die Reihenfolge, in der ein Ingenieur rechnet: erst $\theta_2$, dann $\theta_1$. Für zwei Gelenke ist das kein Gewinn; für sechs, wo keine geschlossene Formel bekannt war, hat die Elimination die Gleichung vom Grad $16$ geliefert, die seither in jedem Robotersteuerungslehrbuch steht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- ECDSA und die wiederverwendete Zufallszahl}
+Bei ECDSA mit Schlüssel $d$, Basispunkt $G$ der Ordnung $n$ und Nachrichten-Hash $h$ wählt der Signierer zufällig $k$, berechnet $R = kG$, $r = x(R)\bmod n$ und $s = k^{-1}(h + rd)\bmod n$. Zeigen Sie, dass zwei Signaturen mit demselben $k$ den Schlüssel verraten.
+
+\loesung
+\schritt{Schritt 1 --- Zwei Signaturen}
+$(r, s_1)$ zu $h_1$ und $(r, s_2)$ zu $h_2$, gleiches $r$ (weil gleiches $k$): $s_1 = k^{-1}(h_1 + rd)$, $s_2 = k^{-1}(h_2 + rd)$.
+
+\schritt{Schritt 2 --- $k$}
+$s_1 - s_2 = k^{-1}(h_1 - h_2)$, also $k = (h_1 - h_2)(s_1 - s_2)^{-1}\bmod n$.
+
+\schritt{Schritt 3 --- $d$}
+$d = (s_1k - h_1)r^{-1}\bmod n$.
+
+\schritt{Schritt 4 --- Zahlenbeispiel auf der Kurve aus Satz 14.2}
+$n = 29$, $d = 7$, $k = 5$: $R = 5G = (7, 20)$, $r = 7$. $h_1 = 3$: $s_1 = 5^{-1}(3 + 7\cdot7) = 6\cdot52 = 6\cdot23 = 138\equiv22\pmod{29}$ ($5^{-1} = 6$, da $30\equiv1$). $h_2 = 10$: $s_2 = 6\cdot(10 + 49) = 6\cdot59 = 6\cdot1 = 6$. Angreifer: $k = (3 - 10)(22 - 6)^{-1} = (-7)\cdot16^{-1}$; $16^{-1}\bmod29 = 20$ ($320 = 11\cdot29 + 1$); $k = -140\equiv-140 + 145 = 5$. \checkmark\ $d = (22\cdot5 - 3)\cdot7^{-1} = 107\cdot7^{-1}$; $107\equiv20$, $7^{-1} = 25$ ($175 = 6\cdot29 + 1$); $d = 500\equiv500 - 493 = 7$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Genau so wurde 2010 der Signaturschlüssel der PlayStation 3 gefunden}, und 2013 Bitcoin-Wallets auf Android, deren Zufallsgenerator Werte wiederholte. Die Mathematik der Kurve war unberührt; die Gleichungen in Schritt 2 und 3 sind linear. Die Abhilfe ist deterministisches $k$ aus Schlüssel und Nachricht (RFC 6979) --- kein Zufall mehr, der schiefgehen kann --- oder Signaturen, die $k$ gar nicht brauchen (Ed25519 leitet es ab). Dass der Angriff überhaupt existiert, liegt daran, dass ECDSA $k$ in zwei Rollen benutzt: als Punkt $kG$ und als Zahl $k^{-1}$; eine Gleichung mit zwei Unbekannten und einer zweiten Gleichung ist gelöst.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Ein Chiffre als Gleichungssystem}
+Eine Spielzeugchiffre: Klartextbits $p_1, p_2$, Schlüsselbits $k_1, k_2$, Geheimtext $c_1 = p_1 + k_1 + k_1k_2$, $c_2 = p_2 + k_2 + p_1k_1$ über $\mathbb F_2$. Aus dem Paar $(p, c) = ((1, 0), (0, 1))$: finden Sie den Schlüssel mit einer Gröbner-Basis über $\mathbb F_2$.
+
+\loesung
+\schritt{Schritt 1 --- Das System}
+Einsetzen: $0 = 1 + k_1 + k_1k_2$, $1 = 0 + k_2 + k_1$. Also $f_1 = k_1k_2 + k_1 + 1$, $f_2 = k_1 + k_2 + 1$, und die Körpergleichungen $k_1^{2} + k_1$, $k_2^{2} + k_2$ (in $\mathbb F_2$ ist $-1 = 1$).
+
+\schritt{Schritt 2 --- Reduzieren}
+Aus $f_2$: $k_1 = k_2 + 1$. In $f_1$: $(k_2 + 1)k_2 + (k_2 + 1) + 1 = k_2^{2} + k_2 + k_2 = k_2^{2}$ (modulo $2$, $k_2 + k_2 = 0$); mit $k_2^{2} = k_2$: $k_2 = 0$. Dann $k_1 = 1$.
+
+\schritt{Schritt 3 --- Die Basis}
+$\{k_1 + 1,\ k_2\}$: ein Punkt, $(k_1, k_2) = (1, 0)$. Probe: $c_1 = 1 + 1 + 0 = 0$ \checkmark, $c_2 = 0 + 0 + 1\cdot1 = 1$ \checkmark.
+
+\schritt{Schritt 4 --- Und mit $80$ Bits}
+Dieselbe Rechnung mit $80$ Schlüsselbits und einer echten Chiffre erzeugt Tausende Gleichungen vom Grad $2$ bis $4$; die Gröbner-Basis ist am Ende wieder $\{k_i + \text{Bit}\}$ --- aber der Weg dorthin geht über Zwischenpolynome, deren Grad die Laufzeit bestimmt. Für eine gut entworfene Chiffre ist dieser Grad so hoch, dass die Rechnung länger dauert als das Ausprobieren aller $2^{80}$ Schlüssel. Das ist die ganze Theorie der algebraischen Kryptanalyse: Der Grad der Regularität gegen die Schlüssellänge.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Über $\mathbb F_2$ mit den Körpergleichungen ist jedes Ideal radikal und jede Varietät endlich}, und die Gröbner-Basis ist genau die Liste der Lösungen --- Hilberts Nullstellensatz in seiner einfachsten Form. Die Kryptographie über $\mathbb F_2$ ist Band 29 ohne Geometrie: keine Kurven, keine Dimension, nur Punkte und die Frage, wie teuer es ist, sie zu finden. Dass die Antwort \enquote{zu teuer} lauten kann, obwohl die Lösung eindeutig und die Theorie vollständig ist, ist der Bruchfall von Kapitel 2 --- Mayr und Meyer --- als Schutzschild.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Koblitz, Miller, und ein Arm in Stanford}
+\Person{Neal Koblitz} und \Person{Victor Miller} schlugen 1985 unabhängig vor, elliptische Kurven für die Kryptographie zu verwenden; Millers Arbeit wurde zunächst abgelehnt, und IBM meldete kein Patent an, weil niemand an eine Anwendung glaubte. Es dauerte zwanzig Jahre, bis die Kurven die Zahlen ablösten --- die NSA empfahl 2005 die \enquote{Suite B} mit ECC, und ab 2010 setzten Browser sie ein.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Die Kinematik als algebraische Geometrie} begann mit \Person{Pieper} 1968 in Stanford, der zeigte, dass ein 6R-Arm mit drei sich schneidenden Achsen geschlossen lösbar ist, und die allgemeine Frage stellte; \Person{Roth}, \Person{Rastegar} und \Person{Scheinman} vermuteten 1973 die $32$, \Person{Duffy} und \Person{Crane} 1980 die $32$ als Grad einer Gleichung, \Person{Primrose} bewies 1986 die $16$, \Person{Lee} und \Person{Liang} fanden 1988 die Gleichung vom Grad $16$, \Person{Raghavan} und \Person{Roth} 1993 die heute benutzte Herleitung über Elimination. \Person{Husty} löste 1996 die Stewart-Plattform ($40$) mit Gröbner-Basen --- einer der ersten Fälle, in denen Buchbergers Verfahren ein Problem der Ingenieure entschied, das anders nicht zugänglich war.}
+\end{minipage}
+\end{center}
+
+\schritt{Faugère und HFE}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Jean-Charles Faugère} und \Person{Antoine Joux} brachen 2003 das HFE-Challenge-1 (Patarin hatte \$500 ausgesetzt) mit F5 in $96$ Stunden auf einer Workstation --- und erklärten zugleich, warum: Die Gleichungen von HFE verhalten sich wie ein System über dem kleinen Körper $\mathbb F_{2^{80}}$ von niedrigem Grad, und der Grad der Regularität ist $4$ statt der $\approx 10$ eines zufälligen Systems. \textbf{Seither ist der Grad der Regularität die Kennzahl, die über algebraische Sicherheit entscheidet}, und Chiffren werden so entworfen, dass er hoch ist.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Gelenke und Geheimnisse heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Post\-quanten\-krypto\-graphie} & Shors Algorithmus löst das Logarithmusproblem auf Kurven in Polynomzeit; NIST hat 2024 gitterbasierte Verfahren standardisiert (Kyber, Dilithium). Isogenien zwischen elliptischen Kurven (SIKE) galten als Alternative --- gebrochen 2022 (Castryck--Decru) mit Algebraischer Geometrie: Kummer-Flächen und Richelot-Isogenien.\\
+\textbf{Kinematik mit Lernen} & Inverse Kinematik für Arme mit vielen Gelenken durch neuronale Netze, die alle Lösungen einer Faser lernen; die algebraische Struktur (Grad, Komponenten) bestimmt, ob das Netz sie trennen kann.\\
+\textbf{Zero-Knowledge-Beweise} & Berechnungen als Polynomsysteme über großen Körpern (R1CS, Plonk): Der Beweiser zeigt, dass er eine Lösung kennt, ohne sie zu verraten --- Idealzugehörigkeit als Beweisprotokoll, Grundlage von Blockchain-Skalierung seit 2020.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Bruch von SIKE im Sommer 2022 war der spektakulärste Erfolg der algebraischen Geometrie in der Kryptanalyse}: Ein Verfahren, das im NIST-Wettbewerb die vierte Runde erreicht hatte, wurde von \Person{Castryck} und \Person{Decru} auf einem Laptop in einer Stunde gebrochen --- mit einem Satz von \Person{Kani} aus dem Jahr 1997 über Isogenien abelscher Flächen, den außerhalb der reinen Mathematik niemand kannte. Die Lehre ist die von Satz 14.3: Sicherheit beruht darauf, dass kein Angreifer Struktur findet, und die Struktur elliptischer Kurven ist seit zweihundert Jahren Gegenstand der tiefsten Mathematik. Was für die Zahlentheorie ein Schatz ist, ist für die Kryptographie ein Risiko --- und ein Satz, der in einem Lehrbuch von 1997 steht, kann 2022 ein Verfahren zerstören.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 14.1} & Kinematik: Faser der Vorwärtsabbildung; $2$, $16$, $40$\\
+\textbf{Satz 14.2} & ECDH: $abG$; Verdoppeln und Addieren\\
+\textbf{Satz 14.3} & sichere Kurven: Ordnung prim, nicht anomal, nicht supersingulär\\
+\textbf{Satz 14.4} & algebraische Angriffe: Grad der Regularität\\
+\textbf{Der Bruchfall} & die Algebra hält, die Implementierung bricht\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil V ist zu Ende. Kapitel 15 gibt den Stand des Fachs im Jahr 2026 --- und sagt, was der Band ausgelassen hat, um auf hundertfünfzig Seiten vom Nullstellensatz bis zur Kurve mit Gruppengesetz zu kommen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

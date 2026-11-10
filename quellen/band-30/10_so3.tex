@@ -1,0 +1,296 @@
+\part{Kontinuierliche Gruppen}
+
+\chapter{Die Drehgruppe}
+
+\section{Eins, drei, fünf, sieben}
+
+\begin{merksatz}
+\boxtitel{Die dritte Überraschung --- Orbitale}
+Die Zustände eines Elektrons in einem Atom tragen Buchstaben $s, p, d, f$ und kommen in Gruppen gleicher Energie: $s$ einmal, $p$ dreimal, $d$ fünfmal, $f$ siebenmal. Die Periodentafel ist nach diesen Zahlen gebaut ($2, 6, 10, 14$ Elemente je Block --- das Doppelte, wegen des Spins, Kapitel 11). Woher kommen $1, 3, 5, 7$?
+
+\schritt{Die Antwort in einem Satz}
+Der Hamilton-Operator eines Elektrons im Zentralfeld, $H = -\frac{\hbar^{2}}{2m}\Delta + V(r)$, vertauscht mit allen Drehungen. Jeder Energieeigenraum ist also eine Darstellung von $SO(3)$ (Kapitel 3, Folgerung aus Schur: Entartung ist Darstellung). Die irreduziblen Darstellungen von $SO(3)$ haben die Dimensionen $2\ell + 1 = 1, 3, 5, 7, \dots$ --- \emph{und keine anderen}. Das ist der Inhalt dieses Kapitels.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.75, every node/.style={font=\small}]
+\foreach \l/\x/\lab in {0/0/{$s$ ($\ell = 0$)}, 1/3.2/{$p$ ($\ell = 1$)}, 2/6.4/{$d$ ($\ell = 2$)}, 3/9.6/{$f$ ($\ell = 3$)}}{
+  \pgfmathsetmacro{\n}{2*\l+1}
+  \foreach \k in {1,...,\n}{
+    \pgfmathsetmacro{\y}{0.32*(\k-1)}
+    \draw[tief, very thick] (\x,\y) -- (\x+1.6,\y);
+  }
+  \node at (\x+0.8,-0.6) {\lab};
+  \node[grau] at (\x+0.8,0.32*\n+0.1) {\pgfmathprintnumber{\n}};
+}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Entartung der Orbitale ist Schurs Lemma für die Drehgruppe: Energieeigenräume sind irreduzible Darstellungen, und $SO(3)$ hat genau eine irreduzible Darstellung in jeder ungeraden Dimension.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Teil IV verlässt die endlichen Gruppen.} $SO(3)$ hat überabzählbar viele Elemente, aber sie ist \emph{kompakt}, und für kompakte Gruppen bleibt die ganze Theorie der Teile I--III bestehen, mit einem Integral anstelle der Summe $\frac1{|G|}\sum_g$. Dieses Kapitel führt das Integral ein (das Haar-Maß), berechnet die Charaktere der Drehgruppe --- $\chi_\ell(\theta) = \sin\bigl((2\ell + 1)\theta/2\bigr)/\sin(\theta/2)$ --- und zeigt, dass die Kugelflächenfunktionen $Y_{\ell m}$ die irreduziblen Darstellungen sind. Die Auswahlregeln der Atomspektren ($\Delta\ell = \pm1$) folgen wie in Kapitel 6, und Bethes Kristallfeld aus Kapitel 7 ist jetzt vollständig begründet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Mitteln über eine kompakte Gruppe}
+
+\begin{definition}
+\boxtitelm{Definition 10.1 --- Haar-Maß}
+Eine \Begriff{kompakte Gruppe} ist eine Gruppe mit einer Topologie, in der Multiplikation und Inversion stetig sind und die kompakt ist --- für Matrixgruppen: abgeschlossen und beschränkt im Raum der Matrizen. $SO(3)$, $SU(2)$, $U(1) = \{e^{i\varphi}\}$, alle endlichen Gruppen sind kompakt; $\mathbb R$, $GL_n(\mathbb R)$, die Lorentz-Gruppe sind es nicht.
+
+Auf jeder kompakten Gruppe gibt es genau ein Wahrscheinlichkeitsmaß $dg$, das \Begriff{Haar-Maß}, das unter Links- und Rechtsverschiebung invariant ist: $\int_Gf(hg)\,dg = \int_Gf(gh)\,dg = \int_Gf(g)\,dg$. Für endliche Gruppen ist es $\frac1{|G|}\sum_g$; für $U(1)$ ist es $\frac1{2\pi}\int_0^{2\pi}d\varphi$. (Existenz und Eindeutigkeit: Haar 1933, von Neumann 1934; Auslassung.)
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 10.2 --- alles bleibt}
+Für stetige endlichdimensionale Darstellungen einer kompakten Gruppe $G$ gelten mit $\frac1{|G|}\sum_g\to\int_G dg$: Unitarisierbarkeit (Satz 2.2), Maschke (3.2), Schur (3.3), die Orthogonalität der irreduziblen Charaktere (4.3) bezüglich $\langle\varphi, \psi\rangle = \int_G\varphi\overline\psi\,dg$, die Zerlegung nach Vielfachheiten $m_i = \langle\chi, \chi_i\rangle$ (4.4), die Projektionsformel (6.2), Frobenius-Reziprozität (7.5) und die Formeln für $\otimes$, $\mathrm{Sym}^{2}$, $\mathrm{Alt}^{2}$ und den Indikator $\nu = \int_G\chi(g^{2})\,dg$ (9.2--9.4).
+
+\schritt{Beweis}
+Jeder dieser Beweise benutzt von der Gruppe nur: Die Mittelung $f\mapsto\frac1{|G|}\sum_gf(g)$ ist linear, positiv, normiert und verschiebungsinvariant. Das Haar-Integral hat dieselben vier Eigenschaften. $\blacksquare$
+
+\schritt{Was nicht bleibt}
+Satz 4.5 (endlich viele Irreduzible, $\sum d_i^{2} = |G|$, Zahl $=$ Zahl der Klassen) --- $SO(3)$ hat unendlich viele irreduzible Darstellungen und unendlich viele Klassen, und $|G|$ ist kein Zahl. Was bleibt, ist die Vollständigkeit: Die Matrixelemente aller irreduziblen Darstellungen spannen einen dichten Teilraum von $L^{2}(G)$ auf (\Person{Peter}--\Person{Weyl} 1927, Kapitel 12).
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Kompakt heißt: Man kann mitteln. Wer mitteln kann, hat Maschke, Schur und die Orthogonalität der Charaktere. Die Summe über die Gruppe wird zum Integral, sonst ändert sich nichts.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Klassen und Charaktere von $SO(3)$}
+
+\begin{merksatz}
+\boxtitel{Satz 10.3 --- Konjugationsklassen und Weyls Integralformel}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item Zwei Drehungen sind genau dann konjugiert, wenn sie denselben Drehwinkel $\theta\in[0, \pi]$ haben. Klassenfunktionen auf $SO(3)$ sind Funktionen von $\theta$.
+\item Für eine Klassenfunktion $f$ gilt
+\[ \int_{SO(3)}f(g)\,dg = \frac1\pi\int_0^{\pi}f(\theta)\,(1 - \cos\theta)\,d\theta . \]
+\end{enumerate}
+
+\schritt{Beweis von (a)}
+$hR_{\vec n}(\theta)h^{-1} = R_{h\vec n}(\theta)$: Konjugation dreht die Achse, erhält den Winkel; $SO(3)$ wirkt transitiv auf Achsen. Und $R_{\vec n}(-\theta) = R_{-\vec n}(\theta)$, deshalb $\theta\in[0, \pi]$.
+
+\schritt{Beweis von (b), Skizze}
+Das Haar-Maß auf $SO(3)$ ist das normierte Volumen auf der Gruppe als dreidimensionaler Mannigfaltigkeit. In Achse-Winkel-Koordinaten (Achse $\vec n\in S^{2}$, Winkel $\theta$) ist die Dichte proportional zu $(1 - \cos\theta)\,d\theta\,d\vec n$ --- bei $\theta = 0$ ist die Achse unbestimmt, die Drehungen mit kleinem $\theta$ füllen wenig Volumen; die Menge der Drehungen um Winkel in $[\theta, \theta + d\theta]$ hat Volumen $\propto\sin^{2}(\theta/2)\,d\theta$. Die Normierung: $\frac1\pi\int_0^{\pi}(1 - \cos\theta)\,d\theta = 1$. (Das ist Weyls Integralformel für $SO(3)$; Auslassung für den allgemeinen Fall.) $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Charaktertafel von $SO(3)$ hat eine kontinuierliche Spalte $\theta\in[0, \pi]$, und die Spaltengewichte sind $(1 - \cos\theta)/\pi$: Drehungen um $180^{\circ}$ wiegen am meisten, kleine Drehungen fast nichts.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 10.4 --- die irreduziblen Darstellungen von $SO(3)$}
+Für jedes $\ell = 0, 1, 2, \dots$ gibt es genau eine irreduzible Darstellung $V_\ell$ der Dimension $2\ell + 1$, mit Charakter
+\[ \chi_\ell(\theta) = \sum_{m = -\ell}^{\ell}e^{im\theta} = 1 + 2\cos\theta + 2\cos2\theta + \dots + 2\cos\ell\theta = \frac{\sin\bigl((2\ell + 1)\theta/2\bigr)}{\sin(\theta/2)} , \]
+und das sind alle. $V_\ell$ ist realisiert auf dem Raum $\mathcal H_\ell$ der \Begriff{harmonischen} homogenen Polynome vom Grad $\ell$ in $x, y, z$ ($\Delta P = 0$), eingeschränkt auf die Sphäre: den \Begriff{Kugelflächenfunktionen} $Y_{\ell m}$.
+
+\schritt{Schritt 1 --- Polynome}
+$SO(3)$ wirkt auf homogenen Polynomen vom Grad $\ell$ durch $(gP)(\vec x) = P(g^{-1}\vec x)$; der Raum $\mathcal P_\ell$ hat Dimension $\binom{\ell + 2}2$. Der Laplace-Operator vertauscht mit Drehungen, also ist sein Kern $\mathcal H_\ell$ eine Unterdarstellung, und $\mathcal P_\ell = \mathcal H_\ell\oplus r^{2}\mathcal P_{\ell - 2}$ (Auslassung: $\Delta\colon\mathcal P_\ell\to\mathcal P_{\ell - 2}$ ist surjektiv, und $r^{2}\mathcal P_{\ell-2}$ ist ein Komplement des Kerns). Dimension: $\dim\mathcal H_\ell = \binom{\ell + 2}2 - \binom\ell2 = 2\ell + 1$.
+
+\schritt{Schritt 2 --- Charakter}
+Eine Drehung um die $z$-Achse um $\theta$ hat auf den Linearformen $x + iy$, $x - iy$, $z$ die Eigenwerte $e^{-i\theta}, e^{i\theta}, 1$. Auf $\mathcal P_\ell$: Monome $(x + iy)^{a}(x - iy)^{b}z^{c}$, $a + b + c = \ell$, Eigenwert $e^{i(b - a)\theta}$. Das Gewicht $m = b - a$ kommt in $\mathcal P_\ell$ so oft vor, wie es $(a, b, c)$ mit $b - a = m$ gibt: $\lfloor(\ell - |m|)/2\rfloor + 1$. In $\mathcal P_{\ell - 2}$: $\lfloor(\ell - 2 - |m|)/2\rfloor + 1$. Differenz: genau $1$ für jedes $|m|\le\ell$. Also $\chi_{\mathcal H_\ell}(\theta) = \sum_{m = -\ell}^{\ell}e^{im\theta}$, und die geometrische Summe gibt den Quotienten der Sinus.
+
+\schritt{Schritt 3 --- irreduzibel}
+$\langle\chi_\ell, \chi_\ell\rangle = \frac1\pi\int_0^{\pi}\frac{\sin^{2}((2\ell + 1)\theta/2)}{\sin^{2}(\theta/2)}(1 - \cos\theta)\,d\theta = \frac2\pi\int_0^{\pi}\sin^{2}\bigl((2\ell + 1)\tfrac\theta2\bigr)\,d\theta = \frac2\pi\cdot\frac\pi2 = 1$, da $1 - \cos\theta = 2\sin^{2}(\theta/2)$. Satz 4.4b: irreduzibel. Ebenso $\langle\chi_\ell, \chi_{\ell'}\rangle = \frac2\pi\int_0^\pi\sin((2\ell + 1)\frac\theta2)\sin((2\ell' + 1)\frac\theta2)\,d\theta = 0$ für $\ell\neq\ell'$.
+
+\schritt{Schritt 4 --- alle}
+Sei $V$ irreduzibel, $\chi$ sein Charakter. Die Drehungen um $z$ bilden $U(1)$; eingeschränkt zerfällt $V$ in Gewichte $e^{im\theta}$, $m\in\mathbb Z$ (Satz 5.1 für $U(1)$: die Charaktere sind $e^{im\theta}$). Sei $\ell$ das größte vorkommende $m$. Dann ist $\langle\chi, \chi_\ell\rangle\neq0$ oder man findet ein $\ell' < \ell$ mit $\langle\chi, \chi_{\ell'}\rangle\neq0$ --- die $\chi_\ell$ spannen alle endlichen Gewichtskombinationen auf, die unter $m\to-m$ symmetrisch sind, und $\chi$ ist eine solche ($R_z(\theta)$ ist zu $R_z(-\theta)$ konjugiert). Also ist $V\cong V_{\ell'}$ für ein $\ell'$. $\blacksquare$ --- (Kapitel 11 gibt den Beweis noch einmal mit Leiteroperatoren, so wie er in der Quantenmechanik steht.)
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Genau eine irreduzible Darstellung in jeder ungeraden Dimension, keine in gerader. Die Basis ist $Y_{\ell m}$, $m = -\ell, \dots, \ell$, der Charakter ist eine endliche Fourier-Reihe im Drehwinkel. Das ist die ganze Charaktertafel von $SO(3)$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Anwendungen}
+
+\begin{merksatz}
+\boxtitel{Satz 10.5 --- Clebsch--Gordan für $SO(3)$, Auswahlregeln, Kristallfeld}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item $V_\ell\otimes V_{\ell'} = V_{|\ell - \ell'|}\oplus V_{|\ell - \ell'| + 1}\oplus\dots\oplus V_{\ell + \ell'}$, jedes genau einmal.
+\item Elektrische Dipolübergänge ($\vec x$ trägt $V_1$) zwischen Zuständen mit $\ell$ und $\ell'$ sind nur für $\ell' = \ell\pm1$ möglich: $\Delta\ell = \pm1$. ($\Delta\ell = 0$ wäre nach (a) erlaubt, ist aber durch die Parität $(-1)^{\ell}$ verboten.)
+\item Eingeschränkt auf eine Punktgruppe zerfällt $V_\ell$ nach der Tafel; für die Würfelgruppe $O$: $V_0 = A_1$, $V_1 = T_1$, $V_2 = E + T_2$, $V_3 = A_2 + T_1 + T_2$, $V_4 = A_1 + E + T_1 + T_2$.
+\end{enumerate}
+
+\schritt{Beweis von (a)}
+$\chi_\ell\chi_{\ell'} = \sum_{m, m'}e^{i(m + m')\theta}$. Die Gewichte $m + m'$: für $\ell\ge\ell'$ kommt $M$ so oft vor, wie es Paare mit Summe $M$ gibt, und das ist genau die Zahl der $L\in\{\ell - \ell', \dots, \ell + \ell'\}$ mit $|M|\le L$. Also $\chi_\ell\chi_{\ell'} = \sum_{L = \ell - \ell'}^{\ell + \ell'}\chi_L$. $\blacksquare$
+
+\schritt{Beweis von (b)}
+Das Matrixelement $\langle\psi_{\ell'}|\vec x|\psi_\ell\rangle$ ist eine invariante Abbildung $V_1\otimes V_\ell\to V_{\ell'}$; nach Schur null, wenn $V_{\ell'}$ in $V_1\otimes V_\ell = V_{\ell - 1} + V_\ell + V_{\ell + 1}$ nicht vorkommt. Parität: Inversion $\vec x\to-\vec x$ wirkt auf $Y_{\ell m}$ als $(-1)^{\ell}$, auf $\vec x$ als $-1$; das Matrixelement hat Parität $(-1)^{\ell' + 1 + \ell}$ und muss gerade sein, also $\ell' - \ell$ ungerade. $\blacksquare$ (Für (c): Aufgabe 7.3 und 10.3.)
+
+\schritt{Spektren}
+Die Lyman-Serie des Wasserstoffs: $np\to1s$. Balmer: $ns, nd\to2p$ und $np\to2s$. Nie $2s\to1s$ (beide $\ell = 0$): Der $2s$-Zustand ist \emph{metastabil}, zerfällt nur durch Zwei-Photonen-Emission mit Lebensdauer $0{,}12$ s statt $10^{-9}$ s --- und genau diese Emission liefert das Kontinuum, das in planetarischen Nebeln beobachtet wird.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Drehimpulse koppeln nach der Dreiecksregel; Dipolübergänge ändern $\ell$ um eins; ein Kristallfeld spaltet $2\ell + 1$ nach der Verzweigungsregel. Alle drei sind Kapitel 6, 7, 9 mit $\int$ statt $\sum$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Das Wasserstoffatom ist zu entartet}
+Im Wasserstoffatom hängt die Energie nur von $n$ ab: $2s$ und $2p$ haben dieselbe Energie, $3s$, $3p$, $3d$ ebenfalls. Der Eigenraum zu $n$ hat Dimension $n^{2} = 1 + 3 + 5 + \dots + (2n - 1)$ --- also $V_0\oplus V_1\oplus\dots\oplus V_{n-1}$, \emph{reduzibel} unter $SO(3)$. Schur sagt: Jeder Eigenraum ist eine Darstellung; er sagt nicht, dass sie irreduzibel ist. Die Umkehrung --- \enquote{Entartung kommt von Symmetrie} --- gilt nur, wenn man die ganze Symmetrie kennt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Die versteckte Symmetrie} & Das $1/r$-Potential hat eine zusätzliche Erhaltungsgröße, den Runge--Lenz-Vektor; zusammen mit dem Drehimpuls erzeugt er $SO(4)$, und die Eigenräume zu $n$ sind irreduzible Darstellungen von $SO(4)$ der Dimension $n^{2}$ (\Person{Pauli} 1926, \Person{Fock} 1935). Die \enquote{zufällige} Entartung ist keine.\\
+\textbf{Alkaliatome} & Natrium hat $3s\neq3p\neq3d$: Das Potential der inneren Elektronen ist nicht $1/r$, die $SO(4)$ ist weg, nur $SO(3)$ bleibt --- und mit ihr genau die Entartungen $1, 3, 5$. Die Gelbe Linie ist $3p\to3s$.\\
+\textbf{Nichtkompakt} & Für die Lorentz-Gruppe $SO(3, 1)$ oder $SL_2(\mathbb R)$ gibt es kein Haar-Wahrscheinlichkeitsmaß; endlichdimensionale Darstellungen sind nicht unitarisierbar, unitäre sind unendlichdimensional (\Person{Wigner} 1939, \Person{Bargmann} 1947). Satz 10.2 braucht Kompaktheit an jeder Stelle.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mehr Entartung als die bekannte Symmetrie erklärt heißt: Es gibt mehr Symmetrie. Das Wasserstoffatom hat $SO(4)$, der harmonische Oszillator $SU(3)$, und wo keine gefunden wird, spricht man von zufälliger Entartung --- bis jemand sie findet.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Quadratische Polynome}
+Zerlegen Sie die Darstellung von $SO(3)$ auf den homogenen Polynomen vom Grad $2$ (Dimension $6$) mit Charakteren.
+
+\loesung
+\schritt{Schritt 1 --- Gewichte}
+Monome in $u = x + iy$, $\bar u = x - iy$, $z$ vom Grad $2$: $u^{2}$ ($m = -2$), $u\bar u$ ($0$), $\bar u^{2}$ ($2$), $uz$ ($-1$), $\bar uz$ ($1$), $z^{2}$ ($0$). Charakter: $\chi(\theta) = e^{-2i\theta} + e^{-i\theta} + 2 + e^{i\theta} + e^{2i\theta} = 2 + 2\cos\theta + 2\cos2\theta$.
+
+\schritt{Schritt 2 --- Zerlegung}
+$\chi_2 = 1 + 2\cos\theta + 2\cos2\theta$, $\chi_0 = 1$: $\chi = \chi_0 + \chi_2$. Also $\mathcal P_2 = V_0\oplus V_2$: die Invariante $r^{2} = x^{2} + y^{2} + z^{2}$ und die fünf harmonischen Quadriken ($xy, xz, yz, x^{2} - y^{2}, 2z^{2} - x^{2} - y^{2}$) --- die $d$-Orbitale.
+
+\schritt{Schritt 3 --- Probe mit dem Integral}
+$\langle\chi, \chi_0\rangle = \frac1\pi\int_0^{\pi}(2 + 2\cos\theta + 2\cos2\theta)(1 - \cos\theta)\,d\theta = \frac1\pi\bigl(2\pi - \pi + 0\bigr) = 1$ ($\int\cos\theta\cdot\cos\theta = \pi/2$, mal $-2$ gibt $-\pi$; alle anderen Produkte integrieren zu null). \checkmark\ $\langle\chi, \chi\rangle$: $\frac1\pi\int(2 + 2\cos\theta + 2\cos2\theta)^{2}(1 - \cos\theta)\,d\theta$; Ausmultiplizieren und $\int_0^\pi\cos^{2}k\theta = \pi/2$, $\int\cos\theta\cos2\theta = 0$, $\int\cos^{3}\theta = 0$, $\int\cos^{2}\theta\cos2\theta = \pi/4$: Ergebnis $\frac1\pi(4\pi + 2\pi + 2\pi - 4\pi - 2\pi) = 2$ --- zwei Komponenten. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dasselbe Ergebnis hatte Kapitel 9 für $T_d$}: $\mathrm{Sym}^{2}T_2 = A_1 + E + T_2$, und eingeschränkt ist $V_0 = A_1$, $V_2 = E + T_2$. Die quadratischen Formen zerfallen immer in Spur und spurfreien Teil --- das ist $\mathcal P_2 = V_0\oplus V_2$ in jeder Untergruppe gelesen. Der Trägheitstensor, der Spannungstensor, der Polarisierbarkeitstensor: alle haben einen skalaren und einen fünfdimensionalen Anteil, und der fünfdimensionale ist es, der im Ramanspektrum die Depolarisation bestimmt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Zeeman}
+Ein Magnetfeld in $z$-Richtung bricht $SO(3)$ zu $SO(2)$ (Drehungen um $z$). Wie spaltet $V_\ell$ auf, und wie viele Linien zeigt der Übergang $d\to p$ im Feld?
+
+\loesung
+\schritt{Schritt 1 --- Verzweigung $SO(3)\downarrow SO(2)$}
+$SO(2) = U(1)$ hat die Charaktere $e^{im\theta}$, $m\in\mathbb Z$ (Satz 5.1). $\chi_\ell(\theta) = \sum_{m = -\ell}^{\ell}e^{im\theta}$: $V_\ell$ zerfällt in $2\ell + 1$ eindimensionale Darstellungen, eine je $m$. Die Energie wird $E_\ell + \mu_BBm$: $2\ell + 1$ äquidistante Niveaus.
+
+\schritt{Schritt 2 --- Auswahlregel für $m$}
+$\vec x$ hat die Komponenten $z$ ($m = 0$) und $x\pm iy$ ($m = \pm1$); das Matrixelement $\langle\ell', m'|x_j|\ell, m\rangle$ ist eine $U(1)$-invariante Abbildung, nur ungleich null für $m' = m + \{0, \pm1\}$: $\Delta m\in\{0, \pm1\}$.
+
+\schritt{Schritt 3 --- Linien}
+$d\to p$: $5\times3 = 15$ Paare, davon $\Delta m\in\{0, \pm1\}$: für $m' = -1, 0, 1$ je drei $m$, also $9$ Übergänge. Ihre Energien: $E_d - E_p + \mu_BB(m - m')$ --- hängen nur von $\Delta m$ ab, da die Aufspaltung in beiden Niveaus gleich ist. Also \textbf{drei} Linien (\Begriff{Lorentz-Triplett}): $\Delta m = -1, 0, +1$. Das ist der normale Zeeman-Effekt (\Person{Zeeman} 1896, \Person{Lorentz}' Erklärung 1897).
+
+\schritt{Schritt 4 --- Probe und Vorbehalt}
+Ohne Feld $9\to1$ Linie. \checkmark\ Mit Spin (Kapitel 11) ist die Aufspaltung in beiden Niveaus verschieden ($g$-Faktoren), und aus drei Linien werden mehr: der \emph{anomale} Zeeman-Effekt, der 1896--1925 niemand erklären konnte, bis der Spin gefunden war.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Zeeman-Effekt ist Einschränkung auf eine Untergruppe}, wie das Kristallfeld --- nur dass die Untergruppe hier abelsch ist und alles in eindimensionale Stücke zerfällt. Das Dreieck \enquote{Symmetrie gebrochen --- Entartung aufgehoben --- Zahl der Linien aus der Verzweigungsregel} ist dasselbe wie bei $\mathrm{CH_4}\to\mathrm{CH_3D}$ (Kapitel 7). Zeeman erhielt 1902 den Nobelpreis dafür, mit Lorentz; die Gruppentheorie dazu schrieb Wigner 1927.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- $V_4$ im Würfel}
+Zerlegen Sie $V_4$ ($g$-Orbitale, Dimension $9$) unter der Würfelgruppe $O$.
+
+\loesung
+\schritt{Schritt 1 --- Charakterwerte}
+$\chi_4(\theta) = 1 + 2\cos\theta + 2\cos2\theta + 2\cos3\theta + 2\cos4\theta$. $E$: $9$. $C_3$ ($120^{\circ}$): $1 - 1 - 1 + 2 - 1 = 0$. $C_2$ ($180^{\circ}$): $1 - 2 + 2 - 2 + 2 = 1$. $C_4$ ($90^{\circ}$): $1 + 0 - 2 + 0 + 2 = 1$. $C_2'$: $1$. Also $(9, 0, 1, 1, 1)$.
+
+\schritt{Schritt 2 --- Zerlegung}
+$m_{A_1} = \frac1{24}(9 + 0 + 3 + 6 + 6) = 1$; $m_{A_2} = \frac1{24}(9 + 3 - 6 - 6) = 0$; $m_E = \frac1{24}(18 + 0 + 6 + 0 + 0) = 1$; $m_{T_1} = \frac1{24}(27 + 0 - 3 + 6 - 6) = 1$; $m_{T_2} = \frac1{24}(27 - 3 - 6 + 6) = 1$. $V_4 = A_1 + E + T_1 + T_2$; $1 + 2 + 3 + 3 = 9$. \checkmark
+
+\schritt{Schritt 3 --- Die Tabelle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{0.8cm}P{0.8cm}P{4.4cm}P{2.2cm}@{}}
+\toprule
+$\ell$ & $\dim$ & $O$ & Orbitale\\
+\midrule
+$0$ & $1$ & $A_1$ & $s$\\
+$1$ & $3$ & $T_1$ & $p$\\
+$2$ & $5$ & $E + T_2$ & $d$\\
+$3$ & $7$ & $A_2 + T_1 + T_2$ & $f$\\
+$4$ & $9$ & $A_1 + E + T_1 + T_2$ & $g$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Erst bei $\ell = 4$ erscheint $A_1$ wieder: Die erste nichttriviale Würfel-invariante Funktion ist $x^{4} + y^{4} + z^{4} - \frac35r^{4}$, Grad $4$. Deshalb ist das Kristallfeld eines Oktaeders in erster Näherung ein $\ell = 4$-Potential, und es spaltet $d$-Orbitale ($V_2\otimes V_2\ni V_4$), aber keine $p$-Orbitale ($V_1\otimes V_1 = V_0 + V_1 + V_2\not\ni V_4$).
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Warum $p$-Orbitale im Oktaederfeld nicht spalten}, $d$-Orbitale aber: Das ist eine Aussage über Tensorprodukte. Die Aufspaltung erster Ordnung ist das Matrixelement $\langle\ell|V_{\mathrm{Kristall}}|\ell\rangle$, und $V_{\mathrm{Kristall}}$ hat (neben dem Skalar) $\ell = 4$ als niedrigste Komponente. Es kann nur wirken, wenn $V_4\subset V_\ell\otimes V_\ell$, also $\ell\ge2$. Kapitel 14 wendet das auf das Eisen im Hämoglobin an, dessen $d^{6}$- oder $d^{5}$-Konfiguration zwischen high-spin und low-spin wechselt, wenn Sauerstoff bindet --- der Grund für den Farbwechsel des Bluts.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von Laplace zu Weyl}
+Die Kugelflächenfunktionen sind älter als die Gruppentheorie: \Person{Legendre} (1782) und \Person{Laplace} (1785) führten sie für das Gravitationspotential ein; Laplace zeigte, dass sie Eigenfunktionen des Winkelanteils seines Operators sind. Dass sie Darstellungen von $SO(3)$ tragen, wurde erst mit \Person{Cartan}s Klassifikation der Darstellungen halbeinfacher Lie-Algebren (1913) und \Person{Weyl}s Arbeiten von 1925--26 klar.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Weyls drei Arbeiten \enquote{Theorie der Darstellung kontinuierlicher halbeinfacher Gruppen durch lineare Transformationen}} (1925--26) enthalten die Integralformel, die Charakterformel und den Beweis der vollständigen Reduzibilität für alle kompakten Lie-Gruppen --- mit dem \enquote{unitären Trick}, der Hurwitz' Mittelung über die Gruppe (1897, für $SO(n)$) auf die Darstellungstheorie anwandte. \Person{Peter} und Weyl bewiesen 1927 die Vollständigkeit. \Person{Haar} konstruierte 1933 das invariante Maß für beliebige lokalkompakte Gruppen, von Neumann bewies die Eindeutigkeit; damit war Satz 10.2 in voller Allgemeinheit da. \textbf{Dass Orbitale $1, 3, 5, 7$ sind, wusste die Spektroskopie seit 1900; warum, seit 1926.}}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{$SO(3)$ heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Äquivariante neuronale Netze} & Netze, deren Schichten mit $SO(3)$ vertauschen, zerlegen alle Zwischengrößen nach $V_\ell$ und koppeln sie mit Clebsch--Gordan (Tensor Field Networks 2018, NequIP 2022); sie sagen Kräfte in Molekülen mit Quantenchemie-Genauigkeit voraus und sind der Kern heutiger interatomarer Potentiale.\\
+\textbf{Kosmische Hintergrundstrahlung} & Die Temperaturkarte des Himmels wird in $Y_{\ell m}$ entwickelt; die Isotropie des Universums heißt, dass nur $C_\ell = \langle|a_{\ell m}|^{2}\rangle$ zählt. Das Spektrum $C_\ell$ (Planck 2018) mit seinem ersten Maximum bei $\ell\approx220$ bestimmt die Krümmung des Raums. Kapitel 12.\\
+\textbf{Computergrafik} & Beleuchtung aus allen Richtungen wird in $Y_{\ell m}$ bis $\ell = 2$ oder $4$ gespeichert (\enquote{precomputed radiance transfer}, Sloan 2002); die Drehung der Szene ist dann eine Darstellungsmatrix $D^{\ell}(g)$ --- in jeder Spielekonsole.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 10.1} & kompakte Gruppe, Haar-Maß\\
+\textbf{Satz 10.2} & die Theorie der Teile I--III gilt mit $\int$ statt $\sum$\\
+\textbf{Satz 10.3} & Klassen = Drehwinkel; Gewicht $(1 - \cos\theta)/\pi$\\
+\textbf{Satz 10.4} & $V_\ell$, $\dim 2\ell + 1$, $\chi_\ell = \sin((2\ell + 1)\theta/2)/\sin(\theta/2)$; Kugelflächenfunktionen\\
+\textbf{Satz 10.5} & Clebsch--Gordan-Dreieck; $\Delta\ell = \pm1$; Kristallfeld\\
+\textbf{Der Bruchfall} & Wasserstoff hat $SO(4)$; nichtkompakte Gruppen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kapitel 11 fragt, warum der Silberstrahl im Stern-Gerlach-Versuch in \emph{zwei} Teile spaltet, wo $SO(3)$ doch keine zweidimensionale Darstellung hat --- und findet die Gruppe, die eine hat.}
+\end{minipage}
+\end{center}
+\end{merksatz}

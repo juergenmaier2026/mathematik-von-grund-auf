@@ -1,0 +1,295 @@
+\chapter{Veränderliche loswerden}
+
+\section{Woher die Messgrößen kommen}
+
+\begin{merksatz}
+\boxtitel{Das Modell und seine Ein-Ausgabe-Gleichung}
+Das Zwei-Kammer-Modell ist ein Differentialgleichungssystem:
+\[ \dot x_1 = -(k_{10} + k_{12})\,x_1 + k_{21}\,x_2, \qquad \dot x_2 = k_{12}\,x_1 - (k_{21} + k_{20})\,x_2, \qquad y = x_1 . \]
+Gemessen wird $y$; $x_2$ sieht niemand. Man schreibe die Gleichungen für $y, \dot y, \ddot y, x_2, \dot x_2$ als Polynome in diesen Größen und den Parametern:
+\begin{align*}
+e_1 &= \dot y + (k_{10} + k_{12})\,y - k_{21}\,x_2, \\
+e_2 &= \ddot y + (k_{10} + k_{12})\,\dot y - k_{21}\,\dot x_2, \\
+e_3 &= \dot x_2 - k_{12}\,y + (k_{21} + k_{20})\,x_2 .
+\end{align*}
+Gröbner-Basis in lex mit $\dot x_2 > x_2 > \ddot y > \dot y > y > k_{ij}$, und darin das einzige Element ohne $x_2$ und $\dot x_2$:
+\[ \ddot y + (k_{10} + k_{12} + k_{21} + k_{20})\,\dot y + (k_{10}k_{21} + k_{10}k_{20} + k_{12}k_{20})\,y = 0 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist die Ein-Ausgabe-Gleichung des Modells: eine Differentialgleichung zweiter Ordnung für die Messgröße allein, mit den Koeffizienten $s_2$ und $s_3$. Dazu $\dot y(0) = -(k_{10} + k_{12})y(0)$ wegen $x_2(0) = 0$: das ist $s_1$. Die drei Messgrößen des Leitfalls sind das, was von den Parametern übrig bleibt, wenn man das Unsichtbare eliminiert.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Elimination ist die Operation, die aus einem Modell seine beobachtbaren Konsequenzen macht.} Dieses Kapitel beweist, dass lex-Gröbner-Basen eliminieren (Satz 6.1), sagt, wann sich eine Lösung der eliminierten Gleichungen zu einer des ganzen Systems ergänzen lässt (Satz 6.2), stellt die ältere Methode der Resultante daneben (Satz 6.3) und verwandelt Parametrisierungen in Gleichungen (Satz 6.4). Die Ein-Ausgabe-Gleichung oben ist der Leitfall in dieser Sprache: Die Ableitungen sind Veränderliche, das Modell ist ein Ideal, und die Messgleichung ist sein Eliminationsideal.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Eliminationssatz}
+
+\begin{definition}
+\boxtitelm{Definition 6.1 --- Eliminationsideal}
+Für ein Ideal $I\subseteq k[x_1, \ldots, x_n]$ und $0\le l < n$ heißt $I_l = I\cap k[x_{l+1}, \ldots, x_n]$ das $l$-te \Begriff{Eliminationsideal}: alle Konsequenzen von $I$, in denen $x_1, \ldots, x_l$ nicht vorkommen.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 6.1 --- der Eliminationssatz}
+Sei $G$ eine Gröbner-Basis von $I$ bezüglich lex mit $x_1 > x_2 > \cdots > x_n$. Dann ist $G_l = G\cap k[x_{l+1}, \ldots, x_n]$ eine Gröbner-Basis von $I_l$.
+
+\schritt{Beweis}
+$G_l\subseteq I_l$ ist klar. Zu zeigen: $\langle\mathrm{LM}(G_l)\rangle = \mathrm{LM}(I_l)$. Sei $f\in I_l$, $f\ne0$. Da $f\in I$ und $G$ Gröbner-Basis, ist $\mathrm{LM}(f)$ durch ein $\mathrm{LM}(g)$, $g\in G$, teilbar. $\mathrm{LM}(f)$ enthält keine der Veränderlichen $x_1, \ldots, x_l$, also auch $\mathrm{LM}(g)$ nicht. In lex-Ordnung ist jedes Monom, das $x_1, \ldots, x_l$ enthält, größer als jedes, das sie nicht enthält; da $\mathrm{LM}(g)$ das größte Monom von $g$ ist und $x_1, \ldots, x_l$ nicht enthält, enthält kein Monom von $g$ sie: $g\in G_l$. $\blacksquare$
+
+\schritt{Der Leitfall}
+Mit $k_{10} > k_{12} > k_{21} > k_{20}$ ist $G = \{k_{10} + k_{12} - \tfrac12,\ k_{12}k_{20} - \tfrac25k_{12} + \tfrac{3}{50},\ k_{21} + k_{20} - \tfrac25\}$; also $G_1 = \{g,\ k_{21} + k_{20} - \tfrac25\}$ (ohne $k_{10}$) und $G_2 = \{k_{21} + k_{20} - \tfrac25\}$ (ohne $k_{10}, k_{12}$). Mit der Ordnung $k_{10} > k_{21} > k_{12} > k_{20}$ dagegen ist $G_2 = \{g\}$: die Beziehung zwischen $k_{12}$ und $k_{20}$ allein. Die Ordnung entscheidet, \kursiv{welche} Veränderlichen eliminiert werden; eliminiert wird immer von oben.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Satz ist eine Zeile lang, weil lex alles tut}: Eine Veränderliche, die in lex oben steht, wird in der Basis so weit wie möglich hinausgedrängt. Das ist der Grund, warum lex-Basen dreieckig sind und warum sie groß werden --- sie enthalten die vollständige Information über jede Projektion. Für Band 26 (Ökonometrie) ist derselbe Satz die reduzierte Form eines Gleichungsmodells: die Gleichungen in den beobachteten Größen allein.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 6.2 --- der Erweiterungssatz}
+Sei $k$ algebraisch abgeschlossen, $I = \langle f_1, \ldots, f_s\rangle\subseteq k[x_1, \ldots, x_n]$, und $I_1$ das erste Eliminationsideal. Man schreibe jedes $f_i = c_i(x_2, \ldots, x_n)\,x_1^{N_i} + (\text{Terme niedrigeren Grades in } x_1)$ mit $c_i\ne0$. Ist $(a_2, \ldots, a_n)\in V(I_1)$ eine Teillösung und nicht alle $c_i(a_2, \ldots, a_n) = 0$, so gibt es $a_1\in k$ mit $(a_1, a_2, \ldots, a_n)\in V(I)$.
+
+\schritt{Beweisidee}
+Man setzt $a_2, \ldots, a_n$ ein und erhält Polynome $f_i(x_1, a)$ in einer Veränderlichen. Zu zeigen: Sie haben eine gemeinsame Nullstelle. Hätten sie keine, so wäre ihr größter gemeinsamer Teiler $1$, und man könnte $1$ als Kombination schreiben; man zeigt mit der Resultante (unten), dass diese Kombination zu einem Element von $I_1$ führt, das in $a$ nicht verschwindet --- Widerspruch zu $a\in V(I_1)$. Die Voraussetzung über die $c_i$ wird gebraucht, damit die Grade beim Einsetzen nicht fallen (Auslassung 3, \zit{5}, Kap.~3.6). $\blacksquare$
+
+\schritt{Beispiel}
+$I = \langle xy - 1\rangle$, $I_1 = I\cap k[y] = \{0\}$: Jedes $y$ ist Teillösung. Der Leitkoeffizient von $xy - 1$ in $x$ ist $c = y$; für $y\ne0$ gibt es $x = 1/y$; für $y = 0$ versagt der Satz --- und tatsächlich gibt es dort kein $x$. Die Projektion der Hyperbel auf die $y$-Achse ist alles außer dem Ursprung: keine Varietät.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Teillösung lässt sich ergänzen, wenn ein Leitkoeffizient in ihr nicht verschwindet. Wo alle verschwinden, kann die Lösung \enquote{ins Unendliche} entkommen --- die Hyperbel bei $y\to0$. Kapitel 9 schließt das Unendliche an und macht den Satz ausnahmslos.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Resultante}
+
+\begin{definition}
+\boxtitelm{Definition 6.3 --- Resultante}
+Für $f = a_0x^{m} + \cdots + a_m$ und $g = b_0x^{n} + \cdots + b_n$ (Grade $m, n > 0$) ist die \Begriff{Resultante} $\mathrm{Res}(f, g)$ die Determinante der $(m + n)\times(m + n)$-\Begriff{Sylvester-Matrix}, deren erste $n$ Zeilen die Koeffizienten von $f$, jeweils um eine Stelle verschoben, und deren letzte $m$ Zeilen die von $g$ enthalten.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 6.3 --- gemeinsame Nullstelle $\Leftrightarrow$ Resultante null}
+Über einem Körper $k$: $f$ und $g$ haben einen gemeinsamen Faktor positiven Grades genau dann, wenn $\mathrm{Res}(f, g) = 0$. Ist $k$ algebraisch abgeschlossen, heißt das: genau dann, wenn sie eine gemeinsame Nullstelle haben. Ferner gibt es Polynome $A, B$ mit $\deg A < n$, $\deg B < m$ und $Af + Bg = \mathrm{Res}(f, g)$.
+
+\schritt{Beweis}
+$f$ und $g$ haben einen gemeinsamen Faktor $h$ genau dann, wenn es $A, B\ne0$ gibt mit $\deg A < n$, $\deg B < m$ und $Af + Bg = 0$ (setze $A = g/h$, $B = -f/h$; umgekehrt: aus $Af = -Bg$ und $\deg A < \deg g$ folgt, dass $g$ nicht in $f$ aufgeht und ein Faktor von $g$ in $f$ steckt). Die Gleichung $Af + Bg = 0$ ist ein lineares Gleichungssystem für die $m + n$ Koeffizienten von $A$ und $B$: Koeffizientenvergleich in $x^{m+n-1}, \ldots, x^{0}$. Seine Matrix ist die Sylvester-Matrix (transponiert). Eine nichttriviale Lösung existiert genau dann, wenn die Determinante null ist. --- Für $Af + Bg = \mathrm{Res}$: Cramersche Regel auf das System $Af + Bg = 1$, Nenner $\mathrm{Res}$ wegmultipliziert. $\blacksquare$
+
+\schritt{Beispiel}
+$f = x^{2} - 3x + 2$ (Nullstellen $1, 2$), $g = x^{2} - c$:
+\[ \mathrm{Res} = \det\begin{pmatrix}1 & -3 & 2 & 0\\ 0 & 1 & -3 & 2\\ 1 & 0 & -c & 0\\ 0 & 1 & 0 & -c\end{pmatrix} = \begin{cases}0 & c = 1\ (\text{gemeinsam } x = 1)\\ 0 & c = 4\ (\text{gemeinsam } x = 2)\\ 40 & c = 9\end{cases} \]
+Probe für $c = 9$ mit der Produktformel $\mathrm{Res} = a_0^{n}b_0^{m}\prod(\alpha_i - \beta_j)$: $(1-3)(1+3)(2-3)(2+3) = (-2)(4)(-1)(5) = 40$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Resultante ist Elimination mit einer Determinante statt einer Gröbner-Basis}: Für zwei Polynome in $x$ und $y$, als Polynome in $x$ mit Koeffizienten in $k[y]$ aufgefasst, ist $\mathrm{Res}_x(f, g)\in k[y]$ ein Element des Eliminationsideals $\langle f, g\rangle\cap k[y]$ (das ist die zweite Aussage des Satzes), und seine Nullstellen sind die $y$-Werte der gemeinsamen Punkte. Sie ist älter (\Person{Euler} 1748, \Person{Bézout} 1764, \Person{Sylvester} 1840), für zwei Polynome oft schneller, und sie trägt den Beweis des Erweiterungssatzes und des Satzes von Bézout, Kapitel 9.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Implizitisierung}
+
+\begin{merksatz}
+\boxtitel{Satz 6.4 --- von der Parametrisierung zur Gleichung}
+Sei $x_i = g_i(t_1, \ldots, t_m)$, $i = 1, \ldots, n$, eine polynomiale Parametrisierung, und $I = \langle x_1 - g_1, \ldots, x_n - g_n\rangle\subseteq k[t_1, \ldots, t_m, x_1, \ldots, x_n]$. Dann ist $V(I_m)$ --- $I_m$ das Eliminationsideal ohne die $t$ --- die kleinste Varietät, die das Bild der Parametrisierung enthält (über $\mathbb C$: ihr Zariski-Abschluss). Für rationale Parametrisierungen $x_i = g_i/h_i$ nimmt man $I = \langle h_ix_i - g_i,\ 1 - y\prod h_i\rangle$ mit einer Hilfsveränderlichen $y$ und eliminiert $t$ und $y$.
+
+\schritt{Beweis für den polynomialen Fall}
+Jeder Punkt des Bildes, $(t, g(t))$, liegt in $V(I)$, und seine Projektion $g(t)$ in $V(I_m)$ (ein Polynom ohne $t$, das auf $V(I)$ verschwindet, verschwindet in $g(t)$). Also enthält $V(I_m)$ das Bild. Ist $W = V(J)$ eine Varietät, die das Bild enthält, so verschwindet jedes $F\in J$ in allen $g(t)$, also ist $F(g_1(t), \ldots, g_n(t)) = 0$ als Polynom in $t$; dann ist $F(x) = F(x) - F(g(t))$, und $F(x) - F(g(t))$ liegt in $I$ (jedes $x_i^{a} - g_i^{a}$ ist durch $x_i - g_i$ teilbar). Also $F\in I\cap k[x] = I_m$, und $V(I_m)\subseteq V(J) = W$. $\blacksquare$
+
+\schritt{Beispiele, gerechnet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+$(t^{2}, t^{3})$ & lex-Basis $\{t^{2} - x,\ tx - y,\ ty - x^{2},\ x^{3} - y^{2}\}$; $I_1 = \langle x^{3} - y^{2}\rangle$: die Neilsche Parabel\\
+$(t^{2} + 1, t^{3} + t)$ & $I_1 = \langle x^{3} - x^{2} - y^{2}\rangle$: die Kubik mit Schleife, $y^{2} = x^{2}(x - 1)$ --- der Bruchfall aus Kapitel 1\\
+Kreis $\bigl(\frac{1-t^{2}}{1+t^{2}}, \frac{2t}{1+t^{2}}\bigr)$ & $\langle x(1+t^{2}) - (1 - t^{2}),\ y(1+t^{2}) - 2t\rangle$: lex-Basis $\{tx + t - y,\ ty + x - 1,\ x^{2} + y^{2} - 1\}$; $I_1 = \langle x^{2} + y^{2} - 1\rangle$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Gleichung ist die kleinste Varietät um das Bild --- nicht das Bild. Der Kreis hat den Punkt $(-1, 0)$, den die Parametrisierung nicht trifft; die Gleichung hat ihn. Der Unterschied ist stets eine Varietät kleinerer Dimension (Auslassung 4, Chevalley).}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Im Kreisbeispiel steht in der Basis $ty + x - 1$}, also $t = (1 - x)/y$: die Umkehrung der Parametrisierung, geschenkt --- und bei $y = 0$ sieht man, warum $(-1, 0)$ fehlt (für $x = -1$, $y = 0$ wäre $t = 2/0$). Für den Leitfall ist die Parametrisierung die Abbildung Parameter $\mapsto$ Messgrößen, $(k_{10}, k_{12}, k_{21}, k_{20})\mapsto(s_1, s_2, s_3)$, und ihre Implizitisierung ist leer: Es gibt keine polynomiale Beziehung zwischen den drei Messgrößen, sie sind \enquote{unabhängig}; das Bild ist (bis auf eine dünne Menge) der ganze Raum, und jede Faser hat Dimension $4 - 3 = 1$. Das ist der Dimensionssatz für Abbildungen, Kapitel 7 --- die Zahl, die das Vorwort als \enquote{Kurve} angekündigt hat, in einer Zeile.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was die Elimination verliert}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.6cm}@{}}
+\toprule
+\textbf{Die Projektion ist keine Varietät} & $V(xy - 1)\to y$-Achse: alles außer $0$. $I_1 = \{0\}$ sagt \enquote{ganze Achse}. Der fehlende Punkt ist nicht rekonstruierbar.\\
+\textbf{Der Erweiterungssatz versagt} & genau dort, wo alle Leitkoeffizienten verschwinden --- und das kann auf einer großen Menge geschehen: $I = \langle yx^{2} - 1, yx - y\rangle$ hat Leitkoeffizienten $y$ und $y$.\\
+\textbf{Über $\mathbb R$} & $V(x^{2} + y^{2} - 1)\to x$-Achse: das Intervall $[-1, 1]$; $I_1 = \{0\}$ sagt \enquote{ganze Achse}. Projektionen reeller Varietäten sind semialgebraisch, nicht algebraisch.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Elimination berechnet den Abschluss der Projektion, nie die Projektion. Was fehlt, ist klein --- aber im Leitfall sind es genau die Grenzfälle: Parameter null, Kammern entkoppelt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Ein-Ausgabe-Gleichung am Anfang hat dieselbe Lücke}: Sie wurde unter der stillschweigenden Annahme $k_{21}\ne0$ hergeleitet --- in der Gröbner-Basis steht $k_{21}$ als Leitkoeffizient vor $x_2$. Für $k_{21} = 0$ ist die zweite Kammer unsichtbar, $y$ fällt mit einer einzigen Exponentialfunktion, und die Gleichung zweiter Ordnung gilt noch, ist aber nicht mehr die ganze Wahrheit: $s_2, s_3$ bestimmen dann nur $k_{10} + k_{12}$ und $(k_{10} + k_{12})(k_{21} + k_{20})$, zwei Zahlen statt drei. Die Identifizierbarkeitsprogramme geben darum stets eine Liste von Ausnahmemengen aus --- die Varietät, auf der die Leitkoeffizienten verschwinden ---, und wer sie überliest, hält ein unidentifizierbares Grenzmodell für bestimmt. Es ist der Erweiterungssatz, der sagt, dass die Liste endlich ist.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.1 --- Eine Fläche implizit machen}
+$x = s + t$, $y = s - t$, $z = st$. Gleichung der Fläche?
+
+\loesung
+\schritt{Schritt 1 --- Von Hand}
+$x + y = 2s$, $x - y = 2t$, also $z = st = \tfrac14(x + y)(x - y) = \tfrac14(x^{2} - y^{2})$: $4z = x^{2} - y^{2}$, ein hyperbolisches Paraboloid (Sattelfläche).
+
+\schritt{Schritt 2 --- Mit Elimination}
+$I = \langle x - s - t,\ y - s + t,\ z - st\rangle$, lex $s > t > x > y > z$. $S$-Polynome: Aus den ersten beiden $s = \tfrac12(x + y)$, $t = \tfrac12(x - y)$; einsetzen in das dritte gibt $z - \tfrac14(x^{2} - y^{2})$. $I_2 = \langle x^{2} - y^{2} - 4z\rangle$. \checkmark
+
+\schritt{Schritt 3 --- Bild = Varietät?}
+Zu jedem $(x, y, z)$ mit $4z = x^{2} - y^{2}$ gibt es $s = \tfrac12(x + y)$, $t = \tfrac12(x - y)$: Ja, die Parametrisierung ist surjektiv (linear in $s, t$ für die ersten beiden Koordinaten --- der Erweiterungssatz mit konstanten Leitkoeffizienten).
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Sattelfläche ist eine Regelfläche}: Für festes $s$ ist $t\mapsto(s + t, s - t, st)$ eine Gerade, ebenso für festes $t$. Zwei Geradenscharen auf einer gekrümmten Fläche --- das ist der Grund, warum man sie aus geraden Stäben bauen kann (Kühltürme sind Hyperboloide, die andere Regelfläche zweiten Grades). Für die algebraische Geometrie: Die Fläche hat Grad $2$ und enthält unendlich viele Geraden; eine Fläche dritten Grades enthält genau $27$ (Kapitel 15).}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.2 --- Schnittpunkte mit der Resultante}
+Schneiden Sie $f = x^{2} + y^{2} - 1$ und $g = x^{2} - y$ (Kreis und Parabel) mit der Resultante nach $x$.
+
+\loesung
+\schritt{Schritt 1 --- Als Polynome in $x$}
+$f = 1\cdot x^{2} + 0\cdot x + (y^{2} - 1)$, $g = 1\cdot x^{2} + 0\cdot x + (-y)$.
+
+\schritt{Schritt 2 --- Sylvester}
+\[ \mathrm{Res}_x = \det\begin{pmatrix}1 & 0 & y^{2} - 1 & 0\\ 0 & 1 & 0 & y^{2} - 1\\ 1 & 0 & -y & 0\\ 0 & 1 & 0 & -y\end{pmatrix} . \]
+Zeile 3 minus Zeile 1, Zeile 4 minus Zeile 2: untere Hälfte $\begin{pmatrix}0 & 0 & -y - y^{2} + 1 & 0\\ 0 & 0 & 0 & -y - y^{2} + 1\end{pmatrix}$. Blockdreiecksform: $\mathrm{Res}_x = (1 - y - y^{2})^{2}$.
+
+\schritt{Schritt 3 --- Die $y$-Werte}
+$y^{2} + y - 1 = 0$: $y = \tfrac{-1\pm\sqrt5}{2}$, also $y_1 = 0{,}618$ und $y_2 = -1{,}618$.
+
+\schritt{Schritt 4 --- Erweitern}
+Für jedes $y$: $x^{2} = y$. $y_1 = 0{,}618$: $x = \pm0{,}786$ --- zwei reelle Punkte. $y_2 = -1{,}618$: $x = \pm1{,}272\,\mathrm i$ --- zwei komplexe Punkte. Vier Schnittpunkte insgesamt, $2\cdot2 = 4$ (Bézout). Probe: $0{,}786^{2} + 0{,}618^{2} = 0{,}618 + 0{,}382 = 1{,}000$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Resultante ist ein Quadrat}, weil jeder $y$-Wert zwei $x$-Werte trägt ($\pm$): Die Vielfachheit der Nullstelle der Resultante zählt die Schnittpunkte über ihr. Das ist die Vielfachheit, die Bézout braucht, Kapitel 9 --- und sie kommt aus einer Determinante, nicht aus einer Anschauung. Der goldene Schnitt $0{,}618$ als $y$-Koordinate ist kein Zufall: Kreis und Parabel $y = x^{2}$ schneiden sich dort, wo $x^{2} + x^{4} = 1$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.3 --- Die Ein-Ausgabe-Gleichung von Hand}
+Leiten Sie die Gleichung aus dem Eingangskasten ohne Gröbner-Basis her und lesen Sie daran ab, warum genau drei Zahlen messbar sind.
+
+\loesung
+\schritt{Schritt 1 --- $x_2$ ausdrücken}
+Aus $\dot y = -(k_{10} + k_{12})y + k_{21}x_2$ folgt $x_2 = \bigl(\dot y + (k_{10} + k_{12})y\bigr)/k_{21}$ (für $k_{21}\ne0$).
+
+\schritt{Schritt 2 --- Ableiten und einsetzen}
+$\dot x_2 = \bigl(\ddot y + (k_{10} + k_{12})\dot y\bigr)/k_{21}$. Die zweite Modellgleichung $\dot x_2 = k_{12}y - (k_{21} + k_{20})x_2$ wird, mit $k_{21}$ multipliziert:
+\[ \ddot y + (k_{10} + k_{12})\dot y = k_{12}k_{21}y - (k_{21} + k_{20})\bigl(\dot y + (k_{10} + k_{12})y\bigr). \]
+
+\schritt{Schritt 3 --- Ordnen}
+$\ddot y + \bigl(k_{10} + k_{12} + k_{21} + k_{20}\bigr)\dot y + \bigl((k_{21} + k_{20})(k_{10} + k_{12}) - k_{12}k_{21}\bigr)y = 0$, und $(k_{21} + k_{20})(k_{10} + k_{12}) - k_{12}k_{21} = k_{10}k_{21} + k_{10}k_{20} + k_{12}k_{20}$. \checkmark
+
+\schritt{Schritt 4 --- Warum drei}
+Eine lineare Differentialgleichung zweiter Ordnung mit konstanten Koeffizienten hat zwei Koeffizienten ($s_2, s_3$); ihre Lösung $y = Ae^{-\alpha t} + Be^{-\beta t}$ ist durch $\alpha, \beta$ (aus $s_2, s_3$) und die Anfangswerte $y(0), \dot y(0)$ bestimmt. $y(0)$ ist die Dosis (bekannt), $\dot y(0) = -(k_{10} + k_{12})y(0)$ liefert $s_1$. Mehr steckt in der Kurve nicht: Vier Zahlen $A, B, \alpha, \beta$, eine davon durch die Dosis festgelegt --- drei bleiben.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das Zählargument der Identifizierbarkeit}: Die Messkurve ist eine Summe von $n$ Exponentialfunktionen und trägt $2n$ Zahlen, abzüglich der bekannten; ein Modell mit $n$ Kammern hat bis zu $n^{2}$ Parameter. Für $n = 2$: drei gegen vier. Für $n = 3$: fünf gegen neun. Das Zählen sagt, dass es nicht reicht; die Elimination sagt, \kursiv{was} nicht reicht, und die Gröbner-Basis des Leitfalls sagt, welche Kombinationen trotzdem bestimmt sind. Dass die Gleichung oben mit $k_{21}$ multipliziert wurde, ist die Stelle, an der der Bruchfall lauert.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Bézout, Sylvester, Kronecker --- und die Rückkehr der Elimination}
+Die Elimination war im 18.\ und 19.\ Jahrhundert das Herz der Algebra: \Person{Euler} 1748 und \Person{Bézout} 1764 eliminierten eine Unbekannte aus zwei Gleichungen durch Determinanten, \Person{Sylvester} gab 1840 der Matrix ihre Form, \Person{Cayley} und \Person{Salmon} rechneten mit Resultanten ganze Bücher voll.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Kronecker} baute 1882 eine vollständige Eliminationstheorie für beliebig viele Gleichungen, \Person{Macaulay} 1916 die mehrdimensionale Resultante. \textbf{Dann verschwand das Gebiet}: \Person{van der Waerden} strich die Elimination aus den späteren Auflagen seiner \enquote{Modernen Algebra}, und \Person{Weil} schrieb 1946, die Eliminationstheorie sei zu eliminieren --- die abstrakte Methode (Nullstellensatz, Zerlegung) brauche sie nicht. Sie kam mit dem Rechner zurück: \Person{Buchberger}s Eliminationssatz 1985, die Arbeiten von \Person{Gelfand}, \Person{Kapranov} und \Person{Zelevinsky} 1994 zu Resultanten und Diskriminanten, und die Anwendungen in Robotik und Biologie, Kapitel 13 und 14. Was man nicht rechnen konnte, war unmodern; was man rechnen kann, ist Praxis.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Ein-Ausgabe-Gleichung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Idee, aus einem Kompartimentmodell die Gleichung für die Messgröße allein herzuleiten und daran die Identifizierbarkeit abzulesen, ist von \Person{Bellman} und \Person{Åström} 1970; sie nannten das Problem \enquote{strukturelle Identifizierbarkeit}. \textbf{Dass es Elimination ist und mit Gröbner-Basen oder differentieller Algebra (\Person{Ritt} 1950, \Person{Ollivier} 1990, \Person{Ljung}--\Person{Glad} 1994) systematisch gelöst werden kann}, machte daraus ein Rechenverfahren; DAISY (2007) war das erste Programm, das ein Modell einliest und die identifizierbaren Parameter ausgibt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Elimination heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Differentielle Elimination} & Ritt--Kolchin-Theorie als Algorithmus (Rosenfeld--Gröbner, Boulier 1995): Ein-Ausgabe-Gleichungen für nichtlineare Modelle mit Dutzenden Zuständen; die Grundlage von StructuralIdentifiability.jl (2021).\\
+\textbf{Sparse Resultanten} & Resultanten, die die Struktur der Monome ausnutzen (Gelfand--Kapranov--Zelevinsky 1994, Emiris 1996): für Systeme aus der Geometrie und Robotik um Größenordnungen kleiner als Macaulays.\\
+\textbf{Quantoren\-elimination} & Über $\mathbb R$: Tarski 1951, Collins' zylindrische algebraische Zerlegung 1975 --- jeder Satz der reellen Algebra ist entscheidbar, doppelt exponentiell; der Bruchfall dieses Kapitels als eigenes Fach.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für den Leitfall hat sich das Gebiet in fünfzehn Jahren von Handrechnungen zu einem Standardwerkzeug gewandelt}: Man gibt die Differentialgleichungen ein, bekommt die Liste der global, lokal und nicht identifizierbaren Parameter, die identifizierbaren Kombinationen und die Ausnahmemengen --- in Sekunden für Modelle mit zwanzig Zuständen, die vor 2010 unzugänglich waren. Die Pharmakologie und die Systembiologie benutzen es vor jeder Studie; was es nicht kann, ist der Bruchfall von Kapitel 3: sagen, welche Lösungen reell und positiv sind, und wie gut ein identifizierbarer Parameter bei verrauschten Daten bestimmt ist. Dafür braucht es Band 17.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 6.1} & Elimination: $G\cap k[x_{l+1}, \ldots]$ ist Basis von $I_l$\\
+\textbf{Satz 6.2} & Erweiterung: möglich, wo ein Leitkoeffizient nicht verschwindet\\
+\textbf{Satz 6.3} & Resultante $= 0\Leftrightarrow$ gemeinsamer Faktor; $Af + Bg = \mathrm{Res}$\\
+\textbf{Satz 6.4} & Implizitisierung: $V(I_m)$ = Abschluss des Bildes\\
+\textbf{Der Bruchfall} & Projektionen sind keine Varietäten; Ausnahmemengen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil II ist zu Ende: Man kann mit Idealen rechnen. Teil III fragt nach der Gestalt --- wie groß ist eine Varietät (Dimension), wo ist sie glatt und wo nicht (Singularitäten), und was geschieht im Unendlichen, wo der Erweiterungssatz seine Ausnahmen hat (projektiver Raum).}
+\end{minipage}
+\end{center}
+\end{merksatz}

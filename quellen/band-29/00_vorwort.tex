@@ -1,0 +1,87 @@
+\chapter*{Vorwort}
+\addcontentsline{toc}{chapter}{Vorwort}
+
+\section*{Worum es geht}
+
+\begin{merksatz}
+\boxtitel{Ein Medikament, zwei Kammern, vier Zahlen}
+Ein Wirkstoff wird in die Blutbahn gespritzt, verteilt sich ins Gewebe und zurück, und wird ausgeschieden. Das einfachste Modell hat zwei Kammern und vier Geschwindigkeiten: $k_{12}$ (Blut ins Gewebe), $k_{21}$ (zurück), $k_{10}$ (Ausscheidung aus dem Blut), $k_{20}$ (Ausscheidung aus dem Gewebe). Gemessen wird nur die Konzentration im Blut, und sie fällt als Summe zweier Exponentialfunktionen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.6cm}P{5.0cm}@{}}
+\toprule
+\textbf{Was die Messung liefert} & drei Zahlen: $s_1 = k_{10} + k_{12}$, $s_2 = k_{10} + k_{12} + k_{21} + k_{20}$, $s_3 = k_{10}k_{21} + k_{10}k_{20} + k_{12}k_{20}$\\
+\textbf{Was man wissen will} & vier Zahlen: $k_{10}, k_{12}, k_{21}, k_{20}$\\
+\textbf{Die Frage} & Welche Parametersätze passen zu denselben Daten? Einer, endlich viele, unendlich viele?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Antwort ist eine Nullstellenmenge: alle $(k_{10}, k_{12}, k_{21}, k_{20})$, die drei polynomiale Gleichungen erfüllen. Ihre Gestalt --- Punkt, Punktepaar, Kurve --- ist die Antwort auf die Frage, ob das Modell aus den Daten bestimmbar ist. Für vier Parameter ist sie eine Kurve: unendlich viele Modelle, dieselben Daten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Algebraische Geometrie ist die Lehre von den Lösungsmengen polynomialer Gleichungen} --- ihrer Gestalt, ihrer Dimension, ihrer Zerlegung in Teile, ihrer Schnittpunkte. Dieses Buch nimmt den Weg von der Nullstellenmenge zur Kurve mit Gruppengesetz und hält an jedem Schritt an einem Beispiel an, das man durchrechnen kann. Der Leitfall --- die Frage, ob ein Modell aus Daten bestimmbar ist --- begleitet den Band, weil er genau die Werkzeuge braucht, die er entwickelt: Ideale, Gröbner-Basen, Elimination, Dimension. Und weil er zeigt, dass eine Frage der Medizin eine Frage der Geometrie sein kann, ohne dass jemand etwas zeichnet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section*{Drei Überraschungen}
+
+\begin{merksatz}
+\boxtitel{Was dieser Band zeigt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{0.5cm}P{8.2cm}@{}}
+\toprule
+$1$ & Unendlich viele polynomiale Gleichungen in endlich vielen Unbekannten haben immer dieselbe Lösungsmenge wie endlich viele von ihnen --- und man kann die endlich vielen ausrechnen. \kursiv{(Kapitel 2 und 5)}\\
+$2$ & Zwei ebene Kurven der Grade $m$ und $n$ schneiden sich in genau $mn$ Punkten --- wenn man richtig zählt: mit Vielfachheit, im Komplexen und im Unendlichen. \kursiv{(Kapitel 9)}\\
+$3$ & Die Punkte einer Kurve dritten Grades bilden eine Gruppe: Man kann sie addieren, und die Addition ist die Grundlage der Verschlüsselung in jedem Mobiltelefon. \kursiv{(Kapitel 10)}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die erste Überraschung ist Hilberts Basissatz von 1890, die zweite Bézouts Satz von 1779, die dritte eine Entdeckung, die sich über zweihundert Jahre von Fermat bis Poincaré hinzog. Alle drei werden in diesem Band bewiesen --- die erste vollständig, die zweite bis auf die Vielfachheitstheorie, die dritte mit dem Gruppengesetz in Koordinaten, das man nachrechnen kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section*{Der Aufbau}
+
+\begin{merksatz}
+\boxtitel{Die sechs Teile}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{3.6cm}P{3.0cm}@{}}
+\toprule
+\textbf{Teil} & \textbf{Thema} & \textbf{Kapitel}\\
+\midrule
+I & Nullstellen und Ideale & $1$--$3$\\
+II & Rechnen mit Idealen & $4$--$6$\\
+III & Die Gestalt & $7$--$9$\\
+IV & Kurven & $10$--$12$\\
+V & Anwendungen & $13$--$14$\\
+VI & Stand & $15$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Was vorausgesetzt wird}
+Ringe, Ideale und Körper in dem Umfang von Band 11 (Algebra); lineare Algebra mit Determinanten und Rang (Band 2); die komplexen Zahlen und der Fundamentalsatz der Algebra (Band 12). Für Kapitel 10 und 14 ist Band 1 (Zahlentheorie) nützlich, für den Leitfall Band 18 (Kompartimentmodelle) und Band 26 (Identifizierbarkeit), aber nicht nötig. Alles andere wird hier entwickelt, und wo ein Beweis übergangen wird, steht es dabei --- die Auslassungen sind im Anhang gesammelt.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Jedes Kapitel endet mit einem Bruchfall}: einem Beispiel, an dem die Methode des Kapitels versagt --- die reelle Zeichnung, die die Varietät nicht zeigt; die Gröbner-Basis, die zu groß wird; der Satz von Bézout ohne Vielfachheit. Und jedes Kapitel hat drei Übungsaufgaben mit vollständiger Lösung und Probe. Die Gröbner-Basen in diesem Band wurden mit einem Programm von gut hundert Zeilen gerechnet, das der Leser nach Kapitel 5 selbst schreiben kann; es liegt den Quellen bei.}
+\end{minipage}
+\end{center}
+\end{merksatz}

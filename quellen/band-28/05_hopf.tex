@@ -1,0 +1,290 @@
+\chapter{Wie aus der Ruhe ein Takt wird}
+
+\section{Die Lücke in der Tabelle}
+
+\begin{merksatz}
+\boxtitel{Bei $I = 0{,}331$}
+Kapitel~2 hat die Ruhe der Herzzelle bei $I = 0{,}3$ als anziehenden, bei $I = 0{,}5$ als abstoßenden Strudel gefunden. Dazwischen, bei
+\[ v^{*} = -\sqrt{1 - \varepsilon b} = -0{,}9675, \qquad I_H = 0{,}3313 , \]
+ist die Spur null: ein Paar Eigenwerte $\pm0{,}2755\,\mathrm i$ auf der imaginären Achse.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Links davon ruht die Zelle, rechts davon schlägt sie. Die Frage ist, wie der Übergang aussieht: Wächst die Schwingung leise aus der Ruhe heraus --- oder setzt sie mit voller Kraft ein?}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Beides kommt vor, und der Unterschied ist klinisch}: Ein Sinusknoten, dessen Takt leise einsetzt, beginnt mit winzigen Schlägen; einer, der hart einsetzt, schlägt vom ersten Schlag an voll --- und hört bei sinkendem Antrieb nicht dort auf, wo er begonnen hat. Welcher Fall vorliegt, entscheidet die dritte Ordnung der Gleichungen, und dieses Kapitel rechnet sie aus.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz von Hopf}
+
+\begin{merksatz}
+\boxtitel{Satz 5.1 --- Hopf}
+Sei $\dot x = f(x,\mu)$ mit einem Fixpunkt $x^{*}(\mu)$, dessen Jacobi-Matrix bei $\mu = 0$ ein Paar rein imaginärer Eigenwerte $\pm\mathrm i\omega$ hat und sonst keine mit Realteil null. Überquert das Paar die Achse mit Geschwindigkeit $\mathrm d(\operatorname{Re}\lambda)/\mathrm d\mu = d \ne 0$, so entsteht bei $\mu = 0$ eine geschlossene Bahn mit Periode nahe $2\pi/\omega$ und Amplitude $\sim\sqrt{|\mu|}$. In geeigneten Koordinaten lautet das System nahe der Verzweigung
+\[ \dot r = d\mu\,r + a\,r^{3}, \qquad \dot\vartheta = \omega + O(\mu, r^{2}) , \]
+und das Vorzeichen des \Begriff{ersten Lyapunow-Koeffizienten} $a$ entscheidet:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.4cm}@{}}
+\toprule
+$a < 0$ & \textbf{superkritisch}: Für $d\mu > 0$ ein anziehender Zyklus mit $r = \sqrt{-d\mu/a}$; der Fixpunkt wird abstoßend. Leiser Einsatz.\\
+$a > 0$ & \textbf{subkritisch}: Für $d\mu < 0$ ein abstoßender Zyklus mit $r = \sqrt{-d\mu/a}$ um den noch anziehenden Fixpunkt; bei $\mu = 0$ verschwindet er, und die Bahn springt weg. Harter Einsatz.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis}
+Auslassung 5 für die Reduktion auf die Normalform (Zentrumsmannigfaltigkeit und Normalformtheorie, Kuznetsov\zit{15}). Die Normalform selbst ist Satz 4.1 in Polarkoordinaten: $\dot r = r(d\mu + ar^{2})$ hat die Fixpunkte $r = 0$ und $r^{2} = -d\mu/a$, und $\mathrm d\dot r/\mathrm dr = d\mu + 3ar^{2}$ ist bei $r^{2} = -d\mu/a$ gleich $-2d\mu$: Vorzeichen gegen das des Fixpunkts. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Hopf-Verzweigung ist eine Heugabel im Radius. Und wie die Heugabel hat sie zwei Gesichter --- je nachdem, ob der kubische Term bremst oder treibt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Der Koeffizient $a$ in der Ebene}
+Hat man das System in Koordinaten gebracht, in denen die Jacobi-Matrix $\bigl(\begin{smallmatrix}0&-\omega\\\omega&0\end{smallmatrix}\bigr)$ ist, mit $\dot x = -\omega y + f(x,y)$, $\dot y = \omega x + g(x,y)$, so gilt
+\begin{align*} a = {} & \frac{1}{16}\big(f_{xxx} + f_{xyy} + g_{xxy} + g_{yyy}\big) \\ & + \frac{1}{16\omega}\big(f_{xy}(f_{xx}+f_{yy}) - g_{xy}(g_{xx}+g_{yy}) - f_{xx}g_{xx} + f_{yy}g_{yy}\big) , \end{align*}
+alle Ableitungen im Fixpunkt.
+
+\schritt{Für die Herzzelle bei $I_H$}
+Die Nichtlinearität steckt nur in $-v^{3}/3$; um $v^{*}$ entwickelt: $-v^{*}u^{2} - u^{3}/3$ mit $u = v - v^{*}$. Nach der Koordinatentransformation (Aufgabe 5.3 rechnet sie) ergibt sich
+\[ a = +0{,}0723, \qquad d = \frac{\mathrm d\operatorname{Re}\lambda}{\mathrm dI} = +0{,}816 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$a > 0$: Die Hopf-Verzweigung der Herzzelle ist subkritisch. Der Takt setzt hart ein.}
+\end{minipage}
+\end{center}
+
+\schritt{Was das vorhersagt --- und die Simulation}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.2cm}P{2.6cm}P{2.2cm}P{2.6cm}@{}}
+\toprule
+$I$ & \textbf{instabiler Zyklus} $r = \sqrt{d(I_H-I)/a}$ & \textbf{Stoß $0{,}10$} & \textbf{Stoß $0{,}15$}\\
+\midrule
+$0{,}330$ & $0{,}12$ & verklingt & springt auf $1{,}87$\\
+$0{,}331$ & $0{,}056$ & springt auf $1{,}88$ & springt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der abstoßende kleine Zyklus ist die Schwelle}: Störungen innerhalb verklingen, Störungen außerhalb laufen zum großen Zyklus mit Amplitude $1{,}87$, der schon existiert, bevor der Fixpunkt instabil wird. Bei $I = 0{,}33$ liegt die Schwelle bei $0{,}12$, und ein Stoß von $0{,}10$ verklingt, einer von $0{,}15$ springt --- die Formel trifft. Mit wachsendem $I$ schrumpft die Schwelle auf null, und bei $I_H$ genügt ein Hauch. Die große Amplitude ist dieselbe wie bei $I = 0{,}5$: Es gibt keine kleinen Schläge. Das ist der harte Einsatz, und er hat eine Kehrseite, die der nächste Abschnitt zeigt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Hysterese im Takt}
+
+\begin{merksatz}
+\boxtitel{Hin und zurück}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.2cm}@{}}
+\toprule
+\textbf{$I$ steigend} & Die Zelle ruht bis $I_H = 0{,}3313$. Dort springt sie auf den großen Zyklus.\\
+\textbf{$I$ fallend} & Die Zelle schlägt weiter --- bei $0{,}33$, bei $0{,}325$ --- und hört erst bei $I_{SN} \approx 0{,}3245$ auf, wo der große anziehende und der kleine abstoßende Zyklus verschmelzen und verschwinden: ein Sattel-Knoten von Zyklen.\\
+\textbf{Dazwischen} & Für $0{,}3245 < I < 0{,}3313$ ist die Zelle bistabil: Ruhe und Takt sind beide möglich, und die Geschichte entscheidet.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Zelle beginnt bei $0{,}3313$ zu schlagen und hört bei $0{,}3245$ auf. Zwischen den beiden Werten kann ein einzelner Stoß den Takt starten --- oder stoppen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das Verzweigungsdiagramm einer subkritischen Hopf-Verzweigung, und es ist dasselbe wie das der Befischung aus Kapitel~4} --- mit Zyklen statt Fixpunkten. Für den Sinusknoten bedeutet es, dass ein kurzer Reiz einen stillen Knoten dauerhaft in Gang setzen oder einen schlagenden dauerhaft anhalten kann; beides ist beobachtet worden, an isolierten Zellen und --- als \Begriff{Sinusknotenstillstand} nach einem Vagusreiz --- am Menschen. Ein superkritischer Knoten könnte das nicht: Dort gibt es bei jedem $I$ genau einen Zustand, und kein Stoß ändert ihn für länger als einige Umläufe.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Verzweigung, die am Fixpunkt nicht zu sehen ist}
+Wer die Herzzelle untersucht, indem er den Fixpunkt verfolgt --- Kapitel~2, Eigenwerte für jedes $I$ ---, findet $I_H = 0{,}3313$ und nichts sonst. Der Sattel-Knoten der Zyklen bei $0{,}3245$ hinterlässt am Fixpunkt keine Spur.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Fixpunkt-Analyse} & Ruhe stabil bis $0{,}3313$. Richtig --- und unvollständig: Sie sagt nicht, dass ab $0{,}3245$ ein zweiter Attraktor existiert.\\
+\textbf{Simulation von unten} & Zelle ruht bis $0{,}3313$, dann voller Takt. Bestätigt die Fixpunkt-Analyse und verfehlt die Bistabilität.\\
+\textbf{Simulation von oben} & Takt bis $0{,}3245$. Widerspricht scheinbar beiden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Drei Untersuchungen, drei Antworten --- und keine ist falsch. Was fehlt, ist die Frage nach dem Vorzeichen von $a$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Lehre: Eine Hopf-Verzweigung ist erst verstanden, wenn man weiß, ob sie super- oder subkritisch ist} --- und das sieht man weder am Fixpunkt noch an einer einzelnen Simulation, sondern am kubischen Koeffizienten oder an einer Simulation in beide Richtungen. In Experimenten ist die Unterscheidung schwierig: Rauschen lässt ein bistabiles System zwischen beiden Zuständen springen, und eine subkritische Verzweigung sieht dann aus wie eine superkritische mit Zittern. Die Verzweigungsprogramme aus Kapitel~4 berechnen $a$ automatisch; wer von Hand rechnet, hat Aufgabe 5.3.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.1 --- Die Normalform durchrechnen}
+$\dot r = \mu r - r^{3}$, $\dot\vartheta = 1$. Bestimmen Sie Amplitude und Stabilität des Zyklus für $\mu = 0{,}04$ und die Zeit, bis eine Bahn von $r = 0{,}01$ den Zyklus bis auf ein Prozent erreicht.
+
+\loesung
+\schritt{Schritt 1 --- Der Zyklus}
+$r^{*} = \sqrt{\mu} = 0{,}2$; $\mathrm d\dot r/\mathrm dr = \mu - 3r^{2} = -2\mu = -0{,}08 < 0$: anziehend.
+
+\schritt{Schritt 2 --- Die Lösung}
+$\dot r = \mu r - r^{3}$ ist eine Bernoulli-Gleichung (Band 14): mit $s = r^{-2}$ wird $\dot s = -2\mu s + 2$, also
+\[ r(t)^{-2} = \frac1\mu + \Big(\frac{1}{r_0^{2}} - \frac1\mu\Big)e^{-2\mu t} . \]
+
+\schritt{Schritt 3 --- Die Zeit}
+$r = 0{,}99\,r^{*}$ heißt $r^{-2} = 1{,}0203/\mu$; mit $r_0 = 0{,}01$:
+\[ e^{-2\mu t} = \frac{0{,}0203/\mu}{1/r_0^{2} - 1/\mu} = \frac{0{,}5076}{9975} \quad\Longrightarrow\quad t = \frac{\ln 19\,650}{0{,}08} = 124 . \]
+Etwa zwanzig Umläufe bei Periode $2\pi$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Zeit ist $\ln(\ldots)/2\mu$ --- nahe der Verzweigung wird sie beliebig lang.} Das ist das kritische Verlangsamen aus Kapitel~4 für Zyklen: Nahe $\mu = 0$ braucht die Schwingung lange, um ihre Amplitude zu finden, und ein Experiment, das nicht lange genug wartet, sieht eine wachsende Schwingung, wo in Wahrheit ein fester Zyklus ist. Bei der Herzzelle an der Hopf-Stelle: $d(I - I_H) = 0{,}8\cdot10^{-4}$ bei $I = 0{,}3314$ --- zehntausend Zeiteinheiten, bis sich etwas entscheidet.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.2 --- Die Glykolyse}
+Das Modell von Selkov: $\dot x = -x + ay + x^{2}y$, $\dot y = b - ay - x^{2}y$ mit $a = 0{,}08$. Für welche $b$ schwingt es?
+
+\loesung
+\schritt{Schritt 1 --- Der Fixpunkt}
+Addieren: $\dot x + \dot y = b - x$, also $x^{*} = b$; aus $\dot y = 0$: $y^{*} = b/(a + b^{2})$.
+
+\schritt{Schritt 2 --- Die Jacobi-Matrix}
+\[ J = \begin{pmatrix} -1 + 2xy & a + x^{2} \\ -2xy & -(a+x^{2}) \end{pmatrix}, \qquad \Delta = (a+x^{2})(1 - 2xy) + 2xy(a+x^{2}) = a + x^{2} > 0 . \]
+Nie ein Sattel; alles hängt an der Spur $\tau = -1 + 2x^{*}y^{*} - a - x^{*2}$.
+
+\schritt{Schritt 3 --- Die Spur im Fixpunkt}
+$2x^{*}y^{*} = 2b^{2}/(a+b^{2})$:
+\[ \tau = \frac{2b^{2}}{a+b^{2}} - 1 - a - b^{2} = \frac{2b^{2} - (1+a+b^{2})(a+b^{2})}{a+b^{2}} = \frac{-b^{4} + (1-2a)\,b^{2} - a(1+a)}{a+b^{2}} . \]
+
+\schritt{Schritt 4 --- Die Hopf-Stellen}
+$\tau = 0$: $b^{4} - 0{,}84\,b^{2} + 0{,}0864 = 0$, $b^{2} = 0{,}42\pm\sqrt{0{,}1764 - 0{,}0864} = 0{,}42\pm0{,}3$:
+\[ b_1 = \sqrt{0{,}12} = 0{,}346, \qquad b_2 = \sqrt{0{,}72} = 0{,}849 . \]
+Zwischen beiden ist $\tau > 0$ und das System schwingt; außerhalb ruht es.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Zwei Hopf-Verzweigungen, wie bei der Herzzelle} --- eine, in der die Schwingung entsteht, eine, in der sie wieder verschwindet. Dazwischen ein Fenster, und außerhalb Ruhe bei zu wenig oder zu viel Zufuhr. Die Glykolyse in Hefezellen schwingt tatsächlich, mit Perioden von Minuten, und nur in einem Fenster der Glukosezufuhr; Selkov fand 1968 das Modell, bevor man den Mechanismus kannte. Die Rechnung ist in jedem Fall dieselbe: Fixpunkt, Determinante, Spur --- und die Nullstellen der Spur sind die Grenzen des Taktes.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.3 --- Der Koeffizient $a$ der Herzzelle}
+Rechnen Sie $a = 0{,}0723$ nach.
+
+\loesung
+\schritt{Schritt 1 --- Die Jacobi-Matrix bei $I_H$}
+$v^{*} = -0{,}9675$: $J = \bigl(\begin{smallmatrix}0{,}064&-1\\0{,}08&-0{,}064\end{smallmatrix}\bigr)$, $\omega = \sqrt{\Delta} = \sqrt{0{,}08 - 0{,}0041} = 0{,}2755$.
+
+\schritt{Schritt 2 --- Die Koordinaten}
+Ein Eigenvektor zu $\mathrm i\omega$ ist $q = (1,\ 0{,}064 - 0{,}2755\,\mathrm i)^{\top}$. Mit $T = (\operatorname{Re} q, -\operatorname{Im} q)$ wird $T^{-1}JT = \bigl(\begin{smallmatrix}0&-\omega\\\omega&0\end{smallmatrix}\bigr)$, und $v - v^{*} = u = x$ (erste Zeile von $T$ ist $(1, 0)$).
+
+\schritt{Schritt 3 --- Die Rücktransformation}
+\[ T = \begin{pmatrix} 1 & 0 \\ 0{,}064 & 0{,}2755 \end{pmatrix}, \qquad T^{-1} = \begin{pmatrix} 1 & 0 \\ -0{,}232 & 3{,}630 \end{pmatrix} . \]
+Die Nichtlinearität steht nur in der ersten Gleichung: $N(u) = -v^{*}u^{2} - u^{3}/3$ mit $u = x$. Nach der Transformation erscheint sie in beiden neuen Gleichungen, mit den Faktoren $c_1 = (T^{-1})_{11} = 1$ und $c_2 = (T^{-1})_{21} = -0{,}232$:
+\[ f_{xx} = c_1\cdot(-2v^{*}) = 1{,}935, \qquad f_{xxx} = -2, \qquad g_{xx} = c_2\cdot(-2v^{*}) = -0{,}449 ; \]
+alle Ableitungen, in denen $y$ vorkommt, verschwinden.
+
+\schritt{Schritt 4 --- Einsetzen}
+\[ a = \frac{f_{xxx}}{16} + \frac{-f_{xx}\,g_{xx}}{16\,\omega} = \frac{-2}{16} + \frac{1{,}935\cdot0{,}449}{4{,}408} = -0{,}125 + 0{,}197 = +0{,}072 . \qquad\checkmark \]
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Vorzeichen von $c_2$ ist die Stelle, an der diese Rechnung meistens scheitert}: Mit $+0{,}232$ käme $a = -0{,}32$ heraus, superkritisch --- und falsch. Der kubische Term $-2/16$ allein wäre stabilisierend --- er bremst große Ausschläge, wie bei van der Pol. Was die Verzweigung subkritisch macht, ist der quadratische Term $-v^{*}u^{2}$, der über die Kopplung $g_{xx}$ in zweiter Ordnung treibend wirkt: Die kubische Nullkline ist bei $v^{*} = -0{,}97$ nicht symmetrisch, und die Asymmetrie gewinnt gegen die Dämpfung. Wer das Vorzeichen eines Lyapunow-Koeffizienten von Hand bestimmt, prüfe es an einer Simulation in beide Richtungen; wer es simuliert, prüfe es an der Formel. Keines von beiden allein ist verlässlich.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Hopf, Andronow und das Pendel von Marsden}
+\Person{Eberhard Hopf} veröffentlichte den Satz 1942 in Leipzig, in den Berichten der Sächsischen Akademie --- mitten im Krieg, auf Deutsch, und zwanzig Jahre lang kaum gelesen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Andronow} hatte den ebenen Fall 1929 in Gorki beschrieben, mit dem Koeffizienten $a$ und seinem Vorzeichen, weshalb der Satz in Russland Andronow-Hopf heißt; Poincaré hatte den Mechanismus 1892 gesehen. \textbf{Die Verbreitung kam 1976 mit dem Buch von \Person{Marsden} und \Person{McCracken}}, das den Satz übersetzte, verallgemeinerte und mit Beispielen aus der Strömungsmechanik versah --- die Entstehung von Wirbeln hinter einem Zylinder ist eine Hopf-Verzweigung, und die Frage, ob super- oder subkritisch, ist dort die Frage, ob die Strömung sanft oder schlagartig umschlägt.}
+\end{minipage}
+\end{center}
+
+\schritt{Der Sinusknoten}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dass der Takt einer Herzzelle hart einsetzen kann, zeigten \Person{Guevara} und \Person{Jongsma} 1990 an isolierten Sinusknotenzellen des Kaninchens: Sie fanden das bistabile Fenster und den Stillstand nach einem einzelnen Reiz. \textbf{Die Theorie hatte die Beobachtung vorhergesagt}, aus dem Vorzeichen eines Koeffizienten, den niemand messen kann.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Hopf heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Bautin-Punkt} & Wo $a$ selbst das Vorzeichen wechselt: Die Verzweigung kippt von super- zu subkritisch, und ein Sattel-Knoten von Zyklen entspringt dort.\\
+\textbf{Kanarden} & In Systemen mit schneller und langsamer Variable --- wie der Herzzelle --- wächst der Zyklus nach der Verzweigung in einem Parameterfenster von $10^{-4}$ von winzig auf voll: die \enquote{Kanardenexplosion}.\\
+\textbf{Hopf in Netzen} & Gekoppelte Zellen: Die Verzweigung des Netzes ist nicht die der Zelle, und ein Netz kann schwingen, obwohl jede Zelle allein ruht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Kanarden heißen so, weil ihre Bahn im Phasenportrait einer Ente gleicht} --- die französischen Mathematiker, die sie 1981 mit Nichtstandard-Analysis entdeckten, fanden das komisch. Der Mechanismus: Nahe der Hopf-Stelle folgt der kleine Zyklus dem mittleren, abstoßenden Ast der kubischen Nullkline ein Stück weit, bevor er abspringt --- eine Bahn entlang einer abstoßenden Kurve, die nur in einem exponentiell schmalen Parameterfenster existiert. Bei der Herzzelle liegt das Fenster bei $I \approx 0{,}3325$, und in einer Simulation sieht man es als Sprung der Amplitude von $0{,}08$ auf $1{,}88$ zwischen $I = 0{,}332$ und $0{,}333$. Für Modelle von Nervenzellen ist die Kanarde der Übergang von einzelnen Aktionspotentialen zum Dauerfeuern, und sie ist der Grund, warum dieser Übergang so abrupt ist.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 5.1} & Hopf: $\dot r = d\mu r + ar^{3}$, Amplitude $\sim\sqrt{|\mu|}$\\
+\textbf{Vorzeichen von $a$} & superkritisch leise, subkritisch hart\\
+\textbf{Die Herzzelle} & $a = +0{,}072$: subkritisch, bistabil zwischen $0{,}3245$ und $0{,}3313$\\
+\textbf{Hysterese} & Sattel-Knoten von Zyklen\\
+\textbf{Der Bruchfall} & am Fixpunkt allein nicht erkennbar\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Sinusknoten schlägt von allein. Die übrigen Zellen des Herzens schlagen, weil er sie treibt --- ein Grenzzyklus, dem von außen ein Takt aufgezwungen wird. Was dabei geschieht, wenn der eigene und der fremde Takt nicht zusammenpassen, ist das nächste Kapitel: Es handelt von Schrittmachern, von Jetlag und von der Frage, warum zwei Pendeluhren an derselben Wand im Gleichtakt gehen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

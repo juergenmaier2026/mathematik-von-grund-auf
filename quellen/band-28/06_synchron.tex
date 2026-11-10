@@ -1,0 +1,342 @@
+\chapter{Ein Takt von außen}
+
+\section{Der Schrittmacher}
+
+\begin{merksatz}
+\boxtitel{Eine erregbare Zelle unter periodischen Reizen}
+Die Zelle ruht ($I = 0$) und erhält alle $T_p$ Zeiteinheiten einen Stoß von $0{,}8$ --- über der Schwelle $0{,}555$. Wie oft antwortet sie?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{2.4cm}P{4.6cm}@{}}
+\toprule
+$T_p$ & \textbf{Antworten je Reiz} & \textbf{Muster}\\
+\midrule
+$40$ & $1$ & $111111\ldots$ --- jeder Reiz ein Schlag\\
+$30$--$20$ & $1/2$ & $101010\ldots$ --- $2\!:\!1$-Block\\
+$18$ & $0{,}43$ & $010101001010\ldots$ --- unregelmäßig\\
+$16$--$14$ & $1/3$ & $010010\ldots$ --- $3\!:\!1$-Block\\
+$13$ & $2/3$ & $110110\ldots$ --- $3\!:\!2$\\
+$12$--$10$ & $1/2$ & $110011\ldots$ --- $4\!:\!2$\\
+$8$ & $0$ & kein Schlag mehr\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Zelle folgt dem Reiz nur, solange er ihr Zeit zur Erholung lässt. Darunter antwortet sie in Brüchen --- und die Brüche sind die Blockbilder des EKG.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein $2\!:\!1$-Block ist keine Störung des Modells, sondern seine Vorhersage}: Nach einem Aktionspotential ist die Zelle etwa $35$ Zeiteinheiten lang nicht erregbar --- $w$ ist noch hoch, die Nullkline verschoben ---, und ein Reiz, der früher kommt, trifft auf eine Zelle, die nicht kann. Die \Begriff{Refraktärzeit} ist die Erholungsphase des Grenzzyklus, und die Verhältnisse $1\!:\!1$, $2\!:\!1$, $3\!:\!2$ sind die Stufen, in denen ein erregbares System einem Takt folgt, der schneller ist als es selbst. Dieses Kapitel erklärt die Stufen --- für Zellen, für Uhren und für den Schlaf.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Phase und ihre Antwort}
+
+\begin{definition}
+\boxtitelm{Definition 6.1 --- Phase und Phasenantwortkurve}
+Auf einem Grenzzyklus der Periode $T$ sei die \Begriff{Phase} $\varphi\in[0,1)$ die seit einem Bezugspunkt --- dem Aufstrich --- verstrichene Zeit, geteilt durch $T$. Ein kurzer Stoß in der Phase $\varphi$ verschiebt den nächsten Aufstrich um $\Delta(\varphi)\cdot T$; die Funktion $\Delta(\varphi)$ heißt \Begriff{Phasenantwortkurve}. $\Delta > 0$ heißt: Der nächste Schlag kommt früher.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Die Phasenantwortkurve der schlagenden Zelle ($I = 0{,}5$, Stoß $+0{,}3$ in $v$)}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}P{1.2cm}@{}}
+\toprule
+$\varphi$ & $0{,}0$ & $0{,}2$ & $0{,}3$ & $0{,}5$ & $0{,}7$ & $0{,}9$\\
+\midrule
+$\Delta$ & $+0{,}007$ & $+0{,}003$ & $-0{,}026$ & $-0{,}002$ & $-0{,}026$ & $+0{,}059$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Während des Aktionspotentials ($\varphi$ bis $0{,}3$) tut der Stoß fast nichts. Kurz vor dem nächsten Aufstrich ($\varphi = 0{,}9$) löst er ihn aus: $6$ Prozent der Periode früher. Dazwischen verzögert er leicht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Phasenantwortkurve ist die Rückkehrabbildung aus Kapitel~3 mit einem Parameter mehr --- dem Zeitpunkt.} Sie ist alles, was man über einen Oszillator wissen muss, um seine Reaktion auf schwache Reize vorherzusagen; die Gestalt des Zyklus selbst braucht man dann nicht mehr. Für Relaxationsoszillatoren wie die Herzzelle ist sie klein und flach bis kurz vor dem Sprung, dann steil: Der Reiz kann den Sprung auslösen, aber nicht das Plateau verkürzen. Für sinusartige Oszillatoren ist sie selbst eine Sinuskurve. Für die circadiane Uhr des Menschen ist sie gemessen: Licht um drei Uhr morgens verschiebt die Uhr um bis zu zwei Stunden vor, Licht um neun Uhr abends um bis zu zwei zurück.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Kreisabbildung}
+
+\begin{merksatz}
+\boxtitel{Satz 6.2 --- vom Fluss zur Abbildung auf dem Kreis}
+Ein Oszillator der Periode $T$ erhalte alle $T_p$ Zeiteinheiten einen Stoß mit Phasenantwort $\Delta$. Die Phase $\varphi_n$ beim $n$-ten Stoß erfüllt
+\[ \varphi_{n+1} = \varphi_n + \Omega + \Delta(\varphi_n) \pmod 1, \qquad \Omega = \frac{T_p}{T} . \]
+Der mittlere Phasenzuwachs je Stoß, die \Begriff{Windungszahl} $\rho = \lim(\varphi_n - \varphi_0)/n$, ist die Zahl der Eigenschläge je Reiz.
+
+\schritt{Beweis}
+Zwischen zwei Stößen läuft die Phase frei um $T_p/T$; der Stoß addiert $\Delta$. Die Windungszahl zählt, wie oft der Aufstrich je Reiz geschieht. $\blacksquare$
+
+\schritt{Das Standardbeispiel}
+Mit $\Delta(\varphi) = \frac{K}{2\pi}\sin 2\pi\varphi$ --- der sinusförmigen Antwort --- heißt die Abbildung \Begriff{Standard-Kreisabbildung} mit Kopplungsstärke $K$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+$K$ & $\Omega = 0{,}45$ & $0{,}48$ & $0{,}50$ & $0{,}52$ & $0{,}55$\\
+\midrule
+$0$ & $0{,}450$ & $0{,}480$ & $0{,}500$ & $0{,}520$ & $0{,}550$\\
+$0{,}5$ & $0{,}449$ & $0{,}482$ & $0{,}500$ & $0{,}518$ & $0{,}551$\\
+$0{,}9$ & $0{,}455$ & $\mathbf{0{,}500}$ & $\mathbf{0{,}500}$ & $\mathbf{0{,}500}$ & $0{,}545$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei $K = 0{,}9$ ist die Windungszahl von $\Omega = 0{,}47$ bis $0{,}53$ genau $\tfrac12$: Der Oszillator schlägt exakt jeden zweiten Reiz --- obwohl sein eigener Takt bis zu sechs Prozent daneben liegt. Das ist Synchronisation.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 6.3 --- Arnold-Zungen}
+Für jeden Bruch $p/q$ gibt es ein Intervall von $\Omega$-Werten, in dem $\rho = p/q$ fest bleibt --- die \Begriff{Arnold-Zunge} zu $p\!:\!q$. Ihre Breite wächst mit $K$: für $1\!:\!1$ wie $K/\pi$, für $1\!:\!2$ wie $K^{2}$, allgemein wie $K^{q}$.
+
+\schritt{Beweis für $1\!:\!1$}
+$\rho = 1$ (oder $0$ mod $1$) heißt: Die Abbildung hat einen Fixpunkt, $\Omega + \frac{K}{2\pi}\sin2\pi\varphi^{*} = 0 \pmod 1$. Das ist lösbar genau für $|\Omega| \le K/2\pi$: Zungenbreite $K/\pi$. Für $p\!:\!q$ braucht man einen Fixpunkt der $q$-fach iterierten Abbildung; die Nichtlinearität geht in der Iteration mit $K^{q}$ ein (Auslassung 6). $\blacksquare$
+
+\schritt{Gemessen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.2cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+$K$ & $1\!:\!2$-Zunge & \textbf{Breite}\\
+\midrule
+$0{,}5$ & $[0{,}490;\ 0{,}510]$ & $0{,}019$\\
+$0{,}9$ & $[0{,}470;\ 0{,}530]$ & $0{,}061$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Verhältnis $3{,}1$ gegen $(0{,}9/0{,}5)^{2} = 3{,}2$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für $K < 1$ sind die Zungen schmal und lassen zwischen sich Platz für irrationale Windungszahlen} --- Quasiperiodizität: Der Oszillator folgt dem Reiz nie, läuft aber auch nie frei, und sein Verlauf wiederholt sich nicht, ohne chaotisch zu sein. Trägt man $\rho$ gegen $\Omega$ auf, erhält man eine Treppe mit unendlich vielen Stufen, deren Gesamtlänge für $K \to 1$ das ganze Intervall ausfüllt: die \Begriff{Teufelstreppe}. Für die Herzzelle sind die Stufen die Blockbilder aus Abschnitt 6.1 --- $1\!:\!1$, $2\!:\!1$, $3\!:\!2$, $3\!:\!1$ --- und ihre Reihenfolge beim Verkürzen von $T_p$ ist, bis auf die Zone bei $T_p = 18$, die einer Teufelstreppe.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zwei Oszillatoren}
+
+\begin{merksatz}
+\boxtitel{Satz 6.4 --- Kuramoto für zwei}
+Zwei Oszillatoren mit Eigenfrequenzen $\omega_1, \omega_2$ und schwacher symmetrischer Kopplung $K$ erfüllen für die Phasendifferenz $\psi = \vartheta_1 - \vartheta_2$
+\[ \dot\psi = \Delta\omega - K\sin\psi, \qquad \Delta\omega = \omega_1 - \omega_2 . \]
+Sie synchronisieren --- $\psi$ läuft gegen einen festen Wert --- genau dann, wenn $|\Delta\omega| \le K$. Die gemeinsame Frequenz ist dann das Mittel, und der Vorsprung des schnelleren beträgt $\psi^{*} = \arcsin(\Delta\omega/K)$.
+
+\schritt{Beweis}
+$\dot\psi = 0$ ist lösbar genau für $|\Delta\omega/K| \le 1$; von den zwei Lösungen ist die mit $\cos\psi^{*} > 0$ anziehend ($\mathrm d\dot\psi/\mathrm d\psi = -K\cos\psi^{*} < 0$). Für $|\Delta\omega| > K$ ist $\dot\psi$ nie null, und $\psi$ wächst --- die Oszillatoren laufen auseinander, mit einer Schwebung der Periode $2\pi/\sqrt{\Delta\omega^{2}-K^{2}}$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Synchronisation ist eine Sattel-Knoten-Verzweigung in der Phasendifferenz: Bei $|\Delta\omega| = K$ verschmelzen der stabile und der instabile Gleichtakt und verschwinden.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist Huygens' Beobachtung von 1665 in einer Zeile}: Zwei Pendeluhren an derselben Wand gehen im Gleichtakt, wenn ihre Gangunterschiede kleiner sind als die Kopplung durch den Balken --- und sie gehen \kursiv{gegen}takt, weil $\cos\psi^{*} > 0$ bei Huygens' Kopplung die Phasendifferenz $\pi$ auswählt. Für das Herz: Sinusknoten und AV-Knoten sind zwei Oszillatoren mit Eigenperioden von etwa $0{,}8$ und $1{,}5$ Sekunden; die Kopplung durch die Leitung ist stark genug, dass der schnellere führt. Fällt sie weg --- der AV-Block ---, laufen beide frei, und das EKG zeigt zwei unabhängige Rhythmen: Vorhof und Kammer, jeder in seinem Takt, Satz 6.4 mit $K = 0$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{$K > 1$: wenn die Zungen sich überlappen}
+Für $K \le 1$ ist die Kreisabbildung umkehrbar: Jede Phase hat genau einen Vorgänger. Für $K > 1$ ist $\varphi + \frac{K}{2\pi}\sin2\pi\varphi$ nicht mehr monoton --- die Abbildung faltet den Kreis.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.4cm}@{}}
+\toprule
+$K < 1$ & Zungen getrennt; dazwischen Quasiperiodizität; Windungszahl eindeutig und stetig in $\Omega$.\\
+$K = 1$ & Zungen füllen das Intervall bis auf eine Menge vom Maß null --- die Teufelstreppe ist vollständig.\\
+$K > 1$ & Zungen überlappen: Bei demselben $\Omega$ sind zwei Windungszahlen möglich, je nach Start. Innerhalb der Zungen Periodenverdopplungen, dann Chaos.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein zu starker Schrittmacher macht die Antwort nicht sicherer, sondern unberechenbar. Die Windungszahl, die eben noch alles erklärte, ist nicht mehr definiert.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Punkt, an dem Teil II in Teil III übergeht.} Die unregelmäßige Zone bei $T_p = 18$ in Abschnitt 6.1 --- Muster $010101001010$, das sich nicht wiederholt --- liegt in einem Bereich überlappender Zungen: Der Stoß von $0{,}8$ ist für die Herzzelle eine starke Kopplung, und die Phasenantwort ist nahe dem Sprung steil genug, um die Abbildung zu falten. \Person{Guevara}, \Person{Glass} und \Person{Shrier} haben 1981 an periodisch gereizten Herzzellen des Hühnerembryos genau diese Folge gesehen: $1\!:\!1$, $2\!:\!1$, $3\!:\!2$ --- und dazwischen Muster ohne Periode, die sich als Chaos einer Kreisabbildung erwiesen. Es war der erste Nachweis von Chaos in einem lebenden Gewebe, und die Abbildung, die es erklärte, war die dieses Kapitels.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.1 --- Die Grenze der $1\!:\!1$-Zunge}
+Ein Sinusknoten mit Eigenperiode $T = 1{,}0$ s wird von einem Schrittmacher mit $T_p = 0{,}92$ s gereizt; die Phasenantwort sei $\Delta(\varphi) = \frac{K}{2\pi}\sin2\pi\varphi$ mit $K = 0{,}4$. Folgt er?
+
+\loesung
+\schritt{Schritt 1 --- $\Omega$}
+$\Omega = T_p/T = 0{,}92$, also $\Omega - 1 = -0{,}08$: Der Schrittmacher ist acht Prozent schneller.
+
+\schritt{Schritt 2 --- Die Bedingung}
+$1\!:\!1$ heißt $\rho = 1$, Fixpunkt: $0{,}92 + \frac{0{,}4}{2\pi}\sin2\pi\varphi^{*} = 1$, also $\sin2\pi\varphi^{*} = 0{,}08\cdot2\pi/0{,}4 = 1{,}257$.
+
+\schritt{Schritt 3 --- Das Urteil}
+Unlösbar ($\sin \le 1$): Der Knoten folgt \kursiv{nicht}. Die Zunge reicht nur bis $|\Omega - 1| \le K/2\pi = 0{,}064$, also $T_p \ge 0{,}936$ s.
+
+\schritt{Schritt 4 --- Was stattdessen geschieht}
+$\rho$ liegt zwischen $0{,}92$ und $1$: Auf etwa $12$ Reize kommen $11$ Schläge --- ein Schlag fällt periodisch aus, oder, bei irrationalem $\rho$, unregelmäßig.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Mit $K = 0{,}6$ wäre die Zunge $0{,}095$ breit, und der Knoten folgte.} Die Stärke der Kopplung ist beim Schrittmacher die Reizamplitude, und die Regel, sie \enquote{mit Sicherheitsfaktor} über die Schwelle zu setzen, ist in der Sprache dieses Kapitels: $K$ so groß wählen, dass $|\Omega - 1|$ in der Zunge liegt --- aber nicht so groß, dass die Zungen überlappen. Zwischen beiden Grenzen liegt das Fenster, in dem ein Schrittmacher verlässlich ist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.2 --- Wenckebach}
+Eine Leitung verzögert jeden Reiz um $d_{n+1} = d_0 + c\,(T_r - (T_p - d_n))$ --- je kürzer die Erholung seit dem letzten geleiteten Reiz, desto länger die Verzögerung --- und blockiert, wenn die Erholung unter $T_r$ fällt. Zeigen Sie, dass daraus das Wenckebach-Muster entsteht: wachsende Verzögerungen, dann ein Ausfall.
+
+\loesung
+\schritt{Schritt 1 --- Die Abbildung}
+Erholung vor dem $(n+1)$-ten Reiz: $E_n = T_p - d_n$. Für $E_n > T_r$ wird geleitet mit $d_{n+1} = d_0 + c(T_r - E_n)$ --- wegen $E_n > T_r$ ist die Klammer negativ; man setze stattdessen die übliche Form $d_{n+1} = d_0 + c\,(T_r - E_n)^{+}$ mit einer Schwelle $T_r$, oberhalb derer $d = d_0$ bleibt: Dann wächst $d$ nur, wenn $E_n < T_r$. Mit $T_p = 1{,}0$, $d_0 = 0{,}2$, $T_r = 0{,}85$, $c = 1{,}5$:
+
+\schritt{Schritt 2 --- Iterieren}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{1.6cm}P{1.8cm}P{2.6cm}@{}}
+\toprule
+$n$ & $d_n$ & $E_n = T_p - d_n$ & \textbf{geleitet?}\\
+\midrule
+$1$ & $0{,}20$ & $0{,}80$ & ja; $d_2 = 0{,}2 + 1{,}5\cdot0{,}05 = 0{,}275$\\
+$2$ & $0{,}275$ & $0{,}725$ & ja; $d_3 = 0{,}2 + 1{,}5\cdot0{,}125 = 0{,}388$\\
+$3$ & $0{,}388$ & $0{,}612$ & ja; $d_4 = 0{,}557$\\
+$4$ & $0{,}557$ & $0{,}443$ & \textbf{blockiert} ($E < 0{,}5$)\\
+$5$ & $0{,}20$ & $1{,}443$ & ja --- Erholung über zwei Reize\\
+\bottomrule
+\end{tabular}}
+\end{center}
+(Block bei $E_n < 0{,}5$ angenommen.) Muster: $4\!:\!3$ --- drei geleitet, einer blockiert, mit Verzögerungen $0{,}20$, $0{,}275$, $0{,}388$, $0{,}557$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Verzögerung wächst von Schlag zu Schlag --- und zwar mit abnehmendem Zuwachs, weil die Abbildung linear ist ---, bis ein Reiz ausfällt. Dann beginnt alles von vorn. Das ist die Wenckebach-Periodik, 1899 am Menschen beschrieben, hier als Fixpunktlosigkeit einer Abbildung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ob die Zuwächse ab- oder zunehmen, entscheidet $c$}: Für $c < 1$ hat die Abbildung einen Fixpunkt --- die Verzögerung pendelt sich ein, jeder Reiz wird geleitet mit konstantem, verlängertem $d$: der AV-Block ersten Grades. Für $c > 1$ gibt es keinen Fixpunkt, $d$ wächst bis zum Ausfall: Wenckebach, Block zweiten Grades. Der Übergang bei $c = 1$ ist eine Verzweigung der Leitung, und $c$ ist die Steigung der Erholungskurve des AV-Knotens --- eine messbare Größe, Kapitel~7.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.3 --- Jetlag}
+Die circadiane Uhr hat eine Eigenperiode von $24{,}2$ Stunden, und Licht verschiebt sie um höchstens $\Delta_{\max} = 2$ Stunden je Tag. Nach einem Flug über acht Zeitzonen nach Osten: Wie viele Tage bis zur Anpassung, und warum ist Westen leichter?
+
+\loesung
+\schritt{Schritt 1 --- Die tägliche Verschiebung}
+Ohne Licht driftet die Uhr um $0{,}2$ Stunden am Tag nach hinten (Periode länger als der Tag). Licht kann sie um bis zu $2$ Stunden vorstellen (Osten) oder zurückstellen (Westen).
+
+\schritt{Schritt 2 --- Osten: $8$ Stunden vor}
+Netto je Tag höchstens $2 - 0{,}2 = 1{,}8$ Stunden: $8/1{,}8 = 4{,}4$, also fünf Tage.
+
+\schritt{Schritt 3 --- Westen: $8$ Stunden zurück}
+Netto je Tag $2 + 0{,}2 = 2{,}2$ Stunden: $8/2{,}2 = 3{,}6$, also vier Tage.
+
+\schritt{Schritt 4 --- Und zwölf Zonen}
+Die Uhr nimmt den kürzeren Weg --- oder nicht: Bei zwölf Stunden ist sie unentschieden, und manche Reisende passen sich \kursiv{rückwärts} an, über $12 + 12$ Stunden statt $12$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist Satz 6.4 mit Zahlen}: $\Delta\omega$ ist der Gangunterschied $0{,}2$ Stunden je Tag, $K$ die Lichtwirkung $2$ Stunden, und der Vorsprung $\arcsin(0{,}2/2)$ ist die feste Phasenlage der inneren Uhr zum Tag --- bei den meisten Menschen etwa eine Stunde hinter der Sonne. Nach dem Flug ist die Phasendifferenz um acht Stunden verstellt, und die Rückkehr zum Fixpunkt dauert so lange, wie die Phasenantwortkurve je Tag erlaubt. Dass die Kurve morgens vorstellt und abends zurückstellt, ist der Grund für die Lichtregel: nach Osten Morgenlicht suchen und Abendlicht meiden, nach Westen umgekehrt. Falsch angewandt verlängert Licht den Jetlag --- ein Stoß in der falschen Phase.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Huygens' Uhren und Arnolds Zungen}
+\Person{Christiaan Huygens}, krank im Bett, beobachtete im Februar 1665 zwei seiner Pendeluhren an derselben Wandhalterung: Sie gingen im Gegentakt, und wenn er sie störte, fanden sie binnen einer halben Stunde wieder zusammen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er nannte es \enquote{sympathie des horloges} und erkannte den Balken als Vermittler --- die erste beschriebene Synchronisation. \textbf{Die Theorie kam zweihundertfünfzig Jahre später}: \Person{van der Pol} 1927 für den getriebenen Oszillator, \Person{Arnold} 1961 für die Kreisabbildung und die Zungen, die seinen Namen tragen, \Person{Winfree} 1967 für Populationen von Oszillatoren und die Phasenantwortkurve, \Person{Kuramoto} 1975 für das Modell, das Satz 6.4 auf $N$ Oszillatoren erweitert und bis heute das Arbeitspferd des Fachs ist.}
+\end{minipage}
+\end{center}
+
+\schritt{Das Herz}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Leon Glass} und \Person{Michael Guevara} in Montreal zeigten 1981 bis 1984, dass die Reaktion von Herzzellen auf periodische Reize eine Kreisabbildung ist --- gemessen über die Phasenantwortkurve, vorhergesagt über die Zungen, bestätigt bis in das Chaos hinein. \textbf{Ihr Buch mit \Person{Mackey} von 1988, \enquote{From Clocks to Chaos}, machte aus der Beobachtung ein Fach}: die Dynamik physiologischer Rhythmen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Synchronisation heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Kuramoto-Netze} & Tausende Oszillatoren auf einem Graphen (Band 16): Wann synchronisiert das Netz, und wer führt?\\
+\textbf{Chimären} & Identische, symmetrisch gekoppelte Oszillatoren, von denen ein Teil synchron läuft und der Rest nicht --- entdeckt 2002, gesehen 2012.\\
+\textbf{Hirnrhythmen} & Epilepsie als übermäßige Synchronisation; tiefe Hirnstimulation als Stoß in der richtigen Phase, der sie löst.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Phasenantwortkurve ist das Werkzeug, mit dem man Synchronisation nicht nur herstellt, sondern auch zerstört}: Ein Stoß in der Phase, in der $\Delta$ am steilsten ist, treibt synchrone Oszillatoren auseinander --- \Person{Tass} hat daraus 2003 die \enquote{koordinierte Rücksetzung} entwickelt, ein Reizmuster für Parkinson-Patienten, das die pathologische Synchronisation der Basalganglien entkoppelt, mit Wirkungen, die über das Ende der Reizung hinaus anhalten. Die Mathematik ist die dieses Kapitels; der klinische Nachweis läuft seit zwanzig Jahren und ist noch nicht abgeschlossen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 6.1} & Phase, Phasenantwortkurve\\
+\textbf{Satz 6.2} & Kreisabbildung, Windungszahl\\
+\textbf{Satz 6.3} & Arnold-Zungen, Breite $\sim K^{q}$, Teufelstreppe\\
+\textbf{Satz 6.4} & zwei Oszillatoren: synchron für $|\Delta\omega| \le K$\\
+\textbf{Der Bruchfall} & $K > 1$: Zungen überlappen, Chaos\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil II hat gezeigt, wie Ruhe zu Takt und Takt zu Gleichtakt wird --- und am Ende, dass zu viel Kopplung den Takt zerstört. Teil III geht diesem Ende nach: Was geschieht, wenn eine Periode sich verdoppelt, dann wieder, und wieder --- und warum am Ende der Verdopplungen ein Verlauf steht, der sich nie wiederholt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

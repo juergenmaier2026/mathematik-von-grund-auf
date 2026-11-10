@@ -1,0 +1,290 @@
+\part{Moleküle, Kristalle, Teilchen}
+
+\chapter{Benzol}
+
+\section{Sechs Elektronen auf einem Ring}
+
+\begin{merksatz}
+\boxtitel{Kekulés Problem}
+Benzol, $\mathrm{C_6H_6}$, ist ein ebener Sechsring, alle C--C-Abstände gleich ($1{,}39$ \AA, zwischen Einfach- $1{,}54$ und Doppelbindung $1{,}34$). Jedes Kohlenstoffatom bindet mit drei $sp^{2}$-Orbitalen in der Ebene seine zwei Nachbarn und ein Wasserstoffatom; übrig bleibt je ein $p_z$-Orbital senkrecht zur Ebene mit einem Elektron. Sechs $p_z$-Orbitale, sechs Elektronen: Wie verteilen sie sich?
+
+\schritt{Hückels Ansatz (1931)}
+Man nimmt die sechs $p_z$-Orbitale $\varphi_1, \dots, \varphi_6$ als Basis, setzt die Energie eines einzelnen auf $\alpha$ und die Kopplung benachbarter auf $\beta < 0$, alles andere null. Der Hamilton-Operator ist die $6\times6$-Matrix
+\[ H = \alpha I + \beta A,\qquad A = \text{Adjazenzmatrix des Sechsecks}, \]
+und die Molekülorbitale sind seine Eigenvektoren. Ohne Symmetrie: ein $6\times6$-Eigenwertproblem. Mit Symmetrie: keines.
+
+\schritt{Die Lösung in einer Zeile}
+$A$ vertauscht mit der Drehung $C_6$ (sie permutiert die $\varphi_i$ zyklisch); die Eigenvektoren von $C_6$ sind die Fourier-Moden auf $\mathbb Z/6$ (Kapitel 12), $\psi_k = \frac1{\sqrt6}\sum_j\omega^{jk}\varphi_j$ mit $\omega = e^{2\pi i/6}$, und $A\psi_k = (\omega^{k} + \omega^{-k})\psi_k = 2\cos(2\pi k/6)\,\psi_k$. Energien:
+\begin{align*} E_k &= \alpha + 2\beta\cos\frac{2\pi k}6\colon\\ &\alpha + 2\beta\ (k = 0),\quad\alpha + \beta\ (k = \pm1),\quad\alpha - \beta\ (k = \pm2),\quad\alpha - 2\beta\ (k = 3). \end{align*}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8, every node/.style={font=\small}]
+\draw[grau] (-0.5,0) -- (6.5,0) node[right] {$\alpha$};
+\foreach \y/\x/\lab/\occ in {-2/2.8/{$A_{2u}$ \ $\alpha+2\beta$}/1, -1/1.5/{$E_{1g}$ \ $\alpha+\beta$}/1, -1/3.3/{}/1, 1/1.5/{$E_{2u}$ \ $\alpha-\beta$}/0, 1/3.3/{}/0, 2/2.8/{$B_{2g}$ \ $\alpha-2\beta$}/0}{
+  \draw[tief, very thick] (\x,\y) -- (\x+1.2,\y);
+  \ifnum\occ=1 \draw[akzent,-latex] (\x+0.45,\y-0.3) -- (\x+0.45,\y+0.3); \draw[akzent,latex-] (\x+0.75,\y-0.3) -- (\x+0.75,\y+0.3); \fi
+}
+\node[anchor=west] at (4.7,-2) {$A_{2u}$: $\alpha + 2\beta$};
+\node[anchor=west] at (4.7,-1) {$E_{1g}$: $\alpha + \beta$};
+\node[anchor=west] at (4.7,1) {$E_{2u}$: $\alpha - \beta$};
+\node[anchor=west] at (4.7,2) {$B_{2g}$: $\alpha - 2\beta$};
+\node[anchor=east] at (1.2,-2) {$k = 0$};
+\node[anchor=east] at (1.2,-1) {$k = \pm1$};
+\node[anchor=east] at (1.2,1) {$k = \pm2$};
+\node[anchor=east] at (1.2,2) {$k = 3$};
+\end{tikzpicture}
+\end{center}
+Sechs Elektronen füllen die drei untersten Orbitale ($\beta < 0$): Gesamtenergie $2(\alpha + 2\beta) + 4(\alpha + \beta) = 6\alpha + 8\beta$. Drei isolierte Doppelbindungen (Kekulés Strukturformel) hätten $6\alpha + 6\beta$. Die Differenz $2\beta\approx-150$ kJ/mol ist die \Begriff{Delokalisierungsenergie} --- der Grund, warum Benzol stabil ist und sich nicht wie ein Alken verhält.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Hückel-Matrix ist zirkulant, also diagonalisiert sie die Fourier-Transformation auf $\mathbb Z/6$. Die Orbitale sind Fourier-Moden, die Energien $\alpha + 2\beta\cos(2\pi k/n)$; die vollständige Schale bei sechs Elektronen ist die Aromatizität.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Teil V wendet an.} Kein neuer Satz mehr; die Kapitel 13 und 14 nehmen Moleküle, Kristalle und Elementarteilchen und rechnen mit dem, was steht. Dieses Kapitel nimmt das Benzol vollständig auseinander: die $\pi$-Orbitale nach $D_{6h}$ sortiert (sie sind $A_{2u}, E_{1g}, E_{2u}, B_{2g}$), die Hückel-Regel $4n + 2$ aus der Kosinus-Formel, die Auswahlregeln für die Elektronenanregung --- und der Bruchfall: Die bekannteste Bande des Benzols, bei $260$ nm, ist symmetrieverboten und trotzdem da.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die $\pi$-Orbitale nach Symmetrie}
+
+\begin{merksatz}
+\boxtitel{Satz 13.1 --- $\Gamma_\pi = A_{2u} + E_{1g} + E_{2u} + B_{2g}$}
+Die sechs $p_z$-Orbitale tragen eine Darstellung $\Gamma_\pi$ von $D_{6h}$ mit Charakter (Klassen wie in Kapitel 5: $E, 2C_6, 2C_3, C_2, 3C_2', 3C_2'', i, 2S_3, 2S_6, \sigma_h, 3\sigma_d, 3\sigma_v$)
+\[ \chi_\pi = (6, 0, 0, 0, -2, 0, 0, 0, 0, -6, 0, 2) = A_{2u} + E_{1g} + E_{2u} + B_{2g} . \]
+Die Hückel-Orbitale $\psi_0, \psi_{\pm1}, \psi_{\pm2}, \psi_3$ tragen der Reihe nach $A_{2u}$, $E_{1g}$, $E_{2u}$, $B_{2g}$.
+
+\schritt{Der Charakter}
+Wie in Satz 6.1: ungerückte Atome mal Vorzeichen von $p_z$. $C_2'$ (Achse durch zwei Atome, in der Ebene): zwei Atome bleiben, $p_z\to-p_z$: $-2$. $C_2''$ (durch Kantenmitten): kein Atom bleibt: $0$. $\sigma_h$: alle sechs bleiben, $p_z\to-p_z$: $-6$. $\sigma_v$ (durch Atome, enthält $z$): zwei bleiben, $p_z$ unverändert: $2$. $\sigma_d$: $0$. Alle Drehungen um $z$, $i$, $S_3$, $S_6$: kein Atom bleibt: $0$.
+
+\schritt{Zerlegung}
+Mit der $D_{6h}$-Tafel ($D_6\times C_i$, Kapitel 5) und $|G| = 24$: $m_{A_{2u}} = \frac1{24}\bigl(6 + 3\cdot(-2)(-1) + (-6)(-1) + 3\cdot2\cdot1\bigr) = \frac{24}{24} = 1$ ($A_{2u}$ hat $-1$ auf $C_2'$, $-1$ auf $\sigma_h$, $+1$ auf $\sigma_v$); $m_{B_{2g}} = \frac1{24}(6 + 6 + 6 + 6) = 1$; $m_{E_{1g}} = \frac1{24}(12 + 0 + 12 + 0) = 1$; $m_{E_{2u}} = \frac1{24}(12 + 0 + 12 + 0) = 1$. Dimension $1 + 2 + 2 + 1 = 6$. \checkmark
+
+\schritt{Zuordnung}
+$\psi_0 = \frac1{\sqrt6}\sum\varphi_j$ ist unter $C_6$ invariant ($A$ oder $B$ mit $\chi(C_6) = 1$: $A$), unter $\sigma_h$ negativ ($u$), unter $C_2'$ negativ: $A_{2u}$. $\psi_3 = \frac1{\sqrt6}\sum(-1)^{j}\varphi_j$: $\chi(C_6) = -1$ ($B$), $g$ unter Inversion ($i$ schickt Atom $j$ nach $j + 3$ und kehrt $p_z$ um: $(-1)^{3}\cdot(-1) = +1$): $B_{2g}$. Die Paare $\psi_{\pm1}$ ($\chi(C_6) = \omega + \omega^{-1} = 1$: $E_1$) und $\psi_{\pm2}$ ($\chi(C_6) = -1$: $E_2$), mit $g/u$ wie oben: $E_{1g}$, $E_{2u}$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die besetzten Orbitale sind $A_{2u}$ und $E_{1g}$, die leeren $E_{2u}$ und $B_{2g}$. Besetzt und leer unterscheiden sich in der Parität: $u, g$ unten, $u, g$ oben --- in genau der Reihenfolge, die für die Auswahlregeln zählt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Zahl der Knoten} steigt mit der Energie: $\psi_0$ hat keine Knotenebene senkrecht zum Ring, $\psi_{\pm1}$ eine, $\psi_{\pm2}$ zwei, $\psi_3$ drei (jede zweite Bindung). Das ist die Fourier-Frequenz $k$, sichtbar gemacht. Für den Chemiker: Die Zahl der Knotenebenen bestimmt den Index von $E$ ($E_1$: eine, $E_2$: zwei), und $B$ heißt: Vorzeichenwechsel bei jeder $C_6$-Drehung. Die Rastertunnelmikroskopie zeigt die Orbitale heute direkt --- die ersten Bilder der Hückel-Orbitale einzelner Moleküle auf Oberflächen stammen von 2005 (Repp et al., Pentacen).}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Hückels Regel}
+
+\begin{merksatz}
+\boxtitel{Satz 13.2 --- $4n + 2$}
+Für einen ebenen Ring aus $N$ Kohlenstoffatomen mit je einem $p_z$-Elektron sind die Hückel-Energien $E_k = \alpha + 2\beta\cos(2\pi k/N)$, $k = 0, \pm1, \dots$: ein nichtentartetes Orbital unten, dann Paare. Eine abgeschlossene Schale (alle besetzten Orbitale voll, keines halb) entsteht genau dann, wenn $N = 4n + 2$ Elektronen vorhanden sind. Für $N = 4n$ ist das oberste besetzte Paar halb gefüllt: ein offenschaliger, nach Hund paramagnetischer Grundzustand.
+
+\schritt{Beweis}
+Die Energien sind die Eigenwerte der Adjazenzmatrix des $N$-Ecks, die mit $C_N$ vertauscht, also durch die Fourier-Moden $\psi_k$ diagonalisiert wird: $A\psi_k = (\omega^{k} + \omega^{-k})\psi_k$ mit $\omega = e^{2\pi i/N}$. $k = 0$ gibt $2$; $k$ und $-k$ geben dasselbe (Paar); für gerades $N$ gibt $k = N/2$ den Wert $-2$, allein. Mit $2$ Elektronen je Orbital: $2$ für $k = 0$, dann je $4$ pro Paar; die Schale ist nach $2 + 4n$ Elektronen voll. $\blacksquare$
+
+\schritt{Beispiele}
+Benzol $N = 6 = 4\cdot1 + 2$: aromatisch. Cyclobutadien $N = 4$: zwei Elektronen in einem entarteten Paar bei $\alpha$, Triplett nach Hund --- tatsächlich verzerrt sich das Molekül zu einem Rechteck und hebt die Entartung auf (Jahn--Teller, Kapitel 14); \enquote{antiaromatisch}. Cyclooctatetraen $N = 8$: ebenfalls $4n$, ist nicht eben, sondern wannenförmig, und verhält sich wie vier Doppelbindungen. Cyclopentadienyl-Anion $\mathrm{C_5H_5^{-}}$: $6$ Elektronen auf $5$ Atomen, aromatisch --- der Ligand im Ferrocen. $\mathrm{C_7H_7^{+}}$ (Tropylium): $6$ auf $7$, aromatisch.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$4n + 2$ ist die Zahl der Elektronen, die $k = 0$ und $n$ Paare $\pm k$ füllt. Die Regel folgt allein aus der zyklischen Symmetrie des Rings; die Zahl $2$ ist der Spin, die $4$ ist $2\times2$ für ein entartetes Paar.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Entartung der Paare ist Schurs Lemma für $C_N$ über $\mathbb R$} --- die Darstellungen $\psi_k$ und $\psi_{-k}$ sind komplex konjugiert (Bruchfall Kapitel 5), und ein reeller Hamilton-Operator hat auf ihnen dieselbe Energie. Für $D_{Nh}$ sind sie ein echtes zweidimensionales $E$. Die Regel ist eine Näherung: Hückel vernachlässigt Elektron-Elektron-Wechselwirkung und Überlappung nichtbenachbarter Atome; aber die Zuordnung der Orbitale zu Symmetrietypen und die Zahl $4n + 2$ überleben jede Verfeinerung, weil sie Darstellungstheorie sind, nicht Hückel-Theorie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Elektronenspektrum}
+
+\begin{merksatz}
+\boxtitel{Satz 13.3 --- die $\pi\to\pi^{*}$-Übergänge des Benzols}
+Die niedrigste Anregung hebt ein Elektron von $E_{1g}$ (HOMO) nach $E_{2u}$ (LUMO). Der angeregte Zustand trägt $E_{1g}\otimes E_{2u} = B_{1u} + B_{2u} + E_{1u}$ --- drei Zustände (je Spin-Singulett). Elektrische Dipolübergänge aus dem Grundzustand $A_{1g}$ sind erlaubt nach $A_{2u}$ ($z$) und $E_{1u}$ ($x, y$). Also: \textbf{ein} erlaubter Übergang ($E_{1u}$), \textbf{zwei} verbotene ($B_{1u}$, $B_{2u}$).
+
+\schritt{Rechnung}
+In $D_6$: $E_1\otimes E_2 = (4, -1, 1, -4, 0, 0)$; $m_{B_1} = \frac1{12}(4 + 2 + 2 + 4) = 1$, $m_{B_2} = 1$, $m_{E_1} = \frac1{12}(8 - 2 - 2 + 8) = 1$. Parität: $g\otimes u = u$. Dipol: $\langle A_{1g}|\vec x|\Gamma\rangle\neq0$ braucht $\Gamma\subset\Gamma_{\mathrm{trans}} = A_{2u} + E_{1u}$ (Satz 6.3, Schur).
+
+\schritt{Das Spektrum}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{1.8cm}P{1.8cm}P{1.6cm}P{3.2cm}@{}}
+\toprule
+Zustand & Lage (nm) & Lage (eV) & erlaubt? & Intensität $\varepsilon$ (l/mol$\cdot$cm)\\
+\midrule
+$B_{2u}$ & $\approx255$ & $4{,}9$ & nein & $\approx200$\\
+$B_{1u}$ & $\approx205$ & $6{,}2$ & nein & $\approx7000$\\
+$E_{1u}$ & $\approx180$ & $6{,}9$ & ja & $\approx50\,000$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die erlaubte Bande ist $250$-mal stärker als die bei $255$ nm. Aber die verbotene ist \emph{da} --- der Bruchfall.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{HOMO mal LUMO, zerlegen, mit $\Gamma_{\mathrm{trans}}$ vergleichen: Von drei angeregten Zuständen ist einer erlaubt. Die Intensitäten im Spektrum folgen der Regel um Größenordnungen --- aber nicht auf null.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Bande, die es nicht geben dürfte --- und was sie verrät}
+Die Benzolbande bei $255$ nm ist nach Satz 13.3 verboten. Sie ist schwach ($\varepsilon\approx200$ statt $50\,000$), aber deutlich, und sie hat eine Feinstruktur: eine Folge von Linien im Abstand von $\approx920$ cm$^{-1}$.
+
+\schritt{Herzberg--Teller-Kopplung}
+Die Auswahlregel gilt für die Gleichgewichtsgeometrie. Schwingt das Molekül, ist seine Symmetrie momentan niedriger, und der Übergang \enquote{leiht} sich Intensität vom erlaubten $E_{1u}$. Der vibronische Zustand $B_{2u}\otimes\Gamma_{\mathrm{vib}}$ ist erlaubt, wenn er $E_{1u}$ enthält: $B_{2u}\otimes\Gamma_{\mathrm{vib}}\ni E_{1u}$ genau für $\Gamma_{\mathrm{vib}} = E_{2g}$ (in $D_6$: $B_2\otimes E_2 = E_1$ \checkmark). Benzol hat vier $E_{2g}$-Schwingungen (Kapitel 6, Aufgabe 6.3); die bei $606$ cm$^{-1}$ ($\nu_6$) ist die, die den Übergang trägt. Die Feinstruktur im Abstand $920$ ist die Ringatmung $\nu_1$ ($A_{1g}$, im angeregten Zustand $923$ statt $992$), die beliebig oft dazu angeregt werden kann.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Verboten heißt schwach} & Die Regel sagt $\partial\mu = 0$ in nullter Ordnung; die erste Ordnung (Herzberg--Teller 1933) ist um den Faktor $\langle\partial H/\partial Q\rangle/\Delta E$ unterdrückt --- $10^{-2}$ bis $10^{-3}$ in der Intensität, nicht null.\\
+\textbf{Die Regel bestimmt die Feinstruktur} & Nur $E_{2g}$-Schwingungen können $B_{2u}$ aktivieren. Die $0$--$0$-Linie fehlt im Spektrum (sie wäre rein elektronisch, also streng verboten); jede sichtbare Linie enthält ein Quant $\nu_6$. Das Fehlen der $0$--$0$-Linie \emph{beweist} die $D_{6h}$-Symmetrie.\\
+\textbf{Spin} & Alle Zustände hier sind Singuletts. Die Triplett-Zustände liegen tiefer ($T_1$ bei $\approx3{,}7$ eV) und sind spinverboten --- Phosphoreszenz mit Sekunden Lebensdauer, sichtbar erst in gefrorenen Lösungen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine verbotene Bande ist nicht abwesend, sondern schwach und ohne $0$--$0$-Linie. Der Bruch der Auswahlregel folgt selbst einer Auswahlregel --- welche Schwingung ihn vermittelt --- und ist damit ein Beweis für die Symmetrie, nicht gegen sie.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dasselbe Phänomen färbt Übergangsmetallkomplexe}: $d$--$d$-Übergänge in Oktaedern sind alle paritätsverboten ($g\to g$, Laporte-Regel), und $[\mathrm{Ti(H_2O)_6}]^{3+}$ ist trotzdem violett, $[\mathrm{Cu(H_2O)_6}]^{2+}$ blau --- schwach ($\varepsilon\approx5$--$50$), vibronisch erlaubt durch $u$-Schwingungen des Oktaeders. Tetraederkomplexe ohne Inversionszentrum sind zehn- bis hundertmal intensiver gefärbt ($\mathrm{CoCl_4^{2-}}$ tiefblau). Die Blässe der Oktaeder und die Kräftigkeit der Tetraeder ist Satz 6.3c für Elektronen. Und das Blut: Die Soret-Bande des Häms bei $415$ nm ($\varepsilon\approx10^{5}$) ist ein erlaubter $\pi\to\pi^{*}$-Übergang des Porphyrinrings, der ein $D_{4h}$-Analogon des Benzols ist; die $d$--$d$-Übergänge des Eisens sind unsichtbar daneben.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.1 --- Cyclobutadien}
+Bestimmen Sie für das quadratische $\mathrm{C_4H_4}$ ($D_{4h}$) die Symmetrien und Energien der $\pi$-Orbitale und den Grundzustand nach Hückel.
+
+\loesung
+\schritt{Schritt 1 --- Energien}
+$E_k = \alpha + 2\beta\cos(2\pi k/4)$: $k = 0\colon\alpha + 2\beta$; $k = \pm1\colon\alpha$; $k = 2\colon\alpha - 2\beta$.
+
+\schritt{Schritt 2 --- Charakter}
+$D_{4h}$-Klassen $E, 2C_4, C_2, 2C_2', 2C_2'', i, 2S_4, \sigma_h, 2\sigma_v, 2\sigma_d$ ($C_2'$ und $\sigma_v$ durch Atome). $\chi_\pi = (4, 0, 0, -2, 0, 0, 0, -4, 2, 0)$: $C_2'$ lässt zwei Atome, kehrt $p_z$ um; $\sigma_h$ kehrt alle um; $\sigma_v$ lässt zwei Atome, $p_z$ fest.
+
+\schritt{Schritt 3 --- Zerlegung}
+$D_{4h} = D_4\times C_i$ mit der $C_{4v}$-Tafel aus Kapitel 5 (als $D_4$ gelesen). $m_{A_{2u}} = \frac1{16}(4 + 2\cdot2 + 4 + 2\cdot2) = 1$; $m_{E_g} = \frac1{16}(8 + 0 + 8 + 0) = 1$; $m_{B_{2u}} = \frac1{16}(4 + 4 + 4 + 4) = 1$ ($B_2$ hat $+1$ auf $C_2''$, $-1$ auf $C_2'$; $B_{2u}$ also $+1$ auf $\sigma_v = i\cdot C_2'$). $\Gamma_\pi = A_{2u} + E_g + B_{2u}$, $1 + 2 + 1 = 4$. \checkmark\ Zuordnung: $k = 0\to A_{2u}$ ($\alpha + 2\beta$), $k = \pm1\to E_g$ ($\alpha$), $k = 2\to B_{2u}$ ($\alpha - 2\beta$).
+
+\schritt{Schritt 4 --- Grundzustand}
+Vier Elektronen: zwei in $A_{2u}$, zwei in das entartete $E_g$. Nach Hund parallel: Triplett, Symmetrie $\mathrm{Alt}^{2}E_g = A_{2g}$ (Satz 9.3: $\chi_{\mathrm{Alt}^{2}E} = \frac12(\chi_E^{2} - \chi_E(g^{2})) = \frac12\bigl((4, 0, 4, 0, 0) - (2, -2, 2, 2, 2)\bigr) = (1, 1, 1, -1, -1) = A_2$). Ein entarteter Grundzustand eines nichtlinearen Moleküls ist instabil (Jahn--Teller, Kapitel 14): Cyclobutadien verzerrt sich zum Rechteck ($D_{2h}$), die $E_g$-Entartung spaltet, und der wirkliche Grundzustand ist ein Singulett mit zwei kurzen und zwei langen Bindungen --- so beobachtet in Matrixisolation bei $8$ K (Lin--Krantz 1972, Masamune 1978).
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Hückel sagt Triplett, die Natur zeigt Singulett}: Die Hückel-Näherung hat die Elektronenabstoßung weggelassen, die das Singulett in offener Schale begünstigt, und die Kern-Elektron-Kopplung, die die Verzerrung antreibt. Was bleibt: Die Symmetrieanalyse --- $A_{2u}$ unten, entartetes $E_g$ in der Mitte, $B_{2u}$ oben, Entartung bei $4n$ --- ist exakt, und sie ist der Grund, warum Cyclobutadien überhaupt verzerren \emph{muss}. Ein Molekül mit entartetem elektronischem Grundzustand gibt es in der Natur (fast) nicht.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.2 --- Naphthalin ohne Ring}
+Naphthalin ($\mathrm{C_{10}H_8}$, zwei kondensierte Ringe) hat $D_{2h}$. Bestimmen Sie $\Gamma_\pi$ der zehn $p_z$-Orbitale aus dem Charakter, und begründen Sie, warum keine Entartung auftritt und das Hückel-Problem trotzdem in kleine Blöcke zerfällt.
+
+\loesung
+\schritt{Schritt 1 --- Geometrie}
+Molekül in der $xy$-Ebene, lange Achse $x$. $D_{2h} = \{E, C_2(z), C_2(y), C_2(x), i, \sigma(xy), \sigma(xz), \sigma(yz)\}$. Atome: zwei auf der $y$-Achse (die Brücke), acht außerhalb aller Achsen.
+
+\schritt{Schritt 2 --- Charakter}
+$E\colon10$. $C_2(z)$: kein Atom bleibt (die Brückenatome liegen auf $y$, nicht auf $z$): $0$. $C_2(y)$: zwei Brückenatome bleiben, $p_z\to-p_z$: $-2$. $C_2(x)$: $0$. $i\colon0$. $\sigma(xy) = \sigma_h$: alle bleiben, $p_z$ umgekehrt: $-10$. $\sigma(xz)$: kein Atom (die Brücke liegt in $yz$): $0$. $\sigma(yz)$: zwei Brückenatome, $p_z$ fest: $2$. $\chi_\pi = (10, 0, -2, 0, 0, -10, 0, 2)$.
+
+\schritt{Schritt 3 --- Zerlegung}
+$D_{2h}$ hat acht eindimensionale Darstellungen (Aufgabe 5.3). $m_\Gamma = \frac18\sum\chi_\pi\chi_\Gamma$. Nur vier Klassen tragen bei. Mit $B_{1u}$ ($z$; $+1$ auf $C_2(z)$, $-1$ auf $C_2(y), C_2(x)$; $u$): $\frac18(10 + 2 + 10 + 2) = 3$. $B_{2g}$ ($xz$; $-1$ auf $C_2(z)$, $+1$ auf $C_2(y)$, $-1$ auf $C_2(x)$; $g$): $\frac18(10 - 2 + 10 - 2)$ --- Vorsicht mit Vorzeichen: $\chi_{B_{2g}}(\sigma(xy)) = \chi_{B_2}(C_2(z)) = -1$, $\chi_{B_{2g}}(\sigma(yz)) = \chi_{B_2}(C_2(x)) = -1$: $\frac18(10 - 2 + 10 - 2) = 2$. $A_u$: $\frac18(10 - 2 - 10 - 2)\cdot$ --- $A_u(\sigma(xy)) = -1$, $A_u(\sigma(yz)) = -1$, $A_u(C_2(y)) = 1$: $\frac18(10 - 2 + 10 - 2) = 2$. $B_{3g}$ ($yz$; $-1, -1, +1$ auf $C_2(z), C_2(y), C_2(x)$): $\frac18(10 + 2 + 10 + 2) = 3$. Summe $3 + 2 + 2 + 3 = 10$. \checkmark\ $\Gamma_\pi = 3B_{1u} + 2B_{2g} + 2A_u + 3B_{3g}$. (Die anderen vier Darstellungen sind $g$ mit $+1$ auf $\sigma_h$ oder $u$ mit $-1$ --- sie geben $\frac18(10 \pm \dots - 10\dots) = 0$.)
+
+\schritt{Schritt 4 --- Blöcke}
+Alle Darstellungen eindimensional: keine Symmetrieentartung. Aber die Hückel-Matrix vertauscht mit $D_{2h}$, zerfällt also in Blöcke der Größen $3, 2, 2, 3$ --- statt eines $10\times10$-Problems zwei $3\times3$ und zwei $2\times2$. Die zehn Energien sind $\alpha + x_i\beta$ mit $x = \pm2{,}303, \pm1{,}618, \pm1{,}303, \pm1{,}000, \pm0{,}618$; $\pm1{,}618 = \pm\phi$ und $\pm0{,}618 = \pm1/\phi$ kommen aus den $2\times2$-Blöcken (Goldener Schnitt!), die anderen aus den $3\times3$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Goldene Schnitt im Naphthalin}: Die $2\times2$-Blöcke haben die charakteristische Gleichung $x^{2} - x - 1 = 0$ (für $B_{2g}$) bzw.\ $x^{2} + x - 1 = 0$ ($A_u$), deren Lösungen $\phi, -1/\phi$ und $1/\phi, -\phi$ sind. Dasselbe $\phi$ erscheint in den Hückel-Energien des Cyclopentadienyls ($\alpha + 2\beta\cos72^{\circ} = \alpha + \beta/\phi$) und im Ikosaeder (Kapitel 14). Die Delokalisierungsenergie des Naphthalins, $3{,}68\beta$, ist größer als die zweier Benzole ($4\beta$)? Nein --- kleiner, und genau das macht Naphthalin reaktiver als Benzol.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.3 --- Die erlaubte Bande ist entartet}
+Der $E_{1u}$-Zustand des Benzols ist zweifach entartet. Wie polarisiert ist die Absorption? Und was passiert mit den drei Banden in Toluol ($\mathrm{C_6H_5CH_3}$, $C_{2v}$)?
+
+\loesung
+\schritt{Schritt 1 --- Polarisation}
+$E_{1u}$ trägt $(x, y)$: Der Übergang wird von Licht angeregt, dessen elektrischer Vektor in der Ringebene liegt, in jeder Richtung der Ebene gleich stark (die beiden Komponenten sind entartet). Licht senkrecht zur Ebene ($z$, $A_{2u}$) regt $E_{1u}$ nicht an. In Kristallen oder orientierten Filmen ist das messbar: Die $180$-nm-Bande ist \enquote{in-plane} polarisiert.
+
+\schritt{Schritt 2 --- $D_{6h}\downarrow C_{2v}$}
+Toluol: Die $C_2$-Achse geht durch die Methylgruppe und das gegenüberliegende Atom ($x$-Achse von $D_{6h}$, eine $C_2'$); erhalten bleiben $E$, dieses $C_2'$, $\sigma_h$ (jetzt eine $\sigma_v$ von $C_{2v}$: die Molekülebene) und die $\sigma_v$ durch die Achse. Einschränkung (Kapitel 7): $A_{1g}\to A_1$; $E_{1u}\to$ Spalten $E, C_2', \sigma_h, \sigma_v$ der $E_{1u}$-Zeile: $E_{1u}(E) = 2$, $E_{1u}(C_2') = 0$, $E_{1u}(\sigma_h) = -E_1(C_2) = 2$, $E_{1u}(\sigma_v) = -E_1(C_2'') = 0$; also $(2, 0, 2, 0) = A_1 + B_2$ (mit der $C_{2v}$-Tafel, die Molekülebene als $\sigma(yz)$ gelesen): zwei nichtentartete, in der Ebene polarisierte Zustände. $B_{1u}\to(1, 1, 1, -1)$ bzw.\ $B_{2u}\to(1, -1, 1, 1)$: je $A_1$ oder $B_2$ --- beide \emph{erlaubt} in $C_{2v}$, wo $A_1, B_1, B_2$ alle den Dipol tragen.
+
+\schritt{Schritt 3 --- Spektrum}
+Toluol zeigt die $E_{1u}$-Bande aufgespalten in zwei, und die beiden vormals verbotenen Banden gewinnen Intensität --- die $260$-nm-Bande des Toluols ($\varepsilon\approx300$) hat eine $0$--$0$-Linie, die dem Benzol fehlt. Jede Substitution am Ring bricht $D_{6h}$ und \enquote{erlaubt} das Verbotene; die Stärke der $0$--$0$-Linie misst, wie sehr.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Methode der UV-Spektroskopie aromatischer Verbindungen} (Platt 1949, Clar): Die Banden werden nach ihrer Herkunft im Benzol benannt ($L_b, L_a, B$ bei Platt), und ihre Verschiebungen und Intensitätsgewinne lesen den Substituenten ab. Die Aminosäuren Tryptophan, Tyrosin, Phenylalanin absorbieren bei $280$, $275$, $257$ nm --- Benzolringe mit Substituenten ---, und die Proteinkonzentration im Labor wird bei $280$ nm gemessen, weil dort Tryptophans $L_a$-Bande liegt. Darstellungstheorie, die täglich in jedem biochemischen Labor benutzt wird, ohne dass jemand $D_{6h}$ sagt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Hückel, 1931}
+\Person{Erich Hückel} veröffentlichte 1931--32 drei Arbeiten \enquote{Quantentheoretische Beiträge zum Benzolproblem}, in denen die Methode, die Energien $\alpha + 2\beta\cos(2\pi k/N)$ und die $4n + 2$-Regel (die den Namen erst später erhielt) stehen. Er war Physiker, Schüler von Debye und Bohr, Bruder des Chemikers Walter Hückel, und seine Arbeit wurde von Chemikern zwei Jahrzehnte kaum beachtet.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Die Symmetrie war von Anfang an dabei}: Hückel benutzte die zyklische Symmetrie zur Diagonalisierung, ohne sie Darstellungstheorie zu nennen; \Person{Mulliken} ordnete 1933 die Orbitale den Symmetrietypen zu. Die vibronische Erklärung der $260$-nm-Bande gaben \Person{Herzberg} und \Person{Teller} 1933, \Person{Sklar} 1937 die Zuordnung zu $B_{2u}$; \Person{Platt} 1949 das Schema für alle Aromaten. \Person{Coulson} und \Person{Longuet-Higgins} entwickelten 1947--50 die Hückel-Theorie zur Störungstheorie der Reaktivität, \Person{Woodward} und \Person{Hoffmann} 1965 die Orbitalsymmetrie-Regeln für Reaktionen (Nobelpreis Hoffmann 1981, mit Fukui) --- Darstellungstheorie, die vorhersagt, welche Ringschlüsse thermisch und welche photochemisch gelingen. Hückel erhielt nie den Nobelpreis; er starb 1980 in Marburg.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Aromaten heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Graphen} & Ein unendlicher Benzolring: Hückel auf dem Wabengitter gibt das Bandspektrum $E(\vec k) = \alpha\pm\beta|1 + e^{i\vec k\vec a_1} + e^{i\vec k\vec a_2}|$ mit den Dirac-Punkten, an denen Valenz- und Leitungsband sich berühren (Wallace 1947; Geim--Novoselov 2004, Nobelpreis 2010). Die Symmetriegruppe ist eine Raumgruppe, Kapitel 14.\\
+\textbf{Aromatizität vermessen} & NICS (Schleyer 1996): die magnetische Abschirmung im Ringzentrum als Maß für Ringströme; Möbius-Aromaten mit $4n$ Elektronen und einer Verdrillung (Heilbronner 1964 vorhergesagt, 2003 synthetisiert); dreidimensionale Aromatizität in Boranen und Fullerenen.\\
+\textbf{Hückel exakt?} & Für Benzol stimmt Hückel qualitativ; quantitative Spektren brauchen Vielteilchenmethoden (CASPT2, EOM-CC). Die drei Zustände $B_{2u}, B_{1u}, E_{1u}$ sind seit 2000 auf $0{,}1$ eV berechnet; ihre Symmetrie war seit 1937 richtig.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Hückel} & $H = \alpha I + \beta A$, Fourier auf $\mathbb Z/N$, $E_k = \alpha + 2\beta\cos(2\pi k/N)$\\
+\textbf{Satz 13.1} & $\Gamma_\pi = A_{2u} + E_{1g} + E_{2u} + B_{2g}$, Energieordnung\\
+\textbf{Satz 13.2} & $4n + 2$; Cyclobutadien $4n$, Jahn--Teller\\
+\textbf{Satz 13.3} & $E_{1g}\otimes E_{2u} = B_{1u} + B_{2u} + E_{1u}$; ein erlaubter Übergang\\
+\textbf{Der Bruchfall} & Herzberg--Teller: verboten heißt schwach, ohne $0$--$0$-Linie, vermittelt durch $E_{2g}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kapitel 14 verlässt das einzelne Molekül: Kristalle mit ihren $230$ Raumgruppen, das Eisen im Hämoglobin in seinem Kristallfeld, und die Quarks, die Gell-Mann mit $SU(3)$ sortierte --- drei Anwendungen, drei Bruchfälle, keine neue Mathematik.}
+\end{minipage}
+\end{center}
+\end{merksatz}

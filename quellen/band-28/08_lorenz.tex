@@ -1,0 +1,271 @@
+\chapter{Drei Gleichungen}
+
+\section{Zwei Verläufe, die sich trennen}
+
+\begin{merksatz}
+\boxtitel{Das Lorenz-System, und ein Fehler in der achten Stelle}
+\[ \dot x = \sigma(y - x), \qquad \dot y = x(r - z) - y, \qquad \dot z = xy - bz, \qquad \sigma = 10,\ r = 28,\ b = \tfrac83 . \]
+Zwei Startpunkte auf dem Attraktor, die sich um $10^{-8}$ in $x$ unterscheiden:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.3cm}P{0.9cm}P{1.0cm}P{1.2cm}P{1.0cm}P{1.0cm}P{0.9cm}P{0.9cm}@{}}
+\toprule
+$t$ & $0$ & $5$ & $10$ & $15$ & $18$ & $20$ & $30$\\
+\midrule
+Abstand & $10^{-8}$ & $5\cdot10^{-6}$ & $1{,}5\cdot10^{-4}$ & $0{,}043$ & $0{,}066$ & $4{,}0$ & $10{,}7$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Abstand verzehnfacht sich etwa alle $2{,}5$ Zeiteinheiten. Nach $t = 20$ --- etwa zwanzig Umläufen --- sind die beiden Verläufe so weit voneinander entfernt wie zwei beliebige Punkte des Attraktors: Die achte Stelle des Anfangs ist zur ersten Stelle des Endes geworden.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Beobachtung, die \Person{Edward Lorenz} 1961 am Royal McBee LGP-30 machte}: Er hatte einen Lauf mit auf drei Stellen gerundeten Zwischenwerten neu gestartet und einen anderen Verlauf bekommen --- nicht leicht verschieden, sondern nach kurzer Zeit ohne Zusammenhang. Die Gleichungen sind deterministisch, glatt, und sie haben nur drei Veränderliche. Dieses Kapitel zeigt, warum drei genügen, wo zwei nicht reichen, und was das Gebilde ist, auf dem die Verläufe für immer bleiben, ohne sich je zu wiederholen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das System}
+
+\begin{merksatz}
+\boxtitel{Fixpunkte und ihr Schicksal}
+\schritt{Der Ursprung}
+$0$ ist Fixpunkt für jedes $r$; Jacobi-Matrix mit Eigenwerten $-b$ und $\frac{-(\sigma+1)\pm\sqrt{(\sigma+1)^{2} + 4\sigma(r-1)}}{2}$. Für $r < 1$ alle negativ: stabil. Bei $r = 1$ Heugabel (Satz 4.2): Es entstehen
+\[ C_\pm = \left(\pm\sqrt{b(r-1)},\ \pm\sqrt{b(r-1)},\ r - 1\right) , \]
+bei $r = 28$: $(\pm8{,}485,\ \pm8{,}485,\ 27)$. Der Ursprung hat dann die Eigenwerte $-22{,}83$, $+11{,}83$, $-2{,}67$: ein Sattel mit einer abstoßenden Richtung.
+
+\schritt{$C_\pm$}
+Eigenwerte bei $r = 28$: $-13{,}85$ und $0{,}094 \pm 10{,}19\,\mathrm i$ --- eine instabile Spirale in einer Ebene, starke Anziehung senkrecht dazu. Die Stabilität ging bei
+\[ r_H = \sigma\,\frac{\sigma + b + 3}{\sigma - b - 1} = 24{,}74 \]
+in einer \textbf{subkritischen} Hopf-Verzweigung verloren (Kapitel 5): Kein kleiner Zyklus entsteht; die Verläufe verlassen die Umgebung.
+
+\schritt{Volumen}
+$\nabla\cdot F = -\sigma - 1 - b = -13{,}67$: Jedes Volumen schrumpft um den Faktor $\mathrm e^{-13{,}67} \approx 10^{-6}$ je Zeiteinheit (Satz 1.3). Alles, was bleibt, hat Volumen null.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Für $r = 28$ sind alle drei Fixpunkte instabil, es gibt keinen stabilen Zyklus, und jedes Volumen geht gegen null. Die Verläufe bleiben beschränkt --- wohin also?}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{definition}
+\boxtitelm{Definition 8.1 --- Attraktor, seltsamer Attraktor}
+Ein \Begriff{Attraktor} ist eine abgeschlossene, invariante Menge $A$, die alle Verläufe aus einer offenen Umgebung anzieht und keine kleinere solche Menge enthält. Er heißt \Begriff{seltsam}, wenn Verläufe auf ihm \textbf{empfindlich} von den Anfangsbedingungen abhängen: Benachbarte Punkte trennen sich im Mittel exponentiell. Ein Fluss auf einem beschränkten Attraktor mit dieser Eigenschaft heißt \Begriff{chaotisch}.
+\end{definition}
+
+\section{Warum nicht zwei, und warum drei}
+
+\begin{merksatz}
+\boxtitel{Satz 8.2 --- in der Ebene kein Chaos, im Raum schon}
+\schritt{Zwei Dimensionen}
+Poincaré--Bendixson (Satz 3.2): Ein beschränkter Verlauf in der Ebene nähert sich einem Fixpunkt, einem Zyklus oder einer Kette aus Fixpunkten und Verbindungen. Keine dieser Mengen ist empfindlich. Der Grund ist topologisch: Ein Verlauf in der Ebene kann sich nicht kreuzen und teilt sie in innen und außen --- er sperrt sich selbst ein.
+
+\schritt{Drei Dimensionen}
+Ein Verlauf kann über einen anderen hinweg; die Sperre fällt. Lorenz' Mechanismus: Die Spirale um $C_+$ weitet sich (Eigenwert $+0{,}094$), bis der Verlauf in die Einflusszone des Ursprungs gerät, dessen abstoßende Richtung ihn nach $C_-$ wirft, wo das Spiel beginnt --- und ob er nach $k$ Umläufen um $C_+$ wechselt oder nach $k+1$, entscheidet die achte Stelle.
+
+\schritt{Die Lorenz-Abbildung}
+Trägt man das $n$-te Maximum $z_n$ gegen das nächste auf, liegen die Punkte auf einer Kurve: einem Zelt mit Spitze bei $z \approx 38{,}5$, Werte in $[30{,}5;\ 46{,}8]$, mit Steigung dem Betrag nach überall größer als $1$ ($1{,}1$ bis $2{,}3$ links, $-1{,}2$ bis $-1{,}9$ rechts).
+
+\schritt{Folgerung}
+Ein Zyklus des Flusses wäre ein Zyklus der Abbildung, und sein Multiplikator ein Produkt von Steigungen, jede vom Betrag $> 1$: Er ist abstoßend (Satz 7.2). \textbf{Es gibt keinen stabilen Zyklus.} Zusammen mit den instabilen Fixpunkten und der Volumenschrumpfung: Der Attraktor ist eine Menge vom Volumen null, auf der nichts zur Ruhe kommt. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist Lorenz' Argument von 1963, und es ist bis heute das klarste.} Dass das Zelt eine Kurve ist und keine Wolke, verdankt sich der Volumenschrumpfung: Der Attraktor ist so dünn, dass die Rückkehrabbildung praktisch eindimensional wird. Dass die Steigung überall über $1$ liegt, hat Lorenz an den Zahlen gesehen; dass es wirklich so ist --- dass der Attraktor existiert und seltsam ist im Sinne von Definition 8.1 ---, hat \Person{Tucker} erst 2002 bewiesen, mit einem rechnergestützten Beweis, der Intervallarithmetik für jeden Umlauf durchführt. Dazwischen lagen vierzig Jahre, in denen jeder Rechner den Attraktor zeigte und kein Mathematiker ihn hatte.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was auf dem Attraktor geschieht}
+
+\begin{merksatz}
+\boxtitel{Dehnen und Falten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.8cm}@{}}
+\toprule
+\textbf{Dehnen} & In einer Richtung trennen sich Nachbarn: um den Faktor $\mathrm e^{0{,}906}\approx 2{,}5$ je Zeiteinheit (Kapitel 9).\\
+\textbf{Zusammenziehen} & In den anderen Richtungen nähern sie sich: Faktor $\mathrm e^{-14{,}57}$.\\
+\textbf{Falten} & Der Verlauf bleibt beschränkt; was gedehnt wurde, muss zurückgefaltet werden --- der Wechsel zwischen den Flügeln.\\
+\textbf{Ergebnis} & Unendlich viele Blätter, dicht gepackt: ein Gebilde der Dimension $2{,}06$, kein Volumen, keine Fläche.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Chaos ist Dehnen und Falten in einem beschränkten Raum. Das Dehnen macht die Empfindlichkeit, das Falten die Beschränktheit, und beides zusammen die unendlich feine Blätterung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Zahl $2{,}06$ ist eine Dimension, die keine ganze Zahl ist} --- Kapitel 11 sagt, wie man sie misst. Ein Blatt des Attraktors ist eine Fläche; die Blätter liegen in einer Cantor-Menge übereinander, die so dünn ist, dass sie der Fläche nur $0{,}06$ hinzufügt. Für die Herzzelle: Die Spirale aus Kapitel 13 ist das zweidimensionale Gegenstück, und das Flimmern das, was aus ihr wird, wenn sie bricht. Drei Veränderliche --- Spannung, Erholung und ein Ort --- reichen auch dort.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Empfindlichkeit allein ist kein Chaos}
+Der Sattel im Ursprung trennt benachbarte Verläufe auch: mit dem Faktor $\mathrm e^{11{,}83}$ je Zeiteinheit, viel schneller als der Attraktor. Niemand nennt einen Sattel chaotisch.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{6.2cm}@{}}
+\toprule
+\textbf{Sattel} & Trennung, aber die Verläufe gehen weg und kommen nie zurück: Die Empfindlichkeit erschöpft sich.\\
+\textbf{Instabiler Zyklus} & Dasselbe: Ein Mal getrennt, für immer getrennt.\\
+\textbf{Seltsamer Attraktor} & Trennung \textbf{und} Rückkehr: Die Verläufe bleiben beisammen auf derselben beschränkten Menge und trennen sich dort immer wieder neu.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Definition 8.1 verlangt beides: anziehend und empfindlich. Das eine ohne das andere ist Instabilität, nicht Chaos.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Fehler ist häufig}: Ein Modell, dessen Verläufe bei kleinen Störungen weit auseinanderlaufen, wird chaotisch genannt --- und ist nur instabil, mit einem Fixpunkt, der alles wegschickt. Umgekehrt: Ein Modell mit stabilem Gleichgewicht, dessen Daten verrauscht sind, wird für chaotisch gehalten, weil die Daten unregelmäßig aussehen. Beides unterscheidet erst die Messung aus Teil IV: Der Ljapunow-Exponent (Kapitel 9) ist für den Sattel positiv, aber nur vorübergehend; für Rauschen ist er unendlich; für den Attraktor ist er positiv und bleibt es --- und die Dimension (Kapitel 11) ist für Rauschen unendlich, für den Attraktor $2{,}06$.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Die Hopf-Schwelle}
+Leiten Sie $r_H = \sigma(\sigma + b + 3)/(\sigma - b - 1)$ her.
+
+\loesung
+\schritt{Schritt 1 --- Das charakteristische Polynom in $C_+$}
+Jacobi-Matrix $\begin{pmatrix}-\sigma&\sigma&0\\ 1&-1&-c\\ c&c&-b\end{pmatrix}$ mit $c = \sqrt{b(r-1)}$, denn $r - z = 1$ dort. Determinantenentwicklung gibt
+\[ \lambda^{3} + (\sigma + b + 1)\lambda^{2} + b(\sigma + r)\lambda + 2\sigma b(r - 1) = 0 . \]
+
+\schritt{Schritt 2 --- Die Hopf-Bedingung}
+Ein Paar $\pm\mathrm i\omega$ ist Nullstelle von $\lambda^{3} + a_2\lambda^{2} + a_1\lambda + a_0$ genau dann, wenn $a_1a_2 = a_0$ (Einsetzen von $\mathrm i\omega$: Realteil $-a_2\omega^{2} + a_0 = 0$, Imaginärteil $-\omega^{3} + a_1\omega = 0$, also $\omega^{2} = a_1$ und $a_0 = a_1a_2$).
+
+\schritt{Schritt 3 --- Auflösen}
+$b(\sigma + r)(\sigma + b + 1) = 2\sigma b(r - 1)$, also $r(\sigma + b + 1) - 2\sigma r = -\sigma(\sigma + b + 1) - 2\sigma$, und $r = \sigma(\sigma + b + 3)/(\sigma - b - 1)$. \checkmark
+
+\schritt{Schritt 4 --- Zahl}
+$10\cdot(10 + 2{,}667 + 3)/(10 - 2{,}667 - 1) = 156{,}67/6{,}333 = 24{,}74$. \checkmark\ Und $\omega^{2} = a_1 = b(\sigma + r_H) = 92{,}6$, $\omega = 9{,}62$ --- nahe den $10{,}19$ bei $r = 28$. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Rössler}
+$\dot x = -y - z$, $\dot y = x + ay$, $\dot z = b + z(x - c)$ mit $a = b = 0{,}2$, $c = 5{,}7$ --- das einfachste chaotische System mit nur einer nichtlinearen Stelle. Bestimmen Sie die Fixpunkte und ihre Art.
+
+\loesung
+\schritt{Schritt 1 --- Fixpunkte}
+$y = -x/a$, $z = x/a$, und $b + (x/a)(x - c) = 0$: $x^{2} - cx + ab = 0$, $x = \frac{c \pm \sqrt{c^{2} - 4ab}}{2} = \frac{5{,}7 \pm 5{,}686}{2}$: $x_1 = 0{,}0070$, $x_2 = 5{,}693$.
+
+\schritt{Schritt 2 --- Jacobi-Matrix}
+$\begin{pmatrix}0&-1&-1\\1&a&0\\z&0&x-c\end{pmatrix}$.
+
+\schritt{Schritt 3 --- Eigenwerte}
+In $x_1$ ($z = 0{,}035$): $0{,}097 \pm 0{,}995\,\mathrm i$ und $-5{,}69$ --- instabile Spirale in einer Ebene, starke Anziehung senkrecht dazu, wie $C_\pm$ bei Lorenz. In $x_2$ ($z = 28{,}5$): $+0{,}193$ und $\approx 0 \pm 5{,}43\,\mathrm i$ --- ein Sattel weit außen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Mechanismus ist derselbe wie bei Lorenz, nur mit einem Flügel}: Die Spirale um $x_1$ weitet sich in der $xy$-Ebene, bis $x$ die Schwelle $c$ überschreitet; dann wächst $z$ explosionsartig (der Term $z(x - c)$), hebt den Verlauf aus der Ebene, wirft ihn zurück zum Zentrum, und $z$ fällt wieder. Dehnen in der Ebene, Falten durch den Ausflug nach oben. \Person{Rössler} hat das System 1976 ausdrücklich so gebaut: als das Minimum, das Dehnen und Falten erlaubt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- Wie lange hält ein Mikrometer?}
+Zwei Lorenz-Verläufe starten mit Abstand $10^{-6}$. Wann ist der Abstand $1$, wenn er mit $\mathrm e^{0{,}906\,t}$ wächst --- und wann, wenn der Start auf $10^{-12}$ genau war?
+
+\loesung
+\schritt{Schritt 1}
+$\mathrm e^{0{,}906t} = 10^{6}$: $t = 6\ln10/0{,}906 = 13{,}8/0{,}906 = 15{,}2$.
+
+\schritt{Schritt 2}
+$10^{-12}$: $t = 27{,}6/0{,}906 = 30{,}5$.
+
+\schritt{Schritt 3 --- Probe an der Tabelle}
+Von $10^{-8}$: $18{,}4/0{,}906 = 20{,}3$; die Tabelle zeigt den Sprung auf $4$ zwischen $t = 18$ und $20$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Millionenfach genauer messen verdoppelt den Vorhersagehorizont --- nur.} Das ist das Gesetz des Chaos: Der Horizont wächst mit dem Logarithmus der Genauigkeit, und jede Stelle mehr kauft dieselbe feste Zeitspanne, hier $\ln10/0{,}906 = 2{,}5$ Einheiten. Für das Wetter, mit seinem Exponenten von etwa einer Verdopplung je zwei Tage, kauft eine zehnfach bessere Beobachtung etwa eine Woche; der Rest ist nicht Mangel an Daten, sondern Eigenschaft der Gleichungen. Kapitel 9 macht aus dieser Rechnung eine Messgröße.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Wettermodell, das kein Wetter beschreibt}
+Lorenz' drei Gleichungen sind eine Abkürzung der Konvektion: \Person{Saltzman} hatte 1962 die Gleichungen einer von unten geheizten Flüssigkeitsschicht in Fourier-Moden entwickelt; Lorenz behielt drei davon --- $x$ für die Umlaufgeschwindigkeit, $y$ und $z$ für zwei Temperaturmuster --- und warf den Rest fort.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Für $r = 28$ ist die Abkürzung physikalisch nicht gerechtfertigt; die weggeworfenen Moden wären nicht klein. \textbf{Das System ist kein Modell der Konvektion, sondern ein Modell der Vorhersagbarkeit} --- und als solches wurde es 1963 in einer meteorologischen Zeitschrift veröffentlicht, wo Mathematiker es zehn Jahre nicht fanden. \Person{Ruelle} und \Person{Takens} prägten 1971 den \enquote{seltsamen Attraktor}, ohne Lorenz zu kennen; \Person{Yorke} brachte die Arbeit 1972 unter Mathematiker. \Person{Lorenz}' Vortrag von 1972, \enquote{Löst der Flügelschlag eines Schmetterlings in Brasilien einen Tornado in Texas aus?}, gab dem Phänomen den Namen, der blieb.}
+\end{minipage}
+\end{center}
+
+\schritt{Die LGP-30}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Rechner, auf dem Lorenz 1961 die Empfindlichkeit entdeckte, rechnete mit $30$ Bit; der Ausdruck zeigte drei Stellen. \textbf{Die Entdeckung war ein Rundungsfehler, den jemand nicht für einen Fehler hielt.} Lorenz hatte zuvor jahrelang statistische Wettervorhersage betrieben und wollte zeigen, dass lineare Regression nicht ausreicht --- das Modell sollte unregelmäßig sein, damit die Regression scheiterte. Dass es die Vorhersage überhaupt begrenzte, war die Überraschung.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Der Attraktor als Beweisgegenstand}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Tuckers Beweis} & Intervallarithmetik plus Normalform am Ursprung: Der Attraktor existiert und ist robust (2002). Rechnergestützt, für Menschen nicht nachlesbar.\\
+\textbf{Smales 14. Problem} & Genau diese Frage, 1998 gestellt --- eines der wenigen gelösten.\\
+\textbf{Formale Verifikation} & Beweisassistenten prüfen Tuckers Rechnung Schritt für Schritt (Immler 2018): Der Beweis ist nun ein Programm, das ein Programm geprüft hat.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Was ist ein Beweis, den kein Mensch liest?} Tuckers Arbeit umfasst wenige Seiten Mathematik und ein Programm, das einige Stunden rechnet und für jeden Abschnitt des Attraktors Schranken liefert; der Beweis besteht darin, dass alle Schranken halten. \Person{Immler}s Verifikation in Isabelle/HOL hat 2018 jeden Schritt dieser Rechnung formal nachvollzogen --- der erste seltsame Attraktor, dessen Existenz maschinell geprüft ist. Band B hat die Frage gestellt, was ein solcher Beweis beweist; hier ist ihr schwerster Fall.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Lorenz-System} & Fixpunkte, $r_H = 24{,}74$ subkritisch, $\nabla\cdot F = -13{,}67$\\
+\textbf{Definition 8.1} & Attraktor, seltsam, chaotisch\\
+\textbf{Satz 8.2} & Ebene: nie; Raum: Lorenz-Abbildung mit Steigung $> 1$\\
+\textbf{Mechanismus} & Dehnen und Falten; Dimension $2{,}06$\\
+\textbf{Der Bruchfall} & Empfindlichkeit ohne Rückkehr ist kein Chaos\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Tabelle am Anfang zeigte den Abstand wachsen. Kapitel 9 misst, wie schnell --- der Ljapunow-Exponent --- und rechnet aus, wie weit die Vorhersage reicht, wenn man ihn kennt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

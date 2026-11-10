@@ -1,0 +1,384 @@
+\chapter{Tafeln bauen}
+
+\section{Die Tafel von $C_{3v}$ ohne eine einzige Matrix}
+
+\begin{merksatz}
+\boxtitel{Ammoniak --- drei Zeilen aus zwei Zahlen}
+$C_{3v}$ hat sechs Elemente in drei Klassen ($E$; $2C_3$; $3\sigma_v$). Also drei irreduzible Darstellungen mit $d_1^{2} + d_2^{2} + d_3^{2} = 6$: Dimensionen $1, 1, 2$.
+
+\schritt{Die eindimensionalen}
+Eine eindimensionale Darstellung ist ein Homomorphismus $G\to\mathbb C^{\times}$; $\mathbb C^{\times}$ ist abelsch, also ist jeder Kommutator $ghg^{-1}h^{-1}$ im Kern. In $C_{3v}$ erzeugen die Kommutatoren die Drehungen ($\sigma C_3\sigma^{-1}C_3^{-1} = C_3^{-2}\cdot C_3^{-1}$, eine Drehung). Also faktorisieren eindimensionale Darstellungen über $C_{3v}/\{E, C_3, C_3^{2}\}\cong\mathbb Z/2$: genau zwei, $A_1 = (1, 1, 1)$ und $A_2 = (1, 1, -1)$.
+
+\schritt{Die zweidimensionale}
+$\chi_E(E) = 2$. Die Spalten der Tafel sind orthogonal (Satz 5.2 unten): Spalte $C_3$ gegen Spalte $E$: $1\cdot1 + 1\cdot1 + \chi_E(C_3)\cdot2 = 0$, also $\chi_E(C_3) = -1$. Spalte $\sigma$ gegen $E$: $1 - 1 + 2\chi_E(\sigma) = 0$, also $\chi_E(\sigma) = 0$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.2cm}P{0.8cm}P{1.0cm}P{1.0cm}P{3.6cm}@{}}
+\toprule
+$C_{3v}$ & $E$ & $2C_3$ & $3\sigma_v$ & \textbf{Basisfunktionen}\\
+\midrule
+$A_1$ & $1$ & $1$ & $1$ & $z$; $x^{2} + y^{2}$, $z^{2}$\\
+$A_2$ & $1$ & $1$ & $-1$ & $R_z$\\
+$E$ & $2$ & $-1$ & $0$ & $(x, y)$, $(R_x, R_y)$; $(x^{2} - y^{2}, xy)$, $(xz, yz)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Tafel folgt aus der Gruppenstruktur allein: Klassen zählen, $|G|$ in Quadrate zerlegen, die Kommutatorgruppe bestimmen, Spalten orthogonal machen. Keine Matrix wurde gebraucht --- und die Tafel stimmt mit den Spuren aus Satz 1.2 überein.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dieses Kapitel baut die Tafeln, die der Band braucht}: $C_{2v}$ (Wasser), $C_{3v}$ (Ammoniak), $C_{4v}$ und $D_4$, $A_4$ und $T_d$ (Methan), $D_6$ und $D_{6h}$ (Benzol). Die Werkzeuge: Abelisierung für die eindimensionalen Zeilen, Zeilen- und Spaltenorthogonalität für den Rest, Produkte für Gruppen mit Inversionszentrum. Am Ende steht Mullikens Notation --- und ein Bruchfall, in dem die Chemiker-Tafel etwas anderes zeigt als die Mathematiker-Tafel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zwei Werkzeuge}
+
+\begin{merksatz}
+\boxtitel{Satz 5.1 --- eindimensionale Darstellungen}
+Die eindimensionalen Darstellungen von $G$ entsprechen den Darstellungen der \Begriff{Abelisierung} $G/[G, G]$; ihre Zahl ist $|G/[G, G]|$. Für $G$ abelsch sind alle irreduziblen Darstellungen eindimensional, und es gibt $|G|$ davon.
+
+\schritt{Beweis}
+$\chi\colon G\to\mathbb C^{\times}$ ist ein Homomorphismus in eine abelsche Gruppe, also $\chi([g, h]) = [\chi(g), \chi(h)] = 1$; $\chi$ faktorisiert über $G/[G, G]$. Umgekehrt ist jede Darstellung des Quotienten eine von $G$. Für $G$ abelsch: Schur (Folgerung 1 in Satz 3.3) gibt $d_i = 1$, dann $\sum d_i^{2} = |G|$ gibt die Zahl. $\blacksquare$
+
+\schritt{Beispiel $\mathbb Z/n$}
+Erzeuger $g$ mit $g^{n} = e$; $\chi(g) = \zeta$ mit $\zeta^{n} = 1$: die $n$ Einheitswurzeln $\zeta_k = e^{2\pi ik/n}$, $\chi_k(g^{m}) = \zeta_k^{m}$. Die Tafel ist die Matrix $(\zeta^{km})_{k, m}$ --- die diskrete Fourier-Transformation (Kapitel 12).
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 5.2 --- Spaltenorthogonalität}
+Für $g, h\in G$:
+\[ \sum_i\chi_i(g)\overline{\chi_i(h)} = \begin{cases}|C_G(g)| = |G|/|\mathrm{Kl}(g)| & g\sim h\\ 0 & \text{sonst,}\end{cases} \]
+wobei die Summe über alle irreduziblen Charaktere läuft, $C_G(g)$ der Zentralisator und $\mathrm{Kl}(g)$ die Klasse von $g$ ist.
+
+\schritt{Beweis}
+Sei $X$ die quadratische Matrix mit Einträgen $X_{ik} = \chi_i(g_k)\sqrt{|\mathrm{Kl}_k|/|G|}$ ($i$ über Irreduzible, $k$ über Klassen --- gleich viele nach Satz 4.5b). Die Zeilenorthogonalität (Satz 4.3) sagt $XX^{*} = I$. Eine quadratische Matrix mit $XX^{*} = I$ erfüllt auch $X^{*}X = I$, und das ist, ausgeschrieben, die Behauptung: $\sum_i\overline{\chi_i(g_k)}\chi_i(g_l)\sqrt{|\mathrm{Kl}_k||\mathrm{Kl}_l|}/|G| = \delta_{kl}$. $\blacksquare$
+
+\schritt{Probe an $C_{3v}$}
+Spalte $\sigma$ mit sich selbst: $1 + 1 + 0 = 2 = 6/3$. \checkmark\ Spalte $C_3$: $1 + 1 + 1 = 3 = 6/2$. \checkmark\ Spalte $E$: $1 + 1 + 4 = 6$. \checkmark\ Spalte $C_3$ gegen $\sigma$: $1 - 1 + 0 = 0$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Tafel ist, richtig normiert, eine unitäre Matrix. Zeilen orthonormal heißt Spalten orthonormal. Jede fehlende Zeile einer Tafel ist durch Spaltenorthogonalität bestimmt, sobald alle anderen stehen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Vier Tafeln}
+
+\begin{merksatz}
+\boxtitel{$C_{4v}$ und $D_4$ --- Ordnung $8$, fünf Klassen}
+Klassen: $E$; $2C_4$ ($90^{\circ}$ und $270^{\circ}$); $C_2$; $2\sigma_v$ (durch die Achsen); $2\sigma_d$ (durch die Diagonalen). Dimensionen: $8 = 1 + 1 + 1 + 1 + 4$.
+
+\schritt{Vier eindimensionale}
+$[C_{4v}, C_{4v}] = \{E, C_2\}$, Quotient $\cong V_4 = \mathbb Z/2\times\mathbb Z/2$: Werte $\pm1$ auf $C_4$ und auf $\sigma_v$, frei; $\chi(C_2) = \chi(C_4)^{2} = 1$; $\chi(\sigma_d) = \chi(C_4)\chi(\sigma_v)$.
+
+\schritt{Die zweidimensionale}
+$\chi_E(E) = 2$, $\chi_E(C_2) = -2$ (Spalte $C_2$ gegen $E$: $4 + 2\chi = 0$); die übrigen Spaltenprodukte mit Spalte $E$ geben $\chi_E(C_4) = \chi_E(\sigma_v) = \chi_E(\sigma_d) = 0$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.2cm}P{0.7cm}P{0.9cm}P{0.8cm}P{0.9cm}P{0.9cm}P{3.0cm}@{}}
+\toprule
+$C_{4v}$ & $E$ & $2C_4$ & $C_2$ & $2\sigma_v$ & $2\sigma_d$ & \textbf{Basis}\\
+\midrule
+$A_1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $z$; $x^{2} + y^{2}$, $z^{2}$\\
+$A_2$ & $1$ & $1$ & $1$ & $-1$ & $-1$ & $R_z$\\
+$B_1$ & $1$ & $-1$ & $1$ & $1$ & $-1$ & $x^{2} - y^{2}$\\
+$B_2$ & $1$ & $-1$ & $1$ & $-1$ & $1$ & $xy$\\
+$E$ & $2$ & $0$ & $-2$ & $0$ & $0$ & $(x, y)$, $(R_x, R_y)$; $(xz, yz)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+$D_4$ (die Drehgruppe des Quadrats, ohne Spiegelungen, aber mit den $C_2'$-Achsen in der Ebene) hat dieselbe Tafel --- und $Q_8$ ebenfalls (Bruchfall in Kapitel 4). Das Quadrat als ebenes Molekül, etwa $\mathrm{XeF_4}$, hat $D_{4h} = D_4\times C_i$.
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{$A_4$ --- die Tetraederdrehgruppe}
+Zwölf Drehungen, die ein Tetraeder in sich überführen: $E$; acht $C_3$ (um die vier Ecken, je $\pm120^{\circ}$); drei $C_2$ (um die Mitten gegenüberliegender Kanten). In $A_4$ zerfallen die acht $C_3$ in \emph{zwei} Klassen zu vier (Drehung um $+120^{\circ}$ und um $-120^{\circ}$ sind in $A_4$ nicht konjugiert --- es fehlen die Spiegelungen, die sie vertauschen würden). Vier Klassen, $12 = 1 + 1 + 1 + 9$ (Aufgabe 4.1).
+
+\schritt{Drei eindimensionale}
+$[A_4, A_4] = V_4 = \{E, 3C_2\}$, Quotient $\mathbb Z/3$: $\chi(C_3) = 1, \omega, \omega^{2}$ mit $\omega = e^{2\pi i/3}$, $\chi(C_2) = 1$.
+
+\schritt{Die dreidimensionale}
+Spaltenorthogonalität gegen Spalte $E$: $C_3$: $1 + \omega + \omega^{2} + 3\chi_T = 0$, also $\chi_T(C_3) = 0$ (da $1 + \omega + \omega^{2} = 0$); $C_2$: $3 + 3\chi_T = 0$, $\chi_T(C_2) = -1$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{0.7cm}P{1.0cm}P{1.0cm}P{0.9cm}P{4.6cm}@{}}
+\toprule
+$A_4$ & $E$ & $4C_3$ & $4C_3^{2}$ & $3C_2$ & \textbf{Basis}\\
+\midrule
+$A$ & $1$ & $1$ & $1$ & $1$ & $x^{2} + y^{2} + z^{2}$\\
+$E_{(1)}$ & $1$ & $\omega$ & $\omega^{2}$ & $1$ & \multirow{2}{*}{$\{2z^{2} - x^{2} - y^{2},\ x^{2} - y^{2}\}$}\\
+$E_{(2)}$ & $1$ & $\omega^{2}$ & $\omega$ & $1$ & \\
+$T$ & $3$ & $0$ & $0$ & $-1$ & $(x, y, z)$, $(R_x, R_y, R_z)$; $(xy, xz, yz)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Probe: $\langle T, T\rangle = \frac1{12}(9 + 0 + 0 + 3\cdot1) = 1$. \checkmark\ $\langle E_{(1)}, E_{(1)}\rangle = \frac1{12}(1 + 4|\omega|^{2} + 4|\omega^{2}|^{2} + 3) = 1$. \checkmark\ $\langle E_{(1)}, E_{(2)}\rangle = \frac1{12}(1 + 4\omega\overline{\omega^{2}} + 4\omega^{2}\overline\omega + 3) = \frac1{12}(4 + 4\omega^{2} + 4\omega) = 0$. \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{$T_d$ --- die volle Tetraedergruppe (Methan)}
+$T_d\cong S_4$ (Permutationen der vier Ecken), Ordnung $24$, fünf Klassen: $E$; $8C_3$; $3C_2$; $6S_4$ (Drehspiegelungen um $90^{\circ}$); $6\sigma_d$ (Ebenen durch eine Kante und die Mitte der gegenüberliegenden). Jetzt sind $C_3$ und $C_3^{2}$ konjugiert (die $\sigma_d$ vertauschen sie). Dimensionen $24 = 1 + 1 + 4 + 9 + 9$.
+
+\schritt{Aufbau}
+$[S_4, S_4] = A_4$, Quotient $\mathbb Z/2$: $A_1$ und $A_2$ (Vorzeichen: $-1$ auf $S_4$ und $\sigma_d$, den ungeraden Permutationen). $E$: Einschränkung auf $A_4$ muss $E_{(1)}\oplus E_{(2)}$ sein (Dimension $2$, und es gibt keine andere Möglichkeit mit reellen Spuren), also $\chi_E(C_3) = \omega + \omega^{2} = -1$, $\chi_E(C_2) = 2$; auf $S_4$, $\sigma_d$: Spaltenorthogonalität gegen $E$ gibt nach Kenntnis von $T_1, T_2$ den Wert $0$. $T_2$: die geometrische Darstellung, Spuren nach Satz 1.2: $C_3\colon0$, $C_2\colon-1$, $S_4\colon-1 + 2\cos90^{\circ} = -1$, $\sigma_d\colon1$. $T_1 = T_2\otimes A_2$ (Produkt mit dem Vorzeichen; Kapitel 9).
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.2cm}P{0.7cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{3.0cm}@{}}
+\toprule
+$T_d$ & $E$ & $8C_3$ & $3C_2$ & $6S_4$ & $6\sigma_d$ & \textbf{Basis}\\
+\midrule
+$A_1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $x^{2} + y^{2} + z^{2}$\\
+$A_2$ & $1$ & $1$ & $1$ & $-1$ & $-1$ & \\
+$E$ & $2$ & $-1$ & $2$ & $0$ & $0$ & $(2z^{2} - x^{2} - y^{2}, x^{2} - y^{2})$\\
+$T_1$ & $3$ & $0$ & $-1$ & $1$ & $-1$ & $(R_x, R_y, R_z)$\\
+$T_2$ & $3$ & $0$ & $-1$ & $-1$ & $1$ & $(x, y, z)$; $(xy, xz, yz)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Probe Spalte $S_4$: $1 + 1 + 0 + 1 + 1 = 4 = 24/6$. \checkmark\ Spalte $C_3$: $1 + 1 + 1 + 0 + 0 = 3 = 24/8$. \checkmark\ Zeile $T_1$ gegen $T_2$: $\frac1{24}(9 + 0 + 3 - 6 - 6) = 0$. \checkmark
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{$D_6$ und $D_{6h}$ --- Benzol}
+$D_6$ (zwölf Drehungen des Sechsecks): Klassen $E$; $2C_6$; $2C_3$; $C_2$; $3C_2'$ (durch gegenüberliegende Ecken); $3C_2''$ (durch gegenüberliegende Kantenmitten). Sechs Klassen, $12 = 4\cdot1 + 2\cdot4$: vier eindimensionale ($[D_6, D_6] = \{E, C_3, C_3^{2}\}$, Quotient $V_4$), zwei zweidimensionale.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{0.6cm}P{0.8cm}P{0.8cm}P{0.7cm}P{0.8cm}P{0.8cm}P{2.6cm}@{}}
+\toprule
+$D_6$ & $E$ & $2C_6$ & $2C_3$ & $C_2$ & $3C_2'$ & $3C_2''$ & \textbf{Basis}\\
+\midrule
+$A_1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $x^{2} + y^{2}$, $z^{2}$\\
+$A_2$ & $1$ & $1$ & $1$ & $1$ & $-1$ & $-1$ & $z$, $R_z$\\
+$B_1$ & $1$ & $-1$ & $1$ & $-1$ & $1$ & $-1$ & \\
+$B_2$ & $1$ & $-1$ & $1$ & $-1$ & $-1$ & $1$ & \\
+$E_1$ & $2$ & $1$ & $-1$ & $-2$ & $0$ & $0$ & $(x, y)$, $(R_x, R_y)$; $(xz, yz)$\\
+$E_2$ & $2$ & $-1$ & $-1$ & $2$ & $0$ & $0$ & $(x^{2} - y^{2}, xy)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+$E_1$ ist die Drehung der Ebene: $\chi(C_6) = 2\cos60^{\circ} = 1$, $\chi(C_3) = 2\cos120^{\circ} = -1$, $\chi(C_2) = -2$, Umklappungen $0$. $E_2$ ist \enquote{doppelt so schnell}: $\chi(C_6) = 2\cos120^{\circ}$ usw.
+
+\schritt{$D_{6h} = D_6\times C_i$}
+Benzol hat zusätzlich das Inversionszentrum $i$; $D_{6h} = D_6\times\{E, i\}$, Ordnung $24$, zwölf Klassen. Nach Satz 5.3 ist die Tafel das Produkt: Jede Zeile $\Gamma$ von $D_6$ wird zu $\Gamma_g$ (Charakter auf $i\cdot g$ gleich $\chi(g)$) und $\Gamma_u$ (gleich $-\chi(g)$). Die zwölf Klassen: $E, 2C_6, 2C_3, C_2, 3C_2', 3C_2''$ und $i, 2S_3, 2S_6, \sigma_h, 3\sigma_d, 3\sigma_v$ (in dieser Reihenfolge die Produkte mit $i$). Zwölf Zeilen $A_{1g}, \dots, E_{2u}$, $\sum d^{2} = 2\cdot12 = 24$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Gruppe mit Inversionszentrum ist ein Produkt $G\times C_i$, und ihre Tafel ist die Tafel von $G$, zweimal: einmal mit $+$ ($g$, gerade), einmal mit $-$ ($u$, ungerade) auf der inversen Hälfte. $D_{6h}$, $D_{4h}$, $O_h$, $D_{2h}$ --- alle so.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 5.3 --- Produkte}
+Die irreduziblen Darstellungen von $G\times H$ sind genau die $\rho\boxtimes\sigma$ auf $V\otimes W$, $(g, h)\mapsto\rho(g)\otimes\sigma(h)$, mit $\rho, \sigma$ irreduzibel; Charakter $\chi_{\rho\boxtimes\sigma}(g, h) = \chi_\rho(g)\chi_\sigma(h)$.
+
+\schritt{Beweis}
+Spur eines Kronecker-Produkts ist das Produkt der Spuren. $\langle\chi_\rho\chi_\sigma, \chi_{\rho'}\chi_{\sigma'}\rangle_{G\times H} = \langle\chi_\rho, \chi_{\rho'}\rangle_G\langle\chi_\sigma, \chi_{\sigma'}\rangle_H$ (Doppelsumme faktorisiert): orthonormal, also irreduzibel und paarweise inäquivalent. Vollständig: Es sind $k_Gk_H$ Stück, und $G\times H$ hat $k_Gk_H$ Klassen (Klassen von Paaren sind Paare von Klassen). $\blacksquare$
+\end{merksatz}
+
+\section{Mullikens Notation}
+
+\begin{definition}
+\boxtitelm{Lesehilfe --- $A, B, E, T$ und die Indizes}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.6cm}P{7.0cm}@{}}
+\toprule
+$A$, $B$ & eindimensional; $A$: $\chi(C_n) = +1$ für die Hauptachse, $B$: $\chi(C_n) = -1$\\
+$E$ & zweidimensional (\enquote{entartet}; nicht das neutrale Element!)\\
+$T$ (auch $F$) & dreidimensional\\
+$G$, $H$ & vier-, fünfdimensional (nur in Ikosaedergruppen)\\
+Index $1$, $2$ & symmetrisch ($+1$) bzw.\ antisymmetrisch ($-1$) unter einer $C_2'$ senkrecht zur Hauptachse oder, falls keine, unter $\sigma_v$\\
+Index $g$, $u$ & gerade, ungerade unter Inversion $i$\\
+$'$, $''$ & symmetrisch, antisymmetrisch unter $\sigma_h$ (wenn kein $i$ da ist, z.\,B.\ $D_{3h}$)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die Konvention ist nicht in jedem Fall eindeutig ($B_1$ gegen $B_2$ in $C_{2v}$ hängt von der Wahl der $x$-Achse ab; Mulliken empfahl 1955 eine Regel, die nicht alle befolgen). Die Charaktertafel selbst ist eindeutig; nur die Etiketten nicht.
+\end{definition}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Chemiker-$E$ und Mathematiker-$E$}
+Die Tafel von $C_3$ (reine Drehgruppe der Ordnung $3$, abelsch) in Chemiebüchern:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{0.7cm}P{1.0cm}P{1.0cm}@{}}
+\toprule
+$C_3$ & $E$ & $C_3$ & $C_3^{2}$\\
+\midrule
+$A$ & $1$ & $1$ & $1$\\
+$E$ & $\left\{\begin{smallmatrix}1\\1\end{smallmatrix}\right.$ & $\begin{smallmatrix}\omega\\\omega^{2}\end{smallmatrix}$ & $\left.\begin{smallmatrix}\omega^{2}\\\omega\end{smallmatrix}\right\}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die Klammer fasst zwei eindimensionale komplexe Darstellungen zu einer zweidimensionalen \emph{reellen} zusammen (Bruchfall Kapitel 2: über $\mathbb R$ ist die Drehung um $120^{\circ}$ irreduzibel). Für $\sum d_i^{2} = |G|$ zählt man sie als zwei Einsen ($1 + 1 + 1 = 3$), nicht als eine Zwei ($1 + 4 = 5\neq3$).
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wo ein $E$ mit geschweifter Klammer steht, sind es zwei komplex konjugierte Charaktere. Die Theorie dieses Bandes ist über $\mathbb C$; die Chemie rechnet reell, weil Schwingungen reell sind. Beide haben recht, man muss nur wissen, in welcher man ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Verwechslung ist nicht harmlos}: In $C_3$ oder $C_4$ oder $C_{3h}$ sind die beiden Zeilen eines solchen $E$ im Skalarprodukt mit sich selbst je $1$, das Paar also $2$, und wer die Projektionsformel von Kapitel 6 mit dem gebündelten $E$ anwendet, bekommt reelle Funktionen --- zum Glück die, die man wollte, weil $P_{E_{(1)}} + P_{E_{(2)}}$ eine reelle Projektion ist. Wer aber Entartungen zählt, sieht Unterschiede: Das Chemiker-$E$ von $C_3$ ist eine echte zweifache Entartung (zwei Schwingungen gleicher Frequenz), aber ihr Grund ist nicht Schur über $\mathbb C$, sondern die Zeitumkehr --- Kramers' Satz, dass komplex konjugierte Darstellungen reeller Hamilton-Operatoren entartet sind. Kapitel 9 behandelt den Frobenius--Schur-Indikator, der genau sagt, welche komplexen Darstellungen sich reell realisieren lassen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.1 --- $C_{2h}$ als Produkt}
+Bauen Sie die Tafel von $C_{2h} = \{E, C_2, i, \sigma_h\}$ (trans-Dichlorethen) aus $C_2\times C_i$ und benennen Sie die Zeilen nach Mulliken.
+
+\loesung
+\schritt{Schritt 1 --- Die Faktoren}
+$C_2 = \{E, C_2\}$: $A = (1, 1)$, $B = (1, -1)$. $C_i = \{E, i\}$: $g = (1, 1)$, $u = (1, -1)$.
+
+\schritt{Schritt 2 --- Das Produkt}
+Elemente $(E, E) = E$, $(C_2, E) = C_2$, $(E, i) = i$, $(C_2, i) = C_2i = \sigma_h$ (Drehung um $180^{\circ}$ gefolgt von Inversion ist Spiegelung an der Ebene senkrecht zur Achse).
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{0.7cm}P{0.8cm}P{0.7cm}P{0.8cm}P{3.0cm}@{}}
+\toprule
+$C_{2h}$ & $E$ & $C_2$ & $i$ & $\sigma_h$ & \textbf{Basis}\\
+\midrule
+$A_g$ & $1$ & $1$ & $1$ & $1$ & $R_z$; $x^{2}, y^{2}, z^{2}, xy$\\
+$B_g$ & $1$ & $-1$ & $1$ & $-1$ & $R_x, R_y$; $xz, yz$\\
+$A_u$ & $1$ & $1$ & $-1$ & $-1$ & $z$\\
+$B_u$ & $1$ & $-1$ & $-1$ & $1$ & $x, y$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Probe}
+Zeilen paarweise orthogonal (jedes Paar: zwei $+1$, zwei $-1$). \checkmark\ $\sum d^{2} = 4$. \checkmark\ $z$ ist unter $C_2$ (um $z$) fest, unter $i$ negiert: $A_u$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Vier Zeilen, zwei Blöcke}: Oben die geraden, unten die ungeraden. Alle Translationen sind $u$, alle Rotationen und alle quadratischen Funktionen sind $g$ --- das gilt in jeder Gruppe mit Inversionszentrum und ist der Grund für das Alternativverbot in Kapitel 6.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.2 --- Die fehlende Zeile}
+Von der Tafel von $T_d$ seien $A_1, A_2, E, T_1$ bekannt. Bestimmen Sie $T_2$ allein aus der Spaltenorthogonalität.
+
+\loesung
+\schritt{Schritt 1 --- Spalte $E$}
+$\sum d_i^{2} = 24$: $1 + 1 + 4 + 9 + d^{2} = 24$, $d = 3$.
+
+\schritt{Schritt 2 --- Jede Spalte gegen sich selbst}
+Spalte $C_3$ ($|C_G| = 24/8 = 3$): $1 + 1 + 1 + 0 + \chi^{2} = 3$, $\chi(C_3) = 0$. Spalte $C_2$ ($24/3 = 8$): $1 + 1 + 4 + 1 + \chi^{2} = 8$, $\chi = \pm1$. Spalte $S_4$ ($24/6 = 4$): $1 + 1 + 0 + 1 + \chi^{2} = 4$, $\chi = \pm1$. Spalte $\sigma_d$: ebenso $\pm1$.
+
+\schritt{Schritt 3 --- Vorzeichen aus Spalte gegen Spalte $E$}
+Spalte $C_2$ gegen $E$: $1 + 1 + 4 - 3 + 3\chi(C_2) = 0$, $\chi(C_2) = -1$. Spalte $S_4$ gegen $E$: $1 - 1 + 0 + 3 + 3\chi(S_4) = 0$, $\chi(S_4) = -1$. Spalte $\sigma_d$ gegen $E$: $1 - 1 + 0 - 3 + 3\chi(\sigma_d) = 0$, $\chi(\sigma_d) = 1$.
+
+\schritt{Schritt 4 --- Ergebnis und Probe}
+$T_2 = (3, 0, -1, -1, 1)$. \checkmark\ Zeilennorm: $\frac1{24}(9 + 0 + 3 + 6 + 6) = 1$. \checkmark\ Es ist die geometrische Darstellung (Spuren aus Satz 1.2). \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Rätsel mit eindeutiger Lösung}: Die Spaltenorthogonalität ist ein lineares Gleichungssystem für die fehlende Zeile, und es hat --- bei einer fehlenden Zeile --- immer genau eine Lösung, weil die Tafel unitär ist. Fehlen zwei Zeilen, braucht man mehr: etwa eine bekannte Darstellung, die man zerlegt (Kapitel 6), oder ein Tensorprodukt (Kapitel 9).}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 5.3 --- $D_{2h}$ hat acht eindimensionale}
+Ethen ($\mathrm{C_2H_4}$) hat Symmetriegruppe $D_{2h}$ der Ordnung $8$. Wie viele Klassen, wie viele irreduzible Darstellungen, welche Dimensionen? Wie heißt die Darstellung von $z$ (senkrecht zur Molekülebene)?
+
+\loesung
+\schritt{Schritt 1 --- Struktur}
+$D_{2h} = D_2\times C_i$ mit $D_2 = \{E, C_2(z), C_2(y), C_2(x)\}\cong V_4$, abelsch. Also ist $D_{2h}\cong(\mathbb Z/2)^{3}$ abelsch: acht Klassen, acht eindimensionale Darstellungen, $\sum d^{2} = 8$. \checkmark
+
+\schritt{Schritt 2 --- Die Tafel}
+$D_2$: $A$, $B_1$, $B_2$, $B_3$ mit $B_1 = (1, 1, -1, -1)$ (symmetrisch zu $C_2(z)$), $B_2 = (1, -1, 1, -1)$ ($C_2(y)$), $B_3 = (1, -1, -1, 1)$ ($C_2(x)$). Mal $C_i$: $A_g, B_{1g}, B_{2g}, B_{3g}, A_u, B_{1u}, B_{2u}, B_{3u}$.
+
+\schritt{Schritt 3 --- Die Funktion $z$}
+Unter $C_2(z)$: $z\mapsto z$; $C_2(y)$: $z\mapsto-z$; $C_2(x)$: $-z$. Das ist $B_1$. Unter $i$: $-z$, also $u$: $z\in B_{1u}$. Entsprechend $y\in B_{2u}$, $x\in B_{3u}$. Probe: $B_{1u}\cdot B_{2u}\cdot B_{3u}$ (Produkt der Charaktere) $= (1, 1, 1, 1)\cdot(-1)^{3}$ auf der $u$-Hälfte $= A_u$; und $xyz$ ist unter allen $C_2$ invariant, unter $i$ negiert --- $A_u$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle zwölf Normalschwingungen des Ethens sind nicht entartet} --- die Gruppe hat keine mehrdimensionalen Darstellungen, also keinen Grund für gleiche Frequenzen. Fünf von ihnen sind infrarotaktiv ($B_{1u}, B_{2u}, B_{3u}$ kommen in $\Gamma_{\mathrm{vib}} = 3A_g + A_u + 2B_{1g} + B_{2g} + B_{1u} + 2B_{2u} + 2B_{3u}$ vor), sechs ramanaktiv ($g$-Darstellungen), eine ($A_u$, die Torsion um die Doppelbindung) weder noch --- unsichtbar in beiden Spektren. Kapitel 6 erklärt die Regel; die Zerlegung ist Aufgabe 6.3.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Gruppenpest}
+\Person{Bethe} löste 1929 in seiner Dissertation \enquote{Termaufspaltung in Kristallen} die Frage, wie sich die Energieniveaus eines Atoms aufspalten, wenn man es in ein Kristallfeld der Symmetrie $O_h$ oder $T_d$ setzt: Die Antwort ist die Einschränkung der $SO(3)$-Darstellungen auf die Untergruppe (Kapitel 7 und 14), und Bethe schrieb die Tafeln der kristallographischen Punktgruppen auf --- mit den Bezeichnungen $\Gamma_1, \dots, \Gamma_5$, die Physiker bis heute verwenden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Die Chemiker brauchten länger}: \Person{Wigner}s Buch \enquote{Gruppentheorie und ihre Anwendung auf die Quantenmechanik der Atomspektren} (1931) und \Person{Weyl}s \enquote{Gruppentheorie und Quantenmechanik} (1928) galten als schwer; der Spott von der \enquote{Gruppenpest} wird Pauli zugeschrieben, und \Person{Slater} erklärte stolz, er habe die Gruppentheorie aus der Atomphysik vertrieben. Mullikens Notation von 1933 und \Person{Wilson}s Arbeit von 1934 über Normalschwingungen (\enquote{The degeneracy, selection rules, and other properties of the normal vibrations of certain polyatomic molecules}) machten die Tafeln zum Alltagswerkzeug, und das Lehrbuch von \Person{Cotton}, \enquote{Chemical Applications of Group Theory} (1963), brachte sie in jedes Chemiestudium. Die Tafeln, die heute im Anhang jedes Lehrbuchs der physikalischen Chemie stehen, sind Bethes Tafeln mit Mullikens Namen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Die größten Tafeln}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Das Monster} & Die größte sporadische einfache Gruppe, Ordnung $\approx8\cdot10^{53}$, hat $194$ Klassen; ihre Tafel berechneten \Person{Fischer}, Livingstone und Thorne 1979 --- \emph{bevor} die Existenz der Gruppe bewiesen war (Griess 1982). Die kleinste nichttriviale Dimension, $196\,883$, führte zur \enquote{Monstrous Moonshine}.\\
+\textbf{Der ATLAS} & Conway, Curtis, Norton, Parker, Wilson 1985: die Charaktertafeln aller sporadischen und vieler anderer einfacher Gruppen, auf Papier. Heute in GAP als Bibliothek von über $5000$ Tafeln.\\
+\textbf{Offene Fragen} & Brauers Probleme von 1963: Was sagt die Tafel über die Gruppe? Nicht die Elementordnungen (Bruchfall Kapitel 4); wohl aber Auflösbarkeit, Nilpotenz, die Ordnung des Zentrums --- und, seit 2023, die Isomorphieklasse der Sylowgruppen für $p = 2$? Noch offen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Monstrous Moonshine ist der merkwürdigste Satz über eine Charaktertafel}: \Person{McKay} bemerkte 1978, dass $196\,884 = 196\,883 + 1$ --- links der erste Koeffizient der Modulfunktion $j(\tau)$, rechts die Dimension der kleinsten Monster-Darstellung plus die triviale. \Person{Conway} und \Person{Norton} formulierten die Vermutung, dass alle Koeffizienten von $j$ Dimensionen von Monster-Darstellungen sind, und \Person{Borcherds} bewies sie 1992 (Fields-Medaille 1998) über Vertexoperatoralgebren. Eine Charaktertafel, 1979 von Hand berechnet, enthielt Zahlentheorie, die niemand dort erwartet hatte.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 5.1} & eindimensionale Darstellungen = Darstellungen von $G/[G, G]$\\
+\textbf{Satz 5.2} & Spaltenorthogonalität; die Tafel ist unitär\\
+\textbf{Satz 5.3} & Tafel von $G\times H$ ist das Produkt; $g/u$ für Inversion\\
+\textbf{Tafeln} & $C_{2v}$, $C_{3v}$, $C_{4v}$, $A_4$, $T_d$, $D_6$, $D_{6h}$, $C_{2h}$, $D_{2h}$\\
+\textbf{Der Bruchfall} & Chemiker-$E$ in zyklischen Gruppen = zwei komplexe Zeilen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Tafeln stehen. Kapitel 6 benutzt sie: Es zerlegt die Bewegungen eines Moleküls, projiziert auf die Symmetrietypen und liest ab, welche Schwingungen im Infrarot- und welche im Ramanspektrum erscheinen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

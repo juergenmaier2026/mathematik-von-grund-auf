@@ -1,0 +1,313 @@
+\part{Anwendungen}
+
+\chapter{Modelle als Varietäten}
+
+\section{Zwei Münzen, vier Zahlen}
+
+\begin{merksatz}
+\boxtitel{Eine Mischung aus zwei Binomialverteilungen}
+Eine Population besteht aus zwei Gruppen (Anteil $w$ und $1 - w$); in jeder wird ein Merkmal mit Wahrscheinlichkeit $p$ bzw.\ $q$ vererbt, und man zählt bei je $n$ Nachkommen, wie viele es tragen. Beobachtet werden die Häufigkeiten $P_0, \ldots, P_n$; gesucht sind $w, p, q$.
+\[ P_j = w\binom nj p^{j}(1 - p)^{n-j} + (1 - w)\binom nj q^{j}(1 - q)^{n-j}, \qquad j = 0, \ldots, n . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.0cm}P{2.6cm}P{5.0cm}@{}}
+\toprule
+$n$ & \textbf{Zahlen} & \textbf{Faser (Gröbner-Basis, lex $w > p > q$)}\\
+\midrule
+$2$ & $3$ Parameter, $2$ freie Daten & Kurve vom Grad $4$: nicht identifizierbar\\
+$3$ & $3$ Parameter, $3$ freie Daten & $\{w + \tfrac25q - \tfrac{17}{25},\ p + q - \tfrac{9}{10},\ q^{2} - \tfrac{9}{10}q + \tfrac{7}{50}\}$: zwei Punkte\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Die zwei Punkte für $n = 3$ (Daten aus $w = 0{,}4$, $p = 0{,}2$, $q = 0{,}7$): $q\in\{0{,}2;\ 0{,}7\}$, also $(w, p, q) = (0{,}4;\ 0{,}2;\ 0{,}7)$ oder $(0{,}6;\ 0{,}7;\ 0{,}2)$ --- dieselbe Mischung mit vertauschten Gruppen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mit zwei Nachkommen je Familie ist das Modell nicht identifizierbar, mit dreien ist es identifizierbar bis auf die Vertauschung der Gruppen --- genau wie das Zwei-Kammer-Modell mit Messung im Gewebe. Es ist dieselbe Mathematik: ein Punktepaar als Faser, Grad zwei, eine Symmetrie.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein statistisches Modell mit endlich vielen Ausgängen ist eine Abbildung von Parametern in den Wahrscheinlichkeitssimplex}, und wenn die Abbildung polynomial ist --- was bei diskreten Modellen fast immer gilt ---, ist ihr Bild eine Varietät (oder deren Abschluss) und jede Faser eine Varietät. Alles, was der Band über Fasern gesagt hat --- Dimension, Grad, Komponenten, Geschlecht --- ist dann eine Aussage über Identifizierbarkeit. Dieses Kapitel führt den Leitfall zu Ende: zuerst die allgemeine Methode für Kompartimentmodelle, dann drei statistische Modelle, dann die Frage nach den reellen, positiven Lösungen, die der Band seit Kapitel 3 vor sich herschiebt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Leitfall als Verfahren}
+
+\begin{merksatz}
+\boxtitel{Satz 13.1 --- strukturelle Identifizierbarkeit, algorithmisch}
+Gegeben ein Modell $\dot x = f(x, k)$, $y = h(x, k)$ mit polynomialem $f, h$ und Parametern $k\in\mathbb C^{m}$. Das Verfahren:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{0.6cm}P{3.0cm}P{5.0cm}@{}}
+\toprule
+$1$ & \textbf{Ein-Ausgabe-Gleichungen} & Eliminiere die Zustände $x$ aus $\{y - h, \dot y - \ldots, \ddot y - \ldots\}$ (Kapitel 6); die Koeffizienten $s_1(k), \ldots, s_r(k)$ der Ein-Ausgabe-Gleichungen sind die Messgrößen.\\
+$2$ & \textbf{Rang} & Rang $\rho$ der Jacobi-Matrix $(\partial s_i/\partial k_j)$ an einem zufälligen Punkt (Kapitel 8). $\rho = m$: lokal identifizierbar. Sonst: Faserdimension $m - \rho$.\\
+$3$ & \textbf{Faser} & Gröbner-Basis von $\langle s_i(k) - s_i(k^{*})\rangle$ für zufälliges $k^{*}$, lex (Kapitel 5); Dimension und Grad (Kapitel 7); Komponenten (Kapitel 3).\\
+$4$ & \textbf{Identifizierbare Funktionen} & Eliminationsideal $\langle s_i - \sigma_i\rangle\cap k[\sigma]$ (Kapitel 6) --- oder, einfacher, alle Polynome in den $s_i$; die Frage ist, welche \kursiv{Parameter} oder einfachen Kombinationen darunter sind.\\
+$5$ & \textbf{Ausnahmen} & Die Varietät, auf der die Leitkoeffizienten der Elimination verschwinden (Kapitel 6); dort gilt alles nicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Das Verfahren entscheidet strukturelle (generische, komplexe) Identifizierbarkeit --- global, wenn der Grad der Faser $1$ ist, lokal, wenn er endlich ist.
+
+\schritt{Der Leitfall, komplett}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{1.0cm}P{1.0cm}P{1.0cm}P{2.0cm}@{}}
+\toprule
+\textbf{Modell} & $m$ & $\rho$ & \textbf{Grad} & \textbf{Urteil}\\
+\midrule
+$k_{10}, k_{12}, k_{21}, k_{20}$, Blut & $4$ & $3$ & --- & Kurve; identifizierbar: $k_{10} + k_{12}$, $k_{21} + k_{20}$, $k_{12}k_{20} - \tfrac25k_{12}$\\
+$k_{20} = 0$, Blut & $3$ & $3$ & $1$ & global\\
+$k_{10} = 0$, Blut & $3$ & $3$ & $1$ & global\\
+$k_{20} = 0$, Gewebe & $3$ & $3$ & $2$ & lokal (Vertauschung $k_{10}\leftrightarrow k_{21}$)\\
+Kette, drei Kammern & $5$ & $5$ & $1$ & global\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Verfahren ist Stand der Technik, und seine Grenzen sind die des Bandes}: Es rechnet über $\mathbb C$ und generisch; es sagt nichts über reelle positive Lösungen (unten), nichts über spezielle Daten (Ausnahmemengen), nichts über die Güte der Schätzung bei Rauschen (praktische Identifizierbarkeit, Band 17). Für nichtlineare Modelle ist Schritt 1 differentielle Elimination (Ritt--Kolchin), und die Ein-Ausgabe-Gleichungen können Hunderte Terme haben; die Programme (DAISY, SIAN, StructuralIdentifiability.jl, COMBOS für die identifizierbaren Kombinationen) bewältigen Modelle mit etwa zwanzig Zuständen und dreißig Parametern. Darüber hinaus hilft Schritt 2 allein --- der Rang ---, und die Algebra schweigt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Drei statistische Modelle}
+
+\begin{merksatz}
+\boxtitel{Satz 13.2 --- Unabhängigkeit, Hardy--Weinberg, Mischungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.9cm}P{3.0cm}P{2.9cm}@{}}
+\toprule
+\textbf{Modell} & \textbf{Varietät} & \textbf{Dimension, Grad}\\
+\midrule
+Unab\-hängig\-keit, $2\times2$-Tafel & $p_{11}p_{22} = p_{12}p_{21}$ (Segre) & $2$ im Simplex der Dimension $3$; Grad $2$\\
+Unab\-hängig\-keit, $r\times c$ & $\operatorname{rang}(p_{ij}) = 1$: alle $2\times2$-Minoren null & $r + c - 2$; Grad $\binom{r+c-2}{r-1}$\\
+Hardy--Weinberg & $(p^{2}, 2pq, q^{2})$: $4p_{AA}p_{aa} = p_{Aa}^{2}$ & Kegelschnitt im Dreieck; Dimension $1$, Grad $2$\\
+Mischung zweier Unab\-hängig\-keits\-modelle, $2\times2$ & $\operatorname{rang}\le2$: alles & $3$ = der ganze Simplex; $5$ Parameter: nicht identifizierbar\\
+Mischung, $3\times3$ & $\det(p_{ij}) = 0$ & $7$; $9$ Parameter: nicht identifizierbar\\
+Mischung, $4\times4$ & $\operatorname{rang}\le2$: alle $3\times3$-Minoren & $11$ (erwartet $2\cdot6 + 1 = 13$): nicht identifizierbar\\
+Mischung zweier Binomial($3$) & Bild dicht & $3$ Parameter, Grad $2$: identifizierbar bis auf Vertauschung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Das Unabhängigkeitsmodell}
+$p_{ij} = \alpha_i\beta_j$ mit $\sum\alpha_i = \sum\beta_j = 1$: eine Parametrisierung mit $(r - 1) + (c - 1)$ freien Parametern. Ihr Bild ist die Menge der Rang-$1$-Matrizen im Simplex --- die \Begriff{Segre-Varietät}, Implizitisierung (Kapitel 6): Alle $2\times2$-Minoren verschwinden. Für $2\times2$: eine Gleichung, die Hyperfläche $p_{11}p_{22} - p_{12}p_{21} = 0$; die Statistik nennt die Abweichung davon das Kreuzproduktverhältnis, und der $\chi^{2}$-Test (Band 17) misst den Abstand der Daten zu dieser Fläche.
+
+\schritt{Warum Mischungen scheitern}
+Eine Mischung zweier Unabhängigkeitsmodelle ist $p = w\,\alpha\beta^{\top} + (1 - w)\,\alpha'\beta'^{\top}$: eine Matrix vom Rang $\le2$. Für $2\times2$ ist jede Matrix vom Rang $\le2$: Das Bild ist alles, und $5$ Parameter füllen eine dreidimensionale Menge --- Faserdimension $2$. Für $3\times3$ ist $\operatorname{rang}\le2$ die Hyperfläche $\det = 0$ (Dimension $7$), und $9$ Parameter geben Faserdimension $2$. Für $4\times4$ hat die Varietät der Rang-$\le2$-Matrizen Dimension $2\cdot(4 + 4 - 2) - 1 = 11$ im Simplex der Dimension $15$, die Parameter sind $2\cdot6 + 1 = 13$: Faserdimension $2$. \textbf{Immer zwei}: Eine Rang-$2$-Matrix lässt sich auf eine zweiparametrige Schar von Weisen als Summe zweier Rang-$1$-Matrizen schreiben --- das Bild der Spalten ist eine Ebene, und jede Wahl zweier Richtungen in ihr gibt eine Zerlegung (Auslassung 20, die Dimension der Sekantenvarietät).
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ob ein Modell identifizierbar ist, steht in einer Dimension: der seines Bildes, verglichen mit der Zahl seiner Parameter. Für Mischungen diskreter Modelle ist das Bild eine Sekantenvarietät, und ihre Dimension ist seit den 1990er Jahren Gegenstand der algebraischen Statistik.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Hardy-Weinberg-Modell ist der Leitfall der Genetik}: Zwei Allele mit Häufigkeiten $p, q = 1 - p$, Genotypen mit Häufigkeiten $(p^{2}, 2pq, q^{2})$ --- ein Punkt auf dem Kegelschnitt $4p_{AA}p_{aa} = p_{Aa}^{2}$ im Dreieck aller Genotypverteilungen. Die Hypothese \enquote{Hardy--Weinberg gilt} ist die Hypothese, dass die Daten auf dieser Kurve liegen; der Test ist der Abstand zur Kurve; und die Parametrisierung durch $p$ ist bijektiv ($p = p_{AA} + \tfrac12p_{Aa}$): global identifizierbar, Grad $1$. Alles, was in Band 17 als Test \enquote{auf HWE} erscheint, ist eine Aussage über eine ebene Kurve vom Grad $2$ und Geschlecht $0$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Reell und positiv}
+
+\begin{merksatz}
+\boxtitel{Satz 13.3 --- das Bild als semialgebraische Menge}
+Das Bild einer polynomialen Abbildung von einer semialgebraischen Menge (definiert durch Gleichungen und Ungleichungen, etwa $k_i > 0$) ist semialgebraisch (Tarski--Seidenberg, Auslassung 21). Für den Leitfall mit $k_{20} = 0$ und $k_i > 0$:
+\[ \{(s_1, s_2, s_3)\} = \bigl\{\,s_1 > 0,\ s_2 > s_1,\ 0 < s_3 < s_1(s_2 - s_1)\,\bigr\} . \]
+
+\schritt{Herleitung}
+$s_1 = k_{10} + k_{12} > 0$; $s_2 - s_1 = k_{21} > 0$; $s_3 = k_{10}k_{21}$ mit $0 < k_{10} < s_1$ und $k_{21} = s_2 - s_1$: also $0 < s_3 < s_1(s_2 - s_1)$. Umgekehrt liefert jedes solche Tripel genau einen positiven Parametersatz. $\blacksquare$
+
+\schritt{Was das heißt}
+Messwerte außerhalb dieser Menge --- $s_3\ge s_1(s_2 - s_1)$ --- passen zu \kursiv{keinem} positiven Modell, obwohl die komplexe Faser nicht leer ist (ein Punkt, mit $k_{10} > s_1$, also $k_{12} < 0$). Ein Schätzverfahren, das diese Bedingung nicht kennt, liefert dann einen negativen Übergangskoeffizienten.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.8cm}@{}}
+\toprule
+\textbf{Komplex, generisch} & Faser = Varietät; Dimension, Grad, Komponenten --- Kapitel 1 bis 12\\
+\textbf{Reell} & Faser $\cap\,\mathbb R^{m}$: Zahl der Punkte zwischen $0$ und Grad, wechselt an der Diskriminante (Kapitel 8, 9)\\
+\textbf{Reell und positiv} & Faser $\cap\,\mathbb R_{>0}^{m}$: semialgebraisch; Zertifikat der Unlösbarkeit über den Positivstellensatz\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für Modelle mit Vertauschungssymmetrie löst die Positivität das Problem oft}: Beim Gewebemodell sind beide Lösungen positiv, und man muss wählen; bei der Mischung zweier Binomialverteilungen auch --- aber wenn eine der beiden Lösungen $w\notin[0, 1]$ oder $p\notin[0, 1]$ hätte, wäre sie ausgeschlossen, und das Modell wäre reell-global identifizierbar. Die Statistik nennt die Vertauschung \enquote{label switching} und lebt damit; die Pharmakologie kann es nicht, weil die beiden Parametersätze verschiedene Dosierungen bedeuten. Das Verfahren aus Satz 13.1 um Schritt 6 --- \enquote{reelle positive Lösungen zählen} --- zu ergänzen, ist mit zylindrischer algebraischer Zerlegung möglich (Auslassung 21) und in der Praxis selten getan; die Programme überlassen es dem Anwender.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Identifizierbar und trotzdem nicht bestimmbar}
+Das Zwei-Kammer-Modell mit $k_{20} = 0$ ist global identifizierbar: Faser ein Punkt. Nun seien die wahren Werte $k_{21} = 0{,}30$ und $k_{10} = 0{,}31$ --- fast gleich. Die Blutkurve ist dann \textbf{fast} eine einzige Exponentialfunktion, und die Messgrößen $s_2, s_3$ hängen nur schwach von der Aufteilung ab:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.4cm}@{}}
+\toprule
+\textbf{Algebra} & Faser = ein Punkt. Identifizierbar.\\
+\textbf{Rauschen $1\,\%$ auf der Kurve} & Konfidenzbereich für $(k_{10}, k_{21})$: ein langgestrecktes Gebiet entlang $k_{10} + k_{21} = \text{const}$; einzelne Werte auf $\pm50\,\%$ unsicher.\\
+\textbf{Der Grund} & Der Punkt liegt nahe der Diskriminante $k_{10} = k_{21}$ --- dort, wo die Jacobi-Matrix der Abbildung fast singulär ist (Kapitel 8). Identifizierbar, aber \emph{schlecht konditioniert}.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Strukturelle Identifizierbarkeit ist eine Aussage über exakte Daten. Mit Rauschen entscheidet nicht, ob die Faser ein Punkt ist, sondern wie steil die Abbildung dort ist --- die Singulärwerte der Jacobi-Matrix, Band 5 und Band 17. Ein Punkt nahe einer Singularität der Abbildung ist algebraisch bestimmt und praktisch unbestimmt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Grenze, an der dieser Band an Band 17 übergibt.} Die praktische Identifizierbarkeit --- Profil-Likelihood (Raue 2009), Fisher-Information, Konditionszahl --- ist eine Frage der Statistik, und sie kann ein Modell verwerfen, das die Algebra freigegeben hat. Umgekehrt nicht: Was die Algebra als unidentifizierbar erkennt, rettet keine Datenmenge. Die richtige Reihenfolge ist darum die des Bandes: zuerst die Struktur (Faser, Dimension, Grad), dann die Zahlen. Wer sie umkehrt --- erst schätzen, dann wundern, warum die Schätzung schwankt ---, verbringt Monate mit einem Problem, das Kapitel 1 in einer Zeile entscheidet.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.1 --- Hardy--Weinberg als Kurve}
+Zeigen Sie, dass die Genotypverteilungen $(p^{2}, 2pq, q^{2})$, $p + q = 1$, genau die Punkte des Simplex auf dem Kegelschnitt $4p_{AA}p_{aa} = p_{Aa}^{2}$ sind, und bestimmen Sie $p$ aus den Daten.
+
+\loesung
+\schritt{Schritt 1 --- Hin}
+$4\cdot p^{2}\cdot q^{2} = (2pq)^{2}$. \checkmark
+
+\schritt{Schritt 2 --- Zurück}
+Sei $(a, b, c)$ im Simplex ($a, b, c\ge0$, $a + b + c = 1$) mit $4ac = b^{2}$. Setze $p = a + \tfrac b2$, $q = c + \tfrac b2$; dann $p + q = 1$, und $p^{2} = a^{2} + ab + \tfrac{b^{2}}{4} = a^{2} + ab + ac = a(a + b + c) = a$. \checkmark\ Ebenso $q^{2} = c$, und $2pq = 1 - a - c = b$. \checkmark
+
+\schritt{Schritt 3 --- Identifizierbarkeit}
+$p = p_{AA} + \tfrac12p_{Aa}$: eine lineare Funktion der Daten, eindeutig. Grad $1$, global identifizierbar --- und die Formel ist der Schätzer, den jedes Genetiklehrbuch angibt (Allelfrequenz durch Zählen).
+
+\schritt{Schritt 4 --- Der Test}
+Die Hypothese ist \enquote{Daten liegen auf der Kurve}. Mit beobachteten Zählungen $n_{AA}, n_{Aa}, n_{aa}$ und $\hat p$ aus Schritt 3 sind die erwarteten $N\hat p^{2}, 2N\hat p\hat q, N\hat q^{2}$, und $\chi^{2} = \sum(\text{beob} - \text{erw})^{2}/\text{erw}$ hat einen Freiheitsgrad --- die Dimension des Simplex ($2$) minus die der Kurve ($1$). Die Zahl der Freiheitsgrade eines Anpassungstests ist eine Kodimension.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{\enquote{Freiheitsgrade = Kodimension des Modells im Simplex}} ist die erste Lektion der algebraischen Statistik, und sie gilt, solange das Modell glatt ist. An singulären Punkten der Modellvarietät --- bei Mischmodellen, wenn zwei Komponenten zusammenfallen --- ist die $\chi^{2}$-Verteilung mit dieser Freiheitsgradzahl falsch, und der Test lügt. Der Bruchfall von Kapitel 8 in der Statistik.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.2 --- Die Mischung mit $n = 2$}
+Zeigen Sie direkt, dass die Mischung zweier Binomial($2$)-Verteilungen nicht identifizierbar ist, und geben Sie die identifizierbaren Funktionen an.
+
+\loesung
+\schritt{Schritt 1 --- Die Daten}
+$P_0 = w(1 - p)^{2} + (1 - w)(1 - q)^{2}$, $P_1 = 2wp(1 - p) + 2(1 - w)q(1 - q)$, $P_2 = 1 - P_0 - P_1$: zwei freie Zahlen für drei Parameter.
+
+\schritt{Schritt 2 --- Die Momente}
+Mittelwert der Merkmalszahl: $\mu_1 = P_1 + 2P_2 = 2(wp + (1 - w)q)$. Zweites Moment: $P_1 + 4P_2 = 2(wp + (1-w)q) + 2(wp^{2} + (1-w)q^{2})$. Also sind $m_1 = wp + (1 - w)q$ und $m_2 = wp^{2} + (1 - w)q^{2}$ identifizierbar --- und mehr nicht: Die Daten sind Funktionen von $m_1, m_2$ allein.
+
+\schritt{Schritt 3 --- Die Faser}
+Zu gegebenen $m_1, m_2$: Drei Unbekannte, zwei Gleichungen --- eine Kurve. Parametrisiert durch $w$: $p, q$ sind die Lösungen von $wp + (1-w)q = m_1$, $wp^{2} + (1-w)q^{2} = m_2$. Für die Daten aus $(0{,}4;\ 0{,}2;\ 0{,}7)$: $m_1 = 0{,}5$, $m_2 = 0{,}31$; mit $w = \tfrac12$: $p + q = 1$, $p^{2} + q^{2} = 0{,}62$, also $pq = 0{,}19$, $p, q = 0{,}5\pm\sqrt{0{,}06} = 0{,}255, 0{,}745$ --- ein anderes Modell, dieselben Daten. \checkmark
+
+\schritt{Schritt 4 --- Mit $n = 3$}
+Das dritte Moment $m_3 = wp^{3} + (1-w)q^{3}$ kommt hinzu, drei Gleichungen für drei Unbekannte, und die Faser wird endlich: Grad $2$ (Eingangstabelle). Allgemein: Eine Mischung aus $k$ Binomialverteilungen ist genau dann identifizierbar (bis auf Vertauschung), wenn $n\ge2k - 1$ (Teicher 1963, Blischke 1964).
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Momente sind die identifizierbaren Funktionen} --- symmetrisch in den beiden Komponenten, wie es die Vertauschungssymmetrie verlangt ---, und ihre Zahl ist $n$; die Parameter sind $2k - 1$. Das Zählen gibt $n\ge2k - 1$, und hier stimmt das Zählen, weil die Momentenabbildung ab dieser Schranke vollen Rang hat (Kapitel 8). Für Mischungen von Normalverteilungen ist alles identifizierbar (Teicher), für Mischungen von Gleichverteilungen nicht --- die Frage ist für jede Familie eine eigene Rechnung.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.3 --- Ein Positivitätszertifikat}
+Zeigen Sie: Zu Messwerten $s_1 = 1$, $s_2 = 2$, $s_3 = 2$ gibt es kein Zwei-Kammer-Modell mit $k_{20} = 0$ und positiven Parametern --- und geben Sie ein algebraisches Zertifikat.
+
+\loesung
+\schritt{Schritt 1 --- Die komplexe Faser}
+$k_{21} = s_2 - s_1 = 1$, $k_{10} = s_3/k_{21} = 2$, $k_{12} = s_1 - k_{10} = -1$. Ein Punkt --- mit negativem $k_{12}$.
+
+\schritt{Schritt 2 --- Die Bedingung}
+Satz 13.3: positive Lösung genau dann, wenn $s_3 < s_1(s_2 - s_1) = 1\cdot1 = 1$. Hier $s_3 = 2 > 1$: keine.
+
+\schritt{Schritt 3 --- Das Zertifikat}
+Man schreibe $s_3 - s_1(s_2 - s_1)$ in den Parametern: $k_{10}k_{21} - (k_{10} + k_{12})k_{21} = -k_{12}k_{21}$. Also gilt \textbf{identisch} $k_{12}k_{21} = s_1(s_2 - s_1) - s_3$. Für positive Parameter ist die linke Seite positiv; mit den Daten ist die rechte Seite $1 - 2 = -1 < 0$. Die Identität $k_{12}k_{21} = s_1s_2 - s_1^{2} - s_3$ ist das Zertifikat: ein Polynom in den Parametern, das positiv sein muss und sich als Ausdruck in den Daten schreiben lässt, der negativ ist.
+
+\schritt{Schritt 4 --- Positivstellensatz}
+Allgemein sagt der Positivstellensatz: Ist ein System $f_i = 0$, $g_j > 0$ über $\mathbb R$ unlösbar, so gibt es Quadratsummen $\sigma$ und Produkte der $g_j$ mit einer Identität der Form $-1 = \sum h_if_i + \sigma_0 + \sum\sigma_jg_j + \ldots$ Hier: $f = k_{12}k_{21} - (s_1s_2 - s_1^{2} - s_3)$ mit den Daten $= k_{12}k_{21} + 1$, $g = k_{12}k_{21}$ (Produkt zweier Positiven): $-1 = f - g$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Zertifikat ist eine Zeile, und es überzeugt einen Skeptiker, der die Rechnung nicht nachvollziehen will}: Er prüft nur die Identität. Für größere Modelle findet man solche Zertifikate mit semidefiniter Optimierung (Kapitel 3, Forschungskasten), und sie sind der Weg, auf dem die reelle Frage der Identifizierbarkeit --- \enquote{gibt es überhaupt ein zulässiges Modell zu diesen Daten?} --- algorithmisch beantwortet wird. In der Klinik heißt der Fall $s_3 > s_1(s_2 - s_1)$: Die Kurve fällt schneller ab, als ein Zwei-Kammer-Modell mit Ausscheidung nur aus dem Blut erlaubt --- das Modell ist falsch, nicht der Patient.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von Hardy bis zur algebraischen Statistik}
+\Person{G.\ H.\ Hardy} schrieb 1908 einen Brief an \enquote{Science}, in dem er einem Genetiker erklärte, dass die Genotyphäufigkeiten unter Zufallspaarung nach einer Generation stabil sind --- $(p^{2}, 2pq, q^{2})$ --- und entschuldigte sich fast dafür, etwas so Einfaches zu veröffentlichen; \Person{Wilhelm Weinberg}, Arzt in Stuttgart, hatte dasselbe im selben Jahr vor dem Verein für vaterländische Naturkunde vorgetragen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Dass statistische Modelle Varietäten sind}, bemerkte man systematisch erst in den 1990er Jahren: \Person{Diaconis} und \Person{Sturmfels} 1998 berechneten mit Gröbner-Basen exakte Tests für Kontingenztafeln (die \enquote{Markov-Basen}), \Person{Pistone}, \Person{Riccomagno} und \Person{Wynn} prägten 2001 den Namen \enquote{algebraische Statistik}, und \Person{Pachter} und \Person{Sturmfels} zeigten 2005, dass die Modelle der Phylogenetik --- Bäume mit Mutationsraten auf den Kanten --- Varietäten sind, deren Gleichungen (\enquote{Phylogenetische Invarianten}, Cavender--Felsenstein 1987, Lake 1987) sich mit den Mitteln dieses Bandes finden lassen. Die Identifizierbarkeit von Mischmodellen und versteckten Variablen wurde zum Hauptthema (Allman--Matias--Rhodes 2009), und die Verbindung zur Pharmakokinetik ist seit etwa 2010 gezogen: \Person{Meshkat}, \Person{Sullivant} und \Person{Eisenberg} 2015 behandelten lineare Kompartimentmodelle mit genau den Methoden von Kapitel 6 und 7.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Algebraische Statistik heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Maximum-Likelihood-Grad} & Die Zahl der kritischen Punkte der Likelihood auf der Modellvarietät für generische Daten ist eine Invariante der Varietät (Catanese--Hoşten--Khetan--Sturmfels 2006): für Unabhängigkeitsmodelle $1$, für allgemeine Modelle oft groß --- so viele lokale Maxima muss ein Schätzverfahren fürchten.\\
+\textbf{Identifizierbarkeit in Reaktionsnetzen} & Massenwirkungskinetik ist polynomial; die Identifizierbarkeit der Raten aus stationären Daten ist eine Frage nach Fasern von Varietäten (Craciun--Pantea 2008), und für viele biochemische Netze beantwortet.\\
+\textbf{Kausale Modelle} & Band 23 trifft Band 29: Die Identifizierbarkeit kausaler Effekte in linearen Strukturgleichungsmodellen ist eine Frage nach Fasern einer polynomialen Abbildung (Drton 2018), und Gröbner-Basen entscheiden sie für Graphen, bei denen die klassischen Kriterien schweigen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{In Band 23 war Identifizierbarkeit eine Frage von Graphen --- Hintertür, Vordertür, do-Kalkül.} Für lineare Modelle mit Gaußschem Rauschen ist sie zugleich eine Frage der Algebra: Die Kovarianzmatrix ist eine polynomiale (rationale) Funktion der Pfadkoeffizienten, und ein Koeffizient ist identifizierbar, wenn er auf der Faser konstant ist. Die graphischen Kriterien sind hinreichend, nicht notwendig; die Algebra entscheidet die Fälle dazwischen (\enquote{half-trek criterion}, Foygel--Draisma--Drton 2012), und für Graphen mit zehn Knoten in Sekunden. Es ist dieselbe Rechnung wie für die zwei Kammern --- und derselbe Bruchfall: generisch, komplex, ohne Rauschen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 13.1} & das Verfahren: Elimination, Rang, Faser, Funktionen, Ausnahmen\\
+\textbf{Satz 13.2} & Unabhängigkeit = Segre; Mischungen = Sekanten; Hardy--Weinberg = Kegelschnitt\\
+\textbf{Satz 13.3} & das reelle Bild ist semialgebraisch; Zertifikate\\
+\textbf{Der Bruchfall} & identifizierbar $\ne$ bestimmbar: Konditionierung, Band 17\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Leitfall ist zu Ende gerechnet. Kapitel 14 zeigt die beiden anderen großen Anwendungen des Bandes: einen Roboterarm, dessen Gelenkwinkel die Lösungen eines Polynomsystems sind, und die Kubik des Titelbilds über einem endlichen Körper, auf der die Verschlüsselung des Internets beruht.}
+\end{minipage}
+\end{center}
+\end{merksatz}

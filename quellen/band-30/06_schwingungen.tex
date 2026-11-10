@@ -1,0 +1,322 @@
+\chapter{Die Schwingungen des Moleküls}
+
+\section{Neun Bewegungen, drei Schwingungen}
+
+\begin{merksatz}
+\boxtitel{Wasser --- von $\Gamma_{3N}$ zu $\Gamma_{\mathrm{vib}}$}
+Die neun Verschiebungskoordinaten des Wassers tragen $\Gamma_{3N} = 3A_1 + A_2 + 2B_1 + 3B_2$ (Kapitel 4). Drei davon verschieben das ganze Molekül (Translationen: $x, y, z$, also $B_1 + B_2 + A_1$), drei drehen es ($R_x, R_y, R_z$, also $B_2 + B_1 + A_2$). Was bleibt:
+\begin{align*} \Gamma_{\mathrm{vib}} &= \Gamma_{3N} - \Gamma_{\mathrm{trans}} - \Gamma_{\mathrm{rot}}\\ &= (3A_1 + A_2 + 2B_1 + 3B_2) - (A_1 + B_1 + B_2) - (A_2 + B_1 + B_2) = 2A_1 + B_2 . \end{align*}
+Drei Schwingungen ($3N - 6 = 3$), zwei vom Typ $A_1$, eine vom Typ $B_2$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.72, every node/.style={font=\small}]
+\foreach \dx/\lab/\a/\b/\c in {0/{$\nu_1$ ($A_1$) --- 3657 cm$^{-1}$}/{(-0.5,-0.5)}/{(0.5,-0.5)}/{(0,0.45)}, 5.2/{$\nu_2$ ($A_1$) --- 1595 cm$^{-1}$}/{(-0.35,0.35)}/{(0.35,0.35)}/{(0,-0.4)}, 10.4/{$\nu_3$ ($B_2$) --- 3756 cm$^{-1}$}/{(-0.5,-0.5)}/{(-0.5,0.5)}/{(0.5,0)}}{
+\begin{scope}[shift={(\dx,0)}]
+\fill[tief] (0,0) circle (0.3);
+\fill[akzent] (-1.3,-1.1) circle (0.2);
+\fill[akzent] (1.3,-1.1) circle (0.2);
+\draw[grau, thick] (0,0)--(-1.3,-1.1) (0,0)--(1.3,-1.1);
+\draw[-latex, purpur, very thick] (-1.3,-1.1) -- ++\a;
+\draw[-latex, purpur, very thick] (1.3,-1.1) -- ++\b;
+\draw[-latex, purpur, very thick] (0,0) -- ++\c;
+\node at (0,-2.1) {\lab};
+\end{scope}}
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Zerlegung sagt: zwei symmetrische Schwingungen (beide Bindungen gleich gestreckt; der Winkel geöffnet) und eine antisymmetrische (eine Bindung gestreckt, die andere gestaucht). Sie sagt nicht, welche Frequenz --- aber sie sagt, dass alle drei im Infrarotspektrum und alle drei im Ramanspektrum erscheinen. Für Methan sagt dieselbe Rechnung: zwei Infrarotbanden von neun Schwingungen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dieses Kapitel ist das Ziel von Teil II}: Es liefert die Formel für $\Gamma_{3N}$ ohne Matrizen (Satz 6.1), die Projektionsformel, die zu jedem Symmetrietyp die zugehörigen Koordinaten konstruiert (Satz 6.2), und die Auswahlregeln (Satz 6.3): Eine Schwingung ist infrarotaktiv, wenn ihr Typ eine Komponente des Dipolvektors enthält, und ramanaktiv, wenn er eine quadratische Funktion enthält. Für Moleküle mit Inversionszentrum schließen sich beide aus. Die Chemie nennt das Alternativverbot; die Mathematik nennt es \enquote{$g\neq u$}.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Charakter der Verschiebungen}
+
+\begin{merksatz}
+\boxtitel{Satz 6.1 --- $\chi_{3N}$ ohne Matrizen}
+Für eine Symmetrieoperation $g$ eines Moleküls mit $N$ Atomen gilt
+\[ \chi_{3N}(g) = n(g)\cdot\chi_{\mathrm{geo}}(g), \]
+wobei $n(g)$ die Zahl der Atome ist, die $g$ nicht bewegt, und $\chi_{\mathrm{geo}}$ die Spur der $3\times3$-Matrix (Satz 1.2): $1 + 2\cos\theta$ für Drehungen um $\theta$, $-1 + 2\cos\theta$ für Drehspiegelungen $S_n$ ($\sigma = S_1$: $1$; $i = S_2$: $-3$).
+
+\schritt{Beweis}
+Die $9\times9$-Matrix (Kapitel 2) besteht aus $3\times3$-Blöcken: Block $(a, b)$ ist $D_{\mathrm{geo}}(g)$, wenn $g$ Atom $b$ nach $a$ schickt, sonst $0$. Auf der Diagonalen stehen nur die Blöcke der Atome mit $g(a) = a$; die Spur ist $n(g)$-mal die Spur von $D_{\mathrm{geo}}(g)$. $\blacksquare$
+
+\schritt{Die drei Moleküle}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.2cm}P{4.0cm}P{3.2cm}P{3.2cm}@{}}
+\toprule
+ & $\mathrm{H_2O}$ ($C_{2v}$) & $\mathrm{NH_3}$ ($C_{3v}$) & $\mathrm{CH_4}$ ($T_d$)\\
+\midrule
+Klassen & $E$, $C_2$, $\sigma(xz)$, $\sigma(yz)$ & $E$, $2C_3$, $3\sigma_v$ & $E$, $8C_3$, $3C_2$, $6S_4$, $6\sigma_d$\\
+$n(g)$ & $3, 1, 1, 3$ & $4, 1, 2$ & $5, 2, 1, 1, 3$\\
+$\chi_{\mathrm{geo}}$ & $3, -1, 1, 1$ & $3, 0, 1$ & $3, 0, -1, -1, 1$\\
+$\chi_{3N}$ & $9, -1, 1, 3$ & $12, 0, 2$ & $15, 0, -1, -1, 3$\\
+$\Gamma_{3N}$ & $3A_1 + A_2 + 2B_1 + 3B_2$ & $3A_1 + A_2 + 4E$ & $A_1 + E + T_1 + 3T_2$\\
+$\Gamma_{\mathrm{trans}}$ & $A_1 + B_1 + B_2$ & $A_1 + E$ & $T_2$\\
+$\Gamma_{\mathrm{rot}}$ & $A_2 + B_1 + B_2$ & $A_2 + E$ & $T_1$\\
+$\Gamma_{\mathrm{vib}}$ & $2A_1 + B_2$ & $2A_1 + 2E$ & $A_1 + E + 2T_2$\\
+Zahl der Moden & $3$ & $6$ & $9$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Probe Methan: $m_{A_1} = \frac1{24}(15 + 0 - 3 - 6 + 18) = 1$, $m_E = \frac1{24}(30 + 0 - 6 + 0 + 0) = 1$, $m_{T_1} = \frac1{24}(45 + 0 + 3 - 6 - 18) = 1$, $m_{T_2} = \frac1{24}(45 + 0 + 3 + 6 + 18) = 3$, $m_{A_2} = \frac1{24}(15 - 3 + 6 - 18) = 0$. Dimension $1 + 2 + 3 + 9 = 15$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Atome zählen, die stillstehen; mit $1 + 2\cos\theta$ oder $-1 + 2\cos\theta$ multiplizieren; Translationen und Rotationen abziehen. Das ist die ganze Rechnung, und sie dauert für Methan zwei Minuten.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Projektionsformel}
+
+\begin{merksatz}
+\boxtitel{Satz 6.2 --- Projektion auf einen Symmetrietyp}
+Sei $\rho$ eine Darstellung auf $V$ und $\chi_i$ ein irreduzibler Charakter der Dimension $d_i$. Dann ist
+\[ P_i = \frac{d_i}{|G|}\sum_{g\in G}\overline{\chi_i(g)}\,\rho(g) \]
+die Projektion von $V$ auf die \Begriff{isotypische Komponente} $V_i$ --- die Summe aller Teilräume, die $\rho_i$ tragen. Es gilt $P_i^{2} = P_i$, $P_iP_j = 0$ für $i\neq j$, $\sum_iP_i = \mathrm{id}$, und $\dim V_i = m_id_i$.
+
+\schritt{Beweis}
+Auf einem irreduziblen Teilraum $W\subset V$ vom Typ $\rho_j$ ist $P_i|_W = \frac{d_i}{|G|}\sum_g\overline{\chi_i(g)}\rho_j(g)$; das vertauscht mit $\rho_j$ (Klassenfunktion, wie im Beweis von Satz 4.5b), ist also $\lambda\,\mathrm{id}_W$ mit $\lambda d_j = \operatorname{Spur} = \frac{d_i}{|G|}\sum_g\overline{\chi_i(g)}\chi_j(g) = d_i\langle\chi_j, \chi_i\rangle = d_i\delta_{ij}$. Also $P_i|_W = \delta_{ij}\,\mathrm{id}_W$. Da $V$ direkte Summe solcher $W$ ist (Maschke), ist $P_i$ die Identität auf den Teilräumen vom Typ $i$ und null auf allen anderen. $\blacksquare$
+
+\schritt{Anwendung auf die Streckkoordinaten des Wassers}
+Seien $r_1, r_2$ die Längenänderungen der beiden O--H-Bindungen. $C_2$ und $\sigma(xz)$ vertauschen sie, $E$ und $\sigma(yz)$ lassen sie fest.
+\begin{align*}
+P_{A_1}r_1 &= \tfrac14(r_1 + r_2 + r_2 + r_1) = \tfrac12(r_1 + r_2) & &\text{symmetrische Streckung}\\
+P_{B_2}r_1 &= \tfrac14(r_1 - r_2 - r_2 + r_1) = \tfrac12(r_1 - r_2) & &\text{antisymmetrische Streckung}\\
+P_{A_2}r_1 &= \tfrac14(r_1 + r_2 - r_2 - r_1) = 0, & P_{B_1}r_1 &= \tfrac14(r_1 - r_2 + r_2 - r_1) = 0 .
+\end{align*}
+Die Winkeländerung $\delta$ ist unter allen vier Operationen fest: $A_1$. Zusammen: $2A_1$ ($r_1 + r_2$ und $\delta$) $+\ B_2$ ($r_1 - r_2$). \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Projektionsformel baut Symmetriekoordinaten: Man nimmt irgendeine Koordinate, wendet alle Gruppenelemente an, gewichtet mit dem Charakter, und summiert. Was herauskommt, hat den gewünschten Symmetrietyp --- oder ist null, wenn der Typ nicht vorkommt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Was die Projektion nicht leistet}: Sie trennt die zwei $A_1$-Koordinaten nicht voneinander --- $r_1 + r_2$ und $\delta$ liegen beide in $V_{A_1}$, und welche Linearkombinationen die echten Normalschwingungen sind, entscheidet die Dynamik (Kraftkonstanten, Massen), nicht die Symmetrie. Die Symmetrie blockdiagonalisiert die Bewegungsgleichungen: Statt eines $3\times3$-Eigenwertproblems ein $2\times2$ ($A_1$) und ein $1\times1$ ($B_2$). Für Benzol: statt $30\times30$ ein Dutzend kleine Blöcke, der größte $4\times4$ ($E_{2g}$, viermal). Das ist Wilsons $FG$-Methode von 1939, und ihr Nutzen war vor Computern enorm.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Auswahlregeln}
+
+\begin{merksatz}
+\boxtitel{Satz 6.3 --- Infrarot und Raman}
+Sei $\Gamma_k$ der Symmetrietyp einer Normalschwingung.
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item Sie ist \Begriff{infrarotaktiv} genau dann, wenn $\Gamma_k$ in $\Gamma_{\mathrm{trans}}$ vorkommt (eine der Koordinaten $x, y, z$ trägt $\Gamma_k$).
+\item Sie ist \Begriff{ramanaktiv} genau dann, wenn $\Gamma_k$ in $\mathrm{Sym}^{2}\Gamma_{\mathrm{trans}}$ vorkommt (eine der quadratischen Funktionen $x^{2}, y^{2}, z^{2}, xy, xz, yz$ oder eine Kombination trägt $\Gamma_k$).
+\item \Begriff{Alternativverbot}: Hat das Molekül ein Inversionszentrum, ist keine Schwingung beides. Infrarotaktive sind $u$, ramanaktive sind $g$.
+\end{enumerate}
+
+\schritt{Woher die Regel kommt}
+Infrarotlicht wird absorbiert, wenn sich das Dipolmoment $\vec\mu$ mit der Schwingung ändert: $\partial\vec\mu/\partial Q_k\neq0$. Die Komponenten von $\vec\mu$ transformieren sich wie $(x, y, z)$, die Normalkoordinate $Q_k$ wie $\Gamma_k$. Die Ableitung ist eine gruppeninvariante lineare Abbildung $V_{\Gamma_k}\to V_{\mathrm{trans}}$; nach Schur ist sie null, wenn $\Gamma_k$ in $\Gamma_{\mathrm{trans}}$ nicht vorkommt. Raman: Streuung, wenn sich die Polarisierbarkeit $\alpha$ --- ein symmetrischer Tensor, transformiert wie die quadratischen Formen --- mit $Q_k$ ändert; dasselbe Argument mit $\mathrm{Sym}^{2}$.
+
+\schritt{Beweis von (c)}
+$i$ wirkt auf $(x, y, z)$ als $-1$: Alle Komponenten von $\Gamma_{\mathrm{trans}}$ sind $u$. Auf Produkten $x_ax_b$ wirkt $i$ als $(-1)^{2} = +1$: Alle Komponenten von $\mathrm{Sym}^{2}$ sind $g$. Eine irreduzible Darstellung von $G\times C_i$ ist entweder $g$ oder $u$ (Satz 5.3). $\blacksquare$
+
+\schritt{Der Charakter von $\mathrm{Sym}^{2}$}
+$\chi_{\mathrm{Sym}^{2}V}(g) = \frac12\bigl(\chi_V(g)^{2} + \chi_V(g^{2})\bigr)$: Hat $\rho(g)$ Eigenwerte $\lambda_a$, so hat $\mathrm{Sym}^{2}$ die Eigenwerte $\lambda_a\lambda_b$ ($a\le b$), Summe $\frac12\bigl((\sum\lambda_a)^{2} + \sum\lambda_a^{2}\bigr)$. Für $C_{2v}$: $g^{2} = E$ für alle $g$, also $\chi_{\mathrm{Sym}^{2}} = \frac12(\chi_{\mathrm{geo}}^{2} + 3) = (6, 2, 2, 2) = 3A_1 + A_2 + B_1 + B_2$ --- die Spalte \enquote{Basisfunktionen} der Tafel: $x^{2}, y^{2}, z^{2}\in A_1$, $xy\in A_2$, $xz\in B_1$, $yz\in B_2$. \checkmark
+
+\schritt{Die drei Moleküle, abgelesen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{2.6cm}P{2.3cm}P{2.3cm}P{3.6cm}@{}}
+\toprule
+ & $\Gamma_{\mathrm{vib}}$ & IR-aktiv & Raman-aktiv & gemessen (cm$^{-1}$)\\
+\midrule
+$\mathrm{H_2O}$ & $2A_1 + B_2$ & alle $3$ & alle $3$ & $3657, 1595$ ($A_1$); $3756$ ($B_2$)\\
+$\mathrm{NH_3}$ & $2A_1 + 2E$ & alle $4$ Banden & alle $4$ & $3337, 950$ ($A_1$); $3444, 1627$ ($E$)\\
+$\mathrm{CH_4}$ & $A_1 + E + 2T_2$ & nur $T_2$: $2$ Banden & alle $4$ Banden & $2917$ ($A_1$); $1534$ ($E$); $3019, 1306$ ($T_2$)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+In $T_d$ trägt nur $T_2$ die Koordinaten $(x, y, z)$: Die symmetrische Streckung $A_1$ (alle vier Bindungen zugleich) ändert das Dipolmoment nicht --- es bleibt null --- und fehlt im Infrarotspektrum. Im Ramanspektrum ist sie die stärkste Linie.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Schwingung ist infrarotaktiv, wenn sie den Dipol ändert, ramanaktiv, wenn sie die Polarisierbarkeit ändert --- und ob sie das kann, steht in der Spalte \enquote{Basisfunktionen} der Charaktertafel: $x, y, z$ für Infrarot, Quadrate für Raman.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was die Symmetrie nicht sagt --- und was sie zu viel verspricht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Erlaubt, nicht intensiv} & Die Auswahlregel sagt, wann $\partial\mu/\partial Q = 0$ ist; wie groß sie sonst ist, sagt sie nicht. Die $A_1$-Biegeschwingung des Wassers bei $1595$ ist im Infrarot stark; manche erlaubte Banden sind so schwach, dass man sie nicht findet.\\
+\textbf{Fermi-Resonanz} & $\mathrm{CO_2}$ sollte im Raman eine Linie zeigen ($\Sigma_g^{+}$, symmetrische Streckung, berechnet bei etwa $1340$); man sieht zwei, $1285$ und $1388$. Der Oberton $2\nu_2$ der Biegeschwingung ($2\times667$) hat denselben Symmetrietyp und mischt sich hinein (\Person{Fermi} 1931). Die Symmetrie erlaubt die Mischung; die Energie entscheidet, dass sie stattfindet.\\
+\textbf{Obertöne, Kombinationen} & Die Regel gilt für die Fundamentale $v = 0\to1$. Obertöne ($0\to2$) und Kombinationsbanden haben andere Symmetrietypen (Tensorprodukte, Kapitel 9) und erscheinen, schwach, wo die Fundamentale verboten ist.\\
+\textbf{Anharmonizität} & Alles hier ist harmonische Näherung. Reale Potentiale sind es nicht; die Normalkoordinaten sind nur in erster Ordnung entkoppelt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Gruppentheorie sagt, welche Banden null sind. Alles andere --- Lage, Intensität, Aufspaltung, Mischung --- ist Dynamik. Ein Spektrum mit der Zahl der erwarteten Banden bestätigt die Symmetrie; eines mit mehr widerlegt sie nicht, denn Resonanzen und Obertöne sind erlaubt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Fermi-Resonanz ist ein Bruchfall der besonderen Art}: Die Symmetrie ist hier nicht zu schwach, sondern genau richtig --- sie erlaubt die Kopplung von $\nu_1$ und $2\nu_2$, weil beide $\Sigma_g^{+}$ sind, und verbietet die von $\nu_1$ mit $\nu_2$ selbst ($\Pi_u$). Die Rechnung, die nur Fundamentale zählt, übersieht die Erlaubnis. Fermi hat sie in einer zweiseitigen Note erklärt, und seither heißt jede zufällige Entartung gleicher Symmetrie, die sich durch Mischung abstößt, nach ihm. Im Infrarotspektrum der Atmosphäre ist $\mathrm{CO_2}$ bei $667$ ($\Pi_u$, Biegung) und $2349$ ($\Sigma_u^{+}$, antisymmetrische Streckung) sichtbar, das Dublett bei $1285/1388$ nicht --- $g$, also ramanaktiv und infrarotstumm, genau wie das Alternativverbot es verlangt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.1 --- Bortrifluorid}
+$\mathrm{BF_3}$ ist eben, das Bor in der Mitte eines gleichseitigen Dreiecks: Gruppe $D_{3h} = C_{3v}\times C_s$ mit Klassen $E$, $2C_3$, $3C_2$, $\sigma_h$, $2S_3$, $3\sigma_v$. Die Tafel: $A_1' = (1, 1, 1, 1, 1, 1)$, $A_2' = (1, 1, -1, 1, 1, -1)$, $E' = (2, -1, 0, 2, -1, 0)$, und $A_1'', A_2'', E''$ mit negierter zweiter Hälfte. $z\in A_2''$, $(x, y)\in E'$, $R_z\in A_2'$, $(R_x, R_y)\in E''$; quadratische Funktionen in $A_1'$, $E'$, $E''$. Bestimmen Sie $\Gamma_{\mathrm{vib}}$ und die Zahl der Infrarot- und Ramanbanden.
+
+\loesung
+\schritt{Schritt 1 --- $n(g)$ und $\chi_{\mathrm{geo}}$}
+$n = (4, 1, 2, 4, 1, 2)$: $C_2$ geht durch B und ein F; $\sigma_h$ ist die Molekülebene; $\sigma_v$ enthält B und ein F. $\chi_{\mathrm{geo}} = (3, 0, -1, 1, -2, 1)$: $S_3$ ist $-1 + 2\cos120^{\circ} = -2$.
+
+\schritt{Schritt 2 --- $\chi_{3N}$ und Zerlegung}
+$\chi_{3N} = (12, 0, -2, 4, -2, 2)$. Mit Klassengrößen $1, 2, 3, 1, 2, 3$ und $|G| = 12$:
+$m_{A_1'} = \frac1{12}(12 + 0 - 6 + 4 - 4 + 6) = 1$;
+$m_{A_2'} = \frac1{12}(12 + 0 + 6 + 4 - 4 - 6) = 1$;
+$m_{E'} = \frac1{12}(24 + 0 + 0 + 8 + 4 + 0) = 3$;
+$m_{A_1''} = \frac1{12}(12 + 0 - 6 - 4 + 4 - 6) = 0$;
+$m_{A_2''} = \frac1{12}(12 + 0 + 6 - 4 + 4 + 6) = 2$;
+$m_{E''} = \frac1{12}(24 + 0 + 0 - 8 - 4 + 0) = 1$.
+Probe: $1 + 1 + 6 + 0 + 2 + 2 = 12$. \checkmark
+
+\schritt{Schritt 3 --- Abziehen}
+$\Gamma_{\mathrm{trans}} = A_2'' + E'$, $\Gamma_{\mathrm{rot}} = A_2' + E''$. $\Gamma_{\mathrm{vib}} = A_1' + 2E' + A_2''$: $1 + 4 + 1 = 6 = 3\cdot4 - 6$. \checkmark
+
+\schritt{Schritt 4 --- Auswahlregeln}
+IR-aktiv: $A_2''$ ($z$) und $E'$ ($x, y$): drei Banden. Raman-aktiv: $A_1'$ und $E'$: drei Banden. Beides: die zwei $E'$. Nur Raman: $A_1'$ (symmetrische Streckung, etwa $888$ cm$^{-1}$). Nur IR: $A_2''$ (Bor schwingt aus der Ebene, etwa $700$). Das Spektrum zeigt vier Fundamentalfrequenzen, keine Schwingung ist stumm.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{$D_{3h}$ hat kein Inversionszentrum, und doch schließen sich hier eine IR- und eine Ramanbande aus} --- $A_1'$ ist nur Raman, $A_2''$ nur IR. Das Alternativverbot ist hinreichend für den Ausschluss, nicht notwendig; in $D_{3h}$ liegt es daran, dass $\sigma_h$ die quadratischen Funktionen anders behandelt als $z$. Das Experiment benutzt das: Eine Verbindung $\mathrm{AB_3}$, die im IR drei und im Raman drei Banden mit zwei Koinzidenzen zeigt, ist eben; eine pyramidale ($C_{3v}$, wie $\mathrm{NH_3}$) zeigt vier und vier mit vier Koinzidenzen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.2 --- Die Streckschwingungen des Ammoniaks}
+Projizieren Sie die drei N--H-Streckkoordinaten $r_1, r_2, r_3$ von $\mathrm{NH_3}$ auf die Symmetrietypen von $C_{3v}$.
+
+\loesung
+\schritt{Schritt 1 --- Die Darstellung auf $\{r_1, r_2, r_3\}$}
+$C_3$ permutiert zyklisch, die $\sigma_v$ vertauschen je zwei und lassen eines fest. Charakter: $(3, 0, 1)$ --- also $A_1 + E$ (Aufgabe 4.2). Keine $A_2$-Streckung.
+
+\schritt{Schritt 2 --- $P_{A_1}$}
+$P_{A_1}r_1 = \frac16\sum_g\rho(g)r_1 = \frac16(r_1 + r_2 + r_3 + r_1 + r_2 + r_3) = \frac13(r_1 + r_2 + r_3)$: alle drei Bindungen zugleich.
+
+\schritt{Schritt 3 --- $P_E$}
+$P_Er_1 = \frac26\bigl(2\cdot r_1 - 1\cdot(r_2 + r_3) + 0\bigr) = \frac13(2r_1 - r_2 - r_3)$. Ebenso $P_Er_2 = \frac13(2r_2 - r_1 - r_3)$. Die beiden sind linear unabhängig und spannen $V_E$ auf (Dimension $2$); $P_Er_3 = -(P_Er_1 + P_Er_2)$.
+
+\schritt{Schritt 4 --- Probe}
+$P_{A_1} + P_E$ auf $r_1$: $\frac13(r_1 + r_2 + r_3) + \frac13(2r_1 - r_2 - r_3) = r_1$. \checkmark\ $P_{A_2}r_1 = \frac16(r_1 + r_2 + r_3 - r_1 - r_2 - r_3) = 0$. \checkmark\ Die $E$-Koordinaten sind orthogonal zu $r_1 + r_2 + r_3$ (Koeffizientensumme $0$). \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine orthogonale Basis von $V_E$} ist $\frac1{\sqrt6}(2r_1 - r_2 - r_3)$ und $\frac1{\sqrt2}(r_2 - r_3)$ --- die zweite erhält man, indem man $P_Er_2 - P_Er_3$ bildet. Beide schwingen mit derselben Frequenz ($3444$ cm$^{-1}$): Sie liegen in einem irreduziblen Teilraum, und jeder Hamilton-Operator mit $C_{3v}$-Symmetrie ist auf ihm nach Schur ein Vielfaches der Identität. \textbf{Entartung ist Schurs Lemma}; die dritte Überraschung des Vorworts (Orbitale $1, 3, 5, 7$) wird in Kapitel 10 dieselbe Erklärung haben.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 6.3 --- Benzol}
+Für Benzol ($D_{6h}$) ist $\Gamma_{\mathrm{vib}} = 2A_{1g} + A_{2g} + A_{2u} + 2B_{1u} + 2B_{2g} + 2B_{2u} + E_{1g} + 3E_{1u} + 4E_{2g} + 2E_{2u}$. Translationen: $A_{2u}$ ($z$), $E_{1u}$ ($x, y$); quadratische Funktionen: $A_{1g}$, $E_{1g}$, $E_{2g}$. Wie viele Banden im Infrarot, wie viele im Raman, wie viele Schwingungen sind stumm? Prüfen Sie das Alternativverbot und die Modenzahl.
+
+\loesung
+\schritt{Schritt 1 --- Modenzahl}
+$2 + 1 + 1 + 2 + 2 + 2 + 2 + 6 + 8 + 4 = 30 = 3\cdot12 - 6$. \checkmark
+
+\schritt{Schritt 2 --- Infrarot}
+Typen in $\Gamma_{\mathrm{trans}}$: $A_{2u}$ (einmal) und $E_{1u}$ (dreimal). Vier Banden ($1 + 3$), die $E_{1u}$ je zweifach entartet.
+
+\schritt{Schritt 3 --- Raman}
+$A_{1g}$ (zweimal), $E_{1g}$ (einmal), $E_{2g}$ (viermal): sieben Banden.
+
+\schritt{Schritt 4 --- Stumm}
+$A_{2g}$ ($1$), $B_{1u}$ ($2$), $B_{2g}$ ($2$), $B_{2u}$ ($2$), $E_{2u}$ ($2$): neun Typen-Vorkommen, $1 + 2 + 2 + 2 + 4 = 11$ Schwingungen, die weder im IR noch im Raman erscheinen. Insgesamt: IR $1 + 6 = 7$ Moden, Raman $2 + 2 + 8 = 12$ Moden, stumm $11$; $7 + 12 + 11 = 30$. \checkmark
+
+\schritt{Schritt 5 --- Alternativverbot}
+Alle IR-aktiven sind $u$, alle Raman-aktiven $g$, keine Koinzidenz. \checkmark\ Experiment: Vier IR-Fundamentale ($3064, 1484, 1038$ $E_{1u}$; $673$ $A_{2u}$), sieben Raman-Fundamentale, darunter die berühmte Ringatmung $A_{1g}$ bei $992$ cm$^{-1}$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Elf stumme Schwingungen}: Mehr als ein Drittel der Bewegungen des Benzols ist in beiden Spektren unsichtbar --- man kennt ihre Frequenzen aus Obertönen, Kombinationsbanden, aus Isotopenverschiebungen (das Alternativverbot gilt für $\mathrm{C_6H_6}$, nicht für $\mathrm{C_6H_5D}$, das nur noch $C_{2v}$ hat) und heute aus der Rechnung. Dass ein Spektrum des Benzols elf Banden weniger zeigt, als Moden da sind, war 1934 ein Argument \emph{für} den ebenen Sechsring mit Inversionszentrum, gegen Kekulés alternierende Struktur, die nur $D_{3h}$ hätte. Kapitel 13 kehrt zum Benzol zurück: zu seinen Elektronen statt zu seinen Kernen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Raman, Wilson, Herzberg}
+\Person{Raman} fand 1928 in Kalkutta, dass Licht an Molekülen mit verschobener Frequenz gestreut wird --- die Verschiebung ist die Schwingungsfrequenz (Nobelpreis 1930, die erste Entdeckung dieser Art mit Sonnenlicht und einem Filter). \Person{Placzek} gab 1934 die Theorie der Polarisierbarkeit und damit die Raman-Auswahlregel. \Person{Wilson} leitete 1934 die Zerlegung von $\Gamma_{3N}$ und die Auswahlregeln aus den Charaktertafeln ab und entwickelte 1939 die $FG$-Matrix-Methode; sein Buch mit Decius und Cross, \enquote{Molecular Vibrations} (1955), ist bis heute die Referenz.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{\Person{Herzberg}} --- 1935 aus Darmstadt entlassen, über Saskatoon nach Ottawa --- schrieb die drei Bände \enquote{Molecular Spectra and Molecular Structure} (1939, 1945, 1966); der zweite, \enquote{Infrared and Raman Spectra of Polyatomic Molecules}, enthält die Charaktertafeln aller Punktgruppen mit Auswahlregeln und die Zuordnung Tausender Banden. Nobelpreis Chemie 1971. Das Alternativverbot steht dort als \enquote{rule of mutual exclusion}; den deutschen Namen prägte die Vorkriegsliteratur. \textbf{Dass es ein Satz der Gruppentheorie ist} --- $u\neq g$ ---, war den Spektroskopikern der dreißiger Jahre klar; ihre Rechnungen mit $n(g)(1 + 2\cos\theta)$ sind dieselben wie in Satz 6.1.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Schwingungsspektren heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Gerechnet statt gemessen} & Dichtefunktionaltheorie liefert harmonische Frequenzen mit etwa $3\,\%$ Fehler (skaliert: $1\,\%$); die Symmetrieklassifikation ist dabei exakt, die Frequenz nicht. Anharmonische Methoden (VPT2, VSCF/VCI) kommen auf wenige cm$^{-1}$.\\
+\textbf{Exoplaneten} & Das James-Webb-Teleskop fand 2022 die $4{,}3\,\mu$m-Bande des $\mathrm{CO_2}$ ($\Sigma_u^{+}$, $2349$ cm$^{-1}$) in der Atmosphäre von WASP-39b und 2023 Methan auf K2-18b --- die $T_2$-Banden aus Satz 6.3. Die Auswahlregeln dieses Kapitels sagen, welche Moleküle man aus hundert Lichtjahren Entfernung sehen kann.\\
+\textbf{Oberflächen} & Auf Metalloberflächen gilt eine zusätzliche Regel (Bilddipol): Nur Schwingungen mit Dipoländerung senkrecht zur Oberfläche sind IR-aktiv. Die Symmetriegruppe ist die des adsorbierten Moleküls samt Oberfläche, kleiner als die des freien.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Alternativverbot im Klimasystem}: $\mathrm{N_2}$ und $\mathrm{O_2}$ sind homonuklear, ihre einzige Schwingung ist $\Sigma_g^{+}$ --- ramanaktiv, infrarotstumm. Sie machen $99\,\%$ der Atmosphäre aus und absorbieren keine Wärmestrahlung. $\mathrm{CO_2}$ hat vier Schwingungen; eine ($\Sigma_g^{+}$) ist stumm, drei ($\Pi_u$ zweifach, $\Sigma_u^{+}$) absorbieren --- die Biegeschwingung bei $667$ cm$^{-1}$ liegt mitten im thermischen Spektrum der Erde. $\mathrm{H_2O}$ ohne Inversionszentrum absorbiert mit allen drei. Dass die Atmosphäre für sichtbares Licht durchsichtig ist und für Infrarot nicht, ist zu einem erheblichen Teil Satz 6.3c, angewandt auf die Moleküle, die in ihr vorkommen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 6.1} & $\chi_{3N}(g) = n(g)\chi_{\mathrm{geo}}(g)$; $\Gamma_{\mathrm{vib}} = \Gamma_{3N} - \Gamma_{\mathrm{trans}} - \Gamma_{\mathrm{rot}}$\\
+\textbf{Satz 6.2} & Projektionsformel; isotypische Komponenten; Symmetriekoordinaten\\
+\textbf{Satz 6.3} & IR: $\Gamma_k\subset\Gamma_{\mathrm{trans}}$; Raman: $\Gamma_k\subset\mathrm{Sym}^{2}$; Alternativverbot\\
+\textbf{Moleküle} & $\mathrm{H_2O}$, $\mathrm{NH_3}$, $\mathrm{CH_4}$, $\mathrm{BF_3}$, $\mathrm{C_6H_6}$ klassifiziert\\
+\textbf{Der Bruchfall} & erlaubt heißt nicht intensiv; Fermi-Resonanz; Obertöne\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil II ist zu Ende: Aus der Symmetriegruppe eines Moleküls folgen Zahl, Entartung und Sichtbarkeit seiner Schwingungen. Teil III baut neue Darstellungen aus alten --- Einschränkung, Induktion, Tensorprodukte --- und kommt damit zu Kristallfeldern, Kombinationsbanden und der symmetrischen Gruppe.}
+\end{minipage}
+\end{center}
+\end{merksatz}

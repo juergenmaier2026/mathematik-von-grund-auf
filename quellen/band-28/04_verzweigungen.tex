@@ -1,0 +1,352 @@
+\part{Wenn Parameter wandern}
+
+\chapter{Wenn aus einem Fixpunkt drei werden}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{Ein Parameter, der sich verschiebt}
+In Aufgabe 2.3 hatte die Herzzelle bei $b = 2{,}5$ drei Fixpunkte, bei $b = 0{,}8$ einen. Irgendwo dazwischen muss sich die Zahl geändert haben --- und Fixpunkte entstehen nicht einzeln.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{6.6cm}@{}}
+\toprule
+$b$ & \textbf{Fixpunkte}\\
+\midrule
+$2{,}0$ & einer: $v = -1{,}486$\\
+$2{,}3$ & einer: $v = -1{,}516$\\
+$2{,}379$ & zwei: $v = -1{,}523$ und $v = 0{,}761$ (doppelt)\\
+$2{,}5$ & drei: $v = -1{,}532$, $0{,}569$, $0{,}963$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei $b = 2{,}379$ erscheint aus dem Nichts ein Fixpunkt, der sich sofort in zwei teilt: einen Sattel und einen Strudel. Das ist eine Verzweigung --- und sie ist nicht allmählich.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine \Begriff{Verzweigung} ist ein Parameterwert, an dem sich das Phasenportrait qualitativ ändert}: Fixpunkte entstehen, verschwinden, wechseln die Stabilität, werden zu Zyklen. Zwischen Verzweigungen ändert sich nur Quantitatives --- die Lage verschiebt sich, die Periode wird länger. Ein System zu verstehen heißt, seine Verzweigungen zu kennen; sie sind die wenigen Stellen, an denen etwas geschieht. Dieses Kapitel behandelt die drei Arten, die mit Fixpunkten allein auskommen; das nächste die, bei der ein Zyklus entsteht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Sattel-Knoten-Verzweigung}
+
+\begin{merksatz}
+\boxtitel{Satz 4.1 --- die Normalform}
+\[ \dot x = r + x^{2} \]
+Für $r < 0$ gibt es zwei Fixpunkte $x = \pm\sqrt{-r}$ --- der linke anziehend, der rechte abstoßend. Für $r = 0$ gibt es einen, halbstabil. Für $r > 0$ keinen.
+
+\schritt{Beweis}
+Fixpunkte: $x^{2} = -r$. Ableitung $f'(x) = 2x$: negativ bei $-\sqrt{-r}$ (anziehend), positiv bei $+\sqrt{-r}$ (abstoßend). Bei $r = 0$ ist $f' = 0$ und $\dot x = x^{2} \ge 0$: Bahnen von links laufen hinein, von rechts weg. $\blacksquare$
+
+\schritt{Das Verzweigungsdiagramm}
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\draw[grau!60, ->] (-2.4,0) -- (1.4,0) node[right, font=\scriptsize, color=grau] {$r$};
+\draw[grau!60, ->] (0,-1.7) -- (0,1.7) node[above, font=\scriptsize, color=grau] {$x^{*}$};
+\draw[tief, line width=1.2pt, domain=0:2.25, samples=60] plot ({-\x*\x/2.25*2.25/2.25*1}, {-\x/1.5});
+\draw[akzent, line width=1.2pt, dashed, domain=0:2.25, samples=60] plot ({-\x*\x/2.25}, {\x/1.5});
+\fill[grau] (0,0) circle (2pt);
+\node[font=\scriptsize, color=tief, anchor=north] at (-1.8,-1.1) {anziehend};
+\node[font=\scriptsize, color=akzent, anchor=south] at (-1.8,1.1) {abstoßend};
+\node[font=\scriptsize, color=grau, anchor=west] at (0.1,-0.3) {$r=0$};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Fixpunkte laufen aufeinander zu, verschmelzen und verschwinden. Die Zahl der Fixpunkte springt von zwei auf null --- und mit ihr das Verhalten: Vorher Ruhe, nachher Drift.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Normalform ist nicht ein Beispiel, sondern der allgemeine Fall}: Hat ein System $\dot x = f(x, r)$ bei $(x_0, r_0)$ einen Fixpunkt mit $f_x = 0$, $f_{xx} \neq 0$ und $f_r \neq 0$, so sieht es in einer Umgebung nach Umbenennung der Koordinaten aus wie $\dot x = r + x^{2}$ --- Taylor-Entwicklung bis zur zweiten Ordnung, und die höheren Ordnungen ändern nichts (Auslassung 4). Deshalb gleicht jede Sattel-Knoten-Verzweigung jeder anderen: Die Fixpunkte nähern sich wie $\sqrt{-r}$, und kurz vor dem Verschwinden wird die Bewegung langsam, mit der Zeit $\pi/\sqrt r$ durch den \enquote{Geist} des Fixpunkts.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Herzzelle bei $b = 2{,}379$}
+In zwei Dimensionen heißt der Vorgang \Begriff{Sattel-Knoten}, weil ein Sattel und ein Knoten entstehen. Die Bedingung: Die Determinante der Jacobi-Matrix geht durch null --- ein Eigenwert ist null.
+\[ \Delta = \varepsilon\big(1 - b(1 - v^{2})\big) = 0 \quad\Longleftrightarrow\quad 1 - v^{2} = \frac1b \]
+Das ist zugleich die Bedingung, dass die Gerade $w = (v+a)/b$ die kubische Nullkline \kursiv{berührt}: Beide haben dort dieselbe Steigung $1 - v^{2} = 1/b$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Geometrisch ist jede Sattel-Knoten-Verzweigung eine Berührung von Nullklinen.} Die Gerade schneidet die Kurve einmal, dann berührt sie sie, dann schneidet sie dreimal. Bei $b = 2{,}379$ berührt sie am Punkt $v = 0{,}761$, und für $b$ darüber ist die Zelle bistabil. Der klinische Fall ist eine Zelle, deren Kaliumleitfähigkeit --- in $b$ versteckt --- zu groß wird: Sie kann in einem depolarisierten Zustand hängen bleiben, aus dem sie kein normaler Reiz zurückholt. Solche Zellen leiten nicht, und wo sie liegen, bricht die Erregungswelle aus Kapitel~13.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Transkritisch und Heugabel}
+
+\begin{merksatz}
+\boxtitel{Satz 4.2 --- zwei weitere Normalformen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{2.4cm}P{4.0cm}@{}}
+\toprule
+\textbf{Name} & \textbf{Normalform} & \textbf{Was geschieht}\\
+\midrule
+transkritisch & $\dot x = rx - x^{2}$ & Zwei Fixpunkte $0$ und $r$ kreuzen sich bei $r = 0$ und tauschen die Stabilität.\\
+Heugabel & $\dot x = rx - x^{3}$ & Für $r<0$ ein anziehender Fixpunkt $0$; für $r>0$ wird $0$ abstoßend, und zwei anziehende $\pm\sqrt r$ erscheinen symmetrisch.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis}
+Transkritisch: $f' = r - 2x$; bei $x=0$ gleich $r$ (anziehend für $r<0$), bei $x=r$ gleich $-r$ (anziehend für $r>0$). Heugabel: $f' = r - 3x^{2}$; bei $0$ gleich $r$, bei $\pm\sqrt r$ gleich $-2r < 0$. $\blacksquare$
+
+\schritt{Wo sie vorkommen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.4cm}@{}}
+\toprule
+\textbf{transkritisch} & Wo ein Fixpunkt für alle $r$ existiert --- der Nullzustand: keine Population, kein Laser, keine Infektion. Band 18: $R_0 = 1$ ist eine transkritische Verzweigung.\\
+\textbf{Heugabel} & Wo eine Symmetrie herrscht --- links und rechts gleichwertig: ein Stab unter Druck, der nach einer Seite knickt; ein Magnet unter der Curie-Temperatur.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die drei Verzweigungen unterscheiden sich darin, was man voraussetzt}: Nichts --- Sattel-Knoten. Einen Fixpunkt, der nie verschwindet --- transkritisch. Eine Symmetrie --- Heugabel. Je mehr man voraussetzt, desto seltener ist der Fall, und desto leichter zerbricht er: Der Bruchfall dieses Kapitels zeigt, was von der Heugabel bleibt, wenn die Symmetrie um ein Haar gestört wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Hysterese}
+
+\begin{merksatz}
+\boxtitel{Eine Population unter Befischung}
+Band 18: $\dot x = x(1-x) - h$ --- logistisches Wachstum, Fang $h$ je Zeiteinheit.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{3.0cm}P{4.0cm}@{}}
+\toprule
+$h$ & \textbf{Fixpunkte} & \textbf{Zustand}\\
+\midrule
+$0{,}10$ & $0{,}887$ (anziehend), $0{,}113$ (abstoßend) & stabiler Bestand\\
+$0{,}20$ & $0{,}724$, $0{,}276$ & stabil, Schwelle rückt näher\\
+$0{,}24$ & $0{,}600$, $0{,}400$ & kurz vor dem Ende\\
+$0{,}25$ & $0{,}500$ (doppelt) & Sattel-Knoten\\
+$0{,}26$ & keiner & Zusammenbruch: $\dot x < 0$ überall\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bis $h = 0{,}25$ fällt der Bestand allmählich von $0{,}89$ auf $0{,}50$. Bei $0{,}251$ gibt es keinen Bestand mehr --- die Population stirbt, nicht langsam, sondern mit der Geschwindigkeit $h - x(1-x)$.}
+\end{minipage}
+\end{center}
+
+\schritt{Und der Rückweg}
+Senkt man $h$ nach dem Zusammenbruch wieder auf $0{,}2$, so ist der Bestand bei $x \approx 0$ --- \kursiv{unter} der Schwelle $0{,}276$. Er erholt sich nicht. Erst bei $h = 0$ wächst er wieder.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist \Begriff{Hysterese}: Der Weg zurück ist nicht der Weg hin.} Der Zustand hängt nicht nur vom Parameter ab, sondern von der Geschichte --- und die Sattel-Knoten-Verzweigung ist ihr Mechanismus: Der abstoßende Fixpunkt, der mit dem anziehenden verschmilzt, war die Schwelle, und nach dem Verschmelzen gibt es keine mehr. Fischbestände, Seen, die kippen, Klimazustände, und --- in der Zelle aus Abschnitt 4.2 --- die Depolarisation, aus der kein Reiz zurückführt: Überall dasselbe Diagramm, und überall die Lehre, dass man die Verzweigung \kursiv{vor} dem Zusammenbruch erkennen muss. Der Forschungskasten sagt, woran.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die gestörte Heugabel}
+\[ \dot x = h + rx - x^{3} \]
+mit einem kleinen $h \ne 0$ --- die Symmetrie $x \to -x$ ist gebrochen.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.4cm}P{6.4cm}@{}}
+\toprule
+$h = 0$ & Heugabel bei $r = 0$: ein Ast spaltet sich symmetrisch in zwei.\\
+$h = 0{,}01$ & Kein Spalten. Der obere Ast läuft glatt durch; der untere entsteht für sich, bei $r = 3(h/2)^{2/3} = 0{,}088$, durch einen Sattel-Knoten --- und ist von oben nicht erreichbar.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Störung von einem Prozent zerstört die Heugabel. Was bleibt, ist eine Sattel-Knoten-Verzweigung an anderer Stelle --- und eine Vorentscheidung: Das System geht immer nach oben.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Heugabel ist strukturell instabil, wie das Zentrum in Kapitel~2}: Sie existiert nur, solange die Symmetrie exakt gilt, und keine Symmetrie der Wirklichkeit ist exakt. Was man in der Natur sieht, ist stets die gestörte Form --- der Stab knickt nach der Seite, nach der er schon vorher ein wenig neigte. Das ist kein Mangel des Modells, sondern eine Vorhersage: \textbf{Wo eine Heugabel sein sollte, suche man die kleine Asymmetrie; sie entscheidet.} Die Sattel-Knoten-Verzweigung dagegen braucht keine Annahme und überlebt jede Störung: Sie ist die einzige, der man in der Wirklichkeit begegnet, wenn man nichts weiter weiß.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.1 --- Die Berührung berechnen}
+Bestimmen Sie den Verzweigungswert $b_c$ der Herzzelle ($a = 0{,}7$, $I = 0$) aus der Berührbedingung.
+
+\loesung
+\schritt{Schritt 1 --- Zwei Bedingungen}
+Schnitt: $v - v^{3}/3 = (v + a)/b$. Berührung: $1 - v^{2} = 1/b$.
+
+\schritt{Schritt 2 --- Eliminieren}
+Aus der zweiten: $b = 1/(1-v^{2})$. In die erste: $v - v^{3}/3 = (v+a)(1-v^{2})$, also
+\[ v - \frac{v^{3}}{3} = v - v^{3} + a - av^{2} \quad\Longrightarrow\quad \frac{2v^{3}}{3} + a v^{2} - a = 0 . \]
+
+\schritt{Schritt 3 --- Lösen}
+$g(v) = \tfrac23 v^{3} + 0{,}7 v^{2} - 0{,}7$: $g(0{,}7) = 0{,}229 + 0{,}343 - 0{,}7 = -0{,}128$, $g(0{,}8) = 0{,}341 + 0{,}448 - 0{,}7 = 0{,}089$. Newton von $0{,}76$: $g = -0{,}0030$, $g' = 2v^{2} + 1{,}4v = 2{,}219$, $v = 0{,}76 + 0{,}0014 = 0{,}7614$.
+
+\schritt{Schritt 4 --- $b_c$ und Probe}
+$b_c = 1/(1 - 0{,}7614^{2}) = 1/0{,}4203 = 2{,}379$. Numerisch aus der Diskriminante der kubischen Gleichung: $2{,}379$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Rechnung ist das Muster für jede Sattel-Knoten-Verzweigung}: $f = 0$ und $\partial f/\partial x = 0$ zugleich, zwei Gleichungen für Ort und Parameter. In höheren Dimensionen tritt $\det J = 0$ an die Stelle der zweiten; das ist, was die Verzweigungsprogramme des Forschungskastens nachverfolgen, wenn sie einen Parameter durchfahren.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.2 --- Die Epidemie als transkritische Verzweigung}
+Im SIR-Modell aus Band 18 ist nahe am infektionsfreien Zustand $\dot I = (R_0 - 1)\,\gamma\,I - c\,I^{2}$ mit $c > 0$. Deuten Sie das.
+
+\loesung
+\schritt{Schritt 1 --- Die Form}
+Mit $r = (R_0 - 1)\gamma$ und $x = I$: $\dot x = rx - cx^{2}$ --- die transkritische Normalform bis auf den Faktor $c$.
+
+\schritt{Schritt 2 --- Die Fixpunkte}
+$x = 0$ (keine Infektion) für alle $R_0$; $x = r/c = (R_0-1)\gamma/c$ --- nur für $R_0 > 1$ positiv.
+
+\schritt{Schritt 3 --- Die Stabilität}
+$f'(0) = r$: anziehend für $R_0 < 1$, abstoßend für $R_0 > 1$. $f'(r/c) = -r$: das Umgekehrte.
+
+\schritt{Schritt 4 --- Die Deutung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bei $R_0 = 1$ tauschen die infektionsfreie und die endemische Lage ihre Stabilität. Darunter stirbt jeder Ausbruch aus, darüber bleibt eine Dauerlast --- und die wächst linear mit $R_0 - 1$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die transkritische Form ist zwingend, weil $I = 0$ immer ein Fixpunkt ist}: Ohne Infizierte entstehen keine. Dasselbe gilt für Populationen ($N = 0$), Laser (keine Photonen) und chemische Reaktionen ohne Produkt. Wo ein Nullzustand erhalten bleibt, ist die Verzweigung transkritisch --- und der Übergang stetig: Die endemische Last beginnt bei null. Das ist der Unterschied zum Sattel-Knoten, bei dem der neue Zustand mit endlicher Größe erscheint. Band 25, Kapitel~6, hat dieselbe Schwelle als Aussterbesatz für den Verzweigungsprozess; dort ist sie stochastisch, hier deterministisch, und die Zahl ist dieselbe.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 4.3 --- Der kritische Fang}
+Wie groß ist der Fang, der die Population $\dot x = x(1-x) - h$ gerade noch verträgt, wie groß der Bestand dabei --- und was würde ein Fischer tun, der nur den Bestand sieht?
+
+\loesung
+\schritt{Schritt 1 --- Die Verzweigung}
+Fixpunkte $x(1-x) = h$: $x = \tfrac12\big(1\pm\sqrt{1-4h}\big)$, reell für $h \le \tfrac14$. Sattel-Knoten bei $h_c = 0{,}25$, $x_c = 0{,}5$.
+
+\schritt{Schritt 2 --- Der Bestand kurz davor}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.4cm}P{2.0cm}P{2.6cm}@{}}
+\toprule
+$h$ & \textbf{Bestand} & \textbf{Schwelle}\\
+\midrule
+$0{,}20$ & $0{,}724$ & $0{,}276$\\
+$0{,}24$ & $0{,}600$ & $0{,}400$\\
+$0{,}249$ & $0{,}532$ & $0{,}468$\\
+$0{,}25$ & $0{,}500$ & $0{,}500$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Schritt 3 --- Was der Fischer sieht}
+Der Bestand fällt von $0{,}72$ auf $0{,}53$, als $h$ von $0{,}20$ auf $0{,}249$ steigt --- ein Viertel weniger, bei einem Viertel mehr Fang. Nichts deutet darauf hin, dass der nächste Schritt alles beendet.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Verzweigung kündigt sich im Bestand nicht an. Sie kündigt sich in der Erholungszeit an: Nahe am Sattel-Knoten ist $f'(x^{*}) = \sqrt{1-4h}$ fast null, und eine Störung klingt mit $1/\sqrt{1-4h}$ ab --- bei $h = 0{,}249$ sechzehnmal langsamer als bei $h = 0$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das \Begriff{kritische Verlangsamen}, und es ist das einzige allgemeine Frühwarnzeichen, das die Theorie kennt}: Vor jeder Sattel-Knoten-Verzweigung geht der Eigenwert gegen null, Störungen klingen langsamer ab, und die Varianz und Autokorrelation einer verrauschten Zeitreihe steigen --- Band 26, Satz 10.4, in neuer Rolle. Wer Bestände, Seen oder Patienten überwacht, sollte nicht den Mittelwert betrachten, sondern das Gedächtnis der Schwankungen. Der Forschungskasten zeigt, wie weit das trägt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Poincaré, Andronow, Thom}
+Das Wort \enquote{bifurcation} prägte Poincaré 1885 für die Gleichgewichtsfiguren rotierender Flüssigkeiten --- die Frage, wann sich ein Planet aus einer Scheibe zu einer Birne verformt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Alexander Andronow} entwickelte in den 1930er Jahren in Gorki die Theorie der Verzweigungen ebener Systeme und den Begriff der strukturellen Stabilität --- mit \Person{Pontrjagin} 1937: Ein System ist grob, wenn kleine Änderungen der Gleichungen das Portrait nicht ändern. \textbf{Die Sattel-Knoten-Verzweigung ist die einzige grobe Verzweigung eines Fixpunkts}; transkritisch und Heugabel brauchen Zusatzannahmen. \Person{René Thom} ordnete 1972 die Verzweigungen von Gradientensystemen als sieben Katastrophen und gab dem Fach einen Namen, der mehr versprach, als die Mathematik hielt; die Sattel-Knoten-Verzweigung heißt dort Faltenkatastrophe, die gestörte Heugabel Spitzenkatastrophe.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Befischung}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dass ein konstanter Fang einen Bestand schlagartig vernichten kann, zeigte \Person{Colin Clark} 1976 in einer Monographie über die Mathematik der Fischerei --- \textbf{zwei Jahre, bevor der Kabeljau vor Neufundland zusammenbrach}, der sich bis heute nicht erholt hat. Die Hysterese der Aufgabe 4.3 ist keine Metapher.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Verzweigungen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Numerische Fortsetzung} & Programme, die einen Fixpunkt oder Zyklus durch den Parameterraum verfolgen und jede Verzweigung erkennen (AUTO, MatCont).\\
+\textbf{Frühwarnzeichen} & Kritisches Verlangsamen in Daten: Autokorrelation und Varianz vor Kippunkten --- Klima, Ökosysteme, Epilepsie, Depression.\\
+\textbf{Kippkaskaden} & Verzweigungen, die einander auslösen: Ein System kippt und verschiebt den Parameter des nächsten.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{\Person{Scheffer} und Mitarbeiter haben 2009 die Frühwarnzeichen aus Aufgabe 4.3 zum Programm gemacht}: steigende Autokorrelation und Varianz in der Zeitreihe eines Systems, das sich einem Sattel-Knoten nähert. Nachgewiesen wurden sie rückblickend in Klimaarchiven und in Seen vor dem Umkippen; vorausschauend in Laborpopulationen. \textbf{In der Medizin sind sie umstritten}: Für epileptische Anfälle fand man sie in manchen Patienten, für depressive Episoden in Stimmungstagebüchern --- und in beiden Fällen auch Gegenbeispiele. Der Grund ist der Bruchfall: Das Zeichen gilt für Sattel-Knoten-Verzweigungen und nicht für alle Übergänge, und welche Art ein klinischer Übergang hat, weiß man meist nicht.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 4.1} & Sattel-Knoten: $\dot x = r + x^{2}$, Berührung der Nullklinen\\
+\textbf{Satz 4.2} & transkritisch (Nullzustand), Heugabel (Symmetrie)\\
+\textbf{Hysterese} & der Rückweg ist nicht der Hinweg\\
+\textbf{Verlangsamen} & Eigenwert gegen null: das Frühwarnzeichen\\
+\textbf{Der Bruchfall} & die gestörte Heugabel\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Alle Verzweigungen dieses Kapitels geschehen, wenn ein Eigenwert durch null geht. Das nächste Kapitel behandelt den anderen Fall: Ein Paar komplexer Eigenwerte überquert die imaginäre Achse --- und aus der Ruhe wird ein Takt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

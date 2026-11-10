@@ -1,0 +1,280 @@
+\chapter{Spin}
+
+\section{Zwei Flecken}
+
+\begin{merksatz}
+\boxtitel{Stern und Gerlach, Frankfurt 1922}
+Ein Strahl von Silberatomen fliegt durch ein inhomogenes Magnetfeld. Hat das Atom ein magnetisches Moment, wird es abgelenkt, je nach Orientierung --- klassisch ein Kontinuum von Ablenkungen, ein verschmierter Fleck. Beobachtet: \textbf{zwei} scharfe Flecken.
+
+\schritt{Was die Darstellungstheorie dazu sagt}
+Die Zustände des Atoms mit fester Energie bilden eine Darstellung der Drehgruppe. Zwei Flecken heißt: zwei Zustände, eine zweidimensionale Darstellung. Aber $SO(3)$ hat \emph{keine} zweidimensionale irreduzible Darstellung (Satz 10.4: Dimensionen $1, 3, 5, \dots$). Zwei eindimensionale ($V_0\oplus V_0$) würden sich im Magnetfeld nicht aufspalten.
+
+\schritt{Die Auflösung}
+Die Gruppe, die ein quantenmechanisches System wirklich darstellt, ist nicht $SO(3)$, sondern ihre \Begriff{doppelte Überlagerung} $SU(2)$: die Gruppe der unitären $2\times2$-Matrizen mit Determinante $1$. Sie hat Darstellungen in \emph{jeder} Dimension $2j + 1$, $j = 0, \frac12, 1, \frac32, \dots$ --- und die mit $j = \frac12$ ist der Spin des Elektrons.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Quantenmechanische Zustände sind nur bis auf eine Phase bestimmt. Darum muss eine Symmetrie nur bis auf eine Phase dargestellt sein, und das erlaubt für Drehungen genau eine zusätzliche Möglichkeit: Eine Drehung um $360^{\circ}$ wirkt als $-1$. Das ist Spin $\tfrac12$, und ohne ihn gäbe es weder die Periodentafel noch die Kernspintomographie.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dieses Kapitel} konstruiert $SU(2)$ und die Abbildung $SU(2)\to SO(3)$ mit Kern $\{\pm1\}$, findet alle irreduziblen Darstellungen mit der Methode der Quantenmechanik --- Leiteroperatoren in der Lie-Algebra --- und beweist die Clebsch--Gordan-Regel für Drehimpulse. Der Frobenius--Schur-Indikator wird zum Satz von Kramers: Halbzahliger Spin ist quaternionisch, und deshalb sind Energieniveaus bei ungerader Elektronenzahl doppelt. Der Bruchfall: Was die Chemiker mit \enquote{Doppelgruppen} meinen, und warum eine Drehung um $2\pi$ messbar ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{$SU(2)$ und die Drehgruppe}
+
+\begin{definition}
+\boxtitelm{Definition 11.1 --- $SU(2)$}
+$SU(2) = \{U\in\mathbb C^{2\times2}\colon U^{*}U = I,\ \det U = 1\} = \Bigl\{\begin{pmatrix}a & -\bar b\\ b & \bar a\end{pmatrix}\colon|a|^{2} + |b|^{2} = 1\Bigr\}$. Als Menge ist das die Einheitssphäre $S^{3}\subset\mathbb C^{2} = \mathbb R^{4}$: kompakt, zusammenhängend, einfach zusammenhängend. Jedes Element ist konjugiert zu $\operatorname{diag}(e^{i\theta/2}, e^{-i\theta/2})$ mit $\theta\in[0, 2\pi]$; Klassenfunktionen hängen von $\theta$ ab, mit Spur $2\cos(\theta/2)$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 11.2 --- $SU(2)\to SO(3)$, zwei zu eins}
+Sei $\mathfrak h = \{X\in\mathbb C^{2\times2}\colon X^{*} = X,\ \operatorname{Spur}X = 0\}$, ein dreidimensionaler reeller Vektorraum mit Basis der \Begriff{Pauli-Matrizen}
+\[ \sigma_x = \begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix},\quad\sigma_y = \begin{pmatrix}0 & -i\\ i & 0\end{pmatrix},\quad\sigma_z = \begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix}, \]
+also $\vec x\mapsto X = x\sigma_x + y\sigma_y + z\sigma_z$ mit $\det X = -|\vec x|^{2}$. Die Abbildung $\Phi(U)\colon X\mapsto UXU^{*}$ ist eine Drehung von $\mathfrak h\cong\mathbb R^{3}$, $\Phi\colon SU(2)\to SO(3)$ ist ein surjektiver Homomorphismus mit Kern $\{I, -I\}$, und $\Phi\bigl(\operatorname{diag}(e^{i\theta/2}, e^{-i\theta/2})\bigr)$ ist die Drehung um die $z$-Achse um den Winkel $\theta$.
+
+\schritt{Beweis}
+$UXU^{*}$ ist wieder hermitesch und spurfrei; $\det(UXU^{*}) = \det X$, also erhält $\Phi(U)$ die Länge $|\vec x|$: orthogonal. $SU(2)$ ist zusammenhängend und $\Phi$ stetig, $\det\Phi(U) = \pm1$ stetig, bei $I$ gleich $1$: also $SO(3)$. Homomorphismus: $\Phi(UV)X = UVXV^{*}U^{*} = \Phi(U)\Phi(V)X$. Für $U = \operatorname{diag}(e^{i\theta/2}, e^{-i\theta/2})$: $U\sigma_zU^{*} = \sigma_z$, $U(\sigma_x + i\sigma_y)U^{*} = e^{i\theta}(\sigma_x + i\sigma_y)$ (ausrechnen: $\sigma_x + i\sigma_y = \begin{pmatrix}0 & 2\\ 0 & 0\end{pmatrix}$, konjugiert mit $U$ gibt den Faktor $e^{i\theta/2}\cdot e^{i\theta/2}$), also Drehung um $z$ um $\theta$. Surjektiv: Jede Drehung ist konjugiert zu einer um $z$, und $\Phi$ ist mit Konjugation verträglich. Kern: $UXU^{*} = X$ für alle $X\in\mathfrak h$ heißt $U$ vertauscht mit allen $2\times2$-Matrizen, also $U = \lambda I$ mit $\lambda^{2} = 1$. $\blacksquare$
+
+\schritt{Die Folge}
+Eine Drehung um $\theta = 2\pi$ um $z$ ist in $SO(3)$ die Identität, in $SU(2)$ die Matrix $\operatorname{diag}(e^{i\pi}, e^{-i\pi}) = -I$. Erst $\theta = 4\pi$ gibt $I$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$SU(2)$ ist die Drehgruppe, in der man sich merkt, ob man eine ungerade oder gerade Zahl voller Umdrehungen gemacht hat. $SO(3) = SU(2)/\{\pm1\}$; jede Darstellung von $SO(3)$ ist eine von $SU(2)$, aber nicht umgekehrt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Darstellungen von $SU(2)$}
+
+\begin{merksatz}
+\boxtitel{Satz 11.3 --- Leiteroperatoren}
+Sei $\rho$ eine irreduzible Darstellung von $SU(2)$ auf $V$. Die Lie-Algebra $\mathfrak{su}(2)$ wirkt durch Ableiten: $J_k = i\frac{d}{dt}\rho\bigl(e^{-it\sigma_k/2}\bigr)\big|_{t = 0}$ für $k = x, y, z$ (die Normierung ist die der Quantenmechanik, $\hbar = 1$). Dann gilt $[J_x, J_y] = iJ_z$ und zyklisch. Setze $J_\pm = J_x\pm iJ_y$ und $J^{2} = J_x^{2} + J_y^{2} + J_z^{2}$. Dann:
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item $[J_z, J_\pm] = \pm J_\pm$, $[J_+, J_-] = 2J_z$, $J^{2}$ vertauscht mit allem.
+\item Ist $J_zv = mv$, so $J_z(J_\pm v) = (m\pm1)J_\pm v$: $J_\pm$ hebt und senkt das Gewicht um $1$.
+\item Es gibt genau ein $j\in\{0, \frac12, 1, \frac32, \dots\}$ mit $V\cong V_j$: $\dim V_j = 2j + 1$, Gewichte $m = -j, -j + 1, \dots, j$ je einmal, $J^{2} = j(j + 1)$, und in einer Basis $|j, m\rangle$:
+\[ J_z|j, m\rangle = m|j, m\rangle,\qquad J_\pm|j, m\rangle = \sqrt{j(j + 1) - m(m\pm1)}\,|j, m\pm1\rangle . \]
+\item Charakter: $\chi_j(\theta) = \sum_{m = -j}^{j}e^{im\theta} = \dfrac{\sin\bigl((2j + 1)\theta/2\bigr)}{\sin(\theta/2)}$; für $\theta = 2\pi$: $\chi_j(2\pi) = (-1)^{2j}(2j + 1)$. Genau die ganzzahligen $j$ sind Darstellungen von $SO(3)$ ($= V_\ell$ aus Kapitel 10).
+\end{enumerate}
+
+\schritt{Beweis von (c)}
+$J_z$ ist (nach Unitarisierung) hermitesch, hat also einen Eigenvektor $v$ zum Eigenwert $m$. Nach (b) sind $J_+^{k}v$ Eigenvektoren zu $m + k$ oder null; in einem endlichdimensionalen Raum muss die Leiter abbrechen: Es gibt $v_j\neq0$ mit $J_+v_j = 0$, $J_zv_j = jv_j$. Setze $v_{j-k} = J_-^{k}v_j$. Dann (Induktion mit (a)): $J_+v_{m} = \bigl(j(j + 1) - m(m + 1)\bigr)v_{m+1}$ --- denn $J_+J_- = J^{2} - J_z^{2} + J_z$ und $J^{2}v_j = (J_-J_+ + J_z^{2} + J_z)v_j = j(j + 1)v_j$, und $J^{2}$ ist konstant auf der Leiter. Auch nach unten bricht die Leiter ab: $v_{m-1} = 0$ für ein kleinstes $m$, dann $0 = J_+v_{m-1} = \bigl(j(j + 1) - (m - 1)m\bigr)v_m$, also $(j + m)(j - m + 1) = 0$, also $m = -j$. Von $j$ nach $-j$ in ganzzahligen Schritten: $2j\in\mathbb N$, Dimension $2j + 1$. Der von $v_j, \dots, v_{-j}$ aufgespannte Raum ist invariant unter $J_x, J_y, J_z$, also unter $SU(2)$ (zusammenhängend: erzeugt von der Lie-Algebra), also gleich $V$. Die Normierung mit der Wurzel: $\|J_-v_m\|^{2} = \langle v_m, J_+J_-v_m\rangle = \bigl(j(j + 1) - m(m - 1)\bigr)\|v_m\|^{2}$. Existenz für jedes $j$: Die homogenen Polynome vom Grad $2j$ in zwei Variablen $u, v$ mit $U$ wirkend auf $(u, v)$ --- Dimension $2j + 1$, Gewichte $\frac{a - b}2$ für $u^{a}v^{b}$, irreduzibel nach demselben Argument. $\blacksquare$
+
+\schritt{Beweis von (d)}
+Die Gewichte von $\operatorname{diag}(e^{i\theta/2}, e^{-i\theta/2})$ auf $|j, m\rangle$ sind $e^{im\theta}$; Summe wie in Satz 10.4. $\theta = 2\pi$: $e^{2\pi im} = (-1)^{2m} = (-1)^{2j}$. Faktorisiert über $SO(3)$ genau dann, wenn $-I\mapsto I$, also $\chi_j(2\pi) = \chi_j(0)$: $2j$ gerade. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine irreduzible Darstellung ist eine Leiter: höchstes Gewicht $j$, dann mit $J_-$ Sprosse für Sprosse abwärts bis $-j$. Die Länge $2j + 1$ ist beliebig, ganz- oder halbzahliges $j$. Nur die ganzzahligen überleben den Abstieg nach $SO(3)$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Beweis, der in jedem Lehrbuch der Quantenmechanik steht}, dort als \enquote{algebraische Theorie des Drehimpulses}, und er ist für die Lie-Algebra $\mathfrak{su}(2)$, nicht für die Gruppe. Dass jede Darstellung der Lie-Algebra zu einer der Gruppe $SU(2)$ gehört, liegt daran, dass $SU(2)$ einfach zusammenhängend ist; für $SO(3)$ gilt das nicht, und genau die halbzahligen $j$ bleiben beim Übergang zur Gruppe auf der Strecke. Die Spin-$\frac12$-Darstellung ist $SU(2)$ selbst: $J_k = \sigma_k/2$, und $\rho(U) = U$. Spin $\frac12$ \emph{definiert} die Gruppe; alles andere ist aus ihr gebaut.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Kopplung, Statistik, Zeitumkehr}
+
+\begin{merksatz}
+\boxtitel{Satz 11.4 --- Clebsch--Gordan für Drehimpulse}
+$V_{j_1}\otimes V_{j_2} = V_{|j_1 - j_2|}\oplus V_{|j_1 - j_2| + 1}\oplus\dots\oplus V_{j_1 + j_2}$, jedes einmal. Insbesondere
+\[ \tfrac12\otimes\tfrac12 = 0\oplus1,\qquad1\otimes\tfrac12 = \tfrac12\oplus\tfrac32,\qquad\mathrm{Sym}^{2}V_{1/2} = V_1,\quad\mathrm{Alt}^{2}V_{1/2} = V_0 . \]
+
+\schritt{Beweis}
+Charaktere wie in Satz 10.5a. Für $\frac12\otimes\frac12$ explizit: Basis $|{\uparrow\uparrow}\rangle, |{\uparrow\downarrow}\rangle, |{\downarrow\uparrow}\rangle, |{\downarrow\downarrow}\rangle$ mit $J_z$-Gewichten $1, 0, 0, -1$. Höchstes Gewicht $1$: $|1, 1\rangle = |{\uparrow\uparrow}\rangle$; $J_-$ ($= J_-^{(1)} + J_-^{(2)}$) gibt $|1, 0\rangle = \frac1{\sqrt2}(|{\uparrow\downarrow}\rangle + |{\downarrow\uparrow}\rangle)$, nochmals $|1, -1\rangle = |{\downarrow\downarrow}\rangle$. Orthogonal dazu im Gewicht $0$: $|0, 0\rangle = \frac1{\sqrt2}(|{\uparrow\downarrow}\rangle - |{\downarrow\uparrow}\rangle)$, und $J_\pm|0, 0\rangle = 0$. Triplett symmetrisch, Singulett antisymmetrisch. $\blacksquare$
+
+\schritt{Spin und Statistik}
+Zwei Elektronen im selben Orbital: Die Ortswellenfunktion ist symmetrisch, also muss (Pauli) die Spinfunktion antisymmetrisch sein --- das Singulett. Zwei Elektronen können ein Orbital teilen, aber nur mit entgegengesetztem Spin: die $2$ in $2, 6, 10, 14$. Das Spin-Statistik-Theorem (\Person{Pauli} 1940) sagt allgemein: halbzahliger Spin $\Rightarrow$ antisymmetrisch (Fermionen), ganzzahliger $\Rightarrow$ symmetrisch (Bosonen); sein Beweis braucht die Relativitätstheorie und liegt außerhalb dieses Bandes.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Spins $\tfrac12$ geben Spin $0$ oder $1$; das Singulett ist antisymmetrisch, das Triplett symmetrisch. Das ist ortho/para (Kapitel 8), die Paarbesetzung der Orbitale und die Regel $\mathrm{Alt}^{2}V_{1/2} = V_0$ in einem.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 11.5 --- Kramers}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item Der Frobenius--Schur-Indikator von $V_j$ ist $\nu(V_j) = (-1)^{2j}$: ganzzahliger Spin reell, halbzahliger quaternionisch.
+\item Die Zeitumkehr $T$ wirkt auf $V_j$ antiunitär mit $T^{2} = (-1)^{2j}$.
+\item Ist $H$ zeitumkehrinvariant und wirkt auf einem Raum mit $T^{2} = -1$ (ungerade Zahl von Spin-$\frac12$-Teilchen), so ist jedes Energieniveau mindestens zweifach entartet (\Begriff{Kramers-Dublett}).
+\end{enumerate}
+
+\schritt{Beweis von (a)}
+Mit Weyls Integralformel für $SU(2)$ --- Haar-Maß auf Klassenfunktionen $\frac1\pi\int_0^{2\pi}f(\theta)\sin^{2}(\theta/2)\,d\theta$ --- und $g^{2}$ hat Winkel $2\theta$: $\nu = \frac1\pi\int_0^{2\pi}\chi_j(2\theta)\sin^{2}(\theta/2)\,d\theta$. Für $j = \frac12$: $\chi_{1/2}(2\theta) = 2\cos\theta$, $\frac1\pi\int_0^{2\pi}2\cos\theta\cdot\frac{1 - \cos\theta}2\,d\theta = \frac1\pi(0 - \pi) = -1$. Für $j = 1$: $\chi_1(2\theta) = 1 + 2\cos2\theta$, $\frac1\pi\int(1 + 2\cos2\theta)\frac{1 - \cos\theta}2\,d\theta = \frac1\pi\cdot\pi = 1$. Allgemein $(-1)^{2j}$ (Induktion über Clebsch--Gordan oder direkt). Die invariante Bilinearform auf $V_{1/2}$ ist $\varepsilon(v, w) = v_1w_2 - v_2w_1 = \det(v, w)$ --- alternierend, invariant wegen $\det U = 1$.
+
+\schritt{Beweis von (b), (c)}
+$T$ muss Drehimpulse umkehren ($T\vec JT^{-1} = -\vec J$) und ist antiunitär (Wigner). Auf $V_{1/2}$: $T = i\sigma_yK$ ($K$ = komplexe Konjugation), $T^{2} = i\sigma_y\overline{i\sigma_y} = i\sigma_y\cdot(-i)\overline{\sigma_y} = \sigma_y\overline{\sigma_y} = -\sigma_y^{2} = -1$. Auf $V_j$: $T^{2} = (-1)^{2j}$ (Tensorprodukt von $2j$ Kopien). (c): Sei $H\psi = E\psi$. Dann $HT\psi = TH\psi = ET\psi$. Wäre $T\psi = \lambda\psi$, so $T^{2}\psi = T(\lambda\psi) = \bar\lambda\lambda\psi = |\lambda|^{2}\psi\neq-\psi$. Also ist $T\psi$ linear unabhängig von $\psi$ --- sogar orthogonal: $\langle\psi, T\psi\rangle = \langle T(T\psi), T\psi\rangle = \langle-\psi, T\psi\rangle$ (Antiunitarität: $\langle T\varphi, T\psi\rangle = \overline{\langle\varphi, \psi\rangle} = \langle\psi, \varphi\rangle$), also $\langle\psi, T\psi\rangle = 0$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{$T^{2} = -1$ hat keine Eigenvektoren, also kommen Zustände nur in Paaren. Ungerade Elektronenzahl heißt Kramers-Dubletts, und nur ein Magnetfeld (das $T$ bricht) kann sie trennen. Das ist der Indikator $-1$ aus Kapitel 9 in der Physik.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Hämoglobin}: Eisen(III) mit fünf $d$-Elektronen (Methämoglobin, high-spin $S = \frac52$) hat $T^{2} = -1$, alle Niveaus sind Kramers-Dubletts, und das Ion ist paramagnetisch mit Elektronenspinresonanz-Signal; Eisen(II) mit sechs $d$-Elektronen hat $T^{2} = +1$, und im low-spin-Zustand (Oxyhämoglobin, $S = 0$) ist es diamagnetisch --- \Person{Pauling} und \Person{Coryell} maßen 1936 den Unterschied zwischen arteriellem und venösem Blut mit einer Waage im Magnetfeld. Kapitel 14 rechnet die Aufspaltung aus; die Darstellungstheorie dieses Kapitels sagt vorher, welche Zahl von Zuständen überhaupt möglich ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Ist eine Drehung um $360^{\circ}$ messbar?}
+Wenn eine Drehung um $2\pi$ den Zustand mit $-1$ multipliziert, ist das eine Phase --- und Phasen sind nicht beobachtbar. Oder doch?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Relativ schon} & Teilt man einen Neutronenstrahl, dreht die Spins im einen Arm durch ein Magnetfeld um $2\pi$ und führt beide Arme zusammen, interferieren sie \emph{destruktiv}; erst bei $4\pi$ wieder konstruktiv. Gemessen von \Person{Rauch} et al.\ und \Person{Werner} et al., 1975, mit Neutroneninterferometern aus einem Silizium-Einkristall. Die Periode $4\pi$ ist Satz 11.2 im Labor.\\
+\textbf{Doppelgruppen} & \Person{Bethe} 1929: Um Spin-Zustände in einer Punktgruppe $G$ zu klassifizieren, nimmt man das Urbild $\tilde G\subset SU(2)$, mit doppelt so vielen Elementen; die Drehung um $2\pi$ ist ein neues Element $\bar E$. $\tilde C_{3v}$ hat Ordnung $12$, sechs Klassen, Darstellungen $A_1, A_2, E$ (alt) und $E_{1/2}$, ${}^{1}E_{3/2}$, ${}^{2}E_{3/2}$ (neu; $1 + 1 + 4 + 4 + 1 + 1 = 12$).\\
+\textbf{Projektive Darstellungen} & Was in der Quantenmechanik \enquote{Darstellung} heißt, ist eine Darstellung bis auf Phase: $\rho(g)\rho(h) = \omega(g, h)\rho(gh)$. Für $SO(3)$ sind alle solchen gewöhnliche Darstellungen von $SU(2)$ (\Person{Bargmann} 1954); für andere Gruppen (Galilei-Gruppe: die Masse!) gibt es mehr.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Drehung um $2\pi$ ist als absolute Phase unmessbar und als relative Phase messbar. $SU(2)$, nicht $SO(3)$, ist die Drehgruppe der Quantenmechanik, und die Natur hat das 1975 bestätigt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- $1\otimes\frac12$}
+Konstruieren Sie die Clebsch--Gordan-Zerlegung $V_1\otimes V_{1/2} = V_{3/2}\oplus V_{1/2}$ explizit und deuten Sie sie für ein $p$-Elektron.
+
+\loesung
+\schritt{Schritt 1 --- Gewichte}
+$|1, m_1\rangle\otimes|{\uparrow}\rangle, |{\downarrow}\rangle$: Gewichte $m_1\pm\frac12$: $\frac32, \frac12, \frac12, -\frac12, -\frac12, -\frac32$. Höchstes $\frac32$ einmal, $\frac12$ zweimal: $V_{3/2}$ (Gewichte $\pm\frac32, \pm\frac12$) und $V_{1/2}$ (Gewichte $\pm\frac12$). $4 + 2 = 6$. \checkmark
+
+\schritt{Schritt 2 --- Leiter}
+$|\frac32, \frac32\rangle = |1, 1\rangle|{\uparrow}\rangle$. $J_- = J_-^{(1)} + J_-^{(2)}$ mit $J_-|1, 1\rangle = \sqrt{2 - 0}\,|1, 0\rangle = \sqrt2|1, 0\rangle$ und $J_-|{\uparrow}\rangle = |{\downarrow}\rangle$:
+\[ J_-|\tfrac32, \tfrac32\rangle = \sqrt2|1, 0\rangle|{\uparrow}\rangle + |1, 1\rangle|{\downarrow}\rangle,\quad\text{Norm }\sqrt3 = \sqrt{\tfrac32\cdot\tfrac52 - \tfrac32\cdot\tfrac12}\ \checkmark . \]
+Also $|\frac32, \frac12\rangle = \sqrt{\frac23}|1, 0\rangle|{\uparrow}\rangle + \sqrt{\frac13}|1, 1\rangle|{\downarrow}\rangle$.
+
+\schritt{Schritt 3 --- Das Orthogonale}
+$|\frac12, \frac12\rangle = \sqrt{\frac13}|1, 0\rangle|{\uparrow}\rangle - \sqrt{\frac23}|1, 1\rangle|{\downarrow}\rangle$ (Vorzeichen: Condon--Shortley-Konvention). Probe: $J_+|\frac12, \frac12\rangle = \sqrt{\frac13}\sqrt2|1, 1\rangle|{\uparrow}\rangle - \sqrt{\frac23}|1, 1\rangle|{\uparrow}\rangle = 0$. \checkmark\ Höchstes Gewicht der zweiten Leiter.
+
+\schritt{Schritt 4 --- Deutung}
+Ein $p$-Elektron hat $\ell = 1$ und $s = \frac12$; die Spin-Bahn-Kopplung $\xi\,\vec L\cdot\vec S = \frac\xi2(J^{2} - L^{2} - S^{2})$ hat auf $V_{3/2}$ den Wert $\frac\xi2(\frac{15}4 - 2 - \frac34) = \frac\xi2$, auf $V_{1/2}$ den Wert $\frac\xi2(\frac34 - 2 - \frac34) = -\xi$: Aufspaltung $\frac32\xi$ in $p_{3/2}$ (vier Zustände) und $p_{1/2}$ (zwei). Das Natrium-Dublett $589{,}0$ und $589{,}6$ nm ist $3p_{3/2}\to3s$ und $3p_{1/2}\to3s$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Koeffizienten $\sqrt{2/3}$, $\sqrt{1/3}$ sind Clebsch--Gordan-Koeffizienten}; die Reihe ($\frac32\oplus\frac12$) war eine Zeile Charakterrechnung, die Koeffizienten brauchten die Leiter --- Bruchfall Kapitel 9. Ihre Quadrate sind Wahrscheinlichkeiten: Ein $p_{3/2}$-Elektron mit $m_j = \frac12$ hat mit Wahrscheinlichkeit $\frac23$ Spin aufwärts. Die Tabellen der Koeffizienten (bis $2\otimes2$) stehen auf der Rückseite jeder Teilchenphysik-Tabelle des Particle Data Group --- Gordans Invariantentheorie von 1868 als Nachschlagewerk.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- Spin-$1$-Teilchen und $\mathrm{Sym}^{2}$}
+Zwei identische Spin-$1$-Bosonen (etwa zwei Deuteronen, oder zwei Photonen --- Letztere mit Vorbehalt) im selben Ortszustand: Welche Gesamtspins sind möglich?
+
+\loesung
+\schritt{Schritt 1 --- Produkt}
+$V_1\otimes V_1 = V_0\oplus V_1\oplus V_2$ (Dimensionen $1 + 3 + 5 = 9$).
+
+\schritt{Schritt 2 --- Symmetrisch}
+Bosonen im symmetrischen Ortszustand brauchen symmetrischen Spinzustand: $\mathrm{Sym}^{2}V_1$, Dimension $6$. Charakter: $\chi_1(\theta) = 1 + 2\cos\theta$, $\chi_1(2\theta) = 1 + 2\cos2\theta$; $\chi_{\mathrm{Sym}^{2}} = \frac12\bigl((1 + 2\cos\theta)^{2} + 1 + 2\cos2\theta\bigr) = \frac12(1 + 4\cos\theta + 4\cos^{2}\theta + 1 + 2\cos2\theta) = \frac12(2 + 4\cos\theta + 2 + 2\cos2\theta + 2\cos2\theta) = 2 + 2\cos\theta + 2\cos2\theta = \chi_0 + \chi_2$ ($4\cos^{2}\theta = 2 + 2\cos2\theta$).
+
+\schritt{Schritt 3 --- Ergebnis}
+$\mathrm{Sym}^{2}V_1 = V_0\oplus V_2$: Gesamtspin $0$ oder $2$, nicht $1$. $\mathrm{Alt}^{2}V_1 = V_1$ (Dimension $3$, der Rest). \checkmark\ Dieselbe Rechnung wie Aufgabe 10.1 ($\mathcal P_2 = V_0 + V_2$) und Aufgabe 9.2 ($\mathrm{Sym}^{2}E = A_1 + E$ in $C_{3v}$).
+
+\schritt{Schritt 4 --- Landau--Yang}
+Für zwei Photonen kommt hinzu, dass sie masselos sind und nur Helizität $\pm1$ haben; \Person{Landau} (1948) und \Person{Yang} (1950) zeigten, dass ein Teilchen mit Spin $1$ nicht in zwei Photonen zerfallen kann --- und deshalb war klar, dass das 2012 entdeckte Teilchen, das in zwei Photonen zerfällt, Spin $0$ oder $2$ hat, nicht $1$. Das Higgs-Boson hat Spin $0$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Satz über $\mathrm{Sym}^{2}$, der einen Nobelpreis einsortiert}: Die erste Eigenschaft des neuen Teilchens, die am CERN feststand, war \enquote{nicht Spin $1$}, und das war Satz 9.3 für $SU(2)$, plus Landau--Yang für die Masselosigkeit. Die Spin-$0$-Zuweisung kam später aus Winkelverteilungen --- auch das Darstellungstheorie: Die Verteilung der Zerfallsprodukte ist $|D^{j}_{m m'}(\theta)|^{2}$, eine Wigner-$d$-Funktion, und für $j = 0$ isotrop.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Der Indikator, nochmals}
+Prüfen Sie $\nu(V_{3/2}) = -1$ und $\nu(V_2) = 1$ mit der Integralformel, und zeigen Sie: Ein System aus $n$ Spin-$\frac12$-Teilchen hat $T^{2} = (-1)^{n}$.
+
+\loesung
+\schritt{Schritt 1 --- $V_{3/2}$}
+$\chi_{3/2}(\varphi) = 2\cos(\varphi/2) + 2\cos(3\varphi/2)$, also $\chi_{3/2}(2\theta) = 2\cos\theta + 2\cos3\theta$. $\nu = \frac1\pi\int_0^{2\pi}(2\cos\theta + 2\cos3\theta)\frac{1 - \cos\theta}2\,d\theta = \frac1\pi\int_0^{2\pi}(\cos\theta + \cos3\theta)(1 - \cos\theta)\,d\theta$. Nur $-\cos^{2}\theta$ überlebt: $-\pi$. $\nu = -1$. \checkmark
+
+\schritt{Schritt 2 --- $V_2$}
+$\chi_2(2\theta) = 1 + 2\cos2\theta + 2\cos4\theta$. $\frac1\pi\int(1 + 2\cos2\theta + 2\cos4\theta)\frac{1 - \cos\theta}2\,d\theta = \frac1{2\pi}\cdot2\pi = 1$ (alle Kosinusprodukte integrieren über $[0, 2\pi]$ zu null, da die Frequenzen verschieden sind). \checkmark
+
+\schritt{Schritt 3 --- $n$ Teilchen}
+$T = T_1\otimes\dots\otimes T_n$, $T^{2} = T_1^{2}\otimes\dots\otimes T_n^{2} = (-1)^{n}$. Allgemein für Gesamtspin $J$: $T^{2} = (-1)^{2J}$, und $2J\equiv n\pmod2$ nach Clebsch--Gordan (Summe von $n$ halbzahligen ist halbzahlig genau für ungerades $n$). \checkmark
+
+\schritt{Schritt 4 --- Was das heißt}
+Atome mit ungerader Elektronenzahl (Na, Cu$^{2+}$, Fe$^{3+}$) haben Kramers-Dubletts; mit gerader (Ni$^{2+}$, Fe$^{2+}$) können sie nichtentartete Grundzustände haben. Elektronenspinresonanz funktioniert gut an Kramers-Ionen --- der Grund, warum ESR-Spektren von Fe$^{3+}$-Hämproteinen Routine sind und die von Fe$^{2+}$ nicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die drei Fälle des Indikators sind die drei Zufallsmatrix-Ensembles} (Band 25): Hamilton-Operatoren mit $T^{2} = +1$ sind reell symmetrisch (GOE), mit $T^{2} = -1$ quaternionisch selbstadjungiert (GSE), ohne Zeitumkehr komplex hermitesch (GUE). Dysons \enquote{threefold way} (1962) ist Frobenius--Schur 1906 für die Gruppe der Zeitumkehr --- und die Niveauabstoßung in Kernspektren, die Wigner 1955 beschrieb, hat je nach Fall den Exponenten $\beta = 1, 2, 4$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Der Spin, der nicht sein durfte}
+\Person{Uhlenbeck} und \Person{Goudsmit} schlugen 1925 vor, dass das Elektron einen Eigendrehimpuls $\frac12$ hat --- ihr Doktorvater \Person{Ehrenfest} schickte die Note ab, bevor Lorentz ihnen ausreden konnte, dass die Oberfläche eines rotierenden Elektrons schneller als Licht sein müsste. \Person{Kronig} hatte dieselbe Idee Monate früher und ließ sich von \Person{Pauli} davon abbringen. \Person{Pauli} selbst führte 1927 die Matrizen $\sigma_k$ ein, \Person{Dirac} 1928 die relativistische Gleichung, aus der der Spin folgt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Dass $SU(2)$ die Drehgruppe der Quantenmechanik ist}, steht in \Person{Weyl}s \enquote{Gruppentheorie und Quantenmechanik} (1928) und \Person{Wigner}s Buch (1931); die zweideutigen Darstellungen von $SO(3)$ hatte \Person{Cartan} 1913 als Spinoren klassifiziert, ohne Physik. Der Stern-Gerlach-Versuch (1922) war als Test der Richtungsquantelung von Sommerfelds $\ell = 1$ gedacht und hätte drei Flecken zeigen müssen; dass zwei herauskamen, verstand man erst 1925--27 als Spin. Die Zigarre, deren Rauch die Silberschicht auf der Platte sichtbar machte --- Gerlachs Legende ---, ist historisch unsicher; der Spin nicht. \Person{Kramers}' Satz stammt von 1930, die Deutung über $T^{2} = -1$ von \Person{Wigner} 1932.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Spin heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Kernspin\-tomographie} & Protonen ($j = \frac12$) im Feld von $1{,}5$--$7$ T präzedieren mit $64$--$300$ MHz; ein Hochfrequenzpuls ist ein Element von $SU(2)$, das Spins um $90^{\circ}$ oder $180^{\circ}$ dreht, und jede Pulssequenz ist ein Wort in $SU(2)$. Die Bildgebung selbst ist Fourier-Analyse (Kapitel 12).\\
+\textbf{Qubits} & Ein Qubit ist $V_{1/2}$; die Einzel-Qubit-Gatter sind $SU(2)$ (bis auf Phase), die Bloch-Kugel ist $SU(2)/U(1) = S^{2}$. Fehlerkorrektur und Benchmarking zerlegen Rauschkanäle nach Clebsch--Gordan ($\frac12\otimes\frac12 = 0\oplus1$: Identität plus Pauli-Fehler).\\
+\textbf{Kramers-Paare in Festkörpern} & Topologische Isolatoren (Kane--Mele 2005) beruhen auf Kramers-Entartung: Mit $T^{2} = -1$ sind Randzustände in Paaren geschützt, die kein zeitumkehrinvarianter Defekt streuen kann. Der $\mathbb Z_2$-Index zählt Kramers-Paare modulo $2$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 11.2} & $SU(2)\to SO(3)$, Kern $\pm1$; $2\pi\mapsto-1$\\
+\textbf{Satz 11.3} & Leiteroperatoren; $V_j$ für alle $j\in\frac12\mathbb N$; halbzahlig nicht in $SO(3)$\\
+\textbf{Satz 11.4} & Clebsch--Gordan; Singulett/Triplett; Spin und Statistik\\
+\textbf{Satz 11.5} & $\nu(V_j) = (-1)^{2j}$; $T^{2} = (-1)^{2j}$; Kramers-Dubletts\\
+\textbf{Der Bruchfall} & $4\pi$-Periode gemessen (1975); Doppelgruppen; projektive Darstellungen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kapitel 12 sammelt ein, was die ganze Zeit im Hintergrund stand: dass jede Funktion auf einer Gruppe eine Summe von Matrixelementen ist --- Fourier-Analyse, von $\mathbb Z/n$ über $S_n$ bis $SO(3)$ ---, und dass $S_n$ und $SU(2)$ auf $(\mathbb C^{2})^{\otimes n}$ einander vollständig bestimmen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

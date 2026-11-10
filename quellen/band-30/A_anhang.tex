@@ -1,0 +1,344 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Begriffe und Formeln}
+
+\begin{merksatz}
+\boxtitel{Teil I bis III}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{4.8cm}P{3.8cm}@{}}
+\toprule
+$E, C_n, \sigma, i, S_n$; Spuren $1 + 2\cos\theta$, $1$, $-3$, $-1 + 2\cos\theta$ & Symmetrieoperationen (1.2)\\
+$C_{2v}, C_{3v}, C_{4v}, D_{6h}, T_d, O_h$ & Punktgruppen, Schoenflies (1)\\
+$\rho\colon G\to GL(V)$, $\rho(gh) = \rho(g)\rho(h)$ & Darstellung (2.1)\\
+$\langle v, w\rangle_G = \frac1{|G|}\sum\langle\rho(g)v, \rho(g)w\rangle$ & Unitarisierung (2.2)\\
+$W\subset V$ invariant; $V = W\oplus W^{\perp}$ & Maschke (3.2)\\
+$\operatorname{Hom}_G(V, W) = 0$ oder $\cong$; $\operatorname{End}_G(V) = \mathbb C$ & Schur (3.3)\\
+$\chi(g) = \operatorname{Spur}\rho(g)$; $\chi(g^{-1}) = \overline{\chi(g)}$ & Charakter (4.1, 4.2)\\
+$\langle\chi_i, \chi_j\rangle = \frac1{|G|}\sum_g\chi_i\overline{\chi_j} = \delta_{ij}$ & Orthogonalität (4.3)\\
+$m_i = \langle\chi, \chi_i\rangle$; $\langle\chi, \chi\rangle = \sum m_i^{2}$ & Zerlegung (4.4)\\
+$\sum d_i^{2} = |G|$; $\#\{\rho_i\} = \#$Klassen & Zählung (4.5)\\
+$\#\{\dim 1\} = |G/[G, G]|$ & Abelisierung (5.1)\\
+$\sum_i\chi_i(g)\overline{\chi_i(h)} = |C_G(g)|\delta_{g\sim h}$ & Spaltenorthogonalität (5.2)\\
+$\chi_{\rho\boxtimes\sigma}(g, h) = \chi_\rho(g)\chi_\sigma(h)$; $g/u$ & Produkte $G\times H$ (5.3)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{4.8cm}P{3.8cm}@{}}
+\toprule
+$\chi_{3N}(g) = n(g)\chi_{\mathrm{geo}}(g)$; $\Gamma_{\mathrm{vib}} = \Gamma_{3N} - \Gamma_{\mathrm{tr}} - \Gamma_{\mathrm{rot}}$ & Schwingungen (6.1)\\
+$P_i = \frac{d_i}{|G|}\sum_g\overline{\chi_i(g)}\rho(g)$ & Projektion (6.2)\\
+IR: $\Gamma\subset\Gamma_{\mathrm{trans}}$; Raman: $\Gamma\subset\mathrm{Sym}^{2}\Gamma_{\mathrm{trans}}$; $g\neq u$ & Auswahlregeln (6.3)\\
+$\chi_{\operatorname{Ind}\sigma}(g) = \frac1{|H|}\sum_{x^{-1}gx\in H}\chi_\sigma(x^{-1}gx)$ & Induktion (7.4)\\
+$\langle\operatorname{Ind}\sigma, \rho\rangle_G = \langle\sigma, \operatorname{Res}\rho\rangle_H$ & Frobenius-Reziprozität (7.5)\\
+Klassen von $S_n$ = Partitionen; $z_\lambda = \prod j^{m_j}m_j!$ & (8.1)\\
+$S^{\lambda}\subset\operatorname{Ind}_{S_\lambda}\mathbf 1\cap\operatorname{Ind}_{S_{\lambda'}}\mathrm{sgn}$ & Specht-Modul (8.2)\\
+$f^{\lambda} = n!/\prod h(i, j)$ & Hakenformel (8.4)\\
+$\chi_{\rho\otimes\sigma} = \chi_\rho\chi_\sigma$; $c_{ij}^{k} = \langle\chi_i\chi_j, \chi_k\rangle$ & Tensorprodukt (9.2)\\
+$\chi_{\mathrm{Sym}^{2}/\mathrm{Alt}^{2}}(g) = \frac12(\chi(g)^{2}\pm\chi(g^{2}))$ & Quadrate (9.3)\\
+$\nu(\chi) = \frac1{|G|}\sum\chi(g^{2})\in\{1, 0, -1\}$ & Frobenius--Schur (9.4)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Teil IV und V}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{4.8cm}P{3.8cm}@{}}
+\toprule
+$\int_Gf(hg)\,dg = \int_Gf(g)\,dg$, $\int_G dg = 1$ & Haar-Maß (10.1)\\
+$\int_{SO(3)}f = \frac1\pi\int_0^{\pi}f(\theta)(1 - \cos\theta)\,d\theta$ & Weyl-Integral $SO(3)$ (10.3)\\
+$\chi_\ell(\theta) = \sum_{m=-\ell}^{\ell}e^{im\theta} = \frac{\sin((2\ell + 1)\theta/2)}{\sin(\theta/2)}$ & $V_\ell$, $\dim 2\ell + 1$ (10.4)\\
+$V_\ell\otimes V_{\ell'} = \bigoplus_{L = |\ell - \ell'|}^{\ell + \ell'}V_L$; $\Delta\ell = \pm1$ & Clebsch--Gordan, Dipol (10.5)\\
+$V_2\downarrow O = E + T_2$; $V_3\downarrow O = A_2 + T_1 + T_2$ & Kristallfeld (7.3, 10.3)\\
+$SU(2)\to SO(3)$, Kern $\pm1$; $\sigma_x, \sigma_y, \sigma_z$ & Überlagerung (11.2)\\
+$[J_z, J_\pm] = \pm J_\pm$; $J_\pm|j, m\rangle = \sqrt{j(j + 1) - m(m\pm1)}|j, m\pm1\rangle$ & Leiter (11.3)\\
+$\int_{SU(2)}f = \frac1\pi\int_0^{2\pi}f(\theta)\sin^{2}\frac\theta2\,d\theta$; $\chi_j(2\pi) = (-1)^{2j}(2j + 1)$ & (11.3, 11.5)\\
+$\tfrac12\otimes\tfrac12 = 0\oplus1$; $\mathrm{Alt}^{2}V_{1/2} = V_0$ & Singulett/Triplett (11.4)\\
+$\nu(V_j) = (-1)^{2j}$; $T^{2} = (-1)^{2j}$ & Kramers (11.5)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}P{4.8cm}P{3.8cm}@{}}
+\toprule
+$\hat f(\rho) = \sum_gf(g)\rho(g)$; $f(g) = \frac1{|G|}\sum_id_i\operatorname{Spur}(\rho_i(g^{-1})\hat f(\rho_i))$ & Fourier (12.1, 12.2)\\
+$\widehat{f * h} = \hat f\hat h$; $\sum|f|^{2} = \frac1{|G|}\sum d_i\|\hat f_i\|^{2}$ & Faltung, Plancherel (12.2)\\
+$L^{2}(G) = \widehat\bigoplus d_\rho\rho$; $L^{2}(S^{2}) = \bigoplus\mathcal H_\ell$ & Peter--Weyl (12.3)\\
+$V^{\otimes n} = \bigoplus_\lambda S^{\lambda}\otimes W_\lambda(V)$; $(\mathbb C^{2})^{\otimes n} = \bigoplus_kS^{(n-k,k)}\otimes V_{(n-2k)/2}$ & Schur--Weyl (12.4)\\
+$E_k = \alpha + 2\beta\cos(2\pi k/N)$; $4n + 2$ & Hückel (13.2)\\
+$\Gamma_\pi(\mathrm{C_6H_6}) = A_{2u} + E_{1g} + E_{2u} + B_{2g}$ & (13.1)\\
+$\psi_{\vec k}(\vec r + \vec R) = e^{i\vec k\vec R}\psi_{\vec k}(\vec r)$ & Bloch (14.1)\\
+$t_{2g}\to b_{2g} + e_g$; $e_g\to a_{1g} + b_{1g}$; $\Delta_o\gtrless P$ & $O_h\to D_{4h}$, Spinzustand (14.2)\\
+$\dim(p, q) = \frac12(p + 1)(q + 1)(p + q + 2)$; $\mathbf 3^{\otimes3} = \mathbf{10} + \mathbf 8 + \mathbf 8 + \mathbf 1$ & $SU(3)$ (14.3)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz worauf beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Satz} & \textbf{beruht auf}\\
+\midrule
+1.2 Operationen & Eigenwerte orthogonaler Matrizen (Band 2)\\
+2.2 Unitarität & Mittelung; Skalarprodukte (Band 2)\\
+3.2 Maschke & 2.2; orthogonales Komplement --- oder Mittelung einer Projektion\\
+3.3 Schur & Kern und Bild sind invariant; Eigenwerte über $\mathbb C$ (Band 12)\\
+4.3 Orthogonalität & 3.3 auf gemittelte Matrix; Spur\\
+4.4 Zerlegung & 3.2, 4.3\\
+4.5 Zählung & reguläre Darstellung; 3.3 für $T_f$\\
+5.2 Spalten & 4.3, 4.5: unitäre Matrix\\
+5.3 Produkte & Spur des Kronecker-Produkts; Klassen von Paaren\\
+6.2 Projektion & 3.3; 4.3; Maschke\\
+6.3 Auswahlregeln & 3.3 für invariante Abbildungen; 9.3 für $\mathrm{Sym}^{2}$\\
+7.4 Induktion & Blockstruktur; Umindizieren\\
+7.5 Reziprozität & 7.4; Klassenfunktion\\
+8.2 Specht & 7.5; Mackey (Auslassung 2); Dominanz (Auslassung 4)\\
+8.4 Haken & Verzweigung (Auslassung 5); Hakenspaziergang (Auslassung 6)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Satz} & \textbf{beruht auf}\\
+\midrule
+9.2 Tensor & Eigenwerte des Kronecker-Produkts; 4.4\\
+9.3 Quadrate & Eigenwerte; $\sum\lambda_a^{2} = \chi(g^{2})$\\
+9.4 Indikator & 9.3; 9.2c; Realisierbarkeit (Auslassung 8)\\
+10.2 kompakt & Haar-Maß (Auslassung 9); alle Beweise von I--III\\
+10.4 $V_\ell$ & Gewichte; Integral; harmonische Polynome (Auslassung 11)\\
+11.2 Überlagerung & Pauli-Matrizen; Zusammenhang von $SU(2)$\\
+11.3 Leiter & Kommutatoren; Endlichkeit; Lie-Algebra $\to$ Gruppe (Auslassung 12)\\
+11.5 Kramers & 9.4 mit Integral; Antiunitarität (Auslassung 15)\\
+12.2 Fourier & 4.3 Matrixelemente; 4.5a\\
+12.3 Peter--Weyl & kompakte Operatoren (Band 17; Auslassung 13)\\
+12.4 Schur--Weyl & Doppelkommutant (Auslassung 14); 8.2\\
+13.1--13.3 Benzol & 6.1, 4.4, 9.2, 6.3\\
+14.1--14.3 & 5.1, 7.1, 12.4; $SU(3)$-Darstellungen (Auslassung 19)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Was nicht bewiesen wurde}
+
+\begin{merksatz}
+\boxtitel{Zwanzig Auslassungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{4.6cm}P{0.8cm}P{3.0cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+1 $d_i$ teilt $|G|$ & $4$ & Serre\zit{1}, 6.5; Isaacs\zit{4}, 3.11\\
+2 Mackey: $\operatorname{Res}\operatorname{Ind}$-Formel, Irreduzibilitätskriterium & $7$, $8$ & \zit{1}, 7.3--7.4; Fulton--Harris\zit{2}, 3.3\\
+3 Brauers Induktionssatz & $7$ & \zit{1}, 10; \zit{4}, 8\\
+4 Specht-Moduln: Irreduzibilität, Dominanzordnung & $8$ & Sagan\zit{6}, 2.4; James--Kerber\zit{7}\\
+5 Verzweigungsregel $S_n\downarrow S_{n-1}$ & $8$ & \zit{6}, 2.8\\
+6 Hakenformel & $8$ & \zit{6}, 3.10; Greene--Nijenhuis--Wilf 1979\\
+7 Youngs Regel für $M^{\lambda}$ & $8$ & \zit{6}, 2.11; \zit{2}, 4.3\\
+8 $\nu = 1\Rightarrow$ reell realisierbar & $9$ & \zit{1}, 13.2; Bröcker--tom Dieck\zit{9}, II.6\\
+9 Existenz, Eindeutigkeit des Haar-Maßes & $10$ & \zit{9}, I.5; Hall\zit{10}\\
+10 Weyls Integralformel allgemein & $10$ & \zit{9}, IV.1\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{4.6cm}P{0.8cm}P{3.0cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+11 $\Delta\colon\mathcal P_\ell\to\mathcal P_{\ell-2}$ surjektiv; $\mathcal H_\ell$ irreduzibel direkt & $10$ & \zit{9}, II.5; Sternberg\zit{26}, 4.8\\
+12 Lie-Algebra-Darstellungen $\leftrightarrow$ Gruppe (einfach zusammenhängend) & $11$ & \zit{10}, 5.7; Böhm\zit{12}\\
+13 Peter--Weyl: Vollständigkeit & $12$ & \zit{9}, III.3; \zit{10}, 12\\
+14 Doppelkommutantensatz; Schur--Weyl & $12$ & \zit{2}, 6.1; Etingof\zit{5}, 5.18\\
+15 Wigner: Symmetrien unitär oder antiunitär; Bargmann & $11$ & Wigner\zit{14}, Anhang; Weinberg, \textit{QFT I}, 2.A\\
+16 Spin-Statistik-Theorem & $11$ & Pauli 1940; Streater--Wightman, \textit{PCT, Spin and Statistics}, 1964\\
+17 Jahn--Teller: alle Punktgruppen & $14$ & Jahn--Teller 1937; Bishop\zit{23}, 10\\
+18 Herleitung der $230$ Raumgruppen & $14$ & Dresselhaus\zit{28}, 9; Hahn (Hg.), \textit{International Tables A}\\
+19 Darstellungen von $SU(3)$: $(p, q)$, Dimension & $14$ & Georgi\zit{27}, 7--9; \zit{2}, 12--13\\
+20 Wigner--Eckart & $15$ & Tinkham\zit{24}, 5.6; \zit{26}, 3.9\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Was bewiesen wurde}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Vollständig bewiesen sind}: die Spuren der Symmetrieoperationen, $C_{3v}\cong S_3$, die Unitarisierbarkeit, Maschke (zweimal), Schur mit Folgerungen, alle Eigenschaften der Charaktere, die Orthogonalitätsrelationen samt Matrixelementen, Zerlegung und Eindeutigkeit, die reguläre Darstellung, Zahl der Irreduziblen = Zahl der Klassen, Spaltenorthogonalität, Produkte, alle Tafeln des Bandes, $\chi_{3N}$, die Projektionsformel, die Auswahlregeln und das Alternativverbot, Clifford (Skizze), Charakter der Induzierten, Frobenius-Reziprozität, Klassen von $S_n$, die Tafel von $S_4$, Ganzzahligkeit der $S_n$-Charaktere, $\dim = \#$SYT aus der Verzweigung, Tensorprodukt und Quadrate, der Indikator bis auf Realisierbarkeit, $SO(3)$-Charaktere und ihre Orthonormalität, Clebsch--Gordan für $SO(3)$ und $SU(2)$, $\Delta\ell = \pm1$, $SU(2)\to SO(3)$, die Leiterkonstruktion, Kramers, Fourier-Umkehrung, Plancherel und Faltung, Hückel-Energien, $4n + 2$, alle Zerlegungen der Kapitel 13 und 14. Alle Zahlen --- Charaktertafeln, Zerlegungen, Integrale, Indikatoren --- wurden mit dem beiliegenden Programm oder numerisch nachgerechnet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von Dedekinds Brief bis zum Dirac-Punkt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{7.4cm}@{}}
+\toprule
+$1782$/$85$ & Legendre, Laplace: Kugelflächenfunktionen\\
+$1807$ & Fourier: Wärmeleitung, trigonometrische Reihen\\
+$1830$ & Hessel: die $32$ Kristallklassen\\
+$1868$/$72$ & Gordan, Clebsch: binäre Formen\\
+$1891$ & Fedorov, Schoenflies: $230$ Raumgruppen\\
+$1896$ & Frobenius: Gruppencharaktere (Dedekinds Brief vom April)\\
+$1897$/$98$ & Frobenius: Darstellungen; induzierte Charaktere; Maschke\\
+$1900$/$01$ & Frobenius: Charaktere von $S_n$; Young: Tableaux; Schur: Dissertation ($GL_n$, $S_n$)\\
+$1905$ & Schur: das Lemma; Burnside: $p^{a}q^{b}$\\
+$1906$ & Frobenius--Schur: der Indikator\\
+$1913$ & Cartan: Darstellungen halbeinfacher Lie-Algebren, Spinoren\\
+$1922$ & Stern--Gerlach\\
+$1925$/$26$ & Weyl: kompakte Gruppen; Uhlenbeck--Goudsmit: Spin; Pauli: $SO(4)$ des Wasserstoffs\\
+$1927$ & Peter--Weyl; Wigner: Gruppentheorie der Atomspektren; Pauli-Matrizen\\
+$1928$/$31$ & Weyl, Wigner: die beiden Bücher; Bloch; Raman\\
+$1929$ & Bethe: Termaufspaltung in Kristallen\\
+$1930$ & Kramers: das Dublett\\
+$1931$ & Hückel: Benzol; Fermi: Resonanz im $\mathrm{CO_2}$\\
+$1933$/$34$ & Mulliken: $A, B, E, T$; Haar: das Maß; Wilson: Normalschwingungen; Herzberg--Teller\\
+$1936$/$37$ & Pauling--Coryell: Blut im Magnetfeld; Jahn--Teller; Clifford\\
+$1938$/$39$ & Murnaghan: Kronecker-Koeffizienten; Wilson: $FG$-Methode; Weyl: \textit{Classical Groups}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{7.4cm}@{}}
+\toprule
+$1945$ & Herzberg: \textit{Infrared and Raman Spectra}\\
+$1947$ & Brauer: Induktionssatz\\
+$1951$ & Mackey: induzierte Darstellungen\\
+$1954$ & Frame--Robinson--Thrall: Hakenformel; Tanabe--Sugano\\
+$1961$ & Gell-Mann, Ne'eman: Achtfacher Weg\\
+$1962$ & Dyson: dreifaltiger Weg\\
+$1964$ & $\Omega^{-}$; Quarks; Farbe (Greenberg)\\
+$1965$ & Cooley--Tukey: FFT; Woodward--Hoffmann\\
+$1970$ & Perutz: Mechanismus des Hämoglobins\\
+$1975$ & $4\pi$-Periode des Neutrons gemessen\\
+$1978$/$79$ & Moonshine bemerkt; Monster-Tafel berechnet\\
+$1982$ & Shechtman: Quasikristalle\\
+$1985$ & ATLAS of Finite Groups\\
+$1988$ & Diaconis: Gruppen in der Statistik\\
+$1992$ & Borcherds: Moonshine; Bayer--Diaconis: sieben Riffelmischungen\\
+$1996$ & Okounkov--Vershik: $S_n$ ohne Tableaux\\
+$2004$ & Graphen isoliert\\
+$2013$ & Williamson: James' Vermutung falsch\\
+$2017$ & topologische Quantenchemie für alle $230$ Raumgruppen\\
+$2021$ & neuronale Netze finden Formel für Kazhdan--Lusztig-Polynome\\
+$2024$ & McKay-Vermutung bewiesen; geometrisches Langlands angekündigt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Abelisierung} & $G/[G, G]$; zählt eindimensionale Darstellungen (5)\\
+\textbf{Alternativverbot} & mit Inversionszentrum: IR-aktiv $\Rightarrow$ nicht Raman-aktiv (6)\\
+\textbf{Auswahlregel} & Matrixelement null, wenn Produkt der Darstellungen die Identität nicht enthält (6, 10)\\
+\textbf{Bloch-Theorem} & Eigenzustände tragen Charaktere $e^{i\vec k\vec R}$ der Translationen (14)\\
+\textbf{Brillouin-Zone} & Klassen von $\mathbb Z^{3}$: die $\vec k$ modulo reziprokes Gitter (14)\\
+\textbf{Charakter} & Spur einer Darstellung; Klassenfunktion (4)\\
+\textbf{Charaktertafel} & Irreduzible gegen Klassen; unitär (4, 5)\\
+\textbf{Clebsch--Gordan} & Zerlegung von $\rho\otimes\sigma$; Reihe gegen Koeffizienten (9, 11)\\
+\textbf{Darstellung} & Homomorphismus $G\to GL(V)$ (2)\\
+\textbf{Doppelgruppe} & Urbild einer Punktgruppe in $SU(2)$ (11)\\
+\textbf{Einschränkung} & Darstellung auf Untergruppe betrachtet; Verzweigung (7)\\
+\textbf{Entartung} & Dimension eines Eigenraums; erzwungen durch Irreduzible (3, 10)\\
+\textbf{Frobenius--Schur-Indi\-kator} & $\frac1{|G|}\sum\chi(g^{2})$: reell, komplex, quaternionisch (9)\\
+\textbf{Gewicht} & Eigenwert von $J_z$ bzw.\ Charakter der Torus-Untergruppe (10, 11)\\
+\textbf{Haar-Maß} & invariantes Wahrscheinlichkeitsmaß auf kompakter Gruppe (10)\\
+\textbf{Hakenformel} & $\dim S^{\lambda} = n!/\prod h$ (8)\\
+\textbf{high-spin, low-spin} & maximale bzw.\ minimale Zahl ungepaarter $d$-Elektronen (14)\\
+\textbf{Hückel} & $H = \alpha I + \beta A$; Fourier auf $\mathbb Z/N$ (13)\\
+\textbf{Induktion} & Darstellung von $H$ zu einer von $G$ aufgeblasen; $\dim\cdot[G\colon H]$ (7)\\
+\textbf{Irreduzibel} & kein echter invarianter Teilraum (3)\\
+\textbf{Isotypische Kompo\-nente} & Summe aller Teilräume eines Typs; Bild von $P_i$ (6)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Jahn--Teller} & entarteter Zustand $\Rightarrow$ Verzerrung (14)\\
+\textbf{Klasse} & Konjugationsklasse $\{hgh^{-1}\}$ (1)\\
+\textbf{Kramers-Dublett} & Entartung durch $T^{2} = -1$ (11)\\
+\textbf{Kristallfeld} & $SO(3)\downarrow$ Punktgruppe: $d\to t_{2g} + e_g$ (7, 14)\\
+\textbf{Kugelflächen\-funktion} & $Y_{\ell m}$; Basis von $V_\ell$ (10)\\
+\textbf{Leiteroperator} & $J_\pm$; hebt, senkt das Gewicht (11)\\
+\textbf{Maschke} & vollständige Reduzibilität (3)\\
+\textbf{Mulliken-Symbol} & $A, B, E, T$; Indizes $1, 2, g, u, ', ''$ (5)\\
+\textbf{Normalschwingung} & Eigenmode; trägt irreduzible Darstellung (6)\\
+\textbf{Orthogonalitäts\-relationen} & Zeilen und Spalten der Tafel (4, 5)\\
+\textbf{Partition} & $\lambda_1\ge\dots\ge\lambda_k$, $\sum = n$; Young-Diagramm (8)\\
+\textbf{Peter--Weyl} & Matrixelemente vollständig in $L^{2}(G)$ (12)\\
+\textbf{Plancherel} & $\sum|f|^{2} = \frac1{|G|}\sum d_i\|\hat f_i\|^{2}$ (12)\\
+\textbf{Projektionsformel} & $P_i = \frac{d_i}{|G|}\sum\overline{\chi_i}\rho$ (6)\\
+\textbf{Punktgruppe} & endliche Gruppe von Isometrien mit Fixpunkt (1)\\
+\textbf{Quasikristall} & aperiodisch, mit Beugungsmuster verbotener Symmetrie (14)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Raumgruppe} & Symmetriegruppe eines Kristalls; $230$ (14)\\
+\textbf{Reguläre Darstellung} & $G$ auf $\mathbb C[G]$; enthält $\rho_i$ genau $d_i$-mal (2, 4)\\
+\textbf{Reziprozität} & $\langle\operatorname{Ind}\sigma, \rho\rangle = \langle\sigma, \operatorname{Res}\rho\rangle$ (7)\\
+\textbf{Schur} & $\operatorname{Hom}_G$ zwischen Irreduziblen ist $0$ oder $\mathbb C$ (3)\\
+\textbf{Schur--Weyl} & $V^{\otimes n}$ unter $S_n\times GL(V)$ (12)\\
+\textbf{Specht-Modul} & $S^{\lambda}$, irreduzible Darstellung von $S_n$ (8)\\
+\textbf{Spin} & Darstellung $V_{1/2}$ von $SU(2)$; halbzahlig (11)\\
+\textbf{Standardtableau} & wachsende Füllung; zählt $\dim S^{\lambda}$ (8)\\
+\textbf{Symmetrisches Qua\-drat} & $\mathrm{Sym}^{2}V$; Obertöne, Polarisierbarkeit (9)\\
+\textbf{Tensorprodukt} & $V\otimes W$ mit $\rho(g)\otimes\sigma(g)$; Charakter: Produkt (9)\\
+\textbf{Unitär} & $\rho(g)^{*}\rho(g) = I$; immer erreichbar (2)\\
+\textbf{Vielfachheit} & $m_i = \langle\chi, \chi_i\rangle$ (4)\\
+\textbf{Young-Diagramm} & Kästchenbild einer Partition (8)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,294 @@
+\part{Konstruktionen}
+
+\chapter{Einschränken und Induzieren}
+
+\section{Ein Wasserstoff wird schwer}
+
+\begin{merksatz}
+\boxtitel{$\mathrm{CH_4}$ wird $\mathrm{CH_3D}$ --- aus zwei Banden werden sechs}
+Ersetzt man in Methan ein Wasserstoffatom durch Deuterium, bleibt die Geometrie (fast) dieselbe, aber die Symmetrie schrumpft: Von $T_d$ bleiben nur die Operationen, die das D festhalten --- $E$, die beiden $C_3$ um die C--D-Achse und die drei $\sigma_d$ durch diese Achse: $C_{3v}$. Was wird aus den Darstellungen?
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{0.7cm}P{1.0cm}P{1.0cm}P{3.2cm}@{}}
+\toprule
+$T_d\downarrow C_{3v}$ & $E$ & $2C_3$ & $3\sigma_d$ & \textbf{Zerlegung in $C_{3v}$}\\
+\midrule
+$A_1$ & $1$ & $1$ & $1$ & $A_1$\\
+$A_2$ & $1$ & $1$ & $-1$ & $A_2$\\
+$E$ & $2$ & $-1$ & $0$ & $E$\\
+$T_1$ & $3$ & $0$ & $-1$ & $A_2 + E$\\
+$T_2$ & $3$ & $0$ & $1$ & $A_1 + E$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Man liest die Spalten der $T_d$-Tafel ab, die zu Klassen von $C_{3v}$ gehören ($E$; $C_3\subset8C_3$; $\sigma_d\subset6\sigma_d$), und zerlegt mit der $C_{3v}$-Tafel. Also:
+\[ \Gamma_{\mathrm{vib}}(\mathrm{CH_4}) = A_1 + E + 2T_2\ \longrightarrow\ A_1 + E + 2(A_1 + E) = 3A_1 + 3E = \Gamma_{\mathrm{vib}}(\mathrm{CH_3D}) . \]
+In $C_{3v}$ sind $A_1$ und $E$ beide infrarotaktiv: \textbf{sechs} Banden statt zwei. Die $A_1$-Atmungsschwingung des Methans (2917 cm$^{-1}$, infrarotstumm) wird in $\mathrm{CH_3D}$ sichtbar (bei 2970); die $E$-Schwingung (1534, stumm) ebenfalls (1471). Die Entartungen $T_2$ spalten in $A_1 + E$: aus $3019$ werden $2200$ (C--D-Streckung, $A_1$) und $3017$ ($E$).
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Weniger Symmetrie heißt mehr Banden: Verbotenes wird erlaubt, Entartetes spaltet auf. Was genau passiert, sagt die Einschränkung der Darstellungen auf die Untergruppe --- eine Spaltenauswahl in der Charaktertafel.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Teil III konstruiert neue Darstellungen aus alten.} Dieses Kapitel: von $G$ zur Untergruppe $H$ (\emph{Einschränkung}) und zurück (\emph{Induktion}), verbunden durch Frobenius' Reziprozität --- der Satz, der sagt, dass die beiden Richtungen zueinander adjungiert sind. Die Streckschwingungen jedes Moleküls erweisen sich als induzierte Darstellungen, und die Aufspaltung der Atomorbitale in einem Kristall, Bethes Problem von 1929, ist eine Einschränkung von $SO(3)$ auf die Punktgruppe --- Kapitel 10 und 14 führen das aus.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Einschränkung}
+
+\begin{definition}
+\boxtitelm{Definition 7.1 --- Einschränkung}
+Ist $\rho$ eine Darstellung von $G$ und $H\le G$ eine Untergruppe, so ist $\operatorname{Res}^G_H\rho$ (auch $\rho\downarrow H$) dieselbe Abbildung, nur auf $H$ betrachtet. Ihr Charakter ist $\chi_\rho|_H$. Die Zerlegung $\operatorname{Res}^G_H\rho_i = \bigoplus_jb_{ij}\sigma_j$ in irreduzible Darstellungen von $H$ heißt \Begriff{Verzweigungsregel} (branching rule); die Matrix $(b_{ij})$ die Verzweigungsmatrix.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 7.2 --- was die Einschränkung erhält}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item Dimension, Äquivalenz und direkte Summen bleiben erhalten; Irreduzibilität im Allgemeinen nicht.
+\item Ist $H$ ein Normalteiler, so permutiert $G$ die irreduziblen Bestandteile von $\operatorname{Res}^G_H\rho_i$, und alle haben dieselbe Vielfachheit (\Person{Clifford} 1937).
+\item Ist $H = G$, ist nichts passiert; ist $H = \{e\}$, bleibt nur die Dimension.
+\end{enumerate}
+
+\schritt{Beweis von (b), Skizze}
+Für $g\in G$ und einen $H$-Teilraum $W\subset V$ vom Typ $\sigma$ ist $\rho(g)W$ wieder $H$-invariant (da $gHg^{-1} = H$) und trägt die konjugierte Darstellung $\sigma^{g}(h) = \sigma(g^{-1}hg)$. Die Summe aller $\rho(g)W$ ist $G$-invariant, also ganz $V$; $V$ ist die Summe der isotypischen Komponenten der $\sigma^{g}$, und $G$ permutiert sie transitiv. $\blacksquare$
+
+\schritt{Beispiel: $T_d\downarrow A_4$}
+$A_4$ ist Normalteiler (Index $2$). $A_1, A_2\to A$; $E\to E_{(1)} + E_{(2)}$ (zwei verschiedene, von $T_d$ vertauschte Bestandteile mit gleicher Vielfachheit --- Clifford); $T_1, T_2\to T$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Einschränken ist Vergessen: Man sieht weniger Symmetrie, also zerfällt, was unzerlegbar war. Die Verzweigungsregel sagt, wie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Induktion}
+
+\begin{definition}
+\boxtitelm{Definition 7.3 --- induzierte Darstellung}
+Sei $H\le G$ mit Index $n = [G\colon H]$ und $\sigma$ eine Darstellung von $H$ auf $W$. Wähle Vertreter $g_1 = e, g_2, \dots, g_n$ der Linksnebenklassen $g_iH$. Die \Begriff{induzierte Darstellung} $\operatorname{Ind}^G_H\sigma$ (auch $\sigma\uparrow G$) lebt auf
+\[ V = g_1W\oplus g_2W\oplus\dots\oplus g_nW\quad(\dim V = n\dim W) \]
+und ist so definiert: Für $g\in G$ und $g_iw\in g_iW$ schreibe $gg_i = g_jh$ mit eindeutigem $j$ und $h\in H$; dann $g\cdot(g_iw) = g_j\,\sigma(h)w$. Jedes $g$ permutiert die Blöcke und wirkt innerhalb mit einem Element von $H$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 7.4 --- der Charakter der induzierten Darstellung}
+\[ \chi_{\operatorname{Ind}\sigma}(g) = \sum_{i\colon g_i^{-1}gg_i\in H}\chi_\sigma(g_i^{-1}gg_i) = \frac1{|H|}\sum_{x\in G\colon x^{-1}gx\in H}\chi_\sigma(x^{-1}gx) . \]
+Insbesondere: $\operatorname{Ind}^G_H\mathbf 1$ ist die Permutationsdarstellung von $G$ auf $G/H$, und $\operatorname{Ind}^G_{\{e\}}\mathbf 1$ ist die reguläre Darstellung.
+
+\schritt{Beweis}
+In der Blockzerlegung steht auf der Diagonalen nur der Block $i$ mit $gg_i\in g_iH$, also $g_i^{-1}gg_i\in H$, und dort steht $\sigma(g_i^{-1}gg_i)$. Spur: erste Formel. Zweite Formel: Ersetzt man $g_i$ durch $g_ih'$, ändert sich $g_i^{-1}gg_i$ nur durch Konjugation in $H$, also nicht die Spur; jedes $x\in G$ ist $g_ih'$ für genau ein $i$, und die Summe über alle $x$ zählt jedes $i$ genau $|H|$-mal. Für $\sigma = \mathbf 1$: $\chi(g)$ ist die Zahl der Nebenklassen $g_iH$ mit $gg_iH = g_iH$ --- die Fixpunkte von $g$ auf $G/H$. $\blacksquare$
+
+\schritt{Das Beispiel, auf das es ankommt}
+Die O--H-Bindungen des Wassers bilden eine Menge mit zwei Elementen, auf der $C_{2v}$ transitiv wirkt; der Stabilisator einer Bindung ist $H = \{E, \sigma(yz)\}\cong C_s$. Die Darstellung auf den Streckkoordinaten $r_1, r_2$ ist die Permutationsdarstellung auf $G/H$, also $\operatorname{Ind}^{C_{2v}}_{C_s}\mathbf 1$: Charakter $(2, 0, 0, 2)$ (Fixpunkte), Zerlegung $A_1 + B_2$ --- Kapitel 6. \checkmark\ Ebenso: N--H-Streckungen $= \operatorname{Ind}^{C_{3v}}_{C_s}\mathbf 1$, Charakter $(3, 0, 1)$, $= A_1 + E$; C--H-Streckungen des Methans $= \operatorname{Ind}^{T_d}_{C_{3v}}\mathbf 1$, Charakter $(4, 1, 0, 0, 2)$, $= A_1 + T_2$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Darstellung auf einer Menge äquivalenter Bindungen, Atome oder Orbitale ist eine induzierte Darstellung: von der trivialen Darstellung des Stabilisators. Ihr Charakter zählt, was festbleibt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Frobenius-Reziprozität}
+
+\begin{merksatz}
+\boxtitel{Satz 7.5 --- Frobenius-Reziprozität}
+Für eine Darstellung $\sigma$ von $H$ und eine Darstellung $\rho$ von $G$ gilt
+\[ \langle\operatorname{Ind}^G_H\sigma, \rho\rangle_G = \langle\sigma, \operatorname{Res}^G_H\rho\rangle_H . \]
+In Worten: $\rho_i$ kommt in $\operatorname{Ind}\sigma$ so oft vor, wie $\sigma$ in $\operatorname{Res}\rho_i$ vorkommt.
+
+\schritt{Beweis}
+Mit Satz 7.4:
+\begin{align*}
+\langle\operatorname{Ind}\sigma, \rho\rangle_G &= \frac1{|G|}\sum_{g\in G}\frac1{|H|}\sum_{\substack{x\in G\\ x^{-1}gx\in H}}\chi_\sigma(x^{-1}gx)\overline{\chi_\rho(g)}\\
+&= \frac1{|G||H|}\sum_{x\in G}\sum_{h\in H}\chi_\sigma(h)\overline{\chi_\rho(xhx^{-1})}\\
+&= \frac1{|G||H|}\sum_{x\in G}\sum_{h\in H}\chi_\sigma(h)\overline{\chi_\rho(h)} = \frac{|G|}{|G||H|}\sum_{h\in H}\chi_\sigma(h)\overline{\chi_\rho(h)} = \langle\sigma, \operatorname{Res}\rho\rangle_H .
+\end{align*}
+In der zweiten Zeile wurde $h = x^{-1}gx$ gesetzt; bei festem $x$ läuft $h$ über ganz $H$. Im dritten Schritt: $\chi_\rho$ ist Klassenfunktion auf $G$, also $\chi_\rho(xhx^{-1}) = \chi_\rho(h)$, und die Summe über $x$ gibt den Faktor $|G|$. $\blacksquare$
+
+\schritt{Probe am Methan}
+$\operatorname{Ind}^{T_d}_{C_{3v}}\mathbf 1 = A_1 + T_2$. Reziprok: Die triviale Darstellung von $C_{3v}$ kommt in $\operatorname{Res}A_1 = A_1$ einmal vor, in $\operatorname{Res}T_2 = A_1 + E$ einmal, in $\operatorname{Res}E = E$ null mal, in $\operatorname{Res}T_1 = A_2 + E$ null mal, in $\operatorname{Res}A_2 = A_2$ null mal. \checkmark\ Die Verzweigungstabelle vom Anfang des Kapitels, in der Spalte $A_1$ gelesen, ist die Zerlegung der Streckschwingungen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Induzieren und Einschränken sind adjungiert: Die Verzweigungsmatrix, zeilenweise gelesen, zerlegt Einschränkungen; spaltenweise gelesen, zerlegt induzierte Darstellungen. Eine Tabelle, zwei Richtungen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Formel hat eine Lesart ohne Charaktere}: $\operatorname{Hom}_G(\operatorname{Ind}\sigma, \rho)\cong\operatorname{Hom}_H(\sigma, \operatorname{Res}\rho)$, ein Isomorphismus von Vektorräumen, natürlich in beiden Argumenten --- die Induktion ist der \emph{linksadjungierte Funktor} zur Einschränkung. (Für endliche Gruppen auch der rechtsadjungierte; für unendliche fallen die beiden auseinander, und man unterscheidet Induktion und Koinduktion.) Band 23 hat Adjunktionen eingeführt; hier ist eine, die ein Chemiker täglich benutzt, ohne das Wort zu kennen. Und sie erklärt, warum die Streckschwingungen immer $A_1$ enthalten: $\langle\operatorname{Ind}\mathbf 1, A_1\rangle = \langle\mathbf 1, \operatorname{Res}A_1\rangle = \langle\mathbf 1, \mathbf 1\rangle = 1$ --- die symmetrische Streckung aller Bindungen zugleich, immer genau eine.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Induzieren macht fast nie Irreduzibles}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{$\operatorname{Ind}\mathbf 1$ enthält immer $\mathbf 1$} & Nach Reziprozität mit Vielfachheit $\langle\mathbf 1, \operatorname{Res}\mathbf 1\rangle = 1$. Für $H\neq G$ ist $\dim\operatorname{Ind}\mathbf 1 = [G\colon H] > 1$: reduzibel.\\
+\textbf{Kein Inverses} & $\operatorname{Res}\operatorname{Ind}\sigma\neq\sigma$ (Dimension wächst um den Faktor $[G\colon H]$); $\operatorname{Ind}\operatorname{Res}\rho\neq\rho$ (ebenso). Die beiden Richtungen sind adjungiert, nicht invers.\\
+\textbf{Mackeys Kriterium} & $\operatorname{Ind}^G_H\sigma$ ist genau dann irreduzibel, wenn $\sigma$ irreduzibel ist und für jedes $g\notin H$ die Darstellungen $\sigma$ und $\sigma^{g}$ auf $H\cap gHg^{-1}$ keinen gemeinsamen Bestandteil haben (\Person{Mackey} 1951; Auslassung). Für Normalteiler $H$: $\sigma^{g}\not\cong\sigma$ für alle $g\notin H$.\\
+\textbf{Beispiel $S_3$} & $\operatorname{Ind}^{S_3}_{A_3}\omega = E$ irreduzibel ($\omega^{g} = \omega^{2}\neq\omega$); $\operatorname{Ind}^{S_3}_{A_3}\mathbf 1 = A_1 + A_2$ reduzibel ($\mathbf 1^{g} = \mathbf 1$).\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Induzierte Darstellungen sind das wichtigste Werkzeug, um Darstellungen \emph{herzustellen} --- aber was man herstellt, muss man danach zerlegen. Irreduzibel wird es nur unter Mackeys Bedingung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dass Induktion trotzdem alles liefert}, ist ein Satz von \Person{Brauer} (1947): Jeder Charakter von $G$ ist eine ganzzahlige Linearkombination von Charakteren, die von eindimensionalen Darstellungen \emph{elementarer} Untergruppen (Produkte einer zyklischen mit einer $p$-Gruppe) induziert sind. \Person{Artin} hatte 1930 dasselbe mit rationalen Koeffizienten und zyklischen Untergruppen gezeigt. Brauers Satz ist der Grund, warum Artins $L$-Funktionen meromorph sind --- ein Satz über Gruppencharaktere, der die analytische Zahlentheorie trägt. Und für $S_n$ (Kapitel 8) gibt es eine Ausnahme von der Regel \enquote{fast nie irreduzibel}: Youngs Konstruktion gewinnt jede irreduzible Darstellung aus Induktionen, geschnitten.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.1 --- Wasser wird HDO}
+Bestimmen Sie die Verzweigung $C_{2v}\downarrow C_s$ für $\mathrm{HDO}$ (nur die Molekülebene $\sigma(yz)$ bleibt) und die Folgen für Entartung und Auswahlregeln.
+
+\loesung
+\schritt{Schritt 1 --- Die Untergruppe}
+$C_s = \{E, \sigma\}$ mit $A' = (1, 1)$ (symmetrisch zur Ebene), $A'' = (1, -1)$.
+
+\schritt{Schritt 2 --- Die Spaltenauswahl}
+Spalten $E$ und $\sigma(yz)$ der $C_{2v}$-Tafel: $A_1\colon(1, 1) = A'$; $A_2\colon(1, -1) = A''$; $B_1\colon(1, -1) = A''$; $B_2\colon(1, 1) = A'$.
+
+\schritt{Schritt 3 --- Schwingungen}
+$\Gamma_{\mathrm{vib}}(\mathrm{H_2O}) = 2A_1 + B_2\to3A'$. Alle drei waren schon in $C_{2v}$ IR- und ramanaktiv, es gibt keine Entartung: Die Zahl der Banden bleibt drei. Was sich ändert: Die Symmetriekoordinaten $r_1\pm r_2$ sind nicht mehr erzwungen. In $\mathrm{HDO}$ sind die Streckschwingungen eine fast reine O--H-Streckung (3707 cm$^{-1}$) und eine fast reine O--D-Streckung (2727), nicht mehr symmetrische und antisymmetrische Kombination.
+
+\schritt{Schritt 4 --- Probe}
+Dimension $3 = 3$. \checkmark\ Translationen $A_1 + B_1 + B_2\to2A' + A''$: $y, z$ in der Ebene, $x$ senkrecht. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Hier ändert die Symmetrieerniedrigung nichts an der Bandenzahl, aber alles an der Gestalt der Moden} --- der Fall, in dem die Dynamik (ungleiche Massen) das letzte Wort hat, nicht die Gruppe. Die $C_{2v}$-Symmetrie des $\mathrm{H_2O}$ \emph{erzwingt} $r_1\pm r_2$; die $C_s$-Symmetrie des $\mathrm{HDO}$ \emph{erlaubt} jede Mischung von $r_{\mathrm{OH}}$ und $r_{\mathrm{OD}}$, und die Massen wählen die Entmischung. Bruchfall Kapitel 1: HDO und $\mathrm{H_2O}$ haben dieselbe Geometrie, aber nicht dieselbe Gruppe.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.2 --- Induktion von $\mathbb Z/4$ nach $D_4$}
+$D_4$ (Ordnung $8$) enthält die Drehungen $C_4 = \mathbb Z/4$ als Normalteiler. Induzieren Sie die vier eindimensionalen Charaktere $\chi_k(r) = i^{k}$ ($k = 0, 1, 2, 3$) von $C_4$ und zerlegen Sie.
+
+\loesung
+\schritt{Schritt 1 --- Charaktere der Induzierten}
+Index $2$, Vertreter $e$ und eine Spiegelung $s$. Für $g = r^{m}$ (Drehung): beide Konjugierten $e^{-1}r^{m}e = r^{m}$ und $s^{-1}r^{m}s = r^{-m}$ liegen in $C_4$; $\chi_{\operatorname{Ind}}(r^{m}) = i^{km} + i^{-km}$. Für Spiegelungen: keine Konjugierte liegt in $C_4$, Charakter $0$.
+Klassen von $D_4$: $E$; $2C_4$ ($r, r^{3}$); $C_2$ ($r^{2}$); $2\sigma_v$; $2\sigma_d$.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{0.7cm}P{0.9cm}P{0.8cm}P{0.9cm}P{0.9cm}P{2.4cm}@{}}
+\toprule
+ & $E$ & $2C_4$ & $C_2$ & $2\sigma_v$ & $2\sigma_d$ & \textbf{Zerlegung}\\
+\midrule
+$\operatorname{Ind}\chi_0$ & $2$ & $2$ & $2$ & $0$ & $0$ & $A_1 + A_2$\\
+$\operatorname{Ind}\chi_1$ & $2$ & $0$ & $-2$ & $0$ & $0$ & $E$\\
+$\operatorname{Ind}\chi_2$ & $2$ & $-2$ & $2$ & $0$ & $0$ & $B_1 + B_2$\\
+$\operatorname{Ind}\chi_3$ & $2$ & $0$ & $-2$ & $0$ & $0$ & $E$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+($i^{1} + i^{-1} = 0$, $i^{2} + i^{-2} = -2$, $i^{3} + i^{-3} = 0$.)
+
+\schritt{Schritt 2 --- Zerlegung prüfen}
+$\operatorname{Ind}\chi_1 = (2, 0, -2, 0, 0)$: Norm $\frac18(4 + 0 + 4 + 0 + 0) = 1$, irreduzibel $= E$. \checkmark\ $\operatorname{Ind}\chi_0 = (2, 2, 2, 0, 0)$: Norm $\frac18(4 + 8 + 4) = 2$; $A_1 + A_2$. \checkmark
+
+\schritt{Schritt 3 --- Mackey}
+$\chi_1^{s}(r) = \chi_1(s^{-1}rs) = \chi_1(r^{-1}) = -i\neq i$: konjugierte Darstellung verschieden, Induzierte irreduzibel. $\chi_0^{s} = \chi_0$, $\chi_2^{s} = \chi_2$ ($(-1)^{-m} = (-1)^{m}$): reduzibel. \checkmark\ Und $\chi_1, \chi_3$ sind konjugiert zueinander, geben dieselbe Induzierte. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{So entstehen alle Darstellungen der Diedergruppen}: Die zweidimensionalen sind induziert von den Charakteren der Drehgruppe, je ein Paar $\chi_k, \chi_{-k}$ gibt eine; die eindimensionalen kommen aus den selbstkonjugierten Charakteren ($k = 0$ und, für gerades $n$, $k = n/2$), die sich auf zwei Weisen fortsetzen. Für $D_n$ mit $n$ ungerade: $2$ eindimensionale, $(n - 1)/2$ zweidimensionale; $n$ gerade: $4$ und $(n - 2)/2$. $D_6$: $4 + 2$, Kapitel 5. \checkmark}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 7.3 --- Vorschau: $d$-Orbitale im Würfel}
+Die fünf $d$-Orbitale ($\ell = 2$) tragen eine Darstellung von $SO(3)$, deren Charakter auf einer Drehung um $\theta$ gleich $1 + 2\cos\theta + 2\cos2\theta$ ist (Kapitel 10). Schränken Sie auf die Drehgruppe $O$ des Würfels ein (Klassen $E$, $8C_3$, $3C_2$, $6C_4$, $6C_2'$; Tafel wie $T_d$ mit $C_4$ statt $S_4$ und $C_2'$ statt $\sigma_d$).
+
+\loesung
+\schritt{Schritt 1 --- Charakterwerte}
+$\theta = 0\colon5$. $C_3$ ($120^{\circ}$): $1 + 2(-\tfrac12) + 2(-\tfrac12) = -1$. $C_2$ ($180^{\circ}$): $1 - 2 + 2 = 1$. $C_4$ ($90^{\circ}$): $1 + 0 - 2 = -1$. $C_2'$: $1$. Also $\chi_d = (5, -1, 1, -1, 1)$.
+
+\schritt{Schritt 2 --- Zerlegung}
+$m_{A_1} = \frac1{24}(5 - 8 + 3 - 6 + 6) = 0$; $m_{A_2} = \frac1{24}(5 - 8 + 3 + 6 - 6) = 0$; $m_E = \frac1{24}(10 + 8 + 6 + 0 + 0) = 1$; $m_{T_1} = \frac1{24}(15 + 0 - 3 - 6 - 6) = 0$; $m_{T_2} = \frac1{24}(15 + 0 - 3 + 6 + 6) = 1$. Also $\chi_d = E + T_2$; Dimension $2 + 3 = 5$. \checkmark
+
+\schritt{Schritt 3 --- Mit Inversion}
+In $O_h = O\times C_i$ sind $d$-Orbitale gerade ($\ell = 2$): $E_g + T_{2g}$. Die $E_g$-Orbitale sind $d_{z^{2}}$ und $d_{x^{2} - y^{2}}$ (zeigen auf die Würfelflächen, wo in einem Oktaederkomplex die Liganden sitzen), die $T_{2g}$ sind $d_{xy}, d_{xz}, d_{yz}$ (zeigen zwischen die Liganden). Im Kristallfeld liegen die $E_g$ höher; die Aufspaltung heißt $\Delta_o$ ($10\,Dq$).
+
+\schritt{Schritt 4 --- $f$-Orbitale zur Probe}
+$\ell = 3$: $\chi(\theta) = 1 + 2\cos\theta + 2\cos2\theta + 2\cos3\theta$, Werte $(7, 1, -1, -1, -1)$. Zerlegung: $m_{A_2} = \frac1{24}(7 + 8 - 3 + 6 + 6) = 1$, $m_{T_1} = \frac1{24}(21 + 0 + 3 - 6 + 6) = 1$, $m_{T_2} = \frac1{24}(21 + 3 + 6 - 6) = 1$; $A_2 + T_1 + T_2$, Dimension $1 + 3 + 3 = 7$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist Bethes Rechnung von 1929} --- und die Farbe der Übergangsmetallkomplexe: Ein Elektron, das von $T_{2g}$ nach $E_g$ springt, absorbiert Licht der Energie $\Delta_o$, für $[\mathrm{Ti(H_2O)_6}]^{3+}$ bei etwa $20\,000$ cm$^{-1}$ (violett), für Hämoglobin-Eisen in einer Umgebung, die nur noch $C_{4v}$ ist, aufgespalten in weitere Stufen. Kapitel 14 rechnet das Eisen durch. Die Vorschau zeigt schon das Prinzip: Kugelsymmetrie ($SO(3)$) auf Punktgruppe eingeschränkt, Verzweigungsregel abgelesen, Entartung $5$ zerfällt in $2 + 3$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Frobenius 1898, Bethe 1929, Mackey 1951}
+Die induzierte Darstellung ist \Person{Frobenius}' zweite große Erfindung: \enquote{Über Relationen zwischen den Charakteren einer Gruppe und denen ihrer Untergruppen} (1898) enthält die Charakterformel und die Reziprozität --- als Aussage über Charaktere, denn Darstellungen hatte er noch nicht als Hauptgegenstand.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Bethes Dissertation} (1929, bei Sommerfeld) wandte die Einschränkung von $SO(3)$ auf die kristallographischen Punktgruppen an --- ohne das Wort \enquote{Einschränkung}, mit den Charakteren $\sin((2\ell + 1)\theta/2)/\sin(\theta/2)$ und Tafeln, die er selbst aufstellte. \Person{Van Vleck} machte daraus in den dreißiger Jahren die Kristallfeldtheorie des Magnetismus; \Person{Tanabe} und \Person{Sugano} berechneten 1954 die Diagramme, die die Farben der Komplexe erklären. \Person{Mackey} formulierte 1951--53 die Theorie der induzierten Darstellungen für lokalkompakte Gruppen, mit dem Irreduzibilitätskriterium und dem \enquote{Mackey-Mechanismus}, der die Darstellungen von semidirekten Produkten liefert --- darunter die der Poincaré-Gruppe, die \Person{Wigner} 1939 klassifiziert hatte: Masse und Spin der Elementarteilchen sind Etiketten induzierter Darstellungen. Band 30 kommt in Kapitel 14 darauf zurück.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Induktion heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Parabolische Induktion} & Darstellungen von $GL_n$ über endlichen und $p$-adischen Körpern werden aus kleineren $GL_k$ induziert (Harish-Chandra, Deligne--Lusztig 1976). Das Langlands-Programm ist in weiten Teilen die Frage, welche Darstellungen \emph{nicht} so entstehen (\enquote{kuspidal}).\\
+\textbf{Isotopen\-markierung} & Gezieltes $^{13}\mathrm{C}$ oder $^{2}\mathrm{H}$ an einer Stelle eines Proteins senkt die lokale Symmetrie und verschiebt eine Bande isoliert --- zweidimensionale Infrarotspektroskopie (Hamm, Zanni) kartiert so Proteinfaltung in Pikosekunden. Der Leitfall dieses Kapitels als Messmethode.\\
+\textbf{Verzweigungs\-regeln berechnen} & Für $SU(n)\downarrow SU(k)$ und für $S_n\downarrow S_{n-1}\times S_1$ gibt es kombinatorische Regeln (Littlewood--Richardson, Young-Verband); für $S_n\downarrow S_k\times S_{n-k}$ ebenfalls, für $S_{mn}\downarrow S_m\wr S_n$ (Plethysmus) sind die Vielfachheiten bis heute ohne Formel.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 7.1, 7.3} & Einschränkung, Verzweigungsregel; induzierte Darstellung\\
+\textbf{Satz 7.2} & Clifford: Normalteiler, konjugierte Bestandteile\\
+\textbf{Satz 7.4} & Charakterformel; Permutationsdarstellungen sind $\operatorname{Ind}\mathbf 1$\\
+\textbf{Satz 7.5} & Frobenius-Reziprozität\\
+\textbf{Der Bruchfall} & $\operatorname{Ind}$ fast nie irreduzibel; Mackeys Kriterium\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kapitel 8 wendet Induktion auf die Gruppe an, die am meisten davon profitiert: $S_n$. Jede ihrer irreduziblen Darstellungen ist der Schnitt zweier induzierter --- und Youngs Diagramme zählen sie.}
+\end{minipage}
+\end{center}
+\end{merksatz}

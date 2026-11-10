@@ -1,0 +1,279 @@
+\part{Raum und Zeit}
+
+\chapter{Die Welle und die Spirale}
+
+\section{Die Zelle bekommt Nachbarn}
+
+\begin{merksatz}
+\boxtitel{FitzHugh--Nagumo im Gewebe}
+Jede Zelle ist über ihre Nachbarn gekoppelt --- Strom fließt von der erregten in die ruhende Zelle. Im Kontinuum:
+\[ \partial_t v = v - \tfrac{v^{3}}{3} - w + I + D\,\nabla^{2}v, \qquad \partial_t w = \varepsilon(v + a - bw), \]
+mit $D = 1$, $I = 0{,}2$ (Ruhe bei $v = -1{,}069$, erregbar, nicht schwingend), Gewebe $80\times80$ Längeneinheiten.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{4.2cm}P{4.6cm}@{}}
+\toprule
+\textbf{Gemessen} & \textbf{Wert}\\
+\midrule
+Geschwindigkeit der ebenen Welle & $c = 1{,}03$\\
+Breite des erregten Bereichs ($v > 0$) & $11$\\
+Zweite Welle nach $45$ / $30$ / $26$ & $c = 1{,}06$ / $0{,}95$ / $0{,}94$\\
+Zweite Welle nach $24$ & \textbf{Block}\\
+Kleinster Abstand zweier Wellen & $\approx 32$\\
+\midrule
+Spirale: Umlaufzeit & $38{,}7$\\
+Spirale: Wellenlänge & $39$\\
+Spirale: Kernradius & $\approx 1{,}4$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Welle, die an einem Ende abgebrochen ist, rollt sich um dieses Ende auf und dreht sich seither alle $38{,}7$ Zeiteinheiten um einen Kern von der Größe einer Zelle --- ohne Schrittmacher, ohne Reiz, für immer. Das ist der Kreislauf der Erregung, den die Kardiologie Reentry nennt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Spirale hat eine Periode, die kürzer ist als alles, was der Sinusknoten vorgibt} --- $38{,}7$ gegen den freien Zyklus von $39{,}5$ bei $I = 0{,}5$, und bei realen Herzzellen drei- bis viermal schneller als der Sinusrhythmus. Darum übernimmt sie: Sie reizt das ganze Gewebe, bevor der Schrittmacher dazu kommt. Kammertachykardie ist eine Spirale, Flimmern ihr Zerfall in viele. Dieses Kapitel baut beides aus den Gleichungen der Zelle und dem Laplace-Operator --- und endet an der Stelle, an der die Spirale bricht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Front}
+
+\begin{definition}
+\boxtitelm{Definition 13.1 --- Reaktions-Diffusions-System, erregbares Medium}
+$\partial_t u = f(u) + D\nabla^{2}u$ für einen Vektor $u$ von Konzentrationen oder Spannungen heißt \Begriff{Reaktions-Diffusions-System}; $f$ ist die lokale Dynamik (Teil I), $D\nabla^{2}$ die Kopplung an die Nachbarn. Das Medium heißt \Begriff{erregbar}, wenn die lokale Dynamik einen stabilen Ruhepunkt hat, von dem aus ein überschwelliger Reiz eine große Auslenkung mit Rückkehr auslöst (Kapitel 2).
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 13.2 --- die laufende Front}
+Für die bistabile Gleichung $\partial_t u = u(1-u)(u-\alpha) + D\,\partial_{xx}u$, $0 < \alpha < \tfrac12$, gibt es genau eine Front $u(x,t) = U(x - ct)$ von $u = 1$ (links) nach $u = 0$ (rechts), und sie läuft mit
+\[ c = \sqrt{2D}\,\Bigl(\tfrac12 - \alpha\Bigr) . \]
+
+\schritt{Beweis}
+Ansatz $U(\xi)$, $\xi = x - ct$: $-cU' = U(1-U)(U-\alpha) + DU''$. Man probiere $U' = -kU(1-U)$ (eine Front dieser Form): $U'' = -kU'(1-2U) = k^{2}U(1-U)(1-2U)$. Einsetzen und durch $U(1-U)$ teilen: $ck = (U - \alpha) + Dk^{2}(1-2U)$. Das muss für alle $U$ gelten: Koeffizient von $U$: $1 - 2Dk^{2} = 0$, $k = 1/\sqrt{2D}$; konstanter Teil: $ck = Dk^{2} - \alpha = \tfrac12 - \alpha$, also $c = (\tfrac12-\alpha)\sqrt{2D}$. Die Front: $U(\xi) = 1/(1 + \mathrm e^{k\xi})$. Eindeutigkeit und Stabilität: Auslassung 15 (\zit{13}). $\blacksquare$
+
+\schritt{Was man daran sieht}
+Für $\alpha = \tfrac12$ steht die Front: Die Gebiete $0$ und $1$ sind gleich stark. Für $\alpha > \tfrac12$ läuft sie rückwärts --- die Ruhe frisst die Erregung. Die Geschwindigkeit wächst mit $\sqrt D$: Vierfache Kopplung, doppelte Geschwindigkeit. Und sie wächst mit dem Abstand der Schwelle $\alpha$ von der Mitte --- Erregbarkeit.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für FitzHugh--Nagumo ist die Vorderfront genau diese Gleichung} --- auf der Zeitskala des Aufstrichs ist $w$ eingefroren, und $v - v^{3}/3 - w + I$ ist kubisch mit drei Nullstellen: Ruhe, Schwelle, Plateau. Mit $D = 1$, $I = 0{,}2$ und $w$ auf dem Ruhewert sind die Nullstellen $-1{,}070$, $-0{,}929$ und $1{,}998$, also $\alpha = 0{,}046$ und ein Vorfaktor $(r_{2}-r_{0})^{3}/3 = 9{,}6$ vor der kubischen Form; die Formel liefert $c = \sqrt{2\cdot9{,}6}\,(0{,}5 - 0{,}046) = 2{,}0$ gegen die gemessenen $1{,}03$. Der Faktor zwei kommt daher, dass $w$ während des Aufstrichs eben nicht eingefroren ist --- $\varepsilon = 0{,}08$ ist nicht klein, und die steigende Erholung hebt die Schwelle, während die Front läuft. Die Formel gibt Richtung und Skalierung ($\sqrt D$, Erregbarkeit), die Zahl gibt die Simulation. Für das Herz: $D$ ist die Leitfähigkeit der Gap Junctions, und Medikamente oder Narbengewebe, die sie senken, senken $c$ --- mit $\sqrt D$, also langsamer als man denkt, und erst bei starker Senkung dramatisch.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Puls und sein Abstand}
+
+\begin{merksatz}
+\boxtitel{Satz 13.3 --- Dispersion und Wellenlänge}
+Im erregbaren Medium folgt der Front die Rückkehr: ein Puls der Breite $c\cdot T_{\mathrm{AP}}$, dahinter die Refraktärzone. Eine zweite Welle im Abstand $T$ läuft mit $c(T) < c(\infty)$, fallend für kleines $T$, und existiert nur für $T > T_{\min}$ --- die \Begriff{Dispersionsrelation} des Mediums. Die kleinste \Begriff{Wellenlänge} ist $\lambda_{\min} = c(T_{\min})\,T_{\min}$.
+
+\schritt{Warum $c$ fällt}
+Die zweite Front läuft in Gewebe, das noch nicht ganz erholt ist --- $w$ liegt über dem Ruhewert, die Schwelle $\alpha$ in Satz 13.2 ist höher, $\tfrac12 - \alpha$ kleiner. Bei $T_{\min}$ erreicht die Schwelle die Mitte: Die Front steht, dann kehrt sie um. $\blacksquare$
+
+\schritt{Gemessen}
+$c(45) = 1{,}06$, $c(30) = 0{,}95$, $c(26) = 0{,}94$, Block bei $24$: $T_{\min}\approx25$, $\lambda_{\min}\approx 0{,}94\cdot 32 \approx 30$ (der Abstand der Fronten ist größer als $c\,T$, weil die erste Welle schneller ist und davonläuft).
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Medium kann nur so viele Wellen tragen, wie Wellenlängen hineinpassen. Das ist die Regel, die über Reentry entscheidet: Ein Kreis, der kürzer ist als $\lambda_{\min}$, trägt keine umlaufende Welle --- sie beißt sich in den eigenen Schwanz.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Wellenlänge ist die wichtigste Zahl der Arrhythmiologie}: $\lambda = c\cdot T_{\mathrm{ref}}$, Leitungsgeschwindigkeit mal Refraktärzeit. Für das Vorhofgewebe: $c \approx 0{,}5$ m/s, $T_{\mathrm{ref}}\approx 0{,}25$ s, $\lambda \approx 12$ cm --- länger als jeder Weg im Vorhof; kein Reentry. Vorhofflimmern braucht entweder langsamere Leitung (Fibrose) oder kürzere Refraktärzeit (die elektrische Umbildung, die das Flimmern selbst erzeugt: \enquote{AF begets AF}, Wijffels 1995) --- beides verkürzt $\lambda$, bis Kreise hineinpassen. Antiarrhythmika der Klasse III verlängern $T_{\mathrm{ref}}$ und damit $\lambda$: Sie machen den Vorhof für die Welle zu klein.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Spirale}
+
+\begin{merksatz}
+\boxtitel{Satz 13.4 --- Krümmung und Kern}
+Eine gekrümmte Front mit Krümmung $\kappa$ (positiv für konvex nach vorn) läuft mit
+\[ c_{n} = c_{0} - D\,\kappa \]
+--- die \Begriff{Eikonal-Gleichung} (Zykov 1980, Keener 1986). Eine Front, die stärker gekrümmt ist als $\kappa_{c} = c_{0}/D$, läuft rückwärts; der \Begriff{kritische Radius} $r_{c} = D/c_{0}$ ist die kleinste Erregung, die sich ausbreitet.
+
+\schritt{Herleitung}
+In Polarkoordinaten um den Krümmungsmittelpunkt ist $\nabla^{2}u = u_{rr} + u_{r}/r$; der Term $u_{r}/r = \kappa\,u_{r}$ wirkt wie eine Advektion mit Geschwindigkeit $D\kappa$ gegen die Laufrichtung: $-c_{n}U' = f(U) + DU'' + D\kappa U'$, also $(c_{n} + D\kappa)$ an der Stelle von $c_{0}$. $\blacksquare$
+
+\schritt{Die Spirale}
+An einem freien Wellenende ist die Krümmung groß; das Ende läuft langsamer als die Front und bleibt zurück --- die Welle rollt sich auf. Im Gleichgewicht umkreist die Spitze einen Kern, dessen Rand die Krümmung $\kappa_{c}$ hat: Innen kann die Welle nicht eindringen, weil sie dort rückwärts liefe. Die Umlaufzeit setzt die Spitze, und sie ist länger als $T_{\min}$ --- gemessen $38{,}7$ gegen $25$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Spirale braucht keinen Defekt und keine Narbe: Ein Kern von $D/c_{0}\approx 1$ Längeneinheit --- eine Zelle --- genügt. Sie ist die stabile Lösung des Mediums selbst, so wie der Grenzzyklus die stabile Lösung der Zelle ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Gemessen: Kernradius $1{,}4$, $D/c_{0} = 0{,}97$} --- nahe genug für eine Formel, die eine dünne Front voraussetzt. Dass die Spiralspitze in Wirklichkeit auf komplizierteren Bahnen läuft --- Kreise, Blumen, Zykloiden, je nach Erregbarkeit (\Person{Winfree} 1991, \enquote{Varieties of spiral wave behavior}) ---, ist die Hopf-Verzweigung der Spitzenbewegung (\Person{Barkley} 1992): eine Verzweigung zweiter Stufe, Kapitel 5 auf das Muster angewandt. Im Herzen sind die Blumen die Formen des EKG bei Kammertachykardie; die Spirale mit Kreisbahn gibt eine monomorphe, die mit wandernder Spitze eine polymorphe Tachykardie.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die Spirale ist Ordnung}
+Eine Spirale ist periodisch: Jeder Punkt des Gewebes wird alle $38{,}7$ Zeiteinheiten erregt. Ihr Ljapunow-Exponent ist null, ihre Dimension die eines Zyklus. Nichts an ihr ist Chaos --- und das EKG der Kammertachykardie ist entsprechend regelmäßig.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{6.0cm}@{}}
+\toprule
+\textbf{Eine Spirale} & periodisch; Kammertachykardie; EKG regelmäßig, schnell.\\
+\textbf{Spirale bricht} & Wellenbruch, wenn die Spitze auf Gewebe trifft, das noch refraktär ist; aus einem Bruch zwei neue Spitzen.\\
+\textbf{Viele Spiralen} & entstehen, brechen, löschen einander: räumlich-zeitliches Chaos; Kammerflimmern; EKG ohne Struktur.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Übergang von Ordnung zu Chaos ist hier ein Bruch im Raum, nicht eine Verdopplung in der Zeit. Was ihn auslöst, ist die Restitution aus Kapitel 7: Alternans entlang der Spiralarme macht die Wellenlänge ungleichmäßig, und wo ein kurzer Arm auf einen langen Schwanz trifft, reißt er.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{\Person{Karma} hat 1993 gezeigt, dass die Steigung der Restitutionskurse über $1$ --- das Alternans-Kriterium --- die Spirale brechen lässt}, und \Person{Fenton}, \Person{Cherry}, \Person{Hastings} und \Person{Evans} haben 2002 die Mechanismen des Bruchs katalogisiert: steile Restitution, diskordanter Alternans, Spitzenmäander an die Grenze, Rotationsanisotropie der Faserrichtung. Das Modell dieses Kapitels bricht nicht: FitzHugh--Nagumo hat eine flache Restitutionskurve, und seine Spirale ist unzerstörbar stabil --- ein Vorzug für die Darstellung, ein Mangel als Herzmodell. Zellmodelle mit Kalziumdynamik (\Person{Luo}--\Person{Rudy} 1991, \Person{ten Tusscher} 2004) brechen, und mit ihnen rechnet man heute. Kapitel 14 fragt, was aus vielen brechenden Spiralen wird, und Kapitel 15, ob man das eine Flimmern vom anderen unterscheiden kann.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.1 --- Die Frontgeschwindigkeit}
+Für $\partial_t u = u(1-u)(u-\alpha) + D\,\partial_{xx}u$ mit $D = 1$: Geschwindigkeit bei $\alpha = 0{,}1$, $0{,}3$, $0{,}5$, $0{,}7$; und bei $\alpha = 0{,}3$ für $D = 4$ und $D = 0{,}25$.
+
+\loesung
+\schritt{Schritt 1 --- $\alpha$}
+$c = \sqrt2\,(0{,}5 - \alpha)$: $0{,}566$; $0{,}283$; $0$; $-0{,}283$. Bei $0{,}7$ läuft die Ruhe in die Erregung hinein --- das Gewebe löscht den Reiz.
+
+\schritt{Schritt 2 --- $D$}
+$c = \sqrt{2D}\cdot0{,}2$: $D = 4$: $0{,}566$ (doppelt); $D = 0{,}25$: $0{,}141$ (halb). \checkmark
+
+\schritt{Schritt 3 --- Probe an der Front}
+$U = 1/(1 + \mathrm e^{k\xi})$, $k = 1/\sqrt2$: $U' = -kU(1-U)$, $U'' = k^{2}U(1-U)(1-2U)$. Bei $U = \tfrac12$: $U' = -k/4$, $U'' = 0$, und die Gleichung $-cU' = U(1-U)(U-\alpha) + U''$ wird $ck/4 = (\tfrac12 - \alpha)/4$, $c = (\tfrac12-\alpha)/k = (\tfrac12-\alpha)\sqrt2$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Breite der Front ist $1/k = \sqrt{2D}$} --- für $D = 1$ etwa $1{,}4$ Längeneinheiten, drei Gitterzellen bei $\Delta x = 0{,}5$. Das ist der Grund für die Gitterweite der Simulation: Eine Front, die schmaler ist als zwei Zellen, läuft auf dem Gitter zu langsam oder bleibt hängen --- der diskrete Bruchfall, und zugleich ein echter Effekt: Gewebe mit zerstörten Gap Junctions ist ein grobes Gitter, und die Welle kann darin stecken bleiben, obwohl jede Zelle erregbar ist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.2 --- Der kritische Radius}
+Ein Reiz erregt im Gewebe ($D = 1$, $c_{0} = 1{,}03$) einen Kreis vom Radius $r$. Für welches $r$ breitet er sich aus? Und wie groß ist der kleinste Reiz im Herzen ($D \approx 1$ cm$^{2}$/s, $c_{0} \approx 50$ cm/s)?
+
+\loesung
+\schritt{Schritt 1 --- Modell}
+$c_{n} = c_{0} - D/r > 0$ für $r > D/c_{0} = 0{,}97$. Ein Kreis von Radius $1$ wächst knapp; einer von $0{,}5$ schrumpft und verschwindet --- obwohl jede Zelle darin überschwellig erregt wurde.
+
+\schritt{Schritt 2 --- Herz}
+$r_{c} = 1/50$ cm $= 0{,}2$ mm: etwa zwei Zellen. Ein Reiz muss mehr als zwei Zellen auf einmal erregen, sonst löscht ihn die Nachbarschaft.
+
+\schritt{Schritt 3 --- Was das heißt}
+Eine einzelne Zelle, die spontan feuert, erregt das Gewebe nicht: Die Kopplung zieht ihr die Ladung weg (\enquote{source-sink mismatch}). Erst eine Gruppe über $r_{c}$ --- oder eine Zelle, deren Nachbarn entkoppelt sind --- kann eine Extrasystole auslösen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Kopplung schützt und gefährdet zugleich}: Sie unterdrückt einzelne Fehlzündungen (das Herz hat Millionen Zellen, die gelegentlich spontan feuern, und man merkt nichts), und sie trägt die Welle, wenn sie einmal läuft. Fibrose entkoppelt: Dann feuern Einzelzellen durch --- mehr Extrasystolen --- und die Welle läuft langsamer --- kürzere Wellenlänge. Beides zusammen ist das Substrat der Arrhythmie, und beides ist der Term $D\nabla^{2}v$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 13.3 --- Passt ein Kreis in den Vorhof?}
+Vorhof: Umfang eines Reentry-Kreises um die Hohlvenen etwa $6$ cm. Gesund: $c = 0{,}5$ m/s, $T_{\mathrm{ref}} = 250$ ms. Nach Umbildung: $c = 0{,}3$ m/s, $T_{\mathrm{ref}} = 120$ ms. Reentry?
+
+\loesung
+\schritt{Schritt 1 --- Gesund}
+$\lambda = 0{,}5\cdot0{,}25 = 0{,}125$ m $= 12{,}5$ cm $> 6$ cm. Die Welle träfe nach $6/50 = 0{,}12$ s auf Gewebe, das noch $0{,}13$ s refraktär ist: Block. Kein Reentry.
+
+\schritt{Schritt 2 --- Umgebildet}
+$\lambda = 0{,}3\cdot0{,}12 = 3{,}6$ cm $< 6$ cm: Die Welle braucht $0{,}2$ s für den Kreis und findet erholtes Gewebe. Reentry mit Periode $200$ ms --- $300$ Umläufe je Minute, Vorhofflattern.
+
+\schritt{Schritt 3 --- Die Lücke}
+$6 - 3{,}6 = 2{,}4$ cm erregbare Lücke (\enquote{excitable gap}) --- Platz, in dem ein weiterer Reiz landen und den Kreis stören oder einen zweiten starten kann. Je größer die Lücke, desto eher wird aus einem Kreis Flimmern.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das Wellenlängenkonzept von \Person{Allessie} (1977) in Zahlen}, und es ist der Grund für die zwei Therapien des Vorhofflimmerns: Medikamente, die $T_{\mathrm{ref}}$ verlängern, bis $\lambda$ wieder über $6$ cm liegt; und Ablation, die den Vorhof durch Narbenlinien in Streifen schneidet, von denen keiner einen Kreis von $\lambda$ trägt. Beide Therapien folgen aus Satz 13.3, und die Grenzen beider auch --- $\lambda$ ist nicht überall gleich, und eine Narbenlinie mit Lücke ist ein neuer Kreis.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von der Qualle zum Herzen}
+\Person{Alfred Mayer} beobachtete 1906 an einem Ring aus Quallengewebe (\kursiv{Cassiopea}), dass eine Erregung darin stundenlang kreisen kann; \Person{George Mines} übertrug das 1913 auf das Herz und formulierte, dass der Kreis länger sein muss als Geschwindigkeit mal Refraktärzeit --- Satz 13.3, vor der Mathematik.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Mines starb 1914 mit 28 Jahren in seinem Labor, vermutlich bei einem Selbstversuch. \textbf{Die Spirale ohne Hindernis --- der Kern aus nichts --- fand \Person{Zhabotinsky} 1970 in einer Schale mit der Reaktion von \Person{Belousov}} (der sie 1951 entdeckt und nicht veröffentlichen konnte, weil die Gutachter eine schwingende Reaktion für unmöglich hielten); \Person{Winfree} erkannte 1972, dass dieselbe Spirale im Herzen laufen muss, und \Person{Allessie} zeigte sie 1973 im Vorhof des Kaninchens als \enquote{leading circle}. Die Eikonal-Gleichung kam von \Person{Zykov} in Puschtschino 1980 und \Person{Keener} 1986; die Spirale als Verzweigungsgegenstand von \Person{Barkley} 1992.}
+\end{minipage}
+\end{center}
+
+\schritt{Gesehen}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Spirale im Herzen direkt zu sehen gelang erst mit spannungsempfindlichen Farbstoffen: \Person{Davidenko}, \Person{Pertsov} und \Person{Jalife} 1992 im Kammergewebe des Schafs --- ein Film, in dem sich die Welle genau so aufrollt, wie die Gleichungen es zeigen. \textbf{Seit 2010 (\Person{Narayan}) werden Rotoren bei Patienten im Katheterlabor kartiert und abladiert}; ob die Karten wirklich Rotoren zeigen und ob ihre Ablation hilft, ist die Kontroverse von Kapitel 15.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wellen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Scroll-Wellen} & Die Spirale in drei Dimensionen: ein Faden als Kern, der sich verbiegen, verknoten und bei negativer Fadenspannung von selbst vermehren kann --- Flimmern aus der Geometrie.\\
+\textbf{Niederenergie-Defibrillation} & Statt eines Schocks von $200$ J eine Folge schwacher Pulse, die an Gewebeinhomogenitäten Wellen starten und die Spiralen abräumen (Luther 2011).\\
+\textbf{Optogenetik} & Licht statt Strom: Spiralen mit einem Lichtmuster lenken, verschieben, löschen (Burton 2015) --- die Eikonal-Gleichung als Steuergesetz.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Kammerwand ist dick, und die Spirale ist dort ein Wirbel um einen Faden}: Der Kern wird zur Linie, die \Begriff{Filament}, und ihre Dynamik --- Spannung, Krümmung, Länge --- ist eine eigene Theorie (\Person{Biktashev} 1994). Bei positiver Fadenspannung schrumpfen Fäden und das Flimmern endet von selbst; bei negativer wachsen sie, verdrehen sich, teilen sich, und das Gewebe füllt sich mit Wirbeln. Welches Vorzeichen das menschliche Herz hat, hängt von Dicke, Faserrichtung und Zellmodell ab --- und davon, ob ein Flimmern sich selbst beendet oder einen Defibrillator braucht.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 13.1} & Reaktion--Diffusion, erregbares Medium\\
+\textbf{Satz 13.2} & Front $c = \sqrt{2D}(\tfrac12 - \alpha)$\\
+\textbf{Satz 13.3} & Dispersion, $\lambda_{\min} = c\,T_{\min}$\\
+\textbf{Satz 13.4} & Eikonal $c_{n} = c_{0} - D\kappa$, Kern $D/c_{0}$\\
+\textbf{Der Bruchfall} & Spirale ist Ordnung; Chaos kommt vom Bruch\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Welle und die Spirale sind die Ordnung des Raums. Kapitel 14 fragt, was geschieht, wenn Tausende Oszillatoren, Spiralen oder Zellen gekoppelt sind und keine Ordnung mehr findet --- und was dann an die Stelle der einen Zahl $\lambda_1$ tritt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

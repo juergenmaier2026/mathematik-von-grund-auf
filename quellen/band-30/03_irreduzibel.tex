@@ -1,0 +1,268 @@
+\chapter{Die Bausteine}
+
+\section{Eine Ebene, die nicht zerfällt}
+
+\begin{merksatz}
+\boxtitel{Die $xy$-Ebene unter $C_{3v}$}
+Die Drehung $C_3$ und die Spiegelung $\sigma_1$ wirken auf der Ebene durch
+\[ R = \begin{pmatrix}-\tfrac12 & -\tfrac{\sqrt3}{2}\\ \tfrac{\sqrt3}{2} & -\tfrac12\end{pmatrix}, \qquad S = \begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix} . \]
+Gibt es eine Gerade, die beide auf sich abbilden? $S$ lässt nur die $x$-Achse und die $y$-Achse fest; $R$ dreht beide weg. Also nein.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Eigenvektoren von $S$} & $(1, 0)$ zu $+1$, $(0, 1)$ zu $-1$\\
+\textbf{Eigenvektoren von $R$} & $(1, \mp\mathrm i)$ zu $e^{\pm2\pi\mathrm i/3}$ --- komplex, und keiner davon ist Eigenvektor von $S$\\
+\textbf{Folge} & kein gemeinsamer Eigenvektor, also kein invarianter Unterraum der Dimension $1$\\
+\textbf{Matrizen, die mit $R$ und $S$ vertauschen} & nur Vielfache der Einheit (nachgerechnet: ein lineares System mit Lösungsraum der Dimension $1$)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Ebene ist ein Baustein: eine Darstellung ohne echten invarianten Unterraum --- irreduzibel. Dass die mit ihr vertauschenden Matrizen nur die Skalare sind, ist kein Zufall, sondern Schurs Lemma, und es ist das Werkzeug, mit dem man Irreduzibilität nachweist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dieses Kapitel beweist die beiden Sätze, auf denen die ganze Theorie endlicher Gruppen steht.} Maschke: Jede Darstellung zerfällt vollständig in irreduzible --- es gibt keine \enquote{halb zerlegbaren} Darstellungen, die einen invarianten Unterraum ohne invariantes Komplement haben. Schur: Zwischen irreduziblen Darstellungen gibt es keine Abbildungen außer null und Isomorphismen, und eine irreduzible Darstellung vertauscht nur mit Skalaren. Aus beiden zusammen folgt in Kapitel 4, dass die Bausteine durch ihre Spuren bestimmt sind und dass es nur endlich viele gibt. Für die Moleküle heißt Maschke: Die Schwingungen lassen sich vollständig nach Symmetrietypen sortieren; und Schur: Innerhalb eines Typs sind alle Zustände einer irreduziblen Darstellung gleichberechtigt --- entartet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Maschke}
+
+\begin{definition}
+\boxtitelm{Definition 3.1 --- irreduzibel, vollständig reduzibel}
+Eine Darstellung $\rho$ auf $V\ne0$ heißt \Begriff{irreduzibel}, wenn $0$ und $V$ die einzigen invarianten Unterräume sind. Sie heißt \Begriff{vollständig reduzibel}, wenn $V$ eine direkte Summe irreduzibler invarianter Unterräume ist.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 3.2 --- Maschke 1898}
+Jede Darstellung einer endlichen Gruppe über $\mathbb C$ (oder über jedem Körper, dessen Charakteristik $|G|$ nicht teilt) ist vollständig reduzibel: $V = W_1\oplus\cdots\oplus W_r$ mit irreduziblen $W_i$.
+
+\schritt{Beweis --- über das invariante Skalarprodukt}
+Sei $W\subseteq V$ invariant. Nach Satz 2.2 gibt es ein $G$-invariantes Skalarprodukt. Sei $W^{\perp}$ das orthogonale Komplement von $W$ bezüglich dieses Skalarprodukts. Behauptung: $W^{\perp}$ ist invariant. Sei $v\in W^{\perp}$, $g\in G$, $w\in W$. Dann $\langle\rho(g)v, w\rangle = \langle\rho(g)v, \rho(g)\rho(g^{-1})w\rangle = \langle v, \rho(g^{-1})w\rangle = 0$, weil $\rho(g^{-1})w\in W$ und $v\perp W$. Also $\rho(g)v\in W^{\perp}$. Damit $V = W\oplus W^{\perp}$ als Darstellungen. Ist $W$ oder $W^{\perp}$ nicht irreduzibel, wiederholt man das Argument; es endet, weil die Dimension fällt. $\blacksquare$
+
+\schritt{Beweis --- über Mittelung einer Projektion (der Beweis, der auch ohne $\mathbb C$ geht)}
+Sei $P\colon V\to W$ irgendeine Projektion ($P|_W = \mathrm{id}$, Bild $W$). Setze $P_G = \frac1{|G|}\sum_{g}\rho(g)P\rho(g)^{-1}$. Dann ist $P_G$ wieder eine Projektion auf $W$ ($\rho(g)P\rho(g)^{-1}$ ist eine, weil $W$ invariant ist, und das Mittel von Projektionen auf $W$, die auf $W$ die Identität sind, ist eine solche), und $P_G$ vertauscht mit allen $\rho(h)$ (Umindizieren der Summe). Also ist $\ker P_G$ ein invariantes Komplement von $W$. Hier braucht man nur, dass $1/|G|$ existiert --- die Charakteristik teilt $|G|$ nicht. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Maschke sagt: Blockdiagonal geht immer vollständig. Es gibt keine Darstellung, deren Matrizen man nur in Blockdreiecksform bringen kann. Die Verschiebungen des Wassers zerfallen deshalb restlos in eindimensionale Stücke, die des Ammoniaks in ein- und zweidimensionale.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Beide Beweise sind der Mittelungstrick}, einmal auf das Skalarprodukt, einmal auf die Projektion angewandt; der zweite zeigt genau, wo die Voraussetzung sitzt --- man muss durch $|G|$ teilen können. Über $\mathbb F_p$ mit $p\mid|G|$ geht das nicht, und dort ist der Satz falsch (Bruchfall). Für unendliche Gruppen ist er im Allgemeinen ebenfalls falsch --- $\mathbb Z$ hat die Darstellung $n\mapsto\begin{pmatrix}1 & n\\ 0 & 1\end{pmatrix}$, die $e_1$ invariant lässt, aber kein Komplement hat ---, aber für kompakte Gruppen gilt er wieder, mit dem Integral als Mittel (Kapitel 10). Die Zerlegung ist eindeutig bis auf Reihenfolge und Isomorphie der Stücke; das folgt aus Schur, unten, und den Charakteren, Kapitel 4.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Schur}
+
+\begin{merksatz}
+\boxtitel{Satz 3.3 --- Schurs Lemma}
+Seien $\rho_1$ auf $V_1$ und $\rho_2$ auf $V_2$ irreduzible Darstellungen von $G$ über $\mathbb C$, und $T\colon V_1\to V_2$ linear mit $T\rho_1(g) = \rho_2(g)T$ für alle $g$ (eine \Begriff{äquivariante} Abbildung, ein \enquote{Verflechtungsoperator}). Dann:
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item Entweder $T = 0$, oder $T$ ist ein Isomorphismus (und $\rho_1\cong\rho_2$).
+\item Ist $\rho_1 = \rho_2$, so ist $T = \lambda\,\mathrm{id}$ für ein $\lambda\in\mathbb C$.
+\end{enumerate}
+
+\schritt{Beweis von (a)}
+$\ker T$ ist invariant unter $\rho_1$: Ist $Tv = 0$, so $T\rho_1(g)v = \rho_2(g)Tv = 0$. Da $\rho_1$ irreduzibel: $\ker T = 0$ oder $V_1$. Ebenso ist $\operatorname{Bild}T$ invariant unter $\rho_2$: $\rho_2(g)Tv = T\rho_1(g)v\in\operatorname{Bild}T$. Also $\operatorname{Bild}T = 0$ oder $V_2$. Ist $T\ne0$, so $\ker T = 0$ und $\operatorname{Bild}T = V_2$: Isomorphismus. $\blacksquare$
+
+\schritt{Beweis von (b)}
+Über $\mathbb C$ hat $T$ einen Eigenwert $\lambda$ (Fundamentalsatz, Band 12). $T - \lambda\,\mathrm{id}$ vertauscht ebenfalls mit allen $\rho(g)$ und hat nichttrivialen Kern; nach (a) ist $T - \lambda\,\mathrm{id} = 0$. $\blacksquare$
+
+\schritt{Folgerung 1 --- abelsche Gruppen}
+Ist $G$ abelsch und $\rho$ irreduzibel, so vertauscht jedes $\rho(h)$ mit allen $\rho(g)$; nach (b) ist $\rho(h) = \lambda_h\,\mathrm{id}$. Dann ist jeder Unterraum invariant, und Irreduzibilität erzwingt $\dim V = 1$. \textbf{Irreduzible Darstellungen abelscher Gruppen sind eindimensional} --- Charaktere im Sinn von Band 20 (Fourier auf $\mathbb Z/n$).
+
+\schritt{Folgerung 2 --- die Ebene unter $C_{3v}$}
+Die Matrizen, die mit $R$ und $S$ vertauschen, bilden einen Raum der Dimension $1$ (Eingangstabelle). Wäre die Ebene reduzibel --- Summe zweier Geraden ---, so gäbe es Projektionen auf jede Gerade, die mit allem vertauschen: Dimension $\ge2$. Also irreduzibel. $\blacksquare$
+
+\schritt{Folgerung 3 --- Entartung}
+Ist $H$ eine Matrix (ein \enquote{Hamilton-Operator}), die mit einer irreduziblen Darstellung $\rho$ vertauscht, so ist $H = \lambda\,\mathrm{id}$: Alle Zustände des Raums haben denselben Eigenwert $\lambda$. Die Dimension der irreduziblen Darstellung ist der Entartungsgrad.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Schur sagt: Eine irreduzible Darstellung hat keine inneren Freiheitsgrade. Was mit ihr vertauscht, ist eine Zahl. Darum sind die zwei Zustände einer $E$-Schwingung des Ammoniaks entartet --- nicht ungefähr, sondern exakt, solange die Symmetrie gilt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Folgerung 3 ist der Satz, der die Darstellungstheorie in die Physik brachte} (\Person{Wigner} 1927): Der Hamilton-Operator eines Systems vertauscht mit seiner Symmetriegruppe; jeder Eigenraum ist eine Darstellung; ist sie irreduzibel, ist die Entartung ihre Dimension --- $1$ für $A$ und $B$, $2$ für $E$, $3$ für $T$ in der Notation der Chemiker, $2l + 1$ für die Orbitale mit Drehimpuls $l$ (Kapitel 10). Umgekehrt: Fällt eine Entartung höher aus, als eine irreduzible Darstellung erlaubt, hat man eine Symmetrie übersehen --- so wurde die \enquote{zufällige} Entartung des Wasserstoffatoms ($n^{2}$ statt $2l + 1$) zur Entdeckung einer verborgenen $SO(4)$-Symmetrie (Fock 1935). Und die Auflösung einer Entartung durch eine Störung, die die Symmetrie senkt, ist das Zeeman-, Stark- und Kristallfeldspektrum, Kapitel 14.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wenn die Charakteristik die Gruppenordnung teilt}
+$G = \mathbb Z/p$ wirke auf $\mathbb F_p^{2}$ durch $D(1) = \begin{pmatrix}1 & 1\\ 0 & 1\end{pmatrix}$. Dann $D(k) = \begin{pmatrix}1 & k\\ 0 & 1\end{pmatrix}$ und $D(p) = \begin{pmatrix}1 & p\\ 0 & 1\end{pmatrix} = I$ in $\mathbb F_p$: eine Darstellung.
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Invarianter Unterraum} & $\mathbb F_pe_1$: $D(k)e_1 = e_1$. Ja.\\
+\textbf{Invariantes Komplement} & Jede andere Gerade $\mathbb F_p(a, b)$ mit $b\ne0$ wird nach $(a + b, b)$ geschickt --- eine andere Gerade. Nein.\\
+\textbf{Also} & reduzibel, aber nicht vollständig reduzibel. Maschke scheitert.\\
+\textbf{Wo der Beweis bricht} & $P_G = \frac1p\sum\ldots$: Division durch $p = 0$.\\
+\textbf{Schur} & gilt noch (der Beweis braucht nur Irreduzibilität); aber die Eigenwert-Hälfte (b) braucht einen algebraisch abgeschlossenen Körper.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Über einem Körper, dessen Charakteristik die Gruppenordnung teilt, gibt es Darstellungen in Blockdreiecksform, die sich nicht blockdiagonal machen lassen. Die Theorie dieses Bandes gilt dort nicht; an ihre Stelle tritt die modulare Darstellungstheorie, in der nicht mehr alles aus Bausteinen zusammengesetzt ist.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für Moleküle ist das irrelevant --- der Körper ist $\mathbb C$} ---, für die Zahlentheorie und die Kodierungstheorie nicht: Darstellungen über $\mathbb F_2$ von Gruppen gerader Ordnung sind der Alltag der Codes (Band 20), und sie zerfallen nicht. \Person{Brauer} baute die modulare Theorie ab 1935 auf, mit \enquote{Blöcken} statt irreduziblen Summanden und einer Charaktertheorie, die auf den Elementen lebt, deren Ordnung zu $p$ teilerfremd ist. Dass Maschke für $p\nmid|G|$ gilt und für $p\mid|G|$ nicht, ist der Grund, warum die Darstellungstheorie der endlichen Gruppen zwei Hälften hat, eine, die in einem Semester zu lernen ist, und eine, die ein Leben füllt --- Brauers Vermutungen von 1950 sind zum Teil erst 2020 bewiesen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Die irreduziblen Darstellungen von $\mathbb Z/4$}
+Bestimmen Sie alle irreduziblen Darstellungen von $\mathbb Z/4$ über $\mathbb C$ und zerlegen Sie die Drehdarstellung aus dem Bruchfall von Kapitel 2.
+
+\loesung
+\schritt{Schritt 1 --- Eindimensional}
+Schur, Folgerung 1: alle eindimensional, $D(1) = \lambda$ mit $\lambda^{4} = 1$: $\lambda\in\{1, \mathrm i, -1, -\mathrm i\}$. Vier irreduzible Darstellungen $\chi_0, \chi_1, \chi_2, \chi_3$ mit $\chi_k(m) = \mathrm i^{km}$.
+
+\schritt{Schritt 2 --- Vier ist richtig}
+$\mathbb Z/4$ hat vier Klassen (abelsch), und Kapitel 4 sagt: so viele irreduzible Darstellungen wie Klassen. \checkmark\ Außerdem $1^{2} + 1^{2} + 1^{2} + 1^{2} = 4 = |G|$. \checkmark
+
+\schritt{Schritt 3 --- Die Drehung}
+$D(1) = \begin{pmatrix}0 & -1\\ 1 & 0\end{pmatrix}$ hat Eigenwerte $\mathrm i, -\mathrm i$: Die Darstellung ist $\chi_1\oplus\chi_3$. Basis: $(1, -\mathrm i)$ und $(1, \mathrm i)$.
+
+\schritt{Schritt 4 --- Probe über Spuren}
+$\operatorname{Spur}D(m)$: $2, 0, -2, 0$ für $m = 0, 1, 2, 3$. $\chi_1 + \chi_3$: $1 + 1, \mathrm i - \mathrm i, -1 - 1, -\mathrm i + \mathrm i = 2, 0, -2, 0$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für abelsche Gruppen ist die Darstellungstheorie die Fourier-Analyse}: Die irreduziblen Darstellungen von $\mathbb Z/n$ sind die $n$-ten Einheitswurzeln $e^{2\pi\mathrm ikm/n}$, und eine Funktion auf $\mathbb Z/n$ nach ihnen zu zerlegen ist die diskrete Fourier-Transformation, Band 20 und Band 27. Kapitel 12 verallgemeinert das auf nichtabelsche Gruppen, wo die \enquote{Frequenzen} Matrizen sind.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Irreduzibilität mit Schur nachweisen}
+Zeigen Sie, dass die zweidimensionale Darstellung von $S_3$ aus Aufgabe 2.1 (mit $D((12)) = \begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}$, $D((123)) = \begin{pmatrix}-1 & -1\\ 1 & 0\end{pmatrix}$) irreduzibel ist, indem Sie die Matrizen bestimmen, die mit beiden vertauschen.
+
+\loesung
+\schritt{Schritt 1 --- Ansatz}
+$X = \begin{pmatrix}a & b\\ c & d\end{pmatrix}$ mit $XD((12)) = D((12))X$: $\begin{pmatrix}b & a\\ d & c\end{pmatrix} = \begin{pmatrix}c & d\\ a & b\end{pmatrix}$, also $b = c$ und $a = d$: $X = \begin{pmatrix}a & b\\ b & a\end{pmatrix}$.
+
+\schritt{Schritt 2 --- Mit $A = D((123))$}
+$XA = \begin{pmatrix}-a + b & -a\\ -b + a & -b\end{pmatrix}$, $AX = \begin{pmatrix}-a - b & -b - a\\ a & b\end{pmatrix}$. Gleichheit: $-a + b = -a - b\Rightarrow b = 0$; dann $-a = -a$ \checkmark, $a = a$ \checkmark, $0 = 0$ \checkmark. Also $X = aI$.
+
+\schritt{Schritt 3 --- Schluss}
+Der Raum der vertauschenden Matrizen hat Dimension $1$. Wäre die Darstellung reduzibel, so wäre sie nach Maschke Summe zweier Geraden, und die beiden Projektionen darauf wären vertauschende Matrizen --- Dimension $\ge2$. Widerspruch. Irreduzibel. $\blacksquare$
+
+\schritt{Schritt 4 --- Probe über Eigenvektoren}
+$D((12))$ hat Eigenvektoren $(1, 1)$ und $(1, -1)$. $A(1, 1) = (-2, 1)$, kein Vielfaches von $(1, 1)$. $A(1, -1) = (0, 1)$, kein Vielfaches von $(1, -1)$. Kein gemeinsamer Eigenvektor. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Beide Methoden --- Kommutant und gemeinsame Eigenvektoren --- sind lineare Algebra}, und für zwei Erzeuger in zwei Dimensionen von Hand zu machen. Kapitel 4 gibt die Methode, die immer geht: $\frac1{|G|}\sum|\chi(g)|^{2} = 1$ genau für irreduzible Darstellungen. Für diese: $\frac16(2^{2} + 3\cdot0^{2} + 2\cdot(-1)^{2}) = \frac16(4 + 2) = 1$. \checkmark}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Ein Komplement finden}
+Die Permutationsdarstellung von $S_3$ auf $\mathbb C^{3}$ hat den invarianten Unterraum $W = \mathbb C(1, 1, 1)$. Finden Sie das invariante Komplement mit beiden Beweisen von Maschke.
+
+\loesung
+\schritt{Schritt 1 --- Orthogonales Komplement}
+Das Standardskalarprodukt auf $\mathbb C^{3}$ ist unter Permutationen invariant (Permutationsmatrizen sind orthogonal); kein Mitteln nötig. $W^{\perp} = \{x : x_1 + x_2 + x_3 = 0\}$. \checkmark
+
+\schritt{Schritt 2 --- Gemittelte Projektion}
+Irgendeine Projektion auf $W$: $P(x) = x_1\cdot(1, 1, 1)$ (nimmt die erste Koordinate). Mitteln: $P_G(x) = \frac16\sum_\pi\rho(\pi)P\rho(\pi)^{-1}x$. $\rho(\pi)^{-1}x$ hat als erste Koordinate $x_{\pi(1)}$; $P$ davon ist $x_{\pi(1)}(1,1,1)$; $\rho(\pi)$ lässt $(1,1,1)$ fest. Also $P_G(x) = \frac16\sum_\pi x_{\pi(1)}(1,1,1) = \frac16\cdot2(x_1 + x_2 + x_3)(1,1,1) = \frac{x_1 + x_2 + x_3}{3}(1, 1, 1)$ (jedes $i$ ist $\pi(1)$ für zwei Permutationen). Die Projektion auf den Mittelwert. $\ker P_G = \{x_1 + x_2 + x_3 = 0\}$. \checkmark\ Dasselbe Komplement.
+
+\schritt{Schritt 3 --- Über $\mathbb F_3$}
+Dort ist $(1, 1, 1)\in W^{\perp}$ (denn $1 + 1 + 1 = 0$): $W\subseteq W^{\perp}$, kein Komplement auf diesem Weg. Und $P_G$ hätte den Faktor $\frac13 = \frac10$. Tatsächlich hat $W$ über $\mathbb F_3$ kein invariantes Komplement (Bruchfall): $3 = |S_3|/2$ teilt $|S_3|$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die gemittelte Projektion ist der Mittelwert, und das ist kein Zufall}: Die Projektion auf die triviale Darstellung ist immer $\frac1{|G|}\sum_g\rho(g)$ --- der Mittelwert über die Gruppenbahn ---, und sie ist der erste Fall der Projektionsformel von Kapitel 6, mit der man aus jeder Darstellung die Komponente eines gegebenen Symmetrietyps herausprojiziert. Für Moleküle heißt das: die symmetrische Schwingung finden, indem man eine beliebige Auslenkung über alle Symmetrieoperationen mittelt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Maschke in Chicago, Schur in Berlin}
+\Person{Heinrich Maschke}, Schüler von Klein, emigrierte 1891 in die Vereinigten Staaten, arbeitete ein Jahr als Elektrotechniker bei Weston in Newark und wurde 1892 Professor in Chicago. Seinen Satz bewies er 1898 --- zunächst nur für die Frage, ob eine endliche Gruppe von Matrizen eine Basis hat, in der sie \enquote{zerfällt}; der heutige Beweis über die invariante Form ist von \Person{Loewy} und \Person{Moore} 1896/98, die Fassung mit der gemittelten Projektion von \Person{Schur}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{\Person{Issai Schur} bewies das Lemma 1905 in seiner Arbeit \enquote{Neue Begründung der Theorie der Gruppencharaktere}}, die die Charaktertheorie von Frobenius' Gruppendeterminante löste und auf die Darstellungen stellte, wie sie heute gelehrt wird. Das Lemma ist zwei Zeilen lang und trägt alles: die Orthogonalität der Charaktere (Kapitel 4), die Entartungsregel der Quantenmechanik, die Klassifikation der Darstellungen abelscher Gruppen. Schur war von 1916 bis 1935 Professor in Berlin, mit Hörsälen von vierhundert Studenten; 1935 wurde er zwangsemeritiert, 1938 aus der Akademie gedrängt, 1939 emigrierte er nach Tel Aviv, wo er 1941 starb. Seine Schüler --- Brauer, Wielandt, Alfred Brauer, Rademacher --- trugen die Theorie in die Welt.}
+\end{minipage}
+\end{center}
+
+\schritt{Wigner 1927}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Eugene Wigner}, Chemieingenieur aus Budapest, lernte die Darstellungstheorie 1926 in Berlin von \Person{von Neumann} und wandte sie 1927 auf die Spektren der Atome an: Die Entartungen sind Dimensionen irreduzibler Darstellungen, die Auswahlregeln folgen aus den Charakteren. \textbf{Sein Buch \enquote{Gruppentheorie und ihre Anwendung auf die Quantenmechanik der Atomspektren} von 1931} machte Schurs Lemma zur \enquote{Gruppenpest}, über die Schrödinger und Pauli spotteten --- und zum Standardwerkzeug, das es bis heute ist. Nobelpreis 1963.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Bausteine heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Modulare Darstellungen} & Brauers Höhe-Null-Vermutung (1955) bewiesen 2024 (Malle--Navarro--Schaeffer Fry--Tiep) --- nach siebzig Jahren, mit der Klassifikation der endlichen einfachen Gruppen als Werkzeug.\\
+\textbf{Schurs Lemma als Baugesetz} & Äquivariante Netze: Die Schichten sind Verflechtungsoperatoren; Schur sagt, dass sie zwischen verschiedenen irreduziblen Typen null sind --- die Gewichte zerfallen in Blöcke (Weiler--Cesa 2019).\\
+\textbf{Kategorifizierung} & Darstellungen als Objekte einer Kategorie, Charaktere als Schatten davon (Khovanov 2000, Rouquier 2008): Was Frobenius zählte, wird zu Strukturen, die man abbilden kann.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Schurs Lemma beantwortet eine Ingenieurfrage}: Wie sieht eine lineare Abbildung aus, die mit einer Gruppenwirkung vertauscht? Zerlegt man Ein- und Ausgaberaum in irreduzible Stücke, so ist die Abbildung blockweise null zwischen verschiedenen Typen und ein Skalar zwischen gleichen. Ein äquivariantes neuronales Netz hat darum nicht $n^{2}$ freie Gewichte je Schicht, sondern so viele, wie es Paare gleicher irreduzibler Typen gibt --- oft hundertmal weniger. Für Moleküle: Ein Netz, das Energien unter $SO(3)$ invariant vorhersagt, zerlegt seine Merkmale nach Drehimpuls $l$ (Kapitel 10), und seine Gewichte sind Clebsch--Gordan-Koeffizienten (Kapitel 9). Die Theorie von 1905 ist die Bauanleitung von 2022.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 3.1} & irreduzibel, vollständig reduzibel\\
+\textbf{Satz 3.2} & Maschke: vollständige Zerlegung, zwei Beweise\\
+\textbf{Satz 3.3} & Schur: null oder Isomorphismus; Kommutant = Skalare\\
+\textbf{Folgerungen} & abelsch $\Rightarrow$ eindimensional; Entartung = Dimension\\
+\textbf{Der Bruchfall} & Charakteristik teilt $|G|$: kein Maschke\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil I hat die Bausteine benannt. Teil II zählt sie: Kapitel 4 zeigt, dass die Spuren --- die Charaktere --- orthonormal sind, dass sie die Darstellung bestimmen und dass es genau so viele Bausteine gibt wie Klassen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

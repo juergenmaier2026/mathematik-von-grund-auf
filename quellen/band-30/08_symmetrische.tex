@@ -1,0 +1,275 @@
+\chapter{Die symmetrische Gruppe}
+
+\section{Vier Protonen, drei Sorten Methan}
+
+\begin{merksatz}
+\boxtitel{Kernspin-Isomere --- $S_4$ auf $16$ Spinzuständen}
+Die vier Protonen des Methans haben je Spin $\tfrac12$: $2^{4} = 16$ Spinzustände. Vertauscht man zwei Protonen, vertauscht man ihre Spins; die Gruppe $S_4$ der Permutationen wirkt auf dem $16$-dimensionalen Spinraum. Charakter: Eine Permutation mit $c$ Zyklen fixiert die Zustände, die auf jedem Zyklus konstant sind: $2^{c}$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{0.8cm}P{1.0cm}P{1.4cm}P{1.0cm}P{1.2cm}@{}}
+\toprule
+Klasse & $e$ & $(12)$ & $(12)(34)$ & $(123)$ & $(1234)$\\
+Größe & $1$ & $6$ & $3$ & $8$ & $6$\\
+\midrule
+Zyklenzahl $c$ & $4$ & $3$ & $2$ & $2$ & $1$\\
+$\chi_{\mathrm{Spin}} = 2^{c}$ & $16$ & $8$ & $4$ & $4$ & $2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+$S_4\cong T_d$ (Kapitel 5): $(12)\leftrightarrow\sigma_d$, $(12)(34)\leftrightarrow C_2$, $(123)\leftrightarrow C_3$, $(1234)\leftrightarrow S_4$. Zerlegung mit der $T_d$-Tafel: $m_{A_1} = \frac1{24}(16 + 6\cdot8 + 3\cdot4 + 8\cdot4 + 6\cdot2) = \frac{120}{24} = 5$; $m_E = \frac1{24}(32 + 0 + 24 - 32 + 0) = 1$; $m_{T_2} = \frac1{24}(48 + 48 - 12 + 0 - 12) = 3$; $m_{A_2} = m_{T_1} = 0$.
+\[ \Gamma_{\mathrm{Spin}} = 5A_1 + E + 3T_2,\qquad5 + 2 + 9 = 16 .\ \checkmark \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Methan kommt in drei Kernspin-Sorten vor: $A$ (Gesamtspin $I = 2$, fünf Zustände), $T$ ($I = 1$, dreimal drei) und $E$ ($I = 0$, zwei Zustände). Sie wandeln sich praktisch nicht ineinander um; die statistischen Gewichte $5 : 9 : 2$ stehen in den Intensitäten der Rotationslinien. Wasserstoff kennt dasselbe als ortho- und para-$\mathrm{H_2}$ ($3 : 1$).}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die symmetrische Gruppe ist die Gruppe der identischen Teilchen}, und ihre Darstellungstheorie ist in der Physik so unentbehrlich wie in der Mathematik. Dieses Kapitel baut sie vollständig für alle $n$ auf: Die Klassen sind die Zyklentypen, also die Partitionen von $n$; zu jeder Partition gehört ein Young-Diagramm; zu jedem Diagramm eine irreduzible Darstellung; ihre Dimension zählt die Standardtableaux, und die Hakenformel zählt sie in einer Zeile. Die Werkzeuge sind die von Kapitel 7: Induktion von Untergruppen $S_{\lambda_1}\times S_{\lambda_2}\times\cdots$, geschnitten mit der Induktion vom transponierten Diagramm.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Klassen und Partitionen}
+
+\begin{merksatz}
+\boxtitel{Satz 8.1 --- Klassen von $S_n$}
+Zwei Permutationen sind genau dann konjugiert, wenn sie denselben \Begriff{Zyklentyp} haben --- dieselbe Multimenge von Zyklenlängen. Die Zyklentypen entsprechen den \Begriff{Partitionen} von $n$: $\lambda = (\lambda_1\ge\lambda_2\ge\dots\ge\lambda_k)$ mit $\sum\lambda_i = n$. Die Zahl der irreduziblen Darstellungen von $S_n$ ist also die Zahl $p(n)$ der Partitionen: $1, 2, 3, 5, 7, 11, 15, 22, \dots$
+
+\schritt{Beweis}
+$\tau\sigma\tau^{-1}$ hat die Zyklen $(\tau(a_1)\,\tau(a_2)\,\dots)$, wenn $\sigma$ die Zyklen $(a_1\,a_2\,\dots)$ hat: Konjugation benennt die Elemente um und erhält die Längen. Umgekehrt: Haben $\sigma, \sigma'$ denselben Typ, schreibe beide Zyklenzerlegungen untereinander und definiere $\tau$ als die Zuordnung Stelle für Stelle; dann $\tau\sigma\tau^{-1} = \sigma'$. $\blacksquare$
+
+\schritt{Klassengrößen}
+Der Zentralisator einer Permutation vom Typ $\lambda$ mit $m_j$ Zyklen der Länge $j$ hat Ordnung $z_\lambda = \prod_jj^{m_j}m_j!$ (jeder Zyklus kann um sich selbst gedreht, gleich lange Zyklen vertauscht werden); die Klasse hat $n!/z_\lambda$ Elemente. $S_4$: $z_{(2,2)} = 2^{2}\cdot2! = 8$, Klasse $24/8 = 3$. \checkmark\ $z_{(2,1,1)} = 2\cdot1\cdot2! = 4$, Klasse $6$. \checkmark
+
+\schritt{Young-Diagramme}
+Eine Partition zeichnet man als linksbündige Zeilen von Kästchen:
+\begin{center}
+$(3, 1) = \ydiagram{3,1}$\qquad $(2, 2) = \ydiagram{2,2}$\qquad $(2, 1, 1) = \ydiagram{2,1,1}$
+\end{center}
+Die \Begriff{transponierte} Partition $\lambda'$ spiegelt an der Diagonalen: $(3, 1)' = (2, 1, 1)$, $(2, 2)' = (2, 2)$.
+\end{merksatz}
+
+\section{Youngs Konstruktion}
+
+\begin{merksatz}
+\boxtitel{Satz 8.2 --- zu jeder Partition eine irreduzible Darstellung}
+Zu $\lambda$ sei $S_\lambda = S_{\lambda_1}\times S_{\lambda_2}\times\dots\le S_n$ die \Begriff{Young-Untergruppe} (Permutationen, die jede Zeile eines Tableaus in sich abbilden) und $S_{\lambda'}$ die der Spalten. Setze
+\[ M^{\lambda} = \operatorname{Ind}^{S_n}_{S_\lambda}\mathbf 1,\qquad M^{\lambda'}_{\mathrm{sgn}} = \operatorname{Ind}^{S_n}_{S_{\lambda'}}\mathrm{sgn} . \]
+Dann haben $M^{\lambda}$ und $M^{\lambda'}_{\mathrm{sgn}}$ genau eine gemeinsame irreduzible Komponente $S^{\lambda}$, mit Vielfachheit $1$ in beiden. Die $S^{\lambda}$ (\Begriff{Specht-Moduln}) für alle Partitionen $\lambda$ von $n$ sind paarweise inäquivalent, und es sind alle irreduziblen Darstellungen von $S_n$.
+
+\schritt{Beweis, Skizze}
+Die Vielfachheit der gemeinsamen Komponenten ist $\langle M^{\lambda}, M^{\lambda'}_{\mathrm{sgn}}\rangle$, nach Frobenius-Reziprozität $= \langle\mathbf 1, \operatorname{Res}_{S_\lambda}\operatorname{Ind}_{S_{\lambda'}}\mathrm{sgn}\rangle$, und mit Mackeys Formel für $\operatorname{Res}\operatorname{Ind}$ (Auslassung) wird das eine Summe über Doppelnebenklassen $S_\lambda\backslash S_n/S_{\lambda'}$: ein Summand ist $1$ genau dann, wenn die Doppelnebenklasse einer Permutation entspricht, für die $S_\lambda\cap gS_{\lambda'}g^{-1}$ trivial ist --- kombinatorisch: einer Ausfüllung des Diagramms, in der keine zwei Zahlen einer Zeile in derselben Spalte stehen. Das gibt es für $\lambda$ gegen $\lambda'$ genau einmal (bis auf $S_\lambda\times S_{\lambda'}$), also $\langle M^{\lambda}, M^{\lambda'}_{\mathrm{sgn}}\rangle = 1$. Paarweise verschieden: Für $\mu\neq\lambda$ sind die $S^{\mu}$ in anderen $M$ und $M_{\mathrm{sgn}}$ enthalten; eine Ordnungsrelation auf Partitionen (Dominanz) zeigt, dass $S^{\lambda}\not\cong S^{\mu}$. Vollständig: $p(n)$ Stück, so viele wie Klassen. $\blacksquare$
+
+\schritt{Die Beispiele}
+$\lambda = (n)$: $M^{(n)} = \mathbf 1$, $S^{(n)} = \mathbf 1$. $\lambda = (1^{n})$: $S^{(1^{n})} = \mathrm{sgn}$. $\lambda = (n - 1, 1)$: $M^{(n-1,1)} = \operatorname{Ind}^{S_n}_{S_{n-1}}\mathbf 1$ ist die Permutationsdarstellung auf $\{1, \dots, n\}$, $= \mathbf 1\oplus\mathrm{Std}$ mit der \Begriff{Standarddarstellung} $\mathrm{Std} = \{x\in\mathbb C^{n}\colon\sum x_i = 0\}$ der Dimension $n - 1$; $S^{(n-1,1)} = \mathrm{Std}$, Charakter $\chi(\sigma) = \mathrm{fix}(\sigma) - 1$. $\lambda' = (2, 1^{n-2})$: $S^{\lambda'} = \mathrm{Std}\otimes\mathrm{sgn}$. Allgemein $S^{\lambda'}\cong S^{\lambda}\otimes\mathrm{sgn}$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die irreduziblen Darstellungen von $S_n$ sind die Young-Diagramme. Jede ist der Durchschnitt einer Induzierten von den Zeilen (trivial) und einer Induzierten von den Spalten (Vorzeichen). Zeilen symmetrisieren, Spalten antisymmetrisieren --- das ist der Young-Symmetrisierer, und $S^{\lambda}$ ist sein Bild in der Gruppenalgebra.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 8.3 --- die Charaktertafel von $S_4$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{1.3cm}P{0.6cm}P{1.0cm}P{1.6cm}P{1.1cm}P{1.3cm}P{1.5cm}@{}}
+\toprule
+$\lambda$ & $T_d$-Name & $e$ & $6\,(12)$ & $3\,(12)(34)$ & $8\,(123)$ & $6\,(1234)$ & $\dim$ = \#SYT\\
+\midrule
+$(4)$ & $A_1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $1$\\
+$(3, 1)$ & $T_2$ & $3$ & $1$ & $-1$ & $0$ & $-1$ & $3$\\
+$(2, 2)$ & $E$ & $2$ & $0$ & $2$ & $-1$ & $0$ & $2$\\
+$(2, 1, 1)$ & $T_1$ & $3$ & $-1$ & $-1$ & $0$ & $1$ & $3$\\
+$(1^{4})$ & $A_2$ & $1$ & $-1$ & $1$ & $1$ & $-1$ & $1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+$(3, 1)$: $\mathrm{fix} - 1$, also $4 - 1, 2 - 1, 0 - 1, 1 - 1, 0 - 1$. $(2, 1, 1) = (3, 1)\otimes\mathrm{sgn}$. $(2, 2)$: aus Spaltenorthogonalität (Aufgabe 5.2) oder aus $M^{(2,2)} = \operatorname{Ind}_{S_2\times S_2}\mathbf 1$ (Dimension $6$, Charakter = Zahl der fixierten Zerlegungen von $\{1, 2, 3, 4\}$ in zwei Paare: $(6, 2, 2, 0, 0)$) minus $\mathbf 1$ minus $\mathrm{Std}$: $(6, 2, 2, 0, 0) - (1, 1, 1, 1, 1) - (3, 1, -1, 0, -1) = (2, 0, 2, -1, 0)$. \checkmark\ Die $T_d$-Tafel aus Kapitel 5 mit umgeordneten Spalten ($\sigma_d\leftrightarrow(12)$, $C_2\leftrightarrow(12)(34)$, $C_3\leftrightarrow(123)$, $S_4\leftrightarrow(1234)$). \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Alle Einträge sind ganze Zahlen} --- für jedes $S_n$. Das folgt daraus, dass $\sigma$ und $\sigma^{k}$ für $k$ teilerfremd zur Ordnung denselben Zyklentyp haben, also konjugiert sind: Die Charakterwerte sind invariant unter allen Galois-Automorphismen der Kreisteilungskörper, also rational, und als Summen von Einheitswurzeln ganz. Für $A_n$ gilt das nicht ($A_5$ hat $\frac{1\pm\sqrt5}{2}$), für $C_3$ nicht ($\omega$). $S_n$ ist in dieser Hinsicht die einfachste aller Gruppen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Dimensionen: Tableaux und Haken}
+
+\begin{merksatz}
+\boxtitel{Satz 8.4 --- Verzweigung und Standardtableaux}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item \textbf{Verzweigungsregel}: $\operatorname{Res}^{S_n}_{S_{n-1}}S^{\lambda} = \bigoplus_\mu S^{\mu}$, Summe über alle $\mu$, die aus $\lambda$ durch Entfernen eines Randkästchens entstehen (ein Kästchen, das am Ende seiner Zeile und seiner Spalte steht). Jede Komponente kommt genau einmal vor.
+\item $\dim S^{\lambda} = f^{\lambda}$, die Zahl der \Begriff{Standard-Young-Tableaux} der Form $\lambda$: Ausfüllungen mit $1, \dots, n$, in jeder Zeile und jeder Spalte wachsend.
+\item \textbf{Hakenformel} (Frame--Robinson--Thrall 1954): $f^{\lambda} = \dfrac{n!}{\prod_{(i,j)\in\lambda}h(i, j)}$, wobei der \Begriff{Haken} $h(i, j)$ das Kästchen $(i, j)$ selbst, alle rechts davon und alle darunter zählt.
+\end{enumerate}
+
+\schritt{Beweis von (b) aus (a)}
+Induktion nach $n$: $\dim S^{\lambda} = \sum_\mu\dim S^{\mu} = \sum_\mu f^{\mu}$, und ein Standardtableau von $\lambda$ ist ein Standardtableau von $\mu$ (die Kästchen $1, \dots, n - 1$) plus das Kästchen $n$ an einem Randplatz. $\blacksquare$ --- (a) selbst (Auslassung) folgt aus der Konstruktion in Satz 8.2 mit Frobenius-Reziprozität; (c) beweist man heute am elegantesten mit dem \enquote{Hakenspaziergang} von Greene, Nijenhuis und Wilf (1979), einem Zufallsprozess auf dem Diagramm.
+
+\schritt{Rechnung für $S_4$}
+$(3, 1)$: Haken $4, 2, 1$ in der ersten Zeile, $1$ in der zweiten: $24/(4\cdot2\cdot1\cdot1) = 3$. \checkmark\ $(2, 2)$: Haken $3, 2$ / $2, 1$: $24/12 = 2$. \checkmark\ $(2, 1, 1)$: $4, 1$ / $2$ / $1$: $24/8 = 3$. \checkmark\ Standardtableaux von $(2, 2)$: $\begin{smallmatrix}1 & 2\\ 3 & 4\end{smallmatrix}$ und $\begin{smallmatrix}1 & 3\\ 2 & 4\end{smallmatrix}$ --- zwei. \checkmark
+
+\schritt{$S_5$}
+Partitionen $(5), (4, 1), (3, 2), (3, 1, 1), (2, 2, 1), (2, 1^{3}), (1^{5})$; Dimensionen $1, 4, 5, 6, 5, 4, 1$; $1 + 16 + 25 + 36 + 25 + 16 + 1 = 120 = 5!$. \checkmark\ Probe $(3, 2)$: Haken $4, 3, 1$ / $2, 1$: $120/24 = 5$. \checkmark\ $(3, 1, 1)$: $5, 2, 1$ / $2$ / $1$: $120/20 = 6$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Dimension einer Darstellung von $S_n$ ist eine Abzählung: wie viele Arten, das Diagramm wachsend mit $1$ bis $n$ zu füllen. Die Hakenformel gibt die Zahl ohne Abzählen. Und $\sum(f^{\lambda})^{2} = n!$ ist Satz 4.5 --- oder der Satz von Robinson--Schensted, der Permutationen bijektiv auf Paare gleichgeformter Standardtableaux abbildet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Über $\mathbb F_p$: die offene Hälfte}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Specht-Moduln zerfallen} & Über einem Körper der Charakteristik $p\le n$ ist $S^{\lambda}$ definiert, aber nicht mehr irreduzibel, und nicht mehr vollständig reduzibel (Maschke versagt). Die irreduziblen $D^{\mu}$ sind die Köpfe der $S^{\mu}$ für $p$-reguläre $\mu$ (\Person{James} 1976); ihre Dimensionen sind \emph{unbekannt}.\\
+\textbf{Zerlegungszahlen} & $[S^{\lambda}\colon D^{\mu}]$, die Vielfachheit von $D^{\mu}$ in einer Kompositionsreihe von $S^{\lambda}$: für $n\le 20$ oder so berechnet, allgemein kein Algorithmus in polynomialer Zeit bekannt, keine Formel.\\
+\textbf{James' Vermutung} & $1990$: Für $p > n/\dots$ (genauer: $p$ größer als das Gewicht des Blocks) sollten die Zerlegungszahlen durch Kazhdan--Lusztig-Polynome gegeben sein. \Person{Williamson} zeigte 2013/17 (\enquote{torsion explosion}), dass die Vermutung falsch ist: Es gibt Gegenbeispiele für große $n$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Über $\mathbb C$ ist die Darstellungstheorie von $S_n$ seit 1900 vollständig; über $\mathbb F_p$ kennt man nicht einmal die Dimensionen der irreduziblen Darstellungen. Der Unterschied ist Maschkes Satz.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Warum man das wissen will}: Die modularen Darstellungen von $S_n$ hängen über Schur--Weyl-Dualität (Kapitel 12) mit denen von $GL_n(\mathbb F_p)$ zusammen, die in der Zahlentheorie (Galois-Darstellungen modulo $p$) und in der Kryptographie auftreten; über die Hecke-Algebren mit den Quantengruppen; und über die Kazhdan--Lusztig-Theorie mit der Geometrie der Fahnenvarietäten. Williamsons Gegenbeispiele kamen aus der Geometrie: Torsion in der Kohomologie von Schubert-Varietäten, die schneller wächst als jede Schranke, die James' Vermutung erlaubt hätte. \textbf{Ein Problem über Permutationen, das mit Methoden der algebraischen Geometrie entschieden wurde} --- und zwar negativ.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Die Tafel von $S_5$, zwei Zeilen}
+Bestimmen Sie die Charaktere von $S^{(4,1)}$ und $S^{(3,2)}$ auf den sieben Klassen von $S_5$ (Typen $1^{5}$, $2\,1^{3}$, $2^{2}1$, $3\,1^{2}$, $3\,2$, $4\,1$, $5$; Größen $1, 10, 15, 20, 20, 30, 24$).
+
+\loesung
+\schritt{Schritt 1 --- $(4, 1)$: Fixpunkte minus eins}
+Fixpunkte: $5, 3, 1, 2, 0, 1, 0$. Charakter $(4, 2, 0, 1, -1, 0, -1)$. Norm: $\frac1{120}(16 + 40 + 0 + 20 + 20 + 0 + 24) = \frac{120}{120} = 1$. \checkmark
+
+\schritt{Schritt 2 --- $(3, 2)$ aus $M^{(3,2)}$}
+$M^{(3,2)} = \operatorname{Ind}_{S_3\times S_2}\mathbf 1$: Permutationsdarstellung auf den $\binom52 = 10$ zweielementigen Teilmengen. Fixierte Teilmengen: $e\colon10$; $(12)\colon\{1, 2\}$ und die $\binom32 = 3$ Paare aus $\{3, 4, 5\}$: $4$; $(12)(34)\colon\{1, 2\}, \{3, 4\}$: $2$; $(123)\colon\{4, 5\}$: $1$; $(123)(45)\colon\{4, 5\}$: $1$; $(1234)\colon\{1, 3\}, \{2, 4\}$: $2$; $(12345)\colon0$. Charakter $(10, 4, 2, 1, 1, 2, 0)$. Satz 8.2: $M^{(3,2)}$ enthält $S^{(3,2)}$ einmal; was sonst? Nach Youngs Regel (Auslassung) $M^{(3,2)} = S^{(5)} + S^{(4,1)} + S^{(3,2)}$. Also
+\begin{align*} \chi_{(3,2)} &= (10, 4, 2, 1, 1, 2, 0) - (1, 1, 1, 1, 1, 1, 1) - (4, 2, 0, 1, -1, 0, -1)\\ &= (5, 1, 1, -1, 1, -1, 0) . \end{align*}
+
+\schritt{Schritt 3 --- Proben}
+Dimension $5$ = Hakenformel. \checkmark\ Norm: $\frac1{120}(25 + 10 + 15 + 20 + 20 + 30 + 0) = \frac{120}{120} = 1$. \checkmark\ Orthogonal zu $(4, 1)$: $\frac1{120}(20 + 20 + 0 - 20 - 20 + 0 + 0) = 0$. \checkmark\ Zu $\mathbf 1$: $5 + 10 + 15 - 20 + 20 - 30 + 0 = 0$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{$S^{(3,2)}$ hat eine Geometrie}: $S_5\cong PGL_2(\mathbb F_5)$, und die fünfdimensionale Darstellung ist die auf den Funktionen auf der projektiven Geraden $\mathbb P^{1}(\mathbb F_5)$ (sechs Punkte) mit Summe null. $S_5$ wirkt auch auf dem Ikosaeder ($A_5$ ist seine Drehgruppe); die dreidimensionalen Darstellungen von $A_5$ mit $\frac{1\pm\sqrt5}{2}$ setzen sich zu einer sechsdimensionalen von $S_5$ zusammen --- das ist $S^{(3,1,1)}$. Kapitel 14 kommt zum Ikosaeder zurück (Fullerene, Viren).}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Verzweigung $S_5\downarrow S_4$}
+Prüfen Sie Satz 8.4a für alle sieben Darstellungen von $S_5$ an den Dimensionen, und für $S^{(3,2)}$ am Charakter.
+
+\loesung
+\schritt{Schritt 1 --- Randkästchen entfernen}
+$(5)\to(4)$: $1 = 1$. $(4, 1)\to(3, 1) + (4)$: $4 = 3 + 1$. $(3, 2)\to(2, 2) + (3, 1)$: $5 = 2 + 3$. $(3, 1, 1)\to(2, 1, 1) + (3, 1)$: $6 = 3 + 3$. $(2, 2, 1)\to(2, 1, 1) + (2, 2)$: $5 = 3 + 2$. $(2, 1^{3})\to(1^{4}) + (2, 1, 1)$: $4 = 1 + 3$. $(1^{5})\to(1^{4})$: $1$. Alle stimmen. \checkmark
+
+\schritt{Schritt 2 --- Charakter von $S^{(3,2)}$ auf $S_4$}
+Die Klassen von $S_4$ in $S_5$: $e\to1^{5}$, $(12)\to2\,1^{3}$, $(12)(34)\to2^{2}1$, $(123)\to3\,1^{2}$, $(1234)\to4\,1$. Einschränkung von $(5, 1, 1, -1, 1, -1, 0)$: $(5, 1, 1, -1, -1)$. Und $S^{(2,2)} + S^{(3,1)} = (2, 0, 2, -1, 0) + (3, 1, -1, 0, -1) = (5, 1, 1, -1, -1)$. \checkmark
+
+\schritt{Schritt 3 --- Der Young-Verband}
+Zeichnet man alle Diagramme und verbindet $\lambda$ mit $\mu$, wenn $\mu$ durch Entfernen eines Kästchens entsteht, so ist $f^{\lambda}$ die Zahl der Wege von $\varnothing$ nach $\lambda$ --- ein Pascalsches Dreieck für Partitionen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Verzweigung ist multiplizitätsfrei} --- jede Komponente genau einmal ---, und daraus folgt eine kanonische Basis: Schränkt man $S^{\lambda}$ auf $S_{n-1}$, dann auf $S_{n-2}$ usw. ein, zerfällt es am Ende in eindimensionale Stücke, je eines pro Standardtableau. Das ist die \textbf{Gelfand--Tsetlin-Basis} (Young hatte sie als \enquote{seminormale Form}), und Okounkov und Vershik haben 1996 gezeigt, dass man die ganze Darstellungstheorie von $S_n$ aus dieser Kette aufbauen kann, ohne Young-Symmetrisierer --- der Weg, der heute in Vorlesungen gegangen wird.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- ortho und para}
+Zwei Protonen ($\mathrm{H_2}$): Zerlegen Sie den Spinraum ($4$ Zustände) und den Rotationsraum unter $S_2$ und leiten Sie das Verhältnis $3 : 1$ der Kernspin-Isomere her.
+
+\loesung
+\schritt{Schritt 1 --- Spin}
+$S_2 = \{e, (12)\}$, Charakter auf dem Spinraum: $2^{c} = (4, 2)$. Trivial: $\frac12(4 + 2) = 3$; Vorzeichen: $\frac12(4 - 2) = 1$. Drei symmetrische Spinzustände (Triplett, $I = 1$: $\uparrow\uparrow$, $\downarrow\downarrow$, $\uparrow\downarrow + \downarrow\uparrow$), ein antisymmetrischer (Singulett, $I = 0$).
+
+\schritt{Schritt 2 --- Rotation}
+Die Vertauschung der Kerne ist für $\mathrm{H_2}$ die Inversion der Kernkoordinaten; die Rotationsfunktion mit Drehimpuls $J$ hat Parität $(-1)^{J}$. Gerades $J$: trivial; ungerades $J$: Vorzeichen.
+
+\schritt{Schritt 3 --- Pauli}
+Protonen sind Fermionen; die Gesamtwellenfunktion muss antisymmetrisch sein ($\mathrm{sgn}$). Elektronischer Grundzustand und Schwingung sind symmetrisch; also $\Gamma_{\mathrm{Spin}}\otimes\Gamma_{\mathrm{Rot}} = \mathrm{sgn}$: Triplett (trivial) mit ungeradem $J$ (\Begriff{ortho}), Singulett mit geradem $J$ (\Begriff{para}). Bei hoher Temperatur sind alle $J$ etwa gleich besetzt; Gewichte $3 : 1$. \checkmark
+
+\schritt{Schritt 4 --- Methan}
+Dieselbe Regel: $\Gamma_{\mathrm{Spin}}\otimes\Gamma_{\mathrm{Rot}}$ muss das Vorzeichen $A_2$ von $S_4\cong T_d$ enthalten. $A_1$-Spin ($I = 2$) braucht $A_2$-Rotationszustände, $T_2$-Spin braucht $T_1$ ($T_2\otimes T_1\ni A_2$, Kapitel 9), $E$-Spin braucht $E$. Gewichte $5 : 9 : 2$, wie im Leitfall.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Para-Wasserstoff ist die Form bei tiefer Temperatur} ($J = 0$ ist nur dem Singulett erlaubt); die Umwandlung ortho $\to$ para ist ohne Katalysator extrem langsam, weil sie eine Kernspinumkehr braucht. Flüssiger Wasserstoff, der als $3 : 1$-Gemisch abgefüllt wird, wandelt sich über Tage um und setzt dabei mehr Wärme frei als seine Verdampfungswärme --- der Tank kocht leer. Raketentreibstoff wird deshalb beim Verflüssigen katalytisch auf Para umgestellt. \textbf{Eine Darstellung von $S_2$, die über Tankgrößen entscheidet.}}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Young, der Pfarrer}
+\Person{Alfred Young} (1873--1940) war Landpfarrer in Birdbrook, Essex, und schrieb zwischen 1900 und 1934 neun Arbeiten \enquote{On quantitative substitutional analysis}, in denen die Diagramme, die Tableaux, die Symmetrisierer und die seminormale Form stehen. \Person{Frobenius} fand 1900 die Charaktere von $S_n$ mit seiner Determinantenformel, unabhängig und früher als Young die Darstellungen; \Person{Schur} verband in seiner Dissertation 1901 die Darstellungen von $S_n$ mit denen von $GL_n$ (Kapitel 12).
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Die Theorie wurde mehrfach neu erfunden}: \Person{Specht} 1935 (die Moduln tragen seinen Namen), \Person{James} 1978 mit der kombinatorischen Konstruktion, die heute Standard ist, \Person{Okounkov} und \Person{Vershik} 1996 ohne Tableaux. Die Hakenformel fanden Frame, Robinson und Thrall 1954 --- Robinson hatte sie laut Legende an einem Nachmittag mit Frame vermutet und Thrall sie am nächsten Tag an einer Tafel bewiesen. Der Satz von Robinson (1938) und Schensted (1961), dass Permutationen und Tableaupaare bijektiv zusammenhängen, hat seinen Ursprung in einem Problem über die längste wachsende Teilfolge --- ein Problem der Sortiertheorie, das sich als Darstellungstheorie erwies.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{$S_n$ heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Kronecker-Koeffizienten} & Die Vielfachheiten in $S^{\lambda}\otimes S^{\mu}$ (Kapitel 9) haben seit Murnaghan 1938 keine kombinatorische Formel. Ihre Positivität zu entscheiden ist NP-schwer (Ikenmeyer--Mulmuley--Walter 2017); sie stehen im Zentrum der \enquote{geometrischen Komplexitätstheorie}, Mulmuleys Programm, $P\neq NP$ über Darstellungstheorie anzugehen --- das nach 2016 an genau dieser Stelle einen Rückschlag erlitt (Bürgisser--Ikenmeyer--Panova).\\
+\textbf{Die längste wachsende Teilfolge} & Baik--Deift--Johansson 1999: Für eine zufällige Permutation von $n$ ist die Länge der längsten wachsenden Teilfolge etwa $2\sqrt n$, und die Schwankungen folgen der Tracy--Widom-Verteilung --- derselben wie die größten Eigenwerte zufälliger Matrizen (Band 25). Der Beweis geht über Robinson--Schensted und die Plancherel-Maß auf Partitionen $f_\lambda^{2}/n!$.\\
+\textbf{Charaktere asymptotisch} & Wie sehen typische Young-Diagramme mit $n\to\infty$ Kästchen aus? Logan--Shepp und Vershik--Kerov 1977: eine bestimmte Grenzkurve; die Charakterwerte $\chi^{\lambda}(\sigma)/f^{\lambda}$ normierter Charaktere werden von Kerov-Polynomen beschrieben, deren Koeffizienten positiv sind (Féray 2009) --- aus unbekanntem Grund.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 8.1} & Klassen = Zyklentypen = Partitionen; $z_\lambda$\\
+\textbf{Satz 8.2} & Specht-Modul $S^{\lambda} = M^{\lambda}\cap M^{\lambda'}_{\mathrm{sgn}}$; alle Irreduziblen\\
+\textbf{Satz 8.3} & Tafel von $S_4$; alle Charaktere ganzzahlig\\
+\textbf{Satz 8.4} & Verzweigung durch Randkästchen; $\dim = \#$SYT; Hakenformel\\
+\textbf{Der Bruchfall} & über $\mathbb F_p$ unbekannte Dimensionen; James' Vermutung falsch\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Kapitel 9 behandelt das Produkt zweier Darstellungen --- das Werkzeug, mit dem Kombinationsbanden, Auswahlregeln für Übergänge und die Kopplung von Drehimpulsen gerechnet werden, und mit dem sich die Frage \enquote{reell, komplex oder quaternionisch?} für jeden Charakter in einer Zeile beantworten lässt.}
+\end{minipage}
+\end{center}
+\end{merksatz}

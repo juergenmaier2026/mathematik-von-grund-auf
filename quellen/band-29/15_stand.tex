@@ -1,0 +1,216 @@
+\part{Stand}
+
+\chapter{Die Form der Lösungen}
+
+\section{Der Leitfall, ein letztes Mal}
+
+\begin{merksatz}
+\boxtitel{Was der Band aus zwei Kammern gemacht hat}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.2cm}P{3.6cm}P{3.6cm}@{}}
+\toprule
+\textbf{Kap.} & \textbf{Das Modell} & \textbf{Der Satz}\\
+\midrule
+$1$ & vier Parameter, drei Messgrößen: eine Kurve & Varietät, Parametrisierung\\
+$2$--$3$ & das Zertifikat $g = f_3 + (k_{10} - \tfrac25)f_1 - k_{10}f_2$; $k[C]$ & Basissatz, Nullstellensatz, Koordinatenring\\
+$4$--$5$ & $\{k_{10} + k_{12} - \tfrac12,\ k_{21} + k_{20} - \tfrac25,\ g\}$ & Division, Gröbner-Basis\\
+$6$ & $\ddot y + s_2\dot y + s_3y = 0$ & Elimination\\
+$7$ & $2d + 1$: Dimension $1$, Grad $2$ & Hilbert-Polynom, Fasern\\
+$8$ & $\det J = k_{21} - k_{10}$: die Falte & Tangentialraum, Rang\\
+$9$ & zwei Punkte im Unendlichen: die Asymptoten & projektiver Abschluss, Bézout\\
+$11$--$12$ & Hyperbel: rational, Geschlecht $0$ & Lüroth, Geschlecht\\
+$13$ & $0 < s_3 < s_1(s_2 - s_1)$; das Verfahren & semialgebraisch, Positivstellensatz\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Frage der Pharmakologie --- welche Parameter bestimmen die Daten? --- hat den Band getragen, weil sie jede seiner Fragen ist: Was ist die Lösungsmenge, wie groß, wie glatt, wie viele Punkte, welche Funktionen sind auf ihr konstant, und was davon ist reell. Die Antwort ist eine Hyperbel, und alles, was man über sie wissen kann, steht jetzt da.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Vier Muster}
+
+\begin{merksatz}
+\boxtitel{Muster 1 --- die Lösungsmenge ist der Gegenstand, nicht die Lösung}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+Kap.~1 & Vier Modelle, dieselbe Blutkurve: Die Menge ist die Antwort.\\
+Kap.~3 & Varietäten $\leftrightarrow$ Radikalideale: Die Menge hat eine Algebra.\\
+Kap.~7 & Dimension und Grad: Die Menge hat eine Größe.\\
+Kap.~13 & Identifizierbar = konstant auf der Faser: Die Menge entscheidet, was man wissen kann.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Schulmathematik sucht \kursiv{die} Lösung; die algebraische Geometrie fragt nach der Form aller Lösungen} --- und erst diese Frage hat Antworten, die man beweisen kann. Dass eine Gleichung \enquote{keine Lösung} hat, ist ein Zertifikat (Kapitel 3); dass sie \enquote{unendlich viele} hat, ist eine Dimension (Kapitel 7); dass sie \enquote{zwei} hat, ist ein Grad (Kapitel 9). Für den Pharmakologen, der mit einem Schätzwert nach Hause gehen will, ist das eine Zumutung; für den, der wissen will, ob der Schätzwert etwas bedeutet, ist es die einzige Auskunft, die hält.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 2 --- über $\mathbb C$ rechnen, über $\mathbb R$ fragen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+Kap.~1, 3 & Die reelle Zeichnung zeigt die Varietät nicht; der Nullstellensatz gilt nur über $\mathbb C$.\\
+Kap.~9 & Bézout zählt komplex, projektiv, mit Vielfachheit --- oder gar nicht.\\
+Kap.~12 & Geschlecht ist komplex; die reelle Gestalt ist eine von vielen (Harnack).\\
+Kap.~13 & Reell und positiv ist semialgebraisch: Positivstellensatz statt Nullstellensatz.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die methodische Entscheidung des Fachs, und der Band hat sie viermal vorgeführt}: Die Sätze gelten über einem algebraisch abgeschlossenen Körper, weil dort nichts fehlt --- jede Gleichung hat ihre Nullstellen, jede Projektion ihr Bild, jeder Schnitt seine Punkte. Die Anwendung lebt über $\mathbb R$, und sie stellt am Ende die Frage, welche der komplexen Antworten reell sind. Die Frage ist eine eigene --- Tarski, Krivine, Stengle --- und schwerer; aber sie ist \kursiv{nach} der komplexen zu stellen, nicht statt ihrer.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 3 --- Rechnen ersetzt Anschauen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+Kap.~5 & Die Gröbner-Basis als Normalform: Gleichheit von Idealen wird ein Zeichenvergleich.\\
+Kap.~6 & Elimination: Projektionen werden berechnet, nicht gezeichnet.\\
+Kap.~7 & Dimension durch Monomzählen in vier Veränderlichen, wo niemand zeichnet.\\
+Kap.~14 & Der Kosinussatz, vom Algorithmus wiedergefunden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Buchbergers Algorithmus von 1965 hat die algebraische Geometrie zu einer rechnenden Wissenschaft gemacht}, und der Band hat ihn in hundert Zeilen mitgebracht. Alles, was in Kapitel 1 bis 9 behauptet wurde, hat das Programm nachgerechnet: die Basis des Leitfalls, die Hilbert-Funktionen, die Ein-Ausgabe-Gleichung, den Arm. Was es nicht kann, ist ebenso Teil der Wahrheit: Es rechnet über $\mathbb Q$, nicht über $\mathbb R$; es explodiert bei cyclic-7; es sagt nichts über Rauschen. Der Leser, der es nach Kapitel 5 selbst schreibt, besitzt das Fach in der Form, in der es heute betrieben wird --- und weiß, wo es aufhört.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Muster 4 --- dieselbe Faser überall}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{7.0cm}@{}}
+\toprule
+Kap.~1 & Zwei Kammern, Messung im Gewebe: zwei Punkte, $k_{10}\leftrightarrow k_{21}$.\\
+Kap.~13 & Zwei Binomialverteilungen gemischt: zwei Punkte, Gruppe $1\leftrightarrow$ Gruppe $2$.\\
+Kap.~14 & Zwei Gelenke: zwei Punkte, Ellbogen oben $\leftrightarrow$ unten.\\
+Kap.~8 & Alle drei: Jacobi-Determinante null, wo die zwei Punkte verschmelzen --- die Falte.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Pharmakologie, Statistik und Robotik haben hier dieselbe Mathematik, nicht nur analoge}: eine polynomiale Abbildung, eine generische Faser aus zwei Punkten, eine Symmetrie, die sie vertauscht, und eine Diskriminante, auf der sie zusammenfallen. Die drei Fächer haben das jeweils für sich entdeckt --- Bellman und Åström 1970, Teicher 1963, Pieper 1968 --- und reden bis heute kaum miteinander. Der Band hat sie in ein Kapitel gesetzt, weil die Form der Lösungen dieselbe ist; das ist, was der Titel meint.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was der Band ausgelassen hat}
+
+\begin{merksatz}
+\boxtitel{Die Landkarte jenseits dieses Bandes}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Schemata} & Grothendieck 1960: Ein Raum zu jedem Ring, mit $V(x^{2})\ne V(x)$, mit Punkten für Primideale, über beliebigen Körpern und über $\mathbb Z$. Die Sprache, in der das Fach seit sechzig Jahren geschrieben wird, und der Grund, warum Fermats Satz ein Satz der Geometrie ist.\\
+\textbf{Garben und Kohomologie} & Das Werkzeug, mit dem man von lokal nach global kommt: Riemann--Roch (Auslassung 18) ist eine Dimensionsformel für Kohomologie; die $27$ Geraden auf der Kubikfläche, die Klassifikation der Flächen, Hodge-Theorie.\\
+\textbf{Divisoren und Jacobische} & Die Gruppe der Kubik (Kapitel 10) ist der Fall $g = 1$ einer Konstruktion, die jeder Kurve eine $g$-dimensionale Gruppe zuordnet; Faltings' Beweis lebt dort.\\
+\textbf{Modulräume} & Varietäten, deren Punkte Varietäten sind: alle Kurven vom Geschlecht $g$, alle elliptischen Kurven ($j$-Gerade); Mazurs Satz ist ein Satz über Modulkurven.\\
+\textbf{Höhere Dimension} & Flächen (Enriques--Kodaira), Dreifaltigkeiten (Mori), das minimale Modellprogramm; die Frage nach Rationalität (Kapitel 11) in jeder Dimension neu.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dieser Band ist die algebraische Geometrie vor Grothendieck, mit dem Rechner von nach Buchberger. Das ist genug für Identifizierbarkeit, Kinematik und Kryptographie --- und es ist der Boden, auf dem alles Weitere steht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Warum keine Schemata?} Weil sie hier nichts gerechnet hätten, was ohne sie nicht ging --- und weil ihre Sprache ein Jahr braucht, nicht hundertfünfzig Seiten. Der Leser, der weitergehen will, findet in \zit{10} die Sprache, in \zit{6} die Algebra dazu und in \zit{15} die Motivation; der Band hat an fünf Stellen gesagt, wo die klassische Sicht an ihre Grenze kommt (Kapitel 3: $V(x^{2})$; Kapitel 8: Glattheit und Radikal; Kapitel 12: zwei Geschlechter; Kapitel 15: oben). Dort beginnt das Schema.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was offen ist}
+
+\begin{merksatz}
+\boxtitel{Stand bei Redaktionsschluss, August 2026}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Identifizierbarkeit} & Programme entscheiden strukturelle Identifizierbarkeit für Modelle mit etwa dreißig Parametern; offen: reelle Identifizierbarkeit algorithmisch, Komponenten und Geschlecht der Fasern, Verbindung zur praktischen Identifizierbarkeit.\\
+\textbf{Gröbner-Komplexität} & Scharfe Schranken nur für reguläre Folgen; die Praxis ist um Größenordnungen besser als die Theorie erklärt. Gelernte Strategien seit 2020.\\
+\textbf{Rationalität} & Kubische Vierfaltigkeiten: offen, mit Fortschritten in beide Richtungen; stabile Rationalität von Hyperflächen weitgehend geklärt (Schreieder 2019).\\
+\textbf{Elliptische Kurven} & BSD offen; mittlerer Rang $\le0{,}885$ (Bhargava--Shankar); Rang beschränkt? --- vermutlich ja, seit 2019 mit Heuristik. Gleichmäßige Mordell-Vermutung: Dimitrov--Gao--Habegger 2021.\\
+\textbf{Auflösung in Charakteristik $p$} & offen ab Dimension $4$.\\
+\textbf{Post\-quanten\-krypto\-graphie} & Gitter standardisiert 2024; Isogenien nach SIKE neu bewertet (SQIsign im Wettbewerb); elliptische Kurven bleiben, bis ein Quantenrechner mit Tausenden logischen Qubits existiert --- Stand 2026: noch nicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die offenste Frage des Bandes ist die bescheidenste}: Warum sind Gröbner-Basen in der Praxis so viel schneller als im schlimmsten Fall? Mayr und Meyer haben bewiesen, dass es Ideale gibt, deren Basen doppelt exponentiell groß sind, und niemand hat je eines in einer Anwendung getroffen. Die Erklärungen --- Regularität, Dünnbesetztheit, Struktur --- erfassen Teile; eine Theorie der \enquote{typischen} Polynomsysteme, die Anwendungen hervorbringen, gibt es nicht. Es ist dieselbe Lücke wie beim Simplex-Verfahren in Band 19 und beim SAT-Lösen in der Informatik-Reihe: Der Algorithmus funktioniert, und man weiß nicht genau, warum.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Sechs Sätze, die bleiben}
+
+\begin{merksatz}
+\boxtitel{Die Bilanz}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{6.6cm}@{}}
+\toprule
+\textbf{Satz 2.3} & Hilbert: Jedes Ideal ist endlich erzeugt --- und der Beweis ist ein Algorithmus.\\
+\textbf{Satz 3.3} & Nullstellensatz: Varietäten und Radikalideale sind dasselbe; Unlösbarkeit hat ein Zertifikat.\\
+\textbf{Satz 5.4} & Buchberger: Alle S-Polynome reduzieren zu null --- und man hat die Basis.\\
+\textbf{Satz 7.3} & Das Hilbert-Polynom: Dimension vorn, Grad davor, Geschlecht hinten.\\
+\textbf{Satz 9.3} & Bézout: $mn$ Punkte, wenn man richtig zählt.\\
+\textbf{Satz 12.3} & Das Geschlecht entscheidet: rational, elliptisch, endlich.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Dazu ein Verfahren (Satz 13.1), das aus den sechs Sätzen eine Antwort auf eine Frage der Medizin macht --- und ein Programm von hundert Zeilen, das die Antwort ausrechnet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Ein Schlusswort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Band 28 endete dort, wo die Vorhersage endet; dieser Band hat gefragt, wo die Bestimmung endet --- wo Daten aufhören, ein Modell festzulegen. Die Antwort war eine Form: ein Punkt, ein Punktepaar, eine Kurve, und eine Theorie, die diese Formen unterscheidet, misst und berechnet. \textbf{Die algebraische Geometrie ist die Lehre davon, dass Gleichungen eine Gestalt haben} --- und dass diese Gestalt mehr sagt als jede einzelne Lösung: ob es eine gibt, wie viele, wie sie zusammenhängen, was sie gemeinsam haben. Für Hilbert war das Theologie, für Grothendieck eine Sprache, für Buchberger ein Algorithmus, für den Pharmakologen die Auskunft, ob sein Modell etwas taugt. Band 30 nimmt die andere Hälfte des Erlanger Programms: nicht die Gestalt der Lösungen, sondern die Gestalt der Symmetrien --- Gruppen, dargestellt als Matrizen, und was sie über Moleküle, Kristalle und Teilchen verraten.}
+\end{minipage}
+\end{center}
+\end{merksatz}

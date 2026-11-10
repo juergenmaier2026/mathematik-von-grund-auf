@@ -1,0 +1,258 @@
+\chapter{Der Test gegen den Zufall}
+
+\section{Neunzehn Zwillinge}
+
+\begin{merksatz}
+\boxtitel{Lorenz gegen seine Surrogate}
+Aus dem $x$-Kanal ($4000$ Punkte) werden $19$ \Begriff{Surrogate} erzeugt: Reihen mit demselben Spektrum und derselben Werteverteilung, aber zufälligen Phasen --- alles Lineare bewahrt, alles andere zerstört. Dann misst man an Original und Surrogaten eine Größe, die Nichtlinearität anzeigt: den Fehler einer nichtlinearen Vorhersage aus nächsten Nachbarn (Kapitel 10), in Einheiten der Standardabweichung.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{3.2cm}P{1.6cm}P{2.6cm}P{1.8cm}@{}}
+\toprule
+\textbf{Reihe} & \textbf{Original} & \textbf{19 Surrogate} & \textbf{Urteil}\\
+\midrule
+Lorenz $x$ & $0{,}067$ & $0{,}68 \pm 0{,}02$ (min $0{,}64$) & nichtlinear\\
+Lorenz $+\,50\,\%$ Rauschen & $0{,}803$ & $0{,}89 \pm 0{,}03$ (min $0{,}83$) & nichtlinear\\
+AR(1), dann $x^{3}$ & $0{,}84$ & $0{,}73 \pm 0{,}08$ (min $0{,}61$) & \textbf{nicht} abgelehnt\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Lorenz sagt sich zehnmal besser vorher als jeder seiner Zwillinge --- und selbst unter $50$ Prozent Rauschen noch besser als alle $19$. Die kubisch verzerrte lineare Reihe dagegen ist von ihren Zwillingen nicht zu unterscheiden: Sie sieht nichtlinear aus, und der Test sagt zu Recht nein.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Test, der den Bruchfällen der Kapitel 9 bis 11 gefehlt hat.} Dort war die Frage \enquote{Ist das Chaos?} nicht zu beantworten, weil jede Messgröße --- Exponent, Dimension, falsche Nachbarn --- auch für Rauschen einen Wert liefert. Hier ist die Frage anders gestellt: \enquote{Ist das von einem linearen Zufallsprozess zu unterscheiden?} Die kann man beantworten, mit einer Nullhypothese, einer Stichprobe aus ihr und einer Irrtumswahrscheinlichkeit --- Band 24, auf Zeitreihen angewandt. Dieses Kapitel baut den Test und zeigt, wo auch er bricht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Nullhypothese}
+
+\begin{definition}
+\boxtitelm{Definition 12.1 --- Surrogat}
+Gegeben eine Nullhypothese $H_0$ über den erzeugenden Prozess. Ein \Begriff{Surrogat} ist eine künstliche Reihe, die unter $H_0$ dieselbe Verteilung hat wie die gemessene --- eine Ziehung aus $H_0$, die alle Eigenschaften der Messung teilt, die $H_0$ festlegt, und sonst keine.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.2cm}P{3.6cm}P{3.0cm}@{}}
+\toprule
+$H_0$ & \textbf{bewahrt} & \textbf{Surrogat}\\
+\midrule
+weißes Rauschen & Verteilung & Permutation\\
+linear gaußsch & Spektrum & Phasen würfeln (FT)\\
+linear gaußsch, statisch verzerrt & Spektrum und Verteilung & AAFT / IAAFT\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 12.2 --- der Rangtest}
+Sei $T$ eine Messgröße, $T_0$ ihr Wert am Original, $T_1, \ldots, T_n$ an $n$ Surrogaten. Unter $H_0$ sind alle $n + 1$ Werte austauschbar, und
+\[ P(T_0 \text{ ist das Minimum}) = \frac{1}{n+1} . \]
+Mit $n = 19$ Surrogaten lehnt \enquote{Original ist Minimum} $H_0$ auf dem Niveau $0{,}05$ ab; zweiseitig (Minimum oder Maximum) braucht man $n = 39$; für $0{,}01$ einseitig $n = 99$.
+
+\schritt{Beweis}
+Unter $H_0$ sind Original und Surrogate $n + 1$ unabhängige Ziehungen aus derselben Verteilung; jede Rangordnung ist gleich wahrscheinlich, und der Rang des Originals ist gleichverteilt auf $\{1, \ldots, n+1\}$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Test braucht keine Verteilung von $T$, keinen Mittelwert, keine Standardabweichung: nur Ränge. Die $\pm$-Angaben in der Tabelle sind Anschauung; das Urteil fällt der Rang.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Wahl von $T$ entscheidet über die Macht, nicht über die Gültigkeit.} Jede Größe ist erlaubt --- Dimension, Exponent, Vorhersagefehler, Zeitumkehrasymmetrie $\langle(x_n - x_{n-\tau})^{3}\rangle$ ---, der Test bleibt korrekt. Aber eine Größe, die unter Nichtlinearität nicht reagiert, findet sie nicht: Die Zeitumkehrasymmetrie ist für Lorenz' $x$-Kanal nahe null ($0{,}007$ gegen Surrogate $-0{,}01 \pm 0{,}06$), weil der Attraktor in $x$ fast zeitumkehrsymmetrisch ist; der Vorhersagefehler findet denselben Attraktor mit Rang $1$ von $20$ und Abstand $38$ Standardabweichungen. Die Vorhersage ist die mächtigste Größe, weil sie das misst, was Determinismus heißt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Surrogate erzeugen}
+
+\begin{merksatz}
+\boxtitel{Satz 12.3 --- Theiler 1992, Schreiber--Schmitz 1996}
+\schritt{FT-Surrogat}
+Fourier-Transformierte der Reihe, Beträge behalten, Phasen durch gleichverteilte Zufallsphasen ersetzen, zurücktransformieren. Das Ergebnis hat dasselbe Periodogramm --- dieselbe Autokorrelation (Wiener--Chintschin, Band 26) --- und ist gaußsch verteilt, weil es eine Summe vieler unabhängiger Sinusse ist. Es prüft $H_0$: linearer gaußscher Prozess.
+
+\schritt{Das Problem}
+Eine gemessene Reihe ist selten gaußsch verteilt --- RR-Intervalle sind schief, Spannungen begrenzt. Dann unterscheidet sich das Original vom FT-Surrogat schon in der Verteilung, und jeder Test lehnt ab, ohne dass Dynamik im Spiel wäre.
+
+\schritt{IAAFT}
+Man beginne mit einer Permutation der Reihe und wiederhole: (1) Spektrum auf das des Originals setzen (Phasen behalten); (2) Werte durch die sortierten Originalwerte ersetzen, in der Rangordnung des Ergebnisses. Jeder Schritt verletzt, was der andere erzwungen hat, aber die Verletzungen schrumpfen; nach $50$ Iterationen stimmen Spektrum und Verteilung auf Promille. $H_0$ ist dann: linearer gaußscher Prozess, durch eine monotone statische Funktion verzerrt --- die Zeile \enquote{AR(1), dann $x^{3}$} in der Tabelle, und der Test lehnt sie zu Recht nicht ab.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Reihenfolge ist: erst $H_0$ formulieren, dann das Surrogat, dann $T$ --- und nicht umgekehrt.} Ein Surrogat, das eine Eigenschaft nicht bewahrt, die das Original hat, führt zur Ablehnung wegen dieser Eigenschaft, nicht wegen Nichtlinearität: Periodische Anteile, Trends, Sprünge, ungleiche Abtastung --- jede davon lehnt FT-Surrogate ab. \Person{Theiler} und \Person{Prichard} haben 1996 den Fall der \enquote{Nichtlinearität} im EEG untersucht, die sich als Nichtstationarität erwies; \Person{Schreiber} und \Person{Schmitz} 2000 die Liste der Fallen. Die Nullhypothese, die man wirklich ablehnt, ist immer die, die das Surrogat erfüllt --- und oft ist das eine schwächere als gedacht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Was nicht stationär ist, hat kein Surrogat}
+Das farbige Rauschen mit $\alpha = 2{,}5$ aus Kapitel 11, dem die Dimension $1$ zugeschrieben wurde, im Surrogattest:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{3.6cm}P{1.6cm}P{3.2cm}@{}}
+\toprule
+$T$ & \textbf{Original} & \textbf{19 IAAFT-Surrogate}\\
+\midrule
+Vorhersagefehler & $1{,}28$ & $0{,}41 \pm 0{,}32$ (min $0{,}06$)\\
+Zeitumkehr\-asymmetrie & $-0{,}16$ & $-0{,}07 \pm 1{,}75$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Surrogate streuen um das Zehnfache mehr als bei Lorenz, und das Original liegt nicht unten, sondern oben. Der Test lehnt nichts ab --- richtig --- aber die Zahlen zeigen, dass er hier nichts prüft: Die Surrogate eines nichtstationären Prozesses sind keine Ziehungen aus einer Verteilung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Prozess mit $1/f^{2{,}5}$ hat unendliche Varianz im Grenzwert --- er wandert.} Vier tausend Punkte sind ein Ausschnitt, in dem er zufällig oben oder unten ist, und jedes Surrogat ein anderer Ausschnitt desselben Wanderns; die Messgröße hängt davon ab, wo. Die Voraussetzung von Satz 12.2 --- austauschbare Ziehungen --- ist verletzt, bevor der Test beginnt. Herzfrequenz, Klima und Kurse haben genau solche Spektren. Die Antwort der Praxis: kurze, stationäre Abschnitte; Trendbereinigung; Surrogate, die auch den Trend bewahren (\enquote{constrained randomization}, Schreiber 1998) --- und die Einsicht, dass die Frage \enquote{chaotisch oder zufällig?} für einen wandernden Prozess schlecht gestellt ist. Kapitel 15 sagt, was die bessere Frage war.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.1 --- Wie viele Surrogate}
+Man will einseitig auf dem Niveau $0{,}01$ testen und zweiseitig auf $0{,}02$. Wie viele Surrogate?
+
+\loesung
+\schritt{Schritt 1 --- Einseitig}
+$1/(n+1) = 0{,}01$: $n = 99$.
+
+\schritt{Schritt 2 --- Zweiseitig}
+$P(\text{Minimum oder Maximum}) = 2/(n+1) = 0{,}02$: ebenfalls $n = 99$.
+
+\schritt{Schritt 3 --- Und mit $19$}
+Einseitig $0{,}05$, zweiseitig $0{,}10$. Wer mit $19$ Surrogaten \enquote{$p < 0{,}05$ zweiseitig} schreibt, hat $n = 39$ gebraucht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Rangtest ist exakt, aber grob}: Mit $19$ Surrogaten gibt es nur die $p$-Werte $1/20, 2/20, \ldots$ Für Lorenz liegt das Original $38$ Standardabweichungen unter den Surrogaten --- ein $p$, das kein Rangtest ausdrücken kann und keiner braucht. Der Rang ist für die Grenzfälle da, und dort zählt er genau.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.2 --- Zeitumkehr von Hand}
+Die Reihe $0, 1, 3, 4, 2, 0, 1, 3, 4, 2$ (eine Sägezahnform: langsam hoch, schnell runter). Berechnen Sie $T = \langle d^{3}\rangle/\langle d^{2}\rangle^{3/2}$ mit $d_n = x_n - x_{n-1}$, und für die zeitumgekehrte Reihe.
+
+\loesung
+\schritt{Schritt 1 --- Differenzen}
+$d = 1, 2, 1, -2, -2, 1, 2, 1, -2$ (neun Werte).
+
+\schritt{Schritt 2 --- Momente}
+$\sum d^{2} = 1 + 4 + 1 + 4 + 4 + 1 + 4 + 1 + 4 = 24$, $\langle d^{2}\rangle = 2{,}667$; $\sum d^{3} = 1 + 8 + 1 - 8 - 8 + 1 + 8 + 1 - 8 = -4$, $\langle d^{3}\rangle = -0{,}444$.
+
+\schritt{Schritt 3 --- $T$}
+$T = -0{,}444/2{,}667^{1{,}5} = -0{,}444/4{,}355 = -0{,}102$.
+
+\schritt{Schritt 4 --- Umgekehrt}
+Zeitumkehr dreht jedes $d$ um: $\langle d^{3}\rangle = +0{,}444$, $T = +0{,}102$. Ein linearer gaußscher Prozess ist zeitumkehrbar (seine Verteilung hängt nur von der Autokorrelation ab, die symmetrisch ist), hat also $T = 0$ im Erwartungswert. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Sägezahnform ist die der Relaxationsoszillation}: langsamer Aufbau, schneller Abfall --- van der Pol, das Aktionspotential, der tropfende Wasserhahn. Die Zeitumkehrasymmetrie ist deshalb die natürliche Messgröße für erregbare Systeme, und sie hat einen Vorzug: Sie ist in Sekunden berechnet, braucht keine Einbettung und keine Parameter. Für Lorenz' $x$-Kanal taugt sie nicht, wie im Text gezeigt --- jede Größe hat ihre Systeme.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.3 --- Lorenz unter Rauschen}
+In der Tabelle des Leitfalls: Lorenz mit $50$ Prozent Rauschen, Original $0{,}803$, Surrogate $0{,}888 \pm 0{,}025$, Minimum $0{,}831$. Ablehnung? Und ab welchem Rauschen nicht mehr?
+
+\loesung
+\schritt{Schritt 1 --- Rang}
+$0{,}803 < 0{,}831$: Das Original ist das Minimum von $20$, $p = 0{,}05$. Abgelehnt.
+
+\schritt{Schritt 2 --- Abstand}
+$(0{,}888 - 0{,}803)/0{,}025 = 3{,}4$ Standardabweichungen --- deutlich, aber nicht mehr die $38$ der reinen Reihe.
+
+\schritt{Schritt 3 --- Die Grenze}
+Der Vorhersagefehler des Originals steigt mit dem Rauschen gegen den der Surrogate; bei $100$ Prozent Rauschen (Signal und Rauschen gleich stark) liegt er etwa bei $0{,}9$ gegen $0{,}95$, bei $200$ Prozent ist kein Unterschied mehr messbar. Die Grenze hängt von $N$ ab: Mehr Punkte, mehr Nachbarn, bessere Mittelung --- die Vorhersage aus Nachbarn ist ein Schätzer, der Rauschen wegmittelt, und ihre Macht wächst mit $\sqrt N$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für die Herzfrequenz ist das die ehrliche Antwort}: Sie ist nichtlinear --- Surrogattests mit Vorhersagefehler, Zeitumkehr und Verwandten lehnen die lineare Nullhypothese fast immer ab, bei Gesunden wie bei Kranken. Ob sie \kursiv{chaotisch} ist, ist nicht entscheidbar, weil Nichtlinearität plus Rauschen von Chaos plus Rauschen keine Messung trennt; und dass die Unterscheidung klinisch nichts ändert, ist seit etwa 2009 Konsens (Glass: \enquote{Introduction to controversial topics in nonlinear science: Is the normal heart rate chaotic?}). Was geblieben ist, sind die nichtlinearen Messgrößen selbst --- als Risikomarker, ohne das Wort Chaos.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Santa Fe 1991}
+\Person{James Theiler}, \Person{Stephen Eubank}, \Person{André Longtin}, \Person{Bryan Galdrikian} und \Person{Doyne Farmer} --- Farmer aus dem Santa-Cruz-Kollektiv, jetzt am Santa Fe Institute --- veröffentlichten 1992 \enquote{Testing for nonlinearity in time series: the method of surrogate data}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Anlass war die Flut von Dimensionen und Exponenten aus allem, was eine Zeitreihe hatte; Osborne und Provenzale hatten 1989 gezeigt, dass Rauschen Dimensionen hat, Ruelle 1990 die Fiktion benannt. \textbf{Theilers Antwort war nicht eine bessere Messgröße, sondern ein Test} --- die Rückführung der Chaos-Diagnostik auf die Statistik von Band 24. Die Phasenrandomisierung selbst ist älter (sie steckt schon in Arbeiten der siebziger Jahre zu Spektralschätzung); neu war, sie als Nullhypothese zu verstehen. \Person{Schreiber} und \Person{Schmitz} verbesserten 1996 die Surrogate (IAAFT) und schrieben 2000 die Übersicht, die bis heute gilt; \Person{Kantz} und \Person{Schreiber}s Lehrbuch von 1997, \zit{12}, machte den Test zum Standard.}
+\end{minipage}
+\end{center}
+
+\schritt{Ein Wettbewerb}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Weigend} und \Person{Gershenfeld} veranstalteten 1991 in Santa Fe einen Vorhersagewettbewerb: sechs Reihen --- Laser, Herzfrequenz eines Schlafapnoe-Patienten, Wechselkurse, ein Musikstück, eine Sternhelligkeit, eine synthetische --- und die Aufgabe, sie fortzusetzen. \textbf{Die Laserdaten gewann ein neuronales Netz mit einer Einbettung, die Herzfrequenz niemand}: Sie wechselt zwischen Zuständen, und kein Modell sah die Wechsel kommen. Das Ergebnis von 1993 war die erste systematische Niederlage der Chaos-Vorhersage an echten physiologischen Daten --- und der Beginn dessen, was Kapitel 15 beschreibt.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Surrogate heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Zwillingssurrogate} & Surrogate aus dem Rekurrenzplot der Reihe selbst (Thiel 2006): prüfen Kopplung zwischen zwei Systemen statt Linearität.\\
+\textbf{Surrogate für Netze} & Dieselbe Logik für Graphen --- Konfigurationsmodell, Band 16: Welche Eigenschaft des Netzes ist mehr als seine Gradverteilung?\\
+\textbf{Surrogate für Punktprozesse} & Für Spike-Züge und Ereignisfolgen (Grün 2009): Welche Synchronie ist mehr als Zufall bei gegebener Rate?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Prinzip ist von der Zeitreihe abgelöst worden und gilt überall, wo eine Struktur beobachtet wird, die auch Zufall sein könnte}: Man baue Zufall, der alles hat, was man kennt, und frage, ob die Beobachtung darüber hinausgeht. In der Neurowissenschaft ist das die Standardfrage an gleichzeitige Spikes: \enquote{Unitary events} sind die, die häufiger auftreten, als die Raten erwarten lassen, und die Surrogate --- Verschiebung, Dithering, Ratenbewahrung --- haben dort ihre eigene Literatur über das, was ein Surrogat versehentlich zerstört. Es ist Theilers Programm, dreißig Jahre später, mit denselben Fallen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 12.1} & Surrogat: Ziehung aus $H_0$ mit den Eigenschaften der Messung\\
+\textbf{Satz 12.2} & Rangtest $p = 1/(n+1)$; $19$ für $0{,}05$\\
+\textbf{Satz 12.3} & FT, AAFT, IAAFT; erst $H_0$, dann Surrogat, dann $T$\\
+\textbf{Der Bruchfall} & nichtstationär: keine austauschbaren Ziehungen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil IV ist zu Ende: Einbetten, messen, testen. Teil V verlässt die Zeitreihe und geht in den Raum --- wo die Herzzelle nicht allein ist, sondern eine von Milliarden, und die Erregung eine Welle, die sich zur Spirale aufrollen kann.}
+\end{minipage}
+\end{center}
+\end{merksatz}

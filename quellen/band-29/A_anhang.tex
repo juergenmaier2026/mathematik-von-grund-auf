@@ -1,0 +1,330 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Begriffe und Formeln}
+
+\begin{merksatz}
+\boxtitel{Teil I bis III}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.6cm}P{4.0cm}@{}}
+\toprule
+$V(f_1, \ldots, f_s) = \{a : f_i(a) = 0\}$ & affine Varietät (1.1)\\
+$V\cup W = V(f_ig_j)$, $V\cap W = V(f_i, g_j)$ & Zariski-abgeschlossen (1.2)\\
+$\langle f_1, \ldots, f_s\rangle$, $I(V)$ & Ideal, Verschwindungsideal (2.1)\\
+$V(I(V)) = V$, $I(V(I))\supseteq I$ & die beiden Richtungen (2.2)\\
+jedes Ideal endlich erzeugt & Basissatz (2.3)\\
+$V(I) = \emptyset\Rightarrow1\in I$ & schwacher Nullstellensatz (3.1)\\
+$I(V(I)) = \sqrt I$ & starker Nullstellensatz (3.3)\\
+$1 - yf$ & Rabinowitsch\\
+irreduzibel $\iff I(V)$ prim & Zerlegung (3.5)\\
+$k[V] = k[x]/I(V)$ & Koordinatenring (3.6)\\
+lex, grlex, grevlex & Monomordnungen (4.2)\\
+$f = \sum q_ig_i + r$ & Division (4.3)\\
+$\langle\mathrm{LM}(G)\rangle = \mathrm{LM}(I)$ & Gröbner-Basis (5.1)\\
+$S(f, g) = \frac{x^{\gamma}}{\mathrm{LT}f}f - \frac{x^{\gamma}}{\mathrm{LT}g}g$ & S-Polynom (5.3)\\
+alle $\overline{S(g_i, g_j)}^{\,G} = 0$ & Buchberger-Kriterium (5.4)\\
+$G\cap k[x_{l+1}, \ldots, x_n]$ & Elimination (6.1)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.6cm}P{4.0cm}@{}}
+\toprule
+$\det$ Sylvester & Resultante (6.3)\\
+$V(I_m) = \overline{\text{Bild}}$ & Implizitisierung (6.4)\\
+${}^{a}\!H_I(d) = \#$Standardmonome $\le d$ & Hilbert-Funktion (7.1, 7.2)\\
+$\dim = \deg HP$, $\deg = \dim!\cdot\mathrm{LC}$ & Dimension, Grad (7.3)\\
+$\dim F\ge\dim V - \dim W$ & Fasern (7.5)\\
+$T_pV = \ker J(p)$ & Tangentialraum (8.1)\\
+glatt $\iff\operatorname{rang}J = n - r$ & Jacobi-Kriterium (8.2)\\
+$\dim\overline{\varphi(V)} = \operatorname{rang}J_\varphi$ & Bild einer Abbildung (8.3)\\
+$(x_0 : \cdots : x_n)$, $f^{h} = x_0^{d}f(x/x_0)$ & projektiv, homogenisieren (9.1, 9.2)\\
+$\sum I_p(F, G) = mn$ & Bézout (9.3)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Teil IV und V}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.6cm}P{4.0cm}@{}}
+\toprule
+$y^{2} = x^{3} + ax + b$, $\Delta = -16(4a^{3} + 27b^{2})$ & Weierstraß-Form (10.1)\\
+$m = \frac{y_2 - y_1}{x_2 - x_1}$ bzw.\ $\frac{3x_1^{2} + a}{2y_1}$; $x_3 = m^{2} - x_1 - x_2$ & Gruppengesetz (10.2)\\
+$E(\mathbb Q)\cong\mathbb Z^{r}\oplus T$ & Mordell (10.4)\\
+Torsion: ganz, $y^{2}\mid\Delta$ & Nagell--Lutz (10.4)\\
+$|\#E(\mathbb F_p) - p - 1|\le2\sqrt p$ & Hasse (10.4)\\
+Gerade durch Punkt, Vieta & Parametrisierung (11.1, 11.2)\\
+$k\subsetneq K\subseteq k(t)\Rightarrow K = k(u)$ & Lüroth (11.3)\\
+$HP_C = ed + 1 - p_a$ & Geschlecht (12.1)\\
+$p_a = \binom{d-1}{2}$, $g = p_a - \delta$ & Grad-Geschlecht (12.2)\\
+$g = 0, 1, \ge2$ & rational, elliptisch, endlich (12.3)\\
+Elimination $\to$ Rang $\to$ Faser $\to$ Funktionen $\to$ Ausnahmen & Identifizierbarkeit (13.1)\\
+Rang $1$: $2\times2$-Minoren; $(p^{2}, 2pq, q^{2})$ & Segre, Hardy--Weinberg (13.2)\\
+$0 < s_3 < s_1(s_2 - s_1)$ & reelles Bild des Leitfalls (13.3)\\
+$2$, $16$, $40$ & Kinematik (14.1)\\
+$K = abG$ & ECDH (14.2)\\
+prim, nicht anomal, nicht supersingulär & sichere Kurve (14.3)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz worauf beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Satz} & \textbf{beruht auf}\\
+\midrule
+1.2 Schnitt, Vereinigung & Körper ohne Nullteiler (Band 11)\\
+2.2 $V$ und $I$ & Definitionen; Radikal\\
+2.3 Basissatz & Dickson; Division; Wohlordnung (Band 10)\\
+3.1 schwacher NSS & Hauptidealring $k[x]$ (Band 11); Zariskis Lemma (Auslassung 1)\\
+3.3 starker NSS & 3.1; Rabinowitsch\\
+3.5 Zerlegung & 2.3 (Kettenbedingung); 3.3\\
+4.3 Division & Wohlordnung der Monome\\
+5.2 Gröbner-Eigenschaften & 2.3, 4.3\\
+5.4 Buchberger & Teleskoplemma; 4.3\\
+5.5 Algorithmus & 5.4; Dickson\\
+6.1 Elimination & lex-Eigenschaft; 5.1\\
+6.3 Resultante & lineare Algebra (Band 2)\\
+6.4 Implizitisierung & 6.1; Teilbarkeit $x^{a} - g^{a}$\\
+7.2 Macaulay & 5.2; Gauß-Elimination\\
+7.3 Hilbert-Polynom & Monomideale (Auslassung 5)\\
+7.4 drei Dimensionen & 7.3; Noether-Normalisierung (Auslassung 6)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Satz} & \textbf{beruht auf}\\
+\midrule
+8.2 Jacobi & implizite Funktionen (Band 13); Auslassung 9\\
+9.3 Bézout & 6.3; Fundamentalsatz (Band 12); Vielfachheit Auslassung 12\\
+10.2 Gruppengesetz & Vieta; 9.3\\
+10.3 Assoziativität & Cayley--Bacharach (Auslassung 14)\\
+11.1, 11.2 Parametrisierung & 9.3; Vieta\\
+12.2 Grad-Geschlecht & Binomialkoeffizienten (Band 15); $\delta$ Auslassung 17\\
+12.3 Trichotomie & Riemann--Roch (Auslassung 18); Mordell, Faltings (15, 19)\\
+13.3 semialgebraisch & Tarski--Seidenberg (Auslassung 21)\\
+14.2 ECDH & 10.2 über $\mathbb F_p$ (Band 1)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Was nicht bewiesen wurde}
+
+\begin{merksatz}
+\boxtitel{Einundzwanzig Auslassungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{4.6cm}P{0.8cm}P{3.0cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+1 Zariskis Lemma & $3$ & Atiyah--Macdonald\zit{1}; Kunz\zit{13}\\
+2 Primärzerlegung (Lasker--Noether) & $3$ & \zit{1}, Kap.~4; Eisenbud\zit{6}\\
+3 Erweiterungssatz & $6$ & Cox--Little--O'Shea\zit{5}, Kap.~3\\
+4 Chevalley: Bilder sind konstruierbar & $6$ & Hartshorne\zit{10}, Ex.~II.3.19\\
+5 Zerlegung des Monomkomplements & $7$ & \zit{5}, Kap.~9.2\\
+6 Hilbert = Krull = Transzendenz & $7$ & \zit{1}, Kap.~11; \zit{5}, Kap.~9\\
+7 Faserdimension & $7$ & \zit{10}, Kap.~II.3; Shafarevich\zit{22}\\
+8 affiner Dimensionssatz & $7$ & \zit{10}, Kap.~I.7\\
+9 Jacobi-Kriterium, generische Glattheit & $8$ & \zit{10}, Kap.~I.5; \zit{22}\\
+10 Homogenisierung der Gröbner-Basis & $9$ & \zit{5}, Kap.~8.4\\
+11 Hauptsatz der Eliminationstheorie & $9$ & \zit{5}, Kap.~8.5; \zit{22}\\
+12 Schnittvielfachheit; Bézout allgemein & $9$ & Fulton\zit{7}, Kap.~3, 5\\
+13 Bernstein--Kushnirenko--Khovanskii & $9$ & Sturmfels\zit{25}, Kap.~3\\
+14 Cayley--Bacharach & $10$ & \zit{7}, Kap.~5.6\\
+15 Mordell; Nagell--Lutz; Hasse; Torsion & $10$ & Silverman--Tate\zit{24}; Silverman\zit{23}\\
+16 Lüroth, Irreduzibilitätsargument & $11$ & \zit{10}, Kap.~IV.2; Sendra\zit{21}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{4.6cm}P{0.8cm}P{3.0cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+17 $g = p_a - \delta$ & $12$ & \zit{7}, Kap.~8; Brieskorn--Knörrer\zit{3}\\
+18 Riemann--Roch, Riemann--Hurwitz, Divisoren & $12$, $14$ & \zit{7}, Kap.~8; \zit{10}, Kap.~IV\\
+19 Faltings & $12$ & Cornell--Silverman (Hg.), \textit{Arithmetic Geometry}, 1986\\
+20 Dimension von Sekantenvarietäten & $13$ & Sullivant\zit{26}, Kap.~14\\
+21 Tarski--Seidenberg; zylindrische Zerlegung & $13$ & Bochnak--Coste--Roy, \textit{Real Algebraic Geometry}, 1998\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Vollständig bewiesen sind}: Schnitt und Vereinigung, die Regeln für $V$ und $I$, Hilberts Basissatz (über Dickson), der schwache Nullstellensatz in einer Veränderlichen und der Rückschluss von Zariskis Lemma, der starke Nullstellensatz aus dem schwachen, Zerlegung und Eindeutigkeit, Monomordnungen und Division, alle Eigenschaften der Gröbner-Basen, das Buchberger-Kriterium mit Lemma, Terminierung und Korrektheit des Algorithmus, Elimination, Resultante, Implizitisierung, Macaulays Satz, das Hilbert-Polynom für Monomideale, Transzendenz $\le$ Hilbert, Bézout bis auf die Identifikation der Vielfachheit, das Gruppengesetz mit Formeln, die Torsion der Titelkurve (gegeben Nagell--Lutz), Kegelschnitt- und Knotenparametrisierung, die Grad-Geschlecht-Formel für glatte ebene Kurven, das reelle Bild des Leitfalls. Alle Zahlen des Bandes --- Gröbner-Basen, Hilbert-Funktionen, Punkte auf Kurven --- wurden mit dem beiliegenden Programm oder von Hand nachgerechnet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von Diophant bis zu den Gröbner-Basen im Katheterlabor}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{7.4cm}@{}}
+\toprule
+$\sim250$ & Diophant: Sekantenverfahren, Zerlegung in Quadrate\\
+$1637$ & Descartes: Koordinaten; Fermat: Randbemerkung\\
+$1639$ & Desargues: Punkte im Unendlichen\\
+$1670$ & Newton: Kubiken klassifiziert, Newton-Polygon\\
+$1748$/$64$ & Euler, Bézout: Elimination durch Determinanten\\
+$1779$ & Bézout: der Satz\\
+$1822$ & Poncelet: projektive Geometrie (geschrieben in Saratow 1813)\\
+$1826$ & Abel: Additionstheorem, das Geschlecht erscheint\\
+$1840$ & Sylvester: die Matrix der Resultante\\
+$1857$ & Riemann: Flächen, Geschlecht als Henkelzahl\\
+$1864$ & Clebsch: Grad-Geschlecht-Formel\\
+$1876$ & Lüroth; Harnack\\
+$1882$ & Dedekind--Weber: Kurven über Funktionenkörper; Kronecker: Eliminationstheorie\\
+$1890$ & Hilbert: Basissatz, Hilbert-Polynom\\
+$1893$ & Hilbert: Nullstellensatz\\
+$1905$ & Lasker: Primärzerlegung\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{7.4cm}@{}}
+\toprule
+$1913$ & Dickson: das Lemma\\
+$1921$ & Noether: Idealtheorie in Ringbereichen\\
+$1922$ & Mordell: endliche Erzeugung; die Vermutung\\
+$1927$ & Macaulay: Hilbert-Funktion über Leitmonome\\
+$1929$ & Rabinowitsch: der Trick\\
+$1933$/$35$ & Hasse; Nagell--Lutz\\
+$1946$ & Weil: Foundations; \enquote{Elimination eliminieren}\\
+$1960$ & Grothendieck: Schemata (EGA)\\
+$1964$/$65$ & Hironaka: Auflösung; Buchberger: Gröbner-Basen\\
+$1968$/$70$ & Pieper: Kinematik; Bellman--Åström: Identifizierbarkeit\\
+$1972$ & Lüroth in Dimension $3$ falsch (dreimal)\\
+$1977$ & Mazur: Torsion\\
+$1982$ & Mayr--Meyer: doppelt exponentiell\\
+$1983$ & Faltings: Mordell-Vermutung\\
+$1985$ & Koblitz, Miller: Kurven in der Kryptographie; Schoof: Punkte zählen\\
+$1986$/$93$ & Primrose: $16$; Raghavan--Roth\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{7.4cm}@{}}
+\toprule
+$1995$ & Wiles: Modularität, Fermat\\
+$1996$/$99$ & Husty: $40$; Faugère: F4\\
+$1998$ & Diaconis--Sturmfels: algebraische Statistik\\
+$2003$ & Faugère--Joux: HFE gebrochen\\
+$2007$ & DAISY: Identifizierbarkeit als Programm\\
+$2010$--$15$ & Bhargava--Shankar: mittlerer Rang; Meshkat--Sullivant--Eisenberg: Kompartimente algebraisch\\
+$2021$/$22$ & Dimitrov--Gao--Habegger; SIKE gebrochen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Affine Varietät} & Nullstellenmenge endlich vieler Polynome in $k^{n}$ (1)\\
+\textbf{Arithmetisches Geschlecht} & $1 - $ Konstante des Hilbert-Polynoms (12)\\
+\textbf{Bézout} & $\sum I_p = mn$ für ebene Kurven (9)\\
+\textbf{Buchberger-Kriterium} & S-Polynome reduzieren zu null (5)\\
+\textbf{Diskriminante} & $\mathrm{Res}(g, g')$; $\Delta$ der Kubik (10)\\
+\textbf{Dimension} & Grad des Hilbert-Polynoms; Krull; Transzendenz (7)\\
+\textbf{Elimination} & Ideal ohne gewisse Veränderliche (6)\\
+\textbf{Elliptische Kurve} & glatte Kubik mit Punkt; eine Gruppe (10)\\
+\textbf{Faser} & Urbild eines Punktes; Lösungsmenge der Umkehrung (7, 13)\\
+\textbf{Geschlecht} & Henkelzahl; entscheidet rational/elliptisch/endlich (12)\\
+\textbf{Glatt} & Tangentialraum hat Dimension der Varietät (8)\\
+\textbf{Grad einer Varietät} & $\dim!\cdot$ Leitkoeffizient des Hilbert-Polynoms (7)\\
+\textbf{Gröbner-Basis} & Leitmonome erzeugen alle Leitmonome (5)\\
+\textbf{grevlex} & Grad zuerst, dann umgekehrt lexikographisch (4)\\
+\textbf{Hilbert-Funktion} & Zahl der Standardmonome bis Grad $d$ (7)\\
+\textbf{Homogen} & alle Terme gleichen Grades; auf $\mathbb P^{n}$ definiert (9)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Ideal} & abgeschlossen unter Summe und Vielfachen (2)\\
+\textbf{Identifizierbar} & Faser ein Punkt (global), endlich (lokal), konstant auf der Faser (Funktion) (1, 13)\\
+\textbf{Implizitisierung} & Parametrisierung $\to$ Gleichungen (6)\\
+\textbf{Irreduzibel} & keine Vereinigung echter Teilvarietäten; Ideal prim (3)\\
+\textbf{Jacobi-Matrix} & Linearisierung; Rang gibt Glattheit und Bilddimension (8)\\
+\textbf{Koordinatenring} & $k[x]/I(V)$: Polynomfunktionen auf $V$ (3)\\
+\textbf{Kreispunkte} & $(0 : 1 : \pm\mathrm i)$ (9)\\
+\textbf{Leitmonom} & größtes Monom in der Ordnung (4)\\
+\textbf{lex} & lexikographische Ordnung; eliminiert (4, 6)\\
+\textbf{Monomordnung} & Totalordnung, multiplikativ, wohlgeordnet (4)\\
+\textbf{Nullstellensatz} & $I(V(I)) = \sqrt I$ über $\mathbb C$ (3)\\
+\textbf{Parametrisierung} & Kurve als Bild von $t\mapsto(x(t), y(t))$ (1, 11)\\
+\textbf{Positivstellensatz} & Zertifikate für reelle Unlösbarkeit (3, 13)\\
+\textbf{Primideal} & $fg\in I\Rightarrow f\in I$ oder $g\in I$ (3)\\
+\textbf{Projektiver Raum} & Geraden durch $0$; affiner Raum plus Unendliches (9)\\
+\textbf{Radikal} & $\sqrt I = \{f : f^{m}\in I\}$ (3)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Rang (Kurve)} & Zahl der freien Erzeuger von $E(\mathbb Q)$ (10)\\
+\textbf{Rational} & parametrisierbar; Geschlecht $0$ (11, 12)\\
+\textbf{Reduzierte Basis} & normiert, gegeneinander reduziert; eindeutig (5)\\
+\textbf{Resultante} & Determinante der Sylvester-Matrix (6)\\
+\textbf{S-Polynom} & Kombination mit ausgelöschten Leittermen (5)\\
+\textbf{Semialgebraisch} & durch Gleichungen und Ungleichungen über $\mathbb R$ (13)\\
+\textbf{Singulär} & Tangentialraum zu groß (8)\\
+\textbf{Standardmonom} & nicht in $\mathrm{LM}(I)$; Basis von $k[x]/I$ (5, 7)\\
+\textbf{Tangentialkegel} & Terme niedrigsten Grades (8)\\
+\textbf{Tangentialraum} & $\ker J(p)$ (8)\\
+\textbf{Torsion} & Punkte endlicher Ordnung (10)\\
+\textbf{Vielfachheit} & Ordnung der Resultantennullstelle; $\dim\mathcal O_p/(F, G)$ (9)\\
+\textbf{Zertifikat} & Darstellung $f = \sum h_if_i$ (2, 3)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}

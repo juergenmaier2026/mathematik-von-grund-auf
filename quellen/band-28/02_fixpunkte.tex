@@ -1,0 +1,342 @@
+\chapter{Ruhe, und ob sie hält}
+
+\section{Die Frage}
+
+\begin{merksatz}
+\boxtitel{Drei Arten von Ruhe}
+Ein Fixpunkt ist ein Zustand, der sich nicht ändert. Die Frage ist, was mit Zuständen \kursiv{in seiner Nähe} geschieht.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{6.0cm}@{}}
+\toprule
+\textbf{anziehend} & Jede Bahn, die nahe genug beginnt, läuft in den Fixpunkt. Die Ruhe der Herzzelle.\\
+\textbf{abstoßend} & Jede Bahn, die nicht genau im Fixpunkt beginnt, entfernt sich. Ein Bleistift auf der Spitze.\\
+\textbf{Sattel} & Manche Bahnen laufen hinein, die meisten hinaus. Der Scheitel eines Passes.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Fixpunkt, den man beobachtet, ist fast immer anziehend --- die anderen sieht man nicht, weil nichts in ihnen bleibt. Aber die unsichtbaren bestimmen die Grenzen zwischen den sichtbaren.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Antwort steckt in der Ableitung}: Nahe am Fixpunkt verhält sich jedes glatte System wie ein lineares, und lineare Systeme sind in Band 14 vollständig gelöst --- durch Eigenwerte. Dieses Kapitel macht daraus ein Verfahren, prüft es an der Herzzelle und findet am Ende den einen Fall, in dem es versagt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Linearisieren}
+
+\begin{definition}
+\boxtitelm{Definition 2.1 --- die Linearisierung}
+Sei $x^{*}$ ein Fixpunkt von $\dot x = f(x)$. Die \Begriff{Jacobi-Matrix} $J = Df(x^{*})$ mit $J_{ij} = \partial f_i/\partial x_j$ definiert das \Begriff{linearisierte System} $\dot\xi = J\xi$ für die Abweichung $\xi = x - x^{*}$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 2.2 --- Hartman und Grobman}
+Hat kein Eigenwert von $J$ den Realteil null, so heißt der Fixpunkt \Begriff{hyperbolisch}, und in seiner Umgebung sieht das Phasenportrait des Systems aus wie das des linearisierten Systems: Es gibt eine stetige, umkehrbare Verzerrung, die die Bahnen des einen in die des anderen überführt.
+
+\schritt{Beweis}
+Auslassung 2 --- der Beweis braucht die Theorie invarianter Mannigfaltigkeiten und steht bei Perko\zit{20}. Was man ohne ihn einsehen kann: Für $\xi$ klein ist $f(x^{*}+\xi) = J\xi + O(|\xi|^{2})$, und der quadratische Rest ist gegen den linearen Teil vernachlässigbar, solange dieser nicht selbst verschwindet --- was bei Realteil null in einer Richtung geschieht. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Eigenwerte der Jacobi-Matrix entscheiden: alle Realteile negativ --- anziehend; alle positiv --- abstoßend; gemischt --- Sattel.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.3 --- die Ebene: Spur und Determinante}
+Für $n = 2$ mit $\tau = \operatorname{Spur} J$ und $\Delta = \det J$ sind die Eigenwerte $\lambda = \tfrac12\big(\tau\pm\sqrt{\tau^{2}-4\Delta}\big)$, und
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.8cm}P{3.0cm}@{}}
+\toprule
+$\Delta < 0$ & & \textbf{Sattel}\\
+$\Delta > 0$, $\tau < 0$ & $\tau^{2} > 4\Delta$ & \textbf{Knoten}, anziehend\\
+& $\tau^{2} < 4\Delta$ & \textbf{Strudel}, anziehend\\
+$\Delta > 0$, $\tau > 0$ & & abstoßend (Knoten oder Strudel)\\
+$\Delta > 0$, $\tau = 0$ & & \textbf{Zentrum} --- nicht hyperbolisch\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis}
+Das charakteristische Polynom ist $\lambda^{2} - \tau\lambda + \Delta$ (Band 2, Kapitel~7). $\Delta < 0$ gibt zwei reelle Eigenwerte verschiedenen Vorzeichens. $\Delta > 0$: beide Realteile haben das Vorzeichen von $\tau$; reell für $\tau^{2} \ge 4\Delta$, sonst komplex mit Imaginärteil $\tfrac12\sqrt{4\Delta-\tau^{2}}$, der die Drehung macht. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Spur und Determinante sind das Vorzeichen der Divergenz und das der Fläche}: $\tau = \operatorname{div} f$ am Fixpunkt --- Satz 1.3 im Kleinen --- und $\Delta$ sagt, ob die Abbildung die Orientierung erhält. Für die Ebene genügt diese Tabelle für alles, was ein Fixpunkt sein kann; im Raum kommen Sattel mit einer oder zwei anziehenden Richtungen hinzu, und mit ihnen in Kapitel~8 das Chaos.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Herzzelle, linearisiert}
+
+\begin{merksatz}
+\boxtitel{Die Jacobi-Matrix}
+\[ J = \begin{pmatrix} 1 - v^{2} & -1 \\ \varepsilon & -\varepsilon b \end{pmatrix} \]
+\[ \tau = 1 - v^{2} - 0{,}064, \qquad \Delta = -\varepsilon b(1-v^{2}) + \varepsilon = 0{,}064\,v^{2} + 0{,}016 . \]
+$\Delta$ ist immer positiv: Die Zelle hat nie einen Sattel. Alles hängt an der Spur --- und die hängt an $v^{*}$.
+
+\schritt{Für verschiedene Reizströme}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.0cm}P{1.6cm}P{1.6cm}P{1.6cm}P{3.0cm}@{}}
+\toprule
+$I$ & $v^{*}$ & $\tau$ & $\Delta$ & \textbf{Eigenwerte}\\
+\midrule
+$0$ & $-1{,}199$ & $-0{,}503$ & $0{,}108$ & $-0{,}251 \pm 0{,}212\,\mathrm i$\\
+$0{,}3$ & $-0{,}993$ & $-0{,}051$ & $0{,}079$ & $-0{,}025 \pm 0{,}280\,\mathrm i$\\
+$0{,}5$ & $-0{,}805$ & $+0{,}288$ & $0{,}058$ & $+0{,}144 \pm 0{,}192\,\mathrm i$\\
+$1{,}0$ & $+0{,}409$ & $+0{,}769$ & $0{,}027$ & $+0{,}732$, $+0{,}037$\\
+$1{,}5$ & $+1{,}033$ & $-0{,}130$ & $0{,}084$ & $-0{,}065 \pm 0{,}283\,\mathrm i$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ohne Reiz ein anziehender Strudel: Die Ruhe hält. Bei $I = 0{,}5$ ein abstoßender Strudel: Die Ruhe hält nicht, die Zelle schwingt. Bei $I = 1{,}5$ wieder anziehend: zu viel Reiz, die Zelle bleibt oben stehen.}
+\end{minipage}
+\end{center}
+
+\schritt{Was die Eigenwerte vorhersagen, und was die Simulation zeigt}
+Bei $I = 0$: Störungen klingen mit $e^{-0{,}251 t}$ ab --- auf ein Fünfzigstel in $\ln 50/0{,}251 = 15{,}6$ Zeiteinheiten --- und drehen dabei mit Periode $2\pi/0{,}212 = 29{,}6$. Die Simulation in Kapitel~1 fand $21$ Zeiteinheiten bis zur Rückkehr auf ein Hundertstel. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Zwischen $I = 0{,}3$ und $0{,}5$ wechselt die Spur das Vorzeichen}: bei $v^{*} = -\sqrt{0{,}936} = -0{,}967$, also $I = 0{,}331$. Dort geht der Eigenwert durch die imaginäre Achse --- der Fixpunkt ist nicht hyperbolisch, Satz 2.2 schweigt, und genau dort entsteht die Schwingung. Das ist die Hopf-Verzweigung, der Kapitel~5 gehört; hier ist sie nur die Lücke in der Tabelle. Und bei $I = 1{,}0$ wird der Strudel zum Knoten, bleibt aber abstoßend: Die Schwingung besteht fort, bis bei $I \approx 1{,}42$ die Spur erneut negativ wird. Eine Zelle unter Dauerreiz hört auf zu schlagen --- das ist der Depolarisationsblock, und er ist der Grund, warum eine zu hohe Kaliumkonzentration das Herz stillstehen lässt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Stabilität ohne Linearisierung}
+
+\begin{merksatz}
+\boxtitel{Satz 2.4 --- Lyapunow-Funktionen}
+Sei $V$ eine stetig differenzierbare Funktion mit $V(x^{*}) = 0$ und $V(x) > 0$ sonst in einer Umgebung von $x^{*}$. Gilt dort entlang der Bahnen
+\[ \dot V = \nabla V\cdot f \le 0 , \]
+so ist $x^{*}$ stabil (Bahnen bleiben nahe); gilt $\dot V < 0$ außerhalb $x^{*}$, so ist $x^{*}$ anziehend.
+
+\schritt{Beweis}
+$V$ nimmt entlang jeder Bahn nicht zu. Die Höhenlinien $V = c$ um $x^{*}$ sind geschlossene Flächen, und eine Bahn, die innerhalb von $V = c$ beginnt, kann sie nicht nach außen überqueren --- dazu müsste $V$ wachsen. Bei $\dot V < 0$ sinkt $V$ streng und strebt gegen sein Infimum; wäre dieses positiv, so bliebe die Bahn in einem Ring $c_1 \le V \le c_2$, auf dem $\dot V \le -m < 0$ ist, und $V$ müsste nach endlicher Zeit unter $c_1$ fallen. Also strebt $V$ gegen $0$ und die Bahn gegen $x^{*}$. $\blacksquare$
+
+\schritt{Das gedämpfte Pendel}
+$\dot\theta = \omega$, $\dot\omega = -\sin\theta - \gamma\omega$. Mit der Energie $V = \tfrac12\omega^{2} + 1 - \cos\theta$:
+\[ \dot V = \omega\dot\omega + \sin\theta\,\dot\theta = \omega(-\sin\theta - \gamma\omega) + \omega\sin\theta = -\gamma\omega^{2} \le 0 . \]
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Energie nimmt nie zu --- das Pendel ist stabil, und zwar nicht nur nahe am Fixpunkt, sondern überall unterhalb der Separatrix. Die Linearisierung hätte nur die Umgebung geliefert.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Problem ist, $V$ zu finden.} Bei mechanischen Systemen ist es die Energie, bei chemischen die freie Enthalpie, bei Populationen manchmal eine Entropie --- und oft gibt es keine erkennbare. Die Linearisierung braucht nur die Ableitung und ist deshalb das Werkzeug der ersten Wahl; die Lyapunow-Funktion ist das der zweiten, wenn die Linearisierung schweigt oder wenn man die ganze Reichweite des Einzugsgebiets wissen will. Der Forschungskasten zeigt, dass Rechner sie inzwischen selbst suchen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Das Zentrum: wenn die Linearisierung schweigt}
+\[ \dot x = -y + \alpha\,x\,(x^{2}+y^{2}), \qquad \dot y = x + \alpha\,y\,(x^{2}+y^{2}) \]
+Die Jacobi-Matrix im Ursprung ist $\bigl(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\bigr)$ für \kursiv{jedes} $\alpha$: Eigenwerte $\pm\mathrm i$, ein Zentrum. Die Linearisierung sagt: geschlossene Kreise.
+
+\schritt{Was wirklich geschieht}
+In Polarkoordinaten ist $\dot r = \alpha r^{3}$, $\dot\vartheta = 1$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{3.2cm}P{3.4cm}@{}}
+\toprule
+$\alpha$ & \textbf{Bahn von $r = 0{,}5$} & \textbf{nach $t = 50$}\\
+\midrule
+$-0{,}1$ & Spirale nach innen & $r = 0{,}267$\\
+$0$ & Kreis & $r = 0{,}500$\\
+$+0{,}1$ & Spirale nach außen & $r \to \infty$ schon bei $t = 20$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Drei Systeme mit derselben Linearisierung: anziehend, neutral, abstoßend --- und das abstoßende explodiert in endlicher Zeit. Die Ableitung erster Ordnung weiß davon nichts; der kubische Term entscheidet.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Fall ist nicht exotisch, sondern der wichtigste des Bandes}: Genau an der Stelle, an der ein Parameter die Spur durch null führt --- bei der Herzzelle $I = 0{,}331$ ---, steht das System in dieser Lage, und ob die entstehende Schwingung klein und stabil oder plötzlich und groß ist, hängt vom Vorzeichen des kubischen Terms ab. Kapitel~5 berechnet ihn. Die Regel für heute: \textbf{Realteil null heißt nicht \enquote{neutral}, sondern \enquote{unentschieden} --- und die Entscheidung fällt eine Ordnung höher.} Für $\alpha < 0$ gibt übrigens $V = r^{2}$ den Nachweis: $\dot V = 2\alpha r^{4} < 0$, Satz 2.4 greift, wo Satz 2.2 schweigt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- Das gedämpfte Pendel linearisiert}
+$\dot\theta = \omega$, $\dot\omega = -\sin\theta - \gamma\omega$ mit $\gamma = 0{,}5$. Klassifizieren Sie die Fixpunkte $(0,0)$ und $(\pi,0)$.
+
+\loesung
+\schritt{Schritt 1 --- Die Jacobi-Matrix}
+\[ J = \begin{pmatrix} 0 & 1 \\ -\cos\theta & -\gamma \end{pmatrix} \]
+
+\schritt{Schritt 2 --- Hängend, $\theta = 0$}
+$\tau = -0{,}5$, $\Delta = 1$, $\tau^{2} = 0{,}25 < 4$: anziehender Strudel. Eigenwerte $-0{,}25\pm0{,}968\,\mathrm i$ --- Schwingung mit Periode $2\pi/0{,}968 = 6{,}5$, Abklingen mit $e^{-t/4}$.
+
+\schritt{Schritt 3 --- Stehend, $\theta = \pi$}
+$\cos\pi = -1$: $\tau = -0{,}5$, $\Delta = -1 < 0$: Sattel. Eigenwerte $\tfrac12(-0{,}5\pm\sqrt{0{,}25+4}) = 0{,}781$ und $-1{,}281$.
+
+\schritt{Schritt 4 --- Probe}
+Produkt der Eigenwerte $0{,}781\cdot(-1{,}281) = -1{,}000 = \Delta$, Summe $-0{,}500 = \tau$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Sattel hat eine anziehende Richtung (Eigenwert $-1{,}28$) und eine abstoßende ($+0{,}78$).} Die Bahnen, die genau in der anziehenden Richtung ankommen, erreichen den stehenden Punkt --- das sind die Separatrizen, und sie trennen die Einzugsgebiete der hängenden Ruhelagen $\theta = 0$ und $\theta = 2\pi$ voneinander. Ein Pendel, das genau die Energie hat, oben anzukommen, braucht dafür unendlich lange; alle anderen fallen nach links oder rechts. Die unsichtbaren Fixpunkte zeichnen die Landkarte der sichtbaren.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Räuber und Beute}
+Die Lotka-Volterra-Gleichungen aus Band 18: $\dot x = x(1-y)$, $\dot y = y(x-1)$. Was sagt die Linearisierung über $(1,1)$ --- und was sagt sie nicht?
+
+\loesung
+\schritt{Schritt 1 --- Die Jacobi-Matrix in $(1,1)$}
+\[ J = \begin{pmatrix} 1-y & -x \\ y & x-1 \end{pmatrix}_{(1,1)} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}, \qquad \tau = 0, \ \Delta = 1 . \]
+
+\schritt{Schritt 2 --- Das Urteil}
+Zentrum, nicht hyperbolisch. Satz 2.2 schweigt; nach dem Bruchfall könnte alles sein.
+
+\schritt{Schritt 3 --- Die Erhaltungsgröße}
+$H = x - \ln x + y - \ln y$: $\dot H = (1 - 1/x)\dot x + (1 - 1/y)\dot y = (x-1)(1-y) + (y-1)(x-1) = 0$. Die Bahnen sind Höhenlinien von $H$ --- geschlossen.
+
+\schritt{Schritt 4 --- Die Antwort}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das Zentrum ist hier echt: Räuber und Beute schwingen auf geschlossenen Bahnen, deren Größe vom Start abhängt. Die Linearisierung hat es nicht bewiesen; die Erhaltungsgröße hat es.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Und darum ist das Modell zerbrechlich}: Jeder zusätzliche Term --- Sättigung der Beute, Konkurrenz unter Räubern --- macht aus $\tau = 0$ ein $\tau \ne 0$, und aus den unendlich vielen Kreisen wird ein Strudel oder, Kapitel~3, ein einziger Grenzzyklus. Band 18 hat das als Schwäche des Modells benannt; hier ist es ein Satz: Ein Zentrum ist \Begriff{strukturell instabil}, es überlebt keine Störung der Gleichungen. Was in der Natur schwingt, schwingt auf einem Grenzzyklus, nicht auf einem Zentrum.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Drei Ruhelagen}
+Man setze bei der Herzzelle $b = 2{,}5$ statt $0{,}8$ und $a = 0{,}7$, $I = 0$. Wie viele Fixpunkte gibt es, und welcher Art?
+
+\loesung
+\schritt{Schritt 1 --- Die Gleichung}
+$v - v^{3}/3 = (v+0{,}7)/2{,}5$, also $v^{3}/3 - 0{,}6\,v + 0{,}28 = 0$.
+
+\schritt{Schritt 2 --- Die Nullstellen}
+$g(v) = v^{3}/3 - 0{,}6v + 0{,}28$ hat Extrema bei $v = \pm\sqrt{0{,}6} = \pm0{,}775$: $g(-0{,}775) = 0{,}590 > 0$, $g(0{,}775) = -0{,}030 < 0$. Drei Nullstellen: $-1{,}532$, $0{,}569$, $0{,}963$ (Newton, je zwei Schritte).
+
+\schritt{Schritt 3 --- Die Art}
+$\tau = 1 - v^{2} - \varepsilon b = 0{,}8 - v^{2}$, $\Delta = \varepsilon\big(1 - b(1-v^{2})\big) = 0{,}08\,(2{,}5\,v^{2} - 1{,}5)$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{1.6cm}P{1.6cm}P{3.2cm}@{}}
+\toprule
+$v^{*}$ & $\tau$ & $\Delta$ & \textbf{Art}\\
+\midrule
+$-1{,}532$ & $-1{,}55$ & $+0{,}35$ & Knoten, anziehend\\
+$0{,}569$ & $+0{,}48$ & $-0{,}06$ & Sattel\\
+$0{,}963$ & $-0{,}13$ & $+0{,}07$ & Strudel, anziehend\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei anziehende Ruhelagen und ein Sattel dazwischen: eine Zelle mit zwei stabilen Potentialen. Ein Reiz schaltet sie um, ein zweiter zurück.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bistabilität ist das Prinzip jedes Schalters und jedes Gedächtnisses} --- der Flipflop aus Band B, die Genexpression, die zwischen zwei Zuständen wählt, die Zelle, die einmal differenziert bleibt. Die Separatrizen des Sattels sind die Schwelle; wer sie überschreitet, bleibt drüben. Für das Herz ist der Fall pathologisch: Eine Zelle, die im depolarisierten Zustand stehen bleibt, leitet nicht mehr. Kapitel~4 zeigt, wie aus dem einen Fixpunkt der normalen Zelle drei werden, wenn $b$ sinkt --- und dass der Übergang nicht allmählich ist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Lyapunow in Charkow}
+\Person{Alexander Lyapunow} verteidigte 1892 in Moskau seine Dissertation über die allgemeine Aufgabe der Stabilität der Bewegung --- die Grundlage dieses Kapitels.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Frage stammte aus der Astronomie: Ist das Sonnensystem stabil? Lyapunow fand zwei Methoden --- die erste über die Linearisierung und ihre Eigenwerte, die zweite über Funktionen, die entlang der Bahnen fallen, ohne dass man die Bahnen kennt. \textbf{Die zweite Methode blieb ein halbes Jahrhundert unbeachtet}, bis sie in den 1940er Jahren für die Regelungstechnik wiederentdeckt wurde: Ein Regler ist ein Vektorfeld, das einen Fixpunkt anziehend machen soll, und die Lyapunow-Funktion ist der Beweis, dass er es tut. Lyapunow selbst erschoss sich 1918 in Odessa, am Tag nach dem Tod seiner Frau.}
+\end{minipage}
+\end{center}
+
+\schritt{Hartman und Grobman}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dass die Linearisierung nicht nur die Stabilität, sondern die ganze Gestalt des Portraits liefert, bewiesen \Person{David Grobman} 1959 in Moskau und \Person{Philip Hartman} 1960 in Baltimore unabhängig voneinander. \textbf{Der Satz ist die Erlaubnis, in der Nähe eines hyperbolischen Fixpunkts linear zu denken} --- und die Warnung, es anderswo nicht zu tun.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Stabilität heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Gefundene Lyapunow-Funktionen} & Polynome $V$ so bestimmen, dass $V$ und $-\dot V$ Summen von Quadraten sind --- ein konvexes Programm (Band 19).\\
+\textbf{Gelernte Lyapunow-Funktionen} & Neuronale Netze als $V$, mit dem Nachweis $\dot V < 0$ durch verifizierte Rechnung (Band 5).\\
+\textbf{Einzugsgebiete} & Die Reichweite der Stabilität berechnen statt nur ihre Existenz --- für Stromnetze und Flugregler.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Was Lyapunow von Hand suchte, sucht seit 2000 ein Optimierer}: Man setzt $V$ als Polynom mit unbekannten Koeffizienten an und verlangt, dass $V$ und $-\nabla V\cdot f$ als Summe von Quadraten darstellbar sind --- eine Bedingung, die sich als semidefinites Programm aus Band 19 schreiben lässt. Findet der Rechner eine Lösung, ist der Fixpunkt bewiesen stabil, mit einem Zertifikat, das jeder nachprüfen kann. Für die Herzzelle findet er ein $V$ vierten Grades. Für das Chaos in Kapitel~8 findet er keines --- und das ist kein Versagen des Verfahrens.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 2.1} & Jacobi-Matrix, linearisiertes System\\
+\textbf{Satz 2.2} & hyperbolisch: Eigenwerte entscheiden\\
+\textbf{Satz 2.3} & Spur und Determinante: Sattel, Knoten, Strudel, Zentrum\\
+\textbf{Satz 2.4} & Lyapunow-Funktion: Stabilität ohne Eigenwerte\\
+\textbf{Der Bruchfall} & Realteil null heißt unentschieden\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Bei $I = 0{,}5$ ist die Ruhe der Herzzelle abstoßend, und doch läuft keine Bahn ins Unendliche: Die Zelle schwingt, regelmäßig, mit Periode $39{,}5$. Wohin eine Bahn läuft, wenn der Fixpunkt sie abstößt und die Divergenz sie am Rand einfängt, ist die Frage des nächsten Kapitels --- und ihre Antwort in der Ebene ist eindeutig.}
+\end{minipage}
+\end{center}
+\end{merksatz}

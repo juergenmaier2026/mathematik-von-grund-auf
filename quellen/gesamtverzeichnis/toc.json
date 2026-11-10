@@ -1,0 +1,5248 @@
+{
+"0": {
+"titel": "Die Kunst des Rechnens",
+"fach": "Vorkurs Schulmathematik",
+"seiten": 154,
+"items": [
+[
+"T",
+"I",
+"Zahlen und Rechnen",
+5
+],
+[
+"K",
+"1",
+"Die Zahlbereiche",
+7
+],
+[
+"K",
+"2",
+"Bruchrechnung",
+15
+],
+[
+"K",
+"3",
+"Potenzen, Wurzeln, Logarithmen",
+23
+],
+[
+"T",
+"II",
+"Algebra",
+31
+],
+[
+"K",
+"4",
+"Terme umformen",
+33
+],
+[
+"K",
+"5",
+"Gleichungen",
+39
+],
+[
+"K",
+"6",
+"Ungleichungen und Systeme",
+47
+],
+[
+"T",
+"III",
+"Funktionen",
+55
+],
+[
+"K",
+"7",
+"Der Funktionsbegriff",
+57
+],
+[
+"K",
+"8",
+"Die wichtigsten Funktionstypen",
+67
+],
+[
+"T",
+"IV",
+"Geometrie und Trigonometrie",
+75
+],
+[
+"K",
+"9",
+"Elementargeometrie",
+77
+],
+[
+"K",
+"10",
+"Trigonometrie",
+83
+],
+[
+"T",
+"V",
+"Die Schwelle zur Analysis",
+91
+],
+[
+"K",
+"11",
+"Folgen und Grenzwerte",
+93
+],
+[
+"K",
+"12",
+"Die Ableitung",
+99
+],
+[
+"K",
+"13",
+"Das Integral",
+107
+],
+[
+"T",
+"VI",
+"Handwerkszeug",
+115
+],
+[
+"K",
+"14",
+"Beweisen lernen",
+117
+],
+[
+"T",
+"VII",
+"Aktueller Stand",
+125
+],
+[
+"K",
+"15",
+"Der Übergang Schule–Hochschule",
+127
+],
+[
+"K",
+"16",
+"Die große Formelsammlung",
+135
+],
+[
+"K",
+"17",
+"Fehlerkatalog",
+139
+],
+[
+"K",
+"18",
+"Zeittafel",
+141
+],
+[
+"K",
+"19",
+"Glossar",
+143
+],
+[
+"K",
+"20",
+"Kommentierte Literatur",
+145
+]
+]
+},
+"1": {
+"titel": "Die Königin der Mathematik",
+"fach": "Zahlentheorie",
+"seiten": 181,
+"items": [
+[
+"T",
+"I",
+"Das Fundament",
+0
+],
+[
+"K",
+"1",
+"Zählen: Die natürlichen Zahlen",
+3
+],
+[
+"K",
+"2",
+"Teilbarkeit",
+11
+],
+[
+"K",
+"3",
+"Der größte gemeinsame Teiler",
+19
+],
+[
+"K",
+"4",
+"Primzahlen und der Fundamentalsatz",
+29
+],
+[
+"T",
+"II",
+"Die Sprache der Kongruenzen",
+0
+],
+[
+"K",
+"5",
+"Modulares Rechnen",
+43
+],
+[
+"K",
+"6",
+"Der chinesische Restsatz",
+51
+],
+[
+"K",
+"7",
+"Die Sätze von Fermat, Euler und Wilson",
+57
+],
+[
+"K",
+"8",
+"Quadratische Reste und das Reziprozitätsgesetz",
+71
+],
+[
+"T",
+"III",
+"Arithmetische Funktionen und die Verteilung der Primzahlen",
+0
+],
+[
+"K",
+"9",
+"Arithmetische Funktionen",
+85
+],
+[
+"K",
+"10",
+"Die Verteilung der Primzahlen",
+95
+],
+[
+"T",
+"IV",
+"Diophantische Gleichungen",
+0
+],
+[
+"K",
+"11",
+"Pythagoreische Tripel",
+107
+],
+[
+"K",
+"12",
+"Der unendliche Abstieg und Fermats letzter Satz für n = 4",
+111
+],
+[
+"K",
+"13",
+"Kettenbrüche und die Pellsche Gleichung",
+115
+],
+[
+"K",
+"14",
+"Summen von Quadraten",
+121
+],
+[
+"T",
+"V",
+"Die Tür zur modernen Zahlentheorie",
+0
+],
+[
+"K",
+"15",
+"Algebraische Zahlen und Ideale",
+127
+],
+[
+"K",
+"16",
+"Elliptische Kurven",
+131
+],
+[
+"T",
+"VI",
+"Anwendungen und aktueller Stand",
+0
+],
+[
+"K",
+"17",
+"Kryptographie",
+141
+],
+[
+"K",
+"18",
+"Primzahltests",
+145
+],
+[
+"K",
+"19",
+"Faktorisierung",
+149
+],
+[
+"K",
+"20",
+"Der aktuelle Forschungsstand",
+153
+],
+[
+"T",
+"VII",
+"Anhänge",
+0
+],
+[
+"K",
+"A",
+"Formelsammlung",
+161
+],
+[
+"K",
+"B",
+"Zeitleiste",
+165
+],
+[
+"K",
+"C",
+"Glossar",
+167
+],
+[
+"K",
+"D",
+"Kommentierte Literatur",
+169
+]
+]
+},
+"2": {
+"titel": "Die Kunst der linearen Struktur",
+"fach": "Lineare Algebra",
+"seiten": 167,
+"items": [
+[
+"T",
+"I",
+"Das Konkrete: Gleichungen und Matrizen",
+0
+],
+[
+"K",
+"1",
+"Lineare Gleichungssysteme",
+3
+],
+[
+"K",
+"2",
+"Matrizen",
+15
+],
+[
+"T",
+"II",
+"Der abstrakte Sprung",
+0
+],
+[
+"K",
+"3",
+"Vektorräume",
+27
+],
+[
+"K",
+"4",
+"Basis und Dimension",
+37
+],
+[
+"T",
+"III",
+"Lineare Abbildungen",
+0
+],
+[
+"K",
+"5",
+"Lineare Abbildungen",
+49
+],
+[
+"T",
+"IV",
+"Determinanten",
+0
+],
+[
+"K",
+"6",
+"Die Determinante",
+63
+],
+[
+"T",
+"V",
+"Eigenwerte",
+0
+],
+[
+"K",
+"7",
+"Eigenwerte und Eigenvektoren",
+77
+],
+[
+"K",
+"8",
+"Die Jordansche Normalform",
+89
+],
+[
+"T",
+"VI",
+"Geometrie: Skalarprodukte",
+0
+],
+[
+"K",
+"9",
+"Skalarprodukte und Orthogonalität",
+101
+],
+[
+"K",
+"10",
+"Der Spektralsatz",
+111
+],
+[
+"K",
+"11",
+"Die Singulärwertzerlegung",
+119
+],
+[
+"T",
+"VII",
+"Numerik und aktueller Stand",
+0
+],
+[
+"K",
+"12",
+"Numerische lineare Algebra",
+129
+],
+[
+"K",
+"13",
+"Der aktuelle Forschungsstand",
+137
+],
+[
+"T",
+"VIII",
+"Anhänge",
+0
+],
+[
+"K",
+"A",
+"Formelsammlung",
+147
+],
+[
+"K",
+"B",
+"Zeitleiste",
+151
+]
+]
+},
+"3": {
+"titel": "Die Kunst des Grenzübergangs",
+"fach": "Analysis",
+"seiten": 173,
+"items": [
+[
+"T",
+"I",
+"Das Fundament: Zahlen, Folgen, Reihen",
+1
+],
+[
+"K",
+"1",
+"Die reellen Zahlen",
+3
+],
+[
+"K",
+"2",
+"Folgen und Grenzwerte",
+11
+],
+[
+"K",
+"3",
+"Reihen",
+23
+],
+[
+"T",
+"II",
+"Stetigkeit",
+35
+],
+[
+"K",
+"4",
+"Stetige Funktionen",
+37
+],
+[
+"K",
+"5",
+"Die elementaren Funktionen",
+47
+],
+[
+"T",
+"III",
+"Differentialrechnung",
+55
+],
+[
+"K",
+"6",
+"Die Ableitung",
+57
+],
+[
+"K",
+"7",
+"Mittelwertsätze und ihre Folgen",
+65
+],
+[
+"K",
+"8",
+"Der Satz von Taylor",
+75
+],
+[
+"T",
+"IV",
+"Integralrechnung",
+83
+],
+[
+"K",
+"9",
+"Das Riemann-Integral",
+85
+],
+[
+"K",
+"10",
+"Der Hauptsatz und die Integrationstechniken",
+93
+],
+[
+"K",
+"11",
+"Uneigentliche Integrale",
+103
+],
+[
+"T",
+"V",
+"Funktionenfolgen",
+111
+],
+[
+"K",
+"12",
+"Gleichmäßige Konvergenz",
+113
+],
+[
+"T",
+"VI",
+"Analysis mehrerer Veränderlicher",
+123
+],
+[
+"K",
+"13",
+"Differentialrechnung im Rn",
+125
+],
+[
+"T",
+"VII",
+"Ausblick und aktueller Stand",
+137
+],
+[
+"K",
+"14",
+"Wohin die Analysis führt",
+139
+],
+[
+"K",
+"A",
+"Formelsammlung",
+147
+],
+[
+"K",
+"B",
+"Zeitleiste",
+153
+],
+[
+"K",
+"C",
+"Glossar",
+157
+],
+[
+"K",
+"D",
+"Kommentierte Literatur",
+161
+]
+]
+},
+"4": {
+"titel": "Die Vermessung des Zufalls",
+"fach": "Wahrscheinlichkeitstheorie",
+"seiten": 164,
+"items": [
+[
+"T",
+"I",
+"Grundlagen",
+1
+],
+[
+"K",
+"1",
+"Was ist Wahrscheinlichkeit?",
+3
+],
+[
+"K",
+"2",
+"Kombinatorik und Laplace-Experimente",
+13
+],
+[
+"K",
+"3",
+"Bedingte Wahrscheinlichkeit und Unabhängigkeit",
+21
+],
+[
+"T",
+"II",
+"Zufallsvariablen und Verteilungen",
+31
+],
+[
+"K",
+"4",
+"Zufallsvariablen",
+33
+],
+[
+"K",
+"5",
+"Die diskreten Verteilungen",
+41
+],
+[
+"K",
+"6",
+"Die stetigen Verteilungen",
+49
+],
+[
+"K",
+"7",
+"Erwartungswert, Varianz und Ungleichungen",
+57
+],
+[
+"T",
+"III",
+"Mehrere Zufallsvariablen",
+67
+],
+[
+"K",
+"8",
+"Gemeinsame Verteilungen",
+69
+],
+[
+"T",
+"IV",
+"Die Grenzwertsätze",
+77
+],
+[
+"K",
+"9",
+"Konvergenzbegriffe",
+79
+],
+[
+"K",
+"10",
+"Die Gesetze der großen Zahlen",
+85
+],
+[
+"K",
+"11",
+"Der zentrale Grenzwertsatz",
+91
+],
+[
+"T",
+"V",
+"Stochastische Prozesse",
+99
+],
+[
+"K",
+"12",
+"Markow-Ketten",
+101
+],
+[
+"K",
+"13",
+"Martingale und Irrfahrten",
+109
+],
+[
+"T",
+"VI",
+"Schließende Statistik",
+117
+],
+[
+"K",
+"14",
+"Schätzen und Testen",
+119
+],
+[
+"T",
+"VII",
+"Ausblick und aktueller Stand",
+129
+],
+[
+"K",
+"15",
+"Der aktuelle Stand",
+131
+],
+[
+"K",
+"A",
+"Formelsammlung",
+141
+],
+[
+"K",
+"B",
+"Verteilungen im Überblick",
+145
+],
+[
+"K",
+"C",
+"Zeitleiste der Wahrscheinlichkeitstheorie",
+147
+],
+[
+"K",
+"D",
+"Glossar",
+149
+],
+[
+"K",
+"E",
+"Kommentierte Literatur",
+151
+]
+]
+},
+"5": {
+"titel": "Die Kunst der Näherung",
+"fach": "Numerische Mathematik",
+"seiten": 224,
+"items": [
+[
+"T",
+"I",
+"Rechnen mit endlicher Genauigkeit",
+1
+],
+[
+"K",
+"1",
+"Zahlen im Rechner",
+3
+],
+[
+"K",
+"2",
+"Kondition und Stabilität",
+17
+],
+[
+"T",
+"II",
+"Numerische lineare Algebra",
+29
+],
+[
+"K",
+"3",
+"Lineare Gleichungssysteme und die LR-Zerlegung",
+31
+],
+[
+"K",
+"4",
+"QR-Zerlegung und Ausgleichsrechnung",
+43
+],
+[
+"K",
+"5",
+"Iterative Verfahren für große Systeme",
+55
+],
+[
+"K",
+"6",
+"Eigenwerte und Singulärwerte",
+67
+],
+[
+"T",
+"III",
+"Nichtlineare Gleichungen",
+79
+],
+[
+"K",
+"7",
+"Nullstellen und Fixpunkte",
+81
+],
+[
+"T",
+"IV",
+"Interpolation und Approximation",
+95
+],
+[
+"K",
+"8",
+"Polynominterpolation",
+97
+],
+[
+"K",
+"9",
+"Splines und trigonometrische Interpolation",
+109
+],
+[
+"K",
+"10",
+"Approximation",
+119
+],
+[
+"T",
+"V",
+"Integration und Differentiation",
+127
+],
+[
+"K",
+"11",
+"Numerische Quadratur",
+129
+],
+[
+"T",
+"VI",
+"Differentialgleichungen",
+145
+],
+[
+"K",
+"12",
+"Anfangswertprobleme",
+147
+],
+[
+"K",
+"13",
+"Randwertprobleme und partielle Differentialgleichungen",
+159
+],
+[
+"T",
+"VII",
+"Optimierung und Zufall",
+173
+],
+[
+"K",
+"14",
+"Numerische Optimierung und Monte-Carlo",
+175
+],
+[
+"K",
+"15",
+"Numerik heute",
+189
+],
+[
+"T",
+"IX",
+"Anhänge",
+199
+],
+[
+"K",
+"A",
+"Formelsammlung",
+201
+],
+[
+"K",
+"B",
+"Verfahren im Überblick",
+205
+],
+[
+"K",
+"C",
+"Zeitleiste der Numerischen Mathematik",
+207
+],
+[
+"K",
+"D",
+"Glossar",
+209
+],
+[
+"K",
+"E",
+"Kommentierte Literatur",
+211
+]
+]
+},
+"6": {
+"titel": "Die Vermessung des Raumes",
+"fach": "Geometrie",
+"seiten": 184,
+"items": [
+[
+"T",
+"I",
+"Klassische Geometrie",
+1
+],
+[
+"K",
+"1",
+"Euklid und die Axiome",
+3
+],
+[
+"K",
+"2",
+"Das Dreieck",
+11
+],
+[
+"K",
+"3",
+"Kreis und Kegelschnitte",
+23
+],
+[
+"T",
+"II",
+"Analytische Geometrie",
+33
+],
+[
+"K",
+"4",
+"Koordinaten und Vektoren",
+35
+],
+[
+"K",
+"5",
+"Quadriken und Hauptachsen",
+43
+],
+[
+"T",
+"III",
+"Transformationen und Symmetrie",
+53
+],
+[
+"K",
+"6",
+"Isometrien und Symmetriegruppen",
+55
+],
+[
+"K",
+"7",
+"Affine und projektive Geometrie",
+67
+],
+[
+"T",
+"IV",
+"Nichteuklidische Geometrie",
+77
+],
+[
+"K",
+"8",
+"Das Parallelenproblem",
+79
+],
+[
+"K",
+"9",
+"Hyperbolische Geometrie",
+87
+],
+[
+"K",
+"10",
+"Sphärische Geometrie",
+97
+],
+[
+"T",
+"V",
+"Differentialgeometrie",
+107
+],
+[
+"K",
+"11",
+"Kurven",
+109
+],
+[
+"K",
+"12",
+"Flächen",
+119
+],
+[
+"K",
+"13",
+"Geodäten und Gauß–Bonnet",
+129
+],
+[
+"T",
+"VI",
+"Polyeder, Konvexität, Packungen",
+137
+],
+[
+"K",
+"14",
+"Diskrete Geometrie",
+139
+],
+[
+"T",
+"VII",
+"Aktueller Stand",
+147
+],
+[
+"K",
+"15",
+"Geometrie heute",
+149
+],
+[
+"K",
+"A",
+"Formelsammlung",
+159
+],
+[
+"K",
+"B",
+"Die Geometrien im Überblick",
+165
+],
+[
+"K",
+"C",
+"Zeitleiste der Geometrie",
+167
+],
+[
+"K",
+"D",
+"Glossar",
+169
+],
+[
+"K",
+"E",
+"Kommentierte Literatur",
+171
+]
+]
+},
+"7": {
+"titel": "Die Wege des Denkens",
+"fach": "Geschichte der Mathematik",
+"seiten": 188,
+"items": [
+[
+"T",
+"I",
+"Vor dem Beweis",
+1
+],
+[
+"K",
+"1",
+"Zählen, Zahlzeichen, Rechnen",
+3
+],
+[
+"K",
+"2",
+"China, Indien, Mesoamerika",
+15
+],
+[
+"T",
+"II",
+"Das griechische Wunder",
+25
+],
+[
+"K",
+"3",
+"Die Erfindung des Beweises",
+27
+],
+[
+"K",
+"4",
+"Euklid und Archimedes",
+37
+],
+[
+"K",
+"5",
+"Späte Antike und Niedergang",
+47
+],
+[
+"T",
+"III",
+"Das Erbe wandert",
+55
+],
+[
+"K",
+"6",
+"Die Mathematik der islamischen Welt",
+57
+],
+[
+"K",
+"7",
+"Mittelalter und Renaissance in Europa",
+67
+],
+[
+"T",
+"IV",
+"Die Revolution des 17. Jahrhunderts",
+79
+],
+[
+"K",
+"8",
+"Koordinaten und Zufall",
+81
+],
+[
+"K",
+"9",
+"Die Infinitesimalrechnung",
+89
+],
+[
+"T",
+"V",
+"Das 19. Jahrhundert",
+103
+],
+[
+"K",
+"10",
+"Die Strenge kommt",
+105
+],
+[
+"K",
+"11",
+"Die Algebra wird abstrakt",
+115
+],
+[
+"K",
+"12",
+"Geometrie und Grundlagen",
+125
+],
+[
+"T",
+"VI",
+"Das 20. Jahrhundert",
+131
+],
+[
+"K",
+"13",
+"Die Grundlagenkrise",
+133
+],
+[
+"K",
+"14",
+"Institutionen, Vertreibung, Krieg",
+145
+],
+[
+"T",
+"VII",
+"Aktueller Stand",
+153
+],
+[
+"K",
+"15",
+"Mathematikgeschichte heute",
+155
+],
+[
+"K",
+"A",
+"Große Zeittafel",
+167
+],
+[
+"K",
+"B",
+"Kurzbiographien",
+171
+],
+[
+"K",
+"C",
+"Glossar historischer Begriffe",
+173
+],
+[
+"K",
+"D",
+"Kommentierte Literatur",
+175
+]
+]
+},
+"8": {
+"titel": "Die Kunst der Verformung",
+"fach": "Topologie",
+"seiten": 178,
+"items": [
+[
+"T",
+"I",
+"Die Grundidee",
+1
+],
+[
+"K",
+"1",
+"Wo die Topologie herkommt",
+3
+],
+[
+"K",
+"2",
+"Metrische Räume",
+13
+],
+[
+"T",
+"II",
+"Topologische Räume",
+25
+],
+[
+"K",
+"3",
+"Der Raumbegriff",
+27
+],
+[
+"K",
+"4",
+"Stetigkeit und Konstruktionen",
+37
+],
+[
+"T",
+"III",
+"Die großen Eigenschaften",
+47
+],
+[
+"K",
+"5",
+"Zusammenhang",
+49
+],
+[
+"K",
+"6",
+"Kompaktheit",
+55
+],
+[
+"K",
+"7",
+"Trennungsaxiome",
+65
+],
+[
+"T",
+"IV",
+"Algebraische Topologie",
+73
+],
+[
+"K",
+"8",
+"Homotopie und Fundamentalgruppe",
+75
+],
+[
+"K",
+"9",
+"Die Ernte: vier klassische Sätze",
+85
+],
+[
+"T",
+"V",
+"Flächen und Homologie",
+95
+],
+[
+"K",
+"10",
+"Die Klassifikation der Flächen",
+97
+],
+[
+"K",
+"11",
+"Homologie",
+105
+],
+[
+"T",
+"VI",
+"Geometrische und angewandte Topologie",
+115
+],
+[
+"K",
+"12",
+"Knotentheorie",
+117
+],
+[
+"K",
+"13",
+"Mannigfaltigkeiten",
+125
+],
+[
+"K",
+"14",
+"Angewandte Topologie",
+133
+],
+[
+"T",
+"VII",
+"Aktueller Stand",
+143
+],
+[
+"K",
+"15",
+"Topologie heute",
+145
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersichten",
+153
+],
+[
+"K",
+"B",
+"Räume und Invarianten im Überblick",
+159
+],
+[
+"K",
+"C",
+"Zeittafel der Topologie",
+161
+],
+[
+"K",
+"D",
+"Glossar",
+163
+],
+[
+"K",
+"E",
+"Kommentierte Literatur",
+165
+]
+]
+},
+"9": {
+"titel": "Die Sprache der Felder",
+"fach": "Vektor- und Tensoranalysis",
+"seiten": 130,
+"items": [
+[
+"T",
+"I",
+"Felder und Ableitungen",
+5
+],
+[
+"K",
+"1",
+"Was ein Feld ist",
+7
+],
+[
+"K",
+"2",
+"Die drei Operatoren",
+11
+],
+[
+"K",
+"3",
+"Rechenregeln und Identitäten",
+19
+],
+[
+"T",
+"II",
+"Die Integralsätze",
+25
+],
+[
+"K",
+"4",
+"Kurven- und Flächenintegrale",
+27
+],
+[
+"K",
+"5",
+"Green und Gauß",
+33
+],
+[
+"K",
+"6",
+"Der Satz von Stokes",
+37
+],
+[
+"K",
+"7",
+"Potentiale und Topologie",
+41
+],
+[
+"T",
+"III",
+"Krummlinige Koordinaten",
+47
+],
+[
+"K",
+"8",
+"Andere Koordinaten",
+49
+],
+[
+"T",
+"IV",
+"Tensoren",
+55
+],
+[
+"K",
+"9",
+"Was ein Tensor ist",
+57
+],
+[
+"K",
+"10",
+"Tensoralgebra",
+63
+],
+[
+"T",
+"V",
+"Tensoranalysis",
+71
+],
+[
+"K",
+"11",
+"Die kovariante Ableitung",
+73
+],
+[
+"K",
+"12",
+"Krümmung",
+79
+],
+[
+"T",
+"VI",
+"Differentialformen",
+85
+],
+[
+"K",
+"13",
+"Der eine Satz von Stokes",
+87
+],
+[
+"K",
+"14",
+"Anwendungen",
+95
+],
+[
+"T",
+"VII",
+"Aktueller Stand",
+101
+],
+[
+"K",
+"15",
+"Vektor- und Tensoranalysis heute",
+103
+],
+[
+"K",
+"16",
+"Große Formelsammlung",
+111
+],
+[
+"K",
+"17",
+"Konventionen und Fallstricke",
+115
+],
+[
+"K",
+"18",
+"Zeittafel",
+117
+],
+[
+"K",
+"19",
+"Glossar",
+119
+],
+[
+"K",
+"20",
+"Kommentierte Literatur",
+121
+]
+]
+},
+"10": {
+"titel": "Die Ordnung des Unendlichen",
+"fach": "Logik und Mengenlehre",
+"seiten": 124,
+"items": [
+[
+"T",
+"I",
+"Logik",
+5
+],
+[
+"K",
+"1",
+"Aussagenlogik",
+7
+],
+[
+"K",
+"2",
+"Beweiskalküle",
+13
+],
+[
+"K",
+"3",
+"Prädikatenlogik",
+19
+],
+[
+"K",
+"4",
+"Vollständigkeit und ihre Folgen",
+25
+],
+[
+"T",
+"II",
+"Mengenlehre",
+31
+],
+[
+"K",
+"5",
+"Die naive Mengenlehre und ihr Ende",
+33
+],
+[
+"K",
+"6",
+"Die Axiome von ZFC",
+39
+],
+[
+"K",
+"7",
+"Ordinalzahlen",
+45
+],
+[
+"K",
+"8",
+"Kardinalzahlen",
+51
+],
+[
+"T",
+"III",
+"Das Auswahlaxiom",
+55
+],
+[
+"K",
+"9",
+"Wählen ohne Vorschrift",
+57
+],
+[
+"T",
+"IV",
+"Unentscheidbarkeit",
+61
+],
+[
+"K",
+"10",
+"Berechenbarkeit",
+63
+],
+[
+"K",
+"11",
+"Die Unvollständigkeitssätze",
+69
+],
+[
+"K",
+"12",
+"Weitere Unentscheidbarkeit",
+77
+],
+[
+"T",
+"V",
+"Modelltheorie und Forcing",
+83
+],
+[
+"K",
+"13",
+"Modelltheorie",
+85
+],
+[
+"K",
+"14",
+"Forcing und Unabhängigkeit",
+91
+],
+[
+"T",
+"VI",
+"Aktueller Stand",
+97
+],
+[
+"K",
+"15",
+"Logik und Mengenlehre heute",
+99
+],
+[
+"T",
+"VII",
+"Anhänge",
+107
+],
+[
+"K",
+"16",
+"Die Axiome im Überblick",
+109
+],
+[
+"K",
+"17",
+"Die großen Sätze",
+111
+],
+[
+"K",
+"18",
+"Zeittafel",
+113
+],
+[
+"K",
+"19",
+"Glossar",
+115
+],
+[
+"K",
+"20",
+"Kommentierte Literatur",
+117
+]
+]
+},
+"11": {
+"titel": "Die Gestalt der Symmetrie",
+"fach": "Algebra",
+"seiten": 150,
+"items": [
+[
+"T",
+"I",
+"Gruppen",
+5
+],
+[
+"K",
+"1",
+"Was eine Gruppe ist",
+7
+],
+[
+"K",
+"2",
+"Zyklische Gruppen und Permutationen",
+15
+],
+[
+"K",
+"3",
+"Nebenklassen und der Satz von Lagrange",
+23
+],
+[
+"K",
+"4",
+"Normalteiler und Faktorgruppen",
+29
+],
+[
+"T",
+"II",
+"Die Struktur der Gruppen",
+37
+],
+[
+"K",
+"5",
+"Gruppenoperationen",
+39
+],
+[
+"K",
+"6",
+"Die Sylow-Sätze",
+47
+],
+[
+"K",
+"7",
+"Abelsche Gruppen",
+53
+],
+[
+"T",
+"III",
+"Ringe",
+59
+],
+[
+"K",
+"8",
+"Ringe und Ideale",
+61
+],
+[
+"K",
+"9",
+"Polynomringe",
+69
+],
+[
+"T",
+"IV",
+"Körper",
+77
+],
+[
+"K",
+"10",
+"Körpererweiterungen",
+79
+],
+[
+"K",
+"11",
+"Zerfällungskörper und endliche Körper",
+87
+],
+[
+"T",
+"V",
+"Galoistheorie",
+95
+],
+[
+"K",
+"12",
+"Der Hauptsatz",
+97
+],
+[
+"K",
+"13",
+"Auflösbarkeit durch Radikale",
+105
+],
+[
+"T",
+"VI",
+"Weiterführende Strukturen",
+113
+],
+[
+"K",
+"14",
+"Moduln, Darstellungen, Kategorien",
+115
+],
+[
+"T",
+"VII",
+"Aktueller Stand",
+121
+],
+[
+"K",
+"15",
+"Algebra heute",
+123
+],
+[
+"K",
+"A",
+"Die Strukturen im Überblick",
+131
+],
+[
+"K",
+"B",
+"Gruppen kleiner Ordnung",
+135
+],
+[
+"K",
+"C",
+"Zeittafel der Algebra",
+137
+],
+[
+"K",
+"D",
+"Glossar",
+139
+],
+[
+"K",
+"E",
+"Kommentierte Literatur",
+141
+]
+]
+},
+"12": {
+"titel": "Die Vollendung der Analysis",
+"fach": "Funktionentheorie",
+"seiten": 176,
+"items": [
+[
+"T",
+"I",
+"Die komplexe Ebene",
+7
+],
+[
+"K",
+"1",
+"Die komplexen Zahlen",
+9
+],
+[
+"K",
+"2",
+"Topologie, Folgen und Funktionen",
+19
+],
+[
+"T",
+"II",
+"Holomorphie",
+27
+],
+[
+"K",
+"3",
+"Die komplexe Ableitung",
+29
+],
+[
+"K",
+"4",
+"Potenzreihen und die elementaren Funktionen",
+37
+],
+[
+"T",
+"III",
+"Integration",
+49
+],
+[
+"K",
+"5",
+"Kurvenintegrale und der Cauchysche Integralsatz",
+51
+],
+[
+"K",
+"6",
+"Die Cauchysche Integralformel",
+61
+],
+[
+"T",
+"IV",
+"Die lokale Struktur",
+69
+],
+[
+"K",
+"7",
+"Identitätssatz und analytische Fortsetzung",
+71
+],
+[
+"K",
+"8",
+"Laurentreihen und Singularitäten",
+79
+],
+[
+"K",
+"9",
+"Der Residuensatz",
+87
+],
+[
+"K",
+"10",
+"Reelle Integrale mit Residuen",
+95
+],
+[
+"T",
+"V",
+"Globale Sätze",
+105
+],
+[
+"K",
+"11",
+"Argumentprinzip und Abbildungsverhalten",
+107
+],
+[
+"K",
+"12",
+"Konforme Abbildungen",
+115
+],
+[
+"T",
+"VI",
+"Ganze und meromorphe Funktionen",
+123
+],
+[
+"K",
+"13",
+"Produktsätze und die Gammafunktion",
+125
+],
+[
+"K",
+"14",
+"Die Zetafunktion und der Primzahlsatz",
+135
+],
+[
+"T",
+"VII",
+"Aktueller Stand",
+145
+],
+[
+"K",
+"15",
+"Funktionentheorie heute",
+147
+],
+[
+"K",
+"A",
+"Formelsammlung",
+155
+],
+[
+"K",
+"B",
+"Standardintegrale und Wege",
+159
+],
+[
+"K",
+"C",
+"Die großen Sätze im Überblick",
+161
+],
+[
+"K",
+"D",
+"Zeittafel der Funktionentheorie",
+163
+],
+[
+"K",
+"E",
+"Glossar",
+165
+]
+]
+},
+"13": {
+"titel": "Das Maß und der Raum",
+"fach": "Maßtheorie und Funktionalanalysis",
+"seiten": 175,
+"items": [
+[
+"T",
+"I",
+"Warum Riemann nicht genügt",
+7
+],
+[
+"K",
+"1",
+"Die drei Defekte des Riemann-Integrals",
+9
+],
+[
+"K",
+"2",
+"Das Problem des Messens",
+19
+],
+[
+"T",
+"II",
+"Maß und Integral",
+27
+],
+[
+"K",
+"3",
+"σ-Algebren und Maße",
+29
+],
+[
+"K",
+"4",
+"Das Lebesgue-Maß",
+37
+],
+[
+"K",
+"5",
+"Messbare Funktionen und das Integral",
+45
+],
+[
+"K",
+"6",
+"Die drei Konvergenzsätze",
+53
+],
+[
+"K",
+"7",
+"Produktmaße, Fubini und Transformation",
+63
+],
+[
+"T",
+"III",
+"Das Scharnier: die L p -Räume",
+71
+],
+[
+"K",
+"8",
+"Die Räume L p",
+73
+],
+[
+"K",
+"9",
+"Radon-Nikodym und Dualität",
+83
+],
+[
+"T",
+"IV",
+"Banachräume",
+91
+],
+[
+"K",
+"10",
+"Normierte Räume und Hahn-Banach",
+93
+],
+[
+"K",
+"11",
+"Baire und die drei Prinzipien",
+101
+],
+[
+"T",
+"V",
+"Hilberträume",
+109
+],
+[
+"K",
+"12",
+"Geometrie im Unendlichdimensionalen",
+111
+],
+[
+"T",
+"VI",
+"Operatoren",
+119
+],
+[
+"K",
+"13",
+"Kompakte Operatoren und Fredholm",
+121
+],
+[
+"K",
+"14",
+"Der Spektralsatz und die Quantenmechanik",
+129
+],
+[
+"T",
+"VII",
+"Aktueller Stand",
+145
+],
+[
+"K",
+"15",
+"Wo die Forschung heute steht",
+147
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+157
+],
+[
+"K",
+"B",
+"Kommentierte Literatur",
+167
+]
+]
+},
+"14": {
+"titel": "Die Gesetze der Veränderung",
+"fach": "Differentialgleichungen",
+"seiten": 214,
+"items": [
+[
+"T",
+"I",
+"Was eine Differentialgleichung ist",
+7
+],
+[
+"K",
+"1",
+"Der Begriff und das Richtungsfeld",
+9
+],
+[
+"K",
+"2",
+"Die elementaren Lösungsverfahren",
+19
+],
+[
+"T",
+"II",
+"Die Theorie erster Ordnung",
+31
+],
+[
+"K",
+"3",
+"Existenz und Eindeutigkeit",
+33
+],
+[
+"K",
+"4",
+"Lineare Systeme und das Matrixexponential",
+45
+],
+[
+"T",
+"III",
+"Höhere Ordnung und Schwingungen",
+55
+],
+[
+"K",
+"5",
+"Lineare Gleichungen mit konstanten Koeffizienten",
+57
+],
+[
+"K",
+"6",
+"Potenzreihen und spezielle Funktionen",
+67
+],
+[
+"K",
+"7",
+"Randwertprobleme und Sturm-Liouville",
+79
+],
+[
+"T",
+"IV",
+"Qualitative Theorie",
+91
+],
+[
+"K",
+"8",
+"Phasenporträt und Stabilität",
+93
+],
+[
+"K",
+"9",
+"Grenzzyklen, Bifurkationen und Chaos",
+105
+],
+[
+"T",
+"V",
+"Partielle Differentialgleichungen",
+119
+],
+[
+"K",
+"10",
+"Klassifikation und Charakteristiken",
+121
+],
+[
+"K",
+"11",
+"Die Wellengleichung",
+131
+],
+[
+"K",
+"12",
+"Die Wärmeleitungsgleichung",
+141
+],
+[
+"K",
+"13",
+"Die Laplacegleichung",
+153
+],
+[
+"T",
+"VI",
+"Moderne Methoden",
+165
+],
+[
+"K",
+"14",
+"Schwache Lösungen und numerische Verfahren",
+167
+],
+[
+"T",
+"VII",
+"Aktueller Stand",
+181
+],
+[
+"K",
+"15",
+"Wo die Forschung heute steht",
+183
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+195
+],
+[
+"K",
+"B",
+"Kommentierte Literatur",
+205
+]
+]
+},
+"15": {
+"titel": "Die Kunst des Zählens",
+"fach": "Kombinatorik",
+"seiten": 200,
+"items": [
+[
+"T",
+"I",
+"Grundlegendes Zählen",
+7
+],
+[
+"K",
+"1",
+"Die Grundregeln",
+9
+],
+[
+"K",
+"2",
+"Die vier Grundaufgaben",
+19
+],
+[
+"T",
+"II",
+"Verfeinerungen",
+31
+],
+[
+"K",
+"3",
+"Das Pascalsche Dreieck",
+33
+],
+[
+"K",
+"4",
+"Inklusion und Exklusion",
+43
+],
+[
+"T",
+"III",
+"Erzeugende Funktionen",
+53
+],
+[
+"K",
+"5",
+"Gewöhnliche erzeugende Funktionen",
+55
+],
+[
+"K",
+"6",
+"Exponentielle erzeugende Funktionen",
+67
+],
+[
+"K",
+"7",
+"Rekursionen, Catalanzahlen, Asymptotik",
+77
+],
+[
+"T",
+"IV",
+"Struktur des Zählens",
+87
+],
+[
+"K",
+"8",
+"Der Zwölffachweg",
+89
+],
+[
+"K",
+"9",
+"Symmetrie und Zählen",
+99
+],
+[
+"T",
+"V",
+"Graphentheorie",
+109
+],
+[
+"K",
+"10",
+"Graphen und Bäume",
+111
+],
+[
+"K",
+"11",
+"Planarität und Färbung",
+121
+],
+[
+"K",
+"12",
+"Matchings, Flüsse und der Satz von Hall",
+133
+],
+[
+"T",
+"VI",
+"Ramseytheorie und die probabilistische Methode",
+143
+],
+[
+"K",
+"13",
+"Ramseytheorie",
+145
+],
+[
+"K",
+"14",
+"Die probabilistische Methode und extremale Kombinatorik",
+155
+],
+[
+"T",
+"VII",
+"Aktueller Stand",
+167
+],
+[
+"K",
+"15",
+"Wo die Forschung heute steht",
+169
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+179
+],
+[
+"K",
+"B",
+"Kommentierte Literatur",
+191
+]
+]
+},
+"16": {
+"titel": "Punkte und Linien",
+"fach": "Graphentheorie",
+"seiten": 270,
+"items": [
+[
+"T",
+"I",
+"Der Begriff",
+7
+],
+[
+"K",
+"1",
+"Was ein Graph ist",
+9
+],
+[
+"K",
+"2",
+"Wege, Kreise und Zusammenhang",
+33
+],
+[
+"K",
+"3",
+"Wie man Graphen aufschreibt",
+53
+],
+[
+"T",
+"II",
+"Bäume",
+65
+],
+[
+"K",
+"4",
+"Bäume und Wälder",
+67
+],
+[
+"K",
+"5",
+"Spannbäume und wie man sie zählt",
+81
+],
+[
+"T",
+"III",
+"Durchlaufen",
+103
+],
+[
+"K",
+"6",
+"Eulerzüge",
+105
+],
+[
+"K",
+"7",
+"Hamiltonkreise",
+117
+],
+[
+"T",
+"IV",
+"Zeichnen und Färben",
+135
+],
+[
+"K",
+"8",
+"Planare Graphen",
+137
+],
+[
+"K",
+"9",
+"Färbungen",
+151
+],
+[
+"K",
+"10",
+"Das chromatische Polynom",
+165
+],
+[
+"T",
+"V",
+"Paarungen und Flüsse",
+177
+],
+[
+"K",
+"11",
+"Paarungen",
+179
+],
+[
+"K",
+"12",
+"Flüsse und Schnitte",
+193
+],
+[
+"T",
+"VI",
+"Grenzen und Zufall",
+207
+],
+[
+"K",
+"13",
+"Extremale Graphentheorie",
+209
+],
+[
+"K",
+"14",
+"Spektren und Zufallsgraphen",
+223
+],
+[
+"T",
+"VII",
+"Aktueller Stand",
+237
+],
+[
+"K",
+"15",
+"Wo die Forschung heute steht",
+239
+],
+[
+"T",
+"VIII",
+"Anhang",
+249
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+251
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+259
+]
+]
+},
+"17": {
+"titel": "Was die Zahlen hergeben",
+"fach": "Statistik",
+"seiten": 282,
+"items": [
+[
+"T",
+"I",
+"Beschreiben",
+7
+],
+[
+"K",
+"1",
+"Daten, Skalen und die erste Falle",
+9
+],
+[
+"K",
+"2",
+"Lage und Streuung",
+25
+],
+[
+"K",
+"3",
+"Zusammenhang",
+45
+],
+[
+"T",
+"II",
+"Schätzen",
+61
+],
+[
+"K",
+"4",
+"Von der Stichprobe zur Aussage",
+63
+],
+[
+"K",
+"5",
+"Punktschätzer und ihre Güte",
+79
+],
+[
+"K",
+"6",
+"Konfidenzintervalle",
+95
+],
+[
+"T",
+"III",
+"Testen",
+111
+],
+[
+"K",
+"7",
+"Die Logik des Tests",
+113
+],
+[
+"K",
+"8",
+"Die klassischen Tests",
+131
+],
+[
+"K",
+"9",
+"Verteilungsfreie Verfahren und Simulation",
+149
+],
+[
+"T",
+"IV",
+"Modelle",
+165
+],
+[
+"K",
+"10",
+"Lineare Regression",
+167
+],
+[
+"K",
+"11",
+"Andere Zielgrößen",
+185
+],
+[
+"T",
+"V",
+"Medizinische Statistik",
+201
+],
+[
+"K",
+"12",
+"Studiendesign",
+203
+],
+[
+"K",
+"13",
+"Diagnostische Tests",
+221
+],
+[
+"K",
+"14",
+"Viele Tests auf einmal",
+235
+],
+[
+"T",
+"VI",
+"Aktueller Stand",
+251
+],
+[
+"K",
+"15",
+"Wo die Statistik heute steht",
+253
+],
+[
+"T",
+"VII",
+"Anhang",
+261
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+263
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+271
+]
+]
+},
+"18": {
+"titel": "Wachsen und Vergehen",
+"fach": "Biomathematik",
+"seiten": 262,
+"items": [
+[
+"T",
+"I",
+"Wachstum",
+7
+],
+[
+"K",
+"1",
+"Exponentielles Wachstum",
+9
+],
+[
+"K",
+"2",
+"Beschränktes Wachstum",
+23
+],
+[
+"K",
+"3",
+"Diskrete Modelle und Chaos",
+37
+],
+[
+"T",
+"II",
+"Wechselwirkung",
+51
+],
+[
+"K",
+"4",
+"Räuber und Beute",
+53
+],
+[
+"K",
+"5",
+"Wettbewerb und Koexistenz",
+69
+],
+[
+"K",
+"6",
+"Stabilität",
+83
+],
+[
+"T",
+"III",
+"Ausbreitung",
+99
+],
+[
+"K",
+"7",
+"Das SIR-Modell",
+101
+],
+[
+"K",
+"8",
+"Impfung und Schwellenwerte",
+117
+],
+[
+"K",
+"9",
+"Netzwerke und Heterogenität",
+131
+],
+[
+"T",
+"IV",
+"Der Körper",
+145
+],
+[
+"K",
+"10",
+"Pharmakokinetik",
+147
+],
+[
+"K",
+"11",
+"Enzym- und Rezeptorkinetik",
+165
+],
+[
+"K",
+"12",
+"Erregbare Zellen",
+181
+],
+[
+"T",
+"V",
+"Krankheit",
+197
+],
+[
+"K",
+"13",
+"Tumorwachstum und Therapie",
+199
+],
+[
+"K",
+"14",
+"Resistenz und Evolution",
+213
+],
+[
+"T",
+"VI",
+"Aktueller Stand",
+229
+],
+[
+"K",
+"15",
+"Was Modelle leisten",
+231
+],
+[
+"T",
+"VII",
+"Anhang",
+239
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+241
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+251
+]
+]
+},
+"19": {
+"titel": "Das Beste finden",
+"fach": "Optimierung",
+"seiten": 252,
+"items": [
+[
+"T",
+"I",
+"Lineare Probleme",
+5
+],
+[
+"K",
+"1",
+"Was heißt optimal?",
+7
+],
+[
+"K",
+"2",
+"Lineare Probleme",
+21
+],
+[
+"K",
+"3",
+"Das Simplexverfahren",
+37
+],
+[
+"T",
+"II",
+"Dualität",
+51
+],
+[
+"K",
+"4",
+"Das duale Problem",
+53
+],
+[
+"K",
+"5",
+"Schattenpreise und Sensitivität",
+69
+],
+[
+"K",
+"6",
+"Netzwerke und Ganzzahligkeit",
+83
+],
+[
+"T",
+"III",
+"Ohne Linearität",
+101
+],
+[
+"K",
+"7",
+"Konvexität",
+103
+],
+[
+"K",
+"8",
+"Lagrange und die KKT-Bedingungen",
+117
+],
+[
+"K",
+"9",
+"Abstiegsverfahren",
+133
+],
+[
+"T",
+"IV",
+"Ganzzahligkeit",
+149
+],
+[
+"K",
+"10",
+"Wenn Bruchteile nicht gehen",
+151
+],
+[
+"K",
+"11",
+"Verzweigen und Beschränken",
+167
+],
+[
+"K",
+"12",
+"Was schwer ist und warum",
+181
+],
+[
+"T",
+"V",
+"Unsicherheit",
+195
+],
+[
+"K",
+"13",
+"Wenn die Daten wackeln",
+197
+],
+[
+"K",
+"14",
+"Mehrere Ziele",
+209
+],
+[
+"T",
+"VI",
+"Aktueller Stand",
+221
+],
+[
+"K",
+"15",
+"Was Optimierung leistet",
+223
+],
+[
+"T",
+"VII",
+"Anhang",
+229
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+231
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+241
+]
+]
+},
+"20": {
+"titel": "Was Nachrichten wiegen",
+"fach": "Information und Kryptographie",
+"seiten": 242,
+"items": [
+[
+"T",
+"I",
+"Information messen",
+7
+],
+[
+"K",
+"1",
+"Was Information ist",
+9
+],
+[
+"K",
+"2",
+"Entropie",
+23
+],
+[
+"K",
+"3",
+"Quellencodierung",
+37
+],
+[
+"T",
+"II",
+"Der gestörte Kanal",
+53
+],
+[
+"K",
+"4",
+"Transinformation und Kapazität",
+55
+],
+[
+"K",
+"5",
+"Das Kanalcodierungstheorem",
+69
+],
+[
+"K",
+"6",
+"Fehlerkorrigierende Codes",
+83
+],
+[
+"T",
+"III",
+"Zufall und Komplexität",
+97
+],
+[
+"K",
+"7",
+"Kolmogorow-Komplexität",
+99
+],
+[
+"K",
+"8",
+"Information in der Statistik",
+113
+],
+[
+"T",
+"IV",
+"Geheimhaltung",
+127
+],
+[
+"K",
+"9",
+"Perfekte Sicherheit",
+129
+],
+[
+"K",
+"10",
+"Blockchiffren",
+141
+],
+[
+"K",
+"11",
+"Hashfunktionen und Unversehrtheit",
+153
+],
+[
+"T",
+"V",
+"Öffentliche Schlüssel",
+167
+],
+[
+"K",
+"12",
+"Schlüsseltausch über offene Leitung",
+169
+],
+[
+"K",
+"13",
+"RSA",
+181
+],
+[
+"K",
+"14",
+"Elliptische Kurven und Signaturen",
+195
+],
+[
+"T",
+"VI",
+"Aktueller Stand",
+209
+],
+[
+"K",
+"15",
+"Was Information leistet",
+211
+],
+[
+"T",
+"VII",
+"Anhang",
+219
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+221
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+231
+]
+]
+},
+"21": {
+"titel": "Wenn andere mitrechnen",
+"fach": "Spieltheorie",
+"seiten": 236,
+"items": [
+[
+"T",
+"I",
+"Entgegengesetzte Interessen",
+5
+],
+[
+"K",
+"1",
+"Was ein Spiel ist",
+7
+],
+[
+"K",
+"2",
+"Der Minimax-Satz",
+21
+],
+[
+"K",
+"3",
+"Spiele und lineare Optimierung",
+35
+],
+[
+"T",
+"II",
+"Gleichgewichte",
+49
+],
+[
+"K",
+"4",
+"Das Nash-Gleichgewicht",
+51
+],
+[
+"K",
+"5",
+"Drei Spiele, die alles erklären",
+63
+],
+[
+"K",
+"6",
+"Existenz und Berechnung",
+75
+],
+[
+"T",
+"III",
+"Über die Zeit",
+89
+],
+[
+"K",
+"7",
+"Reihenfolge und Glaubwürdigkeit",
+91
+],
+[
+"K",
+"8",
+"Wiederholte Spiele",
+103
+],
+[
+"T",
+"IV",
+"Evolution",
+117
+],
+[
+"K",
+"9",
+"Evolutionär stabile Strategien",
+119
+],
+[
+"K",
+"10",
+"Replikatordynamik",
+131
+],
+[
+"T",
+"V",
+"Regeln entwerfen",
+145
+],
+[
+"K",
+"11",
+"Kollektivgüter und soziale Dilemmata",
+147
+],
+[
+"K",
+"12",
+"Abstimmen",
+161
+],
+[
+"K",
+"13",
+"Auktionen und Zuteilung",
+175
+],
+[
+"K",
+"14",
+"Verhandlung und Koalitionen",
+189
+],
+[
+"T",
+"VI",
+"Aktueller Stand",
+203
+],
+[
+"K",
+"15",
+"Was die Theorie leistet",
+205
+],
+[
+"T",
+"VII",
+"Anhang",
+213
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+215
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+225
+],
+[
+"T",
+"VI",
+"Stand",
+15
+]
+]
+},
+"B": {
+"titel": "Die Architektur der Gewissheit",
+"fach": "Beweistheorie",
+"seiten": 182,
+"items": [
+[
+"T",
+"I",
+"Die Frage",
+0
+],
+[
+"K",
+"1",
+"Was ist ein Beweis?",
+3
+],
+[
+"T",
+"II",
+"Woher das alles kommt",
+0
+],
+[
+"K",
+"2",
+"Rechnen ohne Beweisen: Die Welt vor Griechenland",
+11
+],
+[
+"K",
+"3",
+"Das griechische Wunder",
+13
+],
+[
+"K",
+"4",
+"Euklid: Die Erfindung des Systems",
+17
+],
+[
+"K",
+"5",
+"Archimedes: Finden und Beweisen sind zweierlei",
+21
+],
+[
+"K",
+"6",
+"Zwischenspiel: Algebra, Induktion, und die Rückkehr der Zahl",
+23
+],
+[
+"K",
+"7",
+"Die Krise der Infinitesimalien",
+25
+],
+[
+"K",
+"8",
+"Die Rigorisierung: Was ist eine reelle Zahl?",
+27
+],
+[
+"K",
+"9",
+"Nichteuklidische Geometrie: Der erste Unabhängigkeitsbeweis",
+31
+],
+[
+"K",
+"10",
+"Cantor: Das aktual Unendliche",
+35
+],
+[
+"K",
+"11",
+"Die Grundlagenkrise",
+39
+],
+[
+"T",
+"III",
+"Die Maschinerie",
+0
+],
+[
+"K",
+"12",
+"Aussagenlogik: Das Skelett des Schließens",
+45
+],
+[
+"K",
+"13",
+"Prädikatenlogik: Die Sprache der Mathematik",
+51
+],
+[
+"K",
+"14",
+"Beweiskalküle: Wie man wirklich schließt",
+57
+],
+[
+"K",
+"15",
+"ZFC: Das Fundament, auf dem alles steht",
+61
+],
+[
+"T",
+"IV",
+"Der Werkzeugkasten",
+0
+],
+[
+"K",
+"16",
+"Die elementaren Beweisformen",
+69
+],
+[
+"K",
+"17",
+"Induktion: Warum sie funktioniert",
+73
+],
+[
+"K",
+"18",
+"Diagonalisierung: Das mächtigste Muster",
+77
+],
+[
+"K",
+"19",
+"Zählen, Extremalprinzip, Invarianten",
+79
+],
+[
+"K",
+"20",
+"Nichtkonstruktive Methoden",
+81
+],
+[
+"K",
+"21",
+"Anatomie: Sechs Beweise unter dem Mikroskop",
+85
+],
+[
+"T",
+"V",
+"Die Grenzen",
+0
+],
+[
+"K",
+"22",
+"Berechenbarkeit: Was eine Maschine kann",
+93
+],
+[
+"K",
+"23",
+"Gödels erster Unvollständigkeitssatz",
+101
+],
+[
+"K",
+"24",
+"Der zweite Unvollständigkeitssatz",
+107
+],
+[
+"K",
+"25",
+"Was Gödels Sätze nicht besagen",
+109
+],
+[
+"K",
+"26",
+"Unabhängigkeit: Die Kontinuumshypothese",
+111
+],
+[
+"K",
+"27",
+"Große Kardinalzahlen und die Suche nach neuen Axiomen",
+115
+],
+[
+"K",
+"28",
+"Konkrete Unabhängigkeit",
+119
+],
+[
+"K",
+"29",
+"Busy Beaver: Die Grenze in Zahlen",
+123
+],
+[
+"K",
+"30",
+"Beweistheorie: Die Vermessung der Systeme",
+127
+],
+[
+"K",
+"31",
+"Reverse Mathematik: Welche Axiome braucht ein Satz?",
+129
+],
+[
+"K",
+"32",
+"Beweiskomplexität: Wenn Beweise zu lang sind",
+131
+],
+[
+"T",
+"VI",
+"Andere Fundamente",
+0
+],
+[
+"K",
+"33",
+"Konstruktive Mathematik",
+135
+],
+[
+"K",
+"34",
+"Typentheorie und Homotopietypentheorie",
+137
+],
+[
+"K",
+"35",
+"Kategorientheorie und Topoi",
+139
+],
+[
+"T",
+"VII",
+"Beweis heute",
+0
+],
+[
+"K",
+"36",
+"Computerbeweise",
+143
+],
+[
+"K",
+"37",
+"Beweisassistenten und die Formalisierung der Mathematik",
+145
+],
+[
+"K",
+"38",
+"Künstliche Intelligenz und der Beweis",
+147
+],
+[
+"K",
+"39",
+"Die Soziologie und Epistemologie des Beweises",
+151
+],
+[
+"T",
+"VIII",
+"Epilog",
+0
+],
+[
+"K",
+"40",
+"Wo sind die Grenzen wirklich?",
+155
+],
+[
+"T",
+"IX",
+"Anhänge",
+0
+],
+[
+"K",
+"A",
+"Symbolverzeichnis",
+161
+],
+[
+"K",
+"B",
+"Zeitleiste",
+163
+],
+[
+"K",
+"C",
+"Glossar",
+167
+],
+[
+"K",
+"D",
+"Kommentierte Literatur",
+169
+]
+]
+},
+"22": {
+"titel": "Was sich verallgemeinern lässt",
+"fach": "Maschinelles Lernen",
+"seiten": 204,
+"items": [
+[
+"T",
+"I",
+"Das Problem",
+5
+],
+[
+"K",
+"1",
+"Was Lernen heißt",
+7
+],
+[
+"K",
+"2",
+"Zu wenig und zu viel",
+21
+],
+[
+"K",
+"3",
+"Wie man prüft — und wie man sich betrügt",
+33
+],
+[
+"T",
+"II",
+"Lineare Verfahren",
+45
+],
+[
+"K",
+"4",
+"Die Freiheit begrenzen",
+47
+],
+[
+"K",
+"5",
+"Eine Wahrscheinlichkeit vorhersagen",
+57
+],
+[
+"K",
+"6",
+"Der breiteste Streifen",
+69
+],
+[
+"T",
+"III",
+"Die Theorie",
+83
+],
+[
+"K",
+"7",
+"Wie viele Beispiele man braucht",
+85
+],
+[
+"K",
+"8",
+"Warum Einfaches verallgemeinert",
+97
+],
+[
+"T",
+"IV",
+"Nichtlineare Verfahren",
+107
+],
+[
+"K",
+"9",
+"Bäume und Wälder",
+109
+],
+[
+"K",
+"10",
+"Ähnliche Fälle und der Fluch der Dimension",
+121
+],
+[
+"K",
+"11",
+"Neuronale Netze",
+131
+],
+[
+"T",
+"V",
+"Ohne Etiketten, in der Tiefe",
+143
+],
+[
+"K",
+"12",
+"Gruppen finden",
+145
+],
+[
+"K",
+"13",
+"Die dünne Fläche",
+155
+],
+[
+"K",
+"14",
+"Das Rätsel der tiefen Netze",
+165
+],
+[
+"T",
+"VI",
+"Aktueller Stand",
+175
+],
+[
+"K",
+"15",
+"Was sich verallgemeinern lässt",
+177
+],
+[
+"T",
+"VII",
+"Anhang",
+183
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+185
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+193
+]
+]
+},
+"23": {
+"titel": "Woran es liegt",
+"fach": "Kausale Schlüsse",
+"seiten": 158,
+"items": [
+[
+"T",
+"I",
+"Das Problem",
+5
+],
+[
+"K",
+"1",
+"Zusammenhang und Ursache",
+7
+],
+[
+"K",
+"2",
+"Was gewesen wäre",
+17
+],
+[
+"K",
+"3",
+"Das Los",
+27
+],
+[
+"T",
+"II",
+"Graphen und Regeln",
+37
+],
+[
+"K",
+"4",
+"Annahmen aufschreiben",
+39
+],
+[
+"K",
+"5",
+"Was man herausrechnen darf",
+49
+],
+[
+"K",
+"6",
+"Der Hintertürtest",
+59
+],
+[
+"T",
+"III",
+"Anpassen",
+67
+],
+[
+"K",
+"7",
+"Eine Zahl statt zwanzig",
+69
+],
+[
+"K",
+"8",
+"Gewichten und doppelte Absicherung",
+77
+],
+[
+"T",
+"IV",
+"Wenn Anpassen nicht reicht",
+85
+],
+[
+"K",
+"9",
+"Instrumente",
+87
+],
+[
+"K",
+"10",
+"Natürliche Versuche",
+95
+],
+[
+"K",
+"11",
+"Die Studie nachbilden",
+103
+],
+[
+"T",
+"V",
+"Über die Zeit, im Einzelfall",
+111
+],
+[
+"K",
+"12",
+"Behandeln über die Zeit",
+113
+],
+[
+"K",
+"13",
+"Auf welchem Weg",
+121
+],
+[
+"K",
+"14",
+"Für wen es wirkt",
+127
+],
+[
+"T",
+"VI",
+"Aktueller Stand",
+135
+],
+[
+"K",
+"15",
+"Woran es liegt",
+137
+],
+[
+"T",
+"VII",
+"Anhang",
+141
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+143
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+149
+]
+]
+},
+"24": {
+"titel": "Was zu tun ist",
+"fach": "Entscheidungen unter Unsicherheit",
+"seiten": 140,
+"items": [
+[
+"T",
+"I",
+"Grundlagen",
+5
+],
+[
+"K",
+"1",
+"Abwägen",
+7
+],
+[
+"K",
+"2",
+"Woher der Nutzen kommt",
+15
+],
+[
+"K",
+"3",
+"Was Wissen wert ist",
+23
+],
+[
+"T",
+"II",
+"Klinische Entscheidungen",
+31
+],
+[
+"K",
+"4",
+"Zwei Schwellen",
+33
+],
+[
+"K",
+"5",
+"Bäume und ihre Empfindlichkeit",
+41
+],
+[
+"K",
+"6",
+"Über zwanzig Jahre",
+47
+],
+[
+"T",
+"III",
+"Über die Zeit",
+55
+],
+[
+"K",
+"7",
+"Rückwärts denken",
+57
+],
+[
+"K",
+"8",
+"Ohne Ende",
+63
+],
+[
+"K",
+"9",
+"Erkunden oder ausnutzen",
+69
+],
+[
+"T",
+"IV",
+"Grenzen des Modells",
+75
+],
+[
+"K",
+"10",
+"Mehr als ein Ziel",
+77
+],
+[
+"K",
+"11",
+"Unsichere Wahrscheinlichkeiten",
+83
+],
+[
+"K",
+"12",
+"Wie Menschen wirklich entscheiden",
+91
+],
+[
+"T",
+"V",
+"Entscheiden für andere",
+99
+],
+[
+"K",
+"13",
+"Wenn mehrere entscheiden",
+101
+],
+[
+"K",
+"14",
+"Entscheiden für viele",
+109
+],
+[
+"T",
+"VI",
+"Aktueller Stand",
+115
+],
+[
+"K",
+"15",
+"Was zu tun ist",
+117
+],
+[
+"T",
+"VII",
+"Anhang",
+123
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+125
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+131
+]
+]
+},
+"25": {
+"titel": "Wenn der Zufall weitergeht",
+"fach": "Stochastische Prozesse",
+"seiten": 158,
+"items": [
+[
+"T",
+"I",
+"Ketten",
+5
+],
+[
+"K",
+"1",
+"Die Irrfahrt",
+7
+],
+[
+"K",
+"2",
+"Ketten ohne Gedächtnis",
+17
+],
+[
+"K",
+"3",
+"Wohin die Kette strebt",
+27
+],
+[
+"T",
+"II",
+"Sprünge in stetiger Zeit",
+35
+],
+[
+"K",
+"4",
+"Ereignisse ohne Gedächtnis",
+37
+],
+[
+"K",
+"5",
+"Warten",
+45
+],
+[
+"K",
+"6",
+"Aussterben oder Ausbruch",
+53
+],
+[
+"T",
+"III",
+"Faire Spiele",
+61
+],
+[
+"K",
+"7",
+"Was man schon weiß",
+63
+],
+[
+"K",
+"8",
+"Faire Spiele",
+71
+],
+[
+"K",
+"9",
+"Wohin faire Spiele laufen",
+79
+],
+[
+"T",
+"IV",
+"Die Brownsche Bewegung",
+87
+],
+[
+"K",
+"10",
+"Stetig und nirgends glatt",
+89
+],
+[
+"K",
+"11",
+"Ein Integral für zerknitterte Pfade",
+99
+],
+[
+"K",
+"12",
+"Die Kettenregel mit Zusatz",
+107
+],
+[
+"T",
+"V",
+"Anwendungen",
+115
+],
+[
+"K",
+"13",
+"Was eine Option wert ist",
+117
+],
+[
+"K",
+"14",
+"Prozesse in Klinik und Natur",
+125
+],
+[
+"T",
+"VI",
+"Aktueller Stand",
+133
+],
+[
+"K",
+"15",
+"Was der Zufall mitbringt",
+135
+],
+[
+"T",
+"VII",
+"Anhang",
+141
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+143
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+149
+],
+[
+"T",
+"VI",
+"Stand",
+15
+]
+]
+},
+"26": {
+"titel": "Wenn die Daten sich selbst bestimmen",
+"fach": "Ökonometrie",
+"seiten": 156,
+"items": [
+[
+"T",
+"I",
+"Das Problem",
+5
+],
+[
+"K",
+"1",
+"Wenn der Regressor nicht unschuldig ist",
+7
+],
+[
+"K",
+"2",
+"Was die Daten nicht hergeben",
+15
+],
+[
+"K",
+"3",
+"Eine Veränderung von außen",
+23
+],
+[
+"T",
+"II",
+"Querschnittsdaten",
+31
+],
+[
+"K",
+"4",
+"Momente statt Verteilungen",
+33
+],
+[
+"K",
+"5",
+"Ja oder nein, null oder mehr",
+41
+],
+[
+"K",
+"6",
+"Wer in den Daten ist",
+49
+],
+[
+"T",
+"III",
+"Dieselben über die Zeit",
+57
+],
+[
+"K",
+"7",
+"Jeder sein eigener Vergleich",
+59
+],
+[
+"K",
+"8",
+"Wenn gestern heute erklärt",
+67
+],
+[
+"K",
+"9",
+"Vorher, nachher, und mit wem",
+75
+],
+[
+"T",
+"IV",
+"Zeitreihen",
+83
+],
+[
+"K",
+"10",
+"Eine Reihe, viele Zeitpunkte",
+85
+],
+[
+"K",
+"11",
+"Zusammenhänge, die keine sind",
+93
+],
+[
+"K",
+"12",
+"Zwei Irrfahrten, ein Band",
+101
+],
+[
+"T",
+"V",
+"Vorhersage und Politik",
+111
+],
+[
+"K",
+"13",
+"Was ein gutes Modell nicht kann",
+113
+],
+[
+"K",
+"14",
+"Der Leitfall, zu Ende gerechnet",
+121
+],
+[
+"T",
+"VI",
+"Aktueller Stand",
+129
+],
+[
+"K",
+"15",
+"Was die Ökonometrie beiträgt",
+131
+],
+[
+"T",
+"VII",
+"Anhang",
+137
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+139
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+147
+]
+]
+},
+"27": {
+"titel": "Was der Rechner vom Zufall weiß",
+"fach": "Numerische Simulation",
+"seiten": 170,
+"items": [
+[
+"T",
+"I",
+"Der Zufall im Rechner",
+5
+],
+[
+"K",
+"1",
+"Ein Experiment im Rechner",
+7
+],
+[
+"K",
+"2",
+"Zufall aus einer Formel",
+15
+],
+[
+"K",
+"3",
+"Der Fluch der Dimension",
+25
+],
+[
+"T",
+"II",
+"Genauer werden",
+33
+],
+[
+"K",
+"4",
+"Den Fehler richtig messen",
+35
+],
+[
+"K",
+"5",
+"Weniger Streuung ohne mehr Läufe",
+45
+],
+[
+"K",
+"6",
+"Dort ziehen, wo etwas passiert",
+55
+],
+[
+"T",
+"III",
+"Ketten und Pfade",
+65
+],
+[
+"K",
+"7",
+"Ziehen, ohne ziehen zu können",
+67
+],
+[
+"K",
+"8",
+"Ist die Kette angekommen?",
+77
+],
+[
+"K",
+"9",
+"Fliegen statt kriechen, und Pfade rechnen",
+85
+],
+[
+"T",
+"IV",
+"Systeme über die Zeit",
+95
+],
+[
+"K",
+"10",
+"Die Station als Programm",
+97
+],
+[
+"K",
+"11",
+"Was hilft, und wie selten es schlimm wird",
+107
+],
+[
+"K",
+"12",
+"Was jetzt gerade los ist",
+115
+],
+[
+"T",
+"V",
+"Die Praxis",
+123
+],
+[
+"K",
+"13",
+"Dasselbe noch einmal",
+125
+],
+[
+"K",
+"14",
+"Was man dem Ergebnis glauben darf",
+135
+],
+[
+"T",
+"VI",
+"Aktueller Stand",
+143
+],
+[
+"K",
+"15",
+"Was der Rechner vom Zufall weiß",
+145
+],
+[
+"T",
+"VII",
+"Anhang",
+151
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+153
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+161
+]
+]
+},
+"28": {
+"titel": "Wo die Vorhersage endet",
+"fach": "Dynamische Systeme und Chaos",
+"seiten": 166,
+"items": [
+[
+"T",
+"I",
+"Der Fluss",
+5
+],
+[
+"K",
+"1",
+"Ein Zustand und seine Zukunft",
+7
+],
+[
+"K",
+"2",
+"Ruhe, und ob sie hält",
+15
+],
+[
+"K",
+"3",
+"Die Schwingung, die von allein kommt",
+25
+],
+[
+"T",
+"II",
+"Wenn Parameter wandern",
+35
+],
+[
+"K",
+"4",
+"Wenn aus einem Fixpunkt drei werden",
+37
+],
+[
+"K",
+"5",
+"Wie aus der Ruhe ein Takt wird",
+47
+],
+[
+"K",
+"6",
+"Ein Takt von außen",
+55
+],
+[
+"T",
+"III",
+"Der Weg ins Chaos",
+65
+],
+[
+"K",
+"7",
+"Wenn die Periode sich verdoppelt",
+67
+],
+[
+"K",
+"8",
+"Drei Gleichungen",
+75
+],
+[
+"K",
+"9",
+"Wie weit reicht die Vorhersage",
+83
+],
+[
+"T",
+"IV",
+"Erkennen und Messen",
+91
+],
+[
+"K",
+"10",
+"Ein Kanal genügt",
+93
+],
+[
+"K",
+"11",
+"Die Dimension des Attraktors",
+101
+],
+[
+"K",
+"12",
+"Der Test gegen den Zufall",
+109
+],
+[
+"T",
+"V",
+"Raum und Zeit",
+117
+],
+[
+"K",
+"13",
+"Die Welle und die Spirale",
+119
+],
+[
+"K",
+"14",
+"Viele",
+127
+],
+[
+"T",
+"VI",
+"Stand",
+135
+],
+[
+"K",
+"15",
+"Wo die Vorhersage endet",
+137
+],
+[
+"T",
+"VII",
+"Anhang",
+143
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+145
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+157
+]
+]
+},
+"29": {
+"titel": "Die Form der Lösungen",
+"fach": "Algebraische Geometrie",
+"seiten": 188,
+"items": [
+[
+"T",
+"I",
+"Nullstellen und Ideale",
+5
+],
+[
+"K",
+"1",
+"Was eine Gleichung zeichnet",
+7
+],
+[
+"K",
+"2",
+"Die Gleichungen einer Varietät",
+17
+],
+[
+"K",
+"3",
+"Hilberts Nullstellensatz",
+25
+],
+[
+"T",
+"II",
+"Rechnen mit Idealen",
+35
+],
+[
+"K",
+"4",
+"Ordnen und Teilen",
+37
+],
+[
+"K",
+"5",
+"Gröbner-Basen",
+45
+],
+[
+"K",
+"6",
+"Veränderliche loswerden",
+55
+],
+[
+"T",
+"III",
+"Die Gestalt",
+65
+],
+[
+"K",
+"7",
+"Wie groß eine Varietät ist",
+67
+],
+[
+"K",
+"8",
+"Glatt und nicht glatt",
+79
+],
+[
+"K",
+"9",
+"Das Unendliche anschließen",
+89
+],
+[
+"T",
+"IV",
+"Kurven",
+99
+],
+[
+"K",
+"10",
+"Die Gruppe auf der Kurve",
+101
+],
+[
+"K",
+"11",
+"Kurven, die man durchlaufen kann",
+111
+],
+[
+"K",
+"12",
+"Das Geschlecht",
+121
+],
+[
+"T",
+"V",
+"Anwendungen",
+131
+],
+[
+"K",
+"13",
+"Modelle als Varietäten",
+133
+],
+[
+"K",
+"14",
+"Gelenke und Geheimnisse",
+145
+],
+[
+"T",
+"VI",
+"Stand",
+157
+],
+[
+"K",
+"15",
+"Die Form der Lösungen",
+159
+],
+[
+"T",
+"VII",
+"Anhang",
+165
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+167
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+179
+]
+]
+},
+"30": {
+"titel": "Was die Symmetrie verrät",
+"fach": "Darstellungstheorie",
+"seiten": 196,
+"items": [
+[
+"T",
+"I",
+"Gruppen und ihre Darstellungen",
+5
+],
+[
+"K",
+"1",
+"Symmetrie als Gruppe",
+7
+],
+[
+"K",
+"2",
+"Gruppen, die wirken",
+17
+],
+[
+"K",
+"3",
+"Die Bausteine",
+27
+],
+[
+"T",
+"II",
+"Charaktere",
+37
+],
+[
+"K",
+"4",
+"Die Spur sagt alles",
+39
+],
+[
+"K",
+"5",
+"Tafeln bauen",
+49
+],
+[
+"K",
+"6",
+"Die Schwingungen des Moleküls",
+61
+],
+[
+"T",
+"III",
+"Konstruktionen",
+71
+],
+[
+"K",
+"7",
+"Einschränken und Induzieren",
+73
+],
+[
+"K",
+"8",
+"Die symmetrische Gruppe",
+83
+],
+[
+"K",
+"9",
+"Produkte",
+93
+],
+[
+"T",
+"IV",
+"Kontinuierliche Gruppen",
+103
+],
+[
+"K",
+"10",
+"Die Drehgruppe",
+105
+],
+[
+"K",
+"11",
+"Spin",
+115
+],
+[
+"K",
+"12",
+"Fourier auf Gruppen",
+125
+],
+[
+"T",
+"V",
+"Moleküle, Kristalle, Teilchen",
+135
+],
+[
+"K",
+"13",
+"Benzol",
+137
+],
+[
+"K",
+"14",
+"Kristalle, Eisen, Quarks",
+147
+],
+[
+"T",
+"VI",
+"Stand",
+159
+],
+[
+"K",
+"15",
+"Stand",
+161
+],
+[
+"T",
+"VII",
+"Anhang",
+171
+],
+[
+"K",
+"A",
+"Formelsammlung und Übersicht",
+173
+],
+[
+"K",
+"B",
+"Kommentierte Quellen",
+187
+]
+]
+}
+}

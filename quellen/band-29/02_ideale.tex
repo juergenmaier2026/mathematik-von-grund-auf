@@ -1,0 +1,277 @@
+\chapter{Die Gleichungen einer Varietät}
+
+\section{Von drei Gleichungen zu unendlich vielen}
+
+\begin{merksatz}
+\boxtitel{Was auf der Leitfall-Kurve alles verschwindet}
+Die drei Gleichungen $f_1 = k_{10} + k_{12} - \tfrac12$, $f_2 = k_{10} + k_{12} + k_{21} + k_{20} - \tfrac{9}{10}$, $f_3 = k_{10}k_{21} + k_{10}k_{20} + k_{12}k_{20} - \tfrac{14}{100}$ verschwinden auf der Kurve. Aber auch:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{4.6cm}P{4.0cm}@{}}
+\toprule
+$f_2 - f_1 = k_{21} + k_{20} - \tfrac25$ & Differenz zweier Gleichungen\\
+$k_{10}\cdot f_1$, $k_{20}^{3}\cdot f_2$, $(k_{10}k_{12} + 7)\cdot f_3$ & Vielfache\\
+$g = k_{12}k_{20} - \tfrac25k_{12} + \tfrac{3}{50}$ & die Hyperbel aus Kapitel 1\\
+$g = f_3 + (k_{10} - \tfrac25)f_1 - k_{10}f_2$ & --- denn so entsteht sie\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mit drei Polynomen verschwinden alle ihre Summen und alle ihre Vielfachen mit beliebigen Polynomen --- unendlich viele Gleichungen für dieselbe Kurve. Die Menge dieser Gleichungen ist der eigentliche Gegenstand; die drei, mit denen man begann, sind eine Wahl.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die vierte Zeile ist ein Zertifikat}: Sie beweist, dass $g$ auf der Kurve verschwindet, ohne die Kurve zu kennen --- jeder, der $f_1, f_2, f_3$ null setzt, setzt auch $g$ null. Solche Zertifikate sind die Währung dieses Kapitels. Die Frage, ob ein gegebenes Polynom eines hat, ist das \Begriff{Idealzugehörigkeitsproblem}, und es ist der Grund für die Rechenverfahren von Teil II. Zuerst aber der Satz, der das Fach begründet: Egal, wie viele Gleichungen eine Varietät hat --- endlich viele davon genügen immer.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Ideale}
+
+\begin{definition}
+\boxtitelm{Definition 2.1 --- Ideal, erzeugtes Ideal, Verschwindungsideal}
+Eine Teilmenge $I\subseteq k[x_1, \ldots, x_n]$ heißt \Begriff{Ideal}, wenn $0\in I$, mit $f, g\in I$ auch $f + g\in I$, und mit $f\in I$ und beliebigem $h$ auch $hf\in I$ (Band 11). Für Polynome $f_1, \ldots, f_s$ ist
+\[ \langle f_1, \ldots, f_s\rangle = \{\,h_1f_1 + \cdots + h_sf_s : h_i\in k[x_1, \ldots, x_n]\,\} \]
+das von ihnen \Begriff{erzeugte Ideal}. Für eine Teilmenge $V\subseteq k^{n}$ ist
+\[ I(V) = \{\,f : f(a) = 0\ \text{für alle}\ a\in V\,\} \]
+das \Begriff{Verschwindungsideal} von $V$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 2.2 --- die beiden Richtungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+$V(f_1, \ldots, f_s) = V(\langle f_1, \ldots, f_s\rangle)$ & Die Varietät hängt nur vom Ideal ab, nicht von den Erzeugern.\\
+$I(V)$ ist ein Ideal & und zwar ein \Begriff{Radikalideal}: $f^{m}\in I(V)\Rightarrow f\in I(V)$.\\
+$V\subseteq W \Rightarrow I(V)\supseteq I(W)$ & Mehr Punkte, weniger Gleichungen.\\
+$I\subseteq J \Rightarrow V(I)\supseteq V(J)$ & Mehr Gleichungen, weniger Punkte.\\
+$V(I(V)) = V$ für Varietäten $V$ & Die Varietät kommt zurück.\\
+$I(V(I))\supseteq I$ & Das Ideal kommt zurück --- oder etwas Größeres.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis der ersten Zeile}
+Verschwinden alle $f_i$ in $a$, so auch jede Kombination $\sum h_if_i$; also $V(f_1, \ldots, f_s)\subseteq V(\langle f_1, \ldots, f_s\rangle)$. Umgekehrt sind die $f_i$ selbst in dem Ideal. $\blacksquare$
+
+\schritt{Beweis der zweiten Zeile}
+$0$ verschwindet überall; Summen und Vielfache von Polynomen, die auf $V$ verschwinden, verschwinden auf $V$. Ist $f^{m}(a) = 0$, so $f(a)^{m} = 0$, also $f(a) = 0$, weil $k$ ein Körper ist. $\blacksquare$
+
+\schritt{Beweis der fünften Zeile}
+$V\subseteq V(I(V))$, weil jedes $f\in I(V)$ auf $V$ verschwindet. Ist $V = V(f_1, \ldots, f_s)$, so sind die $f_i\in I(V)$, also $V(I(V))\subseteq V(f_1, \ldots, f_s) = V$. $\blacksquare$
+
+\schritt{Die sechste Zeile}
+$f\in I$ verschwindet auf $V(I)$, also $f\in I(V(I))$. Dass die Umkehrung falsch sein kann, zeigt $I = \langle x^{2}\rangle$: $V(I)$ ist die $y$-Achse, und $x\in I(V(I))$, aber $x\notin\langle x^{2}\rangle$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Varietäten und Ideale sind durch $V$ und $I$ verbunden, aber nicht eins zu eins.} Verschiedene Ideale --- $\langle x\rangle$ und $\langle x^{2}\rangle$ --- geben dieselbe Varietät; die Varietät sieht die Vielfachheit nicht. Welche Ideale genau als $I(V)$ auftreten, sagt der Nullstellensatz in Kapitel 3: über $\mathbb C$ genau die Radikalideale. Bis dahin genügt: $I(V)$ ist das größte Ideal zu $V$, und jedes Erzeugendensystem von $I(V)$ ist ein \enquote{vollständiger} Satz von Gleichungen für $V$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Hilberts Basissatz}
+
+\begin{merksatz}
+\boxtitel{Satz 2.3 --- Hilbert 1890}
+Jedes Ideal $I\subseteq k[x_1, \ldots, x_n]$ ist endlich erzeugt: Es gibt $f_1, \ldots, f_s\in I$ mit $I = \langle f_1, \ldots, f_s\rangle$. Insbesondere ist jede Varietät --- auch eine durch unendlich viele Gleichungen gegebene --- die Nullstellenmenge endlich vieler Polynome, und jede aufsteigende Kette von Idealen $I_1\subseteq I_2\subseteq\cdots$ wird stationär.
+
+\schritt{Schritt 1 --- Monomideale: Dicksons Lemma}
+Ein \Begriff{Monomideal} wird von Monomen $x^{\alpha} = x_1^{\alpha_1}\cdots x_n^{\alpha_n}$ erzeugt; ein Monom liegt darin genau dann, wenn es durch eines der Erzeuger teilbar ist (Koeffizientenvergleich). Behauptung: Jedes Monomideal ist von endlich vielen Monomen erzeugt. Beweis durch Induktion nach $n$. Für $n = 1$: Die Exponenten der erzeugenden Monome haben ein Minimum $m$, und $x^{m}$ erzeugt. Für $n > 1$: Man betrachte die Erzeuger als $x^{\alpha}x_n^{a}$ mit $\alpha\in\mathbb N^{n-1}$. Die $x^{\alpha}$ erzeugen ein Monomideal $J$ in $n - 1$ Veränderlichen, nach Induktion endlich erzeugt von $x^{\alpha_1}, \ldots, x^{\alpha_r}$; jedes $x^{\alpha_i}$ tritt mit einem Exponenten $a_i$ auf; sei $A = \max a_i$. Für jedes $a < A$ erzeugen die $x^{\alpha}$, deren $x^{\alpha}x_n^{a}$ Erzeuger sind, ein Monomideal $J_a$, nach Induktion endlich erzeugt. Alle diese endlich vielen Monome zusammen --- die $x^{\alpha_i}x_n^{a_i}$ und die Erzeuger der $J_a$ für $a < A$, je mit $x_n^{a}$ --- erzeugen $I$: Ein Monom $x^{\beta}x_n^{b}$ in $I$ mit $b\ge A$ ist durch ein $x^{\alpha_i}x_n^{a_i}$ teilbar; mit $b < A$ liegt $x^{\beta}$ in $J_b$ und das Monom ist durch einen Erzeuger von $J_bx_n^{b}$ teilbar. $\blacksquare$
+
+\schritt{Schritt 2 --- Leitmonome}
+Man fixiere eine Monomordnung (Kapitel 4; hier genügt: eine Totalordnung auf den Monomen, verträglich mit Multiplikation, ohne unendliche absteigende Ketten --- etwa die lexikographische). Jedes Polynom $f\ne0$ hat ein größtes Monom, sein \Begriff{Leitmonom} $\mathrm{LM}(f)$. Sei $\mathrm{LM}(I) = \langle\mathrm{LM}(f) : f\in I\rangle$, ein Monomideal. Nach Schritt 1 ist es von endlich vielen Monomen erzeugt, $\mathrm{LM}(g_1), \ldots, \mathrm{LM}(g_s)$ mit $g_i\in I$.
+
+\schritt{Schritt 3 --- Die $g_i$ erzeugen $I$}
+Sei $f\in I$. Division mit Rest durch $g_1, \ldots, g_s$ (Kapitel 4; hier nur: Man subtrahiert Vielfache der $g_i$, solange das Leitmonom des Rests durch ein $\mathrm{LM}(g_i)$ teilbar ist; das endet, weil die Ordnung wohlgeordnet ist) gibt $f = \sum h_ig_i + r$, wobei kein Monom von $r$ durch ein $\mathrm{LM}(g_i)$ teilbar ist. Nun ist $r = f - \sum h_ig_i\in I$; wäre $r\ne0$, so läge $\mathrm{LM}(r)$ in $\mathrm{LM}(I) = \langle\mathrm{LM}(g_i)\rangle$ und wäre durch ein $\mathrm{LM}(g_i)$ teilbar --- Widerspruch. Also $r = 0$ und $f\in\langle g_1, \ldots, g_s\rangle$. $\blacksquare$
+
+\schritt{Schritt 4 --- Die Kette}
+Ist $I_1\subseteq I_2\subseteq\cdots$, so ist $\bigcup I_j$ ein Ideal, endlich erzeugt von $f_1, \ldots, f_s$; jedes $f_i$ liegt in einem $I_{j_i}$, und ab $j = \max j_i$ ist $I_j = \bigcup I_j$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Erzeuger $g_1, \ldots, g_s$ aus Schritt 2 sind nicht irgendwelche: Ihre Leitmonome erzeugen alle Leitmonome des Ideals. Ein solches Erzeugendensystem heißt Gröbner-Basis, und Teil II handelt davon, wie man es berechnet.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Hilberts Beweis von 1890 war anders} --- Induktion nach der Zahl der Veränderlichen über die Leitkoeffizienten, ohne Monomordnung --- und er war nicht konstruktiv: Er zeigte, dass endlich viele Erzeuger existieren, ohne sie anzugeben. \Person{Gordan}, der die Invarianten binärer Formen zwanzig Jahre lang von Hand berechnet hatte, soll gesagt haben: \enquote{Das ist nicht Mathematik, das ist Theologie.} Der Beweis oben, nach \Person{Buchberger} 1965 und \Person{Cox}, \Person{Little}, \Person{O'Shea}, \zit{5}, ist konstruktiv: Schritt 1 bis 3 sind ein Algorithmus, sobald man weiß, wie man $\mathrm{LM}(I)$ findet --- und das ist genau Buchbergers Algorithmus, Kapitel 5. Die Theologie ist Rechenverfahren geworden.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Endlich erzeugt heißt nicht klein}
+Das Ideal $I = \langle x^{2} - y,\ x^{3} - z\rangle$ der verdrehten Kubik enthält $xz - y^{2}$. Teilt man $xz - y^{2}$ mit Rest durch die beiden Erzeuger (lexikographisch, $x > y > z$), bleibt $xz - y^{2}$ selbst als Rest --- kein Leitmonom passt. Und doch:
+\[ xz - y^{2} = -(y + x^{2})(y - x^{2}) + x\,(z - x^{3}) \quad\checkmark \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.8cm}@{}}
+\toprule
+\textbf{Erzeuger} & $x^{2} - y$, $x^{3} - z$: Leitmonome $x^{2}$, $x^{3}$\\
+\textbf{Im Ideal} & $xz - y^{2}$: Leitmonom $xz$ --- durch kein Erzeuger-Leitmonom teilbar\\
+\textbf{Folge} & Division mit Rest gibt \enquote{nicht im Ideal} für ein Element des Ideals\\
+\textbf{Ausweg} & Erzeuger, deren Leitmonome alle Leitmonome erzeugen: $\{x^{2} - y,\ xy - z,\ xz - y^{2},\ y^{3} - z^{2}\}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Ein Erzeugendensystem beantwortet die Frage \enquote{liegt $f$ im Ideal?} nicht --- es sei denn, es ist eine Gröbner-Basis. Der Basissatz garantiert, dass eine existiert; er sagt nicht, dass die Erzeuger, die man hat, eine sind.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Zertifikat für $xz - y^{2}$ hat Koeffizienten vom Grad zwei}, höher als der Grad von $xz - y^{2}$ selbst. Das ist die Regel, nicht die Ausnahme: \Person{Hermann} zeigte 1926, dass die Koeffizienten eines Zertifikats Grad bis $(2d)^{2^{n}}$ brauchen können --- doppelt exponentiell in der Zahl der Veränderlichen ---, und \Person{Mayr} und \Person{Meyer} 1982, dass das nicht zu verbessern ist. Idealzugehörigkeit ist im schlimmsten Fall eines der schwersten berechenbaren Probleme, Band 3 der Informatik-Reihe. Dass sie in der Praxis fast immer gutartig ist, ist eine Erfahrung, keine Garantie; Kapitel 5 kommt auf den Unterschied zurück.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.1 --- Ein Zertifikat finden}
+Liegt $x^{2} + y^{2}$ im Ideal $\langle x + y,\ xy\rangle\subset\mathbb Q[x, y]$?
+
+\loesung
+\schritt{Schritt 1 --- Ansatz}
+$x^{2} + y^{2} = (x + y)^{2} - 2xy$.
+
+\schritt{Schritt 2 --- Zertifikat}
+$x^{2} + y^{2} = (x + y)\cdot(x + y) + (-2)\cdot xy$: ja, mit $h_1 = x + y$, $h_2 = -2$.
+
+\schritt{Schritt 3 --- Geometrisch}
+$V(x + y, xy)$: aus $xy = 0$ ist $x = 0$ oder $y = 0$, mit $x + y = 0$ also nur der Ursprung. Dort verschwindet $x^{2} + y^{2}$. \checkmark\ (Das ist eine Probe, kein Beweis: Verschwinden auf der Varietät genügt für die Zugehörigkeit erst nach dem Nullstellensatz, und auch dann nur bis auf Potenzen.)
+
+\schritt{Schritt 4 --- Und $x$?}
+$x$ verschwindet im Ursprung, aber $x\notin\langle x + y, xy\rangle$: Jedes Element des Ideals hat die Form $h_1(x + y) + h_2xy$; setzt man $y = -x$, wird es $-h_2(x, -x)\,x^{2}$, also durch $x^{2}$ teilbar --- $x$ ist es nicht. Dagegen $x^{2} = x(x + y) - xy\in I$. Das Ideal ist nicht radikal.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Substitution $y = -x$ in Schritt 4 ist ein Trick, der oft hilft}: Auf der Varietät $V(x + y)$ sieht man das Ideal \enquote{modulo $x + y$}, und dort wird die Frage eindimensional. Allgemein ist das der Übergang zum Quotientenring $k[x, y]/\langle x + y\rangle\cong k[x]$, Kapitel 3.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.2 --- Das Verschwindungsideal der verdrehten Kubik}
+Zeigen Sie: $I(V) = \langle y - x^{2},\ z - x^{3}\rangle$ für $V = \{(t, t^{2}, t^{3})\}$.
+
+\loesung
+\schritt{Schritt 1 --- $\supseteq$}
+Beide Erzeuger verschwinden auf $V$: $t^{2} - t^{2} = 0$, $t^{3} - t^{3} = 0$. Also liegt das Ideal in $I(V)$ (Satz 2.2).
+
+\schritt{Schritt 2 --- $\subseteq$: Reduktion}
+Sei $f\in I(V)$. Man ersetze in $f$ jedes $y$ durch $x^{2} + (y - x^{2})$ und jedes $z$ durch $x^{3} + (z - x^{3})$ und multipliziere aus: $f = r(x) + h_1\,(y - x^{2}) + h_2\,(z - x^{3})$ mit einem Polynom $r$ in $x$ allein (alle Terme, die $y - x^{2}$ oder $z - x^{3}$ enthalten, sammelt man in $h_1, h_2$).
+
+\schritt{Schritt 3 --- Der Rest ist null}
+Auf $V$ ist $f = 0$ und $y - x^{2} = z - x^{3} = 0$, also $r(t) = 0$ für alle $t\in k$. Ist $k$ unendlich, hat ein Polynom einer Veränderlichen mit unendlich vielen Nullstellen nur den Nullkoeffizienten: $r = 0$. Also $f = h_1(y - x^{2}) + h_2(z - x^{3})$. $\blacksquare$
+
+\schritt{Schritt 4 --- Probe am Bruchfall}
+$f = xz - y^{2}$: $xz = x(x^{3} + (z - x^{3})) = x^{4} + x(z - x^{3})$; $y^{2} = (x^{2} + (y - x^{2}))^{2} = x^{4} + 2x^{2}(y - x^{2}) + (y - x^{2})^{2}$. Differenz: $r = 0$, $h_1 = -2x^{2} - (y - x^{2}) = -(x^{2} + y)$, $h_2 = x$. \checkmark\ Dasselbe Zertifikat wie im Bruchfall.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Argument funktioniert für jede Varietät, die ein Graph ist} --- $y_i = g_i(x)$: Das Verschwindungsideal ist $\langle y_i - g_i(x)\rangle$, weil man alles auf eine Funktion von $x$ reduzieren kann. Für den Leitfall ist die Kurve ein Graph über $k_{12}$ (außer bei $k_{12} = 0$), und ihr Verschwindungsideal ist $\langle f_1, f_2 - f_1, g\rangle$, wie man ebenso zeigt. Für Varietäten, die kein Graph sind --- der Kreis ---, braucht man den Nullstellensatz.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 2.3 --- Das Zertifikat für die Hyperbel}
+Zeigen Sie $g = k_{12}k_{20} - \tfrac25k_{12} + \tfrac{3}{50} = f_3 + (k_{10} - \tfrac25)f_1 - k_{10}f_2$ und erklären Sie, wie man es findet.
+
+\loesung
+\schritt{Schritt 1 --- Ausmultiplizieren}
+$(k_{10} - \tfrac25)f_1 = k_{10}^{2} + k_{10}k_{12} - \tfrac12k_{10} - \tfrac25k_{10} - \tfrac25k_{12} + \tfrac15$.\\
+$k_{10}f_2 = k_{10}^{2} + k_{10}k_{12} + k_{10}k_{21} + k_{10}k_{20} - \tfrac{9}{10}k_{10}$.\\
+Differenz: $-k_{10}k_{21} - k_{10}k_{20} - \tfrac12k_{10} - \tfrac25k_{10} + \tfrac{9}{10}k_{10} - \tfrac25k_{12} + \tfrac15 = -k_{10}k_{21} - k_{10}k_{20} - \tfrac25k_{12} + \tfrac15$.
+
+\schritt{Schritt 2 --- Plus $f_3$}
+$+ k_{10}k_{21} + k_{10}k_{20} + k_{12}k_{20} - \tfrac{14}{100} = k_{12}k_{20} - \tfrac25k_{12} + \tfrac15 - \tfrac{14}{100} = k_{12}k_{20} - \tfrac25k_{12} + \tfrac{3}{50} = g$. \checkmark
+
+\schritt{Schritt 3 --- Wie man es findet}
+In $f_3 = k_{10}(k_{21} + k_{20}) + k_{12}k_{20} - \tfrac{14}{100}$ ersetzt man $k_{21} + k_{20}$ durch $(f_2 - f_1) + \tfrac25$ --- das ist die Rechnung aus Kapitel 1, nur dass man die Gleichungen mitschleppt statt sie null zu setzen: $f_3 = k_{10}(f_2 - f_1) + \tfrac25k_{10} + k_{12}k_{20} - \tfrac{14}{100}$, und $\tfrac25k_{10} = \tfrac25(f_1 - k_{12} + \tfrac12)$. Zusammen: $f_3 = k_{10}(f_2 - f_1) + \tfrac25f_1 + g$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{\enquote{Gleichungen mitschleppen statt null setzen} ist das ganze Geheimnis der Zertifikate}: Jede Substitution, die man beim Lösen macht, ist eine Idealoperation, und wer sie protokolliert, hat am Ende die Koeffizienten. Der Divisionsalgorithmus in Kapitel 4 tut genau das mechanisch, und der Buchberger-Algorithmus in Kapitel 5 wählt die Substitutionen so, dass am Ende jedes Element des Ideals den Rest null hat.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Hilbert 1890, und was Gordan sagte}
+\Person{David Hilbert}, 28 Jahre alt, bewies 1890 in den Mathematischen Annalen, dass das Ideal der Invarianten einer beliebigen Gruppe von Linearsubstitutionen endlich erzeugt ist --- die Frage, an der die Invariantentheorie seit \Person{Cayley} und \Person{Sylvester} arbeitete, mit Hunderten Seiten expliziter Rechnungen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Der Beweis zeigte die Existenz der Erzeuger, ohne einen einzigen anzugeben. \Person{Paul Gordan}, der \enquote{König der Invarianten}, soll \enquote{Das ist nicht Mathematik, das ist Theologie} gesagt haben; die Quelle ist \Person{Max Noether}s Nachruf auf Gordan von 1914, und ob Gordan es so meinte, ist umstritten --- er betreute später \Person{Emmy Noether}s Dissertation, in der sie $331$ Invarianten von Hand berechnete. \textbf{Hilbert selbst gab 1893 einen konstruktiven Beweis nach}, mit dem Nullstellensatz als Werkzeug (Kapitel 3), und die \enquote{Theologie} wurde zur Grundlage der modernen Algebra: \Person{Emmy Noether} abstrahierte 1921 die Kettenbedingung, und Ringe, in denen sie gilt, heißen seither noethersch.}
+\end{minipage}
+\end{center}
+
+\schritt{Dicksons Lemma}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Leonard Dickson} bewies Schritt 1 des obigen Beweises 1913 in einer Arbeit über vollkommene Zahlen --- er brauchte, dass es nur endlich viele minimale Elemente in $\mathbb N^{n}$ unter Teilbarkeit gibt. \textbf{Dass sein Lemma der Kern des Basissatzes ist, bemerkte man erst, als \Person{Buchberger} 1965 die Gröbner-Basen einführte}; seither ist der Beweis über Monomideale der Standard, weil er den Algorithmus gleich mitliefert.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Wie schwer ist Idealzugehörigkeit?}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Schlimmster Fall} & Mayr--Meyer 1982: Zertifikatsgrade bis $2^{2^{cn}}$ sind nötig; das Problem ist EXPSPACE-vollständig.\\
+\textbf{Radikal\-zugehörigkeit} & Ist $f$ eine Potenz im Ideal? Brownawell 1987, Kollár 1988: Grad höchstens $d^{n}$ --- einfach exponentiell, und scharf.\\
+\textbf{Praxis} & Für Ideale aus Anwendungen (Robotik, Statistik, Kompartimente) rechnen heutige Systeme Gröbner-Basen mit Dutzenden Veränderlichen in Sekunden; warum, ist nur teilweise verstanden.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Unterschied zwischen Zeile eins und zwei ist der zwischen Algebra und Geometrie}: Ob $f$ im Ideal liegt, kann grauenhaft schwer sein; ob $f$ auf der Varietät verschwindet --- also eine Potenz im Ideal liegt, Kapitel 3 --- ist \enquote{nur} exponentiell. Die Geometrie vergisst die Vielfachheit, und das macht sie leichter. \Person{Kollár}s Schranke $d^{n}$ für den effektiven Nullstellensatz ist eines der schönsten Ergebnisse der achtziger Jahre; sie sagt, dass das Zertifikat $1 = \sum h_if_i$ für leere Varietäten höchstens Grad $d^{n}$ braucht, und die Schranke wird für die Beispiele von Masser und Philippon angenommen.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 2.1} & Ideal, $\langle f_1, \ldots, f_s\rangle$, $I(V)$\\
+\textbf{Satz 2.2} & $V$ und $I$ drehen Inklusionen um; $V(I(V)) = V$; $I(V(I))\supseteq I$\\
+\textbf{Satz 2.3} & Hilbert: jedes Ideal endlich erzeugt; Ketten werden stationär\\
+\textbf{Der Bruchfall} & Erzeuger beantworten Zugehörigkeit nicht --- Gröbner-Basen schon\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{$I(V(I))$ ist größer als $I$, wenn $I$ Potenzen enthält, deren Wurzeln fehlen. Kapitel 3 zeigt, dass das über $\mathbb C$ der einzige Unterschied ist --- Hilberts Nullstellensatz ---, und zerlegt Varietäten in ihre unzerlegbaren Teile.}
+\end{minipage}
+\end{center}
+\end{merksatz}

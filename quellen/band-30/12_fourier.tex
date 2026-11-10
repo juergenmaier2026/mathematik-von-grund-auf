@@ -1,0 +1,266 @@
+\chapter{Fourier auf Gruppen}
+
+\section{Eine Karte des ganzen Himmels}
+
+\begin{merksatz}
+\boxtitel{Die kosmische Hintergrundstrahlung}
+Der Planck-Satellit hat die Temperatur der Mikrowellenstrahlung aus jeder Richtung des Himmels gemessen: eine Funktion $T(\vec n)$ auf der Sphäre, im Mittel $2{,}725$ K, mit Schwankungen von etwa $10^{-5}$. Wie analysiert man eine Funktion auf der Sphäre?
+
+\schritt{Die Entwicklung}
+$L^{2}(S^{2}) = \bigoplus_{\ell\ge0}\mathcal H_\ell$: Jede quadratintegrable Funktion auf der Sphäre ist eine konvergente Summe von Kugelflächenfunktionen,
+\[ T(\vec n) = \sum_{\ell = 0}^{\infty}\sum_{m = -\ell}^{\ell}a_{\ell m}Y_{\ell m}(\vec n),\qquad a_{\ell m} = \int_{S^{2}}T\,\overline{Y_{\ell m}}\,d\Omega . \]
+Das ist Fourier-Analyse auf $S^{2} = SO(3)/SO(2)$, und die $\ell$ sind die Frequenzen: $\ell$ entspricht Winkelskalen von etwa $180^{\circ}/\ell$.
+
+\schritt{Was die Symmetrie sagt}
+Das Universum ist im Mittel isotrop --- kein Punkt und keine Richtung ist ausgezeichnet. Also hängt die Statistik der $a_{\ell m}$ nur von $\ell$ ab, nicht von $m$ (Schur: die einzige $SO(3)$-invariante Bilinearform auf $\mathcal H_\ell$ ist das Skalarprodukt): $\langle a_{\ell m}\overline{a_{\ell' m'}}\rangle = C_\ell\,\delta_{\ell\ell'}\delta_{mm'}$. Die ganze Information ist das \Begriff{Leistungsspektrum} $C_\ell$, eine Funktion einer Variablen. Es hat ein erstes Maximum bei $\ell\approx220$ ($\approx1^{\circ}$) --- die Schallwellen des frühen Universums --- und seine Lage sagt, dass der Raum flach ist.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Eine Funktion auf der Sphäre in Kugelflächenfunktionen zu entwickeln, ist dasselbe wie eine periodische Funktion in Sinus und Kosinus: Zerlegung nach irreduziblen Darstellungen. Die Gruppe ist $SO(3)$ statt $U(1)$, die Frequenz ist $\ell$ statt $k$, und Isotropie heißt, dass nur $\ell$ zählt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dieses Kapitel ist die Zusammenfassung des Bandes unter einem Begriff}: Die Fourier-Transformation auf einer Gruppe ersetzt eine Funktion $f\colon G\to\mathbb C$ durch die Matrizen $\hat f(\rho) = \sum_gf(g)\rho(g)$, eine je irreduzibler Darstellung. Für $\mathbb Z/n$ ist das die diskrete Fourier-Transformation, für $U(1)$ die Fourier-Reihe, für $S_n$ eine Transformation von Rangdaten, für $SO(3)$ die Kugelflächenfunktionen. Umkehrformel, Plancherel und Faltungssatz folgen aus der Orthogonalität der Matrixelemente (Kapitel 4); für kompakte Gruppen ist das Peter--Weyl. Am Ende steht Schur--Weyl: $S_n$ und $GL(V)$ auf $V^{\otimes n}$, und die Kernspin-Isomere des Methans aus Kapitel 8 bekommen ihre endgültige Erklärung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Fourier-Transformation auf einer endlichen Gruppe}
+
+\begin{definition}
+\boxtitelm{Definition 12.1}
+Sei $G$ endlich, $\rho_1, \dots, \rho_k$ die irreduziblen Darstellungen (unitär, in festen Basen), $d_i$ ihre Dimensionen. Die \Begriff{Fourier-Transformierte} von $f\colon G\to\mathbb C$ ist
+\[ \hat f(\rho_i) = \sum_{g\in G}f(g)\rho_i(g)\in\mathbb C^{d_i\times d_i} . \]
+Die \Begriff{Faltung} ist $(f * h)(g) = \sum_{x\in G}f(x)h(x^{-1}g)$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 12.2 --- Umkehrung, Plancherel, Faltung}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item $f(g) = \dfrac1{|G|}\sum_{i = 1}^{k}d_i\operatorname{Spur}\bigl(\rho_i(g^{-1})\hat f(\rho_i)\bigr)$.
+\item $\sum_{g}|f(g)|^{2} = \dfrac1{|G|}\sum_id_i\|\hat f(\rho_i)\|_F^{2}$ ($\|\cdot\|_F$ Frobenius-Norm).
+\item $\widehat{f * h}(\rho_i) = \hat f(\rho_i)\hat h(\rho_i)$ (Matrixprodukt).
+\item Die Abbildung $f\mapsto(\hat f(\rho_1), \dots, \hat f(\rho_k))$ ist ein Isomorphismus von Algebren $\mathbb C[G]\to\bigoplus_i\mathbb C^{d_i\times d_i}$ (\Person{Wedderburn}); Dimensionen: $|G| = \sum d_i^{2}$.
+\end{enumerate}
+
+\schritt{Beweis}
+(c) $\widehat{f * h}(\rho) = \sum_g\sum_xf(x)h(x^{-1}g)\rho(g) = \sum_x\sum_yf(x)h(y)\rho(xy) = \hat f(\rho)\hat h(\rho)$ mit $y = x^{-1}g$. (a) Einsetzen: $\frac1{|G|}\sum_id_i\operatorname{Spur}\bigl(\rho_i(g^{-1})\sum_hf(h)\rho_i(h)\bigr) = \sum_hf(h)\cdot\frac1{|G|}\sum_id_i\chi_i(g^{-1}h)$. Die innere Summe ist nach Satz 4.5a der Charakter der regulären Darstellung an $g^{-1}h$, also $|G|$ für $h = g$ und $0$ sonst --- und $\frac1{|G|}\cdot|G| = 1$. (b) Aus (a) und den Orthogonalitätsrelationen der Matrixelemente (Satz 4.3, Schritt 2): $\sum_g\overline{\rho_i(g)_{ab}}\rho_j(g)_{cd} = \frac{|G|}{d_i}\delta_{ij}\delta_{ac}\delta_{bd}$. (d) Linear und multiplikativ nach (c); injektiv nach (a); gleiche Dimension nach Satz 4.5a. $\blacksquare$
+
+\schritt{Der Fall $\mathbb Z/n$}
+$\rho_k(m) = e^{2\pi ikm/n}$, alle eindimensional: $\hat f(k) = \sum_mf(m)e^{2\pi ikm/n}$, Umkehrung $f(m) = \frac1n\sum_k\hat f(k)e^{-2\pi ikm/n}$, Plancherel $\sum|f|^{2} = \frac1n\sum|\hat f|^{2}$, Faltung $\to$ Produkt. Die diskrete Fourier-Transformation, mit der schnellen Fourier-Transformation (Cooley--Tukey 1965, Gauß 1805) in $O(n\log n)$ Schritten --- das Rückgrat der Signalverarbeitung, der Kernspintomographie, der Kompression.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Gruppenalgebra ist ein Produkt von Matrixalgebren; Fourier ist der Isomorphismus. Faltung wird Matrixprodukt, und für abelsche Gruppen, wo alle Matrizen $1\times1$ sind, wird Faltung zum gewöhnlichen Produkt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für nichtabelsche Gruppen ist $\hat f(\rho)$ eine Matrix, und das Produkt in (c) ist nicht kommutativ} --- genau wie die Faltung auf $G$. Die Analyse einer Wahrscheinlichkeitsverteilung $P$ auf $S_n$ (ein Mischvorgang, eine Rangordnung): $\hat P(\rho_i)$ für $\rho_i = \mathbf 1$ ist $\sum P = 1$; für die Standarddarstellung ist $\hat P(\mathrm{Std})$ eine $(n - 1)\times(n - 1)$-Matrix, die sagt, welche Positionen welche Elemente bevorzugen (\enquote{Effekte erster Ordnung}); für $S^{(n-2,2)}$ und $S^{(n-2,1,1)}$ stehen Paar-Effekte. \Person{Diaconis} hat so 1989 Wahldaten mit Präferenzordnungen analysiert und $k$-facher Mischung $P^{*k}$ --- deren Transformierte $\hat P(\rho)^{k}$ ist, Matrixpotenz, und die Konvergenz gegen Gleichverteilung ist das Abklingen der Eigenwerte von $\hat P(\rho)$ für $\rho\neq\mathbf 1$. Kapitel 4 hat die sieben Riffelmischungen genannt; hier ist die Rechnung, die sie liefert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Peter--Weyl}
+
+\begin{merksatz}
+\boxtitel{Satz 12.3 --- Peter--Weyl}
+Sei $G$ kompakt. Dann:
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item Die Matrixelemente $\sqrt{d_\rho}\,\rho(g)_{ab}$ aller irreduziblen unitären Darstellungen $\rho$ (bis auf Äquivalenz, $a, b = 1, \dots, d_\rho$) bilden eine Orthonormalbasis von $L^{2}(G)$ (Haar-Maß).
+\item Die irreduziblen Charaktere bilden eine Orthonormalbasis des Raums der Klassenfunktionen in $L^{2}(G)$.
+\item Jede irreduzible Darstellung ist endlichdimensional, und die reguläre Darstellung auf $L^{2}(G)$ zerfällt als $\bigoplus_\rho d_\rho\cdot\rho$ (Hilbertraum-Summe).
+\item Für $U(1)$: Fourier-Reihen. Für $SO(3)$ auf $S^{2} = SO(3)/SO(2)$: $L^{2}(S^{2}) = \bigoplus_\ell\mathcal H_\ell$, die $Y_{\ell m}$ sind eine Orthonormalbasis.
+\end{enumerate}
+
+\schritt{Beweis, was beweisbar ist}
+Orthogonalität: Satz 4.3 Schritt 2 mit $\int$ statt $\sum$ (Satz 10.2). Vollständigkeit ist die Substanz: Man zeigt, dass der Faltungsoperator $f\mapsto\varphi * f$ für stetiges $\varphi$ kompakt und (für $\varphi(g^{-1}) = \overline{\varphi(g)}$) selbstadjungiert ist, nach dem Spektralsatz also Eigenräume endlicher Dimension zu Eigenwerten $\neq0$ hat; diese sind $G$-invariant, also endlichdimensionale Darstellungen, und die Summe aller Eigenräume aller $\varphi$ ist dicht. (Auslassung für die Analysis; Band 17 hat kompakte Operatoren behandelt.) Für (d): $L^{2}(S^{2})$ sind die Funktionen auf $G$, die rechts unter $SO(2)$ invariant sind; in $\rho = V_\ell$ ist das der eindimensionale Raum mit $m = 0$ auf der rechten Seite, also kommt jedes $V_\ell$ genau einmal vor --- Frobenius-Reziprozität für $\operatorname{Ind}^{SO(3)}_{SO(2)}\mathbf 1$: $\langle\operatorname{Ind}\mathbf 1, V_\ell\rangle = \langle\mathbf 1, \operatorname{Res}V_\ell\rangle = 1$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Matrixelemente der irreduziblen Darstellungen sind die Sinus und Kosinus jeder kompakten Gruppe. Peter--Weyl sagt: Sie reichen, um jede Funktion darzustellen. Für $U(1)$ ist das Fourier, für $SO(3)$ sind es die Kugelflächenfunktionen, und für endliche Gruppen ist es Satz 4.5.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Schur--Weyl-Dualität}
+
+\begin{merksatz}
+\boxtitel{Satz 12.4 --- Schur--Weyl}
+Sei $V = \mathbb C^{d}$. Auf $V^{\otimes n}$ wirken $GL(V)$ (diagonal, $g(v_1\otimes\dots\otimes v_n) = gv_1\otimes\dots\otimes gv_n$) und $S_n$ (Permutation der Faktoren), und die beiden Wirkungen vertauschen. Dann
+\[ V^{\otimes n} = \bigoplus_{\lambda}S^{\lambda}\otimes W_\lambda(V), \]
+Summe über die Partitionen $\lambda$ von $n$ mit höchstens $d$ Zeilen, wobei $S^{\lambda}$ der Specht-Modul (Kapitel 8) und $W_\lambda(V)$ eine irreduzible Darstellung von $GL(V)$ ist (der \Begriff{Weyl-Modul}, auch \Begriff{Schur-Funktor} $\mathbb S_\lambda V$). Jede irreduzible Darstellung von $GL(V)$, die in Tensorpotenzen vorkommt, ist genau ein $W_\lambda$, und die Zuordnung $\lambda\leftrightarrow W_\lambda$ ist bijektiv. Die Algebren, die $S_n$ und $GL(V)$ auf $V^{\otimes n}$ erzeugen, sind gegenseitig ihre Kommutanten.
+
+\schritt{Beweis, Skizze}
+Der Doppelkommutantensatz: Für eine halbeinfache Algebra $A$ (hier das Bild von $\mathbb C[S_n]$, halbeinfach nach Maschke) auf einem endlichdimensionalen Raum ist der Kommutant $B = A'$ halbeinfach, $A = B'$, und der Raum zerfällt als $\bigoplus_\lambda S_\lambda\otimes W_\lambda$ mit $S_\lambda$ den einfachen $A$-Moduln und $W_\lambda$ den einfachen $B$-Moduln (Auslassung). Die Substanz ist, dass der Kommutant von $S_n$ genau die lineare Hülle der Operatoren $g^{\otimes n}$ ist --- die symmetrischen Tensoren in $\operatorname{End}(V)^{\otimes n}$, und diese werden von Potenzen $g\otimes\dots\otimes g$ aufgespannt (ein Polarisationsargument). $\blacksquare$
+
+\schritt{Der Fall $d = 2$: Spins}
+$V = \mathbb C^{2} = V_{1/2}$, $GL_2\supset SU(2)$. Partitionen mit höchstens zwei Zeilen: $\lambda = (n - k, k)$, $k\le n/2$, und $W_\lambda$ eingeschränkt auf $SU(2)$ ist $V_j$ mit $j = \frac{n - 2k}2 = \frac{\lambda_1 - \lambda_2}2$. Also
+\[ (\mathbb C^{2})^{\otimes n} = \bigoplus_{k = 0}^{\lfloor n/2\rfloor}S^{(n-k,k)}\otimes V_{(n-2k)/2} . \]
+$n = 2$: $S^{(2)}\otimes V_1\oplus S^{(1,1)}\otimes V_0$ --- Triplett symmetrisch, Singulett antisymmetrisch (Satz 11.4). $n = 3$: $S^{(3)}\otimes V_{3/2}\oplus S^{(2,1)}\otimes V_{1/2}$, Dimensionen $1\cdot4 + 2\cdot2 = 8$. \checkmark\ $n = 4$: $S^{(4)}\otimes V_2\oplus S^{(3,1)}\otimes V_1\oplus S^{(2,2)}\otimes V_0$, Dimensionen $1\cdot5 + 3\cdot3 + 2\cdot1 = 16$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die vier Protonen des Methans (Kapitel 8): $5A_1 + 3T_2 + E$ war die Zerlegung unter $S_4$. Schur--Weyl sagt, warum die Vielfachheiten $5, 3, 1$ sind: Sie sind die Dimensionen $2j + 1$ der Spin-$j$-Darstellungen mit $j = 2, 1, 0$, und die Young-Diagramme $(4), (3, 1), (2, 2)$ sind die Gesamtspins. Die Permutationssymmetrie bestimmt den Spin, der Spin die Permutationssymmetrie.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der Grund für Youngs Diagramme in der Physik}: Ein Zustand von $n$ Spin-$\frac12$-Teilchen mit Gesamtspin $j$ hat unter Vertauschung die Symmetrie des Diagramms mit Zeilen $\frac n2 + j$ und $\frac n2 - j$ --- und die Pauli-Regel für die Ortswellenfunktion ist dann das transponierte Diagramm. Für $d = 3$ ($SU(3)$: Quarks) sind Diagramme mit bis zu drei Zeilen zugelassen, und $\mathbf 3\otimes\mathbf 3\otimes\mathbf 3 = S^{(3)}\otimes\mathbf{10}\oplus S^{(2,1)}\otimes\mathbf 8\oplus S^{(1,1,1)}\otimes\mathbf 1$ --- das Dekuplett (symmetrisch), zwei Oktetts, ein Singulett: die Hadronen (Kapitel 14). Schur hat in seiner Dissertation 1901 die Darstellungen von $GL_n$ über die von $S_n$ gefunden; Weyl hat 1925 die Richtung umgekehrt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Wo Fourier endet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Nichtkompakt} & Auf $\mathbb R$ sind die Charaktere $e^{ikx}$ nicht quadratintegrabel, die Zerlegung von $L^{2}(\mathbb R)$ ist ein Integral, kein diskretes Spektrum; für die Lorentz- oder Poincaré-Gruppe sind die irreduziblen unitären Darstellungen unendlichdimensional (Kapitel 10, Bruchfall), und Peter--Weyl gilt nicht. Die Fourier-Analyse wird zur Theorie der Plancherel-Maße (Harish-Chandra).\\
+\textbf{Punktweises Produkt} & Auf abelschen Gruppen ist $\widehat{f\cdot h} = \hat f * \hat h$. Auf nichtabelschen: Das Produkt $f\cdot h$ hat eine Transformierte, aber sie ist durch Clebsch--Gordan-Koeffizienten gegeben, nicht durch Faltung der Matrizen. Die Symmetrie zwischen $G$ und $\hat G$ (Pontrjagin-Dualität) geht verloren; $\hat G$ ist keine Gruppe mehr.\\
+\textbf{Schnelle Transformation} & Die FFT braucht $O(n\log n)$ für $\mathbb Z/n$. Für $S_n$ ist die naive Transformation $O((n!)^{2})$, und die besten Algorithmen (Clausen 1989, Maslen--Rockmore 1997) erreichen $O(n^{3}\,n!)$ --- polynomial in $|G|$, aber der Exponent der \enquote{Schnelligkeit} ist nicht $\log$. Ob $O(|G|\log^{c}|G|)$ für alle Gruppen geht, ist offen.\\
+\textbf{Quantencomputer} & Shors Algorithmus ist die Fourier-Transformation auf $\mathbb Z/N$ in $O(\log^{2}N)$ Gattern. Für nichtabelsche Gruppen ist die Quanten-Fourier-Transformation für $S_n$ effizient (Beals 1997) --- aber das Problem, das sie lösen sollte (Graphisomorphie als verstecktes Untergruppenproblem in $S_n$), bleibt offen: Die Transformation allein genügt nicht.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Peter--Weyl braucht Kompaktheit. Der Faltungssatz überlebt den Übergang zu nichtabelschen Gruppen, der Produktsatz nicht, die Schnelligkeit nur zum Teil. Und ein Quantencomputer kann die Transformation, aber nicht automatisch das, was man mit ihr wollte.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.1 --- Fourier auf $\mathbb Z/4$}
+Transformieren Sie $f = (1, 2, 0, 1)$ (Werte an $0, 1, 2, 3$) und prüfen Sie Plancherel und den Faltungssatz für $f * f$.
+
+\loesung
+\schritt{Schritt 1 --- Transformation}
+$\hat f(k) = \sum_mf(m)i^{km}$. $k = 0\colon1 + 2 + 0 + 1 = 4$. $k = 1\colon1 + 2i + 0 - i = 1 + i$. $k = 2\colon1 - 2 + 0 - 1 = -2$. $k = 3\colon1 - 2i + 0 + i = 1 - i$. $\hat f = (4, 1 + i, -2, 1 - i)$.
+
+\schritt{Schritt 2 --- Plancherel}
+$\sum|f|^{2} = 1 + 4 + 0 + 1 = 6$. $\frac14\sum|\hat f|^{2} = \frac14(16 + 2 + 4 + 2) = \frac{24}4 = 6$. \checkmark
+
+\schritt{Schritt 3 --- Faltung}
+$(f * f)(g) = \sum_xf(x)f(g - x)$: $g = 0\colon f(0)f(0) + f(1)f(3) + f(2)f(2) + f(3)f(1) = 1 + 2 + 0 + 2 = 5$. $g = 1\colon f(0)f(1) + f(1)f(0) + f(2)f(3) + f(3)f(2) = 2 + 2 + 0 + 0 = 4$. $g = 2\colon f(0)f(2) + f(1)f(1) + f(2)f(0) + f(3)f(3) = 0 + 4 + 0 + 1 = 5$. $g = 3\colon f(0)f(3) + f(1)f(2) + f(2)f(1) + f(3)f(0) = 1 + 0 + 0 + 1 = 2$. $f * f = (5, 4, 5, 2)$.
+Transformierte: $k = 0\colon16$; $k = 1\colon5 + 4i - 5 - 2i = 2i$; $k = 2\colon5 - 4 + 5 - 2 = 4$; $k = 3\colon5 - 4i - 5 + 2i = -2i$. Und $\hat f^{2} = (16, (1 + i)^{2}, 4, (1 - i)^{2}) = (16, 2i, 4, -2i)$. \checkmark
+
+\schritt{Schritt 4 --- Umkehrung}
+$f(1) = \frac14\sum_k\hat f(k)i^{-k} = \frac14\bigl(4 + (1 + i)(-i) + (-2)(-1) + (1 - i)(i)\bigr) = \frac14(4 - i + 1 + 2 + i + 1) = \frac84 = 2$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Vier Zahlen, vier Zeilen} --- aber dieselbe Rechnung mit $n = 2^{20}$ Punkten läuft in Millisekunden, weil die Transformation auf $\mathbb Z/2^{k}$ in die auf $\mathbb Z/2^{k-1}$ zerfällt (Cooley--Tukey ist Satz 7.5 für die Untergruppe $2\mathbb Z/2^{k}$). Die Kernspintomographie misst $\hat f$ --- die Fourier-Transformierte der Protonendichte, Zeile für Zeile im \enquote{$k$-Raum} --- und rechnet mit der Umkehrformel das Bild aus. Jedes MRT-Bild ist Satz 12.2a in zwei oder drei Dimensionen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.2 --- Rangdaten auf $S_3$}
+Drei Kandidaten $a, b, c$; $60$ Wähler geben Rangordnungen ab: $abc\colon20$, $acb\colon10$, $bac\colon8$, $bca\colon12$, $cab\colon4$, $cba\colon6$. Berechnen Sie $\hat P(\mathrm{Std})$ und deuten Sie.
+
+\loesung
+\schritt{Schritt 1 --- Als Funktion auf $S_3$}
+Eine Rangordnung ist eine Permutation $\sigma$ (Kandidat $\mapsto$ Platz). $P(\sigma)$ = Anteil. Die Standarddarstellung von $S_3$ auf $\{x\in\mathbb C^{3}\colon\sum x = 0\}$; einfacher: die Permutationsdarstellung $M$ (Dimension $3$) $= \mathbf 1\oplus\mathrm{Std}$, und $\hat P(M)_{ij} = \sum_\sigma P(\sigma)\,[\sigma(i) = j]$ = Anteil der Wähler, die Kandidat $i$ auf Platz $j$ setzen.
+
+\schritt{Schritt 2 --- Die Matrix}
+Platz $1$: $a$ bei $abc, acb$: $30/60$; $b$ bei $bac, bca$: $20/60$; $c$: $10/60$. Platz $2$: $a$ bei $bac, cab$: $12/60$; $b$ bei $abc, cba$: $26/60$; $c$ bei $acb, bca$: $22/60$. Platz $3$: $a$: $18/60$; $b$: $14/60$; $c$: $28/60$.
+\[ \hat P(M) = \frac1{60}\begin{pmatrix}30 & 12 & 18\\ 20 & 26 & 14\\ 10 & 22 & 28\end{pmatrix}\quad(\text{Zeilen } a, b, c;\ \text{Spalten Platz } 1, 2, 3). \]
+Zeilen- und Spaltensummen $1$ (doppelt stochastisch): Der $\mathbf 1$-Anteil ist $\frac13J$ (alle Einträge $\frac13 = 20/60$); $\hat P(\mathrm{Std})$ ist der Rest, $\hat P(M) - \frac13J$:
+\[ \frac1{60}\begin{pmatrix}10 & -8 & -2\\ 0 & 6 & -6\\ -10 & 2 & 8\end{pmatrix}. \]
+
+\schritt{Schritt 3 --- Deutung}
+$a$ wird überdurchschnittlich oft auf Platz $1$ gesetzt ($+10/60$), $c$ unterdurchschnittlich ($-10/60$); $c$ landet überdurchschnittlich auf Platz $3$. Effekte erster Ordnung: $a$ vorn, $c$ hinten, $b$ Mitte. Was in $\hat P(\mathrm{Std})$ \emph{nicht} steht: Paar-Effekte (\enquote{wer $a$ vorn setzt, setzt $b$ hinten}) --- die stünden in $\hat P(\mathrm{sgn})$, der dritten Komponente: $\hat P(\mathrm{sgn}) = \sum P(\sigma)\mathrm{sgn}(\sigma) = \frac1{60}(20 - 10 - 8 + 12 + 4 - 6) = \frac{12}{60}$: gerade Permutationen (zyklische Verschiebungen von $abc$) sind um $20\,\%$ häufiger als ungerade.
+
+\schritt{Schritt 4 --- Plancherel}
+$\sum_\sigma P(\sigma)^{2} = \frac1{3600}(400 + 100 + 64 + 144 + 16 + 36) = \frac{760}{3600}$. Rechts: $\frac16\bigl(1\cdot1^{2} + 1\cdot(\frac{12}{60})^{2} + 2\|\hat P(\mathrm{Std})\|_F^{2}\bigr)$; $\|\hat P(\mathrm{Std})\|_F^{2} = \frac1{3600}(100 + 64 + 4 + 0 + 36 + 36 + 100 + 4 + 64) = \frac{408}{3600}$; also $\frac16\bigl(1 + \frac{144}{3600} + \frac{816}{3600}\bigr) = \frac16\cdot\frac{4560}{3600} = \frac{760}{3600}$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Zerlegung ist eine Varianzanalyse}: $\mathbf 1$ ist der Mittelwert, $\mathrm{Std}$ sind die Haupteffekte (Kandidat $\times$ Platz), $\mathrm{sgn}$ --- für $n = 3$ --- der Rest; für $S_n$ kommen $S^{(n-2,2)}$ und $S^{(n-2,1,1)}$ als Paar-Effekte hinzu usw. \Person{Diaconis}' \enquote{Group Representations in Probability and Statistics} (1988) hat daraus eine Statistik für Rangdaten gemacht, die klassische Verfahren (Kendalls $\tau$, Spearman) als Projektionen auf einzelne Darstellungen erkennt. Die Daten hier sind erfunden; Diaconis' Beispiel waren $5738$ Stimmzettel der American Psychological Association 1980.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 12.3 --- Ammoniak-Protonen}
+Zerlegen Sie den Spinraum der drei Protonen des $\mathrm{NH_3}$ unter $S_3$ und unter $SU(2)$, und prüfen Sie Schur--Weyl.
+
+\loesung
+\schritt{Schritt 1 --- $S_3$}
+Charakter $2^{c}$ auf $e$, $(12)$, $(123)$: $(8, 4, 2)$; Klassengrößen $1, 3, 2$. $m_{A_1} = \frac16(8 + 12 + 4) = 4$; $m_{A_2} = \frac16(8 - 12 + 4) = 0$; $m_E = \frac16(16 + 0 - 4) = 2$. $\Gamma_{\mathrm{Spin}} = 4A_1 + 2E$, Dimension $4 + 4 = 8$. \checkmark
+
+\schritt{Schritt 2 --- $SU(2)$}
+$V_{1/2}^{\otimes3} = V_{1/2}\otimes(V_0\oplus V_1) = V_{1/2}\oplus(V_{1/2}\oplus V_{3/2}) = V_{3/2}\oplus2V_{1/2}$. Dimension $4 + 4 = 8$. \checkmark
+
+\schritt{Schritt 3 --- Schur--Weyl}
+$S^{(3)}\otimes V_{3/2}\oplus S^{(2,1)}\otimes V_{1/2}$: Die vier $A_1$-Zustände sind das Spin-$\frac32$-Quartett (vollsymmetrisch, alle Spins parallel oder symmetrische Kombinationen); die beiden $E$-Kopien sind zwei Spin-$\frac12$-Dubletts, und $E$ wirkt auf dem Paar. Also $4A_1 = \mathbf 1\otimes V_{3/2}$ und $2E = E\otimes V_{1/2}$, gelesen als $S_3\times SU(2)$-Darstellung. \checkmark
+
+\schritt{Schritt 4 --- Physik}
+Ammoniak hat zwei Kernspin-Sorten: ortho ($I = \frac32$, Gewicht $4$, Symmetrie $A_1$) und para ($I = \frac12$, Gewicht $2\cdot2 = 4$, Symmetrie $E$). Pauli: Gesamtwellenfunktion antisymmetrisch unter Protonenvertauschung --- in $C_{3v}$ gelesen muss $\Gamma_{\mathrm{Spin}}\otimes\Gamma_{\mathrm{Rot}}$ das $A_2$ enthalten, also $A_1$-Spin mit $A_2$-Rotation, $E$-Spin mit $E$-Rotation. Beide Sorten kommen im Ammoniak-Maser vor (Townes 1954); die Inversionslinie bei $23{,}87$ GHz, mit der Ammoniak im interstellaren Raum nachgewiesen wird, gehört zum Rotationszustand $(J, K) = (1, 1)$ --- para.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Schur--Weyl als Wörterbuch}: Links $S_n$, rechts $SU(2)$, und jede Zeile ein Young-Diagramm mit zwei Zeilen. Für Kerne mit höherem Spin ($d = 2I + 1 > 2$) kommen Diagramme mit mehr Zeilen hinzu; für Deuterium ($I = 1$, $d = 3$) sind es bis zu drei --- und die Kernspin-Statistik von $\mathrm{ND_3}$ oder $\mathrm{CD_4}$ liest man an denselben Diagrammen ab, mit $SU(3)$ statt $SU(2)$ rechts. Kapitel 14 benutzt dieselbe Struktur für Quarks.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von Fourier zu Peter und Weyl}
+\Person{Fourier} reichte 1807 seine Abhandlung über die Wärmeleitung ein, mit der Behauptung, jede Funktion sei eine Reihe von Sinus und Kosinus; Lagrange zweifelte, und die Frage, für welche Funktionen das gilt, hat die Analysis des 19.\ Jahrhunderts geprägt (Dirichlet 1829, Riemann 1854, Cantor 1870 --- die Mengenlehre entstand an den Ausnahmemengen von Fourier-Reihen).
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Dass Fourier-Reihen Darstellungstheorie von $U(1)$ sind}, konnte man erst nach Frobenius sagen; \Person{Peter} und \Person{Weyl} bewiesen 1927 den Satz, der Fourier auf kompakte Gruppen überträgt --- Fritz Peter war Weyls Doktorand und wurde Schullehrer; es blieb seine einzige Arbeit. \Person{Pontrjagin} (1934) und \Person{van Kampen} (1935) gaben die Dualität für lokalkompakte abelsche Gruppen, \Person{Gelfand} und \Person{Raikov} 1943 die allgemeine Theorie unitärer Darstellungen, \Person{Harish-Chandra} ab 1950 die Plancherel-Formel für halbeinfache Lie-Gruppen. \textbf{Schur--Weyl} steht in Schurs Dissertation von 1901 (die Darstellungen von $GL_n$ über $S_n$) und in Weyls Buch von 1939, \enquote{The Classical Groups}, das die Dualität als Prinzip formuliert. Und die schnelle Fourier-Transformation: Gauß 1805 (unveröffentlicht, zur Bahnberechnung von Asteroiden), Cooley und Tukey 1965 --- Tukey wollte Kernwaffentests aus seismischen Daten erkennen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Fourier auf Gruppen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Sphärische CNNs} & Faltungsnetze auf $S^{2}$ und $SO(3)$ (Cohen--Geiger--Köhler--Welling 2018) rechnen Faltungen über Satz 12.2c im Fourier-Raum der $Y_{\ell m}$ und $D^{\ell}_{mm'}$ --- für Molekülerkennung, Klimadaten, Omnidirektionalbilder.\\
+\textbf{Planck 2018} & Das Leistungsspektrum $C_\ell$ bis $\ell\approx2500$, mit sieben akustischen Maxima; aus ihm die sechs Parameter des kosmologischen Standardmodells. Das Alter des Universums ($13{,}8$ Milliarden Jahre) ist eine Fourier-Analyse auf $SO(3)$.\\
+\textbf{Verstecktes Untergruppenproblem} & Shor (abelsch) ist gelöst; für $S_n$ (Graphisomorphie) und Diedergruppen (Gitterprobleme, also die Sicherheit heutiger Post-Quanten-Kryptographie) ist offen, ob ein Quantenalgorithmus existiert. Hallgren--Moore--Rötteler--Russell--Sen 2006: Für $S_n$ reichen Messungen einzelner Fourier-Koeffizienten nicht, man braucht hochgradig verschränkte Messungen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 12.1} & $\hat f(\rho) = \sum f(g)\rho(g)$; Faltung\\
+\textbf{Satz 12.2} & Umkehrung, Plancherel, Faltungssatz, Wedderburn\\
+\textbf{Satz 12.3} & Peter--Weyl; $L^{2}(S^{2}) = \bigoplus\mathcal H_\ell$\\
+\textbf{Satz 12.4} & Schur--Weyl: $(\mathbb C^{2})^{\otimes n} = \bigoplus S^{(n-k,k)}\otimes V_{(n-2k)/2}$\\
+\textbf{Der Bruchfall} & nichtkompakt; kein Produktsatz; FFT auf $S_n$; HSP offen\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil IV ist zu Ende. Teil V wendet alles an: auf die Elektronen des Benzols (Kapitel 13), auf Kristalle, das Eisen im Hämoglobin und die Quarks (Kapitel 14). Es kommt kein neuer Satz mehr --- nur neue Gruppen.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,296 @@
+\chapter{Glatt und nicht glatt}
+
+\section{Wo zwei Lösungen eine werden}
+
+\begin{merksatz}
+\boxtitel{Die Jacobi-Matrix des Leitfalls}
+Für das Modell mit Messung im Gewebe (Aufgabe 1.3) ist die Abbildung Parameter $\to$ Messgrößen
+\[ \varphi(k_{10}, k_{12}, k_{21}) = \bigl(k_{12},\ k_{10} + k_{12} + k_{21},\ k_{10}k_{21}\bigr), \]
+\[ J_\varphi = \begin{pmatrix}0 & 1 & 0\\ 1 & 1 & 1\\ k_{21} & 0 & k_{10}\end{pmatrix}, \qquad \det J_\varphi = k_{21} - k_{10} . \]
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{1.6cm}P{3.6cm}@{}}
+\toprule
+\textbf{Parametersatz} & $\det J_\varphi$ & \textbf{Bedeutung}\\
+\midrule
+$(0{,}4;\ 0{,}2;\ 0{,}2)$ & $-0{,}2$ & lokal identifizierbar: eine der zwei Lösungen\\
+$(0{,}2;\ 0{,}2;\ 0{,}4)$ & $+0{,}2$ & die andere\\
+$(0{,}3;\ 0{,}2;\ 0{,}3)$ & $0$ & die beiden Lösungen fallen zusammen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wo die Determinante verschwindet, ist die Abbildung nicht mehr lokal umkehrbar: Dort berühren sich die zwei Zweige der Lösung, und die Faser über dem Bildpunkt ist ein Doppelpunkt --- ein Punkt mit Vielfachheit zwei, die quadratische Gleichung $k_{21}^{2} - \tfrac35k_{21} + \tfrac{9}{100} = (k_{21} - \tfrac{3}{10})^{2}$ aus Kapitel 5 mit Diskriminante null.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Jacobi-Matrix ist das Werkzeug, mit dem die Praxis Identifizierbarkeit prüft} --- lokal, numerisch, in Sekunden: Rang voll heißt lokal identifizierbar. Dieses Kapitel sagt, was sie geometrisch misst: den Tangentialraum. Eine Varietät ist in einem Punkt glatt, wenn ihr Tangentialraum so groß ist wie sie selbst, und singulär, wenn er größer ist --- Spitze, Kreuzung, Berührung. Die Jacobi-Matrix der Gleichungen entscheidet das, und die Jacobi-Matrix der Abbildung entscheidet, wo die Fasern ihre Gestalt wechseln. Der Punkt $k_{10} = k_{21}$ oben ist der erste singuläre Punkt des Bandes, und er liegt genau dort, wo das Modell am wenigsten sagt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Tangentialraum}
+
+\begin{definition}
+\boxtitelm{Definition 8.1 --- Tangentialraum}
+Sei $V = V(f_1, \ldots, f_s)\subseteq\mathbb C^{n}$ mit $I(V) = \langle f_1, \ldots, f_s\rangle$ und $p\in V$. Der \Begriff{Tangentialraum} von $V$ in $p$ ist
+\[ T_pV = \{\,v\in\mathbb C^{n} : \nabla f_i(p)\cdot v = 0\ \text{für alle } i\,\} = \ker J(p), \]
+der Kern der Jacobi-Matrix $J(p) = \bigl(\partial f_i/\partial x_j(p)\bigr)$. Er hängt nur von $I(V)$ ab, nicht von den gewählten Erzeugern (jede Kombination $\sum h_if_i$ hat in $p$ den Gradienten $\sum h_i(p)\nabla f_i(p)$, eine Kombination der $\nabla f_i(p)$).
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 8.2 --- das Jacobi-Kriterium}
+Sei $V$ irreduzibel von Dimension $r$ und $p\in V$. Dann ist $\dim T_pV\ge r$, und
+\[ \dim T_pV = r \iff \operatorname{rang}J(p) = n - r . \]
+Punkte mit $\dim T_pV = r$ heißen \Begriff{glatt} (regulär), die anderen \Begriff{singulär}. Die singulären Punkte bilden eine echte Teilvarietät $\mathrm{Sing}(V)\subsetneq V$ --- fast jeder Punkt ist glatt.
+
+\schritt{Beweis der Ungleichung, Idee}
+Man wähle $r$ Koordinaten $x_{i_1}, \ldots, x_{i_r}$, die auf $V$ algebraisch unabhängig sind (Satz 7.4). Die übrigen $n - r$ Koordinaten sind auf $V$ algebraisch über ihnen; in einer Umgebung eines allgemeinen Punktes sind sie sogar Funktionen von ihnen (Satz über implizite Funktionen, Band 13), und $V$ ist dort eine $r$-dimensionale Mannigfaltigkeit mit $r$-dimensionalem Tangentialraum. Dass $\dim T_pV$ halbstetig ist --- in speziellen Punkten springt es nur nach oben, weil der Rang einer Matrix nur nach unten springt --- und dass die Punkte mit höherem $\dim T_p$ eine Teilvarietät bilden (Nullstellen aller $(n - r)$-Minoren von $J$), gibt den Rest. Die Gleichheit für allgemeines $p$ ist Auslassung 9 (\zit{10}, Kap.~I.5; \zit{22}). $\blacksquare$
+
+\schritt{Ebene Kurven}
+$V = V(f)\subseteq\mathbb C^{2}$, $r = 1$: $p$ ist singulär genau dann, wenn $f(p) = f_x(p) = f_y(p) = 0$. Dann hat die Kurve in $p$ keine eindeutige Tangente.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{2.4cm}P{3.6cm}@{}}
+\toprule
+\textbf{Kurve} & $\mathrm{Sing}$ & \textbf{Art}\\
+\midrule
+$y^{2} = x^{3} - 2x$ & leer & glatt: $\nabla = (-3x^{2} + 2, 2y) \ne 0$ auf der Kurve\\
+$y^{2} = x^{3}$ & $(0,0)$ & Spitze (Kuspe): eine Tangente, doppelt\\
+$y^{2} = x^{2}(x + 1)$ & $(0,0)$ & Knoten: zwei Tangenten $y = \pm x$\\
+$x^{2} = y^{2}z$ (Fläche) & $z$-Achse & Whitney-Schirm: singulär entlang einer Geraden\\
+Leitfall-Kurve $C$ & leer & glatt: Hyperbel\\
+Faser über $s_3 = 0$ & $(0, s_1, 0)$ & Knoten: zwei Geraden kreuzen sich\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Probe: der Knoten}
+$f = y^{2} - x^{3} - x^{2}$, $\nabla f = (-3x^{2} - 2x,\ 2y)$. Null genau für $y = 0$ und $x\in\{0, -\tfrac23\}$; auf der Kurve liegt nur $(0, 0)$ (denn $f(-\tfrac23, 0) = \tfrac{8}{27} - \tfrac49\ne0$). Dort ist $T_pV = \mathbb C^{2}$: zweidimensional für eine Kurve, singulär. \checkmark\ Die beiden Tangenten findet man aus dem Term niedrigsten Grades, $y^{2} - x^{2} = (y - x)(y + x)$: der \Begriff{Tangentialkegel}.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Tangentialraum ist die Linearisierung aus Band 28, auf Gleichungen statt auf Flüsse angewandt}: Man ersetzt $f_i$ durch sein Taylor-Polynom ersten Grades in $p$ und erhält lineare Gleichungen; ihr Lösungsraum ist $T_pV$. Wo die Linearisierung die Varietät gut beschreibt --- glatt ---, ist sie lokal ein gekrümmter Unterraum der richtigen Dimension. Wo nicht --- singulär ---, verrät der erste Term nichts, und der Tangentialkegel (die Terme niedrigsten Grades) tritt an seine Stelle. Die Spitze und der Knoten haben denselben Tangentialraum und verschiedene Kegel: $y^{2}$ (eine Doppelgerade) gegen $y^{2} - x^{2}$ (zwei Geraden).}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Abbildungen und ihre Fasern}
+
+\begin{merksatz}
+\boxtitel{Satz 8.3 --- der Rang der Jacobi-Matrix einer Abbildung}
+Sei $\varphi = (\varphi_1, \ldots, \varphi_m)\colon\mathbb C^{n}\to\mathbb C^{m}$ polynomial, $J_\varphi$ ihre $m\times n$-Jacobi-Matrix und $\rho$ ihr Rang an einem allgemeinen Punkt (der größte vorkommende Rang). Dann gilt:
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item $\dim\overline{\varphi(\mathbb C^{n})} = \rho$: Der generische Rang ist die Dimension des Bildes.
+\item Die allgemeine Faser hat Dimension $n - \rho$.
+\item Ist $\rho = n$ (voller Spaltenrang), so sind die allgemeinen Fasern endlich: lokale Identifizierbarkeit. Ist $\operatorname{rang}J_\varphi(p) = n$ in einem speziellen Punkt $p$, so ist $p$ in seiner Faser isoliert.
+\end{enumerate}
+
+\schritt{Beweisidee}
+(a) Die Jacobi-Matrix von $\varphi$ ist die Linearisierung; am allgemeinen Punkt ist $\varphi$ nach dem Satz vom konstanten Rang (Band 13) lokal eine Projektion auf einen $\rho$-dimensionalen Raum, also hat das Bild lokal Dimension $\rho$, und die Dimension einer irreduziblen Varietät ist überall gleich. (b) ist Satz 7.5 mit (a). (c) Bei vollem Spaltenrang in $p$ ist $\varphi$ in einer Umgebung von $p$ injektiv (Satz über inverse Funktionen auf einem $n$-dimensionalen Teilraum des Bildes), also trifft die Faser die Umgebung nur in $p$. $\blacksquare$
+
+\schritt{Der Leitfall in allen Fassungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{1.0cm}P{1.0cm}P{3.0cm}@{}}
+\toprule
+\textbf{Modell} & $n$ & $\rho$ & \textbf{Faser}\\
+\midrule
+vier Parameter, Blut & $4$ & $3$ & Kurve ($4 - 3 = 1$)\\
+$k_{20} = 0$, Blut & $3$ & $3$ & isoliert; $\det J = k_{10} - k_{21}$ hier $\ne 0$ generisch, aber: global ein Punkt (Aufg.~1.2)\\
+$k_{20} = 0$, Gewebe & $3$ & $3$ & isoliert; zwei Punkte, verschmolzen wo $k_{10} = k_{21}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Für das Vier-Parameter-Modell ist $J_\varphi$ die $3\times4$-Matrix mit den Zeilen $\nabla s_1 = (1, 1, 0, 0)$, $\nabla s_2 = (1, 1, 1, 1)$, $\nabla s_3 = (k_{21} + k_{20},\ k_{20},\ k_{10},\ k_{10} + k_{12})$. Sie hat Rang $3$, außer wenn $\nabla s_3$ die Form $(a, a, b, b)$ hat, also $k_{20} = k_{21} + k_{20}$ und $k_{10} = k_{10} + k_{12}$: $k_{21} = k_{12} = 0$ --- die beiden Kammern entkoppelt, der Fall aus dem Bruchfall von Kapitel 6.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Jacobi-Matrix sagt \enquote{lokal}: Vollen Rang heißt, in der Nähe gibt es keinen anderen Parametersatz mit denselben Daten. Sie sagt nichts über ferne Parametersätze --- die zweite Lösung in Aufgabe 1.3 ist weit weg. Lokale Identifizierbarkeit ist Rang; globale ist Grad.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Rangtest ist das Standardverfahren der Praxis, weil er billig ist}: Man setzt zufällige Zahlen für die Parameter ein, berechnet die Jacobi-Matrix numerisch (oder exakt, modulo einer Primzahl) und bestimmt den Rang --- für Modelle mit hundert Parametern in Sekunden; die Methode der \enquote{Sensitivitätsmatrix} in der Systembiologie ist dasselbe mit Zeitreihen statt Koeffizienten. Was er übersieht, ist genau das, was die Gröbner-Basis sieht: die Zahl der fernen Lösungen und die identifizierbaren Kombinationen. Beides zusammen ist der heutige Stand (Kapitel 13): Rang zuerst, Algebra, wo der Rang nicht genügt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Glatt sieht aus wie singulär --- und umgekehrt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.6cm}@{}}
+\toprule
+$V(y^{2} - x^{3})$ & singulär im Ursprung --- obwohl die Parametrisierung $(t^{2}, t^{3})$ glatt ist. Die Kurve ist Bild einer glatten Kurve, aber selbst nicht glatt: Die Abbildung hat Ableitung null bei $t = 0$.\\
+$V(x^{2})$ & die $y$-Achse mit dem Ideal $\langle x^{2}\rangle$: $\nabla(x^{2}) = (2x, 0) = 0$ überall auf $V$ --- jeder Punkt singulär? Nein: $I(V) = \langle x\rangle$, und mit $\nabla x = (1, 0)$ ist alles glatt. Die Definition braucht das Radikalideal.\\
+$V(y^{2} - x^{2}(x - 1))$ über $\mathbb R$ & der isolierte Punkt $(0,0)$: dort ist $\nabla = 0$, der Punkt ist singulär --- und zugleich eine eigene Zusammenhangskomponente der reellen Kurve. Komplex ist er ein Knoten mit zwei imaginären Tangenten $y = \pm\mathrm ix$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Glattheit ist eine Eigenschaft der Varietät mit ihrem Verschwindungsideal, nicht der Gleichungen, mit denen man sie hingeschrieben hat --- und nicht der Parametrisierung, mit der man sie erzeugt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die zweite Zeile ist die Falle der Praxis}: Wer Identifizierbarkeit mit der Jacobi-Matrix der \kursiv{Gleichungen} prüft, die er zufällig hat, und nicht mit der des Radikalideals, kann singulär finden, wo glatt ist. Im Leitfall sind die Messgleichungen das Radikalideal (Aufgabe 3.3), und alles stimmt; bei Modellen mit Erhaltungssätzen --- die Summe aller Mengen ist konstant --- liegen die Gleichungen oft als Potenzen oder Produkte vor, und der Rangtest meldet Nichtidentifizierbarkeit, die keine ist. Die Schematheorie (Kapitel 15) nimmt den Standpunkt ein, dass $V(x^{2})$ wirklich etwas anderes ist als $V(x)$ --- eine \enquote{verdoppelte} Gerade --- und dass die Singularität überall echt ist. Beide Sichtweisen sind konsistent; man muss nur wissen, welche man gerade hat.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.1 --- Singuläre Punkte finden}
+Bestimmen Sie die singulären Punkte von $V(f)$, $f = x^{2}y - y^{3} - x^{2} + y^{2}$ (über $\mathbb C$), und deuten Sie das Ergebnis.
+
+\loesung
+\schritt{Schritt 1 --- Gradient}
+$f_x = 2xy - 2x = 2x(y - 1)$, $f_y = x^{2} - 3y^{2} + 2y$.
+
+\schritt{Schritt 2 --- $f_x = 0$}
+$x = 0$ oder $y = 1$.
+
+\schritt{Schritt 3 --- Fall $x = 0$}
+$f_y = -3y^{2} + 2y = y(2 - 3y) = 0$: $y = 0$ oder $y = \tfrac23$. $f(0, 0) = 0$ \checkmark; $f(0, \tfrac23) = -\tfrac{8}{27} + \tfrac49 = \tfrac{4}{27}\ne0$. Also $(0, 0)$.
+
+\schritt{Schritt 4 --- Fall $y = 1$}
+$f_y = x^{2} - 3 + 2 = x^{2} - 1 = 0$: $x = \pm1$. $f(\pm1, 1) = 1 - 1 - 1 + 1 = 0$ \checkmark. Also $(1, 1)$ und $(-1, 1)$.
+
+\schritt{Schritt 5 --- Art der Singularitäten}
+Im Ursprung: Terme niedrigsten Grades $-x^{2} + y^{2} = (y - x)(y + x)$: Knoten mit Tangenten $y = \pm x$. In $(1, 1)$: Verschieben $x = 1 + u$, $y = 1 + v$: $f = (1 + u)^{2}(1 + v) - (1 + v)^{3} - (1 + u)^{2} + (1 + v)^{2}$; Terme zweiten Grades: $u^{2} + 2uv - 3v^{2} - u^{2} + v^{2} = 2uv - 2v^{2} = 2v(u - v)$: Knoten mit Tangenten $v = 0$ und $v = u$. Ebenso in $(-1, 1)$. Drei Knoten.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Deutung steht in der Faktorisierung}: $f = x^{2}(y - 1) - y^{2}(y - 1) = (y - 1)(x - y)(x + y)$ --- drei Geraden, $y = 1$, $y = x$, $y = -x$, und die drei Knoten sind genau ihre paarweisen Schnittpunkte. Das ist allgemein so: Treffen sich zwei Komponenten einer Varietät in einem Punkt, so ist er singulär --- beide Komponenten liefern Tangentenrichtungen, und der Tangentialraum wird zu groß. Wer vor dem Rechnen faktorisiert, spart die Rechnung; wer nach dem Rechnen drei Knoten auf einer Kurve dritten Grades findet, sollte faktorisieren, denn eine irreduzible Kubik hat höchstens einen singulären Punkt (Kapitel 12).}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.2 --- Der Whitney-Schirm}
+$V = V(x^{2} - y^{2}z)\subseteq\mathbb C^{3}$. Bestimmen Sie $\mathrm{Sing}(V)$ und die Dimension des Tangentialraums dort; beschreiben Sie die reelle Fläche.
+
+\loesung
+\schritt{Schritt 1 --- Gradient}
+$\nabla f = (2x,\ -2yz,\ -y^{2})$. Null genau für $x = 0$, $y = 0$ ($z$ beliebig): die $z$-Achse, und sie liegt auf $V$ ($0 = 0$).
+
+\schritt{Schritt 2 --- Tangentialraum}
+Auf der $z$-Achse ist $T_pV = \mathbb C^{3}$: Dimension $3$ für eine Fläche. Singulär entlang einer ganzen Geraden --- $\mathrm{Sing}(V)$ hat Dimension $1$.
+
+\schritt{Schritt 3 --- Gestalt}
+Für $z > 0$: $x = \pm y\sqrt z$, zwei Ebenen durch die $z$-Achse, die sich mit wachsendem $z$ öffnen --- ein Schirm. Für $z < 0$: nur $x = y = 0$, die $z$-Achse allein --- der \enquote{Stiel}. Für $z = 0$: $x = 0$, die $y$-Achse.
+
+\schritt{Schritt 4 --- Der Stiel}
+Reell ist der Stiel ($z < 0$, $x = y = 0$) eine isolierte Kurve auf der Fläche --- wie der isolierte Punkt in Kapitel 1. Komplex gehört er dazu: $x = \pm y\sqrt z$ mit imaginärem $\sqrt z$. Parametrisierung: $(uv, u, v^{2})$ --- $x^{2} = u^{2}v^{2} = y^{2}z$ \checkmark --- trifft den Stiel nur im Ursprung ($u = 0$, $v^{2} = z < 0$ imaginär).
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Whitney-Schirm ist die Normalform der einfachsten Flächensingularität, die keine isolierte ist}, und zugleich das Standardbeispiel dafür, dass das Bild einer glatten Fläche unter einer polynomialen Abbildung singulär sein kann --- $(u, v)\mapsto(uv, u, v^{2})$ ist überall definiert und glatt, das Bild nicht. Für den Leitfall ist das die Lehre aus Satz 8.3 nochmals: Die Parameterabbildung ist glatt, ihr Bild (die Menge der erreichbaren Messgrößen) kann Ecken, Kanten und Verzweigungen haben --- und an ihnen wechseln die Fasern ihre Zahl.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 8.3 --- Der Rangtest für drei Kammern}
+Für die Kette aus Aufgabe 7.3 ($k_{10}, k_{12}, k_{21}, k_{23}, k_{32}$; Messung im Blut) ist die Ein-Ausgabe-Gleichung dritter Ordnung, $\dddot y + a_2\ddot y + a_1\dot y + a_0y = 0$, mit
+$a_2 = k_{10} + k_{12} + k_{21} + k_{23} + k_{32}$, und $\dot y(0)/y(0) = -(k_{10} + k_{12})$, $\ddot y(0)/y(0) = (k_{10} + k_{12})^{2} + k_{12}k_{21}$. Zeigen Sie mit dem Rangtest an $a_2$ und den beiden Anfangswertgrößen und den beiden weiteren Koeffizienten $a_1, a_0$ (ohne sie auszurechnen): Welche Parameter sind aus den drei genannten Größen allein bestimmbar?
+
+\loesung
+\schritt{Schritt 1 --- Die drei Größen}
+$b_1 = k_{10} + k_{12}$, $b_2 = (k_{10} + k_{12})^{2} + k_{12}k_{21}$, $a_2 = b_1 + k_{21} + k_{23} + k_{32}$.
+
+\schritt{Schritt 2 --- Jacobi-Matrix nach $(k_{10}, k_{12}, k_{21}, k_{23}, k_{32})$}
+\[ \begin{pmatrix} 1 & 1 & 0 & 0 & 0\\ 2b_1 & 2b_1 + k_{21} & k_{12} & 0 & 0\\ 1 & 1 & 1 & 1 & 1 \end{pmatrix} . \]
+
+\schritt{Schritt 3 --- Rang}
+Zeilen $1$ und $3$ sind unabhängig (dritte hat Einsen hinten). Zeile $2$ minus $2b_1\cdot$Zeile $1$: $(0, k_{21}, k_{12}, 0, 0)$, unabhängig von den anderen für $k_{12}\ne0$ oder $k_{21}\ne0$. Rang $3$: Das Bild der drei Größen ist dreidimensional, die Faser hat Dimension $5 - 3 = 2$ --- zwei Parameter bleiben frei, bis man $a_1$ und $a_0$ hinzunimmt.
+
+\schritt{Schritt 4 --- Welche Kombinationen}
+Bestimmt sind $b_1 = k_{10} + k_{12}$ (direkt), $k_{12}k_{21} = b_2 - b_1^{2}$, und $k_{21} + k_{23} + k_{32} = a_2 - b_1$. Keine einzelne Rate ist aus den dreien allein bestimmbar; die vollständige Identifizierbarkeit braucht $a_1$ und $a_0$ --- und der Rangtest mit allen fünf gibt Rang $5$: lokal identifizierbar, und (Aufgabe 7.3) tatsächlich global.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Rangtest zeigt hier seine Stärke und seine Grenze auf einmal}: Er sagt in einer Zeile, dass drei Größen für fünf Parameter nicht reichen und dass zwei Freiheitsgrade bleiben --- aber die identifizierbaren Kombinationen, die in Schritt 4 stehen, hat man von Hand abgelesen, nicht aus dem Rang. Die Gröbner-Basis liefert sie automatisch, als die Elemente ihres Eliminationsideals (Kapitel 6). In der Praxis rechnet man beides: den Rang, um schnell zu wissen, ob; die Basis, um zu wissen, was.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Singularitäten: von Newton bis Hironaka}
+\Person{Newton} untersuchte um 1670 Kurven in der Nähe singulärer Punkte mit dem \enquote{Newton-Polygon}: Er trug die Exponenten der Monome als Punkte auf und las an der konvexen Hülle die Zweige ab --- Puiseux-Reihen $y = x^{p/q}(\ldots)$, hundertfünfzig Jahre vor \Person{Puiseux}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Dass sich jede Singularität durch Aufblasen auflösen lässt} --- die Varietät durch eine glatte ersetzen, die sich auf sie abbildet und außerhalb der Singularitäten mit ihr übereinstimmt --- bewies für Kurven \Person{Noether} (Max) 1871, für Flächen \Person{Zariski} 1939 und \Person{Walker} 1935, und in beliebiger Dimension über Körpern der Charakteristik null \Person{Hironaka} 1964 in einer Arbeit von 218 Seiten, für die er 1970 die Fields-Medaille erhielt. In positiver Charakteristik ist die Frage für Dimension $\ge4$ offen --- eines der großen Probleme des Fachs. Hironakas Beweis enthielt die Standardbasen, die Buchberger zur selben Zeit als Gröbner-Basen fand (Kapitel 5).}
+\end{minipage}
+\end{center}
+
+\schritt{Whitney und Thom}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Hassler Whitney} studierte in den vierziger Jahren die Singularitäten von Abbildungen --- nicht von Varietäten ---, fand den Schirm und 1955 die Klassifikation der Singularitäten glatter Abbildungen der Ebene in die Ebene: Falte und Spitze, mehr gibt es generisch nicht. \textbf{\Person{René Thom} baute daraus 1972 die Katastrophentheorie}: Die sieben elementaren Katastrophen sind die Singularitäten von Abbildungen mit bis zu vier Parametern, und der Leitfall-Punkt $k_{10} = k_{21}$, an dem zwei Lösungen verschmelzen, ist die einfachste von ihnen, die Falte.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Singularitäten heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Minimale Modellprogramm} & Klassifikation höherdimensionaler Varietäten bis auf Aufblasen, mit Singularitäten, die man zulassen muss (Mori 1988, Birkar--Cascini--Hacon--McKernan 2010): das aktive Zentrum der Geometrie.\\
+\textbf{Auflösung in Charakteristik $p$} & Offen ab Dimension $4$; Teilergebnisse Cossart--Piltant 2008 für Dimension $3$; neue Ansätze über gewichtete Aufblasungen (Abramovich--Temkin--Włodarczyk 2020).\\
+\textbf{Singularitäten in der Statistik} & Modelle mit versteckten Variablen sind singuläre Varietäten; an singulären Punkten versagen die asymptotischen Sätze der Statistik (Band 17), und \Person{Watanabe}s singuläre Lerntheorie (2009) ersetzt sie durch Invarianten aus der Auflösung.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Wo das wahre Modell ein singulärer Punkt der Modellvarietät ist, gilt die Normalverteilung der Schätzer nicht mehr}, und die Zahl der Parameter in Informationskriterien wie AIC und BIC (Band 17) ist falsch --- sie muss durch eine rationale Zahl ersetzt werden, die \enquote{reelle Log-kanonische Schwelle}, die man aus Hironakas Auflösung der Singularität berechnet. Neuronale Netze, Mischmodelle und Faktormodelle sind alle singulär an den Punkten, an denen sie etwas Einfacheres darstellen (ein Neuron abgeschaltet, zwei Komponenten gleich). Dass die Statistik des maschinellen Lernens algebraische Geometrie braucht, ist eine der unerwarteten Verbindungen der letzten zwanzig Jahre, und sie beginnt bei der Frage dieses Kapitels: Wo ist der Tangentialraum zu groß?}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 8.1} & Tangentialraum $= \ker J(p)$\\
+\textbf{Satz 8.2} & glatt $\iff\dim T_p = \dim V\iff\operatorname{rang}J = n - r$\\
+\textbf{Satz 8.3} & Rang der Abbildung = Dimension des Bildes; Faser $n - \rho$\\
+\textbf{Tangentialkegel} & Terme niedrigsten Grades: Spitze vs.\ Knoten\\
+\textbf{Der Bruchfall} & Glattheit gehört zum Radikalideal, nicht zur Gleichung\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Der Erweiterungssatz hatte Ausnahmen im Unendlichen, der Dimensionssatz die Bedingung \enquote{falls nicht leer}, und parallele Geraden schneiden sich nicht. Kapitel 9 schließt den Raum ab --- und dann schneiden sich zwei Kurven der Grade $m$ und $n$ in genau $mn$ Punkten.}
+\end{minipage}
+\end{center}
+\end{merksatz}

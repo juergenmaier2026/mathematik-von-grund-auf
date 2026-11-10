@@ -1,0 +1,302 @@
+\part{Gruppen und ihre Darstellungen}
+
+\chapter{Symmetrie als Gruppe}
+
+\section{Was man mit einem Molekül machen kann}
+
+\begin{merksatz}
+\boxtitel{Die Symmetrien des Wassermoleküls}
+Das Molekül liegt in der $yz$-Ebene, das Sauerstoffatom auf der $z$-Achse, die beiden Wasserstoffatome bei $(0, \pm0{,}76, -0{,}59)$ (Ångström, ungefähr). Eine Symmetrie ist eine Bewegung des Raums, die das Molekül auf sich abbildet --- jedes Atom auf ein Atom derselben Sorte.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.2cm}P{2.8cm}P{2.6cm}P{2.0cm}@{}}
+\toprule
+\textbf{Name} & \textbf{Operation} & \textbf{Matrix} & \textbf{Wirkung auf H}\\
+\midrule
+$E$ & nichts tun & $\mathrm{diag}(1, 1, 1)$ & beide fest\\
+$C_2$ & Drehung um $180^{\circ}$ um die $z$-Achse & $\mathrm{diag}(-1, -1, 1)$ & vertauscht\\
+$\sigma_v(xz)$ & Spiegelung an der $xz$-Ebene & $\mathrm{diag}(1, -1, 1)$ & vertauscht\\
+$\sigma_v(yz)$ & Spiegelung an der Molekülebene & $\mathrm{diag}(-1, 1, 1)$ & beide fest\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Die Verknüpfungstafel}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.4cm}P{1.2cm}P{1.2cm}P{1.4cm}P{1.4cm}@{}}
+\toprule
+$\circ$ & $E$ & $C_2$ & $\sigma(xz)$ & $\sigma(yz)$\\
+\midrule
+$E$ & $E$ & $C_2$ & $\sigma(xz)$ & $\sigma(yz)$\\
+$C_2$ & $C_2$ & $E$ & $\sigma(yz)$ & $\sigma(xz)$\\
+$\sigma(xz)$ & $\sigma(xz)$ & $\sigma(yz)$ & $E$ & $C_2$\\
+$\sigma(yz)$ & $\sigma(yz)$ & $\sigma(xz)$ & $C_2$ & $E$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei Symmetrien nacheinander sind wieder eine Symmetrie, jede ist ihr eigenes Inverses, und die Reihenfolge spielt keine Rolle: eine Gruppe mit vier Elementen, die Kleinsche Vierergruppe. Die Chemie nennt sie $C_{2v}$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Gruppe ist der erste Schritt, und er ist der leichteste}: Man zählt, was man mit dem Molekül machen darf, und prüft, dass die Verknüpfung die Menge nicht verlässt. Der zweite Schritt --- die Gruppe auf den Bewegungen des Moleküls wirken zu lassen, als $9\times9$-Matrizen --- ist die Darstellung, Kapitel 2. Der dritte --- diese Darstellung in unzerlegbare Stücke zu zerlegen --- ist die Charaktertafel, Kapitel 4 bis 6, und er liefert die Töne aus dem Vorwort. Dieses Kapitel bleibt beim ersten Schritt und nimmt drei Moleküle als Beispiele, die den ganzen Band begleiten: Wasser ($C_{2v}$, vier Elemente, kommutativ), Ammoniak ($C_{3v}$, sechs Elemente, nicht kommutativ) und Benzol ($D_{6h}$, vierundzwanzig Elemente).}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Gruppen}
+
+\begin{definition}
+\boxtitelm{Definition 1.1 --- Gruppe, Untergruppe, Ordnung}
+Eine \Begriff{Gruppe} ist eine Menge $G$ mit einer Verknüpfung $(g, h)\mapsto gh$, die assoziativ ist, ein neutrales Element $e$ hat und zu jedem $g$ ein Inverses $g^{-1}$ (Band 11). Ist $gh = hg$ für alle $g, h$, heißt $G$ \Begriff{abelsch}. $|G|$ ist die \Begriff{Ordnung}, die Ordnung eines Elements ist das kleinste $n$ mit $g^{n} = e$. Eine \Begriff{Symmetriegruppe} eines Körpers im Raum ist die Menge der Isometrien (Drehungen, Spiegelungen, Drehspiegelungen, Inversion), die ihn auf sich abbilden, mit der Hintereinanderausführung.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 1.2 --- die Symmetrieoperationen im Raum}
+Jede Isometrie des $\mathbb R^{3}$, die den Ursprung festlässt, ist eine orthogonale Matrix $M$ ($M^{\top}M = I$), und sie ist von einer der folgenden Arten:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{1.4cm}P{3.4cm}P{1.0cm}P{2.6cm}@{}}
+\toprule
+\textbf{Symbol} & \textbf{Operation} & $\det$ & \textbf{Spur}\\
+\midrule
+$E$ & Identität & $1$ & $3$\\
+$C_n$ & Drehung um $2\pi/n$ & $1$ & $1 + 2\cos(2\pi/n)$\\
+$\sigma$ & Spiegelung an einer Ebene & $-1$ & $1$\\
+$i$ & Inversion $x\mapsto-x$ & $-1$ & $-3$\\
+$S_n$ & Drehspiegelung: $C_n$, dann $\sigma$ senkrecht zur Achse & $-1$ & $-1 + 2\cos(2\pi/n)$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis}
+Eine orthogonale $3\times3$-Matrix hat Eigenwerte vom Betrag $1$; das charakteristische Polynom hat reelle Koeffizienten, also ist mindestens ein Eigenwert reell: $\pm1$. Auf der dazu senkrechten Ebene wirkt $M$ orthogonal, also als Drehung um einen Winkel $\varphi$ oder als Spiegelung. Fall $\det = 1$: Eigenwert $+1$ und Drehung um $\varphi$ --- eine Drehung um die Achse des Eigenvektors ($C_n$ für $\varphi = 2\pi/n$; $E$ für $\varphi = 0$). Fall $\det = -1$: Eigenwert $-1$ und Drehung um $\varphi$ --- Spiegelung an der Ebene ($\varphi = 0$), Inversion ($\varphi = \pi$), sonst Drehspiegelung $S_n$. Die Spur ist die Summe der Eigenwerte $\pm1 + 2\cos\varphi$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Spur einer Symmetrieoperation hängt nur von ihrer Art ab, nicht von der Lage der Achse --- und die Spur wird in Kapitel 4 der Charakter sein. Die ganze Rechnung mit Molekülschwingungen läuft über diese fünf Spuren.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Chemie hat für die Symmetriegruppen von Molekülen eine eigene Notation}, die von \Person{Schoenflies} 1891 stammt: $C_n$ für eine $n$-zählige Achse allein, $C_{nv}$ mit $n$ senkrechten Spiegelebenen, $C_{nh}$ mit einer waagerechten, $D_n$ mit $n$ zweizähligen Achsen senkrecht zur Hauptachse, $D_{nh}$, $D_{nd}$, $S_n$, $T_d$ (Tetraeder, $24$ Elemente), $O_h$ (Würfel, $48$), $I_h$ (Ikosaeder, $120$). Ein Flussdiagramm mit sieben Fragen ordnet jedes Molekül ein; Wasser ist $C_{2v}$, Ammoniak $C_{3v}$, Methan $T_d$, Benzol $D_{6h}$, Schwefelhexafluorid $O_h$, das Fulleren $C_{60}$ ist $I_h$. Die Kristallographie zählt $32$ solcher \enquote{Punktgruppen}, die mit einem Gitter verträglich sind --- weil nur $n = 1, 2, 3, 4, 6$ auf einem Gitter vorkommen (Aufgabe 1.3).}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Drei Moleküle}
+
+\begin{merksatz}
+\boxtitel{Satz 1.3 --- Ammoniak und die erste nichtkommutative Gruppe}
+Ammoniak $\mathrm{NH}_3$ ist eine dreiseitige Pyramide: Stickstoff an der Spitze, drei Wasserstoffe in einem gleichseitigen Dreieck. Symmetrien: $E$, Drehungen $C_3$ und $C_3^{2}$ um die Achse, drei Spiegelungen $\sigma_1, \sigma_2, \sigma_3$ an Ebenen durch die Achse und je ein H-Atom. Die Gruppe $C_{3v}$ hat sechs Elemente, und
+\[ \sigma_1\sigma_2 = C_3, \qquad \sigma_2\sigma_1 = C_3^{2} \ne C_3 : \]
+sie ist \textbf{nicht abelsch}. Sie ist isomorph zur symmetrischen Gruppe $S_3$ --- jede Symmetrie permutiert die drei H-Atome, und jede der sechs Permutationen kommt vor.
+
+\schritt{Beweis von $\sigma_1\sigma_2 \ne \sigma_2\sigma_1$}
+Zwei Spiegelungen an Ebenen, die sich unter dem Winkel $\alpha$ schneiden, geben eine Drehung um $2\alpha$ um die Schnittgerade; die Reihenfolge bestimmt den Drehsinn. Hier $\alpha = 60^{\circ}$, also $C_3$ oder $C_3^{-1} = C_3^{2}$. (Nachrechnen mit Matrizen: Aufgabe 1.2.) $\blacksquare$
+
+\schritt{Konjugationsklassen}
+Zwei Elemente $g, h$ heißen \Begriff{konjugiert}, wenn $h = xgx^{-1}$ für ein $x\in G$ --- dieselbe Operation, von einem anderen Standpunkt gesehen. Die Klassen von $C_{3v}$:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.0cm}P{3.4cm}P{3.2cm}@{}}
+\toprule
+\textbf{Klasse} & \textbf{Elemente} & \textbf{Deutung}\\
+\midrule
+$\{E\}$ & $1$ & nichts\\
+$\{C_3, C_3^{2}\}$ & $2$ & Drehung um $\pm120^{\circ}$: $\sigma_1C_3\sigma_1^{-1} = C_3^{2}$\\
+$\{\sigma_1, \sigma_2, \sigma_3\}$ & $3$ & die drei Spiegelungen gehen durch Drehung ineinander über\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Drei Klassen, Größen $1 + 2 + 3 = 6$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In einer abelschen Gruppe ist jedes Element seine eigene Klasse ($C_{2v}$: vier Klassen). In einer nichtabelschen fallen Elemente zusammen, die \enquote{gleichartig} sind. Die Zahl der Klassen wird in Kapitel 4 die Zahl der unzerlegbaren Darstellungen sein: vier für Wasser, drei für Ammoniak.}
+\end{minipage}
+\end{center}
+
+\schritt{Benzol}
+$\mathrm C_6\mathrm H_6$, ein regelmäßiges Sechseck in einer Ebene: Hauptachse $C_6$ (mit $C_3 = C_6^{2}$, $C_2 = C_6^{3}$), sechs zweizählige Achsen in der Ebene (drei durch gegenüberliegende Atome, $C_2'$; drei durch Kantenmitten, $C_2''$), die Molekülebene $\sigma_h$, sechs senkrechte Spiegelebenen ($\sigma_v$, $\sigma_d$), die Inversion $i$ und Drehspiegelungen $S_6$, $S_3$. Zusammen $24$ Elemente in $12$ Klassen: $D_{6h}$. Das Programm, das die Gruppe aus drei Erzeugern ($C_6$, $C_2'$, $\sigma_h$) aufbaut, findet $24$ Matrizen und $12$ Klassen in Sekundenbruchteilen; von Hand ist es eine Stunde.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dass Ammoniak und das Dreieck dieselbe Gruppe haben wie die Permutationen dreier Dinge}, ist die erste Lektion des Bandes: Die Gruppe ist abstrakt --- sechs Elemente, eine Verknüpfungstafel --- und das Molekül, das Dreieck, die Permutationen sind drei \kursiv{Darstellungen} derselben Gruppe, in verschiedenen Räumen. Die Darstellungstheorie trennt beides: Die Gruppe ist das Gesetz, die Darstellung die Erscheinung. Alles, was für $S_3$ bewiesen wird, gilt für Ammoniak, für das Dreieck, für drei Teilchen, die man vertauscht, und für die Nullstellen einer kubischen Gleichung (Band 11, Galois).}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Fast symmetrisch ist nicht symmetrisch}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.8cm}@{}}
+\toprule
+\textbf{HDO} & Wasser mit einem Deuterium statt Wasserstoff: dieselbe Geometrie (fast), aber $C_2$ und $\sigma(xz)$ vertauschen Atome verschiedener Sorte. Gruppe $C_s = \{E, \sigma(yz)\}$, zwei Elemente. Die Schwingungsanalyse ändert sich vollständig: drei Schwingungen vom Typ $A'$, keine Entartung, keine Auswahlregel.\\
+\textbf{Wasserstoff\-peroxid $\mathrm H_2\mathrm O_2$} & Die beiden OH-Gruppen stehen um $\approx112^{\circ}$ verdreht: nur $E$ und eine $C_2$. Wäre der Winkel $180^{\circ}$ (planar), hätte man $C_{2h}$ mit vier Elementen --- die Symmetrie hängt von einer Konformation ab, die sich bei Zimmertemperatur ständig ändert.\\
+\textbf{Ammoniak, wirklich} & Das N-Atom tunnelt durch die H-Ebene (Inversion, $24$ GHz); zeitgemittelt ist die Gruppe $D_{3h}$ mit zwölf Elementen, nicht $C_{3v}$. Welche Gruppe gilt, hängt von der Zeitskala der Messung ab.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Symmetriegruppe ist eine Eigenschaft des idealisierten Moleküls --- Gleichgewichtsgeometrie, identische Kerne, starres Gerüst. Jede Abweichung senkt die Symmetrie, und mit ihr ändert sich alles, was die Theorie vorhersagt. Die Gruppe steht nicht im Molekül; man wählt sie, und muss sagen, warum.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die gebrochene Symmetrie ist dabei nicht der Feind, sondern das Werkzeug}: Ein Isotopenaustausch (H gegen D), der die Gruppe von $C_{2v}$ auf $C_s$ senkt, hebt Entartungen auf und macht Schwingungen sichtbar, die vorher verboten waren --- die Spektroskopie nutzt das, um Banden zuzuordnen (Kapitel 6). Und die Frage, was von einer Darstellung übrig bleibt, wenn man die Gruppe auf eine Untergruppe einschränkt, ist die Korrelationstafel, Kapitel 7: Jede $C_{2v}$-Darstellung wird zu einer $C_s$-Darstellung, $A_1, B_2\to A'$, $A_2, B_1\to A''$. Die Theorie der Symmetrie ist zu gleichen Teilen eine Theorie ihres Bruchs.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.1 --- Die Vierergruppe ist keine zyklische}
+Zeigen Sie, dass $C_{2v}$ nicht isomorph zur zyklischen Gruppe $\mathbb Z/4$ ist, wohl aber zu $\mathbb Z/2\times\mathbb Z/2$.
+
+\loesung
+\schritt{Schritt 1 --- Ordnungen}
+In $C_{2v}$ hat jedes Element außer $E$ die Ordnung $2$ (Diagonale der Tafel: $g^{2} = E$). In $\mathbb Z/4$ hat $1$ die Ordnung $4$. Isomorphismen erhalten Ordnungen: nicht isomorph.
+
+\schritt{Schritt 2 --- Der Isomorphismus}
+$E\mapsto(0, 0)$, $C_2\mapsto(1, 1)$, $\sigma(xz)\mapsto(1, 0)$, $\sigma(yz)\mapsto(0, 1)$. Probe: $\sigma(xz)\sigma(yz) = C_2$ und $(1, 0) + (0, 1) = (1, 1)$. \checkmark\ $C_2\sigma(xz) = \sigma(yz)$ und $(1, 1) + (1, 0) = (0, 1)$. \checkmark
+
+\schritt{Schritt 3 --- Geometrisch}
+$\sigma(xz)\sigma(yz)$: erst an $yz$ spiegeln ($x\mapsto-x$), dann an $xz$ ($y\mapsto-y$): zusammen $(x, y, z)\mapsto(-x, -y, z) = C_2$. Zwei senkrechte Spiegelungen geben die Drehung um $180^{\circ}$ um die Schnittgerade. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Es gibt genau zwei Gruppen mit vier Elementen}, die zyklische und die Kleinsche, und ein Molekül mit einer vierzähligen Achse allein ($C_4$, etwa ein geeignet substituiertes Cyclobutan) hat die zyklische. Die beiden Gruppen haben verschiedene Charaktertafeln (Kapitel 5): Die zyklische hat komplexe Charaktere ($\pm\mathrm i$), die Kleinsche nur $\pm1$. Das ist ein messbarer Unterschied --- in der Zahl der entarteten Zustände.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.2 --- $C_{3v}$ mit Matrizen}
+Mit $C_3$ als Drehung um die $z$-Achse und $\sigma_1$ als Spiegelung an der $xz$-Ebene: Berechnen Sie $\sigma_2 = C_3\sigma_1C_3^{-1}$ und prüfen Sie $\sigma_1\sigma_2\ne\sigma_2\sigma_1$.
+
+\loesung
+\schritt{Schritt 1 --- Die Matrizen}
+$C_3 = \begin{pmatrix}c & -s & 0\\ s & c & 0\\ 0 & 0 & 1\end{pmatrix}$ mit $c = \cos120^{\circ} = -\tfrac12$, $s = \sin120^{\circ} = \tfrac{\sqrt3}{2}$; $\sigma_1 = \mathrm{diag}(1, -1, 1)$.
+
+\schritt{Schritt 2 --- $\sigma_2$}
+$\sigma_2 = C_3\sigma_1C_3^{-1}$ ist die Spiegelung an der um $120^{\circ}$ gedrehten Ebene. In der $xy$-Ebene: $C_3\sigma_1C_3^{\top} = \begin{pmatrix}c & -s\\ s & c\end{pmatrix}\begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix}\begin{pmatrix}c & s\\ -s & c\end{pmatrix} = \begin{pmatrix}c^{2} - s^{2} & 2cs\\ 2cs & s^{2} - c^{2}\end{pmatrix} = \begin{pmatrix}-\tfrac12 & -\tfrac{\sqrt3}{2}\\ -\tfrac{\sqrt3}{2} & \tfrac12\end{pmatrix}$ (mit $c^{2} - s^{2} = \cos240^{\circ} = -\tfrac12$, $2cs = \sin240^{\circ} = -\tfrac{\sqrt3}{2}$). Spiegelung an der Geraden im Winkel $120^{\circ}$. \checkmark
+
+\schritt{Schritt 3 --- Produkte}
+$\sigma_1\sigma_2 = \begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix}\begin{pmatrix}-\tfrac12 & -\tfrac{\sqrt3}{2}\\ -\tfrac{\sqrt3}{2} & \tfrac12\end{pmatrix} = \begin{pmatrix}-\tfrac12 & -\tfrac{\sqrt3}{2}\\ \tfrac{\sqrt3}{2} & -\tfrac12\end{pmatrix} = C_3$ (Drehung um $+120^{\circ}$). \checkmark\\
+$\sigma_2\sigma_1 = \begin{pmatrix}-\tfrac12 & \tfrac{\sqrt3}{2}\\ -\tfrac{\sqrt3}{2} & -\tfrac12\end{pmatrix} = C_3^{2}$ (Drehung um $-120^{\circ}$). Verschieden. $\blacksquare$
+
+\schritt{Schritt 4 --- Probe mit der Spur}
+$\operatorname{Spur}(\sigma_1\sigma_2) = -1 = 1 + 2\cos120^{\circ}$ (in $3\times3$: $-1 + 1 = 0$; hier $2\times2$: $-1$). \checkmark\ Spur von $\sigma_2$: $0$ (in $3\times3$: $1$, Satz 1.2). \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Rechnung ist in Wahrheit zweidimensional}: Die $z$-Achse bleibt bei allen Operationen von $C_{3v}$ fest, und die Gruppe wirkt auf der $xy$-Ebene. Das ist die erste Zerlegung des Bandes --- der dreidimensionale Raum zerfällt unter $C_{3v}$ in die $z$-Achse (eine eindimensionale Darstellung, $A_1$) und die $xy$-Ebene (eine zweidimensionale, $E$) --- und Kapitel 3 sagt, warum man die Ebene nicht weiter zerlegen kann.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.3 --- Warum es keine fünfzähligen Kristalle gibt}
+Zeigen Sie: Eine Drehung $C_n$, die ein Gitter in der Ebene auf sich abbildet, hat $n\in\{1, 2, 3, 4, 6\}$.
+
+\loesung
+\schritt{Schritt 1 --- Die Spur ist ganz}
+In einer Gitterbasis hat die Drehmatrix ganzzahlige Einträge (sie bildet Gittervektoren auf Gittervektoren ab). Die Spur ist basisunabhängig und daher ganz.
+
+\schritt{Schritt 2 --- Die Spur einer Drehung}
+$\operatorname{Spur}(C_n) = 2\cos(2\pi/n)$ (in der Ebene). Also $2\cos(2\pi/n)\in\mathbb Z$, d.\,h.\ $\cos(2\pi/n)\in\{-1, -\tfrac12, 0, \tfrac12, 1\}$.
+
+\schritt{Schritt 3 --- Auflösen}
+$2\pi/n\in\{\pi, \tfrac{2\pi}{3}, \tfrac\pi2, \tfrac\pi3, 0\}$: $n\in\{2, 3, 4, 6, 1\}$. $\blacksquare$
+
+\schritt{Schritt 4 --- Fünf}
+$2\cos72^{\circ} = 0{,}618$, nicht ganz: Kein Gitter hat fünfzählige Symmetrie. Ein Pentagon lässt sich nicht lückenlos in der Ebene aufreihen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die kristallographische Restriktion ist von 1830 (Hessel) und galt als Naturgesetz, bis \Person{Shechtman} 1982 ein Beugungsbild mit zehnzähliger Symmetrie sah} --- Quasikristalle, ohne Gitter, mit Fernordnung, Nobelpreis 2011. Die Mathematik des Satzes blieb richtig: Quasikristalle haben kein Gitter. Was fiel, war die Annahme, dass Festkörper eines haben müssen. Für den Band: Die $32$ Punktgruppen der Kristallographie sind die Symmetriegruppen mit $n\in\{1, 2, 3, 4, 6\}$, und Kapitel 14 zählt, was aus ihnen und den Translationen wird --- $230$ Raumgruppen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von Haüy bis Schoenflies}
+\Person{René-Just Haüy} ließ 1784 einen Kalkspatkristall fallen und sah in den Bruchstücken dieselbe Form --- der Anfang der Kristallographie als Lehre von der Symmetrie. \Person{Hessel} zählte 1830 die $32$ Kristallklassen, unbeachtet; \Person{Bravais} 1848 die $14$ Gitter.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Die Gruppe als Begriff kam aus der Algebra} --- \Person{Galois} 1832 für Permutationen von Nullstellen, \Person{Cayley} 1854 abstrakt ---, und \Person{Jordan} verband 1869 beides: Die Symmetrien eines Kristalls sind eine Gruppe von Bewegungen. \Person{Fedorow} und \Person{Schoenflies} fanden 1891 unabhängig alle $230$ Raumgruppen, Schoenflies mit der Notation, die die Chemie bis heute benutzt; \Person{Barlow} 1894 nochmals. \Person{Klein}s Erlanger Programm von 1872 hatte den Rahmen gesetzt: Geometrie ist das Studium dessen, was eine Gruppe invariant lässt --- und Darstellungstheorie, der Gegenstand dieses Bandes, ist die Frage, wie eine Gruppe überhaupt auf einem Raum wirken kann.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Moleküle}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dass Molekülsymmetrie Spektren bestimmt, erkannten \Person{Wigner} 1930 und \Person{Tisza} 1933 --- Tisza leitete als Erster die Zahl der Schwingungen jedes Symmetrietyps ab, genau die Rechnung des Vorworts. \textbf{\Person{Wilson}s Arbeit von 1934 und das Lehrbuch von \Person{Wilson}, \Person{Decius} und \Person{Cross} 1955 machten daraus das Handwerk der Schwingungsspektroskopie}, und \Person{Cotton}s \enquote{Chemical Applications of Group Theory} 1963 brachte es in jedes Chemiestudium. Die Chemiker lernen seither Charaktertafeln, bevor sie wissen, was eine Darstellung ist; dieser Band geht den anderen Weg.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Symmetrie heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Symmetrie in neuronalen Netzen} & Netze, die unter Drehungen, Spiegelungen oder Permutationen äquivariant sind (Cohen--Welling 2016, \enquote{geometric deep learning}): Darstellungstheorie als Architekturprinzip; AlphaFold nutzt $SE(3)$-Äquivarianz.\\
+\textbf{Symmetrie\-bestimmung aus Daten} & Aus einer Punktwolke (Kryo-Elektronenmikroskopie eines Proteins) die Symmetriegruppe schätzen --- mit Rauschen, also \enquote{fast symmetrisch} als Statistik.\\
+\textbf{Quasikristalle} & Beugungsbilder mit verbotener Symmetrie; die Mathematik dahinter sind Projektionen höherdimensionaler Gitter (de Bruijn 1981) und aperiodische Parkettierungen (Penrose 1974; die Einstein-Kachel 2023).\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Bilderkenner soll ein gedrehtes Bild als dasselbe erkennen} --- und statt ihm Millionen gedrehter Beispiele zu zeigen, baut man die Drehgruppe in die Architektur ein: Jede Schicht ist eine Abbildung, die mit der Gruppenwirkung vertauscht, eine \kursiv{äquivariante} Abbildung, und Kapitel 3 sagt (Schurs Lemma), wie solche Abbildungen aussehen. Für Moleküle heißt das: Ein Netz, das die Energie eines Moleküls vorhersagt, muss unter $E(3)$ invariant sein, und die Netze, die das einbauen (SchNet 2017, NequIP 2022), brauchen hundertmal weniger Daten als solche, die es lernen müssen. Die Darstellungstheorie der Drehgruppe --- Kapitel 10 --- ist hier Ingenieurwerkzeug geworden.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 1.1} & Gruppe, Symmetriegruppe\\
+\textbf{Satz 1.2} & fünf Arten von Operationen, ihre Spuren\\
+\textbf{Satz 1.3} & $C_{3v}\cong S_3$ nicht abelsch; Klassen\\
+\textbf{Drei Moleküle} & $C_{2v}$ ($4$), $C_{3v}$ ($6$), $D_{6h}$ ($24$)\\
+\textbf{Der Bruchfall} & die Gruppe ist gewählt, nicht gegeben\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Gruppe steht. Kapitel 2 lässt sie wirken: auf dem Raum, auf den Atomen, auf allen neun Bewegungen des Wassermoleküls --- und definiert, was eine Darstellung ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

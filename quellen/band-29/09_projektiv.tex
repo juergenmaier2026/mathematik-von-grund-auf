@@ -1,0 +1,285 @@
+\chapter{Das Unendliche anschließen}
+
+\section{Wo sich Parallelen treffen}
+
+\begin{merksatz}
+\boxtitel{Schnittpunkte, gezählt --- mit und ohne Unendliches}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{1.4cm}P{1.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Zwei Kurven} & \textbf{Grade} & \textbf{affin} & \textbf{fehlt}\\
+\midrule
+zwei parallele Geraden & $1\cdot1$ & $0$ & $1$ im Unendlichen\\
+Gerade und Parabel $y = x^{2}$, Gerade $x = 1$ & $1\cdot2$ & $1$ & $1$ im Unendlichen\\
+Kreis und Gerade, die ihn verfehlt & $1\cdot2$ & $0$ & $2$ komplexe\\
+Kreis und Parabel (Aufg.\ 6.2) & $2\cdot2$ & $4$ & ---\\
+Kreis $x^{2} + y^{2} = 1$ und Kreis $(x - 1)^{2} + y^{2} = 1$ & $2\cdot2$ & $2$ & $2$ im Unendlichen, komplex\\
+Kreis und Ellipse $\tfrac{x^{2}}{4} + y^{2} = 1$ & $2\cdot2$ & $2$ & $2$ --- Berührung, je doppelt\\
+Kubik $y^{2} = x^{3} - 2x$ und Gerade $y = -x$ & $3\cdot1$ & $3$ & ---\\
+Leitfall-Hyperbel und Gerade $k_{20} = \tfrac25$ & $2\cdot1$ & $0$ & $2$ im Unendlichen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jedes Mal fehlt zum Produkt der Grade dasselbe: Punkte im Unendlichen, komplexe Punkte, oder Punkte, die doppelt zählen. Zählt man alle drei richtig, kommt immer $mn$ heraus. Das ist der Satz von Bézout, und das Unendliche richtig anzuschließen ist die Hälfte seines Beweises.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die projektive Ebene ist die affine Ebene plus eine Gerade im Unendlichen}, auf der sich parallele Geraden treffen --- ein Punkt für jede Richtung. In ihr hat die Parabel einen Punkt im Unendlichen (sie berührt die unendlich ferne Gerade), die Hyperbel zwei (ihre Asymptotenrichtungen), die Ellipse keinen. Dieses Kapitel baut den Raum, überträgt Varietäten, Ideale und Gröbner-Basen auf ihn (homogene Polynome), beweist Bézout für Kurven und zieht die Folgerung für den Leitfall: Die Zahl der Parametersätze zu gegebenen Daten ist ein Grad, und der Grad ist eine Schnittzahl.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der projektive Raum}
+
+\begin{definition}
+\boxtitelm{Definition 9.1 --- projektiver Raum, homogene Koordinaten}
+Der \Begriff{projektive Raum} $\mathbb P^{n}$ über $k$ ist die Menge der Geraden durch den Ursprung in $k^{n+1}$: Punkte sind Klassen $(x_0 : x_1 : \cdots : x_n)$ von Vektoren $\ne0$, wobei $(x_0 : \cdots : x_n) = (\lambda x_0 : \cdots : \lambda x_n)$ für $\lambda\ne0$. Die Punkte mit $x_0\ne0$ bilden den \Begriff{affinen Teil} $U_0\cong k^{n}$ via $(x_0 : \cdots : x_n)\mapsto(x_1/x_0, \ldots, x_n/x_0)$; die Punkte mit $x_0 = 0$ bilden die \Begriff{Hyperebene im Unendlichen} $\cong\mathbb P^{n-1}$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 9.2 --- projektive Varietäten}
+Ein Polynom $F\in k[x_0, \ldots, x_n]$ heißt \Begriff{homogen} vom Grad $d$, wenn alle Terme Grad $d$ haben; dann ist $F(\lambda x) = \lambda^{d}F(x)$, und $F(p) = 0$ ist für Punkte $p\in\mathbb P^{n}$ wohldefiniert. Eine \Begriff{projektive Varietät} ist $V(F_1, \ldots, F_s)$ für homogene $F_i$; ein Ideal, das von homogenen Polynomen erzeugt wird, heißt \Begriff{homogen}.
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item \textbf{Homogenisieren}: Für $f\in k[x_1, \ldots, x_n]$ vom Grad $d$ ist $f^{h} = x_0^{d}f(x_1/x_0, \ldots, x_n/x_0)$ homogen vom Grad $d$, und $V(f^{h})\cap U_0 = V(f)$. Die Punkte von $V(f^{h})$ mit $x_0 = 0$ sind die Punkte im Unendlichen von $V(f)$; man findet sie als Nullstellen des Anteils höchsten Grades von $f$.
+\item \textbf{Dehomogenisieren}: $F(1, x_1, \ldots, x_n)$ ist der affine Teil.
+\item Der \Begriff{projektive Abschluss} von $V = V(I)\subseteq k^{n}$ ist $V(I^{h})$ mit $I^{h} = \langle f^{h} : f\in I\rangle$. Ist $G$ eine Gröbner-Basis von $I$ bezüglich einer gradkompatiblen Ordnung, so ist $\{g^{h} : g\in G\}$ eine Basis von $I^{h}$ (Auslassung 10, \zit{5}, Kap.~8.4).
+\end{enumerate}
+
+\schritt{Beispiele}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{2.6cm}P{3.4cm}@{}}
+\toprule
+\textbf{affin} & \textbf{homogen} & \textbf{im Unendlichen ($x_0 = 0$)}\\
+\midrule
+$y = x^{2}$ & $yx_0 = x^{2}$ & $x^{2} = 0$: $(0 : 0 : 1)$, doppelt\\
+$xy = 1$ & $xy = x_0^{2}$ & $xy = 0$: $(0 : 1 : 0)$ und $(0 : 0 : 1)$\\
+$x^{2} + y^{2} = 1$ & $x^{2} + y^{2} = x_0^{2}$ & $x^{2} + y^{2} = 0$: $(0 : 1 : \pm\mathrm i)$\\
+$y^{2} = x^{3} - 2x$ & $y^{2}x_0 = x^{3} - 2xx_0^{2}$ & $x^{3} = 0$: $(0 : 0 : 1)$, dreifach\\
+Leitfall $g$ & $k_{12}k_{20} - \tfrac25k_{12}w + \tfrac{3}{50}w^{2}$ & $k_{12}k_{20} = 0$: zwei Punkte\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Jeder Kreis geht durch dieselben zwei Punkte im Unendlichen, $(0 : 1 : \pm\mathrm i)$ --- die \enquote{Kreispunkte}. Darum schneiden sich zwei Kreise affin in höchstens zwei Punkten: Die anderen zwei der vier sind immer dieselben, und sie sind komplex und unendlich fern.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der projektive Raum ist kompakt --- in ihm läuft nichts weg.} Das ist der Grund, warum die Sätze dort ohne Ausnahmen gelten: Der Erweiterungssatz (Kapitel 6) hat im Projektiven keine Ausnahmemenge, denn die Lösung, die affin \enquote{ins Unendliche} entkam, ist jetzt ein Punkt; der Dimensionssatz braucht kein \enquote{falls nicht leer}, denn zwei Varietäten mit $\dim V + \dim W\ge n$ schneiden sich immer; und die Projektion einer projektiven Varietät ist wieder eine (Hauptsatz der Eliminationstheorie, Auslassung 11). Für den Leitfall: Die Hyperbel hat zwei Punkte im Unendlichen, einen in Richtung $k_{12}\to\infty$ (mit $k_{20}\to\tfrac25$) und einen in Richtung $k_{20}\to-\infty$ (mit $k_{12}\to0$) --- die Asymptoten. Der zweite ist der Grenzfall $k_{12} = 0$, entkoppelte Kammern, der in Kapitel 6 als Ausnahme auftrat.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz von Bézout}
+
+\begin{merksatz}
+\boxtitel{Satz 9.3 --- Bézout}
+Seien $F, G\in\mathbb C[x_0, x_1, x_2]$ homogen von den Graden $m$ und $n$ ohne gemeinsamen Faktor. Dann schneiden sich die Kurven $V(F)$ und $V(G)$ in $\mathbb P^{2}$ in endlich vielen Punkten, und mit Vielfachheiten gezählt sind es genau $mn$:
+\[ \sum_{p\in V(F)\cap V(G)} I_p(F, G) = mn . \]
+
+\schritt{Schritt 1 --- Endlich viele Punkte}
+Hätten $F$ und $G$ unendlich viele gemeinsame Nullstellen, so hätten sie einen gemeinsamen Faktor: Man fasse beide als Polynome in $x_2$ mit Koeffizienten in $\mathbb C[x_0, x_1]$ auf (nach einer Koordinatenänderung, so dass beide den vollen Grad in $x_2$ haben). Die Resultante $R(x_0, x_1) = \mathrm{Res}_{x_2}(F, G)$ ist ein Polynom, das in jedem $(a_0 : a_1)$ verschwindet, über dem ein gemeinsamer Punkt liegt (Satz 6.3). Unendlich viele gemeinsame Punkte geben unendlich viele Nullstellen von $R$ in $\mathbb P^{1}$, also $R = 0$, also einen gemeinsamen Faktor (Satz 6.3, über dem Körper $\mathbb C(x_0, x_1)$, und nach Gauß' Lemma in $\mathbb C[x_0, x_1, x_2]$). $\blacksquare$
+
+\schritt{Schritt 2 --- Die Resultante ist homogen vom Grad $mn$}
+$F = \sum_{i=0}^{m}A_i(x_0, x_1)x_2^{m-i}$ mit $A_i$ homogen vom Grad $i$, ebenso $G$ mit $B_j$ vom Grad $j$. Die Sylvester-Determinante hat $m + n$ Zeilen; jeder Term des Determinantenprodukts ist ein Produkt von $A$'s und $B$'s, und man rechnet nach (Auslassung 12, oder: man ersetze $(x_0, x_1)$ durch $(\lambda x_0, \lambda x_1)$; $A_i$ wird $\lambda^{i}A_i$; multipliziere die $k$-te Zeile der Sylvester-Matrix mit $\lambda^{k}$ und die $l$-te Spalte mit $\lambda^{-l}$, geeignet indiziert, und lies den Gesamtexponenten ab), dass jeder Term den Grad $mn$ hat. Also ist $R$ eine binäre Form vom Grad $mn$, und nach dem Fundamentalsatz zerfällt sie über $\mathbb C$ in $mn$ Linearfaktoren: $R = \prod_{k=1}^{mn}(\beta_kx_0 - \alpha_kx_1)$. $\blacksquare$
+
+\schritt{Schritt 3 --- Punkte und Vielfachheiten}
+Nach einer weiteren Koordinatenänderung liegen über jedem Punkt $(\alpha : \beta)\in\mathbb P^{1}$ höchstens ein Schnittpunkt (die Schnittpunkte haben paarweise verschiedene Projektionen; das geht, weil es endlich viele sind). Dann entsprechen die Nullstellen von $R$ den Schnittpunkten, und man \textbf{definiert} $I_p(F, G)$ als die Vielfachheit der entsprechenden Nullstelle von $R$. Die Summe der Vielfachheiten ist $mn$. $\blacksquare$
+
+\schritt{Was fehlt}
+Dass $I_p(F, G)$ nicht von den Koordinatenänderungen abhängt und mit der lokalen Schnittvielfachheit übereinstimmt --- $\dim_{\mathbb C}\mathcal O_p/(F, G)$, der Dimension des lokalen Rings modulo beider Gleichungen --- ist Auslassung 12 (\zit{7}, Kap.~3 und 5). Für transversale Schnitte (verschiedene Tangenten) ist $I_p = 1$; Berührung gibt $I_p\ge2$; durch einen singulären Punkt gehen mehr.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Bézout ist ein Satz über eine Determinante: Die Resultante zweier Formen der Grade $m$ und $n$ hat Grad $mn$, und Grad $mn$ heißt $mn$ Nullstellen. Alles andere --- Unendliches, Komplexes, Vielfachheit --- sind die Bedingungen, unter denen \enquote{Nullstellen zählen} wörtlich gilt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Tabelle, nachgerechnet}
+Zwei Kreise $x^{2} + y^{2} = x_0^{2}$ und $(x - x_0)^{2} + y^{2} = x_0^{2}$: Differenz $2xx_0 - x_0^{2} = x_0(2x - x_0)$. Also $x_0 = 0$ (dann $x^{2} + y^{2} = 0$: die beiden Kreispunkte) oder $x = \tfrac12x_0$ (dann $y^{2} = \tfrac34x_0^{2}$: zwei affine Punkte $(\tfrac12, \pm\tfrac{\sqrt3}{2})$). Vier. \checkmark\ --- Kreis und Ellipse $x^{2} + 4y^{2} = 4x_0^{2}$: Differenz $3y^{2} = 3x_0^{2}$, $y = \pm x_0$, $x = 0$: die Punkte $(0, \pm1)$, und dort haben beide Kurven die Tangente $y = \pm1$: je $I_p = 2$. Vier. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für den Leitfall mit Messung im Gewebe} ist die Faser der Schnitt dreier Flächen im $\mathbb C^{3}$, und Bézout in der Fassung für $n$ Hyperflächen (Auslassung 12) sagt: höchstens $1\cdot1\cdot2 = 2$ Punkte, wenn endlich viele --- genau die zwei aus Aufgabe 1.3. Allgemein ist die Zahl der Parametersätze zu generischen Daten durch das Produkt der Grade der Messgleichungen beschränkt, und sie wird erreicht, wenn keine Lösung im Unendlichen liegt. Darum sind die Grade der Messgleichungen die erste Zahl, die ein Identifizierbarkeitsprogramm ausgibt.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Bézout ohne Vielfachheit ist falsch, und mit Vielfachheit ist er leer}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.4cm}@{}}
+\toprule
+\textbf{Ohne Vielfachheit} & Kreis und Ellipse: zwei Punkte, nicht vier. Parabel und Tangente: ein Punkt, nicht zwei. Die Aussage \enquote{$mn$ Punkte} ist falsch.\\
+\textbf{Mit Vielfachheit, definiert als \enquote{was fehlt}} & Die Vielfachheit so zu definieren, dass die Summe $mn$ ergibt, macht den Satz leer. Er wird erst durch die lokale Definition ($\dim\mathcal O_p/(F, G)$) zum Satz --- und der Beweis, dass beide übereinstimmen, ist die Arbeit.\\
+\textbf{Gemeinsame Komponente} & $V(xy)$ und $V(x(y - 1))$: unendlich viele gemeinsame Punkte (die $y$-Achse). Der Satz gilt nicht, und die Resultante ist null.\\
+\textbf{Über $\mathbb R$} & Kreis und Gerade, die ihn verfehlt: null reelle Punkte. Kein Satz zählt reelle Schnittpunkte; nur Schranken ($\le mn$) und Paritäten ($\equiv mn \bmod 2$ unter Bedingungen).\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Vielfachheit ist kein Flicken, sondern eine lokale Größe mit eigener Definition; dass sie die Lücke zu $mn$ genau füllt, ist der Inhalt des Satzes. Wer sie als Flicken benutzt, hat keinen Satz, sondern eine Konvention.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für den Leitfall ist die vierte Zeile die wichtige}: Von den zwei komplexen Parametersätzen, die Bézout garantiert, können null, einer oder zwei reell sein --- und nur reelle, positive zählen. Das Modell mit Messung im Gewebe hat beide reell (Aufgabe 1.3), aber ein Modell mit einer Gleichung dritten Grades kann einen reellen und zwei komplexe Parametersätze haben: dann ist es über $\mathbb C$ lokal, über $\mathbb R$ global identifizierbar. Die Zahl der reellen Lösungen ist keine algebraische Invariante; sie hängt von den Daten ab und ändert sich dort, wo die Diskriminante verschwindet --- Kapitel 8, der Punkt $k_{10} = k_{21}$. Dort gehen zwei reelle Lösungen ineinander über und könnten, bei anderem Vorzeichen der Diskriminante, komplex werden.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.1 --- Punkte im Unendlichen}
+Bestimmen Sie für die Hyperbel $x^{2} - y^{2} = 1$, die Neilsche Parabel $y^{2} = x^{3}$ und die Gerade $y = 2x + 3$ die Punkte im Unendlichen, und prüfen Sie, welche davon singulär sind.
+
+\loesung
+\schritt{Schritt 1 --- Hyperbel}
+$x^{2} - y^{2} = x_0^{2}$; bei $x_0 = 0$: $x^{2} = y^{2}$, $x = \pm y$: $(0 : 1 : 1)$ und $(0 : 1 : -1)$, die Asymptotenrichtungen. Gradient $(-2x_0, 2x, -2y)$ ist dort $(0, 2, \mp2)\ne0$: glatt.
+
+\schritt{Schritt 2 --- Neilsche Parabel}
+$y^{2}x_0 = x^{3}$; bei $x_0 = 0$: $x^{3} = 0$: $(0 : 0 : 1)$, dreifach. Gradient $(y^{2}, -3x^{2}, 2yx_0)$ bei $(0 : 0 : 1)$: $(1, 0, 0)\ne0$: glatt im Unendlichen --- aber die Kurve ist dort zur unendlich fernen Geraden tangential mit Berührung dritter Ordnung (Wendepunkt). Der einzige singuläre Punkt bleibt der Ursprung $(1 : 0 : 0)$.
+
+\schritt{Schritt 3 --- Gerade}
+$y = 2x + 3x_0$; bei $x_0 = 0$: $y = 2x$: $(0 : 1 : 2)$, die Richtung der Geraden. Jede Gerade $y = 2x + c$ geht durch denselben Punkt: Dort treffen sich die Parallelen.
+
+\schritt{Schritt 4 --- Probe}
+Grad $2$, $3$, $1$ --- Schnitt mit der Geraden im Unendlichen (Grad $1$) nach Bézout: $2$, $3$, $1$ Punkte mit Vielfachheit. Hyperbel: $1 + 1$. Neil: $3$ (ein Punkt, dreifach). Gerade: $1$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Neilsche Parabel hat im Unendlichen einen Wendepunkt, und die Kubik des Titelbilds auch}: Für $y^{2}x_0 = x^{3} - 2xx_0^{2}$ ist $(0 : 0 : 1)$ der einzige Punkt im Unendlichen, glatt, mit Tangente $x_0 = 0$ dreifach. Dieser Punkt ist das neutrale Element der Gruppe, die Kapitel 10 auf der Kurve baut: Er heißt $\mathcal O$, und \enquote{drei Punkte auf einer Geraden addieren sich zu null} ist mit ihm als Nullpunkt formuliert.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.2 --- Bézout mit der Resultante}
+Schneiden Sie $F = x^{2} + y^{2} - x_0^{2}$ (Kreis) und $G = y - x_0$ (Tangente $y = 1$) projektiv und mit Vielfachheit.
+
+\loesung
+\schritt{Schritt 1 --- Als Polynome in $y$}
+$F = y^{2} + (x^{2} - x_0^{2})$, $G = y - x_0$.
+
+\schritt{Schritt 2 --- Resultante}
+\[ \mathrm{Res}_y(F, G) = \det\begin{pmatrix}1 & 0 & x^{2} - x_0^{2}\\ 1 & -x_0 & 0\\ 0 & 1 & -x_0\end{pmatrix} = x_0^{2} - 0 + (x^{2} - x_0^{2})\cdot1 = x^{2} . \]
+(Entwicklung nach der ersten Zeile: $1\cdot(x_0^{2} - 0) - 0 + (x^{2} - x_0^{2})\cdot(1 - 0)$.)
+
+\schritt{Schritt 3 --- Lesen}
+$R = x^{2}$: homogen vom Grad $2 = 2\cdot1$ \checkmark, eine Nullstelle $x = 0$ mit Vielfachheit $2$. Der Schnittpunkt liegt über $(x_0 : x) = (1 : 0)$: $y = x_0$, also $(1 : 0 : 1)$, der Punkt $(0, 1)$ --- Berührpunkt, $I_p = 2$.
+
+\schritt{Schritt 4 --- Probe mit der Produktformel}
+$\mathrm{Res}_y(F, G) = \prod_{G(\beta) = 0}F(\beta)$ für normiertes $G$: $F(y = x_0) = x_0^{2} + x^{2} - x_0^{2} = x^{2}$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für eine Gerade ist die Resultante einfach das Einsetzen}, und die Vielfachheit ist die Ordnung der Nullstelle des eingesetzten Polynoms --- das ist die Schulregel \enquote{Tangente: doppelte Nullstelle}, hier als Spezialfall von Bézout. Für zwei Kurven höheren Grades gibt es kein Einsetzen, und die Resultante ist der Ersatz: Sie \enquote{setzt} die eine Kurve in die andere \enquote{ein}, ohne eine Parametrisierung zu brauchen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.3 --- Wie viele Parametersätze höchstens}
+Ein Modell habe Messgleichungen der Grade $1, 1, 2, 3$ in vier Parametern. Wie viele Parametersätze passen höchstens zu generischen Daten, wann wird die Schranke erreicht, und was heißt es, wenn man weniger findet?
+
+\loesung
+\schritt{Schritt 1 --- Schranke}
+Bézout für vier Hyperflächen im $\mathbb P^{4}$: $1\cdot1\cdot2\cdot3 = 6$ Punkte mit Vielfachheit, falls endlich viele. Also höchstens $6$ Parametersätze.
+
+\schritt{Schritt 2 --- Erreicht}
+Genau dann, wenn alle sechs Schnittpunkte im affinen Teil liegen (keiner im Unendlichen) und alle einfach sind. Punkte im Unendlichen entsprechen Lösungen, bei denen Parameter gegen unendlich gehen --- für generische Daten gibt es sie nicht, wenn die Terme höchsten Grades der Gleichungen keine gemeinsame Nullstelle haben.
+
+\schritt{Schritt 3 --- Weniger}
+Findet man generisch nur $4$: Dann liegen $2$ Schnittpunkte im Unendlichen, für alle Daten --- die Formen höchsten Grades haben eine gemeinsame Nullstelle. Das ist eine Eigenschaft des Modells, nicht der Daten, und sie ist häufig: Die beiden linearen Gleichungen eliminieren meist zwei Parameter, und die verbleibende Kurve vom Grad $2\cdot3 = 6$ in zwei Veränderlichen kann weniger affine Punkte haben.
+
+\schritt{Schritt 4 --- Noch weniger: Vielfachheit}
+Findet man für spezielle Daten nur $3$ verschiedene Punkte: Zwei sind zusammengefallen (Jacobi-Determinante null, Kapitel 8), die Diskriminante der Daten verschwindet. Für generische Daten geschieht das nicht.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Bézout-Schranke ist fast immer zu groß}, weil Modellgleichungen Struktur haben --- dünn besetzt, mit vielen linearen Termen ---, und die Schranke, die die Struktur berücksichtigt, ist die von \Person{Bernstein}, \Person{Kushnirenko} und \Person{Khovanskii} (1975): das gemischte Volumen der Newton-Polytope der Gleichungen, Auslassung 13. Für die Identifizierbarkeitsprogramme ist sie die Zahl, die den Aufwand der numerischen Verfahren bestimmt: So viele Startpfade braucht die Homotopie (Kapitel 5, Forschung), und für dünne Systeme ist sie um Größenordnungen kleiner als $\prod d_i$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Desargues, Poncelet, Bézout}
+\Person{Girard Desargues}, Architekt in Lyon, führte 1639 die Punkte im Unendlichen ein, um die Perspektive der Maler zur Geometrie zu machen: Parallele Geraden treffen sich am Horizont. Sein Buch über Kegelschnitte, in fünfzig Exemplaren gedruckt, ging verloren und wurde 1845 in einer Abschrift wiedergefunden.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{\Person{Jean-Victor Poncelet} schrieb die projektive Geometrie 1813 als Kriegsgefangener in Saratow}, ohne Bücher, aus dem Gedächtnis; sein \enquote{Traité des propriétés projectives des figures} (1822) machte das Unendliche und das Imaginäre zu gleichberechtigten Teilen der Geometrie --- das \enquote{Kontinuitätsprinzip}, das Cauchy für unbewiesen hielt und das \Person{Plücker} mit homogenen Koordinaten (1830) beweisbar machte. \Person{Étienne Bézout} hatte den Satz 1779 in seiner \enquote{Théorie générale des équations algébriques} formuliert und für den Fall ohne Vielfachheiten bewiesen; \Person{Maclaurin} hatte ihn 1720 vermutet. \textbf{Der vollständige Beweis mit Vielfachheiten ist von \Person{Halphen} 1873 und in moderner Form von \Person{Fulton} 1969}, dessen \enquote{Algebraic Curves} \zit{7} ihn auf dreißig Seiten führt.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Kreispunkte}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Dass alle Kreise durch die beiden Punkte $(0 : 1 : \pm\mathrm i)$ gehen, fand \Person{Poncelet}; \Person{Laguerre} zeigte 1853, dass der Winkel zwischen zwei Geraden sich als Logarithmus eines Doppelverhältnisses mit den Kreispunkten schreiben lässt --- die euklidische Geometrie als Spezialfall der projektiven, mit zwei ausgezeichneten imaginären Punkten. \textbf{\Person{Klein}s Erlanger Programm von 1872 machte daraus das Prinzip}: Eine Geometrie ist eine Gruppe und das, was sie invariant lässt; Band 30 handelt von Gruppen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Schnittzahlen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Schnitttheorie} & Fulton 1984: Schnittzahlen für beliebige Varietäten, mit Chow-Ringen; die Grundlage der enumerativen Geometrie --- wie viele Kegelschnitte berühren fünf gegebene? ($3264$, Chasles 1864, bewiesen Fulton--MacPherson 1978.)\\
+\textbf{Gromov--Witten} & Wie viele rationale Kurven vom Grad $d$ gehen durch $3d - 1$ Punkte der Ebene? Kontsevich 1994: eine Rekursion, aus der Stringtheorie --- $1, 1, 12, 620, 87304, \ldots$\\
+\textbf{Reelle Schnittzahlen} & Welschinger 2003: Für reelle rationale Kurven gibt es eine Invariante mit Vorzeichen, die untere Schranken für die Zahl reeller Lösungen gibt --- der erste Satz, der im Reellen zählt.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur dritten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Bruchfall dieses Kapitels --- über $\mathbb R$ zählt nichts --- hat seit 2003 eine Ausnahme.} \Person{Welschinger} ordnete jeder reellen rationalen Kurve ein Vorzeichen zu (nach der Parität ihrer isolierten Doppelpunkte) und zeigte, dass die Summe mit Vorzeichen nicht von der Lage der Punkte abhängt: eine reelle Invariante, und damit eine untere Schranke für die Zahl reeller Kurven. Durch acht allgemeine reelle Punkte gehen mindestens $8$ reelle rationale Kubiken --- von $12$ komplexen. Für die Identifizierbarkeit wäre das Gegenstück eine untere Schranke für die Zahl reeller Parametersätze; sie existiert nicht in dieser Form, aber die Idee, Lösungen mit Vorzeichen zu zählen, ist die, mit der man heute an die reelle Frage herangeht (Sottile 2011).}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 9.1} & $\mathbb P^{n}$, homogene Koordinaten, Hyperebene im Unendlichen\\
+\textbf{Satz 9.2} & homogenisieren, Punkte im Unendlichen, projektiver Abschluss\\
+\textbf{Satz 9.3} & Bézout: $\sum I_p = mn$; Beweis über die Resultante\\
+\textbf{Kreispunkte} & $(0 : 1 : \pm\mathrm i)$ auf jedem Kreis\\
+\textbf{Der Bruchfall} & Vielfachheit ist lokal definiert, sonst ist der Satz leer; über $\mathbb R$ zählt nichts\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil III ist zu Ende: Dimension, Glattheit, Unendliches. Teil IV widmet sich den Kurven --- zuerst der Kubik des Titelbilds, auf der eine Gerade drei Punkte trifft und daraus eine Gruppe wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}

@@ -1,0 +1,295 @@
+\part{Kurven}
+
+\chapter{Die Gruppe auf der Kurve}
+
+\section{Drei Punkte auf einer Geraden}
+
+\begin{merksatz}
+\boxtitel{Das Titelbild, nachgerechnet}
+Die Kurve $E\colon y^{2} = x^{3} - 2x$ und die Gerade $y = -x$ durch $P = (-1, 1)$ und $Q = (0, 0)$:
+\[ x^{2} = x^{3} - 2x \iff x(x - 2)(x + 1) = 0, \]
+dritter Schnittpunkt $R = (2, -2)$ --- genau drei, wie Bézout ($3\cdot1$) verlangt.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Die Regel} & $P + Q := $ Spiegelung des dritten Schnittpunkts an der $x$-Achse\\
+$P + Q$ & $(2, 2)$; Probe: $4 = 8 - 4$ \checkmark\\
+$2P$ (Tangente in $P$) & Steigung $m = \frac{3x^{2} - 2}{2y} = \frac12$; $x = m^{2} - 2x_P = \frac94$, $y = -\frac{21}{8}$; Probe: $\frac{441}{64} = \frac{729}{64} - \frac{288}{64}$ \checkmark\\
+$3P$ & $\bigl(-\frac{1}{169},\ \frac{239}{2197}\bigr)$\\
+$4P$ & $\bigl(\frac{12769}{7056},\ \frac{900271}{592704}\bigr)$\\
+$2Q$ & Tangente in $Q$ senkrecht: kein dritter affiner Punkt --- $2Q = \mathcal O$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Mit dem Punkt im Unendlichen $\mathcal O$ als Null wird die Kurve zu einer abelschen Gruppe: $P + Q + R = \mathcal O$ für drei Punkte auf einer Geraden. Die Vielfachen von $P$ haben wachsende Nenner und wiederholen sich nie --- $P$ hat unendliche Ordnung; $Q$ hat Ordnung $2$.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die dritte Überraschung des Vorworts}: Eine Kurve, auf der man addieren kann. Dass die Konstruktion assoziativ ist, ist nicht offensichtlich --- es ist eine Aussage über neun Punkte und zwei Kubiken ---, und dass die rationalen Punkte eine endlich erzeugte Gruppe bilden, ist Mordells Satz von 1922, einer der tiefsten der Zahlentheorie. Dass dieselbe Addition über einem endlichen Körper die Verschlüsselung jedes Mobiltelefons trägt, ist Kapitel 14. Dieses Kapitel baut die Gruppe, beweist ihre Gesetze, soweit die Mittel reichen, und zählt ihre Punkte --- über $\mathbb Q$ und über $\mathbb F_p$.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Weierstraß-Form}
+
+\begin{definition}
+\boxtitelm{Definition 10.1 --- elliptische Kurve}
+Eine \Begriff{elliptische Kurve} über einem Körper $k$ (Charakteristik $\ne 2, 3$) ist eine glatte projektive Kubik mit einem ausgezeichneten Punkt; in geeigneten Koordinaten hat sie die \Begriff{Weierstraß-Form}
+\[ E\colon\ y^{2} = x^{3} + ax + b, \qquad \Delta = -16(4a^{3} + 27b^{2})\ne0, \]
+mit dem Punkt $\mathcal O = (0 : 1 : 0)$ im Unendlichen als ausgezeichnetem Punkt. $\Delta\ne0$ heißt: Die rechte Seite hat drei verschiedene Nullstellen, und das ist genau die Glattheit (Aufgabe 10.1).
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 10.2 --- das Gruppengesetz}
+Für $P = (x_1, y_1)$, $Q = (x_2, y_2)$ auf $E$ setze man $P + \mathcal O = P$; $P + (x_1, -y_1) = \mathcal O$; und sonst
+\[ m = \begin{cases}\dfrac{y_2 - y_1}{x_2 - x_1} & P\ne Q\\[8pt] \dfrac{3x_1^{2} + a}{2y_1} & P = Q\end{cases}, \qquad x_3 = m^{2} - x_1 - x_2, \qquad y_3 = m(x_1 - x_3) - y_1, \]
+und $P + Q = (x_3, y_3)$. Damit ist $(E, +)$ eine abelsche Gruppe mit neutralem Element $\mathcal O$ und $-(x, y) = (x, -y)$.
+
+\schritt{Herleitung der Formeln}
+Die Gerade $y = m(x - x_1) + y_1$ durch $P$ und $Q$ schneidet $E$ in den Nullstellen von $x^{3} + ax + b - (m(x - x_1) + y_1)^{2}$, einer Kubik mit Leitkoeffizient $1$ und $x^{2}$-Koeffizient $-m^{2}$. Die Summe der drei Nullstellen ist $m^{2}$ (Vieta); zwei sind $x_1, x_2$, also die dritte $x_3 = m^{2} - x_1 - x_2$. Der dritte Schnittpunkt ist $(x_3, m(x_3 - x_1) + y_1)$; Spiegeln gibt $y_3$. Für $P = Q$ ist $m$ die Tangentensteigung: implizit differenziert, $2yy' = 3x^{2} + a$. $\blacksquare$
+
+\schritt{Gruppenaxiome}
+Abgeschlossenheit: $x_3, y_3\in k$, weil $m\in k$ --- die Formeln sind rational in den Koordinaten; und $(x_3, y_3)$ liegt auf $E$, weil es Nullstelle der Schnittkubik ist. Neutrales Element: $\mathcal O$ per Definition; geometrisch: Die Gerade durch $P$ und $\mathcal O$ ist die Senkrechte durch $P$, dritter Schnittpunkt $-P$, gespiegelt $P$. \checkmark\ Inverse: $(x, -y)$. Kommutativität: Die Gerade durch $P, Q$ ist dieselbe wie durch $Q, P$. \textbf{Assoziativität}: nicht offensichtlich; siehe Satz 10.3.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Formeln sind ein Programm}, und das Programm hat die Probe für das Titelbild gemacht: $P + Q = (2, 2)$, $2P = (\tfrac94, -\tfrac{21}{8})$, $(P + Q) + S = P + (Q + S)$ für $S = (2, 2)$ --- numerisch geprüft, exakt in Brüchen. Dass Zähler und Nenner der Vielfachen $nP$ so schnell wachsen (bei $4P$ sechsstellig), ist kein Zufall: Ihr Logarithmus wächst wie $n^{2}$ --- die kanonische Höhe, der Schlüssel zu Mordells Satz.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Satz 10.3 --- Assoziativität}
+Für alle $P, Q, R\in E$ gilt $(P + Q) + R = P + (Q + R)$.
+
+\schritt{Beweis über den Satz von den neun Punkten}
+Hilfssatz (Cayley--Bacharach, Spezialfall): Schneiden sich zwei Kubiken $C_1, C_2$ in neun verschiedenen Punkten, so geht jede Kubik durch acht davon auch durch den neunten. Begründung: Kubiken bilden einen Vektorraum der Dimension $10$ (zehn Koeffizienten); durch acht Punkte in allgemeiner Lage gehen die eines zweidimensionalen Unterraums, also alle $\lambda C_1 + \mu C_2$; jede Kubik durch die acht Punkte ist von dieser Form und verschwindet damit auch im neunten Punkt. (Dass die acht Punkte \enquote{allgemein} genug liegen, braucht ein Argument --- Auslassung 14, \zit{7}, Kap.~5.) --- Nun seien $P, Q, R$ gegeben. Man betrachte die Geraden $\ell_1$ durch $P, Q, -(P+Q)$; $\ell_2$ durch $P + Q, R, -((P+Q)+R)$; $\ell_3$ durch $Q + R, \mathcal O, -(Q+R)$ --- und $m_1$ durch $Q, R, -(Q+R)$; $m_2$ durch $P, Q + R, -(P+(Q+R))$; $m_3$ durch $P + Q, \mathcal O, -(P+Q)$. Die Kubik $\ell_1\ell_2\ell_3$ und die Kubik $m_1m_2m_3$ schneiden sich in den neun Punkten $P, Q, R, P+Q, Q+R, -(P+Q), -(Q+R), \mathcal O$ und je einem neunten: $-((P+Q)+R)$ bzw.\ $-(P+(Q+R))$. Die Kurve $E$ geht durch die acht gemeinsamen, also durch beide neunten --- und da $E$ mit $\ell_2$ nur drei Punkte gemein hat, ist $-((P+Q)+R) = -(P+(Q+R))$. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Assoziativität ist ein Satz der projektiven Geometrie über neun Punkte, nicht eine Rechnung. Rechnen könnte man auch --- die Formeln einsetzen und vergleichen ---, aber das Ergebnis füllt Seiten und erklärt nichts.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Punkte zählen}
+
+\begin{merksatz}
+\boxtitel{Satz 10.4 --- Mordell, Nagell--Lutz, Hasse}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item \textbf{Mordell 1922}: Für $E$ über $\mathbb Q$ ist $E(\mathbb Q)$ eine endlich erzeugte abelsche Gruppe: $E(\mathbb Q)\cong\mathbb Z^{r}\oplus T$ mit endlicher Torsionsgruppe $T$ und dem \Begriff{Rang} $r$. (Auslassung 15.)
+\item \textbf{Nagell--Lutz 1935}: Ist $P = (x, y)\in E(\mathbb Q)$ ein Torsionspunkt ($nP = \mathcal O$ für ein $n$) und $a, b\in\mathbb Z$, so sind $x, y\in\mathbb Z$, und $y = 0$ oder $y^{2}\mid\Delta$. (Auslassung 15.)
+\item \textbf{Hasse 1933}: Für $E$ über $\mathbb F_p$ gilt $|\#E(\mathbb F_p) - (p + 1)|\le2\sqrt p$. (Auslassung 15.)
+\end{enumerate}
+
+\schritt{Das Titelbild über $\mathbb Q$}
+$a = -2$, $b = 0$, $\Delta = -16\cdot4\cdot(-8) = 512$. Torsionspunkte haben ganze Koordinaten mit $y = 0$ oder $y^{2}\mid512$, also $y\in\{0, \pm1, \pm2, \pm4, \pm8, \pm16\}$. $y = 0$: $x(x^{2} - 2) = 0$, $x = 0$: der Punkt $Q = (0, 0)$ der Ordnung $2$ (die anderen, $\pm\sqrt2$, sind irrational). $y = \pm1$: $x^{3} - 2x = 1$, $x = -1$: $P = (-1, \pm1)$ --- aber $2P = (\tfrac94, -\tfrac{21}{8})$ ist nicht ganz, also ist $P$ \textbf{kein} Torsionspunkt. Die übrigen $y$ geben keine ganzen $x$ (nachrechnen: $x^{3} - 2x\in\{4, 16, 64, 256\}$ hat keine ganze Lösung). Also $T = \{\mathcal O, Q\}\cong\mathbb Z/2$, und $r\ge1$ wegen $P$. (Tatsächlich $r = 1$, mit Erzeuger $P$; der Beweis braucht die Abstiegsmethode.)
+
+\schritt{Das Titelbild über $\mathbb F_p$}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}@{}}
+\toprule
+$p$ & $5$ & $7$ & $11$ & $13$ & $17$ & $19$ & $23$\\
+\midrule
+$\#E(\mathbb F_p)$ & $10$ & $8$ & $12$ & $18$ & $20$ & $20$ & $24$\\
+$p + 1$ & $6$ & $8$ & $12$ & $14$ & $18$ & $20$ & $24$\\
+$2\sqrt p$ & $4{,}5$ & $5{,}3$ & $6{,}6$ & $7{,}2$ & $8{,}2$ & $8{,}7$ & $9{,}6$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Alle Werte innerhalb der Hasse-Schranke \checkmark; für $p\equiv3\pmod4$ ist $\#E = p + 1$ genau --- die Kurve hat komplexe Multiplikation mit $\mathrm i$ ($(x, y)\mapsto(-x, \mathrm iy)$ ist ein Automorphismus), und das macht sie \enquote{supersingulär} für diese $p$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Rang ist die große Unbekannte.} Für die Torsion gibt es einen vollständigen Satz --- \Person{Mazur} 1977: $T$ ist eine von genau $15$ Gruppen ($\mathbb Z/n$ für $n\le10$ oder $12$, $\mathbb Z/2\times\mathbb Z/2n$ für $n\le4$) --- und ein Verfahren (Nagell--Lutz). Für den Rang gibt es keinen Algorithmus, von dem man weiß, dass er endet; die Vermutung von Birch und Swinnerton-Dyer (1965, eines der Millennium-Probleme) sagt ihn aus der Verteilung der Punktzahlen $\#E(\mathbb F_p)$ voraus --- die Tabelle oben, über alle $p$ --- und ist nur in Spezialfällen bewiesen. Der größte bekannte Rang ist $\ge28$ (Elkies 2006); ob er beschränkt ist, ist offen, und die Meinung dazu hat sich seit 2010 gedreht (Kapitel 15).}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Die singuläre Kubik hat auch eine Gruppe --- aber eine langweilige}
+Für $\Delta = 0$ ist die Kurve singulär, und das Gruppengesetz funktioniert noch auf den glatten Punkten. Aber:
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{2.6cm}P{3.0cm}@{}}
+\toprule
+\textbf{Kurve} & \textbf{Singularität} & \textbf{Gruppe der glatten Punkte}\\
+\midrule
+$y^{2} = x^{3}$ & Spitze & $\cong(k, +)$ via $(x, y)\mapsto x/y$\\
+$y^{2} = x^{2}(x + 1)$ & Knoten & $\cong(k^{\times}, \cdot)$ via $(x, y)\mapsto\frac{y + x}{y - x}$\\
+$y^{2} = x^{3} + ax + b$, $\Delta\ne0$ & keine & eine elliptische Kurve --- weder $k$ noch $k^{\times}$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Gruppe auf einer singulären Kubik ist die additive oder die multiplikative Gruppe des Körpers in Verkleidung. Die Gruppe auf einer glatten Kubik ist etwas Neues --- und nur sie ist für die Zahlentheorie und die Kryptographie von Interesse.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für die Kryptographie ist das kein Bruchfall, sondern ein Angriff}: Wählt man eine Kurve über $\mathbb F_p$ mit $\Delta\equiv0$ --- aus Versehen oder weil ein Angreifer die Parameter wählt ---, so ist das diskrete Logarithmusproblem auf ihr (Kapitel 14) so leicht wie in $\mathbb F_p$ oder $\mathbb F_p^{\times}$, und das ist mit dem Index-Calculus unterexponentiell. Dasselbe gilt für \enquote{anomale} Kurven mit $\#E(\mathbb F_p) = p$ (Smart 1999): Dort ist die Gruppe zwar glatt, aber durch einen $p$-adischen Logarithmus zu $(\mathbb F_p, +)$ isomorph --- und der Logarithmus ist in Polynomzeit berechenbar. Jede Kurve, die in einem Standard steht, ist auf beide Fälle geprüft; jede Kurve, die jemand selbst wählt, sollte es sein.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.1 --- Diskriminante und Glattheit}
+Zeigen Sie: $y^{2} = x^{3} + ax + b$ ist genau dann glatt (auch im Unendlichen), wenn $4a^{3} + 27b^{2}\ne0$.
+
+\loesung
+\schritt{Schritt 1 --- Affine Punkte}
+$f = y^{2} - x^{3} - ax - b$, $\nabla f = (-3x^{2} - a,\ 2y)$. Singulär: $y = 0$, $3x^{2} = -a$, und $x^{3} + ax + b = 0$. Also: $x$ ist gemeinsame Nullstelle von $g(x) = x^{3} + ax + b$ und $g'(x) = 3x^{2} + a$ --- eine mehrfache Nullstelle von $g$.
+
+\schritt{Schritt 2 --- Mehrfache Nullstelle}
+$g$ hat eine mehrfache Nullstelle genau dann, wenn $\mathrm{Res}(g, g') = 0$ (Satz 6.3). Für $g = x^{3} + ax + b$: $\mathrm{Res}(g, g') = 4a^{3} + 27b^{2}$ (Sylvester-Determinante $5\times5$, Vorzeichen je nach Zeilenanordnung; oder über die Produktformel $\prod g'(\alpha_i) = \prod(3\alpha_i^{2} + a)$ mit den drei Nullstellen, was nach Vieta $-(4a^{3} + 27b^{2})$ gibt --- dasselbe bis aufs Vorzeichen). Probe mit $a = -2$, $b = 1$: $\det = -5 = 4\cdot(-8) + 27$. \checkmark Also affin glatt genau für $4a^{3} + 27b^{2}\ne0$.
+
+\schritt{Schritt 3 --- Im Unendlichen}
+Homogen: $F = y^{2}z - x^{3} - axz^{2} - bz^{3}$; bei $z = 0$: $x^{3} = 0$, einziger Punkt $\mathcal O = (0 : 1 : 0)$. $\nabla F = (-3x^{2} - az^{2},\ 2yz,\ y^{2} - 2axz - 3bz^{2})$, in $\mathcal O$: $(0, 0, 1)\ne0$. Glatt, immer. $\blacksquare$
+
+\schritt{Schritt 4 --- Probe}
+$a = -2$, $b = 0$: $4\cdot(-8) + 0 = -32\ne0$, glatt. \checkmark\ $a = -3$, $b = 2$: $4\cdot(-27) + 27\cdot4 = 0$: $x^{3} - 3x + 2 = (x - 1)^{2}(x + 2)$, Knoten in $(1, 0)$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Diskriminante ist die Resultante von $g$ und $g'$, und das ist kein Zufall}: Für jedes Polynom ist $\mathrm{Disc}(g) = \pm\mathrm{Res}(g, g')/\mathrm{LC}(g)$, die Bedingung für eine mehrfache Nullstelle, und für die Kurve $y^{2} = g(x)$ ist eine mehrfache Nullstelle von $g$ genau ein singulärer Punkt. Für Kurven höheren Grades $y^{2} = g(x)$ mit $\deg g = 5, 6$ --- hyperelliptische Kurven, Geschlecht $2$ --- gilt dasselbe, und sie haben kein Gruppengesetz mehr: Kapitel 12.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.2 --- Eine Gruppe über $\mathbb F_7$}
+Bestimmen Sie alle Punkte von $E\colon y^{2} = x^{3} - 2x$ über $\mathbb F_7$ und die Gruppenstruktur.
+
+\loesung
+\schritt{Schritt 1 --- Quadrate in $\mathbb F_7$}
+$0^{2} = 0$, $(\pm1)^{2} = 1$, $(\pm2)^{2} = 4$, $(\pm3)^{2} = 2$. Quadrate: $\{0, 1, 2, 4\}$.
+
+\schritt{Schritt 2 --- Rechte Seite}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.0cm}P{0.7cm}P{0.7cm}P{0.7cm}P{0.7cm}P{0.7cm}P{0.7cm}P{0.7cm}@{}}
+\toprule
+$x$ & $0$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$\\
+\midrule
+$x^{3} - 2x \bmod 7$ & $0$ & $6$ & $4$ & $0$ & $0$ & $3$ & $1$\\
+Quadrat? & ja & nein & ja & ja & ja & nein & ja\\
+$y$ & $0$ & --- & $\pm2$ & $0$ & $0$ & --- & $\pm1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+($x = 3$: $27 - 6 = 21\equiv0$; $x = 4$: $64 - 8 = 56\equiv0$; $x = 5$: $125 - 10 = 115\equiv3$; $x = 6$: $216 - 12 = 204\equiv1$.)
+
+\schritt{Schritt 3 --- Zählen}
+$(0,0), (3,0), (4,0)$: drei Punkte der Ordnung $2$. $(2, \pm2)$, $(6, \pm1)$: vier weitere. Plus $\mathcal O$: $\#E(\mathbb F_7) = 8 = 7 + 1$. \checkmark\ (Tabelle oben.)
+
+\schritt{Schritt 4 --- Struktur}
+Drei Elemente der Ordnung $2$: Die Gruppe ist nicht zyklisch ($\mathbb Z/8$ hätte nur eines). Ordnung $8$, nicht zyklisch, abelsch: $\mathbb Z/2\times\mathbb Z/4$ oder $(\mathbb Z/2)^{3}$. Probe: $2\cdot(2, 2)$ mit $m = (3\cdot4 - 2)/(2\cdot2) = 10/4 = 3\cdot2 = 6\equiv-1$ (in $\mathbb F_7$: $4^{-1} = 2$); $x_3 = 1 - 4 = -3\equiv4$, $y_3 = -1\cdot(2 - 4) - 2 = 2 - 2 = 0$: $2\cdot(2,2) = (4, 0)\ne\mathcal O$. Also hat $(2, 2)$ Ordnung $4$, und $E(\mathbb F_7)\cong\mathbb Z/2\times\mathbb Z/4$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Gruppe über $\mathbb F_p$ ist stets $\mathbb Z/n$ oder $\mathbb Z/n_1\times\mathbb Z/n_2$ mit $n_1\mid n_2$} --- höchstens zwei Erzeuger, weil die $m$-Torsion einer elliptischen Kurve über $\overline{k}$ stets $(\mathbb Z/m)^{2}$ ist (Auslassung 15). Für die Kryptographie will man $\#E(\mathbb F_p)$ prim oder fast prim, damit die Gruppe zyklisch ist und keine kleinen Untergruppen hat; $8 = 2^{3}$ wäre eine schlechte Wahl, und $p = 7$ sowieso.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 10.3 --- Kongruente Zahlen}
+Eine natürliche Zahl $n$ heißt kongruent, wenn sie Flächeninhalt eines rechtwinkligen Dreiecks mit rationalen Seiten ist. Zeigen Sie: $n$ ist kongruent genau dann, wenn $y^{2} = x^{3} - n^{2}x$ einen rationalen Punkt mit $y\ne0$ hat, und folgern Sie etwas über $n = 2$ aus der Titelkurve? Vorsicht.
+
+\loesung
+\schritt{Schritt 1 --- Vom Dreieck zur Kurve}
+Seien $a, b, c$ rational mit $a^{2} + b^{2} = c^{2}$ und $ab/2 = n$. Setze $x = (c/2)^{2}$, $y = (a^{2} - b^{2})c/8$. Dann $x^{3} - n^{2}x = x(x^{2} - n^{2}) = \frac{c^{2}}{4}\Bigl(\frac{c^{4}}{16} - \frac{a^{2}b^{2}}{4}\Bigr) = \frac{c^{2}}{64}(c^{4} - 4a^{2}b^{2}) = \frac{c^{2}}{64}\bigl((a^{2} + b^{2})^{2} - 4a^{2}b^{2}\bigr) = \frac{c^{2}(a^{2} - b^{2})^{2}}{64} = y^{2}$. \checkmark\ Und $y\ne0$, da $a\ne b$ (sonst $c = a\sqrt2$ irrational).
+
+\schritt{Schritt 2 --- Zurück}
+Umgekehrt gibt ein Punkt $(x, y)$ mit $y\ne0$ das Dreieck $a = |x^{2} - n^{2}|/|y|$, $b = 2nx/|y|$, $c = (x^{2} + n^{2})/|y|$: $a^{2} + b^{2} = \frac{(x^{2} - n^{2})^{2} + 4n^{2}x^{2}}{y^{2}} = \frac{(x^{2} + n^{2})^{2}}{y^{2}} = c^{2}$ \checkmark, und $ab/2 = \frac{n x(x^{2} - n^{2})}{y^{2}} = \frac{n(x^{3} - n^{2}x)}{y^{2}} = n$. \checkmark
+
+\schritt{Schritt 3 --- Die Titelkurve}
+$y^{2} = x^{3} - 2x$ ist \textbf{nicht} von der Form $x^{3} - n^{2}x$ ($2$ ist kein Quadrat); sie gehört zu $n = \sqrt2$ und sagt über $n = 2$ nichts. Die Kurve zu $n = 2$ ist $y^{2} = x^{3} - 4x$, und ihre rationalen Punkte sind nur $\mathcal O, (0, 0), (\pm2, 0)$ --- alle mit $y = 0$ (Fermat, mit unendlichem Abstieg): $2$ ist nicht kongruent, ebenso wenig $1$ und $3$. Die kleinste kongruente Zahl ist $5$ ($a = \tfrac32$, $b = \tfrac{20}{3}$, $c = \tfrac{41}{6}$), dann $6$ (das Dreieck $3, 4, 5$), $7$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Frage, welche Zahlen kongruent sind, ist tausend Jahre alt} (arabische Handschriften des 10.\ Jahrhunderts, Fibonacci 1225) und bis heute offen: Sie ist gleichbedeutend mit der Frage, ob der Rang von $y^{2} = x^{3} - n^{2}x$ positiv ist, und \Person{Tunnell} gab 1983 ein Kriterium, das genau dann vollständig ist, wenn Birch--Swinnerton-Dyer für diese Kurven gilt. Die Vorsicht in der Aufgabenstellung galt dem Reflex, die Titelkurve für die Kurve zu $n = 2$ zu halten; der Reflex ist verbreitet und falsch.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Von Diophant zu Mordell}
+\Person{Diophant} (3.\ Jh.) konstruierte aus zwei rationalen Lösungen einer kubischen Gleichung eine dritte --- das Sekantenverfahren, ohne Geometrie. \Person{Fermat} bewies um 1640 mit dem unendlichen Abstieg, dass $x^{4} + y^{4} = z^{2}$ keine Lösung hat --- und damit, dass $1$ nicht kongruent ist; es war der erste Beweis, dass eine elliptische Kurve nur endlich viele rationale Punkte hat.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Newton} sah um 1670 die Sekanten- und Tangentenkonstruktion geometrisch; \Person{Jacobi} 1835 und \Person{Clebsch} 1864 erkannten, dass sie ein Gruppengesetz ist --- über die elliptischen Funktionen, die der Kurve ihren Namen gaben (sie kommen aus der Bogenlänge der Ellipse, nicht aus ihrer Form). \textbf{\Person{Poincaré} vermutete 1901, dass die rationalen Punkte endlich erzeugt sind; \Person{Mordell} bewies es 1922}, mit Fermats Abstieg als Kern; \Person{Weil} verallgemeinerte 1928 auf Zahlkörper und höhere Dimension. Seit \Person{Wiles} 1995 weiß man, dass jede elliptische Kurve über $\mathbb Q$ modular ist --- der Satz, aus dem Fermats letzter Satz folgt, und zugleich der Grund, warum man die Punktzahlen $\#E(\mathbb F_p)$ als Koeffizienten einer Modulform lesen kann.}
+\end{minipage}
+\end{center}
+
+\schritt{Nagell und Lutz}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Trygve Nagell} 1935 und \Person{Élisabeth Lutz} 1937 --- Lutz als Doktorandin Weils in Straßburg --- bewiesen unabhängig, dass Torsionspunkte ganze Koordinaten haben. \textbf{Der Satz macht die Torsion berechenbar}: endlich viele Kandidaten, jeder in endlich vielen Schritten zu prüfen. Für den Rang gibt es nichts Vergleichbares, und das ist der Grund, warum die Zahlentheorie der elliptischen Kurven ein offenes Gebiet geblieben ist, hundert Jahre nach Mordell.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Elliptische Kurven heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Birch--Swinnerton-Dyer} & Bewiesen für Rang $0$ und $1$ (Gross--Zagier 1986, Kolyvagin 1989); offen darüber. Millennium-Problem.\\
+\textbf{Rangverteilung} & Bhargava--Shankar 2010--2015: Der mittlere Rang ist höchstens $0{,}885$; mindestens ein Fünftel aller Kurven hat Rang $0$, mindestens ein Fünftel Rang $1$. Die Vermutung: Hälfte $0$, Hälfte $1$, Rest Maß null.\\
+\textbf{Beschränkter Rang?} & Seit 2010 (Park--Poonen--Voight--Wood 2019, Heuristik) glaubt man, dass der Rang beschränkt ist --- vielleicht durch $21$. Der Rekord $28$ von Elkies wäre dann eine der endlich vielen Ausnahmen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{\Person{Manjul Bhargava} hat mit Methoden der Geometrie der Zahlen (Band 1) etwas bewiesen, das niemand für erreichbar hielt}: Aussagen über \kursiv{alle} elliptischen Kurven im Mittel, ohne eine einzige im Einzelnen zu verstehen. Zusammen mit \Person{Skinner} und \Person{Zhang} folgt, dass Birch--Swinnerton-Dyer für mehr als zwei Drittel aller Kurven gilt --- der erste Beweis einer Millennium-Vermutung \enquote{im Durchschnitt}. Für den Leitfall ist das weit weg; für die Kryptographie nicht: Die Verteilung der Punktzahlen $\#E(\mathbb F_p)$ über alle Kurven (Sato--Tate, bewiesen 2011) sagt, wie oft eine zufällig gewählte Kurve eine Primzahl als Ordnung hat --- und damit, wie lange man suchen muss, Kapitel 14.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 10.1} & Weierstraß-Form, $\Delta\ne0$, $\mathcal O$\\
+\textbf{Satz 10.2} & Gruppengesetz mit Formeln; $P + Q + R = \mathcal O$ auf Geraden\\
+\textbf{Satz 10.3} & Assoziativität über neun Punkte\\
+\textbf{Satz 10.4} & Mordell, Nagell--Lutz, Hasse; Titelkurve: $\mathbb Z\oplus\mathbb Z/2$\\
+\textbf{Der Bruchfall} & singulär: Gruppe ist $k$ oder $k^{\times}$; anomale Kurven\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Kubik hat eine Gruppe und keine rationale Parametrisierung; der Kreis hat eine Parametrisierung und keine Gruppe dieser Art. Kapitel 11 sagt, welche Kurven sich parametrisieren lassen --- und wie.}
+\end{minipage}
+\end{center}
+\end{merksatz}

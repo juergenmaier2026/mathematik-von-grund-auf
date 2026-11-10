@@ -1,0 +1,272 @@
+\chapter{Die Dimension des Attraktors}
+
+\section{Eine Zahl zwischen zwei und drei}
+
+\begin{merksatz}
+\boxtitel{Lorenz, gemessen}
+Man zähle, welcher Anteil aller Punktepaare des Attraktors näher beieinander liegt als $\varepsilon$: die \Begriff{Korrelationssumme} $C(\varepsilon)$. Für die $6000$ Punkte der Einbettung aus Kapitel 10 ($x$-Kanal, $\tau = 0{,}16$, $m = 3$):
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.4cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}P{0.9cm}@{}}
+\toprule
+$\varepsilon$ & $0{,}15$ & $0{,}23$ & $0{,}36$ & $0{,}55$ & $0{,}84$ & $1{,}28$ & $1{,}96$\\
+\midrule
+Steigung $\frac{\Delta\ln C}{\Delta\ln\varepsilon}$ & $1{,}72$ & $1{,}93$ & $1{,}96$ & $2{,}01$ & $2{,}00$ & $1{,}96$ & $1{,}85$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.6cm}P{1.0cm}P{1.0cm}P{1.0cm}P{1.0cm}P{1.6cm}@{}}
+\toprule
+$m$ & $2$ & $3$ & $4$ & $5$ & \textbf{wahr (3D)}\\
+\midrule
+Lorenz, $D_2$ & $1{,}74$ & $1{,}93$ & $1{,}99$ & $2{,}00$ & $2{,}05$\\
+Rauschen, $D_2$ & $1{,}97$ & $2{,}97$ & $4{,}11$ & $5{,}06$ & ---\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Über eine Dekade von $\varepsilon$ ist die Steigung $2{,}0$: $C(\varepsilon)\sim\varepsilon^{2{,}0}$ --- wie bei einer Fläche, fast. Mit wachsendem $m$ sättigt der Wert bei $2{,}0$; beim Rauschen wächst er mit $m$ und sättigt nie.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Zwei Beobachtungen machen die Messung}: ein Plateau in $\varepsilon$ --- die Skalierung --- und eine Sättigung in $m$ --- der Attraktor ist entfaltet und wird durch mehr Dimensionen nicht größer. Rauschen hat beides nicht: Es füllt jeden Raum, den man ihm gibt. Dass $6000$ Punkte $2{,}00$ statt $2{,}05$ liefern, ist die endliche Länge; die Kaplan-Yorke-Dimension $2{,}06$ aus Kapitel 9 und der direkte Wert $2{,}05$ aus allen drei Koordinaten stimmen. Dieses Kapitel sagt, was die Zahl bedeutet und wie man sie ehrlich misst.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Was eine Dimension ist}
+
+\begin{definition}
+\boxtitelm{Definition 11.1 --- Box-Dimension}
+Man überdecke eine beschränkte Menge $A$ mit Würfeln der Kantenlänge $\varepsilon$ und zähle die benötigten: $N(\varepsilon)$. Die \Begriff{Box-Dimension} ist
+\[ D_0 = \lim_{\varepsilon\to0}\frac{\ln N(\varepsilon)}{\ln(1/\varepsilon)} , \]
+falls der Grenzwert existiert --- die Zahl $D$, für die $N(\varepsilon)\sim\varepsilon^{-D}$.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 11.2 --- Beispiele, nachgerechnet}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.6cm}P{3.6cm}P{2.4cm}@{}}
+\toprule
+\textbf{Menge} & $N(\varepsilon)$ & $D_0$\\
+\midrule
+Strecke der Länge $1$ & $1/\varepsilon$ & $1$\\
+Quadrat & $1/\varepsilon^{2}$ & $2$\\
+Cantor-Menge & $2^{k}$ bei $\varepsilon = 3^{-k}$ & $\ln2/\ln3 = 0{,}631$\\
+Koch-Kurve & $4^{k}$ bei $\varepsilon = 3^{-k}$ & $\ln4/\ln3 = 1{,}262$\\
+Sierpinski-Dreieck & $3^{k}$ bei $\varepsilon = 2^{-k}$ & $\ln3/\ln2 = 1{,}585$\\
+Lorenz-Attraktor & --- & $2{,}06$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Cantor}
+Aus $[0,1]$ das mittlere Drittel entfernen, aus den Resten wieder, und so fort. Nach $k$ Schritten: $2^{k}$ Intervalle der Länge $3^{-k}$, jedes eine Box. $\ln2^{k}/\ln3^{k} = \ln2/\ln3$. \checkmark\ Die Menge hat Länge $\lim(2/3)^{k} = 0$ und überabzählbar viele Punkte: mehr als ein Punkt, weniger als eine Strecke --- $0{,}631$.
+
+\schritt{Warum der Lorenz-Attraktor $2{,}06$ hat}
+Quer zu den Blättern ist er eine Cantor-Menge, erzeugt vom Dehnen und Falten (Kapitel 8); in den Blättern eine Fläche. Dimensionen addieren sich bei Produkten: $2 + 0{,}06$, und die $0{,}06$ ist die Dimension der Cantor-Menge quer zum Blatt --- so dünn, weil die Kontraktion $\mathrm e^{-14{,}57}$ so stark ist. Kaplan--Yorke (Aufgabe 9.2) ist genau diese Rechnung: $\lambda_1/|\lambda_3| = 0{,}062$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine Dimension zwischen den ganzen Zahlen ist kein Rätsel, sondern eine Zählweise}: Sie sagt, wie schnell die Zahl der nötigen Boxen wächst, wenn man feiner hinsieht --- und für Mengen, die auf jeder Skala Struktur haben, wächst sie mit einer Potenz, die keine ganze Zahl sein muss. \Person{Mandelbrot} nannte solche Mengen 1975 Fraktale; die Dimension selbst ist von \Person{Hausdorff} 1918, in einer feineren Fassung, die für die Mengen dieses Bandes dasselbe liefert (Auslassung 13).}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Die Korrelationsdimension}
+
+\begin{merksatz}
+\boxtitel{Satz 11.3 --- Grassberger und Procaccia}
+Für $N$ Punkte $\mathbf s_i$ auf dem Attraktor sei
+\[ C(\varepsilon) = \frac{2}{N(N-1)}\sum_{i<j}\Theta\bigl(\varepsilon - |\mathbf s_i - \mathbf s_j|\bigr) \]
+der Anteil der Paare mit Abstand unter $\varepsilon$. Die \Begriff{Korrelationsdimension} ist
+\[ D_2 = \lim_{\varepsilon\to0}\lim_{N\to\infty}\frac{\ln C(\varepsilon)}{\ln\varepsilon} , \]
+und es gilt $D_2 \le D_0$, mit Gleichheit für gleichmäßig besuchte Attraktoren.
+
+\schritt{Warum $\le D_0$}
+$C(\varepsilon)$ gewichtet dicht besuchte Gegenden stärker --- ein Paar in einer vollen Box zählt wie jedes andere, und volle Boxen haben mehr Paare. $D_0$ zählt jede Box einmal, ob voll oder fast leer; so kommen dünne Ränder in $D_0$ voll zur Geltung und in $D_2$ kaum. Ist die Besuchsdichte gleichmäßig, fällt der Unterschied weg (Auslassung 14). $\blacksquare$
+
+\schritt{Warum $D_2$ und nicht $D_0$}
+Boxen zählen in $m = 5$ Dimensionen bei $\varepsilon = 0{,}01$ heißt $10^{10}$ Boxen verwalten, fast alle leer. Paare zählen heißt $N^{2}/2$ Abstände --- für $N = 6000$ sind das $18$ Millionen, eine Sekunde. Und die Statistik ist besser: Jeder Punkt trägt $N - 1$ Abstände bei, nicht eine Box.
+
+\schritt{Das Verfahren}
+Einbetten ($\tau$ aus der Transinformation); $C(\varepsilon)$ für $m = 2, 3, \ldots$ über drei Dekaden von $\varepsilon$; lokale Steigung $\mathrm d\ln C/\mathrm d\ln\varepsilon$ gegen $\ln\varepsilon$ auftragen; ein Plateau suchen; den Plateauwert gegen $m$ auftragen; die Sättigung lesen. Keines der fünf Bilder darf fehlen.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Plateau ist die Prüfung, nicht die Zahl.} Für Lorenz reicht es von $\varepsilon = 0{,}23$ bis $1{,}3$ --- eine knappe Dekade, bei $6000$ Punkten; darunter werden die Paare rar (Steigung fällt: $1{,}72$, $1{,}53$), darüber sieht man den Attraktor als Ganzes (Steigung fällt: $1{,}85$, $1{,}72$). Wer eine Gerade durch alle Punkte legt, bekommt irgendeine Zahl; wer das Plateau liest, bekommt die Dimension. Hénon ($a = 1{,}4$, $b = 0{,}3$) gibt so $1{,}18$ (Literatur $1{,}21$); die Feigenbaum-Menge bei $r_\infty$ hat $D_0 = 0{,}538$, und ihre $D_2$ ist kleiner --- $0{,}50$ ---, weil sie ungleich besucht wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Farbiges Rauschen hat eine Dimension}
+Man nehme Rauschen mit Spektrum $1/f^{\alpha}$ --- zufällige Phasen, Amplituden nach Potenzgesetz, sonst nichts --- und messe $D_2$:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{2.8cm}P{1.0cm}P{1.0cm}P{1.0cm}P{1.0cm}P{1.0cm}@{}}
+\toprule
+$m$ & $2$ & $3$ & $4$ & $5$ & $6$\\
+\midrule
+weiß ($\alpha = 0$) & $1{,}97$ & $2{,}97$ & $4{,}11$ & $5{,}06$ & ---\\
+$\alpha = 2$ & $1{,}18$ & $1{,}53$ & $1{,}95$ & $2{,}43$ & $2{,}95$\\
+$\alpha = 2{,}5$ & $0{,}89$ & $0{,}92$ & $0{,}97$ & $1{,}03$ & $1{,}12$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Rauschen mit $\alpha = 2{,}5$ sättigt bei $D_2 \approx 1$: Nach allen Regeln des Verfahrens ein niederdimensionaler Attraktor --- aus einem Prozess, in dem nichts als Zufall steckt.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{\Person{Osborne} und \Person{Provenzale} haben das 1989 gezeigt, und es hat die Chaos-Diagnostik verändert.} Der Grund: Ein Prozess mit steilem Spektrum ist glatt --- benachbarte Werte sind fast gleich ---, und eine glatte Kurve hat in jeder Einbettung die Dimension einer Kurve, nämlich etwa $1$, solange $\varepsilon$ größer ist als die Rauigkeit. Die Sättigung in $m$ ist also keine Garantie für Determinismus; sie beweist nur, dass die Reihe auf den geprüften Skalen glatt ist. Klima, Herzfrequenz, EEG und Kurse haben alle steile Spektren --- und alle bekamen in den achtziger Jahren Dimensionen zwischen $3$ und $8$, die diesem Test nicht standhielten. Was den Unterschied macht, zeigt Kapitel 12: Surrogate, die dasselbe Spektrum haben und sonst nichts.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.1 --- Eine Cantor-Menge mit anderem Maß}
+Aus $[0,1]$ werde jeweils das mittlere \kursiv{Fünftel} entfernt. Dimension?
+
+\loesung
+\schritt{Schritt 1 --- Die Konstruktion}
+Jedes Intervall der Länge $\ell$ wird durch zwei der Länge $\tfrac25\ell$ ersetzt. Nach $k$ Schritten: $2^{k}$ Intervalle der Länge $(2/5)^{k}$.
+
+\schritt{Schritt 2 --- Dimension}
+$D_0 = \lim\frac{\ln2^{k}}{\ln(5/2)^{k}} = \frac{\ln2}{\ln2{,}5} = \frac{0{,}693}{0{,}916} = 0{,}756$.
+
+\schritt{Schritt 3 --- Probe}
+Weniger entfernen ($\tfrac15$ statt $\tfrac13$) lässt mehr übrig: $0{,}756 > 0{,}631$. \checkmark\ Im Grenzfall \enquote{nichts entfernen}: $\ln2/\ln2 = 1$, die Strecke. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Allgemein: $N$ Kopien, jede um den Faktor $s$ verkleinert, geben $D = \ln N/\ln(1/s)$} --- die Ähnlichkeitsdimension, die für selbstähnliche Mengen mit $D_0$ übereinstimmt. Für den Lorenz-Attraktor gibt es keine solche Formel, weil die Kontraktion von Ort zu Ort verschieden ist; aber die Idee ist dieselbe: quer zum Blatt in jedem Umlauf zwei Kopien, jede um $\mathrm e^{-14{,}57\cdot T}$ verkleinert, und daraus die $0{,}06$.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.2 --- Die Steigung lesen}
+Aus einer Reihe wurden in $m = 4$ gemessen: $C(0{,}1) = 2{,}0\cdot10^{-4}$, $C(0{,}2) = 1{,}6\cdot10^{-3}$, $C(0{,}4) = 1{,}3\cdot10^{-2}$, $C(0{,}8) = 6{,}0\cdot10^{-2}$, $C(1{,}6) = 0{,}18$. Dimension? Plateau?
+
+\loesung
+\schritt{Schritt 1 --- Lokale Steigungen}
+Je Verdopplung von $\varepsilon$ ist $\Delta\ln\varepsilon = 0{,}693$:
+$\ln(1{,}6/0{,}2)/0{,}693 = \ln8/\ln2 = 3{,}00$; $\ln(13/1{,}6)/0{,}693 = 2{,}095/0{,}693 = 3{,}02$; $\ln(60/13)/0{,}693 = 1{,}529/0{,}693 = 2{,}21$; $\ln(0{,}18/0{,}06)/0{,}693 = 1{,}585$.
+
+\schritt{Schritt 2 --- Lesen}
+Plateau bei $3{,}0$ von $\varepsilon = 0{,}1$ bis $0{,}4$; darüber fällt die Steigung --- der Attraktor ist bei $\varepsilon \approx 1$ ausgeschöpft. $D_2 \approx 3{,}0$ in $m = 4$.
+
+\schritt{Schritt 3 --- Was fehlt}
+Ob $3{,}0$ die Dimension ist, sagt erst die Sättigung: In $m = 5, 6$ muss derselbe Wert kommen. Käme $4{,}0$, $5{,}0$, wäre es Rauschen (Tabelle). Und selbst bei Sättigung bleibt der Bruchfall --- ein Surrogattest, Kapitel 12.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{$N$ für ein Plateau bis $\varepsilon = 0{,}1$ bei $D = 3$}: $C(0{,}1) = 2\cdot10^{-4}$ heißt, dass zwei von zehntausend Paaren so nah sind; für $100$ solche Paare --- das Minimum für eine Steigung --- braucht man $N^{2}/2 \ge 5\cdot10^{5}$, $N \ge 1000$. Eine Dekade tiefer wären es $N \ge 30\,000$: Das ist Eckmann--Ruelle in Zahlen.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 11.3 --- Information und Dimension}
+Die \Begriff{Informationsdimension} ist $D_1 = \lim\frac{\sum p_i\ln p_i}{\ln\varepsilon}$ mit den Besuchswahrscheinlichkeiten $p_i$ der Boxen. Zeigen Sie $D_2 \le D_1 \le D_0$ und berechnen Sie alle drei für eine Cantor-Menge, deren linke Hälfte mit Wahrscheinlichkeit $\tfrac23$ besucht wird.
+
+\loesung
+\schritt{Schritt 1 --- Die Kette}
+Alle drei sind Spezialfälle $D_q = \frac{1}{q-1}\lim\frac{\ln\sum p_i^{q}}{\ln\varepsilon}$ ($q = 0$: Boxen zählen; $q \to 1$: Entropie; $q = 2$: Paare). $D_q$ fällt in $q$ (Hölder-Ungleichung, Auslassung 14), also $D_2 \le D_1 \le D_0$.
+
+\schritt{Schritt 2 --- $D_0$}
+Unabhängig von den Wahrscheinlichkeiten: $\ln2/\ln3 = 0{,}631$.
+
+\schritt{Schritt 3 --- $D_1$}
+Nach $k$ Schritten: Entropie $k\,H(\tfrac23,\tfrac13) = k\cdot0{,}6365$; $D_1 = 0{,}6365/\ln3 = 0{,}579$.
+
+\schritt{Schritt 4 --- $D_2$}
+$\sum p_i^{2} = \bigl((\tfrac23)^{2} + (\tfrac13)^{2}\bigr)^{k} = (\tfrac59)^{k}$; $D_2 = \ln(9/5)/\ln3 = 0{,}5878/1{,}0986 = 0{,}535$.
+
+\schritt{Schritt 5 --- Probe}
+$0{,}535 \le 0{,}579 \le 0{,}631$. \checkmark\ Bei gleichen Wahrscheinlichkeiten $\tfrac12$: $H = \ln2$, $\sum p^{2} = \tfrac12$, alle drei $= 0{,}631$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Ein Attraktor hat nicht eine Dimension, sondern ein Spektrum} --- und die Kluft zwischen $D_0$ und $D_2$ misst, wie ungleich er besucht wird: Multifraktalität. Für Lorenz ist sie klein ($2{,}06$ gegen $2{,}05$); für die Feigenbaum-Menge groß ($0{,}538$ gegen $0{,}50$); für Turbulenz und Finanzreihen ist das Spektrum selbst der Gegenstand (Band 27, Kapitel 14).}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Wie lang ist die Küste Britanniens?}
+\Person{Lewis Fry Richardson} --- der Meteorologe aus Kapitel 15, Pazifist und Quäker --- maß in den vierziger Jahren Küsten und Grenzen mit Zirkeln verschiedener Öffnung und fand, dass die Länge mit kleinerer Öffnung ohne Grenze wächst: $L(\varepsilon)\sim\varepsilon^{1-D}$ mit $D = 1{,}25$ für die Westküste Britanniens.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Die Arbeit erschien 1961 postum in einem Jahrbuch für Konfliktforschung --- er hatte untersucht, ob Länder mit längeren gemeinsamen Grenzen häufiger Krieg führen. \textbf{\Person{Mandelbrot} fand sie und machte 1967 in \enquote{Science} aus der Fußnote ein Programm}: Die Küste hat keine Länge, sondern eine Dimension. 1975 prägte er das Wort Fraktal, 1982 erschien \enquote{The Fractal Geometry of Nature}. \Person{Grassberger} und \Person{Procaccia} gaben 1983 das Verfahren, mit dem man eine Dimension aus Daten misst; innerhalb von fünf Jahren war es auf alles angewandt worden, und \Person{Ruelle} warnte 1990 in einem Aufsatz mit dem Titel \enquote{Deterministic chaos: the science and the fiction} vor den Ergebnissen.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Dimension heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Intrinsische Dimension} & Dasselbe Problem im maschinellen Lernen: Bilder, Texte und Netzaktivität liegen auf Mannigfaltigkeiten niedriger Dimension in Räumen hoher --- gemessen mit Verwandten von $D_2$ (Levina--Bickel, TwoNN).\\
+\textbf{Neuronale Mannigfaltigkeiten} & Populationsaktivität von Tausenden Neuronen hat eine Dimension von etwa $10$ bis $100$; was darunter liegt, ist Rauschen, was darüber, Redundanz.\\
+\textbf{Multifraktale Herzfrequenz} & Nicht die Dimension, sondern das Spektrum der $D_q$ unterscheidet gesund von krank (Ivanov 1999) --- der Fund, der die Chaos-Diagnostik überlebt hat.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Methode dieses Kapitels ist, unter anderem Namen, Alltag der Neurowissenschaft geworden.} Man zeichnet tausend Neuronen auf, bettet ein --- die Koordinaten sind jetzt die Neuronen, nicht die Verzögerungen --- und fragt, in wie vielen Dimensionen die Aktivität wirklich liegt: Bei Bewegungen des Arms etwa zehn, bei Orientierung im Raum ein Ring (Kopfrichtung) oder ein Torus (Gitterzellen; Gardner 2022). Die Antwort \enquote{ein Torus} aus den Daten von $150$ Zellen ist Takens plus Dimension, und die Vorsicht aus dem Bruchfall gilt dort wie hier.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 11.1} & Box-Dimension $N(\varepsilon)\sim\varepsilon^{-D}$\\
+\textbf{Satz 11.2} & Cantor $0{,}631$, Koch $1{,}262$, Lorenz $2{,}06$\\
+\textbf{Satz 11.3} & Grassberger--Procaccia: Plateau in $\varepsilon$, Sättigung in $m$\\
+\textbf{$D_q$} & $D_2 \le D_1 \le D_0$\\
+\textbf{Der Bruchfall} & farbiges Rauschen sättigt auch\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Dimension ist gemessen, und der Bruchfall hat gezeigt, dass sie allein nichts beweist. Kapitel 12 baut den Test, der fehlt: Wie unterscheidet man einen Attraktor von Rauschen, das aussieht wie einer?}
+\end{minipage}
+\end{center}
+\end{merksatz}

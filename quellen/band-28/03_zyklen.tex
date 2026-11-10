@@ -1,0 +1,324 @@
+\chapter{Die Schwingung, die von allein kommt}
+
+\section{Der Sinusknoten}
+
+\begin{merksatz}
+\boxtitel{Eine Zelle, die nicht ruhen kann}
+Bei $I = 0{,}5$ ist die Ruhe der Herzzelle ein abstoßender Strudel. Die Bahn, die ihn verlässt, läuft aber nicht ins Unendliche: Sie findet nach wenigen Umläufen eine geschlossene Kurve und bleibt auf ihr --- Periode $39{,}5$, zwischen $v = -1{,}97$ und $+1{,}85$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Von innen} & Start nahe der Ruhe: Die Spirale wächst, bis sie den Zyklus erreicht.\\
+\textbf{Von außen} & Start bei $v = 3$: Die Bahn wird nach innen gezogen und landet auf demselben Zyklus.\\
+\textbf{Nach einer Störung} & Ein Stoß von $0{,}2$ in $w$ ist nach einem Umlauf auf unter $10^{-4}$ geschrumpft.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Das ist ein Grenzzyklus: eine geschlossene Bahn, die Nachbarn anzieht. Der Sinusknoten ist einer --- und deshalb schlägt das Herz nach jeder Störung im alten Takt weiter.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Unterschied zum Zentrum aus Kapitel~2 ist der Unterschied zwischen Uhr und Pendel ohne Antrieb}: Das Zentrum hat unendlich viele Bahnen, jede mit ihrer eigenen Amplitude, und eine Störung verschiebt die Bahn für immer. Der Grenzzyklus hat eine Amplitude, und sie ist Eigenschaft des Systems, nicht des Anfangs. Alles, was in der Natur einen festen Takt hat --- Herz, Atmung, Schlaf, Jahreszeiten einer Population ---, läuft auf einem Grenzzyklus.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Satz von Poincaré und Bendixson}
+
+\begin{definition}
+\boxtitelm{Definition 3.1 --- Grenzzyklus und Einfangbereich}
+Eine geschlossene Bahn heißt \Begriff{Grenzzyklus}, wenn Bahnen in ihrer Umgebung sich ihr für $t\to\infty$ (anziehend) oder $t\to-\infty$ (abstoßend) nähern. Ein abgeschlossenes, beschränktes Gebiet $R$, das keine Bahn verlässt, heißt \Begriff{Einfangbereich}: Auf dem Rand zeigt das Vektorfeld überall nach innen oder tangential.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 3.2 --- Poincaré und Bendixson}
+Sei $R$ ein Einfangbereich in der Ebene, der keinen Fixpunkt enthält. Dann enthält $R$ eine geschlossene Bahn.
+
+\schritt{Beweis}
+Auslassung 3 für die vollständige Fassung; der Kern: Eine Bahn in $R$ hat, weil $R$ beschränkt ist, einen Häufungspunkt $p$. Durch $p$ lege man eine kurze Querstrecke $\Sigma$, die das Vektorfeld überall in derselben Richtung schneidet. Die Bahn trifft $\Sigma$ immer wieder, und nach Satz 1.2 --- Bahnen schneiden sich nicht --- müssen die Treffpunkte auf $\Sigma$ \kursiv{monoton} liegen: Jeder Umlauf schließt den vorigen ein oder wird von ihm eingeschlossen. Eine monotone, beschränkte Folge konvergiert; ihr Grenzwert auf $\Sigma$ liegt auf einer Bahn, die $\Sigma$ nach einem Umlauf wieder im selben Punkt trifft --- und das ist eine geschlossene Bahn. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{In der Ebene gibt es nur drei Schicksale für eine beschränkte Bahn: ein Fixpunkt, eine geschlossene Bahn oder eine Kette von Sätteln. Chaos ist ausgeschlossen.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der ganze Satz beruht darauf, dass eine geschlossene Kurve die Ebene in innen und außen teilt} --- der Jordansche Kurvensatz aus Band 13 --- und dass Bahnen sich nicht kreuzen. In drei Dimensionen teilt eine geschlossene Kurve nichts; eine Bahn kann über sie hinweg, immer wieder, ohne sich je zu schneiden und ohne je zu schließen. Deshalb braucht Chaos drei Dimensionen, und deshalb ist der Satz für dieses Buch eine Grenze: Er sagt, wo Vorhersage \kursiv{nicht} endet.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Die Herzzelle bei $I = 0{,}5$: der Einfangbereich}
+\schritt{Außen}
+Für große $|v|$ gewinnt der Term $-v^{3}/3$: $\dot v$ hat das Gegenzeichen von $v$. Für große $|w|$ gewinnt $-\varepsilon b w$. Ein hinreichend großes Rechteck wird also auf allen vier Seiten nach innen überquert: ein Einfangbereich.
+
+\schritt{Innen}
+Der einzige Fixpunkt ist der abstoßende Strudel. Um ihn lege man einen kleinen Kreis; nach Satz 2.2 laufen die Bahnen dort nach außen, der Kreis wird von innen nach außen überquert.
+
+\schritt{Der Ring}
+Rechteck ohne Kreisscheibe: Ein Einfangbereich ohne Fixpunkt. Nach Satz 3.2 liegt darin eine geschlossene Bahn. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Beweis sagt, dass der Zyklus existiert. Wo er liegt, wie lang seine Periode ist, ob es nur einen gibt --- das sagt er nicht. Dafür rechnet man.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Muster \enquote{abstoßender Fixpunkt in einem Einfangbereich} ist das Rezept für jede Schwingung in der Ebene.} Man prüft zwei Dinge --- das Vektorfeld am Rand und die Spur im Fixpunkt --- und hat den Grenzzyklus bewiesen, ohne eine Lösung zu kennen. Für die Herzzelle gilt das Rezept genau für $0{,}331 < I < 1{,}419$: das Fenster, in dem die Spur positiv ist. Darunter und darüber ist die Ruhe anziehend, und die Bahnen finden sie statt des Zyklus.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Van der Pol: wie der Zyklus aussieht}
+
+\begin{merksatz}
+\boxtitel{Die Gleichung von van der Pol}
+\[ \ddot x - \mu\,(1-x^{2})\,\dot x + x = 0 \qquad\Longleftrightarrow\qquad \dot x = y, \quad \dot y = \mu(1-x^{2})\,y - x \]
+Eine Schwingung mit Dämpfung $-\mu(1-x^{2})$: negativ für $|x|<1$ (Antrieb), positiv für $|x|>1$ (Bremse). Kleine Ausschläge werden verstärkt, große gebremst --- der Grenzzyklus liegt dazwischen.
+
+\schritt{Simuliert}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.2cm}P{2.0cm}P{2.0cm}P{3.2cm}@{}}
+\toprule
+$\mu$ & \textbf{Periode} & \textbf{Amplitude} & \textbf{Gestalt}\\
+\midrule
+$0{,}1$ & $6{,}29$ & $2{,}000$ & fast ein Kreis, Periode $2\pi$\\
+$1$ & $6{,}66$ & $2{,}009$ & verzerrter Kreis\\
+$5$ & $11{,}6$ & $2{,}02$ & Rechteck mit Sprüngen\\
+$10$ & $19{,}1$ & $2{,}01$ & Relaxation: $T\approx(3-2\ln2)\,\mu = 16{,}1$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Amplitude ist $2$, fast unabhängig von $\mu$. Die Periode wächst mit $\mu$ von $2\pi$ zu $1{,}61\,\mu$ --- und die Gestalt wechselt von der Sinuskurve zum Kippen.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum die Amplitude $2$ ist}
+Für kleines $\mu$ ist die Bahn fast ein Kreis $x = A\cos t$. Die Energie $E = \tfrac12(x^{2}+y^{2})$ ändert sich um $\dot E = \mu(1-x^{2})y^{2}$, über einen Umlauf gemittelt:
+\[ \langle\dot E\rangle = \mu A^{2}\big\langle(1-A^{2}\cos^{2}t)\sin^{2}t\big\rangle = \mu A^{2}\Big(\frac12 - \frac{A^{2}}{8}\Big) . \]
+Null genau für $A = 2$; kleiner $A$ gewinnt, größerer verliert Energie. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Mittelung ist das Verfahren, mit dem man Grenzzyklen berechnet, wenn man sie nicht simulieren will}: Man nimmt an, die Bahn sei nahezu die des ungestörten Systems, und mittelt die Störung über eine Periode. Für großes $\mu$ versagt das, und man rechnet anders --- die Bahn springt zwischen zwei Ästen der Nullkline hin und her, kriecht langsam auf ihnen entlang, und die Periode ist die Kriechzeit: $(3-2\ln 2)\mu$. Das ist die \Begriff{Relaxationsschwingung}, und die Herzzelle mit ihrem kleinen $\varepsilon$ ist eine: schneller Aufstrich, langsames Plateau, schneller Abfall, langsame Erholung. Ein EKG ist das Bild einer Relaxationsschwingung.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Stabilität eines Zyklus}
+
+\begin{merksatz}
+\boxtitel{Satz 3.3 --- die Rückkehrabbildung}
+Sei $\Sigma$ eine Querstrecke durch einen Punkt $p^{*}$ des Zyklus. Die \Begriff{Poincaré-Abbildung} $P$ ordnet jedem Punkt $s\in\Sigma$ nahe $p^{*}$ den Punkt zu, an dem seine Bahn $\Sigma$ nach einem Umlauf wieder trifft. Dann ist $P(p^{*}) = p^{*}$, und der Zyklus ist anziehend, wenn $|P'(p^{*})| < 1$, abstoßend, wenn $|P'(p^{*})| > 1$.
+
+\schritt{Beweis}
+$P$ ist eine Abbildung einer Strecke in sich mit Fixpunkt $p^{*}$; der Abstand $s - p^{*}$ wird je Umlauf mit dem Faktor $P'(p^{*})$ multipliziert --- Band 18, Kapitel~3, für Abbildungen. In der Ebene ist zudem
+\[ P'(p^{*}) = \exp\Big(\int_0^{T}\operatorname{div} f\big(\gamma(t)\big)\,\mathrm dt\Big) , \]
+das Integral der Divergenz entlang des Zyklus $\gamma$ --- Satz 1.3, angewandt auf einen schmalen Streifen um die Bahn. $\blacksquare$
+
+\schritt{Für die Herzzelle bei $I = 0{,}5$}
+Eine Störung von $0{,}2$ in $w$ ist nach einer Rückkehr auf unter $10^{-4}$ gesunken: $|P'| < 10^{-3}$. Die Divergenz ist entlang fast des ganzen Zyklus stark negativ (Aufgabe 1.3) und nur kurz positiv.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Zyklus vergisst eine Störung in einem Umlauf fast vollständig. Darum braucht es nicht viele Schläge, bis ein gestörtes Herz wieder im Takt ist --- und darum ist die Vorhersage des nächsten Schlags so leicht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Poincaré-Abbildung ist der wichtigste Trick dieses Bandes}: Sie macht aus einem Fluss in $n$ Dimensionen eine Abbildung in $n-1$, und aus einer geschlossenen Bahn einen Fixpunkt. Alles, was Band 18 über Abbildungen gesagt hat --- Fixpunkte, Steigung, Periodenverdopplung ---, gilt dann für Zyklen. In Kapitel~7 ist die Rückkehrabbildung des Herzens die Restitutionskurve, und ihre Steigung $1$ ist die Grenze, an der der Takt stolpert.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Zwei Zyklen, und einer ist unsichtbar}
+\[ \dot r = -r\,(r^{2}-1)(2-r^{2}), \qquad \dot\vartheta = 1 \]
+in Polarkoordinaten. Fixpunkte von $\dot r$: $r = 0$, $r = 1$, $r = \sqrt2$.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{1.6cm}P{2.2cm}P{4.6cm}@{}}
+\toprule
+$r$ & $\dot r$ \textbf{daneben} & \textbf{Art}\\
+\midrule
+$0$ & $r < 1$: $\dot r > 0$ & abstoßender Fixpunkt\\
+$1$ & $< 1$: $>0$; $1<r<\sqrt2$: $<0$ & anziehender Zyklus\\
+$\sqrt2$ & $<\sqrt2$: $<0$; $>\sqrt2$: $>0$ & \textbf{abstoßender Zyklus}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Wer dieses System simuliert, sieht einen Zyklus bei $r = 1$ und sonst nichts --- oder, von außen gestartet, Bahnen ins Unendliche. Den Zyklus bei $\sqrt2$ sieht er nie: Keine Bahn bleibt auf ihm.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der unsichtbare Zyklus ist die Grenze des Einzugsgebiets des sichtbaren.} Innerhalb von $r = \sqrt2$ landet alles auf $r = 1$; außerhalb entkommt alles. Für das Herz heißt das: Es gibt Störungen, die der Zyklus verträgt, und solche, die ihn verlassen --- und die Grenze ist keine Zahl, die man dem Zyklus ansieht, sondern ein zweiter, abstoßender Zyklus oder ein Sattel, den die Simulation nicht zeigt, weil nichts in ihm bleibt. Satz 3.2 findet ihn trotzdem --- mit umgekehrter Zeit: Ersetzt man $t$ durch $-t$, wird $r = \sqrt2$ anziehend, und der Ring $1{,}2 < r < 2$ ist ein Einfangbereich ohne Fixpunkt. Die unsichtbaren Objekte findet man, indem man die Zeit umkehrt.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.1 --- Ein Zyklus von Hand}
+$\dot x = x - y - x(x^{2}+y^{2})$, $\dot y = x + y - y(x^{2}+y^{2})$. Zeigen Sie, dass es genau einen Grenzzyklus gibt, und bestimmen Sie ihn.
+
+\loesung
+\schritt{Schritt 1 --- Polarkoordinaten}
+Mit $r^{2} = x^{2}+y^{2}$ und $r\dot r = x\dot x + y\dot y$:
+\[ r\dot r = x^{2} + y^{2} - (x^{2}+y^{2})^{2} = r^{2}(1 - r^{2}) \quad\Longrightarrow\quad \dot r = r(1-r^{2}), \qquad \dot\vartheta = 1 . \]
+
+\schritt{Schritt 2 --- Die Radialgleichung}
+$\dot r = 0$ für $r = 0$ und $r = 1$. Für $0 < r < 1$ ist $\dot r > 0$, für $r > 1$ ist $\dot r < 0$: Jede Bahn außer dem Ursprung strebt gegen $r = 1$.
+
+\schritt{Schritt 3 --- Der Zyklus}
+$r = 1$, $\vartheta = t + \vartheta_0$: der Einheitskreis, Periode $2\pi$, anziehend.
+
+\schritt{Schritt 4 --- Probe mit Satz 3.3}
+Die Rückkehrabbildung auf der positiven $x$-Achse: Lösung von $\dot r = r(1-r^{2})$ ist $r(t)^{-2} = 1 + (r_0^{-2}-1)e^{-2t}$, nach $T = 2\pi$:
+\[ P'(1) = e^{-2\cdot2\pi} = e^{-4\pi} = 3{,}5\cdot10^{-6} . \]
+Und das Divergenzintegral: $\operatorname{div} f = 2 - 4r^{2} = -2$ auf $r=1$, Integral $-2\cdot2\pi = -4\pi$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist die Normalform jedes Grenzzyklus, der aus einem Fixpunkt entsteht} --- Kapitel~5 wird zeigen, dass nahe der Entstehung \kursiv{jedes} System so aussieht, in geeigneten Koordinaten. Der Faktor $e^{-4\pi}$ sagt, dass der Zyklus nach einem Umlauf eine Störung auf drei Millionstel gedrückt hat; die Herzzelle, mit $|P'| < 10^{-3}$, ist kaum schwächer.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.2 --- Kein Zyklus}
+Zeigen Sie: Die gedämpfte Schwingung $\dot x = y$, $\dot y = -x - \gamma y$ mit $\gamma > 0$ hat keine geschlossene Bahn.
+
+\loesung
+\schritt{Schritt 1 --- Das Kriterium von Bendixson}
+Hat $\operatorname{div} f$ in einem einfach zusammenhängenden Gebiet überall dasselbe Vorzeichen (und ist nicht identisch null), so gibt es dort keine geschlossene Bahn.
+
+\schritt{Schritt 2 --- Warum}
+Eine geschlossene Bahn $\gamma$ umschließt ein Gebiet $G$. Nach dem Gaußschen Satz ist $\int_G\operatorname{div} f = \oint_\gamma f\cdot n\,\mathrm ds$, und auf der Bahn ist $f$ tangential: $f\cdot n = 0$. Das Integral der Divergenz über $G$ wäre null --- unmöglich bei festem Vorzeichen.
+
+\schritt{Schritt 3 --- Anwenden}
+$\operatorname{div} f = 0 + (-\gamma) = -\gamma < 0$ in der ganzen Ebene. Keine geschlossene Bahn. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Bendixsons Kriterium ist das Gegenstück zu Poincaré-Bendixson}: Der eine Satz findet Zyklen, der andere schließt sie aus, und beide fragen nur nach dem Vektorfeld, nie nach Lösungen. Für van der Pol ist $\operatorname{div} f = \mu(1-x^{2})$ und wechselt bei $|x| = 1$ das Vorzeichen --- das Kriterium greift nicht, und der Zyklus liegt genau so, dass er beide Zonen durchquert: Amplitude $2$, Vorzeichenwechsel bei $1$. Ein Zyklus braucht eine Zone, die Energie gibt, und eine, die sie nimmt.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 3.3 --- Die Periode der Relaxation}
+Leiten Sie für van der Pol mit großem $\mu$ die Periode $T \approx (3 - 2\ln 2)\,\mu$ her.
+
+\loesung
+\schritt{Schritt 1 --- Liénards Koordinaten}
+Mit $F(x) = x^{3}/3 - x$ und $z = \dot x/\mu + F(x)$ wird die Gleichung zu
+\[ \dot x = \mu\,\big(z - F(x)\big), \qquad \dot z = -\frac{x}{\mu} . \]
+Für großes $\mu$ ist $x$ schnell und $z$ langsam: Die Bahn springt waagerecht auf die Kurve $z = F(x)$ und kriecht auf ihr entlang.
+
+\schritt{Schritt 2 --- Das Kriechen}
+Auf $z = F(x)$ gilt $\dot z = F'(x)\dot x = -x/\mu$, also $\dot x = -x/(\mu F'(x)) = -x/(\mu(x^{2}-1))$. Die Bahn kriecht auf dem rechten Ast von $x = 2$ (dem Sprunglandepunkt) bis $x = 1$ (dem Knick, wo $F' = 0$ und der Sprung einsetzt):
+\[ t = -\mu\int_{2}^{1}\frac{x^{2}-1}{x}\,\mathrm dx = \mu\Big[\frac{x^{2}}{2} - \ln x\Big]_{1}^{2} = \mu\Big(2 - \ln 2 - \frac12\Big) = \mu\Big(\frac32 - \ln 2\Big) . \]
+
+\schritt{Schritt 3 --- Zweimal}
+Rechter und linker Ast: $T = 2\mu(\tfrac32 - \ln2) = (3 - 2\ln2)\,\mu = 1{,}614\,\mu$. Die Sprünge dauern $O(1/\mu)$ und zählen nicht. $\blacksquare$
+
+\schritt{Schritt 4 --- Probe}
+$\mu = 10$: $16{,}1$ gegen simuliert $19{,}1$; die Differenz sind die Sprünge, die bei $\mu = 10$ noch nicht vernachlässigbar sind. Der nächste Term der Entwicklung ist $7{,}01\,\mu^{-1/3} = 3{,}3$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Herzzelle ist dieselbe Rechnung mit $\mu = 1/\varepsilon = 12{,}5$}: Die Periode des Aktionspotentials ist die Kriechzeit auf den beiden äußeren Ästen der kubischen Nullkline, und sie hängt fast nur von $\varepsilon$ ab --- von der Geschwindigkeit der Kaliumkanäle. Medikamente, die die Periode verlängern, verlangsamen das Kriechen; das ist, in einer Gleichung, die Wirkung der Klasse-III-Antiarrhythmika.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Das Radio und das Herz}
+\Person{Balthasar van der Pol} war Ingenieur bei Philips in Eindhoven und untersuchte 1926 die Schwingungen einer Triodenröhre.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Er fand die Gleichung, die seinen Namen trägt, und nannte das Verhalten bei großem $\mu$ \enquote{Relaxationsschwingung}, weil das System sich nach jedem Sprung \enquote{entspannt}. \textbf{1928 schlug er zusammen mit \Person{Jan van der Mark} vor, das Herz als drei gekoppelte Relaxationsoszillatoren zu beschreiben} --- Sinusknoten, Vorhof, Kammer --- und baute die Schaltung nach; beim Verstellen der Kopplung erzeugte sie Rhythmusstörungen, die den klinischen glichen. Es war die erste mathematische Kardiologie, und sie wurde vierzig Jahre nicht ernst genommen.}
+\end{minipage}
+\end{center}
+
+\schritt{Poincaré und Bendixson}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Poincaré bewies den Satz 1886 für analytische Felder, \Person{Ivar Bendixson} 1901 in Stockholm für stetig differenzierbare; sein Kriterium für die Nichtexistenz stammt aus derselben Arbeit. \textbf{Dass der Satz die Ebene vom Chaos ausschließt, wurde erst klar, als es Chaos gab} --- 1963, in drei Dimensionen, Kapitel~8.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Grenzzyklen heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Hilberts 16.\ Problem} & Wie viele Grenzzyklen kann ein polynomiales Feld vom Grad $n$ in der Ebene haben? Für $n = 2$ ist die Antwort bis heute unbekannt (mindestens vier).\\
+\textbf{Phasenantwort\-kurven} & Wie ein Zyklus auf einen kurzen Stoß reagiert, als Funktion des Zeitpunkts --- das Werkzeug für Kapitel~6.\\
+\textbf{Zelluläre Uhren} & Grenzzyklen aus Genregulation: die circadiane Uhr als Relaxationsoszillator mit $24$ Stunden Periode.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Phasenantwortkurve ist die Rückkehrabbildung in anderer Gestalt}: Man stört den Zyklus zu einem bestimmten Zeitpunkt seiner Periode und misst, um wie viel der nächste Schlag früher oder später kommt. Für den Sinusknoten lässt sie sich am Menschen messen --- ein Reiz des Vagusnervs zu verschiedenen Zeitpunkten --- und für die circadiane Uhr ist sie die Grundlage jeder Behandlung des Jetlag: Licht am frühen Morgen verschiebt die Uhr vor, Licht am Abend zurück. Die Kurve, die das beschreibt, ist dieselbe wie die der Herzzelle, und Kapitel~6 berechnet sie.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 3.1} & Grenzzyklus, Einfangbereich\\
+\textbf{Satz 3.2} & Einfangbereich ohne Fixpunkt enthält eine geschlossene Bahn\\
+\textbf{Van der Pol} & Amplitude $2$ durch Mittelung, Periode $1{,}61\mu$ durch Kriechen\\
+\textbf{Satz 3.3} & Poincaré-Abbildung; $|P'| < 1$ heißt anziehend\\
+\textbf{Der Bruchfall} & der unsichtbare Zyklus als Grenze des Einzugsgebiets\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil I hat die Gestalt der Lösungen bei festen Gleichungen beschrieben. Teil II lässt die Gleichungen wandern: Was geschieht mit Fixpunkten und Zyklen, wenn ein Parameter sich stetig ändert --- und warum das Ergebnis nicht stetig ist.}
+\end{minipage}
+\end{center}
+\end{merksatz}

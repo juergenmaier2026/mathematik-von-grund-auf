@@ -1,0 +1,281 @@
+\chapter{Produkte}
+
+\section{Eine Bande, die es nicht geben dürfte}
+
+\begin{merksatz}
+\boxtitel{Methan bei $2830$ cm$^{-1}$}
+Das Infrarotspektrum des Methans zeigt neben den beiden erlaubten Fundamentalen ($T_2$: $3019$ und $1306$ cm$^{-1}$) eine schwächere Bande bei etwa $2830$ cm$^{-1}$. Keine Fundamentale liegt dort. Aber $1534 + 1306 = 2840$: die Summe von $\nu_2$ ($E$, infrarotstumm) und $\nu_4$ ($T_2$). Eine \Begriff{Kombinationsbande} --- beide Schwingungen werden mit je einem Quant angeregt. Welche Symmetrie hat dieser Zustand?
+
+\schritt{Das Produkt der Charaktere}
+Der Zustand lebt im Tensorprodukt der beiden Schwingungsräume; sein Charakter ist das Produkt: $\chi_E\cdot\chi_{T_2} = (2\cdot3, -1\cdot0, 2\cdot(-1), 0, 0) = (6, 0, -2, 0, 0)$. Zerlegung: $m_{T_1} = \frac1{24}(18 + 0 + 6 + 0 + 0) = 1$, $m_{T_2} = 1$, alle anderen $0$: $E\otimes T_2 = T_1 + T_2$.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Kombinationszustand enthält $T_2$ --- also eine Komponente, die den Dipol ändert. Die Bande ist erlaubt, obwohl eine ihrer beiden Fundamentalen verboten ist. Das Produkt zweier Darstellungen entscheidet, und es wird mit der Tafel in einer Zeile gerechnet.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dieses Kapitel behandelt das Tensorprodukt}: Definition und Charakter (ein Produkt), die Zerlegung in Irreduzible (die \emph{Clebsch--Gordan-Reihe}), die symmetrischen und antisymmetrischen Quadrate (für Obertöne und für die Frage, welche Darstellungen reell sind), und den Frobenius--Schur-Indikator, der in einer Zeile sagt, ob eine Darstellung reell, komplex oder quaternionisch ist --- und damit auch den Bruchfall aus Kapitel 4 auflöst: $D_4$ und $Q_8$ haben dieselbe Tafel, aber verschiedene Indikatoren.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Tensorprodukt}
+
+\begin{definition}
+\boxtitelm{Definition 9.1 --- Tensorprodukt von Darstellungen}
+Für Darstellungen $\rho$ auf $V$ und $\sigma$ auf $W$ derselben Gruppe $G$ ist $\rho\otimes\sigma$ die Darstellung auf $V\otimes W$ (Dimension $\dim V\cdot\dim W$) mit $(\rho\otimes\sigma)(g) = \rho(g)\otimes\sigma(g)$ --- in Basen das Kronecker-Produkt der Matrizen. Für Funktionen: Ist $f_1$ vom Typ $\rho$ und $f_2$ vom Typ $\sigma$, so ist das Produkt $f_1f_2$ vom Typ $\rho\otimes\sigma$ (oder eine Komponente davon).
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 9.2 --- Charakter und Zerlegung}
+\begin{enumerate}[label=(\alph*), leftmargin=1.6em]
+\item $\chi_{\rho\otimes\sigma} = \chi_\rho\cdot\chi_\sigma$ (punktweise).
+\item $\rho_i\otimes\rho_j = \bigoplus_kc_{ij}^{k}\rho_k$ mit $c_{ij}^{k} = \langle\chi_i\chi_j, \chi_k\rangle = \frac1{|G|}\sum_g\chi_i(g)\chi_j(g)\overline{\chi_k(g)}$ (\Begriff{Clebsch--Gordan-Reihe}); die $c_{ij}^{k}$ sind symmetrisch in $i, j$.
+\item $\rho\otimes\mathbf 1 = \rho$; für eindimensionales $\lambda$ ist $\rho_i\otimes\lambda$ irreduzibel; $\rho_i\otimes\overline{\rho_i}$ enthält $\mathbf 1$ genau einmal; allgemein $c_{ij}^{\mathbf 1} = 1$ genau dann, wenn $\rho_j\cong\overline{\rho_i}$.
+\end{enumerate}
+
+\schritt{Beweis}
+(a) Spur des Kronecker-Produkts $= $ Produkt der Spuren (Eigenwerte $\lambda_a\mu_b$, Summe $(\sum\lambda_a)(\sum\mu_b)$). (b) Satz 4.4a. (c) $\langle\chi_i\lambda, \chi_i\lambda\rangle = \frac1{|G|}\sum|\chi_i|^{2}|\lambda|^{2} = \langle\chi_i, \chi_i\rangle = 1$, da $|\lambda(g)| = 1$. $\langle\chi_i\chi_j, \mathbf 1\rangle = \frac1{|G|}\sum\chi_i\chi_j = \langle\chi_i, \overline{\chi_j}\rangle$, und $\overline{\chi_j}$ ist der Charakter der konjugierten Darstellung. $\blacksquare$
+
+\schritt{Produkttafeln}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{0.9cm}P{0.9cm}P{2.6cm}@{}}
+\toprule
+$C_{3v}$ & $A_1$ & $A_2$ & $E$\\
+\midrule
+$A_1$ & $A_1$ & $A_2$ & $E$\\
+$A_2$ & & $A_1$ & $E$\\
+$E$ & & & $A_1 + A_2 + E$\\
+\bottomrule
+\end{tabular}
+\qquad
+\begin{tabular}{@{}P{0.8cm}P{0.8cm}P{0.8cm}P{1.8cm}P{2.6cm}P{2.6cm}@{}}
+\toprule
+$T_d$ & $A_1$ & $A_2$ & $E$ & $T_1$ & $T_2$\\
+\midrule
+$A_2$ & $A_2$ & $A_1$ & $E$ & $T_2$ & $T_1$\\
+$E$ & $E$ & $E$ & $A_1 + A_2 + E$ & $T_1 + T_2$ & $T_1 + T_2$\\
+$T_1$ & $T_1$ & $T_2$ & $T_1 + T_2$ & $A_1 + E + T_1 + T_2$ & $A_2 + E + T_1 + T_2$\\
+$T_2$ & $T_2$ & $T_1$ & $T_1 + T_2$ & $A_2 + E + T_1 + T_2$ & $A_1 + E + T_1 + T_2$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+Probe $T_2\otimes T_2 = (9, 0, 1, 1, 1)$: $m_{A_1} = \frac1{24}(9 + 0 + 3 + 6 + 6) = 1$, $m_E = \frac1{24}(18 + 0 + 6) = 1$, $m_{T_1} = \frac1{24}(27 - 3 + 6 - 6) = 1$, $m_{T_2} = \frac1{24}(27 - 3 - 6 + 6) = 1$, $m_{A_2} = \frac1{24}(9 + 3 - 6 - 6) = 0$. Dimension $1 + 2 + 3 + 3 = 9$. \checkmark\ Für $C_{2v}$ (alle eindimensional) ist die Produkttafel die Gruppentafel von $V_4$: $B_1\otimes B_2 = A_2$ usw.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Charaktertafel multiplizieren, zerlegen, fertig: Jedes Chemiebuch druckt die Produkttafeln, und jede ist eine Zeile Rechnung. Produkt mit einer eindimensionalen Darstellung permutiert die Zeilen; das Produkt einer Darstellung mit ihrer Konjugierten enthält die Identität genau einmal.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Symmetrische und antisymmetrische Quadrate}
+
+\begin{merksatz}
+\boxtitel{Satz 9.3 --- $V\otimes V = \mathrm{Sym}^{2}V\oplus\mathrm{Alt}^{2}V$}
+Die Vertauschung $v\otimes w\mapsto w\otimes v$ kommutiert mit $G$; ihre Eigenräume $\mathrm{Sym}^{2}V$ (Eigenwert $+1$, Dimension $\binom{n+1}2$) und $\mathrm{Alt}^{2}V$ ($-1$, Dimension $\binom n2$) sind Unterdarstellungen mit
+\[ \chi_{\mathrm{Sym}^{2}}(g) = \tfrac12\bigl(\chi(g)^{2} + \chi(g^{2})\bigr),\qquad\chi_{\mathrm{Alt}^{2}}(g) = \tfrac12\bigl(\chi(g)^{2} - \chi(g^{2})\bigr) . \]
+
+\schritt{Beweis}
+Eigenwerte $\lambda_1, \dots, \lambda_n$ von $\rho(g)$ in einer Eigenbasis $e_a$. $\mathrm{Sym}^{2}$ hat Basis $e_ae_b$ ($a\le b$) mit Eigenwerten $\lambda_a\lambda_b$; Summe $= \sum_{a<b}\lambda_a\lambda_b + \sum_a\lambda_a^{2} = \frac12\bigl((\sum\lambda_a)^{2} - \sum\lambda_a^{2}\bigr) + \sum\lambda_a^{2} = \frac12\bigl(\chi(g)^{2} + \chi(g^{2})\bigr)$, da $\sum\lambda_a^{2} = \chi(g^{2})$. $\mathrm{Alt}^{2}$: $a < b$, Summe $\frac12(\chi(g)^{2} - \chi(g^{2}))$. $\blacksquare$
+
+\schritt{Anwendung: Obertöne}
+Der erste Oberton $2\nu_i$ einer Schwingung vom Typ $\Gamma_i$ hat Symmetrie $\mathrm{Sym}^{2}\Gamma_i$ (zwei ununterscheidbare Quanten derselben Mode --- Bosonen), nicht $\Gamma_i\otimes\Gamma_i$. Methan, $2\nu_2$: $\chi_E(g^{2}) = (2, -1, 2, 2, 2)$ ($C_3^{2}\sim C_3$, $C_2^{2} = S_4^{4} = \sigma_d^{2} = E$, $S_4^{2} = C_2$); $\chi_{\mathrm{Sym}^{2}E} = \frac12\bigl((4, 1, 4, 0, 0) + (2, -1, 2, 2, 2)\bigr) = (3, 0, 3, 1, 1) = A_1 + E$. Kein $T_2$: Der Oberton $2\nu_2$ bei $\approx3070$ ist infrarotverboten --- und tatsächlich nur schwach durch Resonanz mit $\nu_3$ sichtbar. $2\nu_4$: $\mathrm{Sym}^{2}T_2 = \frac12\bigl((9, 0, 1, 1, 1) + (3, 0, 3, -1, 3)\bigr) = (6, 0, 2, 0, 2) = A_1 + E + T_2$: erlaubt (bei $2600$ beobachtet).
+
+\schritt{Anwendung: Raman}
+$\mathrm{Sym}^{2}\Gamma_{\mathrm{trans}}$ ist die Darstellung der quadratischen Formen, also des Polarisierbarkeitstensors --- Satz 6.3b. Und $\mathrm{Alt}^{2}\Gamma_{\mathrm{trans}}$ ist die der Rotationen: Für $T_d$ ist $\mathrm{Alt}^{2}T_2 = \frac12\bigl((9, 0, 1, 1, 1) - (3, 0, 3, -1, 3)\bigr) = (3, 0, -1, 1, -1) = T_1$. \checkmark\ Das ist kein Zufall: $\mathrm{Alt}^{2}\mathbb R^{3}\cong\mathfrak{so}(3)$, infinitesimale Drehungen sind antisymmetrische Matrizen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Zwei gleiche Quanten: symmetrisches Quadrat. Zwei verschiedene: volles Produkt. Der Unterschied ist $\mathrm{Alt}^{2}$, und ihn zu vergessen ist der häufigste Fehler beim Zählen von Obertönen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Reell, komplex, quaternionisch}
+
+\begin{merksatz}
+\boxtitel{Satz 9.4 --- der Frobenius--Schur-Indikator}
+Für einen irreduziblen Charakter $\chi$ sei $\nu(\chi) = \frac1{|G|}\sum_{g\in G}\chi(g^{2})$. Dann ist $\nu(\chi)\in\{1, 0, -1\}$, und
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{0.9cm}P{2.3cm}P{5.6cm}@{}}
+\toprule
+$\nu$ & Typ & Bedeutung\\
+\midrule
+$1$ & \textbf{reell} & $\chi$ reellwertig; $\rho$ ist äquivalent zu einer Darstellung durch \emph{reelle} Matrizen; es gibt eine invariante symmetrische Bilinearform\\
+$0$ & \textbf{komplex} & $\chi$ nicht reellwertig ($\overline\chi\neq\chi$); keine invariante Bilinearform\\
+$-1$ & \textbf{quater\-nionisch} & $\chi$ reellwertig, aber $\rho$ nicht reell realisierbar; invariante \emph{alternierende} Bilinearform\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Beweis}
+$\nu(\chi) = \langle\chi_{\mathrm{Sym}^{2}}, \mathbf 1\rangle - \langle\chi_{\mathrm{Alt}^{2}}, \mathbf 1\rangle$ (Satz 9.3: $\chi_{\mathrm{Sym}^{2}} - \chi_{\mathrm{Alt}^{2}} = \chi(g^{2})$). Eine $G$-invariante Bilinearform auf $V$ ist ein $G$-invarianter Vektor in $(V\otimes V)^{*}$, und $\dim(V\otimes V)^{G} = \langle\chi^{2}, \mathbf 1\rangle = \langle\chi, \overline\chi\rangle\in\{0, 1\}$ (Satz 9.2c). Ist sie $0$, ist $\nu = 0 - 0 = 0$ und $\chi\neq\overline\chi$. Ist sie $1$, so gibt es genau eine invariante Bilinearform (bis auf Skalar), und sie liegt entweder in $\mathrm{Sym}^{2}$ ($\nu = 1$) oder in $\mathrm{Alt}^{2}$ ($\nu = -1$). Dass $\nu = 1$ reelle Realisierbarkeit bedeutet: Eine invariante symmetrische Form $B$ und das invariante Skalarprodukt $\langle\cdot, \cdot\rangle$ zusammen definieren einen antilinearen $G$-Isomorphismus $J$ mit $J^{2} = c\,\mathrm{id}$, $c > 0$ (symmetrisch) bzw.\ $c < 0$ (alternierend); im ersten Fall ist der Fixraum von $J/\sqrt c$ eine reelle Form, im zweiten gibt $J$ eine Quaternionenstruktur. (Auslassung für die Details.) $\blacksquare$
+
+\schritt{Beispiele}
+$C_3$, $\chi(g) = \omega$: $\nu = \frac13(1 + \omega^{2} + \omega^{4}) = \frac13(1 + \omega^{2} + \omega) = 0$: komplex. \checkmark\ $A_4$, $E_{(1)}$: $\nu = \frac1{12}(1 + 4\omega^{2} + 4\omega + 3) = 0$: komplex. \checkmark\ Alle Darstellungen von $S_n$: reell ($\nu = 1$; die Specht-Moduln sind über $\mathbb Q$ definiert). Jede Darstellung mit reellen Matrizen hat $\nu = 1$: Das sind alle Punktgruppendarstellungen mit reellen Charakteren --- die Molekülphysik ist reell.
+
+\schritt{$D_4$ gegen $Q_8$}
+Beide haben die zweidimensionale Darstellung $E$ mit Charakter $(2, 0, -2, 0, 0)$. Quadrate in $D_4$: $e^{2} = e$, $(r^{2})^{2} = e$, $r^{2} = (r^{3})^{2} = r^{2}$, alle vier Spiegelungen quadrieren zu $e$: $\sum\chi(g^{2}) = 6\cdot2 + 2\cdot(-2) = 8$, $\nu = 1$: reell (die Drehmatrizen des Quadrats). In $Q_8 = \{\pm1, \pm i, \pm j, \pm k\}$: $(\pm1)^{2} = 1$, die sechs anderen quadrieren zu $-1$ mit $\chi(-1) = -2$: $\sum = 2\cdot2 + 6\cdot(-2) = -8$, $\nu = -1$: \textbf{quaternionisch}. Die zweidimensionale Darstellung von $Q_8$ sind die Quaternionen selbst als $2\times2$-Matrizen über $\mathbb C$, und sie lässt sich nicht reell machen.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Tafel allein unterscheidet $D_4$ und $Q_8$ nicht; die Tafel mit der Quadratabbildung $g\mapsto g^{2}$ tut es. $\nu = 1$: reell; $0$: komplex (konjugiertes Paar in der Tafel); $-1$: quaternionisch (reeller Charakter, aber nur mit komplexen Matrizen).}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der quaternionische Fall ist in der Physik der Fall des halbzahligen Spins}: Die Spin-$\frac12$-Darstellung von $SU(2)$ (Kapitel 11) hat $\nu = -1$; Zeitumkehr $T$ erfüllt dort $T^{2} = -1$, und daraus folgt \Person{Kramers}' Satz (1930): In einem System mit ungerader Elektronenzahl ist jedes Energieniveau mindestens zweifach entartet, solange kein Magnetfeld anliegt --- weil die invariante Form alternierend ist und ein eindimensionaler Raum keine nichtentartete alternierende Form trägt. Der Indikator $-1$ ist ein Satz über Elektronen in Molekülen: Hämoglobin mit $\mathrm{Fe}^{3+}$ ($d^{5}$, ungerade) hat Kramers-Dubletts, mit $\mathrm{Fe}^{2+}$ ($d^{6}$) nicht.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Produkt ist nicht gleich Produkt}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{Innen und außen} & $\rho\otimes\sigma$ für Darstellungen \emph{derselben} Gruppe (dieses Kapitel) hat Charakter $\chi_\rho(g)\chi_\sigma(g)$ und ist meist reduzibel. $\rho\boxtimes\sigma$ für Darstellungen \emph{zweier} Gruppen (Satz 5.3) hat Charakter $\chi_\rho(g)\chi_\sigma(h)$ und ist irreduzibel. Dasselbe Zeichen in vielen Büchern.\\
+\textbf{Oberton $\neq$ Produkt} & $2\nu_i$ hat $\mathrm{Sym}^{2}\Gamma_i$, nicht $\Gamma_i\otimes\Gamma_i$; für $E$ in $T_d$ drei Zustände statt vier. Wer vier zählt, erfindet einen $A_2$-Zustand, den es nicht gibt.\\
+\textbf{Clebsch--Gordan-\emph{Koeffizienten}} & Die Reihe $c_{ij}^{k}$ sagt, \emph{wie oft} $\rho_k$ vorkommt. Die Koeffizienten --- die Basiswechselmatrix von $e_a\otimes f_b$ zu den Basen der $\rho_k$ --- sind etwas anderes, hängen von Phasenkonventionen ab und sind, wo $c_{ij}^{k} > 1$ ist, nicht einmal eindeutig (Multiplizitätsproblem; für $SU(3)$ und für $S_n$ real).\\
+\textbf{Kronecker für $S_n$} & $S^{\lambda}\otimes S^{\mu} = \sum g_{\lambda\mu\nu}S^{\nu}$: Die $g_{\lambda\mu\nu}$ sind seit 1938 ohne kombinatorische Beschreibung (Kapitel 8).\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die Clebsch--Gordan-Reihe ist leicht (Charaktere multiplizieren); die Clebsch--Gordan-Koeffizienten sind schwer (Basen wählen); die Kronecker-Koeffizienten von $S_n$ sind ungelöst. Alle drei heißen manchmal nur \enquote{Zerlegung des Tensorprodukts}.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.1 --- Kombinationsbanden des Wassers}
+Welche Kombinationsbanden $\nu_i + \nu_j$ und Obertöne $2\nu_i$ des Wassers sind infrarotaktiv? Vergleichen Sie mit dem Spektrum ($\nu_1 + \nu_3$ bei $5331$, $\nu_2 + \nu_3$ bei $5235$, $2\nu_2$ bei $3151$ cm$^{-1}$).
+
+\loesung
+\schritt{Schritt 1 --- Produkttafel $C_{2v}$}
+Alle Darstellungen eindimensional, $\Gamma\otimes\Gamma = A_1$, $A_1\otimes\Gamma = \Gamma$, $B_2\otimes A_1 = B_2$. Die drei Fundamentalen: $\nu_1, \nu_2\in A_1$, $\nu_3\in B_2$.
+
+\schritt{Schritt 2 --- Kombinationen}
+$\nu_1 + \nu_2\colon A_1\otimes A_1 = A_1$ ($z$): aktiv. $\nu_1 + \nu_3, \nu_2 + \nu_3\colon A_1\otimes B_2 = B_2$ ($y$): aktiv. Obertöne: $\mathrm{Sym}^{2}$ einer eindimensionalen Darstellung ist ihr Quadrat, $A_1$: alle $2\nu_i$ aktiv.
+
+\schritt{Schritt 3 --- Vergleich}
+Alles erlaubt, alles beobachtet: $\nu_1 + \nu_3$ ($5331$) und $\nu_2 + \nu_3$ ($5235$) sind die starken Banden im nahen Infrarot, die Wasserdampf in der Atmosphäre bei $1{,}9\,\mu$m absorbieren lässt; $2\nu_2$ ($3151$) liegt dicht an $\nu_1$ und $\nu_3$. In $C_{2v}$ gibt es keine Auswahlregel für Kombinationen, weil jede Darstellung eine Komponente des Dipols trägt --- außer $A_2$, das nur als Produkt $B_1\otimes B_2$ entsteht, und $B_1$ kommt in $\Gamma_{\mathrm{vib}}$ nicht vor.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Darum ist Wasserdampf das wichtigste Treibhausgas}: nicht nur drei Fundamentale, sondern alle Kombinationen und Obertöne sind erlaubt, und das Molekül ist leicht, so dass die Banden weit auseinanderliegen und das thermische Spektrum breit abdecken. $\mathrm{CO_2}$ mit Inversionszentrum hat die Hälfte der Kombinationen verboten (Produkt zweier $u$ ist $g$). Kapitel 6 hat das Alternativverbot als $g\neq u$ formuliert; hier wird $u\otimes u = g$ zur Regel für Kombinationsbanden.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.2 --- Ammoniak: $E\otimes E$ und der Oberton}
+Für $\mathrm{NH_3}$ ($C_{3v}$): Welche Symmetrie haben $\nu_3 + \nu_4$ (beide $E$) und $2\nu_4$? Welche Komponenten sind infrarotaktiv?
+
+\loesung
+\schritt{Schritt 1 --- Produkt}
+$E\otimes E = (4, 1, 0) = A_1 + A_2 + E$ (Tafel oben). $\nu_3 + \nu_4$ hat vier Zustände in drei Typen.
+
+\schritt{Schritt 2 --- Symmetrisches Quadrat}
+$\chi_E(g^{2})$: $E^{2} = E$, $C_3^{2}\sim C_3$, $\sigma^{2} = E$: $(2, -1, 2)$. $\chi_{\mathrm{Sym}^{2}E} = \frac12\bigl((4, 1, 0) + (2, -1, 2)\bigr) = (3, 0, 1) = A_1 + E$. $\chi_{\mathrm{Alt}^{2}E} = \frac12\bigl((4, 1, 0) - (2, -1, 2)\bigr) = (1, 1, -1) = A_2$. Also $2\nu_4\colon A_1 + E$, drei Zustände.
+
+\schritt{Schritt 3 --- Aktivität}
+In $C_{3v}$ sind $A_1$ ($z$) und $E$ ($x, y$) aktiv, $A_2$ nicht. $\nu_3 + \nu_4$: die Komponenten $A_1$ und $E$ aktiv, $A_2$ stumm. $2\nu_4$: alle aktiv.
+
+\schritt{Schritt 4 --- Probe}
+$\mathrm{Sym}^{2} + \mathrm{Alt}^{2} = (3, 0, 1) + (1, 1, -1) = (4, 1, 0) = E\otimes E$. \checkmark\ Dimensionen $3 + 1 = 4$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der $A_2$-Anteil ist das Antisymmetrische}: In $\nu_3 + \nu_4$ (zwei verschiedene $E$-Moden) ist er da, als Zustand, der unter allen Spiegelungen das Vorzeichen wechselt; in $2\nu_4$ fehlt er, weil zwei gleiche Quanten sich nicht antisymmetrisch kombinieren lassen. Für Drehimpulse ist das die Regel: Zwei Spin-$1$-Teilchen im symmetrischen Zustand haben $j = 0$ oder $2$, nicht $1$ --- $\mathrm{Sym}^{2}$ der Spin-$1$-Darstellung von $SU(2)$ ist $j = 0\oplus j = 2$, $\mathrm{Alt}^{2}$ ist $j = 1$. Kapitel 11.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 9.3 --- Indikatoren von $A_4$ und $S_4$}
+Berechnen Sie $\nu(\chi)$ für alle irreduziblen Charaktere von $A_4$ und von $S_4$.
+
+\loesung
+\schritt{Schritt 1 --- Quadrate in $A_4$}
+$e\mapsto e$; die $3C_2$ quadrieren zu $e$; die $4C_3$ zu $4C_3^{2}$ und umgekehrt. Also $\sum\chi(g^{2}) = \chi(e)(1 + 3) + 4\chi(C_3^{2}) + 4\chi(C_3)$.
+$A\colon(4 + 4 + 4)/12 = 1$. $E_{(1)}\colon(4 + 4\omega^{2} + 4\omega)/12 = 0$. $E_{(2)}\colon0$. $T\colon(12 + 0 + 0)/12 = 1$.
+
+\schritt{Schritt 2 --- Quadrate in $S_4$}
+$e, 6\,(12), 3\,(12)(34)\mapsto e$ ($10$ Elemente); $8\,(123)\mapsto(132)$, Typ $(123)$; $6\,(1234)\mapsto(13)(24)$, Typ $(12)(34)$. $\sum\chi(g^{2}) = 10\chi(e) + 8\chi\bigl((123)\bigr) + 6\chi\bigl((12)(34)\bigr)$.
+$A_1\colon(10 + 8 + 6)/24 = 1$. $A_2\colon(10 + 8 + 6)/24 = 1$. $E\colon(20 - 8 + 12)/24 = 1$. $T_1\colon(30 + 0 - 6)/24 = 1$. $T_2\colon(30 + 0 - 6)/24 = 1$.
+
+\schritt{Schritt 3 --- Deutung}
+$S_4$: alle reell (wie jedes $S_n$). $A_4$: zwei komplexe (das konjugierte Paar), zwei reelle. Die komplexen Darstellungen von $A_4$ werden in $S_4$ zur reellen $E$ zusammengefasst --- $\operatorname{Ind}^{S_4}_{A_4}E_{(1)} = E$ (Mackey: $E_{(1)}^{g} = E_{(2)}\neq E_{(1)}$, also irreduzibel). Kein quaternionischer Fall; der kleinste ist $Q_8$.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Eine Zählregel}: $\sum_\chi\nu(\chi)\chi(e)$ ist die Zahl der Elemente mit $g^{2} = e$ (Involutionen plus Identität) --- denn $\sum_\chi\nu(\chi)\chi(g) $ zählt die Quadratwurzeln von $g$, ein Satz von Frobenius und Schur (1906). Für $S_4$: $1 + 1 + 2 + 3 + 3 = 10$ \checkmark\ ($e$, $6$ Transpositionen, $3$ Doppeltranspositionen). Für $Q_8$: $4\cdot1 + (-1)\cdot2 = 2$ \checkmark\ ($\pm1$). Für $D_4$: $4 + 2 = 6$ \checkmark\ ($e$, $r^{2}$, vier Spiegelungen). Die Zahl der Involutionen steht nicht in der Tafel --- aber in Tafel plus Indikatoren.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Clebsch, Gordan, Wigner, Racah}
+\Person{Clebsch} und \Person{Gordan} arbeiteten in den 1860er Jahren über binäre Formen --- Polynome in zwei Variablen unter $SL_2$ --- und fanden, wie sich das Produkt zweier Formen in irreduzible Stücke zerlegt (\enquote{Theorie der binären algebraischen Formen}, 1872). Dass das die Kopplung zweier Drehimpulse ist, erkannte \Person{Wigner} 1927; sein Buch von 1931 gibt die Koeffizienten explizit, und \Person{Racah} entwickelte 1942--49 die Algebra der Umkopplung ($6j$-, $9j$-Symbole), die die Atomspektroskopie bis heute benutzt.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\textbf{Der Frobenius--Schur-Indikator} stammt aus der gemeinsamen Arbeit \enquote{Über die reellen Darstellungen der endlichen Gruppen} (1906) --- der einzigen gemeinsamen Arbeit der beiden, und einer der wenigen Arbeiten Frobenius' mit einem Koautor. Die Dreiteilung reell/komplex/quaternionisch ist dieselbe wie in Wigners Klassifikation der Zeitumkehr (1932) und in Dysons \enquote{dreifaltigem Weg} (1962) für Zufallsmatrizen: orthogonal, unitär, symplektisch, $\beta = 1, 2, 4$. Band 25 hat Dysons Ensembles behandelt; der Grund für genau drei ist Satz 9.4.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Tensorprodukte heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Symmetrische Tensornetzwerke} & Quantenzustände vieler Teilchen werden als Netzwerke von Tensoren dargestellt (Matrixproduktzustände, DMRG); erhält der Hamilton-Operator eine Symmetrie, zerfallen alle Tensoren nach Clebsch--Gordan in Blöcke, und die Rechnung wird um Größenordnungen schneller (McCulloch 2007, Singh--Pfeifer--Vidal 2010).\\
+\textbf{Quanten\-algorithmen} & Die Schur-Transformation --- Basiswechsel zur Clebsch--Gordan-Basis für $n$ Qubits --- ist auf einem Quantencomputer effizient (Bacon--Chuang--Harrow 2006) und ist der Kern von Algorithmen zur Spektralschätzung und für versteckte Untergruppen.\\
+\textbf{Clebsch--Gordan für $SU(3)$} & Die Kopplung von Quarks ($\mathbf 3\otimes\mathbf 3\otimes\mathbf 3 = \mathbf 1\oplus\mathbf 8\oplus\mathbf 8\oplus\mathbf{10}$) hat Multiplizitäten $> 1$; eindeutige Koeffizienten verlangen eine zusätzliche Konvention (de Swart 1963), und die Frage nach einer kanonischen Wahl ist offen. Kapitel 14.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Satz 9.2} & $\chi_{\rho\otimes\sigma} = \chi_\rho\chi_\sigma$; Clebsch--Gordan-Reihe; Produkttafeln\\
+\textbf{Satz 9.3} & $\mathrm{Sym}^{2}$, $\mathrm{Alt}^{2}$ mit Charakterformeln; Obertöne, Raman, Rotationen\\
+\textbf{Satz 9.4} & Frobenius--Schur-Indikator: reell $1$, komplex $0$, quaternionisch $-1$; $D_4\neq Q_8$\\
+\textbf{Anwendung} & Kombinationsbanden: Methan $2830$, Wasser $5331$\\
+\textbf{Der Bruchfall} & $\otimes$ gegen $\boxtimes$; Oberton $\neq$ Produkt; Reihe $\neq$ Koeffizienten\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil III ist zu Ende; alle Werkzeuge für endliche Gruppen stehen. Teil IV verlässt sie: $SO(3)$ hat unendlich viele Elemente, aber die Theorie überlebt --- mit einem Integral statt einer Summe. Die Kugelflächenfunktionen sind ihre Charaktertafel, und die Orbitale $s, p, d, f$ mit $1, 3, 5, 7$ Zuständen sind Schurs Lemma für die Drehgruppe.}
+\end{minipage}
+\end{center}
+\end{merksatz}

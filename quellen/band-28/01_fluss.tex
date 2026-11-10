@@ -1,0 +1,327 @@
+\part{Der Fluss}
+
+\chapter{Ein Zustand und seine Zukunft}
+
+\section{Der Leitfall}
+
+\begin{merksatz}
+\boxtitel{Eine Herzmuskelzelle in zwei Zahlen}
+Die Zelle hat ein Membranpotential $v$ und einen Erholungszustand $w$ --- den Anteil ihrer Kaliumkanäle, die offen sind. Beide ändern sich nach festen Regeln:
+\[ \dot v = v - \frac{v^{3}}{3} - w + I, \qquad \dot w = \varepsilon\,(v + a - b\,w) \]
+mit $a = 0{,}7$, $b = 0{,}8$, $\varepsilon = 0{,}08$ und einem Reizstrom $I$. Der Punkt bezeichnet die Ableitung nach der Zeit.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Die erste Gleichung ist schnell und treibt $v$ auseinander; die zweite ist langsam ($\varepsilon$ ist klein) und zieht zurück. Alles Weitere in diesem Band entsteht aus diesem Wechselspiel.}
+\end{minipage}
+\end{center}
+
+\schritt{Was die Gleichungen vorhersagen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{3.2cm}P{5.4cm}@{}}
+\toprule
+\textbf{ohne Reiz ($I=0$)} & Die Zelle ruht bei $v = -1{,}199$, $w = -0{,}624$.\\
+\textbf{kleiner Stoß} & $v$ um $0{,}5$ angehoben: kehrt in $21$ Zeiteinheiten zur Ruhe zurück, höchster Wert $-0{,}67$.\\
+\textbf{größerer Stoß} & $v$ um $0{,}6$ angehoben: Ausschlag auf $+1{,}71$, dann Rückkehr --- ein Aktionspotential.\\
+\textbf{die Schwelle} & liegt bei einem Stoß von $0{,}555$: darunter nichts, darüber die volle Antwort.\\
+\textbf{Dauerreiz ($I = 0{,}5$)} & Die Zelle schlägt von allein, Periode $39{,}5$, zwischen $-1{,}97$ und $+1{,}85$.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist das Modell von FitzHugh und Nagumo}, die Vereinfachung der vier Gleichungen von Hodgkin und Huxley auf zwei. Die Einheiten sind dimensionslos: $v = 1$ entspricht grob $50$ Millivolt, eine Zeiteinheit grob zehn Millisekunden. Die Tabelle ist das ganze Programm des Bandes in fünf Zeilen --- Ruhe, Schwelle, Antwort, Schwingung ---, und die ersten drei Kapitel erklären jede davon aus der Gestalt der Gleichungen.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zustand, Fluss, Phasenraum}
+
+\begin{definition}
+\boxtitelm{Definition 1.1 --- dynamisches System}
+Ein \Begriff{dynamisches System} besteht aus einem \Begriff{Zustandsraum} $X\subseteq\mathbb R^{n}$ und einer Regel, die jedem Zustand $x$ seine Änderung $\dot x = f(x)$ zuordnet; $f$ heißt \Begriff{Vektorfeld}. Die Lösung $\varphi_t(x_0)$ mit $\varphi_0(x_0) = x_0$ heißt \Begriff{Fluss}; die Menge $\{\varphi_t(x_0): t\in\mathbb R\}$ heißt \Begriff{Bahn} von $x_0$. Der Zustandsraum mit allen Bahnen heißt \Begriff{Phasenraum} oder, gezeichnet, \Begriff{Phasenportrait}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 1.2 --- Bahnen schneiden sich nicht}
+Ist $f$ stetig differenzierbar, so geht durch jeden Punkt des Zustandsraums genau eine Bahn. Zwei Bahnen sind entweder gleich oder haben keinen gemeinsamen Punkt.
+
+\schritt{Beweis}
+Der Satz von Picard und Lindelöf aus Band 14, Kapitel~2, liefert zu jedem Anfangswert genau eine Lösung (Auslassung 1 für die Fortsetzung auf das größtmögliche Zeitintervall). Hätten zwei Bahnen einen Punkt $p$ gemeinsam, so wären beide Lösungen mit Anfangswert $p$ --- und damit dieselbe, bis auf eine Verschiebung der Zeit. $\blacksquare$
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Der Zustand bestimmt die Zukunft vollständig --- und die Vergangenheit auch. Das ist der Determinismus, und er ist ein Satz, keine Weltanschauung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Der Satz ist stärker, als er aussieht.} In zwei Dimensionen heißt er: Eine geschlossene Bahn ist eine Schranke, die keine andere Bahn überqueren kann --- das Innere bleibt innen, das Äußere außen. Daraus folgt in Kapitel~3 der Satz von Poincaré und Bendixson, der in der Ebene Chaos ausschließt. In drei Dimensionen kann eine Bahn über eine geschlossene hinwegsteigen, und dort beginnt Kapitel~8.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Das Phasenportrait lesen}
+
+\begin{merksatz}
+\boxtitel{Nullklinen}
+Die Kurve $\dot v = 0$ heißt $v$-\Begriff{Nullkline}, die Kurve $\dot w = 0$ die $w$-Nullkline. Auf der ersten läuft die Bahn senkrecht, auf der zweiten waagerecht; wo sich beide schneiden, steht sie still --- ein \Begriff{Fixpunkt}.
+
+\schritt{Für die Herzzelle}
+\[ \dot v = 0:\ \ w = v - \frac{v^{3}}{3} + I \ \text{(kubisch)}, \qquad \dot w = 0:\ \ w = \frac{v+a}{b} \ \text{(Gerade)} \]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\draw[grau!60, ->] (-2.6,0) -- (2.6,0) node[right, font=\scriptsize, color=grau] {$v$};
+\draw[grau!60, ->] (0,-1.6) -- (0,2.4) node[above, font=\scriptsize, color=grau] {$w$};
+\draw[tief, line width=1.1pt, domain=-2.45:2.45, samples=80] plot (\x, {\x - \x*\x*\x/3});
+\draw[akzent, line width=1.1pt, domain=-2.5:1.2] plot (\x, {(\x+0.7)/0.8});
+\fill[gruen] (-1.199,-0.624) circle (2pt);
+\node[font=\scriptsize, color=tief, anchor=east] at (2.3,-2.1) {$\dot v = 0$};
+\node[font=\scriptsize, color=akzent, anchor=west] at (1.25,2.3) {$\dot w = 0$};
+\node[font=\scriptsize, color=gruen, anchor=north] at (-1.2,-0.75) {Ruhe};
+\draw[grau, ->, line width=0.6pt] (-0.6,-0.6) -- (0.1,-0.6);
+\draw[grau, ->, line width=0.6pt] (1.6,1.3) -- (1.6,0.75);
+\draw[grau, ->, line width=0.6pt] (0.4,1.3) -- (-0.3,1.3);
+\draw[grau, ->, line width=0.6pt] (-1.9,-0.3) -- (-1.9,-0.85);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Rechts der kubischen Kurve wächst $v$, links fällt es; oberhalb der Geraden fällt $w$, unterhalb wächst es. Vier Pfeile, und das Portrait steht.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Schwelle ist jetzt sichtbar}: Ein Stoß nach rechts, der die Bahn vor dem mittleren Ast der kubischen Kurve absetzt, wird nach links zurückgetrieben --- $\dot v < 0$ --- und die Zelle kehrt zur Ruhe. Ein Stoß, der sie hinter den mittleren Ast bringt, wird nach rechts weitergetrieben bis zum rechten Ast, bei $v \approx 1{,}7$; dort erst holt die langsame Gleichung $w$ nach oben, die Bahn verlässt den rechten Ast, springt zum linken und sinkt langsam zur Ruhe zurück. Der mittlere Ast der Nullkline ist die Schwelle, und die Antwort ist \enquote{alles oder nichts}, weil es zwischen den Ästen keinen Halt gibt. Das ist der \Begriff{Erregbarkeit} genannte Mechanismus, und er erklärt, warum ein Aktionspotential stets dieselbe Form hat, wie groß der Reiz auch war.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeit und Volumen}
+
+\begin{merksatz}
+\boxtitel{Satz 1.3 --- Liouville: wie sich Volumen im Fluss ändert}
+Ein Gebiet $G$ des Zustandsraums wird vom Fluss zu $\varphi_t(G)$ getragen. Für sein Volumen gilt
+\[ \frac{\mathrm d}{\mathrm dt}\operatorname{Vol}(\varphi_t(G)) = \int_{\varphi_t(G)} \operatorname{div} f\,\mathrm dx, \qquad \operatorname{div} f = \sum_i \frac{\partial f_i}{\partial x_i} . \]
+Ist $\operatorname{div} f = 0$, so bleibt das Volumen erhalten; ist $\operatorname{div} f < 0$ überall, so schrumpft jedes Gebiet.
+
+\schritt{Beweis}
+Band 9, Kapitel~6: Der Gaußsche Integralsatz, angewandt auf das Vektorfeld $f$ und den Rand von $\varphi_t(G)$ --- die Volumenänderung ist der Fluss durch den Rand, und der ist das Integral der Divergenz. $\blacksquare$
+
+\schritt{Für die Herzzelle}
+\[ \operatorname{div} f = (1 - v^{2}) - \varepsilon b = 1 - v^{2} - 0{,}064 \]
+Positiv für $|v| < 0{,}967$, negativ außerhalb: Nahe der Ruhe ($v = -1{,}2$) schrumpft das Volumen, auf dem Weg durch die Mitte dehnt es sich.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Systeme, die Volumen schrumpfen lassen, heißen dissipativ --- sie vergessen. Systeme mit erhaltenem Volumen heißen konservativ --- sie vergessen nichts. Das Herz gehört zu den ersten, die Planeten zu den zweiten.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dissipation ist der Grund, warum es Attraktoren gibt}: Ein Gebiet, das immer weiter schrumpft, muss irgendwo landen --- auf einem Punkt, einer Kurve oder, Kapitel~8, auf etwas Seltsamerem, das Volumen null hat und doch keine Kurve ist. Konservative Systeme haben keine Attraktoren; sie haben in Band 24 die Hamilton-Mechanik und in Band 27 das Sprungverfahren geliefert. Dieser Band handelt fast nur von dissipativen Systemen, weil alles Lebende dazugehört.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Eine Zeitreihe ist kein Zustand}
+Man misst von der Herzzelle nur $v$ --- so wie das EKG nur die Spannung sieht. Die Kurve $v(t)$ zeigt beim Aktionspotential ein Auf und Ab, und wer die Bahn in einer Ebene $(v, \dot v)$ aufträgt, sieht Kurven, die sich \kursiv{schneiden}.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{5.8cm}@{}}
+\toprule
+\textbf{Was man sieht} & Zwei Bahnen, die durch denselben Punkt $(v,\dot v)$ laufen und sich danach trennen --- scheinbar ein Widerspruch zu Satz 1.2.\\
+\textbf{Was fehlt} & Die zweite Koordinate $w$. Derselbe Wert von $v$ und $\dot v$ gehört zu verschiedenen $w$, und die Bahnen schneiden sich nur in der Projektion.\\
+\textbf{Die Folge} & Aus $v$ allein ist die Zukunft nicht bestimmt. Wer die Zelle vorhersagen will, braucht $w$ --- oder einen Ersatz dafür.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Determinismus gilt für den Zustand. Eine Messgröße ist in der Regel kein Zustand.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das ist der häufigste Fehler beim Umgang mit gemessenen Verläufen}: Eine Kurve, die sich selbst zu kreuzen scheint, wird als Zufall oder Rauschen gedeutet, obwohl sie nur die Projektion eines höherdimensionalen Zustands ist. Kapitel~10 wird zeigen, dass man den fehlenden Zustand aus der Messgröße selbst zurückgewinnen kann --- mit verzögerten Werten derselben Reihe. Bis dahin gilt: Erst den Zustand benennen, dann die Dynamik lesen.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.1 --- Den Ruhepunkt berechnen}
+Bestimmen Sie den Fixpunkt der Herzzelle für $I = 0$ und prüfen Sie, dass es nur einen gibt.
+
+\loesung
+\schritt{Schritt 1 --- Gleichsetzen}
+Beide Nullklinen: $v - v^{3}/3 = (v + 0{,}7)/0{,}8$, also
+\[ \frac{v^{3}}{3} + 0{,}25\,v + 0{,}875 = 0 . \]
+
+\schritt{Schritt 2 --- Eine Lösung finden}
+Die Funktion $g(v) = v^{3}/3 + 0{,}25v + 0{,}875$ ist streng wachsend ($g' = v^{2} + 0{,}25 > 0$), hat also höchstens eine Nullstelle. $g(-1) = -0{,}333 - 0{,}25 + 0{,}875 = 0{,}292 > 0$, $g(-1{,}3) = -0{,}732 - 0{,}325 + 0{,}875 = -0{,}182 < 0$: Die Nullstelle liegt dazwischen.
+
+\schritt{Schritt 3 --- Newton (Band 5)}
+Start $v = -1{,}2$: $g(-1{,}2) = -0{,}576 - 0{,}3 + 0{,}875 = -0{,}001$, $g'(-1{,}2) = 1{,}69$, Schritt $+0{,}0006$: $v^{*} = -1{,}1994$.
+
+\schritt{Schritt 4 --- $w$ und Probe}
+$w^{*} = (-1{,}1994 + 0{,}7)/0{,}8 = -0{,}6243$. Probe in der ersten Gleichung: $-1{,}1994 + 0{,}5751 + 0{,}6243 = 0{,}0000$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Eindeutigkeit kommt aus der Monotonie, und die aus dem Vorzeichen von $b$}: Die Gerade steigt steiler, als die kubische Kurve an irgendeiner Stelle fallen kann. Bei kleinerem $b$ könnte die Gerade die Kurve dreimal schneiden --- drei Fixpunkte, zwei stabile und einer dazwischen: eine Zelle mit zwei Ruhelagen. Solche Zellen gibt es, und Kapitel~4 zeigt, wie aus einem Fixpunkt drei werden.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.2 --- Das Phasenportrait des Pendels}
+Das reibungsfreie Pendel: $\dot\theta = \omega$, $\dot\omega = -\sin\theta$. Zeichnen Sie das Portrait aus den Nullklinen und der Divergenz.
+
+\loesung
+\schritt{Schritt 1 --- Nullklinen und Fixpunkte}
+$\dot\theta = 0$ auf der Achse $\omega = 0$; $\dot\omega = 0$ auf den Geraden $\theta = k\pi$. Fixpunkte $(k\pi, 0)$: hängend für gerades $k$, stehend für ungerades.
+
+\schritt{Schritt 2 --- Die Divergenz}
+$\operatorname{div} f = \partial\omega/\partial\theta + \partial(-\sin\theta)/\partial\omega = 0$: Volumen erhalten, konservativ. Es gibt keine Attraktoren.
+
+\schritt{Schritt 3 --- Die Erhaltungsgröße}
+$E = \tfrac12\omega^{2} - \cos\theta$ ist konstant auf jeder Bahn: $\dot E = \omega\dot\omega + \sin\theta\,\dot\theta = -\omega\sin\theta + \omega\sin\theta = 0$. Die Bahnen sind die Höhenlinien von $E$.
+
+\schritt{Schritt 4 --- Das Portrait}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.4cm}P{6.2cm}@{}}
+\toprule
+$E < 1$ & geschlossene Kurven um $(0,0)$: Schwingen\\
+$E = 1$ & die Separatrix durch $(\pm\pi,0)$: der Grenzfall, unendlich lange zum Stehen\\
+$E > 1$ & wellige Bahnen ohne Ende: Überschlagen\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Mit Reibung --- $\dot\omega = -\sin\theta - \gamma\omega$ --- wird $\operatorname{div} f = -\gamma < 0$}, die Höhenlinien werden zu Spiralen, und jede Bahn landet in einer hängenden Ruhelage. Der eine Term macht aus einem konservativen System ein dissipatives und aus unendlich vielen Bahnen zwei Attraktoren. Welcher Attraktor gewinnt, hängt vom Start ab: Das ist das \Begriff{Einzugsgebiet}, und seine Grenze ist die Separatrix des stehenden Pendels.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 1.3 --- Wo das Volumen schrumpft}
+Für welche Zustände der Herzzelle schrumpft ein kleines Gebiet, für welche dehnt es sich --- und was heißt das für das Aktionspotential?
+
+\loesung
+\schritt{Schritt 1 --- Die Divergenz}
+$\operatorname{div} f = 1 - v^{2} - \varepsilon b = 0{,}936 - v^{2}$.
+
+\schritt{Schritt 2 --- Das Vorzeichen}
+Schrumpfen für $|v| > 0{,}967$, Dehnen für $|v| < 0{,}967$.
+
+\schritt{Schritt 3 --- Entlang des Aktionspotentials}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.48}
+\begin{tabular}{@{}P{2.6cm}P{2.4cm}P{3.4cm}@{}}
+\toprule
+\textbf{Phase} & $v$ & \textbf{Volumen}\\
+\midrule
+Ruhe & $-1{,}2$ & schrumpft ($-0{,}50$)\\
+Aufstrich & $-0{,}6 \ldots 0{,}6$ & dehnt sich (bis $+0{,}94$)\\
+Plateau & $+1{,}7$ & schrumpft ($-1{,}95$)\\
+Rückkehr & $-1{,}9$ & schrumpft ($-2{,}67$)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Im Aufstrich dehnt sich das Volumen: Zwei benachbarte Zustände laufen auseinander. Das ist die Schwelle, als Zahl --- und die Stelle, an der ein kleiner Unterschied im Reiz über alles oder nichts entscheidet.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Im Mittel über eine ganze Umrundung überwiegt das Schrumpfen} --- sonst gäbe es keinen Grenzzyklus, zu dem die Bahnen hinfinden. Das Verhältnis von Dehnen und Schrumpfen entlang einer Bahn ist, über lange Zeit gemittelt, der Lyapunow-Exponent, den Band 18 für die logistische Abbildung genannt hat; Kapitel~8 berechnet ihn für Flüsse. Für den Herzzyklus ist er negativ: Der Rhythmus vergisst Störungen. Für das Flimmern in Kapitel~13 ist er positiv.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Poincaré und die Gestalt der Lösungen}
+Bis zum Ende des neunzehnten Jahrhunderts hieß eine Differentialgleichung lösen: eine Formel finden. \Person{Henri Poincaré} gab das auf.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{In seiner Abhandlung über das Dreikörperproblem von 1890 --- mit der er einen Preis des schwedischen Königs gewann und deren erste Fassung einen Fehler enthielt, den er auf eigene Kosten korrigieren ließ --- fragte er nicht mehr, \kursiv{wie} die Lösung lautet, sondern \kursiv{wie sie aussieht}: ob sie geschlossen ist, wohin sie strebt, wie sie auf kleine Änderungen reagiert. \textbf{Das Phasenportrait, die Nullklinen, die Fixpunkte und ihre Stabilität sind seine Werkzeuge}, und im selben Werk beschrieb er zum ersten Mal, was heute Chaos heißt: Bahnen, die sich in einem Netz verflechten, \enquote{dessen Komplexität ich nicht einmal zu zeichnen versuche}.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Herzzelle}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Hodgkin} und \Person{Huxley} beschrieben 1952 das Aktionspotential des Tintenfischaxons mit vier Gleichungen und erhielten dafür 1963 den Nobelpreis. \Person{Richard FitzHugh} erkannte 1961, dass zwei Gleichungen die Gestalt des Phasenportraits bewahren, und \Person{Jin-ichi Nagumo} baute im selben Jahr eine elektrische Schaltung, die sie erfüllt. \textbf{Das Modell ist falsch in jedem Detail und richtig in der Gestalt} --- und die Gestalt ist, was dieser Band untersucht.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Dynamik aus Daten}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Gleichungen lernen} & Aus gemessenen Verläufen das Vektorfeld $f$ schätzen --- als dünn besetzte Kombination von Kandidatentermen (SINDy, 2016).\\
+\textbf{Koopman} & Nichtlineare Dynamik als lineare auf einem Raum von Beobachtungsgrößen; der Fluss wird zur Matrix.\\
+\textbf{Herzmodelle} & Zellmodelle mit über fünfzig Variablen, die im Rechner ein ganzes Herz bilden --- für die Planung von Ablationen.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur ersten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das Verfahren kehrt die Richtung dieses Kapitels um}: Statt aus $f$ die Bahnen zu berechnen, sucht es aus Bahnen das $f$ --- mit dem Lasso aus Band 22, angewandt auf eine Bibliothek von Termen $v, w, v^{2}, vw, v^{3}, \ldots$ Für die Herzzelle findet es aus einem verrauschten Verlauf die drei Terme der ersten Gleichung wieder, mit Koeffizienten auf zwei Stellen. Der Preis ist, dass man $w$ messen können muss --- oder, Kapitel~10, aus $v$ rekonstruiert. Für Systeme, deren Gleichungen niemand kennt, ist das der aussichtsreichste Weg, sie zu finden.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 1.1} & Zustand, Vektorfeld, Fluss, Bahn, Phasenportrait\\
+\textbf{Satz 1.2} & durch jeden Punkt genau eine Bahn\\
+\textbf{Nullklinen} & vier Pfeile, ein Portrait; die Schwelle als mittlerer Ast\\
+\textbf{Satz 1.3} & Divergenz: Volumen schrumpft oder bleibt\\
+\textbf{Der Bruchfall} & Messgröße ist kein Zustand\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Die Ruhe der Zelle ist ein Fixpunkt, und die Bahnen kehren zu ihm zurück. Warum sie das tun --- und wann sie es nicht mehr tun --- ist eine Frage an die Ableitung des Vektorfelds im Fixpunkt. Das nächste Kapitel stellt sie.}
+\end{minipage}
+\end{center}
+\end{merksatz}

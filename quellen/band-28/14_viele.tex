@@ -1,0 +1,259 @@
+\chapter{Viele}
+
+\section{Von einem Oszillator zu tausend}
+
+\begin{merksatz}
+\boxtitel{Das Kuramoto-Modell, gerechnet}
+$N = 500$ Oszillatoren mit Eigenfrequenzen $\omega_i$ aus einer Lorentz-Verteilung der Breite $\gamma = 0{,}5$, jeder an alle gekoppelt:
+\[ \dot\vartheta_i = \omega_i + \frac{K}{N}\sum_{j=1}^{N}\sin(\vartheta_j - \vartheta_i) . \]
+Gemessen wird der \Begriff{Ordnungsparameter} $r = \bigl|\tfrac1N\sum\mathrm e^{\mathrm i\vartheta_j}\bigr|$: $1$ bei Gleichtakt, $\approx 1/\sqrt N$ bei Unordnung.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.6cm}P{1.0cm}P{1.0cm}P{1.0cm}P{1.0cm}P{1.0cm}P{1.0cm}P{1.0cm}@{}}
+\toprule
+$K$ & $0{,}5$ & $0{,}8$ & $1{,}0$ & $1{,}2$ & $1{,}5$ & $2$ & $3$\\
+\midrule
+$r$ gemessen & $0{,}06$ & $0{,}12$ & $0{,}25$ & $0{,}43$ & $0{,}57$ & $0{,}70$ & $0{,}81$\\
+$r$ Satz 14.2 & $0$ & $0$ & $0$ & $0{,}41$ & $0{,}58$ & $0{,}71$ & $0{,}82$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Unter $K_c = 2\gamma = 1$ keine Ordnung; darüber wächst sie wie $\sqrt{1 - K_c/K}$. Die Formel stimmt auf zwei Stellen --- und sie ist für $N \to \infty$ bewiesen, mit $500$ Oszillatoren und einer Minute Rechenzeit geprüft.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Satz 6.4 für zwei Oszillatoren wird hier zu einem Phasenübergang}: Bei zweien synchronisiert alles oder nichts, je nachdem, ob $|\Delta\omega| \le K$. Bei tausend synchronisiert ein Teil --- die mit Eigenfrequenz nahe der Mitte ---, und dieser Teil wächst stetig mit $K$ ab einer Schwelle, wie die Magnetisierung eines Ferromagneten unter der Curie-Temperatur (Band 25). Der Sinusknoten ist ein solches Ensemble: etwa zehntausend Zellen mit verschiedenen Eigenfrequenzen, die durch Kopplung einen Takt finden, der keiner Zelle allein gehört. Dieses Kapitel fragt, was aus den Begriffen des Bandes wird, wenn $N$ groß ist --- und findet, dass der Ljapunow-Exponent eine Dichte wird.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Übergang zur Ordnung}
+
+\begin{definition}
+\boxtitelm{Definition 14.1 --- Ordnungsparameter}
+Für $N$ Phasen ist $r\,\mathrm e^{\mathrm i\psi} = \frac1N\sum_j\mathrm e^{\mathrm i\vartheta_j}$: der Schwerpunkt der Phasen auf dem Einheitskreis. $r$ misst die Kohärenz, $\psi$ die mittlere Phase. Mit ihm wird die Kopplung zu
+\[ \dot\vartheta_i = \omega_i + K r\sin(\psi - \vartheta_i) : \]
+jeder Oszillator spürt nur das Mittel, mit Stärke $Kr$ --- das \Begriff{mittlere Feld}.
+\end{definition}
+
+\begin{merksatz}
+\boxtitel{Satz 14.2 --- Kuramoto 1975}
+Für $N\to\infty$ und Eigenfrequenzen mit symmetrischer, unimodaler Dichte $g(\omega)$ gilt: $r = 0$ ist für $K < K_c = 2/(\pi g(0))$ die einzige stationäre Lösung; für $K > K_c$ gibt es eine Lösung $r > 0$, die
+\[ 1 = K\int_{-\pi/2}^{\pi/2}\cos^{2}\vartheta\;g(Kr\sin\vartheta)\,\mathrm d\vartheta \]
+erfüllt. Für die Lorentz-Dichte $g(\omega) = \frac{\gamma/\pi}{\omega^{2}+\gamma^{2}}$ ist $K_c = 2\gamma$ und $r = \sqrt{1 - K_c/K}$.
+
+\schritt{Beweis}
+Im mitrotierenden Bild ($\psi = 0$) sind Oszillatoren mit $|\omega_i| \le Kr$ \textbf{gefangen}: $\dot\vartheta = 0$ bei $\sin\vartheta_i = \omega_i/Kr$ (Satz 6.4 mit $K r$ statt $K$). Die übrigen \textbf{driften} und tragen im Mittel nichts zu $r$ bei (ihre Phasen sind über den Kreis verteilt, mit Dichte $\propto 1/|\dot\vartheta|$, symmetrisch). Selbstkonsistenz: $r = \langle\cos\vartheta_i\rangle_{\text{gefangen}} = \int_{-Kr}^{Kr}\cos\vartheta(\omega)\,g(\omega)\,\mathrm d\omega$; Substitution $\omega = Kr\sin\vartheta$ gibt die Gleichung. Für $r\to0$ wird die rechte Seite $K g(0)\pi/2$, also $K_c = 2/(\pi g(0))$. Für Lorentz ist $g(0) = 1/(\pi\gamma)$, $K_c = 2\gamma$, und das Integral ist geschlossen lösbar (Aufgabe 14.1). $\blacksquare$
+
+\schritt{Probe}
+$\gamma = 0{,}5$: $K_c = 1$; $K = 2$: $r = \sqrt{1/2} = 0{,}707$, gemessen $0{,}70$. \checkmark
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Dass das mittlere Feld die Rechnung erlaubt, ist der Trick, der Kuramoto von Winfree unterscheidet}: Jeder sieht nur $r$ und $\psi$, zwei Zahlen statt $N$ Nachbarn. Das ist exakt für die Kopplung \enquote{jeder mit jedem} und eine Näherung für alles andere --- Band 16 (Graphen) sagt, wie gut: auf Zufallsgraphen gut, auf Gittern schlecht, auf Netzen mit Knotenpunkten wird $K_c$ vom Grad der Knotenpunkte bestimmt und geht für skalenfreie Netze gegen null. Die Stabilität der Lösung $r > 0$ hat erst \Person{Strogatz} und \Person{Mirollo} 1991 beschäftigt und ist erst 2011 (\Person{Chiba}) vollständig bewiesen --- die Gleichung von 1975 war vierzig Jahre lang richtig, ohne dass man wusste, warum.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Chaos, das mit der Größe wächst}
+
+\begin{merksatz}
+\boxtitel{Satz 14.3 --- extensives Chaos}
+Für ein räumlich ausgedehntes chaotisches System der Länge $L$ (gekoppelte Zellen, Flüssigkeit, Gewebe) gilt für große $L$:
+\[ N_{+}(L)\sim n_{+}\,L, \qquad D_{L}(L)\sim d\,L, \qquad h_{KS}(L)\sim h\,L : \]
+die Zahl der positiven Ljapunow-Exponenten, die Dimension des Attraktors und die Entropieproduktion wachsen proportional zur Größe --- mit \Begriff{Dichten} $n_{+}$, $d$, $h$, die das Medium kennzeichnen, nicht die Probe (\Person{Ruelle} 1982).
+
+\schritt{Gerechnet}
+Gekoppelte logistische Abbildungen, $x_{n+1}(i) = (1-\varepsilon)f(x_n(i)) + \tfrac\varepsilon2\bigl[f(x_n(i-1)) + f(x_n(i+1))\bigr]$, $f = 3{,}9\,x(1-x)$, $\varepsilon = 0{,}3$, Ring aus $L$ Zellen:
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.46}
+\begin{tabular}{@{}P{1.0cm}P{1.4cm}P{1.6cm}P{1.6cm}P{1.6cm}P{1.6cm}@{}}
+\toprule
+$L$ & $\lambda_1$ & $N_{+}$ & $N_{+}/L$ & $D_{L}$ & $D_{L}/L$\\
+\midrule
+$8$ & $-0{,}23$ & $0$ & $0$ & $0$ & $0$\\
+$16$ & $0{,}313$ & $7$ & $0{,}44$ & $13{,}1$ & $0{,}82$\\
+$32$ & $0{,}312$ & $13$ & $0{,}41$ & $24{,}3$ & $0{,}76$\\
+$64$ & $0{,}314$ & $26$ & $0{,}41$ & $50{,}0$ & $0{,}78$\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Verdoppelt man das Gewebe, verdoppeln sich die positiven Exponenten und die Dimension; der größte Exponent bleibt $0{,}31$. Das Chaos hat eine Dichte: $0{,}41$ instabile Richtungen und $0{,}78$ Dimensionen je Zelle.}
+\end{minipage}
+\end{center}
+
+\schritt{Warum}
+Weit entfernte Teile des Mediums wissen nichts voneinander --- die Korrelationslänge ist endlich. Ein Stück der Länge $L$ besteht aus $L/\xi$ unabhängigen Stücken, jedes mit seinem eigenen Chaos, und Exponenten unabhängiger Teile addieren sich zur Liste (Auslassung 16).
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Für das flimmernde Herz heißt das}: Die Dimension des Flimmerns ist nicht $3$ oder $5$, sondern proportional zur Gewebemasse --- Tausende. Kein Verfahren aus Teil IV kann sie messen (Eckmann--Ruelle: $N \ge 10^{D/2}$), und jede \enquote{Dimension des Kammerflimmerns} unter $10$ in der Literatur war ein Artefakt der Reihenlänge. Was man messen kann, ist die Dichte --- an einem kleinen Stück --- oder die Korrelationslänge, die Größe der Stücke, die unabhängig flimmern: etwa $2$ bis $4$ cm im menschlichen Herzen, die Größe eines Wellenbruchs.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Der Bruchfall}
+
+\begin{warnung}
+\boxtitelr{Zu klein zum Flimmern}
+In der Tabelle fehlt bei $L = 8$ das Chaos: $\lambda_1 = -0{,}23$, der Ring aus acht Zellen läuft in einen periodischen Zustand. Dieselbe lokale Abbildung, dieselbe Kopplung --- nur weniger davon.
+
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{2.8cm}P{6.0cm}@{}}
+\toprule
+\textbf{$L < $ Korrelationslänge} & Die Kopplung erreicht jede Zelle von jeder: Das System ist effektiv ein Oszillator und findet einen Zyklus.\\
+\textbf{$L \gg$ Korrelationslänge} & Unabhängige Stücke, extensives Chaos, Satz 14.3.\\
+\textbf{Dazwischen} & Weder die Dichte noch der Einzelfall beschreibt es; die Zahlen hängen von $L$ ab.\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\textbf{Chaos im Raum braucht Raum: Unterhalb einer kritischen Größe gibt es keines. Das ist keine Schwäche des Modells, sondern die älteste Beobachtung der Flimmerforschung.}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{\Person{Garrey} zeigte 1914, dass ein Stück Herzgewebe unter einer kritischen Masse nicht flimmern kann} --- er schnitt flimmernde Herzen in Stücke, und die kleinen hörten auf. Die Hypothese der kritischen Masse ist Satz 14.3 von unten gelesen: Flimmern braucht genug Platz für mehrere Wellenlängen, sonst löschen sich die Wellen oder finden einen Kreis. Darum flimmern Mäuseherzen kaum und Pferdeherzen leicht; darum verkleinert die chirurgische Maze-Operation den Vorhof durch Schnittlinien in Streifen unter der kritischen Größe; und darum wirkt eine Verlängerung der Wellenlänge (Satz 13.3) wie eine Verkleinerung des Herzens. Die Tabelle gibt die Größe in Zellen des Modells; im Herzen sind es Zentimeter.}
+\end{minipage}
+\end{center}
+\end{warnung}
+
+\section{Übungsaufgaben}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.1 --- Die Lorentz-Lösung}
+Lösen Sie die Selbstkonsistenzgleichung für $g(\omega) = \frac{\gamma/\pi}{\omega^{2}+\gamma^{2}}$.
+
+\loesung
+\schritt{Schritt 1 --- Einsetzen}
+$1 = K\int_{-\pi/2}^{\pi/2}\cos^{2}\vartheta\,\frac{\gamma/\pi}{K^{2}r^{2}\sin^{2}\vartheta + \gamma^{2}}\,\mathrm d\vartheta$.
+
+\schritt{Schritt 2 --- Das Integral}
+Mit $\beta = Kr/\gamma$: $\int_{-\pi/2}^{\pi/2}\frac{\cos^{2}\vartheta}{\beta^{2}\sin^{2}\vartheta + 1}\,\mathrm d\vartheta = \frac{\pi}{\beta^{2}}\bigl(\sqrt{1+\beta^{2}} - 1\bigr)$ (Standardintegral, Band 9; Probe: für $\beta\to0$ gibt die Entwicklung $\sqrt{1+\beta^{2}}\approx 1 + \beta^{2}/2$ den Wert $\pi/2$, das Integral von $\cos^{2}$. \checkmark)
+
+\schritt{Schritt 3 --- Auflösen}
+$1 = \frac{K\gamma}{\pi}\cdot\frac{\pi}{\beta^{2}\gamma^{2}}\bigl(\sqrt{1+\beta^{2}} - 1\bigr) = \frac{K}{\gamma\beta^{2}}\bigl(\sqrt{1+\beta^{2}}-1\bigr)$. Mit $\beta^{2} = K^{2}r^{2}/\gamma^{2}$: $K r^{2}/\gamma = \sqrt{1 + K^{2}r^{2}/\gamma^{2}} - 1$. Quadrieren: $(Kr^{2}/\gamma + 1)^{2} = 1 + K^{2}r^{2}/\gamma^{2}$, also $K^{2}r^{4}/\gamma^{2} + 2Kr^{2}/\gamma = K^{2}r^{2}/\gamma^{2}$, durch $Kr^{2}/\gamma$: $Kr^{2}/\gamma + 2 = K/\gamma$, $r^{2} = 1 - 2\gamma/K$. \checkmark
+
+\schritt{Schritt 4 --- Probe}
+$K = 2\gamma$: $r = 0$; $K\to\infty$: $r\to1$; $K = 2$, $\gamma = 0{,}5$: $r = \sqrt{0{,}5} = 0{,}707$. \checkmark
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.2 --- Vorhersage für $L = 128$}
+Aus der Tabelle: Wie viele positive Exponenten und welche Dimension für einen Ring aus $128$ Zellen? Und wie viele Punkte bräuchte eine Dimensionsmessung aus Daten?
+
+\loesung
+\schritt{Schritt 1 --- Dichten}
+$n_{+} = 0{,}41$, $d = 0{,}78$ (aus $L = 32$ und $64$).
+
+\schritt{Schritt 2 --- Vorhersage}
+$N_{+} \approx 0{,}41\cdot128 = 52$, $D_{L}\approx 0{,}78\cdot128 = 100$.
+
+\schritt{Schritt 3 --- Daten}
+Eckmann--Ruelle: $N \ge 10^{D/2} = 10^{50}$. Unmöglich --- und für $L = 16$ mit $D = 13$ schon $10^{6{,}5}$, drei Millionen Punkte, am Rand des Machbaren.
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Dimension eines ausgedehnten Systems ist keine messbare Größe mehr, aber ihre Dichte ist eine}: Man misst an einem Stück, das klein genug für die Datenmenge und groß genug für Satz 14.3 ist, und rechnet hoch. In der Turbulenzforschung ist das Standard (die Zahl der Freiheitsgrade je Volumen wächst mit $\mathrm{Re}^{9/4}$); in der Kardiologie hat es niemand getan, weil das Stück --- eine Fläche von einigen Quadratzentimetern mit Tausenden Elektroden --- erst seit kurzem messbar ist.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{aufgabe}
+\boxtitel{Aufgabe 14.3 --- Chimären}
+Zwei Gruppen identischer Oszillatoren, $N$ je Gruppe, Eigenfrequenz $\omega$, Kopplung innerhalb $\mu$, zwischen $\nu < \mu$, mit Phasenverzögerung $\alpha$ (Abrams 2008). Zeigen Sie, dass ein Zustand existiert, in dem Gruppe 1 synchron ist und Gruppe 2 nicht --- obwohl beide Gruppen gleich sind.
+
+\loesung
+\schritt{Schritt 1 --- Die Gleichungen}
+$\dot\vartheta_i^{(1)} = \omega + \mu\,r_1\sin(\psi_1 - \vartheta_i^{(1)} - \alpha) + \nu\,r_2\sin(\psi_2 - \vartheta_i^{(1)} - \alpha)$, ebenso für Gruppe 2 mit vertauschten Rollen.
+
+\schritt{Schritt 2 --- Der Ansatz}
+$r_1 = 1$ (Gruppe 1 im Gleichtakt), $r_2 = r < 1$ konstant, Phasendifferenz $\psi_1 - \psi_2 = \varphi$ konstant. Für Gruppe 2 ist das mittlere Feld $\mu r\,\mathrm e^{\mathrm i\psi_2} + \nu\,\mathrm e^{\mathrm i\psi_1}$ --- ein festes Feld, in dem jeder Oszillator der Gruppe 2 Satz 6.4 erfüllt: gefangen oder driftend. Da alle dieselbe Eigenfrequenz haben, sind entweder alle gefangen ($r = 1$) oder --- und das ist der Punkt --- die Gruppe rotiert als Ganzes mit einer Frequenz, bei der die Phasen \kursiv{nicht} einrasten, weil das Feld, das sie selbst erzeugen, zu schwach ist ($\mu r < $ Frequenzversatz).
+
+\schritt{Schritt 3 --- Selbstkonsistenz}
+Die Selbstkonsistenz für $r$ und $\varphi$ hat (Abrams, Mirollo, Strogatz, Wiley 2008, über den Ott-Antonsen-Ansatz) für $\alpha$ nahe $\pi/2$ und $\nu/\mu$ in einem Fenster Lösungen mit $0 < r < 1$: stabile Chimären. Das Fenster: $\alpha = 1{,}45$, $\mu - \nu$ zwischen etwa $0{,}1$ und $0{,}3$ (bei $\mu + \nu = 1$).
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Die Symmetrie des Systems wird vom Zustand gebrochen, nicht von den Parametern.} \Person{Kuramoto} und \Person{Battogtokh} fanden den Zustand 2002 in Simulationen und hielten ihn zunächst für einen Fehler; \Person{Strogatz} nannte ihn 2004 Chimäre; \Person{Tinsley} 2012 und \Person{Hagerstrom} 2012 sahen ihn in Experimenten mit chemischen und optischen Oszillatoren. Der Einschlaf einer Hirnhälfte bei Delfinen und Zugvögeln ist der physiologische Verdachtsfall --- halb synchron, halb nicht, bei symmetrischer Anatomie.}
+\end{minipage}
+\end{center}
+\end{aufgabe}
+
+\begin{geschichte}
+\boxtitelg{Ein Vortrag in Kyoto, und Glühwürmchen}
+\Person{Yoshiki Kuramoto} stellte sein Modell 1975 auf einer Konferenz in Kyoto vor, in einem Beitrag von vier Seiten; die vollständige Fassung erschien 1984 in seinem Buch \enquote{Chemical Oscillations, Waves, and Turbulence}.
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{\Person{Winfree} hatte 1967 das Problem gestellt --- Populationen von Oszillatoren mit verteilten Frequenzen, und die Frage, ob sie einen gemeinsamen Takt finden --- und mit Simulationen von \enquote{Glühwürmchen} in einer Kiste begonnen. \textbf{Kuramotos Beitrag war die Wahl der Kopplung $\sin(\vartheta_j - \vartheta_i)$, die die Rechnung erlaubt}; dass die Natur sie nicht genau so wählt, ist unerheblich, weil das Ergebnis --- Schwelle, Wurzelgesetz --- universell ist. \Person{Strogatz} und \Person{Mirollo} griffen das Modell 1991 wieder auf; \Person{Acebrón} und Mitarbeiter fassten 2005 dreißig Jahre zusammen; \Person{Ott} und \Person{Antonsen} fanden 2008 den Ansatz, der die unendlich-dimensionale Dynamik auf eine Gleichung für $r$ reduziert.}
+\end{minipage}
+\end{center}
+
+\schritt{Die Millennium Bridge}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+\kursiv{Am 10. Juni 2000 begann die neu eröffnete Fußgängerbrücke über die Themse seitlich zu schwingen, sobald genügend Menschen darauf gingen; sie wurde nach zwei Tagen gesperrt. \textbf{\Person{Strogatz}, \Person{Abrams}, \Person{McRobie}, \Person{Eckhardt} und \Person{Ott} zeigten 2005, dass es Kuramoto war}: Fußgänger passen ihren Schritt der Brücke an, die Brücke schwingt mit den Schritten, und die Schwelle --- $K_c$ --- liegt bei etwa $160$ Personen. Die Formel sagte die Zahl voraus, die beim Versuch gemessen wurde.}
+\end{minipage}
+\end{center}
+\end{geschichte}
+
+\begin{forschung}
+\boxtitelp{Viele heute}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}P{3.0cm}P{5.2cm}@{}}
+\toprule
+\textbf{Explosive Synchronisation} & Auf Netzen, in denen Frequenz und Grad korrelieren, springt $r$ bei $K_c$ von $0$ auf nahe $1$, mit Hysterese --- ein Übergang erster Ordnung (Gómez-Gardeñes 2011).\\
+\textbf{Stromnetze} & Generatoren als Oszillatoren zweiter Ordnung (mit Trägheit); Netzstabilität als Synchronisationsproblem, Ausfälle als Verlust des Gleichtakts.\\
+\textbf{Hirnrhythmen als Kuramoto} & Hirnareale als Oszillatoren auf dem gemessenen Konnektom (Band 16); welche Kopplung reproduziert das gemessene EEG --- und was bricht bei Epilepsie?\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\schritt{Zur zweiten Zeile}
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Das europäische Verbundnetz ist ein Kuramoto-Modell mit Trägheit und zehntausend Knoten, und seine Frequenz $50$ Hz ist ein $r$ nahe $1$.} Am 4. November 2006 trennte eine Leitungsabschaltung in Norddeutschland das Netz in drei Teile, die binnen Sekunden drei verschiedene Frequenzen hatten --- Verlust der Synchronisation, Satz 6.4 für Kontinente. Mit Wind und Sonne sinkt die Trägheit (keine rotierenden Massen), und die Frage, wie viel Trägheit das Netz zum Gleichtakt braucht, ist eine der Gleichungen dieses Kapitels mit einem zweiten Zeitableitungsterm --- aktuell und unbeantwortet.}
+\end{minipage}
+\end{center}
+\end{forschung}
+
+\begin{merksatz}
+\boxtitel{Was Sie jetzt können}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.0cm}P{5.6cm}@{}}
+\toprule
+\textbf{Definition 14.1} & Ordnungsparameter, mittleres Feld\\
+\textbf{Satz 14.2} & Kuramoto: $K_c = 2/(\pi g(0))$, Lorentz $r = \sqrt{1-K_c/K}$\\
+\textbf{Satz 14.3} & extensives Chaos: $N_{+}$, $D$, $h$ proportional zu $L$\\
+\textbf{Der Bruchfall} & unter der kritischen Größe kein Chaos --- Garrey 1914\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{Teil V ist zu Ende. Es bleibt die Frage, mit der der Band begann: Wo endet die Vorhersage --- und was tut man dort? Kapitel 15 gibt den Stand von 2026.}
+\end{minipage}
+\end{center}
+\end{merksatz}

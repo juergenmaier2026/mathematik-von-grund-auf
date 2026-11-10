@@ -1,0 +1,319 @@
+\appendix
+\part{Anhang}
+
+\newcommand{\lit}[3]{\vspace{5pt}\noindent\textbf{[#1]} #2\par\nopagebreak\vspace{1pt}{\small\itshape\color{grau} #3}\par\vspace{2pt}}
+
+\chapter{Formelsammlung und Übersicht}
+
+\section{Begriffe und Formeln}
+
+\begin{merksatz}
+\boxtitel{Teil I bis III}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.6cm}P{4.0cm}@{}}
+\toprule
+$\dot x = F(x)$, Fluss $\varphi_t$ & dynamisches System (1.1)\\
+$\dot V = \int\nabla\!\cdot\!F\,\mathrm dV$ & Liouville (1.3)\\
+$J = \partial F/\partial x$, $\tau$, $\Delta$ & Linearisierung (2.1), (2.3)\\
+$\tau^{2} - 4\Delta$: Knoten/Spirale & Spur-Determinante-Ebene (2.3)\\
+$\dot v = v - v^{3}/3 - w + I$, $\dot w = \varepsilon(v + a - bw)$ & FitzHugh--Nagumo\\
+$\dot V \le 0$ & Lyapunow-Funktion (2.4)\\
+keine Fixpunkte im Ring $\Rightarrow$ Zyklus & Poincaré--Bendixson (3.2)\\
+$P(x)$, Multiplikator $P'$ & Rückkehrabbildung (3.3)\\
+$\dot x = r + x^{2}$; $\sqrt{-r}$; $\pi/\sqrt r$ & Sattel-Knoten (4.1)\\
+$\dot x = rx - x^{2}$; $\dot x = rx - x^{3}$ & transkritisch, Heugabel (4.2)\\
+$\dot z = (\mu + \mathrm i\omega)z + a z|z|^{2}$ & Hopf-Normalform (5.1)\\
+$a < 0$ super-, $a > 0$ subkritisch & erster Ljapunow-Koeffizient\\
+$\Delta(\varphi)$ & Phasenantwortkurve (6.1)\\
+$\varphi_{n+1} = \varphi_n + \Omega + \Delta(\varphi_n)$ & Kreisabbildung (6.2)\\
+Breite $\sim K^{q}$ & Arnold-Zunge $p\!:\!q$ (6.3)\\
+$\dot\psi = \Delta\omega - K\sin\psi$; $|\Delta\omega| \le K$ & zwei Oszillatoren (6.4)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.6cm}P{4.0cm}@{}}
+\toprule
+$|\lambda| < 1$; Flip bei $\lambda = -1$ & Abbildung (7.1), (7.2)\\
+$\delta = 4{,}669$, $\alpha = 2{,}503$ & Feigenbaum (7.3)\\
+$3 \succ 5 \succ \cdots \succ 4 \succ 2 \succ 1$ & Scharkowski (7.4)\\
+$\sigma = 10$, $r = 28$, $b = 8/3$; $r_H = 24{,}74$ & Lorenz (8)\\
+$z_{n+1} = L(z_n)$, $|L'| > 1$ & Lorenz-Abbildung (8.2)\\
+$\lambda_1 = \lim\frac1t\ln|\delta(t)|/|\delta(0)|$ & Ljapunow-Exponent (9.1)\\
+$\sum\lambda_i = \overline{\nabla\!\cdot\!F}$ & Spektrum (9.2)\\
+$t_{\max} = \ln(\Delta/\delta_0)/\lambda_1$ & Horizont (9.4)\\
+$D_L = j + \sum_{i\le j}\lambda_i/|\lambda_{j+1}|$ & Kaplan--Yorke (9)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\begin{merksatz}
+\boxtitel{Teil IV und V}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}P{4.6cm}P{4.0cm}@{}}
+\toprule
+$(s_n, s_{n-\tau}, \ldots, s_{n-(m-1)\tau})$ & Verzögerungsvektor (10.1)\\
+$m \ge 2d + 1$; $m > 2D$ & Takens; Sauer--Yorke--Casdagli (10.2)\\
+erstes Minimum von $I(\tau)$ & Verzögerung (10.3)\\
+falsche Nachbarn $\to 0$ & Einbettungsdimension (10.3)\\
+$N \gtrsim 10^{2+0{,}4D}$; $D \le 2\log_{10}N$ & Tsonis; Eckmann--Ruelle (10)\\
+$N(\varepsilon)\sim\varepsilon^{-D_0}$ & Box-Dimension (11.1)\\
+$\ln2/\ln3$, $\ln4/\ln3$, $\ln3/\ln2$ & Cantor, Koch, Sierpinski (11.2)\\
+$C(\varepsilon)\sim\varepsilon^{D_2}$ & Korrelationsdimension (11.3)\\
+$D_2 \le D_1 \le D_0$ & Dimensionsspektrum (11)\\
+$p = 1/(n+1)$; $19$ für $0{,}05$ & Rangtest (12.2)\\
+FT, AAFT, IAAFT & Surrogate (12.3)\\
+$\langle d^{3}\rangle/\langle d^{2}\rangle^{3/2}$ & Zeitumkehrasymmetrie (12)\\
+$\partial_t u = f(u) + D\nabla^{2}u$ & Reaktion--Diffusion (13.1)\\
+$c = \sqrt{2D}\,(\tfrac12 - \alpha)$ & Front (13.2)\\
+$\lambda_{\min} = c(T_{\min})\,T_{\min}$ & Wellenlänge (13.3)\\
+$c_n = c_0 - D\kappa$; $r_c = D/c_0$ & Eikonal, Kern (13.4)\\
+$r\mathrm e^{\mathrm i\psi} = \frac1N\sum\mathrm e^{\mathrm i\vartheta_j}$ & Ordnungsparameter (14.1)\\
+$K_c = 2/(\pi g(0))$; $r = \sqrt{1 - K_c/K}$ & Kuramoto (14.2)\\
+$N_+ \sim n_+L$, $D \sim dL$ & extensives Chaos (14.3)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Die Landkarte}
+
+\begin{merksatz}
+\boxtitel{Welcher Satz worauf beruht}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Satz} & \textbf{beruht auf}\\
+\midrule
+1.2 Bahnen & Picard--Lindelöf (Band 14, Auslassung 1)\\
+1.3 Liouville & Gaußscher Satz (Band 13)\\
+2.2 Hartman--Grobman & invariante Mannigfaltigkeiten (Auslassung 2)\\
+2.3 Spur-Determinante & Eigenwerte $2\times2$ (Band 7)\\
+2.4 Lyapunow & Kettenregel; Monotonie (Band 9)\\
+3.2 Poincaré--Bendixson & Jordanscher Kurvensatz (Band 20, Auslassung 3)\\
+3.3 Rückkehrabbildung & 1.2; Satz über implizite Funktionen (Band 13)\\
+4.1, 4.2 Normalformen & Taylor; 2.3; Auslassung 4\\
+5.1 Hopf & Zentrumsmannigfaltigkeit (Auslassung 5); 4.2\\
+6.2 Kreisabbildung & 3.3; 6.1\\
+6.3 Zungen & Fixpunkte von $f^{q}$; Auslassung 6\\
+6.4 zwei Oszillatoren & 4.1 in der Phasendifferenz\\
+7.2 Flip & 4.2 für $f^{2}$; Schwarzsche Ableitung (Auslassung 7)\\
+7.3 Feigenbaum & Renormierung (Auslassung 8)\\
+7.4 Scharkowski & Zwischenwertsatz (Band 9); Auslassung 9\\
+8.2 Lorenz & 3.2; 7.2; 1.3; Existenz: Tucker\zit{26}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Satz} & \textbf{beruht auf}\\
+\midrule
+9.2 Exponenten & 1.3; Oseledets (Auslassung 11)\\
+9.3 Benettin & Gram--Schmidt (Band 7)\\
+9.4 Horizont & 9.1, Exponentialgesetz\\
+10.2 Takens & Whitney (Band 20); Auslassung 12\\
+11.2, 11.3 Dimensionen & Grenzwerte, Hölder (Band 9, 17); Auslassungen 13, 14\\
+12.2 Rangtest & Austauschbarkeit (Band 24)\\
+12.3 Surrogate & Wiener--Chintschin (Band 26)\\
+13.2 Front & gewöhnliche DGL der laufenden Welle; Auslassung 15\\
+13.4 Eikonal & Laplace in Polarkoordinaten (Band 13)\\
+14.2 Kuramoto & 6.4; Selbstkonsistenz; Stabilität: Chiba\\
+14.3 extensiv & 9.2; Additivität (Auslassung 16)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Was nicht bewiesen wurde}
+
+\begin{merksatz}
+\boxtitel{Siebzehn Auslassungen}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{4.4cm}P{0.8cm}P{3.2cm}@{}}
+\toprule
+\textbf{Ergebnis} & \textbf{Kap.} & \textbf{Wo es steht}\\
+\midrule
+1 Picard--Lindelöf, maximales Intervall & $1$ & Band 14; Perko\zit{20}\\
+2 Hartman--Grobman & $2$ & Perko\zit{20}, Kap.~2.8\\
+3 Poincaré--Bendixson, vollständig & $3$ & Perko\zit{20}; Strogatz\zit{23}\\
+4 Normalform des Sattel-Knotens & $4$ & Kuznetsov\zit{15}; Wiggins\zit{27}\\
+5 Hopf: Zentrumsmannigfaltigkeit & $5$ & Kuznetsov\zit{15}, Kap.~3, 5\\
+6 Zungenbreite $\sim K^{q}$ & $6$ & Pikovsky\zit{21}; Ott\zit{19}\\
+7 Schwarzsche Ableitung, Flip-Richtung & $7$ & Devaney\zit{4}\\
+8 Feigenbaum-Renormierung & $7$ & Feigenbaum\zit{6}; Schuster\zit{22}\\
+9 Scharkowski, allgemein & $7$ & Devaney\zit{4}\\
+10 Pesin: $h_{KS} = \sum\lambda_i^{+}$ & $9$ & Eckmann--Ruelle\zit{5}\\
+11 Oseledets & $9$ & Eckmann--Ruelle\zit{5}; Ott\zit{19}\\
+12 Takens, Beweis & $10$ & Takens\zit{24}; Kantz--Schreiber\zit{12}\\
+13 Hausdorff-Dimension & $11$ & Ott\zit{19}\\
+14 $D_q$ monoton (Hölder) & $11$ & Ott\zit{19}; Kantz--Schreiber\zit{12}\\
+15 Front: Eindeutigkeit, Stabilität & $13$ & Keener--Sneyd\zit{13}\\
+16 Additivität der Exponenten & $14$ & Eckmann--Ruelle\zit{5}\\
+17 Smales Hufeisen & $15$ & Guckenheimer--Holmes\zit{10}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.88\textwidth}
+\kursiv{\textbf{Vollständig bewiesen sind}: Liouville, die Spur-Determinante-Klassifikation, die Rückkehrabbildung als Werkzeug, die $1\!:\!1$-Zunge, Satz 6.4, Flip und Zweierzyklus (bis auf die Richtung), \enquote{drei erzwingt zwei}, Lorenz' Argument gegen stabile Zyklen (gegeben die Abbildung), der Nullexponent in Flussrichtung, die Summenregel, der Horizont, das Whitney-Zählargument, die Box-Dimensionen der selbstähnlichen Mengen, $D_2 \le D_0$ im Fall gleichmäßiger Besuchsdichte, der Rangtest, die Frontgeschwindigkeit, die Eikonal-Gleichung, Kuramotos Selbstkonsistenz mit der Lorentz-Lösung. Die Hopf-Verzweigung wurde durch Nachrechnen des Koeffizienten und Simulation geprüft, nicht bewiesen; die Zahlen der Simulationen (Kapitel 6, 9, 11--14) sind Messungen mit den im Text angegebenen Längen und tragen deren Unsicherheit.}
+\end{minipage}
+\end{center}
+\end{merksatz}
+
+\section{Zeittafel}
+
+\begin{merksatz}
+\boxtitel{Von Huygens bis zum gelernten Wetter}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{7.4cm}@{}}
+\toprule
+$1665$ & Huygens: zwei Pendeluhren im Gegentakt\\
+$1892$ & Ljapunow: Dissertation über Stabilität; Poincaré: Methodes nouvelles, homokline Verflechtung\\
+$1901$ & Bendixson: der Satz in der Ebene\\
+$1906$/$13$ & Mayer: kreisende Erregung in der Qualle; Mines: Reentry im Herzen\\
+$1914$ & Garrey: kritische Masse\\
+$1926$/$27$ & van der Pol: Relaxationsoszillation; mit van der Mark: \enquote{irregular noise} im Schwingkreis\\
+$1942$ & Hopf: die Verzweigung (Andronow 1929)\\
+$1951$ & Belousov: die schwingende Reaktion, unveröffentlicht\\
+$1961$ & FitzHugh: das Modell; Richardson: Küstenlänge (postum)\\
+$1963$ & Lorenz: \enquote{Deterministic nonperiodic flow}\\
+$1964$ & Scharkowski: die Ordnung\\
+$1965$ & Oseledets: multiplikativer Ergodensatz\\
+$1967$ & Smale: Hufeisen; Winfree: Populationen von Oszillatoren\\
+$1968$ & Nolasco--Dahlen: Alternans-Kriterium\\
+$1970$ & Zhabotinsky: Spiralen in der Schale\\
+$1971$ & Ruelle--Takens: \enquote{seltsamer Attraktor}\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{7.4cm}@{}}
+\toprule
+$1973$ & Allessie: leading circle im Vorhof\\
+$1975$ & Li--Yorke: Period three implies chaos; Kuramoto: das Modell; Mandelbrot: Fraktale\\
+$1976$ & May in Nature; Rössler; Hénon\\
+$1978$ & Feigenbaum: $\delta$\\
+$1979$ & Kaplan--Yorke; Benettin: Spektrum berechnen (1980)\\
+$1980$/$81$ & Packard et al., Takens: Einbettung; Guevara--Glass--Shrier: Chaos in Herzzellen\\
+$1982$ & Libchaber: $\delta$ in Helium; Ruelle: extensives Chaos\\
+$1983$ & Grassberger--Procaccia: $D_2$\\
+$1985$ & Wolf et al.: Exponent aus Daten; Eckmann--Ruelle: Übersicht\\
+$1986$ & Keener: Eikonal-Gleichung; Fraser--Swinney: Transinformation\\
+$1988$ & Glass--Mackey: From Clocks to Chaos\\
+$1989$ & Osborne--Provenzale: Rauschen hat Dimension; Laskar: chaotisches Sonnensystem\\
+$1992$ & Theiler et al.: Surrogate; Kennel: falsche Nachbarn; Barkley: Spiralverzweigung; Davidenko: Spirale im Herzgewebe gefilmt\\
+$1993$ & Karma: Spiralbruch durch Restitution\\
+$1996$ & Schreiber--Schmitz: IAAFT\\
+$2002$ & Tucker: Lorenz-Attraktor bewiesen; Kuramoto--Battogtokh: Chimären\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{1.2cm}P{7.4cm}@{}}
+\toprule
+$2009$ & Glass: Is the normal heart rate chaotic?\\
+$2012$ & Sugihara: Kausalität aus Einbettung; Narayan: Rotoren beim Patienten\\
+$2018$ & Pathak: Reservoir Computing für Lorenz und KS; Immler: Tucker formal verifiziert; Trayanova: digitaler Zwilling\\
+$2019$ & Zhang et al.: die zwei Wochen bestätigt\\
+$2023$--$25$ & GraphCast, Pangu, GenCast, AIFS: gelernte Wettervorhersage\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
+
+\section{Glossar}
+
+\begin{merksatz}
+\boxtitel{Begriffe von A bis Z}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Alternans} & Periodenverdopplung der Aktionspotentialdauer; Flip der Restitutionsabbildung (7)\\
+\textbf{Arnold-Zunge} & Parameterbereich fester Windungszahl $p\!:\!q$ (6)\\
+\textbf{Attraktor} & abgeschlossene invariante Menge, die eine Umgebung anzieht; seltsam, wenn empfindlich (8)\\
+\textbf{Bifurkation} & siehe Verzweigung\\
+\textbf{Box-Dimension} & Wachstumsrate der Boxenzahl bei feinerer Überdeckung (11)\\
+\textbf{Chaos} & beschränkt, empfindlich, wiederkehrend; $\lambda_1 > 0$ auf einem Attraktor (8, 9)\\
+\textbf{Chimäre} & teilweise Synchronisation identischer Oszillatoren (14)\\
+\textbf{Dehnen und Falten} & der Mechanismus jedes Chaos (8, 15)\\
+\textbf{Dispersion} & Geschwindigkeit einer Welle als Funktion des Abstands zur vorigen (13)\\
+\textbf{Einbettung} & Rekonstruktion des Zustandsraums aus Verzögerungen (10)\\
+\textbf{Eikonal} & $c_n = c_0 - D\kappa$: Front mit Krümmung (13)\\
+\textbf{Erregbar} & stabile Ruhe, große Antwort auf überschwelligen Reiz (2, 13)\\
+\textbf{Extensiv} & proportional zur Systemgröße (14)\\
+\textbf{Falsche Nachbarn} & Nachbarn durch Projektion; Kriterium für $m$ (10)\\
+\textbf{Feigenbaum-Zahl} & $\delta = 4{,}669$; Verhältnis der Verdopplungsabstände (7)\\
+\textbf{Fixpunkt} & $F(x^*) = 0$ bzw.\ $f(x^*) = x^*$ (2, 7)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Flip} & Verzweigung bei Multiplikator $-1$ (7)\\
+\textbf{Fluss} & $\varphi_t$: Zustand nach Zeit $t$ (1)\\
+\textbf{Grenzzyklus} & isolierte geschlossene Bahn (3)\\
+\textbf{Hopf-Verzweigung} & Fixpunkt verliert Stabilität an einen Zyklus; super-/subkritisch (5)\\
+\textbf{Horizont} & $\ln(\Delta/\delta_0)/\lambda_1$ (9)\\
+\textbf{Hysterese} & Zustand hängt von der Vorgeschichte ab (4, 5)\\
+\textbf{Kaplan--Yorke} & Dimension aus Exponenten (9)\\
+\textbf{Korrelations\-dimension} & $D_2$ aus Paarabständen (11)\\
+\textbf{Kreisabbildung} & Phase zu Phase; Standardform mit $K\sin$ (6)\\
+\textbf{Ljapunow-Exponent} & mittlere Trennungsrate benachbarter Verläufe (9)\\
+\textbf{Lyapunow-Funktion} & $V$ mit $\dot V \le 0$: Stabilität ohne Lösung (2)\\
+\textbf{Multiplikator} & $f'$ am Fixpunkt einer Abbildung (7)\\
+\textbf{Nullkline} & Kurve, auf der eine Ableitung verschwindet (1)\\
+\textbf{Ordnungsparameter} & Kohärenz $r$ eines Ensembles (14)\\
+\textbf{Phasenantwort\-kurve} & Verschiebung des nächsten Schlags durch einen Stoß in Phase $\varphi$ (6)\\
+\textbf{Quasiperiodisch} & zwei inkommensurable Frequenzen; $\lambda_1 = \lambda_2 = 0$ (6, 9)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\begin{center}
+{\small
+\renewcommand{\arraystretch}{1.42}
+\begin{tabular}{@{}P{3.4cm}P{5.2cm}@{}}
+\toprule
+\textbf{Reentry} & kreisende Erregung; braucht Weg $> \lambda$ (13)\\
+\textbf{Refraktärzeit} & Erholungsphase nach Erregung (6, 13)\\
+\textbf{Restitution} & Dauer des Aktionspotentials als Funktion der Erholung (7)\\
+\textbf{Rückkehrabbildung} & Poincaré-Schnitt: Durchgang zu Durchgang (3)\\
+\textbf{Sattel-Knoten} & zwei Fixpunkte entstehen oder verschwinden (4)\\
+\textbf{Scharkowski-Ordnung} & welche Periode welche erzwingt (7)\\
+\textbf{Spirale} & rotierende Welle um einen Kern (13)\\
+\textbf{Surrogat} & Ziehung aus der Nullhypothese mit den Eigenschaften der Messung (12)\\
+\textbf{Synchronisation} & Einrasten von Oszillatoren; $|\Delta\omega| \le K$ (6, 14)\\
+\textbf{Teufelstreppe} & Windungszahl gegen $\Omega$: Stufen auf jedem Bruch (6)\\
+\textbf{Transinformation} & gegenseitige Information; Kriterium für $\tau$ (10)\\
+\textbf{Verzweigung} & qualitative Änderung bei Parameteränderung (4, 5, 7)\\
+\textbf{Wellenlänge} & $c\cdot T_{\mathrm{ref}}$ (13)\\
+\textbf{Windungszahl} & mittlere Phasenzunahme je Reiz (6)\\
+\bottomrule
+\end{tabular}}
+\end{center}
+\end{merksatz}
