@@ -1,0 +1,521 @@
+\setgebiet{6}{Numerik}{tief}
+\chapter{Numerik}
+\marginnote{\small\itshape\color{grau}\textbf{Sie brauchen:} Band 5, Kapitel 1--14. Aus Band 2 Matrizen, LR, QR, Eigenwerte, SVD (Gebiet 2); aus Band 3 Taylor, Mittelwertsatz, Integrale (Gebiet 3). Ein Taschenrechner oder ein paar Zeilen Python helfen bei den längeren Rechnungen.}[12pt]
+\worum{Numerik ist Mathematik unter der Bedingung, dass man nur endlich viele Stellen hat und nur endlich viele Rechenschritte. Die Aufgaben üben, was dadurch neu wird: Fehler erkennen, bevor sie entstehen (Kondition, Stabilität), Verfahren vergleichen (Aufwand, Konvergenzordnung), und Ergebnisse prüfen, die man nicht exakt kennt.}
+
+\section{Was Sie hier üben}
+\begin{center}
+{\footnotesize\sffamily\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lP{4.9cm}lcll@{}}
+\toprule
+\textbf{Nr.} & \textbf{Titel} & \textbf{Sorte} & \textbf{Grad} & \textbf{Zeit} & \textbf{Band/Kap.}\\
+\midrule
+5.1 & Binär, Epsilon, $0{,}1 + 0{,}2$ & \typtypisch & \grad1 & 10 min & 5/1\\
+5.2 & Gleich ist nicht gleich & \typstolper & \grad1 & 10 min & 5/1\\
+5.3 & $-6{,}25$ als double & \typwerk & \grad1 & 10 min & 5/1\\
+5.4 & Die Mitternachtsformel versagt & \typwerk & \grad2 & 15 min & 5/1\\
+5.5 & $\frac{1 - \cos x}{x^{2}}$ für kleines $x$ & \typwerk & \grad2 & 10 min & 5/1\\
+5.6 & Zehn Millionen mal $0{,}1$ & \typwerk & \grad2 & 10 min & 5/1\\
+5.7 & Die Kondition elementarer Funktionen & \typtypisch & \grad2 & 15 min & 5/2\\
+5.8 & Kondition einer doppelten Nullstelle & \typwerk & \grad2 & 15 min & 5/2\\
+5.9 & Eine Konditionszahl von $40\,000$ & \typwerk & \grad2 & 15 min & 5/2\\
+5.10 & Das Skalarprodukt ist rückwärtsstabil & \typwerk & \grad3 & 20 min & 5/2\\
+5.11 & Was kostet es? & \typtypisch & \grad2 & 15 min & 5/3\\
+5.12 & Eine LR-Zerlegung mit Probe & \typwerk & \grad2 & 15 min & 5/3\\
+5.13 & Cholesky mit großen Zahlen & \typwerk & \grad1 & 10 min & 5/3\\
+5.14 & QR mit Householder & \typwerk & \grad2 & 20 min & 5/4\\
+5.15 & Eine Ausgleichsgerade & \typwerk & \grad1 & 10 min & 5/4\\
+5.16 & Jacobi divergiert & \typstolper & \grad2 & 10 min & 5/5\\
+5.17 & Jacobi und Gauß--Seidel & \typwerk & \grad2 & 20 min & 5/5\\
+5.18 & Zwei CG-Schritte & \typwerk & \grad3 & 20 min & 5/5\\
+5.19 & Gerschgorin und Rayleigh & \typtypisch & \grad2 & 10 min & 5/6\\
+5.20 & Die Potenzmethode & \typwerk & \grad2 & 15 min & 5/6\\
+5.21 & Eine SVD von Hand & \typwerk & \grad2 & 15 min & 5/6\\
+5.22 & Bisektion gegen Newton & \typtypisch & \grad2 & 15 min & 5/7\\
+5.23 & Newton im Kreis & \typstolper & \grad2 & 15 min & 5/7\\
+5.24 & $\sqrt2$ auf zehn Stellen & \typwerk & \grad1 & 10 min & 5/7\\
+5.25 & $x = \cos x$: Fixpunkt oder Newton & \typwerk & \grad2 & 15 min & 5/7\\
+5.26 & Newton in zwei Dimensionen & \typwerk & \grad3 & 20 min & 5/7\\
+5.27 & Der Interpolationsfehler & \typtypisch & \grad2 & 15 min & 5/8\\
+5.28 & Höherer Grad, schlechteres Ergebnis & \typstolper & \grad2 & 15 min & 5/8\\
+5.29 & Das Newton-Schema & \typwerk & \grad1 & 10 min & 5/8\\
+5.30 & Tschebyschow-Knoten & \typwerk & \grad2 & 15 min & 5/8\\
+5.31 & Ein natürlicher Spline & \typwerk & \grad2 & 20 min & 5/9\\
+5.32 & Eine DFT von Hand & \typwerk & \grad2 & 10 min & 5/9\\
+5.33 & Beste Quadratmittel-Approximation & \typwerk & \grad2 & 15 min & 5/10\\
+5.34 & Beste gleichmäßige Approximation & \typwerk & \grad2 & 15 min & 5/10\\
+5.35 & Die Fehlerordnung messen & \typtypisch & \grad2 & 15 min & 5/11\\
+5.36 & Trapez und Simpson & \typwerk & \grad2 & 15 min & 5/11\\
+5.37 & Das Romberg-Schema & \typwerk & \grad2 & 15 min & 5/11\\
+5.38 & Gauß--Legendre mit drei Punkten & \typwerk & \grad2 & 15 min & 5/11\\
+5.39 & Euler explodiert & \typstolper & \grad2 & 15 min & 5/12\\
+5.40 & Euler und Runge--Kutta & \typwerk & \grad2 & 20 min & 5/12\\
+5.41 & Ein Randwertproblem auf drei Punkten & \typwerk & \grad2 & 15 min & 5/13\\
+5.42 & Gradientenverfahren im Tal & \typtypisch & \grad2 & 15 min & 5/14\\
+5.43 & Ein Newton-Schritt auf Rosenbrock & \typwerk & \grad2 & 15 min & 5/14\\
+5.44 & $\pi$ mit Monte-Carlo & \typwerk & \grad2 & 10 min & 5/14\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\section{Woran Sie merken, dass Sie es können}
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item Sie sehen einer Formel an, wo Auslöschung droht, und kennen die Umformung, die sie vermeidet.
+\item Sie unterscheiden Kondition (Eigenschaft des Problems) von Stabilität (Eigenschaft des Verfahrens) und wissen, welche von beiden man verbessern kann.
+\item Sie können die Konvergenzordnung eines Verfahrens aus zwei Fehlern ablesen --- und wissen, dass Newton quadratisch konvergiert, wenn er konvergiert.
+\item Sie kennen zu jedem Standardverfahren ein Beispiel, an dem es scheitert: Jacobi ohne Diagonaldominanz, Newton ohne guten Start, Interpolation auf gleichabständigen Knoten, expliziter Euler bei steifen Gleichungen.
+\end{itemize}
+
+\section{Aufgaben}
+
+%%%%%%%%%%% Kapitel 1
+\stupser{tief}{$0{,}1 = \frac1{10}$, und $10 = 2\cdot5$. Ein Bruch ist im Binärsystem genau dann endlich, wenn der Nenner eine Zweierpotenz ist.}{22pt}
+\begin{karte}{tief}{5.1}{\typtypisch}{\meta{1}{10 min}{Band 5, Kap.\ 1}}
+\kartentitel{Binär, Epsilon, $0{,}1 + 0{,}2$}
+\worum{Drei Tatsachen, die jeder Programmierer einmal schmerzhaft lernt --- hier mit Begründung.}
+\methoden{Gleitpunktzahlen, Binärdarstellung, Maschinenepsilon}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Schreiben Sie $0{,}1$ im Binärsystem. Warum ist die Darstellung nicht endlich?
+\item Erklären Sie, warum ein Rechner $0{,}1 + 0{,}2 = 0{,}30000000000000004$ ausgibt.
+\item Das Maschinenepsilon $\varepsilon_M$ von double ist $2^{-52}\approx2{,}2\cdot10^{-16}$. Was bedeutet es? Was liefert der Rechner für $1 + 10^{-16}$, was für $1 + 10^{-15}$?
+\item Wie viele Dezimalstellen sind in double verlässlich, wie viele in single ($\varepsilon_M = 2^{-23}$)?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$10^{16} + 1$ liegt zwischen zwei benachbarten double-Zahlen; der Abstand dort ist $2$. Also $10^{16} + 1 = 10^{16}$ im Rechner.}{22pt}
+\begin{karte}{akzent}{5.2}{\typstolper}{\meta{1}{10 min}{Band 5, Kap.\ 1}}
+\kartentitel{Gleich ist nicht gleich}
+\worum{Gleitpunktzahlen mit \texttt{==} vergleichen, auf das Assoziativgesetz vertrauen, Summen in beliebiger Reihenfolge bilden --- drei Dinge, die bei reellen Zahlen richtig und im Rechner falsch sind.}
+\methoden{Gleitpunktzahlen, Absorption, Summationsreihenfolge}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Was liefert der Rechner für $(10^{16} + 1) - 10^{16}$? Und für $10^{16} + (1 - 10^{16})$?
+\item Was liefert $(0{,}1 + 0{,}2) + 0{,}3$, was $0{,}1 + (0{,}2 + 0{,}3)$? Welches Rechengesetz ist verletzt?
+\item Eine Schleife soll bei $x = 1$ abbrechen und zählt $x$ in Schritten von $0{,}1$ hoch. Warum endet sie nie? Wie prüft man Gleichheit richtig?
+\item Man summiert $1 + 10^{-16} + 10^{-16} + \dots$ ($10^{4}$ Summanden $10^{-16}$). Vorwärts summiert kommt $1$ heraus. Was kommt heraus, wenn man die kleinen Zahlen zuerst addiert? Welche Reihenfolge ist allgemein günstiger?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$6{,}25 = (110{,}01)_2 = (1{,}1001)_2\cdot2^{2}$. Exponent $2$ plus Bias $1023$ ist $1025$.}{22pt}
+\begin{karte}{gruen}{5.3}{\typwerk}{\meta{1}{10 min}{Band 5, Kap.\ 1, Aufgabe 1.1}}
+\kartentitel{$-6{,}25$ als double}
+\worum{Vorzeichen, Exponent, Mantisse: einmal von Hand, damit man weiß, was in den 64 Bit steht.}
+\methoden{Binärdarstellung, Gleitpunktzahlen}
+Stellen Sie $x = -6{,}25$ im Format double dar (Vorzeichenbit, 11 Exponentenbits mit Bias $1023$, 52 Mantissenbits).
+\end{karte}
+
+\stupser{gruen}{$x_2 = \frac{p - \sqrt{p^{2} - 4q}}2$ subtrahiert zwei fast gleiche Zahlen. Vieta: $x_1x_2 = q$.}{22pt}
+\begin{karte}{gruen}{5.4}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 1, Aufgabe 1.2}}
+\kartentitel{Die Mitternachtsformel versagt}
+\worum{Das Lehrbuchbeispiel für Auslöschung: eine richtige Formel, falsch ausgewertet. Und die Umformung, die alles rettet.}
+\methoden{Auslöschung, Vieta, Umformen vor dem Rechnen}
+Berechnen Sie die Nullstellen von $x^{2} - 10^{8}x + 1 = 0$ mit der Mitternachtsformel in doppelter Genauigkeit. Was geht schief, und wie behebt man es?
+\end{karte}
+
+\stupser{gruen}{$\cos(10^{-8}) = 1 - 5\cdot10^{-17}$ wird zu $1$ gerundet. Umformung: $1 - \cos x = 2\sin^{2}\frac x2$.}{22pt}
+\begin{karte}{gruen}{5.5}{\typwerk}{\meta{2}{10 min}{Band 5, Kap.\ 1, Aufgabe 1.3}}
+\kartentitel{$\frac{1 - \cos x}{x^{2}}$ für kleines $x$}
+\worum{Noch einmal Auslöschung, diesmal mit einer trigonometrischen Identität als Rettung --- oder mit der Taylorreihe.}
+\methoden{Auslöschung, Trigonometrische Identität, Taylorreihe}
+Warum liefert $\frac{1 - \cos x}{x^{2}}$ für $x = 10^{-8}$ den Wert $0$, und wie rechnet man richtig?
+\end{karte}
+
+\stupser{gruen}{Jede Addition kostet einen relativen Fehler $\le\varepsilon_M$; nach $n$ Additionen ist der Gesamtfehler bis zu $n\varepsilon_M$ mal die Summe der Beträge.}{22pt}
+\begin{karte}{gruen}{5.6}{\typwerk}{\meta{2}{10 min}{Band 5, Kap.\ 1, Aufgabe 1.4}}
+\kartentitel{Zehn Millionen mal $0{,}1$}
+\worum{Rundungsfehler sammeln sich an. Wie schnell, hängt vom Verfahren ab --- naive Summation ist das schlechteste.}
+\methoden{Rundungsfehler, Fehlerschranke, Summationsreihenfolge}
+Man summiere $10^{7}$-mal die Zahl $0{,}1$ in einfacher Genauigkeit ($\varepsilon_M\approx6\cdot10^{-8}$). Welchen Fehler erwartet man, und welchen bekommt man tatsächlich? Wie macht man es besser?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 2
+\stupser{tief}{Relative Kondition $\kappa(x) = \bigl|\frac{x\,f'(x)}{f(x)}\bigr|$: Um welchen Faktor wird ein relativer Eingabefehler verstärkt?}{22pt}
+\begin{karte}{tief}{5.7}{\typtypisch}{\meta{2}{15 min}{Band 5, Kap.\ 2}}
+\kartentitel{Die Kondition elementarer Funktionen}
+\worum{Kondition ist eine Eigenschaft des Problems, nicht des Rechners. Hier für die Funktionen, aus denen alle anderen gebaut sind.}
+\methoden{Konditionszahl, Relative Fehler}
+Bestimmen Sie die relative Konditionszahl und sagen Sie, wo sie groß wird:
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $f(x) = \sqrt x$, \quad $f(x) = e^{x}$, \quad $f(x) = \ln x$,
+\item $f(x) = \sin x$,
+\item $f(x, y) = x - y$ bezüglich $x$ (bei festem $y$),
+\item Welche der Funktionen ist überall gut konditioniert? Warum ist die Subtraktion die gefährlichste Grundrechenart?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Nullstellen $1\pm\delta$. Stört man den konstanten Koeffizienten $c = 1 - \delta^{2}$, so ist $\frac{dx_1}{dc} = -\frac1{2\delta}$.}{22pt}
+\begin{karte}{gruen}{5.8}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 2, Aufgabe 2.1}}
+\kartentitel{Kondition einer doppelten Nullstelle}
+\worum{Nahe beieinanderliegende Nullstellen sind schlecht konditioniert --- und bei $\delta\to0$ wird die Kondition unendlich. Hier mit Formel.}
+\methoden{Konditionszahl, Ableiten nach dem Parameter}
+Bestimmen Sie die relative Kondition der Nullstellen von $p(x) = x^{2} - 2x + (1 - \delta^{2})$ in Abhängigkeit von $\delta$ und deuten Sie das Ergebnis.
+\end{karte}
+
+\stupser{gruen}{$\operatorname{cond}_\infty(A) = \|A\|_\infty\|A^{-1}\|_\infty$; $A^{-1} = \frac1{0{,}0001}\begin{pmatrix}1{,}0001 & -1\\ -1 & 1\end{pmatrix}$.}{22pt}
+\begin{karte}{gruen}{5.9}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 2, Aufgabe 2.2}}
+\kartentitel{Eine Konditionszahl von $40\,000$}
+\worum{Eine Störung von $10^{-4}$ in der rechten Seite ändert die Lösung um $100\,\%$. Die Konditionszahl sagt das vorher.}
+\methoden{Konditionszahl, Störungsabschätzung, Matrixnorm}
+$A = \begin{pmatrix}1 & 1\\ 1 & 1{,}0001\end{pmatrix}$, $b = \begin{pmatrix}2\\ 2{,}0001\end{pmatrix}$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $Ax = b$ exakt.
+\item Stören Sie $b$ zu $\tilde b = (2;\ 2{,}0002)^{\mathsf T}$ und lösen Sie erneut.
+\item Berechnen Sie $\operatorname{cond}_\infty(A)$ und prüfen Sie die Störungsabschätzung $\frac{\|\Delta x\|}{\|x\|}\le\operatorname{cond}(A)\frac{\|\Delta b\|}{\|b\|}$.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Jeder Term $x_iy_i$ wird von höchstens $n$ Rundungen getroffen: $\tilde s = \sum x_iy_i(1 + \theta_i)$ mit $|\theta_i|\le n\varepsilon_M$. Das ist das exakte Skalarprodukt leicht gestörter $x_i$.}{22pt}
+\begin{karte}{gruen}{5.10}{\typwerk}{\meta{3}{20 min}{Band 5, Kap.\ 2, Aufgabe 2.3}}
+\kartentitel{Das Skalarprodukt ist rückwärtsstabil}
+\worum{Rückwärtsanalyse: Das berechnete Ergebnis ist das exakte Ergebnis für leicht veränderte Eingaben. Hier der einfachste Fall, Schritt für Schritt.}
+\methoden{Rückwärtsanalyse, Standardmodell der Rundung}
+Zeigen Sie, dass die sequenzielle Berechnung von $s = \sum_{i=1}^{n}x_iy_i$ rückwärtsstabil ist: $\tilde s = \sum\tilde x_iy_i$ mit $|\tilde x_i - x_i|\le n\varepsilon_M|x_i|$ (bis auf $O(\varepsilon_M^{2})$).
+\end{karte}
+
+%%%%%%%%%%% Kapitel 3
+\stupser{tief}{LR-Zerlegung $\approx\frac{2}{3}n^{3}$ Gleitpunktoperationen, Vorwärts- und Rückwärtseinsetzen je $\approx n^{2}$, Inverse $\approx2n^{3}$, Cramer $\sim(n + 1)!$.}{22pt}
+\begin{karte}{tief}{5.11}{\typtypisch}{\meta{2}{15 min}{Band 5, Kap.\ 3}}
+\kartentitel{Was kostet es?}
+\worum{Operationen zählen ist die erste Pflicht der Numerik. Die Antworten erklären, warum man nie die Inverse berechnet und nie Cramer benutzt.}
+\methoden{Aufwand zählen, Größenordnung schätzen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zählen Sie die Multiplikationen in der LR-Zerlegung einer $n\times n$-Matrix (führender Term) und im Rückwärtseinsetzen.
+\item Ein Rechner schafft $10^{9}$ Operationen pro Sekunde. Wie lange dauert $Ax = b$ für $n = 1000$, $10^{4}$, $10^{5}$?
+\item Man will $Ax = b$ für $100$ rechte Seiten lösen. Vergleichen Sie: (i) $100$-mal LR, (ii) einmal LR, $100$-mal einsetzen, (iii) $A^{-1}$ berechnen und $100$-mal multiplizieren.
+\item Die Cramersche Regel mit Determinanten per Entwicklung braucht etwa $(n + 1)!$ Operationen. Für welches $n$ überschreitet das das Alter des Universums ($4\cdot10^{17}$ s)?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Pivot $2$, Multiplikatoren $\ell_{21} = -1{,}5$, $\ell_{31} = -1$; danach $\ell_{32} = 4$. Die Multiplikatoren \emph{sind} $L$.}{22pt}
+\begin{karte}{gruen}{5.12}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 3, Aufgabe 3.1}}
+\kartentitel{Eine LR-Zerlegung mit Probe}
+\worum{Gauß als Zerlegung, dann zwei Dreieckssysteme, dann die Probe $LR = A$.}
+\methoden{LR-Zerlegung, Rückwärtseinsetzen, Probe}
+Berechnen Sie die LR-Zerlegung von $A = \begin{pmatrix}2 & 1 & -1\\ -3 & -1 & 2\\ -2 & 1 & 2\end{pmatrix}$ (ohne Pivotsuche) und lösen Sie damit $Ax = (8, -11, -3)^{\mathsf T}$.
+\end{karte}
+
+\stupser{gruen}{$\ell_{11} = 2$, $\ell_{21} = 6$, $\ell_{31} = -8$; $\ell_{22} = \sqrt{37 - 36} = 1$.}{22pt}
+\begin{karte}{gruen}{5.13}{\typwerk}{\meta{1}{10 min}{Band 5, Kap.\ 3, Aufgabe 3.2}}
+\kartentitel{Cholesky mit großen Zahlen}
+\worum{Die Zerlegung geht glatt auf --- ein Zeichen, dass die Aufgabe konstruiert ist, und eine gute Übung für die Spaltenformel.}
+\methoden{Cholesky-Zerlegung, Positive Definitheit}
+Bestimmen Sie die Cholesky-Zerlegung von $A = \begin{pmatrix}4 & 12 & -16\\ 12 & 37 & -43\\ -16 & -43 & 98\end{pmatrix}$ und prüfen Sie $LL^{\mathsf T} = A$.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 4
+\stupser{gruen}{Erste Spalte $(3, 4, 0)$, Norm $5$, $v = (3 - 5, 4, 0) = (-2, 4, 0)$. $H_1 = I - 2\frac{vv^{\mathsf T}}{v^{\mathsf T}v}$ wirkt nur auf die ersten beiden Komponenten.}{22pt}
+\begin{karte}{gruen}{5.14}{\typwerk}{\meta{2}{20 min}{Band 5, Kap.\ 4, Aufgabe 4.1}}
+\kartentitel{QR mit Householder}
+\worum{Zwei Spiegelungen machen aus einer $3\times2$-Matrix eine obere Dreiecksmatrix. Die Zahlen sind so gewählt, dass die erste Spiegelung die aus Gebiet 2 ist.}
+\methoden{Householder-Spiegelung, QR-Zerlegung}
+Bestimmen Sie die QR-Zerlegung von $A = \begin{pmatrix}3 & 1\\ 4 & 2\\ 0 & 5\end{pmatrix}$ mit Householder-Spiegelungen.
+\end{karte}
+
+\stupser{gruen}{Normalengleichungen $A^{\mathsf T}A\begin{pmatrix}\alpha\\ \beta\end{pmatrix} = A^{\mathsf T}b$ mit $A^{\mathsf T}A = \begin{pmatrix}4 & 10\\ 10 & 30\end{pmatrix}$, $A^{\mathsf T}b = \begin{pmatrix}20\\ 59{,}7\end{pmatrix}$.}{22pt}
+\begin{karte}{gruen}{5.15}{\typwerk}{\meta{1}{10 min}{Band 5, Kap.\ 4, Aufgabe 4.2}}
+\kartentitel{Eine Ausgleichsgerade}
+\worum{Kleinste Quadrate mit vier Punkten; dieselbe Rechnung wie Aufgabe 2.41, hier mit der Frage, wann man die Normalengleichungen \emph{nicht} benutzen sollte.}
+\methoden{Kleinste Quadrate, Normalengleichungen, Konditionszahl}
+Passen Sie $y = \alpha + \beta t$ an $(1;\ 2{,}1)$, $(2;\ 3{,}9)$, $(3;\ 6{,}2)$, $(4;\ 7{,}8)$ an. Berechnen Sie das Residuum. Warum ist für große, schlecht konditionierte Probleme die QR-Zerlegung den Normalengleichungen vorzuziehen?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 5
+\stupser{akzent}{Die Iterationsmatrix von Jacobi ist $-D^{-1}(L + U)$; für $\begin{pmatrix}1 & 2\\ 3 & 1\end{pmatrix}$ ist das $\begin{pmatrix}0 & -2\\ -3 & 0\end{pmatrix}$ mit Eigenwerten $\pm\sqrt6$.}{22pt}
+\begin{karte}{akzent}{5.16}{\typstolper}{\meta{2}{10 min}{Band 5, Kap.\ 5}}
+\kartentitel{Jacobi divergiert}
+\worum{Iterative Verfahren konvergieren nicht immer. Diagonaldominanz ist die Bedingung, die man prüft, bevor man loslegt --- und sie hängt von der Zeilenreihenfolge ab.}
+\methoden{Spektralradius, Diagonaldominanz, Gegenbeispiel}
+$A = \begin{pmatrix}1 & 2\\ 3 & 1\end{pmatrix}$, $b = \begin{pmatrix}3\\ 4\end{pmatrix}$ (Lösung $(1, 1)$).
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Führen Sie drei Jacobi-Schritte ab $x^{(0)} = 0$ aus. Was passiert?
+\item Bestimmen Sie den Spektralradius der Iterationsmatrix und erklären Sie damit (a).
+\item Vertauschen Sie die beiden Gleichungen und wiederholen Sie (a), (b).
+\item Warum konvergiert das Verfahren bei strikter Diagonaldominanz immer? (Skizze mit der Zeilensummennorm.)
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Jacobi: $x_1^{(k+1)} = \frac{2 + x_2^{(k)}}4$, $x_2^{(k+1)} = \frac{4 + x_1^{(k)} + x_3^{(k)}}4$, $x_3^{(k+1)} = \frac{10 + x_2^{(k)}}4$. Gauß--Seidel benutzt die neuen Werte sofort.}{22pt}
+\begin{karte}{gruen}{5.17}{\typwerk}{\meta{2}{20 min}{Band 5, Kap.\ 5, Aufgabe 5.1}}
+\kartentitel{Jacobi und Gauß--Seidel}
+\worum{Zwei Iterationen auf derselben tridiagonalen Matrix. Gauß--Seidel ist etwa doppelt so schnell --- und man sieht, warum.}
+\methoden{Jacobi-Verfahren, Gauß–Seidel-Verfahren, Konvergenzrate}
+Lösen Sie $\begin{pmatrix}4 & -1 & 0\\ -1 & 4 & -1\\ 0 & -1 & 4\end{pmatrix}x = \begin{pmatrix}2\\ 4\\ 10\end{pmatrix}$ mit Jacobi und Gauß--Seidel, Startwert $0$, je vier Schritte. Vergleichen Sie die Fehler.
+\end{karte}
+
+\stupser{gruen}{$r_0 = b - Ax_0 = (-8, -3)$, $p_0 = r_0$, $\alpha_0 = \frac{r_0^{\mathsf T}r_0}{p_0^{\mathsf T}Ap_0}$. Nach zwei Schritten muss $r_2 = 0$ sein.}{22pt}
+\begin{karte}{gruen}{5.18}{\typwerk}{\meta{3}{20 min}{Band 5, Kap.\ 5, Aufgabe 5.2}}
+\kartentitel{Zwei CG-Schritte}
+\worum{Das Verfahren der konjugierten Gradienten löst ein $n\times n$-System in höchstens $n$ Schritten exakt. Hier $n = 2$, jede Zahl von Hand.}
+\methoden{Konjugierte Gradienten, Krylow-Raum}
+Führen Sie zwei CG-Schritte für $A = \begin{pmatrix}4 & 1\\ 1 & 3\end{pmatrix}$, $b = \begin{pmatrix}1\\ 2\end{pmatrix}$, $x_0 = \begin{pmatrix}2\\ 1\end{pmatrix}$ aus und prüfen Sie, dass die exakte Lösung erreicht ist.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 6
+\stupser{tief}{Gerschgorin: Jeder Eigenwert liegt in einem Kreis um ein Diagonalelement mit Radius gleich der Summe der übrigen Beträge der Zeile.}{22pt}
+\begin{karte}{tief}{5.19}{\typtypisch}{\meta{2}{10 min}{Band 5, Kap.\ 6}}
+\kartentitel{Gerschgorin und Rayleigh}
+\worum{Zwei Werkzeuge, mit denen man Eigenwerte eingrenzt, ohne sie zu berechnen --- und mit denen man prüft, ob ein berechneter Eigenwert plausibel ist.}
+\methoden{Eigenwerte einschließen}
+$A = \begin{pmatrix}2 & 1\\ 1 & 3\end{pmatrix}$ (Eigenwerte $\frac{5\pm\sqrt5}2$).
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Geben Sie die Gerschgorin-Kreise an. Welches Intervall liefern sie für die Eigenwerte?
+\item Berechnen Sie den Rayleigh-Quotienten $\frac{x^{\mathsf T}Ax}{x^{\mathsf T}x}$ für $x = (1, 1)$, $x = (1, 2)$ und $x = (1;\ 1{,}618)$. Was beobachten Sie?
+\item Warum liegt der Rayleigh-Quotient bei symmetrischen Matrizen immer zwischen dem kleinsten und dem größten Eigenwert?
+\item Wie gut ist der Rayleigh-Quotient, wenn $x$ um $\varepsilon$ vom Eigenvektor abweicht?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$x_{k+1} = Ax_k/\|Ax_k\|_\infty$; der Rayleigh-Quotient oder der Quotient der größten Komponenten nähert $\lambda_1 = 3{,}618$.}{22pt}
+\begin{karte}{gruen}{5.20}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 6, Aufgabe 6.1}}
+\kartentitel{Die Potenzmethode}
+\worum{Immer wieder mit $A$ multiplizieren: Der größte Eigenwert setzt sich durch. Wie schnell, bestimmt das Verhältnis $|\lambda_2/\lambda_1|$.}
+\methoden{Potenzmethode, Eigenwerte einschließen, Konvergenzrate}
+Bestimmen Sie den betragsgrößten Eigenwert von $A = \begin{pmatrix}2 & 1\\ 1 & 3\end{pmatrix}$ mit der Potenzmethode, Startvektor $(1, 0)^{\mathsf T}$, sechs Schritte. Wie schnell konvergiert das Verfahren, und warum?
+\end{karte}
+
+\stupser{gruen}{$A^{\mathsf T}A = \begin{pmatrix}25 & 20\\ 20 & 25\end{pmatrix}$: Eigenwerte $45$ und $5$. Dann $u_i = Av_i/\sigma_i$.}{22pt}
+\begin{karte}{gruen}{5.21}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 6, Aufgabe 6.2}}
+\kartentitel{Eine SVD von Hand}
+\worum{Dieselbe Matrix wie in Aufgabe 2.44 --- hier mit der numerischen Frage: Warum rechnet man die SVD in der Praxis \emph{nicht} über $A^{\mathsf T}A$?}
+\methoden{Singulärwertzerlegung, Konditionszahl}
+Berechnen Sie die SVD von $A = \begin{pmatrix}3 & 0\\ 4 & 5\end{pmatrix}$, geben Sie $\operatorname{cond}_2(A)$ an, und erklären Sie, warum der Umweg über $A^{\mathsf T}A$ numerisch bedenklich ist.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 7
+\stupser{tief}{Bisektion halbiert das Intervall: $2^{-n}\le10^{-10}$ gibt $n\ge34$. Newton verdoppelt die gültigen Stellen: $1, 2, 4, 8, 16$.}{22pt}
+\begin{karte}{tief}{5.22}{\typtypisch}{\meta{2}{15 min}{Band 5, Kap.\ 7}}
+\kartentitel{Bisektion gegen Newton}
+\worum{Konvergenzordnung konkret: linear heißt eine feste Zahl Stellen pro Schritt, quadratisch heißt Verdopplung. Und wann Newton auf linear zurückfällt.}
+\methoden{Bisektion, Newton-Verfahren, Konvergenzordnung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Wie viele Bisektionsschritte braucht man auf $[1, 2]$ für $\sqrt2$ mit Genauigkeit $10^{-10}$? Wie viele Newton-Schritte (Aufgabe 5.24)?
+\item Newton auf $f(x) = x^{2}$ (doppelte Nullstelle bei $0$) ab $x_0 = 1$: Berechnen Sie $x_1, \dots, x_4$. Welche Konvergenzordnung?
+\item Newton auf $f(x) = \sqrt[3]x$ ab $x_0 = 1$: Berechnen Sie $x_1, x_2, x_3$. Was passiert?
+\item Formulieren Sie die Voraussetzungen, unter denen Newton quadratisch konvergiert.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$f(x) = x^{3} - 2x + 2$, $x_0 = 0$: $x_1 = 0 - \frac2{-2} = 1$, $x_2 = 1 - \frac11 = 0$.}{22pt}
+\begin{karte}{akzent}{5.23}{\typstolper}{\meta{2}{15 min}{Band 5, Kap.\ 7}}
+\kartentitel{Newton im Kreis}
+\worum{Newton konvergiert quadratisch --- wenn er konvergiert. Zwei Beispiele, in denen er es nicht tut: ein Zyklus und ein Weglaufen ins Unendliche.}
+\methoden{Newton-Verfahren, Gegenbeispiel, Dämpfung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $f(x) = x^{3} - 2x + 2$, $x_0 = 0$. Berechnen Sie $x_1, x_2, x_3, x_4$. Skizzieren Sie, was geometrisch passiert.
+\item Wo liegt die reelle Nullstelle? Wählen Sie einen Startwert, von dem aus Newton konvergiert, und rechnen Sie drei Schritte.
+\item $f(x) = \arctan x$, $x_0 = 1{,}5$. Berechnen Sie $x_1, x_2, x_3$. Was passiert, und ab welchem $|x_0|$?
+\item Welche praktischen Maßnahmen sichern Newton ab? (Stichworte: Dämpfung, Bisektion zum Einfangen, Abbruch bei wachsendem $|f|$.)
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$x_{k+1} = \frac12\bigl(x_k + \frac2{x_k}\bigr)$ --- das Heron-Verfahren. Die Zahl der richtigen Stellen verdoppelt sich: $1{,}5$; $1{,}417$; $1{,}41422$; $1{,}414213562$.}{22pt}
+\begin{karte}{gruen}{5.24}{\typwerk}{\meta{1}{10 min}{Band 5, Kap.\ 7, Aufgabe 7.1}}
+\kartentitel{$\sqrt2$ auf zehn Stellen}
+\worum{Newton auf $x^{2} - 2$ ist das Verfahren, das die Babylonier kannten. In fünf Schritten von $1$ auf $16$ Stellen.}
+\methoden{Newton-Verfahren, Konvergenzordnung}
+Berechnen Sie $\sqrt2$ mit dem Newton-Verfahren auf zehn Stellen genau, ausgehend von $x_0 = 1$. Zählen Sie die richtigen Stellen nach jedem Schritt.
+\end{karte}
+
+\stupser{gruen}{Fixpunkt: $|g'(x)| = |\sin x|\le0{,}72$ nahe der Lösung --- linear, Fehler mal $0{,}67$ pro Schritt. Newton: drei Schritte.}{22pt}
+\begin{karte}{gruen}{5.25}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 7, Aufgabe 7.2}}
+\kartentitel{$x = \cos x$: Fixpunkt oder Newton}
+\worum{Dieselbe Gleichung, zwei Verfahren: Die Fixpunktiteration braucht $30$ Schritte, Newton $4$. Der Fixpunktsatz sagt vorher, dass beide funktionieren.}
+\methoden{Fixpunktiteration, Kontraktion, Newton-Verfahren}
+Lösen Sie $x = \cos x$ mit der Fixpunktiteration $x_{k+1} = \cos x_k$ (Kontraktionsbedingung prüfen!) und mit Newton, jeweils ab $x_0 = 1$. Vergleichen Sie die Schrittzahlen für $10^{-6}$.
+\end{karte}
+
+\stupser{gruen}{$F(x, y) = (x^{2} + y^{2} - 4,\ e^{x} + y - 1)$, Jacobi-Matrix $\begin{pmatrix}2x & 2y\\ e^{x} & 1\end{pmatrix}$. Ein Newton-Schritt ist ein lineares $2\times2$-System.}{22pt}
+\begin{karte}{gruen}{5.26}{\typwerk}{\meta{3}{20 min}{Band 5, Kap.\ 7, Aufgabe 7.3}}
+\kartentitel{Newton in zwei Dimensionen}
+\worum{Statt durch $f'$ zu teilen, löst man mit der Jacobi-Matrix. Sonst ändert sich nichts --- auch nicht die quadratische Konvergenz.}
+\methoden{Newton-Verfahren, Jacobi-Matrix}
+Lösen Sie $x^{2} + y^{2} = 4$, $e^{x} + y = 1$ mit dem Newton-Verfahren ab $(1;\ -1{,}7)$. Zwei Schritte von Hand; wie viele Stellen stimmen danach?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 8
+\stupser{tief}{Newton-Schema: $f[1, 4] = \frac13$, $f[4, 9] = \frac15$, $f[1, 4, 9] = \frac{1/5 - 1/3}{8} = -\frac1{60}$. Fehlerformel $\frac{f'''(\xi)}{3!}\,\omega(x)$.}{22pt}
+\begin{karte}{tief}{5.27}{\typtypisch}{\meta{2}{15 min}{Band 5, Kap.\ 8}}
+\kartentitel{Der Interpolationsfehler}
+\worum{Ein Interpolationspolynom aufstellen (Lagrange und Newton), auswerten, den Fehler messen und mit der Schranke vergleichen --- die oft viel zu pessimistisch ist.}
+\methoden{Lagrange-Interpolation, Newton-Schema, Fehlerschranke}
+$f(x) = \sqrt x$ an den Knoten $1, 4, 9$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Stellen Sie $p_2$ in Lagrange- und in Newton-Form auf.
+\item Berechnen Sie $p_2(2)$ und den Fehler gegenüber $\sqrt2$.
+\item Berechnen Sie die Fehlerschranke $\frac{\max|f'''|}{6}|\omega(2)|$ mit $\omega(x) = (x - 1)(x - 4)(x - 9)$. Warum ist sie so grob?
+\item An welcher Stelle in $[1, 9]$ ist $|\omega|$ am größten? Was heißt das für die Wahl der Knoten?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$f(x) = \frac1{1 + 25x^{2}}$ auf $[-1, 1]$: Bei $11$ gleichabständigen Knoten ist der maximale Fehler $1{,}9$, bei $21$ Knoten $60$. Die Funktion hat Werte zwischen $0$ und $1$.}{22pt}
+\begin{karte}{akzent}{5.28}{\typstolper}{\meta{2}{15 min}{Band 5, Kap.\ 8}}
+\kartentitel{Höherer Grad, schlechteres Ergebnis}
+\worum{Das Runge-Phänomen: Mehr Stützstellen machen das Interpolationspolynom nicht besser, sondern am Rand katastrophal --- wenn die Stützstellen gleichabständig sind.}
+\methoden{Runge-Phänomen, Gegenbeispiel, Tschebyschow-Knoten}
+$f(x) = \dfrac1{1 + 25x^{2}}$ auf $[-1, 1]$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Interpolieren Sie $f$ an $x = -1, 0, 1$ (Grad $2$) und an $x = -1, -\frac12, 0, \frac12, 1$ (Grad $4$). Werten Sie beide bei $x = 0{,}9$ aus.
+\item Die maximalen Fehler für gleichabständige Knoten sind: Grad $4$: $0{,}44$; Grad $10$: $1{,}9$; Grad $20$: $60$. Für Tschebyschow-Knoten: $0{,}40$; $0{,}11$; $0{,}015$. Deuten Sie.
+\item Woran liegt es? Betrachten Sie $\omega(x) = \prod(x - x_i)$ nahe dem Rand und die Ableitungen von $f$ (Pole bei $\pm\frac i5$).
+\item Was tut man stattdessen? Nennen Sie drei Auswege.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Dividierte Differenzen: $1, 7, 19$; dann $3, 6$; dann $1$. Das Polynom ist $1 + x + 3x(x - 1) + x(x - 1)(x - 2)$.}{22pt}
+\begin{karte}{gruen}{5.29}{\typwerk}{\meta{1}{10 min}{Band 5, Kap.\ 8, Aufgabe 8.1}}
+\kartentitel{Das Newton-Schema}
+\worum{Dividierte Differenzen in Dreiecksform, dann das Polynom ablesen --- und erkennen, dass es $x^{3} + 1$ ist.}
+\methoden{Newton-Schema}
+Interpolieren Sie $(0, 1)$, $(1, 2)$, $(2, 9)$, $(3, 28)$ mit dem Newton-Schema und multiplizieren Sie aus.
+\end{karte}
+
+\stupser{gruen}{$x_k = \cos\frac{(2k + 1)\pi}{10}$, $k = 0, \dots, 4$: $\pm0{,}951$, $\pm0{,}588$, $0$. Für diese Knoten ist $\max|\omega| = 2^{-4}$.}{22pt}
+\begin{karte}{gruen}{5.30}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 8, Aufgabe 8.2}}
+\kartentitel{Tschebyschow-Knoten}
+\worum{Die Knoten, die $\max|\omega|$ minimieren: Nullstellen des Tschebyschow-Polynoms. Hier für fünf Punkte, mit Vergleich.}
+\methoden{Tschebyschow-Knoten, Minimax-Eigenschaft}
+Bestimmen Sie die Tschebyschow-Knoten für $n = 4$ (fünf Punkte) auf $[-1, 1]$ und vergleichen Sie $\max|\omega|$ mit dem für gleichabständige Punkte.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 9
+\stupser{gruen}{Momentengleichungen mit $h = 1$: $M_{i-1} + 4M_i + M_{i+1} = 6(y_{i+1} - 2y_i + y_{i-1})$, $M_0 = M_3 = 0$. Rechte Seiten $-18$ und $18$.}{22pt}
+\begin{karte}{gruen}{5.31}{\typwerk}{\meta{2}{20 min}{Band 5, Kap.\ 9, Aufgabe 9.1}}
+\kartentitel{Ein natürlicher Spline}
+\worum{Vier Punkte, drei kubische Stücke, zwei unbekannte Momente. Der Spline ist das, was ein biegsames Lineal durch die Punkte macht.}
+\methoden{Kubischer Spline, Tridiagonales System}
+Bestimmen Sie den natürlichen kubischen Spline durch $(0, 1)$, $(1, 2)$, $(2, 0)$, $(3, 1)$. Geben Sie die drei Polynomstücke an und prüfen Sie die Glattheit bei $x = 1$.
+\end{karte}
+
+\stupser{gruen}{$N = 4$, $\omega = i$: $c_k = \frac14\sum_jy_ji^{-kj}$. Mit $i^{-1} = -i$, $i^{-2} = -1$, $i^{-3} = i$ ist das reine Buchhaltung.}{22pt}
+\begin{karte}{gruen}{5.32}{\typwerk}{\meta{2}{10 min}{Band 5, Kap.\ 9, Aufgabe 9.2}}
+\kartentitel{Eine DFT von Hand}
+\worum{Vier Zahlen rein, vier komplexe Zahlen raus. Einmal selbst gerechnet, damit man weiß, was die FFT so schnell tut.}
+\methoden{Diskrete Fourier-Transformation, Parseval}
+Berechnen Sie die DFT der Folge $y = (1, 2, 1, 0)$ von Hand (mit Normierung $\frac1N$) und deuten Sie die Koeffizienten.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 10
+\stupser{gruen}{Legendre: $c_0 = \frac12\int_{-1}^{1}e^{x}\,dx$, $c_1 = \frac32\int_{-1}^{1}xe^{x}\,dx$. Das zweite Integral ist $\frac2e$.}{22pt}
+\begin{karte}{gruen}{5.33}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 10, Aufgabe 10.1}}
+\kartentitel{Beste Quadratmittel-Approximation}
+\worum{Orthogonale Projektion auf die Polynome ersten Grades --- mit Legendre-Polynomen ohne Gleichungssystem. Und der Vergleich mit Taylor, der am Rand verliert.}
+\methoden{Orthogonale Projektion, Legendre-Polynome}
+Bestimmen Sie die beste Quadratmittel-Approximation von $f(x) = e^{x}$ durch ein Polynom ersten Grades auf $[-1, 1]$ und vergleichen Sie mit der Taylorentwicklung $1 + x$.
+\end{karte}
+
+\stupser{gruen}{Drei Alternanten: Ränder $0$, $1$ und der Scheitel von $r(x) = x^{2} - ax - b$. Aus $r(0) = r(1) = E$ folgt $a = 1$.}{22pt}
+\begin{karte}{gruen}{5.34}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 10, Aufgabe 10.2}}
+\kartentitel{Beste gleichmäßige Approximation}
+\worum{Tschebyschows Alternantensatz an einem Beispiel, bei dem man alles ausrechnen kann: Der Fehler nimmt dreimal abwechselnd sein Maximum an.}
+\methoden{Alternantensatz, Minimax-Eigenschaft}
+Bestimmen Sie die beste gleichmäßige Approximation von $f(x) = x^{2}$ durch ein Polynom ersten Grades auf $[0, 1]$ und den Fehler $E$.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 11
+\stupser{tief}{Fehler bei $h$ und bei $h/2$ vergleichen: Verhältnis $2^{p}$, $p$ die Ordnung. Trapez $p = 2$, Simpson $p = 4$.}{22pt}
+\begin{karte}{tief}{5.35}{\typtypisch}{\meta{2}{15 min}{Band 5, Kap.\ 11}}
+\kartentitel{Die Fehlerordnung messen}
+\worum{Die Ordnung eines Verfahrens kann man \emph{messen}: Schrittweite halbieren, Fehler vergleichen. Das ist der schnellste Test, ob eine Implementierung stimmt.}
+\methoden{Konvergenzordnung, Romberg-Schema}
+Für $I = \int_0^1e^{-x^{2}}\,dx = 0{,}7468241$ liefern Trapezregel und Simpson-Regel mit $m$ Teilintervallen:
+\begin{center}\small
+\begin{tabular}{lcccc}
+$m$ & $2$ & $4$ & $8$ & $16$\\ \hline
+Trapez & $0{,}7313703$ & $0{,}7429841$ & $0{,}7458656$ & $0{,}7465846$\\
+Simpson & $0{,}7471804$ & $0{,}7468554$ & $0{,}7468261$ & $0{,}7468243$
+\end{tabular}
+\end{center}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie die Fehler und die Fehlerquotienten bei Halbierung. Welche Ordnungen ergeben sich?
+\item Schätzen Sie aus zwei Trapezwerten den Fehler ohne Kenntnis von $I$ (Richardson).
+\item Wie viele Teilintervalle brauchte die Trapezregel für $10^{-10}$? Simpson?
+\item Warum ist der Simpson-Quotient erst bei feinen Gittern nahe $16$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$h = \frac14$; Trapez $= h\bigl(\frac{f_0}2 + f_1 + f_2 + f_3 + \frac{f_4}2\bigr)$, Simpson $= \frac h3(f_0 + 4f_1 + 2f_2 + 4f_3 + f_4)$.}{22pt}
+\begin{karte}{gruen}{5.36}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 11, Aufgabe 11.1}}
+\kartentitel{Trapez und Simpson}
+\worum{Die beiden Grundregeln mit fünf Funktionswerten --- und die Fehlerschätzung über die zweite bzw. vierte Ableitung.}
+\methoden{Trapezregel, Simpson-Regel, Fehlerschranke}
+Berechnen Sie $\int_0^1e^{-x^{2}}\,dx$ mit Trapez- und Simpson-Regel für $m = 4$ und schätzen Sie die Fehler mit den Fehlerformeln ab.
+\end{karte}
+
+\stupser{gruen}{$R_{k,j} = R_{k,j-1} + \frac{R_{k,j-1} - R_{k-1,j-1}}{4^{j} - 1}$. Die erste Spalte sind Trapezwerte, die zweite Simpson.}{22pt}
+\begin{karte}{gruen}{5.37}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 11, Aufgabe 11.2}}
+\kartentitel{Das Romberg-Schema}
+\worum{Richardson-Extrapolation, systematisch: Aus vier Trapezwerten wird ein Ergebnis mit zehn Stellen.}
+\methoden{Romberg-Schema}
+Berechnen Sie $\int_0^1e^{-x^{2}}\,dx$ mit dem Romberg-Schema bis $R_{3,3}$ und geben Sie den Fehler jeder Spalte an.
+\end{karte}
+
+\stupser{gruen}{Knoten $t = 0, \pm\sqrt{3/5}$, Gewichte $\frac89, \frac59, \frac59$ auf $[-1, 1]$; transformieren mit $x = \frac{t + 1}2$, $dx = \frac{dt}2$.}{22pt}
+\begin{karte}{gruen}{5.38}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 11, Aufgabe 11.3}}
+\kartentitel{Gauß--Legendre mit drei Punkten}
+\worum{Drei geschickt gewählte Punkte sind exakt für Polynome bis Grad $5$ --- Simpson mit drei Punkten nur bis Grad $3$. Der Unterschied im Beispiel: Faktor $40$.}
+\methoden{Gauß-Quadratur}
+Berechnen Sie $\int_0^1e^{-x^{2}}\,dx$ mit der Gauß--Legendre-Formel für drei Punkte und vergleichen Sie mit Simpson bei gleicher Punktzahl.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 12
+\stupser{akzent}{Expliziter Euler für $y' = -50y$: $y_{k+1} = (1 - 50h)y_k$. Mit $h = 0{,}1$ ist der Faktor $-4$.}{22pt}
+\begin{karte}{akzent}{5.39}{\typstolper}{\meta{2}{15 min}{Band 5, Kap.\ 12}}
+\kartentitel{Euler explodiert}
+\worum{Eine Differentialgleichung, deren Lösung in Sekundenbruchteilen abklingt, und ein Verfahren, das stattdessen exponentiell wächst. Steifigkeit: der Grund, warum es implizite Verfahren gibt.}
+\methoden{Steifigkeit, Stabilitätsgebiet, Impliziter Euler}
+$y' = -50y$, $y(0) = 1$ (exakt $y = e^{-50t}$).
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Expliziter Euler mit $h = 0{,}1$: Berechnen Sie $y_1, \dots, y_4$ und vergleichen Sie mit der exakten Lösung.
+\item Für welche $h$ bleibt der explizite Euler stabil? Wie viele Schritte braucht man dann für $[0, 1]$?
+\item Impliziter Euler $y_{k+1} = y_k + hf(t_{k+1}, y_{k+1})$ mit $h = 0{,}1$: Berechnen Sie $y_1, \dots, y_4$.
+\item Warum kann man beim impliziten Euler $h$ beliebig groß wählen? Was zahlt man dafür?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Euler: $y_1 = 0{,}5 + 0{,}2\cdot1{,}5 = 0{,}8$. RK4: vier Steigungen $k_1, \dots, k_4$, gewichtet $1, 2, 2, 1$.}{22pt}
+\begin{karte}{gruen}{5.40}{\typwerk}{\meta{2}{20 min}{Band 5, Kap.\ 12, Aufgabe 12.1}}
+\kartentitel{Euler und Runge--Kutta}
+\worum{Zwei Schritte mit jedem Verfahren --- und ein Fehler, der beim einen in der ersten, beim anderen in der fünften Stelle liegt.}
+\methoden{Euler-Verfahren, Runge–Kutta, Konvergenzordnung}
+Lösen Sie $y' = y - t^{2} + 1$, $y(0) = 0{,}5$ auf $[0;\ 0{,}4]$ mit $h = 0{,}2$ mit Euler und mit RK4. Exakt: $y(t) = (t + 1)^{2} - \frac12e^{t}$.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 13
+\stupser{gruen}{$-u'' \approx\frac{-u_{i-1} + 2u_i - u_{i+1}}{h^{2}}$ mit $h = \frac14$: tridiagonales System $16\begin{pmatrix}2 & -1 & 0\\ -1 & 2 & -1\\ 0 & -1 & 2\end{pmatrix}u = f$.}{22pt}
+\begin{karte}{gruen}{5.41}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 13, Aufgabe 13.1}}
+\kartentitel{Ein Randwertproblem auf drei Punkten}
+\worum{Finite Differenzen: Aus der Differentialgleichung wird ein lineares Gleichungssystem. Mit drei Punkten ist der Fehler fünf Prozent --- und man sieht, wie er mit $h^{2}$ fällt.}
+\methoden{Finite Differenzen, Tridiagonales System, Symmetrie ausnutzen}
+Lösen Sie $-u'' = \pi^{2}\sin(\pi x)$, $u(0) = u(1) = 0$ mit $n = 3$ inneren Gitterpunkten und vergleichen Sie mit $u(x) = \sin(\pi x)$.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 14
+\stupser{tief}{Für $f = x^{2} + 10y^{2}$ ist $\nabla f = (2x, 20y)$; exakte Schrittweite $\alpha = \frac{g^{\mathsf T}g}{g^{\mathsf T}Ag}$ mit $A = \operatorname{diag}(2, 20)$.}{22pt}
+\begin{karte}{tief}{5.42}{\typtypisch}{\meta{2}{15 min}{Band 5, Kap.\ 14}}
+\kartentitel{Gradientenverfahren im Tal}
+\worum{Steilster Abstieg zickzackt durch lange Täler; die Konvergenzrate hängt von der Konditionszahl ab. Newton macht es in einem Schritt --- bei quadratischen Funktionen.}
+\methoden{Gradientenverfahren, Liniensuche, Konditionszahl}
+$f(x, y) = x^{2} + 10y^{2}$, Start $(10, 1)$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Führen Sie drei Schritte des Gradientenverfahrens mit exakter Liniensuche aus. Notieren Sie $f$ nach jedem Schritt.
+\item Berechnen Sie die Quotienten aufeinanderfolgender $f$-Werte und vergleichen Sie mit $\bigl(\frac{\kappa - 1}{\kappa + 1}\bigr)^{2}$, $\kappa = 10$.
+\item Führen Sie einen Newton-Schritt aus.
+\item Was passiert mit dem Gradientenverfahren bei $f = x^{2} + 1000y^{2}$? Wie viele Schritte für Faktor $10^{-6}$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Bei $(-1, 1)$ ist $y - x^{2} = 0$: Gradient $(-4, 0)$, Hesse-Matrix $\begin{pmatrix}802 & 400\\ 400 & 200\end{pmatrix}$. Schritt: $H s = -\nabla F$.}{22pt}
+\begin{karte}{gruen}{5.43}{\typwerk}{\meta{2}{15 min}{Band 5, Kap.\ 14, Aufgabe 14.1}}
+\kartentitel{Ein Newton-Schritt auf Rosenbrock}
+\worum{Die Testfunktion der Optimierer: ein gekrümmtes Tal mit Minimum bei $(1, 1)$. Ein Newton-Schritt landet in $x$ richtig --- und in $y$ weit daneben.}
+\methoden{Newton-Verfahren, Hesse-Matrix, Dämpfung}
+Führen Sie für $F(x, y) = (1 - x)^{2} + 100(y - x^{2})^{2}$ einen Newton-Schritt ab $(-1, 1)$ aus. Vergleichen Sie $F$ vorher und nachher. Was lehrt das über ungedämpftes Newton?
+\end{karte}
+
+\stupser{gruen}{Trefferanteil $\hat p\approx\frac\pi4$ mit Standardabweichung $\sqrt{p(1 - p)/N}$; $\hat\pi = 4\hat p$ hat Standardabweichung $4\sqrt{p(1 - p)/N}$.}{22pt}
+\begin{karte}{gruen}{5.44}{\typwerk}{\meta{2}{10 min}{Band 5, Kap.\ 14, Aufgabe 14.2}}
+\kartentitel{$\pi$ mit Monte-Carlo}
+\worum{Zufallspunkte im Quadrat, Anteil im Viertelkreis: Die Methode ist einfach, konvergiert wie $\frac1{\sqrt N}$ --- und das ist in hohen Dimensionen ihre Stärke, in einer ihre Schwäche.}
+\methoden{Monte-Carlo, Standardfehler, Simpson-Regel}
+Schätzen Sie $\pi$ mit Monte-Carlo und bestimmen Sie, wie viele Punkte für drei sichere Nachkommastellen nötig sind. Vergleichen Sie mit der Simpson-Regel für $4\int_0^1\sqrt{1 - x^{2}}\,dx$.
+\end{karte}

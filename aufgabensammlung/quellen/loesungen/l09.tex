@@ -1,0 +1,613 @@
+\setgebiet{10}{DGL}{mittel}
+\chapter[Lösungen: Differentialgleichungen]{Lösungen:\\Differentialgleichungen}
+
+%%%%%%%%%% 9.1
+\stupserzwei{gruen}{(c) Isoklinen $x - y = c$ sind Geraden der Steigung $1$; auf $y = x - 1$ hat das Feld die Steigung $1$ --- diese Gerade ist selbst Lösung, und alle anderen schmiegen sich an sie an.}{22pt}
+\begin{loesungkarte}{gruen}{9.1}{Klassifizieren, einsetzen, zeichnen}
+\derweg{Ordnung = höchste Ableitung; linear = $y$ und Ableitungen nur linear, Koeffizienten dürfen von $x$ abhängen; homogen = kein Term ohne $y$.}
+\schritt{(a)}
+\begin{center}\small
+\begin{tabular}{l|ccc}
+Gleichung & Ordnung & linear & homogen\\ \hline
+$y' + 3y = 0$ & 1 & ja & ja\\
+$y'' + \sin x\cdot y = e^{x}$ & 2 & ja & nein\\
+$y' = y^{2}$ & 1 & nein & ---\\
+$y'' + \sin y = 0$ & 2 & nein & ---\\
+$yy'' = (y')^{2}$ & 2 & nein & ---\\
+$y^{(4)} = -ky$ & 4 & ja & ja
+\end{tabular}
+\end{center}
+$\sin x\cdot y$ ist linear in $y$ (Koeffizient hängt von $x$ ab); $\sin y$ ist es nicht. $yy''$ und $(y')^{2}$ sind Produkte von Unbekannten: nichtlinear.
+\schritt{(b)}
+$y = x^{2}$: $xy' = x\cdot2x = 2x^{2} = 2y$. \checkmark\ Für $x\neq0$ trennen: $\frac{y'}y = \frac2x$, $\ln|y| = 2\ln|x| + C$, $y = Cx^{2}$ (mit $C = 0$ eingeschlossen). Bei $x = 0$ steht $0 = 2y(0)$, also $y(0) = 0$ für jede Lösung, und die Gleichung sagt nichts über $y'(0)$: Man darf $y = C_1x^{2}$ für $x < 0$ mit $y = C_2x^{2}$ für $x > 0$ zusammensetzen --- stetig differenzierbar bei $0$. Durch $(0, 0)$ gehen unendlich viele Lösungen, durch $(0, 1)$ keine. Die Normalform $y' = \frac{2y}x$ ist bei $x = 0$ nicht definiert; dort gilt Picard--Lindelöf nicht.
+\schritt{(c)}
+Isoklinen: $y' = c$ auf $y = x - c$. Für $c = 1$: Die Gerade $y = x - 1$ hat überall die Feldsteigung $1$, ist also Lösung. Oberhalb ist $y' < 1$ (die Lösungen wachsen langsamer als die Gerade), unterhalb $y' > 1$: Alle Lösungen nähern sich $y = x - 1$. Exakt: $y = x - 1 + Ce^{-x}$ (linear, $e^{-x}$ ist die homogene Lösung); $Ce^{-x}\to0$. \checkmark
+\probe{(c) $y' = 1 - Ce^{-x}$, $x - y = 1 - Ce^{-x}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Vor dem Rechnen: klassifizieren und zeichnen. Linear und erster Ordnung heißt \enquote{lösbar mit Formel}; nichtlinear heißt \enquote{Verfahren suchen oder qualitativ arbeiten}. Und die Stelle, an der der Koeffizient der höchsten Ableitung verschwindet ($x = 0$ in (b)), ist immer verdächtig.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.2
+\stupserzwei{tief}{(b) $y'' = \frac d{dx}\bigl(y(1 - y)\bigr) = (1 - 2y)y' = (1 - 2y)y(1 - y)$. Vorzeichen: Produkt dreier Faktoren.}{22pt}
+\begin{loesungkarte}{tief}{9.2}{Aus dem Richtungsfeld lesen}
+\derweg{$f(y) = y(1 - y)$: Nullstellen, Vorzeichen, dann $y'' = f'(y)f(y)$.}
+\schritt{(a)}
+Stationär: $y\equiv0$ und $y\equiv1$. $y' > 0$ für $0 < y < 1$ (wachsend), $y' < 0$ für $y < 0$ und $y > 1$ (fallend). Lösungen können die stationären nicht kreuzen (Eindeutigkeit, $f$ ist glatt): Jede Lösung bleibt in ihrem Streifen.
+\schritt{(b)}
+$y'' = (1 - 2y)\,y(1 - y)$. Für $0 < y < \frac12$: alle drei Faktoren positiv, konvex. Für $\frac12 < y < 1$: $1 - 2y < 0$, konkav. Für $y > 1$: $(-)(+)(-) = +$, konvex. Für $y < 0$: $(+)(-)(+) = -$, konkav. Wendepunkt genau beim Durchgang durch $y = \frac12$ --- also nur für Lösungen, die in $(0, 1)$ starten.
+\schritt{(c)}
+$y(0) = 0{,}1$: wächst, zuerst konvex, Wendepunkt bei $\frac12$, dann konkav gegen $1$ --- die S-Kurve. $y(0) = 0{,}6$: wächst konkav gegen $1$, kein Wendepunkt. $y(0) = 1{,}5$: fällt konvex gegen $1$. $y(0) = -0{,}1$: fällt konkav, immer schneller --- gegen $-\infty$, und zwar in endlicher Zeit (für großes $|y|$ ist $y'\approx-y^{2}$, Aufgabe 9.7).
+\schritt{(d)}
+$f'(y) = 1 - 2y$. $f'(0) = 1 > 0$: Kleine Störungen wachsen, $y = 0$ instabil. $f'(1) = -1 < 0$: Störungen klingen ab wie $e^{-x}$, $y = 1$ stabil. Allgemein: Ein Gleichgewicht von $y' = f(y)$ ist stabil, wenn $f$ dort fallend durch null geht.
+\probe{Exakte Lösung $y = \frac1{1 + Ce^{-x}}$: $y'' = 0\iff y = \frac12$. \checkmark}
+\begin{mitnehmen}\kastentext
+Für autonome Gleichungen $y' = f(y)$ ist das Richtungsfeld in $x$-Richtung konstant: Alles steht in der Funktion $f$. Nullstellen sind Gleichgewichte, Vorzeichen geben die Richtung, $f'$ an der Nullstelle die Stabilität, $f'f$ die Krümmung. Die logistische Kurve hat man damit vollständig verstanden, ohne sie zu lösen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.3
+\stupserzwei{gruen}{(b) Integrierender Faktor $e^{\int2/x} = x^{2}$: $(x^{2}y)' = \sin x$. Dann $x^{2}y = -\cos x + C$, und $y(\pi) = 0$ gibt $C = -1$.}{22pt}
+\begin{loesungkarte}{gruen}{9.3}{Separabel, linear, Bernoulli}
+\derweg{(a) Trennen, Anfangswert; Grenzgeschwindigkeit aus $\dot v = 0$. (b) Faktor $e^{\int p}$. (c) $z = y^{-2}$.}
+\schritt{(a1)}
+$y\equiv0$ löst. Sonst $\frac{y'}y = -2x$, $\ln|y| = -x^{2} + C$, $y = Ae^{-x^{2}}$. $y(0) = 3$: $A = 3$, $y = 3e^{-x^{2}}$. Probe: $y' = -6xe^{-x^{2}} = -2xy$. \checkmark\ (Die Gaußkurve ist Lösung einer Gleichung erster Ordnung --- deshalb ist sie überall.)
+\schritt{(a2)}
+$m\dot v = mg - kv$. Stationär ($\dot v = 0$): $v_\infty = \frac{mg}k$, ohne Rechnung. Trennen: $\frac{dv}{g - \frac kmv} = dt$, $-\frac mk\ln\bigl|g - \tfrac kmv\bigr| = t + C$, $g - \frac kmv = Ae^{-kt/m}$. $v(0) = 0$: $A = g$. $v(t) = \frac{mg}k\bigl(1 - e^{-kt/m}\bigr) = v_\infty\bigl(1 - e^{-t/\tau}\bigr)$, $\tau = \frac mk$. Nach $t = \tau$ sind $63\,\%$ von $v_\infty$ erreicht, nach $3\tau$ $95\,\%$.
+\schritt{(b)}
+$p = \frac2x$, $\mu = e^{\int p} = x^{2}$. $(x^{2}y)' = x^{2}\cdot\frac{\sin x}{x^{2}} = \sin x$. $x^{2}y = -\cos x + C$. $y(\pi) = 0$: $0 = -(-1) + C$, $C = -1$. $y = -\frac{1 + \cos x}{x^{2}}$. Probe: $y' = \frac{x^{2}\sin x + 2x(1 + \cos x)}{x^{4}} = \frac{\sin x}{x^{2}} + \frac{2(1 + \cos x)}{x^{3}} = \frac{\sin x}{x^{2}} - \frac2xy$. \checkmark
+\schritt{(c)}
+$y' + y = xy^{3}$, $n = 3$, $z = y^{1 - n} = y^{-2}$, $z' = -2y^{-3}y' = -2y^{-3}(xy^{3} - y) = -2x + 2y^{-2} = -2x + 2z$. Linear: $z' - 2z = -2x$. Homogen $Ce^{2x}$; partikulär $z_p = ax + b$: $a - 2ax - 2b = -2x$, $a = 1$, $b = \frac12$. $z = Ce^{2x} + x + \frac12$, also $y = \pm\bigl(Ce^{2x} + x + \tfrac12\bigr)^{-1/2}$ --- und $y\equiv0$, das die Substitution verliert.
+\probe{(c) $C = 0$: $y = (x + \frac12)^{-1/2}$, $y' = -\frac12(x + \frac12)^{-3/2}$, $y' + y - xy^{3} = (x + \frac12)^{-3/2}\bigl(-\frac12 + x + \frac12 - x\bigr) = 0$. \checkmark}
+\begin{mitnehmen}\kastentext
+Drei Typen, drei Handgriffe --- und jedes Mal zuerst die stationären Lösungen: Sie sind die Antwort, die das Verfahren verliert (Aufgabe 9.5), und beim freien Fall sind sie die Antwort, die man eigentlich wollte. Der integrierende Faktor $e^{\int p}$ ist die Variation der Konstanten in einem Schritt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.4
+\stupserzwei{tief}{(d) $M_y - N_x = (3x + 2y) - (2x + y) = x + y$, durch $N = x(x + y)$: $g = \frac1x$, $\mu = e^{\ln x} = x$.}{22pt}
+\begin{loesungkarte}{tief}{9.4}{Exakte Gleichungen und integrierender Faktor}
+\derweg{$M_y \overset?= N_x$; dann $F = \int M\,dx + h(y)$, $h$ aus $F_y = N$.}
+\schritt{(a)}
+$M = 2xy + 3$, $N = x^{2}$: $M_y = 2x = N_x$. Exakt. $F = \int(2xy + 3)\,dx = x^{2}y + 3x + h(y)$; $F_y = x^{2} + h' = N = x^{2}$, $h' = 0$. Lösungen: $x^{2}y + 3x = C$, also $y = \frac{C - 3x}{x^{2}}$.
+\schritt{(b)}
+$M_y = 4y$, $N_x = 4y$. Exakt. $F = x^{3} + 2xy^{2} + h(y)$, $F_y = 4xy + h' = 4xy + 6y^{2}$, $h = 2y^{3}$. $x^{3} + 2xy^{2} + 2y^{3} = C$; $y(1) = 1$: $C = 5$. (Implizit --- nach $y$ auflösen wäre eine kubische Gleichung; die implizite Form ist die Lösung.)
+\schritt{(c)}
+$M_y = 1$, $N_x = -1$: nicht exakt. Mit $\mu = \frac1{y^{2}}$: $\frac1y\,dx - \frac x{y^{2}}\,dy = d\bigl(\frac xy\bigr)$, exakt, Lösung $\frac xy = C$. Mit $\mu = \frac1{x^{2}}$: $\frac y{x^{2}}\,dx - \frac1x\,dy = -d\bigl(\frac yx\bigr)$, Lösung $\frac yx = C'$. Beide beschreiben die Geraden durch den Ursprung $y = kx$ (die eine mit $k = \frac1C$, die andere mit $k = C'$): dieselben Kurven, verschieden parametrisiert. Der Faktor ändert die Gleichung, nicht ihre Lösungskurven --- er ändert nur die Stellen, an denen er selbst null oder unendlich ist (hier $x = 0$ bzw.\ $y = 0$).
+\schritt{(d)}
+Sei $\frac{M_y - N_x}N = g(x)$ und $\mu = e^{\int g}$, also $\mu' = g\mu$. Für $\mu M$ und $\mu N$: $(\mu M)_y = \mu M_y$, $(\mu N)_x = \mu'N + \mu N_x = \mu(gN + N_x) = \mu(M_y - N_x + N_x) = \mu M_y$. \checkmark\ Beispiel: $g = \frac1x$, $\mu = x$: $(3x^{2}y + xy^{2})\,dx + (x^{3} + x^{2}y)\,dy = 0$, $M_y = 3x^{2} + 2xy = N_x$. \checkmark\ $F = x^{3}y + \frac{x^{2}y^{2}}2 + h(y)$, $F_y = x^{3} + x^{2}y$, $h' = 0$. Lösung $x^{3}y + \frac12x^{2}y^{2} = C$.
+\probe{(a) $y = \frac{C - 3x}{x^{2}}$ implizit ableiten: $2xy + x^{2}y' + 3 = 0$, also $(2xy + 3) + x^{2}y' = 0$ --- die Gleichung. \checkmark}
+\begin{mitnehmen}\kastentext
+Exakt heißt: Die Lösungskurven sind Niveaulinien eines Potentials $F$. Das Kriterium $M_y = N_x$ ist der Satz von Schwarz; der integrierende Faktor ist die Beobachtung, dass eine Gleichung viele Schreibweisen hat und eine davon exakt sein kann. Jede separable und jede lineare Gleichung hat einen --- die Verfahren aus Aufgabe 9.3 sind Spezialfälle.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.5
+\stupserzwei{akzent}{(b) $\ln|y|$, nicht $\ln y$: Dann $|y| = e^{C}e^{2x}$, also $y = \pm e^{C}e^{2x}$, und mit $y\equiv0$ zusammen $y = Ke^{2x}$ für \emph{jedes} $K\in\mathbb R$.}{22pt}
+\begin{loesungkarte}{akzent}{9.5}{Die verlorene Lösung}
+\derweg{Bei jeder Division fragen: Was ist, wenn der Divisor null ist? Bei jedem $\ln$: Betrag. Bei jeder Formel: Wo ist sie definiert?}
+\schritt{(a)}
+$y\equiv0$ löst $y' = y^{2}$, fehlt in $y = -\frac1{x + C}$ für jedes endliche $C$ --- formal \enquote{$C = \infty$}. Die Division durch $y^{2}$ hat sie entfernt. Vollständige Lösungsmenge: $y = -\frac1{x + C}$ und $y\equiv0$.
+\schritt{(b)}
+Verloren: $y\equiv0$ (Division durch $y$) und alle $y < 0$ (der fehlende Betrag im Logarithmus; $\ln y$ existiert für $y < 0$ gar nicht). Richtig: $\ln|y| = 2x + C$, $y = Ke^{2x}$, $K\in\mathbb R$ beliebig --- hier ist $y\equiv0$ als $K = 0$ enthalten, aber nur, weil man $K = \pm e^{C}$ nachträglich um $0$ ergänzt.
+\schritt{(c)}
+$y\equiv0$: $0 = 3\cdot0$. \checkmark\ Zusammengesetzt: $y = 0$ für $x\le a$, $(x - a)^{3}$ für $x > a$. Bei $x = a$: beide Stücke haben Wert $0$ und Ableitung $0$ ($3(x - a)^{2}\to0$): $y$ ist $C^{1}$ und erfüllt die Gleichung überall. Erlaubt, weil durch $(a, 0)$ mehrere Lösungen gehen --- die rechte Seite $3y^{2/3}$ ist bei $y = 0$ nicht Lipschitz. In (b) ist $f(y) = 2y$ Lipschitz; durch jeden Punkt geht genau eine Lösung, und $y\equiv0$ lässt sich nicht verlassen.
+\schritt{(d)}
+$x^{2} + y^{2} = C$; $y(0) = 1$: $C = 1$, $y = \sqrt{1 - x^{2}}$ (das Vorzeichen aus dem Anfangswert). Definiert auf $(-1, 1)$. Bei $x\to\pm1$: $y\to0$, $y' = -\frac xy\to\mp\infty$ --- die Lösungskurve wird senkrecht, die Gleichung ($\frac xy$) ist bei $y = 0$ nicht definiert. Die Kreislinie geht weiter, die Lösung nicht: Eine Lösung ist eine \emph{Funktion}.
+\begin{fehler}\kastentext
+Drei Verluste beim Trennen: (1) Division durch $g(y)$ --- die Nullstellen von $g$ sind stationäre Lösungen, separat notieren. (2) $\int\frac{dy}y = \ln|y|$, mit Betrag; ohne ihn fehlt die halbe Lösungsmenge. (3) Die Formel gilt dort, wo alle Schritte erlaubt waren; das Existenzintervall ist Teil der Antwort. Zusammensetzen wie in (c) ist nur erlaubt, wo die Eindeutigkeit versagt.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Trennung der Variablen liefert Lösungen; die Lösungs\emph{menge} erhält man erst nach der Frage, was das Verfahren übersehen hat. Die Antwort ist fast immer: die stationären Lösungen --- und manchmal sind das gerade die interessanten (Grenzgeschwindigkeit, Gleichgewicht, Kapazität).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.6
+\stupserzwei{gruen}{(a) Alle Lösungen: $y = (x - b)^{3}$ für $x < b$, $0$ auf $[b, a]$, $(x - a)^{3}$ für $x > a$, mit beliebigen $b\le0\le a$ (auch $b = -\infty$ oder $a = \infty$).}{22pt}
+\begin{loesungkarte}{gruen}{9.6}{Eindeutigkeit, Picard, Existenzintervall}
+\derweg{Lipschitz prüfen über $\partial f/\partial y$; Picard: $y_{k+1} = y_0 + \int_0^{x}f(t, y_k(t))\,dt$; Existenzintervall: lösen und schauen, wo es endet.}
+\schritt{(a)}
+Lösungen durch $(0, 0)$: $y\equiv0$ und $y = x^{3}$ ($y' = 3x^{2} = 3(x^{3})^{2/3}$ \checkmark). $\frac{\partial f}{\partial y} = 2y^{-1/3}\to\infty$ für $y\to0$: keine Lipschitzkonstante in einer Umgebung von $y = 0$. Genauer: $\frac{|f(y) - f(0)|}{|y - 0|} = 3|y|^{-1/3}$ unbeschränkt. Alle Lösungen: Trennen gibt $y = (x - c)^{3}$ für $y\neq0$; da man bei $y = 0$ beliebig lange verweilen darf, ist jede Funktion der Form im Stupser eine Lösung, und das sind alle (eine Lösung ist auf $\{y\neq0\}$ eine Kubik, dazwischen null). Eine zweiparametrige Familie durch einen Punkt.
+\schritt{(b)}
+$y_0 = 0$. $y_1 = \int_0^{x}t\,dt = \frac{x^{2}}2$. $y_2 = \int_0^{x}\bigl(t + \frac{t^{2}}2\bigr)dt = \frac{x^{2}}2 + \frac{x^{3}}6$. $y_3 = \int_0^{x}\bigl(t + \frac{t^{2}}2 + \frac{t^{3}}6\bigr)dt = \frac{x^{2}}2 + \frac{x^{3}}6 + \frac{x^{4}}{24}$. Exakt: linear, $y = Ce^{x} - x - 1$, $y(0) = 0$: $y = e^{x} - x - 1 = \frac{x^{2}}2 + \frac{x^{3}}6 + \frac{x^{4}}{24} + \frac{x^{5}}{120} + \dots$ Die Iteration erzeugt die Taylorreihe Glied für Glied. Bei $x = 1$: $y_3(1) = 0{,}7083$, exakt $e - 2 = 0{,}7183$.
+\schritt{(c)}
+Trennen: $\arctan y = x + C$, $C = 0$, $y = \tan x$. Definiert auf $(-\frac\pi2, \frac\pi2)$; an beiden Rändern $|y|\to\infty$. Die rechte Seite $1 + y^{2}$ ist auf ganz $\mathbb R^{2}$ glatt --- und trotzdem lebt die Lösung nur auf einem Intervall der Länge $\pi$. Picard--Lindelöf garantiert nur ein kleines Intervall um $0$; das maximale ist das, bis zu dem sich die Lösung fortsetzen lässt, und das endet, wenn sie \enquote{aus jedem Kompaktum entweicht}.
+\probe{(b) Picard konvergiert, weil $f = x + y$ Lipschitz mit $L = 1$ ist: $|y_{k+1} - y_k|\le\frac{|x|^{k+2}}{(k + 2)!}$ --- genau die Taylorglieder.}
+\begin{mitnehmen}\kastentext
+Drei Lehren: Ohne Lipschitz keine Eindeutigkeit (und der Verstoß passiert bei Potenzen $y^{\alpha}$ mit $\alpha < 1$); der Beweis von Picard--Lindelöf ist ein Rechenverfahren, das bei linearen Gleichungen die Potenzreihe erzeugt; und Existenz ist lokal --- das Existenzintervall gehört zur Lösung dazu (Aufgabe 9.7).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.7
+\stupserzwei{akzent}{(c) Ist $|f(x, y)|\le L|y| + |f(x, 0)|\le L|y| + M$, so wächst $|y|$ höchstens wie $e^{Lx}$ (Gronwall) --- es kann in endlicher Zeit nicht unendlich werden.}{22pt}
+\begin{loesungkarte}{akzent}{9.7}{Lokal heißt nicht global}
+\derweg{Explizit lösen, Intervall ablesen; die fehlende Voraussetzung benennen; die globale Version beweisen.}
+\schritt{(a)}
+$-\frac1y = x + C$, $C = -\frac1{y_0}$: $y = \frac{y_0}{1 - y_0x}$. Für $y_0 > 0$: Nenner null bei $x = \frac1{y_0}$; maximales Intervall $(-\infty, \frac1{y_0})$, Blow-up nach rechts --- je größer der Anfangswert, desto früher. Für $y_0 < 0$: Intervall $(\frac1{y_0}, \infty)$, Blow-up nach links (rückwärts in der Zeit); vorwärts geht $y\to0^{-}$.
+\schritt{(b)}
+Picard--Lindelöf verlangt Lipschitz auf einem Rechteck um den Anfangspunkt und liefert Existenz auf einem Intervall, dessen Länge von der Größe des Rechtecks und der Schranke von $f$ dort abhängt. $y^{2}$ ist \emph{lokal} Lipschitz (auf jedem beschränkten $y$-Bereich), aber nicht \emph{global}: $\frac{|y^{2} - z^{2}|}{|y - z|} = |y + z|$ ist unbeschränkt. $f(y) = y$ hat $L = 1$ überall.
+\schritt{(c)}
+Sei $f$ global Lipschitz mit Konstante $L$ und stetig. Dann $|f(x, y)|\le|f(x, y) - f(x, 0)| + |f(x, 0)|\le L|y| + M(x)$ mit stetigem $M$. Auf jedem beschränkten $x$-Intervall $[0, T]$: $\frac d{dx}|y|\le|y'|\le L|y| + M_T$, also $|y(x)|\le\bigl(|y_0| + M_Tx\bigr)e^{Lx}$ (Gronwall). $|y|$ bleibt auf $[0, T]$ beschränkt. Nach dem Satz vom maximalen Existenzintervall endet eine Lösung nur, wenn $|y|\to\infty$ --- hier unmöglich. Also existiert sie auf $[0, T]$ für jedes $T$, d.\,h.\ für alle $x\ge0$; ebenso nach links. $\blacksquare$ Linear: $f = a(x)y + b(x)$, auf $[0, T]$ Lipschitz mit $L = \max|a|$: globale Existenz.
+\schritt{(d)}
+Der Fehler: \enquote{glatt} ist lokale Information, Existenz für alle $x$ eine globale Aussage. Glattheit kontrolliert nicht das Wachstum. $y' = y^{2}$, $y(0) = 1$: $y = \frac1{1 - x}$, und $y(2)$ gibt es nicht --- die Lösung endet bei $x = 1$. Die Formel liefert $\frac1{1 - 2} = -1$, aber das ist der Wert einer \emph{anderen} Lösung (der mit Anfangswert $y(2) = -1$, die auf $(1, \infty)$ lebt); die beiden Zweige der Hyperbel sind verschiedene Lösungen.
+\begin{fehler}\kastentext
+\enquote{Die Lösung existiert} heißt ohne Zusatz nur: in einer Umgebung des Anfangspunkts. Für Existenz auf ganz $\mathbb R$ braucht man lineares Wachstum von $f$ in $y$ (global Lipschitz oder $|f|\le a|y| + b$) --- oder eine a-priori-Schranke aus anderer Quelle (Energie, Erhaltungsgröße, invariante Menge). Nichtlineare Gleichungen mit superlinearem Wachstum ($y^{2}$, $e^{y}$) können in endlicher Zeit explodieren, und die Formel merkt es nicht.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Blow-up in endlicher Zeit ist kein pathologischer Sonderfall, sondern typisch für $y' = y^{p}$, $p > 1$. In den Anwendungen heißt es: Das Modell verliert seine Gültigkeit (Populationsexplosion, Fokussierung eines Laserstrahls, Kollaps). Ob die Navier--Stokes-Gleichungen in drei Dimensionen Blow-up haben, ist ein offenes Millenniumsproblem.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.8
+\stupserzwei{gruen}{(c) Jacobi-Matrix am Gleichgewicht $(\frac cd, \frac ab)$: $\begin{pmatrix}0&-\frac{bc}d\\\frac{ad}b&0\end{pmatrix}$, Eigenwerte $\pm i\sqrt{ac}$. Rein imaginär: Die Linearisierung sieht ein Zentrum --- und entscheidet nichts.}{22pt}
+\begin{loesungkarte}{gruen}{9.8}{System, Matrixexponential, Räuber--Beute}
+\derweg{(a) Eigenwerte, Eigenvektoren, Anfangsbedingung. (b) $A = 2I + N$. (c) Gleichgewicht, Jacobi-Matrix, Eigenwerte, Deutung mit Vorbehalt.}
+\schritt{(a)}
+$\det(A - \lambda I) = (1 - \lambda)(2 - \lambda) - 6 = \lambda^{2} - 3\lambda - 4 = (\lambda - 4)(\lambda + 1)$. Kontrolle: Summe $3 = \operatorname{tr}A$, Produkt $-4 = \det A$. \checkmark\ Eigenvektoren: $\lambda = 4$: $-3v_1 + 2v_2 = 0$, $\vec v_1 = (2, 3)$. $\lambda = -1$: $2v_1 + 2v_2 = 0$, $\vec v_2 = (1, -1)$. Allgemein $\vec y = c_1e^{4x}(2, 3) + c_2e^{-x}(1, -1)$. Anfang: $2c_1 + c_2 = 1$, $3c_1 - c_2 = 0$, also $c_1 = \frac15$, $c_2 = \frac35$:
+\[ \vec y(x) = \frac15e^{4x}\begin{pmatrix}2\\3\end{pmatrix} + \frac35e^{-x}\begin{pmatrix}1\\-1\end{pmatrix}. \]
+Sattelpunkt: Fast alle Lösungen laufen entlang $(2, 3)$ ins Unendliche; nur Start auf der Geraden $(1, -1)$ führt in den Ursprung.
+\schritt{(b)}
+$A = 2I + N$, $N = \begin{pmatrix}0&1\\0&0\end{pmatrix}$, $N^{2} = 0$, und $I$ kommutiert mit allem. $e^{Ax} = e^{2Ix}e^{Nx} = e^{2x}(I + xN) = e^{2x}\begin{pmatrix}1&x\\0&1\end{pmatrix}$. Probe: Ableitung bei $0$ ist $2I + N = A$. \checkmark\ Die zweite Grundlösung enthält den Faktor $x$ --- Jordanblock, wie die Doppelwurzel bei skalaren Gleichungen.
+\schritt{(c)}
+Gleichgewicht: $B(a - bR) = 0$, $R(-c + dB) = 0$; nichttrivial $B^{*} = \frac cd$, $R^{*} = \frac ab$. (Die Beute hängt nur von den Räuberparametern ab und umgekehrt.) Jacobi-Matrix $\begin{pmatrix}a - bR & -bB\\ dR & -c + dB\end{pmatrix}$, am Gleichgewicht $\begin{pmatrix}0&-\frac{bc}d\\\frac{ad}b&0\end{pmatrix}$. $\lambda^{2} + ac = 0$, $\lambda = \pm i\sqrt{ac}$. Die Linearisierung schwingt mit Kreisfrequenz $\sqrt{ac}$, Periode $T = \frac{2\pi}{\sqrt{ac}}$ --- unabhängig von $b$ und $d$. Das sagt sie \emph{nicht}: ob das Gleichgewicht wirklich ein Zentrum ist (es könnte ein schwach an- oder abklingender Strudel sein; ein Zentrum ist nicht hyperbolisch, Aufgabe 9.20). Dass die Bahnen tatsächlich geschlossen sind, zeigt erst die Erhaltungsgröße (Aufgabe 9.18b); und für große Schwankungen ist die Periode länger als $T$.
+\probe{(a) Bei $x = 0$: $\frac15(2, 3) + \frac35(1, -1) = (1, 0)$. \checkmark\ (c) Volterras Beobachtung: Fischfang (erhöht $c$, senkt $a$) verschiebt das Gleichgewicht zu \emph{mehr} Beute $\frac cd$ und \emph{weniger} Räubern $\frac ab$ --- der Fangstopp im Ersten Weltkrieg ließ den Haianteil in der Adria steigen.}
+\begin{mitnehmen}\kastentext
+Für lineare Systeme sind Eigenwerte alles. Für nichtlineare liefert die Linearisierung Typ und Stabilität --- \emph{wenn} kein Eigenwert auf der imaginären Achse liegt. Rein imaginäre Eigenwerte sind der Fall, in dem man weiterfragen muss, und Lotka--Volterra ist das klassische Beispiel dafür.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.9
+\stupserzwei{tief}{(c) $\lambda = 3$ mit $(1, 1)$, $\lambda = 1$ mit $(1, -1)$. $e^{At} = S\operatorname{diag}(e^{3t}, e^{t})S^{-1}$ mit $S = \begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $S^{-1} = \frac12S$.}{22pt}
+\begin{loesungkarte}{tief}{9.9}{$e^{At}$ auf drei Wegen}
+\derweg{Reihe, wenn Potenzen periodisch sind; $D + N$ bei Jordanform; $SDS^{-1}$ bei Diagonalisierbarkeit. Dann Proben.}
+\schritt{(a)}
+$A^{2} = \begin{pmatrix}0&1\\-1&0\end{pmatrix}^{2} = -I$, also $A^{2k} = (-1)^{k}I$, $A^{2k+1} = (-1)^{k}A$.
+\[ e^{At} = \sum_k\frac{(-1)^{k}t^{2k}}{(2k)!}I + \sum_k\frac{(-1)^{k}t^{2k+1}}{(2k + 1)!}A, \]
+\[ e^{At} = \cos t\,I + \sin t\,A = \begin{pmatrix}\cos t&\sin t\\-\sin t&\cos t\end{pmatrix}. \]
+System $\dot x = y$, $\dot y = -x$, also $\ddot x = -x$: harmonischer Oszillator. $e^{At}$ ist eine Drehung um den Winkel $-t$; die Bahnen sind Kreise.
+\schritt{(b)}
+$A = I + N$, $N^{2} = 0$, $IN = NI$. $e^{At} = e^{It}e^{Nt} = e^{t}(I + tN) = e^{t}\begin{pmatrix}1&t\\0&1\end{pmatrix}$. Die Regel $e^{B + C} = e^{B}e^{C}$ gilt nur für kommutierende $B, C$; für $B = \begin{pmatrix}0&1\\0&0\end{pmatrix}$, $C = \begin{pmatrix}0&0\\1&0\end{pmatrix}$ ist $e^{B}e^{C} = \begin{pmatrix}2&1\\1&1\end{pmatrix}$, aber $e^{B + C} = \begin{pmatrix}\cosh1&\sinh1\\\sinh1&\cosh1\end{pmatrix}$ --- verschieden.
+\schritt{(c)}
+$\det(A - \lambda I) = (2 - \lambda)^{2} - 1$, $\lambda = 3, 1$. Eigenvektoren $(1, 1)$, $(1, -1)$. $S = \begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $S^{-1} = \frac12\begin{pmatrix}1&1\\1&-1\end{pmatrix}$.
+\[ e^{At} = S\begin{pmatrix}e^{3t}&0\\0&e^{t}\end{pmatrix}S^{-1} = \frac12\begin{pmatrix}e^{3t} + e^{t}&e^{3t} - e^{t}\\e^{3t} - e^{t}&e^{3t} + e^{t}\end{pmatrix}. \]
+\schritt{(d)}
+Ableitung bei $0$: (a) $\begin{pmatrix}0&1\\-1&0\end{pmatrix}$ \checkmark; (b) $I + N$ \checkmark; (c) $\frac12\begin{pmatrix}3 + 1&3 - 1\\3 - 1&3 + 1\end{pmatrix} = \begin{pmatrix}2&1\\1&2\end{pmatrix}$ \checkmark. Determinanten: (a) $\cos^{2} + \sin^{2} = 1 = e^{0}$; (b) $e^{2t}$, $\operatorname{tr} = 2$; (c) $\frac14\bigl((e^{3t} + e^{t})^{2} - (e^{3t} - e^{t})^{2}\bigr) = e^{4t}$, $\operatorname{tr} = 4$. \checkmark
+\begin{mitnehmen}\kastentext
+$e^{At}$ ist die Lösung von $\dot X = AX$, $X(0) = I$ --- alle drei Rechenwege sind nur Mittel, sie hinzuschreiben. Die Formel $\det e^{At} = e^{t\operatorname{tr}A}$ (Liouville) sagt, wie Volumina im Phasenraum wachsen: $\operatorname{tr}A = 0$ heißt volumentreu (Hamiltonsche Systeme), $\operatorname{tr}A < 0$ heißt kontrahierend (Lorenz: $\operatorname{tr} = -\sigma - 1 - \beta$).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.10
+\stupserzwei{gruen}{(b) $C = \frac{F_0}{\omega_0^{2} - \omega^{2} + 2i\delta\omega}$, $A = |C| = \frac{F_0}{\sqrt{(\omega_0^{2} - \omega^{2})^{2} + 4\delta^{2}\omega^{2}}}$. Maximum bei $\omega_r^{2} = \omega_0^{2} - 2\delta^{2}$ mit $A_{\max} = \frac{F_0}{2\delta\sqrt{\omega_0^{2} - \delta^{2}}}$.}{22pt}
+\begin{loesungkarte}{gruen}{9.10}{Dritte Ordnung, erzwungene Schwingung, Resonanz}
+\derweg{Charakteristisches Polynom faktorisieren; komplexer Ansatz für die partikuläre Lösung; im Resonanzfall Faktor $t$.}
+\schritt{(a)}
+$r^{3} - 3r^{2} + 4 = 0$. $r = -1$ ist Nullstelle ($-1 - 3 + 4 = 0$); Division: $(r + 1)(r^{2} - 4r + 4) = (r + 1)(r - 2)^{2}$. $y = c_1e^{-x} + (c_2 + c_3x)e^{2x}$. Probe mit $xe^{2x}$: $y' = (1 + 2x)e^{2x}$, $y'' = (4 + 4x)e^{2x}$, $y''' = (12 + 8x)e^{2x}$; $y''' - 3y'' + 4y = (12 + 8x - 12 - 12x + 4x)e^{2x} = 0$. \checkmark
+\schritt{(b)}
+Komplex: $\ddot z + 2\delta\dot z + \omega_0^{2}z = F_0e^{i\omega t}$, Ansatz $z = Ce^{i\omega t}$: $(-\omega^{2} + 2i\delta\omega + \omega_0^{2})C = F_0$. $x_p = \operatorname{Re}z = A\cos(\omega t - \varphi)$ mit $A = |C|$ (Stupser) und $\tan\varphi = \frac{2\delta\omega}{\omega_0^{2} - \omega^{2}}$ ($\varphi$ von $0$ bis $\pi$; bei $\omega = \omega_0$ genau $\frac\pi2$). Maximum von $A$: Minimum von $g(\omega^{2}) = (\omega_0^{2} - \omega^{2})^{2} + 4\delta^{2}\omega^{2}$, $g' = -2(\omega_0^{2} - \omega^{2}) + 4\delta^{2} = 0$, $\omega_r^{2} = \omega_0^{2} - 2\delta^{2}$ (existiert für $\delta < \frac{\omega_0}{\sqrt2}$). Dort $g = 4\delta^{4} + 4\delta^{2}(\omega_0^{2} - 2\delta^{2}) = 4\delta^{2}(\omega_0^{2} - \delta^{2})$, also $A_{\max} = \frac{F_0}{2\delta\sqrt{\omega_0^{2} - \delta^{2}}}$. Für $\omega_0 = 1$, $\delta = 0{,}2$: $\omega_r = 0{,}959$, $A_{\max} = 2{,}55\,F_0$ gegenüber $A(0) = F_0$. Die homogene Lösung klingt wie $e^{-\delta t}$ ab: Nach dem Einschwingen bleibt $x_p$.
+\schritt{(c)}
+$\ddot x + \omega_0^{2}x = F_0\cos\omega_0t$. Ansatz $A\cos\omega_0t$ scheitert (homogene Lösung). Ansatz $x_p = t(a\cos\omega_0t + b\sin\omega_0t)$: $\ddot x_p = 2(-a\omega_0\sin\omega_0t + b\omega_0\cos\omega_0t) - \omega_0^{2}x_p$, also $\ddot x_p + \omega_0^{2}x_p = 2\omega_0(b\cos\omega_0t - a\sin\omega_0t) = F_0\cos\omega_0t$: $a = 0$, $b = \frac{F_0}{2\omega_0}$. $x_p = \frac{F_0}{2\omega_0}\,t\sin\omega_0t$: Die Amplitude wächst linear --- unbegrenzt. Real begrenzen Dämpfung ($A_{\max}$ aus (b)) oder Nichtlinearität (Materialversagen).
+\probe{(b) Grenzfall $\delta\to0$: $A\to\frac{F_0}{|\omega_0^{2} - \omega^{2}|}$, divergiert bei $\omega_0$ --- konsistent mit (c). \checkmark}
+\begin{mitnehmen}\kastentext
+Die Resonanzkurve $A(\omega)$ ist das Herz der Schwingungslehre: Radioempfang, Brückenschwingungen, Kernspinresonanz. Breite $\approx2\delta$, Höhe $\approx\frac{F_0}{2\delta\omega_0}$ --- die Güte $Q = \frac{\omega_0}{2\delta}$ misst beides. Der komplexe Ansatz spart die Hälfte der Rechnung: Phase und Amplitude stecken in einer Zahl.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.11
+\stupserzwei{tief}{(b) Doppelwurzel $r = 1$, rechte Seite $e^{x}$: beide Ansätze $e^{x}$, $xe^{x}$ sind homogen --- also $x^{2}e^{x}$.}{22pt}
+\begin{loesungkarte}{tief}{9.11}{Ansatz vom Typ der rechten Seite}
+\derweg{Homogene Lösung zuerst (damit man die Resonanz sieht), dann Ansatz, Koeffizientenvergleich.}
+\schritt{(a)}
+Homogen: $r^{2} + 1 = 0$, $y_h = c_1\cos x + c_2\sin x$. Rechte Seite $xe^{x}$, keine Resonanz; Ansatz $(ax + b)e^{x}$: $y_p'' = (ax + 2a + b)e^{x}$, $y_p'' + y_p = (2ax + 2a + 2b)e^{x} = xe^{x}$: $a = \frac12$, $b = -\frac12$. $y = c_1\cos x + c_2\sin x + \frac12(x - 1)e^{x}$.
+\schritt{(b)}
+$r^{2} - 2r + 1 = (r - 1)^{2}$, $y_h = (c_1 + c_2x)e^{x}$. Rechte Seite $e^{x}$: doppelt resonant, Ansatz $ax^{2}e^{x}$. $y_p' = a(x^{2} + 2x)e^{x}$, $y_p'' = a(x^{2} + 4x + 2)e^{x}$; $y_p'' - 2y_p' + y_p = a(x^{2} + 4x + 2 - 2x^{2} - 4x + x^{2})e^{x} = 2ae^{x}$: $a = \frac12$. $y = (c_1 + c_2x + \frac12x^{2})e^{x}$.
+\schritt{(c)}
+$r^{2} + 4 = 0$, $y_h = c_1\cos2x + c_2\sin2x$. $\cos2x$ ist resonant: Ansatz $x(a\cos2x + b\sin2x)$. Wie in Aufgabe 9.10c: $y_p'' + 4y_p = 4(b\cos2x - a\sin2x) = \cos2x$, $a = 0$, $b = \frac14$. $y = c_1\cos2x + c_2\sin2x + \frac x4\sin2x$.
+\schritt{(d)}
+$r^{2} - 1 = 0$, $y_h = c_1e^{x} + c_2e^{-x}$. Drei Teile: $e^{x}$ resonant, Ansatz $axe^{x}$: $y'' - y = 2ae^{x}$, $a = \frac12$. $e^{-x}$ resonant, Ansatz $bxe^{-x}$: $y'' - y = -2be^{-x}$, $b = -\frac12$. $x$: Ansatz $cx + d$: $-cx - d = x$, $c = -1$, $d = 0$. $y = c_1e^{x} + c_2e^{-x} + \frac x2e^{x} - \frac x2e^{-x} - x = c_1e^{x} + c_2e^{-x} + x\sinh x - x$.
+\probe{(c) $y_p = \frac x4\sin2x$: $y_p' = \frac14\sin2x + \frac x2\cos2x$, $y_p'' = \cos2x - x\sin2x$, $y_p'' + 4y_p = \cos2x$. \checkmark}
+\begin{mitnehmen}\kastentext
+Der Ansatz funktioniert, weil $e^{ax}$, $x^{k}$, $\sin$, $\cos$ unter Ableitung einen endlichdimensionalen Raum aufspannen; die Gleichung wird zu einem linearen Gleichungssystem darin. Resonanz heißt, dass der Differentialoperator auf diesem Raum nicht invertierbar ist --- der Faktor $x$ vergrößert den Raum gerade so weit, dass es wieder geht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.12
+\stupserzwei{akzent}{(c) $x = e^{t}$, $\frac{dy}{dx} = e^{-t}\dot y$, $\frac{d^{2}y}{dx^{2}} = e^{-2t}(\ddot y - \dot y)$. Also $x^{2}y'' = \ddot y - \dot y$, $xy' = \dot y$: $\ddot y + (a - 1)\dot y + by = 0$.}{22pt}
+\begin{loesungkarte}{akzent}{9.12}{Wenn die Koeffizienten nicht konstant sind}
+\derweg{Zeigen, warum $e^{\lambda x}$ versagt; Potenzansatz; Substitution; Reduktion der Ordnung.}
+\schritt{(a)}
+$y = e^{\lambda x}$ in $x^{2}y'' - 2y = 0$: $(\lambda^{2}x^{2} - 2)e^{\lambda x} = 0$ für alle $x$ --- unmöglich mit konstantem $\lambda$. Der Grund: $e^{\lambda x}$ ist Eigenfunktion von $\frac d{dx}$, aber $x^{2}\frac{d^{2}}{dx^{2}}$ hat andere Eigenfunktionen: $x^{r}$, denn $x^{2}(x^{r})'' = r(r - 1)x^{r}$. Ansatz $y = x^{r}$: $r(r - 1) - 2 = 0$, $r^{2} - r - 2 = (r - 2)(r + 1)$, $y = c_1x^{2} + c_2x^{-1}$.
+\schritt{(b)}
+$x^{2}y'' - xy' + y = 0$, $y = x^{r}$: $r(r - 1) - r + 1 = r^{2} - 2r + 1 = (r - 1)^{2}$. Doppelwurzel $r = 1$: $y_1 = x$. Zweite Lösung $y_2 = x\ln x$ (Probe: $y_2' = \ln x + 1$, $y_2'' = \frac1x$; $x^{2}\cdot\frac1x - x(\ln x + 1) + x\ln x = x - x\ln x - x + x\ln x = 0$ \checkmark). An die Stelle von $x$ tritt $\ln x$ --- weil $\ln x$ das ist, was $x$ nach der Substitution (c) wird.
+\schritt{(c)}
+Mit $x = e^{t}$ (Stupser): $x^{2}y'' + axy' + by = \ddot y - \dot y + a\dot y + by = \ddot y + (a - 1)\dot y + by = 0$ --- konstante Koeffizienten. Charakteristisches Polynom $r^{2} + (a - 1)r + b$, dasselbe wie der Potenzansatz liefert ($r(r - 1) + ar + b$). Lösungen $e^{rt} = x^{r}$, bei Doppelwurzel $te^{rt} = x^{r}\ln x$, bei komplexen $r = \alpha\pm i\beta$: $x^{\alpha}\cos(\beta\ln x)$, $x^{\alpha}\sin(\beta\ln x)$.
+\schritt{(d)}
+$y_1 = x$: $0 - x(x + 2) + (x + 2)x = 0$. \checkmark\ $y = xu$: $y' = u + xu'$, $y'' = 2u' + xu''$. Einsetzen: $x^{2}(2u' + xu'') - x(x + 2)(u + xu') + (x + 2)xu = x^{3}u'' + 2x^{2}u' - x^{2}(x + 2)u' = x^{3}u'' - x^{3}u' = 0$. Also $u'' = u'$, $u' = e^{x}$, $u = e^{x}$: $y_2 = xe^{x}$. Probe: $y_2' = (1 + x)e^{x}$, $y_2'' = (2 + x)e^{x}$; $x^{2}(2 + x) - x(x + 2)(1 + x) + (x + 2)x = x(x + 2)\bigl(x - (1 + x) + 1\bigr) = 0$. \checkmark
+\begin{fehler}\kastentext
+Das charakteristische Polynom gehört zu konstanten Koeffizienten --- und nur dorthin. Bei $x^{k}y^{(k)}$-Termen (Euler) hilft $x^{r}$, sonst Potenzreihe (Aufgabe 9.14), Reduktion der Ordnung (wenn eine Lösung bekannt ist) oder Variation der Konstanten. Wer $e^{\lambda x}$ in $x^{2}y'' - 2y = 0$ einsetzt, bekommt ein $x$-abhängiges \enquote{$\lambda$} und sollte das als Warnung lesen.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Der Potenzansatz funktioniert bei Euler, weil $x\frac d{dx}$ der Operator ist, der $x^{r}$ als Eigenfunktion hat --- so wie $\frac d{dx}$ für $e^{\lambda x}$. Die Substitution $x = e^{t}$ übersetzt den einen in den anderen. Eulersche Gleichungen tauchen überall auf, wo Skaleninvarianz herrscht: Laplace in Polarkoordinaten, Potentialtheorie, Black--Scholes.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.13
+\stupserzwei{gruen}{(c) $u = J_0(kr)\cos\omega t$ mit $kR = j_{0,1}$, $\omega = ck$: $f = \frac{\omega}{2\pi} = \frac{2{,}4048\,c}{2\pi R} = 0{,}3827\,\frac cR$. Saite der Länge $2R$: $f = \frac c{4R} = 0{,}25\,\frac cR$.}{22pt}
+\begin{loesungkarte}{gruen}{9.13}{Airy, Legendre, Trommel}
+\derweg{(a) Reihe einsetzen, Indizes verschieben, Rekursion. (b) Rekursion mit abbrechendem Zähler. (c) Separation in Polarkoordinaten, Bessel, Randbedingung.}
+\schritt{(a)}
+$y = \sum a_nx^{n}$, $y'' = \sum_{n\ge0}(n + 2)(n + 1)a_{n+2}x^{n}$, $xy = \sum_{n\ge1}a_{n-1}x^{n}$. Vergleich: $n = 0$: $2a_2 = 0$. $n\ge1$: $(n + 2)(n + 1)a_{n+2} = a_{n-1}$, also $a_{n+3} = \frac{a_n}{(n + 2)(n + 3)}$. Drei Ketten; die mit $a_2$ ist null. Aus $a_0$: $a_3 = \frac{a_0}6$, $a_6 = \frac{a_3}{30} = \frac{a_0}{180}$, $a_9 = \frac{a_6}{72} = \frac{a_0}{12\,960}$. Aus $a_1$: $a_4 = \frac{a_1}{12}$, $a_7 = \frac{a_4}{42} = \frac{a_1}{504}$, $a_{10} = \frac{a_7}{90} = \frac{a_1}{45\,360}$.
+\begin{align*} y = {}& a_0\Bigl(1 + \frac{x^{3}}6 + \frac{x^{6}}{180} + \frac{x^{9}}{12\,960} + \dots\Bigr)\\ &+ a_1\Bigl(x + \frac{x^{4}}{12} + \frac{x^{7}}{504} + \frac{x^{10}}{45\,360} + \dots\Bigr). \end{align*}
+Konvergenzradius $\infty$ (Quotient $\to0$). Die Airy-Funktionen $\operatorname{Ai}$, $\operatorname{Bi}$ sind spezielle Kombinationen; für $x < 0$ oszillieren sie, für $x > 0$ wachsen bzw.\ fallen sie exponentiell --- die Gleichung $y'' = xy$ wechselt bei $x = 0$ vom Oszillator- zum Exponentialtyp.
+\schritt{(b)}
+$y = \sum a_kx^{k}$ in $(1 - x^{2})y'' - 2xy' + n(n + 1)y = 0$: Koeffizient von $x^{k}$: $(k + 2)(k + 1)a_{k+2} - k(k - 1)a_k - 2ka_k + n(n + 1)a_k = 0$, also
+\[ a_{k+2} = \frac{k(k + 1) - n(n + 1)}{(k + 1)(k + 2)}a_k. \]
+Für $k = n$ ist der Zähler null: $a_{n+2} = a_{n+4} = \dots = 0$. Die Kette mit der Parität von $n$ bricht ab --- ein Polynom vom Grad $n$. (Die andere Kette bricht nicht ab und divergiert bei $x = \pm1$; man setzt sie null.) $n = 0$: $P_0 = 1$. $n = 1$: $P_1 = x$. $n = 2$: $a_2 = \frac{-6}2a_0 = -3a_0$, $y = a_0(1 - 3x^{2})$, $P_2(1) = 1$ gibt $a_0 = -\frac12$: $P_2 = \frac12(3x^{2} - 1)$. $n = 3$: $a_3 = \frac{2 - 12}6a_1 = -\frac53a_1$, $y = a_1(x - \frac53x^{3})$, Normierung: $P_3 = \frac12(5x^{3} - 3x)$.
+\schritt{(c)}
+$u_{tt} = c^{2}\Delta u$, $u = 0$ bei $r = R$. Ansatz $u = f(r)\cos(m\varphi)\cos\omega t$, $\Delta$ in Polarkoordinaten: $-\omega^{2}f = c^{2}\bigl(f'' + \frac1rf' - \frac{m^{2}}{r^{2}}f\bigr)$. Mit $k = \frac\omega c$ und $s = kr$: $s^{2}f'' + sf' + (s^{2} - m^{2})f = 0$, Bessel. Regulär bei $r = 0$: $f = J_m(kr)$ ($Y_m$ divergiert in der Mitte). Rand: $J_m(kR) = 0$, $kR = j_{m,n}$, $\omega_{m,n} = \frac{cj_{m,n}}R$. Grundton $m = 0$, $n = 1$: $f_{0,1} = \frac{c\,j_{0,1}}{2\pi R} = 0{,}3827\,\frac cR$. Saite der Länge $2R$: $f_1 = \frac c{2\cdot2R} = 0{,}25\,\frac cR$. Die Trommel klingt $1{,}53$-mal höher --- und ihre Obertöne ($j_{0,2}/j_{0,1} = 2{,}295$, $j_{1,1}/j_{0,1} = 1{,}593$) sind nicht harmonisch: Deshalb hat eine Trommel keine klare Tonhöhe.
+\probe{(a) $y = 1 + \frac{x^{3}}6 + \frac{x^{6}}{180}$: $y'' = x + \frac{x^{4}}6$, $xy = x + \frac{x^{4}}6 + \dots$ \checkmark\ (b) $P_2'' = 3$, $(1 - x^{2})\cdot3 - 2x\cdot3x + 6\cdot\frac{3x^{2} - 1}2 = 3 - 3x^{2} - 6x^{2} + 9x^{2} - 3 = 0$. \checkmark}
+\begin{mitnehmen}\kastentext
+Spezielle Funktionen sind Lösungen spezieller Gleichungen, die in der Physik immer wieder auftreten --- Airy an Wendepunkten (Regenbogen, WKB), Legendre bei Kugelsymmetrie (Wasserstoffatom, Gravitationsfeld), Bessel bei Zylindersymmetrie (Trommel, Wellenleiter, Beugung). Der Potenzreihenansatz ist das Werkzeug, mit dem man sie alle herstellt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.14
+\stupserzwei{tief}{(c) $\frac{2x}{1 + x^{2}}$ hat Pole bei $x = \pm i$, Abstand $1$ vom Nullpunkt. Konvergenzradius mindestens $1$ --- und genau $1$, weil $\arctan$ dort tatsächlich singulär ist.}{22pt}
+\begin{loesungkarte}{tief}{9.14}{Potenzreihenansatz}
+\derweg{Einsetzen, Index verschieben, vergleichen, Rekursion; dann identifizieren oder abbrechen lassen.}
+\schritt{(a)}
+$\sum(k + 2)(k + 1)a_{k+2}x^{k} + \sum a_kx^{k} = 0$, also $a_{k+2} = -\frac{a_k}{(k + 1)(k + 2)}$. Gerade: $a_2 = -\frac{a_0}2$, $a_4 = \frac{a_0}{24}$, $a_6 = -\frac{a_0}{720}$: $a_0(1 - \frac{x^{2}}{2!} + \frac{x^{4}}{4!} - \dots) = a_0\cos x$. Ungerade: $a_3 = -\frac{a_1}6$, $a_5 = \frac{a_1}{120}$: $a_1\sin x$. Die Rekursion \emph{erzeugt} die Taylorreihen --- hätte man $\cos$ und $\sin$ nicht gekannt, wäre dies ihre Definition.
+\schritt{(b)}
+$y'' - 2xy' + 2ny = 0$: Koeffizient von $x^{k}$: $(k + 2)(k + 1)a_{k+2} - 2ka_k + 2na_k = 0$, $a_{k+2} = \frac{2(k - n)}{(k + 1)(k + 2)}a_k$. Für $k = n$ wird der Zähler null, $a_{n+2} = 0$ und alle weiteren derselben Parität: Polynom vom Grad $n$ (die andere Parität setzt man null). $n = 0$: $1$. $n = 1$: $x$. $n = 2$: $a_2 = \frac{-4}2a_0 = -2a_0$: $1 - 2x^{2}$. $n = 3$: $a_3 = \frac{2(1 - 3)}6a_1 = -\frac23a_1$: $x - \frac23x^{3}$. Mit der Normierung Leitkoeffizient $2^{n}$: $H_2 = 4x^{2} - 2$, $H_3 = 8x^{3} - 12x$ --- die Hermite-Polynome des harmonischen Oszillators.
+\schritt{(c)}
+Normalform $y'' + \frac{2x}{1 + x^{2}}y' = 0$. Der Koeffizient ist analytisch außer bei $x = \pm i$; der Satz über reguläre Punkte garantiert Konvergenz der Reihenlösungen um $0$ im Kreis bis zur nächsten Singularität: Radius $\ge1$. Elementar: $\bigl((1 + x^{2})y'\bigr)' = 0$, $y' = \frac C{1 + x^{2}}$, $y = C\arctan x + D$. $\arctan x = x - \frac{x^{3}}3 + \frac{x^{5}}5 - \dots$ hat Radius genau $1$. \checkmark\ Auf der reellen Achse ist nichts Auffälliges --- die Grenze kommt aus dem Komplexen.
+\probe{(b) $y = 1 - 2x^{2}$: $y'' = -4$, $-2xy' = 8x^{2}$, $4y = 4 - 8x^{2}$; Summe $0$. \checkmark}
+\begin{mitnehmen}\kastentext
+Der Potenzreihenansatz ist das universelle Lösungsverfahren für lineare Gleichungen mit analytischen Koeffizienten: Er funktioniert immer, liefert aber Reihen statt geschlossener Formeln --- außer wenn sie abbrechen (Polynome) oder man sie erkennt. Der Konvergenzradius steht schon vor der Rechnung fest: Abstand zur nächsten komplexen Singularität der Koeffizienten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.15
+\stupserzwei{gruen}{(b) Dreieck mit Spitze $h$ bei $\frac L2$: $b_n = \frac{8h}{n^{2}\pi^{2}}\sin\frac{n\pi}2$. Für gerade $n$ null --- die Saite wird im Knoten dieser Moden angezupft.}{22pt}
+\begin{loesungkarte}{gruen}{9.15}{Greensche Funktion, Saite, Knicklast}
+\derweg{(a) Zwei homogene Lösungen mit je einer Randbedingung, zusammensetzen, Sprung normieren. (b) Eigenwertproblem, Fourierkoeffizienten. (c) Als Eigenwertproblem lesen.}
+\schritt{(a)}
+Homogen $-u'' = 0$: $u = x$ erfüllt $u(0) = 0$, $v = 1 - x$ erfüllt $v(1) = 0$. $G(x, \xi) = c\,u(x_<)v(x_>)$ mit $x_< = \min(x, \xi)$, $x_> = \max$; die Konstante aus dem Sprung $G_x(\xi^{+}) - G_x(\xi^{-}) = -1$: $c\bigl(-\xi - (1 - \xi)\bigr) = -c = -1$, $c = 1$.
+\[ G(x, \xi) = \begin{cases}x(1 - \xi) & x\le\xi\\ \xi(1 - x) & x\ge\xi\end{cases} \]
+Für $f\equiv1$: $y(x) = \int_0^{x}\xi(1 - x)\,d\xi + \int_x^{1}x(1 - \xi)\,d\xi = \frac{x^{2}(1 - x)}2 + \frac{x(1 - x)^{2}}2 = \frac{x(1 - x)}2$. Probe: $y'' = -1$, $y(0) = y(1) = 0$. \checkmark
+\schritt{(b)}
+$y'' + \lambda y = 0$, $y(0) = y(L) = 0$. $\lambda\le0$ gibt nur $y\equiv0$ (Exponential- bzw.\ lineare Funktionen mit zwei Nullstellen). $\lambda > 0$: $y = A\cos\sqrt\lambda x + B\sin\sqrt\lambda x$, $A = 0$, $\sin\sqrt\lambda L = 0$: $\lambda_n = \bigl(\frac{n\pi}L\bigr)^{2}$, $y_n = \sin\frac{n\pi x}L$. Dreieck $f(x) = \frac{2h}Lx$ für $x\le\frac L2$, symmetrisch: $b_n = \frac2L\int_0^{L}f\sin\frac{n\pi x}L\,dx = \frac{8h}{n^{2}\pi^{2}}\sin\frac{n\pi}2$ (zweimal partiell integrieren oder Symmetrie). $f = \frac{8h}{\pi^{2}}\bigl(\sin\frac{\pi x}L - \frac19\sin\frac{3\pi x}L + \frac1{25}\sin\frac{5\pi x}L - \dots\bigr)$. Die geraden Obertöne fehlen: Ihre Eigenfunktionen haben bei $\frac L2$ einen Knoten, und eine dort angezupfte Saite regt sie nicht an. (Gitarristen zupfen deshalb nicht in der Mitte --- der Klang wäre hohl.)
+\schritt{(c)}
+$y'' + \frac F{EI}y = 0$, $y(0) = y(\ell) = 0$: das Problem aus (b) mit $\lambda = \frac F{EI}$. Nichttriviale Lösung genau für $\frac F{EI} = \bigl(\frac{n\pi}\ell\bigr)^{2}$. Kleinste: $F_{\text{krit}} = \frac{\pi^{2}EI}{\ell^{2}}$ (Euler 1744). Darunter nur die gerade Lage; darüber knickt der Stab in die Form $\sin\frac{\pi x}\ell$. Doppelte Länge: ein Viertel der Last --- deshalb sind lange Stützen gefährlich, und deshalb hat ein Rohr (großes $I$ bei wenig Material) Vorteile.
+\probe{(b) $b_1 = \frac{8h}{\pi^{2}} = 0{,}81h$; der Reihenwert bei $\frac L2$: $\frac{8h}{\pi^{2}}(1 + \frac19 + \frac1{25} + \dots) = \frac{8h}{\pi^{2}}\cdot\frac{\pi^{2}}8 = h$. \checkmark}
+\begin{mitnehmen}\kastentext
+Randwertprobleme sind lineare Algebra in unendlicher Dimension: Die Greensche Funktion ist die inverse Matrix, die Eigenfunktionen sind die Eigenvektoren, die Fourierreihe ist die Entwicklung nach einer Orthogonalbasis. Und das Knickproblem zeigt: Ein Eigenwert ist nicht nur eine Zahl --- er ist die Last, bei der die Welt sich ändert.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.16
+\stupserzwei{tief}{(b) $y(0) = 0$ gibt $\sin$; $y'(L) = 0$ gibt $\cos\sqrt\lambda L = 0$, also $\sqrt\lambda L = \frac\pi2, \frac{3\pi}2, \dots$ Eine Viertelwelle passt --- wie bei der gedackten Orgelpfeife.}{22pt}
+\begin{loesungkarte}{tief}{9.16}{Andere Randbedingungen, andere Eigenfunktionen}
+\derweg{Drei Fälle $\lambda < 0$, $= 0$, $> 0$; Randbedingungen einsetzen; Eigenwertgleichung lösen.}
+\schritt{(a) Neumann}
+$\lambda < 0$, $\lambda = -\mu^{2}$: $y = A\cosh\mu x + B\sinh\mu x$, $y'(0) = B\mu = 0$, $y'(L) = A\mu\sinh\mu L = 0$, also $A = 0$: trivial. $\lambda = 0$: $y = A + Bx$, $y' = B = 0$: $y\equiv1$ ist Eigenfunktion zu $\lambda_0 = 0$. $\lambda > 0$: $y = A\cos\sqrt\lambda x + B\sin\sqrt\lambda x$, $y'(0) = B\sqrt\lambda = 0$, $y'(L) = -A\sqrt\lambda\sin\sqrt\lambda L = 0$: $\lambda_n = \bigl(\frac{n\pi}L\bigr)^{2}$, $y_n = \cos\frac{n\pi x}L$, $n = 0, 1, 2, \dots$ Die Kosinusreihe. (Bei der Wärmeleitung mit isolierten Enden gehört zu $\lambda_0 = 0$ die Endtemperatur --- der Mittelwert, der nicht abklingt.)
+\schritt{(b) Fest--frei}
+$\lambda\le0$: trivial (nachrechnen wie oben). $\lambda > 0$: $A = 0$, $y'(L) = B\sqrt\lambda\cos\sqrt\lambda L = 0$: $\sqrt\lambda L = (2n - 1)\frac\pi2$, $\lambda_n = \Bigl(\frac{(2n - 1)\pi}{2L}\Bigr)^{2}$, $y_n = \sin\frac{(2n - 1)\pi x}{2L}$, $n\ge1$. Nur ungerade Vielfache der Grundfrequenz --- wie bei der Klarinette (ein Ende geschlossen).
+\schritt{(c) Periodisch}
+$\lambda < 0$: $\cosh$ und $\sinh$ sind nicht periodisch, trivial. $\lambda = 0$: $y = A + Bx$ periodisch nur für $B = 0$: $y\equiv1$. $\lambda > 0$: Beide Bedingungen erfüllt, wenn $\sqrt\lambda L = 2n\pi$: $\lambda_n = \bigl(\frac{2n\pi}L\bigr)^{2}$, und \emph{beide} Funktionen $\cos\frac{2n\pi x}L$, $\sin\frac{2n\pi x}L$ sind Eigenfunktionen --- doppelte Eigenwerte. Die volle Fourierreihe auf einem Kreis der Länge $L$.
+\schritt{(d)}
+$\int_0^{L}\sin\frac{(2m - 1)\pi x}{2L}\sin\frac{(2n - 1)\pi x}{2L}\,dx = \frac12\int_0^{L}\Bigl[\cos\frac{(m - n)\pi x}L - \cos\frac{(m + n - 1)\pi x}L\Bigr]dx = 0$ für $m\neq n$ (beide Integrale von $\cos\frac{k\pi x}L$ mit ganzem $k\neq0$ verschwinden über $[0, L]$). Allgemein: $\int(y_m''y_n - y_my_n'') = (\lambda_n - \lambda_m)\int y_my_n$, und die linke Seite ist $[y_m'y_n - y_my_n']_0^{L} = 0$ bei allen Randbedingungen aus (a)--(c) --- der Operator ist symmetrisch, Eigenfunktionen zu verschiedenen Eigenwerten sind orthogonal. Zu (c) gehört die Fourierreihe in $\cos$ und $\sin$ (oder $e^{2\pi inx/L}$).
+\begin{mitnehmen}\kastentext
+Das Schema ist immer dasselbe: drei Fälle, Randbedingungen, Eigenwertgleichung. Die Randbedingungen bestimmen, welche Reihe herauskommt --- Sinus, Kosinus, ungerade Sinus, volle Fourierreihe. Und die Orthogonalität ist kein Zufall, sondern Symmetrie: $-\frac{d^{2}}{dx^{2}}$ ist mit diesen Randbedingungen ein selbstadjungierter Operator, der unendlichdimensionale Bruder der symmetrischen Matrix.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.17
+\stupserzwei{akzent}{(c) Partiell integrieren: $\int_0^{\pi}(y'' + y)\sin x\,dx = [y'\sin x - y\cos x]_0^{\pi} + \int_0^{\pi}y(\sin x)'' + y\sin x = -y(\pi)\cos\pi + y(0)\cos0 = 0$, wenn $y(0) = y(\pi) = 0$.}{22pt}
+\begin{loesungkarte}{akzent}{9.17}{Randwertprobleme: eine, keine, unendlich viele}
+\derweg{Allgemeine Lösung, Randbedingungen als Gleichungssystem für $A, B$; dann die Lösbarkeitsbedingung.}
+\schritt{(a)}
+$y = A\cos x + B\sin x$. (i) $y(0) = A = 0$; $y(1) = B\sin1 = 1$, $B = \frac1{\sin1}$: genau eine Lösung $y = \frac{\sin x}{\sin1}$. (ii) $A = 0$; $y(\pi) = B\sin\pi = 0$ für jedes $B$: unendlich viele Lösungen $y = B\sin x$. (iii) $A = 0$; $B\sin\pi = 0\neq1$: keine Lösung.
+\schritt{(b)}
+Das System $\begin{pmatrix}1&0\\\cos\ell&\sin\ell\end{pmatrix}\begin{pmatrix}A\\B\end{pmatrix} = \begin{pmatrix}y_0\\y_\ell\end{pmatrix}$ hat Determinante $\sin\ell$. Für $\ell = 1$: $\sin1\neq0$, eindeutig lösbar. Für $\ell = \pi$: $\sin\pi = 0$, singulär --- lösbar genau dann, wenn die rechte Seite im Bild liegt ($y_\pi = -y_0$, hier $0 = 0$: ja, unendlich viele; $1\neq0$: nein). Die Randwerte $\ell = n\pi$ sind genau die, bei denen $\lambda = 1$ ein Eigenwert des Problems $y'' + \lambda y = 0$, $y(0) = y(\ell) = 0$ ist.
+\schritt{(c)}
+Sei $y$ Lösung von $y'' + y = f$, $y(0) = y(\pi) = 0$. Multiplizieren mit $\sin x$, integrieren: $\int_0^{\pi}f\sin x\,dx = \int_0^{\pi}(y'' + y)\sin x\,dx$. Zweimal partiell (Stupser): Randterme verschwinden wegen $y(0) = y(\pi) = 0$ und $\sin0 = \sin\pi = 0$, und $\int y(\sin'' + \sin) = 0$. Also ist $\int_0^{\pi}f\sin x\,dx = 0$ notwendig. Hinreichend: Ist die Bedingung erfüllt, liefert Variation der Konstanten eine Lösung (die Gleichung mit $f$ hat immer eine partikuläre Lösung $y_p$; $y_p(0) = 0$ erreicht man durch Addition von $A\cos x$, und $y_p(\pi) = 0$ folgt dann gerade aus der Bedingung). $f = 1$: $\int_0^{\pi}\sin x = 2\neq0$ --- keine Lösung (Probe: $y_p = 1$, $y = 1 + A\cos x + B\sin x$, $y(0) = 1 + A = 0$, $y(\pi) = 1 - A = 2\neq0$). $f = \sin2x$: $\int\sin2x\sin x = 0$ --- lösbar: $y_p = -\frac13\sin2x$, $y = -\frac13\sin2x + B\sin x$, unendlich viele.
+\schritt{(d)}
+$Ax = b$ mit singulärem $A$: lösbar genau dann, wenn $b\perp\ker A^{T}$ (Fredholmsche Alternative, Aufgabe 2.13). Hier ist der Operator $L = \frac{d^{2}}{dx^{2}} + 1$ mit Dirichlet-Randbedingungen symmetrisch, $\ker L = \operatorname{span}\{\sin x\}$, und die Bedingung lautet $f\perp\sin x$. Die Lösung ist dann bis auf Vielfache von $\sin x$ eindeutig --- wie $x + \ker A$.
+\begin{fehler}\kastentext
+\enquote{Zwei Bedingungen, zwei Konstanten, also eindeutig lösbar} gilt für Anfangswertprobleme (Wronski-Determinante $\neq0$), nicht für Randwertprobleme: Dort kann die Determinante null sein, und dann gibt es keine oder unendlich viele Lösungen --- genau wie bei $Ax = b$. Die kritischen Fälle sind die Eigenwerte des zugehörigen homogenen Problems, und das sind in der Physik die Resonanzen.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Die Fredholmsche Alternative verbindet drei Themen dieses Gebiets: Randwertprobleme (hier), Resonanz (Aufgabe 9.10c: die Anregung $\cos\omega_0t$ liegt nicht senkrecht zum Kern) und Eigenwertprobleme (Aufgabe 9.16). Die Frage \enquote{ist $0$ ein Eigenwert?} entscheidet jedes Mal zwischen eindeutig und entartet.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.18
+\stupserzwei{gruen}{(c) Jacobi-Matrix $\begin{pmatrix}3 - 2x - 2y&-2x\\-y&2 - x - 2y\end{pmatrix}$. Bei $(1, 1)$: $\begin{pmatrix}-1&-2\\-1&-1\end{pmatrix}$, $\det = -1 < 0$: Sattel. Koexistenz ist instabil.}{22pt}
+\begin{loesungkarte}{gruen}{9.18}{Pendel, Lotka--Volterra, Wettbewerb}
+\derweg{Gleichgewichte, Jacobi-Matrix, Spur und Determinante; beim Zentrum eine Erhaltungsgröße.}
+\schritt{(a)}
+System $\dot x_1 = x_2$, $\dot x_2 = -\omega_0^{2}\sin x_1 - \gamma x_2$. Gleichgewichte $(k\pi, 0)$. Jacobi-Matrix $\begin{pmatrix}0&1\\-\omega_0^{2}\cos x_1&-\gamma\end{pmatrix}$. Unten ($k$ gerade, $\cos = 1$): $\tau = -\gamma$, $\Delta = \omega_0^{2} > 0$. $\gamma = 0$: Zentrum der Linearisierung --- und wirklich ein Zentrum, weil die Energie $E = \frac12x_2^{2} + \omega_0^{2}(1 - \cos x_1)$ erhalten ist und bei $(0, 0)$ ein striktes Minimum hat: geschlossene Niveaulinien. $0 < \gamma < 2\omega_0$: stabiler Strudel (gedämpfte Schwingung); $\gamma\ge2\omega_0$: stabiler Knoten (Kriechfall). Oben ($k$ ungerade, $\cos = -1$): $\Delta = -\omega_0^{2} < 0$, Sattel --- mit und ohne Reibung. Die Reibung ändert den stabilen Punkt qualitativ (Zentrum $\to$ Strudel), den instabilen nicht: Ein Sattel ist hyperbolisch und robust.
+\schritt{(b)}
+$V = dB - c\ln B + bR - a\ln R$. $\dot V = (d - \frac cB)\dot B + (b - \frac aR)\dot R = (d - \frac cB)B(a - bR) + (b - \frac aR)R(-c + dB) = (dB - c)(a - bR) + (bR - a)(dB - c) = 0$. \checkmark\ $V$ ist auf dem positiven Quadranten strikt konvex ($V_{BB} = \frac c{B^{2}} > 0$, $V_{RR} = \frac a{R^{2}} > 0$, keine gemischten Terme), hat sein Minimum genau am Gleichgewicht $(\frac cd, \frac ab)$ und geht gegen $\infty$ an den Rändern. Die Niveaumengen $V = $ const sind also geschlossene Kurven um das Gleichgewicht, und jede Bahn bleibt auf einer: alle Bahnen geschlossen, periodisch. $\blacksquare$ (Ein Zentrum, das die Linearisierung nur vermuten konnte, Aufgabe 9.8c.)
+\schritt{(c)}
+$x(3 - x - 2y) = 0$, $y(2 - x - y) = 0$: Gleichgewichte $(0, 0)$, $(3, 0)$, $(0, 2)$, $(1, 1)$. Jacobi-Matrix (Stupser). $(0, 0)$: $\operatorname{diag}(3, 2)$, instabiler Knoten. $(3, 0)$: $\begin{pmatrix}-3&-6\\0&-1\end{pmatrix}$, Eigenwerte $-3, -1$: stabiler Knoten. $(0, 2)$: $\begin{pmatrix}-1&0\\-2&-2\end{pmatrix}$, Eigenwerte $-1, -2$: stabiler Knoten. $(1, 1)$: $\det = 1 - 2 = -1$: Sattel. Phasenporträt: Zwei stabile Zustände --- \enquote{$x$ siegt} $(3, 0)$ und \enquote{$y$ siegt} $(0, 2)$ ---, getrennt durch die stabile Mannigfaltigkeit des Sattels $(1, 1)$ (eine Kurve vom Ursprung durch $(1, 1)$ ins Unendliche). Welcher Zustand erreicht wird, hängt vom Start ab: Bistabilität. Ökologisch: Konkurrenzausschluss (Gause) --- die zwischenartliche Konkurrenz (Koeffizient $2$ vor $y$ in der ersten Gleichung) ist stärker als die innerartliche; die Arten können nicht koexistieren, und ein einmaliger Eingriff, der das System über die Trennlinie schiebt, kippt es dauerhaft.
+\probe{(c) Eigenvektoren bei $(1, 1)$: $\lambda = -1\pm\sqrt2$; stabile Richtung ($\lambda = -1 - \sqrt2$): $(\sqrt2, 1)$ --- die Separatrix verläuft dort mit Steigung $\frac1{\sqrt2}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Drei Werkzeuge für Phasenporträts: Linearisierung (entscheidet bei Sattel, Knoten, Strudel), Erhaltungsgröße oder Lyapunovfunktion (entscheidet beim Zentrum), Separatrizen (zeigen die Einzugsgebiete). Das Wettbewerbsmodell ist das einfachste Beispiel für Bistabilität und Kipppunkte --- derselbe Mechanismus wie bei Ökosystemen, Klima und Märkten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.19
+\stupserzwei{tief}{(a) $\tau, \Delta$: $(-2, 5)$ Strudel stabil; $(2, -3)$ Sattel; $(0, 1)$ Zentrum; $(-5, 6)$ Knoten stabil; $(2, 2)$ Strudel instabil.}{22pt}
+\begin{loesungkarte}{tief}{9.19}{Gleichgewichte klassifizieren}
+\derweg{Spur, Determinante, Diskriminante $\tau^{2} - 4\Delta$; nichtlinear: Jacobi-Matrix; beim Zentrum Erhaltungsgröße.}
+\schritt{(a)}
+\begin{center}\small
+\begin{tabular}{l|ccc|l}
+$A$ & $\tau$ & $\Delta$ & $\tau^{2} - 4\Delta$ & Typ\\ \hline
+$\begin{pmatrix}-1&2\\-2&-1\end{pmatrix}$ & $-2$ & $5$ & $-16$ & stabiler Strudel ($\lambda = -1\pm2i$)\\
+$\begin{pmatrix}1&1\\4&1\end{pmatrix}$ & $2$ & $-3$ & --- & Sattel ($\lambda = 3, -1$)\\
+$\begin{pmatrix}0&1\\-1&0\end{pmatrix}$ & $0$ & $1$ & $-4$ & Zentrum ($\lambda = \pm i$)\\
+$\begin{pmatrix}-3&1\\0&-2\end{pmatrix}$ & $-5$ & $6$ & $1$ & stabiler Knoten ($\lambda = -3, -2$)\\
+$\begin{pmatrix}1&-1\\1&1\end{pmatrix}$ & $2$ & $2$ & $-4$ & instabiler Strudel ($\lambda = 1\pm i$)
+\end{tabular}
+\end{center}
+\schritt{(b)}
+Gleichgewichte: $y = 0$, $x(x^{2} - 1) = 0$: $(0, 0)$, $(\pm1, 0)$. Jacobi-Matrix $\begin{pmatrix}0&1\\-1 + 3x^{2}&0\end{pmatrix}$. Bei $(\pm1, 0)$: $\begin{pmatrix}0&1\\2&0\end{pmatrix}$, $\Delta = -2$: Sattel --- gesichert (hyperbolisch). Bei $(0, 0)$: $\begin{pmatrix}0&1\\-1&0\end{pmatrix}$, Zentrum der Linearisierung --- nicht gesichert; die kubischen Terme könnten einen Strudel daraus machen (Aufgabe 9.20).
+\schritt{(c)}
+$\dot H = H_x\dot x + H_y\dot y = (x - x^{3})y + y(-x + x^{3}) = 0$. \checkmark\ Bei $(0, 0)$ hat $H$ ein striktes lokales Minimum ($H\approx\frac12(x^{2} + y^{2})$): Die Niveaulinien in der Nähe sind geschlossene Kurven, der Ursprung ist ein echtes Zentrum. $H(\pm1, 0) = \frac12 - \frac14 = \frac14$: Die Niveaulinie $H = \frac14$ geht durch beide Sättel --- das sind die Separatrizen, zwei Bögen, die die Sättel verbinden (heterokline Orbits) und das Gebiet geschlossener Bahnen um den Ursprung begrenzen; außerhalb laufen die Bahnen ins Unendliche. Das Potential $U = \frac{x^{2}}2 - \frac{x^{4}}4$ ist ein Hügel mit Mulde: Teilchen mit $E < \frac14$ schwingen in der Mulde, mit $E > \frac14$ entkommen sie.
+\probe{(c) Auf $H = \frac14$ bei $x = 0$: $y = \pm\frac1{\sqrt2}$ --- die Separatrizen schneiden die $y$-Achse bei $\pm0{,}707$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die $(\tau, \Delta)$-Ebene ist die Landkarte der linearen Systeme; die Parabel $\tau^{2} = 4\Delta$ trennt Knoten von Strudeln, die Achse $\tau = 0$ ist das Zentrum, $\Delta < 0$ der Sattel. Nichtlinear gilt dieselbe Karte --- außer auf den Grenzlinien $\tau = 0$ und $\Delta = 0$: Dort muss man nachrechnen, und das Mittel der Wahl ist eine Erhaltungsgröße.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.20
+\stupserzwei{akzent}{(d) $\dot x = x^{2}$: Linearisierung $\dot x = 0$ --- sagt nichts. Tatsächlich: von links angezogen, nach rechts abgestoßen (halbstabil). $\dot x = -x^{3}$: stabil, aber Störungen klingen wie $\frac1{\sqrt t}$ ab, nicht exponentiell.}{22pt}
+\begin{loesungkarte}{akzent}{9.20}{Wenn die Linearisierung schweigt}
+\derweg{Linearisierung ausrechnen, dann Polarkoordinaten --- die nichtlinearen Terme entscheiden.}
+\schritt{(a)}
+Jacobi-Matrix im Ursprung: Die kubischen Terme haben dort Ableitung null, also $\begin{pmatrix}0&-1\\1&0\end{pmatrix}$, Eigenwerte $\pm i$: Zentrum der Linearisierung. Hartman--Grobman ist nicht anwendbar (nicht hyperbolisch).
+\schritt{(b)}
+$r\dot r = x\dot x + y\dot y = x(-y + xr^{2}) + y(x + yr^{2}) = r^{4}$, also $\dot r = r^{3}$. $r^{2}\dot\varphi = x\dot y - y\dot x = x(x + yr^{2}) - y(-y + xr^{2}) = r^{2}$, also $\dot\varphi = 1$. Die Bahnen drehen mit konstanter Winkelgeschwindigkeit und der Radius wächst: instabiler Strudel --- aber sehr langsam nahe $0$ (kubisch, nicht linear). $\dot r = r^{3}$: $-\frac1{2r^{2}} = t + C$, $r(t) = \frac{r_0}{\sqrt{1 - 2r_0^{2}t}}$. Blow-up bei $t^{*} = \frac1{2r_0^{2}}$: Eine Bahn, die bei $r_0 = 0{,}1$ startet, ist nach $t = 50$ im Unendlichen.
+\schritt{(c)}
+Mit Minuszeichen: $\dot r = -r^{3}$, $\dot\varphi = 1$. Stabiler Strudel, $r(t) = \frac{r_0}{\sqrt{1 + 2r_0^{2}t}}\to0$ --- aber nur wie $t^{-1/2}$, nicht exponentiell. Dieselbe Linearisierung wie in (b), entgegengesetztes Verhalten: Die Linearisierung kann ein Zentrum nicht von einem schwachen Strudel unterscheiden, in keine Richtung.
+\schritt{(d)}
+$\dot x = x^{2}$: $f'(0) = 0$. Für $x < 0$ ist $\dot x > 0$ (Bewegung zum Ursprung), für $x > 0$ ebenfalls $\dot x > 0$ (Bewegung weg): halbstabil, ein Sattel-Knoten-Punkt. $\dot x = -x^{3}$: $f'(0) = 0$, aber $x\dot x = -x^{4} < 0$: asymptotisch stabil, $x(t) = \frac{x_0}{\sqrt{1 + 2x_0^{2}t}}$. \enquote{Hyperbolisch} verlangt: kein Eigenwert mit Realteil null. Dann dominieren die linearen Terme in einer Umgebung (sie wachsen oder fallen wie $e^{\lambda t}$, die nichtlinearen Korrekturen sind von höherer Ordnung in $r$), und das Phasenporträt ist topologisch das der Linearisierung (Hartman--Grobman). Bei Realteil null fehlt die exponentielle Dominanz; Terme höherer Ordnung, die die Linearisierung ignoriert, bestimmen Richtung und Geschwindigkeit.
+\begin{fehler}\kastentext
+\enquote{Die Linearisierung hat rein imaginäre Eigenwerte, also ist das Gleichgewicht ein Zentrum} --- falsch. Es kann Zentrum, stabiler oder instabiler Strudel sein; nur eine Erhaltungsgröße, eine Lyapunovfunktion oder eine Symmetrie (zeitumkehrbare Systeme) entscheidet. Ebenso bei einem Eigenwert $0$: Sattel-Knoten, transkritisch, Heugabel --- alles möglich (Aufgabe 9.22).
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Nichthyperbolische Gleichgewichte sind nicht die Ausnahme, sondern der interessante Fall: Genau dort finden Bifurkationen statt, dort entscheidet sich, ob ein Räuber-Beute-System schwingt oder einpendelt (Aufgabe 9.8), dort beginnt die Hopf-Bifurkation (Aufgabe 9.22d). Die Linearisierung sagt, \emph{wo} man genauer hinsehen muss.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.21
+\stupserzwei{gruen}{(b) $x^{*} = 1 - \frac1r$, $f'(x^{*}) = 2 - r$. Stabil für $|2 - r| < 1$, also $1 < r < 3$. Bei $r = 3$ wird $f' = -1$: Periodenverdopplung. $2$-Zyklus für $r = 3{,}2$: $x = \frac{r + 1\pm\sqrt{(r + 1)(r - 3)}}{2r} = 0{,}7995$ und $0{,}5130$.}{22pt}
+\begin{loesungkarte}{gruen}{9.21}{Van der Pol, logistische Abbildung, Lorenz}
+\derweg{(a) Liénard-System, Linearisierung, Fangbereich. (b) Fixpunkte, $|f'|$, Zweizyklus. (c) Gleichgewichte, Jacobi-Matrix bei $O$, gegebene Formel prüfen.}
+\schritt{(a)}
+$y = \dot x - \mu(x - \frac{x^{3}}3)$: $\dot x = y + \mu(x - \frac{x^{3}}3)$, $\dot y = \ddot x - \mu(1 - x^{2})\dot x = -x$. Probe: $\ddot x = \dot y + \mu(1 - x^{2})\dot x = -x + \mu(1 - x^{2})\dot x$. \checkmark\ Einziges Gleichgewicht $(0, 0)$ (aus $\dot y = 0$ folgt $x = 0$, dann $y = 0$). Jacobi-Matrix $\begin{pmatrix}\mu&1\\-1&0\end{pmatrix}$: $\tau = \mu > 0$, $\Delta = 1$ --- instabiler Strudel ($\mu < 2$) oder Knoten. Poincaré--Bendixson: In der Ebene läuft eine Bahn, die in einer kompakten Menge ohne Gleichgewichte bleibt, gegen eine geschlossene Bahn. Man konstruiert einen Ring: innen ein kleiner Kreis um $0$, den die Bahnen nach außen verlassen (der Ursprung stößt ab); außen eine große geschlossene Kurve, die die Bahnen nach innen überqueren --- für große $|x|$ dominiert der Term $-\mu\frac{x^{3}}3$ und zieht zurück (Energie $\frac12(x^{2} + y^{2})$ nimmt ab, wo $|x| > 1$). Im Ring gibt es kein Gleichgewicht; also enthält er eine periodische Bahn, den Grenzzyklus. Für kleines $\mu$ ist er fast ein Kreis mit Radius $2$, für großes $\mu$ eine Relaxationsschwingung mit zwei Zeitskalen.
+\schritt{(b)}
+Fixpunkte von $f(x) = rx(1 - x)$: $x = 0$ und $x^{*} = 1 - \frac1r$ (für $r > 1$ in $(0, 1)$). $f'(x) = r(1 - 2x)$: $f'(0) = r$ --- $0$ stabil für $r < 1$. $f'(x^{*}) = r(1 - 2 + \frac2r) = 2 - r$ --- stabil für $1 < r < 3$. Bei $r = 3$: $f' = -1$, der Fixpunkt wird instabil, ein stabiler $2$-Zyklus entsteht (Periodenverdopplung). $2$-Zyklus: $f(f(x)) = x$, geteilt durch $(x - 0)(x - x^{*})$ bleibt $r^{2}x^{2} - r(r + 1)x + (r + 1) = 0$, $x_\pm = \frac{r + 1\pm\sqrt{(r + 1)(r - 3)}}{2r}$. $r = 3{,}2$: $\sqrt{4{,}2\cdot0{,}2} = 0{,}9165$, $x_\pm = \frac{4{,}2\pm0{,}9165}{6{,}4} = 0{,}7995$, $0{,}5130$. Probe: $3{,}2\cdot0{,}5130\cdot0{,}4870 = 0{,}7995$. \checkmark\ Weitere Verdopplungen bei $3{,}449$, $3{,}544$, $3{,}564$, \dots, Häufungspunkt $3{,}5699$ (Feigenbaum: Abstände schrumpfen um den Faktor $4{,}669$), dahinter Chaos.
+\schritt{(c)}
+$\sigma(y - x) = 0\Rightarrow y = x$; $x(\rho - z) - x = 0\Rightarrow x = 0$ oder $z = \rho - 1$; $x^{2} = \beta z$. Also $O = (0, 0, 0)$ für alle $\rho$ und $C_\pm = (\pm\sqrt{\beta(\rho - 1)}, \pm\sqrt{\beta(\rho - 1)}, \rho - 1)$ für $\rho > 1$ --- bei $\rho = 1$ eine Heugabelbifurkation aus $O$. Jacobi-Matrix bei $O$: $\begin{pmatrix}-\sigma&\sigma&0\\\rho&-1&0\\0&0&-\beta\end{pmatrix}$; Eigenwert $-\beta$ und die Wurzeln von $\lambda^{2} + (\sigma + 1)\lambda + \sigma(1 - \rho) = 0$: beide negativ für $\rho < 1$ (stabiler Knoten), eine positiv für $\rho > 1$ (Sattel). $C_\pm$: stabil für $1 < \rho < \rho_H$, mit $\rho_H = \frac{\sigma(\sigma + \beta + 3)}{\sigma - \beta - 1} = \frac{10\cdot(10 + \frac83 + 3)}{10 - \frac83 - 1} = \frac{10\cdot\frac{47}3}{\frac{19}3} = \frac{470}{19} = 24{,}74$. Dort subkritische Hopf-Bifurkation: Die Punkte werden instabil, ohne dass ein stabiler Zyklus entsteht --- nichts Stabiles bleibt, der seltsame Attraktor übernimmt. Lorenz wählte $\rho = 28$.
+\probe{(c) Volumenkontraktion: $\operatorname{div} = -\sigma - 1 - \beta = -13{,}67$: Jedes Volumen schrumpft wie $e^{-13{,}67t}$, der Attraktor hat Volumen null --- und ist trotzdem keine Kurve und keine Fläche (Dimension $2{,}06$).}
+\begin{mitnehmen}\kastentext
+Drei Wege zu komplexem Verhalten: ein Grenzzyklus durch Poincaré--Bendixson (nur in der Ebene möglich), Chaos in einer Dimension durch Iteration (Abbildungen sind \enquote{wilder} als Flüsse), Chaos in drei Dimensionen durch einen seltsamen Attraktor. Der Satz von Poincaré--Bendixson sagt zugleich, warum es in der Ebene kein Chaos gibt: Bahnen können sich nicht kreuzen und haben keinen Platz.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.22
+\stupserzwei{tief}{(d) $\dot r = r(\mu - r^{2})$: Für $\mu\le0$ ist $r = 0$ das einzige Gleichgewicht, stabil. Für $\mu > 0$ wird $r = 0$ instabil und $r = \sqrt\mu$ ist ein stabiler Kreis --- ein Grenzzyklus mit Amplitude $\sqrt\mu$.}{22pt}
+\begin{loesungkarte}{tief}{9.22}{Bifurkationen erkennen}
+\derweg{Gleichgewichte $f(x, r) = 0$, Stabilität über $f_x$, Diagramm $x^{*}(r)$.}
+\schritt{(a) Sattel-Knoten}
+$r + x^{2} = 0$: für $r < 0$ zwei Gleichgewichte $x = \pm\sqrt{-r}$, $f_x = 2x$: $-\sqrt{-r}$ stabil, $+\sqrt{-r}$ instabil. Für $r = 0$: $x = 0$ halbstabil. Für $r > 0$: keines --- $\dot x > 0$ überall, alles läuft nach $+\infty$. Diagramm: eine nach links geöffnete Parabel, unterer Ast durchgezogen, oberer gestrichelt. Zwei Gleichgewichte verschmelzen und verschwinden: die Geburt (oder der Tod) von Gleichgewichten \enquote{aus dem Nichts}.
+\schritt{(b) Transkritisch}
+$x(r - x) = 0$: $x = 0$ und $x = r$ für alle $r$. $f_x = r - 2x$: Bei $x = 0$: $f_x = r$, stabil für $r < 0$; bei $x = r$: $f_x = -r$, stabil für $r > 0$. Zwei Geraden, die sich bei $r = 0$ kreuzen und dabei die Stabilität tauschen. (Logistisches Wachstum mit Rate $r$: Für $r < 0$ stirbt die Population aus, für $r > 0$ ist die Kapazität $r$ stabil.)
+\schritt{(c) Heugabel}
+$x(r - x^{2}) = 0$: $x = 0$ für alle $r$; $x = \pm\sqrt r$ für $r > 0$. $f_x = r - 3x^{2}$: $x = 0$ stabil für $r < 0$, instabil für $r > 0$; $x = \pm\sqrt r$: $f_x = -2r < 0$, stabil. Superkritische Heugabel: Ein stabiles Gleichgewicht wird instabil und gibt zwei neue stabile ab --- Symmetriebrechung (Stab unter Last, Aufgabe 9.15c: gerade Lage wird instabil, Ausknicken nach links oder rechts). $\dot x = rx + x^{3}$: $x = \pm\sqrt{-r}$ für $r < 0$ mit $f_x = r + 3x^{2} = -2r > 0$: instabil. Subkritische Heugabel: Die instabilen Äste existieren \emph{vor} der Bifurkation; bei $r = 0$ verliert der Ursprung die Stabilität, und es gibt nichts Stabiles in der Nähe --- das System springt weit weg (bei realen Systemen bis zu einem entfernten Ast, mit Hysterese).
+\schritt{(d) Hopf}
+$\dot r = r(\mu - r^{2})$: Gleichgewicht $r = 0$ mit $\frac{d}{dr}[r(\mu - r^{2})]_{r = 0} = \mu$ --- stabil für $\mu < 0$, instabil für $\mu > 0$. Für $\mu > 0$ zusätzlich $r = \sqrt\mu$ mit Ableitung $\mu - 3\mu = -2\mu < 0$: stabil. In der Ebene ($\dot\varphi = 1$): Für $\mu < 0$ ein stabiler Strudel; bei $\mu = 0$ verlieren die Eigenwerte $\mu\pm i$ ihren negativen Realteil; für $\mu > 0$ ein instabiler Strudel, umgeben von einem stabilen Grenzzyklus mit Radius $\sqrt\mu$. Die Amplitude wächst wie $\sqrt\mu$ --- das Kennzeichen der superkritischen Hopf-Bifurkation (van der Pol bei kleinem $\mu$, Aufgabe 9.21a).
+\probe{Allgemein: Sattel-Knoten, wenn $f_x = 0$ und $f_r\neq0$, $f_{xx}\neq0$; transkritisch und Heugabel brauchen zusätzlich $f_r = 0$ (ein Gleichgewicht existiert für alle $r$) --- deshalb sind sie \enquote{nicht generisch} und treten nur mit Symmetrie oder Struktur auf.}
+\begin{mitnehmen}\kastentext
+Vier Normalformen, und fast jede Bifurkation eines Gleichgewichts in einer Dimension oder in der Ebene ist eine davon --- lokal, nach Koordinatenwechsel. Sattel-Knoten: Kipppunkt. Transkritisch: Stabilitätstausch. Heugabel: Symmetriebrechung. Hopf: Beginn einer Schwingung. Wer diese vier Bilder kennt, erkennt sie in Klimamodellen, Lasern, Herzzellen und Märkten wieder.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.23
+\stupserzwei{gruen}{(c) Der Stoß entsteht dort, wo die Charakteristik aus $x_0 = \frac1{\sqrt3}$ zur Zeit $t_{\text{Stoß}}$ ist: $x = x_0 + f(x_0)t = \frac1{\sqrt3} + \frac34\cdot\frac{8\sqrt3}9 = \sqrt3$.}{22pt}
+\begin{loesungkarte}{gruen}{9.23}{Klassifikation, Transport, Stoß}
+\derweg{Diskriminante $B^{2} - AC$ der Hauptteile; Charakteristiken als Kurven, längs derer $u$ konstant ist; Brechzeit aus $\min f'$.}
+\schritt{(a)}
+Für $Au_{xx} + 2Bu_{xy} + Cu_{yy} + \dots$: $B^{2} - AC > 0$ hyperbolisch, $= 0$ parabolisch, $< 0$ elliptisch.
+\begin{center}\small
+\begin{tabular}{l|ccc|l}
+Gleichung & $A$ & $B$ & $C$ & Typ\\ \hline
+$c^{2}u_{xx} - u_{tt} = 0$ & $c^{2}$ & $0$ & $-1$ & $c^{2} > 0$: hyperbolisch\\
+$ku_{xx} - u_t = 0$ & $k$ & $0$ & $0$ & $0$: parabolisch\\
+$u_{xx} + u_{yy} = 0$ & $1$ & $0$ & $1$ & $-1$: elliptisch\\
+$u_{xx} + 2u_{xy} + u_{yy} = 0$ & $1$ & $1$ & $1$ & $0$: parabolisch\\
+$yu_{xx} + u_{yy} = 0$ & $y$ & $0$ & $1$ & $-y$: gemischt
+\end{tabular}
+\end{center}
+Tricomi: hyperbolisch für $y < 0$, elliptisch für $y > 0$ --- das Modell der Überschallströmung. Charakteristiken $\frac{dy}{dx} = \frac{B\pm\sqrt{B^{2} - AC}}A$: Wellengleichung $\frac{dt}{dx} = \pm\frac1c$, also $x\pm ct = $ const --- zwei Scharen, die laufenden Wellen. Wärmeleitung: $\frac{dt}{dx} = 0$, $t = $ const --- eine Schar, die zugleich die Anfangslinie ist; deshalb darf man nur $u$ vorgeben, nicht $u_t$.
+\schritt{(b)}
+Charakteristiken $\dot x = 2$, $x = x_0 + 2t$; längs ihnen $\frac d{dt}u(x(t), t) = u_t + 2u_x = 0$, $u$ konstant. $u(x, t) = u(x_0, 0) = e^{-(x - 2t)^{2}}$. Die Glocke wandert unverformt mit Geschwindigkeit $2$ nach rechts --- Transport. Probe: $u_t = 4(x - 2t)e^{-(\cdot)^{2}}$, $u_x = -2(x - 2t)e^{-(\cdot)^{2}}$, $u_t + 2u_x = 0$. \checkmark
+\schritt{(c)}
+Charakteristiken $\dot x = u$, $u$ konstant längs ihnen: $x = x_0 + f(x_0)t$, $u = f(x_0)$ --- implizit $u = f(x - ut)$. Zwei Charakteristiken kreuzen, wenn $\frac{\partial x}{\partial x_0} = 1 + f'(x_0)t = 0$; zuerst dort, wo $f'$ am negativsten ist. $f' = -\frac{2x}{(1 + x^{2})^{2}}$, $f'' = 0$ bei $3x^{2} = 1$, $x_0 = \frac1{\sqrt3}$: $f'(x_0) = -\frac{2/\sqrt3}{(4/3)^{2}} = -\frac{9}{8\sqrt3} = -\frac{3\sqrt3}8 = -0{,}6495$. $t_{\text{Stoß}} = \frac1{0{,}6495} = \frac{8\sqrt3}9 = 1{,}5396$. Ort (Stupser): $x = \sqrt3 = 1{,}732$. Dort wird $u_x = \frac{f'}{1 + tf'}$ unendlich: Das Profil hat eine senkrechte Tangente, danach wäre $u$ mehrdeutig --- physikalisch bildet sich eine Stoßfront (Verkehrsstau, Überschallknall), mathematisch braucht man schwache Lösungen (Kapitel 14).
+\probe{(c) Schnellere Teile holen langsamere ein: $f$ ist für $x > 0$ fallend, die hohen Werte links laufen den niedrigen rechts hinterher. Für $x < 0$ ist $f$ steigend --- dort verflacht das Profil (Verdünnungswelle), kein Stoß. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Klassifikation sagt, welche Daten man vorgeben darf und wie die Lösung sich verhält: hyperbolisch --- Wellen, endliche Geschwindigkeit, keine Glättung; parabolisch --- Diffusion, unendliche Geschwindigkeit, Glättung; elliptisch --- Gleichgewicht, Randwerte, Mittelwerteigenschaft. Und die Burgersgleichung zeigt, was Nichtlinearität anrichtet: Glatte Daten erzeugen in endlicher Zeit Unstetigkeiten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.24
+\stupserzwei{tief}{(c) Rampe: Charakteristiken aus $x_0\in(0, 1)$ sind $x = x_0 + (1 - x_0)t$ --- alle treffen sich bei $t = 1$ im Punkt $x = 1$. Für $t < 1$: $u = \frac{1 - x}{1 - t}$ auf $t < x < 1$.}{22pt}
+\begin{loesungkarte}{tief}{9.24}{Charakteristiken rechnen}
+\derweg{Charakteristikengleichung $\dot x = c$, Gleichung für $u$ längs der Kurve, nach $x_0$ auflösen.}
+\schritt{(a)}
+$\dot x = x$: $x = x_0e^{t}$, also $x_0 = xe^{-t}$. Längs der Kurven $\frac{d}{dt}u = u_t + xu_x = 0$: $u(x, t) = f(xe^{-t})$. Die Charakteristiken sind Exponentialkurven, die vom Ursprung weg auseinanderlaufen (für $x_0 = 0$ die $t$-Achse). Ein Anfangsprofil wird mit dem Faktor $e^{t}$ gestreckt: $u(x, t) = f(xe^{-t})\to f(0)$ für jedes feste $x$. Alles wird flach --- die Information fließt ins Unendliche.
+\schritt{(b)}
+$\dot x = 1$, $x = x_0 + t$. Längs der Charakteristik: $\frac d{dt}u(x(t), t) = u_t + u_x = -u$, also $u = u_0e^{-t}$. $u(x, t) = e^{-t}f(x - t)$: Transport nach rechts mit gleichzeitigem exponentiellem Abklingen. Probe: $u_t = -e^{-t}f - e^{-t}f'$, $u_x = e^{-t}f'$, $u_t + u_x = -e^{-t}f = -u$. \checkmark
+\schritt{(c)}
+Charakteristiken $x = x_0 + f(x_0)t$: für $x_0\le0$ Geraden der Steigung $1$ ($x = x_0 + t$); für $x_0\ge1$ senkrechte Geraden ($x = x_0$); für $0 < x_0 < 1$: $x = x_0 + (1 - x_0)t$, alle durch den Punkt $(1, 1)$. Dort kreuzen sich unendlich viele: Stoß bei $t = 1$, $x = 1$ (Formel: $\min f' = -1$, $t = 1$ \checkmark). Für $t < 1$: $u = 1$ für $x\le t$; auf dem Rampenbereich $x_0 = \frac{x - t}{1 - t}$, $u = 1 - x_0 = \frac{1 - x}{1 - t}$ für $t < x < 1$; $u = 0$ für $x\ge1$. Die Rampe wird steiler und steiler, bis sie bei $t = 1$ senkrecht steht.
+\schritt{(d)}
+Nach dem Stoß: links $u_- = 1$, rechts $u_+ = 0$. Rankine--Hugoniot für $u_t + (\frac{u^{2}}2)_x = 0$: $s = \frac{\frac12u_-^{2} - \frac12u_+^{2}}{u_- - u_+} = \frac{u_- + u_+}2 = \frac12$. Der Stoß läuft ab $(1, 1)$ mit Geschwindigkeit $\frac12$: $x_s(t) = 1 + \frac{t - 1}2$. Charakteristiken laufen von beiden Seiten in ihn hinein (links mit Geschwindigkeit $1$, rechts mit $0$) --- die Entropiebedingung, die den physikalischen Stoß von unphysikalischen unterscheidet.
+\probe{(c) Erhaltung: $\int u\,dx$ ist für die Burgersgleichung erhalten. Bei $t = 0$: $\int_{-L}^{\infty}u = L + \frac12$; bei $t < 1$: $(L + t) + \frac12(1 - t) = L + \frac12$. \checkmark}
+\begin{mitnehmen}\kastentext
+Charakteristiken verwandeln eine partielle Differentialgleichung erster Ordnung in eine Schar gewöhnlicher: Längs der Kurve $\dot x = c$ gilt $\dot u = $ Quellterm. Linear: Die Kurven stehen fest, das Profil wird transportiert und verformt. Nichtlinear: Die Kurven hängen von der Lösung ab und können sich kreuzen --- dann endet die klassische Lösung, und Rankine--Hugoniot sagt, wie es weitergeht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.25
+\stupserzwei{gruen}{(b) $\sin\frac{n\pi x}L\cos\frac{n\pi ct}L = \frac12\Bigl[\sin\frac{n\pi(x - ct)}L + \sin\frac{n\pi(x + ct)}L\Bigr]$: Jede stehende Welle ist die Summe zweier laufender --- und die Fourierreihe von $f$ wird zu $\frac12[\tilde f(x - ct) + \tilde f(x + ct)]$.}{22pt}
+\begin{loesungkarte}{gruen}{9.25}{Dreieck, Separation, Energie}
+\derweg{D'Alembert auswerten und zeichnen; Separation, Reihe umschreiben; Energie ableiten, Randterme prüfen.}
+\schritt{(a)}
+$g = 0$: $u = \frac12\bigl[f(x - ct) + f(x + ct)\bigr]$. Zwei Dreiecke halber Höhe, eines läuft nach rechts, eines nach links. $ct = 0$: das Dreieck, Höhe $1$. $ct = \frac12$: Überlagerung, ein Trapez mit Plateau $\frac12$ auf $[-\frac12, \frac12]$, Flanken bis $\pm\frac32$. $ct = 1$: Die Dreiecke berühren sich bei $x = 0$ --- zwei Dreiecke der Höhe $\frac12$ auf $[-2, 0]$ und $[0, 2]$. $ct = 2$: getrennt, auf $[-3, -1]$ und $[1, 3]$. Die Knicke des Dreiecks (bei $x = 0, \pm1$) wandern mit und bleiben Knicke: Die Wellengleichung glättet nicht.
+\schritt{(b)}
+$u = X(x)T(t)$: $\frac{T''}{c^{2}T} = \frac{X''}X = -\lambda$, $X_n = \sin\frac{n\pi x}L$, $T_n = a_n\cos\frac{n\pi ct}L + b_n\sin\frac{n\pi ct}L$. $u = \sum\bigl(a_n\cos\frac{n\pi ct}L + b_n\sin\frac{n\pi ct}L\bigr)\sin\frac{n\pi x}L$ mit $a_n = \frac2L\int f\sin$, $b_n = \frac2{n\pi c}\int g\sin$. Umschreiben (Stupser): $\sum a_n\sin\frac{n\pi x}L\cos\frac{n\pi ct}L = \frac12\bigl[\tilde f(x - ct) + \tilde f(x + ct)\bigr]$, wobei $\tilde f = \sum a_n\sin\frac{n\pi x}L$ die ungerade $2L$-periodische Fortsetzung von $f$ ist (das ist genau, was die Sinusreihe darstellt). Ebenso für $g$ mit $\sin\cdot\sin = \frac12[\cos(\cdot) - \cos(\cdot)]$, was nach Integration den $g$-Term von d'Alembert liefert. Die Randbedingung $u(0, t) = 0$ ist in der ungeraden Fortsetzung eingebaut: Eine Welle, die am festen Ende ankommt, wird als ihr Negatives reflektiert.
+\schritt{(c)}
+$\dot E = \int_0^{L}(u_tu_{tt} + c^{2}u_xu_{xt})\,dx = \int_0^{L}(u_t\cdot c^{2}u_{xx} + c^{2}u_xu_{xt})\,dx = c^{2}\int_0^{L}\partial_x(u_tu_x)\,dx = c^{2}\bigl[u_tu_x\bigr]_0^{L} = 0$, weil $u(0, t) = u(L, t) = 0$ für alle $t$, also $u_t(0, t) = u_t(L, t) = 0$. \checkmark\ Eindeutigkeit: Sind $u_1, u_2$ Lösungen mit denselben Anfangs- und Randwerten, so löst $w = u_1 - u_2$ die Wellengleichung mit $w = w_t = 0$ bei $t = 0$ und $w = 0$ am Rand. $E_w(0) = 0$, also $E_w(t) = 0$ für alle $t$, also $w_t = w_x = 0$, $w$ konstant, $w = 0$. $\blacksquare$
+\probe{(a) Bei $ct = \frac12$, $x = 0$: $\frac12[f(-\frac12) + f(\frac12)] = \frac12$. \checkmark\ (c) Für das Dreieck: $E = \frac{c^{2}}2\int f'^{2} = \frac{c^{2}}2\cdot2 = c^{2}$ (bei $t = 0$ nur potentielle Energie); für $ct > 1$: zwei Dreiecke halber Höhe, je $\frac14$ der potentiellen plus gleich viel kinetischer Energie. \checkmark}
+\begin{mitnehmen}\kastentext
+D'Alembert und Separation sind zwei Sprachen für dieselbe Lösung: laufende und stehende Wellen. Die Energie ist das Werkzeug für Eindeutigkeit und Stabilität --- für alle Gleichungen, die eine haben. Dass Knicke erhalten bleiben, ist kein Mangel, sondern Hyperbolizität: Information läuft mit endlicher Geschwindigkeit und wird nicht verwischt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.26
+\stupserzwei{tief}{(a) Für $ct\ge1$ und $|x|\le ct - 1$ liegt $[-1, 1]$ ganz im Intervall $[x - ct, x + ct]$: $u = \frac1{2c}\cdot2 = \frac1c$. Das Plateau wächst nach beiden Seiten, die Saite bleibt angehoben.}{22pt}
+\begin{loesungkarte}{tief}{9.26}{D'Alembert mit Anfangsgeschwindigkeit}
+\derweg{$u = \frac1{2c}\int_{x - ct}^{x + ct}g$ als Länge eines Schnitts; dann Deutung, Spiegelung, Abhängigkeitsgebiet.}
+\schritt{(a)}
+$u(x, t) = \frac1{2c}\bigl|[x - ct, x + ct]\cap[-1, 1]\bigr|$. $ct = \frac12$: Für $|x|\le\frac12$ ist das Intervall der Länge $1$ ganz in $[-1, 1]$: $u = \frac1{2c}$; für $\frac12 < |x| < \frac32$ linear abfallend auf $0$. Trapez mit Plateau $\frac1{2c}$ auf $[-\frac12, \frac12]$. $ct = 1$: Dreieck mit Spitze $\frac1c$ bei $x = 0$, Basis $[-2, 2]$. $ct = 3$: Für $|x|\le2$ ist $[-1, 1]$ ganz enthalten: $u = \frac1c$; für $2 < |x| < 4$ linear auf $0$. Trapez mit Plateau $\frac1c$ auf $[-2, 2]$. Für festes $x$ und $t\to\infty$: $u\to\frac1c$ --- die Saite bleibt um $\frac1c$ angehoben.
+\schritt{(b)}
+Der Anfangsimpuls $g$ verleiht dem Stück $[-1, 1]$ Geschwindigkeit $1$. Die Störung breitet sich als zwei Fronten aus; dahinter ist die Saite in Ruhe --- aber in einer neuen Lage. In einer Dimension gilt das Huygenssche Prinzip nicht: Die Lösung in $(x, t)$ hängt vom ganzen Intervall $[x - ct, x + ct]$ ab, nicht nur von dessen Rand; der Einfluss der Anfangsgeschwindigkeit bleibt für immer. (In drei Dimensionen hängt $u$ nur von der Sphäre $|y - x| = ct$ ab --- deshalb hört man einen Knall einmal und nicht als Nachhall.) In Aufgabe 9.25a dagegen ($g = 0$) ist die Saite nach Durchgang der Pulse wieder in der Ruhelage: Der Term $\frac12[f(x - ct) + f(x + ct)]$ verschwindet, wenn beide Argumente außerhalb des Trägers liegen.
+\schritt{(c)}
+Ungerade Fortsetzung $\tilde f(-x) = -f(x)$: ein zweiter Puls mit umgekehrtem Vorzeichen auf $[-2, -1]$. Die d'Alembert-Lösung auf ganz $\mathbb R$ erfüllt automatisch $u(0, t) = 0$ (ungerade Funktion). Für $x > 0$: Der nach links laufende halbe Puls aus $[1, 2]$ erreicht $x = 0$ zur Zeit $ct = 1$; gleichzeitig kommt von links der negative Spiegelpuls an. Beide überlagern sich am Ende zu $0$ und laufen aneinander vorbei --- was für $x > 0$ wie eine Reflexion aussieht: Der Puls kommt mit umgekehrtem Vorzeichen (unten statt oben) zurück und läuft nach rechts. Am festen Ende wird eine Welle invertiert reflektiert; am freien Ende (gerade Fortsetzung) ohne Inversion.
+\schritt{(d)}
+Abhängigkeitsgebiet von $(x_0, t_0)$: das Intervall $[x_0 - ct_0, x_0 + ct_0]$ auf der $x$-Achse --- die Basis des rückwärtigen Charakteristikendreiecks. Einflussbereich von $[-1, 1]$: der vorwärtige Keil $\{(x, t)\colon-1 - ct\le x\le1 + ct\}$. Endliche Ausbreitungsgeschwindigkeit: Was bei $t = 0$ außerhalb von $[x_0 - ct_0, x_0 + ct_0]$ passiert, beeinflusst $u(x_0, t_0)$ nicht; nichts läuft schneller als $c$. Bei der Wärmeleitung ist das anders (Aufgabe 9.28b).
+\begin{mitnehmen}\kastentext
+Die zwei Terme der d'Alembertschen Formel verhalten sich verschieden: Der $f$-Term transportiert und geht vorbei, der $g$-Term integriert und bleibt. Beides ist Hyperbolizität --- endliche Geschwindigkeit, keine Glättung, Reflexion an Rändern durch Fortsetzung. Das Abhängigkeitsgebiet ist die geometrische Fassung der Kausalität; in der Relativitätstheorie heißt es Lichtkegel.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.27
+\stupserzwei{gruen}{(c) $d = \sqrt{2k/\omega} = \sqrt{2\cdot0{,}5\cdot10^{-6}/1{,}991\cdot10^{-7}} = 2{,}24\,\mathrm m$. Phasenverzug $\frac zd$; ein halbes Jahr heißt $\frac zd = \pi$: $z = 7{,}0\,\mathrm m$. Dort ist die Amplitude $e^{-\pi} = 4{,}3\,\%$ --- der Boden ist im Winter am wärmsten.}{22pt}
+\begin{loesungkarte}{gruen}{9.27}{Stab, Fundamentallösung, Jahreswelle}
+\derweg{(a) Separation, Fourierkoeffizienten der Konstanten. (b) Ähnlichkeitsansatz, gewöhnliche Gleichung, Normierung. (c) Komplexer Ansatz, $\sqrt i$.}
+\schritt{(a)}
+$u = \sum b_ne^{-k(n\pi/L)^{2}t}\sin\frac{n\pi x}L$ mit $b_n = \frac2L\int_0^{L}u_0\sin\frac{n\pi x}L\,dx = \frac{2u_0}{n\pi}(1 - (-1)^{n})$: $b_n = \frac{4u_0}{n\pi}$ für ungerade $n$, $0$ für gerade.
+\[ u(x, t) = \frac{4u_0}\pi\sum_{n\text{ ungerade}}\frac1ne^{-kn^{2}\pi^{2}t/L^{2}}\sin\frac{n\pi x}L. \]
+Zeitkonstante der Grundmode: $\tau_1 = \frac{L^{2}}{k\pi^{2}}$; nach $t = \tau_1$ ist sie auf $\frac1e$ gefallen. Die Mode $n$ klingt wie $e^{-n^{2}t/\tau_1}$ ab --- bei $t = \tau_1$ ist $n = 3$ schon bei $e^{-9} = 10^{-4}$ ihres Anfangswerts. Nach kurzer Zeit ist $u\approx\frac{4u_0}\pi e^{-t/\tau_1}\sin\frac{\pi x}L$: Der Stab vergisst seine Anfangsverteilung und nimmt die Grundmode an.
+\schritt{(b)}
+Ansatz $u = t^{-1/2}\varphi(\xi)$, $\xi = \frac x{\sqrt t}$. $u_t = -\frac12t^{-3/2}\varphi - \frac12t^{-3/2}\xi\varphi'$, $u_{xx} = t^{-3/2}\varphi''$. Einsetzen und mit $t^{3/2}$ multiplizieren: $-\frac12(\varphi + \xi\varphi') = k\varphi''$, also $k\varphi'' + \frac12(\xi\varphi)' = 0$. Integrieren: $k\varphi' + \frac12\xi\varphi = C_1$; $C_1 = 0$ (Symmetrie: $\varphi' = 0$ bei $\xi = 0$). $\frac{\varphi'}\varphi = -\frac\xi{2k}$, $\varphi = Ce^{-\xi^{2}/4k}$. Normierung $\int u\,dx = 1$ (Gesamtwärme erhalten): $\int t^{-1/2}Ce^{-x^{2}/4kt}\,dx = C\sqrt{4\pi k} = 1$, $C = \frac1{\sqrt{4\pi k}}$. Warum $t^{-1/2}$: Die Gleichung ist invariant unter $x\to\lambda x$, $t\to\lambda^{2}t$; die Erhaltung von $\int u\,dx$ verlangt, dass die Höhe wie $\frac1{\text{Breite}} = \frac1{\sqrt t}$ fällt.
+\schritt{(c)}
+$u = u_m + \operatorname{Re}\bigl(A_0e^{i\omega t}\psi(z)\bigr)$, $\psi(0) = 1$: $i\omega\psi = k\psi''$, $\psi = e^{\pm\sqrt{i\omega/k}\,z}$. $\sqrt i = e^{i\pi/4} = \frac{1 + i}{\sqrt2}$, also $\sqrt{\frac{i\omega}k} = (1 + i)\sqrt{\frac\omega{2k}} = \frac{1 + i}d$ mit $d = \sqrt{\frac{2k}\omega}$. Abklingend: Minuszeichen. $u = u_m + A_0e^{-z/d}\cos\bigl(\omega t - \frac zd\bigr)$. Amplitude $e^{-z/d}$, Phasenverzug $\frac zd$ (die Welle läuft mit Geschwindigkeit $\omega d$ nach unten). Zahlen: $\omega = \frac{2\pi}{3{,}156\cdot10^{7}\,\mathrm s} = 1{,}991\cdot10^{-7}\,\mathrm{s^{-1}}$, $d = \sqrt{\frac{10^{-6}}{1{,}991\cdot10^{-7}}} = \sqrt{5{,}02} = 2{,}24\,\mathrm m$. Halbes Jahr Verzug: $\frac zd = \pi$, $z = 7{,}04\,\mathrm m$; Amplitude dort $e^{-\pi}A_0 = 0{,}043A_0$ --- bei $A_0 = 10\,\mathrm K$ noch $0{,}4\,\mathrm K$, mit Maximum im Januar. (Weinkeller: in $2$--$3\,\mathrm m$ Tiefe Amplitude $e^{-1}\approx37\,\%$ und Verzug von zwei Monaten.) Die Tageswelle hat $\omega$ um den Faktor $365$ größer, $d$ um $\sqrt{365} = 19$ kleiner: $12\,\mathrm{cm}$.
+\probe{(b) $\Phi$ bei $t\to0$: Höhe $\to\infty$, Breite $\to0$, Integral $1$ --- die Deltafunktion. Die Lösung zu $u(x, 0) = f$ ist $u = \int\Phi(x - y, t)f(y)\,dy$: Faltung mit einer Gaußglocke der Varianz $2kt$. \checkmark}
+\begin{mitnehmen}\kastentext
+Drei Erscheinungsformen der Diffusion: Fourierreihe (Moden klingen wie $n^{2}$ ab --- Glättung), Fundamentallösung (Gaußglocke mit Breite $\sqrt{2kt}$ --- die Wurzel ist das Kennzeichen der Diffusion), Eindringtiefe (periodische Anregung reicht nur $\sqrt{2k/\omega}$ tief). Alle drei stecken in einer Zahl: $k$ hat die Einheit $\mathrm{m^{2}/s}$, also ist $\sqrt{kt}$ die Länge, die Wärme in der Zeit $t$ zurücklegt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.28
+\stupserzwei{akzent}{(b) Die Fourierreihe $\sum b_ne^{-kn^{2}t}\sin nx$ konvergiert für jedes $t > 0$ samt allen Ableitungen: Jede $L^{2}$-Anfangsverteilung wird sofort $C^{\infty}$. Was weg ist, ist weg --- und lässt sich aus der geglätteten Funktion nicht zurückgewinnen.}{22pt}
+\begin{loesungkarte}{akzent}{9.28}{Rückwärts in der Zeit}
+\derweg{Eine Mode genügt: Vorwärts wird sie klein, rückwärts riesig. Dann das Maximumprinzip als Grund für Eindeutigkeit und Stabilität vorwärts.}
+\schritt{(a)}
+$u = \varepsilon e^{-kn^{2}t}\sin nx$: $u_t = -kn^{2}u$, $u_{xx} = -n^{2}u$, also $u_t = ku_{xx}$. \checkmark\ Randwerte $u(0, t) = u(\pi, t) = 0$. Bei $t = -T$: Amplitude $\varepsilon e^{kn^{2}T}$. Das Rückwärtsproblem \enquote{gegeben $u(\cdot, 0)$, finde $u(\cdot, -T)$} bildet die Störung $\varepsilon\sin nx$ (Norm $\varepsilon$, beliebig klein) auf $\varepsilon e^{kn^{2}T}\sin nx$ ab --- für $n\to\infty$ unbeschränkt. Zwei Anfangsdaten, die sich um $10^{-6}$ unterscheiden, können zu Vorgeschichten gehören, die sich um $10^{37}$ unterscheiden. Keine stetige Abhängigkeit: schlecht gestellt (Hadamard). Dazu: Für die meisten Daten existiert gar keine Rückwärtslösung (sie müssten analytisch sein).
+\schritt{(b)}
+Vorwärts dämpft dieselbe Formel die Mode $n$ um $e^{-kn^{2}t}$: Hohe Frequenzen verschwinden fast sofort, die Lösung ist für $t > 0$ unendlich oft differenzierbar, selbst wenn $u(x, 0)$ Sprünge hatte. Konsequenz: Aus der Temperatur zur Zeit $t$ kann man die Anfangstemperatur nur bis auf Störungen rekonstruieren, die inzwischen unter die Messgenauigkeit gefallen sind --- und das sind alle feinen Details. Entfaltung (Bildschärfung, Dekonvolution) ist genau dieses Problem und braucht Regularisierung: Man rekonstruiert nur die niedrigen Moden.
+\schritt{(c)}
+Angenommen, $u$ hätte im Innern $(x_0, t_0)$ mit $0 < x_0 < L$, $t_0 > 0$ ein striktes Maximum. Dann $u_{xx}(x_0, t_0)\le0$ (Maximum in $x$) und $u_t(x_0, t_0)\ge0$ ($u$ ist bis $t_0$ nicht gefallen; bei striktem Maximum $> 0$ oder man betrachtet $u + \delta x^{2}$). Also $u_t\ge0\ge ku_{xx}$, mit $u + \delta x^{2}$ strikt: Widerspruch zu $u_t = ku_{xx}$. Das Maximum liegt also auf dem parabolischen Rand: bei $t = 0$ oder bei $x\in\{0, L\}$. Ebenso das Minimum. Eindeutigkeit vorwärts: Für $w = u_1 - u_2$ mit gleichen Anfangs- und Randwerten ist $\max w = \min w = 0$. Stabilität: $\max|u_1 - u_2|\le$ maximale Abweichung der Daten. Vorwärts gut gestellt.
+\schritt{(d)}
+$t\to-t$: $u_{tt}$ bleibt, $u_t$ wechselt das Vorzeichen. Die Wellengleichung ist invariant --- jede Lösung rückwärts abgespielt ist wieder eine Lösung; die Wärmeleitungsgleichung wird zu $u_t = -ku_{xx}$, der Rückwärtsgleichung, die Störungen verstärkt. Der Term erster Ordnung in $t$ bricht die Zeitsymmetrie. Physikalisch: Diffusion erzeugt Entropie ($\frac d{dt}\int u^{2}\,dx = -2k\int u_x^{2}\,dx\le0$, Information über die Verteilung geht verloren); der zweite Hauptsatz ist in der Gleichung eingebaut. Dass die mikroskopische Mechanik zeitumkehrbar ist, die Diffusion aber nicht, ist das Loschmidt-Paradoxon --- aufgelöst durch Statistik (Band 4).
+\begin{fehler}\kastentext
+Gut gestellt heißt: Existenz, Eindeutigkeit \emph{und} stetige Abhängigkeit von den Daten. Das dritte wird am häufigsten vergessen und ist in der Praxis das wichtigste --- Messdaten sind nie exakt. Die Wärmeleitung rückwärts, die Laplacegleichung als Anfangswertproblem (Hadamards Beispiel) und die Dekonvolution sind schlecht gestellt; sie lassen sich nur mit Regularisierung behandeln, und die Antwort hängt von der Regularisierung ab.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Die drei Typen aus Aufgabe 9.23 unterscheiden sich darin, welches Problem gut gestellt ist: hyperbolisch --- Anfangswerte in beide Zeitrichtungen; parabolisch --- Anfangswerte nur vorwärts; elliptisch --- Randwerte, keine Anfangswerte. Die Klassifikation ist also keine Formsache, sondern die Antwort auf die Frage: Welche Daten darf ich vorgeben, und was bekomme ich zurück?
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.29
+\stupserzwei{gruen}{(c) Mittelwerteigenschaft $\leftrightarrow$ Rotationssymmetrie der Brownschen Bewegung: Von $\vec x$ aus verlässt sie jede kleine Kreisscheibe um $\vec x$ an einem gleichverteilten Randpunkt. Also ist $u(\vec x)$ der Mittelwert von $u$ auf dem Kreis.}{22pt}
+\begin{loesungkarte}{gruen}{9.29}{Rechteck, Halbebene, Brownsche Bewegung}
+\derweg{(a) Separation, $\sinh$ aus der Nullbedingung bei $y = 0$. (b) Spiegelladung, Normalableitung am Rand. (c) Starke Markoveigenschaft am ersten Austritt aus einem kleinen Kreis.}
+\schritt{(a)}
+$u = X(x)Y(y)$: $\frac{X''}X = -\frac{Y''}Y = -\lambda$. $X'' + \lambda X = 0$, $X(0) = X(a) = 0$: $X_n = \sin\frac{n\pi x}a$, $\lambda_n = \bigl(\frac{n\pi}a\bigr)^{2}$. $Y'' - \lambda_nY = 0$: $Y = A\cosh\frac{n\pi y}a + B\sinh\frac{n\pi y}a$, $Y(0) = 0$ gibt $A = 0$. Also $u = \sum b_n\sin\frac{n\pi x}a\frac{\sinh(n\pi y/a)}{\sinh(n\pi b/a)}$ mit $b_n = \frac2a\int_0^{a}g(x)\sin\frac{n\pi x}a\,dx$ (so dass $u(x, b) = \sum b_n\sin\frac{n\pi x}a = g$). Warum $\sinh$: Die Laplacegleichung hat in $x$ und $y$ entgegengesetzte Vorzeichen --- oszilliert die Lösung in einer Richtung, wächst sie in der anderen exponentiell. Elliptische Gleichungen haben keine \enquote{Wellen in beide Richtungen}; die Randdaten bei $y = b$ dringen gedämpft ins Innere ($\frac{\sinh(n\pi y/a)}{\sinh(n\pi b/a)}\approx e^{-n\pi(b - y)/a}$), die hohen Moden am schnellsten.
+\schritt{(b)}
+Fundamentallösung in der Ebene $\Phi(\vec x) = \frac1{2\pi}\ln|\vec x|$. Für $\vec y = (y_1, y_2)$ mit $y_2 > 0$ sei $\vec y^{*} = (y_1, -y_2)$ der Spiegelpunkt. $G(\vec x, \vec y) = \frac1{2\pi}\bigl(\ln|\vec x - \vec y| - \ln|\vec x - \vec y^{*}|\bigr)$: harmonisch in $\vec x$ für $\vec x\neq\vec y$ (der Spiegelpunkt liegt außerhalb der Halbebene), Singularität $\Phi$ bei $\vec y$, und für $x_2 = 0$ gilt $|\vec x - \vec y| = |\vec x - \vec y^{*}|$, also $G = 0$. \checkmark\ Dirichletproblem: $u(\vec y) = -\int_{\partial\Omega}\frac{\partial G}{\partial n}(\vec x, \vec y)g(\vec x)\,dS$ mit äußerer Normale $-\vec e_2$, also $\frac{\partial G}{\partial n} = -\partial_{x_2}G$. $\partial_{x_2}\ln|\vec x - \vec y| = \frac{x_2 - y_2}{|\vec x - \vec y|^{2}}$, bei $x_2 = 0$: $\frac{-y_2}{(x_1 - y_1)^{2} + y_2^{2}}$; für den Spiegelterm $\frac{+y_2}{(\cdot)}$. Differenz: $\partial_{x_2}G|_{x_2 = 0} = \frac1{2\pi}\cdot\frac{-2y_2}{(x_1 - y_1)^{2} + y_2^{2}}$. Also (mit $\vec y\to(x_1, x_2)$ umbenannt)
+\[ u(x_1, x_2) = \frac{x_2}\pi\int_{-\infty}^{\infty}\frac{g(t)}{(x_1 - t)^{2} + x_2^{2}}\,dt. \]
+Der Poissonkern $\frac{x_2}{\pi((x_1 - t)^{2} + x_2^{2})}$ ist die Dichte der Cauchyverteilung mit Lage $x_1$ und Skala $x_2$: $u$ ist eine Faltung mit Cauchykernen, deren Breite mit der Höhe wächst.
+\schritt{(c)}
+Sei $u(\vec x) = \mathbb E_{\vec x}[g(B_\tau)]$. Starke Markoveigenschaft: Starte in $\vec x$, warte bis zum ersten Austritt $\sigma$ aus der Kreisscheibe $B_r(\vec x)\subset\Omega$; der Austrittspunkt $B_\sigma$ ist wegen der Rotationssymmetrie der Brownschen Bewegung gleichverteilt auf dem Kreis $\partial B_r(\vec x)$. Danach startet die Bewegung neu in $B_\sigma$, und der Erwartungswert von $g(B_\tau)$ von dort ist $u(B_\sigma)$. Also $u(\vec x) = \mathbb E[u(B_\sigma)] = \frac1{2\pi}\int_0^{2\pi}u(\vec x + re^{i\varphi})\,d\varphi$: Mittelwerteigenschaft für jeden Kreis in $\Omega$ --- und eine stetige Funktion mit der Mittelwerteigenschaft ist harmonisch (Aufgabe 9.30). Randwerte: Startet man nahe am Rand, trifft die Bewegung ihn mit hoher Wahrscheinlichkeit sofort in der Nähe, also $u\to g$. Die zugrunde liegende Eigenschaft: Harmonische Funktionen sind genau die mit der Mittelwerteigenschaft, und die Brownsche Bewegung ist der Prozess, dessen Erzeuger $\frac12\Delta$ ist. Für die Halbebene heißt das: $\frac{x_2}{\pi((x_1 - t)^{2} + x_2^{2})}\,dt$ ist die Wahrscheinlichkeit, dass die Brownsche Bewegung ab $(x_1, x_2)$ die Achse in $[t, t + dt]$ trifft --- die Cauchyverteilung als Austrittsverteilung.
+\probe{(b) $g\equiv1$: $\frac{x_2}\pi\int\frac{dt}{(x_1 - t)^{2} + x_2^{2}} = \frac{x_2}\pi\cdot\frac\pi{x_2} = 1$. \checkmark\ (a) $g = \sin\frac{\pi x}a$: $u = \sin\frac{\pi x}a\frac{\sinh(\pi y/a)}{\sinh(\pi b/a)}$, $\Delta u = (-\frac{\pi^{2}}{a^{2}} + \frac{\pi^{2}}{a^{2}})u = 0$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Laplacegleichung beschreibt Gleichgewichte --- und ein Gleichgewicht ist ein Mittelwert. Separation, Spiegelung und Brownsche Bewegung sind drei Arten, diesen Mittelwert auszurechnen: als Reihe, als Integral mit Kern, als Erwartungswert. Die letzte ist auch ein Algorithmus (Monte Carlo für Randwertprobleme) und die Brücke zwischen Analysis und Stochastik.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.30
+\stupserzwei{tief}{(c) Ist $u(\vec a) = M$ ein inneres Maximum, so ist $u\le M$ auf jedem Kreis um $\vec a$, und der Mittelwert ist $M$ --- also $u\equiv M$ auf dem Kreis. Die Menge $\{u = M\}$ ist offen und abgeschlossen: das ganze Gebiet.}{22pt}
+\begin{loesungkarte}{tief}{9.30}{Mittelwert und Maximum}
+\derweg{$\Delta u$ ausrechnen; Mittelwert mit Polarkoordinaten; Maximumprinzip aus dem Mittelwert; Eindeutigkeit aus dem Maximumprinzip.}
+\schritt{(a)}
+$\Delta(x^{2} - y^{2}) = 2 - 2 = 0$ \checkmark. $\Delta(xy) = 0$ \checkmark. $\Delta(x^{2} + y^{2}) = 4$: nicht harmonisch. $\Delta(e^{x}\cos y) = e^{x}\cos y - e^{x}\cos y = 0$ \checkmark. $\ln(x^{2} + y^{2}) = 2\ln r$: $\Delta = \frac{d^{2}}{dr^{2}}(2\ln r) + \frac1r\frac d{dr}(2\ln r) = -\frac2{r^{2}} + \frac2{r^{2}} = 0$ auf $\mathbb R^{2}\setminus\{0\}$ \checkmark --- die Fundamentallösung, singulär im Ursprung. $x^{3} - 3xy^{2}$: $\Delta = 6x - 6x = 0$ \checkmark (Realteil von $z^{3}$; überhaupt sind Real- und Imaginärteil jeder holomorphen Funktion harmonisch: $x^{2} - y^{2}$, $xy$, $e^{x}\cos y$ sind $\operatorname{Re}z^{2}$, $\frac12\operatorname{Im}z^{2}$, $\operatorname{Re}e^{z}$).
+\schritt{(b)}
+Kreis $(a + r\cos\varphi, b + r\sin\varphi)$: $u = (a + r\cos\varphi)^{2} - (b + r\sin\varphi)^{2} = a^{2} - b^{2} + 2r(a\cos\varphi - b\sin\varphi) + r^{2}(\cos^{2}\varphi - \sin^{2}\varphi)$. Mittel über $\varphi$: Die linearen Terme haben Mittel $0$, und $\cos^{2} - \sin^{2} = \cos2\varphi$ ebenfalls. Also $\frac1{2\pi}\int u\,d\varphi = a^{2} - b^{2} = u(a, b)$. \checkmark\ Für $x^{2} + y^{2}$: Mittel $= a^{2} + b^{2} + r^{2}\cdot\frac1{2\pi}\int(\cos^{2} + \sin^{2}) = a^{2} + b^{2} + r^{2} > u(a, b)$ --- subharmonisch ($\Delta u > 0$: Der Mittelwert übersteigt den Funktionswert).
+\schritt{(c)}
+Sei $\Omega$ zusammenhängend, $u$ stetig mit Mittelwerteigenschaft, $M = \max_\Omega u$ in einem inneren Punkt $\vec a$ angenommen. Für jeden Kreis $\partial B_r(\vec a)\subset\Omega$: $M = u(\vec a) = \frac1{2\pi}\int u\le M$, Gleichheit nur, wenn $u\equiv M$ auf dem Kreis (stetige Funktion $\le M$ mit Mittel $M$). Also $u\equiv M$ auf einer ganzen Kreisscheibe um $\vec a$: Die Menge $\{u = M\}$ ist offen. Sie ist auch abgeschlossen (Stetigkeit) und nichtleer. $\Omega$ zusammenhängend: $\{u = M\} = \Omega$, $u$ konstant. $\blacksquare$ Folge (schwaches Maximumprinzip): Auf einem beschränkten Gebiet nimmt eine nichtkonstante harmonische Funktion Maximum und Minimum nur auf dem Rand an.
+\schritt{(d)}
+Seien $u_1, u_2$ harmonisch in $\Omega$ (beschränkt), stetig bis zum Rand, mit $u_i = g_i$ auf $\partial\Omega$. $w = u_1 - u_2$ ist harmonisch mit Randwerten $g_1 - g_2$. Maximumprinzip: $\max_{\overline\Omega}w = \max_{\partial\Omega}(g_1 - g_2)$, $\min_{\overline\Omega}w = \min_{\partial\Omega}(g_1 - g_2)$. Also $\max|u_1 - u_2|\le\max_{\partial\Omega}|g_1 - g_2|$. Mit $g_1 = g_2$: $w\equiv0$, Eindeutigkeit. Stabilität: Ein Fehler $\varepsilon$ in den Randdaten erzeugt höchstens den Fehler $\varepsilon$ im Innern --- das Dirichletproblem ist gut gestellt.
+\probe{(b) numerisch: $u = x^{2} - y^{2}$ bei $(1, 0)$, Kreis $r = 1$: Punkte $(2, 0), (1, 1), (0, 0), (1, -1)$ geben $4, 0, 0, 0$, Mittel $1 = u(1, 0)$ --- schon mit vier Punkten exakt, weil die Abweichung $\cos2\varphi$ über vier äquidistante Punkte verschwindet. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Kette Mittelwert $\Rightarrow$ Maximumprinzip $\Rightarrow$ Eindeutigkeit $\Rightarrow$ Stabilität ist das Grundmuster der elliptischen Theorie; sie funktioniert ohne Formel für die Lösung. Die Mittelwerteigenschaft erklärt auch die Glattheit (harmonisch $\Rightarrow$ analytisch), den Satz von Liouville (beschränkt und harmonisch auf $\mathbb R^{2}$ $\Rightarrow$ konstant) und die Verbindung zur Brownschen Bewegung (Aufgabe 9.29c).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.31
+\stupserzwei{gruen}{(a) Für Testfunktionen $\varphi$: $\int_{-1}^{1}H\varphi' = \int_0^{1}\varphi' = -\varphi(0)$. Eine Funktion $g\in L^{1}$ mit $\int g\varphi = \varphi(0)$ für alle $\varphi$ gibt es nicht --- die Ableitung ist das Dirac-Maß, keine Funktion.}{22pt}
+\begin{loesungkarte}{gruen}{9.31}{Schwache Ableitung, finite Elemente, steifes Problem}
+\derweg{(a) Definition der schwachen Ableitung mit Testfunktionen. (b) Schwache Form, Hutfunktionen, Integrale der Ableitungen. (c) Verstärkungsfaktor pro Schritt.}
+\schritt{(a)}
+Schwache Ableitung $g$ von $H$: $\int_{-1}^{1}g\varphi\,dx = -\int_{-1}^{1}H\varphi'\,dx$ für alle $\varphi\in C_c^{\infty}(-1, 1)$. Rechts: $-\int_0^{1}\varphi' = -(\varphi(1) - \varphi(0)) = \varphi(0)$. Gäbe es $g\in L^{1}_{\text{loc}}$ mit $\int g\varphi = \varphi(0)$ für alle $\varphi$, so für $\varphi$ mit Träger in $(0, 1)$: $\int g\varphi = 0$, also $g = 0$ fast überall auf $(0, 1)$; ebenso auf $(-1, 0)$; also $g = 0$ f.\,ü., aber dann $\int g\varphi = 0\neq\varphi(0)$. Widerspruch. $H$ hat keine schwache Ableitung im Funktionensinn (als Distribution: $H' = \delta$). $H\in L^{p}$ für alle $p$, aber $H\notin W^{1,p}(-1, 1)$ für jedes $p$. --- $|x|$: Für $\varphi$ beliebig: $-\int|x|\varphi' = -\bigl[\int_0^{1}x\varphi' - \int_{-1}^{0}x\varphi'\bigr] = \int_0^{1}\varphi - \int_{-1}^{0}\varphi = \int\operatorname{sgn}(x)\varphi$ (Randterme verschwinden). Schwache Ableitung $\operatorname{sgn}x\in L^{\infty}$: $|x|\in W^{1,p}$ für alle $p\le\infty$. Ein Knick ist erlaubt, ein Sprung nicht --- in einer Dimension sind $W^{1,p}$-Funktionen stetig.
+\schritt{(b)}
+Schwache Form: Multiplizieren mit $v$, $v(0) = v(1) = 0$, partiell integrieren: $\int_0^{1}u'v'\,dx = \int_0^{1}fv\,dx$ für alle $v\in H_0^{1}$. Gitter $x_i = ih$, $h = \frac1N$, Hutfunktionen $\varphi_i$ (Wert $1$ in $x_i$, $0$ in den Nachbarknoten, dazwischen linear), $i = 1, \dots, N - 1$. Ansatz $u_h = \sum c_j\varphi_j$, $v = \varphi_i$: $\sum_jA_{ij}c_j = b_i$ mit $A_{ij} = \int\varphi_i'\varphi_j'$, $b_i = \int f\varphi_i$. $\varphi_i' = \frac1h$ auf $[x_{i-1}, x_i]$, $-\frac1h$ auf $[x_i, x_{i+1}]$. $A_{ii} = \int_{x_{i-1}}^{x_{i+1}}\frac1{h^{2}} = \frac2h$. $A_{i,i+1} = \int_{x_i}^{x_{i+1}}\bigl(-\frac1h\bigr)\frac1h = -\frac1h$. Sonst $0$ (disjunkte Träger). $A = \frac1h\operatorname{tridiag}(-1, 2, -1)$. Mit $b_i\approx hf(x_i)$ (Mittelpunktsregel) lautet die $i$-te Gleichung $\frac{-c_{i-1} + 2c_i - c_{i+1}}h = hf(x_i)$, also $\frac{-c_{i-1} + 2c_i - c_{i+1}}{h^{2}} = f(x_i)$ --- die finite Differenz für $-u''$. In einer Dimension dasselbe System; der Unterschied kommt in mehreren Dimensionen (beliebige Dreiecksgitter, krumme Ränder, lokale Verfeinerung) und in der Theorie (Céa: $\|u - u_h\|_{H^{1}}\le C\inf_{v_h}\|u - v_h\|_{H^{1}} = O(h)$).
+\schritt{(c)}
+Explizit: $y_{n+1} = (1 - 50h)y_n$, $y_n = (1 - 50h)^{n}$. Implizit: $y_{n+1} = y_n - 50hy_{n+1}$, $y_n = (1 + 50h)^{-n}$. Exakt bei $t = 1$: $e^{-50} = 1{,}9\cdot10^{-22}$.
+\begin{center}\small
+\begin{tabular}{c|c|c|c}
+$h$ & Faktor explizit & explizit, $t = 1$ & implizit, $t = 1$\\ \hline
+$0{,}05$ & $-1{,}5$ & $(-1{,}5)^{20} = 3325$ & $3{,}5^{-20} = 1{,}3\cdot10^{-11}$\\
+$0{,}025$ & $-0{,}25$ & $(-0{,}25)^{40} = 8\cdot10^{-25}$ & $2{,}25^{-40} = 8\cdot10^{-15}$\\
+$0{,}01$ & $0{,}5$ & $0{,}5^{100} = 8\cdot10^{-31}$ & $1{,}5^{-100} = 2\cdot10^{-18}$
+\end{tabular}
+\end{center}
+Explizit stabil genau für $|1 - 50h| < 1$, also $h < 0{,}04$: Bei $h = 0{,}05$ oszilliert die Näherung mit wachsender Amplitude --- qualitativ falsch, obwohl die Lösung glatt und langweilig ist. Implizit ist der Faktor $\frac1{1 + 50h}\in(0, 1)$ für jedes $h$: unbedingt stabil, monoton fallend wie die exakte Lösung. Genauigkeit: beide Ordnung $1$; die absoluten Zahlen bei $t = 1$ sind alle \enquote{praktisch null}, aber der explizite Wert bei $h = 0{,}05$ ist um $25$ Größenordnungen falsch.
+\probe{(c) Stabilitätsgrenze allgemein: explizites Euler für $\dot y = \lambda y$ braucht $|1 + h\lambda| < 1$, hier $h < \frac2{50}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Steif heißt: Die Lösung ist glatt, aber die Gleichung enthält schnelle Zeitskalen ($\frac1{50}$), die die Schrittweite expliziter Verfahren diktieren --- nicht die Genauigkeit, sondern die Stabilität. Implizite Verfahren kosten pro Schritt ein Gleichungssystem und sparen dafür Tausende Schritte. Bei Systemen (chemische Kinetik, Schaltkreise, Diskretisierungen von $u_t = ku_{xx}$ mit $\lambda\sim-\frac k{h_x^{2}}$) ist das der Normalfall.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 9.32
+\stupserzwei{tief}{(c) Zehn Schritte: Euler $1{,}1^{10} = 2{,}5937$ (Fehler $4{,}6\,\%$); Heun $1{,}105^{10} = 2{,}7141$ ($0{,}15\,\%$); RK4 $1{,}1051708^{10} = 2{,}71828$ ($8\cdot10^{-7}$ relativ).}{22pt}
+\begin{loesungkarte}{tief}{9.32}{Ein Schritt von Hand}
+\derweg{Für $y' = y$ ist jeder Schritt eine Multiplikation mit einem Faktor; den Faktor mit $e^{h}$ vergleichen.}
+\schritt{(a)}
+Euler: $y_1 = y_0 + hy_0 = 1{,}1$. Heun: $k_1 = 1$, $k_2 = 1 + 0{,}1 = 1{,}1$, $y_1 = 1 + 0{,}05(1 + 1{,}1) = 1{,}105$. RK4: $k_1 = 1$, $k_2 = 1 + 0{,}05\cdot1 = 1{,}05$, $k_3 = 1 + 0{,}05\cdot1{,}05 = 1{,}0525$, $k_4 = 1 + 0{,}1\cdot1{,}0525 = 1{,}10525$; $y_1 = 1 + \frac{0{,}1}6(1 + 2{,}1 + 2{,}105 + 1{,}10525) = 1 + \frac{0{,}1}6\cdot6{,}31025 = 1{,}1051708$.
+\schritt{(b)}
+$e^{h} = 1 + h + \frac{h^{2}}2 + \frac{h^{3}}6 + \frac{h^{4}}{24} + \frac{h^{5}}{120} + \dots = 1{,}10517092$. Euler: $1 + h$ --- richtig bis $h^{1}$, Fehler $\frac{h^{2}}2 = 0{,}005$. Heun: $1 + h + \frac{h^{2}}2$ --- richtig bis $h^{2}$, Fehler $\frac{h^{3}}6 = 1{,}7\cdot10^{-4}$. RK4: Faktor $1 + h + \frac{h^{2}}2 + \frac{h^{3}}6 + \frac{h^{4}}{24}$ (nachrechnen: $\frac h6(k_1 + 2k_2 + 2k_3 + k_4)$ mit $k_2 = 1 + \frac h2$, $k_3 = 1 + \frac h2 + \frac{h^{2}}4$, $k_4 = 1 + h + \frac{h^{2}}2 + \frac{h^{3}}4$ gibt genau die Taylorglieder bis $h^{4}$) --- richtig bis $h^{4}$, Fehler $\frac{h^{5}}{120} = 8\cdot10^{-8}$. Lokaler Fehler $O(h^{p+1})$ heißt globaler Fehler $O(h^{p})$ (nach $\frac1h$ Schritten): Ordnung $1$, $2$, $4$.
+\schritt{(c)}
+Nach zehn Schritten (Stupser): Euler $2{,}5937$, Heun $2{,}7141$, RK4 $2{,}718280$; exakt $2{,}718282$. Halbiert man $h$, sinkt der Fehler bei Euler auf die Hälfte, bei Heun auf ein Viertel, bei RK4 auf ein Sechzehntel.
+\schritt{(d)}
+Auswertungen pro Schritt: Euler $1$, Heun $2$, RK4 $4$. Bei gleichem Aufwand (sagen wir $40$ Auswertungen auf $[0, 1]$): Euler $h = 0{,}025$, Fehler $\approx\frac{e}2\cdot h\approx0{,}034$; Heun $h = 0{,}05$, Fehler $\approx\frac e6h^{2}\approx0{,}001$; RK4 $h = 0{,}1$, Fehler $2\cdot10^{-6}$. Für glatte Probleme gewinnt die höhere Ordnung immer; RK4 ist deshalb das Standardverfahren --- bis Steifheit (Aufgabe 9.31c) implizite Verfahren verlangt oder sehr hohe Genauigkeit noch höhere Ordnungen (Dormand--Prince, Extrapolation) lohnt.
+\probe{(a) RK4-Faktor exakt: $1 + 0{,}1 + 0{,}005 + 0{,}000\,166\,67 + 0{,}000\,004\,17 = 1{,}105\,170\,83$. \checkmark}
+\begin{mitnehmen}\kastentext
+Ein Runge-Kutta-Verfahren ist ein Rezept, Steigungen so zu mischen, dass die Taylorentwicklung bis zur Ordnung $p$ stimmt. Für $y' = y$ sieht man es direkt; für allgemeine $f$ gelten dieselben Ordnungen. Die Stufenzahl wächst schneller als die Ordnung (Ordnung $5$ braucht $6$ Stufen), weshalb RK4 der Sweet Spot ist --- und weshalb man für Ordnung $8$ auf andere Ideen ausweicht.
+\end{mitnehmen}
+\end{loesungkarte}

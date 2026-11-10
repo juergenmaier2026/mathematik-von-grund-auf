@@ -1,0 +1,115 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{mathpazo}
+\usepackage[scaled=0.90]{helvet}
+\usepackage[a4paper,twoside,inner=22mm,outer=70mm,top=24mm,bottom=26mm,marginparwidth=46mm,marginparsep=8mm,headheight=14pt]{geometry}
+\usepackage{colortbl,xcolor,tikz,tcolorbox,booktabs,array,enumitem,marginnote,eso-pic,fancyhdr,titlesec,amsmath,amssymb,emptypage}
+\usepackage{needspace,multicol}
+\usepackage[autostyle=false]{csquotes}\setquotestyle{german}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\definecolor{tief}{HTML}{1F3A5F}
+\definecolor{mittel}{HTML}{2E5F8A}
+\definecolor{akzent}{HTML}{A34A28}
+\definecolor{sand}{HTML}{F4F1EA}
+\definecolor{grau}{HTML}{5A5A5A}
+\definecolor{gruen}{HTML}{2F6B4F}
+\definecolor{purpur}{HTML}{5B3A72}
+\definecolor{hell}{HTML}{FBFAF6}
+\definecolor{linie}{HTML}{D8D2C4}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\renewcommand{\arraystretch}{1.3}
+\raggedbottom
+\tolerance=1800 \emergencystretch=1.6em \hyphenpenalty=30
+\hyphenation{Er-gän-zungs-sät-zen Er-gän-zungs-satz Re-zi-pro-zi-tät Re-zi-pro-zi-täts-ge-setz Prim-zahl-ver-tei-lung arith-me-ti-sche dio-phan-ti-sche Kryp-to-gra-phie Qua-drat-zahl Le-gen-dre-Sym-bol Ja-co-bi-Sym-bol Pri-mi-tiv-wur-zel Pri-mi-tiv-wur-zeln Teil-bar-keit Teil-bar-keits-re-gel Kon-gru-enz Kon-gru-en-zen Rest-klas-sen Schwie-rig-keit Schwie-rig-kei-ten Wahr-schein-lich-keit Wahr-schein-lich-kei-ten Zahlen-theo-rie Auf-ga-ben-samm-lung Um-kehr-funk-ti-on De-fi-ni-ti-ons-be-reich Wer-te-be-reich Halb-werts-zeit Stol-per-stein Zwi-schen-er-geb-nis Zwi-schen-er-geb-nis-se Durch-schnitts-ge-schwin-dig-keit Ge-schwin-dig-keit Un-glei-chung Un-glei-chun-gen Glei-chungs-sys-tem Prim-fak-tor-zer-le-gung Prim-fak-to-ren}
+\renewcommand{\contentsname}{Inhalt}\renewcommand{\chaptername}{}
+
+% --- Kopf- und Fußzeile
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[LE]{\small\color{grau}\sffamily\thepage\quad\itshape\leftmark}
+\fancyhead[RO]{\small\color{grau}\sffamily\itshape\rightmark\quad\upshape\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+
+% --- Daumenregister: farbiger Reiter am Außenrand, Höhe je Gebiet
+\newcounter{gebiet}
+\newcommand{\gebietname}{}
+\newcommand{\gebietfarbe}{tief}
+\newcommand{\setgebiet}[3]{\setcounter{gebiet}{#1}\renewcommand{\gebietname}{#2}\renewcommand{\gebietfarbe}{#3}}
+\AddToShipoutPictureBG{%
+  \ifnum\value{gebiet}>0
+  \begin{tikzpicture}[remember picture,overlay]
+    \pgfmathsetmacro{\yy}{-40 - (\value{gebiet}-1)*28}
+    \ifodd\value{page}
+      \coordinate (t) at ([yshift=\yy mm]current page.north east);
+      \fill[\gebietfarbe] ($(t)+(-9mm,0)$) rectangle ($(t)+(0,-26mm)$);
+      \node[rotate=-90,text=white,font=\sffamily\scriptsize\bfseries] at ($(t)+(-4.5mm,-13mm)$) {\gebietname};
+    \else
+      \coordinate (t) at ([yshift=\yy mm]current page.north west);
+      \fill[\gebietfarbe] (t) rectangle ($(t)+(9mm,-26mm)$);
+      \node[rotate=90,text=white,font=\sffamily\scriptsize\bfseries] at ($(t)+(4.5mm,-13mm)$) {\gebietname};
+    \fi
+  \end{tikzpicture}\fi}
+
+% --- Typen und Marker
+\newcommand{\typtypisch}{\textcolor{tief}{\sffamily\scriptsize\bfseries TYPISCH}}
+\newcommand{\typstolper}{\textcolor{akzent}{\sffamily\scriptsize\bfseries STOLPERSTEIN}}
+\newcommand{\typwerk}{\textcolor{gruen}{\sffamily\scriptsize\bfseries AUS DEM WERK}}
+\newcommand{\grad}[1]{\ifcase#1\or$\bullet\circ\circ$\or$\bullet\bullet\circ$\or$\bullet\bullet\bullet$\fi}
+\newcommand{\meta}[3]{{\sffamily\scriptsize\color{grau}\grad{#1}\ \ $\cdot$\ \ #2\ \ $\cdot$\ \ #3}}
+
+% --- Die Aufgabenkarte
+\newcommand{\aktuellenummer}{}
+\newtcolorbox{karte}[4]{% #1 Farbe, #2 Nummer, #3 Typ-Makro, #4 Meta
+  code={\gdef\aktuellenummer{#2}},
+  enhanced, breakable, colback=hell, colframe=hell, boxrule=0pt,
+  borderline west={2.5pt}{0pt}{#1}, sharp corners,
+  left=11pt, right=9pt, top=8pt, bottom=9pt, before skip=14pt, after skip=14pt,
+  shrink break goal=24pt,
+  overlay unbroken and first={\node[anchor=north west,font=\sffamily\small\bfseries,text=#1] at ([xshift=11pt,yshift=-5pt]frame.north west) {Aufgabe #2\quad#3};
+    \node[anchor=north east] at ([xshift=-9pt,yshift=-5pt]frame.north east) {#4};}}
+\newcommand{\kartentitel}[1]{\vspace{12pt}{\large\bfseries\color{tief}#1}\par\vspace{3pt}}
+\newcommand{\worum}[1]{{\itshape\color{grau}#1}\par\vspace{4pt}}
+\newcommand{\stupser}[3]{\needspace{9\baselineskip}\marginnote{\begin{tikzpicture}[baseline]\node[draw=#1,circle,inner sep=1.2pt,font=\sffamily\tiny\bfseries,text=#1] {?};\end{tikzpicture}\ {\sffamily\scriptsize\bfseries\color{#1}Stupser}\par\vspace{1pt}{\small\itshape\color{grau}#2}}[#3]}
+
+% --- Lösungen
+\newtcolorbox{loesungkarte}[3]{% #1 Farbe, #2 Nummer, #3 Titel
+  code={\write\methfile{L|#2|\thepage}},
+  enhanced, breakable, colback=white, colframe=white, boxrule=0pt,
+  borderline west={2.5pt}{0pt}{#1}, sharp corners,
+  left=11pt, right=0pt, top=8pt, bottom=6pt, before skip=14pt, after skip=10pt, shrink break goal=24pt,
+  overlay unbroken and first={\node[anchor=north west,font=\sffamily\small\bfseries,text=#1] at ([xshift=11pt,yshift=-5pt]frame.north west) {Lösung #2};
+    \node[anchor=north east,font=\itshape,text=grau] at ([yshift=-5pt]frame.north east) {#3};}}
+\newcommand{\derweg}[1]{\vspace{12pt}{\bfseries\color{tief}Der Weg in einem Satz.}\ #1\par\vspace{4pt}}
+\newcommand{\schritt}[1]{\par\vspace{5pt}{\sffamily\small\bfseries\color{grau}#1}\par\nopagebreak\vspace{1pt}\nopagebreak}
+\newcommand{\probe}[1]{\par\vspace{5pt}{\sffamily\small\bfseries\color{gruen}Probe.}\ #1\par}
+\newtcolorbox{mitnehmen}{enhanced, colback=sand, colframe=sand, boxrule=0pt, sharp corners, left=9pt,right=9pt,top=6pt,bottom=6pt, before skip=8pt, after skip=6pt,
+  overlay={\node[anchor=north west,font=\sffamily\scriptsize\bfseries,text=tief] at ([xshift=9pt,yshift=-3pt]frame.north west) {MITNEHMEN};}}
+\newtcolorbox{fehler}{enhanced, colback=akzent!6, colframe=akzent!6, boxrule=0pt, sharp corners, left=9pt,right=9pt,top=6pt,bottom=6pt, before skip=8pt, after skip=6pt,
+  overlay={\node[anchor=north west,font=\sffamily\scriptsize\bfseries,text=akzent] at ([xshift=9pt,yshift=-3pt]frame.north west) {DER TYPISCHE FEHLER};}}
+\newcommand{\kastentext}{\vspace{9pt}}
+
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries\color{tief}}{\sffamily\normalsize\color{grau}\MakeUppercase{\gebietname}}{6pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{0pt}{24pt}
+\titleformat{\section}{\normalfont\large\bfseries\color{tief}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{16pt}{6pt}
+
+
+% --- zweiter Stupser (deutlicher), am Anfang einer Lösung
+\newcommand{\stupserzwei}[3]{\needspace{9\baselineskip}\marginnote{\begin{tikzpicture}[baseline]\node[draw=#1,circle,inner sep=1.2pt,font=\sffamily\tiny\bfseries,text=#1] {?};\end{tikzpicture}\ {\sffamily\scriptsize\bfseries\color{#1}Stupser 2}\par\vspace{1pt}{\small\itshape\color{grau}#2}}[#3]}
+% --- Methodenregister (Sammelliste; wird am Bandende gesetzt)
+\newwrite\methfile
+\makeatletter
+\newcommand{\methoden}[1]{%
+  \@for\mth@item:=#1\do{\protected@write\methfile{}{\mth@item|\aktuellenummer|\thepage}}%
+  \par\vspace{1pt}{\sffamily\scriptsize\color{grau}\textbf{Methoden:}\ \def\mth@sep{}\@for\mth@item:=#1\do{\mth@sep\mth@item\def\mth@sep{\ \ $\cdot$\ \ }}}\par\vspace{4pt}}
+\makeatother
+% --- Registerdarstellung
+\newcommand{\regeintrag}[2]{\par\noindent\hangindent=1.2em\hangafter=1\raggedright{\bfseries #1}\hspace{0.6em plus 0.4em}\linebreak[0]{\footnotesize #2}\par}
+\newcommand{\regbuchstabe}[1]{\par\vspace{8pt}\noindent{\sffamily\large\bfseries\color{tief}#1}\par\nopagebreak\vspace{3pt}}
+% --- Zwischenergebnis in der Außenspalte
+\newcommand{\rand}[2]{\marginnote{\small\itshape\color{grau}#1}[#2]}
+\newcommand{\randbild}[2]{\marginnote{#1}[#2]}

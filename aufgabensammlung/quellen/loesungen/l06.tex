@@ -1,0 +1,695 @@
+\setgebiet{7}{Geometrie}{mittel}
+\chapter{Lösungen: Geometrie}
+
+%%%%%%%%%% 6.1
+\stupserzwei{tief}{(a) Die Dreiecke $SAP$ und $SBP$ haben $SA = SB$, $AP = BP$ und die gemeinsame Seite $SP$: SSS. Also sind die Winkel bei $S$ gleich.}{22pt}
+\begin{loesungkarte}{tief}{6.1}{Winkelhalbierende und Lot}
+\derweg{Konstruieren, dann zwei Dreiecke finden, die nach einem Kongruenzsatz gleich sind --- die gesuchte Gleichheit ist eine Folge davon.}
+\schritt{(a) Konstruktion}
+Kreis um $S$ mit beliebigem Radius schneidet die Schenkel in $A$ und $B$. Kreise um $A$ und $B$ mit gleichem Radius $> \frac12AB$ schneiden sich in $P$ (im Winkelfeld). Die Gerade $SP$ ist die Winkelhalbierende.
+\schritt{(a) Beweis}
+In den Dreiecken $SAP$ und $SBP$ gilt $SA = SB$ (gleicher Kreis um $S$), $AP = BP$ (gleiche Radien), $SP$ gemeinsam. Nach SSS sind sie kongruent, also $\angle ASP = \angle BSP$. $\blacksquare$
+\schritt{(b) Konstruktion}
+Kreis um $P$, der $g$ in $A$ und $B$ schneidet. Kreise um $A$ und $B$ mit gleichem Radius schneiden sich in $Q$ (auf der anderen Seite von $g$). $PQ$ ist das Lot.
+\schritt{(b) Beweis}
+$PQ$ ist die Mittelsenkrechte von $AB$ (Aufgabe 6.3): $P$ und $Q$ haben beide gleichen Abstand zu $A$ und $B$. Also steht $PQ$ senkrecht auf $AB = g$. $\blacksquare$
+\schritt{(c)}
+Halbieren braucht nur Kreise gleicher Radien --- eine quadratische Operation (Schnitt zweier Kreise). Dritteln des Winkels $60^{\circ}$ hieße $\cos20^{\circ}$ konstruieren, und das ist Nullstelle von $8x^{3} - 6x - 1$, eines irreduziblen kubischen Polynoms. Mit Zirkel und Lineal erreicht man nur Zahlen, deren Grad eine Zweierpotenz ist (Wantzel 1837, Band 11).
+\probe{(a) Probe am rechten Winkel: $A = (1, 0)$, $B = (0, 1)$, $P = (1, 1)$ (Schnitt der Kreise mit Radius $1$); $SP$ ist die Diagonale $y = x$, Winkel $45^{\circ}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Jede Konstruktion ist ein Satz: \enquote{Wenn man so zeichnet, dann gilt \dots} Der Beweis benennt die kongruenten Dreiecke und den Kongruenzsatz. Und fast immer ist es SSS, weil der Zirkel gleiche Längen liefert.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.2
+\stupserzwei{akzent}{$\sin\alpha = \frac{a\sin\beta}b = \frac{5\cdot0{,}5}3 = 0{,}833$: $\alpha = 56{,}4^{\circ}$ oder $123{,}6^{\circ}$. Beide passen, weil $\alpha + \beta < 180^{\circ}$ in beiden Fällen.}{22pt}
+\begin{loesungkarte}{akzent}{6.2}{SSW ist kein Kongruenzsatz}
+\derweg{Konstruieren, mit dem Sinussatz beide Lösungen finden, die Eindeutigkeitsbedingung ablesen.}
+\schritt{(a)}
+Zeichne $a = BC = 5$. Trage in $B$ den Winkel $\beta = 30^{\circ}$ an. Kreis um $C$ mit Radius $b = 3$: Er schneidet den freien Schenkel zweimal, in $A_1$ und $A_2$ --- weil $b = 3$ größer als der Abstand von $C$ zum Schenkel ($5\sin30^{\circ} = 2{,}5$) und kleiner als $a = 5$ ist. Zwei Dreiecke mit denselben Daten.
+\schritt{(b)}
+Sinussatz: $\frac{\sin\alpha}a = \frac{\sin\beta}b$, $\sin\alpha = \frac{5\cdot0{,}5}3 = 0{,}8333$. $\alpha_1 = 56{,}4^{\circ}$, $\alpha_2 = 180^{\circ} - 56{,}4^{\circ} = 123{,}6^{\circ}$. Dann $\gamma_1 = 93{,}6^{\circ}$, $c_1 = \frac{b\sin\gamma_1}{\sin\beta} = 5{,}99$; $\gamma_2 = 26{,}4^{\circ}$, $c_2 = 2{,}67$.
+\schritt{(c)}
+SsW: Der gegebene Winkel liegt der \emph{größeren} Seite gegenüber. Dann ist $\alpha$ gegenüber der kleineren Seite spitz (der größere Winkel liegt der größeren Seite gegenüber), und die zweite Lösung $180^{\circ} - \alpha$ fällt weg. Hier läge $\beta$ gegenüber $b = 3 < a = 5$: nicht erfüllt. Mit $b = 6 > a$ wäre der Kreis groß genug, nur einmal zu schneiden.
+\schritt{(d)}
+\enquote{Also sind sie kongruent} --- der Schluss von SSW auf Kongruenz ist falsch; (a) ist das Gegenbeispiel. Richtig wäre er, wenn zusätzlich $b\ge a$ bekannt wäre.
+\begin{fehler}\kastentext
+Vier Kongruenzsätze: SSS, SWS, WSW (und WWS), SsW. Nicht SSW, nicht WWW (das ist Ähnlichkeit). Der Sinussatz liefert aus $\sin\alpha$ immer zwei Winkel; welcher gilt, entscheidet die Geometrie --- und manchmal beide.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Bei jeder Dreiecksberechnung mit Sinussatz: Prüfen, ob $180^{\circ} - \alpha$ auch passt. Der Kosinussatz hat dieses Problem nicht --- $\cos$ ist auf $[0^{\circ}, 180^{\circ}]$ injektiv, deshalb liefert SWS über den Kosinussatz immer eindeutig.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.3
+\stupserzwei{gruen}{$APB$ und $AQB$ sind kongruent (SSS), also $\angle PAB = \angle QAB$. Damit sind $APM$ und $AQM$ kongruent (SWS), also $\angle AMP = \angle AMQ$ --- Nebenwinkel, die gleich sind, sind rechte.}{22pt}
+\begin{loesungkarte}{gruen}{6.3}{Die Mittelsenkrechte}
+\derweg{Zweimal Kongruenz: erst zeigen, dass $PQ$ die Strecke $AB$ halbiert, dann dass die Winkel bei $M$ rechte sind.}
+\schritt{Konstruktion}
+Kreise um $A$ und $B$ mit gleichem Radius $r > \frac12AB$ schneiden sich in $P$ und $Q$. Gerade $PQ$, Schnitt mit $AB$ in $M$.
+\schritt{$PQ$ halbiert $AB$}
+Dreiecke $APQ$ und $BPQ$: $AP = BP = r$, $AQ = BQ = r$, $PQ$ gemeinsam: SSS, kongruent. Also $\angle APQ = \angle BPQ$. Nun $APM$ und $BPM$: $AP = BP$, $PM$ gemeinsam, eingeschlossene Winkel gleich: SWS, kongruent. Also $AM = BM$. $M$ ist der Mittelpunkt.
+\schritt{$PQ$ steht senkrecht}
+Aus derselben Kongruenz: $\angle AMP = \angle BMP$. Die beiden sind Nebenwinkel (sie ergänzen sich zu $180^{\circ}$) und gleich, also je $90^{\circ}$. $\blacksquare$
+\schritt{Umkehrung}
+Jeder Punkt der Mittelsenkrechten hat gleichen Abstand zu $A$ und $B$, und nur diese Punkte: Die Mittelsenkrechte ist der Ort aller Punkte mit $XA = XB$ --- der Grund, warum sich drei Mittelsenkrechten in einem Punkt treffen (Aufgabe 6.5).
+\probe{Koordinaten: $A = (-1, 0)$, $B = (1, 0)$, $r = 2$: Kreise $(x\pm1)^{2} + y^{2} = 4$ schneiden sich bei $x = 0$, $y = \pm\sqrt3$. $PQ$ ist die $y$-Achse. \checkmark}
+\begin{mitnehmen}\kastentext
+Der Beweis braucht $r > \frac12AB$ (sonst schneiden sich die Kreise nicht) und die Tatsache, dass gleiche Nebenwinkel rechte sind. Das sind genau die Stellen, an denen Euklid in den \emph{Elementen} (I.10 und I.11) ebenfalls argumentiert.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.4
+\stupserzwei{tief}{Die Höhe $12$ auf $b = 14$ teilt sie in $5$ und $9$: Die beiden Teildreiecke sind $5$-$12$-$13$ und $9$-$12$-$15$ --- beide pythagoreisch.}{22pt}
+\begin{loesungkarte}{tief}{6.4}{Das 13-14-15-Dreieck}
+\derweg{Heron, dann Höhe aus der Fläche, dann $r = A/s$, $R = abc/4A$, dann Kosinussatz als Probe.}
+\schritt{(a)}
+$s = \frac{13 + 14 + 15}2 = 21$. $A = \sqrt{21\cdot8\cdot7\cdot6} = \sqrt{7056} = 84$.
+\schritt{(b)}
+$h_b = \frac{2A}b = \frac{168}{14} = 12$. Der Fußpunkt teilt $b$: $\sqrt{13^{2} - 12^{2}} = 5$ und $\sqrt{15^{2} - 12^{2}} = 9$, $5 + 9 = 14$. \checkmark\ Das Dreieck ist aus einem $5$-$12$-$13$- und einem $9$-$12$-$15$-Dreieck zusammengesetzt --- deshalb die schönen Zahlen.
+\schritt{(c)}
+$r = \frac As = \frac{84}{21} = 4$. $R = \frac{abc}{4A} = \frac{2730}{336} = \frac{65}8 = 8{,}125$.
+\schritt{(d)}
+$\cos\alpha = \frac{b^{2} + c^{2} - a^{2}}{2bc} = \frac{196 + 225 - 169}{420} = \frac{252}{420} = 0{,}6$, $\alpha = 53{,}13^{\circ}$, $\sin\alpha = 0{,}8$. $A = \frac12\cdot14\cdot15\cdot0{,}8 = 84$. \checkmark
+\probe{$\cos\beta = \frac{169 + 225 - 196}{390} = \frac{198}{390} = 0{,}5077$, $\beta = 59{,}5^{\circ}$; $\cos\gamma = \frac{169 + 196 - 225}{364} = \frac{140}{364} = 0{,}3846$, $\gamma = 67{,}4^{\circ}$. Summe $53{,}1 + 59{,}5 + 67{,}4 = 180{,}0$. \checkmark\ Euler: $R\ge2r$: $8{,}125\ge8$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Formeln, die man braucht: Heron $A = \sqrt{s(s - a)(s - b)(s - c)}$, $A = rs$, $A = \frac{abc}{4R}$, $A = \frac12bc\sin\alpha$. Vier Ausdrücke für dieselbe Fläche --- und jeder löst eine andere Aufgabe. Das $13$-$14$-$15$-Dreieck ist das kleinste mit ganzzahligen Seiten, Fläche, Höhe und Inkreisradius ohne rechten Winkel.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.5
+\stupserzwei{gruen}{$U = (3, 1)$, $H = (2, 2)$, $S = (\frac83, \frac43)$. Prüfen: $S - U = (-\frac13, \frac13)$, $H - U = (-1, 1)$ --- parallel, Verhältnis $1 : 3$.}{22pt}
+\begin{loesungkarte}{gruen}{6.5}{Die Eulergerade}
+\derweg{Drei Punkte ausrechnen, dann prüfen, ob die Verbindungsvektoren parallel sind.}
+\schritt{Schwerpunkt}
+$S = \frac{A + B + C}3 = \bigl(\frac83, \frac43\bigr)$.
+\schritt{Umkreismittelpunkt}
+Mittelsenkrechte von $AB$: $x = 3$. Mittelsenkrechte von $AC$: Mittelpunkt $(1, 2)$, Richtung von $AC$ ist $(2, 4)$, also $2(x - 1) + 4(y - 2) = 0$, $x + 2y = 5$. Schnitt: $x = 3$, $y = 1$. $U = (3, 1)$. Probe: $UA = \sqrt{9 + 1} = \sqrt{10}$, $UB = \sqrt{9 + 1}$, $UC = \sqrt{1 + 9}$. \checkmark
+\schritt{Höhenschnittpunkt}
+Höhe von $C$ auf $AB$: $x = 2$. Höhe von $A$ auf $BC$: $BC = (-4, 4)$, also Richtung $(1, 1)$ durch $A$: $y = x$. Schnitt: $H = (2, 2)$. Probe: Höhe von $B$ auf $AC$: Richtung senkrecht zu $(2, 4)$, also $(2, -1)$: $(6, 0) + t(2, -1)$ trifft $(2, 2)$ bei $t = -2$. \checkmark
+\schritt{Eulergerade}
+$H - U = (-1, 1)$, $S - U = \bigl(-\frac13, \frac13\bigr) = \frac13(H - U)$. $S$ liegt auf $UH$ und teilt die Strecke im Verhältnis $US : SH = 1 : 2$. Genau Eulers Satz.
+\probe{Allgemein gilt $H = A + B + C - 2U$ (bei $U$ als Ursprung: $H = A + B + C$): $(8, 4) - (6, 2) = (2, 2)$. \checkmark}
+\begin{mitnehmen}\kastentext
+Mit $U$ als Ursprung ist $H = A + B + C$ und $S = \frac{A + B + C}3 = \frac H3$ --- die Eulergerade ist dann eine Zeile. Die richtige Wahl des Koordinatenursprungs ersetzt oft eine Seite Rechnung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.6
+\stupserzwei{tief}{Tangente in $P$ auf Kreis um $M$: $(P - M)\cdot(X - M) = r^{2}$, hier $3(x - 3) + 4(y + 2) = 25$.}{22pt}
+\begin{loesungkarte}{tief}{6.6}{Eine Kreisgleichung lesen}
+\derweg{Quadratisch ergänzen; Tangente über den Radiusvektor; Schnitt durch Einsetzen; Existenz über das Vorzeichen des Radiusquadrats.}
+\schritt{(a)}
+$(x^{2} - 6x + 9) + (y^{2} + 4y + 4) = 12 + 9 + 4$: $(x - 3)^{2} + (y + 2)^{2} = 25$. $M = (3, -2)$, $r = 5$.
+\schritt{(b)}
+$(6 - 3)^{2} + (2 + 2)^{2} = 9 + 16 = 25$. \checkmark\ Tangente: senkrecht zum Radius $P - M = (3, 4)$ durch $P$: $3(x - 6) + 4(y - 2) = 0$, also $3x + 4y = 26$.
+\schritt{(c)}
+$y = x - 1$ einsetzen: $x^{2} + (x - 1)^{2} - 6x + 4(x - 1) - 12 = 2x^{2} - 4x - 15 = 0$, $x = \frac{4\pm\sqrt{16 + 120}}4 = 1\pm\frac{\sqrt{34}}2$: $x_{1,2} = 3{,}915$ und $-1{,}915$, $y = x - 1$: Schnittpunkte $(3{,}915;\ 2{,}915)$ und $(-1{,}915;\ -2{,}915)$.
+\schritt{(d)}
+$(x - 3)^{2} + (y + 2)^{2} = 13 - c$. Für $c > 13$ ist die rechte Seite negativ: keine Lösung. Für $c = 13$ nur der Punkt $M$, für $c < 13$ ein Kreis mit $r = \sqrt{13 - c}$.
+\probe{(c) Abstand von $M$ zur Geraden $x - y - 1 = 0$: $\frac{|3 + 2 - 1|}{\sqrt2} = 2{,}83 < 5$: zwei Schnittpunkte. \checkmark\ Sehnenlänge $\sqrt2\cdot5{,}83 = 8{,}25$; und $2\sqrt{25 - 8} = 8{,}25$. \checkmark}
+\begin{mitnehmen}\kastentext
+Kreis: $|X - M| = r$. Tangente in $P$: $(P - M)\cdot(X - M) = r^{2}$. Lage einer Geraden: Abstand von $M$ mit $r$ vergleichen. Alles folgt aus dem Skalarprodukt --- und dasselbe gilt für die Kugel im Raum.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.7
+\stupserzwei{gruen}{$PB = \frac{144}8 = 18$; die Tangentenlänge ist $\sqrt{144} = 12$ --- Pythagoras im Dreieck $P$, Mittelpunkt, Berührpunkt: $13^{2} = 5^{2} + 12^{2}$.}{22pt}
+\begin{loesungkarte}{gruen}{6.7}{Die Potenz eines Punktes}
+\derweg{Potenz ausrechnen; Sekantensatz und Tangentensatz sind dieselbe Gleichung.}
+\schritt{Potenz}
+$\operatorname{pot}(P) = d^{2} - r^{2} = 169 - 25 = 144$.
+\schritt{Sekante}
+$PA\cdot PB = \operatorname{pot}(P)$: $8\cdot PB = 144$, $PB = 18$. Die Sehne $AB$ hat Länge $10$ --- ein Durchmesser; die Sekante geht durch den Mittelpunkt (Probe: $PA = 13 - 5 = 8$). \checkmark
+\schritt{Tangente}
+$t^{2} = \operatorname{pot}(P) = 144$, $t = 12$. Pythagoras: Berührpunkt $T$, Dreieck $PTM$ rechtwinklig bei $T$: $PT^{2} = PM^{2} - r^{2} = 169 - 25$. \checkmark
+\probe{Eine andere Sekante, etwa mit $PA' = 9$: $PB' = 16$, Sehne $7$. Das Produkt bleibt $144$, die Sehne variiert. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Potenz ist eine Funktion des Punktes: negativ innen (Sehnensatz, $PA\cdot PB = r^{2} - d^{2}$), null auf dem Kreis, positiv außen (Sekanten-Tangenten-Satz). Der Ort der Punkte gleicher Potenz bezüglich zweier Kreise ist eine Gerade, die Potenzgerade --- der Schlüssel zu vielen Kreiskonstruktionen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.8
+\stupserzwei{gruen}{$PF_1 + PF_2 = 8{,}2 + 1{,}8 = 10 = 2a$. Tangente: $\frac{4x}{25} + \frac{1{,}8y}9 = 1$, also $4x + 5y = 25$.}{22pt}
+\begin{loesungkarte}{gruen}{6.8}{Eine Ellipse vermessen}
+\derweg{$c$ aus $a^{2} - b^{2}$; Abstände zu den Brennpunkten addieren; Tangentenformel.}
+\schritt{(a)}
+$c = \sqrt{25 - 9} = 4$, Brennpunkte $(\pm4, 0)$. $e = \frac ca = 0{,}8$. Leitlinien $x = \pm\frac ae = \pm\frac{a^{2}}c = \pm6{,}25$.
+\schritt{(b)}
+$P$ auf der Ellipse: $\frac{16}{25} + \frac{3{,}24}9 = 0{,}64 + 0{,}36 = 1$. \checkmark\ $PF_1 = \sqrt{(4 + 4)^{2} + 1{,}8^{2}} = \sqrt{67{,}24} = 8{,}2$, $PF_2 = \sqrt{0 + 3{,}24} = 1{,}8$. Summe $10 = 2a$. \checkmark\ Leitlinieneigenschaft: Abstand zu $F_2$ durch Abstand zur Leitlinie $x = 6{,}25$: $\frac{1{,}8}{2{,}25} = 0{,}8 = e$. \checkmark
+\schritt{(c)}
+Tangente in $(x_0, y_0)$: $\frac{x_0x}{a^{2}} + \frac{y_0y}{b^{2}} = 1$: $\frac{4x}{25} + \frac{1{,}8y}9 = 1$, mal $25$: $4x + 5y = 25$. Steigung $-\frac45$.
+\probe{Mit Ableitung: $\frac{2x}{25} + \frac{2yy'}9 = 0$, $y' = -\frac{9x}{25y} = -\frac{36}{45} = -0{,}8$. \checkmark\ Die Tangente halbiert den Außenwinkel zwischen $PF_1$ und $PF_2$ (Reflexionseigenschaft): Richtungen $(-8, -1{,}8)$ und $(0, -1{,}8)$, Tangentenrichtung $(5, -4)$; Winkel zur Tangente: $\cos = \frac{-40 + 7{,}2}{8{,}2\cdot6{,}4} = -0{,}625$ und $\frac{7{,}2}{1{,}8\cdot6{,}4} = 0{,}625$ --- gleich groß. \checkmark}
+\begin{mitnehmen}\kastentext
+Drei Definitionen, eine Kurve: Summe der Brennpunktabstände $2a$ (Gärtner), Abstandsverhältnis $e < 1$ zur Leitlinie (Kegelschnitt), Gleichung $\frac{x^{2}}{a^{2}} + \frac{y^{2}}{b^{2}} = 1$ (analytisch). Dieselben drei gibt es für Parabel ($e = 1$) und Hyperbel ($e > 1$).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.9
+\stupserzwei{tief}{$u\times v = (1, 1, 0)\times(0, 1, 2) = (2, -2, 1)$, $|u\times v| = 3$. Verbindungsvektor $(-1, 0, 1)$: Abstand $\frac{|-2 + 0 + 1|}3 = \frac13$.}{22pt}
+\begin{loesungkarte}{tief}{6.9}{Windschief}
+\derweg{Nicht parallel, Gleichsetzen führt zum Widerspruch; Abstand über das Kreuzprodukt; Lotpunkte über zwei Orthogonalitätsbedingungen.}
+\schritt{(a)}
+Richtungen $(1, 1, 0)$ und $(0, 1, 2)$ sind keine Vielfachen: nicht parallel. Gleichsetzen: $1 + s = 0$, $s = t$, $0 = 1 + 2t$ --- aus den ersten beiden $s = t = -1$, dann $0 = -1$. Kein Schnittpunkt. Windschief.
+\schritt{(b)}
+$n = u\times v = (2, -2, 1)$, $|n| = 3$. $d = \frac{|(Q - P)\cdot n|}{|n|} = \frac{|(-1, 0, 1)\cdot(2, -2, 1)|}3 = \frac13$.
+\schritt{(c)}
+$P(s) = (1 + s, s, 0)$, $Q(t) = (0, t, 1 + 2t)$, $Q - P = (-1 - s, t - s, 1 + 2t)$. Senkrecht zu $u$: $-1 - s + t - s = 0$. Senkrecht zu $v$: $t - s + 2 + 4t = 0$. Aus der ersten $t = 1 + 2s$, in die zweite: $5(1 + 2s) - s + 2 = 0$, $s = -\frac79$, $t = -\frac59$. Lotpunkte $P = \bigl(\frac29, -\frac79, 0\bigr)$, $Q = \bigl(0, -\frac59, -\frac19\bigr)$; $Q - P = \bigl(-\frac29, \frac29, -\frac19\bigr)$, Länge $\frac13$. \checkmark
+\schritt{(d)}
+Ebene durch $(1, 0, 0)$ mit Normale $n$: $2x - 2y + z = 2$. Sie enthält $g$ (Richtung $u\perp n$) und ist parallel zu $h$ ($v\perp n$); $h$ liegt im Abstand $\frac13$ darüber.
+\probe{$Q - P$ ist parallel zu $n$: $\bigl(-\frac29, \frac29, -\frac19\bigr) = -\frac19(2, -2, 1)$. \checkmark}
+\begin{mitnehmen}\kastentext
+Zwei Geraden im Raum: Richtungen vergleichen (parallel?), Gleichsetzen (Schnitt?), sonst windschief. Der Abstand ist die Projektion des Verbindungsvektors auf die gemeinsame Normale $u\times v$ --- dieselbe Formel wie der Abstand Punkt--Ebene, denn $h$ liegt in einer zu $g$ parallelen Ebene.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.10
+\stupserzwei{akzent}{(a) $54{,}7^{\circ}$ ist der Winkel zur \emph{Normalen}. Der Winkel zur Ebene ist $90^{\circ} - 54{,}7^{\circ} = 35{,}3^{\circ}$, und $\sin35{,}3^{\circ} = \frac1{\sqrt3}$.}{22pt}
+\begin{loesungkarte}{akzent}{6.10}{Sinus oder Kosinus?}
+\derweg{Jede Formel auf die Frage zurückführen: Winkel zwischen welchen zwei Vektoren? Richtung und Normale sind verschiedene Dinge.}
+\schritt{(a)}
+Das Skalarprodukt mit der Normalen gibt den Winkel zwischen Gerade und \emph{Normale}: $54{,}7^{\circ}$. Der Winkel zwischen Gerade und Ebene ist das Komplement: $35{,}3^{\circ}$. Formel: $\sin\varphi = \frac{|d\cdot n|}{|d||n|}$ --- Sinus, weil $\varphi = 90^{\circ} - \angle(d, n)$.
+\schritt{(b)}
+Winkel zwischen Ebenen $=$ Winkel zwischen Normalen: $\cos\varphi = \frac{|n_1\cdot n_2|}{|n_1||n_2|} = \frac{|(1, 1, 0)\cdot(0, 0, 1)|}{\sqrt2} = 0$, $\varphi = 90^{\circ}$. Zwei Ebenen bilden zwei Winkel ($\varphi$ und $180^{\circ} - \varphi$); gemeint ist der spitze --- daher der Betrag.
+\schritt{(c)}
+$\cos\varphi = \frac{(1, 0, 0)\cdot(1, 1, 0)}{1\cdot\sqrt2} = \frac1{\sqrt2}$, $\varphi = 45^{\circ}$. Mit $h'$: $\frac{-1}{\sqrt2}$, $135^{\circ}$ --- dieselbe Gerade, anderer Richtungsvektor. Der Winkel zwischen Geraden ist in $[0^{\circ}, 90^{\circ}]$: Betrag setzen, $45^{\circ}$.
+\schritt{(d)}
+\begin{center}\small
+\begin{tabular}{l|l|l}
+Objekte & Vektoren & Formel\\ \hline
+Gerade--Gerade & Richtungen $d_1, d_2$ & $\cos\varphi = \frac{|d_1\cdot d_2|}{|d_1||d_2|}$\\
+Ebene--Ebene & Normalen $n_1, n_2$ & $\cos\varphi = \frac{|n_1\cdot n_2|}{|n_1||n_2|}$\\
+Gerade--Ebene & Richtung $d$, Normale $n$ & $\sin\varphi = \frac{|d\cdot n|}{|d||n|}$
+\end{tabular}
+\end{center}
+\begin{fehler}\kastentext
+Das Skalarprodukt misst den Winkel zwischen den \emph{Vektoren}, die man einsetzt. Bei Gerade und Ebene setzt man eine Richtung und eine Normale ein --- und bekommt das Komplement des gesuchten Winkels. Der Betrag im Zähler macht aus zwei möglichen Winkeln den spitzen.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Vor jeder Winkelrechnung: Welche zwei Vektoren beschreiben die Objekte, und ist einer davon eine Normale? Eine Normale im Spiel: Vorzeichen des Komplements beachten. Zwei Normalen: Kosinus wie bei Geraden.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.11
+\stupserzwei{gruen}{$12x + 7y + 11z = 59$; $D$ eingesetzt gibt $51$: Abstand $\frac8{\sqrt{314}} = 0{,}451$. Volumen $\frac86 = \frac43$.}{22pt}
+\begin{loesungkarte}{gruen}{6.11}{Ebene, Abstand, Tetraeder}
+\derweg{Normale aus dem Kreuzprodukt; Abstand als normierte Projektion; Volumen als Spatprodukt durch $6$; Winkel über das Skalarprodukt.}
+\schritt{(a)}
+$u = B - A = (3, -2, -2)$, $v = C - A = (1, 3, -3)$. $n = u\times v = \bigl((-2)(-3) - (-2)(3),\ (-2)(1) - (3)(-3),\ 3\cdot3 - (-2)(1)\bigr) = (12, 7, 11)$. Ebene: $12x + 7y + 11z = 12 + 14 + 33 = 59$. Probe mit $B$: $48 + 0 + 11 = 59$ \checkmark, $C$: $24 + 35 + 0 = 59$ \checkmark.
+\schritt{(b)}
+$D$ eingesetzt: $0 + 7 + 44 = 51$. $|n| = \sqrt{144 + 49 + 121} = \sqrt{314} = 17{,}72$. Abstand $\frac{|51 - 59|}{17{,}72} = 0{,}451$.
+\schritt{(c)}
+$V = \frac16|n\cdot(D - A)| = \frac16|(12, 7, 11)\cdot(-1, -1, 1)| = \frac16|-12 - 7 + 11| = \frac86 = \frac43$.
+\schritt{(d)}
+$\cos\varphi = \frac{u\cdot v}{|u||v|} = \frac{3 - 6 + 6}{\sqrt{17}\sqrt{19}} = \frac3{17{,}97} = 0{,}167$, $\varphi = 80{,}4^{\circ}$.
+\probe{(c) anders: Grundfläche $\frac12|n| = 8{,}86$, Höhe $0{,}451$: $V = \frac13\cdot8{,}86\cdot0{,}451 = 1{,}33$. \checkmark}
+\begin{mitnehmen}\kastentext
+Kreuzprodukt: Normale und Flächeninhalt ($|u\times v|$ = Parallelogramm). Spatprodukt: Volumen ($|n\cdot w|$ = Spat, durch $6$ = Tetraeder). Skalarprodukt: Winkel und Abstände. Drei Produkte, und die ganze Raumgeometrie der Schule ist damit erledigt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.12
+\stupserzwei{akzent}{Die erweiterte $3\times3$-Matrix hat bei echten Kegelschnitten Determinante $\neq0$; bei (a), (c), (d), (e) ist sie $0$. (b) ist nicht entartet, nur leer.}{22pt}
+\begin{loesungkarte}{akzent}{6.12}{Entartete Kegelschnitte}
+\derweg{Faktorisieren, wo es geht; sonst Vorzeichen betrachten; die Determinante der erweiterten Matrix als Kriterium.}
+\schritt{Die fünf Mengen}
+(a) $(x - y)(x + y) = 0$: zwei sich schneidende Geraden $y = \pm x$. \\
+(b) $x^{2} + y^{2} = -1$: leer (über $\mathbb R$). \\
+(c) $(x - y)^{2} = 0$: eine Gerade $y = x$, doppelt gezählt. \\
+(d) $(x - y)^{2} = 1$: zwei parallele Geraden $y = x\pm1$. \\
+(e) $xy = 0$: die beiden Koordinatenachsen.
+\schritt{Echt oder entartet}
+Echte Kegelschnitte: Ellipse, Parabel, Hyperbel. (a), (c), (d), (e) sind Geradenpaare --- entartet. (b) ist keine Kurve; man nennt sie \enquote{imaginäre Ellipse}: algebraisch nicht entartet (die Gleichung ist irreduzibel), aber ohne reelle Punkte.
+\schritt{Kriterium}
+Schreibe $x^{\mathsf T}Ax + 2b^{\mathsf T}x + c = 0$ mit der erweiterten Matrix $\tilde A = \begin{pmatrix}A & b\\ b^{\mathsf T} & c\end{pmatrix}$. Entartet $\iff\det\tilde A = 0$. (a) $\tilde A = \operatorname{diag}(1, -1, 0)$: $0$. (c) $A = \begin{pmatrix}1 & -1\\ -1 & 1\end{pmatrix}$, $c = 0$: $\det\tilde A = 0$. (d) dasselbe $A$, $c = -1$: $\det = -1\cdot\det A = 0$. (e) $A = \begin{pmatrix}0 & \frac12\\ \frac12 & 0\end{pmatrix}$, $c = 0$: $0$. (b) $\operatorname{diag}(1, 1, 1)$: $1\neq0$, nicht entartet. Die kleine Determinante $\det A$ sagt nur den Typ: $> 0$ elliptisch, $< 0$ hyperbolisch, $= 0$ parabolisch --- (c) und (d) sind \enquote{parabolisch entartet}.
+\probe{Eine echte Hyperbel $x^{2} - y^{2} = 1$: $\tilde A = \operatorname{diag}(1, -1, -1)$, $\det = 1\neq0$. \checkmark\ Ihre Asymptoten sind genau der entartete Fall (a). \checkmark}
+\begin{fehler}\kastentext
+Vor der Hauptachsentransformation: $\det\tilde A$ prüfen. Ist sie null, zerfällt die Gleichung in lineare Faktoren (oder einen Punkt), und Halbachsen gibt es nicht. Und eine Gleichung ohne reelle Lösung ist kein Widerspruch --- $x^{2} + y^{2} = -1$ ist eine korrekte Gleichung mit leerer Lösungsmenge.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Entartete Kegelschnitte sind die Grenzfälle der echten: Zwei sich schneidende Geraden sind eine Hyperbel mit Halbachsen $0$, zwei parallele eine Parabel ohne Scheitel, ein Punkt eine Ellipse mit Halbachsen $0$. In der projektiven Geometrie (Kapitel 7) sind sie alle Schnitte eines Kegels mit einer Ebene --- durch die Spitze.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.13
+\stupserzwei{gruen}{Eigenvektoren: zu $4$ ist $(2, 1)$, zu $9$ ist $(1, -2)$. In diesen Richtungen liegen die Halbachsen $3$ und $2$.}{22pt}
+\begin{loesungkarte}{gruen}{6.13}{Typ und Normalform}
+\derweg{Matrix, Determinante für den Typ, Eigenwerte und -vektoren, Normalform.}
+\schritt{Matrix}
+$5x^{2} - 4xy + 8y^{2} = (x, y)\begin{pmatrix}5 & -2\\ -2 & 8\end{pmatrix}\begin{pmatrix}x\\ y\end{pmatrix}$.
+\schritt{Typ}
+$\det A = 40 - 4 = 36 > 0$: elliptisch. Erweiterte Determinante $\det\tilde A = -36\cdot36\neq0$: nicht entartet. Da $5 > 0$ und rechte Seite $36 > 0$: eine echte Ellipse.
+\schritt{Eigenwerte}
+$\lambda^{2} - 13\lambda + 36 = 0$: $\lambda_1 = 4$, $\lambda_2 = 9$. Eigenvektoren: $(A - 4I)v = 0$ mit $\begin{pmatrix}1 & -2\\ -2 & 4\end{pmatrix}$: $v_1 = \frac1{\sqrt5}(2, 1)$. $(A - 9I)$: $\begin{pmatrix}-4 & -2\\ -2 & -1\end{pmatrix}$: $v_2 = \frac1{\sqrt5}(1, -2)$.
+\schritt{Normalform}
+$4x'^{2} + 9y'^{2} = 36$, also $\frac{x'^{2}}9 + \frac{y'^{2}}4 = 1$: Ellipse mit Halbachsen $a = 3$ in Richtung $(2, 1)$ und $b = 2$ in Richtung $(1, -2)$. Drehwinkel $\arctan\frac12 = 26{,}6^{\circ}$.
+\probe{Scheitel $3v_1 = \frac3{\sqrt5}(2, 1) = (2{,}68;\ 1{,}34)$: $5\cdot7{,}2 - 4\cdot3{,}6 + 8\cdot1{,}8 = 36 - 14{,}4 + 14{,}4 = 36$. \checkmark\ Spur $13 = 4 + 9$, Determinante $36 = 4\cdot9$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Eigenwerte sagen den Typ (beide positiv: Ellipse; verschiedene Vorzeichen: Hyperbel; einer null: Parabel), die Eigenvektoren die Achsen, die Quotienten $\sqrt{c/\lambda_i}$ die Halbachsen. Der große Eigenwert gehört zur kurzen Achse.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.14
+\stupserzwei{gruen}{$4x'^{2} + y'^{2} + z'^{2} = 6$: Ellipsoid mit Halbachsen $\sqrt{1{,}5}$, $\sqrt6$, $\sqrt6$ --- ein abgeplattetes Rotationsellipsoid um die Achse $(1, 1, 1)$.}{22pt}
+\begin{loesungkarte}{gruen}{6.14}{Eine Quadrik im Raum}
+\derweg{Struktur der Matrix erkennen, Eigenwerte ablesen, Normalform, Halbachsen.}
+\schritt{Matrix}
+$A = \begin{pmatrix}2 & 1 & 1\\ 1 & 2 & 1\\ 1 & 1 & 2\end{pmatrix} = I + J$ mit $J$ der Matrix aus lauter Einsen.
+\schritt{Eigenwerte}
+$J$ hat Rang $1$: Eigenwert $3$ zum Vektor $(1, 1, 1)$ und Eigenwert $0$ (doppelt) auf dem Komplement. Also hat $A = I + J$ die Eigenwerte $4$ (einfach, Richtung $(1, 1, 1)$) und $1$ (doppelt, Ebene $x + y + z = 0$).
+\schritt{Normalform}
+$4x'^{2} + y'^{2} + z'^{2} = 6$, also $\frac{x'^{2}}{3/2} + \frac{y'^{2}}6 + \frac{z'^{2}}6 = 1$. Alle Eigenwerte positiv: Ellipsoid. Halbachsen $\sqrt{1{,}5} = 1{,}22$ in Richtung $(1, 1, 1)$, $\sqrt6 = 2{,}45$ in jeder Richtung senkrecht dazu. Ein abgeplattetes Rotationsellipsoid (wie die Erde), Symmetrieachse $(1, 1, 1)$.
+\probe{Punkt $\frac{1{,}22}{\sqrt3}(1, 1, 1) = (0{,}707, 0{,}707, 0{,}707)$: $3\cdot2\cdot0{,}5 + 3\cdot2\cdot0{,}5 = 3 + 3 = 6$. \checkmark\ Punkt $\sqrt3\,(1, -1, 0)$ (Länge $\sqrt6$): $2\cdot3 + 2\cdot3 + 0 + 2(-3) + 0 + 0 = 6$. \checkmark}
+\begin{mitnehmen}\kastentext
+Matrizen der Form $aI + bJ$ haben Eigenwerte $a + nb$ (einmal) und $a$ ($n - 1$-mal) --- das sieht man ohne Rechnung, und solche Matrizen sind überall: Kovarianzen gleich korrelierter Größen, vollständige Graphen, Austauschsymmetrie. Doppelte Eigenwerte heißen Rotationssymmetrie.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.15
+\stupserzwei{tief}{$f_2$: Determinante $-1$, keine Fixpunkte --- Gleitspiegelung. Die Achse geht durch die Mittelpunkte von $P$ und $f_2(P)$: $(0, 0)\mapsto(1, 1)$, Mittelpunkt $(\frac12, \frac12)$.}{22pt}
+\begin{loesungkarte}{tief}{6.15}{Drei Abbildungen, drei Typen}
+\derweg{Linearen Teil ablesen, Determinante, Fixpunktgleichung lösen; was übrig bleibt, bestimmt den Typ.}
+\schritt{$f_1$: Drehung}
+Linearer Teil $\begin{pmatrix}0 & -1\\ 1 & 0\end{pmatrix}$, Determinante $+1$, Drehmatrix um $90^{\circ}$. Fixpunkt: $x = -y + 2$, $y = x + 1$, also $x = -(x + 1) + 2$, $x = \frac12$, $y = \frac32$. Drehung um $90^{\circ}$ gegen den Uhrzeigersinn um $Z = \bigl(\frac12, \frac32\bigr)$.
+\schritt{$f_2$: Gleitspiegelung}
+Linearer Teil $\begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}$, Determinante $-1$: Spiegelungsmatrix an $y = x$. Fixpunkte: $x = y + 1$ und $y = x + 1$ --- Widerspruch, keine. Also Gleitspiegelung. Achse: Mittelpunkte von $P$ und $f_2(P)$ liegen darauf: $(0, 0)\mapsto(1, 1)$, Mitte $(\frac12, \frac12)$; $(1, 0)\mapsto(1, 2)$, Mitte $(1, 1)$. Achse $y = x$. Gleitvektor: $f_2$ verschiebt Punkte der Achse um $(1, 1)$.
+\schritt{$f_3$: Spiegelung}
+Linearer Teil $\begin{pmatrix}-1 & 0\\ 0 & 1\end{pmatrix}$, Determinante $-1$. Fixpunkte: $x = -x + 4$, also $x = 2$, $y$ beliebig: eine ganze Gerade. Spiegelung an $x = 2$.
+\probe{$f_1$ viermal angewandt auf $(0, 0)$: $(2, 1)\to(1, 3)\to(-1, 2)\to(0, 0)$. \checkmark\ $f_2$ zweimal: $(0, 0)\to(1, 1)\to(2, 2)$ --- Verschiebung um $2\cdot(1, 1)$, wie bei einer Gleitspiegelung. \checkmark\ $f_3$ zweimal: Identität. \checkmark}
+\begin{mitnehmen}\kastentext
+Entscheidungsbaum: $\det = +1$ und Fixpunkt $\Rightarrow$ Drehung; $\det = +1$ ohne Fixpunkt $\Rightarrow$ Verschiebung; $\det = -1$ mit Fixgerade $\Rightarrow$ Spiegelung; $\det = -1$ ohne Fixpunkt $\Rightarrow$ Gleitspiegelung. Vier Typen, und jede Isometrie der Ebene ist einer davon (Chasles).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.16
+\stupserzwei{gruen}{$S_2S_1 = \begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}\begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix} = \begin{pmatrix}0 & -1\\ 1 & 0\end{pmatrix}$: Drehung um $+90^{\circ}$. Umgekehrt: $-90^{\circ}$.}{22pt}
+\begin{loesungkarte}{gruen}{6.16}{Zwei Spiegelungen}
+\derweg{Matrizen aufstellen, in der richtigen Reihenfolge multiplizieren, Ergebnis als Drehmatrix erkennen.}
+\schritt{Matrizen}
+Spiegelung an $y = 0$: $S_1 = \begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix}$. Spiegelung an $y = x$: $S_2 = \begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}$.
+\schritt{Verkettung}
+Erst $S_1$, dann $S_2$: $S_2S_1 = \begin{pmatrix}0 & -1\\ 1 & 0\end{pmatrix} = \begin{pmatrix}\cos90^{\circ} & -\sin90^{\circ}\\ \sin90^{\circ} & \cos90^{\circ}\end{pmatrix}$: Drehung um $90^{\circ}$ gegen den Uhrzeigersinn um den Ursprung (den Schnittpunkt der Achsen). Allgemein: Winkel zwischen den Achsen $45^{\circ}$, Drehwinkel das Doppelte.
+\schritt{Umgekehrt}
+$S_1S_2 = \begin{pmatrix}0 & 1\\ -1 & 0\end{pmatrix}$: Drehung um $-90^{\circ}$. Die Reihenfolge der Spiegelungen bestimmt den Drehsinn; Spiegelungen kommutieren nur, wenn die Achsen senkrecht stehen (dann ist das Produkt die Punktspiegelung).
+\probe{$(1, 0)\xrightarrow{S_1}(1, 0)\xrightarrow{S_2}(0, 1)$: um $90^{\circ}$ gedreht. \checkmark\ $(S_2S_1)^{4} = I$. \checkmark}
+\begin{mitnehmen}\kastentext
+Zwei Spiegelungen an Geraden mit Schnittwinkel $\varphi$ sind eine Drehung um $2\varphi$ um den Schnittpunkt; an parallelen Geraden im Abstand $d$ eine Verschiebung um $2d$. Deshalb erzeugen Spiegelungen alle Isometrien --- und jede Isometrie der Ebene ist Produkt von höchstens drei.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.17
+\stupserzwei{gruen}{Weg 2: Die vier Raumdiagonalen werden von jeder Drehung permutiert, und jede der $24$ Permutationen kommt vor. Mit der Punktspiegelung ($-I$) verdoppelt sich alles.}{22pt}
+\begin{loesungkarte}{gruen}{6.17}{Die Symmetriegruppe des Würfels}
+\derweg{Bahnformel für die Drehgruppe; Permutationen der Raumdiagonalen als zweiter Weg; dann Spiegelungen dazu.}
+\schritt{Weg 1: Bahnformel}
+Die Drehgruppe operiert auf den $6$ Seitenflächen. Bahn einer Fläche: alle $6$ (jede lässt sich in jede drehen). Stabilisator: die $4$ Drehungen um die Achse durch den Flächenmittelpunkt ($0^{\circ}, 90^{\circ}, 180^{\circ}, 270^{\circ}$). $|G_{\text{Dreh}}| = 6\cdot4 = 24$.
+\schritt{Weg 2: Raumdiagonalen}
+Jede Drehung permutiert die $4$ Raumdiagonalen; verschiedene Drehungen geben verschiedene Permutationen (nur die Identität lässt alle vier fest). Das liefert eine injektive Abbildung $G_{\text{Dreh}}\to S_4$, und $|S_4| = 24$. Da man alle Transpositionen durch Drehungen um $180^{\circ}$ um Kantenmittenachsen bekommt, ist sie surjektiv: $G_{\text{Dreh}}\cong S_4$.
+\schritt{Volle Gruppe}
+Die Punktspiegelung $-I$ ist eine Symmetrie des Würfels, keine Drehung, und vertauscht mit allen Drehungen. Jede Symmetrie ist eine Drehung oder eine Drehung mal $-I$: $|G| = 2\cdot24 = 48$, $G\cong S_4\times\mathbb Z_2$.
+\schritt{Zählen nach Typ}
+Drehungen: $1$ Identität; $9$ um Flächenachsen ($3$ Achsen, je $3$ Winkel); $8$ um Raumdiagonalen ($4$ Achsen, je $2$ Winkel $\pm120^{\circ}$); $6$ um Kantenmittenachsen ($180^{\circ}$). $1 + 9 + 8 + 6 = 24$. \checkmark
+\probe{Bahnformel mit Ecken: Bahn $8$, Stabilisator $3$ (Drehungen um die Raumdiagonale durch die Ecke): $24$. \checkmark\ Mit Kanten: $12\cdot2 = 24$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Bahnformel $|G| = |\text{Bahn}|\cdot|\text{Stabilisator}|$ zählt Gruppen, ohne ihre Elemente aufzulisten; Oktaeder (dual) hat dieselbe Gruppe, Tetraeder $S_4$ als volle Gruppe mit $12$ Drehungen, Ikosaeder $A_5\times\mathbb Z_2$ mit $120$ Elementen. Diese Gruppen sind die Symmetrien der Moleküle und Kristalle (Band 30).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.18
+\stupserzwei{tief}{$t = (1, 1)$; $M e_1 = (3, 2) - (1, 1) = (2, 1)$, $M e_2 = (2, 4) - (1, 1) = (1, 3)$. $\det M = 5$: Flächen werden verfünffacht.}{22pt}
+\begin{loesungkarte}{tief}{6.18}{Eine affine Abbildung bestimmen}
+\derweg{Verschiebung aus dem Bild des Ursprungs, Matrixspalten aus den Bildern der Einheitsvektoren; dann Invarianten prüfen.}
+\schritt{(a)}
+$t = f(0, 0) = (1, 1)$. $M = \begin{pmatrix}2 & 1\\ 1 & 3\end{pmatrix}$. $f(x, y) = (2x + y + 1,\ x + 3y + 1)$.
+\schritt{(b)}
+Ecken $(0, 0), (1, 0), (1, 1), (0, 1)\mapsto(1, 1), (3, 2), (4, 5), (2, 4)$: ein Parallelogramm. Fläche $|\det M|\cdot1 = 5$. Probe: Vektoren $(2, 1)$ und $(1, 3)$, Determinante $6 - 1 = 5$. \checkmark
+\schritt{(c)}
+Mittelpunkt von $(0, 0)$ und $(1, 0)$ ist $(\frac12, 0)$, Bild $(2, \frac32)$ --- der Mittelpunkt von $(1, 1)$ und $(3, 2)$. \checkmark\ Die Geraden $y = 0$ und $y = 1$ werden zu $(1, 1) + s(2, 1)$ und $(2, 4) + s(2, 1)$: parallel. \checkmark\ Der rechte Winkel bei $(0, 0)$ wird zum Winkel zwischen $(2, 1)$ und $(1, 3)$: $\cos = \frac5{\sqrt5\sqrt{10}} = 0{,}707$, also $45^{\circ}$. Nicht erhalten.
+\schritt{(d)}
+$f^{-1}(x) = M^{-1}(x - t)$ mit $M^{-1} = \frac15\begin{pmatrix}3 & -1\\ -1 & 2\end{pmatrix}$ --- wieder affin. Affine Abbildungen bilden eine Gruppe.
+\probe{$f^{-1}(4, 5) = \frac15\begin{pmatrix}3 & -1\\ -1 & 2\end{pmatrix}\begin{pmatrix}3\\ 4\end{pmatrix} = \frac15(5, 5) = (1, 1)$. \checkmark\ Das Parallelogramm: $(3, 2) - (1, 1) = (2, 1)$ und $(4, 5) - (2, 4) = (2, 1)$, gegenüberliegende Seiten gleich. \checkmark}
+\begin{mitnehmen}\kastentext
+Affin erhalten: Geraden, Parallelität, Teilverhältnisse, Flächen\emph{verhältnisse} (Faktor $|\det M|$ für alle). Nicht erhalten: Längen, Winkel, Kreise (werden Ellipsen). Was erhalten bleibt, darf man am bequemsten Dreieck beweisen (Aufgabe 6.20).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.19
+\stupserzwei{gruen}{$\frac{AC}{CB} = \frac24 = \frac12$; also muss $\frac{AD}{DB} = -\frac12$: $\frac x{6 - x} = -\frac12$, $x = -6$.}{22pt}
+\begin{loesungkarte}{gruen}{6.19}{Harmonische Lage}
+\derweg{Doppelverhältnis mit orientierten Längen hinschreiben und gleich $-1$ setzen.}
+\schritt{Rechnung}
+$(A, B;\ C, D) = \frac{AC}{CB}\Big/\frac{AD}{DB} = \frac{2 - 0}{6 - 2}\Big/\frac{x - 0}{6 - x} = \frac12\cdot\frac{6 - x}x$. Gleich $-1$: $6 - x = -2x$, $x = -6$. $D = -6$.
+\schritt{Deutung}
+$C = 2$ teilt $AB$ innen im Verhältnis $AC : CB = 2 : 4 = 1 : 2$. $D = -6$ teilt außen: $|AD| : |DB| = 6 : 12 = 1 : 2$. Gleiches Verhältnis, einmal innen, einmal außen --- das ist harmonische Teilung.
+\probe{Vertauscht man die Paare: $(C, D;\ A, B) = \frac{CA}{AD}\Big/\frac{CB}{BD} = \frac{-2}{-6}\Big/\frac4{-12} = \frac13\Big/\bigl(-\frac13\bigr) = -1$. \checkmark\ Harmonische Lage ist symmetrisch in den beiden Paaren.}
+\begin{mitnehmen}\kastentext
+Das Doppelverhältnis ist die einzige projektive Invariante von vier Punkten auf einer Geraden; $-1$ ist der ausgezeichnete Wert, bei dem die Vierergruppe symmetrisch wird. Harmonische Punkte entstehen beim vollständigen Vierseit, bei Pol und Polare am Kreis --- und beim Mittelpunkt: $M$ und der Fernpunkt teilen $AB$ harmonisch.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.20
+\stupserzwei{gruen}{Mit $A = (0, 0)$, $B = e_1$, $C = e_2$ ist $U = I$: $M = U'$ hat die Spalten $B' - A'$ und $C' - A'$, und $t = A'$.}{22pt}
+\begin{loesungkarte}{gruen}{6.20}{Affin gibt es nur ein Dreieck}
+\derweg{Kantenvektoren als Basen; $M$ überführt die eine Basis in die andere; $t$ aus $A\mapsto A'$.}
+\schritt{Allgemein}
+$u = B - A$, $v = C - A$; $u', v'$ ebenso. Nichtentartet heißt: $\{u, v\}$ und $\{u', v'\}$ sind Basen. Sei $U$ die Matrix mit Spalten $u, v$ und $U'$ die mit $u', v'$; beide invertierbar. $M = U'U^{-1}$ erfüllt $Mu = u'$, $Mv = v'$. Mit $t = A' - MA$ ist $f(x) = Mx + t$ affin und $f(A) = A'$, $f(B) = MA + Mu + t = A' + u' = B'$, $f(C) = C'$. $\blacksquare$ Eindeutig, weil eine affine Abbildung durch drei nichtkollineare Punkte festgelegt ist.
+\schritt{Konkret}
+$U = I$, also $M = U' = \begin{pmatrix}3 & 1\\ 1 & 4\end{pmatrix}$ (Spalten $B' - A' = (3, 1)$, $C' - A' = (1, 4)$), $t = A' = (1, 1)$. $f(x, y) = (3x + y + 1,\ x + 4y + 1)$.
+\schritt{Schwerpunkt}
+$S = \bigl(\frac13, \frac13\bigr)$, $f(S) = \bigl(1 + \frac13 + 1,\ \frac13 + \frac43 + 1\bigr) = \bigl(\frac73, \frac83\bigr) = \frac{A' + B' + C'}3$. Affine Abbildungen erhalten Schwerpunkte --- weil der Schwerpunkt über Teilverhältnisse definiert ist. Deshalb genügt es, \enquote{die Seitenhalbierenden schneiden sich in einem Punkt und teilen sich $2 : 1$} am gleichseitigen Dreieck zu beweisen.
+\probe{$f(1, 0) = (4, 2) = B'$, $f(0, 1) = (2, 5) = C'$. \checkmark\ $\det M = 11 > 0$: orientierungserhaltend; die Fläche von $A'B'C'$ ist $\frac{11}2$, die von $ABC$ ist $\frac12$. \checkmark}
+\begin{mitnehmen}\kastentext
+Affine Geometrie kennt kein \enquote{gleichseitig} und kein \enquote{rechtwinklig} --- alle Dreiecke sind äquivalent, alle Parallelogramme, alle Ellipsen. Sätze über Seitenhalbierende, Mittelparallelen, Schwerpunkte, Teilverhältnisse sind affin und dürfen am Spezialfall bewiesen werden. Sätze über Höhen, Umkreis, Winkel sind es nicht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.21
+\stupserzwei{akzent}{(c) Äquivalent zum Parallelenaxiom: Rechteck, ähnliche nichtkongruente Dreiecke, Pythagoras, Umkreis für jedes Dreieck. In jeder Geometrie: Winkelsumme $\le180^{\circ}$ (Saccheri--Legendre).}{22pt}
+\begin{loesungkarte}{akzent}{6.21}{Ein Beweis im Kreis}
+\derweg{Prüfen, welche Voraussetzung an welcher Stelle eingeht; die Äquivalenzen auseinanderhalten; das Modell als Unabhängigkeitsbeweis.}
+\schritt{(a)}
+Die Winkelsumme $180^{\circ}$ ist dem Parallelenaxiom äquivalent: Man kann sie nur \emph{mit} dem Axiom beweisen. Wer sie voraussetzt, hat das Axiom schon benutzt --- der Beweis ist zirkulär. (In der hyperbolischen Ebene ist die Winkelsumme kleiner, und durch $P$ gibt es viele Parallelen; beides zusammen ist konsistent.)
+\schritt{(b)}
+Dreieck $ABC$; durch $C$ die Parallele $p$ zu $AB$ (existiert in jeder Geometrie; \emph{eindeutig} nach dem Axiom). Wechselwinkel an den Transversalen $AC$ und $BC$: Die Winkel bei $C$ zwischen $p$ und $CA$ bzw.\ $CB$ sind $\alpha$ und $\beta$ --- das braucht die Eindeutigkeit: Nur die eine Parallele hat gleiche Wechselwinkel. Zusammen mit $\gamma$ füllen sie den gestreckten Winkel bei $C$: $\alpha + \beta + \gamma = 180^{\circ}$. $\blacksquare$
+\schritt{(c)}
+Äquivalent zum Parallelenaxiom: Existenz eines Rechtecks (vier rechte Winkel); Existenz ähnlicher, nicht kongruenter Dreiecke (Wallis); Satz des Pythagoras; Umkreis für jedes Dreieck (Bolyai). Unabhängig davon gültig (absolute Geometrie): Winkelsumme $\le180^{\circ}$ (Saccheri--Legendre), Außenwinkelsatz (Außenwinkel $>$ jeder nicht anliegende Innenwinkel), Existenz \emph{mindestens einer} Parallelen.
+\schritt{(d)}
+Die hyperbolische Ebene (Poincaré-Modell) erfüllt alle Axiome Euklids außer dem Parallelenaxiom. Wäre das Axiom aus den anderen beweisbar, müsste es auch dort gelten --- tut es nicht. Also ist es unabhängig. Das ist ein Beweis über ein Modell: Man zeigt nicht, dass etwas wahr ist, sondern dass seine Negation konsistent ist.
+\begin{fehler}\kastentext
+Ein Zirkelschluss versteckt sich meist in einer \enquote{offensichtlichen} Aussage, die der Behauptung äquivalent ist. Test: Gilt die benutzte Aussage auch in der hyperbolischen Ebene? Wenn nein, hat man das Parallelenaxiom benutzt --- so scheiterten Proklos, Saccheri, Lambert und Legendre.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Unabhängigkeit beweist man durch Modelle: ein Modell mit dem Axiom (euklidische Ebene), eines ohne (hyperbolische Ebene). Dasselbe Verfahren entscheidet in der Mengenlehre über das Auswahlaxiom und die Kontinuumshypothese (Band 10).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.22
+\stupserzwei{tief}{(d) Winkelsumme $180^{\circ}$ gäbe Fläche $0$, Winkelsumme $210^{\circ}$ Fläche negativ: beide unmöglich. Gleichseitige hyperbolische Dreiecke haben Winkel $< 60^{\circ}$.}{22pt}
+\begin{loesungkarte}{tief}{6.22}{Hyperbolische Vielecke}
+\derweg{Fläche $=$ Defekt: $(n - 2)\pi$ minus Winkelsumme; alles andere ist Auflösen.}
+\schritt{(a)}
+$\alpha + \beta + \gamma = \pi - 1$. $\gamma = \pi - 1 - \frac{50\pi}{180} = 3{,}1416 - 1 - 0{,}8727 = 1{,}2689$ rad $= 72{,}7^{\circ}$. Winkelsumme $122{,}7^{\circ}$.
+\schritt{(b)}
+Fünfeck: $(5 - 2)\pi - 5\cdot\frac\pi2 = 3\pi - 2{,}5\pi = \frac\pi2$. Euklidisch wäre die Winkelsumme eines Fünfecks $540^{\circ}$, die eines rechtwinkligen aber $450^{\circ}$ --- Widerspruch; hyperbolisch ist das Defizit von $90^{\circ}$ genau die Fläche.
+\schritt{(c)}
+Fläche $= \pi - (\alpha + \beta + \gamma) < \pi$. Der Grenzwert $\pi$ wird vom idealen Dreieck erreicht: drei Ecken im Unendlichen, drei Winkel $0$, unendlich lange Seiten --- und endliche Fläche $\pi$.
+\schritt{(d)}
+$60^{\circ}, 60^{\circ}, 60^{\circ}$: Summe $\pi$, Fläche $0$ --- nur als entartetes Dreieck. $70^{\circ}$: Summe $> \pi$, Fläche negativ --- unmöglich. Gleichseitige hyperbolische Dreiecke haben Winkel echt kleiner als $60^{\circ}$, umso kleiner, je größer sie sind. Es gibt kein \emph{das} gleichseitige Dreieck: Größe und Winkel hängen zusammen (keine Ähnlichkeit, Aufgabe 6.21).
+\probe{(b) Fünf rechtwinklige Fünfecke um eine Ecke? Nein --- $4\cdot90^{\circ} = 360^{\circ}$: vier. Die hyperbolische Ebene lässt sich mit rechtwinkligen Fünfecken parkettieren, je vier an jeder Ecke. \checkmark}
+\begin{mitnehmen}\kastentext
+Hyperbolisch: Fläche $= (n - 2)\pi - \text{Winkelsumme}$ (bei $K = -1$). Sphärisch: Winkelsumme $- (n - 2)\pi$ (bei $K = 1$). Euklidisch: null --- und deshalb keine Verbindung zwischen Winkeln und Größe. Gauß--Bonnet fasst alle drei zusammen (Aufgabe 6.33).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.23
+\stupserzwei{gruen}{Winkelsumme $120^{\circ} = \frac{2\pi}3$; Defekt $\frac\pi3$. Mit $R = 3$: mal $R^{2} = 9$.}{22pt}
+\begin{loesungkarte}{gruen}{6.23}{Ein hyperbolisches Dreieck}
+\derweg{Defekt ausrechnen, mit $R^{2}$ skalieren, durch das Maximum $\pi$ teilen.}
+\schritt{(a)}
+Winkelsumme $120^{\circ} = \frac{2\pi}3$. Fläche $= \pi - \frac{2\pi}3 = \frac\pi3 = 1{,}047$.
+\schritt{(b)}
+Bei $K = -\frac1{R^{2}}$: Fläche $= R^{2}\cdot\text{Defekt} = 9\cdot\frac\pi3 = 3\pi = 9{,}42$. Dasselbe Dreieck (dieselben Winkel) ist in der flacheren Ebene neunmal größer --- Winkel bestimmen die Größe.
+\schritt{(c)}
+Maximum (bei $K = -1$): $\pi$. Anteil $\frac{\pi/3}\pi = \frac13$. Bei $R = 3$ ist das Maximum $9\pi$, der Anteil derselbe.
+\probe{Ein euklidisches Dreieck mit Winkeln $30^{\circ}, 40^{\circ}, 50^{\circ}$ gibt es nicht ($120^{\circ}\neq180^{\circ}$); ein sphärisches auch nicht ($< 180^{\circ}$). Nur hyperbolisch. \checkmark}
+\begin{mitnehmen}\kastentext
+Das Defizit zu $180^{\circ}$ ist die Fläche in Einheiten von $R^{2}$. Für ein Dreieck von $1$ km auf einer hyperbolischen Ebene mit $R = 10^{6}$ km wäre das Defizit $10^{-12}$ --- unmessbar. Gauß vermaß das Dreieck Brocken--Hohenhagen--Inselsberg (bis $107$ km) und fand im Rahmen der Messgenauigkeit $180^{\circ}$: kein Beweis für Euklid, nur eine untere Schranke für $R$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.24
+\stupserzwei{akzent}{(b) $10^{\circ}$ auf $60^{\circ}$ N: Breitenkreis $556{,}0$ km, Großkreis $555{,}3$ km. Der Unterschied ist winzig, aber da.}{22pt}
+\begin{loesungkarte}{akzent}{6.24}{Der Breitenkreis ist kein Umweg --- oder doch?}
+\derweg{Breitenkreisbogen $= R\cos\varphi\cdot\Delta\lambda$; Großkreis über den sphärischen Kosinussatz; Geodäte heißt Ebene durch den Mittelpunkt.}
+\schritt{(a)}
+Breitenkreis bei $60^{\circ}$ N hat Radius $R\cos60^{\circ} = \frac R2$; der halbe Umfang ist $\pi\cdot\frac R2 = 10\,008$ km. Über den Pol: von $60^{\circ}$ N zum Pol sind $30^{\circ}$, hin und zurück $60^{\circ} = \frac\pi3$: $\frac\pi3R = 6672$ km. Der Breitenkreis ist $50\,\%$ länger.
+\schritt{(b)}
+Breitenkreis: $R\cos60^{\circ}\cdot\frac{10\pi}{180} = 556{,}0$ km. Großkreis: $\cos d = \sin^{2}60^{\circ} + \cos^{2}60^{\circ}\cos10^{\circ} = 0{,}75 + 0{,}25\cdot0{,}98481 = 0{,}99620$, $d = 4{,}994^{\circ}$, Strecke $555{,}3$ km. Unterschied $0{,}7$ km --- für kurze Strecken ist der Breitenkreis fast optimal, für lange nicht.
+\schritt{(c)}
+Geodäten auf der Kugel sind Großkreise: Schnitte mit Ebenen durch den Mittelpunkt. Die Äquatorebene geht durch den Mittelpunkt; die Ebene des Breitenkreises $60^{\circ}$ liegt $R\sin60^{\circ}$ darüber. Ein Breitenkreis hat Krümmungsradius $R\cos\varphi < R$ --- er biegt stärker als nötig, nach Norden hin.
+\schritt{(d)}
+Frankfurt und New York liegen auf $50^{\circ}$ und $41^{\circ}$ N; der Großkreis zwischen ihnen wölbt sich nach Norden, über Irland, Südgrönland, Neufundland --- bis $55^{\circ}$ N. Der Startkurs ist $295^{\circ}$ (Aufgabe 6.26), nicht $270^{\circ}$ (West), und ändert sich unterwegs.
+\begin{fehler}\kastentext
+Auf der Mercator-Karte sind Breitenkreise Geraden und Großkreise Bögen --- die Karte lügt über Längen (Aufgabe 6.30). Ein Breitenkreis ist nur am Äquator eine Geodäte. Die Intuition \enquote{geradeaus nach Westen ist der kürzeste Weg nach Westen} stimmt auf der Kugel nicht.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Geodäte: lokal kürzeste Verbindung, Krümmung nur senkrecht zur Fläche. Auf der Kugel Großkreise, auf dem Zylinder Schraubenlinien (Aufgabe 6.29), in der hyperbolischen Ebene die Kreisbögen des Poincaré-Modells. Breitenkreise sind \enquote{Kreise um den Pol}, keine Geraden --- so wenig wie ein Kreis in der Ebene.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.25
+\stupserzwei{gruen}{(c) Fläche $\approx\frac{\sqrt3}4\cdot100^{2} = 4330$ km$^{2}$, Exzess $= \frac A{R^{2}} = 1{,}07\cdot10^{-4}$ rad $= 22$ Bogensekunden.}{22pt}
+\begin{loesungkarte}{gruen}{6.25}{Ein Dreieck auf der Erde}
+\derweg{Winkel aus der Geometrie der Meridiane, Exzessformel, Vergleich; für das kleine Dreieck die euklidische Fläche als Näherung.}
+\schritt{(a)}
+Am Pol: Die Meridiane $0^{\circ}$ und $90^{\circ}$ bilden den Winkel $90^{\circ}$. Am Äquator trifft jeder Meridian senkrecht: $90^{\circ}$, $90^{\circ}$. Winkelsumme $270^{\circ}$, Exzess $90^{\circ} = \frac\pi2$. Fläche $= R^{2}\cdot\frac\pi2 = 6371^{2}\cdot1{,}5708 = 6{,}376\cdot10^{7}$ km$^{2}$.
+\schritt{(b)}
+Kugeloberfläche $4\pi R^{2} = 5{,}101\cdot10^{8}$ km$^{2}$, ein Achtel: $6{,}376\cdot10^{7}$. \checkmark\ Das Dreieck ist ein Oktant.
+\schritt{(c)}
+Für ein kleines Dreieck ist die Fläche fast euklidisch: gleichseitig mit $100$ km: $A = \frac{\sqrt3}4\cdot10^{4} = 4330$ km$^{2}$. Exzess $= \frac A{R^{2}} = \frac{4330}{4{,}059\cdot10^{7}} = 1{,}07\cdot10^{-4}$ rad $= 0{,}0061^{\circ} = 22''$. Mit Theodoliten (Genauigkeit $1''$) messbar; Gauß' Hannoversche Landesvermessung sah den Exzess.
+\probe{Drei Oktanten zu $270^{\circ}$ plus\dots: Acht Oktanten mit je Exzess $\frac\pi2$ geben $4\pi = \frac{4\pi R^{2}}{R^{2}}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Sphärischer Exzess $= \frac{\text{Fläche}}{R^{2}}$ --- für die Erde heißt das $22''$ pro $4330$ km$^{2}$, für ein Fußballfeld $10^{-10}$ Bogensekunden. Die Erde ist lokal flach, aber nicht global: Jede Landesvermessung muss den Exzess berücksichtigen, jede Stadtvermessung darf ihn ignorieren.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.26
+\stupserzwei{gruen}{$\cos d = \sin50^{\circ}\sin40{,}7^{\circ} + \cos50^{\circ}\cos40{,}7^{\circ}\cos82{,}6^{\circ} = 0{,}4995 + 0{,}0628 = 0{,}5623$, $d = 55{,}78^{\circ}$. Kurs aus dem Kosinussatz für die Seite $NY$.}{22pt}
+\begin{loesungkarte}{gruen}{6.26}{Frankfurt--New York}
+\derweg{Sphärisches Dreieck Nordpol--Frankfurt--New York; Kosinussatz für die Distanz, noch einmal Kosinussatz für den Winkel in Frankfurt.}
+\schritt{Dreieck}
+Ecken $N$ (Pol), $F$, $Y$. Seiten vom Pol: $NF = 90^{\circ} - 50{,}0^{\circ} = 40{,}0^{\circ}$, $NY = 90^{\circ} - 40{,}7^{\circ} = 49{,}3^{\circ}$. Winkel am Pol: Längendifferenz $8{,}6^{\circ} + 74{,}0^{\circ} = 82{,}6^{\circ}$.
+\schritt{Distanz}
+Sphärischer Kosinussatz: $\cos d = \cos40^{\circ}\cos49{,}3^{\circ} + \sin40^{\circ}\sin49{,}3^{\circ}\cos82{,}6^{\circ} = 0{,}7660\cdot0{,}6521 + 0{,}6428\cdot0{,}7581\cdot0{,}1288 = 0{,}4995 + 0{,}0628 = 0{,}5623$. $d = 55{,}78^{\circ} = 0{,}9736$ rad. Strecke $R\cdot d = 6371\cdot0{,}9736 = 6203$ km.
+\schritt{Startkurs}
+Winkel $\alpha$ bei $F$ zwischen Meridian (nach Norden) und Großkreis: Kosinussatz für die Seite $NY$: $\cos49{,}3^{\circ} = \cos40^{\circ}\cos d + \sin40^{\circ}\sin d\cos\alpha$. $0{,}6521 = 0{,}7660\cdot0{,}5623 + 0{,}6428\cdot0{,}8270\cos\alpha$, $\cos\alpha = \frac{0{,}6521 - 0{,}4307}{0{,}5316} = 0{,}4165$, $\alpha = 65{,}4^{\circ}$. Der Kurs ist $65{,}4^{\circ}$ westlich von Nord: $360^{\circ} - 65{,}4^{\circ} = 294{,}6^{\circ}$ (Westnordwest).
+\schritt{Vergleich}
+Breitenkreisweg (ungefähr, auf $45^{\circ}$ N): $R\cos45^{\circ}\cdot82{,}6^{\circ}$ in rad $= 6371\cdot0{,}7071\cdot1{,}4416 = 6494$ km --- $290$ km länger. Der nördlichste Punkt des Großkreises liegt bei etwa $55^{\circ}$ N.
+\probe{Sinussatz: $\frac{\sin\alpha}{\sin49{,}3^{\circ}} = \frac{\sin82{,}6^{\circ}}{\sin d}$: $\sin\alpha = \frac{0{,}7581\cdot0{,}9917}{0{,}8270} = 0{,}909$, $\alpha = 65{,}4^{\circ}$ (oder $114{,}6^{\circ}$ --- der Kosinussatz entscheidet). \checkmark\ Flugzeit bei $850$ km/h: $7{,}3$ h. \checkmark}
+\begin{mitnehmen}\kastentext
+Sphärischer Kosinussatz $\cos c = \cos a\cos b + \sin a\sin b\cos\gamma$: für kleine Dreiecke wird daraus (Taylor) der ebene Kosinussatz. Die Navigation rechnet seit Jahrhunderten damit; GPS-Empfänger tun es heute mit dem Ellipsoid statt der Kugel, der Unterschied liegt bei $0{,}3\,\%$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.27
+\stupserzwei{tief}{(b) $\kappa(0) = 2$, $\rho = \frac12$; $\kappa(1) = \frac2{5^{3/2}} = 0{,}179$, $\rho = 5{,}59$. (d) $\int_0^1\sqrt{1 + \sinh^{2}x}\,dx = \int_0^1\cosh x\,dx = \sinh1$.}{22pt}
+\begin{loesungkarte}{tief}{6.27}{Krümmung eines Graphen}
+\derweg{Graph als Kurve $(x, f(x))$ in die Parameterformel; dann einsetzen; die Bogenlänge der Kettenlinie als Geschenk.}
+\schritt{(a)}
+$\gamma(x) = (x, f(x))$, $\gamma' = (1, f')$, $\gamma'' = (0, f'')$. $\kappa = \frac{|x'y'' - y'x''|}{(x'^{2} + y'^{2})^{3/2}} = \frac{|1\cdot f'' - f'\cdot0|}{(1 + f'^{2})^{3/2}} = \frac{|f''|}{(1 + f'^{2})^{3/2}}$. $\blacksquare$
+\schritt{(b)}
+$f = x^{2}$, $f' = 2x$, $f'' = 2$. Bei $0$: $\kappa = 2$, $\rho = \frac12$ --- der Schmiegkreis hat Mittelpunkt $(0, \frac12)$ und berührt die Parabel im Scheitel von innen. Bei $1$: $\kappa = \frac2{(1 + 4)^{3/2}} = \frac2{11{,}18} = 0{,}179$, $\rho = 5{,}59$.
+\schritt{(c)}
+$f''$ ist die Änderung der \emph{Steigung} pro Einheit $x$; die Krümmung ist die Änderung des \emph{Winkels} pro Einheit \emph{Bogenlänge}. Bei steiler Tangente ändert sich der Winkel langsamer als die Steigung (Faktor $\frac1{1 + f'^{2}}$), und pro $x$-Einheit läuft man mehr Bogen (Faktor $\sqrt{1 + f'^{2}}$). Zusammen $(1 + f'^{2})^{3/2}$. Die Parabel hat überall $f'' = 2$, aber weit draußen ist sie fast gerade.
+\schritt{(d)}
+$y = \cosh x$, $y' = \sinh x$, $1 + y'^{2} = \cosh^{2}x$. $L = \int_0^1\cosh x\,dx = \sinh1 = 1{,}1752$. Die Kettenlinie ist die einzige Kurve, bei der $\sqrt{1 + y'^{2}} = y$ --- Bogenlänge gleich Fläche unter der Kurve.
+\probe{Krümmung der Kettenlinie: $\kappa = \frac{\cosh x}{\cosh^{3}x} = \frac1{\cosh^{2}x}$, bei $0$ gleich $1$: Schmiegkreisradius $1$, Mittelpunkt $(0, 2)$. \checkmark}
+\begin{mitnehmen}\kastentext
+$\kappa = |f''|$ nur dort, wo $f' = 0$. Sonst ist die Krümmung kleiner --- deshalb kann eine Funktion mit $f'' = $ const (Parabel) im Unendlichen beliebig gerade werden, während der Kreis mit $\kappa = $ const sich schließt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.28
+\stupserzwei{gruen}{Bei $t = 0$: Nenner $4^{3/2} = 8$, $\kappa = \frac68 = \frac34$. Bei $t = \frac\pi2$: Nenner $9^{3/2} = 27$, $\kappa = \frac6{27} = \frac29$.}{22pt}
+\begin{loesungkarte}{gruen}{6.28}{Die Krümmung der Ellipse}
+\derweg{Krümmungsformel für Parameterkurven; Zähler konstant; Nenner in den Scheiteln.}
+\schritt{Ableitungen}
+$\gamma' = (-3\sin t, 2\cos t)$, $\gamma'' = (-3\cos t, -2\sin t)$. $x'y'' - y'x'' = 6\sin^{2}t + 6\cos^{2}t = 6$ --- konstant (die Flächengeschwindigkeit, zweites Keplersches Gesetz).
+\schritt{Krümmung}
+$\kappa(t) = \frac6{(9\sin^{2}t + 4\cos^{2}t)^{3/2}}$. Hauptscheitel $t = 0$, Punkt $(3, 0)$: $\kappa = \frac6{4^{3/2}} = \frac68 = \frac34$, $\rho = \frac43$. Nebenscheitel $t = \frac\pi2$, Punkt $(0, 2)$: $\kappa = \frac6{9^{3/2}} = \frac29$, $\rho = \frac92$.
+\schritt{Allgemein}
+$\rho = \frac{b^{2}}a$ im Hauptscheitel, $\frac{a^{2}}b$ im Nebenscheitel: $\frac43$ und $\frac92$. \checkmark\ Die Ellipse ist an den Enden der langen Achse am stärksten gekrümmt --- der Schmiegkreis dort ist klein; an den Enden der kurzen Achse ist der Schmiegkreis größer als die Ellipse selbst.
+\probe{Kreis $a = b = r$: $\rho = r$ in beiden Scheiteln. \checkmark\ Krümmung im Hauptscheitel über die Graphenformel: nahe $(3, 0)$ ist $x = 3\sqrt{1 - y^{2}/4}\approx3 - \frac{3y^{2}}8$, also $|x''| = \frac34$ bei waagerechter Tangente. \checkmark}
+\begin{mitnehmen}\kastentext
+Der Schmiegkreis ist der Kreis, der die Kurve bis zur zweiten Ordnung berührt. Die Mittelpunkte aller Schmiegkreise bilden die Evolute --- bei der Ellipse eine Astroide. Bei Eisenbahnkurven schaltet man zwischen Gerade und Kreisbogen eine Klothoide, damit die Krümmung stetig wächst; ein Sprung in $\kappa$ ist ein Ruck.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.29
+\stupserzwei{gruen}{$\gamma'\times\gamma'' = (ab\sin t, -ab\cos t, a^{2})$, Betrag $a\sqrt{a^{2} + b^{2}}$; $\gamma''' = (a\sin t, -a\cos t, 0)$; $(\gamma'\times\gamma'')\cdot\gamma''' = a^{2}b$.}{22pt}
+\begin{loesungkarte}{gruen}{6.29}{Die Schraubenlinie}
+\derweg{Drei Ableitungen, Kreuzprodukt, die beiden Formeln; dann $b\to0$ und $a\to0$.}
+\schritt{Ableitungen}
+$\gamma' = (-a\sin t, a\cos t, b)$, $|\gamma'| = \sqrt{a^{2} + b^{2}}$ (konstant: die Kurve wird mit konstanter Geschwindigkeit durchlaufen). $\gamma'' = (-a\cos t, -a\sin t, 0)$, $\gamma''' = (a\sin t, -a\cos t, 0)$.
+\schritt{Krümmung}
+$\gamma'\times\gamma'' = (a\cos t\cdot0 - b(-a\sin t),\ b(-a\cos t) - (-a\sin t)\cdot0,\ a^{2}\sin^{2}t + a^{2}\cos^{2}t) = (ab\sin t, -ab\cos t, a^{2})$. Betrag $\sqrt{a^{2}b^{2} + a^{4}} = a\sqrt{a^{2} + b^{2}}$. $\kappa = \frac{a\sqrt{a^{2} + b^{2}}}{(a^{2} + b^{2})^{3/2}} = \frac a{a^{2} + b^{2}}$.
+\schritt{Torsion}
+$(\gamma'\times\gamma'')\cdot\gamma''' = a^{2}b\sin^{2}t + a^{2}b\cos^{2}t + 0 = a^{2}b$. $\tau = \frac{a^{2}b}{a^{2}(a^{2} + b^{2})} = \frac b{a^{2} + b^{2}}$.
+\schritt{Grenzfälle}
+$b = 0$: Kreis mit Radius $a$, $\kappa = \frac1a$, $\tau = 0$ --- eben. $a\to0$: Gerade, $\kappa\to0$, $\tau\to0$ (bei $a = 0$ ist die Torsion nicht definiert). $b < 0$: Linksschraube, $\tau < 0$. Für $a = b$: $\kappa = \tau = \frac1{2a}$.
+\probe{$\kappa^{2} + \tau^{2} = \frac{a^{2} + b^{2}}{(a^{2} + b^{2})^{2}} = \frac1{a^{2} + b^{2}}$ --- die Schraubenlinie ist eine \enquote{Kreislinie} vom Radius $\sqrt{a^{2} + b^{2}}$ in einem gewissen Sinn. \checkmark}
+\begin{mitnehmen}\kastentext
+Hauptsatz der Kurventheorie: $\kappa(s)$ und $\tau(s)$ bestimmen die Kurve bis auf Bewegung. Konstante $\kappa, \tau$ geben genau die Schraubenlinien (einschließlich Kreis und Gerade). DNA, Sprungfedern, Schiffsschrauben: Die Natur mag konstante Krümmung und Torsion.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.30
+\stupserzwei{akzent}{(c) Winkeltreu und flächentreu zugleich wäre längentreu --- und das verbietet $K\neq0$. Grönland ($2{,}2$ Mio.\ km$^{2}$) erscheint auf Mercator so groß wie Afrika ($30$ Mio.).}{22pt}
+\begin{loesungkarte}{akzent}{6.30}{Warum keine Landkarte stimmt}
+\derweg{Flächenelement aus der Fundamentalform; Theorema egregium: Isometrien erhalten $K$; daraus alle Unmöglichkeiten.}
+\schritt{(a)}
+Das Flächenelement ist $\sqrt{EG - F^{2}}\,d\theta\,d\varphi = R^{2}\sin\theta\,d\theta\,d\varphi$ (Aufgabe 6.31). Der Faktor $\sin\theta$ fehlt: Nahe den Polen sind die Koordinatenmaschen schmal. Richtig: $\int_0^{2\pi}\int_0^{\pi}R^{2}\sin\theta\,d\theta\,d\varphi = 2\pi R^{2}\cdot2 = 4\pi R^{2}$.
+\schritt{(b)}
+Theorema egregium: Die Gauß-Krümmung hängt nur von der ersten Fundamentalform ab, also bleibt sie bei längentreuen Abbildungen (Isometrien) erhalten. Zylinder: $K = 0$ (eine Hauptkrümmung null), Ebene: $K = 0$ --- Abwickeln möglich, und man sieht es: Ein Blatt Papier lässt sich rollen. Kugel: $K = \frac1{R^{2}} > 0$, Ebene $K = 0$ --- keine Isometrie, nicht einmal lokal. Eine Orangenschale lässt sich nicht flach drücken, ohne zu reißen.
+\schritt{(c)}
+Winkeltreu und flächentreu heißt: Die lineare Näherung ist eine Ähnlichkeit (winkeltreu) mit Determinante $1$ (flächentreu), also eine Isometrie --- unmöglich nach (b). Mercator ist winkeltreu (Kurse sind Geraden, deshalb für die Seefahrt gemacht) und streckt dafür Flächen um $\frac1{\cos^{2}\varphi}$: bei $70^{\circ}$ N um den Faktor $8{,}5$. Grönland sieht aus wie Afrika, ist aber $14$-mal kleiner.
+\schritt{(d)}
+Nein. Längentreu auf einem noch so kleinen Stück hieße $K = 0$ dort, und $K = \frac1{R^{2}}$ überall. Jede Karte verzerrt --- man kann nur wählen, was: Winkel (Mercator), Flächen (Peters, Lambert), Abstände von einem Punkt (azimutal). Das ist auch der Grund für die Sektoren eines Globus-Bastelbogens: viele schmale Streifen, jeder fast flach.
+\begin{fehler}\kastentext
+Zwei Fehler, eine Ursache: Das Flächenelement $\sqrt{EG - F^{2}}$ ist die Verzerrung der Koordinatenkarte, und $K\neq0$ heißt, dass keine Karte sie beseitigt. Wer $d\theta\,d\varphi$ integriert, behandelt die Karte, als wäre sie die Fläche.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Gauß' \enquote{Theorema egregium} (1827): Krümmung ist eine innere Größe --- ein zweidimensionales Wesen auf der Fläche kann sie messen, ohne nach außen zu schauen (Winkelsumme kleiner Dreiecke, Umfang kleiner Kreise). Das ist der Gedanke, den Riemann zu $n$ Dimensionen und Einstein zur Gravitation gemacht hat.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.31
+\stupserzwei{gruen}{$X_\theta$ zeigt nach Süden, $X_\varphi$ nach Osten; beide stehen senkrecht ($F = 0$). $E = R^{2}$, $G = R^{2}\sin^{2}\theta$ --- ein Grad Länge ist $\sin\theta$-mal so lang wie ein Grad Breite.}{22pt}
+\begin{loesungkarte}{gruen}{6.31}{Die Kugel und ihre Oberfläche}
+\derweg{Parametrisierung ableiten, drei Skalarprodukte, Flächenelement integrieren.}
+\schritt{Parametrisierung}
+$X(\theta, \varphi) = R(\sin\theta\cos\varphi, \sin\theta\sin\varphi, \cos\theta)$, $\theta\in(0, \pi)$ Poldistanz, $\varphi\in[0, 2\pi)$ Länge.
+\schritt{Tangentenvektoren}
+$X_\theta = R(\cos\theta\cos\varphi, \cos\theta\sin\varphi, -\sin\theta)$ (nach Süden), $X_\varphi = R(-\sin\theta\sin\varphi, \sin\theta\cos\varphi, 0)$ (nach Osten).
+\schritt{Fundamentalform}
+$E = X_\theta\cdot X_\theta = R^{2}(\cos^{2}\theta + \sin^{2}\theta) = R^{2}$. $F = X_\theta\cdot X_\varphi = R^{2}(-\cos\theta\sin\theta\cos\varphi\sin\varphi + \cos\theta\sin\theta\sin\varphi\cos\varphi) = 0$. $G = X_\varphi\cdot X_\varphi = R^{2}\sin^{2}\theta$. \\
+$ds^{2} = R^{2}\,d\theta^{2} + R^{2}\sin^{2}\theta\,d\varphi^{2}$: Meridiane und Breitenkreise stehen senkrecht ($F = 0$); ein Grad Länge ist $\sin\theta$-mal so lang wie ein Grad Breite.
+\schritt{Oberfläche}
+$dA = \sqrt{EG - F^{2}}\,d\theta\,d\varphi = R^{2}\sin\theta\,d\theta\,d\varphi$. $A = \int_0^{2\pi}\!\!\int_0^{\pi}R^{2}\sin\theta\,d\theta\,d\varphi = 2\pi R^{2}[-\cos\theta]_0^{\pi} = 4\pi R^{2}$.
+\probe{Kugelzone zwischen $\theta_1$ und $\theta_2$: $2\pi R^{2}(\cos\theta_1 - \cos\theta_2)$, hängt nur von der Höhe $h = R(\cos\theta_1 - \cos\theta_2)$ ab: $2\pi Rh$ --- Archimedes' Satz. \checkmark\ Breitenkreislänge bei $\theta$: $\int_0^{2\pi}\sqrt G\,d\varphi = 2\pi R\sin\theta$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die erste Fundamentalform $ds^{2} = E\,du^{2} + 2F\,du\,dv + G\,dv^{2}$ ist alles, was ein Flächenbewohner kennt: Längen ($\int\sqrt{E\dot u^{2} + \dots}$), Winkel ($F = 0$ heißt orthogonale Koordinaten), Flächen ($\sqrt{EG - F^{2}}$) --- und nach Gauß auch die Krümmung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.32
+\stupserzwei{gruen}{Normale $N = (\cos u\cos v, \cos u\sin v, \sin u)$; $L = r$, $M = 0$, $N_{\text{II}} = (R + r\cos u)\cos u$; $E = r^{2}$, $F = 0$, $G = (R + r\cos u)^{2}$.}{22pt}
+\begin{loesungkarte}{gruen}{6.32}{Die Krümmung des Torus}
+\derweg{Erste und zweite Fundamentalform, $K = \frac{LN - M^{2}}{EG - F^{2}}$, Vorzeichen von $\cos u$; dann das Integral.}
+\schritt{Erste Fundamentalform}
+$X_u = (-r\sin u\cos v, -r\sin u\sin v, r\cos u)$, $X_v = (-(R + r\cos u)\sin v, (R + r\cos u)\cos v, 0)$. $E = r^{2}$, $F = 0$, $G = (R + r\cos u)^{2}$.
+\schritt{Normale und zweite Fundamentalform}
+$N = \frac{X_u\times X_v}{|X_u\times X_v|} = (\cos u\cos v, \cos u\sin v, \sin u)$ (nach außen). $X_{uu} = (-r\cos u\cos v, -r\cos u\sin v, -r\sin u)$, $X_{uv} = (r\sin u\sin v, -r\sin u\cos v, 0)$, $X_{vv} = (-(R + r\cos u)\cos v, -(R + r\cos u)\sin v, 0)$. \\
+$L = X_{uu}\cdot N = -r$, $M = X_{uv}\cdot N = 0$, $\mathcal N = X_{vv}\cdot N = -(R + r\cos u)\cos u$. (Vorzeichen nach Konvention; das Produkt $L\mathcal N$ ist davon unabhängig.)
+\schritt{Gauß-Krümmung}
+$K = \frac{L\mathcal N - M^{2}}{EG - F^{2}} = \frac{r(R + r\cos u)\cos u}{r^{2}(R + r\cos u)^{2}} = \frac{\cos u}{r(R + r\cos u)}$.
+\schritt{Typen}
+$\cos u > 0$ (Außenseite, $|u| < \frac\pi2$): $K > 0$, elliptisch --- wie eine Kugel. $\cos u < 0$ (Innenseite): $K < 0$, hyperbolisch --- Sattel. $\cos u = 0$ (oberster und unterster Kreis): $K = 0$, parabolisch. Maximum $K = \frac1{r(R + r)}$ ganz außen, Minimum $\frac{-1}{r(R - r)}$ ganz innen --- innen ist die Krümmung betragsmäßig größer.
+\schritt{Integral}
+$dA = \sqrt{EG}\,du\,dv = r(R + r\cos u)\,du\,dv$. $\int_TK\,dA = \int_0^{2\pi}\!\!\int_0^{2\pi}\cos u\,du\,dv = 2\pi\cdot0 = 0$. Gauß--Bonnet: $2\pi\chi(T) = 0$. \checkmark
+\probe{Grenzfall $R\to\infty$ bei festem $r$: $K\to\frac{\cos u}{rR}\to0$ --- der Torus wird zum Zylinder. \checkmark\ Außen bei $u = 0$: Hauptkrümmungen $\frac1r$ (Meridian) und $\frac1{R + r}$ (Breitenkreis), Produkt stimmt. \checkmark}
+\begin{mitnehmen}\kastentext
+$K = \kappa_1\kappa_2$: Produkt der Hauptkrümmungen. Positiv, wenn die Fläche in beide Richtungen gleich gekrümmt ist (Kuppe oder Mulde), negativ beim Sattel, null, wenn eine Richtung gerade ist. Der Torus zeigt alle drei --- und sein Gesamtintegral ist null, egal wie dick er ist.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.33
+\stupserzwei{tief}{(c) $E = \frac{12\cdot5 + 20\cdot6}2 = 90$, $V = \frac{2E}3 = 60$ (drei Kanten pro Ecke), $F = 32$: $60 - 90 + 32 = 2$.}{22pt}
+\begin{loesungkarte}{tief}{6.33}{Gauß--Bonnet konkret}
+\derweg{Beide Seiten der Formel ausrechnen, wo man kann; die Topologie zählt Ecken, Kanten, Flächen.}
+\schritt{(a)}
+$K = \frac1{R^{2}}$, $A = 4\pi R^{2}$: $\int K\,dA = 4\pi$. $\chi(\text{Kugel}) = 2$, $2\pi\chi = 4\pi$. \checkmark\ Unabhängig von $R$: Eine kleine Kugel ist stark gekrümmt, aber klein.
+\schritt{(b)}
+Dreieck mit drei rechten Winkeln (Oktant): Fläche $\frac{\pi R^{2}}2$, $\int K\,dA = \frac\pi2$. Gauß--Bonnet für geodätische Dreiecke: $\int K\,dA = \alpha + \beta + \gamma - \pi = \frac{3\pi}2 - \pi = \frac\pi2$. \checkmark\ Das ist der sphärische Exzess (Aufgabe 6.25).
+\schritt{(c)}
+$F = 32$. Kanten: jede Fläche hat $5$ bzw.\ $6$, jede Kante gehört zu zwei Flächen: $E = \frac{60 + 120}2 = 90$. Ecken: an jeder treffen sich $3$ Kanten: $V = \frac{2\cdot90}3 = 60$. $V - E + F = 60 - 90 + 32 = 2$. \checkmark\ Und mit $12$ Fünfecken geht es immer: Für ein Polyeder aus Fünf- und Sechsecken mit drei Kanten pro Ecke folgt aus Euler $F_5 = 12$, egal wie viele Sechsecke.
+\schritt{(d)}
+Eine geschlossene Fläche ohne Loch ist topologisch eine Kugel, $\chi = 2$, also $\int K\,dA = 4\pi > 0$. Irgendwo muss $K > 0$ sein --- egal wie viele Dellen (negativ gekrümmte Stellen) man hineindrückt, die Kuppen gleichen sie aus. Für den Torus ($\chi = 0$) ist das Integral null (Aufgabe 6.32), für eine Brezel mit $g$ Löchern $4\pi(1 - g) < 0$: Flächen mit vielen Löchern sind überwiegend sattelförmig.
+\probe{Würfel als \enquote{Kugel mit Ecken}: $K$ ist auf den Flächen null, konzentriert in den $8$ Ecken mit je Defekt $2\pi - 3\cdot\frac\pi2 = \frac\pi2$: $8\cdot\frac\pi2 = 4\pi$. \checkmark\ Descartes' Satz vom Winkeldefekt ist Gauß--Bonnet für Polyeder.}
+\begin{mitnehmen}\kastentext
+$\int_MK\,dA = 2\pi\chi(M)$: Links Analysis (Krümmung, punktweise), rechts Topologie (eine ganze Zahl). Verbiegen ändert $K$ überall, aber nicht das Integral. Das ist die erste der großen Index-Formeln --- die Vorfahrin von Riemann--Roch, Atiyah--Singer und dem Chern-Gauß-Bonnet-Satz.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.34
+\stupserzwei{gruen}{Torus: $\chi = 0$. Das Feld \enquote{immer nach Osten} ($X_v$) hat keine Nullstelle --- es kämmt den Torus.}{22pt}
+\begin{loesungkarte}{gruen}{6.34}{Der Igelsatz}
+\derweg{Index einer Nullstelle definieren; Poincaré--Hopf verbindet die Indexsumme mit $\chi$; Gauß--Bonnet liefert $\chi$ aus der Krümmung.}
+\schritt{Index}
+Hat ein Tangentialvektorfeld bei $P$ eine Nullstelle, so umläuft man $P$ auf einem kleinen Kreis und zählt, wie oft sich der Feldvektor dabei dreht: Quelle, Senke, Wirbel haben Index $+1$, ein Sattel $-1$.
+\schritt{Poincaré--Hopf}
+Für jedes Vektorfeld mit endlich vielen Nullstellen auf einer geschlossenen Fläche $M$: $\sum\text{Index} = \chi(M)$. Auf der Kugel $\chi = 2$: Die Indexsumme ist $2\neq0$, also gibt es mindestens eine Nullstelle. Ein nirgends verschwindendes Feld hätte Indexsumme $0$. $\blacksquare$
+\schritt{Zusammenhang mit Gauß--Bonnet}
+Gauß--Bonnet sagt $\int K\,dA = 2\pi\chi$; Poincaré--Hopf sagt $\sum\text{Index} = \chi$. Beide berechnen dieselbe topologische Zahl, einmal aus der Krümmung, einmal aus einem Vektorfeld. Der Beweis von Poincaré--Hopf benutzt Gauß--Bonnet: Man integriert $K$ über die Fläche ohne kleine Scheiben um die Nullstellen; die Randterme sind die Indizes.
+\schritt{Beispiele}
+Das Feld \enquote{nach Norden} auf der Erde: Nullstellen an beiden Polen (Senke am Nordpol, Quelle am Südpol), Indizes $+1 + 1 = 2$. \checkmark\ Das Feld \enquote{nach Osten}: Wirbel an beiden Polen, $+1 + 1 = 2$. \checkmark\ Der Torus: $\chi = 0$; das Feld $X_v$ (entlang der Breitenkreise) hat keine Nullstelle. Der Torus lässt sich kämmen --- ein Donut mit Streuseln in Umlaufrichtung.
+\probe{Ein Feld auf der Kugel mit nur \emph{einer} Nullstelle? Ja: stereographisch das konstante Feld der Ebene übertragen; am Nordpol entsteht eine Nullstelle mit Index $2$ (ein \enquote{Dipol}). \checkmark}
+\begin{mitnehmen}\kastentext
+\enquote{Auf der Erde ist immer irgendwo Windstille} --- ein Satz der Topologie, nicht der Meteorologie. Dieselbe Mathematik: Ein Wirbelsturm auf der Kugel braucht ein Gegenstück; ein Magnetfeld auf einer Kugel hat Pole; stetige Abbildungen der Kugel auf sich haben Fixpunkte oder Antipodenpunkte.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.35
+\stupserzwei{tief}{$\frac{2E}q - E + \frac{2E}p = 2$, also $E\bigl(\frac2p + \frac2q - 1\bigr) = 2 > 0$, also $\frac1p + \frac1q > \frac12$.}{22pt}
+\begin{loesungkarte}{tief}{6.35}{Die fünf platonischen Körper}
+\derweg{Doppeltes Abzählen der Kanten, Euler einsetzen, die Ungleichung in ganzen Zahlen lösen.}
+\schritt{(a)}
+Jede der $F$ Flächen hat $p$ Kanten, jede Kante liegt in $2$ Flächen: $pF = 2E$, $F = \frac{2E}p$. An jeder der $V$ Ecken enden $q$ Kanten, jede Kante hat $2$ Enden: $qV = 2E$, $V = \frac{2E}q$. Euler: $\frac{2E}q - E + \frac{2E}p = 2$.
+\schritt{(b)}
+$E\bigl(\frac2p + \frac2q - 1\bigr) = 2$. Da $E > 0$: $\frac2p + \frac2q > 1$, also $\frac1p + \frac1q > \frac12$. Mit $p, q\ge3$: $p = 3$: $\frac1q > \frac16$, $q\in\{3, 4, 5\}$. $p = 4$: $\frac1q > \frac14$, $q = 3$. $p = 5$: $\frac1q > \frac3{10}$, $q = 3$. $p\ge6$: $\frac1q > \frac13$, unmöglich. Fünf Lösungen.
+\schritt{(c)}
+$E = \frac2{2/p + 2/q - 1}$, dann $V, F$:
+\begin{center}\small
+\begin{tabular}{cc|ccc|l}
+$p$ & $q$ & $V$ & $E$ & $F$ & Körper\\ \hline
+3 & 3 & 4 & 6 & 4 & Tetraeder\\
+4 & 3 & 8 & 12 & 6 & Würfel\\
+3 & 4 & 6 & 12 & 8 & Oktaeder\\
+5 & 3 & 20 & 30 & 12 & Dodekaeder\\
+3 & 5 & 12 & 30 & 20 & Ikosaeder
+\end{tabular}
+\end{center}
+Vertauschen von $p$ und $q$ vertauscht $V$ und $F$: Dualität (Würfel--Oktaeder, Dodekaeder--Ikosaeder, Tetraeder mit sich selbst).
+\schritt{(d)}
+$\frac1p + \frac1q = \frac12$: $(3, 6)$, $(4, 4)$, $(6, 3)$. Dann wäre $E = \infty$ --- das sind die drei regelmäßigen Parkettierungen der Ebene: Dreiecke (sechs an jeder Ecke), Quadrate, Sechsecke. Und $\frac1p + \frac1q < \frac12$ liefert die Parkettierungen der hyperbolischen Ebene (Aufgabe 6.22: rechtwinklige Fünfecke, $(5, 4)$).
+\probe{Dodekaeder: $12$ Fünfecke, $E = 30$, $V = 20$; $20 - 30 + 12 = 2$. \checkmark\ Winkeldefekt an jeder Ecke $360^{\circ} - 3\cdot108^{\circ} = 36^{\circ}$, mal $20$ Ecken: $720^{\circ} = 4\pi$. \checkmark}
+\begin{mitnehmen}\kastentext
+Euklids \emph{Elemente} enden mit diesem Satz (Buch XIII). Der Beweis über Euler ist moderner als Euklids über Winkelsummen und zeigt mehr: Die Ungleichung sortiert zugleich die sphärischen ($> \frac12$), euklidischen ($= \frac12$) und hyperbolischen ($< \frac12$) regelmäßigen Parkettierungen --- drei Geometrien in einer Ungleichung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.36
+\stupserzwei{gruen}{Läge auf $g_0$ ein dritter Punkt, so liegen zwei der drei auf derselben Seite des Lotfußpunkts von $P_0$ --- und der nähere von beiden hat zur Geraden durch $P_0$ und den ferneren einen kleineren Abstand als $P_0$ zu $g_0$.}{22pt}
+\begin{loesungkarte}{gruen}{6.36}{Sylvester--Gallai}
+\derweg{Extremalprinzip: unter endlich vielen Paaren (Punkt, Gerade) das mit kleinstem positivem Abstand; dann ein noch kleineres konstruieren, falls drei Punkte auf der Geraden liegen.}
+\schritt{Kandidaten}
+Betrachte alle Paare $(P, g)$: $g$ eine Gerade durch mindestens zwei der Punkte, $P$ ein Punkt der Menge nicht auf $g$. Da nicht alle kollinear sind, gibt es solche Paare; da die Menge endlich ist, endlich viele.
+\schritt{Minimum}
+Wähle $(P_0, g_0)$ mit kleinstem Abstand $d > 0$. Sei $F$ der Lotfußpunkt von $P_0$ auf $g_0$.
+\schritt{Widerspruch}
+Angenommen, auf $g_0$ liegen drei Punkte $A, B, C$ der Menge. Zwei davon liegen auf derselben Seite von $F$ (oder einer ist $F$) --- sagen wir $A$ und $B$ mit $FA\le FB$ (eventuell $A = F$). Betrachte die Gerade $h = P_0B$. Der Abstand von $A$ zu $h$ ist kleiner als $d$: Im Dreieck $P_0FB$ ist $A$ auf der Strecke $FB$, und die Höhe von $A$ auf $P_0B$ ist kürzer als die Höhe von $F$ auf $P_0B$, die wiederum kürzer als $P_0F = d$ ist (Höhe im rechtwinkligen Dreieck). Also hat $(A, h)$ einen kleineren positiven Abstand als $(P_0, g_0)$ --- Widerspruch zur Minimalität. Also liegen auf $g_0$ genau zwei Punkte. $\blacksquare$
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\draw[linie] (-2.5,0)--(3.5,0) node[right,grau,font=\small] {$g_0$};
+\fill[tief] (0,1.6) circle (1.6pt) node[above,font=\small] {$P_0$};
+\fill[grau] (0,0) circle (1.2pt) node[below,font=\small] {$F$};
+\fill[tief] (1,0) circle (1.6pt) node[below,font=\small] {$A$};
+\fill[tief] (2.8,0) circle (1.6pt) node[below,font=\small] {$B$};
+\draw[akzent] (0,1.6)--(2.8,0) node[midway,above right,font=\scriptsize] {$h$};
+\draw[dashed,grau] (0,1.6)--(0,0);
+\draw[dashed,akzent] (1,0)--(1.44,0.78);
+\end{tikzpicture}
+\end{center}
+\schritt{Unendlich viele Punkte}
+Das Extremalprinzip braucht ein Minimum, und das gibt es bei unendlich vielen Paaren nicht unbedingt (Infimum $0$). Und der Satz ist dort falsch: Alle Gitterpunkte $\mathbb Z^{2}$ --- jede Verbindungsgerade enthält unendlich viele. Ebenso alle Punkte der Ebene.
+\probe{Kleinstes Beispiel: $3$ Punkte, nicht kollinear --- jede Verbindungsgerade enthält genau zwei. \checkmark\ Reguläres $n$-Eck plus Mittelpunkt: Die Geraden durch den Mittelpunkt enthalten $3$ Punkte (bei geradem $n$), die Seiten je zwei. \checkmark}
+\begin{mitnehmen}\kastentext
+Extremalprinzip: Wähle das kleinste, größte, nächste Objekt --- und zeige, dass ein noch extremeres existiert, falls die Behauptung falsch wäre. Es braucht Endlichkeit (oder Kompaktheit), und es beweist Existenzsätze ohne Konstruktion. Kellys Beweis ist das Lehrbuchbeispiel; Erdős nahm ihn ins \enquote{Buch}.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 6.37
+\stupserzwei{gruen}{Raum: kubisch-flächenzentrierte Zelle mit Kantenlänge $a = 2\sqrt2\,r$ (Flächendiagonale $= 4r$) enthält $4$ Kugeln: $\frac{4\cdot\frac43\pi r^{3}}{16\sqrt2\,r^{3}}$.}{22pt}
+\begin{loesungkarte}{gruen}{6.37}{Dichteste Packungen}
+\derweg{Elementarzelle wählen, Kugelanteil darin zählen, durch das Zellvolumen teilen.}
+\schritt{Ebene: hexagonal}
+Drei sich berührende Kreise vom Radius $r$; ihre Mittelpunkte bilden ein gleichseitiges Dreieck mit Seite $2r$, Fläche $\frac{\sqrt3}4(2r)^{2} = \sqrt3\,r^{2}$. Im Dreieck liegen drei Kreissektoren zu je $60^{\circ}$, zusammen ein halber Kreis: $\frac{\pi r^{2}}2$. Dichte $\frac{\pi r^{2}/2}{\sqrt3\,r^{2}} = \frac\pi{2\sqrt3} = 0{,}9069$.
+\schritt{Raum: kubisch-flächenzentriert}
+Kugeln an den Ecken und Flächenmitten eines Würfels mit Kante $a$; Nachbarn berühren sich entlang der Flächendiagonale: $a\sqrt2 = 4r$, $a = 2\sqrt2\,r$. Kugeln in der Zelle: $8$ Ecken zu je $\frac18$ plus $6$ Flächen zu je $\frac12$: $1 + 3 = 4$. Dichte $\frac{4\cdot\frac43\pi r^{3}}{(2\sqrt2\,r)^{3}} = \frac{\frac{16}3\pi}{16\sqrt2} = \frac\pi{3\sqrt2} = 0{,}7405$.
+\schritt{Einordnung}
+Ebene: Optimalität bewiesen von Thue (1910), streng von Fejes Tóth (1940). Raum: Keplers Vermutung (1611), bewiesen von Hales (1998, $250$ Seiten plus Computer; formal verifiziert 2014). Die hexagonale Schichtung (hcp) hat dieselbe Dichte --- es gibt unendlich viele optimale Packungen, alle aus den gleichen Schichten in verschiedener Stapelfolge.
+\probe{Kubisch-primitiv (Kugeln nur an den Ecken, $a = 2r$): $\frac{\frac43\pi r^{3}}{8r^{3}} = \frac\pi6 = 0{,}524$. Kubisch-raumzentriert: $0{,}680$. Beide schlechter. \checkmark\ Zufällig geschüttete Kugeln: etwa $0{,}64$.}
+\begin{mitnehmen}\kastentext
+Elementarzelle: die kleinste Einheit, die durch Verschieben den ganzen Raum füllt; Dichte $=$ Volumenanteil darin. In Dimension $8$ und $24$ sind die optimalen Packungen bekannt ($E_8$, Leech-Gitter; Viazovska 2016), in Dimension $4$ bis $7$ nicht --- und die dichtesten Packungen in hohen Dimensionen sind die Grundlage fehlerkorrigierender Codes (Band 20).
+\end{mitnehmen}
+\end{loesungkarte}

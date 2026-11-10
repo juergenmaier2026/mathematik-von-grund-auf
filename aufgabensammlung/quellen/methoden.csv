@@ -1,0 +1,383 @@
+0.1;Vorzeichenregeln;Rechenreihenfolge
+0.2;Vorzeichenregeln;Rechenreihenfolge;Gegenbeispiel
+0.3;Widerspruchsbeweis;Teilbarkeitsargument
+0.4;Rechenreihenfolge;Terme vereinfachen
+0.5;Bruchrechnung;Doppelbruch auflösen
+0.6;Bruchrechnung;Gegenbeispiel
+0.7;Faktorisieren;Kürzen;Definitionsbereich prüfen
+0.8;Prozentrechnung;Wachstumsfaktor
+0.9;Potenzgesetze
+0.10;Logarithmieren;Exponentialgleichung
+0.11;Logarithmengesetze
+0.12;Exponentielles Wachstum;Wachstumsfaktor
+0.13;Faktorisieren;Kürzen;Definitionsbereich prüfen
+0.14;Quadratische Gleichung;Quadratische Ergänzung;Faktorisieren
+0.15;Gleichungen lösen;Substitution (Gleichung);Faktorisieren
+0.16;Probe;Scheinlösungen;Quadrieren
+0.17;Lineare Gleichungssysteme;Einsetzen und Eliminieren;Fallunterscheidung
+0.18;Ungleichungen;Fallunterscheidung;Division durch null vermeiden
+0.19;Ungleichungen;Betrag;Fallunterscheidung
+0.20;Funktionen lesen;Definitionsbereich prüfen;Skizze
+0.21;Umkehrfunktion;Definitionsbereich prüfen
+0.22;Exponentielles Wachstum;Halbwertszeit;Logarithmieren
+0.23;Mittelwerte;Gegenbeispiel
+0.24;Ähnlichkeit;Skalierung
+0.25;Einheitskreis;Trigonometrie
+0.26;Trigonometrie;Sinus- und Kosinussatz;Faktorisieren
+0.27;Grenzwerte;Ausklammern;Geometrische Reihe
+0.28;Ableitung;Extremwertaufgabe;Integral als Fläche
+0.29;Ableitungsregeln;Kettenregel
+0.30;Hauptsatz der Integralrechnung;Integral als Fläche;Rotationsvolumen
+0.31;Vollständige Induktion;Muster erkennen;Skizze
+1.1;Vollständige Induktion;Faktorisieren
+1.2;Vollständige Induktion;Fehler finden
+1.3;Vollständige Induktion;Muster erkennen
+1.4;Starke Induktion;Existenzbeweis
+1.5;Faktorisieren;Teilbarkeitsargument;Aufeinanderfolgende Zahlen
+1.6;Division mit Rest;Vorzeichenregeln
+1.7;Teilbarkeitsregeln;Quersumme
+1.8;Euklidischer Algorithmus;Lemma von Bézout
+1.9;Teilbarkeitsargument;Gegenbeispiel;Teilerfremdheit
+1.10;Euklidischer Algorithmus
+1.11;Euklidischer Algorithmus;Lemma von Bézout;Rückwärtseinsetzen
+1.12;Diophantische Gleichung;Lemma von Bézout;Zählen
+1.13;ggT und kgV;Euklidischer Algorithmus
+1.14;Primfaktorzerlegung;ggT und kgV;Teiler zählen
+1.15;Primfaktorzerlegung;Teiler zählen
+1.16;Primfaktorzerlegung;ggT und kgV
+1.17;Sieb des Eratosthenes;Probedivision
+1.18;Restklassen;Fallunterscheidung
+1.19;Widerspruchsbeweis;Euklids Primzahlbeweis;Restklassen
+1.20;Lineare Kongruenz;Lemma von Bézout
+1.21;Kürzen in Kongruenzen;Gegenbeispiel
+1.22;Kleiner Fermat und Euler;Modulare Arithmetik
+1.23;Modulare Arithmetik;Teilbarkeitsregeln
+1.24;Lineare Kongruenz;Euklidischer Algorithmus
+1.25;Chinesischer Restsatz;Modulare Arithmetik
+1.26;Chinesischer Restsatz
+1.27;Chinesischer Restsatz;Quadratwurzeln modulo n
+1.28;Chinesischer Restsatz;Modulare Arithmetik
+1.29;Kleiner Fermat und Euler;Ordnung modulo n
+1.30;Kleiner Fermat und Euler;Gegenbeispiel
+1.31;Kleiner Fermat und Euler
+1.32;Eulersche Phi-Funktion;Primfaktorzerlegung;Multiplikativität
+1.33;Ordnung modulo n;Kleiner Fermat und Euler
+1.34;Ordnung modulo n;Primitivwurzel
+1.35;Primitivwurzel;Ordnung modulo n
+1.36;Satz von Wilson;Modulare Arithmetik
+1.37;Legendre-Symbol;Reziprozitätsgesetz
+1.38;Legendre-Symbol;Quadratwurzeln modulo n;Reziprozitätsgesetz
+1.39;Reziprozitätsgesetz;Legendre-Symbol
+1.40;Jacobi-Symbol;Reziprozitätsgesetz
+1.41;Multiplikativität;Vollkommene Zahlen
+1.42;Multiplikativität;Primfaktorzerlegung
+1.43;Möbius-Inversion;Teiler zählen
+1.44;Modulare Arithmetik;Vollkommene Zahlen;Fallunterscheidung
+1.45;Gegenbeispiel;Probedivision
+1.46;Primzahlsatz;Größenordnung schätzen
+1.47;Restklassen;Fallunterscheidung
+1.48;Pythagoreische Tripel;Parametrisierung
+1.49;Kettenbruch;Beste Näherung
+1.50;Kettenbruch;Periodizität
+1.51;Pellsche Gleichung;Kettenbruch
+1.52;Zwei-Quadrate-Satz;Gegenbeispiel
+1.53;Zwei-Quadrate-Satz;Primfaktorzerlegung;Brahmagupta-Identität
+1.54;Elliptische Kurve;Gruppengesetz
+1.55;Schnelle Potenzierung;Modulare Arithmetik
+1.56;Diffie–Hellman;Schnelle Potenzierung
+1.57;RSA;Eulersche Phi-Funktion;Schnelle Potenzierung
+1.58;Miller–Rabin;Quadratwurzeln modulo n;Carmichael-Zahl
+1.59;Fermat-Faktorisierung;Differenz von Quadraten
+1.60;Pollard-Rho;Euklidischer Algorithmus
+1.61;Probedivision;Modulare Arithmetik;Gegenbeispiel
+2.1;Gauß-Algorithmus;Rang;Lösbarkeitskriterium
+2.2;Gauß-Algorithmus;Rückwärtseinsetzen
+2.3;Gauß-Algorithmus;Freie Variablen;Lösungsraum
+2.4;Fallunterscheidung;Gauß-Algorithmus;Division durch null vermeiden
+2.5;Matrixmultiplikation;Formatprüfung;Transponieren
+2.6;Gegenbeispiel;Nullteiler;Nichtkommutativität
+2.7;Matrixmultiplikation;Permutationsmatrix
+2.8;Gauß-Algorithmus;Inverse Matrix
+2.9;LR-Zerlegung;Rückwärtseinsetzen
+2.10;Inverse Matrix;Determinante;Kern
+2.11;Lineare Unabhängigkeit;Funktionen als Vektoren;Einsetzen von Stellen
+2.12;Untervektorraum-Kriterium;Gegenbeispiel
+2.13;Spann;Lineare Gleichungssysteme
+2.14;Basiswechsel;Koeffizientenvergleich
+2.15;Basis bestimmen;Koordinaten;Gauß-Algorithmus
+2.16;Lineare Unabhängigkeit;Gegenbeispiel;Dimension als Schranke
+2.17;Lineare Unabhängigkeit;Determinante;Gauß-Algorithmus
+2.18;Dimensionsformel;Schnitt von Unterräumen
+2.19;Darstellungsmatrix;Verkettung;Drehmatrix
+2.20;Dimensionssatz;Gegenbeispiel;Injektiv und surjektiv
+2.21;Kern und Bild;Rangsatz;Gauß-Algorithmus
+2.22;Darstellungsmatrix;Kern und Bild;Nilpotenz
+2.23;Basiswechsel;Darstellungsmatrix;Eigenbasis
+2.24;Determinante;Gauß-Algorithmus
+2.25;Gegenbeispiel;Multilinearität;Determinante
+2.26;Determinante;Gauß-Algorithmus;Rang
+2.27;Laplace-Entwicklung;Determinante
+2.28;Cramersche Regel;Determinante
+2.29;Determinante;Orientierung
+2.30;Diagonalisieren;Matrixpotenzen
+2.31;Gegenbeispiel;Eigenwerte;Gleichzeitige Diagonalisierung
+2.32;Charakteristisches Polynom;Eigenvektoren;Spur und Determinante als Probe
+2.33;Diagonalisieren;Vielfachheiten;Charakteristisches Polynom
+2.34;Diagonalisieren;Lineare Rekursion;Fibonacci
+2.35;Cayley–Hamilton;Inverse Matrix
+2.36;Jordansche Normalform;Hauptvektoren
+2.37;Lineare Differentialgleichungssysteme;Eigenvektoren;Entkopplung
+2.38;Markow-Kette;Stationäre Verteilung;Eigenwert 1
+2.39;Orthogonale Projektion;Abstand;Projektionsmatrix
+2.40;Gram–Schmidt;Orthonormalbasis
+2.41;Kleinste Quadrate;Normalengleichungen;Residuum
+2.42;Spektralsatz
+2.43;Hauptachsentransformation;Quadratische Form;Kegelschnitt
+2.44;Singulärwertzerlegung;Eigenwerte
+2.45;Hauptkomponentenanalyse;Kovarianzmatrix;Spektralsatz
+2.46;Pivotisierung;Rundungsfehler;Auslöschung
+2.47;Householder-Spiegelung;Orthogonale Matrix
+2.48;Cholesky-Zerlegung;Positive Definitheit
+3.1;Supremum und Infimum;Epsilon-Beweis;Vollständigkeit
+3.2;Supremum und Infimum;Polynomdivision;Monotonie
+3.3;Betrag;Fallunterscheidung;Quadrieren
+3.4;Grenzwerte;Ausklammern
+3.5;Unbestimmte Formen;Gegenbeispiel;Grenzwerte
+3.6;Epsilon-Beweis;Grenzwerte
+3.7;Binomischer Satz;Einschließungssatz;Überschuss benennen
+3.8;Rekursive Folge;Monotonie;Fixpunktgleichung
+3.9;Cauchy-Folge;Harmonische Reihe;Abschätzung nach unten
+3.10;Konvergenzkriterien;Vergleichskriterium;Leibniz-Kriterium;Quotientenkriterium
+3.11;Absolute Konvergenz;Umordnung;Gegenbeispiel
+3.12;Teleskopsumme;Partialbruchzerlegung
+3.13;Verdichtungskriterium;Geometrische Reihe
+3.14;Quotientenkriterium;Zahl e
+3.15;Konvergenzradius;Randverhalten;Leibniz-Kriterium
+3.16;Stetige Fortsetzung;Zwischenwertsatz;Intervallhalbierung
+3.17;Satz vom Maximum;Gegenbeispiel;Kompaktheit
+3.18;Epsilon-Beweis;Einschließungssatz;Folgenkriterium
+3.19;Zwischenwertsatz;Ausklammern
+3.20;Gleichmäßige Stetigkeit;Abschätzung durch Ungleichung
+3.21;Substitution (Gleichung);Logarithmieren;Definitionsbereich prüfen
+3.22;Potenzreihe;Fehlerschranke
+3.23;Ableitungsregeln;Kettenregel;Logarithmieren
+3.24;Differenzenquotient;Gegenbeispiel;Einseitige Grenzwerte
+3.25;Produktregel;Quotientenregel;Kettenregel
+3.26;Differenzenquotient;Folgenkriterium;Unstetige Ableitung
+3.27;Mittelwertsatz
+3.28;Regel von L'Hospital;Voraussetzungen prüfen;Gegenbeispiel
+3.29;Regel von L'Hospital;Unbestimmte Formen;Logarithmieren
+3.30;Kurvendiskussion;Polynomdivision;Krümmung
+3.31;Potenzreihe;Koeffizientenvergleich;Fehlerschranke
+3.32;Taylorpolynom;Fehlerschranke
+3.33;Taylorreihe;Gliedweise Integration;Randverhalten
+3.34;Riemann-Summe
+3.35;Ober- und Untersummen;Summenformeln
+3.36;Substitution (Integral);Partielle Integration;Trigonometrische Identität
+3.37;Fehler finden;Uneigentliches Integral;Substitution (Integral)
+3.38;Partielle Integration;Integral im Kreis
+3.39;Substitution (Integral)
+3.40;Partialbruchzerlegung;Zuhaltemethode
+3.41;Bogenlänge;Uneigentliches Integral
+3.42;Uneigentliches Integral;Fallunterscheidung
+3.43;Uneigentliches Integral;Partielle Integration;Abschätzung nach unten
+3.44;Vergleichskriterium;Uneigentliches Integral;Grenzübergang
+3.45;Gleichmäßige Konvergenz;Gegenbeispiel;Vertauschung von Grenzprozessen
+3.46;Gliedweise Ableitung;Geometrische Reihe
+3.47;Gradient;Richtungsableitung;Lineare Näherung
+3.48;Kritische Punkte;Hesse-Matrix
+3.49;Lagrange-Multiplikatoren;Nebenbedingung einsetzen
+3.50;Kugelkoordinaten;Transformationssatz;Satz von Fubini
+4.1;Laplace-Wahrscheinlichkeit;Zählen
+4.2;Einschluss–Ausschluss;Exponentialreihe
+4.3;Verteilung einer Summe;Tabelle;Bedingte Wahrscheinlichkeit
+4.4;Hypergeometrische Verteilung;Binomialkoeffizient
+4.5;Gegenwahrscheinlichkeit;Produktregel;Zählen
+4.6;Zählen;Binomialkoeffizient
+4.7;Gegenwahrscheinlichkeit;Gegenbeispiel;Additivität
+4.8;Baumdiagramm;Bedingte Wahrscheinlichkeit;Satz von Bayes
+4.9;Unabhängigkeit;Gegenbeispiel
+4.10;Natürliche Häufigkeiten;Satz von Bayes;Baumdiagramm
+4.11;Modellannahmen;Fallunterscheidung;Satz von Bayes
+4.12;Gewichtetes Mittel;Störgröße;Simpson-Paradox
+4.13;Erwartungswert;Varianz
+4.14;Dichte;Verteilungsfunktion;Median
+4.15;Modellwahl;Binomialverteilung;Poisson-Verteilung;Geometrische Verteilung
+4.16;Binomialverteilung;Zentraler Grenzwertsatz
+4.17;Poisson-Verteilung;Modellkritik
+4.18;Exponentialverteilung;Gedächtnislosigkeit;Erwartungswert
+4.19;Normalverteilung
+4.20;Indikatortrick;Linearität des Erwartungswerts;Wartezeiten
+4.21;Varianz;Unabhängigkeit;Kovarianz
+4.22;Erwartungswert;Schwere Ränder;Nutzenfunktion
+4.23;Indikatortrick;Kovarianz
+4.24;Faktorielles Moment;Exponentialreihe
+4.25;Erzeugende Funktion;Faltung
+4.26;Kovarianz;Gegenbeispiel;Unabhängigkeit
+4.27;Kontingenztafel;Kovarianz;Unabhängigkeit
+4.28;Totale Wahrscheinlichkeit;Poisson-Ausdünnung;Bedingte Erwartung
+4.29;Borel–Cantelli;Geometrische Verteilung
+4.30;Unabhängigkeit;Gesetz der großen Zahlen;Fehler finden
+4.31;Gesetz der großen Zahlen;Varianz;Skalen unterscheiden
+4.32;Zentraler Grenzwertsatz;Stetigkeitskorrektur
+4.33;Zentraler Grenzwertsatz;Kontrollgrenze;Multiples Testen
+4.34;Methode des ersten Schritts;Zustandsdiagramm;Erwartungswert
+4.35;Markow-Kette;Matrixmultiplikation
+4.36;Stationäre Verteilung;Bilanzgleichungen;Rückkehrzeit
+4.37;Methode des ersten Schritts;Differenzengleichung;Randbedingungen
+4.38;Martingal;Optionales Stoppen
+4.39;Konfidenzintervall;Stichprobenumfang
+4.40;p-Wert;Bedingte Wahrscheinlichkeit;Fehler finden
+4.41;Maximum Likelihood;Log-Likelihood;Ableiten und Nullsetzen
+4.42;Konfidenzintervall;Standardfehler
+4.43;Signifikanztest;Normalverteilung;p-Wert
+5.1;Gleitpunktzahlen;Binärdarstellung;Maschinenepsilon
+5.2;Gleitpunktzahlen;Absorption;Summationsreihenfolge
+5.3;Binärdarstellung;Gleitpunktzahlen
+5.4;Auslöschung;Vieta;Umformen vor dem Rechnen
+5.5;Auslöschung;Trigonometrische Identität;Taylorreihe
+5.6;Rundungsfehler;Fehlerschranke;Summationsreihenfolge
+5.7;Konditionszahl;Relative Fehler
+5.8;Konditionszahl;Ableiten nach dem Parameter
+5.9;Konditionszahl;Störungsabschätzung;Matrixnorm
+5.10;Rückwärtsanalyse;Standardmodell der Rundung
+5.11;Aufwand zählen;Größenordnung schätzen
+5.12;LR-Zerlegung;Rückwärtseinsetzen;Probe
+5.13;Cholesky-Zerlegung;Positive Definitheit
+5.14;Householder-Spiegelung;QR-Zerlegung
+5.15;Kleinste Quadrate;Normalengleichungen;Konditionszahl
+5.16;Spektralradius;Diagonaldominanz;Gegenbeispiel
+5.17;Jacobi-Verfahren;Gauß–Seidel-Verfahren;Konvergenzrate
+5.18;Konjugierte Gradienten;Krylow-Raum
+5.19;Eigenwerte einschließen
+5.20;Potenzmethode;Eigenwerte einschließen;Konvergenzrate
+5.21;Singulärwertzerlegung;Konditionszahl
+5.22;Bisektion;Newton-Verfahren;Konvergenzordnung
+5.23;Newton-Verfahren;Gegenbeispiel;Dämpfung
+5.24;Newton-Verfahren;Konvergenzordnung
+5.25;Fixpunktiteration;Kontraktion;Newton-Verfahren
+5.26;Newton-Verfahren;Jacobi-Matrix
+5.27;Lagrange-Interpolation;Newton-Schema;Fehlerschranke
+5.28;Runge-Phänomen;Gegenbeispiel;Tschebyschow-Knoten
+5.29;Newton-Schema
+5.30;Tschebyschow-Knoten;Minimax-Eigenschaft
+5.31;Kubischer Spline;Tridiagonales System
+5.32;Diskrete Fourier-Transformation;Parseval
+5.33;Orthogonale Projektion;Legendre-Polynome
+5.34;Alternantensatz;Minimax-Eigenschaft
+5.35;Konvergenzordnung;Romberg-Schema
+5.36;Trapezregel;Simpson-Regel;Fehlerschranke
+5.37;Romberg-Schema
+5.38;Gauß-Quadratur
+5.39;Steifigkeit;Stabilitätsgebiet;Impliziter Euler
+5.40;Euler-Verfahren;Runge–Kutta;Konvergenzordnung
+5.41;Finite Differenzen;Tridiagonales System;Symmetrie ausnutzen
+5.42;Gradientenverfahren;Liniensuche;Konditionszahl
+5.43;Newton-Verfahren;Hesse-Matrix;Dämpfung
+5.44;Monte-Carlo;Standardfehler;Simpson-Regel
+7.1;Stammbruchzerlegung;Gieriger Algorithmus;Bruchrechnung
+7.2;Zahlsysteme;Sexagesimalsystem;Verdopplungsverfahren
+7.3;Verdopplungsverfahren;Binärdarstellung;Division mit Rest
+7.4;Kreisfläche;Näherung bewerten;Rezept entschlüsseln
+7.5;Sexagesimalsystem;Näherung bewerten;Satz des Pythagoras
+7.6;Quadratische Ergänzung;Rezept entschlüsseln;Quadratische Gleichung
+7.7;Division durch null vermeiden;Gegenbeispiel;Grenzwerte
+7.8;Gauß-Algorithmus;Rechenbrett;Lineare Gleichungssysteme
+7.9;Heronsche Formel;Sehnenviereck;Spezialfall prüfen
+7.10;Wissen und Beweis unterscheiden;Quellenkritik;Satz des Pythagoras
+7.11;Euklidischer Algorithmus;Kettenbruch;Inkommensurabilität
+7.12;Widerspruchsbeweis;Gerade und ungerade;Inkommensurabilität
+7.13;Exhaustionsmethode;Doppelter Widerspruch;Grenzwerte
+7.14;Euklids Primzahlbeweis;Konstruktiver Beweis;Aktual und potentiell unendlich
+7.15;Einschließung;Rekursion;Mittelwerte
+7.16;Hebelgesetz;Scheibenmethode;Heuristik und Beweis
+7.17;Sehnenrechnung;Goldener Schnitt;Trigonometrie
+7.18;Rationale Parametrisierung;Diophantische Gleichung;Geschickter Ansatz
+7.19;Quadratische Gleichung;Fallunterscheidung;Historische Normalform
+7.20;Quadratische Ergänzung;Geometrische Algebra;Rezept entschlüsseln
+7.21;Kegelschnitte;Geometrische Lösung;Kubische Gleichung
+7.22;Komplexe Zahlen;Cardanische Formel;Casus irreducibilis
+7.23;Lineare Rekursion;Modellannahmen;Fibonacci
+7.24;Cardanische Formel;Substitution (Gleichung);Vieta;Kubische Gleichung
+7.25;Logarithmengesetze;Tabellenrechnen;Kinematische Definition
+7.26;Doppelte Nullstelle;Tangente;Koordinatengeometrie
+7.27;Extremwertaufgabe;Differenzenquotient;Infinitesimalien
+7.28;Erwartungswert;Fallaufzählung;Rückwärtsrechnen
+7.29;Potenzreihe;Leibniz-Kriterium;Konvergenzgeschwindigkeit
+7.30;Divergente Reihen;Gegenbeispiel;Abel-Summation
+7.31;Binomialreihe;Potenzreihe;Geschickter Ansatz
+7.32;Produktregel;Infinitesimalien;Differentiale
+7.33;Produktdarstellung;Koeffizientenvergleich;Heuristik und Beweis
+7.34;Dedekind-Schnitt;Vollständigkeit;Supremum und Infimum
+7.35;Gleichmäßige Konvergenz;Gegenbeispiel;Majorante
+7.36;Diagonalargument;Widerspruchsbeweis;Abzählbarkeit
+7.37;Symmetrische Funktionen;Permutationen der Wurzeln;Vieta
+7.38;Galoisgruppe;Zerfällungskörper;Auflösbarkeit
+7.39;Peano-Axiome;Rekursive Definition;Vollständige Induktion
+7.40;Russellsche Antinomie;Widerspruchsbeweis;Axiomatik
+8.1;Euler-Charakteristik;Doppeltes Abzählen;Fallunterscheidung
+8.2;Gradzählung;Euler-Weg;Invariante
+8.3;Euler-Charakteristik;Quadratmodell;Zählen
+8.4;Metrik prüfen;Dreiecksungleichung;Offene Kugeln;Fallunterscheidung
+8.5;Metrik prüfen;Dreiecksungleichung;Offene Kugeln;Äquivalente Metriken
+8.6;Banachscher Fixpunktsatz;Fixpunktiteration;Mittelwertsatz;Fehlerschranke
+8.7;Gegenbeispiel;Homöomorphismus;Cauchy-Folge;Invariante
+8.8;Basiskriterium;Offen und abgeschlossen;Feinere Topologie;Abzählbarkeitsargument
+8.9;Inneres und Abschluss;Rand;Teilraumtopologie;Dichtheit
+8.10;Gegenbeispiel;Offene Mengen;Inneres und Abschluss
+8.11;Homöomorphismus;Stetigkeit;Umkehrabbildung
+8.12;Quotientenraum;Verklebung verfolgen;Euler-Charakteristik;Orientierbarkeit
+8.13;Gegenbeispiel;Homöomorphismus;Kompaktheit;Umkehrabbildung
+8.14;Zusammenhang;Punkte entfernen;Invariante;Zwischenwertsatz
+8.15;Zusammenhang;Wegzusammenhang;Abschluss;Widerspruchsbeweis;Grenzwerte
+8.16;Kompaktheit;Heine-Borel;Offene Überdeckung;Gegenbeispiel
+8.17;Kompaktheit;Ternärdarstellung;Cantors Diagonalargument;Geometrische Reihe;Zusammenhang
+8.18;Gegenbeispiel;Kompaktheit;Folgenkompaktheit;Offene Überdeckung
+8.19;Trennungsaxiome;Hausdorff-Eigenschaft;Gegenbeispiel;Quotientenraum
+8.20;Gegenbeispiel;Hausdorff-Eigenschaft;Konvergenz;Grenzwerte
+8.21;Deformationsretrakt;Homotopie;Fundamentalgruppe
+8.22;Deformationsretrakt;Fundamentalgruppe;Quadratmodell;Freie Gruppe
+8.23;Überlagerung;Hochheben von Wegen;Windungszahl;Fundamentalgruppe
+8.24;Brouwerscher Fixpunktsatz;Retraktion;Zwischenwertsatz;Widerspruchsbeweis
+8.25;Satz von Borsuk-Ulam;Zwischenwertsatz;Stetigkeitsargument;Konstruktion einer Hilfsfunktion
+8.26;Gegenbeispiel;Brouwerscher Fixpunktsatz;Kompaktheit
+8.27;Kantenwort;Euler-Charakteristik;Orientierbarkeit;Klassifikation der Flächen;Verklebung verfolgen
+8.28;Kantenwort;Euler-Charakteristik;Orientierbarkeit;Fundamentalgruppe;Verklebung verfolgen
+8.29;Simpliziale Homologie;Randoperator;Rang;Lineare Gleichungssysteme;Euler-Charakteristik
+8.30;Simpliziale Homologie;Mayer-Vietoris;Betti-Zahlen;Euler-Charakteristik;Quadratmodell
+8.31;Knoteninvariante;Reidemeister-Züge;Dreifärbbarkeit;Fallunterscheidung
+8.32;Knoteninvariante;Lineare Gleichungssysteme;Modulare Arithmetik;Determinante;Rang
+8.33;Kritische Punkte;Hesse-Matrix;Morse-Index;Euler-Charakteristik;Partielle Ableitungen
+8.34;Vietoris-Rips-Komplex;Betti-Zahlen;Euler-Charakteristik;Filtrierung;Trigonometrie
+9.1;Klassifikation von DGL;Einsetzen und Prüfen;Richtungsfeld
+9.2;Richtungsfeld;Stationäre Lösungen;Vorzeichenanalyse;Qualitative Analyse
+9.3;Trennung der Variablen;Integrierender Faktor;Bernoulli-Gleichung;Stationäre Lösungen
+9.4;Exakte Differentialgleichung;Integrierender Faktor;Partielle Ableitungen;Potential bestimmen
+9.5;Trennung der Variablen;Stationäre Lösungen;Fehler finden;Definitionsbereich prüfen
+9.6;Lipschitz-Bedingung;Picard-Iteration;Maximales Existenzintervall;Trennung der Variablen
+9.7;Maximales Existenzintervall;Lipschitz-Bedingung;Gegenbeispiel;Lineare DGL
+9.8;Eigenwerte;Matrixexponential;Linearisierung;Jacobi-Matrix
+9.9;Matrixexponential;Potenzreihe;Diagonalisieren;Nilpotente Matrix
+9.10;Charakteristisches Polynom;Mehrfache Nullstellen;Ansatz vom Typ der rechten Seite;Resonanz;Komplexer Ansatz
+9.11;Ansatz vom Typ der rechten Seite;Resonanz;Koeffizientenvergleich;Charakteristisches Polynom
+9.12;Eulersche Differentialgleichung;Fehler finden;Reduktion der Ordnung;Substitution (Gleichung)
+9.13;Potenzreihenansatz;Rekursion für Koeffizienten;Legendre-Polynome;Besselsche Differentialgleichung;Separationsansatz
+9.14;Potenzreihenansatz;Rekursion für Koeffizienten;Koeffizientenvergleich;Konvergenzradius
+9.15;Greensche Funktion;Sturm-Liouville-Problem;Eigenfunktionen;Fourierreihe;Eigenwertproblem
+9.16;Sturm-Liouville-Problem;Eigenwertproblem;Fallunterscheidung;Orthogonalität;Fourierreihe
+9.17;Randwertproblem;Fredholmsche Alternative;Lineares Gleichungssystem;Fallunterscheidung
+9.18;Gleichgewichtspunkte;Linearisierung;Jacobi-Matrix;Lyapunov-Funktion;Phasenporträt;Erhaltungsgröße
+9.19;Spur-Determinante-Kriterium;Eigenwerte;Linearisierung;Jacobi-Matrix;Erhaltungsgröße;Phasenporträt
+9.20;Linearisierung;Polarkoordinaten;Gegenbeispiel;Lyapunov-Funktion;Hyperbolisches Gleichgewicht
+9.21;Poincaré-Bendixson;Grenzzyklus;Fixpunktiteration;Periodenverdopplung;Gleichgewichtspunkte;Hopf-Bifurkation
+9.22;Bifurkation;Stationäre Lösungen;Vorzeichenanalyse;Polarkoordinaten;Bifurkationsdiagramm
+9.23;Klassifikation von PDE;Charakteristiken;Transportgleichung;Burgers-Gleichung;Stoßbildung
+9.24;Charakteristiken;Transportgleichung;Burgers-Gleichung;Stoßbildung;Trennung der Variablen
+9.25;D'Alembert-Formel;Separationsansatz;Fourierreihe;Energieerhaltung;Eindeutigkeitsbeweis
+9.26;D'Alembert-Formel;Integration stückweiser Funktionen;Spiegelungsmethode;Abhängigkeitsgebiet
+9.27;Separationsansatz;Fourierreihe;Ähnlichkeitsansatz;Komplexer Ansatz;Fundamentallösung
+9.28;Wohlgestelltheit;Gegenbeispiel;Separationsansatz;Maximumprinzip
+9.29;Separationsansatz;Fourierreihe;Spiegelungsmethode;Greensche Funktion;Poissonkern;Brownsche Bewegung
+9.30;Harmonische Funktionen;Mittelwerteigenschaft;Maximumprinzip;Eindeutigkeitsbeweis;Trigonometrie
+9.31;Schwache Ableitung;Sobolev-Raum;Finite Elemente;Steifigkeitsmatrix;Euler-Verfahren;Stabilität numerischer Verfahren
+9.32;Euler-Verfahren;Heun-Verfahren;Runge-Kutta-Verfahren;Konvergenzordnung;Potenzreihe

@@ -1,0 +1,542 @@
+\setgebiet{9}{Topologie}{tief}
+\chapter{Topologie}
+\marginnote{\small\itshape\color{grau}\textbf{Sie brauchen:} Band 8, Kapitel 1--14. Dazu Grenzwerte und Stetigkeit (Gebiet 3), ein wenig Gruppentheorie und lineare Algebra über $\mathbb Z$ (Gebiet 2) für die Kapitel 8, 10 und 11.}[12pt]
+\worum{Topologie übt man an Beispielen und Gegenbeispielen: Welche Mengen sind offen, welche Räume homöomorph, welche kompakt, welche zusammenhängend --- und woran erkennt man das? Die zweite Hälfte rechnet: Fundamentalgruppen, Kantenwörter, Homologie, Knotenfärbungen, Barcodes. Die Stolpersteine sind die Stellen, an denen die Anschauung zuverlässig in die Irre führt.}
+
+\section{Was Sie hier üben}
+\begin{center}
+{\footnotesize\sffamily\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lP{4.9cm}lcll@{}}
+\toprule
+\textbf{Nr.} & \textbf{Titel} & \textbf{Sorte} & \textbf{Grad} & \textbf{Zeit} & \textbf{Band/Kap.}\\
+\midrule
+8.1 & Warum es nur fünf platonische Körper gibt & \typtypisch & \grad2 & 15 min & 8/1\\
+8.2 & Die Brücken von Königsberg & \typwerk & \grad1 & 10 min & 8/1\\
+8.3 & Der Torus hat $\chi = 0$ & \typwerk & \grad1 & 10 min & 8/1\\
+8.4 & Drei ungewohnte Metriken & \typtypisch & \grad2 & 15 min & 8/2\\
+8.5 & Die Maximumsmetrik & \typwerk & \grad1 & 10 min & 8/2\\
+8.6 & $x = \cos x$ mit Banach & \typwerk & \grad2 & 15 min & 8/2\\
+8.7 & Vollständigkeit ist nicht topologisch & \typstolper & \grad2 & 10 min & 8/2\\
+8.8 & Die Sorgenfrey-Gerade & \typwerk & \grad2 & 15 min & 8/3\\
+8.9 & Inneres, Abschluss, Rand & \typwerk & \grad1 & 10 min & 8/3\\
+8.10 & Unendlich viele offene Mengen & \typstolper & \grad1 & 10 min & 8/3\\
+8.11 & Homöomorphismen hinschreiben & \typtypisch & \grad2 & 15 min & 8/4\\
+8.12 & Das Möbiusband & \typwerk & \grad2 & 15 min & 8/4\\
+8.13 & Stetig und bijektiv, aber kein Homöomorphismus & \typstolper & \grad2 & 10 min & 8/4\\
+8.14 & Räume durch Zusammenhang unterscheiden & \typtypisch & \grad2 & 15 min & 8/5\\
+8.15 & Der Sinuskamm & \typwerk & \grad3 & 20 min & 8/5\\
+8.16 & Kompakt oder nicht? & \typtypisch & \grad2 & 15 min & 8/6\\
+8.17 & Die Cantor-Menge & \typwerk & \grad2 & 20 min & 8/6\\
+8.18 & Die Einheitskugel in $\ell^{2}$ & \typstolper & \grad2 & 15 min & 8/6\\
+8.19 & Trennungsaxiome prüfen & \typwerk & \grad2 & 15 min & 8/7\\
+8.20 & Eine Folge mit allen Grenzwerten & \typstolper & \grad1 & 10 min & 8/7\\
+8.21 & Deformationsretrakte & \typtypisch & \grad2 & 15 min & 8/8\\
+8.22 & Der punktierte Torus & \typwerk & \grad2 & 15 min & 8/8\\
+8.23 & Überlagerungen und Windungszahl & \typtypisch & \grad3 & 20 min & 8/8\\
+8.24 & Brouwer anwenden & \typtypisch & \grad2 & 15 min & 8/9\\
+8.25 & Der Schinkensandwich-Satz & \typwerk & \grad3 & 20 min & 8/9\\
+8.26 & Fixpunkte ohne Kompaktheit & \typstolper & \grad1 & 10 min & 8/9\\
+8.27 & Kantenwörter lesen & \typtypisch & \grad2 & 15 min & 8/10\\
+8.28 & Das Wort $aba b^{-1}$ & \typwerk & \grad2 & 15 min & 8/10\\
+8.29 & Homologie des Tetraederrands & \typwerk & \grad2 & 20 min & 8/11\\
+8.30 & Betti-Zahlen bestimmen & \typtypisch & \grad2 & 20 min & 8/11\\
+8.31 & Dreifärbbarkeit & \typwerk & \grad2 & 15 min & 8/12\\
+8.32 & Der Achterknoten & \typtypisch & \grad3 & 20 min & 8/12\\
+8.33 & Höhenfunktionen auf dem Torus & \typwerk & \grad2 & 20 min & 8/13\\
+8.34 & Ein Barcode von Hand & \typwerk & \grad2 & 20 min & 8/14\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\section{Woran Sie merken, dass Sie es können}
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item Sie können für eine konkrete Menge in einem konkreten Raum entscheiden, ob sie offen, abgeschlossen, kompakt, zusammenhängend ist --- und den Beweis in zwei Sätzen führen.
+\item Sie weisen nach, dass zwei Räume homöomorph sind (Abbildung hinschreiben) oder nicht (eine Invariante finden, die sie trennt).
+\item Sie berechnen $\chi$, $\pi_1$ und die Betti-Zahlen einfacher Räume aus einem Modell: Quadrat mit Verklebung, Kantenwort, Triangulierung.
+\item Sie kennen die Gegenbeispiele --- Sinuskamm, Cantor-Menge, kofinite Topologie, Einheitskugel in $\ell^{2}$ --- und wissen, welchen falschen Satz jedes von ihnen widerlegt.
+\end{itemize}
+
+\section{Aufgaben}
+
+%%%%%%%%%%% Kapitel 1
+\stupser{tief}{Zählen Sie Kanten zweimal: jede gehört zu $2$ Flächen und zu $2$ Ecken. Mit $p$-Ecken und $q$ Kanten pro Ecke: $pF = 2K = qE$.}{22pt}
+\begin{karte}{tief}{8.1}{\typtypisch}{\meta{2}{15 min}{Band 8, Kap.\ 1}}
+\kartentitel{Warum es nur fünf platonische Körper gibt}
+\worum{Eulers Polyedersatz $E - K + F = 2$ ist mehr als eine Zählformel: Er schließt Dinge aus. Die klassische Anwendung ist der Beweis, dass es genau fünf regelmäßige konvexe Polyeder gibt.}
+\methoden{Euler-Charakteristik, Doppeltes Abzählen, Fallunterscheidung}
+Ein regelmäßiges Polyeder habe lauter $p$-Ecke als Flächen, und an jeder Ecke stoßen $q$ Kanten zusammen ($p, q\ge3$).
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie $pF = 2K$ und $qE = 2K$.
+\item Setzen Sie in $E - K + F = 2$ ein und leiten Sie $\frac1p + \frac1q = \frac12 + \frac1K$ her.
+\item Folgern Sie $\frac1p + \frac1q > \frac12$ und bestimmen Sie alle Lösungen $(p, q)$ mit $p, q\ge3$.
+\item Berechnen Sie für jede Lösung $K$, $E$, $F$ und benennen Sie den Körper.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Zählen Sie an jedem Ufer und jeder Insel die Brücken. Ein Weg, der jede Brücke genau einmal benutzt, betritt und verlässt jeden Zwischenpunkt paarweise.}{22pt}
+\begin{karte}{gruen}{8.2}{\typwerk}{\meta{1}{10 min}{Band 8, Kap.\ 1, Aufgabe 1.1}}
+\kartentitel{Die Brücken von Königsberg}
+\worum{Vier Landteile $A, B, C, D$, sieben Brücken: $A$--$C$ zweimal, $A$--$D$, $B$--$C$ zweimal, $B$--$D$, $C$--$D$. Gesucht ist ein Spaziergang, der jede Brücke genau einmal überquert. Euler zeigte $1736$, dass es keinen gibt --- der erste topologische Beweis.}
+\methoden{Gradzählung, Euler-Weg, Invariante}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie den Grad (die Brückenzahl) jedes Landteils und prüfen Sie: Die Summe ist das Doppelte der Brückenzahl.
+\item Beweisen Sie: Hat ein zusammenhängender Graph einen Weg, der jede Kante genau einmal benutzt, so haben höchstens zwei Knoten ungeraden Grad. Folgern Sie, dass es in Königsberg keinen solchen Weg gibt.
+\item Welche Brücke müsste man abreißen (oder hinzubauen), damit ein solcher Weg existiert? Und was ist nötig, damit der Weg zum Ausgangspunkt zurückkehrt?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Quadrat mit verklebten Gegenseiten: Wie viele Ecken bleiben nach dem Verkleben übrig? Alle vier werden eine.}{22pt}
+\begin{karte}{gruen}{8.3}{\typwerk}{\meta{1}{10 min}{Band 8, Kap.\ 1, Aufgabe 1.2}}
+\kartentitel{Der Torus hat $\chi = 0$}
+\worum{Die Euler-Charakteristik hängt nicht von der Zerlegung ab --- das ist ein Satz, den man an Beispielen prüfen sollte, bevor man ihm glaubt.}
+\methoden{Euler-Charakteristik, Quadratmodell, Zählen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Quadratmodell: Der Torus entsteht aus $[0, 1]^{2}$ durch Verkleben von $(0, y)\sim(1, y)$ und $(x, 0)\sim(x, 1)$. Zählen Sie Ecken, Kanten und Flächen \emph{nach} dem Verkleben.
+\item Zweite Zerlegung: Teilen Sie das Quadrat in ein $3\times3$-Gitter aus neun kleinen Quadraten und zählen Sie erneut nach dem Verkleben.
+\item Dritte Zerlegung (frei): Zerlegen Sie den Torus als \enquote{Ring aus $n$ Vierecken}, also einen Zylinder aus $n$ Rechtecken, dessen Enden verklebt werden. Was ergibt sich für beliebiges $n$?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 2
+\stupser{tief}{(b) Zwei Punkte, die nicht mit dem Ursprung auf einer Geraden liegen, erreicht man nur über Paris --- den Ursprung.}{22pt}
+\begin{karte}{tief}{8.4}{\typtypisch}{\meta{2}{15 min}{Band 8, Kap.\ 2}}
+\kartentitel{Drei ungewohnte Metriken}
+\worum{Metrik heißt: nichtnegativ und definit, symmetrisch, Dreiecksungleichung. Die Beispiele zeigen, wie verschieden \enquote{Abstand} aussehen kann --- und dass die offenen Kugeln nicht rund sein müssen.}
+\methoden{Metrik prüfen, Dreiecksungleichung, Offene Kugeln, Fallunterscheidung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Die diskrete Metrik auf einer beliebigen Menge: $d(x, y) = 0$ für $x = y$, sonst $1$. Prüfen Sie die Axiome. Was sind die offenen Kugeln $B_r(x)$ für $r\le1$ und $r > 1$? Welche Mengen sind offen?
+\item Die französische Eisenbahnmetrik auf $\mathbb R^{2}$: $d(x, y) = |x - y|$, falls $x, y$ und $0$ auf einer Geraden liegen, sonst $d(x, y) = |x| + |y|$. Prüfen Sie die Dreiecksungleichung (Fallunterscheidung) und skizzieren Sie $B_r(x)$ für $r < |x|$ und für $r > |x|$.
+\item Auf $\mathbb R$ sei $d(x, y) = |\arctan x - \arctan y|$. Warum ist das eine Metrik? Welche Teilmengen von $\mathbb R$ sind offen? Ist $(\mathbb R, d)$ vollständig? (Betrachten Sie $x_n = n$.)
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Dreiecksungleichung: Das Maximum über $i$ von $|x_i - z_i|\le|x_i - y_i| + |y_i - z_i|$ ist höchstens die Summe der beiden Maxima.}{22pt}
+\begin{karte}{gruen}{8.5}{\typwerk}{\meta{1}{10 min}{Band 8, Kap.\ 2, Aufgabe 2.1}}
+\kartentitel{Die Maximumsmetrik}
+\worum{Auf $\mathbb R^{n}$ gibt es viele Metriken. $d_\infty(x, y) = \max_i|x_i - y_i|$ ist die bequemste für Abschätzungen --- und erzeugt dieselbe Topologie wie die euklidische.}
+\methoden{Metrik prüfen, Dreiecksungleichung, Offene Kugeln, Äquivalente Metriken}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $d_\infty$ eine Metrik auf $\mathbb R^{n}$ ist.
+\item Zeichnen Sie die Einheitskugeln $\{x\colon d(x, 0)\le1\}$ in $\mathbb R^{2}$ für $d_1(x, y) = \sum|x_i - y_i|$, $d_2$ (euklidisch) und $d_\infty$.
+\item Zeigen Sie $d_\infty\le d_2\le d_1\le n\,d_\infty$ und folgern Sie, dass alle drei dieselben offenen Mengen haben.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Auf $[0{,}5;\ 1]$ ist $|\cos x - \cos y| = |\sin\xi|\,|x - y|\le\sin(1)\,|x - y|$ mit $\sin1 = 0{,}8415$.}{22pt}
+\begin{karte}{gruen}{8.6}{\typwerk}{\meta{2}{15 min}{Band 8, Kap.\ 2, Aufgabe 2.2}}
+\kartentitel{$x = \cos x$ mit Banach}
+\worum{Der Banachsche Fixpunktsatz liefert Existenz, Eindeutigkeit, ein Verfahren und eine Fehlerschranke auf einmal. Die Gleichung $x = \cos x$ ist das Musterbeispiel.}
+\methoden{Banachscher Fixpunktsatz, Fixpunktiteration, Mittelwertsatz, Fehlerschranke}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Finden Sie ein abgeschlossenes Intervall $X$ mit $\cos(X)\subseteq X$.
+\item Zeigen Sie mit dem Mittelwertsatz, dass $\cos$ auf $X$ eine Kontraktion ist, und bestimmen Sie die Konstante $q$.
+\item Iterieren Sie von $x_0 = 0{,}75$ aus drei Schritte und geben Sie den Fixpunkt auf sechs Stellen an.
+\item A-priori-Schranke: $d(x_n, x^{*})\le\frac{q^{n}}{1 - q}\,d(x_1, x_0)$. Wie viele Schritte garantieren einen Fehler unter $10^{-6}$? Vergleichen Sie mit dem tatsächlichen Fehler nach $10$ Schritten.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$x\mapsto\tan\bigl(\pi(x - \frac12)\bigr)$ ist ein Homöomorphismus $(0, 1)\to\mathbb R$. Links ist $\frac1n$ eine Cauchy-Folge ohne Grenzwert, rechts gibt es so etwas nicht.}{22pt}
+\begin{karte}{akzent}{8.7}{\typstolper}{\meta{2}{10 min}{Band 8, Kap.\ 2}}
+\kartentitel{Vollständigkeit ist nicht topologisch}
+\worum{Vollständigkeit, Beschränktheit, Cauchy-Folge --- diese Begriffe gehören zur Metrik, nicht zur Topologie. Homöomorphe Räume können sich in ihnen unterscheiden. Wer das vergisst, \enquote{beweist} falsche Sätze.}
+\methoden{Gegenbeispiel, Homöomorphismus, Cauchy-Folge, Invariante}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $(0, 1)$ und $\mathbb R$ homöomorph sind, $(0, 1)$ aber nicht vollständig und $\mathbb R$ vollständig ist.
+\item Was ist die Folge $\frac1n$ in $(0, 1)$ unter dem Homöomorphismus? Ist das Bild eine Cauchy-Folge?
+\item Beschränktheit: Ist \enquote{beschränkt} eine topologische Eigenschaft? Und \enquote{kompakt}? Begründen Sie den Unterschied.
+\item Welche der folgenden Aussagen sind richtig? (i) Ein stetiges Bild einer Cauchy-Folge ist eine Cauchy-Folge. (ii) Ein gleichmäßig stetiges Bild einer Cauchy-Folge ist eine Cauchy-Folge. (iii) Ein Homöomorphismus bildet konvergente Folgen auf konvergente Folgen ab.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 3
+\stupser{gruen}{(d) Zu jedem $x$ gibt es ein Basiselement $B$ mit $x\in B\subseteq[x, x + 1)$ --- und dann ist $x = \min B$. Verschiedene $x$, verschiedene $B$.}{22pt}
+\begin{karte}{gruen}{8.8}{\typwerk}{\meta{2}{15 min}{Band 8, Kap.\ 3, Aufgabe 3.1}}
+\kartentitel{Die Sorgenfrey-Gerade}
+\worum{$\mathbb R_\ell$ ist $\mathbb R$ mit der von den halboffenen Intervallen $[a, b)$ erzeugten Topologie. Sie ist das Standardgegenbeispiel der mengentheoretischen Topologie: harmlos aussehend, mit überraschenden Eigenschaften.}
+\methoden{Basiskriterium, Offen und abgeschlossen, Feinere Topologie, Abzählbarkeitsargument}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $\mathcal B = \{[a, b)\colon a < b\}$ eine Basis ist (Durchschnitt zweier Basiselemente ist wieder eines oder leer).
+\item Ist $[0, 1)$ offen? Abgeschlossen? Und $(0, 1)$? Und $[0, 1]$?
+\item Zeigen Sie: Jede in $\mathbb R$ offene Menge ist in $\mathbb R_\ell$ offen, aber nicht umgekehrt. Welche Topologie ist feiner?
+\item Zeigen Sie, dass $\mathbb R_\ell$ keine abzählbare Basis hat. (Warum hat trotzdem jeder Punkt eine abzählbare Umgebungsbasis?)
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Dreimal dieselbe Menge, drei Räume. In $\mathbb R$: Jedes Intervall enthält Irrationales (kein Inneres) und Rationales (Abschluss $[0, 1]$).}{22pt}
+\begin{karte}{gruen}{8.9}{\typwerk}{\meta{1}{10 min}{Band 8, Kap.\ 3, Aufgabe 3.2}}
+\kartentitel{Inneres, Abschluss, Rand}
+\worum{Inneres, Abschluss und Rand hängen vom umgebenden Raum ab, nicht nur von der Menge. Die Aufgabe macht das an $A = \mathbb Q\cap[0, 1]$ sichtbar.}
+\methoden{Inneres und Abschluss, Rand, Teilraumtopologie, Dichtheit}
+Bestimmen Sie $\operatorname{int}A$, $\overline A$ und $\partial A$ für $A = \mathbb Q\cap[0, 1]$
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item in $\mathbb R$ mit der Standardtopologie,
+\item in $\mathbb Q$ mit der Teilraumtopologie,
+\item in $\mathbb R$ mit der diskreten Topologie.
+\end{enumerate}
+Prüfen Sie jeweils $\partial A = \overline A\setminus\operatorname{int}A$.
+\end{karte}
+
+\stupser{akzent}{$\bigcap_n(-\frac1n, \frac1n) = \{0\}$: Unendlich viele offene Mengen, ein Punkt. Die Axiome erlauben nur \emph{endliche} Durchschnitte --- und das ist kein Schönheitsfehler.}{22pt}
+\begin{karte}{akzent}{8.10}{\typstolper}{\meta{1}{10 min}{Band 8, Kap.\ 3}}
+\kartentitel{Unendlich viele offene Mengen}
+\worum{Beliebige Vereinigungen offener Mengen sind offen, aber nur endliche Durchschnitte. Analog vertauscht der Abschluss mit endlichen, nicht mit unendlichen Vereinigungen. Die Gegenbeispiele sind klein und sollten im Kopf sein.}
+\methoden{Gegenbeispiel, Offene Mengen, Inneres und Abschluss}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Geben Sie unendlich viele offene Mengen in $\mathbb R$ an, deren Durchschnitt nicht offen ist, und unendlich viele abgeschlossene, deren Vereinigung nicht abgeschlossen ist.
+\item Zeigen Sie $\overline{A\cup B} = \overline A\cup\overline B$ und geben Sie Mengen $A_n$ mit $\overline{\bigcup A_n}\neq\bigcup\overline{A_n}$ an.
+\item Zeigen Sie $\partial(A\cup B)\subseteq\partial A\cup\partial B$ und finden Sie $A, B$ mit echter Inklusion.
+\item Was wäre, wenn man beliebige Durchschnitte offener Mengen zuließe? Zeigen Sie: In $\mathbb R$ wäre dann jede Menge offen.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 4
+\stupser{tief}{Ein Homöomorphismus ist eine stetige Bijektion mit stetiger Umkehrung. Am schnellsten: beide Abbildungen hinschreiben und ihre Stetigkeit ablesen.}{22pt}
+\begin{karte}{tief}{8.11}{\typtypisch}{\meta{2}{15 min}{Band 8, Kap.\ 4}}
+\kartentitel{Homöomorphismen hinschreiben}
+\worum{\enquote{Topologisch gleich} beweist man konstruktiv: Man gibt die Abbildung an. Die Aufgabe sammelt die Standardfälle, die man auswendig können sollte.}
+\methoden{Homöomorphismus, Stetigkeit, Umkehrabbildung}
+Geben Sie jeweils einen Homöomorphismus mit Umkehrabbildung an:
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $(0, 1)\to\mathbb R$ und $(a, b)\to(c, d)$.
+\item Die offene Einheitskreisscheibe $D = \{x\in\mathbb R^{2}\colon|x| < 1\}\to\mathbb R^{2}$.
+\item Der Rand des Quadrats $[-1, 1]^{2}$ $\to$ die Kreislinie $S^{1}$.
+\item $S^{1}\setminus\{(0, 1)\}\to\mathbb R$ (stereographische Projektion). Folgern Sie: $S^{1}$ ist die Einpunktkompaktifizierung von $\mathbb R$.
+\item $\mathbb R^{n}\setminus\{0\}\to S^{n-1}\times(0, \infty)$.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Modell: $[0, 1]^{2}$ mit $(0, y)\sim(1, 1 - y)$. Verfolgen Sie die Randkante $y = 0$: Sie läuft bei $x = 1$ weiter als $y = 1$.}{22pt}
+\begin{karte}{gruen}{8.12}{\typwerk}{\meta{2}{15 min}{Band 8, Kap.\ 4, Aufgabe 4.1}}
+\kartentitel{Das Möbiusband}
+\worum{Das Möbiusband ist der erste Raum, an dem die Anschauung versagt: ein Rand, eine Seite, und Schnitte, die nicht trennen. Papier und Schere sind erlaubt --- aber die Antworten sollen am Modell begründet werden.}
+\methoden{Quotientenraum, Verklebung verfolgen, Euler-Charakteristik, Orientierbarkeit}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Wie viele Randkomponenten hat das Möbiusband? Begründen Sie am Quadratmodell.
+\item Was entsteht beim Schnitt längs der Mittellinie $y = \frac12$? Wie viele Verdrehungen hat das Ergebnis, und ist es einseitig?
+\item Was entsteht beim Schnitt längs $y = \frac13$?
+\item Bestimmen Sie $\chi$ über eine Zerlegung des Quadrats. Vergleichen Sie mit Zylinder und Torus.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$f\colon[0, 1)\to S^{1}$, $t\mapsto e^{2\pi it}$, ist stetig und bijektiv. Die Umkehrung ist bei $(1, 0)$ unstetig --- oder: $[0, 1)$ ist nicht kompakt, $S^{1}$ schon.}{22pt}
+\begin{karte}{akzent}{8.13}{\typstolper}{\meta{2}{10 min}{Band 8, Kap.\ 4}}
+\kartentitel{Stetig und bijektiv, aber kein Homöomorphismus}
+\worum{In der linearen Algebra ist eine bijektive lineare Abbildung automatisch ein Isomorphismus. In der Topologie ist eine stetige Bijektion \emph{nicht} automatisch ein Homöomorphismus --- außer unter einer Zusatzvoraussetzung, die man kennen sollte.}
+\methoden{Gegenbeispiel, Homöomorphismus, Kompaktheit, Umkehrabbildung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $f\colon[0, 1)\to S^{1}$, $t\mapsto(\cos2\pi t, \sin2\pi t)$, stetig und bijektiv ist, aber $f^{-1}$ nicht stetig.
+\item Zeigen Sie dasselbe für $\operatorname{id}\colon(\mathbb R, \text{diskret})\to(\mathbb R, \text{Standard})$.
+\item Beweisen Sie: Eine stetige Bijektion von einem kompakten Raum auf einen Hausdorff-Raum ist ein Homöomorphismus. Welche Voraussetzung ist in (a) und (b) verletzt?
+\item Warum folgt aus (c), dass es keine stetige Bijektion $[0, 1]\to S^{1}$ gibt, obwohl beide kompakt sind? (Hinweis: Entfernen Sie einen Punkt.)
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 5
+\stupser{tief}{Zusammenhang ist eine Invariante --- und bleibt es, wenn man aus beiden Räumen \enquote{entsprechende} Punkte entfernt. Zählen Sie, wie viele Teile ein Raum nach Entfernen eines Punkts hat.}{22pt}
+\begin{karte}{tief}{8.14}{\typtypisch}{\meta{2}{15 min}{Band 8, Kap.\ 5}}
+\kartentitel{Räume durch Zusammenhang unterscheiden}
+\worum{Wie beweist man, dass zwei Räume \emph{nicht} homöomorph sind? Man braucht eine Invariante, in der sie sich unterscheiden. Zusammenhang --- vor und nach dem Entfernen von Punkten --- ist die einfachste.}
+\methoden{Zusammenhang, Punkte entfernen, Invariante, Zwischenwertsatz}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie: $[0, 1]$ und $S^{1}$ sind nicht homöomorph. Ebenso $[0, 1]$ und $[0, 1)$.
+\item Zeigen Sie: $\mathbb R$ und $\mathbb R^{2}$ sind nicht homöomorph.
+\item Die Buchstaben I, L, T, X, O, P als Teilmengen der Ebene: Welche sind untereinander homöomorph? Begründen Sie mit der Zahl der Punkte, deren Entfernung den Buchstaben in $1$, $2$, $3$ oder $4$ Teile zerlegt.
+\item Beweisen Sie mit dem Zwischenwertsatz: Zu jeder stetigen Funktion $f\colon S^{1}\to\mathbb R$ gibt es $x$ mit $f(x) = f(-x)$. (Borsuk--Ulam in Dimension $1$.)
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Zusammenhängend: $S$ ist der Abschluss des Graphen, und der Abschluss einer zusammenhängenden Menge ist zusammenhängend. Wegzusammenhängend: Ein Weg aus $A$ heraus müsste die Oszillationen $\pm1$ überleben.}{22pt}
+\begin{karte}{gruen}{8.15}{\typwerk}{\meta{3}{20 min}{Band 8, Kap.\ 5, Aufgabe 5.1}}
+\kartentitel{Der Sinuskamm}
+\worum{$S = G\cup A$ mit $G = \{(x, \sin\frac1x)\colon0 < x\le1\}$ und $A = \{0\}\times[-1, 1]$. Das Standardbeispiel dafür, dass Zusammenhang und Wegzusammenhang verschieden sind.}
+\methoden{Zusammenhang, Wegzusammenhang, Abschluss, Widerspruchsbeweis, Grenzwerte}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie: $G$ ist wegzusammenhängend, und $\overline G = S$.
+\item Folgern Sie, dass $S$ zusammenhängend ist.
+\item Zeigen Sie, dass $S$ nicht wegzusammenhängend ist: Angenommen $\gamma\colon[0, 1]\to S$ ist ein Weg mit $\gamma(0)\in A$ und $\gamma(1)\in G$. Sei $t_0 = \sup\{t\colon\gamma(t)\in A\}$. Leiten Sie aus der Stetigkeit bei $t_0$ einen Widerspruch her.
+\item Was ändert sich, wenn man $A$ durch den einzelnen Punkt $(0, 0)$ ersetzt? Durch die Strecke $\{0\}\times[-2, 2]$?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 6
+\stupser{tief}{In $\mathbb R^{n}$: kompakt $\iff$ abgeschlossen und beschränkt (Heine--Borel). Für \enquote{nicht kompakt} genügt eine offene Überdeckung ohne endliche Teilüberdeckung --- oder eine Folge ohne Häufungspunkt.}{22pt}
+\begin{karte}{tief}{8.16}{\typtypisch}{\meta{2}{15 min}{Band 8, Kap.\ 6}}
+\kartentitel{Kompakt oder nicht?}
+\worum{Kompaktheit ist der Begriff, der den Satz vom Maximum, die gleichmäßige Stetigkeit und Bolzano--Weierstraß trägt. Man muss sie an konkreten Mengen schnell entscheiden können.}
+\methoden{Kompaktheit, Heine-Borel, Offene Überdeckung, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Geben Sie für $(0, 1)$ eine offene Überdeckung ohne endliche Teilüberdeckung an; ebenso für $\mathbb Z\subseteq\mathbb R$ und für $[0, \infty)$.
+\item Welche der folgenden Mengen sind kompakt: $\{0\}\cup\{\frac1n\colon n\in\mathbb N\}$; $\{\frac1n\}$ ohne die $0$; die Einheitssphäre $S^{n-1}$; $\{(x, y)\colon xy = 1\}$; $\{(x, y)\colon x^{2} + y^{2}\le1,\ y > 0\}$; $\mathbb Q\cap[0, 1]$ (in $\mathbb R$)?
+\item Zeigen Sie: Das stetige Bild einer kompakten Menge ist kompakt. Folgern Sie den Satz vom Maximum.
+\item Zeigen Sie: Eine kompakte Teilmenge eines metrischen Raums ist abgeschlossen und beschränkt. (Die Umkehrung gilt nicht --- Aufgabe 8.18.)
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$C = \bigcap C_n$, jedes $C_n$ eine endliche Vereinigung abgeschlossener Intervalle. Elemente von $C$: Ternärbrüche nur mit Ziffern $0$ und $2$.}{22pt}
+\begin{karte}{gruen}{8.17}{\typwerk}{\meta{2}{20 min}{Band 8, Kap.\ 6, Aufgabe 6.1}}
+\kartentitel{Die Cantor-Menge}
+\worum{Aus $[0, 1]$ entfernt man das offene mittlere Drittel, aus den beiden Resten wieder, und so fort. Was übrig bleibt, ist das vielseitigste Gegenbeispiel der Analysis: kompakt, überabzählbar, vom Maß null, ohne isolierte Punkte, total unzusammenhängend.}
+\methoden{Kompaktheit, Ternärdarstellung, Cantors Diagonalargument, Geometrische Reihe, Zusammenhang}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $C$ kompakt ist.
+\item Zeigen Sie: $x\in C$ genau dann, wenn $x$ eine Ternärdarstellung ohne die Ziffer $1$ hat. Folgern Sie, dass $C$ überabzählbar ist.
+\item Berechnen Sie die Gesamtlänge der entfernten Intervalle. Was folgt für das \enquote{Maß} von $C$?
+\item Zeigen Sie: $C$ enthält kein Intervall (total unzusammenhängend), aber keinen isolierten Punkt (perfekt).
+\item Ist $\frac14$ in $C$? Und $\frac34$? Und $\frac1{10}$?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Die Einheitsvektoren $e_n$ haben paarweise Abstand $\sqrt2$. Eine Folge ohne konvergente Teilfolge in einer abgeschlossenen, beschränkten Menge.}{22pt}
+\begin{karte}{akzent}{8.18}{\typstolper}{\meta{2}{15 min}{Band 8, Kap.\ 6}}
+\kartentitel{Die Einheitskugel in $\ell^{2}$}
+\worum{\enquote{Abgeschlossen und beschränkt, also kompakt} --- in $\mathbb R^{n}$ richtig, in unendlichdimensionalen Räumen falsch. Der Fehler ist häufig, weil Heine--Borel so vertraut ist.}
+\methoden{Gegenbeispiel, Kompaktheit, Folgenkompaktheit, Offene Überdeckung}
+Sei $\ell^{2}$ der Raum der quadratsummierbaren Folgen mit $\|x\| = \bigl(\sum x_k^{2}\bigr)^{1/2}$, und $\overline B = \{x\colon\|x\|\le1\}$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $\overline B$ abgeschlossen und beschränkt ist.
+\item Sei $e_n$ die Folge mit $1$ an der Stelle $n$ und $0$ sonst. Berechnen Sie $\|e_n - e_m\|$ für $n\neq m$ und folgern Sie, dass $(e_n)$ keine konvergente Teilfolge hat.
+\item Geben Sie eine offene Überdeckung von $\overline B$ ohne endliche Teilüberdeckung an. (Kugeln vom Radius $\frac12$ um alle Punkte --- wie viele $e_n$ liegen in einer?)
+\item Wo genau geht der Beweis von Heine--Borel (Intervallschachtelung, Halbieren der Würfel) in unendlicher Dimension schief?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 7
+\stupser{gruen}{(a) Zwei nichtleere offene Mengen der kofiniten Topologie haben endliche Komplemente --- ihr Durchschnitt ist nie leer.}{22pt}
+\begin{karte}{gruen}{8.19}{\typwerk}{\meta{2}{15 min}{Band 8, Kap.\ 7, Aufgabe 7.1}}
+\kartentitel{Trennungsaxiome prüfen}
+\worum{$T_0$: je zwei Punkte durch eine offene Menge unterscheidbar; $T_1$: Einpunktmengen abgeschlossen; $T_2$ (Hausdorff): disjunkte Umgebungen; $T_4$ (normal): disjunkte abgeschlossene Mengen trennbar. Die Beispiele zeigen, dass jede Stufe eine echte ist.}
+\methoden{Trennungsaxiome, Hausdorff-Eigenschaft, Gegenbeispiel, Quotientenraum}
+Untersuchen Sie $T_0$, $T_1$, $T_2$ für
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $\mathbb R$ mit der kofiniten Topologie (offen: $\emptyset$ und alle Mengen mit endlichem Komplement). Ist dieser Raum kompakt?
+\item den Sierpiński-Raum $S = \{0, 1\}$ mit $\mathcal T = \{\emptyset, \{1\}, S\}$;
+\item den Quotienten $\mathbb R/\mathbb Q$ (mit $x\sim y\iff x - y\in\mathbb Q$);
+\item jeden metrischen Raum --- zeigen Sie hier zusätzlich $T_4$ mit der Funktion $f(x) = \frac{d(x, A)}{d(x, A) + d(x, B)}$.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{In der kofiniten Topologie enthält jede Umgebung jedes Punkts fast alle Glieder jeder injektiven Folge. Die Folge $x_n = n$ konvergiert gegen $\pi$, gegen $0$, gegen alles.}{22pt}
+\begin{karte}{akzent}{8.20}{\typstolper}{\meta{1}{10 min}{Band 8, Kap.\ 7}}
+\kartentitel{Eine Folge mit allen Grenzwerten}
+\worum{\enquote{Der Grenzwert} einer Folge --- der bestimmte Artikel setzt Eindeutigkeit voraus, und die gilt nur in Hausdorff-Räumen. Die Aufgabe zeigt, was ohne $T_2$ passiert.}
+\methoden{Gegenbeispiel, Hausdorff-Eigenschaft, Konvergenz, Grenzwerte}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie: In $\mathbb R$ mit der kofiniten Topologie konvergiert jede Folge mit paarweise verschiedenen Gliedern gegen \emph{jeden} Punkt.
+\item Gegen welche Punkte konvergiert die konstante Folge $x_n = 5$? Die Folge $1, 2, 1, 2, \dots$?
+\item Beweisen Sie: In einem Hausdorff-Raum hat jede Folge höchstens einen Grenzwert.
+\item Im Sierpiński-Raum (Aufgabe 8.19b): Wogegen konvergiert die konstante Folge $1, 1, 1, \dots$? Und $0, 0, 0, \dots$?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 8
+\stupser{tief}{Ein Deformationsretrakt braucht eine Homotopie $H(x, t)$ mit $H(x, 0) = x$, $H(x, 1)\in A$ und $H(a, t) = a$ für $a\in A$. Meist tut es die gerade Verbindungsstrecke: $H(x, t) = (1 - t)x + t\,r(x)$.}{22pt}
+\begin{karte}{tief}{8.21}{\typtypisch}{\meta{2}{15 min}{Band 8, Kap.\ 8}}
+\kartentitel{Deformationsretrakte}
+\worum{Homotopieäquivalente Räume haben dieselbe Fundamentalgruppe. Die wichtigste Quelle solcher Äquivalenzen: Ein Raum zieht sich auf einen Teilraum zusammen. Die Aufgabe übt, die Homotopie hinzuschreiben.}
+\methoden{Deformationsretrakt, Homotopie, Fundamentalgruppe}
+Zeigen Sie, dass $A$ ein Deformationsretrakt von $X$ ist, und geben Sie $\pi_1(X)$ an:
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $X = \mathbb R^{2}\setminus\{0\}$, $A = S^{1}$.
+\item $X = \{x\in\mathbb R^{2}\colon1\le|x|\le2\}$ (Kreisring), $A = \{|x| = 1\}$.
+\item $X = \mathbb R^{3}\setminus z\text{-Achse}$, $A = $ Einheitskreis in der $xy$-Ebene.
+\item $X$ = Möbiusband, $A$ = Mittellinie. (Was folgt für $\pi_1$ des Möbiusbands?)
+\item $X = \mathbb R^{2}\setminus\{p, q\}$, $A$ = eine \enquote{Acht} aus zwei Kreisen um $p$ und $q$, die sich in einem Punkt berühren. (Skizze genügt; was ist $\pi_1$?)
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Das Quadrat ohne Mittelpunkt zieht sich radial auf seinen Rand zusammen. Der Rand ist nach dem Verkleben eine Acht: $S^{1}\vee S^{1}$.}{22pt}
+\begin{karte}{gruen}{8.22}{\typwerk}{\meta{2}{15 min}{Band 8, Kap.\ 8, Aufgabe 8.1}}
+\kartentitel{Der punktierte Torus}
+\worum{$\pi_1(T^{2}) = \mathbb Z\times\mathbb Z$ ist abelsch. Entfernt man einen Punkt, wird die Gruppe frei --- die Relation $ab = ba$ lebte in der Fläche, die man weggenommen hat.}
+\methoden{Deformationsretrakt, Fundamentalgruppe, Quadratmodell, Freie Gruppe}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $[0, 1]^{2}\setminus\{(\frac12, \frac12)\}$ sich auf den Rand des Quadrats zusammenzieht.
+\item Was ist der Rand des Quadrats nach den Torus-Verklebungen? Folgern Sie $\pi_1(T^{2}\setminus\{p\})$.
+\item Vergleichen Sie mit $\pi_1(T^{2}) = \langle a, b\mid aba^{-1}b^{-1}\rangle$: Woher kommt die Relation, und warum verschwindet sie?
+\item Zeigen Sie, dass $\pi_1(T^{2}\setminus\{p\})$ nicht abelsch ist (es genügt ein Homomorphismus auf eine nichtabelsche Gruppe, etwa $S_3$).
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{(a) Jede Schleife in $S^{1}$ hebt sich eindeutig zu einem Weg in $\mathbb R$ mit Anfang $0$; sein Endpunkt ist eine ganze Zahl --- die Windungszahl.}{22pt}
+\begin{karte}{tief}{8.23}{\typtypisch}{\meta{3}{20 min}{Band 8, Kap.\ 8}}
+\kartentitel{Überlagerungen und Windungszahl}
+\worum{$p\colon\mathbb R\to S^{1}$, $t\mapsto e^{2\pi it}$, ist die Mutter aller Überlagerungen. Mit ihr berechnet man $\pi_1(S^{1})$, den Grad von $z\mapsto z^{n}$ und --- über $S^{2}\to\mathbb{RP}^{2}$ --- die Fundamentalgruppe der projektiven Ebene.}
+\methoden{Überlagerung, Hochheben von Wegen, Windungszahl, Fundamentalgruppe}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Erklären Sie, wie das Hochheben von Wegen jeder Schleife $\gamma$ in $S^{1}$ (Basispunkt $1$) eine ganze Zahl $\deg\gamma$ zuordnet, und warum homotope Schleifen denselben Grad haben.
+\item Bestimmen Sie den Grad von $\gamma_n(t) = e^{2\pi int}$ und von $t\mapsto e^{2\pi i\sin(\pi t)}$.
+\item Folgern Sie $\pi_1(S^{1})\cong\mathbb Z$ (Sie dürfen benutzen, dass Schleifen gleichen Grades homotop sind).
+\item $\mathbb{RP}^{2} = S^{2}/(x\sim-x)$. Zeigen Sie, dass $S^{2}\to\mathbb{RP}^{2}$ eine zweiblättrige Überlagerung ist, und folgern Sie $\pi_1(\mathbb{RP}^{2})\cong\mathbb Z/2$. Welche Schleife ist der Erzeuger, und warum ist ihr Quadrat trivial?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 9
+\stupser{tief}{(b) Gäbe es eine Retraktion $r\colon D^{2}\to S^{1}$, so hätte $x\mapsto-r(x)$ keinen Fixpunkt. Gäbe es $f$ ohne Fixpunkt, so definiert der Strahl von $f(x)$ durch $x$ eine Retraktion.}{22pt}
+\begin{karte}{tief}{8.24}{\typtypisch}{\meta{2}{15 min}{Band 8, Kap.\ 9}}
+\kartentitel{Brouwer anwenden}
+\worum{Jede stetige Abbildung $D^{n}\to D^{n}$ hat einen Fixpunkt. Der Satz ist nicht konstruktiv, aber ungemein anwendbar --- und er ist äquivalent zu einer Aussage über Retraktionen, die man kennen sollte.}
+\methoden{Brouwerscher Fixpunktsatz, Retraktion, Zwischenwertsatz, Widerspruchsbeweis}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Eine Landkarte des Landes liegt irgendwo im Land auf dem Boden. Zeigen Sie: Genau ein Punkt der Karte liegt über dem Punkt, den er darstellt. (Warum \enquote{genau ein}? Welcher Fixpunktsatz reicht hier?)
+\item Zeigen Sie: Brouwer für $D^{2}$ ist äquivalent zu \enquote{es gibt keine Retraktion $D^{2}\to S^{1}$}.
+\item Beweisen Sie Brouwer in Dimension $1$ ($f\colon[0, 1]\to[0, 1]$) mit dem Zwischenwertsatz.
+\item Sei $M$ eine $n\times n$-Matrix mit lauter positiven Einträgen. Zeigen Sie mit Brouwer auf dem Simplex $\Delta = \{x\ge0, \sum x_i = 1\}$, dass $M$ einen Eigenvektor mit positiven Einträgen zu einem positiven Eigenwert hat.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Zu jeder Richtung $u\in S^{n-1}$ gibt es eine Hyperebene senkrecht zu $u$, die $A_n$ halbiert. Die Volumina von $A_1, \dots, A_{n-1}$ auf der $u$-Seite geben $f(u)\in\mathbb R^{n-1}$ --- und Borsuk--Ulam liefert $f(u) = f(-u)$.}{22pt}
+\begin{karte}{gruen}{8.25}{\typwerk}{\meta{3}{20 min}{Band 8, Kap.\ 9, Aufgabe 9.1}}
+\kartentitel{Der Schinkensandwich-Satz}
+\worum{Zu $n$ beschränkten messbaren Mengen im $\mathbb R^{n}$ gibt es eine Hyperebene, die alle gleichzeitig halbiert. Der Beweis ist eine Anwendung von Borsuk--Ulam --- und ein Muster dafür, wie man einen topologischen Satz auf ein Maßproblem ansetzt.}
+\methoden{Satz von Borsuk-Ulam, Zwischenwertsatz, Stetigkeitsargument, Konstruktion einer Hilfsfunktion}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $n = 1$: Zeigen Sie mit dem Zwischenwertsatz, dass es zu einer beschränkten messbaren Menge $A\subseteq\mathbb R$ einen Punkt gibt, der sie halbiert.
+\item $n = 2$: Zu jeder Richtung $u\in S^{1}$ gibt es eine Gerade senkrecht zu $u$, die $A_2$ halbiert. Sei $f(u)$ der Flächeninhalt von $A_1$ auf der Seite, in die $u$ zeigt. Zeigen Sie $f(u) + f(-u) = |A_1|$ und wenden Sie Borsuk--Ulam ($S^{1}\to\mathbb R$) an.
+\item Formulieren Sie den Beweis für allgemeines $n$ mit $f\colon S^{n-1}\to\mathbb R^{n-1}$.
+\item Wo braucht man, dass die halbierende Hyperebene stetig von $u$ abhängt, und wie behebt man das Problem, wenn sie nicht eindeutig ist? (Hinweis: Mittelwert aller halbierenden Positionen.)
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Offene Scheibe: $f(x) = \frac{x + e_1}2$ schiebt alles Richtung Rand; der Fixpunkt $e_1$ liegt nicht mehr im Raum. Kreisring: eine Drehung.}{22pt}
+\begin{karte}{akzent}{8.26}{\typstolper}{\meta{1}{10 min}{Band 8, Kap.\ 9}}
+\kartentitel{Fixpunkte ohne Kompaktheit}
+\worum{Brouwer gilt für die abgeschlossene Kugel --- nicht für die offene, nicht für den Kreisring, nicht für die Sphäre. Jede Voraussetzung lässt sich durch ein Gegenbeispiel rechtfertigen.}
+\methoden{Gegenbeispiel, Brouwerscher Fixpunktsatz, Kompaktheit}
+Geben Sie jeweils eine stetige Selbstabbildung ohne Fixpunkt an:
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item der offenen Einheitskreisscheibe $\{|x| < 1\}$;
+\item von $\mathbb R^{2}$;
+\item des Kreisrings $\{1\le|x|\le2\}$;
+\item der Sphäre $S^{2}$;
+\item des Raums $[0, 1]\cup[2, 3]$.
+\end{enumerate}
+Welche Voraussetzung von Brouwer ist jeweils verletzt --- Kompaktheit, Konvexität (allgemeiner: Zusammenziehbarkeit), Zusammenhang?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 10
+\stupser{tief}{Nichtorientierbar genau dann, wenn ein Buchstabe zweimal mit demselben Exponenten vorkommt. $\chi = E - K + 1$ mit $K$ = Zahl der verschiedenen Buchstaben; $E$ durch Verfolgen der Ecken.}{22pt}
+\begin{karte}{tief}{8.27}{\typtypisch}{\meta{2}{15 min}{Band 8, Kap.\ 10}}
+\kartentitel{Kantenwörter lesen}
+\worum{Jede geschlossene Fläche ist ein Vieleck mit paarweise verklebten Kanten, beschrieben durch ein Wort. Aus dem Wort liest man Orientierbarkeit und $\chi$ ab --- und damit nach dem Klassifikationssatz die Fläche.}
+\methoden{Kantenwort, Euler-Charakteristik, Orientierbarkeit, Klassifikation der Flächen, Verklebung verfolgen}
+Bestimmen Sie für jedes Wort die Zahl der Ecken nach dem Verkleben, $\chi$, die Orientierbarkeit und die Fläche:
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $aba^{-1}b^{-1}$
+\item $aa$
+\item $aabb$
+\item $abca^{-1}b^{-1}c^{-1}$
+\item $abcb^{-1}ac$
+\item $aba^{-1}b^{-1}cdc^{-1}d^{-1}$
+\item Welche Flächen haben $\chi = 0$? Welche $\chi = -1$? Warum gibt es keine orientierbare Fläche mit $\chi = -1$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Eine Kantensorte ist gleichsinnig verklebt (das gibt einen Zylinder), die andere gegensinnig: Die beiden Zylinderränder werden verdreht verklebt --- Kleinsche Flasche.}{22pt}
+\begin{karte}{gruen}{8.28}{\typwerk}{\meta{2}{15 min}{Band 8, Kap.\ 10, Aufgabe 10.1}}
+\kartentitel{Das Wort $abab^{-1}$}
+\worum{Ein Quadrat, ein Wort, eine Fläche: Welche? Die Aufgabe führt die Rechnung vollständig durch --- Ecken verfolgen, $\chi$, Orientierbarkeit, Fundamentalgruppe --- und vergleicht mit dem Torus $aba^{-1}b^{-1}$.}
+\methoden{Kantenwort, Euler-Charakteristik, Orientierbarkeit, Fundamentalgruppe, Verklebung verfolgen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeichnen Sie das Quadrat mit den Kantenpfeilen und verfolgen Sie, welche Ecken identifiziert werden.
+\item Berechnen Sie $\chi$ und entscheiden Sie die Orientierbarkeit. Welche Fläche ist es?
+\item Geben Sie $\pi_1$ als Präsentation an (Erzeuger: die Kanten, Relation: das Wort) und zeigen Sie, dass die Gruppe nicht abelsch ist.
+\item Zeigen Sie, dass die Fläche sich auch als Verklebung zweier Möbiusbänder längs ihrer Ränder schreiben lässt, und prüfen Sie $\chi$ auf diesem Weg.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 11
+\stupser{gruen}{$C_2 = \mathbb Z^{4}\to C_1 = \mathbb Z^{6}\to C_0 = \mathbb Z^{4}$. Ränge der Randmatrizen: $\operatorname{rg}\partial_2 = 3$, $\operatorname{rg}\partial_1 = 3$. Dann $b_2 = 4 - 3$, $b_1 = (6 - 3) - 3$, $b_0 = 4 - 3$.}{22pt}
+\begin{karte}{gruen}{8.29}{\typwerk}{\meta{2}{20 min}{Band 8, Kap.\ 11, Aufgabe 11.1}}
+\kartentitel{Homologie des Tetraederrands}
+\worum{Die simpliziale Homologie ist lineare Algebra über $\mathbb Z$: Kettengruppen, Randabbildungen, Kerne modulo Bilder. Die Sphäre als Tetraederoberfläche ist das kleinste Beispiel, an dem alles vorkommt.}
+\methoden{Simpliziale Homologie, Randoperator, Rang, Lineare Gleichungssysteme, Euler-Charakteristik}
+Ecken $v_0, v_1, v_2, v_3$, alle sechs Kanten $[v_iv_j]$, alle vier Dreiecke $[v_iv_jv_k]$, kein Volumen.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Schreiben Sie die Randmatrizen $\partial_1\colon C_1\to C_0$ ($4\times6$) und $\partial_2\colon C_2\to C_1$ ($6\times4$) auf und prüfen Sie $\partial_1\partial_2 = 0$.
+\item Bestimmen Sie $H_0 = C_0/\operatorname{im}\partial_1$.
+\item Bestimmen Sie $\ker\partial_1$ und $\operatorname{im}\partial_2$ und folgern Sie $H_1 = 0$.
+\item Bestimmen Sie $H_2 = \ker\partial_2$ und einen Erzeuger (die \enquote{Fundamentalklasse}).
+\item Prüfen Sie $\chi = b_0 - b_1 + b_2 = E - K + F$.
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Mayer--Vietoris für $X = A\cup B$: $\dots\to H_1(A\cap B)\to H_1(A)\oplus H_1(B)\to H_1(X)\to H_0(A\cap B)\to\dots$ Für die Acht: $A\cap B$ zusammenziehbar, also $H_1(X) = H_1(A)\oplus H_1(B)$.}{22pt}
+\begin{karte}{tief}{8.30}{\typtypisch}{\meta{2}{20 min}{Band 8, Kap.\ 11}}
+\kartentitel{Betti-Zahlen bestimmen}
+\worum{Betti-Zahlen zählt man auf drei Wegen: direkt aus einer Triangulierung, mit Mayer--Vietoris aus Teilstücken, oder --- für Flächen --- aus $\chi$ und Orientierbarkeit. Die Aufgabe übt alle drei am Kreis, an der Acht und am Torus.}
+\methoden{Simpliziale Homologie, Mayer-Vietoris, Betti-Zahlen, Euler-Charakteristik, Quadratmodell}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $S^{1}$ als Rand eines Dreiecks ($3$ Ecken, $3$ Kanten): Bestimmen Sie $H_0$ und $H_1$ direkt.
+\item $S^{1}\vee S^{1}$ (Acht): Bestimmen Sie $H_1$ mit Mayer--Vietoris. Welche Rolle spielt, dass $A\cap B$ zusammenziehbar ist?
+\item Torus: Das Quadratmodell ist ein Zellkomplex mit einer Ecke, zwei Kanten $a, b$, einer Fläche $F$ mit $\partial F = a + b - a - b$. Berechnen Sie $H_0, H_1, H_2$.
+\item Für eine geschlossene orientierbare Fläche gilt $b_0 = b_2 = 1$. Bestimmen Sie $b_1$ für die Fläche vom Geschlecht $g$ aus $\chi = 2 - 2g$. Was ändert sich bei nichtorientierbaren Flächen ($b_2 = 0$, Torsion in $H_1$) --- etwa bei der Kleinschen Flasche?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 12
+\stupser{gruen}{Invarianz: Bei jedem Reidemeister-Zug lässt sich eine Färbung des alten Diagramms eindeutig auf das neue fortsetzen. Beim Zug II etwa bekommt der neue kleine Bogen die Farbe $2a - b$.}{22pt}
+\begin{karte}{gruen}{8.31}{\typwerk}{\meta{2}{15 min}{Band 8, Kap.\ 12, Aufgabe 12.1}}
+\kartentitel{Dreifärbbarkeit}
+\worum{Ein Diagramm heißt dreifärbbar, wenn man die Bögen so mit drei Farben färben kann, dass an jeder Kreuzung alle drei Farben oder nur eine vorkommen --- und mindestens zwei Farben insgesamt. Es ist die einfachste Invariante, die den Kleeblattknoten vom Unknoten unterscheidet.}
+\methoden{Knoteninvariante, Reidemeister-Züge, Dreifärbbarkeit, Fallunterscheidung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass das Standarddiagramm des Kleeblatts dreifärbbar ist, und dass das kreuzungsfreie Diagramm des Unknotens es nicht ist.
+\item Zeigen Sie, dass Dreifärbbarkeit unter den drei Reidemeister-Zügen erhalten bleibt (für Zug III genügt es, die Fälle \enquote{alle drei Bögen gleich} und \enquote{alle drei verschieden} am oberen Bogen zu betrachten).
+\item Folgern Sie: Das Kleeblatt ist nicht der Unknoten.
+\item Zeigen Sie: Die Farben $\{0, 1, 2\}$ mit der Kreuzungsregel $2\cdot(\text{Überbogen})\equiv\text{Unterbogen}_1 + \text{Unterbogen}_2\pmod3$ sind genau die Dreifärbungen. Wie viele Dreifärbungen hat das Kleeblatt (einfarbige mitgezählt)?
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Die Kreuzungsgleichungen modulo $3$ haben nur die einfarbigen Lösungen. Modulo $5$ gibt es $25$ Lösungen, also $20$ echte Fünffärbungen.}{22pt}
+\begin{karte}{tief}{8.32}{\typtypisch}{\meta{3}{20 min}{Band 8, Kap.\ 12}}
+\kartentitel{Der Achterknoten}
+\worum{Der Achterknoten hat vier Kreuzungen und ist nicht dreifärbbar --- ist er also der Unknoten? Nein: Man muss die Farbenzahl wechseln. Die $p$-Färbungen (Fox) sind ein lineares Gleichungssystem modulo $p$, und welche $p$ funktionieren, verrät die Determinante des Knotens.}
+\methoden{Knoteninvariante, Lineare Gleichungssysteme, Modulare Arithmetik, Determinante, Rang}
+Das Standarddiagramm des Achterknotens hat vier Bögen $1, 2, 3, 4$ und vier Kreuzungen; an jeder liegt ein Bogen oben und zwei Bögen enden unten:
+\begin{center}\small
+\begin{tabular}{c|cccc}
+Kreuzung & I & II & III & IV\\ \hline
+Überbogen & $1$ & $3$ & $4$ & $2$\\
+Unterbögen & $2, 4$ & $1, 2$ & $3, 1$ & $4, 3$
+\end{tabular}
+\end{center}
+Eine $p$-Färbung ordnet jedem Bogen eine Zahl in $\mathbb Z/p$ zu, so dass an jeder Kreuzung $2\cdot\text{über}\equiv\text{unter}_1 + \text{unter}_2\pmod p$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Schreiben Sie die vier Gleichungen als Matrix $M$ (Zeilen: Kreuzungen, Spalten: Bögen). Zeigen Sie, dass jede Zeilen- und jede Spaltensumme null ist.
+\item Zeigen Sie, dass es modulo $3$ nur einfarbige Lösungen gibt. Der Achterknoten ist also nicht dreifärbbar.
+\item Finden Sie eine echte Fünffärbung. Wie viele gibt es?
+\item Streichen Sie eine Zeile und eine Spalte von $M$ und berechnen Sie die Determinante des Rests. Für welche Primzahlen $p$ ist der Knoten $p$-färbbar? Vergleichen Sie mit dem Kleeblatt (Determinante $3$).
+\item Folgern Sie, dass der Achterknoten weder der Unknoten noch das Kleeblatt ist.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 13
+\stupser{gruen}{Liegt der Torus flach auf dem Tisch (Achse senkrecht), ist die Höhe $f = \sin u$ auf dem obersten und untersten Kreis konstant --- kritische Kreise statt Punkte. Steht er auf der Seite, ist $f = (2 + \cos u)\cos v$.}{22pt}
+\begin{karte}{gruen}{8.33}{\typwerk}{\meta{2}{20 min}{Band 8, Kap.\ 13, Aufgabe 13.1}}
+\kartentitel{Höhenfunktionen auf dem Torus}
+\worum{Morse-Theorie liest die Topologie einer Mannigfaltigkeit an den kritischen Punkten einer Funktion ab: $c_0 - c_1 + c_2 = \chi$. Die Aufgabe vergleicht den stehenden Torus (vier isolierte kritische Punkte) mit dem liegenden (zwei kritische Kreise).}
+\methoden{Kritische Punkte, Hesse-Matrix, Morse-Index, Euler-Charakteristik, Partielle Ableitungen}
+Torus mit senkrechter Symmetrieachse: $X(u, v) = \bigl((2 + \cos u)\cos v, (2 + \cos u)\sin v, \sin u\bigr)$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Liegender Torus (flach auf dem Tisch), $f = z = \sin u$: Bestimmen Sie die kritischen Punkte. Warum ist $f$ keine Morse-Funktion?
+\item Stehender Torus (auf der Seite), $f = x = (2 + \cos u)\cos v$: Berechnen Sie $f_u$, $f_v$ und die vier kritischen Punkte.
+\item Bestimmen Sie dort die Hesse-Matrix und die Indizes (Minimum $0$, Sattel $1$, Maximum $2$) und prüfen Sie $c_0 - c_1 + c_2 = \chi(T^{2})$.
+\item Was bedeutet \enquote{Morse-Funktionen liegen dicht}, und wie \enquote{repariert} ein kleines Kippen den liegenden Torus?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 14
+\stupser{gruen}{Abstände im regelmäßigen Achteck: $2\sin22{,}5^{\circ} = 0{,}765$, $\sqrt2 = 1{,}414$, $2\sin67{,}5^{\circ} = 1{,}848$, $2$. Bei jedem Wert kommen Kanten hinzu --- und manchmal Dreiecke.}{22pt}
+\begin{karte}{gruen}{8.34}{\typwerk}{\meta{2}{20 min}{Band 8, Kap.\ 14, Aufgabe 14.1}}
+\kartentitel{Ein Barcode von Hand}
+\worum{Persistente Homologie: Man verbindet Punkte, deren Abstand höchstens $\varepsilon$ ist (Vietoris--Rips-Komplex), lässt $\varepsilon$ wachsen und protokolliert, wann Löcher entstehen und verschwinden. Acht Punkte auf einem Kreis sind klein genug für die Hand.}
+\methoden{Vietoris-Rips-Komplex, Betti-Zahlen, Euler-Charakteristik, Filtrierung, Trigonometrie}
+Die Punkte $p_k = (\cos\frac{2\pi k}8, \sin\frac{2\pi k}8)$, $k = 0, \dots, 7$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie die vier vorkommenden Abstände.
+\item Beschreiben Sie den Rips-Komplex für $\varepsilon$ knapp unter und knapp über jedem der vier Werte: Zahl der Ecken, Kanten, Dreiecke (höhere Simplizes nur qualitativ), $b_0$ und $b_1$. Prüfen Sie mit $\chi$, wo es geht.
+\item Bei welchem $\varepsilon$ wird das zentrale Loch geboren, bei welchem stirbt es? Zeichnen Sie den Barcode für $H_0$ und $H_1$.
+\item Was passiert bei $\varepsilon = 2\sin67{,}5^{\circ}$ in höheren Dimensionen --- welcher bekannte Raum ist der Rips-Komplex dort? (Jeder Punkt ist mit allen außer seinem Gegenüber verbunden.)
+\end{enumerate}
+\end{karte}

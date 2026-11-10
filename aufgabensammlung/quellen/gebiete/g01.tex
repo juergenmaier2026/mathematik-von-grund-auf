@@ -1,0 +1,813 @@
+\setgebiet{2}{Zahlentheorie}{tief}
+\chapter{Zahlentheorie}
+\marginnote{\small\itshape\color{grau}\textbf{Sie brauchen:} Band 1, Kapitel 1--8 für die Aufgaben 1.1--1.40, Kapitel 9--19 für 1.41--1.61. Aus Band 0: Induktion (Kap.\ 14) und Bruchrechnung.}[12pt]
+\worum{Die Zahlentheorie ist das Gebiet, in dem man mit kleinen Zahlen große Sätze prüft. Fast jede Aufgabe hier lässt sich mit Bleistift und Papier vollständig durchrechnen --- und genau das ist der Zweck: Teilbarkeit, Kongruenzen und das Reziprozitätsgesetz werden erst Werkzeuge, wenn man sie an $91$ und $65$, an $360$ und an $9907$ benutzt hat.}
+
+\section{Was Sie hier üben}
+\begin{center}
+{\footnotesize\sffamily\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lP{4.9cm}lcll@{}}
+\toprule
+\textbf{Nr.} & \textbf{Titel} & \textbf{Sorte} & \textbf{Grad} & \textbf{Zeit} & \textbf{Band/Kap.}\\
+\midrule
+1.1 & Die Summe der Quadrate & \typtypisch & \grad1 & 10 min & 1/1\\
+1.2 & Alle Pferde sind gleichfarbig & \typstolper & \grad2 & 15 min & 1/1\\
+1.3 & Die Gaußsche Summe & \typwerk & \grad1 & 10 min & 1/1\\
+1.4 & Jede Zahl ist ein Produkt von Primzahlen & \typwerk & \grad2 & 10 min & 1/1\\
+1.5 & $n^{3} - n$ & \typwerk & \grad1 & 10 min & 1/2\\
+1.6 & Division mit Rest, dreimal & \typwerk & \grad1 & 5 min & 1/2\\
+1.7 & Quersummen & \typwerk & \grad1 & 5 min & 1/2\\
+1.8 & Euklid und Bézout & \typtypisch & \grad1 & 10 min & 1/3\\
+1.9 & Durch 4 und durch 6 & \typstolper & \grad1 & 10 min & 1/3\\
+1.10 & ggT(91, 65) & \typwerk & \grad1 & 5 min & 1/3\\
+1.11 & $91x + 65y = 13$ & \typwerk & \grad1 & 10 min & 1/3\\
+1.12 & Hühner und Enten & \typwerk & \grad2 & 15 min & 1/3\\
+1.13 & kgV(91, 65) & \typwerk & \grad1 & 5 min & 1/3\\
+1.14 & Zwei Zahlen, alle Teiler & \typtypisch & \grad1 & 10 min & 1/4\\
+1.15 & Die Teiler von 360 & \typwerk & \grad1 & 10 min & 1/4\\
+1.16 & ggT und kgV aus der Zerlegung & \typwerk & \grad1 & 10 min & 1/4\\
+1.17 & Das Sieb bis 50 & \typwerk & \grad1 & 10 min & 1/4\\
+1.18 & Primzahlen haben die Form $6k\pm1$ & \typwerk & \grad1 & 10 min & 1/4\\
+1.19 & Unendlich viele $4k + 3$ & \typwerk & \grad2 & 15 min & 1/4\\
+1.20 & Eine lineare Kongruenz mit zwei Lösungen & \typtypisch & \grad1 & 10 min & 1/5\\
+1.21 & Kürzen in Kongruenzen & \typstolper & \grad1 & 10 min & 1/5\\
+1.22 & $7^{100}$ modulo 5 & \typwerk & \grad1 & 5 min & 1/5\\
+1.23 & Die Neunerprobe & \typwerk & \grad1 & 10 min & 1/5\\
+1.24 & $6x\equiv15 \pmod{21}$ & \typwerk & \grad1 & 10 min & 1/5\\
+1.25 & Drei Reste, ein Rest & \typtypisch & \grad2 & 15 min & 1/6\\
+1.26 & Meister Sun & \typwerk & \grad2 & 10 min & 1/6\\
+1.27 & $x^{2}\equiv1 \pmod{105}$ & \typwerk & \grad2 & 15 min & 1/6\\
+1.28 & Die Eier im Korb & \typwerk & \grad2 & 10 min & 1/6\\
+1.29 & Letzte Ziffern und Ordnungen & \typtypisch & \grad1 & 10 min & 1/7\\
+1.30 & 341 besteht den Test & \typstolper & \grad2 & 15 min & 1/7\\
+1.31 & $3^{1000}$ modulo 7 & \typwerk & \grad1 & 5 min & 1/7\\
+1.32 & $\varphi(360)$ und $\varphi(1000)$ & \typwerk & \grad1 & 10 min & 1/7\\
+1.33 & Die letzten beiden Ziffern von $7^{2026}$ & \typwerk & \grad2 & 10 min & 1/7\\
+1.34 & Ordnungen modulo 7 & \typwerk & \grad1 & 10 min & 1/7\\
+1.35 & Primitivwurzeln modulo 13 & \typwerk & \grad2 & 15 min & 1/7\\
+1.36 & Wilson für 11 und 9 & \typwerk & \grad1 & 10 min & 1/7\\
+1.37 & Ein Legendre-Symbol, Schritt für Schritt & \typtypisch & \grad2 & 15 min & 1/8\\
+1.38 & $x^{2}\equiv5 \pmod{13}$ & \typwerk & \grad1 & 10 min & 1/8\\
+1.39 & $x^{2}\equiv219 \pmod{383}$ & \typwerk & \grad2 & 15 min & 1/8\\
+1.40 & $1001$ über $9907$ & \typwerk & \grad2 & 15 min & 1/8\\
+1.41 & Vollkommen, multiplikativ & \typtypisch & \grad1 & 10 min & 1/9\\
+1.42 & $\tau(720)$ und $\sigma(720)$ & \typwerk & \grad1 & 5 min & 1/9\\
+1.43 & Primitive Halsketten & \typwerk & \grad3 & 20 min & 1/9\\
+1.44 & Gerade vollkommene Zahlen enden auf 6 oder 28 & \typwerk & \grad2 & 15 min & 1/9\\
+1.45 & $2^{11} - 1$ & \typstolper & \grad1 & 10 min & 1/9\\
+1.46 & Primzahlen jenseits von $10^{20}$ & \typwerk & \grad1 & 10 min & 1/10\\
+1.47 & Der einzige Drilling & \typwerk & \grad1 & 10 min & 1/10\\
+1.48 & Pythagoreische Tripel bis 100 & \typwerk & \grad2 & 15 min & 1/11\\
+1.49 & $\pi$ als Kettenbruch & \typtypisch & \grad2 & 15 min & 1/13\\
+1.50 & Der Kettenbruch von $\sqrt7$ & \typwerk & \grad2 & 15 min & 1/13\\
+1.51 & $x^{2} - 7y^{2} = 1$ & \typwerk & \grad2 & 10 min & 1/13\\
+1.52 & 21 ist $\equiv1 \pmod 4$ & \typstolper & \grad2 & 10 min & 1/14\\
+1.53 & Summen zweier Quadrate & \typwerk & \grad2 & 15 min & 1/14\\
+1.54 & Ein Punkt wird verdoppelt & \typwerk & \grad2 & 15 min & 1/16\\
+1.55 & Quadrieren und Multiplizieren & \typtypisch & \grad1 & 10 min & 1/17\\
+1.56 & Diffie--Hellman mit $p = 23$ & \typwerk & \grad1 & 10 min & 1/17\\
+1.57 & RSA, vollständig & \typwerk & \grad2 & 20 min & 1/17\\
+1.58 & 561 und Miller--Rabin & \typwerk & \grad2 & 15 min & 1/18\\
+1.59 & 8051 nach Fermat & \typwerk & \grad1 & 10 min & 1/19\\
+1.60 & 8051 nach Pollard & \typwerk & \grad2 & 15 min & 1/19\\
+1.61 & Fermats Vermutung über $2^{2^{n}} + 1$ & \typstolper & \grad2 & 15 min & 1/19\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+
+\section{Woran Sie merken, dass Sie es können}
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item Sie führen den euklidischen Algorithmus rückwärts, ohne nachzudenken, und schreiben den ggT als Kombination hin.
+\item Sie kürzen in einer Kongruenz nur durch Zahlen, die zum Modul teilerfremd sind --- und wissen, was sonst mit dem Modul passiert.
+\item Sie reduzieren einen Exponenten, bevor Sie potenzieren: Ordnung oder $\varphi$ zuerst, dann die kleine Potenz.
+\item Sie rechnen ein Legendre-Symbol mit Reziprozität und Ergänzungssätzen aus, ohne eine Quadratzahl aufzulisten.
+\end{itemize}
+
+\section{Aufgaben}
+
+%%%%%%%%%%%%% Kapitel 1
+\stupser{tief}{Der Induktionsschritt ist eine Gleichung: Formel für $n$, plus $(n + 1)^{2}$, muss Formel für $n + 1$ ergeben. Klammern Sie $(n + 1)$ aus, bevor Sie ausmultiplizieren.}{22pt}
+\begin{karte}{tief}{1.1}{\typtypisch}{\meta{1}{10 min}{Band 1, Kap.\ 1}}
+\kartentitel{Die Summe der Quadrate}
+\worum{Die erste Induktion, die nicht mehr $1 + 2 + \dots + n$ ist. Die Formel ist nicht zu erraten, aber zu prüfen --- und der Beweis ist eine Zeile Algebra, wenn man richtig ausklammert.}
+\methoden{Vollständige Induktion, Faktorisieren}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Prüfen Sie $1^{2} + 2^{2} + \dots + n^{2} = \dfrac{n(n + 1)(2n + 1)}6$ für $n = 1, 2, 3, 10$.
+\item Beweisen Sie die Formel durch Induktion.
+\item Wie viele Quadrate (aller Größen) enthält ein $8\times8$-Schachbrett?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Suchen Sie das kleinste $n$, für das der Induktionsschritt benutzt wird --- und prüfen Sie, ob die beiden Teilmengen dort wirklich ein gemeinsames Pferd haben.}{22pt}
+\begin{karte}{akzent}{1.2}{\typstolper}{\meta{2}{15 min}{Band 1, Kap.\ 1}}
+\kartentitel{Alle Pferde sind gleichfarbig}
+\worum{\enquote{Beweis}: Ein Pferd hat eine Farbe. Sind je $n$ Pferde gleichfarbig, so auch $n + 1$: Die ersten $n$ sind es, die letzten $n$ auch, und die Überlappung erzwingt eine gemeinsame Farbe. Also sind alle Pferde gleichfarbig. Wo liegt der Fehler?}
+\methoden{Vollständige Induktion, Fehler finden}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Schreiben Sie den Induktionsschritt für $n = 1\to2$ auf: zwei Pferde $A$ und $B$. Welche Teilmengen werden verglichen, und wo überlappen sie?
+\item Für welche $n$ ist der Schritt $n\to n + 1$ korrekt?
+\item Was lehrt das über die Rolle des Induktionsanfangs --- genauer: über die Frage, ab welchem $n$ der Schritt gilt?
+\item Finden Sie den entsprechenden Fehler in folgendem \enquote{Beweis}: \enquote{Jede Zahl $n\ge1$ ist $\le1$: Für $n = 1$ klar; gilt $n\le1$, so folgt $n + 1\le1$, denn \dots}
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Schreiben Sie die Summe einmal vorwärts, einmal rückwärts untereinander und addieren Sie spaltenweise. Dann Induktion als zweiter Beweis.}{22pt}
+\begin{karte}{gruen}{1.3}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 1, Aufgabe 1.1}}
+\kartentitel{Die Gaußsche Summe}
+\worum{Die Formel, die der neunjährige Gauß angeblich im Kopf fand. Zwei Beweise: einer, der sie erklärt, und einer, der sie beweist.}
+\methoden{Vollständige Induktion, Muster erkennen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie $1 + 2 + \dots + n = \dfrac{n(n + 1)}2$ mit dem Trick des Umkehrens.
+\item Beweisen Sie dieselbe Formel durch Induktion.
+\item Welche der beiden Methoden liefert die Formel, welche setzt sie voraus?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Starke Induktion: Nehmen Sie an, alle Zahlen von $2$ bis $n - 1$ seien Produkte von Primzahlen. Ist $n$ prim, fertig; sonst ist $n = ab$ mit kleineren Faktoren.}{22pt}
+\begin{karte}{gruen}{1.4}{\typwerk}{\meta{2}{10 min}{Band 1, Kap.\ 1, Aufgabe 1.2}}
+\kartentitel{Jede Zahl ist ein Produkt von Primzahlen}
+\worum{Die Existenzhälfte des Fundamentalsatzes --- die leichte. Sie zeigt, wofür man die \emph{starke} Induktion braucht: Der Schritt benutzt nicht $n - 1$, sondern irgendwelche kleineren Zahlen.}
+\methoden{Starke Induktion, Existenzbeweis}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie: Jede natürliche Zahl $n\ge2$ ist ein Produkt von Primzahlen (ein Faktor zugelassen).
+\item Warum reicht die gewöhnliche Induktion ($n - 1\Rightarrow n$) hier nicht?
+\item Welche Hälfte des Fundamentalsatzes ist damit bewiesen, und was fehlt noch?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 2
+\stupser{gruen}{$n^{3} - n = (n - 1)n(n + 1)$: drei aufeinanderfolgende Zahlen. Unter dreien ist immer eine durch $3$ teilbar, unter zweien eine gerade.}{22pt}
+\begin{karte}{gruen}{1.5}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 2, Aufgabe 2.1}}
+\kartentitel{$n^{3} - n$}
+\worum{Ein Teilbarkeitsbeweis, der ohne Induktion auskommt, weil man das Produkt sieht. Die Technik --- faktorisieren, dann aufeinanderfolgende Zahlen --- trägt viele ähnliche Aufgaben.}
+\methoden{Faktorisieren, Teilbarkeitsargument, Aufeinanderfolgende Zahlen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie: Für jedes $n\in\mathbb Z$ ist $n^{3} - n$ durch $6$ teilbar.
+\item Ist $n^{3} - n$ immer durch $12$ teilbar? Prüfen Sie an einem Beispiel.
+\item Zeigen Sie: $n^{5} - n$ ist durch $30$ teilbar. (Hinweis: Kapitel 7 liefert später einen Zweizeiler; hier geht es elementar.)
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Der Rest ist immer $0\le r < b$ --- auch bei negativem $a$. $-100 = -15\cdot7 + 5$, nicht $-14\cdot7 - 2$.}{22pt}
+\begin{karte}{gruen}{1.6}{\typwerk}{\meta{1}{5 min}{Band 1, Kap.\ 2, Aufgabe 2.2}}
+\kartentitel{Division mit Rest, dreimal}
+\worum{Die Division mit Rest ist der Satz, auf dem der euklidische Algorithmus steht. Die Falle ist das Vorzeichen.}
+\methoden{Division mit Rest, Vorzeichenregeln}
+Bestimmen Sie $q$ und $r$ mit $a = qb + r$, $0\le r < b$:
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $a = 100$, $b = 7$ \quad (b) $a = -100$, $b = 7$ \quad (c) $a = 7$, $b = 100$.
+\setcounter{enumi}{3}
+\item Was gibt ein Taschenrechner oder eine Programmiersprache für $-100 \bmod 7$ aus --- und warum ist das manchmal $-2$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Quersumme für $9$; alternierende Quersumme für $11$ --- von rechts beginnend mit Plus.}{22pt}
+\begin{karte}{gruen}{1.7}{\typwerk}{\meta{1}{5 min}{Band 1, Kap.\ 2, Aufgabe 2.3}}
+\kartentitel{Quersummen}
+\worum{Zwei Teilbarkeitsregeln, die jeder kennt und wenige begründen können. Die Begründung kommt in Aufgabe 1.23; hier die Anwendung.}
+\methoden{Teilbarkeitsregeln, Quersumme}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Ist $n = 987\,654\,321$ durch $9$ teilbar? Durch $11$?
+\item Welchen Rest lässt $n$ bei Division durch $11$?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 3
+\stupser{tief}{Immer den Rest weiterverarbeiten, bis er null ist; der letzte Rest ungleich null ist der ggT. Rückwärts: jeden Rest durch die Zeile darüber ausdrücken.}{22pt}
+\begin{karte}{tief}{1.8}{\typtypisch}{\meta{1}{10 min}{Band 1, Kap.\ 3}}
+\kartentitel{Euklid und Bézout}
+\worum{Der euklidische Algorithmus ist der älteste Algorithmus der Mathematik und der wichtigste der Zahlentheorie. Vorwärts liefert er den ggT, rückwärts die Darstellung $ax + by = \operatorname{ggT}$ --- und die braucht man für jede lineare Kongruenz.}
+\methoden{Euklidischer Algorithmus, Lemma von Bézout}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $\operatorname{ggT}(252, 198)$.
+\item Bestimmen Sie $x, y\in\mathbb Z$ mit $252x + 198y = \operatorname{ggT}(252, 198)$.
+\item Gibt es $x, y$ mit $252x + 198y = 12$? Mit $= 36$?
+\item Beschreiben Sie alle Lösungen von (b).
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$12$ ist durch $4$ und durch $6$ teilbar. Und durch $24$?}{22pt}
+\begin{karte}{akzent}{1.9}{\typstolper}{\meta{1}{10 min}{Band 1, Kap.\ 3}}
+\kartentitel{Durch 4 und durch 6}
+\worum{\enquote{Durch $2$ und durch $3$ teilbar, also durch $6$} ist richtig. \enquote{Durch $4$ und durch $6$, also durch $24$} ist falsch. Der Unterschied ist das ganze Kapitel 3.}
+\methoden{Teilbarkeitsargument, Gegenbeispiel, Teilerfremdheit}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Finden Sie eine Zahl, die durch $4$ und $6$ teilbar ist, aber nicht durch $24$.
+\item Durch welche Zahl ist jede durch $4$ und $6$ teilbare Zahl sicher teilbar? Begründen Sie.
+\item Beweisen Sie: Sind $a\mid c$ und $b\mid c$ und $\operatorname{ggT}(a, b) = 1$, so $ab\mid c$. (Bézout.)
+\item Wo genau geht der Beweis für $a = 4$, $b = 6$ schief?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$91 = 1\cdot65 + 26$. Dann $65$ und $26$.}{22pt}
+\begin{karte}{gruen}{1.10}{\typwerk}{\meta{1}{5 min}{Band 1, Kap.\ 3, Aufgabe 3.1}}
+\kartentitel{$\operatorname{ggT}(91, 65)$}
+\worum{Drei Zeilen Euklid --- das Beispiel, an dem der Band alles vorführt. Rechnen Sie es einmal selbst; die nächsten drei Aufgaben bauen darauf.}
+\methoden{Euklidischer Algorithmus}
+Berechnen Sie $\operatorname{ggT}(91, 65)$ mit dem euklidischen Algorithmus, und prüfen Sie das Ergebnis über die Primfaktorzerlegungen.
+\end{karte}
+
+\stupser{gruen}{Aus Aufgabe 1.10 rückwärts: $13 = 65 - 2\cdot26$ und $26 = 91 - 65$.}{22pt}
+\begin{karte}{gruen}{1.11}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 3, Aufgabe 3.2}}
+\kartentitel{$91x + 65y = 13$}
+\worum{Das Lemma von Bézout, konkret: Der ggT ist eine ganzzahlige Kombination. Der erweiterte euklidische Algorithmus findet sie.}
+\methoden{Euklidischer Algorithmus, Lemma von Bézout, Rückwärtseinsetzen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie $x, y\in\mathbb Z$ mit $91x + 65y = 13$.
+\item Geben Sie alle Lösungen an.
+\item Warum hat $91x + 65y = 10$ keine Lösung?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$5h + 3e = 100$. Eine Lösung ist $h = 20$, $e = 0$; alle anderen erhält man, indem man $h$ um $3$ verringert und $e$ um $5$ erhöht.}{22pt}
+\begin{karte}{gruen}{1.12}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 3, Aufgabe 3.3}}
+\kartentitel{Hühner und Enten}
+\worum{Eine lineare diophantische Gleichung mit Nebenbedingung: ganzzahlig und nichtnegativ. Die Lösungsmenge ist eine Gerade, auf der man die Gitterpunkte im ersten Quadranten abzählt.}
+\methoden{Diophantische Gleichung, Lemma von Bézout, Zählen}
+Ein Bauer kauft Hühner zu $5$ Euro und Enten zu $3$ Euro und gibt genau $100$ Euro aus.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Welche Kombinationen sind möglich?
+\item Wie viele Kombinationen gäbe es bei $101$ Euro? Bei $7$ Euro?
+\item Welcher ist der größte Betrag, der sich \emph{nicht} aus Fünfern und Dreiern zusammensetzen lässt?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$\operatorname{ggT}\cdot\operatorname{kgV} = a\cdot b$.}{22pt}
+\begin{karte}{gruen}{1.13}{\typwerk}{\meta{1}{5 min}{Band 1, Kap.\ 3, Aufgabe 3.4}}
+\kartentitel{$\operatorname{kgV}(91, 65)$}
+\worum{Das kleinste gemeinsame Vielfache braucht keinen eigenen Algorithmus: Es steckt im ggT.}
+\methoden{ggT und kgV, Euklidischer Algorithmus}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $\operatorname{kgV}(91, 65)$.
+\item Begründen Sie $\operatorname{ggT}(a, b)\cdot\operatorname{kgV}(a, b) = ab$ über die Primfaktorzerlegung.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 4
+\stupser{tief}{Teileranzahl: Exponenten je um $1$ erhöhen und multiplizieren. ggT: kleinere Exponenten, kgV: größere.}{22pt}
+\begin{karte}{tief}{1.14}{\typtypisch}{\meta{1}{10 min}{Band 1, Kap.\ 4}}
+\kartentitel{Zwei Zahlen, alle Teiler}
+\worum{Mit der Primfaktorzerlegung in der Hand sind Teileranzahl, ggT und kgV Ablesesache. Die Aufgabe übt das Ablesen --- und die Zerlegung selbst.}
+\methoden{Primfaktorzerlegung, ggT und kgV, Teiler zählen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zerlegen Sie $1008$ und $1188$ in Primfaktoren.
+\item Wie viele positive Teiler hat jede der beiden Zahlen?
+\item Bestimmen Sie $\operatorname{ggT}$ und $\operatorname{kgV}$ aus den Zerlegungen und prüfen Sie $\operatorname{ggT}\cdot\operatorname{kgV} = 1008\cdot1188$.
+\item Wie viele gemeinsame Teiler haben die beiden Zahlen?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$360 = 2^{3}\cdot3^{2}\cdot5$. Jeder Teiler ist $2^{a}3^{b}5^{c}$ mit $a\le3$, $b\le2$, $c\le1$.}{22pt}
+\begin{karte}{gruen}{1.15}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 4, Aufgabe 4.1}}
+\kartentitel{Die Teiler von 360}
+\worum{Warum der Kreis $360$ Grad hat: Die Zahl hat so viele Teiler wie keine kleinere. Die Aufgabe zählt und listet sie --- systematisch, nicht durch Probieren.}
+\methoden{Primfaktorzerlegung, Teiler zählen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Wie viele positive Teiler hat $360$? Listen Sie sie auf.
+\item $360$ ist die kleinste Zahl mit $24$ Teilern. Prüfen Sie an $240$, $288$, $300$ und $336$, dass diese Kandidaten weniger haben --- und erklären Sie, warum eine Zahl mit vielen Teilern kleine Primfaktoren mit abfallenden Exponenten hat.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Primzahlen, die nur in einer Zahl vorkommen, haben in der anderen den Exponenten $0$ --- im ggT verschwinden sie, im kgV bleiben sie.}{22pt}
+\begin{karte}{gruen}{1.16}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 4, Aufgabe 4.2}}
+\kartentitel{ggT und kgV aus der Zerlegung}
+\worum{Mit fertiger Zerlegung sind ggT und kgV reines Ablesen. Die Aufgabe zeigt, dass man dafür die Zahlen nicht einmal ausrechnen muss.}
+\methoden{Primfaktorzerlegung, ggT und kgV}
+$a = 2^{4}\cdot3^{2}\cdot5\cdot11$, $b = 2^{2}\cdot3^{5}\cdot7\cdot11^{2}$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie $\operatorname{ggT}(a, b)$ und $\operatorname{kgV}(a, b)$ in faktorisierter Form.
+\item Prüfen Sie, dass die Exponenten von ggT und kgV sich zu denen von $ab$ addieren.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Streichen Sie die Vielfachen von $2$, $3$, $5$, $7$. Mehr braucht man bis $50$ nicht, weil $7^{2} = 49\le50 < 121 = 11^{2}$.}{22pt}
+\begin{karte}{gruen}{1.17}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 4, Aufgabe 4.3}}
+\kartentitel{Das Sieb bis 50}
+\worum{Das Sieb des Eratosthenes, einmal von Hand. Die Frage, bis zu welcher Primzahl man sieben muss, ist der eigentliche Lerninhalt.}
+\methoden{Sieb des Eratosthenes, Probedivision}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie alle Primzahlen bis $50$ mit dem Sieb.
+\item Warum genügt es, Vielfache von Primzahlen $\le\sqrt{50}$ zu streichen?
+\item Wie viele Primzahlen sind es? Vergleichen Sie mit der Näherung $50/\ln50$.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Jede Zahl ist $6k + r$ mit $r\in\{0, 1, 2, 3, 4, 5\}$. Welche Reste sind für Primzahlen $> 3$ unmöglich?}{22pt}
+\begin{karte}{gruen}{1.18}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 4, Aufgabe 4.4}}
+\kartentitel{Primzahlen haben die Form $6k\pm1$}
+\worum{Ein Satz, der nichts über Primzahlen sagt --- sondern über Zahlen, die \emph{keine} sind. Trotzdem halbiert er die Arbeit jedes Primzahltests.}
+\methoden{Restklassen, Fallunterscheidung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie: Ist $p > 3$ prim, so ist $p = 6k + 1$ oder $p = 6k - 1$.
+\item Gilt die Umkehrung? Geben Sie ein Gegenbeispiel.
+\item Zeigen Sie: Für jede Primzahl $p > 3$ ist $p^{2} - 1$ durch $24$ teilbar.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Euklids Trick mit einer Zutat: Bilden Sie $N = 4p_1p_2\cdots p_k - 1$. Welche Form hat $N$, und warum muss einer seiner Primfaktoren dieselbe Form haben?}{22pt}
+\begin{karte}{gruen}{1.19}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 4, Aufgabe 4.5}}
+\kartentitel{Unendlich viele $4k + 3$}
+\worum{Euklids Beweis, verfeinert: Nicht nur unendlich viele Primzahlen, sondern unendlich viele in einer Restklasse. Für $4k + 3$ geht es elementar; für $4k + 1$ braucht man mehr --- und für $ak + b$ allgemein Dirichlet (Kapitel 10).}
+\methoden{Widerspruchsbeweis, Euklids Primzahlbeweis, Restklassen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie: Ein Produkt von Zahlen der Form $4k + 1$ hat wieder die Form $4k + 1$.
+\item Zeigen Sie: Es gibt unendlich viele Primzahlen der Form $4k + 3$.
+\item Warum funktioniert derselbe Beweis nicht für $4k + 1$?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 5
+\stupser{tief}{$\operatorname{ggT}(14, 100) = 2$ teilt $30$: lösbar, mit $2$ Lösungen modulo $100$. Durch $2$ kürzen --- auch den Modul.}{22pt}
+\begin{karte}{tief}{1.20}{\typtypisch}{\meta{1}{10 min}{Band 1, Kap.\ 5}}
+\kartentitel{Eine lineare Kongruenz mit zwei Lösungen}
+\worum{$ax\equiv b\pmod m$ ist lösbar genau dann, wenn $\operatorname{ggT}(a, m)\mid b$, und dann gibt es $\operatorname{ggT}(a, m)$ Lösungen. Hier der Fall mit zwei.}
+\methoden{Lineare Kongruenz, Lemma von Bézout}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $14x\equiv30\pmod{100}$.
+\item Lösen Sie $14x\equiv31\pmod{100}$.
+\item Lösen Sie $7x\equiv15\pmod{50}$ mit dem erweiterten euklidischen Algorithmus (Inverses von $7$ modulo $50$).
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$6\cdot1\equiv6$ und $6\cdot4 = 24\equiv6 \pmod 9$. Also ist $x\equiv1$ nicht die einzige Lösung von $6x\equiv6$.}{22pt}
+\begin{karte}{akzent}{1.21}{\typstolper}{\meta{1}{10 min}{Band 1, Kap.\ 5}}
+\kartentitel{Kürzen in Kongruenzen}
+\worum{Aus $6x\equiv6\pmod9$ folgt nicht $x\equiv1\pmod9$. Kürzen in Kongruenzen ist erlaubt --- aber der Modul kürzt mit, wenn der Faktor nicht teilerfremd ist.}
+\methoden{Kürzen in Kongruenzen, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie alle Lösungen von $6x\equiv6\pmod9$ durch Einsetzen von $x = 0, \dots, 8$.
+\item Formulieren Sie die richtige Kürzungsregel: Aus $ca\equiv cb\pmod m$ folgt $a\equiv b\pmod{?}$.
+\item Für welche $c$ darf man ohne Änderung des Moduls kürzen? Warum genau für diese?
+\item Lösen Sie $15x\equiv25\pmod{35}$ mit der Regel aus (b).
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$7\equiv2\pmod5$, und $2^{4} = 16\equiv1$.}{22pt}
+\begin{karte}{gruen}{1.22}{\typwerk}{\meta{1}{5 min}{Band 1, Kap.\ 5, Aufgabe 5.1}}
+\kartentitel{$7^{100}$ modulo 5}
+\worum{Große Potenzen modulo kleiner Zahlen: Man sucht eine Potenz, die $1$ ergibt, und reduziert den Exponenten.}
+\methoden{Kleiner Fermat und Euler, Modulare Arithmetik}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Welchen Rest lässt $7^{100}$ bei Division durch $5$?
+\item Welchen Rest lässt $7^{101}$? $7^{2026}$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$10\equiv1\pmod9$, also $10^{k}\equiv1$ für jedes $k$. Eine Zahl ist $\sum a_k10^{k}$.}{22pt}
+\begin{karte}{gruen}{1.23}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 5, Aufgabe 5.2}}
+\kartentitel{Die Neunerprobe}
+\worum{Die Teilbarkeitsregel aus Aufgabe 1.7, jetzt bewiesen --- in zwei Zeilen, weil Kongruenzen genau die richtige Sprache dafür sind.}
+\methoden{Modulare Arithmetik, Teilbarkeitsregeln}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Beweisen Sie: $9\mid n$ genau dann, wenn $9$ die Quersumme von $n$ teilt. Zeigen Sie mehr: $n\equiv Q(n)\pmod9$.
+\item Beweisen Sie die Elferregel mit der alternierenden Quersumme.
+\item Welche Regel ergibt sich für die Teilbarkeit durch $7$ aus $10^{3}\equiv-1\pmod7$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$\operatorname{ggT}(6, 21) = 3$ teilt $15$: drei Lösungen. Erst durch $3$ kürzen: $2x\equiv5\pmod7$.}{22pt}
+\begin{karte}{gruen}{1.24}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 5, Aufgabe 5.3}}
+\kartentitel{$6x\equiv15\pmod{21}$}
+\worum{Die lineare Kongruenz des Bandes --- mit ggT $3$, also drei Lösungen. Aufgabe 1.21 hat die Regel, hier ist die Anwendung.}
+\methoden{Lineare Kongruenz, Euklidischer Algorithmus}
+Lösen Sie $6x\equiv15\pmod{21}$ und geben Sie alle Lösungen modulo $21$ an.
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 6
+\stupser{tief}{Für jeden Modul eine Zahl bauen, die dort $1$ und bei den anderen $0$ ist: $35\cdot(35^{-1}\bmod4)$ für den ersten, usw. Dann gewichtet addieren.}{22pt}
+\begin{karte}{tief}{1.25}{\typtypisch}{\meta{2}{15 min}{Band 1, Kap.\ 6}}
+\kartentitel{Drei Reste, ein Rest}
+\worum{Der chinesische Restsatz als Konstruktion: Aus Resten modulo $4$, $5$, $7$ einen Rest modulo $140$. Die Bausteine, die man dabei baut, sind für jedes weitere System mit denselben Moduln wiederverwendbar.}
+\methoden{Chinesischer Restsatz, Modulare Arithmetik}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $x\equiv1\pmod4$, $x\equiv2\pmod5$, $x\equiv3\pmod7$.
+\item Bestimmen Sie die drei \enquote{Bausteine} $e_1, e_2, e_3$ mit $e_1\equiv1\pmod4$, $e_1\equiv0\pmod{5}$, $e_1\equiv0\pmod7$ usw., und lösen Sie damit auch $x\equiv3\pmod4$, $x\equiv0\pmod5$, $x\equiv6\pmod7$.
+\item Warum braucht der Satz paarweise teilerfremde Moduln? Was geht bei $x\equiv1\pmod4$, $x\equiv2\pmod6$ schief?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Die kleinste Zahl mit Rest $2$ bei $3$ und bei $7$ ist $2$ selbst; dann in Schritten von $21$ nach dem Rest $3$ bei $5$ suchen.}{22pt}
+\begin{karte}{gruen}{1.26}{\typwerk}{\meta{2}{10 min}{Band 1, Kap.\ 6, Aufgabe 6.1}}
+\kartentitel{Meister Sun}
+\worum{Das Problem aus dem \emph{Sunzi Suanjing}, drittes Jahrhundert: die Geburtsurkunde des chinesischen Restsatzes.}
+\methoden{Chinesischer Restsatz}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $x\equiv2\pmod3$, $x\equiv3\pmod5$, $x\equiv2\pmod7$.
+\item Wie lautet die allgemeine Lösung?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$105 = 3\cdot5\cdot7$. Modulo jeder Primzahl hat $x^{2}\equiv1$ genau zwei Lösungen, $\pm1$. Der Restsatz kombiniert sie.}{22pt}
+\begin{karte}{gruen}{1.27}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 6, Aufgabe 6.2}}
+\kartentitel{$x^{2}\equiv1\pmod{105}$}
+\worum{Modulo einer Primzahl hat $x^{2} = 1$ zwei Lösungen. Modulo einer zusammengesetzten Zahl mehr --- und das ist der Grund, warum Faktorisieren mit Quadratwurzeln zusammenhängt (Kapitel 19).}
+\methoden{Chinesischer Restsatz, Quadratwurzeln modulo n}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Wie viele Lösungen hat $x^{2}\equiv1\pmod{105}$? Bestimmen Sie alle.
+\item Wie viele Lösungen hat $x^{2}\equiv1\pmod{p_1p_2\cdots p_k}$ für verschiedene ungerade Primzahlen?
+\item Wählen Sie eine Lösung $x\not\equiv\pm1$ und berechnen Sie $\operatorname{ggT}(x - 1, 105)$. Was fällt auf?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{\enquote{Rest $1$ bei $2, 3, 4, 5, 6$} heißt: $x - 1$ ist durch $\operatorname{kgV}(2, 3, 4, 5, 6) = 60$ teilbar.}{22pt}
+\begin{karte}{gruen}{1.28}{\typwerk}{\meta{2}{10 min}{Band 1, Kap.\ 6, Aufgabe 6.3}}
+\kartentitel{Die Eier im Korb}
+\worum{Ein Rätsel aus dem Mittelalter, das zeigt, wie man ein Restsystem mit nicht teilerfremden Moduln zuerst zusammenfasst.}
+\methoden{Chinesischer Restsatz, Modulare Arithmetik}
+Ein Korb enthält Eier. Nimmt man je $2, 3, 4, 5$ oder $6$ heraus, bleibt jeweils genau eines übrig; nimmt man je $7$ heraus, bleibt keines. Wie viele Eier sind es mindestens? Wie lauten alle möglichen Anzahlen?
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 7
+\stupser{tief}{Letzte Ziffer heißt modulo $10$; die Potenzen von $3$ wiederholen sich mit Periode $4$. Modulo $13$: Fermat gibt $2^{12}\equiv1$, also $1000$ durch $12$ teilen.}{22pt}
+\begin{karte}{tief}{1.29}{\typtypisch}{\meta{1}{10 min}{Band 1, Kap.\ 7}}
+\kartentitel{Letzte Ziffern und Ordnungen}
+\worum{Der kleine Fermat und der Satz von Euler sind Werkzeuge zum Reduzieren von Exponenten. Die Aufgabe übt, den richtigen Modul für den Exponenten zu finden.}
+\methoden{Kleiner Fermat und Euler, Ordnung modulo n}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Welche letzte Ziffer hat $3^{2025}$?
+\item Berechnen Sie $2^{1000}\bmod13$.
+\item Welche Ordnung hat $2$ modulo $13$? Hätte eine kleinere Ordnung die Rechnung in (b) verkürzt?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$341 = 11\cdot31$. Prüfen Sie $2^{10}\bmod11$ und $2^{10}\bmod31$ --- und schließen Sie auf $2^{340}$.}{22pt}
+\begin{karte}{akzent}{1.30}{\typstolper}{\meta{2}{15 min}{Band 1, Kap.\ 7}}
+\kartentitel{341 besteht den Test}
+\worum{Der kleine Fermat sagt: Ist $p$ prim, so $a^{p-1}\equiv1\pmod p$. Viele lesen ihn rückwärts --- und $341$ zeigt, dass die Umkehrung falsch ist.}
+\methoden{Kleiner Fermat und Euler, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie $2^{340}\equiv1\pmod{341}$, obwohl $341 = 11\cdot31$.
+\item Berechnen Sie $3^{340}\bmod341$ (mit $3^{10}\bmod11$ und $\bmod31$). Was zeigt das Ergebnis?
+\item Formulieren Sie genau, was der kleine Fermat über eine Zahl $n$ aussagt, für die $a^{n-1}\equiv1\pmod n$ gilt --- und was nicht.
+\item Warum ist der Fermat-Test trotzdem nützlich?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$3^{6}\equiv1\pmod7$; $1000 = 6\cdot166 + 4$.}{22pt}
+\begin{karte}{gruen}{1.31}{\typwerk}{\meta{1}{5 min}{Band 1, Kap.\ 7, Aufgabe 7.1}}
+\kartentitel{$3^{1000}$ modulo 7}
+\worum{Fermat in einer Zeile.}
+\methoden{Kleiner Fermat und Euler}
+Berechnen Sie $3^{1000}\bmod7$.
+\end{karte}
+
+\stupser{gruen}{$\varphi$ ist multiplikativ: $\varphi(p^{k}) = p^{k} - p^{k-1}$, und für teilerfremde Faktoren multipliziert man.}{22pt}
+\begin{karte}{gruen}{1.32}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 7, Aufgabe 7.2}}
+\kartentitel{$\varphi(360)$ und $\varphi(1000)$}
+\worum{Die Eulersche $\varphi$-Funktion zählt die Einheiten modulo $n$. Berechnen kann man sie nur über die Zerlegung --- weshalb RSA funktioniert (Kapitel 17).}
+\methoden{Eulersche Phi-Funktion, Primfaktorzerlegung, Multiplikativität}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $\varphi(360)$ und $\varphi(1000)$.
+\item Prüfen Sie $\varphi(360)$ über die Formel $\varphi(n) = n\prod_{p\mid n}(1 - \frac1p)$.
+\item Für welche $n$ ist $\varphi(n) = n - 1$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Letzte zwei Ziffern heißt modulo $100$. $\varphi(100) = 40$ --- aber die Ordnung von $7$ ist viel kleiner: $7^{2} = 49$, $7^{4} = 2401$.}{22pt}
+\begin{karte}{gruen}{1.33}{\typwerk}{\meta{2}{10 min}{Band 1, Kap.\ 7, Aufgabe 7.3}}
+\kartentitel{Die letzten beiden Ziffern von $7^{2026}$}
+\worum{Euler gibt $7^{40}\equiv1\pmod{100}$; die Ordnung von $7$ ist aber $4$. Wer die Ordnung kennt, rechnet schneller.}
+\methoden{Ordnung modulo n, Kleiner Fermat und Euler}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie die letzten beiden Ziffern von $7^{2026}$.
+\item Welche Ordnung hat $7$ modulo $100$? Welche Ordnungen sind nach Euler überhaupt möglich?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Potenzen bilden, bis $1$ erscheint. Die Ordnung teilt $6$, kann also nur $1, 2, 3$ oder $6$ sein.}{22pt}
+\begin{karte}{gruen}{1.34}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 7, Aufgabe 7.4}}
+\kartentitel{Ordnungen modulo 7}
+\worum{Die Ordnung eines Elements ist die Länge seines Zyklus. Modulo $7$ sieht man alle möglichen Längen --- und die Primitivwurzeln als die mit maximaler Ordnung.}
+\methoden{Ordnung modulo n, Primitivwurzel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie die Ordnungen aller Elemente von $(\mathbb Z/7\mathbb Z)^{\times} = \{1, \dots, 6\}$.
+\item Welche sind Primitivwurzeln? Wie viele sollten es nach der Formel $\varphi(\varphi(7))$ sein?
+\item Zeigen Sie an diesem Beispiel: Die Ordnung jedes Elements teilt $6$.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$g$ ist Primitivwurzel modulo $13$ genau dann, wenn $g^{4}\not\equiv1$ und $g^{6}\not\equiv1$ --- denn die echten Teiler von $12$ sind in $4$ und $6$ enthalten.}{22pt}
+\begin{karte}{gruen}{1.35}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 7, Aufgabe 7.5}}
+\kartentitel{Primitivwurzeln modulo 13}
+\worum{Wie man Primitivwurzeln findet, ohne alle Potenzen aufzuschreiben: Es genügt, die Exponenten $(p - 1)/q$ für die Primteiler $q$ von $p - 1$ zu prüfen.}
+\methoden{Primitivwurzel, Ordnung modulo n}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Finden Sie alle Primitivwurzeln modulo $13$.
+\item Wie viele sind es nach der Formel? Prüfen Sie.
+\item Ist $2$ Primitivwurzel modulo $13$? Schreiben Sie die Potenzen $2^{0}, \dots, 2^{11}$ auf und lesen Sie daran $\log_2 5$ (den diskreten Logarithmus) ab.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Paare bilden: Jedes $a\in\{2, \dots, 9\}$ hat modulo $11$ ein Inverses im selben Bereich, und die Paare heben sich weg.}{22pt}
+\begin{karte}{gruen}{1.36}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 7, Aufgabe 7.6}}
+\kartentitel{Wilson für 11 und 9}
+\worum{$(p - 1)!\equiv-1\pmod p$ genau für Primzahlen --- ein Primzahltest, der perfekt ist und nutzlos, weil die Fakultät zu groß wird.}
+\methoden{Satz von Wilson, Modulare Arithmetik}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Verifizieren Sie den Satz von Wilson für $p = 11$, indem Sie die Faktoren zu Inversenpaaren ordnen.
+\item Zeigen Sie mit Wilson, dass $9$ zusammengesetzt ist.
+\item Warum ist $(n - 1)!\equiv0\pmod n$ für jedes zusammengesetzte $n > 4$?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 8
+\stupser{tief}{Zerlegen Sie $15 = 3\cdot5$; für jeden Faktor Reziprozität ($41\equiv1\pmod4$ macht sie vorzeichenfrei), dann den Zähler reduzieren.}{22pt}
+\begin{karte}{tief}{1.37}{\typtypisch}{\meta{2}{15 min}{Band 1, Kap.\ 8}}
+\kartentitel{Ein Legendre-Symbol, Schritt für Schritt}
+\worum{Das Reziprozitätsgesetz macht aus der Frage \enquote{Ist $a$ ein Quadrat modulo $p$?} eine Rechnung, die wie der euklidische Algorithmus abläuft: Zähler und Nenner tauschen, reduzieren, wiederholen.}
+\methoden{Legendre-Symbol, Reziprozitätsgesetz}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $\bigl(\frac{15}{41}\bigr)$.
+\item Prüfen Sie das Ergebnis mit dem Euler-Kriterium $a^{(p-1)/2}\bmod p$.
+\item Berechnen Sie $\bigl(\frac{2}{41}\bigr)$ und $\bigl(\frac{-1}{41}\bigr)$ mit den Ergänzungssätzen.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$13\equiv1\pmod4$: $\bigl(\frac5{13}\bigr) = \bigl(\frac{13}5\bigr) = \bigl(\frac35\bigr)$.}{22pt}
+\begin{karte}{gruen}{1.38}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 8, Aufgabe 8.1}}
+\kartentitel{$x^{2}\equiv5\pmod{13}$}
+\worum{Die Frage des Kapitels an einem kleinen Beispiel: einmal durch Nachsehen, einmal durch Reziprozität.}
+\methoden{Legendre-Symbol, Quadratwurzeln modulo n, Reziprozitätsgesetz}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Ist $x^{2}\equiv5\pmod{13}$ lösbar? Entscheiden Sie durch Auflisten der Quadrate.
+\item Entscheiden Sie noch einmal mit dem Reziprozitätsgesetz.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$219 = 3\cdot73$. Für die $3$: beide $\equiv3\pmod4$, Vorzeichen dreht. Für die $73$: $73\equiv1\pmod4$, dann $383\bmod73$.}{22pt}
+\begin{karte}{gruen}{1.39}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 8, Aufgabe 8.2}}
+\kartentitel{$x^{2}\equiv219\pmod{383}$}
+\worum{Ein Beispiel, bei dem Auflisten unmöglich ist ($191$ Quadrate) und Reziprozität fünf Zeilen braucht.}
+\methoden{Reziprozitätsgesetz, Legendre-Symbol}
+Ist $x^{2}\equiv219\pmod{383}$ lösbar? ($383$ ist prim.)
+\end{karte}
+
+\stupser{gruen}{Mit dem Jacobi-Symbol darf man den Zähler \emph{nicht} faktorisieren müssen: $\bigl(\frac{1001}{9907}\bigr) = \bigl(\frac{9907}{1001}\bigr)$, weil $1001\equiv1\pmod4$; dann $9907\bmod1001$.}{22pt}
+\begin{karte}{gruen}{1.40}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 8, Aufgabe 8.3}}
+\kartentitel{1001 über 9907}
+\worum{Das Jacobi-Symbol ist das Legendre-Symbol ohne die Pflicht zu faktorisieren --- der Grund, warum man Reziprozität als Algorithmus laufen lassen kann.}
+\methoden{Jacobi-Symbol, Reziprozitätsgesetz}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $\bigl(\frac{1001}{9907}\bigr)$ mit dem Jacobi-Symbol. ($9907$ ist prim.)
+\item Berechnen Sie es noch einmal über $1001 = 7\cdot11\cdot13$ und vergleichen Sie den Aufwand.
+\item Was sagt das Ergebnis über $x^{2}\equiv1001\pmod{9907}$? Und was würde ein Jacobi-Symbol $\bigl(\frac aN\bigr) = 1$ für zusammengesetztes $N$ über $x^{2}\equiv a\pmod N$ sagen?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 9
+\stupser{tief}{$\sigma(p^{k}) = 1 + p + \dots + p^{k} = \frac{p^{k+1} - 1}{p - 1}$, und für teilerfremde Faktoren multipliziert man.}{22pt}
+\begin{karte}{tief}{1.41}{\typtypisch}{\meta{1}{10 min}{Band 1, Kap.\ 9}}
+\kartentitel{Vollkommen, multiplikativ}
+\worum{Die Teilersumme $\sigma$ ist multiplikativ --- das ist der Grund, warum man sie aus der Primfaktorzerlegung ablesen kann, und der Grund für Euklids Formel der vollkommenen Zahlen.}
+\methoden{Multiplikativität, Vollkommene Zahlen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $\sigma(28)$ und $\sigma(496)$ über die Zerlegung und prüfen Sie, dass beide Zahlen vollkommen sind ($\sigma(n) = 2n$).
+\item Zeigen Sie: Ist $2^{p} - 1$ prim, so ist $2^{p-1}(2^{p} - 1)$ vollkommen.
+\item Warum ist $\sigma(ab) = \sigma(a)\sigma(b)$ für teilerfremde $a, b$? Argumentieren Sie mit den Teilern von $ab$.
+\item Ist $\sigma(ab) = \sigma(a)\sigma(b)$ auch für $a = b = 2$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$720 = 2^{4}\cdot3^{2}\cdot5$: $\tau = 5\cdot3\cdot2$, $\sigma = 31\cdot13\cdot6$.}{22pt}
+\begin{karte}{gruen}{1.42}{\typwerk}{\meta{1}{5 min}{Band 1, Kap.\ 9, Aufgabe 9.1}}
+\kartentitel{$\tau(720)$ und $\sigma(720)$}
+\worum{Zwei arithmetische Funktionen, einmal ausgewertet.}
+\methoden{Multiplikativität, Primfaktorzerlegung}
+Berechnen Sie $\tau(720)$ und $\sigma(720)$. Ist $720$ abundant ($\sigma(n) > 2n$) oder defizient?
+\end{karte}
+
+\stupser{gruen}{Jedes Wort der Länge $n$ hat genau eine kleinste Periode $d\mid n$ und ist die Wiederholung eines primitiven Wortes der Länge $d$. Also $k^{n} = \sum_{d\mid n}W(d)$ --- und Möbius dreht das um.}{22pt}
+\begin{karte}{gruen}{1.43}{\typwerk}{\meta{3}{20 min}{Band 1, Kap.\ 9, Aufgabe 9.2}}
+\kartentitel{Primitive Halsketten}
+\worum{Eine Zählaufgabe, die genau die Struktur der Möbius-Inversion hat: Man kennt die Summe über alle Teiler und will den einzelnen Summanden.}
+\methoden{Möbius-Inversion, Teiler zählen}
+Ein Wort der Länge $n$ aus $k$ Farben heißt primitiv, wenn es keine echte Periode hat --- es ist nicht die Wiederholung eines kürzeren Wortes. Eine Halskette ist ein Wort bis auf zyklische Drehung.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Sei $W(n)$ die Zahl der primitiven Wörter der Länge $n$. Begründen Sie $k^{n} = \sum_{d\mid n}W(d)$.
+\item Folgern Sie mit Möbius-Inversion eine Formel für $W(n)$. Warum ist die Zahl der primitiven Halsketten $P(n) = W(n)/n$?
+\item Berechnen Sie $P(4)$ und $P(6)$ für $k = 2$, und prüfen Sie $P(4)$ durch Auflisten.
+\item Was hat $P(p)\in\mathbb N$ für eine Primzahl $p$ mit dem kleinen Fermat zu tun?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$N = 2^{p-1}(2^{p} - 1)$ mit $p$ prim. Für $p = 2$ ist $N = 6$. Für ungerades $p$ unterscheiden Sie $p\equiv1$ und $p\equiv3\pmod4$ und rechnen modulo $10$ --- im zweiten Fall modulo $100$.}{22pt}
+\begin{karte}{gruen}{1.44}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 9, Aufgabe 9.3}}
+\kartentitel{Gerade vollkommene Zahlen enden auf 6 oder 28}
+\worum{$6, 28, 496, 8128, 33\,550\,336$: Die Endziffern wechseln zwischen $6$ und $28$. Das ist ein Satz, und sein Beweis ist Restrechnung an der Euklid--Euler-Formel.}
+\methoden{Modulare Arithmetik, Vollkommene Zahlen, Fallunterscheidung}
+Zeigen Sie: Jede gerade vollkommene Zahl endet auf $6$ oder auf $28$. (Benutzen Sie den Satz von Euler, dass jede gerade vollkommene Zahl die Form $2^{p-1}(2^{p} - 1)$ mit $2^{p} - 1$ prim hat.)
+\end{karte}
+
+\stupser{akzent}{Probieren Sie $23$ als Teiler von $2047$. Und fragen Sie, warum ausgerechnet $23 = 2\cdot11 + 1$.}{22pt}
+\begin{karte}{akzent}{1.45}{\typstolper}{\meta{1}{10 min}{Band 1, Kap.\ 9}}
+\kartentitel{$2^{11} - 1$}
+\worum{$2^{2} - 1 = 3$, $2^{3} - 1 = 7$, $2^{5} - 1 = 31$, $2^{7} - 1 = 127$: alle prim. Die Vermutung \enquote{$2^{p} - 1$ ist prim für jede Primzahl $p$} hält sich hartnäckig --- und scheitert beim nächsten Fall.}
+\methoden{Gegenbeispiel, Probedivision}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $2^{11} - 1 = 2047$ zusammengesetzt ist.
+\item Zeigen Sie umgekehrt: Ist $2^{n} - 1$ prim, so ist $n$ prim. (Faktorisieren Sie $2^{ab} - 1$.)
+\item Jeder Primteiler $q$ von $2^{p} - 1$ ($p$ prim) hat die Form $q = 2kp + 1$. Begründen Sie das mit der Ordnung von $2$ modulo $q$, und prüfen Sie es an $2047$ und an $2^{23} - 1 = 47\cdot178\,481$.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 10
+\stupser{gruen}{Primzahldichte bei $x$ ist etwa $1/\ln x$. Wie groß ist $\ln10^{20}$?}{22pt}
+\begin{karte}{gruen}{1.46}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 10, Aufgabe 10.1}}
+\kartentitel{Primzahlen jenseits von $10^{20}$}
+\worum{Der Primzahlsatz als Werkzeug: Er sagt nicht, welche Zahlen prim sind, aber wie viele --- und damit, wie lange man suchen muss.}
+\methoden{Primzahlsatz, Größenordnung schätzen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Wie viele Primzahlen erwarten Sie zwischen $10^{20}$ und $10^{20} + 10^{6}$?
+\item Wie viele Zahlen muss man in dieser Gegend im Mittel prüfen, bis man eine Primzahl findet? Und wenn man nur ungerade Zahlen prüft, die nicht durch $3$ oder $5$ teilbar sind?
+\item Für RSA braucht man Primzahlen mit $300$ Dezimalstellen. Wie viele Kandidaten testet man im Mittel?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Betrachten Sie $p$, $p + 2$, $p + 4$ modulo $3$.}{22pt}
+\begin{karte}{gruen}{1.47}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 10, Aufgabe 10.2}}
+\kartentitel{Der einzige Drilling}
+\worum{Primzahlzwillinge gibt es vermutlich unendlich viele; Drillinge im Abstand $2, 2$ nur einen. Der Unterschied ist eine Restklasse.}
+\methoden{Restklassen, Fallunterscheidung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie: $(3, 5, 7)$ ist der einzige Primzahldrilling der Form $(p, p + 2, p + 4)$.
+\item Warum scheitert dasselbe Argument bei Zwillingen $(p, p + 2)$ und bei Drillingen der Form $(p, p + 2, p + 6)$?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 11
+\stupser{gruen}{$(m^{2} - n^{2}, 2mn, m^{2} + n^{2})$ mit $m > n$, teilerfremd, verschiedener Parität, $m^{2} + n^{2}\le100$: also $m\le9$.}{22pt}
+\begin{karte}{gruen}{1.48}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 11, Aufgabe 11.1}}
+\kartentitel{Pythagoreische Tripel bis 100}
+\worum{Die Parametrisierung aller primitiven Tripel, einmal ausgeführt --- mit der Frage, warum die Bedingungen an $m$ und $n$ genau so lauten.}
+\methoden{Pythagoreische Tripel, Parametrisierung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Erzeugen Sie alle primitiven pythagoreischen Tripel mit $c\le100$.
+\item Warum müssen $m$ und $n$ teilerfremd und von verschiedener Parität sein? Was entsteht, wenn beide ungerade sind?
+\item Zwei der Tripel haben dieselbe Hypotenuse $65$. Erklären Sie das über $65 = 5\cdot13$ (Kapitel 14).
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 13
+\stupser{tief}{$\pi = 3 + 0{,}14159\ldots$; $1/0{,}14159 = 7{,}0625\ldots$; $1/0{,}0625 = 15{,}996\ldots$; $1/0{,}996 = 1{,}0034\ldots$; $1/0{,}0034 = 292{,}6\ldots$}{22pt}
+\begin{karte}{tief}{1.49}{\typtypisch}{\meta{2}{15 min}{Band 1, Kap.\ 13}}
+\kartentitel{$\pi$ als Kettenbruch}
+\worum{Kettenbrüche liefern die besten rationalen Näherungen --- und sie erklären, warum $22/7$ und $355/113$ seit zweitausend Jahren die Näherungen für $\pi$ sind.}
+\methoden{Kettenbruch, Beste Näherung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie aus $\pi = 3{,}14159265\ldots$ die ersten fünf Teilnenner des Kettenbruchs.
+\item Berechnen Sie die Näherungsbrüche und ihre Fehler.
+\item Warum ist $355/113$ so viel besser als die Näherungsbrüche davor und danach erwarten lassen? Was hat das mit dem Teilnenner $292$ zu tun?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$\sqrt7 = 2 + (\sqrt7 - 2)$; $\frac1{\sqrt7 - 2} = \frac{\sqrt7 + 2}3 = 1 + \frac{\sqrt7 - 1}3$; weiter so, bis sich etwas wiederholt.}{22pt}
+\begin{karte}{gruen}{1.50}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 13, Aufgabe 13.1}}
+\kartentitel{Der Kettenbruch von $\sqrt7$}
+\worum{Quadratische Irrationalzahlen haben periodische Kettenbrüche --- und die Periode liefert die Lösungen der Pellschen Gleichung (nächste Aufgabe).}
+\methoden{Kettenbruch, Periodizität}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie den Kettenbruch von $\sqrt7$.
+\item Berechnen Sie die ersten sechs Näherungsbrüche.
+\item Berechnen Sie für jeden Näherungsbruch $p/q$ den Wert $p^{2} - 7q^{2}$. Was fällt auf?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{In der Tabelle aus Aufgabe 1.50c steht die Lösung: der erste Näherungsbruch mit $p^{2} - 7q^{2} = 1$.}{22pt}
+\begin{karte}{gruen}{1.51}{\typwerk}{\meta{2}{10 min}{Band 1, Kap.\ 13, Aufgabe 13.2}}
+\kartentitel{$x^{2} - 7y^{2} = 1$}
+\worum{Die Pellsche Gleichung: unendlich viele Lösungen, alle aus einer Grundlösung durch Potenzieren.}
+\methoden{Pellsche Gleichung, Kettenbruch}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie die kleinste Lösung von $x^{2} - 7y^{2} = 1$ in positiven ganzen Zahlen.
+\item Bestimmen Sie die nächste Lösung aus $(x_1 + y_1\sqrt7)^{2}$.
+\item Warum liefert $(x_1 + y_1\sqrt7)^{n}$ für jedes $n$ eine Lösung? (Norm.)
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 14
+\stupser{akzent}{Welche Zahlen sind $x^{2} + y^{2}$ für $x, y\le4$? Steht $21$ darunter? Und $21 = 3\cdot7$: welche Reste haben $3$ und $7$ modulo $4$?}{22pt}
+\begin{karte}{akzent}{1.52}{\typstolper}{\meta{2}{10 min}{Band 1, Kap.\ 14}}
+\kartentitel{21 ist $\equiv1\pmod4$}
+\worum{\enquote{Eine Zahl ist Summe zweier Quadrate, wenn sie $\equiv1\pmod4$ ist} --- der Satz von Fermat, falsch zitiert. Der richtige Satz spricht von \emph{Primzahlen}, und für zusammengesetzte Zahlen zählen die Exponenten.}
+\methoden{Zwei-Quadrate-Satz, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $21$ keine Summe zweier Quadrate ist, obwohl $21\equiv1\pmod4$.
+\item Zeigen Sie, dass $45 = 3^{2}\cdot5$ eine ist, obwohl $3\equiv3\pmod4$ ein Teiler ist.
+\item Formulieren Sie den Zwei-Quadrate-Satz für beliebige $n$ richtig.
+\item Warum kann eine Zahl $\equiv3\pmod4$ nie Summe zweier Quadrate sein? (Quadrate modulo $4$.)
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Zerlegen: $221 = 13\cdot17$, $198 = 2\cdot3^{2}\cdot11$, $2025 = 3^{4}\cdot5^{2}$. Dann die Primteiler $\equiv3\pmod4$ und ihre Exponenten ansehen.}{22pt}
+\begin{karte}{gruen}{1.53}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 14, Aufgabe 14.1}}
+\kartentitel{Summen zweier Quadrate}
+\worum{Der Zwei-Quadrate-Satz als Entscheidungsverfahren --- und, wo die Antwort ja ist, die Darstellungen über die Identität von Brahmagupta.}
+\methoden{Zwei-Quadrate-Satz, Primfaktorzerlegung, Brahmagupta-Identität}
+Welche der Zahlen $221$, $198$, $2025$ sind Summen zweier Quadrate? Geben Sie gegebenenfalls alle Darstellungen an.
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 16
+\stupser{gruen}{Tangentensteigung $\lambda = \frac{3x_1^{2} + a}{2y_1}$; dann $x_3 = \lambda^{2} - 2x_1$, $y_3 = \lambda(x_1 - x_3) - y_1$.}{22pt}
+\begin{karte}{gruen}{1.54}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 16, Aufgabe 16.1}}
+\kartentitel{Ein Punkt wird verdoppelt}
+\worum{Das Gruppengesetz der elliptischen Kurve, einmal mit Zahlen: Tangente anlegen, dritten Schnittpunkt berechnen, spiegeln.}
+\methoden{Elliptische Kurve, Gruppengesetz}
+Auf $E\colon y^{2} = x^{3} + 17$ liegt $P = (-2, 3)$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $2P$ und prüfen Sie, dass der Punkt auf $E$ liegt.
+\item Berechnen Sie $3P = 2P + P$ mit der Sekantenformel $\lambda = \frac{y_2 - y_1}{x_2 - x_1}$.
+\item Die Koordinaten werden schnell größer. Was sagt das über die Ordnung von $P$ in der Gruppe $E(\mathbb Q)$?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 17
+\stupser{tief}{$218 = 128 + 64 + 16 + 8 + 2$, binär $11011010$. Quadrieren Sie $3$ siebenmal modulo $1000$ und multiplizieren Sie die Potenzen zusammen, deren Bit gesetzt ist.}{22pt}
+\begin{karte}{tief}{1.55}{\typtypisch}{\meta{1}{10 min}{Band 1, Kap.\ 17}}
+\kartentitel{Quadrieren und Multiplizieren}
+\worum{Ohne schnelle Potenzierung gäbe es kein RSA: $m^{e}\bmod n$ mit $600$-stelligen Exponenten braucht nicht $10^{600}$ Multiplikationen, sondern etwa $2000$. Hier das Verfahren an einem Beispiel, das man von Hand schafft.}
+\methoden{Schnelle Potenzierung, Modulare Arithmetik}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $3^{218}\bmod1000$ durch wiederholtes Quadrieren.
+\item Wie viele Multiplikationen modulo $1000$ haben Sie gebraucht? Wie viele wären es bei $3^{218}$ durch Ausmultiplizieren?
+\item Wie viele Multiplikationen braucht man für einen Exponenten mit $2048$ Binärstellen im schlimmsten Fall?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$5^{2}\equiv2\pmod{23}$ --- das macht alle Potenzen klein: $5^{6} = (5^{2})^{3}\equiv8$.}{22pt}
+\begin{karte}{gruen}{1.56}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 17, Aufgabe 17.1}}
+\kartentitel{Diffie--Hellman mit $p = 23$}
+\worum{Der Schlüsselaustausch über einen offenen Kanal: Beide rechnen Potenzen, und am Ende haben sie dieselbe Zahl, die niemand sonst kennt.}
+\methoden{Diffie–Hellman, Schnelle Potenzierung}
+Führen Sie Diffie--Hellman mit $p = 23$, $g = 5$, $a = 6$, $b = 15$ durch.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $A = g^{a}$ und $B = g^{b}$ modulo $23$.
+\item Berechnen Sie den gemeinsamen Schlüssel auf beiden Seiten.
+\item Ein Lauscher kennt $p, g, A, B$. Was müsste er lösen? Lösen Sie es hier --- für $p = 23$ geht das von Hand.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$n = pq$, $\varphi = (p - 1)(q - 1)$, $d = e^{-1}\bmod\varphi$ mit dem erweiterten Euklid; $c = m^{e}\bmod n$ mit Quadrieren und Multiplizieren.}{22pt}
+\begin{karte}{gruen}{1.57}{\typwerk}{\meta{2}{20 min}{Band 1, Kap.\ 17, Aufgabe 17.2}}
+\kartentitel{RSA, vollständig}
+\worum{Das ganze Verfahren an Zahlen, die man noch kontrollieren kann: Schlüssel erzeugen, verschlüsseln, entschlüsseln --- und am Ende sehen, warum es funktioniert.}
+\methoden{RSA, Eulersche Phi-Funktion, Schnelle Potenzierung}
+$p = 61$, $q = 53$, $e = 17$, Nachricht $m = 65$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $n$, $\varphi(n)$ und den privaten Schlüssel $d$.
+\item Verschlüsseln Sie $m = 65$.
+\item Entschlüsseln Sie das Ergebnis und prüfen Sie, dass $65$ herauskommt.
+\item Warum ist $(m^{e})^{d}\equiv m\pmod n$? Welcher Satz steckt dahinter?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 18
+\stupser{gruen}{$560 = 2^{4}\cdot35$. Berechnen Sie $2^{35}\bmod561$ und quadrieren Sie bis zu viermal. Sobald eine $1$ auftaucht, sehen Sie sich den Wert davor an.}{22pt}
+\begin{karte}{gruen}{1.58}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 18, Aufgabe 18.1}}
+\kartentitel{561 und Miller--Rabin}
+\worum{$561 = 3\cdot11\cdot17$ ist die kleinste Carmichael-Zahl: Sie besteht den Fermat-Test zu \emph{jeder} teilerfremden Basis. Miller--Rabin entlarvt sie trotzdem --- über eine Quadratwurzel von $1$.}
+\methoden{Miller–Rabin, Quadratwurzeln modulo n, Carmichael-Zahl}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Testen Sie $n = 561$ mit Miller--Rabin zur Basis $a = 2$.
+\item Welcher Zwischenwert verrät die Zusammengesetztheit, und welchen Faktor von $561$ liefert er über einen ggT?
+\item Warum besteht $561$ den einfachen Fermat-Test zur Basis $2$ (also $2^{560}\equiv1$)?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%% Kapitel 19
+\stupser{gruen}{$\sqrt{8051} = 89{,}7\ldots$; beginnen Sie mit $a = 90$ und prüfen Sie, ob $a^{2} - 8051$ ein Quadrat ist.}{22pt}
+\begin{karte}{gruen}{1.59}{\typwerk}{\meta{1}{10 min}{Band 1, Kap.\ 19, Aufgabe 19.1}}
+\kartentitel{8051 nach Fermat}
+\worum{Fermats Methode: $n = a^{2} - b^{2} = (a - b)(a + b)$. Sie ist schnell, wenn die Faktoren nahe beieinander liegen --- und das ist genau der Fall, den man bei RSA-Schlüsseln vermeiden muss.}
+\methoden{Fermat-Faktorisierung, Differenz von Quadraten}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Faktorisieren Sie $n = 8051$ mit der Fermat-Methode.
+\item Wie viele Schritte hätte die Methode für $n = 7\cdot1151 = 8057$ gebraucht? (Schätzen Sie über $a\approx\frac{p + q}2$.)
+\item Was folgt daraus für die Wahl von $p$ und $q$ bei RSA?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$f(x) = x^{2} + 1$, Start $2$: Folge $x_i$ und die doppelt schnelle $y_i = f(f(y_{i-1}))$; in jedem Schritt $\operatorname{ggT}(|x_i - y_i|, 8051)$.}{22pt}
+\begin{karte}{gruen}{1.60}{\typwerk}{\meta{2}{15 min}{Band 1, Kap.\ 19, Aufgabe 19.2}}
+\kartentitel{8051 nach Pollard}
+\worum{Pollards $\rho$-Methode findet einen Faktor $p$ in etwa $\sqrt p$ Schritten, ohne $p$ zu kennen --- über eine Pseudozufallsfolge, die modulo $p$ früher in einen Zyklus läuft als modulo $n$.}
+\methoden{Pollard-Rho, Euklidischer Algorithmus}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Faktorisieren Sie $n = 8051$ mit Pollards $\rho$-Methode ($f(x) = x^{2} + 1$, $x_0 = 2$, Floyd-Zyklussuche).
+\item Erklären Sie, warum ein ggT $> 1$ auftaucht: Was passiert mit der Folge modulo $97$?
+\item Warum heißt die Methode $\rho$?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$641 = 5\cdot2^{7} + 1$ und $641 = 2^{4} + 5^{4}$. Aus der ersten Gleichung folgt $5\cdot2^{7}\equiv-1$, aus der zweiten $5^{4}\equiv-2^{4}\pmod{641}$. Potenzieren Sie die erste mit $4$.}{22pt}
+\begin{karte}{akzent}{1.61}{\typstolper}{\meta{2}{15 min}{Band 1, Kap.\ 19}}
+\kartentitel{Fermats Vermutung über $2^{2^{n}} + 1$}
+\worum{$3, 5, 17, 257, 65537$ sind prim, und Fermat vermutete, dass alle Zahlen $F_n = 2^{2^{n}} + 1$ prim sind. Euler fand 1732 den Teiler $641$ von $F_5$ --- mit einem Argument, das man nachvollziehen kann. Seither ist keine weitere Fermat-Primzahl gefunden worden.}
+\methoden{Probedivision, Modulare Arithmetik, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie mit Eulers Argument, dass $641\mid2^{32} + 1$, ohne $2^{32}$ auszurechnen.
+\item Zeigen Sie: Ist $2^{m} + 1$ prim, so ist $m$ eine Zweierpotenz. (Faktorisieren Sie $2^{ab} + 1$ für ungerades $b$.)
+\item Fünf Beispiele, eine Vermutung, ein Gegenbeispiel: Was lehrt die Geschichte über \enquote{Muster} in der Zahlentheorie?
+\end{enumerate}
+\end{karte}

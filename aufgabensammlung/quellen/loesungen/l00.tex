@@ -1,0 +1,676 @@
+\setgebiet{1}{Schulmathematik}{mittel}
+\chapter{Lösungen: Schulmathematik}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.1
+\stupserzwei{tief}{Das Quadrat bindet stärker als das Minus: $-3^{2}$ ist $-(3^{2})$. Eine Klammer wird aufgelöst, indem man das Vorzeichen vor ihr auf \emph{jeden} Summanden anwendet.}{22pt}
+\begin{loesungkarte}{tief}{0.1}{Minus, Klammer, Quadrat}
+\derweg{Potenz vor Punkt vor Strich --- und ein Minus vor einer Klammer ist eine Multiplikation mit $-1$, die jeden Summanden trifft.}
+\schritt{(a)}
+$-3^{2} = -(3\cdot3) = -9$. \quad $(-3)^{2} = (-3)(-3) = 9$. \quad $-(-3)^{2} = -9$. \quad $(-3)^{3} = (-3)(-3)(-3) = -27$.
+\schritt{(b)}
+$5 - 2\cdot(3 - 7)^{2} = 5 - 2\cdot(-4)^{2} = 5 - 2\cdot16 = 5 - 32 = -27$. Ohne Klammern: $5 - 2\cdot3 - 7^{2} = 5 - 6 - 49 = -50$.
+\schritt{(c)}
+Innen beginnen: $2x - (3 - x) = 2x - 3 + x = 3x - 3$. Dann $4 - (3x - 3) = 4 - 3x + 3 = 7 - 3x$.
+\schritt{(d)}
+Ein Exponent gehört zu dem, was unmittelbar links von ihm steht --- eine Zahl, eine Variable oder eine Klammer ---, und ein Minus vor einer Klammer kehrt jedes Vorzeichen in ihr um.
+\probe{(c) mit $x = 1$: links $4 - (2 - (3 - 1)) = 4 - 0 = 4$, rechts $7 - 3 = 4$. \checkmark\ (a): $(-3)^{2} + (-3)^{3} = 9 - 27 = -18 = (-3)^{2}(1 + (-3))$. \checkmark}
+\begin{mitnehmen}\kastentext
+Das Minus ist kein Teil der Zahl, sondern ein Faktor $-1$. Wer das verinnerlicht, braucht für $-3^{2}$ keine Regel mehr: $(-1)\cdot3^{2} = -9$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.2
+\stupserzwei{akzent}{$(a - b)^{2}$ ist $(a - b)(a - b)$ --- vier Produkte, nicht zwei. Die beiden gemischten sind es, die bei \enquote{gliedweise} fehlen.}{22pt}
+\begin{loesungkarte}{akzent}{0.2}{Warum $-2^{2} = -4$ ist}
+\derweg{Man schreibt die Potenz als Produkt aus und sieht nach, was tatsächlich multipliziert wird.}
+\schritt{(a)}
+$-2^{2} = -(2^{2}) = -4$. Gehörte das Minus zur Zahl, wäre es $(-2)^{2} = 4$. Die Konvention \enquote{Potenz zuerst} ist keine Willkür: Sie macht $-x^{2}$ zu dem, was man meint, wenn man die Parabel $y = -x^{2}$ zeichnet --- nach unten geöffnet, für jedes $x$.
+\schritt{(b)}
+$(5 - 3)^{2} = 2^{2} = 4$. Gliedweise: $25 - 9 = 16$. Der Unterschied ist $12 = 2\cdot5\cdot3$, das doppelte Produkt: $(a - b)^{2} = a^{2} - 2ab + b^{2}$. Das Quadrat einer Summe ist nicht die Summe der Quadrate, weil beim Ausmultiplizieren von $(a - b)(a - b)$ auch $a\cdot(-b)$ und $(-b)\cdot a$ entstehen.
+\schritt{(c)}
+Richtig: $(ab)^{2} = a^{2}b^{2}$ und $\sqrt{ab} = \sqrt a\sqrt b$. Falsch: $(a + b)^{2} = a^{2} + b^{2}$ (gilt nur für $ab = 0$) und $\sqrt{a + b} = \sqrt a + \sqrt b$ (Probe $a = b = 1$: $\sqrt2\neq2$).
+\schritt{(d)}
+Beide verteilen eine Operation --- Quadrieren, Wurzelziehen --- über eine \emph{Summe}. Potenzen und Wurzeln sind mit Produkten verträglich, nicht mit Summen. Das Distributivgesetz gilt für \emph{mal über plus}, für nichts sonst.
+\probe{$(a + b)^{2} - (a^{2} + b^{2}) = 2ab$: für $a = b = 1$ ist das $2 = 4 - 2$. \checkmark}
+\begin{fehler}\kastentext
+$-2^{2} = 4$, $(a + b)^{2} = a^{2} + b^{2}$, $\sqrt{a^{2} + b^{2}} = a + b$: drei Schreibweisen desselben Irrtums --- dass eine Rechenoperation sich auf die Teile einer Summe verteilen lasse. Nur die Multiplikation darf das.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Im Zweifel ausschreiben: $(a - b)^{2} = (a - b)(a - b)$. Was man sieht, kann man nicht mehr falsch machen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.3
+\stupserzwei{gruen}{Gerade Zahl mal gerade Zahl ist gerade, ungerade mal ungerade ist ungerade. Daraus folgt alles, was der Beweis über $p$ und $q$ wissen muss.}{22pt}
+\begin{loesungkarte}{gruen}{0.3}{$\sqrt2$ ist nicht rational}
+\derweg{Man nimmt das Gegenteil an und zeigt, dass Zähler und Nenner dann beide gerade sein müssten --- obwohl man sie gekürzt hatte.}
+\schritt{(a)}
+Aus $\sqrt2 = p/q$ folgt $2 = p^{2}/q^{2}$, also $p^{2} = 2q^{2}$: $p^{2}$ ist gerade.
+\schritt{(b)}
+Wäre $p$ ungerade, $p = 2k + 1$, so wäre $p^{2} = 4k^{2} + 4k + 1$ ungerade. Da $p^{2}$ gerade ist, ist $p$ gerade.
+\schritt{(c)}
+$p = 2m$, also $4m^{2} = 2q^{2}$, also $q^{2} = 2m^{2}$: $q^{2}$ ist gerade, also (wie in (b)) $q$ gerade. Dann haben $p$ und $q$ den gemeinsamen Teiler $2$ --- im Widerspruch zur Annahme, der Bruch sei gekürzt. Also gibt es keinen solchen Bruch.
+\schritt{(d)}
+Für $\sqrt4 = p/q$ ergibt sich $p^{2} = 4q^{2}$. Daraus folgt zwar $p$ gerade, $p = 2m$, aber dann $4m^{2} = 4q^{2}$, also $m^{2} = q^{2}$ --- und über $q$ ist nichts mehr zu schließen. Tatsächlich: $p = 2$, $q = 1$. Der Beweis braucht, dass $2$ eine \emph{Primzahl} ist; $4$ ist keine.
+\probe{Der Beweis funktioniert wörtlich für $\sqrt3$, $\sqrt5$, jede Primzahl $\sqrt p$; und mit \enquote{$p^{2}$ teilbar durch $n$ $\Rightarrow$ $p$ teilbar durch $n$} für jedes quadratfreie $n$. Für $\sqrt4$, $\sqrt9$ scheitert genau dieser Schritt. \checkmark}
+\begin{mitnehmen}\kastentext
+Ein Widerspruchsbeweis beginnt mit \enquote{angenommen, es ginge} und endet mit etwas Unmöglichem. Entscheidend ist, dass jede Annahme benutzt wird --- hier die Kürzung. Band 0, Kapitel 14; Band 10 macht daraus eine Theorie.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.4
+\stupserzwei{gruen}{Vier Bausteine: $-2^{2}$, $(-3)^{2}$, $(4 - 7)$, $(-5 + 2\cdot(-4))$. Jeden einzeln ausrechnen, dann zusammensetzen.}{22pt}
+\begin{loesungkarte}{gruen}{0.4}{Ein Term mit allem}
+\derweg{Bausteine einzeln berechnen, dann Punkt vor Strich von links nach rechts.}
+\schritt{(a)}
+\begin{align*}
+-2^{2} &= -4 & (-3)^{2} &= 9\\
+4 - 7 &= -3 & -5 + 2\cdot(-4) &= -5 - 8 = -13 .
+\end{align*}
+Also $-4 + 9\cdot(-3) : 3 - (-13)$. Punktrechnung von links: $9\cdot(-3) = -27$, $-27 : 3 = -9$. Dann $-4 + (-9) + 13 = 0$.
+\schritt{(b)}
+Die häufigste Fehlrechnung ist $-2^{2} = 4$; sie liefert $4 - 9 + 13 = 8$. Die zweithäufigste ist $-(-13) = -13$; sie liefert $-4 - 9 - 13 = -26$.
+\probe{Rückwärts: $0 + 13 = 13$, $13 - 9 = 4 = -(-4)$. \checkmark}
+\begin{mitnehmen}\kastentext
+Zwischenergebnisse untereinander schreiben kostet eine Minute und spart jede Fehlersuche. Das Ergebnis $0$ ist hier kein Zufall: Der Term ist so gebaut, dass jeder Fehler sofort auffällt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.5
+\stupserzwei{tief}{Hauptnenner oben $12$, unten $6$. Dann $\frac{11}{12} : \frac13 = \frac{11}{12}\cdot\frac31$.}{22pt}
+\begin{loesungkarte}{tief}{0.5}{Der Doppelbruch}
+\derweg{Zähler und Nenner je zu einem Bruch, dann mit dem Kehrwert multiplizieren.}
+\schritt{(a)}
+Zähler: $\frac23 + \frac14 = \frac8{12} + \frac3{12} = \frac{11}{12}$. Nenner: $\frac56 - \frac12 = \frac56 - \frac36 = \frac26 = \frac13$. Also $\frac{11}{12} : \frac13 = \frac{11}{12}\cdot3 = \frac{11}4$.
+\schritt{(b)}
+$\frac1a + \frac1b = \frac{b + a}{ab}$, also $\dfrac1{\frac1a + \frac1b} = \dfrac{ab}{a + b}$. Zwei parallele Widerstände von $2$ und $3$ Ohm: $\frac65 = 1{,}2$ Ohm --- kleiner als der kleinere, wie es sein muss.
+\schritt{(c)}
+Nicht definiert für $a = 0$ oder $b = 0$ (die inneren Brüche) und für $a + b = 0$ (der äußere). Die letzte Bedingung sieht man dem Ergebnis $\frac{ab}{a + b}$ an, die ersten beiden nicht mehr --- der Definitionsbereich gehört zur Rechnung, nicht zum Endterm.
+\probe{(a) dezimal: $(0{,}6667 + 0{,}25)/(0{,}8333 - 0{,}5) = 0{,}9167/0{,}3333 = 2{,}75 = \frac{11}4$. \checkmark}
+\begin{mitnehmen}\kastentext
+Durch einen Bruch teilen heißt mit dem Kehrwert multiplizieren --- und $\frac{ab}{a + b}$ ist eine Formel, die man wiedererkennt: Parallelschaltung, harmonisches Mittel (Aufgabe 0.23), reduzierte Masse.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.6
+\stupserzwei{akzent}{Im Rechteck mit sechs Feldern sind $\frac12$ drei Felder und $\frac13$ zwei Felder. Zusammen fünf von sechs --- nicht zwei von fünf.}{22pt}
+\begin{loesungkarte}{akzent}{0.6}{Brüche addiert man nicht so}
+\derweg{Brüche sind Anteile eines Ganzen; addieren kann man sie nur, wenn das Ganze in gleiche Teile zerlegt ist.}
+\schritt{(a)}
+\begin{center}
+\begin{tikzpicture}[x=0.75cm,y=0.75cm,font=\small]
+\foreach \i in {0,...,5} {\draw[linie] (\i,0) rectangle (\i+1,1);}
+\fill[tief!35] (0,0) rectangle (3,1);
+\fill[akzent!40] (3,0) rectangle (5,1);
+\foreach \i in {0,...,5} {\draw[grau] (\i,0) rectangle (\i+1,1);}
+\node[below] at (1.5,0) {$\frac12 = \frac36$};
+\node[below] at (4,0) {$\frac13 = \frac26$};
+\node[right] at (6.2,0.5) {$\frac36 + \frac26 = \frac56$};
+\end{tikzpicture}
+\end{center}
+Fünf von sechs Feldern sind gefärbt. $\frac25$ wäre weniger als die Hälfte --- aber allein $\frac12$ ist schon die Hälfte, und es kommt etwas dazu. Eine Summe zweier positiver Brüche ist größer als jeder Summand; $\frac25 < \frac12$ kann also nicht stimmen.
+\schritt{(b)}
+$\frac{1 + 1}{2 + 3}$ ist der \emph{Mediant}: Trifft man $1$ von $2$ Würfen und dann $1$ von $3$, hat man insgesamt $2$ von $5$ getroffen. Das ist eine gemeinsame Trefferquote, keine Summe von Anteilen --- und sie liegt immer \emph{zwischen} den beiden Quoten ($\frac13 < \frac25 < \frac12$), nie darüber.
+\schritt{(c)}
+Nein. $x = 2$: $\frac{4}{6} = \frac23$, aber $\frac{x + 1}{x + 2} = \frac34$. Die $2$ und die $4$ sind Summanden, keine Faktoren.
+\schritt{(d)}
+Kürzen heißt, einen gemeinsamen \emph{Faktor} von Zähler und Nenner zu entfernen: $\frac{ac}{bc} = \frac ab$. Aus Summen kürzt nur, wer zuerst ausklammert --- und dann einen Faktor hat.
+\probe{$\frac{2x + 4}{2x + 8} = \frac{2(x + 2)}{2(x + 4)} = \frac{x + 2}{x + 4}$: hier \emph{darf} man die $2$ kürzen, weil sie Faktor beider Seiten ist. \checkmark}
+\begin{fehler}\kastentext
+\enquote{Zähler plus Zähler, Nenner plus Nenner.} Es sieht aus wie eine Regel, ist aber die Rechnung für etwas anderes (den Medianten). Das Ergebnis liegt zwischen den Brüchen, statt größer als beide zu sein --- daran erkennt man den Fehler sofort.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Drei Verbote, eine Regel: Nur Faktoren kürzen, nur Gleichnamiges addieren, nur über Produkte Wurzeln und Potenzen verteilen. Summen lassen nichts mit sich machen, außer dass man sie zusammenfasst.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.7
+\stupserzwei{gruen}{Erste Klammer: Hauptnenner $12$, Ergebnis negativ. Zweite Klammer: Hauptnenner $12$, Ergebnis $\frac34$.}{22pt}
+\begin{loesungkarte}{gruen}{0.7}{Kürzen bis zum Ende}
+\derweg{Klammern zuerst, dann die Division als Multiplikation mit dem Kehrwert, dann alles in einen Bruch und kürzen.}
+\schritt{(a)}
+$\frac34 - \frac56 = \frac9{12} - \frac{10}{12} = -\frac1{12}$. \quad $\frac23 + \frac1{12} = \frac8{12} + \frac1{12} = \frac9{12} = \frac34$.
+\[ -\frac1{12} : \frac34\cdot\frac59 = -\frac1{12}\cdot\frac43\cdot\frac59 = -\frac{1\cdot4\cdot5}{12\cdot3\cdot9} = -\frac{20}{324} = -\frac5{81} . \]
+Schneller: die $4$ gegen die $12$ kürzen, bevor man multipliziert: $-\frac1{3}\cdot\frac13\cdot\frac59 = -\frac5{81}$.
+\schritt{(b)}
+$(0{,}750 - 0{,}833) : (0{,}667 + 0{,}083)\cdot0{,}556 = (-0{,}083) : 0{,}750\cdot0{,}556 = -0{,}111\cdot0{,}556 = -0{,}0617$; und $-\frac5{81} = -0{,}0617$. \checkmark
+\probe{Die Division geht \emph{vor} der Multiplikation, weil sie links steht: $a : b\cdot c = (a : b)\cdot c$. Hätte man $a : (b\cdot c)$ gerechnet, käme $-\frac1{12} : \frac{15}{36} = -\frac15$ heraus --- falsch.}
+\begin{mitnehmen}\kastentext
+Punktrechnung von links nach rechts; und kürzen, bevor man multipliziert, hält die Zahlen klein.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.8
+\stupserzwei{tief}{$1{,}2\cdot0{,}8 = 0{,}96$. Die zwanzig Prozent nach oben wurden von einer kleineren Zahl genommen als die zwanzig nach unten.}{22pt}
+\begin{loesungkarte}{tief}{0.8}{Zwanzig Prozent hin, zwanzig zurück}
+\derweg{Jede Prozentänderung ist ein Faktor; Hintereinander heißt Produkt.}
+\schritt{(a)}
+$1{,}2\cdot0{,}8 = 0{,}96$: Es bleiben $96\,\%$, der Preis ist um $4\,\%$ gefallen. Konkret: $100\to120\to96$.
+\schritt{(b)}
+Gesucht $q$ mit $1{,}2\cdot q = 1$, also $q = \frac1{1{,}2} = 0{,}8\overline3$: Der Preis muss um $16{,}7\,\%$ sinken. Die Umkehrung einer Erhöhung um $p\,\%$ ist eine Senkung um $\frac{p}{100 + p}\cdot100\,\%$, nicht um $p\,\%$.
+\schritt{(c)}
+$1{,}15^{2} = 1{,}3225$: $32{,}25\,\%$, nicht $30$. Die zweite Erhöhung wirkt auch auf die erste --- \enquote{Zinseszins}. Der Unterschied $2{,}25\,\% = 0{,}15^{2}$ ist das Produkt der beiden Raten.
+\schritt{(d)}
+Von $5$ auf $6$: ein Prozent\emph{punkt} mehr; relativ $\frac65 = 1{,}2$, also $20\,\%$ Anstieg. Beide Angaben sind richtig und meinen Verschiedenes --- und Schlagzeilen wählen die größere.
+\probe{(b): $120\cdot0{,}8\overline3 = 100$. \checkmark\ (a) allgemein: $(1 + p)(1 - p) = 1 - p^{2} < 1$ für jedes $p\neq0$ --- hin und zurück verliert immer.}
+\begin{mitnehmen}\kastentext
+Prozent sind Faktoren: plus $p\,\%$ ist $\times(1 + \frac p{100})$. Hintereinander wird multipliziert, rückgängig wird dividiert, und Prozentpunkte sind Differenzen, keine Faktoren.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.9
+\stupserzwei{tief}{$(2a^{2}b^{-1})^{3} = 8a^{6}b^{-3}$ und $(ab^{2})^{-2} = a^{-2}b^{-4}$. Dann Exponenten von $a$ und $b$ je zusammenzählen.}{22pt}
+\begin{loesungkarte}{tief}{0.9}{Potenzen aufräumen}
+\derweg{Klammern einzeln potenzieren, dann je Basis die Exponenten addieren beziehungsweise subtrahieren.}
+\schritt{(a)}
+\[ \frac{8a^{6}b^{-3}\cdot a^{-2}b^{-4}}{4a} = \frac{8}{4}\cdot a^{6 - 2 - 1}\cdot b^{-3 - 4} = 2a^{3}b^{-7} = \frac{2a^{3}}{b^{7}} . \]
+\schritt{(b)}
+$\sqrt[3]{x^{2}} = x^{2/3}$, $\sqrt x = x^{1/2}$; Produkt $x^{2/3 + 1/2} = x^{7/6} = x\sqrt[6]x$.
+\schritt{(c)}
+Aus $a^{m}\cdot a^{0} = a^{m + 0} = a^{m}$ folgt $a^{0} = 1$ (für $a\neq0$). Aus $a^{n}\cdot a^{-n} = a^{0} = 1$ folgt $a^{-n} = 1/a^{n}$. Die Definitionen sind so gewählt, dass das eine Gesetz für alle ganzen Exponenten gilt --- das ist der einzige Grund.
+\probe{(a) mit $a = 2$, $b = 3$: links $\frac{(8/3)^{3}\cdot(18)^{-2}}{8} = \frac{18{,}963\cdot0{,}003086}{8} = 0{,}007316$; rechts $\frac{16}{2187} = 0{,}007316$. \checkmark}
+\begin{mitnehmen}\kastentext
+Alle Potenzgesetze sind Buchhaltung über Exponenten; die Definitionen von $a^{0}$, $a^{-n}$, $a^{1/n}$ sind so gemacht, dass die Buchhaltung nie eine Ausnahme braucht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.10
+\stupserzwei{tief}{$2^{x} = 16 = 2^{4}$. Bei (c) ist $\ln x + \ln(x - 3) = \ln\bigl(x(x - 3)\bigr)$, und gleiche Logarithmen heißen gleiche Argumente.}{22pt}
+\begin{loesungkarte}{tief}{0.10}{Die Unbekannte im Exponenten}
+\derweg{Potenz isolieren, Logarithmus anwenden; bei Logarithmengleichungen zuerst zu einem Logarithmus zusammenfassen und am Ende den Definitionsbereich prüfen.}
+\schritt{(a)}
+$2^{x} = 16 = 2^{4}$, also $x = 4$.
+\schritt{(b)}
+$(2x - 1)\ln3 = \ln7$, also $x = \frac12\bigl(\frac{\ln7}{\ln3} + 1\bigr) = \frac12(1{,}7712 + 1) = 1{,}386$.
+\schritt{(c)}
+$\ln\bigl(x(x - 3)\bigr) = \ln10$, also $x^{2} - 3x - 10 = 0$, $x = 5$ oder $x = -2$. Für $x = -2$ ist $\ln x$ nicht definiert: einzige Lösung $x = 5$. Probe: $\ln5 + \ln2 = \ln10$. \checkmark
+\schritt{(d)}
+Weil $\ln a + \ln b = \ln(ab)$ ist, nicht $\ln(a + b)$. Der Logarithmus macht aus Produkten Summen --- das ist sein Zweck ---, und daher aus Summen nichts Einfaches. (Dieselbe Regel wie in Aufgabe 0.2: Operationen verteilen sich nicht über Summen.)
+\probe{(b): $3^{2\cdot1{,}386 - 1} = 3^{1{,}772} = e^{1{,}772\cdot1{,}0986} = e^{1{,}946} = 7{,}00$. \checkmark}
+\begin{mitnehmen}\kastentext
+Logarithmieren holt die Unbekannte aus dem Exponenten --- aber nur, wenn die Potenz allein steht. Und bei Logarithmengleichungen gehört die Probe zur Lösung, weil das Zusammenfassen Kandidaten erzeugt, die nicht im Definitionsbereich liegen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.11
+\stupserzwei{gruen}{$64 = 2^{6}$, $\frac19 = 3^{-2}$, $\sqrt5 = 5^{1/2}$. Bei (d): $1{,}03^{t} = 2$, beide Seiten $\ln$.}{22pt}
+\begin{loesungkarte}{gruen}{0.11}{Logarithmen ohne Rechner}
+\derweg{Die Zahl als Potenz der Basis schreiben; die Rechenregeln sind die Potenzgesetze, rückwärts gelesen.}
+\schritt{(a)}
+$\log_264 = 6$, $\log_3\frac19 = -2$, $\log_5\sqrt5 = \frac12$.
+\schritt{(b)}
+$\log_a(x^{3}y) - 2\log_ax + \log_a\frac1y = 3\log_ax + \log_ay - 2\log_ax - \log_ay = \log_ax$.
+\schritt{(c)}
+Sei $c = \log_ab$, also $a^{c} = b$. Logarithmieren: $c\ln a = \ln b$, also $c = \frac{\ln b}{\ln a}$. Damit $\log_210 = \frac{\ln10}{\ln2} = \frac{2{,}3026}{0{,}6931} = 3{,}322$. (Probe: $2^{3} = 8 < 10 < 16 = 2^{4}$. \checkmark)
+\schritt{(d)}
+$1{,}03^{t} = 2$, also $t = \frac{\ln2}{\ln1{,}03} = \frac{0{,}6931}{0{,}02956} = 23{,}4$ Jahre. Faustregel $70/3 = 23{,}3$. Sie beruht auf $\ln2\approx0{,}70$ und $\ln(1 + p)\approx p$ für kleine $p$.
+\probe{(b) mit $a = 10$, $x = 10$, $y = 100$: $\log(10^{5}) - 2 + \log(0{,}01) = 5 - 2 - 2 = 1 = \log10$. \checkmark}
+\begin{mitnehmen}\kastentext
+$\log_ab$ ist die Antwort auf \enquote{$a$ hoch was gibt $b$?} --- alle Regeln folgen aus dieser Frage, und die Basisumrechnung macht aus jedem Logarithmus einen natürlichen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.12
+\stupserzwei{akzent}{$1{,}01^{100}\approx2{,}70$. Die Verdopplung: $1{,}01^{t} = 2$, also $t = \ln2/\ln1{,}01$. Die Seerose: einen Tag vor dem Ende war sie halb so groß.}{22pt}
+\begin{loesungkarte}{akzent}{0.12}{Ein Prozent am Tag}
+\derweg{Wachstum um einen festen Prozentsatz ist Multiplikation mit einem festen Faktor; über $t$ Schritte ist das eine Potenz.}
+\schritt{(a)}
+$1{,}01^{100} = 2{,}705$: ein Zuwachs von $170\,\%$, nicht $100$. Der Unterschied ist der Zuwachs auf den Zuwachs.
+\schritt{(b)}
+$1{,}01^{t} = 2$ gibt $t = \frac{\ln2}{\ln1{,}01} = \frac{0{,}6931}{0{,}00995} = 69{,}7$ Tage. Faustregel $70/1 = 70$. \checkmark
+\schritt{(c)}
+Verdopplung täglich heißt rückwärts Halbierung täglich: halb bedeckt an Tag $29$, zu einem Viertel an Tag $28$. Wer am Tag $28$ sagt \enquote{drei Viertel sind noch frei}, hat zwei Tage.
+\schritt{(d)}
+$N(t) = N_0\cdot1{,}01^{t}$. Der Zuwachs von Tag $t$ auf $t + 1$ ist $N(t + 1) - N(t) = 0{,}01\cdot N(t)$ --- ein fester \emph{Anteil} des jeweiligen Bestands, also ein wachsender Betrag. Linear wäre $N_0(1 + 0{,}01t)$: fester Betrag $0{,}01N_0$ je Tag.
+\begin{center}
+\begin{tikzpicture}[x=0.09cm,y=1.1cm,font=\small]
+\draw[grau,-{Latex[length=1.5mm]}] (0,0)--(104,0) node[right,font=\scriptsize]{Tage};
+\draw[grau,-{Latex[length=1.5mm]}] (0,0)--(0,2.9) node[above,font=\scriptsize]{$N/N_0$};
+\foreach \y in {1,2} {\draw[linie] (0,\y)--(100,\y); \node[left,font=\scriptsize,grau] at (0,\y) {\y};}
+\draw[grau,thick,dashed] (0,1)--(100,2) node[right,font=\scriptsize,grau]{linear};
+\draw[akzent,thick] plot[domain=0:100,samples=50] (\x,{1.01^\x}) node[right,font=\scriptsize,akzent]{$1{,}01^{t}$};
+\fill[akzent] (69.7,2) circle (1.4pt); \node[akzent,font=\scriptsize,above left] at (69.7,2) {$70$};
+\end{tikzpicture}
+\end{center}
+\probe{(a) über die Verdopplungszeit: $100/69{,}7 = 1{,}435$ Verdopplungen, $2^{1{,}435} = 2{,}70$. \checkmark}
+\begin{fehler}\kastentext
+\enquote{Ein Prozent pro Tag, hundert Tage, also hundert Prozent.} --- Das addiert Prozente, die sich auf verschiedene Grundwerte beziehen. Der zweite Tag bringt ein Prozent von $1{,}01N_0$, nicht von $N_0$. Je länger die Zeit, desto größer der Fehler: nach $700$ Tagen ist der Bestand das Tausendfache, nicht das Achtfache.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Exponentielles Wachstum erkennt man daran, dass die \emph{Verdopplungszeit} konstant ist, nicht der Zuwachs. Faustregel: $70$ durch Prozentsatz. Kapitel 8 in Band 0, Band 18 für Populationen, Band 3 für die Theorie.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.13
+\stupserzwei{gruen}{$x^{2} - 9 = (x - 3)(x + 3)$, $x^{2} - 6x + 9 = (x - 3)^{2}$, $x^{2} - 3x = x(x - 3)$, $x^{2} + 3x = x(x + 3)$.}{22pt}
+\begin{loesungkarte}{gruen}{0.13}{Ein Bruchterm wird eins}
+\derweg{Alle vier Polynome faktorisieren, Nullstellen der Nenner notieren, dann Faktoren kürzen.}
+\schritt{(a)}
+\[ \frac{(x - 3)(x + 3)}{(x - 3)^{2}}\cdot\frac{x(x - 3)}{x(x + 3)} = \frac{(x - 3)(x + 3)\cdot x(x - 3)}{(x - 3)^{2}\cdot x(x + 3)} = 1 . \]
+\schritt{(b)}
+Nenner null für $x = 3$ (erster Bruch) und $x = 0$, $x = -3$ (zweiter). Definitionsbereich $\mathbb R\setminus\{-3, 0, 3\}$. Der Term ist \emph{nicht} die konstante Funktion $1$, sondern $1$ mit drei Löchern: An den Stellen $-3$, $0$, $3$ ist er nicht definiert, auch wenn das gekürzte Ergebnis es nicht mehr zeigt. Die Information über den Definitionsbereich geht beim Kürzen verloren, deshalb liest man ihn vorher ab.
+\probe{$x = 1$: $\frac{1 - 9}{1 - 6 + 9}\cdot\frac{1 - 3}{1 + 3} = \frac{-8}{4}\cdot\frac{-2}{4} = (-2)(-\tfrac12) = 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Erst faktorisieren, dann den Definitionsbereich notieren, dann kürzen --- in dieser Reihenfolge. Ein gekürzter Term hat ein kürzeres Gedächtnis als der ursprüngliche.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.14
+\stupserzwei{tief}{$2x^{2} - 8x + 3 = 2(x^{2} - 4x) + 3 = 2\bigl((x - 2)^{2} - 4\bigr) + 3$. Genau eine Lösung heißt Diskriminante null.}{22pt}
+\begin{loesungkarte}{tief}{0.14}{Quadratisch: faktorisieren, ergänzen, lesen}
+\derweg{Drei Formen derselben Funktion --- Produkt, Scheitelpunkt, Summe ---, und jede Frage hat ihre Form.}
+\schritt{(a)}
+Gesucht zwei Zahlen mit Produkt $6$ und Summe $5$: $2$ und $3$. $x^{2} - 5x + 6 = (x - 2)(x - 3)$, Lösungen $x = 2$ und $x = 3$.
+\schritt{(b)}
+$2x^{2} - 8x + 3 = 2(x^{2} - 4x) + 3 = 2\bigl((x - 2)^{2} - 4\bigr) + 3 = 2(x - 2)^{2} - 5$. Scheitel $(2, -5)$, Parabel nach oben geöffnet, Wertebereich $[-5, \infty)$.
+\schritt{(c)}
+Der Scheitel liegt unterhalb der Achse und die Parabel öffnet nach oben: zwei Nullstellen. Direkt aus der Form: $2(x - 2)^{2} = 5$, $x = 2\pm\sqrt{5/2} = 2\pm1{,}58$.
+\schritt{(d)}
+$x^{2} - 6x + c = (x - 3)^{2} + c - 9$; genau eine Lösung, wenn der Scheitel auf der Achse liegt: $c = 9$. Gleichbedeutend: Diskriminante $36 - 4c = 0$.
+\begin{center}
+\begin{tikzpicture}[x=0.8cm,y=0.35cm,font=\small]
+\draw[grau,-{Latex[length=1.5mm]}] (-0.6,0)--(4.8,0) node[right,font=\scriptsize]{$x$};
+\draw[grau,-{Latex[length=1.5mm]}] (0,-6)--(0,5) node[above,font=\scriptsize]{$y$};
+\draw[tief,thick] plot[domain=-0.1:4.1,samples=40] (\x,{2*(\x-2)^2-5});
+\fill[akzent] (2,-5) circle (1.5pt); \node[akzent,font=\scriptsize,below] at (2,-5.2) {$(2, -5)$};
+\fill[tief] (0.42,0) circle (1.2pt); \fill[tief] (3.58,0) circle (1.2pt);
+\node[font=\scriptsize,above] at (0.42,0.2) {$2 - \sqrt{5/2}$}; \node[font=\scriptsize,above] at (3.58,0.2) {$2 + \sqrt{5/2}$};
+\end{tikzpicture}
+\end{center}
+\probe{(a) Vieta: $2 + 3 = 5$, $2\cdot3 = 6$. \checkmark\ (b) ausmultiplizieren: $2(x^{2} - 4x + 4) - 5 = 2x^{2} - 8x + 3$. \checkmark}
+\begin{mitnehmen}\kastentext
+Faktorisierte Form: Nullstellen. Scheitelpunktform: Extremum, Wertebereich, Zahl der Nullstellen. Die $p$-$q$-Formel braucht man erst, wenn beides nicht zu sehen ist.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.15
+\stupserzwei{gruen}{(b): Hauptnenner $(x - 2)(x + 2)$; die Lösung $x = 2$ fällt weg, weil sie den Nenner null macht. (c): $x$ muss $\ge0$ sein, bevor man quadriert.}{22pt}
+\begin{loesungkarte}{gruen}{0.15}{Vier Gleichungen, vier Methoden}
+\derweg{Jede Gleichung auf eine Normalform bringen, die man kennt --- und jede Umformung, die nicht umkehrbar ist, mit der Probe bezahlen.}
+\schritt{(a)}
+Durch $2$: $x^{2} - 5x + 6 = 0$, also $x = 2$ oder $x = 3$ (Aufgabe 0.14a). Probe: $8 - 20 + 12 = 0$, $18 - 30 + 12 = 0$. \checkmark
+\schritt{(b)}
+$x^{2} - 4 = (x - 2)(x + 2)$; Definitionsbereich $x\neq\pm2$. Mal $(x - 2)(x + 2)$: $x(x + 2) + 3(x - 2) = 8$, also $x^{2} + 5x - 14 = 0$, $(x + 7)(x - 2) = 0$. $x = 2$ ist ausgeschlossen. Einzige Lösung $x = -7$. Probe: $\frac{-7}{-9} + \frac3{-5} = \frac79 - \frac35 = \frac{35 - 27}{45} = \frac8{45}$; rechts $\frac8{49 - 4} = \frac8{45}$. \checkmark
+\schritt{(c)}
+Quadrieren: $2x + 3 = x^{2}$, also $x^{2} - 2x - 3 = 0$, $(x - 3)(x + 1) = 0$. Probe: $x = 3$: $\sqrt9 = 3$. \checkmark\ $x = -1$: $\sqrt1 = 1\neq-1$. Scheinlösung --- sie löst $-\sqrt{2x + 3} = x$, die Gleichung, die beim Quadrieren dieselbe wird. Lösung $x = 3$.
+\schritt{(d)}
+$4^{x} = (2^{x})^{2}$; mit $u = 2^{x}$: $u^{2} - 5u + 4 = 0$, $u = 1$ oder $u = 4$, also $x = 0$ oder $x = 2$. Probe: $1 - 5 + 4 = 0$; $16 - 20 + 4 = 0$. \checkmark
+\schritt{Warum die Probe bei (b) und (c) Pflicht ist}
+Multiplizieren mit einem Term, der null werden kann, und Quadrieren sind keine Äquivalenzumformungen: Sie können Lösungen hinzufügen (nie wegnehmen). Die Probe filtert die hinzugefügten heraus. Bei (a) und (d) wurde nur durch Konstanten geteilt und substituiert --- umkehrbar, Probe freiwillig.
+\begin{mitnehmen}\kastentext
+Äquivalenzumformung: Probe ist Kür. Quadrieren, mit Variablen multiplizieren, Logarithmen zusammenfassen: Probe ist Pflicht, weil die neue Gleichung mehr Lösungen haben kann als die alte.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.16
+\stupserzwei{akzent}{$\sqrt{16} = 4$, auch wenn die $16$ von $-4$ kam. Also $\sqrt{x^{2}} = |x|$. Und $x^{2} = 9$ hat zwei Lösungen, weil zwei Zahlen das Quadrat $9$ haben.}{22pt}
+\begin{loesungkarte}{akzent}{0.16}{Wurzeln, Beträge, Scheinlösungen}
+\derweg{Die Wurzel ist eine Funktion mit nichtnegativen Werten; Quadrieren ist keine Funktion rückwärts --- daher der Betrag, die zwei Lösungen, die Scheinlösung.}
+\schritt{(a)}
+$\sqrt{4^{2}} = \sqrt{16} = 4$ und $\sqrt{(-4)^{2}} = \sqrt{16} = 4$. Allgemein $\sqrt{x^{2}} = |x|$. Die Wurzel \enquote{weiß} nicht mehr, ob $x$ negativ war.
+\schritt{(b)}
+$x^{2} = 9$ heißt $|x| = 3$, also $x = 3$ oder $x = -3$. Nicht nur $\sqrt9 = 3$: Die Wurzel gibt die nichtnegative Lösung, die Gleichung hat beide.
+\schritt{(c)}
+$\sqrt{9 + 16} = 5$, aber $3 + 4 = 7$. Gleichheit $\sqrt{a^{2} + b^{2}} = a + b$ würde nach Quadrieren $a^{2} + b^{2} = a^{2} + 2ab + b^{2}$ verlangen, also $ab = 0$: nur wenn eine der Zahlen null ist. (Geometrisch: die Hypotenuse ist kürzer als die Summe der Katheten --- Dreiecksungleichung.)
+\schritt{(d)}
+Quadrieren: $x + 2 = x^{2}$, $x^{2} - x - 2 = (x - 2)(x + 1) = 0$. $x = 2$: $\sqrt4 = 2$. \checkmark\ $x = -1$: $\sqrt1 = 1\neq-1$. Im Bild: Die Gerade $y = x$ schneidet die Wurzelkurve $y = \sqrt{x + 2}$ einmal, bei $x = 2$; die Parabel $y^{2} = x + 2$ (beide Wurzeläste) schneidet sie zweimal. Die Scheinlösung $x = -1$ liegt auf dem \emph{unteren} Ast $y = -\sqrt{x + 2}$, den die Gleichung nie gemeint hat.
+\begin{center}
+\begin{tikzpicture}[x=0.9cm,y=0.9cm,font=\small]
+\draw[grau,-{Latex[length=1.5mm]}] (-2.4,0)--(3.2,0) node[right,font=\scriptsize]{$x$};
+\draw[grau,-{Latex[length=1.5mm]}] (0,-1.9)--(0,2.5) node[above,font=\scriptsize]{$y$};
+\draw[tief,thick] plot[domain=-2:3,samples=60] (\x,{sqrt(\x+2)}) node[right,font=\scriptsize,tief]{$\sqrt{x + 2}$};
+\draw[tief,thick,dashed] plot[domain=-2:3,samples=60] (\x,{-sqrt(\x+2)}) node[right,font=\scriptsize,tief]{$-\sqrt{x + 2}$};
+\draw[akzent] (-1.8,-1.8)--(2.4,2.4) node[right,font=\scriptsize,akzent]{$y = x$};
+\fill[gruen] (2,2) circle (1.6pt); \node[gruen,font=\scriptsize,above left] at (2,2) {$x = 2$};
+\fill[akzent] (-1,-1) circle (1.6pt); \node[akzent,font=\scriptsize,below right] at (-1,-1) {$x = -1$};
+\end{tikzpicture}
+\end{center}
+\probe{(c) allgemein: $\sqrt{a^{2} + b^{2}}\le a + b$ für $a, b\ge0$, mit Gleichheit nur für $ab = 0$. \checkmark}
+\begin{fehler}\kastentext
+\enquote{$\sqrt{x^{2}} = x$.} --- Für negative $x$ falsch; richtig ist $|x|$. Daraus folgen beide anderen Fehler: Wer $\sqrt{x^{2}} = x$ glaubt, sieht nur eine Lösung von $x^{2} = 9$ und hält die Scheinlösung von $\sqrt{x + 2} = x$ für echt.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+$\sqrt{\ }$ ist eine Funktion: ein Eingang, ein nichtnegativer Ausgang. Quadrieren ist nicht ihre Umkehrung auf ganz $\mathbb R$ --- und jede Rechnung, die so tut, braucht am Ende die Probe.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.17
+\stupserzwei{tief}{Aus $x - y = 1$ folgt $x = y + 1$; das in die erste Gleichung. Oder: zweite Gleichung mal $3$ und zur ersten addieren --- $y$ verschwindet.}{22pt}
+\begin{loesungkarte}{tief}{0.17}{Zwei Gleichungen, zwei Unbekannte}
+\derweg{Eine Unbekannte eliminieren --- durch Einsetzen oder durch Addition ---, die andere ausrechnen, zurück einsetzen.}
+\schritt{(a) Einsetzen}
+$x = y + 1$ in $2x + 3y = 12$: $2y + 2 + 3y = 12$, $5y = 10$, $y = 2$, $x = 3$.
+\schritt{(a) Addition}
+Zweite Gleichung mal $3$: $3x - 3y = 3$. Plus erste: $5x = 15$, $x = 3$, dann $y = 2$. Probe: $6 + 6 = 12$, $3 - 2 = 1$. \checkmark
+\schritt{(b)}
+$4x + 6y = 20$ ist das Doppelte der linken Seite von $2x + 3y = 12$, aber $20\neq24$: Widerspruch, keine Lösung. $4x + 6y = 24$ ist genau das Doppelte: dieselbe Gleichung zweimal, unendlich viele Lösungen --- alle Punkte der Geraden $2x + 3y = 12$.
+\schritt{(c)}
+Zwei Geraden schneiden sich in einem Punkt (eine Lösung), sind parallel (keine) oder fallen zusammen (unendlich viele). Parallel heißt: gleiche Steigung, verschiedener Achsenabschnitt --- genau der Fall $20\neq24$.
+\begin{center}
+\begin{tikzpicture}[x=0.55cm,y=0.55cm,font=\small]
+\draw[grau,-{Latex[length=1.5mm]}] (-0.5,0)--(7,0) node[right,font=\scriptsize]{$x$};
+\draw[grau,-{Latex[length=1.5mm]}] (0,-1.5)--(0,5) node[above,font=\scriptsize]{$y$};
+\draw[tief,thick] plot[domain=-0.3:6.5] (\x,{(12-2*\x)/3}) node[right,font=\scriptsize,tief]{$2x + 3y = 12$};
+\draw[akzent,thick] plot[domain=-0.3:5.5] (\x,{\x-1}) node[right,font=\scriptsize,akzent]{$x - y = 1$};
+\draw[grau,thick,dashed] plot[domain=-0.3:5.5] (\x,{(20-4*\x)/6}) node[right,font=\scriptsize,grau]{$4x + 6y = 20$};
+\fill[gruen] (3,2) circle (1.6pt); \node[gruen,font=\scriptsize,above right] at (3,2) {$(3, 2)$};
+\end{tikzpicture}
+\end{center}
+\begin{mitnehmen}\kastentext
+Ein lineares System mit zwei Unbekannten ist ein Bild aus zwei Geraden. Band 2 macht daraus Matrizen; die drei Fälle --- eine, keine, unendlich viele Lösungen --- bleiben dieselben.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.18
+\stupserzwei{akzent}{$-2x > 6$ heißt $x < -3$: Beim Teilen durch $-2$ dreht sich das Zeichen. $x^{2} = 3x$ heißt $x^{2} - 3x = 0$, also $x(x - 3) = 0$ --- zwei Faktoren, zwei Lösungen.}{22pt}
+\begin{loesungkarte}{akzent}{0.18}{Mal minus, durch $x$}
+\derweg{Statt zu teilen, bringt man alles auf eine Seite und faktorisiert; und bei Ungleichungen merkt man sich, dass negative Faktoren die Ordnung umkehren.}
+\schritt{(a)}
+$-2x + 5 > 11$, also $-2x > 6$, also $x < -3$. Probe: $x = -4$: $8 + 5 = 13 > 11$. \checkmark\ $x = 0$: $5 > 11$ falsch. \checkmark\ Warum sich das Zeichen dreht: $2 < 3$, aber $-2 > -3$ --- Multiplikation mit $-1$ spiegelt die Zahlengerade und vertauscht links und rechts.
+\schritt{(b)}
+$x^{2} - 3x = 0$, $x(x - 3) = 0$: $x = 0$ oder $x = 3$. Wer beide Seiten durch $x$ teilt, setzt stillschweigend $x\neq0$ voraus und verliert die Lösung $x = 0$.
+\schritt{(c)}
+Für $x > 0$: $6 > 2x$, $x < 3$, also $0 < x < 3$. Für $x < 0$: Multiplikation dreht das Zeichen, $6 < 2x$, $x > 3$ --- Widerspruch zu $x < 0$, keine Lösung. Insgesamt $0 < x < 3$. Wer ohne Fallunterscheidung multipliziert, bekommt $x < 3$ und erklärt $x = -1$ zur Lösung; aber $\frac6{-1} = -6 > 2$ ist falsch.
+\schritt{(d)}
+Multipliziert oder dividiert man eine Ungleichung mit einer Zahl, deren Vorzeichen man nicht kennt, muss man die Fälle unterscheiden. Dividiert man eine Gleichung durch einen Term, der null sein könnte, muss man den Fall \enquote{gleich null} getrennt prüfen.
+\begin{fehler}\kastentext
+\enquote{Durch $x$ teilen} und \enquote{mit $x$ multiplizieren} sehen harmlos aus. Das eine verschluckt $x = 0$, das andere ignoriert das Vorzeichen. Beide Fehler vermeidet, wer faktorisiert statt teilt und Fälle unterscheidet statt multipliziert.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+$ab = 0$ heißt $a = 0$ oder $b = 0$ --- das ist der sichere Weg. Und bei Ungleichungen: Vorzeichen unbekannt, Fall unterscheiden.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.19
+\stupserzwei{gruen}{(a): $-4\le2x - 6\le4$, dann $+6$ und $:2$. (b): Für $x > 3$ darf man multiplizieren, ohne zu drehen; für $x < 3$ dreht sich das Zeichen.}{22pt}
+\begin{loesungkarte}{gruen}{0.19}{Betrag und Bruch in Ungleichungen}
+\derweg{Betrag als Doppelungleichung lesen; Bruch nach dem Vorzeichen des Nenners in Fälle teilen.}
+\schritt{(a)}
+$|2x - 6|\le4$ heißt $-4\le2x - 6\le4$, also $2\le2x\le10$, also $1\le x\le5$. Deutung: $|2x - 6| = 2|x - 3|$, der Abstand von $x$ zu $3$ ist höchstens $2$.
+\schritt{(b)}
+Fall $x > 3$ (Nenner positiv): $x + 1\ge2(x - 3) = 2x - 6$, also $x\le7$. Zusammen $3 < x\le7$. Fall $x < 3$ (Nenner negativ, Zeichen dreht): $x + 1\le2x - 6$, also $x\ge7$ --- Widerspruch zu $x < 3$. Lösung: $(3, 7]$. Die $3$ selbst ist ausgeschlossen (Nenner null), die $7$ gehört dazu ($\frac87 \cdot$ --- $\frac{8}{4} = 2\ge2$ \checkmark).
+\begin{center}
+\begin{tikzpicture}[x=0.8cm,font=\small]
+\draw[grau,-{Latex[length=1.5mm]}] (-0.5,0.8)--(8.5,0.8);
+\foreach \x in {0,...,8} {\draw[grau] (\x,0.72)--(\x,0.88); \node[below,font=\scriptsize,grau] at (\x,0.7) {\x};}
+\draw[tief,very thick] (1,0.8)--(5,0.8); \fill[tief] (1,0.8) circle (1.8pt); \fill[tief] (5,0.8) circle (1.8pt);
+\node[tief,font=\scriptsize,above] at (3,0.9) {(a) $[1, 5]$};
+\draw[grau,-{Latex[length=1.5mm]}] (-0.5,-0.6)--(8.5,-0.6);
+\foreach \x in {0,...,8} {\draw[grau] (\x,-0.68)--(\x,-0.52); \node[below,font=\scriptsize,grau] at (\x,-0.7) {\x};}
+\draw[akzent,very thick] (3,-0.6)--(7,-0.6); \draw[akzent,fill=white,thick] (3,-0.6) circle (1.8pt); \fill[akzent] (7,-0.6) circle (1.8pt);
+\node[akzent,font=\scriptsize,above] at (5,-0.5) {(b) $(3, 7]$};
+\end{tikzpicture}
+\end{center}
+\probe{(b) mit $x = 5$: $\frac62 = 3\ge2$. \checkmark\ Mit $x = 8$: $\frac95 = 1{,}8 < 2$. \checkmark\ Mit $x = 0$: $\frac1{-3} < 2$, nicht in der Lösungsmenge. \checkmark}
+\begin{mitnehmen}\kastentext
+$|a|\le r$ heißt $-r\le a\le r$; $|a|\ge r$ heißt $a\le-r$ oder $a\ge r$. Und ein Bruch in einer Ungleichung verlangt immer die Frage nach dem Vorzeichen des Nenners.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.20
+\stupserzwei{tief}{Unter der Wurzel $x - 1\ge0$. Die Wurzel ist mindestens $0$, also $f(x)\ge2$. Umkehren: $y = \sqrt{x - 1} + 2$, nach $x$ auflösen --- und $y\ge2$ mitnehmen.}{22pt}
+\begin{loesungkarte}{tief}{0.20}{Eine Funktion lesen}
+\derweg{Definitionsbereich aus der Wurzel, Wertebereich aus dem kleinsten Wert, Umkehrfunktion durch Auflösen --- und die Bereiche tauschen die Rollen.}
+\schritt{(a)}
+$D = [1, \infty)$; $\sqrt{x - 1}$ durchläuft $[0, \infty)$, also $W = [2, \infty)$.
+\schritt{(b)}
+Der Graph von $\sqrt x$, um $1$ nach rechts und $2$ nach oben verschoben: Er beginnt im Punkt $(1, 2)$.
+\schritt{(c)}
+$y = \sqrt{x - 1} + 2$, also $\sqrt{x - 1} = y - 2$, also $x = (y - 2)^{2} + 1$ --- gültig für $y\ge2$. $f^{-1}(x) = (x - 2)^{2} + 1$ mit Definitionsbereich $[2, \infty)$ (dem Wertebereich von $f$). Ohne diese Einschränkung wäre $f^{-1}$ eine ganze Parabel und keine Umkehrfunktion.
+\begin{center}
+\begin{tikzpicture}[x=0.55cm,y=0.55cm,font=\small]
+\draw[grau,-{Latex[length=1.5mm]}] (-0.5,0)--(7.5,0) node[right,font=\scriptsize]{$x$};
+\draw[grau,-{Latex[length=1.5mm]}] (0,-0.5)--(0,7.5) node[above,font=\scriptsize]{$y$};
+\draw[linie] (0,0)--(7,7);
+\draw[tief,thick] plot[domain=1:7,samples=40] (\x,{sqrt(\x-1)+2}) node[right,font=\scriptsize,tief]{$f$};
+\draw[akzent,thick] plot[domain=2:4.45,samples=40] (\x,{(\x-2)^2+1}) node[right,font=\scriptsize,akzent]{$f^{-1}$};
+\fill[tief] (1,2) circle (1.5pt); \fill[akzent] (2,1) circle (1.5pt);
+\end{tikzpicture}
+\end{center}
+\schritt{(d)}
+$f(5) = \sqrt4 + 2 = 4$, $f^{-1}(4) = 4 + 1 = 5$. \checkmark\ $f^{-1}(3) = 1 + 1 = 2$, $f(2) = 1 + 2 = 3$. \checkmark
+\begin{mitnehmen}\kastentext
+Der Graph der Umkehrfunktion ist die Spiegelung an der Diagonalen --- und mitgespiegelt werden die Bereiche: $D$ wird $W$, $W$ wird $D$. Wer den Wertebereich nicht bestimmt, bekommt eine falsche Umkehrfunktion.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.21
+\stupserzwei{gruen}{$f(x) = 2$ hätte $2x - 1 = 2x + 6$ zur Folge --- unmöglich. Die $2$ ist der Wert, den $f$ nie erreicht: die waagerechte Asymptote.}{22pt}
+\begin{loesungkarte}{gruen}{0.21}{Umkehren und zurück}
+\derweg{Der Nenner gibt die Definitionslücke, die Asymptote gibt die Lücke im Wertebereich, Auflösen nach $x$ gibt die Umkehrfunktion --- mit vertauschten Lücken.}
+\schritt{(a)}
+$D = \mathbb R\setminus\{-3\}$. Wertebereich: $y = \frac{2x - 1}{x + 3}$ nach $x$ auflösen: $y(x + 3) = 2x - 1$, $x(y - 2) = -3y - 1$, $x = \frac{-3y - 1}{y - 2}$ --- für jedes $y\neq2$ gibt es genau ein $x$. $W = \mathbb R\setminus\{2\}$. ($2$ ist der Grenzwert für $x\to\pm\infty$.)
+\schritt{(b)}
+Die Auflösung in (a) ist eindeutig: Zu jedem $y$ genau ein $x$, also injektiv. $f^{-1}(y) = \frac{-3y - 1}{y - 2} = \frac{3y + 1}{2 - y}$, Definitionsbereich $\mathbb R\setminus\{2\}$, Wertebereich $\mathbb R\setminus\{-3\}$.
+\schritt{(c)}
+\[ f^{-1}\bigl(f(x)\bigr) = \frac{3\cdot\frac{2x - 1}{x + 3} + 1}{2 - \frac{2x - 1}{x + 3}} = \frac{\frac{6x - 3 + x + 3}{x + 3}}{\frac{2x + 6 - 2x + 1}{x + 3}} = \frac{7x}{7} = x .\ \checkmark \]
+\probe{$f(0) = -\frac13$, $f^{-1}(-\frac13) = \frac{-1 + 1}{2 + \frac13} = 0$. \checkmark\ $f(1) = \frac14$, $f^{-1}(\frac14) = \frac{\frac74}{\frac74} = 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Bei gebrochen-linearen Funktionen stehen Definitionslücke und Asymptote in den Koeffizienten: $x = -\frac dc$, $y = \frac ac$. Die Umkehrfunktion vertauscht sie. Und \enquote{Verkettung gibt $x$} ist die Probe, die keine Ausrede zulässt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.22
+\stupserzwei{gruen}{$15$ Stunden sind $2{,}5$ Halbwertszeiten: zweimal halbieren und dann noch einmal durch $\sqrt2$. $50 = 400/8 = 400/2^{3}$: drei Halbwertszeiten.}{22pt}
+\begin{loesungkarte}{gruen}{0.22}{Halbwertszeit}
+\derweg{Die Zeit in Halbwertszeiten messen; dann ist der Rest eine Potenz von $\frac12$, und \enquote{wann?} ist ein Logarithmus zur Basis $2$.}
+\schritt{(a)}
+$N(t) = 400\cdot\bigl(\tfrac12\bigr)^{t/6}$ mg, $t$ in Stunden. Gleichwertig $400\cdot e^{-\lambda t}$ mit $\lambda = \frac{\ln2}6 = 0{,}1155$ h$^{-1}$.
+\schritt{(b)}
+$t = 15$: $400\cdot2^{-2{,}5} = 400/(4\sqrt2) = 400/5{,}657 = 70{,}7$ mg.
+\schritt{(c)}
+$400\cdot2^{-t/6} = 50$, also $2^{-t/6} = \frac18 = 2^{-3}$, $t = 18$ h --- drei Halbwertszeiten, ohne Rechner.
+\schritt{(d)}
+$2^{-t/6} = \frac1{400}$, also $t = 6\log_2400 = 6\cdot\frac{\ln400}{\ln2} = 6\cdot8{,}644 = 51{,}9$ h. Nach rund $52$ Stunden --- knapp neun Halbwertszeiten, denn $2^{9} = 512 > 400$.
+\begin{center}
+\begin{tikzpicture}[x=0.13cm,y=0.0075cm,font=\small]
+\draw[grau,-{Latex[length=1.5mm]}] (0,0)--(56,0) node[right,font=\scriptsize]{$t$ [h]};
+\draw[grau,-{Latex[length=1.5mm]}] (0,0)--(0,430) node[above,font=\scriptsize]{mg};
+\foreach \y in {100,200,400} {\draw[linie] (0,\y)--(54,\y); \node[left,font=\scriptsize,grau] at (0,\y) {\y};}
+\foreach \x in {6,12,18,24,36,48} {\draw[grau] (\x,0)--(\x,-8); \node[below,font=\scriptsize,grau] at (\x,-8) {\x};}
+\draw[tief,thick] plot[domain=0:54,samples=60] (\x,{400*0.5^(\x/6)});
+\fill[akzent] (15,70.7) circle (1.5pt); \node[akzent,font=\scriptsize,above right] at (15,70.7) {$70{,}7$};
+\fill[akzent] (18,50) circle (1.5pt); \node[akzent,font=\scriptsize,below right] at (18,50) {$50$};
+\end{tikzpicture}
+\end{center}
+\probe{(b) über (a): $N(12) = 100$, $N(18) = 50$, dazwischen bei $15$: $100/\sqrt2 = 70{,}7$. \checkmark}
+\begin{mitnehmen}\kastentext
+Halbwertszeit als Zeiteinheit: Nach $k$ Halbwertszeiten ist $2^{-k}$ übrig. Fünf Halbwertszeiten sind $3\,\%$ --- die Faustregel für \enquote{praktisch eliminiert}. Band 18 rechnet so mit Medikamentenspiegeln, Band 14 mit der Differentialgleichung dahinter.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.23
+\stupserzwei{akzent}{$120$ km hin bei $60$ km/h: $2$ Stunden. Zurück bei $40$: $3$ Stunden. $240$ km in $5$ Stunden.}{22pt}
+\begin{loesungkarte}{akzent}{0.23}{Hin mit 60, zurück mit 40}
+\derweg{Durchschnittsgeschwindigkeit ist Gesamtstrecke durch Gesamtzeit --- und die langsamere Hälfte dauert länger, also zählt sie mehr.}
+\schritt{(a)}
+Strecke $s$ je Richtung: Zeiten $\frac s{60}$ und $\frac s{40}$. Mittel $= \frac{2s}{s/60 + s/40} = \frac{2}{1/60 + 1/40} = \frac2{5/120} = 48$ km/h. Nicht $50$, weil man mehr Zeit mit $40$ unterwegs ist als mit $60$.
+\schritt{(b)}
+$s$ kürzt sich heraus: $\bar v = \dfrac{2}{\frac1{v_1} + \frac1{v_2}} = \dfrac{2v_1v_2}{v_1 + v_2}$ --- das \emph{harmonische} Mittel. (Vergleiche Aufgabe 0.5b: $\frac{ab}{a + b}$, doppelt.)
+\schritt{(c)}
+Mengen gleich, Raten $100$ und $50$ ml/h: harmonisches Mittel $\frac{2\cdot100\cdot50}{150} = 66{,}7$ ml/h. Probe mit $200$ ml: $100$ ml in $1$ h, $100$ ml in $2$ h, $200$ ml in $3$ h $= 66{,}7$ ml/h. \checkmark
+\schritt{(d)}
+Das arithmetische Mittel ist richtig, wenn die \emph{Zeiten} gleich sind: eine Stunde $60$, eine Stunde $40$ ergibt $100$ km in $2$ h $= 50$ km/h. Bei gleichen Strecken (oder Mengen) ist es das harmonische. Allgemein: Man mittelt die Größe, die im Zähler steht, über die, die im Nenner steht.
+\begin{fehler}\kastentext
+\enquote{$(60 + 40)/2 = 50$.} --- Das arithmetische Mittel gewichtet beide Fahrten gleich; tatsächlich dauert die langsame länger. Das harmonische Mittel ist immer kleiner als das arithmetische (hier $48 < 50$), und der Unterschied wächst mit dem Abstand der Werte.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Bevor man mittelt: Was ist gleich --- Strecke oder Zeit, Menge oder Dauer? Gleiche Zähler: harmonisch. Gleiche Nenner: arithmetisch. Band 17 kennt noch das geometrische Mittel für Wachstumsraten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.24
+\stupserzwei{gruen}{Mantellinie $s = \sqrt{36 + 64} = 10$. Oberer Teilkegel: Faktor $k$ mit $k^{3} = \frac12$, also $k = 0{,}794$; seine Höhe ist $8k$.}{22pt}
+\begin{loesungkarte}{gruen}{0.24}{Der halbe Kegel}
+\derweg{Volumen und Oberfläche nach Formel; für den Schnitt die Ähnlichkeit: der obere Teil ist ein Kegel mit allen Längen mal $k$, also Volumen mal $k^{3}$.}
+\schritt{(a)}
+$V = \frac13\pi r^{2}h = \frac13\pi\cdot36\cdot8 = 96\pi\approx301{,}6$ cm$^{3}$. Mantellinie $s = \sqrt{r^{2} + h^{2}} = \sqrt{36 + 64} = 10$ cm. Oberfläche $O = \pi r^{2} + \pi rs = 36\pi + 60\pi = 96\pi\approx301{,}6$ cm$^{2}$. (Dass $V$ und $O$ dieselbe Maßzahl haben, ist Zufall --- ein Kegel mit $r = 6$, $h = 8$ ist eben so gebaut.)
+\schritt{(b)}
+Schneidet man in der Höhe $x$ über der Grundfläche, ist der obere Teil ein Kegel der Höhe $8 - x$, ähnlich zum ganzen mit Faktor $k = \frac{8 - x}8$. Sein Volumen ist $k^{3}V$. Gleiche Volumina: $k^{3} = \frac12$, $k = \sqrt[3]{1/2} = 0{,}7937$. Also $8 - x = 6{,}35$, $x = 1{,}65$ cm über der Grundfläche --- viel tiefer als die halbe Höhe, weil der Kegel unten breit ist.
+\begin{center}
+\begin{tikzpicture}[x=0.32cm,y=0.32cm,font=\small]
+\draw[tief,thick] (-6,0)--(6,0)--(0,8)--cycle;
+\draw[akzent,thick] (-4.76,1.65)--(4.76,1.65);
+\draw[grau,dashed] (0,0)--(0,8);
+\node[akzent,font=\scriptsize,right] at (5,1.65) {$x = 1{,}65$};
+\node[font=\scriptsize,left] at (-0.2,4) {$8$};
+\node[font=\scriptsize,below] at (3,0) {$6$};
+\node[font=\scriptsize] at (0,4.5) {$\tfrac12V$};
+\node[font=\scriptsize] at (3.2,0.8) {$\tfrac12V$};
+\end{tikzpicture}
+\end{center}
+\probe{Oberer Kegel: Radius $6k = 4{,}76$, Höhe $6{,}35$, Volumen $\frac13\pi\cdot22{,}68\cdot6{,}35 = 150{,}8 = \frac12\cdot301{,}6$. \checkmark}
+\begin{mitnehmen}\kastentext
+Längen mal $k$, Flächen mal $k^{2}$, Volumina mal $k^{3}$. Das ist der Grund, warum man einen Kegel nicht in halber Höhe halbiert, warum große Tiere dicke Beine haben und warum Dosierungen nach Körperoberfläche und nicht nach Gewicht gehen (Band 18).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.25
+\stupserzwei{tief}{$150^{\circ}$ liegt im zweiten Quadranten, Bezugswinkel $30^{\circ}$: Sinus positiv. $240^{\circ}$ im dritten, Bezugswinkel $60^{\circ}$: Kosinus negativ.}{22pt}
+\begin{loesungkarte}{tief}{0.25}{Am Einheitskreis}
+\derweg{Winkel zeichnen, Bezugswinkel zur $x$-Achse bestimmen, Vorzeichen aus dem Quadranten.}
+\schritt{(a)}
+$\sin150^{\circ} = \sin30^{\circ} = \frac12$. $\cos240^{\circ} = -\cos60^{\circ} = -\frac12$. $\tan315^{\circ} = \frac{\sin315^{\circ}}{\cos315^{\circ}} = \frac{-\sqrt2/2}{\sqrt2/2} = -1$.
+\schritt{(b)}
+$\sin x = -\frac12$: $y$-Koordinate $-\frac12$, also unten; Bezugswinkel $30^{\circ} = \frac\pi6$. Dritter und vierter Quadrant: $x = \pi + \frac\pi6 = \frac{7\pi}6$ und $x = 2\pi - \frac\pi6 = \frac{11\pi}6$.
+\schritt{(c)}
+$\cos x = \frac12$: die senkrechte Gerade $x = \frac12$ schneidet den Kreis zweimal ($\pm\frac\pi3$). $\sin x = 1$: die waagerechte Gerade $y = 1$ berührt den Kreis nur im höchsten Punkt $\frac\pi2$. Zwei Lösungen, wenn der Wert echt zwischen $-1$ und $1$ liegt; eine am Rand; keine außerhalb.
+\begin{center}
+\begin{tikzpicture}[scale=1.3,font=\small]
+\draw[grau] (-1.3,0)--(1.3,0); \draw[grau] (0,-1.3)--(0,1.3);
+\draw[tief,thick] (0,0) circle (1);
+\draw[linie] (-1,-0.5)--(1,-0.5);
+\fill[akzent] (-0.866,-0.5) circle (1.3pt) node[below left,font=\scriptsize] {$\frac{7\pi}6$};
+\fill[akzent] (0.866,-0.5) circle (1.3pt) node[below right,font=\scriptsize] {$\frac{11\pi}6$};
+\node[font=\scriptsize,grau,left] at (-1.05,-0.5) {$y = -\frac12$};
+\fill[gruen] (-0.866,0.5) circle (1.3pt) node[above left,font=\scriptsize] {$150^{\circ}$};
+\fill[gruen] (-0.5,-0.866) circle (1.3pt) node[below left,font=\scriptsize] {$240^{\circ}$};
+\end{tikzpicture}
+\end{center}
+\begin{mitnehmen}\kastentext
+Der Einheitskreis ist die Tabelle: Bezugswinkel liefert den Betrag, Quadrant das Vorzeichen, Symmetrie die zweite Lösung. Band 3 und Band 12 bauen darauf die Analysis der Winkelfunktionen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.26
+\stupserzwei{gruen}{$c^{2} = a^{2} + b^{2} - 2ab\cos\gamma$. Bei (c): $\sin2x = 2\sin x\cos x$, dann $\cos x$ ausklammern --- nicht durch $\cos x$ teilen (Aufgabe 0.18).}{22pt}
+\begin{loesungkarte}{gruen}{0.26}{Ein Dreieck ohne rechten Winkel}
+\derweg{Kosinussatz für die Seite, Sinussatz für den kleineren Winkel, Winkelsumme für den Rest; Fläche aus zwei Seiten und dem eingeschlossenen Winkel.}
+\schritt{(a)}
+$c^{2} = 49 + 81 - 2\cdot7\cdot9\cdot\cos52^{\circ} = 130 - 126\cdot0{,}6157 = 130 - 77{,}57 = 52{,}43$, $c = 7{,}24$ cm. Sinussatz für den Winkel gegenüber der \emph{kleineren} Seite $a$ (sicher spitz): $\sin\alpha = \frac{a\sin\gamma}{c} = \frac{7\cdot0{,}7880}{7{,}24} = 0{,}7618$, $\alpha = 49{,}6^{\circ}$. Dann $\beta = 180^{\circ} - 52^{\circ} - 49{,}6^{\circ} = 78{,}4^{\circ}$.
+\schritt{(b)}
+$F = \frac12ab\sin\gamma = \frac12\cdot63\cdot0{,}7880 = 24{,}8$ cm$^{2}$.
+\schritt{(c)}
+$\sin2x = 2\sin x\cos x$, also $2\sin x\cos x - \cos x = 0$, $\cos x\,(2\sin x - 1) = 0$. Entweder $\cos x = 0$: $x = \frac\pi2, \frac{3\pi}2$; oder $\sin x = \frac12$: $x = \frac\pi6, \frac{5\pi}6$. Vier Lösungen. Wer durch $\cos x$ teilt, verliert die ersten beiden.
+\probe{(a) Sinussatz für $\beta$: $\frac{9\cdot0{,}7880}{7{,}24} = 0{,}9795$, $\beta = 78{,}4^{\circ}$. \checkmark\ (c) $x = \frac\pi2$: $\sin\pi = 0 = \cos\frac\pi2$. \checkmark}
+\begin{mitnehmen}\kastentext
+Zwei Seiten und der eingeschlossene Winkel: Kosinussatz zuerst. Den Sinussatz immer für den Winkel gegenüber der kleineren Seite --- er ist spitz, und der Arkussinus gibt ihn richtig. Und Produkt gleich null ist sicherer als dividieren.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.27
+\stupserzwei{gruen}{(b): $(\sqrt{n^{2} + n} - n)\cdot\frac{\sqrt{n^{2} + n} + n}{\sqrt{n^{2} + n} + n} = \frac{n}{\sqrt{n^{2} + n} + n}$. Dann durch $n$ kürzen.}{22pt}
+\begin{loesungkarte}{gruen}{0.27}{Vier Grenzwerte}
+\derweg{Durch die höchste Potenz kürzen; Wurzeldifferenzen mit der dritten binomischen Formel; geometrische Reihe $\sum q^{k} = \frac1{1 - q}$.}
+\schritt{(a)}
+$\dfrac{3 - 5/n + 2/n^{2}}{2 + 7/n}\to\dfrac32$.
+\schritt{(b)}
+Erweitern: $\dfrac{(n^{2} + n) - n^{2}}{\sqrt{n^{2} + n} + n} = \dfrac{n}{\sqrt{n^{2} + n} + n} = \dfrac{1}{\sqrt{1 + 1/n} + 1}\to\dfrac12$.
+\schritt{(c)}
+$q = \frac23$, $|q| < 1$: Summe $\frac1{1 - 2/3} = 3$.
+\schritt{(d)}
+$0{,}\overline7 = \frac7{10} + \frac7{100} + \dots = \frac7{10}\sum_{k\ge0}\bigl(\frac1{10}\bigr)^{k} = \frac7{10}\cdot\frac{1}{1 - 1/10} = \frac7{10}\cdot\frac{10}9 = \frac79$. Exakt, nicht näherungsweise: Der Grenzwert der Partialsummen \emph{ist} $\frac79$.
+\probe{(b) numerisch $n = 100$: $\sqrt{10100} - 100 = 100{,}499 - 100 = 0{,}499$. \checkmark\ (d): $7 : 9 = 0{,}777\ldots$ \checkmark}
+\begin{mitnehmen}\kastentext
+$0{,}\overline9 = 1$ aus demselben Grund: $\frac9{10}\cdot\frac{10}9$. Eine unendliche Dezimalzahl ist eine Reihe, und eine Reihe ist ein Grenzwert --- Band 3, Kapitel 2.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.28
+\stupserzwei{tief}{$f'(x) = 3x^{2} - 3$. Nullstellen von $f$ in $[0, 2]$: $x = 0$ und $x = \sqrt3$. Dazwischen ist $f$ negativ --- das Integral zählt die Fläche dort mit Minus.}{22pt}
+\begin{loesungkarte}{tief}{0.28}{Tangente, Extrema, Fläche}
+\derweg{Ableitung ausrechnen, an der Stelle auswerten; Nullstellen der Ableitung; für die Fläche das Integral an den Nullstellen von $f$ zerlegen.}
+\schritt{(a)}
+$f(2) = 8 - 6 = 2$, $f'(x) = 3x^{2} - 3$, $f'(2) = 9$. Tangente $y = 2 + 9(x - 2) = 9x - 16$.
+\schritt{(b)}
+$f'(x) = 0$ für $x = \pm1$. $f''(x) = 6x$: $f''(1) = 6 > 0$, Minimum bei $(1, -2)$; $f''(-1) < 0$, Maximum bei $(-1, 2)$.
+\schritt{(c)}
+$\int_0^{2}(x^{3} - 3x)\,dx = \bigl[\tfrac{x^{4}}4 - \tfrac{3x^{2}}2\bigr]_0^{2} = 4 - 6 = -2$. Nullstellen von $f$: $x(x^{2} - 3) = 0$, in $[0, 2]$ bei $0$ und $\sqrt3$. $\int_0^{\sqrt3}f = \frac94 - \frac92 = -\frac94$ (unter der Achse), $\int_{\sqrt3}^{2}f = -2 - (-\frac94) = \frac14$ (darüber). Fläche $= \frac94 + \frac14 = \frac52$. Das Integral $-2$ ist die \emph{Bilanz} der beiden Teile, die Fläche ihre Summe.
+\begin{center}
+\begin{tikzpicture}[x=1.1cm,y=0.5cm,font=\small]
+\draw[grau,-{Latex[length=1.5mm]}] (-0.3,0)--(2.5,0) node[right,font=\scriptsize]{$x$};
+\draw[grau,-{Latex[length=1.5mm]}] (0,-2.6)--(0,2.8) node[above,font=\scriptsize]{$y$};
+\fill[akzent!30] plot[domain=0:1.732,samples=30] (\x,{\x^3-3*\x}) -- (1.732,0) -- (0,0) -- cycle;
+\fill[gruen!30] plot[domain=1.732:2,samples=20] (\x,{\x^3-3*\x}) -- (2,0) -- (1.732,0) -- cycle;
+\draw[tief,thick] plot[domain=-0.2:2.1,samples=50] (\x,{\x^3-3*\x});
+\node[akzent,font=\scriptsize] at (0.9,-1.2) {$-\frac94$};
+\node[gruen,font=\scriptsize] at (2.25,0.5) {$+\frac14$};
+\node[font=\scriptsize,below] at (1.732,0) {$\sqrt3$};
+\end{tikzpicture}
+\end{center}
+\probe{(a): die Tangente trifft $f$ bei $x = 2$: $9\cdot2 - 16 = 2 = f(2)$. \checkmark\ (c): $-\frac94 + \frac14 = -2$. \checkmark}
+\begin{mitnehmen}\kastentext
+Das Integral ist eine Bilanz mit Vorzeichen; die Fläche ist die Summe der Beträge. Wer Flächen will, braucht die Nullstellen zuerst --- Band 3, Kapitel 8.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.29
+\stupserzwei{gruen}{$-\frac2x = -2x^{-1}$ hat Ableitung $2x^{-2}$; $5\sqrt x = 5x^{1/2}$ hat Ableitung $\frac52x^{-1/2}$. Innen mal außen bei der Kette.}{22pt}
+\begin{loesungkarte}{gruen}{0.29}{Vier Ableitungen}
+\derweg{Umschreiben, Regel wählen, rechnen, aufräumen.}
+\schritt{(a)}
+$f'(x) = 12x^{3} + \dfrac2{x^{2}} + \dfrac5{2\sqrt x}$.
+\schritt{(b)}
+Produktregel: $g'(x) = 2xe^{-x} + x^{2}(-e^{-x}) = (2x - x^{2})e^{-x} = x(2 - x)e^{-x}$.
+\schritt{(c)}
+Quotientenregel: $h'(x) = \dfrac{x\cos x - \sin x}{x^{2}}$.
+\schritt{(d)}
+Kettenregel: $k'(x) = \dfrac{1}{2\sqrt{3x^{2} + 1}}\cdot6x = \dfrac{3x}{\sqrt{3x^{2} + 1}}$.
+\probe{(b) hat Nullstellen der Ableitung bei $x = 0$ und $x = 2$: $g$ hat dort Minimum ($g(0) = 0$) und Maximum ($g(2) = 4e^{-2} = 0{,}54$). \checkmark\ (d) numerisch bei $x = 1$: $\frac{k(1{,}001) - k(1)}{0{,}001} = \frac{2{,}0015 - 2}{0{,}001} = 1{,}50$; Formel $\frac3{2} = 1{,}5$. \checkmark}
+\begin{mitnehmen}\kastentext
+Vier Regeln, immer dieselbe Frage vorab: Ist das eine Summe, ein Produkt, ein Quotient oder eine Verkettung? Die Antwort steht fest, bevor man rechnet.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.30
+\stupserzwei{gruen}{Stammfunktion von $\frac4{x + 1}$ ist $4\ln(x + 1)$. Schnittpunkte von $x^{2}$ und $2x$: $0$ und $2$. Kugel: $\pi\int_{-r}^{r}(r^{2} - x^{2})\,dx$.}{22pt}
+\begin{loesungkarte}{gruen}{0.30}{Drei Integrale}
+\derweg{Stammfunktion und Grenzen; Fläche zwischen Kurven ist Integral der Differenz; Rotationsvolumen ist $\pi\int y^{2}$.}
+\schritt{(a)}
+$\int_1^{3}\bigl(2x^{2} - \tfrac4{x + 1}\bigr)dx = \bigl[\tfrac{2x^{3}}3 - 4\ln(x + 1)\bigr]_1^{3} = \bigl(18 - 4\ln4\bigr) - \bigl(\tfrac23 - 4\ln2\bigr) = \tfrac{52}3 - 4\ln2 = 17{,}33 - 2{,}77 = 14{,}56$.
+\schritt{(b)}
+$x^{2} = 2x$ bei $x = 0$ und $x = 2$; dazwischen ist $2x > x^{2}$. Fläche $\int_0^{2}(2x - x^{2})\,dx = \bigl[x^{2} - \tfrac{x^{3}}3\bigr]_0^{2} = 4 - \tfrac83 = \tfrac43$.
+\schritt{(c)}
+Der Halbkreis $y = \sqrt{r^{2} - x^{2}}$, $-r\le x\le r$, rotiert um die $x$-Achse: $V = \pi\int_{-r}^{r}(r^{2} - x^{2})\,dx = \pi\bigl[r^{2}x - \tfrac{x^{3}}3\bigr]_{-r}^{r} = \pi\bigl(2r^{3} - \tfrac{2r^{3}}3\bigr) = \tfrac43\pi r^{3}$.
+\probe{(a) grob: der Integrand liegt zwischen $0$ ($x = 1$) und $17$ ($x = 3$), Mittel etwa $7$ auf einem Intervall der Länge $2$: $\approx14$. \checkmark\ (b) ist $\frac13$ des umschließenden Rechtecks $2\times4$ --- wie bei jeder Parabel über einer Sehne (Archimedes). \checkmark}
+\begin{mitnehmen}\kastentext
+Fläche zwischen Kurven: Schnittpunkte, dann obere minus untere. Rotationsvolumen: Scheiben vom Radius $y$, also $\pi y^{2}$ aufsummiert. Beides ist der Hauptsatz, einmal angewandt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 0.31
+\stupserzwei{gruen}{$n^{2} + (2n + 1) = n^{2} + 2n + 1 = (n + 1)^{2}$ --- die erste binomische Formel ist der ganze Induktionsschritt.}{22pt}
+\begin{loesungkarte}{gruen}{0.31}{Die ungeraden Zahlen}
+\derweg{Anfang prüfen, dann zeigen: Wenn die Formel für $n$ gilt, gilt sie für $n + 1$. Das Bild erklärt, warum; die Induktion beweist, dass.}
+\schritt{(a)}
+$1 = 1$; $1 + 3 = 4$; $1 + 3 + 5 = 9$; $1 + 3 + 5 + 7 = 16$. \checkmark
+\schritt{(b)}
+\emph{Anfang} $n = 1$: $1 = 1^{2}$. \emph{Schritt}: Gelte $1 + 3 + \dots + (2n - 1) = n^{2}$. Dann
+\[ 1 + 3 + \dots + (2n - 1) + (2n + 1) = n^{2} + 2n + 1 = (n + 1)^{2}, \]
+und $2n + 1 = 2(n + 1) - 1$ ist die nächste ungerade Zahl. Also gilt die Formel für $n + 1$, und damit für alle $n\ge1$. $\blacksquare$
+\schritt{(c)}
+\begin{center}
+\begin{tikzpicture}[x=0.55cm,y=0.55cm]
+\foreach \k/\c in {0/tief!15,1/tief!35,2/tief!55,3/tief!80} {
+  \foreach \i in {0,...,\k} {\fill[\c] (\i,\k) rectangle (\i+1,\k+1); \fill[\c] (\k,\i) rectangle (\k+1,\i+1);}
+}
+\foreach \i in {0,...,4} {\draw[white,thick] (\i,0)--(\i,4); \draw[white,thick] (0,\i)--(4,\i);}
+\draw[grau] (0,0) rectangle (4,4);
+\node[right,font=\small] at (4.5,2) {$1 + 3 + 5 + 7 = 4^{2}$};
+\end{tikzpicture}
+\end{center}
+Jeder Winkel (\enquote{Gnomon}) fügt die nächste ungerade Zahl hinzu und macht aus dem $n\times n$-Quadrat ein $(n + 1)\times(n + 1)$-Quadrat. Das Bild \emph{ist} der Induktionsschritt, anschaulich: Es zeigt, warum $n^{2} + (2n + 1) = (n + 1)^{2}$. Ein Beweis ist es nicht, weil es nur ein $n$ zeigt und man glauben muss, dass es für alle so weitergeht --- genau das, was die Induktion statt des Glaubens liefert.
+\begin{mitnehmen}\kastentext
+Induktion ist die Dominoreihe: Der erste fällt, und jeder stößt den nächsten um. Das Bild zeigt, warum ein Stein den nächsten umstößt; der Beweis stellt sicher, dass es alle sind. Band 0, Kapitel 14, und Band 15 für das Zählen.
+\end{mitnehmen}
+\end{loesungkarte}

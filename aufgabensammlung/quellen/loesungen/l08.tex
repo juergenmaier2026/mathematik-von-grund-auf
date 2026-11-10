@@ -1,0 +1,686 @@
+\setgebiet{9}{Topologie}{mittel}
+\chapter{Lösungen: Topologie}
+
+%%%%%%%%%% 8.1
+\stupserzwei{tief}{(c) $\frac1p + \frac1q > \frac12$ mit $p, q\ge3$: Ist $p\ge6$, so $\frac1q > \frac12 - \frac16 = \frac13$, also $q < 3$ --- unmöglich. Also $p, q\in\{3, 4, 5\}$, und $(4, 4), (4, 5), (5, 4), (5, 5)$ fallen weg.}{22pt}
+\begin{loesungkarte}{tief}{8.1}{Warum es nur fünf platonische Körper gibt}
+\derweg{Kanten doppelt zählen, in Euler einsetzen, die entstehende Ungleichung in ganzen Zahlen lösen.}
+\schritt{(a)}
+Jede der $F$ Flächen hat $p$ Kanten, jede Kante gehört zu genau zwei Flächen: $pF = 2K$. Jede der $E$ Ecken hat $q$ Kanten, jede Kante hat zwei Endpunkte: $qE = 2K$.
+\schritt{(b)}
+$E = \frac{2K}q$, $F = \frac{2K}p$. Einsetzen: $\frac{2K}q - K + \frac{2K}p = 2$. Durch $2K$: $\frac1q - \frac12 + \frac1p = \frac1K$, also $\frac1p + \frac1q = \frac12 + \frac1K$.
+\schritt{(c)}
+Da $K > 0$: $\frac1p + \frac1q > \frac12$. Mit $p, q\ge3$: Wäre $p\ge6$, so $\frac1q > \frac13$, also $q\le2$. Also $p\le5$, ebenso $q\le5$. Von den neun Paaren in $\{3, 4, 5\}^{2}$ erfüllen die Ungleichung: $(3, 3)$: $\frac23$; $(3, 4), (4, 3)$: $\frac7{12}$; $(3, 5), (5, 3)$: $\frac8{15}$. Nicht: $(4, 4)$: $\frac12$; $(4, 5), (5, 4)$: $\frac9{20}$; $(5, 5)$: $\frac25$. Genau fünf Lösungen.
+\schritt{(d)}
+$K = \bigl(\frac1p + \frac1q - \frac12\bigr)^{-1}$:
+\begin{center}\small
+\begin{tabular}{cc|ccc|l}
+$p$ & $q$ & $K$ & $E$ & $F$ & Körper\\ \hline
+3 & 3 & 6 & 4 & 4 & Tetraeder\\
+4 & 3 & 12 & 8 & 6 & Würfel\\
+3 & 4 & 12 & 6 & 8 & Oktaeder\\
+5 & 3 & 30 & 20 & 12 & Dodekaeder\\
+3 & 5 & 30 & 12 & 20 & Ikosaeder
+\end{tabular}
+\end{center}
+\probe{Würfel: $8 - 12 + 6 = 2$. Ikosaeder: $12 - 30 + 20 = 2$. \checkmark\ Vertauschen von $p$ und $q$ vertauscht $E$ und $F$: Dualität.}
+\begin{mitnehmen}\kastentext
+Der Beweis benutzt nur $\chi = 2$ und Zählen --- keine Geometrie, keine Winkel. Deshalb gilt er auch für alle \enquote{kombinatorisch regelmäßigen} Zerlegungen der Sphäre. Für den Torus ($\chi = 0$) wird aus der Ungleichung $\frac1p + \frac1q = \frac12$: die drei Parkettierungen der Ebene $(3, 6), (4, 4), (6, 3)$, aufgerollt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.2
+\stupserzwei{gruen}{$\deg A = 3$, $\deg B = 3$, $\deg C = 5$, $\deg D = 3$. Vier ungerade Knoten --- zwei zu viel.}{22pt}
+\begin{loesungkarte}{gruen}{8.2}{Die Brücken von Königsberg}
+\derweg{Grade zählen; Paarungsargument an Zwischenknoten; Folgerung; Reparatur.}
+\schritt{(a)}
+$A$: zwei Brücken nach $C$, eine nach $D$: $3$. $B$: ebenso $3$. $C$: je zwei nach $A$ und $B$, eine nach $D$: $5$. $D$: je eine nach $A, B, C$: $3$. Summe $14 = 2\cdot7$. \checkmark\ (Jede Brücke wird an beiden Enden gezählt --- das \emph{Handschlaglemma}.)
+\schritt{(b)}
+Sei $W$ ein Weg, der jede Kante genau einmal benutzt, und $v$ ein Knoten, der weder Anfang noch Ende ist. Jedes Mal, wenn $W$ in $v$ ankommt, verlässt er $v$ über eine andere, noch unbenutzte Kante. Die Kanten an $v$ zerfallen also in Paare (Ankunft, Abfahrt): $\deg v$ ist gerade. Nur Anfang und Ende können ungeraden Grad haben (und haben ihn, falls sie verschieden sind). Also höchstens zwei ungerade Knoten. In Königsberg sind es vier: kein solcher Weg. $\blacksquare$
+\schritt{(c)}
+Reißt man eine Brücke zwischen zwei ungeraden Knoten ab, etwa eine der beiden $A$--$C$-Brücken, so werden $A$ und $C$ gerade ($2$ und $4$); ungerade bleiben $B$ und $D$ --- ein Weg von $B$ nach $D$ existiert dann (Euler zeigte auch die Umkehrung: zusammenhängend mit $0$ oder $2$ ungeraden Knoten genügt). Ebenso hilft eine neue Brücke $A$--$B$ (dann $A, B$ gerade, Weg von $C$ nach $D$). Für einen \emph{Rundweg} müssen alle Grade gerade sein: zwei Brücken abreißen oder bauen, etwa $A$--$B$ und $C$--$D$ neu.
+\probe{Nach Abriss einer $A$--$C$-Brücke: $B\to C\to A\to D\to B\to C\to D$ benutzt alle sechs Kanten. \checkmark}
+\begin{mitnehmen}\kastentext
+Euler hat die Brücken nicht gezeichnet, sondern gezählt --- Lage statt Länge. Das Paaritätsargument ist eine \emph{Invariante}: eine Größe, die jeder Weg hätte, die der Graph aber nicht hat. So beweist man Unmöglichkeit; die Topologie besteht zu großen Teilen aus solchen Invarianten ($\chi$, $\pi_1$, Betti-Zahlen).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.3
+\stupserzwei{gruen}{(b) Vom $4\times4$-Gitter der Eckpunkte bleiben nach dem Verkleben $3\times3 = 9$; von $24$ Kanten $18$; Flächen $9$. $9 - 18 + 9 = 0$.}{22pt}
+\begin{loesungkarte}{gruen}{8.3}{Der Torus hat $\chi = 0$}
+\derweg{Vor dem Verkleben zählen, dann identifizierte Ecken und Kanten zusammenfassen.}
+\schritt{(a)}
+Quadrat: $4$ Ecken, $4$ Kanten, $1$ Fläche. Verkleben: Die vier Ecken werden eine (alle sind $(0, 0)\sim(1, 0)\sim(0, 1)\sim(1, 1)$); die Kanten $x = 0$ und $x = 1$ werden eine ($b$), ebenso $y = 0$ und $y = 1$ ($a$). $E = 1$, $K = 2$, $F = 1$: $\chi = 1 - 2 + 1 = 0$.
+\schritt{(b)}
+$3\times3$-Gitter: $16$ Gitterpunkte, $24$ Kanten ($12$ waagerecht, $12$ senkrecht), $9$ Flächen. Verkleben: Die Randpunkte werden identifiziert --- von $16$ bleiben $9$ (die Eckpunkte des Torus bilden ein $3\times3$-Gitter). Von den $24$ Kanten werden die $3$ unteren mit den $3$ oberen und die $3$ linken mit den $3$ rechten identifiziert: $18$. $\chi = 9 - 18 + 9 = 0$. \checkmark
+\schritt{(c)}
+Ring aus $n$ Rechtecken: Zylinder mit $2n$ Ecken ($n$ oben, $n$ unten), $3n$ Kanten ($n$ Seitenkanten, $n$ oben, $n$ unten), $n$ Flächen --- $\chi = 2n - 3n + n = 0$ für den Zylinder. Verklebt man die obere mit der unteren Randkurve: $n$ Ecken, $2n$ Kanten, $n$ Flächen: $\chi = 0$ für jedes $n$. \checkmark
+\probe{Allgemein: Ein $m\times n$-Gitter auf dem Torus hat $mn$ Ecken, $2mn$ Kanten, $mn$ Flächen --- immer $0$.}
+\begin{mitnehmen}\kastentext
+$\chi$ hängt nicht von der Zerlegung ab: Jede Verfeinerung (Kante teilen: $+1$ Ecke, $+1$ Kante; Fläche teilen: $+1$ Kante, $+1$ Fläche) lässt $\chi$ unverändert, und je zwei Zerlegungen haben eine gemeinsame Verfeinerung. Die Zahl gehört also zur Fläche, nicht zur Zeichnung --- sie ist die älteste topologische Invariante.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.4
+\stupserzwei{tief}{(a) $B_1(x) = \{x\}$: Jeder Punkt ist offen, also jede Menge. (c) $\arctan$ ist ein Homöomorphismus $\mathbb R\to(-\frac\pi2, \frac\pi2)$; die Metrik ist die von $(-\frac\pi2, \frac\pi2)$ zurückgeholte.}{22pt}
+\begin{loesungkarte}{tief}{8.4}{Drei ungewohnte Metriken}
+\derweg{Axiome prüfen, dabei die Dreiecksungleichung nach Fällen; Kugeln skizzieren; Topologie ablesen.}
+\schritt{(a) Diskrete Metrik}
+Nichtnegativ, $d(x, y) = 0\iff x = y$, symmetrisch: nach Definition. Dreiecksungleichung $d(x, z)\le d(x, y) + d(y, z)$: Die linke Seite ist höchstens $1$; die rechte ist $0$ nur für $x = y = z$, und dann ist auch die linke $0$. \checkmark\ Kugeln: $B_r(x) = \{x\}$ für $r\le1$, $B_r(x) = X$ für $r > 1$. Da $\{x\}$ offen ist, ist jede Menge (Vereinigung ihrer Punkte) offen: die \emph{diskrete Topologie}. Jede Abbildung aus einem diskreten Raum ist stetig.
+\schritt{(b) Eisenbahnmetrik}
+Definitheit und Symmetrie sind klar. Dreiecksungleichung für $x, y, z$: Liegen $x, z$ mit $0$ auf einer Geraden, so ist $d(x, z) = |x - z|\le|x| + |z|$, und $|x| + |z|\le d(x, y) + d(y, z)$ in jedem Fall (ob $y$ nun auf den Geraden liegt oder nicht, ist $d(x, y)\ge\bigl||x| - |y|\bigr|$ bzw.\ $= |x| + |y|$, und man prüft die vier Fälle). Liegen $x, z$ nicht mit $0$ auf einer Geraden: $d(x, z) = |x| + |z|$, und $y$ kann höchstens mit einem der beiden auf einem Strahl durch $0$ liegen; dann ist $d(x, y) + d(y, z)\ge\bigl||x| - |y|\bigr| + |y| + |z|\ge|x| + |z|$. \checkmark\ Kugeln um $x\neq0$: Für $r\le|x|$ ein offenes Stück der Geraden durch $0$ und $x$ (Länge $2r$ um $x$) --- alle anderen Punkte sind mindestens $|x|$ entfernt. Für $r > |x|$: dieses Stück plus die euklidische Kugel vom Radius $r - |x|$ um $0$, deren Punkte man über Paris erreicht.
+\schritt{(c) Arctan-Metrik}
+$d(x, y) = |\arctan x - \arctan y|$ ist die euklidische Metrik auf dem Bild $(-\frac\pi2, \frac\pi2)$, zurückgeholt mit der Bijektion $\arctan$: alle Axiome übertragen sich. Da $\arctan$ und $\tan$ stetig sind, hat jede Standard-offene Menge eine $d$-Kugel um jeden Punkt und umgekehrt: \emph{dieselben offenen Mengen}. Aber $x_n = n$: $d(n, m) = |\arctan n - \arctan m|\to0$ --- eine Cauchy-Folge ohne Grenzwert ($\arctan n\to\frac\pi2$, und $\frac\pi2$ ist kein $\arctan$). Nicht vollständig.
+\probe{(b) Dreiecksungleichung an $x = (1, 0)$, $y = (0, 1)$, $z = (2, 0)$: $d(x, z) = 1\le d(x, y) + d(y, z) = 2 + 3$. \checkmark}
+\begin{mitnehmen}\kastentext
+(a) zeigt: Die Metrik bestimmt die Topologie, aber verschiedene Metriken können dieselbe Topologie geben --- und eine Metrik kann eine Topologie erzeugen, in der nichts \enquote{nahe} ist. (c) zeigt: Vollständigkeit hängt an der Metrik, nicht an der Topologie (Aufgabe 8.7). (b) zeigt, dass offene Kugeln nicht rund sein müssen --- und dass die Dreiecksungleichung der einzige Punkt ist, an dem man bei neuen Metriken wirklich arbeiten muss.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.5
+\stupserzwei{gruen}{(c) $\max_i|a_i|\le\sqrt{\sum a_i^{2}}\le\sum|a_i|\le n\max_i|a_i|$ --- die erste, weil die Summe den größten Term enthält; die zweite durch Quadrieren; die dritte, weil jeder Term höchstens das Maximum ist.}{22pt}
+\begin{loesungkarte}{gruen}{8.5}{Die Maximumsmetrik}
+\derweg{Axiome; Einheitskugeln zeichnen; Ungleichungskette; daraus die Gleichheit der Topologien.}
+\schritt{(a)}
+(M1) Ein Maximum von Beträgen ist $\ge0$ und genau dann $0$, wenn alle $|x_i - y_i| = 0$, also $x = y$. (M2) $|x_i - y_i| = |y_i - x_i|$. (M3) Sei $k$ ein Index mit $d_\infty(x, z) = |x_k - z_k|$. Dann $|x_k - z_k|\le|x_k - y_k| + |y_k - z_k|\le d_\infty(x, y) + d_\infty(y, z)$, weil jeder der beiden Terme höchstens das jeweilige Maximum ist. \checkmark
+\schritt{(b)}
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\draw[tief,thick] (1,0)--(0,1)--(-1,0)--(0,-1)--cycle;
+\draw[akzent,thick] (0,0) circle (1);
+\draw[gruen,thick] (-1,-1) rectangle (1,1);
+\draw[->,gray] (-1.4,0)--(1.4,0); \draw[->,gray] (0,-1.4)--(0,1.4);
+\node[tief,font=\small] at (0.75,0.75) {$d_1$};
+\node[akzent,font=\small] at (0.82,-0.6) {$d_2$};
+\node[gruen,font=\small] at (1.2,1.15) {$d_\infty$};
+\end{tikzpicture}
+\end{center}
+$d_1$: Raute $|x| + |y|\le1$. $d_2$: Kreis. $d_\infty$: Quadrat $\max(|x|, |y|)\le1$. Raute $\subseteq$ Kreis $\subseteq$ Quadrat.
+\schritt{(c)}
+Mit $a_i = x_i - y_i$: $\max|a_i|\le\sqrt{\sum a_i^{2}}$, weil $\max|a_i|^{2}$ einer der Summanden ist. $\sqrt{\sum a_i^{2}}\le\sum|a_i|$, weil $\sum a_i^{2}\le\bigl(\sum|a_i|\bigr)^{2}$ (rechts kommen die gemischten Terme $2|a_i||a_j|\ge0$ hinzu). $\sum|a_i|\le n\max|a_i|$. Also $d_\infty\le d_2\le d_1\le n\,d_\infty$. Folglich enthält jede $d_\infty$-Kugel $B^{\infty}_r(x)$ die Kugel $B^{1}_r(x)$, und jede $d_1$-Kugel $B^{1}_r(x)$ die Kugel $B^{\infty}_{r/n}(x)$: Eine Menge, die um jeden Punkt eine Kugel der einen Sorte enthält, enthält auch eine der anderen. Dieselben offenen Mengen. \checkmark
+\probe{In $\mathbb R^{2}$: $d_\infty((0,0), (1,1)) = 1$, $d_2 = \sqrt2$, $d_1 = 2 = 2\cdot d_\infty$. Die Kette ist scharf.}
+\begin{mitnehmen}\kastentext
+Metriken, die sich gegenseitig durch Konstanten abschätzen, heißen \emph{äquivalent} --- sie haben dieselben offenen Mengen, dieselben konvergenten und dieselben Cauchy-Folgen. In $\mathbb R^{n}$ sind alle Normen äquivalent (Band 2); in unendlicher Dimension nicht mehr, und dann beginnt die Funktionalanalysis.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.6
+\stupserzwei{gruen}{(d) $\frac{q^{n}}{1 - q}\cdot0{,}0183 < 10^{-6}$ heißt $0{,}8415^{n} < 8{,}7\cdot10^{-6}$, also $n\ge68$. Tatsächlich ist der Fehler nach $10$ Schritten schon $3{,}4\cdot10^{-5}$.}{22pt}
+\begin{loesungkarte}{gruen}{8.6}{$x = \cos x$ mit Banach}
+\derweg{Invariantes Intervall; Kontraktion über den Mittelwertsatz; iterieren; a-priori-Schranke auswerten.}
+\schritt{(a)}
+Für $x\in[0, 1]$ ist $\cos x\in[\cos1, 1] = [0{,}5403, 1]\subseteq[0, 1]$. Enger: $X = [0{,}5, 1]$, denn $\cos$ fällt dort, $\cos(X) = [\cos1, \cos0{,}5] = [0{,}5403, 0{,}8776]\subseteq X$. \checkmark\ $X$ ist abgeschlossen in $\mathbb R$, also vollständig.
+\schritt{(b)}
+Mittelwertsatz: $|\cos x - \cos y| = |\sin\xi|\,|x - y|$ mit $\xi$ zwischen $x$ und $y$, also $\xi\in X$. Dort ist $\sin$ monoton wachsend, $|\sin\xi|\le\sin1 = 0{,}841471 =: q < 1$. Kontraktion. \checkmark
+\schritt{(c)}
+$x_1 = \cos0{,}75 = 0{,}731689$, $x_2 = \cos x_1 = 0{,}744047$, $x_3 = 0{,}735734$. Die Folge alterniert um den Grenzwert, weil $\cos' < 0$. Fixpunkt: $x^{*} = 0{,}739085$ (die \emph{Dottie-Zahl}; sie ist transzendent).
+\schritt{(d)}
+$d(x_1, x_0) = 0{,}018311$. Schranke $\frac{q^{n}}{1 - q}\cdot0{,}018311 = 0{,}1155\cdot0{,}841471^{n}$. Für $n = 10$: $0{,}1155\cdot0{,}178 = 0{,}0206$. Für $< 10^{-6}$: $0{,}841471^{n} < 8{,}66\cdot10^{-6}$, $n > \frac{\ln(8{,}66\cdot10^{-6})}{\ln0{,}841471} = 67{,}5$, also $n = 68$. Tatsächlich: $x_{10} = 0{,}739119$, Fehler $3{,}4\cdot10^{-5}$ --- die Schranke ist um den Faktor $600$ pessimistisch, weil $|\sin\xi|$ nahe $x^{*}$ nur $0{,}674$ ist, nicht $0{,}841$.
+\probe{$\cos(0{,}739085) = 0{,}739085$. \checkmark}
+\begin{mitnehmen}\kastentext
+Banach liefert vier Dinge auf einmal --- Existenz, Eindeutigkeit, Verfahren, Fehlerschranke --- und verlangt dafür nur Vollständigkeit und eine Kontraktion. Die a-priori-Schranke ist grob, aber sie steht \emph{vor} der Rechnung fest. Schneller konvergiert Newton (Aufgabe 5.24), aber ohne eine so bequeme Garantie.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.7
+\stupserzwei{akzent}{(b) Das Bild von $\frac1n$ ist $\tan\bigl(\pi(\frac1n - \frac12)\bigr)\to-\infty$: unbeschränkt, erst recht keine Cauchy-Folge. Der Homöomorphismus erhält Konvergenz, aber nicht \enquote{Cauchy}.}{22pt}
+\begin{loesungkarte}{akzent}{8.7}{Vollständigkeit ist nicht topologisch}
+\derweg{Homöomorphismus angeben; Cauchy-Folge verfolgen; sortieren, welche Begriffe die Metrik und welche die Topologie brauchen.}
+\schritt{(a)}
+$h(x) = \tan\bigl(\pi(x - \frac12)\bigr)$ ist stetig und streng monoton von $(0, 1)$ auf $\mathbb R$, mit stetiger Umkehrung $\frac1\pi\arctan y + \frac12$: Homöomorphismus. In $(0, 1)$ ist $\frac1n$ eine Cauchy-Folge (Abstände $\to0$) ohne Grenzwert in $(0, 1)$: nicht vollständig. $\mathbb R$ ist vollständig (Band 3).
+\schritt{(b)}
+$h(\frac1n) = \tan\bigl(\pi(\frac1n - \frac12)\bigr) = -\cot\frac\pi n\to-\infty$. Keine Cauchy-Folge --- Homöomorphismen erhalten Konvergenz (und Nichtkonvergenz), aber nicht die Cauchy-Eigenschaft, weil diese Abstände vergleicht, die der Homöomorphismus beliebig dehnen darf.
+\schritt{(c)}
+Beschränkt ist nicht topologisch: $(0, 1)$ beschränkt, $\mathbb R$ nicht, beide homöomorph. Kompakt ist topologisch: definiert über offene Überdeckungen, und ein Homöomorphismus bildet offene Überdeckungen auf offene Überdeckungen ab. In $\mathbb R^{n}$ gilt \enquote{kompakt $=$ abgeschlossen und beschränkt}, aber die rechte Seite ist nur in dieser Kombination topologisch invariant.
+\schritt{(d)}
+(i) Falsch: $f(x) = \frac1x$ auf $(0, 1)$, $x_n = \frac1n$ Cauchy, $f(x_n) = n$ nicht. (ii) Richtig: Zu $\varepsilon$ gibt es $\delta$ mit $d(x, y) < \delta\Rightarrow d(f(x), f(y)) < \varepsilon$; für $n, m$ groß ist $d(x_n, x_m) < \delta$. (iii) Richtig: Stetige Abbildungen erhalten Konvergenz, $f(x_n)\to f(x)$.
+\begin{fehler}\kastentext
+\enquote{Vollständig} und \enquote{beschränkt} gehören zur Metrik; \enquote{kompakt}, \enquote{zusammenhängend}, \enquote{offen} zur Topologie. Ein Satz, der \enquote{vollständig} voraussetzt (Banach, Baire), gilt also für einen Raum \emph{mit dieser Metrik}, und ein homöomorpher Raum kann die Voraussetzung verletzen. Umgekehrt: Vollständigkeit lässt sich oft durch Wechsel zu einer äquivalenten Metrik erzwingen --- $(0, 1)$ wird mit $d(x, y) = |h(x) - h(y)|$ vollständig.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Es gibt eine topologische Fassung: Ein metrisierbarer Raum heißt \emph{vollständig metrisierbar}, wenn \emph{irgendeine} verträgliche Metrik vollständig ist. $(0, 1)$ ist es (via $h$), $\mathbb Q$ nicht (Satz von Baire). Die Frage \enquote{welche Metrik?} ist also keine Spitzfindigkeit, sondern der Unterschied zwischen zwei Begriffen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.8
+\stupserzwei{gruen}{(b) $[0, 1)$ ist offen (Basiselement) \emph{und} abgeschlossen, denn das Komplement $(-\infty, 0)\cup[1, \infty) = \bigcup_{a < 0}[a, 0)\cup\bigcup_{b > 1}[1, b)$ ist offen.}{22pt}
+\begin{loesungkarte}{gruen}{8.8}{Die Sorgenfrey-Gerade}
+\derweg{Basiskriterium; Mengen durch Basiselemente ausschöpfen; Vergleich; ein Abzählbarkeitsargument.}
+\schritt{(a)}
+$\bigcup\mathcal B = \mathbb R$. Durchschnitt: $[a_1, b_1)\cap[a_2, b_2) = [\max a_i, \min b_i)$, wenn nichtleer --- wieder ein Basiselement. Also enthält der Durchschnitt zweier Basiselemente um jeden seiner Punkte ein Basiselement: Basiskriterium erfüllt. \checkmark
+\schritt{(b)}
+$[0, 1)$: offen (Basiselement), abgeschlossen (siehe Stupser) --- \enquote{abgeschlossen-offen}. $(0, 1) = \bigcup_{n}[\frac1n, 1)$: offen; nicht abgeschlossen (das Komplement enthält $0$, aber kein $[0, \varepsilon)$ liegt im Komplement). $[0, 1]$: abgeschlossen (Komplement $(-\infty, 0)\cup(1, \infty)$ ist in $\mathbb R$ offen, also nach (c) auch hier); nicht offen (kein $[1, b)$ liegt in $[0, 1]$).
+\schritt{(c)}
+Jedes offene Intervall ist $(a, b) = \bigcup_n[a + \frac1n, b)$, also offen in $\mathbb R_\ell$; damit jede in $\mathbb R$ offene Menge. Umgekehrt ist $[0, 1)$ in $\mathbb R$ nicht offen. $\mathbb R_\ell$ ist echt \emph{feiner} (mehr offene Mengen).
+\schritt{(d)}
+Sei $\mathcal B'$ irgendeine Basis. Zu jedem $x\in\mathbb R$ gibt es $B_x\in\mathcal B'$ mit $x\in B_x\subseteq[x, x + 1)$. Dann ist $x = \min B_x$. Für $x\neq y$ ist also $B_x\neq B_y$: Die Zuordnung $x\mapsto B_x$ ist injektiv, $\mathcal B'$ hat mindestens die Mächtigkeit von $\mathbb R$ --- überabzählbar. $\blacksquare$ Trotzdem hat jeder Punkt die abzählbare Umgebungsbasis $\{[x, x + \frac1n)\}$: $\mathbb R_\ell$ erfüllt das erste, nicht das zweite Abzählbarkeitsaxiom.
+\probe{In $\mathbb R_\ell$ konvergiert $x_n\to x$ genau dann, wenn $x_n\to x$ in $\mathbb R$ und schließlich $x_n\ge x$: $\frac1n\to0$, aber $-\frac1n\not\to0$.}
+\begin{mitnehmen}\kastentext
+Die Sorgenfrey-Gerade ist separabel ($\mathbb Q$ liegt dicht), erststufig abzählbar, aber nicht zweitstufig --- also nicht metrisierbar (in metrischen Räumen fallen separabel und zweitstufig zusammen). Ihr Quadrat $\mathbb R_\ell\times\mathbb R_\ell$ ist nicht normal. Sie ist das Gegenbeispiel, das man zuerst probiert, wenn eine Vermutung über topologische Räume \enquote{zu gut klingt}.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.9
+\stupserzwei{gruen}{In $\mathbb Q$: $A = \mathbb Q\cap[0, 1]$ ist abgeschlossen (Spur von $[0, 1]$), und offen ist nur $\mathbb Q\cap(0, 1)$ --- um $0$ liegen negative rationale Zahlen.}{22pt}
+\begin{loesungkarte}{gruen}{8.9}{Inneres, Abschluss, Rand}
+\derweg{Inneres: größte offene Teilmenge. Abschluss: kleinste abgeschlossene Obermenge. Rand: Differenz. In jedem Raum neu.}
+\schritt{(a) In $\mathbb R$}
+Inneres: Jedes offene Intervall enthält irrationale Zahlen, liegt also nicht in $A$: $\operatorname{int}A = \emptyset$. Abschluss: Jede Umgebung eines $x\in[0, 1]$ enthält rationale Zahlen aus $[0, 1]$, also $[0, 1]\subseteq\overline A$; und $[0, 1]$ ist abgeschlossen: $\overline A = [0, 1]$. Rand: $\partial A = [0, 1]\setminus\emptyset = [0, 1]$.
+\schritt{(b) In $\mathbb Q$}
+Offen in $\mathbb Q$ sind die Mengen $U\cap\mathbb Q$, $U$ offen in $\mathbb R$. $A = [0, 1]\cap\mathbb Q$ ist abgeschlossen (Spur einer abgeschlossenen Menge): $\overline A = A$. Inneres: $(0, 1)\cap\mathbb Q\subseteq A$ ist offen in $\mathbb Q$; die Punkte $0$ und $1$ haben keine Umgebung in $A$ (jedes $(-\varepsilon, \varepsilon)\cap\mathbb Q$ enthält negative Zahlen). $\operatorname{int}A = (0, 1)\cap\mathbb Q$. Rand: $\partial A = \{0, 1\}$.
+\schritt{(c) Diskret}
+Jede Menge ist offen und abgeschlossen: $\operatorname{int}A = \overline A = A$, $\partial A = \emptyset$.
+\probe{$\partial A = \overline A\setminus\operatorname{int}A$: (a) $[0, 1]\setminus\emptyset$; (b) $A\setminus(0, 1)\cap\mathbb Q = \{0, 1\}$; (c) $A\setminus A = \emptyset$. \checkmark}
+\begin{mitnehmen}\kastentext
+Dieselbe Punktmenge, drei verschiedene Antworten: Inneres, Abschluss und Rand sind Eigenschaften des Paares (Menge, Raum). Beim Wechsel in einen Teilraum $Y$ gilt $\overline A^{\,Y} = \overline A\cap Y$ --- für das Innere gibt es keine so einfache Regel. Deshalb immer dazusagen: \emph{offen in was?}
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.10
+\stupserzwei{akzent}{(d) $\{x\} = \bigcap_n(x - \frac1n, x + \frac1n)$. Wären beliebige Durchschnitte offen, so jede Einpunktmenge --- und damit jede Menge.}{22pt}
+\begin{loesungkarte}{akzent}{8.10}{Unendlich viele offene Mengen}
+\derweg{Gegenbeispiele in $\mathbb R$; eine Inklusion beweisen, die andere widerlegen.}
+\schritt{(a)}
+$\bigcap_{n\ge1}(-\frac1n, \frac1n) = \{0\}$: nicht offen. Komplementär: $\bigcup_{n\ge1}[\frac1n, 1] = (0, 1]$: nicht abgeschlossen.
+\schritt{(b)}
+$\overline{A\cup B} = \overline A\cup\overline B$: \enquote{$\supseteq$}, weil $\overline{A\cup B}$ abgeschlossen ist und $A$, $B$ enthält. \enquote{$\subseteq$}: $\overline A\cup\overline B$ ist abgeschlossen (endliche Vereinigung) und enthält $A\cup B$. Unendlich: $A_n = \{\frac1n\}$, $\overline{A_n} = A_n$, $\bigcup\overline{A_n} = \{\frac1n\colon n\ge1\}$, aber $\overline{\bigcup A_n}$ enthält zusätzlich $0$.
+\schritt{(c)}
+$\partial(A\cup B)\subseteq\partial A\cup\partial B$: $x\in\partial(A\cup B)$ heißt, jede Umgebung trifft $A\cup B$ und das Komplement $A^{c}\cap B^{c}$. Trifft jede Umgebung $A$, so ist $x\in\partial A$ (denn sie trifft auch $A^{c}$); sonst gibt es eine Umgebung ohne $A$-Punkte, dann treffen alle kleineren $B$, und $x\in\partial B$. Echt: $A = \mathbb Q$, $B = \mathbb R\setminus\mathbb Q$: $\partial A = \partial B = \mathbb R$, $\partial(A\cup B) = \partial\mathbb R = \emptyset$.
+\schritt{(d)}
+Mit beliebigen Durchschnitten wäre $\{x\} = \bigcap(x - \frac1n, x + \frac1n)$ offen für jedes $x$, also jede Menge als Vereinigung von Punkten offen: die diskrete Topologie. Stetigkeit würde trivial (jede Funktion stetig), Konvergenz bedeutungslos (nur schließlich konstante Folgen konvergieren). Die Beschränkung auf endliche Durchschnitte ist genau das, was \enquote{nahe} von \enquote{gleich} unterscheidet.
+\begin{fehler}\kastentext
+\enquote{Durchschnitte offener Mengen sind offen} --- nur endliche. \enquote{Vereinigungen abgeschlossener Mengen sind abgeschlossen} --- nur endliche. \enquote{Abschluss der Vereinigung $=$ Vereinigung der Abschlüsse} --- nur endlich. Jeder dieser Sätze ist für unendlich viele Mengen falsch, und der Fehler passiert immer dann, wenn man ein Argument für zwei Mengen \enquote{offensichtlich} auf unendlich viele überträgt.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Die Asymmetrie der Axiome --- beliebige Vereinigungen, endliche Durchschnitte --- ist kein Zufall: Sie ist das, was in $\mathbb R$ für $\varepsilon$-Umgebungen gilt. Mengen, die abzählbare Durchschnitte offener Mengen sind ($G_\delta$-Mengen, wie $\{0\}$ oder die Irrationalen), bilden eine eigene, wichtige Klasse.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.11
+\stupserzwei{tief}{(b) $x\mapsto\frac x{1 - |x|}$ streckt radial: $|x|\to1$ geht nach $\infty$. Umkehrung $y\mapsto\frac y{1 + |y|}$.}{22pt}
+\begin{loesungkarte}{tief}{8.11}{Homöomorphismen hinschreiben}
+\derweg{Abbildung, Umkehrabbildung, Stetigkeit beider ablesen (Zusammensetzung stetiger Funktionen, Nenner $\neq0$).}
+\schritt{(a)}
+$h(x) = \tan\bigl(\pi(x - \frac12)\bigr)$, $h^{-1}(y) = \frac1\pi\arctan y + \frac12$. Für $(a, b)\to(c, d)$: $x\mapsto c + \frac{d - c}{b - a}(x - a)$, affin, Umkehrung affin.
+\schritt{(b)}
+$h(x) = \frac x{1 - |x|}$ auf $D$: stetig (Nenner $> 0$), $|h(x)| = \frac{|x|}{1 - |x|}$ durchläuft $[0, \infty)$ monoton. Umkehrung $h^{-1}(y) = \frac y{1 + |y|}$, stetig, $|h^{-1}(y)| < 1$. Probe: $h^{-1}(h(x))$: $|h(x)| = \frac{|x|}{1 - |x|}$, $1 + |h(x)| = \frac1{1 - |x|}$, also $\frac{h(x)}{1 + |h(x)|} = x$. \checkmark
+\schritt{(c)}
+Radialprojektion $h(x) = \frac x{|x|_2}$ vom Quadratrand auf $S^{1}$; Umkehrung $h^{-1}(y) = \frac y{|y|_\infty}$ (Streckung bis zum Quadratrand, wo $\max(|y_1|, |y_2|) = 1$). Beide stetig, weil die Normen stetig und auf den Rändern $\neq0$ sind.
+\schritt{(d)}
+Stereographische Projektion vom Nordpol $N = (0, 1)$: $h(x, y) = \frac x{1 - y}$ (Schnittpunkt der Geraden durch $N$ und $(x, y)$ mit der $x$-Achse). Umkehrung $h^{-1}(t) = \bigl(\frac{2t}{t^{2} + 1}, \frac{t^{2} - 1}{t^{2} + 1}\bigr)$. Probe: $\bigl(\frac{2t}{t^{2} + 1}\bigr)^{2} + \bigl(\frac{t^{2} - 1}{t^{2} + 1}\bigr)^{2} = \frac{4t^{2} + t^{4} - 2t^{2} + 1}{(t^{2} + 1)^{2}} = 1$. \checkmark\ Für $t\to\pm\infty$ geht $h^{-1}(t)\to N$: $S^{1} = \mathbb R\cup\{\infty\}$, der Nordpol ist der eine fehlende Punkt.
+\schritt{(e)}
+$h(x) = \bigl(\frac x{|x|}, |x|\bigr)$, Umkehrung $(u, r)\mapsto ru$. Polarkoordinaten, topologisch gelesen: $\mathbb R^{n}\setminus\{0\}\cong S^{n-1}\times(0, \infty)\cong S^{n-1}\times\mathbb R$.
+\begin{mitnehmen}\kastentext
+Fünf Rezepte: monotone Funktion, radiale Streckung, Radialprojektion, stereographische Projektion, Polarkoordinaten. Fast jeder \enquote{offensichtliche} Homöomorphismus zwischen Teilmengen des $\mathbb R^{n}$ ist eines davon oder eine Zusammensetzung. Und (d) zeigt, dass $S^{n}$ die Einpunktkompaktifizierung von $\mathbb R^{n}$ ist --- der Grund, warum $\infty$ in der Funktionentheorie ein Punkt ist.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.12
+\stupserzwei{gruen}{(d) Quadrat: $4$ Ecken, $4$ Kanten, $1$ Fläche. Verkleben: $(0, 0)\sim(1, 1)$ und $(0, 1)\sim(1, 0)$ --- $2$ Ecken; Kante $a$ verklebt, oben und unten bleiben --- $3$ Kanten. $2 - 3 + 1 = 0$.}{22pt}
+\begin{loesungkarte}{gruen}{8.12}{Das Möbiusband}
+\derweg{Alles am Quadratmodell $[0, 1]^{2}$, $(0, y)\sim(1, 1 - y)$: Randkanten verfolgen, Schnittlinien verfolgen, Zellen zählen.}
+\schritt{(a)}
+Vom Quadratrand werden $x = 0$ und $x = 1$ verklebt; es bleiben $y = 0$ und $y = 1$. Die Verklebung verbindet den Endpunkt $(1, 0)$ der unteren Kante mit $(0, 1)$, dem Anfang der oberen, und den Endpunkt $(1, 1)$ der oberen mit $(0, 0)$, dem Anfang der unteren: Die beiden Kanten bilden \emph{eine} geschlossene Kurve. Ein Rand, doppelt so lang wie der Streifen.
+\schritt{(b)}
+Der Schnitt $y = \frac12$ ist unter $y\mapsto1 - y$ fest: Er trifft sich nach einem Umlauf selbst und schließt sich. Er zerlegt das Quadrat in zwei Streifen $[0, \frac12]$ und $[\frac12, 1]$, die durch die Verklebung über Kreuz verbunden werden: $(0, y)$ mit $y < \frac12$ klebt an $(1, 1 - y)$ mit $1 - y > \frac12$. Also \emph{ein} Band, doppelt so lang, halb so breit. Verfolgt man die Verdrehung: zweimal durch die halbe Drehung, also eine volle Drehung ($360^{\circ}$) pro ursprünglichem Umlauf, und das Band läuft zweimal um --- insgesamt zwei volle Verdrehungen. Zweiseitig, kein Möbiusband.
+\schritt{(c)}
+Der Schnitt $y = \frac13$ geht bei $x = 1$ über in $y = \frac23$: Die Schnittlinie läuft zweimal um und trennt die Randregion $[0, \frac13]\cup[\frac23, 1]$ (ein Band, zweimal um, zwei Verdrehungen) vom Mittelstreifen $[\frac13, \frac23]$, der mit $y\mapsto1 - y$ verklebt wieder ein Möbiusband ist. Die beiden sind verkettet (die Randregion umschlingt den Mittelstreifen).
+\schritt{(d)}
+$E = 2$, $K = 3$, $F = 1$: $\chi = 0$. Zylinder ($(0, y)\sim(1, y)$): $E = 2$, $K = 3$, $F = 1$, $\chi = 0$. Torus: $\chi = 0$ (Aufgabe 8.3). Drei Räume mit $\chi = 0$ --- unterschieden durch Rand (Torus: keiner; Zylinder: zwei Komponenten; Möbiusband: eine) und Orientierbarkeit.
+\probe{Papier und Schere bestätigen (b) und (c). Die Formel \enquote{Schnitt bei $y = \frac1k$} liefert für jedes $k\ge3$ dasselbe wie (c).}
+\begin{mitnehmen}\kastentext
+Das Möbiusband ist nicht orientierbar: Ein kleiner Kreispfeil, einmal herumgetragen, kommt gespiegelt zurück. Jede nichtorientierbare Fläche enthält ein Möbiusband --- das ist die Definition, die der Klassifikationssatz benutzt (Aufgabe 8.27). Und $\chi$ allein reicht nicht zur Klassifikation; man braucht $\chi$, Orientierbarkeit und die Zahl der Randkomponenten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.13
+\stupserzwei{akzent}{(c) Abgeschlossen in kompakt $\Rightarrow$ kompakt; stetiges Bild kompakt; kompakt in Hausdorff $\Rightarrow$ abgeschlossen. Also bildet $f$ abgeschlossene Mengen auf abgeschlossene ab, und $f^{-1}$ ist stetig.}{22pt}
+\begin{loesungkarte}{akzent}{8.13}{Stetig und bijektiv, aber kein Homöomorphismus}
+\derweg{Zwei Gegenbeispiele; der Satz, der sie ausschließt; eine Anwendung des Satzes.}
+\schritt{(a)}
+$f$ ist stetig (Komponenten stetig) und bijektiv auf $S^{1}$ ($t\in[0, 1)$ durchläuft den Winkel $[0, 2\pi)$ genau einmal). $f^{-1}$ ist bei $(1, 0)$ unstetig: Die Punkte $f(1 - \frac1n)$ konvergieren gegen $(1, 0) = f(0)$, aber $f^{-1}$ davon, $1 - \frac1n$, konvergiert gegen $1$, nicht gegen $0$. Alternativ: $f([0, \frac12))$ ist offen in $[0, 1)$, sein Bild (ein halber Kreis mit einem Endpunkt) nicht offen in $S^{1}$.
+\schritt{(b)}
+$\operatorname{id}\colon(\mathbb R, \text{diskret})\to(\mathbb R, \text{Standard})$ ist stetig (jede Abbildung aus einem diskreten Raum ist stetig) und bijektiv. Die Umkehrung $\operatorname{id}\colon(\mathbb R, \text{Standard})\to(\mathbb R, \text{diskret})$ ist nicht stetig: $\{0\}$ ist im Ziel offen, im Urbild nicht.
+\schritt{(c)}
+Sei $f\colon X\to Y$ stetig, bijektiv, $X$ kompakt, $Y$ Hausdorff. Zu zeigen: $f^{-1}$ stetig, d.\,h.\ $f$ bildet abgeschlossene Mengen auf abgeschlossene ab. Sei $A\subseteq X$ abgeschlossen. Dann ist $A$ kompakt (abgeschlossen in kompakt), $f(A)$ kompakt (stetiges Bild), also abgeschlossen in $Y$ (kompakt in Hausdorff). $\blacksquare$ In (a) ist $[0, 1)$ nicht kompakt; in (b) ist $(\mathbb R, \text{diskret})$ nicht kompakt (die Punkte überdecken ohne endliche Teilüberdeckung).
+\schritt{(d)}
+Gäbe es eine stetige Bijektion $[0, 1]\to S^{1}$, so wäre sie nach (c) ein Homöomorphismus. Entfernt man $\frac12$ aus $[0, 1]$ und sein Bild aus $S^{1}$, bleibt links ein unzusammenhängender, rechts ein zusammenhängender Raum --- Homöomorphismen erhalten aber Zusammenhang. Widerspruch (Aufgabe 8.14a).
+\begin{fehler}\kastentext
+\enquote{Stetig und bijektiv, also Homöomorphismus} ist der häufigste Fehlschluss der Anfängertopologie. Die Umkehrabbildung muss \emph{eigens} auf Stetigkeit geprüft werden --- es sei denn, der Satz aus (c) greift. In der linearen Algebra über $\mathbb R^{n}$ und in der Analysis monotoner Funktionen auf Intervallen ist er automatisch erfüllt; deshalb fällt der Fehler dort nie auf.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Der Satz aus (c) ist das Arbeitspferd beim Nachweis von Homöomorphismen: Verklebemodelle (Quadrat $\to$ Torus) sind kompakt, Zielräume meist Hausdorff, und man braucht nur noch eine stetige Bijektion. Deshalb genügt in Aufgabe 8.3 \enquote{das Quadrat wird zum Torus verklebt}, ohne dass man die Umkehrabbildung hinschreibt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.14
+\stupserzwei{tief}{(c) Zählen Sie Trennpunkte: I und L haben nur Punkte, die in $2$ Teile trennen; T hat einen $3$-Punkt, X einen $4$-Punkt, O keinen Trennpunkt. P hat genau einen Endpunkt --- I hat zwei, O keinen.}{22pt}
+\begin{loesungkarte}{tief}{8.14}{Räume durch Zusammenhang unterscheiden}
+\derweg{Ein Homöomorphismus $X\to Y$ induziert einen Homöomorphismus $X\setminus\{p\}\to Y\setminus\{h(p)\}$. Also: Komponenten nach Entfernen von Punkten zählen.}
+\schritt{(a)}
+Wäre $h\colon[0, 1]\to S^{1}$ ein Homöomorphismus, so auch $[0, 1]\setminus\{\frac12\}\to S^{1}\setminus\{h(\frac12)\}$. Links zwei Komponenten, rechts eine (ein offener Bogen). Widerspruch. $[0, 1]$ und $[0, 1)$: Entfernt man aus $[0, 1)$ den Punkt $0$, bleibt zusammenhängend; aus $[0, 1]$ kann man nur $0$ oder $1$ entfernen, ohne zu trennen. $h(0)$ müsste also $0$ oder $1$ sein --- beides geht: $h(0) = 0$ erlaubt. Dann $h\colon(0, 1]\to(0, 1)$ Homöomorphismus; entferne $1$ links: $(0, 1)$ zusammenhängend; rechts $(0, 1)\setminus\{h(1)\}$ unzusammenhängend. Widerspruch. (Kürzer: $[0, 1]$ ist kompakt, $[0, 1)$ nicht.)
+\schritt{(b)}
+$\mathbb R\setminus\{0\}$ hat zwei Komponenten; $\mathbb R^{2}\setminus\{p\}$ ist wegzusammenhängend (zwei Punkte verbindet man durch einen Weg, der $p$ umgeht --- etwa über einen dritten Punkt nicht auf ihrer Verbindungsgeraden). Also nicht homöomorph. (Für $\mathbb R^{2}$ gegen $\mathbb R^{3}$ reicht Zusammenhang nicht mehr; man braucht $\pi_1$ oder Homologie.)
+\schritt{(c)}
+Für jeden Raum zählen wir, wie viele Komponenten nach Entfernen eines Punkts bleiben:
+\begin{center}\small
+\begin{tabular}{l|P{7.6cm}}
+I, L & innere Punkte: $2$; die zwei Endpunkte: $1$\\
+T & Verzweigungspunkt: $3$; drei Endpunkte: $1$; sonst $2$\\
+X & Verzweigungspunkt: $4$; vier Endpunkte: $1$; sonst $2$\\
+O & jeder Punkt: $1$\\
+P & Ansatzpunkt: $2$; ein Endpunkt: $1$; Bogenpunkte: $1$; Stielpunkte: $2$
+\end{tabular}
+\end{center}
+I $\cong$ L (ein Bogen, gebogen oder nicht). T, X, O sind untereinander und von I verschieden ($3$-Punkt, $4$-Punkt, kein Trennpunkt). P ist von allen verschieden: Es hat genau \emph{einen} Endpunkt (Punkt, dessen Entfernung nicht trennt und der eine Umgebung homöomorph zu $[0, 1)$ hat) --- I hat zwei, O keinen, T drei; und P hat unendlich viele nichttrennende Punkte, I nur zwei. Fünf Klassen: $\{$I, L$\}$, $\{$T$\}$, $\{$X$\}$, $\{$O$\}$, $\{$P$\}$.
+\schritt{(d)}
+$g(x) = f(x) - f(-x)$ ist stetig auf $S^{1}$ mit $g(-x) = -g(x)$. Ist $g(x_0) = 0$, fertig. Sonst haben $g(x_0)$ und $g(-x_0)$ verschiedene Vorzeichen; $S^{1}$ ist zusammenhängend, also nimmt $g$ (Zwischenwertsatz für zusammenhängende Räume: $g(S^{1})$ ist ein Intervall) den Wert $0$ an. $\blacksquare$ Anwendung: Auf jedem Breitenkreis der Erde gibt es zwei gegenüberliegende Punkte gleicher Temperatur.
+\begin{mitnehmen}\kastentext
+\enquote{Nicht homöomorph} beweist man nie durch Scheitern beim Suchen einer Abbildung, sondern durch eine Invariante: eine Eigenschaft, die Homöomorphismen erhalten und in der sich die Räume unterscheiden. Zusammenhang nach Punktentfernung ist die billigste; sie trennt die Dimensionen $1$ und $2$, aber nicht $2$ und $3$ --- dafür braucht man die Werkzeuge der Kapitel 8 und 11.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.15
+\stupserzwei{gruen}{(c) Nach $t_0$ ist $\gamma$ im Graphen; die $x$-Koordinate nimmt nach dem Zwischenwertsatz alle kleinen positiven Werte an, darunter solche mit $\sin\frac1x = 1$ und $= -1$. Die $y$-Koordinate springt dann um $2$ --- in beliebig kleiner Nähe von $t_0$.}{22pt}
+\begin{loesungkarte}{gruen}{8.15}{Der Sinuskamm}
+\derweg{Zusammenhang über den Abschluss, Wegzusammenhang über einen Widerspruch mit der Stetigkeit am Übergangspunkt.}
+\schritt{(a)}
+$G$ ist das stetige Bild des Intervalls $(0, 1]$ unter $x\mapsto(x, \sin\frac1x)$, also wegzusammenhängend. Abschluss: Häufungspunkte von $G$ außerhalb $G$ haben $x = 0$; für jedes $y_0\in[-1, 1]$ gibt es $x_n\to0$ mit $\sin\frac1{x_n} = y_0$ (nämlich $\frac1{x_n} = \arcsin y_0 + 2\pi n$), also $(0, y_0)\in\overline G$. Punkte mit $|y| > 1$ oder $x < 0$ liegen nicht im Abschluss. $\overline G = G\cup A = S$. \checkmark
+\schritt{(b)}
+Der Abschluss einer zusammenhängenden Menge ist zusammenhängend (wäre $\overline G = U\sqcup V$ mit offenen, disjunkten, nichtleeren $U, V$, so läge $G$ ganz in $U$ oder ganz in $V$, etwa in $U$; dann wäre $V\cap\overline G\neq\emptyset$, aber $V$ ist eine offene Umgebung eines Punktes von $\overline G$ ohne Punkte von $G$ --- Widerspruch). Also ist $S$ zusammenhängend.
+\schritt{(c)}
+Sei $\gamma = (\gamma_1, \gamma_2)\colon[0, 1]\to S$ ein Weg mit $\gamma(0)\in A$, $\gamma(1)\in G$. Die Menge $\gamma^{-1}(A)$ ist abgeschlossen ($A$ abgeschlossen, $\gamma$ stetig), also hat sie ein Maximum $t_0 < 1$. Für $t > t_0$ ist $\gamma(t)\in G$, also $\gamma_1(t) > 0$ und $\gamma_2(t) = \sin\frac1{\gamma_1(t)}$. Stetigkeit bei $t_0$: Es gibt $\delta > 0$ mit $|\gamma_2(t) - \gamma_2(t_0)| < 1$ für $t\in[t_0, t_0 + \delta]$. Auf $(t_0, t_0 + \delta]$ ist $\gamma_1$ stetig und positiv mit $\gamma_1(t)\to0$ für $t\to t_0$; nach dem Zwischenwertsatz nimmt $\gamma_1$ dort jeden Wert in $(0, \gamma_1(t_0 + \delta)]$ an --- insbesondere ein $x'$ mit $\sin\frac1{x'} = 1$ und ein $x''$ mit $\sin\frac1{x''} = -1$. Dann ist $\gamma_2$ an den zugehörigen Stellen $1$ und $-1$, beide im Abstand $< 1$ von $\gamma_2(t_0)$: unmöglich. $\blacksquare$
+\schritt{(d)}
+$G\cup\{(0, 0)\}$: liegt zwischen $G$ und $\overline G$, also zusammenhängend (dasselbe Argument wie (b)); nicht wegzusammenhängend (dasselbe Argument wie (c) mit $A = \{(0, 0)\}$). $G\cup(\{0\}\times[-2, 2])$: Vereinigung der zusammenhängenden Mengen $S$ und $\{0\}\times[-2, 2]$ mit gemeinsamen Punkten: zusammenhängend; nicht wegzusammenhängend --- der Weg müsste wieder irgendwo von $x = 0$ in den Graphen wechseln.
+\begin{mitnehmen}\kastentext
+Wegzusammenhängend $\Rightarrow$ zusammenhängend, nicht umgekehrt; aber für offene Teilmengen des $\mathbb R^{n}$ und für lokal wegzusammenhängende Räume fallen beide zusammen. Der Sinuskamm ist nicht lokal wegzusammenhängend bei den Punkten von $A$: Jede kleine Umgebung zerfällt in unendlich viele Streifen. Das ist die Eigenschaft, die der Zwischenwertsatz in (c) ausnutzt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.16
+\stupserzwei{tief}{(b) Kompakt: $\{0\}\cup\{\frac1n\}$, $S^{n-1}$. Nicht kompakt: $\{\frac1n\}$ (nicht abgeschlossen), Hyperbel (unbeschränkt), Halbscheibe ohne Durchmesser (nicht abgeschlossen), $\mathbb Q\cap[0, 1]$ (nicht abgeschlossen).}{22pt}
+\begin{loesungkarte}{tief}{8.16}{Kompakt oder nicht?}
+\derweg{Überdeckungen für \enquote{nein}; Heine--Borel für \enquote{ja}; zwei kurze Beweise.}
+\schritt{(a)}
+$(0, 1) = \bigcup_{n\ge2}(\frac1n, 1)$: endlich viele davon überdecken nur $(\frac1N, 1)$. $\mathbb Z = \bigcup_{n}(n - \frac12, n + \frac12)$: jedes Intervall enthält genau eine ganze Zahl, endlich viele reichen nie. $[0, \infty) = \bigcup_n(-1, n)$.
+\schritt{(b)}
+Heine--Borel: kompakt $\iff$ abgeschlossen und beschränkt. $\{0\}\cup\{\frac1n\}$: beschränkt, abgeschlossen (einziger Häufungspunkt $0$ ist drin): kompakt. $\{\frac1n\}$ ohne $0$: nicht abgeschlossen. $S^{n-1}$: Urbild von $\{1\}$ unter der stetigen Norm, beschränkt: kompakt. Hyperbel $xy = 1$: abgeschlossen (Urbild), unbeschränkt. Halbscheibe mit $y > 0$: nicht abgeschlossen (der Durchmesser fehlt). $\mathbb Q\cap[0, 1]$: nicht abgeschlossen in $\mathbb R$.
+\schritt{(c)}
+Sei $K$ kompakt, $f$ stetig, $\{U_i\}$ offene Überdeckung von $f(K)$. Dann ist $\{f^{-1}(U_i)\}$ eine offene Überdeckung von $K$; endlich viele reichen, $K\subseteq f^{-1}(U_{i_1})\cup\dots\cup f^{-1}(U_{i_m})$, also $f(K)\subseteq U_{i_1}\cup\dots\cup U_{i_m}$. $\blacksquare$ Satz vom Maximum: $f\colon K\to\mathbb R$ stetig, $K$ kompakt nichtleer. $f(K)$ ist kompakt in $\mathbb R$, also abgeschlossen und beschränkt, enthält also sein Supremum. $\blacksquare$
+\schritt{(d)}
+Beschränkt: Die Kugeln $B_n(x_0)$, $n\in\mathbb N$, überdecken; endlich viele reichen, also $K\subseteq B_N(x_0)$. Abgeschlossen: Sei $y\notin K$. Zu jedem $x\in K$ gibt es disjunkte Kugeln $B_{r_x}(x)$, $B_{r_x}(y)$ (Hausdorff, Aufgabe 8.19d). Endlich viele $B_{r_{x_i}}(x_i)$ überdecken $K$; der Durchschnitt der zugehörigen $B_{r_{x_i}}(y)$ ist eine offene Umgebung von $y$ ohne Punkte von $K$. Also ist $K^{c}$ offen. $\blacksquare$ (Nur \enquote{Hausdorff} wurde benutzt: kompakt in Hausdorff $\Rightarrow$ abgeschlossen.)
+\begin{mitnehmen}\kastentext
+Kompaktheit ist \enquote{Endlichkeit im Kleinen}: Alles, was für endliche Mengen gilt (Maximum existiert, gleichmäßig stetig, Überdeckung hat endliche Teilüberdeckung), gilt für kompakte. Heine--Borel macht den Test in $\mathbb R^{n}$ mechanisch; außerhalb des $\mathbb R^{n}$ braucht man die Definition --- oder Folgenkompaktheit, die in metrischen Räumen dasselbe ist.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.17
+\stupserzwei{gruen}{(e) $\frac14 = 0{,}\overline{02}_3$, $\frac34 = 0{,}\overline{20}_3$, $\frac1{10} = 0{,}\overline{0022}_3$: alle drei ohne Ziffer $1$, alle drei in $C$ --- obwohl keines ein Intervallendpunkt ist.}{22pt}
+\begin{loesungkarte}{gruen}{8.17}{Die Cantor-Menge}
+\derweg{Kompaktheit über Heine--Borel; Ternärdarstellung als Adresse; Längen summieren; Intervalle und isolierte Punkte ausschließen.}
+\schritt{(a)}
+$C_n$ ist eine Vereinigung von $2^{n}$ abgeschlossenen Intervallen der Länge $3^{-n}$, also abgeschlossen. $C = \bigcap C_n$ ist abgeschlossen (beliebiger Durchschnitt) und in $[0, 1]$ beschränkt: kompakt. \checkmark
+\schritt{(b)}
+Im ersten Schritt wird das mittlere Drittel entfernt: die Zahlen, deren erste Ternärziffer $1$ sein \emph{muss} (die Endpunkte $\frac13 = 0{,}1_3 = 0{,}0\overline2_3$ haben eine Alternative und bleiben). Im $n$-ten Schritt: $n$-te Ziffer $1$. Also $x\in C\iff x$ hat eine Ternärdarstellung mit Ziffern aus $\{0, 2\}$. Die Abbildung $0{,}a_1a_2\dots_3\mapsto0{,}b_1b_2\dots_2$ mit $b_i = a_i/2$ ist eine Surjektion von $C$ auf $[0, 1]$ (Binärdarstellungen): $C$ ist überabzählbar --- genauso mächtig wie $[0, 1]$, obwohl es \enquote{fast nichts} ist.
+\schritt{(c)}
+Entfernt: $1$ Intervall der Länge $\frac13$, dann $2$ der Länge $\frac19$, dann $4$ der Länge $\frac1{27}$, \dots: $\sum_{n\ge0}\frac{2^{n}}{3^{n+1}} = \frac13\cdot\frac1{1 - \frac23} = 1$. Alles. $C$ hat Länge (Lebesgue-Maß) $0$.
+\schritt{(d)}
+Kein Intervall: Ein Intervall der Länge $\ell > 0$ passt nicht in $C_n$, sobald $3^{-n} < \ell$. Also sind die Zusammenhangskomponenten Punkte: total unzusammenhängend. Kein isolierter Punkt: Ist $x\in C$ mit Ternärziffern $a_i\in\{0, 2\}$, so liegt $x_n$ (dieselben Ziffern, nur $a_n$ durch $2 - a_n$ ersetzt) in $C$ mit $|x - x_n| = 2\cdot3^{-n}\to0$. Jede Umgebung von $x$ enthält andere Punkte von $C$: perfekt.
+\schritt{(e)}
+$\frac14$: $\frac14\cdot3 = \frac34\to0$; $\frac34\cdot3 = \frac94 = 2 + \frac14\to2$; periodisch $0{,}\overline{02}_3$. Probe: $\frac{2}{9}\cdot\frac1{1 - \frac19} = \frac28 = \frac14$. \checkmark\ $\frac34 = 0{,}\overline{20}_3$. \checkmark\ $\frac1{10}$: $0{,}3\to0$; $0{,}9\to0$; $2{,}7\to2$; $2{,}1\to2$; $0{,}3$ --- Periode $0022$: $\frac1{10} = 0{,}\overline{0022}_3$, Probe $\frac{0\cdot27 + 0\cdot9 + 2\cdot3 + 2}{81 - 1} = \frac8{80}$. \checkmark\ Alle drei in $C$.
+\begin{mitnehmen}\kastentext
+Die Cantor-Menge widerlegt gleich mehrere Vermutungen: \enquote{überabzählbar $\Rightarrow$ enthält ein Intervall}, \enquote{abgeschlossen ohne isolierte Punkte $\Rightarrow$ positive Länge}, \enquote{Maß null $\Rightarrow$ abzählbar}. Topologisch ist sie $\{0, 2\}^{\mathbb N}$ mit der Produkttopologie --- und jeder kompakte metrische Raum ist ein stetiges Bild von ihr.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.18
+\stupserzwei{akzent}{(c) Jede Kugel vom Radius $\frac12$ enthält höchstens ein $e_n$ (zwei hätten Abstand $\sqrt2 > 1$). Endlich viele Kugeln lassen unendlich viele $e_n$ draußen.}{22pt}
+\begin{loesungkarte}{akzent}{8.18}{Die Einheitskugel in $\ell^{2}$}
+\derweg{Abgeschlossen und beschränkt nachweisen; dann zwei Beweise der Nichtkompaktheit, über Folgen und über Überdeckungen.}
+\schritt{(a)}
+Beschränkt: $\|x\|\le1$ nach Definition. Abgeschlossen: $\overline B = \|\cdot\|^{-1}([0, 1])$, Urbild einer abgeschlossenen Menge unter der stetigen Norm (stetig wegen $\bigl|\|x\| - \|y\|\bigr|\le\|x - y\|$).
+\schritt{(b)}
+$\|e_n - e_m\|^{2} = 1^{2} + (-1)^{2} = 2$, also $\|e_n - e_m\| = \sqrt2$ für $n\neq m$. Eine konvergente Teilfolge wäre eine Cauchy-Folge, deren Glieder schließlich Abstand $< \sqrt2$ hätten --- unmöglich. Keine konvergente Teilfolge: $\overline B$ ist nicht folgenkompakt, in metrischen Räumen also nicht kompakt.
+\schritt{(c)}
+$\{B_{1/2}(x)\colon x\in\overline B\}$ überdeckt $\overline B$. Jede dieser Kugeln enthält höchstens ein $e_n$: Enthielte sie $e_n$ und $e_m$, so $\sqrt2 = \|e_n - e_m\|\le\|e_n - x\| + \|x - e_m\| < 1$. Endlich viele Kugeln enthalten also nur endlich viele $e_n$, decken $\overline B$ nicht. Keine endliche Teilüberdeckung. \checkmark
+\schritt{(d)}
+Der Beweis von Heine--Borel halbiert den Würfel in $2^{n}$ Teilwürfel und wählt einen, der nicht endlich überdeckbar ist --- $2^{n}$ ist endlich, also gibt es einen solchen. In unendlicher Dimension zerfällt der \enquote{Würfel} $[-1, 1]^{\mathbb N}$ in unendlich viele Teilwürfel, und das Argument \enquote{einer von endlich vielen} bricht. Äquivalent: Bolzano--Weierstraß braucht, dass man aus einer beschränkten Folge in jeder der \emph{endlich vielen} Koordinaten nacheinander eine konvergente Teilfolge ziehen kann.
+\begin{fehler}\kastentext
+\enquote{Abgeschlossen und beschränkt, also kompakt} gilt in $\mathbb R^{n}$ --- und \emph{nur} dort, genauer: in einem normierten Raum ist die Einheitskugel genau dann kompakt, wenn die Dimension endlich ist (Riesz). In Funktionenräumen braucht man Zusatzbedingungen (gleichgradige Stetigkeit: Arzelà--Ascoli), um Kompaktheit zu bekommen. Der Fehler passiert typischerweise, wenn man \enquote{eine konvergente Teilfolge} von Funktionen braucht und sie sich einfach nimmt.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Die Einheitsvektoren $e_n$ sind das Standardgegenbeispiel: Sie konvergieren \emph{schwach} gegen $0$ (jede Koordinate geht gegen $0$), aber nicht in der Norm. Dieser Unterschied --- schwache gegen starke Konvergenz --- ist das Thema der Funktionalanalysis (Band 16), und er existiert nur, weil $\overline B$ nicht kompakt ist.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.19
+\stupserzwei{gruen}{(c) Jede nichtleere offene Menge in $\mathbb R$ enthält eine ganze Klasse $x + \mathbb Q$ --- und ist sie saturiert, dann alle Klassen, die sie trifft. Da jede Klasse dicht liegt, ist jede nichtleere saturierte offene Menge ganz $\mathbb R$.}{22pt}
+\begin{loesungkarte}{gruen}{8.19}{Trennungsaxiome prüfen}
+\derweg{Zu jedem Axiom entweder die trennenden Mengen angeben oder zeigen, dass es keine gibt.}
+\schritt{(a) Kofinit}
+$T_1$: Für $x\neq y$ ist $U = \mathbb R\setminus\{y\}$ offen, enthält $x$, nicht $y$. \checkmark\ (Gleichwertig: Punkte sind abgeschlossen.) $T_2$: Zwei nichtleere offene Mengen haben endliche Komplemente, also hat ihr Durchschnitt das endliche Komplement $(\mathbb R\setminus U)\cup(\mathbb R\setminus V)$ und ist nichtleer (sogar unendlich). Keine disjunkten Umgebungen: nicht Hausdorff. Kompakt: Sei $\{U_i\}$ eine offene Überdeckung, $U_{i_0}\neq\emptyset$. Sein Komplement ist endlich, $\{y_1, \dots, y_k\}$; wähle zu jedem $y_j$ ein $U_{i_j}\ni y_j$. Dann überdecken $U_{i_0}, \dots, U_{i_k}$. Kompakt --- ein kompakter Raum, der nicht Hausdorff ist. \checkmark
+\schritt{(b) Sierpiński}
+$T_0$: $\{1\}$ ist offen, enthält $1$, nicht $0$. \checkmark\ $T_1$: Keine offene Menge enthält $0$, aber nicht $1$ --- $\{0\}$ ist nicht offen, also $\{1\}$ nicht abgeschlossen. Nicht $T_1$, erst recht nicht $T_2$.
+\schritt{(c) $\mathbb R/\mathbb Q$}
+Offen im Quotienten sind die Bilder saturierter offener Mengen (Vereinigungen von Klassen $x + \mathbb Q$). Eine nichtleere offene Menge $U\subseteq\mathbb R$ enthält ein Intervall; jede Klasse $x + \mathbb Q$ liegt dicht, trifft also $U$; ist $U$ saturiert, so enthält es jede Klasse: $U = \mathbb R$. Der Quotient hat nur die offenen Mengen $\emptyset$ und alles --- die indiskrete Topologie. Nicht einmal $T_0$: Keine zwei Punkte sind unterscheidbar.
+\schritt{(d) Metrisch}
+$T_2$: Für $x\neq y$, $r = d(x, y) > 0$: $B_{r/2}(x)\cap B_{r/2}(y) = \emptyset$, denn ein gemeinsamer Punkt $z$ gäbe $r\le d(x, z) + d(z, y) < r$. \checkmark\ $T_4$: $A, B$ disjunkt abgeschlossen. $f(x) = \frac{d(x, A)}{d(x, A) + d(x, B)}$: Der Nenner ist nie $0$ (sonst $x\in\overline A\cap\overline B = A\cap B$); $f$ ist stetig (Lipschitz-Funktionen $d(\cdot, A)$); $f = 0$ auf $A$, $f = 1$ auf $B$. $U = f^{-1}([0, \frac12))$, $V = f^{-1}((\frac12, 1])$ sind disjunkte offene Umgebungen. \checkmark
+\probe{Hierarchie: metrisch $\Rightarrow T_4\Rightarrow T_2\Rightarrow T_1\Rightarrow T_0$; (a) ist $T_1$, nicht $T_2$; (b) ist $T_0$, nicht $T_1$; (c) ist nicht $T_0$. Jede Stufe echt.}
+\begin{mitnehmen}\kastentext
+Hausdorff ist das Axiom, das man fast immer will: eindeutige Grenzwerte (Aufgabe 8.20), kompakte Mengen abgeschlossen, Diagonale abgeschlossen. Die kofinite Topologie zeigt, dass $T_1$ dafür nicht reicht --- sie ist die Zariski-Topologie der algebraischen Geometrie, wo man ohne Hausdorff auskommen muss. Und (c) warnt: Quotienten zerstören Trennungseigenschaften, auch die harmlosesten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.20
+\stupserzwei{akzent}{(b) Die konstante Folge $5, 5, 5, \dots$ konvergiert nur gegen $5$: $\mathbb R\setminus\{5\}$ ist eine Umgebung jedes anderen Punkts ohne ein einziges Folgenglied.}{22pt}
+\begin{loesungkarte}{akzent}{8.20}{Eine Folge mit allen Grenzwerten}
+\derweg{Konvergenz heißt: Jede Umgebung des Grenzwerts enthält fast alle Glieder. In der kofiniten Topologie ist jede Umgebung \enquote{fast alles}.}
+\schritt{(a)}
+Sei $(x_n)$ injektiv und $x\in\mathbb R$ beliebig. Eine offene Umgebung $U$ von $x$ hat endliches Komplement; da die $x_n$ paarweise verschieden sind, liegen nur endlich viele von ihnen im Komplement. Also liegen fast alle $x_n$ in $U$: $x_n\to x$. Jeder Punkt ist Grenzwert. $\blacksquare$
+\schritt{(b)}
+$x_n = 5$: Gegen $5$ (trivial). Gegen $x\neq5$? $U = \mathbb R\setminus\{5\}$ ist eine offene Umgebung von $x$, die kein Folgenglied enthält. Nein. Eindeutiger Grenzwert $5$. --- $1, 2, 1, 2, \dots$: Gegen $x\notin\{1, 2\}$ nicht ($\mathbb R\setminus\{1, 2\}$); gegen $1$ nicht ($\mathbb R\setminus\{2\}$ verpasst unendlich viele Glieder); gegen $2$ ebenso nicht. Kein Grenzwert.
+\schritt{(c)}
+Seien $x\neq y$ beide Grenzwerte von $(x_n)$ in einem Hausdorff-Raum. Wähle disjunkte Umgebungen $U\ni x$, $V\ni y$. Fast alle $x_n$ liegen in $U$ und fast alle in $V$, also fast alle in $U\cap V = \emptyset$. Widerspruch. $\blacksquare$
+\schritt{(d)}
+Sierpiński-Raum, offene Mengen $\emptyset, \{1\}, \{0, 1\}$. Konstante Folge $1$: gegen $1$ (Umgebungen $\{1\}, S$ enthalten alles) und gegen $0$ (einzige Umgebung von $0$ ist $S$). Zwei Grenzwerte. Konstante Folge $0$: gegen $0$ ja; gegen $1$ nein, denn $\{1\}$ ist eine Umgebung von $1$ ohne Folgenglieder. Der Punkt $0$ ist \enquote{klebriger} als $1$ --- er liegt im Abschluss von $\{1\}$.
+\begin{fehler}\kastentext
+\enquote{Der Grenzwert} setzt voraus, was nur Hausdorff garantiert. In Nicht-Hausdorff-Räumen (Quotienten, Zariski-Topologie, Sierpiński) kann eine Folge mehrere oder alle Punkte als Grenzwert haben, und Argumente der Form \enquote{beide Folgen konvergieren gegen $x$ und $y$, also $x = y$} sind ungültig. Umgekehrt zeigt (c): Wo Grenzwerte eindeutig sein sollen, muss man Hausdorff \emph{voraussetzen} oder \emph{nachweisen}.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Konvergenz ist in allgemeinen topologischen Räumen schwächer als in metrischen: Folgen reichen nicht, um die Topologie zu beschreiben (dafür braucht man Netze oder Filter), und Grenzwerte sind nicht eindeutig. Metrische Räume verwöhnen --- und die Topologie zeigt, welche Eigenschaften man dafür bezahlt hat.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.21
+\stupserzwei{tief}{(d) Im Quadratmodell: $H((x, y), t) = (x, (1 - t)y + \frac t2)$ zieht jede Faser auf die Mittellinie $y = \frac12$. Verträglich mit der Verklebung, weil $y\mapsto1 - y$ die Mitte festlässt.}{22pt}
+\begin{loesungkarte}{tief}{8.21}{Deformationsretrakte}
+\derweg{Retraktion $r\colon X\to A$ angeben, Homotopie $H(x, t) = (1 - t)x + t\,r(x)$ (oder eine Variante) prüfen: bleibt in $X$, lässt $A$ fest.}
+\schritt{(a)}
+$r(x) = \frac x{|x|}$, $H(x, t) = (1 - t)x + t\frac x{|x|} = \bigl((1 - t) + \frac t{|x|}\bigr)x$. Der Faktor ist positiv, also $H(x, t)\neq0$: bleibt in $X$. Für $|x| = 1$ ist $H(x, t) = x$. $\pi_1(\mathbb R^{2}\setminus\{0\}) = \pi_1(S^{1}) = \mathbb Z$.
+\schritt{(b)}
+Dieselbe Formel, $r(x) = \frac x{|x|}$: Für $1\le|x|\le2$ liegt $H(x, t)$ auf der Strecke zwischen $x$ und $\frac x{|x|}$, deren Punkte Betrag zwischen $1$ und $|x|$ haben --- im Kreisring. $\pi_1 = \mathbb Z$. (Ebenso gut: auf den äußeren Kreis.)
+\schritt{(c)}
+$x = (x_1, x_2, x_3)$ mit $(x_1, x_2)\neq0$. $r(x) = \frac{(x_1, x_2, 0)}{\sqrt{x_1^{2} + x_2^{2}}}$. $H(x, t) = (1 - t)x + t\,r(x)$: Die ersten beiden Koordinaten sind ein positives Vielfaches von $(x_1, x_2)$, also $\neq0$ --- $H$ meidet die $z$-Achse. Auf $A$ ist $r = \operatorname{id}$. $\pi_1(\mathbb R^{3}\setminus\text{Gerade}) = \mathbb Z$.
+\schritt{(d)}
+Im Quadratmodell $H((x, y), t) = (x, (1 - t)y + \frac t2)$. Verträglichkeit mit $(0, y)\sim(1, 1 - y)$: $H((0, y), t) = (0, (1 - t)y + \frac t2)$ und $H((1, 1 - y), t) = (1, (1 - t)(1 - y) + \frac t2) = (1, 1 - [(1 - t)y + \frac t2])$ --- dieselbe Klasse. \checkmark\ Die Mittellinie ist ein Kreis: $\pi_1(\text{Möbiusband}) = \mathbb Z$. Der Rand läuft zweimal um die Mittellinie; er entspricht $2\in\mathbb Z$.
+\schritt{(e)}
+Man zieht zuerst die Ebene außerhalb einer großen Kreisscheibe auf deren Rand, dann das Innere ohne $p, q$ auf die Acht aus zwei Kreisen um $p$ und $q$ plus den Verbindungen --- eine Skizze zeigt, dass $\mathbb R^{2}\setminus\{p, q\}$ auf eine \enquote{Brille} oder gleichwertig auf eine Acht deformiert. $\pi_1 = \pi_1(S^{1}\vee S^{1}) = F_2$, die freie Gruppe auf zwei Erzeugern (Schleife um $p$, Schleife um $q$). Nicht abelsch: Die Schleife \enquote{um $p$, um $q$, rückwärts um $p$, rückwärts um $q$} ist nicht zusammenziehbar.
+\probe{(a) direkt am Beispiel: Die Schleife $e^{2\pi it}$ in $\mathbb R^{2}\setminus\{0\}$ ist nicht zusammenziehbar --- sonst wäre auch ihr Bild unter $r$ in $S^{1}$ zusammenziehbar, und das ist der Erzeuger von $\mathbb Z$.}
+\begin{mitnehmen}\kastentext
+\enquote{Zieht sich zusammen auf} ist das wichtigste Werkzeug zur Berechnung von $\pi_1$: Man ersetzt den Raum durch ein Skelett --- Kreis, Acht, Graph --- dessen Fundamentalgruppe man kennt. Die gerade Verbindungsstrecke funktioniert, wenn $X$ \enquote{sternförmig in Richtung $A$} ist; sonst zerlegt man in Schritte. Die Dimension spielt keine Rolle: $\mathbb R^{n}\setminus\{0\}\simeq S^{n-1}$ für jedes $n$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.22
+\stupserzwei{gruen}{(d) $a\mapsto(1\,2)$, $b\mapsto(2\,3)$ definiert einen Homomorphismus $F_2\to S_3$ (freie Gruppe: jede Zuordnung der Erzeuger geht). Bild nicht abelsch, also $F_2$ nicht abelsch.}{22pt}
+\begin{loesungkarte}{gruen}{8.22}{Der punktierte Torus}
+\derweg{Radiale Deformation auf den Quadratrand; Rand nach Verklebung lesen; Relation verstehen; Nichtkommutativität über einen Homomorphismus.}
+\schritt{(a)}
+Für $x\neq m = (\frac12, \frac12)$ sei $r(x)$ der Punkt, in dem der Strahl von $m$ durch $x$ den Quadratrand trifft. $H(x, t) = (1 - t)x + t\,r(x)$ bleibt auf diesem Strahl, also im Quadrat und $\neq m$; auf dem Rand ist $r = \operatorname{id}$. Deformationsretrakt. Die Abbildung ist verträglich mit den Verklebungen des Randes, weil sie den Rand punktweise festlässt --- sie steigt zum Torus ab.
+\schritt{(b)}
+Der Quadratrand ist nach den Verklebungen $(0, y)\sim(1, y)$, $(x, 0)\sim(x, 1)$ die Vereinigung zweier Kreise $a$ (unten $=$ oben) und $b$ (links $=$ rechts), die sich im einzigen Eckpunkt treffen: eine Acht $S^{1}\vee S^{1}$. Also $T^{2}\setminus\{p\}\simeq S^{1}\vee S^{1}$ und $\pi_1(T^{2}\setminus\{p\}) = F_2 = \langle a, b\mid\ \rangle$.
+\schritt{(c)}
+Beim vollen Torus ist der Randweg $aba^{-1}b^{-1}$ (einmal um das Quadrat) über die Fläche des Quadrats zusammenziehbar --- das Quadrat ist eine Scheibe. Also $aba^{-1}b^{-1} = 1$, $ab = ba$: $\pi_1(T^{2}) = \mathbb Z^{2}$. Ohne den Mittelpunkt ist das Quadrat ein Kreisring, der Randweg umläuft das Loch und ist nicht mehr zusammenziehbar: Die Relation fällt weg.
+\schritt{(d)}
+$F_2$ ist frei: Zu jeder Wahl von Bildern der Erzeuger in einer Gruppe $G$ gibt es genau einen Homomorphismus. Wähle $G = S_3$, $a\mapsto(1\,2)$, $b\mapsto(2\,3)$. Dann $ab\mapsto(1\,2)(2\,3) = (1\,2\,3)$ und $ba\mapsto(2\,3)(1\,2) = (1\,3\,2)$ --- verschieden. Wäre $ab = ba$ in $F_2$, so auch die Bilder. Also nicht abelsch. $\blacksquare$ (Der Homomorphismus $F_2\to\mathbb Z^{2}$, $a\mapsto(1, 0)$, $b\mapsto(0, 1)$, ist die Abelisierung; er entspricht dem Einfügen des Punktes.)
+\probe{$\chi(T^{2}\setminus\{p\}) = \chi(S^{1}\vee S^{1}) = 1 - 2 = -1 = \chi(T^{2}) - 1$: Einen Punkt entfernen senkt $\chi$ um $1$ (eine Fläche wird zu einer offenen Fläche, die nicht zählt). \checkmark}
+\begin{mitnehmen}\kastentext
+Punkte entfernen macht Räume \enquote{freier}: Der Torus minus Punkt ist homotop zu einem Graphen, und Graphen haben freie Fundamentalgruppen. Allgemein ist eine geschlossene Fläche vom Geschlecht $g$ minus Punkt homotop zu einer Rosette aus $2g$ Kreisen, $\pi_1 = F_{2g}$; der fehlende Punkt \enquote{trägt} die eine Relation.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.23
+\stupserzwei{tief}{(d) Die Projektion $S^{2}\to\mathbb{RP}^{2}$ hat zwei Blätter; $S^{2}$ ist einfach zusammenhängend. Dann ist $\pi_1$ der Basis gleich der Gruppe der Decktransformationen: $\{\operatorname{id}, x\mapsto-x\}\cong\mathbb Z/2$.}{22pt}
+\begin{loesungkarte}{tief}{8.23}{Überlagerungen und Windungszahl}
+\derweg{Hochheben, Endpunkt lesen, Homotopieinvarianz; dann die Rechenregeln; dann dasselbe Schema für $\mathbb{RP}^{2}$.}
+\schritt{(a)}
+Zu jedem Weg $\gamma\colon[0, 1]\to S^{1}$ mit $\gamma(0) = 1$ gibt es genau einen Weg $\tilde\gamma\colon[0, 1]\to\mathbb R$ mit $\tilde\gamma(0) = 0$ und $p\circ\tilde\gamma = \gamma$ (Hochhebungssatz: lokal ist $p$ ein Homöomorphismus, und man setzt stückweise fort). Ist $\gamma$ eine Schleife, so $p(\tilde\gamma(1)) = 1$, also $\tilde\gamma(1)\in\mathbb Z$: $\deg\gamma := \tilde\gamma(1)$. Homotopieinvarianz: Eine Homotopie $\gamma_s$ von Schleifen hebt sich zu einer Homotopie $\tilde\gamma_s$ mit $\tilde\gamma_s(0) = 0$; die Endpunkte $\tilde\gamma_s(1)$ hängen stetig von $s$ ab und liegen in $\mathbb Z$ --- also konstant.
+\schritt{(b)}
+$\gamma_n(t) = e^{2\pi int}$: $\tilde\gamma_n(t) = nt$, $\deg = n$. $t\mapsto e^{2\pi i\sin(\pi t)}$: Hochhebung $\tilde\gamma(t) = \sin(\pi t)$, Endpunkt $\sin\pi = 0$: $\deg = 0$. Die Schleife läuft ein Stück vor und wieder zurück --- zusammenziehbar.
+\schritt{(c)}
+$\deg\colon\pi_1(S^{1}, 1)\to\mathbb Z$ ist wohldefiniert (a), ein Homomorphismus (die Hochhebung von $\gamma\cdot\delta$ ist $\tilde\gamma$ gefolgt von $\tilde\delta + \deg\gamma$, Endpunkt $\deg\gamma + \deg\delta$), surjektiv (b), und injektiv, weil Schleifen gleichen Grades homotop sind (ihre Hochhebungen haben gleiche Endpunkte und sind in $\mathbb R$ durch die gerade Homotopie verbunden; herunterprojiziert ist das eine Homotopie in $S^{1}$). Also $\pi_1(S^{1})\cong\mathbb Z$. $\blacksquare$
+\schritt{(d)}
+$q\colon S^{2}\to\mathbb{RP}^{2}$, $x\mapsto\{x, -x\}$. Zu jedem Punkt von $\mathbb{RP}^{2}$ gibt es eine Umgebung (Bild einer offenen Halbkugelkappe $U$, die keine antipodalen Punkte enthält), deren Urbild $U\sqcup(-U)$ ist und auf der $q$ auf jedem Teil ein Homöomorphismus ist: zweiblättrige Überlagerung. Da $S^{2}$ einfach zusammenhängend ist, ist $q$ die universelle Überlagerung, und $\pi_1(\mathbb{RP}^{2})$ ist die Decktransformationsgruppe $\{\operatorname{id}, -\operatorname{id}\}\cong\mathbb Z/2$. Konkret: Der Erzeuger ist das Bild eines Weges von $N$ nach $S = -N$ (im Quotienten eine Schleife); durchläuft man ihn zweimal, hebt er sich zu einem geschlossenen Weg $N\to S\to N$ auf $S^{2}$, der dort zusammenziehbar ist --- also ist das Quadrat des Erzeugers trivial.
+\probe{(c) liefert den Fundamentalsatz der Algebra: $p(z) = z^{n} + \dots$ hat auf großen Kreisen Windungszahl $n\neq0$, auf kleinen $0$, wenn $p$ keine Nullstelle hat --- Widerspruch zur Homotopieinvarianz (Band 8, Kap.\ 9).}
+\begin{mitnehmen}\kastentext
+Überlagerungen übersetzen Fundamentalgruppen in Geometrie: $\pi_1(X)$ ist die Gruppe der Decktransformationen der universellen Überlagerung. $\mathbb R\to S^{1}$ gibt $\mathbb Z$, $S^{2}\to\mathbb{RP}^{2}$ gibt $\mathbb Z/2$, $\mathbb R^{2}\to T^{2}$ gibt $\mathbb Z^{2}$, die hyperbolische Ebene $\to$ Fläche vom Geschlecht $g\ge2$ gibt die Flächengruppen. Das ist der Grund, warum Fundamentalgruppen \emph{berechenbar} sind.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.24
+\stupserzwei{tief}{(d) $x\mapsto\frac{Mx}{\sum_i(Mx)_i}$ bildet das Simplex stetig in sich ab ($Mx > 0$ für $x\in\Delta$). Ein Fixpunkt $x$ erfüllt $Mx = \lambda x$ mit $\lambda = \sum(Mx)_i > 0$.}{22pt}
+\begin{loesungkarte}{tief}{8.24}{Brouwer anwenden}
+\derweg{Jeweils die Abbildung finden, auf die der Fixpunktsatz passt; in (b) beide Richtungen durch Konstruktion.}
+\schritt{(a)}
+Das Land sei $L\subseteq\mathbb R^{2}$, die Karte ein verkleinertes Abbild $f(L)\subseteq L$ mit $f(x) = \lambda Rx + c$, $0 < \lambda < 1$ (Drehung $R$, Verschiebung $c$). $f$ ist eine Kontraktion auf dem vollständigen Raum $L$ (abgeschlossen): \emph{Banach} liefert genau einen Fixpunkt $x^{*} = f(x^{*})$ --- der Kartenpunkt, der über dem Ort liegt, den er darstellt. Brouwer würde nur Existenz geben und nur, wenn $L$ homöomorph zu einer Kreisscheibe ist; hier braucht man ihn nicht.
+\schritt{(b)}
+Brouwer $\Rightarrow$ keine Retraktion: Wäre $r\colon D^{2}\to S^{1}$ stetig mit $r|_{S^{1}} = \operatorname{id}$, so hätte $g(x) = -r(x)$ einen Fixpunkt $x = -r(x)$; dann $|x| = 1$, also $r(x) = x$, also $x = -x$, $x = 0$ --- Widerspruch zu $|x| = 1$. Keine Retraktion $\Rightarrow$ Brouwer: Sei $f\colon D^{2}\to D^{2}$ ohne Fixpunkt. Für jedes $x$ ist $f(x)\neq x$; der Strahl von $f(x)$ durch $x$ trifft $S^{1}$ in genau einem Punkt $r(x)$ (jenseits von $x$). $r$ ist stetig (Formel mit Wurzel, Nenner $|x - f(x)| > 0$) und $r(x) = x$ für $|x| = 1$: eine Retraktion. Widerspruch. $\blacksquare$
+\schritt{(c)}
+$g(x) = f(x) - x$ ist stetig auf $[0, 1]$ mit $g(0) = f(0)\ge0$ und $g(1) = f(1) - 1\le0$. Zwischenwertsatz: $g(x^{*}) = 0$ für ein $x^{*}$. $\blacksquare$ (Keine Retraktion $[0, 1]\to\{0, 1\}$: Das stetige Bild eines Zusammenhängenden ist zusammenhängend --- Brouwer in Dimension $1$ ist der Zwischenwertsatz.)
+\schritt{(d)}
+$\Delta = \{x\in\mathbb R^{n}\colon x_i\ge0, \sum x_i = 1\}$ ist kompakt, konvex, homöomorph zu $D^{n-1}$. Für $x\in\Delta$ ist $Mx > 0$ komponentenweise (alle $m_{ij} > 0$, und $x$ hat eine positive Komponente). $g(x) = \frac{Mx}{\sum_i(Mx)_i}$ ist stetig und bildet $\Delta$ in $\Delta$ ab. Brouwer: $g(x) = x$ für ein $x\in\Delta$, also $Mx = \lambda x$ mit $\lambda = \sum(Mx)_i > 0$. Und $x = \frac{Mx}\lambda > 0$ komponentenweise. $\blacksquare$ (Der Satz von Perron: Eigenvektor, Eigenwert und Positivität --- Band 2 beweist mehr, nämlich Eindeutigkeit und Dominanz.)
+\begin{mitnehmen}\kastentext
+Brouwer ist ein Existenzsatz ohne Verfahren: Er sagt nicht, wo der Fixpunkt liegt. Banach gibt ihn konstruktiv, verlangt aber eine Kontraktion. Die Äquivalenz in (b) zeigt, was Brouwer wirklich sagt: \emph{Der Rand der Scheibe ist kein Retrakt der Scheibe} --- $S^{1}$ hat ein Loch, das $D^{2}$ nicht hat, und das bemerkt $\pi_1$ (eine Retraktion würde den Erzeuger von $\pi_1(S^{1}) = \mathbb Z$ durch $\pi_1(D^{2}) = 0$ schicken).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.25
+\stupserzwei{gruen}{(d) Ein Parameter mehr löst alle Probleme: $u = (u_1, \dots, u_n, u_{n+1})\in S^{n}$ beschreibt den Halbraum $h(u) = \{x\colon u_1x_1 + \dots + u_nx_n\le u_{n+1}\}$. Dann ist $f(u) = (|A_1\cap h(u)|, \dots, |A_n\cap h(u)|)\colon S^{n}\to\mathbb R^{n}$ stetig, und $f(u) = f(-u)$ heißt: jede Menge halbiert.}{22pt}
+\begin{loesungkarte}{gruen}{8.25}{Der Schinkensandwich-Satz}
+\derweg{Von $n = 1$ (Zwischenwertsatz) über $n = 2$ (Borsuk--Ulam auf $S^{1}$) zur allgemeinen Fassung; dann die saubere Version ohne Auswahl einer Hyperebene.}
+\schritt{(a)}
+$g(s) = |A\cap(-\infty, s]|$ ist stetig (die Länge von $A\cap[s, s + h]$ ist höchstens $h$), monoton wachsend von $0$ bis $|A|$. Zwischenwertsatz: $g(s^{*}) = \frac{|A|}2$ für ein $s^{*}$. \checkmark
+\schritt{(b)}
+Zu $u\in S^{1}$ sei $\ell(u)$ die Gerade senkrecht zu $u$, die $A_2$ halbiert (sie existiert nach (a), angewendet auf die Projektion auf $u$; wir nehmen zunächst an, sie sei eindeutig). $f(u)$ := Fläche von $A_1$ auf der Seite von $\ell(u)$, in die $u$ zeigt. Dann ist $\ell(-u) = \ell(u)$ (dieselbe Gerade, andere Seite), also $f(u) + f(-u) = |A_1|$. Borsuk--Ulam für $f\colon S^{1}\to\mathbb R$: Es gibt $u$ mit $f(u) = f(-u)$, also $f(u) = \frac{|A_1|}2$. Diese Gerade halbiert $A_1$ und $A_2$. \checkmark\ (Für $S^{1}\to\mathbb R$ ist Borsuk--Ulam der Zwischenwertsatz, Aufgabe 8.14d.)
+\schritt{(c)}
+Zu $u\in S^{n-1}$ die Hyperebene $H(u)\perp u$, die $A_n$ halbiert. $f(u) = \bigl(|A_1\cap H(u)^{+}|, \dots, |A_{n-1}\cap H(u)^{+}|\bigr)\in\mathbb R^{n-1}$, wobei $H(u)^{+}$ die Seite ist, in die $u$ zeigt. $f(-u) = (|A_i| - f_i(u))_i$. Borsuk--Ulam ($S^{n-1}\to\mathbb R^{n-1}$) gibt $u$ mit $f(u) = f(-u)$, also $f_i(u) = \frac{|A_i|}2$ für alle $i < n$; $A_n$ ist nach Konstruktion halbiert. $\blacksquare$
+\schritt{(d)}
+Die Stetigkeit von $f$ braucht, dass $H(u)$ stetig von $u$ abhängt. Ist $A_n$ etwa zwei getrennte Klötze, so halbiert jede Hyperebene \emph{zwischen} ihnen --- ein Intervall von Positionen, dessen Mittelpunkt bei Drehung von $u$ springen kann. Eleganter Ausweg: eine Dimension höher. Für $u = (u', u_{n+1})\in S^{n}\subseteq\mathbb R^{n+1}$ sei $h(u) = \{x\in\mathbb R^{n}\colon\langle u', x\rangle\le u_{n+1}\}$ --- jeder Halbraum kommt vor, und $h(-u)$ ist das Komplement von $h(u)$ (bis auf die Hyperebene, die Maß null hat). $F(u) = (|A_1\cap h(u)|, \dots, |A_n\cap h(u)|)\colon S^{n}\to\mathbb R^{n}$ ist stetig (die Maße der Halbräume ändern sich stetig mit $u$, weil Hyperebenen Maß null haben). Borsuk--Ulam: $F(u) = F(-u)$ für ein $u$, also $|A_i\cap h(u)| = |A_i\setminus h(u)|$ für alle $i$. Ist $u' = 0$, so ist $h(u)$ leer oder alles, und $F(u) = F(-u)$ hieße $|A_i| = 0$ --- ausgeschlossen, wenn alle $A_i$ positives Maß haben. Also $u'\neq0$, und die Hyperebene $\langle u', x\rangle = u_{n+1}$ halbiert alle $n$ Mengen. Keine Auswahl, keine Stetigkeitsfrage. $\blacksquare$
+\begin{mitnehmen}\kastentext
+Borsuk--Ulam ($S^{n}\to\mathbb R^{n}$ hat antipodale Punkte mit gleichem Bild) ist der Satz, der \enquote{gleichzeitig halbieren} ermöglicht --- die Antipodensymmetrie $f(-u) = |A| - f(u)$ ist genau das, was man zum Einsetzen braucht. Die diskrete Fassung (endliche Punktmengen, Hyperebene halbiert jede Farbe) ist ein Grundwerkzeug der algorithmischen Geometrie; dort heißt der Satz \emph{ham sandwich cut}.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.26
+\stupserzwei{akzent}{(e) $x\mapsto x + 2$ auf $[0, 1]$, $x\mapsto x - 2$ auf $[2, 3]$: vertauscht die beiden Teile. Stetig, weil die Teile getrennt sind; fixpunktfrei, weil jeder Punkt die Seite wechselt.}{22pt}
+\begin{loesungkarte}{akzent}{8.26}{Fixpunkte ohne Kompaktheit}
+\derweg{Für jeden Raum eine fixpunktfreie stetige Selbstabbildung; dann die fehlende Voraussetzung benennen.}
+\schritt{(a)}
+$f(x) = \frac{x + e_1}2$ mit $e_1 = (1, 0)$: $|f(x)|\le\frac{|x| + 1}2 < 1$, bleibt in der offenen Scheibe. Fixpunkt: $x = \frac{x + e_1}2\iff x = e_1$, nicht in der offenen Scheibe. Fehlt: Kompaktheit (Abgeschlossenheit).
+\schritt{(b)}
+$f(x) = x + e_1$: Verschiebung. Fehlt: Kompaktheit (Beschränktheit).
+\schritt{(c)}
+Drehung um $90^{\circ}$ um den Ursprung: $f(x_1, x_2) = (-x_2, x_1)$. Erhält $|x|$, also den Kreisring; einziger Fixpunkt wäre $0$, nicht im Ring. Fehlt: Zusammenziehbarkeit (der Ring hat ein Loch; $\pi_1\neq0$).
+\schritt{(d)}
+Antipodenabbildung $x\mapsto-x$: fixpunktfrei. Fehlt: Zusammenziehbarkeit ($S^{2}$ ist kompakt, aber hat $H_2\neq0$). Schon Dimension $1$: $S^{1}$ mit $x\mapsto-x$.
+\schritt{(e)}
+Vertauschen der beiden Intervalle (siehe Stupser). Fehlt: Zusammenhang. --- Für $[0, 1]\cup[2, 3]$ gibt es auch Abbildungen \emph{mit} Fixpunkt; die Aussage \enquote{\emph{jede} stetige Selbstabbildung hat einen Fixpunkt} ist es, die scheitert.
+\begin{fehler}\kastentext
+Brouwer gilt für kompakte, konvexe Mengen in $\mathbb R^{n}$ --- allgemeiner für kompakte \emph{zusammenziehbare} Räume mit der Fixpunkteigenschaft, nicht für alle kompakten (Sphäre), nicht für alle konvexen (offene Scheibe, Ebene). Vor jeder Anwendung: Ist der Raum abgeschlossen \emph{und} beschränkt? Ist er konvex, oder wenigstens ohne Löcher? Wer \enquote{Fixpunktsatz} sagt und eine offene Menge meint, hat meist Banach gemeint --- und auch Banach braucht Vollständigkeit, also Abgeschlossenheit.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Die Lefschetz-Zahl $L(f) = \sum(-1)^{k}\operatorname{tr}(f_{*}\colon H_k\to H_k)$ entscheidet allgemein: $L(f)\neq0$ erzwingt einen Fixpunkt. Für $D^{n}$ ist $L = 1$ für jedes $f$ (Brouwer); für $S^{n}$ ist $L(f) = 1 + (-1)^{n}\deg f$, und die Antipodenabbildung hat $\deg = (-1)^{n+1}$, also $L = 0$. Der \enquote{Satz vom Igel} ($S^{2}$ hat kein stetiges nirgends verschwindendes Tangentialfeld) ist dieselbe Rechnung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.27
+\stupserzwei{tief}{(d) Sechseck $abca^{-1}b^{-1}c^{-1}$: Beim Verfolgen der Ecken entstehen zwei Klassen. $\chi = 2 - 3 + 1 = 0$, orientierbar (jede Kante einmal mit $+1$, einmal mit $-1$): Torus.}{22pt}
+\begin{loesungkarte}{tief}{8.27}{Kantenwörter lesen}
+\derweg{Ecken verfolgen (Anfang der $i$-ten Kante $\sim$ Anfang/Ende der Partnerkante), $K$ = Zahl der Buchstaben, $F = 1$; orientierbar genau dann, wenn jeder Buchstabe mit beiden Exponenten vorkommt.}
+\schritt{Verfahren}
+Nummeriere die Ecken des Vielecks $P_1, \dots, P_m$; die $i$-te Kante läuft von $P_i$ nach $P_{i+1}$. Kommt ein Buchstabe als $x$ an Position $i$ und als $x$ an Position $j$ vor (gleiche Exponenten), so $P_i\sim P_j$ und $P_{i+1}\sim P_{j+1}$; kommt er als $x$ und $x^{-1}$ vor, so $P_i\sim P_{j+1}$ und $P_{i+1}\sim P_j$. Die Klassen zählen gibt $E$.
+\schritt{Ergebnisse}
+\begin{center}\small
+\begin{tabular}{l|cccc|l}
+Wort & $E$ & $K$ & $\chi$ & or.\ & Fläche\\ \hline
+(a) $aba^{-1}b^{-1}$ & 1 & 2 & 0 & ja & Torus\\
+(b) $aa$ & 1 & 1 & 1 & nein & $\mathbb{RP}^{2}$\\
+(c) $aabb$ & 1 & 2 & 0 & nein & Kleinsche Flasche\\
+(d) $abca^{-1}b^{-1}c^{-1}$ & 2 & 3 & 0 & ja & Torus\\
+(e) $abcb^{-1}ac$ & 1 & 3 & $-1$ & nein & $N_3$\\
+(f) $aba^{-1}b^{-1}cdc^{-1}d^{-1}$ & 1 & 4 & $-2$ & ja & Brezel, $g = 2$
+\end{tabular}
+\end{center}
+Zu (e): $a$ an Positionen $1, 5$: $P_1\sim P_5$, $P_2\sim P_6$; $b$ an $2$ und $b^{-1}$ an $4$: $P_2\sim P_5$, $P_3\sim P_4$; $c$ an $3, 6$: $P_3\sim P_6$, $P_4\sim P_1$. Zusammen $P_1\sim P_5\sim P_2\sim P_6\sim P_3\sim P_4$: alle sechs Ecken eine Klasse, $E = 1$. Zu (d): $a$ an $1$, $a^{-1}$ an $4$: $P_1\sim P_5$, $P_2\sim P_4$; $b$ an $2$, $b^{-1}$ an $5$: $P_2\sim P_6$, $P_3\sim P_5$; $c$ an $3$, $c^{-1}$ an $6$: $P_3\sim P_1$, $P_4\sim P_6$. Klassen $\{P_1, P_3, P_5\}$, $\{P_2, P_4, P_6\}$: $E = 2$.
+\schritt{(g)}
+Klassifikation: orientierbar $\chi = 2 - 2g$ (Sphäre, Torus, Brezel, \dots), nichtorientierbar $\chi = 2 - k$ ($k$ Kreuzhauben: $\mathbb{RP}^{2}$, Klein, $N_3$, \dots). $\chi = 0$: Torus ($g = 1$) und Kleinsche Flasche ($k = 2$). $\chi = -1$: nur $N_3$, denn $2 - 2g = -1$ hat keine ganzzahlige Lösung --- orientierbare Flächen haben gerades $\chi$.
+\probe{(c) und (e) über die Normalform: $aabb$ ist bereits Normalform (zwei Kreuzhauben); $abcb^{-1}ac$ lässt sich durch Schneiden und Kleben in $aabbcc$ überführen. Die Zahl der Buchstaben mit gleichem Exponenten (hier $a$ und $c$) verrät nur \emph{dass}, nicht \emph{wie viele} Kreuzhauben; dafür braucht man $\chi$.}
+\begin{mitnehmen}\kastentext
+Zwei Zahlen klassifizieren alle geschlossenen Flächen: $\chi$ und Orientierbarkeit. Das Kantenwort liefert beides in einer Minute --- und das Verfolgen der Ecken ist die einzige Stelle, an der man sich verzählen kann. Die Normalformen $a_1b_1a_1^{-1}b_1^{-1}\cdots$ und $a_1a_1a_2a_2\cdots$ sind die Standardmodelle; der Klassifikationssatz sagt, dass jedes Wort zu einer von ihnen äquivalent ist.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.28
+\stupserzwei{gruen}{(c) Aus $abab^{-1} = 1$ folgt $bab^{-1} = a^{-1}$: $b$ konjugiert $a$ in sein Inverses. In $S_3$: $a = (1\,2\,3)$, $b = (1\,2)$ erfüllt das, und $ab\neq ba$.}{22pt}
+\begin{loesungkarte}{gruen}{8.28}{Das Wort $abab^{-1}$}
+\derweg{Ecken verfolgen, $\chi$, Orientierbarkeit, Fundamentalgruppe aus dem Wort, zweite Zerlegung als Probe.}
+\schritt{(a)}
+Quadrat $P_1P_2P_3P_4$ (gegen den Uhrzeigersinn ab links unten), Kanten: unten $a$ ($P_1\to P_2$), rechts $b$ ($P_2\to P_3$), oben $a$ ($P_3\to P_4$), links $b^{-1}$ ($P_4\to P_1$, also $b$ von $P_1$ nach $P_4$). $a$ gleichsinnig: $P_1\sim P_3$, $P_2\sim P_4$. $b$: $P_2\sim P_1$, $P_3\sim P_4$. Alle vier Ecken eine Klasse: $E = 1$.
+\schritt{(b)}
+$K = 2$, $F = 1$: $\chi = 1 - 2 + 1 = 0$. Der Buchstabe $a$ kommt zweimal mit demselben Exponenten vor: nichtorientierbar. $\chi = 0$, nichtorientierbar: die Kleinsche Flasche. Anschaulich: Die $b$-Kanten sind gleichsinnig verklebt, $(0, y)\sim(1, y)$ --- ein Zylinder; dessen Randkreise werden durch $a$ \emph{gegensinnig} verklebt, $(x, 0)\sim(1 - x, 1)$ (gleichsinnig gäbe den Torus).
+\schritt{(c)}
+$\pi_1 = \langle a, b\mid abab^{-1}\rangle$ (Seifert--van Kampen: eine Zelle, zwei Kanten, die Relation ist das Randwort). Umformen: $abab^{-1} = 1\iff aba = b\iff bab^{-1} = a^{-1}$. In $S_3$: $a = (1\,2\,3)$, $b = (1\,2)$: $bab^{-1} = (2\,1\,3) = (1\,3\,2) = a^{-1}$. \checkmark\ Also gibt es einen Homomorphismus auf $S_3$, und $ab = (1\,2\,3)(1\,2) = (1\,3)$, $ba = (1\,2)(1\,2\,3) = (2\,3)$ --- verschieden. Nicht abelsch. $\blacksquare$ Abelisiert: $2a = 0$, also $H_1 = \mathbb Z\oplus\mathbb Z/2$ --- Torsion, wie bei jeder nichtorientierbaren Fläche.
+\schritt{(d)}
+Die Verklebung $(x, 0)\sim(1 - x, 1)$ hat die Fixpunkte $x = \frac12$ und $x = 0\sim1$; um diese beiden senkrechten Linien liegen die Möbiusbänder. Mittlerer Streifen $[\frac14, \frac34]\times[0, 1]$: ein Rechteck, dessen obere und untere Kante gegensinnig verklebt werden --- ein Möbiusband. Randstreifen $[\frac34, 1]\times[0, 1]\cup[0, \frac14]\times[0, 1]$: über die $b$-Verklebung ein Rechteck $[-\frac14, \frac14]\times[0, 1]$, oben und unten wieder gegensinnig verklebt --- das zweite Möbiusband. Gemeinsamer Rand: die Linien $x = \frac14$ und $x = \frac34$, die durch $(\frac14, 0)\sim(\frac34, 1)$ zu \emph{einem} Kreis zusammenwachsen. $\chi = \chi(M_1) + \chi(M_2) - \chi(S^{1}) = 0 + 0 - 0 = 0$. \checkmark
+\probe{Normalform: $abab^{-1}\to$ (Schneiden längs einer Diagonalen $c$, Kleben längs $a$) $\to bbcc$ --- zwei Kreuzhauben, die Normalform der Kleinschen Flasche. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Kleinsche Flasche ist Torus und Möbiusband zugleich: ein Zylinder mit verdreht verklebten Enden, oder zwei Möbiusbänder Rand an Rand. Sie lässt sich nicht in $\mathbb R^{3}$ einbetten (jede geschlossene Fläche im $\mathbb R^{3}$ ist orientierbar --- sie trennt innen von außen), wohl aber in $\mathbb R^{4}$. Ihre Fundamentalgruppe ist das einfachste Beispiel einer unendlichen nichtabelschen Gruppe aus der Topologie.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.29
+\stupserzwei{gruen}{(c) Jede der Kanten $[v_1v_2], [v_1v_3], [v_2v_3]$ liegt im Rand genau eines der Dreiecke $[v_0v_1v_2], [v_0v_1v_3], [v_0v_2v_3]$. Ein $1$-Zykel lässt sich damit auf den Baum $[v_0v_1], [v_0v_2], [v_0v_3]$ reduzieren --- und dort gibt es keinen Zykel.}{22pt}
+\begin{loesungkarte}{gruen}{8.29}{Homologie des Tetraederrands}
+\derweg{Kanten $[v_iv_j]$ mit $i < j$ orientieren; $\partial[v_iv_j] = v_j - v_i$, $\partial[v_iv_jv_k] = [v_jv_k] - [v_iv_k] + [v_iv_j]$; dann Kerne und Bilder.}
+\schritt{(a)}
+Kantenreihenfolge $e_1 = [v_0v_1], e_2 = [v_0v_2], e_3 = [v_0v_3], e_4 = [v_1v_2], e_5 = [v_1v_3], e_6 = [v_2v_3]$; Dreiecke $f_1 = [v_0v_1v_2], f_2 = [v_0v_1v_3], f_3 = [v_0v_2v_3], f_4 = [v_1v_2v_3]$.
+\[ \partial_1 = \begin{pmatrix}-1&-1&-1&0&0&0\\1&0&0&-1&-1&0\\0&1&0&1&0&-1\\0&0&1&0&1&1\end{pmatrix}, \]
+\[ \partial_2 = \begin{pmatrix}1&1&0&0\\-1&0&1&0\\0&-1&-1&0\\1&0&0&1\\0&1&0&-1\\0&0&1&1\end{pmatrix}. \]
+($\partial f_1 = [v_1v_2] - [v_0v_2] + [v_0v_1] = e_4 - e_2 + e_1$ usw.) $\partial_1\partial_2$: Erste Spalte: $\partial_1(e_1 - e_2 + e_4) = (v_1 - v_0) - (v_2 - v_0) + (v_2 - v_1) = 0$; die anderen ebenso. $\partial_1\partial_2 = 0$. \checkmark
+\schritt{(b)}
+$\operatorname{im}\partial_1$ wird von $v_j - v_i$ erzeugt --- alle Differenzen, also alle Vektoren mit Koordinatensumme $0$ (Rang $3$). $H_0 = \mathbb Z^{4}/\operatorname{im}\partial_1\cong\mathbb Z$ (die Abbildung \enquote{Koordinatensumme} ist ein Isomorphismus auf $\mathbb Z$). Eine Komponente.
+\schritt{(c)}
+$\ker\partial_1$: Rang $6 - 3 = 3$. $\operatorname{im}\partial_2$: Die Spalten $\partial f_1, \partial f_2, \partial f_3$ sind linear unabhängig (sie enthalten $e_4$, $e_5$, $e_6$ jeweils nur einmal), $\partial f_4 = \partial f_1 - \partial f_2 + \partial f_3$ (nachrechnen: $(e_1 - e_2 + e_4) - (e_1 - e_3 + e_5) + (e_2 - e_3 + e_6) = e_4 - e_5 + e_6 = \partial f_4$ \checkmark). Rang $3$. Ist $\operatorname{im}\partial_2 = \ker\partial_1$ (nicht nur gleicher Rang --- es könnte Torsion geben)? Sei $z = \sum c_ie_i\in\ker\partial_1$. Ziehe $c_4\partial f_1 + c_5\partial f_2 + c_6\partial f_3$ ab: Der Rest ist ein Zykel, der nur $e_1, e_2, e_3$ enthält. Ein solcher Zykel $c_1e_1 + c_2e_2 + c_3e_3$ hat Rand $c_1v_1 + c_2v_2 + c_3v_3 - (c_1 + c_2 + c_3)v_0 = 0$, also $c_1 = c_2 = c_3 = 0$. Jeder Zykel ist ein Rand: $H_1 = 0$. \checkmark
+\schritt{(d)}
+$\ker\partial_2$: $\sum d_if_i$ mit $\partial = 0$. Aus den Spalten: $d_1 + d_2 = 0$ (Koeffizient $e_1$), $-d_1 + d_3 = 0$ ($e_2$), $-d_2 - d_3 = 0$ ($e_3$), $d_1 + d_4 = 0$ ($e_4$), $d_2 - d_4 = 0$ ($e_5$), $d_3 + d_4 = 0$ ($e_6$). Lösung: $d_2 = -d_1$, $d_3 = d_1$, $d_4 = -d_1$. $\ker\partial_2 = \mathbb Z\cdot(f_1 - f_2 + f_3 - f_4)$, $H_2 = \mathbb Z$. Der Erzeuger ist die \enquote{Summe aller Dreiecke, kohärent orientiert} --- die Fundamentalklasse $[S^{2}]$; sie ist genau $\partial[v_0v_1v_2v_3]$, der Rand des Volltetraeders, den wir weggelassen haben.
+\schritt{(e)}
+$b_0 - b_1 + b_2 = 1 - 0 + 1 = 2 = 4 - 6 + 4$. \checkmark
+\begin{mitnehmen}\kastentext
+Homologie ist lineare Algebra über $\mathbb Z$ --- Ränge geben die Betti-Zahlen, aber für Torsion muss man genauer hinsehen (Aufgabe 8.30d). $H_0$ zählt Komponenten, $H_1$ \enquote{Schleifen, die nichts beranden}, $H_2$ \enquote{Hohlräume}. Die Sphäre hat eine Komponente, keine Schleife, einen Hohlraum; und $\chi = \sum(-1)^{k}b_k$ ist der Satz von Euler--Poincaré, der die Zählformel aus Kapitel 1 erklärt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.30
+\stupserzwei{tief}{(d) Kleinsche Flasche als Zellkomplex: $\partial F = a + b + a - b = 2a$. $H_1 = \mathbb Z^{2}/\langle2a\rangle = \mathbb Z/2\oplus\mathbb Z$, $H_2 = \ker\partial_2 = 0$. $b_1 = 1$, $b_2 = 0$, $\chi = 1 - 1 + 0 = 0$.}{22pt}
+\begin{loesungkarte}{tief}{8.30}{Betti-Zahlen bestimmen}
+\derweg{Dreimal rechnen: Randmatrizen; Mayer--Vietoris; Zellkomplex. Dann $\chi$ als Kontrolle.}
+\schritt{(a)}
+Dreieck $v_0v_1v_2$, Kanten $e_1 = [v_0v_1], e_2 = [v_1v_2], e_3 = [v_0v_2]$. $\partial_1 e_1 = v_1 - v_0$, $\partial_1e_2 = v_2 - v_1$, $\partial_1e_3 = v_2 - v_0$: Rang $2$ (Bild = Summe-null-Vektoren). $H_0 = \mathbb Z^{3}/\operatorname{im} = \mathbb Z$. $\ker\partial_1$: $c_1(v_1 - v_0) + c_2(v_2 - v_1) + c_3(v_2 - v_0) = 0$ gibt $c_1 = -c_3$, $c_2 = c_1$: erzeugt von $e_1 + e_2 - e_3$ (einmal herum). Keine $2$-Simplizes, also $H_1 = \ker\partial_1 = \mathbb Z$.
+\schritt{(b)}
+$X = S^{1}\vee S^{1}$, $A$ = linker Kreis plus kleine offene Umgebung des Berührpunkts im rechten, $B$ symmetrisch. $A\simeq S^{1}$, $B\simeq S^{1}$, $A\cap B$ = kleines Kreuz um den Berührpunkt, zusammenziehbar. Mayer--Vietoris:
+\[ \underbrace{H_1(A\cap B)}_{0}\to\underbrace{H_1(A)\oplus H_1(B)}_{\mathbb Z^{2}}\to H_1(X)\to\underbrace{\tilde H_0(A\cap B)}_{0}. \]
+Also $H_1(X)\cong\mathbb Z^{2}$. Die Zusammenziehbarkeit von $A\cap B$ macht beide Enden null, und die Sequenz zwingt den Isomorphismus. (Mit nicht zusammenziehbarem Durchschnitt --- etwa beim Torus als Vereinigung zweier Zylinder, $A\cap B\simeq S^{1}\sqcup S^{1}$ --- muss man die Verbindungsabbildungen ausrechnen.)
+\schritt{(c)}
+Zellkomplex: $C_0 = \mathbb Z$ (Ecke $v$), $C_1 = \mathbb Z^{2}$ ($a, b$), $C_2 = \mathbb Z$ ($F$). $\partial_1 a = v - v = 0$, $\partial_1 b = 0$ (geschlossene Kanten). $\partial_2 F = a + b - a - b = 0$. Alle Randabbildungen null: $H_0 = \mathbb Z$, $H_1 = \mathbb Z^{2}$, $H_2 = \mathbb Z$. Betti-Zahlen $1, 2, 1$, $\chi = 1 - 2 + 1 = 0$. \checkmark
+\schritt{(d)}
+Orientierbar, Geschlecht $g$: $\chi = 2 - 2g = b_0 - b_1 + b_2 = 2 - b_1$, also $b_1 = 2g$ --- die $2g$ Standardschleifen. Kleinsche Flasche (Wort $abab^{-1}$): $\partial_2F = a + b + a - b = 2a$, $\partial_1 = 0$. $H_1 = \mathbb Z^{2}/\langle(2, 0)\rangle = \mathbb Z/2\oplus\mathbb Z$, $H_2 = \ker\partial_2 = 0$ (da $\partial_2F\neq0$). Betti: $b_1 = 1$ (der freie Teil), $b_2 = 0$; $\chi = 1 - 1 + 0 = 0$ stimmt mit Aufgabe 8.28. Die Torsion $\mathbb Z/2$ ist die Schleife $a$, die selbst kein Rand ist, deren Doppeltes aber die ganze Fläche berandet --- das Kennzeichen der Nichtorientierbarkeit.
+\probe{$\mathbb{RP}^{2}$ ($aa$): $\partial_2F = 2a$, $\partial_1a = 0$: $H_1 = \mathbb Z/2$, $H_2 = 0$, $b = (1, 0, 0)$, $\chi = 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Drei Wege, ein Ergebnis --- das ist die Stärke der Homologie: Sie ist \emph{berechenbar}, mit Triangulierungen, Zellkomplexen oder durch Zerlegen (Mayer--Vietoris). Betti-Zahlen sind die Ränge; Torsion verrät Verdrehung (Nichtorientierbarkeit). Und $\chi = \sum(-1)^{k}b_k$ ist die Brücke zurück zu Eulers Zählformel.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.31
+\stupserzwei{gruen}{Zug I erzeugt eine Kreuzung, an der derselbe Bogen oben und unten liegt --- alle drei \enquote{Bögen} gleich gefärbt. Zug II: Zwei Kreuzungen, der neue Bogen bekommt $2a - b\pmod3$, die alte Farbe $b$ kommt zurück. Zug III: Farben außen fest, die mittlere ergibt sich aus der Regel.}{22pt}
+\begin{loesungkarte}{gruen}{8.31}{Dreifärbbarkeit}
+\derweg{Beispiele; Invarianz an den drei Zügen; Folgerung; algebraische Fassung.}
+\schritt{(a)}
+Kleeblatt: drei Bögen, drei Kreuzungen; an jeder Kreuzung treffen alle drei Bögen zusammen (einer oben, zwei unten). Färbe die drei Bögen rot, grün, blau: An jeder Kreuzung drei verschiedene Farben, und es kommen drei Farben vor. Dreifärbbar. \checkmark\ Unknoten ohne Kreuzung: ein Bogen, eine Farbe --- die Bedingung \enquote{mindestens zwei Farben} ist verletzt. Nicht dreifärbbar.
+\schritt{(b)}
+Zug I (Schlaufe erzeugen): Der eine Bogen wird in zwei geteilt, die an der neuen Kreuzung mit sich selbst als Überbogen zusammentreffen. Regel: über $x$, unter $x$ und $y$ --- erlaubt sind \enquote{alle gleich} oder \enquote{alle verschieden}; mit zwei gleichen muss $y = x$: Die alte Färbung setzt sich eindeutig fort, und umgekehrt. Zug II (einen Bogen über einen anderen schieben): Zwei neue Kreuzungen, beide mit demselben Überbogen $a$; der untere Bogen $b$ wird in drei Stücke $b, b', b$ geteilt. An der ersten Kreuzung: $a$ über, $b$ und $b'$ unter --- $b' = b$, falls $a = b$, sonst die dritte Farbe. An der zweiten Kreuzung dieselbe Rechnung zurück: Das äußere Stück bekommt wieder $b$. Eindeutige Fortsetzung in beide Richtungen. Zug III (Bogen über eine Kreuzung schieben): Die drei äußeren Bögen behalten ihre Farben; der mittlere Bogen, der an zwei Kreuzungen beteiligt ist, bekommt seine Farbe aus der ersten Kreuzung zugewiesen, und man prüft in den zwei genannten Fällen (alle gleich: alles gleich; alle verschieden: die Regel $2\cdot\text{über} = \text{unter}_1 + \text{unter}_2$ ist linear und liefert dieselbe Farbe für den verschobenen Bogen auf beiden Seiten). Die Zahl der Farben bleibt jeweils gleich. $\blacksquare$
+\schritt{(c)}
+Reidemeisters Satz: Zwei Diagramme desselben Knotens gehen durch Züge I--III (und ebene Isotopie) auseinander hervor. Dreifärbbarkeit ist invariant unter den Zügen, das Kleeblatt-Diagramm ist dreifärbbar, das Unknoten-Diagramm nicht: Es sind verschiedene Knoten. $\blacksquare$
+\schritt{(d)}
+Mit Farben $0, 1, 2\in\mathbb Z/3$: \enquote{alle gleich oder alle verschieden} $\iff u_1 + u_2 + o\equiv0\pmod3$ (die drei Zahlen $0, 1, 2$ summieren zu $0$, dreimal dieselbe auch; zwei gleiche und eine andere nie) $\iff u_1 + u_2\equiv-o\equiv2o$. \checkmark\ Kleeblatt: Bögen $x_1, x_2, x_3$, an jeder Kreuzung $2x_i = x_j + x_k$, also $x_1 + x_2 + x_3 = 0$ --- eine Gleichung, drei Unbekannte über $\mathbb Z/3$: $3^{2} = 9$ Lösungen, davon $3$ einfarbig, $6$ echte.
+\begin{mitnehmen}\kastentext
+Eine Knoteninvariante ist eine Größe, die man am Diagramm abliest und die sich unter den drei Reidemeister-Zügen nicht ändert. Die Dreifärbbarkeit ist die einfachste; sie unterscheidet Kleeblatt und Unknoten, aber nicht Kleeblatt und sein Spiegelbild, und nicht den Achterknoten vom Unknoten (Aufgabe 8.32). Das Jones-Polynom sieht mehr, der Preis ist Rechenaufwand.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.32
+\stupserzwei{tief}{(d) Streicht man Zeile IV und Spalte $4$: $\det\begin{pmatrix}2&-1&0\\-1&-1&2\\-1&0&-1\end{pmatrix} = 2\cdot(1 - 0) + 1\cdot(1 + 2) + 0 = 5$. Die Determinante des Achterknotens ist $5$.}{22pt}
+\begin{loesungkarte}{tief}{8.32}{Der Achterknoten}
+\derweg{Kreuzungsgleichungen als Matrix; Lösungsraum modulo $3$ und $5$; Determinante als Schlüssel.}
+\schritt{(a)}
+Zeile I: $2x_1 - x_2 - x_4$; II: $2x_3 - x_1 - x_2$; III: $2x_4 - x_3 - x_1$; IV: $2x_2 - x_4 - x_3$.
+\[ M = \begin{pmatrix}2&-1&0&-1\\-1&-1&2&0\\-1&0&-1&2\\0&2&-1&-1\end{pmatrix}. \]
+Zeilensummen: $2 - 1 - 1 = 0$ in jeder Zeile --- die einfarbigen Färbungen $(c, c, c, c)$ sind immer Lösungen. Spaltensummen: $2 - 1 - 1 + 0 = 0$, $-1 - 1 + 0 + 2 = 0$, $0 + 2 - 1 - 1 = 0$, $-1 + 0 + 2 - 1 = 0$ --- jeder Bogen ist genau einmal Überbogen (Beitrag $+2$) und hat zwei Enden (je $-1$). Also hat $M$ höchstens Rang $3$, und man darf eine Zeile und eine Spalte streichen.
+\schritt{(b)}
+Modulo $3$ ist $-1\equiv2$, $M\equiv\begin{pmatrix}2&2&0&2\\2&2&2&0\\2&0&2&2\\0&2&2&2\end{pmatrix}$. Zeile I minus Zeile II: $(0, 0, 1, 2)$, also $x_3 = -2x_4 = x_4$. Zeile I minus Zeile III: $(0, 2, 1, 0)$, also $2x_2 = -x_3 = 2x_3$, $x_2 = x_3$. Zeile I: $2x_1 + 2x_2 + 2x_4 = 0$, mit $x_2 = x_4$: $2x_1 + 4x_4 = 2x_1 + x_4 = 0$, $x_4 = -2x_1 = x_1$. Also $x_1 = x_2 = x_3 = x_4$: nur die $3$ einfarbigen Lösungen. Nicht dreifärbbar.
+\schritt{(c)}
+Modulo $5$: Setze $x_4 = 0$ (Normierung, da Verschieben aller Farben um $c$ Lösungen auf Lösungen abbildet) und löse: Zeile I: $2x_1 = x_2$. Zeile III: $x_3 = -x_1 = 4x_1$. Zeile II: $2x_3 = x_1 + x_2 = 3x_1$, also $8x_1 = 3x_1$, $5x_1 = 0$ --- immer erfüllt. Zeile IV: $2x_2 = x_3$, $4x_1 = 4x_1$. \checkmark\ Also $x_1$ frei: $(x_1, 2x_1, 4x_1, 0)$, etwa $(1, 2, 4, 0)$; mit Verschiebung $(0, 1, 3, 4)$ (Probe an I: $0 - 1 - 4 = -5\equiv0$ \checkmark). Anzahl: $5$ (Wahl von $x_1$) $\times$ $5$ (Verschiebung) $= 25$ Lösungen, davon $5$ einfarbig: $20$ echte Fünffärbungen.
+\schritt{(d)}
+Minor (Stupser): $5$. Die Streichung ist beliebig (alle $3\times3$-Minoren haben Betrag $5$ wegen der Nullsummen). Das Gleichungssystem hat modulo $p$ nichttriviale Lösungen (über die einfarbigen hinaus) genau dann, wenn $p$ die Determinante $5$ teilt: nur $p = 5$. Kleeblatt: Determinante $3$, nur $p = 3$.
+\schritt{(e)}
+$p$-Färbbarkeit ist für jedes $p$ eine Invariante (derselbe Beweis wie in Aufgabe 8.31, die Regel ist linear). Unknoten: für kein $p$ färbbar. Kleeblatt: $p = 3$. Achterknoten: $p = 5$. Drei verschiedene Knoten. $\blacksquare$
+\probe{Die Determinante eines Knotens ist $|\Delta(-1)|$ für das Alexander-Polynom: Kleeblatt $\Delta = t - 1 + t^{-1}$, $|\Delta(-1)| = 3$; Achter $\Delta = -t + 3 - t^{-1}$, $|\Delta(-1)| = 5$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Fox-Färbungen sind ein lineares Gleichungssystem --- und seine Determinante ist eine Knoteninvariante, die alle $p$ auf einmal beantwortet: $p$-färbbar $\iff p\mid\det$. Knoten mit Determinante $1$ (etwa alle Knoten mit trivialem Alexander-Polynom) sind für kein $p$ färbbar und sehen für diese Invariante wie der Unknoten aus; dort beginnt die Arbeit mit Jones und Khovanov.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.33
+\stupserzwei{gruen}{(c) Hesse von $f = (2 + \cos u)\cos v$: $f_{uu} = -\cos u\cos v$, $f_{vv} = -(2 + \cos u)\cos v$, $f_{uv} = \sin u\sin v$. An den vier Punkten ist $f_{uv} = 0$; die Vorzeichen der Diagonale geben den Index.}{22pt}
+\begin{loesungkarte}{gruen}{8.33}{Höhenfunktionen auf dem Torus}
+\derweg{Gradient null setzen; Hesse-Matrix auswerten; Indizes zählen; $\chi$ prüfen.}
+\schritt{(a)}
+$f = \sin u$: $f_u = \cos u$, $f_v = 0$. Kritisch: $\cos u = 0$, $u = \frac\pi2$ (oberster Kreis, $z = 1$) und $u = \frac{3\pi}2$ (unterster Kreis, $z = -1$) --- für \emph{alle} $v$. Zwei kritische Kreise statt isolierter Punkte. Die Hesse-Matrix $\begin{pmatrix}-\sin u&0\\0&0\end{pmatrix}$ ist dort singulär (Eigenwert $0$ in $v$-Richtung): entartet. Keine Morse-Funktion. Die Entartung kommt von der Rotationssymmetrie um die $z$-Achse --- $f$ \enquote{sieht} $v$ nicht.
+\schritt{(b)}
+$f = (2 + \cos u)\cos v$. $f_u = -\sin u\cos v$, $f_v = -(2 + \cos u)\sin v$. Da $2 + \cos u\ge1$: $f_v = 0\iff\sin v = 0\iff v\in\{0, \pi\}$. Dann $\cos v = \pm1\neq0$, also $f_u = 0\iff\sin u = 0\iff u\in\{0, \pi\}$. Vier kritische Punkte: $(0, 0)$ mit $f = 3$; $(\pi, 0)$ mit $f = 1$; $(0, \pi)$ mit $f = -3$; $(\pi, \pi)$ mit $f = -1$.
+\schritt{(c)}
+Hesse-Matrix $\begin{pmatrix}-\cos u\cos v&\sin u\sin v\\\sin u\sin v&-(2 + \cos u)\cos v\end{pmatrix}$, an den kritischen Punkten diagonal:
+\begin{center}\small
+\begin{tabular}{c|c|c|c|l}
+$(u, v)$ & $f$ & $f_{uu}$ & $f_{vv}$ & Typ, Index\\ \hline
+$(0, \pi)$ & $-3$ & $1$ & $3$ & Minimum, $0$\\
+$(\pi, \pi)$ & $-1$ & $-1$ & $1$ & Sattel, $1$\\
+$(\pi, 0)$ & $1$ & $1$ & $-1$ & Sattel, $1$\\
+$(0, 0)$ & $3$ & $-1$ & $-3$ & Maximum, $2$
+\end{tabular}
+\end{center}
+Alle Hesse-Matrizen regulär: Morse-Funktion. $c_0 = 1$, $c_1 = 2$, $c_2 = 1$: $c_0 - c_1 + c_2 = 0 = \chi(T^{2})$. \checkmark\ Anschaulich: der stehende Torus hat unten ein Minimum, dann den Sattel am unteren Lochrand, den Sattel am oberen Lochrand, oben das Maximum.
+\schritt{(d)}
+\enquote{Dicht} heißt: Zu jeder glatten Funktion $f$ und jedem $\varepsilon > 0$ gibt es eine Morse-Funktion $g$ mit $|f - g| < \varepsilon$ (samt Ableitungen). Kippt man den liegenden Torus um einen kleinen Winkel $\varepsilon$ --- $g = \sin u + \varepsilon(2 + \cos u)\cos v$ --- so zerfällt jeder kritische Kreis in zwei isolierte Punkte: der obere Kreis in ein Maximum (Index $2$) und einen Sattel (Index $1$), der untere in einen Sattel und ein Minimum. Wieder $c = (1, 2, 1)$. Die Morse-Theorie gilt also für \enquote{fast alle} Funktionen, und die entarteten Fälle lassen sich durch beliebig kleine Störungen beheben.
+\probe{Morse-Ungleichungen: $c_k\ge b_k$, hier $1\ge1$, $2\ge2$, $1\ge1$ --- die Höhenfunktion des stehenden Torus ist \emph{perfekt}: so wenige kritische Punkte wie die Homologie erlaubt.}
+\begin{mitnehmen}\kastentext
+Morse-Theorie: Die kritischen Punkte einer generischen Funktion bauen die Mannigfaltigkeit zellenweise auf --- Index $k$ heißt \enquote{eine $k$-Zelle ankleben}. Die Zahlen $c_k$ erfüllen $\sum(-1)^{k}c_k = \chi$ und $c_k\ge b_k$. Entartete Funktionen (Symmetrie!) stören das Bild nur scheinbar: Kippen hilft. Mit dieser Idee bewies Smale die Poincaré-Vermutung in Dimension $\ge5$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 8.34
+\stupserzwei{gruen}{(d) Bei $\varepsilon = 1{,}848$ ist jeder Punkt mit allen außer seinem Antipoden verbunden. Der Rips-Komplex ist der Rand des $4$-dimensionalen Kreuzpolytops --- eine $3$-Sphäre. Das $1$-Loch ist tot, dafür lebt ein $3$-Loch.}{22pt}
+\begin{loesungkarte}{gruen}{8.34}{Ein Barcode von Hand}
+\derweg{Abstände; bei jedem Schwellenwert Kanten und Dreiecke zählen; $b_0$, $b_1$ über $\chi$ oder direkt; Barcode zeichnen.}
+\schritt{(a)}
+Abstand bei Winkeldifferenz $\theta$: $2\sin\frac\theta2$. Nachbarn ($45^{\circ}$): $2\sin22{,}5^{\circ} = 0{,}7654$. Übernächste ($90^{\circ}$): $\sqrt2 = 1{,}4142$. Drittnächste ($135^{\circ}$): $2\sin67{,}5^{\circ} = 1{,}8478$. Gegenüber: $2$.
+\schritt{(b)}
+\begin{center}\small
+\begin{tabular}{l|ccc|cc}
+$\varepsilon$ & Ecken & Kanten & Dreiecke & $b_0$ & $b_1$\\ \hline
+$< 0{,}765$ & 8 & 0 & 0 & 8 & 0\\
+$[0{,}765, 1{,}414)$ & 8 & 8 & 0 & 1 & 1\\
+$[1{,}414, 1{,}848)$ & 8 & 16 & 8 & 1 & 1\\
+$[1{,}848, 2)$ & 8 & 24 & 32 & 1 & 0\\
+$\ge2$ & 8 & 28 & 56 & 1 & 0
+\end{tabular}
+\end{center}
+Bei $0{,}765$: Die acht Nachbarkanten schließen den Ring; sieben Komponenten sterben, ein Loch wird geboren; $\chi = 8 - 8 = 0 = b_0 - b_1$. \checkmark\ Bei $1{,}414$: acht Diagonalen hinzu, acht Dreiecke $\{p_k, p_{k+1}, p_{k+2}\}$ (Seiten $0{,}765, 0{,}765, 1{,}414$); $\chi = 8 - 16 + 8 = 0$, mit $b_0 = 1$ also $b_1 = 1$: Die Dreiecke liegen am Rand, die Mitte bleibt offen. \checkmark\ Bei $1{,}848$: Jeder Punkt ist mit sechs anderen verbunden ($24$ Kanten); Dreiecke sind alle Tripel ohne antipodales Paar: $\binom83 - 4\cdot6 = 56 - 24 = 32$; ebenso $16$ Tetraeder (je ein Punkt aus jedem der vier Antipodenpaare). Der Komplex ist der Rand des Kreuzpolytops: $b_1 = 0$, das Loch ist gefüllt --- aber $b_3 = 1$.
+\schritt{(c)}
+$H_0$: acht Balken ab $0$, sieben enden bei $0{,}765$, einer läuft bis $\infty$. $H_1$: ein Balken von $0{,}765$ bis $1{,}848$ (Persistenz $1{,}08$) --- das Signal \enquote{die Punkte liegen auf einem Kreis}. Alle anderen Merkmale (das kurzlebige $H_3$ von $1{,}848$ bis $2$) sind Artefakte der Rips-Konstruktion.
+\schritt{(d)}
+Das Kreuzpolytop in $\mathbb R^{4}$ hat die Ecken $\pm e_1, \dots, \pm e_4$; sein Rand besteht aus allen Simplizes, die kein Antipodenpaar enthalten --- genau unser Komplex mit den vier Paaren $\{p_k, p_{k+4}\}$. Der Rand eines konvexen $4$-Polytops ist eine $3$-Sphäre: $b_0 = b_3 = 1$, sonst $0$. Ein Rips-Komplex aus acht Punkten der Ebene kann also eine $3$-Sphäre sein --- Rips-Komplexe sind nicht \enquote{die Form der Daten}, sondern ein Hilfsmittel, und nur langlebige Balken sind Geometrie.
+\probe{$\chi$ bei $1{,}848$: $8 - 24 + 32 - 16 = 0 = b_0 - b_1 + b_2 - b_3 = 1 - 0 + 0 - 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Persistente Homologie beantwortet \enquote{hat die Punktwolke ein Loch?} mit einem Barcode: lange Balken sind Struktur, kurze sind Rauschen. Dass das Loch bei $1{,}848$ stirbt, nicht erst bei $2$, und dass zwischendurch eine $3$-Sphäre auftaucht, zeigt, wie sehr die Rips-Konstruktion von der Metrik abweicht --- der Čech-Komplex (Schnitte von Kugeln) wäre treuer, aber teurer zu berechnen.
+\end{mitnehmen}
+\end{loesungkarte}

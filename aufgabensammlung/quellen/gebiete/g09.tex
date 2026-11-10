@@ -1,0 +1,478 @@
+\setgebiet{10}{DGL}{tief}
+\chapter{Differentialgleichungen}
+\marginnote{\small\itshape\color{grau}\textbf{Sie brauchen:} Band 9, Kapitel 1--14. Dazu Integrationstechnik und Potenzreihen (Gebiet 3), Eigenwerte und Matrixexponential (Gebiet 2), für die Kapitel 10--14 Fourierreihen (Band 9, Kap.\ 7 und 11).}[12pt]
+\worum{Differentialgleichungen sind die Sprache, in der Naturgesetze geschrieben sind. Man übt sie dreifach: Lösungen \emph{finden} (Trennen, Variation der Konstanten, Ansatz, Potenzreihen, Separation), Lösungen \emph{verstehen}, ohne sie zu kennen (Richtungsfeld, Phasenporträt, Stabilität, Bifurkation), und Lösungen \emph{beurteilen} (Existenz, Eindeutigkeit, Wohlgestelltheit, Numerik). Die Stolpersteine sitzen bei den verlorenen Lösungen, den falschen Ansätzen und den Fällen, in denen die Linearisierung schweigt.}
+
+\section{Was Sie hier üben}
+\begin{center}
+{\footnotesize\sffamily\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lP{4.9cm}lcll@{}}
+\toprule
+\textbf{Nr.} & \textbf{Titel} & \textbf{Sorte} & \textbf{Grad} & \textbf{Zeit} & \textbf{Band/Kap.}\\
+\midrule
+9.1 & Klassifizieren, einsetzen, zeichnen & \typwerk & \grad1 & 15 min & 9/1\\
+9.2 & Aus dem Richtungsfeld lesen & \typtypisch & \grad1 & 10 min & 9/1\\
+9.3 & Separabel, linear, Bernoulli & \typwerk & \grad2 & 20 min & 9/2\\
+9.4 & Exakte Gleichungen und integrierender Faktor & \typtypisch & \grad2 & 15 min & 9/2\\
+9.5 & Die verlorene Lösung & \typstolper & \grad1 & 10 min & 9/2\\
+9.6 & Eindeutigkeit, Picard, Existenzintervall & \typwerk & \grad2 & 20 min & 9/3\\
+9.7 & Lokal heißt nicht global & \typstolper & \grad2 & 10 min & 9/3\\
+9.8 & System, Matrixexponential, Räuber--Beute & \typwerk & \grad2 & 25 min & 9/4\\
+9.9 & $e^{At}$ auf drei Wegen & \typtypisch & \grad2 & 15 min & 9/4\\
+9.10 & Dritte Ordnung, erzwungene Schwingung, Resonanz & \typwerk & \grad2 & 25 min & 9/5\\
+9.11 & Ansatz vom Typ der rechten Seite & \typtypisch & \grad2 & 15 min & 9/5\\
+9.12 & Wenn die Koeffizienten nicht konstant sind & \typstolper & \grad2 & 10 min & 9/5\\
+9.13 & Airy, Legendre, Trommel & \typwerk & \grad3 & 25 min & 9/6\\
+9.14 & Potenzreihenansatz & \typtypisch & \grad2 & 15 min & 9/6\\
+9.15 & Greensche Funktion, Saite, Knicklast & \typwerk & \grad2 & 25 min & 9/7\\
+9.16 & Andere Randbedingungen, andere Eigenfunktionen & \typtypisch & \grad2 & 15 min & 9/7\\
+9.17 & Randwertprobleme: eine, keine, unendlich viele & \typstolper & \grad2 & 10 min & 9/7\\
+9.18 & Pendel, Lotka--Volterra, Wettbewerb & \typwerk & \grad3 & 25 min & 9/8\\
+9.19 & Gleichgewichte klassifizieren & \typtypisch & \grad2 & 15 min & 9/8\\
+9.20 & Wenn die Linearisierung schweigt & \typstolper & \grad2 & 10 min & 9/8\\
+9.21 & Van der Pol, logistische Abbildung, Lorenz & \typwerk & \grad3 & 25 min & 9/9\\
+9.22 & Bifurkationen erkennen & \typtypisch & \grad2 & 15 min & 9/9\\
+9.23 & Klassifikation, Transport, Stoß & \typwerk & \grad2 & 20 min & 9/10\\
+9.24 & Charakteristiken rechnen & \typtypisch & \grad2 & 15 min & 9/10\\
+9.25 & Dreieck, Separation, Energie & \typwerk & \grad2 & 20 min & 9/11\\
+9.26 & D'Alembert mit Anfangsgeschwindigkeit & \typtypisch & \grad2 & 15 min & 9/11\\
+9.27 & Stab, Fundamentallösung, Jahreswelle & \typwerk & \grad2 & 25 min & 9/12\\
+9.28 & Rückwärts in der Zeit & \typstolper & \grad2 & 10 min & 9/12\\
+9.29 & Rechteck, Halbebene, Brownsche Bewegung & \typwerk & \grad3 & 25 min & 9/13\\
+9.30 & Mittelwert und Maximum & \typtypisch & \grad2 & 15 min & 9/13\\
+9.31 & Schwache Ableitung, finite Elemente, steifes Problem & \typwerk & \grad2 & 25 min & 9/14\\
+9.32 & Ein Schritt von Hand & \typtypisch & \grad1 & 10 min & 9/14\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\section{Woran Sie merken, dass Sie es können}
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item Sie erkennen den Typ einer Gleichung erster Ordnung auf einen Blick (separabel, linear, Bernoulli, exakt) und wählen das passende Verfahren --- einschließlich der Lösungen, die das Verfahren verliert.
+\item Sie lösen lineare Gleichungen und Systeme mit konstanten Koeffizienten vollständig, mit richtigem Ansatz auch im Resonanzfall.
+\item Sie zeichnen ein Phasenporträt aus Gleichgewichten, Linearisierung und Erhaltungsgrößen --- und wissen, wann die Linearisierung nicht reicht.
+\item Sie trennen bei Wellen-, Wärmeleitungs- und Laplacegleichung die Variablen, kennen die Rolle der Randbedingungen und wissen, welches Problem gut gestellt ist.
+\end{itemize}
+
+\section{Aufgaben}
+
+%%%%%%%%%%% Kapitel 1
+\stupser{gruen}{(b) $y = Cx^{2}$ für jedes $C$ --- und auch $y = Cx^{2}$ für $x < 0$ mit anderem $C$: Bei $x = 0$ verliert die Gleichung ihre Normalform.}{22pt}
+\begin{karte}{gruen}{9.1}{\typwerk}{\meta{1}{15 min}{Band 9, Kap.\ 1, Aufgabe 1.1}}
+\kartentitel{Klassifizieren, einsetzen, zeichnen}
+\worum{Drei Grundfertigkeiten: eine Gleichung einordnen (Ordnung, linear, homogen), eine behauptete Lösung prüfen, und das Richtungsfeld lesen, bevor man rechnet.}
+\methoden{Klassifikation von DGL, Einsetzen und Prüfen, Richtungsfeld}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie Ordnung, Linearität und Homogenität von $y' + 3y = 0$; $y'' + \sin x\cdot y = e^{x}$; $y' = y^{2}$; $y'' + \sin y = 0$; $yy'' = (y')^{2}$; $y^{(4)} = -ky$.
+\item Prüfen Sie durch Einsetzen, ob $y = x^{2}$ die Gleichung $xy' = 2y$ löst, und finden Sie alle Lösungen. Was ist bei $x = 0$ besonders?
+\item Zeichnen Sie das Richtungsfeld von $y' = x - y$ (Isoklinen $x - y = c$) und beschreiben Sie das Verhalten der Lösungen für $x\to\infty$. Prüfen Sie Ihre Vermutung an der exakten Lösung.
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Nullisokline $y' = 0$: $y = 0$ und $y = 1$. Dazwischen $y' > 0$, außerhalb $y' < 0$. Wendepunkte, wo $y'' = y'(1 - 2y) = 0$: bei $y = \frac12$.}{22pt}
+\begin{karte}{tief}{9.2}{\typtypisch}{\meta{1}{10 min}{Band 9, Kap.\ 1}}
+\kartentitel{Aus dem Richtungsfeld lesen}
+\worum{Für $y' = f(y)$ sagt das Vorzeichen von $f$ alles über Monotonie und Grenzverhalten, und $y'' = f'(y)f(y)$ über die Krümmung. Die logistische Gleichung ist das Übungsstück.}
+\methoden{Richtungsfeld, Stationäre Lösungen, Vorzeichenanalyse, Qualitative Analyse}
+Für $y' = y(1 - y)$:
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie die stationären Lösungen und das Vorzeichen von $y'$ in den drei Bereichen.
+\item Berechnen Sie $y''$ als Funktion von $y$ und bestimmen Sie, wo Lösungen konvex, wo konkav sind und wo sie Wendepunkte haben.
+\item Skizzieren Sie die Lösungen mit $y(0) = 0{,}1$, $y(0) = 0{,}6$, $y(0) = 1{,}5$ und $y(0) = -0{,}1$ allein aus (a) und (b).
+\item Welche stationäre Lösung ist stabil, welche instabil? Prüfen Sie am Vorzeichen von $f'(y)$ an den Nullstellen.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 2
+\stupser{gruen}{(c) Substitution $z = y^{-2}$: $z' = -2y^{-3}y'$. Die Gleichung wird linear: $z' - 2z = -2x$.}{22pt}
+\begin{karte}{gruen}{9.3}{\typwerk}{\meta{2}{20 min}{Band 9, Kap.\ 2, Aufgabe 2.1}}
+\kartentitel{Separabel, linear, Bernoulli}
+\worum{Drei Typen erster Ordnung, drei Verfahren: Trennen der Variablen, integrierender Faktor $e^{\int p}$, Substitution $z = y^{1-n}$. Dazu ein physikalisches Modell, bei dem die stationäre Lösung die Antwort vorwegnimmt.}
+\methoden{Trennung der Variablen, Integrierender Faktor, Bernoulli-Gleichung, Stationäre Lösungen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $y' = -2xy$, $y(0) = 3$. Lösen Sie den freien Fall mit Luftwiderstand $m\dot v = mg - kv$, $v(0) = 0$; lesen Sie zuerst die Grenzgeschwindigkeit ab.
+\item Lösen Sie $y' + \frac2xy = \frac{\sin x}{x^{2}}$ mit $y(\pi) = 0$.
+\item Lösen Sie die Bernoulligleichung $y' + y = xy^{3}$.
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Exakt heißt $M_y = N_x$. Dann gibt es $F$ mit $F_x = M$, $F_y = N$, und die Lösungen sind $F(x, y) = C$. Sonst: Faktor $\mu$ suchen, der $\mu M\,dx + \mu N\,dy$ exakt macht.}{22pt}
+\begin{karte}{tief}{9.4}{\typtypisch}{\meta{2}{15 min}{Band 9, Kap.\ 2}}
+\kartentitel{Exakte Gleichungen und integrierender Faktor}
+\worum{$M\,dx + N\,dy = 0$ ist exakt, wenn die linke Seite ein totales Differential ist. Die Prüfung ist eine Ableitung, die Lösung eine Integration --- und wenn die Prüfung scheitert, hilft manchmal ein Faktor.}
+\methoden{Exakte Differentialgleichung, Integrierender Faktor, Partielle Ableitungen, Potential bestimmen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Prüfen Sie $(2xy + 3)\,dx + x^{2}\,dy = 0$ auf Exaktheit und lösen Sie.
+\item Prüfen Sie $(3x^{2} + 2y^{2})\,dx + (4xy + 6y^{2})\,dy = 0$ und lösen Sie mit $y(1) = 1$.
+\item $y\,dx - x\,dy = 0$ ist nicht exakt. Zeigen Sie, dass $\mu = \frac1{y^{2}}$ und $\mu = \frac1{x^{2}}$ integrierende Faktoren sind, und lösen Sie auf beide Arten. Warum stimmen die Lösungsmengen überein?
+\item Zeigen Sie: Ist $\frac{M_y - N_x}N = g(x)$ eine Funktion von $x$ allein, so ist $\mu = e^{\int g}$ ein integrierender Faktor. Lösen Sie damit $(3xy + y^{2})\,dx + (x^{2} + xy)\,dy = 0$.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Beim Trennen teilt man durch $g(y)$. Jede Nullstelle $y_0$ von $g$ ist eine Lösung $y\equiv y_0$, die danach nicht mehr in der Formel steht --- außer sie kommt als Grenzfall $C = 0$ zurück.}{22pt}
+\begin{karte}{akzent}{9.5}{\typstolper}{\meta{1}{10 min}{Band 9, Kap.\ 2}}
+\kartentitel{Die verlorene Lösung}
+\worum{Trennung der Variablen ist das erste Verfahren, das man lernt, und das erste, bei dem man Lösungen verliert: durch Division, durch $\ln|y|$ ohne Betrag, durch stillschweigende Annahmen über den Definitionsbereich.}
+\methoden{Trennung der Variablen, Stationäre Lösungen, Fehler finden, Definitionsbereich prüfen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Jemand löst $y' = y^{2}$: $\int\frac{dy}{y^{2}} = \int dx$, also $-\frac1y = x + C$, $y = -\frac1{x + C}$. Welche Lösung fehlt? Ist sie als Grenzfall enthalten?
+\item Jemand löst $y' = 2y$: $\ln y = 2x + C$, $y = e^{2x + C} = Ke^{2x}$ mit $K > 0$. Welche Lösungen fehlen, und wo ist der Fehler?
+\item $y' = 3y^{2/3}$: Trennen gibt $y = (x + C)^{3}$. Zeigen Sie, dass auch $y\equiv0$ löst, und dass man Stücke zusammensetzen kann: $y = 0$ für $x\le a$, $y = (x - a)^{3}$ für $x > a$. Warum ist das hier erlaubt, in (b) aber nicht?
+\item $y' = -\frac xy$: Trennen gibt $x^{2} + y^{2} = C$. Wo ist die Lösung mit $y(0) = 1$ definiert? Was passiert bei $x = \pm1$?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 3
+\stupser{gruen}{(b) $y_0 = 0$, $y_{k+1}(x) = \int_0^{x}(t + y_k(t))\,dt$. $y_1 = \frac{x^{2}}2$, $y_2 = \frac{x^{2}}2 + \frac{x^{3}}6$, $y_3 = \frac{x^{2}}2 + \frac{x^{3}}6 + \frac{x^{4}}{24}$.}{22pt}
+\begin{karte}{gruen}{9.6}{\typwerk}{\meta{2}{20 min}{Band 9, Kap.\ 3, Aufgabe 3.1}}
+\kartentitel{Eindeutigkeit, Picard, Existenzintervall}
+\worum{Der Satz von Picard--Lindelöf gibt Existenz und Eindeutigkeit unter einer Lipschitzbedingung --- lokal. Die drei Teile zeigen, was passiert, wenn die Bedingung fehlt, wie der Beweis rechnet, und warum \enquote{lokal} ernst gemeint ist.}
+\methoden{Lipschitz-Bedingung, Picard-Iteration, Maximales Existenzintervall, Trennung der Variablen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Untersuchen Sie $y' = 3y^{2/3}$, $y(0) = 0$ vollständig auf Eindeutigkeit: Geben Sie mindestens zwei Lösungen an, zeigen Sie, wo die Lipschitzbedingung scheitert, und beschreiben Sie \emph{alle} Lösungen.
+\item Führen Sie drei Picard-Iterationen für $y' = x + y$, $y(0) = 0$ durch und vergleichen Sie mit der exakten Lösung.
+\item Bestimmen Sie das maximale Existenzintervall von $y' = 1 + y^{2}$, $y(0) = 0$. Was passiert an seinen Rändern?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$f(x, y) = y^{2}$ ist beliebig glatt. Trotzdem existiert die Lösung von $y' = y^{2}$, $y(0) = 1$ nur auf $(-\infty, 1)$: $y = \frac1{1 - x}$.}{22pt}
+\begin{karte}{akzent}{9.7}{\typstolper}{\meta{2}{10 min}{Band 9, Kap.\ 3}}
+\kartentitel{Lokal heißt nicht global}
+\worum{Picard--Lindelöf garantiert eine Lösung auf einem kleinen Intervall. Dass sie \enquote{für alle $x$} existiert, ist eine Zusatzaussage, die eine Zusatzvoraussetzung braucht --- und die bei nichtlinearen Gleichungen oft falsch ist.}
+\methoden{Maximales Existenzintervall, Lipschitz-Bedingung, Gegenbeispiel, Lineare DGL}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $y' = y^{2}$ mit $y(0) = y_0 > 0$ und bestimmen Sie das maximale Existenzintervall in Abhängigkeit von $y_0$. Was passiert für $y_0 < 0$?
+\item Warum widerspricht das nicht Picard--Lindelöf? Welche Eigenschaft von $f(y) = y^{2}$ fehlt auf ganz $\mathbb R$, die $f(y) = y$ hat?
+\item Zeigen Sie: Ist $f$ global Lipschitz in $y$ (also $|f(x, y) - f(x, z)|\le L|y - z|$ für alle $y, z$), so existiert die Lösung für alle $x$. (Hinweis: Nach dem Satz vom Existenzintervall kann eine Lösung nur enden, wenn $|y|\to\infty$; schätzen Sie $|y|'$ ab.) Folgern Sie, dass lineare Gleichungen $y' = a(x)y + b(x)$ mit stetigen $a, b$ globale Lösungen haben.
+\item Jemand argumentiert: \enquote{$y' = y^{2}$ hat glatte rechte Seite, also eine glatte Lösung auf ganz $\mathbb R$.} Wo ist der Fehler --- und bei $y' = y^{2}$, $y(0) = 1$ an der Stelle $x = 2$: Was ist $y(2)$?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 4
+\stupser{gruen}{(b) $A = 2I + N$ mit $N = \begin{pmatrix}0&1\\0&0\end{pmatrix}$, $N^{2} = 0$. $I$ und $N$ kommutieren: $e^{Ax} = e^{2x}(I + xN)$.}{22pt}
+\begin{karte}{gruen}{9.8}{\typwerk}{\meta{2}{25 min}{Band 9, Kap.\ 4, Aufgabe 4.1}}
+\kartentitel{System, Matrixexponential, Räuber--Beute}
+\worum{Lineare Systeme löst man mit Eigenwerten; das Matrixexponential ist die Fundamentallösung; und nichtlineare Systeme untersucht man in der Nähe eines Gleichgewichts durch Linearisierung --- mit einer Warnung, die Aufgabe 9.20 ausführt.}
+\methoden{Eigenwerte, Matrixexponential, Linearisierung, Jacobi-Matrix}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $\vec y\,' = \begin{pmatrix}1&2\\3&2\end{pmatrix}\vec y$ mit $\vec y(0) = \begin{pmatrix}1\\0\end{pmatrix}$ vollständig.
+\item Berechnen Sie $e^{Ax}$ für $A = \begin{pmatrix}2&1\\0&2\end{pmatrix}$.
+\item Räuber--Beute: $\dot B = aB - bBR$, $\dot R = -cR + dBR$. Bestimmen Sie den nichttrivialen Gleichgewichtspunkt, linearisieren Sie dort und deuten Sie die Eigenwerte. Was sagt die Linearisierung über die Periode kleiner Schwankungen --- und was sagt sie \emph{nicht}?
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{(a) $A^{2} = -I$, also $A^{2k} = (-1)^{k}I$, $A^{2k+1} = (-1)^{k}A$. Die Reihe zerfällt in Kosinus- und Sinusreihe.}{22pt}
+\begin{karte}{tief}{9.9}{\typtypisch}{\meta{2}{15 min}{Band 9, Kap.\ 4}}
+\kartentitel{$e^{At}$ auf drei Wegen}
+\worum{Das Matrixexponential berechnet man je nach Matrix anders: über die Reihe, wenn Potenzen ein Muster haben; über $A = D + N$, wenn $N$ nilpotent ist und mit $D$ kommutiert; über Diagonalisierung, wenn es geht.}
+\methoden{Matrixexponential, Potenzreihe, Diagonalisieren, Nilpotente Matrix}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $A = \begin{pmatrix}0&1\\-1&0\end{pmatrix}$: Berechnen Sie $e^{At}$ über die Exponentialreihe. Welches System löst es, und was bedeutet das Ergebnis geometrisch?
+\item $A = \begin{pmatrix}1&1\\0&1\end{pmatrix}$: Berechnen Sie $e^{At}$ über $A = I + N$. Warum darf man $e^{I t + Nt} = e^{It}e^{Nt}$ schreiben --- und wann darf man das nicht?
+\item $A = \begin{pmatrix}2&1\\1&2\end{pmatrix}$: Berechnen Sie $e^{At}$ über Diagonalisierung $A = SDS^{-1}$.
+\item Prüfen Sie in allen drei Fällen $\frac d{dt}e^{At}\big|_{t = 0} = A$ und $\det e^{At} = e^{t\operatorname{tr}A}$.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 5
+\stupser{gruen}{(a) $r^{3} - 3r^{2} + 4 = (r + 1)(r - 2)^{2}$: eine einfache, eine doppelte Wurzel. (c) Ohne Dämpfung bei $\omega = \omega_0$: Der Ansatz $A\cos\omega_0t$ scheitert, weil er die homogene Gleichung löst --- Faktor $t$.}{22pt}
+\begin{karte}{gruen}{9.10}{\typwerk}{\meta{2}{25 min}{Band 9, Kap.\ 5, Aufgabe 5.1}}
+\kartentitel{Dritte Ordnung, erzwungene Schwingung, Resonanz}
+\worum{Lineare Gleichungen mit konstanten Koeffizienten: charakteristisches Polynom, Mehrfachwurzeln, und der physikalisch wichtigste Fall --- der getriebene gedämpfte Oszillator mit seiner Resonanzkurve.}
+\methoden{Charakteristisches Polynom, Mehrfache Nullstellen, Ansatz vom Typ der rechten Seite, Resonanz, Komplexer Ansatz}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $y''' - 3y'' + 4y = 0$ vollständig.
+\item $\ddot x + 2\delta\dot x + \omega_0^{2}x = F_0\cos\omega t$: Bestimmen Sie die partikuläre Lösung (komplexer Ansatz $x = \operatorname{Re}(Ce^{i\omega t})$), die Amplitude $A(\omega)$ und die Phasenverschiebung. Wo liegt das Maximum von $A$, und wie hoch ist es?
+\item Behandeln Sie den Resonanzfall ohne Dämpfung, $\delta = 0$, $\omega = \omega_0$. Wie wächst die Amplitude?
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Regel: Ansatz wie die rechte Seite, mit allen \enquote{Verwandten} (Ableitungen); löst ein Teil des Ansatzes die homogene Gleichung, mit $x$ multiplizieren --- so oft, bis kein Teil mehr homogene Lösung ist.}{22pt}
+\begin{karte}{tief}{9.11}{\typtypisch}{\meta{2}{15 min}{Band 9, Kap.\ 5}}
+\kartentitel{Ansatz vom Typ der rechten Seite}
+\worum{Für $e^{ax}$, Polynome, $\sin$, $\cos$ und ihre Produkte als rechte Seite findet man eine partikuläre Lösung durch Ansatz. Der einzige Denkfehler lauert bei Resonanz: wenn die rechte Seite selbst homogene Lösung ist.}
+\methoden{Ansatz vom Typ der rechten Seite, Resonanz, Koeffizientenvergleich, Charakteristisches Polynom}
+Bestimmen Sie die allgemeine Lösung:
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $y'' + y = xe^{x}$
+\item $y'' - 2y' + y = e^{x}$
+\item $y'' + 4y = \cos2x$
+\item $y'' - y = e^{x} + e^{-x} + x$ (Superposition: drei Ansätze einzeln)
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$x^{2}y'' - 2y = 0$: Der Ansatz $e^{\lambda x}$ gibt $x^{2}\lambda^{2} - 2 = 0$ --- $\lambda$ hinge von $x$ ab. Richtig ist $y = x^{r}$: $r(r - 1) - 2 = 0$.}{22pt}
+\begin{karte}{akzent}{9.12}{\typstolper}{\meta{2}{10 min}{Band 9, Kap.\ 5}}
+\kartentitel{Wenn die Koeffizienten nicht konstant sind}
+\worum{Das charakteristische Polynom funktioniert nur, weil $e^{\lambda x}$ Eigenfunktion von $\frac d{dx}$ ist. Bei variablen Koeffizienten braucht man andere Ansätze --- bei der Eulerschen Gleichung Potenzen, sonst meist Reihen oder Reduktion der Ordnung.}
+\methoden{Eulersche Differentialgleichung, Fehler finden, Reduktion der Ordnung, Substitution (Gleichung)}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Jemand löst $x^{2}y'' - 2y = 0$ mit dem Ansatz $y = e^{\lambda x}$. Zeigen Sie, dass das scheitert, und lösen Sie mit $y = x^{r}$.
+\item Lösen Sie $x^{2}y'' - xy' + y = 0$ ($x > 0$). Was tritt an die Stelle des Faktors $x$ bei Doppelwurzeln?
+\item Zeigen Sie, dass die Substitution $x = e^{t}$ jede Eulersche Gleichung $x^{2}y'' + axy' + by = 0$ in eine Gleichung mit konstanten Koeffizienten verwandelt. Welche?
+\item Reduktion der Ordnung: $y_1 = x$ löst $x^{2}y'' - x(x + 2)y' + (x + 2)y = 0$ (prüfen!). Finden Sie mit $y = x\,u(x)$ eine zweite Lösung.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 6
+\stupser{gruen}{(a) $\sum(n + 2)(n + 1)a_{n+2}x^{n} = \sum a_{n-1}x^{n}$ gibt $a_2 = 0$ und $a_{n+3} = \frac{a_n}{(n + 2)(n + 3)}$. Zwei Reihen: eine beginnt mit $a_0$, eine mit $a_1$.}{22pt}
+\begin{karte}{gruen}{9.13}{\typwerk}{\meta{3}{25 min}{Band 9, Kap.\ 6, Aufgabe 6.1}}
+\kartentitel{Airy, Legendre, Trommel}
+\worum{Drei spezielle Funktionen, drei Wege: Potenzreihe (Airy), abbrechende Reihe (Legendre-Polynome), und die Besselfunktion als Lösung eines physikalischen Randwertproblems.}
+\methoden{Potenzreihenansatz, Rekursion für Koeffizienten, Legendre-Polynome, Besselsche Differentialgleichung, Separationsansatz}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $y'' - xy = 0$ durch Potenzreihenansatz; geben Sie die Rekursion und die ersten vier Glieder beider Grundlösungen an.
+\item Zeigen Sie, dass die Legendregleichung $(1 - x^{2})y'' - 2xy' + n(n + 1)y = 0$ für ganzzahliges $n$ eine Polynomlösung hat, und bestimmen Sie $P_0, \dots, P_3$ (normiert mit $P_n(1) = 1$).
+\item Bestimmen Sie die Grundfrequenz einer kreisrunden Membran vom Radius $R$ (Wellengeschwindigkeit $c$). Die erste Nullstelle von $J_0$ ist $j_{0,1} = 2{,}4048$. Vergleichen Sie mit einer Saite der Länge $2R$.
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{(b) $y'' - 2xy' + 2ny = 0$: $a_{k+2} = \frac{2(k - n)}{(k + 1)(k + 2)}a_k$. Für $k = n$ wird der Zähler null --- die Reihe bricht ab.}{22pt}
+\begin{karte}{tief}{9.14}{\typtypisch}{\meta{2}{15 min}{Band 9, Kap.\ 6}}
+\kartentitel{Potenzreihenansatz}
+\worum{$y = \sum a_kx^{k}$ einsetzen, Indizes verschieben, Koeffizienten vergleichen, Rekursion lösen: Das Verfahren ist immer dasselbe. Die Aufgabe übt es an einer bekannten Gleichung (Kontrolle!) und an einer, deren Lösung Polynome sind.}
+\methoden{Potenzreihenansatz, Rekursion für Koeffizienten, Koeffizientenvergleich, Konvergenzradius}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $y'' + y = 0$ durch Potenzreihenansatz und identifizieren Sie die beiden Grundlösungen.
+\item Hermitesche Gleichung $y'' - 2xy' + 2ny = 0$: Leiten Sie die Rekursion her und zeigen Sie, dass für ganzes $n\ge0$ eine Polynomlösung vom Grad $n$ existiert. Bestimmen Sie sie für $n = 0, 1, 2, 3$.
+\item Bestimmen Sie den Konvergenzradius der Reihenlösungen von $(1 + x^{2})y'' + 2xy' = 0$ um $x = 0$ --- ohne die Reihe auszurechnen (Satz über reguläre Punkte: Konvergenz bis zur nächsten Singularität der Koeffizienten in $\mathbb C$). Lösen Sie dann elementar und prüfen Sie.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 7
+\stupser{gruen}{(a) $G(x, \xi) = x(1 - \xi)$ für $x\le\xi$, $\xi(1 - x)$ für $x\ge\xi$: stetig, symmetrisch, Sprung der Ableitung $-1$ bei $x = \xi$.}{22pt}
+\begin{karte}{gruen}{9.15}{\typwerk}{\meta{2}{25 min}{Band 9, Kap.\ 7, Aufgabe 7.1}}
+\kartentitel{Greensche Funktion, Saite, Knicklast}
+\worum{Randwertprobleme: Die Greensche Funktion macht aus dem Differentialoperator einen Integraloperator; das Eigenwertproblem der Saite liefert die Fourierreihe; und das Knicken eines Stabes ist dasselbe Eigenwertproblem in anderer Kleidung.}
+\methoden{Greensche Funktion, Sturm-Liouville-Problem, Eigenfunktionen, Fourierreihe, Eigenwertproblem}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie die Greensche Funktion für $-y'' = f$ auf $[0, 1]$, $y(0) = y(1) = 0$, und berechnen Sie damit die Lösung für $f\equiv1$. Probe durch Einsetzen.
+\item Lösen Sie das Eigenwertproblem $y'' + \lambda y = 0$, $y(0) = y(L) = 0$ und entwickeln Sie die in der Mitte um $h$ gezupfte Saite (Dreiecksprofil) nach Eigenfunktionen. Welche Obertöne fehlen, und warum?
+\item Eulersche Knickung: $EIy'' = -Fy$, $y(0) = y(\ell) = 0$. Bestimmen Sie die kleinste Kraft, bei der eine nichttriviale Biegelinie existiert. Wie ändert sie sich bei doppelter Länge?
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Neumann: $y'(0) = 0$ erzwingt $\cos$; $y'(L) = 0$ erzwingt $\sin(\sqrt\lambda L) = 0$ --- oder $\lambda = 0$ mit $y\equiv1$. Der Eigenwert $0$ gehört dazu.}{22pt}
+\begin{karte}{tief}{9.16}{\typtypisch}{\meta{2}{15 min}{Band 9, Kap.\ 7}}
+\kartentitel{Andere Randbedingungen, andere Eigenfunktionen}
+\worum{Dieselbe Gleichung $y'' + \lambda y = 0$, andere Randbedingungen: Jedes Mal ein anderes Orthogonalsystem. Die Aufgabe übt das Schema (drei Fälle für $\lambda$, Randbedingungen einsetzen, Eigenwerte ablesen) und die Orthogonalitätsprobe.}
+\methoden{Sturm-Liouville-Problem, Eigenwertproblem, Fallunterscheidung, Orthogonalität, Fourierreihe}
+Bestimmen Sie alle Eigenwerte und Eigenfunktionen von $y'' + \lambda y = 0$ auf $[0, L]$ mit
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $y'(0) = y'(L) = 0$ (beide Enden frei; vergessen Sie $\lambda\le0$ nicht),
+\item $y(0) = 0$, $y'(L) = 0$ (ein Ende fest, eines frei),
+\item $y(0) = y(L)$, $y'(0) = y'(L)$ (periodisch).
+\setcounter{enumi}{3}
+\item Prüfen Sie in (b) die Orthogonalität zweier verschiedener Eigenfunktionen durch Integration, und erklären Sie, warum sie aus der Theorie folgt. Welche Reihenentwicklung gehört zu (c)?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$y'' + y = 0$ hat die Lösungen $A\cos x + B\sin x$. $y(0) = 0$ erzwingt $A = 0$; $y(\pi) = 0$ ist dann \emph{automatisch} erfüllt --- $B$ bleibt frei. $y(\pi) = 1$ ist \emph{nie} erfüllt.}{22pt}
+\begin{karte}{akzent}{9.17}{\typstolper}{\meta{2}{10 min}{Band 9, Kap.\ 7}}
+\kartentitel{Randwertprobleme: eine, keine, unendlich viele}
+\worum{Anfangswertprobleme haben (unter Lipschitz) genau eine Lösung. Randwertprobleme nicht: Dieselbe Gleichung kann je nach Randwerten eindeutig lösbar, unlösbar oder vieldeutig sein. Die Regel dahinter ist die Fredholmsche Alternative.}
+\methoden{Randwertproblem, Fredholmsche Alternative, Lineares Gleichungssystem, Fallunterscheidung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $y'' + y = 0$ mit (i) $y(0) = 0$, $y(1) = 1$; (ii) $y(0) = 0$, $y(\pi) = 0$; (iii) $y(0) = 0$, $y(\pi) = 1$.
+\item Erklären Sie die drei Ergebnisse über das lineare Gleichungssystem für $A, B$: Wann ist seine Matrix singulär?
+\item Für $y'' + y = f(x)$, $y(0) = y(\pi) = 0$: Zeigen Sie, dass eine Lösung genau dann existiert, wenn $\int_0^{\pi}f(x)\sin x\,dx = 0$. (Multiplizieren Sie die Gleichung mit $\sin x$ und integrieren Sie zweimal partiell.) Prüfen Sie an $f = 1$ und $f = \sin2x$.
+\item Welche Analogie besteht zu $Ax = b$ mit singulärer Matrix $A$?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 8
+\stupser{gruen}{(b) $V(B, R) = dB - c\ln B + bR - a\ln R$. Rechnen Sie $\dot V = V_B\dot B + V_R\dot R$ aus --- es kommt $0$ heraus.}{22pt}
+\begin{karte}{gruen}{9.18}{\typwerk}{\meta{3}{25 min}{Band 9, Kap.\ 8, Aufgabe 8.1}}
+\kartentitel{Pendel, Lotka--Volterra, Wettbewerb}
+\worum{Drei nichtlineare Systeme in der Ebene: Gleichgewichte finden, linearisieren, klassifizieren --- und dort, wo die Linearisierung nicht entscheidet (Zentrum), eine Erhaltungsgröße oder Lyapunovfunktion finden.}
+\methoden{Gleichgewichtspunkte, Linearisierung, Jacobi-Matrix, Lyapunov-Funktion, Phasenporträt, Erhaltungsgröße}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Klassifizieren Sie alle Gleichgewichte des Pendels $\ddot\vartheta + \gamma\dot\vartheta + \omega_0^{2}\sin\vartheta = 0$ für $\gamma = 0$ und für kleines $\gamma > 0$. Was ändert die Reibung am unteren, was am oberen Gleichgewicht?
+\item Lotka--Volterra $\dot B = aB - bBR$, $\dot R = -cR + dBR$: Zeigen Sie mit $V = dB - c\ln B + bR - a\ln R$, dass alle Bahnen im positiven Quadranten geschlossen sind.
+\item Wettbewerb $\dot x = x(3 - x - 2y)$, $\dot y = y(2 - x - y)$: Bestimmen Sie alle vier Gleichgewichte, klassifizieren Sie sie und skizzieren Sie das Phasenporträt. Was bedeutet das Ergebnis ökologisch?
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Für $\dot{\vec x} = A\vec x$ entscheiden $\tau = \operatorname{tr}A$ und $\Delta = \det A$: $\Delta < 0$ Sattel; $\Delta > 0$, $\tau^{2} > 4\Delta$ Knoten; $\tau^{2} < 4\Delta$ Strudel; $\tau = 0$ Zentrum. Vorzeichen von $\tau$: stabil oder instabil.}{22pt}
+\begin{karte}{tief}{9.19}{\typtypisch}{\meta{2}{15 min}{Band 9, Kap.\ 8}}
+\kartentitel{Gleichgewichte klassifizieren}
+\worum{Die Spur-Determinante-Ebene klassifiziert lineare Systeme auf einen Blick; für nichtlineare Systeme linearisiert man und prüft, ob das Ergebnis trägt. Wenn nicht (Zentrum, Nulleigenwert), hilft eine Erhaltungsgröße.}
+\methoden{Spur-Determinante-Kriterium, Eigenwerte, Linearisierung, Jacobi-Matrix, Erhaltungsgröße, Phasenporträt}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Klassifizieren Sie $\dot{\vec x} = A\vec x$ für $A = \begin{pmatrix}-1&2\\-2&-1\end{pmatrix}$, $\begin{pmatrix}1&1\\4&1\end{pmatrix}$, $\begin{pmatrix}0&1\\-1&0\end{pmatrix}$, $\begin{pmatrix}-3&1\\0&-2\end{pmatrix}$, $\begin{pmatrix}1&-1\\1&1\end{pmatrix}$.
+\item Für $\dot x = y$, $\dot y = -x + x^{3}$: Bestimmen Sie die Gleichgewichte und linearisieren Sie. Welche Klassifikation ist gesichert, welche nicht?
+\item Zeigen Sie, dass $H(x, y) = \frac{y^{2}}2 + \frac{x^{2}}2 - \frac{x^{4}}4$ erhalten bleibt, und entscheiden Sie damit den offenen Fall aus (b). Skizzieren Sie das Phasenporträt mit den Separatrizen $H = \frac14$.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{In Polarkoordinaten: $\dot r = r^{3}$, $\dot\varphi = 1$. Die Linearisierung ($\dot r = 0$) sieht ein Zentrum, der kubische Term treibt nach außen --- beliebig langsam, aber unaufhaltsam.}{22pt}
+\begin{karte}{akzent}{9.20}{\typstolper}{\meta{2}{10 min}{Band 9, Kap.\ 8}}
+\kartentitel{Wenn die Linearisierung schweigt}
+\worum{Der Satz von Hartman--Grobman gilt für \emph{hyperbolische} Gleichgewichte (kein Eigenwert mit Realteil $0$). Zentrum und Nulleigenwert sind die Fälle, in denen nichtlineare Terme entscheiden --- und in denen man nicht aus der Linearisierung ablesen darf.}
+\methoden{Linearisierung, Polarkoordinaten, Gegenbeispiel, Lyapunov-Funktion, Hyperbolisches Gleichgewicht}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $\dot x = -y + x(x^{2} + y^{2})$, $\dot y = x + y(x^{2} + y^{2})$: Linearisieren Sie im Ursprung. Was sagt die Linearisierung?
+\item Rechnen Sie in Polarkoordinaten um ($r\dot r = x\dot x + y\dot y$, $r^{2}\dot\varphi = x\dot y - y\dot x$) und bestimmen Sie das wahre Verhalten. Lösen Sie $\dot r = r^{3}$ explizit --- wann erreicht die Bahn $r = \infty$?
+\item Dasselbe für $\dot x = -y - x(x^{2} + y^{2})$, $\dot y = x - y(x^{2} + y^{2})$. Dieselbe Linearisierung, anderes Ergebnis.
+\item $\dot x = x^{2}$ in einer Dimension: Linearisierung bei $0$? Verhalten? Und $\dot x = -x^{3}$? Formulieren Sie, was \enquote{hyperbolisch} verlangt und warum.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 9
+\stupser{gruen}{(c) Gleichgewichte: der Ursprung und für $\rho > 1$ zwei Punkte $C_\pm$ mit $z = \rho - 1$ und $x = y = \pm\sqrt{\beta z}$. Die $C_\pm$ verlieren die Stabilität bei $\rho_H = 24{,}74$.}{22pt}
+\begin{karte}{gruen}{9.21}{\typwerk}{\meta{3}{25 min}{Band 9, Kap.\ 9, Aufgabe 9.1}}
+\kartentitel{Van der Pol, logistische Abbildung, Lorenz}
+\worum{Drei Wege ins Nichtlineare: ein Grenzzyklus, der sich selbst seine Amplitude sucht; eine Iteration, die über Periodenverdopplung ins Chaos geht; und drei Gleichungen, die die Wettervorhersage begrenzen.}
+\methoden{Poincaré-Bendixson, Grenzzyklus, Fixpunktiteration, Periodenverdopplung, Gleichgewichtspunkte, Hopf-Bifurkation}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Van der Pol $\ddot x - \mu(1 - x^{2})\dot x + x = 0$, $\mu > 0$: Schreiben Sie als System (Liénard-Transformation $y = \dot x - \mu(x - \frac{x^{3}}3)$), zeigen Sie, dass der Ursprung ein instabiles Gleichgewicht ist, und skizzieren Sie, wie Poincaré--Bendixson einen Grenzzyklus liefert.
+\item Logistische Abbildung $x_{n+1} = rx_n(1 - x_n)$: Bestimmen Sie die Fixpunkte und ihre Stabilität in Abhängigkeit von $r$. Bei welchem $r$ beginnt die Periodenverdopplung? Bestimmen Sie den $2$-Zyklus für $r = 3{,}2$.
+\item Lorenz $\dot x = \sigma(y - x)$, $\dot y = x(\rho - z) - y$, $\dot z = xy - \beta z$ mit $\sigma = 10$, $\beta = \frac83$: Bestimmen Sie die Gleichgewichte in Abhängigkeit von $\rho$ und die Stabilität des Ursprungs. Wo liegt die Hopf-Bifurkation der Punkte $C_\pm$ (Formel gegeben; nachrechnen)?
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Sattel-Knoten: zwei Gleichgewichte verschmelzen und verschwinden. Transkritisch: zwei tauschen Stabilität. Heugabel: eines wird instabil, zwei neue entstehen. Hopf: ein Strudel wird instabil, ein Grenzzyklus entsteht.}{22pt}
+\begin{karte}{tief}{9.22}{\typtypisch}{\meta{2}{15 min}{Band 9, Kap.\ 9}}
+\kartentitel{Bifurkationen erkennen}
+\worum{Wenn ein Parameter einen kritischen Wert durchläuft, ändert sich das Phasenporträt qualitativ. Die vier Grundtypen haben Normalformen, an denen man sie lernt --- und wiedererkennt.}
+\methoden{Bifurkation, Stationäre Lösungen, Vorzeichenanalyse, Polarkoordinaten, Bifurkationsdiagramm}
+Bestimmen Sie für jede Gleichung die Gleichgewichte in Abhängigkeit von $r$, ihre Stabilität, und zeichnen Sie das Bifurkationsdiagramm ($x^{*}$ gegen $r$, stabil durchgezogen, instabil gestrichelt):
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $\dot x = r + x^{2}$
+\item $\dot x = rx - x^{2}$
+\item $\dot x = rx - x^{3}$ (und zum Vergleich $\dot x = rx + x^{3}$)
+\item $\dot r = r(\mu - r^{2})$, $\dot\varphi = 1$ in Polarkoordinaten. Was passiert bei $\mu = 0$ mit dem Ursprung, und was entsteht für $\mu > 0$?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 10
+\stupser{gruen}{(c) $u = f(x - ut)$ bricht, wenn $1 + tf'(x_0) = 0$: $t_{\text{Stoß}} = -\frac1{\min f'}$. Für $f = \frac1{1 + x^{2}}$ ist $\min f' = -\frac{3\sqrt3}8 = -0{,}6495$ bei $x = \frac1{\sqrt3}$.}{22pt}
+\begin{karte}{gruen}{9.23}{\typwerk}{\meta{2}{20 min}{Band 9, Kap.\ 10, Aufgabe 10.1}}
+\kartentitel{Klassifikation, Transport, Stoß}
+\worum{Partielle Differentialgleichungen zweiter Ordnung sind hyperbolisch, parabolisch oder elliptisch --- und das bestimmt, welche Daten man vorgeben darf. Charakteristiken sind die Kurven, längs derer Information läuft; bei der Burgersgleichung laufen sie ineinander.}
+\methoden{Klassifikation von PDE, Charakteristiken, Transportgleichung, Burgers-Gleichung, Stoßbildung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Klassifizieren Sie $u_{tt} = c^{2}u_{xx}$, $u_t = ku_{xx}$, $u_{xx} + u_{yy} = 0$, $u_{xx} + 2u_{xy} + u_{yy} = 0$, $yu_{xx} + u_{yy} = 0$ (Tricomi) und bestimmen Sie die Charakteristiken der ersten beiden.
+\item Lösen Sie $u_t + 2u_x = 0$, $u(x, 0) = e^{-x^{2}}$, und deuten Sie das Ergebnis.
+\item Burgers $u_t + uu_x = 0$ mit $u(x, 0) = f(x) = \frac1{1 + x^{2}}$: Bestimmen Sie den Stoßzeitpunkt und den Ort, an dem der Stoß entsteht.
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Charakteristiken von $u_t + c(x, t, u)u_x = 0$: Kurven mit $\dot x = c$, längs derer $u$ konstant ist. Aufstellen, lösen, nach $x_0$ auflösen, $u = f(x_0)$ hinschreiben.}{22pt}
+\begin{karte}{tief}{9.24}{\typtypisch}{\meta{2}{15 min}{Band 9, Kap.\ 10}}
+\kartentitel{Charakteristiken rechnen}
+\worum{Die Methode der Charakteristiken löst Gleichungen erster Ordnung, indem sie sie auf gewöhnliche Differentialgleichungen längs Kurven zurückführt. Drei Varianten: variable Geschwindigkeit, Quellterm, nichtlinear mit Stoß.}
+\methoden{Charakteristiken, Transportgleichung, Burgers-Gleichung, Stoßbildung, Trennung der Variablen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $u_t + xu_x = 0$, $u(x, 0) = f(x)$. Zeichnen Sie die Charakteristiken. Was passiert mit einem Anfangsprofil für $t\to\infty$?
+\item $u_t + u_x = -u$, $u(x, 0) = f(x)$. Längs der Charakteristiken ist $u$ jetzt nicht konstant --- welche gewöhnliche Gleichung gilt dort?
+\item Burgers $u_t + uu_x = 0$ mit der Rampe $f(x) = 1$ für $x\le0$, $1 - x$ für $0 < x < 1$, $0$ für $x\ge1$. Zeichnen Sie die Charakteristiken, bestimmen Sie Stoßzeit und -ort, und geben Sie $u(x, t)$ für $t < 1$ explizit an.
+\item Für $t > 1$ in (c): Mit welcher Geschwindigkeit läuft der Stoß (Rankine--Hugoniot: $s = \frac{u_- + u_+}2$)?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 11
+\stupser{gruen}{(a) $u = \frac12\bigl(f(x - ct) + f(x + ct)\bigr)$: Das Dreieck zerfällt in zwei halb so hohe Dreiecke, die nach links und rechts laufen. Für $ct > 1$ sind sie getrennt.}{22pt}
+\begin{karte}{gruen}{9.25}{\typwerk}{\meta{2}{20 min}{Band 9, Kap.\ 11, Aufgabe 11.1}}
+\kartentitel{Dreieck, Separation, Energie}
+\worum{Die Wellengleichung hat zwei Gesichter: d'Alemberts laufende Wellen und die stehenden Wellen der Separation. Beide beschreiben dasselbe --- und die Energie zeigt, warum die Lösung eindeutig ist.}
+\methoden{D'Alembert-Formel, Separationsansatz, Fourierreihe, Energieerhaltung, Eindeutigkeitsbeweis}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $u_{tt} = c^{2}u_{xx}$ auf $\mathbb R$ mit $u(x, 0) = f(x) = \max(1 - |x|, 0)$, $u_t(x, 0) = 0$: Lösen Sie mit d'Alembert und skizzieren Sie $u$ zu den Zeiten $ct = 0, \frac12, 1, 2$.
+\item Eingespannte Saite auf $[0, L]$: Lösen Sie durch Separation und zeigen Sie, dass die Reihenlösung mit d'Alembert übereinstimmt, wenn man $f$ und $g$ ungerade und $2L$-periodisch fortsetzt.
+\item Zeigen Sie, dass $E(t) = \frac12\int_0^{L}(u_t^{2} + c^{2}u_x^{2})\,dx$ konstant ist, und folgern Sie die Eindeutigkeit der Lösung des Anfangs-Randwert-Problems.
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{$u(x, t) = \frac1{2c}\int_{x - ct}^{x + ct}g(s)\,ds$: die halbe Länge des Schnitts von $[x - ct, x + ct]$ mit $[-1, 1]$, durch $c$. Ein Trapez, das breiter wird und die Höhe $\frac1c$ erreicht.}{22pt}
+\begin{karte}{tief}{9.26}{\typtypisch}{\meta{2}{15 min}{Band 9, Kap.\ 11}}
+\kartentitel{D'Alembert mit Anfangsgeschwindigkeit}
+\worum{Der zweite Teil der d'Alembertschen Formel --- das Integral über die Anfangsgeschwindigkeit --- verhält sich anders als der erste: Die Störung bleibt. Dazu die Spiegelung an einem festen Ende.}
+\methoden{D'Alembert-Formel, Integration stückweiser Funktionen, Spiegelungsmethode, Abhängigkeitsgebiet}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $u_{tt} = c^{2}u_{xx}$ auf $\mathbb R$, $u(x, 0) = 0$, $u_t(x, 0) = g(x) = 1$ für $|x|\le1$, $0$ sonst. Berechnen Sie $u(x, t)$ und skizzieren Sie es für $ct = \frac12, 1, 3$. Was ist $\lim_{t\to\infty}u(x, t)$ für festes $x$?
+\item Erklären Sie das Ergebnis physikalisch: Warum kehrt die Saite nicht in die Ruhelage zurück, obwohl keine Kraft mehr wirkt? (Vergleichen Sie mit (a) aus Aufgabe 9.25.)
+\item Halbgerade $x > 0$ mit festem Ende $u(0, t) = 0$ und Anfangsdaten $f$ mit Träger in $[1, 2]$, $g = 0$: Setzen Sie $f$ ungerade fort und beschreiben Sie, was mit dem nach links laufenden Puls am Ende passiert.
+\item Zeichnen Sie das Abhängigkeitsgebiet des Punktes $(x_0, t_0)$ und den Einflussbereich des Intervalls $[-1, 1]$. Was sagt \enquote{endliche Ausbreitungsgeschwindigkeit}?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 12
+\stupser{gruen}{(b) Ansatz $u = t^{-1/2}\varphi(\xi)$ mit $\xi = \frac x{\sqrt t}$. Einsetzen gibt $k\varphi'' + \frac12(\xi\varphi)' = 0$, also $\varphi = Ce^{-\xi^{2}/4k}$. Normierung $\int u\,dx = 1$ gibt $C$.}{22pt}
+\begin{karte}{gruen}{9.27}{\typwerk}{\meta{2}{25 min}{Band 9, Kap.\ 12, Aufgabe 12.1}}
+\kartentitel{Stab, Fundamentallösung, Jahreswelle}
+\worum{Die Wärmeleitungsgleichung glättet, dämpft und vergisst. Drei Rechnungen: Fourierreihe für den endlichen Stab, Ähnlichkeitslösung für die unendliche Gerade, komplexer Ansatz für periodische Randtemperatur.}
+\methoden{Separationsansatz, Fourierreihe, Ähnlichkeitsansatz, Komplexer Ansatz, Fundamentallösung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $u_t = ku_{xx}$ auf $[0, L]$, $u(0, t) = u(L, t) = 0$, $u(x, 0) = u_0$: Lösen Sie durch Separation. Nach welcher Zeit ist die Amplitude der Grundmode auf $\frac1e$ gefallen, und warum dominiert sie bald allein?
+\item Leiten Sie die Fundamentallösung $\Phi(x, t) = \frac1{\sqrt{4\pi kt}}e^{-x^{2}/4kt}$ durch den Ähnlichkeitsansatz $u = t^{-1/2}\varphi(x/\sqrt t)$ her. Warum gerade $t^{-1/2}$?
+\item Jahrestemperaturwelle: $u_t = ku_{zz}$ für $z > 0$ mit $u(0, t) = u_m + A_0\cos\omega t$. Lösen Sie mit komplexem Ansatz, bestimmen Sie Eindringtiefe $d = \sqrt{2k/\omega}$ und Phasenverzögerung, und rechnen Sie für $k = 0{,}5\cdot10^{-6}\,\mathrm{m^{2}/s}$ aus, in welcher Tiefe der Jahresgang um ein halbes Jahr verschoben ist.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$u(x, t) = \varepsilon e^{-kn^{2}t}\sin nx$ löst die Gleichung für alle $t$. Bei $t = -1$ hat sie die Amplitude $\varepsilon e^{kn^{2}}$ --- aus $\varepsilon = 10^{-6}$ wird für $n = 10$, $k = 1$ die Zahl $10^{37}$.}{22pt}
+\begin{karte}{akzent}{9.28}{\typstolper}{\meta{2}{10 min}{Band 9, Kap.\ 12}}
+\kartentitel{Rückwärts in der Zeit}
+\worum{Die Wärmeleitungsgleichung ist vorwärts gut gestellt und rückwärts schlecht gestellt: Aus der Temperaturverteilung heute lässt sich die von gestern nicht stabil rekonstruieren. Das ist kein Rechenproblem, sondern Physik --- Entropie.}
+\methoden{Wohlgestelltheit, Gegenbeispiel, Separationsansatz, Maximumprinzip}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie: Zu $u(x, 0) = \varepsilon\sin nx$ gehört die Lösung $u = \varepsilon e^{-kn^{2}t}\sin nx$ auf $[0, \pi]$. Wie groß ist $u$ bei $t = -T$? Folgern Sie, dass das Rückwärtsproblem nicht stetig von den Daten abhängt.
+\item Vorwärts: Zeigen Sie mit derselben Formel, dass hochfrequente Störungen schnell verschwinden --- die Gleichung glättet. Welche Konsequenz hat das für die Messung der Anfangstemperatur aus späteren Daten?
+\item Maximumprinzip: Begründen Sie (ohne vollen Beweis), warum $u$ sein Maximum auf dem parabolischen Rand ($t = 0$ oder $x\in\{0, L\}$) annimmt. Was bedeutet das für die Eindeutigkeit vorwärts?
+\item Die Wellengleichung ist zeitumkehrbar ($t\to-t$ lässt sie invariant), die Wärmeleitungsgleichung nicht. Welcher Term ist verantwortlich, und was hat das mit dem zweiten Hauptsatz zu tun?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 13
+\stupser{gruen}{(b) $G(\vec x, \vec y) = \frac1{2\pi}\bigl(\ln|\vec x - \vec y| - \ln|\vec x - \vec y^{*}|\bigr)$ mit dem Spiegelpunkt $\vec y^{*} = (y_1, -y_2)$. Auf dem Rand $x_2 = 0$ sind beide Abstände gleich.}{22pt}
+\begin{karte}{gruen}{9.29}{\typwerk}{\meta{3}{25 min}{Band 9, Kap.\ 13, Aufgabe 13.1}}
+\kartentitel{Rechteck, Halbebene, Brownsche Bewegung}
+\worum{Die Laplacegleichung: Separation auf dem Rechteck, Spiegelung für die Halbebene --- und die überraschende Deutung: $u(\vec x)$ ist der Erwartungswert der Randwerte, gesehen von einem Zufallsläufer, der in $\vec x$ startet.}
+\methoden{Separationsansatz, Fourierreihe, Spiegelungsmethode, Greensche Funktion, Poissonkern, Brownsche Bewegung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $\Delta u = 0$ auf $[0, a]\times[0, b]$, $u = 0$ auf drei Seiten, $u(x, b) = g(x)$: Lösen Sie durch Separation. Warum treten $\sinh$-Funktionen auf?
+\item Bestimmen Sie die Greensche Funktion der oberen Halbebene durch Spiegelung und leiten Sie die Poissonformel $u(x_1, x_2) = \frac{x_2}\pi\int_{-\infty}^{\infty}\frac{g(t)}{(x_1 - t)^{2} + x_2^{2}}\,dt$ her.
+\item Erklären Sie, warum $u(\vec x) = \mathbb E\bigl[g(B_\tau)\bigr]$ (Brownsche Bewegung ab $\vec x$, $\tau$ = Austrittszeit) harmonisch ist mit Randwerten $g$. Welche Eigenschaft harmonischer Funktionen steckt dahinter?
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Mittelwerteigenschaft: $u(\vec a) = \frac1{2\pi}\int_0^{2\pi}u(\vec a + r e^{i\varphi})\,d\varphi$. Für $u = x^{2} - y^{2}$ und $\vec a = (a, b)$: $\int\cos^{2}\varphi = \int\sin^{2}\varphi$, die gemischten Terme fallen weg.}{22pt}
+\begin{karte}{tief}{9.30}{\typtypisch}{\meta{2}{15 min}{Band 9, Kap.\ 13}}
+\kartentitel{Mittelwert und Maximum}
+\worum{Harmonische Funktionen sind in jedem Punkt gleich ihrem Mittelwert auf jedem Kreis um den Punkt. Daraus folgt das Maximumprinzip, daraus die Eindeutigkeit des Dirichletproblems, daraus die Stabilität. Eine Kette, die man einmal selbst durchgehen sollte.}
+\methoden{Harmonische Funktionen, Mittelwerteigenschaft, Maximumprinzip, Eindeutigkeitsbeweis, Trigonometrie}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Prüfen Sie, welche der Funktionen harmonisch sind: $x^{2} - y^{2}$, $xy$, $x^{2} + y^{2}$, $e^{x}\cos y$, $\ln(x^{2} + y^{2})$ (wo?), $x^{3} - 3xy^{2}$.
+\item Verifizieren Sie die Mittelwerteigenschaft für $u = x^{2} - y^{2}$ auf dem Kreis um $(a, b)$ mit Radius $r$, und zeigen Sie, dass sie für $x^{2} + y^{2}$ verletzt ist.
+\item Folgern Sie aus der Mittelwerteigenschaft das starke Maximumprinzip: Nimmt $u$ auf einem zusammenhängenden Gebiet ein inneres Maximum an, ist $u$ konstant.
+\item Folgern Sie: Das Dirichletproblem auf einem beschränkten Gebiet hat höchstens eine Lösung, und $\max|u_1 - u_2|\le\max_{\partial\Omega}|g_1 - g_2|$ (Stabilität).
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 14
+\stupser{gruen}{(c) Explizit: $y_{n} = (1 - 50h)^{n}$, stabil nur für $h < 0{,}04$. Implizit: $y_n = (1 + 50h)^{-n}$, stabil für jedes $h$. Beide haben Ordnung $1$.}{22pt}
+\begin{karte}{gruen}{9.31}{\typwerk}{\meta{2}{25 min}{Band 9, Kap.\ 14, Aufgabe 14.1}}
+\kartentitel{Schwache Ableitung, finite Elemente, steifes Problem}
+\worum{Drei Stücke moderner Theorie und Praxis: Ableitungen im schwachen Sinn (und wo sie aufhören zu existieren), die Steifigkeitsmatrix der finiten Elemente, und der Grund, warum man für steife Probleme implizite Verfahren braucht.}
+\methoden{Schwache Ableitung, Sobolev-Raum, Finite Elemente, Steifigkeitsmatrix, Euler-Verfahren, Stabilität numerischer Verfahren}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie die schwache Ableitung von $H(x) = 0$ für $x < 0$, $1$ für $x\ge0$ auf $(-1, 1)$ --- falls sie existiert. Liegt $H$ in $W^{1,p}(-1, 1)$? Und $|x|$?
+\item Finite Elemente für $-u'' = f$ auf $(0, 1)$, $u(0) = u(1) = 0$ mit Hutfunktionen auf einem Gitter der Weite $h$: Stellen Sie die schwache Form auf und berechnen Sie die Steifigkeitsmatrix. Was fällt im Vergleich zu finiten Differenzen auf?
+\item $\dot y = -50y$, $y(0) = 1$: Vergleichen Sie explizites und implizites Euler-Verfahren für $h = 0{,}05$, $h = 0{,}025$ und $h = 0{,}01$ nach $t = 1$ mit der exakten Lösung. Wo liegt die Stabilitätsgrenze des expliziten Verfahrens?
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Für $y' = y$, $h = 0{,}1$: Euler $1{,}1$; Heun $1{,}105$; RK4 $1{,}1051708$; exakt $e^{0{,}1} = 1{,}1051709$. Die Fehler verhalten sich wie $h^{2}$, $h^{3}$, $h^{5}$ pro Schritt.}{22pt}
+\begin{karte}{tief}{9.32}{\typtypisch}{\meta{1}{10 min}{Band 9, Kap.\ 14}}
+\kartentitel{Ein Schritt von Hand}
+\worum{Man versteht ein numerisches Verfahren, wenn man einen Schritt von Hand gerechnet hat. Für $y' = y$ lässt sich jeder Schritt mit der Exponentialreihe vergleichen --- und man sieht, welche Potenzen von $h$ ein Verfahren richtig macht.}
+\methoden{Euler-Verfahren, Heun-Verfahren, Runge-Kutta-Verfahren, Konvergenzordnung, Potenzreihe}
+Für $y' = y$, $y(0) = 1$, $h = 0{,}1$:
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Rechnen Sie einen Schritt mit dem expliziten Euler-Verfahren, dem Heun-Verfahren ($k_1 = f(y_n)$, $k_2 = f(y_n + hk_1)$, $y_{n+1} = y_n + \frac h2(k_1 + k_2)$) und dem klassischen Runge--Kutta-Verfahren vierter Ordnung.
+\item Vergleichen Sie mit $e^{h} = 1 + h + \frac{h^{2}}2 + \frac{h^{3}}6 + \frac{h^{4}}{24} + \dots$: Bis zu welcher Potenz von $h$ stimmt jedes Verfahren? Welche Konvergenzordnung folgt daraus?
+\item Nach zehn Schritten ($t = 1$): Was liefert Euler, was Heun, was RK4 (Formel $y_{10} = (\text{Faktor})^{10}$)? Vergleichen Sie mit $e = 2{,}71828$.
+\item Wie viele Funktionsauswertungen kostet jedes Verfahren pro Schritt, und was folgt für die Wahl bei vorgegebener Genauigkeit?
+\end{enumerate}
+\end{karte}

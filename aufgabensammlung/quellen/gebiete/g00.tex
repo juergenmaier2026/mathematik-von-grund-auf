@@ -1,0 +1,462 @@
+\setgebiet{1}{Schulmathematik}{tief}
+\chapter{Schulmathematik}
+\marginnote{\small\itshape\color{grau}\textbf{Sie brauchen:} Band 0, Kapitel 1--14. Nichts sonst --- dieses Gebiet ist der Einstieg, und seine Aufgaben setzen nur die Schule voraus.}[12pt]
+\worum{Die Schulmathematik ist das Gebiet, in dem die meisten Fehler des Studiums gemacht werden --- nicht aus Unkenntnis, sondern aus Gewohnheit: Minus vor der Klammer, Brüche addieren, Wurzeln ziehen, durch $x$ kürzen. Die Aufgaben hier üben zuerst das Handwerk (Typisch), dann die Fallen (Stolperstein), zuletzt die Aufgaben des Bandes selbst.}
+
+\section{Was Sie hier üben}
+\begin{center}
+{\footnotesize\sffamily\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lP{4.9cm}lcll@{}}
+\toprule
+\textbf{Nr.} & \textbf{Titel} & \textbf{Sorte} & \textbf{Grad} & \textbf{Zeit} & \textbf{Band/Kap.}\\
+\midrule
+0.1 & Minus, Klammer, Quadrat & \typtypisch & \grad1 & 10 min & 0/1\\
+0.2 & Warum $-2^{2} = -4$ ist & \typstolper & \grad1 & 10 min & 0/1\\
+0.3 & $\sqrt2$ ist nicht rational & \typwerk & \grad2 & 15 min & 0/1\\
+0.4 & Ein Term mit allem & \typwerk & \grad1 & 10 min & 0/1\\
+0.5 & Der Doppelbruch & \typtypisch & \grad1 & 10 min & 0/2\\
+0.6 & Brüche addiert man nicht so & \typstolper & \grad1 & 10 min & 0/2\\
+0.7 & Kürzen bis zum Ende & \typwerk & \grad1 & 10 min & 0/2\\
+0.8 & Zwanzig Prozent hin, zwanzig zurück & \typtypisch & \grad1 & 10 min & 0/2\\
+0.9 & Potenzen aufräumen & \typtypisch & \grad1 & 10 min & 0/3\\
+0.10 & Die Unbekannte im Exponenten & \typtypisch & \grad2 & 15 min & 0/3\\
+0.11 & Logarithmen ohne Rechner & \typwerk & \grad2 & 15 min & 0/3\\
+0.12 & Ein Prozent am Tag & \typstolper & \grad2 & 15 min & 0/3\\
+0.13 & Ein Bruchterm wird eins & \typwerk & \grad2 & 10 min & 0/4\\
+0.14 & Quadratisch: faktorisieren, ergänzen, lesen & \typtypisch & \grad1 & 15 min & 0/5\\
+0.15 & Vier Gleichungen, vier Methoden & \typwerk & \grad2 & 25 min & 0/5\\
+0.16 & Wurzeln, Beträge, Scheinlösungen & \typstolper & \grad2 & 15 min & 0/5\\
+0.17 & Zwei Gleichungen, zwei Unbekannte & \typtypisch & \grad1 & 10 min & 0/6\\
+0.18 & Mal minus, durch $x$ & \typstolper & \grad1 & 10 min & 0/6\\
+0.19 & Betrag und Bruch in Ungleichungen & \typwerk & \grad2 & 15 min & 0/6\\
+0.20 & Eine Funktion lesen & \typtypisch & \grad1 & 15 min & 0/7\\
+0.21 & Umkehren und zurück & \typwerk & \grad2 & 15 min & 0/7\\
+0.22 & Halbwertszeit & \typwerk & \grad2 & 15 min & 0/8\\
+0.23 & Hin mit 60, zurück mit 40 & \typstolper & \grad1 & 10 min & 0/8\\
+0.24 & Der halbe Kegel & \typwerk & \grad2 & 15 min & 0/9\\
+0.25 & Am Einheitskreis & \typtypisch & \grad1 & 10 min & 0/10\\
+0.26 & Ein Dreieck ohne rechten Winkel & \typwerk & \grad2 & 20 min & 0/10\\
+0.27 & Vier Grenzwerte & \typwerk & \grad2 & 15 min & 0/11\\
+0.28 & Tangente, Extrema, Fläche & \typtypisch & \grad2 & 20 min & 0/12\\
+0.29 & Vier Ableitungen & \typwerk & \grad1 & 10 min & 0/12\\
+0.30 & Drei Integrale & \typwerk & \grad2 & 20 min & 0/13\\
+0.31 & Die ungeraden Zahlen & \typwerk & \grad2 & 15 min & 0/14\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\section{Woran Sie merken, dass Sie es können}
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item Sie setzen bei $-x^{2}$ und $(-x)^{2}$ nie mehr zur falschen Rechnung an --- und können erklären, warum der Unterschied kein Konventionsstreit ist.
+\item Sie kürzen nur Faktoren, addieren Brüche nur gleichnamig, ziehen Wurzeln nur aus Produkten --- und sehen die drei Verbote als eine einzige Regel.
+\item Sie machen bei jeder Gleichung die Probe, und bei jeder Umformung, die nicht umkehrbar ist (Quadrieren, mal $x$), wissen Sie, dass die Probe Pflicht ist.
+\item Sie sehen einer Funktion ihren Definitionsbereich an, bevor Sie rechnen.
+\end{itemize}
+
+\section{Aufgaben}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 1: Zahlen
+\stupser{tief}{Zwei Fragen vor jeder Rechnung: Worauf bezieht sich das Quadrat --- auf die Zahl oder auf das Minus? Und was steht in der Klammer, bevor ich sie auflöse?}{22pt}
+\begin{karte}{tief}{0.1}{\typtypisch}{\meta{1}{10 min}{Band 0, Kap.\ 1}}
+\kartentitel{Minus, Klammer, Quadrat}
+\worum{Vorzeichen und Klammern sind die häufigste Fehlerquelle in jeder Rechnung des ersten Semesters. Hier wird einmal langsam gemacht, was später automatisch gehen muss.}
+\methoden{Vorzeichenregeln, Rechenreihenfolge}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $-3^{2}$, $(-3)^{2}$, $-(-3)^{2}$ und $(-3)^{3}$.
+\item Berechnen Sie $5 - 2\cdot(3 - 7)^{2}$ und $5 - 2\cdot3 - 7^{2}$.
+\item Lösen Sie die Klammern auf: $4 - (2x - (3 - x))$.
+\item Formulieren Sie die Regel, die alle drei Teilaufgaben entscheidet, in einem Satz.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Schreiben Sie $-2^{2}$ als Produkt: Welche beiden Faktoren sind es? Dann ist die Frage, ob $(-1)\cdot2^{2}$ oder $((-1)\cdot2)^{2}$ gemeint ist.}{22pt}
+\begin{karte}{akzent}{0.2}{\typstolper}{\meta{1}{10 min}{Band 0, Kap.\ 1}}
+\kartentitel{Warum $-2^{2} = -4$ ist}
+\worum{Jeder Taschenrechner und jedes Lehrbuch rechnen $-2^{2} = -4$. Viele Studierende halten das für eine Spitzfindigkeit. Es ist keine: Dahinter steht die Frage, was ein Vorzeichen ist.}
+\methoden{Vorzeichenregeln, Rechenreihenfolge, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Was ist $-2^{2}$ nach der Regel \enquote{Potenz vor Punkt vor Strich}? Was wäre es, wenn das Minus zur Zahl gehörte?
+\item Berechnen Sie $(a - b)^{2}$ für $a = 5$, $b = 3$ einmal richtig und einmal \enquote{gliedweise} als $a^{2} - b^{2}$. Woher kommt der Unterschied?
+\item Welche der folgenden Gleichungen gilt für alle $a, b$: $(ab)^{2} = a^{2}b^{2}$, $(a + b)^{2} = a^{2} + b^{2}$, $\sqrt{ab} = \sqrt a\sqrt b$ (für $a, b\ge0$), $\sqrt{a + b} = \sqrt a + \sqrt b$?
+\item Was haben die beiden falschen gemeinsam?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Nehmen Sie an, es ginge doch --- $\sqrt2 = p/q$, vollständig gekürzt. Dann quadrieren Sie und fragen, ob $p$ gerade ist.}{22pt}
+\begin{karte}{gruen}{0.3}{\typwerk}{\meta{2}{15 min}{Band 0, Kap.\ 1, Aufgabe 1.1}}
+\kartentitel{$\sqrt2$ ist nicht rational}
+\worum{Die Griechen entdeckten, dass die Diagonale des Einheitsquadrats mit keiner Seite ein gemeinsames Maß hat. Der Beweis ist der erste Widerspruchsbeweis, den die meisten sehen --- und das Muster jedes weiteren.}
+\methoden{Widerspruchsbeweis, Teilbarkeitsargument}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Nehmen Sie an, $\sqrt2 = p/q$ mit natürlichen Zahlen $p, q$ ohne gemeinsamen Teiler. Was folgt für $p^{2}$?
+\item Zeigen Sie: Ist $p^{2}$ gerade, so ist $p$ gerade. (Was wäre $p^{2}$, wenn $p$ ungerade wäre?)
+\item Schreiben Sie $p = 2m$ und folgern Sie, dass auch $q$ gerade ist. Wo ist der Widerspruch?
+\item Wo bricht derselbe Beweis für $\sqrt4$ zusammen?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Von innen nach außen: erst die innersten Klammern, dann Potenzen, dann Punkt, dann Strich. Schreiben Sie jede Zwischenstufe in eine eigene Zeile.}{22pt}
+\begin{karte}{gruen}{0.4}{\typwerk}{\meta{1}{10 min}{Band 0, Kap.\ 1, Aufgabe 1.2}}
+\kartentitel{Ein Term mit allem}
+\worum{Ein einziger Zahlenterm, der alle Rechenregeln auf einmal braucht. Nicht das Ergebnis ist das Ziel, sondern der lückenlose Weg.}
+\methoden{Rechenreihenfolge, Terme vereinfachen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie schrittweise und begründen Sie jeden Schritt:
+\[ -2^{2} + (-3)^{2}\cdot\bigl(4 - 7\bigr) : 3 - \bigl(-5 + 2\cdot(-4)\bigr). \]
+\item An welcher Stelle hätte die häufigste Fehlrechnung ein anderes Ergebnis geliefert, und welches?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 2: Brüche
+\stupser{tief}{Zähler und Nenner getrennt zu je einem Bruch machen; dann ist ein Doppelbruch eine Division, und Division durch einen Bruch ist Multiplikation mit dem Kehrwert.}{22pt}
+\begin{karte}{tief}{0.5}{\typtypisch}{\meta{1}{10 min}{Band 0, Kap.\ 2}}
+\kartentitel{Der Doppelbruch}
+\worum{Brüche in Brüchen kommen überall vor, wo etwas normiert wird: in Wahrscheinlichkeiten, in der Statistik, in Widerständen. Wer sie sicher auflöst, spart jede Woche eine Viertelstunde.}
+\methoden{Bruchrechnung, Doppelbruch auflösen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Vereinfachen Sie $\dfrac{\frac23 + \frac14}{\frac56 - \frac12}$.
+\item Vereinfachen Sie $\dfrac{1}{\frac1a + \frac1b}$ zu einem einzigen Bruch. (Das ist der Gesamtwiderstand zweier paralleler Widerstände.)
+\item Für welche $a, b$ ist (b) nicht definiert?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Zeichnen Sie $\frac12$ und $\frac13$ als Streifen in einem Rechteck, das in sechs Felder geteilt ist.}{22pt}
+\begin{karte}{akzent}{0.6}{\typstolper}{\meta{1}{10 min}{Band 0, Kap.\ 2}}
+\kartentitel{Brüche addiert man nicht so}
+\worum{$\frac12 + \frac13 = \frac25$ ist der verbreitetste Fehler der Bruchrechnung --- und er hat eine Logik, die man verstehen muss, um ihn loszuwerden.}
+\methoden{Bruchrechnung, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Begründen Sie mit einer Zeichnung, dass $\frac12 + \frac13 = \frac56$ ist, und lesen Sie an derselben Zeichnung ab, warum $\frac25$ nicht sein kann.
+\item Die Zahl $\frac{1 + 1}{2 + 3} = \frac25$ hat trotzdem eine Bedeutung. Welche? (Denken Sie an Treffer von Würfen: $1$ von $2$ und $1$ von $3$.)
+\item Darf man in $\dfrac{x + 2}{x + 4}$ die $2$ gegen die $4$ kürzen? Prüfen Sie mit $x = 2$.
+\item Formulieren Sie, was man kürzen darf, in einem Satz, der das Wort \emph{Faktor} enthält.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Erst die Klammern zu je einem Bruch zusammenfassen, dann erst dividieren. Und nie Zähler gegen Nenner kürzen, solange noch ein Plus darin steht.}{22pt}
+\begin{karte}{gruen}{0.7}{\typwerk}{\meta{1}{10 min}{Band 0, Kap.\ 2, Aufgabe 2.1}}
+\kartentitel{Kürzen bis zum Ende}
+\worum{Vier Rechenarten in einem Ausdruck. Die Aufgabe ist einfach, wenn man die Reihenfolge einhält, und hoffnungslos, wenn nicht.}
+\methoden{Faktorisieren, Kürzen, Definitionsbereich prüfen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $\Bigl(\dfrac34 - \dfrac56\Bigr) : \Bigl(\dfrac23 + \dfrac1{12}\Bigr)\cdot\dfrac59$ und kürzen Sie vollständig.
+\item Prüfen Sie das Ergebnis mit Dezimalzahlen auf drei Stellen.
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Eine Erhöhung um $20\,\%$ ist eine Multiplikation mit $1{,}2$. Schreiben Sie jede Prozentänderung als Faktor --- dann ist \enquote{hintereinander} ein Produkt.}{22pt}
+\begin{karte}{tief}{0.8}{\typtypisch}{\meta{1}{10 min}{Band 0, Kap.\ 2}}
+\kartentitel{Zwanzig Prozent hin, zwanzig zurück}
+\worum{Prozentrechnung ist Multiplikation mit Faktoren nahe $1$. Wer das einmal gesehen hat, rechnet Preisänderungen, Zinsen und Wachstumsraten mit derselben Handbewegung.}
+\methoden{Prozentrechnung, Wachstumsfaktor}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Ein Preis steigt um $20\,\%$ und fällt danach um $20\,\%$. Wie viel Prozent des Ausgangspreises bleiben?
+\item Um wie viel Prozent muss ein Preis nach einer Erhöhung um $20\,\%$ sinken, damit er wieder der alte ist?
+\item Ein Medikament wird um $15\,\%$ teurer, im Folgejahr noch einmal um $15\,\%$. Ist das zusammen $30\,\%$? Begründen Sie mit Faktoren.
+\item Eine Arbeitslosenquote steigt von $5\,\%$ auf $6\,\%$. Um wie viel Prozent ist sie gestiegen --- und um wie viele Prozent\emph{punkte}?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 3: Potenzen, Wurzeln, Logarithmen
+\stupser{tief}{Erst jede Klammer einzeln potenzieren (jeder Faktor bekommt den Exponenten), dann gleiche Basen zusammenfassen: Exponenten addieren beim Multiplizieren, subtrahieren beim Dividieren.}{22pt}
+\begin{karte}{tief}{0.9}{\typtypisch}{\meta{1}{10 min}{Band 0, Kap.\ 3}}
+\kartentitel{Potenzen aufräumen}
+\worum{Fünf Potenzgesetze, und alle folgen aus der Bedeutung von $a^{n}$ als Produkt. Die Aufgabe übt, sie ohne Nachdenken anzuwenden --- und einmal mit Nachdenken zu begründen.}
+\methoden{Potenzgesetze}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Vereinfachen Sie $\dfrac{(2a^{2}b^{-1})^{3}\cdot(ab^{2})^{-2}}{4a}$ zu einem Ausdruck ohne Klammern und mit positiven Exponenten.
+\item Schreiben Sie $\sqrt[3]{x^{2}}\cdot\sqrt x$ als eine Potenz von $x$.
+\item Warum ist $a^{0} = 1$ und $a^{-n} = 1/a^{n}$? Leiten Sie beides aus $a^{m}\cdot a^{n} = a^{m + n}$ ab.
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Isolieren Sie die Potenz, dann erst logarithmieren. Und ein Logarithmus einer Summe lässt sich nicht aufspalten --- bei (c) muss man vorher zusammenfassen.}{22pt}
+\begin{karte}{tief}{0.10}{\typtypisch}{\meta{2}{15 min}{Band 0, Kap.\ 3}}
+\kartentitel{Die Unbekannte im Exponenten}
+\worum{Wann hat sich eine Bakterienkultur verdoppelt, wann ist eine Dosis auf ein Zehntel abgebaut? Immer, wenn die Unbekannte im Exponenten steht, ist der Logarithmus das Werkzeug, das sie herunterholt.}
+\methoden{Logarithmieren, Exponentialgleichung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $5\cdot2^{x} = 80$ ohne Rechner.
+\item Lösen Sie $3^{2x - 1} = 7$ auf drei Dezimalen.
+\item Lösen Sie $\ln x + \ln(x - 3) = \ln10$ und prüfen Sie beide Kandidaten.
+\item Warum darf man in (c) nicht $\ln x + \ln(x - 3) = \ln(2x - 3)$ schreiben?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$\log_ab$ fragt: $a$ hoch was ist $b$? Schreiben Sie $b$ als Potenz von $a$, dann steht die Antwort da. Für (c): $a^{\log_ab} = b$, beide Seiten mit $\ln$.}{22pt}
+\begin{karte}{gruen}{0.11}{\typwerk}{\meta{2}{15 min}{Band 0, Kap.\ 3, Aufgabe 3.1}}
+\kartentitel{Logarithmen ohne Rechner}
+\worum{Der Logarithmus ist die Umkehrung des Potenzierens --- nicht mehr. Wer das festhält, braucht für die meisten Aufgaben keinen Rechner und für die übrigen nur eine Formel.}
+\methoden{Logarithmengesetze}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie $\log_264$, $\log_3\frac19$, $\log_5\sqrt5$.
+\item Vereinfachen Sie $\log_a(x^{3}y) - 2\log_ax + \log_a\frac1y$.
+\item Leiten Sie die Basisumrechnung $\log_ab = \dfrac{\ln b}{\ln a}$ her und berechnen Sie $\log_210$.
+\item Nach welcher Zeit hat sich ein Kapital bei $3\,\%$ Zins verdoppelt? Vergleichen Sie mit der Faustregel \enquote{$70$ durch Zinssatz}.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Hundertmal $1\,\%$ dazu heißt hundertmal mal $1{,}01$. Das ist eine Potenz, keine Summe --- und $1{,}01^{100}$ ist nicht $2$.}{22pt}
+\begin{karte}{akzent}{0.12}{\typstolper}{\meta{2}{15 min}{Band 0, Kap.\ 3}}
+\kartentitel{Ein Prozent am Tag}
+\worum{Die Intuition rechnet linear: ein Prozent am Tag, hundert Tage, hundert Prozent. Exponentielles Wachstum tut etwas anderes, und der Unterschied entscheidet über Epidemien, Zinsen und Tumorvolumina.}
+\methoden{Exponentielles Wachstum, Wachstumsfaktor}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Eine Größe wächst um $1\,\%$ pro Tag. Um wie viel Prozent ist sie nach $100$ Tagen gewachsen?
+\item Nach wie vielen Tagen hat sie sich verdoppelt? Prüfen Sie die Faustregel $70/p$.
+\item Eine Seerose bedeckt am Tag $30$ den ganzen Teich; sie verdoppelt ihre Fläche täglich. An welchem Tag war der Teich halb bedeckt? Zu einem Viertel?
+\item Schreiben Sie das Wachstum als Funktion $N(t) = N_0\cdot q^{t}$ und erklären Sie an der Formel, warum \enquote{Zuwachs pro Tag} keine feste Zahl ist.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 4: Terme
+\stupser{gruen}{Jeden der vier Ausdrücke faktorisieren --- binomische Formeln, Ausklammern ---, bevor irgendetwas gekürzt wird. Der Definitionsbereich wird abgelesen, bevor man kürzt, nicht danach.}{22pt}
+\begin{karte}{gruen}{0.13}{\typwerk}{\meta{2}{10 min}{Band 0, Kap.\ 4, Aufgabe 4.1}}
+\kartentitel{Ein Bruchterm wird eins}
+\worum{Bruchterme vereinfachen heißt faktorisieren und Faktoren kürzen --- und dabei festhalten, welche $x$ man ausschließen musste. Das Ergebnis dieser Aufgabe ist so einfach, dass man misstrauisch werden sollte.}
+\methoden{Faktorisieren, Kürzen, Definitionsbereich prüfen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Vereinfachen Sie $\dfrac{x^{2} - 9}{x^{2} - 6x + 9}\cdot\dfrac{x^{2} - 3x}{x^{2} + 3x}$ vollständig.
+\item Geben Sie den Definitionsbereich an. Warum ist er nicht $\mathbb R$, obwohl das Ergebnis es nahelegt?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 5: Gleichungen
+\stupser{tief}{Zwei Zahlen, deren Produkt $6$ und deren Summe $5$ ist --- das ist (a). Für (b): die Hälfte des Koeffizienten von $x$ quadrieren und addieren, dann wieder abziehen.}{22pt}
+\begin{karte}{tief}{0.14}{\typtypisch}{\meta{1}{15 min}{Band 0, Kap.\ 5}}
+\kartentitel{Quadratisch: faktorisieren, ergänzen, lesen}
+\worum{Die quadratische Gleichung hat drei Gesichter --- Produkt von Linearfaktoren, Scheitelpunktform, Formel ---, und jedes beantwortet eine andere Frage. Wer alle drei kennt, wählt das passende.}
+\methoden{Quadratische Gleichung, Quadratische Ergänzung, Faktorisieren}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $x^{2} - 5x + 6 = 0$ durch Faktorisieren (Vieta).
+\item Bringen Sie $f(x) = 2x^{2} - 8x + 3$ durch quadratische Ergänzung auf Scheitelpunktform und lesen Sie Scheitel und Wertebereich ab.
+\item Wie viele Nullstellen hat $f$? Entscheiden Sie an der Scheitelpunktform, ohne die Formel.
+\item Für welches $c$ hat $x^{2} - 6x + c = 0$ genau eine Lösung?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Vier Gleichungen, vier Wege: Teilen und Vieta; Hauptnenner und Probe; Quadrieren und Probe; Substitution $u = 2^{x}$.}{22pt}
+\begin{karte}{gruen}{0.15}{\typwerk}{\meta{2}{25 min}{Band 0, Kap.\ 5, Aufgabe 5.1}}
+\kartentitel{Vier Gleichungen, vier Methoden}
+\worum{Eine Aufgabe, in der jede Teilaufgabe eine andere Technik verlangt --- und in der zwei der vier eine Scheinlösung erzeugen, die nur die Probe entlarvt.}
+\methoden{Gleichungen lösen, Substitution (Gleichung), Faktorisieren}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $2x^{2} - 10x + 12 = 0$
+\item $\dfrac{x}{x - 2} + \dfrac{3}{x + 2} = \dfrac{8}{x^{2} - 4}$
+\item $\sqrt{2x + 3} = x$
+\item $4^{x} - 5\cdot2^{x} + 4 = 0$
+\end{enumerate}
+Machen Sie jeweils die Probe, und sagen Sie bei (b) und (c), warum sie dort unverzichtbar ist.
+\end{karte}
+
+\stupser{akzent}{$\sqrt{x^{2}}$ ist die \emph{nichtnegative} Zahl, deren Quadrat $x^{2}$ ist. Für $x = -4$ ist das nicht $-4$.}{22pt}
+\begin{karte}{akzent}{0.16}{\typstolper}{\meta{2}{15 min}{Band 0, Kap.\ 5}}
+\kartentitel{Wurzeln, Beträge, Scheinlösungen}
+\worum{Drei Irrtümer mit derselben Wurzel: dass $\sqrt{x^{2}} = x$ sei, dass $\sqrt{a + b}$ sich aufspalten ließe, und dass Quadrieren eine Gleichung unverändert lasse.}
+\methoden{Probe, Scheinlösungen, Quadrieren}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $\sqrt{x^{2}}$ für $x = 4$ und $x = -4$. Wie lautet $\sqrt{x^{2}}$ für beliebiges $x$?
+\item Lösen Sie $x^{2} = 9$. Wie viele Lösungen, und warum nicht nur eine?
+\item Vergleichen Sie $\sqrt{a^{2} + b^{2}}$ mit $a + b$ für $a = 3$, $b = 4$. Für welche $a, b\ge0$ sind beide gleich?
+\item Lösen Sie $\sqrt{x + 2} = x$ durch Quadrieren. Welche der Lösungen der quadratischen Gleichung erfüllt die ursprüngliche? Erklären Sie an der Zeichnung der beiden Graphen, woher die zweite kommt.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 6: Ungleichungen und Systeme
+\stupser{tief}{Eine Gleichung nach einer Unbekannten auflösen und in die andere einsetzen --- oder die Gleichungen so vervielfachen, dass eine Unbekannte beim Addieren verschwindet. Beides muss dasselbe geben.}{22pt}
+\begin{karte}{tief}{0.17}{\typtypisch}{\meta{1}{10 min}{Band 0, Kap.\ 6}}
+\kartentitel{Zwei Gleichungen, zwei Unbekannte}
+\worum{Lineare Gleichungssysteme sind der Anfang der linearen Algebra (Band 2). Hier zwei Unbekannte, zwei Methoden, und die Frage, wann es keine oder unendlich viele Lösungen gibt.}
+\methoden{Lineare Gleichungssysteme, Einsetzen und Eliminieren, Fallunterscheidung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $2x + 3y = 12$, $x - y = 1$ durch Einsetzen und noch einmal durch Addition.
+\item Was passiert bei $2x + 3y = 12$, $4x + 6y = 20$? Und bei $4x + 6y = 24$?
+\item Deuten Sie die drei Fälle als Lagen zweier Geraden.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Bei (a): Multiplizieren Sie beide Seiten von $2 < 3$ mit $-1$. Was passiert mit dem Zeichen? Bei (b): Bevor Sie durch $x$ teilen --- könnte $x$ null sein?}{22pt}
+\begin{karte}{akzent}{0.18}{\typstolper}{\meta{1}{10 min}{Band 0, Kap.\ 6}}
+\kartentitel{Mal minus, durch $x$}
+\worum{Zwei Umformungen, die aussehen wie bei Gleichungen und sich anders verhalten: Multiplikation mit einer negativen Zahl dreht Ungleichungen um, Division durch $x$ verschluckt Lösungen.}
+\methoden{Ungleichungen, Fallunterscheidung, Division durch null vermeiden}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $-2x + 5 > 11$. Prüfen Sie Ihre Lösungsmenge mit einer Zahl aus ihr und einer außerhalb.
+\item Lösen Sie $x^{2} = 3x$. Warum ist $x = 3$ nicht die ganze Antwort?
+\item Lösen Sie $\dfrac{6}{x} > 2$. Warum darf man nicht einfach mit $x$ multiplizieren?
+\item Formulieren Sie beide Regeln so, dass sie die Fehlerquelle nennen.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$|2x - 6|\le4$ heißt: $2x - 6$ liegt zwischen $-4$ und $4$. Für (b): Fallunterscheidung nach dem Vorzeichen von $x - 3$, bevor Sie multiplizieren.}{22pt}
+\begin{karte}{gruen}{0.19}{\typwerk}{\meta{2}{15 min}{Band 0, Kap.\ 6, Aufgabe 6.1}}
+\kartentitel{Betrag und Bruch in Ungleichungen}
+\worum{Beträge heißen \enquote{Abstand}, Brüche heißen \enquote{Vorzeichen des Nenners beachten}. Beide Ungleichungen sind kurz --- und beide gehen schief, wenn man sie wie Gleichungen behandelt.}
+\methoden{Ungleichungen, Betrag, Fallunterscheidung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $|2x - 6|\le4$
+\item $\dfrac{x + 1}{x - 3}\ge2$
+\end{enumerate}
+Zeichnen Sie beide Lösungsmengen auf der Zahlengeraden.
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 7: Funktionen
+\stupser{tief}{Definitionsbereich: Was darf unter der Wurzel stehen? Wertebereich: Was kommt kleinstenfalls heraus? Umkehren: $y$ und $x$ tauschen, nach $y$ auflösen --- und den Bereich mitnehmen.}{22pt}
+\begin{karte}{tief}{0.20}{\typtypisch}{\meta{1}{15 min}{Band 0, Kap.\ 7}}
+\kartentitel{Eine Funktion lesen}
+\worum{Eine Funktion ist eine Zuordnung mit einem Definitionsbereich --- und der ist Teil der Funktion, nicht Beiwerk. Die Aufgabe übt, ihn abzulesen, bevor man rechnet.}
+\methoden{Funktionen lesen, Definitionsbereich prüfen, Skizze}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $f(x) = \sqrt{x - 1} + 2$. Bestimmen Sie Definitions- und Wertebereich.
+\item Skizzieren Sie den Graphen aus dem Graphen von $\sqrt x$ durch Verschieben.
+\item Bestimmen Sie die Umkehrfunktion $f^{-1}$ samt ihrem Definitionsbereich, und zeichnen Sie sie in dieselbe Skizze.
+\item Prüfen Sie $f^{-1}(f(5))$ und $f(f^{-1}(3))$.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Eine gebrochen-lineare Funktion ist umkehrbar, weil sie streng monoton auf jedem Ast ist. Welche Zahl kann $f$ nie annehmen? Das ist das Loch im Wertebereich --- und das Loch im Definitionsbereich der Umkehrfunktion.}{22pt}
+\begin{karte}{gruen}{0.21}{\typwerk}{\meta{2}{15 min}{Band 0, Kap.\ 7, Aufgabe 7.1}}
+\kartentitel{Umkehren und zurück}
+\worum{Bei $f(x) = \dfrac{2x - 1}{x + 3}$ ist alles da, was Funktionen schwierig macht: eine Definitionslücke, eine Lücke im Wertebereich, eine Umkehrfunktion mit beidem vertauscht.}
+\methoden{Umkehrfunktion, Definitionsbereich prüfen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie Definitionsbereich und Wertebereich.
+\item Ist $f$ injektiv? Bestimmen Sie $f^{-1}$.
+\item Prüfen Sie das Ergebnis durch Verkettung: $f^{-1}(f(x))$ muss $x$ ergeben.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 8: Funktionstypen
+\stupser{gruen}{Alle sechs Stunden die Hälfte: $N(t) = 400\cdot(\frac12)^{t/6}$. Für \enquote{wann?} den Logarithmus --- und bei (c) geht es ohne, weil $50 = 400/8$ ist.}{22pt}
+\begin{karte}{gruen}{0.22}{\typwerk}{\meta{2}{15 min}{Band 0, Kap.\ 8, Aufgabe 8.1}}
+\kartentitel{Halbwertszeit}
+\worum{Die Elimination eines Medikaments ist exponentieller Zerfall, und die Halbwertszeit ist die natürliche Zeiteinheit dafür. Die Aufgabe stellt das Modell auf und befragt es in beide Richtungen.}
+\methoden{Exponentielles Wachstum, Halbwertszeit, Logarithmieren}
+Ein Medikament hat eine Halbwertszeit von $6$ Stunden; es werden $400$ mg verabreicht.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Stellen Sie die Funktion $N(t)$ auf.
+\item Wie viel ist nach $15$ Stunden noch vorhanden?
+\item Wann sind noch $50$ mg da?
+\item Ab wann liegt die Menge unter der Nachweisgrenze von $1$ mg?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Nehmen Sie eine konkrete Strecke --- $120$ km --- und rechnen Sie die Zeit für Hin- und Rückweg einzeln aus. Der Mittelwert, den Sie suchen, ist Gesamtstrecke durch Gesamtzeit.}{22pt}
+\begin{karte}{akzent}{0.23}{\typstolper}{\meta{1}{10 min}{Band 0, Kap.\ 8}}
+\kartentitel{Hin mit 60, zurück mit 40}
+\worum{Nicht jeder Mittelwert ist das arithmetische Mittel. Wer Geschwindigkeiten, Raten oder Kurse mittelt, nimmt meist den falschen --- und die Aufgabe zeigt, woran man den richtigen erkennt.}
+\methoden{Mittelwerte, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Hinweg $60$ km/h, Rückweg $40$ km/h, gleiche Strecke. Durchschnittsgeschwindigkeit? Warum nicht $50$?
+\item Zeigen Sie, dass das Ergebnis nicht von der Streckenlänge abhängt, und leiten Sie die allgemeine Formel für zwei Geschwindigkeiten $v_1, v_2$ her.
+\item Eine Infusion läuft die erste Hälfte der Menge mit $100$ ml/h, die zweite mit $50$ ml/h. Mittlere Rate?
+\item Wann ist das arithmetische Mittel doch richtig? (Gleiche Strecken oder gleiche Zeiten?)
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 9: Geometrie
+\stupser{gruen}{Der abgeschnittene obere Teil ist ein verkleinerter Kegel. Verkleinert man alle Längen um den Faktor $k$, so das Volumen um $k^{3}$. Welches $k$ halbiert das Volumen?}{22pt}
+\begin{karte}{gruen}{0.24}{\typwerk}{\meta{2}{15 min}{Band 0, Kap.\ 9, Aufgabe 9.1}}
+\kartentitel{Der halbe Kegel}
+\worum{Ähnlichkeit ist die stärkste Idee der Elementargeometrie: Längen skalieren mit $k$, Flächen mit $k^{2}$, Volumina mit $k^{3}$. Die zweite Teilaufgabe ist ohne diese Idee eine Rechnerei und mit ihr eine Zeile.}
+\methoden{Ähnlichkeit, Skalierung}
+Ein Kegel hat den Radius $r = 6$ cm und die Höhe $h = 8$ cm.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie Volumen und Oberfläche.
+\item In welcher Höhe muss man waagerecht schneiden, damit beide Teile gleiches Volumen haben?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 10: Trigonometrie
+\stupser{tief}{Zeichnen Sie den Winkel am Einheitskreis. Der Kosinus ist die $x$-Koordinate, der Sinus die $y$-Koordinate --- und die Vorzeichen stehen im Quadranten.}{22pt}
+\begin{karte}{tief}{0.25}{\typtypisch}{\meta{1}{10 min}{Band 0, Kap.\ 10}}
+\kartentitel{Am Einheitskreis}
+\worum{Sinus und Kosinus sind Koordinaten eines Punktes auf dem Einheitskreis. Wer das Bild vor Augen hat, braucht keine Tabelle für $150^{\circ}$ und keine Formel für die zweite Lösung einer trigonometrischen Gleichung.}
+\methoden{Einheitskreis, Trigonometrie}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie exakt: $\sin150^{\circ}$, $\cos240^{\circ}$, $\tan315^{\circ}$.
+\item Lösen Sie $\sin x = -\frac12$ für $x\in[0, 2\pi)$.
+\item Warum hat $\cos x = \frac12$ in $[0, 2\pi)$ ebenfalls zwei Lösungen, $\sin x = 1$ aber nur eine?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Zwei Seiten und der eingeschlossene Winkel: Kosinussatz für die dritte Seite. Danach Sinussatz --- aber den kleineren der beiden unbekannten Winkel zuerst, damit er sicher spitz ist.}{22pt}
+\begin{karte}{gruen}{0.26}{\typwerk}{\meta{2}{20 min}{Band 0, Kap.\ 10, Aufgabe 10.1}}
+\kartentitel{Ein Dreieck ohne rechten Winkel}
+\worum{Sinus- und Kosinussatz lösen jedes Dreieck. Die Kunst ist die Reihenfolge --- und bei der Gleichung in (c), den gemeinsamen Faktor zu sehen, statt durch ihn zu teilen.}
+\methoden{Trigonometrie, Sinus- und Kosinussatz, Faktorisieren}
+Ein Dreieck hat $a = 7$ cm, $b = 9$ cm und $\gamma = 52^{\circ}$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie die dritte Seite und die beiden anderen Winkel.
+\item Berechnen Sie die Fläche.
+\item Lösen Sie $\sin(2x) = \cos x$ für $x\in[0, 2\pi)$.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 11: Folgen
+\stupser{gruen}{Bei Brüchen durch die höchste Potenz kürzen. Bei Wurzeldifferenzen mit der Summe erweitern. Bei der Reihe: Was ist $q$? Und $0{,}\overline7$ ist eine Reihe mit $q = \frac1{10}$.}{22pt}
+\begin{karte}{gruen}{0.27}{\typwerk}{\meta{2}{15 min}{Band 0, Kap.\ 11, Aufgabe 11.1}}
+\kartentitel{Vier Grenzwerte}
+\worum{Vier Grenzwerte, vier Techniken --- und am Ende der Beweis, dass $0{,}777\ldots$ genau $\frac79$ ist, nicht \enquote{fast}.}
+\methoden{Grenzwerte, Ausklammern, Geometrische Reihe}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $\displaystyle\lim_{n\to\infty}\frac{3n^{2} - 5n + 2}{2n^{2} + 7n}$
+\item $\displaystyle\lim_{n\to\infty}\bigl(\sqrt{n^{2} + n} - n\bigr)$
+\item $\displaystyle\sum_{k = 0}^{\infty}\Bigl(\frac23\Bigr)^{k}$
+\item $0{,}\overline7$ als Bruch, über die geometrische Reihe.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 12: Ableitung
+\stupser{tief}{Die Tangente braucht einen Punkt und eine Steigung --- beides liefert $f$ und $f'$ an der Stelle $2$. Für die Fläche: erst die Nullstellen, dann stückweise integrieren und Beträge nehmen.}{22pt}
+\begin{karte}{tief}{0.28}{\typtypisch}{\meta{2}{20 min}{Band 0, Kap.\ 12--13}}
+\kartentitel{Tangente, Extrema, Fläche}
+\worum{Eine kubische Funktion, an der die ganze Schulanalysis vorkommt: Ableitung als Steigung, Nullstellen der Ableitung als Extrema, Integral als Fläche --- mit dem Vorzeichenproblem, das jeder einmal übersieht.}
+\methoden{Ableitung, Extremwertaufgabe, Integral als Fläche}
+$f(x) = x^{3} - 3x$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie die Tangente an der Stelle $x = 2$.
+\item Bestimmen Sie die Extrema und ihre Art.
+\item Berechnen Sie $\int_0^{2}f(x)\,dx$ und die Fläche zwischen Graph und $x$-Achse über $[0, 2]$. Warum sind das zwei verschiedene Zahlen?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Jede Funktion erst umschreiben: $2/x = 2x^{-1}$, $\sqrt x = x^{1/2}$. Dann die Regel wählen --- Summe, Produkt, Quotient, Kette --- bevor Sie rechnen.}{22pt}
+\begin{karte}{gruen}{0.29}{\typwerk}{\meta{1}{10 min}{Band 0, Kap.\ 12, Aufgabe 12.1}}
+\kartentitel{Vier Ableitungen}
+\worum{Potenz-, Produkt-, Quotienten- und Kettenregel, je einmal. Die Aufgabe ist Routine --- und Routine ist hier das Ziel.}
+\methoden{Ableitungsregeln, Kettenregel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $f(x) = 3x^{4} - \dfrac2x + 5\sqrt x$
+\item $g(x) = x^{2}e^{-x}$
+\item $h(x) = \dfrac{\sin x}{x}$
+\item $k(x) = \sqrt{3x^{2} + 1}$
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 13: Integral
+\stupser{gruen}{Stammfunktion, obere Grenze minus untere. Bei (b): erst die Schnittpunkte, dann \enquote{oben minus unten}. Bei (c): Die Kugel entsteht, wenn der Halbkreis $y = \sqrt{r^{2} - x^{2}}$ um die $x$-Achse rotiert.}{22pt}
+\begin{karte}{gruen}{0.30}{\typwerk}{\meta{2}{20 min}{Band 0, Kap.\ 13, Aufgabe 13.1}}
+\kartentitel{Drei Integrale}
+\worum{Ein bestimmtes Integral, eine Fläche zwischen zwei Kurven, ein Rotationsvolumen --- drei Lesarten desselben Hauptsatzes.}
+\methoden{Hauptsatz der Integralrechnung, Integral als Fläche, Rotationsvolumen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $\displaystyle\int_1^{3}\Bigl(2x^{2} - \frac4{x + 1}\Bigr)dx$
+\item Die Fläche zwischen $f(x) = x^{2}$ und $g(x) = 2x$.
+\item Das Volumen einer Kugel vom Radius $r$ durch Rotation.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Kapitel 14: Beweisen
+\stupser{gruen}{Induktionsschritt: Nehmen Sie an, für $n$ stimmt es, und addieren Sie auf beiden Seiten die nächste ungerade Zahl $2n + 1$. Rechts muss dann $(n + 1)^{2}$ herauskommen.}{22pt}
+\begin{karte}{gruen}{0.31}{\typwerk}{\meta{2}{15 min}{Band 0, Kap.\ 14, Aufgabe 14.1}}
+\kartentitel{Die ungeraden Zahlen}
+\worum{$1 + 3 + 5 + \dots + (2n - 1) = n^{2}$: eine Formel, die man an einem Bild sieht und mit Induktion beweist. Die Aufgabe verlangt beides --- und fragt, warum das Bild allein nicht reicht.}
+\methoden{Vollständige Induktion, Muster erkennen, Skizze}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Prüfen Sie die Formel für $n = 1, 2, 3, 4$.
+\item Beweisen Sie sie durch vollständige Induktion.
+\item Zeichnen Sie ein $4\times4$-Quadrat aus Kästchen und färben Sie es so, dass man die Formel sieht. Warum ist das Bild ein Argument und trotzdem kein Beweis?
+\end{enumerate}
+\end{karte}

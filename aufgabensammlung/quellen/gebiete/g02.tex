@@ -1,0 +1,578 @@
+\setgebiet{3}{Lineare Algebra}{tief}
+\chapter{Lineare Algebra}
+\marginnote{\small\itshape\color{grau}\textbf{Sie brauchen:} Band 2, Kapitel 1--12. Aus Band 0 die Gleichungssysteme (Kap.\ 6) und aus Band 1 nichts --- die lineare Algebra steht für sich.}[12pt]
+\worum{Lineare Algebra ist das Fach, in dem man zwei Dinge gleichzeitig lernen muss: rechnen (Gauß, Determinanten, Eigenwerte) und abstrahieren (Vektorraum, Basis, lineare Abbildung). Die Aufgaben hier trennen das nicht --- jede Rechnung hat eine Deutung, und jede Definition wird an Zahlen geprüft.}
+
+\section{Was Sie hier üben}
+\begin{center}
+{\footnotesize\sffamily\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lP{4.9cm}lcll@{}}
+\toprule
+\textbf{Nr.} & \textbf{Titel} & \textbf{Sorte} & \textbf{Grad} & \textbf{Zeit} & \textbf{Band/Kap.}\\
+\midrule
+2.1 & Rang und Lösbarkeit & \typtypisch & \grad1 & 10 min & 2/1\\
+2.2 & Die Neun Kapitel & \typwerk & \grad1 & 10 min & 2/1\\
+2.3 & Zwei freie Variablen & \typwerk & \grad2 & 15 min & 2/1\\
+2.4 & Ein Parameter entscheidet & \typwerk & \grad2 & 15 min & 2/1\\
+2.5 & Formate und Reihenfolge & \typtypisch & \grad1 & 10 min & 2/2\\
+2.6 & $AB = 0$, aber $A, B\neq0$ & \typstolper & \grad1 & 10 min & 2/2\\
+2.7 & $AB$ und $BA$ & \typwerk & \grad1 & 5 min & 2/2\\
+2.8 & Eine Inverse mit Gauß--Jordan & \typwerk & \grad1 & 10 min & 2/2\\
+2.9 & Eine LR-Zerlegung & \typwerk & \grad2 & 10 min & 2/2\\
+2.10 & Die $2\times2$-Inverse & \typtypisch & \grad1 & 10 min & 2/2\\
+2.11 & Funktionen als Vektoren & \typstolper & \grad2 & 15 min & 2/3\\
+2.12 & Sechs Mengen, zwei Untervektorräume & \typwerk & \grad1 & 15 min & 2/3\\
+2.13 & Im Spann oder nicht & \typwerk & \grad1 & 5 min & 2/3\\
+2.14 & Zwei Erzeugendensysteme & \typwerk & \grad1 & 10 min & 2/3\\
+2.15 & Basis aussieben, Koordinaten lesen & \typtypisch & \grad1 & 10 min & 2/4\\
+2.16 & Paarweise unabhängig & \typstolper & \grad1 & 10 min & 2/4\\
+2.17 & Drei Vektoren im $\mathbb R^{3}$ & \typwerk & \grad1 & 10 min & 2/4\\
+2.18 & Summe und Schnitt & \typwerk & \grad2 & 15 min & 2/4\\
+2.19 & Drehen und Spiegeln & \typtypisch & \grad1 & 10 min & 2/5\\
+2.20 & Kern trivial, also bijektiv? & \typstolper & \grad2 & 10 min & 2/5\\
+2.21 & Kern, Bild, Rangsatz & \typwerk & \grad2 & 15 min & 2/5\\
+2.22 & Die Ableitung als Matrix & \typwerk & \grad1 & 10 min & 2/5\\
+2.23 & Eine Spiegelung in zwei Basen & \typwerk & \grad2 & 10 min & 2/5\\
+2.24 & Rechenregeln der Determinante & \typtypisch & \grad1 & 10 min & 2/6\\
+2.25 & $\det(A + B)$ & \typstolper & \grad1 & 10 min & 2/6\\
+2.26 & Eine $4\times4$-Determinante & \typwerk & \grad1 & 10 min & 2/6\\
+2.27 & Entwickeln nach der richtigen Zeile & \typwerk & \grad1 & 10 min & 2/6\\
+2.28 & Cramer & \typwerk & \grad1 & 5 min & 2/6\\
+2.29 & Die Fläche eines Dreiecks & \typwerk & \grad1 & 5 min & 2/6\\
+2.30 & $A^{n}$ ohne $n$ Multiplikationen & \typtypisch & \grad2 & 15 min & 2/7\\
+2.31 & Eigenwerte addieren sich nicht & \typstolper & \grad2 & 10 min & 2/7\\
+2.32 & Eigenwerte einer $2\times2$-Matrix & \typwerk & \grad1 & 10 min & 2/7\\
+2.33 & Diagonalisieren --- oder nicht & \typwerk & \grad2 & 15 min & 2/7\\
+2.34 & Fibonacci geschlossen & \typwerk & \grad2 & 15 min & 2/7\\
+2.35 & Cayley--Hamilton invertiert & \typwerk & \grad1 & 5 min & 2/7\\
+2.36 & Eine Jordanbasis & \typwerk & \grad3 & 20 min & 2/8\\
+2.37 & Ein lineares System von Differentialgleichungen & \typwerk & \grad2 & 15 min & 2/8\\
+2.38 & Mietwagen & \typwerk & \grad2 & 10 min & 2/8\\
+2.39 & Projektion und Abstand & \typtypisch & \grad1 & 10 min & 2/9\\
+2.40 & Gram--Schmidt & \typwerk & \grad2 & 15 min & 2/9\\
+2.41 & Die Ausgleichsgerade & \typwerk & \grad2 & 15 min & 2/9\\
+2.42 & Orthogonal diagonalisieren & \typwerk & \grad2 & 10 min & 2/10\\
+2.43 & Ein Kegelschnitt & \typwerk & \grad2 & 15 min & 2/10\\
+2.44 & Eine Singulärwertzerlegung & \typwerk & \grad3 & 20 min & 2/11\\
+2.45 & Hauptkomponenten & \typwerk & \grad2 & 15 min & 2/11\\
+2.46 & Drei Stellen, zwei Pivots & \typwerk & \grad2 & 15 min & 2/12\\
+2.47 & Eine Householder-Spiegelung & \typwerk & \grad1 & 10 min & 2/12\\
+2.48 & Cholesky & \typwerk & \grad2 & 10 min & 2/12\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\section{Woran Sie merken, dass Sie es können}
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item Sie lesen aus der Zeilenstufenform Rang, Lösbarkeit und Zahl der freien Variablen ab --- ohne noch einmal hinzusehen.
+\item Sie wissen, dass Matrizen nicht kommutieren, Nullteiler haben und dass $\det$ mit Produkten verträglich ist, nicht mit Summen.
+\item Sie können jede lineare Abbildung in drei Formen sehen: als Vorschrift, als Matrix (bezüglich einer Basis), als Bild von Kern und Bild.
+\item Sie diagonalisieren, wenn es geht, und wissen, woran Sie merken, dass es nicht geht.
+\end{itemize}
+
+\section{Aufgaben}
+
+%%%%%%%%%%% Kapitel 1
+\stupser{tief}{Zeilenstufenform der erweiterten Matrix: Eine Zeile $(0\ 0\ 0\mid c)$ mit $c\neq0$ heißt unlösbar. Sonst: Zahl der Unbekannten minus Rang ist die Zahl der freien Variablen.}{22pt}
+\begin{karte}{tief}{2.1}{\typtypisch}{\meta{1}{10 min}{Band 2, Kap.\ 1}}
+\kartentitel{Rang und Lösbarkeit}
+\worum{Dieselbe Koeffizientenmatrix, zwei rechte Seiten, zwei völlig verschiedene Antworten. Die Aufgabe übt den Blick auf die Stufenform, der alles entscheidet.}
+\methoden{Gauß-Algorithmus, Rang, Lösbarkeitskriterium}
+$A = \begin{pmatrix}1 & 1 & 1\\ 1 & 2 & 3\\ 2 & 3 & 4\end{pmatrix}$, $b = \begin{pmatrix}6\\ 14\\ 20\end{pmatrix}$, $b' = \begin{pmatrix}6\\ 14\\ 21\end{pmatrix}$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie den Rang von $A$.
+\item Lösen Sie $Ax = b$ vollständig.
+\item Zeigen Sie, dass $Ax = b'$ unlösbar ist, und sagen Sie in einem Satz, woran das liegt.
+\item Beschreiben Sie geometrisch: Was ist die Lösungsmenge in (b), und was ist in (c) passiert?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Erste Spalte ausräumen mit der dritten Zeile als Pivot (sie beginnt mit $1$). Dann ist die Rechnung bruchfrei bis zum Schluss.}{22pt}
+\begin{karte}{gruen}{2.2}{\typwerk}{\meta{1}{10 min}{Band 2, Kap.\ 1, Aufgabe 1.1}}
+\kartentitel{Die Neun Kapitel}
+\worum{Das Gleichungssystem aus dem chinesischen \emph{Jiuzhang Suanshu}, zweitausend Jahre alt, mit genau dem Verfahren gelöst, das heute Gauß heißt.}
+\methoden{Gauß-Algorithmus, Rückwärtseinsetzen}
+Lösen Sie $3x + 2y + z = 39$, $2x + 3y + z = 34$, $x + 2y + 3z = 26$.
+\end{karte}
+
+\stupser{gruen}{Nach dem Ausräumen sind Zeile 2 und 3 gleich. Zwei Pivots, vier Unbekannte: zwei freie Variablen, und zwar die in den Spalten ohne Pivot.}{22pt}
+\begin{karte}{gruen}{2.3}{\typwerk}{\meta{2}{15 min}{Band 2, Kap.\ 1, Aufgabe 1.2}}
+\kartentitel{Zwei freie Variablen}
+\worum{Der allgemeine Fall des Gauß-Algorithmus: weniger Pivots als Unbekannte. Die Lösungsmenge ist ein Punkt plus ein Untervektorraum --- und genau das soll man hinschreiben.}
+\methoden{Gauß-Algorithmus, Freie Variablen, Lösungsraum}
+Bestimmen Sie die Lösungsmenge von
+\begin{align*} x_1 + 2x_2 + x_3 + x_4 &= 3,\\ 2x_1 + 4x_2 + x_3 - x_4 &= 4,\\ 3x_1 + 6x_2 + 2x_3 &= 7 . \end{align*}
+Geben Sie sie in der Form \enquote{spezielle Lösung plus Lösungsraum des homogenen Systems} an und prüfen Sie zwei Lösungen.
+\end{karte}
+
+\stupser{gruen}{Nach $Z_2 - Z_1$ und $Z_3 - \lambda Z_1$ taucht überall der Faktor $(1 - \lambda)$ auf. Die Fälle $\lambda = 1$ und der, bei dem die letzte Zeile $(0\ 0\ 0\mid\neq0)$ wird, sind die Ausnahmen.}{22pt}
+\begin{karte}{gruen}{2.4}{\typwerk}{\meta{2}{15 min}{Band 2, Kap.\ 1, Aufgabe 1.3}}
+\kartentitel{Ein Parameter entscheidet}
+\worum{Ein System mit Parameter: Für fast alle $\lambda$ eine Lösung, für zwei Werte etwas anderes. Die Fallunterscheidung ist der Inhalt --- und die Regel, nie durch etwas zu teilen, das null sein könnte (Aufgabe 0.18).}
+\methoden{Fallunterscheidung, Gauß-Algorithmus, Division durch null vermeiden}
+Für welche $\lambda\in\mathbb R$ ist das System lösbar, und wie viele Lösungen gibt es?
+\[ x + y + \lambda z = 1,\qquad x + \lambda y + z = 1,\qquad\lambda x + y + z = 1 . \]
+\end{karte}
+
+%%%%%%%%%%% Kapitel 2
+\stupser{tief}{$AB$ gibt es, wenn die Spaltenzahl von $A$ gleich der Zeilenzahl von $B$ ist; das Ergebnis hat die Zeilen von $A$ und die Spalten von $B$.}{22pt}
+\begin{karte}{tief}{2.5}{\typtypisch}{\meta{1}{10 min}{Band 2, Kap.\ 2}}
+\kartentitel{Formate und Reihenfolge}
+\worum{Zwei Handgriffe, die sitzen müssen: Welche Produkte sind definiert, und dass die Reihenfolge zählt.}
+\methoden{Matrixmultiplikation, Formatprüfung, Transponieren}
+$A = \begin{pmatrix}1 & 2 & 0\\ 0 & 1 & 1\end{pmatrix}$, $B = \begin{pmatrix}1 & 0\\ 2 & 1\\ 0 & 3\end{pmatrix}$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Welche der Produkte $AB$, $BA$, $A^{2}$, $B^{2}$, $A^{\mathsf T}A$, $AA^{\mathsf T}$ sind definiert, und welches Format haben sie?
+\item Berechnen Sie $AB$ und $BA$.
+\item Berechnen Sie $(AB)^{\mathsf T}$ und $B^{\mathsf T}A^{\mathsf T}$. Was sehen Sie?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Suchen Sie zwei Matrizen aus Einsen und Minus-Einsen, deren Zeilen und Spalten sich gegenseitig auslöschen.}{22pt}
+\begin{karte}{akzent}{2.6}{\typstolper}{\meta{1}{10 min}{Band 2, Kap.\ 2}}
+\kartentitel{$AB = 0$, aber $A, B\neq0$}
+\worum{Bei Zahlen folgt aus $ab = 0$, dass $a = 0$ oder $b = 0$ --- und aus $ab = ac$ mit $a\neq0$, dass $b = c$. Bei Matrizen gilt beides nicht, und wer die Gewohnheit mitnimmt, kürzt sich um richtige Ergebnisse.}
+\methoden{Gegenbeispiel, Nullteiler, Nichtkommutativität}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Finden Sie $2\times2$-Matrizen $A, B\neq0$ mit $AB = 0$.
+\item Finden Sie $A\neq0$ und $B\neq C$ mit $AB = AC$.
+\item Berechnen Sie $(A + B)^{2}$ und $A^{2} + 2AB + B^{2}$ für $A = \begin{pmatrix}1 & 1\\ 0 & 1\end{pmatrix}$, $B = \begin{pmatrix}1 & 0\\ 1 & 1\end{pmatrix}$.
+\item Unter welcher Voraussetzung an $A$ darf man aus $AB = AC$ doch auf $B = C$ schließen?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$B$ vertauscht die Spalten (von rechts) oder die Zeilen (von links).}{22pt}
+\begin{karte}{gruen}{2.7}{\typwerk}{\meta{1}{5 min}{Band 2, Kap.\ 2, Aufgabe 2.1}}
+\kartentitel{$AB$ und $BA$}
+\worum{Das kleinste Beispiel dafür, dass Matrizen nicht kommutieren --- und dafür, was eine Permutationsmatrix tut.}
+\methoden{Matrixmultiplikation, Permutationsmatrix}
+Berechnen Sie $AB$ und $BA$ für $A = \begin{pmatrix}1 & 2\\ 3 & 4\end{pmatrix}$, $B = \begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}$, und beschreiben Sie in Worten, was $B$ jeweils tut.
+\end{karte}
+
+\stupser{gruen}{$(A\mid I)$ mit Zeilenoperationen zu $(I\mid A^{-1})$. Die dritte Zeile $(1\ 0\ 0)$ ist ein guter Anfang: Tauschen Sie sie nach oben.}{22pt}
+\begin{karte}{gruen}{2.8}{\typwerk}{\meta{1}{10 min}{Band 2, Kap.\ 2, Aufgabe 2.2}}
+\kartentitel{Eine Inverse mit Gauß--Jordan}
+\worum{Invertieren ist Gleichungslösen mit drei rechten Seiten auf einmal.}
+\methoden{Gauß-Algorithmus, Inverse Matrix}
+Bestimmen Sie die Inverse von $A = \begin{pmatrix}2 & 1 & 1\\ 1 & 3 & 2\\ 1 & 0 & 0\end{pmatrix}$ und machen Sie die Probe $AA^{-1} = I$.
+\end{karte}
+
+\stupser{gruen}{Gauß ohne Zeilentausch; die Multiplikatoren, mit denen Sie Zeilen abziehen, sind die Einträge von $L$.}{22pt}
+\begin{karte}{gruen}{2.9}{\typwerk}{\meta{2}{10 min}{Band 2, Kap.\ 2, Aufgabe 2.3}}
+\kartentitel{Eine LR-Zerlegung}
+\worum{$A = LR$: Der Gauß-Algorithmus, als Produkt aufgeschrieben. Wer die Zerlegung hat, löst $Ax = b$ für jede neue rechte Seite in zwei Dreieckssystemen.}
+\methoden{LR-Zerlegung, Rückwärtseinsetzen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie die LR-Zerlegung von $A = \begin{pmatrix}2 & 1 & 1\\ 4 & 3 & 3\\ 8 & 7 & 9\end{pmatrix}$.
+\item Lösen Sie damit $Ax = (1, 1, 1)^{\mathsf T}$ durch Vorwärts- und Rückwärtseinsetzen.
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{Vertauschen Sie die Diagonale, negieren Sie die Nebendiagonale, teilen Sie durch die Determinante. Probe durch Ausmultiplizieren.}{22pt}
+\begin{karte}{tief}{2.10}{\typtypisch}{\meta{1}{10 min}{Band 2, Kap.\ 2}}
+\kartentitel{Die $2\times2$-Inverse}
+\worum{Die eine Formel, die man auswendig kann --- und an der man sieht, warum $\det = 0$ \enquote{nicht invertierbar} heißt.}
+\methoden{Inverse Matrix, Determinante, Kern}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie: $\begin{pmatrix}a & b\\ c & d\end{pmatrix}^{-1} = \dfrac1{ad - bc}\begin{pmatrix}d & -b\\ -c & a\end{pmatrix}$, falls $ad - bc\neq0$.
+\item Invertieren Sie $\begin{pmatrix}2 & 5\\ 1 & 3\end{pmatrix}$ und lösen Sie damit $2x + 5y = 1$, $x + 3y = 0$.
+\item Warum ist $\begin{pmatrix}2 & 4\\ 1 & 2\end{pmatrix}$ nicht invertierbar? Geben Sie einen Vektor $v\neq0$ mit $Av = 0$ an.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 3
+\stupser{akzent}{Ein Vektor ist alles, was man addieren und mit Zahlen multiplizieren kann. Funktionen kann man das. Linear unabhängig prüft man durch Einsetzen geeigneter $x$-Werte.}{22pt}
+\begin{karte}{akzent}{2.11}{\typstolper}{\meta{2}{15 min}{Band 2, Kap.\ 3}}
+\kartentitel{Funktionen als Vektoren}
+\worum{Der schwierigste Schritt des Bandes: einsehen, dass $\sin$, $\cos$ und $x^{2}$ Vektoren sind. Wer es glaubt, hat die lineare Algebra; wer Vektoren weiter für Pfeile hält, versteht Fourier-Reihen und Differentialgleichungen nicht.}
+\methoden{Lineare Unabhängigkeit, Funktionen als Vektoren, Einsetzen von Stellen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $\sin$ und $\cos$ im Raum der Funktionen $\mathbb R\to\mathbb R$ linear unabhängig sind.
+\item Zeigen Sie, dass $\sin$, $\cos$ und $f(x) = \sin(x + \frac\pi4)$ linear \emph{abhängig} sind.
+\item Sind $1$, $x$, $x^{2}$ linear unabhängig? Und $1$, $\sin^{2}$, $\cos^{2}$?
+\item Welche Dimension hat der Spann von $\{\sin, \cos, \sin(x + \varphi)\colon\varphi\in\mathbb R\}$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Drei Fragen je Menge: Ist $0$ drin? Ist mit $u, v$ auch $u + v$ drin? Mit $u$ auch $\lambda u$? Ein Gegenbeispiel genügt zum Nein.}{22pt}
+\begin{karte}{gruen}{2.12}{\typwerk}{\meta{1}{15 min}{Band 2, Kap.\ 3, Aufgabe 3.1}}
+\kartentitel{Sechs Mengen, zwei Untervektorräume}
+\worum{Das Untervektorraum-Kriterium, sechsmal angewandt --- und jedes Nein hat einen anderen Grund.}
+\methoden{Untervektorraum-Kriterium, Gegenbeispiel}
+Welche der folgenden Mengen sind Untervektorräume von $\mathbb R^{3}$?
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=1pt]
+\item $U_1 = \{(x, y, z)\colon x + 2y - z = 0\}$
+\item $U_2 = \{(x, y, z)\colon x + 2y - z = 1\}$
+\item $U_3 = \{(x, y, z)\colon x^{2} = y^{2}\}$
+\item $U_4 = \{(x, y, z)\colon x\ge0\}$
+\item $U_5 = \{(t, 2t, -t)\colon t\in\mathbb R\}$
+\item $U_6 = \{(x, y, z)\colon xyz = 0\}$
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$b = \alpha v_1 + \beta v_2$ ist ein Gleichungssystem mit drei Gleichungen und zwei Unbekannten. Die ersten beiden bestimmen $\alpha, \beta$; die dritte entscheidet.}{22pt}
+\begin{karte}{gruen}{2.13}{\typwerk}{\meta{1}{5 min}{Band 2, Kap.\ 3, Aufgabe 3.2}}
+\kartentitel{Im Spann oder nicht}
+\worum{\enquote{Liegt $b$ im Spann?} ist immer ein lineares Gleichungssystem.}
+\methoden{Spann, Lineare Gleichungssysteme}
+Liegt $b = (1, 4, 7)$ im Spann von $v_1 = (1, 2, 3)$ und $v_2 = (0, 1, 2)$? Und $b' = (1, 4, 8)$?
+\end{karte}
+
+\stupser{gruen}{Jedes Element des einen Systems als Kombination des anderen schreiben --- in beide Richtungen.}{22pt}
+\begin{karte}{gruen}{2.14}{\typwerk}{\meta{1}{10 min}{Band 2, Kap.\ 3, Aufgabe 3.3}}
+\kartentitel{Zwei Erzeugendensysteme}
+\worum{Ein Vektorraum hat viele Basen, und die Umrechnung zwischen ihnen ist lineare Algebra im Kleinen.}
+\methoden{Basiswechsel, Koeffizientenvergleich}
+Zeigen Sie, dass $\{1, x, x^{2}\}$ und $\{1, 1 + x, 1 + x + x^{2}\}$ beide den Raum $\mathbb R[x]_{\le2}$ der Polynome vom Grad $\le2$ erzeugen. Drücken Sie $p(x) = 3 - x + 2x^{2}$ in der zweiten Basis aus.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 4
+\stupser{tief}{Vektoren als Spalten in eine Matrix, Gauß: Die Pivotspalten gehören zur Basis. Koordinaten: Gleichungssystem mit der Basis als Spalten.}{22pt}
+\begin{karte}{tief}{2.15}{\typtypisch}{\meta{1}{10 min}{Band 2, Kap.\ 4}}
+\kartentitel{Basis aussieben, Koordinaten lesen}
+\worum{Aus einem Erzeugendensystem eine Basis machen und einen Vektor in ihr ausdrücken --- die zwei Rechnungen, die hinter jeder Dimensionsbestimmung stehen.}
+\methoden{Basis bestimmen, Koordinaten, Gauß-Algorithmus}
+$v_1 = (1, 2, 1)$, $v_2 = (2, 4, 2)$, $v_3 = (1, 0, 1)$, $v_4 = (0, 2, 0)$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie eine Basis von $U = \operatorname{span}(v_1, v_2, v_3, v_4)$ und $\dim U$.
+\item Liegt $w = (3, 2, 3)$ in $U$? Bestimmen Sie gegebenenfalls seine Koordinaten bezüglich Ihrer Basis.
+\item Beschreiben Sie $U$ durch eine Gleichung.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$(1, 0)$, $(0, 1)$, $(1, 1)$: je zwei davon sind unabhängig. Alle drei?}{22pt}
+\begin{karte}{akzent}{2.16}{\typstolper}{\meta{1}{10 min}{Band 2, Kap.\ 4}}
+\kartentitel{Paarweise unabhängig}
+\worum{\enquote{Keiner ist ein Vielfaches eines anderen, also sind sie unabhängig} --- richtig für zwei Vektoren, falsch für drei. Lineare Unabhängigkeit ist eine Eigenschaft der ganzen Familie.}
+\methoden{Lineare Unabhängigkeit, Gegenbeispiel, Dimension als Schranke}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie: $(1, 0)$, $(0, 1)$, $(1, 1)$ sind paarweise linear unabhängig, aber zusammen abhängig.
+\item Warum sind drei Vektoren im $\mathbb R^{2}$ \emph{immer} abhängig?
+\item Formulieren Sie die Definition der linearen Unabhängigkeit so, dass der Fehler unmöglich wird.
+\item Geben Sie drei Vektoren im $\mathbb R^{3}$ an, die paarweise unabhängig und insgesamt abhängig sind, und deuten Sie geometrisch.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Determinante oder Gauß --- oder Hinsehen: Ist $v_2$ eine Kombination von $v_1$ und $v_3$?}{22pt}
+\begin{karte}{gruen}{2.17}{\typwerk}{\meta{1}{10 min}{Band 2, Kap.\ 4, Aufgabe 4.1}}
+\kartentitel{Drei Vektoren im $\mathbb R^{3}$}
+\worum{Der Standardtest auf lineare Unabhängigkeit, mit drei Methoden.}
+\methoden{Lineare Unabhängigkeit, Determinante, Gauß-Algorithmus}
+Prüfen Sie, ob $v_1 = (1, 2, 3)$, $v_2 = (2, 5, 7)$, $v_3 = (0, 1, 1)$ linear unabhängig sind. Falls nicht, geben Sie eine nichttriviale Relation an.
+\end{karte}
+
+\stupser{gruen}{$\dim(U + W) = \dim U + \dim W - \dim(U\cap W)$. Bestimmen Sie $\dim(U + W)$ als Rang der vier Vektoren; der Rest folgt.}{22pt}
+\begin{karte}{gruen}{2.18}{\typwerk}{\meta{2}{15 min}{Band 2, Kap.\ 4, Aufgabe 4.2}}
+\kartentitel{Summe und Schnitt}
+\worum{Die Dimensionsformel für Summe und Schnitt --- und die Erfahrung, dass der Schnitt zweier Ebenen im $\mathbb R^{4}$ eine Gerade sein kann, oder ein Punkt.}
+\methoden{Dimensionsformel, Schnitt von Unterräumen}
+Im $\mathbb R^{4}$: $U = \operatorname{span}\bigl((1, 0, 1, 0), (0, 1, 0, 1)\bigr)$, $W = \operatorname{span}\bigl((1, 1, 1, 1), (1, 0, 0, 1)\bigr)$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie $\dim U$, $\dim W$, $\dim(U + W)$ und $\dim(U\cap W)$.
+\item Geben Sie eine Basis von $U\cap W$ an.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 5
+\stupser{tief}{Die Spalten der Matrix sind die Bilder der Basisvektoren. Wo landet $e_1 = (1, 0)$ bei einer Drehung um $90^{\circ}$? Wo $e_2$?}{22pt}
+\begin{karte}{tief}{2.19}{\typtypisch}{\meta{1}{10 min}{Band 2, Kap.\ 5}}
+\kartentitel{Drehen und Spiegeln}
+\worum{Darstellungsmatrizen aufstellen heißt: Basisvektoren abbilden und die Bilder als Spalten schreiben. Verketten heißt multiplizieren --- in der richtigen Reihenfolge.}
+\methoden{Darstellungsmatrix, Verkettung, Drehmatrix}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie die Matrix $R$ der Drehung um $90^{\circ}$ gegen den Uhrzeigersinn und die Matrix $S$ der Spiegelung an der $x$-Achse.
+\item Berechnen Sie $RS$ und $SR$. Welche Abbildungen sind das?
+\item Berechnen Sie $R^{4}$ und $S^{2}$ und deuten Sie.
+\item Allgemein: Matrix der Drehung um den Winkel $\varphi$. Prüfen Sie, dass $R_\varphi R_\psi = R_{\varphi + \psi}$ die Additionstheoreme liefert.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Dimensionssatz: $\dim\operatorname{Kern} + \dim\operatorname{Bild} = \dim V$. Für $f\colon\mathbb R^{4}\to\mathbb R^{3}$ ist das Bild höchstens dreidimensional.}{22pt}
+\begin{karte}{akzent}{2.20}{\typstolper}{\meta{2}{10 min}{Band 2, Kap.\ 5}}
+\kartentitel{Kern trivial, also bijektiv?}
+\worum{\enquote{Injektiv ist dasselbe wie surjektiv} gilt für quadratische Matrizen --- und nur für sie. Wer das vergisst, sucht Inverse, die es nicht gibt.}
+\methoden{Dimensionssatz, Gegenbeispiel, Injektiv und surjektiv}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie: Eine lineare Abbildung $f\colon\mathbb R^{4}\to\mathbb R^{3}$ ist nie injektiv, und $g\colon\mathbb R^{3}\to\mathbb R^{4}$ ist nie surjektiv.
+\item Zeigen Sie: Für $f\colon V\to V$ mit $\dim V < \infty$ sind \enquote{injektiv}, \enquote{surjektiv}, \enquote{bijektiv} äquivalent.
+\item Der Verschiebeoperator $T(a_1, a_2, a_3, \dots) = (0, a_1, a_2, \dots)$ auf dem Raum der Folgen ist injektiv. Ist er surjektiv? Was ist hier anders?
+\item Welche Rolle spielt die Determinante bei quadratischen Matrizen in diesem Zusammenhang?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Gauß auf $A$: Die Pivotspalten von $A$ (nicht der Stufenform!) sind eine Basis des Bildes; die freien Variablen parametrisieren den Kern.}{22pt}
+\begin{karte}{gruen}{2.21}{\typwerk}{\meta{2}{15 min}{Band 2, Kap.\ 5, Aufgabe 5.1}}
+\kartentitel{Kern, Bild, Rangsatz}
+\worum{Kern und Bild einer Matrix konkret --- und der Satz, der ihre Dimensionen verbindet.}
+\methoden{Kern und Bild, Rangsatz, Gauß-Algorithmus}
+$f\colon\mathbb R^{4}\to\mathbb R^{3}$, $f(x) = Ax$ mit $A = \begin{pmatrix}1 & 2 & 0 & 1\\ 2 & 4 & 1 & 3\\ 1 & 2 & 1 & 2\end{pmatrix}$.
+Bestimmen Sie Basen von $\operatorname{Kern}f$ und $\operatorname{Bild}f$ und verifizieren Sie den Rangsatz.
+\end{karte}
+
+\stupser{gruen}{Spalte $j$ ist das Bild des $j$-ten Basisvektors, in Koordinaten: $D(x^{2}) = 2x = 0\cdot1 + 2\cdot x + 0\cdot x^{2} + 0\cdot x^{3}$.}{22pt}
+\begin{karte}{gruen}{2.22}{\typwerk}{\meta{1}{10 min}{Band 2, Kap.\ 5, Aufgabe 5.2}}
+\kartentitel{Die Ableitung als Matrix}
+\worum{Differenzieren ist linear, also eine Matrix --- sobald man eine Basis wählt. Die Aufgabe macht aus der Analysis Zahlen.}
+\methoden{Darstellungsmatrix, Kern und Bild, Nilpotenz}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $D\colon\mathbb R[x]_{\le3}\to\mathbb R[x]_{\le3}$ sei die Ableitung. Bestimmen Sie die Darstellungsmatrix bezüglich $B = (1, x, x^{2}, x^{3})$.
+\item Berechnen Sie $D^{4}$ als Matrix. Was bedeutet das Ergebnis?
+\item Bestimmen Sie Kern und Bild von $D$ und prüfen Sie den Rangsatz.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{In der Basis aus einem Vektor \emph{auf} der Spiegelachse und einem \emph{senkrecht} dazu ist die Spiegelung diagonal.}{22pt}
+\begin{karte}{gruen}{2.23}{\typwerk}{\meta{2}{10 min}{Band 2, Kap.\ 5, Aufgabe 5.3}}
+\kartentitel{Eine Spiegelung in zwei Basen}
+\worum{Dieselbe Abbildung, zwei Matrizen --- und die zweite Basis ist so gewählt, dass man die Abbildung in der Matrix sofort erkennt. Das ist die Idee hinter Eigenvektoren.}
+\methoden{Basiswechsel, Darstellungsmatrix, Eigenbasis}
+$f\colon\mathbb R^{2}\to\mathbb R^{2}$ sei die Spiegelung an der Geraden $y = x$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie die Darstellungsmatrix bezüglich der Standardbasis.
+\item Bestimmen Sie sie bezüglich $B' = \bigl((1, 1), (1, -1)\bigr)$.
+\item Verbinden Sie beide über die Basiswechselmatrix: $M_{B'} = T^{-1}M_ET$ mit $T$ aus den Vektoren von $B'$.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 6
+\stupser{tief}{Zeilen addieren ändert nichts; Zeilen tauschen dreht das Vorzeichen; eine Zeile mit $c$ multiplizieren multipliziert die Determinante mit $c$ --- und $2A$ multipliziert \emph{alle} Zeilen.}{22pt}
+\begin{karte}{tief}{2.24}{\typtypisch}{\meta{1}{10 min}{Band 2, Kap.\ 6}}
+\kartentitel{Rechenregeln der Determinante}
+\worum{Die Determinante berechnet man mit Gauß und benutzt sie mit vier Regeln. Beides hier.}
+\methoden{Determinante, Gauß-Algorithmus}
+$A = \begin{pmatrix}1 & 2 & 3\\ 2 & 5 & 7\\ 1 & 1 & 3\end{pmatrix}$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $\det A$ durch Zeilenumformung.
+\item Geben Sie ohne weitere Rechnung an: $\det(A^{\mathsf T})$, $\det(2A)$, $\det(A^{2})$, $\det(A^{-1})$, $\det(-A)$.
+\item Was ist $\det$ der Matrix, die aus $A$ durch Vertauschen der ersten beiden Zeilen entsteht?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$A = B = I_2$: $\det(A + B) = \det(2I) = 4$, aber $\det A + \det B = 2$.}{22pt}
+\begin{karte}{akzent}{2.25}{\typstolper}{\meta{1}{10 min}{Band 2, Kap.\ 6}}
+\kartentitel{$\det(A + B)$}
+\worum{Die Determinante ist linear in jeder Zeile --- und deshalb gerade \emph{nicht} linear in der Matrix. $\det(A + B)\neq\det A + \det B$ und $\det(2A)\neq2\det A$ sind dieselbe Verwechslung.}
+\methoden{Gegenbeispiel, Multilinearität, Determinante}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie an $A = B = I_2$, dass $\det(A + B)\neq\det A + \det B$.
+\item Berechnen Sie $\det(2A)$ für eine $n\times n$-Matrix in Abhängigkeit von $\det A$. Warum?
+\item Was bedeutet \enquote{linear in jeder Zeile} genau? Schreiben Sie es für die erste Zeile einer $2\times2$-Matrix hin und prüfen Sie es.
+\item Für welche Produkte und Summen gilt eine Regel: $\det(AB)$, $\det(A + B)$, $\det(A^{\mathsf T})$, $\det(cA)$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Erste Spalte mit der ersten Zeile ausräumen; dann genau hinsehen, ob zwei Zeilen gleich geworden sind.}{22pt}
+\begin{karte}{gruen}{2.26}{\typwerk}{\meta{1}{10 min}{Band 2, Kap.\ 6, Aufgabe 6.1}}
+\kartentitel{Eine $4\times4$-Determinante}
+\worum{Vier mal vier mit Gauß --- schneller als jede Entwicklung, und mit einem Ergebnis, das man deuten sollte.}
+\methoden{Determinante, Gauß-Algorithmus, Rang}
+Berechnen Sie $\det A$ für $A = \begin{pmatrix}2 & 1 & 3 & 1\\ 4 & 3 & 8 & 3\\ 6 & 5 & 15 & 8\\ 2 & 2 & 7 & 5\end{pmatrix}$. Was folgt für den Rang von $A$?
+\end{karte}
+
+\stupser{gruen}{Die dritte Zeile hat drei Nullen: Entwickeln Sie nach ihr.}{22pt}
+\begin{karte}{gruen}{2.27}{\typwerk}{\meta{1}{10 min}{Band 2, Kap.\ 6, Aufgabe 6.2}}
+\kartentitel{Entwickeln nach der richtigen Zeile}
+\worum{Laplace-Entwicklung lohnt sich, wenn eine Zeile oder Spalte fast nur Nullen hat --- dann bleibt eine einzige Unterdeterminante.}
+\methoden{Laplace-Entwicklung, Determinante}
+Berechnen Sie $\det\begin{pmatrix}3 & 0 & 2 & 0\\ 1 & 4 & -1 & 2\\ 0 & 0 & 5 & 0\\ 2 & 1 & 0 & 3\end{pmatrix}$.
+\end{karte}
+
+\stupser{gruen}{$x = \det A_x/\det A$, wobei $A_x$ aus $A$ entsteht, indem man die $x$-Spalte durch die rechte Seite ersetzt.}{22pt}
+\begin{karte}{gruen}{2.28}{\typwerk}{\meta{1}{5 min}{Band 2, Kap.\ 6, Aufgabe 6.3}}
+\kartentitel{Cramer}
+\worum{Die Cramersche Regel: für $2\times2$ praktisch, für Theorie wichtig, für große Systeme nutzlos.}
+\methoden{Cramersche Regel, Determinante}
+Lösen Sie $2x + y = 5$, $x + 3y = 10$ mit der Cramerschen Regel und prüfen Sie durch Einsetzen.
+\end{karte}
+
+\stupser{gruen}{Fläche $= \frac12|\det(P_2 - P_1, P_3 - P_1)|$.}{22pt}
+\begin{karte}{gruen}{2.29}{\typwerk}{\meta{1}{5 min}{Band 2, Kap.\ 6, Aufgabe 6.4}}
+\kartentitel{Die Fläche eines Dreiecks}
+\worum{Die Determinante ist ein Volumen --- hier eine Fläche, mit Vorzeichen.}
+\methoden{Determinante, Orientierung}
+Ein Dreieck hat die Ecken $P_1 = (1, 2)$, $P_2 = (4, 3)$, $P_3 = (2, 6)$. Bestimmen Sie seinen Flächeninhalt. Was bedeutet das Vorzeichen der Determinante?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 7
+\stupser{tief}{$A = SDS^{-1}$ mit $D$ diagonal; dann $A^{n} = SD^{n}S^{-1}$, und $D^{n}$ ist elementweise.}{22pt}
+\begin{karte}{tief}{2.30}{\typtypisch}{\meta{2}{15 min}{Band 2, Kap.\ 7}}
+\kartentitel{$A^{n}$ ohne $n$ Multiplikationen}
+\worum{Der Hauptnutzen der Diagonalisierung: Potenzen. Für Markow-Ketten, Rekursionen und Differentialgleichungen ist das die Rechnung, die man immer wieder braucht.}
+\methoden{Diagonalisieren, Matrixpotenzen}
+$A = \begin{pmatrix}2 & 1\\ 1 & 2\end{pmatrix}$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie Eigenwerte und Eigenvektoren.
+\item Schreiben Sie $A = SDS^{-1}$ und berechnen Sie $A^{n}$ allgemein.
+\item Prüfen Sie für $n = 2$ durch direktes Multiplizieren.
+\item Was passiert mit $A^{n}v$ für großes $n$ und beliebiges $v$? Welche Richtung dominiert?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$A = \begin{pmatrix}0 & 1\\ 0 & 0\end{pmatrix}$ und $B = A^{\mathsf T}$ haben beide nur den Eigenwert $0$. Welche Eigenwerte hat $A + B$?}{22pt}
+\begin{karte}{akzent}{2.31}{\typstolper}{\meta{2}{10 min}{Band 2, Kap.\ 7}}
+\kartentitel{Eigenwerte addieren sich nicht}
+\worum{Drei verbreitete Irrtümer: dass die Eigenwerte von $A + B$ die Summen sind, dass die von $AB$ die Produkte sind, und dass Eigenvektoren zu verschiedenen Eigenwerten orthogonal sind. Alle drei stimmen manchmal --- und das macht sie gefährlich.}
+\methoden{Gegenbeispiel, Eigenwerte, Gleichzeitige Diagonalisierung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie die Eigenwerte von $A = \begin{pmatrix}0 & 1\\ 0 & 0\end{pmatrix}$, $B = A^{\mathsf T}$ und $A + B$.
+\item Bestimmen Sie die Eigenwerte von $AB$ und $BA$.
+\item $C = \begin{pmatrix}1 & 1\\ 0 & 2\end{pmatrix}$ hat Eigenwerte $1$ und $2$. Bestimmen Sie die Eigenvektoren. Sind sie orthogonal?
+\item Wann gelten die drei Regeln doch? (Stichworte: gleichzeitig diagonalisierbar; symmetrisch.)
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$\det(A - \lambda I) = (4 - \lambda)(1 - \lambda) + 2 = \lambda^{2} - 5\lambda + 6$.}{22pt}
+\begin{karte}{gruen}{2.32}{\typwerk}{\meta{1}{10 min}{Band 2, Kap.\ 7, Aufgabe 7.1}}
+\kartentitel{Eigenwerte einer $2\times2$-Matrix}
+\worum{Charakteristisches Polynom, Nullstellen, Kerne --- das Grundrezept.}
+\methoden{Charakteristisches Polynom, Eigenvektoren, Spur und Determinante als Probe}
+Bestimmen Sie Eigenwerte und Eigenvektoren von $A = \begin{pmatrix}4 & -2\\ 1 & 1\end{pmatrix}$, und prüfen Sie $Av = \lambda v$ für beide.
+\end{karte}
+
+\stupser{gruen}{Blockdreiecksgestalt: Der Eigenwert $2$ steht oben links, der untere $2\times2$-Block liefert die anderen. Zählen Sie die Eigenvektoren zum doppelten Eigenwert.}{22pt}
+\begin{karte}{gruen}{2.33}{\typwerk}{\meta{2}{15 min}{Band 2, Kap.\ 7, Aufgabe 7.2}}
+\kartentitel{Diagonalisieren --- oder nicht}
+\worum{Eine Matrix mit einem doppelten Eigenwert, zu dem es nur einen Eigenvektor gibt. Die Aufgabe heißt \enquote{Diagonalisieren Sie}, und die Antwort ist: geht nicht --- mit Begründung.}
+\methoden{Diagonalisieren, Vielfachheiten, Charakteristisches Polynom}
+Diagonalisieren Sie $A = \begin{pmatrix}2 & 1 & 0\\ 0 & 1 & -1\\ 0 & 2 & 4\end{pmatrix}$, falls möglich. Bestimmen Sie algebraische und geometrische Vielfachheit jedes Eigenwerts.
+\end{karte}
+
+\stupser{gruen}{$\begin{pmatrix}F_{n+1}\\ F_n\end{pmatrix} = \begin{pmatrix}1 & 1\\ 1 & 0\end{pmatrix}\begin{pmatrix}F_n\\ F_{n-1}\end{pmatrix}$; Eigenwerte $\varphi = \frac{1 + \sqrt5}2$ und $\psi = \frac{1 - \sqrt5}2$.}{22pt}
+\begin{karte}{gruen}{2.34}{\typwerk}{\meta{2}{15 min}{Band 2, Kap.\ 7, Aufgabe 7.3}}
+\kartentitel{Fibonacci geschlossen}
+\worum{Die Formel von Binet aus der Diagonalisierung einer $2\times2$-Matrix --- das schönste Beispiel dafür, was Eigenwerte für Rekursionen leisten.}
+\methoden{Diagonalisieren, Lineare Rekursion, Fibonacci}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Schreiben Sie $F_{n+1} = F_n + F_{n-1}$ als Matrixgleichung.
+\item Diagonalisieren Sie die Matrix und leiten Sie $F_n = \dfrac{\varphi^{n} - \psi^{n}}{\sqrt5}$ her.
+\item Prüfen Sie für $n = 1, 2, 5$. Warum ist $F_n$ die zu $\varphi^{n}/\sqrt5$ nächste ganze Zahl?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$A^{2} - 5A + 6I = 0$; multiplizieren Sie mit $A^{-1}$ und lösen Sie nach $A^{-1}$ auf.}{22pt}
+\begin{karte}{gruen}{2.35}{\typwerk}{\meta{1}{5 min}{Band 2, Kap.\ 7, Aufgabe 7.4}}
+\kartentitel{Cayley--Hamilton invertiert}
+\worum{Jede Matrix erfüllt ihr charakteristisches Polynom --- und daraus fällt die Inverse als Polynom in $A$ heraus.}
+\methoden{Cayley–Hamilton, Inverse Matrix}
+Berechnen Sie mit Cayley--Hamilton die Inverse von $A = \begin{pmatrix}4 & -2\\ 1 & 1\end{pmatrix}$ und vergleichen Sie mit der Formel aus Aufgabe 2.10.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 8
+\stupser{gruen}{Zum Eigenwert $2$: Eigenvektor $v_1$, dann ein Hauptvektor $v_2$ mit $(A - 2I)v_2 = v_1$. Zum Eigenwert $3$ ein gewöhnlicher Eigenvektor.}{22pt}
+\begin{karte}{gruen}{2.36}{\typwerk}{\meta{3}{20 min}{Band 2, Kap.\ 8, Aufgabe 8.1}}
+\kartentitel{Eine Jordanbasis}
+\worum{Was man tut, wenn Diagonalisieren scheitert: Hauptvektoren. Die Matrix aus Aufgabe 2.33 bekommt ihre Normalform.}
+\methoden{Jordansche Normalform, Hauptvektoren}
+Bestimmen Sie die Jordansche Normalform $J$ und eine Jordanbasis $S$ für $A = \begin{pmatrix}2 & 1 & 0\\ 0 & 1 & -1\\ 0 & 2 & 4\end{pmatrix}$, und prüfen Sie $AS = SJ$.
+\end{karte}
+
+\stupser{gruen}{$x' = Ax$ mit der Matrix aus Aufgabe 2.32. Lösung: $x(t) = c_1e^{3t}v_1 + c_2e^{2t}v_2$; die $c_i$ aus der Anfangsbedingung.}{22pt}
+\begin{karte}{gruen}{2.37}{\typwerk}{\meta{2}{15 min}{Band 2, Kap.\ 8, Aufgabe 8.2}}
+\kartentitel{Ein lineares System von Differentialgleichungen}
+\worum{Eigenvektoren entkoppeln: In Eigenkoordinaten ist jedes lineare System $x' = Ax$ eine Sammlung von $y' = \lambda y$.}
+\methoden{Lineare Differentialgleichungssysteme, Eigenvektoren, Entkopplung}
+Lösen Sie $x' = 4x - 2y$, $y' = x + y$ mit $x(0) = 1$, $y(0) = 0$, und prüfen Sie die Lösung durch Ableiten.
+\end{karte}
+
+\stupser{gruen}{Gesucht ist der Vektor $\pi$ mit $P\pi = \pi$, $\pi_1 + \pi_2 = 1$ --- der Eigenvektor zum Eigenwert $1$.}{22pt}
+\begin{karte}{gruen}{2.38}{\typwerk}{\meta{2}{10 min}{Band 2, Kap.\ 8, Aufgabe 8.3}}
+\kartentitel{Mietwagen}
+\worum{Eine Markow-Kette mit zwei Zuständen: Der Eigenwert $1$ gibt die Gleichgewichtsverteilung, der zweite Eigenwert die Geschwindigkeit, mit der man sie erreicht.}
+\methoden{Markow-Kette, Stationäre Verteilung, Eigenwert 1}
+Ein Mietwagenunternehmen hat Stationen $A$ und $B$. Von den in $A$ gemieteten Wagen werden $70\,\%$ in $A$ und $30\,\%$ in $B$ zurückgegeben; von den in $B$ gemieteten $40\,\%$ in $A$ und $60\,\%$ in $B$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Wie verteilt sich der Bestand langfristig?
+\item Alle Wagen starten in $A$. Wie ist die Verteilung nach einem, zwei, drei Tagen, und wie schnell nähert sie sich dem Gleichgewicht?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 9
+\stupser{tief}{Projektion von $b$ auf die Richtung $n$: $\frac{b\cdot n}{n\cdot n}n$. Der Abstand zur Ebene durch $0$ mit Normale $n$ ist die Länge dieser Projektion.}{22pt}
+\begin{karte}{tief}{2.39}{\typtypisch}{\meta{1}{10 min}{Band 2, Kap.\ 9}}
+\kartentitel{Projektion und Abstand}
+\worum{Orthogonale Projektion ist das Werkzeug hinter Abständen, kleinsten Quadraten und Fourier-Koeffizienten. Hier im $\mathbb R^{3}$, wo man es sehen kann.}
+\methoden{Orthogonale Projektion, Abstand, Projektionsmatrix}
+$b = (1, 2, 3)$, Ebene $E\colon x + y + z = 0$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zerlegen Sie $b$ in einen Anteil senkrecht zu $E$ und einen in $E$.
+\item Bestimmen Sie den Abstand von $b$ zu $E$ und den Fußpunkt des Lots.
+\item Bestimmen Sie den Abstand von $b$ zur parallelen Ebene $x + y + z = 3$.
+\item Geben Sie die Projektionsmatrix $P$ auf $E$ an und prüfen Sie $P^{2} = P$.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$q_1 = a_1/\|a_1\|$; $a_2$ minus seine Projektion auf $q_1$, normieren; $a_3$ minus Projektionen auf $q_1$ und $q_2$, normieren.}{22pt}
+\begin{karte}{gruen}{2.40}{\typwerk}{\meta{2}{15 min}{Band 2, Kap.\ 9, Aufgabe 9.1}}
+\kartentitel{Gram--Schmidt}
+\worum{Aus einer Basis eine Orthonormalbasis --- das Verfahren, das hinter QR-Zerlegung und orthogonalen Polynomen steht.}
+\methoden{Gram–Schmidt, Orthonormalbasis}
+Orthonormalisieren Sie $a_1 = (1, 1, 0)$, $a_2 = (1, 0, 1)$, $a_3 = (0, 1, 1)$. Prüfen Sie Orthogonalität und Norm.
+\end{karte}
+
+\stupser{gruen}{Normalengleichungen $X^{\mathsf T}X\beta = X^{\mathsf T}y$ mit $X = \begin{pmatrix}1 & x_i\end{pmatrix}$: ein $2\times2$-System.}{22pt}
+\begin{karte}{gruen}{2.41}{\typwerk}{\meta{2}{15 min}{Band 2, Kap.\ 9, Aufgabe 9.2}}
+\kartentitel{Die Ausgleichsgerade}
+\worum{Kleinste Quadrate sind orthogonale Projektion: Die Gerade, die den Fehler minimiert, ist die Projektion der Daten auf den Spaltenraum.}
+\methoden{Kleinste Quadrate, Normalengleichungen, Residuum}
+Bestimmen Sie die Ausgleichsgerade $y = a + bx$ durch $(1, 2), (2, 3), (3, 5), (4, 6)$. Berechnen Sie die Residuen und prüfen Sie, dass sie senkrecht auf beiden Spalten von $X$ stehen.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 10
+\stupser{gruen}{Eigenwerte aus $\lambda^{2} - 7\lambda + 6$; die Eigenvektoren sind automatisch orthogonal (symmetrische Matrix) --- nur normieren.}{22pt}
+\begin{karte}{gruen}{2.42}{\typwerk}{\meta{2}{10 min}{Band 2, Kap.\ 10, Aufgabe 10.1}}
+\kartentitel{Orthogonal diagonalisieren}
+\worum{Der Spektralsatz konkret: eine symmetrische Matrix, eine orthogonale Matrix $Q$ mit $Q^{\mathsf T}AQ = D$.}
+\methoden{Spektralsatz}
+Diagonalisieren Sie $A = \begin{pmatrix}5 & 2\\ 2 & 2\end{pmatrix}$ orthogonal und prüfen Sie $Q^{\mathsf T}Q = I$ und $A = QDQ^{\mathsf T}$.
+\end{karte}
+
+\stupser{gruen}{Die quadratische Form $5x^{2} + 4xy + 2y^{2}$ hat die Matrix aus Aufgabe 2.42. In Eigenkoordinaten verschwindet der gemischte Term.}{22pt}
+\begin{karte}{gruen}{2.43}{\typwerk}{\meta{2}{15 min}{Band 2, Kap.\ 10, Aufgabe 10.2}}
+\kartentitel{Ein Kegelschnitt}
+\worum{Hauptachsentransformation: Eigenvektoren sind die Achsen, Eigenwerte bestimmen Typ und Halbachsen.}
+\methoden{Hauptachsentransformation, Quadratische Form, Kegelschnitt}
+Bestimmen Sie Typ, Hauptachsen und Halbachsen des Kegelschnitts $5x^{2} + 4xy + 2y^{2} = 6$, und skizzieren Sie ihn.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 11
+\stupser{gruen}{$A^{\mathsf T}A = \begin{pmatrix}25 & 20\\ 20 & 25\end{pmatrix}$: Eigenwerte $45$ und $5$, Singulärwerte $\sqrt{45}$ und $\sqrt5$. Dann $u_i = Av_i/\sigma_i$.}{22pt}
+\begin{karte}{gruen}{2.44}{\typwerk}{\meta{3}{20 min}{Band 2, Kap.\ 11, Aufgabe 11.1}}
+\kartentitel{Eine Singulärwertzerlegung}
+\worum{Die SVD ist die Zerlegung, die für jede Matrix existiert: Drehung, Streckung, Drehung. Einmal von Hand, damit man weiß, was der Rechner tut.}
+\methoden{Singulärwertzerlegung, Eigenwerte}
+Bestimmen Sie die Singulärwertzerlegung $A = U\Sigma V^{\mathsf T}$ von $A = \begin{pmatrix}3 & 0\\ 4 & 5\end{pmatrix}$ und prüfen Sie das Produkt.
+\end{karte}
+
+\stupser{gruen}{Kovarianzmatrix $\tilde X^{\mathsf T}\tilde X$ (bis auf den Faktor $1/(n - 1)$); ihre Eigenvektoren sind die Hauptkomponenten, die Eigenwerte die erklärte Varianz.}{22pt}
+\begin{karte}{gruen}{2.45}{\typwerk}{\meta{2}{15 min}{Band 2, Kap.\ 11, Aufgabe 11.2}}
+\kartentitel{Hauptkomponenten}
+\worum{PCA ist der Spektralsatz für Datenmatrizen: Die Richtung größter Varianz ist ein Eigenvektor.}
+\methoden{Hauptkomponentenanalyse, Kovarianzmatrix, Spektralsatz}
+Führen Sie eine Hauptkomponentenanalyse für die zentrierten Daten $\tilde X = \begin{pmatrix}2 & 1\\ -2 & -1\\ 1 & 2\\ -1 & -2\end{pmatrix}$ durch (Zeilen = Beobachtungen). Welchen Anteil der Varianz erklärt die erste Komponente?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 12
+\stupser{gruen}{Mit Pivot $0{,}0001$ wird der Multiplikator $10\,000$, und $2 - 10\,000$ ist auf drei Stellen $-10\,000$: Die Information aus der zweiten Zeile ist weg.}{22pt}
+\begin{karte}{gruen}{2.46}{\typwerk}{\meta{2}{15 min}{Band 2, Kap.\ 12, Aufgabe 12.1}}
+\kartentitel{Drei Stellen, zwei Pivots}
+\worum{Warum man Pivots wählt: Ein kleines Pivot verstärkt Rundungsfehler, bis das Ergebnis nichts mehr mit der Lösung zu tun hat.}
+\methoden{Pivotisierung, Rundungsfehler, Auslöschung}
+Lösen Sie $0{,}0001x + y = 1$, $x + y = 2$ einmal mit dem Pivot $0{,}0001$ und einmal mit Zeilentausch --- jeweils mit nur drei signifikanten Stellen. Vergleichen Sie mit der exakten Lösung.
+\end{karte}
+
+\stupser{gruen}{$H = I - 2\frac{vv^{\mathsf T}}{v^{\mathsf T}v}$ mit $v = a - \|a\|e_1$.}{22pt}
+\begin{karte}{gruen}{2.47}{\typwerk}{\meta{1}{10 min}{Band 2, Kap.\ 12, Aufgabe 12.2}}
+\kartentitel{Eine Householder-Spiegelung}
+\worum{Householder-Matrizen sind Spiegelungen, die einen Vektor auf die Achse klappen --- der Baustein der numerisch stabilen QR-Zerlegung.}
+\methoden{Householder-Spiegelung, Orthogonale Matrix}
+Bestimmen Sie eine Householder-Matrix $H$, die $a = (3, 4)$ auf ein Vielfaches von $e_1$ abbildet. Prüfen Sie $Ha$, $H^{2} = I$ und $H^{\mathsf T} = H$.
+\end{karte}
+
+\stupser{gruen}{$L$ untere Dreiecksmatrix mit $A = LL^{\mathsf T}$: $l_{11} = \sqrt{a_{11}}$, dann Spalte für Spalte.}{22pt}
+\begin{karte}{gruen}{2.48}{\typwerk}{\meta{2}{10 min}{Band 2, Kap.\ 12, Aufgabe 12.3}}
+\kartentitel{Cholesky}
+\worum{Für symmetrische positiv definite Matrizen die halbe LR-Zerlegung: $A = LL^{\mathsf T}$, halber Aufwand, und ein Test auf Definitheit gratis.}
+\methoden{Cholesky-Zerlegung, Positive Definitheit}
+Bestimmen Sie die Cholesky-Zerlegung von $A = \begin{pmatrix}4 & 2 & -2\\ 2 & 5 & -1\\ -2 & -1 & 6\end{pmatrix}$ und prüfen Sie $LL^{\mathsf T} = A$. Woran hätten Sie gemerkt, dass $A$ nicht positiv definit ist?
+\end{karte}

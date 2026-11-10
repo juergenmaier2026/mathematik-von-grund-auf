@@ -1,0 +1,450 @@
+\setgebiet{7}{Geometrie}{tief}
+\chapter{Geometrie}
+\marginnote{\small\itshape\color{grau}\textbf{Sie brauchen:} Band 6, Kapitel 1--14. Aus Band 2 Vektoren, Matrizen, Eigenwerte (Gebiet 2); aus Band 3 Ableitungen und Integrale (Gebiet 3); für die Kapitel 11--13 Kurven und Flächen aus Band 3, Kap.\ 13.}[12pt]
+\worum{Geometrie ist das Gebiet, in dem man drei Sprachen zugleich spricht: die synthetische (Zirkel, Lineal, Kongruenz), die analytische (Koordinaten, Vektoren, Matrizen) und die differentielle (Krümmung, Geodäten). Die Aufgaben wechseln bewusst zwischen ihnen --- und zeigen, dass dieselbe Frage in jeder Sprache anders aussieht und in einer davon meist leicht ist.}
+
+\section{Was Sie hier üben}
+\begin{center}
+{\footnotesize\sffamily\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lP{4.9cm}lcll@{}}
+\toprule
+\textbf{Nr.} & \textbf{Titel} & \textbf{Sorte} & \textbf{Grad} & \textbf{Zeit} & \textbf{Band/Kap.}\\
+\midrule
+6.1 & Winkelhalbierende und Lot & \typtypisch & \grad1 & 15 min & 6/1\\
+6.2 & SSW ist kein Kongruenzsatz & \typstolper & \grad1 & 10 min & 6/1\\
+6.3 & Die Mittelsenkrechte & \typwerk & \grad1 & 10 min & 6/1\\
+6.4 & Das 13-14-15-Dreieck & \typtypisch & \grad2 & 15 min & 6/2\\
+6.5 & Die Eulergerade & \typwerk & \grad2 & 15 min & 6/2\\
+6.6 & Eine Kreisgleichung lesen & \typtypisch & \grad1 & 10 min & 6/3\\
+6.7 & Die Potenz eines Punktes & \typwerk & \grad1 & 10 min & 6/3\\
+6.8 & Eine Ellipse vermessen & \typwerk & \grad2 & 15 min & 6/3\\
+6.9 & Windschief & \typtypisch & \grad2 & 15 min & 6/4\\
+6.10 & Sinus oder Kosinus? & \typstolper & \grad1 & 10 min & 6/4\\
+6.11 & Ebene, Abstand, Tetraeder & \typwerk & \grad2 & 15 min & 6/4\\
+6.12 & Entartete Kegelschnitte & \typstolper & \grad1 & 10 min & 6/5\\
+6.13 & Typ und Normalform & \typwerk & \grad2 & 15 min & 6/5\\
+6.14 & Eine Quadrik im Raum & \typwerk & \grad2 & 15 min & 6/5\\
+6.15 & Drei Abbildungen, drei Typen & \typtypisch & \grad2 & 15 min & 6/6\\
+6.16 & Zwei Spiegelungen & \typwerk & \grad1 & 10 min & 6/6\\
+6.17 & Die Symmetriegruppe des Würfels & \typwerk & \grad2 & 15 min & 6/6\\
+6.18 & Eine affine Abbildung bestimmen & \typtypisch & \grad2 & 15 min & 6/7\\
+6.19 & Harmonische Lage & \typwerk & \grad1 & 10 min & 6/7\\
+6.20 & Affin gibt es nur ein Dreieck & \typwerk & \grad2 & 15 min & 6/7\\
+6.21 & Ein Beweis im Kreis & \typstolper & \grad2 & 15 min & 6/8\\
+6.22 & Hyperbolische Vielecke & \typtypisch & \grad2 & 15 min & 6/9\\
+6.23 & Ein hyperbolisches Dreieck & \typwerk & \grad1 & 10 min & 6/9\\
+6.24 & Der Breitenkreis ist kein Umweg --- oder doch? & \typstolper & \grad1 & 10 min & 6/10\\
+6.25 & Ein Dreieck auf der Erde & \typwerk & \grad2 & 15 min & 6/10\\
+6.26 & Frankfurt--New York & \typwerk & \grad2 & 20 min & 6/10\\
+6.27 & Krümmung eines Graphen & \typtypisch & \grad2 & 15 min & 6/11\\
+6.28 & Die Krümmung der Ellipse & \typwerk & \grad2 & 10 min & 6/11\\
+6.29 & Die Schraubenlinie & \typwerk & \grad2 & 15 min & 6/11\\
+6.30 & Warum keine Landkarte stimmt & \typstolper & \grad2 & 15 min & 6/12\\
+6.31 & Die Kugel und ihre Oberfläche & \typwerk & \grad2 & 15 min & 6/12\\
+6.32 & Die Krümmung des Torus & \typwerk & \grad3 & 20 min & 6/12\\
+6.33 & Gauß--Bonnet konkret & \typtypisch & \grad2 & 15 min & 6/13\\
+6.34 & Der Igelsatz & \typwerk & \grad2 & 15 min & 6/13\\
+6.35 & Die fünf platonischen Körper & \typtypisch & \grad2 & 15 min & 6/14\\
+6.36 & Sylvester--Gallai & \typwerk & \grad3 & 20 min & 6/14\\
+6.37 & Dichteste Packungen & \typwerk & \grad2 & 15 min & 6/14\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\section{Woran Sie merken, dass Sie es können}
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item Sie können eine Konstruktion nicht nur ausführen, sondern mit einem Kongruenzsatz begründen --- und wissen, welche Kongruenzsätze es nicht gibt.
+\item Sie wechseln frei zwischen Bild und Koordinaten: Ein Dreieck ist drei Punkte, eine Ebene ein Normalenvektor, ein Kegelschnitt eine symmetrische Matrix.
+\item Sie erkennen den Typ einer Isometrie an Fixpunkten und Determinante, und Sie wissen, was affin erhalten bleibt und was nicht.
+\item Sie können Winkelsumme und Fläche auf Kugel und hyperbolischer Ebene ausrechnen --- und erklären, warum beides zusammenhängt.
+\end{itemize}
+
+\section{Aufgaben}
+
+%%%%%%%%%%% Kapitel 1
+\stupser{tief}{Winkelhalbierende: gleich lange Schenkelstücke abtragen, von dort gleiche Kreise. Beweis: zwei Dreiecke mit drei gleichen Seiten.}{22pt}
+\begin{karte}{tief}{6.1}{\typtypisch}{\meta{1}{15 min}{Band 6, Kap.\ 1}}
+\kartentitel{Winkelhalbierende und Lot}
+\worum{Zwei Grundkonstruktionen mit Zirkel und Lineal --- und für jede der Beweis, dass sie tut, was sie soll. Der Beweis ist immer ein Kongruenzsatz.}
+\methoden{Konstruktion mit Zirkel und Lineal, Kongruenzsätze, Beweis einer Konstruktion}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Konstruieren Sie die Winkelhalbierende eines Winkels mit Scheitel $S$ und beweisen Sie, dass sie den Winkel halbiert.
+\item Konstruieren Sie das Lot von einem Punkt $P$ auf eine Gerade $g$ und beweisen Sie, dass es senkrecht steht.
+\item Warum kann man mit Zirkel und Lineal jeden Winkel halbieren, aber nicht jeden dritteln? (Nur die Idee; der Beweis ist Band 11.)
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Zeichnen Sie Seite $a = 5$, Winkel $\beta = 30^{\circ}$ an ihrem Ende, und einen Kreis mit Radius $b = 3$ um den anderen Endpunkt: Er schneidet den freien Schenkel zweimal.}{22pt}
+\begin{karte}{akzent}{6.2}{\typstolper}{\meta{1}{10 min}{Band 6, Kap.\ 1}}
+\kartentitel{SSW ist kein Kongruenzsatz}
+\worum{SSS, SWS, WSW und SsW --- aber nicht SSW: Zwei Seiten und ein Winkel, der nicht der größeren Seite gegenüberliegt, bestimmen das Dreieck nicht. Wer das übersieht, beweist Dinge, die falsch sind.}
+\methoden{Kongruenzsätze, Gegenbeispiel, Fallunterscheidung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Konstruieren Sie zwei nicht kongruente Dreiecke mit $a = 5$, $b = 3$ und $\beta = 30^{\circ}$ (Winkel gegenüber $b$).
+\item Rechnen Sie mit dem Sinussatz nach: Welche Werte kann $\alpha$ haben?
+\item Wann ist SSW doch eindeutig? Formulieren Sie die Bedingung (SsW).
+\item Finden Sie den Fehler: \enquote{In den Dreiecken $ABC$ und $A'B'C'$ gilt $a = a'$, $b = b'$ und $\beta = \beta'$. Also sind sie kongruent, also $c = c'$.}
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Die Schnittpunkte $P$, $Q$ der beiden Kreise haben von $A$ und $B$ denselben Abstand. Alle Punkte mit dieser Eigenschaft liegen auf einer Geraden --- warum?}{22pt}
+\begin{karte}{gruen}{6.3}{\typwerk}{\meta{1}{10 min}{Band 6, Kap.\ 1, Aufgabe 1.1}}
+\kartentitel{Die Mittelsenkrechte}
+\worum{Die Konstruktion kennt jeder; der Beweis braucht zweimal SSS und einmal den Nebenwinkelsatz.}
+\methoden{Konstruktion mit Zirkel und Lineal, Kongruenzsätze, Beweis einer Konstruktion}
+Konstruieren Sie die Mittelsenkrechte einer Strecke $AB$ und beweisen Sie, dass die Konstruktion richtig ist: Die Gerade $PQ$ geht durch den Mittelpunkt und steht senkrecht.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 2
+\stupser{tief}{Heron: $A = \sqrt{s(s - a)(s - b)(s - c)}$ mit $s = 21$. Dann $r = A/s$, $R = abc/(4A)$.}{22pt}
+\begin{karte}{tief}{6.4}{\typtypisch}{\meta{2}{15 min}{Band 6, Kap.\ 2}}
+\kartentitel{Das 13-14-15-Dreieck}
+\worum{Das Dreieck mit den schönsten Zahlen: Fläche, Höhen, Inkreis, Umkreis, Winkel --- alles ganz oder halb. Ein Beispiel, an dem man alle Dreiecksformeln einmal durchrechnet.}
+\methoden{Heronsche Formel, Inkreis und Umkreis, Kosinussatz}
+Ein Dreieck hat die Seiten $a = 13$, $b = 14$, $c = 15$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie die Fläche mit der Heronschen Formel.
+\item Berechnen Sie die Höhe auf $b$ und zerlegen Sie damit das Dreieck in zwei rechtwinklige. Was fällt auf?
+\item Berechnen Sie Inkreisradius $r$ und Umkreisradius $R$.
+\item Berechnen Sie den Winkel $\alpha$ mit dem Kosinussatz und prüfen Sie $A = \frac12bc\sin\alpha$.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Umkreismittelpunkt: Schnitt zweier Mittelsenkrechten. Höhenschnittpunkt: Schnitt zweier Höhen. Dann prüfen, ob $S$ auf der Strecke $UH$ liegt und sie $1 : 2$ teilt.}{22pt}
+\begin{karte}{gruen}{6.5}{\typwerk}{\meta{2}{15 min}{Band 6, Kap.\ 2, Aufgabe 2.1}}
+\kartentitel{Die Eulergerade}
+\worum{Schwerpunkt, Umkreismittelpunkt und Höhenschnittpunkt liegen auf einer Geraden --- Euler 1765. Mit Koordinaten ist das eine Rechnung von zehn Zeilen.}
+\methoden{Koordinatengeometrie, Besondere Punkte im Dreieck, Teilverhältnis}
+Ein Dreieck hat die Ecken $A = (0, 0)$, $B = (6, 0)$, $C = (2, 4)$. Bestimmen Sie Schwerpunkt, Umkreismittelpunkt und Höhenschnittpunkt und prüfen Sie die Eulergerade.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 3
+\stupser{tief}{Quadratische Ergänzung in $x$ und in $y$: $(x - 3)^{2} + (y + 2)^{2} = 25$.}{22pt}
+\begin{karte}{tief}{6.6}{\typtypisch}{\meta{1}{10 min}{Band 6, Kap.\ 3}}
+\kartentitel{Eine Kreisgleichung lesen}
+\worum{Mittelpunkt und Radius aus der ausmultiplizierten Form, eine Tangente, ein Schnitt mit einer Geraden --- Kreisrechnung, wie sie in jeder Anwendung vorkommt.}
+\methoden{Quadratische Ergänzung, Kreisgleichung, Tangente}
+$K\colon x^{2} + y^{2} - 6x + 4y - 12 = 0$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie Mittelpunkt und Radius.
+\item Zeigen Sie, dass $P = (6, 2)$ auf $K$ liegt, und bestimmen Sie die Tangente in $P$.
+\item Bestimmen Sie die Schnittpunkte von $K$ mit der Geraden $y = x - 1$.
+\item Für welche $c$ hat $x^{2} + y^{2} - 6x + 4y + c = 0$ keinen Punkt?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Potenz $= d^{2} - r^{2} = 169 - 25 = 144$. Sekante: $PA\cdot PB = 144$. Tangente: $t^{2} = 144$.}{22pt}
+\begin{karte}{gruen}{6.7}{\typwerk}{\meta{1}{10 min}{Band 6, Kap.\ 3, Aufgabe 3.1}}
+\kartentitel{Die Potenz eines Punktes}
+\worum{Sekanten-Tangenten-Satz und Sehnensatz sind ein Satz: Das Produkt der Abschnitte hängt nur vom Punkt ab, nicht von der Geraden.}
+\methoden{Potenz eines Punktes, Sekanten-Tangenten-Satz}
+Ein Kreis hat den Radius $5$. Ein Punkt $P$ liegt $13$ Einheiten vom Mittelpunkt entfernt. Eine Sekante durch $P$ trifft den Kreis in $A$ und $B$ mit $PA = 8$. Bestimmen Sie $PB$ und die Tangentenlänge von $P$.
+\end{karte}
+
+\stupser{gruen}{$c^{2} = a^{2} - b^{2} = 16$; $e = c/a$; Leitlinien $x = \pm a/e$. Tangente in $(x_0, y_0)$: $\frac{x_0x}{a^{2}} + \frac{y_0y}{b^{2}} = 1$.}{22pt}
+\begin{karte}{gruen}{6.8}{\typwerk}{\meta{2}{15 min}{Band 6, Kap.\ 3, Aufgabe 3.2}}
+\kartentitel{Eine Ellipse vermessen}
+\worum{Brennpunkte, Exzentrizität, Leitlinien, Tangente --- alle Kenngrößen einer Ellipse an einem Beispiel, bei dem die Zahlen aufgehen.}
+\methoden{Kegelschnitte, Brennpunkteigenschaft, Tangente}
+Eine Ellipse hat die Halbachsen $a = 5$ und $b = 3$. (a) Bestimmen Sie Brennpunkte, Exzentrizität und Leitlinien. (b) Prüfen Sie für $P = (4;\ 1{,}8)$ die Brennpunkteigenschaft. (c) Bestimmen Sie die Tangente in $P$.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 4
+\stupser{tief}{Windschief: nicht parallel und kein Schnittpunkt. Abstand: Verbindungsvektor der Aufpunkte auf das Kreuzprodukt der Richtungen projizieren.}{22pt}
+\begin{karte}{tief}{6.9}{\typtypisch}{\meta{2}{15 min}{Band 6, Kap.\ 4}}
+\kartentitel{Windschief}
+\worum{Zwei Geraden im Raum: parallel, schneidend oder windschief --- und im letzten Fall ein Abstand, den man mit dem Kreuzprodukt in einer Zeile bekommt.}
+\methoden{Lagebeziehungen, Kreuzprodukt, Abstand}
+$g\colon(1, 0, 0) + s(1, 1, 0)$, $h\colon(0, 0, 1) + t(0, 1, 2)$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $g$ und $h$ windschief sind.
+\item Berechnen Sie den Abstand von $g$ und $h$.
+\item Bestimmen Sie die beiden Punkte, in denen der Abstand angenommen wird (das gemeinsame Lot).
+\item Geben Sie die Ebene an, die $g$ enthält und zu $h$ parallel ist.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Der Winkel zwischen Gerade und Ebene ist der Winkel zur \emph{Projektion} der Geraden --- also $90^{\circ}$ minus Winkel zur Normalen. Daher $\sin$, nicht $\cos$.}{22pt}
+\begin{karte}{akzent}{6.10}{\typstolper}{\meta{1}{10 min}{Band 6, Kap.\ 4}}
+\kartentitel{Sinus oder Kosinus?}
+\worum{Drei Winkelformeln mit dem Skalarprodukt, die man verwechselt: zwischen zwei Geraden, zwischen zwei Ebenen, zwischen Gerade und Ebene. Bei der dritten steht der Sinus --- und das übersieht jeder einmal.}
+\methoden{Skalarprodukt, Winkel zwischen Gerade und Ebene, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Jemand berechnet den Winkel zwischen $g\colon t(1, 1, 1)$ und der Ebene $z = 0$ als $\arccos\frac{(1, 1, 1)\cdot(0, 0, 1)}{\sqrt3} = 54{,}7^{\circ}$. Warum ist das falsch, und was ist richtig?
+\item Berechnen Sie den Winkel zwischen den Ebenen $x + y = 0$ und $z = 0$. Welcher Winkel ist gemeint, wenn zwei herauskommen?
+\item Berechnen Sie den Winkel zwischen $g\colon t(1, 0, 0)$ und $h\colon s(1, 1, 0)$ und zwischen $g$ und $h'\colon s(-1, -1, 0)$. Warum muss man Beträge setzen?
+\item Fassen Sie die drei Formeln in einer Tabelle zusammen.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Normalenvektor $(B - A)\times(C - A) = (12, 7, 11)$. Abstand $= \frac{|n\cdot(D - A)|}{|n|}$, Volumen $= \frac16|n\cdot(D - A)|$.}{22pt}
+\begin{karte}{gruen}{6.11}{\typwerk}{\meta{2}{15 min}{Band 6, Kap.\ 4, Aufgabe 4.1}}
+\kartentitel{Ebene, Abstand, Tetraeder}
+\worum{Vier Punkte im Raum, und alle Grundrechnungen daran: Ebene, Abstand, Volumen, Winkel --- mit Kreuz- und Spatprodukt.}
+\methoden{Kreuzprodukt, Spatprodukt, Abstand, Skalarprodukt}
+$A = (1, 2, 3)$, $B = (4, 0, 1)$, $C = (2, 5, 0)$, $D = (0, 1, 4)$. (a) Ebene durch $A, B, C$ in Koordinatenform. (b) Abstand von $D$ zu dieser Ebene. (c) Volumen des Tetraeders $ABCD$. (d) Winkel zwischen $AB$ und $AC$.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 5
+\stupser{akzent}{$x^{2} - y^{2} = 0$ ist $(x - y)(x + y) = 0$: zwei Geraden. $x^{2} + y^{2} = 0$: ein Punkt. $x^{2} + y^{2} = -1$: nichts.}{22pt}
+\begin{karte}{akzent}{6.12}{\typstolper}{\meta{1}{10 min}{Band 6, Kap.\ 5}}
+\kartentitel{Entartete Kegelschnitte}
+\worum{\enquote{Jede Gleichung zweiten Grades ist Ellipse, Parabel oder Hyperbel} --- fast. Die Ausnahmen sind Geradenpaare, Punkte und die leere Menge, und man muss sie erkennen, bevor man Halbachsen ausrechnet.}
+\methoden{Kegelschnitte, Fallunterscheidung, Gegenbeispiel, Faktorisieren}
+Bestimmen Sie die Menge aller $(x, y)$ mit
+\begin{align*} &\text{(a) } x^{2} - y^{2} = 0, &&\text{(b) } x^{2} + y^{2} + 1 = 0,\\ &\text{(c) } x^{2} - 2xy + y^{2} = 0, &&\text{(d) } x^{2} - 2xy + y^{2} - 1 = 0,\\ &\text{(e) } xy = 0 . \end{align*}
+Welche sind Kegelschnitte im eigentlichen Sinn? Woran erkennt man die Entartung an der Matrix und an der Determinante?
+\end{karte}
+
+\stupser{gruen}{Matrix $\begin{pmatrix}5 & -2\\ -2 & 8\end{pmatrix}$, Eigenwerte $4$ und $9$: $4x'^{2} + 9y'^{2} = 36$.}{22pt}
+\begin{karte}{gruen}{6.13}{\typwerk}{\meta{2}{15 min}{Band 6, Kap.\ 5, Aufgabe 5.1}}
+\kartentitel{Typ und Normalform}
+\worum{Hauptachsentransformation an einer Gleichung mit gemischtem Term: Eigenwerte bestimmen den Typ, Eigenvektoren die Achsen.}
+\methoden{Hauptachsentransformation, Eigenwerte, Kegelschnitte}
+Bestimmen Sie Typ und Normalform von $5x^{2} - 4xy + 8y^{2} - 36 = 0$, die Halbachsen und die Richtungen der Hauptachsen.
+\end{karte}
+
+\stupser{gruen}{$A = I + J$ mit $J$ der Einsmatrix; Eigenwerte von $J$ sind $3, 0, 0$, also die von $A$: $4, 1, 1$.}{22pt}
+\begin{karte}{gruen}{6.14}{\typwerk}{\meta{2}{15 min}{Band 6, Kap.\ 5, Aufgabe 5.2}}
+\kartentitel{Eine Quadrik im Raum}
+\worum{Drei Variablen, alle gemischten Terme gleich --- eine Matrix mit Struktur, deren Eigenwerte man ohne charakteristisches Polynom sieht.}
+\methoden{Hauptachsentransformation, Eigenwerte, Quadriken}
+Klassifizieren Sie $2x^{2} + 2y^{2} + 2z^{2} + 2xy + 2yz + 2zx = 6$ und geben Sie die Halbachsen und die Symmetrieachse an.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 6
+\stupser{tief}{Fixpunkte suchen: $f(x) = x$. Determinante des linearen Teils: $+1$ Drehung oder Verschiebung, $-1$ Spiegelung oder Gleitspiegelung.}{22pt}
+\begin{karte}{tief}{6.15}{\typtypisch}{\meta{2}{15 min}{Band 6, Kap.\ 6}}
+\kartentitel{Drei Abbildungen, drei Typen}
+\worum{Jede Isometrie der Ebene ist Verschiebung, Drehung, Spiegelung oder Gleitspiegelung. Die Aufgabe übt, den Typ aus der Formel abzulesen --- über Fixpunkte und Determinante.}
+\methoden{Isometrien klassifizieren, Fixpunkte, Determinante}
+Bestimmen Sie Typ und Kenngrößen (Zentrum, Winkel, Achse, Verschiebung) von
+\begin{align*} f_1(x, y) &= (-y + 2,\ x + 1),\\ f_2(x, y) &= (y + 1,\ x + 1),\\ f_3(x, y) &= (-x + 4,\ y). \end{align*}
+\end{karte}
+
+\stupser{gruen}{Erst an $y = 0$, dann an $y = x$: Matrixprodukt $S_2S_1$. Zwei Spiegelungen an Geraden mit Winkel $\varphi$ ergeben eine Drehung um $2\varphi$.}{22pt}
+\begin{karte}{gruen}{6.16}{\typwerk}{\meta{1}{10 min}{Band 6, Kap.\ 6, Aufgabe 6.1}}
+\kartentitel{Zwei Spiegelungen}
+\worum{Der Satz, auf dem die ganze Isometrietheorie steht: Zwei Spiegelungen sind eine Drehung (oder Verschiebung). Hier mit Matrizen, und mit der Frage nach der Reihenfolge.}
+\methoden{Verkettung, Spiegelungsmatrix, Drehmatrix}
+Bestimmen Sie die Verkettung der Spiegelung an $y = 0$ mit der Spiegelung an $y = x$ und identifizieren Sie den Typ. Was ändert sich bei umgekehrter Reihenfolge?
+\end{karte}
+
+\stupser{gruen}{Bahnformel: $|G| = |\text{Bahn}|\cdot|\text{Stabilisator}|$. Die Drehgruppe operiert auf $6$ Flächen, jede hat $4$ Drehungen als Stabilisator.}{22pt}
+\begin{karte}{gruen}{6.17}{\typwerk}{\meta{2}{15 min}{Band 6, Kap.\ 6, Aufgabe 6.2}}
+\kartentitel{Die Symmetriegruppe des Würfels}
+\worum{$48$ Symmetrien, $24$ davon Drehungen --- und zwei Wege, das zu zählen: die Bahnformel und die Permutation der Raumdiagonalen.}
+\methoden{Bahnformel, Symmetriegruppe, Zählen}
+Bestimmen Sie die Ordnung der vollen Symmetriegruppe des Würfels auf zwei Weisen.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 7
+\stupser{tief}{$f(x) = Mx + t$: $t = f(0, 0)$; die Spalten von $M$ sind $f(e_1) - t$ und $f(e_2) - t$.}{22pt}
+\begin{karte}{tief}{6.18}{\typtypisch}{\meta{2}{15 min}{Band 6, Kap.\ 7}}
+\kartentitel{Eine affine Abbildung bestimmen}
+\worum{Drei Punkte und ihre Bilder legen eine affine Abbildung fest. Was sie erhält (Parallelität, Teilverhältnisse, Flächenverhältnisse) und was nicht (Längen, Winkel), sieht man an der Matrix.}
+\methoden{Affine Abbildung, Determinante, Invarianten}
+$f$ sei affin mit $f(0, 0) = (1, 1)$, $f(1, 0) = (3, 2)$, $f(0, 1) = (2, 4)$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie $f(x) = Mx + t$.
+\item Berechnen Sie das Bild des Einheitsquadrats und seine Fläche.
+\item Zeigen Sie an diesem Beispiel: Mittelpunkte gehen in Mittelpunkte, parallele Geraden in parallele; rechte Winkel nicht in rechte Winkel.
+\item Welche Abbildung macht das Bild wieder zum Quadrat? Ist sie affin?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$(A, B;\ C, D) = \frac{AC}{CB}\Big/\frac{AD}{DB} = -1$ mit orientierten Längen; $D$ liegt außerhalb der Strecke $AB$.}{22pt}
+\begin{karte}{gruen}{6.19}{\typwerk}{\meta{1}{10 min}{Band 6, Kap.\ 7, Aufgabe 7.1}}
+\kartentitel{Harmonische Lage}
+\worum{Vier Punkte liegen harmonisch, wenn ihr Doppelverhältnis $-1$ ist: Einer teilt innen im selben Verhältnis wie der andere außen.}
+\methoden{Doppelverhältnis, Teilverhältnis}
+Auf einer Geraden liegen $A = 0$, $B = 6$, $C = 2$, $D = x$. Für welches $x$ liegen die vier Punkte harmonisch? Prüfen Sie, dass $C$ innen und $D$ außen im selben Verhältnis teilen.
+\end{karte}
+
+\stupser{gruen}{$u = B - A$, $v = C - A$ und entsprechend $u', v'$. Die Matrix $M$ mit $Mu = u'$, $Mv = v'$ ist $M = U'U^{-1}$.}{22pt}
+\begin{karte}{gruen}{6.20}{\typwerk}{\meta{2}{15 min}{Band 6, Kap.\ 7, Aufgabe 7.2}}
+\kartentitel{Affin gibt es nur ein Dreieck}
+\worum{In der affinen Geometrie sind alle Dreiecke gleich --- deshalb beweist man affine Sätze am gleichseitigen oder am rechtwinkligen und hat sie für alle.}
+\methoden{Affine Abbildung, Basiswechsel, Existenzbeweis}
+Zeigen Sie, dass sich je zwei nichtentartete Dreiecke durch eine affine Abbildung ineinander überführen lassen. Führen Sie es durch für $A = (0, 0)$, $B = (1, 0)$, $C = (0, 1)$ und $A' = (1, 1)$, $B' = (4, 2)$, $C' = (2, 5)$. Was folgt für den Schwerpunkt?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 8
+\stupser{akzent}{Um zu zeigen, dass die Winkelsumme $180^{\circ}$ ist, zieht man eine Parallele durch die Spitze und benutzt Wechselwinkel. Dass diese Parallele \emph{eindeutig} ist, ist das Parallelenaxiom.}{22pt}
+\begin{karte}{akzent}{6.21}{\typstolper}{\meta{2}{15 min}{Band 6, Kap.\ 8}}
+\kartentitel{Ein Beweis im Kreis}
+\worum{Zweitausend Jahre lang versuchte man, das Parallelenaxiom aus den anderen zu beweisen --- und benutzte dabei jedes Mal eine Aussage, die ihm äquivalent ist. Die Aufgabe übt, solche Zirkel zu erkennen.}
+\methoden{Äquivalente Aussagen, Zirkelschluss erkennen, Axiomatik}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Jemand \enquote{beweist} das Parallelenaxiom so: \enquote{Die Winkelsumme im Dreieck ist $180^{\circ}$. Gäbe es durch $P$ zwei Parallelen zu $g$, so \dots} Wo ist der Zirkel?
+\item Zeigen Sie: Aus dem Parallelenaxiom folgt die Winkelsumme $180^{\circ}$. (Das ist die harmlose Richtung.)
+\item Welche der folgenden Aussagen sind dem Parallelenaxiom äquivalent, welche gelten in jeder Geometrie: Es gibt ein Rechteck. Es gibt ähnliche, nicht kongruente Dreiecke. Die Winkelsumme ist höchstens $180^{\circ}$. Der Satz des Pythagoras. Durch drei nicht kollineare Punkte geht ein Kreis.
+\item Warum ist die hyperbolische Geometrie der Beweis, dass es keinen Beweis gibt?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 9
+\stupser{tief}{Fläche eines hyperbolischen $n$-Ecks bei $K = -1$: $(n - 2)\pi$ minus Winkelsumme. Für ein rechtwinkliges Fünfeck: $3\pi - 5\cdot\frac\pi2$.}{22pt}
+\begin{karte}{tief}{6.22}{\typtypisch}{\meta{2}{15 min}{Band 6, Kap.\ 9}}
+\kartentitel{Hyperbolische Vielecke}
+\worum{In der hyperbolischen Ebene bestimmt die Winkelsumme die Fläche --- und es gibt Figuren, die es euklidisch nicht gibt: rechtwinklige Fünfecke, Dreiecke mit drei Nullwinkeln.}
+\methoden{Winkeldefekt, Flächenformel, Gauß–Bonnet}
+Krümmung $K = -1$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Ein Dreieck hat die Winkel $20^{\circ}$ und $30^{\circ}$ und die Fläche $1$. Bestimmen Sie den dritten Winkel.
+\item Bestimmen Sie die Fläche eines Fünfecks mit fünf rechten Winkeln. Warum gibt es so ein Fünfeck euklidisch nicht?
+\item Wie groß ist die Fläche eines Dreiecks höchstens, und wie sieht das Dreieck aus, das sie erreicht?
+\item Kann ein hyperbolisches Dreieck die Winkel $60^{\circ}, 60^{\circ}, 60^{\circ}$ haben? Und $70^{\circ}, 70^{\circ}, 70^{\circ}$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Fläche $= \pi - (\alpha + \beta + \gamma)$ bei $K = -1$; allgemein $\frac{\pi - \text{Winkelsumme}}{|K|}$.}{22pt}
+\begin{karte}{gruen}{6.23}{\typwerk}{\meta{1}{10 min}{Band 6, Kap.\ 9, Aufgabe 9.1}}
+\kartentitel{Ein hyperbolisches Dreieck}
+\worum{Winkeldefekt gleich Fläche --- die Formel, die Gauß und Lambert fanden, an Zahlen.}
+\methoden{Winkeldefekt, Flächenformel, Skalierung}
+Ein hyperbolisches Dreieck hat die Winkel $30^{\circ}$, $40^{\circ}$, $50^{\circ}$. (a) Fläche bei $K = -1$. (b) Fläche bei $K = -\frac1{R^{2}}$ mit $R = 3$. (c) Welchen Anteil der maximal möglichen Dreiecksfläche nimmt es ein?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 10
+\stupser{akzent}{Zwei Punkte auf $60^{\circ}$ Nord, $180^{\circ}$ Länge auseinander: Entlang des Breitenkreises $\pi R\cos60^{\circ}$; über den Pol $2\cdot30^{\circ}$ Bogen.}{22pt}
+\begin{karte}{akzent}{6.24}{\typstolper}{\meta{1}{10 min}{Band 6, Kap.\ 10}}
+\kartentitel{Der Breitenkreis ist kein Umweg --- oder doch?}
+\worum{Auf der Karte sieht der Breitenkreis wie die direkte Verbindung aus. Auf der Kugel ist er es nicht: Nur Großkreise sind Geodäten, und Breitenkreise (außer dem Äquator) sind keine.}
+\methoden{Großkreis, Geodäten, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zwei Orte liegen auf $60^{\circ}$ Nord, $180^{\circ}$ Längenunterschied. Wie lang ist der Weg längs des Breitenkreises, wie lang über den Nordpol ($R = 6371$ km)?
+\item Dasselbe für $10^{\circ}$ Längenunterschied auf $60^{\circ}$ Nord. Wie groß ist der Unterschied jetzt?
+\item Warum ist der Äquator eine Geodäte, der Breitenkreis $60^{\circ}$ aber nicht? (Argument mit der Ebene durch den Mittelpunkt.)
+\item Was bedeutet das für den Kurs eines Flugzeugs von Frankfurt nach New York (Aufgabe 6.26)?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Alle drei Winkel sind rechte: Exzess $\frac\pi2$, Fläche $R^{2}\cdot\frac\pi2$. Das ist ein Achtel der Kugel.}{22pt}
+\begin{karte}{gruen}{6.25}{\typwerk}{\meta{2}{15 min}{Band 6, Kap.\ 10, Aufgabe 10.1}}
+\kartentitel{Ein Dreieck auf der Erde}
+\worum{Winkelexzess gleich Fläche durch $R^{2}$ --- das sphärische Gegenstück zum Winkeldefekt. Am Oktanten sieht man es, am $100$-km-Dreieck merkt man nichts.}
+\methoden{Winkelexzess, Flächenformel, Größenordnung schätzen}
+Ein sphärisches Dreieck auf der Erde ($R = 6371$ km) hat die Ecken Nordpol, $(0^{\circ}\,\text{N}, 0^{\circ}\,\text{O})$ und $(0^{\circ}\,\text{N}, 90^{\circ}\,\text{O})$. (a) Winkel und Fläche. (b) Vergleich mit dem Achtel der Kugeloberfläche. (c) Exzess eines Dreiecks mit $100$ km Seitenlänge.
+\end{karte}
+
+\stupser{gruen}{Sphärischer Kosinussatz im Dreieck Pol--Frankfurt--New York: $\cos d = \sin\varphi_1\sin\varphi_2 + \cos\varphi_1\cos\varphi_2\cos\Delta\lambda$.}{22pt}
+\begin{karte}{gruen}{6.26}{\typwerk}{\meta{2}{20 min}{Band 6, Kap.\ 10, Aufgabe 10.2}}
+\kartentitel{Frankfurt--New York}
+\worum{Die Großkreisentfernung und der Startkurs --- sphärische Trigonometrie, wie die Navigation sie seit Jahrhunderten benutzt.}
+\methoden{Sphärischer Kosinussatz, Großkreis, Sphärische Trigonometrie}
+Berechnen Sie die kürzeste Flugstrecke von Frankfurt ($50{,}0^{\circ}$ N, $8{,}6^{\circ}$ O) nach New York ($40{,}7^{\circ}$ N, $74{,}0^{\circ}$ W) und den Startkurs.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 11
+\stupser{tief}{$\kappa = \frac{|f''|}{(1 + f'^{2})^{3/2}}$. Im Scheitel der Parabel $y = x^{2}$: $f' = 0$, $f'' = 2$.}{22pt}
+\begin{karte}{tief}{6.27}{\typtypisch}{\meta{2}{15 min}{Band 6, Kap.\ 11}}
+\kartentitel{Krümmung eines Graphen}
+\worum{Krümmung ist nicht die zweite Ableitung --- aber dort, wo die Tangente waagerecht ist, schon. Die Formel für Graphen, Schmiegkreise, und die Bogenlänge als Kontrolle.}
+\methoden{Krümmung, Schmiegkreis, Bogenlänge}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Leiten Sie $\kappa = \frac{|f''|}{(1 + f'^{2})^{3/2}}$ aus der Krümmungsformel für Parameterkurven her.
+\item Berechnen Sie die Krümmung von $y = x^{2}$ bei $x = 0$ und $x = 1$ und die Schmiegkreisradien.
+\item Warum ist $\kappa\neq|f''|$, obwohl $f''$ die \enquote{Krümmung} des Graphen misst? Was misst $f''$ stattdessen?
+\item Berechnen Sie die Bogenlänge der Kettenlinie $y = \cosh x$ von $0$ bis $1$.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$x'y'' - y'x'' = 6$ für alle $t$; der Nenner $(9\sin^{2}t + 4\cos^{2}t)^{3/2}$ ist in den Scheiteln $8$ bzw.\ $27$.}{22pt}
+\begin{karte}{gruen}{6.28}{\typwerk}{\meta{2}{10 min}{Band 6, Kap.\ 11, Aufgabe 11.1}}
+\kartentitel{Die Krümmung der Ellipse}
+\worum{Die Ellipse ist an den Enden der großen Achse am stärksten gekrümmt --- und die Schmiegkreisradien sind $b^{2}/a$ und $a^{2}/b$.}
+\methoden{Krümmung, Schmiegkreis, Parameterkurve}
+Bestimmen Sie die Krümmung der Ellipse $\gamma(t) = (3\cos t, 2\sin t)$ in den Scheiteln und die Schmiegkreisradien.
+\end{karte}
+
+\stupser{gruen}{$|\gamma'| = \sqrt{a^{2} + b^{2}}$ konstant; $\kappa = \frac{|\gamma'\times\gamma''|}{|\gamma'|^{3}}$, $\tau = \frac{(\gamma'\times\gamma'')\cdot\gamma'''}{|\gamma'\times\gamma''|^{2}}$.}{22pt}
+\begin{karte}{gruen}{6.29}{\typwerk}{\meta{2}{15 min}{Band 6, Kap.\ 11, Aufgabe 11.2}}
+\kartentitel{Die Schraubenlinie}
+\worum{Die einzige Kurve mit konstanter Krümmung \emph{und} konstanter Torsion --- und die Grenzfälle Kreis ($b = 0$) und Gerade ($a = 0$).}
+\methoden{Krümmung, Torsion, Frenet-Formeln}
+Bestimmen Sie Krümmung und Torsion der Schraubenlinie $\gamma(t) = (a\cos t, a\sin t, bt)$, $a > 0$. Diskutieren Sie die Grenzfälle.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 12
+\stupser{akzent}{$\int_0^{2\pi}\!\!\int_0^{\pi}R^{2}\,d\theta\,d\varphi = 2\pi^{2}R^{2}\neq4\pi R^{2}$: Das Flächenelement ist $R^{2}\sin\theta\,d\theta\,d\varphi$. Und: $K = \frac1{R^{2}}\neq0$ --- keine Abwicklung.}{22pt}
+\begin{karte}{akzent}{6.30}{\typstolper}{\meta{2}{15 min}{Band 6, Kap.\ 12}}
+\kartentitel{Warum keine Landkarte stimmt}
+\worum{Zwei Irrtümer: Das Flächenelement sei $d\theta\,d\varphi$, und man könne die Kugel wie einen Zylinder in die Ebene abrollen. Beide scheitern an derselben Zahl --- der Gauß-Krümmung.}
+\methoden{Flächenelement, Theorema egregium, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Jemand berechnet die Kugeloberfläche als $\int_0^{2\pi}\int_0^{\pi}R^{2}\,d\theta\,d\varphi = 2\pi^{2}R^{2}$. Wo ist der Fehler?
+\item Der Zylinder lässt sich ohne Verzerrung in die Ebene abwickeln, die Kugel nicht. Begründen Sie beides mit der Gauß-Krümmung.
+\item Die Mercator-Karte ist winkeltreu. Warum kann sie nicht auch flächentreu sein? Was passiert mit Grönland?
+\item Gibt es eine längentreue Karte eines Kugelstücks, und sei es noch so klein?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$X_\theta\cdot X_\theta = R^{2}$, $X_\theta\cdot X_\varphi = 0$, $X_\varphi\cdot X_\varphi = R^{2}\sin^{2}\theta$. Flächenelement $\sqrt{EG - F^{2}} = R^{2}\sin\theta$.}{22pt}
+\begin{karte}{gruen}{6.31}{\typwerk}{\meta{2}{15 min}{Band 6, Kap.\ 12, Aufgabe 12.1}}
+\kartentitel{Die Kugel und ihre Oberfläche}
+\worum{Die erste Fundamentalform ist das Lineal auf der Fläche: Sie misst Längen, Winkel und Flächen in den Parametern.}
+\methoden{Erste Fundamentalform, Flächenelement, Kugelkoordinaten}
+Bestimmen Sie die erste Fundamentalform der Kugel vom Radius $R$ in Kugelkoordinaten und berechnen Sie damit die Oberfläche.
+\end{karte}
+
+\stupser{gruen}{$K = \frac{\cos u}{r(R + r\cos u)}$: Vorzeichen von $\cos u$ --- positiv außen, negativ innen, null oben und unten.}{22pt}
+\begin{karte}{gruen}{6.32}{\typwerk}{\meta{3}{20 min}{Band 6, Kap.\ 12, Aufgabe 12.2}}
+\kartentitel{Die Krümmung des Torus}
+\worum{Eine Fläche mit allen drei Krümmungstypen: elliptisch außen, hyperbolisch innen, parabolisch dazwischen. Und das Integral über $K$ ist null --- Gauß--Bonnet für $\chi = 0$.}
+\methoden{Gauß-Krümmung, Zweite Fundamentalform, Fallunterscheidung}
+Berechnen Sie die Gauß-Krümmung des Torus $X(u, v) = \bigl((R + r\cos u)\cos v, (R + r\cos u)\sin v, r\sin u\bigr)$, $R > r > 0$, und bestimmen Sie, wo er elliptisch, parabolisch und hyperbolisch ist. Prüfen Sie $\int_TK\,dA = 0$.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 13
+\stupser{tief}{$\int_MK\,dA = 2\pi\chi(M)$. Kugel $\chi = 2$, Torus $\chi = 0$. Für Vielecke: $\int K + \text{Außenwinkel} = 2\pi$.}{22pt}
+\begin{karte}{tief}{6.33}{\typtypisch}{\meta{2}{15 min}{Band 6, Kap.\ 13}}
+\kartentitel{Gauß--Bonnet konkret}
+\worum{Der Satz, der Krümmung (lokal) und Topologie (global) verbindet --- an Beispielen, bei denen man beide Seiten ausrechnen kann.}
+\methoden{Gauß–Bonnet, Euler-Charakteristik, Winkelexzess}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Prüfen Sie Gauß--Bonnet für die Kugel vom Radius $R$: $\int K\,dA = 2\pi\chi$.
+\item Ein geodätisches Dreieck auf der Kugel mit drei rechten Winkeln: Berechnen Sie $\int K\,dA$ über das Dreieck und vergleichen Sie mit der Winkelsumme.
+\item Ein Fußball hat $12$ Fünfecke und $20$ Sechsecke. Zählen Sie Ecken und Kanten und prüfen Sie $V - E + F = 2$.
+\item Warum muss jede geschlossene Fläche im Raum, die kein Torus-Loch hat, irgendwo positive Krümmung haben --- egal wie verbeult sie ist?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Poincaré--Hopf: Die Summe der Indizes der Nullstellen eines Vektorfelds ist $\chi(M)$. Auf der Kugel $\chi = 2\neq0$, also gibt es Nullstellen.}{22pt}
+\begin{karte}{gruen}{6.34}{\typwerk}{\meta{2}{15 min}{Band 6, Kap.\ 13, Aufgabe 13.1}}
+\kartentitel{Der Igelsatz}
+\worum{Man kann einen Igel nicht kämmen --- und auf der Erde gibt es immer einen Punkt ohne Wind. Beides ist die Euler-Charakteristik der Kugel.}
+\methoden{Index eines Vektorfelds, Euler-Charakteristik, Poincaré–Hopf}
+Der Igelsatz: Auf einer Kugel gibt es kein stetiges, nirgends verschwindendes Tangentialvektorfeld. Erklären Sie den Zusammenhang mit Gauß--Bonnet. Warum lässt sich der Torus kämmen?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 14
+\stupser{tief}{Jede Fläche hat $p$ Kanten, jede Kante gehört zu $2$ Flächen: $pF = 2E$. An jeder Ecke $q$ Kanten: $qV = 2E$. In $V - E + F = 2$ einsetzen.}{22pt}
+\begin{karte}{tief}{6.35}{\typtypisch}{\meta{2}{15 min}{Band 6, Kap.\ 14}}
+\kartentitel{Die fünf platonischen Körper}
+\worum{Dass es genau fünf gibt, ist ein Satz --- und sein Beweis ist drei Zeilen Eulersche Polyederformel plus eine Ungleichung.}
+\methoden{Eulersche Polyederformel, Doppeltes Abzählen, Ungleichung lösen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Ein regelmäßiges Polyeder habe $p$-eckige Flächen, $q$ an jeder Ecke. Drücken Sie $V$ und $F$ durch $E$ aus und setzen Sie in $V - E + F = 2$ ein.
+\item Leiten Sie $\frac1p + \frac1q > \frac12$ her und bestimmen Sie alle Lösungen mit $p, q\ge3$.
+\item Berechnen Sie für jede Lösung $V, E, F$ und benennen Sie den Körper.
+\item Welche Lösungen gibt es für $\frac1p + \frac1q = \frac12$, und was beschreiben sie?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Unter allen Paaren (Punkt, Verbindungsgerade) mit positivem Abstand wähle das mit kleinstem Abstand. Läge auf der Geraden ein dritter Punkt, fände man ein noch kleineres Paar.}{22pt}
+\begin{karte}{gruen}{6.36}{\typwerk}{\meta{3}{20 min}{Band 6, Kap.\ 14, Aufgabe 14.1}}
+\kartentitel{Sylvester--Gallai}
+\worum{Endlich viele Punkte, nicht alle auf einer Geraden: Dann gibt es eine Gerade durch genau zwei. Kellys Beweis (1948) ist das Musterbeispiel für das Extremalprinzip.}
+\methoden{Extremalprinzip, Widerspruchsbeweis, Diskrete Geometrie}
+Beweisen Sie den Satz von Sylvester--Gallai. Warum scheitert der Beweis bei unendlich vielen Punkten --- und gilt der Satz dort überhaupt?
+\end{karte}
+
+\stupser{gruen}{Ebene: Gleichseitiges Dreieck mit Seite $2r$ enthält drei Sechstelkreise, also einen halben Kreis. Dichte $= \frac{\pi r^{2}/2}{\sqrt3r^{2}}$.}{22pt}
+\begin{karte}{gruen}{6.37}{\typwerk}{\meta{2}{15 min}{Band 6, Kap.\ 14, Aufgabe 14.2}}
+\kartentitel{Dichteste Packungen}
+\worum{$\frac\pi{2\sqrt3}\approx0{,}907$ in der Ebene (Thue 1910), $\frac\pi{3\sqrt2}\approx0{,}740$ im Raum (Kepler 1611, Hales 1998). Die Zahlen sind elementar, die Beweise nicht.}
+\methoden{Elementarzelle, Dichte berechnen, Volumen}
+Berechnen Sie die Dichte der dichtesten Kugelpackung in Dimension $2$ und $3$.
+\end{karte}

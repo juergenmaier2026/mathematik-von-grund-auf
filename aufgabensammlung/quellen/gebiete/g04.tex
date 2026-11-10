@@ -1,0 +1,553 @@
+\setgebiet{5}{Wahrscheinlichkeit}{tief}
+\chapter{Wahrscheinlichkeit}
+\marginnote{\small\itshape\color{grau}\textbf{Sie brauchen:} Band 4, Kapitel 1--14. Aus Band 0 die Bruchrechnung und den Binomialkoeffizienten, aus Band 3 Reihen und Integrale (ab Kapitel 4), aus Band 2 Matrizen (Kapitel 12).}[12pt]
+\worum{Der Zufall ist das Gebiet, in dem die Intuition am häufigsten irrt --- und in dem eine Zeichnung sie am sichersten korrigiert. Die Aufgaben üben vier Dinge: zählen statt rechnen, bedingte Wahrscheinlichkeiten in die richtige Richtung lesen, Erwartungswerte durch Zustände und Indikatoren gliedern, und die Grenzwertsätze dort anwenden, wo sie gelten.}
+
+\section{Was Sie hier üben}
+\begin{center}
+{\footnotesize\sffamily\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lP{4.9cm}lcll@{}}
+\toprule
+\textbf{Nr.} & \textbf{Titel} & \textbf{Sorte} & \textbf{Grad} & \textbf{Zeit} & \textbf{Band/Kap.}\\
+\midrule
+4.1 & Würfel, Münzen, Karten: zählen & \typtypisch & \grad1 & 10 min & 4/1\\
+4.2 & Die vertauschten Briefe & \typwerk & \grad2 & 15 min & 4/1\\
+4.3 & Zwei Würfel, eine Summe & \typtypisch & \grad1 & 10 min & 4/2\\
+4.4 & Zehn Karten aus dem Skatblatt & \typwerk & \grad2 & 15 min & 4/2\\
+4.5 & Gleiche Geburtstage & \typwerk & \grad2 & 15 min & 4/2\\
+4.6 & Wege im Gitter & \typwerk & \grad1 & 10 min & 4/2\\
+4.7 & \enquote{Mindestens eine Sechs} & \typstolper & \grad2 & 10 min & 4/2\\
+4.8 & Bedingt --- in welche Richtung? & \typtypisch & \grad1 & 10 min & 4/3\\
+4.9 & Unabhängig oder unvereinbar? & \typstolper & \grad1 & 10 min & 4/3\\
+4.10 & Ein positiver Test & \typwerk & \grad2 & 15 min & 4/3\\
+4.11 & Drei Türen & \typwerk & \grad2 & 15 min & 4/3\\
+4.12 & Das Simpson-Paradox & \typwerk & \grad2 & 15 min & 4/3\\
+4.13 & Ein Würfel als Zufallsvariable & \typtypisch & \grad1 & 10 min & 4/4\\
+4.14 & Eine Dichte normieren & \typwerk & \grad1 & 10 min & 4/4\\
+4.15 & Binomial, Poisson oder geometrisch? & \typtypisch & \grad2 & 15 min & 4/5\\
+4.16 & Zwölf Patienten & \typwerk & \grad1 & 15 min & 4/5\\
+4.17 & Infektionen pro Woche & \typwerk & \grad2 & 15 min & 4/5\\
+4.18 & Gleich- und Exponentialverteilung & \typtypisch & \grad2 & 15 min & 4/6\\
+4.19 & Körpergrößen & \typwerk & \grad1 & 10 min & 4/6\\
+4.20 & Erwartungswert ohne Verteilung & \typtypisch & \grad2 & 15 min & 4/7\\
+4.21 & Varianz der Summe & \typtypisch & \grad2 & 15 min & 4/7\\
+4.22 & Das Sankt-Petersburg-Spiel & \typstolper & \grad3 & 20 min & 4/7\\
+4.23 & Wie viele Briefe liegen richtig? & \typwerk & \grad1 & 10 min & 4/7\\
+4.24 & Erwartungswert und Varianz der Poisson-Verteilung & \typwerk & \grad2 & 15 min & 4/7\\
+4.25 & Poisson plus Poisson & \typwerk & \grad2 & 10 min & 4/7\\
+4.26 & Unkorreliert, aber abhängig & \typstolper & \grad2 & 10 min & 4/8\\
+4.27 & Eine gemeinsame Verteilung & \typwerk & \grad2 & 15 min & 4/8\\
+4.28 & Eier und Küken & \typwerk & \grad2 & 15 min & 4/8\\
+4.29 & Der Affe und Hamlet & \typwerk & \grad2 & 10 min & 4/9\\
+4.30 & Der Spielerfehlschluss & \typstolper & \grad1 & 10 min & 4/10\\
+4.31 & Was das Gesetz der großen Zahlen sagt & \typwerk & \grad2 & 15 min & 4/10\\
+4.32 & Hundert Münzwürfe & \typwerk & \grad2 & 15 min & 4/11\\
+4.33 & Wann wird man stutzig? & \typwerk & \grad2 & 15 min & 4/11\\
+4.34 & Zwei Sechsen hintereinander & \typtypisch & \grad3 & 25 min & 4/12\\
+4.35 & Ein Patient in zwei Wochen & \typwerk & \grad1 & 10 min & 4/12\\
+4.36 & Die stationäre Verteilung & \typwerk & \grad2 & 15 min & 4/12\\
+4.37 & Das Ruinproblem & \typwerk & \grad3 & 20 min & 4/13\\
+4.38 & Ruin mit dem Stoppsatz & \typwerk & \grad3 & 15 min & 4/13\\
+4.39 & Wie viele Patienten braucht die Studie? & \typtypisch & \grad2 & 10 min & 4/14\\
+4.40 & Was der $p$-Wert nicht sagt & \typstolper & \grad2 & 15 min & 4/14\\
+4.41 & Der Maximum-Likelihood-Schätzer & \typwerk & \grad2 & 10 min & 4/14\\
+4.42 & Ein Konfidenzintervall & \typwerk & \grad1 & 10 min & 4/14\\
+4.43 & Ein einseitiger Test & \typwerk & \grad2 & 15 min & 4/14\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\section{Woran Sie merken, dass Sie es können}
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item Sie zeichnen bei einer bedingten Wahrscheinlichkeit, ohne nachzudenken, erst den Baum --- und lesen die Frage dann vom richtigen Ast ab.
+\item Sie können jede Prozentangabe in \enquote{von tausend Menschen} übersetzen, und umgekehrt.
+\item Sie wissen, dass ein Erwartungswert eine Gleichung lösen oder eine Summe von Indikatoren sein kann, bevor er eine Summe über die Verteilung ist.
+\item Sie kennen den Unterschied zwischen \enquote{unabhängig} und \enquote{unvereinbar}, zwischen \enquote{unkorreliert} und \enquote{unabhängig}, und zwischen dem, was der $p$-Wert sagt, und dem, was man gern hätte.
+\end{itemize}
+
+\section{Aufgaben}
+
+%%%%%%%%%%% Kapitel 1
+\stupser{tief}{Günstige durch mögliche --- aber nur, wenn alle möglichen gleich wahrscheinlich sind. Bei zwei Würfeln sind das $36$ geordnete Paare, nicht $21$ ungeordnete.}{22pt}
+\begin{karte}{tief}{4.1}{\typtypisch}{\meta{1}{10 min}{Band 4, Kap.\ 1}}
+\kartentitel{Würfel, Münzen, Karten: zählen}
+\worum{Laplace-Wahrscheinlichkeit ist Zählen. Die Kunst besteht darin, den Grundraum so zu wählen, dass alle Ergebnisse gleich wahrscheinlich sind.}
+\methoden{Laplace-Wahrscheinlichkeit, Zählen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Drei Münzen: Wahrscheinlichkeit für genau zweimal Kopf?
+\item Zwei Würfel: Wahrscheinlichkeit, dass beide dieselbe Zahl zeigen? Dass die Zahlen verschieden sind und die größere eine $6$ ist?
+\item Aus einem Skatblatt ($32$ Karten) zwei Karten ohne Zurücklegen: Wahrscheinlichkeit für zwei Asse?
+\item Warum ist \enquote{Summe $2$} bei zwei Würfeln seltener als \enquote{Summe $3$}, obwohl es jeweils nur \emph{eine} Zahlenkombination gibt ($1 + 1$ bzw.\ $1 + 2$)?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Einschluss--Ausschluss: $P(\text{mindestens einer richtig}) = \sum P(A_i) - \sum P(A_i\cap A_j) + \dots$ Jede $k$-fache Schnittwahrscheinlichkeit ist $\frac{(n - k)!}{n!}$, und es gibt $\binom nk$ davon.}{22pt}
+\begin{karte}{gruen}{4.2}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 1, Aufgabe 1.1}}
+\kartentitel{Die vertauschten Briefe}
+\worum{Das Problem von Montmort (1708): $n$ Briefe, $n$ Umschläge, alles zufällig. Dass die Antwort gegen $\frac1e$ geht und praktisch nicht von $n$ abhängt, ist eine der schönsten Überraschungen der elementaren Wahrscheinlichkeitsrechnung.}
+\methoden{Einschluss–Ausschluss, Exponentialreihe}
+$n$ Briefe werden zufällig auf $n$ adressierte Umschläge verteilt. Wie wahrscheinlich ist es, dass kein Brief im richtigen Umschlag landet? Was passiert für $n\to\infty$?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 2
+\stupser{tief}{Eine $6\times6$-Tabelle. Zählen Sie die Felder je Diagonale.}{22pt}
+\begin{karte}{tief}{4.3}{\typtypisch}{\meta{1}{10 min}{Band 4, Kap.\ 2}}
+\kartentitel{Zwei Würfel, eine Summe}
+\worum{Die Verteilung der Augensumme ist das erste Beispiel einer Zufallsvariablen, die nicht gleichverteilt ist --- und das erste Mal, dass eine Tabelle die ganze Arbeit macht.}
+\methoden{Verteilung einer Summe, Tabelle, Bedingte Wahrscheinlichkeit}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie $P(S = k)$ für alle $k = 2, \dots, 12$.
+\item Welche Summe ist am wahrscheinlichsten? Wie wahrscheinlich ist $S\ge10$?
+\item Beim Spiel \enquote{Craps} gewinnt man im ersten Wurf mit $7$ oder $11$ und verliert mit $2$, $3$ oder $12$. Wie wahrscheinlich ist jedes?
+\item Wie wahrscheinlich ist \enquote{Summe $7$}, wenn man weiß, dass der erste Würfel eine $4$ zeigt? Und wenn man weiß, dass mindestens ein Würfel eine $4$ zeigt?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Grundraum: $\binom{32}{10}$ Blätter, alle gleich wahrscheinlich. Günstig für \enquote{genau $3$ Buben}: $\binom43\binom{28}7$.}{22pt}
+\begin{karte}{gruen}{4.4}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 2, Aufgabe 2.1}}
+\kartentitel{Zehn Karten aus dem Skatblatt}
+\worum{Hypergeometrisch: Ziehen ohne Zurücklegen aus zwei Sorten. Das Muster \enquote{$\binom{\text{Sorte 1}}{k}\binom{\text{Sorte 2}}{n - k}$ durch $\binom{\text{alle}}n$} trägt durch die halbe Kombinatorik.}
+\methoden{Hypergeometrische Verteilung, Binomialkoeffizient}
+Ein Skatblatt hat $32$ Karten ($4$ Farben zu je $8$ Werten). Es werden $10$ Karten ausgeteilt. Berechnen Sie die Wahrscheinlichkeit für (a) genau $3$ Buben (es gibt $4$ Buben), (b) mindestens $3$ Buben, (c) alle $8$ Karo-Karten.
+\end{karte}
+
+\stupser{gruen}{Die Frage \enquote{mindestens zwei gleich} ist schwer; die Frage \enquote{alle verschieden} ist leicht. Rechnen Sie die leichte und ziehen Sie von $1$ ab.}{22pt}
+\begin{karte}{gruen}{4.5}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 2, Aufgabe 2.2}}
+\kartentitel{Gleiche Geburtstage}
+\worum{Wie viele Personen müssen in einem Raum sein, damit die Wahrscheinlichkeit für zwei gleiche Geburtstage über $50\,\%$ liegt? Die meisten schätzen: über hundert. Die Rechnung sagt: $23$.}
+\methoden{Gegenwahrscheinlichkeit, Produktregel, Zählen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zwei Personen: Mit welcher Wahrscheinlichkeit haben sie \emph{verschiedene} Geburtstage? (Schaltjahre ignorieren.)
+\item Drei Personen: Mit welcher Wahrscheinlichkeit sind alle drei Geburtstage verschieden? Schreiben Sie das Produkt hin, bevor Sie rechnen.
+\item Geben Sie die Formel für $n$ Personen an und bestimmen Sie das kleinste $n$, bei dem die Wahrscheinlichkeit mindestens eines gemeinsamen Geburtstags $50\,\%$ überschreitet.
+\item Bei welchem $n$ überschreitet sie $99\,\%$?
+\item Warum täuscht sich die Intuition? Zählen Sie, wie viele \emph{Paare} es unter $23$ Personen gibt.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Jeder Weg ist ein Wort aus $m$ Buchstaben R und $n$ Buchstaben O. Wie viele solche Wörter gibt es?}{22pt}
+\begin{karte}{gruen}{4.6}{\typwerk}{\meta{1}{10 min}{Band 4, Kap.\ 2, Aufgabe 2.3}}
+\kartentitel{Wege im Gitter}
+\worum{Zählen durch Umcodieren: Ein geometrisches Objekt wird zu einem Wort, und Wörter kann man zählen.}
+\methoden{Zählen, Binomialkoeffizient}
+Wie viele Wege führen in einem Gitter von $(0, 0)$ nach $(m, n)$, wenn man nur nach rechts und nach oben gehen darf? Prüfen Sie die Formel für $(2, 2)$ durch Aufzählen.
+\end{karte}
+
+\stupser{akzent}{Vier Würfe, je $\frac16$ --- aber $4\cdot\frac16$ ist die \emph{erwartete Anzahl} von Sechsen, nicht die Wahrscheinlichkeit für mindestens eine. Mit $24$ Würfen und $\frac1{36}$ wäre $24\cdot\frac1{36} = \frac23$, mit $36$ Würfen $1$ --- offensichtlich falsch.}{22pt}
+\begin{karte}{akzent}{4.7}{\typstolper}{\meta{2}{10 min}{Band 4, Kap.\ 2}}
+\kartentitel{\enquote{Mindestens eine Sechs}}
+\worum{Der Chevalier de Méré wettete 1654, in vier Würfen mindestens eine Sechs zu werfen, und gewann; dann wettete er, in $24$ Würfen mit zwei Würfeln mindestens eine Doppelsechs zu werfen, und verlor. Seine Rechnung: $4\cdot\frac16 = 24\cdot\frac1{36}$. Pascal erklärte ihm den Fehler.}
+\methoden{Gegenwahrscheinlichkeit, Gegenbeispiel, Additivität}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie die Wahrscheinlichkeit, in vier Würfen mindestens eine Sechs zu werfen.
+\item Berechnen Sie die Wahrscheinlichkeit, in $24$ Doppelwürfen mindestens eine Doppelsechs zu werfen.
+\item Was berechnet $4\cdot\frac16$ tatsächlich? Wann ist $P(A\cup B) = P(A) + P(B)$ richtig?
+\item Wie viele Doppelwürfe braucht de Méré, damit seine zweite Wette günstig wird?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 3
+\stupser{tief}{$P(A\mid B) = \frac{P(A\cap B)}{P(B)}$: Der Nenner ist das, was man \emph{weiß}. Zeichnen Sie den Baum in der Reihenfolge, in der die Information kommt.}{22pt}
+\begin{karte}{tief}{4.8}{\typtypisch}{\meta{1}{10 min}{Band 4, Kap.\ 3}}
+\kartentitel{Bedingt --- in welche Richtung?}
+\worum{$P(A\mid B)$ und $P(B\mid A)$ sind verschieden --- so verschieden wie \enquote{die meisten Ärzte sind Menschen} und \enquote{die meisten Menschen sind Ärzte}. Die Aufgabe übt, die Richtung zu lesen.}
+\methoden{Baumdiagramm, Bedingte Wahrscheinlichkeit, Satz von Bayes}
+Eine Urne enthält $3$ rote und $2$ blaue Kugeln. Zwei werden ohne Zurücklegen gezogen.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeichnen Sie den Baum und bestimmen Sie $P(\text{zweite rot}\mid\text{erste rot})$.
+\item Bestimmen Sie $P(\text{zweite rot})$. Vergleichen Sie mit $P(\text{erste rot})$.
+\item Bestimmen Sie $P(\text{erste rot}\mid\text{zweite rot})$ --- die Information kommt \enquote{von hinten}.
+\item Welche der drei Zahlen aus (a)--(c) sind gleich, und warum?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Unvereinbar: $P(A\cap B) = 0$. Unabhängig: $P(A\cap B) = P(A)P(B)$. Wenn $P(A), P(B) > 0$, schließen sich die beiden aus.}{22pt}
+\begin{karte}{akzent}{4.9}{\typstolper}{\meta{1}{10 min}{Band 4, Kap.\ 3}}
+\kartentitel{Unabhängig oder unvereinbar?}
+\worum{Zwei Begriffe, die beide \enquote{haben nichts miteinander zu tun} heißen könnten --- und fast Gegenteile sind. Unvereinbare Ereignisse hängen maximal voneinander ab: Tritt das eine ein, ist das andere unmöglich.}
+\methoden{Unabhängigkeit, Gegenbeispiel}
+Ein Würfel wird geworfen. $A = \{\text{gerade}\}$, $B = \{\text{durch 3 teilbar}\}$, $C = \{1, 2\}$, $D = \{5, 6\}$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Sind $A$ und $B$ unabhängig? Unvereinbar?
+\item Sind $C$ und $D$ unabhängig? Unvereinbar?
+\item Zeigen Sie: Haben $A$ und $B$ positive Wahrscheinlichkeit und sind unvereinbar, so sind sie \emph{nicht} unabhängig.
+\item Sind $A$ und $C$ unabhängig? Finden Sie alle Ereignisse $E$ mit $P(E) = \frac13$, die von $A$ unabhängig sind. Gibt es ein Ereignis mit $P(E) = \frac12$, das von $A$ unabhängig ist?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Zählen Sie Menschen, nicht Prozente. Tausend Personen, zwei Gruppen, je zwei Testergebnisse: vier Zahlen, und die Antwort ist ein Bruch aus zweien davon.}{22pt}
+\begin{karte}{gruen}{4.10}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 3, Aufgabe 3.1}}
+\kartentitel{Ein positiver Test}
+\worum{Ein Test hat eine Sensitivität von $90\,\%$ und eine Falsch-Positiv-Rate von $9\,\%$; die Krankheit hat in der getesteten Bevölkerung eine Prävalenz von $1\,\%$. Eine Patientin hat ein positives Ergebnis. Die Frage, die sie stellt, ist nicht die, die der Test beantwortet.}
+\methoden{Natürliche Häufigkeiten, Satz von Bayes, Baumdiagramm}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Von $1000$ getesteten Personen: Wie viele sind krank, wie viele gesund?
+\item Wie viele der Kranken testen positiv? Wie viele der Gesunden?
+\item Wie groß ist die Wahrscheinlichkeit, dass die Patientin krank ist --- der \emph{positive Vorhersagewert}? Vergleichen Sie mit der Sensitivität.
+\item Dieselbe Rechnung für eine Risikogruppe mit Prävalenz $10\,\%$. Was hat sich geändert, was nicht?
+\item Formulieren Sie in einem Satz, warum derselbe Test in zwei Gruppen so verschieden aussagekräftig ist.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Die Wahrscheinlichkeit, dass die erste Wahl richtig war, ist $\frac13$ --- und daran ändert der Moderator nichts, denn er öffnet \emph{immer} eine Ziegentür.}{22pt}
+\begin{karte}{gruen}{4.11}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 3, Aufgabe 3.2}}
+\kartentitel{Drei Türen}
+\worum{Das Ziegenproblem: Drei Türen, ein Auto, zwei Ziegen. Der Kandidat wählt; der Moderator, der weiß, wo das Auto steht, öffnet eine andere Tür mit einer Ziege und bietet den Wechsel an. Sollte man wechseln? Die Antwort ist eindeutig --- sobald man die Annahmen aufschreibt.}
+\methoden{Modellannahmen, Fallunterscheidung, Satz von Bayes}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Schreiben Sie die Modellannahmen auf: Wo steht das Auto, wie wählt der Kandidat, wie wählt der Moderator?
+\item Bestimmen Sie die Gewinnwahrscheinlichkeit bei \enquote{bleiben} und bei \enquote{wechseln} durch Fallunterscheidung über die Position des Autos.
+\item Dieselbe Rechnung mit Bayes: $P(\text{Auto hinter Tür 1}\mid\text{Moderator öffnet Tür 3})$, wenn der Kandidat Tür $1$ gewählt hat.
+\item Was ändert sich, wenn der Moderator \emph{nicht} weiß, wo das Auto steht, zufällig eine Tür öffnet und zufällig eine Ziege erwischt?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Verfahren $A$ wurde vor allem bei großen Steinen angewandt (263 von 350), $B$ vor allem bei kleinen (270 von 350). Die Gesamtquote mischt verschiedene Patientengruppen.}{22pt}
+\begin{karte}{gruen}{4.12}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 3, Aufgabe 3.3}}
+\kartentitel{Das Simpson-Paradox}
+\worum{Zwei Behandlungsverfahren für Nierensteine (reale Daten, Charig u.\,a.\ 1986): $A$ ist bei kleinen Steinen besser ($81/87 = 93\,\%$ gegen $234/270 = 87\,\%$) und bei großen Steinen besser ($192/263 = 73\,\%$ gegen $55/80 = 69\,\%$) --- aber insgesamt schlechter ($273/350 = 78\,\%$ gegen $289/350 = 83\,\%$). Wie ist das möglich?}
+\methoden{Gewichtetes Mittel, Störgröße, Simpson-Paradox}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Prüfen Sie die sechs Quoten nach.
+\item Schreiben Sie die Gesamtquote von $A$ als gewichtetes Mittel der beiden Teilquoten. Welche Gewichte? Dasselbe für $B$.
+\item Erklären Sie das Paradox in zwei Sätzen: Welche Variable ist die Störgröße, und warum wirkt sie in diese Richtung?
+\item Welches Verfahren würden Sie empfehlen --- und auf welche der beiden Tabellen stützen Sie sich dabei?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 4
+\stupser{tief}{$E[X] = \sum k\,P(X = k)$, $\operatorname{Var}X = E[X^{2}] - (E[X])^{2}$. Für den Würfel: $E[X^{2}] = \frac{1 + 4 + 9 + 16 + 25 + 36}6$.}{22pt}
+\begin{karte}{tief}{4.13}{\typtypisch}{\meta{1}{10 min}{Band 4, Kap.\ 4}}
+\kartentitel{Ein Würfel als Zufallsvariable}
+\worum{Verteilung, Verteilungsfunktion, Erwartungswert, Varianz --- einmal alles an dem Beispiel, bei dem man jedes Ergebnis im Kopf hat.}
+\methoden{Erwartungswert, Varianz}
+$X$ sei die Augenzahl eines fairen Würfels.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Geben Sie die Verteilung und die Verteilungsfunktion $F(x) = P(X\le x)$ an und skizzieren Sie $F$.
+\item Berechnen Sie $E[X]$ und $\operatorname{Var}X$.
+\item $Y = 2X + 1$: Bestimmen Sie $E[Y]$ und $\operatorname{Var}Y$ ohne die Verteilung von $Y$ aufzustellen.
+\item $Z = (X - 3)^{2}$: Bestimmen Sie die Verteilung von $Z$ und $E[Z]$.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$\int_0^3cx^{2}\,dx = 9c = 1$. Die Verteilungsfunktion ist das Integral der Dichte von $0$ bis $x$.}{22pt}
+\begin{karte}{gruen}{4.14}{\typwerk}{\meta{1}{10 min}{Band 4, Kap.\ 4, Aufgabe 4.1}}
+\kartentitel{Eine Dichte normieren}
+\worum{Die stetige Version von Aufgabe 4.13: Statt Summen Integrale, statt Wahrscheinlichkeiten einzelner Werte Flächen.}
+\methoden{Dichte, Verteilungsfunktion, Median}
+$X$ habe die Dichte $f(x) = cx^{2}$ für $0\le x\le3$, sonst $0$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie $c$.
+\item Bestimmen Sie die Verteilungsfunktion $F$.
+\item Berechnen Sie $P(1\le X\le2)$.
+\item Bestimmen Sie den Median, also $m$ mit $F(m) = \frac12$.
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 5
+\stupser{tief}{Feste Anzahl Versuche, zählt Treffer: binomial. Seltene Ereignisse in einem Kontinuum, zählt Fälle: Poisson. Wartet auf den ersten Treffer: geometrisch.}{22pt}
+\begin{karte}{tief}{4.15}{\typtypisch}{\meta{2}{15 min}{Band 4, Kap.\ 5}}
+\kartentitel{Binomial, Poisson oder geometrisch?}
+\worum{Die drei diskreten Standardverteilungen beantworten drei verschiedene Fragen. Modellwahl ist der Schritt, der in Prüfungen am häufigsten fehlt --- und der im Beruf der einzige ist, der zählt.}
+\methoden{Modellwahl, Binomialverteilung, Poisson-Verteilung, Geometrische Verteilung}
+Ordnen Sie zu, begründen Sie, und rechnen Sie:
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Ein Würfel wird geworfen, bis die erste Sechs fällt. Wahrscheinlichkeit, dass das beim vierten Wurf passiert? Erwartete Wurfzahl?
+\item Von $20$ Patienten mit einer Nebenwirkungsrate von $5\,\%$: Wahrscheinlichkeit für keine Nebenwirkung? Für mindestens zwei?
+\item Auf einer Notfallstation kommen im Mittel $3$ Patienten pro Stunde. Wahrscheinlichkeit für genau $3$ in einer Stunde? Für keinen in zwanzig Minuten?
+\item In welchem Sinn ist (c) ein Grenzfall von (b)? Rechnen Sie $P(X = 0)$ in (b) auch mit der Poisson-Näherung und vergleichen Sie.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$X\sim\operatorname{Bin}(12;\ 0{,}7)$. $P(X = 9) = \binom{12}9\,0{,}7^{9}\,0{,}3^{3}$ mit $\binom{12}9 = 220$.}{22pt}
+\begin{karte}{gruen}{4.16}{\typwerk}{\meta{1}{15 min}{Band 4, Kap.\ 5, Aufgabe 5.1}}
+\kartentitel{Zwölf Patienten}
+\worum{Binomialverteilung konkret: eine Einzelwahrscheinlichkeit, eine kumulierte, ein Erwartungswert.}
+\methoden{Binomialverteilung, Zentraler Grenzwertsatz}
+Ein Medikament wirkt bei $70\,\%$ der Patienten. Es wird an $12$ Patienten erprobt. (a) Wie wahrscheinlich wirkt es bei genau $9$? (b) Bei höchstens $6$? (c) Bei wie vielen wirkt es im Mittel?
+\end{karte}
+
+\stupser{gruen}{$X\sim\operatorname{Poi}(2{,}5)$: $P(X = k) = e^{-2{,}5}\frac{2{,}5^{k}}{k!}$. \enquote{Mehr als $5$} ist $1 - P(X\le5)$.}{22pt}
+\begin{karte}{gruen}{4.17}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 5, Aufgabe 5.2}}
+\kartentitel{Infektionen pro Woche}
+\worum{Poisson-Verteilung konkret --- und die Frage, wann ein Modell seltener Ereignisse passt und wann (Ausbruch!) nicht mehr.}
+\methoden{Poisson-Verteilung, Modellkritik}
+In einer Klinik treten im Mittel $2{,}5$ nosokomiale Infektionen pro Woche auf. (a) Wie wahrscheinlich ist eine Woche ohne Infektion? (b) Wie wahrscheinlich sind mehr als $5$? (c) In wie vielen von $52$ Wochen erwartet man mindestens $5$ Infektionen? (d) Welche Annahme steckt im Modell, und wann ist sie verletzt?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 6
+\stupser{tief}{Exponentialverteilung: $P(T > t) = e^{-\lambda t}$, Median $\frac{\ln2}\lambda$, $E[T] = \frac1\lambda$. Gleichverteilung auf $[0, 1]$: $E = \frac12$, $\operatorname{Var} = \frac1{12}$.}{22pt}
+\begin{karte}{tief}{4.18}{\typtypisch}{\meta{2}{15 min}{Band 4, Kap.\ 6}}
+\kartentitel{Gleich- und Exponentialverteilung}
+\worum{Die beiden einfachsten stetigen Verteilungen, mit den Rechnungen, die immer wieder vorkommen: Momente durch Integrale, Wartezeiten, Gedächtnislosigkeit.}
+\methoden{Exponentialverteilung, Gedächtnislosigkeit, Erwartungswert}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $U$ gleichverteilt auf $[0, 1]$: Berechnen Sie $E[U]$, $\operatorname{Var}U$ und $P(U^{2} < \frac14)$.
+\item Die Zeit $T$ bis zum nächsten Notruf sei exponentialverteilt mit Mittelwert $20$ Minuten. Bestimmen Sie $\lambda$, $P(T > 30)$, den Median und $P(T > 50\mid T > 20)$.
+\item Zeigen Sie allgemein $P(T > s + t\mid T > s) = P(T > t)$. Was bedeutet das für jemanden, der schon $20$ Minuten gewartet hat?
+\item Welche Verteilung hat die Anzahl der Notrufe in einer Stunde, wenn die Wartezeiten unabhängig und wie in (b) verteilt sind?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Standardisieren: $z = \frac{x - 178}7$; dann $\Phi$ ablesen. Für (c) umgekehrt: $z$ mit $\Phi(z) = 0{,}99$ ist $2{,}326$.}{22pt}
+\begin{karte}{gruen}{4.19}{\typwerk}{\meta{1}{10 min}{Band 4, Kap.\ 6, Aufgabe 6.1}}
+\kartentitel{Körpergrößen}
+\worum{Normalverteilung mit Tabelle: Standardisieren, ablesen, zurückrechnen.}
+\methoden{Normalverteilung}
+Die Körpergröße erwachsener Männer sei $N(178;\ 7^{2})$-verteilt (in cm). (a) Wie viel Prozent sind größer als $190$ cm? (b) Wie viel Prozent liegen zwischen $170$ und $185$ cm? (c) Ab welcher Größe gehört man zum größten Prozent?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 7
+\stupser{tief}{$X = \sum X_i$ mit Indikatoren $X_i\in\{0, 1\}$; $E[X] = \sum P(X_i = 1)$ --- auch wenn die $X_i$ abhängig sind.}{22pt}
+\begin{karte}{tief}{4.20}{\typtypisch}{\meta{2}{15 min}{Band 4, Kap.\ 7}}
+\kartentitel{Erwartungswert ohne Verteilung}
+\worum{Die Linearität des Erwartungswerts gilt ohne Unabhängigkeit. Wer eine Anzahl als Summe von Indikatoren schreibt, umgeht die Verteilung komplett --- und oft ist die Verteilung gar nicht zu bekommen.}
+\methoden{Indikatortrick, Linearität des Erwartungswerts, Wartezeiten}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Ein Würfel wird sechsmal geworfen. Wie viele \emph{verschiedene} Augenzahlen treten im Mittel auf?
+\item Eine Sammelserie hat $6$ Bilder; jede Packung enthält eines, zufällig. Wie viele Packungen braucht man im Mittel, bis die Serie vollständig ist? (Hinweis: Wartezeit auf das nächste \emph{neue} Bild.)
+\item $n$ Personen sitzen zufällig an einem runden Tisch. Wie viele Paare von Nachbarn, die vorher schon nebeneinander saßen (bei einer festen früheren Sitzordnung), erwartet man?
+\item Warum darf man in (a) und (c) addieren, obwohl die Indikatoren abhängig sind?
+\end{enumerate}
+\end{karte}
+
+\stupser{tief}{$\operatorname{Var}(X + Y) = \operatorname{Var}X + \operatorname{Var}Y + 2\operatorname{Cov}(X, Y)$. Für unabhängige Summanden fällt der letzte Term weg; $\operatorname{Var}(aX) = a^{2}\operatorname{Var}X$.}{22pt}
+\begin{karte}{tief}{4.21}{\typtypisch}{\meta{2}{15 min}{Band 4, Kap.\ 7}}
+\kartentitel{Varianz der Summe}
+\worum{Erwartungswerte addieren sich immer, Varianzen nur bei Unabhängigkeit --- und Standardabweichungen nie. Drei Rechnungen, die den Unterschied festnageln.}
+\methoden{Varianz, Unabhängigkeit, Kovarianz}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zwei Würfel: $\operatorname{Var}(X_1 + X_2)$. Vergleichen Sie mit $\operatorname{Var}(2X_1)$. Warum sind die beiden verschieden, obwohl $E[X_1 + X_2] = E[2X_1]$?
+\item $n$ unabhängige Messungen mit Varianz $\sigma^{2}$: Varianz und Standardabweichung des Mittelwerts $\bar X$. Wie viele Messungen braucht man, um die Standardabweichung zu halbieren?
+\item $X$ und $Y = -X$: $\operatorname{Var}(X + Y)$. Was ist hier die Kovarianz?
+\item Zeigen Sie $\operatorname{Var}(X + Y) = \operatorname{Var}X + \operatorname{Var}Y + 2\operatorname{Cov}(X, Y)$ aus der Definition.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Mit Wahrscheinlichkeit $2^{-k}$ gewinnt man $2^{k}$ Euro. Jeder Summand des Erwartungswerts ist $1$ --- und es gibt unendlich viele.}{22pt}
+\begin{karte}{akzent}{4.22}{\typstolper}{\meta{3}{20 min}{Band 4, Kap.\ 7}}
+\kartentitel{Das Sankt-Petersburg-Spiel}
+\worum{Eine Münze wird geworfen, bis zum ersten Mal Kopf fällt; passiert das beim $k$-ten Wurf, erhält man $2^{k}$ Euro. Welchen Einsatz sollte man zahlen? Der Erwartungswert sagt: jeden. Niemand würde mehr als etwa $20$ Euro geben. Bernoulli (1738) hat daraus die Nutzentheorie gemacht.}
+\methoden{Erwartungswert, Schwere Ränder, Nutzenfunktion}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie die Verteilung des Gewinns $G$ und berechnen Sie $E[G]$.
+\item Wie wahrscheinlich ist ein Gewinn von mehr als $1000$ Euro? Was ist der Median von $G$?
+\item Die Bank kann höchstens $2^{30}\approx10^{9}$ Euro auszahlen. Wie groß ist $E[G]$ dann?
+\item Bernoullis Vorschlag: Bewerte Geld mit $\ln$. Berechnen Sie $E[\ln G]$ und den \enquote{fairen Einsatz} $e^{E[\ln G]}$.
+\item Was lehrt das Spiel über den Erwartungswert als Entscheidungskriterium?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$X_i = 1$, wenn Brief $i$ richtig liegt. $P(X_i = 1) = \frac1n$. Und es gibt $n$ Briefe.}{22pt}
+\begin{karte}{gruen}{4.23}{\typwerk}{\meta{1}{10 min}{Band 4, Kap.\ 7, Aufgabe 7.1}}
+\kartentitel{Wie viele Briefe liegen richtig?}
+\worum{Aufgabe 4.2 fragte nach der Wahrscheinlichkeit, dass kein Brief richtig liegt --- und brauchte Einschluss--Ausschluss. Der Erwartungswert ist mit dem Indikatortrick eine Zeile.}
+\methoden{Indikatortrick, Kovarianz}
+$n$ Briefe werden zufällig auf $n$ Umschläge verteilt. Wie viele landen im Mittel im richtigen Umschlag? Berechnen Sie auch die Varianz.
+\end{karte}
+
+\stupser{gruen}{$E[X] = \sum_{k\ge1}k\,e^{-\lambda}\frac{\lambda^{k}}{k!} = \lambda e^{-\lambda}\sum_{k\ge1}\frac{\lambda^{k-1}}{(k - 1)!}$. Für die Varianz zuerst $E[X(X - 1)]$.}{22pt}
+\begin{karte}{gruen}{4.24}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 7, Aufgabe 7.2}}
+\kartentitel{Erwartungswert und Varianz der Poisson-Verteilung}
+\worum{Die eine Verteilung, bei der Erwartungswert und Varianz gleich sind --- und der Rechentrick mit dem faktoriellen Moment $E[X(X - 1)]$, der bei allen diskreten Verteilungen hilft.}
+\methoden{Faktorielles Moment, Exponentialreihe}
+Berechnen Sie $E[X]$ und $\operatorname{Var}X$ für $X\sim\operatorname{Poi}(\lambda)$.
+\end{karte}
+
+\stupser{gruen}{$G_X(s) = E[s^{X}] = e^{\lambda(s - 1)}$. Für unabhängige Summanden multiplizieren sich die erzeugenden Funktionen.}{22pt}
+\begin{karte}{gruen}{4.25}{\typwerk}{\meta{2}{10 min}{Band 4, Kap.\ 7, Aufgabe 7.3}}
+\kartentitel{Poisson plus Poisson}
+\worum{Erzeugende Funktionen verwandeln Faltungen in Produkte. Hier zeigen sie in drei Zeilen, was mit Summen eine Seite bräuchte.}
+\methoden{Erzeugende Funktion, Faltung}
+Zeigen Sie mit erzeugenden Funktionen: Sind $X\sim\operatorname{Poi}(\lambda)$ und $Y\sim\operatorname{Poi}(\mu)$ unabhängig, so ist $X + Y\sim\operatorname{Poi}(\lambda + \mu)$. Deuten Sie das Ergebnis an Aufgabe 4.17.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 8
+\stupser{akzent}{$X\in\{-1, 0, 1\}$ gleichverteilt, $Y = X^{2}$. $E[XY] = E[X^{3}] = 0 = E[X]E[Y]$. Aber $Y$ ist eine Funktion von $X$.}{22pt}
+\begin{karte}{akzent}{4.26}{\typstolper}{\meta{2}{10 min}{Band 4, Kap.\ 8}}
+\kartentitel{Unkorreliert, aber abhängig}
+\worum{Unabhängig $\Rightarrow$ unkorreliert, nie umgekehrt. Die Korrelation misst nur \emph{lineare} Zusammenhänge; ein perfekter quadratischer Zusammenhang hat Korrelation null.}
+\methoden{Kovarianz, Gegenbeispiel, Unabhängigkeit}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $X$ gleichverteilt auf $\{-1, 0, 1\}$, $Y = X^{2}$. Berechnen Sie $\operatorname{Cov}(X, Y)$. Sind $X$ und $Y$ unabhängig?
+\item Beweisen Sie: Sind $X, Y$ unabhängig (mit endlichen Varianzen), so ist $\operatorname{Cov}(X, Y) = 0$.
+\item Für welche Klasse von Verteilungen gilt die Umkehrung? (Stichwort: gemeinsam normalverteilt.)
+\item Zwei Würfel, $S = X_1 + X_2$, $D = X_1 - X_2$. Berechnen Sie $\operatorname{Cov}(S, D)$. Sind $S$ und $D$ unabhängig?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$E[XY] = \sum xy\,P(X = x, Y = y)$: nur die Zelle $(1, 1)$ und $(1, 2)$ tragen bei. $\operatorname{Cov} = E[XY] - E[X]E[Y]$.}{22pt}
+\begin{karte}{gruen}{4.27}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 8, Aufgabe 8.1}}
+\kartentitel{Eine gemeinsame Verteilung}
+\worum{Aus einer Tabelle Ränder, Erwartungswerte, Kovarianz, Korrelation ablesen --- und den Unabhängigkeitstest machen, der nur eine Zelle braucht.}
+\methoden{Kontingenztafel, Kovarianz, Unabhängigkeit}
+Die gemeinsame Verteilung von $X$ und $Y$ sei
+\begin{center}
+\begin{tabular}{l|ccc|c}
+ & $Y = 0$ & $Y = 1$ & $Y = 2$ & Rand $X$\\ \hline
+$X = 0$ & $0{,}1$ & $0{,}2$ & $0{,}1$ & $0{,}4$\\
+$X = 1$ & $0{,}2$ & $0{,}1$ & $0{,}3$ & $0{,}6$\\ \hline
+Rand $Y$ & $0{,}3$ & $0{,}3$ & $0{,}4$ & $1$
+\end{tabular}
+\end{center}
+Bestimmen Sie $\operatorname{Cov}(X, Y)$ und $\operatorname{Korr}(X, Y)$. Sind $X$ und $Y$ unabhängig?
+\end{karte}
+
+\stupser{gruen}{Gegeben $N = n$ ist $K\sim\operatorname{Bin}(n, p)$. Summieren Sie $P(K = k) = \sum_nP(N = n)P(K = k\mid N = n)$ und erkennen Sie die Exponentialreihe.}{22pt}
+\begin{karte}{gruen}{4.28}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 8, Aufgabe 8.2}}
+\kartentitel{Eier und Küken}
+\worum{Eine zufällige Anzahl von Versuchen: Poisson-Ausdünnung. Das Ergebnis ist so einfach, dass man es sich merken kann, und so nützlich, dass man es immer wieder braucht.}
+\methoden{Totale Wahrscheinlichkeit, Poisson-Ausdünnung, Bedingte Erwartung}
+Ein Huhn legt $N\sim\operatorname{Poi}(\lambda)$ Eier. Jedes Ei schlüpft unabhängig mit Wahrscheinlichkeit $p$. Wie ist die Anzahl $K$ der Küken verteilt? Bestimmen Sie $E[K]$ auf zwei Arten.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 9
+\stupser{gruen}{Zerlegen Sie den Text in disjunkte Blöcke der Länge $L$. Die Ereignisse \enquote{Block $n$ ist Hamlet} sind unabhängig mit $p = 90^{-L} > 0$, und $\sum p = \infty$.}{22pt}
+\begin{karte}{gruen}{4.29}{\typwerk}{\meta{2}{10 min}{Band 4, Kap.\ 9, Aufgabe 9.1}}
+\kartentitel{Der Affe und Hamlet}
+\worum{Das Lemma von Borel--Cantelli: Unabhängige Ereignisse mit divergenter Wahrscheinlichkeitssumme treten fast sicher unendlich oft ein --- egal, wie winzig jedes einzelne ist.}
+\methoden{Borel–Cantelli, Geometrische Verteilung}
+Ein Affe tippt zufällig und unabhängig Zeichen auf einer Tastatur mit $90$ Tasten. Wie wahrscheinlich ist es, dass er irgendwann den vollständigen Hamlet (etwa $180\,000$ Zeichen) tippt? Wie lange dauert das im Mittel?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 10
+\stupser{akzent}{Die Münze hat kein Gedächtnis: $P(\text{Kopf}\mid\text{zehnmal Zahl}) = \frac12$. Das Gesetz der großen Zahlen gleicht nicht aus, es \emph{verdünnt}.}{22pt}
+\begin{karte}{akzent}{4.30}{\typstolper}{\meta{1}{10 min}{Band 4, Kap.\ 10}}
+\kartentitel{Der Spielerfehlschluss}
+\worum{\enquote{Zehnmal Rot --- jetzt muss Schwarz kommen.} Das Gesetz der großen Zahlen wird als Ausgleichsgesetz missverstanden. Es sagt etwas über Anteile, nichts über Differenzen.}
+\methoden{Unabhängigkeit, Gesetz der großen Zahlen, Fehler finden}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Eine faire Münze zeigte zehnmal Zahl. Wie wahrscheinlich ist Kopf im elften Wurf? Wie wahrscheinlich war die Serie vorher, und warum ist das irrelevant?
+\item Nach $100$ Würfen steht es $60 : 40$. Wie viele Köpfe erwartet man nach weiteren $900$ Würfen insgesamt, und wie groß ist dann der erwartete Anteil? Wurde der Überschuss \enquote{ausgeglichen}?
+\item Formulieren Sie das Gesetz der großen Zahlen so, dass der Fehlschluss unmöglich wird.
+\item Ein Arzt sagt: \enquote{Ich hatte diese Woche schon drei Komplikationen, statistisch ist die vierte unwahrscheinlich.} Was stimmt daran, was nicht?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$H_n - \frac n2$ hat Varianz $\frac n4$, Standardabweichung $\frac{\sqrt n}2$ --- die Differenz wächst, der Anteil schrumpft.}{22pt}
+\begin{karte}{gruen}{4.31}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 10, Aufgabe 10.1}}
+\kartentitel{Was das Gesetz der großen Zahlen sagt}
+\worum{Die präzise Version von Aufgabe 4.30: Was konvergiert, was nicht, und wie groß die typische Abweichung ist.}
+\methoden{Gesetz der großen Zahlen, Varianz, Skalen unterscheiden}
+Eine faire Münze wird wiederholt geworfen; $H_n$ sei die Anzahl der Köpfe nach $n$ Würfen. (a) Was sagt das starke Gesetz über $\frac{H_n}n$? (b) Konvergiert $H_n - \frac n2$ gegen $0$? (c) Wie groß ist $|H_n - \frac n2|$ typischerweise? Geben Sie die Zahl für $n = 10^{4}$ und $n = 10^{6}$ an.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 11
+\stupser{gruen}{$\mu = 50$, $\sigma = 5$. Ohne Korrektur: $\Phi(1) - \Phi(-1)$. Mit Korrektur: $\Phi(1{,}1) - \Phi(-1{,}1)$ --- die Grenzen $44{,}5$ und $55{,}5$.}{22pt}
+\begin{karte}{gruen}{4.32}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 11, Aufgabe 11.1}}
+\kartentitel{Hundert Münzwürfe}
+\worum{Der zentrale Grenzwertsatz als Rechenwerkzeug --- und die Stetigkeitskorrektur, die aus einer brauchbaren Näherung eine sehr gute macht.}
+\methoden{Zentraler Grenzwertsatz, Stetigkeitskorrektur}
+Eine faire Münze wird $100$-mal geworfen. Berechnen Sie $P(45\le X\le55)$ (a) exakt (per Summation, mit Rechner), (b) mit Normalapproximation ohne Stetigkeitskorrektur, (c) mit Stetigkeitskorrektur.
+\end{karte}
+
+\stupser{gruen}{$X\sim\operatorname{Bin}(400;\ 0{,}08)$, $\mu = 32$, $\sigma = 5{,}43$. Einseitig: $95\,\%$-Schranke $\mu + 1{,}645\sigma$, $99\,\%$-Schranke $\mu + 2{,}326\sigma$.}{22pt}
+\begin{karte}{gruen}{4.33}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 11, Aufgabe 11.2}}
+\kartentitel{Wann wird man stutzig?}
+\worum{Qualitätsüberwachung mit dem zentralen Grenzwertsatz: Ab wann ist eine Komplikationszahl nicht mehr Zufall? Und warum die Antwort anders ausfällt, wenn man $1900$ Krankenhäuser gleichzeitig prüft.}
+\methoden{Zentraler Grenzwertsatz, Kontrollgrenze, Multiples Testen}
+Ein Krankenhaus behandelt jährlich $400$ Patienten mit einer Operation, deren Komplikationsrate $8\,\%$ beträgt. Ab welcher Komplikationszahl sollte man stutzig werden? Diskutieren Sie das Problem des multiplen Testens.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 12
+\stupser{tief}{Der Erwartungswert ist hier eine \emph{Unbekannte}, keine Summe. Schreiben Sie auf, was nach einem Wurf passiert ist --- und wo man dann steht.}{22pt}
+\begin{karte}{tief}{4.34}{\typtypisch}{\meta{3}{25 min}{Band 4, Kap.\ 12}}
+\kartentitel{Zwei Sechsen hintereinander}
+\worum{Man würfelt, bis zum ersten Mal zwei Sechsen direkt aufeinander folgen. Wie viele Würfe braucht man im Mittel? Die Antwort ist nicht $12$, und auch nicht $36$.}
+\methoden{Methode des ersten Schritts, Zustandsdiagramm, Erwartungswert}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zum Aufwärmen: Wie viele Würfe braucht man im Mittel bis zur \emph{ersten} Sechs? Begründen Sie das Ergebnis mit einer Gleichung der Form $E = 1 + (\dots)E$, nicht mit einer Reihe.
+\item Beschreiben Sie den Zustand des Spiels nach jedem Wurf mit zwei Zuständen: \enquote{die letzte Zahl war keine Sechs} und \enquote{die letzte Zahl war eine Sechs}. Zeichnen Sie das Diagramm mit den Übergangswahrscheinlichkeiten.
+\item Seien $E_0$ und $E_1$ die mittleren Restwurfzahlen aus den beiden Zuständen. Stellen Sie zwei Gleichungen auf und lösen Sie sie.
+\item Prüfen Sie die Antwort an einem Grenzfall: Was ergäbe dieselbe Rechnung für eine Münze (\enquote{zweimal Kopf hintereinander})? Ist das plausibel?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Startverteilung $\pi_0 = (0, 1, 0)$; nach einer Woche $\pi_0P$ (die zweite Zeile von $P$), nach zwei Wochen $(\pi_0P)P$.}{22pt}
+\begin{karte}{gruen}{4.35}{\typwerk}{\meta{1}{10 min}{Band 4, Kap.\ 12, Aufgabe 12.1}}
+\kartentitel{Ein Patient in zwei Wochen}
+\worum{Eine Markow-Kette mit drei Zuständen: Die Verteilung nach $n$ Schritten ist ein Zeilenvektor mal $P^{n}$.}
+\methoden{Markow-Kette, Matrixmultiplikation}
+Ein Patient ist in einem von drei Zuständen: gesund (G), leicht erkrankt (L), schwer erkrankt (S). Die wöchentlichen Übergänge seien
+\[ P = \begin{pmatrix}0{,}90 & 0{,}08 & 0{,}02\\ 0{,}40 & 0{,}50 & 0{,}10\\ 0{,}10 & 0{,}30 & 0{,}60\end{pmatrix} \]
+(Zeilen: von G, L, S; Spalten: nach G, L, S). Der Patient ist heute leicht erkrankt. Wie ist sein Zustand in zwei Wochen verteilt?
+\end{karte}
+
+\stupser{gruen}{$\pi P = \pi$ mit $\pi_G + \pi_L + \pi_S = 1$: drei unabhängige Gleichungen, drei Unbekannte. Die Lösung hat Nenner $113$.}{22pt}
+\begin{karte}{gruen}{4.36}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 12, Aufgabe 12.2}}
+\kartentitel{Die stationäre Verteilung}
+\worum{Langfristig vergisst die Kette ihren Start. Die stationäre Verteilung ist der Linkseigenvektor zum Eigenwert $1$ --- Gebiet 2, Aufgabe 2.38, jetzt mit drei Zuständen.}
+\methoden{Stationäre Verteilung, Bilanzgleichungen, Rückkehrzeit}
+Bestimmen Sie die stationäre Verteilung der Kette aus Aufgabe 4.35. Wie oft ist der Patient langfristig schwer krank, und wie lange dauert es im Mittel von einer schweren Phase zur nächsten?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 13
+\stupser{gruen}{$r_k$ = Ruinwahrscheinlichkeit bei Kapital $k$. Erster Schritt: $r_k = p\,r_{k+1} + q\,r_{k-1}$, mit $r_0 = 1$, $r_N = 0$. Die Differenzen $r_k - r_{k-1}$ bilden eine geometrische Folge.}{22pt}
+\begin{karte}{gruen}{4.37}{\typwerk}{\meta{3}{20 min}{Band 4, Kap.\ 13, Aufgabe 13.1}}
+\kartentitel{Das Ruinproblem}
+\worum{Das älteste Problem der Irrfahrten (Pascal und Fermat, 1656): Zwei Spieler, ein Euro pro Runde, bis einer nichts mehr hat. Die Antwort zeigt, warum die Bank immer gewinnt.}
+\methoden{Methode des ersten Schritts, Differenzengleichung, Randbedingungen}
+Ein Spieler startet mit $a$ Euro und spielt gegen einen Gegner mit $b$ Euro. In jeder Runde gewinnt er mit Wahrscheinlichkeit $p$ einen Euro, sonst verliert er einen. Gespielt wird, bis einer ruiniert ist. Wie groß ist die Ruinwahrscheinlichkeit des Spielers? Werten Sie aus für $a = 10$, $b = 90$ und $p = 0{,}5$ bzw.\ $p = 0{,}49$.
+\end{karte}
+
+\stupser{gruen}{$S_n$ ist für $p = \frac12$ ein Martingal; $T$ = erste Zeit in $\{0, N\}$. Optionales Stoppen: $E[S_T] = E[S_0] = a$. Und $S_T$ ist $0$ oder $N$.}{22pt}
+\begin{karte}{gruen}{4.38}{\typwerk}{\meta{3}{15 min}{Band 4, Kap.\ 13, Aufgabe 13.2}}
+\kartentitel{Ruin mit dem Stoppsatz}
+\worum{Dieselbe Antwort wie in Aufgabe 4.37 für $p = \frac12$ --- in drei Zeilen, ohne Rekursion. Das ist die Kraft der Martingale.}
+\methoden{Martingal, Optionales Stoppen}
+Lösen Sie das Ruinproblem für $p = \frac12$ mit dem Satz vom optionalen Stoppen. Bestimmen Sie mit dem Martingal $S_n^{2} - n$ auch die erwartete Spieldauer.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 14
+\stupser{tief}{Halbe Breite des Konfidenzintervalls $= 1{,}96\sqrt{p(1 - p)/n}$. Nach $n$ auflösen; $p(1 - p)\le\frac14$ ist der ungünstigste Fall.}{22pt}
+\begin{karte}{tief}{4.39}{\typtypisch}{\meta{2}{10 min}{Band 4, Kap.\ 14}}
+\kartentitel{Wie viele Patienten braucht die Studie?}
+\worum{Die Umkehrung des Konfidenzintervalls: Nicht \enquote{wie genau ist meine Schätzung?}, sondern \enquote{wie viele brauche ich für eine vorgegebene Genauigkeit?} --- die Frage jeder Studienplanung.}
+\methoden{Konfidenzintervall, Stichprobenumfang}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Eine Ansprechrate soll mit einem $95\,\%$-Konfidenzintervall der halben Breite $\pm3$ Prozentpunkte geschätzt werden. Wie viele Patienten braucht man, wenn man nichts über $p$ weiß?
+\item Wie viele, wenn man $p\approx0{,}1$ erwartet?
+\item Wie ändert sich $n$, wenn die halbe Breite auf $\pm1{,}5$ Prozentpunkte halbiert werden soll?
+\item Warum ist $n$ \emph{nicht} von der Größe der Grundgesamtheit abhängig?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{Der $p$-Wert ist $P(\text{Daten so extrem}\mid H_0)$, nicht $P(H_0\mid\text{Daten})$. Die Richtung der Bedingung --- Aufgabe 4.8 noch einmal, in der Statistik.}{22pt}
+\begin{karte}{akzent}{4.40}{\typstolper}{\meta{2}{15 min}{Band 4, Kap.\ 14}}
+\kartentitel{Was der $p$-Wert nicht sagt}
+\worum{Vier verbreitete Fehldeutungen eines Testergebnisses, jede ein eigener Irrtum. Wer sie auseinanderhalten kann, liest Studien anders.}
+\methoden{p-Wert, Bedingte Wahrscheinlichkeit, Fehler finden}
+Ein Test liefert $p = 0{,}03$. Welche der folgenden Aussagen folgen daraus, welche nicht --- und warum?
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item \enquote{Die Wahrscheinlichkeit, dass die Nullhypothese wahr ist, beträgt $3\,\%$.}
+\item \enquote{Der Effekt ist mit $97\,\%$ Wahrscheinlichkeit real.}
+\item \enquote{Der Effekt ist groß und klinisch relevant.}
+\item \enquote{Würde man die Studie wiederholen, bekäme man mit $97\,\%$ wieder ein signifikantes Ergebnis.}
+\item Was sagt $p = 0{,}03$ tatsächlich? Und was sagt $p = 0{,}30$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$L(p) = \binom nkp^{k}(1 - p)^{n-k}$; logarithmieren, ableiten, null setzen. Der Binomialkoeffizient hängt nicht von $p$ ab.}{22pt}
+\begin{karte}{gruen}{4.41}{\typwerk}{\meta{2}{10 min}{Band 4, Kap.\ 14, Aufgabe 14.1}}
+\kartentitel{Der Maximum-Likelihood-Schätzer}
+\worum{Das Prinzip: Wähle den Parameter, unter dem die Daten am wahrscheinlichsten sind. Beim Binomialmodell kommt heraus, was man erwartet --- und man sieht, warum.}
+\methoden{Maximum Likelihood, Log-Likelihood, Ableiten und Nullsetzen}
+Bestimmen Sie den ML-Schätzer für $p$ einer Binomialverteilung, wenn bei $n$ Versuchen $k$ Treffer beobachtet wurden. Prüfen Sie, dass es ein Maximum ist.
+\end{karte}
+
+\stupser{gruen}{$\hat p = 0{,}64$, $\mathrm{SE} = \sqrt{\hat p(1 - \hat p)/n} = 0{,}0304$; Intervall $\hat p\pm1{,}96\,\mathrm{SE}$.}{22pt}
+\begin{karte}{gruen}{4.42}{\typwerk}{\meta{1}{10 min}{Band 4, Kap.\ 14, Aufgabe 14.2}}
+\kartentitel{Ein Konfidenzintervall}
+\worum{Das Wald-Intervall für eine Rate: Punktschätzer, Standardfehler, $\pm1{,}96$. Und die Frage, was \enquote{$95\,\%$} hier bedeutet.}
+\methoden{Konfidenzintervall, Standardfehler}
+In einer Studie mit $250$ Patienten sprachen $160$ auf die Therapie an. Bestimmen Sie ein $95\,\%$-Konfidenzintervall für die Ansprechrate. Was bedeutet das Intervall --- und was nicht?
+\end{karte}
+
+\stupser{gruen}{Unter $H_0$ ($p_0 = 0{,}6$): $\mu = 120$, $\sigma = \sqrt{48} = 6{,}93$. $z = \frac{136 - 120}{6{,}93}$; einseitig kritisch ist $1{,}645$.}{22pt}
+\begin{karte}{gruen}{4.43}{\typwerk}{\meta{2}{15 min}{Band 4, Kap.\ 14, Aufgabe 14.3}}
+\kartentitel{Ein einseitiger Test}
+\worum{Hypothesen, Teststatistik, kritischer Wert, Entscheidung, $p$-Wert --- das Schema eines Signifikanztests an einem Beispiel, bei dem die Entscheidung knapp, aber eindeutig ist.}
+\methoden{Signifikanztest, Normalverteilung, p-Wert}
+Ein Medikament soll die Heilungsrate über den Standardwert von $60\,\%$ heben. Bei $200$ Patienten heilen $136$. Testen Sie auf dem Niveau $\alpha = 0{,}05$ und geben Sie den $p$-Wert an.
+\end{karte}

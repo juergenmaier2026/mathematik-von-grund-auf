@@ -1,0 +1,817 @@
+\setgebiet{3}{Lineare Algebra}{mittel}
+\chapter{Lösungen: Lineare Algebra}
+
+%%%%%%%%%% 2.1
+\stupserzwei{tief}{Zeile 3 ist Zeile 1 plus Zeile 2. Das gilt für die Koeffizienten --- und muss für die rechte Seite auch gelten, sonst geht es nicht.}{22pt}
+\begin{loesungkarte}{tief}{2.1}{Rang und Lösbarkeit}
+\derweg{Gauß auf die erweiterte Matrix; der Rang steht in der Stufenform, die Lösbarkeit in der letzten Zeile.}
+\schritt{(a)}
+$Z_2 - Z_1$, $Z_3 - 2Z_1$: $\begin{pmatrix}1 & 1 & 1\\ 0 & 1 & 2\\ 0 & 1 & 2\end{pmatrix}$; $Z_3 - Z_2$ macht die dritte Zeile zur Nullzeile. Zwei Pivots: $\operatorname{Rang}A = 2$. (Direkt sichtbar: $Z_3 = Z_1 + Z_2$.)
+\schritt{(b)}
+Dieselben Schritte an $(A\mid b)$: $\left(\begin{array}{ccc|c}1 & 1 & 1 & 6\\ 0 & 1 & 2 & 8\\ 0 & 0 & 0 & 0\end{array}\right)$ --- die Nullzeile ist auch rechts null ($20 - 6 - 14 = 0$). Freie Variable $z = t$; $y = 8 - 2t$; $x = 6 - y - z = -2 + t$.
+\[ L = \bigl\{(-2 + t,\ 8 - 2t,\ t)\colon t\in\mathbb R\bigr\} = (-2, 8, 0) + \mathbb R\,(1, -2, 1). \]
+\schritt{(c)}
+Mit $b'$ wird die letzte Zeile $(0\ 0\ 0\mid 1)$, denn $21 - 6 - 14 = 1$: die Gleichung $0 = 1$. Unlösbar. Der Grund: $b'$ erfüllt nicht die Relation $b_3 = b_1 + b_2$, die alle Spalten von $A$ erfüllen --- $b'$ liegt nicht im Spaltenraum.
+\schritt{(d)}
+In (b) ist die Lösungsmenge eine Gerade im $\mathbb R^{3}$ (ein Punkt plus eine Richtung): drei Ebenen, die sich in einer gemeinsamen Geraden schneiden. In (c) wurde die dritte Ebene parallel verschoben; die drei Ebenen schneiden sich paarweise, haben aber keinen gemeinsamen Punkt.
+\probe{$t = 0$: $(-2, 8, 0)$: $-2 + 8 = 6$, $-2 + 16 = 14$, $-4 + 24 = 20$. \checkmark\ \ $t = 2$: $(0, 4, 2)$: $6$, $0 + 8 + 6 = 14$, $0 + 12 + 8 = 20$. \checkmark}
+\begin{mitnehmen}\kastentext
+Lösbar $\iff\operatorname{Rang}A = \operatorname{Rang}(A\mid b)$. Dann: Zahl der freien Variablen $=$ Unbekannte minus Rang. Beides steht in der Stufenform, und sonst nirgends.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.2
+\stupserzwei{gruen}{Nach dem Ausräumen der ersten Spalte bleibt ein $2\times2$-System in $y, z$ mit den Zeilen $(-1, -5\mid -18)$ und $(-4, -8\mid -39)$.}{22pt}
+\begin{loesungkarte}{gruen}{2.2}{Die Neun Kapitel}
+\derweg{Gauß mit der dritten Gleichung als erster Zeile, dann rückwärts einsetzen.}
+\schritt{Umordnen und ausräumen}
+Zeilen: $Z_1\colon x + 2y + 3z = 26$, $Z_2\colon 2x + 3y + z = 34$, $Z_3\colon 3x + 2y + z = 39$. $Z_2 - 2Z_1$: $-y - 5z = -18$. $Z_3 - 3Z_1$: $-4y - 8z = -39$.
+\schritt{Zweite Spalte}
+$(Z_3') - 4(Z_2')$: $-8z + 20z = -39 + 72$, also $12z = 33$, $z = \frac{11}4 = 2{,}75$.
+\schritt{Rückwärts}
+$y = 18 - 5z = 18 - \frac{55}4 = \frac{17}4 = 4{,}25$. $x = 26 - 2y - 3z = 26 - \frac{34}4 - \frac{33}4 = \frac{104 - 67}4 = \frac{37}4 = 9{,}25$.
+\probe{$3\cdot\frac{37}4 + 2\cdot\frac{17}4 + \frac{11}4 = \frac{111 + 34 + 11}4 = \frac{156}4 = 39$. \checkmark\ \ $2\cdot\frac{37}4 + 3\cdot\frac{17}4 + \frac{11}4 = \frac{74 + 51 + 11}4 = 34$. \checkmark\ \ $\frac{37}4 + 2\cdot\frac{17}4 + 3\cdot\frac{11}4 = \frac{37 + 34 + 33}4 = 26$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die \emph{Neun Kapitel} lösen dieses System (Kapitel 8, \enquote{Fang cheng}) mit genau den Spaltenoperationen, die wir heute Zeilenoperationen nennen --- auf dem Rechenbrett, mit Stäbchen. Das Verfahren ist zweitausend Jahre älter als sein Name.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.3
+\stupserzwei{gruen}{Pivots in Spalte 1 und 3. Also $x_2 = s$ und $x_4 = t$ frei; $x_3$ aus Zeile 2, $x_1$ aus Zeile 1.}{22pt}
+\begin{loesungkarte}{gruen}{2.3}{Zwei freie Variablen}
+\derweg{Stufenform, freie Variablen benennen, die anderen ausdrücken, das Ergebnis als Punkt plus Spann schreiben.}
+\schritt{Stufenform}
+$Z_2 - 2Z_1$: $(0, 0, -1, -3\mid -2)$. $Z_3 - 3Z_1$: $(0, 0, -1, -3\mid -2)$. $Z_3 - Z_2$: Nullzeile. Rang $2$, zwei freie Variablen.
+\schritt{Auflösen}
+Aus $Z_2'$: $x_3 = 2 - 3x_4$. Aus $Z_1$: $x_1 = 3 - 2x_2 - x_3 - x_4 = 3 - 2x_2 - (2 - 3x_4) - x_4 = 1 - 2x_2 + 2x_4$. Mit $x_2 = s$, $x_4 = t$:
+\[ L = \begin{pmatrix}1\\ 0\\ 2\\ 0\end{pmatrix} + s\begin{pmatrix}-2\\ 1\\ 0\\ 0\end{pmatrix} + t\begin{pmatrix}2\\ 0\\ -3\\ 1\end{pmatrix},\qquad s, t\in\mathbb R . \]
+Der erste Vektor ist eine spezielle Lösung, die beiden anderen spannen den Lösungsraum des homogenen Systems auf (Dimension $4 - 2 = 2$).
+\probe{$s = t = 0$: $(1, 0, 2, 0)$: $1 + 2 = 3$, $2 + 2 = 4$, $3 + 4 = 7$. \checkmark\ \ $s = 1, t = 1$: $(1, 1, -1, 1)$: $1 + 2 - 1 + 1 = 3$, $2 + 4 - 1 - 1 = 4$, $3 + 6 - 2 = 7$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Lösungsmenge eines lösbaren Systems ist \emph{eine} Lösung plus der Kern der Matrix. Nicht-Pivot-Spalten liefern die freien Variablen; jede davon gibt einen Basisvektor des Kerns, wenn man sie $1$ und die anderen $0$ setzt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.4
+\stupserzwei{gruen}{Addieren Sie alle drei Gleichungen: $(\lambda + 2)(x + y + z) = 3$. Für $\lambda = -2$ steht links null.}{22pt}
+\begin{loesungkarte}{gruen}{2.4}{Ein Parameter entscheidet}
+\derweg{Gauß mit Fallunterscheidung an jeder Stelle, an der ein Ausdruck in $\lambda$ null werden kann.}
+\schritt{Ausräumen}
+$Z_2 - Z_1$: $(\lambda - 1)y + (1 - \lambda)z = 0$, also $(\lambda - 1)(y - z) = 0$. $Z_3 - \lambda Z_1$: $(1 - \lambda)y + (1 - \lambda^{2})z = 1 - \lambda$, also $(1 - \lambda)\bigl[y + (1 + \lambda)z - 1\bigr] = 0$.
+\schritt{Fall $\lambda = 1$}
+Beide neuen Zeilen verschwinden; es bleibt $x + y + z = 1$. Rang $1$, zwei freie Variablen, \emph{unendlich viele Lösungen} (eine Ebene).
+\schritt{Fall $\lambda\neq1$}
+Teilen durch $\lambda - 1\neq0$: $y = z$ und $y + (1 + \lambda)z = 1$, also $(2 + \lambda)z = 1$.
+\emph{Unterfall $\lambda = -2$:} $0 = 1$, \emph{keine Lösung}.
+\emph{Unterfall $\lambda\neq-2$:} $z = \frac1{\lambda + 2}$, $y = z$, $x = 1 - y - \lambda z = 1 - \frac{1 + \lambda}{\lambda + 2} = \frac1{\lambda + 2}$: \emph{genau eine Lösung} $x = y = z = \frac1{\lambda + 2}$.
+\probe{Einsetzen von $x = y = z = \frac1{\lambda + 2}$ in jede Gleichung: $\frac{1 + 1 + \lambda}{\lambda + 2} = 1$. \checkmark\ \ $\lambda = 0$: $x = y = z = \frac12$; $\frac12 + \frac12 + 0 = 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die kritischen Werte stehen in den Faktoren, durch die man teilen möchte: $\lambda - 1$ und $\lambda + 2$. Dass $\det A = (\lambda - 1)^{2}(\lambda + 2)\cdot(-1)$ genau dort verschwindet, ist kein Zufall: Eindeutig lösbar $\iff\det A\neq0$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.5
+\stupserzwei{tief}{$A$ ist $2\times3$, $B$ ist $3\times2$. $AB$ ist $2\times2$, $BA$ ist $3\times3$ --- beide definiert, und nicht einmal gleich groß.}{22pt}
+\begin{loesungkarte}{tief}{2.5}{Formate und Reihenfolge}
+\derweg{Formate prüfen (innen gleich?), dann Zeile mal Spalte.}
+\schritt{(a)}
+$AB$: $(2\times3)(3\times2) = 2\times2$. $BA$: $(3\times2)(2\times3) = 3\times3$. $A^{2}$: $(2\times3)(2\times3)$ --- $3\neq2$, nicht definiert. $B^{2}$: ebenso nicht. $A^{\mathsf T}A$: $(3\times2)(2\times3) = 3\times3$. $AA^{\mathsf T}$: $2\times2$.
+\schritt{(b)}
+\[ AB = \begin{pmatrix}1 + 4 + 0 & 0 + 2 + 0\\ 0 + 2 + 0 & 0 + 1 + 3\end{pmatrix} = \begin{pmatrix}5 & 2\\ 2 & 4\end{pmatrix},\qquad BA = \begin{pmatrix}1 & 2 & 0\\ 2 & 5 & 1\\ 0 & 3 & 3\end{pmatrix}. \]
+(Für $BA$: Zeile $(2, 1)$ von $B$ mal Spalten von $A$ gibt $2\cdot(1, 2, 0) + 1\cdot(0, 1, 1) = (2, 5, 1)$.)
+\schritt{(c)}
+$(AB)^{\mathsf T} = \begin{pmatrix}5 & 2\\ 2 & 4\end{pmatrix}$ (symmetrisch, also gleich $AB$). $B^{\mathsf T}A^{\mathsf T} = \begin{pmatrix}1 & 2 & 0\\ 0 & 1 & 3\end{pmatrix}\begin{pmatrix}1 & 0\\ 2 & 1\\ 0 & 1\end{pmatrix} = \begin{pmatrix}5 & 2\\ 2 & 4\end{pmatrix}$. Gleich: $(AB)^{\mathsf T} = B^{\mathsf T}A^{\mathsf T}$, die Reihenfolge dreht sich um.
+\probe{Spur von $AB$: $9$; Spur von $BA$: $1 + 5 + 3 = 9$. Gleiche Spur ist kein Zufall: $\operatorname{Spur}(AB) = \operatorname{Spur}(BA)$ immer. \checkmark}
+\begin{mitnehmen}\kastentext
+Format zuerst: $(m\times n)(n\times p) = m\times p$. Beim Transponieren eines Produkts dreht sich die Reihenfolge um --- beim Invertieren ebenso: $(AB)^{-1} = B^{-1}A^{-1}$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.6
+\stupserzwei{akzent}{$A = \begin{pmatrix}1 & 1\\ 1 & 1\end{pmatrix}$, $B = \begin{pmatrix}1 & -1\\ -1 & 1\end{pmatrix}$: Jede Zeile von $A$ mal jede Spalte von $B$ ist $1 - 1 = 0$.}{22pt}
+\begin{loesungkarte}{akzent}{2.6}{$AB = 0$, aber $A, B\neq0$}
+\derweg{Nullteiler konstruieren, die Kürzungsregel damit widerlegen, und die binomische Formel an $AB\neq BA$ scheitern sehen.}
+\schritt{(a)}
+$A = \begin{pmatrix}1 & 1\\ 1 & 1\end{pmatrix}$, $B = \begin{pmatrix}1 & -1\\ -1 & 1\end{pmatrix}$: $AB = \begin{pmatrix}0 & 0\\ 0 & 0\end{pmatrix}$. Noch kleiner: $A = \begin{pmatrix}0 & 1\\ 0 & 0\end{pmatrix}$ mit $A^{2} = 0$.
+\schritt{(b)}
+$A = \begin{pmatrix}1 & 1\\ 1 & 1\end{pmatrix}$, $B = \begin{pmatrix}1 & 0\\ 0 & 0\end{pmatrix}$, $C = \begin{pmatrix}0 & 0\\ 1 & 0\end{pmatrix}$: $AB = AC = \begin{pmatrix}1 & 0\\ 1 & 0\end{pmatrix}$, aber $B\neq C$. Allgemein: $AB = AC\iff A(B - C) = 0$, und das geht mit $B - C\neq0$ genau dann, wenn $A$ einen nichttrivialen Kern hat.
+\schritt{(c)}
+$A + B = \begin{pmatrix}2 & 1\\ 1 & 2\end{pmatrix}$, $(A + B)^{2} = \begin{pmatrix}5 & 4\\ 4 & 5\end{pmatrix}$. Andererseits $A^{2} = \begin{pmatrix}1 & 2\\ 0 & 1\end{pmatrix}$, $B^{2} = \begin{pmatrix}1 & 0\\ 2 & 1\end{pmatrix}$, $AB = \begin{pmatrix}2 & 1\\ 1 & 1\end{pmatrix}$, also $A^{2} + 2AB + B^{2} = \begin{pmatrix}6 & 4\\ 4 & 4\end{pmatrix}\neq(A + B)^{2}$. Richtig ist $(A + B)^{2} = A^{2} + AB + BA + B^{2}$ mit $BA = \begin{pmatrix}1 & 1\\ 1 & 2\end{pmatrix}$: Summe $\begin{pmatrix}5 & 4\\ 4 & 5\end{pmatrix}$. \checkmark
+\schritt{(d)}
+Ist $A$ invertierbar, so folgt aus $AB = AC$ durch Multiplikation mit $A^{-1}$ von links $B = C$. Invertierbar heißt für quadratische Matrizen: $\det A\neq0$, oder Kern $= \{0\}$, oder voller Rang.
+\begin{fehler}\kastentext
+Die Regeln aus $\mathbb R$, die für Matrizen \emph{nicht} gelten: $ab = ba$; $ab = 0\Rightarrow a = 0$ oder $b = 0$; $ab = ac,\ a\neq0\Rightarrow b = c$; $(a + b)^{2} = a^{2} + 2ab + b^{2}$. Alle vier haben dieselbe Wurzel: Die Multiplikation ist nicht kommutativ, und es gibt Nullteiler.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Kürzen darf man durch invertierbare Matrizen, und nur durch die --- und zwar auf der Seite, auf der sie stehen. $AB = CA$ lässt sich nicht zu $B = C$ kürzen, auch wenn $A$ invertierbar ist.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.7
+\stupserzwei{gruen}{$AB$: Die Spalten von $A$ tauschen. $BA$: Die Zeilen von $A$ tauschen.}{22pt}
+\begin{loesungkarte}{gruen}{2.7}{$AB$ und $BA$}
+\derweg{Ausrechnen und ablesen, welche Zeilen oder Spalten gewandert sind.}
+\begin{align*} AB &= \begin{pmatrix}1 & 2\\ 3 & 4\end{pmatrix}\begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix} = \begin{pmatrix}2 & 1\\ 4 & 3\end{pmatrix},\\ BA &= \begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}\begin{pmatrix}1 & 2\\ 3 & 4\end{pmatrix} = \begin{pmatrix}3 & 4\\ 1 & 2\end{pmatrix}. \end{align*}
+Von rechts multipliziert vertauscht $B$ die Spalten, von links die Zeilen. $AB\neq BA$.
+\probe{$B^{2} = I$ (zweimal tauschen), also $B^{-1} = B$; dann muss $BA$ aus $A$ durch dieselbe Zeilenoperation entstehen wie $B$ aus $I$. \checkmark}
+\begin{mitnehmen}\kastentext
+Elementarmatrizen von links: Zeilenoperationen. Von rechts: Spaltenoperationen. Der Gauß-Algorithmus ist eine Folge von Linksmultiplikationen --- und deshalb ist $A = LR$ nichts als der Gauß-Algorithmus, in Matrizen aufgeschrieben.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.8
+\stupserzwei{gruen}{Nach dem Tausch $Z_1\leftrightarrow Z_3$ steht $(1\ 0\ 0\mid0\ 0\ 1)$ oben, und die erste Spalte ist mit zwei Abzügen ausgeräumt.}{22pt}
+\begin{loesungkarte}{gruen}{2.8}{Eine Inverse mit Gauß--Jordan}
+\derweg{$(A\mid I)$ durch Zeilenoperationen zu $(I\mid A^{-1})$; dabei die Zeile mit der Eins zuerst.}
+\schritt{Ausräumen}
+Tausch $Z_1\leftrightarrow Z_3$:
+$\left(\begin{array}{ccc|ccc}1 & 0 & 0 & 0 & 0 & 1\\ 1 & 3 & 2 & 0 & 1 & 0\\ 2 & 1 & 1 & 1 & 0 & 0\end{array}\right)$.
+$Z_2 - Z_1$, $Z_3 - 2Z_1$:
+$\left(\begin{array}{ccc|ccc}1 & 0 & 0 & 0 & 0 & 1\\ 0 & 3 & 2 & 0 & 1 & -1\\ 0 & 1 & 1 & 1 & 0 & -2\end{array}\right)$.
+\schritt{Zweite und dritte Spalte}
+Tausch $Z_2\leftrightarrow Z_3$, dann $Z_3 - 3Z_2$: dritte Zeile $(0\ 0\ -1\mid -3\ 1\ 5)$, mal $-1$: $(0\ 0\ 1\mid 3\ -1\ -5)$. Dann $Z_2 - Z_3$: $(0\ 1\ 0\mid -2\ 1\ 3)$.
+\[ A^{-1} = \begin{pmatrix}0 & 0 & 1\\ -2 & 1 & 3\\ 3 & -1 & -5\end{pmatrix}. \]
+\probe{$AA^{-1}$: Zeile $(2, 1, 1)$: $(0 - 2 + 3,\ 0 + 1 - 1,\ 2 + 3 - 5) = (1, 0, 0)$. Zeile $(1, 3, 2)$: $(0 - 6 + 6,\ 0 + 3 - 2,\ 1 + 9 - 10) = (0, 1, 0)$. Zeile $(1, 0, 0)$: $(0, 0, 1)$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die $j$-te Spalte von $A^{-1}$ ist die Lösung von $Ax = e_j$. Gauß--Jordan löst alle drei Systeme gleichzeitig --- und wenn dabei links eine Nullzeile entsteht, ist $A$ nicht invertierbar.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.9
+\stupserzwei{gruen}{$Z_2 - 2Z_1$ und $Z_3 - 4Z_1$, dann $Z_3' - 3Z_2'$: Die Zahlen $2, 4, 3$ sind $L$.}{22pt}
+\begin{loesungkarte}{gruen}{2.9}{Eine LR-Zerlegung}
+\derweg{Gauß ohne Tausch; Multiplikatoren in $L$ sammeln, Stufenform ist $R$; dann zwei Dreieckssysteme.}
+\schritt{(a)}
+$Z_2 - 2Z_1 = (0, 1, 1)$, $Z_3 - 4Z_1 = (0, 3, 5)$; $Z_3' - 3Z_2' = (0, 0, 2)$.
+\[ L = \begin{pmatrix}1 & 0 & 0\\ 2 & 1 & 0\\ 4 & 3 & 1\end{pmatrix},\qquad R = \begin{pmatrix}2 & 1 & 1\\ 0 & 1 & 1\\ 0 & 0 & 2\end{pmatrix}. \]
+\schritt{(b)}
+$Ly = b$ vorwärts: $y_1 = 1$, $y_2 = 1 - 2 = -1$, $y_3 = 1 - 4 + 3 = 0$. $Rx = y$ rückwärts: $x_3 = 0$, $x_2 = -1 - x_3 = -1$, $x_1 = \frac12(1 - x_2 - x_3) = 1$. Also $x = (1, -1, 0)$.
+\probe{$LR$, dritte Zeile: $4(2, 1, 1) + 3(0, 1, 1) + (0, 0, 2) = (8, 7, 9)$. \checkmark\ \ $Ax = (2 - 1,\ 4 - 3,\ 8 - 7) = (1, 1, 1)$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Zerlegung kostet einmal $\sim n^{3}/3$ Operationen, jede weitere rechte Seite nur $\sim n^{2}$. Wer dasselbe System mit vielen rechten Seiten löst, zerlegt einmal und setzt ein --- statt die Inverse zu berechnen, die teurer und ungenauer ist.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.10
+\stupserzwei{tief}{Multiplizieren Sie $\begin{pmatrix}a & b\\ c & d\end{pmatrix}\begin{pmatrix}d & -b\\ -c & a\end{pmatrix}$ aus: Es kommt $(ad - bc)\,I$ heraus.}{22pt}
+\begin{loesungkarte}{tief}{2.10}{Die $2\times2$-Inverse}
+\derweg{Die Formel durch Ausmultiplizieren bestätigen, dann anwenden --- und am singulären Fall sehen, warum $\det = 0$ das Ende ist.}
+\schritt{(a)}
+$\begin{pmatrix}a & b\\ c & d\end{pmatrix}\begin{pmatrix}d & -b\\ -c & a\end{pmatrix} = \begin{pmatrix}ad - bc & -ab + ab\\ cd - cd & -bc + ad\end{pmatrix} = (ad - bc)\,I$. Teilen durch $ad - bc\neq0$ gibt $I$. $\blacksquare$
+\schritt{(b)}
+$\det = 6 - 5 = 1$: $A^{-1} = \begin{pmatrix}3 & -5\\ -1 & 2\end{pmatrix}$. Lösung von $Ax = (1, 0)^{\mathsf T}$: $x = A^{-1}(1, 0)^{\mathsf T} = (3, -1)^{\mathsf T}$, also $x = 3$, $y = -1$.
+\schritt{(c)}
+$\det = 4 - 4 = 0$: Die zweite Zeile ist die Hälfte der ersten. $v = (2, -1)$: $Av = (4 - 4, 2 - 2) = (0, 0)$. Gäbe es $A^{-1}$, so wäre $v = A^{-1}Av = A^{-1}0 = 0$ --- Widerspruch.
+\probe{(b): $2\cdot3 + 5\cdot(-1) = 1$, $3 - 3 = 0$. \checkmark}
+\begin{mitnehmen}\kastentext
+Für $2\times2$ ist die Formel schneller als Gauß. Für $3\times3$ und größer nicht mehr: Dort Gauß--Jordan (Aufgabe 2.8). Die Begründung in (c) gilt in jeder Dimension: Kern $\neq\{0\}$ schließt die Inverse aus.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.11
+\stupserzwei{akzent}{$a\sin x + b\cos x = 0$ für alle $x$: Setzen Sie $x = 0$ und $x = \frac\pi2$ ein.}{22pt}
+\begin{loesungkarte}{akzent}{2.11}{Funktionen als Vektoren}
+\derweg{Eine Linearkombination, die als Funktion null ist, ist an jeder Stelle null; geschickt gewählte Stellen liefern Gleichungen für die Koeffizienten.}
+\schritt{(a)}
+Sei $a\sin x + b\cos x = 0$ für alle $x$. $x = 0$: $b = 0$. $x = \frac\pi2$: $a = 0$. Also nur die triviale Kombination: linear unabhängig.
+\schritt{(b)}
+Additionstheorem: $\sin(x + \frac\pi4) = \sin x\cos\frac\pi4 + \cos x\sin\frac\pi4 = \frac1{\sqrt2}(\sin x + \cos x)$. Also $\sqrt2\,f - \sin - \cos = 0$, eine nichttriviale Relation: abhängig.
+\schritt{(c)}
+$1, x, x^{2}$: $a + bx + cx^{2} = 0$ für alle $x$. $x = 0$: $a = 0$; dann $x(b + cx) = 0$ für alle $x$, also $b + cx = 0$ für $x\neq0$, also $b = c = 0$. Unabhängig. (Oder: ein Polynom vom Grad $\le2$ mit unendlich vielen Nullstellen ist das Nullpolynom.) \\
+$1, \sin^{2}, \cos^{2}$: $\sin^{2}x + \cos^{2}x - 1 = 0$ --- abhängig.
+\schritt{(d)}
+Jedes $\sin(x + \varphi) = \cos\varphi\,\sin x + \sin\varphi\,\cos x$ liegt im Spann von $\sin$ und $\cos$. Die unendliche Familie spannt also denselben Raum auf wie $\{\sin, \cos\}$: Dimension $2$.
+\probe{(b) an $x = 0$: $f(0) = \sin\frac\pi4 = \frac1{\sqrt2}$, und $\frac1{\sqrt2}(0 + 1) = \frac1{\sqrt2}$. \checkmark}
+\begin{fehler}\kastentext
+\enquote{Linear unabhängig} heißt bei Funktionen: Die Nullkombination gilt \emph{für alle $x$}. Wer nur an einer Stelle prüft, zeigt nichts; wer an genügend vielen Stellen prüft, bekommt ein lineares Gleichungssystem für die Koeffizienten --- und ist wieder in der Matrizenrechnung.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Der Raum aller Funktionen ist unendlichdimensional, aber seine interessanten Unterräume --- Polynome vom Grad $\le n$, Schwingungen einer Frequenz, Lösungen einer linearen Differentialgleichung --- sind endlichdimensional. Dort funktioniert alles aus diesem Gebiet, und daraus leben Fourier-Reihen (Gebiet 3) und Differentialgleichungen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.12
+\stupserzwei{gruen}{Eine Gleichung $\text{linear} = 0$ definiert immer einen Untervektorraum; $= 1$ nie (die Null fehlt); Quadrate und Vorzeichenbedingungen scheitern an Summe oder Vielfachem.}{22pt}
+\begin{loesungkarte}{gruen}{2.12}{Sechs Mengen, zwei Untervektorräume}
+\derweg{Drei Fragen je Menge: Null drin? Summe drin? Vielfaches drin?}
+\schritt{(a) $U_1$: ja}
+$0$ erfüllt $0 + 0 - 0 = 0$. Erfüllen $u, v$ die Gleichung, dann auch $u + v$ und $\lambda u$ (die linke Seite ist linear). Eine Ebene durch den Ursprung.
+\schritt{(b) $U_2$: nein}
+$0\notin U_2$, denn $0 + 0 - 0 = 0\neq1$. (Auch: $u, v\in U_2\Rightarrow u + v$ hat linke Seite $2$.) Eine Ebene, die nicht durch den Ursprung geht.
+\schritt{(c) $U_3$: nein}
+$(1, 1, 0)$ und $(1, -1, 0)$ liegen in $U_3$, ihre Summe $(2, 0, 0)$ nicht ($4\neq0$). $U_3$ ist die Vereinigung der beiden Ebenen $x = y$ und $x = -y$.
+\schritt{(d) $U_4$: nein}
+$(1, 0, 0)\in U_4$, aber $(-1)\cdot(1, 0, 0)\notin U_4$. Ein Halbraum ist abgeschlossen unter Addition, nicht unter Vielfachen.
+\schritt{(e) $U_5$: ja}
+$U_5 = \mathbb R\,(1, 2, -1)$, eine Gerade durch den Ursprung: $t_1(1, 2, -1) + t_2(1, 2, -1) = (t_1 + t_2)(1, 2, -1)$, $\lambda\cdot t(1, 2, -1) = (\lambda t)(1, 2, -1)$. ($U_5$ liegt nicht in $U_1$: $t + 4t + t = 6t\neq0$ für $t\neq0$.)
+\schritt{(f) $U_6$: nein}
+$(1, 0, 0), (0, 1, 1)\in U_6$, Summe $(1, 1, 1)$ hat $xyz = 1\neq0$. $U_6$ ist die Vereinigung der drei Koordinatenebenen.
+\probe{$U_1$ und $U_5$ sind durch \emph{lineare homogene} Bedingungen bzw. als Spann gegeben --- genau die beiden Arten, auf die Untervektorräume immer entstehen. \checkmark}
+\begin{mitnehmen}\kastentext
+Untervektorräume des $\mathbb R^{3}$ sind: $\{0\}$, Geraden und Ebenen durch den Ursprung, $\mathbb R^{3}$. Alles, was nicht durch den Ursprung geht, gekrümmt ist, Ecken hat oder aus mehreren Stücken besteht, ist keiner.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.13
+\stupserzwei{gruen}{Erste Komponente: $\alpha = 1$. Zweite: $2 + \beta = 4$, also $\beta = 2$. Dritte Komponente ist die Probe.}{22pt}
+\begin{loesungkarte}{gruen}{2.13}{Im Spann oder nicht}
+\derweg{$\alpha v_1 + \beta v_2 = b$ komponentenweise; zwei Gleichungen bestimmen, die dritte entscheidet.}
+$\alpha(1, 2, 3) + \beta(0, 1, 2) = (1, 4, 7)$: $\alpha = 1$; $2\alpha + \beta = 4\Rightarrow\beta = 2$; dritte Komponente $3\alpha + 2\beta = 3 + 4 = 7$. \checkmark\ Also $b = v_1 + 2v_2\in\operatorname{span}(v_1, v_2)$.
+
+Für $b' = (1, 4, 8)$: dieselben $\alpha = 1$, $\beta = 2$, aber $3 + 4 = 7\neq8$. $b'\notin\operatorname{span}(v_1, v_2)$.
+\probe{Der Spann ist die Ebene $x - 2y + z = 0$ (Normalenvektor $v_1\times v_2 = (1, -2, 1)$). $b$: $1 - 8 + 7 = 0$. \checkmark\ \ $b'$: $1 - 8 + 8 = 1\neq0$. \checkmark}
+\begin{mitnehmen}\kastentext
+\enquote{Liegt $b$ im Spann von $v_1, \dots, v_k$?} ist die Frage \enquote{Ist $Ax = b$ lösbar?} mit den $v_i$ als Spalten von $A$. Der Spann der Spalten \emph{ist} die Menge der lösbaren rechten Seiten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.14
+\stupserzwei{gruen}{$x^{2} = (1 + x + x^{2}) - (1 + x)$, $x = (1 + x) - 1$: Damit ist jede Potenz in der zweiten Basis.}{22pt}
+\begin{loesungkarte}{gruen}{2.14}{Zwei Erzeugendensysteme}
+\derweg{Jedes Element der einen Familie durch die andere ausdrücken; der Koeffizientenvergleich ist ein Dreieckssystem.}
+\schritt{Beide erzeugen}
+$\{1, x, x^{2}\}$ erzeugt $\mathbb R[x]_{\le2}$ nach Definition. Umgekehrt: $1 = 1$, $x = (1 + x) - 1$, $x^{2} = (1 + x + x^{2}) - (1 + x)$. Also liegt jede Potenz im Spann der zweiten Familie, damit jedes Polynom. (Beide Familien haben drei Elemente in einem dreidimensionalen Raum und erzeugen ihn --- also sind beide Basen.)
+\schritt{Koordinaten}
+$3 - x + 2x^{2} = a\cdot1 + b(1 + x) + c(1 + x + x^{2})$. Koeffizient von $x^{2}$: $c = 2$. Von $x$: $b + c = -1\Rightarrow b = -3$. Konstante: $a + b + c = 3\Rightarrow a = 4$. Also $p = 4\cdot1 - 3(1 + x) + 2(1 + x + x^{2})$, Koordinatenvektor $(4, -3, 2)$.
+\probe{$4 - 3 - 3x + 2 + 2x + 2x^{2} = 3 - x + 2x^{2}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Basiswechselmatrix von $\{1, 1 + x, 1 + x + x^{2}\}$ nach $\{1, x, x^{2}\}$ ist obere Dreiecksmatrix mit Einsen --- deshalb geht das Auflösen von hinten nach vorn. Basen aus \enquote{Teleskop-Summen} sind in der Numerik und bei Newton-Interpolation Alltag.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.15
+\stupserzwei{tief}{$v_2 = 2v_1$ und $v_4 = v_1 - v_3$. Es bleiben $v_1$ und $v_3$ --- und bei allen vieren ist die erste gleich der dritten Komponente.}{22pt}
+\begin{loesungkarte}{tief}{2.15}{Basis aussieben, Koordinaten lesen}
+\derweg{Abhängige Vektoren streichen, bis die restlichen unabhängig sind; Koordinaten durch Gleichungssystem; Gleichung aus dem gemeinsamen Muster.}
+\schritt{(a)}
+$v_2 = 2v_1$: weg. $v_4 = (0, 2, 0) = (1, 2, 1) - (1, 0, 1) = v_1 - v_3$: weg. $v_1, v_3$ sind unabhängig (kein Vielfaches voneinander). Basis $(v_1, v_3)$, $\dim U = 2$. \\
+Mit Gauß: Vektoren als Spalten, Stufenform hat Pivots in Spalte 1 und 3 --- dasselbe Ergebnis.
+\schritt{(b)}
+$a(1, 2, 1) + b(1, 0, 1) = (3, 2, 3)$: zweite Komponente $2a = 2$, $a = 1$; erste $1 + b = 3$, $b = 2$; dritte $1 + 2 = 3$. \checkmark\ Also $w\in U$ mit Koordinaten $(1, 2)$ bezüglich $(v_1, v_3)$.
+\schritt{(c)}
+Alle $v_i$ haben erste gleich dritte Komponente; $U$ ist zweidimensional, also eine Ebene: $U = \{(x, y, z)\colon x = z\}$. Normalenvektor $(1, 0, -1)$, orthogonal zu $v_1$ und $v_3$. \checkmark
+\probe{$w = (3, 2, 3)$ erfüllt $x = z$. \checkmark\ \ $\dim$: zwei Basisvektoren, eine Gleichung im $\mathbb R^{3}$: $3 - 1 = 2$. \checkmark}
+\begin{mitnehmen}\kastentext
+Zwei Beschreibungen eines Untervektorraums: durch Erzeuger (Spann) und durch Gleichungen (Kern). Hin und her kommt man mit Gauß --- und $\dim$(Spann) $+$ Zahl unabhängiger Gleichungen $= n$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.16
+\stupserzwei{akzent}{$(1, 1) = (1, 0) + (0, 1)$. Das ist die Relation --- und keiner der drei ist ein Vielfaches eines einzelnen anderen.}{22pt}
+\begin{loesungkarte}{akzent}{2.16}{Paarweise unabhängig}
+\derweg{Die Relation hinschreiben; die Dimension als Obergrenze; die Definition so formulieren, dass sie die ganze Familie betrifft.}
+\schritt{(a)}
+Paarweise: $(1, 0)$ und $(0, 1)$ keine Vielfachen; $(1, 0)$ und $(1, 1)$ nicht; $(0, 1)$ und $(1, 1)$ nicht. Zusammen: $1\cdot(1, 0) + 1\cdot(0, 1) - 1\cdot(1, 1) = 0$. Abhängig.
+\schritt{(b)}
+Drei Vektoren im $\mathbb R^{2}$ als Spalten einer $2\times3$-Matrix: höchstens zwei Pivots, also mindestens eine freie Variable, also eine nichttriviale Lösung von $Ax = 0$ --- das ist eine Relation. Allgemein: Mehr als $\dim V$ Vektoren sind immer abhängig.
+\schritt{(c)}
+$v_1, \dots, v_k$ sind linear unabhängig, wenn aus $\lambda_1v_1 + \dots + \lambda_kv_k = 0$ folgt $\lambda_1 = \dots = \lambda_k = 0$. Das ist eine Aussage über \emph{alle} Koeffizienten gleichzeitig. Äquivalent: Keiner der Vektoren ist eine Linearkombination \emph{der anderen zusammen} --- nicht: eines anderen.
+\schritt{(d)}
+$(1, 0, 0), (0, 1, 0), (1, 1, 0)$: paarweise unabhängig, aber alle drei liegen in der $xy$-Ebene --- drei Vektoren in einem zweidimensionalen Raum. Geometrisch: Drei Pfeile, von denen keine zwei auf einer Geraden liegen, aber alle drei in einer Ebene.
+\begin{fehler}\kastentext
+\enquote{Kein Vektor ist ein Vielfaches eines anderen} prüft nur Paare. Für zwei Vektoren ist das dasselbe wie lineare Unabhängigkeit; für drei und mehr nicht. Der richtige Test ist immer: Gauß auf die Matrix der Vektoren, Zahl der Pivots gleich Zahl der Vektoren?
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Lineare Unabhängigkeit ist eine Eigenschaft der \emph{Familie}, nicht der Paare. Die Zahl $\dim V$ ist die absolute Obergrenze für unabhängige Familien.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.17
+\stupserzwei{gruen}{$2v_1 = (2, 4, 6)$, dazu $v_3 = (0, 1, 1)$: Summe $(2, 5, 7) = v_2$.}{22pt}
+\begin{loesungkarte}{gruen}{2.17}{Drei Vektoren im $\mathbb R^{3}$}
+\derweg{Determinante der Matrix aus den drei Vektoren; ist sie null, die Relation mit Gauß oder durch Hinsehen finden.}
+\schritt{Determinante}
+$\det\begin{pmatrix}1 & 2 & 0\\ 2 & 5 & 1\\ 3 & 7 & 1\end{pmatrix}$ (Vektoren als Spalten) $= 1(5 - 7) - 2(2 - 3) + 0 = -2 + 2 = 0$. Abhängig.
+\schritt{Relation}
+$v_2 = 2v_1 + v_3$: $(2, 4, 6) + (0, 1, 1) = (2, 5, 7)$. \checkmark\ Also $2v_1 - v_2 + v_3 = 0$.
+\schritt{Mit Gauß}
+Vektoren als Zeilen: $Z_2 - 2Z_1 = (0, 1, 1) = Z_3$, also $Z_3 - Z_2' = 0$: Rang $2$. Dasselbe Ergebnis, und die Rechnung zeigt die Relation.
+\probe{Spann ist die Ebene durch $v_1$ und $v_3$ mit Normale $v_1\times v_3 = (2 - 3, 0 - 1, 1 - 0) = (-1, -1, 1)$: $-2 - 5 + 7 = 0$ für $v_2$. \checkmark}
+\begin{mitnehmen}\kastentext
+Drei Methoden, ein Ergebnis: Determinante (schnell, nur für $n$ Vektoren im $\mathbb R^{n}$, sagt nicht, welche Relation), Gauß (immer, liefert die Relation), Hinsehen (manchmal). Im Zweifel Gauß.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.18
+\stupserzwei{gruen}{Ein Vektor im Schnitt hat die Form $(a, b, a, b)$ \emph{und} die Form $(c + d, c, c, c + d)$. Vergleichen: $d = 0$ und $a = b = c$.}{22pt}
+\begin{loesungkarte}{gruen}{2.18}{Summe und Schnitt}
+\derweg{Dimension der Summe als Rang aller vier Vektoren, Schnitt aus der Dimensionsformel --- und dann den Schnitt konkret berechnen.}
+\schritt{(a)}
+$\dim U = 2$, $\dim W = 2$ (jeweils zwei nicht-parallele Vektoren). Alle vier als Zeilen:
+$\begin{pmatrix}1 & 0 & 1 & 0\\ 0 & 1 & 0 & 1\\ 1 & 1 & 1 & 1\\ 1 & 0 & 0 & 1\end{pmatrix}$. $Z_3 - Z_1 - Z_2 = 0$; $Z_4 - Z_1 = (0, 0, -1, 1)$, unabhängig von $Z_1, Z_2$. Rang $3$: $\dim(U + W) = 3$. Dimensionsformel: $\dim(U\cap W) = 2 + 2 - 3 = 1$.
+\schritt{(b)}
+$a(1, 0, 1, 0) + b(0, 1, 0, 1) = (a, b, a, b)$; $c(1, 1, 1, 1) + d(1, 0, 0, 1) = (c + d, c, c, c + d)$. Gleichsetzen: $a = c + d$, $b = c$, $a = c$, $b = c + d$. Aus $a = c = c + d$: $d = 0$; dann $a = b = c$. Schnitt: $\mathbb R\,(1, 1, 1, 1)$, Basis $\{(1, 1, 1, 1)\}$.
+\probe{$(1, 1, 1, 1) = 1\cdot(1, 0, 1, 0) + 1\cdot(0, 1, 0, 1)\in U$ und $= 1\cdot(1, 1, 1, 1) + 0\cdot(1, 0, 0, 1)\in W$. \checkmark\ Dimension $1$ wie aus der Formel. \checkmark}
+\begin{mitnehmen}\kastentext
+Zwei Ebenen im $\mathbb R^{4}$ können sich in einer Geraden schneiden (wie hier), in einem Punkt ($\dim(U + W) = 4$) oder zusammenfallen. Im $\mathbb R^{3}$ ist nur die Gerade oder das Zusammenfallen möglich --- die Dimensionsformel sagt warum: $2 + 2 - \dim(U + W)\ge1$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.19
+\stupserzwei{tief}{Drehung um $90^{\circ}$: $e_1 = (1, 0)\mapsto(0, 1)$, $e_2 = (0, 1)\mapsto(-1, 0)$. Diese Bilder sind die Spalten.}{22pt}
+\begin{loesungkarte}{tief}{2.19}{Drehen und Spiegeln}
+\derweg{Basisvektoren abbilden, Bilder als Spalten; verketten durch Multiplizieren; das Ergebnis geometrisch lesen.}
+\schritt{(a)}
+$R = \begin{pmatrix}0 & -1\\ 1 & 0\end{pmatrix}$ (Spalten: Bilder von $e_1, e_2$). $S = \begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix}$ ($e_1$ bleibt, $e_2\mapsto-e_2$).
+\schritt{(b)}
+$RS = \begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}$: erst spiegeln, dann drehen (die rechte Matrix wirkt zuerst). Das vertauscht $x$ und $y$: Spiegelung an $y = x$. \\
+$SR = \begin{pmatrix}0 & -1\\ -1 & 0\end{pmatrix}$: $(x, y)\mapsto(-y, -x)$, Spiegelung an $y = -x$. $RS\neq SR$: Die Reihenfolge von Drehung und Spiegelung ist nicht egal.
+\schritt{(c)}
+$R^{2} = \begin{pmatrix}-1 & 0\\ 0 & -1\end{pmatrix} = -I$ (Drehung um $180^{\circ}$), $R^{4} = I$ (viermal $90^{\circ}$). $S^{2} = I$: zweimal spiegeln ist nichts tun.
+\schritt{(d)}
+$R_\varphi = \begin{pmatrix}\cos\varphi & -\sin\varphi\\ \sin\varphi & \cos\varphi\end{pmatrix}$. Produkt $R_\varphi R_\psi$, Eintrag oben links: $\cos\varphi\cos\psi - \sin\varphi\sin\psi$; das muss $\cos(\varphi + \psi)$ sein. Eintrag unten links: $\sin\varphi\cos\psi + \cos\varphi\sin\psi = \sin(\varphi + \psi)$. Die Additionstheoreme fallen aus der Matrixmultiplikation heraus.
+\probe{$R_{90^{\circ}}$ mit $\cos = 0$, $\sin = 1$ gibt $R$ aus (a). \checkmark\ \ $\det R = 1$ (Drehung erhält Orientierung), $\det S = -1$ (Spiegelung kehrt sie um), $\det(RS) = -1$: eine Spiegelung. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Spalten der Matrix sind die Bilder der Basisvektoren --- diese eine Regel erzeugt jede Darstellungsmatrix. Verketten $=$ Multiplizieren, mit der zuerst angewandten Abbildung rechts.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.20
+\stupserzwei{akzent}{$\dim\operatorname{Kern}f = 4 - \dim\operatorname{Bild}f\ge4 - 3 = 1$: Der Kern ist nie trivial.}{22pt}
+\begin{loesungkarte}{akzent}{2.20}{Kern trivial, also bijektiv?}
+\derweg{Der Dimensionssatz $\dim\operatorname{Kern} + \dim\operatorname{Bild} = \dim V$ entscheidet alles --- solange $\dim V$ endlich ist.}
+\schritt{(a)}
+$f\colon\mathbb R^{4}\to\mathbb R^{3}$: $\dim\operatorname{Bild}\le3$, also $\dim\operatorname{Kern}\ge1$: nicht injektiv. $g\colon\mathbb R^{3}\to\mathbb R^{4}$: $\dim\operatorname{Bild}\le\dim\mathbb R^{3} = 3 < 4$: nicht surjektiv.
+\schritt{(b)}
+Für $f\colon V\to V$, $n = \dim V$: injektiv $\iff\operatorname{Kern} = \{0\}\iff\dim\operatorname{Bild} = n\iff\operatorname{Bild} = V\iff$ surjektiv. Beides zusammen ist bijektiv. $\blacksquare$
+\schritt{(c)}
+$T$ ist injektiv ($T(a) = 0\Rightarrow a = 0$), aber nicht surjektiv: $(1, 0, 0, \dots)$ hat kein Urbild, die erste Komponente des Bildes ist immer $0$. Hier ist $\dim V = \infty$, der Dimensionssatz greift nicht: $\infty = \infty + 1$.
+\schritt{(d)}
+Für eine $n\times n$-Matrix: $\det A\neq0\iff$ Kern $= \{0\}\iff$ injektiv $\iff$ bijektiv $\iff$ invertierbar. Die Determinante ist ein einziges Zahlenkriterium für alle diese Eigenschaften zugleich.
+\begin{fehler}\kastentext
+\enquote{Injektiv $\iff$ surjektiv} gilt für lineare Abbildungen eines endlichdimensionalen Raumes \emph{in sich}. Zwischen Räumen verschiedener Dimension gilt es nie, in unendlicher Dimension nicht immer. Wer eine Inverse zu einer $3\times4$-Matrix sucht, sucht etwas, das nicht existiert.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Der Dimensionssatz ist der Buchhalter der linearen Algebra: Was im Kern verschwindet, fehlt im Bild. Aus ihm folgen Lösbarkeit, Invertierbarkeit und die Zahl der freien Variablen --- alles in einer Gleichung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.21
+\stupserzwei{gruen}{Stufenform hat Pivots in Spalte 1 und 3. Kernbasis: $x_2 = 1, x_4 = 0$ und $x_2 = 0, x_4 = 1$. Bildbasis: Spalten 1 und 3 von $A$ selbst.}{22pt}
+\begin{loesungkarte}{gruen}{2.21}{Kern, Bild, Rangsatz}
+\derweg{Gauß auf $A$; Kern aus den freien Variablen, Bild aus den Pivotspalten der Originalmatrix.}
+\schritt{Stufenform}
+$Z_2 - 2Z_1 = (0, 0, 1, 1)$, $Z_3 - Z_1 = (0, 0, 1, 1)$, $Z_3' - Z_2' = 0$. Stufenform $\begin{pmatrix}1 & 2 & 0 & 1\\ 0 & 0 & 1 & 1\\ 0 & 0 & 0 & 0\end{pmatrix}$, Rang $2$.
+\schritt{Kern}
+$x_2 = s$, $x_4 = t$ frei; $x_3 = -t$; $x_1 = -2s - t$. Kern $= \operatorname{span}\bigl((-2, 1, 0, 0), (-1, 0, -1, 1)\bigr)$, Dimension $2$.
+\schritt{Bild}
+Pivotspalten $1$ und $3$ \emph{von $A$}: $(1, 2, 1)$ und $(0, 1, 1)$. Dimension $2$. (Spalte 2 ist $2\cdot$Spalte 1, Spalte 4 ist Spalte 1 $+$ Spalte 3.)
+\schritt{Rangsatz}
+$\dim\operatorname{Kern} + \dim\operatorname{Bild} = 2 + 2 = 4 = \dim\mathbb R^{4}$. \checkmark
+\probe{$A(-2, 1, 0, 0)^{\mathsf T} = (-2 + 2, -4 + 4, -2 + 2) = 0$. \checkmark\ \ $A(-1, 0, -1, 1)^{\mathsf T} = (-1 + 0 + 1, -2 - 1 + 3, -1 - 1 + 2) = 0$. \checkmark}
+\begin{mitnehmen}\kastentext
+Das Bild wird von den Pivotspalten der \emph{Originalmatrix} aufgespannt --- die Spalten der Stufenform sind andere Vektoren (Zeilenoperationen ändern den Spaltenraum). Der Zeilenraum dagegen bleibt gleich; seine Basis liest man aus der Stufenform ab.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.22
+\stupserzwei{gruen}{Vier Ableitungen eines kubischen Polynoms sind null: $D^{4} = 0$. Eine Matrix mit $D^{4} = 0$, $D^{3}\neq0$ heißt nilpotent.}{22pt}
+\begin{loesungkarte}{gruen}{2.22}{Die Ableitung als Matrix}
+\derweg{Bilder der Basisvektoren als Spalten; Potenzen ausrechnen; Kern und Bild ablesen.}
+\schritt{(a)}
+$D(1) = 0$, $D(x) = 1$, $D(x^{2}) = 2x$, $D(x^{3}) = 3x^{2}$. In Koordinaten bezüglich $(1, x, x^{2}, x^{3})$:
+\[ M_D = \begin{pmatrix}0 & 1 & 0 & 0\\ 0 & 0 & 2 & 0\\ 0 & 0 & 0 & 3\\ 0 & 0 & 0 & 0\end{pmatrix}. \]
+\schritt{(b)}
+$M_D^{2} = \begin{pmatrix}0 & 0 & 2 & 0\\ 0 & 0 & 0 & 6\\ 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0\end{pmatrix}$ (zweite Ableitung: $x^{2}\mapsto2$, $x^{3}\mapsto6x$), $M_D^{3}$ hat nur den Eintrag $6$ oben rechts, $M_D^{4} = 0$. Die vierte Ableitung eines Polynoms vom Grad $\le3$ ist null.
+\schritt{(c)}
+Kern: $D(p) = 0\iff p$ konstant; Kern $= \operatorname{span}(1)$, Dimension $1$. Bild: alle Polynome vom Grad $\le2$ (jedes hat eine Stammfunktion vom Grad $\le3$), Dimension $3$. $1 + 3 = 4$. \checkmark
+\probe{$p = 2 + x - x^{3}$, Koordinaten $(2, 1, 0, -1)$: $M_D(2, 1, 0, -1)^{\mathsf T} = (1, 0, -3, 0)$, also $1 - 3x^{2} = p'$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Ableitung hat den einzigen Eigenwert $0$ (Eigenvektoren: die Konstanten) und ist nilpotent. Auf dem Raum \emph{aller} Polynome ist sie surjektiv, aber nicht injektiv --- wieder ein Beispiel dafür, dass Aufgabe 2.20 in unendlicher Dimension scheitert.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.23
+\stupserzwei{gruen}{$(1, 1)$ liegt auf der Spiegelachse: bleibt. $(1, -1)$ steht senkrecht darauf: wird negiert.}{22pt}
+\begin{loesungkarte}{gruen}{2.23}{Eine Spiegelung in zwei Basen}
+\derweg{In der Standardbasis die Bilder von $e_1, e_2$; in der angepassten Basis die Bilder von $(1, 1), (1, -1)$; dann die Basiswechselformel als Probe.}
+\schritt{(a)}
+Spiegelung an $y = x$ vertauscht die Koordinaten: $e_1\mapsto e_2$, $e_2\mapsto e_1$. $M_E = \begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}$.
+\schritt{(b)}
+$f(1, 1) = (1, 1) = 1\cdot b_1 + 0\cdot b_2$; $f(1, -1) = (-1, 1) = 0\cdot b_1 - 1\cdot b_2$. $M_{B'} = \begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix}$.
+\schritt{(c)}
+$T = \begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}$, $\det T = -2$, $T^{-1} = -\frac12\begin{pmatrix}-1 & -1\\ -1 & 1\end{pmatrix} = \frac12\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}$. $M_ET = \begin{pmatrix}1 & -1\\ 1 & 1\end{pmatrix}$; $T^{-1}M_ET = \frac12\begin{pmatrix}2 & 0\\ 0 & -2\end{pmatrix} = \begin{pmatrix}1 & 0\\ 0 & -1\end{pmatrix}$. \checkmark
+\probe{Beide Matrizen haben Spur $0$ und Determinante $-1$ --- Spur und Determinante hängen nicht von der Basis ab. \checkmark}
+\begin{mitnehmen}\kastentext
+$M_{B'} = T^{-1}M_ET$: Koordinaten von $B'$ nach $E$ übersetzen ($T$), abbilden ($M_E$), zurückübersetzen ($T^{-1}$). Die Basis aus Eigenvektoren macht die Matrix diagonal --- Kapitel 7 ist die Suche nach solchen Basen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.24
+\stupserzwei{tief}{$2A$ multipliziert jede der drei Zeilen mit $2$: Faktor $2^{3} = 8$. Und $-A$: Faktor $(-1)^{3} = -1$.}{22pt}
+\begin{loesungkarte}{tief}{2.24}{Rechenregeln der Determinante}
+\derweg{Gauß ohne Tausch und ohne Skalieren ändert die Determinante nicht; dann die vier Regeln anwenden.}
+\schritt{(a)}
+$Z_2 - 2Z_1 = (0, 1, 1)$, $Z_3 - Z_1 = (0, -1, 0)$, $Z_3' + Z_2' = (0, 0, 1)$. Dreiecksmatrix mit Diagonale $1, 1, 1$: $\det A = 1$.
+\schritt{(b)}
+$\det A^{\mathsf T} = \det A = 1$. $\det(2A) = 2^{3}\det A = 8$. $\det(A^{2}) = (\det A)^{2} = 1$. $\det(A^{-1}) = 1/\det A = 1$. $\det(-A) = (-1)^{3}\det A = -1$.
+\schritt{(c)}
+Ein Zeilentausch kehrt das Vorzeichen: $-1$.
+\probe{Sarrus für (a): $1\cdot5\cdot3 + 2\cdot7\cdot1 + 3\cdot2\cdot1 - 3\cdot5\cdot1 - 1\cdot7\cdot1 - 2\cdot2\cdot3 = 15 + 14 + 6 - 15 - 7 - 12 = 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Vier Regeln: $\det(AB) = \det A\det B$; $\det A^{\mathsf T} = \det A$; $\det(cA) = c^{n}\det A$; Zeilentausch wechselt das Vorzeichen. Dazu: Zeilen addieren ändert nichts, und deshalb rechnet man Determinanten mit Gauß.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.25
+\stupserzwei{akzent}{$\det(2A) = 2^{n}\det A$, weil $2A$ alle $n$ Zeilen verdoppelt und jede Zeile einen Faktor $2$ beiträgt.}{22pt}
+\begin{loesungkarte}{akzent}{2.25}{$\det(A + B)$}
+\derweg{Ein Gegenbeispiel, die Skalierungsregel, die Linearität in \emph{einer} Zeile ausbuchstabiert --- und damit der Unterschied.}
+\schritt{(a)}
+$\det(I + I) = \det\begin{pmatrix}2 & 0\\ 0 & 2\end{pmatrix} = 4$, aber $\det I + \det I = 2$.
+\schritt{(b)}
+$\det(2A) = 2^{n}\det A$: Die Determinante ist linear in jeder einzelnen Zeile; $2A$ hat $n$ verdoppelte Zeilen, und jede liefert einen Faktor $2$. Für $n = 2$: Faktor $4$, nicht $2$.
+\schritt{(c)}
+Linear in der ersten Zeile heißt: $\det\begin{pmatrix}a + a' & b + b'\\ c & d\end{pmatrix} = \det\begin{pmatrix}a & b\\ c & d\end{pmatrix} + \det\begin{pmatrix}a' & b'\\ c & d\end{pmatrix}$ (bei \emph{festgehaltener} zweiter Zeile). Nachrechnen: $(a + a')d - (b + b')c = (ad - bc) + (a'd - b'c)$. \checkmark\ Bei $A + B$ ändern sich aber \emph{beide} Zeilen, und dann gilt keine Summenregel.
+\schritt{(d)}
+Regeln gibt es für $\det(AB) = \det A\det B$, $\det A^{\mathsf T} = \det A$, $\det(cA) = c^{n}\det A$. Für $\det(A + B)$ gibt es keine Formel in $\det A$ und $\det B$ allein.
+\begin{fehler}\kastentext
+\enquote{Die Determinante ist linear} --- ja, in jeder Zeile einzeln (multilinear). Nein, als Funktion der Matrix. $\det(A + B)\neq\det A + \det B$, $\det(cA)\neq c\det A$. Wer das verwechselt, vergisst, dass eine $n\times n$-Matrix $n$ Zeilen hat.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Multilinear, alternierend, normiert --- diese drei Eigenschaften \emph{definieren} die Determinante. Linear in der Matrix wäre eine vierte, die den anderen widerspricht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.26
+\stupserzwei{gruen}{Nach zwei Gauß-Runden sind Zeile 3 und 4 beide $(0, 0, 2, 3)$.}{22pt}
+\begin{loesungkarte}{gruen}{2.26}{Eine $4\times4$-Determinante}
+\derweg{Gauß; sobald zwei Zeilen gleich sind, ist die Determinante null.}
+\schritt{Erste Spalte}
+$Z_2 - 2Z_1 = (0, 1, 2, 1)$, $Z_3 - 3Z_1 = (0, 2, 6, 5)$, $Z_4 - Z_1 = (0, 1, 4, 4)$.
+\schritt{Zweite Spalte}
+$Z_3' - 2Z_2' = (0, 0, 2, 3)$, $Z_4' - Z_2' = (0, 0, 2, 3)$. Zwei gleiche Zeilen: $\det A = 0$.
+\schritt{Rang}
+Drei Pivots ($2, 1, 2$), eine Nullzeile: $\operatorname{Rang}A = 3$. Die Spalten sind abhängig, $A$ ist nicht invertierbar.
+\probe{Die Relation zurückrechnen: $Z_3' - 2Z_2' = Z_4' - Z_2'$ heißt $Z_3' = Z_4' + Z_2'$, also $Z_3 - 3Z_1 = (Z_4 - Z_1) + (Z_2 - 2Z_1)$, also $Z_3 = Z_2 + Z_4$. An den Originalzeilen: $(4, 3, 8, 3) + (2, 2, 7, 5) = (6, 5, 15, 8)$. \checkmark}
+\begin{mitnehmen}\kastentext
+$\det A = 0\iff\operatorname{Rang}A < n\iff$ Zeilen abhängig $\iff$ Spalten abhängig $\iff$ nicht invertierbar. Die Relation zwischen den Zeilen findet man, indem man die Gauß-Schritte zurückverfolgt --- und prüft sie immer an den Originalzeilen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.27
+\stupserzwei{gruen}{Nach Zeile 3: $5\cdot(-1)^{3+3}\cdot M_{33}$, wobei $M_{33}$ die $3\times3$-Determinante ohne Zeile 3 und Spalte 3 ist.}{22pt}
+\begin{loesungkarte}{gruen}{2.27}{Entwickeln nach der richtigen Zeile}
+\derweg{Laplace nach der Zeile mit drei Nullen; die verbleibende $3\times3$-Determinante nach ihrer Zeile mit zwei Nullen.}
+\schritt{Entwicklung}
+Zeile 3 ist $(0, 0, 5, 0)$: $\det A = 5\cdot(-1)^{3+3}\det\begin{pmatrix}3 & 0 & 0\\ 1 & 4 & 2\\ 2 & 1 & 3\end{pmatrix}$.
+\schritt{Die Unterdeterminante}
+Erste Zeile $(3, 0, 0)$: $3\cdot\det\begin{pmatrix}4 & 2\\ 1 & 3\end{pmatrix} = 3(12 - 2) = 30$.
+\schritt{Ergebnis}
+$\det A = 5\cdot30 = 150$.
+\probe{Mit Gauß: Spalten 1 und 3 vertauschen (Vorzeichen $-1$) macht die Matrix fast dreieckig --- oder man vertraut der Entwicklung und prüft nur das Vorzeichen: $(-1)^{3+3} = +1$, $(-1)^{1+1} = +1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Laplace-Entwicklung ist exponentiell teuer ($n!$ Terme) --- außer wenn Nullen die meisten Terme löschen. Dann ist sie schneller als Gauß. Das Vorzeichen $(-1)^{i+j}$ ist das Schachbrettmuster mit $+$ in der Ecke oben links.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.28
+\stupserzwei{gruen}{$\det A = 2\cdot3 - 1\cdot1 = 5$. $A_x$: erste Spalte durch $(5, 10)$ ersetzt.}{22pt}
+\begin{loesungkarte}{gruen}{2.28}{Cramer}
+\derweg{Drei Determinanten, zwei Quotienten.}
+$\det A = \begin{vmatrix}2 & 1\\ 1 & 3\end{vmatrix} = 5$, $\det A_x = \begin{vmatrix}5 & 1\\ 10 & 3\end{vmatrix} = 15 - 10 = 5$, $\det A_y = \begin{vmatrix}2 & 5\\ 1 & 10\end{vmatrix} = 20 - 5 = 15$. Also $x = \frac55 = 1$, $y = \frac{15}5 = 3$.
+\probe{$2\cdot1 + 3 = 5$, $1 + 9 = 10$. \checkmark}
+\begin{mitnehmen}\kastentext
+Cramer braucht $n + 1$ Determinanten; für $n = 10$ sind das $11$ Determinanten statt eines Gauß-Durchlaufs. Die Regel ist für Theorie wertvoll (sie zeigt, dass die Lösung rational von den Koeffizienten abhängt) und für $2\times2$ bequem --- sonst nicht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.29
+\stupserzwei{gruen}{$P_2 - P_1 = (3, 1)$, $P_3 - P_1 = (1, 4)$, Determinante $3\cdot4 - 1\cdot1 = 11$.}{22pt}
+\begin{loesungkarte}{gruen}{2.29}{Die Fläche eines Dreiecks}
+\derweg{Zwei Kantenvektoren, Determinante, halbieren, Betrag.}
+$\det\begin{pmatrix}3 & 1\\ 1 & 4\end{pmatrix} = 12 - 1 = 11$ ist der Flächeninhalt des von den Kanten aufgespannten Parallelogramms; das Dreieck ist die Hälfte: $\frac{11}2 = 5{,}5$. \\
+Das Vorzeichen: positiv, weil $P_1\to P_2\to P_3$ gegen den Uhrzeigersinn läuft (der Vektor $(1, 4)$ liegt links von $(3, 1)$). Bei umgekehrter Reihenfolge wäre die Determinante $-11$.
+\probe{Mit der Schnürsenkelformel: $\frac12|x_1(y_2 - y_3) + x_2(y_3 - y_1) + x_3(y_1 - y_2)| = \frac12|1(3 - 6) + 4(6 - 2) + 2(2 - 3)| = \frac12|-3 + 16 - 2| = \frac{11}2$. \checkmark}
+\begin{mitnehmen}\kastentext
+$|\det|$ ist das Volumen des von den Spalten aufgespannten Parallelotops, das Vorzeichen die Orientierung. Für Dreiecke und Tetraeder teilt man durch $2$ beziehungsweise $6$. Das ist auch der Grund, warum die Determinante in der Substitutionsregel für mehrdimensionale Integrale steht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.30
+\stupserzwei{tief}{Eigenwerte $3$ und $1$ mit Eigenvektoren $(1, 1)$ und $(1, -1)$. $S^{-1} = \frac12 S$, weil die Spalten orthogonal mit Länge $\sqrt2$ sind.}{22pt}
+\begin{loesungkarte}{tief}{2.30}{$A^{n}$ ohne $n$ Multiplikationen}
+\derweg{Diagonalisieren, $D^{n}$ elementweise, zurücktransformieren.}
+\schritt{(a)}
+$\det(A - \lambda I) = (2 - \lambda)^{2} - 1 = (\lambda - 1)(\lambda - 3)$. $\lambda = 3$: $(A - 3I)v = 0$ mit $A - 3I = \begin{pmatrix}-1 & 1\\ 1 & -1\end{pmatrix}$: $v_1 = (1, 1)$. $\lambda = 1$: $A - I = \begin{pmatrix}1 & 1\\ 1 & 1\end{pmatrix}$: $v_2 = (1, -1)$.
+\schritt{(b)}
+$S = \begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}$, $D = \operatorname{diag}(3, 1)$, $S^{-1} = \frac12\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}$.
+\begin{align*}
+A^{n} = SD^{n}S^{-1} &= \frac12\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}\begin{pmatrix}3^{n} & 0\\ 0 & 1\end{pmatrix}\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}\\
+&= \frac12\begin{pmatrix}3^{n} & 1\\ 3^{n} & -1\end{pmatrix}\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix} = \frac12\begin{pmatrix}3^{n} + 1 & 3^{n} - 1\\ 3^{n} - 1 & 3^{n} + 1\end{pmatrix}.
+\end{align*}
+\schritt{(c)}
+$n = 2$: Formel gibt $\frac12\begin{pmatrix}10 & 8\\ 8 & 10\end{pmatrix} = \begin{pmatrix}5 & 4\\ 4 & 5\end{pmatrix}$. Direkt: $A^{2} = \begin{pmatrix}4 + 1 & 2 + 2\\ 2 + 2 & 1 + 4\end{pmatrix} = \begin{pmatrix}5 & 4\\ 4 & 5\end{pmatrix}$. \checkmark
+\schritt{(d)}
+$v = \alpha v_1 + \beta v_2$, dann $A^{n}v = \alpha3^{n}v_1 + \beta v_2$. Für großes $n$ dominiert $3^{n}$: $A^{n}v\approx\alpha3^{n}(1, 1)$, die Richtung $(1, 1)$ --- außer wenn $\alpha = 0$, also $v$ parallel zu $(1, -1)$. Der größte Eigenwert gewinnt; das ist die Grundlage der Potenzmethode und von PageRank (Aufgabe 2.38).
+\probe{$n = 0$: $\frac12\begin{pmatrix}2 & 0\\ 0 & 2\end{pmatrix} = I$. \checkmark\ \ $n = 1$: $\frac12\begin{pmatrix}4 & 2\\ 2 & 4\end{pmatrix} = A$. \checkmark}
+\begin{mitnehmen}\kastentext
+$A^{n} = SD^{n}S^{-1}$ gilt für jede diagonalisierbare Matrix, und $D^{n}$ kostet nichts. Dasselbe für $e^{A} = Se^{D}S^{-1}$, $\sqrt A$, $\sin A$: Alles, was man an Zahlen tun kann, kann man an diagonalisierbaren Matrizen tun --- auf den Eigenwerten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.31
+\stupserzwei{akzent}{$A + B = \begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}$ hat Eigenwerte $\pm1$. Aus $0 + 0$ wird nicht $0$.}{22pt}
+\begin{loesungkarte}{akzent}{2.31}{Eigenwerte addieren sich nicht}
+\derweg{Drei Gegenbeispiele rechnen; dann die Bedingung nennen, unter der die Regeln doch gelten.}
+\schritt{(a)}
+$A$ und $B = A^{\mathsf T}$ sind Dreiecksmatrizen mit Diagonale $0, 0$: einziger Eigenwert $0$. $A + B = \begin{pmatrix}0 & 1\\ 1 & 0\end{pmatrix}$: $\lambda^{2} - 1 = 0$, Eigenwerte $1$ und $-1$. Nicht $0 + 0$.
+\schritt{(b)}
+$AB = \begin{pmatrix}1 & 0\\ 0 & 0\end{pmatrix}$, Eigenwerte $1, 0$. $BA = \begin{pmatrix}0 & 0\\ 0 & 1\end{pmatrix}$, Eigenwerte $0, 1$. Nicht $0\cdot0$. (Dass $AB$ und $BA$ dieselben Eigenwerte haben, ist dagegen immer wahr.)
+\schritt{(c)}
+$\lambda = 1$: $C - I = \begin{pmatrix}0 & 1\\ 0 & 1\end{pmatrix}$, Eigenvektor $(1, 0)$. $\lambda = 2$: $C - 2I = \begin{pmatrix}-1 & 1\\ 0 & 0\end{pmatrix}$, Eigenvektor $(1, 1)$. Skalarprodukt $1\neq0$: nicht orthogonal. Linear unabhängig sind sie trotzdem --- das garantiert der Satz über verschiedene Eigenwerte.
+\schritt{(d)}
+Haben $A$ und $B$ eine \emph{gemeinsame} Eigenbasis (gleichzeitig diagonalisierbar, äquivalent zu $AB = BA$ bei diagonalisierbaren Matrizen), dann addieren und multiplizieren sich die Eigenwerte paarweise. Eigenvektoren zu verschiedenen Eigenwerten sind orthogonal, wenn $A$ symmetrisch ist (Spektralsatz, Kap.\ 10).
+\begin{fehler}\kastentext
+Eigenwerte sind keine Zahlen, die an der Matrix \enquote{hängen} und sich mit ihr addieren. Sie gehören zu Eigenvektoren, und $A$ und $B$ haben im Allgemeinen verschiedene. Nur wenn die Eigenvektoren dieselben sind, rechnet man mit Eigenwerten wie mit Zahlen.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Was immer gilt: Summe der Eigenwerte $=$ Spur, Produkt $=$ Determinante; $AB$ und $BA$ haben dieselben Eigenwerte; Eigenvektoren zu verschiedenen Eigenwerten sind unabhängig. Was nur mit Zusatzvoraussetzung gilt: alles andere.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.32
+\stupserzwei{gruen}{$\lambda^{2} - 5\lambda + 6 = (\lambda - 2)(\lambda - 3)$. Für $\lambda = 3$ ist $A - 3I = \begin{pmatrix}1 & -2\\ 1 & -2\end{pmatrix}$.}{22pt}
+\begin{loesungkarte}{gruen}{2.32}{Eigenwerte einer $2\times2$-Matrix}
+\derweg{Charakteristisches Polynom, Nullstellen, Kern von $A - \lambda I$.}
+\schritt{Eigenwerte}
+$\det(A - \lambda I) = (4 - \lambda)(1 - \lambda) + 2 = \lambda^{2} - 5\lambda + 6 = (\lambda - 2)(\lambda - 3)$. Eigenwerte $2$ und $3$.
+\schritt{Eigenvektoren}
+$\lambda = 3$: $\begin{pmatrix}1 & -2\\ 1 & -2\end{pmatrix}v = 0\Rightarrow v_1 = (2, 1)$. $\lambda = 2$: $\begin{pmatrix}2 & -2\\ 1 & -1\end{pmatrix}v = 0\Rightarrow v_2 = (1, 1)$.
+\probe{$A(2, 1)^{\mathsf T} = (8 - 2, 2 + 1) = (6, 3) = 3(2, 1)$. \checkmark\ \ $A(1, 1)^{\mathsf T} = (4 - 2, 1 + 1) = (2, 2) = 2(1, 1)$. \checkmark\ \ Spur $5 = 2 + 3$, $\det = 6 = 2\cdot3$. \checkmark}
+\begin{mitnehmen}\kastentext
+Für $2\times2$: $\lambda^{2} - (\operatorname{Spur})\lambda + \det = 0$. Die Spur-Determinante-Probe fängt die meisten Rechenfehler --- vor dem Suchen der Eigenvektoren.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.33
+\stupserzwei{gruen}{Zum Eigenwert $2$: $A - 2I$ hat Rang $2$, also einen eindimensionalen Kern. Ein Eigenvektor für einen doppelten Eigenwert --- das reicht nicht.}{22pt}
+\begin{loesungkarte}{gruen}{2.33}{Diagonalisieren --- oder nicht}
+\derweg{Eigenwerte aus der Blockstruktur; für jeden die geometrische Vielfachheit; Vergleich mit der algebraischen.}
+\schritt{Eigenwerte}
+Erste Spalte $(2, 0, 0)$: Entwicklung gibt $(2 - \lambda)\det\begin{pmatrix}1 - \lambda & -1\\ 2 & 4 - \lambda\end{pmatrix} = (2 - \lambda)\bigl[(1 - \lambda)(4 - \lambda) + 2\bigr] = (2 - \lambda)(\lambda^{2} - 5\lambda + 6) = -(\lambda - 2)^{2}(\lambda - 3)$. Eigenwerte $2$ (algebraisch doppelt) und $3$ (einfach).
+\schritt{Eigenvektoren zu $2$}
+$A - 2I = \begin{pmatrix}0 & 1 & 0\\ 0 & -1 & -1\\ 0 & 2 & 2\end{pmatrix}$: $y = 0$, $-y - z = 0\Rightarrow z = 0$; $x$ frei. Kern $= \operatorname{span}(1, 0, 0)$, geometrische Vielfachheit $1 < 2$.
+\schritt{Eigenvektor zu $3$}
+$A - 3I = \begin{pmatrix}-1 & 1 & 0\\ 0 & -2 & -1\\ 0 & 2 & 1\end{pmatrix}$: $x = y$, $z = -2y$. $v_3 = (1, 1, -2)$. Geometrische Vielfachheit $1 = 1$.
+\schritt{Ergebnis}
+Nur zwei linear unabhängige Eigenvektoren im $\mathbb R^{3}$: $A$ ist \emph{nicht} diagonalisierbar. Die Jordansche Normalform folgt in Aufgabe 2.36.
+\probe{$A(1, 1, -2)^{\mathsf T} = (2 + 1, 1 + 2, 2 - 8) = (3, 3, -6) = 3(1, 1, -2)$. \checkmark\ \ Spur $2 + 1 + 4 = 7 = 2 + 2 + 3$. \checkmark}
+\begin{mitnehmen}\kastentext
+Diagonalisierbar $\iff$ für jeden Eigenwert geometrische $=$ algebraische Vielfachheit. Die geometrische ist $n - \operatorname{Rang}(A - \lambda I)$; sie ist nie größer als die algebraische, aber oft kleiner --- und dann fehlen Eigenvektoren.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.34
+\stupserzwei{gruen}{Eigenvektor zu $\varphi$: $(\varphi, 1)$, denn $\begin{pmatrix}1 & 1\\ 1 & 0\end{pmatrix}\begin{pmatrix}\varphi\\ 1\end{pmatrix} = \begin{pmatrix}\varphi + 1\\ \varphi\end{pmatrix}$ und $\varphi + 1 = \varphi^{2}$.}{22pt}
+\begin{loesungkarte}{gruen}{2.34}{Fibonacci geschlossen}
+\derweg{Rekursion als Matrix, Diagonalisieren, $n$-te Potenz auf den Startvektor.}
+\schritt{(a)}
+$\begin{pmatrix}F_{n+1}\\ F_n\end{pmatrix} = \begin{pmatrix}1 & 1\\ 1 & 0\end{pmatrix}\begin{pmatrix}F_n\\ F_{n-1}\end{pmatrix}$, also $\begin{pmatrix}F_{n+1}\\ F_n\end{pmatrix} = Q^{n}\begin{pmatrix}F_1\\ F_0\end{pmatrix} = Q^{n}\begin{pmatrix}1\\ 0\end{pmatrix}$ mit $Q = \begin{pmatrix}1 & 1\\ 1 & 0\end{pmatrix}$.
+\schritt{(b)}
+$\det(Q - \lambda I) = \lambda^{2} - \lambda - 1$, Nullstellen $\varphi = \frac{1 + \sqrt5}2$, $\psi = \frac{1 - \sqrt5}2$; beide erfüllen $\lambda^{2} = \lambda + 1$. Eigenvektoren $(\varphi, 1)$ und $(\psi, 1)$. Schreibe $(1, 0) = \alpha(\varphi, 1) + \beta(\psi, 1)$: $\alpha + \beta = 0$, $\alpha\varphi + \beta\psi = 1\Rightarrow\alpha(\varphi - \psi) = 1\Rightarrow\alpha = \frac1{\sqrt5}$, $\beta = -\frac1{\sqrt5}$. Dann
+\[ Q^{n}\begin{pmatrix}1\\ 0\end{pmatrix} = \frac1{\sqrt5}\varphi^{n}\begin{pmatrix}\varphi\\ 1\end{pmatrix} - \frac1{\sqrt5}\psi^{n}\begin{pmatrix}\psi\\ 1\end{pmatrix}, \]
+und die zweite Komponente ist $F_n = \dfrac{\varphi^{n} - \psi^{n}}{\sqrt5}$.
+\schritt{(c)}
+$n = 1$: $\frac{\varphi - \psi}{\sqrt5} = 1$. \checkmark\ $n = 2$: $\varphi^{2} - \psi^{2} = (\varphi - \psi)(\varphi + \psi) = \sqrt5\cdot1$, also $F_2 = 1$. \checkmark\ $n = 5$: $\varphi^{5}\approx11{,}090$, $\psi^{5}\approx-0{,}090$, Differenz $11{,}180$, geteilt durch $2{,}236$: $5{,}000$. \checkmark\ \\
+Weil $|\psi| < 1$, ist $|\psi^{n}/\sqrt5| < \frac12$ für alle $n\ge0$; also ist $F_n$ die zu $\varphi^{n}/\sqrt5$ nächste ganze Zahl.
+\probe{$F_{10} = 55$; $\varphi^{10}/\sqrt5 = 122{,}99/2{,}236 = 55{,}004$, gerundet $55$. \checkmark}
+\begin{mitnehmen}\kastentext
+Jede lineare Rekursion $a_{n+1} = c_1a_n + c_2a_{n-1}$ ist eine $2\times2$-Matrix, und ihre Lösung ist eine Kombination von $\lambda^{n}$ über die Eigenwerte. Das charakteristische Polynom der Matrix ist das \enquote{charakteristische Polynom der Rekursion} aus Band 0 --- dasselbe Objekt, jetzt mit Begründung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.35
+\stupserzwei{gruen}{$A^{2} - 5A + 6I = 0$ mal $A^{-1}$: $A - 5I + 6A^{-1} = 0$, also $A^{-1} = \frac16(5I - A)$.}{22pt}
+\begin{loesungkarte}{gruen}{2.35}{Cayley--Hamilton invertiert}
+\derweg{Charakteristisches Polynom aus Aufgabe 2.32, Matrix einsetzen, nach $A^{-1}$ auflösen.}
+Charakteristisches Polynom $\lambda^{2} - 5\lambda + 6$. Cayley--Hamilton: $A^{2} - 5A + 6I = 0$. Multiplikation mit $A^{-1}$: $A - 5I + 6A^{-1} = 0$, also
+\[ A^{-1} = \tfrac16(5I - A) = \tfrac16\begin{pmatrix}1 & 2\\ -1 & 4\end{pmatrix} = \begin{pmatrix}\frac16 & \frac13\\ -\frac16 & \frac23\end{pmatrix}. \]
+Formel aus Aufgabe 2.10: $\det A = 4 + 2 = 6$, $A^{-1} = \frac16\begin{pmatrix}1 & 2\\ -1 & 4\end{pmatrix}$. Gleich. \checkmark
+\probe{$AA^{-1} = \frac16\begin{pmatrix}4 + 2 & 8 - 8\\ 1 - 1 & 2 + 4\end{pmatrix} = I$. \checkmark}
+\begin{mitnehmen}\kastentext
+Cayley--Hamilton macht aus $A^{-1}$ ein Polynom in $A$ vom Grad $n - 1$. Das ist mehr Theorie als Praxis --- aber es zeigt, dass $A^{-1}$, $A^{n}$, $e^{A}$ alle im $n$-dimensionalen Raum $\operatorname{span}(I, A, \dots, A^{n-1})$ liegen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.36
+\stupserzwei{gruen}{$(A - 2I)v_2 = (1, 0, 0)$: zweite Komponente $y = 1$, dann $-y - z = 0$, $z = -1$; $x$ frei, nimm $0$.}{22pt}
+\begin{loesungkarte}{gruen}{2.36}{Eine Jordanbasis}
+\derweg{Eigenvektor zum doppelten Eigenwert, dazu ein Hauptvektor; Eigenvektor zum einfachen; zusammensetzen und $AS = SJ$ prüfen.}
+\schritt{Kette zum Eigenwert $2$}
+Aus Aufgabe 2.33: $v_1 = (1, 0, 0)$. Hauptvektor $v_2$ mit $(A - 2I)v_2 = v_1$: $\begin{pmatrix}0 & 1 & 0\\ 0 & -1 & -1\\ 0 & 2 & 2\end{pmatrix}v_2 = \begin{pmatrix}1\\ 0\\ 0\end{pmatrix}$ gibt $y = 1$, $z = -1$, $x$ beliebig: $v_2 = (0, 1, -1)$.
+\schritt{Eigenwert $3$}
+$v_3 = (1, 1, -2)$ aus Aufgabe 2.33.
+\schritt{Normalform}
+\[ S = \begin{pmatrix}1 & 0 & 1\\ 0 & 1 & 1\\ 0 & -1 & -2\end{pmatrix},\qquad J = \begin{pmatrix}2 & 1 & 0\\ 0 & 2 & 0\\ 0 & 0 & 3\end{pmatrix},\qquad A = SJS^{-1}. \]
+\probe{$AS$ spaltenweise: $Av_1 = 2v_1 = (2, 0, 0)$; $Av_2 = (1, 1 + 1, 2 - 4) = (1, 2, -2) = v_1 + 2v_2$; $Av_3 = 3v_3 = (3, 3, -6)$. $SJ$ spaltenweise: $2v_1$, $v_1 + 2v_2$, $3v_3$. Gleich. \checkmark}
+\begin{mitnehmen}\kastentext
+Ein Jordanblock $\begin{pmatrix}\lambda & 1\\ 0 & \lambda\end{pmatrix}$ steht für eine Kette $v_1\leftarrow v_2$: $A$ wirkt auf $v_2$ als $\lambda v_2 + v_1$. Potenzen: $J^{n}$ hat $n\lambda^{n-1}$ in der Nebendiagonale --- deshalb tauchen bei doppelten Eigenwerten Lösungen $te^{\lambda t}$ auf.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.37
+\stupserzwei{gruen}{$2c_1 + c_2 = 1$, $c_1 + c_2 = 0$: $c_1 = 1$, $c_2 = -1$.}{22pt}
+\begin{loesungkarte}{gruen}{2.37}{Ein lineares System von Differentialgleichungen}
+\derweg{Eigenwerte und Eigenvektoren liefern die Grundlösungen $e^{\lambda t}v$; die Anfangsbedingung die Koeffizienten.}
+\schritt{Ansatz}
+$\begin{pmatrix}x\\ y\end{pmatrix}' = \begin{pmatrix}4 & -2\\ 1 & 1\end{pmatrix}\begin{pmatrix}x\\ y\end{pmatrix}$. Aus Aufgabe 2.32: $\lambda_1 = 3$, $v_1 = (2, 1)$; $\lambda_2 = 2$, $v_2 = (1, 1)$. Allgemeine Lösung $c_1e^{3t}(2, 1) + c_2e^{2t}(1, 1)$.
+\schritt{Anfangswert}
+$t = 0$: $2c_1 + c_2 = 1$, $c_1 + c_2 = 0$, also $c_1 = 1$, $c_2 = -1$.
+\[ x(t) = 2e^{3t} - e^{2t},\qquad y(t) = e^{3t} - e^{2t}. \]
+\probe{$x' = 6e^{3t} - 2e^{2t}$; $4x - 2y = 8e^{3t} - 4e^{2t} - 2e^{3t} + 2e^{2t} = 6e^{3t} - 2e^{2t}$. \checkmark\ \ $y' = 3e^{3t} - 2e^{2t}$; $x + y = 3e^{3t} - 2e^{2t}$. \checkmark\ \ $x(0) = 1$, $y(0) = 0$. \checkmark}
+\begin{mitnehmen}\kastentext
+In Eigenkoordinaten $u = S^{-1}x$ zerfällt $x' = Ax$ in $u_i' = \lambda_iu_i$ --- lauter Exponentialfunktionen. Das Vorzeichen der Eigenwerte entscheidet über Stabilität: hier beide positiv, alles wächst.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.38
+\stupserzwei{gruen}{$0{,}7a + 0{,}4b = a\Rightarrow0{,}4b = 0{,}3a\Rightarrow b = \frac34a$. Mit $a + b = 1$: $a = \frac47$.}{22pt}
+\begin{loesungkarte}{gruen}{2.38}{Mietwagen}
+\derweg{Übergangsmatrix aufstellen, Eigenvektor zum Eigenwert $1$ normieren; die Konvergenzgeschwindigkeit steckt im zweiten Eigenwert.}
+\schritt{(a)}
+Übergangsmatrix (Spalten: von $A$, von $B$): $P = \begin{pmatrix}0{,}7 & 0{,}4\\ 0{,}3 & 0{,}6\end{pmatrix}$. Gleichgewicht $P\pi = \pi$: $0{,}7a + 0{,}4b = a$, also $3a = 4b$. Mit $a + b = 1$: $\pi = \bigl(\frac47, \frac37\bigr)\approx(0{,}571;\ 0{,}429)$. Langfristig $\frac47$ der Wagen in $A$.
+\schritt{(b)}
+Start $(1, 0)$. Tag 1: $(0{,}7;\ 0{,}3)$. Tag 2: $(0{,}49 + 0{,}12;\ 0{,}21 + 0{,}18) = (0{,}61;\ 0{,}39)$. Tag 3: $(0{,}427 + 0{,}156;\ 0{,}183 + 0{,}234) = (0{,}583;\ 0{,}417)$. \\
+Abweichung von $\frac47 = 0{,}5714$: $0{,}4286$, $0{,}1286$, $0{,}0386$, $0{,}0116$ --- jeden Tag ein Faktor $0{,}3$. Das ist der zweite Eigenwert: $\lambda_2 = \operatorname{Spur}P - 1 = 1{,}3 - 1 = 0{,}3$.
+\probe{$P\pi = \bigl(0{,}7\cdot\frac47 + 0{,}4\cdot\frac37,\ 0{,}3\cdot\frac47 + 0{,}6\cdot\frac37\bigr) = \bigl(\frac{2{,}8 + 1{,}2}7, \frac{1{,}2 + 1{,}8}7\bigr) = \bigl(\frac47, \frac37\bigr)$. \checkmark}
+\begin{mitnehmen}\kastentext
+Eine stochastische Matrix hat immer den Eigenwert $1$ (die Spaltensummen sind $1$, also ist $(1, \dots, 1)$ Links-Eigenvektor). Der zugehörige Rechts-Eigenvektor ist die stationäre Verteilung; $|\lambda_2|$ bestimmt, wie schnell man sie erreicht. PageRank ist genau diese Rechnung für Milliarden Zustände.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.39
+\stupserzwei{tief}{$b\cdot n = 6$, $n\cdot n = 3$: Der Normalanteil ist $2n = (2, 2, 2)$, der Rest $(-1, 0, 1)$ liegt in $E$.}{22pt}
+\begin{loesungkarte}{tief}{2.39}{Projektion und Abstand}
+\derweg{Normalanteil durch Projektion auf $n$; der Rest liegt in der Ebene; Abstand ist die Länge des Normalanteils.}
+\schritt{(a)}
+$n = (1, 1, 1)$. $b_\perp = \frac{b\cdot n}{n\cdot n}n = \frac63(1, 1, 1) = (2, 2, 2)$. $b_E = b - b_\perp = (-1, 0, 1)$; Probe: $-1 + 0 + 1 = 0$, liegt in $E$. \checkmark
+\schritt{(b)}
+Abstand $= \|b_\perp\| = \sqrt{12} = 2\sqrt3\approx3{,}46$. Fußpunkt des Lots: $b_E = (-1, 0, 1)$.
+\schritt{(c)}
+Allgemein: Abstand von $b$ zur Ebene $n\cdot x = c$ ist $\frac{|n\cdot b - c|}{\|n\|} = \frac{|6 - 3|}{\sqrt3} = \sqrt3$. (Die Ebene $x + y + z = 3$ liegt zwischen $0$ und $b$.)
+\schritt{(d)}
+$P = I - \frac{nn^{\mathsf T}}{n^{\mathsf T}n} = I - \frac13\begin{pmatrix}1 & 1 & 1\\ 1 & 1 & 1\\ 1 & 1 & 1\end{pmatrix} = \frac13\begin{pmatrix}2 & -1 & -1\\ -1 & 2 & -1\\ -1 & -1 & 2\end{pmatrix}$. $P^{2} = P$: Die Matrix $N = \frac13\mathbf 1\mathbf 1^{\mathsf T}$ erfüllt $N^{2} = N$ (weil $\mathbf 1^{\mathsf T}\mathbf 1 = 3$), also $(I - N)^{2} = I - 2N + N = I - N$. \checkmark
+\probe{$Pb = \frac13(2 - 2 - 3, -1 + 4 - 3, -1 - 2 + 6) = \frac13(-3, 0, 3) = (-1, 0, 1) = b_E$. \checkmark}
+\begin{mitnehmen}\kastentext
+Projektion auf einen Untervektorraum $=$ $b$ minus Projektion auf das orthogonale Komplement. Eine Projektionsmatrix erkennt man an $P^{2} = P$ und $P^{\mathsf T} = P$; ihre Eigenwerte sind nur $0$ und $1$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.40
+\stupserzwei{gruen}{$a_2 - \frac12(1, 1, 0) = (\frac12, -\frac12, 1)$, Länge $\sqrt{3/2}$. Mit $2$ multipliziert: $(1, -1, 2)$ mit Länge $\sqrt6$.}{22pt}
+\begin{loesungkarte}{gruen}{2.40}{Gram--Schmidt}
+\derweg{Normieren, Projektionen abziehen, normieren --- und Brüche vermeiden, indem man Vielfache nimmt.}
+\schritt{$q_1$}
+$q_1 = \frac1{\sqrt2}(1, 1, 0)$.
+\schritt{$q_2$}
+$a_2\cdot q_1 = \frac1{\sqrt2}$. $a_2 - (a_2\cdot q_1)q_1 = (1, 0, 1) - \frac12(1, 1, 0) = (\frac12, -\frac12, 1)\parallel(1, -1, 2)$. $q_2 = \frac1{\sqrt6}(1, -1, 2)$.
+\schritt{$q_3$}
+$a_3\cdot q_1 = \frac1{\sqrt2}$, $a_3\cdot q_2 = \frac{-1 + 2}{\sqrt6} = \frac1{\sqrt6}$. $a_3 - \frac12(1, 1, 0) - \frac16(1, -1, 2) = \bigl(0 - \frac12 - \frac16,\ 1 - \frac12 + \frac16,\ 1 - \frac13\bigr) = \bigl(-\frac23, \frac23, \frac23\bigr)\parallel(-1, 1, 1)$. $q_3 = \frac1{\sqrt3}(-1, 1, 1)$.
+\probe{$q_1\cdot q_2 = \frac{1 - 1 + 0}{\sqrt{12}} = 0$, $q_1\cdot q_3 = \frac{-1 + 1}{\sqrt6} = 0$, $q_2\cdot q_3 = \frac{-1 - 1 + 2}{\sqrt{18}} = 0$. \checkmark\ Normen: $\frac{\sqrt2}{\sqrt2}, \frac{\sqrt6}{\sqrt6}, \frac{\sqrt3}{\sqrt3} = 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Gram--Schmidt ist $A = QR$: $Q$ hat die $q_i$ als Spalten, $R$ ist obere Dreiecksmatrix mit den Skalarprodukten. Numerisch ist das Verfahren in dieser Form instabil; stabil sind Householder-Spiegelungen (Aufgabe 2.47) oder die \enquote{modifizierte} Variante, die nach jedem Schritt alle Restvektoren aktualisiert.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.41
+\stupserzwei{gruen}{$X^{\mathsf T}X = \begin{pmatrix}4 & 10\\ 10 & 30\end{pmatrix}$, $X^{\mathsf T}y = \begin{pmatrix}16\\ 47\end{pmatrix}$.}{22pt}
+\begin{loesungkarte}{gruen}{2.41}{Die Ausgleichsgerade}
+\derweg{Normalengleichungen aufstellen und lösen; dann die Residuen als Orthogonalitätsprobe.}
+\schritt{Normalengleichungen}
+$X = \begin{pmatrix}1 & 1\\ 1 & 2\\ 1 & 3\\ 1 & 4\end{pmatrix}$, $y = (2, 3, 5, 6)^{\mathsf T}$. $X^{\mathsf T}X = \begin{pmatrix}4 & 10\\ 10 & 30\end{pmatrix}$, $X^{\mathsf T}y = \begin{pmatrix}2 + 3 + 5 + 6\\ 2 + 6 + 15 + 24\end{pmatrix} = \begin{pmatrix}16\\ 47\end{pmatrix}$.
+\schritt{Lösen}
+$4a + 10b = 16$, $10a + 30b = 47$. Erste mal $2{,}5$: $10a + 25b = 40$; abziehen: $5b = 7$, $b = 1{,}4$; $a = (16 - 14)/4 = 0{,}5$. Gerade $y = 0{,}5 + 1{,}4x$.
+\schritt{Residuen}
+Vorhersagen $1{,}9;\ 3{,}3;\ 4{,}7;\ 6{,}1$; Residuen $r = y - \hat y = (0{,}1;\ -0{,}3;\ 0{,}3;\ -0{,}1)$. $\mathbf 1\cdot r = 0$ \checkmark, $x\cdot r = 0{,}1 - 0{,}6 + 0{,}9 - 0{,}4 = 0$ \checkmark.
+\probe{Die Gerade geht durch den Schwerpunkt $(\bar x, \bar y) = (2{,}5;\ 4)$: $0{,}5 + 1{,}4\cdot2{,}5 = 4$. \checkmark}
+\begin{mitnehmen}\kastentext
+Kleinste Quadrate heißt: $\hat y = X\beta$ ist die orthogonale Projektion von $y$ auf den Spaltenraum von $X$. Deshalb steht das Residuum senkrecht auf allen Spalten --- und genau das sagen die Normalengleichungen $X^{\mathsf T}(y - X\beta) = 0$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.42
+\stupserzwei{gruen}{$\lambda^{2} - 7\lambda + 6 = (\lambda - 1)(\lambda - 6)$. Zu $6$: $(2, 1)$; zu $1$: $(1, -2)$. Skalarprodukt $2 - 2 = 0$.}{22pt}
+\begin{loesungkarte}{gruen}{2.42}{Orthogonal diagonalisieren}
+\derweg{Eigenwerte, Eigenvektoren, normieren, als Spalten in $Q$.}
+\schritt{Eigenwerte}
+$\det(A - \lambda I) = (5 - \lambda)(2 - \lambda) - 4 = \lambda^{2} - 7\lambda + 6 = (\lambda - 1)(\lambda - 6)$.
+\schritt{Eigenvektoren}
+$\lambda = 6$: $\begin{pmatrix}-1 & 2\\ 2 & -4\end{pmatrix}v = 0\Rightarrow(2, 1)$. $\lambda = 1$: $\begin{pmatrix}4 & 2\\ 2 & 1\end{pmatrix}v = 0\Rightarrow(1, -2)$. Orthogonal, wie es der Spektralsatz verspricht; normiert mit $\frac1{\sqrt5}$.
+\schritt{Zerlegung}
+$Q = \frac1{\sqrt5}\begin{pmatrix}2 & 1\\ 1 & -2\end{pmatrix}$, $D = \operatorname{diag}(6, 1)$, $A = QDQ^{\mathsf T}$.
+\probe{$Q^{\mathsf T}Q = \frac15\begin{pmatrix}4 + 1 & 2 - 2\\ 2 - 2 & 1 + 4\end{pmatrix} = I$. \checkmark\ \ $QDQ^{\mathsf T} = \frac15\begin{pmatrix}12 & 1\\ 6 & -2\end{pmatrix}\begin{pmatrix}2 & 1\\ 1 & -2\end{pmatrix} = \frac15\begin{pmatrix}25 & 10\\ 10 & 10\end{pmatrix} = A$. \checkmark}
+\begin{mitnehmen}\kastentext
+Symmetrisch $\Rightarrow$ reelle Eigenwerte, orthogonale Eigenvektoren, immer diagonalisierbar. $Q^{-1} = Q^{\mathsf T}$ erspart das Invertieren. Die Zerlegung $A = \sum\lambda_iq_iq_i^{\mathsf T}$ ist die Summe von Projektionen auf die Eigenrichtungen, gewichtet mit den Eigenwerten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.43
+\stupserzwei{gruen}{In Eigenkoordinaten $u, v$ lautet die Gleichung $6u^{2} + v^{2} = 6$, also $u^{2} + \frac{v^{2}}6 = 1$.}{22pt}
+\begin{loesungkarte}{gruen}{2.43}{Ein Kegelschnitt}
+\derweg{Quadratische Form als $x^{\mathsf T}Ax$ mit der Matrix aus Aufgabe 2.42; Hauptachsen sind die Eigenvektoren, Halbachsen folgen aus den Eigenwerten.}
+\schritt{Matrix}
+$5x^{2} + 4xy + 2y^{2} = (x, y)\begin{pmatrix}5 & 2\\ 2 & 2\end{pmatrix}\begin{pmatrix}x\\ y\end{pmatrix}$ --- der gemischte Koeffizient $4$ wird halbiert auf die Nebendiagonale.
+\schritt{Hauptachsen}
+Mit $(x, y) = Q(u, v)$ aus Aufgabe 2.42: $x^{\mathsf T}Ax = (u, v)D(u, v)^{\mathsf T} = 6u^{2} + v^{2}$. Die Gleichung wird $6u^{2} + v^{2} = 6$, also $\dfrac{u^{2}}{1} + \dfrac{v^{2}}{6} = 1$.
+\schritt{Typ und Maße}
+Beide Eigenwerte positiv: eine \emph{Ellipse}. Halbachse $1$ in Richtung $u$, also entlang $(2, 1)/\sqrt5$; Halbachse $\sqrt6\approx2{,}45$ in Richtung $v$, entlang $(1, -2)/\sqrt5$.
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\draw[->,linie] (-3,0)--(3,0) node[right,grau,font=\small] {$x$};
+\draw[->,linie] (0,-3)--(0,3) node[above,grau,font=\small] {$y$};
+\draw[thick,tief,rotate=26.565] (0,0) ellipse (1 and 2.449);
+\draw[akzent,->] (0,0)--(0.894,0.447) node[right,font=\small] {$u$};
+\draw[akzent,->] (0,0)--(1.095,-2.191) node[below right,font=\small] {$v$};
+\end{tikzpicture}
+\end{center}
+\probe{Der Punkt mit $u = 1$, $v = 0$ ist $(x, y) = (2, 1)/\sqrt5$: $5\cdot\frac45 + 4\cdot\frac25 + 2\cdot\frac15 = 4 + 1{,}6 + 0{,}4 = 6$. \checkmark\ \ Mit $u = 0$, $v = \sqrt6$: $(x, y) = \sqrt{6/5}\,(1, -2)$: $\frac65(5 - 8 + 8) = 6$. \checkmark}
+\begin{mitnehmen}\kastentext
+Vorzeichen der Eigenwerte $=$ Typ: $(+, +)$ Ellipse, $(+, -)$ Hyperbel, ein Eigenwert $0$ Parabel oder Geradenpaar. Die Halbachsen sind $\sqrt{c/\lambda_i}$: großer Eigenwert, kurze Achse.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.44
+\stupserzwei{gruen}{$u_1 = Av_1/\sigma_1$ mit $v_1 = (1, 1)/\sqrt2$: $Av_1 = (3, 9)/\sqrt2$, durch $\sqrt{45}$: $(1, 3)/\sqrt{10}$.}{22pt}
+\begin{loesungkarte}{gruen}{2.44}{Eine Singulärwertzerlegung}
+\derweg{$V$ aus den Eigenvektoren von $A^{\mathsf T}A$, $\sigma_i = \sqrt{\lambda_i}$, $u_i = Av_i/\sigma_i$.}
+\schritt{$A^{\mathsf T}A$}
+$A^{\mathsf T}A = \begin{pmatrix}3 & 4\\ 0 & 5\end{pmatrix}\begin{pmatrix}3 & 0\\ 4 & 5\end{pmatrix} = \begin{pmatrix}25 & 20\\ 20 & 25\end{pmatrix}$. Eigenwerte $45$ und $5$ (Summe $50$, Produkt $225$), Eigenvektoren $v_1 = \frac1{\sqrt2}(1, 1)$, $v_2 = \frac1{\sqrt2}(1, -1)$.
+\schritt{Singulärwerte}
+$\sigma_1 = \sqrt{45} = 3\sqrt5\approx6{,}708$, $\sigma_2 = \sqrt5\approx2{,}236$.
+\schritt{$U$}
+$u_1 = \frac{Av_1}{\sigma_1} = \frac{(3, 9)/\sqrt2}{3\sqrt5} = \frac{(1, 3)}{\sqrt{10}}$. $u_2 = \frac{Av_2}{\sigma_2} = \frac{(3, -1)/\sqrt2}{\sqrt5} = \frac{(3, -1)}{\sqrt{10}}$. Orthogonal: $3 - 3 = 0$. \checkmark
+\[ A = U\Sigma V^{\mathsf T} = \frac1{\sqrt{10}}\begin{pmatrix}1 & 3\\ 3 & -1\end{pmatrix}\begin{pmatrix}3\sqrt5 & 0\\ 0 & \sqrt5\end{pmatrix}\frac1{\sqrt2}\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}. \]
+\probe{$U\Sigma = \frac1{\sqrt{10}}\begin{pmatrix}3\sqrt5 & 3\sqrt5\\ 9\sqrt5 & -\sqrt5\end{pmatrix}$; mal $V^{\mathsf T}$ und $\frac1{\sqrt{20}} = \frac1{2\sqrt5}$: Eintrag $(1, 1)$: $\frac{6\sqrt5}{2\sqrt5} = 3$; $(1, 2)$: $0$; $(2, 1)$: $\frac{8\sqrt5}{2\sqrt5} = 4$; $(2, 2)$: $\frac{10\sqrt5}{2\sqrt5} = 5$. \checkmark\ \ $\sigma_1\sigma_2 = \sqrt{225} = 15 = |\det A|$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die SVD existiert für jede Matrix, auch nicht-quadratische und singuläre. $\sigma_1$ ist die größte Streckung ($\|A\|_2$), $\sigma_1/\sigma_n$ die Konditionszahl, die Zahl der $\sigma_i\neq0$ der Rang. Abschneiden kleiner Singulärwerte ist die beste Näherung von niedrigem Rang --- Bildkompression, PCA, Rauschfilter.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.45
+\stupserzwei{gruen}{$\tilde X^{\mathsf T}\tilde X = \begin{pmatrix}10 & 8\\ 8 & 10\end{pmatrix}$: Eigenwerte $18$ und $2$. Erklärter Anteil $\frac{18}{20}$.}{22pt}
+\begin{loesungkarte}{gruen}{2.45}{Hauptkomponenten}
+\derweg{Streumatrix, Eigenvektoren, Varianzanteil aus den Eigenwerten.}
+\schritt{Streumatrix}
+Spalten sind zentriert (Summe $0$). $\tilde X^{\mathsf T}\tilde X = \begin{pmatrix}4 + 4 + 1 + 1 & 2 + 2 + 2 + 2\\ 8 & 1 + 1 + 4 + 4\end{pmatrix} = \begin{pmatrix}10 & 8\\ 8 & 10\end{pmatrix}$. (Kovarianzmatrix: durch $n - 1 = 3$ teilen; das ändert Eigenvektoren und Anteile nicht.)
+\schritt{Eigenzerlegung}
+$\lambda_1 = 18$ mit $(1, 1)/\sqrt2$, $\lambda_2 = 2$ mit $(1, -1)/\sqrt2$.
+\schritt{Hauptkomponenten}
+Erste Hauptachse $(1, 1)/\sqrt2$: Die Daten streuen vor allem entlang der Diagonale. Erklärter Varianzanteil $\frac{18}{18 + 2} = 90\,\%$. Die Projektionen (Scores) auf die erste Achse: $\frac{3}{\sqrt2}, -\frac3{\sqrt2}, \frac3{\sqrt2}, -\frac3{\sqrt2}$; auf die zweite: $\frac1{\sqrt2}, -\frac1{\sqrt2}, -\frac1{\sqrt2}, \frac1{\sqrt2}$.
+\probe{Summe der quadrierten Scores: erste Achse $4\cdot\frac92 = 18$, zweite $4\cdot\frac12 = 2$ --- die Eigenwerte. \checkmark\ Spur $20 = 18 + 2$. \checkmark}
+\begin{mitnehmen}\kastentext
+PCA ist die SVD der Datenmatrix: Die rechten Singulärvektoren sind die Hauptachsen, $\sigma_i^{2}$ die Eigenwerte der Streumatrix. Die Korrelation zwischen den beiden Merkmalen ist hier $\frac8{10} = 0{,}8$; je näher an $1$, desto mehr steckt in der ersten Komponente.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.46
+\stupserzwei{gruen}{Mit Pivot $0{,}0001$: $1 - 10\,000 = -9999$, auf drei Stellen $-10\,000$; $2 - 10\,000 = -9998\to-10\,000$. Dann $y = 1$ und $x = 0$.}{22pt}
+\begin{loesungkarte}{gruen}{2.46}{Drei Stellen, zwei Pivots}
+\derweg{Beide Rechnungen mit drei Stellen durchführen; dann sehen, wo die Information verloren ging.}
+\schritt{Exakt}
+$x = 2 - y$, $0{,}0001(2 - y) + y = 1$, $y(1 - 0{,}0001) = 1 - 0{,}0002$, $y = \frac{0{,}9998}{0{,}9999} = 0{,}99990$, $x = 1{,}00010$. Also $x\approx y\approx1$.
+\schritt{Ohne Zeilentausch}
+Multiplikator $m = 1/0{,}0001 = 10\,000$. $Z_2 - mZ_1$: $(1 - 10\,000)y = 2 - 10\,000$. Mit drei Stellen: $-10\,000y = -10\,000$, also $y = 1{,}00$. Rückwärts: $x = (1 - y)/0{,}0001 = 0/0{,}0001 = 0$. \emph{Falsch} --- $x$ sollte $1$ sein.
+\schritt{Mit Zeilentausch}
+Pivot $1$: $Z_1 - 0{,}0001Z_2$: $(1 - 0{,}0001)y = 1 - 0{,}0002$; drei Stellen: $1{,}00y = 1{,}00$, $y = 1{,}00$. Rückwärts: $x = 2 - 1 = 1{,}00$. Richtig auf drei Stellen.
+\schritt{Was passiert ist}
+Beim kleinen Pivot wurde die zweite Zeile mit $10\,000$ überflutet: Die $1$ und die $2$ der Originalgleichung gingen in der Rundung unter --- das System \enquote{vergaß} $x + y = 2$. Dann liefert die Rückwärtssubstitution $x$ als Quotient zweier winziger, ungenauer Zahlen.
+\probe{Lösung des Tausch-Verfahrens $(1, 1)$ eingesetzt: $0{,}0001 + 1 = 1{,}0001\approx1$ \checkmark, $2$ \checkmark. Lösung $(0, 1)$ ohne Tausch: zweite Gleichung $0 + 1 = 1\neq2$. \texttimes}
+\begin{mitnehmen}\kastentext
+Spaltenpivotisierung: Immer die Zeile mit dem betragsgrößten Element in der Pivotspalte nach oben. Sie kostet nichts und verhindert, dass Multiplikatoren explodieren. Jede ernsthafte Gauß-Implementierung tut das --- und die LR-Zerlegung wird zu $PA = LR$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.47
+\stupserzwei{gruen}{$\|a\| = 5$, $v = a - 5e_1 = (-2, 4)$, $v^{\mathsf T}v = 20$, $vv^{\mathsf T} = \begin{pmatrix}4 & -8\\ -8 & 16\end{pmatrix}$.}{22pt}
+\begin{loesungkarte}{gruen}{2.47}{Eine Householder-Spiegelung}
+\derweg{Spiegelvektor $v = a - \|a\|e_1$, dann $H = I - 2vv^{\mathsf T}/v^{\mathsf T}v$.}
+\schritt{$v$ und $H$}
+$\|a\| = \sqrt{9 + 16} = 5$. $v = (3, 4) - (5, 0) = (-2, 4)$. $v^{\mathsf T}v = 20$.
+\[ H = I - \frac2{20}\begin{pmatrix}4 & -8\\ -8 & 16\end{pmatrix} = \begin{pmatrix}1 - 0{,}4 & 0{,}8\\ 0{,}8 & 1 - 1{,}6\end{pmatrix} = \begin{pmatrix}0{,}6 & 0{,}8\\ 0{,}8 & -0{,}6\end{pmatrix}. \]
+\schritt{Probe der Eigenschaften}
+$Ha = (1{,}8 + 3{,}2,\ 2{,}4 - 2{,}4) = (5, 0) = \|a\|e_1$. \checkmark\ $H^{\mathsf T} = H$ (symmetrisch). \checkmark\ $H^{2} = \begin{pmatrix}0{,}36 + 0{,}64 & 0{,}48 - 0{,}48\\ 0{,}48 - 0{,}48 & 0{,}64 + 0{,}36\end{pmatrix} = I$. \checkmark
+\probe{$\det H = -0{,}36 - 0{,}64 = -1$: eine Spiegelung, keine Drehung. Die Spiegelachse ist senkrecht zu $v$, also die Gerade in Richtung $(2, 1)$ --- die Winkelhalbierende zwischen $a$ und $5e_1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Householder-Spiegelungen räumen eine ganze Spalte unterhalb der Diagonale mit einer einzigen orthogonalen Matrix aus. $n - 1$ davon geben $QR$, numerisch stabil, weil orthogonale Matrizen Längen und damit Fehler nicht vergrößern. Wählt man $v = a + \|a\|e_1$ bei $a_1 > 0$, vermeidet man Auslöschung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 2.48
+\stupserzwei{gruen}{$l_{11} = 2$, $l_{21} = 2/2 = 1$, $l_{31} = -2/2 = -1$; $l_{22} = \sqrt{5 - 1} = 2$; $l_{32} = (-1 - (-1)(1))/2 = 0$; $l_{33} = \sqrt{6 - 1 - 0} = \sqrt5$.}{22pt}
+\begin{loesungkarte}{gruen}{2.48}{Cholesky}
+\derweg{Spalte für Spalte: Diagonalelement als Wurzel, darunter die Quotienten; jede Wurzel muss aus einer positiven Zahl gezogen werden.}
+\schritt{Erste Spalte}
+$l_{11} = \sqrt{a_{11}} = 2$. $l_{21} = a_{21}/l_{11} = 1$, $l_{31} = a_{31}/l_{11} = -1$.
+\schritt{Zweite Spalte}
+$l_{22} = \sqrt{a_{22} - l_{21}^{2}} = \sqrt{5 - 1} = 2$. $l_{32} = (a_{32} - l_{31}l_{21})/l_{22} = (-1 - (-1)(1))/2 = 0$.
+\schritt{Dritte Spalte}
+$l_{33} = \sqrt{a_{33} - l_{31}^{2} - l_{32}^{2}} = \sqrt{6 - 1 - 0} = \sqrt5$.
+\[ L = \begin{pmatrix}2 & 0 & 0\\ 1 & 2 & 0\\ -1 & 0 & \sqrt5\end{pmatrix}. \]
+\schritt{Definitheit}
+Alle drei Radikanden ($4$, $4$, $5$) waren positiv. Wäre einer null oder negativ gewesen, hätte die Zerlegung abgebrochen --- und das ist der Beweis, dass $A$ nicht positiv definit ist. Cholesky ist zugleich der billigste Definitheitstest.
+\probe{$LL^{\mathsf T}$: Zeile 1: $(4, 2, -2)$. Zeile 2: $(2, 1 + 4, -1 + 0) = (2, 5, -1)$. Zeile 3: $(-2, -1, 1 + 0 + 5) = (-2, -1, 6)$. \checkmark}
+\begin{mitnehmen}\kastentext
+Cholesky braucht die Hälfte der Operationen von $LR$ und keine Pivotisierung --- positiv definite Matrizen sind von selbst gutartig. Sie entstehen überall, wo Energien oder Quadratsummen minimiert werden: Normalengleichungen ($X^{\mathsf T}X$), Kovarianzmatrizen, Steifigkeitsmatrizen.
+\end{mitnehmen}
+\end{loesungkarte}

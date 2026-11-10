@@ -1,0 +1,753 @@
+\setgebiet{8}{Geschichte}{mittel}
+\chapter[Lösungen: Mathematikgeschichte]{Lösungen:\\Mathematikgeschichte}
+
+%%%%%%%%%% 7.1
+\stupserzwei{tief}{(d) Beim gierigen Schritt $\frac pq - \frac1n$ mit $n = \lceil q/p\rceil$ ist der neue Zähler $pn - q < p$: Die Zähler fallen streng, also endet es.}{22pt}
+\begin{loesungkarte}{tief}{7.1}{Ägyptische Stammbrüche}
+\derweg{Zerlegungen durch Hauptnenner prüfen; gierig: den größten passenden Stammbruch abziehen, Rest kürzen, wiederholen.}
+\schritt{(a)}
+$\frac14 + \frac1{28} = \frac7{28} + \frac1{28} = \frac8{28} = \frac27$. \checkmark\ $\frac18 + \frac1{52} + \frac1{104} = \frac{13 + 2 + 1}{104} = \frac{16}{104} = \frac2{13}$. \checkmark
+\schritt{(b)}
+$\frac4{13} = 0{,}3077$. Größter Stammbruch darunter: $\frac14$ ($\lceil\frac{13}4\rceil = 4$). Rest $\frac4{13} - \frac14 = \frac{16 - 13}{52} = \frac3{52}$. Größter Stammbruch darunter: $\frac1{18}$ ($\lceil\frac{52}3\rceil = 18$). Rest $\frac3{52} - \frac1{18} = \frac{54 - 52}{936} = \frac2{936} = \frac1{468}$. Also $\frac4{13} = \frac14 + \frac1{18} + \frac1{468}$.
+\schritt{(c)}
+Gierig: $\frac2{13} - \frac17 = \frac{14 - 13}{91} = \frac1{91}$: $\frac2{13} = \frac17 + \frac1{91}$. Zwei Glieder statt drei --- aber Rhind nimmt $\frac18 + \frac1{52} + \frac1{104}$. Die ägyptische Wahl hat gerade Nenner (leicht zu halbieren beim Weiterrechnen) und kleinere größte Nenner ($104$ statt $91$ ist hier nicht kleiner, aber bei $\frac2{n}$ für größere $n$ meist). Die Ägypter optimierten für ihre Rechenpraxis, nicht für die Gliederzahl.
+\schritt{(d)}
+Sei $\frac pq$ mit $p < q$ und $n = \lceil\frac qp\rceil$, also $\frac1n\le\frac pq < \frac1{n - 1}$. Rest: $\frac pq - \frac1n = \frac{pn - q}{qn}$. Aus $\frac pq < \frac1{n - 1}$ folgt $p(n - 1) < q$, also $pn - q < p$. Der Zähler wird in jedem Schritt echt kleiner; nach höchstens $p$ Schritten ist er $1$. $\blacksquare$ (Fibonacci 1202; der Beweis stammt von Sylvester 1880.)
+\probe{$\frac14 + \frac1{18} + \frac1{468} = \frac{117 + 26 + 1}{468} = \frac{144}{468} = \frac4{13}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Stammbrüche waren keine Marotte: Mit ihnen lässt sich \enquote{$2$ Brote auf $13$ Personen} ohne Bruchrechnung verteilen --- jeder bekommt ein Achtel, ein Zweiundfünfzigstel und ein Hundertviertel. Der gierige Algorithmus ist das erste Beispiel eines Verfahrens, dessen Terminierung man beweisen muss.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.2
+\stupserzwei{tief}{(b) $1;30\cdot2;15$: $1\cdot2 = 2$; $1\cdot\frac{15}{60} + \frac{30}{60}\cdot2 = \frac{15}{60} + 1 = 1;15$; $\frac{30}{60}\cdot\frac{15}{60} = \frac{450}{3600} = 0;7,30$. Summe $3;22,30$.}{22pt}
+\begin{loesungkarte}{tief}{7.2}{Mit und ohne Stellenwert}
+\derweg{Römisch: verdoppeln und auswählen. Babylonisch: wie dezimal, nur mit $60$. Dann die Grenzen beider Systeme.}
+\schritt{(a)}
+Verdoppeln: $\mathrm{XLVII}$ ($47$), $\mathrm{XCIV}$ ($94$), $\mathrm{CLXXXVIII}$ ($188$), $\mathrm{CCCLXXVI}$ ($376$). $\mathrm{XII} = \mathrm{VIII} + \mathrm{IV}$, also $\mathrm{CCCLXXVI} + \mathrm{CLXXXVIII}$: Zusammenlegen und bündeln --- $\mathrm{CCCC}\,\mathrm{LL}\,\mathrm{XXXXXX}\,\mathrm{VV}\,\mathrm{IIII}$, dann $\mathrm{LL} = \mathrm{C}$, $\mathrm{XXXXX} = \mathrm{L}$, $\mathrm{VV} = \mathrm{X}$: $\mathrm{D}\,\mathrm{L}\,\mathrm{X}\,\mathrm{IV} = \mathrm{DLXIV} = 564$. Die Subtraktionsschreibweise ($\mathrm{IV}$, $\mathrm{XL}$) macht das Rechnen schwerer; die Römer rechneten auf dem Abakus und schrieben nur das Ergebnis.
+\schritt{(b)}
+$1;30 = 1{,}5$, $2;15 = 2{,}25$. Produkt: $1\cdot2 = 2$; Kreuzterme $1\cdot0;15 + 0;30\cdot2 = 0;15 + 1 = 1;15$; $0;30\cdot0;15 = \frac{30\cdot15}{3600} = \frac{450}{3600} = 0;7,30$. Summe $2 + 1;15 + 0;7,30 = 3;22,30$. Dezimal: $3 + \frac{22}{60} + \frac{30}{3600} = 3{,}375 = 1{,}5\cdot2{,}25$. \checkmark
+\schritt{(c)}
+$\frac13 = 0;20$ --- endlich, weil $3\mid60$. $\frac17 = 0;8,34,17,8,34,17,\dots$ --- periodisch, weil $7\nmid60^{k}$. Die $60$ hat die Teiler $2, 3, 4, 5, 6, 10, 12, 15, 20, 30$: Mehr Brüche sind endlich als im Dezimalsystem (nur $2$ und $5$). Bei $7$, $11$, $13$ versagt auch sie; die Babylonier arbeiteten mit Reziprokentafeln und mieden solche Nenner.
+\schritt{(d)}
+\enquote{$1, 30$} ohne Komma und Null kann sein: $1\cdot60 + 30 = 90$; $1 + \frac{30}{60} = 1{,}5$; $\frac1{60} + \frac{30}{3600} = 0{,}025$; auch $1\cdot3600 + 30$ oder $1\cdot60 + 0\cdot1 + 30\cdot\frac1{60}$ (bei fehlender Null in der Mitte). Der Kontext entschied --- so wie heute \enquote{Dreiviertel} Stunde oder Liter. Die Tafel YBC 7289 (Aufgabe 7.5) ist nur lesbar, weil man weiß, dass die Diagonale etwa $\frac75$ der Seite ist.
+\probe{(a) dezimal $47\cdot12 = 564$. \checkmark}
+\begin{mitnehmen}\kastentext
+Stellenwert plus Null macht Rechnen zu einem Algorithmus, den man schriftlich und ohne Nachdenken ausführt. Das Sexagesimalsystem hat den Stellenwert seit $2000$ v.\,Chr.\ und überlebt in Minuten und Sekunden; die Null als Zeichen kam erst um $300$ v.\,Chr., als Zahl in Indien um $600$ n.\,Chr.\ (Aufgabe 7.7).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.3
+\stupserzwei{gruen}{$992 + 496 + 248 + 124 = 1860$, Rest $16$. Faktoren $32 + 16 + 8 + 4 = 60$. Also $1876 = 60\cdot31 + 16$.}{22pt}
+\begin{loesungkarte}{gruen}{7.3}{Ägyptisch dividieren}
+\derweg{Verdopplungstabelle für den Divisor, von oben nach unten greifen, Faktoren addieren.}
+\schritt{Tabelle}
+\begin{center}\small
+\begin{tabular}{r|r}
+Faktor & $31\cdot$ \\ \hline
+1 & 31\\ 2 & 62\\ 4 & 124\\ 8 & 248\\ 16 & 496\\ 32 & 992
+\end{tabular}
+\end{center}
+($64\cdot31 = 1984 > 1876$: Abbruch.)
+\schritt{Auswählen}
+Von oben: $992$ passt (Rest $884$); $496$ passt (Rest $388$); $248$ passt (Rest $140$); $124$ passt (Rest $16$); $62$ und $31$ passen nicht. Gewählte Faktoren: $32 + 16 + 8 + 4 = 60$. $1876 = 60\cdot31 + 16$. Der Rest $16$ wäre ägyptisch als Stammbrüche von $\frac{16}{31}$ weitergeführt worden.
+\schritt{Binär}
+Die gewählten Faktoren sind die Einsen in der Binärdarstellung von $60 = 111100_2$. Das Verfahren \emph{ist} die binäre Multiplikation: Jede Zahl ist eine Summe von Zweierpotenzen, also braucht man nur Verdoppeln und Addieren --- genau das, was ein Prozessor tut.
+\probe{$60\cdot31 = 1860$, $1860 + 16 = 1876$. \checkmark}
+\begin{mitnehmen}\kastentext
+Ägyptische Multiplikation $=$ russische Bauernmultiplikation $=$ binäre Multiplikation $=$ schnelle Potenzierung (Aufgabe 1.55): Eine Idee, viertausend Jahre, vier Namen. Die Ägypter brauchten kein Einmaleins, nur Verdoppeln.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.4
+\stupserzwei{gruen}{$\bigl(\frac89\bigr)^{2}d^{2} = \frac\pi4d^{2}$ gibt $\pi = 4\cdot\frac{64}{81} = \frac{256}{81} = 3{,}1605$.}{22pt}
+\begin{loesungkarte}{gruen}{7.4}{Aufgabe 50 des Rhind-Papyrus}
+\derweg{Das Rezept als Formel schreiben, mit $\frac\pi4d^{2}$ vergleichen, Fehler angeben, Herkunft vermuten.}
+\schritt{Formel}
+Rezept: $A = \bigl(d - \frac d9\bigr)^{2} = \bigl(\frac{8}9d\bigr)^{2} = \frac{64}{81}d^{2}$. Exakt: $A = \frac\pi4d^{2}$. Also $\frac\pi4\approx\frac{64}{81}$, $\pi\approx\frac{256}{81} = 3{,}1605$.
+\schritt{Genauigkeit}
+$\frac{3{,}1605 - 3{,}1416}{3{,}1416} = 0{,}6\,\%$ zu groß. Für $d = 9$: $64$ statt $63{,}6$. Besser als das biblische $\pi = 3$ (1 Kön 7,23), schlechter als Archimedes.
+\schritt{Herkunft}
+Eine Vermutung (nach dem Papyrus selbst, Aufgabe 48): Ein Quadrat mit Seite $9$ wird in $9$ Felder geteilt; schneidet man die vier Ecken als Dreiecke ab, entsteht ein Achteck mit Fläche $81 - 4\cdot\frac{9}2 = 63$. Der Kreis im Quadrat hat etwa diese Fläche, und $63\approx64 = 8^{2}$. Der Schritt von $63$ zu $64$ macht die Regel zu einem Quadrat --- bequem zum Rechnen.
+\probe{Mit $\frac{256}{81}$: Kreis vom Durchmesser $1$ hat Fläche $0{,}790$ statt $0{,}785$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Ägypter hatten keine Zahl $\pi$ --- sie hatten ein Rezept, das gut genug für Felder war. Erst die Griechen fragten, ob Umfang und Fläche dieselbe Konstante enthalten (Archimedes bewies es) und wie groß sie ist (Aufgabe 7.15). Zwischen Rezept und Satz liegen $1500$ Jahre.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.5
+\stupserzwei{gruen}{$1;24,51,10 = 1{,}41421296$, $\sqrt2 = 1{,}41421356$: Fehler $6\cdot10^{-7}$. Und $42;25,35 = 42{,}42639 = 30\cdot1{,}41421$ --- die Diagonale eines Quadrats der Seite $30$.}{22pt}
+\begin{loesungkarte}{gruen}{7.5}{Die Tafel YBC 7289}
+\derweg{Beide Zahlen dezimal umrechnen, als $\sqrt2$ und $30\sqrt2$ erkennen, Genauigkeit messen, Verfahren vermuten.}
+\schritt{Erste Zahl}
+$1 + \frac{24}{60} + \frac{51}{3600} + \frac{10}{216\,000} = 1 + 0{,}4 + 0{,}0141667 + 0{,}0000463 = 1{,}4142130$. $\sqrt2 = 1{,}4142136$. Fehler $6\cdot10^{-7}$, relativ $4\cdot10^{-7}$ --- sechs richtige Dezimalstellen, oder: die beste Näherung mit drei Sexagesimalstellen.
+\schritt{Zweite Zahl}
+$42 + \frac{25}{60} + \frac{35}{3600} = 42{,}42639$. Und $30\cdot1{,}4142130 = 42{,}42639$. \checkmark\ Die Tafel zeigt ein Quadrat mit Seite $30$; auf der Diagonale stehen der Faktor $\sqrt2$ und das Produkt. Die Diagonale wurde aus der Seite mit dem Faktor berechnet --- Pythagoras, tausend Jahre vor Pythagoras.
+\schritt{Verfahren}
+Wahrscheinlich das Heron-Verfahren (Aufgabe 5.24) in sexagesimaler Form: $x_{k+1} = \frac12\bigl(x_k + \frac2{x_k}\bigr)$. Start $1;30$: $\frac12(1;30 + 1;20) = 1;25$. Dann $\frac12(1;25 + 1;24,42,21) = 1;24,51,10$ --- genau der Tafelwert, nach zwei Schritten. (Die Babylonier hatten Reziprokentafeln für die Division.)
+\probe{$1;24,51,10$ quadriert: $1{,}4142130^{2} = 1{,}9999983$ --- auf $2$ bis $1{,}7\cdot10^{-6}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Tafel ist ein Schülertext: Die Zahl $30$ ist der Standardwert für Übungen, und $1;24,51,10$ wurde aus einer Tabelle abgeschrieben. Dass eine Schule um $1700$ v.\,Chr.\ $\sqrt2$ auf sechs Stellen kannte, sagt mehr über die babylonische Mathematik als jede Textstelle.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.6
+\stupserzwei{gruen}{Halbe $1$ ist $\frac12$; Quadrat $\frac14$; $870 + \frac14 = 870{,}25 = 29{,}5^{2}$; plus $\frac12$: $30$. Probe: $900 - 30 = 870$.}{22pt}
+\begin{loesungkarte}{gruen}{7.6}{Eine babylonische quadratische Gleichung}
+\derweg{Das Rezept in Worten ausführen, dann als quadratische Ergänzung lesen.}
+\schritt{Babylonisch}
+\enquote{Du setzt $1$ (den Koeffizienten der Seite). Du zerbrichst die Hälfte von $1$: $\frac12$. Du multiplizierst $\frac12$ mit $\frac12$: $\frac14$. Du addierst $\frac14$ zu $870$: $870\frac14$. Das ist das Quadrat von $29\frac12$. Du addierst $\frac12$, das du multipliziert hast, zu $29\frac12$: $30$ ist die Seite.}
+\schritt{Modern}
+$x^{2} - x = 870\iff x^{2} - x + \frac14 = 870{,}25\iff\bigl(x - \frac12\bigr)^{2} = 29{,}5^{2}\iff x = \frac12 + 29{,}5 = 30$. Die quadratische Ergänzung, in der Form $x = \frac b2 + \sqrt{\frac{b^{2}}4 + c}$ für $x^{2} - bx = c$.
+\schritt{Nur eine Lösung}
+Die andere Lösung ist $x = \frac12 - 29{,}5 = -29$. Eine negative Seite gibt es nicht; die Babylonier rechneten mit Flächen und Seiten, und das Rezept liefert, was geometrisch sinnvoll ist. Negative Zahlen kommen erst in Indien (Aufgabe 7.7), zwei Lösungen bei al-Chwarizmi (Aufgabe 7.19).
+\probe{$30^{2} - 30 = 900 - 30 = 870$. \checkmark\ Die Zahl $870 = 14;30$ sexagesimal und $30 = 0;30$ --- die Tafel rechnet mit $\frac12$ als $0;30$, und \enquote{$870$} ist in Wirklichkeit vermutlich $14;30$.}
+\begin{mitnehmen}\kastentext
+Die Babylonier beherrschten die quadratische Ergänzung als Rezept, ohne Formel, ohne Symbole, ohne negative Zahlen --- $1500$ Jahre vor Euklid, $2500$ vor al-Chwarizmi. Jedes Rezept steht für eine Klasse von Aufgaben; die Tafeln sind Lehrbücher mit Musterlösungen, genau wie dieses hier.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.7
+\stupserzwei{akzent}{(c) $a = b$ heißt $a - b = 0$; die Division durch $(a - b)$ ist die Division durch $0$. Alles davor und danach ist richtig.}{22pt}
+\begin{loesungkarte}{akzent}{7.7}{Brahmagupta und die Null}
+\derweg{Division über ihre Definition prüfen; die zwei Vorzeichen bei $\frac1x$; die versteckte Null im Trugschluss; Grenzwerte als die richtige Frage.}
+\schritt{(a)}
+$\frac00 = c$ hieße $0 = 0\cdot c$, und das gilt für \emph{jedes} $c$. Die Division ist nicht eindeutig, also nicht definiert. Brahmaguptas $0$ ist eine mögliche Antwort unter unendlich vielen --- keine ausgezeichnete.
+\schritt{(b)}
+$\frac1x$ wird für $x\to0$ beliebig groß: Das meint Bhaskara, und es stimmt als Grenzwertaussage. Als Gleichung versagt es: Für $x\to0^{+}$ geht $\frac1x\to+\infty$, für $x\to0^{-}$ gegen $-\infty$; welches $\infty$ wäre $\frac10$? Und wenn $\frac a0 = \infty$ für alle $a$, dann $\frac10 = \frac20$, also $1 = 2$ nach Multiplikation mit $0$ --- Bhaskara selbst zog solche Folgerungen und kam ins Schleudern.
+\schritt{(c)}
+Aus $a = b$ folgt $a - b = 0$. Der Schritt von $(a + b)(a - b) = b(a - b)$ zu $a + b = b$ teilt durch $a - b = 0$. Jede Division durch einen Ausdruck muss von der Prüfung begleitet sein, ob er null sein kann (Aufgabe 0.18).
+\schritt{(d)}
+$\frac{\sin x}x\to1$, $\frac{x^{2}}x = x\to0$, $\frac x{x^{2}} = \frac1x\to\pm\infty$. Dreimal \enquote{$\frac00$}, drei Antworten: Die Form sagt nichts; der Grenzwert hängt davon ab, \emph{wie} Zähler und Nenner gegen null gehen. \enquote{$\frac00$} ist keine Zahl, sondern die Aufforderung, genauer hinzusehen (Aufgabe 3.5).
+\begin{fehler}\kastentext
+Die Null ist eine Zahl wie jede andere --- außer bei der Division. $\frac a0$ ist nicht $\infty$, nicht $0$, nicht \enquote{unendlich groß}, sondern nicht definiert; $\frac00$ erst recht. Was man sinnvoll fragen kann, ist $\lim\frac{f(x)}{g(x)}$, und das hat je nach $f, g$ jede Antwort.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Brahmagupta ($628$) gab erstmals Regeln für Null und negative Zahlen (\enquote{Schulden} und \enquote{Vermögen}): $(-a)(-b) = ab$, $0 - a = -a$. Dass ihm bei $\frac00$ ein Fehler unterlief, zeigt, wie unselbstverständlich der Schritt war --- Europa übernahm die Null erst $600$ Jahre später, und die Division durch null bleibt die häufigste Fehlerquelle in Beweisen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.8
+\stupserzwei{gruen}{Mittlere Spalte mal $3$, minus zweimal rechte Spalte: $(6, 9, 3\mid102) - (6, 4, 2\mid78) = (0, 5, 1\mid24)$. Linke Spalte mal $3$ minus rechte: $(0, 4, 8\mid39)$.}{22pt}
+\begin{loesungkarte}{gruen}{7.8}{Fangcheng}
+\derweg{Spaltenweise Anordnung, Spalten vervielfachen und abziehen, bis die Anordnung dreieckig ist; dann von unten einsetzen.}
+\schritt{Anordnung}
+Spalten von rechts nach links (chinesisch): $\begin{array}{ccc}1 & 2 & 3\\ 2 & 3 & 2\\ 3 & 1 & 1\\ 26 & 34 & 39\end{array}$ --- Zeilen: gute, mittlere, schlechte Garben, Dou.
+\schritt{Erste Elimination}
+Mittlere Spalte mal $3$: $(6, 9, 3\mid102)$; minus $2\times$ rechte Spalte $(3, 2, 1\mid39)$: $(0, 5, 1\mid24)$. Linke Spalte mal $3$: $(3, 6, 9\mid78)$; minus rechte: $(0, 4, 8\mid39)$.
+\schritt{Zweite Elimination}
+Linke Spalte $(0, 4, 8\mid39)$ mal $5$: $(0, 20, 40\mid195)$; minus $4\times$ mittlere $(0, 5, 1\mid24)$: $(0, 0, 36\mid99)$.
+\schritt{Rückwärts}
+$36z = 99$, $z = \frac{11}4$. Mittlere: $5y + z = 24$, $y = \frac{24 - 2{,}75}5 = \frac{17}4$. Rechte: $3x + 2y + z = 39$, $x = \frac{39 - 8{,}5 - 2{,}75}3 = \frac{37}4$. Gute Garbe $9\frac14$, mittlere $4\frac14$, schlechte $2\frac34$ Dou.
+\schritt{Negative Zahlen}
+Bei anderen Aufgaben der \emph{Neun Kapitel} entstehen beim Abziehen negative Einträge; die Chinesen legten dafür schwarze statt rote Stäbchen und hatten Regeln (\emph{zheng fu shu}) für das Rechnen damit --- die ersten negativen Zahlen der Geschichte, als Hilfsgrößen im Algorithmus, nicht als Lösungen.
+\probe{Identisch mit Aufgabe 2.2. \checkmark\ Die Anordnung entspricht der transponierten erweiterten Matrix; die Spaltenoperationen sind unsere Zeilenoperationen.}
+\begin{mitnehmen}\kastentext
+Der Gauß-Algorithmus ist chinesisch, etwa $2000$ Jahre älter als Gauß. Was fehlte, war nicht das Verfahren, sondern der Begriff: Die \emph{Neun Kapitel} lösen Aufgaben, sie formulieren keinen Satz über Lösbarkeit. Dass ein Algorithmus eine Theorie \emph{ist}, ist eine Einsicht des 19.\ Jahrhunderts.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.9
+\stupserzwei{gruen}{$A = \sqrt{6\cdot5\cdot4\cdot3} = \sqrt{360} = 18{,}97$. Quadrat mit Seite $1$: Formel $1$, Fläche $1$. Raute mit $30^{\circ}$: Formel $1$, Fläche $\frac12$.}{22pt}
+\begin{loesungkarte}{gruen}{7.9}{Brahmaguptas Formel}
+\derweg{Einsetzen; $d = 0$ gibt Heron; ein Gegenbeispiel zeigt, dass die Sehnenbedingung nötig ist.}
+\schritt{Rechnung}
+$s = \frac{3 + 4 + 5 + 6}2 = 9$. $A = \sqrt{(9 - 3)(9 - 4)(9 - 5)(9 - 6)} = \sqrt{6\cdot5\cdot4\cdot3} = \sqrt{360} = 18{,}97$.
+\schritt{Heron als Spezialfall}
+$d = 0$: Das Viereck wird zum Dreieck (jedes Dreieck hat einen Umkreis), $s = \frac{a + b + c}2$, und $A = \sqrt{(s - a)(s - b)(s - c)\cdot s}$ --- Herons Formel. Brahmagupta verallgemeinert Heron; ob er es wusste, ist unklar, denn er nennt die Sehnenbedingung nicht.
+\schritt{Warum Sehnenviereck}
+Ein Viereck ist durch seine vier Seiten nicht bestimmt --- es lässt sich an den Ecken \enquote{knicken}. Quadrat mit Seite $1$ (ein Sehnenviereck): Formel $\sqrt{1\cdot1\cdot1\cdot1} = 1$, richtig. Raute mit Seite $1$ und Winkel $30^{\circ}$ (kein Sehnenviereck, weil gegenüberliegende Winkel $30^{\circ} + 30^{\circ}\neq180^{\circ}$): Formel wieder $1$, Fläche aber $\sin30^{\circ} = \frac12$. Unter allen Vierecken mit gegebenen Seiten hat das Sehnenviereck die \emph{größte} Fläche --- Brahmaguptas Formel ist dieses Maximum.
+\probe{Sehnenviereck mit $3, 4, 5, 6$: Die Fläche $18{,}97$ liegt unter der eines Rechtecks $4{,}5\times4{,}5 = 20{,}25$ mit gleichem Umfang. \checkmark}
+\begin{mitnehmen}\kastentext
+Brahmaguptas Formel gilt für Sehnenvierecke; die allgemeine Formel von Bretschneider ($1842$) hat einen Zusatzterm $-abcd\cos^{2}\frac{\alpha + \gamma}2$, der genau dann verschwindet, wenn $\alpha + \gamma = 180^{\circ}$. Indische Mathematik war stark in Formeln und Rechenregeln; Beweise und Voraussetzungen notierte man selten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.10
+\stupserzwei{akzent}{$119^{2} + 120^{2} = 14\,161 + 14\,400 = 28\,561 = 169^{2}$. Fünfzehn solche Tripel auf einer Tafel sind kein Zufall --- aber auch kein Beweis des Satzes.}{22pt}
+\begin{loesungkarte}{akzent}{7.10}{Wissen ist nicht Beweisen}
+\derweg{Drei Stufen unterscheiden: Beispiele, Figur, Beweis aus Axiomen --- und jede an ihrer Quelle prüfen.}
+\schritt{(a)}
+$119^{2} + 120^{2} = 28\,561 = 169^{2}$. \checkmark\ Plimpton 322 enthält $15$ Tripel, systematisch geordnet, vermutlich aus einer Parameterformel erzeugt. Das zeigt: Die Babylonier \emph{kannten} die Beziehung und konnten Tripel erzeugen. Es zeigt nicht, dass sie den Satz für \emph{alle} rechtwinkligen Dreiecke behauptet oder begründet hätten. Eine Tabelle ist Wissen, kein Beweis.
+\schritt{(b)}
+Quadrat mit Seite $a + b$, Fläche $(a + b)^{2}$. Darin vier rechtwinklige Dreiecke mit Katheten $a, b$ (Fläche je $\frac{ab}2$) und ein schiefes Quadrat mit Seite $c$. Also $(a + b)^{2} = 4\cdot\frac{ab}2 + c^{2}$, $a^{2} + 2ab + b^{2} = 2ab + c^{2}$, $a^{2} + b^{2} = c^{2}$. --- Die Figur \emph{enthält} einen Beweis, wenn man weiß, dass das innere Viereck ein Quadrat ist (Winkelsumme!) und dass Flächen sich additiv verhalten. Das \emph{Zhoubi} sagt \enquote{schau}; die Begründung dieser beiden Punkte bleibt dem Betrachter.
+\schritt{(c)}
+Euklid I.47: (i) Er beweist aus explizit genannten Axiomen und vorher bewiesenen Sätzen (Kongruenz, Flächengleichheit von Parallelogrammen), nicht aus einer Figur. (ii) Er beweist für \emph{jedes} rechtwinklige Dreieck, nicht für eines mit bestimmten Maßen; die Figur ist Illustration, nicht Argument. Dazu: Er beweist auch die Umkehrung (I.48).
+\schritt{(d)}
+\enquote{Die Griechen erfanden den Beweis} heißt: Sie machten das \emph{Zurückführen auf ausgesprochene Voraussetzungen} zur Norm und zum Gegenstand --- nicht, dass vor ihnen niemand richtig argumentiert hätte, und nicht, dass sie die Sätze zuerst kannten.
+\begin{fehler}\kastentext
+\enquote{Wer es zuerst wusste} und \enquote{wer es zuerst bewies} sind verschiedene Fragen --- und \enquote{bewies} ist selbst graduell: Beispiele, einsichtige Figur, Deduktion aus Axiomen. Beim Satz des Pythagoras lautet die Antwort: Babylonier, Chinesen, Inder kannten ihn; die Griechen (vielleicht Pythagoreer, sicher Euklid) bewiesen ihn im strengen Sinn.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Ein Beweis beantwortet die Frage \enquote{Warum gilt es?} mit \enquote{Weil es aus diesem und jenem folgt.} Das setzt voraus, dass man \enquote{dieses und jenes} für sicherer hält als den Satz --- die Idee des Axioms. Diese Idee ist griechisch, und sie ist der Grund, warum dieses Buch Beweise verlangt und nicht nur Rezepte.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.11
+\stupserzwei{tief}{Goldenes Rechteck minus Quadrat ist wieder ein goldenes Rechteck. Das Verfahren erzeugt in jedem Schritt dieselbe Situation --- es kann nie enden.}{22pt}
+\begin{loesungkarte}{tief}{7.11}{Wechselwegnahme}
+\derweg{Abtragen und zählen; beim goldenen Schnitt die Selbstähnlichkeit erkennen; Kettenbruch ablesen.}
+\schritt{(a)}
+$17 = 3\cdot5 + 2$: dreimal $5$ von $17$ abtragen, Rest $2$. $5 = 2\cdot2 + 1$: zweimal $2$ von $5$, Rest $1$. $2 = 2\cdot1$: zweimal $1$ von $2$, Rest $0$. Gemeinsames Maß $1$; die Anzahlen $3, 2, 2$ geben den Kettenbruch $\frac{17}5 = 3 + \frac1{2 + \frac12} = [3; 2, 2]$. Das ist der euklidische Algorithmus (Aufgabe 1.10).
+\schritt{(b)}
+$a : b = b : (a - b)$ heißt: Das Restrechteck $b\times(a - b)$ hat dasselbe Seitenverhältnis wie das Ausgangsrechteck --- es ist wieder golden. Man nimmt das Quadrat $b\times b$ weg (einmal, weil $a < 2b$), und steht vor derselben Aufgabe im Kleinen. Jeder Schritt ist \enquote{einmal abtragen, Rest ist wieder golden}. Es gibt keinen Schritt, bei dem der Rest null wird.
+\schritt{(c)}
+Endet die Wechselwegnahme nicht, gibt es kein gemeinsames Maß: $\frac ab$ ist kein Bruch $\frac mn$ (sonst wäre der ggT-Algorithmus für $m, n$ endlich). Der goldene Schnitt $\varphi = \frac ab$ ist irrational. Die Anzahlen sind alle $1$: $\varphi = 1 + \frac1{1 + \frac1{1 + \dots}} = [1; 1, 1, 1, \dots]$. Probe: $\varphi = 1 + \frac1\varphi$, also $\varphi^{2} = \varphi + 1$. \checkmark
+\schritt{(d)}
+Quadrat mit Seite $s$, Diagonale $d$. $d - s$ ist der Rest nach einmal Abtragen. Trägt man $d - s$ auf der Diagonale ab und errichtet dort das Lot, entsteht ein kleines Quadrat mit Seite $d - s$, dessen Diagonale $2s - d$ ist. Nun ist $s = 2(d - s) + (2s - d)$: zweimal abtragen, Rest ist die kleine Diagonale --- dieselbe Situation. Kettenbruch $[1; 2, 2, 2, \dots] = \sqrt2$ (Aufgabe 1.50 mit $\sqrt7$). Nie endend, also inkommensurabel: ein geometrischer Beweis der Irrationalität von $\sqrt2$, ohne gerade und ungerade.
+\probe{$[1; 1, 1, 1, 1] = 1 + \frac1{1 + \frac1{1 + \frac1{1 + 1}}} = \frac85 = 1{,}6$; $\varphi = 1{,}618$. Die Näherungsbrüche sind Fibonacci-Quotienten (Aufgabe 7.23). \checkmark}
+\begin{mitnehmen}\kastentext
+Wechselwegnahme war vermutlich \emph{die} Entdeckungsmethode der Inkommensurabilität --- am Pentagramm, dessen Diagonalen sich im goldenen Schnitt schneiden. Der Kettenbruch ist ihr Protokoll, und ein unendlicher Kettenbruch ist ein Irrationalitätsbeweis: Das ist moderner als der Paritätsbeweis (Aufgabe 7.12), aber vielleicht älter.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.12
+\stupserzwei{gruen}{$m^{2} = 2n^{2}$ ist gerade, also $m$ gerade ($m = 2k$). Dann $4k^{2} = 2n^{2}$, $n^{2} = 2k^{2}$ gerade, also $n$ gerade. Beide gerade --- aber der Bruch war gekürzt.}{22pt}
+\begin{loesungkarte}{gruen}{7.12}{Inkommensurabel, nach Aristoteles}
+\derweg{Annahme eines gemeinsamen Maßes, gekürzter Bruch, Pythagoras, Paritätsschluss zweimal, Widerspruch.}
+\schritt{Annahme}
+Seite $s$ und Diagonale $d$ seien kommensurabel: $d : s = m : n$ mit ganzen $m, n$, vollständig gekürzt --- nicht beide gerade.
+\schritt{Pythagoras}
+$d^{2} = 2s^{2}$ (das Quadrat über der Diagonale ist doppelt so groß), also $m^{2} = 2n^{2}$.
+\schritt{Parität}
+$m^{2}$ ist gerade, also $m$ gerade (das Quadrat einer ungeraden Zahl ist ungerade). Schreibe $m = 2k$: $4k^{2} = 2n^{2}$, $n^{2} = 2k^{2}$. Also $n^{2}$ gerade, also $n$ gerade.
+\schritt{Widerspruch}
+$m$ und $n$ sind beide gerade --- der Bruch war aber gekürzt. Genauer, in Aristoteles' Worten: $n$ wäre zugleich ungerade (weil gekürzt und $m$ gerade) und gerade. Die Annahme ist falsch: Es gibt kein gemeinsames Maß. $\blacksquare$
+\schritt{Die Krise}
+Die Pythagoreer glaubten, \enquote{alles ist Zahl} --- jedes Verhältnis sei ein Verhältnis ganzer Zahlen. Die Diagonale des eigenen Symbols, des Quadrats (oder Pentagramms), widerlegte das. Die Proportionenlehre musste neu begründet werden; das tat Eudoxos (Euklid, Buch V) mit einer Definition, die Dedekinds Schnitten (Aufgabe 7.34) erstaunlich nahekommt.
+\probe{Derselbe Beweis für $\sqrt3$: $m^{2} = 3n^{2}$, dann \enquote{durch $3$ teilbar} statt \enquote{gerade}. Für $\sqrt4$ scheitert er: $m^{2} = 4n^{2}$ gibt $m = 2n$, kein Widerspruch. \checkmark}
+\begin{mitnehmen}\kastentext
+Der Beweis benutzt: Pythagoras, die Eindeutigkeit der Kürzung, und \enquote{$m^{2}$ gerade $\Rightarrow$ $m$ gerade}. Letzteres ist ein Stück Primfaktorzerlegung (Gebiet 1). Aristoteles führt ihn als Beispiel dafür an, dass ein Widerspruchsbeweis etwas zeigt, was kein direkter Beweis zeigen kann --- und er hat bis heute recht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.13
+\stupserzwei{gruen}{Das Hilfsmittel: Zu jeder Fläche $\varepsilon > 0$ gibt es ein einbeschriebenes Vieleck, dessen Fläche sich vom Kreis um weniger als $\varepsilon$ unterscheidet (Verdoppeln der Seitenzahl halbiert mindestens den Rest).}{22pt}
+\begin{loesungkarte}{gruen}{7.13}{Exhaustion}
+\derweg{Für Vielecke gilt die Behauptung; Kreise werden durch Vielecke ausgeschöpft; \enquote{größer} und \enquote{kleiner} führen je zum Widerspruch.}
+\schritt{Vorbereitung}
+Für ähnliche Vielecke gilt: Flächen verhalten sich wie Quadrate entsprechender Seiten, also wie Quadrate der Umkreisdurchmesser (Euklid XII.1). Einbeschriebene regelmäßige $n$-Ecke $P_n^{(1)}, P_n^{(2)}$ in beiden Kreisen: $P_n^{(1)} : P_n^{(2)} = d_1^{2} : d_2^{2}$.
+\schritt{Ausschöpfung}
+Beim Übergang vom $n$-Eck zum $2n$-Eck wird mehr als die Hälfte des Rests $A - P_n$ weggenommen (jedes Kreissegment wird durch ein Dreieck ersetzt, das mehr als die Hälfte des Segments ausmacht). Also wird $A - P_n$ kleiner als jede vorgegebene Fläche --- das ist Eudoxos' Axiom (Euklid X.1).
+\schritt{Fall \enquote{größer}}
+Angenommen $A_1 : A_2 > d_1^{2} : d_2^{2}$ (der Fall, den Euklid ausführt). Dann gibt es $S < A_2$ mit $A_1 : S = d_1^{2} : d_2^{2}$. Wähle $n$ so groß, dass $A_2 - P_n^{(2)} < A_2 - S$, also $P_n^{(2)} > S$. Für die Vielecke gilt $P_n^{(1)} : P_n^{(2)} = d_1^{2} : d_2^{2} = A_1 : S$. Da $P_n^{(1)} < A_1$, folgt $P_n^{(2)} < S$. Widerspruch zu $P_n^{(2)} > S$.
+\schritt{Der andere Fall}
+$A_1 : A_2 < d_1^{2} : d_2^{2}$ ist dasselbe wie $A_2 : A_1 > d_2^{2} : d_1^{2}$ --- die Rollen der Kreise tauschen, derselbe Widerspruch. Also Gleichheit. $\blacksquare$
+\schritt{Wo der Grenzwert steckt}
+Modern: $A = \lim P_n$, und Grenzwerte von Verhältnissen sind Verhältnisse der Grenzwerte. Euklid hat keinen Grenzwert; er hat (i) das Axiom, dass der Rest beliebig klein wird, und (ii) den doppelten Widerspruch. Zusammen ist das die $\varepsilon$-Definition des Grenzwerts, nur ohne das Wort --- und ohne jemals \enquote{alle $n$} zusammenzufassen.
+\probe{Modern in einer Zeile: $A = \frac\pi4d^{2}$, also $A_1 : A_2 = d_1^{2} : d_2^{2}$. Aber Euklid kennt $\pi$ nicht als Zahl --- der Satz sagt gerade, dass es eine solche Konstante gibt. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Exhaustionsmethode ist der Grenzwertbegriff in Verkleidung: Statt $\lim P_n = A$ zu sagen, zeigt man, dass $A$ weder größer noch kleiner als die Vielecke zulassen. Archimedes brachte sie zur Meisterschaft (Parabelsegment, Kugel); Cauchy und Weierstraß nahmen zweitausend Jahre später die Verkleidung ab.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.14
+\stupserzwei{gruen}{$2\cdot3\cdot5\cdot7\cdot11\cdot13 + 1 = 30\,031 = 59\cdot509$: nicht prim --- aber $59$ und $509$ sind neue Primzahlen.}{22pt}
+\begin{loesungkarte}{gruen}{7.14}{Euklid IX.20}
+\derweg{Zu endlich vielen Primzahlen eine weitere konstruieren; Fallunterscheidung, ob $N$ prim ist; die Formulierung beachten.}
+\schritt{Formulierung}
+Euklid: \enquote{Es gibt mehr Primzahlen als jede vorgelegte Anzahl von Primzahlen.} Nicht: \enquote{Es gibt unendlich viele.} Er spricht nie von der Gesamtheit aller Primzahlen --- nur davon, dass man zu jeder endlichen Liste eine weitere findet. Das ist das \emph{potentiell} Unendliche (Aristoteles); das \emph{aktual} Unendliche (eine fertige unendliche Menge) kommt erst mit Cantor.
+\schritt{Beweis}
+Seien $p_1, \dots, p_n$ Primzahlen. $N = p_1\cdots p_n + 1$. Fall 1: $N$ ist prim; dann ist $N$ eine Primzahl, die nicht unter den $p_i$ ist ($N > p_i$). Fall 2: $N$ ist nicht prim; dann hat $N$ einen Primteiler $q$ (Aufgabe 1.4). Keines der $p_i$ teilt $N$, denn $N$ lässt bei Division durch $p_i$ den Rest $1$. Also $q\neq p_i$ für alle $i$. In beiden Fällen gibt es eine Primzahl außerhalb der Liste. $\blacksquare$
+\schritt{Ist $N$ prim?}
+Nicht immer: $2 + 1 = 3$, $2\cdot3 + 1 = 7$, $2\cdot3\cdot5 + 1 = 31$, $2\cdot3\cdot5\cdot7 + 1 = 211$, $2\cdot3\cdot5\cdot7\cdot11 + 1 = 2311$ --- alle prim; aber $2\cdot3\cdot5\cdot7\cdot11\cdot13 + 1 = 30\,031 = 59\cdot509$. Der Beweis behauptet das auch nicht; er sagt nur, dass $N$ einen neuen Primteiler hat.
+\schritt{Konstruktiv}
+Der Beweis ist direkt: Gegeben eine Liste, konstruiere $N$, zerlege es, finde eine neue Primzahl. Kein Widerspruch nötig. Die Fassung \enquote{Angenommen, es gäbe nur endlich viele \dots} ist eine spätere Umformung, die den Beweis indirekt macht und ihm die Konstruktion nimmt --- und die zur falschen Vorstellung führt, $N$ sei immer prim.
+\probe{Liste $\{3, 5\}$: $N = 16 = 2^{4}$, neue Primzahl $2$ --- kleiner als alle in der Liste. Der Beweis verlangt nicht, dass die Liste die \emph{ersten} Primzahlen enthält. \checkmark}
+\begin{mitnehmen}\kastentext
+Euklids Beweis ist ein Algorithmus: Er liefert zu jeder Liste eine neue Primzahl. Dass man ihn meist als Widerspruchsbeweis erzählt, sagt etwas über uns, nicht über Euklid. Die Frage, ob \enquote{unendlich viele} eine Menge ist oder ein Prozess, trennt Aristoteles von Cantor --- und Brouwer von Hilbert (Aufgabe 7.40).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.15
+\stupserzwei{gruen}{Halbe Umfänge: $a_6 = 3$, $b_6 = 3{,}4641$; $a_{12} = 3{,}1058$, $b_{12} = 3{,}2154$; \dots; $a_{96} = 3{,}1410$, $b_{96} = 3{,}1427$.}{22pt}
+\begin{loesungkarte}{gruen}{7.15}{Archimedes und das 96-Eck}
+\derweg{Harmonisches und geometrisches Mittel im Wechsel; vier Verdopplungen.}
+\schritt{Start}
+Einheitskreis, halbe Umfänge der ein- und umbeschriebenen $n$-Ecke: $a_n < \pi < b_n$. Sechseck: $a_6 = 3$ (Seite $1$), $b_6 = 2\sqrt3 = 3{,}4641$ (Seite $\frac2{\sqrt3}$).
+\schritt{Rekursion}
+$b_{2n} = \frac{2a_nb_n}{a_n + b_n}$ (harmonisches Mittel), $a_{2n} = \sqrt{a_nb_{2n}}$ (geometrisches Mittel).
+\begin{center}\small
+\begin{tabular}{c|ll}
+$n$ & $a_n$ & $b_n$\\ \hline
+6 & $3{,}000000$ & $3{,}464102$\\
+12 & $3{,}105829$ & $3{,}215390$\\
+24 & $3{,}132629$ & $3{,}159660$\\
+48 & $3{,}139350$ & $3{,}146086$\\
+96 & $3{,}141032$ & $3{,}142715$
+\end{tabular}
+\end{center}
+\schritt{Vergleich}
+$3{,}14103 < \pi < 3{,}14271$. Archimedes: $3\frac{10}{71} = 3{,}14085 < \pi < 3\frac17 = 3{,}14286$ --- etwas weiter, weil er die Wurzeln ($\sqrt3$ und die Zwischenwerte) nach unten bzw.\ oben durch Brüche abschätzte, um die Einschließung sicher zu halten. Zwei Dezimalstellen von $\pi$, bewiesen, $250$ v.\,Chr.
+\probe{Die Mittelwertrekursion konvergiert gegen $\pi$: $b_n - a_n$ viertelt sich pro Schritt ($0{,}464$; $0{,}110$; $0{,}027$; $0{,}0067$; $0{,}0017$). \checkmark\ Mit $n = 3\cdot2^{20}$ hätte man $12$ Stellen --- Ludolph van Ceulen rechnete $1596$ so bis zum $2^{62}$-Eck und $35$ Stellen.}
+\begin{mitnehmen}\kastentext
+Archimedes beweist Schranken, nicht einen Wert: $\pi$ ist für ihn eine Zahl zwischen zwei Brüchen, nicht eine Dezimalzahl. Die Methode --- einschließen und verfeinern --- ist die Exhaustion (Aufgabe 7.13) als Rechenverfahren, und die Rekursion über Mittelwerte ist der Vorläufer der AGM-Algorithmen, mit denen man heute Milliarden Stellen rechnet.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.16
+\stupserzwei{gruen}{$2r\cdot\pi(\rho^{2} + x^{2}) = 2r\cdot\pi\cdot2rx = x\cdot\pi(2r)^{2}$: Scheibe für Scheibe Gleichgewicht. Summiert: $2r(V_{\text{Kugel}} + V_{\text{Kegel}}) = r\cdot V_{\text{Zylinder}}$.}{22pt}
+\begin{loesungkarte}{gruen}{7.16}{Die Kugel auf der Waage}
+\derweg{Scheiben bei $x$ vergleichen; Hebelgesetz Scheibe für Scheibe; summieren; Kegel- und Zylindervolumen sind bekannt, Kugel folgt.}
+\schritt{Anordnung}
+Kugel vom Radius $r$ (Mittelpunkt bei $x = r$), Kegel mit Spitze in $0$, Grundkreisradius $2r$ und Höhe $2r$, Zylinder mit Radius $2r$ und Höhe $2r$; alle auf der $x$-Achse von $0$ bis $2r$. Ein Hebel mit Drehpunkt $0$, linker Arm der Länge $2r$.
+\schritt{Scheiben bei $x$}
+Kugel: Schnittkreis mit $\rho^{2} = r^{2} - (x - r)^{2} = 2rx - x^{2}$, Fläche $\pi(2rx - x^{2})$. Kegel: Radius $x$, Fläche $\pi x^{2}$. Zylinder: Fläche $\pi(2r)^{2} = 4\pi r^{2}$.
+\schritt{Gleichgewicht}
+Kugel- und Kegelscheibe an den linken Arm ($2r$) gehängt: Moment $2r\cdot\pi(2rx - x^{2} + x^{2}) = 4\pi r^{2}x$. Zylinderscheibe an ihrem Ort $x$: Moment $x\cdot4\pi r^{2}$. Gleich --- für jedes $x$. Also halten Kugel und Kegel bei $2r$ dem Zylinder im Gleichgewicht, wenn dessen Gewicht in seinem Schwerpunkt $x = r$ angreift.
+\schritt{Volumen}
+$2r(V_K + V_{\text{Kegel}}) = r\cdot V_Z$. $V_Z = \pi(2r)^{2}\cdot2r = 8\pi r^{3}$, $V_{\text{Kegel}} = \frac13\pi(2r)^{2}\cdot2r = \frac83\pi r^{3}$. $V_K = \frac{V_Z}2 - V_{\text{Kegel}} = 4\pi r^{3} - \frac83\pi r^{3} = \frac43\pi r^{3}$.
+\schritt{Warum kein Beweis}
+Archimedes zerlegt Körper in \enquote{alle Scheiben} und summiert sie --- unendlich viele Indivisible, deren Summe ein Volumen sein soll. Das ist die Integration, aber ohne Begründung, warum Scheiben ohne Dicke ein Volumen ergeben. Er nennt es im Brief an Eratosthenes eine Methode zum \emph{Finden}, der ein Beweis durch Exhaustion folgen müsse --- und liefert ihn in \emph{Über Kugel und Zylinder}.
+\probe{Als Integral: $\int_0^{2r}\pi(2rx - x^{2})\,dx = \pi\bigl(4r^{3} - \frac83r^{3}\bigr) = \frac43\pi r^{3}$. \checkmark\ Archimedes' Grabstein: Kugel im Zylinder, Verhältnis $2 : 3$. \checkmark}
+\begin{mitnehmen}\kastentext
+Heuristik und Beweis sind verschiedene Dinge, und Archimedes wusste es. Die \emph{Methode} wurde $1906$ auf einem Palimpsest gefunden; bis dahin rätselte man, wie er seine Sätze \emph{gefunden} hatte. Cavalieri ($1635$) machte die Indivisiblen zum Prinzip, Newton und Leibniz zum Kalkül, Riemann zum Satz.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.17
+\stupserzwei{gruen}{Goldener Schnitt: $x^{2} = R(R - x)$, $x = R\frac{\sqrt5 - 1}2 = 0{,}618R$. $\operatorname{crd}36^{\circ} = 0{,}618R$, $\sin18^{\circ} = \frac{0{,}618}2 = 0{,}309$.}{22pt}
+\begin{loesungkarte}{gruen}{7.17}{Ptolemäus: $\operatorname{crd}36^{\circ}$}
+\derweg{Zehneckseite über den goldenen Schnitt (Euklid XIII.9), Sehne in Sinus umrechnen, dann Ptolemäus' Weg zu kleineren Winkeln.}
+\schritt{Zehneck}
+Der Zentriwinkel des regelmäßigen Zehnecks ist $36^{\circ}$; seine Seite ist $\operatorname{crd}36^{\circ}$. Euklid XIII.9: Die Zehneckseite ist der größere Abschnitt des im goldenen Schnitt geteilten Radius.
+\schritt{Goldener Schnitt}
+$R : x = x : (R - x)$, also $x^{2} + Rx - R^{2} = 0$, $x = R\frac{-1 + \sqrt5}2 = 0{,}618034R$. Mit Ptolemäus' $R = 60$: $\operatorname{crd}36^{\circ} = 37{,}082 = 37;4,55$ (sein Wert: $37;4,55$).
+\schritt{Sinus}
+$\operatorname{crd}\alpha = 2R\sin\frac\alpha2$, also $\sin18^{\circ} = \frac{\operatorname{crd}36^{\circ}}{2R} = \frac{\sqrt5 - 1}4 = 0{,}309017$.
+\schritt{Zu $1^{\circ}$}
+Ptolemäus kannte $\operatorname{crd}60^{\circ} = R$ (Sechseck), $\operatorname{crd}90^{\circ}$, $\operatorname{crd}72^{\circ}$ (Fünfeck, aus dem Zehneck), und mit seinem Satz über Sehnenvierecke die Sehne der Differenz: $\operatorname{crd}(72^{\circ} - 60^{\circ}) = \operatorname{crd}12^{\circ}$. Halbierung: $6^{\circ}$, $3^{\circ}$, $1{,}5^{\circ}$, $0{,}75^{\circ}$. Dann eine Interpolationsungleichung: $\operatorname{crd}1^{\circ}$ liegt zwischen $\frac23\operatorname{crd}1{,}5^{\circ}$ und $\frac43\operatorname{crd}0{,}75^{\circ}$, beide $\approx1;2,50$. Von dort in Halbgradschritten die ganze Tafel.
+\probe{$\sin18^{\circ} = 0{,}309017$ (Rechner). \checkmark\ $\cos36^{\circ} = \frac{\sqrt5 + 1}4 = 0{,}809 = \varphi/2$: Der goldene Schnitt sitzt im Fünfeck. \checkmark}
+\begin{mitnehmen}\kastentext
+Ptolemäus' Tafel ($0{,}5^{\circ}$ bis $180^{\circ}$, drei Sexagesimalstellen) blieb $1400$ Jahre die Grundlage der Astronomie. Ihr Werkzeug --- der Satz des Ptolemäus über Sehnenvierecke --- ist das Additionstheorem des Sinus in geometrischer Form. Sinus statt Sehne kam aus Indien (Aryabhata, $500$ n.\,Chr.).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.18
+\stupserzwei{gruen}{$t^{2} + (2t - 4)^{2} = 16$ gibt $5t^{2} - 16t = 0$, $t = \frac{16}5$; $y = \frac{12}5$. Probe: $\frac{256 + 144}{25} = 16$.}{22pt}
+\begin{loesungkarte}{gruen}{7.18}{Diophant II.8}
+\derweg{Ansatz $y = kt - 4$ mit $4 = \sqrt{16}$; die Konstante fällt weg, die Gleichung wird linear in $t$.}
+\schritt{Diophants Rechnung}
+$x = t$, $y = 2t - 4$: $t^{2} + 4t^{2} - 16t + 16 = 16$, also $5t^{2} = 16t$, $t = \frac{16}5$. $x = \frac{16}5$, $y = \frac{32}5 - 4 = \frac{12}5$. $16 = \bigl(\frac{16}5\bigr)^{2} + \bigl(\frac{12}5\bigr)^{2}$. Diophant gibt genau diese Lösung.
+\schritt{Allgemein}
+$y = kt - 4$: $t^{2} + k^{2}t^{2} - 8kt + 16 = 16$, $t = \frac{8k}{1 + k^{2}}$, $y = \frac{8k^{2}}{1 + k^{2}} - 4 = \frac{4(k^{2} - 1)}{1 + k^{2}}$. Für jedes rationale $k$ eine rationale Lösung --- unendlich viele.
+\schritt{Einheitskreis}
+Durch $16$ geteilt: $\bigl(\frac x4\bigr)^{2} + \bigl(\frac y4\bigr)^{2} = 1$. Der Ansatz $y = kt - 4$ ist eine Gerade durch den Punkt $(0, -4)$ auf dem Kreis mit Steigung $k$; ihr zweiter Schnittpunkt mit dem Kreis ist rational, wenn $k$ es ist. Das ist die rationale Parametrisierung des Einheitskreises: $\bigl(\frac{2k}{1 + k^{2}}, \frac{k^{2} - 1}{1 + k^{2}}\bigr)$ --- und damit alle pythagoreischen Tripel (Aufgabe 1.48).
+\probe{$k = 3$: $t = \frac{24}{10} = \frac{12}5$, $y = \frac{32}{10} = \frac{16}5$ --- dieselbe Lösung mit vertauschten Rollen. $k = \frac12$: $t = \frac{16}5$, $y = -\frac{12}5$. \checkmark}
+\begin{mitnehmen}\kastentext
+Diophant suchte rationale Lösungen und fand sie durch geschickte Ansätze, einen pro Aufgabe. Dass dahinter eine Methode steckt --- Gerade durch einen bekannten Punkt --- sah erst die Neuzeit. Fermat schrieb an den Rand dieser Aufgabe, für Kuben und höhere Potenzen gehe es nicht: der Große Fermatsche Satz, bewiesen $1995$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.19
+\stupserzwei{tief}{$x^{2} + 21 = 10x$: $x = 5\pm\sqrt{25 - 21} = 5\pm2$, also $3$ oder $7$. Al-Chwarizmi nennt beide. $x^{2} = 3x + 4$: $x = \frac32 + \sqrt{\frac94 + 4} = 4$; die Lösung $-1$ fehlt.}{22pt}
+\begin{loesungkarte}{tief}{7.19}{Die sechs Typen al-Chwarizmis}
+\derweg{Jede Gleichung so umstellen, dass alle Koeffizienten positiv sind; dann das Rezept des Typs.}
+\schritt{(a)}
+$x^{2} = 5x$: Typ (1), $x = 5$ (al-Chwarizmi teilt durch $x$; $x = 0$ gilt nicht als Lösung). $x^{2} + 21 = 10x$: Typ (5), $x = 5\pm\sqrt{25 - 21} = 3$ oder $7$. $x^{2} = 3x + 4$: Typ (6), $x = \frac32 + \sqrt{\frac94 + 4} = \frac32 + \frac52 = 4$.
+\schritt{(b)}
+Typ (5), $x^{2} + c = bx$, ist der einzige mit zwei positiven Lösungen --- al-Chwarizmi sagt ausdrücklich, man könne die Wurzel addieren oder subtrahieren und beides sei richtig. Typ (6), $x^{2} = bx + c$, hat eine positive und eine negative Lösung; die negative sieht er nicht. Typ (4), $x^{2} + bx = c$, ebenso.
+\schritt{(c)}
+Negative Zahlen (als Koeffizienten) und die Null (als Koeffizient und als rechte Seite): Mit beiden wird aus den sechs Typen die eine Gleichung $ax^{2} + bx + c = 0$ mit beliebigen reellen $a\neq0, b, c$ --- und aus den sechs Rezepten die eine Mitternachtsformel. Die Vereinheitlichung kam mit Stifel ($1544$) und Viète ($1591$); Descartes schrieb $1637$ noch Gleichungen so um, dass Koeffizienten positiv waren.
+\schritt{(d)}
+Heute: Die Diskriminante $\frac{b^{2}}4 - c$ ist negativ, die Lösungen sind komplex --- Bombelli (Aufgabe 7.22) öffnete diese Tür erst, als er sie für reelle Lösungen kubischer Gleichungen brauchte. Al-Chwarizmi hat recht: Mit seinen Zahlen ist die Aufgabe unmöglich, und er sagt es, statt zu rechnen.
+\probe{Typ (5) mit $b = 10$, $c = 25$: $x = 5\pm0$, eine doppelte Lösung --- auch das bemerkt al-Chwarizmi (\enquote{dann ist die Wurzel die Hälfte der Zahl der Wurzeln}). \checkmark}
+\begin{mitnehmen}\kastentext
+Sechs Typen, weil die Sprache keine negativen Zahlen hat --- jeder Typ ist eine geometrische Situation (Flächen und Rechtecke addieren). Die Einteilung sieht umständlich aus und war doch der Schritt zur Allgemeinheit: Al-Chwarizmi löst nicht eine Aufgabe, sondern alle eines Typs. Deshalb heißt die Algebra nach seinem Buch, \emph{al-dschabr} (das Ergänzen).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.20
+\stupserzwei{gruen}{Große Figur: Quadrat $x^{2}$, zwei Rechtecke $5\cdot x$, ein Eckquadrat $5\cdot5 = 25$. Zusammen $(x + 5)^{2} = 39 + 25 = 64$, also $x + 5 = 8$.}{22pt}
+\begin{loesungkarte}{gruen}{7.20}{Quadrat und zehn Wurzeln}
+\derweg{Rezept ausführen; dann die Figur, die zeigt, warum es stimmt.}
+\schritt{Rezept}
+Hälfte der Zahl der Wurzeln: $5$. Quadrat: $25$. Zu $39$ addieren: $64$. Wurzel: $8$. Minus $5$: $3$. \enquote{Das ist die Wurzel des Quadrats, welches du suchst.} $x = 3$, $x^{2} = 9$.
+\schritt{Figur}
+\begin{center}
+\begin{tikzpicture}[scale=0.55]
+\fill[tief!15] (0,0) rectangle (3,3); \node at (1.5,1.5) {$x^{2}$};
+\fill[sand] (3,0) rectangle (5,3); \node at (4,1.5) {$5x$};
+\fill[sand] (0,3) rectangle (3,5); \node at (1.5,4) {$5x$};
+\fill[akzent!20] (3,3) rectangle (5,5); \node at (4,4) {$25$};
+\draw (0,0) rectangle (5,5); \draw (3,0)--(3,5); \draw (0,3)--(5,3);
+\node[below,font=\small] at (1.5,0) {$x$}; \node[below,font=\small] at (4,0) {$5$};
+\end{tikzpicture}
+\end{center}
+Das Quadrat $x^{2}$ und die zehn Wurzeln $10x$, als zwei Rechtecke $5\times x$ an zwei Seiten angelegt, haben zusammen die Fläche $39$. Das Eckquadrat $5\times5 = 25$ ergänzt die Figur zum großen Quadrat mit Seite $x + 5$ und Fläche $39 + 25 = 64$. Also $x + 5 = 8$, $x = 3$.
+\schritt{Modern}
+$x^{2} + 10x + 25 = 64$, $(x + 5)^{2} = 64$, $x = -5\pm8$. Die Lösung $-13$ hat in der Figur keinen Platz.
+\probe{$9 + 30 = 39$. \checkmark}
+\begin{mitnehmen}\kastentext
+\enquote{Quadratische Ergänzung} ist wörtlich gemeint: Eine Figur wird zum Quadrat ergänzt. Al-Chwarizmi gibt das Rezept \emph{und} die Begründung --- das unterscheidet ihn von den Babyloniern (Aufgabe 7.6), die dasselbe Rezept hatten. Die Begründung ist griechisch (Euklid II.4), das Rezept babylonisch, die Verbindung seine.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.21
+\stupserzwei{gruen}{Parabel $x^{2} = 2y$, Kreis $(x - 1)^{2} + y^{2} = 1$. Einsetzen von $y = \frac{x^{2}}2$: $x^{2} - 2x + \frac{x^{4}}4 = 0$, durch $x$: $\frac{x^{3}}4 + x - 2 = 0$, mal $4$: $x^{3} + 4x = 8$.}{22pt}
+\begin{loesungkarte}{gruen}{7.21}{Chayyams Kegelschnitte}
+\derweg{Parabel mit Parameter $p = \sqrt a$, Kreis mit Durchmesser $b/a$ auf der Achse; der Schnittpunkt erfüllt die kubische Gleichung.}
+\schritt{Umformung}
+$x^{3} + ax = b$ mit $a = p^{2}$, $p = 2$: $x^{3} + p^{2}x = b$. Chayyam denkt in Proportionen: Gesucht ist $x$ mit $x^{3} = p^{2}(\frac b{p^{2}} - x)$, also $x^{2} : p^{2} = (\frac b{p^{2}} - x) : x$ --- wenn wir $\frac b{p^{2}} = 2$ setzen.
+\schritt{Parabel und Kreis}
+Parabel $x^{2} = py$, hier $x^{2} = 2y$: Für ihre Punkte ist $y = \frac{x^{2}}p$. Kreis mit Durchmesser $\frac b{p^{2}} = \frac84 = 2$ auf der $x$-Achse von $0$ bis $2$: $(x - 1)^{2} + y^{2} = 1$, also $y^{2} = x(2 - x)$. Im Schnittpunkt: $\frac{x^{4}}{p^{2}} = x(2 - x)$, $x^{3} = p^{2}(2 - x) = 8 - 4x$. \checkmark
+\schritt{Zahl}
+$x^{3} + 4x - 8 = 0$: $f(1{,}36) = 2{,}515 + 5{,}44 - 8 = -0{,}045$, $f(1{,}37) = 2{,}571 + 5{,}48 - 8 = 0{,}051$. Newton: $x = 1{,}36466$. Der Schnittpunkt liegt bei $(1{,}365;\ 0{,}931)$.
+\schritt{Was Chayyam hatte und nicht hatte}
+Er zeigt: Die Lösung existiert und ist konstruierbar (als Strecke, mit Kegelschnitten). Er findet keine Zahl und keine Formel; er schreibt, er hoffe auf Nachfolger, die sie finden --- das waren del Ferro und Tartaglia (Aufgabe 7.24), $450$ Jahre später. Und er sieht nur die positive Lösung.
+\probe{$1{,}36466^{3} + 4\cdot1{,}36466 = 2{,}5414 + 5{,}4586 = 8{,}0000$. \checkmark}
+\begin{mitnehmen}\kastentext
+Chayyam klassifizierte alle kubischen Gleichungen (mit positiven Koeffizienten: $14$ Typen) und gab zu jedem die Kegelschnitte. Es ist die erste systematische Theorie der Gleichungen dritten Grades --- geometrisch, weil die Algebra der Zeit nicht reichte. Descartes' \emph{Géométrie} tut $1637$ dasselbe mit Koordinaten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.22
+\stupserzwei{tief}{$\frac{q^{2}}4 - \frac{p^{3}}{27} = 4 - 125 = -121$. Bombelli: $\sqrt[3]{2 + 11i} + \sqrt[3]{2 - 11i} = (2 + i) + (2 - i) = 4$.}{22pt}
+\begin{loesungkarte}{tief}{7.22}{Bombelli und die Wurzel aus $-121$}
+\derweg{Lösungen prüfen; Cardano anwenden und die negative Wurzel stehen lassen; mit \enquote{più di meno} weiterrechnen wie mit Zahlen.}
+\schritt{(a)}
+$64 = 60 + 4$. \checkmark\ Polynomdivision $x^{3} - 15x - 4 = (x - 4)(x^{2} + 4x + 1)$, also $x = -2\pm\sqrt3$. Drei reelle Lösungen.
+\schritt{(b)}
+$p = 15$, $q = 4$: $\frac{q^{2}}4 - \frac{p^{3}}{27} = 4 - 125 = -121$. $x = \sqrt[3]{2 + \sqrt{-121}} + \sqrt[3]{2 - \sqrt{-121}}$. Cardano hätte gesagt: unmöglich --- und doch ist $x = 4$ eine ganz gewöhnliche Lösung.
+\schritt{(c)}
+$(2 + i)^{3} = 8 + 3\cdot4\cdot i + 3\cdot2\cdot i^{2} + i^{3} = 8 + 12i - 6 - i = 2 + 11i = 2 + \sqrt{-121}$. Ebenso $(2 - i)^{3} = 2 - 11i$. Also $x = (2 + i) + (2 - i) = 4$. Bombelli schrieb $i$ als \emph{più di meno} (\enquote{plus von minus}) und gab Rechenregeln: \emph{più di meno} mal \emph{più di meno} ist \emph{meno} --- $i\cdot i = -1$. Er rechnete damit, ohne zu wissen, was es ist.
+\schritt{(d)}
+\emph{Casus irreducibilis}: drei reelle Lösungen, aber die Formel geht durch komplexe Zahlen. Man kann ihn nicht auf reelle Wurzelausdrücke \enquote{zurückführen}: Wantzel bewies $1843$, dass bei drei reellen irrationalen Lösungen \emph{jede} Wurzelformel komplexe Zwischenwerte braucht. Die komplexen Zahlen sind hier nicht Bequemlichkeit, sondern Notwendigkeit.
+\probe{Die anderen beiden Lösungen aus Cardano: $\omega(2 + i) + \bar\omega(2 - i) = 2\operatorname{Re}\bigl(\omega(2 + i)\bigr)$ mit $\omega = e^{2\pi i/3}$. $\omega(2 + i) = (-\tfrac12 + \tfrac{\sqrt3}2i)(2 + i) = -1 - \tfrac{\sqrt3}2 + (\sqrt3 - \tfrac12)i$, also $x = -2 - \sqrt3$; mit $\bar\omega$ entsprechend $-2 + \sqrt3$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die komplexen Zahlen wurden nicht erfunden, um $x^{2} = -1$ zu lösen --- das hielt man für unmöglich und ließ es sein. Sie wurden erfunden, weil man sie für \emph{reelle} Lösungen \emph{brauchte}. Erst Euler ($i$, $1777$), Gauß (Zahlenebene, $1831$) und Hamilton (Zahlenpaare, $1837$) machten aus Bombellis Rechenregeln Zahlen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.23
+\stupserzwei{gruen}{Monate $1$ bis $12$: $1$, $1$, $2$, $3$, $5$, $8$, $13$, $21$, $34$, $55$, $89$, $144$. Fibonacci zählt den Startmonat mit und kommt im Monat $13$ auf $233$; ohne den Start sind es $144$ \emph{neue} Monate.}{22pt}
+\begin{loesungkarte}{gruen}{7.23}{Fibonaccis Kaninchen}
+\derweg{Modellannahmen, Rekursion aus \enquote{alte Paare plus Nachwuchs der reifen Paare}, Tabelle, Quotienten.}
+\schritt{Modell}
+Jedes Paar wird nach einem Monat reif, wirft danach jeden Monat ein Paar, keines stirbt, die Fortpflanzung ist synchron. Unrealistisch in allem --- aber es ist eine Rechenübung, keine Biologie.
+\schritt{Rekursion}
+$F_n$ Paare im Monat $n$: die $F_{n-1}$ des Vormonats plus ein Neugeborenes je Paar, das im Monat $n - 2$ schon da war (nur die sind reif): $F_n = F_{n-1} + F_{n-2}$, $F_1 = F_2 = 1$.
+\schritt{Tabelle}
+$1$, $1$, $2$, $3$, $5$, $8$, $13$, $21$, $34$, $55$, $89$, $144$. Nach zwölf Monaten $144$ Paare; Fibonacci selbst zählt den Anfangsmonat als nullten und gibt $377$ (nach $13$ Verdopplungen inklusive des ersten Wurfs) --- je nach Zählweise $144$, $233$ oder $377$. Die Rekursion ist das Wesentliche.
+\schritt{Quotienten}
+$\frac{F_{n+1}}{F_n}$: $1;\ 2;\ 1{,}5;\ 1{,}667;\ 1{,}6;\ 1{,}625;\ 1{,}615;\ 1{,}619;\ 1{,}618;\ \dots$ --- abwechselnd über und unter $\varphi = \frac{1 + \sqrt5}2 = 1{,}618034$ (Aufgabe 2.34: Binet). Die Näherungsbrüche des Kettenbruchs $[1; 1, 1, \dots]$ (Aufgabe 7.11).
+\probe{$F_{12} = 144 = 12^{2}$ --- die einzige Quadratzahl in der Folge außer $1$ (Cohn 1964). $F_{12} = \frac{\varphi^{12} - \psi^{12}}{\sqrt5} = \frac{321{,}997 + 0{,}003}{2{,}236} = 144{,}0$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Folge war in Indien schon bekannt (Silbenmuster in der Metrik, Pingala, um $200$ v.\,Chr.; Hemachandra $1150$). Fibonacci gab ihr eine Aufgabe, Kepler den goldenen Schnitt, Lucas ($1877$) den Namen. Der \emph{Liber abbaci} ist wichtiger für etwas anderes: Er brachte die indisch-arabischen Ziffern nach Europa.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.24
+\stupserzwei{gruen}{$x^{3} + 6x = 20$: $p = 6$, $q = -20$. $u^{3}, v^{3}$ sind die Lösungen von $z^{2} + 20z - 8 = 0$: $-10\pm\sqrt{108}$. $x = \sqrt[3]{\sqrt{108} + 10} - \sqrt[3]{\sqrt{108} - 10} = 2$.}{22pt}
+\begin{loesungkarte}{gruen}{7.24}{Cardanos Formel}
+\derweg{$x = u + v$, Nebenbedingung $3uv = -p$ wählen, dann sind $u^{3}, v^{3}$ Lösungen einer quadratischen Gleichung.}
+\schritt{Ansatz}
+$x = u + v$: $(u + v)^{3} + p(u + v) + q = u^{3} + v^{3} + 3uv(u + v) + p(u + v) + q = u^{3} + v^{3} + (3uv + p)(u + v) + q$.
+\schritt{Nebenbedingung}
+Eine Unbekannte wurde durch zwei ersetzt --- also darf man eine Bedingung frei wählen: $3uv = -p$. Dann bleibt $u^{3} + v^{3} = -q$, und $u^{3}v^{3} = -\frac{p^{3}}{27}$.
+\schritt{Vieta}
+$u^{3}$ und $v^{3}$ sind Lösungen von $z^{2} + qz - \frac{p^{3}}{27} = 0$: $z = -\frac q2\pm\sqrt{\frac{q^{2}}4 + \frac{p^{3}}{27}}$. Also
+\[ x = \sqrt[3]{-\frac q2 + \sqrt{\frac{q^{2}}4 + \frac{p^{3}}{27}}} + \sqrt[3]{-\frac q2 - \sqrt{\frac{q^{2}}4 + \frac{p^{3}}{27}}}. \]
+\schritt{Cardanos Beispiel}
+$x^{3} + 6x - 20 = 0$: $p = 6$, $q = -20$. $\frac{q^{2}}4 + \frac{p^{3}}{27} = 100 + 8 = 108$. $x = \sqrt[3]{10 + \sqrt{108}} + \sqrt[3]{10 - \sqrt{108}} = \sqrt[3]{20{,}392} + \sqrt[3]{-0{,}392} = 2{,}732 - 0{,}732 = 2$. Cardano schreibt das Ergebnis in Wurzeln und bemerkt, es sei $2$ --- Probe: $8 + 12 = 20$. \checkmark
+\schritt{Die anderen Lösungen}
+$x^{3} + 6x - 20 = (x - 2)(x^{2} + 2x + 10)$, $x = -1\pm3i$: komplex. Für Cardano gab es sie nicht; sein Beispiel ist so gewählt, dass die Wurzel positiv ist und keine Komplikation auftritt.
+\probe{$\sqrt[3]{10 + \sqrt{108}} = 1 + \sqrt3$: $(1 + \sqrt3)^{3} = 1 + 3\sqrt3 + 9 + 3\sqrt3 = 10 + 6\sqrt3 = 10 + \sqrt{108}$. \checkmark\ Und $\sqrt[3]{10 - \sqrt{108}} = 1 - \sqrt3$; Summe $2$. \checkmark}
+\begin{mitnehmen}\kastentext
+Der Trick --- Freiheit durch eine überflüssige Unbekannte --- ist allgemein: Man führt mehr Variablen ein, als man braucht, und wählt die Nebenbedingung so, dass sich etwas vereinfacht. Dieselbe Idee steckt in der Variation der Konstanten (Band 14) und in Lagrange-Multiplikatoren (Aufgabe 3.49). Die Formel selbst ist in der Praxis selten nützlich: Numerik (Aufgabe 5.23) ist schneller.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.25
+\stupserzwei{gruen}{$\log3{,}472 = 0{,}5406$, $\log2{,}718 = 0{,}4343$, Summe $0{,}9749$, Antilog $9{,}438$. Exakt $9{,}437$.}{22pt}
+\begin{loesungkarte}{gruen}{7.25}{Napiers Logarithmen}
+\derweg{Das Prinzip aus der Funktionalgleichung; Napiers kinematische Definition; zwei Rechnungen mit Tafelwerten.}
+\schritt{Prinzip}
+Eine Funktion mit $\log(ab) = \log a + \log b$ verwandelt Multiplikation in Addition: Tafel nachschlagen, addieren, zurückschlagen. Entsprechend $\log\sqrt[n]a = \frac1n\log a$: Wurzeln werden Divisionen.
+\schritt{Napiers Definition}
+Zwei Punkte starten gleichzeitig: Einer läuft mit konstanter Geschwindigkeit auf einer unendlichen Geraden, der andere auf einer Strecke der Länge $10^{7}$ mit einer Geschwindigkeit, die proportional zum verbleibenden Weg ist. Der Logarithmus von $x$ (dem Restweg) ist der Weg des ersten Punkts: $\mathrm{NapLog}(x) = 10^{7}\ln\frac{10^{7}}x$. Kein $e$, keine Basis --- $e$ steckt in der Differentialgleichung $\dot x = -x$ versteckt. $\mathrm{NapLog}(ab)$ ist \emph{nicht} $\mathrm{NapLog}(a) + \mathrm{NapLog}(b)$, sondern erfüllt eine ähnliche Regel mit Korrekturterm; Briggs ($1617$) richtete die Tafel mit $\log1 = 0$, $\log10 = 1$ ein.
+\schritt{Produkt}
+$\log3{,}472 = 0{,}5406$, $\log2{,}718 = 0{,}4343$ (vierstellige Tafel). Summe $0{,}9749$. Antilogarithmus $10^{0{,}9749} = 9{,}438$. Exakt $3{,}472\cdot2{,}718 = 9{,}437$. Fehler in der vierten Stelle --- vierstellige Logarithmen geben etwa vier Stellen.
+\schritt{Wurzel}
+$\log1234 = 3{,}0913$; durch $3$: $1{,}0304$; Antilog $10{,}73$. Exakt $\sqrt[3]{1234} = 10{,}726$. Eine Kubikwurzel ohne Logarithmen hätte Iteration gekostet; mit Tafel sind es zwei Nachschlagen und eine Division.
+\probe{Die Fehlergrenze: Tafelwerte auf $\pm5\cdot10^{-5}$, also relative Fehler des Ergebnisses etwa $\ln10\cdot10^{-4} = 2\cdot10^{-4}$ --- $9{,}438$ gegen $9{,}437$ passt. \checkmark}
+\begin{mitnehmen}\kastentext
+Logarithmen waren $350$ Jahre das Rechenwerkzeug --- Tafeln, Rechenschieber, Rechenstab. Kepler rechnete damit die Rudolfinischen Tafeln, Laplace sagte, sie hätten das Leben der Astronomen verdoppelt. Dass $\ln$ die Umkehrung von $e^{x}$ ist, kam später (Euler $1748$); Napier hatte eine Kinematik, Briggs eine Tabelle, beide ohne Exponentialfunktion.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.26
+\stupserzwei{tief}{$x^{2} + (y - c)^{2} = r^{2}$ mit $x^{2} = y$: $y^{2} + (1 - 2c)y + c^{2} - r^{2} = 0$. Doppelte Nullstelle bei $y = 1$: $(y - 1)^{2} = y^{2} - 2y + 1$, also $1 - 2c = -2$, $c = \frac32$.}{22pt}
+\begin{loesungkarte}{tief}{7.26}{Descartes' Normalenmethode}
+\derweg{Kreis um $(0, c)$ mit der Kurve schneiden; Berührung heißt doppelte Nullstelle; Koeffizientenvergleich gibt $c$; die Normale ist die Verbindung zum Mittelpunkt.}
+\schritt{Ansatz}
+Kreis mit Mittelpunkt $(0, c)$ durch $(1, 1)$: $x^{2} + (y - c)^{2} = 1 + (1 - c)^{2}$. Auf der Parabel ist $x^{2} = y$: $y + (y - c)^{2} = 1 + (1 - c)^{2}$, also $y^{2} + (1 - 2c)y + c^{2} - 1 - (1 - c)^{2} = 0$, also $y^{2} + (1 - 2c)y + 2c - 2 = 0$.
+\schritt{Berührung}
+Der Kreis berührt die Parabel in $(1, 1)$ genau dann, wenn $y = 1$ doppelte Nullstelle ist: $y^{2} + (1 - 2c)y + 2c - 2 = (y - 1)^{2} = y^{2} - 2y + 1$. Vergleich: $1 - 2c = -2$, also $c = \frac32$; und $2c - 2 = 1$. \checkmark
+\schritt{Normale und Tangente}
+Normale: von $(1, 1)$ zum Mittelpunkt $(0, \frac32)$, Richtung $(-1, \frac12)$, Steigung $-\frac12$. Tangente senkrecht dazu: Steigung $2$. Ableitung: $y' = 2x = 2$ bei $x = 1$. \checkmark
+\schritt{Warum unhandlich}
+Für $y = x^{3}$ im Punkt $(1, 1)$ entsteht mit $y = x^{3}$ eine Gleichung sechsten Grades in $x$, die bei $x = 1$ eine doppelte Nullstelle haben soll --- der Koeffizientenvergleich wird lang. Für transzendente Kurven (Zykloide, Spirale) gibt es keine algebraische Gleichung, und die Methode versagt ganz. Fermats und Newtons Zugang über Differenzenquotienten (Aufgabe 7.27) ist allgemein und kurz --- aber nicht algebraisch rein.
+\probe{Der Kreis $x^{2} + (y - \frac32)^{2} = \frac54$: bei $x = 1$, $y = 1$: $1 + \frac14 = \frac54$. \checkmark\ Schmiegkreis der Parabel bei $(1, 1)$ hat Radius $5{,}59$ (Aufgabe 6.27), Descartes' Kreis $1{,}12$ --- er berührt, schmiegt sich aber nicht an.}
+\begin{mitnehmen}\kastentext
+Descartes wollte Tangenten ohne Infinitesimalien: \enquote{Berührung $=$ doppelte Nullstelle} ist rein algebraisch und völlig streng --- und genau deshalb auf algebraische Kurven beschränkt. Der Streit Descartes--Fermat ($1638$) über Tangentenmethoden ist der Streit zwischen algebraischer Strenge und analytischer Reichweite; die Analysis gewann, und ihre Strenge kam erst $200$ Jahre später nach.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.27
+\stupserzwei{gruen}{$bx - x^{2}\approx bx - x^{2} + be - 2xe - e^{2}$; also $be - 2xe - e^{2}\approx0$; durch $e$: $b - 2x - e\approx0$; $e$ weglassen: $x = \frac b2$.}{22pt}
+\begin{loesungkarte}{gruen}{7.27}{Fermats Adäqualität}
+\derweg{$f(x)$ und $f(x + e)$ adäqual setzen, vereinfachen, durch $e$ teilen, $e$ streichen.}
+\schritt{Ansatz}
+Teile $x$ und $b - x$, Rechteck $f(x) = x(b - x) = bx - x^{2}$. Fermat: In der Nähe des Maximums sind $f(x)$ und $f(x + e)$ \enquote{adäqual} (ungefähr gleich): $bx - x^{2}\approx b(x + e) - (x + e)^{2} = bx - x^{2} + be - 2xe - e^{2}$.
+\schritt{Vereinfachen}
+Gleiche Terme weg: $0\approx be - 2xe - e^{2}$. Durch $e$ teilen: $0\approx b - 2x - e$. Nun $e$ streichen (\enquote{weglassen}): $b - 2x = 0$, $x = \frac b2$. Das Rechteck ist das Quadrat.
+\schritt{Berkeleys Einwand}
+Erst teilt man durch $e$ --- also ist $e\neq0$. Dann setzt man $e = 0$. Berkeley ($1734$, gegen Newton): Das seien \enquote{Geister verstorbener Größen}. Fermat sagt \enquote{adäqual}, nicht \enquote{gleich}, und das ist ehrlicher als Leibniz' Gleichheitszeichen (Aufgabe 7.32) --- aber eine Definition von \enquote{adäqual} gibt er nicht.
+\schritt{Modern}
+$\frac{f(x + e) - f(x)}e = b - 2x - e\to b - 2x$ für $e\to0$: Der Grenzwert des Differenzenquotienten ist null im Extremum. Fermats Rechnung ist genau diese, mit $\approx$ statt $\lim$. Er hat die Ableitung und die notwendige Bedingung $f' = 0$ --- ohne beide Begriffe.
+\probe{$f(\frac b2) = \frac{b^{2}}4$; $f(\frac b2\pm e) = \frac{b^{2}}4 - e^{2}$: Die Änderung ist zweiter Ordnung in $e$ --- das ist der Grund, warum \enquote{adäqual} funktioniert. \checkmark}
+\begin{mitnehmen}\kastentext
+Fermat ($1636$) fand auch Tangenten so und wusste, dass Maximum und Tangente dieselbe Rechnung sind. Was fehlte: der Grenzwert als Begriff, der \enquote{durch $e$ teilen, dann $e = 0$} rechtfertigt. Cauchy lieferte ihn $1821$ --- bis dahin rechnete man zweihundert Jahre richtig mit einer unbegründeten Methode.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.28
+\stupserzwei{gruen}{Vier Verläufe der nächsten zwei Runden: $AA, AB, BA, BB$. In dreien gewinnt $A$. Also $\frac34\cdot64 = 48$ für $A$, $16$ für $B$.}{22pt}
+\begin{loesungkarte}{gruen}{7.28}{Das Teilungsproblem}
+\derweg{Fermat: alle gleich wahrscheinlichen Verläufe zählen. Pascal: vom sicheren Anteil rückwärts. Beide: Es zählt die Zukunft, nicht die Vergangenheit.}
+\schritt{Fermat}
+$A$ braucht noch einen Sieg, $B$ zwei. Spätestens nach zwei Runden ist entschieden. Fermats Kunstgriff: Man denkt sich beide Runden gespielt, auch wenn die zweite oft nicht mehr nötig ist --- dann sind alle vier Verläufe $AA, AB, BA, BB$ gleich wahrscheinlich. $A$ gewinnt in $AA, AB, BA$: $P(A) = \frac34$. Aufteilung $48 : 16$.
+\schritt{Pascal}
+Rückwärts: Beim Stand $2 : 2$ wäre die Lage symmetrisch, jeder bekäme $32$. Beim Stand $2 : 1$: Gewinnt $A$ die nächste Runde, erhält er $64$; verliert er, steht es $2 : 2$ und er erhält $32$. In jedem Fall mindestens $32$ --- die gehören ihm sicher. Um die übrigen $32$ wird mit gleichen Chancen gespielt: je $16$. $A$: $32 + 16 = 48$. --- Das ist der Erwartungswert $\frac12\cdot64 + \frac12\cdot32 = 48$, ein Begriff, den Pascal hier erstmals verwendet.
+\schritt{Pacioli}
+$2 : 1$ teilt nach den \emph{gewonnenen} Runden --- der Vergangenheit. Aber der Einsatz gehört dem, der das Spiel gewonnen \emph{hätte}, und das hängt von den \emph{ausstehenden} Runden ab. Beim Stand $2 : 0$ gäbe Pacioli alles an $A$, obwohl $B$ noch mit $\frac18$ gewinnen kann (drei Siege in Folge); beim Stand $1 : 0$ gäbe er auch alles an $A$ --- absurd.
+\probe{Stand $2 : 0$: $B$ braucht drei Siege: $P(B) = \frac18$, $A$ erhält $56$. Stand $1 : 0$: $A$ braucht zwei, $B$ drei; von vier Runden gewinnt $A$, wenn er mindestens zwei gewinnt: $\frac{11}{16}$, also $44$. \checkmark}
+\begin{mitnehmen}\kastentext
+Der Briefwechsel Pascal--Fermat ($1654$) ist die Geburtsurkunde der Wahrscheinlichkeitsrechnung: Fermats Abzählen gleich wahrscheinlicher Fälle ist Laplace' Definition (Aufgabe 4.1), Pascals Rückwärtsrechnen ist die Methode des ersten Schritts (Aufgabe 4.34). Und die Einsicht, dass die Zukunft zählt, ist die Grundlage jeder Bewertung von Optionen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.29
+\stupserzwei{tief}{(b) Fehler von $\pi$ nach $n$ Gliedern $< \frac4{2n + 1}$. Für $0{,}005$: $n > 400$. Für $5\cdot10^{-11}$: $n > 4\cdot10^{10}$.}{22pt}
+\begin{loesungkarte}{tief}{7.29}{Die Leibniz-Reihe}
+\derweg{Geometrische Reihe gliedweise integrieren; Leibniz-Fehlerschranke; Machins Formel mit kleinen Argumenten.}
+\schritt{(a)}
+$\frac1{1 + t^{2}} = 1 - t^{2} + t^{4} - \dots$ für $|t| < 1$; gliedweise integriert: $\arctan x = x - \frac{x^{3}}3 + \frac{x^{5}}5 - \dots$ Bei $x = 1$ (Rand des Konvergenzbereichs, Abelscher Grenzwertsatz): $\frac\pi4 = 1 - \frac13 + \frac15 - \dots$
+\schritt{(b)}
+Alternierend mit fallenden Gliedern: Fehler $< $ erstes weggelassenes Glied $\frac1{2n + 1}$; für $\pi$ mal $4$. Zwei Nachkommastellen ($< 0{,}005$): $\frac4{2n + 1} < 0{,}005$, $n > 400$. Zehn Stellen: $n > 4\cdot10^{10}$ --- bei einer Million Gliedern pro Sekunde elf Stunden. Mit $400$ Gliedern: $3{,}1391$ (Fehler $0{,}0025$). \checkmark
+\schritt{(c)}
+$\arctan\frac15 = 0{,}2 - \frac{0{,}008}3 + \frac{0{,}00032}5 - \frac{0{,}0000128}7 = 0{,}2 - 0{,}0026667 + 0{,}0000640 - 0{,}0000018 = 0{,}1973955$ (vier Glieder). $\arctan\frac1{239} = 0{,}0041841 - \frac{7{,}3\cdot10^{-8}}3 = 0{,}0041841$ (zwei Glieder). $\frac\pi4 = 4\cdot0{,}1973955 - 0{,}0041841 = 0{,}7853979$, $\pi = 3{,}141592$ --- sechs Stellen mit sechs Gliedern. (Mit fünf Gliedern für $\arctan\frac15$: $3{,}1415927$.)
+\schritt{(d)}
+Die Glieder bei $x = \frac15$ fallen wie $\frac1{(2k + 1)25^{k}}$ --- jedes Glied bringt $1{,}4$ Dezimalstellen; bei $x = 1$ fallen sie nur wie $\frac1{2k + 1}$. Der Konvergenzradius ist $1$; am Rand ist die Konvergenz logarithmisch langsam, im Inneren geometrisch schnell. Machins Kunst war, $\frac\pi4$ aus Arkustangens \emph{kleiner} Argumente zusammenzusetzen.
+\probe{Machins Identität: $\tan(4\arctan\frac15) = \frac{120}{119}$ (zweimal Doppelwinkel), und $\tan(\arctan\frac{120}{119} - \arctan\frac1{239}) = \frac{120/119 - 1/239}{1 + 120/(119\cdot239)} = \frac{28\,561}{28\,561} = 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Leibniz' Reihe ist schön, weil sie $\pi$ mit den ungeraden Zahlen verbindet (Madhava kannte sie $300$ Jahre früher, mit Korrekturtermen). Zum Rechnen taugt sie nicht; Machin-Formeln rechneten $\pi$ bis $1949$ ($2037$ Stellen, ENIAC), danach übernahmen AGM-Verfahren (Aufgabe 7.15) und Ramanujans Reihen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.30
+\stupserzwei{akzent}{(c) $\sum(-1)^{n}x^{n} = \frac1{1 + x}$ für $|x| < 1$; $\lim_{x\to1^{-}}\frac1{1 + x} = \frac12$. Die Abel-Summe ist $\frac12$ --- Eulers Wert, als Grenzwert richtig gelesen.}{22pt}
+\begin{loesungkarte}{akzent}{7.30}{Was Euler durfte}
+\derweg{Divergenz über Partialsummen; die falschen Gleichungen in richtige Grenzwertaussagen übersetzen; Abel-Summation als die Regel, die Euler fehlte.}
+\schritt{(a)}
+Partialsummen $1, 0, 1, 0, \dots$: keine Konvergenz. Klammern: $(1 - 1) + (1 - 1) + \dots = 0$, aber $1 - (1 - 1) - (1 - 1) - \dots = 1$. Grandi ($1703$) schloss daraus auf die Schöpfung aus dem Nichts; Euler schloss auf $\frac12$ --- als Mittel, und weil $\frac1{1 + x}$ bei $x = 1$ gleich $\frac12$ ist.
+\schritt{(b)}
+$1 - 2 + 3 - 4 + \dots$: Partialsummen $1, -1, 2, -2, \dots$, divergent. $1 + 2 + 4 + \dots$: divergiert gegen $+\infty$; $-1$ ist absurd als Summe. Richtig gemeint: Die Funktionen $\frac1{(1 + x)^{2}}$ und $\frac1{1 - x}$ setzen die Potenzreihen über ihren Konvergenzkreis hinaus fort (analytische Fortsetzung); der Wert der \emph{Funktion} an der Stelle ist $\frac14$ bzw.\ $-1$. Die \emph{Reihe} hat dort keinen Wert. Euler verwechselte Funktion und Reihe --- und hatte bei der Funktion immer recht.
+\schritt{(c)}
+Abel-Summe von $\sum a_n$: $\lim_{x\to1^{-}}\sum a_nx^{n}$, falls existent. Für $a_n = (-1)^{n}$: $\sum(-1)^{n}x^{n} = \frac1{1 + x}\to\frac12$. Abelscher Grenzwertsatz: Konvergiert $\sum a_n$ gegen $s$, so ist auch die Abel-Summe $s$ --- die Methode ist \emph{regulär}, sie widerspricht der gewöhnlichen Summe nie. Sie erweitert sie nur auf manche divergente Reihen ($1 - 1 + 1 - \dots$, $1 - 2 + 3 - \dots$), nicht auf alle ($1 + 2 + 4 + \dots$ hat auch keine Abel-Summe; $x = 2$ liegt außerhalb).
+\schritt{(d)}
+Regel: Eine Potenzreihe darf man am Randpunkt $x_0$ des Konvergenzkreises auswerten, \emph{wenn die Zahlenreihe dort konvergiert}; dann ist ihr Wert der Grenzwert der Funktion (Abel). Konvergiert sie dort nicht, ist der Funktionswert kein Reihenwert. Euler hatte die Regel nicht und setzte immer ein; Cauchy verbot es; Abel ($1826$) bewies, wann es geht.
+\begin{fehler}\kastentext
+\enquote{Die Funktion hat bei $x = 1$ den Wert $\frac12$} und \enquote{die Reihe bei $x = 1$ hat die Summe $\frac12$} sind verschiedene Aussagen, und nur die erste ist wahr. Euler nahm die zweite als Definition --- was zulässig ist, wenn man es sagt (Abel-, Cesàro-, Borel-Summation) und unzulässig, wenn man dann mit \enquote{$=$} weiterrechnet wie mit konvergenten Reihen.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Eulers Instinkt war richtig: Divergente Reihen tragen Information, und es gibt konsistente Regeln, sie zu summieren (Hardy, \emph{Divergent Series}, $1949$). $1 + 2 + 3 + \dots = -\frac1{12}$ ist in diesem Sinn die Zeta-Regularisierung --- physikalisch real im Casimir-Effekt, und als Gleichung zwischen Zahlen falsch.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.31
+\stupserzwei{gruen}{$\sqrt2 = \frac75\sqrt{\frac{50}{49}} = 1{,}4\sqrt{1 + \frac1{49}}$: $1 + \frac1{98} - \frac1{8\cdot49^{2}} + \frac1{16\cdot49^{3}} = 1{,}01015254$; mal $1{,}4$: $1{,}4142136$.}{22pt}
+\begin{loesungkarte}{gruen}{7.31}{Newtons Binomialreihe}
+\derweg{Binomialkoeffizienten mit $\frac12$ ausrechnen; $x = 1$ ist am Rand, $x = \frac1{49}$ tief im Inneren.}
+\schritt{Verallgemeinerung}
+$(1 + x)^{\alpha} = \sum\binom\alpha kx^{k}$ mit $\binom\alpha k = \frac{\alpha(\alpha - 1)\cdots(\alpha - k + 1)}{k!}$ --- für ganzes $\alpha$ bricht die Reihe ab (binomischer Satz), für gebrochenes nicht. Newton sah das Muster an den Zwischenzeilen des Pascalschen Dreiecks und vertraute ihm; bewiesen hat es Euler (für rationale $\alpha$) und Abel ($1826$, mit Konvergenzradius $1$).
+\schritt{Reihe für $\sqrt{1 + x}$}
+$\binom{1/2}1 = \frac12$, $\binom{1/2}2 = \frac{\frac12\cdot(-\frac12)}2 = -\frac18$, $\binom{1/2}3 = \frac{\frac12(-\frac12)(-\frac32)}6 = \frac1{16}$, $\binom{1/2}4 = -\frac5{128}$. $\sqrt{1 + x} = 1 + \frac x2 - \frac{x^{2}}8 + \frac{x^{3}}{16} - \frac{5x^{4}}{128} + \dots$
+\schritt{$x = 1$}
+$\sqrt2 = 1 + 0{,}5 - 0{,}125 + 0{,}0625 - 0{,}039 + 0{,}027 - \dots$: Die Glieder fallen wie $k^{-3/2}$ --- konvergent, aber nach $100$ Gliedern erst zwei Stellen. Rand des Konvergenzkreises.
+\schritt{Newtons Trick}
+$\sqrt2 = \sqrt{\frac{49}{25}\cdot\frac{50}{49}} = \frac75\sqrt{1 + \frac1{49}}$. $x = \frac1{49} = 0{,}020408$: $1 + 0{,}0102041 - 0{,}0000521 + 0{,}0000005 - \dots = 1{,}0101525$. Mal $1{,}4$: $1{,}4142135$. Sieben Stellen mit vier Gliedern; jedes weitere Glied bringt etwa $1{,}7$ Stellen.
+\probe{$\sqrt2 = 1{,}41421356$. \checkmark\ Newtons Fassung: Er rechnete so Logarithmen auf $50$ Stellen und schämte sich später, \enquote{zu viele Stellen} berechnet zu haben.}
+\begin{mitnehmen}\kastentext
+Die Binomialreihe war Newtons erstes großes Werkzeug: Mit ihr integrierte er $\sqrt{1 - x^{2}}$ (Kreisfläche, also $\pi$), $\frac1{1 + x}$ (Logarithmus) und fand die Reihen für $\sin$ und $\arcsin$. Und der Trick \enquote{nahe bei einem bekannten Wert entwickeln} ist derselbe wie bei Taylor um $x_0\neq0$ (Aufgabe 3.32).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.32
+\stupserzwei{gruen}{$du\,dv$ ist \enquote{unendlich klein von zweiter Ordnung}: Teilt man durch $dx$, bleibt $\frac{du}{dx}dv$, und $dv\to0$. Der Grenzwert tut, was Leibniz durch Streichen tat.}{22pt}
+\begin{loesungkarte}{gruen}{7.32}{Leibniz' Produktregel}
+\derweg{Differential des Produkts ausmultiplizieren, das Produkt der Differentiale streichen; dann die drei Rechtfertigungen.}
+\schritt{Leibniz}
+$d(uv) = (u + du)(v + dv) - uv = u\,dv + v\,du + du\,dv$. Leibniz: $du\,dv$ ist unendlich klein gegenüber $u\,dv$ und $v\,du$ (zweite gegen erste Ordnung) und wird weggelassen: $d(uv) = u\,dv + v\,du$. (In seinem Manuskript von $1675$ probierte er zuerst $d(uv) = du\,dv$ --- und merkte am Beispiel, dass es falsch ist.)
+\schritt{Was unstreng ist}
+$du$ ist entweder $0$ --- dann ist $d(uv) = 0$, nichts gewonnen --- oder nicht $0$ --- dann darf man $du\,dv$ nicht streichen. Berkeleys Einwand (Aufgabe 7.27). Leibniz antwortete, $du$ sei \enquote{unvergleichlich klein}, wie ein Sandkorn gegen die Erde: eine Analogie, keine Definition.
+\schritt{Grenzwert}
+$\frac{(u + \Delta u)(v + \Delta v) - uv}{\Delta x} = u\frac{\Delta v}{\Delta x} + v\frac{\Delta u}{\Delta x} + \frac{\Delta u}{\Delta x}\Delta v$. Für $\Delta x\to0$: Die ersten beiden Terme gehen gegen $uv' + vu'$, der dritte gegen $u'\cdot0 = 0$, weil $\Delta v\to0$ (Stetigkeit von $v$). Das Streichen ist ein Grenzübergang, und der dritte Term verschwindet \emph{wirklich}, nicht \enquote{ungefähr}.
+\schritt{Nichtstandardanalysis}
+Robinson ($1961$): Es gibt Zahlkörper mit echten infinitesimalen Elementen (kleiner als jede positive reelle Zahl, aber $\neq0$). Dort ist $du\,dv$ eine infinitesimale Zahl zweiter Ordnung, und $d(uv)/dx = uv' + vu' + u'\,dv$; der \emph{Standardteil} (die nächste reelle Zahl) ist $uv' + vu'$. Leibniz' Rechnung wird wörtlich richtig --- mit einem Schlussschritt, dem Standardteil, den er \enquote{Streichen} nannte.
+\probe{$u = v = x$: $d(x^{2}) = x\,dx + x\,dx = 2x\,dx$. \checkmark\ Mit $du\,dv$: $2x\,dx + dx^{2}$, und $\frac{dx^{2}}{dx} = dx\to0$. \checkmark}
+\begin{mitnehmen}\kastentext
+Leibniz' Kalkül war richtig, bevor er begründet war --- $150$ Jahre lang. Die Begründung kam dreimal: Cauchy/Weierstraß (Grenzwerte, $1821$--$1870$), Robinson (Infinitesimalien, $1961$), und die glatte Infinitesimalanalysis (Lawvere, $1970$er). Alle drei sagen: Leibniz hatte recht, und sein $du\,dv$ darf weg.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.33
+\stupserzwei{gruen}{Koeffizient von $x^{2}$ im Produkt: $-\sum\frac1{n^{2}\pi^{2}}$. In der Reihe: $-\frac16$. Also $\sum\frac1{n^{2}} = \frac{\pi^{2}}6$.}{22pt}
+\begin{loesungkarte}{gruen}{7.33}{Das Basler Problem}
+\derweg{$\sin x$ wie ein Polynom über seine Nullstellen faktorisieren; Koeffizientenvergleich mit der Taylorreihe.}
+\schritt{Die Idee}
+Ein Polynom mit $p(0) = 1$ und Nullstellen $r_1, \dots, r_n$ ist $p(x) = \prod\bigl(1 - \frac x{r_i}\bigr)$. Euler behandelt $\frac{\sin x}x$ (Wert $1$ bei $0$, Nullstellen $\pm\pi, \pm2\pi, \dots$) genauso:
+\[ \frac{\sin x}x = \prod_{n\ge1}\Bigl(1 - \frac x{n\pi}\Bigr)\Bigl(1 + \frac x{n\pi}\Bigr) = \prod_{n\ge1}\Bigl(1 - \frac{x^{2}}{n^{2}\pi^{2}}\Bigr). \]
+\schritt{Koeffizientenvergleich}
+Links: $\frac{\sin x}x = 1 - \frac{x^{2}}6 + \frac{x^{4}}{120} - \dots$ Rechts, ausmultipliziert bis $x^{2}$: $1 - \Bigl(\sum_{n\ge1}\frac1{n^{2}\pi^{2}}\Bigr)x^{2} + \dots$ Vergleich: $\frac1{\pi^{2}}\sum\frac1{n^{2}} = \frac16$, also $\sum_{n\ge1}\frac1{n^{2}} = \frac{\pi^{2}}6 = 1{,}644934$.
+\schritt{Die Lücke}
+Warum darf man eine unendliche Reihe wie ein Polynom faktorisieren? Ein Polynom ist durch Nullstellen und Leitkoeffizient bestimmt; $e^{x}\cdot\frac{\sin x}x$ hat dieselben Nullstellen und denselben Wert bei $0$. Euler brauchte, dass es keine solche \enquote{versteckte} Funktion gibt --- das ist der Produktsatz von Weierstraß ($1876$), und für $\sin$ stimmt es, weil $\sin$ \enquote{langsam wächst} (Ordnung $1$). Euler wusste, dass hier etwas fehlte, und gab $1741$ einen zweiten Beweis.
+\schritt{Numerische Probe}
+Euler hatte vorher die Summe mit Beschleunigungstricks auf $20$ Stellen berechnet: $1{,}64493406684822643647$. Dann fand er die Formel und prüfte: $\frac{\pi^{2}}6 = 1{,}64493406684822643647$. Übereinstimmung auf $20$ Stellen --- das überzeugte ihn und alle anderen, bevor der Beweis stand.
+\probe{Koeffizient von $x^{4}$: $\frac1{120} = \frac1{\pi^{4}}\sum_{m < n}\frac1{m^{2}n^{2}}$, woraus mit $\bigl(\sum\frac1{n^{2}}\bigr)^{2} = \sum\frac1{n^{4}} + 2\sum_{m < n}$ folgt: $\sum\frac1{n^{4}} = \frac{\pi^{4}}{90}$. Euler rechnete so bis $\zeta(26)$. \checkmark}
+\begin{mitnehmen}\kastentext
+Eulers Lösung ist das Muster für \enquote{kühne Analogie, numerisch geprüft, später bewiesen}. Die Werte $\zeta(2k)$ sind alle rationale Vielfache von $\pi^{2k}$; über $\zeta(3)$ weiß man nur, dass es irrational ist (Apéry $1978$). Die Riemannsche Zetafunktion (Band 10) beginnt mit dieser Reihe.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.34
+\stupserzwei{tief}{(b) $r' = r + \frac{2 - r^{2}}{r + 2} = \frac{2r + 2}{r + 2}$; $2 - r'^{2} = \frac{2(2 - r^{2})}{(r + 2)^{2}} > 0$. Also $r' > r$ und $r'\in A$.}{22pt}
+\begin{loesungkarte}{tief}{7.34}{Ein Dedekind-Schnitt}
+\derweg{Die drei Schnitteigenschaften prüfen; dann zeigen, dass weder $A$ ein Maximum noch $B$ ein Minimum hat --- das ist die Lücke, die $\sqrt2$ heißt.}
+\schritt{(a)}
+$0\in A$, $2\in B$ (da $4 > 2$): beide nichtleer; $2$ ist obere Schranke von $A$. Ist $a\in A$, $b\in B$, so $a\le0 < b$ oder ($a > 0$ und $a^{2} < 2\le b^{2}$, also $a < b$, da beide positiv). Jedes $a$ ist kleiner als jedes $b$: ein Schnitt.
+\schritt{(b)}
+Sei $r\in A$, $r > 0$, $r^{2} < 2$. Setze $r' = \frac{2r + 2}{r + 2}$. Dann $r' - r = \frac{2r + 2 - r^{2} - 2r}{r + 2} = \frac{2 - r^{2}}{r + 2} > 0$, also $r' > r$. Und $2 - r'^{2} = \frac{2(r + 2)^{2} - (2r + 2)^{2}}{(r + 2)^{2}} = \frac{2r^{2} + 8r + 8 - 4r^{2} - 8r - 4}{(r + 2)^{2}} = \frac{4 - 2r^{2}}{(r + 2)^{2}} = \frac{2(2 - r^{2})}{(r + 2)^{2}} > 0$, also $r'\in A$. Kein Element von $A$ ist das größte.
+\schritt{(c)}
+Dieselbe Formel: Für $r\in B$ ($r > 0$, $r^{2} > 2$) ist $r' < r$ und $r'^{2} > 2$, also $r'\in B$ und kleiner. Kein kleinstes Element. --- Die Lücke: $A$ hat kein Supremum in $\mathbb Q$ (es müsste das größte Element von $A$ oder das kleinste von $B$ sein). In $\mathbb R$ \emph{definiert} Dedekind: Die reelle Zahl $\sqrt2$ \emph{ist} dieser Schnitt. Das Supremum von $A$ in $\mathbb R$ ist der Schnitt selbst.
+\schritt{(d)}
+$A' = \{r < 1\}$, $B' = \{r\ge1\}$: $B'$ hat ein kleinstes Element, $1$. Dieser Schnitt \enquote{ist} die rationale Zahl $1$; es klafft keine Lücke. Rationale Zahlen sind Schnitte, bei denen eine Klasse ein Randelement hat; irrationale sind Schnitte ohne. Zusammen bilden alle Schnitte $\mathbb R$ --- und das Vollständigkeitsaxiom (jede beschränkte Menge hat ein Supremum) wird zum Satz.
+\probe{$r = 1$: $r' = \frac43 = 1{,}333$; $r'' = \frac{14/3}{10/3} = 1{,}4$; $r''' = \frac{4{,}8}{3{,}4} = 1{,}4118$; weiter $1{,}4138$, $1{,}41416$ --- von unten gegen $\sqrt2$. \checkmark\ (Die Iteration $r\mapsto\frac{2r + 2}{r + 2}$ ist der Kettenbruch $[1; 2, 2, 2, \dots]$, Aufgabe 7.11.)}
+\begin{mitnehmen}\kastentext
+Dedekind ($1858$ gefunden, $1872$ veröffentlicht): Eine reelle Zahl ist eine Lücke in $\mathbb Q$ --- oder ein rationaler Punkt. Das ist Eudoxos' Proportionenlehre (Euklid V, Def.\ 5) in moderner Form; Dedekind sagt es selbst. Damit stand die Analysis erstmals auf den natürlichen Zahlen, ohne Geometrie und ohne Anschauung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.35
+\stupserzwei{gruen}{Gliedweise abgeleitet: $-\sum a^{n}b^{n}\pi\sin(b^{n}\pi x)$ mit $(ab)^{n}\to\infty$: Die Summanden werden \emph{größer}, nicht kleiner. Das ist der Grund, warum die Ableitung scheitert --- und noch kein Beweis.}{22pt}
+\begin{loesungkarte}{gruen}{7.35}{Die Weierstraß-Funktion}
+\derweg{Stetigkeit über gleichmäßige Konvergenz; Nichtdifferenzierbarkeit über Differenzenquotienten, die mit $(ab)^{n}$ wachsen.}
+\schritt{Stetig}
+$|a^{n}\cos(b^{n}\pi x)|\le a^{n}$, und $\sum a^{n} = \frac1{1 - a} < \infty$. Weierstraß' Majorantenkriterium: Die Reihe konvergiert gleichmäßig; eine gleichmäßig konvergente Reihe stetiger Funktionen ist stetig (Aufgabe 3.45). Fertig --- die Stetigkeit ist die leichte Hälfte.
+\schritt{Nicht differenzierbar: die Idee}
+Der $n$-te Summand schwingt mit Frequenz $b^{n}$ und Amplitude $a^{n}$; seine Steigung ist bis zu $a^{n}b^{n}\pi = (ab)^{n}\pi$. Da $ab > 1$, werden die Steigungen mit $n$ \emph{größer}. Eine Ableitung müsste der Grenzwert der Differenzenquotienten sein; aber auf jeder Skala $h\approx b^{-n}$ dominiert der $n$-te Summand den Differenzenquotienten mit einem Beitrag der Größe $(ab)^{n}$, der mit wechselndem Vorzeichen gegen $\pm\infty$ geht. Die Bedingung $ab > 1 + \frac{3\pi}2$ stellt sicher, dass die Summanden $> n$ den $n$-ten nicht auslöschen; $b$ ungerade sorgt für die richtigen Vorzeichen. (Hardy $1916$: $ab\ge1$ genügt.)
+\schritt{Bild}
+Die Funktion sieht in jeder Vergrößerung gleich zackig aus --- ein Fraktal (Band 8), Dimension zwischen $1$ und $2$. Es gibt keine Stelle, an der sie \enquote{lokal gerade} ist.
+\probe{$a = \frac12$, $b = 13$: $ab = 6{,}5 > 1 + 4{,}71$. \checkmark\ Die Partialsummen $S_N$ sind glatt; ihre Ableitung bei $x = 0$ ist $0$ für alle $N$ (alle Kosinus haben dort ein Maximum) --- aber $\frac{W(h) - W(0)}h$ für $h = b^{-N}$ ist von der Größe $-(ab)^{N}$: Die Grenzprozesse $N\to\infty$ und $h\to0$ vertauschen nicht. \checkmark}
+\begin{mitnehmen}\kastentext
+Bolzano hatte $1830$ ein ähnliches Beispiel (unveröffentlicht), Riemann vermutete eines, Weierstraß bewies es $1872$. Die Reaktion --- Hermite: \enquote{Ich wende mich mit Schrecken und Entsetzen ab} --- zeigt, wie sehr die Anschauung die Analysis geführt hatte. Danach gilt: Jeder Satz braucht die Voraussetzung, die er braucht, und \enquote{stetig} ist nicht \enquote{fast differenzierbar}.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.36
+\stupserzwei{gruen}{Bei $\mathbb Q$ bricht es an der letzten Stelle: Die Diagonalzahl ist konstruiert, aber nichts garantiert, dass sie \emph{rational} ist --- und sie ist es im Allgemeinen nicht.}{22pt}
+\begin{loesungkarte}{gruen}{7.36}{Cantors Diagonale}
+\derweg{Annahme einer Liste, Diagonalzahl mit Ziffernwechsel, Widerspruch; dann die zwei Feinheiten.}
+\schritt{Annahme}
+$[0, 1]$ sei abzählbar: eine Liste $x_1, x_2, x_3, \dots$ enthält alle. Schreibe $x_k = 0{,}a_{k1}a_{k2}a_{k3}\dots$ als Dezimalbruch (bei zwei Darstellungen die ohne Neunerperiode).
+\schritt{Diagonale}
+Definiere $y = 0{,}b_1b_2b_3\dots$ mit $b_k = 4$, falls $a_{kk}\neq4$, und $b_k = 5$, falls $a_{kk} = 4$. Dann ist $b_k\neq a_{kk}$ für jedes $k$.
+\schritt{Widerspruch}
+$y\in[0, 1]$, also $y = x_k$ für ein $k$. Dann stimmen alle Ziffern überein, insbesondere $b_k = a_{kk}$. Widerspruch. Keine Liste enthält alle: $[0, 1]$ ist überabzählbar. $\blacksquare$
+\schritt{Warum nicht für $\mathbb Q$}
+Für $\mathbb Q$ gibt es eine Liste (Cantors erstes Diagonalverfahren, Band 10). Das Argument lässt sich formal durchführen und liefert eine Zahl $y$, die nicht in der Liste steht --- aber $y$ ist dann eben nicht rational; es ist eine irrationale Zahl, deren Ziffern aus der Liste gebastelt wurden. Der Widerspruch braucht, dass $y$ zur Menge gehört, und das gilt für $[0, 1]$ (jede Ziffernfolge ist eine reelle Zahl), nicht für $\mathbb Q$.
+\schritt{Neunerperioden}
+$0{,}4999\ldots = 0{,}5$: Zwei Ziffernfolgen, eine Zahl. Wäre $y$ eine Neunerperiode, könnte es mit einem $x_k$ übereinstimmen, obwohl die Ziffern verschieden sind. Deshalb wählt man $b_k\in\{4, 5\}$: $y$ enthält weder $0$ noch $9$ und hat eine eindeutige Darstellung. Ein Detail, das in populären Fassungen fehlt --- und ohne das der Beweis eine Lücke hat.
+\probe{Variante mit Binärfolgen: Die Menge aller $0$-$1$-Folgen ist überabzählbar (dasselbe Argument mit $b_k = 1 - a_{kk}$, hier ohne das Periodenproblem, wenn man Folgen statt Zahlen nimmt). Und $|\mathcal P(\mathbb N)| > |\mathbb N|$: Cantors Satz (Aufgabe 7.40). \checkmark}
+\begin{mitnehmen}\kastentext
+Das Diagonalargument ist eine Maschine: Aus jeder Liste von Objekten baut sie ein Objekt, das an der $k$-ten Stelle vom $k$-ten abweicht. Dieselbe Maschine beweist Cantors Satz, Gödels Unvollständigkeit, Turings Unentscheidbarkeit des Halteproblems und Russells Antinomie --- vier Jahrhundertresultate mit einem Trick.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.37
+\stupserzwei{tief}{(c) Unter zyklischen Vertauschungen wird $t$ mit $\omega$ oder $\omega^{2}$ multipliziert, $t^{3}$ bleibt. Unter Transpositionen wird $t$ zu $t' = x_1 + \omega^{2}x_2 + \omega x_3$. $t^{3}$ nimmt zwei Werte an.}{22pt}
+\begin{loesungkarte}{tief}{7.37}{Lagranges Resolvente}
+\derweg{Symmetrische Ausdrücke in den Wurzeln sind Polynome in den Koeffizienten; die Lösungsformel ist ein Ausdruck, der \emph{fast} symmetrisch ist.}
+\schritt{(a)}
+Vieta: $x_1 + x_2 = -p$, $x_1x_2 = q$. $(x_1 - x_2)^{2} = (x_1 + x_2)^{2} - 4x_1x_2 = p^{2} - 4q$. Alle drei sind symmetrisch unter $x_1\leftrightarrow x_2$, und der Hauptsatz über symmetrische Polynome sagt: Jedes symmetrische Polynom in den Wurzeln ist ein Polynom in den Koeffizienten. Deshalb lassen sie sich ohne Kenntnis der Wurzeln ausrechnen.
+\schritt{(b)}
+$x_1 - x_2$ wechselt unter der Vertauschung das Vorzeichen --- nicht symmetrisch, also kein Polynom in $p, q$. Aber sein Quadrat ist symmetrisch: $x_1 - x_2 = \pm\sqrt{p^{2} - 4q}$. Mit $x_1 + x_2 = -p$: $x_1 = \frac{-p + \sqrt{p^{2} - 4q}}2$. Die Mitternachtsformel, hergeleitet aus der Frage, welcher Ausdruck unter Permutationen wie viele Werte annimmt.
+\schritt{(c)}
+$t = x_1 + \omega x_2 + \omega^{2}x_3$. Zyklische Permutation $(1\,2\,3)$: $t\mapsto x_2 + \omega x_3 + \omega^{2}x_1 = \omega^{2}t$; also $t^{3}\mapsto t^{3}$. Transposition $(2\,3)$: $t\mapsto x_1 + \omega x_3 + \omega^{2}x_2 =: t'$. Unter allen $6$ Permutationen nimmt $t^{3}$ nur die zwei Werte $t^{3}, t'^{3}$ an. Also sind $t^{3} + t'^{3}$ und $t^{3}t'^{3}$ symmetrisch, Polynome in $p, q$; $t^{3}$ und $t'^{3}$ sind Lösungen einer quadratischen Gleichung (der \emph{Resolvente}), und $x_1 = \frac13(t + t' + (x_1 + x_2 + x_3))$. Das ist Cardanos Formel (Aufgabe 7.24) --- erklärt statt gefunden: $u = \frac t3$, $v = \frac{t'}3$.
+\schritt{(d)}
+Für Grad $4$ gibt es einen Ausdruck mit $3$ Werten (Resolvente dritten Grades) --- Ferrari. Für Grad $5$ bräuchte man einen Ausdruck in fünf Wurzeln, der unter $S_5$ nur $2$, $3$ oder $4$ Werte annimmt. Lagrange fand keinen; Ruffini und Abel bewiesen, dass es keinen gibt (ein Ausdruck mit weniger als $5$ Werten hat $2$ oder $1$, und $2$ Werte reichen nicht). Galois sagte, warum: $S_5$ hat keine passende Kette von Normalteilern (Aufgabe 7.38).
+\probe{(c) numerisch für $x^{3} - 15x - 4$ (Aufgabe 7.22): Wurzeln $4, -2+\sqrt3, -2-\sqrt3$; $t = 4 + \omega(-0{,}268) + \omega^{2}(-3{,}732)$; $t^{3} = 27(2 + 11i)$ --- Bombellis Zahl mal $27$. \checkmark}
+\begin{mitnehmen}\kastentext
+Lagranges \emph{Réflexions} ($1770$) stellen die richtige Frage: nicht \enquote{wie löst man die Gleichung}, sondern \enquote{was tun Permutationen der Wurzeln mit Ausdrücken in ihnen}. Die Antwort heißt Gruppentheorie, und Lagrange hat ihren ersten Satz (Ordnung der Untergruppe teilt Ordnung der Gruppe) genau hier bewiesen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.38
+\stupserzwei{gruen}{Zwischenkörper: $\mathbb Q(\omega)$ (Grad $2$, zu $A_3$) und die drei Körper $\mathbb Q(\sqrt[3]2\,\omega^{k})$ (Grad $3$, zu den drei Untergruppen der Ordnung $2$).}{22pt}
+\begin{loesungkarte}{gruen}{7.38}{Die Galoisgruppe von $x^{3} - 2$}
+\derweg{Nullstellen, Zerfällungskörper und sein Grad, Gruppe als Permutationsgruppe der Nullstellen, Normalteilerkette.}
+\schritt{Nullstellen}
+$x_1 = \sqrt[3]2 = 1{,}2599$, $x_2 = \sqrt[3]2\,\omega$, $x_3 = \sqrt[3]2\,\omega^{2}$ mit $\omega = e^{2\pi i/3} = -\frac12 + \frac{\sqrt3}2i$. Eine reelle, zwei komplexe.
+\schritt{Zerfällungskörper}
+$K = \mathbb Q(\sqrt[3]2, \omega)$. $[\mathbb Q(\sqrt[3]2) : \mathbb Q] = 3$ ($x^{3} - 2$ irreduzibel, Eisenstein); $\omega\notin\mathbb Q(\sqrt[3]2)\subset\mathbb R$, also $[K : \mathbb Q(\sqrt[3]2)] = 2$. $[K : \mathbb Q] = 6$.
+\schritt{Gruppe}
+$|\operatorname{Gal}(K/\mathbb Q)| = 6$; jeder Automorphismus permutiert die drei Nullstellen, und verschiedene Automorphismen geben verschiedene Permutationen. Eine Untergruppe von $S_3$ mit $6$ Elementen: $\operatorname{Gal} = S_3$. Erzeuger: $\sigma\colon\sqrt[3]2\mapsto\sqrt[3]2\,\omega$, $\omega\mapsto\omega$ (Ordnung $3$) und $\tau$ = komplexe Konjugation (Ordnung $2$).
+\schritt{Auflösbarkeit}
+$S_3\supset A_3\supset\{e\}$: $A_3 = \langle\sigma\rangle$ ist Normalteiler vom Index $2$, $A_3\cong\mathbb Z_3$ ist abelsch. Die Faktoren $\mathbb Z_2$, $\mathbb Z_3$ sind zyklisch: $S_3$ ist auflösbar. Die Gleichung ist durch Wurzeln lösbar --- natürlich, $\sqrt[3]2$ steht ja da; aber Galois' Satz sagt es für jede kubische Gleichung, weil jede Untergruppe von $S_3$ auflösbar ist.
+\schritt{Zwischenkörper}
+Galois-Korrespondenz: Untergruppen $\leftrightarrow$ Zwischenkörper, Index $\leftrightarrow$ Grad. $A_3$ (Index $2$) $\leftrightarrow$ $\mathbb Q(\omega) = \mathbb Q(\sqrt{-3})$. Die drei Untergruppen $\langle\tau\rangle, \langle\sigma\tau\rangle, \langle\sigma^{2}\tau\rangle$ der Ordnung $2$ (Index $3$) $\leftrightarrow$ $\mathbb Q(\sqrt[3]2)$, $\mathbb Q(\sqrt[3]2\,\omega)$, $\mathbb Q(\sqrt[3]2\,\omega^{2})$. Nur $\mathbb Q(\omega)$ ist über $\mathbb Q$ galoissch --- weil nur $A_3$ Normalteiler ist.
+\probe{Cardano für $x^{3} - 2 = 0$ ($p = 0$, $q = -2$): $x = \sqrt[3]{1 + 1} + \sqrt[3]{1 - 1} = \sqrt[3]2$. Die Formel \enquote{sieht} die Kette: erst $\sqrt{\dots}$ (zu $\mathbb Q(\omega)$), dann $\sqrt[3]{\dots}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Galois ($1832$, mit $20$ Jahren, in der Nacht vor dem Duell): Eine Gleichung ist durch Wurzeln lösbar genau dann, wenn ihre Gruppe eine Kette von Normalteilern mit abelschen Faktoren hat. $S_3$ und $S_4$ haben sie, $S_5$ nicht --- deshalb Cardano und Ferrari, und keine Formel für Grad $5$. Band 11 beweist es.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.39
+\stupserzwei{tief}{(c) Induktion über $a$: $0 + 0 = 0$ (Axiom). Gilt $0 + a = a$, so $0 + S(a) = S(0 + a) = S(a)$ (Definition, dann Induktionsannahme).}{22pt}
+\begin{loesungkarte}{tief}{7.39}{$2 + 2 = 4$ nach Peano}
+\derweg{Alles auf $0$, $S$ und die rekursive Definition der Addition zurückführen; jeden Schritt mit seiner Regel beschriften.}
+\schritt{(a)}
+Definitionen: $1 := S(0)$, $2 := S(1)$, $3 := S(2)$, $4 := S(3)$. Addition rekursiv: (A1) $a + 0 = a$; (A2) $a + S(b) = S(a + b)$. \\
+$2 + 2 = 2 + S(1) \overset{A2}{=} S(2 + 1) = S(2 + S(0)) \overset{A2}{=} S(S(2 + 0)) \overset{A1}{=} S(S(2)) = S(3) = 4$. $\blacksquare$ Vier Schritte, jeder eine Definition oder ein Axiom.
+\schritt{(b)}
+$a + 1 = a + S(0) \overset{A2}{=} S(a + 0) \overset{A1}{=} S(a)$. $\blacksquare$ Kein Induktionsbeweis nötig --- $a$ bleibt beliebig.
+\schritt{(c)}
+Induktion über $a$. Anfang: $0 + 0 = 0$ nach (A1). Schritt: Gelte $0 + a = a$. Dann $0 + S(a) \overset{A2}{=} S(0 + a) = S(a)$. $\blacksquare$ --- Das Axiom (A1) sagt $a + 0 = a$ (Null \emph{rechts}); $0 + a = a$ (Null \emph{links}) ist etwas anderes, weil die Addition über das rechte Argument definiert ist. Die Kommutativität $a + b = b + a$ ist ein Satz, der zwei Induktionen braucht.
+\schritt{(d)}
+Das fünfte Axiom: Enthält eine Menge die $0$ und mit jedem $n$ auch $S(n)$, so enthält sie alle natürlichen Zahlen. Ohne es: Modelle mit \enquote{Nichtstandard-Zahlen}, etwa $\mathbb N\cup\{\dots, \omega - 1, \omega, \omega + 1, \dots\}$ --- eine Kopie von $\mathbb Z$ hinter allen natürlichen Zahlen, die $0$ nie erreicht. Dort gelten die ersten vier Axiome, aber (c) ist nicht mehr beweisbar. Das Induktionsaxiom sagt: Es gibt nur die Zahlen, die man von $0$ aus erreicht.
+\probe{$2\cdot2 = 4$ mit (M1) $a\cdot0 = 0$, (M2) $a\cdot S(b) = a\cdot b + a$: $2\cdot2 = 2\cdot1 + 2 = (2\cdot0 + 2) + 2 = (0 + 2) + 2 = 2 + 2 = 4$ --- wobei $0 + 2 = 2$ den Satz (c) braucht. \checkmark}
+\begin{mitnehmen}\kastentext
+Peano ($1889$; Dedekind $1888$ hatte dieselben Axiome): Fünf Axiome, zwei Definitionen, und die Arithmetik ist ein deduktives System. Russell und Whitehead brauchten in den \emph{Principia Mathematica} $360$ Seiten bis $1 + 1 = 2$ --- weil sie auch die Logik und die Mengen aufbauten. Gödel zeigte $1931$, dass dieses System wahre Sätze hat, die es nicht beweist (Aufgabe 7.40 ist der Anfang dieser Geschichte).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 7.40
+\stupserzwei{akzent}{(c) $R_M\in R_M$ ist unmöglich (sonst $R_M\notin R_M$); also $R_M\notin R_M$, und dann folgt aus der Definition nur: $R_M\notin M$. Kein Widerspruch --- $R_M$ ist einfach kein Element von $M$.}{22pt}
+\begin{loesungkarte}{akzent}{7.40}{Die Menge aller Mengen}
+\derweg{Russells Argument; Cantors Satz gegen die Allmenge; wie Aussonderung den Widerspruch in einen harmlosen Satz verwandelt.}
+\schritt{(a)}
+$R = \{x\colon x\notin x\}$. Für jedes $x$: $x\in R\iff x\notin x$. Setze $x = R$: $R\in R\iff R\notin R$. Eine Aussage ist genau dann wahr, wenn sie falsch ist --- Widerspruch. Also kann es die Menge $R$ nicht geben. Da Cantors (und Freges) Mengenlehre erlaubte, zu \emph{jeder} Eigenschaft die Menge der Dinge mit dieser Eigenschaft zu bilden (Komprehension), ist sie widersprüchlich.
+\schritt{(b)}
+Cantor: Für jede Menge $M$ ist $|M| < |\mathcal P(M)|$ (Diagonalargument: Zu jeder Abbildung $f\colon M\to\mathcal P(M)$ ist $\{x\colon x\notin f(x)\}$ nicht im Bild). Gäbe es die Menge $V$ aller Mengen, so wäre $\mathcal P(V)\subseteq V$ (jede Teilmenge von $V$ ist eine Menge), also $|\mathcal P(V)|\le|V|$. Widerspruch. --- Cantor kannte dieses Argument ($1899$) und sprach von \enquote{inkonsistenten Vielheiten}.
+\schritt{(c)}
+Zermelo: Mengen bildet man nur durch Aussonderung aus vorhandenen Mengen, $\{x\in M\colon\varphi(x)\}$. Dann: $R_M = \{x\in M\colon x\notin x\}$. Angenommen $R_M\in R_M$; dann $R_M\in M$ und $R_M\notin R_M$ --- Widerspruch, also $R_M\notin R_M$. Dann aber: Wäre $R_M\in M$, so wäre $R_M\in R_M$ nach Definition --- Widerspruch, also $R_M\notin M$. Kein Paradox, sondern ein Satz: Zu jeder Menge $M$ gibt es eine Menge, die nicht in $M$ liegt. Insbesondere gibt es keine Menge aller Mengen --- bewiesen, nicht widersprüchlich.
+\schritt{(d)}
+Der Barbier (rasiert genau die, die sich nicht selbst rasieren): Rasiert er sich? Beides führt zum Widerspruch --- also \emph{gibt es keinen solchen Barbier}. Das ist bequem: Niemand hat behauptet, dass es ihn gibt. Bei Mengen ist es unbequem, weil Frege und Cantor behauptet hatten, zu jeder Eigenschaft gebe es die Menge --- und die Antwort \enquote{diese Menge gibt es nicht} verlangt eine neue Regel, welche Mengen es gibt. Das ist die ganze axiomatische Mengenlehre (ZF).
+\begin{fehler}\kastentext
+\enquote{Die Menge aller $x$ mit \dots} ist nicht automatisch eine Menge. Komprehension ist widersprüchlich; Aussonderung ($\{x\in M\colon\dots\}$ aus einer schon vorhandenen Menge $M$) ist es nicht. Jede Konstruktion \enquote{die Menge aller Mengen, die \dots} braucht die Frage: aus welcher Menge ausgesondert?
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Russell schrieb Frege $1902$; Frege antwortete, die Arithmetik gerate ins Wanken, und fügte seinem zweiten Band ein Nachwort an. Die Antinomie war das Ende der naiven Mengenlehre und der Beginn der Grundlagenkrise --- Zermelo (Axiome, $1908$), Russell (Typentheorie, $1910$), Hilbert (Beweistheorie, $1920$er), Brouwer (Intuitionismus), Gödel ($1931$). Die Mathematik überlebte --- mit expliziten Regeln dafür, was eine Menge ist.
+\end{mitnehmen}
+\end{loesungkarte}

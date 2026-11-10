@@ -1,0 +1,564 @@
+\setgebiet{4}{Analysis}{tief}
+\chapter{Analysis}
+\marginnote{\small\itshape\color{grau}\textbf{Sie brauchen:} Band 3, Kapitel 1--13. Aus Band 0 die Funktionen und die Ableitungsregeln (Kap.\ 7--12); aus Band 1 die Induktion.}[12pt]
+\worum{Analysis ist die Kunst, mit dem Unendlichen so zu rechnen, dass am Ende eine Zahl steht. Grenzwert, Stetigkeit, Ableitung, Integral --- vier Begriffe, ein Mechanismus: $\varepsilon$, dann $\delta$ oder $N$. Die Aufgaben üben das Rechnen \emph{und} das Begründen, denn in der Analysis ist der zweite Teil der, an dem man scheitert.}
+
+\section{Was Sie hier üben}
+\begin{center}
+{\footnotesize\sffamily\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lP{4.9cm}lcll@{}}
+\toprule
+\textbf{Nr.} & \textbf{Titel} & \textbf{Sorte} & \textbf{Grad} & \textbf{Zeit} & \textbf{Band/Kap.}\\
+\midrule
+3.1 & Supremum ist nicht Maximum & \typtypisch & \grad1 & 10 min & 3/1\\
+3.2 & Supremum und Infimum einer Folge & \typwerk & \grad1 & 5 min & 3/1\\
+3.3 & Eine Betragsungleichung & \typwerk & \grad1 & 10 min & 3/1\\
+3.4 & Grenzwerte, die man sehen muss & \typtypisch & \grad1 & 10 min & 3/2\\
+3.5 & $0\cdot\infty$ und $1^{\infty}$ & \typstolper & \grad2 & 10 min & 3/2\\
+3.6 & Ein $\varepsilon$-$N$-Beweis & \typwerk & \grad1 & 10 min & 3/2\\
+3.7 & $\sqrt[n]{n}\to1$ & \typwerk & \grad2 & 15 min & 3/2\\
+3.8 & Eine rekursive Folge & \typwerk & \grad2 & 15 min & 3/2\\
+3.9 & Die harmonische Reihe ist keine Cauchy-Folge & \typwerk & \grad2 & 10 min & 3/2\\
+3.10 & Vier Reihen, vier Kriterien & \typtypisch & \grad2 & 15 min & 3/3\\
+3.11 & Umordnen verboten & \typstolper & \grad2 & 15 min & 3/3\\
+3.12 & Eine Teleskopreihe & \typwerk & \grad1 & 10 min & 3/3\\
+3.13 & Die $p$-Reihe & \typwerk & \grad2 & 10 min & 3/3\\
+3.14 & Fakultät gegen Potenz & \typwerk & \grad2 & 10 min & 3/3\\
+3.15 & Drei Konvergenzradien & \typwerk & \grad2 & 15 min & 3/3\\
+3.16 & Stetig machen, Nullstelle finden & \typtypisch & \grad1 & 10 min & 3/4\\
+3.17 & Stetig, also beschränkt? & \typstolper & \grad1 & 10 min & 3/4\\
+3.18 & $x\sin\frac1x$ & \typwerk & \grad2 & 10 min & 3/4\\
+3.19 & Ungerader Grad, reelle Nullstelle & \typwerk & \grad2 & 10 min & 3/4\\
+3.20 & Die Wurzel ist gleichmäßig stetig & \typwerk & \grad2 & 15 min & 3/4\\
+3.21 & Gleichungen mit $e$ und $\ln$ & \typtypisch & \grad1 & 10 min & 3/5\\
+3.22 & $\cos(0{,}5)$ auf vier Stellen & \typwerk & \grad1 & 10 min & 3/5\\
+3.23 & Ableiten im Akkord & \typtypisch & \grad1 & 10 min & 3/6\\
+3.24 & Stetig, aber nicht differenzierbar & \typstolper & \grad1 & 10 min & 3/6\\
+3.25 & Alle drei Regeln auf einmal & \typwerk & \grad1 & 10 min & 3/6\\
+3.26 & Differenzierbar mit unstetiger Ableitung & \typwerk & \grad2 & 15 min & 3/6\\
+3.27 & Ungleichungen mit dem Mittelwertsatz & \typtypisch & \grad2 & 15 min & 3/7\\
+3.28 & L'Hospital, falsch angewandt & \typstolper & \grad2 & 10 min & 3/7\\
+3.29 & Drei Grenzwerte mit L'Hospital & \typwerk & \grad1 & 10 min & 3/7\\
+3.30 & Eine Kurvendiskussion & \typwerk & \grad2 & 20 min & 3/7\\
+3.31 & Rechnen mit Taylorreihen & \typtypisch & \grad2 & 15 min & 3/8\\
+3.32 & $\sqrt{1{,}1}$ mit Fehlerschranke & \typwerk & \grad1 & 10 min & 3/8\\
+3.33 & Die Reihe von $\ln(1 + x)$ & \typwerk & \grad2 & 15 min & 3/8\\
+3.34 & Summen, die Integrale sind & \typtypisch & \grad2 & 15 min & 3/9\\
+3.35 & $\int_0^1x^{2}\,dx$ von Hand & \typwerk & \grad2 & 15 min & 3/9\\
+3.36 & Sechs Integrale, sechs Handgriffe & \typtypisch & \grad2 & 20 min & 3/10\\
+3.37 & Drei Integrale, drei Fehler & \typstolper & \grad2 & 15 min & 3/10\\
+3.38 & Partielle Integration & \typwerk & \grad1 & 15 min & 3/10\\
+3.39 & Substitution & \typwerk & \grad2 & 15 min & 3/10\\
+3.40 & Partialbruchzerlegung & \typwerk & \grad1 & 10 min & 3/10\\
+3.41 & Der Umfang des Einheitskreises & \typwerk & \grad2 & 15 min & 3/10\\
+3.42 & $\int x^{-p}$, zweimal uneigentlich & \typwerk & \grad2 & 10 min & 3/11\\
+3.43 & $\int\frac{\sin x}x$ & \typwerk & \grad3 & 20 min & 3/11\\
+3.44 & Vergleichen statt rechnen & \typtypisch & \grad2 & 15 min & 3/11\\
+3.45 & Punktweise ist nicht gleichmäßig & \typstolper & \grad3 & 20 min & 3/12\\
+3.46 & $\sum kx^{k}$ & \typwerk & \grad1 & 10 min & 3/12\\
+3.47 & Gradient, Richtung, Tangentialebene & \typtypisch & \grad2 & 15 min & 3/13\\
+3.48 & Kritische Punkte klassifizieren & \typwerk & \grad2 & 15 min & 3/13\\
+3.49 & Lagrange am Rechteck & \typwerk & \grad1 & 10 min & 3/13\\
+3.50 & Das Volumen der Kugel & \typwerk & \grad2 & 10 min & 3/13\\
+\bottomrule
+\end{tabular}}
+\end{center}
+
+\section{Woran Sie merken, dass Sie es können}
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item Sie können zu einem gegebenen $\varepsilon$ ein $N$ oder $\delta$ \emph{ausrechnen} --- nicht nur sagen, dass es eines gibt.
+\item Sie wählen zu einer Reihe das passende Kriterium in zehn Sekunden und wissen, dass $a_k\to0$ nichts beweist.
+\item Sie kennen die Voraussetzungen der großen Sätze (Maximum, Zwischenwert, Mittelwert, L'Hospital, Vertauschung von Grenzwert und Integral) und ein Gegenbeispiel für jede, die fehlt.
+\item Sie integrieren mit den vier Techniken und erkennen ein uneigentliches Integral, bevor Sie einsetzen.
+\end{itemize}
+
+\section{Aufgaben}
+
+%%%%%%%%%%% Kapitel 1
+\stupser{tief}{Supremum: kleinste obere Schranke. Es gehört zur Menge, wenn es ein Maximum gibt --- und sonst nicht.}{22pt}
+\begin{karte}{tief}{3.1}{\typtypisch}{\meta{1}{10 min}{Band 3, Kap.\ 1}}
+\kartentitel{Supremum ist nicht Maximum}
+\worum{Der erste Begriff der Analysis, und der erste, den man falsch verwendet: Das Supremum muss nicht zur Menge gehören.}
+\methoden{Supremum und Infimum, Epsilon-Beweis, Vollständigkeit}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie Supremum, Infimum, Maximum und Minimum (sofern vorhanden) von $A = \{1 - \frac1n\colon n\ge1\}$, $B = (0, 1)$, $C = [0, 1]$, $D = \{x\in\mathbb Q\colon x^{2} < 2\}$.
+\item Zeigen Sie für $A$ mit der $\varepsilon$-Charakterisierung: Zu jedem $\varepsilon > 0$ gibt es ein $a\in A$ mit $a > 1 - \varepsilon$.
+\item Warum hat $D$ in $\mathbb Q$ kein Supremum, in $\mathbb R$ aber schon? Welches Axiom steckt dahinter?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$\frac{n - 1}{n + 1} = 1 - \frac2{n + 1}$: wächst monoton, startet bei $0$, nähert sich $1$.}{22pt}
+\begin{karte}{gruen}{3.2}{\typwerk}{\meta{1}{5 min}{Band 3, Kap.\ 1, Aufgabe 1.1}}
+\kartentitel{Supremum und Infimum einer Folge}
+\worum{Die Menge der Folgenglieder: Was ist die kleinste obere, was die größte untere Schranke --- und welche wird angenommen?}
+\methoden{Supremum und Infimum, Polynomdivision, Monotonie}
+Bestimmen Sie Supremum und Infimum von $M = \bigl\{\frac{n - 1}{n + 1}\colon n\in\mathbb N, n\ge1\bigr\}$. Werden sie angenommen?
+\end{karte}
+
+\stupser{gruen}{Die Beträge wechseln bei $x = \frac32$ und $x = -1$. Drei Bereiche, drei Rechnungen --- oder quadrieren, weil beide Seiten nichtnegativ sind.}{22pt}
+\begin{karte}{gruen}{3.3}{\typwerk}{\meta{1}{10 min}{Band 3, Kap.\ 1, Aufgabe 1.2}}
+\kartentitel{Eine Betragsungleichung}
+\worum{Fallunterscheidung ist der sichere Weg, Quadrieren der schnelle --- wenn man weiß, wann es erlaubt ist.}
+\methoden{Betrag, Fallunterscheidung, Quadrieren}
+Lösen Sie $|2x - 3| < |x + 1|$ auf zwei Arten und vergleichen Sie.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 2
+\stupser{tief}{Höchste Potenz ausklammern; bei Wurzeldifferenzen mit der Summe erweitern; bei $3^{n}$ gegen $2^{n}$ durch $3^{n}$ teilen.}{22pt}
+\begin{karte}{tief}{3.4}{\typtypisch}{\meta{1}{10 min}{Band 3, Kap.\ 2}}
+\kartentitel{Grenzwerte, die man sehen muss}
+\worum{Vier Grundformen, die in jeder Klausur stehen. Wer die Handgriffe kennt, braucht keine $\varepsilon$ mehr --- die Grenzwertsätze haben sie schon erledigt.}
+\methoden{Grenzwerte, Ausklammern}
+Bestimmen Sie die Grenzwerte, falls sie existieren:
+\begin{align*} &\text{(a) } \frac{2n^{2} + 3}{n^{2} - n}, &&\text{(b) } \sqrt{n^{2} + n} - n,\\ &\text{(c) } \frac{3^{n} + 2^{n}}{3^{n} - 2^{n}}, &&\text{(d) } (-1)^{n}\frac n{n + 1}. \end{align*}
+\end{karte}
+
+\stupser{akzent}{$n\cdot\frac1n = 1$, $n^{2}\cdot\frac1n = n$, $\frac1n\cdot\frac1n\cdot n = \frac1n$: Dreimal \enquote{$\infty\cdot0$}, drei verschiedene Ergebnisse.}{22pt}
+\begin{karte}{akzent}{3.5}{\typstolper}{\meta{2}{10 min}{Band 3, Kap.\ 2}}
+\kartentitel{$0\cdot\infty$ und $1^{\infty}$}
+\worum{Die Grenzwertsätze gelten für konvergente Folgen. Wer sie auf $\infty$ anwendet, bekommt \enquote{$0\cdot\infty = 0$} und \enquote{$1^{\infty} = 1$} --- und beides ist falsch.}
+\methoden{Unbestimmte Formen, Gegenbeispiel, Grenzwerte}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie $\lim a_nb_n$ für $a_n = \frac1n$ und $b_n = n$, $b_n = n^{2}$, $b_n = \sqrt n$, $b_n = (-1)^{n}n$. Was zeigt das über \enquote{$0\cdot\infty$}?
+\item Jemand argumentiert: $\bigl(1 + \frac1n\bigr)^{n}\to1^{\infty} = 1$. Berechnen Sie die Folge für $n = 1, 10, 1000$ und finden Sie den Fehler.
+\item Formulieren Sie die Grenzwertsätze für Produkt und Quotient mit ihren \emph{Voraussetzungen}.
+\item Welche der folgenden Formen sind bestimmt, welche unbestimmt: $\frac0\infty$, $\frac\infty0$, $\infty - \infty$, $0^{\infty}$, $\infty^{0}$, $\frac{1}{0^{+}}$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$\bigl|\frac{3n + 2}{2n + 5} - \frac32\bigr| = \frac{11}{2(2n + 5)}$. Das soll kleiner als $\varepsilon$ sein --- nach $n$ auflösen.}{22pt}
+\begin{karte}{gruen}{3.6}{\typwerk}{\meta{1}{10 min}{Band 3, Kap.\ 2, Aufgabe 2.1}}
+\kartentitel{Ein $\varepsilon$-$N$-Beweis}
+\worum{Einmal die Definition in voller Länge: Abstand ausrechnen, nach $n$ auflösen, $N$ hinschreiben.}
+\methoden{Epsilon-Beweis, Grenzwerte}
+Zeigen Sie mit der Definition, dass $\lim_{n\to\infty}\dfrac{3n + 2}{2n + 5} = \dfrac32$. Geben Sie für $\varepsilon = 0{,}01$ ein konkretes $N$ an.
+\end{karte}
+
+\stupser{gruen}{Schreiben Sie $\sqrt[n]n = 1 + h_n$ mit $h_n\ge0$. Dann $n = (1 + h_n)^{n}\ge\binom n2h_n^{2}$.}{22pt}
+\begin{karte}{gruen}{3.7}{\typwerk}{\meta{2}{15 min}{Band 3, Kap.\ 2, Aufgabe 2.2}}
+\kartentitel{$\sqrt[n]{n}\to1$}
+\worum{Ein berühmter Grenzwert mit einem berühmten Trick: den Überschuss über $1$ benennen und mit dem binomischen Satz einfangen.}
+\methoden{Binomischer Satz, Einschließungssatz, Überschuss benennen}
+Bestimmen Sie $\lim_{n\to\infty}\sqrt[n]n$ und beweisen Sie das Ergebnis.
+\end{karte}
+
+\stupser{gruen}{Erst zeigen: $a_n < 2$ für alle $n$ (Induktion). Dann: $a_n < 2\Rightarrow a_n^{2} < 2 + a_n\Rightarrow a_n < a_{n+1}$.}{22pt}
+\begin{karte}{gruen}{3.8}{\typwerk}{\meta{2}{15 min}{Band 3, Kap.\ 2, Aufgabe 2.3}}
+\kartentitel{Eine rekursive Folge}
+\worum{Das Standardverfahren für rekursive Folgen: monoton und beschränkt, also konvergent; dann den Grenzwert aus der Fixpunktgleichung.}
+\methoden{Rekursive Folge, Monotonie, Fixpunktgleichung}
+$a_1 = 1$, $a_{n+1} = \sqrt{2 + a_n}$. Zeigen Sie, dass die Folge konvergiert, und bestimmen Sie den Grenzwert.
+\end{karte}
+
+\stupser{gruen}{$a_{2n} - a_n = \frac1{n + 1} + \dots + \frac1{2n}$: $n$ Summanden, jeder mindestens $\frac1{2n}$.}{22pt}
+\begin{karte}{gruen}{3.9}{\typwerk}{\meta{2}{10 min}{Band 3, Kap.\ 2, Aufgabe 2.4}}
+\kartentitel{Die harmonische Reihe ist keine Cauchy-Folge}
+\worum{Benachbarte Glieder rücken zusammen, und trotzdem divergiert die Folge. Das Gegenbeispiel, das man zur Cauchy-Definition kennen muss.}
+\methoden{Cauchy-Folge, Harmonische Reihe, Abschätzung nach unten}
+$a_n = \sum_{k=1}^{n}\frac1k$. Zeigen Sie, dass $(a_n)$ keine Cauchy-Folge ist (und damit divergiert), obwohl $a_{n+1} - a_n\to0$.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 3
+\stupser{tief}{Rationale Glieder: Vergleich mit $\frac1{k^{p}}$. Alternierend: Leibniz. Fakultäten und Potenzen: Quotient. Immer zuerst: Geht $a_k$ gegen null?}{22pt}
+\begin{karte}{tief}{3.10}{\typtypisch}{\meta{2}{15 min}{Band 3, Kap.\ 3}}
+\kartentitel{Vier Reihen, vier Kriterien}
+\worum{Reihen untersuchen heißt: das Kriterium wählen, das zur Gestalt der Glieder passt. Hier vier Gestalten.}
+\methoden{Konvergenzkriterien, Vergleichskriterium, Leibniz-Kriterium, Quotientenkriterium}
+Untersuchen Sie auf Konvergenz und absolute Konvergenz:
+\begin{align*} &\text{(a) } \sum_{k\ge1}\frac k{k^{2} + 1}, &&\text{(b) } \sum_{k\ge1}\frac1{k^{2} + 1},\\ &\text{(c) } \sum_{k\ge1}\frac{(-1)^{k}}{\sqrt k}, &&\text{(d) } \sum_{k\ge1}\frac{k^{2}}{2^{k}}. \end{align*}
+\end{karte}
+
+\stupser{akzent}{Nehmen Sie die alternierende harmonische Reihe $S = 1 - \frac12 + \frac13 - \dots$ und daneben $\frac S2 = 0 + \frac12 + 0 - \frac14 + 0 + \frac16 - \dots$. Addieren Sie gliedweise.}{22pt}
+\begin{karte}{akzent}{3.11}{\typstolper}{\meta{2}{15 min}{Band 3, Kap.\ 3}}
+\kartentitel{Umordnen verboten}
+\worum{Bei endlichen Summen darf man umsortieren. Bei unendlichen nur, wenn sie absolut konvergieren --- sonst kann man jeden Wert erzeugen. Dazu der ältere Irrtum: \enquote{$a_k\to0$, also konvergiert die Reihe}.}
+\methoden{Absolute Konvergenz, Umordnung, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $S = \sum_{k\ge1}\frac{(-1)^{k+1}}k = \ln2$ (Aufgabe 3.33). Zeigen Sie, dass die Umordnung $1 + \frac13 - \frac12 + \frac15 + \frac17 - \frac14 + \dots$ (zwei positive, ein negatives Glied) den Wert $\frac32\ln2$ hat.
+\item Warum ist das kein Widerspruch? Welche Eigenschaft fehlt der Reihe?
+\item Nennen Sie eine Reihe mit $a_k\to0$, die divergiert, und eine konvergente Reihe, die nicht absolut konvergiert.
+\item Was besagt der Riemannsche Umordnungssatz?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$\frac1{k(k + 1)} = \frac1k - \frac1{k + 1}$. In der Partialsumme hebt sich fast alles weg.}{22pt}
+\begin{karte}{gruen}{3.12}{\typwerk}{\meta{1}{10 min}{Band 3, Kap.\ 3, Aufgabe 3.1}}
+\kartentitel{Eine Teleskopreihe}
+\worum{Eine der wenigen Reihen, deren Summe man exakt ausrechnen kann --- weil die Partialsummen zusammenklappen.}
+\methoden{Teleskopsumme, Partialbruchzerlegung}
+Untersuchen Sie $\sum_{k\ge1}\frac1{k(k + 1)}$ auf Konvergenz und bestimmen Sie gegebenenfalls die Summe.
+\end{karte}
+
+\stupser{gruen}{Verdichtung: $\sum2^{j}a_{2^{j}}$ konvergiert genau dann, wenn $\sum a_k$ konvergiert. Hier wird daraus eine geometrische Reihe mit Quotient $2^{1 - p}$.}{22pt}
+\begin{karte}{gruen}{3.13}{\typwerk}{\meta{2}{10 min}{Band 3, Kap.\ 3, Aufgabe 3.2}}
+\kartentitel{Die $p$-Reihe}
+\worum{Die Vergleichsreihe für alles andere: $\sum k^{-p}$ konvergiert genau für $p > 1$. Hier wird es bewiesen.}
+\methoden{Verdichtungskriterium, Geometrische Reihe}
+Für welche $p > 0$ konvergiert $\sum_{k\ge1}\frac1{k^{p}}$?
+\end{karte}
+
+\stupser{gruen}{$\frac{a_{k+1}}{a_k} = \bigl(\frac k{k + 1}\bigr)^{k} = \frac1{(1 + 1/k)^{k}}\to\frac1e$.}{22pt}
+\begin{karte}{gruen}{3.14}{\typwerk}{\meta{2}{10 min}{Band 3, Kap.\ 3, Aufgabe 3.3}}
+\kartentitel{Fakultät gegen Potenz}
+\worum{Das Quotientenkriterium in seinem Element --- und der Grenzwert $e$ taucht auf, wo man ihn nicht erwartet.}
+\methoden{Quotientenkriterium, Zahl e}
+Untersuchen Sie $\sum_{k\ge1}\frac{k!}{k^{k}}$ auf Konvergenz.
+\end{karte}
+
+\stupser{gruen}{$R = \lim\bigl|\frac{c_k}{c_{k+1}}\bigr|$. Für (a) ist das $\frac{k + 1}k\to1$; am Rand $x = \pm1$ einsetzen.}{22pt}
+\begin{karte}{gruen}{3.15}{\typwerk}{\meta{2}{15 min}{Band 3, Kap.\ 3, Aufgabe 3.4}}
+\kartentitel{Drei Konvergenzradien}
+\worum{Drei Potenzreihen mit Radius $1$, $\infty$ und $0$ --- und am Rand des Konvergenzkreises passiert das Interessante.}
+\methoden{Konvergenzradius, Randverhalten, Leibniz-Kriterium}
+Bestimmen Sie Konvergenzradius und Randverhalten von
+\[ \text{(a) } \sum_{k\ge1}\frac{x^{k}}k,\qquad\text{(b) } \sum_{k\ge0}\frac{x^{k}}{k!},\qquad\text{(c) } \sum_{k\ge0}k!\,x^{k}. \]
+\end{karte}
+
+%%%%%%%%%%% Kapitel 4
+\stupser{tief}{$\frac{x^{2} - 1}{x - 1} = x + 1$ für $x\neq1$. Für den Zwischenwertsatz: $g(x) = x - \cos x$ an den Intervallenden auswerten.}{22pt}
+\begin{karte}{tief}{3.16}{\typtypisch}{\meta{1}{10 min}{Band 3, Kap.\ 4}}
+\kartentitel{Stetig machen, Nullstelle finden}
+\worum{Zwei Standardaufgaben zur Stetigkeit: eine Lücke schließen und mit dem Zwischenwertsatz eine Lösung nachweisen, die man nicht ausrechnen kann.}
+\methoden{Stetige Fortsetzung, Zwischenwertsatz, Intervallhalbierung}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Für welches $c$ ist $f(x) = \frac{x^{2} - 1}{x - 1}$ ($x\neq1$), $f(1) = c$ stetig?
+\item Für welche $a, b$ ist $g(x) = x^{2}$ für $x\le1$, $g(x) = ax + b$ für $x > 1$ stetig \emph{und} differenzierbar?
+\item Zeigen Sie, dass $x = \cos x$ eine Lösung in $(0, \frac\pi2)$ hat, und grenzen Sie sie auf ein Intervall der Länge $0{,}1$ ein.
+\item Warum hat die Signumfunktion keine Lösung von $\operatorname{sgn}(x) = \frac12$, obwohl $-1$ und $1$ angenommen werden?
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$f(x) = \frac1x$ auf $(0, 1)$ ist stetig. Beschränkt? Und $f(x) = x$ auf $(0, 1)$: Wo wäre das Maximum?}{22pt}
+\begin{karte}{akzent}{3.17}{\typstolper}{\meta{1}{10 min}{Band 3, Kap.\ 4}}
+\kartentitel{Stetig, also beschränkt?}
+\worum{Der Satz vom Maximum gilt auf abgeschlossenen, beschränkten Intervallen. Jedes Wort ist nötig, und für jedes weggelassene gibt es ein Gegenbeispiel.}
+\methoden{Satz vom Maximum, Gegenbeispiel, Kompaktheit}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Geben Sie eine stetige Funktion auf $(0, 1)$ an, die unbeschränkt ist, und eine, die beschränkt ist, aber kein Maximum hat.
+\item Geben Sie eine stetige Funktion auf $[0, \infty)$ an, die beschränkt ist und kein Maximum hat.
+\item Geben Sie eine Funktion auf $[0, 1]$ an, die kein Maximum hat. Welche Voraussetzung ist verletzt?
+\item Formulieren Sie den Satz vom Maximum vollständig und sagen Sie, welche Voraussetzung in (a), (b), (c) jeweils fehlt.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$|x\sin\frac1x|\le|x|$: Das zwingt $f$ gegen $0$. Für $g$: Die Punkte $x_n = \frac1{(2n + \frac12)\pi}$ gehen gegen $0$, aber $g(x_n) = 1$.}{22pt}
+\begin{karte}{gruen}{3.18}{\typwerk}{\meta{2}{10 min}{Band 3, Kap.\ 4, Aufgabe 4.1}}
+\kartentitel{$x\sin\frac1x$}
+\worum{Zwei Funktionen, die in jeder Umgebung der Null unendlich oft schwingen --- die eine ist stetig, die andere nicht. Der Faktor $x$ macht den Unterschied.}
+\methoden{Epsilon-Beweis, Einschließungssatz, Folgenkriterium}
+Untersuchen Sie $f(x) = x\sin\frac1x$ ($x\neq0$), $f(0) = 0$, auf Stetigkeit in $0$. Vergleichen Sie mit $g(x) = \sin\frac1x$ ($x\neq0$), $g(0) = 0$.
+\end{karte}
+
+\stupser{gruen}{Für großes $|x|$ verhält sich $p(x)$ wie $a_nx^{n}$ --- und $x^{n}$ mit ungeradem $n$ hat verschiedene Vorzeichen bei $\pm M$.}{22pt}
+\begin{karte}{gruen}{3.19}{\typwerk}{\meta{2}{10 min}{Band 3, Kap.\ 4, Aufgabe 4.2}}
+\kartentitel{Ungerader Grad, reelle Nullstelle}
+\worum{Der Zwischenwertsatz in seiner klassischen Anwendung: Vorzeichenwechsel plus Stetigkeit ergibt eine Nullstelle.}
+\methoden{Zwischenwertsatz, Ausklammern}
+Zeigen Sie: Jedes Polynom ungeraden Grades hat mindestens eine reelle Nullstelle.
+\end{karte}
+
+\stupser{gruen}{$|\sqrt x - \sqrt y|\le\sqrt{|x - y|}$ --- quadrieren Sie das. Dann $\delta = \varepsilon^{2}$.}{22pt}
+\begin{karte}{gruen}{3.20}{\typwerk}{\meta{2}{15 min}{Band 3, Kap.\ 4, Aufgabe 4.3}}
+\kartentitel{Die Wurzel ist gleichmäßig stetig}
+\worum{Gleichmäßig stetig heißt: ein $\delta$ für alle Stellen. Die Wurzel schafft das auf $[0, \infty)$, obwohl ihre Steigung bei $0$ unendlich wird.}
+\methoden{Gleichmäßige Stetigkeit, Abschätzung durch Ungleichung}
+Zeigen Sie, dass $f(x) = \sqrt x$ auf $[0, \infty)$ gleichmäßig stetig ist.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 5
+\stupser{tief}{$e^{2x} = (e^{x})^{2}$: Setzen Sie $u = e^{x}$. Bei $\ln$-Gleichungen am Ende prüfen, ob alle Argumente positiv sind.}{22pt}
+\begin{karte}{tief}{3.21}{\typtypisch}{\meta{1}{10 min}{Band 3, Kap.\ 5}}
+\kartentitel{Gleichungen mit $e$ und $\ln$}
+\worum{Rechenroutine mit den elementaren Funktionen: Substitution bei Exponentialgleichungen, Zusammenfassen bei Logarithmen, und die Definitionsbereichsprobe, die man nie vergessen darf.}
+\methoden{Substitution (Gleichung), Logarithmieren, Definitionsbereich prüfen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Lösen Sie $e^{2x} - 3e^{x} + 2 = 0$.
+\item Lösen Sie $\ln x + \ln(x - 3) = \ln4$.
+\item Lösen Sie $2^{x} = 5\cdot3^{x}$.
+\item Leiten Sie aus $\exp(a + b) = \exp a\exp b$ die Regel $\ln(xy) = \ln x + \ln y$ her.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$\cos x = 1 - \frac{x^{2}}2 + \frac{x^{4}}{24} - \frac{x^{6}}{720} + \dots$; bei alternierenden Reihen ist der Fehler kleiner als das erste weggelassene Glied.}{22pt}
+\begin{karte}{gruen}{3.22}{\typwerk}{\meta{1}{10 min}{Band 3, Kap.\ 5, Aufgabe 5.1}}
+\kartentitel{$\cos(0{,}5)$ auf vier Stellen}
+\worum{Wie der Taschenrechner es macht --- und wie man weiß, wann man aufhören darf.}
+\methoden{Potenzreihe, Fehlerschranke}
+Berechnen Sie $\cos(0{,}5)$ auf vier Nachkommastellen und geben Sie eine garantierte Fehlerschranke an.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 6
+\stupser{tief}{$x^{x} = e^{x\ln x}$. $\ln(\cos x)$: Kettenregel mit äußerer Ableitung $\frac1{\cos x}$.}{22pt}
+\begin{karte}{tief}{3.23}{\typtypisch}{\meta{1}{10 min}{Band 3, Kap.\ 6}}
+\kartentitel{Ableiten im Akkord}
+\worum{Fünf Ableitungen, die zusammen alle Regeln abdecken --- und die Umschreibung $x^{x} = e^{x\ln x}$, die man kennen muss.}
+\methoden{Ableitungsregeln, Kettenregel, Logarithmieren}
+Leiten Sie ab und vereinfachen Sie:
+\[ \text{(a) } x^{x},\quad\text{(b) } \ln(\cos x),\quad\text{(c) } \arctan(2x), \]
+\[ \text{(d) } \sin^{2}(3x),\quad\text{(e) } xe^{-x^{2}}. \]
+\end{karte}
+
+\stupser{akzent}{Bei $|x|$ in $0$: Differenzenquotient von links $-1$, von rechts $+1$. Bei $\sqrt[3]x$ in $0$: $\frac{h^{1/3}}h = h^{-2/3}\to\infty$.}{22pt}
+\begin{karte}{akzent}{3.24}{\typstolper}{\meta{1}{10 min}{Band 3, Kap.\ 6}}
+\kartentitel{Stetig, aber nicht differenzierbar}
+\worum{Differenzierbar impliziert stetig; die Umkehrung gilt nicht, und zwar auf zwei Arten: Knick und senkrechte Tangente. Dazu der Rechenfehler $(fg)' = f'g'$.}
+\methoden{Differenzenquotient, Gegenbeispiel, Einseitige Grenzwerte}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $|x|$ in $0$ stetig, aber nicht differenzierbar ist.
+\item Zeigen Sie dasselbe für $\sqrt[3]x$. Was ist hier anders als bei $|x|$?
+\item Beweisen Sie: Ist $f$ in $a$ differenzierbar, so ist $f$ in $a$ stetig.
+\item Prüfen Sie an $f(x) = g(x) = x$, dass $(fg)'\neq f'g'$, und schreiben Sie die richtige Regel hin.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{Quotientenregel außen, Produktregel im Zähler, Kettenregel in beiden Faktoren. Sauber notieren, dann zusammenfassen.}{22pt}
+\begin{karte}{gruen}{3.25}{\typwerk}{\meta{1}{10 min}{Band 3, Kap.\ 6, Aufgabe 6.1}}
+\kartentitel{Alle drei Regeln auf einmal}
+\worum{Ein Ausdruck, der Ketten-, Produkt- und Quotientenregel gleichzeitig verlangt. Übung in Buchführung.}
+\methoden{Produktregel, Quotientenregel, Kettenregel}
+Bestimmen Sie die Ableitung von $f(x) = \dfrac{e^{x^{2}}\sin(3x)}{1 + x^{2}}$.
+\end{karte}
+
+\stupser{gruen}{$\frac{f(h) - f(0)}h = h\sin\frac1h\to0$: differenzierbar mit $f'(0) = 0$. Für $x\neq0$ aber $f'(x) = 2x\sin\frac1x - \cos\frac1x$.}{22pt}
+\begin{karte}{gruen}{3.26}{\typwerk}{\meta{2}{15 min}{Band 3, Kap.\ 6, Aufgabe 6.2}}
+\kartentitel{Differenzierbar mit unstetiger Ableitung}
+\worum{Die Ableitung einer differenzierbaren Funktion muss nicht stetig sein. Dieses Beispiel ist das, mit dem man es belegt.}
+\methoden{Differenzenquotient, Folgenkriterium, Unstetige Ableitung}
+Untersuchen Sie $f(x) = x^{2}\sin\frac1x$ ($x\neq0$), $f(0) = 0$: Ist $f$ in $0$ differenzierbar? Ist $f'$ in $0$ stetig?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 7
+\stupser{tief}{Differenz der beiden Seiten als Funktion $g$; $g(0) = 0$; Vorzeichen von $g'$ untersuchen. Für (d): Ableitung ist null, also konstant --- Wert bei $x = 1$.}{22pt}
+\begin{karte}{tief}{3.27}{\typtypisch}{\meta{2}{15 min}{Band 3, Kap.\ 7}}
+\kartentitel{Ungleichungen mit dem Mittelwertsatz}
+\worum{Der Mittelwertsatz in Arbeitskleidung: $g' \ge 0\Rightarrow g$ wächst, $g' = 0\Rightarrow g$ konstant. Damit beweist man Ungleichungen und Identitäten, ohne zu rechnen.}
+\methoden{Mittelwertsatz}
+Beweisen Sie:
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $e^{x}\ge1 + x$ für alle $x$,
+\item $\sin x\le x$ für $x\ge0$,
+\item $\ln(1 + x)\le x$ für $x > -1$,
+\item $\arctan x + \arctan\frac1x = \frac\pi2$ für $x > 0$.
+\end{enumerate}
+\end{karte}
+
+\stupser{akzent}{$\lim_{x\to1}\frac{x^{2} + 1}{x + 1}$ ist kein $\frac00$ --- einfach einsetzen. Und $\frac{x + \sin x}x$ für $x\to\infty$: Was passiert mit $\frac{\sin x}x$?}{22pt}
+\begin{karte}{akzent}{3.28}{\typstolper}{\meta{2}{10 min}{Band 3, Kap.\ 7}}
+\kartentitel{L'Hospital, falsch angewandt}
+\worum{Die Regel hat drei Voraussetzungen: unbestimmte Form, Differenzierbarkeit, und der Grenzwert der Ableitungsquotienten muss \emph{existieren}. Drei Beispiele, in denen je eine fehlt.}
+\methoden{Regel von L'Hospital, Voraussetzungen prüfen, Gegenbeispiel}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Jemand rechnet $\lim_{x\to1}\frac{x^{2} + 1}{x + 1} = \lim\frac{2x}1 = 2$. Richtig?
+\item Jemand rechnet $\lim_{x\to\infty}\frac{x + \sin x}x = \lim\frac{1 + \cos x}1$ und schließt: existiert nicht. Richtig?
+\item Jemand beweist $\lim_{x\to0}\frac{\sin x}x = 1$ mit L'Hospital. Was ist daran bedenklich, wenn man $(\sin x)' = \cos x$ erst noch herleiten muss?
+\item Formulieren Sie die Regel vollständig, mit allen Voraussetzungen.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{(a) zweimal L'Hospital. (b) $x\ln x = \frac{\ln x}{1/x}$. (c) $x^{x} = e^{x\ln x}$, dann (b).}{22pt}
+\begin{karte}{gruen}{3.29}{\typwerk}{\meta{1}{10 min}{Band 3, Kap.\ 7, Aufgabe 7.1}}
+\kartentitel{Drei Grenzwerte mit L'Hospital}
+\worum{Die drei Formen $\frac00$, $0\cdot\infty$ und $0^{0}$ --- und wie man die letzten beiden auf die erste zurückführt.}
+\methoden{Regel von L'Hospital, Unbestimmte Formen, Logarithmieren}
+Berechnen Sie (a) $\lim_{x\to0}\dfrac{e^{x} - 1 - x}{x^{2}}$, (b) $\lim_{x\to0^{+}}x\ln x$, (c) $\lim_{x\to0^{+}}x^{x}$.
+\end{karte}
+
+\stupser{gruen}{$f(x) = 1 + \frac1{x^{2} - 1}$: Das sieht man die Asymptote $y = 1$ und die Pole sofort.}{22pt}
+\begin{karte}{gruen}{3.30}{\typwerk}{\meta{2}{20 min}{Band 3, Kap.\ 7, Aufgabe 7.2}}
+\kartentitel{Eine Kurvendiskussion}
+\worum{Das vollständige Programm: Definitionsbereich, Symmetrie, Nullstellen, Pole, Asymptoten, Monotonie, Extrema, Krümmung, Skizze.}
+\methoden{Kurvendiskussion, Polynomdivision, Krümmung}
+Führen Sie eine vollständige Kurvendiskussion durch für $f(x) = \dfrac{x^{2}}{x^{2} - 1}$.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 8
+\stupser{tief}{$\cos x = 1 - \frac{x^{2}}2 + \frac{x^{4}}{24} - \dots$ einsetzen: Zähler beginnt mit $\frac{x^{4}}{24}$. Für (b) die beiden Reihen multiplizieren und bis $x^{3}$ sammeln.}{22pt}
+\begin{karte}{tief}{3.31}{\typtypisch}{\meta{2}{15 min}{Band 3, Kap.\ 8}}
+\kartentitel{Rechnen mit Taylorreihen}
+\worum{Taylorreihen sind ein Rechenwerkzeug: Grenzwerte ablesen statt L'Hospital, Produkte ausmultiplizieren, Fehler abschätzen.}
+\methoden{Potenzreihe, Koeffizientenvergleich, Fehlerschranke}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Bestimmen Sie $\lim_{x\to0}\dfrac{\cos x - 1 + \frac{x^{2}}2}{x^{4}}$ und $\lim_{x\to0}\dfrac{\sin x - x}{x^{3}}$ mit Reihen.
+\item Bestimmen Sie das Taylorpolynom dritten Grades von $e^{x}\sin x$ um $0$ durch Multiplikation der Reihen.
+\item Wie groß ist der Fehler von $\sin x\approx x - \frac{x^{3}}6$ höchstens, wenn $|x|\le0{,}5$?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$f(x) = \sqrt x$ um $x_0 = 1$: $f(1) = 1$, $f'(1) = \frac12$, $f''(1) = -\frac14$. Restglied mit $f'''(\xi) = \frac38\xi^{-5/2}\le\frac38$.}{22pt}
+\begin{karte}{gruen}{3.32}{\typwerk}{\meta{1}{10 min}{Band 3, Kap.\ 8, Aufgabe 8.1}}
+\kartentitel{$\sqrt{1{,}1}$ mit Fehlerschranke}
+\worum{Taylorpolynom zweiten Grades plus Lagrange-Restglied: eine Näherung und ihre Garantie.}
+\methoden{Taylorpolynom, Fehlerschranke}
+Berechnen Sie $\sqrt{1{,}1}$ mit dem Taylorpolynom zweiten Grades und geben Sie eine Fehlerschranke an.
+\end{karte}
+
+\stupser{gruen}{$f^{(k)}(0) = (-1)^{k+1}(k - 1)!$, also $\frac{f^{(k)}(0)}{k!} = \frac{(-1)^{k+1}}k$. Am Rand $x = 1$: Leibniz; $x = -1$: harmonisch.}{22pt}
+\begin{karte}{gruen}{3.33}{\typwerk}{\meta{2}{15 min}{Band 3, Kap.\ 8, Aufgabe 8.2}}
+\kartentitel{Die Reihe von $\ln(1 + x)$}
+\worum{Eine Reihe, die am einen Rand konvergiert und am anderen nicht --- und am konvergenten Rand $\ln2$ liefert.}
+\methoden{Taylorreihe, Gliedweise Integration, Randverhalten}
+Bestimmen Sie die Taylorreihe von $\ln(1 + x)$ um $0$ und ihren Konvergenzbereich. Berechnen Sie damit $\ln2$ als Reihe.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 9
+\stupser{tief}{$\sum_{k=1}^{n}\frac1{n + k} = \frac1n\sum_{k=1}^{n}\frac1{1 + k/n}$: eine Riemann-Summe von $\frac1{1 + x}$ auf $[0, 1]$.}{22pt}
+\begin{karte}{tief}{3.34}{\typtypisch}{\meta{2}{15 min}{Band 3, Kap.\ 9}}
+\kartentitel{Summen, die Integrale sind}
+\worum{Die Riemann-Summe rückwärts gelesen: Ein Grenzwert von Summen, den man nicht ausrechnen kann, ist ein Integral, das man ausrechnen kann.}
+\methoden{Riemann-Summe}
+Bestimmen Sie die Grenzwerte für $n\to\infty$:
+\[ \text{(a) } \sum_{k=1}^{n}\frac1{n + k},\qquad\text{(b) } \frac1n\sum_{k=1}^{n}\Bigl(\frac kn\Bigr)^{2},\qquad\text{(c) } \sum_{k=1}^{n}\frac n{n^{2} + k^{2}}. \]
+\end{karte}
+
+\stupser{gruen}{Obersumme $\frac1{n^{3}}\sum_{i=1}^{n}i^{2} = \frac{n(n + 1)(2n + 1)}{6n^{3}}$ (Aufgabe 1.1 aus Gebiet 1).}{22pt}
+\begin{karte}{gruen}{3.35}{\typwerk}{\meta{2}{15 min}{Band 3, Kap.\ 9, Aufgabe 9.1}}
+\kartentitel{$\int_0^1x^{2}\,dx$ von Hand}
+\worum{Einmal ohne Hauptsatz: Ober- und Untersummen, die zusammenrücken. So war das Integral definiert, bevor es bequem wurde.}
+\methoden{Ober- und Untersummen, Summenformeln}
+Berechnen Sie $\int_0^1x^{2}\,dx$ direkt über Ober- und Untersummen.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 10
+\stupser{tief}{Steht die Ableitung des Inneren als Faktor da, substituieren ($\frac x{1 + x^{2}}$, $x\sqrt{1 + x^{2}}$, $\tan x = \frac{\sin x}{\cos x}$). $\sin^{2}x$: Doppelwinkel. $x^{2}e^{x}$: zweimal partiell.}{22pt}
+\begin{karte}{tief}{3.36}{\typtypisch}{\meta{2}{20 min}{Band 3, Kap.\ 10}}
+\kartentitel{Sechs Integrale, sechs Handgriffe}
+\worum{Integrieren ist Mustererkennung. Sechs Muster, die immer wieder vorkommen.}
+\methoden{Substitution (Integral), Partielle Integration, Trigonometrische Identität}
+\begin{align*} &\text{(a) } \int\frac x{1 + x^{2}}\,dx, &&\text{(b) } \int\tan x\,dx, &&\text{(c) } \int\frac{dx}{x^{2} + 4},\\ &\text{(d) } \int x\sqrt{1 + x^{2}}\,dx, &&\text{(e) } \int\sin^{2}x\,dx, &&\text{(f) } \int x^{2}e^{x}\,dx. \end{align*}
+\end{karte}
+
+\stupser{akzent}{$\frac1{x^{2}} > 0$ überall --- kann das Integral $-2$ sein? Bei (b): Die Grenzen gehören zur Variablen, und die Variable wurde gewechselt.}{22pt}
+\begin{karte}{akzent}{3.37}{\typstolper}{\meta{2}{15 min}{Band 3, Kap.\ 10}}
+\kartentitel{Drei Integrale, drei Fehler}
+\worum{Drei Rechnungen, die flüssig aussehen und falsch sind: eine Polstelle übersehen, Grenzen nicht umgerechnet, ein Produkt auseinandergerissen.}
+\methoden{Fehler finden, Uneigentliches Integral, Substitution (Integral)}
+Finden Sie den Fehler und korrigieren Sie:
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $\int_{-1}^{1}\frac{dx}{x^{2}} = \bigl[-\frac1x\bigr]_{-1}^{1} = -1 - 1 = -2$.
+\item $\int_0^2 2xe^{x^{2}}\,dx$ mit $u = x^{2}$: $= \int_0^2e^{u}\,du = e^{2} - 1$.
+\item $\int_0^1x\cdot x\,dx = \int_0^1x\,dx\cdot\int_0^1x\,dx = \frac14$.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{LIATE: Logarithmus, Inverse, Algebraisch, Trigonometrisch, Exponentiell --- was weiter vorn steht, wird $u$. Bei (c) zweimal partiell, dann nach dem Integral auflösen.}{22pt}
+\begin{karte}{gruen}{3.38}{\typwerk}{\meta{1}{15 min}{Band 3, Kap.\ 10, Aufgabe 10.1}}
+\kartentitel{Partielle Integration}
+\worum{Drei Klassiker: einmal, einmal mit $v' = 1$, einmal im Kreis.}
+\methoden{Partielle Integration, Integral im Kreis}
+Berechnen Sie (a) $\int xe^{x}\,dx$, (b) $\int\ln x\,dx$, (c) $\int_0^{\pi}e^{x}\sin x\,dx$.
+\end{karte}
+
+\stupser{gruen}{(a) $u = x^{2}$, Grenzen $0\to0$, $2\to4$. (b) $x = \sin t$. (c) $u = \ln x$.}{22pt}
+\begin{karte}{gruen}{3.39}{\typwerk}{\meta{2}{15 min}{Band 3, Kap.\ 10, Aufgabe 10.2}}
+\kartentitel{Substitution}
+\worum{Drei Substitutionen: eine naheliegende, eine trigonometrische, eine, bei der man das Innere erst sehen muss.}
+\methoden{Substitution (Integral)}
+Berechnen Sie (a) $\int_0^2xe^{x^{2}}\,dx$, (b) $\int_0^1\sqrt{1 - x^{2}}\,dx$, (c) $\int\frac{dx}{x\ln x}$.
+\end{karte}
+
+\stupser{gruen}{$x^{2} - x - 2 = (x - 2)(x + 1)$. Ansatz $\frac A{x - 2} + \frac B{x + 1}$; $A$ durch Einsetzen von $x = 2$, $B$ mit $x = -1$.}{22pt}
+\begin{karte}{gruen}{3.40}{\typwerk}{\meta{1}{10 min}{Band 3, Kap.\ 10, Aufgabe 10.3}}
+\kartentitel{Partialbruchzerlegung}
+\worum{Rationale Funktionen integriert man, indem man sie in Brüche mit linearem Nenner zerlegt. Die Zuhaltemethode macht das schnell.}
+\methoden{Partialbruchzerlegung, Zuhaltemethode}
+Berechnen Sie $\displaystyle\int\frac{3x + 5}{x^{2} - x - 2}\,dx$.
+\end{karte}
+
+\stupser{gruen}{Bogenlänge $\int\sqrt{1 + f'(x)^{2}}\,dx$ mit $f(x) = \sqrt{1 - x^{2}}$; der Integrand wird $\frac1{\sqrt{1 - x^{2}}}$ --- die Ableitung von $\arcsin$.}{22pt}
+\begin{karte}{gruen}{3.41}{\typwerk}{\meta{2}{15 min}{Band 3, Kap.\ 10, Aufgabe 10.4}}
+\kartentitel{Der Umfang des Einheitskreises}
+\worum{$\pi$ wurde in Kapitel 5 über die Nullstellen des Kosinus definiert. Hier schließt sich der Kreis: Der Umfang ist tatsächlich $2\pi$.}
+\methoden{Bogenlänge, Uneigentliches Integral}
+Bestimmen Sie den Umfang des Einheitskreises über die Bogenlängenformel. Woran muss man am Rand des Intervalls denken?
+\end{karte}
+
+%%%%%%%%%%% Kapitel 11
+\stupser{gruen}{$\int_1^R x^{-p}\,dx = \frac{R^{1 - p} - 1}{1 - p}$ für $p\neq1$. Was passiert für $R\to\infty$, je nach Vorzeichen von $1 - p$? Analog bei $0$.}{22pt}
+\begin{karte}{gruen}{3.42}{\typwerk}{\meta{2}{10 min}{Band 3, Kap.\ 11, Aufgabe 11.1}}
+\kartentitel{$\int x^{-p}$, zweimal uneigentlich}
+\worum{Die Vergleichsintegrale für alles Weitere: bei $\infty$ konvergiert $x^{-p}$ für $p > 1$, bei $0$ für $p < 1$. Genau umgekehrt, und $p = 1$ fällt beide Male durch.}
+\methoden{Uneigentliches Integral, Fallunterscheidung}
+Untersuchen Sie $\int_1^{\infty}\frac{dx}{x^{p}}$ und $\int_0^1\frac{dx}{x^{p}}$ auf Konvergenz in Abhängigkeit von $p > 0$.
+\end{karte}
+
+\stupser{gruen}{(a) Partiell mit $u = \frac1x$, $v' = \sin x$: Randterm beschränkt, Restintegral $\int\frac{\cos x}{x^{2}}$ absolut konvergent. (b) Auf $[k\pi, (k + 1)\pi]$ ist $\int|\sin x|\,dx = 2$ und $\frac1x\ge\frac1{(k + 1)\pi}$.}{22pt}
+\begin{karte}{gruen}{3.43}{\typwerk}{\meta{3}{20 min}{Band 3, Kap.\ 11, Aufgabe 11.2}}
+\kartentitel{$\int\frac{\sin x}x$}
+\worum{Das Integral, das konvergiert, aber nicht absolut --- die harmonische Reihe in Integralform.}
+\methoden{Uneigentliches Integral, Partielle Integration, Abschätzung nach unten}
+Untersuchen Sie (a) $\int_0^{\infty}\frac{\sin x}x\,dx$ und (b) $\int_0^{\infty}\frac{|\sin x|}x\,dx$ auf Konvergenz.
+\end{karte}
+
+\stupser{tief}{$e^{-x^{2}}\le e^{-x}$ für $x\ge1$. $\frac{\ln x}{x^{2}}\le\frac{x^{1/2}}{x^{2}}$ für große $x$. Für (c), (d) rechnet man direkt.}{22pt}
+\begin{karte}{tief}{3.44}{\typtypisch}{\meta{2}{15 min}{Band 3, Kap.\ 11}}
+\kartentitel{Vergleichen statt rechnen}
+\worum{Bei uneigentlichen Integralen will man oft nur wissen, ob sie konvergieren. Dann vergleicht man mit $x^{-p}$ oder $e^{-x}$ --- und spart sich die Stammfunktion, die es manchmal gar nicht gibt.}
+\methoden{Vergleichskriterium, Uneigentliches Integral, Grenzübergang}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Zeigen Sie, dass $\int_0^{\infty}e^{-x^{2}}\,dx$ konvergiert, ohne es auszurechnen.
+\item Berechnen Sie $\int_0^{\infty}\frac{dx}{1 + x^{2}}$.
+\item Berechnen Sie $\int_1^{\infty}\frac{\ln x}{x^{2}}\,dx$.
+\item Berechnen Sie $\int_0^1\ln x\,dx$. Wo ist dieses Integral uneigentlich?
+\end{enumerate}
+\end{karte}
+
+%%%%%%%%%%% Kapitel 12
+\stupser{akzent}{$f_n(x) = x^{n}$ auf $[0, 1]$: Grenzfunktion ist $0$ für $x < 1$ und $1$ bei $x = 1$. Der Abstand $\sup|f_n - f|$ bleibt $1$.}{22pt}
+\begin{karte}{akzent}{3.45}{\typstolper}{\meta{3}{20 min}{Band 3, Kap.\ 12}}
+\kartentitel{Punktweise ist nicht gleichmäßig}
+\worum{Drei Dinge, die man gern vertauscht --- Grenzwert und Stetigkeit, Grenzwert und Integral, Grenzwert und Ableitung --- und die man nur bei gleichmäßiger Konvergenz vertauschen darf.}
+\methoden{Gleichmäßige Konvergenz, Gegenbeispiel, Vertauschung von Grenzprozessen}
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item $f_n(x) = x^{n}$ auf $[0, 1]$. Bestimmen Sie die Grenzfunktion. Ist sie stetig? Ist die Konvergenz gleichmäßig?
+\item $g_n(x) = nx(1 - x^{2})^{n}$ auf $[0, 1]$. Zeigen Sie $g_n\to0$ punktweise, aber $\int_0^1g_n\to\frac12$.
+\item $h_n(x) = \frac{x^{n}}n$ auf $[0, 1]$. Zeigen Sie, dass $h_n\to0$ gleichmäßig, aber $h_n'(1)\not\to0$.
+\item Welcher Satz rettet welche Vertauschung, und unter welcher Voraussetzung?
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$\sum x^{k} = \frac1{1 - x}$ gliedweise ableiten (erlaubt im Inneren des Konvergenzkreises), dann mit $x$ multiplizieren.}{22pt}
+\begin{karte}{gruen}{3.46}{\typwerk}{\meta{1}{10 min}{Band 3, Kap.\ 12, Aufgabe 12.1}}
+\kartentitel{$\sum kx^{k}$}
+\worum{Was gleichmäßige Konvergenz praktisch bringt: Potenzreihen darf man gliedweise ableiten, und aus der geometrischen Reihe werden neue.}
+\methoden{Gliedweise Ableitung, Geometrische Reihe}
+Bestimmen Sie eine geschlossene Form für $\sum_{k\ge1}kx^{k}$ ($|x| < 1$) und berechnen Sie $\sum_{k\ge1}\frac k{2^{k}}$.
+\end{karte}
+
+%%%%%%%%%%% Kapitel 13
+\stupser{tief}{$f_x = 2xy + ye^{xy}$, $f_y = x^{2} + xe^{xy}$. Richtungsableitung: Gradient mal Einheitsvektor. Tangentialebene: $z = f(p) + \nabla f(p)\cdot(x - p)$.}{22pt}
+\begin{karte}{tief}{3.47}{\typtypisch}{\meta{2}{15 min}{Band 3, Kap.\ 13}}
+\kartentitel{Gradient, Richtung, Tangentialebene}
+\worum{Die Grundrechnungen in zwei Variablen an einem Beispiel: partielle Ableitungen, Gradient, Richtungsableitung, lineare Näherung.}
+\methoden{Gradient, Richtungsableitung, Lineare Näherung}
+$f(x, y) = x^{2}y + e^{xy}$, Punkt $p = (1, 0)$.
+\begin{enumerate}[label=(\alph*),leftmargin=1.6em,itemsep=2pt]
+\item Berechnen Sie $\nabla f(p)$.
+\item Berechnen Sie die Richtungsableitung in Richtung $(1, 1)$. In welcher Richtung wächst $f$ am stärksten, und wie stark?
+\item Geben Sie die Tangentialebene in $p$ an und schätzen Sie damit $f(1{,}1;\ 0{,}05)$.
+\end{enumerate}
+\end{karte}
+
+\stupser{gruen}{$\nabla f = 0$ gibt $y = x^{2}$ und $x = y^{2}$, also $x = x^{4}$. Hesse-Matrix $\begin{pmatrix}6x & -3\\ -3 & 6y\end{pmatrix}$.}{22pt}
+\begin{karte}{gruen}{3.48}{\typwerk}{\meta{2}{15 min}{Band 3, Kap.\ 13, Aufgabe 13.1}}
+\kartentitel{Kritische Punkte klassifizieren}
+\worum{Gradient null, Hesse-Matrix prüfen: Minimum, Maximum oder Sattel. Hier je einmal Sattel und Minimum.}
+\methoden{Kritische Punkte, Hesse-Matrix}
+Bestimmen und klassifizieren Sie alle kritischen Punkte von $f(x, y) = x^{3} - 3xy + y^{3}$.
+\end{karte}
+
+\stupser{gruen}{$\nabla(xy) = \lambda\nabla(x + y - 10)$: $y = \lambda$, $x = \lambda$.}{22pt}
+\begin{karte}{gruen}{3.49}{\typwerk}{\meta{1}{10 min}{Band 3, Kap.\ 13, Aufgabe 13.2}}
+\kartentitel{Lagrange am Rechteck}
+\worum{Die Lagrange-Methode an einem Beispiel, dessen Antwort man kennt --- um zu sehen, wie die Methode sie findet.}
+\methoden{Lagrange-Multiplikatoren, Nebenbedingung einsetzen}
+Bestimmen Sie das Rechteck maximalen Flächeninhalts mit Umfang $20$ mit Lagrange-Multiplikatoren. Vergleichen Sie mit dem Weg über das Einsetzen der Nebenbedingung.
+\end{karte}
+
+\stupser{gruen}{Kugelkoordinaten, Funktionaldeterminante $r^{2}\sin\vartheta$; das Dreifachintegral zerfällt in drei Faktoren.}{22pt}
+\begin{karte}{gruen}{3.50}{\typwerk}{\meta{2}{10 min}{Band 3, Kap.\ 13, Aufgabe 13.3}}
+\kartentitel{Das Volumen der Kugel}
+\worum{Transformationssatz und Fubini in einer Rechnung: $\frac43\pi$, und man sieht, woher jeder Faktor kommt.}
+\methoden{Kugelkoordinaten, Transformationssatz, Satz von Fubini}
+Berechnen Sie das Volumen der Einheitskugel im $\mathbb R^{3}$.
+\end{karte}

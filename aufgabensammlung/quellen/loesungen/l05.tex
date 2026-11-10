@@ -1,0 +1,895 @@
+\setgebiet{6}{Numerik}{mittel}
+\chapter{Lösungen: Numerik}
+
+%%%%%%%%%% 5.1
+\stupserzwei{tief}{$0{,}1 = (0{,}0\overline{0011})_2$. Auf 52 Bit gerundet ist das $0{,}1000000000000000055\dots$ --- ein Hauch zu groß.}{22pt}
+\begin{loesungkarte}{tief}{5.1}{Binär, Epsilon, $0{,}1 + 0{,}2$}
+\derweg{Dualbrüche entwickeln, Rundung bei 52 Bit, dann Epsilon als Abstand zur nächsten darstellbaren Zahl.}
+\schritt{(a)}
+$0{,}1\cdot2 = 0{,}2\to0$; $0{,}4\to0$; $0{,}8\to0$; $1{,}6\to1$, Rest $0{,}6$; $1{,}2\to1$, Rest $0{,}2$ --- ab hier wiederholt sich alles: $0{,}1 = (0{,}0\,0011\,0011\,0011\dots)_2$. Ein Bruch $\frac pq$ (gekürzt) ist binär genau dann endlich, wenn $q$ eine Zweierpotenz ist; $10 = 2\cdot5$ hat den Faktor $5$.
+\schritt{(b)}
+Gespeichert werden $\operatorname{fl}(0{,}1) = 0{,}1 + 5{,}55\cdot10^{-18}$ und $\operatorname{fl}(0{,}2) = 0{,}2 + 1{,}11\cdot10^{-17}$. Ihre Summe $0{,}3 + 1{,}67\cdot10^{-17}$ wird auf die nächste double gerundet, und die ist $0{,}3000000000000000444$; die double zu \enquote{$0{,}3$} dagegen ist $0{,}2999999999999999889$. Die Ausgabe zeigt die kürzeste Dezimalzahl, die die gespeicherte double eindeutig bezeichnet: $0{,}30000000000000004$.
+\schritt{(c)}
+$\varepsilon_M$ ist der Abstand von $1$ zur nächstgrößeren darstellbaren Zahl; gleichbedeutend: der maximale relative Rundungsfehler ist $\varepsilon_M/2$. $1 + 10^{-16}$: Das liegt näher an $1$ als an $1 + \varepsilon_M$, Ergebnis $1$. $1 + 10^{-15}$: etwa $1 + 4{,}5\varepsilon_M$, gerundet auf $1 + 4\varepsilon_M$ oder $1 + 5\varepsilon_M$ --- ungleich $1$, aber nur auf $\pm11\,\%$ der Störung genau.
+\schritt{(d)}
+double: $\log_{10}2^{52}\approx15{,}7$, also $15$ bis $16$ Dezimalstellen. single: $\log_{10}2^{23}\approx6{,}9$, also $6$ bis $7$ Stellen.
+\probe{$0{,}1 + 0{,}2 = 0{,}3$ liefert \texttt{False}; $0{,}1 + 0{,}2 - 0{,}3$ liefert $5{,}55\cdot10^{-17}$ --- ein Viertel von $\varepsilon_M$, genau der Rundungsrest. \checkmark}
+\begin{mitnehmen}\kastentext
+Dezimalbrüche sind im Rechner fast nie exakt; $\frac12, \frac14, 0{,}375$ sind es, $0{,}1$ nicht. Jede Rechnung trägt einen relativen Fehler bis $\frac{\varepsilon_M}2$ --- das ist das \emph{Standardmodell} der Gleitpunktarithmetik, und alles in Kapitel 1 und 2 folgt daraus.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.2
+\stupserzwei{akzent}{(d) Kleine zuerst: $10^{4}\cdot10^{-16} = 10^{-12}$ wird exakt gebildet, dann $1 + 10^{-12}$ --- und das ist darstellbar.}{22pt}
+\begin{loesungkarte}{akzent}{5.2}{Gleich ist nicht gleich}
+\derweg{In jedem Fall fragen: Welche Zahl wird wann gerundet, und ist die Zwischensumme darstellbar?}
+\schritt{(a)}
+Bei $10^{16}\approx2^{53}$ ist der Abstand benachbarter doubles $2$. $10^{16} + 1$ wird zu $10^{16}$ gerundet, die Differenz ist $0$. Andersherum: $1 - 10^{16}$ ist exakt $-9\,999\,999\,999\,999\,999$ --- nicht darstellbar, gerundet zu $-10^{16}$; Summe wieder $0$. Beide Klammerungen geben $0$ statt $1$; mit $10^{15}$ statt $10^{16}$ gäbe die zweite das richtige Ergebnis, die erste nicht. Assoziativität ist verloren.
+\schritt{(b)}
+$(0{,}1 + 0{,}2) + 0{,}3 = 0{,}6000000000000001$, $0{,}1 + (0{,}2 + 0{,}3) = 0{,}6$. Verletzt ist das Assoziativgesetz: Jede Zwischensumme wird gerundet, und wo gerundet wird, hängt von der Klammerung ab.
+\schritt{(c)}
+$x = 0{,}1 + 0{,}1 + \dots$ trifft die $1$ nie exakt: Nach zehn Additionen steht $0{,}9999999999999999$ da. Richtig prüft man $|x - 1| < \text{tol}$ mit einer Toleranz --- absolut für Werte nahe $0$, sonst relativ: $|x - y|\le\text{tol}\cdot\max(|x|, |y|)$. Besser noch: Schleifen über ganze Zahlen zählen und $x = k/10$ berechnen.
+\schritt{(d)}
+Vorwärts: $1 + 10^{-16} = 1$, und das $10^{4}$-mal --- Ergebnis $1$. Kleine zuerst: $10^{4}\cdot10^{-16} = 10^{-12}$ (Summen kleiner Zahlen untereinander sind relativ genau), dann $1 + 10^{-12} = 1{,}000000000001$ --- richtig. Allgemein: aufsteigend nach Betrag summieren, oder paarweise (Baum), oder mit Kahan-Kompensation; alle drei halten die Zwischensummen in vergleichbarer Größe.
+\begin{fehler}\kastentext
+Gleitpunktzahlen sind kein Körper: nicht assoziativ, nicht distributiv, mit Lücken. \texttt{==} auf Gleitpunktzahlen ist fast immer ein Fehler; Gleichheit heißt \enquote{näher als eine Toleranz}. Und die Reihenfolge einer Summe ist Teil des Algorithmus.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Zwei Faustregeln: Große Zahlen fressen kleine (Absorption), und fast gleiche Zahlen subtrahieren löscht Stellen aus (Auslöschung, Aufgaben 5.4, 5.5). Wer eine Rechnung plant, ordnet sie so, dass beides selten vorkommt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.3
+\stupserzwei{gruen}{Mantisse: die Bits nach dem Komma von $(1{,}1001)_2$, also $1001$ und dann $48$ Nullen. Exponentfeld $1025 = (10000000001)_2$.}{22pt}
+\begin{loesungkarte}{gruen}{5.3}{$-6{,}25$ als double}
+\derweg{Betrag binär, normalisieren, Exponent plus Bias, führende Eins weglassen.}
+\schritt{Vorzeichen}
+$x < 0$: $s = 1$.
+\schritt{Binär}
+$6 = (110)_2$, $0{,}25 = 2^{-2} = (0{,}01)_2$: $6{,}25 = (110{,}01)_2$.
+\schritt{Normalisieren}
+$(110{,}01)_2 = (1{,}1001)_2\cdot2^{2}$: Exponent $e = 2$, Exponentfeld $e + 1023 = 1025 = (10000000001)_2$.
+\schritt{Mantisse}
+Die führende $1$ ist implizit; gespeichert wird $1001\,0000\dots0$ (52 Bit).
+\schritt{Ergebnis}
+$1\ |\ 10000000001\ |\ 1001000\dots0$; hexadezimal \texttt{C019 0000 0000 0000}.
+\probe{Rückwärts: $(-1)^{1}\cdot(1 + \frac12 + \frac1{16})\cdot2^{1025 - 1023} = -1{,}5625\cdot4 = -6{,}25$. \checkmark\ Hex: $\mathtt C = 1100$ (Vorzeichen $1$, Exponent beginnt $100$), $\mathtt 0 = 0000$, $\mathtt 1 = 0001$ (Exponent endet $\dots0001$), $\mathtt 9 = 1001$ (Mantissenanfang). \checkmark}
+\begin{mitnehmen}\kastentext
+double: $1 + 11 + 52$ Bit, Bias $1023$, implizite Eins --- also $53$ Bit Genauigkeit und Exponenten von $-1022$ bis $1023$ (Zahlen bis etwa $1{,}8\cdot10^{308}$). Sonderfälle: Exponentfeld $0$ für $0$ und denormalisierte Zahlen, $2047$ für $\pm\infty$ und NaN.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.4
+\stupserzwei{gruen}{$\sqrt{10^{16} - 4} = 10^{8}\sqrt{1 - 4\cdot10^{-16}}\approx10^{8}(1 - 2\cdot10^{-16})$; die Differenz zu $10^{8}$ ist $2\cdot10^{-8}$, aber double hat bei $10^{8}$ nur eine Auflösung von $1{,}5\cdot10^{-8}$.}{22pt}
+\begin{loesungkarte}{gruen}{5.4}{Die Mitternachtsformel versagt}
+\derweg{Die kleine Nullstelle entsteht als Differenz fast gleicher Zahlen; stattdessen die große berechnen und Vieta benutzen.}
+\schritt{Exakt}
+$x_{1,2} = \frac{10^{8}\pm\sqrt{10^{16} - 4}}2$. Exakt: $x_1 = 99\,999\,999{,}99999999$, $x_2 = 1{,}0000000000000001\cdot10^{-8}$ (Vieta: $x_1x_2 = 1$).
+\schritt{Was der Rechner tut}
+$\sqrt{10^{16} - 4}$ wird in double zu $10^{8}$ gerundet (der Unterschied $2\cdot10^{-8}$ liegt unter dem Zahlenabstand $1{,}49\cdot10^{-8}$ bei $10^{8}$ --- genauer: $10^{16} - 4$ selbst ist schon nicht darstellbar und wird $10^{16}$). Dann $x_2 = \frac{10^{8} - 10^{8}}2 = 0$, oder bei etwas anderer Rundung $7{,}45\cdot10^{-9}$ --- $25\,\%$ daneben. Auslöschung: Zwei $16$-stellige Zahlen, die in $16$ Stellen übereinstimmen, haben eine Differenz ohne gültige Stelle.
+\schritt{Abhilfe}
+Die Nullstelle ohne Auslöschung zuerst: $x_1 = \frac{10^{8} + \sqrt{\dots}}2 = 10^{8}$ (richtig auf $16$ Stellen). Dann $x_2 = \frac q{x_1} = 10^{-8}$ (Vieta, eine Division, kein Fehler). Allgemein: $x_1 = \frac{-p - \operatorname{sgn}(p)\sqrt{p^{2} - 4q}}2$, $x_2 = \frac q{x_1}$.
+\probe{$x_1x_2 = 10^{8}\cdot10^{-8} = 1 = q$, $x_1 + x_2 = 10^{8} = -p$. \checkmark}
+\begin{mitnehmen}\kastentext
+Auslöschung ist nicht der Rundungsfehler --- der ist winzig. Sie ist die Verstärkung eines winzigen Fehlers durch eine Subtraktion fast gleicher Zahlen: Das Ergebnis ist klein, der absolute Fehler bleibt, der relative explodiert. Gegenmittel sind immer algebraisch: umformen, bevor man rechnet.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.5
+\stupserzwei{gruen}{$\frac{2\sin^{2}(x/2)}{x^{2}}$: Für $x = 10^{-8}$ ist $\sin(5\cdot10^{-9}) = 5\cdot10^{-9}$ auf $16$ Stellen, das Quadrat $2{,}5\cdot10^{-17}$, mal $2$ durch $10^{-16}$: $0{,}5$.}{22pt}
+\begin{loesungkarte}{gruen}{5.5}{$\frac{1 - \cos x}{x^{2}}$ für kleines $x$}
+\derweg{Wahren Wert mit Taylor; dann sehen, dass $\cos x$ auf $1$ gerundet wird; Identität oder Reihe als Ausweg.}
+\schritt{Wahrer Wert}
+$\cos x = 1 - \frac{x^{2}}2 + \frac{x^{4}}{24} - \dots$, also $\frac{1 - \cos x}{x^{2}} = \frac12 - \frac{x^{2}}{24} + \dots$ Für $x = 10^{-8}$: $0{,}5$ bis auf $4\cdot10^{-18}$.
+\schritt{Was der Rechner tut}
+$\cos(10^{-8}) = 1 - 5\cdot10^{-17}$. Die nächste double unter $1$ ist $1 - 1{,}1\cdot10^{-16}$; also $\operatorname{fl}(\cos x) = 1$. Dann $1 - 1 = 0$, geteilt durch $10^{-16}$: $0$. Auslöschung in Reinform: Die Information über $\frac{x^{2}}2$ war nie im gespeicherten Kosinus.
+\schritt{Abhilfe 1: Identität}
+$1 - \cos x = 2\sin^{2}\frac x2$, also $\frac{1 - \cos x}{x^{2}} = \frac12\Bigl(\frac{\sin(x/2)}{x/2}\Bigr)^{2}$. Keine Subtraktion; $\sin(5\cdot10^{-9})$ ist relativ genau, das Ergebnis $0{,}5$ auf $16$ Stellen.
+\schritt{Abhilfe 2: Reihe}
+Für $|x| < 10^{-4}$ reicht $\frac12 - \frac{x^{2}}{24}$ (Fehler $< x^{4}/720 < 10^{-19}$); für größere $x$ die Originalformel. Bibliotheken tun genau das: Fallunterscheidung nach $|x|$.
+\probe{$x = 10^{-3}$: Original $\frac{1 - 0{,}99999950000004}{10^{-6}} = 0{,}49999996$ (stimmt auf $8$ Stellen, $8$ verloren). Identität: $0{,}4999999583333$ (alle Stellen). \checkmark}
+\begin{mitnehmen}\kastentext
+Funktionen wie $1 - \cos x$, $e^{x} - 1$, $\ln(1 + x)$, $\sqrt{1 + x} - 1$ für kleines $x$ sind die klassischen Auslöschungsfallen; jede Bibliothek hat dafür eigene Routinen (\texttt{expm1}, \texttt{log1p}). Wer die Taylorreihe kennt, sieht die Gefahr: Das Ergebnis ist $O(x^{2})$, die Summanden sind $O(1)$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.6
+\stupserzwei{gruen}{Ab $S\approx10^{6}\approx2^{20}$ ist der Abstand benachbarter single-Zahlen $2^{20}\cdot2^{-23} = 0{,}125$. Addiert man $0{,}1$, wird das Ergebnis auf $S + 0{,}125$ gerundet: jeder Schritt $25\,\%$ zu viel.}{22pt}
+\begin{loesungkarte}{gruen}{5.6}{Zehn Millionen mal $0{,}1$}
+\derweg{Schranke aus dem Standardmodell; dann den tatsächlichen Mechanismus ansehen --- der ist spezifischer und erklärt das Vorzeichen.}
+\schritt{Exakt}
+$10^{7}\cdot0{,}1 = 10^{6}$.
+\schritt{Schranke}
+Jede Addition: $S_k = (S_{k-1} + x_k)(1 + \delta_k)$, $|\delta_k|\le\varepsilon_M$. Ausmultipliziert: $|S_n - \sum x_i|\le(n - 1)\varepsilon_M\sum|x_i|$. Mit $\varepsilon_M = 6\cdot10^{-8}$ und $\sum|x_i| = 10^{6}$: bis zu $0{,}6\cdot10^{6}$ --- $60\,\%$. Die Schranke ist pessimistisch, aber sie warnt: lineares Wachstum in $n$.
+\schritt{Tatsächlich}
+Das Programm liefert $1\,087\,937$ --- $8{,}8\,\%$ zu viel. Der Mechanismus: Sobald $S > 2^{20}\approx10^{6}$ ist, beträgt der Zahlenabstand $0{,}125$; $S + 0{,}1$ wird zu $S + 0{,}125$ gerundet, also systematisch $25\,\%$ zu viel pro Schritt. Schon ab $S > 2^{19}$ ist der Abstand $0{,}0625$ und $0{,}1$ wird mal zu $0{,}0625$, mal zu $0{,}125$ gerundet. Bei $S > 2^{24} = 1{,}7\cdot10^{7}$ wäre $S + 0{,}1 = S$: Die Summe bliebe stehen.
+\schritt{Besser}
+Kahan-Summation (den Rundungsrest mitführen): Fehler $O(\varepsilon_M)$ statt $O(n\varepsilon_M)$. Paarweise Summation: $O(\varepsilon_M\log n)$. Oder einfach double: $\varepsilon_M = 10^{-16}$, Fehler bei $10^{7}$ Additionen etwa $10^{-9}$ relativ. Oder gar nicht summieren: $n\cdot0{,}1$.
+\probe{Rechnung mit dem Mechanismus: In der Phase $S\in[2^{20}, 1{,}09\cdot10^{6}]$ gewinnt jeder Schritt $0{,}025$ extra; das sind etwa $(1{,}09\cdot10^{6} - 1{,}05\cdot10^{6})/0{,}125\approx3\cdot10^{5}$ Schritte, Zuwachs $8000$ --- plus die Phase davor. Größenordnung $10^{4}$ bis $10^{5}$; tatsächlich $8{,}8\cdot10^{4}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Rundungsfehler sind nicht zufällig: Bei $0{,}1$ in single sind sie systematisch positiv, und die Summe läuft davon. Die Schranke $n\varepsilon_M$ sagt, \emph{dass} man bei $10^{7}$ Summanden in single nichts mehr erwarten darf; der Mechanismus sagt, \emph{wie} es schiefgeht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.7
+\stupserzwei{tief}{$\ln$: $\kappa = \bigl|\frac{x\cdot1/x}{\ln x}\bigr| = \frac1{|\ln x|}$ --- unendlich bei $x = 1$. Subtraktion: $\kappa = \frac{|x|}{|x - y|}$ --- unendlich bei $x = y$.}{22pt}
+\begin{loesungkarte}{tief}{5.7}{Die Kondition elementarer Funktionen}
+\derweg{$\kappa = |xf'/f|$ ausrechnen und die Nullstellen des Nenners suchen.}
+\schritt{(a)}
+$\sqrt x$: $\kappa = \bigl|\frac{x\cdot\frac1{2\sqrt x}}{\sqrt x}\bigr| = \frac12$ --- überall gut, halbiert sogar den relativen Fehler. \\
+$e^{x}$: $\kappa = \bigl|\frac{xe^{x}}{e^{x}}\bigr| = |x|$ --- schlecht für großes $|x|$: $e^{100}$ mit $x$ auf $16$ Stellen hat nur $14$ richtige. \\
+$\ln x$: $\kappa = \frac1{|\ln x|}$ --- schlecht nahe $x = 1$, wo $\ln x\approx0$ (deshalb \texttt{log1p}).
+\schritt{(b)}
+$\sin x$: $\kappa = |x\cot x|$ --- unendlich bei $x = k\pi$, $k\neq0$ (Nullstellen), und wachsend für großes $|x|$: $\sin(10^{10})$ ist aus einer $16$-stelligen Eingabe nicht mehr bestimmbar, weil $10^{10}$ nur auf $\pm10^{-6}$ bekannt ist und das schon ein Teil der Periode ist.
+\schritt{(c)}
+$f(x) = x - y$: $\kappa_x = \bigl|\frac{x\cdot1}{x - y}\bigr| = \frac{|x|}{|x - y|}$. Für $x\approx y$ beliebig groß: Das ist die Auslöschung, als Konditionszahl ausgedrückt. (Für $x + y$ mit gleichem Vorzeichen ist $\kappa_x = \frac{|x|}{|x + y|}\le1$: Addition gleicher Vorzeichen ist harmlos.)
+\schritt{(d)}
+Nur $\sqrt x$ (und Multiplikation, Division: $\kappa = 1$). Die Subtraktion ist die einzige Grundrechenart, deren Kondition unbeschränkt ist --- und sie steckt in jeder Differenz, jedem Differenzenquotienten, jeder Mitternachtsformel.
+\probe{$e^{x}$ bei $x = 10$: $\kappa = 10$. $x = 10(1 + 10^{-16})$ gibt $e^{x} = e^{10}(1 + 10^{-15})$ --- Faktor $10$. \checkmark}
+\begin{mitnehmen}\kastentext
+Kondition ist eine Eigenschaft des Problems: Kein Algorithmus kann $\ln(1{,}000000001)$ aus einer $16$-stelligen Eingabe auf mehr als $7$ Stellen bestimmen. Was ein Algorithmus kann, ist, \emph{keinen zusätzlichen} Fehler zu machen --- das ist Stabilität (Aufgabe 5.10).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.8
+\stupserzwei{gruen}{$\kappa = \bigl|\frac{c}{x_1}\frac{dx_1}{dc}\bigr| = \frac{1 - \delta^{2}}{(1 + \delta)\,2\delta}\approx\frac1{2\delta}$.}{22pt}
+\begin{loesungkarte}{gruen}{5.8}{Kondition einer doppelten Nullstelle}
+\derweg{Nullstelle als Funktion des Koeffizienten, ableiten, relative Kondition bilden.}
+\schritt{Nullstellen}
+$x_{1,2} = 1\pm\sqrt{1 - (1 - \delta^{2})} = 1\pm\delta$. Für $\delta\to0$ fallen sie zusammen.
+\schritt{Als Funktion von $c$}
+$c = 1 - \delta^{2}$, $x_1(c) = 1 + \sqrt{1 - c}$, $\frac{dx_1}{dc} = -\frac1{2\sqrt{1 - c}} = -\frac1{2\delta}$.
+\schritt{Kondition}
+$\kappa = \Bigl|\frac{c\,x_1'(c)}{x_1(c)}\Bigr| = \frac{1 - \delta^{2}}{2\delta(1 + \delta)} = \frac{1 - \delta}{2\delta}\approx\frac1{2\delta}$.
+\schritt{Deutung}
+Für $\delta = 10^{-4}$ ist $\kappa = 5000$: Eine Störung des Koeffizienten um $10^{-16}$ (eine Rundung) verschiebt die Nullstelle relativ um $5\cdot10^{-13}$. Für $\delta = 10^{-8}$: $\kappa = 5\cdot10^{7}$, und die Nullstellen sind nur noch auf $8$ Stellen bestimmt. Bei $\delta = 0$ (doppelte Nullstelle) ist $\kappa = \infty$: Eine Störung $\varepsilon$ des Koeffizienten verschiebt die Nullstelle um $\sqrt\varepsilon$, nicht um $\varepsilon$ --- die Ableitung existiert nicht.
+\probe{$\delta = 0$, $c\to1 - \varepsilon$: Nullstellen $1\pm\sqrt\varepsilon$. Mit $\varepsilon = 10^{-16}$: $1\pm10^{-8}$ --- acht Stellen verloren. \checkmark}
+\begin{mitnehmen}\kastentext
+Mehrfache und nahe Nullstellen sind schlecht konditioniert, unabhängig vom Verfahren. Das berühmte Wilkinson-Polynom $\prod(x - k)$, $k = 1, \dots, 20$, hat einfache Nullstellen, aber Konditionszahlen bis $10^{13}$: Nullstellen aus Koeffizienten zu berechnen ist grundsätzlich heikel.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.9
+\stupserzwei{gruen}{$\|A\|_\infty = 2{,}0001$, $\|A^{-1}\|_\infty = \frac{1{,}0001 + 1}{0{,}0001} = 20\,001$, Produkt $40\,004$.}{22pt}
+\begin{loesungkarte}{gruen}{5.9}{Eine Konditionszahl von $40\,000$}
+\derweg{Zweimal lösen, Änderungen vergleichen, Konditionszahl als Zeilensummennormen.}
+\schritt{(a)}
+$Z_2 - Z_1$: $0{,}0001x_2 = 0{,}0001$, $x_2 = 1$, $x_1 = 1$. $x = (1, 1)$.
+\schritt{(b)}
+$Z_2 - Z_1$: $0{,}0001x_2 = 0{,}0002$, $x_2 = 2$, $x_1 = 0$. $\tilde x = (0, 2)$. Die rechte Seite änderte sich um $10^{-4}$, die Lösung um $1$ in jeder Komponente.
+\schritt{(c)}
+$\|A\|_\infty = \max(2;\ 2{,}0001) = 2{,}0001$. $A^{-1} = \frac1{0{,}0001}\begin{pmatrix}1{,}0001 & -1\\ -1 & 1\end{pmatrix}$, $\|A^{-1}\|_\infty = \frac{2{,}0001}{0{,}0001} = 20\,001$. $\operatorname{cond}_\infty(A) = 2{,}0001\cdot20\,001 = 40\,004$. \\
+Störungsabschätzung: $\frac{\|\Delta x\|_\infty}{\|x\|_\infty} = \frac11 = 1$; rechte Seite $\operatorname{cond}\cdot\frac{\|\Delta b\|_\infty}{\|b\|_\infty} = 40\,004\cdot\frac{0{,}0001}{2{,}0001} = 2{,}0$. $1\le2$: Die Abschätzung gilt und ist bis auf den Faktor $2$ scharf.
+\probe{Geometrisch: Zwei fast parallele Geraden ($x_1 + x_2 = 2$ und $x_1 + 1{,}0001x_2 = 2{,}0001$); ihr Schnittpunkt wandert weit, wenn man eine Gerade minimal verschiebt. \checkmark}
+\begin{mitnehmen}\kastentext
+$\operatorname{cond}(A)\approx10^{k}$ heißt: bis zu $k$ Stellen gehen verloren, egal wie gut der Löser ist. Bei $\operatorname{cond} = 4\cdot10^{4}$ und $\varepsilon_M = 10^{-16}$ bleiben $11$ Stellen; bei $\operatorname{cond} = 10^{16}$ keine. Deshalb berechnet jeder gute Löser eine Schätzung der Konditionszahl mit.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.10
+\stupserzwei{gruen}{$(1 + \delta_i)(1 + \eta_i)\cdots(1 + \eta_n) = 1 + \theta_i$ mit $|\theta_i|\le(n - i + 2)\varepsilon_M + O(\varepsilon_M^{2})$ --- höchstens $n$ Faktoren.}{22pt}
+\begin{loesungkarte}{gruen}{5.10}{Das Skalarprodukt ist rückwärtsstabil}
+\derweg{Jede Rundung als Faktor $(1 + \delta)$; alle Faktoren, die ein Produkt $x_iy_i$ treffen, zu einem $(1 + \theta_i)$ zusammenfassen; $\theta_i$ auf $x_i$ abwälzen.}
+\schritt{Standardmodell}
+$\operatorname{fl}(x_iy_i) = x_iy_i(1 + \delta_i)$, $|\delta_i|\le\varepsilon_M$. Teilsummen: $s_1 = x_1y_1(1 + \delta_1)$, $s_k = \bigl(s_{k-1} + x_ky_k(1 + \delta_k)\bigr)(1 + \eta_k)$, $|\eta_k|\le\varepsilon_M$.
+\schritt{Ausmultiplizieren}
+Der Term $x_iy_i$ wird von $\delta_i$ und von allen $\eta_k$ mit $k\ge\max(i, 2)$ getroffen:
+\[ \tilde s = \sum_{i=1}^{n}x_iy_i(1 + \delta_i)\prod_{k=\max(i,2)}^{n}(1 + \eta_k) =: \sum_{i=1}^{n}x_iy_i(1 + \theta_i). \]
+\schritt{Abschätzen}
+Ein Produkt von $m$ Faktoren $(1 + \epsilon_j)$ mit $|\epsilon_j|\le\varepsilon_M$ ist $1 + \theta$ mit $|\theta|\le m\varepsilon_M + O(\varepsilon_M^{2})$. Hier $m\le n$: $|\theta_i|\le n\varepsilon_M$.
+\schritt{Rückwärts lesen}
+$\tilde s = \sum\tilde x_iy_i$ mit $\tilde x_i = x_i(1 + \theta_i)$, $|\tilde x_i - x_i|\le n\varepsilon_M|x_i|$. Das berechnete Skalarprodukt ist das \emph{exakte} Skalarprodukt leicht gestörter Daten. $\blacksquare$
+\probe{Vorwärts folgt daraus: $|\tilde s - s|\le n\varepsilon_M\sum|x_iy_i|$. Für $s\approx0$ bei großen $|x_iy_i|$ ist das relativ riesig --- aber das ist die Kondition des Problems, nicht die Schuld des Algorithmus. \checkmark}
+\begin{mitnehmen}\kastentext
+Rückwärtsstabil: Das Ergebnis ist exakt für gestörte Eingaben, Störung $O(\varepsilon_M)$. Dann gilt Fehler $\lesssim$ Kondition $\times$ $\varepsilon_M$ --- die Arbeitsteilung der Numerik: Der Algorithmus garantiert Stabilität, das Problem bestimmt die Kondition, das Produkt ist der Fehler.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.11
+\stupserzwei{tief}{Schritt $k$ der Elimination: $(n - k)^{2}$ Multiplikationen. Summe $\sum_{k=1}^{n}(n - k)^{2}\approx\frac{n^{3}}3$.}{22pt}
+\begin{loesungkarte}{tief}{5.11}{Was kostet es?}
+\derweg{Führende Terme zählen, mit der Rechnergeschwindigkeit multiplizieren, Varianten vergleichen.}
+\schritt{(a)}
+Elimination: In Schritt $k$ werden $(n - k)$ Zeilen mit je $(n - k)$ Einträgen verändert: $(n - k)^{2}$ Multiplikationen (und ebenso viele Additionen). $\sum_{j=0}^{n-1}j^{2}\approx\frac{n^{3}}3$. Rückwärtseinsetzen: Zeile $i$ braucht $n - i$ Multiplikationen, Summe $\approx\frac{n^{2}}2$. Zusammen mit Additionen: LR $\approx\frac23n^{3}$ Flops, jedes Einsetzen $\approx n^{2}$.
+\schritt{(b)}
+$n = 1000$: $\frac23\cdot10^{9}$ Flops, $0{,}7$ s. $n = 10^{4}$: $7\cdot10^{11}$, $11$ Minuten. $n = 10^{5}$: $7\cdot10^{14}$, $8$ Tage. (Reale Rechner mit mehreren Kernen und $10^{11}$ Flops/s: entsprechend schneller --- aber $n^{3}$ bleibt.)
+\schritt{(c) für $n = 1000$}
+(i) $100$ Zerlegungen: $67$ s. (ii) Eine Zerlegung plus $100\cdot2n^{2} = 2\cdot10^{8}$: $0{,}87$ s. (iii) Inverse ($\approx2n^{3} = 2\cdot10^{9}$, dreimal LR) plus $100$ Matrix-Vektor-Produkte ($2\cdot10^{8}$): $2{,}2$ s --- und ungenauer als (ii). Die Zerlegung ist der Weg.
+\schritt{(d)}
+$(n + 1)!\ge4\cdot10^{17}\cdot10^{9} = 4\cdot10^{26}$: $26! = 4{,}0\cdot10^{26}$, also $n = 25$. Ein $25\times25$-System mit Cramer und Laplace-Entwicklung dauert länger als das Universum alt ist; mit LR: $10$ Mikrosekunden.
+\probe{$n = 2$: Formel $\frac23\cdot8 = 5$ Flops, tatsächlich eine Elimination (1 Division, 1 Mult., 1 Add.) --- führende Terme stimmen erst für großes $n$. \checkmark}
+\begin{mitnehmen}\kastentext
+Drei Regeln: Nie die Inverse berechnen (teurer, ungenauer), nie Cramer (exponentiell), einmal zerlegen und oft einsetzen. Und $n^{3}$ ist die Grenze der direkten Verfahren --- ab $n\approx10^{5}$ braucht man iterative (Kapitel 5), die die Dünnbesetztheit ausnutzen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.12
+\stupserzwei{gruen}{$Ly = b$: $y = (8, 1, 1)$. $Rx = y$: $x_3 = -1$, $x_2 = 3$, $x_1 = 2$.}{22pt}
+\begin{loesungkarte}{gruen}{5.12}{Eine LR-Zerlegung mit Probe}
+\derweg{Elimination, Multiplikatoren in $L$, Stufenform in $R$, zwei Dreieckssysteme, Probe.}
+\schritt{Erste Spalte}
+Pivot $2$. $\ell_{21} = \frac{-3}2 = -1{,}5$, $\ell_{31} = \frac{-2}2 = -1$. $Z_2 - \ell_{21}Z_1 = Z_2 + 1{,}5Z_1 = (0;\ 0{,}5;\ 0{,}5)$. $Z_3 + Z_1 = (0, 2, 1)$.
+\schritt{Zweite Spalte}
+Pivot $0{,}5$. $\ell_{32} = \frac2{0{,}5} = 4$. $Z_3 - 4Z_2 = (0, 0, -1)$.
+\[ L = \begin{pmatrix}1 & 0 & 0\\ -1{,}5 & 1 & 0\\ -1 & 4 & 1\end{pmatrix},\qquad R = \begin{pmatrix}2 & 1 & -1\\ 0 & 0{,}5 & 0{,}5\\ 0 & 0 & -1\end{pmatrix}. \]
+\schritt{Lösen}
+$Ly = (8, -11, -3)$: $y_1 = 8$, $y_2 = -11 + 1{,}5\cdot8 = 1$, $y_3 = -3 + 8 - 4 = 1$. $Rx = y$: $x_3 = -1$; $0{,}5x_2 - 0{,}5 = 1\Rightarrow x_2 = 3$; $2x_1 + 3 + 1 = 8\Rightarrow x_1 = 2$. $x = (2, 3, -1)$.
+\probe{$LR$, Zeile 3: $-1\cdot(2, 1, -1) + 4\cdot(0;\ 0{,}5;\ 0{,}5) + (0, 0, -1) = (-2, 1, 2)$. \checkmark\ $Ax = (4 + 3 + 1,\ -6 - 3 - 2,\ -4 + 3 - 2) = (8, -11, -3)$. \checkmark}
+\begin{mitnehmen}\kastentext
+Ohne Pivotsuche ist das Pivot $0{,}5$ kleiner als der Eintrag $2$ darunter --- mit Spaltenpivotisierung hätte man die Zeilen getauscht und $PA = LR$ bekommen. Hier schadet es nicht; bei Pivots nahe $0$ (Aufgabe 2.46) entscheidet es über alles.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.13
+\stupserzwei{gruen}{$\ell_{32} = \frac{a_{32} - \ell_{31}\ell_{21}}{\ell_{22}} = \frac{-43 + 48}1 = 5$, $\ell_{33} = \sqrt{98 - 64 - 25} = 3$.}{22pt}
+\begin{loesungkarte}{gruen}{5.13}{Cholesky mit großen Zahlen}
+\derweg{Spaltenweise: Wurzel auf der Diagonale, Quotienten darunter.}
+\schritt{Spalte 1}
+$\ell_{11} = \sqrt4 = 2$, $\ell_{21} = \frac{12}2 = 6$, $\ell_{31} = \frac{-16}2 = -8$.
+\schritt{Spalte 2}
+$\ell_{22} = \sqrt{37 - 6^{2}} = \sqrt1 = 1$. $\ell_{32} = \frac{-43 - (-8)(6)}1 = \frac{-43 + 48}1 = 5$.
+\schritt{Spalte 3}
+$\ell_{33} = \sqrt{98 - (-8)^{2} - 5^{2}} = \sqrt{98 - 64 - 25} = \sqrt9 = 3$.
+\[ L = \begin{pmatrix}2 & 0 & 0\\ 6 & 1 & 0\\ -8 & 5 & 3\end{pmatrix}. \]
+\probe{$LL^{\mathsf T}$: $(2, 2)$: $36 + 1 = 37$. \checkmark\ $(3, 2)$: $-48 + 5 = -43$. \checkmark\ $(3, 3)$: $64 + 25 + 9 = 98$. \checkmark\ Alle Radikanden positiv: $A$ ist positiv definit, $\det A = (2\cdot1\cdot3)^{2} = 36$.}
+\begin{mitnehmen}\kastentext
+Cholesky ist stabil ohne Pivotisierung: Die Einträge von $L$ sind durch $\sqrt{a_{ii}}$ beschränkt ($\sum_k\ell_{ik}^{2} = a_{ii}$), sie können nicht explodieren. Das und der halbe Aufwand machen es zum Standard für symmetrisch positiv definite Systeme --- Normalengleichungen, Steifigkeitsmatrizen, Kovarianzen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.14
+\stupserzwei{gruen}{$H_1A = \begin{pmatrix}5 & 2{,}2\\ 0 & -0{,}4\\ 0 & 5\end{pmatrix}$. Die zweite Spiegelung wirkt auf $(-0{,}4;\ 5)$ mit Norm $5{,}016$.}{22pt}
+\begin{loesungkarte}{gruen}{5.14}{QR mit Householder}
+\derweg{Erste Spalte auf $\|x\|e_1$ spiegeln, dann den unteren $2\times1$-Rest; $R$ sammelt sich, $Q = H_1H_2$.}
+\schritt{Erste Spiegelung}
+$x = (3, 4, 0)$, $\|x\| = 5$, $v = x - 5e_1 = (-2, 4, 0)$, $v^{\mathsf T}v = 20$. $H_1 = I - \frac2{20}vv^{\mathsf T} = \begin{pmatrix}0{,}6 & 0{,}8 & 0\\ 0{,}8 & -0{,}6 & 0\\ 0 & 0 & 1\end{pmatrix}$ (Aufgabe 2.47, um eine Dimension erweitert).
+$H_1A$: erste Spalte $(5, 0, 0)$; zweite Spalte $H_1(1, 2, 5) = (0{,}6 + 1{,}6,\ 0{,}8 - 1{,}2,\ 5) = (2{,}2;\ -0{,}4;\ 5)$.
+\schritt{Zweite Spiegelung}
+Auf den Rest $(-0{,}4;\ 5)$: Norm $\sqrt{0{,}16 + 25} = 5{,}016$. Zur Vermeidung von Auslöschung spiegelt man auf $-\operatorname{sgn}(x_1)\|x\|e_1 = +5{,}016e_1$: $v = (-0{,}4 - 5{,}016;\ 5) = (-5{,}416;\ 5)$, $v^{\mathsf T}v = 54{,}33$. $H_2' = I - \frac2{54{,}33}vv^{\mathsf T} = \begin{pmatrix}-0{,}0798 & 0{,}9968\\ 0{,}9968 & 0{,}0798\end{pmatrix}$; $H_2 = \operatorname{diag}(1, H_2')$.
+\schritt{Ergebnis}
+$R = H_2H_1A = \begin{pmatrix}5 & 2{,}2\\ 0 & 5{,}016\\ 0 & 0\end{pmatrix}$. $Q = H_1H_2$; die ersten beiden Spalten: $q_1 = (0{,}6;\ 0{,}8;\ 0)$, $q_2 = H_1(0;\ -0{,}0798;\ 0{,}9968) = (-0{,}0638;\ 0{,}0479;\ 0{,}9968)$.
+\probe{$2{,}2q_1 + 5{,}016q_2 = (1{,}32 - 0{,}32,\ 1{,}76 + 0{,}24,\ 5{,}00) = (1, 2, 5)$. \checkmark\ $q_1\cdot q_2 = -0{,}0383 + 0{,}0383 = 0$. \checkmark\ $\|q_2\|^{2} = 0{,}0041 + 0{,}0023 + 0{,}9936 = 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Householder-QR: $n$ Spiegelungen, jede orthogonal, also kein Fehlerwachstum --- rückwärtsstabil. Man speichert nur die Vektoren $v$, nie $Q$ explizit; $Q^{\mathsf T}b$ berechnet man, indem man die Spiegelungen der Reihe nach auf $b$ anwendet. Die Vorzeichenwahl beim Spiegeln ist die eine Stelle, an der man Auslöschung vermeiden muss.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.15
+\stupserzwei{gruen}{$4\alpha + 10\beta = 20$, $10\alpha + 30\beta = 59{,}7$: $\beta = 1{,}94$, $\alpha = 0{,}15$.}{22pt}
+\begin{loesungkarte}{gruen}{5.15}{Eine Ausgleichsgerade}
+\derweg{Normalengleichungen lösen, Residuum ausrechnen, dann die Konditionsfrage.}
+\schritt{Normalengleichungen}
+$A^{\mathsf T}A = \begin{pmatrix}4 & 10\\ 10 & 30\end{pmatrix}$, $A^{\mathsf T}b = \begin{pmatrix}20{,}0\\ 59{,}7\end{pmatrix}$. Erste mal $2{,}5$ von der zweiten abziehen: $5\beta = 9{,}7$, $\beta = 1{,}94$; $\alpha = \frac{20 - 19{,}4}4 = 0{,}15$. Gerade $y = 0{,}15 + 1{,}94t$.
+\schritt{Residuum}
+Vorhersagen $2{,}09;\ 4{,}03;\ 5{,}97;\ 7{,}91$. Residuen $r = (0{,}01;\ -0{,}13;\ 0{,}23;\ -0{,}11)$, $\|r\|_2^{2} = 0{,}082$, $\|r\|_2 = 0{,}29$. $A^{\mathsf T}r = (0;\ 0{,}01 - 0{,}26 + 0{,}69 - 0{,}44) = (0, 0)$. \checkmark
+\schritt{Warum QR}
+$\operatorname{cond}(A^{\mathsf T}A) = \operatorname{cond}(A)^{2}$: Bei $\operatorname{cond}(A) = 10^{8}$ ist $A^{\mathsf T}A$ in double numerisch singulär. QR arbeitet mit $A$ selbst: $Rx = Q^{\mathsf T}b$, Kondition $\operatorname{cond}(A)$, nicht quadriert. Für Polynomansätze höheren Grades oder viele Parameter ist das der Unterschied zwischen Ergebnis und Rauschen.
+\probe{Mittelwerte $\bar t = 2{,}5$, $\bar y = 5$: $0{,}15 + 1{,}94\cdot2{,}5 = 5$. \checkmark}
+\begin{mitnehmen}\kastentext
+Normalengleichungen für kleine, gut konditionierte Probleme; QR (oder SVD) für alles andere. Die SVD liefert zusätzlich die Konditionszahl und erlaubt, numerisch irrelevante Richtungen abzuschneiden --- Regularisierung, Band 19.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.16
+\stupserzwei{akzent}{(d) Für $M = -D^{-1}(L + U)$ ist $\|M\|_\infty = \max_i\sum_{j\neq i}\frac{|a_{ij}|}{|a_{ii}|} < 1$ bei strikter Diagonaldominanz --- und $\rho(M)\le\|M\|$.}{22pt}
+\begin{loesungkarte}{akzent}{5.16}{Jacobi divergiert}
+\derweg{Iterieren und zusehen; den Spektralradius der Iterationsmatrix als Erklärung; durch Zeilentausch Diagonaldominanz herstellen.}
+\schritt{(a)}
+$x_1^{(k+1)} = 3 - 2x_2^{(k)}$, $x_2^{(k+1)} = 4 - 3x_1^{(k)}$. Ab $0$: $(3, 4)$, $(-5, -5)$, $(13, 19)$, $(-35, -35)$, \dots Die Iterierten wachsen und wechseln das Vorzeichen.
+\schritt{(b)}
+$M = -D^{-1}(L + U) = \begin{pmatrix}0 & -2\\ -3 & 0\end{pmatrix}$, Eigenwerte $\pm\sqrt6$, $\rho(M) = 2{,}45 > 1$. Der Fehler $e^{(k)} = M^{k}e^{(0)}$ wächst wie $2{,}45^{k}$: Divergenz.
+\schritt{(c)}
+Vertauscht: $A' = \begin{pmatrix}3 & 1\\ 1 & 2\end{pmatrix}$, $b' = (4, 3)$. $x_1 = \frac{4 - x_2}3$, $x_2 = \frac{3 - x_1}2$. Ab $0$: $(1{,}33;\ 1{,}5)$, $(0{,}83;\ 0{,}83)$, $(1{,}06;\ 1{,}08)$, $(0{,}97;\ 0{,}97)$, $(1{,}01;\ 1{,}01)$ --- konvergiert gegen $(1, 1)$. $M' = \begin{pmatrix}0 & -\frac13\\ -\frac12 & 0\end{pmatrix}$, Eigenwerte $\pm\frac1{\sqrt6}$, $\rho = 0{,}41$: Fehler schrumpft um Faktor $0{,}41$ pro Schritt.
+\schritt{(d)}
+Strikte Diagonaldominanz heißt $\sum_{j\neq i}|a_{ij}| < |a_{ii}|$ für alle $i$, also $\|M\|_\infty = \max_i\sum_{j\neq i}\frac{|a_{ij}|}{|a_{ii}|} < 1$. Da $\rho(M)\le\|M\|$ für jede Matrixnorm: $\rho(M) < 1$, Konvergenz für jeden Startwert. $\blacksquare$
+\begin{fehler}\kastentext
+Iterative Verfahren setzen Bedingungen voraus: Jacobi und Gauß--Seidel brauchen $\rho(M) < 1$, garantiert bei Diagonaldominanz oder (Gauß--Seidel) bei symmetrisch positiv definit. Die Diagonaldominanz hängt von der Zeilenreihenfolge ab --- dieselbe Matrix mit vertauschten Zeilen ist ein anderes Verfahren.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Konvergenz einer linearen Iteration $x^{(k+1)} = Mx^{(k)} + c$: genau dann für alle Startwerte, wenn $\rho(M) < 1$; die Rate ist $\rho(M)$. Alles andere --- Diagonaldominanz, Definitheit --- sind hinreichende Bedingungen, die man schneller prüfen kann als Eigenwerte.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.17
+\stupserzwei{gruen}{Jacobi-Fehler nach vier Schritten $0{,}031$, Gauß--Seidel $0{,}0034$; die Spektralradien sind $\frac{\sqrt2}4 = 0{,}354$ und $0{,}354^{2} = 0{,}125$.}{22pt}
+\begin{loesungkarte}{gruen}{5.17}{Jacobi und Gauß--Seidel}
+\derweg{Diagonaldominanz prüfen, exakte Lösung zur Kontrolle, dann beide Iterationen tabellieren.}
+\schritt{Vorprüfung}
+Zeilensummen außerhalb der Diagonale: $1, 2, 1 < 4$: strikt diagonaldominant, beide Verfahren konvergieren. Exakt: $x = (1, 2, 3)$ (Probe: $4 - 2 = 2$, $-1 + 8 - 3 = 4$, $-2 + 12 = 10$ \checkmark).
+\schritt{Jacobi}
+$x_1' = \frac{2 + x_2}4$, $x_2' = \frac{4 + x_1 + x_3}4$, $x_3' = \frac{10 + x_2}4$, alle mit alten Werten.
+\begin{center}\small
+\begin{tabular}{c|ccc|c}
+$k$ & $x_1$ & $x_2$ & $x_3$ & $\|e\|_\infty$\\ \hline
+1 & $0{,}5$ & $1$ & $2{,}5$ & $1$\\
+2 & $0{,}75$ & $1{,}75$ & $2{,}75$ & $0{,}25$\\
+3 & $0{,}9375$ & $1{,}875$ & $2{,}9375$ & $0{,}125$\\
+4 & $0{,}96875$ & $1{,}96875$ & $2{,}96875$ & $0{,}031$
+\end{tabular}
+\end{center}
+\schritt{Gauß--Seidel}
+Dieselben Formeln, aber $x_2'$ benutzt das neue $x_1'$, $x_3'$ das neue $x_2'$.
+\begin{center}\small
+\begin{tabular}{c|ccc|c}
+$k$ & $x_1$ & $x_2$ & $x_3$ & $\|e\|_\infty$\\ \hline
+1 & $0{,}5$ & $1{,}125$ & $2{,}781$ & $0{,}875$\\
+2 & $0{,}781$ & $1{,}891$ & $2{,}973$ & $0{,}219$\\
+3 & $0{,}973$ & $1{,}986$ & $2{,}997$ & $0{,}027$\\
+4 & $0{,}9966$ & $1{,}9983$ & $2{,}9996$ & $0{,}0034$
+\end{tabular}
+\end{center}
+\schritt{Vergleich}
+Jacobi verliert pro Schritt etwa Faktor $0{,}35$ (zwei Schritte $\approx$ eine Dezimalstelle), Gauß--Seidel Faktor $0{,}125$ (ein Schritt $\approx$ eine Stelle). Für tridiagonale Matrizen gilt exakt $\rho_{GS} = \rho_J^{2}$: Gauß--Seidel ist doppelt so schnell.
+\probe{$\rho_J$: Eigenwerte von $\frac14\begin{pmatrix}0 & 1 & 0\\ 1 & 0 & 1\\ 0 & 1 & 0\end{pmatrix}$ sind $0, \pm\frac{\sqrt2}4 = \pm0{,}354$. Jacobi-Fehler $1\to0{,}25\to0{,}125\to0{,}031$: im Mittel Faktor $0{,}31$. \checkmark}
+\begin{mitnehmen}\kastentext
+Gauß--Seidel nutzt neue Werte sofort und ist deshalb schneller --- und braucht keinen zweiten Vektor. Jacobi dagegen ist parallelisierbar: Alle Komponenten gleichzeitig. Mit Überrelaxation (SOR, $\omega\approx1{,}2$ hier) wird Gauß--Seidel noch einmal schneller; für große Systeme schlagen beide die CG-Verfahren (Aufgabe 5.18) bei Weitem nicht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.18
+\stupserzwei{gruen}{$\alpha_0 = \frac{73}{331} = 0{,}2205$; $x_1 = (0{,}2357;\ 0{,}3384)$; $r_1 = (-0{,}2810;\ 0{,}7492)$; $\beta_0 = 0{,}00877$.}{22pt}
+\begin{loesungkarte}{gruen}{5.18}{Zwei CG-Schritte}
+\derweg{Residuum, Suchrichtung, Schrittweite, Update --- zweimal; dann $r_2 = 0$ sehen.}
+\schritt{Exakt zur Kontrolle}
+$\det A = 11$, $x^{*} = \frac1{11}\begin{pmatrix}3 & -1\\ -1 & 4\end{pmatrix}\begin{pmatrix}1\\ 2\end{pmatrix} = \frac1{11}\begin{pmatrix}1\\ 7\end{pmatrix} = (0{,}0909;\ 0{,}6364)$.
+\schritt{Schritt 0}
+$r_0 = b - Ax_0 = (1 - 9,\ 2 - 5) = (-8, -3)$, $p_0 = r_0$. $r_0^{\mathsf T}r_0 = 73$, $Ap_0 = (-35, -17)$, $p_0^{\mathsf T}Ap_0 = 280 + 51 = 331$. $\alpha_0 = \frac{73}{331} = 0{,}22054$.
+\schritt{Schritt 1}
+$x_1 = x_0 + \alpha_0p_0 = (2 - 1{,}7643;\ 1 - 0{,}6616) = (0{,}2357;\ 0{,}3384)$. $r_1 = r_0 - \alpha_0Ap_0 = (-8 + 7{,}7190;\ -3 + 3{,}7492) = (-0{,}2810;\ 0{,}7492)$. $r_1^{\mathsf T}r_1 = 0{,}6403$, $\beta_0 = \frac{0{,}6403}{73} = 0{,}008771$. $p_1 = r_1 + \beta_0p_0 = (-0{,}3512;\ 0{,}7229)$.
+\schritt{Schritt 2}
+$Ap_1 = (-1{,}4048 + 0{,}7229;\ -0{,}3512 + 2{,}1687) = (-0{,}6819;\ 1{,}8175)$. $p_1^{\mathsf T}Ap_1 = 0{,}2395 + 1{,}3139 = 1{,}5534$. $\alpha_1 = \frac{0{,}6403}{1{,}5534} = 0{,}4122$. $x_2 = x_1 + \alpha_1p_1 = (0{,}2357 - 0{,}1448;\ 0{,}3384 + 0{,}2980) = (0{,}0909;\ 0{,}6364)$. $r_2 = r_1 - \alpha_1Ap_1 = (-0{,}2810 + 0{,}2811;\ 0{,}7492 - 0{,}7492) = (0, 0)$.
+\probe{$x_2 = x^{*}$ auf vier Stellen. \checkmark\ Konjugiertheit: $p_0^{\mathsf T}Ap_1 = (-8)(-0{,}6819) + (-3)(1{,}8175) = 5{,}455 - 5{,}453\approx0$. \checkmark}
+\begin{mitnehmen}\kastentext
+CG minimiert in jedem Schritt über einen wachsenden Krylow-Raum; nach $n$ Schritten ist der Raum alles, und die Lösung exakt. In der Praxis (mit $n = 10^{6}$) bricht man nach wenigen hundert Schritten ab --- die Konvergenzrate ist $\frac{\sqrt\kappa - 1}{\sqrt\kappa + 1}$, und Vorkonditionierung drückt $\kappa$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.19
+\stupserzwei{tief}{Rayleigh-Quotienten $3{,}5$; $3{,}6$; $3{,}618$ --- sie nähern sich $\lambda_1 = 3{,}618$ von unten, und mit dem Eigenvektor $(1;\ 1{,}618)$ exakt.}{22pt}
+\begin{loesungkarte}{tief}{5.19}{Gerschgorin und Rayleigh}
+\derweg{Kreise aus Zeilen; Quotienten ausrechnen; Extremaleigenschaft aus der Spektralzerlegung.}
+\schritt{(a)}
+Zeile 1: Mittelpunkt $2$, Radius $1$: $[1, 3]$. Zeile 2: Mittelpunkt $3$, Radius $1$: $[2, 4]$. Alle Eigenwerte liegen in $[1, 3]\cup[2, 4] = [1, 4]$. Tatsächlich $1{,}382$ und $3{,}618$ --- beide drin, und beide nahe den Kreisrändern.
+\schritt{(b)}
+$x = (1, 1)$: $x^{\mathsf T}Ax = 2 + 1 + 1 + 3 = 7$, $x^{\mathsf T}x = 2$: $3{,}5$. $x = (1, 2)$: $2 + 2 + 2 + 12 = 18$, durch $5$: $3{,}6$. $x = (1;\ 1{,}618)$: $2 + 3{,}236 + 7{,}854 = 13{,}09$, durch $3{,}618$: $3{,}618$. Je näher $x$ am Eigenvektor $(1, \varphi)$, desto näher der Quotient an $\lambda_1$ --- und immer darunter.
+\schritt{(c)}
+$A = Q\Lambda Q^{\mathsf T}$, $y = Q^{\mathsf T}x$: $\frac{x^{\mathsf T}Ax}{x^{\mathsf T}x} = \frac{\sum\lambda_iy_i^{2}}{\sum y_i^{2}}$ --- ein gewichtetes Mittel der Eigenwerte mit Gewichten $y_i^{2}\ge0$. Liegt zwischen $\lambda_{\min}$ und $\lambda_{\max}$, mit Gleichheit genau an den Eigenvektoren.
+\schritt{(d)}
+$x = v_1 + \varepsilon w$ mit $w\perp v_1$, $\|v_1\| = \|w\| = 1$: $\frac{x^{\mathsf T}Ax}{x^{\mathsf T}x} = \frac{\lambda_1 + \varepsilon^{2}w^{\mathsf T}Aw}{1 + \varepsilon^{2}} = \lambda_1 + O(\varepsilon^{2})$. Ein Fehler $\varepsilon$ im Vektor gibt einen Fehler $\varepsilon^{2}$ im Eigenwert: Der Rayleigh-Quotient ist quadratisch genau.
+\probe{(b) mit $(1, 2)$: Abstand zum Eigenvektor $(1;\ 1{,}618)$ ist etwa $0{,}38/1{,}9 = 0{,}2$ relativ; Fehler im Quotienten $0{,}018\approx0{,}2^{2}\cdot0{,}45$. \checkmark}
+\begin{mitnehmen}\kastentext
+Gerschgorin: Eigenwerte grob einschließen, ohne zu rechnen --- und Diagonaldominanz heißt gerade, dass kein Kreis die Null enthält. Rayleigh: aus einem Näherungsvektor einen doppelt so genauen Eigenwert. Beides steckt in jedem Eigenwertlöser.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.20
+\stupserzwei{gruen}{Rayleigh-Quotienten $2$; $3$; $3{,}5$; $3{,}6$; $3{,}615$; $3{,}618$. Fehler $1{,}62$; $0{,}62$; $0{,}12$; $0{,}018$; $0{,}0026$; $0{,}0004$ --- Faktor $0{,}146 = (\lambda_2/\lambda_1)^{2}$.}{22pt}
+\begin{loesungkarte}{gruen}{5.20}{Die Potenzmethode}
+\derweg{Multiplizieren, normieren, Rayleigh-Quotient; Konvergenzrate aus dem Eigenwertverhältnis.}
+\schritt{Exakt}
+$\lambda^{2} - 5\lambda + 5 = 0$: $\lambda_1 = 3{,}618034$, $\lambda_2 = 1{,}381966$, $\lambda_2/\lambda_1 = 0{,}382$.
+\schritt{Iteration}
+$x_{k+1} = Ax_k/\|Ax_k\|_\infty$, $\mu_k = \frac{x_k^{\mathsf T}Ax_k}{x_k^{\mathsf T}x_k}$:
+\begin{center}\small
+\begin{tabular}{c|ccc}
+$k$ & $Ax_k$ & $x_{k+1}$ & $\mu_k$\\ \hline
+0 & $(2, 1)$ & $(1;\ 0{,}5)$ & $2$\\
+1 & $(2{,}5;\ 2{,}5)$ & $(1, 1)$ & $3$\\
+2 & $(3, 4)$ & $(0{,}75;\ 1)$ & $3{,}5$\\
+3 & $(2{,}5;\ 3{,}75)$ & $(0{,}667;\ 1)$ & $3{,}6$\\
+4 & $(2{,}333;\ 3{,}667)$ & $(0{,}636;\ 1)$ & $3{,}6154$\\
+5 & $(2{,}273;\ 3{,}636)$ & $(0{,}625;\ 1)$ & $3{,}6176$
+\end{tabular}
+\end{center}
+Nach sechs Schritten: $\lambda_1\approx3{,}618$, Eigenvektor $\approx(0{,}618;\ 1)$, exakt $(\varphi^{-1}, 1)$.
+\schritt{Konvergenz}
+Der Vektor konvergiert mit Faktor $|\lambda_2/\lambda_1| = 0{,}382$ pro Schritt (Komponenten: $0{,}5;\ 1;\ 0{,}75;\ 0{,}667;\ 0{,}636;\ 0{,}625\to0{,}618$). Der Rayleigh-Quotient bei symmetrischen Matrizen mit dem Quadrat $0{,}146$ (Aufgabe 5.19(d)) --- die Fehler $0{,}62\to0{,}12\to0{,}018\to0{,}0026$ bestätigen es.
+\probe{$A(0{,}618;\ 1) = (2{,}236;\ 3{,}618) = 3{,}618\cdot(0{,}618;\ 1)$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Potenzmethode braucht nur Matrix-Vektor-Produkte --- ideal für riesige dünne Matrizen (PageRank, Aufgabe 2.38). Ihre Schwäche: Faktor $|\lambda_2/\lambda_1|$, bei nahen Eigenwerten quälend langsam. Inverse Iteration mit Shift, $(A - \sigma I)^{-1}$, macht aus jedem Eigenwert nahe $\sigma$ den dominanten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.21
+\stupserzwei{gruen}{$\operatorname{cond}_2(A) = \frac{\sigma_1}{\sigma_2} = \frac{\sqrt{45}}{\sqrt5} = 3$; aber $\operatorname{cond}_2(A^{\mathsf T}A) = \frac{45}5 = 9$.}{22pt}
+\begin{loesungkarte}{gruen}{5.21}{Eine SVD von Hand}
+\derweg{Wie Aufgabe 2.44; dann die Konditionszahl und das Argument gegen $A^{\mathsf T}A$.}
+\schritt{Rechnung}
+$A^{\mathsf T}A = \begin{pmatrix}25 & 20\\ 20 & 25\end{pmatrix}$, Eigenwerte $45$, $5$ mit $v_1 = \frac1{\sqrt2}(1, 1)$, $v_2 = \frac1{\sqrt2}(1, -1)$. $\sigma_1 = 3\sqrt5 = 6{,}708$, $\sigma_2 = \sqrt5 = 2{,}236$. $u_1 = Av_1/\sigma_1 = \frac1{\sqrt{10}}(1, 3)$, $u_2 = \frac1{\sqrt{10}}(3, -1)$.
+\schritt{Kondition}
+$\operatorname{cond}_2(A) = \sigma_1/\sigma_2 = 3$. Gutartig.
+\schritt{Warum nicht über $A^{\mathsf T}A$}
+Die Eigenwerte von $A^{\mathsf T}A$ sind $\sigma_i^{2}$: Die Konditionszahl wird quadriert ($9$ statt $3$ hier; $10^{16}$ statt $10^{8}$ bei schlecht konditionierten Matrizen). Kleine Singulärwerte gehen in $A^{\mathsf T}A$ durch Rundung verloren: Ist $\sigma_2 = 10^{-9}\sigma_1$, so ist $\sigma_2^{2} = 10^{-18}\sigma_1^{2}$ --- unter $\varepsilon_M$, also numerisch $0$. Und: Die Bildung von $A^{\mathsf T}A$ kostet $n^{3}$ und vernichtet Dünnbesetztheit. Standardverfahren (Golub--Kahan): $A$ orthogonal auf Bidiagonalgestalt bringen, dann QR-Iterationen --- arbeitet mit $A$ und hält die Kondition.
+\probe{$\sigma_1\sigma_2 = 15 = |\det A|$. \checkmark\ $\|A\|_2 = \sigma_1 = 6{,}71$; Probe mit $\|A\|_F = \sqrt{9 + 16 + 25} = \sqrt{50} = 7{,}07 = \sqrt{\sigma_1^{2} + \sigma_2^{2}}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Dieselbe Regel wie bei den Normalengleichungen (Aufgabe 5.15): Nie $A^{\mathsf T}A$ bilden, wenn man es vermeiden kann. Alles, was man aus $A^{\mathsf T}A$ will --- Eigenwerte, Lösungen, Projektionen --- bekommt man aus einer orthogonalen Zerlegung von $A$, ohne die Kondition zu quadrieren.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.22
+\stupserzwei{tief}{(c) $x_{k+1} = x_k - \frac{x_k^{1/3}}{\frac13x_k^{-2/3}} = x_k - 3x_k = -2x_k$: Die Iterierten verdoppeln sich und wechseln das Vorzeichen.}{22pt}
+\begin{loesungkarte}{tief}{5.22}{Bisektion gegen Newton}
+\derweg{Schrittzahlen aus den Konvergenzordnungen; die Ausnahmen durch Einsetzen.}
+\schritt{(a)}
+Bisektion: Intervalllänge $2^{-n}\le10^{-10}$, $n\ge\log_2 10^{10} = 33{,}2$, also $34$ Schritte --- jeder Schritt ein Bit, gut drei Schritte eine Dezimalstelle. Newton (Aufgabe 5.24): $5$ Schritte, die Stellenzahl verdoppelt sich.
+\schritt{(b)}
+$x_{k+1} = x_k - \frac{x_k^{2}}{2x_k} = \frac{x_k}2$: $0{,}5;\ 0{,}25;\ 0{,}125;\ 0{,}0625$. Der Fehler halbiert sich --- lineare Konvergenz mit Faktor $\frac12$, wie Bisektion. Allgemein bei $m$-facher Nullstelle Faktor $1 - \frac1m$; Abhilfe: $x_{k+1} = x_k - m\frac{f}{f'}$ ist wieder quadratisch.
+\schritt{(c)}
+$x_{k+1} = -2x_k$: $-2, 4, -8$. Divergenz --- die Tangente an $\sqrt[3]x$ ist bei $0$ senkrecht, $f'$ existiert dort nicht, und weit weg ist die Tangente so flach, dass sie über das Ziel hinausschießt.
+\schritt{(d)}
+$f$ zweimal stetig differenzierbar, $f(x^{*}) = 0$, $f'(x^{*})\neq0$ (einfache Nullstelle), Startwert nahe genug bei $x^{*}$. Dann $|e_{k+1}|\le C|e_k|^{2}$ mit $C\approx\bigl|\frac{f''(x^{*})}{2f'(x^{*})}\bigr|$.
+\probe{(a) Newton für $\sqrt2$: Fehler $0{,}086;\ 0{,}0025;\ 2{,}1\cdot10^{-6};\ 1{,}6\cdot10^{-12}$; Quotienten $e_{k+1}/e_k^{2}$: $0{,}34;\ 0{,}34;\ 0{,}35$; und $\frac{f''}{2f'} = \frac2{4\sqrt2} = 0{,}354$. \checkmark}
+\begin{mitnehmen}\kastentext
+Bisektion: langsam, aber sicher (nur Stetigkeit und Vorzeichenwechsel nötig). Newton: schnell, aber anspruchsvoll (Ableitung, einfache Nullstelle, guter Start). Die Praxis kombiniert: Bisektion oder Sekanten zum Einfangen, Newton zum Fertigrechnen --- so arbeitet etwa Brents Verfahren.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.23
+\stupserzwei{akzent}{(c) Newton für $\arctan$: $x_{k+1} = x_k - (1 + x_k^{2})\arctan x_k$. Ab $1{,}5$: $-1{,}69$; $2{,}32$; $-5{,}11$; $32{,}3$. Der Umschlagpunkt liegt bei $|x_0| = 1{,}3917$.}{22pt}
+\begin{loesungkarte}{akzent}{5.23}{Newton im Kreis}
+\derweg{Rechnen und zusehen; die Nullstelle lokalisieren; die Schutzmaßnahmen benennen.}
+\schritt{(a)}
+$f(x) = x^{3} - 2x + 2$, $f'(x) = 3x^{2} - 2$. $x_0 = 0$: $f = 2$, $f' = -2$, $x_1 = 0 - \frac2{-2} = 1$. $x_1 = 1$: $f = 1$, $f' = 1$, $x_2 = 1 - 1 = 0$. Dann $x_3 = 1$, $x_4 = 0$: ein Zweierzyklus. Geometrisch: Die Tangente in $0$ trifft die Achse in $1$, die Tangente in $1$ trifft sie in $0$ --- ein Rechteck, aus dem Newton nie herauskommt.
+\schritt{(b)}
+$f(-2) = -8 + 4 + 2 = -2 < 0$, $f(-1) = -1 + 2 + 2 = 3 > 0$: Nullstelle in $(-2, -1)$ (die einzige reelle; $f' > 0$ für $|x| > 0{,}82$ und $f > 0$ auf $[-0{,}82;\ \infty)$). Ab $x_0 = -2$: $x_1 = -2 - \frac{-2}{10} = -1{,}8$; $x_2 = -1{,}8 - \frac{-0{,}232}{7{,}72} = -1{,}7699$; $x_3 = -1{,}76929$. Nullstelle $-1{,}769292$.
+\schritt{(c)}
+$f = \arctan x$, $f' = \frac1{1 + x^{2}}$: $x_{k+1} = x_k - (1 + x_k^{2})\arctan x_k$. Ab $1{,}5$: $x_1 = 1{,}5 - 3{,}25\cdot0{,}9828 = -1{,}694$; $x_2 = 2{,}321$; $x_3 = -5{,}114$; $x_4 = 32{,}3$. Die Iterierten wachsen mit wechselndem Vorzeichen: Weil $\arctan$ abflacht, schießt die Tangente immer weiter über die Null hinaus. Grenze: $|x_0| = 1{,}3917$ (dort $x_1 = -x_0$, ein Zyklus); darunter Konvergenz, darüber Divergenz.
+\schritt{(d)}
+Dämpfung: $x_{k+1} = x_k - \alpha\frac{f}{f'}$ mit $\alpha\in(0, 1]$, so gewählt, dass $|f(x_{k+1})| < |f(x_k)|$ (Armijo-Regel); Schrittweite halbieren, bis es gilt. Einfangen: erst Bisektion, bis das Intervall klein ist, dann Newton. Abbruch: wenn $|f|$ wächst oder $f'\approx0$. Mehrere Startwerte. Und: das Ergebnis immer durch Einsetzen prüfen.
+\begin{fehler}\kastentext
+Newton ist ein lokales Verfahren. Der Konvergenzsatz gilt in einer Umgebung der Nullstelle, deren Größe man vorher nicht kennt. Weit weg kann Newton zyklen, divergieren oder gegen eine andere Nullstelle laufen --- die Einzugsgebiete sind Fraktale (Band 8).
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Nie ungedämpft Newton ohne Kontrolle laufen lassen. Die Faustregel \enquote{Residuum muss fallen} kostet eine Zeile Code und verwandelt ein launisches Verfahren in ein robustes.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.24
+\stupserzwei{gruen}{Fehler: $0{,}086$; $0{,}0025$; $2{,}1\cdot10^{-6}$; $1{,}6\cdot10^{-12}$; $< 10^{-16}$. Richtige Stellen: $1, 2, 5, 11, 16$.}{22pt}
+\begin{loesungkarte}{gruen}{5.24}{$\sqrt2$ auf zehn Stellen}
+\derweg{Heron-Form der Iteration, fünf Schritte, Stellen zählen.}
+\schritt{Iteration}
+$x_{k+1} = \frac12\bigl(x_k + \frac2{x_k}\bigr)$. Ab $x_0 = 1$:
+\begin{center}\small
+\begin{tabular}{c|l|l|c}
+$k$ & $x_k$ & Fehler & richtige Stellen\\ \hline
+1 & $1{,}5$ & $8{,}6\cdot10^{-2}$ & 1\\
+2 & $1{,}41\underline{66666667}$ & $2{,}5\cdot10^{-3}$ & 2\\
+3 & $1{,}41421\underline{56862745}$ & $2{,}1\cdot10^{-6}$ & 5\\
+4 & $1{,}41421356237\underline{46899}$ & $1{,}6\cdot10^{-12}$ & 11\\
+5 & $1{,}4142135623730950$ & $< 10^{-16}$ & 16
+\end{tabular}
+\end{center}
+Nach vier Schritten zehn Stellen, nach fünf die volle double-Genauigkeit.
+\schritt{Warum Verdopplung}
+$x_{k+1} - \sqrt2 = \frac{(x_k - \sqrt2)^{2}}{2x_k}$: Der neue Fehler ist das Quadrat des alten, geteilt durch $2x_k\approx2{,}83$. Ein Fehler von $10^{-m}$ wird zu $10^{-2m}/2{,}83$.
+\probe{$1{,}4142135623730950^{2} = 1{,}9999999999999999$ in double, das ist $2 - \varepsilon_M$. \checkmark\ Heron, Alexandria, 1.~Jahrhundert: dieselbe Iteration für Quadratwurzeln.}
+\begin{mitnehmen}\kastentext
+Quadratische Konvergenz heißt Stellenverdopplung; von $1$ Stelle auf $16$ braucht man $\log_2 16 = 4$ Schritte (plus einen, weil der Start grob war). Deshalb rechnen Prozessoren Wurzeln und Kehrwerte mit Newton: eine Tabelle für den Start, drei Schritte für alles Weitere.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.25
+\stupserzwei{gruen}{Fixpunkt: $x_{30} = 0{,}739087$, Fehler $2\cdot10^{-6}$. Newton: $x_3 = 0{,}7390851334$, Fehler $2\cdot10^{-10}$.}{22pt}
+\begin{loesungkarte}{gruen}{5.25}{$x = \cos x$: Fixpunkt oder Newton}
+\derweg{Existenz und Kontraktion prüfen; beide Iterationen laufen lassen; Schritte zählen.}
+\schritt{Existenz}
+$h(x) = x - \cos x$: $h(0) = -1$, $h(1) = 0{,}46$, Nullstelle in $(0, 1)$; $h' = 1 + \sin x > 0$, also eindeutig.
+\schritt{Kontraktion}
+$g(x) = \cos x$, $|g'(x)| = |\sin x|\le\sin0{,}9 = 0{,}78 < 1$ auf $[0{,}5;\ 0{,}9]$, und $g$ bildet $[0{,}5;\ 0{,}9]$ nach $[0{,}62;\ 0{,}88]$ ab --- in sich. Banach: Die Iteration konvergiert für jeden Start dort; Rate $|g'(x^{*})| = \sin0{,}739 = 0{,}674$.
+\schritt{Fixpunktiteration}
+$1\to0{,}5403\to0{,}8576\to0{,}6543\to0{,}7935\to0{,}7014\to0{,}7640\to0{,}7221\to0{,}7504\to\dots$ Die Werte pendeln um $0{,}7391$ (weil $g' < 0$) und nähern sich mit Faktor $0{,}67$. Nach $10$ Schritten Fehler $5\cdot10^{-3}$, nach $20$ Schritten $1{,}1\cdot10^{-4}$, nach $30$ Schritten $2\cdot10^{-6}$. Für $10^{-6}$: $\log(10^{-6}/0{,}26)/\log0{,}674\approx32$ Schritte.
+\schritt{Newton}
+$x_{k+1} = x_k - \frac{x_k - \cos x_k}{1 + \sin x_k}$: $1\to0{,}7504\to0{,}73911\to0{,}7390851\to0{,}73908513322$. Nach $3$ Schritten $10^{-6}$, nach $4$ Schritten $10^{-16}$.
+\probe{$\cos0{,}7390851332 = 0{,}7390851332$. \checkmark\ Fixpunktfehler-Quotienten: $0{,}0113/0{,}0167 = 0{,}68$, $\dots$ --- konstant $0{,}674$. \checkmark}
+\begin{mitnehmen}\kastentext
+Fixpunktiteration: linear, Rate $|g'(x^{*})|$, robust, keine Ableitung. Newton: quadratisch, aber nur lokal. Newton \emph{ist} eine Fixpunktiteration mit $g = x - f/f'$ --- und $g'(x^{*}) = 0$ ist der Grund für die quadratische Konvergenz: Die lineare Rate ist null.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.26
+\stupserzwei{gruen}{Bei $(1;\ -1{,}7)$: $F = (-0{,}11;\ 0{,}0183)$, $J = \begin{pmatrix}2 & -3{,}4\\ 2{,}718 & 1\end{pmatrix}$, $\det J = 11{,}24$. Schritt $s = (0{,}00426;\ -0{,}02985)$.}{22pt}
+\begin{loesungkarte}{gruen}{5.26}{Newton in zwei Dimensionen}
+\derweg{$F$ und $J$ auswerten, $Js = -F$ lösen, $x\leftarrow x + s$; zweimal.}
+\schritt{Aufstellen}
+$F(x, y) = \begin{pmatrix}x^{2} + y^{2} - 4\\ e^{x} + y - 1\end{pmatrix}$, $J = \begin{pmatrix}2x & 2y\\ e^{x} & 1\end{pmatrix}$.
+\schritt{Schritt 1}
+Bei $(1;\ -1{,}7)$: $F = (1 + 2{,}89 - 4;\ 2{,}7183 - 1{,}7 - 1) = (-0{,}11;\ 0{,}0183)$. $J = \begin{pmatrix}2 & -3{,}4\\ 2{,}7183 & 1\end{pmatrix}$, $\det = 2 + 9{,}242 = 11{,}242$. $s = J^{-1}(-F) = \frac1{11{,}242}\begin{pmatrix}1 & 3{,}4\\ -2{,}7183 & 2\end{pmatrix}\begin{pmatrix}0{,}11\\ -0{,}0183\end{pmatrix} = \frac1{11{,}242}\begin{pmatrix}0{,}0478\\ -0{,}3356\end{pmatrix} = \begin{pmatrix}0{,}00426\\ -0{,}02985\end{pmatrix}$. Neu: $(1{,}00426;\ -1{,}72985)$.
+\schritt{Schritt 2}
+$F = (1{,}00854 + 2{,}99238 - 4;\ 2{,}72988 - 1{,}72985 - 1) = (0{,}00092;\ 0{,}00003)$. $J\approx\begin{pmatrix}2{,}0085 & -3{,}4597\\ 2{,}7299 & 1\end{pmatrix}$, $\det = 2{,}0085 + 9{,}4447 = 11{,}453$. $s = \frac1{11{,}453}\begin{pmatrix}1 & 3{,}4597\\ -2{,}7299 & 2{,}0085\end{pmatrix}\begin{pmatrix}-0{,}00092\\ -0{,}00003\end{pmatrix} = (-0{,}000089;\ 0{,}000214)$. Neu: $(1{,}004169;\ -1{,}729637)$.
+\schritt{Genauigkeit}
+Exakt (weitere Schritte): $(1{,}004169;\ -1{,}729637)$. Nach Schritt 1 stimmen $3$ Stellen, nach Schritt 2 alle $7$ --- Verdopplung.
+\probe{$1{,}004169^{2} + 1{,}729637^{2} = 1{,}008355 + 2{,}991644 = 3{,}999999$. \checkmark\ $e^{1{,}004169} - 1{,}729637 = 2{,}729637 - 1{,}729637 = 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Mehrdimensionales Newton: pro Schritt ein lineares System mit der Jacobi-Matrix. Man berechnet nie $J^{-1}$, sondern löst $Js = -F$ (Aufgabe 5.11). Quadratische Konvergenz bleibt, ebenso die Startwertabhängigkeit --- und mit $n = 10^{6}$ Unbekannten ist das lineare System der eigentliche Aufwand.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.27
+\stupserzwei{tief}{$p_2(2) = 1 + \frac13 + \frac2{60} = 1{,}3667$; $\sqrt2 = 1{,}4142$; Fehler $0{,}048$. Schranke $\frac{3/8}6\cdot14 = 0{,}875$.}{22pt}
+\begin{loesungkarte}{tief}{5.27}{Der Interpolationsfehler}
+\derweg{Beide Formen aufstellen, auswerten, Fehlerformel mit $\max|f'''|$ und $\omega$ --- und dann das Maximum von $|f'''|$ als Übeltäter erkennen.}
+\schritt{(a) Lagrange}
+$L_0 = \frac{(x - 4)(x - 9)}{(1 - 4)(1 - 9)} = \frac{(x - 4)(x - 9)}{24}$, $L_1 = \frac{(x - 1)(x - 9)}{(4 - 1)(4 - 9)} = -\frac{(x - 1)(x - 9)}{15}$, $L_2 = \frac{(x - 1)(x - 4)}{40}$. $p_2 = 1\cdot L_0 + 2L_1 + 3L_2$.
+\schritt{(a) Newton}
+$f[1, 4] = \frac{2 - 1}3 = \frac13$, $f[4, 9] = \frac{3 - 2}5 = \frac15$, $f[1, 4, 9] = \frac{1/5 - 1/3}{9 - 1} = -\frac1{60}$. $p_2(x) = 1 + \frac13(x - 1) - \frac1{60}(x - 1)(x - 4)$.
+\schritt{(b)}
+$p_2(2) = 1 + \frac13 - \frac1{60}(1)(-2) = 1 + 0{,}3333 + 0{,}0333 = 1{,}3667$. $\sqrt2 = 1{,}4142$; Fehler $0{,}0476$.
+\schritt{(c)}
+$f''' = \frac38x^{-5/2}$, auf $[1, 9]$ maximal bei $1$: $\frac38$. $\omega(2) = (1)(-2)(-7) = 14$. Schranke $\frac{3/8}{6}\cdot14 = 0{,}875$ --- achtzehnmal größer als der wahre Fehler. Grund: $f'''$ fällt von $0{,}375$ bei $1$ auf $0{,}0015$ bei $9$; das $\xi$ der Fehlerformel liegt irgendwo in $[1, 9]$, und das Maximum ist unrealistisch pessimistisch. (Mit $f'''(2) = 0{,}066$ käme $0{,}155$ heraus --- immer noch grob, weil $\omega$ bei $2$ relativ groß ist.)
+\schritt{(d)}
+$\omega(x) = (x - 1)(x - 4)(x - 9)$ hat auf $[1, 4]$ sein Extremum bei $x\approx2{,}2$ ($|\omega|\approx14{,}7$) und auf $[4, 9]$ bei $x\approx7{,}1$ ($|\omega|\approx35$). $|\omega|$ ist dort am größten, wo die Knoten am weitesten auseinanderliegen --- hier im rechten Intervall. Knoten dichter setzen, wo man interpolieren will; für den ganzen Bereich: Tschebyschow-Knoten (Aufgabe 5.30).
+\probe{Lagrange bei $2$: $1\cdot\frac{14}{24} + 2\cdot\frac7{15} - 3\cdot\frac{2}{40} = 0{,}5833 + 0{,}9333 - 0{,}15 = 1{,}3667$. \checkmark}
+\begin{mitnehmen}\kastentext
+Fehler $= \frac{f^{(n+1)}(\xi)}{(n + 1)!}\omega(x)$: zwei Faktoren, einer von der Funktion, einer von den Knoten. Nur den zweiten kann man wählen. Die Schranke mit $\max|f^{(n+1)}|$ ist oft um Größenordnungen zu groß --- aber sie ist das Einzige, was man garantieren kann.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.28
+\stupserzwei{akzent}{Grad 2: $p(x) = 1 - \frac{25}{26}x^{2}$, $p(0{,}9) = 0{,}221$. Grad 4: $p(0{,}9) = -0{,}289$ --- negativ, obwohl $f > 0$. $f(0{,}9) = 0{,}047$.}{22pt}
+\begin{loesungkarte}{akzent}{5.28}{Höherer Grad, schlechteres Ergebnis}
+\derweg{Beide Polynome aufstellen (gerade Symmetrie hilft), am Rand auswerten; dann die Fehlerformel lesen.}
+\schritt{(a) Grad 2}
+Knoten $\pm1$ (Wert $\frac1{26}$), $0$ (Wert $1$). $p$ ist gerade: $p = 1 + ax^{2}$ mit $1 + a = \frac1{26}$, $a = -\frac{25}{26}$. $p(0{,}9) = 1 - 0{,}9615\cdot0{,}81 = 0{,}221$. Fehler $0{,}174$.
+\schritt{(a) Grad 4}
+$p = 1 + ax^{2} + bx^{4}$ mit $p(\frac12) = \frac1{7{,}25} = 0{,}1379$, $p(1) = 0{,}0385$: $\frac a4 + \frac b{16} = -0{,}8621$, $a + b = -0{,}9615$. Lösung $a = -4{,}277$, $b = 3{,}316$. $p(0{,}9) = 1 - 3{,}465 + 2{,}175 = -0{,}289$. Fehler $0{,}336$ --- doppelt so groß wie bei Grad $2$, und negativ.
+\schritt{(b)}
+Gleichabständig: Der Fehler wächst mit dem Grad, exponentiell ($0{,}44\to1{,}9\to60$). Tschebyschow: Er fällt ($0{,}40\to0{,}11\to0{,}015$). Die Knotenwahl entscheidet über Konvergenz oder Divergenz.
+\schritt{(c)}
+Fehler $= \frac{f^{(n+1)}(\xi)}{(n + 1)!}\omega(x)$. Bei gleichabständigen Knoten ist $|\omega|$ in der Mitte klein und am Rand riesig (die Knoten liegen \enquote{in der Mitte zu dicht}): $\max|\omega|$ bei $n = 20$ etwa $10^{4}$-mal größer als bei Tschebyschow-Knoten. Und $f$ hat Pole bei $\pm\frac i5$, nahe am reellen Intervall: $f^{(n+1)}$ wächst wie $n!\cdot5^{n+1}$. Beides zusammen: Divergenz am Rand für $|x| > 0{,}726$ (Runge 1901).
+\schritt{(d)}
+Tschebyschow-Knoten (Aufgabe 5.30); stückweise Interpolation mit niedrigem Grad --- Splines (Aufgabe 5.31); Approximation statt Interpolation --- kleinste Quadrate (Aufgabe 5.33).
+\probe{$p_4$ ist bei $x = 0{,}9$ negativ, bei $1$ gleich $0{,}0385$ und bei $0{,}5$ gleich $0{,}138$ --- es schwingt zwischen den Knoten durch. \checkmark}
+\begin{fehler}\kastentext
+\enquote{Mehr Daten, besseres Polynom} ist falsch, wenn die Daten gleichabständig sind und der Grad mitwächst. Interpolationspolynome hohen Grades auf gleichabständigen Knoten sind in der Praxis fast immer ein Fehler --- Grad $3$ bis $5$ stückweise, oder Tschebyschow.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Das Runge-Phänomen ist kein Rundungsproblem, sondern Mathematik: Das Interpolationspolynom konvergiert auf $[-1, 1]$ nur, wenn $f$ in einer Ellipse um das Intervall analytisch ist, die groß genug ist --- und Pole bei $\pm0{,}2i$ sind zu nah. Tschebyschow-Knoten schrumpfen die nötige Ellipse auf das Intervall selbst.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.29
+\stupserzwei{gruen}{$p(x) = 1 + 1\cdot x + 3\cdot x(x - 1) + 1\cdot x(x - 1)(x - 2)$. Ausmultipliziert: $x^{3} + 1$.}{22pt}
+\begin{loesungkarte}{gruen}{5.29}{Das Newton-Schema}
+\derweg{Dividierte Differenzen dreieckig, Diagonale ablesen, ausmultiplizieren.}
+\schritt{Schema}
+\begin{center}\small
+\begin{tabular}{c|c|c|c|c}
+$x_i$ & $f$ & 1.\ DD & 2.\ DD & 3.\ DD\\ \hline
+0 & 1 & & & \\
+ & & $\frac{2 - 1}{1} = 1$ & & \\
+1 & 2 & & $\frac{7 - 1}{2} = 3$ & \\
+ & & $\frac{9 - 2}{1} = 7$ & & $\frac{6 - 3}{3} = 1$\\
+2 & 9 & & $\frac{19 - 7}{2} = 6$ & \\
+ & & $\frac{28 - 9}{1} = 19$ & & \\
+3 & 28 & & &
+\end{tabular}
+\end{center}
+\schritt{Polynom}
+Koeffizienten: die obere Diagonale $1, 1, 3, 1$.
+$p(x) = 1 + x + 3x(x - 1) + x(x - 1)(x - 2) = 1 + x + 3x^{2} - 3x + x^{3} - 3x^{2} + 2x = x^{3} + 1$.
+\probe{$0^{3} + 1 = 1$, $1 + 1 = 2$, $8 + 1 = 9$, $27 + 1 = 28$. \checkmark\ Dritte dividierte Differenz $1$ = führender Koeffizient. \checkmark}
+\begin{mitnehmen}\kastentext
+Das Newton-Schema ist Lagrange mit Gedächtnis: Ein neuer Knoten fügt eine Diagonale und einen Term hinzu, das bisherige Polynom bleibt. Die $k$-te dividierte Differenz ist $\frac{f^{(k)}(\xi)}{k!}$ für ein $\xi$ --- deshalb liest man am Schema ab, welchen Grad die Daten \enquote{brauchen}: Hier wird die dritte Differenz konstant, die vierte wäre null.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.30
+\stupserzwei{gruen}{Für Tschebyschow-Knoten ist $\omega(x) = 2^{-n}T_{n+1}(x)$, also $\max|\omega| = 2^{-4} = 0{,}0625$. Gleichabständig: $0{,}1135$.}{22pt}
+\begin{loesungkarte}{gruen}{5.30}{Tschebyschow-Knoten}
+\derweg{Nullstellen von $T_5$, dann $\max|\omega|$ exakt; gleichabständig numerisch.}
+\schritt{Knoten}
+$x_k = \cos\frac{(2k + 1)\pi}{10}$, $k = 0, \dots, 4$: $\cos18^{\circ} = 0{,}9511$, $\cos54^{\circ} = 0{,}5878$, $\cos90^{\circ} = 0$, $-0{,}5878$, $-0{,}9511$. Dichter am Rand als in der Mitte.
+\schritt{$\max|\omega|$}
+$\omega(x) = \prod(x - x_k) = 2^{-4}T_5(x)$ (das Tschebyschow-Polynom $T_5 = 16x^{5} - 20x^{3} + 5x$ hat führenden Koeffizienten $16$ und genau diese Nullstellen). Da $|T_5|\le1$: $\max|\omega| = \frac1{16} = 0{,}0625$, angenommen an $6$ Stellen abwechselnd.
+\schritt{Gleichabständig}
+Knoten $-1, -\frac12, 0, \frac12, 1$: $\omega(x) = x(x^{2} - 1)(x^{2} - \frac14)$. Maximum nahe $x = \pm0{,}88$: $0{,}1135$. Fast das Doppelte --- und das Verhältnis wächst mit $n$ exponentiell (bei $n = 20$: Faktor $\approx10^{4}$).
+\probe{$T_5(1) = 16 - 20 + 5 = 1$. \checkmark\ $\omega(0{,}3)$ mit Tschebyschow-Knoten: $0{,}3\cdot(0{,}09 - 0{,}3455)(0{,}09 - 0{,}9045) = 0{,}3\cdot(-0{,}2555)(-0{,}8145) = 0{,}0624$ --- nahe am Maximum, wie es sein soll. \checkmark}
+\begin{mitnehmen}\kastentext
+Tschebyschow-Knoten minimieren $\max|\omega|$ unter allen Knotenwahlen --- das ist die Minimax-Eigenschaft von $T_n$: Unter allen normierten Polynomen vom Grad $n$ hat $2^{1-n}T_n$ die kleinste Maximumnorm auf $[-1, 1]$. Praktisch: Knoten am Rand verdichten, weil dort $\omega$ sonst explodiert.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.31
+\stupserzwei{gruen}{$4M_1 + M_2 = -18$, $M_1 + 4M_2 = 18$: $M_1 = -6$, $M_2 = 6$.}{22pt}
+\begin{loesungkarte}{gruen}{5.31}{Ein natürlicher Spline}
+\derweg{Momentengleichungen, Momente, dann die Stücke aus der Standardformel; Glattheit an den Nahtstellen prüfen.}
+\schritt{Momente}
+$h = 1$, $M_0 = M_3 = 0$. Gleichungen $M_{i-1} + 4M_i + M_{i+1} = 6(y_{i+1} - 2y_i + y_{i-1})$: $i = 1$: $4M_1 + M_2 = 6(0 - 4 + 1) = -18$. $i = 2$: $M_1 + 4M_2 = 6(1 - 0 + 2) = 18$. Lösung $M_1 = -6$, $M_2 = 6$.
+\schritt{Stücke}
+Auf $[x_i, x_{i+1}]$ mit $t = x - x_i$: $S_i(t) = y_i + b_it + \frac{M_i}2t^{2} + \frac{M_{i+1} - M_i}6t^{3}$, $b_i = y_{i+1} - y_i - \frac{2M_i + M_{i+1}}6$.
+$S_0$: $b_0 = 1 - \frac{-6}6 = 2$: $S_0 = 1 + 2x - x^{3}$. \\
+$S_1$: $b_1 = -2 - \frac{-12 + 6}6 = -1$: $S_1 = 2 - (x - 1) - 3(x - 1)^{2} + 2(x - 1)^{3}$. \\
+$S_2$: $b_2 = 1 - \frac{12}6 = -1$: $S_2 = 0 - (x - 2) + 3(x - 2)^{2} - (x - 2)^{3}$.
+\schritt{Glattheit bei $x = 1$}
+Werte: $S_0(1) = 1 + 2 - 1 = 2 = S_1(1)$. \checkmark\ Steigungen: $S_0' = 2 - 3x^{2}$, $S_0'(1) = -1$; $S_1'(1) = b_1 = -1$. \checkmark\ Krümmungen: $S_0'' = -6x$, $S_0''(1) = -6 = M_1 = S_1''(1)$. \checkmark
+\begin{center}
+\begin{tikzpicture}[x=1.6cm,y=0.9cm]
+\draw[->,linie] (-0.2,0)--(3.4,0); \draw[->,linie] (0,-0.4)--(0,2.6);
+\draw[tief,thick,domain=0:1,samples=40,smooth] plot (\x,{1+2*\x-\x*\x*\x});
+\draw[tief,thick,domain=1:2,samples=40,smooth] plot (\x,{2-(\x-1)-3*(\x-1)^2+2*(\x-1)^3});
+\draw[tief,thick,domain=2:3,samples=40,smooth] plot (\x,{-(\x-2)+3*(\x-2)^2-(\x-2)^3});
+\foreach \p in {(0,1),(1,2),(2,0),(3,1)} \fill[akzent] \p circle (1.6pt);
+\foreach \x in {1,2,3} \node[below,font=\scriptsize,grau] at (\x,0) {\x};
+\end{tikzpicture}
+\end{center}
+\probe{$S_1(2) = 2 - 1 - 3 + 2 = 0$, $S_2(3) = -1 + 3 - 1 = 1$. \checkmark\ Natürlich: $S_0''(0) = 0$, $S_2''(3) = 6 - 6 = 0$. \checkmark}
+\begin{mitnehmen}\kastentext
+Ein kubischer Spline ist zweimal stetig differenzierbar und minimiert $\int S''^{2}$ --- die Biegeenergie eines Lineals. Die Momentengleichungen sind tridiagonal und diagonaldominant: $O(n)$ Aufwand, keine Pivotisierung, kein Runge-Phänomen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.32
+\stupserzwei{gruen}{$c_1 = \frac14(1 + 2i^{-1} + 1\cdot i^{-2} + 0) = \frac14(1 - 2i - 1) = -\frac i2$.}{22pt}
+\begin{loesungkarte}{gruen}{5.32}{Eine DFT von Hand}
+\derweg{$\omega = i$, Potenzen tabellieren, vier Summen.}
+\schritt{Vorbereitung}
+$N = 4$, $\omega = e^{2\pi i/4} = i$, $c_k = \frac14\sum_{j=0}^{3}y_j\,i^{-kj}$. Potenzen: $i^{0} = 1$, $i^{-1} = -i$, $i^{-2} = -1$, $i^{-3} = i$.
+\schritt{Koeffizienten}
+$c_0 = \frac14(1 + 2 + 1 + 0) = 1$. \\
+$c_1 = \frac14(1 + 2(-i) + 1(-1) + 0) = \frac14(-2i) = -\frac i2$. \\
+$c_2 = \frac14(1 + 2(-1) + 1(1) + 0) = 0$. \\
+$c_3 = \frac14(1 + 2(i) + 1(-1) + 0) = \frac i2$.
+\schritt{Deutung}
+$c_0 = 1$: Mittelwert. $c_1 = -\frac i2$ und $c_3 = \overline{c_1}$: eine Schwingung der Grundfrequenz mit Amplitude $2|c_1| = 1$ und Phase $-\frac\pi2$, also ein Sinus. $c_2 = 0$: keine Nyquist-Komponente. Tatsächlich $y_j = 1 + \sin\frac{2\pi j}4$: $1, 2, 1, 0$. \checkmark
+\probe{Parseval: $\frac14\sum|y_j|^{2} = \frac{1 + 4 + 1}4 = 1{,}5$; $\sum|c_k|^{2} = 1 + \frac14 + 0 + \frac14 = 1{,}5$. \checkmark}
+\begin{mitnehmen}\kastentext
+Für reelle Daten ist $c_{N-k} = \overline{c_k}$; die Hälfte der Koeffizienten ist redundant. Die FFT berechnet alle $N$ Koeffizienten in $O(N\log N)$ statt $O(N^{2})$ --- bei $N = 10^{6}$ der Unterschied zwischen Millisekunden und Stunden, und der Grund, warum digitale Signalverarbeitung existiert.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.33
+\stupserzwei{gruen}{$c_0 = \frac{e - e^{-1}}2 = \sinh1 = 1{,}1752$, $c_1 = \frac32\cdot\frac2e = \frac3e = 1{,}1036$.}{22pt}
+\begin{loesungkarte}{gruen}{5.33}{Beste Quadratmittel-Approximation}
+\derweg{Projektion auf $P_0 = 1$, $P_1 = x$ mit $c_k = \frac{\langle f, P_k\rangle}{\langle P_k, P_k\rangle}$; dann Vergleich mit Taylor an den Rändern und in der Norm.}
+\schritt{Koeffizienten}
+$\langle1, 1\rangle = 2$, $\langle x, x\rangle = \frac23$, $\langle1, x\rangle = 0$ (orthogonal). $\langle e^{x}, 1\rangle = e - e^{-1} = 2{,}3504$, $c_0 = 1{,}1752$. $\langle e^{x}, x\rangle = [xe^{x} - e^{x}]_{-1}^{1} = 0 + 2e^{-1} = 0{,}7358$, $c_1 = \frac{0{,}7358}{2/3} = 1{,}1036$.
+\schritt{Ergebnis}
+$p(x) = 1{,}1752 + 1{,}1036x$. Taylor: $1 + x$.
+\schritt{Vergleich}
+Bei $x = 1$: $e = 2{,}718$; $p = 2{,}279$; Taylor $2$. Bei $x = -1$: $0{,}368$; $p = 0{,}072$; Taylor $0$. Bei $0$: $1$; $p = 1{,}175$; Taylor $1$ (exakt). Taylor ist in der Mitte besser und am Rand schlechter. In der $L^{2}$-Norm: $\|e^{x} - p\|_2 = 0{,}229$, $\|e^{x} - (1 + x)\|_2 = 0{,}348$. Die Projektion gewinnt --- sie ist dafür gebaut.
+\probe{$\|e^{x}\|_2^{2} = \frac{e^{2} - e^{-2}}2 = 3{,}627$; $\|p\|_2^{2} = 2c_0^{2} + \frac23c_1^{2} = 2{,}762 + 0{,}812 = 3{,}574$; Fehler$^{2}$ $= 0{,}053$, Fehler $0{,}230$ (Pythagoras). \checkmark}
+\begin{mitnehmen}\kastentext
+Orthogonale Polynome machen die Normalengleichungen diagonal: Jeder Koeffizient ist ein einzelnes Integral, und mehr Terme ändern die alten nicht. Taylor ist lokal optimal (bei $0$), die Projektion global --- für ein ganzes Intervall ist sie fast immer die bessere Wahl.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.34
+\stupserzwei{gruen}{$r(0) = -b = E$, $r(1) = 1 - a - b = E$, $r(\frac a2) = -\frac{a^{2}}4 - b = -E$. Aus den ersten beiden: $a = 1$; dann $-\frac14 - b = b$, $b = -\frac18$.}{22pt}
+\begin{loesungkarte}{gruen}{5.34}{Beste gleichmäßige Approximation}
+\derweg{Drei Alternanten (Ränder und Scheitel), Alternanzbedingungen, lösen.}
+\schritt{Ansatz}
+$p(x) = ax + b$, $r(x) = x^{2} - ax - b$, nach oben geöffnete Parabel. Für $n = 1$ braucht man $n + 2 = 3$ Alternanten: die Ränder $0$, $1$ (Maxima von $r$) und den Scheitel $x = \frac a2$ (Minimum).
+\schritt{Gleichungen}
+$r(0) = -b = E$, $r(1) = 1 - a - b = E$, $r(\frac a2) = \frac{a^{2}}4 - \frac{a^{2}}2 - b = -\frac{a^{2}}4 - b = -E$.
+\schritt{Lösen}
+Aus den ersten beiden: $1 - a = 0$, $a = 1$. Dann $-\frac14 - b = -E = b$, also $b = -\frac18$, $E = \frac18$.
+\schritt{Ergebnis}
+$p(x) = x - \frac18$, Fehler $\|x^{2} - p\|_\infty = \frac18$, angenommen bei $0$ ($+$), $\frac12$ ($-$), $1$ ($+$).
+\probe{$r(0) = \frac18$, $r(\frac12) = \frac14 - \frac12 + \frac18 = -\frac18$, $r(1) = 1 - 1 + \frac18 = \frac18$. \checkmark\ Zum Vergleich: die Sekante $p = x$ hat Fehler $\frac14$, die Tangente bei $\frac12$, $p = x - \frac14$, ebenfalls $\frac14$. Die Minimax-Lösung liegt genau dazwischen. \checkmark}
+\begin{mitnehmen}\kastentext
+Alternantensatz: $p_n$ ist die beste gleichmäßige Approximation genau dann, wenn der Fehler an $n + 2$ Stellen abwechselnd $\pm E$ annimmt. Für $x^{2}$ auf $[0, 1]$ ist der Fehler $\frac18 = \frac12\cdot2^{-2}$ --- das Tschebyschow-Polynom $T_2$, auf $[0, 1]$ transformiert. Der Remez-Algorithmus findet die Alternanten iterativ; Bibliotheken berechnen so $\sin$, $\exp$ und Co.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.35
+\stupserzwei{tief}{Trapez-Fehler $1{,}55\cdot10^{-2}$; $3{,}84\cdot10^{-3}$; $9{,}59\cdot10^{-4}$; $2{,}40\cdot10^{-4}$: Quotienten $4{,}02$; $4{,}01$; $4{,}00$.}{22pt}
+\begin{loesungkarte}{tief}{5.35}{Die Fehlerordnung messen}
+\derweg{Fehler tabellieren, Quotienten bilden, $p = \log_2(\text{Quotient})$; Richardson aus zwei Werten.}
+\schritt{(a)}
+\begin{center}\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l|cccc}
+$m$ & 2 & 4 & 8 & 16\\ \hline
+Trapez-Fehler & $-1{,}55\cdot10^{-2}$ & $-3{,}84\cdot10^{-3}$ & $-9{,}59\cdot10^{-4}$ & $-2{,}40\cdot10^{-4}$\\
+Quotient & & $4{,}02$ & $4{,}01$ & $4{,}00$\\ \hline
+Simpson-Fehler & $3{,}56\cdot10^{-4}$ & $3{,}12\cdot10^{-5}$ & $1{,}99\cdot10^{-6}$ & $1{,}25\cdot10^{-7}$\\
+Quotient & & $11{,}4$ & $15{,}7$ & $16{,}0$
+\end{tabular}
+\end{center}
+Trapez: Quotient $4 = 2^{2}$, Ordnung $2$. Simpson: Quotient $\to16 = 2^{4}$, Ordnung $4$.
+\schritt{(b)}
+Fehler $\approx Ch^{2}$: $T(h) - I\approx4(T(h/2) - I)$, also $I\approx T(h/2) + \frac{T(h/2) - T(h)}3$. Mit $m = 4, 8$: $0{,}7458656 + \frac{0{,}0028815}3 = 0{,}7468261$ --- das ist Simpson mit $m = 8$, Fehler $2\cdot10^{-6}$. Die Fehlerschätzung $\frac{T(h/2) - T(h)}3 = 9{,}6\cdot10^{-4}$ trifft den wahren Fehler $9{,}59\cdot10^{-4}$ von $T(h/2)$.
+\schritt{(c)}
+Trapez: Fehler $\approx\frac{0{,}0615}{m^{2}}$; $10^{-10}$ bei $m\approx25\,000$. Simpson: Fehler $\approx\frac{0{,}0082}{m^{4}}$; $10^{-10}$ bei $m\approx96$. Faktor $260$ in den Funktionsauswertungen --- das ist der Wert einer höheren Ordnung.
+\schritt{(d)}
+Der Fehler ist $C_4h^{4} + C_6h^{6} + \dots$; bei grobem $h$ ist der $h^{6}$-Term noch spürbar, und der Quotient weicht von $16$ ab. Die Ordnung ist eine asymptotische Aussage: $p$ erkennt man erst, wenn $h$ klein genug ist. Umgekehrt: Bleibt der Quotient weit unter dem Erwarteten, fehlt der Funktion Glattheit --- oder dem Programm ein Faktor.
+\probe{Trapezfehler-Vorzeichen: $-\frac{h^{2}}{12}\int f''$, und $\int_0^1f'' = f'(1) - f'(0) = -2e^{-1} < 0$: Fehler negativ (Trapez zu klein, Integrand konkav in der Mitte --- nein: $f'' < 0$ auf $[0, 0{,}7]$, Trapezsehnen liegen unter der Kurve). \checkmark}
+\begin{mitnehmen}\kastentext
+Ordnung messen: $p = \log_2\frac{e(h)}{e(h/2)}$. Das ist der wichtigste Test für jede Implementierung --- stimmt die Ordnung nicht, ist etwas falsch. Und Richardson: Aus zwei Näherungen der Ordnung $p$ wird eine der Ordnung $p + 2$ (bei geraden Entwicklungen), gratis.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.36
+\stupserzwei{gruen}{Trapez $0{,}742984$, Simpson $0{,}746855$; exakt $0{,}746824$. Fehlerschranken: $\frac{h^{2}}{12}\max|f''| = 0{,}0104$, $\frac{h^{4}}{180}\max|f^{(4)}| = 2{,}6\cdot10^{-4}$.}{22pt}
+\begin{loesungkarte}{gruen}{5.36}{Trapez und Simpson}
+\derweg{Fünf Funktionswerte, zwei gewichtete Summen, Fehlerformeln mit Ableitungsschranken.}
+\schritt{Funktionswerte}
+$h = 0{,}25$: $f_0 = 1$, $f_1 = 0{,}939413$, $f_2 = 0{,}778801$, $f_3 = 0{,}569783$, $f_4 = 0{,}367879$.
+\schritt{Trapez}
+$T = h\bigl(\frac{f_0 + f_4}2 + f_1 + f_2 + f_3\bigr) = 0{,}25\cdot(0{,}683940 + 2{,}287997) = 0{,}742984$.
+\schritt{Simpson}
+$S = \frac h3(f_0 + 4f_1 + 2f_2 + 4f_3 + f_4) = \frac{0{,}25}3\cdot(1 + 3{,}757652 + 1{,}557602 + 2{,}279131 + 0{,}367879) = \frac{0{,}25}3\cdot8{,}962264 = 0{,}746855$.
+\schritt{Fehlerschranken}
+$f'' = (4x^{2} - 2)e^{-x^{2}}$, $|f''|\le2$ auf $[0, 1]$ (bei $0$). Trapez: $|E|\le\frac{(b - a)h^{2}}{12}\max|f''| = \frac{0{,}0625}{12}\cdot2 = 0{,}0104$. Tatsächlich $0{,}0038$. \\
+$f^{(4)} = (16x^{4} - 48x^{2} + 12)e^{-x^{2}}$, $|f^{(4)}|\le12$ (bei $0$). Simpson: $|E|\le\frac{(b - a)h^{4}}{180}\cdot12 = \frac{0{,}00390625\cdot12}{180} = 2{,}6\cdot10^{-4}$. Tatsächlich $3{,}1\cdot10^{-5}$.
+\probe{$\int_0^1e^{-x^{2}}\,dx = \frac{\sqrt\pi}2\operatorname{erf}(1) = 0{,}886227\cdot0{,}842701 = 0{,}746824$. \checkmark\ Beide Schranken halten, mit Faktor $3$ bzw.\ $8$ Luft.}
+\begin{mitnehmen}\kastentext
+Simpson mit $5$ Punkten schlägt Trapez mit $5$ Punkten um zwei Größenordnungen --- Ordnung $4$ gegen $2$. Die Fehlerformeln brauchen Ableitungen, die man selten hat; in der Praxis ersetzt man sie durch den Vergleich zweier Schrittweiten (Aufgabe 5.35) oder durch Romberg (Aufgabe 5.37).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.37
+\stupserzwei{gruen}{Trapezwerte $0{,}683940$; $0{,}731370$; $0{,}742984$; $0{,}745866$. Jede Spalte rechts entsteht aus zwei Nachbarn links.}{22pt}
+\begin{loesungkarte}{gruen}{5.37}{Das Romberg-Schema}
+\derweg{Trapezwerte mit $h, \frac h2, \frac h4, \frac h8$ (Rekursion nutzt alte Punkte), dann Richardson spaltenweise.}
+\schritt{Erste Spalte}
+$R_{0,0} = \frac12(1 + 0{,}367879) = 0{,}683940$. $R_{1,0} = \frac12R_{0,0} + 0{,}5\cdot f(0{,}5) = 0{,}341970 + 0{,}389400 = 0{,}731370$. $R_{2,0} = \frac12R_{1,0} + 0{,}25(f_1 + f_3) = 0{,}365685 + 0{,}377299 = 0{,}742984$. $R_{3,0} = \frac12R_{2,0} + 0{,}125\sum_{\text{neu}}f = 0{,}371492 + 0{,}374374 = 0{,}745866$.
+\schritt{Schema}
+$R_{k,j} = R_{k,j-1} + \frac{R_{k,j-1} - R_{k-1,j-1}}{4^{j} - 1}$:
+\begin{center}\small
+\begin{tabular}{c|llll}
+$k$ & $j = 0$ & $j = 1$ & $j = 2$ & $j = 3$\\ \hline
+0 & $0{,}6839397$ & & & \\
+1 & $0{,}7313703$ & $0{,}7471804$ & & \\
+2 & $0{,}7429841$ & $0{,}7468554$ & $0{,}7468337$ & \\
+3 & $0{,}7458656$ & $0{,}7468261$ & $0{,}7468242$ & $0{,}7468240$
+\end{tabular}
+\end{center}
+\schritt{Fehler}
+Exakt $0{,}7468241$. Spalte $0$ (Trapez): $6\cdot10^{-2}$, $1{,}5\cdot10^{-2}$, $3{,}8\cdot10^{-3}$, $9{,}6\cdot10^{-4}$. Spalte $1$ (Simpson): $3{,}6\cdot10^{-4}$, $3{,}1\cdot10^{-5}$, $2{,}0\cdot10^{-6}$. Spalte $2$: $9{,}6\cdot10^{-6}$, $3{,}7\cdot10^{-8}$. Spalte $3$: $1{,}1\cdot10^{-7}$. \\
+$R_{3,3}$ ist nicht besser als $R_{3,2}$: Die dritte Extrapolation setzt voraus, dass der $h^{6}$-Term schon dominiert, und $R_{2,2}$ war dafür zu grob. Bester Wert im Schema: $R_{3,2}$ mit $8$ richtigen Stellen --- aus $9$ Funktionswerten.
+\probe{Spalte $1$ ist Simpson: $R_{2,1} = 0{,}7468554$ stimmt mit Aufgabe 5.36 überein. \checkmark\ Spalte $2$ ist die Boole-Regel (Ordnung $6$). \checkmark}
+\begin{mitnehmen}\kastentext
+Romberg ist Richardson-Extrapolation in Tabellenform: Jede Spalte gewinnt zwei Ordnungen. Voraussetzung ist die Euler--Maclaurin-Entwicklung des Trapezfehlers in geraden Potenzen von $h$ --- die gilt für glatte Integranden; bei Singularitäten oder Knicken bricht das Schema zusammen (Aufgabe 5.44).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.38
+\stupserzwei{gruen}{Knoten $x = \frac{1\pm\sqrt{3/5}}2$ und $\frac12$: $0{,}1127$; $0{,}5$; $0{,}8873$. Gewichte $\frac5{18}, \frac8{18}, \frac5{18}$ (nach Transformation).}{22pt}
+\begin{loesungkarte}{gruen}{5.38}{Gauß--Legendre mit drei Punkten}
+\derweg{Transformieren, drei Funktionswerte, gewichtete Summe; Vergleich mit Simpson $m = 2$.}
+\schritt{Transformation}
+$x = \frac{t + 1}2$, $dx = \frac{dt}2$: $I = \frac12\int_{-1}^{1}e^{-((t + 1)/2)^{2}}\,dt$. Knoten $t = -\sqrt{3/5}, 0, \sqrt{3/5}$ mit Gewichten $\frac59, \frac89, \frac59$.
+\schritt{Auswertung}
+$x_0 = 0{,}112702$: $f = 0{,}987377$. $x_1 = 0{,}5$: $f = 0{,}778801$. $x_2 = 0{,}887298$: $f = 0{,}455062$. \\
+$I\approx\frac12\bigl(\frac59\cdot0{,}987377 + \frac89\cdot0{,}778801 + \frac59\cdot0{,}455062\bigr) = \frac12\cdot(0{,}548543 + 0{,}692268 + 0{,}252812) = 0{,}746811$. Fehler $1{,}3\cdot10^{-5}$. (Mit mehr Stellen in den Funktionswerten: $0{,}7468146$, Fehler $9{,}5\cdot10^{-6}$.)
+\schritt{Simpson mit drei Punkten}
+$\frac16(f(0) + 4f(0{,}5) + f(1)) = \frac16(1 + 3{,}115203 + 0{,}367879) = 0{,}747180$. Fehler $3{,}6\cdot10^{-4}$.
+\schritt{Vergleich}
+Gleiche Punktzahl, Faktor $37$ im Fehler. Gauß ist exakt für Polynome bis Grad $5$, Simpson bis Grad $3$; die Fehlerterme sind $\sim f^{(6)}$ bzw.\ $\sim f^{(4)}$.
+\probe{Exaktheit bis Grad $5$: $\int_{-1}^{1}t^{4}\,dt = \frac25$; Gauß: $2\cdot\frac59\cdot\frac9{25} = \frac25$. \checkmark\ Grad $6$: $\int t^{6} = \frac27$; Gauß: $2\cdot\frac59\cdot\frac{27}{125} = \frac6{25}\neq\frac27$ --- wie erwartet nicht mehr exakt.}
+\begin{mitnehmen}\kastentext
+$n$ Gauß-Punkte integrieren Polynome bis Grad $2n - 1$ exakt --- doppelt so viel wie jede Formel mit festen Knoten. Die Knoten sind die Nullstellen der Legendre-Polynome, die Gewichte positiv (keine Auslöschung). Für glatte Integranden ist Gauß das Verfahren der Wahl; für Daten auf festem Gitter bleibt Simpson.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.39
+\stupserzwei{akzent}{Implizit: $y_{k+1} = y_k - 50hy_{k+1}$, also $y_{k+1} = \frac{y_k}{1 + 50h} = \frac{y_k}6$. Faktor $\frac16$ für jedes $h > 0$ kleiner als $1$.}{22pt}
+\begin{loesungkarte}{akzent}{5.39}{Euler explodiert}
+\derweg{Verstärkungsfaktor pro Schritt ausrechnen; Stabilität heißt $|\text{Faktor}| < 1$.}
+\schritt{(a)}
+$y_{k+1} = y_k + h(-50y_k) = (1 - 5)y_k = -4y_k$: $y_1 = -4$, $y_2 = 16$, $y_3 = -64$, $y_4 = 256$. Exakt: $y(0{,}1) = e^{-5} = 0{,}0067$, $y(0{,}4) = e^{-20} = 2\cdot10^{-9}$. Das Verfahren liefert exponentielles Wachstum mit Vorzeichenwechsel für eine Lösung, die praktisch sofort null ist.
+\schritt{(b)}
+Faktor $|1 - 50h| < 1\iff0 < h < \frac2{50} = 0{,}04$. Für $[0, 1]$ also mindestens $26$ Schritte --- obwohl die Lösung nach $t = 0{,}1$ nichts mehr tut. Die Schrittweite wird von der Stabilität diktiert, nicht von der Genauigkeit: Das ist Steifigkeit.
+\schritt{(c)}
+$y_{k+1} = \frac{y_k}{1 + 50h} = \frac{y_k}6$: $0{,}1667$; $0{,}0278$; $0{,}0046$; $0{,}0008$. Nicht genau (exakt $0{,}0067$ nach einem Schritt), aber qualitativ richtig: monoton fallend gegen $0$.
+\schritt{(d)}
+Faktor $\frac1{1 + 50h}$ liegt für jedes $h > 0$ in $(0, 1)$: A-stabil, keine Schrittweitenbeschränkung. Mit $h = 1$: $y_1 = \frac1{51}$ --- grob, aber stabil. Preis: Pro Schritt ist eine Gleichung nach $y_{k+1}$ zu lösen; bei nichtlinearem $f$ ein Newton-Verfahren (Aufgabe 5.26) in jedem Schritt.
+\begin{center}
+\begin{tikzpicture}[x=9cm,y=0.9cm]
+\draw[->,linie] (0,0)--(0.45,0) node[right,grau,font=\small] {$t$}; \draw[->,linie] (0,-1.3)--(0,1.4);
+\draw[gruen,thick,domain=0:0.42,samples=80] plot (\x,{exp(-50*\x)});
+\draw[akzent,thick] (0,1)--(0.1,-1)--(0.2,1.2)--(0.3,-1.25); \node[akzent,font=\scriptsize,right] at (0.31,-1.25) {$-4^{k}$ (abgeschnitten)};
+\draw[tief,thick] (0,1)--(0.1,0.1667)--(0.2,0.0278)--(0.3,0.0046)--(0.4,0.0008);
+\node[gruen,font=\scriptsize,right] at (0.02,0.5) {$e^{-50t}$}; \node[tief,font=\scriptsize,above right] at (0.1,0.17) {implizit};
+\end{tikzpicture}
+\end{center}
+\begin{fehler}\kastentext
+\enquote{Kleinere Schrittweite, kleinerer Fehler} gilt nur innerhalb des Stabilitätsgebiets. Außerhalb explodiert das Verfahren, egal wie glatt die Lösung ist. Steife Probleme (chemische Kinetik, Schaltkreise, parabolische PDE nach Ortsdiskretisierung) erkennt man daran, dass explizite Verfahren absurd kleine Schritte verlangen.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Testgleichung $y' = \lambda y$: Explizites Euler ist stabil für $|1 + h\lambda| < 1$, implizites für alle $\operatorname{Re}\lambda < 0$. Bei steifen Systemen ist $|\lambda|$ groß (schnell abklingende Komponenten), und nur implizite Verfahren (oder spezielle wie BDF, Band 29) kommen mit vernünftigen Schrittweiten aus.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.40
+\stupserzwei{gruen}{RK4 erster Schritt: $k_1 = 1{,}5$, $k_2 = 1{,}64$, $k_3 = 1{,}654$, $k_4 = 1{,}7908$; $y_1 = 0{,}5 + \frac{0{,}2}6(k_1 + 2k_2 + 2k_3 + k_4) = 0{,}829293$.}{22pt}
+\begin{loesungkarte}{gruen}{5.40}{Euler und Runge--Kutta}
+\derweg{Euler: eine Steigung. RK4: vier Steigungen pro Schritt, gewichtet.}
+\schritt{Exakt}
+$y(0{,}2) = 1{,}44 - 0{,}5e^{0{,}2} = 0{,}829299$, $y(0{,}4) = 1{,}96 - 0{,}5e^{0{,}4} = 1{,}214088$.
+\schritt{Euler}
+$f(t, y) = y - t^{2} + 1$. $y_1 = 0{,}5 + 0{,}2\cdot(0{,}5 + 1) = 0{,}8$. $y_2 = 0{,}8 + 0{,}2\cdot(0{,}8 - 0{,}04 + 1) = 1{,}152$. Fehler $0{,}029$ und $0{,}062$.
+\schritt{RK4, Schritt 1}
+$k_1 = f(0;\ 0{,}5) = 1{,}5$. $k_2 = f(0{,}1;\ 0{,}65) = 0{,}65 - 0{,}01 + 1 = 1{,}64$. $k_3 = f(0{,}1;\ 0{,}664) = 1{,}654$. $k_4 = f(0{,}2;\ 0{,}8308) = 0{,}8308 - 0{,}04 + 1 = 1{,}7908$. $y_1 = 0{,}5 + \frac{0{,}2}6(1{,}5 + 3{,}28 + 3{,}308 + 1{,}7908) = 0{,}5 + 0{,}329293 = 0{,}829293$. Fehler $5\cdot10^{-6}$.
+\schritt{RK4, Schritt 2}
+$k_1 = f(0{,}2;\ 0{,}829293) = 1{,}789293$. $k_2 = f(0{,}3;\ 1{,}008222) = 1{,}918222$. $k_3 = f(0{,}3;\ 1{,}021115) = 1{,}931115$. $k_4 = f(0{,}4;\ 1{,}215516) = 2{,}055516$. $y_2 = 0{,}829293 + \frac{0{,}2}6(1{,}789293 + 3{,}836444 + 3{,}862230 + 2{,}055516) = 0{,}829293 + 0{,}384783 = 1{,}214076$. Fehler $1{,}1\cdot10^{-5}$.
+\schritt{Vergleich}
+Euler: Fehler in der zweiten Dezimale ($3\,\%$). RK4: in der fünften, bei viermal so vielen Funktionsauswertungen. Mit $h = 0{,}05$ hätte Euler Fehler $0{,}016$ (Ordnung $1$: Viertelung der Schrittweite viertelt den Fehler), RK4 bei gleichem Aufwand $4\cdot10^{-8}$ (Ordnung $4$: Faktor $256$).
+\probe{Exakte Lösung einsetzen: $y' = 2(t + 1) - 0{,}5e^{t}$; $y - t^{2} + 1 = t^{2} + 2t + 1 - 0{,}5e^{t} - t^{2} + 1 = 2t + 2 - 0{,}5e^{t}$. \checkmark}
+\begin{mitnehmen}\kastentext
+RK4 ist das Arbeitspferd für nicht-steife Probleme: Ordnung $4$ für vier Auswertungen, einfach zu programmieren, keine Vergangenheit nötig. Moderne Löser (Dormand--Prince) nehmen zwei RK-Formeln verschiedener Ordnung gleichzeitig, schätzen daraus den Fehler und steuern $h$ --- Band 29.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.41
+\stupserzwei{gruen}{$16\begin{pmatrix}2 & -1 & 0\\ -1 & 2 & -1\\ 0 & -1 & 2\end{pmatrix}u = \pi^{2}\begin{pmatrix}0{,}7071\\ 1\\ 0{,}7071\end{pmatrix}$; Symmetrie gibt $u_1 = u_3$.}{22pt}
+\begin{loesungkarte}{gruen}{5.41}{Ein Randwertproblem auf drei Punkten}
+\derweg{Zweite Ableitung durch den zentralen Differenzenquotienten, tridiagonales System, Symmetrie ausnutzen.}
+\schritt{Diskretisierung}
+$h = \frac14$, innere Punkte $0{,}25$, $0{,}5$, $0{,}75$. $-u''(x_i)\approx\frac{-u_{i-1} + 2u_i - u_{i+1}}{h^{2}}$, $u_0 = u_4 = 0$. System: $16(2u_1 - u_2) = f_1$, $16(-u_1 + 2u_2 - u_3) = f_2$, $16(-u_2 + 2u_3) = f_3$ mit $f_1 = f_3 = \pi^{2}\sin\frac\pi4 = 6{,}9792$, $f_2 = \pi^{2} = 9{,}8696$.
+\schritt{Lösen}
+Symmetrie: $u_1 = u_3$. Erste Gleichung: $u_2 = 2u_1 - \frac{6{,}9792}{16} = 2u_1 - 0{,}43620$. Zweite: $16(-2u_1 + 2u_2) = 9{,}8696$, also $u_2 - u_1 = 0{,}30843$. Einsetzen: $u_1 - 0{,}43620 = 0{,}30843$, $u_1 = 0{,}74463$, $u_2 = 1{,}05306$.
+\schritt{Vergleich}
+Exakt: $\sin\frac\pi4 = 0{,}70711$, $\sin\frac\pi2 = 1$. Fehler $0{,}0375$ und $0{,}0531$ --- etwa $5\,\%$. Theoretisch $\approx\frac{h^{2}}{12}\max|u^{(4)}| = \frac{0{,}0625}{12}\pi^{4}\cdot u = 0{,}507\cdot0{,}0625\cdot\dots$ --- genauer: Der Fehler ist $\frac{h^{2}\pi^{2}}{12}u(x) + O(h^{4}) = 0{,}0514\,u(x)$: $0{,}0364$ und $0{,}0514$. \checkmark
+\probe{Mit $h = \frac18$ ($7$ innere Punkte) wäre der Fehler ein Viertel: $0{,}013$ in der Mitte. Ordnung $2$. \checkmark\ Die Matrix ist symmetrisch, positiv definit, diagonaldominant: Cholesky, Jacobi, CG --- alles geht.}
+\begin{mitnehmen}\kastentext
+Finite Differenzen: Ableitung durch Differenzenquotient, Differentialgleichung durch Gleichungssystem, Fehler $O(h^{2})$. In zwei Dimensionen wird aus der Tridiagonalmatrix der Fünf-Punkte-Stern mit $n^{2}$ Unbekannten --- und ab da sind iterative Löser (Kapitel 5) keine Option mehr, sondern Pflicht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.42
+\stupserzwei{tief}{Schritt 1: $g = (20, 20)$, $\alpha = \frac{800}{8800} = \frac1{11}$, neu $(8{,}18;\ -0{,}82)$, $f = 73{,}6$. Die Quotienten $\frac{73{,}6}{110} = \frac{49{,}3}{73{,}6} = 0{,}669 = \bigl(\frac9{11}\bigr)^{2}$.}{22pt}
+\begin{loesungkarte}{tief}{5.42}{Gradientenverfahren im Tal}
+\derweg{Gradient, exakte Schrittweite $\alpha = \frac{g^{\mathsf T}g}{g^{\mathsf T}Ag}$, Update; Quotienten mit der Theorie vergleichen; Newton zum Kontrast.}
+\schritt{(a)}
+$A = \operatorname{diag}(2, 20)$, $\nabla f = Ax$, $f(10, 1) = 110$.
+\begin{center}\small
+\begin{tabular}{c|ccc|c}
+$k$ & $x$ & $\nabla f$ & $\alpha$ & $f$\\ \hline
+0 & $(10;\ 1)$ & $(20;\ 20)$ & $0{,}0909$ & $110$\\
+1 & $(8{,}18;\ -0{,}82)$ & $(16{,}4;\ -16{,}4)$ & $0{,}0909$ & $73{,}6$\\
+2 & $(6{,}69;\ 0{,}67)$ & $(13{,}4;\ 13{,}4)$ & $0{,}0909$ & $49{,}3$\\
+3 & $(5{,}48;\ -0{,}55)$ & & & $33{,}0$
+\end{tabular}
+\end{center}
+Die Iterierten zickzacken: $y$ wechselt das Vorzeichen, $x$ schrumpft langsam.
+\schritt{(b)}
+Quotienten $\frac{73{,}6}{110} = 0{,}669$, $\frac{49{,}3}{73{,}6} = 0{,}669$, $\frac{33{,}0}{49{,}3} = 0{,}669$. Theorie: $\bigl(\frac{\kappa - 1}{\kappa + 1}\bigr)^{2} = \bigl(\frac9{11}\bigr)^{2} = 0{,}669$ --- hier exakt, weil der Start die schlechteste Richtung trifft.
+\schritt{(c)}
+Newton: $x_1 = x_0 - H^{-1}\nabla f = x_0 - A^{-1}Ax_0 = 0$. Ein Schritt, fertig --- bei quadratischem $f$ ist das Newton-Modell exakt.
+\schritt{(d)}
+$\kappa = 1000$: Faktor $\bigl(\frac{999}{1001}\bigr)^{2} = 0{,}996$ pro Schritt. Für $10^{-6}$: $\frac{\ln10^{-6}}{\ln0{,}996} = 3450$ Schritte. Das Gradientenverfahren ist für schlecht konditionierte Probleme unbrauchbar; CG braucht $\sim\sqrt\kappa = 32$ Schritte, Newton einen.
+\probe{Exakte Liniensuche heißt: Der neue Gradient steht senkrecht auf dem alten. $(16{,}4;\ -16{,}4)\cdot(20;\ 20) = 0$. \checkmark}
+\begin{mitnehmen}\kastentext
+Steilster Abstieg: billig pro Schritt, aber Rate $\frac{\kappa - 1}{\kappa + 1}$ --- in langen Tälern hoffnungslos. Abhilfen: Vorkonditionierung (das Tal rund machen), konjugierte Richtungen (CG), Krümmungsinformation (Newton, Quasi-Newton). Rosenbrock (Aufgabe 5.43) ist der Testfall für alle drei.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.43
+\stupserzwei{gruen}{$Hs = -\nabla F$: $\begin{pmatrix}802 & 400\\ 400 & 200\end{pmatrix}s = \begin{pmatrix}4\\ 0\end{pmatrix}$, $\det = 400$, $s = (2, -4)$. Neu: $(1, -3)$, $F = 1600$.}{22pt}
+\begin{loesungkarte}{gruen}{5.43}{Ein Newton-Schritt auf Rosenbrock}
+\derweg{Gradient und Hesse-Matrix am Startpunkt, lineares System, Schritt --- und dann $F$ vergleichen.}
+\schritt{Ableitungen}
+$F_x = -2(1 - x) - 400x(y - x^{2})$, $F_y = 200(y - x^{2})$. $F_{xx} = 2 - 400(y - x^{2}) + 800x^{2}$, $F_{xy} = -400x$, $F_{yy} = 200$.
+\schritt{Bei $(-1, 1)$}
+$y - x^{2} = 0$: $\nabla F = (-4, 0)$, $H = \begin{pmatrix}802 & 400\\ 400 & 200\end{pmatrix}$, $F = 4$.
+\schritt{Newton-Schritt}
+$Hs = -\nabla F = (4, 0)$. $\det H = 160\,400 - 160\,000 = 400$. $s = \frac1{400}\begin{pmatrix}200 & -400\\ -400 & 802\end{pmatrix}\begin{pmatrix}4\\ 0\end{pmatrix} = \frac1{400}(800, -1600) = (2, -4)$. Neuer Punkt $(1, -3)$.
+\schritt{Bewertung}
+$F(1, -3) = 0 + 100(-3 - 1)^{2} = 1600$ --- vierhundertmal schlechter als $F = 4$. Die $x$-Koordinate ist perfekt ($1$), die $y$-Koordinate liegt weit unter dem Tal ($y$ sollte $x^{2} = 1$ sein). Das quadratische Modell ist am Startpunkt gut, aber $2$ Einheiten weit entfernt nicht mehr --- $F$ ist quartisch.
+\schritt{Dämpfung}
+$x_0 + \alpha s$: $\alpha = 1$: $1600$; $\alpha = \frac12$: $(0, -1)$, $F = 101$; $\alpha = \frac14$: $(-0{,}5;\ 0)$, $F = 8{,}5$; $\alpha = 0{,}1$: $(-0{,}8;\ 0{,}6)$, $F = 3{,}4 < 4$. Erst die Schrittweite $0{,}1$ ist ein Abstieg. Gedämpftes Newton (Armijo) nimmt diesen Schritt --- und ist in etwa $20$ Schritten am Ziel; ungedämpft wird es ein Zickzack.
+\probe{$H$ ist positiv definit ($802 > 0$, $\det > 0$): Die Newton-Richtung ist eine Abstiegsrichtung, $\nabla F\cdot s = -8 < 0$. \checkmark\ Das Problem ist nicht die Richtung, sondern die Länge.}
+\begin{mitnehmen}\kastentext
+Newton für Optimierung: Richtung aus dem quadratischen Modell, Länge aus einer Liniensuche. Ohne Liniensuche vertraut man dem Modell blind --- und auf Rosenbrocks gekrümmtem Tal kostet das. Trust-Region-Verfahren begrenzen den Schritt von vornherein; beides ist Band 19.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 5.44
+\stupserzwei{gruen}{Standardabweichung von $\hat\pi$: $4\sqrt{\frac{p(1 - p)}N} = \frac{1{,}64}{\sqrt N}$. Für $\pm5\cdot10^{-4}$ als eine Standardabweichung: $N\approx1{,}1\cdot10^{7}$.}{22pt}
+\begin{loesungkarte}{gruen}{5.44}{$\pi$ mit Monte-Carlo}
+\derweg{Trefferanteil als Binomialschätzer; Standardabweichung; nach $N$ auflösen; dann Simpson zum Vergleich.}
+\schritt{Verfahren}
+$N$ Punkte gleichverteilt in $[0, 1]^{2}$; Anteil $\hat p$ mit $x^{2} + y^{2}\le1$ schätzt $\frac\pi4$; $\hat\pi = 4\hat p$.
+\schritt{Genauigkeit}
+Treffer sind $\operatorname{Bin}(N, p)$ mit $p = \frac\pi4 = 0{,}785$. $\operatorname{sd}(\hat p) = \sqrt{\frac{p(1 - p)}N} = \frac{0{,}411}{\sqrt N}$, $\operatorname{sd}(\hat\pi) = \frac{1{,}64}{\sqrt N}$. Drei sichere Nachkommastellen: Fehler $< 5\cdot10^{-4}$. Als eine Standardabweichung: $N = \bigl(\frac{1{,}64}{5\cdot10^{-4}}\bigr)^{2} = 1{,}1\cdot10^{7}$. Mit $95\,\%$ Sicherheit (zwei Standardabweichungen): $4{,}3\cdot10^{7}$ Punkte.
+\schritt{Simpson}
+$4\int_0^1\sqrt{1 - x^{2}}\,dx$: $m = 10$: Fehler $1{,}5\cdot10^{-2}$; $m = 100$: $4{,}6\cdot10^{-4}$; $m = 1000$: $1{,}5\cdot10^{-5}$. Nur Ordnung $1{,}5$ statt $4$ --- die Wurzel hat bei $x = 1$ eine senkrechte Tangente, und das zerstört die Fehlerentwicklung. Trotzdem: $100$ Auswertungen für drei Stellen, gegen $10^{7}$ Zufallspunkte.
+\schritt{Einordnung}
+Monte-Carlo: Fehler $\sim\frac1{\sqrt N}$, unabhängig von der Dimension und von der Glattheit. Für ein eindimensionales Integral absurd langsam; für ein $20$-dimensionales das einzige, was noch geht (Simpson bräuchte $100^{20}$ Punkte).
+\probe{Mit $N = 10^{6}$ liefert eine Simulation typischerweise $\hat\pi\in[3{,}138;\ 3{,}145]$ --- zwei Stellen, Schwankung $\pm1{,}6\cdot10^{-3}$, wie die Formel sagt. \checkmark}
+\begin{mitnehmen}\kastentext
+$\frac1{\sqrt N}$ ist das Gesetz der großen Zahlen als Konvergenzrate (Aufgabe 4.31). Zehnmal mehr Genauigkeit kostet hundertmal mehr Punkte. Varianzreduktion (Importance Sampling, Quasi-Monte-Carlo) verbessert die Konstante oder den Exponenten --- Band 27.
+\end{mitnehmen}
+\end{loesungkarte}

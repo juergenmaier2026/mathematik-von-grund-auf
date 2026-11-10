@@ -1,0 +1,908 @@
+\setgebiet{4}{Analysis}{mittel}
+\chapter{Lösungen: Analysis}
+
+%%%%%%%%%% 3.1
+\stupserzwei{tief}{Zu $\varepsilon > 0$: Wähle $n > \frac1\varepsilon$. Dann $1 - \frac1n > 1 - \varepsilon$.}{22pt}
+\begin{loesungkarte}{tief}{3.1}{Supremum ist nicht Maximum}
+\derweg{Schranken finden, dann prüfen, ob die beste Schranke zur Menge gehört.}
+\schritt{(a)}
+$A$: Glieder $0, \frac12, \frac23, \frac34, \dots$, monoton wachsend. $\inf A = \min A = 0$ (bei $n = 1$). $\sup A = 1$, denn $1 - \frac1n < 1$ für alle $n$, und keine kleinere Zahl ist obere Schranke (siehe (b)). Kein Maximum: $1\notin A$. \\
+$B = (0, 1)$: $\sup = 1$, $\inf = 0$, weder Maximum noch Minimum (die Randpunkte fehlen). \\
+$C = [0, 1]$: $\sup = \max = 1$, $\inf = \min = 0$. \\
+$D$: in $\mathbb R$ ist $\sup D = \sqrt2$, $\inf D = -\sqrt2$; weder Maximum noch Minimum, da $\pm\sqrt2\notin\mathbb Q$.
+\schritt{(b)}
+Sei $\varepsilon > 0$. Wähle $n > \frac1\varepsilon$ (Archimedes). Dann $\frac1n < \varepsilon$, also $a = 1 - \frac1n > 1 - \varepsilon$ und $a\in A$. Damit ist keine Zahl $s < 1$ obere Schranke (nimm $\varepsilon = 1 - s$), und $1$ ist die kleinste.
+\schritt{(c)}
+In $\mathbb Q$: Wäre $s\in\mathbb Q$ Supremum von $D$, so $s^{2} < 2$ oder $s^{2} > 2$ ($s^{2} = 2$ ist in $\mathbb Q$ unmöglich, Gebiet 1). Ist $s^{2} < 2$, findet man ein rationales $s' > s$ mit $s'^{2} < 2$ --- $s$ ist keine obere Schranke. Ist $s^{2} > 2$, findet man ein rationales $s' < s$ mit $s'^{2} > 2$, das noch obere Schranke ist --- $s$ ist nicht die kleinste. Also gibt es kein Supremum in $\mathbb Q$. In $\mathbb R$ garantiert das \emph{Vollständigkeitsaxiom}: Jede nichtleere, nach oben beschränkte Menge hat ein Supremum. Das ist genau der Unterschied zwischen $\mathbb Q$ und $\mathbb R$.
+\probe{(a) $A$: $n = 100$ gibt $0{,}99 < 1$; $n = 10^{6}$ gibt $0{,}999999 < 1$. Die $1$ wird nicht erreicht, aber beliebig nahe. \checkmark}
+\begin{mitnehmen}\kastentext
+Supremum $=$ kleinste obere Schranke, charakterisiert durch: (i) $a\le s$ für alle $a$, (ii) zu jedem $\varepsilon > 0$ gibt es $a > s - \varepsilon$. Maximum $=$ Supremum, das zur Menge gehört. Die Analysis beginnt damit, dass in $\mathbb R$ jedes Supremum existiert.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.2
+\stupserzwei{gruen}{$n = 1$: $0$. Große $n$: $1 - \frac2{n + 1}$ ist kleiner als $1$ und kommt ihr beliebig nahe.}{22pt}
+\begin{loesungkarte}{gruen}{3.2}{Supremum und Infimum einer Folge}
+\derweg{Umschreiben als $1 - \frac2{n + 1}$; dann Monotonie ablesen.}
+$\frac{n - 1}{n + 1} = \frac{(n + 1) - 2}{n + 1} = 1 - \frac2{n + 1}$. Der Bruch $\frac2{n + 1}$ fällt monoton von $1$ (bei $n = 1$) gegen $0$. Also wächst die Folge monoton von $0$ gegen $1$. \\
+$\inf M = 0$, angenommen bei $n = 1$ (Minimum). $\sup M = 1$: Alle Glieder sind $< 1$; zu $\varepsilon > 0$ wähle $n + 1 > \frac2\varepsilon$, dann ist das Glied $> 1 - \varepsilon$. Nicht angenommen (kein Maximum).
+\probe{$n = 1, 2, 3, 99$: $0, \frac13, \frac12, 0{,}98$. \checkmark}
+\begin{mitnehmen}\kastentext
+Bei Brüchen der Form $\frac{an + b}{cn + d}$ hilft Polynomdivision: Der Grenzwert $\frac ac$ wird sichtbar, und ein Restbruch zeigt Monotonie und Richtung der Annäherung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.3
+\stupserzwei{gruen}{Quadrieren: $4x^{2} - 12x + 9 < x^{2} + 2x + 1$, also $3x^{2} - 14x + 8 < 0$, also $(3x - 2)(x - 4) < 0$.}{22pt}
+\begin{loesungkarte}{gruen}{3.3}{Eine Betragsungleichung}
+\derweg{Weg 1: drei Fälle nach den Nullstellen der Beträge. Weg 2: Quadrieren, weil $|a| < |b|\iff a^{2} < b^{2}$.}
+\schritt{Weg 1: Fallunterscheidung}
+Kritische Punkte $x = -1$ und $x = \frac32$. \\
+\emph{$x < -1$:} $3 - 2x < -x - 1\iff4 < x$. Widerspruch zu $x < -1$: keine Lösung. \\
+\emph{$-1\le x < \frac32$:} $3 - 2x < x + 1\iff x > \frac23$. Lösungen: $\frac23 < x < \frac32$. \\
+\emph{$x\ge\frac32$:} $2x - 3 < x + 1\iff x < 4$. Lösungen: $\frac32\le x < 4$. \\
+Vereinigung: $L = \bigl(\frac23, 4\bigr)$.
+\schritt{Weg 2: Quadrieren}
+Beide Seiten sind $\ge0$, also $|2x - 3| < |x + 1|\iff(2x - 3)^{2} < (x + 1)^{2}\iff3x^{2} - 14x + 8 < 0\iff(3x - 2)(x - 4) < 0\iff\frac23 < x < 4$. Dasselbe.
+\probe{$x = 0$: $3 < 1$? Nein, $0\notin L$. \checkmark\ $x = 1$: $1 < 2$. \checkmark\ $x = 5$: $7 < 6$? Nein. \checkmark}
+\begin{mitnehmen}\kastentext
+Quadrieren ist eine Äquivalenzumformung, wenn beide Seiten nichtnegativ sind --- bei zwei Beträgen immer. Bei $|a| < b$ mit möglicherweise negativem $b$ nicht; dann Fallunterscheidung oder $-b < a < b$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.4
+\stupserzwei{tief}{(b) $\sqrt{n^{2} + n} - n = \frac{n}{\sqrt{n^{2} + n} + n} = \frac1{\sqrt{1 + 1/n} + 1}$.}{22pt}
+\begin{loesungkarte}{tief}{3.4}{Grenzwerte, die man sehen muss}
+\derweg{Jeweils so umformen, dass nur noch Nullfolgen und Konstanten auftreten; dann Grenzwertsätze.}
+\schritt{(a)}
+$\frac{2n^{2} + 3}{n^{2} - n} = \frac{2 + 3/n^{2}}{1 - 1/n}\to\frac{2 + 0}{1 - 0} = 2$.
+\schritt{(b)}
+Erweitern mit $\sqrt{n^{2} + n} + n$: $\frac{(n^{2} + n) - n^{2}}{\sqrt{n^{2} + n} + n} = \frac n{\sqrt{n^{2} + n} + n} = \frac1{\sqrt{1 + 1/n} + 1}\to\frac12$.
+\schritt{(c)}
+Durch $3^{n}$ teilen: $\frac{1 + (2/3)^{n}}{1 - (2/3)^{n}}\to\frac{1 + 0}{1 - 0} = 1$, da $(2/3)^{n}\to0$.
+\schritt{(d)}
+$\frac n{n + 1}\to1$, also liegen die Glieder abwechselnd nahe $-1$ und $+1$: Zwei Teilfolgen mit verschiedenen Grenzwerten, die Folge divergiert. (Beschränkt ist sie, mit Häufungspunkten $\pm1$.)
+\probe{(b) $n = 100$: $\sqrt{10100} - 100 = 100{,}499 - 100 = 0{,}499$. \checkmark\ (c) $n = 10$: $\frac{59049 + 1024}{59049 - 1024} = 1{,}035$. \checkmark}
+\begin{mitnehmen}\kastentext
+Drei Reflexe: höchste Potenz ausklammern (rationale Ausdrücke), mit der konjugierten Summe erweitern (Wurzeldifferenzen), durch die dominante Basis teilen (Exponentialausdrücke). Alles danach ist $\frac1n\to0$ und $q^{n}\to0$ für $|q| < 1$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.5
+\stupserzwei{akzent}{$(1 + \frac1n)^{n}$: $2$; $2{,}594$; $2{,}717$ --- das geht gegen $e$, nicht gegen $1$.}{22pt}
+\begin{loesungkarte}{akzent}{3.5}{$0\cdot\infty$ und $1^{\infty}$}
+\derweg{Beispiele zeigen, dass die Form das Ergebnis nicht bestimmt; die Sätze mit ihren Voraussetzungen hinschreiben.}
+\schritt{(a)}
+$\frac1n\cdot n = 1\to1$. $\frac1n\cdot n^{2} = n\to\infty$. $\frac1n\cdot\sqrt n = \frac1{\sqrt n}\to0$. $\frac1n\cdot(-1)^{n}n = (-1)^{n}$: divergiert. Vier verschiedene Ergebnisse bei derselben \enquote{Form}: $0\cdot\infty$ ist kein Wert, sondern die Ansage, dass man genauer hinsehen muss.
+\schritt{(b)}
+$n = 1$: $2$. $n = 10$: $2{,}594$. $n = 1000$: $2{,}717$. Grenzwert $e = 2{,}718\dots$ Der Fehler: Der Grenzwertsatz $\lim a_n^{b_n} = (\lim a_n)^{\lim b_n}$ gilt für konvergente $b_n$ (und positive $a_n$). Hier ist $b_n = n$ nicht konvergent. Die Basis geht gegen $1$, aber der Exponent wächst --- und beides gleichzeitig ergibt etwas Eigenes.
+\schritt{(c)}
+Sind $a_n\to a$ und $b_n\to b$ \emph{konvergent}, so $a_nb_n\to ab$; ist zusätzlich $b\neq0$, so $\frac{a_n}{b_n}\to\frac ab$. Die Voraussetzung \enquote{konvergent} schließt $\infty$ aus; die Voraussetzung $b\neq0$ schließt $\frac00$ aus.
+\schritt{(d)}
+Bestimmt: $\frac0\infty = 0$, $\frac\infty0$ --- Betrag geht gegen $\infty$ (Vorzeichen hängt ab), $0^{\infty} = 0$ (Basis positiv gegen $0$), $\frac1{0^{+}} = +\infty$. Unbestimmt: $\infty - \infty$, $\infty^{0}$ (neben $\frac00$, $\frac\infty\infty$, $0\cdot\infty$, $1^{\infty}$, $0^{0}$).
+\begin{fehler}\kastentext
+Die Grenzwertsätze sind Sätze über \emph{konvergente} Folgen. Sobald ein $\infty$ im Spiel ist oder durch $0$ geteilt wird, gelten sie nicht, und man muss umformen, abschätzen oder L'Hospital bemühen (Aufgabe 3.28). Die Symbole $0\cdot\infty$, $1^{\infty}$ sind Warnschilder, keine Rechenregeln.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Sieben unbestimmte Formen: $\frac00$, $\frac\infty\infty$, $0\cdot\infty$, $\infty - \infty$, $1^{\infty}$, $0^{0}$, $\infty^{0}$. Alle anderen Kombinationen sind bestimmt. Die Potenzformen führt man mit $a^{b} = e^{b\ln a}$ auf $0\cdot\infty$ zurück.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.6
+\stupserzwei{gruen}{$\frac{11}{4n + 10} < \varepsilon\iff n > \frac{11/\varepsilon - 10}4$. Für $\varepsilon = 0{,}01$: $n > 272{,}5$.}{22pt}
+\begin{loesungkarte}{gruen}{3.6}{Ein $\varepsilon$-$N$-Beweis}
+\derweg{Abstand ausrechnen und vereinfachen, nach $n$ auflösen, $N$ wählen, Beweis aufschreiben.}
+\schritt{Abstand}
+$\Bigl|\frac{3n + 2}{2n + 5} - \frac32\Bigr| = \Bigl|\frac{2(3n + 2) - 3(2n + 5)}{2(2n + 5)}\Bigr| = \Bigl|\frac{-11}{2(2n + 5)}\Bigr| = \frac{11}{4n + 10}$.
+\schritt{Auflösen}
+$\frac{11}{4n + 10} < \varepsilon\iff4n + 10 > \frac{11}\varepsilon\iff n > \frac{11}{4\varepsilon} - \frac52$.
+\schritt{Beweis}
+Sei $\varepsilon > 0$. Wähle $N\in\mathbb N$ mit $N > \frac{11}{4\varepsilon} - \frac52$. Für alle $n\ge N$ gilt dann $\bigl|\frac{3n + 2}{2n + 5} - \frac32\bigr| = \frac{11}{4n + 10}\le\frac{11}{4N + 10} < \varepsilon$. $\blacksquare$ \\
+Für $\varepsilon = 0{,}01$: $\frac{11}{0{,}04} - 2{,}5 = 272{,}5$, also $N = 273$.
+\probe{$n = 273$: $\frac{821}{551} = 1{,}49002$, Abstand $0{,}00998 < 0{,}01$. \checkmark\ $n = 272$: $\frac{818}{549} = 1{,}48998$, Abstand $0{,}01002 > 0{,}01$ --- $N = 273$ ist scharf. \checkmark}
+\begin{mitnehmen}\kastentext
+Der $\varepsilon$-$N$-Beweis ist eine Rechnung rückwärts: Man löst $|a_n - a| < \varepsilon$ nach $n$ auf und schreibt das Ergebnis dann vorwärts als Beweis auf. Großzügiges Abschätzen ($\frac{11}{4n + 10} < \frac{11}{4n} < \frac3n$) ist erlaubt und macht das $N$ einfacher.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.7
+\stupserzwei{gruen}{Aus $n\ge\frac{n(n - 1)}2h_n^{2}$ folgt $h_n^{2}\le\frac2{n - 1}$, also $h_n\to0$.}{22pt}
+\begin{loesungkarte}{gruen}{3.7}{$\sqrt[n]{n}\to1$}
+\derweg{Vermutung aus Zahlen; Beweis durch $\sqrt[n]n = 1 + h_n$ und den binomischen Satz.}
+\schritt{Vermutung}
+$\sqrt[1]1 = 1$, $\sqrt2 = 1{,}414$, $\sqrt[10]{10} = 1{,}259$, $\sqrt[100]{100} = 1{,}047$, $\sqrt[1000]{1000} = 1{,}0069$. Vermutung: Grenzwert $1$.
+\schritt{Beweis}
+Für $n\ge2$ ist $\sqrt[n]n > 1$; setze $\sqrt[n]n = 1 + h_n$ mit $h_n > 0$. Dann
+\[ n = (1 + h_n)^{n} = \sum_{k=0}^{n}\binom nkh_n^{k}\ge\binom n2h_n^{2} = \frac{n(n - 1)}2h_n^{2}, \]
+da alle Summanden positiv sind. Also $h_n^{2}\le\frac2{n - 1}$, $0 < h_n\le\sqrt{\frac2{n - 1}}\to0$. Nach dem Einschließungssatz $h_n\to0$, also $\sqrt[n]n\to1$. $\blacksquare$
+\probe{$n = 100$: Schranke $\sqrt{2/99} = 0{,}142$, tatsächlich $h_{100} = 0{,}047$. Die Schranke ist grob, aber sie reicht. \checkmark}
+\begin{mitnehmen}\kastentext
+Den Überschuss über den vermuteten Grenzwert benennen und dann einen einzigen Term des binomischen Satzes behalten --- dieser Trick beweist auch $\sqrt[n]a\to1$ und $\frac{n}{q^{n}}\to0$ für $q > 1$ (mit $\binom n1$ bzw.\ $\binom n2$ in $(1 + h)^{n}$).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.8
+\stupserzwei{gruen}{Fixpunktgleichung $L = \sqrt{2 + L}$, also $L^{2} - L - 2 = 0$, also $L = 2$ (die Lösung $-1$ scheidet aus).}{22pt}
+\begin{loesungkarte}{gruen}{3.8}{Eine rekursive Folge}
+\derweg{Beschränkt (Induktion), monoton (Umformung), also konvergent; Grenzwert aus der Fixpunktgleichung.}
+\schritt{Werte}
+$a_1 = 1$, $a_2 = \sqrt3 = 1{,}732$, $a_3 = 1{,}932$, $a_4 = 1{,}983$, $a_5 = 1{,}996$. Vermutung: monoton wachsend gegen $2$.
+\schritt{Beschränkt: $a_n < 2$}
+Induktion. $a_1 = 1 < 2$. Ist $a_n < 2$, so $a_{n+1} = \sqrt{2 + a_n} < \sqrt4 = 2$. \checkmark
+\schritt{Monoton: $a_{n+1} > a_n$}
+$a_{n+1} > a_n\iff\sqrt{2 + a_n} > a_n\iff2 + a_n > a_n^{2}\iff a_n^{2} - a_n - 2 < 0\iff(a_n - 2)(a_n + 1) < 0$. Wegen $0 < a_n < 2$ ist das wahr. \checkmark
+\schritt{Grenzwert}
+Monoton und beschränkt $\Rightarrow$ konvergent gegen ein $L$. Grenzübergang in $a_{n+1} = \sqrt{2 + a_n}$ (die Wurzel ist stetig): $L = \sqrt{2 + L}$, $L^{2} = 2 + L$, $L = 2$ oder $L = -1$. Da $a_n\ge1$: $L = 2$.
+\probe{$a_{10}$: Der Abstand zu $2$ halbiert sich etwa pro Schritt ($2 - a_{n+1} = \frac{2 - a_n}{2 + \sqrt{2 + a_n}}\approx\frac{2 - a_n}4$, sogar Viertelung): $a_5 = 1{,}996$, $a_6\approx1{,}999$. \checkmark}
+\begin{mitnehmen}\kastentext
+Rezept für $a_{n+1} = g(a_n)$: Fixpunkte von $g$ bestimmen (Kandidaten für $L$), Schranke und Monotonie per Induktion, Konvergenz aus dem Monotoniesatz, Grenzwert durch Grenzübergang in der Rekursion. Die Fixpunktgleichung allein beweist nichts --- erst die Konvergenz rechtfertigt den Grenzübergang.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.9
+\stupserzwei{gruen}{Cauchy heißt: $|a_m - a_n| < \varepsilon$ für \emph{alle} $m, n\ge N$. Mit $m = 2n$ scheitert das für $\varepsilon = \frac12$.}{22pt}
+\begin{loesungkarte}{gruen}{3.9}{Die harmonische Reihe ist keine Cauchy-Folge}
+\derweg{Einen Sprung über $n$ Glieder abschätzen; er bleibt mindestens $\frac12$.}
+\schritt{Benachbarte Glieder}
+$a_{n+1} - a_n = \frac1{n + 1}\to0$. Das sieht nach Konvergenz aus --- ist aber nicht die Cauchy-Bedingung.
+\schritt{Der Sprung}
+$a_{2n} - a_n = \frac1{n + 1} + \frac1{n + 2} + \dots + \frac1{2n}$: $n$ Summanden, jeder $\ge\frac1{2n}$. Also $a_{2n} - a_n\ge n\cdot\frac1{2n} = \frac12$.
+\schritt{Schluss}
+Für $\varepsilon = \frac12$ gibt es kein $N$, ab dem $|a_m - a_n| < \varepsilon$ für alle $m, n\ge N$: Zu jedem $N$ nimm $n = N$, $m = 2N$. Keine Cauchy-Folge, also nicht konvergent (in $\mathbb R$ sind konvergent und Cauchy dasselbe). $\blacksquare$
+\probe{$a_{10} - a_5 = \frac16 + \dots + \frac1{10} = 0{,}646\ge0{,}5$. \checkmark\ Übrigens: $a_{2^{k}}\ge1 + \frac k2$, also wächst $a_n$ wie $\ln n$ --- unbeschränkt, aber sehr langsam.}
+\begin{mitnehmen}\kastentext
+Cauchy verlangt kleine Abstände zwischen \emph{allen} späten Gliedern, nicht nur zwischen Nachbarn. $a_{n+1} - a_n\to0$ ist notwendig, aber nicht hinreichend --- dasselbe wie $a_k\to0$ bei Reihen (Aufgabe 3.11).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.10
+\stupserzwei{tief}{(a) $\frac k{k^{2} + 1}\ge\frac k{2k^{2}} = \frac1{2k}$. (d) Quotient $\frac{(k + 1)^{2}}{2k^{2}}\to\frac12$.}{22pt}
+\begin{loesungkarte}{tief}{3.10}{Vier Reihen, vier Kriterien}
+\derweg{Minorante, Majorante, Leibniz, Quotient --- je nach Bauart der Glieder.}
+\schritt{(a) divergent}
+Für $k\ge1$ ist $k^{2} + 1\le2k^{2}$, also $\frac k{k^{2} + 1}\ge\frac1{2k}$. Die harmonische Reihe ist eine divergente Minorante. (Alle Glieder positiv, also auch nicht absolut konvergent.)
+\schritt{(b) absolut konvergent}
+$\frac1{k^{2} + 1} < \frac1{k^{2}}$, und $\sum\frac1{k^{2}}$ konvergiert ($p = 2 > 1$). Konvergente Majorante.
+\schritt{(c) konvergent, nicht absolut}
+$\frac1{\sqrt k}$ fällt monoton gegen $0$: Leibniz-Kriterium, die Reihe konvergiert. Die Beträge $\sum\frac1{\sqrt k}$ bilden die $p$-Reihe mit $p = \frac12 < 1$: divergent. Also bedingt konvergent.
+\schritt{(d) absolut konvergent}
+$\frac{a_{k+1}}{a_k} = \frac{(k + 1)^{2}}{2^{k+1}}\cdot\frac{2^{k}}{k^{2}} = \frac12\Bigl(1 + \frac1k\Bigr)^{2}\to\frac12 < 1$. Quotientenkriterium. (Positive Glieder: absolut.)
+\probe{(d) hat sogar eine geschlossene Summe: $\sum k^{2}x^{k} = \frac{x(1 + x)}{(1 - x)^{3}}$, bei $x = \frac12$: $\frac{\frac12\cdot\frac32}{\frac18} = 6$. Partialsumme bis $k = 10$: $5{,}93$. \checkmark}
+\begin{mitnehmen}\kastentext
+Erst $a_k\to0$ prüfen (sonst sofort divergent). Dann: rationale Glieder $\to$ Vergleich mit $k^{-p}$, wobei $p$ der Gradunterschied ist; alternierend $\to$ Leibniz; Fakultäten, Potenzen mit $k$ im Exponenten $\to$ Quotient; $k$-te Potenzen $\to$ Wurzel. Absolute Konvergenz ist die stärkere Eigenschaft und die, die Umordnen erlaubt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.11
+\stupserzwei{akzent}{$S + \frac S2$ gliedweise: $1 + 0$, $-\frac12 + \frac12 = 0$, $\frac13 + 0$, $-\frac14 - \frac14 = -\frac12$, $\frac15 + 0$, $-\frac16 + \frac16 = 0$, $\dots$ --- genau die umgeordnete Reihe.}{22pt}
+\begin{loesungkarte}{akzent}{3.11}{Umordnen verboten}
+\derweg{Die umgeordnete Reihe als Summe zweier Reihen identifizieren; dann die Theorie dahinter.}
+\schritt{(a)}
+$S = 1 - \frac12 + \frac13 - \frac14 + \frac15 - \frac16 + \dots$ und $\frac S2 = \frac12 - \frac14 + \frac16 - \dots$, mit Nullen gestreckt: $0 + \frac12 + 0 - \frac14 + 0 + \frac16 + 0 - \frac18 + \dots$ Gliedweise Addition (erlaubt für zwei konvergente Reihen):
+\begin{align*} S + \tfrac S2 &= 1 + 0 + \tfrac13 - \tfrac12 + \tfrac15 + 0 + \tfrac17 - \tfrac14 + \dots\\ &= 1 + \tfrac13 - \tfrac12 + \tfrac15 + \tfrac17 - \tfrac14 + \dots \end{align*}
+Das ist (nach Streichen der Nullen, was den Wert nicht ändert) die umgeordnete Reihe. Ihr Wert ist $\frac32S = \frac32\ln2\approx1{,}040$.
+\schritt{(b)}
+Kein Widerspruch, weil der Umordnungssatz (\enquote{die Summe hängt nicht von der Reihenfolge ab}) nur für \emph{absolut} konvergente Reihen gilt. $\sum\frac{(-1)^{k+1}}k$ konvergiert, aber $\sum\frac1k$ nicht. Die positiven Glieder allein summieren sich zu $\infty$, die negativen zu $-\infty$; durch die Reihenfolge steuert man, wie viel von welchem Vorrat man wann verbraucht.
+\schritt{(c)}
+$\sum\frac1k$: $a_k\to0$, divergent. $\sum\frac{(-1)^{k+1}}k$: konvergent (Leibniz), nicht absolut.
+\schritt{(d)}
+Riemann: Eine bedingt konvergente Reihe kann durch Umordnung gegen \emph{jede} reelle Zahl konvergieren --- und auch divergieren. Eine absolut konvergente Reihe hat bei jeder Umordnung dieselbe Summe.
+\probe{Numerisch: Partialsumme der umgeordneten Reihe nach $300$ Dreiergruppen $1{,}0397$; $\frac32\ln2 = 1{,}0397$. \checkmark}
+\begin{fehler}\kastentext
+Zwei Irrtümer, ein Ursprung: \enquote{$a_k\to0$, also konvergent} und \enquote{Reihenfolge egal}. Beide behandeln unendliche Summen wie endliche. Endliche Summen sind kommutativ und immer definiert; unendliche sind Grenzwerte von Partialsummen, und Grenzwerte sind empfindlich.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Absolut konvergent $\Rightarrow$ umordnen, klammern, Produkte bilden (Cauchy-Produkt) --- alles erlaubt. Bedingt konvergent $\Rightarrow$ nur das, was die Partialsummen direkt respektiert. Deshalb prüft man immer zuerst auf absolute Konvergenz.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.12
+\stupserzwei{gruen}{$s_n = \bigl(1 - \frac12\bigr) + \bigl(\frac12 - \frac13\bigr) + \dots + \bigl(\frac1n - \frac1{n + 1}\bigr) = 1 - \frac1{n + 1}$.}{22pt}
+\begin{loesungkarte}{gruen}{3.12}{Eine Teleskopreihe}
+\derweg{Partialbruchzerlegung, Partialsumme teleskopieren, Grenzwert.}
+\schritt{Zerlegung}
+$\frac1{k(k + 1)} = \frac Ak + \frac B{k + 1}$: $1 = A(k + 1) + Bk$; $k = 0$: $A = 1$; $k = -1$: $B = -1$. Also $\frac1{k(k + 1)} = \frac1k - \frac1{k + 1}$.
+\schritt{Partialsumme}
+$s_n = \sum_{k=1}^{n}\bigl(\frac1k - \frac1{k + 1}\bigr) = 1 - \frac1{n + 1}$: Alle inneren Glieder heben sich auf.
+\schritt{Grenzwert}
+$s_n\to1$. Die Reihe konvergiert mit Summe $1$.
+\probe{$s_3 = \frac12 + \frac16 + \frac1{12} = \frac{6 + 2 + 1}{12} = \frac34 = 1 - \frac14$. \checkmark}
+\begin{mitnehmen}\kastentext
+Teleskopsummen sind die diskreten Hauptsätze: $\sum(b_{k+1} - b_k) = b_{n+1} - b_1$. Wo immer ein Glied als Differenz geschrieben werden kann, ist die Partialsumme explizit --- und damit die Konvergenzfrage trivial.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.13
+\stupserzwei{gruen}{$2^{j}\cdot(2^{j})^{-p} = 2^{j(1 - p)} = (2^{1 - p})^{j}$: geometrisch mit Quotient $q = 2^{1 - p}$, und $q < 1\iff p > 1$.}{22pt}
+\begin{loesungkarte}{gruen}{3.13}{Die $p$-Reihe}
+\derweg{Cauchysches Verdichtungskriterium macht aus der $p$-Reihe eine geometrische.}
+\schritt{Voraussetzung}
+$a_k = k^{-p}$ ist für $p > 0$ positiv und monoton fallend --- das verlangt das Verdichtungskriterium: $\sum a_k$ konvergiert $\iff\sum2^{j}a_{2^{j}}$ konvergiert.
+\schritt{Verdichten}
+$\sum_{j\ge0}2^{j}(2^{j})^{-p} = \sum_{j\ge0}(2^{1 - p})^{j}$, eine geometrische Reihe mit Quotient $q = 2^{1 - p}$. Sie konvergiert genau für $q < 1$, also $1 - p < 0$, also $p > 1$.
+\schritt{Ergebnis}
+$\sum k^{-p}$ konvergiert für $p > 1$ und divergiert für $0 < p\le1$. Bei $p = 1$ ist $q = 1$: die harmonische Reihe (Aufgabe 3.9).
+\probe{$p = 2$: $\sum\frac1{k^{2}} = \frac{\pi^{2}}6 = 1{,}645$ (Euler); Partialsumme bis $100$: $1{,}635$. \checkmark\ $p = \frac12$: $\sum_{k\le100}\frac1{\sqrt k} = 18{,}6$, bis $10^{4}$: $198{,}5$ --- wächst wie $2\sqrt n$. \checkmark}
+\begin{mitnehmen}\kastentext
+Verdichtung lohnt sich, wenn $a_k$ monoton fällt und $a_{2^{j}}$ einfach ist: $k^{-p}$, $\frac1{k\ln k}$ (divergent!), $\frac1{k(\ln k)^{2}}$ (konvergent). Dieselbe Idee steckt im Integralkriterium: $\sum k^{-p}$ und $\int x^{-p}$ konvergieren für dasselbe $p$ (Aufgabe 3.42).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.14
+\stupserzwei{gruen}{$\frac{(k + 1)!}{(k + 1)^{k+1}}\cdot\frac{k^{k}}{k!} = \frac{(k + 1)k^{k}}{(k + 1)^{k+1}} = \frac{k^{k}}{(k + 1)^{k}}$.}{22pt}
+\begin{loesungkarte}{gruen}{3.14}{Fakultät gegen Potenz}
+\derweg{Quotientenkriterium; der Quotient ist der Kehrwert der Folge, die $e$ definiert.}
+\schritt{Quotient}
+$\frac{a_{k+1}}{a_k} = \frac{(k + 1)!}{(k + 1)^{k+1}}\cdot\frac{k^{k}}{k!} = \frac{(k + 1)\,k^{k}}{(k + 1)^{k+1}} = \Bigl(\frac k{k + 1}\Bigr)^{k} = \frac1{(1 + 1/k)^{k}}$.
+\schritt{Grenzwert}
+$(1 + \frac1k)^{k}\to e$, also $\frac{a_{k+1}}{a_k}\to\frac1e\approx0{,}368 < 1$. Die Reihe konvergiert (absolut, alle Glieder positiv).
+\probe{Glieder: $1$, $\frac24 = 0{,}5$, $\frac6{27} = 0{,}222$, $\frac{24}{256} = 0{,}094$, $\frac{120}{3125} = 0{,}038$ --- Quotienten $0{,}5$; $0{,}44$; $0{,}42$; $0{,}41$, auf dem Weg zu $0{,}368$. Summe $\approx1{,}88$. \checkmark}
+\begin{mitnehmen}\kastentext
+$k!$ wächst langsamer als $k^{k}$ (Stirling: $k!\approx\sqrt{2\pi k}\,(k/e)^{k}$, also $\frac{k!}{k^{k}}\approx\sqrt{2\pi k}\,e^{-k}$). Das Quotientenkriterium sieht den Faktor $e^{-1}$ pro Schritt, ohne Stirling zu kennen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.15
+\stupserzwei{gruen}{(b) $\bigl|\frac{c_k}{c_{k+1}}\bigr| = \frac{(k + 1)!}{k!} = k + 1\to\infty$. (c) $\frac{k!}{(k + 1)!} = \frac1{k + 1}\to0$.}{22pt}
+\begin{loesungkarte}{gruen}{3.15}{Drei Konvergenzradien}
+\derweg{$R = \lim|c_k/c_{k+1}|$; am Rand die Zahlenreihe einzeln untersuchen.}
+\schritt{(a) $\sum x^{k}/k$}
+$\frac{c_k}{c_{k+1}} = \frac{k + 1}k\to1$: $R = 1$. Rand $x = 1$: harmonische Reihe, divergent. Rand $x = -1$: $\sum\frac{(-1)^{k}}k$, Leibniz, konvergent. Konvergenzbereich $[-1, 1)$.
+\schritt{(b) $\sum x^{k}/k!$}
+$\frac{c_k}{c_{k+1}} = k + 1\to\infty$: $R = \infty$, Konvergenz für alle $x$ (die Exponentialreihe). Kein Rand.
+\schritt{(c) $\sum k!\,x^{k}$}
+$\frac{c_k}{c_{k+1}} = \frac1{k + 1}\to0$: $R = 0$. Konvergenz nur für $x = 0$.
+\probe{(a) bei $x = \frac12$: $\sum\frac{1}{k2^{k}} = \ln2 = 0{,}693$ (vgl.\ Aufgabe 3.33 mit $-\ln(1 - x)$). \checkmark\ (c) bei $x = 0{,}1$: Glieder $0{,}1$; $0{,}02$; $0{,}006$; $0{,}0024$; $0{,}0012$; $0{,}00072$; $0{,}0005$; $\dots$ --- ab $k = 10$ wachsen sie wieder ($k!\,0{,}1^{k}$ hat sein Minimum bei $k\approx10$). \checkmark}
+\begin{mitnehmen}\kastentext
+Im Inneren des Konvergenzkreises konvergiert eine Potenzreihe absolut, außerhalb divergiert sie, und auf dem Rand ist alles möglich --- an jedem Randpunkt einzeln. $R = 0$ heißt: Die Reihe definiert keine Funktion (außer in $0$); solche Reihen treten als asymptotische Entwicklungen trotzdem auf.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.16
+\stupserzwei{tief}{(b) Stetig bei $1$: $a + b = 1$. Differenzierbar bei $1$: Steigungen $2\cdot1 = a$. Also $a = 2$, $b = -1$.}{22pt}
+\begin{loesungkarte}{tief}{3.16}{Stetig machen, Nullstelle finden}
+\derweg{Lücken durch den Grenzwert schließen; Nullstellen durch Vorzeichenwechsel und Intervallhalbierung.}
+\schritt{(a)}
+Für $x\neq1$: $\frac{x^{2} - 1}{x - 1} = \frac{(x - 1)(x + 1)}{x - 1} = x + 1\to2$ für $x\to1$. Stetig genau für $c = 2$.
+\schritt{(b)}
+Stetigkeit bei $1$: $\lim_{x\to1^{-}}g = 1$, $\lim_{x\to1^{+}}g = a + b$, also $a + b = 1$. Differenzierbarkeit: linke Ableitung $2x|_{1} = 2$, rechte $a$; also $a = 2$, $b = -1$. Die Gerade $y = 2x - 1$ ist die Tangente an die Parabel in $(1, 1)$.
+\schritt{(c)}
+$h(x) = x - \cos x$ ist stetig. $h(0) = -1 < 0$, $h(\frac\pi2) = \frac\pi2 > 0$. Zwischenwertsatz: Nullstelle in $(0, \frac\pi2)$. Einschachteln: $h(0{,}7) = 0{,}7 - 0{,}765 = -0{,}065 < 0$, $h(0{,}8) = 0{,}8 - 0{,}697 = 0{,}103 > 0$. Lösung in $(0{,}7;\ 0{,}8)$. (Genauer: $0{,}739$.)
+\schritt{(d)}
+$\operatorname{sgn}$ ist in $0$ nicht stetig: Der Sprung von $-1$ auf $1$ überspringt alle Werte dazwischen. Der Zwischenwertsatz setzt Stetigkeit auf dem ganzen Intervall voraus.
+\probe{(b) $g(1) = 1 = 2\cdot1 - 1$. \checkmark\ (c) $0{,}739 - \cos0{,}739 = 0{,}739 - 0{,}739 = 0{,}000$. \checkmark}
+\begin{mitnehmen}\kastentext
+Eine hebbare Lücke schließt man mit dem Grenzwert, einen Übergang zwischen zwei Formeln macht man stetig durch Gleichsetzen der Werte und glatt durch Gleichsetzen der Ableitungen. Der Zwischenwertsatz liefert Existenz, Intervallhalbierung liefert Stellen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.17
+\stupserzwei{akzent}{$\frac1x$ auf $(0, 1)$: unbeschränkt. $x$ auf $(0, 1)$: Supremum $1$, nie erreicht. $\arctan x$ auf $[0, \infty)$: Supremum $\frac\pi2$, nie erreicht.}{22pt}
+\begin{loesungkarte}{akzent}{3.17}{Stetig, also beschränkt?}
+\derweg{Zu jeder fehlenden Voraussetzung ein Gegenbeispiel; dann den Satz vollständig hinschreiben.}
+\schritt{(a) offenes Intervall}
+$f(x) = \frac1x$ auf $(0, 1)$: stetig, unbeschränkt (geht gegen $\infty$ bei $0$). $f(x) = x$ auf $(0, 1)$: stetig, beschränkt, $\sup = 1$ wird nicht angenommen --- kein Maximum.
+\schritt{(b) unbeschränktes Intervall}
+$f(x) = \arctan x$ auf $[0, \infty)$: stetig, beschränkt durch $\frac\pi2$, kein Maximum. Oder $f(x) = \frac x{1 + x}$, Supremum $1$. Oder $-e^{-x}$ mit Supremum $0$.
+\schritt{(c) unstetige Funktion}
+$f(x) = x$ für $x < 1$, $f(1) = 0$ auf $[0, 1]$: Supremum $1$, nicht angenommen, weil in $1$ ein Sprung nach unten ist. Oder $f(x) = \frac1x$ für $x > 0$, $f(0) = 0$: unbeschränkt. Verletzt: Stetigkeit.
+\schritt{(d) der Satz}
+\emph{Eine stetige Funktion auf einem abgeschlossenen, beschränkten Intervall $[a, b]$ ist beschränkt und nimmt Maximum und Minimum an.} Fehlend in (a): abgeschlossen; in (b): beschränkt; in (c): stetig.
+\begin{fehler}\kastentext
+\enquote{Stetig auf einem Intervall} reicht nicht. Der Satz braucht ein \emph{kompaktes} Intervall --- abgeschlossen und beschränkt. Fehlt eine der Eigenschaften, kann die Funktion zum Rand hin entwischen: nach $\infty$ oder zu einem Wert, der nicht erreicht wird.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Kompaktheit ist die Eigenschaft, die Suprema in Maxima verwandelt. Sie steckt im Satz vom Maximum, im Satz von der gleichmäßigen Stetigkeit (Aufgabe 3.20 ist ein Fall, wo es auch ohne geht) und in der Existenz von Extremwertaufgaben. Wenn eine Optimierungsaufgabe \enquote{keine Lösung hat}, fehlt meist die Kompaktheit.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.18
+\stupserzwei{gruen}{$\varepsilon$-$\delta$ für $f$: $\delta = \varepsilon$ reicht, weil $|f(x) - f(0)|\le|x|$. Für $g$: zwei Folgen gegen $0$ mit Funktionswerten $1$ bzw. $0$.}{22pt}
+\begin{loesungkarte}{gruen}{3.18}{$x\sin\frac1x$}
+\derweg{Für $f$ eine Abschätzung, die den Sinus wegdrückt; für $g$ Folgen, die den Sinus bei verschiedenen Werten festhalten.}
+\schritt{$f$ ist stetig in $0$}
+Für $x\neq0$: $|f(x) - f(0)| = |x|\,|\sin\frac1x|\le|x|$. Sei $\varepsilon > 0$; wähle $\delta = \varepsilon$. Für $|x| < \delta$ ist $|f(x) - f(0)|\le|x| < \varepsilon$. \checkmark\ Der Faktor $x$ zwingt die Schwingung in den Trichter $|y|\le|x|$.
+\schritt{$g$ ist nicht stetig in $0$}
+$x_n = \frac1{(2n + \frac12)\pi}\to0$ mit $g(x_n) = \sin\bigl((2n + \frac12)\pi\bigr) = 1$. $y_n = \frac1{n\pi}\to0$ mit $g(y_n) = 0$. Zwei Folgen gegen $0$, Funktionswerte gegen $1$ bzw.\ $0$: $\lim_{x\to0}g(x)$ existiert nicht, $g$ kann in $0$ nicht stetig sein --- egal, wie man $g(0)$ wählt.
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\draw[->,linie] (-3.2,0)--(3.2,0); \draw[->,linie] (0,-1.6)--(0,1.6);
+\draw[linie,dashed] (-3,-1.5)--(3,1.5); \draw[linie,dashed] (-3,1.5)--(3,-1.5);
+\draw[tief,thick,domain=0.06:3,samples=600,smooth] plot (\x,{0.5*\x*sin(deg(3/\x))});
+\draw[tief,thick,domain=-3:-0.06,samples=600,smooth] plot (\x,{0.5*\x*sin(deg(3/\x))});
+\node[grau,font=\small,anchor=north west] at (1.6,1.5) {$f(x) = x\sin\frac1x$};
+\end{tikzpicture}
+\end{center}
+\probe{$f(0{,}001) = 0{,}001\cdot\sin(1000) = 0{,}001\cdot0{,}827 = 0{,}0008$ --- winzig. $g(0{,}001) = 0{,}827$, $g(0{,}0010005) = \sin(999{,}5) = -0{,}95$ --- springt. \checkmark}
+\begin{mitnehmen}\kastentext
+Unendlich viele Schwingungen sind kein Hindernis für Stetigkeit, solange ihre Amplitude gegen null geht. Das Einschließungsargument $|f(x)|\le|x|$ ist der Standardweg, Stetigkeit an einer kritischen Stelle zu zeigen; zwei Folgen mit verschiedenen Grenzwerten der Standardweg, sie zu widerlegen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.19
+\stupserzwei{gruen}{$p(x) = a_nx^{n}\bigl(1 + \frac{a_{n-1}}{a_nx} + \dots + \frac{a_0}{a_nx^{n}}\bigr)$; die Klammer geht gegen $1$ für $|x|\to\infty$.}{22pt}
+\begin{loesungkarte}{gruen}{3.19}{Ungerader Grad, reelle Nullstelle}
+\derweg{Für großes $|x|$ dominiert $a_nx^{n}$ und hat bei $\pm M$ verschiedene Vorzeichen; Zwischenwertsatz.}
+\schritt{Normieren}
+Ohne Einschränkung $a_n > 0$ (sonst betrachte $-p$). Schreibe $p(x) = x^{n}\,q(x)$ mit $q(x) = a_n + \frac{a_{n-1}}x + \dots + \frac{a_0}{x^{n}}$ für $x\neq0$. Es gilt $q(x)\to a_n > 0$ für $x\to\pm\infty$.
+\schritt{Vorzeichen}
+Also gibt es $M > 0$ mit $q(x) > 0$ für $|x|\ge M$. Dann ist $p(M) = M^{n}q(M) > 0$ und, weil $n$ ungerade ist, $p(-M) = (-M)^{n}q(-M) = -M^{n}q(-M) < 0$.
+\schritt{Zwischenwertsatz}
+$p$ ist stetig auf $[-M, M]$ und wechselt das Vorzeichen: Es gibt $\xi\in(-M, M)$ mit $p(\xi) = 0$. $\blacksquare$
+\probe{$x^{3} - 2x + 5$: $p(-3) = -27 + 6 + 5 = -16$, $p(0) = 5$: Nullstelle in $(-3, 0)$, nämlich $\approx-2{,}09$. \checkmark\ Gegenbeispiel für geraden Grad: $x^{2} + 1$ hat keine reelle Nullstelle --- $p(\pm M) > 0$ auf beiden Seiten.}
+\begin{mitnehmen}\kastentext
+Das Argument ist rein qualitativ: Man weiß nichts über die Lage der Nullstelle, nur dass eine existiert. Für Polynome ergänzt der Fundamentalsatz der Algebra (Band 10): Über $\mathbb C$ hat \emph{jedes} nichtkonstante Polynom eine Nullstelle, und reelle Polynome ungeraden Grades haben eine ungerade Anzahl reeller.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.20
+\stupserzwei{gruen}{O.\,B.\,d.\,A.\ $x\ge y$: $(\sqrt x - \sqrt y)^{2} = x - 2\sqrt{xy} + y\le x - y\iff2y\le2\sqrt{xy}\iff y\le\sqrt{xy}$, wahr wegen $x\ge y$.}{22pt}
+\begin{loesungkarte}{gruen}{3.20}{Die Wurzel ist gleichmäßig stetig}
+\derweg{Eine Ungleichung, die den Abstand der Wurzeln durch den Abstand der Zahlen kontrolliert --- unabhängig von der Stelle; dann $\delta$ aus ihr ablesen.}
+\schritt{Die Ungleichung}
+Behauptung: $|\sqrt x - \sqrt y|\le\sqrt{|x - y|}$ für $x, y\ge0$. Sei $x\ge y$. Beide Seiten sind $\ge0$, also darf man quadrieren: $(\sqrt x - \sqrt y)^{2} = x + y - 2\sqrt{xy}\le x - y\iff2y\le2\sqrt{xy}\iff\sqrt y\le\sqrt x$. Wahr. \checkmark
+\schritt{$\delta$ wählen}
+Sei $\varepsilon > 0$. Setze $\delta = \varepsilon^{2}$. Für alle $x, y\ge0$ mit $|x - y| < \delta$: $|\sqrt x - \sqrt y|\le\sqrt{|x - y|} < \sqrt\delta = \varepsilon$. $\blacksquare$ --- $\delta$ hängt nur von $\varepsilon$ ab, nicht von $x$ oder $y$: gleichmäßig.
+\schritt{Warum das überrascht}
+$f'(x) = \frac1{2\sqrt x}\to\infty$ für $x\to0$. Eine beschränkte Ableitung garantiert gleichmäßige Stetigkeit (Mittelwertsatz), aber sie ist nicht nötig: Die Wurzel ist bei $0$ steil, aber nur auf einem winzigen Stück --- der Zuwachs $\sqrt{\delta}$ bleibt klein.
+\probe{$x = 0$, $y = 0{,}0001$: $|\sqrt x - \sqrt y| = 0{,}01 = \sqrt{0{,}0001}$ --- die Ungleichung ist hier scharf. $x = 100$, $y = 100{,}0001$: Abstand der Wurzeln $5\cdot10^{-6}$, weit unter $0{,}01$. \checkmark}
+\begin{mitnehmen}\kastentext
+Gleichmäßig stetig: ein $\delta$ für alle Stellen. Hinreichend sind: kompakter Definitionsbereich (Satz von Heine), beschränkte Ableitung (Lipschitz), oder eine Abschätzung $|f(x) - f(y)|\le\omega(|x - y|)$ mit $\omega(t)\to0$ --- hier $\omega(t) = \sqrt t$ (Hölder-Stetigkeit). $\frac1x$ auf $(0, 1)$ und $x^{2}$ auf $\mathbb R$ sind \emph{nicht} gleichmäßig stetig.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.21
+\stupserzwei{tief}{(c) Durch $3^{x}$ teilen: $(\frac23)^{x} = 5$, logarithmieren: $x\ln\frac23 = \ln5$. Der Nenner ist negativ --- $x$ ist negativ.}{22pt}
+\begin{loesungkarte}{tief}{3.21}{Gleichungen mit $e$ und $\ln$}
+\derweg{Substituieren, zusammenfassen, logarithmieren --- und am Ende den Definitionsbereich prüfen.}
+\schritt{(a)}
+$u = e^{x} > 0$: $u^{2} - 3u + 2 = (u - 1)(u - 2) = 0$, $u = 1$ oder $u = 2$. Also $x = \ln1 = 0$ oder $x = \ln2\approx0{,}693$.
+\schritt{(b)}
+Definitionsbereich: $x > 0$ und $x > 3$, also $x > 3$. $\ln(x(x - 3)) = \ln4\Rightarrow x^{2} - 3x - 4 = 0\Rightarrow(x - 4)(x + 1) = 0$. $x = -1$ liegt außerhalb des Definitionsbereichs. Einzige Lösung $x = 4$.
+\schritt{(c)}
+$\bigl(\frac23\bigr)^{x} = 5\Rightarrow x\ln\frac23 = \ln5\Rightarrow x = \frac{\ln5}{\ln(2/3)} = \frac{1{,}6094}{-0{,}4055} = -3{,}969$. Plausibel: Für negatives $x$ wird $2^{x}$ \emph{größer} als $3^{x}$, und das muss es, um das Fünffache zu sein.
+\schritt{(d)}
+Setze $a = \ln x$, $b = \ln y$ (für $x, y > 0$). Dann $\exp(a + b) = \exp a\exp b = xy$, also $a + b = \ln(xy)$, das heißt $\ln x + \ln y = \ln(xy)$. $\blacksquare$ --- Die Funktionalgleichung der Exponentialfunktion \emph{ist} die des Logarithmus, gelesen von der anderen Seite.
+\probe{(a) $e^{2\ln2} - 3e^{\ln2} + 2 = 4 - 6 + 2 = 0$. \checkmark\ (b) $\ln4 + \ln1 = \ln4$. \checkmark\ (c) $2^{-3{,}969} = 0{,}0638$, $5\cdot3^{-3{,}969} = 5\cdot0{,}01276 = 0{,}0638$. \checkmark}
+\begin{mitnehmen}\kastentext
+$a^{x} = e^{x\ln a}$ reduziert jede Exponentialfunktion auf $e^{x}$, und $\log_ab = \frac{\ln b}{\ln a}$ jeden Logarithmus auf $\ln$. Bei Logarithmusgleichungen entstehen durch das Zusammenfassen Scheinlösungen --- die Probe gehört zur Lösung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.22
+\stupserzwei{gruen}{Glieder: $1$; $-0{,}125$; $+0{,}0026042$; $-0{,}0000217$; $+0{,}0000001$. Das sechste Glied $\frac{0{,}5^{10}}{10!}\approx2{,}7\cdot10^{-10}$ ist die Fehlerschranke.}{22pt}
+\begin{loesungkarte}{gruen}{3.22}{$\cos(0{,}5)$ auf vier Stellen}
+\derweg{Reihe aufschreiben, Glieder berechnen, bis sie unter die Toleranz fallen; Leibniz-Restabschätzung.}
+\schritt{Reihe}
+$\cos x = \sum_{k\ge0}\frac{(-1)^{k}x^{2k}}{(2k)!} = 1 - \frac{x^{2}}2 + \frac{x^{4}}{24} - \frac{x^{6}}{720} + \frac{x^{8}}{40320} - \dots$
+\schritt{Glieder für $x = 0{,}5$}
+$1$; $\frac{0{,}25}2 = 0{,}125$; $\frac{0{,}0625}{24} = 0{,}00260417$; $\frac{0{,}015625}{720} = 0{,}00002170$; $\frac{0{,}00390625}{40320} = 0{,}00000010$.
+\schritt{Summe}
+$1 - 0{,}125 + 0{,}00260417 - 0{,}00002170 + 0{,}00000010 = 0{,}87758257$. Auf vier Stellen: $\cos(0{,}5)\approx0{,}8776$.
+\schritt{Fehlerschranke}
+Alternierende Reihe mit monoton fallenden Gliedern: Der Fehler nach $n$ Gliedern ist kleiner als das erste weggelassene. Nach den ersten drei Gliedern ($0{,}87760417$) ist der Fehler $< 2{,}2\cdot10^{-5}$ --- das reicht für vier Stellen schon. Nach fünf Gliedern ist der Fehler $< \frac{0{,}5^{10}}{10!} = 2{,}7\cdot10^{-10}$.
+\probe{Taschenrechner: $\cos(0{,}5) = 0{,}8775825619$. Abweichung von unserer Fünf-Glieder-Summe: $3\cdot10^{-10}$, unter der Schranke. \checkmark}
+\begin{mitnehmen}\kastentext
+Für $|x|\le1$ konvergieren die Reihen von $\sin$, $\cos$, $e^{x}$ rasend schnell (Fakultäten im Nenner). Für größere $x$ reduziert man erst: $\cos(x + 2\pi) = \cos x$, $e^{x} = (e^{x/2})^{2}$. Die Leibniz-Schranke \enquote{Fehler $<$ erstes weggelassenes Glied} gilt nur für alternierende Reihen mit monoton fallenden Beträgen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.23
+\stupserzwei{tief}{(a) $(e^{x\ln x})' = e^{x\ln x}\cdot(x\ln x)' = x^{x}(\ln x + 1)$.}{22pt}
+\begin{loesungkarte}{tief}{3.23}{Ableiten im Akkord}
+\derweg{Kettenregel von außen nach innen; bei $x^{x}$ zuerst als Exponentialfunktion schreiben.}
+\schritt{(a)}
+$x^{x} = e^{x\ln x}$. Ableitung: $e^{x\ln x}\cdot(1\cdot\ln x + x\cdot\frac1x) = x^{x}(\ln x + 1)$. Nullstelle bei $x = \frac1e$: dort hat $x^{x}$ sein Minimum $e^{-1/e}\approx0{,}692$.
+\schritt{(b)}
+$(\ln(\cos x))' = \frac1{\cos x}\cdot(-\sin x) = -\tan x$.
+\schritt{(c)}
+$(\arctan(2x))' = \frac1{1 + (2x)^{2}}\cdot2 = \frac2{1 + 4x^{2}}$.
+\schritt{(d)}
+$(\sin^{2}(3x))' = 2\sin(3x)\cdot\cos(3x)\cdot3 = 6\sin(3x)\cos(3x) = 3\sin(6x)$.
+\schritt{(e)}
+$(xe^{-x^{2}})' = e^{-x^{2}} + x\cdot e^{-x^{2}}\cdot(-2x) = e^{-x^{2}}(1 - 2x^{2})$. Extrema bei $x = \pm\frac1{\sqrt2}$.
+\probe{(a) numerisch bei $x = 2$: $\frac{2{,}001^{2{,}001} - 2^{2}}{0{,}001} = \frac{4{,}00677 - 4}{0{,}001} = 6{,}77$; Formel: $4(\ln2 + 1) = 6{,}77$. \checkmark\ (d) bei $x = 0{,}1$: $3\sin0{,}6 = 1{,}694$; $6\sin0{,}3\cos0{,}3 = 6\cdot0{,}2955\cdot0{,}9553 = 1{,}694$. \checkmark}
+\begin{mitnehmen}\kastentext
+Zwei Umschreibungen, die man automatisch macht: $f(x)^{g(x)} = e^{g(x)\ln f(x)}$ und $\log_a x = \frac{\ln x}{\ln a}$. Dann bleiben nur noch $e^{x}$, $\ln$, Potenzen, $\sin$, $\cos$, $\arctan$ --- und die drei Regeln.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.24
+\stupserzwei{akzent}{(c) $f(x) - f(a) = \frac{f(x) - f(a)}{x - a}\cdot(x - a)\to f'(a)\cdot0 = 0$.}{22pt}
+\begin{loesungkarte}{akzent}{3.24}{Stetig, aber nicht differenzierbar}
+\derweg{Differenzenquotient von beiden Seiten; der Beweis der Implikation ist ein Einzeiler mit Grenzwertsätzen.}
+\schritt{(a)}
+Stetig: $||x| - 0|= |x|\to0$. Differenzenquotient in $0$: $\frac{|h| - 0}h = \frac{|h|}h$, das ist $1$ für $h > 0$ und $-1$ für $h < 0$. Rechts- und linksseitiger Grenzwert verschieden: nicht differenzierbar. Ein Knick.
+\schritt{(b)}
+Stetig: $\sqrt[3]h\to0$. Differenzenquotient: $\frac{\sqrt[3]h - 0}h = h^{-2/3}\to+\infty$ für $h\to0$ (von beiden Seiten). Nicht differenzierbar --- aber anders als bei $|x|$: Hier gibt es \emph{eine} Grenzrichtung, nur ist die Steigung unendlich. Eine senkrechte Tangente.
+\schritt{(c)}
+Für $x\neq a$: $f(x) - f(a) = \frac{f(x) - f(a)}{x - a}\cdot(x - a)$. Für $x\to a$ geht der erste Faktor gegen $f'(a)$ (existiert nach Voraussetzung), der zweite gegen $0$; das Produkt gegen $0$. Also $f(x)\to f(a)$: stetig. $\blacksquare$
+\schritt{(d)}
+$(x\cdot x)' = (x^{2})' = 2x$, aber $f'g' = 1\cdot1 = 1$. Richtig: $(fg)' = f'g + fg'$, hier $1\cdot x + x\cdot1 = 2x$. \checkmark
+\begin{fehler}\kastentext
+Differenzierbar $\Rightarrow$ stetig, nie umgekehrt. Stetige Funktionen können Knicke haben ($|x|$), senkrechte Tangenten ($\sqrt[3]x$) oder --- wie die Weierstraß-Funktion --- \emph{nirgends} differenzierbar sein. Und $(fg)' = f'g'$ ist der häufigste Ableitungsfehler überhaupt; die Probe $(x\cdot x)'$ entlarvt ihn in einer Zeile.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Differenzierbar heißt: Der Differenzenquotient hat einen Grenzwert, \emph{eine} Zahl, von beiden Seiten dieselbe und endlich. Jede dieser drei Bedingungen kann einzeln scheitern.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.25
+\stupserzwei{gruen}{$u = e^{x^{2}}\sin3x$, $u' = 2xe^{x^{2}}\sin3x + 3e^{x^{2}}\cos3x$. Dann $f' = \frac{u'(1 + x^{2}) - u\cdot2x}{(1 + x^{2})^{2}}$.}{22pt}
+\begin{loesungkarte}{gruen}{3.25}{Alle drei Regeln auf einmal}
+\derweg{Zähler als Produkt ableiten (mit Kettenregel in jedem Faktor), dann Quotientenregel, dann ausklammern.}
+\schritt{Zähler}
+$u(x) = e^{x^{2}}\sin(3x)$. $(e^{x^{2}})' = 2xe^{x^{2}}$, $(\sin3x)' = 3\cos3x$. Produktregel: $u' = 2xe^{x^{2}}\sin3x + 3e^{x^{2}}\cos3x = e^{x^{2}}(2x\sin3x + 3\cos3x)$.
+\schritt{Quotient}
+$f' = \frac{u'(1 + x^{2}) - 2xu}{(1 + x^{2})^{2}} = \frac{e^{x^{2}}\bigl[(2x\sin3x + 3\cos3x)(1 + x^{2}) - 2x\sin3x\bigr]}{(1 + x^{2})^{2}}$.
+\schritt{Vereinfachen}
+In der Klammer: $2x\sin3x + 2x^{3}\sin3x + 3\cos3x + 3x^{2}\cos3x - 2x\sin3x = 2x^{3}\sin3x + 3(1 + x^{2})\cos3x$. Also
+\[ f'(x) = \frac{e^{x^{2}}\bigl[2x^{3}\sin3x + 3(1 + x^{2})\cos3x\bigr]}{(1 + x^{2})^{2}}. \]
+\probe{$x = 0$: $f'(0) = \frac{1\cdot[0 + 3\cdot1\cdot1]}1 = 3$. Direkt: nahe $0$ ist $f(x)\approx\sin3x\approx3x$, Steigung $3$. \checkmark}
+\begin{mitnehmen}\kastentext
+Bei verschachtelten Ausdrücken: Struktur erkennen (Quotient von Produkt von Verkettungen), von außen nach innen die Regeln anwenden, Teilergebnisse benennen ($u$, $u'$), und erst ganz am Ende vereinfachen. Wer unterwegs vereinfacht, verliert Terme.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.26
+\stupserzwei{gruen}{$f'(x) = 2x\sin\frac1x - \cos\frac1x$ für $x\neq0$. Der erste Summand geht gegen $0$, der zweite schwingt zwischen $-1$ und $1$.}{22pt}
+\begin{loesungkarte}{gruen}{3.26}{Differenzierbar mit unstetiger Ableitung}
+\derweg{In $0$ direkt mit dem Differenzenquotienten; für $x\neq0$ mit den Regeln; dann $\lim_{x\to0}f'(x)$ untersuchen.}
+\schritt{Differenzierbar in $0$}
+$\frac{f(h) - f(0)}h = \frac{h^{2}\sin(1/h)}h = h\sin\frac1h$, und $|h\sin\frac1h|\le|h|\to0$. Also $f'(0) = 0$ existiert.
+\schritt{$f'$ für $x\neq0$}
+Produkt- und Kettenregel: $f'(x) = 2x\sin\frac1x + x^{2}\cos\frac1x\cdot\bigl(-\frac1{x^{2}}\bigr) = 2x\sin\frac1x - \cos\frac1x$.
+\schritt{$f'$ ist in $0$ nicht stetig}
+$2x\sin\frac1x\to0$, aber $\cos\frac1x$ hat für $x\to0$ keinen Grenzwert (bei $x_n = \frac1{2n\pi}$ ist er $1$, bei $y_n = \frac1{(2n + 1)\pi}$ ist er $-1$). Also existiert $\lim_{x\to0}f'(x)$ nicht, und $f'$ ist in $0$ unstetig --- obwohl $f'(0) = 0$ definiert ist.
+\probe{$x = 0{,}01$: $f'(0{,}01) = 0{,}02\sin100 - \cos100 = 0{,}02\cdot(-0{,}506) - 0{,}862 = -0{,}872$. $x = 0{,}0101$: $\cos(99{,}01) = 0{,}124$, $f'\approx-0{,}13$. Große Sprünge auf kleinem Raum. \checkmark}
+\begin{mitnehmen}\kastentext
+\enquote{$f$ differenzierbar} und \enquote{$f'$ stetig} ($f\in C^{1}$) sind verschiedene Eigenschaften. Der Faktor $x^{2}$ ist genau das Maß an Dämpfung, das Differenzierbarkeit in $0$ erzwingt, aber die Ableitung noch wild lässt; $x^{3}\sin\frac1x$ wäre $C^{1}$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.27
+\stupserzwei{tief}{(d) $\frac d{dx}\arctan\frac1x = \frac1{1 + 1/x^{2}}\cdot\bigl(-\frac1{x^{2}}\bigr) = -\frac1{x^{2} + 1}$. Die Summe der Ableitungen ist null.}{22pt}
+\begin{loesungkarte}{tief}{3.27}{Ungleichungen mit dem Mittelwertsatz}
+\derweg{Differenzfunktion bilden; an einer Stelle gleich null; Ableitung hat festes Vorzeichen, also ist die Differenz monoton.}
+\schritt{(a)}
+$g(x) = e^{x} - 1 - x$, $g(0) = 0$, $g'(x) = e^{x} - 1$: negativ für $x < 0$, positiv für $x > 0$. Also fällt $g$ bis $0$ und steigt danach: $g(x)\ge g(0) = 0$ überall. $\blacksquare$
+\schritt{(b)}
+$h(x) = x - \sin x$, $h(0) = 0$, $h'(x) = 1 - \cos x\ge0$. $h$ ist monoton wachsend, also $h(x)\ge0$ für $x\ge0$. $\blacksquare$
+\schritt{(c)}
+$k(x) = x - \ln(1 + x)$ auf $(-1, \infty)$, $k(0) = 0$, $k'(x) = 1 - \frac1{1 + x} = \frac x{1 + x}$: negativ auf $(-1, 0)$, positiv auf $(0, \infty)$. Minimum bei $0$: $k\ge0$. $\blacksquare$
+\schritt{(d)}
+$F(x) = \arctan x + \arctan\frac1x$ auf $(0, \infty)$. $F'(x) = \frac1{1 + x^{2}} + \frac1{1 + 1/x^{2}}\cdot\bigl(-\frac1{x^{2}}\bigr) = \frac1{1 + x^{2}} - \frac1{x^{2} + 1} = 0$. Nach dem Mittelwertsatz ist $F$ auf dem Intervall konstant; $F(1) = \frac\pi4 + \frac\pi4 = \frac\pi2$. $\blacksquare$
+\probe{(a) $x = 1$: $e\ge2$. \checkmark\ $x = -2$: $e^{-2} = 0{,}135\ge-1$. \checkmark\ (d) $x = \sqrt3$: $\frac\pi3 + \frac\pi6 = \frac\pi2$. \checkmark}
+\begin{mitnehmen}\kastentext
+Der Mittelwertsatz in zwei Folgerungen: $g'\ge0\Rightarrow g$ monoton wachsend; $g' = 0\Rightarrow g$ konstant. Mit der ersten beweist man Ungleichungen (Differenz bilden, Nullstelle, Vorzeichen der Ableitung), mit der zweiten Identitäten (Ableitung null, Wert an einer Stelle). Beide brauchen ein \emph{Intervall}: Auf $(-\infty, 0)$ ist $F$ in (d) ebenfalls konstant, aber gleich $-\frac\pi2$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.28
+\stupserzwei{akzent}{(b) $\frac{x + \sin x}x = 1 + \frac{\sin x}x\to1 + 0 = 1$, denn $|\sin x|\le1$. Der Grenzwert existiert --- L'Hospital hat ihn nur nicht gefunden.}{22pt}
+\begin{loesungkarte}{akzent}{3.28}{L'Hospital, falsch angewandt}
+\derweg{In jedem Fall prüfen, welche Voraussetzung fehlt; dann die Regel mit allen Bedingungen aufschreiben.}
+\schritt{(a) keine unbestimmte Form}
+Einsetzen: $\frac{1 + 1}{1 + 1} = 1$. Die Funktion ist in $1$ stetig, der Grenzwert ist der Funktionswert. L'Hospital setzt $\frac00$ oder $\frac\infty\infty$ voraus; hier liegt $\frac22$ vor, und die Regel liefert Unsinn ($2$ statt $1$).
+\schritt{(b) Ableitungsquotient ohne Grenzwert}
+$\frac\infty\infty$ liegt vor. Aber $\frac{(x + \sin x)'}{x'} = 1 + \cos x$ hat für $x\to\infty$ keinen Grenzwert. Die Regel sagt dann \emph{nichts} --- nicht, dass der ursprüngliche Grenzwert fehlt. Er existiert: $1 + \frac{\sin x}x\to1$. L'Hospital ist eine Einbahnstraße: Existiert der Grenzwert der Ableitungen, dann auch der ursprüngliche und beide sind gleich. Umgekehrt nicht.
+\schritt{(c) Zirkelschluss}
+$\frac{\sin x}x\to\frac{\cos0}1 = 1$ ist formal korrekt --- wenn man $(\sin x)' = \cos x$ schon hat. Leitet man aber $\sin$ über den Differenzenquotienten ab, braucht man gerade $\lim\frac{\sin h}h = 1$. Dann beweist das Argument die Aussage mit sich selbst. In Band 3 ist $\sin$ über die Potenzreihe definiert, dort ist $(\sin)' = \cos$ unabhängig --- und L'Hospital hier erlaubt, wenn auch mit Kanonen auf Spatzen.
+\schritt{(d) die Regel}
+Seien $f, g$ auf $(a, b)$ differenzierbar, $g'\neq0$ dort, und entweder $f, g\to0$ oder $|g|\to\infty$ für $x\to a^{+}$. \emph{Existiert} $\lim_{x\to a^{+}}\frac{f'(x)}{g'(x)} = L$ (auch $\pm\infty$ zugelassen), dann ist $\lim_{x\to a^{+}}\frac{f(x)}{g(x)} = L$. Entsprechend für $x\to b^{-}$, $x\to\pm\infty$.
+\begin{fehler}\kastentext
+Drei Prüfungen vor jeder Anwendung: (1) Liegt $\frac00$ oder $\frac\infty\infty$ vor? (2) Existiert der Grenzwert des Ableitungsquotienten? (3) Benutze ich etwas, das ich erst beweisen will? Und eine Alternative immer im Blick: Oft sind Umformen (Aufgabe 3.4) oder Taylorreihen (Aufgabe 3.31) schneller und sicherer.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+L'Hospital ist ein Werkzeug für $\frac00$ und $\frac\infty\infty$, nichts sonst; $0\cdot\infty$, $\infty - \infty$, $1^{\infty}$ muss man erst umschreiben. Und wenn das Ableiten den Ausdruck nicht vereinfacht, ist die Regel das falsche Werkzeug.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.29
+\stupserzwei{gruen}{(b) $\frac{\ln x}{1/x}$ ist $\frac{-\infty}\infty$; Ableitungen: $\frac{1/x}{-1/x^{2}} = -x\to0$.}{22pt}
+\begin{loesungkarte}{gruen}{3.29}{Drei Grenzwerte mit L'Hospital}
+\derweg{Form prüfen, gegebenenfalls umschreiben, ableiten, Grenzwert der Ableitungen bestimmen.}
+\schritt{(a)}
+$\frac00$. Erste Anwendung: $\frac{e^{x} - 1}{2x}$, wieder $\frac00$. Zweite: $\frac{e^{x}}2\to\frac12$. Also $\lim = \frac12$.
+\schritt{(b)}
+$0\cdot(-\infty)$; umschreiben $x\ln x = \frac{\ln x}{1/x}$, Form $\frac{-\infty}{\infty}$. Ableiten: $\frac{1/x}{-1/x^{2}} = -x\to0$. Also $\lim_{x\to0^{+}}x\ln x = 0$.
+\schritt{(c)}
+$0^{0}$; $x^{x} = e^{x\ln x}$, und $x\ln x\to0$ nach (b). Da $\exp$ stetig: $x^{x}\to e^{0} = 1$.
+\probe{(a) $x = 0{,}01$: $\frac{e^{0{,}01} - 1{,}01}{0{,}0001} = \frac{0{,}00005017}{0{,}0001} = 0{,}5017$. \checkmark\ (c) $0{,}01^{0{,}01} = e^{0{,}01\ln0{,}01} = e^{-0{,}046} = 0{,}955$; $0{,}001^{0{,}001} = 0{,}993$. \checkmark}
+\begin{mitnehmen}\kastentext
+(a) sagt: $e^{x} = 1 + x + \frac{x^{2}}2 + \dots$, der Fehler der linearen Näherung ist $\sim\frac{x^{2}}2$. (b) sagt: $\ln x$ geht gegen $-\infty$, aber langsamer als jede Potenz von $x$ gegen $0$ geht. (c) ist die Rechtfertigung für $0^{0} = 1$ in Potenzreihen --- als Grenzwert von $x^{x}$, nicht als allgemeine Regel.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.30
+\stupserzwei{gruen}{$f' = -\frac{2x}{(x^{2} - 1)^{2}}$: Vorzeichen von $-x$. $f'' = \frac{6x^{2} + 2}{(x^{2} - 1)^{3}}$: Vorzeichen von $x^{2} - 1$.}{22pt}
+\begin{loesungkarte}{gruen}{3.30}{Eine Kurvendiskussion}
+\derweg{Das Programm der Reihe nach; die Umschreibung $f = 1 + \frac1{x^{2} - 1}$ macht alles schneller.}
+\schritt{Definitionsbereich, Symmetrie}
+$D = \mathbb R\setminus\{-1, 1\}$. $f(-x) = f(x)$: gerade, achsensymmetrisch zur $y$-Achse.
+\schritt{Nullstellen, Pole}
+$f(x) = 0\iff x = 0$. Pole bei $x = \pm1$: Für $x\to1^{+}$ ist $x^{2} - 1\to0^{+}$, also $f\to+\infty$; für $x\to1^{-}$: $f\to-\infty$. Spiegelbildlich bei $-1$.
+\schritt{Asymptote}
+$f(x) = 1 + \frac1{x^{2} - 1}\to1$ für $x\to\pm\infty$; von oben ($\frac1{x^{2} - 1} > 0$ für $|x| > 1$). Waagerechte Asymptote $y = 1$.
+\schritt{Monotonie, Extrema}
+$f'(x) = -\frac{2x}{(x^{2} - 1)^{2}}$. $f' > 0$ für $x < 0$ (außer $-1$), $f' < 0$ für $x > 0$ (außer $1$). Kritischer Punkt $x = 0$: lokales Maximum $f(0) = 0$. Auf $(-1, 1)$ ist $f\le0$, auf $|x| > 1$ ist $f > 1$: Die Werte in $(0, 1]$ werden nie angenommen.
+\schritt{Krümmung}
+$f''(x) = \frac{6x^{2} + 2}{(x^{2} - 1)^{3}}$. Zähler $> 0$; Nenner $> 0$ für $|x| > 1$ (konvex), $< 0$ für $|x| < 1$ (konkav). Keine Wendepunkte ($f''\neq0$; der Krümmungswechsel passiert an den Polen).
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\draw[->,linie] (-3.5,0)--(3.5,0) node[right,grau,font=\small] {$x$};
+\draw[->,linie] (0,-3)--(0,3.4) node[above,grau,font=\small] {$y$};
+\draw[linie,dashed] (-3.5,1)--(3.5,1); \draw[linie,dashed] (1,-3)--(1,3.4); \draw[linie,dashed] (-1,-3)--(-1,3.4);
+\draw[tief,thick,domain=1.18:3.5,samples=100,smooth] plot (\x,{\x*\x/(\x*\x-1)});
+\draw[tief,thick,domain=-3.5:-1.18,samples=100,smooth] plot (\x,{\x*\x/(\x*\x-1)});
+\draw[tief,thick,domain=-0.82:0.82,samples=100,smooth] plot (\x,{\x*\x/(\x*\x-1)});
+\node[grau,font=\small,anchor=west] at (2.2,1.35) {$y = 1$};
+\fill[akzent] (0,0) circle (1.6pt);
+\end{tikzpicture}
+\end{center}
+\probe{$f(2) = \frac43 = 1{,}33$, $f(0{,}5) = \frac{0{,}25}{-0{,}75} = -\frac13$, $f(1{,}1) = \frac{1{,}21}{0{,}21} = 5{,}76$. Passt zur Skizze. \checkmark\ $f''(2) = \frac{26}{27} > 0$ konvex; $f''(0) = \frac2{-1} = -2 < 0$ konkav, Maximum. \checkmark}
+\begin{mitnehmen}\kastentext
+Bei gebrochen rationalen Funktionen zuerst Polynomdivision: $f = 1 + \frac1{x^{2} - 1}$ zeigt Asymptote und Vorzeichenverhalten ohne Rechnung. Dann das Programm --- aber mit Verstand: Symmetrie halbiert die Arbeit, und wer die Pole kennt, weiß schon, wo die Krümmung wechselt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.31
+\stupserzwei{tief}{(b) $(1 + x + \frac{x^{2}}2 + \frac{x^{3}}6)(x - \frac{x^{3}}6)$: $x^{1}$: $x$; $x^{2}$: $x^{2}$; $x^{3}$: $\frac{x^{3}}2 - \frac{x^{3}}6 = \frac{x^{3}}3$.}{22pt}
+\begin{loesungkarte}{tief}{3.31}{Rechnen mit Taylorreihen}
+\derweg{Reihen einsetzen, niedrigste Potenzen sammeln, kürzen; Fehler mit dem Lagrange-Restglied.}
+\schritt{(a)}
+$\cos x - 1 + \frac{x^{2}}2 = \frac{x^{4}}{24} - \frac{x^{6}}{720} + \dots$, geteilt durch $x^{4}$: $\frac1{24} - \frac{x^{2}}{720} + \dots\to\frac1{24}$. \\
+$\sin x - x = -\frac{x^{3}}6 + \frac{x^{5}}{120} - \dots$, geteilt durch $x^{3}$: $\to-\frac16$.
+\schritt{(b)}
+$e^{x}\sin x = \bigl(1 + x + \frac{x^{2}}2 + \frac{x^{3}}6 + \dots\bigr)\bigl(x - \frac{x^{3}}6 + \dots\bigr)$. Koeffizienten: $x$: $1$; $x^{2}$: $1$; $x^{3}$: $\frac12 - \frac16 = \frac13$. Also $T_3(x) = x + x^{2} + \frac{x^{3}}3$.
+\schritt{(c)}
+Restglied nach dem Glied $-\frac{x^{3}}6$ (das $x^{4}$-Glied ist null): $R = \frac{\sin^{(5)}(\xi)}{5!}x^{5} = \frac{\cos\xi}{120}x^{5}$, also $|R|\le\frac{|x|^{5}}{120}\le\frac{0{,}5^{5}}{120} = \frac{0{,}03125}{120} = 2{,}6\cdot10^{-4}$. (Leibniz-Abschätzung mit dem nächsten Glied $\frac{x^{5}}{120}$ liefert dasselbe.)
+\probe{(a) $x = 0{,}1$: $\frac{\cos0{,}1 - 1 + 0{,}005}{10^{-4}} = \frac{4{,}1653\cdot10^{-6}}{10^{-4}} = 0{,}04165\approx\frac1{24} = 0{,}04167$. \checkmark\ (b) $x = 0{,}1$: $e^{0{,}1}\sin0{,}1 = 0{,}110332$; $T_3 = 0{,}1 + 0{,}01 + 0{,}000333 = 0{,}110333$. \checkmark\ (c) $\sin0{,}5 = 0{,}479426$; $0{,}5 - \frac{0{,}125}6 = 0{,}479167$; Fehler $2{,}6\cdot10^{-4}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Für Grenzwerte bei $0$ sind Taylorreihen oft schneller als L'Hospital: Man sieht sofort, welche Potenz übrig bleibt. Die drei Reihen $e^{x}$, $\sin x$, $\cos x$ und dazu $\frac1{1 - x}$, $\ln(1 + x)$ sollte man bis zur vierten Potenz auswendig können.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.32
+\stupserzwei{gruen}{$T_2(x) = 1 + \frac12(x - 1) - \frac18(x - 1)^{2}$; bei $x = 1{,}1$: $1 + 0{,}05 - 0{,}00125$.}{22pt}
+\begin{loesungkarte}{gruen}{3.32}{$\sqrt{1{,}1}$ mit Fehlerschranke}
+\derweg{Entwickeln um $x_0 = 1$, wo alles exakt ist; Lagrange-Restglied mit der dritten Ableitung.}
+\schritt{Ableitungen bei $1$}
+$f(x) = x^{1/2}$, $f(1) = 1$; $f' = \frac12x^{-1/2}$, $f'(1) = \frac12$; $f'' = -\frac14x^{-3/2}$, $f''(1) = -\frac14$; $f''' = \frac38x^{-5/2}$.
+\schritt{Taylorpolynom}
+$T_2(x) = 1 + \frac12(x - 1) - \frac18(x - 1)^{2}$. Bei $x = 1{,}1$: $1 + 0{,}05 - 0{,}00125 = 1{,}04875$.
+\schritt{Restglied}
+$R_2 = \frac{f'''(\xi)}{3!}(0{,}1)^{3}$ mit $\xi\in(1, 1{,}1)$. Dort $f'''(\xi) = \frac38\xi^{-5/2}\le\frac38$. Also $|R_2|\le\frac{3/8}6\cdot0{,}001 = 6{,}25\cdot10^{-5}$. Garantiert: $\sqrt{1{,}1}\in[1{,}04869;\ 1{,}04881]$. Da $f''' > 0$, ist $R_2 > 0$: der wahre Wert liegt über $1{,}04875$.
+\probe{$\sqrt{1{,}1} = 1{,}0488088$; Fehler $5{,}9\cdot10^{-5} < 6{,}25\cdot10^{-5}$, positiv. \checkmark\ Gegenprobe: $1{,}04875^{2} = 1{,}09988$. \checkmark}
+\begin{mitnehmen}\kastentext
+Lagrange-Restglied: $R_n = \frac{f^{(n+1)}(\xi)}{(n + 1)!}(x - x_0)^{n+1}$ mit unbekanntem $\xi$ zwischen $x_0$ und $x$; man schätzt $|f^{(n+1)}|$ auf dem Intervall nach oben ab. Das Vorzeichen von $f^{(n+1)}$ verrät sogar die Richtung des Fehlers.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.33
+\stupserzwei{gruen}{Oder: $\frac1{1 + x} = \sum(-x)^{k}$ gliedweise integrieren von $0$ bis $x$.}{22pt}
+\begin{loesungkarte}{gruen}{3.33}{Die Reihe von $\ln(1 + x)$}
+\derweg{Ableitungen bei $0$, Muster erkennen, Konvergenzradius, beide Randpunkte prüfen.}
+\schritt{Ableitungen}
+$f = \ln(1 + x)$, $f(0) = 0$; $f' = (1 + x)^{-1}$, $f'(0) = 1$; $f'' = -(1 + x)^{-2}$, $f''(0) = -1$; $f''' = 2(1 + x)^{-3}$, $f'''(0) = 2$; $f^{(4)}(0) = -6$. Allgemein $f^{(k)}(0) = (-1)^{k+1}(k - 1)!$.
+\schritt{Reihe}
+$\frac{f^{(k)}(0)}{k!} = \frac{(-1)^{k+1}}k$, also
+\[ \ln(1 + x) = \sum_{k\ge1}\frac{(-1)^{k+1}}kx^{k} = x - \frac{x^{2}}2 + \frac{x^{3}}3 - \frac{x^{4}}4 + \dots \]
+Kürzer: $\frac1{1 + x} = \sum_{k\ge0}(-1)^{k}x^{k}$ für $|x| < 1$, gliedweise integriert von $0$ bis $x$ gibt dieselbe Reihe.
+\schritt{Konvergenzbereich}
+$R = \lim\frac{k + 1}k = 1$. Bei $x = 1$: $\sum\frac{(-1)^{k+1}}k$, Leibniz, konvergent. Bei $x = -1$: $\sum\frac{(-1)^{k+1}(-1)^{k}}k = -\sum\frac1k$, divergent (passend: $\ln0$ existiert nicht). Konvergenzbereich $(-1, 1]$.
+\schritt{$\ln2$}
+Bei $x = 1$ (Abelscher Grenzwertsatz rechtfertigt das Einsetzen am Rand): $\ln2 = 1 - \frac12 + \frac13 - \frac14 + \dots$
+\probe{Partialsummen: $s_4 = 0{,}583$, $s_{10} = 0{,}646$, $s_{100} = 0{,}688$, $\ln2 = 0{,}693$. Konvergiert --- quälend langsam (Fehler $\approx\frac1{2n}$). \checkmark\ Schneller: $\ln2 = -\ln\frac12 = \sum\frac1{k2^{k}} = 0{,}5 + 0{,}125 + 0{,}0417 + 0{,}0156 + 0{,}0063 + \dots$, nach $10$ Gliedern $0{,}6930$. \checkmark}
+\begin{mitnehmen}\kastentext
+Zwei Wege zu Taylorreihen: Ableitungen berechnen (immer möglich, oft mühsam) oder bekannte Reihen umbauen --- integrieren, ableiten, substituieren (schnell, braucht die Sätze aus Kapitel 12). Das Randverhalten muss man immer gesondert prüfen; hier liefert es die berühmteste langsame Reihe der Analysis.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.34
+\stupserzwei{tief}{(c) $\frac n{n^{2} + k^{2}} = \frac1n\cdot\frac1{1 + (k/n)^{2}}$: Riemann-Summe von $\frac1{1 + x^{2}}$.}{22pt}
+\begin{loesungkarte}{tief}{3.34}{Summen, die Integrale sind}
+\derweg{Den Faktor $\frac1n$ herausziehen, den Rest als $g(k/n)$ erkennen, dann $\int_0^1g$.}
+\schritt{Prinzip}
+Für stetiges $g$ auf $[0, 1]$ gilt $\frac1n\sum_{k=1}^{n}g\bigl(\frac kn\bigr)\to\int_0^1g(x)\,dx$ --- die rechte Riemann-Summe zur äquidistanten Zerlegung.
+\schritt{(a)}
+$\sum_{k=1}^{n}\frac1{n + k} = \frac1n\sum_{k=1}^{n}\frac1{1 + k/n}$, also $g(x) = \frac1{1 + x}$: Grenzwert $\int_0^1\frac{dx}{1 + x} = \ln2$.
+\schritt{(b)}
+$g(x) = x^{2}$: $\int_0^1x^{2}\,dx = \frac13$ (Aufgabe 3.35 beweist genau das).
+\schritt{(c)}
+$\frac n{n^{2} + k^{2}} = \frac1n\cdot\frac1{1 + (k/n)^{2}}$, $g(x) = \frac1{1 + x^{2}}$: $\int_0^1\frac{dx}{1 + x^{2}} = \arctan1 = \frac\pi4$.
+\probe{(a) $n = 1000$: $0{,}69290$, $\ln2 = 0{,}69315$. \checkmark\ (c) $n = 1000$: $0{,}78515$, $\frac\pi4 = 0{,}78540$. \checkmark\ Der Fehler ist jeweils $\approx\frac c n$, wie bei Riemann-Summen üblich.}
+\begin{mitnehmen}\kastentext
+Rückwärts gelesen definiert die Riemann-Summe den Grenzwert von Summen, die keine geschlossene Form haben. (a) ist zugleich der Grund, warum $a_{2n} - a_n\to\ln2$ für die harmonische Reihe (Aufgabe 3.9 zeigte $\ge\frac12$) --- und der Anfang der Formel $a_n\approx\ln n + \gamma$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.35
+\stupserzwei{gruen}{$U_n = \frac{(n - 1)n(2n - 1)}{6n^{3}}$, $O_n = \frac{n(n + 1)(2n + 1)}{6n^{3}}$; beide gegen $\frac26 = \frac13$.}{22pt}
+\begin{loesungkarte}{gruen}{3.35}{$\int_0^1x^{2}\,dx$ von Hand}
+\derweg{Äquidistante Zerlegung, Infimum und Supremum auf jedem Teilintervall (Monotonie), Summenformel, Grenzwert.}
+\schritt{Zerlegung}
+$x_i = \frac in$, $i = 0, \dots, n$, Breite $\frac1n$. Auf $[x_{i-1}, x_i]$ ist $x^{2}$ monoton wachsend: $m_i = \bigl(\frac{i - 1}n\bigr)^{2}$, $M_i = \bigl(\frac in\bigr)^{2}$.
+\schritt{Ober- und Untersumme}
+$O_n = \sum_{i=1}^{n}\frac1n\Bigl(\frac in\Bigr)^{2} = \frac1{n^{3}}\sum_{i=1}^{n}i^{2} = \frac{n(n + 1)(2n + 1)}{6n^{3}}$, \quad $U_n = \frac1{n^{3}}\sum_{i=0}^{n-1}i^{2} = \frac{(n - 1)n(2n - 1)}{6n^{3}}$.
+\schritt{Grenzwert}
+$O_n = \frac16\bigl(1 + \frac1n\bigr)\bigl(2 + \frac1n\bigr)\to\frac26 = \frac13$, $U_n = \frac16\bigl(1 - \frac1n\bigr)\bigl(2 - \frac1n\bigr)\to\frac13$. Da $U_n\le\int\le O_n$ und beide gegen $\frac13$ gehen: $\int_0^1x^{2}\,dx = \frac13$. Außerdem $O_n - U_n = \frac1n\to0$: $x^{2}$ ist Riemann-integrierbar.
+\probe{$n = 10$: $U = \frac{9\cdot10\cdot19}{6000} = 0{,}285$, $O = \frac{10\cdot11\cdot21}{6000} = 0{,}385$; Mittel $0{,}335\approx\frac13$. \checkmark\ Hauptsatz: $\bigl[\frac{x^{3}}3\bigr]_0^1 = \frac13$. \checkmark}
+\begin{mitnehmen}\kastentext
+So rechnete Archimedes (für die Parabel) und so definiert Riemann das Integral. Der Hauptsatz macht die Rechnung überflüssig --- aber nur, weil jemand sie einmal für $x^{n}$ gemacht hat. Bei monotonen Funktionen ist $O_n - U_n = \frac{f(b) - f(a)}n$, deshalb sind monotone Funktionen immer integrierbar.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.36
+\stupserzwei{tief}{(e) $\sin^{2}x = \frac{1 - \cos2x}2$. (f) zweimal partiell, jedes Mal wird der Grad des Polynoms kleiner.}{22pt}
+\begin{loesungkarte}{tief}{3.36}{Sechs Integrale, sechs Handgriffe}
+\derweg{Muster erkennen: innere Ableitung als Faktor, $\frac{f'}f$, $\arctan$-Form, Doppelwinkel, partiell.}
+\schritt{(a)}
+$u = 1 + x^{2}$, $du = 2x\,dx$: $\int\frac x{1 + x^{2}}\,dx = \frac12\int\frac{du}u = \frac12\ln(1 + x^{2}) + C$.
+\schritt{(b)}
+$\int\tan x\,dx = \int\frac{\sin x}{\cos x}\,dx = -\ln|\cos x| + C$ (Form $-\frac{f'}f$ mit $f = \cos$).
+\schritt{(c)}
+$\int\frac{dx}{x^{2} + 4} = \frac14\int\frac{dx}{(x/2)^{2} + 1} = \frac14\cdot2\arctan\frac x2 + C = \frac12\arctan\frac x2 + C$.
+\schritt{(d)}
+$u = 1 + x^{2}$: $\int x\sqrt{1 + x^{2}}\,dx = \frac12\int\sqrt u\,du = \frac12\cdot\frac23u^{3/2} + C = \frac13(1 + x^{2})^{3/2} + C$.
+\schritt{(e)}
+$\int\sin^{2}x\,dx = \int\frac{1 - \cos2x}2\,dx = \frac x2 - \frac{\sin2x}4 + C$.
+\schritt{(f)}
+Partiell mit $u = x^{2}$, $v' = e^{x}$: $x^{2}e^{x} - 2\int xe^{x}\,dx = x^{2}e^{x} - 2(xe^{x} - e^{x}) + C = e^{x}(x^{2} - 2x + 2) + C$.
+\probe{Ableiten: (b) $-\frac{-\sin x}{\cos x} = \tan x$. \checkmark\ (c) $\frac12\cdot\frac1{1 + x^{2}/4}\cdot\frac12 = \frac1{4 + x^{2}}$. \checkmark\ (f) $e^{x}(x^{2} - 2x + 2) + e^{x}(2x - 2) = x^{2}e^{x}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Probe beim Integrieren ist immer dieselbe: ableiten. Sie kostet zehn Sekunden und fängt jeden Faktor $2$ und jedes Vorzeichen. Vier Muster decken die Mehrheit aller Übungsintegrale ab: $\int f'(g)g' = f(g)$, $\int\frac{f'}f = \ln|f|$, $\int\frac{dx}{x^{2} + a^{2}} = \frac1a\arctan\frac xa$, $\int uv' = uv - \int u'v$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.37
+\stupserzwei{akzent}{(a) Der Hauptsatz verlangt eine auf $[-1, 1]$ stetige Funktion; $\frac1{x^{2}}$ ist in $0$ nicht einmal definiert.}{22pt}
+\begin{loesungkarte}{akzent}{3.37}{Drei Integrale, drei Fehler}
+\derweg{Je Fehler die verletzte Voraussetzung benennen und die Rechnung richtig zu Ende führen.}
+\schritt{(a) Polstelle überrannt}
+$\frac1{x^{2}} > 0$, ein negatives Ergebnis ist unmöglich. Der Hauptsatz $\int_a^bf = F(b) - F(a)$ gilt für stetiges $f$ auf $[a, b]$; hier hat $f$ bei $0$ einen Pol. Richtig: uneigentliches Integral, $\int_0^1\frac{dx}{x^{2}} = \lim_{\varepsilon\to0}\bigl[-\frac1x\bigr]_\varepsilon^{1} = \lim(-1 + \frac1\varepsilon) = \infty$. Das Integral divergiert.
+\schritt{(b) Grenzen nicht umgerechnet}
+Mit $u = x^{2}$ gehören zu $x = 0$ und $x = 2$ die Werte $u = 0$ und $u = 4$. Richtig: $\int_0^4e^{u}\,du = e^{4} - 1\approx53{,}6$ (statt $e^{2} - 1\approx6{,}4$). Alternative: unbestimmt integrieren, zurücksubstituieren, dann die $x$-Grenzen einsetzen: $[e^{x^{2}}]_0^2 = e^{4} - 1$.
+\schritt{(c) Produkt zerrissen}
+Das Integral ist linear, nicht multiplikativ: $\int fg\neq\int f\int g$. Richtig: $\int_0^1x^{2}\,dx = \frac13$, nicht $\frac14$. (Für Produkte gibt es die partielle Integration, keine Produktformel.)
+\begin{fehler}\kastentext
+Drei Fragen vor jedem bestimmten Integral: Ist der Integrand auf dem ganzen Intervall stetig (sonst uneigentlich)? Habe ich bei Substitution die Grenzen mitgenommen (oder zurücksubstituiert)? Habe ich eine Regel benutzt, die es nicht gibt ($\int fg = \int f\int g$, $\int\frac fg = \frac{\int f}{\int g}$)?
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Ein Plausibilitätscheck fängt viele Fehler: Vorzeichen (positiver Integrand, positives Integral), Größenordnung (Integrand zwischen $m$ und $M$ auf Länge $L$: Integral zwischen $mL$ und $ML$). In (a) hätte der Check \enquote{positiv} genügt, in (b) \enquote{$e^{x^{2}}$ ist bei $2$ schon $54{,}6$}.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.38
+\stupserzwei{gruen}{(c) $I = \int e^{x}\sin x = e^{x}\sin x - \int e^{x}\cos x = e^{x}\sin x - e^{x}\cos x - I$, also $2I = e^{x}(\sin x - \cos x)$.}{22pt}
+\begin{loesungkarte}{gruen}{3.38}{Partielle Integration}
+\derweg{$\int uv' = uv - \int u'v$ mit $u$ nach LIATE; bei (c) zweimal und dann nach $I$ auflösen.}
+\schritt{(a)}
+$u = x$, $v' = e^{x}$: $\int xe^{x}\,dx = xe^{x} - \int e^{x}\,dx = xe^{x} - e^{x} + C = e^{x}(x - 1) + C$.
+\schritt{(b)}
+$u = \ln x$, $v' = 1$: $\int\ln x\,dx = x\ln x - \int x\cdot\frac1x\,dx = x\ln x - x + C$.
+\schritt{(c)}
+$I = \int e^{x}\sin x\,dx$. $u = \sin x$, $v' = e^{x}$: $I = e^{x}\sin x - \int e^{x}\cos x\,dx$. Noch einmal mit $u = \cos x$: $\int e^{x}\cos x\,dx = e^{x}\cos x + \int e^{x}\sin x\,dx = e^{x}\cos x + I$. Also $I = e^{x}\sin x - e^{x}\cos x - I$, $I = \frac{e^{x}(\sin x - \cos x)}2 + C$. \\
+Bestimmt: $\int_0^{\pi}e^{x}\sin x\,dx = \frac{e^{\pi}(0 - (-1)) - e^{0}(0 - 1)}2 = \frac{e^{\pi} + 1}2\approx12{,}07$.
+\probe{(a) $(e^{x}(x - 1))' = e^{x}(x - 1) + e^{x} = xe^{x}$. \checkmark\ (b) $(x\ln x - x)' = \ln x + 1 - 1 = \ln x$. \checkmark\ (c) $\bigl(\frac{e^{x}(\sin x - \cos x)}2\bigr)' = \frac{e^{x}(\sin x - \cos x) + e^{x}(\cos x + \sin x)}2 = e^{x}\sin x$. \checkmark\ Plausibilität: Integrand auf $[0, \pi]$ positiv, Maximum etwa bei $x = 2{,}4$ mit Wert $\approx7{,}4$; Integral $12$ auf Länge $3{,}14$ passt. \checkmark}
+\begin{mitnehmen}\kastentext
+LIATE (Logarithmus, Inverse trigonometrische, Algebraisch, Trigonometrisch, Exponentiell) sagt, was $u$ wird: das, was beim Ableiten einfacher wird. $v' = 1$ ist der Trick für $\ln x$, $\arctan x$, $\arcsin x$. Und wenn das Ausgangsintegral wiederkehrt, ist das kein Kreis, sondern eine Gleichung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.39
+\stupserzwei{gruen}{(b) $x = \sin t$, $dx = \cos t\,dt$, $\sqrt{1 - \sin^{2}t} = \cos t$ (für $t\in[0, \frac\pi2]$): $\int_0^{\pi/2}\cos^{2}t\,dt$.}{22pt}
+\begin{loesungkarte}{gruen}{3.39}{Substitution}
+\derweg{Inneres erkennen, $du$ bestimmen, Grenzen mitnehmen; bei Wurzeln aus $1 - x^{2}$ trigonometrisch.}
+\schritt{(a)}
+$u = x^{2}$, $du = 2x\,dx$, Grenzen $0\to0$, $2\to4$: $\int_0^2xe^{x^{2}}\,dx = \frac12\int_0^4e^{u}\,du = \frac{e^{4} - 1}2\approx26{,}8$.
+\schritt{(b)}
+$x = \sin t$, $t\in[0, \frac\pi2]$: $\int_0^1\sqrt{1 - x^{2}}\,dx = \int_0^{\pi/2}\cos t\cdot\cos t\,dt = \int_0^{\pi/2}\frac{1 + \cos2t}2\,dt = \Bigl[\frac t2 + \frac{\sin2t}4\Bigr]_0^{\pi/2} = \frac\pi4$. Geometrisch: ein Viertel der Einheitskreisfläche.
+\schritt{(c)}
+$u = \ln x$, $du = \frac{dx}x$: $\int\frac{dx}{x\ln x} = \int\frac{du}u = \ln|u| + C = \ln|\ln x| + C$.
+\probe{(a) $(e^{x^{2}})' = 2xe^{x^{2}}$, also $\int_0^2xe^{x^{2}} = \frac12[e^{x^{2}}]_0^2$. \checkmark\ (c) $(\ln|\ln x|)' = \frac1{\ln x}\cdot\frac1x$. \checkmark\ (b) numerisch (Trapez mit $n = 100$): $0{,}7852$; $\frac\pi4 = 0{,}7854$. \checkmark}
+\begin{mitnehmen}\kastentext
+Substitution ist die Kettenregel rückwärts. Steht die innere Ableitung (bis auf eine Konstante) als Faktor da, ist sie der direkte Weg; bei $\sqrt{a^{2} - x^{2}}$ hilft $x = a\sin t$, bei $\sqrt{a^{2} + x^{2}}$ der $\sinh$ oder $\tan$. Das Integral (c) ist zugleich der Grund, warum $\sum\frac1{k\ln k}$ divergiert.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.40
+\stupserzwei{gruen}{Zuhalten: $A = \frac{3\cdot2 + 5}{2 + 1} = \frac{11}3$, $B = \frac{3\cdot(-1) + 5}{-1 - 2} = -\frac23$.}{22pt}
+\begin{loesungkarte}{gruen}{3.40}{Partialbruchzerlegung}
+\derweg{Nenner faktorisieren, Ansatz, Koeffizienten durch Einsetzen der Nullstellen, dann $\ln$-Terme.}
+\schritt{Faktorisieren}
+$x^{2} - x - 2 = (x - 2)(x + 1)$ (Vieta: Produkt $-2$, Summe $1$).
+\schritt{Ansatz}
+$\frac{3x + 5}{(x - 2)(x + 1)} = \frac A{x - 2} + \frac B{x + 1}$, also $3x + 5 = A(x + 1) + B(x - 2)$. $x = 2$: $11 = 3A$, $A = \frac{11}3$. $x = -1$: $2 = -3B$, $B = -\frac23$.
+\schritt{Integrieren}
+\[ \int\frac{3x + 5}{x^{2} - x - 2}\,dx = \frac{11}3\ln|x - 2| - \frac23\ln|x + 1| + C. \]
+\probe{Zerlegung bei $x = 0$: $\frac5{-2} = -2{,}5$; $\frac{11}3\cdot\frac1{-2} - \frac23\cdot1 = -1{,}833 - 0{,}667 = -2{,}5$. \checkmark\ Ableitung: $\frac{11/3}{x - 2} - \frac{2/3}{x + 1} = \frac{(11/3)(x + 1) - (2/3)(x - 2)}{(x - 2)(x + 1)} = \frac{3x + 5}{(x - 2)(x + 1)}$. \checkmark}
+\begin{mitnehmen}\kastentext
+Zählergrad kleiner als Nennergrad (sonst erst Polynomdivision), Nenner in Linearfaktoren, ein Bruch pro Faktor. Mehrfache Nullstellen brauchen $\frac{A_1}{x - a} + \frac{A_2}{(x - a)^{2}}$, quadratische Faktoren ohne reelle Nullstelle $\frac{Bx + C}{x^{2} + px + q}$ --- und führen zu $\ln$ und $\arctan$. Mehr kann bei rationalen Funktionen nicht herauskommen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.41
+\stupserzwei{gruen}{$1 + f'(x)^{2} = 1 + \frac{x^{2}}{1 - x^{2}} = \frac1{1 - x^{2}}$. Bei $x = \pm1$ ist der Integrand unendlich --- uneigentlich, aber konvergent.}{22pt}
+\begin{loesungkarte}{gruen}{3.41}{Der Umfang des Einheitskreises}
+\derweg{Oberer Halbkreis als Graph, Bogenlängenformel, Integrand vereinfachen, $\arcsin$, verdoppeln.}
+\schritt{Bogenlänge}
+$f(x) = \sqrt{1 - x^{2}}$, $f'(x) = \frac{-x}{\sqrt{1 - x^{2}}}$, $1 + f'^{2} = \frac{1 - x^{2} + x^{2}}{1 - x^{2}} = \frac1{1 - x^{2}}$. Halbkreislänge $L = \int_{-1}^{1}\frac{dx}{\sqrt{1 - x^{2}}}$.
+\schritt{Uneigentlich}
+Der Integrand hat Pole bei $\pm1$. $\int_{-1}^{1} = \lim_{a\to-1^{+}, b\to1^{-}}[\arcsin x]_a^{b} = \arcsin1 - \arcsin(-1) = \frac\pi2 - \bigl(-\frac\pi2\bigr) = \pi$. Konvergent, weil $\arcsin$ auf $[-1, 1]$ stetig ist.
+\schritt{Umfang}
+Oberer und unterer Halbkreis: $U = 2\pi$. Und $\pi$ war in Kapitel 5 als das Doppelte der ersten positiven Nullstelle des Kosinus definiert --- hier zeigt sich, dass dieses $\pi$ der halbe Umfang ist.
+\probe{Numerisch: $\int_{-0{,}99}^{0{,}99}\frac{dx}{\sqrt{1 - x^{2}}} = 2\arcsin0{,}99 = 2\cdot1{,}4293 = 2{,}859$; der Rest bis $\pi$ steckt in den letzten $1\,\%$ an jedem Rand. \checkmark}
+\begin{mitnehmen}\kastentext
+Bogenlänge $\int\sqrt{1 + f'^{2}}$ ist Pythagoras im Kleinen. Beim Kreis als Graph wird das Integral uneigentlich, weil die Tangente senkrecht wird --- in Parameterform $(\cos t, \sin t)$ ist dieselbe Rechnung $\int_0^{2\pi}\sqrt{\sin^{2}t + \cos^{2}t}\,dt = 2\pi$, ohne jeden Pol.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.42
+\stupserzwei{gruen}{Bei $\infty$: $R^{1 - p}\to0$ genau für $1 - p < 0$. Bei $0$: $\varepsilon^{1 - p}\to0$ genau für $1 - p > 0$.}{22pt}
+\begin{loesungkarte}{gruen}{3.42}{$\int x^{-p}$, zweimal uneigentlich}
+\derweg{Stammfunktion, Grenzwert in der kritischen Grenze, Fallunterscheidung nach $p$.}
+\schritt{Stammfunktion}
+Für $p\neq1$: $\int x^{-p}\,dx = \frac{x^{1 - p}}{1 - p}$. Für $p = 1$: $\ln x$.
+\schritt{$\int_1^{\infty}$}
+$p\neq1$: $\int_1^Rx^{-p}\,dx = \frac{R^{1 - p} - 1}{1 - p}$. Für $p > 1$ ist $1 - p < 0$, $R^{1 - p}\to0$: Grenzwert $\frac{-1}{1 - p} = \frac1{p - 1}$, konvergent. Für $p < 1$: $R^{1 - p}\to\infty$, divergent. $p = 1$: $\ln R\to\infty$, divergent. \emph{Konvergent genau für $p > 1$.}
+\schritt{$\int_0^1$}
+$p\neq1$: $\int_\varepsilon^1x^{-p}\,dx = \frac{1 - \varepsilon^{1 - p}}{1 - p}$. Für $p < 1$: $\varepsilon^{1 - p}\to0$, Grenzwert $\frac1{1 - p}$, konvergent. Für $p > 1$: $\varepsilon^{1 - p}\to\infty$, divergent. $p = 1$: $-\ln\varepsilon\to\infty$, divergent. \emph{Konvergent genau für $p < 1$.}
+\probe{$p = 2$: $\int_1^{\infty}\frac{dx}{x^{2}} = 1$, $\int_0^1\frac{dx}{x^{2}} = \infty$ (Aufgabe 3.37). $p = \frac12$: $\int_0^1\frac{dx}{\sqrt x} = 2$, $\int_1^{\infty}\frac{dx}{\sqrt x} = \infty$. \checkmark}
+\begin{mitnehmen}\kastentext
+Merkregel: Bei $\infty$ muss der Integrand \emph{schneller} als $\frac1x$ fallen ($p > 1$), bei $0$ darf er \emph{langsamer} als $\frac1x$ wachsen ($p < 1$). $\frac1x$ selbst verliert beide Male --- logarithmisch. $\int_0^{\infty}x^{-p}\,dx$ divergiert daher für \emph{jedes} $p$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.43
+\stupserzwei{gruen}{(a) Nach partieller Integration: $\Bigl[-\frac{\cos x}x\Bigr]_1^R - \int_1^R\frac{\cos x}{x^{2}}\,dx$; der Randterm ist beschränkt, das Integral absolut konvergent wegen $\bigl|\frac{\cos x}{x^{2}}\bigr|\le\frac1{x^{2}}$.}{22pt}
+\begin{loesungkarte}{gruen}{3.43}{$\int\frac{\sin x}x$}
+\derweg{(a) Bei $0$ harmlos; auf $[1, \infty)$ partiell integrieren und mit $\frac1{x^{2}}$ vergleichen. (b) Auf jedem Halbwellenintervall nach unten abschätzen, harmonische Reihe.}
+\schritt{(a) Stelle $0$}
+$\frac{\sin x}x\to1$ für $x\to0$; der Integrand ist auf $(0, 1]$ beschränkt und stetig fortsetzbar. $\int_0^1$ ist ein gewöhnliches Integral.
+\schritt{(a) Stelle $\infty$}
+Partiell mit $u = \frac1x$, $v' = \sin x$: $\int_1^R\frac{\sin x}x\,dx = \Bigl[-\frac{\cos x}x\Bigr]_1^R - \int_1^R\frac{\cos x}{x^{2}}\,dx = \cos1 - \frac{\cos R}R - \int_1^R\frac{\cos x}{x^{2}}\,dx$. Für $R\to\infty$: $\frac{\cos R}R\to0$; $\int_1^{\infty}\frac{|\cos x|}{x^{2}}\,dx\le\int_1^{\infty}\frac{dx}{x^{2}} = 1$, also konvergiert das letzte Integral absolut. Damit existiert $\lim_{R\to\infty}\int_1^R\frac{\sin x}x\,dx$: \emph{konvergent}.
+\schritt{(b) nicht absolut}
+Auf $I_k = [k\pi, (k + 1)\pi]$ ist $\int_{I_k}|\sin x|\,dx = 2$ und $\frac1x\ge\frac1{(k + 1)\pi}$. Also $\int_{I_k}\frac{|\sin x|}x\,dx\ge\frac2{(k + 1)\pi}$, und
+\[ \int_0^{n\pi}\frac{|\sin x|}x\,dx\ge\frac2\pi\sum_{k=0}^{n-1}\frac1{k + 1} = \frac2\pi\Bigl(1 + \frac12 + \dots + \frac1n\Bigr)\to\infty . \]
+\emph{Divergent.} Das Integral in (a) konvergiert also nur bedingt --- die positiven und negativen Halbwellen löschen sich gerade genug aus.
+\probe{Der Wert von (a) ist $\frac\pi2$ (Dirichlet-Integral, Band 12). Numerisch bis $R = 100$: $1{,}5622$; $\frac\pi2 = 1{,}5708$; Fehler $\approx\frac{\cos100}{100}$-groß, wie die Formel sagt. \checkmark}
+\begin{mitnehmen}\kastentext
+Das Integral-Gegenstück zur alternierenden harmonischen Reihe: Konvergenz durch Auslöschung, keine absolute Konvergenz. Die Technik \enquote{partiell integrieren, um einen Faktor $\frac1x$ zu gewinnen} ist das stetige Analogon zum Dirichlet-Kriterium für Reihen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.44
+\stupserzwei{tief}{(d) $\int_\varepsilon^1\ln x\,dx = [x\ln x - x]_\varepsilon^{1} = -1 - \varepsilon\ln\varepsilon + \varepsilon\to-1$, weil $\varepsilon\ln\varepsilon\to0$ (Aufgabe 3.29).}{22pt}
+\begin{loesungkarte}{tief}{3.44}{Vergleichen statt rechnen}
+\derweg{Konvergenz durch Majorante; Werte, wo eine Stammfunktion da ist, mit Grenzübergang in der kritischen Grenze.}
+\schritt{(a)}
+Für $x\ge1$ ist $x^{2}\ge x$, also $e^{-x^{2}}\le e^{-x}$, und $\int_1^{\infty}e^{-x}\,dx = e^{-1}$ konvergiert. Auf $[0, 1]$ ist der Integrand stetig. Also konvergiert $\int_0^{\infty}e^{-x^{2}}\,dx$. (Der Wert $\frac{\sqrt\pi}2$ braucht einen Trick aus Band 12; eine elementare Stammfunktion gibt es nicht.)
+\schritt{(b)}
+$\int_0^R\frac{dx}{1 + x^{2}} = \arctan R\to\frac\pi2$. Also $\int_0^{\infty}\frac{dx}{1 + x^{2}} = \frac\pi2$. (Über ganz $\mathbb R$: $\pi$.)
+\schritt{(c)}
+Partiell, $u = \ln x$, $v' = x^{-2}$: $\int_1^R\frac{\ln x}{x^{2}}\,dx = \Bigl[-\frac{\ln x}x\Bigr]_1^R + \int_1^R\frac{dx}{x^{2}} = -\frac{\ln R}R + 1 - \frac1R\to1$, da $\frac{\ln R}R\to0$. Wert $1$.
+\schritt{(d)}
+Uneigentlich bei $0$ ($\ln x\to-\infty$). $\int_\varepsilon^1\ln x\,dx = [x\ln x - x]_\varepsilon^1 = -1 - \varepsilon\ln\varepsilon + \varepsilon\to-1$. Wert $-1$: Die Fläche unter dem Graphen ist endlich, obwohl der Graph bei $0$ ins Unendliche fällt --- $\ln$ fällt langsamer als jedes $x^{-p}$.
+\probe{(c) Plausibilität: Integrand $\le\frac{\sqrt x}{x^{2}} = x^{-3/2}$ für $x\ge1$ (weil $\ln x\le\sqrt x$), und $\int_1^{\infty}x^{-3/2} = 2$; unser Wert $1 < 2$. \checkmark\ (d) numerisch $\int_{0{,}001}^1\ln x\,dx = -1 + 0{,}0069 - 0{,}001 = -0{,}994$. \checkmark}
+\begin{mitnehmen}\kastentext
+Zum Nachweis der Konvergenz vergleicht man mit $x^{-p}$ oder $e^{-cx}$; zur Berechnung braucht man eine Stammfunktion und den Grenzübergang. Viele wichtige Integrale ($e^{-x^{2}}$, $\frac{\sin x}x$) haben keine elementare Stammfunktion --- Konvergenz ist beweisbar, der Wert braucht andere Methoden.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.45
+\stupserzwei{akzent}{(b) $\int_0^1nx(1 - x^{2})^{n}\,dx = \Bigl[-\frac n{2(n + 1)}(1 - x^{2})^{n+1}\Bigr]_0^1 = \frac n{2(n + 1)}$.}{22pt}
+\begin{loesungkarte}{akzent}{3.45}{Punktweise ist nicht gleichmäßig}
+\derweg{Grenzfunktion punktweise bestimmen; $\sup|f_n - f|$ berechnen; die drei Vertauschungen an den Beispielen scheitern sehen.}
+\schritt{(a)}
+Für $0\le x < 1$: $x^{n}\to0$; für $x = 1$: $1^{n} = 1$. Grenzfunktion $f(x) = 0$ für $x < 1$, $f(1) = 1$ --- unstetig, obwohl alle $f_n$ stetig sind. $\sup_{[0, 1]}|f_n - f| = \sup_{x < 1}x^{n} = 1\not\to0$: nicht gleichmäßig. (Auf $[0, a]$ mit $a < 1$ dagegen gleichmäßig: $\sup = a^{n}\to0$.)
+\schritt{(b)}
+Punktweise: $g_n(0) = 0$; für $0 < x\le1$ ist $0\le1 - x^{2} < 1$, also $n(1 - x^{2})^{n}\to0$ (Exponentielles schlägt Lineares). Grenzfunktion $0$. Aber $\int_0^1g_n = \frac n{2(n + 1)}\to\frac12\neq0 = \int_0^1\lim g_n$. Die Funktionen bilden einen immer schmaleren, immer höheren Buckel nahe $0$: $\max g_n\approx\sqrt{n/(2e)}\to\infty$ --- nicht gleichmäßig.
+\schritt{(c)}
+$|h_n(x)|\le\frac1n\to0$ für alle $x$ zugleich: gleichmäßig gegen $0$. Aber $h_n'(x) = x^{n-1}$, $h_n'(1) = 1\not\to0 = (\lim h_n)'(1)$. Gleichmäßige Konvergenz der Funktionen sagt nichts über die Ableitungen.
+\schritt{(d)}
+Stetigkeit: $f_n\to f$ gleichmäßig, $f_n$ stetig $\Rightarrow f$ stetig. Integral: $f_n\to f$ gleichmäßig auf $[a, b]\Rightarrow\int f_n\to\int f$. Ableitung: $f_n'\to g$ gleichmäßig und $f_n(x_0)$ konvergent $\Rightarrow f_n\to f$ mit $f' = g$ --- die Voraussetzung liegt bei den \emph{Ableitungen}.
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\draw[->,linie] (0,0)--(4.3,0) node[right,grau,font=\small] {$x$};
+\draw[->,linie] (0,0)--(0,2.6);
+\foreach \n/\c in {2/tief!40,5/tief!65,20/tief} {\draw[\c,thick,domain=0:4,samples=200,smooth] plot (\x,{2*(\x/4)^\n});}
+\node[grau,font=\small] at (2.2,2.3) {$x^{n}$, $n = 2, 5, 20$};
+\fill[akzent] (4,2) circle (1.6pt);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}[scale=0.85]
+\draw[->,linie] (0,0)--(4.3,0) node[right,grau,font=\small] {$x$};
+\draw[->,linie] (0,0)--(0,2.6);
+\foreach \n/\c in {2/tief!40,5/tief!65,15/tief} {\draw[\c,thick,domain=0:4,samples=200,smooth] plot (\x,{0.9*\n*(\x/4)*(1-(\x/4)^2)^\n});}
+\node[grau,font=\small] at (2.6,2.3) {$nx(1 - x^{2})^{n}$};
+\end{tikzpicture}
+\end{center}
+\begin{fehler}\kastentext
+\enquote{Für jedes $x$ gilt $f_n(x)\to f(x)$} ist eine Aussage über jeden Punkt einzeln; die Geschwindigkeit darf von $x$ abhängen. Gleichmäßig heißt: \emph{eine} Geschwindigkeit für alle $x$. Nur dann darf man $\lim$ mit $\int$, mit Stetigkeit, mit Reihen vertauschen --- und für Ableitungen auch dann nicht.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Test auf gleichmäßige Konvergenz: $\sup_x|f_n(x) - f(x)|\to0$? Für Potenzreihen gilt sie auf jedem kompakten Teil des Konvergenzkreises, und deshalb darf man sie dort gliedweise integrieren und ableiten (Aufgabe 3.46). Die Buckelfolge (b) ist das Standardgegenbeispiel, das man kennen muss.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.46
+\stupserzwei{gruen}{$\sum kx^{k-1} = \frac1{(1 - x)^{2}}$; mit $x$ multiplizieren.}{22pt}
+\begin{loesungkarte}{gruen}{3.46}{$\sum kx^{k}$}
+\derweg{Geometrische Reihe gliedweise ableiten, dann mit $x$ multiplizieren.}
+\schritt{Ableiten}
+$\sum_{k\ge0}x^{k} = \frac1{1 - x}$ für $|x| < 1$. Potenzreihen darf man im Inneren des Konvergenzkreises gliedweise ableiten (gleichmäßige Konvergenz auf kompakten Teilmengen): $\sum_{k\ge1}kx^{k-1} = \frac1{(1 - x)^{2}}$.
+\schritt{Multiplizieren}
+$\sum_{k\ge1}kx^{k} = \frac x{(1 - x)^{2}}$, $|x| < 1$.
+\schritt{Anwendung}
+$x = \frac12$: $\sum\frac k{2^{k}} = \frac{1/2}{1/4} = 2$.
+\probe{$\frac12 + \frac24 + \frac38 + \frac4{16} + \frac5{32} + \frac6{64} = 0{,}5 + 0{,}5 + 0{,}375 + 0{,}25 + 0{,}156 + 0{,}094 = 1{,}875$, Rest $\approx0{,}125$. \checkmark\ (Deutung: erwartete Zahl der Würfe bis zum ersten Kopf, Gebiet 4.)}
+\begin{mitnehmen}\kastentext
+Aus $\frac1{1 - x}$ entstehen durch Ableiten $\sum kx^{k-1}$, $\sum k(k - 1)x^{k-2}$, \dots, durch Integrieren $-\ln(1 - x) = \sum\frac{x^{k}}k$ und $\arctan x$ (aus $\frac1{1 + x^{2}}$). Eine Reihe, eine Erlaubnis zum Vertauschen, eine ganze Familie geschlossener Formeln.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.47
+\stupserzwei{tief}{$\nabla f(1, 0) = (0, 2)$. Richtungsableitung $(0, 2)\cdot\frac{(1, 1)}{\sqrt2} = \sqrt2$. Tangentialebene $z = 1 + 2y$.}{22pt}
+\begin{loesungkarte}{tief}{3.47}{Gradient, Richtung, Tangentialebene}
+\derweg{Partielle Ableitungen, einsetzen; Richtungsableitung als Skalarprodukt mit dem Einheitsvektor; lineare Näherung.}
+\schritt{(a)}
+$f_x = 2xy + ye^{xy}$, $f_y = x^{2} + xe^{xy}$. Bei $(1, 0)$: $f_x = 0 + 0 = 0$, $f_y = 1 + 1 = 2$. $\nabla f(1, 0) = (0, 2)$. Außerdem $f(1, 0) = 0 + 1 = 1$.
+\schritt{(b)}
+Einheitsvektor $e = \frac1{\sqrt2}(1, 1)$. $\partial_ef = \nabla f\cdot e = \frac{0 + 2}{\sqrt2} = \sqrt2\approx1{,}41$. Stärkster Anstieg in Richtung des Gradienten, also $(0, 1)$, mit Steigung $\|\nabla f\| = 2$. In Richtung $(1, 0)$ ändert sich $f$ in erster Ordnung nicht.
+\schritt{(c)}
+Tangentialebene: $z = f(1, 0) + f_x\cdot(x - 1) + f_y\cdot(y - 0) = 1 + 2y$. Näherung $f(1{,}1;\ 0{,}05)\approx1 + 2\cdot0{,}05 = 1{,}1$.
+\probe{Exakt: $f(1{,}1;\ 0{,}05) = 1{,}21\cdot0{,}05 + e^{0{,}055} = 0{,}0605 + 1{,}0565 = 1{,}117$. Näherung $1{,}1$, Fehler $0{,}017$, quadratisch klein in der Schrittweite. \checkmark\ Richtungsableitung numerisch: $\frac{f(1 + 0{,}001/\sqrt2,\ 0{,}001/\sqrt2) - 1}{0{,}001} = 1{,}415$. \checkmark}
+\begin{mitnehmen}\kastentext
+Der Gradient zeigt in die Richtung des steilsten Anstiegs, seine Länge ist diese Steigung, und er steht senkrecht auf den Niveaulinien. Richtungsableitung $=$ Gradient mal Einheitsvektor; Tangentialebene $=$ Taylorpolynom ersten Grades. Alles aus Kapitel 6, nur mit Vektoren.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.48
+\stupserzwei{gruen}{$(0, 0)$: $\det H = -9 < 0$, Sattel. $(1, 1)$: $\det H = 27 > 0$, $f_{xx} = 6 > 0$, Minimum mit $f = -1$.}{22pt}
+\begin{loesungkarte}{gruen}{3.48}{Kritische Punkte klassifizieren}
+\derweg{Gradient null setzen und lösen; Hesse-Matrix an jedem Punkt; Determinante und Vorzeichen von $f_{xx}$.}
+\schritt{Kritische Punkte}
+$f_x = 3x^{2} - 3y = 0\Rightarrow y = x^{2}$; $f_y = -3x + 3y^{2} = 0\Rightarrow x = y^{2} = x^{4}$. Also $x(x^{3} - 1) = 0$: $x = 0$ oder $x = 1$. Punkte $(0, 0)$ und $(1, 1)$.
+\schritt{Hesse-Matrix}
+$H = \begin{pmatrix}6x & -3\\ -3 & 6y\end{pmatrix}$.
+\schritt{Klassifikation}
+$(0, 0)$: $H = \begin{pmatrix}0 & -3\\ -3 & 0\end{pmatrix}$, $\det = -9 < 0$: indefinit, \emph{Sattelpunkt}, $f = 0$. (Entlang $y = x$: $f = 2x^{3} - 3x^{2} < 0$ für kleine $x > 0$; entlang $y = -x$: $f = 3x^{2} > 0$.) \\
+$(1, 1)$: $H = \begin{pmatrix}6 & -3\\ -3 & 6\end{pmatrix}$, $\det = 27 > 0$, $f_{xx} = 6 > 0$: positiv definit, \emph{lokales Minimum}, $f(1, 1) = 1 - 3 + 1 = -1$.
+\probe{$f(1{,}1;\ 1) = 1{,}331 - 3{,}3 + 1 = -0{,}969 > -1$; $f(1;\ 0{,}9) = 1 - 2{,}7 + 0{,}729 = -0{,}971 > -1$. \checkmark\ Kein globales Minimum: $f(x, 0) = x^{3}\to-\infty$.}
+\begin{mitnehmen}\kastentext
+Zwei Variablen: $\det H > 0$ und $f_{xx} > 0$ Minimum, $\det H > 0$ und $f_{xx} < 0$ Maximum, $\det H < 0$ Sattel, $\det H = 0$ keine Entscheidung. Die Eigenwerte der Hesse-Matrix (Gebiet 2) sagen dasselbe: beide positiv, beide negativ, gemischt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.49
+\stupserzwei{gruen}{Aus $y = \lambda$ und $x = \lambda$ folgt $x = y$; mit $x + y = 10$: $x = y = 5$.}{22pt}
+\begin{loesungkarte}{gruen}{3.49}{Lagrange am Rechteck}
+\derweg{$\nabla f = \lambda\nabla g$ plus Nebenbedingung; drei Gleichungen, drei Unbekannte.}
+\schritt{Ansatz}
+Maximiere $f(x, y) = xy$ unter $g(x, y) = x + y - 10 = 0$. $\nabla f = (y, x)$, $\nabla g = (1, 1)$.
+\schritt{Lagrange}
+$y = \lambda$, $x = \lambda$, $x + y = 10$. Also $x = y = 5$, $\lambda = 5$. Fläche $25$: das Quadrat.
+\schritt{Vergleich}
+Einsetzen: $y = 10 - x$, $A(x) = x(10 - x) = 10x - x^{2}$, $A' = 10 - 2x = 0$, $x = 5$. Dasselbe, hier sogar schneller. Lagrange zahlt sich aus, wenn man die Nebenbedingung nicht auflösen kann oder will --- und bei mehr als zwei Variablen.
+\probe{$x = 4$, $y = 6$: Fläche $24 < 25$. $x = 5{,}5$, $y = 4{,}5$: $24{,}75 < 25$. \checkmark\ Deutung von $\lambda = 5$: Erhöht man den Umfang um $2$ (also $x + y$ um $1$), wächst die Maximalfläche um etwa $\lambda = 5$ ($6^{2} - 5^{2} = 11$ für Umfang $24$; für kleine Änderungen stimmt $\lambda$). \checkmark}
+\begin{mitnehmen}\kastentext
+Im Optimum berühren sich die Niveaulinie von $f$ und die Nebenbedingungskurve --- ihre Normalen (Gradienten) sind parallel. Das ist die ganze Geometrie hinter $\nabla f = \lambda\nabla g$. Der Multiplikator $\lambda$ misst, wie stark das Optimum auf eine Lockerung der Nebenbedingung reagiert.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 3.50
+\stupserzwei{gruen}{$\int_0^1r^{2}\,dr = \frac13$, $\int_0^{\pi}\sin\vartheta\,d\vartheta = 2$, $\int_0^{2\pi}d\varphi = 2\pi$.}{22pt}
+\begin{loesungkarte}{gruen}{3.50}{Das Volumen der Kugel}
+\derweg{Kugelkoordinaten mit Funktionaldeterminante $r^{2}\sin\vartheta$; Fubini zerlegt in drei eindimensionale Integrale.}
+\schritt{Koordinaten}
+$x = r\sin\vartheta\cos\varphi$, $y = r\sin\vartheta\sin\varphi$, $z = r\cos\vartheta$; $r\in[0, 1]$, $\vartheta\in[0, \pi]$, $\varphi\in[0, 2\pi]$. Funktionaldeterminante $|\det J| = r^{2}\sin\vartheta$.
+\schritt{Integral}
+\begin{align*} V &= \int_0^{2\pi}\!\!\int_0^{\pi}\!\!\int_0^1r^{2}\sin\vartheta\,dr\,d\vartheta\,d\varphi\\ &= \Bigl(\int_0^1r^{2}\,dr\Bigr)\Bigl(\int_0^{\pi}\sin\vartheta\,d\vartheta\Bigr)\Bigl(\int_0^{2\pi}d\varphi\Bigr) = \frac13\cdot2\cdot2\pi = \frac{4\pi}3 . \end{align*}
+\schritt{Woher die Faktoren kommen}
+$\frac13$: das Volumen wächst wie $r^{3}$ (Kugel vom Radius $R$: $\frac43\pi R^{3}$). $2$: die Breite der Kugel in $z$-Richtung, als Mittelwert von $\sin\vartheta$ genommen. $2\pi$: der volle Umlauf.
+\probe{Scheibenmethode: $V = \int_{-1}^{1}\pi(1 - z^{2})\,dz = \pi\bigl[z - \frac{z^{3}}3\bigr]_{-1}^{1} = \pi\bigl(2 - \frac23\bigr) = \frac{4\pi}3$. \checkmark\ Zahlenwert $4{,}189$; der Würfel $[-1, 1]^{3}$ hat Volumen $8$, die Kugel füllt $52\,\%$. \checkmark}
+\begin{mitnehmen}\kastentext
+Transformationssatz: $\int f\,dV = \int f(\Phi)\,|\det J_\Phi|\,du$. Die Funktionaldeterminante ist das Volumen des kleinen verzerrten Quaders --- bei Kugelkoordinaten $r^{2}\sin\vartheta$, bei Zylinderkoordinaten $r$, bei Polarkoordinaten $r$. Dann Fubini, und wenn der Integrand ein Produkt ist, zerfällt alles in Faktoren.
+\end{mitnehmen}
+\end{loesungkarte}

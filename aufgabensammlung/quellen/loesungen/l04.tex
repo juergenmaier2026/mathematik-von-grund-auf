@@ -1,0 +1,851 @@
+\setgebiet{5}{Wahrscheinlichkeit}{mittel}
+\chapter{Lösungen: Wahrscheinlichkeit}
+
+%%%%%%%%%% 4.1
+\stupserzwei{tief}{(b) Günstig für \enquote{verschieden, Maximum $6$}: $(6, k)$ und $(k, 6)$ mit $k = 1, \dots, 5$ --- zehn Paare.}{22pt}
+\begin{loesungkarte}{tief}{4.1}{Würfel, Münzen, Karten: zählen}
+\derweg{Grundraum mit gleich wahrscheinlichen Ergebnissen festlegen, günstige zählen, teilen.}
+\schritt{(a)}
+$2^{3} = 8$ gleich wahrscheinliche Folgen. Genau zweimal Kopf: KKZ, KZK, ZKK --- drei. $P = \frac38$.
+\schritt{(b)}
+$36$ geordnete Paare. Pasch: $(1, 1), \dots, (6, 6)$, sechs: $P = \frac6{36} = \frac16$. Verschieden mit Maximum $6$: $(6, k)$ und $(k, 6)$ für $k = 1, \dots, 5$, zehn: $P = \frac{10}{36} = \frac5{18}$.
+\schritt{(c)}
+$\binom{32}2 = 496$ Paare, davon $\binom42 = 6$ aus Assen: $P = \frac6{496} = \frac3{248}\approx0{,}0121$. Oder schrittweise: $\frac4{32}\cdot\frac3{31} = \frac{12}{992}$, dasselbe.
+\schritt{(d)}
+Als \emph{geordnete} Paare: Summe $2$ nur $(1, 1)$; Summe $3$ aber $(1, 2)$ und $(2, 1)$. Die Kombination $\{1, 2\}$ kann auf zwei Arten entstehen, $\{1, 1\}$ nur auf eine. Wer ungeordnete Paare zählt ($21$ Stück), hat keinen Laplace-Raum: Die $21$ Kombinationen sind nicht gleich wahrscheinlich.
+\probe{(b) Die sechs Pasch-Paare plus die $30$ Nicht-Pasch-Paare sind $36$. Unter den $30$ hat jedes Maximum $m$ genau $2(m - 1)$ Paare: $0 + 2 + 4 + 6 + 8 + 10 = 30$. \checkmark}
+\begin{mitnehmen}\kastentext
+Laplace funktioniert nur, wenn alle Elementarereignisse gleich wahrscheinlich sind --- bei Würfeln und Münzen heißt das: geordnet zählen, auch wenn die Würfel nicht unterscheidbar aussehen. Der Fehler von d'Alembert (der $P(\text{einmal Kopf bei zwei Würfen}) = \frac13$ rechnete) ist genau dieser.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.2
+\stupserzwei{gruen}{$\binom nk\cdot\frac{(n - k)!}{n!} = \frac1{k!}$ --- der Binomialkoeffizient kürzt fast alles weg.}{22pt}
+\begin{loesungkarte}{gruen}{4.2}{Die vertauschten Briefe}
+\derweg{Einschluss--Ausschluss über die Ereignisse \enquote{Brief $i$ richtig}; die Summe wird die Exponentialreihe von $-1$.}
+\schritt{Ereignisse}
+$A_i$ = \enquote{Brief $i$ liegt richtig}. Gesucht $P(\bigcap A_i^{c}) = 1 - P(\bigcup A_i)$.
+\schritt{Schnitte}
+$n!$ Verteilungen, alle gleich wahrscheinlich. Liegen $k$ bestimmte Briefe richtig, sind die übrigen $n - k$ beliebig: $(n - k)!$ Möglichkeiten. Also $P(A_{i_1}\cap\dots\cap A_{i_k}) = \frac{(n - k)!}{n!}$, und es gibt $\binom nk$ solche Schnitte.
+\schritt{Einschluss--Ausschluss}
+\[ P\Bigl(\bigcup A_i\Bigr) = \sum_{k=1}^{n}(-1)^{k+1}\binom nk\frac{(n - k)!}{n!} = \sum_{k=1}^{n}\frac{(-1)^{k+1}}{k!}, \]
+also $P(\text{kein Brief richtig}) = 1 - \sum_{k=1}^{n}\frac{(-1)^{k+1}}{k!} = \sum_{k=0}^{n}\frac{(-1)^{k}}{k!}$.
+\schritt{Grenzwert}
+Das sind die Partialsummen der Reihe $e^{-1} = \sum\frac{(-1)^{k}}{k!}$. Für $n\to\infty$: $P\to\frac1e\approx0{,}3679$. Schon für $n = 6$ stimmt der Wert auf vier Stellen.
+\probe{$n = 2$: $\frac12$ (von zwei Vertauschungen eine komplett falsch). \checkmark\ $n = 3$: $1 - 1 + \frac12 - \frac16 = \frac13$; von sechs Permutationen sind zwei fixpunktfrei ($231$, $312$). \checkmark\ $n = 4$: $\frac38$; $9$ von $24$. \checkmark}
+\begin{mitnehmen}\kastentext
+Dass die Antwort nicht von $n$ abhängt, ist das Verblüffende: Ob $10$ Briefe oder $10\,000$, in $37\,\%$ der Fälle liegt kein einziger richtig. Die fixpunktfreien Permutationen heißen Derangements, ihre Anzahl $D_n = n!\sum_{k\le n}\frac{(-1)^{k}}{k!}$ ist die zu $\frac{n!}e$ nächste ganze Zahl.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.3
+\stupserzwei{tief}{(d) Zweiter Fall: \enquote{mindestens eine Vier} sind $11$ Paare; \enquote{Summe $7$} darunter: $(3, 4)$ und $(4, 3)$.}{22pt}
+\begin{loesungkarte}{tief}{4.3}{Zwei Würfel, eine Summe}
+\derweg{Die $6\times6$-Tabelle; Summen liegen auf Diagonalen.}
+\schritt{(a)}
+Anzahl Paare mit Summe $k$: $1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1$ für $k = 2, \dots, 12$. Also $P(S = k) = \frac{6 - |k - 7|}{36}$.
+\begin{center}
+\begin{tikzpicture}[x=0.55cm,y=0.45cm]
+\foreach \k/\h in {2/1,3/2,4/3,5/4,6/5,7/6,8/5,9/4,10/3,11/2,12/1} {\fill[tief!70] (\k-0.35,0) rectangle (\k+0.35,\h); \node[below,font=\scriptsize] at (\k,0) {\k}; \node[above,font=\tiny,grau] at (\k,\h) {$\frac{\h}{36}$};}
+\draw[linie] (1.3,0)--(12.7,0);
+\end{tikzpicture}
+\end{center}
+\schritt{(b)}
+Am wahrscheinlichsten $S = 7$ mit $\frac6{36} = \frac16$. $P(S\ge10) = \frac{3 + 2 + 1}{36} = \frac16$.
+\schritt{(c)}
+Gewinn ($7$ oder $11$): $\frac{6 + 2}{36} = \frac29\approx22\,\%$. Verlust ($2$, $3$, $12$): $\frac{1 + 2 + 1}{36} = \frac19\approx11\,\%$. Die übrigen $\frac23$ führen zum Weiterspiel.
+\schritt{(d)}
+Erster Würfel $4$: Der zweite muss $3$ zeigen, $P = \frac16$. Mindestens ein Würfel $4$: $11$ Paare (sechs mit $4$ vorn, sechs mit $4$ hinten, $(4, 4)$ doppelt gezählt). Summe $7$ darunter: $(4, 3)$, $(3, 4)$. $P = \frac2{11}\approx0{,}18$ --- mehr als $\frac16$, weil die Bedingung die Pasch-Lücke $(4, 4)$ nicht ausgleicht.
+\probe{Summe aller $P(S = k)$: $\frac{1 + 2 + \dots + 6 + 5 + \dots + 1}{36} = \frac{36}{36}$. \checkmark\ $E[S] = 7$ aus Symmetrie. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Verteilung der Summe zweier Gleichverteilungen ist dreieckig --- die erste Faltung. Mit drei Würfeln wird sie schon glockenförmig: der zentrale Grenzwertsatz in Kinderschuhen (Aufgabe 4.32).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.4
+\stupserzwei{gruen}{$\binom{32}{10} = 64\,512\,240$, $\binom{28}7 = 1\,184\,040$, $\binom{28}6 = 376\,740$, $\binom{24}2 = 276$.}{22pt}
+\begin{loesungkarte}{gruen}{4.4}{Zehn Karten aus dem Skatblatt}
+\derweg{Hypergeometrisch: Buben aus den Buben, Rest aus dem Rest, durch alle Blätter.}
+\schritt{Grundraum}
+$|\Omega| = \binom{32}{10} = 64\,512\,240$ Blätter, ungeordnet, ohne Zurücklegen, alle gleich wahrscheinlich.
+\schritt{(a)}
+$3$ der $4$ Buben und $7$ der $28$ Nicht-Buben: $\binom43\binom{28}7 = 4\cdot1\,184\,040 = 4\,736\,160$. $P = \frac{4\,736\,160}{64\,512\,240} = 0{,}0734$.
+\schritt{(b)}
+Dazu genau $4$ Buben: $\binom44\binom{28}6 = 376\,740$. $P(\ge3) = \frac{4\,736\,160 + 376\,740}{64\,512\,240} = \frac{5\,112\,900}{64\,512\,240} = 0{,}0793$.
+\schritt{(c)}
+Alle $8$ Karo plus $2$ aus den übrigen $24$: $\binom88\binom{24}2 = 276$. $P = \frac{276}{64\,512\,240} = 4{,}3\cdot10^{-6}$ --- etwa einmal in $234\,000$ Blättern.
+\probe{Erwartete Bubenzahl $10\cdot\frac4{32} = 1{,}25$; drei oder mehr sollte selten sein, $8\,\%$ passt. \checkmark\ (c) schrittweise: $\frac{10}{32}\cdot\frac9{31}\cdots\frac3{25}$ für die ersten $8$ Karten Karo, mal $\binom{10}8$ für die Position --- dasselbe Ergebnis. \checkmark}
+\begin{mitnehmen}\kastentext
+Hypergeometrische Verteilung: $P(X = k) = \binom Mk\binom{N - M}{n - k}/\binom Nn$ --- $M$ Erfolge in der Urne, $n$ gezogen, $k$ Erfolge in der Hand. \enquote{Mindestens} summiert man direkt, wenn wenige Terme, sonst über das Gegenteil.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.5
+\stupserzwei{gruen}{$n = 22$: $0{,}476$; $n = 23$: $0{,}507$. Die Schwelle liegt genau dazwischen.}{22pt}
+\begin{loesungkarte}{gruen}{4.5}{Gleiche Geburtstage}
+\derweg{Das Gegenteil --- alle Geburtstage verschieden --- als Produkt berechnen und von eins abziehen.}
+\schritt{(a), (b)}
+Die zweite Person muss einen der $364$ übrigen Tage treffen: $\frac{364}{365} = 0{,}9973$. Die dritte einen der $363$ übrigen: $\frac{364}{365}\cdot\frac{363}{365} = 0{,}9918$.
+\schritt{(c)}
+\[ P(\text{alle verschieden}) = \frac{365}{365}\cdot\frac{364}{365}\cdots\frac{365 - n + 1}{365} = \prod_{k=0}^{n-1}\Bigl(1 - \frac k{365}\Bigr). \]
+$n = 22$: $0{,}5243$, also $47{,}6\,\%$ für einen gemeinsamen Geburtstag. $n = 23$: $0{,}4927$, also $50{,}7\,\%$. Das kleinste $n$ ist $23$.
+\begin{center}
+\begin{tikzpicture}[x=0.11cm,y=3.4cm,font=\small]
+\draw[grau,->] (0,0)--(62,0) node[right,font=\scriptsize]{$n$};
+\draw[grau,->] (0,0)--(0,1.12) node[above,font=\scriptsize]{$P$};
+\foreach \y/\l in {0.5/{$0{,}5$},0.99/{$0{,}99$}} {\draw[linie] (0,\y)--(60,\y); \node[left,font=\scriptsize,grau] at (0,\y) {\l};}
+\foreach \x in {10,20,30,40,50,60} {\draw[grau] (\x,0)--(\x,-0.02); \node[below,font=\scriptsize,grau] at (\x,-0.02) {\x};}
+\draw[tief,thick] plot[smooth] coordinates {(1,0) (5,0.027) (10,0.117) (15,0.253) (20,0.411) (23,0.507) (25,0.569) (30,0.706) (35,0.814) (40,0.891) (45,0.941) (50,0.970) (57,0.990) (60,0.994)};
+\fill[akzent] (23,0.507) circle (1.6pt); \node[akzent,font=\scriptsize,above left] at (23,0.507) {$23$};
+\fill[akzent] (57,0.990) circle (1.6pt); \node[akzent,font=\scriptsize,below right] at (57,0.985) {$57$};
+\end{tikzpicture}
+\end{center}
+\schritt{(d)}
+Bei $n = 57$: $P(\text{alle verschieden}) = 0{,}0099$, also $99{,}0\,\%$. Bei $n = 70$: $99{,}9\,\%$.
+\schritt{(e)}
+Unter $23$ Personen gibt es $\binom{23}2 = 253$ Paare. Jedes hat die Chance $\frac1{365}$; $253$ Versuche ergeben im Mittel $0{,}69$ Treffer. Die Intuition denkt an \emph{eine} Person, die mit $22$ anderen verglichen wird ($\frac{22}{365} = 6\,\%$) --- gefragt ist aber nach irgendeinem Paar.
+\probe{Paarnäherung: $1 - (1 - \frac1{365})^{253} = 0{,}5005$, nahe am exakten $0{,}5073$; der Unterschied kommt daher, dass die Paare nicht unabhängig sind. \checkmark\ Näherung $P(\text{alle verschieden})\approx e^{-n(n - 1)/730}$: für $n = 23$ gibt das $e^{-0{,}693} = 0{,}500$. \checkmark}
+\begin{mitnehmen}\kastentext
+\enquote{Mindestens einmal} rechnet man über das Gegenteil. Die Kurve steigt wie $n^{2}$, weil jede neue Person sich mit allen bisherigen vergleicht --- und das ist auch der Grund, warum Hash-Kollisionen so viel früher auftreten, als man denkt (Geburtstagsangriff, Band 1).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.6
+\stupserzwei{gruen}{$\binom{m + n}m$: Von den $m + n$ Positionen wählt man die $m$ für R aus.}{22pt}
+\begin{loesungkarte}{gruen}{4.6}{Wege im Gitter}
+\derweg{Weg $=$ Wort aus $m$ R und $n$ O; Wörter zählen durch Auswahl der R-Positionen.}
+Jeder Weg besteht aus genau $m$ Schritten nach rechts und $n$ nach oben, in irgendeiner Reihenfolge --- ein Wort der Länge $m + n$ mit $m$ Buchstaben R. Die Positionen der R wählen: $\binom{m + n}m = \binom{m + n}n$ Wege.
+
+Für $(2, 2)$: $\binom42 = 6$: RROO, RORO, ROOR, ORRO, OROR, OORR. \checkmark
+\probe{Rekursion: Nach $(m, n)$ kommt man von $(m - 1, n)$ oder $(m, n - 1)$: $W(m, n) = W(m - 1, n) + W(m, n - 1)$ --- die Pascal-Regel $\binom{m + n}m = \binom{m + n - 1}{m - 1} + \binom{m + n - 1}m$. \checkmark}
+\begin{mitnehmen}\kastentext
+Gitterwege sind die Geometrie des Binomialkoeffizienten; das Pascalsche Dreieck ist eine um $45^{\circ}$ gedrehte Wegezählung. Mit einer Zusatzbedingung (nie über die Diagonale) werden daraus die Catalan-Zahlen, mit Schritten $\pm1$ die Irrfahrt aus Kapitel 13.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.7
+\stupserzwei{akzent}{(d) $1 - \bigl(\frac{35}{36}\bigr)^{n} > \frac12\iff n > \frac{\ln2}{-\ln(35/36)} = 24{,}6$. Mit $25$ Würfen hätte de Méré gewonnen.}{22pt}
+\begin{loesungkarte}{akzent}{4.7}{\enquote{Mindestens eine Sechs}}
+\derweg{Gegenwahrscheinlichkeit; dann klären, was die Summe der Einzelwahrscheinlichkeiten wirklich ist.}
+\schritt{(a)}
+$P(\text{keine Sechs in 4 Würfen}) = \bigl(\frac56\bigr)^{4} = 0{,}4823$, also $P(\text{mindestens eine}) = 0{,}5177$. Günstig --- de Méré gewann zu Recht.
+\schritt{(b)}
+$P(\text{keine Doppelsechs in 24 Würfen}) = \bigl(\frac{35}{36}\bigr)^{24} = 0{,}5086$, also $P(\text{mindestens eine}) = 0{,}4914$. Ungünstig --- er verlor zu Recht, wenn auch knapp.
+\schritt{(c)}
+$4\cdot\frac16 = \frac23$ ist der \emph{Erwartungswert} der Anzahl Sechsen in vier Würfen (Aufgabe 4.20), nicht die Wahrscheinlichkeit für mindestens eine. $P(A\cup B) = P(A) + P(B)$ gilt nur für \emph{unvereinbare} $A, B$; die Ereignisse \enquote{Sechs im $i$-ten Wurf} können gleichzeitig eintreten. Allgemein $P(A\cup B) = P(A) + P(B) - P(A\cap B)$, und die Additivität überschätzt --- mit $36$ Doppelwürfen gäbe sie $P = 1$.
+\schritt{(d)}
+$\bigl(\frac{35}{36}\bigr)^{n} < \frac12\iff n > \frac{\ln2}{\ln(36/35)} = \frac{0{,}6931}{0{,}02817} = 24{,}6$. Ab $25$ Würfen ist die Wette günstig: $1 - (35/36)^{25} = 0{,}5055$.
+\probe{(a) über Einschluss--Ausschluss: $4\cdot\frac16 - 6\cdot\frac1{36} + 4\cdot\frac1{216} - \frac1{1296} = 0{,}6667 - 0{,}1667 + 0{,}0185 - 0{,}0008 = 0{,}5177$. \checkmark}
+\begin{fehler}\kastentext
+Wahrscheinlichkeiten addieren sich nur bei unvereinbaren Ereignissen. \enquote{Mindestens einmal in $n$ Versuchen} ist $1 - (1 - p)^{n}$, und das ist für kleine $np$ ungefähr $np$ --- deshalb funktioniert die Faustregel bei einem Wurf und versagt bei vielen.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Die Korrespondenz zwischen Pascal und Fermat über de Mérés Fragen (1654) gilt als Geburtsstunde der Wahrscheinlichkeitsrechnung. Die Lektion ist noch dieselbe: Wer \enquote{mindestens} hört, rechnet das Gegenteil.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.8
+\stupserzwei{tief}{(c) $P(R_1\mid R_2) = \frac{P(R_1\cap R_2)}{P(R_2)} = \frac{3/5\cdot2/4}{3/5} = \frac12$ --- dasselbe wie $P(R_2\mid R_1)$.}{22pt}
+\begin{loesungkarte}{tief}{4.8}{Bedingt --- in welche Richtung?}
+\derweg{Baum zeichnen; Pfadwahrscheinlichkeiten multiplizieren; bedingen heißt: einen Teilbaum zum neuen Ganzen machen.}
+\schritt{(a)}
+Erste Kugel rot ($\frac35$) oder blau ($\frac25$). Nach einer roten bleiben $2$ rote und $2$ blaue: $P(R_2\mid R_1) = \frac24 = \frac12$.
+\begin{center}
+\begin{tikzpicture}[font=\small,grow=right,level distance=2.6cm,sibling distance=1.3cm,edge from parent/.style={draw,grau,->}]
+\node {Start}
+  child {node {blau $\frac25$} child {node {blau: $\frac25\cdot\frac14 = \frac1{10}$}} child {node {rot: $\frac25\cdot\frac34 = \frac3{10}$}}}
+  child {node {rot $\frac35$} child {node {blau: $\frac35\cdot\frac24 = \frac3{10}$}} child {node {rot: $\frac35\cdot\frac24 = \frac3{10}$}}};
+\end{tikzpicture}
+\end{center}
+\schritt{(b)}
+$P(R_2) = P(R_1)P(R_2\mid R_1) + P(B_1)P(R_2\mid B_1) = \frac35\cdot\frac24 + \frac25\cdot\frac34 = \frac3{10} + \frac3{10} = \frac35$. Gleich $P(R_1)$: Ohne Information über den ersten Zug ist der zweite genauso verteilt wie der erste.
+\schritt{(c)}
+$P(R_1\mid R_2) = \frac{P(R_1\cap R_2)}{P(R_2)} = \frac{3/10}{3/5} = \frac12$. Die Information läuft rückwärts, aber Bayes stört das nicht.
+\schritt{(d)}
+(a) und (c) sind beide $\frac12$: Die Ziehung ist \emph{austauschbar} --- die Reihenfolge spielt für die gemeinsame Verteilung keine Rolle, also sind $P(R_2\mid R_1)$ und $P(R_1\mid R_2)$ gleich. Das ist eine Besonderheit dieses Beispiels, kein allgemeines Gesetz; bei Aufgabe 4.10 sind $P(T^{+}\mid K) = 0{,}9$ und $P(K\mid T^{+}) = 0{,}09$ grundverschieden. (b) ist $\frac35$ und etwas anderes: unbedingt.
+\probe{Die vier Pfade summieren sich zu $\frac1{10} + \frac3{10} + \frac3{10} + \frac3{10} = 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+$P(A\mid B)$: $B$ ist das neue Ganze, $A\cap B$ der Teil davon. Im Baum heißt das: die Pfade durch $B$ sammeln, die durch $A\cap B$ darunter zählen. Die Richtung der Bedingung ist im Alltag die häufigste Fehlerquelle --- vom Testergebnis bis zum $p$-Wert (Aufgabe 4.40).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.9
+\stupserzwei{akzent}{(d) $E$ muss zwei Elemente haben, davon genau eines gerade: $3\cdot3 = 9$ solche Mengen. Für $P(E) = \frac12$ bräuchte man $P(A\cap E) = \frac14$, also $1{,}5$ Elemente --- unmöglich.}{22pt}
+\begin{loesungkarte}{akzent}{4.9}{Unabhängig oder unvereinbar?}
+\derweg{Beides nachrechnen: $P(A\cap B)$ mit $0$ vergleichen (unvereinbar) und mit $P(A)P(B)$ (unabhängig).}
+\schritt{(a)}
+$A = \{2, 4, 6\}$, $B = \{3, 6\}$, $A\cap B = \{6\}$. $P(A\cap B) = \frac16 = \frac12\cdot\frac13 = P(A)P(B)$: \emph{unabhängig}. Nicht unvereinbar ($6$ liegt in beiden).
+\schritt{(b)}
+$C\cap D = \emptyset$: \emph{unvereinbar}. $P(C\cap D) = 0\neq\frac13\cdot\frac13$: \emph{abhängig}. Weiß man, dass $C$ eingetreten ist, ist $D$ unmöglich --- stärker kann Abhängigkeit nicht sein.
+\schritt{(c)}
+Unvereinbar heißt $P(A\cap B) = 0$. Unabhängig hieße $P(A\cap B) = P(A)P(B) > 0$. Beides zugleich geht nicht. $\blacksquare$
+\schritt{(d)}
+$A\cap C = \{2\}$: $\frac16 = \frac12\cdot\frac13$, unabhängig. Allgemein ist $E$ mit $|E| = 2$ genau dann von $A$ unabhängig, wenn $|A\cap E| = 1$, also eine gerade und eine ungerade Zahl: $3\cdot3 = 9$ Mengen ($\{1, 2\}$, $\{1, 4\}$, \dots, $\{5, 6\}$). Für $P(E) = \frac12$ bräuchte man $|A\cap E| = \frac32$: Kein Ereignis mit Wahrscheinlichkeit $\frac12$ ist von $A$ unabhängig (außer über einem feineren Grundraum).
+\begin{fehler}\kastentext
+\enquote{Unabhängig} und \enquote{unvereinbar} werden verwechselt, weil beide nach \enquote{getrennt} klingen. Unvereinbar ist eine Aussage über Mengen (kein gemeinsames Element), unabhängig über Wahrscheinlichkeiten (Produktformel). Unvereinbare Ereignisse mit positiver Wahrscheinlichkeit sind immer abhängig.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Unabhängigkeit ist keine Eigenschaft, die man einer Menge ansieht --- sie hängt vom Wahrscheinlichkeitsmaß ab. Bei einem gezinkten Würfel wären $A$ und $B$ aus (a) im Allgemeinen nicht mehr unabhängig.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.10
+\stupserzwei{gruen}{$9$ Kranke und $89$ Gesunde testen positiv. Der Anteil der Kranken unter den Positiven ist $\frac9{98}$.}{22pt}
+\begin{loesungkarte}{gruen}{4.10}{Ein positiver Test}
+\derweg{Statt mit Prozenten zu rechnen, lässt man tausend Menschen durch den Test laufen und zählt.}
+\schritt{(a), (b) --- der Häufigkeitsbaum}
+Von $1000$ Personen sind $1\,\%$ krank: $10$. Die übrigen $990$ sind gesund. Von den $10$ Kranken testen $90\,\%$ positiv: $9$. Von den $990$ Gesunden testen $9\,\%$ falsch positiv: $89$.
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,font=\small,
+  kn/.style={draw=linie,fill=white,rounded corners=2pt,inner sep=5pt,align=center,minimum width=2.1cm},
+  pf/.style={->,grau}]
+\node[kn,fill=sand] (a) at (0,0) {\textbf{1000}\\getestet};
+\node[kn] (k) at (-2.4,-1.7) {\textbf{10}\\krank};
+\node[kn] (g) at (2.4,-1.7) {\textbf{990}\\gesund};
+\node[kn,draw=akzent,thick] (kp) at (-3.6,-3.6) {\textbf{9}\\positiv};
+\node[kn] (kn) at (-1.2,-3.6) {\textbf{1}\\negativ};
+\node[kn,draw=akzent,thick] (gp) at (1.2,-3.6) {\textbf{89}\\positiv};
+\node[kn] (gn) at (3.6,-3.6) {\textbf{901}\\negativ};
+\draw[pf] (a)--(k) node[midway,left=3pt,font=\scriptsize]{$1\,\%$};
+\draw[pf] (a)--(g) node[midway,right=3pt,font=\scriptsize]{$99\,\%$};
+\draw[pf] (k)--(kp) node[midway,left=2pt,font=\scriptsize]{$90\,\%$};
+\draw[pf] (k)--(kn);
+\draw[pf] (g)--(gp) node[midway,left=2pt,font=\scriptsize]{$9\,\%$};
+\draw[pf] (g)--(gn);
+\draw[akzent,thick,rounded corners=4pt] (-4.85,-4.35) rectangle (2.45,-2.85);
+\node[akzent,font=\scriptsize\bfseries,anchor=west] at (-4.85,-4.65) {alle Positiven: $9 + 89 = 98$};
+\end{tikzpicture}
+\end{center}
+\schritt{(c) --- der positive Vorhersagewert}
+Unter den $98$ Positiven sind $9$ krank: $\mathrm{PPV} = \frac9{98}\approx9{,}2\,\%$. Die Sensitivität $90\,\%$ beantwortet \enquote{Wenn krank, wie oft positiv?}; die Patientin fragt \enquote{Wenn positiv, wie oft krank?}. Umgekehrte Bedingung, zehnmal kleinere Antwort.
+\schritt{(d) --- Prävalenz $10\,\%$}
+$100$ krank, $90$ davon positiv; $900$ gesund, $81$ davon positiv. $\mathrm{PPV} = \frac{90}{171}\approx53\,\%$. Geändert hat sich nur die erste Verzweigung; Sensitivität und Falsch-Positiv-Rate sind dieselben.
+\schritt{(e)}
+Der Test bestimmt, wie viele Falschpositive je Gesundem anfallen; die Prävalenz bestimmt, wie viele Gesunde es gibt --- bei seltener Krankheit ertrinken die wenigen richtig Positiven in den vielen Gesunden.
+\probe{$9 + 1 = 10$, $89 + 901 = 990$. \checkmark\ Bayes: $\frac{0{,}9\cdot0{,}01}{0{,}9\cdot0{,}01 + 0{,}09\cdot0{,}99} = \frac{0{,}009}{0{,}0981} = 0{,}0917$. \checkmark}
+\begin{mitnehmen}\kastentext
+Ein positiver Test bei seltener Krankheit ist meistens falsch --- nicht weil der Test schlecht wäre, sondern weil die Gesunden so viele sind. Rechnen Sie mit tausend Menschen, nie mit Prozenten; natürliche Häufigkeiten verstehen auch Patienten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.11
+\stupserzwei{gruen}{Wechseln gewinnt genau dann, wenn die erste Wahl falsch war --- und das ist in zwei von drei Fällen so.}{22pt}
+\begin{loesungkarte}{gruen}{4.11}{Drei Türen}
+\derweg{Annahmen aufschreiben, über die Autoposition fallunterscheiden, dann mit Bayes bestätigen.}
+\schritt{(a) Annahmen}
+(i) Das Auto steht gleichverteilt hinter einer der drei Türen. (ii) Der Kandidat wählt unabhängig davon (etwa Tür $1$). (iii) Der Moderator öffnet \emph{immer} eine nicht gewählte Tür mit Ziege; hat er zwei zur Auswahl, wählt er zufällig. Ohne (iii) ist die Aufgabe nicht gestellt.
+\schritt{(b) Fallunterscheidung}
+Kandidat wählt Tür $1$. Auto hinter $1$ ($\frac13$): bleiben gewinnt, wechseln verliert. Auto hinter $2$ ($\frac13$): Moderator muss $3$ öffnen; wechseln (auf $2$) gewinnt. Auto hinter $3$ ($\frac13$): Moderator muss $2$ öffnen; wechseln (auf $3$) gewinnt. Bleiben: $\frac13$. Wechseln: $\frac23$.
+\schritt{(c) Bayes}
+$M_3$ = \enquote{Moderator öffnet Tür $3$}. $P(M_3\mid A_1) = \frac12$, $P(M_3\mid A_2) = 1$, $P(M_3\mid A_3) = 0$. $P(M_3) = \frac13\cdot\frac12 + \frac13\cdot1 + 0 = \frac12$. $P(A_1\mid M_3) = \frac{\frac13\cdot\frac12}{\frac12} = \frac13$, $P(A_2\mid M_3) = \frac{\frac13\cdot1}{\frac12} = \frac23$. Wechseln.
+\schritt{(d) Unwissender Moderator}
+Er öffnet zufällig Tür $2$ oder $3$; wir beobachten: Tür $3$, Ziege. $P(M_3\cap\text{Ziege}\mid A_1) = \frac12$, $P(\dots\mid A_2) = \frac12$, $P(\dots\mid A_3) = 0$. Jetzt $P(A_1\mid\dots) = P(A_2\mid\dots) = \frac12$: Wechseln bringt nichts. Der Unterschied: Der wissende Moderator \emph{muss} bei $A_2$ die $3$ öffnen, der unwissende nur zufällig --- und diese Asymmetrie trägt die Information.
+\probe{Simulation im Kopf mit $300$ Spielen: $100$-mal Auto hinter $1$, $100$-mal hinter $2$, $100$-mal hinter $3$. Wechsler gewinnen in den letzten $200$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Intuition \enquote{zwei Türen, $50 : 50$} ignoriert, dass die Tür des Moderators nicht zufällig war. Wo Information herkommt, entscheidet über ihren Wert --- dieselbe Lektion wie beim Simpson-Paradox (Aufgabe 4.12) und bei der Studienauswahl (Publication Bias).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.12
+\stupserzwei{gruen}{$A$: $\frac{87}{350}\cdot0{,}931 + \frac{263}{350}\cdot0{,}730 = 0{,}231 + 0{,}549 = 0{,}780$. Das Gewicht liegt auf den großen Steinen --- den schwierigen Fällen.}{22pt}
+\begin{loesungkarte}{gruen}{4.12}{Das Simpson-Paradox}
+\derweg{Gesamtquote als gewichtetes Mittel der Teilquoten; die Gewichte sind das Paradox.}
+\schritt{(a)}
+$\frac{81}{87} = 0{,}931$, $\frac{234}{270} = 0{,}867$; $\frac{192}{263} = 0{,}730$, $\frac{55}{80} = 0{,}688$; $\frac{273}{350} = 0{,}780$, $\frac{289}{350} = 0{,}826$. Und $81 + 192 = 273$, $234 + 55 = 289$. \checkmark
+\schritt{(b)}
+$A$: $\frac{87}{350}\cdot\frac{81}{87} + \frac{263}{350}\cdot\frac{192}{263} = 0{,}249\cdot0{,}931 + 0{,}751\cdot0{,}730 = 0{,}780$. Gewichte: $25\,\%$ kleine, $75\,\%$ große Steine. \\
+$B$: $\frac{270}{350}\cdot0{,}867 + \frac{80}{350}\cdot0{,}688 = 0{,}771\cdot0{,}867 + 0{,}229\cdot0{,}688 = 0{,}826$. Gewichte: $77\,\%$ kleine, $23\,\%$ große.
+\schritt{(c)}
+Die Steingröße ist die Störgröße (Confounder): Sie beeinflusst sowohl die Verfahrenswahl (große Steine bekamen meist $A$) als auch den Erfolg (große Steine heilen schlechter). $A$ wurde auf die schweren Fälle angesetzt und zieht deshalb in der Gesamtquote den Kürzeren --- obwohl es in jeder Gruppe besser ist.
+\schritt{(d)}
+$A$, auf Grundlage der nach Steingröße getrennten Tabelle. Die Teilquoten vergleichen Gleiches mit Gleichem; die Gesamtquote vergleicht \enquote{$A$ bei schweren Fällen} mit \enquote{$B$ bei leichten}. (Allgemein ist die Antwort nicht immer \enquote{getrennt}: Wäre die Gruppenvariable eine \emph{Folge} der Behandlung, müsste man zusammenfassen. Hier ist die Steingröße vorher da.)
+\probe{Mit vertauschten Gewichten --- $A$ auf $77\,\%$ kleine --- hätte $A$ eine Gesamtquote von $0{,}771\cdot0{,}931 + 0{,}229\cdot0{,}730 = 0{,}885$: besser als $B$. Es sind die Gewichte. \checkmark}
+\begin{mitnehmen}\kastentext
+Simpsons Paradox entsteht immer, wenn eine dritte Variable mit beiden anderen zusammenhängt und die Gruppen ungleich besetzt sind. Randomisierung in Studien verhindert genau das: Sie macht die Gewichte in beiden Armen gleich. Beobachtungsdaten muss man stratifizieren --- und wissen, wonach.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.13
+\stupserzwei{tief}{(c) $E[2X + 1] = 2\cdot3{,}5 + 1 = 8$, $\operatorname{Var}(2X + 1) = 4\operatorname{Var}X$ --- die Verschiebung ändert die Varianz nicht.}{22pt}
+\begin{loesungkarte}{tief}{4.13}{Ein Würfel als Zufallsvariable}
+\derweg{Verteilung als Tabelle, Verteilungsfunktion als Treppe, Momente durch Summen; lineare Transformationen über die Regeln.}
+\schritt{(a)}
+$P(X = k) = \frac16$ für $k = 1, \dots, 6$. $F(x) = 0$ für $x < 1$, $F(x) = \frac{\lfloor x\rfloor}6$ für $1\le x < 6$, $F(x) = 1$ für $x\ge6$: eine Treppe mit sechs Stufen der Höhe $\frac16$, rechtsseitig stetig.
+\schritt{(b)}
+$E[X] = \frac{1 + 2 + \dots + 6}6 = \frac{21}6 = 3{,}5$. $E[X^{2}] = \frac{1 + 4 + 9 + 16 + 25 + 36}6 = \frac{91}6$. $\operatorname{Var}X = \frac{91}6 - \frac{49}4 = \frac{182 - 147}{12} = \frac{35}{12}\approx2{,}917$, Standardabweichung $1{,}71$.
+\schritt{(c)}
+$E[Y] = 2E[X] + 1 = 8$. $\operatorname{Var}Y = 4\operatorname{Var}X = \frac{35}3\approx11{,}67$.
+\schritt{(d)}
+$Z = (X - 3)^{2}$ nimmt die Werte $4, 1, 0, 1, 4, 9$ an (für $X = 1, \dots, 6$). Verteilung: $P(Z = 0) = \frac16$, $P(Z = 1) = \frac26$, $P(Z = 4) = \frac26$, $P(Z = 9) = \frac16$. $E[Z] = \frac{0 + 2 + 8 + 9}6 = \frac{19}6\approx3{,}17$.
+\probe{(d) anders: $E[(X - 3)^{2}] = \operatorname{Var}X + (E[X] - 3)^{2} = \frac{35}{12} + \frac14 = \frac{38}{12} = \frac{19}6$. \checkmark\ (Verschiebungssatz: Der mittlere quadratische Abstand von $c$ ist Varianz plus $(\mu - c)^{2}$, minimal bei $c = \mu$.)}
+\begin{mitnehmen}\kastentext
+$E[aX + b] = aE[X] + b$, $\operatorname{Var}(aX + b) = a^{2}\operatorname{Var}X$. Für nichtlineare $g$ gilt $E[g(X)] = \sum g(k)P(X = k)$ --- man braucht die Verteilung von $g(X)$ nicht aufzustellen. Und $E[g(X)]\neq g(E[X])$: $E[X^{2}] = 15{,}17\neq12{,}25$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.14
+\stupserzwei{gruen}{$F(m) = \frac{m^{3}}{27} = \frac12\iff m^{3} = 13{,}5\iff m = \sqrt[3]{13{,}5}\approx2{,}38$ --- deutlich über der Intervallmitte $1{,}5$.}{22pt}
+\begin{loesungkarte}{gruen}{4.14}{Eine Dichte normieren}
+\derweg{Normierung durch Integral; $F$ als Stammfunktion; Wahrscheinlichkeiten als Differenzen von $F$.}
+\schritt{(a)}
+$\int_0^3cx^{2}\,dx = c\bigl[\frac{x^{3}}3\bigr]_0^3 = 9c = 1$, also $c = \frac19$.
+\schritt{(b)}
+$F(x) = \int_0^x\frac{t^{2}}9\,dt = \frac{x^{3}}{27}$ für $0\le x\le3$; $F = 0$ links, $F = 1$ rechts davon.
+\schritt{(c)}
+$P(1\le X\le2) = F(2) - F(1) = \frac8{27} - \frac1{27} = \frac7{27}\approx0{,}259$.
+\schritt{(d)}
+$\frac{m^{3}}{27} = \frac12\Rightarrow m^{3} = 13{,}5\Rightarrow m = 2{,}381$. Die Dichte wächst nach rechts, also liegt die Hälfte der Masse im kurzen Stück $[2{,}38;\ 3]$.
+\probe{$F(3) = 1$. \checkmark\ $E[X] = \int_0^3\frac{x^{3}}9\,dx = \frac{81}{36} = 2{,}25 < 2{,}38$: Mittelwert links vom Median, wie bei linksschiefen Verteilungen üblich. \checkmark}
+\begin{mitnehmen}\kastentext
+Dichte $f$, Verteilungsfunktion $F = \int f$, $P(a\le X\le b) = F(b) - F(a)$, Median $F^{-1}(\frac12)$. Einzelne Punkte haben Wahrscheinlichkeit null --- $P(X = 2) = 0$, obwohl $f(2) = \frac49 > 0$. Die Dichte ist keine Wahrscheinlichkeit, sondern eine Wahrscheinlichkeit pro Länge.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.15
+\stupserzwei{tief}{(d) Poisson-Näherung mit $\lambda = np = 1$: $P(X = 0)\approx e^{-1} = 0{,}368$ gegen exakt $0{,}95^{20} = 0{,}358$.}{22pt}
+\begin{loesungkarte}{tief}{4.15}{Binomial, Poisson oder geometrisch?}
+\derweg{Die Frage des Modells beantworten (wie viele Versuche? was wird gezählt?), dann die passende Formel.}
+\schritt{(a) geometrisch}
+Warten auf den ersten Erfolg bei unabhängigen Versuchen mit $p = \frac16$. $P(\text{erste Sechs im 4.\ Wurf}) = \bigl(\frac56\bigr)^{3}\cdot\frac16 = \frac{125}{1296} = 0{,}0965$. $E = \frac1p = 6$.
+\schritt{(b) binomial}
+Feste Anzahl $n = 20$, zählt Erfolge, $p = 0{,}05$. $P(X = 0) = 0{,}95^{20} = 0{,}3585$. $P(X = 1) = 20\cdot0{,}05\cdot0{,}95^{19} = 0{,}3774$. $P(X\ge2) = 1 - 0{,}3585 - 0{,}3774 = 0{,}264$.
+\schritt{(c) Poisson}
+Ereignisse in einem Zeitkontinuum mit konstanter Rate, keine feste Versuchszahl. $\lambda = 3$ pro Stunde: $P(X = 3) = e^{-3}\frac{27}6 = 0{,}224$. Zwanzig Minuten: $\lambda = 1$, $P(X = 0) = e^{-1} = 0{,}368$.
+\schritt{(d)}
+Poisson ist der Grenzfall der Binomialverteilung für $n\to\infty$, $p\to0$, $np = \lambda$ fest (\enquote{Gesetz der seltenen Ereignisse}). In (b) ist $np = 1$: Poisson gibt $P(X = 0)\approx e^{-1} = 0{,}368$ statt $0{,}358$ --- drei Prozent daneben, bei $n = 20$ schon brauchbar.
+\probe{(a) Die Wahrscheinlichkeiten $\frac16, \frac5{36}, \frac{25}{216}, \dots$ summieren sich zu $\frac{1/6}{1 - 5/6} = 1$. \checkmark\ (c) $E = 3$, und $P(X = 2) = P(X = 3) = 0{,}224$ --- bei ganzzahligem $\lambda$ sind $\lambda - 1$ und $\lambda$ gleich wahrscheinlich. \checkmark}
+\begin{mitnehmen}\kastentext
+Drei Fragen zur Modellwahl: Ist die Zahl der Versuche fest (binomial) oder zufällig (geometrisch: bis zum ersten Erfolg)? Gibt es überhaupt \enquote{Versuche}, oder Ereignisse in Zeit oder Raum (Poisson)? Sind die Versuche unabhängig mit gleichem $p$ --- oder ohne Zurücklegen (hypergeometrisch, Aufgabe 4.4)?
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.16
+\stupserzwei{gruen}{$0{,}7^{9} = 0{,}04035$, $0{,}3^{3} = 0{,}027$, $220\cdot0{,}04035\cdot0{,}027 = 0{,}2397$.}{22pt}
+\begin{loesungkarte}{gruen}{4.16}{Zwölf Patienten}
+\derweg{Binomialformel für (a), Summe von sieben Termen für (b), $np$ für (c).}
+\schritt{(a)}
+$P(X = 9) = \binom{12}9\,0{,}7^{9}\,0{,}3^{3} = 220\cdot0{,}040354\cdot0{,}027 = 0{,}2397$. Der wahrscheinlichste Wert --- $9$ ist nahe bei $np = 8{,}4$.
+\schritt{(b)}
+$P(X\le6) = \sum_{k=0}^{6}\binom{12}k0{,}7^{k}0{,}3^{12-k}$. Die Terme: $k = 6$: $924\cdot0{,}1176\cdot0{,}000729 = 0{,}0792$; $k = 5$: $0{,}0291$; $k = 4$: $0{,}0078$; $k = 3$: $0{,}0015$; kleinere vernachlässigbar. Summe $0{,}1178$. Also etwa $12\,\%$.
+\schritt{(c)}
+$E[X] = np = 12\cdot0{,}7 = 8{,}4$ Patienten; Standardabweichung $\sqrt{12\cdot0{,}7\cdot0{,}3} = 1{,}59$.
+\probe{$P(X\le6)$ als \enquote{mindestens $1{,}5$ Standardabweichungen unter dem Mittel}: Normalnäherung $\Phi\bigl(\frac{6{,}5 - 8{,}4}{1{,}59}\bigr) = \Phi(-1{,}20) = 0{,}115$. \checkmark}
+\begin{mitnehmen}\kastentext
+Kumulierte Binomialwahrscheinlichkeiten rechnet man am Rand der Verteilung von Hand (wenige Terme) und sonst mit Tabelle, Rechner oder Normalnäherung (Aufgabe 4.32). Die Faustregel $np(1 - p)\ge9$ für die Näherung ist hier mit $2{,}5$ verletzt --- die Näherung stimmt trotzdem auf drei Prozentpunkte.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.17
+\stupserzwei{gruen}{$P(X\le5) = e^{-2{,}5}\bigl(1 + 2{,}5 + 3{,}125 + 2{,}604 + 1{,}628 + 0{,}814\bigr) = 0{,}0821\cdot11{,}67 = 0{,}958$.}{22pt}
+\begin{loesungkarte}{gruen}{4.17}{Infektionen pro Woche}
+\derweg{Poisson-Formel, kumuliert über das Gegenteil; Erwartung über $52$ Wochen als $52\cdot P$.}
+\schritt{(a)}
+$P(X = 0) = e^{-2{,}5} = 0{,}0821$. Etwa jede zwölfte Woche ist infektionsfrei.
+\schritt{(b)}
+$P(X\le5) = e^{-2{,}5}\sum_{k=0}^{5}\frac{2{,}5^{k}}{k!} = 0{,}0821\cdot(1 + 2{,}5 + 3{,}125 + 2{,}604 + 1{,}628 + 0{,}814) = 0{,}958$. $P(X > 5) = 0{,}042$.
+\schritt{(c)}
+$P(X\ge5) = 1 - P(X\le4) = 1 - 0{,}0821\cdot10{,}857 = 1 - 0{,}891 = 0{,}109$. In $52\cdot0{,}109 = 5{,}7$, also fünf bis sechs Wochen pro Jahr.
+\schritt{(d)}
+Das Modell nimmt an: seltene, voneinander unabhängige Ereignisse mit konstanter Rate. Verletzt ist es bei Ausbrüchen (ein Fall steckt weitere an --- die Fälle häufen sich stärker als Poisson erlaubt, Überdispersion) und bei saisonalen Raten. Ausbruchserkennung prüft genau, ob die beobachtete Zahl noch Poisson-verträglich ist: Sechs Fälle in einer Woche ($P = 4\,\%$) sind ein Signal, kein Beweis.
+\probe{$E = \operatorname{Var} = 2{,}5$, Standardabweichung $1{,}58$; \enquote{mehr als $5$} ist $1{,}6$ Standardabweichungen über dem Mittel --- $4\,\%$ passt zur Faustregel. \checkmark}
+\begin{mitnehmen}\kastentext
+Poisson braucht nur $\lambda$ --- das ist seine Stärke und seine Schwäche. Die Diagnose \enquote{Varianz deutlich größer als Mittelwert} in realen Zähldaten heißt: Die Ereignisse sind nicht unabhängig, und man braucht ein Modell mit Clustering (negative Binomialverteilung).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.18
+\stupserzwei{tief}{(c) $P(T > s + t\mid T > s) = \frac{e^{-\lambda(s + t)}}{e^{-\lambda s}} = e^{-\lambda t}$. Die Vergangenheit kürzt sich weg.}{22pt}
+\begin{loesungkarte}{tief}{4.18}{Gleich- und Exponentialverteilung}
+\derweg{Momente durch Integrale; Wahrscheinlichkeiten durch die Verteilungsfunktion; Gedächtnislosigkeit durch Kürzen.}
+\schritt{(a)}
+$E[U] = \int_0^1u\,du = \frac12$. $E[U^{2}] = \int_0^1u^{2}\,du = \frac13$, $\operatorname{Var}U = \frac13 - \frac14 = \frac1{12}$. $P(U^{2} < \frac14) = P(U < \frac12) = \frac12$.
+\schritt{(b)}
+$E[T] = \frac1\lambda = 20$, also $\lambda = \frac1{20}$ pro Minute. $P(T > 30) = e^{-30/20} = e^{-1{,}5} = 0{,}223$. Median: $e^{-\lambda m} = \frac12\Rightarrow m = 20\ln2 = 13{,}9$ Minuten (kleiner als der Mittelwert --- die Verteilung ist rechtsschief). $P(T > 50\mid T > 20) = \frac{e^{-2{,}5}}{e^{-1}} = e^{-1{,}5} = 0{,}223 = P(T > 30)$.
+\schritt{(c)}
+$P(T > s + t\mid T > s) = \frac{P(T > s + t)}{P(T > s)} = \frac{e^{-\lambda(s + t)}}{e^{-\lambda s}} = e^{-\lambda t} = P(T > t)$. $\blacksquare$ Wer $20$ Minuten gewartet hat, wartet im Mittel noch einmal $20$ --- der Notruf wird nicht \enquote{fälliger}. (Das stetige Gegenstück zu Aufgabe 4.30.)
+\schritt{(d)}
+Unabhängige exponentialverteilte Wartezeiten mit Rate $\lambda$ sind ein Poisson-Prozess; die Anzahl in einer Stunde ist $\operatorname{Poi}(60\lambda) = \operatorname{Poi}(3)$.
+\probe{(b) Median $13{,}9 < 20$: $P(T < 20) = 1 - e^{-1} = 0{,}632 > \frac12$, also liegt der Median unter $20$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Exponentialverteilung ist die einzige stetige gedächtnislose Verteilung, die geometrische die einzige diskrete. Beide beschreiben \enquote{Warten ohne Alterung}: radioaktiver Zerfall, Ankünfte, Ausfälle ohne Verschleiß. Sobald etwas altert (Menschen, Maschinen), braucht man andere Verteilungen (Weibull, Gamma).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.19
+\stupserzwei{gruen}{(b) $z_1 = \frac{170 - 178}7 = -1{,}14$, $z_2 = \frac{185 - 178}7 = 1$: $\Phi(1) - \Phi(-1{,}14) = 0{,}8413 - 0{,}1265$.}{22pt}
+\begin{loesungkarte}{gruen}{4.19}{Körpergrößen}
+\derweg{$z = \frac{x - \mu}\sigma$, Tabelle, bei (c) rückwärts.}
+\schritt{(a)}
+$z = \frac{190 - 178}7 = 1{,}714$. $P(X > 190) = 1 - \Phi(1{,}714) = 1 - 0{,}9567 = 0{,}043$. Etwa $4{,}3\,\%$.
+\schritt{(b)}
+$z_1 = -1{,}143$, $z_2 = 1{,}000$. $P = \Phi(1) - \Phi(-1{,}143) = 0{,}8413 - 0{,}1265 = 0{,}715$. Etwa $71{,}5\,\%$.
+\schritt{(c)}
+$\Phi(z) = 0{,}99\Rightarrow z = 2{,}326$. $x = 178 + 2{,}326\cdot7 = 194{,}3$ cm.
+\probe{Faustregeln: $\pm1\sigma$ enthält $68\,\%$, $\pm2\sigma$ $95\,\%$. (b) reicht von $-1{,}14\sigma$ bis $+1\sigma$, also etwas mehr als $68\,\%$. \checkmark\ (a) $1{,}7\sigma$ nach oben: zwischen $16\,\%$ ($1\sigma$) und $2{,}5\,\%$ ($2\sigma$). \checkmark}
+\begin{mitnehmen}\kastentext
+Standardisieren macht aus jeder Normalverteilung die eine Tabelle. $\Phi(-z) = 1 - \Phi(z)$ für negative Werte. Die Quantile $1{,}645$ ($95\,\%$), $1{,}96$ ($97{,}5\,\%$), $2{,}326$ ($99\,\%$), $2{,}576$ ($99{,}5\,\%$) sollte man auswendig kennen --- sie kehren in Konfidenzintervallen und Tests wieder.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.20
+\stupserzwei{tief}{(b) Hat man schon $k$ Bilder, ist die Chance auf ein neues $\frac{6 - k}6$, die Wartezeit darauf im Mittel $\frac6{6 - k}$. Summieren über $k = 0, \dots, 5$.}{22pt}
+\begin{loesungkarte}{tief}{4.20}{Erwartungswert ohne Verteilung}
+\derweg{Anzahl $=$ Summe von Indikatoren oder von Wartezeiten; Erwartungswerte addieren, Abhängigkeit ignorieren.}
+\schritt{(a)}
+$X_j = 1$, wenn Augenzahl $j$ mindestens einmal fällt. $P(X_j = 1) = 1 - \bigl(\frac56\bigr)^{6} = 0{,}665$. $E[\text{Anzahl verschiedener}] = 6\cdot0{,}665 = 3{,}99$. Fast genau vier von sechs.
+\schritt{(b)}
+$T_k$ = Wartezeit auf das nächste neue Bild, wenn man $k$ hat; geometrisch mit $p = \frac{6 - k}6$, $E[T_k] = \frac6{6 - k}$. $E[\text{gesamt}] = \sum_{k=0}^{5}\frac6{6 - k} = 6\bigl(1 + \frac12 + \frac13 + \frac14 + \frac15 + \frac16\bigr) = 6\cdot2{,}45 = 14{,}7$ Packungen. Das letzte Bild allein kostet im Mittel $6$.
+\schritt{(c)}
+Es gibt $n$ frühere Nachbarpaare (am runden Tisch). Für ein festes Paar: Die eine Person sitzt irgendwo; die andere auf einem der $n - 1$ übrigen Plätze, davon $2$ benachbart. $P = \frac2{n - 1}$. $E = n\cdot\frac2{n - 1} = \frac{2n}{n - 1}$ --- für großes $n$ etwa $2$, unabhängig von $n$.
+\schritt{(d)}
+Linearität: $E[X_1 + \dots + X_n] = E[X_1] + \dots + E[X_n]$ gilt \emph{immer}, ohne jede Voraussetzung an die Abhängigkeit. Nur für die Varianz braucht man mehr (Aufgabe 4.21).
+\probe{(c) $n = 3$: Alle drei sitzen immer nebeneinander, alle drei Paare bleiben: $E = 3 = \frac{2\cdot3}2$. \checkmark\ (a) Erwartete Anzahl \emph{fehlender} Zahlen $6\cdot(5/6)^{6} = 2{,}01$, zusammen $6$. \checkmark}
+\begin{mitnehmen}\kastentext
+Der Indikatortrick: Was gezählt wird, ist eine Summe von Nullen und Einsen; der Erwartungswert ist die Summe der Wahrscheinlichkeiten. Sammelbilder, Fixpunkte, Kollisionen, Nachbarpaare --- Verteilungen, die man kaum hinschreiben kann, mit Erwartungswerten in einer Zeile.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.21
+\stupserzwei{tief}{(a) $\operatorname{Var}(X_1 + X_2) = 2\cdot\frac{35}{12} = \frac{35}6$, aber $\operatorname{Var}(2X_1) = 4\cdot\frac{35}{12} = \frac{35}3$ --- doppelt so groß.}{22pt}
+\begin{loesungkarte}{tief}{4.21}{Varianz der Summe}
+\derweg{Unabhängig: Varianzen addieren. Skalieren: quadratisch. Allgemein: Kovarianzterm.}
+\schritt{(a)}
+$\operatorname{Var}(X_1 + X_2) = \frac{35}{12} + \frac{35}{12} = \frac{35}6 = 5{,}83$. $\operatorname{Var}(2X_1) = 4\cdot\frac{35}{12} = \frac{35}3 = 11{,}67$. Zwei unabhängige Würfel gleichen sich teilweise aus (hohe und niedrige Zahlen mischen sich); ein verdoppelter Würfel verdoppelt jede Abweichung. Gleicher Erwartungswert $7$, verschiedene Streuung.
+\schritt{(b)}
+$\operatorname{Var}\bar X = \operatorname{Var}\bigl(\frac1n\sum X_i\bigr) = \frac1{n^{2}}\cdot n\sigma^{2} = \frac{\sigma^{2}}n$, Standardabweichung $\frac\sigma{\sqrt n}$. Halbieren heißt $n$ vervierfachen --- das Gesetz des $\sqrt n$: Zehnfache Genauigkeit kostet hundertfachen Aufwand.
+\schritt{(c)}
+$X + Y = 0$, $\operatorname{Var} = 0$. Aus der Formel: $\operatorname{Var}X + \operatorname{Var}X + 2\operatorname{Cov}(X, -X) = 2\operatorname{Var}X - 2\operatorname{Var}X = 0$, also $\operatorname{Cov}(X, -X) = -\operatorname{Var}X$. \checkmark
+\schritt{(d)}
+Sei $\mu_X = E[X]$, $\mu_Y = E[Y]$. $\operatorname{Var}(X + Y) = E[(X - \mu_X + Y - \mu_Y)^{2}] = E[(X - \mu_X)^{2}] + E[(Y - \mu_Y)^{2}] + 2E[(X - \mu_X)(Y - \mu_Y)] = \operatorname{Var}X + \operatorname{Var}Y + 2\operatorname{Cov}(X, Y)$. $\blacksquare$ Für unabhängige $X, Y$ ist $E[(X - \mu_X)(Y - \mu_Y)] = E[X - \mu_X]E[Y - \mu_Y] = 0$.
+\probe{(a) direkt aus der Verteilung von Aufgabe 4.3: $E[S^{2}] = \sum k^{2}P(S = k) = \frac{1974}{36} = 54{,}83$, $\operatorname{Var}S = 54{,}83 - 49 = 5{,}83$. \checkmark}
+\begin{mitnehmen}\kastentext
+Varianzen addieren sich bei Unabhängigkeit, Standardabweichungen nie ($\sqrt{a + b}\neq\sqrt a + \sqrt b$). Daraus folgt alles über Messwiederholung: Fehler wachsen wie $\sqrt n$, relative Fehler schrumpfen wie $\frac1{\sqrt n}$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.22
+\stupserzwei{akzent}{(d) $E[\ln G] = \sum_{k\ge1}k\ln2\cdot2^{-k} = \ln2\cdot\sum k2^{-k} = 2\ln2$ (Aufgabe 3.46). Also $e^{2\ln2} = 4$ Euro.}{22pt}
+\begin{loesungkarte}{akzent}{4.22}{Das Sankt-Petersburg-Spiel}
+\derweg{Verteilung hinschreiben, Erwartungswert als Reihe, dann sehen, warum er nichts über das Spiel sagt.}
+\schritt{(a)}
+Kopf erstmals im $k$-ten Wurf: $P(K = k) = 2^{-k}$, Gewinn $G = 2^{k}$. $E[G] = \sum_{k\ge1}2^{k}\cdot2^{-k} = \sum_{k\ge1}1 = \infty$. Jeder Einsatz ist \enquote{fair}.
+\schritt{(b)}
+$G > 1000\iff2^{k} > 1000\iff k\ge10$: $P = 2^{-9} = \frac1{512}\approx0{,}2\,\%$. Median: $P(G\le2) = P(K = 1) = \frac12$, also Median $2$ Euro. Ein Spiel mit unendlichem Erwartungswert und Median $2$.
+\schritt{(c)}
+Auszahlung $\min(2^{k}, 2^{30})$: $E = \sum_{k=1}^{29}1 + 2^{30}\cdot P(K\ge30) = 29 + 2^{30}\cdot2^{-29} = 31$ Euro. Eine Bank mit einer Milliarde Kapital macht aus dem unendlichen Spiel eines, das $31$ Euro wert ist.
+\schritt{(d)}
+$E[\ln G] = \sum k\ln2\cdot2^{-k} = \ln2\cdot2 = 2\ln2 = 1{,}386$; $e^{1{,}386} = 4$ Euro. Mit logarithmischem Nutzen ist das Spiel vier Euro wert --- nahe an dem, was Menschen tatsächlich zahlen.
+\schritt{(e)}
+Der Erwartungswert ist ein Mittel über unendlich viele Wiederholungen. Für eine einzelne Entscheidung zählt, dass fast alle Masse bei kleinen Gewinnen liegt und der Erwartungswert von Ereignissen getrieben wird, die praktisch nie eintreten. Deshalb: Erwartungswert nur zusammen mit der Verteilung, nie allein --- und bei Entscheidungen Nutzen statt Geld.
+\probe{(c) Die Terme für $k = 1, \dots, 29$ tragen je $1$ bei; der Rest ($k\ge30$) hat Gesamtwahrscheinlichkeit $2^{-29}$ und Auszahlung $2^{30}$: Beitrag $2$. \checkmark\ (d) $\sum k2^{-k} = \frac{1/2}{(1/2)^{2}} = 2$. \checkmark}
+\begin{fehler}\kastentext
+\enquote{Fairer Einsatz $=$ Erwartungswert} setzt voraus, dass der Erwartungswert existiert und die Verteilung nicht pathologisch ist. Schwere Ränder (hier: $P(G > x)\approx\frac2x$) machen den Erwartungswert unendlich oder instabil --- dasselbe Phänomen bei Cauchy-Verteilungen, Pareto-Einkommen und Versicherungsschäden.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Bernoullis Antwort (1738) --- der Nutzen des Geldes wächst logarithmisch --- wurde zur Grundlage der Entscheidungstheorie. Die moderne Lesart: Die Varianz zählt mit, und ein Spiel mit unendlicher Varianz ist für einen Einzelnen nie fair.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.23
+\stupserzwei{gruen}{Varianz: $\operatorname{Var}X_i = \frac1n\bigl(1 - \frac1n\bigr)$, $\operatorname{Cov}(X_i, X_j) = \frac1{n(n - 1)} - \frac1{n^{2}}$ für $i\neq j$; es gibt $n(n - 1)$ solche Paare.}{22pt}
+\begin{loesungkarte}{gruen}{4.23}{Wie viele Briefe liegen richtig?}
+\derweg{Indikatoren summieren; für die Varianz die Kovarianzen mitnehmen.}
+\schritt{Erwartungswert}
+$X_i = 1$, wenn Brief $i$ richtig. $P(X_i = 1) = \frac1n$. $E[X] = \sum E[X_i] = n\cdot\frac1n = 1$. Unabhängig von $n$: Im Mittel liegt genau ein Brief richtig.
+\schritt{Varianz}
+$\operatorname{Var}X_i = \frac1n - \frac1{n^{2}}$. $P(X_i = X_j = 1) = \frac{(n - 2)!}{n!} = \frac1{n(n - 1)}$, also $\operatorname{Cov}(X_i, X_j) = \frac1{n(n - 1)} - \frac1{n^{2}} = \frac1{n^{2}(n - 1)}$.
+\[ \operatorname{Var}X = n\Bigl(\frac1n - \frac1{n^{2}}\Bigr) + n(n - 1)\cdot\frac1{n^{2}(n - 1)} = 1 - \frac1n + \frac1n = 1 . \]
+Auch die Varianz ist $1$, für jedes $n\ge2$.
+\probe{$n = 2$: $X\in\{0, 2\}$ je mit $\frac12$; $E = 1$, $\operatorname{Var} = \frac12(1 + 1) = 1$. \checkmark\ $n = 3$: $X = 0$ ($\frac26$), $1$ ($\frac36$), $3$ ($\frac16$); $E = \frac{3 + 3}6 = 1$, $E[X^{2}] = \frac{3 + 9}6 = 2$, $\operatorname{Var} = 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Erwartungswert $1$ und Varianz $1$ für alle $n$ --- und die Verteilung der Fixpunkte konvergiert gegen $\operatorname{Poi}(1)$ (dort ist $P(X = 0) = e^{-1}$, Aufgabe 4.2). Die Indikatoren sind schwach abhängig (Kovarianz $\sim n^{-3}$), und das reicht, damit die Poisson-Näherung greift.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.24
+\stupserzwei{gruen}{$E[X(X - 1)] = \sum_{k\ge2}k(k - 1)e^{-\lambda}\frac{\lambda^{k}}{k!} = \lambda^{2}e^{-\lambda}\sum_{k\ge2}\frac{\lambda^{k-2}}{(k - 2)!} = \lambda^{2}$.}{22pt}
+\begin{loesungkarte}{gruen}{4.24}{Erwartungswert und Varianz der Poisson-Verteilung}
+\derweg{Faktoren $k$ und $k(k - 1)$ gegen die Fakultät kürzen; die Exponentialreihe bleibt übrig.}
+\schritt{Erwartungswert}
+$E[X] = \sum_{k\ge0}k\,e^{-\lambda}\frac{\lambda^{k}}{k!} = e^{-\lambda}\sum_{k\ge1}\frac{\lambda^{k}}{(k - 1)!} = \lambda e^{-\lambda}\sum_{j\ge0}\frac{\lambda^{j}}{j!} = \lambda e^{-\lambda}e^{\lambda} = \lambda$.
+\schritt{Zweites faktorielles Moment}
+$E[X(X - 1)] = e^{-\lambda}\sum_{k\ge2}\frac{\lambda^{k}}{(k - 2)!} = \lambda^{2}e^{-\lambda}e^{\lambda} = \lambda^{2}$.
+\schritt{Varianz}
+$E[X^{2}] = E[X(X - 1)] + E[X] = \lambda^{2} + \lambda$. $\operatorname{Var}X = \lambda^{2} + \lambda - \lambda^{2} = \lambda$.
+\probe{Als Grenzfall der Binomialverteilung: $np = \lambda$, $np(1 - p)\to\lambda$ für $p\to0$. \checkmark\ Aufgabe 4.17: $\lambda = 2{,}5$, Standardabweichung $1{,}58$. \checkmark}
+\begin{mitnehmen}\kastentext
+$E[X] = \operatorname{Var}X = \lambda$ ist der Fingerabdruck der Poisson-Verteilung --- und der Test: Zähldaten mit Varianz $\gg$ Mittelwert sind nicht Poisson. Der Trick $E[X(X - 1)]$ statt $E[X^{2}]$ funktioniert bei allen Verteilungen mit Fakultäten oder Binomialkoeffizienten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.25
+\stupserzwei{gruen}{$G_{X+Y}(s) = G_X(s)G_Y(s) = e^{\lambda(s - 1)}e^{\mu(s - 1)} = e^{(\lambda + \mu)(s - 1)}$ --- die erzeugende Funktion von $\operatorname{Poi}(\lambda + \mu)$.}{22pt}
+\begin{loesungkarte}{gruen}{4.25}{Poisson plus Poisson}
+\derweg{Erzeugende Funktion berechnen, Produktregel für unabhängige Summanden, Eindeutigkeit.}
+\schritt{Erzeugende Funktion}
+$G_X(s) = E[s^{X}] = \sum_{k\ge0}s^{k}e^{-\lambda}\frac{\lambda^{k}}{k!} = e^{-\lambda}e^{\lambda s} = e^{\lambda(s - 1)}$.
+\schritt{Summe}
+Für unabhängige $X, Y$: $G_{X+Y}(s) = E[s^{X}s^{Y}] = E[s^{X}]E[s^{Y}] = e^{\lambda(s - 1)}e^{\mu(s - 1)} = e^{(\lambda + \mu)(s - 1)}$.
+\schritt{Schluss}
+Das ist die erzeugende Funktion von $\operatorname{Poi}(\lambda + \mu)$, und die erzeugende Funktion bestimmt die Verteilung eindeutig. $\blacksquare$
+\schritt{Deutung}
+Zwei Stationen mit $2{,}5$ und $1{,}5$ Infektionen pro Woche haben zusammen $\operatorname{Poi}(4)$ --- Poisson-Prozesse überlagern sich zu Poisson-Prozessen. Umgekehrt (Aufgabe 4.28): Ausdünnen gibt wieder Poisson.
+\probe{$G_X'(1) = \lambda = E[X]$, $G_X''(1) = \lambda^{2} = E[X(X - 1)]$ --- die Momente aus Aufgabe 4.24. \checkmark}
+\begin{mitnehmen}\kastentext
+Faltung von Verteilungen $=$ Produkt der erzeugenden Funktionen. Dieselbe Idee heißt bei stetigen Verteilungen charakteristische Funktion (Fourier-Transformierte) und beweist den zentralen Grenzwertsatz.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.26
+\stupserzwei{akzent}{(d) $\operatorname{Cov}(X_1 + X_2, X_1 - X_2) = \operatorname{Var}X_1 - \operatorname{Var}X_2 = 0$. Aber $S = 12$ erzwingt $D = 0$.}{22pt}
+\begin{loesungkarte}{akzent}{4.26}{Unkorreliert, aber abhängig}
+\derweg{Kovarianz ausrechnen (null), Unabhängigkeit an einer Zelle widerlegen.}
+\schritt{(a)}
+$E[X] = 0$, $E[XY] = E[X^{3}] = \frac{-1 + 0 + 1}3 = 0$. $\operatorname{Cov}(X, Y) = 0 - 0\cdot E[Y] = 0$. Unabhängig? $P(X = 0, Y = 0) = \frac13$, aber $P(X = 0)P(Y = 0) = \frac13\cdot\frac13 = \frac19$. Nein --- $Y$ ist sogar eine Funktion von $X$.
+\schritt{(b)}
+Unabhängig $\Rightarrow E[XY] = E[X]E[Y]$ (für Indikatoren ist das die Produktformel, allgemein folgt es durch Approximation). Also $\operatorname{Cov} = E[XY] - E[X]E[Y] = 0$. $\blacksquare$
+\schritt{(c)}
+Sind $(X, Y)$ gemeinsam normalverteilt, so folgt aus $\operatorname{Cov} = 0$ die Unabhängigkeit --- die gemeinsame Dichte faktorisiert dann. Das ist die große Ausnahme und der Grund, warum man in der Statistik so oft mit Korrelationen auskommt.
+\schritt{(d)}
+$\operatorname{Cov}(S, D) = \operatorname{Cov}(X_1, X_1) - \operatorname{Cov}(X_1, X_2) + \operatorname{Cov}(X_2, X_1) - \operatorname{Cov}(X_2, X_2) = \operatorname{Var}X_1 - \operatorname{Var}X_2 = 0$. Unabhängig sind sie nicht: $P(D = 0\mid S = 12) = 1\neq P(D = 0) = \frac16$. Summe und Differenz sind unkorreliert, aber die Summe verrät die Parität der Differenz.
+\begin{fehler}\kastentext
+\enquote{Korrelation null, also kein Zusammenhang} --- nein: kein \emph{linearer} Zusammenhang. Ein Streudiagramm in Form einer Parabel oder eines Kreises hat Korrelation null und perfekten Zusammenhang. Vor jeder Korrelation: das Bild ansehen.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Unabhängig $\Rightarrow$ unkorreliert; unkorreliert $\Rightarrow$ Varianzen addieren sich. Die zweite Folgerung braucht also weniger als Unabhängigkeit --- deshalb gilt $\operatorname{Var}(S + D) = \operatorname{Var}S + \operatorname{Var}D$ in (d), obwohl $S$ und $D$ abhängig sind.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.27
+\stupserzwei{gruen}{$E[XY] = 1\cdot1\cdot0{,}1 + 1\cdot2\cdot0{,}3 = 0{,}7$; $E[X] = 0{,}6$, $E[Y] = 0{,}3 + 0{,}8 = 1{,}1$; $\operatorname{Cov} = 0{,}7 - 0{,}66 = 0{,}04$.}{22pt}
+\begin{loesungkarte}{gruen}{4.27}{Eine gemeinsame Verteilung}
+\derweg{Ränder, Erwartungswerte, $E[XY]$ aus der Tabelle; Varianzen aus den Rändern; eine Zelle für die Unabhängigkeit.}
+\schritt{Erwartungswerte}
+$E[X] = 0\cdot0{,}4 + 1\cdot0{,}6 = 0{,}6$. $E[Y] = 0\cdot0{,}3 + 1\cdot0{,}3 + 2\cdot0{,}4 = 1{,}1$. $E[XY]$: nur Zellen mit $X = 1$, $Y\ge1$: $1\cdot0{,}1 + 2\cdot0{,}3 = 0{,}7$.
+\schritt{Kovarianz}
+$\operatorname{Cov}(X, Y) = 0{,}7 - 0{,}6\cdot1{,}1 = 0{,}04$.
+\schritt{Korrelation}
+$\operatorname{Var}X = 0{,}6\cdot0{,}4 = 0{,}24$. $E[Y^{2}] = 0{,}3 + 4\cdot0{,}4 = 1{,}9$, $\operatorname{Var}Y = 1{,}9 - 1{,}21 = 0{,}69$. $\operatorname{Korr} = \frac{0{,}04}{\sqrt{0{,}24\cdot0{,}69}} = \frac{0{,}04}{0{,}407} = 0{,}098$. Schwach positiv.
+\schritt{Unabhängigkeit}
+$P(X = 0, Y = 0) = 0{,}1$, aber $P(X = 0)P(Y = 0) = 0{,}4\cdot0{,}3 = 0{,}12$. Nicht unabhängig --- eine Zelle genügt zum Nein. (Zum Ja müssten alle sechs stimmen.)
+\probe{Kovarianz über zentrierte Werte: $\sum(x - 0{,}6)(y - 1{,}1)p$: Zelle $(0, 0)$: $(-0{,}6)(-1{,}1)0{,}1 = 0{,}066$; $(0, 1)$: $(-0{,}6)(-0{,}1)0{,}2 = 0{,}012$; $(0, 2)$: $(-0{,}6)(0{,}9)0{,}1 = -0{,}054$; $(1, 0)$: $0{,}4(-1{,}1)0{,}2 = -0{,}088$; $(1, 1)$: $0{,}4(-0{,}1)0{,}1 = -0{,}004$; $(1, 2)$: $0{,}4\cdot0{,}9\cdot0{,}3 = 0{,}108$. Summe $0{,}040$. \checkmark}
+\begin{mitnehmen}\kastentext
+Aus einer Kontingenztafel: Ränder summieren, $E[XY]$ über die Zellen, Kovarianz als $E[XY] - E[X]E[Y]$, Korrelation normieren. Die Korrelation liegt in $[-1, 1]$ und ist einheitenfrei; $0{,}1$ ist praktisch nichts --- und trotzdem sind die Variablen abhängig.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.28
+\stupserzwei{gruen}{$\sum_{n\ge k}e^{-\lambda}\frac{\lambda^{n}}{n!}\binom nkp^{k}(1 - p)^{n-k} = e^{-\lambda}\frac{(\lambda p)^{k}}{k!}\sum_{n\ge k}\frac{(\lambda(1 - p))^{n-k}}{(n - k)!}$, und die Summe ist $e^{\lambda(1 - p)}$.}{22pt}
+\begin{loesungkarte}{gruen}{4.28}{Eier und Küken}
+\derweg{Totale Wahrscheinlichkeit über $N$; Binomialkoeffizient und Fakultät umsortieren; Exponentialreihe.}
+\schritt{Rechnung}
+\begin{align*}
+P(K = k) &= \sum_{n\ge k}P(N = n)\,P(K = k\mid N = n)\\
+&= \sum_{n\ge k}e^{-\lambda}\frac{\lambda^{n}}{n!}\cdot\frac{n!}{k!\,(n - k)!}\,p^{k}(1 - p)^{n-k}\\
+&= e^{-\lambda}\frac{(\lambda p)^{k}}{k!}\sum_{m\ge0}\frac{(\lambda(1 - p))^{m}}{m!}\\
+&= e^{-\lambda}\frac{(\lambda p)^{k}}{k!}\,e^{\lambda(1 - p)} = e^{-\lambda p}\frac{(\lambda p)^{k}}{k!}.
+\end{align*}
+Also $K\sim\operatorname{Poi}(\lambda p)$.
+\schritt{Erwartungswert, zwei Wege}
+Aus der Verteilung: $E[K] = \lambda p$. Über bedingte Erwartung: $E[K] = E[E[K\mid N]] = E[Np] = p\lambda$. \checkmark
+\probe{$p = 1$: alle Eier schlüpfen, $K = N\sim\operatorname{Poi}(\lambda)$. \checkmark\ $p = 0$: $K = 0$, $\operatorname{Poi}(0)$. \checkmark\ Außerdem sind $K$ und $N - K$ (geschlüpft und nicht geschlüpft) unabhängig --- eine Besonderheit der Poisson-Verteilung.}
+\begin{mitnehmen}\kastentext
+Poisson-Ausdünnung: Werden Poisson-Ereignisse unabhängig mit Wahrscheinlichkeit $p$ behalten, bleibt Poisson mit Rate $\lambda p$. Zusammen mit der Überlagerung (Aufgabe 4.25) macht das Poisson-Prozesse zum Baukasten für Zähldaten: Erkannte Fälle bei unvollständiger Meldung, Mutationen, die eine Zelle überleben, Photonen, die den Detektor erreichen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.29
+\stupserzwei{gruen}{Erwartete Zahl der Blöcke bis zum Treffer: $90^{L}$, jeder Block $L$ Zeichen. $90^{180\,000} = 10^{351\,764}$.}{22pt}
+\begin{loesungkarte}{gruen}{4.29}{Der Affe und Hamlet}
+\derweg{Disjunkte Blöcke, unabhängige Ereignisse mit festem $p > 0$, Borel--Cantelli.}
+\schritt{Modell}
+$L\approx180\,000$ Zeichen. $A_n$ = \enquote{Block $n$ (Zeichen $(n - 1)L + 1$ bis $nL$) ist genau Hamlet}. Die Blöcke benutzen disjunkte Zeichen, also sind die $A_n$ unabhängig, mit $P(A_n) = 90^{-L} =: p > 0$.
+\schritt{Borel--Cantelli}
+$\sum_nP(A_n) = \sum_np = \infty$. Für unabhängige Ereignisse mit divergenter Summe tritt fast sicher unendlich oft eines ein (zweites Lemma von Borel--Cantelli). Also: Mit Wahrscheinlichkeit $1$ tippt der Affe Hamlet --- sogar unendlich oft.
+\schritt{Elementar}
+$P(\text{kein Treffer in } n \text{ Blöcken}) = (1 - p)^{n}\to0$ für $n\to\infty$, weil $p > 0$. Das Gegenereignis hat Wahrscheinlichkeit $1$.
+\schritt{Dauer}
+Wartezeit auf den ersten Treffer: geometrisch, im Mittel $\frac1p = 90^{L}$ Blöcke, also $L\cdot90^{L}\approx10^{351\,770}$ Zeichen. Das Universum ist etwa $4\cdot10^{17}$ Sekunden alt. \enquote{Fast sicher} und \enquote{praktisch nie} schließen sich nicht aus.
+\probe{(Die Blockzerlegung unterschätzt: Hamlet könnte auch über eine Blockgrenze hinweg erscheinen. Das macht die Wahrscheinlichkeit nur größer --- für den Beweis reicht die Unterschranke.) \checkmark}
+\begin{mitnehmen}\kastentext
+Borel--Cantelli in beiden Richtungen: $\sum P(A_n) < \infty\Rightarrow$ fast sicher nur endlich viele $A_n$ (ohne Unabhängigkeit); $\sum P(A_n) = \infty$ und unabhängig $\Rightarrow$ fast sicher unendlich viele. Das Null-Eins-Gesetz dahinter: Solche Ereignisse haben nie Wahrscheinlichkeit $0{,}7$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.30
+\stupserzwei{akzent}{(b) Nach $1000$ Würfen erwartet man $60 + 450 = 510$ Köpfe: Anteil $0{,}51$. Der Überschuss von $10$ ist noch da --- er wiegt nur weniger.}{22pt}
+\begin{loesungkarte}{akzent}{4.30}{Der Spielerfehlschluss}
+\derweg{Unabhängigkeit der Würfe; Erwartungswert des Anteils ausrechnen; das Gesetz präzise formulieren.}
+\schritt{(a)}
+$P(\text{Kopf im 11.\ Wurf}) = \frac12$. Die Würfe sind unabhängig; die Münze weiß nichts von den zehn vorigen. Die Serie hatte vorher Wahrscheinlichkeit $2^{-10}\approx0{,}1\,\%$ --- aber sie ist eingetreten, und $P(\text{ZZZZZZZZZZK}) = P(\text{ZZZZZZZZZZZ}) = 2^{-11}$. Jede konkrete Folge ist gleich unwahrscheinlich.
+\schritt{(b)}
+Erwartete Köpfe in den nächsten $900$ Würfen: $450$. Gesamt: $510$ von $1000$, Anteil $0{,}51$. Der Überschuss von $10$ Köpfen bleibt im Erwartungswert bestehen; er wird nicht ausgeglichen, sondern durch die vielen neuen Würfe \emph{verdünnt}: $\frac{10}{100} = 10\,\%$ Abweichung werden zu $\frac{10}{1000} = 1\,\%$.
+\schritt{(c)}
+Das Gesetz der großen Zahlen sagt: Der \emph{Anteil} $\frac{H_n}n$ konvergiert gegen $\frac12$. Es sagt nichts über die \emph{Differenz} $H_n - \frac n2$ --- die wächst typischerweise wie $\sqrt n$ (Aufgabe 4.31). Ein Ausgleichsgesetz gibt es nicht; es gibt ein Verdünnungsgesetz.
+\schritt{(d)}
+Richtig ist: Vier Komplikationen in einer Woche sind \emph{insgesamt} selten. Falsch ist der Schluss auf die nächste: Sind die Komplikationen unabhängig, ist die vierte genauso wahrscheinlich wie jede andere. (Sind sie es nicht --- Erschöpfung, ein Systemproblem ---, dann wird die vierte eher \emph{wahrscheinlicher}. In keinem Modell wird sie unwahrscheinlicher.)
+\begin{fehler}\kastentext
+Der Spielerfehlschluss verwechselt \enquote{eine lange Serie ist unwahrscheinlich} (richtig, vorher) mit \enquote{nach einer langen Serie ist das Gegenteil wahrscheinlicher} (falsch). Die Münze hat kein Gedächtnis, und das Gesetz der großen Zahlen hat keine Gegenkraft.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Anteile konvergieren, Differenzen nicht. Dieser eine Satz entlarvt Roulette-Systeme, \enquote{fällige} Lottozahlen und die Hoffnung, eine Pechsträhne müsse sich ausgleichen. Was sich ausgleicht, ist nur das Gewicht der Vergangenheit.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.31
+\stupserzwei{gruen}{$\operatorname{Var}(H_n) = \frac n4$; $\sqrt{n/4} = \frac{\sqrt n}2$. Für $n = 10^{6}$: $500$ --- bei Anteil $0{,}5\pm0{,}0005$.}{22pt}
+\begin{loesungkarte}{gruen}{4.31}{Was das Gesetz der großen Zahlen sagt}
+\derweg{Starkes Gesetz für den Anteil; Varianzrechnung für die Differenz.}
+\schritt{(a)}
+$H_n = \sum X_k$ mit unabhängigen $X_k\in\{0, 1\}$, $E[X_k] = \frac12$. Starkes Gesetz: $\frac{H_n}n\to\frac12$ fast sicher --- für fast jede konkrete Wurffolge konvergiert der Anteil.
+\schritt{(b)}
+Nein. $H_n - \frac n2$ hat Erwartungswert $0$ und Varianz $\operatorname{Var}H_n = \frac n4$, die gegen $\infty$ geht. Die Differenz konvergiert nicht gegen $0$; sie schwankt immer weiter aus. (Sie kehrt zwar unendlich oft nach $0$ zurück --- die symmetrische Irrfahrt ist rekurrent ---, aber sie bleibt nicht dort.)
+\schritt{(c)}
+Typische Größe $=$ Standardabweichung $\frac{\sqrt n}2$. $n = 10^{4}$: $50$ Köpfe Abweichung, Anteil $0{,}5\pm0{,}005$. $n = 10^{6}$: $500$ Köpfe, Anteil $0{,}5\pm0{,}0005$. Die absolute Abweichung verzehnfacht sich, die relative schrumpft auf ein Zehntel.
+\probe{Zentraler Grenzwertsatz: $\frac{H_n - n/2}{\sqrt n/2}\approx N(0, 1)$, also $|H_n - \frac n2| > \sqrt n$ (zwei Standardabweichungen) in etwa $5\,\%$ der Fälle. Für $n = 100$: Abweichung über $10$ in $5\,\%$ --- Aufgabe 4.32 gibt $27\,\%$ für Abweichung über $5$. \checkmark}
+\begin{mitnehmen}\kastentext
+$\frac{H_n}n\to\frac12$ (Gesetz der großen Zahlen), $\frac{H_n - n/2}{\sqrt n}\to N(0, \frac14)$ (zentraler Grenzwertsatz), $H_n - \frac n2$ konvergiert nicht. Drei Skalen, drei Aussagen; der Spielerfehlschluss (Aufgabe 4.30) überträgt die erste auf die dritte.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.32
+\stupserzwei{gruen}{Exakt $0{,}7287$; ohne Korrektur $0{,}6827$ (Fehler $4{,}6$ Prozentpunkte); mit Korrektur $0{,}7287$ (Fehler $0{,}0001$).}{22pt}
+\begin{loesungkarte}{gruen}{4.32}{Hundert Münzwürfe}
+\derweg{$\mu = 50$, $\sigma = 5$; standardisieren mit und ohne halbe Einheit Rand.}
+\schritt{(a) exakt}
+$P(45\le X\le55) = 2^{-100}\sum_{k=45}^{55}\binom{100}k = 0{,}72875$ (Rechner).
+\schritt{(b) ohne Korrektur}
+$P\bigl(\frac{45 - 50}5\le Z\le\frac{55 - 50}5\bigr) = \Phi(1) - \Phi(-1) = 0{,}6827$. Fehler $0{,}046$ --- zu klein, weil die Balken bei $45$ und $55$ nur halb mitgezählt werden.
+\schritt{(c) mit Korrektur}
+Die diskreten Werte $45, \dots, 55$ entsprechen dem Intervall $[44{,}5;\ 55{,}5]$: $\Phi\bigl(\frac{5{,}5}5\bigr) - \Phi\bigl(-\frac{5{,}5}5\bigr) = \Phi(1{,}1) - \Phi(-1{,}1) = 2\cdot0{,}8643 - 1 = 0{,}7287$. Fehler $0{,}0001$.
+\begin{center}
+\begin{tikzpicture}[x=0.42cm,y=11cm]
+\foreach \k in {40,...,60} {\pgfmathsetmacro{\h}{exp(-(\k-50)^2/50)/sqrt(50*pi)}
+  \ifnum\k>44 \ifnum\k<56 \fill[tief!60] (\k-50-0.45,0) rectangle (\k-50+0.45,\h); \else \fill[linie] (\k-50-0.45,0) rectangle (\k-50+0.45,\h); \fi \else \fill[linie] (\k-50-0.45,0) rectangle (\k-50+0.45,\h); \fi}
+\draw[akzent,thick,domain=-10.5:10.5,samples=100,smooth] plot (\x,{exp(-\x*\x/50)/sqrt(50*pi)});
+\draw[akzent,dashed] (-5.5,0)--(-5.5,0.045) node[above,font=\scriptsize] {$44{,}5$}; \draw[akzent,dashed] (5.5,0)--(5.5,0.045) node[above,font=\scriptsize] {$55{,}5$};
+\draw[linie] (-11,0)--(11,0); \foreach \k in {40,45,50,55,60} {\node[below,font=\scriptsize,grau] at (\k-50,0) {\k};}
+\end{tikzpicture}
+\end{center}
+\probe{Symmetrie: $P(X\le44) = P(X\ge56) = \frac{1 - 0{,}7287}2 = 0{,}1356$; Normalnäherung $\Phi(-1{,}1) = 0{,}1357$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Stetigkeitskorrektur ersetzt ganzzahlige Grenzen $a\le X\le b$ durch $a - \frac12\le X\le b + \frac12$. Sie kostet nichts und verbessert die Näherung um eine Größenordnung --- besonders bei kleinem $\sigma$. Faustregel für die Anwendbarkeit: $np(1 - p)\ge9$; hier $25$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.33
+\stupserzwei{gruen}{$32 + 1{,}645\cdot5{,}43 = 40{,}9$; $32 + 2{,}326\cdot5{,}43 = 44{,}6$. Also: ab $41$ erhöht, ab $45$ auffällig.}{22pt}
+\begin{loesungkarte}{gruen}{4.33}{Wann wird man stutzig?}
+\derweg{Normalnäherung der Binomialverteilung; einseitige Schranken bei $95\,\%$ und $99\,\%$; dann das Problem, wenn viele gleichzeitig geprüft werden.}
+\schritt{Modell}
+$X\sim\operatorname{Bin}(400;\ 0{,}08)$, $\mu = 32$, $\sigma = \sqrt{400\cdot0{,}08\cdot0{,}92} = \sqrt{29{,}44} = 5{,}43$. $np(1 - p) = 29{,}4\ge9$: Normalnäherung zulässig.
+\schritt{Schranken}
+Einseitig (nur zu viele Komplikationen interessieren): $95\,\%$-Schranke $\mu + 1{,}645\sigma = 40{,}9$, $99\,\%$-Schranke $\mu + 2{,}326\sigma = 44{,}6$. Mit Stetigkeitskorrektur: $P(X\ge45)\approx1 - \Phi\bigl(\frac{44{,}5 - 32}{5{,}43}\bigr) = 1 - \Phi(2{,}30) = 0{,}011$; exakt $0{,}0106$.
+\schritt{Deutung}
+Bis $40$: unauffällig. $41$ bis $44$: erhöht --- aber bei unveränderter Qualität in etwa jedem zwanzigsten Jahr zu erwarten. Ab $45$: auffällig, etwa einmal in hundert Jahren durch Zufall.
+\schritt{Multiples Testen}
+Prüft man $1900$ Krankenhäuser mit der $99\,\%$-Schranke, erwartet man $19$ falsche Alarme pro Jahr --- bei lauter einwandfreien Häusern. Die Schranke muss dann strenger sein (Bonferroni: Niveau $\frac{0{,}01}{1900}$, Schranke $\mu + 4{,}4\sigma\approx56$), oder man kontrolliert den Anteil falscher Alarme statt der Wahrscheinlichkeit eines einzigen (False Discovery Rate).
+\probe{Exakt $P(X\ge41) = 0{,}0625$, Näherung $1 - \Phi\bigl(\frac{40{,}5 - 32}{5{,}43}\bigr) = 1 - \Phi(1{,}57) = 0{,}058$. \checkmark}
+\begin{mitnehmen}\kastentext
+Eine Kontrollgrenze ist eine Aussage über \emph{ein} Krankenhaus in \emph{einem} Jahr. Wer viele prüft oder lange beobachtet, muss die Grenze anheben --- sonst findet er Auffälligkeiten, die nur die Zahl der Prüfungen widerspiegeln. Das ist die statistische Seite jeder Qualitätsüberwachung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.34
+\stupserzwei{tief}{Aus $E_1$ führt eine Nicht-Sechs zurück nach $E_0$, nicht nach $E_1$: Die Sechs ist verloren. Das ist der Grund, warum $42$ und nicht $36$ herauskommt.}{22pt}
+\begin{loesungkarte}{tief}{4.34}{Zwei Sechsen hintereinander}
+\derweg{Zustände nach einem Wurf beschreiben und für jeden eine Gleichung für die restliche Wartezeit aufstellen.}
+\schritt{(a) --- bis zur ersten Sechs}
+Sei $E$ die mittlere Zahl der Würfe. Ein Wurf; mit $\frac16$ fertig, mit $\frac56$ wieder am Anfang: $E = 1 + \frac56E$, also $E = 6$.
+\schritt{(b), (c) --- zwei Zustände}
+\begin{center}
+\begin{tikzpicture}[font=\small,node distance=3.4cm,
+  zst/.style={draw=tief,circle,minimum size=1.5cm,align=center,fill=white},
+  pf/.style={->,thick,grau}]
+\node[zst] (z0) {$E_0$\\[-2pt]{\scriptsize keine 6}};
+\node[zst,right of=z0] (z1) {$E_1$\\[-2pt]{\scriptsize zuletzt 6}};
+\node[draw=gruen,thick,circle,minimum size=1.5cm,right of=z1,align=center,fill=gruen!8] (zz) {\textbf{fertig}\\[-2pt]{\scriptsize 6, 6}};
+\draw[pf] (z0) to[out=60,in=120] node[above,font=\scriptsize]{$\frac16$} (z1);
+\draw[pf] (z1) to[out=-120,in=-60] node[below,font=\scriptsize]{$\frac56$} (z0);
+\draw[pf] (z1) -- node[above,font=\scriptsize]{$\frac16$} (zz);
+\draw[pf] (z0) to[out=160,in=200,looseness=4] node[left,font=\scriptsize]{$\frac56$} (z0);
+\end{tikzpicture}
+\end{center}
+Aus $E_0$: ein Wurf, dann mit $\frac16$ nach $E_1$, mit $\frac56$ zurück. Aus $E_1$: ein Wurf, mit $\frac16$ fertig, mit $\frac56$ zurück nach $E_0$.
+\[ E_0 = 1 + \tfrac56E_0 + \tfrac16E_1,\qquad E_1 = 1 + \tfrac56E_0 . \]
+Die erste gibt $E_0 = 6 + E_1$; einsetzen: $E_1 = 1 + \frac56(6 + E_1) = 6 + \frac56E_1$, also $E_1 = 36$ und $E_0 = 42$.
+\schritt{(d) --- Grenzfall Münze}
+$p = \frac12$: $E_0 = 2 + E_1$, $E_1 = 1 + \frac12(2 + E_1) = 2 + \frac12E_1$, also $E_1 = 4$, $E_0 = 6$. Sechs Münzwürfe bis zweimal Kopf hintereinander --- plausibel: In vier Würfen gelingt es etwa jedes zweite Mal.
+\probe{Allgemein $E_0 = \frac1p + \frac1{p^{2}}$: $6 + 36 = 42$ und $2 + 4 = 6$. \checkmark\ Warum nicht $36 = 6\cdot6$? Weil eine Sechs ohne Nachfolgerin nichts nützt --- man beginnt von vorn, und das kostet im Mittel die $6$ Würfe extra.}
+\begin{mitnehmen}\kastentext
+Wartezeiten rechnet man mit Zuständen: Was ist nach einem Schritt passiert, und wo stehe ich dann? Die Reihe, die man sonst summieren müsste, steckt in der Unbekannten. Das ist die Methode des ersten Schritts --- dieselbe wie beim Ruinproblem (Aufgabe 4.37).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.35
+\stupserzwei{gruen}{Nach zwei Wochen: $(0{,}4;\ 0{,}5;\ 0{,}1)\cdot P = (0{,}36 + 0{,}20 + 0{,}01;\ \dots)$.}{22pt}
+\begin{loesungkarte}{gruen}{4.35}{Ein Patient in zwei Wochen}
+\derweg{Zeilenvektor mal Matrix, zweimal.}
+\schritt{Prüfen}
+Zeilensummen von $P$: $1$, $1$, $1$. \checkmark\ Stochastische Matrix.
+\schritt{Eine Woche}
+$\pi_0 = (0, 1, 0)$. $\pi_1 = \pi_0P$ = zweite Zeile $= (0{,}40;\ 0{,}50;\ 0{,}10)$.
+\schritt{Zwei Wochen}
+$\pi_2 = \pi_1P$: G: $0{,}4\cdot0{,}9 + 0{,}5\cdot0{,}4 + 0{,}1\cdot0{,}1 = 0{,}36 + 0{,}20 + 0{,}01 = 0{,}57$. L: $0{,}4\cdot0{,}08 + 0{,}5\cdot0{,}5 + 0{,}1\cdot0{,}3 = 0{,}032 + 0{,}25 + 0{,}03 = 0{,}312$. S: $0{,}4\cdot0{,}02 + 0{,}5\cdot0{,}1 + 0{,}1\cdot0{,}6 = 0{,}008 + 0{,}05 + 0{,}06 = 0{,}118$. \\
+$\pi_2 = (0{,}570;\ 0{,}312;\ 0{,}118)$: In zwei Wochen ist der Patient mit $57\,\%$ gesund, $31\,\%$ leicht und $12\,\%$ schwer erkrankt.
+\probe{$0{,}570 + 0{,}312 + 0{,}118 = 1{,}000$. \checkmark\ Plausibel: Von L aus zieht es stark nach G ($0{,}4$ pro Woche), und G ist klebrig ($0{,}9$).}
+\begin{mitnehmen}\kastentext
+$\pi_n = \pi_0P^{n}$: Die Verteilung nach $n$ Schritten ist Zeilenvektor mal $n$-te Potenz. Das Eintragsmuster von $P^{n}$ nähert sich der stationären Verteilung in allen Zeilen (Aufgabe 4.36) --- die Kette vergisst, wo sie angefangen hat.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.36
+\stupserzwei{gruen}{Aus (I): $0{,}1\pi_G = 0{,}4\pi_L + 0{,}1\pi_S$. Aus (III): $0{,}4\pi_S = 0{,}02\pi_G + 0{,}1\pi_L$. Zwei Gleichungen, dann normieren.}{22pt}
+\begin{loesungkarte}{gruen}{4.36}{Die stationäre Verteilung}
+\derweg{$\pi P = \pi$ als Bilanzgleichungen (Zufluss gleich Abfluss), zwei davon plus Normierung.}
+\schritt{Gleichungen}
+$\pi = (\pi_G, \pi_L, \pi_S)$ mit $\pi P = \pi$, spaltenweise:
+(I) $0{,}9\pi_G + 0{,}4\pi_L + 0{,}1\pi_S = \pi_G$, also $0{,}4\pi_L + 0{,}1\pi_S = 0{,}1\pi_G$. \\
+(III) $0{,}02\pi_G + 0{,}1\pi_L + 0{,}6\pi_S = \pi_S$, also $0{,}02\pi_G + 0{,}1\pi_L = 0{,}4\pi_S$. \\
+(II) ist redundant; dafür (IV) $\pi_G + \pi_L + \pi_S = 1$.
+\schritt{Lösen}
+Aus (I): $\pi_G = 4\pi_L + \pi_S$. In (III): $0{,}08\pi_L + 0{,}02\pi_S + 0{,}1\pi_L = 0{,}4\pi_S$, also $0{,}18\pi_L = 0{,}38\pi_S$, $\pi_L = \frac{19}9\pi_S$. Dann $\pi_G = \frac{76}9\pi_S + \pi_S = \frac{85}9\pi_S$. Normierung: $\pi_S\bigl(\frac{85}9 + \frac{19}9 + 1\bigr) = \pi_S\cdot\frac{113}9 = 1$, $\pi_S = \frac9{113}$.
+\[ \pi = \Bigl(\frac{85}{113}, \frac{19}{113}, \frac9{113}\Bigr) = (0{,}752;\ 0{,}168;\ 0{,}080). \]
+\schritt{Deutung}
+Langfristig ist der Patient $8\,\%$ der Zeit schwer krank. Mittlere Rückkehrzeit nach S: $\frac1{\pi_S} = \frac{113}9 = 12{,}6$ Wochen --- etwa alle drei Monate eine schwere Phase.
+\probe{(II): $0{,}08\cdot0{,}752 + 0{,}5\cdot0{,}168 + 0{,}3\cdot0{,}080 = 0{,}0602 + 0{,}0841 + 0{,}0239 = 0{,}1682\approx\pi_L$. \checkmark\ Aufgabe 4.35 fortgesetzt: $\pi_2 = (0{,}57;\ 0{,}31;\ 0{,}12)$ ist schon auf dem Weg zu $(0{,}75;\ 0{,}17;\ 0{,}08)$. \checkmark}
+\begin{mitnehmen}\kastentext
+Stationäre Verteilung $=$ Linkseigenvektor zum Eigenwert $1$, normiert. Jede Gleichung ist eine Bilanz: Was pro Schritt in einen Zustand fließt, fließt auch heraus. Für irreduzible aperiodische Ketten ist sie eindeutig, und $\frac1{\pi_i}$ ist die mittlere Rückkehrzeit --- die Zahl, die man im Modell medizinisch deuten kann.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.37
+\stupserzwei{gruen}{Mit $d_k = r_k - r_{k-1}$: $p\,d_{k+1} = q\,d_k$, also $d_k = (q/p)^{k-1}d_1$. Summieren von $r_0 = 1$ bis $r_N = 0$ bestimmt $d_1$.}{22pt}
+\begin{loesungkarte}{gruen}{4.37}{Das Ruinproblem}
+\derweg{Erster Schritt gibt eine Rekursion; die Differenzen sind geometrisch; Randbedingungen fixieren die Konstanten.}
+\schritt{Rekursion}
+$r_k$ = Ruinwahrscheinlichkeit bei Kapital $k$, $N = a + b$. Erster Schritt: $r_k = p\,r_{k+1} + q\,r_{k-1}$ für $1\le k\le N - 1$, mit $r_0 = 1$, $r_N = 0$ ($q = 1 - p$).
+\schritt{Differenzen}
+$(p + q)r_k = pr_{k+1} + qr_{k-1}\Rightarrow p(r_{k+1} - r_k) = q(r_k - r_{k-1})$. Mit $d_k = r_k - r_{k-1}$: $d_{k+1} = \frac qpd_k$, also $d_k = \rho^{k-1}d_1$ mit $\rho = \frac qp$.
+\schritt{Fall $p\neq\frac12$}
+$r_k - r_0 = \sum_{j=1}^{k}d_j = d_1\frac{1 - \rho^{k}}{1 - \rho}$. Aus $r_N = 0$: $d_1 = -\frac{1 - \rho}{1 - \rho^{N}}$. Also
+\[ r_k = 1 - \frac{1 - \rho^{k}}{1 - \rho^{N}} = \frac{\rho^{k} - \rho^{N}}{1 - \rho^{N}},\qquad\text{Ruin bei Start } a\colon\ r_a = \frac{\rho^{a} - \rho^{a+b}}{1 - \rho^{a+b}}. \]
+\schritt{Fall $p = \frac12$}
+$\rho = 1$, $d_k = d_1$ konstant, $r_k = 1 + kd_1$, $r_N = 0\Rightarrow d_1 = -\frac1N$: $r_a = 1 - \frac aN = \frac b{a + b}$.
+\schritt{Zahlen}
+$a = 10$, $b = 90$. $p = \frac12$: $r = \frac{90}{100} = 90\,\%$. $p = 0{,}49$: $\rho = \frac{51}{49} = 1{,}0408$, $\rho^{10} = 1{,}492$, $\rho^{100} = 54{,}6$: $r = \frac{1{,}492 - 54{,}6}{1 - 54{,}6} = \frac{-53{,}1}{-53{,}6} = 99{,}1\,\%$. Ein Prozent Nachteil pro Runde macht aus $90\,\%$ Ruin $99\,\%$.
+\probe{$p = \frac12$, $a = b$: $r = \frac12$ aus Symmetrie. \checkmark\ Formel für $p\neq\frac12$ bei $a = b = 50$, $p = 0{,}49$: $r = \frac{\rho^{50} - \rho^{100}}{1 - \rho^{100}} = 0{,}881$ --- bei gleichem Kapital verliert der Benachteiligte zu $88\,\%$. \checkmark}
+\begin{mitnehmen}\kastentext
+Gegen einen Gegner mit viel größerem Kapital ($b\to\infty$) ist der Ruin bei $p\le\frac12$ sicher und bei $p > \frac12$ gleich $\rho^{a}$. Das Casino hat beides: mehr Kapital und $p < \frac12$. Die Methode des ersten Schritts (Aufgabe 4.34) löst Wartezeiten und Treffwahrscheinlichkeiten von Irrfahrten gleichermaßen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.38
+\stupserzwei{gruen}{$E[S_T] = a$ und $S_T\in\{0, N\}$: $a = N\cdot P(S_T = N)$. Für die Dauer: $E[S_T^{2} - T] = a^{2}$, und $E[S_T^{2}] = N^{2}\cdot\frac aN = aN$.}{22pt}
+\begin{loesungkarte}{gruen}{4.38}{Ruin mit dem Stoppsatz}
+\derweg{Martingal, Stoppzeit, Voraussetzungen, Gleichung --- zweimal: mit $S_n$ für die Wahrscheinlichkeit, mit $S_n^{2} - n$ für die Dauer.}
+\schritt{Martingal}
+Für $p = \frac12$: $E[S_{n+1}\mid\mathcal F_n] = S_n + E[\xi_{n+1}] = S_n$. $S_n$ ist ein Martingal.
+\schritt{Stoppzeit}
+$T = \min\{n\colon S_n\in\{0, N\}\}$. Ob bis $n$ gestoppt wurde, hängt nur von $S_0, \dots, S_n$ ab. \checkmark\ Der gestoppte Prozess bleibt in $[0, N]$, also beschränkt; $T < \infty$ fast sicher (die Irrfahrt verlässt jedes endliche Intervall). Der Satz vom optionalen Stoppen ist anwendbar.
+\schritt{Ruinwahrscheinlichkeit}
+$E[S_T] = E[S_0] = a$. $S_T$ ist $0$ (Ruin) oder $N$ (Gewinn): $a = 0\cdot P(\text{Ruin}) + N\cdot P(\text{Gewinn})$, also $P(\text{Gewinn}) = \frac aN$, $P(\text{Ruin}) = \frac bN = \frac b{a + b}$. Wie in Aufgabe 4.37, in drei Zeilen.
+\schritt{Spieldauer}
+$M_n = S_n^{2} - n$ ist ein Martingal: $E[S_{n+1}^{2}\mid\mathcal F_n] = S_n^{2} + 2S_nE[\xi] + E[\xi^{2}] = S_n^{2} + 1$. Optionales Stoppen (mit $E[T] < \infty$): $E[S_T^{2}] - E[T] = a^{2}$. $E[S_T^{2}] = N^{2}\cdot\frac aN = aN$. Also $E[T] = aN - a^{2} = a(N - a) = ab$.
+\probe{$a = 10$, $b = 90$: $900$ Runden im Mittel. $a = b = 1$: $E[T] = 1$ --- eine Runde entscheidet. \checkmark\ $a = b = 50$: $2500$ Runden; die Irrfahrt braucht $\sim d^{2}$ Schritte für Abstand $d$. \checkmark}
+\begin{mitnehmen}\kastentext
+Ein Martingal ist ein faires Spiel; der Stoppsatz sagt, dass keine Strategie es unfair macht --- unter Voraussetzungen (beschränkt oder integrierbar gestoppt), die bei der Verdopplungsstrategie gerade verletzt sind. $S_n^{2} - n$ als Martingal liefert die Dauer $ab$: Die symmetrische Irrfahrt braucht quadratisch viele Schritte.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.39
+\stupserzwei{tief}{$1{,}96\sqrt{\frac{p(1 - p)}n}\le0{,}03\iff n\ge\bigl(\frac{1{,}96}{0{,}03}\bigr)^{2}p(1 - p) = 4268{,}4\cdot p(1 - p)$.}{22pt}
+\begin{loesungkarte}{tief}{4.39}{Wie viele Patienten braucht die Studie?}
+\derweg{Halbe Intervallbreite gleich Vorgabe setzen, nach $n$ auflösen, aufrunden.}
+\schritt{(a)}
+Halbe Breite $h = 1{,}96\sqrt{p(1 - p)/n}$. Nach $n$: $n = \frac{1{,}96^{2}p(1 - p)}{h^{2}}$. Ohne Vorwissen den ungünstigsten Fall $p(1 - p)\le\frac14$: $n = \frac{3{,}8416\cdot0{,}25}{0{,}0009} = 1067{,}1$, also $1068$ Patienten.
+\schritt{(b)}
+$p\approx0{,}1$: $p(1 - p) = 0{,}09$, $n = \frac{3{,}8416\cdot0{,}09}{0{,}0009} = 384{,}2$, also $385$. Weniger als die Hälfte --- Raten nahe $0$ oder $1$ sind leichter zu schätzen.
+\schritt{(c)}
+$h$ halbieren $\Rightarrow h^{2}$ vierteln $\Rightarrow n$ vervierfachen: $4270$ bzw.\ $1537$. Doppelte Genauigkeit, vierfacher Aufwand (Aufgabe 4.21).
+\schritt{(d)}
+Die Formel enthält nur $n$, nicht die Größe der Grundgesamtheit: Die Streuung von $\hat p$ hängt davon ab, wie viele man \emph{befragt}, nicht wie viele es \emph{gibt} --- solange ohne Zurücklegen aus einer großen Menge gezogen wird (Anteil $\frac n{\text{Gesamt}}$ klein). Eine Umfrage mit $1000$ Personen ist in Luxemburg so genau wie in China.
+\probe{Aufgabe 4.42: $n = 250$, $\hat p = 0{,}64$: $h = 1{,}96\cdot0{,}0304 = 0{,}060$. Umgekehrt: für $h = 0{,}06$ und $p = 0{,}64$ braucht man $n = \frac{3{,}8416\cdot0{,}2304}{0{,}0036} = 246$. \checkmark}
+\begin{mitnehmen}\kastentext
+$n\approx\frac{4p(1 - p)}{h^{2}}$, im ungünstigsten Fall $\frac1{h^{2}}$: Für $\pm3\,\%$ braucht man gut $1000$, für $\pm1\,\%$ etwa $10\,000$. Diese Zahlen stehen hinter jeder Wahlumfrage --- und erklären, warum sie alle etwa $1000$ Befragte haben.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.40
+\stupserzwei{akzent}{Alle vier Aussagen sind falsch. Der $p$-Wert bedingt auf $H_0$, nicht auf die Daten; er sagt nichts über Effektgröße oder Wiederholbarkeit.}{22pt}
+\begin{loesungkarte}{akzent}{4.40}{Was der $p$-Wert nicht sagt}
+\derweg{Die Definition hinschreiben und jede Aussage daran messen.}
+\schritt{Definition}
+$p = P(\text{Teststatistik mindestens so extrem wie beobachtet}\mid H_0)$. Eine Wahrscheinlichkeit \emph{über Daten}, berechnet \emph{unter der Annahme}, dass $H_0$ gilt.
+\schritt{(a) falsch}
+$P(H_0\mid\text{Daten})$ ist die umgekehrte Bedingung (Aufgabe 4.8). Sie zu berechnen bräuchte eine A-priori-Wahrscheinlichkeit für $H_0$ --- Bayes. Bei einer unplausiblen Hypothese (Prävalenz-Analogie: Aufgabe 4.10) kann $p = 0{,}03$ mit $P(H_0\mid\text{Daten}) > 50\,\%$ einhergehen.
+\schritt{(b) falsch}
+Dasselbe, mit $1 - p$. \enquote{Der Effekt ist real} ist eine Aussage über die Welt; der $p$-Wert ist eine Aussage über die Daten unter einer Annahme.
+\schritt{(c) falsch}
+Signifikanz misst, wie gut die Daten mit \enquote{kein Effekt} verträglich sind --- nicht, wie groß der Effekt ist. Mit $n = 100\,000$ ist jeder winzige Effekt signifikant; mit $n = 20$ auch ein großer oft nicht. Für Relevanz braucht man die Effektgröße mit Konfidenzintervall.
+\schritt{(d) falsch}
+Die Wiederholungswahrscheinlichkeit hängt von der (unbekannten) wahren Effektgröße ab --- das ist die Power. Bei $p = 0{,}03$ und typischer Power liegt die Chance auf erneute Signifikanz oft nur bei etwa $50\,\%$.
+\schritt{(e) was er sagt}
+$p = 0{,}03$: Wäre $H_0$ wahr, bekäme man so extreme Daten in $3\,\%$ der Studien. Das ist \emph{überraschend} unter $H_0$ --- mehr nicht. $p = 0{,}30$: so extreme Daten wären unter $H_0$ in $30\,\%$ der Studien zu erwarten --- nicht überraschend; das heißt \emph{nicht}, dass $H_0$ wahr ist (Abwesenheit von Evidenz ist nicht Evidenz der Abwesenheit).
+\begin{fehler}\kastentext
+Der $p$-Wert ist $P(\text{Daten}\mid H_0)$, gewünscht wird $P(H_0\mid\text{Daten})$. Das ist dieselbe Verwechslung wie Sensitivität gegen positiven Vorhersagewert. Und wie dort hängt die gewünschte Größe von einer \enquote{Prävalenz} ab --- hier: wie plausibel die Hypothese vorher war.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Ein $p$-Wert ist ein Maß für Überraschung unter $H_0$, keine Wahrscheinlichkeit für Hypothesen, keine Effektgröße, keine Wiederholbarkeit. Berichten sollte man Effektgröße und Konfidenzintervall; der $p$-Wert ist davon eine verlustbehaftete Zusammenfassung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.41
+\stupserzwei{gruen}{$\ell'(p) = \frac kp - \frac{n - k}{1 - p} = 0\iff k(1 - p) = (n - k)p\iff p = \frac kn$.}{22pt}
+\begin{loesungkarte}{gruen}{4.41}{Der Maximum-Likelihood-Schätzer}
+\derweg{Log-Likelihood ableiten, Nullstelle, zweite Ableitung.}
+\schritt{Likelihood}
+$L(p) = \binom nkp^{k}(1 - p)^{n-k}$, $\ell(p) = \ln L = \text{const} + k\ln p + (n - k)\ln(1 - p)$.
+\schritt{Maximum}
+$\ell'(p) = \frac kp - \frac{n - k}{1 - p} = 0\iff k(1 - p) = (n - k)p\iff k = np\iff\hat p = \frac kn$.
+\schritt{Zweite Ableitung}
+$\ell''(p) = -\frac k{p^{2}} - \frac{n - k}{(1 - p)^{2}} < 0$ für $0 < k < n$: Maximum. (Randfälle $k = 0$ oder $k = n$: $\hat p = 0$ bzw.\ $1$, Maximum am Rand.)
+\probe{Aufgabe 4.42: $\hat p = \frac{160}{250} = 0{,}64$. \checkmark\ $E[\hat p] = \frac{np}n = p$: erwartungstreu. $\operatorname{Var}\hat p = \frac{p(1 - p)}n$: Das ist das Quadrat des Standardfehlers aus Aufgabe 4.42. \checkmark}
+\begin{mitnehmen}\kastentext
+Maximum Likelihood liefert hier die relative Häufigkeit --- beruhigend. Bei anderen Modellen liefert es Schätzer, auf die man sonst nicht käme, und immer mit derselben Rezeptur: Likelihood, Logarithmus, Ableitung, Nullstelle. Die Krümmung $-\ell''(\hat p)$ (Fisher-Information) gibt zugleich die Genauigkeit.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.42
+\stupserzwei{gruen}{$1{,}96\cdot0{,}0304 = 0{,}0595$: Intervall $[0{,}580;\ 0{,}700]$.}{22pt}
+\begin{loesungkarte}{gruen}{4.42}{Ein Konfidenzintervall}
+\derweg{Punktschätzer, Standardfehler, $\pm1{,}96$; dann die Deutung.}
+\schritt{Rechnung}
+$\hat p = \frac{160}{250} = 0{,}64$. $\mathrm{SE} = \sqrt{\frac{0{,}64\cdot0{,}36}{250}} = \sqrt{0{,}000922} = 0{,}0304$. Wald-Intervall: $0{,}64\pm1{,}96\cdot0{,}0304 = 0{,}64\pm0{,}060$, also $[0{,}580;\ 0{,}700]$.
+\schritt{Was es bedeutet}
+Das Verfahren \enquote{$\hat p\pm1{,}96\,\mathrm{SE}$} erzeugt in $95\,\%$ aller Studien ein Intervall, das die wahre Rate enthält. Die Aussage gilt für das \emph{Verfahren} über viele Studien.
+\schritt{Was es nicht bedeutet}
+Nicht: \enquote{Die wahre Rate liegt mit $95\,\%$ in $[0{,}58;\ 0{,}70]$.} Die wahre Rate ist eine feste Zahl; sie liegt im Intervall oder nicht. Nicht: \enquote{$95\,\%$ der Patienten sprechen mit Rate zwischen $58$ und $70\,\%$ an.} Und nicht: \enquote{Eine Wiederholung liefert mit $95\,\%$ ein $\hat p$ im Intervall} (das wären etwa $83\,\%$).
+\probe{Anwendbarkeit: $n\hat p = 160\ge10$, $n(1 - \hat p) = 90\ge10$. \checkmark\ Wilson-Intervall (genauer bei kleinem $n$): $[0{,}579;\ 0{,}697]$ --- praktisch dasselbe. \checkmark}
+\begin{mitnehmen}\kastentext
+Ein Konfidenzintervall sagt, welche wahren Werte mit den Daten verträglich sind, und seine Breite sagt, wie viel man gelernt hat. Es enthält den Test: $p_0 = 0{,}6$ liegt im Intervall, also wäre $H_0\colon p = 0{,}6$ auf dem $5\,\%$-Niveau (zweiseitig) nicht abzulehnen --- einseitig in Aufgabe 4.43 schon.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 4.43
+\stupserzwei{gruen}{$z = \frac{136 - 120}{6{,}93} = 2{,}31 > 1{,}645$: $H_0$ ablehnen. $p$-Wert $1 - \Phi(2{,}31) = 0{,}010$.}{22pt}
+\begin{loesungkarte}{gruen}{4.43}{Ein einseitiger Test}
+\derweg{Hypothesen, Verteilung unter $H_0$, Teststatistik, kritischer Wert, Entscheidung, $p$-Wert.}
+\schritt{Hypothesen}
+$H_0\colon p\le0{,}60$ gegen $H_1\colon p > 0{,}60$. Einseitig, weil nur eine Verbesserung interessiert.
+\schritt{Unter $H_0$}
+Im Grenzfall $p_0 = 0{,}6$: $X\sim\operatorname{Bin}(200;\ 0{,}6)$, $\mu = 120$, $\sigma = \sqrt{200\cdot0{,}6\cdot0{,}4} = \sqrt{48} = 6{,}93$. Normalnäherung zulässig ($48\ge9$).
+\schritt{Teststatistik und Entscheidung}
+$z = \frac{136 - 120}{6{,}93} = 2{,}31$. Kritischer Wert einseitig bei $\alpha = 0{,}05$: $1{,}645$. Da $2{,}31 > 1{,}645$: $H_0$ ablehnen. Das Medikament hebt die Heilungsrate signifikant.
+\schritt{$p$-Wert}
+$P(X\ge136\mid p = 0{,}6)\approx1 - \Phi(2{,}31) = 0{,}010$; mit Stetigkeitskorrektur $1 - \Phi\bigl(\frac{135{,}5 - 120}{6{,}93}\bigr) = 1 - \Phi(2{,}24) = 0{,}013$. Exakt (Binomialsumme): $0{,}012$.
+\probe{Mit dem Konfidenzintervall: $\hat p = 0{,}68$, $\mathrm{SE} = \sqrt{0{,}68\cdot0{,}32/200} = 0{,}033$, einseitige untere Grenze $0{,}68 - 1{,}645\cdot0{,}033 = 0{,}626 > 0{,}60$. \checkmark\ Zweiseitig wäre der kritische Wert $1{,}96$ --- auch dann abgelehnt, mit $p = 0{,}021$.}
+\begin{mitnehmen}\kastentext
+Einseitig testet man, wenn die Richtung \emph{vor} der Datenerhebung festgelegt ist --- nie nachträglich, weil die Daten in eine Richtung zeigen. Und Signifikanz ist nicht Relevanz (Aufgabe 4.40): $68\,\%$ statt $60\,\%$ ist der Effekt, das Konfidenzintervall $[0{,}62;\ 0{,}74]$ seine Unsicherheit, und erst der Vergleich mit Kosten und Nebenwirkungen die Entscheidung.
+\end{mitnehmen}
+\end{loesungkarte}

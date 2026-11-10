@@ -1,0 +1,990 @@
+\setgebiet{2}{Zahlentheorie}{mittel}
+\chapter{Lösungen: Zahlentheorie}
+
+%%%%%%%%%% 1.1
+\stupserzwei{tief}{$\frac{n(n+1)(2n+1)}6 + (n+1)^{2} = \frac{(n+1)\bigl[n(2n+1) + 6(n+1)\bigr]}6$, und die eckige Klammer ist $2n^{2} + 7n + 6 = (n + 2)(2n + 3)$.}{22pt}
+\begin{loesungkarte}{tief}{1.1}{Die Summe der Quadrate}
+\derweg{Anfang prüfen, im Schritt $(n + 1)$ ausklammern und die verbleibende quadratische Klammer faktorisieren.}
+\schritt{(a)}
+$n = 1$: $1 = \frac{1\cdot2\cdot3}6$. $n = 2$: $5 = \frac{2\cdot3\cdot5}6$. $n = 3$: $14 = \frac{3\cdot4\cdot7}6$. $n = 10$: $385 = \frac{10\cdot11\cdot21}6 = \frac{2310}6$. \checkmark
+\schritt{(b)}
+Anfang $n = 1$ erledigt. Schritt: Gelte die Formel für $n$. Dann
+\begin{align*} \sum_{k=1}^{n+1}k^{2} &= \frac{n(n+1)(2n+1)}6 + (n+1)^{2}\\ &= \frac{(n+1)\bigl[n(2n+1) + 6(n+1)\bigr]}6 = \frac{(n+1)(2n^{2} + 7n + 6)}6\\ &= \frac{(n+1)(n+2)(2n+3)}6, \end{align*}
+und das ist die Formel für $n + 1$, denn $2(n+1) + 1 = 2n + 3$. $\blacksquare$
+\schritt{(c)}
+Quadrate der Seitenlänge $k$ auf einem $8\times8$-Brett: $(9 - k)^{2}$ Positionen. Summe $8^{2} + 7^{2} + \dots + 1^{2} = \frac{8\cdot9\cdot17}6 = 204$.
+\probe{(c) direkt: $64 + 49 + 36 + 25 + 16 + 9 + 4 + 1 = 204$. \checkmark}
+\begin{mitnehmen}\kastentext
+Im Induktionsschritt nie ausmultiplizieren, was man ausklammern kann: Der Faktor $(n + 1)$ steht in beiden Summanden. Danach ist die Faktorisierung $2n^{2} + 7n + 6 = (n + 2)(2n + 3)$ durch Vieta zu finden --- oder man multipliziert die Zielformel aus und vergleicht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.2
+\stupserzwei{akzent}{Bei $n = 1\to2$ sind die \enquote{ersten $n$} das Pferd $A$ und die \enquote{letzten $n$} das Pferd $B$. Die Überlappung ist leer.}{22pt}
+\begin{loesungkarte}{akzent}{1.2}{Alle Pferde sind gleichfarbig}
+\derweg{Der Induktionsschritt wird an der kleinsten Stelle durchgespielt, an der er gebraucht wird --- und dort bricht er.}
+\schritt{(a)}
+Zwei Pferde $\{A, B\}$. Die ersten $n = 1$: $\{A\}$, gleichfarbig. Die letzten $n = 1$: $\{B\}$, gleichfarbig. Die Überlappung $\{A\}\cap\{B\}$ ist leer --- es gibt kein gemeinsames Pferd, das die Farben verbindet. Der Schluss \enquote{also haben $A$ und $B$ dieselbe Farbe} hat keine Grundlage.
+\schritt{(b)}
+Für $n\ge2$ ist der Schritt korrekt: Unter $n + 1\ge3$ Pferden haben die ersten $n$ und die letzten $n$ mindestens $n - 1\ge1$ gemeinsame Pferde. Wäre also \emph{die Aussage für $n = 2$} wahr, wären tatsächlich alle Pferde gleichfarbig. Sie ist es nicht.
+\schritt{(c)}
+Der Anfang $n = 1$ ist richtig, der Schritt gilt ab $n = 2$ --- die Kette hat ein Loch zwischen $1$ und $2$. Ein Induktionsbeweis muss den Schritt für \emph{jedes} $n$ ab dem Anfang liefern; die Frage \enquote{ab welchem $n$ gilt mein Argument wirklich?} gehört zu jedem Beweis.
+\schritt{(d)}
+Der Schritt behauptet $n\le1\Rightarrow n + 1\le1$, und das ist für kein $n$ wahr. Das \enquote{denn \dots} verdeckt, dass es nichts zu begründen gibt. Hier fehlt nicht der Anfang, sondern der Schritt vollständig.
+\begin{fehler}\kastentext
+Ein Induktionsschritt, der \enquote{offensichtlich für alle $n$} gilt, ist zu prüfen, wo $n$ am kleinsten ist. Dort stehen Mengen mit einem Element, leere Überlappungen, Summen ohne Summanden --- und dort scheitern die meisten falschen Induktionen.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Induktion ist Anfang \emph{plus} Schritt \emph{für jedes} $n$ ab dem Anfang. Fehlt der Schritt an einer einzigen Stelle, ist die Kette gerissen --- egal wie gut sie danach aussieht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.3
+\stupserzwei{gruen}{$S = 1 + 2 + \dots + n$ und $S = n + (n - 1) + \dots + 1$ untereinander: jede Spalte ergibt $n + 1$, es sind $n$ Spalten.}{22pt}
+\begin{loesungkarte}{gruen}{1.3}{Die Gaußsche Summe}
+\derweg{Zweimal die Summe, einmal umgedreht, spaltenweise addiert; dann die Induktion als formaler Beweis.}
+\schritt{(a)}
+$2S = (1 + n) + (2 + (n - 1)) + \dots + (n + 1) = n(n + 1)$, also $S = \frac{n(n+1)}2$.
+\schritt{(b)}
+Anfang $n = 1$: $1 = \frac{1\cdot2}2$. Schritt: $\frac{n(n+1)}2 + (n + 1) = (n + 1)\bigl(\frac n2 + 1\bigr) = \frac{(n+1)(n+2)}2$. $\blacksquare$
+\schritt{(c)}
+Der Umkehrtrick \emph{findet} die Formel: Man muss sie vorher nicht kennen. Die Induktion \emph{beweist} eine Formel, die man schon hat --- sie ist ein Prüfverfahren, kein Entdeckungsverfahren. Beides braucht man: Entdecken ohne Beweis ist Vermutung, Beweis ohne Entdecken ist unmöglich.
+\probe{$n = 100$: $5050$ --- Gauß' Schulaufgabe. \checkmark}
+\begin{mitnehmen}\kastentext
+Induktion beweist, was man vermutet. Woher die Vermutung kommt, ist eine andere Kunst: kleine Fälle, ein Bild, ein Trick. Die Aufgabensammlung fragt deshalb oft zuerst \enquote{prüfen Sie für $n = 1, 2, 3$} und erst dann \enquote{beweisen Sie}.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.4
+\stupserzwei{gruen}{Ist $n$ nicht prim, so $n = ab$ mit $2\le a, b < n$. Für $a$ und $b$ gilt die Behauptung nach Annahme --- also auch für ihr Produkt.}{22pt}
+\begin{loesungkarte}{gruen}{1.4}{Jede Zahl ist ein Produkt von Primzahlen}
+\derweg{Starke Induktion: Die Behauptung für alle kleineren Zahlen wird vorausgesetzt, nicht nur für die Vorgängerin.}
+\schritt{(a)}
+Anfang $n = 2$: prim, Produkt aus einem Faktor. Schritt: Sei $n\ge3$, und jede Zahl $m$ mit $2\le m < n$ sei Produkt von Primzahlen. Ist $n$ prim, fertig. Sonst hat $n$ einen Teiler $a$ mit $1 < a < n$, also $n = ab$ mit $1 < a, b < n$. Nach Voraussetzung sind $a$ und $b$ Produkte von Primzahlen; also ist $n = ab$ eines. $\blacksquare$
+\schritt{(b)}
+Die Faktoren $a, b$ von $n$ sind irgendwelche kleineren Zahlen --- nicht $n - 1$. Von $n - 1$ allein weiß man nichts über $n$ ($n - 1$ und $n$ sind teilerfremd). Man braucht die Voraussetzung für \emph{alle} Zahlen unter $n$: Das ist die starke Induktion, und sie ist der gewöhnlichen äquivalent (Band 1, Kapitel 1), nur bequemer formuliert.
+\schritt{(c)}
+Bewiesen ist die \emph{Existenz} einer Primfaktorzerlegung. Es fehlt die \emph{Eindeutigkeit}: dass zwei Zerlegungen bis auf die Reihenfolge übereinstimmen. Sie braucht das Lemma von Euklid ($p\mid ab\Rightarrow p\mid a$ oder $p\mid b$), das aus Bézout folgt (Band 1, Kapitel 3--4). Existenz ist Induktion, Eindeutigkeit ist der ggT.
+\begin{mitnehmen}\kastentext
+Starke Induktion, wann immer der Schritt auf \enquote{irgendwelche kleineren} zurückgreift: Zerlegungen, Rekursionen, Spiele, Algorithmen. Und: Existenz und Eindeutigkeit sind zwei Sätze mit zwei Beweisen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.5
+\stupserzwei{gruen}{Drei aufeinanderfolgende Zahlen enthalten ein Vielfaches von $3$ und mindestens ein Vielfaches von $2$; $2$ und $3$ sind teilerfremd, also teilt $6$.}{22pt}
+\begin{loesungkarte}{gruen}{1.5}{$n^{3} - n$}
+\derweg{Faktorisieren, Reste betrachten, teilerfremde Teiler zusammensetzen.}
+\schritt{(a)}
+$n^{3} - n = n(n^{2} - 1) = (n - 1)n(n + 1)$. Von drei aufeinanderfolgenden ganzen Zahlen ist genau eine durch $3$ teilbar und mindestens eine gerade. Also $2\mid$ und $3\mid$ Produkt; da $\operatorname{ggT}(2, 3) = 1$, folgt $6\mid n^{3} - n$ (Aufgabe 1.9c).
+\schritt{(b)}
+Nein: $n = 2$ gibt $8 - 2 = 6$, nicht durch $12$ teilbar. Für $4\mid n^{3} - n$ bräuchte man zwei Faktoren $2$, und unter drei aufeinanderfolgenden Zahlen kann es nur eine gerade geben ($n$ gerade mit $n\equiv2\pmod4$).
+\schritt{(c)}
+$n^{5} - n = n(n^{4} - 1) = n(n^{2} - 1)(n^{2} + 1) = (n - 1)n(n + 1)(n^{2} + 1)$. Durch $6$ wie in (a). Durch $5$: Ist $n\equiv0, \pm1\pmod5$, teilt $5$ einen der ersten drei Faktoren; ist $n\equiv\pm2$, so $n^{2} + 1\equiv4 + 1\equiv0$. Also $5\mid n^{5} - n$, und mit $\operatorname{ggT}(6, 5) = 1$: $30\mid n^{5} - n$. (Kapitel 7: Fermat gibt $n^{5}\equiv n\pmod5$ in einer Zeile.)
+\probe{$n = 3$: $27 - 3 = 24 = 4\cdot6$. \checkmark\ $n = 3$ in (c): $243 - 3 = 240 = 8\cdot30$. \checkmark}
+\begin{mitnehmen}\kastentext
+Teilbarkeit eines Polynomwerts: faktorisieren, dann Reste durchgehen. Dass $n^{p} - n$ durch $p$ teilbar ist, ist der kleine Fermat --- hier für $p = 2, 3, 5$ mit den Händen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.6
+\stupserzwei{gruen}{Das Vielfache von $b$ muss \emph{unter} $a$ liegen: für $a = -100$ ist das $-105 = -15\cdot7$, Rest $5$.}{22pt}
+\begin{loesungkarte}{gruen}{1.6}{Division mit Rest, dreimal}
+\derweg{$q$ ist die größte ganze Zahl mit $qb\le a$; dann $r = a - qb$.}
+\schritt{(a), (b), (c)}
+$100 = 14\cdot7 + 2$. \quad $-100 = (-15)\cdot7 + 5$ (nicht $(-14)\cdot7 - 2$: der Rest muss in $\{0, \dots, 6\}$ liegen). \quad $7 = 0\cdot100 + 7$.
+\schritt{(d)}
+Viele Programmiersprachen (C, Java, JavaScript) runden den Quotienten gegen null: $-100 / 7 = -14$, Rest $-100 - (-98) = -2$. Python und die Mathematik runden ab: $-15$, Rest $5$. Beide erfüllen $a = qb + r$; nur die zweite erfüllt $0\le r < b$. Wer Reste negativer Zahlen programmiert, prüft die Konvention --- die Kongruenz $-100\equiv5\equiv-2\pmod7$ ist in beiden Fällen dieselbe.
+\probe{$(-15)\cdot7 + 5 = -105 + 5 = -100$. \checkmark}
+\begin{mitnehmen}\kastentext
+Der Rest ist nie negativ: Das Vielfache liegt immer links von $a$ auf der Zahlengeraden. Für die Zahlentheorie zählt ohnehin nur die Restklasse; $5$ und $-2$ sind modulo $7$ dasselbe.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.7
+\stupserzwei{gruen}{Quersumme $9 + 8 + \dots + 1 = 45$. Alternierend von rechts: $1 - 2 + 3 - 4 + 5 - 6 + 7 - 8 + 9$.}{22pt}
+\begin{loesungkarte}{gruen}{1.7}{Quersummen}
+\derweg{Quersumme für $9$, alternierende Quersumme für $11$; der Rest der Quersumme ist der Rest der Zahl.}
+\schritt{(a)}
+Quersumme $45 = 5\cdot9$: durch $9$ teilbar. Alternierende Quersumme (von rechts): $1 - 2 + 3 - 4 + 5 - 6 + 7 - 8 + 9 = 5$: nicht durch $11$ teilbar.
+\schritt{(b)}
+$n\equiv5\pmod{11}$ (Aufgabe 1.23b: die alternierende Quersumme ist kongruent zur Zahl). Probe: $987\,654\,321 = 11\cdot89\,786\,756 + 5$. \checkmark
+\begin{mitnehmen}\kastentext
+Quersummenregeln geben nicht nur \enquote{teilbar oder nicht}, sondern den Rest. Für $3$ und $9$: die Quersumme; für $11$: die alternierende; für $7$, $13$: Dreierblöcke alternierend (Aufgabe 1.23c).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.8
+\stupserzwei{tief}{$252 = 1\cdot198 + 54$, $198 = 3\cdot54 + 36$, $54 = 1\cdot36 + 18$, $36 = 2\cdot18$. Rückwärts von $18 = 54 - 36$.}{22pt}
+\begin{loesungkarte}{tief}{1.8}{Euklid und Bézout}
+\derweg{Vorwärts dividieren bis Rest null; rückwärts jeden Rest durch die Vorgänger ersetzen, bis nur $252$ und $198$ dastehen.}
+\schritt{(a)}
+$252 = 1\cdot198 + 54$; $198 = 3\cdot54 + 36$; $54 = 1\cdot36 + 18$; $36 = 2\cdot18 + 0$. $\operatorname{ggT} = 18$.
+\schritt{(b)}
+$18 = 54 - 36 = 54 - (198 - 3\cdot54) = 4\cdot54 - 198 = 4(252 - 198) - 198 = 4\cdot252 - 5\cdot198$. Also $x = 4$, $y = -5$.
+\rand{$4\cdot252 = 1008$, $5\cdot198 = 990$, Differenz $18$. \checkmark}{-30pt}
+\schritt{(c)}
+$12$: nein --- jede Kombination $252x + 198y$ ist ein Vielfaches von $18$, und $18\nmid12$. $36 = 2\cdot18$: ja, $x = 8$, $y = -10$.
+\schritt{(d)}
+Alle Lösungen von $252x + 198y = 18$: $x = 4 + 11t$, $y = -5 - 14t$, $t\in\mathbb Z$ --- denn $252/18 = 14$ und $198/18 = 11$, und $252\cdot11t - 198\cdot14t = 0$. Probe mit $t = 1$: $15\cdot252 - 19\cdot198 = 3780 - 3762 = 18$. \checkmark
+\begin{mitnehmen}\kastentext
+Der ggT ist die kleinste positive Zahl der Form $ax + by$, und genau seine Vielfachen sind darstellbar. Rückwärts rechnen ist Fleißarbeit --- die Tabellenform des erweiterten Algorithmus (Band 1, Kapitel 3.4) macht sie mechanisch.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.9
+\stupserzwei{akzent}{$\operatorname{kgV}(4, 6) = 12$, nicht $24$ --- der Faktor $2$ steckt in beiden. Der Beweis in (c) braucht $4x + 6y = 1$, und das gibt es nicht.}{22pt}
+\begin{loesungkarte}{akzent}{1.9}{Durch 4 und durch 6}
+\derweg{Gemeinsame Teilbarkeit heißt Teilbarkeit durch das kgV; und $\operatorname{kgV} = ab$ nur für teilerfremde $a, b$.}
+\schritt{(a)}
+$12$: durch $4$ und $6$ teilbar, nicht durch $24$. Ebenso $36$, $60$.
+\schritt{(b)}
+Durch $\operatorname{kgV}(4, 6) = 12$. Allgemein: $a\mid c$ und $b\mid c$ genau dann, wenn $\operatorname{kgV}(a, b)\mid c$ --- das kgV ist das kleinste gemeinsame Vielfache, und jedes gemeinsame Vielfache ist ein Vielfaches davon (Band 1, Satz 3.7).
+\schritt{(c)}
+Bézout: $ax + by = 1$ für geeignete $x, y$. Multipliziere mit $c$: $c = acx + bcy$. Nun $b\mid c$, also $ab\mid ac$; und $a\mid c$, also $ab\mid bc$. Beide Summanden sind durch $ab$ teilbar, also $ab\mid c$. $\blacksquare$
+\schritt{(d)}
+Für $a = 4$, $b = 6$ gibt es keine $x, y$ mit $4x + 6y = 1$ --- die linke Seite ist immer gerade. Der Beweis beginnt mit einer Gleichung, die es nicht gibt. Mit $\operatorname{ggT} = 2$ liefert dieselbe Rechnung nur $4x + 6y = 2$, also $2c = \dots$, also $24\mid2c$, also $12\mid c$ --- genau (b).
+\begin{fehler}\kastentext
+\enquote{Durch $a$ und durch $b$, also durch $ab$.} Richtig nur für teilerfremde $a, b$. Sonst durch $\operatorname{kgV}(a, b) = ab/\operatorname{ggT}(a, b)$. Die Teilbarkeitsregel für $6$ ($2$ und $3$) funktioniert, die für $8$ als \enquote{$2$ und $4$} nicht.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Teilerfremdheit ist die Voraussetzung, die man am häufigsten vergisst: beim Zusammensetzen von Teilbarkeiten, beim Kürzen in Kongruenzen (Aufgabe 1.21), beim chinesischen Restsatz (Aufgabe 1.25). Immer dieselbe Zutat: Bézout mit $1$ auf der rechten Seite.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.10
+\stupserzwei{gruen}{$91 = 7\cdot13$, $65 = 5\cdot13$.}{22pt}
+\begin{loesungkarte}{gruen}{1.10}{$\operatorname{ggT}(91, 65)$}
+\derweg{Drei Divisionen.}
+\schritt{Euklid}
+$91 = 1\cdot65 + 26$; $65 = 2\cdot26 + 13$; $26 = 2\cdot13 + 0$. $\operatorname{ggT}(91, 65) = 13$.
+\probe{$91 = 7\cdot13$, $65 = 5\cdot13$, $\operatorname{ggT}(7, 5) = 1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Der Algorithmus braucht keine Faktorisierung --- das ist sein Wert bei großen Zahlen, wo Faktorisieren unmöglich ist (Kapitel 19), der ggT aber in Sekunden steht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.11
+\stupserzwei{gruen}{$13 = 65 - 2\cdot26 = 65 - 2(91 - 65) = 3\cdot65 - 2\cdot91$.}{22pt}
+\begin{loesungkarte}{gruen}{1.11}{$91x + 65y = 13$}
+\derweg{Euklid rückwärts; dann die allgemeine Lösung mit den gekürzten Koeffizienten.}
+\schritt{(a)}
+$13 = 65 - 2\cdot26 = 65 - 2\cdot(91 - 65) = 3\cdot65 - 2\cdot91$. Also $x = -2$, $y = 3$: $-182 + 195 = 13$. \checkmark
+\schritt{(b)}
+$x = -2 + 5t$, $y = 3 - 7t$ ($91/13 = 7$, $65/13 = 5$). Probe $t = 1$: $3\cdot91 - 4\cdot65 = 273 - 260 = 13$. \checkmark
+\schritt{(c)}
+Jede Zahl $91x + 65y$ ist durch $13$ teilbar; $10$ ist es nicht. Die darstellbaren Zahlen sind genau die Vielfachen des ggT.
+\begin{mitnehmen}\kastentext
+$ax + by = c$ ist lösbar genau dann, wenn $\operatorname{ggT}(a, b)\mid c$; eine Lösung liefert Euklid rückwärts, alle anderen liegen im Abstand $b/\operatorname{ggT}$ in $x$ und $a/\operatorname{ggT}$ in $y$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.12
+\stupserzwei{gruen}{$3e = 100 - 5h$ muss durch $3$ teilbar sein: $100 - 5h\equiv1 - 2h\equiv0\pmod3$, also $h\equiv2\pmod3$.}{22pt}
+\begin{loesungkarte}{gruen}{1.12}{Hühner und Enten}
+\derweg{Eine Lösung finden, alle Lösungen in Schritten $(-3, +5)$ durchlaufen, auf Nichtnegativität prüfen.}
+\schritt{(a)}
+$5h + 3e = 100$. $h = 20$, $e = 0$ ist eine Lösung; alle: $h = 20 - 3t$, $e = 5t$. Nichtnegativ für $0\le t\le6$: sieben Kombinationen
+\[ (h, e)\in\{(20, 0), (17, 5), (14, 10), (11, 15), (8, 20), (5, 25), (2, 30)\} . \]
+\schritt{(b)}
+$101$: $h\equiv1\pmod3$ (denn $101 - 5h\equiv2 - 2h\equiv0$), $h = 1, 4, \dots, 19$: wieder sieben Lösungen, $(1, 32), (4, 27), \dots, (19, 2)$. $7$: $5h + 3e = 7$ hat keine Lösung in nichtnegativen Zahlen ($h = 0$: $3\nmid7$; $h = 1$: $3\nmid2$).
+\schritt{(c)}
+Der größte nicht darstellbare Betrag ist $7$: $8 = 5 + 3$, $9 = 3\cdot3$, $10 = 2\cdot5$, und ab drei aufeinanderfolgenden darstellbaren Beträgen ist jeder weitere darstellbar (immer $3$ dazulegen). Allgemein ist $ab - a - b$ der größte nicht darstellbare Betrag für teilerfremde $a, b$ (Sylvester 1882): $15 - 8 = 7$. \checkmark
+\begin{center}
+\begin{tikzpicture}[x=0.26cm,y=0.26cm,font=\scriptsize]
+\draw[grau,-{Latex[length=1.5mm]}] (0,0)--(22,0) node[right]{$h$};
+\draw[grau,-{Latex[length=1.5mm]}] (0,0)--(0,34) node[above]{$e$};
+\draw[linie] (0,33.3)--(20,0);
+\foreach \h/\e in {20/0,17/5,14/10,11/15,8/20,5/25,2/30} {\fill[akzent] (\h,\e) circle (2.2pt);}
+\foreach \x in {5,10,15,20} {\node[below,grau] at (\x,0) {\x};}
+\foreach \y in {10,20,30} {\node[left,grau] at (0,\y) {\y};}
+\end{tikzpicture}
+\end{center}
+\begin{mitnehmen}\kastentext
+Die Lösungen einer linearen diophantischen Gleichung liegen auf einer Geraden im Abstand $(b, -a)/\operatorname{ggT}$; nichtnegative Lösungen sind die Gitterpunkte im ersten Quadranten. Zählen heißt: Zahl der Schritte, die auf der Strecke Platz haben.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.13
+\stupserzwei{gruen}{$\operatorname{kgV} = 91\cdot65/13$.}{22pt}
+\begin{loesungkarte}{gruen}{1.13}{$\operatorname{kgV}(91, 65)$}
+\derweg{Produkt durch ggT; Begründung über Minimum und Maximum der Exponenten.}
+\schritt{(a)}
+$\operatorname{kgV}(91, 65) = \frac{91\cdot65}{13} = 7\cdot65 = 455$.
+\schritt{(b)}
+In der Zerlegung hat $a$ zur Primzahl $p$ den Exponenten $\alpha$, $b$ den Exponenten $\beta$. Der ggT hat $\min(\alpha, \beta)$, das kgV $\max(\alpha, \beta)$, und $\min + \max = \alpha + \beta$ --- der Exponent in $ab$. Das gilt für jede Primzahl, also $\operatorname{ggT}\cdot\operatorname{kgV} = ab$. $\blacksquare$
+\probe{$455 = 5\cdot7\cdot13$: durch $91 = 7\cdot13$ und durch $65 = 5\cdot13$ teilbar, und kleiner geht es nicht, weil alle drei Primzahlen gebraucht werden. \checkmark}
+\begin{mitnehmen}\kastentext
+Für zwei Zahlen gilt $\operatorname{ggT}\cdot\operatorname{kgV} = ab$ --- für drei nicht mehr ($\operatorname{ggT}(2, 2, 2)\cdot\operatorname{kgV}(2, 2, 2) = 4\neq8$). Die Exponentenregel $\min$ und $\max$ gilt dagegen immer.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.14
+\stupserzwei{tief}{$1008 = 16\cdot63 = 2^{4}\cdot3^{2}\cdot7$; $1188 = 4\cdot297 = 2^{2}\cdot3^{3}\cdot11$.}{22pt}
+\begin{loesungkarte}{tief}{1.14}{Zwei Zahlen, alle Teiler}
+\derweg{Zerlegen, Exponenten vergleichen, Formeln anwenden.}
+\schritt{(a)}
+$1008 = 2^{4}\cdot3^{2}\cdot7$, $1188 = 2^{2}\cdot3^{3}\cdot11$.
+\schritt{(b)}
+Teileranzahl $\tau = \prod(\text{Exponent} + 1)$: $\tau(1008) = 5\cdot3\cdot2 = 30$, $\tau(1188) = 3\cdot4\cdot2 = 24$.
+\schritt{(c)}
+$\operatorname{ggT} = 2^{2}\cdot3^{2} = 36$, $\operatorname{kgV} = 2^{4}\cdot3^{3}\cdot7\cdot11 = 33\,264$. Probe: $36\cdot33\,264 = 1\,197\,504 = 1008\cdot1188$. \checkmark
+\schritt{(d)}
+Die gemeinsamen Teiler sind die Teiler des ggT: $\tau(36) = 3\cdot3 = 9$ ($1, 2, 3, 4, 6, 9, 12, 18, 36$).
+\begin{mitnehmen}\kastentext
+Aus der Zerlegung liest man alles ab: $\tau$ aus den Exponenten plus eins, ggT aus den Minima, kgV aus den Maxima, gemeinsame Teiler als Teiler des ggT. Ohne Zerlegung bleibt nur Euklid --- der aber immer geht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.15
+\stupserzwei{gruen}{$(3 + 1)(2 + 1)(1 + 1) = 24$. Zum Auflisten: alle $2^{a}3^{b}$ für $a\le3$, $b\le2$ aufschreiben, dann jede Zahl noch mit $5$ multiplizieren.}{22pt}
+\begin{loesungkarte}{gruen}{1.15}{Die Teiler von 360}
+\derweg{Systematisch: erst die Teiler von $72 = 2^{3}\cdot3^{2}$, dann jeden mal $5$.}
+\schritt{(a)}
+$360 = 2^{3}\cdot3^{2}\cdot5$, $\tau(360) = 4\cdot3\cdot2 = 24$. Teiler von $72$: $1, 2, 4, 8, 3, 6, 12, 24, 9, 18, 36, 72$; mal $5$: $5, 10, 20, 40, 15, 30, 60, 120, 45, 90, 180, 360$. Zusammen $24$. \checkmark
+\schritt{(b)}
+$240 = 2^{4}\cdot3\cdot5$: $\tau = 5\cdot2\cdot2 = 20$. $288 = 2^{5}\cdot3^{2}$: $6\cdot3 = 18$. $300 = 2^{2}\cdot3\cdot5^{2}$: $3\cdot2\cdot3 = 18$. $336 = 2^{4}\cdot3\cdot7$: $20$. Alle unter $24$. Warum kleine Primzahlen mit fallenden Exponenten: $\tau$ hängt nur von den Exponenten ab, nicht von den Primzahlen --- für dieselben Exponenten ist die Zahl am kleinsten, wenn die größten Exponenten bei den kleinsten Primzahlen stehen ($2^{3}3^{2}5 = 360$ gegen $2\cdot3^{2}5^{3} = 2250$ mit denselben $24$ Teilern).
+\begin{mitnehmen}\kastentext
+Teiler aufzählen: Gitter aus Exponenten, nicht Probieren. Und $360$, $720$, $5040$ sind \enquote{hochzusammengesetzt} (Ramanujan 1915) --- die Babylonier wählten $360$ für den Kreis, weil man ihn so oft gleichmäßig teilen kann.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.16
+\stupserzwei{gruen}{ggT: je Primzahl der kleinere Exponent, also $2^{2}, 3^{2}, 5^{0}, 7^{0}, 11^{1}$. kgV: der größere.}{22pt}
+\begin{loesungkarte}{gruen}{1.16}{ggT und kgV aus der Zerlegung}
+\derweg{Je Primzahl Minimum und Maximum der Exponenten.}
+\schritt{(a)}
+$\operatorname{ggT} = 2^{2}\cdot3^{2}\cdot11 = 396$. $\operatorname{kgV} = 2^{4}\cdot3^{5}\cdot5\cdot7\cdot11^{2} = 16\,465\,680$.
+\schritt{(b)}
+Exponenten in $ab$: $2^{6}, 3^{7}, 5^{1}, 7^{1}, 11^{3}$; in ggT$\cdot$kgV: $2^{2+4}, 3^{2+5}, 5^{0+1}, 7^{0+1}, 11^{1+2}$. \checkmark
+\begin{mitnehmen}\kastentext
+Man muss $a$ und $b$ nie ausrechnen. Die Zerlegung ist die bessere Darstellung für alles, was mit Teilbarkeit zu tun hat --- und die schlechtere für Addition, was die Zahlentheorie schwer macht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.17
+\stupserzwei{gruen}{Nach dem Streichen der Vielfachen von $2$, $3$, $5$, $7$ bleiben genau die Primzahlen --- denn eine zusammengesetzte Zahl $\le50$ hat einen Primfaktor $\le7$.}{22pt}
+\begin{loesungkarte}{gruen}{1.17}{Das Sieb bis 50}
+\derweg{Vielfache der Primzahlen bis $\sqrt{50}$ streichen; der Rest ist prim.}
+\schritt{(a)}
+$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47$.
+\schritt{(b)}
+Ist $n\le50$ zusammengesetzt, $n = ab$ mit $2\le a\le b$, so $a^{2}\le ab = n\le50$, also $a\le7$; und $a$ hat einen Primfaktor $\le7$, der $n$ teilt. Jede zusammengesetzte Zahl bis $50$ wird also von $2, 3, 5$ oder $7$ gestrichen.
+\schritt{(c)}
+$15$ Primzahlen. $50/\ln50 = 50/3{,}912 = 12{,}8$ --- der Primzahlsatz unterschätzt bei kleinen Zahlen; $\operatorname{li}(50)\approx17{,}4$ überschätzt. Beide treffen die Größenordnung (Kapitel 10).
+\begin{mitnehmen}\kastentext
+Prüfen, ob $n$ prim ist: Teiler bis $\sqrt n$ genügen. Das Sieb macht daraus eine Tabelle; für einzelne große Zahlen ist es nutzlos, und dafür gibt es Kapitel 18.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.18
+\stupserzwei{gruen}{$6k$, $6k + 2$, $6k + 4$ sind gerade; $6k + 3$ ist durch $3$ teilbar. Bleiben $6k + 1$ und $6k + 5 = 6(k + 1) - 1$.}{22pt}
+\begin{loesungkarte}{gruen}{1.18}{Primzahlen haben die Form $6k\pm1$}
+\derweg{Alle Reste modulo $6$ durchgehen und die ausschließen, die einen Teiler $2$ oder $3$ erzwingen.}
+\schritt{(a)}
+Jede Zahl ist $6k + r$ mit $r\in\{0, \dots, 5\}$. $r = 0, 2, 4$: gerade; $r = 3$: durch $3$ teilbar. Eine Primzahl $> 3$ ist weder gerade noch durch $3$ teilbar, also $r = 1$ oder $r = 5$: $p = 6k + 1$ oder $p = 6(k + 1) - 1$. $\blacksquare$
+\schritt{(b)}
+Nein: $25 = 6\cdot4 + 1$ und $35 = 6\cdot6 - 1$ sind nicht prim. Die Form $6k\pm1$ ist notwendig, nicht hinreichend.
+\schritt{(c)}
+$p^{2} - 1 = (p - 1)(p + 1)$. Mit $p = 6k\pm1$: $(p - 1)(p + 1) = 6k(6k\pm2) = 12k(3k\pm1)$. Von $k$ und $3k\pm1$ ist eines gerade (ist $k$ ungerade, so ist $3k\pm1$ gerade), also $24\mid p^{2} - 1$. $\blacksquare$ Probe: $p = 5$: $24$; $p = 7$: $48$; $p = 11$: $120 = 5\cdot24$. \checkmark
+\begin{mitnehmen}\kastentext
+\enquote{Primzahlen $> 3$ sind $\equiv\pm1\pmod6$} sagt: Von sechs aufeinanderfolgenden Zahlen kommen nur zwei als Primzahlen infrage. Ein Primzahltest muss nur ein Drittel aller Kandidaten prüfen --- die \enquote{Wheel-Faktorisierung} der Praxis.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.19
+\stupserzwei{gruen}{$N = 4p_1\cdots p_k - 1\equiv3\pmod4$. Wären alle Primfaktoren von $N$ $\equiv1\pmod4$, wäre $N$ es auch (nach (a)). Also hat $N$ einen Primfaktor $\equiv3$, und der ist keines der $p_i$.}{22pt}
+\begin{loesungkarte}{gruen}{1.19}{Unendlich viele $4k + 3$}
+\derweg{Euklid: Aus endlich vielen eine neue Zahl bauen, die einen neuen Primfaktor der gewünschten Form haben muss.}
+\schritt{(a)}
+$(4a + 1)(4b + 1) = 16ab + 4a + 4b + 1 = 4(4ab + a + b) + 1$. Induktiv für beliebig viele Faktoren. $\blacksquare$
+\schritt{(b)}
+Angenommen, $p_1, \dots, p_k$ seien alle Primzahlen der Form $4k + 3$. Setze $N = 4p_1p_2\cdots p_k - 1$. $N$ ist ungerade und $\equiv3\pmod4$. Alle Primfaktoren von $N$ sind ungerade, also $\equiv1$ oder $\equiv3\pmod4$. Wären alle $\equiv1$, so wäre $N\equiv1$ nach (a) --- Widerspruch. Also hat $N$ einen Primfaktor $q\equiv3\pmod4$. Aber kein $p_i$ teilt $N$ (es ließe Rest $-1$, also $p_i - 1$). Also ist $q$ eine neue Primzahl der Form $4k + 3$. $\blacksquare$
+\schritt{(c)}
+Für $4k + 1$ scheitert das Analogon: Ein Produkt von Zahlen $\equiv3\pmod4$ kann $\equiv1$ sein ($3\cdot3 = 9$), also folgt aus $N\equiv1$ nicht, dass ein Primfaktor $\equiv1$ ist. Für $4k + 1$ braucht man $N = (2p_1\cdots p_k)^{2} + 1$ und den Satz, dass Primteiler von $x^{2} + 1$ immer $\equiv1\pmod4$ sind (Ergänzungssatz, Kapitel 8). Für allgemeines $ak + b$ mit $\operatorname{ggT}(a, b) = 1$: Dirichlet 1837, analytisch (Kapitel 10).
+\begin{mitnehmen}\kastentext
+Euklids Beweis ist ein Bauplan: Konstruiere aus den bekannten Primzahlen eine Zahl, die eine unbekannte erzwingt. Für Restklassen funktioniert er genau dann elementar, wenn die \enquote{anderen} Restklassen multiplikativ abgeschlossen sind.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.20
+\stupserzwei{tief}{$14x\equiv30\pmod{100}\iff7x\equiv15\pmod{50}$. Inverses von $7$ modulo $50$: $7\cdot43 = 301 = 6\cdot50 + 1$.}{22pt}
+\begin{loesungkarte}{tief}{1.20}{Eine lineare Kongruenz mit zwei Lösungen}
+\derweg{ggT prüfen, durch ihn kürzen (auch den Modul), dann mit dem Inversen multiplizieren; am Ende die Lösungen modulo des alten Moduls auffächern.}
+\schritt{(a)}
+$\operatorname{ggT}(14, 100) = 2\mid30$: lösbar, zwei Lösungen. Kürzen: $7x\equiv15\pmod{50}$. $7^{-1}\equiv43\pmod{50}$, also $x\equiv15\cdot43 = 645\equiv45\pmod{50}$. Modulo $100$: $x\equiv45$ oder $x\equiv95$. Probe: $14\cdot45 = 630\equiv30$, $14\cdot95 = 1330\equiv30$. \checkmark
+\schritt{(b)}
+$2\nmid31$: keine Lösung --- $14x$ ist immer gerade, $31 + 100k$ immer ungerade.
+\schritt{(c)}
+Erweiterter Euklid für $7$ und $50$: $50 = 7\cdot7 + 1$, also $1 = 50 - 7\cdot7$, also $7\cdot(-7)\equiv1$, $7^{-1}\equiv-7\equiv43$. Damit $x\equiv15\cdot43\equiv45\pmod{50}$, wie in (a).
+\begin{mitnehmen}\kastentext
+$ax\equiv b\pmod m$: $d = \operatorname{ggT}(a, m)$ muss $b$ teilen; dann durch $d$ kürzen, Inverses nehmen, und die eine Lösung modulo $m/d$ wird zu $d$ Lösungen modulo $m$. Das Inverse liefert immer Euklid --- oder, bei kleinen Zahlen, das Hinsehen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.21
+\stupserzwei{akzent}{Aus $ca\equiv cb\pmod m$ folgt $m\mid c(a - b)$. Teilt man $m$ und $c$ durch ihren ggT $d$, so ist $m/d$ teilerfremd zu $c/d$ und muss $a - b$ teilen.}{22pt}
+\begin{loesungkarte}{akzent}{1.21}{Kürzen in Kongruenzen}
+\derweg{Kongruenz als Teilbarkeit lesen; der Modul verliert beim Kürzen den Faktor, den er mit $c$ gemeinsam hat.}
+\schritt{(a)}
+$6x\bmod9$ für $x = 0, \dots, 8$: $0, 6, 3, 0, 6, 3, 0, 6, 3$. Gleich $6$ für $x = 1, 4, 7$ --- drei Lösungen, nicht eine.
+\schritt{(b)}
+Aus $ca\equiv cb\pmod m$ folgt $a\equiv b\pmod{m/\operatorname{ggT}(c, m)}$. Beweis: $m\mid c(a - b)$; mit $d = \operatorname{ggT}(c, m)$ ist $\frac md\mid\frac cd(a - b)$ und $\operatorname{ggT}(\frac md, \frac cd) = 1$, also $\frac md\mid a - b$ (Lemma von Euklid). Hier: $6x\equiv6\pmod9$ gibt $x\equiv1\pmod3$, also $x\in\{1, 4, 7\}$ modulo $9$. \checkmark
+\schritt{(c)}
+Genau für $\operatorname{ggT}(c, m) = 1$ bleibt der Modul: Dann hat $c$ ein Inverses modulo $m$, und Kürzen ist Multiplikation mit $c^{-1}$ --- eine umkehrbare Operation. Ist $\operatorname{ggT}(c, m) > 1$, hat $c$ kein Inverses, und $c\cdot(\cdot)$ ist nicht injektiv modulo $m$: Verschiedene $x$ geben dasselbe $cx$.
+\schritt{(d)}
+$15x\equiv25\pmod{35}$: $\operatorname{ggT}(15, 35) = 5$, kürzen zu $3x\equiv5\pmod7$. $3^{-1}\equiv5\pmod7$ ($15\equiv1$), also $x\equiv25\equiv4\pmod7$: $x\in\{4, 11, 18, 25, 32\}$ modulo $35$. Probe: $15\cdot4 = 60\equiv25$. \checkmark
+\begin{fehler}\kastentext
+\enquote{$6x\equiv6$, also $x\equiv1$.} --- Man hat durch $6$ geteilt, das modulo $9$ kein Inverses hat. Die Restklassen sind kein Körper, wenn der Modul nicht prim ist: Nullteiler ($3\cdot6\equiv0$) machen die Division zweideutig.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Kürzen durch $c$: Modul durch $\operatorname{ggT}(c, m)$ teilen. Ist $m$ prim, darf man alles außer $0$ kürzen --- der Grund, warum $\mathbb Z/p\mathbb Z$ ein Körper ist und $\mathbb Z/9\mathbb Z$ nicht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.22
+\stupserzwei{gruen}{$7^{100}\equiv2^{100} = (2^{4})^{25}\equiv1^{25}$.}{22pt}
+\begin{loesungkarte}{gruen}{1.22}{$7^{100}$ modulo 5}
+\derweg{Basis reduzieren, Periode finden, Exponent modulo Periode.}
+\schritt{(a)}
+$7\equiv2\pmod5$; $2^{1}, 2^{2}, 2^{3}, 2^{4}\equiv2, 4, 3, 1$. Periode $4$, $100 = 4\cdot25$: $7^{100}\equiv1$. Rest $1$.
+\schritt{(b)}
+$7^{101}\equiv2^{1} = 2$. $7^{2026}$: $2026 = 4\cdot506 + 2$, also $\equiv2^{2} = 4$.
+\probe{$7^{2} = 49\equiv4$, $7^{4}\equiv16\equiv1$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Potenzen einer Zahl modulo $m$ sind periodisch; die Periode heißt Ordnung und teilt $\varphi(m)$ (Kapitel 7). Exponenten rechnet man modulo der Ordnung --- nie modulo $m$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.23
+\stupserzwei{gruen}{$n = \sum a_k10^{k}\equiv\sum a_k\cdot1^{k} = Q(n)\pmod9$. Für $11$: $10\equiv-1$, also $10^{k}\equiv(-1)^{k}$.}{22pt}
+\begin{loesungkarte}{gruen}{1.23}{Die Neunerprobe}
+\derweg{Die Zahl als Summe $a_k10^{k}$ schreiben und $10$ durch seinen Rest ersetzen.}
+\schritt{(a)}
+$10\equiv1\pmod9$, also $10^{k}\equiv1$ für alle $k$, also $n = \sum_ka_k10^{k}\equiv\sum_ka_k = Q(n)\pmod9$. Insbesondere $9\mid n\iff9\mid Q(n)$ --- und mehr: $n$ und $Q(n)$ lassen denselben Rest. (Dasselbe für $3$.) $\blacksquare$
+\schritt{(b)}
+$10\equiv-1\pmod{11}$, also $10^{k}\equiv(-1)^{k}$ und $n\equiv a_0 - a_1 + a_2 - \dots = Q'(n)$, die alternierende Quersumme von rechts. $\blacksquare$
+\schritt{(c)}
+$10^{3} = 1000 = 143\cdot7 - 1\equiv-1\pmod7$. Zerlegt man $n$ in Dreierblöcke von rechts, $n = B_0 + B_1\cdot10^{3} + B_2\cdot10^{6} + \dots$, so $n\equiv B_0 - B_1 + B_2 - \dots\pmod7$. Beispiel $987\,654\,321$: $321 - 654 + 987 = 654 = 7\cdot93 + 3$, also Rest $3$. (Dieselbe Regel gilt für $11$ und $13$, denn $1001 = 7\cdot11\cdot13$.)
+\probe{(c): $987\,654\,321 = 7\cdot141\,093\,474 + 3$. \checkmark}
+\begin{mitnehmen}\kastentext
+Jede Teilbarkeitsregel ist \enquote{$10^{k}$ modulo $m$ ausgerechnet}. Für $m = 9$: alles $1$. Für $11$: $\pm1$. Für $7$: Periode $6$, oder Dreierblöcke mit $\pm1$. Für $2$ und $5$: nur $10^{0}$ zählt --- die letzte Ziffer.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.24
+\stupserzwei{gruen}{$2x\equiv5\pmod7$: $2^{-1}\equiv4$, also $x\equiv20\equiv6\pmod7$. Zurück modulo $21$: $6, 13, 20$.}{22pt}
+\begin{loesungkarte}{gruen}{1.24}{$6x\equiv15\pmod{21}$}
+\derweg{Durch $\operatorname{ggT}(6, 21) = 3$ kürzen, lösen, auffächern.}
+\schritt{Rechnung}
+$3\mid15$: lösbar, drei Lösungen. $2x\equiv5\pmod7$; $2\cdot4 = 8\equiv1$, also $x\equiv4\cdot5 = 20\equiv6\pmod7$. Modulo $21$: $x\in\{6, 13, 20\}$.
+\probe{$6\cdot6 = 36\equiv15$; $6\cdot13 = 78 = 3\cdot21 + 15$; $6\cdot20 = 120 = 5\cdot21 + 15$. \checkmark}
+\begin{mitnehmen}\kastentext
+Drei Lösungen, weil $\operatorname{ggT} = 3$; eine Lösung modulo $7$, drei modulo $21$. Die Zahl der Lösungen steht fest, bevor man rechnet.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.25
+\stupserzwei{tief}{$e_1 = 35\cdot3 = 105$ ($35\equiv3\pmod4$, $3\cdot3\equiv1$), $e_2 = 28\cdot2 = 56$, $e_3 = 20\cdot6 = 120$. Dann $x = 1\cdot e_1 + 2\cdot e_2 + 3\cdot e_3$.}{22pt}
+\begin{loesungkarte}{tief}{1.25}{Drei Reste, ein Rest}
+\derweg{Für jeden Modul einen Baustein $e_i$ bauen, der dort $1$ und sonst $0$ ist; die Lösung ist die gewichtete Summe.}
+\schritt{(a), (b)}
+$M = 4\cdot5\cdot7 = 140$. $e_1$: Vielfaches von $35$ mit Rest $1$ bei $4$: $35\equiv3\pmod4$, $3^{-1}\equiv3$, $e_1 = 35\cdot3 = 105$. $e_2$: Vielfaches von $28$ mit Rest $1$ bei $5$: $28\equiv3\pmod5$, $3^{-1}\equiv2$, $e_2 = 56$. $e_3$: Vielfaches von $20$ mit Rest $1$ bei $7$: $20\equiv6\equiv-1\pmod7$, $(-1)^{-1} = -1\equiv6$, $e_3 = 120$.
+\[ x\equiv1\cdot105 + 2\cdot56 + 3\cdot120 = 577\equiv577 - 4\cdot140 = 17\pmod{140} . \]
+Zweites System: $x\equiv3\cdot105 + 0\cdot56 + 6\cdot120 = 1035\equiv1035 - 7\cdot140 = 55\pmod{140}$.
+\rand{$17$: Rest $1$ bei $4$, $2$ bei $5$, $3$ bei $7$. \checkmark\ $55$: $3$, $0$, $6$. \checkmark}{-40pt}
+\schritt{(c)}
+Die Bausteine brauchen $M/m_i$ invertierbar modulo $m_i$, also $\operatorname{ggT}(M/m_i, m_i) = 1$ --- das ist paarweise Teilerfremdheit. Bei $4$ und $6$: $x\equiv1\pmod4$ heißt $x$ ungerade, $x\equiv2\pmod6$ heißt $x$ gerade. Keine Lösung. Und $x\equiv1\pmod4$, $x\equiv3\pmod6$ hätte Lösungen ($9, 21, \dots$), aber modulo $\operatorname{kgV} = 12$, nicht modulo $24$. Allgemein: lösbar genau dann, wenn die Reste modulo $\operatorname{ggT}(m_i, m_j)$ übereinstimmen.
+\begin{mitnehmen}\kastentext
+Die Bausteine $e_i$ sind die \enquote{Einheitsvektoren} des Restsatzes: Mit ihnen ist jedes System zu denselben Moduln eine Zeile. Sie sind genau das, was $\mathbb Z/140\cong\mathbb Z/4\times\mathbb Z/5\times\mathbb Z/7$ bedeutet.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.26
+\stupserzwei{gruen}{Rest $2$ bei $3$ und $7$: $x\equiv2\pmod{21}$, also $x\in\{2, 23, 44, \dots\}$. Welche davon lässt Rest $3$ bei $5$?}{22pt}
+\begin{loesungkarte}{gruen}{1.26}{Meister Sun}
+\derweg{Zwei Kongruenzen zusammenfassen, die dritte durch Probieren in Schritten des Produkts.}
+\schritt{(a)}
+Aus $x\equiv2\pmod3$ und $x\equiv2\pmod7$ folgt $x\equiv2\pmod{21}$: $2, 23, 44, 65, 86$. Rest $3$ bei $5$: $23$. Also $x = 23$.
+\schritt{(b)}
+$x\equiv23\pmod{105}$: $23, 128, 233, \dots$
+\probe{$23 = 7\cdot3 + 2 = 4\cdot5 + 3 = 3\cdot7 + 2$. \checkmark}
+\begin{mitnehmen}\kastentext
+Meister Sun selbst rechnete mit den Bausteinen $70, 21, 15$ (das sind $e_1, e_2, e_3$ für $3, 5, 7$): $2\cdot70 + 3\cdot21 + 2\cdot15 = 233$, minus $2\cdot105$ gleich $23$. Der Vers dazu steht in Band 1, Kapitel 6.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.27
+\stupserzwei{gruen}{Modulo $3$, $5$, $7$ je $x\equiv\pm1$: $2\cdot2\cdot2 = 8$ Kombinationen, jede nach dem Restsatz genau eine Zahl modulo $105$.}{22pt}
+\begin{loesungkarte}{gruen}{1.27}{$x^{2}\equiv1\pmod{105}$}
+\derweg{Modulo jeder Primzahl zwei Lösungen, der Restsatz kombiniert sie unabhängig.}
+\schritt{(a)}
+$x^{2}\equiv1\pmod p$ hat für ungerades $p$ genau die Lösungen $\pm1$ (denn $p\mid(x - 1)(x + 1)$ erzwingt $p\mid x - 1$ oder $p\mid x + 1$). Modulo $105 = 3\cdot5\cdot7$: $2^{3} = 8$ Vorzeichenkombinationen, je eine Lösung. Mit den Bausteinen $70, 21, 15$: $x\equiv\pm70\pm21\pm15$. Die acht Lösungen: $1, 29, 34, 41, 64, 71, 76, 104$.
+\rand{$29^{2} = 841 = 8\cdot105 + 1$. \checkmark\ $34^{2} = 1156 = 11\cdot105 + 1$. \checkmark}{-30pt}
+\schritt{(b)}
+$2^{k}$ Lösungen --- jede Primzahl verdoppelt.
+\schritt{(c)}
+$x = 29$: $\operatorname{ggT}(28, 105) = 7$. $x = 34$: $\operatorname{ggT}(33, 105) = 3$. $x = 41$: $\operatorname{ggT}(40, 105) = 5$. Jede nichttriviale Quadratwurzel von $1$ liefert einen echten Faktor von $105$ --- denn $105\mid(x - 1)(x + 1)$, aber weder $x - 1$ noch $x + 1$: Die Primfaktoren verteilen sich auf beide.
+\begin{mitnehmen}\kastentext
+Nichttriviale Quadratwurzeln von $1$ gibt es nur modulo zusammengesetzter Zahlen, und jede verrät einen Faktor. Das ist der Kern des Miller--Rabin-Tests (Kapitel 18) und der Faktorisierung mit Differenzen von Quadraten (Kapitel 19).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.28
+\stupserzwei{gruen}{$x\equiv1\pmod{60}$ und $x\equiv0\pmod7$: $x = 60k + 1$, und $60k + 1\equiv4k + 1\equiv0\pmod7$ gibt $k\equiv5$.}{22pt}
+\begin{loesungkarte}{gruen}{1.28}{Die Eier im Korb}
+\derweg{Die fünf Bedingungen zu einer zusammenfassen (kgV), dann mit der sechsten kombinieren.}
+\schritt{Rechnung}
+Rest $1$ bei $2, 3, 4, 5, 6$ heißt $x - 1$ durch $\operatorname{kgV}(2, 3, 4, 5, 6) = 60$ teilbar: $x = 60k + 1$. Dazu $7\mid x$: $60k + 1\equiv4k + 1\equiv0\pmod7$, $4k\equiv6$, $k\equiv6\cdot4^{-1} = 6\cdot2 = 12\equiv5\pmod7$. Also $x = 60\cdot5 + 1 = 301$; alle Lösungen $301 + 420t$.
+\probe{$301 = 7\cdot43$; $300 = 60\cdot5$ ist durch $2, 3, 4, 5, 6$ teilbar. \checkmark}
+\begin{mitnehmen}\kastentext
+Moduln, die nicht teilerfremd sind, fasst man erst zusammen (kgV, Verträglichkeit der Reste prüfen), dann wendet man den Restsatz an. Hier passten alle fünf Reste zusammen, weil sie gleich waren.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.29
+\stupserzwei{tief}{$3^{1}, 3^{2}, 3^{3}, 3^{4}\equiv3, 9, 7, 1\pmod{10}$; $2025 = 4\cdot506 + 1$. Für (b): $1000 = 12\cdot83 + 4$.}{22pt}
+\begin{loesungkarte}{tief}{1.29}{Letzte Ziffern und Ordnungen}
+\derweg{Ordnung oder Fermat liefert die Periode; der Exponent wird modulo Periode reduziert.}
+\schritt{(a)}
+Modulo $10$: $3^{4} = 81\equiv1$, Periode $4$. $2025\equiv1\pmod4$, also $3^{2025}\equiv3^{1} = 3$: letzte Ziffer $3$.
+\schritt{(b)}
+Fermat: $2^{12}\equiv1\pmod{13}$. $1000 = 12\cdot83 + 4$, also $2^{1000}\equiv2^{4} = 16\equiv3\pmod{13}$.
+\schritt{(c)}
+Potenzen von $2$ modulo $13$: $2, 4, 8, 3, 6, 12, 11, 9, 5, 10, 7, 1$ --- erst $2^{12}$ ist $1$: Ordnung $12$, $2$ ist Primitivwurzel. Eine kleinere Ordnung hätte den Exponenten weiter reduziert; hier war $12$ schon das Beste. (Für $3$ modulo $13$: $3^{3} = 27\equiv1$, Ordnung $3$ --- da reduziert man $1000$ modulo $3$.)
+\begin{mitnehmen}\kastentext
+Der Exponent lebt modulo der Ordnung; die Ordnung teilt $\varphi(m)$; Fermat/Euler geben $\varphi(m)$ als sichere, oft zu große Periode. Wer die wahre Ordnung kennt, rechnet mit kleineren Zahlen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.30
+\stupserzwei{akzent}{$2^{10} = 1024 = 93\cdot11 + 1\equiv1\pmod{11}$ und $1024 = 33\cdot31 + 1\equiv1\pmod{31}$. Also $2^{340} = (2^{10})^{34}\equiv1$ modulo beider Faktoren.}{22pt}
+\begin{loesungkarte}{akzent}{1.30}{341 besteht den Test}
+\derweg{Modulo beider Primfaktoren rechnen und mit dem Restsatz zusammensetzen; dann sehen, dass eine andere Basis die Zahl entlarvt.}
+\schritt{(a)}
+$2^{10} = 1024\equiv1\pmod{11}$ und $\equiv1\pmod{31}$. Also $2^{340} = (2^{10})^{34}\equiv1$ modulo $11$ und $31$, also modulo $341$. Die zusammengesetzte Zahl $341$ \enquote{besteht} den Fermat-Test zur Basis $2$: eine \emph{Pseudoprimzahl} zur Basis $2$, die kleinste.
+\schritt{(b)}
+$3^{5} = 243\equiv1\pmod{11}$ ($243 = 22\cdot11 + 1$), also $3^{340} = (3^{5})^{68}\equiv1\pmod{11}$. Modulo $31$: $3^{3} = 27\equiv-4$, $3^{5} = 243 = 7\cdot31 + 26\equiv-5$, $3^{10}\equiv25\equiv-6$, $3^{30}\equiv(-6)^{3} = -216 = -7\cdot31 + 1\equiv1$; also $3^{340} = 3^{330}\cdot3^{10}\equiv1\cdot(-6)\equiv25\pmod{31}$. Zusammen: $x\equiv1\pmod{11}$, $x\equiv25\pmod{31}$ --- das ist $56$ ($56 = 5\cdot11 + 1$, $56 = 31 + 25$). $3^{340}\equiv56\not\equiv1\pmod{341}$: Zur Basis $3$ fällt $341$ durch. Der Test ist zusammengesetzt, aber die Basis $2$ hat es nicht gemerkt.
+\schritt{(c)}
+Fermat: \emph{Wenn} $n$ prim ist, \emph{dann} $a^{n-1}\equiv1$ für alle $a$ mit $p\nmid a$. Gilt $a^{n-1}\not\equiv1$ für ein $a$, ist $n$ sicher zusammengesetzt. Gilt $a^{n-1}\equiv1$, ist $n$ prim \emph{oder} eine Pseudoprimzahl zur Basis $a$ --- der Test beweist nie Primalität.
+\schritt{(d)}
+Weil Pseudoprimzahlen selten sind (unter $10^{10}$ etwa $15\,000$ zur Basis $2$ gegen $455$ Millionen Primzahlen) und weil eine zweite Basis die meisten entlarvt. Nur die Carmichael-Zahlen ($561, 1105, 1729, \dots$) bestehen den Test für \emph{jede} teilerfremde Basis --- und für die gibt es Miller--Rabin (Kapitel 18, Aufgabe 18.1).
+\begin{fehler}\kastentext
+\enquote{$a^{n-1}\equiv1\pmod n$, also ist $n$ prim.} --- Das ist die Umkehrung des kleinen Fermat, und sie ist falsch: $341$, $561$, $645$ bestehen den Test zur Basis $2$. Ein Satz der Form \enquote{prim $\Rightarrow$ Eigenschaft} ist ein Test, der nur \emph{aussortieren} kann.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Implikation ist keine Äquivalenz. Fermat liefert einen \emph{Zusammengesetztheitsbeweis}, nie einen Primzahlbeweis; dass er in der Praxis trotzdem reicht, liegt an Wahrscheinlichkeiten, nicht an Logik.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.31
+\stupserzwei{gruen}{$3^{1000} = (3^{6})^{166}\cdot3^{4}$.}{22pt}
+\begin{loesungkarte}{gruen}{1.31}{$3^{1000}$ modulo 7}
+\derweg{Fermat, Exponent modulo $6$.}
+\schritt{Rechnung}
+$3^{6}\equiv1\pmod7$; $1000 = 6\cdot166 + 4$; $3^{1000}\equiv3^{4} = 81 = 11\cdot7 + 4\equiv4$.
+\probe{Ordnung von $3$ modulo $7$ ist $6$ ($3, 2, 6, 4, 5, 1$), also war Fermat hier scharf. \checkmark}
+\begin{mitnehmen}\kastentext
+Eine Zeile --- wenn man den Exponenten reduziert, bevor man rechnet.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.32
+\stupserzwei{gruen}{$\varphi(2^{3}) = 4$, $\varphi(3^{2}) = 6$, $\varphi(5) = 4$; $\varphi(1000) = \varphi(2^{3})\varphi(5^{3}) = 4\cdot100$.}{22pt}
+\begin{loesungkarte}{gruen}{1.32}{$\varphi(360)$ und $\varphi(1000)$}
+\derweg{Zerlegen, $\varphi(p^{k}) = p^{k-1}(p - 1)$, multiplizieren.}
+\schritt{(a)}
+$\varphi(360) = \varphi(8)\varphi(9)\varphi(5) = 4\cdot6\cdot4 = 96$. $\varphi(1000) = \varphi(8)\varphi(125) = 4\cdot100 = 400$.
+\schritt{(b)}
+$360\cdot(1 - \tfrac12)(1 - \tfrac13)(1 - \tfrac15) = 360\cdot\tfrac12\cdot\tfrac23\cdot\tfrac45 = 96$. \checkmark
+\schritt{(c)}
+$\varphi(n) = n - 1$ genau für Primzahlen: Dann sind alle $1, \dots, n - 1$ teilerfremd zu $n$; ist $n$ zusammengesetzt, ist ein echter Teiler nicht teilerfremd, also $\varphi(n)\le n - 2$.
+\begin{mitnehmen}\kastentext
+$\varphi(n)$ zählt die invertierbaren Reste. Es ist leicht aus der Zerlegung und --- für große $n$ --- ohne sie nicht zu berechnen; und wer $\varphi(n)$ kennt, kann $n = pq$ faktorisieren (Kapitel 17). Darauf beruht RSA.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.33
+\stupserzwei{gruen}{$7^{4} = 2401\equiv1\pmod{100}$. $2026 = 4\cdot506 + 2$.}{22pt}
+\begin{loesungkarte}{gruen}{1.33}{Die letzten beiden Ziffern von $7^{2026}$}
+\derweg{Die Ordnung von $7$ modulo $100$ finden --- sie ist viel kleiner als $\varphi(100) = 40$.}
+\schritt{(a)}
+$7^{2} = 49$, $7^{4} = 49^{2} = 2401\equiv1\pmod{100}$. Also $7^{2026} = (7^{4})^{506}\cdot7^{2}\equiv49$. Die letzten Ziffern sind $49$.
+\schritt{(b)}
+Ordnung $4$. Nach Euler teilt die Ordnung $\varphi(100) = 40$; möglich wären $1, 2, 4, 5, 8, 10, 20, 40$. Mit Euler allein: $2026 = 40\cdot50 + 26$, $7^{26} = (7^{4})^{6}\cdot7^{2}\equiv49$ --- dasselbe, nur mit einem Umweg.
+\begin{mitnehmen}\kastentext
+Euler gibt eine Periode, die Ordnung die kleinste. Bei kleinen Basen lohnt es, ein paar Potenzen auszurechnen, bevor man $\varphi$ bemüht: $7^{4}\equiv1$ ist schneller gefunden als $7^{40}$ ausgerechnet.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.34
+\stupserzwei{gruen}{$2^{3} = 8\equiv1$: Ordnung $3$. $3^{1}, \dots, 3^{6}\equiv3, 2, 6, 4, 5, 1$: Ordnung $6$. $6 = -1$: Ordnung $2$.}{22pt}
+\begin{loesungkarte}{gruen}{1.34}{Ordnungen modulo 7}
+\derweg{Potenzen bilden bis zur $1$; die Ordnungen sind Teiler von $6$.}
+\schritt{(a)}
+$\operatorname{ord}(1) = 1$; $\operatorname{ord}(2) = 3$ ($2, 4, 1$); $\operatorname{ord}(3) = 6$ ($3, 2, 6, 4, 5, 1$); $\operatorname{ord}(4) = 3$ ($4, 2, 1$); $\operatorname{ord}(5) = 6$ ($5, 4, 6, 2, 3, 1$); $\operatorname{ord}(6) = 2$.
+\schritt{(b)}
+Primitivwurzeln: $3$ und $5$ (Ordnung $6 = \varphi(7)$). Formel $\varphi(\varphi(7)) = \varphi(6) = 2$. \checkmark
+\schritt{(c)}
+Ordnungen $1, 2, 3, 3, 6, 6$ --- alle Teiler von $6$, und jeder Teiler $d$ kommt genau $\varphi(d)$-mal vor: $\varphi(1) = 1$, $\varphi(2) = 1$, $\varphi(3) = 2$, $\varphi(6) = 2$. Das ist kein Zufall, sondern die Struktur der zyklischen Gruppe (Band 11).
+\begin{mitnehmen}\kastentext
+Die Ordnung teilt $\varphi(m)$ (Lagrange); die Zahl der Elemente der Ordnung $d$ ist $\varphi(d)$, wenn eine Primitivwurzel existiert. Modulo einer Primzahl ist $(\mathbb Z/p)^{\times}$ zyklisch --- der Satz, den Kapitel 7.5 beweist.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.35
+\stupserzwei{gruen}{$g^{4}\not\equiv1$ und $g^{6}\not\equiv1$ prüfen. $2^{4} = 16\equiv3$, $2^{6} = 64\equiv12$: $2$ ist Primitivwurzel.}{22pt}
+\begin{loesungkarte}{gruen}{1.35}{Primitivwurzeln modulo 13}
+\derweg{Ordnung $12$ heißt: keine der Potenzen $g^{12/q}$ für $q\in\{2, 3\}$ ist $1$.}
+\schritt{(a)}
+Die Ordnung teilt $12$; sie ist genau $12$, wenn $g^{6}\not\equiv1$ und $g^{4}\not\equiv1$. Tabelle: $g^{2}, g^{4} = (g^{2})^{2}, g^{6} = g^{4}g^{2}$ modulo $13$:
+\begin{center}
+{\small\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}c|cccccccccccc@{}}
+$g$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\\hline
+$g^{4}$ & 1 & 3 & 3 & 9 & 1 & 9 & 9 & 1 & 9 & 3 & 3 & 1\\
+$g^{6}$ & 1 & 12 & 1 & 1 & 12 & 12 & 12 & 12 & 1 & 1 & 12 & 1\\
+\end{tabular}}
+\end{center}
+Beide $\neq1$ bei $g = 2, 6, 7, 11$. Das sind die Primitivwurzeln.
+\schritt{(b)}
+$\varphi(12) = 4$. \checkmark\ (Es sind $2^{k}$ für $k$ teilerfremd zu $12$: $2^{1} = 2$, $2^{5} = 6$, $2^{7} = 11$, $2^{11} = 7$.)
+\schritt{(c)}
+$2^{0}, \dots, 2^{11}$: $1, 2, 4, 8, 3, 6, 12, 11, 9, 5, 10, 7$. $5 = 2^{9}$, also $\log_25 = 9$. Alle Reste $1, \dots, 12$ kommen vor --- das ist, was Primitivwurzel heißt.
+\begin{mitnehmen}\kastentext
+Primitivwurzel-Test: $g^{(p-1)/q}\not\equiv1$ für jeden Primteiler $q$ von $p - 1$. Der diskrete Logarithmus ist leicht abzulesen, wenn die Tabelle da ist, und ohne Tabelle schwer --- Diffie--Hellman (Kapitel 17) lebt davon.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.36
+\stupserzwei{gruen}{Modulo $11$: $2\cdot6 = 12\equiv1$, $3\cdot4\equiv1$, $5\cdot9 = 45\equiv1$, $7\cdot8 = 56\equiv1$. Übrig bleiben $1$ und $10$.}{22pt}
+\begin{loesungkarte}{gruen}{1.36}{Wilson für 11 und 9}
+\derweg{Jedes Element außer $\pm1$ mit seinem Inversen paaren; die Paare geben $1$, übrig bleibt $-1$.}
+\schritt{(a)}
+$10! = 1\cdot(2\cdot6)(3\cdot4)(5\cdot9)(7\cdot8)\cdot10\equiv1\cdot1\cdot1\cdot1\cdot1\cdot10\equiv-1\pmod{11}$. \checkmark\ Nur $1$ und $10\equiv-1$ sind zu sich selbst invers ($x^{2}\equiv1$ hat modulo einer Primzahl nur $\pm1$, Aufgabe 1.27).
+\schritt{(b)}
+$8! = 40320 = 4480\cdot9$, also $8!\equiv0\not\equiv-1\pmod9$. Nach Wilson (Richtung \enquote{$(n - 1)!\equiv-1\Rightarrow n$ prim}) ist $9$ nicht prim.
+\schritt{(c)}
+Ist $n = ab$ mit $1 < a < b < n$, so stehen $a$ und $b$ beide in $(n - 1)!$, also $n\mid(n - 1)!$. Ist $n = p^{2}$ mit $p > 2$, so stehen $p$ und $2p < p^{2}$ darin, also $p^{2}\mid(n - 1)!$. Ausnahme $n = 4$: $3! = 6\equiv2\pmod4$.
+\begin{mitnehmen}\kastentext
+Wilson ist eine Äquivalenz --- im Gegensatz zu Fermat (Aufgabe 1.30) ein perfekter Primzahltest. Nur rechnet niemand $(n - 1)!$ für $n$ mit $300$ Stellen; die Fakultät hat keine schnelle Potenzierung.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.37
+\stupserzwei{tief}{$\bigl(\frac3{41}\bigr) = \bigl(\frac{41}3\bigr) = \bigl(\frac23\bigr) = -1$ und $\bigl(\frac5{41}\bigr) = \bigl(\frac{41}5\bigr) = \bigl(\frac15\bigr) = 1$.}{22pt}
+\begin{loesungkarte}{tief}{1.37}{Ein Legendre-Symbol, Schritt für Schritt}
+\derweg{Multiplikativität im Zähler, Reziprozität zum Umdrehen, Reduktion des Zählers modulo Nenner, Ergänzungssätze für $-1$ und $2$.}
+\schritt{(a)}
+$\bigl(\frac{15}{41}\bigr) = \bigl(\frac3{41}\bigr)\bigl(\frac5{41}\bigr)$. $41\equiv1\pmod4$, also dreht Reziprozität ohne Vorzeichen: $\bigl(\frac3{41}\bigr) = \bigl(\frac{41}3\bigr) = \bigl(\frac23\bigr) = -1$ ($2$ ist kein Quadrat modulo $3$); $\bigl(\frac5{41}\bigr) = \bigl(\frac{41}5\bigr) = \bigl(\frac15\bigr) = 1$. Produkt: $\bigl(\frac{15}{41}\bigr) = -1$. $x^{2}\equiv15\pmod{41}$ ist unlösbar.
+\schritt{(b)}
+Euler: $15^{20}\bmod41$. $15^{2} = 225 = 5\cdot41 + 20\equiv20$; $15^{4}\equiv400 = 9\cdot41 + 31\equiv31\equiv-10$; $15^{8}\equiv100\equiv18$; $15^{16}\equiv324 = 7\cdot41 + 37\equiv37\equiv-4$; $15^{20} = 15^{16}\cdot15^{4}\equiv(-4)(-10) = 40\equiv-1$. \checkmark
+\schritt{(c)}
+$\bigl(\frac2{41}\bigr) = +1$, da $41\equiv1\pmod8$. $\bigl(\frac{-1}{41}\bigr) = +1$, da $41\equiv1\pmod4$. (Tatsächlich $9^{2} = 81\equiv-1$ und $17^{2} = 289 = 7\cdot41 + 2\equiv2$.)
+\begin{mitnehmen}\kastentext
+Legendre-Symbole rechnet man wie einen euklidischen Algorithmus: umdrehen, reduzieren, Zweierpotenzen abspalten. Jeder Schritt braucht nur \enquote{modulo $4$} und \enquote{modulo $8$} --- nie eine Quadratzahl.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.38
+\stupserzwei{gruen}{Quadrate modulo $13$: $1, 4, 9, 3, 12, 10$. Die $5$ fehlt.}{22pt}
+\begin{loesungkarte}{gruen}{1.38}{$x^{2}\equiv5\pmod{13}$}
+\derweg{Einmal die sechs Quadrate hinschreiben, einmal Reziprozität.}
+\schritt{(a)}
+$x^{2}$ für $x = 1, \dots, 6$ (die anderen sind Negative): $1, 4, 9, 16\equiv3, 25\equiv12, 36\equiv10$. Quadratische Reste: $\{1, 3, 4, 9, 10, 12\}$. $5$ ist keiner --- unlösbar.
+\schritt{(b)}
+$\bigl(\frac5{13}\bigr) = \bigl(\frac{13}5\bigr)$ ($13\equiv1\pmod4$) $= \bigl(\frac35\bigr) = \bigl(\frac53\bigr)$ ($5\equiv1\pmod4$) $= \bigl(\frac23\bigr) = -1$. \checkmark
+\begin{mitnehmen}\kastentext
+Genau die Hälfte der Reste $1, \dots, p - 1$ sind Quadrate. Für $p = 13$ kann man sie hinschreiben; für $p = 383$ (nächste Aufgabe) nicht mehr --- und das Reziprozitätsgesetz merkt den Unterschied nicht.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.39
+\stupserzwei{gruen}{$\bigl(\frac3{383}\bigr) = -\bigl(\frac{383}3\bigr) = -\bigl(\frac23\bigr) = +1$; $\bigl(\frac{73}{383}\bigr) = \bigl(\frac{383}{73}\bigr) = \bigl(\frac{18}{73}\bigr) = \bigl(\frac2{73}\bigr)\bigl(\frac9{73}\bigr)$.}{22pt}
+\begin{loesungkarte}{gruen}{1.39}{$x^{2}\equiv219\pmod{383}$}
+\derweg{Zähler faktorisieren, für jeden Faktor Reziprozität mit dem richtigen Vorzeichen, Ergänzungssatz für $2$.}
+\schritt{Rechnung}
+$219 = 3\cdot73$, $383\equiv3\pmod4$.
+\begin{itemize}[leftmargin=1.2em,itemsep=1pt]
+\item $\bigl(\frac3{383}\bigr)$: $3\equiv3$ und $383\equiv3\pmod4$, also Vorzeichenwechsel: $= -\bigl(\frac{383}3\bigr) = -\bigl(\frac23\bigr) = -(-1) = +1$.
+\item $\bigl(\frac{73}{383}\bigr)$: $73\equiv1\pmod4$, kein Vorzeichen: $= \bigl(\frac{383}{73}\bigr)$; $383 = 5\cdot73 + 18$, also $= \bigl(\frac{18}{73}\bigr) = \bigl(\frac2{73}\bigr)\bigl(\frac{9}{73}\bigr) = \bigl(\frac2{73}\bigr)\cdot1$; $73\equiv1\pmod8$, also $\bigl(\frac2{73}\bigr) = +1$.
+\end{itemize}
+$\bigl(\frac{219}{383}\bigr) = (+1)(+1) = +1$: \textbf{lösbar}.
+\probe{Tatsächlich $169^{2} = 28\,561 = 74\cdot383 + 219$. \checkmark\ (Die zweite Lösung ist $383 - 169 = 214$.)}
+\begin{mitnehmen}\kastentext
+Das Reziprozitätsgesetz entscheidet die Lösbarkeit, ohne eine Lösung zu nennen --- $169$ fand ein Rechner. Die Lösung selbst zu finden ist ein eigenes Problem (Tonelli--Shanks), das für $p\equiv3\pmod4$ einfach ist: $x\equiv a^{(p+1)/4}$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.40
+\stupserzwei{gruen}{$\bigl(\frac{1001}{9907}\bigr) = \bigl(\frac{9907}{1001}\bigr) = \bigl(\frac{898}{1001}\bigr) = \bigl(\frac2{1001}\bigr)\bigl(\frac{449}{1001}\bigr)$, und dann weiter umdrehen --- der Zähler wird jedes Mal kleiner.}{22pt}
+\begin{loesungkarte}{gruen}{1.40}{1001 über 9907}
+\derweg{Jacobi: umdrehen (Vorzeichen nur, wenn beide $\equiv3\pmod4$), modulo reduzieren, Zweien abspalten --- wie Euklid, ohne zu faktorisieren.}
+\schritt{(a)}
+$1001\equiv1\pmod4$, also $\bigl(\frac{1001}{9907}\bigr) = \bigl(\frac{9907}{1001}\bigr)$. $9907 = 9\cdot1001 + 898$: $= \bigl(\frac{898}{1001}\bigr) = \bigl(\frac2{1001}\bigr)\bigl(\frac{449}{1001}\bigr)$. $1001\equiv1\pmod8$: $\bigl(\frac2{1001}\bigr) = 1$. $449\equiv1\pmod4$: $\bigl(\frac{449}{1001}\bigr) = \bigl(\frac{1001}{449}\bigr) = \bigl(\frac{103}{449}\bigr)$ ($1001 - 2\cdot449 = 103$). $449\equiv1\pmod4$: $= \bigl(\frac{449}{103}\bigr) = \bigl(\frac{37}{103}\bigr)$ ($449 - 4\cdot103 = 37$). $37\equiv1\pmod4$: $= \bigl(\frac{103}{37}\bigr) = \bigl(\frac{29}{37}\bigr)$. $29\equiv1\pmod4$: $= \bigl(\frac{37}{29}\bigr) = \bigl(\frac8{29}\bigr) = \bigl(\frac2{29}\bigr)^{3} = \bigl(\frac2{29}\bigr)$; $29\equiv5\pmod8$: $= -1$.
+\[ \Bigl(\frac{1001}{9907}\Bigr) = -1 . \]
+\schritt{(b)}
+$1001 = 7\cdot11\cdot13$; $9907\equiv3\pmod4$. $\bigl(\frac7{9907}\bigr) = -\bigl(\frac{9907}7\bigr) = -\bigl(\frac27\bigr) = -1$ ($7\equiv7\pmod8$). $\bigl(\frac{11}{9907}\bigr) = -\bigl(\frac{9907}{11}\bigr) = -\bigl(\frac7{11}\bigr) = -\bigl(-\bigl(\frac{11}7\bigr)\bigr) = \bigl(\frac47\bigr) = 1$. $\bigl(\frac{13}{9907}\bigr) = \bigl(\frac{9907}{13}\bigr) = \bigl(\frac1{13}\bigr) = 1$. Produkt $-1$. \checkmark\ Derselbe Wert --- aber man musste $1001$ faktorisieren, was bei großen Zahlen unmöglich ist; der Jacobi-Weg braucht nur Divisionen mit Rest.
+\schritt{(c)}
+$9907$ ist prim, also ist das Jacobi-Symbol ein Legendre-Symbol: $x^{2}\equiv1001\pmod{9907}$ ist \textbf{unlösbar}. Für zusammengesetztes $N$ dagegen heißt $\bigl(\frac aN\bigr) = 1$ \emph{nichts} über die Lösbarkeit: $\bigl(\frac2{15}\bigr) = \bigl(\frac23\bigr)\bigl(\frac25\bigr) = (-1)(-1) = 1$, aber $2$ ist kein Quadrat modulo $15$ (nicht einmal modulo $3$). Nur $\bigl(\frac aN\bigr) = -1$ ist aussagekräftig: dann ist $a$ sicher kein Quadrat.
+\begin{mitnehmen}\kastentext
+Das Jacobi-Symbol ist der Preis dafür, Reziprozität ohne Faktorisierung zu rechnen: Es gehorcht denselben Regeln, aber $+1$ beweist nichts mehr. Genau diese Eigenschaft nutzt der Solovay--Strassen-Primzahltest (Kapitel 18).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.41
+\stupserzwei{tief}{$\sigma(28) = \sigma(4)\sigma(7) = 7\cdot8 = 56 = 2\cdot28$. Für (b): $\sigma(2^{p-1}) = 2^{p} - 1$ und $\sigma(2^{p} - 1) = 2^{p}$, wenn $2^{p} - 1$ prim ist.}{22pt}
+\begin{loesungkarte}{tief}{1.41}{Vollkommen, multiplikativ}
+\derweg{$\sigma$ über die Zerlegung; die Euklid-Formel folgt aus zwei Zeilen Multiplikativität.}
+\schritt{(a)}
+$28 = 2^{2}\cdot7$: $\sigma(28) = (1 + 2 + 4)(1 + 7) = 7\cdot8 = 56 = 2\cdot28$. $496 = 2^{4}\cdot31$: $\sigma = 31\cdot32 = 992 = 2\cdot496$. Beide vollkommen.
+\schritt{(b)}
+$N = 2^{p-1}(2^{p} - 1)$ mit $q = 2^{p} - 1$ prim; $2^{p-1}$ und $q$ sind teilerfremd ($q$ ungerade). $\sigma(N) = \sigma(2^{p-1})\sigma(q) = (2^{p} - 1)(q + 1) = (2^{p} - 1)\cdot2^{p} = 2N$. $\blacksquare$
+\schritt{(c)}
+Jeder Teiler von $ab$ ist eindeutig $d_1d_2$ mit $d_1\mid a$, $d_2\mid b$ (Fundamentalsatz: die Primfaktoren von $a$ und $b$ sind disjunkt). Also $\sigma(ab) = \sum_{d_1\mid a}\sum_{d_2\mid b}d_1d_2 = \bigl(\sum d_1\bigr)\bigl(\sum d_2\bigr) = \sigma(a)\sigma(b)$. $\blacksquare$
+\schritt{(d)}
+Nein: $\sigma(4) = 7$, aber $\sigma(2)^{2} = 9$. Die Teiler von $4$ sind $1, 2, 4$ --- der Teiler $2$ lässt sich auf zwei Arten als $d_1d_2$ schreiben ($1\cdot2$ und $2\cdot1$), die Zerlegung ist nicht mehr eindeutig. Multiplikativ heißt: nur für teilerfremde Faktoren.
+\begin{mitnehmen}\kastentext
+Multiplikative Funktionen ($\tau, \sigma, \varphi, \mu$) sind durch ihre Werte auf Primzahlpotenzen bestimmt. Die Euklid-Formel $2^{p-1}(2^{p} - 1)$ ist eine Zeile $\sigma$-Rechnung; dass sie \emph{alle} geraden vollkommenen Zahlen liefert, ist Eulers Satz und schwerer (Band 1, Kapitel 9.6).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.42
+\stupserzwei{gruen}{$\sigma(2^{4}) = 31$, $\sigma(3^{2}) = 13$, $\sigma(5) = 6$.}{22pt}
+\begin{loesungkarte}{gruen}{1.42}{$\tau(720)$ und $\sigma(720)$}
+\derweg{Zerlegung, Formeln, multiplizieren.}
+\schritt{Rechnung}
+$720 = 2^{4}\cdot3^{2}\cdot5$. $\tau(720) = 5\cdot3\cdot2 = 30$. $\sigma(720) = 31\cdot13\cdot6 = 2418$. Da $2418 > 1440 = 2\cdot720$: abundant --- sogar sehr: $\sigma(720)/720 = 3{,}36$.
+\begin{mitnehmen}\kastentext
+Zahlen mit vielen kleinen Primfaktoren sind abundant; Primzahlen und ihre Potenzen defizient ($\sigma(p^{k}) < 2p^{k}$). Vollkommen ist die Grenze --- und ob es ungerade vollkommene Zahlen gibt, weiß niemand.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.43
+\stupserzwei{gruen}{$W(n) = \sum_{d\mid n}\mu(d)k^{n/d}$. Für $n = 4$, $k = 2$: $2^{4} - 2^{2} = 12$ primitive Wörter, in $12/4 = 3$ Halsketten.}{22pt}
+\begin{loesungkarte}{gruen}{1.43}{Primitive Halsketten}
+\derweg{Alle Wörter nach ihrer kleinsten Periode sortieren; Möbius-Inversion; durch $n$ teilen, weil jede primitive Halskette aus genau $n$ verschiedenen Wörtern besteht.}
+\schritt{(a)}
+Jedes Wort $w$ der Länge $n$ hat eine kleinste Periode $d$; dann ist $w$ die $n/d$-fache Wiederholung eines primitiven Wortes der Länge $d$, und $d\mid n$ (sonst wäre $\operatorname{ggT}(d, n)$ eine kleinere Periode). Umgekehrt gibt jedes primitive Wort der Länge $d\mid n$ genau ein Wort der Länge $n$. Also $k^{n} = \sum_{d\mid n}W(d)$. $\blacksquare$
+\schritt{(b)}
+Möbius-Inversion: $W(n) = \sum_{d\mid n}\mu(d)\,k^{n/d}$. Ein primitives Wort hat $n$ verschiedene zyklische Drehungen (hätte es weniger, hätte es eine echte Periode), also zerfallen die $W(n)$ primitiven Wörter in Halsketten zu je $n$: $P(n) = W(n)/n$.
+\schritt{(c)}
+$k = 2$, $n = 4$: $W(4) = 2^{4} - 2^{2} = 12$ ($\mu(1) = 1$, $\mu(2) = -1$, $\mu(4) = 0$), $P(4) = 3$: die Halsketten $aaab$, $aabb$, $abbb$. ($aaaa$, $bbbb$, $abab$ sind nicht primitiv.) \checkmark\ $n = 6$: $W(6) = 2^{6} - 2^{3} - 2^{2} + 2 = 64 - 8 - 4 + 2 = 54$, $P(6) = 9$.
+\schritt{(d)}
+Für $p$ prim: $W(p) = k^{p} - k$, und $P(p) = (k^{p} - k)/p$ ist eine Anzahl, also ganz: $p\mid k^{p} - k$. Das ist der kleine Fermat --- bewiesen durch Zählen von Halsketten.
+\begin{mitnehmen}\kastentext
+Möbius-Inversion: Wer $g(n) = \sum_{d\mid n}f(d)$ kennt, kennt $f(n) = \sum_{d\mid n}\mu(d)g(n/d)$. Die Halsketten sind das Lehrbuchbeispiel, und der kombinatorische Fermat-Beweis ist ein Geschenk am Rande.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.44
+\stupserzwei{gruen}{$p\equiv1\pmod4$: $2^{p-1} = 16^{k}\equiv6\pmod{10}$ und $2^{p} - 1\equiv1$, Produkt $\equiv6$. $p\equiv3\pmod4$: zeigen Sie $16^{k}(8\cdot16^{k} - 1)\equiv7\pmod{25}$.}{22pt}
+\begin{loesungkarte}{gruen}{1.44}{Gerade vollkommene Zahlen enden auf 6 oder 28}
+\derweg{Euler--Euklid-Form einsetzen, $p$ modulo $4$ unterscheiden, Reste modulo $10$ bzw.\ $100$ verfolgen.}
+\schritt{Fall $p = 2$}
+$N = 6$. Endet auf $6$.
+\schritt{Fall $p\equiv1\pmod4$, $p = 4k + 1$}
+$2^{p-1} = 2^{4k} = 16^{k}\equiv6^{k}\equiv6\pmod{10}$ (denn $6\cdot6 = 36\equiv6$). $2^{p} - 1 = 2\cdot16^{k} - 1\equiv12 - 1\equiv1\pmod{10}$. $N\equiv6\cdot1 = 6\pmod{10}$: endet auf $6$.
+\schritt{Fall $p\equiv3\pmod4$, $p = 4k + 3$}
+$2^{p-1} = 4\cdot16^{k}$, $2^{p} - 1 = 8\cdot16^{k} - 1$, also $N = 4\cdot16^{k}(8\cdot16^{k} - 1)$. Modulo $25$ hat $16^{k}$ die Periode $5$: $16^{k}\equiv1, 16, 6, 21, 11$ für $k\equiv0, 1, 2, 3, 4\pmod5$. Entsprechend $8\cdot16^{k} - 1\equiv7, 2, 22, 17, 12$. Die Produkte $16^{k}(8\cdot16^{k} - 1)$: $7, 32, 132, 357, 132$ --- alle $\equiv7\pmod{25}$. Also $N\equiv4\cdot7 = 28\pmod{100}$ (denn $4\cdot(7 + 25j) = 28 + 100j$): endet auf $28$. $\blacksquare$
+\probe{$p = 3$: $28$. $p = 5$: $496$. $p = 7$: $8128$. $p = 13$: $33\,550\,336$. $p = 19$: $137\,438\,691\,328$. \checkmark}
+\begin{mitnehmen}\kastentext
+Die Endziffern sind kein Zufall, sondern Restrechnung mit einer Formel. Die Fallunterscheidung modulo $4$ kommt daher, dass $2^{4} = 16\equiv6\pmod{10}$ \enquote{stabil} ist --- $6^{k}\equiv6$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.45
+\stupserzwei{akzent}{$2047 = 23\cdot89$. Und $2^{ab} - 1 = (2^{a} - 1)(2^{a(b-1)} + \dots + 2^{a} + 1)$.}{22pt}
+\begin{loesungkarte}{akzent}{1.45}{$2^{11} - 1$}
+\derweg{Ein Gegenbeispiel, die richtige Richtung des Satzes, und der Grund, warum die Teiler so aussehen, wie sie aussehen.}
+\schritt{(a)}
+$2047 = 23\cdot89$. Zusammengesetzt --- die erste Mersenne-Zahl $M_p$ mit primem $p$, die nicht prim ist.
+\schritt{(b)}
+$x^{b} - 1 = (x - 1)(x^{b-1} + \dots + x + 1)$ mit $x = 2^{a}$: $2^{ab} - 1 = (2^{a} - 1)(2^{a(b-1)} + \dots + 1)$. Ist $n = ab$ mit $1 < a < n$, so ist $2^{a} - 1$ ein echter Teiler von $2^{n} - 1$. Also: $2^{n} - 1$ prim $\Rightarrow$ $n$ prim. Die Umkehrung ist (a). $\blacksquare$
+\schritt{(c)}
+Sei $q$ prim, $q\mid2^{p} - 1$, also $2^{p}\equiv1\pmod q$. Die Ordnung von $2$ modulo $q$ teilt $p$, ist also $1$ oder $p$; sie ist nicht $1$ ($2\not\equiv1$), also $p$. Nach Fermat teilt die Ordnung $q - 1$: $p\mid q - 1$. Da $q - 1$ gerade und $p$ ungerade ist, $2p\mid q - 1$: $q = 2kp + 1$. $\blacksquare$ Probe: $23 = 2\cdot11 + 1$, $89 = 8\cdot11 + 1$; $47 = 2\cdot23 + 1$, $178\,481 = 7760\cdot23 + 1$. \checkmark
+\begin{fehler}\kastentext
+\enquote{$2^{p} - 1$ ist prim für primes $p$.} --- Vier Beispiele ($p = 2, 3, 5, 7$), dann $2047 = 23\cdot89$. Richtig ist nur die Umkehrung. Bis heute kennt man $52$ Mersenne-Primzahlen; ob es unendlich viele sind, ist offen.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Teiler von $2^{p} - 1$ sind $\equiv1\pmod{2p}$ --- das macht die Suche nach ihnen schnell und ist der Kern des Lucas--Lehmer-Tests, mit dem die größten bekannten Primzahlen gefunden werden (Band 1, Kapitel 9.6).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.46
+\stupserzwei{gruen}{$\ln10^{20} = 20\ln10 = 46{,}05$. Also etwa eine Primzahl unter $46$ Zahlen.}{22pt}
+\begin{loesungkarte}{gruen}{1.46}{Primzahlen jenseits von $10^{20}$}
+\derweg{Primzahlsatz als Dichte $1/\ln x$, mal Intervalllänge.}
+\schritt{(a)}
+Dichte $1/\ln(10^{20}) = 1/46{,}05$. Erwartet $10^{6}/46{,}05\approx21\,700$ Primzahlen. (Das Intervall ist so kurz, dass $\ln x$ darin konstant ist.)
+\schritt{(b)}
+Im Mittel $46$ Zahlen pro Primzahl. Nur ungerade: $23$. Ohne Vielfache von $2, 3, 5$ bleiben $\frac12\cdot\frac23\cdot\frac45 = \frac4{15}$ aller Zahlen, also etwa $46\cdot\frac4{15}\approx12$ Kandidaten pro Primzahl.
+\schritt{(c)}
+$\ln10^{300} = 690{,}8$: etwa $691$ zufällige Zahlen, $345$ ungerade, $184$ nach Aussieben von $2, 3, 5$. Jeder Kandidat braucht einen Miller--Rabin-Test (Aufgabe 1.58) --- Millisekunden. RSA-Schlüssel zu erzeugen ist deshalb leicht; sie zu brechen nicht.
+\begin{mitnehmen}\kastentext
+Primzahlen sind häufig genug: Bei $n$ Stellen findet man eine unter etwa $2{,}3n$ Zahlen. Darauf beruht, dass Kryptographie mit Primzahlen praktikabel ist.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.47
+\stupserzwei{gruen}{$p$, $p + 2$, $p + 4$ lassen modulo $3$ die Reste $r$, $r + 2$, $r + 1$ --- alle drei Reste kommen vor, einer ist $0$.}{22pt}
+\begin{loesungkarte}{gruen}{1.47}{Der einzige Drilling}
+\derweg{Restklassen modulo $3$ durchgehen.}
+\schritt{(a)}
+Von $p$, $p + 2$, $p + 4$ ist eine durch $3$ teilbar: Ist $p\equiv0$, dann $p$; ist $p\equiv1$, dann $p + 2$; ist $p\equiv2$, dann $p + 4$. Eine durch $3$ teilbare Primzahl ist $3$ selbst. Also ist eine der drei gleich $3$; da $p$ die kleinste ist, $p = 3$: $(3, 5, 7)$. $\blacksquare$
+\schritt{(b)}
+Zwillinge $(p, p + 2)$: Reste $r, r + 2$ --- der Rest $r + 1$ fehlt, also ist für $p\equiv2\pmod3$ keine der beiden durch $3$ teilbar ($5, 7$; $11, 13$; $17, 19$). Drillinge $(p, p + 2, p + 6)$: Reste $r, r + 2, r$ --- auch hier bleibt eine Restklasse frei ($5, 7, 11$; $11, 13, 17$; $17, 19, 23$). Solche \enquote{zulässigen} Muster vermeiden, dass eine Restklasse modulo jeder Primzahl vollständig besetzt ist, und von ihnen erwartet man unendlich viele Vorkommen (Hardy--Littlewood); bewiesen ist das für keines (Band 1, Kapitel 10.6).
+\begin{mitnehmen}\kastentext
+Ein Muster von Primzahlen kann nur dann oft vorkommen, wenn es modulo jeder Primzahl $q$ eine Restklasse frei lässt. $(p, p + 2, p + 4)$ belegt modulo $3$ alle drei --- deshalb nur einmal.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.48
+\stupserzwei{gruen}{$m = 2\colon n = 1$. $m = 3\colon n = 2$. $m = 4\colon n = 1, 3$. $m = 5\colon n = 2, 4$. $m = 6\colon n = 1, 5$. $m = 7\colon n = 2, 4, 6$. $m = 8\colon n = 1, 3, 5$. $m = 9\colon n = 2, 4$ ($n = 8$ gibt $c = 145$).}{22pt}
+\begin{loesungkarte}{gruen}{1.48}{Pythagoreische Tripel bis 100}
+\derweg{$(m^{2} - n^{2}, 2mn, m^{2} + n^{2})$ für alle zulässigen Paare mit $m^{2} + n^{2}\le100$.}
+\schritt{(a)}
+\begin{center}
+{\small\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}cc|ccc@{}}
+$m$ & $n$ & $a$ & $b$ & $c$\\\hline
+2 & 1 & 3 & 4 & 5\\ 3 & 2 & 5 & 12 & 13\\ 4 & 1 & 15 & 8 & 17\\ 4 & 3 & 7 & 24 & 25\\ 5 & 2 & 21 & 20 & 29\\ 5 & 4 & 9 & 40 & 41\\ 6 & 1 & 35 & 12 & 37\\ 6 & 5 & 11 & 60 & 61\\
+\end{tabular}\qquad
+\begin{tabular}{@{}cc|ccc@{}}
+$m$ & $n$ & $a$ & $b$ & $c$\\\hline
+7 & 2 & 45 & 28 & 53\\ 7 & 4 & 33 & 56 & 65\\ 7 & 6 & 13 & 84 & 85\\ 8 & 1 & 63 & 16 & 65\\ 8 & 3 & 55 & 48 & 73\\ 8 & 5 & 39 & 80 & 89\\ 9 & 2 & 77 & 36 & 85\\ 9 & 4 & 65 & 72 & 97\\
+\end{tabular}}
+\end{center}
+Sechzehn primitive Tripel mit $c\le100$.
+\schritt{(b)}
+Sind $m, n$ beide ungerade, so sind $m^{2} - n^{2}$, $2mn$, $m^{2} + n^{2}$ alle gerade --- das Tripel ist nicht primitiv (es ist das Doppelte eines anderen: $m = 3$, $n = 1$ gibt $(8, 6, 10) = 2\cdot(4, 3, 5)$). Haben $m, n$ einen gemeinsamen Primteiler, teilt er alle drei Zahlen. Beide Bedingungen zusammen sind genau die Primitivität (Band 1, Kapitel 11).
+\schritt{(c)}
+$65 = 5\cdot13$, beide $\equiv1\pmod4$, also $65 = 1^{2} + 8^{2} = 4^{2} + 7^{2}$ auf zwei Arten --- und jede Darstellung $c = m^{2} + n^{2}$ liefert ein Tripel: $(8, 1)\to(63, 16, 65)$, $(7, 4)\to(33, 56, 65)$. Ebenso $85 = 5\cdot17 = 2^{2} + 9^{2} = 6^{2} + 7^{2}$.
+\begin{mitnehmen}\kastentext
+Primitive Tripel entsprechen den Darstellungen der Hypotenuse als Summe zweier Quadrate --- ein Zusammenhang zwischen Kapitel 11 und 14, und der Grund, warum Hypotenusen immer Produkte von Primzahlen $\equiv1\pmod4$ sind (bis auf einen Faktor $2$ bei nicht-primitiven).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.49
+\stupserzwei{tief}{$[3; 7, 15, 1, 292, \dots]$. Näherungsbrüche: $3$, $\frac{22}7$, $\frac{333}{106}$, $\frac{355}{113}$, $\frac{103\,993}{33\,102}$.}{22pt}
+\begin{loesungkarte}{tief}{1.49}{$\pi$ als Kettenbruch}
+\derweg{Ganzzahliger Anteil, Kehrwert des Rests, wiederholen; Näherungsbrüche mit der Rekursion $p_k = a_kp_{k-1} + p_{k-2}$.}
+\schritt{(a)}
+$\pi = 3{,}14159265$: $a_0 = 3$, Rest $0{,}14159265$, Kehrwert $7{,}0625133$: $a_1 = 7$, Rest $0{,}0625133$, Kehrwert $15{,}996594$: $a_2 = 15$, Rest $0{,}996594$, Kehrwert $1{,}0034172$: $a_3 = 1$, Rest $0{,}0034172$, Kehrwert $292{,}63$: $a_4 = 292$. Also $\pi = [3; 7, 15, 1, 292, 1, 1, 1, 2, \dots]$ --- ohne erkennbares Muster, im Gegensatz zu $\sqrt7$ (nächste Aufgabe) oder $e = [2; 1, 2, 1, 1, 4, 1, 1, 6, \dots]$.
+\schritt{(b)}
+\begin{center}
+{\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lllll@{}}
+$a_k$ & $3$ & $7$ & $15$ & $1$\\
+$p_k/q_k$ & $3/1$ & $22/7$ & $333/106$ & $355/113$\\
+Fehler & $0{,}14$ & $1{,}3\cdot10^{-3}$ & $8{,}3\cdot10^{-5}$ & $2{,}7\cdot10^{-7}$\\
+\end{tabular}}
+\end{center}
+($p_2 = 15\cdot22 + 3 = 333$, $q_2 = 15\cdot7 + 1 = 106$; $p_3 = 333 + 22 = 355$, $q_3 = 106 + 7 = 113$.)
+\schritt{(c)}
+Der Fehler eines Näherungsbruchs ist etwa $\frac1{a_{k+1}q_k^{2}}$: Ein großer \emph{nächster} Teilnenner macht den \emph{aktuellen} Bruch außergewöhnlich gut. Nach $355/113$ kommt $a_4 = 292$, also Fehler $\approx\frac1{292\cdot113^{2}} = 2{,}7\cdot10^{-7}$ --- sechs richtige Dezimalen mit einem dreistelligen Nenner. Der nächste Näherungsbruch $103\,993/33\,102$ ist kaum besser und viel unhandlicher. Zu Chongzhi fand $355/113$ im 5.\ Jahrhundert; in Europa Adriaan Anthonisz um 1585.
+\begin{mitnehmen}\kastentext
+Näherungsbrüche sind die besten Näherungen überhaupt: Kein Bruch mit kleinerem Nenner kommt näher. Und ein großer Teilnenner ist ein Geschenk --- er sagt, dass der Bruch davor \enquote{zu gut für seinen Nenner} ist.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.50
+\stupserzwei{gruen}{$\sqrt7 = [2; \overline{1, 1, 1, 4}]$. Die Periode $4$ endet mit $2a_0 = 4$ --- das ist immer so.}{22pt}
+\begin{loesungkarte}{gruen}{1.50}{Der Kettenbruch von $\sqrt7$}
+\derweg{Der Algorithmus mit $\sqrt7$ exakt: Rest, Kehrwert rational machen, Ganzteil, bis sich ein Rest wiederholt.}
+\schritt{(a)}
+$\sqrt7 = 2 + (\sqrt7 - 2)$. $\frac1{\sqrt7 - 2} = \frac{\sqrt7 + 2}{3} = 1 + \frac{\sqrt7 - 1}3$. $\frac3{\sqrt7 - 1} = \frac{3(\sqrt7 + 1)}6 = \frac{\sqrt7 + 1}2 = 1 + \frac{\sqrt7 - 1}2$. $\frac2{\sqrt7 - 1} = \frac{2(\sqrt7 + 1)}6 = \frac{\sqrt7 + 1}3 = 1 + \frac{\sqrt7 - 2}3$. $\frac3{\sqrt7 - 2} = \frac{3(\sqrt7 + 2)}3 = \sqrt7 + 2 = 4 + (\sqrt7 - 2)$. Der Rest $\sqrt7 - 2$ ist wieder da: $\sqrt7 = [2; \overline{1, 1, 1, 4}]$.
+\schritt{(b)}
+$a_k$: $2, 1, 1, 1, 4, 1, \dots$ Näherungsbrüche: $\frac21, \frac31, \frac52, \frac83, \frac{37}{14}, \frac{45}{17}, \frac{82}{31}, \dots$ ($\frac{37}{14} = 2{,}642857$ gegen $\sqrt7 = 2{,}645751$.)
+\schritt{(c)}
+$p^{2} - 7q^{2}$: $4 - 7 = -3$; $9 - 7 = 2$; $25 - 28 = -3$; $64 - 63 = 1$; $1369 - 1372 = -3$; $2025 - 2023 = 2$; $6724 - 6727 = -3$; dann wieder $1$ bei $\frac{127}{48}$. Die Werte sind klein ($|p^{2} - 7q^{2}| < 2\sqrt7$) und periodisch wie der Kettenbruch --- und am Ende jeder Periode steht $1$.
+\begin{mitnehmen}\kastentext
+Lagrange: Der Kettenbruch einer quadratischen Irrationalzahl ist periodisch. Die Näherungsbrüche am Periodenende lösen $p^{2} - dq^{2} = \pm1$ --- die Pellsche Gleichung fällt aus dem Kettenbruch heraus.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.51
+\stupserzwei{gruen}{$(8 + 3\sqrt7)^{2} = 64 + 48\sqrt7 + 63 = 127 + 48\sqrt7$.}{22pt}
+\begin{loesungkarte}{gruen}{1.51}{$x^{2} - 7y^{2} = 1$}
+\derweg{Grundlösung aus dem Kettenbruch, weitere durch Potenzieren von $x + y\sqrt7$.}
+\schritt{(a)}
+Aus Aufgabe 1.50c: $(x, y) = (8, 3)$, denn $64 - 63 = 1$. Kleinere positive Lösungen gibt es nicht (die Näherungsbrüche davor geben $-3$ und $2$, und jede Lösung ist ein Näherungsbruch).
+\schritt{(b)}
+$(8 + 3\sqrt7)^{2} = 64 + 2\cdot24\sqrt7 + 9\cdot7 = 127 + 48\sqrt7$: $(127, 48)$, Probe $16129 - 7\cdot2304 = 16129 - 16128 = 1$. \checkmark
+\schritt{(c)}
+Für $\alpha = x + y\sqrt7$ sei $\bar\alpha = x - y\sqrt7$ und $N(\alpha) = \alpha\bar\alpha = x^{2} - 7y^{2}$. Die Norm ist multiplikativ: $N(\alpha\beta) = \alpha\beta\bar\alpha\bar\beta = N(\alpha)N(\beta)$. Also $N(\alpha^{n}) = N(\alpha)^{n} = 1$, und $\alpha^{n} = x_n + y_n\sqrt7$ liefert eine Lösung $(x_n, y_n)$. Umgekehrt ist jede Lösung eine Potenz der Grundlösung (Band 1, Kapitel 13.2).
+\begin{mitnehmen}\kastentext
+Die Lösungen der Pellschen Gleichung bilden eine Gruppe --- die Einheiten von $\mathbb Z[\sqrt7]$ mit Norm $1$ ---, erzeugt von einer Grundlösung. Für $d = 61$ ist die Grundlösung $x = 1\,766\,319\,049$: Fermat stellte sie 1657 als Herausforderung, weil er wusste, wie groß sie ist.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.52
+\stupserzwei{akzent}{Quadrate bis $21$: $0, 1, 4, 9, 16$; keine zwei summieren sich zu $21$. Und $21 = 3\cdot7$ mit $3, 7\equiv3\pmod4$ in ungerader Potenz.}{22pt}
+\begin{loesungkarte}{akzent}{1.52}{21 ist $\equiv1\pmod4$}
+\derweg{Nachrechnen, dann den Satz richtig formulieren: Er handelt von den Exponenten der Primteiler $\equiv3\pmod4$.}
+\schritt{(a)}
+$21 - 0 = 21$, $21 - 1 = 20$, $21 - 4 = 17$, $21 - 9 = 12$, $21 - 16 = 5$: kein Quadrat. $21$ ist keine Summe zweier Quadrate --- obwohl $21\equiv1\pmod4$.
+\schritt{(b)}
+$45 = 36 + 9 = 6^{2} + 3^{2}$. Der Teiler $3\equiv3\pmod4$ kommt mit \emph{geradem} Exponenten vor: $3^{2}\cdot5$, und $5 = 1 + 4$; $45 = 3^{2}(1^{2} + 2^{2}) = 3^{2} + 6^{2}$.
+\schritt{(c)}
+$n$ ist Summe zweier Quadrate genau dann, wenn in der Primfaktorzerlegung jede Primzahl $\equiv3\pmod4$ mit geradem Exponenten vorkommt. (Primzahlen $\equiv1\pmod4$ und die $2$ sind unbeschränkt erlaubt.) Fermats Satz \enquote{$p\equiv1\pmod4\Rightarrow p = x^{2} + y^{2}$} ist der Baustein für Primzahlen; die Identität $(a^{2} + b^{2})(c^{2} + d^{2}) = (ac - bd)^{2} + (ad + bc)^{2}$ setzt zusammen.
+\schritt{(d)}
+Quadrate sind $\equiv0$ oder $1\pmod4$; Summen zweier Quadrate also $\equiv0, 1, 2$ --- nie $3$. Das zeigt sofort $3, 7, 11, 19\notin$. Aber $21\equiv1$ wird davon nicht erfasst: Die Bedingung modulo $4$ ist notwendig, nicht hinreichend.
+\begin{fehler}\kastentext
+\enquote{$n\equiv1\pmod4$, also Summe zweier Quadrate.} --- Der Satz von Fermat gilt für Primzahlen. Für zusammengesetzte Zahlen ist $21 = 3\cdot7$ das Gegenbeispiel: zwei schlechte Primteiler, beide einmal, das Produkt $\equiv1$, und trotzdem nicht darstellbar.
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Sätze über Primzahlen übertragen sich auf zusammengesetzte Zahlen nur über die Zerlegung --- und dann zählen Exponenten. Dasselbe Muster bei $\varphi$, bei quadratischen Resten (Jacobi, Aufgabe 1.40c) und beim Fermat-Test (Aufgabe 1.30).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.53
+\stupserzwei{gruen}{$13 = 9 + 4$, $17 = 16 + 1$; Brahmagupta: $(ac\mp bd)^{2} + (ad\pm bc)^{2}$ mit zwei Vorzeichenwahlen gibt zwei Darstellungen von $221$.}{22pt}
+\begin{loesungkarte}{gruen}{1.53}{Summen zweier Quadrate}
+\derweg{Zerlegen, Primteiler $\equiv3\pmod4$ auf gerade Exponenten prüfen, Darstellungen zusammensetzen.}
+\schritt{221}
+$221 = 13\cdot17$, beide $\equiv1\pmod4$: ja. $13 = 3^{2} + 2^{2}$, $17 = 4^{2} + 1^{2}$. Brahmagupta mit $(a, b, c, d) = (3, 2, 4, 1)$: $(12 - 2)^{2} + (3 + 8)^{2} = 10^{2} + 11^{2}$ und $(12 + 2)^{2} + (3 - 8)^{2} = 14^{2} + 5^{2}$. Also $221 = 100 + 121 = 196 + 25$ --- zwei Darstellungen, weil zwei verschiedene Primteiler $\equiv1\pmod4$.
+\schritt{198}
+$198 = 2\cdot3^{2}\cdot11$. $11\equiv3\pmod4$ mit Exponent $1$: nein. (Probe: $198 - k^{2}$ für $k\le14$: $198, 197, 194, 189, 182, 173, 162, 149, 134, 117, 98, 77, 54, 29, 2$ --- kein Quadrat. \checkmark)
+\schritt{2025}
+$2025 = 3^{4}\cdot5^{2}$. $3$ mit geradem Exponenten: ja. Darstellungen: $45^{2} + 0^{2}$ und, aus $25 = 3^{2} + 4^{2}$ mal $9^{2}$: $27^{2} + 36^{2} = 729 + 1296$. \checkmark\ Das sind alle (mit $x\le y$).
+\begin{mitnehmen}\kastentext
+Entscheiden über die Zerlegung, darstellen über Brahmaguptas Identität --- die Zahl der Darstellungen wächst mit der Zahl der Primteiler $\equiv1\pmod4$ (Jacobis Formel zählt sie exakt).
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.54
+\stupserzwei{gruen}{$\lambda = \frac{3\cdot4 - 2}{2\cdot3}$? Nein --- hier ist $a = 0$: $\lambda = \frac{3\cdot(-2)^{2}}{2\cdot3} = 2$. Dann $x_3 = 4 + 4 = 8$, $y_3 = 2(-2 - 8) - 3 = -23$.}{22pt}
+\begin{loesungkarte}{gruen}{1.54}{Ein Punkt wird verdoppelt}
+\derweg{Tangentenformel für $2P$, Sekantenformel für $2P + P$; jeden Punkt an der Kurvengleichung prüfen.}
+\schritt{(a)}
+$y^{2} = x^{3} + 17$, also $a = 0$. $\lambda = \frac{3x_1^{2}}{2y_1} = \frac{12}6 = 2$. $x_3 = \lambda^{2} - 2x_1 = 4 + 4 = 8$, $y_3 = \lambda(x_1 - x_3) - y_1 = 2(-2 - 8) - 3 = -23$. $2P = (8, -23)$. Probe: $8^{3} + 17 = 529 = 23^{2}$. \checkmark
+\schritt{(b)}
+$2P = (8, -23)$, $P = (-2, 3)$: $\lambda = \frac{-23 - 3}{8 + 2} = -\frac{13}5$. $x_3 = \lambda^{2} - 8 - (-2) = \frac{169}{25} - 6 = \frac{19}{25}$. $y_3 = \lambda(x_1 - x_3) - y_1$ mit $(x_1, y_1) = (-2, 3)$: $-\frac{13}5\bigl(-2 - \frac{19}{25}\bigr) - 3 = -\frac{13}5\cdot\bigl(-\frac{69}{25}\bigr) - 3 = \frac{897}{125} - \frac{375}{125} = \frac{522}{125}$. $3P = \bigl(\frac{19}{25}, \frac{522}{125}\bigr)$. Probe: $\bigl(\frac{19}{25}\bigr)^{3} + 17 = \frac{6859 + 265\,625}{15\,625} = \frac{272\,484}{15\,625} = \bigl(\frac{522}{125}\bigr)^{2}$. \checkmark
+\schritt{(c)}
+Die Nenner wachsen ($1, 1, 25, \dots$) --- bei einem Punkt endlicher Ordnung müssten die Vielfachen irgendwann zum Ausgangspunkt zurückkehren, und nach Nagell--Lutz hätten Torsionspunkte ganzzahlige Koordinaten. $3P$ ist nicht ganzzahlig, also hat $P$ unendliche Ordnung: $E(\mathbb Q)$ ist unendlich, die Kurve hat positiven Rang.
+\begin{mitnehmen}\kastentext
+Das Gruppengesetz ist Rechnen mit Geraden und der Kurvengleichung --- jede Zeile prüfbar. Die Höhe (Größe der Nenner) wächst bei Punkten unendlicher Ordnung quadratisch; daran erkennt man den Rang. Band 29 hat die Geometrie dahinter.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.55
+\stupserzwei{tief}{$3^{2} = 9$, $3^{4} = 81$, $3^{8} = 561$, $3^{16} = 721$, $3^{32} = 841$, $3^{64} = 281$, $3^{128} = 961$ (alles modulo $1000$). Bits von $218 = 11011010_2$: $128, 64, 16, 8, 2$.}{22pt}
+\begin{loesungkarte}{tief}{1.55}{Quadrieren und Multiplizieren}
+\derweg{Potenzen $3^{2^{j}}$ durch wiederholtes Quadrieren; die zum Exponenten gehörenden zusammenmultiplizieren --- alles modulo $1000$.}
+\schritt{(a)}
+Quadrate modulo $1000$: $3^{1} = 3$, $3^{2} = 9$, $3^{4} = 81$, $3^{8} = 6561\equiv561$, $3^{16}\equiv561^{2} = 314\,721\equiv721$, $3^{32}\equiv721^{2} = 519\,841\equiv841$, $3^{64}\equiv841^{2} = 707\,281\equiv281$, $3^{128}\equiv281^{2} = 78\,961\equiv961$.
+$218 = 128 + 64 + 16 + 8 + 2$: $3^{218}\equiv961\cdot281\cdot721\cdot561\cdot9$. Schrittweise: $961\cdot281 = 270\,041\equiv41$; $41\cdot721 = 29\,561\equiv561$; $561\cdot561\equiv721$ (von oben); $721\cdot9 = 6489\equiv489$. Also $3^{218}\equiv489\pmod{1000}$.
+\schritt{(b)}
+Sieben Quadrierungen und vier Multiplikationen: elf. Naiv wären es $217$.
+\schritt{(c)}
+Höchstens $2047$ Quadrierungen und $2047$ Multiplikationen, also rund $4000$ --- gegen $2^{2048}$ naiv, eine Zahl mit $617$ Stellen. Deshalb ist $m^{e}\bmod n$ für RSA in Millisekunden zu berechnen.
+\probe{$3^{218}\equiv489$: Kontrolle über $3^{200}\cdot3^{18}$; oder mit der Ordnung von $3$ modulo $1000$ ($100$): $3^{218}\equiv3^{18}$, und $3^{18} = 3^{16}\cdot3^{2}\equiv721\cdot9 = 6489\equiv489$. \checkmark}
+\begin{mitnehmen}\kastentext
+Schnelle Potenzierung: Binärdarstellung des Exponenten, so viele Quadrierungen wie Stellen, so viele Multiplikationen wie Einsen. Alle Zwischenergebnisse bleiben kleiner als $n^{2}$. Das ist der Algorithmus, den jede Chipkarte ausführt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.56
+\stupserzwei{gruen}{$A = 5^{6}\equiv8$, $B = 5^{15}\equiv19$. Schlüssel $= B^{6} = A^{15} = 2$.}{22pt}
+\begin{loesungkarte}{gruen}{1.56}{Diffie--Hellman mit $p = 23$}
+\derweg{Zwei Potenzen öffentlich, die gemeinsame Potenz privat; der Lauscher braucht den diskreten Logarithmus.}
+\schritt{(a)}
+$5^{2} = 25\equiv2$, also $5^{6} = 2^{3} = 8$: $A = 8$. $5^{15} = 5^{14}\cdot5 = 2^{7}\cdot5 = 128\cdot5 = 640 = 27\cdot23 + 19$: $B = 19$.
+\schritt{(b)}
+Alice: $B^{a} = 19^{6}$. $19\equiv-4$, $(-4)^{6} = 4096 = 178\cdot23 + 2$: $2$. Bob: $A^{b} = 8^{15} = 2^{45} = (2^{11})^{4}\cdot2$; $2^{11} = 2048 = 89\cdot23 + 1\equiv1$; also $2^{45}\equiv2$. Beide haben $2$. \checkmark
+\schritt{(c)}
+Der Lauscher muss $a$ aus $5^{a}\equiv8$ bestimmen (diskreter Logarithmus). Potenzen von $5$: $5, 2, 10, 4, 20, 8$ --- also $a = 6$ nach sechs Versuchen. Bei $p$ mit $600$ Stellen ist dieses Durchprobieren hoffnungslos, und bessere Verfahren (Index-Calculus) brauchen immer noch subexponentiell lange; genau diese Lücke zwischen \enquote{potenzieren ist leicht} und \enquote{Logarithmus ist schwer} ist das Verfahren.
+\begin{mitnehmen}\kastentext
+Diffie--Hellman (1976): $g^{ab}$ aus $g^{a}$ und $g^{b}$ berechnen kann nur, wer $a$ oder $b$ kennt --- solange der diskrete Logarithmus schwer ist. Heute meist auf elliptischen Kurven statt in $(\mathbb Z/p)^{\times}$, mit viel kleineren Zahlen.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.57
+\stupserzwei{gruen}{$n = 3233$, $\varphi = 3120$, $d = 2753$ (denn $17\cdot2753 = 46\,801 = 15\cdot3120 + 1$), $c = 2790$.}{22pt}
+\begin{loesungkarte}{gruen}{1.57}{RSA, vollständig}
+\derweg{Schlüssel aus $p, q, e$; Potenzen mit Quadrieren und Multiplizieren; am Ende Euler.}
+\schritt{(a)}
+$n = 61\cdot53 = 3233$, $\varphi(n) = 60\cdot52 = 3120$. $d = 17^{-1}\bmod3120$: Euklid $3120 = 183\cdot17 + 9$, $17 = 1\cdot9 + 8$, $9 = 1\cdot8 + 1$; rückwärts $1 = 9 - 8 = 9 - (17 - 9) = 2\cdot9 - 17 = 2(3120 - 183\cdot17) - 17 = 2\cdot3120 - 367\cdot17$. Also $d\equiv-367\equiv2753$. Probe: $17\cdot2753 = 46\,801 = 15\cdot3120 + 1$. \checkmark
+\schritt{(b)}
+$c = 65^{17}\bmod3233$. $65^{2} = 4225\equiv992$; $65^{4}\equiv992^{2} = 984\,064\equiv984\,064 - 304\cdot3233 = 984\,064 - 982\,832 = 1232$; $65^{8}\equiv1232^{2} = 1\,517\,824\equiv1\,517\,824 - 469\cdot3233 = 1\,517\,824 - 1\,516\,277 = 1547$; $65^{16}\equiv1547^{2} = 2\,393\,209\equiv2\,393\,209 - 740\cdot3233 = 2\,393\,209 - 2\,392\,420 = 789$. $c = 65^{16}\cdot65\equiv789\cdot65 = 51\,285 = 15\cdot3233 + 2790$: $c = 2790$.
+\schritt{(c)}
+$2790^{2753}\bmod3233 = 65$ --- von Hand mit $12$ Quadrierungen und Multiplikationen (ein Rechner bestätigt $65$). Schneller: Mit $m^{d}\bmod61$ und $\bmod53$ und dem Restsatz (so machen es Chipkarten): $d\bmod60 = 53$, $2790\bmod61 = 45$, $45^{53}\bmod61 = 4$; $d\bmod52 = 49$, $2790\bmod53 = 34$, $34^{49}\bmod53 = 12$; und $x\equiv4\pmod{61}$, $x\equiv12\pmod{53}$ gibt $x = 65$. \checkmark
+\schritt{(d)}
+$ed\equiv1\pmod{\varphi(n)}$, also $ed = 1 + k\varphi(n)$, und $m^{ed} = m\cdot(m^{\varphi(n)})^{k}\equiv m\pmod n$ nach Euler, falls $\operatorname{ggT}(m, n) = 1$. (Für $\operatorname{ggT}(m, n) > 1$ hilft der Restsatz: modulo $p$ und $q$ getrennt gilt die Gleichung mit Fermat.) Wer $\varphi(n)$ kennt, kennt $d$; wer $\varphi(n)$ kennen will, muss $n$ faktorisieren.
+\begin{mitnehmen}\kastentext
+RSA ist der Satz von Euler, rückwärts gelesen: Der öffentliche Exponent potenziert, der private potenziert zurück, und zwischen beiden steht $\varphi(n)$, das nur kennt, wer $p$ und $q$ kennt.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.58
+\stupserzwei{gruen}{$2^{35}\equiv263$, $263^{2}\equiv166$, $166^{2}\equiv67$, $67^{2}\equiv1$. Die $1$ kommt aus $67$, nicht aus $\pm1$ --- das ist der Beweis.}{22pt}
+\begin{loesungkarte}{gruen}{1.58}{561 und Miller--Rabin}
+\derweg{$n - 1 = 2^{s}t$ mit ungeradem $t$; $a^{t}$ berechnen, dann quadrieren und beobachten, ob die $1$ aus $-1$ entsteht.}
+\schritt{(a)}
+$560 = 2^{4}\cdot35$. $2^{35}\bmod561 = 263$ (Quadrieren und Multiplizieren). Quadrieren: $263^{2} = 69\,169 = 123\cdot561 + 166$, also $166$; $166^{2} = 27\,556 = 49\cdot561 + 67$, also $67$; $67^{2} = 4489 = 8\cdot561 + 1$, also $1$. Die Folge $263, 166, 67, 1$ erreicht $1$, aber der Wert davor ist $67\not\equiv\pm1$. Miller--Rabin: \textbf{zusammengesetzt}.
+\schritt{(b)}
+$67^{2}\equiv1$ mit $67\not\equiv\pm1$: eine nichttriviale Quadratwurzel von $1$ (Aufgabe 1.27). $561\mid(67 - 1)(67 + 1) = 66\cdot68$, also $\operatorname{ggT}(66, 561) = 33$ und $\operatorname{ggT}(68, 561) = 17$: $561 = 33\cdot17 = 3\cdot11\cdot17$. Der Test hat nicht nur entschieden, sondern faktorisiert.
+\schritt{(c)}
+$561 = 3\cdot11\cdot17$ und $560$ ist durch $2$, $10$ und $16$ teilbar, also durch $p - 1$ für jeden Primteiler: Nach Fermat ist $a^{560}\equiv1$ modulo $3$, $11$ und $17$, also modulo $561$, für jedes teilerfremde $a$ (Korselts Kriterium). Carmichael-Zahlen sind genau die mit dieser Eigenschaft; es gibt unendlich viele (Alford--Granville--Pomerance 1994).
+\begin{mitnehmen}\kastentext
+Fermat sieht nur $a^{n-1}$; Miller--Rabin sieht die Quadratwurzeln auf dem Weg dorthin. Eine Carmichael-Zahl täuscht den ersten Test für jede Basis, den zweiten für höchstens ein Viertel der Basen --- nach $20$ Basen ist die Irrtumswahrscheinlichkeit unter $10^{-12}$.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.59
+\stupserzwei{gruen}{$90^{2} = 8100$, $8100 - 8051 = 49 = 7^{2}$. Also $8051 = 90^{2} - 7^{2} = 83\cdot97$.}{22pt}
+\begin{loesungkarte}{gruen}{1.59}{8051 nach Fermat}
+\derweg{$a$ von $\lceil\sqrt n\rceil$ aufwärts, bis $a^{2} - n$ ein Quadrat ist.}
+\schritt{(a)}
+$\sqrt{8051} = 89{,}7$; $a = 90$: $8100 - 8051 = 49 = 7^{2}$. Also $8051 = (90 - 7)(90 + 7) = 83\cdot97$. Ein Schritt.
+\schritt{(b)}
+Fermat findet die Zerlegung $n = pq$ bei $a = \frac{p + q}2$. Für $8057 = 7\cdot1151$: $a = 579$; von $\lceil\sqrt{8057}\rceil = 90$ bis $579$ sind es $490$ Schritte. Je weiter die Faktoren auseinander liegen, desto länger dauert es --- im schlimmsten Fall ($p$ klein) etwa $n/2$ Schritte, schlechter als Probedivision.
+\schritt{(c)}
+$p$ und $q$ dürfen nicht nahe beieinander liegen: Ist $|p - q| < n^{1/4}$ (etwa), findet Fermat sie sofort. Die Standards verlangen, dass sich $p$ und $q$ in den oberen Bits unterscheiden. (Umgekehrt dürfen sie auch nicht zu verschieden sein, sonst hilft die elliptische-Kurven-Methode, die kleine Faktoren schnell findet.)
+\begin{mitnehmen}\kastentext
+Fermat: $n = a^{2} - b^{2}$ --- schnell für nahe Faktoren, nutzlos sonst. Die Idee \enquote{finde $x^{2}\equiv y^{2}\pmod n$ mit $x\not\equiv\pm y$} ist aber die Grundlage der besten Verfahren (quadratisches Sieb, Zahlkörpersieb), die mit Kongruenzen statt Gleichungen arbeiten.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.60
+\stupserzwei{gruen}{$x\colon2, 5, 26, 677$; $y\colon2, 26, 7474, 871$. $\operatorname{ggT}(|677 - 871|, 8051) = \operatorname{ggT}(194, 8051) = 97$.}{22pt}
+\begin{loesungkarte}{gruen}{1.60}{8051 nach Pollard}
+\derweg{Hase und Igel auf der Folge $x\mapsto x^{2} + 1$; der ggT der Differenz mit $n$ wird irgendwann größer als $1$.}
+\schritt{(a)}
+$f(x) = x^{2} + 1\bmod8051$, $x_0 = y_0 = 2$.
+\begin{center}
+{\small\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}c|ccc@{}}
+Schritt & $x_i = f(x_{i-1})$ & $y_i = f(f(y_{i-1}))$ & $\operatorname{ggT}(|x_i - y_i|, 8051)$\\\hline
+1 & $5$ & $26$ & $1$\\
+2 & $26$ & $7474$ & $1$\\
+3 & $677$ & $871$ & $\operatorname{ggT}(194, 8051) = 97$\\
+\end{tabular}}
+\end{center}
+$8051 = 97\cdot83$. Drei Schritte.
+\schritt{(b)}
+Modulo $97$: $x\colon2, 5, 26, 677\equiv95$; $y\colon2, 26, 7474\equiv5, 871\equiv95$. Im dritten Schritt ist $x_3\equiv y_3\pmod{97}$, also $97\mid x_3 - y_3$ --- aber modulo $83$ sind sie verschieden ($677\equiv13$, $871\equiv41$), also $8051\nmid x_3 - y_3$, und der ggT ist genau $97$. Die Folge modulo $97$ läuft in einen Zyklus, lange bevor sie es modulo $8051$ tut: Nach dem Geburtstagsparadoxon (Aufgabe 4.8) nach etwa $\sqrt{97}\approx10$ Schritten.
+\schritt{(c)}
+Die Folge modulo $p$ hat einen Vorlauf und dann einen Zyklus --- gezeichnet sieht das aus wie der Buchstabe $\rho$. Floyds Trick (Hase $y$ doppelt so schnell wie Igel $x$) findet den Zyklus, ohne die Folge zu speichern.
+\begin{mitnehmen}\kastentext
+Pollard $\rho$ findet einen Faktor $p$ in etwa $\sqrt p$ Schritten --- gut für Faktoren bis etwa $10^{12}$; für RSA-Zahlen ($p\approx10^{300}$) hoffnungslos. Die Idee, modulo eines unbekannten $p$ zu rechnen und den ggT den Rest tun zu lassen, ist eine der schönsten der Algorithmik.
+\end{mitnehmen}
+\end{loesungkarte}
+
+%%%%%%%%%% 1.61
+\stupserzwei{akzent}{$(5\cdot2^{7})^{4} = 5^{4}\cdot2^{28}\equiv1$ und $5^{4}\equiv-2^{4}$, also $-2^{4}\cdot2^{28} = -2^{32}\equiv1$.}{22pt}
+\begin{loesungkarte}{akzent}{1.61}{Fermats Vermutung über $2^{2^{n}} + 1$}
+\derweg{Zwei Darstellungen von $641$, zu Kongruenzen gemacht und kombiniert; dann die Faktorisierung von $2^{ab} + 1$; dann die Moral.}
+\schritt{(a)}
+$641 = 5\cdot2^{7} + 1$, also $5\cdot2^{7}\equiv-1\pmod{641}$, also $5^{4}\cdot2^{28}\equiv1$. $641 = 5^{4} + 2^{4}$, also $5^{4}\equiv-2^{4}$. Einsetzen: $-2^{4}\cdot2^{28} = -2^{32}\equiv1$, also $2^{32}\equiv-1$, also $641\mid2^{32} + 1 = F_5 = 4\,294\,967\,297$. $\blacksquare$ (Der Kofaktor ist $6\,700\,417$, prim.)
+\schritt{(b)}
+Für ungerades $b$: $x^{b} + 1 = (x + 1)(x^{b-1} - x^{b-2} + \dots + 1)$. Mit $x = 2^{a}$: $2^{ab} + 1$ ist durch $2^{a} + 1$ teilbar. Hat $m$ einen ungeraden Teiler $b > 1$, $m = ab$, so ist $2^{a} + 1$ ein echter Teiler von $2^{m} + 1$. Also: $2^{m} + 1$ prim $\Rightarrow$ $m$ hat keinen ungeraden Teiler $\Rightarrow$ $m = 2^{n}$. $\blacksquare$
+\schritt{(c)}
+Fünf Beispiele sind kein Beweis; und ein Muster, das bei kleinen Zahlen gilt, kann bei der nächsten brechen. Eulers Argument zeigt auch, \emph{wie} man Gegenbeispiele findet: Teiler von $F_n$ haben die Form $k\cdot2^{n+1} + 1$ (Analogon zu Aufgabe 1.45c), für $F_5$ also $64k + 1$ --- $641 = 10\cdot64 + 1$ ist der zweite Kandidat nach $193$. Heute weiß man: $F_5$ bis $F_{32}$ sind alle zusammengesetzt, und es ist offen, ob es überhaupt eine sechste Fermat-Primzahl gibt. Die Vermutung des besten Zahlentheoretikers seiner Zeit war falsch --- und das Nachrechnen hat es entschieden.
+\begin{fehler}\kastentext
+\enquote{Die ersten fünf sind prim, also alle.} --- Der häufigste Fehler der experimentellen Mathematik. Gegenbeispiele können sehr spät kommen: Die Vermutung $\pi(x) < \operatorname{li}(x)$ gilt für alle geprüften $x$ und ist trotzdem falsch (Littlewood 1914; erstes Gegenbeispiel unter $10^{317}$, Skewes).
+\end{fehler}
+\begin{mitnehmen}\kastentext
+Eine Zahlentheorie-Vermutung prüft man an der Struktur, nicht an der Länge der Beispielliste: Welche Form müssen Teiler haben? Gibt es eine Faktorisierung? Eulers Teiler $641$ kam aus genau dieser Frage.
+\end{mitnehmen}
+\end{loesungkarte}
